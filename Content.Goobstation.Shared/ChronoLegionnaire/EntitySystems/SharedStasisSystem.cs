@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.ChronoLegionnaire.Components;
@@ -29,13 +23,13 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.ChronoLegionnaire.EntitySystems;
 
-public abstract class SharedStasisSystem : EntitySystem
+public abstract partial class SharedStasisSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     public override void Initialize()
     {
@@ -161,11 +155,7 @@ public abstract class SharedStasisSystem : EntitySystem
         if (!_statusEffects.TryAddStatusEffect<InsideStasisComponent>(target, "Stasis", statusTime.Value, refresh))
             return false;
 
-        var ev = new StasisEvent();
-        RaiseLocalEvent(target, ref ev);
-
-        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(target):entity} was send into stasis");
-
+        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{target:entity} was sent into stasis");
         return true;
     }
 
@@ -173,26 +163,26 @@ public abstract class SharedStasisSystem : EntitySystem
     public void OnEquip(Entity<StasisProtectionComponent> protection, ref GotEquippedEvent args)
     {
         // Making x10 staminaDamage to make sure no one stunbaton them (until stun resist will be added)
-        if (TryComp<StaminaComponent>(args.Equipee, out var staminaComp))
+        if (TryComp<StaminaComponent>(args.EquipTarget, out var staminaComp))
         {
             staminaComp.CritThreshold *= protection.Comp.StaminaModifier;
             staminaComp.Decay *= protection.Comp.StaminaModifier;
         }
 
         // Applying stasis immune
-        EnsureComp<StasisImmunityComponent>(args.Equipee);
+        EnsureComp<StasisImmunityComponent>(args.EquipTarget);
     }
 
     public void OnUnequip(Entity<StasisProtectionComponent> protection, ref GotUnequippedEvent args)
     {
-        if (TryComp<StaminaComponent>(args.Equipee, out var staminaComp))
+        var target = args.EquipTarget;
+        if (TryComp<StaminaComponent>(target, out var staminaComp))
         {
             staminaComp.CritThreshold /= protection.Comp.StaminaModifier;
             staminaComp.Decay /= protection.Comp.StaminaModifier;
         }
 
-        if (HasComp<StasisImmunityComponent>(args.Equipee) )
-            EntityManager.RemoveComponent<StasisImmunityComponent>(args.Equipee);
+        RemComp<StasisImmunityComponent>(target);
     }
 
     #endregion

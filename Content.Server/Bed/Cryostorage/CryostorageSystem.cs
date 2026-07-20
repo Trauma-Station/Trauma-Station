@@ -1,50 +1,3 @@
-// SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <65184747+Dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <JIPDawg93@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 PursuitInAshes <pursuitinashes@gmail.com>
-// SPDX-FileCopyrightText: 2024 QueerNB <176353696+QueerNB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 c4llv07e <38111072+c4llv07e@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 stellar-novas <stellar_novas@riseup.net>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Globalization;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
@@ -53,12 +6,12 @@ using Content.Server.Inventory;
 using Content.Server.Popups;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
-using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
 using Content.Shared.Climbing.Systems;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
@@ -73,28 +26,29 @@ using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using System.Globalization;
 
 namespace Content.Server.Bed.Cryostorage;
 
 /// <inheritdoc/>
-public sealed class CryostorageSystem : SharedCryostorageSystem
+public sealed partial class CryostorageSystem : SharedCryostorageSystem
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly ClimbSystem _climb = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly ServerInventorySystem _inventory = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private ClimbSystem _climb = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private ServerInventorySystem _inventory = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -360,12 +314,15 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.NextItem(out var item, out var slotDef))
         {
+            if (HasComp<AttachedClothingComponent>(item))
+                continue;
+
             data.ItemSlots.Add(slotDef.Name, Name(item));
         }
 
         foreach (var hand in _hands.EnumerateHands(uid))
         {
-            if (!_hands.TryGetHeldItem(uid, hand, out var heldEntity))
+            if (!_hands.TryGetHeldItem(uid, hand, out var heldEntity, true))
                 continue;
 
             data.HeldItems.Add(hand, Name(heldEntity.Value));

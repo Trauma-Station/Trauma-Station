@@ -1,5 +1,5 @@
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 
 namespace Content.Goobstation.Shared.Wraith.SaltLines;
 

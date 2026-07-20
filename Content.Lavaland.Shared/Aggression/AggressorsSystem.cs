@@ -1,23 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Lavaland.Shared.Audio;
@@ -26,16 +6,15 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Lavaland.Shared.Aggression;
 
-public sealed class AggressorsSystem : EntitySystem
+public sealed partial class AggressorsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedBossMusicSystem _bossMusic = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedBossMusicSystem _bossMusic = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -136,8 +115,10 @@ public sealed class AggressorsSystem : EntitySystem
         var aggComp = EnsureComp<AggressorComponent>(aggressor);
         aggComp.Aggressives.Add(uid);
 
-        RaiseLocalEvent(uid, new AggressorAddedEvent(aggressor));
-        RaiseLocalEvent(aggressor, new AggressiveAddedEvent(uid));
+        var ev = new AggressorAddedEvent(aggressor);
+        RaiseLocalEvent(uid, ref ev);
+        var ev2 = new AggressiveAddedEvent(uid);
+        RaiseLocalEvent(aggressor, ref ev2);
 
         Dirty(uid, comp);
         Dirty(aggressor, aggComp);
@@ -145,32 +126,34 @@ public sealed class AggressorsSystem : EntitySystem
 
     public void RemoveAggressor(Entity<AggressiveComponent> ent, Entity<AggressorComponent?> aggressor)
     {
-        if (!Resolve(aggressor, ref aggressor.Comp))
-            return;
-
         ent.Comp.Aggressors.Remove(aggressor);
-        aggressor.Comp.Aggressives.Remove(ent);
-
-        if (aggressor.Comp.Aggressives.Count == 0)
-            RemComp(aggressor, aggressor.Comp);
+        RemoveAggressorFrom(ent, aggressor);
     }
 
     public void RemoveAllAggressors(Entity<AggressiveComponent> ent)
     {
         foreach (var aggressor in ent.Comp.Aggressors)
         {
-            if (!TryComp<AggressorComponent>(aggressor, out var aggressorComp))
-                continue;
-
-            aggressorComp.Aggressives.Remove(ent.Owner);
-            if (aggressorComp.Aggressives.Count == 0)
-            {
-                RaiseLocalEvent(aggressor, new AggressiveRemovedEvent(ent.Owner));
-                RemComp(aggressor, aggressorComp);
-            }
+            RemoveAggressorFrom(ent, aggressor);
         }
 
         ent.Comp.Aggressors.Clear();
+    }
+
+    private void RemoveAggressorFrom(Entity<AggressiveComponent> ent, Entity<AggressorComponent?> aggressor)
+    {
+        if (!Resolve(aggressor, ref aggressor.Comp))
+            return;
+
+        aggressor.Comp.Aggressives.Remove(ent);
+        if (aggressor.Comp.Aggressives.Count > 0)
+            return;
+
+        var ev = new AggressorRemovedEvent(aggressor);
+        RaiseLocalEvent(ent, ref ev);
+        var ev2 = new AggressiveRemovedEvent(ent);
+        RaiseLocalEvent(aggressor, ref ev2);
+        RemComp(aggressor, aggressor.Comp);
     }
 
     #endregion

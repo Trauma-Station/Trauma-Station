@@ -47,12 +47,12 @@
           - !type:PlayerCountCondition
             min: 10
         # <Trauma>
-        - id: Changeling
-          weight: 25
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
-        - id: Heretic
+#        - id: Changeling
+#          weight: 25
+#          conditions:
+#          - !type:HasBudgetCondition
+#          - !type:MaxRuleOccurenceCondition
+        - id: HereticRoundstart
           weight: 20
           conditions:
           - !type:HasBudgetCondition
@@ -93,20 +93,13 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 15
-        - id: Shadowling
+        - id: ShadowlingRoundstart
           prob: 0.09
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 30
-        - id: DuoAbductorRoundstart
-          prob: 0.15
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
-          - !type:PlayerCountCondition
-            min: 20
         - id: CorporateAgent
           prob: 0.075
           conditions:

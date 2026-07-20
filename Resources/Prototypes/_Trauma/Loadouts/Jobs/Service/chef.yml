@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: loadout
+  id: ClothingUniformJumpsuitDisgusting
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDisgusting
+
+- type: loadout
+  id: ClothingUniformJumpsuitWaiter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWaiter

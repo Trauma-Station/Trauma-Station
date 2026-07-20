@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpecialAnimation;
@@ -8,15 +5,13 @@ using Content.Shared.Interaction.Events;
 using JetBrains.Annotations;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.SpecialAnimation;
 
-public sealed class SpecialAnimationSystem : SharedSpecialAnimationSystem
+public sealed partial class SpecialAnimationSystem : SharedSpecialAnimationSystem
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
     {
@@ -31,7 +26,7 @@ public sealed class SpecialAnimationSystem : SharedSpecialAnimationSystem
         args.ApplyDelay = true;
 
         var animation = SpecialAnimationData.DefaultAnimation;
-        if (_protoMan.TryIndex(ent.Comp.AnimationDataId, out var animationProto))
+        if (ProtoMan.TryIndex(ent.Comp.AnimationDataId, out var animationProto))
             animation = animationProto.Animation;
 
         if (ent.Comp.OverrideText != null)
@@ -113,7 +108,7 @@ public sealed class SpecialAnimationSystem : SharedSpecialAnimationSystem
         ProtoId<SpecialAnimationPrototype>? animationDataId = null,
         string? overrideText = null)
     {
-        if (!_protoMan.TryIndex(animationDataId, out var animationPrototype))
+        if (!ProtoMan.TryIndex(animationDataId, out var animationPrototype))
             return;
 
         PlayAnimationFiltered(sprite, filter, animationPrototype.Animation, overrideText);

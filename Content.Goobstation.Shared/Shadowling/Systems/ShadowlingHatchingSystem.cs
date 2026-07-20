@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Storage.Components;
 
@@ -6,7 +8,7 @@ namespace Content.Goobstation.Shared.Shadowling.Systems;
 /// <summary>
 /// This handles egg interactions.
 /// </summary>
-public sealed class ShadowlingHatchingSystem : EntitySystem
+public sealed partial class ShadowlingHatchingSystem : EntitySystem
 {
     public override void Initialize()
     {

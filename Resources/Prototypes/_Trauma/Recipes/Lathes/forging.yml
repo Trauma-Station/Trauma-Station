@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: Charcoal
+  result: Charcoal15
+  completetime: 30
+  materials:
+    Wood: 1500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: AshPile
+  result: AshPile
+  completetime: 30
+  materials:
+    Wood: 750

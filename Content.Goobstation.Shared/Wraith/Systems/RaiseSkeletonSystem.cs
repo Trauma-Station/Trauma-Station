@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Gibbing;
@@ -9,13 +11,13 @@ using Content.Shared.Mobs.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
-public sealed class RaiseSkeletonSystem : EntitySystem
+public sealed partial class RaiseSkeletonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedRottingSystem _rotting = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
 
     public override void Initialize()
     {
@@ -45,14 +47,14 @@ public sealed class RaiseSkeletonSystem : EntitySystem
         // otherwise, check if target is dead
         if (!_mobState.IsDead(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-raise-no-corpse"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-raise-no-corpse"), ent.Owner, ent.Owner);
             return;
         }
 
         // or rotting
         if (!_rotting.IsRotten(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-raise-body-refuse"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-raise-body-refuse"), ent.Owner, ent.Owner);
             return;
         }
 

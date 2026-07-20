@@ -1,9 +1,5 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 TekuNut <13456422+TekuNut@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
+using Content.Shared.DisplacementMap;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Atmos.Components;
 
@@ -48,19 +44,8 @@ public sealed partial class FireVisualsComponent : Component
     public EntityUid? LightEntity;
 
     /// <summary>
-    /// Trauma - Hardlink for the holy fire effect to be used in tandem with the fire effect.
+    /// Tracks the currently applied displacement, so that only new changes update the layer.
     /// </summary>
     [DataField]
-    public string? SpriteHoly;
-
-    /// <summary>
-    /// Trauma - Color for the holy fire light.
-    /// </summary>
-    [DataField]
-    public Color LightColorHoly = Color.Blue;
-
-    /// <summary>
-    /// Trauma - This is a light entity, same as the LightEntity variable above.
-    /// </summary>
-    public EntityUid? LightEntityHoly;
+    public ProtoId<DisplacementDataPrototype>? CurrentDisplacement;
 }

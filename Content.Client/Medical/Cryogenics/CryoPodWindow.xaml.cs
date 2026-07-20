@@ -1,13 +1,13 @@
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
+using Content.Shared.Body;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.Damage.Components;
 using Content.Shared.EntityConditions.Conditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Medical.Cryogenics;
@@ -21,14 +21,15 @@ namespace Content.Client.Medical.Cryogenics;
 [GenerateTypedNameReferences]
 public sealed partial class CryoPodWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    private readonly SharedAtmosphereSystem _atmosphere = default!;
 
     public event Action? OnEjectPatientPressed;
     public event Action? OnEjectBeakerPressed;
     public event Action<FixedPoint2>? OnInjectPressed;
     // <Shitmed>
-    public event Action<TargetBodyPart?, EntityUid>? OnBodyPartSelected;
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
     // </Shitmed>
 
@@ -36,6 +37,7 @@ public sealed partial class CryoPodWindow : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+        _atmosphere = _entityManager.System<SharedAtmosphereSystem>();
         EjectPatientButton.OnPressed += _ => OnEjectPatientPressed?.Invoke();
         EjectBeakerButton.OnPressed += _ => OnEjectBeakerPressed?.Invoke();
         Inject1.OnPressed += _ => OnInjectPressed?.Invoke(1);
@@ -82,25 +84,23 @@ public sealed partial class CryoPodWindow : FancyWindow
         {
             var totalGasAmount = msg.GasMix.Gases.Sum(gas => gas.Amount);
 
-            foreach (var gas in msg.GasMix.Gases)
+            foreach (var gasEntry in msg.GasMix.Gases)
             {
-                var color = Color.FromHex($"#{gas.Color}", Color.White);
-                var percent = gas.Amount / totalGasAmount * 100;
-                var localizedName = Loc.GetString(gas.Name);
+                var gasProto = _atmosphere.GetGas(gasEntry.Gas);
+                var percent = gasEntry.Amount / totalGasAmount * 100;
+                var localizedName = Loc.GetString(gasProto.Name);
                 var tooltip = Loc.GetString("gas-analyzer-window-molarity-percentage-text",
                                             ("gasName", localizedName),
-                                            ("amount", $"{gas.Amount:0.##}"),
+                                            ("amount", $"{gasEntry.Amount:0.##}"),
                                             ("percentage", $"{percent:0.#}"));
-                GasMixChart.AddEntry(gas.Amount, color, tooltip: tooltip);
+                GasMixChart.AddEntry(gasEntry.Amount, gasProto.Color, tooltip: tooltip);
             }
         }
 
         // Health analyzer
         var maybePatient = _entityManager.GetEntity(msg.Health.TargetEntity);
         var hasPatient = msg.Health.TargetEntity.HasValue;
-        var hasDamage = (hasPatient
-             && _entityManager.TryGetComponent(maybePatient, out DamageableComponent? damageable)
-             && damageable.TotalDamage > 0);
+        var hasDamage = hasPatient && msg.HasDamage;
 
         NoDamageText.Visible = (hasPatient && !hasDamage);
         HealthSection.Visible = hasPatient;
@@ -228,7 +228,7 @@ public sealed partial class CryoPodWindow : FancyWindow
 
         float? result = null;
 
-        foreach (var (_, metabolism) in reagentProto.Metabolisms)
+        foreach (var (_, metabolism) in reagentProto.Metabolisms.Metabolisms)
         {
             foreach (var effect in metabolism.Effects)
             {

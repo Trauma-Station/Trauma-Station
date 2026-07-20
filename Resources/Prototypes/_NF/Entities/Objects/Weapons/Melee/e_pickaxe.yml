@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -16,11 +13,10 @@
     - 1,1,1,2
   - type: ItemToggleMeleeWeapon
     activatedDamage:
-      groups:
-        Brute: 18
       types:
-        Heat: 18
-        Structural: 40
+        Piercing: 15
+        Heat: 15
+        Structural: 45
   - type: Sprite
     sprite: _NF/Objects/Weapons/Melee/energy_pickaxe.rsi
     layers:
@@ -66,7 +62,7 @@
       params:
         volume: -3
     damage:
-      groups:
-        Brute: 3
+      types:
+        Blunt: 3
     heavyStaminaCost: 5
     clickPartDamageMultiplier: 1

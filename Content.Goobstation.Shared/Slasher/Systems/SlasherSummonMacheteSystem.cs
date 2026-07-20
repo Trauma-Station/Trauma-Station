@@ -1,20 +1,20 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 
-public sealed class SlasherSummonMacheteSystem : EntitySystem
+public sealed partial class SlasherSummonMacheteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -43,7 +43,7 @@ public sealed class SlasherSummonMacheteSystem : EntitySystem
         // Fail if the user has no hands.
         if (!TryComp<HandsComponent>(ent.Owner, out var hands) || hands.Hands.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("wieldable-component-no-hands"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wieldable-component-no-hands"), ent.Owner, ent.Owner);
             args.Handled = true;
             return;
         }
@@ -53,10 +53,10 @@ public sealed class SlasherSummonMacheteSystem : EntitySystem
 
         if (machete == null || Deleted(machete))
         {
-            if (!_protos.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
+            if (!ProtoMan.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
                 return;
 
-            machete = Spawn(ent.Comp.MachetePrototype, _xform.GetMoverCoordinates(ent.Owner));
+            machete = PredictedSpawnAtPosition(ent.Comp.MachetePrototype, _xform.GetMoverCoordinates(ent.Owner));
             ent.Comp.MacheteUid = machete;
             Dirty(ent);
         }

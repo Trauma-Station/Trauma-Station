@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: collectiveMind
+  id: Dantalion
+  name: collective-mind-dantalion
+  keycode: 'v'
+  color: "#00FF00"

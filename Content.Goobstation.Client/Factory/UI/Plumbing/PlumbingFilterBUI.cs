@@ -1,9 +1,6 @@
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory.Plumbing;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Factory.UI.Plumbing;
 

@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: emote
+  id: Twitch
+  name: chat-emote-name-twitch
+  category: General
+  chatMessages: ["chat-emote-msg-twitch"]

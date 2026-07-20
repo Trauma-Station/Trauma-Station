@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: mutationRecipe
+  id: ThermalAdaptation
+  result: MutationThermalAdaptation
+  required:
+  - MutationColdAdaptation
+  - MutationHeatAdaptation
+
+- type: mutationRecipe
+  id: ThermalWeakness
+  result: MutationThermalWeakness
+  required:
+  - MutationColdWeakness
+  - MutationHeatWeakness

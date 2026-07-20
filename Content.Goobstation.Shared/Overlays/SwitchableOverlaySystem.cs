@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Flashbang;
@@ -11,21 +5,19 @@ using Content.Shared.Actions;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameStates;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Overlays;
 
-public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // this should get move to a white module if we ever do anything with forks..
+public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // this should get move to a white module if we ever do anything with forks..
     where TComp : SwitchableVisionOverlayComponent
     where TEvent : InstantActionEvent
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

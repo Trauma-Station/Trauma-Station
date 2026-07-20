@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Forensics;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Clothing.Components;
@@ -33,10 +25,10 @@ namespace Content.Server.Cloning;
 /// </remarks>
 public sealed partial class CloningSystem
 {
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly LabelSystem _label = default!;
-    [Dependency] private readonly ForensicsSystem _forensics = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private LabelSystem _label = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
+    [Dependency] private PaperSystem _paper = default!;
 
     public override void Initialize()
     {

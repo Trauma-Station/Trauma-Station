@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
@@ -12,10 +9,8 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Handles fire + temperature events for <see cref="BonusDamageEnchantComponent"/>.
 /// </summary>
-public sealed class BonusDamageEnchantSystem : EntitySystem
+public sealed partial class BonusDamageEnchantSystem : EntitySystem
 {
-    [Dependency] private readonly EnchantingSystem _enchanting = default!;
-
     public override void Initialize()
     {
         base.Initialize();

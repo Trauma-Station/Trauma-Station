@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Damage.Systems;
 using Content.Shared.Throwing;
 
@@ -8,9 +9,9 @@ namespace Content.Trauma.Shared.Damage;
 /// Trauma - moved this out of server
 /// Damages the thrown item when it lands.
 /// </summary>
-public sealed class DamageOnLandSystem : EntitySystem
+public sealed partial class DamageOnLandSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Static
 
 - type: latheRecipePack
@@ -6,6 +8,7 @@
   id: TraumaMedicalStatic
   recipes:
   - MedicalHyposprayEmpty
+  - MedicalCigCarton
 
 - type: latheRecipePack
   id: TraumaCyberneticsStatic
@@ -24,3 +27,9 @@
   recipes:
   - MedkitCombat
   - VialBluespace
+
+- type: latheRecipePack
+  id: TraumaMedicalBoards
+  recipes:
+  - StasisOperatingTableCircuitboard
+  - MedicalBiofabMachineBoard

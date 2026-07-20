@@ -16,11 +16,10 @@ namespace Content.Shared.Inventory;
 public partial class InventorySystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RandomHelperSystem _randomHelper = default!;
     // </Trauma>
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IViewVariablesManager _vvm = default!;
+    [Dependency] private IViewVariablesManager _vvm = default!;
 
     private void InitializeSlots()
     {
@@ -75,9 +74,11 @@ public partial class InventorySystem : EntitySystem
 
         var targetComp = EnsureComp<InventoryComponent>(target);
         targetComp.SpeciesId = source.Comp.SpeciesId;
-        targetComp.Displacements = new Dictionary<string, DisplacementData>(source.Comp.Displacements);
-        targetComp.FemaleDisplacements = new Dictionary<string, DisplacementData>(source.Comp.FemaleDisplacements);
-        targetComp.MaleDisplacements = new Dictionary<string, DisplacementData>(source.Comp.MaleDisplacements);
+        // <Trauma> - removed type parameters so it uses protoid automatically
+        targetComp.Displacements = new(source.Comp.Displacements);
+        targetComp.FemaleDisplacements = new(source.Comp.FemaleDisplacements);
+        targetComp.MaleDisplacements = new(source.Comp.MaleDisplacements);
+        // </Trauma>
         SetTemplateId((target, targetComp), source.Comp.TemplateId);
         Dirty(target, targetComp);
     }
@@ -94,7 +95,7 @@ public partial class InventorySystem : EntitySystem
 
     protected virtual void UpdateInventoryTemplate(Entity<InventoryComponent> ent)
     {
-        if (!_prototypeManager.Resolve(ent.Comp.TemplateId, out var invTemplate))
+        if (!ProtoMan.Resolve(ent.Comp.TemplateId, out var invTemplate))
             return;
 
         // Remove any containers that aren't in the new template.

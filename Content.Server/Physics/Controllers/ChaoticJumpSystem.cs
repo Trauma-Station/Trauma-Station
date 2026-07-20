@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -19,12 +12,12 @@ namespace Content.Server.Physics.Controllers;
 /// <summary>
 /// A component which makes its entity periodically chaotic jumps arounds
 /// </summary>
-public sealed class ChaoticJumpSystem : VirtualController
+public sealed partial class ChaoticJumpSystem : VirtualController
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

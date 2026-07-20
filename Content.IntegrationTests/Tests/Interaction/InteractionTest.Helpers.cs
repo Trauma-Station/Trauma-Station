@@ -1,91 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Darkie <darksaiyanis@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Alice "Arimah" Heurlin <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 CaasGit <87243814+CaasGit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 EmoGarbage404 <retron404@gmail.com>
-// SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Hrosts <35345601+Hrosts@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ian <ignaz.k@live.de>
-// SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Joel Zimmerman <JoelZimmerman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ko4ergaPunk <62609550+Ko4ergaPunk@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kukutis96513 <146854220+Kukutis96513@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Lye <128915833+Lyroth001@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 MerrytheManokit <167581110+MerrytheManokit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 MureixloI <132683811+MureixloI@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 NakataRin <45946146+NakataRin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 OrangeMoronage9622 <whyteterry0092@gmail.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Preston Smith <92108534+thetolbean@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Psychpsyo <60073468+Psychpsyo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Repo <47093363+Titian3@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 RiceMar1244 <138547931+RiceMar1244@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Stalen <33173619+stalengd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TakoDragon <69509841+BackeTako@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Unkn0wn_Gh0st <shadowstalkermll@gmail.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 Vigers Ray <60344369+VigersRay@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deathride58 <deathride58@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 dffdff2423 <dffdff2423@gmail.com>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 foboscheshir <156405958+foboscheshir@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 shamp <140359015+shampunj@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 strO0pwafel <153459934+strO0pwafel@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 stroopwafel <j.o.luijkx@student.tudelft.nl>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 voidnull000 <18663194+voidnull000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 #nullable enable
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -347,6 +259,7 @@ public abstract partial class InteractionTest
 
     /// <summary>
     /// Drops the currently held entity.
+    /// Causes an error if no entity was held.
     /// </summary>
     protected async Task Drop()
     {
@@ -363,6 +276,36 @@ public abstract partial class InteractionTest
 
         await RunTicks(1);
         Assert.That(HandSys.GetActiveItem((ToServer(Player), Hands)), Is.Null);
+    }
+
+    /// <summary>
+    /// Drops all currently held entities.
+    /// Does nothing if no entity was held.
+    /// </summary>
+    protected async Task DropAll()
+    {
+        await Server.WaitPost(() =>
+        {
+            HandSys.DropAll((ToServer(Player), Hands));
+        });
+
+        await RunTicks(1);
+
+        // make sure that all hands are empty
+        Assert.That(HandSys.GetEmptyHandCount((ToServer(Player), Hands)), Is.EqualTo(HandSys.GetHandCount((ToServer(Player), Hands))));
+    }
+
+    /// <summary>
+    /// Swaps the current hand.
+    /// </summary>
+    protected async Task SwapHands(bool reverse = false)
+    {
+        await Server.WaitPost(() =>
+        {
+            HandSys.SwapHands((ToServer(Player), Hands), reverse: reverse);
+        });
+
+        await RunTicks(1);
     }
 
     #region Interact
@@ -534,7 +477,7 @@ public abstract partial class InteractionTest
         var actualTarget = SEntMan.GetCoordinates(target ?? TargetCoords);
         var result = false;
         // Trauma - use PredictedHands
-        await Server.WaitPost(() => result = PredictedHands.ThrowHeldItem(SEntMan.GetEntity(Player), actualTarget, minDistance));
+        await Server.WaitPost(() => result = SPredictedHands.ThrowHeldItem(SEntMan.GetEntity(Player), actualTarget, minDistance));
         return result;
     }
 
@@ -598,11 +541,11 @@ public abstract partial class InteractionTest
         var wasInCombatMode = IsInCombatMode();
         await SetCombatMode(true);
 
-        Assert.That(SGun.TryGetGun(SPlayer, out var gunUid, out var gunComp), "Player was not holding a gun!");
+        Assert.That(SGun.TryGetGun(SPlayer, out var gun), "Player was not holding a gun!");
 
         await Server.WaitAssertion(() =>
         {
-            var success = SGun.AttemptShoot(SPlayer, gunUid, gunComp!, actualTarget);
+            var success = SGun.AttemptShoot(SPlayer, gun, actualTarget);
             if (assert)
                 Assert.That(success, "Gun failed to shoot.");
         });
@@ -637,11 +580,11 @@ public abstract partial class InteractionTest
         var wasInCombatMode = IsInCombatMode();
         await SetCombatMode(true);
 
-        Assert.That(SGun.TryGetGun(SPlayer, out var gunUid, out var gunComp), "Player was not holding a gun!");
+        Assert.That(SGun.TryGetGun(SPlayer, out var gun), "Player was not holding a gun!");
 
         await Server.WaitAssertion(() =>
         {
-            var success = SGun.AttemptShoot(SPlayer, gunUid, gunComp!, Position(actualTarget!.Value), ToServer(actualTarget));
+            var success = SGun.AttemptShoot(SPlayer, gun, Position(actualTarget!.Value), ToServer(actualTarget));
             if (assert)
                 Assert.That(success, "Gun failed to shoot.");
         });
@@ -848,7 +791,7 @@ public abstract partial class InteractionTest
         var pos = Transform.ToMapCoordinates(serverCoords);
         await Server.WaitPost(() =>
         {
-            if (MapMan.TryFindGridAt(pos, out var gridUid, out var grid))
+            if (MapSystem.TryFindGridAt(pos, out var gridUid, out var grid))
                 tile = MapSystem.GetTileRef(gridUid, grid, serverCoords).Tile;
         });
 
@@ -960,7 +903,7 @@ public abstract partial class InteractionTest
     /// <param name="uid">The entity at which the events were directed</param>
     /// <param name="count">How many new events are expected</param>
     /// <param name="predicate">A predicate that can be used to filter the recorded events</param>
-    protected void AssertEvent<TEvent>(EntityUid? uid = null, int count = 1, Func<TEvent,bool>? predicate = null)
+    protected void AssertEvent<TEvent>(EntityUid? uid = null, int count = 1, Func<TEvent, bool>? predicate = null)
         where TEvent : notnull
     {
         Assert.That(GetEvents(uid, predicate).Count, Is.EqualTo(count));
@@ -993,7 +936,7 @@ public abstract partial class InteractionTest
         where TEvent : notnull
     {
         if (_listenerCache.TryGetValue(typeof(TEvent), out var listener))
-            return (TestListenerSystem<TEvent>) listener;
+            return (TestListenerSystem<TEvent>)listener;
 
         var type = Server.Resolve<IReflectionManager>().GetAllChildren<TestListenerSystem<TEvent>>().Single();
         if (!SEntMan.EntitySysManager.TryGetEntitySystem(type, out var systemObj))
@@ -1207,7 +1150,7 @@ public abstract partial class InteractionTest
                 MapSystem.SetTile(gridEnt, SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
                 return;
             }
-            else if (MapMan.TryFindGridAt(pos, out var gUid, out var gComp))
+            else if (MapSystem.TryFindGridAt(pos, out var gUid, out var gComp))
             {
                 MapSystem.SetTile(gUid, gComp, SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
                 return;
@@ -1216,7 +1159,7 @@ public abstract partial class InteractionTest
             if (proto == null)
                 return;
 
-            gridEnt = MapMan.CreateGridEntity(MapData.MapId);
+            gridEnt = MapSystem.CreateGridEntity(MapData.MapId);
             grid = gridEnt;
             gridUid = gridEnt;
             gridComp = gridEnt.Comp;
@@ -1224,7 +1167,7 @@ public abstract partial class InteractionTest
             Transform.SetWorldPosition((gridUid, gridXform), pos.Position);
             MapSystem.SetTile((gridUid, gridComp), SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
 
-            if (!MapMan.TryFindGridAt(pos, out _, out _))
+            if (!MapSystem.TryFindGridAt(pos, out _, out _))
                 Assert.Fail("Failed to create grid?");
         });
         await AssertTile(proto, coords);
@@ -1246,11 +1189,6 @@ public abstract partial class InteractionTest
     protected async Task RunTicks(int ticks)
     {
         await Pair.RunTicksSync(ticks);
-    }
-
-    protected async Task RunSeconds(float seconds)
-    {
-        await Pair.RunSeconds(seconds);
     }
 
     #endregion

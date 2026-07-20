@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityEffect
+  id: MakeSpawnPointDropPod
+  conditions:
+  - !type:SpawnPointHasJob # leave latejoin, observer, etc alone
+  effects:
+  - !type:RemoveComponents
+    components:
+    - type: SpawnPoint
+  - !type:AddComponents
+    components:
+    - type: DropPodSpawnPoint

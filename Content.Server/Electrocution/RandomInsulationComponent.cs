@@ -1,17 +1,18 @@
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
+using Content.Shared.Electrocution;
 
 namespace Content.Server.Electrocution
 {
+    /// <summary>
+    /// An entity with this component will assign a random siemens coefficient on the entities insulated component (if it exists)
+    /// Mostly used to randomize budget insulated gloves.
+    /// </summary>
     [RegisterComponent]
     public sealed partial class RandomInsulationComponent : Component
     {
+        /// <summary>
+        /// A list of possible Siemens Factors from which one will be picked for insulation component.
+        /// </summary>
+        /// <seealso cref="InsulatedComponent.Coefficient"/>
         [DataField("list")]
         public float[] List = { 0f };
     }

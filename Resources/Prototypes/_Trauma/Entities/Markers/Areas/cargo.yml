@@ -1,0 +1,50 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaCargo
+  name: cargo
+  components:
+  - type: DepartmentArea
+    department: Cargo
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaCargoBay
+  name: cargo bay
+  components:
+  - type: Sprite
+    state: cargo_bay
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaCargoLobby
+  name: cargo lobby
+  components:
+  - type: Sprite
+    state: cargo_lobby
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaCargoOffice
+  name: cargo office
+  components:
+  - type: Sprite
+    state: cargo_office
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaPodBay
+  name: podbay
+  components:
+  - type: Sprite
+    state: podbay
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaSalvage
+  name: salv
+  components:
+  - type: Sprite
+    state: salv

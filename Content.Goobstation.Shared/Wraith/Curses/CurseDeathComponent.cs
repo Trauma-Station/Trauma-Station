@@ -1,9 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;
 

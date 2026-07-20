@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: antag
   id: Insurgent
   name: roles-antag-insurgent-name
@@ -5,10 +7,21 @@
   antagonist: true
   setPreference: true
   requirements:
-  - !type:RoleTimeRequirement
-    role: JobPassenger
-    time: 5h # become one with maints
-  # TODO: guide? its just being a halal shitter
+  - !type:OverallPlaytimeRequirement
+    time: 5h
+  guides: [ Insurgents ]
+
+- type: antagSpecifier
+  id: Insurgent
+  spawnerPrototype: GhostRoleSpawnerInsurgent
+  startingGear: Insurgent
+  unequipOldGear: true
+  prefRoles: [ Insurgent ]
+  mindRoles: [ MindRoleInsurgent ]
+  roleLoadout: [ RoleSurvivalStandard ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
 
 - type: startingGear
   id: Insurgent
@@ -23,3 +36,12 @@
     pocket2: FlashlightLantern
     belt: ClothingBeltUtilityFilled
     neck: ClothingNeckBombCollarBroken
+
+- type: antagSmite
+  id: Insurgent
+  antag: Insurgent
+  rule: Insurgency
+  ruleComp: InsurgencyRule
+  icon:
+    sprite: Clothing/Mask/gas.rsi
+    state: icon

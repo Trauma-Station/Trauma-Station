@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
@@ -9,8 +5,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.CloneProjector;
 

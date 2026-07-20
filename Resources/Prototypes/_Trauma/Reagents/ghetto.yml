@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reagent
+  id: NitratedSlurry
+  name: reagent-name-nitrated-slurry
+  desc: reagent-desc-nitrated-slurry
+  physicalDesc: reagent-physical-desc-putrid
+  color: "#444411"

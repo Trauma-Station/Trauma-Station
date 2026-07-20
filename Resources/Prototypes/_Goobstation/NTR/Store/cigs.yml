@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: vendingMachineInventory
   id: CigaretteMachineInventoryDeluxe
   startingInventory:
@@ -8,7 +10,6 @@
     FlippoLighter: 2
     NanotrasenFlippo: 2
     FlippoEngravedLighter: 1
-    CigPackBlueshield: 1
   contrabandInventory:
     CentCommFlippo: 1
 

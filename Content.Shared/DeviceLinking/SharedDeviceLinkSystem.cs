@@ -1,48 +1,3 @@
-// SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Alice "Arimah" Heurlin <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -55,13 +10,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.DeviceLinking;
 
-public abstract class SharedDeviceLinkSystem : EntitySystem
+public abstract partial class SharedDeviceLinkSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+
+    [Dependency] private EntityQuery<DeviceLinkSinkComponent> _deviceLinkSinkQuery = default!;
 
     public const string InvokedPort = "link_port";
 
@@ -127,10 +83,9 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
     /// </summary>
     private void OnSourceRemoved(Entity<DeviceLinkSourceComponent> source, ref ComponentRemove args)
     {
-        var query = GetEntityQuery<DeviceLinkSinkComponent>();
         foreach (var sinkUid in source.Comp.LinkedPorts.Keys)
         {
-            if (query.TryGetComponent(sinkUid, out var sink))
+            if (_deviceLinkSinkQuery.TryGetComponent(sinkUid, out var sink))
                 RemoveSinkFromSourceInternal(source, sinkUid, source, sink);
             else
                 Log.Error($"Device source {ToPrettyString(source)} links to invalid entity: {ToPrettyString(sinkUid)}");
@@ -163,7 +118,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         var comp = EnsureComp<DeviceLinkSourceComponent>(uid);
         foreach (var port in ports)
         {
-            if (!_prototypeManager.HasIndex(port))
+            if (!ProtoMan.HasIndex(port))
                 Log.Error($"Attempted to add invalid port {port} to {ToPrettyString(uid)}");
             else
                 comp.Ports.Add(port);
@@ -181,7 +136,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         var comp = EnsureComp<DeviceLinkSinkComponent>(uid);
         foreach (var port in ports)
         {
-            if (!_prototypeManager.HasIndex(port))
+            if (!ProtoMan.HasIndex(port))
                 Log.Error($"Attempted to add invalid port {port} to {ToPrettyString(uid)}");
             else
                 comp.Ports.Add(port);
@@ -205,7 +160,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         var sourcePorts = new List<SourcePortPrototype>();
         foreach (var port in sourceComponent.Ports)
         {
-            sourcePorts.Add(_prototypeManager.Index(port));
+            sourcePorts.Add(ProtoMan.Index(port));
         }
 
         return sourcePorts;
@@ -228,7 +183,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         var sinkPorts = new List<SinkPortPrototype>();
         foreach (var port in sinkComponent.Ports)
         {
-            sinkPorts.Add(_prototypeManager.Index(port));
+            sinkPorts.Add(ProtoMan.Index(port));
         }
 
         return sinkPorts;
@@ -239,7 +194,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
     /// </summary>
     public string PortName<TPort>(string port) where TPort : DevicePortPrototype, IPrototype
     {
-        if (!_prototypeManager.TryIndex<TPort>(port, out var proto))
+        if (!ProtoMan.TryIndex<TPort>(port, out var proto))
             return port;
 
         return Loc.GetString(proto.Name);
@@ -382,8 +337,8 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         RemoveSinkFromSource(sourceUid, sinkUid, sourceComponent);
         foreach (var (source, sink) in links)
         {
-            DebugTools.Assert(_prototypeManager.HasIndex<SourcePortPrototype>(source));
-            DebugTools.Assert(_prototypeManager.HasIndex<SinkPortPrototype>(sink));
+            DebugTools.Assert(ProtoMan.HasIndex<SourcePortPrototype>(source));
+            DebugTools.Assert(ProtoMan.HasIndex<SinkPortPrototype>(sink));
 
             if (!sourceComponent.Ports.Contains(source) || !sinkComponent.Ports.Contains(sink))
                 continue;
@@ -412,20 +367,6 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         foreach (var sourceUid in sinkComponent.LinkedSources)
         {
             RemoveSinkFromSource(sourceUid, sinkUid, null, sinkComponent);
-        }
-    }
-
-    /// <summary>
-    /// Einstein Engines: Removes every link from the given sink
-    /// </summary>
-    public void RemoveAllFromSource(EntityUid sourceUid, DeviceLinkSourceComponent? sourceComponent = null, Predicate<EntityUid>? filter = null)
-    {
-        if (!Resolve(sourceUid, ref sourceComponent))
-            return;
-
-        foreach (var sinkUid in sourceComponent.LinkedPorts.Where(sinkUid => filter == null || filter.Invoke(sinkUid.Key)))
-        {
-            RemoveSinkFromSource(sourceUid, sinkUid.Key, sourceComponent);
         }
     }
 
@@ -474,8 +415,8 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         {
             foreach (var (sourcePort, sinkPort) in ports)
             {
-                RaiseLocalEvent(sourceUid, new PortDisconnectedEvent(sourcePort, sinkUid)); // EE edit: added Uid field
-                RaiseLocalEvent(sinkUid, new PortDisconnectedEvent(sinkPort, sourceUid)); // EE edit: added Uid field
+                RaiseLocalEvent(sourceUid, new PortDisconnectedEvent(sourcePort));
+                RaiseLocalEvent(sinkUid, new PortDisconnectedEvent(sinkPort));
             }
         }
 
@@ -513,8 +454,8 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
             else
                 _adminLogger.Add(LogType.DeviceLinking, LogImpact.Low, $"unlinked {ToPrettyString(sourceUid):source} {source} and {ToPrettyString(sinkUid):sink} {sink}");
 
-            RaiseLocalEvent(sourceUid, new PortDisconnectedEvent(source, sinkUid)); // EE edit: added Uid field
-            RaiseLocalEvent(sinkUid, new PortDisconnectedEvent(sink, sourceUid)); // EE edit: added Uid field
+            RaiseLocalEvent(sourceUid, new PortDisconnectedEvent(source));
+            RaiseLocalEvent(sinkUid, new PortDisconnectedEvent(sink));
 
             outputs.Remove(sinkUid);
             linkedPorts.Remove((source, sink));

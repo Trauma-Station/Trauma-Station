@@ -1,15 +1,10 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Robust.Client.Graphics;
 
 namespace Content.Client.Physics;
 
-public sealed class JointVisualsSystem : EntitySystem
+public sealed partial class JointVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

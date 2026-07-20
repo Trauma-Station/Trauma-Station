@@ -1,7 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Alert;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Chaplain.Components;
 
@@ -18,10 +18,10 @@ public sealed partial class HolyFlammableComponent : Component
     public float FireStacks;
 
     [DataField]
-    public float FireStacksDropoff = 10f;
+    public float FireStacksDropoff = 15f;
 
     [DataField]
-    public float MaximumFireStacks = 50f;
+    public float MaximumFireStacks = 30f;
 
     [DataField]
     public float MinimumFireStacks = -10f;
@@ -34,7 +34,7 @@ public sealed partial class HolyFlammableComponent : Component
     {
         DamageDict =
         {
-            ["Holy"] = 0.5
+            ["Holy"] = 0.5f
         }
     };
 

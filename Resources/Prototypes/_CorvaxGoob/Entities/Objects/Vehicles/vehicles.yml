@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: BaseVehicle
+  parent: BaseGroundVehicle
   id: VehicleSkeletonMotorcycle
   name: skeleton motorcycle
   description: Bad to the Bone.

@@ -1,8 +1,3 @@
-// <Trauma>
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared.EntityEffects;
-using Content.Shared.Humanoid.Prototypes;
-// </Trauma>
 using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
@@ -74,48 +69,4 @@ public sealed partial class TraitPrototype : IPrototype
     /// </summary>
     [DataField]
     public ProtoId<TraitCategoryPrototype>? Category;
-
-    /// <summary>
-    /// Goob: Ported from DeltaV - Hides traits from specific species
-    /// </summary>
-    [DataField]
-    public HashSet<ProtoId<SpeciesPrototype>> ExcludedSpecies = new();
-
-    /// <summary>
-    /// Goob: Only shows traits to specific species
-    /// </summary>
-    [DataField]
-    public HashSet<ProtoId<SpeciesPrototype>> IncludedSpecies = new();
-
-    /// <summary>
-    /// Trauma - Entity effects applied to the mob after spawning.
-    /// </summary>
-    [DataField]
-    public EntityEffect[] Effects = [];
-
-    // Einstein Engines - Language begin (remove this if trait system refactor)
-    /// <summary>
-    ///     The list of all Spoken Languages that this trait adds.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<LanguagePrototype>>? LanguagesSpoken { get; private set; } = default!;
-
-    /// <summary>
-    ///     The list of all Understood Languages that this trait adds.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<LanguagePrototype>>? LanguagesUnderstood { get; private set; } = default!;
-
-    /// <summary>
-    ///     The list of all Spoken Languages that this trait removes.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<LanguagePrototype>>? RemoveLanguagesSpoken { get; private set; } = default!;
-
-    /// <summary>
-    ///     The list of all Understood Languages that this trait removes.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<LanguagePrototype>>? RemoveLanguagesUnderstood { get; private set; } = default!;
-    // Einstein Engines - Language end
 }

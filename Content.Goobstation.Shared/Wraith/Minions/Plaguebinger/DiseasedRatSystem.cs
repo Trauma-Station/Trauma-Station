@@ -1,15 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Shared.Wraith.Components.Mobs;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 
 /// <summary>
 /// This handles the system for the diseased rat evolving into its bigger stages.
 /// </summary>
-public abstract class SharedDiseasedRatSystem : EntitySystem
+public abstract partial class SharedDiseasedRatSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -35,7 +35,7 @@ public abstract class SharedDiseasedRatSystem : EntitySystem
     {
         foreach (var form in ent.Comp.DiseasedRatForms)
         {
-            if (!_proto.TryIndex(form, out var formIndex)
+            if (!ProtoMan.TryIndex(form, out var formIndex)
                 || filthConsumed < formIndex.FilthRequired)
                 continue;
 

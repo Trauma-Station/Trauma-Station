@@ -1,7 +1,3 @@
-// <Trauma>
-using System.Linq;
-// </Trauma>
-
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Markings;
@@ -35,13 +31,13 @@ public static class MarkingColoring
         MarkingPrototype prototype,
         Color? skinColor,
         Color? eyeColor,
-        MarkingSet markingSet
+        List<Marking> otherMarkings
     )
     {
         var colors = new List<Color>();
 
         // Coloring from default properties
-        var defaultColor = prototype.Coloring.Default.GetColor(skinColor, eyeColor, markingSet);
+        var defaultColor = prototype.Coloring.Default.GetColor(skinColor, eyeColor, otherMarkings);
 
         if (prototype.Coloring.Layers == null)
         {
@@ -52,14 +48,6 @@ public static class MarkingColoring
             }
             return colors;
         }
-        // <Trauma>
-        else if (prototype.Sprites.Count == 0)
-        {
-            return prototype.Coloring.Layers.OrderBy(x => x.Key)
-                .Select(x => x.Value.GetColor(skinColor, eyeColor, markingSet))
-                .ToList();
-        }
-        // </Trauma>
         else
         {
             // If some layers are specified.
@@ -81,7 +69,7 @@ public static class MarkingColoring
                 // All specified layers must be colored separately, all unspecified must depend on default coloring
                 if (prototype.Coloring.Layers.TryGetValue(name, out var layerColoring))
                 {
-                    var marking_color = layerColoring.GetColor(skinColor, eyeColor, markingSet);
+                    var marking_color = layerColoring.GetColor(skinColor, eyeColor, otherMarkings);
                     colors.Add(marking_color);
                 }
                 else
@@ -101,7 +89,7 @@ public static class MarkingColoring
 public sealed partial class LayerColoringDefinition
 {
     [DataField("type")]
-    public LayerColoringType? Type = new SkinColoring();
+    public LayerColoringType? Type = new ColoringTypes.SkinColoring();
 
     /// <summary>
     ///     Coloring types that will be used if main coloring type will return nil
@@ -115,16 +103,16 @@ public sealed partial class LayerColoringDefinition
     [DataField("fallbackColor")]
     public Color FallbackColor = Color.White;
 
-    public Color GetColor(Color? skin, Color? eyes, MarkingSet markingSet)
+    public Color GetColor(Color? skin, Color? eyes, List<Marking> otherMarkings)
     {
         Color? color = null;
         if (Type != null)
-            color = Type.GetColor(skin, eyes, markingSet);
+            color = Type.GetColor(skin, eyes, otherMarkings);
         if (color == null)
         {
             foreach (var type in FallbackTypes)
             {
-                color = type.GetColor(skin, eyes, markingSet);
+                color = type.GetColor(skin, eyes, otherMarkings);
                 if (color != null) break;
             }
         }
@@ -143,10 +131,10 @@ public abstract partial class LayerColoringType
     /// </summary>
     [DataField("negative")]
     public bool Negative { get; private set; } = false;
-    public abstract Color? GetCleanColor(Color? skin, Color? eyes, MarkingSet markingSet);
-    public Color? GetColor(Color? skin, Color? eyes, MarkingSet markingSet)
+    public abstract Color? GetCleanColor(Color? skin, Color? eyes, List<Marking> otherMarkings);
+    public Color? GetColor(Color? skin, Color? eyes, List<Marking> otherMarkings)
     {
-        var color = GetCleanColor(skin, eyes, markingSet);
+        var color = GetCleanColor(skin, eyes, otherMarkings);
         // Negative color
         if (color != null && Negative)
         {

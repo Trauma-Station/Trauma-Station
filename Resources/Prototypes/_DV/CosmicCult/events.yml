@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseAntagGhostRoleRule, BaseGameRule ]
+  id: ColossusSpawn
+  components:
+  - type: StationEvent
+    weight: 1
+    earliestStart: 50
+    reoccurrenceDelay: 30
+    minimumPlayers: 40
+    duration: null
+  - type: SpaceSpawnRule
+  - type: GameRule
+  - type: AntagSpawner
+    prototype: MobCosmicColossusLone
+  - type: AntagObjectives
+    objectives:
+    - ColossusSurviveObjective
+    - ColossusEffigyObjective
+  - type: AntagSelection
+    agentName: role-subtype-colossus
+    antags:
+    - !type:FixedAntagCount
+      proto: CosmicColossus

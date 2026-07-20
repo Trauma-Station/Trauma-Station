@@ -1,6 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: MakeshiftIDCard
   graph: MakeshiftIDCard
   category: construction-category-misc
   targetNode: final
   objectType: Item
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 1
+    ElectronicsKnowledge: 1

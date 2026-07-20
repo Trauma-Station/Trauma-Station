@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.co>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.GridPreloader;
@@ -21,18 +7,16 @@ using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class LoadMapRuleSystem : StationEventSystem<LoadMapRuleComponent>
+public sealed partial class LoadMapRuleSystem : StationEventSystem<LoadMapRuleComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly GridPreloaderSystem _gridPreloader = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private GridPreloaderSystem _gridPreloader = default!;
 
     protected override void Added(EntityUid uid, LoadMapRuleComponent comp, GameRuleComponent rule, GameRuleAddedEvent args)
     {
@@ -53,7 +37,7 @@ public sealed class LoadMapRuleSystem : StationEventSystem<LoadMapRuleComponent>
             DebugTools.AssertNull(comp.GridPath);
             DebugTools.AssertNull(comp.PreloadedGrid);
 
-            var gameMap = _prototypeManager.Index(comp.GameMap.Value);
+            var gameMap = ProtoMan.Index(comp.GameMap.Value);
             grids = GameTicker.LoadGameMap(gameMap, out mapId, null);
             Log.Info($"Created map {mapId} for {ToPrettyString(uid):rule}");
         }

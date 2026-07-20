@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: loadout
   id: EmergencyPlasma
   effects:
@@ -24,15 +26,6 @@
   storage:
     back:
     - BoxSurvivalSlotsSecurityPlasma
-
-- type: loadout
-  id: EmergencyPlasmaMedical
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: PlasmaBreather
-  storage:
-    back:
-    - BoxSurvivalSlotsMedicalPlasma
 
 - type: loadout
   id: EmergencyPlasmaSyndicate

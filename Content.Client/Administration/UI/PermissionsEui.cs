@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Aaron Mell <aaronamell@gmail.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Numerics;
 using Content.Client.Administration.Managers;
@@ -32,11 +16,11 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client.Administration.UI
 {
     [UsedImplicitly]
-    public sealed class PermissionsEui : BaseEui
+    public sealed partial class PermissionsEui : BaseEui
     {
         private const int NoRank = -1;
 
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
+        [Dependency] private IClientAdminManager _adminManager = default!;
 
         private readonly Menu _menu;
         private readonly List<BaseWindow> _subWindows = new();
@@ -306,7 +290,7 @@ namespace Content.Client.Administration.UI
             OpenRankEditWindow(rank);
         }
 
-        private sealed class Menu : DefaultWindow
+        private sealed partial class Menu : DefaultWindow
         {
             private readonly PermissionsEui _ui;
             public readonly GridContainer AdminsList;
@@ -357,7 +341,7 @@ namespace Content.Client.Administration.UI
             }
         }
 
-        private sealed class EditAdminWindow : DefaultWindow
+        private sealed partial class EditAdminWindow : DefaultWindow
         {
             public readonly PermissionsEuiState.AdminData? SourceData;
             public readonly LineEdit? NameEdit;
@@ -546,7 +530,7 @@ namespace Content.Client.Administration.UI
             }
         }
 
-        private sealed class EditAdminRankWindow : DefaultWindow
+        private sealed partial class EditAdminRankWindow : DefaultWindow
         {
             public readonly int? SourceId;
             public readonly LineEdit NameEdit;

@@ -1,9 +1,5 @@
-// SPDX-FileCopyrightText: 2025 Liamofthesky <157073227+Liamofthesky@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.DoAfter;
 using Content.Shared.Random;
 using Content.Trauma.Shared.Botany.Components;
 using Robust.Shared.Audio;
@@ -20,7 +16,7 @@ public sealed partial class PlantAnalyzerComponent : Component
     public PlantAnalyzerSetting Settings = new();
 
     [DataField]
-    public DoAfterId? DoAfter;
+    public bool Busy;
 
     [DataField]
     public SoundSpecifier? ScanningEndSound;

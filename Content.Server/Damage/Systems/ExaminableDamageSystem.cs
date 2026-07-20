@@ -1,26 +1,17 @@
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Damage.Components;
 using Content.Server.Destructible;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Rounding;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Damage.Systems;
 
-public sealed class ExaminableDamageSystem : EntitySystem
+public sealed partial class ExaminableDamageSystem : EntitySystem
 {
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -30,7 +21,7 @@ public sealed class ExaminableDamageSystem : EntitySystem
 
     private void OnExamine(Entity<ExaminableDamageComponent> ent, ref ExaminedEvent args)
     {
-        if (!_prototype.Resolve(ent.Comp.Messages, out var proto) || proto.Values.Count == 0)
+        if (!ProtoMan.Resolve(ent.Comp.Messages, out var proto) || proto.Values.Count == 0)
             return;
 
         var percent = GetDamagePercent(ent);
@@ -49,7 +40,7 @@ public sealed class ExaminableDamageSystem : EntitySystem
         if (!TryComp<DamageableComponent>(ent, out var damageable))
             return 0;
 
-        var damage = damageable.TotalDamage;
+        var damage = _damageable.GetTotalDamage((ent, damageable));
         var damageThreshold = _destructible.DestroyedAt(ent);
 
         if (damageThreshold == 0)

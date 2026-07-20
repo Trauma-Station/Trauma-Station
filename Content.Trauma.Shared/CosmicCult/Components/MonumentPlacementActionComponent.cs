@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Trauma.Shared.CosmicCult.Components;
+
+[RegisterComponent]
+public sealed partial class MonumentPlacementActionComponent : Component
+{
+    /// <summary>
+    /// The mark that was created by this action. If not null, using the action would remove the mark instead.
+    /// </summary>
+    [DataField]
+    public EntityUid? MarkUid;
+
+    [DataField]
+    public EntProtoId? MarkProto = "MonumentCosmicCultSpawnMark";
+}

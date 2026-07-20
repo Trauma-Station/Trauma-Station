@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Utility;
@@ -67,11 +54,9 @@ namespace Content.Server.Power.Pow3r
                 // E.g., the number of nets from lowest to highest for box and saltern are:
                 // Saltern: 1477, 11, 2, 2, 3.
                 // Box:     3308, 20, 1, 5.
-                //
                 // I have NFI what the overhead for a Parallel.ForEach is, and how it compares to computing differently
                 // sized nets. Basic benchmarking shows that this is better, but maybe the highest-tier nets should just
                 // be run sequentially? But then again, maybe they are 2-3 very BIG networks at the top? So maybe:
-                //
                 // TODO make GroupByNetworkDepth evaluate the TOTAL size of each layer (i.e. loads + chargers +
                 // suppliers + discharger) Then decide based on total layer size whether its worth parallelizing that
                 // layer?

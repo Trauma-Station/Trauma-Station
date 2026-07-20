@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -15,13 +9,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Item;
 
-public sealed class MultiHandedItemSystem : EntitySystem
+public sealed partial class MultiHandedItemSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!; // Goobstation
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // Goobstation
 
     /// <inheritdoc/>
     public override void Initialize()

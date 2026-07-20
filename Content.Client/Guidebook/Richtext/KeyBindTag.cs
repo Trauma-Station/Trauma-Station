@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using JetBrains.Annotations;
 using Robust.Client.Input;
 using Robust.Client.UserInterface.RichText;
@@ -12,9 +6,9 @@ using Robust.Shared.Utility;
 namespace Content.Client.Guidebook.Richtext;
 
 [UsedImplicitly]
-public sealed class KeyBindTag : IMarkupTagHandler
+public sealed partial class KeyBindTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
 
     public string Name => "keybind";
 

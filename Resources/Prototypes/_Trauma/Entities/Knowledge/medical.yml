@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: SurgeryKnowledge
+  name: Surgery
+  description: Does nothing currently. Don't waste points on it.
+  components:
+  - type: Knowledge
+    experienceCost: 24
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: FirstAidKnowledge
+  name: First Aid
+  description: How good you are with syringes.
+  components:
+  - type: Knowledge
+    experienceCost: 19
+  - type: InjectTimeKnowledge
+    # y = 1 + 1.4(0.6 - 0.01x)^3
+    # 30% slower, 9% faster at lvl 0/100
+    # no effect around lvl 60
+    curve: !type:CubicSkillCurve
+      skillOffset: 0.6
+      skillScale: -1 # decrease with skill rather than increase
+      curveOffset: 1 # multiplying time so has to be centered at 1
+      curveScale: 1.4
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: ChemistryKnowledge
+  name: Chemistry
+  description: Does nothing currently. Don't waste points on it.
+  components:
+  - type: Knowledge
+    experienceCost: 15

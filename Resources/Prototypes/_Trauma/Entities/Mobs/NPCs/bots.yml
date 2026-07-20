@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: MobSiliconBase
   id: MobButtBot
@@ -46,9 +48,9 @@
   components:
   - type: Sprite
     state: cyberbuttbot
-  - type: Construction
-    graph: CyberButtBot
-    node: bot
+  #- type: Construction # TODO: add CyberButt actual butt item
+  #  graph: CyberButtBot
+  #  node: bot
 
 - type: entity
   parent: MobSiliconBase
@@ -231,10 +233,6 @@
   - type: HTN
     rootTask:
       task: ED209Compound
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - FootstepSound
   - type: NpcFactionMember
     factions:
     - NanoTrasen
@@ -246,6 +244,7 @@
   - type: ChangeHtnOnEmag
     task: !type:HTNCompoundTask
       task: ED209EmagedCompound
+  - type: PatrolSlave
 
 - type: entity
   id: ED209Endoskeleton

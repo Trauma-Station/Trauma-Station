@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: bone axe
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem, BaseMajorContraband, KnifeDurability ]
   id: BoneAxe
   description: An axe made of bones. A primitive hunters favorite... probably.
   components:
@@ -33,11 +35,12 @@
     slots:
     - back
     - suitStorage
+  - type: Sharp
   - type: Tool
     qualities:
     - Prying
     - Axing
-  - type: Sharp
+    - Slicing
   - type: Execution
     doAfterDuration: 5.0
     decapitation: true
@@ -55,6 +58,12 @@
   - type: Construction
     graph: BoneAxeConstructionGraph
     node: axe
+  - type: PhysicalComposition
+    materialComposition:
+      Bones: 300
+  - type: Tag
+    tags:
+    - Trash
 
 - type: entity
   name: bone dagger
@@ -85,3 +94,7 @@
   - type: Tag
     tags:
     - Knife
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Bones: 100

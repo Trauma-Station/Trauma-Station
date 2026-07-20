@@ -1,9 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.GameTicking;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Server.GameTicking;
 using JetBrains.Annotations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Destructible.Thresholds.Behaviors
 {

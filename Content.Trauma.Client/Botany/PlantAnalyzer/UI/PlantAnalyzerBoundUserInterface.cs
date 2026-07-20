@@ -1,16 +1,11 @@
-// SPDX-FileCopyrightText: 2025 Liamofthesky <157073227+Liamofthesky@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ReconPangolin <67752926+ReconPangolin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Content.Trauma.Shared.Botany.Components;
 
 namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 
-
-public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
+public sealed partial class PlantAnalyzerBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private PlantAnalyzerWindow? _window;

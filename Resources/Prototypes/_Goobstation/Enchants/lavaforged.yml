@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Lets you walk through lava unimpeded
 - type: entity
   parent: BaseEnchant

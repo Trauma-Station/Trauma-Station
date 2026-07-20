@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [BaseMob, ClothingMaskBase, MobDamageable]
+  parent: [ BaseMob, ClothingMaskBase, MobDamageable, BaseXenomorphGhostRole, BaseSlicingRefinable ]
   id: MobXenomorphFaceHugger
   name: xenomorph facehugger
   description: A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.
@@ -16,20 +18,11 @@
     noMovementLayers:
       movement:
         state: facehugger
-  - type: GhostTakeoverAvailable
+  - type: ThrowableFacehugger
+    minThrowForce: 5.0
   - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
     name: ghost-role-information-facehugger-name
     description: ghost-role-information-facehugger-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: Jump
-    jumpAction: ActionJumpFacehugger
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
@@ -39,8 +32,9 @@
     accent: ReplacementAccent
     replacement: mumble
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -57,7 +51,7 @@
         Base: facehugger_dead
   - type: MeleeWeapon
     hidden: true
-    canHeavyAttack: false
+    canWideSwing: false
     angle: 0
     damage:
       types:
@@ -67,10 +61,9 @@
   - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
-      amount: 1
   - type: FaceHugger
     blacklist:
       components:
@@ -84,8 +77,8 @@
       types:
         Blunt: 15
     damageOnInfect:
-      groups:
-        Genetic: 100
+      types:
+        Cellular: 100
     sleepChem: Nocturine # ID of the Chemical we want to inject  - Goobstation start
     sleepChemAmount: 10 # Amount in units (Often no need to use more than 10u for most chems)
     minChemicalThreshold: 8 # Minimum amount of the chemical required to prevent additional injections
@@ -138,16 +131,55 @@
         layer:
         - LowImpassable
         hard: false
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Trauma
     understands:
     - Xeno
-#    - XenoHivemind # Trauma
     - Hissing
     - Draconic
-  - type: CollectiveMind # Trauma
+  - type: Speech
+    speechSounds: Xenomorph
+    speechVerb: SmallMob
+  - type: ReplacementAccent
+    accent: xeno
+  - type: Vocal
+    emoteSounds: Xenomorph
+  - type: CollectiveMind
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
+  - type: ThermalVision
+    toggleAction: ToggleThermalVisionXenomorph
+    color: white
+    drawOverlay: false
+    lightRadius: 10
+    strength: 0
+    noise: 0
+    tint: 3, 3, 3
+  - type: Destructible # This prevents GIGA lag
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: LarvaInfestationVision
+  - type: TypingIndicator
+    proto: alien
+  - type: ZombieImmune
+  - type: NoSlip
+  - type: ShowHealthIcons
+  - type: VentCrawler
+  - type: Pinpointer
+    whitelist:
+      components:
+      - XenomorphQueen
+    alert: QueenFinder
+    isActive: true
+    canToggle: false
+    canEmag: false
+    canExamine: false
+  - type: FaceHuggerLeap

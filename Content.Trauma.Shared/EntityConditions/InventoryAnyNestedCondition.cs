@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityConditions;
 using Content.Shared.Inventory;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -17,7 +17,7 @@ public sealed partial class InventoryAnyNestedCondition : EntityConditionBase<In
     public EntityCondition Condition = default!;
 
     [DataField]
-    public LocId GuidebookText = "entity-effect-condition-guidebook-inventory-nested";
+    public LocId GuidebookText = "entity-condition-guidebook-inventory-nested";
 
     [DataField]
     public SlotFlags Flags = SlotFlags.WITHOUT_POCKET;
@@ -26,10 +26,10 @@ public sealed partial class InventoryAnyNestedCondition : EntityConditionBase<In
         => Loc.GetString(GuidebookText, ("condition", Condition.EntityConditionGuidebookText(prototype)));
 }
 
-public sealed class InventoryAnyNestedConditionSystem : EntityConditionSystem<InventoryComponent, InventoryAnyNestedCondition>
+public sealed partial class InventoryAnyNestedConditionSystem : EntityConditionSystem<InventoryComponent, InventoryAnyNestedCondition>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     protected override void Condition(Entity<InventoryComponent> ent, ref EntityConditionEvent<InventoryAnyNestedCondition> args)
     {
@@ -40,7 +40,7 @@ public sealed class InventoryAnyNestedConditionSystem : EntityConditionSystem<In
         var condition = args.Condition.Condition;
         while (slots.NextItem(out var item))
         {
-            if (_conditions.TryCondition(item, condition))
+            if (_conditions.TryCondition(item, condition, args.User))
             {
                 args.Result = true;
                 return;

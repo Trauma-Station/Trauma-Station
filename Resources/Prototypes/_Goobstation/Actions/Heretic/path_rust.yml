@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -9,7 +5,6 @@
   id: ActionHereticRustConstruction
   name: Rust Formation
   description: Transforms a rusted floor into a full wall of rust. Creating a wall underneath a mob will harm it.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -32,11 +27,9 @@
   id: ActionHereticAggressiveSpread
   name: Aggressive Spread
   description: Spreads rust onto nearby surfaces.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
-    predicted: false
     useDelay: 30
     itemIconStyle: NoItem
     sound:
@@ -59,11 +52,9 @@
   id: ActionHereticEntropicPlume
   name: Entropic Plume
   description: Spews forth a disorienting plume that causes enemies to strike each other, briefly blinds them and poisons them. Also spreads rust in the path of the plume.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
-    predicted: false
     useDelay: 30
     itemIconStyle: NoItem
     sound:
@@ -83,7 +74,6 @@
   id: ActionHereticRustCharge
   name: Rust Charge
   description: A charge that must be started on a rusted tile and will destroy any rusted objects you come into contact with, will deal high damage to others and rust around you during the charge. As it is the rust that empowers you with this ability, no focus is needed.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -101,11 +91,20 @@
     requireMagicItem: false
 
 - type: entity
+  parent: ActionHereticRustCharge
+  id: ActionHereticRustChargeShort
+  components:
+  - type: Action
+    useDelay: 10
+  - type: WorldTargetAction
+    event: !type:EventHereticRustCharge
+      distance: 3
+
+- type: entity
   parent: BaseAction
   id: ActionHereticRustWave
   name: Patron's Reach
   description: Release a toxic wave of rust.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: true
@@ -124,6 +123,6 @@
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: ProjectileWaveRust
-      speed: 2.8
+      projectileSpeed: 2.8
   - type: SpeakOnAction
     sentence: heretic-speech-rust-wave

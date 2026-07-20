@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: species
+  id: Shattered
+  name: species-name-shattered
+  roundStart: false
+  prototype: MobShattered
+  dollPrototype: AppearanceShattered
+  skinColoration: NoColor

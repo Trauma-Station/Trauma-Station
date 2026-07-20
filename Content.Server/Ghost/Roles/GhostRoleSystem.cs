@@ -1,47 +1,3 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <zddm@outlook.es>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 ike709 <ike709@github.com>
-// SPDX-FileCopyrightText: 2022 ike709 <ike709@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ray <vigersray@gmail.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 MFMessage <22904993+MFMessage@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mota <belochuc@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vascreeper@yahoo.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 no <165581243+pissdemon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 poeMota <142114334+poeMota@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -83,28 +39,27 @@ using Content.Shared.Roles.Components;
 namespace Content.Server.Ghost.Roles;
 
 [UsedImplicitly]
-public sealed class GhostRoleSystem : EntitySystem
+public sealed partial class GhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly IBanManager _ban = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly FollowerSystem _followerSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IBanManager _ban = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private FollowerSystem _followerSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedRoleSystem _roleSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     private uint _nextRoleIdentifier;
     private bool _needsUpdateGhostRoleCount = true;
 
     private readonly Dictionary<uint, Entity<GhostRoleComponent>> _ghostRoles = new();
     private readonly Dictionary<uint, Entity<GhostRoleRaffleComponent>> _ghostRoleRaffles = new();
+    private readonly List<uint> _badRoles = new(1); // Trauma
 
     private readonly Dictionary<ICommonSession, GhostRolesEui> _openUis = new();
     private readonly Dictionary<ICommonSession, MakeGhostRoleEui> _openMakeGhostRoleUis = new();
@@ -290,7 +245,7 @@ public sealed class GhostRoleSystem : EntitySystem
             }
 
             var foundWinner = false;
-            var deciderPrototype = _prototype.Index(ghostRole.RaffleConfig.Decider);
+            var deciderPrototype = ProtoMan.Index(ghostRole.RaffleConfig.Decider);
 
             // use the ghost role's chosen winner picker to find a winner
             deciderPrototype.Decider.PickWinner(
@@ -399,7 +354,7 @@ public sealed class GhostRoleSystem : EntitySystem
             return; // should, realistically, never be reached but you never know
 
         var settings = config.SettingsOverride
-                       ?? _prototype.Index<GhostRoleRaffleSettingsPrototype>(config.Settings).Settings;
+                       ?? ProtoMan.Index<GhostRoleRaffleSettingsPrototype>(config.Settings).Settings;
 
         if (settings.MaxDuration < settings.InitialDuration)
         {
@@ -506,7 +461,7 @@ public sealed class GhostRoleSystem : EntitySystem
     public void Request(ICommonSession player, uint identifier)
     {
         if (player.AttachedEntity is not { Valid: true } attached ||
-            !EntityManager.TryGetComponent<GhostComponent>(attached, out var ghost) || !ghost.CanTakeGhostRoles) // Goobstation
+            !TryComp<GhostComponent>(attached, out var ghost) || !ghost.CanTakeGhostRoles) // Goobstation
             return;
 
         if (!_ghostRoles.TryGetValue(identifier, out var roleEnt))
@@ -580,10 +535,9 @@ public sealed class GhostRoleSystem : EntitySystem
         // If there is no mind, check the mindRole prototypes
         foreach (var proto in roleEnt.Comp.MindRoles)
         {
-            if (!_prototype.TryIndex(proto, out var indexed)
-                || !indexed.TryGetComponent<MindRoleComponent>(out var comp, _ent.ComponentFactory))
+            if (!ProtoMan.TryIndex(proto, out var indexed)
+                || !indexed.TryComp<MindRoleComponent>(out var roleComp, Factory))
                 continue;
-            var roleComp = (MindRoleComponent)comp;
 
             if (roleComp.JobPrototype is not null)
                 jobs.Add(roleComp.JobPrototype.Value);
@@ -663,6 +617,12 @@ public sealed class GhostRoleSystem : EntitySystem
         _mindSystem.TransferTo(newMind, mob);
 
         _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
+        // <Trauma> - always add the job too
+        if (role.JobProto is { } job)
+        {
+            _roleSystem.MindAddJobRole(newMind, newMind.Comp, silent: false, job);
+        }
+        // </Trauma>
     }
 
     /// <summary>
@@ -670,8 +630,7 @@ public sealed class GhostRoleSystem : EntitySystem
     /// </summary>
     public int GetGhostRoleCount()
     {
-        var metaQuery = GetEntityQuery<MetaDataComponent>();
-        return _ghostRoles.Count(pair => metaQuery.CompOrNull(pair.Value.Owner)?.EntityPaused == false); // Goobstation - goidafix random test fail from deleted ghost roles
+        return _ghostRoles.Count(pair => MetaData(pair.Value.Owner).EntityPaused == false);
     }
 
     /// <summary>
@@ -683,11 +642,25 @@ public sealed class GhostRoleSystem : EntitySystem
     public GhostRoleInfo[] GetGhostRolesInfo(ICommonSession? player)
     {
         var roles = new List<GhostRoleInfo>();
-        var metaQuery = GetEntityQuery<MetaDataComponent>();
 
+        // <Trauma> - some bullshit isnt cleaning up ghost roles properly, prevent it throwing
+        _badRoles.Clear();
+        foreach (var (id, ent) in _ghostRoles)
+        {
+            if (Exists(ent))
+                continue;
+
+            Log.Debug($"Ghost role {id} had deleted entity {id} but was not cleaned up!");
+            _badRoles.Add(id);
+        }
+        foreach (var id in _badRoles)
+        {
+            _ghostRoles.Remove(id);
+        }
+        // </Trauma>
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
-            if (metaQuery.GetComponent(uid).EntityPaused)
+            if (MetaData(uid).EntityPaused)
                 continue;
 
 
@@ -858,7 +831,7 @@ public sealed class GhostRoleSystem : EntitySystem
         args.TookRole = true;
     }
 
-    private bool CanTakeGhost(EntityUid uid, GhostRoleComponent? component = null)
+    public bool CanTakeGhost(EntityUid uid, GhostRoleComponent? component = null) // Trauma - made public
     {
         return Resolve(uid, ref component, false) &&
                !component.Taken &&
@@ -906,7 +879,7 @@ public sealed class GhostRoleSystem : EntitySystem
 
         foreach (var prototypeID in prototypes)
         {
-            if (_prototype.TryIndex<GhostRolePrototype>(prototypeID, out var prototype))
+            if (ProtoMan.TryIndex<GhostRolePrototype>(prototypeID, out var prototype))
             {
                 var verb = CreateVerb(uid, component, args.User, prototype);
                 verbs.Add(verb);
@@ -952,7 +925,7 @@ public sealed class GhostRoleSystem : EntitySystem
 
     public void OnGhostRoleRadioMessage(Entity<GhostRoleMobSpawnerComponent> entity, ref GhostRoleRadioMessage args)
     {
-        if (!_prototype.Resolve(args.ProtoId, out var ghostRoleProto))
+        if (!ProtoMan.Resolve(args.ProtoId, out var ghostRoleProto))
             return;
 
         // if the prototype chosen isn't actually part of the selectable options, ignore it
@@ -972,9 +945,9 @@ public sealed class GhostRoleSystem : EntitySystem
 }
 
 [AnyCommand]
-public sealed class GhostRoles : IConsoleCommand
+public sealed partial class GhostRoles : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _e = default!;
+    [Dependency] private IEntityManager _e = default!;
 
     public string Command => "ghostroles";
     public string Description => "Opens the ghost role request window.";

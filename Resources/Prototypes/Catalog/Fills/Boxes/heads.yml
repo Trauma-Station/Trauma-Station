@@ -40,7 +40,6 @@
         - id: MedicalScannerMachineCircuitboard
         - id: CloningConsoleComputerCircuitboard
         - id: BiomassReclaimerMachineCircuitboard
-        - id: MedicalBiofabMachineBoard
         # </Trauma>
         - id: MedicalTechFabCircuitboard
         - id: CargoRequestMedicalComputerCircuitboard

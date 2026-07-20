@@ -1,12 +1,8 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.DoAfter;
 using Content.Goobstation.Shared.Factory.Filters;
+using Content.Shared.CombatMode;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DoAfter;
@@ -19,36 +15,37 @@ using Content.Shared.Throwing;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Goobstation.Shared.Factory;
 
 internal delegate bool Toggle();
 
-public abstract class SharedInteractorSystem : EntitySystem
+public abstract partial class SharedInteractorSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationSystem _automation = default!;
-    [Dependency] private readonly AutomationFilterSystem _filter = default!;
-    [Dependency] private readonly CollisionWakeSystem _wake = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] protected readonly StartableMachineSystem Machine = default!;
+    [Dependency] private AutomationSystem _automation = default!;
+    [Dependency] private AutomationFilterSystem _filter = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] protected StartableMachineSystem Machine = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
-    private EntityQuery<ActiveDoAfterComponent> _doAfterQuery;
-    private EntityQuery<HandsComponent> _handsQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
-    private EntityQuery<ThrownItemComponent> _thrownQuery;
+    [Dependency] private EntityQuery<ActiveDoAfterComponent> _doAfterQuery = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<ThrownItemComponent> _thrownQuery = default!;
 
-    private readonly HashSet<EntityUid> _targets = new();
+    private readonly HashSet<Entity<PhysicsComponent>> _targets = new();
 
     public static readonly SpriteSpecifier VerbIcon = new SpriteSpecifier.Rsi(new("Objects/Tools/screwdriver.rsi"), "screwdriver-map");
     public static readonly ProtoId<ToolQualityPrototype> Screwing = "Screwing";
@@ -56,11 +53,6 @@ public abstract class SharedInteractorSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _doAfterQuery = GetEntityQuery<ActiveDoAfterComponent>();
-        _handsQuery = GetEntityQuery<HandsComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _thrownQuery = GetEntityQuery<ThrownItemComponent>();
 
         SubscribeLocalEvent<InteractorComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<InteractorComponent, ExaminedEvent>(OnExamined);
@@ -98,7 +90,8 @@ public abstract class SharedInteractorSystem : EntitySystem
         var user = args.User;
         (string, Toggle)[] options = [
             ("alt-interact", () => SetAltInteract(ent, !ent.Comp.AltInteract)),
-            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand))
+            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand)),
+            ("harm-mode", () => SetHarmMode(ent, !ent.Comp.HarmMode))
         ];
         foreach (var (id, toggle) in options)
         {
@@ -107,7 +100,7 @@ public abstract class SharedInteractorSystem : EntitySystem
                 Act = () =>
                 {
                     var value = toggle();
-                    _popup.PopupClient(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
+                    _popup.PopupEntity(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
                 },
                 Text = Loc.GetString($"interactor-verb-toggle-{id}"),
                 Icon = VerbIcon,
@@ -139,13 +132,18 @@ public abstract class SharedInteractorSystem : EntitySystem
 
     private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent args)
     {
-        var alt = args.Port == ent.Comp.AltInteractPort;
-        if (!alt && args.Port != ent.Comp.UseInHandPort)
-            return;
-
         var state = SignalState.Momentary;
         args.Data?.TryGetValue<SignalState>("logic_state", out state);
-        var current = alt ? ent.Comp.AltInteract : ent.Comp.UseInHand;
+        bool current;
+        if (args.Port == ent.Comp.AltInteractPort)
+            current = ent.Comp.AltInteract;
+        else if (args.Port == ent.Comp.UseInHandPort)
+            current = ent.Comp.UseInHand;
+        else if (args.Port == ent.Comp.HarmModePort)
+            current = ent.Comp.HarmMode;
+        else
+            return;
+
         var value = state switch
         {
             SignalState.Momentary => !current,
@@ -153,14 +151,18 @@ public abstract class SharedInteractorSystem : EntitySystem
             SignalState.Low => false,
             _ => false
         };
-        if (alt)
+
+        if (args.Port == ent.Comp.AltInteractPort)
             SetAltInteract(ent, value);
-        else
+        else if (args.Port == ent.Comp.UseInHandPort)
             SetUseInHand(ent, value);
+        else if (args.Port == ent.Comp.HarmModePort)
+            SetHarmMode(ent, value);
     }
 
     public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
         => !_thrownQuery.HasComp(target) // thrown items move too fast to be "clicked" on...
+            && _automation.CanMachineDetect(target) // ignore ghosts ninjas etc
             && _filter.IsAllowed(_filter.GetSlot(ent), target); // ignore non-filtered entities
 
     protected bool HasDoAfter(EntityUid uid) => _doAfterQuery.HasComp(uid);
@@ -189,8 +191,22 @@ public abstract class SharedInteractorSystem : EntitySystem
         if (!_hands.TryGetActiveItem(ent.Owner, out var tool))
             return _interaction.InteractHand(ent, target);
 
-        var coords = Transform(target).Coordinates;
-        return _interaction.InteractUsing(ent, tool.Value, target, coords);
+        if (!ent.Comp.HarmMode)
+        {
+            var coords = Transform(target).Coordinates;
+            return _interaction.InteractUsing(ent, tool.Value, target, coords);
+        }
+
+        // instead of interacting via the SharedInteractionSystem, attack the target with the held item
+        if (!TryComp<MeleeWeaponComponent>(tool, out var meleeWeapon))
+            return false;
+
+        // I turn on combat mode manually for the entity because otherwise the melee attack will fail
+        var prev = _combatMode.IsInCombatMode(ent.Owner);
+        _combatMode.SetInCombatMode(ent.Owner, true);
+        var result = _melee.AttemptLightAttack(ent.Owner, tool.Value, meleeWeapon, target);
+        _combatMode.SetInCombatMode(ent.Owner, prev);
+        return result;
     }
 
     protected void UpdateAppearance(EntityUid uid)
@@ -234,6 +250,19 @@ public abstract class SharedInteractorSystem : EntitySystem
             return use;
 
         ent.Comp.UseInHand = use;
+        Dirty(ent);
+        return use;
+    }
+
+    /// <summary>
+    /// Set <see cref="InteractorComponent.HarmMode"> and dirty it.
+    /// </summary>
+    public bool SetHarmMode(Entity<InteractorComponent> ent, bool use)
+    {
+        if (ent.Comp.HarmMode == use)
+            return use;
+
+        ent.Comp.HarmMode = use;
         Dirty(ent);
         return use;
     }

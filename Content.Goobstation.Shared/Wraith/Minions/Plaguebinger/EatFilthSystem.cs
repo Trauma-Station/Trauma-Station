@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Chemistry.EntitySystems;
@@ -7,12 +9,12 @@ using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
-public sealed class EatFilthSystem : EntitySystem
+public sealed partial class EatFilthSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -25,7 +27,7 @@ public sealed class EatFilthSystem : EntitySystem
     {
         if (!_entityWhitelist.IsWhitelistPass(ent.Comp.AllowedEntities, args.Target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 
@@ -43,7 +45,7 @@ public sealed class EatFilthSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(doAfterArgs);
 
-        _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-you-start", ("target", args.Target)), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-you-start", ("target", args.Target)), ent.Owner, ent.Owner);
         args.Handled = true;
     }
 
@@ -51,14 +53,14 @@ public sealed class EatFilthSystem : EntitySystem
     {
         if (args.Cancelled || args.Handled|| args.Target is not { } target)
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-interrupt"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-interrupt"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 
         // First, check if its compatible reagent
         if (!CanEatTarget(ent, target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 
@@ -70,7 +72,7 @@ public sealed class EatFilthSystem : EntitySystem
 
         PredictedQueueDel(args.Target);
 
-        _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-you-finish", ("target", args.Target)), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-you-finish", ("target", args.Target)), ent.Owner, ent.Owner);
     }
 
     #region Helper

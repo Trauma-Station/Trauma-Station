@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: CrateScienceSecure
+  id: CrateRoboticsSecure
+  name: secure robotics crate
+  components:
+  - type: AccessReader
+    access: [["Robotics"]]

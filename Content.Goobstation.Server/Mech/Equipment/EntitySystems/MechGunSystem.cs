@@ -1,35 +1,29 @@
-// SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Mech;
 using Content.Server.Mech.Systems;
-using Content.Shared.Power.Components;
-using Content.Shared.Power.EntitySystems;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Goobstation.Server.Mech.Equipment.EntitySystems;
 
-public sealed class MechGunSystem : EntitySystem
+public sealed partial class MechGunSystem : EntitySystem
 {
-    [Dependency] private readonly MechSystem _mech = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private MechSystem _mech = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MechEquipmentComponent, HandleMechEquipmentBatteryEvent>(OnHandleMechEquipmentBattery);
+
+        SubscribeLocalEvent<MechEquipmentComponent, MechGunFiredEvent>(OnGunFired);
     }
 
-    private void OnHandleMechEquipmentBattery(EntityUid uid, MechEquipmentComponent component, HandleMechEquipmentBatteryEvent args)
+    private void OnGunFired(EntityUid uid, MechEquipmentComponent component, ref MechGunFiredEvent args)
     {
         if (component.EquipmentOwner == null || !TryComp<BatteryComponent>(uid, out var battery))
             return;

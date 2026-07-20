@@ -1,5 +1,5 @@
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Goobstation.Shared.InternalResources.Data;
@@ -7,7 +7,7 @@ namespace Content.Goobstation.Shared.InternalResources.Data;
 /// <summary>
 /// Data structure for storing and changing inner resource in entities
 /// </summary>
-[Serializable, NetSerializable]
+[DataDefinition, Serializable, NetSerializable]
 public sealed partial class InternalResourcesData
 {
     /// <summary>

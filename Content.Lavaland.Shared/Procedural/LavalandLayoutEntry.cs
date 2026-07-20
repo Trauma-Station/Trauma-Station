@@ -1,5 +1,5 @@
-using System.Numerics;
-using Robust.Shared.Utility;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 
 namespace Content.Lavaland.Shared.Procedural;
 

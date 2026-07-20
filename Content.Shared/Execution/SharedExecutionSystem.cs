@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Body;
+// </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Chat;
 using Content.Shared.CombatMode;
@@ -20,17 +23,20 @@ namespace Content.Shared.Execution;
 /// <summary>
 ///     Verb for violently murdering cuffed creatures.
 /// </summary>
-public sealed partial class SharedExecutionSystem : EntitySystem // Trauma - made partial
+public sealed partial class SharedExecutionSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSuicideSystem _suicide = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedExecutionSystem _execution = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    // <Trauma>
+    [Dependency] private BodySystem _body = default!;
+    // </Trauma>
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSuicideSystem _suicide = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedExecutionSystem _execution = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -95,6 +101,9 @@ public sealed partial class SharedExecutionSystem : EntitySystem // Trauma - mad
 
     }
 
+    /// <summary>
+    /// Check if someone can be executed.
+    /// </summary>
     public bool CanBeExecuted(EntityUid victim, EntityUid attacker)
     {
         // No point executing someone if they can't take damage
@@ -219,7 +228,7 @@ public sealed partial class SharedExecutionSystem : EntitySystem // Trauma - mad
             _melee.AttemptLightAttack(attacker, weapon, meleeWeaponComp, victim);
             // <Goob>
             if (entity.Comp.Decapitation)
-                Decapitation(victim);
+                _body.TryDecapitate(victim, args.User);
             // </Goob>
         }
 

@@ -33,9 +33,6 @@
             ]
         },
         {
-            "name": "eldritch_flask"
-        },
-        {
             "name": "rune_carver"
         },
         {
@@ -47,15 +44,6 @@
                     0.5
                 ]
             ]
-        },
-        {
-            "name": "crucible_soul"
-        },
-        {
-            "name": "clarity"
-        },
-        {
-            "name": "marshal"
         },
         {
             "name": "crucible_empty"

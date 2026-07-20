@@ -1,18 +1,5 @@
-# SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ActiveMammmoth <kmcsmooth@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Scruq445 <storchdamien@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 crasg <109207982+Scruq445@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 keronshb <54602815+keronshb@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Offensive
 - type: listing
   id: SpellbookMimeMalaise
@@ -695,11 +682,14 @@
   id: SpellbookPaperRobe
   name: spellbook-paper-robe-name
   description: spellbook-paper-robe-desc
-  productEntity: ClothingOuterWizardPaperReal
+  productEntity: ClothingBackpackPaper
   cost:
     WizCoin: 1
   categories:
   - SpellbookEquipment
+  icon:
+    sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
+    state: icon
 
 - type: listing
   id: SpellbookHighFrequencyBlade
@@ -707,7 +697,7 @@
   description: spellbook-high-freq-desc
   productEntity: HighFrequencyBlade
   cost:
-    WizCoin: 3
+    WizCoin: 2
   categories:
   - SpellbookEquipment
 
@@ -799,17 +789,6 @@
     WizCoin: 2
   categories:
   - SpellbookEquipment
-
-- type: listing
-  id: SpellbookNinjutsuScroll
-  name: spellbook-ninjutsu-name
-  description: spellbook-ninjutsu-desc
-  productEntity: NinjutsuScroll
-  cost:
-    WizCoin: 2
-  categories:
-  - SpellbookEquipment
-  disableRefund: true
 
 # Summons
 - type: listing

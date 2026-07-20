@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: stealTargetGroup
+  id: SodaDispenser
+  name: steal-target-groups-soda-dispenser
+  sprite:
+    sprite: Structures/smalldispensers.rsi
+    state: soda

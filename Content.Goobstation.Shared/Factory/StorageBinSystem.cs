@@ -1,13 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Factory.Filters;
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Factory;
 
-public sealed class StorageBinSystem : EntitySystem
+public sealed partial class StorageBinSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationFilterSystem _filter = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _device = default!;
+    [Dependency] private AutomationFilterSystem _filter = default!;
+    [Dependency] private SharedDeviceLinkSystem _device = default!;
 
     public const string ContainerId = "storagebase";
 

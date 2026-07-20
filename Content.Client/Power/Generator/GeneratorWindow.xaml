@@ -1,11 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: MIT
--->
-
 <controls:FancyWindow xmlns="https://spacestation14.io"
                 xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
@@ -16,7 +8,7 @@ SPDX-License-Identifier: MIT
     <BoxContainer Margin="4 0" Orientation="Horizontal">
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="2" VerticalAlignment="Top" Margin="5">
             <GridContainer Margin="2 0 0 0" Columns="2" HorizontalExpand="True">
-                <Label Name="StatusLabel" Text="{Loc 'portable-generator-ui-power-switch'}" HorizontalExpand="True" />
+                <Label Name="StatusLabel" HorizontalExpand="True" />  <!-- Trauma - removed invalid Text -->
                 <Control MinWidth="120">
                     <Button Name="StartButton" Text="{Loc 'portable-generator-ui-start'}" />
                     <Button Name="StopButton" Text="{Loc 'portable-generator-ui-stop'}" />
@@ -38,7 +30,7 @@ SPDX-License-Identifier: MIT
                     <Label Name="FuelLeft" Text="0" HorizontalExpand="True"/>
                     <Button Name="FuelEject" Text="{Loc 'portable-generator-ui-eject'}" />
                 </BoxContainer>
-                <Label Name="OutputSwitchLabel" Text="{Loc 'portable-generator-ui-switch'}" Visible="False" />
+                <Label Name="OutputSwitchLabel" Visible="False" /> <!-- Trauma - removed invalid Text -->
                 <Button Name="OutputSwitchButton" Visible="False" />
                 <!-- Network stats menu -->
                 <Label Text="{Loc 'portable-generator-ui-network-stats'}"/>
@@ -49,7 +41,7 @@ SPDX-License-Identifier: MIT
             <Label Margin="2 0 0 0" Name="CloggedLabel" FontColorOverride="Red" Text="{Loc 'portable-generator-ui-clogged'}" />
         </BoxContainer>
         <cc:VSeparator StyleClasses="LowDivider"/>
-        <PanelContainer Margin="12 0 0 0" StyleClasses="Inset" VerticalAlignment="Center">
+        <PanelContainer Margin="12 0 0 0" StyleClasses="BackgroundPanelDark" VerticalAlignment="Center">
             <SpriteView Name="EntityView" SetSize="64 64" Scale="2 2" OverrideDirection="South" Margin="15"/>
         </PanelContainer>
     </BoxContainer>

@@ -1,13 +1,12 @@
 - type: entity
+  abstract: true
   parent: ClothingHandsBase
-  id: ClothingHandsGlovesBoxingRed
-  name: red boxing gloves
-  description: Red gloves for competitive boxing.
+  id: ClothingHandsGlovesBoxingBase
   components:
-  - type: Sprite
-    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
-  - type: Clothing
-    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+  # <Trauma>
+  - type: WeaponClass
+    class: Unarmed # you are still just hitting people
+  # </Trauma>
   - type: StaminaDamageOnHit
     damage: 8 #Stam damage values seem a bit higher than regular damage because of the decay, etc
     # This needs to be moved to boxinggloves
@@ -21,21 +20,32 @@
       collection: BoxingHit
     animation: WeaponArcFist
     mustBeEquippedToUse: true
-  - type: Fiber
-    fiberMaterial: fibers-leather
-    fiberColor: fibers-red
-  - type: FingerprintMask
   - type: Tag
     tags:
     - Kangaroo
     - WhitelistChameleon
-  - type: IgniteFromGasImmunity # Logical? No. Funny as shit? You bet.
+  - type: IgniteFromGasImmunity # Goob - Logical? No. Funny as shit? You bet.
     parts:
-    - LeftHand
-    - RightHand
+    - HandLeft
+    - HandRight
 
 - type: entity
-  parent: ClothingHandsGlovesBoxingRed
+  parent: ClothingHandsGlovesBoxingBase
+  id: ClothingHandsGlovesBoxingRed
+  name: red boxing gloves
+  description: Red gloves for competitive boxing.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-red
+  - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesBoxingBase
   id: ClothingHandsGlovesBoxingBlue
   name: blue boxing gloves
   description: Blue gloves for competitive boxing.
@@ -51,7 +61,7 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: ClothingHandsGlovesBoxingRed
+  parent: ClothingHandsGlovesBoxingBase
   id: ClothingHandsGlovesBoxingGreen
   name: green boxing gloves
   description: Green gloves for competitive boxing.
@@ -67,7 +77,7 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: ClothingHandsGlovesBoxingRed
+  parent: ClothingHandsGlovesBoxingBase
   id: ClothingHandsGlovesBoxingYellow
   name: yellow boxing gloves
   description: Yellow gloves for competitive boxing.
@@ -83,19 +93,53 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: ClothingHandsGlovesBoxingBlue
-  id: ClothingHandsGlovesBoxingRigged
+  abstract: true
+  parent: ClothingHandsGlovesBoxingBase
+  id: ClothingHandsGlovesBoxingRiggedBase
   suffix: Rigged
   components:
-  - type: StaminaDamageOnHit
-    damage: 25
   - type: MeleeWeapon
-    attackRate: 1.4
     damage:
       types:
         Blunt: 8
-    bluntStaminaDamageFactor: 0.0 # so blunt doesn't deal stamina damage at all
-    mustBeEquippedToUse: true
+    bluntStaminaDamageFactor: 2
+
+- type: entity
+  parent: [ ClothingHandsGlovesBoxingRiggedBase, ClothingHandsGlovesBoxingRed ]
+  id: ClothingHandsGlovesBoxingRiggedRed
+  name: red boxing gloves
+  description: Red gloves for competitive boxing.
+
+- type: entity
+  parent: [ ClothingHandsGlovesBoxingRiggedBase, ClothingHandsGlovesBoxingBlue ]
+  id: ClothingHandsGlovesBoxingRiggedBlue
+  name: blue boxing gloves
+  description: Blue gloves for competitive boxing.
+
+- type: entity
+  parent: [ ClothingHandsGlovesBoxingRiggedBase, ClothingHandsGlovesBoxingGreen ]
+  id: ClothingHandsGlovesBoxingRiggedGreen
+  name: green boxing gloves
+  description: Green gloves for competitive boxing.
+
+- type: entity
+  parent: [ ClothingHandsGlovesBoxingRiggedBase, ClothingHandsGlovesBoxingYellow ]
+  id: ClothingHandsGlovesBoxingRiggedYellow
+  name: yellow boxing gloves
+  description: Yellow gloves for competitive boxing.
+
+- type: entity
+  id: GlovesBoxingRiggedRandomSpawner
+  categories: [ HideSpawnMenu ]
+  name: random rigged boxing glove spawner
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: ClothingHandsGlovesBoxingRiggedRed
+      - id: ClothingHandsGlovesBoxingRiggedBlue
+      - id: ClothingHandsGlovesBoxingRiggedGreen
+      - id: ClothingHandsGlovesBoxingRiggedYellow
 
 - type: entity
   parent: [ClothingHandsBase, BaseCommandContraband]
@@ -155,6 +199,9 @@
   - type: Fiber
     fiberMaterial: fibers-latex
   - type: FingerprintMask
+  - type: Tag # Goob
+    tags:
+    - GlovesLatex
 
 - type: entity
   parent: ClothingHandsButcherable
@@ -169,6 +216,10 @@
   - type: Fiber
     fiberMaterial: fibers-nitrile
   - type: FingerprintMask
+  - type: Tag # Goob
+    tags:
+    - GlovesNitrile
+
 ####
 - type: entity
   parent: ClothingHandsButcherable
@@ -319,7 +370,7 @@
         Shock: 0.75
 
 - type: entity
-  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat ]
+  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat, BaseSlicingRefinable ]
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
@@ -328,9 +379,8 @@
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesMercFingerless
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -416,13 +466,17 @@
   name: gloves of the north star
   description: These gloves allow you to punch incredibly fast.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Unarmed # you are still just hitting people just really fast
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/northstar.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/northstar.rsi
   - type: MeleeWeapon
     autoAttack: true
-    attackRate: 4
+    attackRate: 5 # Trauma - was 4
     damage:
       types:
        Blunt: 8
@@ -473,6 +527,10 @@
   name: rubber gloves
   description: High-quality rubber gloves, squeaky to do some cleaning!
   components:
+  # <Trauma> - todo above done...
+  - type: LubeImmune
+  - type: GlueImmune
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/janitor.rsi
   - type: Clothing

@@ -6,6 +6,40 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: KnowledgeHolder
+  - type: IntrinsicUI
+    uis:
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionShowStationMap
+  - type: StationMap # Show location on the map
+  - type: Targeting
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: Penetratable # Better snipers
+    penetrateDamage: 75 # It's harder to kill iron golem
+    damagePenalty: 0.25
+  - type: MiningPoints # for mining borgs mostly
+  - type: SpeechSynthesis
+    voice: Borg
+  - type: KnowledgeGrantOnWear # gets added to the brain, modified when picking borg type
+    skills:
+      # robot basic stuff
+      FabricationKnowledge: 20
+      WallsKnowledge: 10
+      InfrastructureKnowledge: 10
+      ElectronicsKnowledge: 10
+  # </Trauma>
   - type: Reactive
     groups:
       Acidic: [Touch]
@@ -46,7 +80,7 @@
     thresholds:
       0: Alive
       100: Critical
-      200: Dead
+      200: Dead # Trauma - was 300
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
@@ -58,6 +92,7 @@
       - Blunt
       - Slash
       - Piercing
+      - Ballistic # Trauma
       - Heat
       - Shock
     locPrefix: silicon
@@ -76,13 +111,6 @@
       # Goobstation - Add the station map interface to the borg
       enum.StationMapUiKey.Key:
         type: StationMapBoundUserInterface
-  # Goobstation - Add the station map interface to the borg
-  - type: IntrinsicUI
-    uis:
-      enum.StationMapUiKey.Key:
-        toggleAction: ActionShowStationMap
-  - type: StationMap # Also Goobstation - Show location on the map
-  - type: Targeting # Shitmed Change
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: SiliconLawBound
@@ -111,12 +139,6 @@
     # - Binary # Goobstation - replaced with collective mind
     - Common
     - Science
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-    canUseInCrit: true # Goobstation
   - type: ZombieImmune
   - type: Repairable
     damageValue: -10 # 10 seconds to repair from crit
@@ -151,8 +173,7 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-  - type: Body
-    bodyType: Simple # Goob
+  #- type: Body # Trauma - borg is not creature
   - type: StatusEffects
     allowed:
     - Flashed
@@ -167,8 +188,7 @@
     - Crying
     - Whistle
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
+    emoteSounds: UnisexSilicon
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
   - type: UnblockableSpeech
@@ -189,9 +209,11 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
+    damageModifierSet: Silicon # Trauma - ion damage
+  - type: Injurable
     damageContainer: Silicon
-    damageModifierSet: Silicon #Goobstation - Iondamage
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -209,13 +231,15 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:EmptyContainersBehaviour
-        containers:
-        - borg_brain
-        - borg_module
-        - cell_slot
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+      - !type:GibBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapGlass:
+            min: 1
+            max: 1
+          SheetSteel:
+            min: 10
+            max: 20
   - type: HandheldLight
     toggleOnInteract: false
     wattage: 0.2
@@ -266,31 +290,17 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: LanguageKnowledge # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:
         Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
   - type: BypassLock
+    openWiresPanel: true
   - type: BypassLockRequiresMobState
     requiredMobState:
     - Critical
     - Dead
-  # <Goob>
-  - type: Penetratable # Better snipers
-    penetrateDamage: 75 # It's harder to kill iron golem
-    damagePenalty: 0.25
-  - type: MiningPoints
-  - type: SpeechSynthesis
-    voice: Borg
-  # </Goob>
 
 - type: entity
   abstract: true
@@ -374,6 +384,7 @@
   - type: SlavedBorg # DeltaV: NT borgs are enslaved to the AI by default
     law: ObeyAI
   - type: ShowJobIcons
+  - type: ShowCrewIcons
   - type: StationAiVision # Goobstation - AI can see through NT silicon
     range: 3
   - type: InteractionPopup
@@ -385,6 +396,18 @@
   parent: BaseBorgChassis
   abstract: true
   components:
+  # <Trauma>
+  - type: Damageable
+    damageModifierSet: SiliconProtected
+  - type: Injurable
+    damageContainer: Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: FlashImmunity
+    showInExamine: false
+  - type: SpeechSynthesis
+    voice: BorgSyndie
+  # </Trauma>
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -417,22 +440,11 @@
     - Whistle
     # end Goobstation - Cyborg emote sounds
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove syndieborg brains.
-  # <Goob>
-  - type: Damageable
-    damageContainer: Silicon
-    damageModifierSet: SiliconProtected
-  - type: ExplosionResistance
-    damageCoefficient: 0.5
-  - type: FlashImmunity
-  - type: SpeechSynthesis
-    voice: BorgSyndie
-  # </Goob>
 
 - type: entity
   id: BaseBorgChassisDerelict
@@ -452,6 +464,7 @@
   - type: IonStormTarget
     chance: 1
   - type: ShowJobIcons
+  - type: ShowCrewIcons
 
 - type: entity
   id: BaseBorgChassisSyndicateDerelict #For assault borg and maybe others in time
@@ -465,6 +478,7 @@
   - type: IonStormTarget
     chance: 1
   - type: ShowJobIcons
+  - type: ShowCrewIcons
   - type: NpcFactionMember # They're still syndicate even if they can't listen to the radio or see icons
     factions:
     - Syndicate
@@ -480,8 +494,7 @@
     allowedEmotes:
     - Laugh
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
   - type: BypassLock
@@ -532,6 +545,11 @@
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
+    # <Trauma>
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+    # </Trauma>
   - type: TypingIndicator
     proto: xenoborg
   - type: Speech
@@ -545,8 +563,7 @@
     - Whistle
     # end Goobstation - Cyborg emote sounds
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconXenoborg
+    emoteSounds: UnisexSiliconXenoborg
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
   - type: UnblockableSpeech
@@ -609,6 +626,7 @@
   - type: AccessReader
     access: [["Xenoborg"]]
   - type: ShowJobIcons # not sure if it is needed
+  - type: ShowCrewIcons
   - type: InteractionPopup
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg

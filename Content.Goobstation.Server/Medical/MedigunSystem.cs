@@ -1,22 +1,15 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Shared.Medical;
 using Content.Goobstation.Shared.Medical.Components;
-using Content.Server.Body.Systems;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Power.EntitySystems;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Pain.Systems;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -28,32 +21,30 @@ using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 // ReSharper disable EnforceForeachStatementBraces
 namespace Content.Goobstation.Server.Medical;
 
-// TODO: Move this to Shared when battery systems will be predicted
-public sealed class MedigunSystem : SharedMedigunSystem
+// TODO: Move this to Shared
+public sealed partial class MedigunSystem : SharedMedigunSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly AlertsSystem _alert = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!; // Shitmed Change
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly PainSystem _pain = default!; // Shitmed Change
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AlertsSystem _alert = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BatteryComponent> _batteryQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
+
+    public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
 
     public override void Initialize()
     {
@@ -89,8 +80,10 @@ public sealed class MedigunSystem : SharedMedigunSystem
 
             var toHeal = component.HealedEntities.ToArray();
             foreach (var healed in toHeal)
+            {
                 if (!MediGunHealingTick(medGunEnt, healed))
                     DisableConnection(medGunEnt, healed);
+            }
 
             if (component.HealedEntities.Count == 0)
             {
@@ -108,13 +101,14 @@ public sealed class MedigunSystem : SharedMedigunSystem
         }
     }
 
-    private const string PainModifierIdentifier = "PainSuppressant";
-
     /// <summary>
     /// Returns false if target had failed to be healed.
     /// </summary>
     private bool MediGunHealingTick(Entity<MediGunComponent> ent, EntityUid healed)
     {
+        if (TerminatingOrDeleted(healed))
+            return false;
+
         var comp = ent.Comp;
 
         // Calculate positions of all targets and remove ones that out of range
@@ -139,7 +133,7 @@ public sealed class MedigunSystem : SharedMedigunSystem
             return false;
 
         var healing = comp.UberActivated ? comp.UberHealing : comp.Healing;
-        var originalDamage = damageable.TotalDamage;
+        var originalDamage = _damage.GetTotalDamage((healed, damageable));
 
         _damage.ChangeDamage(
             (healed, damageable),
@@ -155,7 +149,7 @@ public sealed class MedigunSystem : SharedMedigunSystem
 
         _bloodstreamSystem.TryModifyBloodLevel(healed, comp.BleedingAmountModifier);
 
-        var afterDamage = damageable.TotalDamage;
+        var afterDamage = _damage.GetTotalDamage((healed, damageable));
         var healedAmount = originalDamage - afterDamage;
 
         if (!comp.UberActivated)
@@ -163,20 +157,6 @@ public sealed class MedigunSystem : SharedMedigunSystem
 
         if (comp.ParentEntity != null)
             UpdateAlert(comp.ParentEntity.Value, ent);
-
-        // PainSystem also adds pain modifiers to coders who are trying to use it. Literally 0 convenience APIs!!!
-        if (!_consciousness.TryGetNerveSystem(healed, out var nerveSys))
-            return true;
-
-        var bodyPart = _body.GetBodyChildrenOfType(healed, BodyPartType.Head).FirstOrNull();
-
-        if (bodyPart == null)
-            return true;
-
-        if (!_pain.TryGetPainModifier(nerveSys.Value, bodyPart.Value.Id, PainModifierIdentifier, out var modifier))
-            _pain.TryAddPainModifier(nerveSys.Value, bodyPart.Value.Id, PainModifierIdentifier, ent.Comp.PainAmountModifier, time: TimeSpan.FromSeconds(1.5f));
-        else
-            _pain.TryChangePainModifier(nerveSys.Value, bodyPart.Value.Id, PainModifierIdentifier, modifier.Value.Change + ent.Comp.PainAmountModifier, time: TimeSpan.FromSeconds(1.5f));
 
         return true;
     }

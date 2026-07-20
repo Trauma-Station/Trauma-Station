@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   id: BaseVinylDisk
@@ -11,8 +13,9 @@
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -64,7 +67,7 @@
   - type: ItemSlots
     slots:
       vinyl:
-        name: vinyl
+        name: item-slot-name-vinyl
         insertSound: /Audio/_Goobstation/RadioStation/vinyl/vinylEject.ogg
         ejectSound: /Audio/_Goobstation/RadioStation/vinyl/vinylInsert.ogg
         whitelist:

@@ -1,25 +1,18 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Goobstation.Server.Devil.Objectives.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Contract;
-using Content.Server.Body.Systems;
+using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Wounds;
 using Content.Server.Hands.Systems;
 using Content.Server.Implants;
 using Content.Server.Mind;
 using Content.Server.Polymorph.Systems;
+using Content.Shared.Body;
 using Content.Shared.Paper;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -27,14 +20,15 @@ namespace Content.Goobstation.Server.Devil.Contract;
 
 public sealed partial class DevilContractSystem : SharedDevilContractSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly WoundSystem _wounds = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SubdermalImplantSystem _implant = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SubdermalImplantSystem _implant = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     public override void Initialize()
     {
@@ -72,17 +66,14 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             var locId = _targetResolvers.Keys.FirstOrDefault(id => Loc.GetString(id).Equals(targetKey, StringComparison.OrdinalIgnoreCase));
             var resolver = _targetResolvers[locId];
 
-            if (resolver(contract.Comp) == null)
+            if (resolver(contract.Comp) is not { } target || TerminatingOrDeleted(target))
             {
-                Log.Warning($"Unknown resolver: {resolver(contract.Comp)}");
+                Log.Warning($"Bad target entity for {locId}!");
                 continue;
             }
 
-            if (!Proto.TryIndex(clauseKey, out DevilClausePrototype? clause))
-            {
-                Log.Warning($"Unknown contract clause: {clauseKey}");
+            if (!ProtoMan.TryIndex(clauseKey, out DevilClausePrototype? clause))
                 continue;
-            }
 
             // no duplicates
             if (!processedClauses.Add(clauseKey))
@@ -91,10 +82,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
                 continue;
             }
 
-            if (resolver(contract.Comp) is {} target)
-                ApplyEffectToTarget(target, clause, contract);
-            else
-                Log.Warning($"Invalid target entity from resolver for clause {clauseKey} in contract {ToPrettyString(contract)}");
+            ApplyEffectToTarget(target, clause, contract);
         }
     }
 
@@ -167,9 +155,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
         foreach (var item in clause.SpawnedItems)
         {
-            if (!Proto.TryIndex(item, out _))
-                continue;
-
             var spawnedItem = SpawnNextToOrDrop(item, target);
             _hands.TryPickupAnyHand(target, spawnedItem, false, false, false);
 
@@ -204,7 +189,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomNegativeClause(EntityUid target)
     {
-        var negativeClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var negativeClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight >= 0)
             .ToList();
 
@@ -219,7 +204,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomNegativeClauseSlasher(EntityUid target)
     {
-        var negativeClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var negativeClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight >= 0 && c.ID != "humanity")
             .ToList();
 
@@ -234,7 +219,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomPositiveClause(EntityUid target)
     {
-        var positiveClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var positiveClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight <= 0)
             .ToList();
 
@@ -249,7 +234,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomClause(EntityUid target)
     {
-        var clauses = Proto.EnumeratePrototypes<DevilClausePrototype>().ToList();
+        var clauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>().ToList();
 
         if (clauses.Count == 0)
             return;

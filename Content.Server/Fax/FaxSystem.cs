@@ -20,6 +20,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Fax;
 using Content.Shared.Fax.Components;
 using Content.Shared.Fax.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
@@ -35,32 +36,34 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Fax;
 
-public sealed class FaxSystem : EntitySystem
+public sealed partial class FaxSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
     // </Trauma>
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly PaperSystem _paperSystem = default!;
-    [Dependency] private readonly LabelSystem _labelSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly ToolSystem _toolSystem = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly FaxecuteSystem _faxecute = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private PaperSystem _paperSystem = default!;
+    [Dependency] private LabelSystem _labelSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private ToolSystem _toolSystem = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private FaxecuteSystem _faxecute = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
 
@@ -315,9 +318,14 @@ public sealed class FaxSystem : EntitySystem
                     args.Data.TryGetValue(FaxConstants.FaxPaperStampedByData, out List<StampDisplayInfo>? stampedBy);
                     args.Data.TryGetValue(FaxConstants.FaxPaperPrototypeData, out string? prototypeId);
                     args.Data.TryGetValue(FaxConstants.FaxPaperLockedData, out bool? locked);
+                    args.Data.TryGetValue(FaxConstants.FaxPaperSenderFaxNameData, out string? senderFaxName);
 
-                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false);
-                    Receive(uid, printout, args.SenderAddress);
+                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false, senderFaxName);
+                    // <Trauma>
+                    args.Data.TryGetValue("fax_data_sender", out EntityUid? sender);
+                    args.Data.TryGetValue("fax_data_user", out EntityUid? user); // hopefully nobody makes a custom packet sender...
+                    Receive(uid, printout, args.SenderAddress, component, user, sender); // pass component, user and sender
+                    // </Trauma>
 
                     break;
                 // Goobstation
@@ -437,6 +445,7 @@ public sealed class FaxSystem : EntitySystem
             return;
 
         component.DestinationFaxAddress = destAddress;
+        component.DestinationFaxName = component.KnownFaxes[destAddress];
 
         UpdateUserInterface(uid, component);
     }
@@ -569,14 +578,39 @@ public sealed class FaxSystem : EntitySystem
 
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
+        var content = paper.Content;
+
+        if (component.AddSenderInfo)
+        {
+            var faxMachineAddress = TryComp<DeviceNetworkComponent>(uid, out var deviceNetworkComponent)
+            ? deviceNetworkComponent.Address
+            : Loc.GetString("device-address-unknown");
+
+            var time = _gameTicker.RoundDuration();
+            var timeString = TimeSpan.FromSeconds(Math.Truncate(time.TotalSeconds)).ToString();
+
+            content += "\n";
+            content += Loc.GetString(component.SenderInfo,
+                ("sender_name", component.FaxName),
+                ("sender_addr", faxMachineAddress),
+                ("recipient_name", component.DestinationFaxName ?? Loc.GetString("fax-machine-popup-source-unknown")),
+                ("recipient_addr", component.DestinationFaxAddress),
+                ("time", timeString)
+            );
+        }
+
         var payload = new NetworkPayload()
         {
-            // Goobstation merge conflict landmine: if how faxes work is changed FaxSlipSystem.cs might become broken
+            // <Trauma>
+            { "fax_data_sender", uid },
+            { "fax_data_user", args.Actor },
+            // </Trauma>
             { DeviceNetworkConstants.Command, FaxConstants.FaxPrintCommand },
             { FaxConstants.FaxPaperNameData, nameMod?.BaseName ?? metadata.EntityName },
             { FaxConstants.FaxPaperLabelData, labelComponent?.CurrentLabel },
-            { FaxConstants.FaxPaperContentData, paper.Content },
+            { FaxConstants.FaxPaperContentData, content },
             { FaxConstants.FaxPaperLockedData, paper.EditingDisabled },
+            { FaxConstants.FaxPaperSenderFaxNameData, component.FaxName ?? Loc.GetString("fax-machine-popup-source-unknown") }
         };
 
         if (metadata.EntityPrototype != null)
@@ -596,7 +630,7 @@ public sealed class FaxSystem : EntitySystem
 
         _deviceNetworkSystem.QueuePacket(uid, component.DestinationFaxAddress, payload);
 
-        if (!args.Actor.IsValid()) // Goobstation - no log for automation
+        if (args.Actor.IsValid()) // Goobstation - no log for automation
         _adminLogger.Add(LogType.Action,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):actor} " +
@@ -616,21 +650,20 @@ public sealed class FaxSystem : EntitySystem
     ///     If has parameter "notifyAdmins" also output a special message to admin chat.
     /// </summary>
     // Goobstation - make printout nullable
-    public void Receive(EntityUid uid, FaxPrintout? printout, string? fromAddress = null, FaxMachineComponent? component = null)
+    public void Receive(EntityUid uid, FaxPrintout? printout, string? fromAddress = null, FaxMachineComponent? component = null,
+        EntityUid? user = null, EntityUid? sender = null) // Trauma
     {
         if (!Resolve(uid, ref component))
             return;
 
-        var faxName = Loc.GetString("fax-machine-popup-source-unknown");
-        if (fromAddress != null && component.KnownFaxes.TryGetValue(fromAddress, out var fax)) // If message received from unknown fax address
-            faxName = fax;
+        var faxName = printout?.SenderFaxName ?? Loc.GetString("fax-machine-popup-source-unknown"); // Trauma - nullable printout
 
         _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-received", ("from", faxName)), uid);
         if (printout != null) // Goobstation
             _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
 
         if (component.NotifyAdmins)
-            NotifyAdmins(faxName);
+            NotifyAdmins(faxName, user, sender); // Trauma - pass user and sender
 
         if (printout != null) // Goobstation
             component.PrintingQueue.Enqueue(printout);
@@ -673,9 +706,15 @@ public sealed class FaxSystem : EntitySystem
         _adminLogger.Add(LogType.Action, LogImpact.Low, $"\"{component.FaxName}\" {ToPrettyString(uid):tool} printed {ToPrettyString(printed):subject}: {printout.Content}");
     }
 
-    private void NotifyAdmins(string faxName)
+    private void NotifyAdmins(string faxName,
+        EntityUid? user, EntityUid? sender) // Trauma
     {
-        _chat.SendAdminAnnouncement(Loc.GetString("fax-machine-chat-notify", ("fax", faxName)));
+        // <Trauma>
+        if (user == null || user == EntityUid.Invalid)
+            return; // don't spam notify if its automated
+        // replaced shitty loc string with real info
+        _chat.SendAdminAnnouncement($"Received new fax message from {ToPrettyString(user)} using fax '{faxName}' {ToPrettyString(sender)}");
+        // </Trauma>
 
         // Goobstation - Admin Notifications / Admin Notifications
         // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));

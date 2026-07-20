@@ -1,29 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
@@ -31,9 +5,12 @@
   name: knowledge-path-blade-s1-name
   description: knowledge-path-blade-s1-desc
   icon: { sprite: _Goobstation/Heretic/Blades/blade_blade.rsi, state: icon }
-  productHereticKnowledge: CuttingEdge
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - CuttingEdge
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathBlade
   conditions:
@@ -56,9 +33,12 @@
   name: knowledge-path-blade-s2-name
   description: knowledge-path-blade-s2-desc
   icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: GraspOfBlade
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - GraspOfBlade
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathBlade
   conditions:
@@ -69,15 +49,17 @@
     whitelist:
     - Blade
 
-# side
 - type: listing
   id: HereticBladePath3
   name: knowledge-path-blade-s3-name
   description: knowledge-path-blade-s3-desc
-  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon-on }
-  productHereticKnowledge: DanceOfTheBrand
+  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MarkOfBlade
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathBlade
   conditions:
@@ -88,12 +70,16 @@
     whitelist:
     - Blade
 
+# side
 - type: listing
   id: HereticBladePath4
   name: knowledge-path-blade-s4-name
   description: knowledge-path-blade-s4-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: MarkOfBlade
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: hook_on }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ChampionHook
   cost:
     KnowledgePoint: 2
   categories:
@@ -110,8 +96,11 @@
   id: HereticBladePath5
   name: knowledge-path-blade-s5-name
   description: knowledge-path-blade-s5-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: realignment }
-  productHereticKnowledge: Realignment
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: sacraments }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - SacramentsOfPower
   cost:
     KnowledgePoint: 2
   categories:
@@ -124,15 +113,39 @@
     whitelist:
     - Blade
 
+- type: listing
+  id: HereticBladeArmor
+  name: knowledge-path-blade-armor-name
+  description: knowledge-path-blade-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ArmorBlade
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Blade
+
 # side
 - type: listing
   id: HereticBladePath6
   name: knowledge-path-blade-s6-name
   description: knowledge-path-blade-s6-desc
-  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon-on }
-  productHereticKnowledge: TornChampionStance
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: furious_steel }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - FuriousSteel
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathBlade
   conditions:
@@ -147,8 +160,11 @@
   id: HereticBladePath7
   name: knowledge-path-blade-s7-name
   description: knowledge-path-blade-s7-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: EmpoweredBlades
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_blade.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - EmpoweredBlades
   cost:
     KnowledgePoint: 2
   categories:
@@ -166,10 +182,13 @@
   id: HereticBladePath8
   name: knowledge-path-blade-s8-name
   description: knowledge-path-blade-s8-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: furious_steel }
-  productHereticKnowledge: FuriousSteel
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: among_sheep }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - WolvesAmongSheep
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathBlade
   conditions:
@@ -185,9 +204,12 @@
   name: knowledge-path-blade-s9-name
   description: knowledge-path-blade-s9-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: protective_blade }
-  productHereticKnowledge: AscensionBlade
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AscensionBlade
   cost:
-    KnowledgePoint: 3
+    KnowledgePoint: 2
   categories:
   - HereticPathBlade
   conditions:

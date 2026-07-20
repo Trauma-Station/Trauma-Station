@@ -1,27 +1,17 @@
-// SPDX-FileCopyrightText: 2025 BeBright <98597725+be1bright@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.NTR.Documents; //amount of times this whole system was re-done: 3
 using Content.Shared.Paper;
-using Robust.Shared.Prototypes; //amount of hours wasted trying to understand papersystem: 29
 using Robust.Shared.Random;                     //skill issue.
 
 // todo: clean these usings
 namespace Content.Goobstation.Server.NTR.Documents
 {
-    public sealed class RandomDocumentSystem : EntitySystem
+    public sealed partial class RandomDocumentSystem : EntitySystem
     {
-        [Dependency] private readonly ILocalizationManager _loc = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly PaperSystem _paper = default!;
-        [Dependency] private readonly IPrototypeManager _proto = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private PaperSystem _paper = default!;
 
         public override void Initialize()
         {
@@ -38,7 +28,7 @@ namespace Content.Goobstation.Server.NTR.Documents
         private string GenerateDocument(ProtoId<DocumentTypePrototype> docType)
         {
             if (string.IsNullOrEmpty(docType.Id) // i hate this
-                || !_proto.TryIndex(docType, out var docProto))
+                || !ProtoMan.TryIndex(docType, out var docProto))
                 return string.Empty;
 
             var curDate = DateTime.Now.AddYears(1000);

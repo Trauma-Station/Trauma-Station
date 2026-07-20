@@ -1,19 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 grub <unalterableness@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-# SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -57,7 +41,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     coverage:
     - Head
     modifiers:
@@ -65,6 +48,7 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6
         Heat: 0.6
         Caustic: 0.1
         Radiation: 0.1
@@ -79,8 +63,7 @@
   components:
   - type: Armor
     coverage: # full coverage, idk, magic
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -92,12 +75,12 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6
         Heat: 0.6
         Radiation: 0.1
         Caustic: 0.1
@@ -211,6 +194,7 @@
     sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
   - type: Clothing
     sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
+    unequipDelay: 5
   - type: ActionGrant
     actions:
     - ActionSummonStickmen
@@ -330,8 +314,7 @@
   - type: SupermatterImmune
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -341,6 +324,7 @@
         Blunt: 0.45
         Slash: 0.45
         Piercing: 0.45
+        Ballistic: 0.45
         Heat: 0.45
         Radiation: 0
         Caustic: 0.1
@@ -467,6 +451,30 @@
   - type: FingerprintMask
   - type: StaticPrice
     price: 1000
+
+- type: entity
+  parent: ClothingHandsGlovesWizard
+  id: ClothingHandsGlovesWizardPaper
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    layers:
+    - state: icon
+      color: "#ffffff"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffffff"
+      right:
+      - state: inhand-right
+        color: "#ffffff"
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND
+        color: "#ffffff"
 
 # Crimsom
 - type: entity

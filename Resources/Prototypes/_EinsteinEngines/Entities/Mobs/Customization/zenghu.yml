@@ -1,13 +1,9 @@
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: marking
   id: CyberLimbsMarkingZenghuHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: head-1
@@ -17,8 +13,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuChest
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: torso-1
@@ -28,8 +23,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuLArm
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: l_arm-1
@@ -39,8 +33,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuLHand
   bodyPart: LHand
-  markingCategory: LeftArm
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: l_hand-1
@@ -50,8 +43,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuLLeg
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: l_leg-1
@@ -62,8 +54,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuLFoot
   bodyPart: LFoot
-  markingCategory: LeftFoot
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: l_foot-1
@@ -75,8 +66,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuRArm
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: r_arm-1
@@ -88,8 +78,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuRHand
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: r_hand-1
@@ -99,8 +88,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuRLeg
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: r_leg-1
@@ -111,8 +99,7 @@
 - type: marking
   id: CyberLimbsMarkingZenghuRFoot
   bodyPart: RFoot
-  markingCategory: RightFoot
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   sprites:
   - sprite: _EinsteinEngines/Mobs/Species/Cybernetics/zenghu/zenghu_main.rsi
     state: r_foot-1

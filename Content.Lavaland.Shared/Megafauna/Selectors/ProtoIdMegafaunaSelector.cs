@@ -1,4 +1,5 @@
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 
 namespace Content.Lavaland.Shared.Megafauna.Selectors;
 
@@ -15,6 +16,6 @@ public sealed partial class ProtoIdMegafaunaSelector : MegafaunaSelector
 
     protected override float InvokeImplementation(MegafaunaCalculationBaseArgs args)
     {
-        return args.PrototypeMan.Index(Id).Selector.Invoke(args);
+        return args.Proto.Index(Id).Selector.Invoke(args);
     }
 }

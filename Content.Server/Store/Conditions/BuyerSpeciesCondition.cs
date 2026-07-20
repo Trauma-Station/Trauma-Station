@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Humanoid;
 using Content.Shared.Store;
 using Content.Shared.Humanoid.Prototypes;
@@ -44,18 +31,18 @@ public sealed partial class BuyerSpeciesCondition : ListingCondition
         if (!ent.TryGetComponent<MindComponent>(args.Buyer, out var mind))
             return true; // needed to obtain body entityuid to check for humanoid appearance
 
-        if (!ent.TryGetComponent<HumanoidAppearanceComponent>(mind.OwnedEntity, out var appearance))
+        if (!ent.TryGetComponent<HumanoidProfileComponent>(mind.OwnedEntity, out var humanoid))
             return true; // inanimate or non-humanoid entities should be handled elsewhere, main example being surplus crates
 
         if (Blacklist != null)
         {
-            if (Blacklist.Contains(appearance.Species))
+            if (Blacklist.Contains(humanoid.Species))
                 return false;
         }
 
         if (Whitelist != null)
         {
-            if (!Whitelist.Contains(appearance.Species))
+            if (!Whitelist.Contains(humanoid.Species))
                 return false;
         }
 

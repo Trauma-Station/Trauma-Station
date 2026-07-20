@@ -1,33 +1,20 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Atmos.Prototypes;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Kitchen.Components;
-using Content.Shared.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.Chemistry.EntitySystems;
 
 /// <inheritdoc/>
-public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
+public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
 
     private static readonly ProtoId<MixingCategoryPrototype> DefaultMixingCategory = "DummyMix";
     private static readonly ProtoId<MixingCategoryPrototype> DefaultGrindCategory = "DummyGrind";
@@ -64,12 +51,12 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
     {
         // this doesn't check what prototypes are being reloaded because, to be frank, we use a lot of them.
         _reagentSources.Clear();
-        foreach (var reagent in PrototypeManager.EnumeratePrototypes<ReagentPrototype>())
+        foreach (var reagent in ProtoMan.EnumeratePrototypes<ReagentPrototype>())
         {
             _reagentSources.Add(reagent.ID, new());
         }
 
-        foreach (var reaction in PrototypeManager.EnumeratePrototypes<ReactionPrototype>())
+        foreach (var reaction in ProtoMan.EnumeratePrototypes<ReactionPrototype>())
         {
             if (!reaction.Source)
                 continue;
@@ -83,7 +70,7 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
             }
         }
 
-        foreach (var gas in PrototypeManager.EnumeratePrototypes<GasPrototype>())
+        foreach (var gas in ProtoMan.EnumeratePrototypes<GasPrototype>())
         {
             if (gas.Reagent == null)
                 continue;
@@ -96,20 +83,20 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
 
         // store the names of the entities used so we don't get repeats in the guide.
         var usedNames = new List<string>();
-        foreach (var entProto in PrototypeManager.EnumeratePrototypes<EntityPrototype>())
+        foreach (var entProto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (entProto.Abstract || usedNames.Contains(entProto.Name))
                 continue;
 
-            if (!entProto.TryGetComponent<ExtractableComponent>(out var extractableComponent, EntityManager.ComponentFactory))
+            if (!entProto.TryComp(out ExtractableComponent? extractableComponent, Factory))
                 continue;
 
             //these bloat the hell out of blood/fat
-            if (entProto.HasComponent<BodyPartComponent>())
+            if (entProto.HasComp<OrganComponent>(Factory))
                 continue;
 
             //these feel obvious...
-            if (entProto.HasComponent<PillComponent>())
+            if (entProto.HasComp<PillComponent>(Factory))
                 continue;
 
             if (extractableComponent.JuiceSolution is { } juiceSolution)
@@ -127,9 +114,8 @@ public sealed class ChemistryGuideDataSystem : SharedChemistryGuideDataSystem
             }
 
 
-            if (extractableComponent.GrindableSolution is { } grindableSolutionId &&
-                entProto.TryGetComponent<SolutionContainerManagerComponent>(out var manager, EntityManager.ComponentFactory) &&
-                _solutionContainer.TryGetSolution(manager, grindableSolutionId, out var grindableSolution))
+            if (extractableComponent.GrindableSolutionName is { } grindableSolutionId &&
+                _solutionContainer.TryGetSolution(entProto, grindableSolutionId, out var grindableSolution))
             {
                 var data = new ReagentEntitySourceData(
                     new() { DefaultGrindCategory },

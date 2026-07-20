@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Speebro <100388782+Speebr0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Speebro <speebro@notreal.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
@@ -16,7 +12,7 @@
   - !type:PlantAdjustNutrition
     amount: 4 # stronger than EZ-nutrient, but not very practical to use anyways
   metabolisms:
-    Food:
+    Digestion:
       effects:
       - !type:SatiateHunger
         conditions:
@@ -42,13 +38,13 @@
     probability: 0.3
     amount: 1
   metabolisms:
-    Food:
+    Digestion:
       effects:
       - !type:SatiateHunger
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant ]
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.2 # powerful at healing diona, but slow
       effects:
       - !type:HealthChange

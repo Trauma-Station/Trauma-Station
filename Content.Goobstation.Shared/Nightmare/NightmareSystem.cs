@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.LightDetection.Components;
@@ -17,10 +13,10 @@ namespace Content.Goobstation.Shared.Nightmare;
 /// <summary>
 /// This handles nightmare logic
 /// </summary>
-public sealed class NightmareSystem : EntitySystem
+public sealed partial class NightmareSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
 
     public override void Update(float frameTime)
     {

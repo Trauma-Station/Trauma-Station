@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Lavaland.Shared.Aggression;
@@ -18,11 +15,12 @@ using Content.Shared.Weapons.Melee.Events;
 // ReSharper disable EnforceForStatementBraces
 namespace Content.Lavaland.Shared.Anger.Systems;
 
-public sealed class AngerSystem : EntitySystem
+public sealed partial class AngerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly MobPhasesSystem _phases = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private MobPhasesSystem _phases = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     private EntityQuery<AngerPlayerScalingComponent> _scalingQuery;
 
@@ -59,7 +57,7 @@ public sealed class AngerSystem : EntitySystem
 
         var anger = ent.Comp1;
         var aggressive = ent.Comp2;
-        var damage = ent.Comp3;
+        var damage = _damageable.GetTotalDamage((ent.Owner, ent.Comp3));
 
         // Get multipliers if possible
         var angerMultiplier = 1f;
@@ -84,7 +82,7 @@ public sealed class AngerSystem : EntitySystem
         var addedAnger = anger.CurrentAnger - anger.MinAnger;
 
         // Progress between 0 and 1 until reaching death
-        var healthProgress = Math.Max((float) (damage.TotalDamage / (anger.TotalHp * healthMultiplier)), 0f);
+        var healthProgress = Math.Max((float) (damage / (anger.TotalHp * healthMultiplier)), 0f);
 
         // Amount of anger based on progress between Min and Max angers
         var newMinAnger = anger.DefaultMinAnger + (anger.DefaultMaxAnger - anger.DefaultMinAnger) * healthProgress;

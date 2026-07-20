@@ -1,15 +1,11 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ThunderBear2006 <bearthunder06@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
 using Content.Shared.Silicons.StationAi;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Silicon.AiCameraWarping;
 
-public abstract class SharedStationAiWarpSystem : EntitySystem { }
+public abstract partial class SharedStationAiWarpSystem : EntitySystem { }
 
 public sealed partial class ToggleCameraWarpScreenEvent : InstantActionEvent { }
 

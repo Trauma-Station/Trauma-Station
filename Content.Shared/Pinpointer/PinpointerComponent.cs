@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Alexander Evgrashin <evgrashin.adl@gmail.com>
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Alert;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
@@ -39,31 +23,31 @@ public sealed partial class PinpointerComponent : Component
     [DataField]
     public EntityWhitelist? Blacklist;
 
-    [DataField("mediumDistance"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float MediumDistance = 16f;
 
-    [DataField("closeDistance"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float CloseDistance = 8f;
 
-    [DataField("reachedDistance"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ReachedDistance = 1f;
 
     /// <summary>
     ///     Pinpointer arrow precision in radians.
     /// </summary>
-    [DataField("precision"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public double Precision = 0.09;
 
     /// <summary>
     ///     Name to display of the target being tracked.
     /// </summary>
-    [DataField("targetName"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public string? TargetName;
 
     /// <summary>
     ///     Whether or not the target name should be updated when the target is updated.
     /// </summary>
-    [DataField("updateTargetName"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool UpdateTargetName;
 
     /// <summary>
@@ -78,7 +62,7 @@ public sealed partial class PinpointerComponent : Component
     /// <summary>
     ///     Whether or not the target can be reassigned.
     /// </summary>
-    [DataField("canRetarget"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool CanRetarget;
 
     /// <summary>

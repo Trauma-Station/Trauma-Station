@@ -1,0 +1,478 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Base
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseForgeItemNoTemp
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+
+- type: entity
+  abstract: true
+  parent: [ BaseForgeItemNoTemp, BaseMetallic ]
+  id: BaseForgeItem
+
+- type: entity
+  abstract: true
+  parent: BaseForgeItem
+  id: BaseMetalScraps
+  description: Needs to be melted in a bloomery to be made useful.
+  components:
+  - type: Construction
+    node: scraps
+
+- type: entity
+  abstract: true
+  parent: BaseForgeItem
+  id: BaseMetalBloom
+  description: Refine it by smashing it with a hammer into shape!
+  components:
+  - type: Metallic
+    workable: true # starts with workable heat out of the bloomery
+  - type: Workable
+    remaining: 25
+  # TODO: heat up whatever attacked it so you can't use a bat or whatever, have to use metal hammers
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ] # no ingot for you
+
+- type: entity
+  abstract: true
+  parent: BaseForgeItem
+  id: BaseMetalIngot
+  suffix: Hot
+  components:
+  - type: MetallicPopups
+    heatedPopup: ingot-heated-popup-text
+    cooledPopup: ingot-cooled-popup-text
+  - type: MetalIngot
+
+# Brass - 850K +- 56K range of error
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicBrass
+  id: BrassOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 906
+    burnedFoodPrototype: OverheatedBrass
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicBrass ]
+  id: BrassScraps
+  name: brass scraps
+  components:
+  - type: Tag
+    tags:
+    - BrassScraps # TODO: generic thing not fucking tags + lathe recipe
+  - type: Sprite
+    layers:
+    - state: brass
+      shader: Emissive
+  - type: Construction
+    graph: BrassScraps
+
+- type: entity
+  parent: [ BaseForgeItem, BaseMetallicBrass ]
+  id: OverheatedBrass
+  name: overheated brass
+  description: The metal has overheated and become brittle, smash it apart to make it usable.
+  components:
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 25
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BrassScraps:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Sprite
+    layers:
+    - state: brassbrittle
+      shader: Emissive
+
+- type: entity
+  parent: [ BaseWorkableBrass, BaseMetalBloom, BrassOverheatable ]
+  id: BrassBloom
+  name: brass bloom
+  components:
+  - type: Sprite
+    layers:
+    - state: bloombrass
+      shader: Emissive
+  - type: Workable
+    result: BrassIngot
+
+- type: entity
+  parent: [ BaseWorkableBrass, BaseMetalIngot, BrassOverheatable]
+  id: BrassIngot
+  name: brass ingot
+  description: A softer piece of metal, can be forged at relatively low temperatures.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_brass
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Brass: 250
+
+# Steel - 1260K +- 42K range of error
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicSteel
+  id: SteelOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 1302
+    burnedFoodPrototype: OverheatedSteel
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicSteel ]
+  id: SteelScraps
+  name: steel scraps
+  description: Needs to be melted in a bloomery to be made useful.
+  components:
+  - type: Tag
+    tags:
+    - SteelScraps
+  - type: Sprite
+    layers:
+    - state: steel
+      shader: Emissive
+  - type: Construction
+    graph: SteelScraps
+
+- type: entity
+  parent: [ BaseForgeItem, BaseMetallicSteel ]
+  id: OverheatedSteel
+  name: overheated steel
+  description: The metal has overheated and become brittle, smash it apart to make it usable.
+  components:
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 40
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SteelScraps:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Sprite
+    layers:
+    - state: steelbrittle
+      shader: Emissive
+
+- type: entity
+  parent: [ BaseWorkableSteel, BaseMetalBloom, SteelOverheatable ]
+  id: SteelBloom
+  name: steel bloom
+  components:
+  - type: Sprite
+    layers:
+    - state: bloomsteel
+      shader: Emissive
+  - type: Workable
+    remaining: 150 # you may want a few of the boys to help you
+    result: SteelIngot
+
+- type: entity
+  parent: [ BaseWorkableSteel, BaseMetalIngot, SteelOverheatable ]
+  id: SteelIngot
+  name: steel ingot
+  description: A strong piece of metal, can be forged at moderately high temperatures.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_steel
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+  - type: MetallicTags
+    workable: [ IngotWorkableSteel ] # needed to craft an anvil
+  - type: Tag
+    tags: [ IngotWorkableSteel ]
+
+# Plasteel - 1483K +- 27K
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicPlasteel
+  id: PlasteelOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 1510
+    burnedFoodPrototype: OverheatedPlasteel
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicPlasteel ]
+  id: PlasteelScraps
+  name: plasteel scraps
+  description: Needs to be melted in a bloomery to be made useful.
+  components:
+  - type: Tag
+    tags:
+    - PlasteelScraps
+  - type: Sprite
+    layers:
+    - state: plasteel
+      shader: Emissive
+  - type: Construction
+    graph: PlasteelScraps
+
+- type: entity
+  parent: [ BaseForgeItem, BaseMetallicPlasteel ]
+  id: OverheatedPlasteel
+  name: overheated plasteel
+  description: The metal has overheated and become brittle, smash it apart to make it usable.
+  components:
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PlasteelScraps:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Sprite
+    layers:
+    - state: plasteelbrittle
+      shader: Emissive
+
+- type: entity
+  parent: [ BaseWorkablePlasteel, BaseMetalBloom, PlasteelOverheatable ]
+  id: PlasteelBloom
+  name: plasteel bloom
+  description: Refine it by smashing it with a hammer into shape!
+  components:
+  - type: Sprite
+    layers:
+    - state: bloomplasteel
+      shader: Emissive
+  - type: Workable
+    remaining: 200 # definitely gonna need the boys for this
+    result: PlasteelIngot
+
+- type: entity
+  parent: [ BaseWorkablePlasteel, BaseMetalIngot, PlasteelOverheatable ]
+  id: PlasteelIngot
+  name: plasteel ingot
+  description: A very robust piece of metal, can be forged at extreme temperatures.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_plasteel
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Plasteel: 250
+
+# Gold
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicGold
+  id: GoldOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 1337 # melting point since gold doesnt become brittle, it just melts
+    burnedFoodPrototype: GoldMolten
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicGold ]
+  id: GoldScraps
+  name: gold scraps
+  description: Needs to be heated and shaped into a usable ingot. Gold has no impurities or oxides to need blooming.
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+      shader: Emissive
+  - type: Workable
+    remaining: 50 # relatively soft metal
+    result: GoldIngot
+  - type: Construction
+    graph: GoldScraps
+  - type: StaticPrice
+    price: 225
+
+- type: entity
+  parent: MarkerBase
+  id: GoldMolten
+  name: molten gold spawner
+  components:
+  - type: PuddleSpawner
+    solution:
+      temperature: 1340 # a bit over the edge
+      reagents:
+      - ReagentId: Gold
+        Quantity: 30
+
+- type: entity
+  parent: [ BaseWorkableGold, BaseMetalIngot, GoldOverheatable ]
+  id: GoldIngot
+  name: gold ingot
+  description: A shiny and rare metal, can be forged at low temperatures. You wouldn't make a pickaxe out of this.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_gold
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Gold: 250
+  - type: StaticPrice
+    price: 225
+# Silver
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicSilver
+  id: SilverOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 1235
+    burnedFoodPrototype: SilverMolten
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicSilver ]
+  id: SilverScraps
+  name: silver scraps
+  description: Needs to be heated and shaped into a usable ingot.
+  components:
+  - type: Sprite
+    layers:
+    - state: silver
+      shader: Emissive
+  - type: Workable
+    remaining: 50 # same hardness as gold
+    result: SilverIngot
+  - type: Construction
+    graph: SilverScraps
+  - type: StaticPrice
+    price: 180
+
+- type: entity
+  parent: MarkerBase
+  id: SilverMolten
+  name: molten silver spawner
+  components:
+  - type: PuddleSpawner
+    solution:
+      temperature: 1240 # a bit over the edge
+      reagents:
+      - ReagentId: Silver
+        Quantity: 30
+
+- type: entity
+  parent: [ BaseWorkableSilver, BaseMetalIngot, SilverOverheatable ]
+  id: SilverIngot
+  name: silver ingot
+  description: A shiny and relatively cheap metal, can be forged at very low temperatures.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_silver
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Silver: 250
+  - type: StaticPrice
+    price: 180
+# Adamantine - 2050K -+ 50K range of error
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicAdamantine
+  id: AdamantineOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 2200
+    burnedFoodPrototype: OverheatedAdamantine
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseForgeItem, AdamantineOverheatable ]
+  id: AdamantineScraps
+  name: adamantine scraps
+  description: Fragments of a once great work of craftsdwarfship, with a great deal of heat it could become workable again.
+  components:
+  - type: Tag
+    tags:
+    - AdamantineScraps
+  - type: Sprite
+    layers:
+    - state: adamantine
+      shader: Emissive
+  - type: Workable
+    remaining: 500 # bring an army, you'll need it
+    result: AdamantineIngot
+
+- type: entity
+  parent: [ BaseForgeItem, BaseMetallicAdamantine ]
+  id: OverheatedAdamantine
+  name: overheated adamantine
+  description: The metal has overheated and lost it's shape, could be worked again if brought to the right temperature.
+  components:
+  - type: Sprite
+    layers:
+    - state: bloomadamantine # not using the overheated version because it doesn't need to be smashed
+      shader: Emissive
+  - type: Temperature
+    currentTemperature: 2200
+  - type: Workable
+    remaining: 500 # bring an army, you'll need it
+    result: AdamantineIngot
+
+- type: entity
+  parent: [ BaseWorkableAdamantine, BaseMetalIngot, AdamantineOverheatable ]
+  id: AdamantineIngot
+  name: adamantine ingot
+  description: A metal that is written about more often than it is seen, requires extreme heat to be workable.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_adamantine
+      shader: Emissive
+  - type: StaticPrice
+    price: 10000

@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Menshin <Menshin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Atmos.Piping.Portable.Components;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -31,7 +24,7 @@ public sealed class SpaceHeaterBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<SpaceHeaterWindow>();
 
-        _window.ToggleStatusButton.OnPressed += _ => OnToggleStatusButtonPressed();
+        _window.ToggleStatusButton.OnToggled += _ => OnToggleStatusButtonPressed();
         _window.IncreaseTempRange.OnPressed += _ => OnTemperatureRangeChanged(_window.TemperatureChangeDelta);
         _window.DecreaseTempRange.OnPressed += _ => OnTemperatureRangeChanged(-_window.TemperatureChangeDelta);
         _window.ModeSelector.OnItemSelected += OnModeChanged;
@@ -41,7 +34,6 @@ public sealed class SpaceHeaterBoundUserInterface : BoundUserInterface
 
     private void OnToggleStatusButtonPressed()
     {
-        _window?.SetActive(!_window.Active);
         SendMessage(new SpaceHeaterToggleMessage());
     }
 

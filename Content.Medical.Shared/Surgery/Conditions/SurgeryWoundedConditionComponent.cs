@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Damage.Prototypes;
+
+namespace Content.Medical.Shared.Surgery.Conditions;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class SurgeryWoundedConditionComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public ProtoId<DamageGroupPrototype> DamageGroup = "Brute";
+}

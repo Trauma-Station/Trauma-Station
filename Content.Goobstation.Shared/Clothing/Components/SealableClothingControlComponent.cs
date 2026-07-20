@@ -1,22 +1,8 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 Martynas6ha4 <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Clothing.Systems;
 using Content.Shared.Inventory;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Clothing.Components;
 
@@ -25,7 +11,7 @@ namespace Content.Goobstation.Shared.Clothing.Components;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedSealableClothingSystem))]
+[Access(typeof(SealableClothingSystem))]
 public sealed partial class SealableClothingControlComponent : Component
 {
     /// <summary>

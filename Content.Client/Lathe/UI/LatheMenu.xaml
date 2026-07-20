@@ -1,25 +1,9 @@
-<!--
-SPDX-FileCopyrightText: 2022 Eoin Mcloughlin <helloworld@eoinrul.es>
-SPDX-FileCopyrightText: 2022 eoineoineoin <eoin.mcloughlin+gh@gmail.com>
-SPDX-FileCopyrightText: 2023 Thom <119594676+ItsMeThom@users.noreply.github.com>
-SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
-<DefaultWindow
+<controls:FancyWindow
     xmlns="https://spacestation14.io"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="clr-namespace:Content.Client.Materials.UI"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="{Loc 'lathe-menu-title'}"
     MinSize="550 450"
     SetSize="750 500">
@@ -148,7 +132,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             HorizontalAlignment="Right"
                             ToolTip="{Loc 'lathe-menu-delete-fabricating-tooltip'}">
                             <Button.StyleClasses>
-                                <system:String>Caution</system:String>
+                                <system:String>negative</system:String>
                                 <system:String>OpenLeft</system:String>
                             </Button.StyleClasses>
                         </Button>
@@ -169,24 +153,28 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             HorizontalExpand="True"
             Orientation="Vertical">
             <Label Text="{Loc 'lathe-menu-materials-title'}" Margin="5 5 5 5" HorizontalAlignment="Center"/>
-            <BoxContainer
-                Orientation="Vertical"
-                VerticalExpand="True"
-                HorizontalExpand="True">
-                <ui:MaterialStorageControl Name="MaterialsList" SizeFlagsStretchRatio="8"/>
-            </BoxContainer>
-            <!-- Begin DeltaV Additions: Mining points -->
-            <BoxContainer Orientation="Vertical" Name="MiningPointsContainer" Visible="False">
-                <BoxContainer Orientation="Horizontal">
-                    <Label Name="MiningPointsLabel" HorizontalExpand="True"/>
-                    <Button Name="MiningPointsClaimButton" Text="{Loc 'lathe-menu-mining-points-claim-button'}"/>
+            <PanelContainer VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer
+                    Orientation="Vertical"
+                    VerticalExpand="True"
+                    HorizontalExpand="True">
+                    <ui:MaterialStorageControl Name="MaterialsList" SizeFlagsStretchRatio="8"/>
+		            <!-- <Trauma> -->
+		            <BoxContainer Orientation="Vertical" Name="MiningPointsContainer" Visible="False">
+		                <BoxContainer Orientation="Horizontal">
+		                    <Label Name="MiningPointsLabel" HorizontalExpand="True"/>
+		                    <Button Name="MiningPointsClaimButton" Text="{Loc 'lathe-menu-mining-points-claim-button'}"/>
+		                </BoxContainer>
+		            </BoxContainer>
+		            <!-- </Trauma> -->
                 </BoxContainer>
-                <RichTextLabel Name="MiningPointsNoConnectionWarning"></RichTextLabel>
-            </BoxContainer>
-            <!-- End DeltaV Additions: Mining points -->
+            </PanelContainer>
         </BoxContainer>
         </BoxContainer>
 
     </BoxContainer>
 
-</DefaultWindow>
+</controls:FancyWindow>

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Numerics;
 using Content.Client.Radiation.Systems;
@@ -16,10 +8,10 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Client.Radiation.Overlays;
 
-public sealed class RadiationDebugOverlay : Overlay
+public sealed partial class RadiationDebugOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IResourceCache _cache = default!;
 
     private readonly SharedMapSystem _mapSystem;
     private readonly RadiationSystem _radiation;

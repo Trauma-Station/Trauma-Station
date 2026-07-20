@@ -2,14 +2,9 @@
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.NTR;
 using Content.Goobstation.Shared.NTR.Events;
-using Content.Server._Goobstation.Wizard.Store;
-using Content.Server.Heretic.EntitySystems;
-using Content.Server.PDA.Ringer;
-using Content.Shared._Goobstation.Wizard.Refund;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.GameTicking;
-using Content.Shared.Heretic;
-using Content.Shared.Heretic.Prototypes;
-using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Linq;
 using Content.Server.Actions;
@@ -20,36 +15,28 @@ using Content.Shared.Actions;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Mind;
-using Content.Shared.PDA.Ringer;
+using Content.Shared.Mindshield.Components;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Store.Systems;
 
-// goob edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 public sealed partial class StoreSystem
 {
     // <Trauma>
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
     // </Trauma>
-    [Dependency] private readonly IAdminLogManager _admin = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly ActionUpgradeSystem _actionUpgrade = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private IAdminLogManager _admin = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private ActionUpgradeSystem _actionUpgrade = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private StackSystem _stack = default!;
 
     private void InitializeUi()
     {
@@ -59,10 +46,16 @@ public sealed partial class StoreSystem
         SubscribeLocalEvent<StoreComponent, StoreRequestRefundMessage>(OnRequestRefund);
         SubscribeLocalEvent<StoreComponent, RefundEntityDeletedEvent>(OnRefundEntityDeleted);
 
-        // Goobstation start
-        SubscribeLocalEvent<StoreComponent, StoreRefundAllListingsMessage>(OnRefundAll);
-        SubscribeLocalEvent<StoreComponent, StoreRefundListingMessage>(OnRefundListing);
-        // Goobstation end
+        SubscribeLocalEvent<RemoteStoreComponent, StoreRequestUpdateInterfaceMessage>((e, c, ev) =>
+            RemoteStoreRelay((e, c), ev));
+        SubscribeLocalEvent<RemoteStoreComponent, StoreBuyListingMessage>((e, c, ev) =>
+            RemoteStoreRelay((e, c), ev));
+        SubscribeLocalEvent<RemoteStoreComponent, StoreRequestWithdrawMessage>((e, c, ev) =>
+            RemoteStoreRelay((e, c), ev));
+        SubscribeLocalEvent<RemoteStoreComponent, StoreRequestRefundMessage>((e, c, ev) =>
+            RemoteStoreRelay((e, c), ev));
+        SubscribeLocalEvent<RemoteStoreComponent, RefundEntityDeletedEvent>((e, c, ev) =>
+            RemoteStoreRelay((e, c), ev));
     }
 
     private void OnRefundEntityDeleted(Entity<StoreComponent> ent, ref RefundEntityDeletedEvent args)
@@ -70,73 +63,12 @@ public sealed partial class StoreSystem
         ent.Comp.BoughtEntities.Remove(args.Uid);
     }
 
-    /// <summary>
-    /// Toggles the store Ui open and closed
-    /// </summary>
-    /// <param name="user">the person doing the toggling</param>
-    /// <param name="storeEnt">the store being toggled</param>
-    /// <param name="component"></param>
-    public void ToggleUi(EntityUid user, EntityUid storeEnt, StoreComponent? component = null)
+    private void RemoteStoreRelay(Entity<RemoteStoreComponent> entity, object ev)
     {
-        if (!Resolve(storeEnt, ref component))
+        if (entity.Comp.Store == null || !TryComp<StoreComponent>(entity.Comp.Store, out var store))
             return;
 
-        if (!TryComp<ActorComponent>(user, out var actor))
-            return;
-
-        if (!_ui.TryToggleUi(storeEnt, StoreUiKey.Key, actor.PlayerSession))
-            return;
-
-        UpdateUserInterface(user, storeEnt, component);
-    }
-
-    /// <summary>
-    /// Closes the store UI for everyone, if it's open
-    /// </summary>
-    public void CloseUi(EntityUid uid, StoreComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        _ui.CloseUi(uid, StoreUiKey.Key);
-    }
-
-    /// <summary>
-    /// Updates the user interface for a store and refreshes the listings
-    /// </summary>
-    /// <param name="user">The person who if opening the store ui. Listings are filtered based on this.</param>
-    /// <param name="store">The store entity itself</param>
-    /// <param name="component">The store component being refreshed.</param>
-    public void UpdateUserInterface(EntityUid? user, EntityUid store, StoreComponent? component = null)
-    {
-        if (!Resolve(store, ref component))
-            return;
-
-        //this is the person who will be passed into logic for all listing filtering.
-        if (user != null) //if we have no "buyer" for this update, then don't update the listings
-        {
-            component.LastAvailableListings = GetAvailableListings(component.AccountOwner ?? user.Value, store, component)
-                .ToHashSet();
-        }
-
-        //dictionary for all currencies, including 0 values for currencies on the whitelist
-        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> allCurrency = new();
-        foreach (var supported in component.CurrencyWhitelist)
-        {
-            allCurrency.Add(supported, FixedPoint2.Zero);
-
-            if (component.Balance.TryGetValue(supported, out var value))
-                allCurrency[supported] = value;
-        }
-
-        // TODO: if multiple users are supposed to be able to interact with a single BUI & see different
-        // stores/listings, this needs to use session specific BUI states.
-
-        // only tell operatives to lock their uplink if it can be locked
-        var showFooter = HasComp<RingerUplinkComponent>(store);
-
-        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
-        _ui.SetUiState(store, StoreUiKey.Key, state);
+        RaiseLocalEvent(entity.Comp.Store.Value, ev);
     }
 
     private void OnRequestUpdate(EntityUid uid, StoreComponent component, StoreRequestUpdateInterfaceMessage args)
@@ -154,7 +86,7 @@ public sealed partial class StoreSystem
     /// </summary>
     private void OnBuyRequest(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg)
     {
-        var listing = component.Listings.FirstOrDefault(x => x.Equals(msg.Listing));
+        var listing = component.FullListingsCatalog.FirstOrDefault(x => x.ID.Equals(msg.Listing.Id));
 
         if (listing == null) //make sure this listing actually exists
         {
@@ -171,28 +103,39 @@ public sealed partial class StoreSystem
         //condition checking because why not
         if (listing.Conditions != null)
         {
-            var args = new ListingConditionArgs(component.AccountOwner ?? buyer, uid, listing, EntityManager);
+            var args = new ListingConditionArgs(component.AccountOwner ?? GetBuyerMind(buyer), uid, listing, EntityManager);
             var conditionsMet = listing.Conditions.All(condition => condition.Condition(args));
 
             if (!conditionsMet)
                 return;
         }
 
+        // <Trauma>
+        var cost = listing.TryGetSelectedCurrenciesForPurchase(component.Balance, out var skipped);
+        if (skipped)
+            cost = listing.Cost.ToDictionary();
+        else if (cost == null)
+            return;
+        // </Trauma>
+
         //check that we have enough money
         // var cost = listing.Cost; // Goobstation
-        foreach (var currency in listing.Cost)
+        foreach (var (currency, amount) in cost)
         {
-            if (!component.Balance.TryGetValue(currency.Key, out var balance) || balance < currency.Value)
+            if (amount == FixedPoint2.Zero) // Trauma - skip balance check if listing costs 0
+                continue;
+
+            if (!component.Balance.TryGetValue(currency, out var balance) || balance < amount)
             {
                 return;
             }
         }
         if (HasComp<NtrClientAccountComponent>(uid))
-            RaiseLocalEvent(uid, new NtrListingPurchaseEvent(listing.Cost.First().Value));
+            RaiseLocalEvent(uid, new NtrListingPurchaseEvent(cost.First().Value));
         OnPurchase(listing); // Goob edit - ntr shittery
 
         // Goobstation start
-        if (_mind.TryGetMind(buyer, out var mindId, out _))
+        if (Mind.TryGetMind(buyer, out var mindId, out _))
         {
             var ev = new ListingPurchasedEvent(buyer, uid, listing);
             RaiseLocalEvent(mindId, ref ev);
@@ -200,33 +143,17 @@ public sealed partial class StoreSystem
         // Goobstation end
 
         // if (!IsOnStartingMap(uid, component)) // Goob edit
-        //     component.RefundAllowed = false;
+        //    DisableRefund(uid, component);
 
         //subtract the cash
-        foreach (var (currency, amount) in listing.Cost)
+        foreach (var (currency, amount) in cost)
         {
-            component.Balance[currency] -= amount;
+            if (amount > FixedPoint2.Zero) // Trauma - skip balance check if listing costs 0
+                component.Balance[currency] -= amount;
 
             component.BalanceSpent.TryAdd(currency, FixedPoint2.Zero);
 
             component.BalanceSpent[currency] += amount;
-        }
-
-        // goobstation - heretics
-        // i am too tired of making separate systems for knowledge adding
-        // and all that shit. i've had like 4 failed attempts
-        // so i'm just gonna shitcode my way out of my misery
-        if (listing.ProductHereticKnowledge != null)
-        {
-            mindId = buyer;
-            var mind = CompOrNull<MindComponent>(mindId);
-
-            if (mind != null || _mind.TryGetMind(buyer, out mindId, out mind))
-            {
-                _heretic.TryAddKnowledge((mindId, mind, null),
-                    listing.ProductHereticKnowledge.Value,
-                    mind.CurrentEntity);
-            }
         }
 
         //spawn entity
@@ -237,7 +164,7 @@ public sealed partial class StoreSystem
 
             RaiseLocalEvent(product, new ItemPurchasedEvent(buyer));
 
-            HandleRefundComp(uid, component, product, listing.Cost, listing); // Goob edit
+            HandleRefundComp(uid, component, product, cost, listing); // Trauma - added cost and listing
 
             var xForm = Transform(product);
 
@@ -257,7 +184,7 @@ public sealed partial class StoreSystem
             EntityUid? actionId;
             // I guess we just allow duplicate actions?
             // Allow duplicate actions and just have a single list buy for the buy-once ones.
-            if (!_mind.TryGetMind(buyer, out var mind, out _))
+            if (listing.ApplyToMob || !Mind.TryGetMind(buyer, out var mind, out _))
                 actionId = _actions.AddAction(buyer, listing.ProductAction);
             else
                 actionId = _actionContainer.AddAction(mind, listing.ProductAction);
@@ -266,11 +193,11 @@ public sealed partial class StoreSystem
             // And then add that action entity to the relevant product upgrade listing, if applicable
             if (actionId != null)
             {
-                HandleRefundComp(uid, component, actionId.Value, listing.Cost, listing); // Goob edit
+                HandleRefundComp(uid, component, actionId.Value, cost, listing); // Trauma - added cost and listing
 
                 if (listing.ProductUpgradeId != null)
                 {
-                    foreach (var upgradeListing in component.Listings)
+                    foreach (var upgradeListing in component.FullListingsCatalog)
                     {
                         if (upgradeListing.ID == listing.ProductUpgradeId)
                         {
@@ -284,16 +211,16 @@ public sealed partial class StoreSystem
 
         if (listing is { ProductUpgradeId: not null, ProductActionEntity: not null })
         {
-            ListingData? originalListing = null; // Goobstation
-            var cost = listing.Cost.ToDictionary(); // Goobstation
+            ListingDataWithCostModifiers? originalListing = null; // Goobstation
+            var costCopy = cost.ToDictionary(); // Goobstation
             if (listing.ProductActionEntity != null)
             {
                 if (TryComp(listing.ProductActionEntity.Value, out StoreRefundComponent? storeRefund)) // Goobstation
                 {
                     foreach (var (key, value) in storeRefund.BalanceSpent)
                     {
-                        cost.TryAdd(key, FixedPoint2.Zero);
-                        cost[key] += value;
+                        costCopy.TryAdd(key, FixedPoint2.Zero);
+                        costCopy[key] += value;
                     }
                     originalListing = storeRefund.Data;
                 }
@@ -303,7 +230,7 @@ public sealed partial class StoreSystem
             if (!_actionUpgrade.TryUpgradeAction(listing.ProductActionEntity, out var upgradeActionId))
             {
                 if (listing.ProductActionEntity != null)
-                    HandleRefundComp(uid, component, listing.ProductActionEntity.Value, cost, originalListing, true); // Goob edit
+                    HandleRefundComp(uid, component, listing.ProductActionEntity.Value, costCopy, originalListing, true); // Trauma - added costCopy, originalListing and true
 
                 return;
             }
@@ -311,53 +238,75 @@ public sealed partial class StoreSystem
             listing.ProductActionEntity = upgradeActionId;
 
             if (upgradeActionId != null)
-                HandleRefundComp(uid, component, upgradeActionId.Value, cost, originalListing, true); // Goob edit
+                HandleRefundComp(uid, component, upgradeActionId.Value, cost, originalListing, true); // Trauma - added cost, originalListing and true
         }
 
         if (listing.ProductEvent != null)
         {
-            if (!listing.RaiseProductEventOnUser)
+            // <Trauma>
+            if (listing.RaiseProductEventOnMind && mindId != EntityUid.Invalid)
+                RaiseLocalEvent(mindId, listing.ProductEvent);
+            else if (!listing.RaiseProductEventOnUser)
+            // </Trauma>
                 RaiseLocalEvent(listing.ProductEvent);
             else
                 RaiseLocalEvent(buyer, listing.ProductEvent);
         }
 
-        // Goob edit start
-        /* if (listing.DisableRefund)
+        // <Trauma>
+        /*
+        if (listing.DisableRefund)
         {
             component.RefundAllowed = false;
-        } */
+        }
+        */
         if (listing.BlockRefundListings.Count > 0)
         {
-            foreach (var listingData in component.Listings.Where(x => listing.BlockRefundListings.Contains(x.ID)))
+            foreach (var listingData in component.FullListingsCatalog.Where(x => listing.BlockRefundListings.Contains(x.ID)))
             {
                 listingData.DisableRefund = true;
             }
         }
-        // Goob edit end
+
+        listing.PurchaseCostHistory.Add(cost);
+        // </Trauma>
 
         //log dat shit.
+        var logImpact = LogImpact.Low;
+        var logExtraInfo = "";
+        if (component.ExpectedFaction?.Count > 0 && !_npcFaction.IsMemberOfAny(buyer, component.ExpectedFaction))
+        {
+            logImpact = LogImpact.High;
+            logExtraInfo = ", but was not from an expected faction";
+
+            if (HasComp<MindShieldComponent>(buyer))
+            {
+                logImpact = LogImpact.Extreme;
+                logExtraInfo += " while also possessing a mindshield";
+            }
+        }
+
         _admin.Add(LogType.StorePurchase,
-            LogImpact.Low,
-            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, _proto)}\" from {ToPrettyString(uid)}");
+            logImpact,
+            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, ProtoMan)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
 
         listing.PurchaseAmount++; //track how many times something has been purchased
-        _audio.PlayGlobal(component.BuySuccessSound, msg.Actor); //cha-ching! // Goob edit
+        if (msg.SoundSource != null && GetEntity(msg.SoundSource) != null)
+            _audio.PlayEntity(component.BuySuccessSound, msg.Actor, GetEntity(msg.SoundSource.Value)); //cha-ching!
 
-        //WD EDIT START
-        if (listing.SaleLimit != 0 && listing.DiscountValue > 0 && listing.PurchaseAmount >= listing.SaleLimit)
+        var buyFinished = new StoreBuyFinishedEvent
         {
-            listing.DiscountValue = 0;
-            listing.Cost = listing.OldCost;
-        }
-        //WD EDIT END
+            PurchasedItem = listing,
+            StoreUid = uid
+        };
+        RaiseLocalEvent(ref buyFinished);
 
         UpdateUserInterface(buyer, uid, component);
         UpdateRefundUserInterface(uid, component); // Goobstation
         if (listing.ResetRestockOnPurchase) // goobstation edit start
         {
             // making sure that you cant buy some stuff endlessly if they are not meant to
-            var restockDuration = listing.RestockAfterPurchase ?? listing.RestockDuration; // Just use the value directly.
+            var restockDuration = listing.RestockAfterPurchase ?? listing.RestockTime; // Just use the value directly.
             listing.RestockTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan) + restockDuration;
         } // goob edit end
 
@@ -380,7 +329,7 @@ public sealed partial class StoreSystem
             return;
 
         //make sure a malicious client didn't send us random shit
-        if (!_proto.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
+        if (!ProtoMan.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
             return;
 
         //we need an actually valid entity to spawn. This check has been done earlier, but just in case.
@@ -415,17 +364,17 @@ public sealed partial class StoreSystem
             return;
 
         // Goob edit start
-        if (!_ui.HasUi(uid, RefundUiKey.Key))
+        if (!UI.HasUi(uid, RefundUiKey.Key))
             component.RefundAllowed = false;
 
         if (!component.RefundAllowed)
-            _ui.CloseUi(uid, RefundUiKey.Key);
+            UI.CloseUi(uid, RefundUiKey.Key);
 
-        if (!_ui.IsUiOpen(uid, RefundUiKey.Key, buyer))
-            _ui.OpenUi(uid, RefundUiKey.Key, buyer);
+        if (!UI.IsUiOpen(uid, RefundUiKey.Key, buyer))
+            UI.OpenUi(uid, RefundUiKey.Key, buyer);
         else
         {
-            _ui.CloseUi(uid, RefundUiKey.Key, buyer);
+            UI.CloseUi(uid, RefundUiKey.Key, buyer);
             return;
         }
 
@@ -433,7 +382,8 @@ public sealed partial class StoreSystem
 
         /* if (!IsOnStartingMap(uid, component))
         {
-            component.RefundAllowed = false;
+            DisableRefund(uid, component);
+            UpdateUserInterface(buyer, uid, component);
         }
 
         if (!component.RefundAllowed || component.BoughtEntities.Count == 0)
@@ -471,10 +421,10 @@ public sealed partial class StoreSystem
     }
 
     // Goobstation start
-    private void UpdateRefundUserInterface(EntityUid uid, StoreComponent component)
+    public void UpdateRefundUserInterface(EntityUid uid, StoreComponent component)
     {
         if (!IsOnStartingMap(uid, component))
-            _ui.SetUiState(uid, RefundUiKey.Key, new StoreRefundState(new(), true));
+            UI.SetUiState(uid, RefundUiKey.Key, new StoreRefundState(new(), true));
         else
         {
             List<RefundListingData> listings = new();
@@ -484,15 +434,15 @@ public sealed partial class StoreSystem
                     refundComp.Data == null || refundComp.StoreEntity != uid || refundComp.Data.DisableRefund)
                     continue;
 
-                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, _proto);
+                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, ProtoMan);
                 listings.Add(new RefundListingData(GetNetEntity(bought), name));
             }
 
-            _ui.SetUiState(uid, RefundUiKey.Key, new StoreRefundState(listings, false));
+            UI.SetUiState(uid, RefundUiKey.Key, new StoreRefundState(listings, false));
         }
     }
 
-    private bool RefundListing(EntityUid uid, StoreComponent component, EntityUid boughtEntity, EntityUid buyer, bool log)
+    public bool RefundListing(EntityUid uid, StoreComponent component, EntityUid boughtEntity, EntityUid buyer, bool log)
     {
         if (!IsOnStartingMap(uid, component) || !Exists(boughtEntity) ||
             !TryComp(boughtEntity, out StoreRefundComponent? refundComp) || refundComp.Data == null ||
@@ -513,65 +463,27 @@ public sealed partial class StoreSystem
 
         if (refundComp.Data.ProductUpgradeId != null)
         {
-            foreach (var upgradeListing in component.Listings.Where(upgradeListing =>
+            foreach (var upgradeListing in component.FullListingsCatalog.Where(upgradeListing =>
                          upgradeListing.ID == refundComp.Data.ProductUpgradeId))
             {
                 upgradeListing.PurchaseAmount = 0;
+                upgradeListing.PurchaseCostHistory.Clear();
                 break;
             }
         }
 
         component.BoughtEntities.Remove(boughtEntity);
 
-        if (_actions.GetAction(boughtEntity) is { } action)
+        if (_actions.GetAction(boughtEntity, false) is { } action)
             _actionContainer.RemoveAction((boughtEntity, action.Comp));
 
-        refundComp.Data.PurchaseAmount = Math.Max(0, refundComp.Data.PurchaseAmount - 1);
+        var listing = refundComp.Data;
+        listing.PurchaseAmount = Math.Max(0, listing.PurchaseAmount - 1);
+        listing.PurchaseCostHistory = listing.PurchaseCostHistory.Take(listing.PurchaseAmount).ToList();
 
         Del(boughtEntity);
 
         return true;
-    }
-
-    private void OnRefundListing(Entity<StoreComponent> ent, ref StoreRefundListingMessage args)
-    {
-        if (args.Actor is not { Valid: true } buyer)
-            return;
-
-        var (uid, component) = ent;
-
-        var listing = GetEntity(args.ListingEntity);
-
-        if (RefundListing(uid, component, listing, buyer, true))
-            UpdateUserInterface(buyer, uid, component);
-
-        UpdateRefundUserInterface(uid, component);
-    }
-
-    private void OnRefundAll(Entity<StoreComponent> ent, ref StoreRefundAllListingsMessage args)
-    {
-        if (args.Actor is not { Valid: true } buyer)
-            return;
-
-        var (uid, component) = ent;
-
-        if (!IsOnStartingMap(uid, component) || !component.RefundAllowed || component.BoughtEntities.Count == 0)
-        {
-            UpdateRefundUserInterface(uid, component);
-            return;
-        }
-
-        _admin.Add(LogType.StoreRefund, LogImpact.Low, $"{ToPrettyString(buyer):player} has refunded their purchases from {ToPrettyString(uid):store}");
-
-        for (var i = component.BoughtEntities.Count - 1; i >= 0; i--)
-        {
-            var purchase = component.BoughtEntities[i];
-
-            RefundListing(uid, component, purchase, buyer, false);
-        }
-
-        UpdateUserInterface(buyer, uid, component);
-        UpdateRefundUserInterface(uid, component);
     }
 
     public static void DisableListingRefund(ListingData? data)
@@ -581,14 +493,19 @@ public sealed partial class StoreSystem
     }
     // Goobstation end
 
-    private void HandleRefundComp(EntityUid uid, StoreComponent component, EntityUid purchase, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> cost, ListingData? data, bool overrideCost = false) // Goob edit
+    private void HandleRefundComp(EntityUid uid,
+        StoreComponent component,
+        EntityUid purchase,
+        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> cost,
+        ListingDataWithCostModifiers? data,
+        bool overrideCost = false) // Trauma - added cost, data and overrideCost
     {
         component.BoughtEntities.Add(purchase);
         var refundComp = EnsureComp<StoreRefundComponent>(purchase);
         refundComp.StoreEntity = uid;
         // Goobstation start
         if (overrideCost)
-            refundComp.BalanceSpent = cost;
+            refundComp.BalanceSpent = cost.ToDictionary();
         else
         {
             foreach (var (key, value) in cost)
@@ -601,9 +518,11 @@ public sealed partial class StoreSystem
         if (data != null)
             refundComp.Data = data;
         // Goobstation end
+
+        refundComp.BoughtTime = _timing.CurTime;
     }
 
-    private bool IsOnStartingMap(EntityUid store, StoreComponent component)
+    public bool IsOnStartingMap(EntityUid store, StoreComponent component)
     {
         var xform = Transform(store);
         return component.StartingMap == xform.MapUid;
@@ -620,3 +539,14 @@ public sealed partial class StoreSystem
         component.RefundAllowed = false;
     }
 }
+
+/// <summary>
+/// Event of successfully finishing purchase in store (<see cref="StoreSystem"/>.
+/// </summary>
+/// <param name="StoreUid">EntityUid on which store is placed.</param>
+/// <param name="PurchasedItem">ListingItem that was purchased.</param>
+[ByRefEvent]
+public readonly record struct StoreBuyFinishedEvent(
+    EntityUid StoreUid,
+    ListingDataWithCostModifiers PurchasedItem
+);

@@ -1,22 +1,13 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
-using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 
-[Virtual]
-public sealed class CustomOutputPanel : Control
+public sealed partial class CustomOutputPanel : Control
 {
-    [Dependency] private readonly MarkupTagManager _tagManager = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private MarkupTagManager _tagManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public const string StylePropertyStyleBox = "stylebox";
 

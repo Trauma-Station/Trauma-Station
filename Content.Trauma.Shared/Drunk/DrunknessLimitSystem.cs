@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.CCVar;
 using Content.Shared.Drunk;
 using Content.Shared.StatusEffectNew;
@@ -7,11 +8,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Drunk;
 
-public sealed class DrunknessLimitSystem : EntitySystem
+public sealed partial class DrunknessLimitSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     private TimeSpan _maxDrunkLimit;
 

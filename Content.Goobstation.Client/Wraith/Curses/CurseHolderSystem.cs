@@ -1,12 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Curses;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Wraith.Curses;
 
-public sealed class CurseHolderSystem : SharedCurseHolderSystem
+public sealed partial class CurseHolderSystem : SharedCurseHolderSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -22,7 +22,7 @@ public sealed class CurseHolderSystem : SharedCurseHolderSystem
 
         foreach (var curseIcon in ent.Comp.CurseStatusIcons)
         {
-            var icon = _proto.Index(curseIcon);
+            var icon = ProtoMan.Index(curseIcon);
             args.StatusIcons.Add(icon);
         }
     }

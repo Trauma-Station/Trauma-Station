@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: FoodBase
+  id: FoodBurned
+  name: burned food
+  description: An all too common mistake.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - terrible
+  - type: Sprite
+    sprite: Objects/Consumable/Food/ingredients.rsi
+    state: badrecipe
+  - type: Solution
+    solution:
+      maxVol: 8
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: GastroToxin
+        Quantity: 3
+  - type: Tag
+    tags:
+    - Trash

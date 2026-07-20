@@ -1,11 +1,13 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Shared.Alert;
 
 namespace Content.Goobstation.Shared.LightDetection.Systems;
 
-public abstract class SharedLightDetectionDamageSystem : EntitySystem
+public abstract partial class SharedLightDetectionDamageSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
@@ -33,3 +35,9 @@ public abstract class SharedLightDetectionDamageSystem : EntitySystem
         DirtyField(ent.Owner, ent.Comp, nameof(LightDetectionDamageComponent.ResistanceModifier));
     }
 }
+
+/// <summary>
+/// Raised before the detection values of LightDetectionDamage system's get updated
+/// </summary>
+[ByRefEvent]
+public record struct LightDamageUpdateAttemptEvent(bool Cancelled = false);

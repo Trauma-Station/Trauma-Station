@@ -1,12 +1,8 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -46,7 +42,7 @@ public sealed partial class ModifySlimeComponent : EntityEffectBase<ModifySlimeC
         => null; // TODO: add something here
 }
 
-public sealed class ModifySlimeComponentEffectSystem : EntityEffectSystem<SlimeComponent, ModifySlimeComponent>
+public sealed partial class ModifySlimeComponentEffectSystem : EntityEffectSystem<SlimeComponent, ModifySlimeComponent>
 {
     protected override void Effect(Entity<SlimeComponent> ent, ref EntityEffectEvent<ModifySlimeComponent> args)
     {

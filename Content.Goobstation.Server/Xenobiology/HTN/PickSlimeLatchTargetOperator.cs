@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Threading;
@@ -28,12 +18,14 @@ namespace Content.Goobstation.Server.Xenobiology.HTN;
 
 public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
+    [Dependency] private IEntityManager _ent = default!;
     private NpcFactionSystem _factions = default!;
     private MobStateSystem _mobSystem = default!;
     private GoobHungerSystem _hunger = default!;
     private PathfindingSystem _pathfinding = default!;
     private SlimeLatchSystem _latch = default!;
+    private EntityQuery<BeingLatchedComponent> _latchedQuery = default!;
+    private EntityQuery<SlimeDamageOvertimeComponent> _dotQuery = default!;
 
     [DataField(required: true)]
     public string RangeKey = string.Empty;
@@ -58,6 +50,9 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
         _factions = sysManager.GetEntitySystem<NpcFactionSystem>();
         _hunger = sysManager.GetEntitySystem<GoobHungerSystem>();
         _latch = sysManager.GetEntitySystem<SlimeLatchSystem>();
+
+        _latchedQuery = _ent.GetEntityQuery<BeingLatchedComponent>();
+        _dotQuery = _ent.GetEntityQuery<SlimeDamageOvertimeComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard, CancellationToken cancelToken)
@@ -74,8 +69,8 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
 
         foreach (var entity in _factions.GetNearbyHostiles(owner, range))
         {
-            if (_ent.HasComponent<BeingLatchedComponent>(entity)
-            || _ent.HasComponent<SlimeDamageOvertimeComponent>(entity) // it's taken
+            if (_latchedQuery.HasComp(entity)
+            || _dotQuery.HasComp(entity) // it's taken
             || _mobSystem.IsDead(entity)
             || (growthComp.IsFirstStage && entity == slimeComp.Tamer) // no killing tamer
             || (entity == slimeComp.Tamer && _hunger.IsHungerAboveState(owner, HungerThreshold.Peckish))) // no killing tamer unless very hungry

@@ -1,26 +1,26 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
+using Content.Shared.Hands;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Temperature;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Enchanting.Components;
 
 /// <summary>
 /// Relays events from enchanted items to their enchants.
 /// </summary>
-public sealed class EnchantRelaySystem : EntitySystem
+public sealed partial class EnchantRelaySystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -33,6 +33,12 @@ public sealed class EnchantRelaySystem : EntitySystem
         SubInventory<GetFireProtectionEvent>();
         SubInventory<ModifyChangedTemperatureEvent>();
         SubInventory<ElectrocutionAttemptEvent>();
+
+        // unremoveable stuff
+        SubscribeLocalEvent<EnchantedComponent, ContainerGettingRemovedAttemptEvent>(RelayEvent);
+        SubscribeLocalEvent<EnchantedComponent, GotUnequippedEvent>(RelayEvent);
+        SubscribeLocalEvent<EnchantedComponent, GotUnequippedHandEvent>(RelayEvent);
+        SubscribeLocalEvent<EnchantedComponent, DroppedEvent>(RelayEvent);
     }
 
     private void SubInventory<T>(bool relayInventory = false) where T: IInventoryRelayEvent

@@ -1,19 +1,18 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Overlays;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Disease;
 
 /// <summary>
 /// Shows icons on infected mobs.
 /// </summary>
-public sealed class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDiseaseIconsComponent>
+public sealed partial class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDiseaseIconsComponent>
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-
     private float? LowThreshold, MediumThreshold, HighThreshold;
 
     public override void Initialize()
@@ -75,11 +74,11 @@ public sealed class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDiseaseIcons
 
             total += comp.InfectionProgress * comp.Complexity;
         }
-        if (total > (HighThreshold ?? int.MaxValue) && _proto.TryIndex(carrier.HighIcon, out var highIcon))
+        if (total > (HighThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.HighIcon, out var highIcon))
             return highIcon;
-        else if (total > (MediumThreshold ?? int.MaxValue) && _proto.TryIndex(carrier.MediumIcon, out var medIcon))
+        else if (total > (MediumThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.MediumIcon, out var medIcon))
             return medIcon;
-        else if (total > (LowThreshold ?? int.MaxValue) && _proto.TryIndex(carrier.LowIcon, out var lowIcon))
+        else if (total > (LowThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.LowIcon, out var lowIcon))
             return lowIcon;
 
         return null;

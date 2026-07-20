@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # If you add a new trait, make sure to add the corresponding component to the whitelist in \Resources\Prototypes\Entities\Mobs\Player\clone.yml so it gets copied to clones correctly!
 # Not sure if it's required, but I added the warning anyway.
 
@@ -92,20 +94,6 @@
     - Elyran
   languagesUnderstood:
     - Elyran
-
-# Commented out since it's species-specific.
-# - type: trait
-#   id: ValyrianStandard
-#   name: trait-language-valyrianstandard-name
-#   description: trait-language-valyrianstandard-desc
-#   category: LanguageTraits
-#   cost: 1
-#   functions:
-#     - !type:TraitModifyLanguages
-#       languagesSpoken:
-#         - ValyrianStandard
-#       languagesUnderstood:
-#         - ValyrianStandard
 
 - type: trait
   id: NovuNederic

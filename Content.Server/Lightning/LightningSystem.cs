@@ -1,21 +1,3 @@
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 TinManTim <73014819+Tin-Man-Tim@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Beam;
 using Content.Server.Beam.Components;
@@ -39,14 +21,14 @@ namespace Content.Server.Lightning;
 
 //I redesigned so that lightning branches can only be created from the point where the lightning struck, no more collide checks
 //and the number of these branches is explicitly controlled in the new function.
-public sealed class LightningSystem : SharedLightningSystem
+public sealed partial class LightningSystem : SharedLightningSystem
 {
-    [Dependency] private readonly BeamSystem _beam = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!; // Goobstation
-    [Dependency] private readonly TagSystem _tag = default!; // Goobstation
+    [Dependency] private BeamSystem _beam = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private PhysicsSystem _physics = default!; // Goobstation
+    [Dependency] private TagSystem _tag = default!; // Goobstation
 
     private static readonly ProtoId<TagPrototype> BlockLightningTag = "BlockLightning";
 
@@ -75,8 +57,7 @@ public sealed class LightningSystem : SharedLightningSystem
     /// <param name="lightningPrototype">The prototype for the lightning to be created</param>
     /// <param name="triggerLightningEvents">if the lightnings being fired should trigger lightning events.</param>
     /// <param name="beamAction">Goobstation. Action that is called on each beam entity.</param>
-    /// <param name="accumulateIndex">Goobstation. Whether to accumulate BeamSystem.NextIndex.</param>
-    public bool ShootLightning(EntityUid user, EntityUid target, string lightningPrototype = "Lightning", bool triggerLightningEvents = true, Action<EntityUid>? beamAction = null, bool accumulateIndex = true)
+    public bool ShootLightning(EntityUid user, EntityUid target, string lightningPrototype = "Lightning", bool triggerLightningEvents = true, Action<EntityUid>? beamAction = null)
     {
         // Goobstation start. This is required for force walls to block lightning so that you can't stand inside them
         // and spam lightning spells.
@@ -105,7 +86,7 @@ public sealed class LightningSystem : SharedLightningSystem
         // Goobstation end
 
         var spriteState = LightningRandomizer();
-        if (!_beam.TryCreateBeam(user, target, lightningPrototype, spriteState, beamAction: beamAction, accumulateIndex: accumulateIndex)) // Goob edit
+        if (!_beam.TryCreateBeam(user, target, lightningPrototype, spriteState, beamAction: beamAction)) // Goob edit
             return false;
 
         if (triggerLightningEvents) // we don't want certain prototypes to trigger lightning level events
@@ -153,7 +134,7 @@ public sealed class LightningSystem : SharedLightningSystem
             if (!_random.Prob(curTarget.Comp.HitProbability)) //Chance to ignore target
                 continue;
 
-            if (!ShootLightning(user, targets[count].Owner, lightningPrototype, triggerLightningEvents, beamAction, false)) // Goob edit
+            if (!ShootLightning(user, targets[count].Owner, lightningPrototype, triggerLightningEvents, beamAction))
             {
                 shootedCount++;
                 continue;
@@ -164,8 +145,6 @@ public sealed class LightningSystem : SharedLightningSystem
             }
             shootedCount++;
         }
-
-        _beam.AccumulateIndex(); // Goobstation
     }
 }
 

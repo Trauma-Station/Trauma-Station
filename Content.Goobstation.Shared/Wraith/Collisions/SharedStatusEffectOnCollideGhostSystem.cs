@@ -1,13 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.StatusEffect;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Wraith.Collisions;
 
-public abstract class SharedStatusEffectOnCollideGhostSystem : EntitySystem
+public abstract partial class SharedStatusEffectOnCollideGhostSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

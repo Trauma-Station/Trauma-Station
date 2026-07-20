@@ -1,7 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  name: ash drake
+  parent: [ LavalandMobBase, BaseSlicingRefinable ]
   id: LavalandBossAshDrake
-  parent: LavalandMobBase
+  name: ash drake
   description: Guardian of the Necropolis.
   components:
   - type: Physics
@@ -71,17 +73,15 @@
     thresholds:
       0: Alive
       2500: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FireballSpellbook
-      amount: 1
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
   - type: TileMovement
   - type: BossMusic
     soundId: AshDrake
   - type: Aggressive # also required component for aggro checking
     forgiveRange: 20.0
-  - type: CombatPower # Goobstation
-    factor: 25 # times more dangerous than a crew-member

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Devil.Condemned;
@@ -15,11 +12,11 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Handles upgrading enchanted item tier when a player-controlled mob is sacrificed on top of an altar with it.
 /// </summary>
-public sealed class EnchantSacrificeSystem : EntitySystem
+public sealed partial class EnchantSacrificeSystem : EntitySystem
 {
-    [Dependency] private readonly EnchantingSystem _enchanting = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EnchantingSystem _enchanting = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<CondemnedComponent> _condemnedQuery;
 
@@ -76,6 +73,6 @@ public sealed class EnchantSacrificeSystem : EntitySystem
             ? Loc.GetString("enchanting-sacrifice-single", ("target", identity), ("item", any))
             : Loc.GetString("enchanting-sacrifice-multiple", ("target", identity));
 
-        _popup.PopupPredicted(msg, mob, null, PopupType.LargeCaution);
+        _popup.PopupEntity(msg, mob, PopupType.LargeCaution);
     }
 }

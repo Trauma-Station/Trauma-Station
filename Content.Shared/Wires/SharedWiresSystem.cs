@@ -1,49 +1,24 @@
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <super.novalskiy_0135@inbox.ru>
-// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 coolboy911 <85909253+coolboy911@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Wires;
 
-public abstract class SharedWiresSystem : EntitySystem
+public abstract partial class SharedWiresSystem : EntitySystem
 {
-    [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
-    [Dependency] private readonly ActivatableUISystem _activatableUI = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] protected readonly SharedToolSystem Tool = default!;
+    [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] private ActivatableUISystem _activatableUI = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedToolSystem Tool = default!;
+    [Dependency] protected SharedUserInterfaceSystem UI = default!;
 
     public override void Initialize()
     {
@@ -53,6 +28,7 @@ public abstract class SharedWiresSystem : EntitySystem
         SubscribeLocalEvent<WiresPanelComponent, WirePanelDoAfterEvent>(OnPanelDoAfter);
         SubscribeLocalEvent<WiresPanelComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<WiresPanelComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<WiresPanelComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<ActivatableUIRequiresPanelComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenActivatableUI);
         SubscribeLocalEvent<ActivatableUIRequiresPanelComponent, PanelChangedEvent>(OnActivatableUIPanelChanged);
@@ -123,6 +99,32 @@ public abstract class SharedWiresSystem : EntitySystem
                 }
             }
         }
+    }
+
+    private void OnGetVerbs(Entity<WiresPanelComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!IsPanelOpen(ent.Owner))
+            return;
+
+        var actor = args.User;
+        var verb = new AlternativeVerb
+        {
+            Text = Loc.GetString("wires-panel-verb-view-panel"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/screwdriver.png")),
+            Act = () => OpenUserInterface(ent, actor),
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    public void OpenUserInterface(EntityUid uid, EntityUid actor)
+    {
+        UI.OpenUi(uid, WiresUiKey.Key, actor);
+    }
+
+    public void OpenUserInterface(EntityUid uid, ICommonSession player)
+    {
+        UI.OpenUi(uid, WiresUiKey.Key, player);
     }
 
     public void ChangePanelVisibility(EntityUid uid, WiresPanelComponent component, bool visible)

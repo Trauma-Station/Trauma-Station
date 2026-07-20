@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Client.Choice.UI;
+
+namespace Content.Medical.Client.Surgery;
+
+[GenerateTypedNameReferences]
+public sealed partial class SurgeryStepButton : ChoiceControl
+{
+    public EntityUid Step { get; set; }
+
+    public SurgeryStepButton()
+    {
+        RobustXamlLoader.Load(this);
+    }
+}

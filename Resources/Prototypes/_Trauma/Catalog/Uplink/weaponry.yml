@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: listing
+  id: UplinkRevolverPython
+  name: uplink-revolver-python-name
+  description: uplink-revolver-python-desc
+  productEntity: WeaponRevolverPythonAP
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRealFoamCutlass
+  name: uplink-foam-cutlass-name
+  description: uplink-foam-cutlass-desc
+  productEntity: RealFoamCutlass
+  icon: { sprite: /Textures/Objects/Weapons/Melee/cutlass.rsi, state: foam_icon }
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRevolverSnakesfang
+  name: uplink-snakesfang-name
+  description: uplink-snakesfang-desc
+  icon: { sprite: _Trauma/Objects/Weapons/Melee/snakesfang.rsi, state: icon }
+  productEntity: ClothingBeltSheathSnakesfangFilled
+  cost:
+    Telecrystal: 25
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRifleFAL
+  name: uplink-rifle-FAL-name
+  description: uplink-rifle-FAL-description
+  productEntity: WeaponRifleFAL
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRifleM90
+  name: uplink-rifle-M90-name
+  description: uplink-rifle-M90-description
+  productEntity: WeaponRifleM90
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkEshieldNukies
+  name: uplink-eshield-name
+  description: uplink-eshield-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
+  productEntity: EnergyShield
+  cost:
+    Telecrystal: 60
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink

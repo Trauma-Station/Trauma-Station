@@ -1,13 +1,7 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Numerics;
-using Content.Goobstation.Common.Footprints;
-using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -17,24 +11,25 @@ using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Fluids;
 
 /// <summary>
 /// Mopping logic for interacting with puddle components.
 /// </summary>
-public abstract class SharedAbsorbentSystem : EntitySystem
+public abstract partial class SharedAbsorbentSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] protected readonly SharedPuddleSystem Puddle = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] protected SharedPuddleSystem Puddle = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainer = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -42,7 +37,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
 
         SubscribeLocalEvent<AbsorbentComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<AbsorbentComponent, UserActivateInWorldEvent>(OnActivateInWorld);
-        SubscribeLocalEvent<AbsorbentComponent, SolutionContainerChangedEvent>(OnAbsorbentSolutionChange);
+        SubscribeLocalEvent<AbsorbentComponent, SolutionChangedEvent>(OnAbsorbentSolutionChange);
     }
 
     private void OnActivateInWorld(Entity<AbsorbentComponent> ent, ref UserActivateInWorldEvent args)
@@ -63,8 +58,12 @@ public abstract class SharedAbsorbentSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionChangedEvent args)
     {
+        // The changes are already networked as part of the same game state.
+        if (_timing.ApplyingState)
+            return;
+
         if (!SolutionContainer.TryGetSolution(ent.Owner, ent.Comp.SolutionName, out _, out var solution))
             return;
 
@@ -73,9 +72,9 @@ public abstract class SharedAbsorbentSystem : EntitySystem
         var absorbentReagents = Puddle.GetAbsorbentReagents(solution);
         var mopReagent = solution.GetTotalPrototypeQuantity(absorbentReagents);
         if (mopReagent > FixedPoint2.Zero)
-            ent.Comp.Progress[solution.GetColorWithOnly(_proto, absorbentReagents)] = mopReagent.Float();
+            ent.Comp.Progress[solution.GetColorWithOnly(ProtoMan, absorbentReagents)] = mopReagent.Float();
 
-        var otherColor = solution.GetColorWithout(_proto, absorbentReagents);
+        var otherColor = solution.GetColorWithout(ProtoMan, absorbentReagents);
         var other = solution.Volume - mopReagent;
         if (other > FixedPoint2.Zero)
             ent.Comp.Progress[otherColor] = other.Float();
@@ -345,9 +344,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
 
         SolutionContainer.AddSolution(absorberSoln, puddleSplit);
 
-        // Goobstation fix mopping sounds
-        // Always play the sound at the puddle's coordinates to prevent cutoff when entity is deleted
-        _audio.PlayPredicted(absorber.PickupSound, Transform(target).Coordinates, user);
+        _audio.PlayPredicted(absorber.PickupSound, isRemoved ? absorbEnt : target, user);
 
         if (useDelay != null)
             _useDelay.TryResetDelay((absorbEnt, useDelay));
@@ -357,9 +354,8 @@ public abstract class SharedAbsorbentSystem : EntitySystem
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
         localPos = userXform.LocalRotation.RotateVec(localPos);
 
-        _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null, Angle.Zero, false);
-
-        RaiseLocalEvent(target, new FootprintCleanEvent()); // Corvax-Next-Footprints
+        _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null,
+            Angle.Zero, false); // Trauma
 
         return true;
     }

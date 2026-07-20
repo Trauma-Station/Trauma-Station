@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: FoodBase
   id: Nutrislime
@@ -7,10 +9,8 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/nutrislime.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 150 # TODO: change to 15
-        reagents:
-        - ReagentId: Nutriment # TODO: change to some slime food reagent, which metabolizes into nutriment in slime stomachs at 10x ratio
-          Quantity: 150 # TODO: change to 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutrislime
+        Quantity: 15

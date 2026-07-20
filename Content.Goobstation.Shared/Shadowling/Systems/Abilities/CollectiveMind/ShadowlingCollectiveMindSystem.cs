@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling.Components;
@@ -10,7 +6,6 @@ using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind;
 
@@ -19,13 +14,12 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind
 /// The Collective Mind ability lets you gain new actions, and informs you
 /// how many Thralls are required to ascend. At the same time, it stuns all Thralls for a very short amount of time.
 /// </summary>
-public sealed class ShadowlingCollectiveMindSystem : EntitySystem
+public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -50,7 +44,7 @@ public sealed class ShadowlingCollectiveMindSystem : EntitySystem
 
         if (comp.UnlockedAbilities.Count >= comp.AvailableAbilities.Count)
         {
-            _popups.PopupPredicted(Loc.GetString("shadowling-collective-mind-ascend"), uid, uid, PopupType.Medium);
+            _popups.PopupEntity(Loc.GetString("shadowling-collective-mind-ascend"), uid, uid, PopupType.Medium);
             return;
         }
 
@@ -68,7 +62,7 @@ public sealed class ShadowlingCollectiveMindSystem : EntitySystem
             if (comp.UnlockedAbilities.Contains(unlock))
                 continue;
 
-            var proto = _protoMan.Index(unlock);
+            var proto = ProtoMan.Index(unlock);
 
             if (comp.AmountOfThralls < proto.UnlockAtThralls)
                 continue;
@@ -84,7 +78,7 @@ public sealed class ShadowlingCollectiveMindSystem : EntitySystem
 
         if (abiltiesAddedCount > 0)
         {
-            _popups.PopupPredicted(
+            _popups.PopupEntity(
                 Loc.GetString("shadowling-collective-mind-success", ("thralls", thrallsRemaining)),
                 uid,
                 uid,
@@ -95,7 +89,7 @@ public sealed class ShadowlingCollectiveMindSystem : EntitySystem
         }
         else
         {
-            _popups.PopupPredicted(Loc.GetString("shadowling-collective-mind-failure", ("thralls", thrallsRemaining)),
+            _popups.PopupEntity(Loc.GetString("shadowling-collective-mind-failure", ("thralls", thrallsRemaining)),
                 uid,
                 uid,
                 PopupType.Medium);

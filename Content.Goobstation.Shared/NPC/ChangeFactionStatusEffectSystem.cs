@@ -1,15 +1,16 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.NPC;
 
 public sealed partial class ChangeFactionStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly NpcFactionSystem _npc = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private NpcFactionSystem _npc = default!;
 
     public static readonly EntProtoId ChangeFactionStatusEffect = "ChangeFactionStatusEffect";
 

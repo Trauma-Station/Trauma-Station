@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   id: SarinGasPayload
   result: SarinGasPayload
@@ -118,3 +120,22 @@
     Steel: 300
     Plastic: 200
     Gold: 100
+
+- type: latheRecipe
+  id: DeepFryerCircuitboard
+  result: DeepFryerCircuitboard
+  completetime: 3
+  materials:
+    Steel: 300
+    Plastic: 200
+
+- type: latheRecipe
+  id: PartCapacitor
+  result: PartCapacitor
+  categories:
+  - Parts
+  completetime: 2
+  materials:
+    Steel: 100
+    Plastic: 100
+    Glass: 100

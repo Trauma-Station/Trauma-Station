@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
@@ -10,14 +12,14 @@ using Content.Trauma.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Tools;
 
-public sealed class DebugEffectStickSystem : EntitySystem
+public sealed partial class DebugEffectStickSystem : EntitySystem
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ISharedAdminManager _admin = default!;
-    [Dependency] private readonly NestedEffectSystem _nested = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedAdminManager _admin = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -48,7 +50,7 @@ public sealed class DebugEffectStickSystem : EntitySystem
         if (ent.Comp.Effect == args.Effect || !IsWorthy(user))
             return;
 
-        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{ToPrettyString(user)} changed DEBUG EFFECT STICK {ToPrettyString(ent)} to {args.Effect}");
+        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{user:user} changed DEBUG EFFECT STICK {ent.Owner:stick} to {args.Effect:effect}");
         ent.Comp.Effect = args.Effect;
         Dirty(ent);
     }
@@ -67,12 +69,10 @@ public sealed class DebugEffectStickSystem : EntitySystem
         if (ent.Comp.Unsafe && !IsWorthy(user))
             return;
 
-        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{ToPrettyString(user)} used DEBUG EFFECT STICK {ToPrettyString(ent)} on {ToPrettyString(target)} with effect {effect}");
+        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{user:user} used DEBUG EFFECT STICK {ent.Owner:stick} on {target:target} with effect {effect:effect}");
 
-        _data.SetUser(target, user);
         _data.SetTool(target, ent);
-        _nested.ApplyNestedEffect(target, effect);
-        _data.ClearUser(target);
+        _effects.TryApplyEffect(target, effect, user: user);
         _data.ClearTool(target);
     }
 
@@ -82,7 +82,7 @@ public sealed class DebugEffectStickSystem : EntitySystem
         if (_admin.HasAdminFlag(uid, AdminFlags.VarEdit))
             return true;
 
-        _popup.PopupClient("You are not worthy...", uid, uid);
+        _popup.PopupEntity("You are not worthy...", uid, uid);
         return false;
     }
 }

@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   # Reptilians
 
   <Box>
-    <GuideEntityEmbed Entity="MobReptilian" Caption=""/>
+    <GuideEntityEmbed Entity="AppearanceReptilian" Caption=""/>
   </Box>
 
   They can eat raw meat and drink blood without any ill effects.

@@ -1,36 +1,3 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Rinkashikachi <15rinkashikachi15@gmail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 ike709 <ike709@github.com>
-// SPDX-FileCopyrightText: 2022 ike709 <ike709@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ray <vigersray@gmail.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mota <belochuc@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Vasilis <vascreeper@yahoo.com>
-// SPDX-FileCopyrightText: 2024 no <165581243+pissdemon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 poeMota <142114334+poeMota@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Ghost.Roles.Raffles;
 using Content.Server.Mind.Commands;
 using Content.Shared.Roles;
@@ -39,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.Ghost.Roles.Components;
 
 [RegisterComponent]
-[Access(typeof(GhostRoleSystem))]
+//[Access(typeof(GhostRoleSystem))] // Trauma - free AA
 public sealed partial class GhostRoleComponent : Component
 {
     [DataField("name")] private string _roleName = "Unknown";
@@ -67,7 +34,7 @@ public sealed partial class GhostRoleComponent : Component
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
     public string RoleName
     {
-        get => Loc.GetString(_roleName);
+        get => Loc.TryGetString(_roleName, out var name) ? name : _roleName; // Trauma - TryGetString, systems may set it to non-loc strings
         set
         {
             _roleName = value;
@@ -79,7 +46,7 @@ public sealed partial class GhostRoleComponent : Component
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
     public string RoleDescription
     {
-        get => Loc.GetString(_roleDescription);
+        get => Loc.TryGetString(_roleDescription, out var desc) ? desc : _roleDescription; // Trauma - TryGetString, systems may set it to non-loc strings
         set
         {
             _roleDescription = value;
@@ -91,7 +58,7 @@ public sealed partial class GhostRoleComponent : Component
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
     public string RoleRules
     {
-        get => Loc.GetString(_roleRules);
+        get => Loc.TryGetString(_roleRules, out var rules) ? rules : _roleRules; // Trauma - TryGetString, systems may set it to non-loc strings
         set
         {
             _roleRules = value;

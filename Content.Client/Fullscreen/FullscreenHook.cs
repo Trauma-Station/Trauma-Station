@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Miro Kavaliou <miraslauk@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Input;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -14,11 +7,11 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
 namespace Content.Client.Fullscreen;
-public sealed class FullscreenHook
+public sealed partial class FullscreenHook
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILogManager _logManager = default!;
     private ISawmill _sawmill = default!;
 
     public void Initialize()

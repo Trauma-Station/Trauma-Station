@@ -1,27 +1,12 @@
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Tony <73495699+carteblanche4me@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 PJB3005 <pieterjan.briers+git@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+using Robust.Shared.Serialization;
+// </Trauma>
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.Clothing.Components;
 
@@ -40,7 +25,7 @@ public sealed partial class ToggleableClothingComponent : Component
     ///     Action used to toggle the clothing on or off.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId Action = "ActionToggleSuitPiece";
+    public EntProtoId? Action;
 
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
@@ -57,25 +42,25 @@ public sealed partial class ToggleableClothingComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
-    public string Slot = string.Empty;
+    public ProtoId<InventorySlotPrototype>? Slot; // Trauma - nullable, string -> ProtoId
 
     /// <summary>
     ///     Dictionary of inventory slots and entity prototypes to spawn into the clothing container.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<string, EntProtoId> ClothingPrototypes = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, EntProtoId> ClothingPrototypes = new(); // Trauma - string -> ProtoId
 
     /// <summary>
     /// slot -> prefix
     /// </summary>
     [DataField]
-    public Dictionary<string, string?> EquippedPrefixes = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, string?> EquippedPrefixes = new(); // Trauma - string -> ProtoId
 
     /// <summary>
     ///     Dictionary of clothing uids and slots
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<EntityUid, string> ClothingUids = new();
+    public Dictionary<EntityUid, ProtoId<InventorySlotPrototype>> ClothingUids = new(); // Trauma - string -> ProtoId
 
     /// <summary>
     ///     The inventory slot flags required for this component to function.
@@ -102,7 +87,7 @@ public sealed partial class ToggleableClothingComponent : Component
     ///     Text shown in the toggle-clothing verb. Defaults to using the name of the <see cref="ActionEntity"/> action.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? VerbText;
+    public LocId VerbText = "toggle-clothing-verb-default";
 
     /// <summary>
     ///     If true it will block unequip of this entity until all attached clothing are removed
@@ -117,6 +102,7 @@ public sealed partial class ToggleableClothingComponent : Component
     public bool ReplaceCurrentClothing = false;
 }
 
+// TODO: move modsuit shit to modules...
 [Serializable, NetSerializable]
 public enum ToggleClothingUiKey : byte
 {

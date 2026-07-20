@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entityTable
   id: BasicCalmEventsTrauma
   table: !type:AllSelector
@@ -8,63 +10,316 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
-    - id: PlagueMiceSpawn
+    - id: RadiationStormRule
+
+- type: entityTable
+  id: BasicAntagEventsTrauma
+  table: !type:AllSelector
+    children:
+    - id: CarpMigrationRule
+    # TOOD: remove these if they fucking suck lmao
+    - id: SingulothKnightsMidround
+    - id: MimeAssassinMidround
+    - id: VoxRaidersMidround
+    - id: TunnelClownMidround
+    - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
+    - id: ParadoxCloneSpawn
+    - id: MorphRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: BlobSpawn
-    # - id: LoneAbductorSpawn
+    - id: BlobMidround
     - id: DuoAbductorSpawn
     - id: BingleSpawn
-    # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
     - id: XenomorphsInfestation
-    # TOOD: remove these if they fucking suck lmao
-    - id: GreyTideAntagMidround
-    - id: SingulothKnightsMidround
-    - id: DarkLordMidround
-    - id: MimeAssassinMidround
-    - id: DarkPriestMidround
-    - id: VoxRaidersMidround
-    - id: TunnelClownMidround
-    #- id: WraithMidround # if someone makes it less chuddy
-    # - id: ChangelingMidround # Trauma - We dont want lings in other game modes people hate it
-    # - id: HereticMidround # Trauma - Heretics scale too slowly here to do this
-    # - id: Devilmidround # Trauma - Devil midround does not make sense and is kinda weird
-    - id: Dud50
     #- id: SlasherSpawn # TODO: when slasher is ready
-
-- type: entity
-  parent: BaseStationEventShortDelay
-  id: PlagueMiceSpawn
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 4 # annoying
-    reoccurrenceDelay: 60 # no spamming them
-    duration: 30
-    chaos:
-      Hostile: 20
-      Medical: 100
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 200
-  - type: VentCrittersRule
-    min: 1
-    max: 3
-    playerRatio: 50
-    table:
-      id: MobMousePlague
+    - id: ColossusSpawn
+    - id: FugitiveSpawn
 
 - type: entity
   parent: BaseGameRule
-  id: Dud50
+  id: CarpMigrationRule
   components:
   - type: StationEvent
-    weight: 50
     duration: 1
-  - type: GameRule
-    chaosScore: 200
+    weight: 1
+  - type: CarpMigrationRule
+  - type: SpaceSpawnRule
+
+- type: entity
+  parent: BaseGameRule
+  id: RadiationStormRule
+  components:
+  - type: StationEvent
+    weight: 0.5
+    startAnnouncement: station-event-radiation-storm-announcement
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
+    duration: 1
+  - type: RadiationStormRule
+  - type: MapEffectsRule
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: WeatherSchedulerRadiationStorm
+      time: null # it removes itself when done
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: RatmaSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobRatma
+      amount: 1, 1
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: WailingHorseSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobWailingHorse
+      amount: 1, 1
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: CoconutCrabSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobCoconutCrab
+        weight: 0.75
+      - id: MobCrabTiny
+      - id: MobCoconutCrabFloofy # because it looks funny
+        weight: 0.05 # NEVER BASICALLY
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: DartFrogSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobDartFrog1
+      - id: MobDartFrog2
+      - id: MobDartFrog3
+      - id: MobDartFrog4
+      - id: MobDartFrog5
+      - id: MobDartFrog6
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: MantisSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobMantis
+      - id: MobMantisShrimp
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: ShrimpSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobMantisShrimp
+      - id: MobShrimp
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: SnakeSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobCobra
+      - id: MobYellowBellySnake
+      - id: MobKraitSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: EelSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobEelSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: BunnySpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobBunny
+      - id: MobBunnySea
+      - id: MobBunnyEvil
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: SpiderCrabSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobSpiderCrabSea
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveSpawn
+  components:
+  - type: StationEvent
+    weight: 3
+    duration: null
+    earliestStart: 10
+    minimumPlayers: 30
+    reoccurrenceDelay: 30
+    maxOccurrences: 2
+  - type: FugitiveRule
+  - type: MaintsSpawnRule
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - FugitiveEscapeObjective
+    - FugitiveKillObjective
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Fugitive
+      count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRule
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterArrestFugitiveObjective
+    - HunterKillRandomPersonObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: HunterObjectiveGroups
+      maxPicks: 3
+    maxDifficulty: 5
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunter
+      count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills

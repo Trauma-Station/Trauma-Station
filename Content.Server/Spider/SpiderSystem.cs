@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Jackrost <jackrost@mail.ru>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Popups;
 using Content.Shared.Spider;
 using Content.Shared.Maps;
@@ -15,12 +9,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Spider;
 
-public sealed class SpiderSystem : SharedSpiderSystem
+public sealed partial class SpiderSystem : SharedSpiderSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     /// <summary>
     ///     A recycled hashset used to check turfs for spiderwebs.

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Movement.Components;
@@ -8,7 +7,6 @@ using Content.Shared.StationAi;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.AudioMuffle;
 using Robust.Client.Audio;
-using Robust.Client.GameObjects;
 using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Shared;
@@ -24,21 +22,20 @@ namespace Content.Trauma.Client.AudioMuffle;
 
 public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
-    private static EntityQuery<GhostComponent> _ghostQuery;
-    private static EntityQuery<SpectralComponent> _spectralQuery;
-    private static EntityQuery<RelayInputMoverComponent> _relayedQuery;
-    private static EntityQuery<AiEyeComponent> _aiEyeQuery;
-    private static EntityQuery<SoundBlockerComponent> _blockerQuery;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private EntityQuery<SpectralComponent> _spectralQuery = default!;
+    [Dependency] private EntityQuery<RelayInputMoverComponent> _relayedQuery = default!;
+    [Dependency] private EntityQuery<AiEyeComponent> _aiEyeQuery = default!;
+    [Dependency] private EntityQuery<SoundBlockerComponent> _blockerQuery = default!;
 
     // Tile indices -> blocker entities
     [ViewVariables]
@@ -65,12 +62,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _ghostQuery = GetEntityQuery<GhostComponent>();
-        _spectralQuery = GetEntityQuery<SpectralComponent>();
-        _relayedQuery = GetEntityQuery<RelayInputMoverComponent>();
-        _aiEyeQuery = GetEntityQuery<AiEyeComponent>();
-        _blockerQuery = GetEntityQuery<SoundBlockerComponent>();
 
         _xform.OnGlobalMoveEvent += OnMove;
 
@@ -290,7 +281,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             _xform.GetMapId(PlayerGrid.Value.Owner) == pos.MapId)
             return PlayerGrid.Value;
 
-        if (_mapManager.TryFindGridAt(pos, out var grid, out var gridComp))
+        if (_map.TryFindGridAt(pos, out var grid, out var gridComp))
             PlayerGrid = (grid, gridComp);
         else
             PlayerGrid = null;
@@ -316,7 +307,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         {
             PlayerGrid = null;
             OldPlayerTile = null;
-            if (_mapManager.TryFindGridAt(newPos, out var g, out var gC))
+            if (_map.TryFindGridAt(newPos, out var g, out var gC))
             {
                 PlayerGrid = (g, gC);
                 var tile = _map.TileIndicesFor((g, gC), newPos);
@@ -328,7 +319,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
         }
 
-        if (!_mapManager.TryFindGridAt(newPos, out var grid, out var gridComp))
+        if (!_map.TryFindGridAt(newPos, out var grid, out var gridComp))
         {
             PlayerGrid = null;
             OldPlayerTile = null;
@@ -461,7 +452,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public Entity<MapGridComponent>? TryFindCommonPlayerGrid(MapCoordinates pos, MapCoordinates other)
     {
         if (ResolvePlayerGrid(pos) is { } grid &&
-            _mapManager.TryFindGridAt(other, out var gridB, out _) && grid.Owner == gridB)
+            _map.TryFindGridAt(other, out var gridB, out _) && grid.Owner == gridB)
             return grid;
 
         return null;
@@ -557,7 +548,11 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         EntityUid? ignoredEnt)
     {
         var rayLength = MathF.Min(distance, _maxRayLength);
-        var ray = new CollisionRay(listener.Position, delta / distance, _audio.OcclusionCollisionMask);
+        if (delta == Vector2.Zero || distance == 0f)
+            return 0f; // you are inside the source?
+
+        var dir = (delta / distance).Normalized();
+        var ray = new CollisionRay(listener.Position, dir, _audio.OcclusionCollisionMask);
 
         var results = _physics.IntersectRayWithPredicate(listener.MapId,
             ray,

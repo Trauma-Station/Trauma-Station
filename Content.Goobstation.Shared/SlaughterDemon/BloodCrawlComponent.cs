@@ -1,14 +1,9 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SlaughterDemon;
 
@@ -49,7 +44,7 @@ public sealed partial class BloodCrawlComponent : Component
     /// <summary>
     /// The reagents to look out for when searching for puddles
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public List<ProtoId<ReagentPrototype>> Blood = new();
 
     /// <summary>

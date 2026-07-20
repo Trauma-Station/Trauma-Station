@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

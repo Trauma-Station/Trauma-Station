@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.LightDetection.Components;
@@ -12,7 +8,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind;
@@ -21,13 +16,13 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind
 /// This handles the Nox Imperii system.
 /// When used, the shadowling no longer becomes affected by lightning damage.
 /// </summary>
-public sealed class ShadowlingNoxImperiiSystem : EntitySystem
+public sealed partial class ShadowlingNoxImperiiSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -85,7 +80,7 @@ public sealed class ShadowlingNoxImperiiSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayGlobal(new SoundPathSpecifier("/Audio/_EinsteinEngines/Effects/ghost.ogg"), Filter.Broadcast(), false, AudioParams.Default.WithVolume(-4f));
 
-        _popups.PopupPredicted(Loc.GetString("shadowling-nox-imperii-done"), uid, uid, PopupType.Medium);
+        _popups.PopupEntity(Loc.GetString("shadowling-nox-imperii-done"), uid, uid, PopupType.Medium);
 
         args.Handled = true;
     }

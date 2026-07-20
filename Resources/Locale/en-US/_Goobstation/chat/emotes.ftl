@@ -1,22 +1,12 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 lanse12 <cloudability.ez@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Names
 chat-emote-name-fart = Fart
 chat-emote-name-fart-inhale = Breathe in a fart
 chat-emote-name-fart-super = Super Fart
-chat-emote-name-flap = Flap
 
 # Message
 chat-emote-msg-fart = farts.
 chat-emote-msg-fart-inhale = breathes in a big fart.
 chat-emote-msg-fart-super = super farts.
-chat-emote-msg-flap = flaps {POSS-ADJ($entity)} wings.
 chat-emote-msg-bagawk = bagawks!
 
 
@@ -30,4 +20,6 @@ emote-fart-inhale-notice = You breathe in, arming a super fart.
 emote-fart-inhale-disarm-notice = You disarm your super fart.
 
 chat-emote-name-boop = Boop
+chat-emote-msg-boop = boops.
 chat-emote-name-whirr = Whirr
+chat-emote-msg-whirr = whirrs.

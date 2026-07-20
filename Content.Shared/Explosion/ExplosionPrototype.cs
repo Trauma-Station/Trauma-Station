@@ -1,20 +1,3 @@
-// SPDX-FileCopyrightText: 2022 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -107,18 +90,34 @@ public sealed partial class ExplosionPrototype : IPrototype
     [DataField]
     public float MaxCombineDistance = 1f;
 
+    /// <summary>
+    /// Normal sound of the explosion.
+    /// </summary>
     [DataField("sound")]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("Explosion");
 
+/// <summary>
+/// Sound if the explosion is small.
+/// <seealso cref="SmallSoundIterationThreshold"/>
+/// </summary>
     [DataField("smallSound")]
     public SoundSpecifier SmallSound = new SoundCollectionSpecifier("ExplosionSmall");
 
+/// <summary>
+/// Secondary sound that will be projected farther than normal sound.
+/// </summary>
     [DataField("soundFar")]
     public SoundSpecifier SoundFar = new SoundCollectionSpecifier("ExplosionFar", AudioParams.Default.WithVolume(2f));
 
+    /// <summary>
+    /// Secondary sound that will be projected farther than normal sound for a small explosion.
+    /// </summary>
     [DataField("smallSoundFar")]
     public SoundSpecifier SmallSoundFar = new SoundCollectionSpecifier("ExplosionSmallFar", AudioParams.Default.WithVolume(2f));
 
+    /// <summary>
+    /// The texture of the explosion.
+    /// </summary>
     [DataField("texturePath")]
     public ResPath TexturePath = new("/Textures/Effects/fire.rsi");
 
@@ -128,8 +127,11 @@ public sealed partial class ExplosionPrototype : IPrototype
     [DataField("intensityPerState")]
     public float IntensityPerState = 12;
 
-    // Theres probably a better way to do this. Currently Atmos just hard codes a constant int, so I have no one to
-    // steal code from.
+    /// <summary>
+    /// Number of states in the rsi of ResPath. To quote the original author:
+    ///  Theres probably a better way to do this. Currently Atmos just hard codes a constant int, so I have no one to
+    /// steal code from.
+    /// </summary>
     [DataField("fireStates")]
     public int FireStates = 3;
 

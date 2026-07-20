@@ -1,15 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Decals;
 using Content.Shared.Humanoid;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Humanoid;
 
-public sealed class RandomHumanoidSkinColorSystem : EntitySystem
+public sealed partial class RandomHumanoidSkinColorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -18,6 +18,6 @@ public sealed class RandomHumanoidSkinColorSystem : EntitySystem
 
     private void OnMapInit(Entity<RandomHumanoidSkinColorComponent> ent, ref MapInitEvent args)
     {
-        _appearance.SetSkinColor(ent, _random.Pick(_prototype.Index<ColorPalettePrototype>(ent.Comp.Palette).Colors.Values));
+        _humanoid.SetSkinColor(ent.Owner, _random.Pick(ProtoMan.Index(ent.Comp.Palette).Colors.Values));
     }
 }

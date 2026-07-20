@@ -1,24 +1,4 @@
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 Rank #1 Jonestown partygoer <mary@thughunt.ing>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: entity
-  id: GhostBarSpawner
-  parent: MarkerBase
-  name: ghost bar spawn point
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Mobs/Ghosts/ghost_human.rsi
-        state: icon
-    state: observer
-  - type: GhostBarSpawn
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
@@ -39,27 +19,6 @@
     - state: green
     - sprite: Mobs/Silicon/chassis.rsi
       state: synd_sec
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  name: grey tide antag spawn
-  parent: BaseAntagSpawner
-  id: SpawnPointGhostGreyTide
-  components:
-  - type: GhostRole
-    name: ghost-role-information-grey-tide-name
-    description: ghost-role-information-grey-tide-description
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: default
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
-      state: icon
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Input;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -15,10 +7,10 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client.Shuttles.Systems
 {
-    public sealed class ShuttleConsoleSystem : SharedShuttleConsoleSystem
+    public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     {
-        [Dependency] private readonly IInputManager _input = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private IInputManager _input = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
 
         public override void Initialize()
         {

@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # The ID is what is searched for on the paper, coming after the target identifier.
@@ -26,7 +22,7 @@
 #  - type: Devourer
 #    foodPreferenceWhitelist:
 #      components:
-#      - HumanoidAppearance
+#      - HumanoidProfile
 #    stomachStorageWhitelist:
 #      components:
 #      - MobState
@@ -69,6 +65,7 @@
   clauseWeight: -15
   addedComponents:
   - type: FlashImmunity
+    showInExamine: false
 
 - type: clause
   id: fearofelectricity
@@ -173,12 +170,14 @@
 - type: clause
   id: aleg
   clauseWeight: 20
-  event: !type:DevilContractLoseLegEvent
+  event: !type:DevilContractLosePartEvent
+    part: Leg
 
 - type: clause
   id: ahand
   clauseWeight: 20
-  event: !type:DevilContractLoseHandEvent
+  event: !type:DevilContractLosePartEvent
+    part: Hand
 
 - type: clause
   id: awake
@@ -227,5 +226,5 @@
   addedComponents:
   - type: DelayedDeath
     preventAllRevives: true # :trol:
-    deathTime: 300
+    deathDelay: 300
     deathMessageId: devil-deal-time-ran-out

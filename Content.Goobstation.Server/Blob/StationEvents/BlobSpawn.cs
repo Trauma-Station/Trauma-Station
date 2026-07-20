@@ -1,32 +1,24 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using Content.Goobstation.Common.Blob;
 using Content.Server.Ghost.Roles.Events;
-using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Blob.StationEvents;
 
-public sealed class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComponent>
+public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPlayerManager _playerSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPlayerManager _playerSystem = default!;
+
+    public static readonly EntProtoId BlobRule = "BlobRule";
 
     public override void Initialize()
     {
@@ -41,22 +33,15 @@ public sealed class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComponent>
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var station))
-        {
+        if (GetRandomStationGrids() is not { } stationGrids)
             return;
-        }
 
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
-        while (locations.MoveNext(out _, out _, out var transform))
+        while (locations.MoveNext(out _, out _, out var xform))
         {
-            if (!HasComp<BecomesStationComponent>(transform.GridUid))
-                continue;
-
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
-            {
-                validLocations.Add(transform.Coordinates);
-            }
+            if (xform.GridUid is { } grid && stationGrids.Contains(grid))
+                validLocations.Add(xform.Coordinates);
         }
 
         if (validLocations.Count == 0)
@@ -76,7 +61,7 @@ public sealed class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComponent>
         }
 
         // start blob rule incase it isn't, for the sweet greentext
-        GameTicker.StartGameRule("BlobRule");
+        GameTicker.StartGameRule(BlobRule);
     }
 
     // Because GameRule spawns just a GhostRoleSpawner, we can't just remove components

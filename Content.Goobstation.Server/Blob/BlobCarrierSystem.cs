@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Blob;
@@ -22,86 +11,68 @@ using Content.Server.Mind;
 using Content.Shared.Gibbing;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Events;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobCarrierSystem : SharedBlobCarrierSystem
+public sealed partial class BlobCarrierSystem : SharedBlobCarrierSystem
 {
-    [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly GhostRoleSystem _ghost = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private BlobObserverSystem _observer = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private GhostRoleSystem _ghost = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private CommonLanguageSystem _language = default!;
 
-    public override void Initialize()
+    private static readonly EntProtoId ActionTransformToBlob = "ActionTransformToBlob";
+
+    [SubscribeLocalEvent]
+    private void OnRemove(Entity<BlobCarrierComponent> ent, ref ComponentShutdown args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlobCarrierComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<BlobCarrierComponent, TransformToBlobActionEvent>(OnTransformToBlobChanged);
-
-        SubscribeLocalEvent<BlobCarrierComponent, MapInitEvent>(OnStartup);
-        SubscribeLocalEvent<BlobCarrierComponent, DetermineEntityLanguagesEvent>(OnApplyLang);
-        SubscribeLocalEvent<BlobCarrierComponent, ComponentRemove>(OnRemove);
-
-        SubscribeLocalEvent<BlobCarrierComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<BlobCarrierComponent, MindRemovedMessage>(OnMindRemove);
+        _language.UpdateEntityLanguages(ent.Owner);
     }
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string ActionTransformToBlob = "ActionTransformToBlob";
-
-    [ValidatePrototypeId<LanguagePrototype>]
-    private const string BlobLang = "Blob";
-
-    private void OnApplyLang(Entity<BlobCarrierComponent> ent, ref DetermineEntityLanguagesEvent args)
+    [SubscribeLocalEvent]
+    private void OnMindAdded(Entity<BlobCarrierComponent> ent, ref MindAddedMessage args)
     {
-        if(ent.Comp.LifeStage is
-           ComponentLifeStage.Removing
-           or ComponentLifeStage.Stopping
-           or ComponentLifeStage.Stopped)
-            return;
-
-        args.SpokenLanguages.Add(BlobLang);
-        args.UnderstoodLanguages.Add(BlobLang);
+        ent.Comp.HasMind = true;
     }
 
-    private void OnRemove(Entity<BlobCarrierComponent> ent, ref ComponentRemove args) => _language.UpdateEntityLanguages(ent.Owner);
-
-    private void OnMindAdded(EntityUid uid, BlobCarrierComponent component, MindAddedMessage args) => component.HasMind = true;
-
-    private void OnMindRemove(EntityUid uid, BlobCarrierComponent component, MindRemovedMessage args) => component.HasMind = false;
-
-    private void OnTransformToBlobChanged(Entity<BlobCarrierComponent> uid, ref TransformToBlobActionEvent args) => TransformToBlob(uid);
-
-    private void OnStartup(EntityUid uid, BlobCarrierComponent component, MapInitEvent args)
+    [SubscribeLocalEvent]
+    private void OnMindRemove(Entity<BlobCarrierComponent> ent, ref MindRemovedMessage args)
     {
-        _language.UpdateEntityLanguages(uid);
-        _action.AddAction(uid, ref component.TransformToBlob, ActionTransformToBlob);
-        //EnsureComp<BlobSpeakComponent>(uid).OverrideName = false;
+        ent.Comp.HasMind = false;
+    }
 
-        if (HasComp<ActorComponent>(uid))
+    [SubscribeLocalEvent]
+    private void OnTransformToBlob(Entity<BlobCarrierComponent> uid, ref TransformToBlobActionEvent args)
+        => TransformToBlob(uid);
+
+    [SubscribeLocalEvent]
+    private void OnMapInit(Entity<BlobCarrierComponent> ent, ref MapInitEvent args)
+    {
+        _language.UpdateEntityLanguages(ent.Owner);
+        _action.AddAction(ent.Owner, ref ent.Comp.TransformToBlob, ActionTransformToBlob);
+
+        if (HasComp<ActorComponent>(ent))
             return;
 
-        var ghostRole = EnsureComp<GhostRoleComponent>(uid);
-        EnsureComp<GhostTakeoverAvailableComponent>(uid);
+        var ghostRole = EnsureComp<GhostRoleComponent>(ent);
+        EnsureComp<GhostTakeoverAvailableComponent>(ent);
         ghostRole.RoleName = Loc.GetString("blob-carrier-role-name");
         ghostRole.RoleDescription = Loc.GetString("blob-carrier-role-desc");
         ghostRole.RoleRules = Loc.GetString("blob-carrier-role-rules");
     }
 
-    private void OnMobStateChanged(Entity<BlobCarrierComponent> uid, ref MobStateChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnMobStateChanged(Entity<BlobCarrierComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Dead)
         {
-            TransformToBlob(uid);
+            TransformToBlob(ent);
         }
     }
 
@@ -111,22 +82,18 @@ public sealed class BlobCarrierSystem : SharedBlobCarrierSystem
         if (!HasComp<MapGridComponent>(xform.GridUid))
             return;
 
-        if (_mind.TryGetMind(ent, out _, out var mind) && mind.UserId != null)
+        var core = Spawn(ent.Comp.CoreBlobPrototype, xform.Coordinates);
+        if (_mind.TryGetMind(ent, out _, out var mind) && mind.UserId is { } userId)
         {
-            var core = Spawn(ent.Comp.CoreBlobPrototype, xform.Coordinates);
-            var ghostRoleComp = EnsureComp<GhostRoleComponent>(core);
+            var ghostRoleComp = Comp<GhostRoleComponent>(core);
 
             // Unfortunately we have to manually turn this off so we don't need to make more prototypes.
             _ghost.UnregisterGhostRole((core, ghostRoleComp));
 
-            if (!TryComp<BlobCoreComponent>(core, out var blobCoreComponent))
+            if (!TryComp<BlobCoreComponent>(core, out var coreComp))
                 return;
 
-            _blobCoreSystem.CreateBlobObserver(core, mind.UserId.Value, blobCoreComponent);
-        }
-        else
-        {
-            Spawn(ent.Comp.CoreBlobPrototype, xform.Coordinates);
+            _observer.CreateBlobObserver((core, coreComp), userId);
         }
 
         _gibbing.Gib(ent);

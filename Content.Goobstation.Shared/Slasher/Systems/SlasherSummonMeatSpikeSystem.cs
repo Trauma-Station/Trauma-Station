@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Actions;
@@ -9,12 +11,12 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 /// <summary>
 /// Handles summoning a meat spike at the slasher's position.
 /// </summary>
-public sealed class SlasherSummonMeatSpikeSystem : EntitySystem
+public sealed partial class SlasherSummonMeatSpikeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -37,9 +39,9 @@ public sealed class SlasherSummonMeatSpikeSystem : EntitySystem
 
     private void OnSummon(Entity<SlasherSummonMeatSpikeComponent> ent, ref SlasherSummonMeatSpikeEvent args)
     {
-        Spawn(ent.Comp.MeatSpikePrototype, _xform.GetMoverCoordinates(ent.Owner));
+        PredictedSpawnAtPosition(ent.Comp.MeatSpikePrototype, _xform.GetMoverCoordinates(ent.Owner));
         _audio.PlayPredicted(ent.Comp.SummonSound, ent.Owner, ent.Owner);
-        _popup.PopupPredicted(Loc.GetString("slasher-summon-meatspike-popup"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("slasher-summon-meatspike-popup"), ent.Owner, ent.Owner, PopupType.MediumCaution);
         args.Handled = true;
     }
 }

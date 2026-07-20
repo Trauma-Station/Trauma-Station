@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Verm <32827189+Vermidia@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -40,13 +29,6 @@ public sealed partial class RandomHumanoidSettingsPrototype : IPrototype, IInher
     /// </summary>
     [DataField("speciesBlacklist")]
     public HashSet<string> SpeciesBlacklist { get; private set; } = new();
-
-    /// <summary>
-    ///     Goobstation
-    ///     Specie that will be used.
-    /// </summary>
-    [DataField]
-    public string? SpeciesWhitelist { get; private set; }
 
     /// <summary>
     ///     Extra components to add to this entity.

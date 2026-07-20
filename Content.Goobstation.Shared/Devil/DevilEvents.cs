@@ -1,12 +1,8 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Devil.Contract;
+using Content.Medical.Common.Body;
 using Content.Shared.Inventory;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Devil;
 
@@ -57,9 +53,11 @@ public abstract partial class BaseDevilContractEvent : EntityEventArgs
 
 public sealed partial class DevilContractSoulOwnershipEvent : BaseDevilContractEvent;
 
-public sealed partial class DevilContractLoseHandEvent : BaseDevilContractEvent;
-
-public sealed partial class DevilContractLoseLegEvent : BaseDevilContractEvent;
+public sealed partial class DevilContractLosePartEvent : BaseDevilContractEvent
+{
+    [DataField(required: true)]
+    public BodyPartType Part;
+}
 
 public sealed partial class DevilContractLoseOrganEvent : BaseDevilContractEvent;
 

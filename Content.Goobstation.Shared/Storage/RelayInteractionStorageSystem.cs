@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Interaction;
@@ -9,10 +6,10 @@ using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.Storage;
 
-public sealed class RelayInteractionStorageSystem : EntitySystem
+public sealed partial class RelayInteractionStorageSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
     public override void Initialize()
     {
         base.Initialize();

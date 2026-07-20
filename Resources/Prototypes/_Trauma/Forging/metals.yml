@@ -1,0 +1,120 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+######################################
+#   NOTE TO BURGERS SUCH AS ARMOK    #
+# THIS USES KELVIN NOT FAHRENHEIT!!! #
+######################################
+
+- type: metal
+  id: Brass
+  name: brass
+  color: "#e79962"
+  ingotSprite: ingot_brass
+  density: 8.5
+  workingTemp: 850
+  workingRange: 56
+  meltTemp: 1200
+  durability: 0.75 # brittle...
+  speed: 0.9 # heavy and slow
+  price: 2
+  damage:
+    Blunt: 1.1 # hit hard ye
+    Slash: 0.9 # doesn't hold a good edge
+    Piercing: 0.9 # really doesnt handle it well
+  overheated: OverheatedBrass
+
+- type: metal
+  id: Steel
+  name: steel
+  color: "#d7dbe9"
+  ingotSprite: ingot_steel
+  density: 7.9
+  workingTemp: 1260
+  workingRange: 42
+  meltTemp: 1700
+  workScale: 1.5
+  durability: 1 # standard material most things use
+  price: 1.5
+  overheated: OverheatedSteel
+
+# TODO: cast iron and stuff? very nice frying pan, not very nice sword blades
+
+- type: metal
+  id: Plasteel
+  name: plasteel
+  color: "#dac7f5"
+  ingotSprite: ingot_plasteel
+  density: 4 # between steel and aluminium, basically lighter steel
+  workingTemp: 1483
+  workingRange: 27
+  meltTemp: 2500 # idk closer to tungsten its crazy high
+  workScale: 2
+  durability: 3 # extremely durable
+  speed: 1.1 # light and quick
+  price: 3
+  damage:
+    Blunt: 0.5 # too light to make a good hammer etc
+    Slash: 1.25 # decent knives
+    Piercing: 1.25 # very pointy spears
+  overheated: OverheatedPlasteel
+  masteryOffset: 1 # hard to make stuff with it
+
+- type: metal
+  id: Gold
+  name: gold
+  color: "#ffcc51"
+  ingotSprite: ingot_gold
+  density: 19.283
+  workingTemp: 923
+  workingRange: 50
+  meltTemp: 1337 # B)
+  workScale: 0.5 # relatively soft metal
+  durability: 0.1 # lol
+  speed: 0.7 # heavy
+  price: 7.5 # shiny
+  damage:
+    Blunt: 0.6 # heavy but easily deforms
+    Slash: 0.1 # no edge at all
+    Piercing: 0.15 # heavy so a bit better for spears
+  overheated: GoldMolten # just melts completely
+
+- type: metal
+  id: Silver
+  name: silver
+  color: "#d7e2e7"
+  ingotSprite: ingot_silver
+  density: 10.503
+  workingTemp: 893
+  workingRange: 80
+  meltTemp: 1235
+  workScale: 0.75 # work-hardens faster than gold but still somewhat fast
+  durability: 0.15
+  speed: 1.1 # not so heavy
+  price: 6 # less shiny
+  damage:
+    Blunt: 0.4 # easily deforms and not as heavy as gold
+    Slash: 0.2 # barely any edge
+    Piercing: 0.2
+  damageBonus:
+    Holy: 0.75 # per point of original weapon damage
+  overheated: SilverMolten
+  # TODO: antimagic for armour
+
+- type: metal
+  id: Adamantine
+  name: adamantine
+  color: "#affaff"
+  ingotSprite: ingot_adamantine
+  density: 1 # extremely light
+  workingTemp: 2050
+  workingRange: 50
+  meltTemp: 2383
+  workScale: 10 # extremely hard to forge, bring friends or technology
+  durability: 10 # that's its bit
+  speed: 1.15 # ligher than plasteel = faster than plasteel
+  price: 20
+  damage:
+    Blunt: 0.2 # just not heavy
+    Slash: 1.5 # the sharpest of edges
+    Piercing: 1.5 # the sharpest of points
+  overheated: OverheatedAdamantine

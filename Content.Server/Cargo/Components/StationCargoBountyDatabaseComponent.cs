@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 wafehling <wafehling@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BarryNorfolk <barrynorfolkman@protonmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Prototypes;
 using Robust.Shared.Prototypes;
@@ -69,5 +59,5 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     /// The time between skipping bounties.
     /// </summary>
     [DataField]
-    public TimeSpan SkipDelay = TimeSpan.FromMinutes(15);
+    public TimeSpan SkipDelay = TimeSpan.FromMinutes(3); // Trauma - Changed this from 15 to 3.
 }

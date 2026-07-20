@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Medical.Shared.Augments;
+
+/// <summary>
+/// Multiplies melee damage, armed and unarmed, when activated.
+/// </summary>
+[RegisterComponent, NetworkedComponent, Access(typeof(AugmentStrengthSystem))]
+public sealed partial class AugmentStrengthComponent : Component
+{
+    /// <summary>
+    /// What to multiply damage by when activated.
+    /// </summary>
+    [DataField]
+    public float Modifier = 1.25f;
+}

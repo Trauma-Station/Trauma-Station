@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseStockPart
@@ -18,6 +20,8 @@
     graph: RevParts
     deconstructionTarget: null
   - type: Appearance
+  groups:
+  - Technological
 
 - type: entity
   parent: BaseRevComponent

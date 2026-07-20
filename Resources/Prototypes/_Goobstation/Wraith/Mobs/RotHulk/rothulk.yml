@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
+  parent: [ BaseMob, MobCombat, MobNightVision ]
   id: MobRotHulk
+  name: bloated abomination
   suffix: Wraith
-  parent: [ BaseMob, MobCombat ]
-  name: Bloated abomination
   description: A rotting, walking mass of flesh.
   components:
   - type: DeleteOnTrigger
@@ -69,9 +71,8 @@
     soundHit:
       collection: Flesh_Tear
     damage:
-      groups:
-        Brute: 10
       types:
+        Blunt: 10
         Structural: 50
   - type: InputMover
   - type: MobMover
@@ -82,8 +83,9 @@
     baseWalkSpeed: 4
     baseSprintSpeed: 4
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona # Weak to heat
+  - type: Injurable
+    damageContainer: Biological
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -94,10 +96,6 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#00FF00"
-    activateSound: null
-    deactivateSound: null
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -136,8 +134,9 @@
     baseWalkSpeed: 4
     baseSprintSpeed: 5
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Moth # Not as weak to heat, but still vulnerable
+  - type: Injurable
+    damageContainer: Biological
   - type: MobThresholds
     thresholds:
       0: Alive

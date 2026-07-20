@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Robust.Client.ResourceManagement;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
@@ -13,10 +7,10 @@ using Robust.Shared.Timing;
 namespace Content.Client.Replay.UI.Loading;
 
 [Virtual]
-public class LoadingScreen<TResult> : State
+public partial class LoadingScreen<TResult> : State
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
 
     public event Action<TResult?, Exception?>? OnJobFinished;
     private LoadingScreenControl _screen = default!;

@@ -1,0 +1,11 @@
+- type: entity
+  id: BaseMobSlimes
+  abstract: true
+  components:
+  - type: BodyCache # Shitmed
+  - type: Body
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      Torso: OrganSlimesTorso # Shitmed
+      Stomach: OrganSlimePersonCore
+      Lungs: OrganSlimePersonLungs

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Damage.Systems;
@@ -8,9 +10,9 @@ using Content.Shared.Popups;
 namespace Content.Goobstation.Shared.Wraith.Systems;
 public sealed partial class DecaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     public override void Initialize()
     {
@@ -21,10 +23,10 @@ public sealed partial class DecaySystem : EntitySystem
 
     private void OnDecay(Entity<DecayComponent> ent, ref DecayEvent args)
     {
-        if (HasComp<HumanoidAppearanceComponent>(args.Target))
+        if (HasComp<HumanoidProfileComponent>(args.Target))
         {
             _stamina.TakeOvertimeStaminaDamage(args.Target, ent.Comp.StaminaDamageAmount);
-            _popup.PopupClient(Loc.GetString("wraith-decay-human-alert"), args.Target, args.Target);
+            _popup.PopupEntity(Loc.GetString("wraith-decay-human-alert"), args.Target, args.Target);
             args.Handled = true;
             return;
         }
@@ -35,6 +37,6 @@ public sealed partial class DecaySystem : EntitySystem
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("wraith-decay-nothing"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-decay-nothing"), ent.Owner, ent.Owner);
     }
 }

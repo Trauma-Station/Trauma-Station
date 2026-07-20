@@ -29,7 +29,7 @@
     - !type:NestedSelector # Trauma
       tableId: FillLockerWardenTrauma
     - id: FlashlightSeclite
-    #- id: WeaponDisabler # Goobstation (Disablers in belts)
+    #- id: WeaponDisabler # Trauma - disablers are in belts
     - id: ClothingBeltSecurityFilled
     - id: Flash
     - id: ClothingEyesGlassesSecurity
@@ -47,6 +47,8 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
+    - id: PlushieLizardJobWarden
+      prob: 0.02
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -74,8 +76,7 @@
       tableId: FillLockerSecurityTrauma
     - id: FlashlightSeclite
       prob: 0.8
-    #- id: WeaponDisabler # Goobstation (Disablers in belts)
-    #- id: WeaponTaser # Trauma - lol no
+    #- id: WeaponDisabler # Trauma - disablers are in belts
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic
@@ -93,6 +94,10 @@
       prob: 0.6
     - id: BookSpaceLaw
       prob: 0.5
+    - id: PlushieLizardJobSecuritycadet
+      prob: 0.02
+    - id: PlushieLizardJobSecurityofficer
+      prob: 0.02
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -108,23 +113,15 @@
   id: FillLockerBrigmedic # heavily goob edited
   table: !type:AllSelector
     children:
-    # <Goob>
-    - id: BoxAutoinjectorCartidges
-    - id: ClothingBackpackDuffelSurgeryFilled
-    - id: ClothingHandsGlovesLatex
-    #- id: ClothingEyesGlassesSecurity
-    #- id: WeaponDisabler
-    #- id: TrackingImplanter
-    #  amount: 2
-    # </Goob>
-    - id: ClothingOuterHardsuitBrigmedic
-    - id: OxygenTankFilled
-    - id: NitrogenTankFilled
+    - id: ClothingEyesGlassesSecurity
+    # <Trauma> - replaced all real gear with bones
+    - id: MaterialBones1 # Remains of a longrotten brigmedic.
+      amount: 5
+    # </Trauma>
     - id: ClothingUniformJumpskirtOfLife
       prob: 0.1
     - id: MedkitOxygenFilled
     - id: MedkitAdvancedFilled
-    - id: BoxBodyBag # Goob Station
 
 - type: entity
   id: LockerDetectiveFilled
@@ -140,6 +137,11 @@
   id: FillLockerDetective
   table: !type:AllSelector
     children:
+    # <Trauma>
+    - id: BloodTrak
+    - id: Betty
+    - id: BoxTapeRecorder
+    # </Trauma>
     - id: ClothingEyesGlassesNoir
     - id: ClothingHeadHatDetGadget
     - id: ClothingNeckTieDet
@@ -156,9 +158,8 @@
     - id: HoloprojectorSecurity
     - id: BoxEvidenceMarkers
     - id: HandLabeler
-    - id: BloodTrak # Goobstation
-    - id: Betty # Goobstation
-    - id: BoxTapeRecorder # DeltaV
+    - id: PlushieLizardJobDetective
+      prob: 0.02
 
 - type: entity
   id: ClosetBombFilled

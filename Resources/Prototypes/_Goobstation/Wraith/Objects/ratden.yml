@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: RatDen
   name: rat den
@@ -8,14 +10,21 @@
       components:
       - WraithMinion
     damage:
-      groups:
-        Brute: -3
-        Burn: -3
-        Airloss: -3
-        Toxin: -3
-        Genetic: -3
+      types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Caustic: -1
+        Asphyxiation: -1.5
+        Bloodloss: -1.5
+        Poison: -1.5
+        Radiation: -1.5
+        Cellular: -3
     delay: 9
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobMadRat
@@ -52,13 +61,14 @@
         maxDistance: 10
         variation: 0.1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 25
+          damage: 10
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]

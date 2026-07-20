@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Arraydeess <arraygitbash@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -18,14 +15,18 @@
     damage:
       types:
         Blunt: 4
-  - type: StaminaDamageOnCollide
-    damage: 10
   - type: Item
     size: Small
   - type: Boomerang # Goobstation
   - type: Construction
     graph: boomerangGraph
     node: boomerangFinish
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 250
+  - type: Tag
+    tags:
+    - Trash
 
 - type: entity
   id: boomerangIncomplete

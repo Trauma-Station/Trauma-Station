@@ -17,16 +17,15 @@
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Medical
-  - SOPChiefMedicalOfficer
-  - SOPMedical
   - Command
   - Chemicals
   - Virology
-  goobcoins: 40 #Goob content
   access:
+  # <Trauma>
+  - External
+  # </Trauma>
   - Medical
   - Command
   - Maintenance
@@ -34,20 +33,26 @@
   - ChiefMedicalOfficer
   - Brig
   - Cryogenics
-  - External # goobstation
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipChiefMedicalOfficer
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      - type: CommandStaff
       # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
       - type: SurgerySpeedModifier
         speedModifier: 2
       - type: CPRTraining
         reviveChance: 0.9 # excellent training and experience
         inhaleChance: 1 # great kisser too
       # </Trauma>
+      - type: CommandStaff
 
 - type: startingGear
   id: CMOGear
@@ -55,7 +60,6 @@
     id: CMOPDA
     ears: ClothingHeadsetAltMedical # Goobstation
     eyes: ClothingEyesGlassesMed # Goobstation
-    belt: ClothingBeltMedicalFilled
   storage:
     back:
     - Flash

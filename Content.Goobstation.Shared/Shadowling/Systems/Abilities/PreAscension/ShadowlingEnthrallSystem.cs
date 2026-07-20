@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling.Components;
@@ -16,12 +12,12 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
 /// <summary>
 /// This handles the Enthrall Abilities
 /// </summary>
-public sealed class ShadowlingEnthrallSystem : EntitySystem
+public sealed partial class ShadowlingEnthrallSystem : EntitySystem
 {
-    [Dependency] private readonly SharedShadowlingSystem _shadowling = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedShadowlingSystem _shadowling = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
@@ -66,7 +62,7 @@ public sealed class ShadowlingEnthrallSystem : EntitySystem
         // Basic Enthrall -> Can't melt Mindshields
         if (HasComp<MindShieldComponent>(target))
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-mindshield"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-mindshield"), uid, uid, PopupType.SmallCaution);
             return;
         }
 

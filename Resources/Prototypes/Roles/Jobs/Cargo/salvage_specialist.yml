@@ -12,17 +12,21 @@
   guides: # goobstation
   - Salvage
   - Cargo
-  goobcoins: 20 #Goob content
   supervisors: job-supervisors-qm
   access:
   - Cargo
   - Salvage
   - Maintenance
   - External
-  special: # Trauma - salv greentext
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipSalvageSpecialist
   - !type:AddObjectiveSpecial
     objectives:
     - SalvageMineObjective
+  # </Trauma>
 
 - type: startingGear
   id: SalvageSpecialistGear

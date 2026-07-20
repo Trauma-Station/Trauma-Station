@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Roles;
@@ -19,17 +15,16 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Shadowling.Rules;
 
-public sealed class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRuleComponent>
+public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRuleComponent>
 {
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly NpcFactionSystem _npc = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private NpcFactionSystem _npc = default!;
 
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_EinsteinEngines/Shadowling/shadowling.ogg");
 

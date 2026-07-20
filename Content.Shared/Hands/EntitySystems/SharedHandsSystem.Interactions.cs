@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Hands;
-using Content.Shared._Goobstation.Wizard.ArcaneBarrage;
+using Content.Trauma.Common.Hands;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Examine;
@@ -85,40 +85,18 @@ public abstract partial class SharedHandsSystem : EntitySystem
 
     private void SwapHandsPressed(ICommonSession? session)
     {
-        SwapHands(session, false);
+        if (session?.AttachedEntity is not { } player)
+            return;
+
+        SwapHands(player, true, false);
     }
 
     private void SwapHandsReversePressed(ICommonSession? session)
     {
-        SwapHands(session, true);
-    }
-
-    private void SwapHands(ICommonSession? session, bool reverse)
-    {
-        if (!TryComp(session?.AttachedEntity, out HandsComponent? component))
+        if (session?.AttachedEntity is not { } player)
             return;
 
-        if (!_actionBlocker.CanInteract(session.AttachedEntity.Value, null))
-            return;
-
-        // <Goobstation> - use public API
-        SwapHands((session.AttachedEntity.Value, component), reverse);
-        // </Goobstation>
-    }
-
-    /// <summary>
-    /// Goobstation - Moved out of SwapHands above for public API.
-    /// </summary>
-    public void SwapHands(Entity<HandsComponent> ent, bool reverse = false)
-    {
-        if (ent.Comp.ActiveHandId == null || ent.Comp.Hands.Count < 2)
-            return;
-
-        var currentIndex = ent.Comp.SortedHands.IndexOf(ent.Comp.ActiveHandId);
-        var newActiveIndex = (currentIndex + (reverse ? -1 : 1) + ent.Comp.Hands.Count) % ent.Comp.Hands.Count;
-        var nextHand = ent.Comp.SortedHands[newActiveIndex];
-
-        TrySetActiveHand((ent, ent), nextHand);
+        SwapHands(player, true, true);
     }
 
     private bool DropPressed(ICommonSession? session, EntityCoordinates coords, EntityUid netEntity)
@@ -128,13 +106,15 @@ public abstract partial class SharedHandsSystem : EntitySystem
             && TryGetActiveItem(session.AttachedEntity.Value, out var activeItem))
         {
             // Goobstation start
-            if (HasComp<DeleteOnDropAttemptComponent>(activeItem))
+            if (activeItem is { } activeItemNotNull)
             {
-                PredictedQueueDel(activeItem);
-                return false;
+                var dropEv = new ItemDropAttemptEvent();
+                RaiseLocalEvent(activeItemNotNull, ref dropEv);
+                if (dropEv.Cancelled)
+                    return false;
             }
 
-            if (session?.AttachedEntity is not {} ent)
+            if (session?.AttachedEntity is not { } ent)
                 return false;
 
             if (TryGetActiveItem(ent, out var item) && TryComp<VirtualItemComponent>(item, out var virtComp))

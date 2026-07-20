@@ -1,34 +1,23 @@
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Collections.Generic;
+// <Trauma>
+using Content.Trauma.Common.Wizard;
+// </Trauma>
 using System.Linq;
-using System.Threading;
-using Content.Server.Store.Systems;
+using Content.IntegrationTests.Fixtures;
+using Content.Server.PDA.Ringer;
 using Content.Server.Traitor.Uplink;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
+using Content.Shared.Mind;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
-//using Content.Shared.StoreDiscount.Components;
+using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.IntegrationTests.Tests;
 
-// gobo edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg.
-
 [TestFixture]
-public sealed class StoreTests
+public sealed class StoreTests : GameTest
 {
 
     [TestPrototypes]
@@ -44,12 +33,11 @@ public sealed class StoreTests
     - idcard
   - type: Pda
 ";
-    /* Goob - fuck newstore
-    do not touch unless you want to shoot yourself in the leg.
+
     [Test]
     public async Task StoreDiscountAndRefund()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var testMap = await pair.CreateTestMap();
@@ -71,6 +59,7 @@ public sealed class StoreTests
         EntityUid pda = default;
 
         var uplinkSystem = entManager.System<UplinkSystem>();
+        var ringerSystem = entManager.System<RingerSystem>();
 
         var listingPrototypes = prototypeManager.EnumeratePrototypes<ListingPrototype>()
                                                 .ToArray();
@@ -79,26 +68,33 @@ public sealed class StoreTests
         await server.WaitAssertion(() =>
         {
             var invSystem = entManager.System<InventorySystem>();
+            var mindSystem = entManager.System<SharedMindSystem>();
 
-            human = entManager.SpawnEntity("HumanUniformDummy", coordinates);
+            human = entManager.SpawnEntity("MobHuman", coordinates);
             uniform = entManager.SpawnEntity("UniformDummy", coordinates);
             pda = entManager.SpawnEntity("InventoryPdaDummy", coordinates);
 
             Assert.That(invSystem.TryEquip(human, uniform, "jumpsuit"));
             Assert.That(invSystem.TryEquip(human, pda, "id"));
 
-            FixedPoint2 originalBalance = 20;
-            uplinkSystem.AddUplink(human, originalBalance, null, true);
+            var mind = mindSystem.CreateMind(null);
+            mindSystem.TransferTo(mind, human, mind: mind);
 
-            var storeComponent = entManager.GetComponent<StoreComponent>(pda);
-            var discountComponent = entManager.GetComponent<StoreDiscountComponent>(pda);
+            FixedPoint2 originalBalance = 1000; // Trauma - It is so high to prevent this test from choosing listing that the store is unable to buy
+            uplinkSystem.AddUplink(human, originalBalance, out var notes, pda, true);
+
+            Assert.That(notes != null);
+            ringerSystem.TryMatchRingtoneToStore(notes, out var storeEnt);
+            Assert.That(storeEnt.HasValue);
+            var storeComponent = entManager.GetComponent<StoreComponent>(storeEnt.Value);
+            var discountComponent = entManager.GetComponent<StoreDiscountComponent>(storeEnt.Value);
             Assert.That(
                 discountComponent.Discounts,
-                Has.Exactly(3).Items,
-                $"After applying discount total discounted items count was expected to be '3' "
+                Has.Exactly(8).Items,
+                $"After applying discount total discounted items count was expected to be '8' "
                 + $"but was actually {discountComponent.Discounts.Count}- this can be due to discount "
                 + $"categories settings (maxItems, weight) not being realistically set, or default "
-                + $"discounted count being changed from '3' in StoreDiscountSystem.InitializeDiscounts."
+                + $"discounted count being changed from '8' in StoreDiscountSystem.InitializeDiscounts."
             );
             var discountedListingItems = storeComponent.FullListingsCatalog
                                                        .Where(x => x.IsCostModified)
@@ -112,7 +108,13 @@ public sealed class StoreTests
                 + $"flag as 'true'. This marks the fact that cost modifier of discount is not applied properly!"
             );
 
-             Refund action requests re-generation of listing items so we will be re-acquiring items from component a lot of times.
+            // The storeComponent returns discounted items with conditions randomly, so we remove these to sanitize the data.
+            foreach (var discountedItem in discountedListingItems)
+            {
+                discountedItem.Conditions = null;
+            }
+
+            // Refund action requests re-generation of listing items so we will be re-acquiring items from component a lot of times.
             var itemIds = discountedListingItems.Select(x => x.ID);
             foreach (var itemId in itemIds)
             {
@@ -127,41 +129,44 @@ public sealed class StoreTests
 
                     var prototypeCost = prototype.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     var discountDownTo = prototype.DiscountDownTo[UplinkSystem.TelecrystalCurrencyPrototype];
-                    Assert.That(plainDiscountedCost.Value, Is.GreaterThanOrEqualTo(discountDownTo.Value), $"Expected discounted cost of {discountedListingItem.Name} to be greater then DiscountDownTo value."); // Goobstation
-                    Assert.That(plainDiscountedCost.Value, Is.LessThan(prototypeCost.Value), $"Expected discounted cost of {discountedListingItem.Name} to be lower then prototype cost."); // Goobstation
+                    Assert.That(plainDiscountedCost.Value, Is.GreaterThanOrEqualTo(discountDownTo.Value), "Expected discounted cost to be greater then DiscountDownTo value.");
+                    Assert.That(plainDiscountedCost.Value, Is.LessThan(prototypeCost.Value), "Expected discounted cost to be lower then prototype cost.");
 
 
-                    var buyMsg = new StoreBuyListingMessage(discountedListingItem.ID){Actor = human};
-                    server.EntMan.EventBus.RaiseLocalEvent(pda, buyMsg);
+                    var buyMsg = new StoreBuyListingMessage(discountedListingItem.ID, null){Actor = human};
+                    server.EntMan.EventBus.RaiseLocalEvent(storeEnt.Value, buyMsg);
 
                     var newBalance = storeComponent.Balance[UplinkSystem.TelecrystalCurrencyPrototype];
-                    Assert.That(newBalance.Value, Is.EqualTo((originalBalance - plainDiscountedCost).Value), $"Expected to have balance reduced by discounted cost: {discountedListingItem.Name}"); // Goobstation
+                    Assert.That(newBalance.Value, Is.EqualTo((originalBalance - plainDiscountedCost).Value), "Expected to have balance reduced by discounted cost");
                     Assert.That(
                         discountedListingItem.IsCostModified,
                         Is.False,
-                        $"Expected item cost of {discountedListingItem.Name} to not be modified after Buying discounted item." // Goobstation
+                        $"Expected item cost to not be modified after Buying discounted item."
                     );
                     var costAfterBuy = discountedListingItem.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     Assert.That(costAfterBuy.Value, Is.EqualTo(prototypeCost.Value), "Expected cost after discount refund to be equal to prototype cost.");
 
-                    var refundMsg = new StoreRequestRefundMessage { Actor = human };
-                    server.EntMan.EventBus.RaiseLocalEvent(pda, refundMsg);
+                    var refundMsg = new StoreRefundAllListingsMessage { Actor = human }; // Trauma
+                    server.EntMan.EventBus.RaiseLocalEvent(storeEnt.Value, refundMsg);
 
-                     get refreshed item after refund re-generated items
+                    // get refreshed item after refund re-generated items
                     discountedListingItem = storeComponent.FullListingsCatalog.First(x => x.ID == itemId);
+
+                    // The storeComponent can give a discounted item a condition at random, so we remove it to sanitize the data.
+                    discountedListingItem.Conditions = null;
 
                     var afterRefundBalance = storeComponent.Balance[UplinkSystem.TelecrystalCurrencyPrototype];
                     Assert.That(afterRefundBalance.Value, Is.EqualTo(originalBalance.Value), "Expected refund to return all discounted cost value.");
                     Assert.That(
                         discountComponent.Discounts.First(x => x.ListingId == discountedListingItem.ID).Count,
                         Is.EqualTo(0),
-                        $"Discounted count should still be zero even after refund: {discountedListingItem.Name}." // Goobstation
+                        "Discounted count should still be zero even after refund."
                     );
 
                     Assert.That(
                         discountedListingItem.IsCostModified,
                         Is.False,
-                        $"Expected item cost of {discountedListingItem.Name} to not be modified after Buying discounted item (even after refund was done)." // Goobstation
+                        $"Expected item cost to not be modified after Buying discounted item (even after refund was done)."
                     );
                     var costAfterRefund = discountedListingItem.Cost[UplinkSystem.TelecrystalCurrencyPrototype];
                     Assert.That(costAfterRefund.Value, Is.EqualTo(prototypeCost.Value), "Expected cost after discount refund to be equal to prototype cost.");
@@ -169,8 +174,5 @@ public sealed class StoreTests
             }
 
         });
-
-        await pair.CleanReturnAsync();
     }
-    */
 }

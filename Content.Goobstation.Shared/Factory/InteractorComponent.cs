@@ -1,12 +1,7 @@
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Factory;
 
@@ -30,6 +25,12 @@ public sealed partial class InteractorComponent : Component
     public ProtoId<SinkPortPrototype> UseInHandPort = "UseInHand";
 
     /// <summary>
+    /// Signal port to toggle or enable/disable <see cref="HarmMode"/>.
+    /// </summary>
+    [DataField]
+    public ProtoId<SinkPortPrototype> HarmModePort = "HarmMode";
+
+    /// <summary>
     /// Whether to use alt interaction, i.e. use the highest priority verb on the target entity.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -40,6 +41,12 @@ public sealed partial class InteractorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool UseInHand;
+
+    /// <summary>
+    /// If the interactor should act as if it is in harmmode and should hit targets with its held item.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool HarmMode;
 }
 
 [Serializable, NetSerializable]

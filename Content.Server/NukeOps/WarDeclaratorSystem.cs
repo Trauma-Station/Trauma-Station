@@ -1,20 +1,7 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kot <1192090+koteq@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rainfall <rainfey0+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rainfey <rainfey0+github@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Server.Audio;
+using Content.Shared.Audio;
+// </Trauma>
 using Content.Goobstation.Shared.SpecialAnimation;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -35,16 +22,19 @@ namespace Content.Server.NukeOps;
 /// <summary>
 ///     This handles nukeops special war mode declaration device and directly using nukeops game rule
 /// </summary>
-public sealed class WarDeclaratorSystem : EntitySystem
+public sealed partial class WarDeclaratorSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly SharedSpecialAnimationSystem _specialAnimation = default!; // Goob edit
+    // <Trauma>
+    [Dependency] private SharedSpecialAnimationSystem _specialAnimation = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    // </Trauma>
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
 
     public override void Initialize()
     {
@@ -96,7 +86,10 @@ public sealed class WarDeclaratorSystem : EntitySystem
             var title = Loc.GetString(ent.Comp.SenderTitle);
             _chat.DispatchGlobalAnnouncement(ent.Comp.Message, title, true, ent.Comp.Sound, ent.Comp.Color);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has declared war with this text: {ent.Comp.Message}");
-            _specialAnimation.PlayAnimationFiltered(args.Actor, Filter.Broadcast(), "NukeOpsWarAnimation"); // Goob edit
+            // <Trauma>
+            _specialAnimation.PlayAnimationFiltered(args.Actor, Filter.Broadcast(), "NukeOpsWarAnimation");
+            _sound.DispatchStationEventMusic(ent, ent.Comp.Music, StationEventMusicType.Nuke, ent.Comp.Music.Params);
+            // </Trauma>
         }
 
         UpdateUI(ent, ev.Status);

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Robust.Shared.Serialization;
 using Content.Shared.Cargo.Prototypes;
 using Robust.Shared.Prototypes;
@@ -31,9 +23,17 @@ public readonly partial record struct CargoBountyData
     [DataField(required: true)]
     public ProtoId<CargoBountyPrototype> Bounty { get; init; } = string.Empty;
 
-    public CargoBountyData(CargoBountyPrototype bounty, int uniqueIdentifier)
+    /// <summary>
+    /// Trauma - The reward for this bounty, based off of the prototype.
+    /// </summary>
+    [DataField]
+    public int Reward { get; init; }
+
+    public CargoBountyData(CargoBountyPrototype bounty, int uniqueIdentifier,
+        int reward) // Trauma
     {
         Bounty = bounty.ID;
         Id = $"{bounty.IdPrefix}{uniqueIdentifier:D3}";
+        Reward = reward; // Trauma
     }
 }

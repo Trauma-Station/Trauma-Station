@@ -1,16 +1,5 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 amogus <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Common.Pirates;
 using Content.Goobstation.Server.Pirates.GameTicking.Rules;
 using Content.Goobstation.Server.Pirates.Objectives;
@@ -32,14 +21,14 @@ namespace Content.Goobstation.Server.Pirates.Siphon;
 
 public sealed partial class ResourceSiphonSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationAnchorSystem _anchor = default!;
-    [Dependency] private readonly CargoSystem _cargo = default!;
-    [Dependency] private readonly PricingSystem _pricing = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationAnchorSystem _anchor = default!;
+    [Dependency] private CargoSystem _cargo = default!;
+    [Dependency] private PricingSystem _pricing = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     private float TickTimer = 1f;
 

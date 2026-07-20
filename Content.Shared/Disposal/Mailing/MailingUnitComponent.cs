@@ -1,11 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Disposal.Mailing;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Disposal.Components;
 
@@ -31,4 +26,39 @@ public sealed partial class MailingUnitComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public string? Tag;
+}
+
+/// <summary>
+/// Message sent from the server to the client to update the UI of mailing units.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MailingUnitBoundUserInterfaceState : BoundUserInterfaceState;
+
+/// <summary>
+/// Sent before the disposal unit flushes it's contents.
+/// Allows adding tags for sorting and preventing the disposal unit from flushing.
+/// </summary>
+public sealed class BeforeDisposalFlushEvent : CancellableEntityEventArgs
+{
+    public readonly List<string> Tags = new();
+}
+
+/// <summary>
+/// Message data sent from client to server when a disposal unit ui button is pressed.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class TargetSelectedMessage : BoundUserInterfaceMessage
+{
+    public readonly string? Target;
+
+    public TargetSelectedMessage(string? target)
+    {
+        Target = target;
+    }
+}
+
+[Serializable, NetSerializable]
+public enum MailingUnitUiKey : byte
+{
+    Key
 }

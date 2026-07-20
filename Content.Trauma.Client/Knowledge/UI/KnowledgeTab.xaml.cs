@@ -1,0 +1,128 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Client.UserInterface.Controls;
+
+namespace Content.Trauma.Client.Knowledge.UI;
+
+[GenerateTypedNameReferences]
+public sealed partial class KnowledgeTab : Control
+{
+    [Dependency] private IEntitySystemManager _system = default!;
+    private readonly KnowledgeSystem _knowledge;
+    private readonly SpriteSystem _sprite;
+
+    public KnowledgeTab()
+    {
+        RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
+
+        _knowledge = _system.GetEntitySystem<KnowledgeSystem>();
+        _sprite = _system.GetEntitySystem<SpriteSystem>();
+    }
+
+    // TODO: update UI whenever knowledge changes
+    /// <summary>
+    /// Updates the specificied knowledge tab with the player's current martial arts knowledge.
+    /// </summary>
+    public void UpdateKnowledgeTab(EntityUid player)
+    {
+        TabContainer.SetTabTitle(this, Loc.GetString("trauma-knowledge-title"));
+
+        KnowledgeBox.RemoveAllChildren();
+        KnowledgePlaceholder.Visible = true;
+
+        if (_knowledge.GrabAllKnowledge(player) is not { } groups)
+            return;
+
+        KnowledgePlaceholder.Visible = false;
+        KnowledgeBox.SeparationOverride = 10;
+        foreach (var (groupId, conditions) in groups)
+        {
+            var boxContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                ToolTip = conditions.Desc,
+                MouseFilter = MouseFilterMode.Pass, // for the tooltip to exist
+            };
+
+            var textRect = new TextureRect
+            {
+                Margin = new Thickness(0, 8, 0, 0),
+            };
+            if (conditions.Sprite is { } sprite)
+                textRect.Texture = _sprite.Frame0(sprite);
+
+            var box = new BoxContainer
+            {
+                MinSize = new System.Numerics.Vector2(10, 0),
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+            };
+
+            var skillText = new RichTextLabel
+            {
+                Text = conditions.Name,
+                Modulate = conditions.Color,
+                SetWidth = 325,
+                HorizontalAlignment = HAlignment.Left,
+            };
+
+            var masteryText = new RichTextLabel
+            {
+                Text = conditions.LevelString,
+                Modulate = conditions.Color,
+                SetWidth = 325,
+                HorizontalAlignment = HAlignment.Left,
+                StyleClasses = { "LabelSubText" }
+            };
+
+            var progressBar = new ProgressBar
+            {
+                MinValue = 0,
+                MaxValue = conditions.ExpCost,
+                Value = conditions.CurrentExp,
+                MinSize = new System.Numerics.Vector2(200, 20)
+            };
+
+            var horizontalContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal
+            };
+
+            box.AddChild(skillText);
+            box.AddChild(masteryText);
+            horizontalContainer.AddChild(box);
+            horizontalContainer.AddChild(progressBar);
+            boxContainer.AddChild(textRect);
+            boxContainer.AddChild(horizontalContainer);
+
+            //Find category.
+            Collapsible? groupContainer = null;
+            foreach (Control? child in KnowledgeBox.Children)
+            {
+                if (child is not Collapsible childNotNull || childNotNull.Name != groupId.Id)
+                    continue;
+
+                groupContainer = childNotNull;
+            }
+
+            // Create category if it doesnt exist
+            if (groupContainer is not { })
+            {
+                var body = new CollapsibleBody();
+                var innerStack = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    Name = "InnerStack",
+                    SeparationOverride = 10
+                };
+                body.AddChild(innerStack);
+                groupContainer = new Collapsible(groupId.Id, body);
+                groupContainer.Name = groupId.Id;
+                KnowledgeBox.AddChild(groupContainer);
+            }
+
+            // Add skill to category.
+            groupContainer.Body?.GetChild(0)?.AddChild(boxContainer);
+        }
+    }
+}

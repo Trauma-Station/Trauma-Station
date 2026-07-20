@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: antag
@@ -12,11 +8,6 @@
   objective: roles-antag-devil-description
   guides: [ Devil ]
   requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 30h
-  - !type:DepartmentTimeRequirement
-    department: Command
-    time: 5h
   - !type:RoleTimeRequirement
     role: JobLawyer
     time: 1h
@@ -24,6 +15,17 @@
     inverted: true
     species:
     - Plasmaman
+  creditImage: /Textures/_Trauma/EndCredits/Antags/devil.png
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Devil
+  prefRoles: [ Devil ]
+  jobBlacklist: [ Chaplain, Mime ] # chaplain is obvious, mime can't write.
+  mindRoles: [ DevilMindRole ]
+  startingGear: DevilStartingGear
+  mindComponents:
+  - type: Evil
 
 - type: startingGear
   id: DevilStartingGear
@@ -33,3 +35,12 @@
     - PenDevil
     - ClothingEyesGlassesSunglasses
     - ClothingUniformJumpsuitDevil
+
+- type: antagSmite
+  id: Devil
+  antag: Devil
+  rule: Devil
+  ruleComp: DevilRule
+  icon:
+    sprite: _Goobstation/Actions/devil.rsi
+    state: summon-contract

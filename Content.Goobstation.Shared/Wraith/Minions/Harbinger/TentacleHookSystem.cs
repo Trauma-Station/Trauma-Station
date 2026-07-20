@@ -1,5 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;
@@ -8,21 +10,18 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using System.Numerics;
-using Content.Shared.Stunnable;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Harbinger;
 
-public sealed class TentacleHookSystem : EntitySystem
+public sealed partial class TentacleHookSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     private const string TentacleJoint = "grappling";
 

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Wrexbe (Josh) <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
@@ -17,19 +9,9 @@ namespace Content.Shared.Objectives.Systems;
 /// <summary>
 /// Provides API for creating and interacting with objectives.
 /// </summary>
-public abstract class SharedObjectivesSystem : EntitySystem
+public abstract partial class SharedObjectivesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-
-    private EntityQuery<MetaDataComponent> _metaQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _metaQuery = GetEntityQuery<MetaDataComponent>();
-    }
+    [Dependency] private SharedMindSystem _mind = default!;
 
     /// <summary>
     /// Checks requirements and duplicate objectives to see if an objective can be assigned.
@@ -47,10 +29,10 @@ public abstract class SharedObjectivesSystem : EntitySystem
         // only check for duplicate prototypes if it's unique
         if (comp.Unique)
         {
-            var proto = _metaQuery.GetComponent(uid).EntityPrototype?.ID;
+            var proto = MetaData(uid).EntityPrototype?.ID;
             foreach (var objective in mind.Objectives)
             {
-                if (_metaQuery.GetComponent(objective).EntityPrototype?.ID == proto)
+                if (MetaData(objective).EntityPrototype?.ID == proto)
                     return false;
             }
         }
@@ -65,7 +47,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
     /// </summary>
     public EntityUid? TryCreateObjective(EntityUid mindId, MindComponent mind, string proto)
     {
-        if (!_protoMan.HasIndex<EntityPrototype>(proto))
+        if (!ProtoMan.HasIndex<EntityPrototype>(proto))
             return null;
 
         var uid = Spawn(proto);
@@ -135,8 +117,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
             return null;
         }
 
-        return new ObjectiveInfo(title, description, comp.Icon, progress,
-            comp.ServerCurrency, comp.ServerCurrencyRewardPartial); // Goob
+        return new ObjectiveInfo(title, description, comp.Icon, progress);
     }
 
     /// <summary>

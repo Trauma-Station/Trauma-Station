@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Goobstation.Shared.Illusion;
 using Content.Server.Atmos.Components;
@@ -7,13 +9,13 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Popups;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Cloning;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -31,24 +33,24 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Server.Illusion;
 
-public sealed class IllusionSystem : EntitySystem
+public sealed partial class IllusionSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "Illusion";
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "IllusionCompound";
@@ -62,7 +64,6 @@ public sealed class IllusionSystem : EntitySystem
         typeof(ReproductiveComponent),
         typeof(ReproductivePartnerComponent),
         typeof(TemperatureComponent),
-        typeof(ConsciousnessComponent),
         typeof(PacifiedComponent),
         typeof(BloodstreamComponent),
     ];
@@ -124,7 +125,7 @@ public sealed class IllusionSystem : EntitySystem
             (_threshold.TryGetThresholdForState(user, MobState.Critical, out var hp, thresholds) ||
              _threshold.TryGetThresholdForState(user, MobState.Dead, out hp, thresholds)))
         {
-            var damage = damageable.TotalDamage;
+            var damage = _damage.GetTotalDamage((user, damageable));
             var totalHp = hp - damage;
             if (totalHp <= 0)
             {

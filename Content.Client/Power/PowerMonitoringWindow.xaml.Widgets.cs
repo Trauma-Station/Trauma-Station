@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Crotalus <crotalus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Partmedia <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pathetic meowmeow <uhhadd@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Stylesheets;
 using Content.Shared.Power;
 using Robust.Client.Graphics;
@@ -108,11 +95,12 @@ public sealed partial class PowerMonitoringWindow
             button.TextureRect.Texture = _spriteSystem.Frame0(new SpriteSpecifier.Rsi(new ResPath(entry.MetaData.Value.SpritePath), entry.MetaData.Value.SpriteState));
 
         // Update name
-        var name = Loc.GetString(entry.MetaData.Value.EntityName);
+        // no Loc.GetString, as the name already gets localized in PowerMonitoringConsoleSystem
+        var name = entry.MetaData.Value.EntityName;
         button.NameLocalized.Text = name;
 
         // Update tool tip
-        button.ToolTip = Loc.GetString(name);
+        button.ToolTip = name;
 
         // Update power value
         // Don't use SI prefixes, just give the number in W, so that it is readily apparent which consumer is using a lot of power.

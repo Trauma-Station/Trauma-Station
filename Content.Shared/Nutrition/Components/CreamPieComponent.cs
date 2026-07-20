@@ -1,32 +1,39 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Nutrition.EntitySystems;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
-namespace Content.Shared.Nutrition.Components
+namespace Content.Shared.Nutrition.Components;
+
+/// <summary>
+/// Component used for banana cream pies.
+/// These can be thrown at someone to stun them and cream their face.
+/// </summary>
+[Access(typeof(SharedCreamPieSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class CreamPieComponent : Component
 {
-    [Access(typeof(SharedCreamPieSystem))]
-    [RegisterComponent]
-    public sealed partial class CreamPieComponent : Component
-    {
-        [DataField("paralyzeTime")]
-        public float ParalyzeTime { get; private set; } = 1f;
+    /// <summary>
+    /// The time being hit by this entity will stun you.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(1);
 
-        [DataField("sound")]
-        public SoundSpecifier Sound { get; private set; } = new SoundCollectionSpecifier("desecration");
+    /// <summary>
+    /// The sound to play when hitting something.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier Sound = new SoundCollectionSpecifier("desecration", AudioParams.Default.WithVariation(0.125f));
 
-        [ViewVariables]
-        public bool Splatted { get; set; } = false;
+    /// <summary>
+    /// Has this pie been splatted by hitting something?
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Splatted = false;
 
-        public const string PayloadSlotName = "payloadSlot";
-    }
+    /// <summary>
+    /// Items in this container will be triggered when the pie hits something.
+    /// This allows throwable C4 pies or similar.
+    /// </summary>
+    [ViewVariables]
+    public const string PayloadSlotName = "payloadSlot";
 }

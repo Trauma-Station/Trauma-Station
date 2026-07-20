@@ -1,18 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: BaseMindRole
   name: Mind Role
@@ -279,7 +264,7 @@
   name: Syndicate Reinforcement Role
   components:
   - type: MindRole
-    roleType: Familiar
+    roleType: TeamAntagonist # Trauma - was Familiar
     subtype: role-subtype-traitor-reinforcement
 
 
@@ -338,6 +323,24 @@
   id: MindRoleChangeling
   name: Changeling Role
   components:
+  # <Trauma>
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+        interactionRange: 0 # no range or validation because it's on the role and would immediately get closed
+        requireInputValidation: false
+  - type: Store
+    name: store-preset-name-changeling
+    categories:
+    - ChangelingAbilityCombat
+    - ChangelingAbilitySting
+    - ChangelingAbilityUtility
+    currencyWhitelist:
+    - EvolutionPoint
+    balance:
+      EvolutionPoint: 6
+  # </Trauma>
   - type: MindRole
     antagPrototype: Changeling
     exclusiveAntag: true

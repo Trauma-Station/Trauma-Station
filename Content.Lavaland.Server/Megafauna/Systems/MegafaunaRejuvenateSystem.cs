@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Administration.Systems;
@@ -9,9 +6,9 @@ using Content.Lavaland.Shared.Megafauna.Events;
 
 namespace Content.Lavaland.Server.Megafauna.Systems;
 
-public sealed class MegafaunaRejuvenateSystem : EntitySystem
+public sealed partial class MegafaunaRejuvenateSystem : EntitySystem
 {
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
 
     public override void Initialize()
     {

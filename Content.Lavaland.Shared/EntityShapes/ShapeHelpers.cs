@@ -1,15 +1,12 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Robust.Shared.Random;
 // ReSharper disable PossibleLossOfFraction
 
 namespace Content.Lavaland.Shared.EntityShapes;
 
+// TODO: make all this shit add to a List<Vector2> param not this slop
 /// <summary>
 /// Some static helper methods that help to create some tile patterns with ease.
 /// Allows to reuse already written methods for generating shapes, so making new
@@ -143,7 +140,7 @@ public static class ShapeHelpers
     public static IEnumerable<Vector2> MakeBoxChanceRandom(
         Vector2 center,
         int range,
-        System.Random random,
+        IRobustRandom random,
         float filledSquareChance = 0.3f,
         float stepSize = 1)
     {
@@ -164,7 +161,7 @@ public static class ShapeHelpers
     public static IEnumerable<Vector2> MakeBoxCountRandom(
         Vector2 center,
         int range,
-        System.Random random,
+        IRobustRandom random,
         int removeAmount = 0,
         float stepSize = 1)
     {

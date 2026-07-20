@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## PARITY
 
 - type: scrollPrayer
@@ -34,15 +36,15 @@
     - type: Devourer # vore
       foodPreferenceWhitelist:
         components:
-        - HumanoidAppearance
+        - HumanoidProfile
       stomachStorageWhitelist:
         components:
-        - HumanoidAppearance
+        - HumanoidProfile
       chemical: Ichor
       healRate: 7.5
       whitelist:
         components:
-        - HumanoidAppearance # can only eat people/monkey
+        - HumanoidProfile # can only eat people/monkey
 
 - type: scrollPrayer
   id: Lockpicking
@@ -55,10 +57,10 @@
   id: LegSweep
   verb: TEACH
   subjects: [ "LEG SWEEP" ]
-  effects:
-  - !type:AddComponents
-    components:
-    - type: KravMaga # it has leg sweep
+  # effects:
+  # - !type:AddComponents
+    # components:
+    # - type: KravMaga # it has leg sweep
 
 - type: scrollPrayer
   id: Steal
@@ -106,7 +108,7 @@
   effects:
   - !type:MakeTraitor
     probability: 0.65
-    rule: TraitorReinforcement # no uplink chud
+    rule: TraitorPrayer # no uplink chud
 
 - type: scrollPrayer
   id: DAGD
@@ -151,6 +153,7 @@
   - !type:AddComponents
     components:
     - type: BloodCrawl
+      jaunt: BloodCrawlJauntPrayer
       blood:
       - Blood
       - AmmoniaBlood

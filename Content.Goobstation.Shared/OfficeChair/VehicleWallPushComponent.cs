@@ -1,12 +1,8 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.OfficeChair;
 

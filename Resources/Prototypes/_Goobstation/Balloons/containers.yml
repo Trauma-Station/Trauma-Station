@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Arraydeess <arraygitbash@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: damageContainer
@@ -10,16 +7,16 @@
   - Brute
   - Genetic
   - Toxin
+
 - type: damageContainer
   id: BlackBalloon
   supportedGroups:
   - Brute
   - Genetic
   - Toxin
-
   supportedTypes:
-    - Cold
-    - Caustic
+  - Cold
+  - Caustic
 
 - type: damageContainer
   id: SteelBalloon
@@ -37,8 +34,8 @@
   - Toxin
   - Electronic
   supportedTypes:
-    - Heat
-    - Caustic
+  - Heat
+  - Caustic
 
 - type: damageContainer
   id: ZebraBalloon

@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text.RegularExpressions;
@@ -17,27 +13,25 @@ using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Supermatter.Components;
+using Content.Lavaland.Shared.Chasm;
+using Content.Medical.Common.Body;
+using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Wounds;
 using Content.Server.Actions;
 using Content.Server.Antag.Components;
-using Content.Server.Atmos.Components;
-using Content.Server.Body.Systems;
-using Content.Shared.Destructible;
 using Content.Server.Hands.Systems;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
-using Content.Server.Temperature.Components;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Lavaland.Shared.Chasm;
-using Content.Shared._Shitmed.Body.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Body;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Destructible;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
@@ -50,10 +44,10 @@ using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Zombies;
+using Content.Trauma.Common.Silicon;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -61,25 +55,26 @@ namespace Content.Goobstation.Server.Devil;
 
 public sealed partial class DevilSystem : EntitySystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly PolymorphSystem _poly = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly DevilContractSystem _contract = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PossessionSystem _possession = default!;
-    [Dependency] private readonly CondemnedSystem _condemned = default!;
-    [Dependency] private readonly MobStateSystem _state = default!;
-    [Dependency] private readonly JitteringSystem _jittering = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private PolymorphSystem _poly = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private DevilContractSystem _contract = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PossessionSystem _possession = default!;
+    [Dependency] private CondemnedSystem _condemned = default!;
+    [Dependency] private MobStateSystem _state = default!;
+    [Dependency] private JitteringSystem _jittering = default!;
 
     private static readonly Regex WhitespaceAndNonWordRegex = new(@"[\s\W]+", RegexOptions.Compiled);
 
@@ -117,7 +112,7 @@ public sealed partial class DevilSystem : EntitySystem
         EnsureComp<BreathingImmunityComponent>(devil);
         EnsureComp<PressureImmunityComponent>(devil);
         EnsureComp<ActiveListenerComponent>(devil);
-        EnsureComp<WeakToHolyComponent>(devil).AlwaysTakeHoly = true;
+        EnsureComp<AlwaysTakeHolyComponent>(devil);
         EnsureComp<CrematoriumImmuneComponent>(devil);
         EnsureComp<AntagImmuneComponent>(devil);
         EnsureComp<SupermatterImmuneComponent>(devil);
@@ -135,13 +130,10 @@ public sealed partial class DevilSystem : EntitySystem
        _damageable.SetDamageModifierSetId(devil.Owner, devil.Comp.DevilDamageModifierSet);
 
         // No decapitating the devil
-        foreach (var part in _body.GetBodyChildren(devil))
+        foreach (var part in _body.GetOrgans<WoundableComponent>(devil.Owner))
         {
-            if (!TryComp(part.Id, out WoundableComponent? woundable))
-                continue;
-
-            woundable.CanRemove = false;
-            Dirty(part.Id, woundable);
+            part.Comp.CanRemove = false;
+            Dirty(part);
         }
 
         // Add base actions
@@ -182,7 +174,7 @@ public sealed partial class DevilSystem : EntitySystem
         var popup = Loc.GetString($"devil-power-level-increase-{args.NewLevel.ToString().ToLowerInvariant()}");
         _popup.PopupEntity(popup, args.User, args.User, PopupType.Large);
 
-        if (!_prototype.TryIndex(devil.Comp.DevilBranchPrototype, out var proto))
+        if (!ProtoMan.TryIndex(devil.Comp.DevilBranchPrototype, out var proto))
             return;
 
         foreach (var ability in proto.PowerActions)
@@ -219,7 +211,7 @@ public sealed partial class DevilSystem : EntitySystem
         // Other Devils and entities without souls have no authority over you.
         if (HasComp<DevilComponent>(args.Source)
         || HasComp<CondemnedComponent>(args.Source)
-        || HasComp<SiliconComponent>(args.Source)
+        || _silicon.IsSilicon(args.Source)
         || args.Source == devil.Owner)
             return;
 
@@ -232,27 +224,28 @@ public sealed partial class DevilSystem : EntitySystem
         // hardcoded, but this is just flavor so who cares :godo:
         _jittering.DoJitter(devil, TimeSpan.FromSeconds(4), true);
 
-        if (_timing.CurTime < devil.Comp.LastTriggeredTime + devil.Comp.CooldownDuration)
+        var now = _timing.CurTime;
+        if (now < devil.Comp.LastTriggeredTime + devil.Comp.CooldownDuration)
             return;
 
-        devil.Comp.LastTriggeredTime = _timing.CurTime;
+        devil.Comp.LastTriggeredTime = now;
 
+        var key = "devil-true-name-heard";
         if (HasComp<BibleUserComponent>(args.Source))
         {
             _damageable.ChangeDamage(devil.Owner, devil.Comp.DamageOnTrueName * devil.Comp.BibleUserDamageMultiplier, true);
             _stun.TryAddParalyzeDuration(devil, devil.Comp.ParalyzeDurationOnTrueName * devil.Comp.BibleUserDamageMultiplier);
 
-            var popup = Loc.GetString("devil-true-name-heard-chaplain", ("speaker", args.Source), ("target", devil));
-            _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
+            key = "devil-true-name-heard-chaplain";
         }
         else
         {
             _damageable.ChangeDamage(devil.Owner, devil.Comp.DamageOnTrueName, true);
             _stun.TryAddParalyzeDuration(devil, devil.Comp.ParalyzeDurationOnTrueName);
-
-            var popup = Loc.GetString("devil-true-name-heard", ("speaker", args.Source), ("target", devil));
-            _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
         }
+
+        var popup = Loc.GetString(key, ("speaker", args.Source), ("target", devil));
+        _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
     }
 
     private void OnExorcismDoAfter(Entity<DevilComponent> devil, ref ExorcismDoAfterEvent args)
@@ -296,8 +289,8 @@ public sealed partial class DevilSystem : EntitySystem
     {
         var comp = ent.Comp;
         // Generate true name.
-        var firstNameOptions = _prototype.Index(comp.FirstNameTrue);
-        var lastNameOptions = _prototype.Index(comp.LastNameTrue);
+        var firstNameOptions = ProtoMan.Index(comp.FirstNameTrue);
+        var lastNameOptions = ProtoMan.Index(comp.LastNameTrue);
 
         comp.TrueName = string.Concat(_random.Pick(firstNameOptions.Values), " ", _random.Pick(lastNameOptions.Values));
         Dirty(ent);

@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 chavonadelal <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.CCVar;
 using Content.Shared.Dataset;
@@ -26,8 +13,7 @@ namespace Content.Shared.Salvage;
 
 public abstract partial class SharedSalvageSystem : EntitySystem
 {
-    [Dependency] protected readonly IConfigurationManager CfgManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] protected IConfigurationManager CfgManager = default!;
 
     /// <summary>
     /// Main loot table for salvage expeditions.
@@ -36,7 +22,8 @@ public abstract partial class SharedSalvageSystem : EntitySystem
 
     public string GetFTLName(LocalizedDatasetPrototype dataset, int seed)
     {
-        var random = new System.Random(seed);
+        var random = new RobustRandom();
+        random.SetSeed(seed);
         return $"{Loc.GetString(dataset.Values[random.Next(dataset.Values.Count)])}-{random.Next(10, 100)}-{(char) (65 + random.Next(26))}";
     }
 
@@ -44,7 +31,8 @@ public abstract partial class SharedSalvageSystem : EntitySystem
     {
         // This is on shared to ensure the client display for missions and what the server generates are consistent
         var modifierBudget = difficulty.ModifierBudget;
-        var rand = new System.Random(seed);
+        var rand = new RobustRandom();
+        rand.SetSeed(seed);
 
         // Run budget in order of priority
         // - Biome
@@ -55,7 +43,7 @@ public abstract partial class SharedSalvageSystem : EntitySystem
         var temp = GetBiomeMod<SalvageTemperatureMod>(biome.ID, rand, ref modifierBudget);
         var air = GetBiomeMod<SalvageAirMod>(biome.ID, rand, ref modifierBudget);
         var dungeon = GetBiomeMod<SalvageDungeonModPrototype>(biome.ID, rand, ref modifierBudget);
-        var factionProtos = _proto.EnumeratePrototypes<SalvageFactionPrototype>().ToList();
+        var factionProtos = ProtoMan.EnumeratePrototypes<SalvageFactionPrototype>().ToList();
         factionProtos.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
         var faction = factionProtos[rand.Next(factionProtos.Count)];
 
@@ -82,9 +70,9 @@ public abstract partial class SharedSalvageSystem : EntitySystem
         return new SalvageMission(seed, dungeon.ID, faction.ID, biome.ID, air.ID, temp.Temperature, light.Color, duration, mods);
     }
 
-    public T GetBiomeMod<T>(string biome, System.Random rand, ref float rating) where T : class, IPrototype, IBiomeSpecificMod
+    public T GetBiomeMod<T>(string biome, IRobustRandom rand, ref float rating) where T : class, IPrototype, IBiomeSpecificMod
     {
-        var mods = _proto.EnumeratePrototypes<T>().ToList();
+        var mods = ProtoMan.EnumeratePrototypes<T>().ToList();
         mods.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
         rand.Shuffle(mods);
 
@@ -101,9 +89,9 @@ public abstract partial class SharedSalvageSystem : EntitySystem
         throw new InvalidOperationException();
     }
 
-    public T GetMod<T>(System.Random rand, ref float rating) where T : class, IPrototype, ISalvageMod
+    public T GetMod<T>(IRobustRandom rand, ref float rating) where T : class, IPrototype, ISalvageMod
     {
-        var mods = _proto.EnumeratePrototypes<T>().ToList();
+        var mods = ProtoMan.EnumeratePrototypes<T>().ToList();
         mods.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
         rand.Shuffle(mods);
 

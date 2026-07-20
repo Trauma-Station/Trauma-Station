@@ -1,26 +1,13 @@
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2023 liltenhead <104418166+liltenhead@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Implants.Components;
+
 /// <summary>
 /// Implanters are used to implant or extract implants from an entity.
 /// Some can be single use (implant only) or some can draw out an implant
@@ -54,8 +41,7 @@ public sealed partial class ImplanterComponent : Component
     /// <summary>
     /// The time it takes to implant someone else
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float ImplantTime = 5f;
 
     //TODO: Remove when surgery is a thing
@@ -63,8 +49,7 @@ public sealed partial class ImplanterComponent : Component
     /// The time it takes to extract an implant from someone
     /// It's excessively long to deter from implant checking any antag
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float DrawTime = 25f;
 
     /// <summary>
@@ -83,13 +68,13 @@ public sealed partial class ImplanterComponent : Component
     /// <summary>
     /// The name and description of the implant to show on the implanter
     /// </summary>
-    [DataField]
-    public (string, string) ImplantData;
+    [DataField, AutoNetworkedField]
+    public (string, string) ImplantData = ("", "");
 
     /// <summary>
     /// Determines if the same type of implant can be implanted into an entity multiple times.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool AllowMultipleImplants = false;
 
     /// <summary>
@@ -101,11 +86,12 @@ public sealed partial class ImplanterComponent : Component
     /// <summary>
     /// If true, the implanter may be used to remove all kinds of (deimplantable) implants without selecting any.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool AllowDeimplantAll = false;
 
     /// <summary>
     /// The subdermal implants that may be removed via this implanter
+    /// TODO: This should be a EntityWhitelist! Don't use protoIds for whitelisting purposes.
     /// </summary>
     [DataField]
     public List<EntProtoId> DeimplantWhitelist = new();
@@ -119,12 +105,23 @@ public sealed partial class ImplanterComponent : Component
     /// <summary>
     /// Chosen implant to remove, if necessary.
     /// </summary>
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntProtoId? DeimplantChosen = null;
 
+    /// <summary>
+    /// The sound to be played when an implanter catastrophically fails.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier ImplanterDrawFailSound  = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
+
+    [ViewVariables]
     public bool UiUpdateNeeded;
 }
 
+/// <summary>
+/// Indicates if the implanter is set to implant removal
+/// or to implanting mode.
+/// </summary>
 [Serializable, NetSerializable]
 public enum ImplanterToggleMode : byte
 {

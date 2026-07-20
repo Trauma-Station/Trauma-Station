@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: Civilian
+  name: guide-entry-civilian
+  text: "/ServerInfo/_Trauma/Guidebook/Civilian/Civilian.xml"
+  children:
+  - Chaplain
+  - Janitorial

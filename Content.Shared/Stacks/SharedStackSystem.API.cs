@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Stack;
+// </Trauma>
 using Content.Shared.Hands.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -7,6 +10,32 @@ namespace Content.Shared.Stacks;
 // Partial for public API functions.
 public abstract partial class SharedStackSystem
 {
+    #region Spawning
+    // Interactions with spawned entities can not currently be predicted.
+    // This means that when spawning a stack it should not be given directly to the player, but have some intermediary.
+
+    /// <summary>
+    /// Gets or spawns an entity with a stack count of 1.
+    /// Useful when you don't know if something is a stack, and want to make sure you just have a single entity.
+    /// </summary>
+    /// <param name="stackEnt">An entity to pop one count off the stack.</param>
+    /// <returns>An entity with a stack count of 1, or a non-stack.</returns>
+    [PublicAPI]
+    public EntityUid GetOne(Entity<StackComponent?> stackEnt)
+    {
+        if (!Resolve(stackEnt.Owner, ref stackEnt.Comp, logMissing: false) // If it's not a stack, you already have the one
+            || stackEnt.Comp.Count == 1) // If it's at one, just use this
+            return stackEnt.Owner;
+
+        ReduceCount(stackEnt, 1);
+        var stackId = ProtoMan.Index(stackEnt.Comp.StackTypeId);
+        var entityUid = PredictedSpawnNextToOrDrop(stackId.Spawn, stackEnt.Owner);
+
+        SetCount(entityUid, 1);
+        return entityUid;
+    }
+
+    #endregion
     #region Merge Stacks
 
     /// <summary>
@@ -32,6 +61,15 @@ public abstract partial class SharedStackSystem
 
         if (recipient.Comp.StackTypeId != donor.Comp.StackTypeId)
             return false;
+
+        // <Trauma>
+        var evRec = new AttemptMergeStackEvent(recipient, false);
+        RaiseLocalEvent(donor, ref evRec);
+        var evDon = new AttemptMergeStackEvent(donor, false);
+        RaiseLocalEvent(recipient, ref evDon);
+        if (evRec.Cancelled || evDon.Cancelled)
+            return false;
+        // <Trauma>
 
         // The most we can transfer
         transferred = Math.Min(donor.Comp.Count, GetAvailableSpace(recipient.Comp));
@@ -236,7 +274,7 @@ public abstract partial class SharedStackSystem
         if (component.MaxCountOverride != null)
             return component.MaxCountOverride.Value;
 
-        var stackProto = _prototype.Index(component.StackTypeId);
+        var stackProto = ProtoMan.Index(component.StackTypeId);
         return stackProto.MaxCount ?? int.MaxValue;
     }
 
@@ -244,8 +282,8 @@ public abstract partial class SharedStackSystem
     [PublicAPI]
     public int GetMaxCount(EntProtoId entityId)
     {
-        var entProto = _prototype.Index<EntityPrototype>(entityId);
-        entProto.TryGetComponent<StackComponent>(out var stackComp, EntityManager.ComponentFactory);
+        var entProto = ProtoMan.Index<EntityPrototype>(entityId);
+        entProto.TryComp<StackComponent>(out var stackComp, EntityManager.ComponentFactory);
         return GetMaxCount(stackComp);
     }
 
@@ -253,7 +291,7 @@ public abstract partial class SharedStackSystem
     [PublicAPI]
     public int GetMaxCount(EntityPrototype entityId)
     {
-        entityId.TryGetComponent<StackComponent>(out var stackComp, EntityManager.ComponentFactory);
+        entityId.TryComp<StackComponent>(out var stackComp, EntityManager.ComponentFactory);
         return GetMaxCount(stackComp);
     }
 
@@ -277,7 +315,7 @@ public abstract partial class SharedStackSystem
     [PublicAPI]
     public int GetMaxCount(ProtoId<StackPrototype> stackId)
     {
-        return GetMaxCount(_prototype.Index(stackId));
+        return GetMaxCount(ProtoMan.Index(stackId));
     }
 
     /// <summary>

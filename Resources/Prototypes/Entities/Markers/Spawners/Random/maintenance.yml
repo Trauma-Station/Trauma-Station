@@ -97,6 +97,7 @@
     - !type:GroupSelector
       weight: 23
       children:
+      - id: TravelCamera
       - id: ClothingNeckCloakHerald
       - id: ClothingHeadHelmetTemplar
       # Cloaks
@@ -118,6 +119,9 @@
         - id: ClothingNeckCloakPan
       - id: ToyFigurineSkeleton
       - id: MysteryFigureBox
+      # <Trauma>
+      - id: ClothingHandsGlovesGripper
+      # </Trauma>
       - id: FoodSnackLollypopWrappedMysteryNeutral # Goobstation - Lollypops!
       - id: RevolutionaryManifesto # Einstein Engines - Revolutionary Manifesto
       # Cult
@@ -169,6 +173,8 @@
       - id: CluwneHorn
       - id: ClothingShoesWizardSkates
       - id: FoodSnackLollypopWrappedMysteryEvil
+      - id: PlushieCosmicCult
+      - id: ClothingHandsGlovesRocket
       # </Trauma>
       - id: DrinkMugDog
       - id: CigarGold
@@ -395,16 +401,16 @@
   id: MaintenancePlantSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Objects/Misc/spaceshroom.rsi
-          state: structure
-    - type: RandomSpawner
-      prototypes:
-        - Spaceshroom
-      chance: 0.6
-      offset: 0.0
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Objects/Misc/spaceshroom.rsi
+        state: structure
+  - type: EntityTableSpawner
+    table:
+      id: Spaceshroom
+      prob: 0.6
+    offset: 0.0
 
 
 - type: entityTable

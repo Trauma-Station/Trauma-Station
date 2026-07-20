@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Physics;
@@ -8,13 +10,13 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Harbinger;
 
-public sealed class SpikerShuffleSystem : EntitySystem
+public sealed partial class SpikerShuffleSystem : EntitySystem
 {
-    [Dependency] private readonly Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusNew = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -29,40 +31,46 @@ public sealed class SpikerShuffleSystem : EntitySystem
     private void OnSpikerShuffle(Entity<SpikerShuffleComponent> ent, ref SpikerShuffleEvent args)
     {
         // first remove all status effects
+#pragma warning disable CS0618
         foreach (var statusEffect in ent.Comp.StatusEffectsToRemove)
             _statusOld.TryRemoveStatusEffect(ent.Owner, statusEffect);
+#pragma warning restore CS0618
+        foreach (var effect in ent.Comp.NewEffectsToRemove)
+            _status.TryRemoveStatusEffect(ent.Owner, effect);
 
-        _statusNew.TryAddStatusEffect(ent.Owner, ent.Comp.StatusEffect, out _, ent.Comp.Duration);
-        _statusNew.TryAddStatusEffect(ent.Owner, ent.Comp.StatusAbilityDisable, out _, ent.Comp.Duration); // disable using actions
+        _status.TryAddStatusEffect(ent.Owner, ent.Comp.StatusEffect, out _, ent.Comp.Duration);
+        _status.TryAddStatusEffect(ent.Owner, ent.Comp.StatusAbilityDisable, out _, ent.Comp.Duration); // disable using actions
 
         args.Handled = true;
     }
 
     private void OnApplied(Entity<SpikerShuffleEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        _popup.PopupClient(Loc.GetString("wraith-spiker-shuffle"), args.Target, args.Target, PopupType.Medium);
-        _appearance.SetData(args.Target, ShuffleVisuals.Shuffling, true);
+        var target = args.Target;
+        _popup.PopupEntity(Loc.GetString("wraith-spiker-shuffle"), target, target, PopupType.Medium);
+        _appearance.SetData(target, ShuffleVisuals.Shuffling, true);
 
-        if (TryComp<FixturesComponent>(args.Target, out var fixtures) && fixtures.FixtureCount >= 1)
+        if (TryComp<FixturesComponent>(target, out var fixtures) && fixtures.FixtureCount >= 1)
         {
             var fixture = fixtures.Fixtures.First();
 
-            _physics.SetCollisionMask(args.Target, fixture.Key, fixture.Value, (int) CollisionGroup.SmallMobMask, fixtures);
-            _physics.SetCollisionLayer(args.Target, fixture.Key, fixture.Value, (int) CollisionGroup.SmallMobLayer, fixtures);
+            _physics.SetCollisionMask(target, fixture.Key, fixture.Value, (int) CollisionGroup.SmallMobMask, fixtures);
+            _physics.SetCollisionLayer(target, fixture.Key, fixture.Value, (int) CollisionGroup.SmallMobLayer, fixtures);
         }
     }
 
     private void OnRemoved(Entity<SpikerShuffleEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        _popup.PopupClient(Loc.GetString("wraith-spiker-shuffle-removed"), args.Target, args.Target, PopupType.Medium);
-        _appearance.SetData(args.Target, ShuffleVisuals.Shuffling, false);
+        var target = args.Target;
+        _popup.PopupEntity(Loc.GetString("wraith-spiker-shuffle-removed"), target, target, PopupType.Medium);
+        _appearance.SetData(target, ShuffleVisuals.Shuffling, false);
 
-        if (TryComp<FixturesComponent>(args.Target, out var fixtures) && fixtures.FixtureCount >= 1)
+        if (TryComp<FixturesComponent>(target, out var fixtures) && fixtures.FixtureCount >= 1)
         {
             var fixture = fixtures.Fixtures.First();
 
-            _physics.SetCollisionMask(args.Target, fixture.Key, fixture.Value, (int) CollisionGroup.MobMask, fixtures);
-            _physics.SetCollisionLayer(args.Target, fixture.Key, fixture.Value, (int) CollisionGroup.MobLayer, fixtures);
+            _physics.SetCollisionMask(target, fixture.Key, fixture.Value, (int) CollisionGroup.MobMask, fixtures);
+            _physics.SetCollisionLayer(target, fixture.Key, fixture.Value, (int) CollisionGroup.MobLayer, fixtures);
         }
     }
 }

@@ -1,10 +1,13 @@
 // <Trauma>
 using Content.Goobstation.Common.LastWords;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Mind.Components;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -37,9 +40,9 @@ namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
-        [Dependency] private readonly DiscordWebhook _discord = default!;
-        [Dependency] private readonly RoleSystem _role = default!;
-        [Dependency] private readonly ITaskManager _taskManager = default!;
+        [Dependency] private DiscordWebhook _discord = default!;
+        [Dependency] private RoleSystem _role = default!;
+        [Dependency] private ITaskManager _taskManager = default!;
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",
@@ -98,7 +101,7 @@ namespace Content.Server.GameTicking
         /// </remarks>
         private void LoadMaps()
         {
-            if (_mapManager.MapExists(DefaultMap))
+            if (_map.MapExists(DefaultMap))
                 return;
 
             AddGamePresetRules();
@@ -127,7 +130,7 @@ namespace Content.Server.GameTicking
             }
 
             if (CurrentPreset?.MapPool != null &&
-                _prototypeManager.TryIndex<GameMapPoolPrototype>(CurrentPreset.MapPool, out var pool) &&
+                ProtoMan.TryIndex<GameMapPoolPrototype>(CurrentPreset.MapPool, out var pool) &&
                 !pool.Maps.Contains(mainStationMap.ID))
             {
                 var msg = Loc.GetString("game-ticker-start-round-invalid-map",
@@ -163,13 +166,10 @@ namespace Content.Server.GameTicking
             Vector2? offset = null,
             Angle? rot = null)
         {
-            offset ??= proto.MaxRandomOffset != 0f
-                ? _robustRandom.NextVector2(proto.MaxRandomOffset)
-                : Vector2.Zero;
-
-            rot ??= proto.RandomRotation
-                ? _robustRandom.NextAngle()
-                : Angle.Zero;
+            // <Trauma> - replace random offset shit
+            offset ??= Vector2.Zero;
+            rot ??= Angle.Zero;
+            // </Trauma>
 
             opts ??= DeserializationOptions.Default;
             var ev = new PreGameMapLoad(proto, opts.Value, offset.Value, rot.Value);
@@ -565,19 +565,17 @@ namespace Content.Server.GameTicking
                 else if (mind.CurrentEntity != null && TryName(mind.CurrentEntity.Value, out var icName))
                     playerIcName = icName;
 
-                if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride)
+                if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride && HasComp<HumanoidProfileComponent>(mind.CurrentEntity)) // Trauma - Check for HumanoidProfile to reduce lag
                 {
                     _pvsOverride.AddGlobalOverride(entity.Value);
                 }
 
                 var roles = _roles.MindGetAllRoleInfo(mindId);
 
-                // Goobstation - End of round last words
-                #region Goob Station - End of round last words
-
+                // <Trauma> - last words/damage
                 var lastWords = "";
                 var mobState = MobState.Invalid;
-                var damagePerGroup = new Dictionary<string, FixedPoint2>();
+                var damagePerGroup = new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
                 var lastMob = TryComp<MindLastMobComponent>(mindId, out var lastMobComponent)
                     ? lastMobComponent.LastMob
                     : null;
@@ -592,12 +590,13 @@ namespace Content.Server.GameTicking
                     if (TryComp<MobStateComponent>(lastMob, out var mobStateComp))
                         mobState = mobStateComp.CurrentState;
 
-                    if (TryComp<DamageableComponent>(lastMob, out var damageableComp))
-                        damagePerGroup = damageableComp.DamagePerGroup;
+                    // TODO: store a thing on the mind when gibbing/cremating/singuloing someone for special displaying
+                    foreach (var (group, amount) in _damageable.GetDamagePerGroup(lastMob.Value))
+                    {
+                        damagePerGroup[group] = amount;
+                    }
                 }
-
-                #endregion
-                // END
+                // </Trauma>
 
                 var playerEndRoundInfo = new RoundEndMessageEvent.RoundEndPlayerInfo()
                 {
@@ -616,10 +615,11 @@ namespace Content.Server.GameTicking
                     AntagPrototypes = roles.Where(role => role.Antagonist).Select(role => role.Prototype).ToArray(),
                     Observer = observer,
                     Connected = connected,
-                    // Goob Station - End of Round Screen
+                    // <Trauma>
                     LastWords = lastWords,
                     EntMobState = mobState,
-                    DamagePerGroup = damagePerGroup
+                    DamagePerGroup = damagePerGroup,
+                    // </Trauma>
                 };
                 listOfPlayerInfo.Add(playerEndRoundInfo);
             }
@@ -758,12 +758,26 @@ namespace Content.Server.GameTicking
             var ev = new RoundRestartCleanupEvent();
             RaiseLocalEvent(ev);
 
-            // So clients' entity systems can clean up too...
-            RaiseNetworkEvent(ev);
+            // <Trauma> - wrap these in try-catch and log exceptions
+            try
+            {
+                // So clients' entity systems can clean up too...
+                RaiseNetworkEvent(ev);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception in RoundRestartCleanup: {e}");
+            }
 
-            EntityManager.FlushEntities();
-
-            _mapManager.Restart();
+            try
+            {
+                EntityManager.FlushEntities();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while flushing entities for round restart: {e}");
+            }
+            // </Trauma>
 
             _banManager.Restart();
 
@@ -830,7 +844,7 @@ namespace Content.Server.GameTicking
         {
             if (CurrentPreset == null) return;
 
-            var options = _prototypeManager.EnumeratePrototypes<RoundAnnouncementPrototype>().ToList();
+            var options = ProtoMan.EnumeratePrototypes<RoundAnnouncementPrototype>().ToList();
 
             if (options.Count == 0)
                 return;

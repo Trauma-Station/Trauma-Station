@@ -1,10 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseObjective
   id: BaseSalvageObjective
   components:
   - type: Objective
-    issuer: objective-issuer-nanotrasen
+    issuer: NanoTrasen
   - type: NotJobRequirement
     jobs: [ SalvageSpecialist ]
     inverted: true

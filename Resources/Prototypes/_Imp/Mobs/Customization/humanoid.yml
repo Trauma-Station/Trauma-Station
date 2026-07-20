@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # markings intended for multiple species go here
@@ -10,8 +7,7 @@
 - type: marking
   id: ChestBackstabbed
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: backstabbed
@@ -19,8 +15,7 @@
 - type: marking
   id: ChestCutHere
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -33,8 +28,7 @@
 - type: marking
   id: ChestHeavyTattoos
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -51,8 +45,7 @@
 - type: marking
   id: ChestNecklace
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -65,8 +58,7 @@
 - type: marking
   id: ChestStar
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: star
@@ -74,8 +66,7 @@
 - type: marking
   id: ChestTwistingLeft
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: twistingleft
@@ -83,8 +74,7 @@
 - type: marking
   id: ChestTwistingRight
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: twistingright
@@ -92,9 +82,7 @@
 - type: marking
   id: HumanoidAbs
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
-  followSkinColor: true
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: muscular
@@ -102,8 +90,7 @@
 - type: marking
   id: ProstheticShoulderL
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -116,8 +103,7 @@
 - type: marking
   id: ProstheticShoulderR
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -130,8 +116,7 @@
 - type: marking
   id: TattooAnchor
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -144,8 +129,7 @@
 - type: marking
   id: TattooCode1
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -158,8 +142,7 @@
 - type: marking
   id: TattooCode2
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -172,8 +155,7 @@
 - type: marking
   id: TattooCode3
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -186,8 +168,7 @@
 - type: marking
   id: TattooDragon
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: dragontattoo1
@@ -197,8 +178,7 @@
 - type: marking
   id: TorsoIncision
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/chest.rsi
     state: incision
@@ -206,8 +186,7 @@
 - type: marking
   id: TattooVinesHumanoid
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -220,8 +199,7 @@
 - type: marking
   id: VitiligoChestF
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -235,8 +213,7 @@
 - type: marking
   id: VitiligoChestSpots
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -252,8 +229,7 @@
 - type: marking
   id: EyebrowsBig
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: eyebrowsthick
@@ -261,8 +237,7 @@
 - type: marking
   id: EyebrowsBigger
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: eyebrowsultra
@@ -270,8 +245,7 @@
 - type: marking
   id: EyebrowsUnibrow
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: eyebrowsunibrow
@@ -279,8 +253,7 @@
 - type: marking
   id: HeadHeavyTattoos
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -295,8 +268,7 @@
 - type: marking
   id: HeadTwisting
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: twisting
@@ -304,8 +276,7 @@
 - type: marking
   id: HeadTwistingFlipped
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: twistingflipped
@@ -313,8 +284,7 @@
 - type: marking
   id: HumanoidEyebags
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: eyebags
@@ -322,8 +292,7 @@
 - type: marking
   id: SmileScars
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/head.rsi
     state: smile
@@ -331,8 +300,7 @@
 - type: marking
   id: VitiligoHeadJaw
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -346,8 +314,7 @@
 - type: marking
   id: VitiligoHeadL
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -361,8 +328,7 @@
 - type: marking
   id: VitiligoHeadR
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -378,8 +344,7 @@
 - type: marking
   id: HeadSeptum
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   coloring:
     default:
       type:
@@ -396,8 +361,7 @@
 - type: marking
   id: ArmDollJointsTattooRight
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -410,8 +374,7 @@
 - type: marking
   id: ArmHeavyTattoosRight
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -426,8 +389,7 @@
 - type: marking
   id: ArmProstheticRight
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -440,8 +402,7 @@
 - type: marking
   id: ArmTwistingRight
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/rarm.rsi
     state: twisting
@@ -449,9 +410,7 @@
 - type: marking
   id: TattooCode4
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
-  followSkinColor: false
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   forcedColoring: false
   coloring:
     default:
@@ -465,9 +424,7 @@
 - type: marking
   id: TattooCode5
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
-  followSkinColor: false
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   forcedColoring: false
   coloring:
     default:
@@ -481,9 +438,7 @@
 - type: marking
   id: TattooHeartR
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
-  followSkinColor: false
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   forcedColoring: false
   coloring:
     default:
@@ -497,8 +452,7 @@
 - type: marking
   id: VitiligoArmR
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -514,8 +468,7 @@
 - type: marking
   id: ArmDollJointsTattooLeft
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -528,8 +481,7 @@
 - type: marking
   id: ArmHeavyTattoosLeft
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -544,8 +496,7 @@
 - type: marking
   id: ArmProstheticLeft
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -558,8 +509,7 @@
 - type: marking
   id: ArmTwistingLeft
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/larm.rsi
     state: twisting
@@ -567,9 +517,7 @@
 - type: marking
   id: TattooHeartL
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
-  followSkinColor: false
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   forcedColoring: false
   coloring:
     default:
@@ -583,8 +531,7 @@
 - type: marking
   id: VitiligoArmL
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -600,8 +547,7 @@
 - type: marking
   id: LegDollJointsTattooRight
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -614,8 +560,7 @@
 - type: marking
   id: LegHeavyTattoosRight
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -630,8 +575,7 @@
 - type: marking
   id: LegTwistingRight
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/rleg.rsi
     state: twisting
@@ -639,8 +583,7 @@
 - type: marking
   id: VitiligoLegR
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -656,8 +599,7 @@
 - type: marking
   id: LegDollJointsTattooLeft
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -670,8 +612,7 @@
 - type: marking
   id: LegHeavyTattoosLeft
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -686,8 +627,7 @@
 - type: marking
   id: LegTwistingLeft
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/lleg.rsi
     state: twisting
@@ -695,8 +635,7 @@
 - type: marking
   id: VitiligoLegL
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -712,8 +651,7 @@
 - type: marking
   id: FootDollJointsTattooLeft
   bodyPart: LFoot
-  markingCategory: LeftFoot
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -726,8 +664,7 @@
 - type: marking
   id: FootHeavyTattoosLeft
   bodyPart: LFoot
-  markingCategory: LeftFoot
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -744,8 +681,7 @@
 - type: marking
   id: FootDollJointsTattooRight
   bodyPart: RFoot
-  markingCategory: RightFoot
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -758,8 +694,7 @@
 - type: marking
   id: FootHeavyTattoosRight
   bodyPart: RFoot
-  markingCategory: RightFoot
-  speciesRestriction: [Human, Dwarf, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -776,8 +711,7 @@
 - type: marking
   id: HandBraceletLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -790,8 +724,7 @@
 - type: marking
   id: HandDollJointsTattooLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -804,8 +737,7 @@
 - type: marking
   id: HandHeavyTattoosLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -820,8 +752,7 @@
 - type: marking
   id: HandProstheticLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -834,8 +765,7 @@
 - type: marking
   id: HandRingsLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -850,8 +780,7 @@
 - type: marking
   id: HandTwistingLeft
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/lhand.rsi
     state: twisting
@@ -859,8 +788,7 @@
 - type: marking
   id: VitiligoHandL
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -876,8 +804,7 @@
 - type: marking
   id: HandBraceletRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -890,8 +817,7 @@
 - type: marking
   id: HandDollJointsTattooRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -904,8 +830,7 @@
 - type: marking
   id: HandHeavyTattoosRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -920,8 +845,7 @@
 - type: marking
   id: HandProstheticRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -934,8 +858,7 @@
 - type: marking
   id: HandRingsRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   coloring:
     default:
       type:
@@ -950,8 +873,7 @@
 - type: marking
   id: HandTwistingRight
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Arachnid]
+  groupWhitelist: [Human, Reptilian, Slime, Arachnid]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/rhand.rsi
     state: twisting
@@ -959,8 +881,7 @@
 - type: marking
   id: VitiligoHandR
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   forcedColoring: true
   coloring:
     default:
@@ -976,8 +897,7 @@
 - type: marking
   id: FloralBeard
   bodyPart: FacialHair
-  markingCategory: FacialHair
-  speciesRestriction: [ Human, Dwarf ]
+  groupWhitelist: [ Human ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/facialhair.rsi
     state: messyfloral1
@@ -989,7 +909,6 @@
 - type: marking
   id: BurqaSolid
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: burqasolid
@@ -997,7 +916,6 @@
 - type: marking
   id: HairFloralLong
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: florallong1
@@ -1007,7 +925,6 @@
 - type: marking
   id: HairFloralMid
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: floralmid1
@@ -1017,7 +934,6 @@
 - type: marking
   id: HijabFashionable
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: hijabchic
@@ -1025,7 +941,6 @@
 - type: marking
   id: HijabSimple
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: hijabsimple
@@ -1033,7 +948,6 @@
 - type: marking
   id: HumanHairFrenchBraid
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: frenchbraid
@@ -1041,7 +955,6 @@
 - type: marking
   id: HumanHairGatheredlow
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: gatheredlow
@@ -1049,7 +962,6 @@
 - type: marking
   id: HumanHairHalfUpShort
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: halfupshort
@@ -1057,7 +969,6 @@
 - type: marking
   id: HumanHairHalfUpLong
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: halfuplong
@@ -1065,7 +976,6 @@
 - type: marking
   id: HumanHairHalfUpUndercut
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: halfupundercut
@@ -1073,7 +983,6 @@
 - type: marking
   id: HumanHairLowpigtails
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: lowpigtails
@@ -1081,7 +990,6 @@
 - type: marking
   id: HumanHairMidPartLong
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: midpartlong
@@ -1089,7 +997,6 @@
 - type: marking
   id: HumanHairMidPartLonger
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: midpartlonger
@@ -1097,7 +1004,6 @@
 - type: marking
   id: HumanHairMulletSideshave
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: mulletsideshave
@@ -1105,7 +1011,6 @@
 - type: marking
   id: HumanHairSideshaveCurly
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: sideshavecurly
@@ -1113,8 +1018,7 @@
 - type: marking
   id: HumanHairSpikyPonytailLong
   bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [ Human, Dwarf, SlimePerson ]
+  groupWhitelist: [ Human, Slime ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: spikyponytaillong
@@ -1122,7 +1026,6 @@
 - type: marking
   id: HumanHairUndercutCurly
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: undercutcurly
@@ -1130,8 +1033,7 @@
 - type: marking
   id: MessyPonytail
   bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [ Human, Dwarf, SlimePerson ]
+  groupWhitelist: [ Human, Slime ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: messyponytail
@@ -1139,8 +1041,7 @@
 - type: marking
   id: Niqab
   bodyPart: Hair
-  markingCategory: Hair
-  speciesRestriction: [ Human, Dwarf, SlimePerson ]
+  groupWhitelist: [ Human, Slime ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: niqab
@@ -1148,7 +1049,6 @@
 - type: marking
   id: TichelFashionable
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: tichelfashionable
@@ -1156,7 +1056,6 @@
 - type: marking
   id: TichelSimple
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: tichelsimple
@@ -1164,7 +1063,6 @@
 - type: marking
   id: HumanHairShaggy
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: shaggy
@@ -1172,7 +1070,6 @@
 - type: marking
   id: HumanHairShaggyLonger
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: shaggylonger
@@ -1180,7 +1077,6 @@
 - type: marking
   id: HumanHairShaggyMessy
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: shaggymessy
@@ -1188,7 +1084,6 @@
 - type: marking
   id: HumanHairSusie
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: susie
@@ -1196,7 +1091,6 @@
 - type: marking
   id: HumanHairSusieNoBangs
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: _Impstation/Mobs/Customization/Humanoid/hair.rsi
     state: susienobangs
@@ -1208,8 +1102,7 @@
 - type: marking
   id: HeadEarrings
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Human, Dwarf, SlimePerson]
+  groupWhitelist: [Human, Slime]
   coloring:
     default:
       type:
@@ -1224,8 +1117,7 @@
 - type: marking
   id: HeadEarringsDrop
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Human, Dwarf, SlimePerson]
+  groupWhitelist: [Human, Slime]
   coloring:
     default:
       type:
@@ -1240,8 +1132,7 @@
 - type: marking
   id: HeadEarringsWeights
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Human, Dwarf, SlimePerson]
+  groupWhitelist: [Human, Slime]
   coloring:
     default:
       type:

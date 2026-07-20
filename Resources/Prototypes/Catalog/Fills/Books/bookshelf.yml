@@ -13,10 +13,20 @@
   id: BookshelfEntityTable
   table: !type:AllSelector
     children:
+    # <Trauma>
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 1
+      tableId: RandomEmptyScroll
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 3
+      tableId: RandomSkillbook
+    # </Trauma>
     # Randomly generated books
     - id: BookRandomStory
       amount: !type:RangeNumberSelector
-        range: 0, 8
+        range: 0, 5
     # Guidebooks
     - !type:NestedSelector
       rolls: !type:RangeNumberSelector
@@ -32,6 +42,7 @@
   id: RandomHandwrittenBookTable
   table: !type:GroupSelector
     children:
+    - id: BookCosmicCult # Trauma
     - id: BookAurora
     - id: BookCafe
     - id: BookEarth
@@ -91,3 +102,5 @@
       tableId: RandomGuidebookTable
     - !type:NestedSelector
       tableId: RandomHandwrittenBookTable
+    - !type:NestedSelector
+      tableId: RandomSkillbook # Trauma - Knowledge

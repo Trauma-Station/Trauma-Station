@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: mutationRecipe
+  id: Hulk
+  result: MutationHulk
+  required:
+  - MutationRadioactivity
+  - MutationStrength
+
+- type: mutationRecipe
+  id: Ork
+  result: MutationOrk
+  required:
+  - MutationHulk
+  - MutationClumsiness

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This holds all simplemobs summoned by void portal.
 
 - type: entity
@@ -40,7 +42,7 @@
       path: /Audio/Effects/bone_rattle.ogg
     damage:
       types:
-        Blunt: 15
+        Blunt: 13
         Structural: 30
   - type: MobState
   - type: Fixtures
@@ -55,8 +57,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Skeleton
+  - type: Injurable
+    damageContainer: Inorganic
   - type: NoSlip
   - type: Pullable
   - type: ZombieImmune
@@ -85,10 +88,7 @@
   - type: Vocal
     wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
     wilhelmProbability: 0.1
-    sounds:
-      Male: Skeleton
-      Female: Skeleton
-      Unsexed: Skeleton
+    emoteSounds: Skeleton
   - type: SkeletonAccent
   - type: TypingIndicator
     proto: skeleton
@@ -144,8 +144,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: NoSlip
   - type: Pullable
   - type: Speech
@@ -154,7 +155,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 40
+          damage: 30
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -210,7 +211,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Blunt: 7
+        Blunt: 5
   - type: MobState
   - type: Fixtures
     fixtures:
@@ -224,8 +225,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: HeavyArmorSyndi # Massive daamge reduction, but very low health.
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: NoSlip
   - type: Pullable
   - type: Speech
@@ -278,10 +280,11 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      60: Dead
+      35: Dead
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Biological
   - type: MeleeWeapon
     altDisarm: false
     animation: WeaponArcBite
@@ -289,7 +292,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 10
+        Slash: 7
   - type: NoSlip
   - type: Pullable
   - type: InputMover
@@ -363,15 +366,16 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Biological
   - type: NoSlip
   - type: Pullable
   - type: Destructible
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 60
+          damage: 35
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -404,15 +408,16 @@
       Dead:
         Base: lion_dead
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: MindContainer
   - type: MindExaminable
   - type: MobState
   - type: MobThresholds
     thresholds:
       0: Alive
-      40: Dead
+      30: Dead
   - type: MeleeWeapon
     altDisarm: false
     animation: WeaponArcBite
@@ -420,7 +425,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 12
+        Slash: 8
   - type: NoSlip
   - type: Pullable
   - type: InputMover
@@ -470,7 +475,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Piercing: 10
+        Piercing: 7
   - type: MobState
   - type: Fixtures
     fixtures:
@@ -493,8 +498,9 @@
         maxDistance: 12
         variation: 0.05
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: HeavyArmorSyndi
+  - type: Injurable
+    damageContainer: Inorganic
   - type: PointLight
     enabled: true
     color: "#790c24"
@@ -508,7 +514,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 30
+          damage: 20
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -538,12 +544,12 @@
       collection: Flesh_Stab
     damage:
       types:
-        Piercing: 15
+        Piercing: 8
   - type: Destructible
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 30
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -590,18 +596,19 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 13
+        Slash: 7
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepHeavySuit
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: HeavyArmorSyndi
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 30
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -986,7 +993,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 25
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -1023,7 +1030,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 75
+          damage: 40
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]

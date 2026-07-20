@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: construction
+  abstract: true
+  id: BaseForgingStructure
+  targetNode: finish
+  placementMode: SnapgridCenter
+  category: construction-category-forging
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+
+- type: construction
+  parent: BaseForgingStructure
+  id: CharcoalOven
+  graph: CharcoalOven
+  practical:
+    MetalworkingKnowledge: 2
+
+- type: construction
+  parent: BaseForgingStructure
+  id: BloomeryCold
+  graph: BloomeryCold
+  targetNode: bloomery
+
+- type: construction
+  parent: BaseForgingStructure
+  id: CharcoalForge
+  graph: CharcoalForge
+  targetNode: unlit
+  practical:
+    MetalworkingKnowledge: 2
+
+# TODO: this should just be a heat exchange system for any reagent so you can have water/oil(maybe fire)/napalm (definitely fire) with their own heat capacities
+- type: construction
+  parent: BaseForgingStructure
+  id: QuenchingBarrel
+  graph: QuenchingBarrel
+  practical:
+    MetalworkingKnowledge: 2

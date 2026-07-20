@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# For stuff like electropacks using ShockOnTrigger
+- type: entity
+  abstract: true
+  id: BaseBatteryShock
+  components:
+  - type: ShockOnTrigger
+    shockCharge: 24 # 30 shocks from full, plenty
+  - type: Battery
+    maxCharge: 720
+    startingCharge: 720
+  - type: BatterySelfRecharger
+    autoRechargeRate: 24
+    autoRechargePauseTime: 3 # can't spam it constantly forever

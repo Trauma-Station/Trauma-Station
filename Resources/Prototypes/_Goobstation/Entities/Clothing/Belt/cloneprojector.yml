@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -22,8 +17,8 @@
     size: Large
   - type: CloneProjector
     damageOnDestroyed:
-      groups:
-        Brute: 10
+      types:
+        Blunt: 10
     addedComponents:
     - type: GhostTakeoverAvailable
     - type: AntagImmune
@@ -34,14 +29,15 @@
     - type: ZombieImmune
     - type: CrematoriumImmune
     - type: BreathingImmunity
-    - type: TemperatureImmunity
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
     - type: TypingIndicator
       proto: robot
     - type: Speech
       speechVerb: Robotic
       speechSounds: Borg
     - type: Silicon
-      entityType: enum.SiliconType.Player
+      entityType: Player
       batteryPowered: false
       chargeThresholdMid: null
       chargeThresholdLow: null
@@ -53,8 +49,7 @@
         1: 0.45
         0: 0.00
     - type: Vocal
-      sounds:
-        Unsexed: UnisexSilicon
+      emoteSounds: UnisexSilicon
     - type: UnblockableSpeech
     - type: ProtectedFromStepTriggers
     - type: MobState
@@ -66,6 +61,7 @@
         0: Alive
         42: Dead # The Answer to the Ultimate Question of Life, the Universe, and Everything
     - type: Damageable
+    - type: Injurable
       damageContainer: SiliconRadiation
     - type: StatusEffects
       allowed:
@@ -97,8 +93,7 @@
       soulOwnedNotDevil: true
     - type: Flammable
       damage:
-        types:
-          burn: 0 # required for whatever reason, go fuck yourself
+        types: {}
     - type: FireVisuals
     - type: Respirator
       damage:
@@ -118,9 +113,11 @@
           Bloodloss:
             0
     - type: InjectableSolution
-    - type: SolutionContainerManager
+    - type: Solution
+    - type: SolutionManager
     - type: Dna
     - type: Absorbable
+    - type: Mutatable
     - type: Fingerprint
     - type: Perishable
     - type: Hunger

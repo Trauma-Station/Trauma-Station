@@ -1,42 +1,34 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Client.Humanoid;
+using Content.Client.UserInterface;
+using Content.Trauma.Client.Input;
 using Content.Trauma.Client.IoC;
+using Content.Trauma.Client.ItemSlotRenderer;
+using Content.Trauma.Client.UserInterface;
+using Robust.Client.Input;
 using Robust.Shared.ContentPack;
 
 namespace Content.Trauma.Client.Entry;
 
-public sealed class EntryPoint : GameClient
+public sealed partial class EntryPoint : GameClient
 {
-    [Dependency] private readonly ShaderMarkingManager _shaderMarking = default!;
-
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void PreInit()
     {
         base.PreInit();
 
-        ContentTraumaClientIoC.Register(Dependencies);
-    }
-
-    public override void Init()
-    {
-        base.Init();
-
-        Dependencies.BuildGraph();
-        Dependencies.InjectDependencies(this);
+        ClientTraumaIoC.Register(Dependencies);
+        IoCManager.InjectDependencies(this);
     }
 
     public override void PostInit()
     {
         base.PostInit();
 
-        _shaderMarking.Initialize();
-    }
+        TraumaInputContexts.SetupContexts(_input.Contexts);
 
-    public override void Shutdown()
-    {
-        base.Shutdown();
-
-        _shaderMarking.Shutdown();
+        _overlay.AddOverlay(new SpriteToLayerBullshitOverlay());
     }
 }

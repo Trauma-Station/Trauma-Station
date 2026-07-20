@@ -1,13 +1,6 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Mind;
+using Content.Shared.Objectives;
+using Content.Shared.Objectives.Prototypes;
 using Content.Shared.Objectives.Systems;
 using Robust.Shared.Utility;
 using Robust.Shared.Prototypes;
@@ -30,11 +23,8 @@ public sealed partial class ObjectiveComponent : Component
     /// <summary>
     /// Organisation that issued this objective, used for grouping and as a header above common objectives.
     /// </summary>
-    [DataField("issuer", required: true)]
-    private LocId Issuer { get; set; }
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public string LocIssuer => Loc.GetString(Issuer);
+    [DataField(required: true)]
+    public ProtoId<ObjectiveIssuerPrototype> Issuer = "Unknown";
 
     /// <summary>
     /// Unique objectives can only have 1 per prototype id.
@@ -49,18 +39,6 @@ public sealed partial class ObjectiveComponent : Component
     /// </summary>
     [DataField]
     public SpriteSpecifier? Icon;
-
-    /// <summary>
-    /// Goob - Server currency awarded for if this completed at round end
-    /// </summary>
-    [DataField]
-    public int ServerCurrency = 5;
-
-    /// <summary>
-    /// Goob - Should the percentage of currency rewarded correspond to the percentage of the objective completed
-    /// </summary>
-    [DataField]
-    public bool ServerCurrencyRewardPartial;
 }
 
 /// <summary>

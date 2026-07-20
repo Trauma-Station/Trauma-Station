@@ -7,6 +7,21 @@
   description: Just add capitalism!
   abstract: true
   components:
+  # <Trauma>
+  - type: Rotatable
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: IntellicardableMind
+  # </Trauma>
   - type: ActionGrant
     actions:
     - ActionVendingThrow
@@ -71,7 +86,6 @@
     boardName: wires-board-name-vendingmachine
     layoutId: Vending
   - type: Anchorable
-  - type: Rotatable # Trauma - why not
   - type: TypingIndicator
     proto: robot
   - type: Speech
@@ -93,11 +107,6 @@
     channels:
     # - Binary # Goobstation - replaced with collective mind
     - Common
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: DoAfter
   - type: Electrified
     enabled: false
@@ -122,14 +131,6 @@
     price: 100
   - type: Appearance
   - type: WiresVisuals
-  - type: LanguageSpeaker # Einstein Engines - Languages
-  - type: LanguageKnowledge # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
 
 - type: entity
   id: VendingMachineWallmount
@@ -913,6 +914,11 @@
   name: Engi-Vend
   description: Spare tool vending. What? Did you expect some witty description?
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - DroneUsable
+  # </Trauma>
   - type: VendingMachine
     pack: EngiVendInventory
     offState: off
@@ -936,9 +942,7 @@
     radius: 2
     energy: 1.6
     color: "#b89e2a"
-  - type: Tag
-    tags:
-    - DroneUsable # Goobstation
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: VendingMachine
@@ -975,6 +979,7 @@
   - type: GuideHelp
     guides:
     - MedicalDoctor
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachineMedicalBase
@@ -1390,7 +1395,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Research"]]
+    access: [["Robotics"]] # Trauma - was Research
   - type: PointLight
     radius: 2
     energy: 1.6
@@ -1821,6 +1826,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Chemistry"]]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachine
@@ -1848,7 +1854,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Service"]]
+    access: [["Library"]] # Trauma - was Service
 
 - type: entity
   parent: VendingMachine
@@ -1881,6 +1887,7 @@
     color: "#b89e2a"
   - type: AccessReader
     access: [["Engineering"]]
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: VendingMachine
@@ -1913,6 +1920,7 @@
     color: "#b89e2a"
   - type: AccessReader
     access: [["Engineering"]]
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: VendingMachine
@@ -2088,7 +2096,7 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Research"]]
+    access: [["Robotics"]] # Trauma - was Research
 
 - type: entity
   parent: VendingMachine
@@ -2116,7 +2124,8 @@
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
-    access: [["Medical"]]
+    access: [["Genetics"]] # Trauma - was Medical
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachine
@@ -2145,6 +2154,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Medical"]]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachine
@@ -2303,6 +2313,7 @@
     guides:
     - Chemicals
     - Chemist
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachineChemicals

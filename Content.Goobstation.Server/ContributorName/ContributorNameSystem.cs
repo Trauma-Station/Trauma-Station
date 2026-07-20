@@ -1,13 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.ContentPack;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.ContributorName;
 
-public sealed class ContributorNameSystem : EntitySystem
+public sealed partial class ContributorNameSystem : EntitySystem
 {
-    [Dependency] private readonly IResourceManager _resourceManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private IResourceManager _resourceManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     private string[] _names = default!;
 

@@ -97,7 +97,7 @@
           True: { visible: True }
           False: { visible: False }
   - type: RechargeBasicEntityAmmo # Goobstation
-    rechargeCooldown: 4
+    rechargeCooldown: 10 # Trauma, was 4
 
 - type: entity
   name: magical wand of instant death

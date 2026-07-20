@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ ClothingHeadsetAlt, BaseRevMajorContraband ]
   id: ClothingHeadsetRevolutionary
@@ -10,3 +12,18 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Ears/Headsets/revearpiece.rsi
   - type: FlashSoundSuppression
+
+- type: entity
+  parent: [ClothingHeadsetAltLoudspeaker, BaseCentcommContraband]
+  id: ClothingHeadsetAltHunter
+  name: spacepol officers over-ear headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeySyndie
+      - EncryptionKeyFreelance
+  - type: Sprite
+    sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi

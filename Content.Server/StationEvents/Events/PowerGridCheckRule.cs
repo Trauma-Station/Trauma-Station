@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Threading;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -24,33 +9,93 @@ using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
+using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events
 {
     [UsedImplicitly]
-    public sealed class PowerGridCheckRule : StationEventSystem<PowerGridCheckRuleComponent>
+    public sealed partial class PowerGridCheckRule : StationEventSystem<PowerGridCheckRuleComponent>
     {
-        [Dependency] private readonly ApcSystem _apcSystem = default!;
+        [Dependency] private ApcSystem _apcSystem = default!;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            SubscribeLocalEvent<PowerGridCheckNotifyComponent, ComponentStartup>(OnApcStartup);
+            SubscribeLocalEvent<PowerGridCheckNotifyComponent, ApcToggleMainBreakerAttemptEvent>(OnApcToggleMainBreaker);
+        }
 
         protected override void Started(EntityUid uid, PowerGridCheckRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
         {
             base.Started(uid, component, gameRule, args);
 
-            if (!TryGetRandomStation(out var chosenStation))
+            if (GetRandomStationGrids(out var chosenStation) is not { } stationGrids) // Trauma - get grids instead of comparing station
                 return;
 
-            component.AffectedStation = chosenStation.Value;
+            component.AffectedStation = chosenStation!.Value; // Trauma - add !, shit language nullables
 
             var query = AllEntityQuery<ApcComponent, TransformComponent>();
             while (query.MoveNext(out var apcUid ,out var apc, out var transform))
             {
-                if (apc.MainBreakerEnabled && CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == chosenStation)
+                if (apc.MainBreakerEnabled && transform.GridUid is { } grid && stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
                     component.Powered.Add(apcUid);
             }
 
             RobustRandom.Shuffle(component.Powered);
 
             component.NumberPerSecond = Math.Max(1, (int)(component.Powered.Count / component.SecondsUntilOff)); // Number of APCs to turn off every second. At least one.
+
+        }
+
+        /// <summary>
+        /// Check if the entity should be affected by an existing
+        /// PowerGridCheckRuleComponent and if so, turns off the APC.
+        /// </summary>
+        private void OnApcStartup(EntityUid apcUid, PowerGridCheckNotifyComponent comp, ComponentStartup args)
+        {
+            if (!TryComp<ApcComponent>(apcUid, out var apcComp))
+            {
+                return;
+            }
+
+            PowerGridCheckRuleComponent? rule = GetRuleAffectingEntity(apcUid);
+            if (rule != null && apcComp.MainBreakerEnabled)
+            {
+                _apcSystem.ApcToggleBreaker(apcUid, apcComp);
+                rule.Unpowered.Add(apcUid);
+            }
+        }
+
+        private void OnApcToggleMainBreaker(EntityUid uid, PowerGridCheckNotifyComponent component, ref ApcToggleMainBreakerAttemptEvent args)
+        {
+            args.Cancelled |= GetRuleAffectingEntity(uid) != null;
+        }
+
+        /// <summary>
+        /// Returns the PowerGridCheckRuleComponent affecting the uid, or null if none
+        /// </summary>
+        private PowerGridCheckRuleComponent? GetRuleAffectingEntity(EntityUid uid)
+        {
+            if (!TryComp(uid, out TransformComponent? xform))
+            {
+                return null;
+            }
+
+            if (!TryComp<StationMemberComponent>(xform.GridUid, out var stationMemberComp))
+            {
+                return null;
+            }
+
+            var activeRules = AllEntityQuery<PowerGridCheckRuleComponent, ActiveGameRuleComponent>();
+            while (activeRules.MoveNext(out var _entity, out var powerGridRule, out var _activeGameRule))
+            {
+                if (stationMemberComp.Station == powerGridRule.AffectedStation)
+                {
+                    return powerGridRule;
+                }
+            }
+
+            return null;
         }
 
         protected override void Ended(EntityUid uid, PowerGridCheckRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)

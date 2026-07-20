@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: nameIdentifierGroup
+  id: CosmicPositronicBrain
+  format: name-identifier-format-mindsink
+  minValue: 0
+  maxValue: 10

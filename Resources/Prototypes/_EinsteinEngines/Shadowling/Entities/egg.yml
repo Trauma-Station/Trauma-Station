@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: SlingEgg
   name: Shadowling Egg
@@ -65,7 +67,8 @@
     bodyType: Dynamic
   - type: ShadowlingAscensionEgg
   - type: Damageable
-    damageContainer: Biological # goob
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:

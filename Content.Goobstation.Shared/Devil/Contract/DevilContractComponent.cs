@@ -1,9 +1,5 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Robust.Shared.GameStates;
+
 
 namespace Content.Goobstation.Shared.Devil.Contract;
 
@@ -20,7 +16,7 @@ public sealed partial class DevilContractComponent : Component
     /// <summary>
     /// The entity who created the contract, AKA, the entity who gains the soul.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? ContractOwner;
 
     /// <summary>

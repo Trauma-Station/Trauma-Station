@@ -1,6 +1,7 @@
 // <Trauma>
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Body;
+using Content.Shared.Localizations;
+using Content.Trauma.Common.Armor;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -17,10 +18,9 @@ namespace Content.Shared.Armor;
 /// <summary>
 ///     This handles logic relating to <see cref="ArmorComponent" />
 /// </summary>
-public abstract class SharedArmorSystem : EntitySystem
+public abstract partial class SharedArmorSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -54,16 +54,34 @@ public abstract class SharedArmorSystem : EntitySystem
         if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
             return;
 
-        // <Goob>
-        if (args.Args.TargetPart == null)
+        // <Trauma>
+        if (args.Args.TargetPart is not { } partType || !component.ArmorCoverage.Contains(partType))
             return;
 
-        var (partType, _) = _body.ConvertTargetBodyPart(args.Args.TargetPart);
+        var isPrecise = (args.Args.Damage.Flags & DamageSpecifier.DamageFlags.PreciseHit) != 0;
+        var ev = new ArmorProtectAttemptEvent(args.Args.Origin, isPrecise);
+        RaiseLocalEvent(uid, ref ev);
+        var mult = ev.Multiplier;
+        if (mult <= 0f)
+            return;
 
-        if (component.ArmorCoverage.Contains(partType))
-            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration));
-        // </Goob>
+        // apply penetration to base modifiers
+        var modifierSet = DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration);
+        if (mult >= 1f)
+        {
+            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, modifierSet);
+            return;
+        }
+
+        var newModifierSet = new DamageModifierSet();
+        foreach (var (key, value) in modifierSet.Coefficients)
+        {
+            newModifierSet.Coefficients[key] = 1f - (1f - value) * mult;
+        }
+
+        newModifierSet.FlatReduction = modifierSet.FlatReduction;
+        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, newModifierSet);
+        // </Trauma>
     }
 
     private void OnBorgDamageModify(EntityUid uid, ArmorComponent component,
@@ -109,13 +127,15 @@ public abstract class SharedArmorSystem : EntitySystem
 
         if (!component.ArmourCoverageHidden)
         {
-            foreach (var coveragePart in coverage.Where(coveragePart => coveragePart != BodyPartType.Other))
-            {
-                msg.PushNewline();
+            // <Trauma>
+            var coveredParts = coverage.Where(coveragePart => coveragePart != BodyPartType.Other).ToList();
+            List<string> coverageText = [];
+            foreach (var part in coveredParts)
+                coverageText.Add(Loc.GetString("armor-coverage-type-" + part.ToString().ToLower()));
 
-                var bodyPartType = Loc.GetString("armor-coverage-type-" + coveragePart.ToString().ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", bodyPartType)));
-            }
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", ContentLocalizationManager.FormatList(coverageText))));
+            // </Trauma>
         }
 
         if (!component.ArmourModifiersHidden)
@@ -124,9 +144,9 @@ public abstract class SharedArmorSystem : EntitySystem
             {
                 msg.PushNewline();
                 var armorType = Loc.GetString("armor-damage-type-" + coefficientArmor.Key.ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value",
+                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value-trauma", // Trauma - better locale string
                     ("type", armorType),
-                    ("value", MathF.Round((1f - coefficientArmor.Value) * 100, 1))
+                    ("value", MathF.Abs(1f - coefficientArmor.Value) * 100), ("protect", coefficientArmor.Value < 1f) // Trauma - better values
                 ));
             }
 

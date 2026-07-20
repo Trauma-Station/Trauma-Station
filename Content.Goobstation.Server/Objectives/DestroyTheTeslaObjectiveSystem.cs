@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Tesla.Components;
 using Content.Shared.Objectives.Components;
 
@@ -6,7 +8,7 @@ namespace Content.Goobstation.Server.Objectives;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class DestroyTheTeslaObjectiveSystem : EntitySystem
+public sealed partial class DestroyTheTeslaObjectiveSystem : EntitySystem
 {
     /// <inheritdoc/>
     public override void Initialize()

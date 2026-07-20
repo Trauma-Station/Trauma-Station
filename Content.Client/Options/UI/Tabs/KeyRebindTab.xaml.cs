@@ -1,4 +1,8 @@
-using Content.Goobstation.Common.CCVar; // Goob
+// <Trauma>
+using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.Input;
+// </Trauma>
 using System.Numerics;
 using Content.Client.Stylesheets;
 using Content.Shared.CCVar;
@@ -27,8 +31,8 @@ namespace Content.Client.Options.UI.Tabs
             EngineKeyFunctions.HideUI,
         };
 
-        [Dependency] private readonly IInputManager _inputManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IInputManager _inputManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         private BindButton? _currentlyRebinding;
 
@@ -36,12 +40,6 @@ namespace Content.Client.Options.UI.Tabs
             new();
 
         private readonly List<Action> _deferCommands = new();
-
-        private void HandleToggleUSQWERTYCheckbox(BaseButton.ButtonToggledEventArgs args)
-        {
-            _cfg.SetCVar(CVars.DisplayUSQWERTYHotkeys, args.Pressed);
-            _cfg.SaveToFile();
-        }
 
         private void InitToggleWalk()
         {
@@ -158,10 +156,26 @@ namespace Content.Client.Options.UI.Tabs
                 KeybindsContainer.AddChild(newCheckBox);
             }
 
+            void AddToggleCvarCheckBox(string checkBoxName, CVarDef<bool> cvar)
+            {
+                CheckBox newCheckBox = new CheckBox() { Text = Loc.GetString(checkBoxName) };
+                newCheckBox.Pressed = _cfg.GetCVar(cvar);
+                newCheckBox.OnToggled += (e) =>
+                {
+                    _cfg.SetCVar(cvar, e.Pressed);
+                    _cfg.SaveToFile();
+                };
+
+                KeybindsContainer.AddChild(newCheckBox);
+            }
+
             AddHeader("ui-options-header-general");
-            AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
+            AddToggleCvarCheckBox("ui-options-hotkey-keymap", CVars.DisplayUSQWERTYHotkeys);
+            AddToggleCvarCheckBox("ui-options-hold-to-attack-melee", CCVars.ControlHoldToAttackMelee);
+            AddToggleCvarCheckBox("ui-options-hold-to-attack-ranged", CCVars.ControlHoldToAttackRanged);
 
             AddHeader("ui-options-header-movement");
+            AddButton(TraumaKeyFunctions.Strafe); // Trauma
             AddButton(EngineKeyFunctions.MoveUp);
             AddButton(EngineKeyFunctions.MoveLeft);
             AddButton(EngineKeyFunctions.MoveDown);
@@ -169,11 +183,16 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.Walk);
             AddCheckBox("ui-options-hotkey-toggle-walk", _cfg.GetCVar(CCVars.ToggleWalk), HandleToggleWalk);
             AddCheckBox("ui-options-hotkey-default-walk", _cfg.GetCVar(GoobCVars.DefaultWalk), HandleDefaultWalk); // Goob
-            AddButton(ContentKeyFunctions.Sprint); // Goob
             InitToggleWalk();
             AddButton(ContentKeyFunctions.ToggleKnockdown);
 
             AddHeader("ui-options-header-camera");
+            // <Trauma>
+            AddToggleCvarCheckBox("ui-options-mouse-wheel-zoom", TraumaCVars.MouseWheelZoom);
+            AddToggleCvarCheckBox("ui-options-mouse-wheel-rotate", TraumaCVars.MouseWheelRotate);
+            AddButton(TraumaKeyFunctions.ZoomMod);
+            AddButton(TraumaKeyFunctions.RotateMod);
+            // </Trauma>
             AddButton(EngineKeyFunctions.CameraRotateLeft);
             AddButton(EngineKeyFunctions.CameraRotateRight);
             AddButton(EngineKeyFunctions.CameraReset);
@@ -191,13 +210,14 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.Drop);
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
-            AddButton(ContentKeyFunctions.ResistGrab); // Goob
+            AddButton(TraumaKeyFunctions.ResistGrab); // Trauma
             AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);
             AddButton(ContentKeyFunctions.SaveItemLocation);
 
             AddHeader("ui-options-header-interaction-adv");
+            AddButton(TraumaKeyFunctions.Tackle); // Trauma
             AddButton(ContentKeyFunctions.SmartEquipBackpack);
             AddButton(ContentKeyFunctions.SmartEquipBelt);
             AddButton(ContentKeyFunctions.SmartEquipPocket1);
@@ -231,7 +251,10 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenCraftingMenu);
             AddButton(ContentKeyFunctions.OpenGuidebook);
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
-            AddButton(ContentKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
+            // <Trauma>
+            AddButton(TraumaKeyFunctions.OpenLanguageMenu);
+            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu);
+            // </Trauma>
             AddButton(ContentKeyFunctions.OpenAHelp);
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);
@@ -246,20 +269,22 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
 
-            // Shitmed Change Start - TODO: Add hands, feet and groin targeting.
+            // <Trauma>
             AddHeader("ui-options-header-targeting");
-            AddButton(ContentKeyFunctions.TargetHead);
-            AddButton(ContentKeyFunctions.TargetChest);
-            AddButton(ContentKeyFunctions.TargetGroin);
-            AddButton(ContentKeyFunctions.TargetLeftArm);
-            AddButton(ContentKeyFunctions.TargetLeftHand);
-            AddButton(ContentKeyFunctions.TargetRightArm);
-            AddButton(ContentKeyFunctions.TargetRightHand);
-            AddButton(ContentKeyFunctions.TargetLeftLeg);
-            AddButton(ContentKeyFunctions.TargetLeftFoot);
-            AddButton(ContentKeyFunctions.TargetRightLeg);
-            AddButton(ContentKeyFunctions.TargetRightFoot);
-            // Shitmed Change End
+            AddToggleCvarCheckBox("ui-options-mouse-wheel-targeting", TraumaCVars.MouseWheelTargeting);
+            AddButton(TraumaKeyFunctions.TargetingMod);
+            AddButton(TraumaKeyFunctions.TargetHead);
+            AddButton(TraumaKeyFunctions.TargetChest);
+            AddButton(TraumaKeyFunctions.TargetGroin);
+            AddButton(TraumaKeyFunctions.TargetLeftArm);
+            AddButton(TraumaKeyFunctions.TargetLeftHand);
+            AddButton(TraumaKeyFunctions.TargetRightArm);
+            AddButton(TraumaKeyFunctions.TargetRightHand);
+            AddButton(TraumaKeyFunctions.TargetLeftLeg);
+            AddButton(TraumaKeyFunctions.TargetLeftFoot);
+            AddButton(TraumaKeyFunctions.TargetRightLeg);
+            AddButton(TraumaKeyFunctions.TargetRightFoot);
+            // </Trauma>
 
             AddHeader("ui-options-header-misc");
             AddButton(ContentKeyFunctions.TakeScreenshot);
@@ -542,7 +567,7 @@ namespace Content.Client.Options.UI.Tabs
             }
         }
 
-        private sealed class BindButton : Control
+        private sealed partial class BindButton : Control
         {
             private readonly KeyRebindTab _tab;
             public readonly KeyControl KeyControl;

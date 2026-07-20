@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretAntiInsurgent
+  suffix: AntiInsurgent
+  components:
+  - type: NpcFactionMember
+    factions:
+    - InsurgentDestroyer9000
+  - type: BallisticAmmoProvider
+    proto: CartridgeTurret
+    capacity: 500

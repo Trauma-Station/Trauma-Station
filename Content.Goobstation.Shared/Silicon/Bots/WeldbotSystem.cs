@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Emag.Systems;
@@ -12,9 +8,9 @@ namespace Content.Goobstation.Shared.Silicon.Bots;
 /// <summary>
 /// Handles emagging Weldbots
 /// </summary>
-public sealed class WeldbotSystem : EntitySystem
+public sealed partial class WeldbotSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

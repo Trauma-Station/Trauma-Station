@@ -1,40 +1,15 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deathride58 <deathride58@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Kayzel <43700376+KayzelW@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Trest <144359854+trest100@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 kurokoTurbo <92106367+kurokoTurbo@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Camera;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Rejuvenate;
 using JetBrains.Annotations;
 
-// Shitmed Change
-using Content.Shared.Body.Systems;
-using Content.Shared.Body.Components;
-using Content.Shared._Shitmed.Body.Organ;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Systems;
-
 namespace Content.Shared.Eye.Blinding.Systems;
 
-public sealed class BlindableSystem : EntitySystem
+public sealed partial class BlindableSystem : EntitySystem
 {
-    [Dependency] private readonly BlurryVisionSystem _blurriness = default!;
-    [Dependency] private readonly EyeClosingSystem _eyelids = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!; // Shitmed Change
-    [Dependency] private readonly TraumaSystem _trauma = default!; // Shitmed Change
+    [Dependency] private BlurryVisionSystem _blurriness = default!;
+    [Dependency] private EyeClosingSystem _eyelids = default!;
 
     public override void Initialize()
     {
@@ -45,7 +20,6 @@ public sealed class BlindableSystem : EntitySystem
         SubscribeLocalEvent<BlindableComponent, GetEyeOffsetAttemptEvent>(OnGetEyeOffsetAttemptEvent);
     }
 
-    // Might need to keep this one because of slimes since their eyes arent an organ, so they wouldnt get rejuvenated.
     private void OnRejuvenate(Entity<BlindableComponent> ent, ref RejuvenateEvent args)
     {
         AdjustEyeDamage((ent.Owner, ent.Comp), -ent.Comp.EyeDamage);
@@ -69,6 +43,10 @@ public sealed class BlindableSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    /// <summary>
+    /// Checks and updates a blindable is blind state according to damage and other components to the entity.
+    /// </summary>
+    /// <param name="blindable">The entity to update.</param>
     [PublicAPI]
     public void UpdateIsBlind(Entity<BlindableComponent?> blindable)
     {
@@ -97,7 +75,11 @@ public sealed class BlindableSystem : EntitySystem
         Dirty(blindable);
     }
 
-    // Shitmed Change Start
+    /// <summary>
+    /// Adjust eye damage and updates the relevant sub components.
+    /// </summary>
+    /// <param name="blindable">Entity to adjust for.</param>
+    /// <param name="amount">How much to change the eye damage. Can be positive and negative.</param>
     public void AdjustEyeDamage(Entity<BlindableComponent?> blindable, int amount)
     {
         if (!Resolve(blindable, ref blindable.Comp, false) || amount == 0)
@@ -105,26 +87,8 @@ public sealed class BlindableSystem : EntitySystem
 
         blindable.Comp.EyeDamage += amount;
         UpdateEyeDamage(blindable, true);
-        // If the entity has eye organs, then we also damage those.
-        if (!TryComp(blindable, out BodyComponent? body)
-            || !_body.TryGetBodyOrganEntityComps<EyesComponent>((blindable, body), out var eyes))
-            return;
-
-        // for now
-        foreach (var eye in eyes)
-            _trauma.TryCreateOrganDamageModifier(eye.Owner, amount, blindable.Owner, "BlindableDamage", eye.Comp2);
+        UpdateEyeOrganDamage(blindable, amount); // Trauma
     }
-
-    // Alternative version of the method intended to be used with Eye Organs, so that you can just pass in
-    // the severity and set that.
-    public void SetEyeDamage(Entity<BlindableComponent?> blindable, int amount)
-    {
-        if (!Resolve(blindable, ref blindable.Comp, false))
-            return;
-        blindable.Comp.EyeDamage = amount;
-        UpdateEyeDamage(blindable, true);
-    }
-    // Shitmed Change End
 
     private void UpdateEyeDamage(Entity<BlindableComponent?> blindable, bool isDamageChanged)
     {
@@ -141,6 +105,13 @@ public sealed class BlindableSystem : EntitySystem
         var ev = new EyeDamageChangedEvent(blindable.Comp.EyeDamage);
         RaiseLocalEvent(blindable.Owner, ref ev);
     }
+
+    /// <summary>
+    /// Sets the minimum damage to an eye.
+    /// Updates also sub components.
+    /// </summary>
+    /// <param name="blindable">The entity to update.</param>
+    /// <param name="amount">The minimum amount the entity can be blinded.</param>
     public void SetMinDamage(Entity<BlindableComponent?> blindable, int amount)
     {
         if (!Resolve(blindable, ref blindable.Comp, false))
@@ -174,6 +145,8 @@ public sealed class CanSeeAttemptEvent : CancellableEntityEventArgs, IInventoryR
 
 public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent
 {
+    public EntityUid Target; // Trauma
+
     /// <summary>
     ///     Time to subtract from any temporary blindness sources.
     /// </summary>

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Whitelist;
@@ -12,10 +6,10 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Containers.OnCollide;
 
-public sealed class InsertToContainerOnCollideSystem : EntitySystem
+public sealed partial class InsertToContainerOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
 
     /// <inheritdoc/>

@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._DV.Carrying;
+
+using Content.Trauma.Shared.Carrying;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -12,23 +14,21 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Throwing;
-using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Player;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Buckle;
 
 // all the loc is specific to crucifixion, so if you want to reuse this youll want to tie loc strings to the component
-public sealed class StrapLockSystem : EntitySystem
+public sealed partial class StrapLockSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly NestedEffectSystem _nestedEffect = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtItem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedVirtualItemSystem _virtItem = default!;
 
     public override void Initialize()
     {
@@ -111,7 +111,7 @@ public sealed class StrapLockSystem : EntitySystem
         {
             args.Cancelled = true;
             if (args.Popup)
-                _popup.PopupClient(Loc.GetString("strap-lock-self", ("strap", ent.Owner)), ent, user);
+                _popup.PopupEntity(Loc.GetString("strap-lock-self", ("strap", ent.Owner)), ent, user);
             return;
         }
 
@@ -123,7 +123,7 @@ public sealed class StrapLockSystem : EntitySystem
             return;
 
         var msg = Loc.GetString("strap-lock-need-hands", ("hands", ent.Comp.RequiredHands), ("strap", ent.Owner));
-        _popup.PopupClient(msg, ent, user);
+        _popup.PopupEntity(msg, ent, user);
     }
 
     private void OnUnstrapAttempt(Entity<StrapLockComponent> ent, ref UnstrapAttemptEvent args)
@@ -138,7 +138,7 @@ public sealed class StrapLockSystem : EntitySystem
         var buckled = Identity.Entity(args.Buckle, EntityManager);
         var key = args.User == args.Buckle.Owner ? "you" : "others";
         var msg = Loc.GetString($"strap-lock-unstrap-locked-{key}", ("buckled", buckled), ("strap", ent.Owner));
-        _popup.PopupClient(msg, ent, args.User);
+        _popup.PopupEntity(msg, ent, args.User);
     }
 
     private void OnUnstrapped(Entity<StrapLockComponent> ent, ref UnstrappedEvent args)
@@ -258,7 +258,7 @@ public sealed class StrapLockSystem : EntitySystem
         var buckled = Identity.Entity(target, EntityManager);
         var you = Loc.GetString("strap-lock-raising-you", ("buckled", buckled), ("strap", ent.Owner));
         var others = Loc.GetString("strap-lock-raising-others", ("buckled", buckled), ("strap", ent.Owner), ("user", userIdent));
-        _popup.PopupPredicted(you, others, target, user);
+        _popup.PopupEntity(you, others, target, user);
 
         var comp = EnsureComp<StrapLockHoldingComponent>(user);
         comp.Strap = ent;
@@ -292,9 +292,13 @@ public sealed class StrapLockSystem : EntitySystem
         var buckled = Identity.Entity(target, EntityManager);
         var you = Loc.GetString("strap-lock-dropped-you", ("buckled", buckled));
         var others = Loc.GetString("strap-lock-dropped-others", ("buckled", buckled), ("user", userIdent));
-        _popup.PopupPredicted(you, others, target, _player.LocalEntity); // all clients will predict it
+        _popup.PopupEntity(you, others, target, _player.LocalEntity); // all clients will predict it
 
-        _nestedEffect.ApplyNestedEffect(target, ent.Comp.DropEffect);
+        _effects.TryApplyEffect(target, ent.Comp.DropEffect);
+
+        // incase some shit didnt clean it up
+        RemCompDeferred<StrapLockedComponent>(target);
+        RemCompDeferred<StrapLockHeldComponent>(target);
     }
 
     private void StopHoldingStrapped(EntityUid uid)

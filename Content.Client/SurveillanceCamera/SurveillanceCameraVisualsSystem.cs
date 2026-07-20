@@ -1,17 +1,11 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.SurveillanceCamera;
 using Robust.Client.GameObjects;
 
 namespace Content.Client.SurveillanceCamera;
 
-public sealed class SurveillanceCameraVisualsSystem : EntitySystem
+public sealed partial class SurveillanceCameraVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

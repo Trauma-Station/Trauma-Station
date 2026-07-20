@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Hands.Components;
@@ -23,10 +18,10 @@ namespace Content.Server.Shuttles.Commands;
 /// </summary>
 [AdminCommand(AdminFlags.Fun)]
 
-public sealed class FTLDiskCommand : LocalizedCommands
+public sealed partial class FTLDiskCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entSystemManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IEntitySystemManager _entSystemManager = default!;
 
     public override string Command => "ftldisk";
 

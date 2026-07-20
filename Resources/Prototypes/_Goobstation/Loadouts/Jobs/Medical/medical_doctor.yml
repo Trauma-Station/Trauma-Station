@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: loadout
   id: MedicalDoctorEnvirosuit
   equipment:
@@ -24,3 +26,8 @@
   - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
     species:
     - Plasmaman
+
+- type: loadout
+  id: MedicMJ
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryMedicalDoctor

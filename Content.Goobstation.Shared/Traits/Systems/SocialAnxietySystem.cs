@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Traits.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.IdentityManagement;
@@ -9,7 +11,7 @@ namespace Content.Goobstation.Shared.Traits.Systems;
 public sealed partial class SocialAnxietySystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
     public override void Initialize()
     {
         base.Initialize();

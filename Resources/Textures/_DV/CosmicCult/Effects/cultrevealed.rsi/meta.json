@@ -8,7 +8,7 @@
     "copyright": "A custom item by AftrLite (Github).",
     "states": [
         {
-            "name": "vfx",
+            "name": "default",
             "directions": 4,
             "delays": [
                 [

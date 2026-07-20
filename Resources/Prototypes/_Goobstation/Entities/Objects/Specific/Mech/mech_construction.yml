@@ -1,8 +1,5 @@
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Ripley MK-II
 
 - type: entity
@@ -62,9 +59,9 @@
     state: ripleymkii_harness+o
     noRot: true
   - type: Construction
-    graph: RipleyMKIIHarness
+    graph: RipleyMKII
     node: start
-    defaultTarget: ripleymkiiHarness
+    defaultTarget: ripleymkii
 
 - type: entity
   id: RipleyMKIIChassis
@@ -147,6 +144,10 @@
   - type: Sprite
     state: clarke_harness+o
     noRot: true
+  - type: Construction
+    graph: Clarke
+    node: start
+    defaultTarget: clarke
 
 - type: entity
   parent: BaseClarkePartItem
@@ -282,6 +283,10 @@
   - type: Sprite
     state: durand_harness+o
     noRot: true
+  - type: Construction
+    graph: Durand
+    node: start
+    defaultTarget: durand
 
 - type: entity
   parent: BaseDurandPartItem
@@ -429,6 +434,10 @@
   - type: Sprite
     state: gygax_harness+o
     noRot: true
+  - type: Construction
+    graph: Gygax
+    node: start
+    defaultTarget: gygax
 
 - type: entity
   parent: BaseGygaxPartItem

@@ -1,10 +1,7 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using System.Numerics;
 using Content.Shared.Buckle.Components;
 
 namespace Content.Goobstation.Shared.OfficeChair;
@@ -14,7 +11,7 @@ public sealed partial class SprayPushableVehicleSystem : EntitySystem
     // This file is terrible code to make the velocity change feel somewhat smooth, this exists due to SpraySystem being server only.
     // I really do not care enough to make it any better. I tried doing velocity change entirely in SpraySystem and it felt like getting teleported.
 
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

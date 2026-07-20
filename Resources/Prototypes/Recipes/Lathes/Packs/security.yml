@@ -2,6 +2,7 @@
 
 - type: latheRecipePack
   id: SecurityEquipmentStatic
+  parent: TraumaSecurityEquipmentStatic # Trauma
   recipes:
   - ClothingEyesHudSecurity
   - ForensicPad
@@ -52,6 +53,12 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
+  # <Trauma>
+  - MagazineBoxGaussgunBullet
+  - MagazineBoxGaussgunDisc
+  - MagazineBoxGaussgunShard
+  - MagazineGaussgun
+  # </Trauma>
 
 - type: latheRecipePack
   id: SecurityWeaponsStatic

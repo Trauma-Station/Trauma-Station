@@ -16,4 +16,26 @@ Entries:
   id: 2
   time: '2025-10-30T21:42:03.0000000+00:00'
   url: https://github.com/space-wizards/space-station-14/pull/40257
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Moved New Life Rule to Core Rules so antags are properly exempt from all
+      Roleplay Rules.
+  - type: Fix
+    message: Cleaned up the grammar of some rules.
+  - type: Tweak
+    message: The server is now 18+.
+  id: 3
+  time: '2026-02-12T16:50:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/666
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: Core Rule 3 now includes netspeak as not permitted.
+  - type: Add
+    message: Roleplay Rule 5 now includes reference characters as not permitted.
+  id: 4
+  time: '2026-05-31T11:55:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2938
 Order: 1

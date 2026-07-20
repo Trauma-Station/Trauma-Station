@@ -1,0 +1,294 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Slam
+
+- type: combo
+  abstract: true
+  id: BaseCQCSlam
+  attacks:
+  - Grab
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-slam
+
+- type: combo
+  parent: BaseCQCSlam
+  id: CQCSlamSimple
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 15
+  - !type:ModifyKnockdown
+    time: 2
+    drop: true
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCSlam
+  id: CQCSlam
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 12
+  - !type:ModifyKnockdown
+    time: 5
+    drop: true
+    type: Update
+  levelRequired: 26
+
+# Kick
+
+- type: combo
+  abstract: true
+  id: BaseCQCKick
+  attacks:
+  - Harm
+  - Harm
+  # cant kick without legs
+  userConditions:
+  - !type:HasOrgan
+    organCategory: LegLeft
+  - !type:HasOrgan
+    organCategory: LegRight
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-kick
+  opponentEffects:
+  - !type:StopPull
+  - !type:GrabThrow
+
+- type: combo
+  parent: BaseCQCKick
+  id: CQCKickSimple
+  opponentEffects:
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 8
+  - !type:ModifyKnockdown
+    time: 1
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCKick
+  id: CQCKick
+  opponentEffects:
+  - !type:IfElse
+    condition: !type:StandingCondition
+      inverted: true
+    trueEffects: # kicking someone on the ground is much stronger
+    - !type:TakeStaminaDamage
+      amount: 45
+    - !type:HealthChange
+      targetPart: Head
+      damage:
+        types:
+          Blunt: 10
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectForcedSleeping
+      time: 8
+      conditions:
+      - !type:StaminaCritical
+    falseEffects:
+    - !type:TakeStaminaDamage
+      amount: 20
+  levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  parent: BaseCQCKick
+  id: CQCKickAdvanced
+  opponentEffects:
+  - !type:IfElse
+    condition: !type:StandingCondition
+      inverted: true
+    trueEffects: # kicking someone on the ground is much stronger
+    - !type:TakeStaminaDamage
+      amount: 55
+    - !type:HealthChange
+      targetPart: Head
+      damage:
+        types:
+          Blunt: 20
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectForcedSleeping
+      time: 12
+      conditions:
+      - !type:StaminaCritical
+    falseEffects:
+    - !type:TakeStaminaDamage
+      amount: 25
+  levelRequired: 60
+
+# Restrain
+
+- type: combo
+  abstract: true
+  id: BaseCQCRestrain
+  attacks:
+  - Grab
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-restrain
+
+- type: combo
+  parent: BaseCQCRestrain
+  id: CQCRestrainSimple
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 2
+    type: Update
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCRestrain
+  id: CQCRestrain
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 10
+    type: Update
+  - !type:ModifyKnockdown
+    time: 3
+    drop: true
+    type: Update
+  levelRequired: 26
+
+# Pressure
+
+- type: combo
+  abstract: true
+  id: BaseCQCPressure
+  attacks:
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-pressure
+
+- type: combo
+  parent: BaseCQCPressure
+  id: CQCPressureSimple
+  opponentEffects:
+  - !type:StealItem
+    probability: 0.5
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCPressure
+  id: CQCPressure
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 60
+  - !type:StealItem
+  levelRequired: 26
+
+# Consecutive
+
+- type: combo
+  abstract: true
+  id: BaseCQCConsecutive
+  attacks:
+  - Disarm
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-consecutive
+
+- type: combo
+  parent: BaseCQCConsecutive
+  id: CQCConsecutiveSimple
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 20
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCConsecutive
+  id: CQCConsecutive
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 40
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 10
+  levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  parent: BaseCQCConsecutive
+  id: CQCConsecutiveAdvanced
+  opponentEffects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: 7
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 30
+  - !type:ModifyKnockdown
+    time: 5
+    drop: true
+    type: Update
+  levelRequired: 60
+
+# Neck snap
+
+- type: combo
+  abstract: true
+  id: BaseCQCHeadCombo
+  userConditions:
+  - !type:TargetingCondition
+    target: Head
+  conditions:
+  - !type:HasOrgan
+    organCategory: Head
+  - !type:PulledByUser
+  - !type:StaminaCritical
+
+- type: combo
+  abstract: true # TODO: enable if finished
+  parent: BaseCQCHeadCombo
+  id: CQCNeckSnap
+  attacks:
+  - Harm
+  # TODO: break neck, damage head until dead
+  levelRequired: 60
+
+# TODO: choke out

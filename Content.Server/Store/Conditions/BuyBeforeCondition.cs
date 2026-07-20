@@ -1,43 +1,21 @@
-// SPDX-FileCopyrightText: 2023 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Store.Conditions;
 
-// goob edit - fuck newstore
-// do not touch unless you want to shoot yourself in the leg
 public sealed partial class BuyBeforeCondition : ListingCondition
 {
     /// <summary>
     ///     Required listing(s) needed to purchase before this listing is available
     /// </summary>
-    [DataField] // Goob edit
-    public HashSet<ProtoId<ListingPrototype>>? Whitelist; // Goob edit
-
-    /// <summary>
-    ///     Goobstation.
-    ///     If false, only one of the listings needs to be purchased to pass the whitelist.
-    ///     If true, all of the listings need to be purchased.
-    /// </summary>
     [DataField]
-    public bool WhitelistRequireAll = true;
+    public HashSet<ProtoId<ListingPrototype>>? Whitelist;
 
     /// <summary>
     ///     Listing(s) that if bought, block this purchase, if any.
     /// </summary>
-    [DataField] // Goobstation
+    [DataField]
     public HashSet<ProtoId<ListingPrototype>>? Blacklist;
 
     public override bool Condition(ListingConditionArgs args)
@@ -45,7 +23,7 @@ public sealed partial class BuyBeforeCondition : ListingCondition
         if (!args.EntityManager.TryGetComponent<StoreComponent>(args.StoreEntity, out var storeComp))
             return false;
 
-        var allListings = storeComp.Listings;
+        var allListings = storeComp.FullListingsCatalog;
 
         var purchasesFound = false;
 
@@ -61,31 +39,26 @@ public sealed partial class BuyBeforeCondition : ListingCondition
             }
         }
 
-        if (Whitelist == null) // Goobstation
-            return true;
-
-        foreach (var requiredListing in Whitelist)
+        if (Whitelist != null)
         {
-            foreach (var listing in allListings)
+            foreach (var requiredListing in Whitelist)
             {
-                if (listing.ID == requiredListing.Id)
+                foreach (var listing in allListings)
                 {
-                    purchasesFound = listing.PurchaseAmount > 0;
-
-                    // Goobstation
-                    switch (purchasesFound)
+                    if (listing.ID == requiredListing.Id)
                     {
-                        case true when !WhitelistRequireAll:
-                            return true;
-                        case false when WhitelistRequireAll:
-                            return false;
+                        purchasesFound = listing.PurchaseAmount > 0;
+                        // <Trauma>
+                        if (purchasesFound != WhitelistRequireAll)
+                            return purchasesFound;
+                        // </Trauma>
+                        break;
                     }
-
-                    break;
                 }
             }
+            return purchasesFound;
         }
 
-        return purchasesFound;
+        return true;
     }
 }

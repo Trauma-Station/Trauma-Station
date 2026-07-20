@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: loadout
   id: WhiteGloves
   equipment:
@@ -53,33 +55,6 @@
   id: DarkGreenEnvirogloves
   equipment:
     gloves: ClothingHandsGlovesEnviroglovesColorDarkGreen
-  effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
-    species:
-    - Plasmaman
-
-- type: loadout
-  id: PurpleEnvirosuit
-  equipment:
-    jumpsuit: ClothingUniformEnvirosuitColorPurple
-  effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
-    species:
-    - Plasmaman
-
-- type: loadout
-  id: PurpleEnvirohelm
-  equipment:
-    head: ClothingHeadEnvirohelmColorPurple
-  effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
-    species:
-    - Plasmaman
-
-- type: loadout
-  id: PurpleEnvirogloves
-  equipment:
-    gloves: ClothingHandsGlovesEnviroglovesPurple
   effects:
   - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
     species:

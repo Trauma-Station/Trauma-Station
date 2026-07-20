@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoProduct
+  id: RotaryPhoneCrateCargo
+  icon:
+    sprite: _RMC14/Objects/phone/rotary_phone.rsi
+    state: rotary_phone
+  product: CrateRotaryPhone
+  cost: 2500
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: CoconutCrabSet
+  icon:
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    state: coconutcrab
+  product: CrateServiceCoconutCrab
+  cost: 7500
+  category: cargoproduct-category-name-service
+  group: market

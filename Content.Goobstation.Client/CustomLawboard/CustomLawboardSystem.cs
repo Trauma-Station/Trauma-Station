@@ -1,10 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.CustomLawboard;
 
 namespace Content.Goobstation.Client.CustomLawboard;
 
-public sealed class CustomLawboardSystem : SharedCustomLawboardSystem
+public sealed partial class CustomLawboardSystem : SharedCustomLawboardSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     protected override void DirtyUI(EntityUid uid, CustomLawboardComponent? customLawboard, UserInterfaceComponent? ui = null)
     {

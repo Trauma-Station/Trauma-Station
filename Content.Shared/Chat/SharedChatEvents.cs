@@ -1,4 +1,6 @@
-using Content.Shared._EinsteinEngines.Language; // Trauma
+// <Trauma>
+using Content.Trauma.Common.Language;
+// </Trauma>
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
 using Content.Shared.Speech;

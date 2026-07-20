@@ -92,7 +92,7 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Piercing: 14
+        Ballistic: 14 # Trauma
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
@@ -146,7 +146,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10 # Trauma
         Heat: 4
   - type: PointLight
     enabled: true
@@ -169,7 +169,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 11 # 20% decrease
+        Ballistic: 11 # 20% decrease # Trauma
     increaseOnly: true # Trauma - apply modifiers, but ignore decreases
 
 - type: entity
@@ -301,7 +301,7 @@
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 20 # Goob edit
+    damage: 22 # Trauma - was 33
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1015,7 +1015,7 @@
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 0
+        Ballistic: 0 # Trauma
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -1037,6 +1037,7 @@
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
+  parent: [SolutionVapor, SolutionSmall]
   id: BulletWaterShot
   name: water
   categories: [ HideSpawnMenu ]
@@ -1059,10 +1060,6 @@
       map: ["enum.VaporVisualLayers.Base"]
   - type: Ammo
     muzzleFlash: null
-  - type: SolutionContainerManager
-    solutions:
-      vapor:
-        maxVol: 50
   - type: Fixtures
     fixtures:
       projectile:
@@ -1089,7 +1086,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10 # Trauma
 
 - type: entity
   id: BulletCannonBall
@@ -1193,7 +1190,7 @@
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 12 # Goob edit
+    damage: 13 # Trauma - was 15
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1253,6 +1250,8 @@
     damage:
       types:
         Heat: 20 #goob, 28 > 20
+  - type: BlurOnCollide # Trauma
+    blurTime: 3
 
 - type: entity
   name : disabler bolt
@@ -1343,8 +1342,9 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        # Trauma
+        # - Impassable
+        # - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile
@@ -1352,6 +1352,8 @@
     damage:
       types:
         Heat: 9 # Trauma
+  - type: BlurOnCollide # Trauma
+    blurTime: 3
 
 - type: entity
   name: wide laser barrage
@@ -1436,7 +1438,7 @@
         - Opaque
 
 - type: entity
-  parent: BaseBullet
+  parent: [SolutionAmmo, BaseBullet]
   id: EnergyCrossbowBolt
   categories: [ HideSpawnMenu ]
   name: energy bolt
@@ -1455,7 +1457,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 2
+        Ballistic: 2 # Trauma
   - type: StunOnCollide #somewhat mirror to taser stats, meant to be tot 'sidegrade'
     stunAmount: 0
     knockdownAmount: 2.5
@@ -1465,13 +1467,12 @@
     drop: false
   - type: StaminaDamageOnCollide #additional stam damage to make repeated pushups less of a viable counter
     damage: 45
-  - type: SolutionContainerManager
-    solutions:
-      bolt:
-        maxVol: 1.5
-        reagents:
-        - ReagentId: Toxin
-          Quantity: 1.5
+  - type: Solution
+    solution:
+      maxVol: 1.5
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 1.5
   - type: SolutionInjectOnProjectileHit
     transferAmount: 1.5
-    solution: bolt
+    solution: ammo

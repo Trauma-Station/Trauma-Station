@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Psychpsyo <60073468+Psychpsyo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 exincore <me@exin.xyz>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Client.Items.Systems;
 using Content.Shared.Item;
@@ -187,7 +176,10 @@ public sealed class ItemGridPiece : Control, IEntityControl
 
             var sizeDifference = ((boundingGrid.Size + Vector2i.One) * _centerTexture.Size * 2 - sprite.Size) * UIScale;
 
-            var spriteBox = new Box2Rotated(new Box2(0f, sprite.Height * scale, sprite.Width * scale, 0f), -iconRotation, Vector2.Zero);
+            var spriteBox = new Box2Rotated(
+                Box2.FromTwoPoints(Vector2.Zero, new Vector2(sprite.Width * scale, sprite.Height * scale)),
+                -iconRotation,
+                Vector2.Zero);
             var root = spriteBox.CalcBoundingBox().BottomLeft;
             var pos = PixelPosition * 2
                       + (Parent?.GlobalPixelPosition ?? Vector2.Zero)

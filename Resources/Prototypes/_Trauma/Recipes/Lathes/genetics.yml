@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  id: GeneticsDisk
+  result: GeneticsDisk
+  completetime: 3
+  materials:
+    Plastic: 300
+    Glass: 200
+    Silver: 100
+
+- type: latheRecipe
+  id: HandheldGeneticsScanner
+  result: HandheldGeneticsScanner
+  completetime: 5
+  materials:
+    Steel: 500
+    Plastic: 300
+    Glass: 200
+    Plasma: 200

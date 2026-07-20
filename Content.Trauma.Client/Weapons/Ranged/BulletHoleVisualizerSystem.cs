@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Trauma.Client.Weapons.Ranged;
+
+public sealed partial class BulletHoleVisualizerSystem : EntitySystem
+{
+    [Dependency] private IOverlayManager _overlayManager = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        _overlayManager.AddOverlay(new BulletHoleOverlay());
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _overlayManager.RemoveOverlay<BulletHoleOverlay>();
+    }
+}

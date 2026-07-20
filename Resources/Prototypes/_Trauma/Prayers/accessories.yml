@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## PARITY
 
 - type: scrollPrayer
@@ -36,8 +38,3 @@
   subjects: [ "INFINITE AMMO", "INVISIBLE", "CQC" ]
   items:
     id: ClothingHeadHatSolidHeadband
-  effects:
-  - !type:AddComponents
-    probability: 0.2
-    components:
-    - type: GrantCqc

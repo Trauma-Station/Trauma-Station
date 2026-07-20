@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: weightedRandomEntity
@@ -18,12 +10,6 @@
     SilverDoor: 1
     PaperDoor: 1
     BananiumDoor: 1
-
-- type: weightedRandomEntity
-  id: WabbajackMonkey
-  weights:
-    MobMonkeyAngry: 1
-    MobKoboldAngry: 1
 
 - type: weightedRandomEntity
   id: WabbajackCluwne
@@ -55,9 +41,22 @@
 - type: weightedRandomEntity
   id: WabbajackSlime
   weights:
-    MobAdultSlimesBlueAngry: 1
-    MobAdultSlimesGreenAngry: 1
-    MobAdultSlimesYellowAngry: 1
+    MobAdultSlimesBlueAngry: 4
+    MobAdultSlimesGreenAngry: 4
+    MobAdultSlimesYellowAngry: 4
+    ReagentSlime: 1
+    ReagentSlimeBeer: 1
+    ReagentSlimePax: 1
+    ReagentSlimeNocturine: 1
+    ReagentSlimeTHC: 1
+    ReagentSlimeBicaridine: 1
+    ReagentSlimeToxin: 1
+    ReagentSlimeNapalm: 1
+    ReagentSlimeOmnizine: 1
+    ReagentSlimeMuteToxin: 1
+    ReagentSlimeNorepinephricAcid: 1
+    ReagentSlimeEphedrine: 1
+    ReagentSlimeRobustHarvest: 1
 
 - type: weightedRandomEntity
   id: WabbajackSpecies
@@ -73,7 +72,6 @@
     MobVoxRandom: 1
     MobDwarfRandom: 1
     MobBananaMen: 1
-    MobHarpyRandom: 1
     MobIPCRandom: 1
     MobAbductor: 0.1
     MobShadowling: 0.01
@@ -81,6 +79,27 @@
 - type: weightedRandomEntity
   id: WabbajackAnimal
   weights:
+    MobBearSea: 1
+    MobSquidSea: 1
+    MobSpiderCrabSea: 1
+    MobKraitSea: 1
+    MobArcherSea: 1
+    MobEelSea: 1
+    MobCobra: 1
+    MobSnakeGrass: 1
+    MobYellowBellySnake: 1
+    MobMantis: 1
+    MobMantisShrimp: 1
+    MobShrimp: 1
+    MobDartFrog1: 1
+    MobDartFrog2: 1
+    MobDartFrog3: 1
+    MobDartFrog4: 1
+    MobDartFrog5: 1
+    MobDartFrog6: 1
+    MobBunny: 1
+    MobBunnySea: 1
+    MobBunnyEvil: 1
     MobBat: 1
     MobBee: 1
     MobChicken: 0.33
@@ -170,11 +189,23 @@
     MobGhoulStalker: 0.33
     MobGhoulProphet: 0.33
     MobGhoulRustWalker: 0.33
+    MobMonkeyAngry: 1
+    MobKoboldAngry: 1
+    MobLavalandGoliath: 0.5
+    MobLavalandGoliathAncient: 0.5
+    LavalandEliteLegionnaire: 1
+    LavalandEliteHerald: 1
+    LavalandEliteGoliathBroodmother: 1
+    LavalandMobBrimdemon: 1
 
 - type: weightedRandomEntity
   id: WabbajackSpecial
   weights:
-    MobBinglePrime: 1
+    MobBinglePrimeTrauma: 1
+    LavalandBossMegaLegion: 1
+    LavalandBossColossus: 1
+    LavalandBossAshDrake: 1
+    LavalandBossBubblegum: 1
 
 - type: weightedRandomEntity
   id: WabbajackXeno
@@ -184,16 +215,14 @@
     MobXenomorphSentinel: 0.8
     MobXenomorphHunter: 1
     MobXenomorphPraetorian: 0.5
-    MobXenomorphMaid: 0.01
 
 - type: weightedRandom
   id: WabbajackGroups
   weights:
-    WabbajackMonkey: 0.8
-    # WabbajackCluwne: 1
-    WabbajackRobot: 0.8
+    WabbajackRobot: 1
     WabbajackSlime: 0.5
     WabbajackSpecies: 1
     WabbajackAnimal: 1
+    WabbajackCluwne: 0.1
     WabbajackXeno: 0.1
     WabbajackSpecial: 0.01 # for high-impact transmutations, approximately 1/160 chance with 8 groups

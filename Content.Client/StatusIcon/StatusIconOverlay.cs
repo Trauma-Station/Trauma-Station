@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Golinth <amh2023@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PrPleGoo <PrPleGoo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
@@ -22,13 +9,13 @@ using System.Numerics;
 
 namespace Content.Client.StatusIcon;
 
-public sealed class StatusIconOverlay : Overlay
+public sealed partial class StatusIconOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
@@ -109,7 +96,7 @@ public sealed class StatusIconOverlay : Overlay
                         countL++;
                     }
                     yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)(accOffsetL - proto.Offset) / EyeManager.PixelsPerMeter;
-                    xOffset = -(bounds.Width + sprite.Offset.X) / 2f;
+                    xOffset = -(bounds.Width + sprite.Offset.X) / 2f + (float)proto.OffsetHorizontal / EyeManager.PixelsPerMeter;
 
                 }
                 else
@@ -122,7 +109,7 @@ public sealed class StatusIconOverlay : Overlay
                         countR++;
                     }
                     yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)(accOffsetR - proto.Offset) / EyeManager.PixelsPerMeter;
-                    xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter;
+                    xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float)(texture.Width - proto.OffsetHorizontal) / EyeManager.PixelsPerMeter;
 
                 }
 

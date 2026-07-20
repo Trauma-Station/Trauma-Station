@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# PDA
+- type: loadout
+  id: HoPPDA
+  equipment:
+    id: HoPPDA
+
+- type: loadout
+  id: AltHoPPDA
+  equipment:
+    id: AltHoPPDA

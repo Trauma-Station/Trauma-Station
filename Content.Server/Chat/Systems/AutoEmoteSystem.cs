@@ -1,32 +1,17 @@
-// SPDX-FileCopyrightText: 2023 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2023 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Mnemotechnican <69920617+Mnemotechnician@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Chat.Systems;
 
-public sealed class AutoEmoteSystem : EntitySystem
+public sealed partial class AutoEmoteSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
 
     public override void Initialize()
     {
@@ -52,7 +37,7 @@ public sealed class AutoEmoteSystem : EntitySystem
                 if (time > curTime)
                     continue;
 
-                var autoEmotePrototype = _prototypeManager.Index<AutoEmotePrototype>(key);
+                var autoEmotePrototype = ProtoMan.Index<AutoEmotePrototype>(key);
                 ResetTimer(uid, key, autoEmote, autoEmotePrototype);
 
                 if (!_random.Prob(autoEmotePrototype.Chance))
@@ -119,7 +104,7 @@ public sealed class AutoEmoteSystem : EntitySystem
         if (!Resolve(uid, ref autoEmote, logMissing: false))
             return false;
 
-        DebugTools.Assert(_prototypeManager.HasIndex<AutoEmotePrototype>(autoEmotePrototypeId), "Prototype not found. Did you make a typo?");
+        DebugTools.Assert(ProtoMan.HasIndex<AutoEmotePrototype>(autoEmotePrototypeId), "Prototype not found. Did you make a typo?");
 
         if (!autoEmote.EmoteTimers.Remove(autoEmotePrototypeId))
             return false;
@@ -145,7 +130,7 @@ public sealed class AutoEmoteSystem : EntitySystem
         if (!autoEmote.Emotes.Contains(autoEmotePrototypeId))
             return false;
 
-        autoEmotePrototype ??= _prototypeManager.Index<AutoEmotePrototype>(autoEmotePrototypeId);
+        autoEmotePrototype ??= ProtoMan.Index<AutoEmotePrototype>(autoEmotePrototypeId);
 
         var curTime = _gameTiming.CurTime;
         var time = curTime + autoEmotePrototype.Interval;

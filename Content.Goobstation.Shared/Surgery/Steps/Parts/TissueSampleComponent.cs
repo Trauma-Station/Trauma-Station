@@ -1,5 +1,6 @@
-using Content.Shared._Shitmed.Medical.Surgery.Tools;
-using Robust.Shared.GameStates;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Common.Surgery.Tools;
 
 namespace Content.Goobstation.Shared.Surgery.Steps.Parts;
 
@@ -7,13 +8,7 @@ namespace Content.Goobstation.Shared.Surgery.Steps.Parts;
 /// Component for xeno tissue sample, used in the graft issue surgery step.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class TissueSampleComponent : Component, ISurgeryToolComponent
+public sealed partial class TissueSampleComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "a xeno tissue sample";
-
-    [DataField]
-    public bool? Used { get; set; } = true;
-
-    [DataField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "a xeno tissue sample";
 }

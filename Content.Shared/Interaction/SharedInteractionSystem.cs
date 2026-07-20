@@ -1,5 +1,9 @@
 // <Trauma>
-using Content.Goobstation.Common.Interactions;
+using Content.Goobstation.Common.Interaction;
+using Content.Shared.Ensnaring;
+using Content.Shared.Ensnaring.Components;
+using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Interaction;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -56,37 +60,41 @@ namespace Content.Shared.Interaction
     [UsedImplicitly]
     public abstract partial class SharedInteractionSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
-        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly ISharedChatManager _chat = default!;
-        [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        [Dependency] private readonly SharedHandsSystem _hands = default!;
-        [Dependency] private readonly InventorySystem _inventory = default!;
-        [Dependency] private readonly PullingSystem _pullSystem = default!;
-        [Dependency] private readonly RotateToFaceSystem _rotateToFaceSystem = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedPhysicsSystem _broadphase = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly SharedVerbSystem _verbSystem = default!;
-        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-        [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-        [Dependency] private readonly SharedStrippableSystem _strippable = default!;
-        [Dependency] private readonly SharedPlayerRateLimitManager _rateLimit = default!;
-        [Dependency] private readonly TagSystem _tagSystem = default!;
-        [Dependency] private readonly UseDelaySystem _useDelay = default!;
+        // <Trauma>
+        [Dependency] private SharedEnsnareableSystem _snare = default!;
+        [Dependency] private EntityQuery<TargetInteractionRelayComponent> _targetRelayQuery = default!;
+        // </Trauma>
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private ISharedChatManager _chat = default!;
+        [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+        [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private SharedHandsSystem _hands = default!;
+        [Dependency] private InventorySystem _inventory = default!;
+        [Dependency] private PullingSystem _pullSystem = default!;
+        [Dependency] private RotateToFaceSystem _rotateToFaceSystem = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedMapSystem _map = default!;
+        [Dependency] private SharedPhysicsSystem _broadphase = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private SharedVerbSystem _verbSystem = default!;
+        [Dependency] private SharedPopupSystem _popupSystem = default!;
+        [Dependency] private SharedUserInterfaceSystem _ui = default!;
+        [Dependency] private SharedStrippableSystem _strippable = default!;
+        [Dependency] private SharedPlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private TagSystem _tagSystem = default!;
+        [Dependency] private UseDelaySystem _useDelay = default!;
 
-        private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
-        private EntityQuery<FixturesComponent> _fixtureQuery;
-        private EntityQuery<ItemComponent> _itemQuery;
-        private EntityQuery<PhysicsComponent> _physicsQuery;
-        private EntityQuery<HandsComponent> _handsQuery;
-        private EntityQuery<InteractionRelayComponent> _relayQuery;
-        private EntityQuery<CombatModeComponent> _combatQuery;
-        private EntityQuery<WallMountComponent> _wallMountQuery;
-        private EntityQuery<UseDelayComponent> _delayQuery;
-        private EntityQuery<ActivatableUIComponent> _uiQuery;
+        [Dependency] private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery = default!;
+        [Dependency] private EntityQuery<FixturesComponent> _fixtureQuery = default!;
+        [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+        [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+        [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+        [Dependency] private EntityQuery<InteractionRelayComponent> _relayQuery = default!;
+        [Dependency] private EntityQuery<CombatModeComponent> _combatQuery = default!;
+        [Dependency] private EntityQuery<WallMountComponent> _wallMountQuery = default!;
+        [Dependency] private EntityQuery<UseDelayComponent> _delayQuery = default!;
+        [Dependency] private EntityQuery<ActivatableUIComponent> _uiQuery = default!;
 
         /// <summary>
         /// The collision mask used by default for
@@ -105,17 +113,6 @@ namespace Content.Shared.Interaction
 
         public override void Initialize()
         {
-            _ignoreUiRangeQuery = GetEntityQuery<IgnoreUIRangeComponent>();
-            _fixtureQuery = GetEntityQuery<FixturesComponent>();
-            _itemQuery = GetEntityQuery<ItemComponent>();
-            _physicsQuery = GetEntityQuery<PhysicsComponent>();
-            _handsQuery = GetEntityQuery<HandsComponent>();
-            _relayQuery = GetEntityQuery<InteractionRelayComponent>();
-            _combatQuery = GetEntityQuery<CombatModeComponent>();
-            _wallMountQuery = GetEntityQuery<WallMountComponent>();
-            _delayQuery = GetEntityQuery<UseDelayComponent>();
-            _uiQuery = GetEntityQuery<ActivatableUIComponent>();
-
             SubscribeLocalEvent<BoundUserInterfaceCheckRangeEvent>(HandleUserInterfaceRangeCheck);
 
             // TODO make this a broadcast event subscription again when engine has updated.
@@ -281,8 +278,19 @@ namespace Content.Shared.Interaction
 
             //is this user trying to pull themself?
             if (userEntity.Value == uid)
-            // <Trauma> - add popup, CDDA parity
+            // <Trauma> - pull bolas and pray
             {
+                if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && _snare.IsEnsnared((uid, ensnareable)))
+                {
+                    foreach (var bola in ensnareable.Container!.ContainedEntities.ToList())
+                    {
+                        if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
+                        {
+                            _snare.TryFree(uid, uid, bola, ensnaring);
+                            return false;
+                        }
+                    }
+                }
                 _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
                 return false;
             }
@@ -290,6 +298,12 @@ namespace Content.Shared.Interaction
 
             if (Deleted(uid))
                 return false;
+
+            // <Trauma>
+            if (_targetRelayQuery.TryComp(uid, out var relay) && relay.RelayPulls &&
+                Exists(relay.RelayEntity) && relay.RelayEntity.Value != uid)
+                return HandleTryPullObject(session, coords, relay.RelayEntity.Value);
+            // </Trauma>
 
             if (!InRangeUnobstructed(userEntity.Value, uid, popup: true))
                 return false;
@@ -426,6 +440,24 @@ namespace Content.Shared.Interaction
 
             if (target != null && Deleted(target.Value))
                 return;
+
+            // <Trauma>
+            if (_targetRelayQuery.TryComp(target, out var targetRelay) && Exists(targetRelay.RelayEntity) &&
+                targetRelay.RelayEntity.Value != target)
+            {
+                if (_actionBlockerSystem.CanInteract(user, target))
+                {
+                    UserInteraction(user,
+                        coordinates,
+                        targetRelay.RelayEntity.Value,
+                        altInteract,
+                        checkCanInteract,
+                        checkAccess,
+                        checkCanUse);
+                    return;
+                }
+            }
+            // </Trauma>
 
             if (!altInteract && _combatQuery.TryComp(user, out var combatMode) && combatMode.IsInCombatMode)
             {
@@ -715,8 +747,9 @@ namespace Content.Shared.Interaction
             if (!Resolve(other, ref other.Comp))
                 return false;
 
-            var ev = new InRangeOverrideEvent(origin, other);
+            var ev = new InRangeOverrideEvent(origin, other, range); // Trauma - added range
             RaiseLocalEvent(origin, ref ev);
+            range = ev.Range; // Trauma - potentially update the range if it was changed
 
             if (ev.Handled)
             {
@@ -920,8 +953,8 @@ namespace Content.Shared.Interaction
                     ignoreAnchored = angleDelta < wallMount.Arc / 2 || Math.Tau - angleDelta < wallMount.Arc / 2;
                 }
 
-                if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out _, out var grid))
-                    ignored.UnionWith(grid.GetAnchoredEntities(targetCoords));
+                if (ignoreAnchored && _map.TryFindGridAt(targetCoords, out var gridUid, out var grid))
+                    ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
             }
 
             Ignored combinedPredicate = e => e == target || (predicate?.Invoke(e) ?? false) || ignored.Contains(e);
@@ -1109,6 +1142,25 @@ namespace Content.Shared.Interaction
             if (checkDeletion && (IsDeleted(user) || IsDeleted(used) || IsDeleted(target)))
                 return false;
 
+            // <Trauma>
+            if (target is { } t)
+            {
+                var afterInteractTargetEvent = new CanBeInteractedWithEvent(user, used, t, clickLocation, canReach);
+                RaiseLocalEvent(t, ref afterInteractTargetEvent);
+                if (afterInteractTargetEvent.Handled)
+                {
+                    DoContactInteraction(user, used, null);
+                    if (canReach)
+                    {
+                        DoContactInteraction(user, t, null);
+                        // Contact interactions are currently only used for forensics, so we don't raise used -> target
+                    }
+
+                    return true;
+                }
+            }
+            // </Trauma>
+
             var afterInteractEvent = new AfterInteractEvent(user, used, target, clickLocation, canReach);
             RaiseLocalEvent(used, afterInteractEvent);
             DoContactInteraction(user, used, afterInteractEvent);
@@ -1248,7 +1300,7 @@ namespace Content.Shared.Interaction
 
             // <Goob>
             var useAttemptEv = new UseInHandAttemptEvent(user);
-            RaiseLocalEvent(used, useAttemptEv);
+            RaiseLocalEvent(used, ref useAttemptEv);
 
             if (useAttemptEv.Cancelled)
                 return false;
@@ -1294,9 +1346,6 @@ namespace Content.Shared.Interaction
             if (IsDeleted(user) || IsDeleted(item))
                 return;
 
-            var dropMsg = new DroppedEvent(user);
-            RaiseLocalEvent(item, dropMsg, true);
-
             // If the dropper is rotated then use their targetrelativerotation as the drop rotation
             var rotation = Angle.Zero;
 
@@ -1306,6 +1355,9 @@ namespace Content.Shared.Interaction
             }
 
             Transform(item).LocalRotation = rotation;
+
+            var dropMsg = new DroppedEvent(user);
+            RaiseLocalEvent(item, dropMsg, true);
         }
         #endregion
 
@@ -1582,10 +1634,12 @@ namespace Content.Shared.Interaction
     /// Override event raised directed on a user to check InRangeUnoccluded AND InRangeUnobstructed to the target if you require custom logic.
     /// </summary>
     [ByRefEvent]
-    public record struct InRangeOverrideEvent(EntityUid User, EntityUid Target)
+    // Trauma - added range
+    public record struct InRangeOverrideEvent(EntityUid User, EntityUid Target, float Range)
     {
         public readonly EntityUid User = User;
         public readonly EntityUid Target = Target;
+        public float Range = Range; // Trauma
 
         public bool Handled;
         public bool InRange = false;

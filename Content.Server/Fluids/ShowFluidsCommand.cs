@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration;
 using Content.Server.Fluids.EntitySystems;
 using Content.Shared.Administration;
@@ -13,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Fluids;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class ShowFluidsCommand : IConsoleCommand
+public sealed partial class ShowFluidsCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
     public string Command => "showfluids";
     public string Description => "Toggles seeing puddle debug overlay.";
     public string Help => $"Usage: {Command}";

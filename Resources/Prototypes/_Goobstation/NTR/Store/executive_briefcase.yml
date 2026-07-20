@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: Executive briefcase
   parent: [BaseItem, StorePresetNTR, BaseGrandTheftContraband]
@@ -73,8 +75,6 @@
 #    - NTREvil # for evil stuff
     currencyWhitelist:
     - NTLoyaltyPoint
-    sales:
-      enabled: false
     ownerOnly: true
 
 - type: storeCategory

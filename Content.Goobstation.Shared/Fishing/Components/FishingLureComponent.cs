@@ -1,25 +1,25 @@
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Fishing.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class FishingLureComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid FishingRod;
 
     [DataField, AutoNetworkedField]
+    public EntityUid Fisher;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? AttachedEntity;
 
-    [ViewVariables]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextUpdate;
 
     [DataField]
-    public float UpdateInterval = 1f;
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 }

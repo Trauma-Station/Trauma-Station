@@ -1,20 +1,11 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # actions
 - type: entity
   parent: BaseAction
   id: ActionHereticOpenStore
   name: Open Knowledge Store
   description: Open the Knowledge Store.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -22,16 +13,18 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: open_store
   - type: InstantAction
-    event: !type:EventHereticOpenStore {}
+    event: !type:EventHereticOpenStore
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticMansusGrasp
   name: Mansus Grasp
   description: Channel the power of the Old Gods through your grip.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -39,16 +32,27 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: mansus_grasp
   - type: InstantAction
-    event: !type:EventHereticMansusGrasp {}
+    event: !type:TouchSpellEvent
+      touchSpell: TouchSpellMansus
+      specialEvent: !type:MansusGraspSpecialEvent
+        cooldown: 10
+        speech: heretic-speech-mansusgrasp
+        sound:
+          path: /Audio/Items/welder.ogg
+      touchSpellWhitelist:
+        components:
+        - MansusGrasp
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticLivingHeart
   name: Living Heart
   description: Use your heart to get your sacrifice targets location.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 2
@@ -57,16 +61,18 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: living_heart
   - type: InstantAction
-    event: !type:EventHereticLivingHeart {}
+    event: !type:EventHereticLivingHeart
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticMansusLink
-  name: Manse Link
+  name: Mansus Link
   description: Pierce through reality and connect minds to one another. Default key is +m
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 10
@@ -76,7 +82,7 @@
       state: mansus_link
   - type: TargetAction
   - type: EntityTargetAction
-    event: !type:EventHereticMansusLink {}
+    event: !type:EventHereticMansusLink
   - type: HereticAction
     requireMagicItem: false
   - type: SpeakOnAction
@@ -87,16 +93,18 @@
   id: ActionHereticShadowCloak
   name: Cloak of Shadow
   description: Completely conceals your identity, but does not make you invisible. Can be activated early to disable it. While cloaked, you move faster, but undergo actions much slower. Taking damage while cloaked may cause it to lift suddenly.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
+    checkCanInteract: false
     useDelay: 6
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: shadowcloak
   - type: InstantAction
-    event: !type:EventHereticShadowCloak
+    event: !type:EventHereticCloak
+      status: ShadowCloakStatusEffect
+      lifetime: 180
   - type: HereticAction
     requireMagicItem: true
   - type: Tag
@@ -108,7 +116,6 @@
   id: ActionHereticShapeshift
   name: Shapechange
   description: A spell that allows you to take on the form of another creature, gaining their abilities.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 10
@@ -141,3 +148,33 @@
     interfaces:
       enum.HereticShapeshiftUiKey.Key:
         type: HereticShapeshiftBoundUserInterface
+        requireInputValidation: false
+        interactionRange: -1
+  - type: HereticAction
+
+- type: entity
+  parent: BaseAction
+  id: DisguiseRevertAction
+  name: Revert
+  description: Revert back into your original identity.
+  components:
+  - type: Action
+    temporary: true
+  - type: InstantAction
+    event: !type:DisguiseRevertEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionToggleAbyssalMask
+  name: Toggle Abyssal Mask
+  description: Toggles between the night vision mode and fear/eye protection mode
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    priority: -20
+    useDelay: 1
+    icon:
+      sprite: _Goobstation/Heretic/mad_mask.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:ToggleAbyssalMaskEvent

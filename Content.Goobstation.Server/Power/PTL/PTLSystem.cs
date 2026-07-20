@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-// SPDX-FileCopyrightText: 2025 McBosserson <mcbosserson@hotmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SoundingExpert <204983230+SoundingExpert@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 john git <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Power.PTL;
@@ -21,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Radiation.Components;
+using Content.Shared.Radiation.Systems;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Hitscan.Components;
@@ -31,25 +24,23 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Numerics;
 using System.Text;
 
 namespace Content.Goobstation.Server.Power.PTL;
 
 public sealed partial class PTLSystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly IPrototypeManager _protMan = default!;
-    [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly AudioSystem _aud = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private FlashSystem _flash = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private AudioSystem _aud = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedRadiationSystem _radiation = default!;
 
     private static readonly EntProtoId _credits = "SpaceCash";
     private static readonly ProtoId<TagPrototype> _tagScrewdriver = "Screwdriver";
@@ -100,7 +91,7 @@ public sealed partial class PTLSystem : EntitySystem
     {
         if (TryComp<RadiationSourceComponent>(ent, out var rad)
             && rad.Intensity > 0)
-            rad.Intensity = MathF.Max(0, rad.Intensity - (rad.Intensity * 0.2f + 0.1f)); // Making sure the radition value doesn't go below
+            _radiation.SetIntensity((ent, rad), MathF.Max(0, rad.Intensity - (rad.Intensity * 0.2f + 0.1f))); // Making sure the radition value doesn't go below
     }
 
     private void Tick(Entity<PTLComponent> ent)
@@ -144,7 +135,7 @@ public sealed partial class PTLSystem : EntitySystem
         // shoot the laser
         var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
         var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
-        _gun.AttemptShoot(ent, ent, gun, targetCoords);
+        _gun.AttemptShoot(ent, (ent.Owner, gun), targetCoords);
 
         // Determine actual energy used.
         var chargeAfter = _battery.GetCharge((ent, ent.Comp2));
@@ -154,16 +145,13 @@ public sealed partial class PTLSystem : EntitySystem
 
         var usedMJ = energyUsed / megajoule;
         // some random formula i found in bounty thread i popped it into desmos i think it looks good
-        var spesos = (int) (usedMJ * 500 / (Math.Log(usedMJ * 5) + 1));
-
+        var spesos = (int) (usedMJ * 325 / (Math.Log(usedMJ * 2) + 1));
         if (!double.IsFinite(spesos) || spesos < 0)
             return;
 
         // EVIL behavior based on energy actually used.
         var evil = (float) (usedMJ * ent.Comp1.EvilMultiplier);
-
-        if (TryComp<RadiationSourceComponent>(ent, out var rad))
-            rad.Intensity = evil;
+        _radiation.SetIntensity(ent.Owner, evil);
 
         _flash.FlashArea(ent.Owner, ent, evil/2, TimeSpan.FromSeconds(evil / 2));
 
@@ -187,7 +175,7 @@ public sealed partial class PTLSystem : EntitySystem
 
     private void OnAfterInteractUsing(Entity<PTLComponent> ent, ref AfterInteractUsingEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !args.CanReach)
             return;
 
         var held = args.Used;

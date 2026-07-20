@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Atmos.Rotting;
@@ -6,16 +8,15 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Revenant.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
-public sealed class MakeRevenentSystem : EntitySystem
+public sealed partial class MakeRevenentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly WraithPossessedSystem _wraithPossessed = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private WraithPossessedSystem _wraithPossessed = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -34,7 +35,7 @@ public sealed class MakeRevenentSystem : EntitySystem
             || !TryComp<PerishableComponent>(args.Target, out var perishComp)
             || perishComp.Stage != 1) // should have been an enum... anyways: 1 means its a fresh corpse
         {
-            _popup.PopupClient(Loc.GetString("wraith-absorb-too-decomposed"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-too-decomposed"), ent.Owner, ent.Owner);
             return;
         }
 

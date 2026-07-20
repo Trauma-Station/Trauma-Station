@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Buckle.Components;
 using Content.Shared.Construction;
 
 namespace Content.Trauma.Shared.Buckle;
 
-public sealed class ChangeNodeOnUnstrapSystem : EntitySystem
+public sealed partial class ChangeNodeOnUnstrapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedConstructionSystem _construction = default!;
+    [Dependency] private SharedConstructionSystem _construction = default!;
 
     public override void Initialize()
     {

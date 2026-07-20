@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Damage; // Goobstation - Armor resisting syringe gun
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -57,7 +48,7 @@ public abstract partial class BaseSolutionInjectOnEventComponent : Component
     /// By how much to downscale the transfer amount by in respect to damage types
     /// </summary>
     [DataField]
-    public Dictionary<string, float> DamageModifierResistances = new() {["Piercing"] = 1f}; // lower transfer amount by 1% per 1% piercing resist
+    public Dictionary<string, float> DamageModifierResistances = new() {["Piercing"] = 1f, ["Ballistic"] = 2f}; // lower transfer amount by 1% per 1% piercing resist, 2% per 1% ballistic
 
     /// <summary>
     /// Contents of popup message to display to the attacker when injection

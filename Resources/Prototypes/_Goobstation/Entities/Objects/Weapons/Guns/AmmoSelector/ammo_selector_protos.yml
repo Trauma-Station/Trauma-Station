@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: selectableAmmo
@@ -137,6 +129,15 @@
   protoId: BulletBigshot
   fireCost: 80
 
+- type: selectableAmmo
+  id: BulletEnergyGunLawyershot
+  desc: A projectile capable of shutting up lawyers, and only lawyers.
+  icon:
+    sprite: Clothing/Neck/Misc/lawyerbadge.rsi
+    state: icon
+  color: black
+  protoId: BulletLawyershot
+  fireCost: 40
 
 # Pulse Rifle
 
@@ -144,20 +145,20 @@
   id: HeavyPulse
   desc: Decimate
   icon:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    state: omnilaser
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    state: u_laser
   color: "#00B2FF"
-  protoId: HeavyPulse
+  protoId: PulseGunBulletHeavy
   fireCost: 250
 
 - type: selectableAmmo
   id: Pulse
   desc: Terminate.
   icon:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    state: omnilaser
+    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
+    state: omnilaser-blue
   color: "#00B2FF"
-  protoId: Pulse
+  protoId: PulseGunBullet
   fireCost: 200
 
 - type: selectableAmmo
@@ -167,15 +168,15 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: heavylaser
   color: red
-  protoId: LightPulse
+  protoId: PulseGunBulletLight
   fireCost: 100
 
 - type: selectableAmmo
   id: StunPulse
   desc: Stun.
   icon:
-    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
-    state: omnilaser-blue
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    state: omnilaser
   color: blue
-  protoId: StunPulse
+  protoId: BulletDisabler
   fireCost: 20

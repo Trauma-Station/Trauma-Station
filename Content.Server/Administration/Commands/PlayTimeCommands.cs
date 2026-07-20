@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 flyingkarii <123355664+flyingkarii@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared.Administration;
 using Content.Shared.Players.PlayTimeTracking;
@@ -19,8 +7,11 @@ using System.Text.RegularExpressions;
 
 namespace Content.Server.Administration.Commands;
 
+// goob shat up all of this file :)
 public sealed class PlayTimeCommandUtilities
 {
+    private static readonly Regex TimeRegex = new Regex(@"(\d+)([A-Za-z]+)", RegexOptions.Compiled);
+
     private readonly static Dictionary<string, int> Units = new() {
         { "y", 525960 },
         { "mo", 43800 },
@@ -69,7 +60,7 @@ public sealed class PlayTimeCommandUtilities
             return result;
         }
 
-        MatchCollection timeRegex = Regex.Matches(timeString, "(\\d+)([A-Za-z]+)");
+        var timeRegex = TimeRegex.Matches(timeString);
 
         foreach (Match match in timeRegex)
         {
@@ -103,10 +94,10 @@ public sealed class PlayTimeCommandUtilities
 }
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class PlayTimeAddOverallCommand : IConsoleCommand
+public sealed partial class PlayTimeAddOverallCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
 
     public string Command => "playtime_addoverall";
     public string Description => Loc.GetString("cmd-playtime_addoverall-desc");
@@ -151,10 +142,10 @@ public sealed class PlayTimeAddOverallCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class PlayTimeAddRoleCommand : IConsoleCommand
+public sealed partial class PlayTimeAddRoleCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
 
     public string Command => "playtime_addrole";
     public string Description => Loc.GetString("cmd-playtime_addrole-desc");
@@ -211,10 +202,10 @@ public sealed class PlayTimeAddRoleCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class PlayTimeGetOverallCommand : IConsoleCommand
+public sealed partial class PlayTimeGetOverallCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
 
     public string Command => "playtime_getoverall";
     public string Description => Loc.GetString("cmd-playtime_getoverall-desc");
@@ -256,10 +247,10 @@ public sealed class PlayTimeGetOverallCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class PlayTimeGetRoleCommand : IConsoleCommand
+public sealed partial class PlayTimeGetRoleCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
 
     public string Command => "playtime_getrole";
     public string Description => Loc.GetString("cmd-playtime_getrole-desc");
@@ -335,10 +326,10 @@ public sealed class PlayTimeGetRoleCommand : IConsoleCommand
 /// Saves the timers for a particular player immediately
 /// </summary>
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class PlayTimeSaveCommand : IConsoleCommand
+public sealed partial class PlayTimeSaveCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
 
     public string Command => "playtime_save";
     public string Description => Loc.GetString("cmd-playtime_save-desc");
@@ -377,10 +368,10 @@ public sealed class PlayTimeSaveCommand : IConsoleCommand
 }
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class PlayTimeFlushCommand : IConsoleCommand
+public sealed partial class PlayTimeFlushCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
 
     public string Command => "playtime_flush";
     public string Description => Loc.GetString("cmd-playtime_flush-desc");

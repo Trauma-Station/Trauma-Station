@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
@@ -11,15 +7,14 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Religion.AlternatePrayable;
 
 public sealed partial class AlternatePrayableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -61,7 +56,7 @@ public sealed partial class AlternatePrayableSystem : EntitySystem
         if (_timing.CurTime > comp.NextPopup)
         {
             var popup = Loc.GetString("alternate-pray-start", ("user", Name(user)), ("item", Name(nullRod)));
-            _popupSystem.PopupPredicted(popup, user, user);
+            _popupSystem.PopupEntity(popup, user, user);
 
             comp.NextPopup = _timing.CurTime + comp.PopupDelay;
         }

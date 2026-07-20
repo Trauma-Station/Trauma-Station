@@ -1,6 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.BloodSplatter;
 
@@ -11,10 +11,19 @@ public sealed partial class BloodSplattererComponent : Component
     public EntProtoId Decal = new ("DecalSpawnerBloodSplattersTrauma");
 
     [DataField]
+    public EntProtoId MinorDecal = new ("DecalSpawnerMinorBloodSplattersTrauma");
+
+    [DataField]
+    public EntProtoId VomitDecal = new ("DecalSpawnerVomit");
+
+    [DataField]
     public EntProtoId GibbedDecal = new ("DecalSpawnerGibBloodSplatters");
 
     [DataField]
     public FixedPoint2 MinimalTriggerDamage = 5;
+
+    [DataField]
+    public FixedPoint2 MinorTriggerDamage = 10;
 
     [DataField]
     public float Chance = .05f;

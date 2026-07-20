@@ -1,27 +1,10 @@
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 pubbi <63283968+impubbi@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
 using Content.Goobstation.Common.DoAfter;
-using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Shared.Projectiles;
+using Content.Trauma.Common.Cuffs;
+// </Trauma>
+using System.Linq;
 using Content.Shared.Alert;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -30,13 +13,11 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Projectiles;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Strip.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Ensnaring;
@@ -46,19 +27,17 @@ public sealed partial class EnsnareableDoAfterEvent : SimpleDoAfterEvent
 {
 }
 
-public abstract class SharedEnsnareableSystem : EntitySystem
+public abstract partial class SharedEnsnareableSystem : EntitySystem
 {
-    [Dependency] private   readonly INetManager _net = default!; // Goobstation
-    [Dependency] private   readonly SharedHulkSystem _hulk = default!; // Goobstation
-    [Dependency] private   readonly AlertsSystem _alerts = default!;
-    [Dependency] private   readonly MovementSpeedModifierSystem _speedModifier = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private   readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     public override void Initialize()
     {
@@ -88,7 +67,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
     private void OnHandleState(EntityUid uid, EnsnareableComponent component, ref AfterAutoHandleStateEvent args)
     {
-        RaiseLocalEvent(uid, new EnsnaredChangedEvent(component.IsEnsnared));
+        RaiseLocalEvent(uid, new EnsnaredChangedEvent(IsEnsnared(uid)));
     }
 
     private void OnDoAfter(EntityUid uid, EnsnareableComponent component, DoAfterEvent args)
@@ -99,7 +78,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         if (args.Handled || !TryComp<EnsnaringComponent>(args.Args.Used, out var ensnaring))
             return;
 
-        if (args.Cancelled || !Container.Remove(args.Args.Used.Value, component.Container))
+        if (args.Cancelled || component.Container == null || !Container.Remove(args.Args.Used.Value, component.Container))
         {
             if (args.User == args.Target)
                 Popup.PopupPredicted(Loc.GetString("ensnare-component-try-free-fail", ("ensnare", args.Args.Used)), uid, args.User, PopupType.MediumCaution);
@@ -109,22 +88,21 @@ public abstract class SharedEnsnareableSystem : EntitySystem
             return;
         }
 
-        component.IsEnsnared = component.Container.ContainedEntities.Count > 0;
+        _hands.PickupOrDrop(args.Args.User, args.Args.Used.Value);
+
         Dirty(uid, component);
         ensnaring.Ensnared = null;
 
-        // Goobstation start
+        // <Trauma>
+        var bola = args.Args.Used.Value;
         if (ensnaring.DestroyOnRemove)
-        {
-            if (_net.IsServer)
-                QueueDel(args.Args.Used.Value);
-        }
+            PredictedQueueDel(bola);
         else
-            _hands.PickupOrDrop(args.Args.User, args.Args.Used.Value);
+            _hands.PickupOrDrop(args.User, bola);
 
-        if (args.User == args.Target && TryComp(args.User, out HulkComponent? hulk))
-            _hulk.Roar((args.User, hulk));
-        // Goobstation end
+        var snareBrokenEv = new EnsnareBrokenEvent(args.Target);
+        RaiseLocalEvent(args.User, ref snareBrokenEv);
+        // </Trauma>
 
         if (args.User == args.Target)
             Popup.PopupPredicted(Loc.GetString("ensnare-component-try-free-complete", ("ensnare", args.Args.Used)), uid, args.User, PopupType.Medium);
@@ -145,7 +123,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
         _speedModifier.RefreshMovementSpeedModifiers(uid);
 
-        var ev = new EnsnaredChangedEvent(component.IsEnsnared);
+        var ev = new EnsnaredChangedEvent(IsEnsnared(uid));
         RaiseLocalEvent(uid, ev);
     }
 
@@ -156,7 +134,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
         _speedModifier.RefreshMovementSpeedModifiers(uid);
 
-        var ev = new EnsnaredChangedEvent(component.IsEnsnared);
+        var ev = new EnsnaredChangedEvent(IsEnsnared(uid));
         RaiseLocalEvent(uid, ev);
     }
 
@@ -167,13 +145,13 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
     private void UpdateAppearance(EntityUid uid, EnsnareableComponent component, AppearanceComponent? appearance = null)
     {
-        Appearance.SetData(uid, EnsnareableVisuals.IsEnsnared, component.IsEnsnared, appearance);
+        Appearance.SetData(uid, EnsnareableVisuals.IsEnsnared, IsEnsnared(uid), appearance);
     }
 
     private void MovementSpeedModify(EntityUid uid, EnsnareableComponent component,
         RefreshMovementSpeedModifiersEvent args)
     {
-        if (!component.IsEnsnared)
+        if (!IsEnsnared(uid))
             return;
 
         args.ModifySpeed(component.WalkSpeed, component.SprintSpeed);
@@ -195,8 +173,11 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         var freeTime = user == target ? component.BreakoutTime : component.FreeTime;
         var breakOnMove = !component.CanMoveBreakout;
 
-        if (user == target && HasComp<HulkComponent>(user)) // Goobstation
-            freeTime = 0f;
+        // <Trauma>
+        var ev = new EnsnareModifyFreeDurationEvent(target, freeTime);
+        RaiseLocalEvent(user, ref ev);
+        freeTime = ev.FreeTime;
+        // </Trauma>
 
         var doAfterEventArgs = new DoAfterArgs(EntityManager, user, freeTime, new EnsnareableDoAfterEvent(), target, target: target, used: ensnare)
         {
@@ -220,6 +201,9 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
     private void OnStripEnsnareMessage(EntityUid uid, EnsnareableComponent component, StrippingEnsnareButtonPressed args)
     {
+        if (component.Container == null)
+            return;
+
         foreach (var entity in component.Container.ContainedEntities)
         {
             if (!TryComp<EnsnaringComponent>(entity, out var ensnaring))
@@ -232,7 +216,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
     private void OnRemoveEnsnareAlert(Entity<EnsnareableComponent> ent, ref RemoveEnsnareAlertEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || ent.Comp.Container == null)
             return;
 
         foreach (var ensnare in ent.Comp.Container.ContainedEntities)
@@ -253,8 +237,8 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         if (!TryComp<EnsnareableComponent>(component.Ensnared, out var ensnared))
             return;
 
-        if (ensnared.IsEnsnared)
-            ForceFree(uid, component);
+        if (IsEnsnared((component.Ensnared.Value, ensnared)))
+            ForceFree((uid, component));
     }
 
     private void AttemptStepTrigger(EntityUid uid, EnsnaringComponent component, ref StepTriggerAttemptEvent args)
@@ -274,11 +258,12 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
         if (TryEnsnare(args.Target, uid, component))
         {
-            _audio.PlayPvs(component.EnsnareSound, uid);
+            _audio.PlayLocal(component.EnsnareSound, uid, null); // Trauma - play local, throwing is predicted
         }
     }
 
     // Goobstation
+    // TODO: move this into module ffs
     private void OnProjectileHit(EntityUid uid, EnsnaringComponent component, ProjectileHitEvent args)
     {
         if (!component.CanThrowTrigger)
@@ -286,7 +271,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
         if (TryEnsnare(args.Target, uid, component))
         {
-            _audio.PlayPvs(component.EnsnareSound, uid);
+            _audio.PlayPredicted(component.EnsnareSound, uid, args.Shooter);
         }
     }
 
@@ -294,12 +279,12 @@ public abstract class SharedEnsnareableSystem : EntitySystem
     /// Used where you want to try to ensnare an entity with the <see cref="EnsnareableComponent"/>
     /// </summary>
     /// <param name="target">The entity that will be ensnared</param>
-    /// <paramref name="ensnare"> The entity that is used to ensnare</param>
+    /// <param name="ensnare"> The entity that is used to ensnare</param>
     /// <param name="component">The ensnaring component</param>
     public bool TryEnsnare(EntityUid target, EntityUid ensnare, EnsnaringComponent component)
     {
         //Don't do anything if they don't have the ensnareable component.
-        if (!TryComp<EnsnareableComponent>(target, out var ensnareable))
+        if (!TryComp<EnsnareableComponent>(target, out var ensnareable) || ensnareable.Container == null)
             return false;
 
         var numEnsnares = ensnareable.Container.ContainedEntities.Count;
@@ -317,7 +302,6 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         }
 
         component.Ensnared = target;
-        ensnareable.IsEnsnared = true;
         Dirty(target, ensnareable);
 
         UpdateAlert(target, ensnareable);
@@ -333,33 +317,74 @@ public abstract class SharedEnsnareableSystem : EntitySystem
     /// <summary>
     /// Used to force free someone for things like if the <see cref="EnsnaringComponent"/> is removed
     /// </summary>
-    public void ForceFree(EntityUid ensnare, EnsnaringComponent component)
+    public void ForceFree(Entity<EnsnaringComponent?> entity)
     {
-        if (component.Ensnared == null)
+        if (!Resolve(entity, ref entity.Comp, false))
             return;
 
-        if (!TryComp<EnsnareableComponent>(component.Ensnared, out var ensnareable))
+        if (!TryComp<EnsnareableComponent>(entity.Comp.Ensnared, out var ensnareable) || ensnareable.Container == null)
             return;
 
-        var target = component.Ensnared.Value;
+        var target = entity.Comp.Ensnared.Value;
 
-        Container.TryRemoveFromContainer(ensnare, force: true); // Goobstation - fix on ensnare entity remove
-        ensnareable.IsEnsnared = ensnareable.Container.ContainedEntities.Count > 0;
-        Dirty(component.Ensnared.Value, ensnareable);
-        component.Ensnared = null;
+        Container.Remove(entity.Owner, ensnareable.Container, force: true);
+
+        Dirty(entity.Comp.Ensnared.Value, ensnareable);
+        entity.Comp.Ensnared = null;
 
         UpdateAlert(target, ensnareable);
-        var ev = new EnsnareRemoveEvent(component.WalkSpeed, component.SprintSpeed);
+        var ev = new EnsnareRemoveEvent(entity.Comp.WalkSpeed, entity.Comp.SprintSpeed);
         RaiseLocalEvent(target, ev);
+    }
+
+    /// <summary>
+    /// Removes all ensnares from an entity.
+    /// </summary>
+    /// <param name="entity">The entity to remove snares from.</param>
+    /// <returns>The list of removed snares.</returns>
+    public List<EntityUid> ForceFreeAll(Entity<EnsnareableComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp, false))
+            return new List<EntityUid>();
+
+        if (entity.Comp.Container == null)
+            return new List<EntityUid>();
+
+        List<EntityUid> snares = new();
+
+        foreach (var snare in entity.Comp.Container.ContainedEntities.ToList())
+        {
+            ForceFree(snare);
+            snares.Add(snare);
+        }
+
+        return snares;
+    }
+
+    /// <summary>
+    /// Checks whether an entity is currently being ensnared.
+    /// </summary>
+    /// <param name="entity">The entity to check.</param>
+    /// <returns>True if ensnared, otherwise False.</returns>
+    public bool IsEnsnared(Entity<EnsnareableComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp, false))
+            return false;
+
+        if (entity.Comp.Container == null)
+            return false;
+
+        return entity.Comp.Container.ContainedEntities.Count > 0;
     }
 
     /// <summary>
     /// Update the Ensnared alert for an entity.
     /// </summary>
     /// <param name="target">The entity that has been affected by a snare</param>
+    /// <param name="component">Entity's EnsnareableComponent.</param>
     public void UpdateAlert(EntityUid target, EnsnareableComponent component)
     {
-        if (!component.IsEnsnared)
+        if (!IsEnsnared(target))
             _alerts.ClearAlert(target, component.EnsnaredAlert);
         else
             _alerts.ShowAlert(target, component.EnsnaredAlert);

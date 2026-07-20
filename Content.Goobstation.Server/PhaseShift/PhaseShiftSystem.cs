@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.PhaseShift;
@@ -9,9 +6,9 @@ using Robust.Server.GameObjects;
 
 namespace Content.Goobstation.Server.PhaseShift;
 
-public sealed class PhaseShiftSystem : SharedPhaseShiftSystem
+public sealed partial class PhaseShiftSystem : SharedPhaseShiftSystem
 {
-    [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
+    [Dependency] private VisibilitySystem _visibilitySystem = default!;
 
     protected override void OnComponentStartup(Entity<PhaseShiftedComponent> ent, ref ComponentStartup args)
     {

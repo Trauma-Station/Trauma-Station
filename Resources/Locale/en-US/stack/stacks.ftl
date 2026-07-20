@@ -7,11 +7,13 @@ stack-plastic = plastic
 stack-silver = silver
 stack-gold = gold
 stack-reinforced-glass = reinforced glass
-stack-plasma-glass = plasma glass
+# Trauma - plasma -> phoron
+stack-plasma-glass = glass-phoron
 stack-uranium = uranium
 stack-uranium-glass = uranium glass
 stack-clockwork-glass = clockwork glass
-stack-reinforced-plasma-glass = reinforced plasma glass
+# Trauma - plasma -> phoron
+stack-reinforced-plasma-glass = reinforced glass-phoron
 stack-reinforced-uranium-glass = reinforced uranium glass
 stack-gunpowder = gunpowder
 stack-cardboard = cardboard
@@ -80,6 +82,10 @@ stack-artifact-fragment = artifact {$amount ->
     [1] fragment
     *[other] fragments
 }
+stack-conveyor-belt = {$amount ->
+    [1] conveyor belt
+    *[other] conveyor belts
+}
 
 # best materials
 stack-ground-tobacco = ground tobacco
@@ -100,7 +106,8 @@ stack-rolling-paper = rolling {$amount ->
 
 stack-fulton = fulton
 stack-credit = speso
-stack-plasma = plasma
+# Trauma - plasma -> phoron
+stack-plasma = phoron
 stack-biomass = biomass
 stack-pyrotton = pyrotton
 stack-sharkminnow-tooth = sharkminnow tooth
@@ -109,7 +116,8 @@ stack-telecrystal = telecrystal
 stack-gold-ore = gold ore
 stack-rough-diamond = rough diamond
 stack-iron-ore = iron ore
-stack-plasma-ore = plasma ore
+# Trauma - plasma -> phoron
+stack-plasma-ore = phoron ore
 stack-silver-ore = silver ore
 stack-space-quartz = space quartz
 stack-uranium-ore = uranium ore
@@ -134,28 +142,37 @@ stack-dark-tile = dark tile
 stack-dark-steel-diagonal-mini-tile = dark steel diagonal mini tile
 stack-dark-steel-diagonal-tile = dark steel diagonal tile
 stack-dark-steel-herringbone = dark steel herringbone
+stack-dark-steel-horizontal-slats-tile-bordered = dark steel bordered horizontal slat tile
 stack-dark-steel-mini-tile = dark steel mini tile
 stack-dark-steel-mono-tile = dark steel mono tile
 stack-dark-steel-pavement = dark steel pavement
 stack-dark-steel-vertical-pavement = dark steel vertical pavement
+stack-dark-steel-vertical-slats-tile-bordered = dark steel bordered vertical slat tile
+stack-dark-steel-slats-tile-continuous = dark steel continuous slat tile
 stack-offset-dark-steel-tile = offset dark steel tile
 stack-offset-steel-tile = offset steel tile
 stack-steel-diagonal-mini-tile = steel diagonal mini tile
 stack-steel-diagonal-tile = steel diagonal tile
 stack-steel-herringbone = steel herringbone
+stack-steel-horizontal-slats-tile-bordered = steel bordered horizontal slat tile
 stack-steel-mini-tile = steel mini tile
 stack-steel-mono-tile = steel mono tile
 stack-steel-pavement = steel pavement
 stack-steel-vertical-pavement = steel vertical pavement
+stack-steel-vertical-slats-tile-bordered = steel bordered vertical slat tile
+stack-steel-slats-tile-continuous = steel continuous slat tile
 stack-white-tile = white tile
 stack-offset-white-steel-tile = offset white steel tile
 stack-white-steel-diagonal-mini-tile = white steel diagonal mini tile
 stack-white-steel-diagonal-tile = white steel diagonal tile
 stack-white-steel-herringbone = white steel herringbone
+stack-white-steel-horizontal-slats-tile-bordered = white steel bordered horizontal slat tile
 stack-white-steel-mini-tile = white steel mini tile
 stack-white-steel-mono-tile = white steel mono tile
 stack-white-steel-pavement = white steel pavement
 stack-white-steel-vertical-pavement = white steel vertical pavement
+stack-white-steel-vertical-slats-tile-bordered = white steel bordered vertical slat tile
+stack-white-steel-slats-tile-continuous = white steel continuous slat tile
 stack-steel-dark-checker-tile = steel dark checker tile
 stack-steel-light-checker-tile = steel light checker tile
 stack-steel-tile = steel tile

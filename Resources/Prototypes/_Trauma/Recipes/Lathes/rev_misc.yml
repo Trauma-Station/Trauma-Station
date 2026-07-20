@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   id: ClothingOuterArmorRev
   result: ClothingOuterArmorRev
@@ -20,7 +22,21 @@
   result: RevPropaganda
   completetime: 180
   materials:
-    Paper: 500
+    Paper: 100
+
+- type: latheRecipe
+  id: BookShootingPrintedRev
+  result: BookShootingPrintedRev
+  completetime: 180
+  materials:
+    Paper: 1000
+
+- type: latheRecipe
+  id: BookMeleePrintedRev
+  result: BookMeleePrintedRev
+  completetime: 180
+  materials:
+    Paper: 1000
 
 - type: latheRecipe
   id: EncryptionKeyRev

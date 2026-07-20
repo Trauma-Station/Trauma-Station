@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.StationRadio.Components;
 using Content.Goobstation.Shared.StationRadio.Events;
 using Content.Shared.Destructible;
@@ -8,27 +10,16 @@ using Content.Trauma.Common.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.StationRadio.Systems;
 
-public sealed class VinylPlayerSystem : EntitySystem
+public sealed partial class VinylPlayerSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLinkSystem = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<VinylPlayerComponent, EntInsertedIntoContainerMessage>(OnVinylInserted);
-        SubscribeLocalEvent<VinylPlayerComponent, EntRemovedFromContainerMessage>(OnVinylRemove);
-        SubscribeLocalEvent<VinylPlayerComponent, DestructionEventArgs>(OnDestruction);
-        SubscribeLocalEvent<VinylPlayerComponent, PowerChangedEvent>(OnPowerChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPowerChanged(EntityUid uid, VinylPlayerComponent comp, PowerChangedEvent args)
     {
         if (comp.SoundEntity != null && !args.Powered)
@@ -41,6 +32,7 @@ public sealed class VinylPlayerSystem : EntitySystem
             StopReceivers();
     }
 
+    [SubscribeLocalEvent]
     private void OnDestruction(EntityUid uid, VinylPlayerComponent comp, DestructionEventArgs args)
     {
         if (!CheckForRadioRig(uid))
@@ -49,6 +41,7 @@ public sealed class VinylPlayerSystem : EntitySystem
         StopReceivers();
     }
 
+    [SubscribeLocalEvent]
     private void OnVinylInserted(EntityUid uid, VinylPlayerComponent comp, EntInsertedIntoContainerMessage args)
     {
         if (!TryComp(args.Entity, out VinylComponent? vinylcomp) || _net.IsClient || vinylcomp.Song == null || !_power.IsPowered(uid))
@@ -76,6 +69,7 @@ public sealed class VinylPlayerSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnVinylRemove(EntityUid uid, VinylPlayerComponent comp, EntRemovedFromContainerMessage args)
     {
         if (comp.SoundEntity != null)

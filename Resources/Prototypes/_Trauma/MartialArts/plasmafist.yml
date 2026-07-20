@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: combo
+  id: TornadoSweep
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  opponentEffects:
+  levelRequired: 26
+
+- type: combo
+  id: Throwback
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  levelRequired: 26
+
+- type: combo
+  id: ThePlasmaFist
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  opponentEffects:
+  levelRequired: 26

@@ -1,6 +1,7 @@
 cosmicability-generic-fail = Your influence fails to take hold..
 
 cosmicability-glare-confirm = Press again to activate Null Glare.
+cosmicability-hibernate-confirm = Press again to activate Slumber Shell.
 
 cosmicability-siphon-cultist-success = Your attempts to draw entropy chill {CAPITALIZE(THE($target))}
 cosmicability-siphon-success = You silently draw Entropy from {CAPITALIZE(THE($target))}.
@@ -20,3 +21,18 @@ cosmicability-monument-spawn-error-grid = Invalid location! The Monument must be
 cosmicability-monument-spawn-error-station = Invalid location! The Monument must be beckoned upon the station.
 cosmicability-monument-spawn-error-intersection = Too crowded! The Monument requires an empty 3x1 area to be beckoned.
 cosmicability-monument-spawn-error-space = Too close to space! The Monument must be be at least {$DISTANCE}m away.
+
+cosmicability-chantry-active = You cannot start a chantry ritual while one is already active!
+
+cosmicability-ingress-bolted = The airlock's bolts prevent it from being forced!
+cosmicability-ingress-not-empowered-door = You must be empowered to open bolted doors!
+
+cosmicability-transmute-not-empowered = You must be empowered to transmute this.
+cosmicability-transmute-not-transmutable = This item cannot be transmuted.
+cosmicability-transmute-type-mismatch = You must improve your transmutation ability to transmute this item.
+cosmicability-transmute-no-item = You must hold an item to transform it.
+
+cosmicability-convert-mindshield = Mental shielding prevents the influence from taking hold!
+cosmicability-convert-chaplain = A spark of divine light prevents the influence from taking hold!
+cosmicability-convert-mindless = The target has no mind, the power would be wasted.
+cosmicability-convert-rotten = The influence has no effect on rotting corpses!

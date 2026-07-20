@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
@@ -17,15 +9,12 @@
   flavor: terrible
   color: "#174f17"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects: # considering vomiting and re-add the metabolism rate works out to ~2.5/s
       - !type:HealthChange # ~20/20 damage per 15u, inconsistent
         damage:
           types:
             Blunt: 4
-      - !type:HealthChange
-        damage:
-          types:
             Poison: 4
       - !type:AdjustReagent
         reagent: Triclor
@@ -34,13 +23,6 @@
         - !type:ReagentCondition
           reagent: Triclor
           max: 15 # Limit self-replication to prevent infinite accumulation
-      - !type:AdjustReagent
-        conditions: # Vomiting behaves weirdly and might leave unmetabolisable 0.1 at 40u (floating point errors?)
-        - !type:ReagentCondition
-          reagent: Triclor
-          max: 1
-        reagent: Triclor
-        amount: -0.5
       - !type:Vomit
       - !type:ModifyBloodLevel
         amount: -5
@@ -63,7 +45,7 @@
   flavor: bitter
   color: "#1abcff"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:HealthChange
@@ -87,25 +69,12 @@
   flavor: bitter
   color: "#819cb5"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
-      - !type:AdjustReagentsByGroup
-        group: Medicine
-        amount: -4.5
-        conditions: # higher quality anti-poisons, save for calomel which is low effort but high risk
-        - !type:ReagentCondition
-          reagent: PentenicAcid
-          max: 0.1
-        - !type:ReagentCondition
-          reagent: Calomel
-          max: 0.1
-        - !type:ReagentCondition
-          reagent: Diphenhydramine
-          max: 0.1
-      - !type:AdjustReagentsByGroup
-        group: Medicine
-        amount: -0.5
+      - !type:CleanBloodstream
+        excluded: [Anacea] # remove other medicines to make it harder to treat
+        cleanseRate: 0.5
       - !type:HealthChange
         damage:
           types:
@@ -120,11 +89,11 @@
   flavor: bitter
   color: "#22ff1a"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
-      - !type:AdjustReagentsByGroup
-        group: Medicine
-        amount: -5
+      - !type:CleanBloodstream
+        excluded: [Pendetide] # remove other medicines to make it much harder to treat
+        cleanseRate: 5
       - !type:HealthChange
         damage:
           types:
@@ -148,7 +117,7 @@
   flavor: bitter
   color: "#8e8e8e"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 3
       effects:
       - !type:HealthChange
@@ -177,7 +146,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:HealthChange
@@ -224,9 +193,8 @@
       - !type:Emote
         emote: Scream
         probability: 0.08
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
         conditions:
         - !type:ReagentCondition
           reagent: Sarin
@@ -255,10 +223,9 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:TakeStaminaDamage
-        conditions:
         amount: 13 # 13 parity
         immediate: false
 
@@ -271,7 +238,7 @@
   flavor: bitter
   color: "#FAF9F6"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:Vomit
@@ -306,7 +273,18 @@
   - !type:PlantAdjustHealth
     amount: -1
   metabolisms:
-    Poison:
+    Digestion: # vox are stinky
+      metabolites:
+        Microplastics: 1 # just goes straight down
+      conditions:
+      - !type:MetabolizerTypeCondition
+        type: [ Vox ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: -0.15 #in reality i dont care if its a good medicine for vox bcz its funny
+    Bloodstream:
       metabolismRate: 0.01 #Yummers
       conditions:
       - !type:MetabolizerTypeCondition
@@ -330,14 +308,3 @@
         - !type:ReagentCondition
           reagent: Microplastics
           min: 20
-    Medicine:
-      metabolismRate: 0.01
-      conditions:
-      - !type:MetabolizerTypeCondition
-        type: [ Vox ]
-        inverted: false # vox are stinky
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: -0.125 #in reality i dont care if its a good medicine for vox bcz its funny

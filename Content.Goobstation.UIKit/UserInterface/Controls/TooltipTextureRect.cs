@@ -1,7 +1,5 @@
-using System.Numerics;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Client.UserInterface.CustomControls;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;

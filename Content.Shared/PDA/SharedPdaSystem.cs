@@ -1,26 +1,15 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-// SPDX-FileCopyrightText: 2024 faint <46868845+ficcialfaint@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.PDA
 {
-    public abstract class SharedPdaSystem : EntitySystem
+    public abstract partial class SharedPdaSystem : EntitySystem
     {
-        [Dependency] protected readonly ItemSlotsSystem ItemSlotsSystem = default!;
-        [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+        [Dependency] protected ItemSlotsSystem ItemSlotsSystem = default!;
+        [Dependency] protected SharedAppearanceSystem Appearance = default!;
+        [Dependency] private SharedJobStatusSystem _jobStatus = default!;
 
         public override void Initialize()
         {
@@ -59,6 +48,7 @@ namespace Content.Shared.PDA
                 pda.ContainedId = args.Entity;
 
             UpdatePdaAppearance(uid, pda);
+            UpdateJobStatus(uid);
         }
 
         protected virtual void OnItemRemoved(EntityUid uid, PdaComponent pda, EntRemovedFromContainerMessage args)
@@ -67,6 +57,7 @@ namespace Content.Shared.PDA
                 pda.ContainedId = null;
 
             UpdatePdaAppearance(uid, pda);
+            UpdateJobStatus(uid);
         }
 
         private void OnGetAdditionalAccess(EntityUid uid, PdaComponent component, ref GetAdditionalAccessEvent args)
@@ -78,6 +69,14 @@ namespace Content.Shared.PDA
         private void UpdatePdaAppearance(EntityUid uid, PdaComponent pda)
         {
             Appearance.SetData(uid, PdaVisuals.IdCardInserted, pda.ContainedId != null);
+        }
+
+        // update the status icon of the player that has the pda currently equipped
+        private void UpdateJobStatus(EntityUid uid)
+        {
+            // Only the player who has the pda currently equipped can insert or remove Ids
+            var parent = Transform(uid).ParentUid;
+            _jobStatus.UpdateStatus(parent);
         }
 
         public virtual void UpdatePdaUi(EntityUid uid, PdaComponent? pda = null)

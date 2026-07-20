@@ -1,9 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.CustomLawboard;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Goobstation.Client.CustomLawboard;
 

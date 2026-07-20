@@ -1,14 +1,29 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: flavor
   id: eldritch
   flavorType: Complex
   description: flavor-complex-eldritch
+
+- type: flavor
+  id: crucibleSoul
+  flavorType: Complex
+  description: flavor-complex-crucible-soul
+
+- type: flavor
+  id: clarity
+  flavorType: Complex
+  description: flavor-complex-clarity
+
+- type: flavor
+  id: marshal
+  flavorType: Complex
+  description: flavor-complex-marshal
+
+- type: flavor
+  id: ether
+  flavorType: Complex
+  description: flavor-complex-ether
 
 - type: reagent
   id: EldritchEssence
@@ -20,7 +35,7 @@
   flavor: eldritch
   color: "#1f8016"
   metabolisms:
-    Medicine:
+    Digestion:
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -32,20 +47,24 @@
       effects:
       - !type:ModifyBloodLevel
         amount: 2
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -3
-            Toxin: -3
-            Airloss: -3
-            Brute: -3
-            Genetic: -3
-            Metaphysical: -5
+          Burn: -3
+          Toxin: -3
+          Airloss: -3
+          Brute: -3
+          Genetic: -3
+          Metaphysical: -5
       - !type:ModifyBleed
         amount: -1
       - !type:CleanBloodstream
-        excluded: EldritchEssence # Trauma - Exclude from chempurge
         cleanseRate: 3
+        excluded:
+        - EldritchEssence
+        - CrucibleSoul
+        - DuskAndDawn
+        - WoundedSoldier
+        - NewbornEther
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         time: 50
@@ -53,20 +72,271 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-    Poison:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
+        time: 50
+        type: Remove
+    Bloodstream:
+      # Either predicted random is broken or some entity effect shitcode but setting probability of paralysis to below 1
+      # results in it either not doing anything or paralyzing repeatedly over and over.
+      # So we have this instead.
+      metabolismRate: 5
       conditions:
       - !type:WhitelistCondition
-        blacklist:
+        checkMind: true
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
-      - !type:Electrocute
-        probability: 0.5
+      - !type:ModifyParalysis
+        time: 1
       - !type:HealthChange
         damage:
           types:
-            Poison: 5
+            Poison: 15
   tileReactions:
   - !type:ChangeTileReaction # Rusts tile
+
+- type: reagent
+  id: CrucibleSoul
+  parent: BaseDrink
+  group: Unknown
+  name: reagent-name-crucible-soul
+  desc: reagent-desc-crucible-soul
+  physicalDesc: reagent-physical-desc-crucible-soul
+  flavor: crucibleSoul
+  color: "#fb793a"
+  metabolisms:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:HasStatusEffectCondition
+          effectProto: StatusEffectCrucibleSoul
+          inverted: true
+        - !type:HasStatusEffectCondition
+          effectProto: StatusEffectCrucibleSoulCooldown
+          inverted: true
+        - !type:ReagentCondition
+          reagent: CrucibleSoul
+          min: 5
+        effectProto: StatusEffectCrucibleSoul
+        time: 40
+        type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        inverted: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.3
+        sprintSpeedModifier: 0.3
+
+- type: reagent
+  id: DuskAndDawn
+  parent: BaseDrink
+  group: Unknown
+  name: reagent-name-clarity
+  desc: reagent-desc-clarity
+  physicalDesc: reagent-physical-desc-clarity
+  flavor: clarity
+  color: "#d5dc1d"
+  metabolisms:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: DuskAndDawn
+          min: 5
+        effectProto: StatusEffectDuskAndDawn
+        time: 90
+        type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        inverted: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Add
+        time: 3
+
+- type: reagent
+  id: WoundedSoldier
+  parent: BaseDrink
+  group: Unknown
+  name: reagent-name-marshal
+  desc: reagent-desc-marshal
+  physicalDesc: reagent-physical-desc-marshal
+  flavor: marshal
+  color: "#5e718e"
+  metabolisms:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:HasStatusEffectCondition
+          effectProto: StatusEffectWoundedSoldier
+          inverted: true
+        - !type:HasStatusEffectCondition
+          effectProto: StatusEffectWoundedSoldierCooldown
+          inverted: true
+        - !type:ReagentCondition
+          reagent: WoundedSoldier
+          min: 5
+        effectProto: StatusEffectWoundedSoldier
+        time: 60
+        type: Set
+    Bloodstream:
+      # Slash damage is split into all parts, which means vital damage is gonna be less, compensate high damage by high metabolism rate
+      metabolismRate : 2.0
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        inverted: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:HealthChange
+        splitDamage: Split
+        damage:
+          types:
+            Slash: 32
+          woundSeverityMultipliers:
+            Slash: 5
+          partDamageVariation: 2
+      - !type:Emote
+        emote: Scream
+        probability: 0.8
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        splitDamage: Split
+        ignoreResistances: false
+        damage:
+          types:
+            Slash: 12
+          woundSeverityMultipliers:
+            Slash: 5
+          partDamageVariation: 2
+      - !type:Emote
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        emote: Scream
+        probability: 0.8
+
+- type: reagent
+  id: NewbornEther
+  parent: BaseDrink
+  group: Unknown
+  name: reagent-name-ether
+  desc: reagent-desc-ether
+  physicalDesc: reagent-physical-desc-ether
+  flavor: ether
+  color: "#92ca35"
+  metabolisms:
+    Digestion:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:HasStatusEffectCondition
+          effectProto: StatusEffectNewbornEther
+          inverted: true
+        - !type:ReagentCondition
+          reagent: NewbornEther
+          min: 5
+        effectProto: StatusEffectNewbornEther
+        time: 60
+        type: Set
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        inverted: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      # Heretic nocturine
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: NewbornEther
+          min: 8
+        effectProto: StatusEffectForcedSleeping
+        time: 9
+        delay: 5

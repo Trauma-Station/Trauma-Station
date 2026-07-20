@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Construction;
@@ -49,7 +37,14 @@ public sealed partial class MinSolution : IGraphCondition
         if (!containerSys.TryGetSolution(uid, Solution, out _, out var solution))
             return false;
 
-        solution.TryGetReagentQuantity(Reagent, out var quantity);
+        // <Trauma> - count total reagent regardless of data like dna
+        var quantity = FixedPoint2.Zero;
+        foreach (var quant in solution.Contents)
+        {
+            if (quant.Reagent.Prototype == Reagent.Prototype)
+                quantity += quant.Quantity;
+        }
+        // </Trauma>
         return quantity >= Quantity;
     }
 

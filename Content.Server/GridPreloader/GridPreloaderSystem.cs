@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.CCVar;
 using Content.Shared.GridPreloader.Prototypes;
@@ -13,7 +5,6 @@ using Content.Shared.GridPreloader.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using System.Numerics;
@@ -23,14 +14,14 @@ using JetBrains.Annotations;
 using Robust.Shared.EntitySerialization.Systems;
 
 namespace Content.Server.GridPreloader;
-public sealed class GridPreloaderSystem : SharedGridPreloaderSystem
+
+public sealed partial class GridPreloaderSystem : SharedGridPreloaderSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <summary>
     /// Whether the preloading CVar is set or not.
@@ -76,7 +67,7 @@ public sealed class GridPreloaderSystem : SharedGridPreloaderSystem
         _map.SetPaused(mapId, true);
 
         var globalXOffset = 0f;
-        foreach (var proto in _prototype.EnumeratePrototypes<PreloadedGridPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<PreloadedGridPrototype>())
         {
             for (var i = 0; i < proto.Copies; i++)
             {

@@ -16,7 +16,7 @@ reagent-desc-thick-smoke = Extremely thick smoke with magical properties. You do
 reagent-name-mugwort = mugwort tea
 reagent-desc-mugwort = A rather bitter herb once thought to hold magical protective properties.
 
-entity-effect-condition-wizard-or-apprentice = the target is a wizard or apprentice
-entity-effect-condition-not-wizard-or-apprentice = the target is not a wizard or apprentice
+entity-condition-wizard-or-apprentice = the target is a wizard or apprentice
+entity-condition-not-wizard-or-apprentice = the target is not a wizard or apprentice
 
 reagent-physical-desc-magical = magical

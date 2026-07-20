@@ -1,19 +1,93 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
+  parent: BaseMaterial
   id: SheetPaper
   graph: SheetPaper
-  startNode: start
   targetNode: paper sheet
-  category: construction-category-materials
-  objectType: Item
+  theory: {} # it's folding paper bro
+  useQuality: false
 
 - type: construction
   id: PowerArmorStand
   graph: PowerArmorStand
-  startNode: start
   targetNode: PowerArmorStand
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 3
+
+- type: construction
+  id: BarbWireStructure
+  graph: BarbedWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: TripWire
+  graph: TripWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: PipeBombTrap
+  graph: PipeBombTrap
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: BaseMaterial
+  id: BarbedWireMaterial
+  graph: BarbedWireMaterial
+  targetNode: BarbedWire
+
+- type: construction
+  parent: BarbedWireMaterial
+  id: BarbedWireMaterialMV
+  targetNode: BarbedWire0
+
+- type: construction
+  parent: BarbedWireMaterial
+  id: BarbedWireMaterialHV
+  graph: BarbedWireMaterial
+  targetNode: BarbedWire1
+
+- type: construction
+  abstract: true
+  id: BaseRepairItem
+  targetNode: finish
+  category: construction-category-tools
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: BaseRepairItem
+  id: Bracing
+  graph: Bracing
+
+- type: construction
+  parent: BaseRepairItem
+  id: Whetstone
+  graph: Whetstone

@@ -1,26 +1,6 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 CommieFlowers <rasmus.cedergren@hotmail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 rolfero <45628623+rolfero@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Arimah Greene <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Preston Smith <92108534+thetolbean@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Construction;
+// </Trauma>
 using Content.Server.Construction.Components;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
@@ -72,7 +52,7 @@ namespace Content.Server.Construction
 
             // If the set graph prototype does not exist, also return null. This could be due to admemes changing values
             // in ViewVariables, so even though the construction state is invalid, just return null.
-            return PrototypeManager.TryIndex(construction.Graph, out ConstructionGraphPrototype? graph) ? graph : null;
+            return ProtoMan.TryIndex(construction.Graph, out ConstructionGraphPrototype? graph) ? graph : null;
         }
 
         /// <summary>
@@ -324,7 +304,7 @@ namespace Content.Server.Construction
             }
 
             // Exit if the new entity's prototype is the same as the original, or the prototype is invalid
-            if (newEntity == metaData.EntityPrototype?.ID || !PrototypeManager.HasIndex<EntityPrototype>(newEntity))
+            if (newEntity == metaData.EntityPrototype?.ID || !ProtoMan.HasIndex<EntityPrototype>(newEntity))
                 return null;
 
             // [Optional] Exit if the new entity's prototype is a parent of the original
@@ -334,7 +314,7 @@ namespace Content.Server.Construction
             if (GetCurrentNode(uid, construction)?.DoNotReplaceInheritingEntities == true &&
                 metaData.EntityPrototype?.ID != null)
             {
-                var parents = PrototypeManager.EnumerateParents<EntityPrototype>(metaData.EntityPrototype.ID)?.ToList();
+                var parents = ProtoMan.EnumerateParents<EntityPrototype>(metaData.EntityPrototype.ID)?.ToList();
 
                 if (parents != null && parents.Any(x => x.ID == newEntity))
                     return null;
@@ -437,6 +417,10 @@ namespace Content.Server.Construction
 
             EntityManager.InitializeAndStartEntity(newUid);
 
+            // <Trauma> - stupid fucking chuds put the events in server idc to refactor them
+            var goidaEv = new ConstructionChangedEvent(newUid);
+            RaiseLocalEvent(uid, ref goidaEv);
+            // </Trauma>
             QueueDel(uid);
 
             // If ChangeEntity has ran, then the entity uid has changed and the
@@ -471,7 +455,7 @@ namespace Content.Server.Construction
             if (!Resolve(uid, ref construction))
                 return false;
 
-            if (!PrototypeManager.TryIndex<ConstructionGraphPrototype>(graphId, out var graph))
+            if (!ProtoMan.TryIndex<ConstructionGraphPrototype>(graphId, out var graph))
                 return false;
 
             if (GetNodeFromGraph(graph, nodeId) is not { })

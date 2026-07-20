@@ -1,11 +1,14 @@
+// <Trauma>
+using Content.Trauma.Common.Language;
+// </Trauma>
+using Content.Shared.Body;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
-using Content.Shared._EinsteinEngines.Language;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -50,6 +53,7 @@ public sealed partial class ZombieComponent : Component
         {
             {"Slash", 0.5},
             {"Piercing", 0.3},
+            {"Ballistic", 0.3}, // Trauma
             {"Blunt", 0.1},
         }
     };
@@ -70,12 +74,6 @@ public sealed partial class ZombieComponent : Component
     public Color EyeColor = new(0.96f, 0.13f, 0.24f);
 
     /// <summary>
-    /// The base layer to apply to any 'external' humanoid layers upon zombification.
-    /// </summary>
-    [DataField("baseLayerExternal")]
-    public string BaseLayerExternal = "MobHumanoidMarkingMatchSkin";
-
-    /// <summary>
     /// The attack arc of the zombie
     /// </summary>
     [DataField("attackArc", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
@@ -87,23 +85,11 @@ public sealed partial class ZombieComponent : Component
     [DataField("zombieRoleId", customTypeSerializer: typeof(PrototypeIdSerializer<AntagPrototype>))]
     public string ZombieRoleId = "Zombie";
 
-    /// <summary>
-    /// The CustomBaseLayers of the humanoid to restore in case of cloning
-    /// </summary>
-    [DataField("beforeZombifiedCustomBaseLayers")]
-    public Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> BeforeZombifiedCustomBaseLayers = new ();
+    [DataField]
+    public Dictionary<ProtoId<OrganCategoryPrototype>, OrganProfileData> BeforeZombifiedProfiles;
 
-    /// <summary>
-    /// The skin color of the humanoid to restore in case of cloning
-    /// </summary>
-    [DataField("beforeZombifiedSkinColor")]
-    public Color BeforeZombifiedSkinColor;
-
-    /// <summary>
-    /// The eye color of the humanoid to restore in case of cloning
-    /// </summary>
-    [DataField("beforeZombifiedEyeColor")]
-    public Color BeforeZombifiedEyeColor;
+    [DataField]
+    public Dictionary<ProtoId<OrganCategoryPrototype>, Dictionary<HumanoidVisualLayers, List<Marking>>> BeforeZombifiedMarkings;
 
     [DataField("emoteId")]
     public ProtoId<EmoteSoundsPrototype>? EmoteSoundsId = "Zombie";
@@ -120,13 +106,14 @@ public sealed partial class ZombieComponent : Component
     [DataField("passiveHealing")]
     public DamageSpecifier PassiveHealing = new()
     {
-        DamageDict = new () ///Changed to be higher for goob
+        DamageDict = new ()
         {
-            { "Blunt", -2 },
-            { "Slash", -1 },
-            { "Piercing", -1 },
-            { "Heat", -1 },
-            { "Shock", -1 }
+            { "Blunt", -0.4 },
+            { "Slash", -0.2 },
+            { "Piercing", -0.2 },
+            { "Ballistic", -0.2 }, // Trauma
+            { "Heat", -0.02 },
+            { "Shock", -0.02 }
         }
     };
 
@@ -142,13 +129,16 @@ public sealed partial class ZombieComponent : Component
     [DataField("healingOnBite")]
     public DamageSpecifier HealingOnBite = new()
     {
-        DamageDict = new() ///Changed to be higher for goob
+        DamageDict = new()
         {
+            // <Trauma> - 2 -> 25, added more types
             { "Blunt", -25 },
             { "Slash", -25 },
             { "Piercing", -25 },
+            { "Ballistic", -25 }, // Trauma
             { "Heat", -25 },
             { "Shock", -25 }
+            // </Trauma>
         }
     };
 

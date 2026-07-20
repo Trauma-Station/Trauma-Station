@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Pulling.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.Body;
@@ -15,9 +19,9 @@ namespace Content.Trauma.Shared.Mobs;
 /// </summary>
 public abstract partial class SharedSoftCritSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly SharedCPRSystem _cpr = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedCPRSystem _cpr = default!;
 
     /// <summary>
     /// Speed modifier for softcrit mobs, on top of being forced to crawl.
@@ -36,11 +40,12 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
 
         SubscribeLocalEvent<SoftCritMobComponent, ComponentStartup>(RefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, ComponentShutdown>(RefreshSpeed);
-        SubscribeLocalEvent<SoftCritMobComponent, AttemptStopPullingEvent>(OnAttemptStopPulling);
+        SubscribeLocalEvent<MobStateComponent, AttemptStopPullingEvent>(OnAttemptStopPulling);
         SubscribeLocalEvent<SoftCritMobComponent, SpeechTypeOverrideEvent>(OnSpeechTypeOverride);
         SubscribeLocalEvent<SoftCritMobComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, StandUpAttemptEvent>(OnStandUpAttempt);
         SubscribeLocalEvent<SoftCritMobComponent, ModifyInhaledVolumeEvent>(OnModifyInhaledVolume);
+        SubscribeLocalEvent<SoftCritMobComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
 
         Subs.CVar(_cfg, TraumaCVars.SoftCritMoveSpeed, x => SoftCritSpeed = x, true);
         Subs.CVar(_cfg, TraumaCVars.SoftCritInhaleModifier, x => InhaleVolumeModifier = x, true);
@@ -51,10 +56,10 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         _movement.RefreshMovementSpeedModifiers(uid);
     }
 
-    private void OnAttemptStopPulling(Entity<SoftCritMobComponent> ent, ref AttemptStopPullingEvent args)
+    private void OnAttemptStopPulling(Entity<MobStateComponent> ent, ref AttemptStopPullingEvent args)
     {
-        // too weak to resist being pulled away into maints
-        if (ent.Owner == args.User)
+        // too weak to resist being pulled away into maints if you aren't alive
+        if (ent.Comp.CurrentState != MobState.Alive && ent.Owner == args.User)
             args.Cancelled = true;
     }
 
@@ -81,5 +86,11 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         // ideally there would be code in respirator to check if it's forced to breathe vs lungs working alone
         if (!_cpr.IsCPRActive(ent))
             args.Volume *= InhaleVolumeModifier;
+    }
+
+    private void OnUnbuckleAttempt(Entity<SoftCritMobComponent> ent, ref UnbuckleAttemptEvent args)
+    {
+        // can't unbuckle yourself if you are in softcrit
+        args.Cancelled |= args.Buckle.Owner == args.User;
     }
 }

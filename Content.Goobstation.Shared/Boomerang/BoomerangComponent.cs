@@ -1,16 +1,5 @@
-// SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ActiveMammmoth <kmcsmooth@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 keronshb <54602815+keronshb@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Boomerang;
 
@@ -49,4 +38,10 @@ public sealed partial class BoomerangComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int CurrentHops = 0;
+
+    /// <summary>
+    /// If boomerang is currently returning to user
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsReturning;
 }

@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 BeeRobynn <166929042+BeeRobynn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Speech;
@@ -14,10 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Speech;
 
-public sealed class BoganAccentSystem : EntitySystem
+public sealed partial class BoganAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

@@ -1,9 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  name: ancient base xeno
-  id: CMBaseXeno
-  parent: SimpleSpaceMobBase
-  description: An alien drone.
   abstract: true
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable, MobNightVision ]
+  id: CMBaseXeno
+  name: ancient base xeno
+  description: An alien drone.
   components:
   - type: CombatMode
   - type: InputMover
@@ -26,7 +28,7 @@
     speedModifier: 2
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: UseDelay # Goobstation - For insta prying
+  - type: UseDelay
     delay: 1
   - type: Reactive
     groups:
@@ -81,8 +83,8 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 5
+      types:
+        Blunt: 5
   - type: DamageStateVisuals
     states:
       Alive:
@@ -92,9 +94,8 @@
       Dead:
         Base: dead
   - type: Puller
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 5
   - type: TypingIndicator
@@ -123,27 +124,26 @@
     allowedStates:
     - Alive
     damage:
-      groups:
-        Brute: -0.5
-        Burn: -0.5
+      types:
+        Blunt: -0.16
+        Slash: -0.16
+        Piercing: -0.16
+        Heat: -0.13
+        Cold: -0.13
+        Shock: -0.13
+        Caustic: -0.13
   - type: StaticPrice
     price: 3000
-  - type: Insulated # Goobstation
+  - type: Insulated
     coefficient: 0.5
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#d14343"
-    activateSound: null
-    deactivateSound: null
   - type: TileMovement
   - type: VentCrawler
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker
     speaks:
     - Xeno
     understands:
     - Xeno
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
-  - type: Fauna # Lavaland Change
+  - type: Fauna
 
 - type: entity
   name: ancient drone
@@ -192,8 +192,6 @@
         Base: crit
       Dead:
         Base: dead
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient warrior
@@ -233,8 +231,6 @@
         Base: crit
       Dead:
         Base: dead
-  - type: CombatPower # Goobstation
-    factor: 1.8 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient crusher
@@ -274,8 +270,6 @@
         Base: crit
       Dead:
         Base: dead
-  - type: CombatPower # Goobstation
-    factor: 2 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient ravager
@@ -314,8 +308,6 @@
         Base: dead
   - type: DashAction
     actionProto: ActionDashGeneric
-  - type: CombatPower # Goobstation
-    factor: 2.5 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient king
@@ -371,13 +363,11 @@
       collection: XenoFootstepLarge
       params:
         volume: -6
-  - type: CombatPower # Goobstation
-    factor: 5 # times more dangerous than a crew-member
 
 - type: entity
-  name: ancient queen
-  id: CMMobXenoQueen
   parent: CMBaseXeno
+  id: CMMobXenoQueen
+  name: ancient queen
   description: The Queen, in all her glory.
   components:
   - type: Sprite
@@ -428,14 +418,13 @@
       collection: XenoFootstepLarge
       params:
         volume: -6
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingOuterArmorQueenCarapace
-      amount: 1
   - type: Devourer
     foodPreferenceWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     stomachStorageWhitelist:
       components:
       - MobState
@@ -447,13 +436,11 @@
       - Door
       tags:
       - Wall
-  - type: CombatPower # Goobstation
-    factor: 5 # times more dangerous than a crew-member
 
 - type: entity
-  name: ancient rogue king
-  id: CMMobXenoRogueKing
   parent: CMMobXenoQueen
+  id: CMMobXenoRogueKing
+  name: ancient rogue king
   description: Driven into isolation, after all these years, this King has grown to be an unstoppable killing machine.
   components:
   - type: Sprite
@@ -469,11 +456,11 @@
       collection: AlienClaw
     animation: WeaponArcBite
     damage:
-        types:
-          Piercing: 15
-          Slash: 15
-          Blunt: 10
-          Structural: 120
+      types:
+        Piercing: 15
+        Slash: 15
+        Blunt: 10
+        Structural: 120
   - type: MovementSpeedModifier
     baseWalkSpeed: 5
     baseSprintSpeed: 5
@@ -506,12 +493,9 @@
         volume: 1
   - type: DashAction
     actionProto: ActionDashGeneric
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: RogueTailWeapon
-      amount: 1
-  - type: CombatPower # Goobstation
-    factor: 9 # times more dangerous than a crew-member
 
 - type: entity
   id: CMMobXenoDroneSentient

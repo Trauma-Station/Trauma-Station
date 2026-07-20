@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BulletTemperatureCold
+  id: BulletTemperatureCryo
+  name: cryo beam
+
+- type: entity
+  parent: BulletTemperatureHot
+  id: BulletTemperaturePyro
+  name: hot beam

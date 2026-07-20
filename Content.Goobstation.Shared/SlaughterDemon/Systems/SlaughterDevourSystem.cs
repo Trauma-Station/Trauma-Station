@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.SlaughterDemon.Objectives;
 using Content.Goobstation.Shared.SlaughterDemon.Other;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
@@ -9,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
@@ -17,17 +19,18 @@ namespace Content.Goobstation.Shared.SlaughterDemon.Systems;
 /// <summary>
 /// This handles the devouring system for the slaughter demons
 /// </summary>
-public sealed class SlaughterDevourSystem : EntitySystem
+public sealed partial class SlaughterDevourSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
 
     private EntityQuery<PullerComponent> _pullerQuery;
-    private EntityQuery<HumanoidAppearanceComponent> _humanoid;
+    private EntityQuery<HumanoidProfileComponent> _humanoid;
     private EntityQuery<ActorComponent> _actorQuery;
     /// <inheritdoc/>
     public override void Initialize()
@@ -35,7 +38,7 @@ public sealed class SlaughterDevourSystem : EntitySystem
         base.Initialize();
 
         _pullerQuery = GetEntityQuery<PullerComponent>();
-        _humanoid = GetEntityQuery<HumanoidAppearanceComponent>();
+        _humanoid = GetEntityQuery<HumanoidProfileComponent>();
         _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<SlaughterDevourComponent, MapInitEvent>(OnMapInit);
@@ -121,22 +124,23 @@ public sealed class SlaughterDevourSystem : EntitySystem
 
     public void HealAfterDevouring(EntityUid target, EntityUid devourer, SlaughterDevourComponent component)
     {
+        var popup = "slaughter-devour-other";
+        var amount = component.ToHealAnythingElse;
         // I dont know how to refactor this into events so im leaving it like this
-        if (HasComp<HumanoidAppearanceComponent>(target) && !HasComp<SiliconComponent>(target))
+        if (HasComp<BorgChassisComponent>(target) || _silicon.IsSilicon(target))
         {
-            _popup.PopupClient(Loc.GetString("slaughter-devour-humanoid"), devourer, devourer); // Trauma - PopupClient
-            _damageable.TryChangeDamage(devourer, component.ToHeal);
+            popup = "slaughter-devour-robot";
+            amount = component.ToHealNonCrew;
         }
-        else if (HasComp<BorgChassisComponent>(target) || HasComp<SiliconComponent>(target))
+        else if (HasComp<HumanoidProfileComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("slaughter-devour-robot"), devourer, devourer); // Trauma - PopupClient
-            _damageable.TryChangeDamage(devourer, component.ToHealNonCrew);
+            popup = "slaughter-devour-humanoid";
+            amount = component.ToHeal;
         }
-        else
-        {
-            _popup.PopupClient(Loc.GetString("slaughter-devour-other"), devourer, devourer); // Trauma - PopupClient
-            _damageable.TryChangeDamage(devourer, component.ToHealAnythingElse);
-        }
+
+        _popup.PopupEntity(Loc.GetString(popup), devourer, devourer);
+        var damage = component.HealDamage * amount;
+        _damageable.ChangeDamage(devourer, damage, true);
     }
 
     /// <summary>

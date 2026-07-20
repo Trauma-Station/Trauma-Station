@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Common.Traumas;
+using Content.Medical.Common.Wounds;
+using Content.Shared.FixedPoint;
+
+namespace Content.Medical.Shared.Traumas;
+
+public partial class TraumaSystem
+{
+    #region Data
+
+    private readonly Dictionary<BoneSeverity, FixedPoint2> _boneThresholds = new()
+    {
+        { BoneSeverity.Normal, 40 },
+        { BoneSeverity.Damaged, 25 },
+        { BoneSeverity.Cracked, 10 },
+        { BoneSeverity.Broken, 0 },
+    };
+
+    private readonly Dictionary<WoundableSeverity, FixedPoint2> _boneTraumaChanceMultipliers = new()
+    {
+        { WoundableSeverity.Healthy, 0 },
+        { WoundableSeverity.Minor, 0.01 },
+        { WoundableSeverity.Moderate, 0.04 },
+        { WoundableSeverity.Severe, 0.12 },
+        { WoundableSeverity.Critical, 0.21 },
+        { WoundableSeverity.Mangled, 0.21 },
+        { WoundableSeverity.Severed, 0 },
+    };
+
+    private readonly Dictionary<WoundableSeverity, FixedPoint2> _boneDamageMultipliers = new()
+    {
+        { WoundableSeverity.Healthy, 0 },
+        { WoundableSeverity.Minor, 0.4 },
+        { WoundableSeverity.Moderate, 0.6 },
+        { WoundableSeverity.Severe, 0.9 },
+        { WoundableSeverity.Critical, 1.25 },
+        { WoundableSeverity.Mangled, 1.6 }, // Fun.
+        { WoundableSeverity.Severed, 0 },
+    };
+
+    #endregion
+}

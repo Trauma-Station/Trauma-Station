@@ -1,0 +1,13 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="{Loc 'ghost-character-window-title'}"
+        SetSize="600 500">
+    <BoxContainer Orientation="Vertical">
+        <Label Text="{Loc 'ghost-character-window-info'}" Margin="4" Align="Center"/>
+        <ScrollContainer Name="ScrollContainer" HorizontalExpand="True" VerticalExpand="True" Margin="20"/>
+    </BoxContainer>
+</controls:FancyWindow>

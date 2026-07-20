@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Access.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Paper;
@@ -8,17 +9,16 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Paper;
 
-public sealed class SignatureSystem : EntitySystem
+public sealed partial class SignatureSystem : EntitySystem
 {
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     // The sprite used to visualize "signatures" on paper entities.
     private const string SignatureStampState = "paper_stamp-signature";
@@ -91,7 +91,7 @@ public sealed class SignatureSystem : EntitySystem
             var identity = Identity.Entity(signer, EntityManager);
             var you = Loc.GetString("paper-signed-self", ("target", paper));
             var others = Loc.GetString("paper-signed-other", ("user", identity), ("target", paper));
-            _popup.PopupPredicted(you, others, signer, signer);
+            _popup.PopupEntity(you, others, signer, signer);
         }
 
         return true;

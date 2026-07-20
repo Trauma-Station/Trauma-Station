@@ -16,8 +16,9 @@
     availableModes:
       - SemiAuto
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Electronic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -63,10 +64,10 @@
         !type:DamageTrigger
         damage: 150
       behaviors:
-        - !type:ChangeConstructionNodeBehavior
-          node: machineFrame
-        - !type:DoActsBehavior
-          acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Gun
     fireRate: 5
     useKey: false
@@ -125,10 +126,10 @@
         !type:DamageTrigger
         damage: 300
       behaviors:
-        - !type:ChangeConstructionNodeBehavior
-          node: machineFrame
-        - !type:DoActsBehavior
-          acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Gun
     fireRate: 1
     soundGunshot:
@@ -184,10 +185,10 @@
         !type:DamageTrigger
         damage: 200
       behaviors:
-        - !type:ChangeConstructionNodeBehavior
-          node: machineFrame
-        - !type:DoActsBehavior
-          acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Gun
     projectileSpeed: 80
     fireRate: 1
@@ -238,10 +239,10 @@
         !type:DamageTrigger
         damage: 350
       behaviors:
-        - !type:ChangeConstructionNodeBehavior
-          node: machineFrame
-        - !type:DoActsBehavior
-          acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Gun
     projectileSpeed: 40
     fireRate: 0.3
@@ -285,16 +286,17 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
         damage: 300
       behaviors:
-        - !type:DoActsBehavior
-          acts: ["Destruction"]
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shuttles/pirate_cannon.rsi
     layers:
@@ -335,10 +337,10 @@
         !type:DamageTrigger
         damage: 100
       behaviors:
-        - !type:ChangeConstructionNodeBehavior
-          node: machineFrame
-        - !type:DoActsBehavior
-          acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Gun
     projectileSpeed: 25 # Goobstation edit
     fireRate: 1 # Goobstation edit
@@ -365,9 +367,9 @@
     count: 5
   - type: Machine
     board: ShuttleGunKineticCircuitboard
-  # <Trauma>
   - type: PressureDamageChange
-    lowerBound: 0
+  - type: PressureEfficiency
+    lowerBound: 0 # work in space
   - type: UpgradeableWeapon
   - type: ItemSlots # for upgrades
     slots:
@@ -380,4 +382,3 @@
         whitelist:
           tags:
           - PKAUpgrade
-  # </Trauma>

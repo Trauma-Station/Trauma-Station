@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -50,12 +40,14 @@ public sealed partial class BlockingComponent : Component
     /// The damage modifer to use while passively blocking
     /// </summary>
     [DataField("passiveBlockModifier", required: true)]
+    [AutoNetworkedField] // Trauma
     public DamageModifierSet PassiveBlockDamageModifer = default!;
 
     /// <summary>
     /// The damage modifier to use while actively blocking.
     /// </summary>
     [DataField("activeBlockModifier", required: true)]
+    [AutoNetworkedField] // Trauma
     public DamageModifierSet ActiveBlockDamageModifier = default!;
 
     [DataField]
@@ -78,6 +70,7 @@ public sealed partial class BlockingComponent : Component
     /// when not blocking
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Trauma
     public float PassiveBlockFraction = 0.5f;
 
     /// <summary>
@@ -85,5 +78,6 @@ public sealed partial class BlockingComponent : Component
     /// when blocking
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Trauma
     public float ActiveBlockFraction = 1.0f;
 }

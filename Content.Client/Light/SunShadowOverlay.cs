@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Numerics;
 using Content.Client.Graphics;
 using Content.Shared.Light.Components;
@@ -15,17 +10,17 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Light;
 
-public sealed class SunShadowOverlay : Overlay
+public sealed partial class SunShadowOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> MixShader = "Mix";
 
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
     private readonly EntityLookupSystem _lookup;
+    private readonly SharedMapSystem _mapSys;
     private readonly SharedTransformSystem _xformSys;
 
     private readonly HashSet<Entity<SunShadowCastComponent>> _shadows = new();
@@ -36,6 +31,7 @@ public sealed class SunShadowOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _xformSys = _entManager.System<SharedTransformSystem>();
+        _mapSys = _entManager.System<SharedMapSystem>();
         _lookup = _entManager.System<EntityLookupSystem>();
         ZIndex = AfterLightTargetOverlay.ContentZIndex + 1;
     }
@@ -51,7 +47,7 @@ public sealed class SunShadowOverlay : Overlay
             return;
 
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(args.MapId,
+        _mapSys.FindGridsIntersecting(args.MapId,
             args.WorldBounds.Enlarged(SunShadowComponent.MaxLength),
             ref _grids);
 

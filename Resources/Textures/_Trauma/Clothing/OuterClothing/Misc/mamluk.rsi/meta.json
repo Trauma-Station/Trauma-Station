@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "Custom",
+  "copyright": "Taken from Civilization 13: https://github.com/Civ13/Civ13/blob/master/icons/obj/clothing/suits.dmi under the AGPLv3 lisence. (had to use Custom as AGPLv3 is missing from the list) tweaked by Papiditel",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

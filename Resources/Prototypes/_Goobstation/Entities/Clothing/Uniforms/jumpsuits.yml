@@ -1,25 +1,5 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Icepick <122653407+Icepicked@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <92357316+Piras314@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 JoeHammad1844 <130668733+JoeHammad1844@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 JoeHammad1844 <finiansalas2@gmail.com>
-# SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-# SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # durathread jumpsuit
 - type: entity
   parent: ClothingUniformBase
@@ -33,8 +13,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/durathread_jumpsuit.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -63,8 +42,7 @@
   components:
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -142,28 +120,6 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitBlueshieldOfficer
-  name: blueshield officer jumpsuit
-  description: A short-sleeved grey and blue jumpsuit, made out of a sturdy material. Blueshield standard issue.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/blueshield_officer.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/blueshield_officer.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitBlueshieldShirt
-  name: blueshield officer blue shirt
-  description: An official security uniform. Pretty safe and pretty busy.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/blueshield_shirt.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/blueshield_shirt.rsi
-
-- type: entity
-  parent: ClothingUniformBase
   id: ClothingUniformMailCarrier
   name: mail carrier's uniform
   description: Enemy of dogs everywhere.
@@ -196,8 +152,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navy_gold.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -206,7 +161,8 @@
       coefficients:
         Blunt: 0.65
         Slash: 0.65
-        Piercing: 0.60
+        Piercing: 0.65
+        Ballistic: 0.6
         Heat: 0.65
 
 - type: entity
@@ -221,8 +177,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/specialoperations.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -231,7 +186,8 @@
       coefficients:
         Blunt: 0.60
         Slash: 0.60
-        Piercing: 0.55
+        Piercing: 0.6
+        Ballistic: 0.55
         Heat: 0.60
 
 - type: entity
@@ -246,8 +202,7 @@
     sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/diplomat.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -256,7 +211,8 @@
       coefficients:
         Blunt: 0.65
         Slash: 0.65
-        Piercing: 0.60
+        Piercing: 0.65
+        Ballistic: 0.6
         Heat: 0.65
 
 - type: entity
@@ -269,18 +225,6 @@
     sprite: _Shitmed/Clothing/Uniforms/Jumpsuit/abductor.rsi
   - type: Clothing
     sprite: _Shitmed/Clothing/Uniforms/Jumpsuit/abductor.rsi
-
-- type: entity
-  parent: ClothingUniformJumpsuitNavyGold
-  id: ClothingUniformJumpsuitTrainer
-  name: NCT Jumpsuit
-  description: A jumpsuit issued to Nanotrasen Career Trainers. Fills you with a feeling of pride.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/trainer.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/trainer.rsi
-
 
 - type: entity
   parent: ClothingUniformJumpsuitLawyerBlack # Not contraband. It's just a suit, dude :godo:
@@ -298,7 +242,8 @@
       coefficients:
         Blunt: 0.75
         Slash: 0.75
-        Piercing: 0.70
+        Piercing: 0.75
+        Ballistic: 0.7
         Heat: 0.75
 
 - type: entity

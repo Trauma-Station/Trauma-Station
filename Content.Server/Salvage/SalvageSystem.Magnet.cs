@@ -1,32 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -37,26 +8,24 @@ using Content.Shared.Radio;
 using Content.Shared.Salvage.Magnet;
 using Robust.Shared.Exceptions;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Salvage;
 
 public sealed partial class SalvageSystem
 {
-    [Dependency] private readonly IRuntimeLog _runtimeLog = default!;
+    [Dependency] private IRuntimeLog _runtimeLog = default!;
+
+    [Dependency] private EntityQuery<SalvageMobRestrictionsComponent> _salvMobQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
 
     private static readonly ProtoId<RadioChannelPrototype> MagnetChannel = "Supply";
-
-    private EntityQuery<SalvageMobRestrictionsComponent> _salvMobQuery;
-    private EntityQuery<MobStateComponent> _mobStateQuery;
 
     private List<(Entity<TransformComponent> Entity, EntityUid MapUid, Vector2 LocalPosition)> _detachEnts = new();
 
     private void InitializeMagnet()
     {
-        _salvMobQuery = GetEntityQuery<SalvageMobRestrictionsComponent>();
-        _mobStateQuery = GetEntityQuery<MobStateComponent>();
-
         SubscribeLocalEvent<SalvageMagnetDataComponent, MapInitEvent>(OnMagnetDataMapInit);
 
         SubscribeLocalEvent<SalvageMagnetTargetComponent, GridSplitEvent>(OnMagnetTargetSplit);
@@ -77,7 +46,7 @@ public sealed partial class SalvageSystem
         }
 
         var index = args.Index;
-        var actor = args.Actor;
+        var actor = args.Actor; // Trauma
         async void TryTakeMagnetOffer()
         {
             try
@@ -329,12 +298,12 @@ public sealed partial class SalvageSystem
         switch (offering)
         {
             case AsteroidOffering asteroid:
-                var grid = _mapManager.CreateGridEntity(salvMap);
+                var grid = _mapSystem.CreateGridEntity(salvMap);
                 await _dungeon.GenerateDungeonAsync(asteroid.DungeonConfig, grid.Owner, grid.Comp, Vector2i.Zero, seed);
                 break;
             case DebrisOffering debris:
-                var debrisProto = _prototypeManager.Index<DungeonConfigPrototype>(debris.Id);
-                var debrisGrid = _mapManager.CreateGridEntity(salvMap);
+                var debrisProto = ProtoMan.Index<DungeonConfigPrototype>(debris.Id);
+                var debrisGrid = _mapSystem.CreateGridEntity(salvMap);
                 await _dungeon.GenerateDungeonAsync(debrisProto, debrisGrid.Owner, debrisGrid.Comp, Vector2i.Zero, seed);
                 break;
             case SalvageOffering wreck:
@@ -379,7 +348,7 @@ public sealed partial class SalvageSystem
             }
         }
 
-        var magnetXform = _xformQuery.GetComponent(magnet.Owner);
+        var magnetXform = Transform(magnet.Owner);
         var magnetGridUid = magnetXform.GridUid;
         var attachedBounds = new Box2Rotated();
         var mapId = MapId.Nullspace;
@@ -387,7 +356,7 @@ public sealed partial class SalvageSystem
 
         if (magnetGridUid != null)
         {
-            var magnetGridXform = _xformQuery.GetComponent(magnetGridUid.Value);
+            var magnetGridXform = Transform(magnetGridUid.Value);
             var (gridPos, gridRot) = _transform.GetWorldPositionRotation(magnetGridXform);
             var gridAABB = _gridQuery.GetComponent(magnetGridUid.Value).LocalAABB;
 
@@ -419,7 +388,7 @@ public sealed partial class SalvageSystem
         // It worked, move it into position and cleanup values.
         while (mapChildren.MoveNext(out var mapChild))
         {
-            var salvXForm = _xformQuery.GetComponent(mapChild);
+            var salvXForm = Transform(mapChild);
             var localPos = salvXForm.LocalPosition;
 
             _transform.SetParent(mapChild, salvXForm, spawnUid.Value);
@@ -459,6 +428,7 @@ public sealed partial class SalvageSystem
         var magnetPos = _transform.GetWorldPosition(magnet) + worldAngle.ToVec() * bounds.MaxDimension;
         var origin = attachedAABB.ClosestPoint(magnetPos);
         var fraction = 0.50f;
+        var grids = new List<Entity<MapGridComponent>>();
 
         // Thanks 20kdc
         for (var i = 0; i < 20; i++)
@@ -474,7 +444,9 @@ public sealed partial class SalvageSystem
 
             // This doesn't stop it from spawning on top of random things in space
             // Might be better like this, ghosts could stop it before
-            if (_mapManager.FindGridsIntersecting(finalCoords.MapId, box2Rot).Any())
+            grids.Clear();
+            _mapSystem.FindGridsIntersecting(finalCoords.MapId, box2Rot, ref grids);
+            if (grids.Count > 0)
             {
                 // Bump it further and further just in case.
                 fraction += 0.1f;

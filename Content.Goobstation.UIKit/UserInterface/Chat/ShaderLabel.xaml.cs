@@ -1,6 +1,5 @@
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.XAML;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 
 namespace Content.Goobstation.UIKit.UserInterface.Chat;
 

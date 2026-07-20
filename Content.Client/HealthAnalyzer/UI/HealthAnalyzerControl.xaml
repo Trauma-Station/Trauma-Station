@@ -30,9 +30,8 @@
 		                        </PanelContainer>
 			                    <PanelContainer SetSize="43 75" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
 			                        <TextureButton Name="HeadButton" MinSize="28 23" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonHead"/>
-			                        <TextureButton Name="ChestButton" SetSize="28 30" Margin="0 18 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonChest"/>
-			                        <PanelContainer MinSize="38 35" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-			                            <TextureButton Name="GroinButton" MinSize="28 15" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonGroin"/>
+			                        <TextureButton Name="TorsoButton" SetSize="28 45" Margin="0 18 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" StyleClasses="TargetDollButtonChest"/>
+			                        <PanelContainer MinSize="38 30" VerticalAlignment="Bottom" HorizontalAlignment="Center">
 			                            <PanelContainer MinSize="20 30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
 			                                <TextureButton Name="LeftLegButton" MinSize="15 28" VerticalAlignment="Top" HorizontalAlignment="Left" StyleClasses="TargetDollButtonLeftLeg"/>
 			                                <TextureButton Name="LeftFootButton" MinSize="20 10" VerticalAlignment="Bottom" StyleClasses="TargetDollButtonLeftFoot"/>

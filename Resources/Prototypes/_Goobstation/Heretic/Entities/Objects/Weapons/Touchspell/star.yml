@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: TouchSpellStar
   name: star touch
@@ -15,3 +17,30 @@
     radius: 2
     energy: 1
     color: "#4E2952"
+  - type: StarTouch
+  - type: TouchSpell
+    cooldown: 15
+    speech: heretic-speech-star-touch
+    sound:
+      path: /Audio/Items/welder.ogg
+    targetWhitelist:
+      components:
+      - MobState
+  - type: BlockContextMenu
+    whitelist:
+      components:
+      - MobState
+  - type: MeleeWeapon
+    clickAttackWhitelist:
+      components:
+      - MobState
+    altClickAttackWhitelist:
+      components:
+      - MobState
+    resetOnHandSelected: false
+    altClickAttack: true
+    canMiss: false
+    canBeParried: false
+    damage:
+      types:
+        Heat: 0

@@ -1,10 +1,4 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Changeling.Components;
 
@@ -14,10 +8,11 @@ namespace Content.Goobstation.Shared.Changeling.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FleshmendEffectComponent : Component
 {
+    [DataField]
     public string EffectState = "mend_active";
 
+    [DataField]
     public ResPath ResPath = new("_Goobstation/Changeling/fleshmend_visuals.rsi");
-
 }
 
 public enum FleshmendEffectKey : byte

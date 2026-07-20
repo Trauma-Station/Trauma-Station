@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseScrewdriver
+  id: Screwdriver
+  components:
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        screwdriver: Rainbow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100

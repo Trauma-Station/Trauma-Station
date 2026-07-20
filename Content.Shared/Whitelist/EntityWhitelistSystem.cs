@@ -1,57 +1,33 @@
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 psykana <36602558+psykana@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Item;
 using Content.Shared.Tag;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Whitelist;
 
-public sealed class EntityWhitelistSystem : EntitySystem
+public sealed partial class EntityWhitelistSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery;
 
-    private EntityQuery<ItemComponent> _itemQuery;
+    private CompName _itemComponentName = default;
+    private CompName _tagComponentName = default;
 
     public override void Initialize()
     {
         base.Initialize();
-        _itemQuery = GetEntityQuery<ItemComponent>();
-    }
 
-    /// <inheritdoc cref="IsValid(Content.Shared.Whitelist.EntityWhitelist,Robust.Shared.GameObjects.EntityUid)"/>
-    public bool IsValid(EntityWhitelist list, [NotNullWhen(true)] EntityUid? uid)
-    {
-        return uid != null && IsValid(list, uid.Value);
+        // caching for minor performance improvement
+        _itemComponentName = CompName.Get<ItemComponent>(Factory);
+        _tagComponentName = CompName.Get<TagComponent>(Factory);
     }
 
     /// <summary>
-    /// Checks whether a given entity is allowed by a whitelist and not blocked by a blacklist.
-    /// If a blacklist is provided and it matches then this returns false.
-    /// If a whitelist is provided and it does not match then this returns false.
-    /// If either list is null it does not get checked.
+    /// Checks whether a given entity satisfies a whitelist.
+    /// Returns false if the entity is null.
     /// </summary>
-    public bool CheckBoth([NotNullWhen(true)] EntityUid? uid, EntityWhitelist? blacklist = null, EntityWhitelist? whitelist = null)
+    public bool IsValid(EntityWhitelist list, [NotNullWhen(true)] EntityUid? uid)
     {
-        if (uid == null)
-            return false;
-
-        if (blacklist != null && IsValid(blacklist, uid))
-            return false;
-
-        return whitelist == null || IsValid(whitelist, uid);
+        return uid != null && IsValid(list, uid.Value);
     }
 
     /// <summary>
@@ -90,13 +66,31 @@ public sealed class EntityWhitelistSystem : EntitySystem
 
         return list.RequireAll;
     }
+
     /// The following are a list of "helper functions" that are basically the same as each other
     /// to help make code that uses EntityWhitelist a bit more readable because at the moment
     /// it is quite clunky having to write out component.Whitelist == null ? true : _whitelist.IsValid(component.Whitelist, uid)
     /// several times in a row and makes comparisons easier to read
 
     /// <summary>
-    /// Helper function to determine if Whitelist is not null and entity is on list
+    /// Checks whether a given entity is allowed by a whitelist and not blocked by a blacklist.
+    /// If a blacklist is provided and it matches then this returns false.
+    /// If a whitelist is provided and it does not match then this returns false.
+    /// If either list is null it does not get checked.
+    /// </summary>
+    public bool CheckBoth([NotNullWhen(true)] EntityUid? uid, EntityWhitelist? blacklist = null, EntityWhitelist? whitelist = null)
+    {
+        if (uid == null)
+            return false;
+
+        if (blacklist != null && IsValid(blacklist, uid))
+            return false;
+
+        return whitelist == null || IsValid(whitelist, uid);
+    }
+
+    /// <summary>
+    /// Helper function to determine if a whitelist is not null and the entity is on list.
     /// </summary>
     public bool IsWhitelistPass(EntityWhitelist? whitelist, EntityUid uid)
     {
@@ -107,7 +101,7 @@ public sealed class EntityWhitelistSystem : EntitySystem
     }
 
     /// <summary>
-    /// Helper function to determine if Whitelist is not null and entity is not on the list
+    /// Helper function to determine if a whitelist is not null and the entity is not on the list.
     /// </summary>
     public bool IsWhitelistFail(EntityWhitelist? whitelist, EntityUid uid)
     {
@@ -118,7 +112,7 @@ public sealed class EntityWhitelistSystem : EntitySystem
     }
 
     /// <summary>
-    /// Helper function to determine if Whitelist is either null or the entity is on the list
+    /// Helper function to determine if a whitelist is either null or the entity is on the list.
     /// </summary>
     public bool IsWhitelistPassOrNull(EntityWhitelist? whitelist, EntityUid uid)
     {
@@ -129,7 +123,7 @@ public sealed class EntityWhitelistSystem : EntitySystem
     }
 
     /// <summary>
-    /// Helper function to determine if Whitelist is either null or the entity is not on the list
+    /// Helper function to determine if a whitelist is either null or the entity is not on the list.
     /// </summary>
     public bool IsWhitelistFailOrNull(EntityWhitelist? whitelist, EntityUid uid)
     {

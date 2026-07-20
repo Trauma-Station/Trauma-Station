@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Translators
@@ -78,16 +74,6 @@
     Silver: 5
 
 - type: latheRecipe
-  id: ValyrianStandardTranslator
-  result: ValyrianStandardTranslator
-  completetime: 2
-  materials:
-    Steel: 500
-    Glass: 100
-    Plastic: 50
-    Gold: 50
-
-- type: latheRecipe
   id: NewKinPidginTranslator
   result: NewKinPidginTranslator
   completetime: 2
@@ -151,12 +137,6 @@
   id: MofficTranslatorImplanter
   subname: lathe-recipe-MofficTranslatorImplanter-subname
   result: MofficTranslatorImplanter
-
-- type: latheRecipe
-  parent: BaseTranslatorImplanter
-  id: ValyrianStandardTranslatorImplanter
-  subname: lathe-recipe-ValyrianStandardTranslatorImplanter-subname
-  result: ValyrianStandardTranslatorImplanter
 
 - type: latheRecipe
   parent: BaseTranslatorImplanter

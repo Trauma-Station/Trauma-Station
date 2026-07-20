@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: mutationRecipe
+  id: Cindikinesis
+  result: MutationCindikinesis
+  required:
+  - MutationGeladikinesis
+  - MutationFierySweat
+
+- type: mutationRecipe
+  id: Pyrokinesis
+  result: MutationPyrokinesis
+  required:
+  - MutationCryokinesis
+  - MutationFierySweat

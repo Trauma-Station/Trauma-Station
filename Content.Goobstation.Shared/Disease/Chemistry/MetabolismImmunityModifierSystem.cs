@@ -1,10 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Disease.Chemistry
 {
-    public sealed class MetabolismImmunityModifierSystem : EntitySystem
+    public sealed partial class MetabolismImmunityModifierSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
 
         private readonly List<Entity<ImmunityModifierMetabolismComponent>> _components = new();
 

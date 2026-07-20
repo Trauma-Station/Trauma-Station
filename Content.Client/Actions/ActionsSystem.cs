@@ -1,6 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.SpellCards;
-using Content.Client._Shitcode.Wizard.Systems;
+using Content.Trauma.Common.Wizard;
 using Content.Goobstation.Common.Actions;
 // </Trauma>
 using System.IO;
@@ -22,24 +21,21 @@ using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Value;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
 
 namespace Content.Client.Actions
 {
     [UsedImplicitly]
-    public sealed class ActionsSystem : SharedActionsSystem
+    public sealed partial class ActionsSystem : SharedActionsSystem
     {
         public delegate void OnActionReplaced(EntityUid actionId);
 
-        [Dependency] private readonly ActionTargetMarkSystem _mark = default!; // Goob
-        [Dependency] private readonly SharedChargesSystem _sharedCharges = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IPrototypeManager _proto = default!;
-        [Dependency] private readonly IResourceManager _resources = default!;
-        [Dependency] private readonly MetaDataSystem _metaData = default!;
-        [Dependency] private readonly ISerializationManager _serialization = default!;
+        [Dependency] private SharedChargesSystem _sharedCharges = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IResourceManager _resources = default!;
+        [Dependency] private MetaDataSystem _metaData = default!;
+        [Dependency] private ISerializationManager _serialization = default!;
 
         public event Action<EntityUid>? OnActionAdded;
         public event Action<EntityUid>? OnActionRemoved;
@@ -298,12 +294,12 @@ namespace Content.Client.Actions
                 else if (map.TryGet<ValueDataNode>("entity", out var entityNode))
                 {
                     var id = new EntProtoId(entityNode.Value);
-                    var proto = _proto.Index(id);
+                    var proto = ProtoMan.Index(id);
                     actionId = Spawn(MappingEntityAction);
                     SetIcon(actionId, new SpriteSpecifier.EntityPrototype(id));
                     SetEvent(actionId, new StartPlacementActionEvent()
                     {
-                        PlacementOption = "SnapgridCenter",
+                        PlacementOption = proto.PlacementMode,
                         EntityType = id
                     });
                     _metaData.SetEntityName(actionId, proto.Name);
@@ -311,7 +307,7 @@ namespace Content.Client.Actions
                 else if (map.TryGet<ValueDataNode>("tileId", out var tileNode))
                 {
                     var id = new ProtoId<ContentTileDefinition>(tileNode.Value);
-                    var proto = _proto.Index(id);
+                    var proto = ProtoMan.Index(id);
                     actionId = Spawn(MappingEntityAction);
                     if (proto.Sprite is {} sprite)
                         SetIcon(actionId, new SpriteSpecifier.Texture(sprite));
@@ -377,8 +373,9 @@ namespace Content.Client.Actions
             }
 
             // <Goob>
-            if (HasComp<LockOnMarkActionComponent>(uid) && Exists(_mark.Target))
-                targetEnt = _mark.Target.Value;
+            // STINKS
+            if (TryComp<LockOnMarkActionComponent>(uid, out var lockOn) && Exists(lockOn.Target))
+                targetEnt = lockOn.Target.Value;
             // </Goob>
 
             if (action.ClientExclusive)
@@ -409,8 +406,9 @@ namespace Content.Client.Actions
                 return;
 
             // <Goob>
-            if (HasComp<LockOnMarkActionComponent>(ent) && Exists(_mark.Target))
-                entity = _mark.Target.Value;
+            // STINKS
+            if (TryComp<LockOnMarkActionComponent>(ent, out var lockOn) && Exists(lockOn.Target))
+                entity = lockOn.Target.Value;
             // </Goob>
 
             // let world target component handle it

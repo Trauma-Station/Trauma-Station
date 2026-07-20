@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Actions;
-using Content.Shared.Cuffs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
@@ -15,14 +16,14 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 
-public sealed class SlasherRegenerateSystem : EntitySystem
+public sealed partial class SlasherRegenerateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -57,7 +58,7 @@ public sealed class SlasherRegenerateSystem : EntitySystem
         // Check if a soul is available to use
         if (!comp.HasSoulAvailable)
         {
-            _popup.PopupPredicted(Loc.GetString("slasher-regenerate-no-soul"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("slasher-regenerate-no-soul"), uid, uid);
             return;
         }
 

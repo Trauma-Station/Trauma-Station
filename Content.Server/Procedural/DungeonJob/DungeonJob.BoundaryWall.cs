@@ -1,13 +1,9 @@
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Threading.Tasks;
 using Content.Shared.Maps;
 using Content.Shared.Procedural;
 using Content.Shared.Procedural.PostGeneration;
 using Robust.Shared.Map;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Procedural.DungeonJob;
@@ -17,7 +13,7 @@ public sealed partial class DungeonJob
     /// <summary>
     /// <see cref="BoundaryWallDunGen"/>
     /// </summary>
-    private async Task PostGen(BoundaryWallDunGen gen, Dungeon dungeon, HashSet<Vector2i> reservedTiles, Random random)
+    private async Task PostGen(BoundaryWallDunGen gen, Dungeon dungeon, HashSet<Vector2i> reservedTiles, IRobustRandom random)
     {
         var tileDef = _tileDefManager[gen.Tile];
         var tiles = new List<(Vector2i Index, Tile Tile)>(dungeon.RoomExteriorTiles.Count);
@@ -34,7 +30,7 @@ public sealed partial class DungeonJob
             if (dungeon.Entrances.Contains(neighbor))
                 continue;
 
-            if (!_anchorable.TileFree(_grid, neighbor, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
+            if (!_anchorable.TileFree((_gridUid, _grid), neighbor, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
                 continue;
 
             tiles.Add((neighbor, _tile.GetVariantTile((ContentTileDefinition) tileDef, random)));
@@ -45,7 +41,7 @@ public sealed partial class DungeonJob
             if (dungeon.RoomTiles.Contains(index))
                 continue;
 
-            if (!_anchorable.TileFree(_grid, index, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
+            if (!_anchorable.TileFree((_gridUid, _grid), index, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
                 continue;
 
             tiles.Add((index, _tile.GetVariantTile((ContentTileDefinition)tileDef, random)));
@@ -58,7 +54,7 @@ public sealed partial class DungeonJob
         {
             var index = tiles[i];
 
-            if (!_anchorable.TileFree(_grid, index.Index, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
+            if (!_anchorable.TileFree((_gridUid, _grid), index.Index, DungeonSystem.CollisionLayer, DungeonSystem.CollisionMask))
                 continue;
 
             // If no cardinal neighbors in dungeon then we're a corner.

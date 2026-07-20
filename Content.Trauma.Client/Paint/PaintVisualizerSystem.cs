@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.Paint;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Paint;
 
@@ -12,12 +10,10 @@ namespace Content.Trauma.Client.Paint;
 /// Colours layers of painted entities that don't have a shader set.
 /// Also colours the spray can colour layers.
 /// </summary>
-public sealed class PaintVisualizerSystem : EntitySystem
+public sealed partial class PaintVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> ShaderId = "Greyscale";
     public ShaderInstance Shader = default!;
@@ -26,9 +22,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
     {
         base.Initialize();
 
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
-
-        Shader = _proto.Index(ShaderId).Instance();
+        Shader = ProtoMan.Index(ShaderId).Instance();
 
         SubscribeLocalEvent<PaintCanComponent, ComponentInit>(OnCanInit);
 

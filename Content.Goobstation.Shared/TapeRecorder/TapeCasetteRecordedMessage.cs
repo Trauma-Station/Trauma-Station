@@ -1,11 +1,7 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Speech;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Language;
 
 namespace Content.Goobstation.Shared.TapeRecorder;
 
@@ -39,12 +35,19 @@ public sealed partial class TapeCassetteRecordedMessage : IComparable<TapeCasset
     [DataField]
     public string Message = string.Empty;
 
-    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message)
+    /// <summary>
+    /// The language used, falls back to tau-ceti common.
+    /// </summary>
+    [DataField]
+    public ProtoId<LanguagePrototype>? Language;
+
+    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message, ProtoId<LanguagePrototype>? language)
     {
         Timestamp = timestamp;
         Name = name;
         Verb = verb;
         Message = message;
+        Language = language;
     }
 
     public int CompareTo(TapeCassetteRecordedMessage? other)

@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 <controls:FancyWindow xmlns="https://spacestation14.io"
         xmlns:controls="using:Content.Client.UserInterface.Controls"
         Title="{Loc 'mob-filter-window-title'}"
@@ -6,5 +10,6 @@
     	<CheckButton Name="AliveButton" Text="{Loc 'mob-state-Alive'}" SetWidth="60" ToggleMode="True"/>
     	<CheckButton Name="DeadButton" Text="{Loc 'mob-state-Dead'}" SetWidth="60" ToggleMode="True"/>
     	<CheckButton Name="CriticalButton" Text="{Loc 'mob-state-Critical'}" SetWidth="60" ToggleMode="True"/>
+    	<CheckButton Name="SoftCritButton" Text="{Loc 'mob-state-SoftCrit'}" SetWidth="60" ToggleMode="True"/>
     </BoxContainer>
 </controls:FancyWindow>

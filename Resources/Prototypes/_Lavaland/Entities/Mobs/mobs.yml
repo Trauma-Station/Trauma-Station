@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: Ash Whelp
   id: LavalandMobAshWhelp
@@ -59,10 +61,9 @@
       0: Alive
       300: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member
+  - type: Injurable
+    damageContainer: Inorganic
 
 - type: entity
   name: Brimdemon
@@ -141,10 +142,9 @@
       0: Alive
       300: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member
+  - type: Injurable
+    damageContainer: Inorganic
 
 - type: entity
   name: Rabble
@@ -207,7 +207,6 @@
             sound:
               path: /Audio/Effects/gib1.ogg
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member
+  - type: Injurable
+    damageContainer: Inorganic

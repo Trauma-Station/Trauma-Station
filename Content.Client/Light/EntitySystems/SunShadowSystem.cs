@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Diagnostics.Contracts;
 using System.Numerics;
 using Content.Client.GameTicking.Managers;
@@ -13,11 +8,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Light.EntitySystems;
 
-public sealed class SunShadowSystem : SharedSunShadowSystem
+public sealed partial class SunShadowSystem : SharedSunShadowSystem
 {
-    [Dependency] private readonly ClientGameTicker _ticker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
+    [Dependency] private ClientGameTicker _ticker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
 
     public override void Update(float frameTime)
     {

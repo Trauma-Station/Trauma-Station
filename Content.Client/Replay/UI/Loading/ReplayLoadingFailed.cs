@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Stylesheets;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
@@ -15,10 +10,10 @@ namespace Content.Client.Replay.UI.Loading;
 /// </summary>
 /// <seealso cref="ReplayLoadingFailedControl"/>
 /// <seealso cref="ContentReplayPlaybackManager"/>
-public sealed class ReplayLoadingFailed : State
+public sealed partial class ReplayLoadingFailed : State
 {
-    [Dependency] private readonly IStylesheetManager _stylesheetManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
+    [Dependency] private IStylesheetManager _stylesheetManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterface = default!;
 
     private ReplayLoadingFailedControl? _control;
 

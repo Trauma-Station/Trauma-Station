@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2023 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.HotPotato;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
@@ -15,11 +5,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.HotPotato;
 
-public sealed class HotPotatoSystem : SharedHotPotatoSystem
+public sealed partial class HotPotatoSystem : SharedHotPotatoSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly EntProtoId _hotPotatoEffectId = "HotPotatoEffect";
 

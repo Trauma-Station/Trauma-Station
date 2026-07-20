@@ -1,8 +1,5 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-// SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Starlight.VentCrawling;
 using Content.Shared.Actions;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DoAfter;
@@ -14,15 +11,12 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.VentCrawler.Tube.Components;
+using Content.Trauma.Common.VentCrawling;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
-using System.Numerics;
 
 // This system allows floor goblins to steal shoes from other entities.
 // It handles the entire process from checking valid targets to transferring the shoes to the goblin's inventory.
@@ -31,20 +25,20 @@ namespace Content.Goobstation.Shared.FloorGoblin;
 
 public sealed partial class StealShoesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedCrawlUnderFloorSystem _crawlUnderFloorSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobstate = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedCrawlUnderFloorSystem _crawlUnderFloorSystem = default!;
+    [Dependency] private MobStateSystem _mobstate = default!;
 
     public override void Initialize()
     {
@@ -73,7 +67,7 @@ public sealed partial class StealShoesSystem : EntitySystem
 
         if (TryComp<VentCrawlerComponent>(uid, out var vent) && vent.InTube)
         {
-            _popup.PopupPredicted(Loc.GetString("steal-shoes-covered"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("steal-shoes-covered"), uid, uid);
             args.Handled = true;
             return;
         }
@@ -85,7 +79,7 @@ public sealed partial class StealShoesSystem : EntitySystem
 
         if (!CanStealHere(uid))
         {
-            _popup.PopupPredicted(Loc.GetString("steal-shoes-covered"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("steal-shoes-covered"), uid, uid);
             args.Handled = true;
             return;
         }
@@ -95,7 +89,7 @@ public sealed partial class StealShoesSystem : EntitySystem
             || shoesUid == null
             || !HasComp<ClothingComponent>(shoesUid))
         {
-            _popup.PopupPredicted(Loc.GetString("steal-shoes-no-shoes"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("steal-shoes-no-shoes"), uid, uid);
             args.Handled = true;
             return;
         }
@@ -134,7 +128,7 @@ public sealed partial class StealShoesSystem : EntitySystem
         if (component.ChompSound is { } chomp)
             _audio.PlayPredicted(chomp, uid, uid);
 
-        _popup.PopupClient(Loc.GetString("steal-shoes-event", ("target", Identity.Name(target, EntityManager)), ("shoes", Name(shoes))), uid, uid);
+        _popup.PopupEntity(Loc.GetString("steal-shoes-event", ("target", Identity.Name(target, EntityManager)), ("shoes", Name(shoes))), uid, uid);
         _popup.PopupEntity(Loc.GetString("shoes-stolen-target-event"), target, target);
 
         ev.Handled = true;

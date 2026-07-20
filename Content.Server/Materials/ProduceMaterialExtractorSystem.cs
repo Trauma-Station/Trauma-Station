@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Botany.Components;
 using Content.Server.Materials.Components;
@@ -14,12 +9,12 @@ using Robust.Server.Audio;
 
 namespace Content.Server.Materials;
 
-public sealed class ProduceMaterialExtractorSystem : EntitySystem
+public sealed partial class ProduceMaterialExtractorSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

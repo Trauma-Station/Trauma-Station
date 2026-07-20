@@ -1,17 +1,4 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Markings;
 using Robust.Client.UserInterface;
 
 namespace Content.Client.Humanoid;
@@ -25,6 +12,8 @@ public sealed class HumanoidMarkingModifierBoundUserInterface : BoundUserInterfa
     [ViewVariables]
     private HumanoidMarkingModifierWindow? _window;
 
+    private readonly MarkingsViewModel _markingsModel = new();
+
     public HumanoidMarkingModifierBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
@@ -34,11 +23,11 @@ public sealed class HumanoidMarkingModifierBoundUserInterface : BoundUserInterfa
         base.Open();
 
         _window = this.CreateWindowCenteredLeft<HumanoidMarkingModifierWindow>();
-        _window.OnMarkingAdded += SendMarkingSet;
-        _window.OnMarkingRemoved += SendMarkingSet;
-        _window.OnMarkingColorChange += SendMarkingSetNoResend;
-        _window.OnMarkingRankChange += SendMarkingSet;
-        _window.OnLayerInfoModified += SendBaseLayer;
+        _window.MarkingPickerWidget.SetModel(_markingsModel);
+        _window.RespectLimits.OnPressed += args => _markingsModel.EnforceLimits = args.Button.Pressed;
+        _window.RespectGroupSex.OnPressed += args => _markingsModel.EnforceGroupAndSexRestrictions = args.Button.Pressed;
+
+        _markingsModel.MarkingsChanged += (_, _) => SendMarkingSet();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -46,25 +35,15 @@ public sealed class HumanoidMarkingModifierBoundUserInterface : BoundUserInterfa
         base.UpdateState(state);
 
         if (_window == null || state is not HumanoidMarkingModifierState cast)
-        {
             return;
-        }
 
-        _window.SetState(cast.MarkingSet, cast.Species, cast.Sex, cast.SkinColor, cast.CustomBaseLayers);
+        _markingsModel.OrganData = cast.OrganData;
+        _markingsModel.OrganProfileData = cast.OrganProfileData;
+        _markingsModel.Markings = cast.Markings;
     }
 
-    private void SendMarkingSet(MarkingSet set)
+    private void SendMarkingSet()
     {
-        SendMessage(new HumanoidMarkingModifierMarkingSetMessage(set, true));
-    }
-
-    private void SendMarkingSetNoResend(MarkingSet set)
-    {
-        SendMessage(new HumanoidMarkingModifierMarkingSetMessage(set, false));
-    }
-
-    private void SendBaseLayer(HumanoidVisualLayers layer, CustomBaseLayerInfo? info)
-    {
-        SendMessage(new HumanoidMarkingModifierBaseLayersSetMessage(layer, info, true));
+        SendMessage(new HumanoidMarkingModifierMarkingSetMessage(_markingsModel.Markings));
     }
 }

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by John John, based off of coolantContainer, https://github.com/Goob-Station/Goob-Station/blob/b631b1878c6eebe219352b3e7306b033abb24be5/Resources/Textures/_Goobstation/Objects/Consumable/Drinks/bay_drinks.rsi/coolant.png",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_open"
+    }
+  ]
+}

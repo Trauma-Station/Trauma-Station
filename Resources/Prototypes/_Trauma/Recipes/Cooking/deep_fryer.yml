@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: deepFryerRecipe
+  id: FoodMealFries
+  result: FoodMealFries
+  items:
+    Potato: 1 # TODO: cut it into raw chips first
+  reagents:
+  - allowed: [Cornoil, Oil, OilOlive]
+    quantity: 5 # 5u of any oil gets used
+
+# TODO: battered sausage etc

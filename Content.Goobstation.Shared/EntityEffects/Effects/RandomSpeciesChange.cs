@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -14,18 +15,18 @@ public sealed partial class RandomSpeciesChange : EntityEffectBase<RandomSpecies
         => Loc.GetString("reagent-effect-guidebook-change-species-random");
 }
 
-public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidAppearanceComponent, RandomSpeciesChange>
+public sealed partial class RandomSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, RandomSpeciesChange>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedSpeciesChangeEffectSystem _speciesChange = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedSpeciesChangeEffectSystem _speciesChange = default!;
 
     public static readonly HashSet<ProtoId<SpeciesPrototype>> SpeciesBlacklist = new()
     {
-        "Cyborg", // shityml
         "IPC",
         "Shadowling", // no ontag
-        "Skeleton"
+        "Skeleton",
+        "Shattered"
     };
 
     private List<ProtoId<SpeciesPrototype>> _species = new();
@@ -39,10 +40,9 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
         LoadPrototypes();
     }
 
-    protected override void Effect(Entity<HumanoidAppearanceComponent> ent, ref EntityEffectEvent<RandomSpeciesChange> args)
+    protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<RandomSpeciesChange> args)
     {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var species = rand.Pick(_species);
         _speciesChange.Polymorph(ent, species);
     }

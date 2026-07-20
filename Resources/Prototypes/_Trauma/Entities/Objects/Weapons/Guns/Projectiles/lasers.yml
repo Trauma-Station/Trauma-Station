@@ -1,0 +1,425 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: SidearmBulletBase
+  parent: BaseBullet
+  name: phaser bolt
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      projectile: &projectile
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        mask:
+        - Opaque
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: heavylaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 0
+  - type: BlurOnCollide
+    blurTime: 3
+
+- type: entity
+  id: LaserSidearmBullet
+  parent: SidearmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 12 # This is a super shitty ranged weapon it should not be good DPS wise.
+
+# Longarms
+
+- type: entity
+  parent: SidearmBulletBase
+  id: LaserGunBulletPractice
+  name: laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 0
+
+- type: entity
+  parent: SidearmBulletBase
+  id: LaserGunBullet
+  name: laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 14
+
+- type: entity
+  parent: SidearmBulletBase
+  id: LaserCarbineBullet
+  name: laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 6
+
+- type: entity
+  id: PulseGunBullet
+  parent: SidearmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: u_laser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlueDisabler
+    damage:
+      types:
+        Heat: 30
+        Blunt: 5
+        Structural: 40
+
+- type: entity
+  parent: PulseGunBullet
+  id: PulseGunBulletLight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 20
+        Blunt: 10
+        Structural: 20
+
+- type: entity
+  parent: PulseGunBullet
+  id: PulseGunBulletHeavy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 35
+        Blunt: 10
+        Structural: 80
+
+- type: entity
+  id: XrayCannonBullet
+  parent: SidearmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: xray
+      shader: unshaded
+  - type: Projectile
+    penetrate: true
+    noPenetrateMask:
+    - BlobImpassable
+    damage:
+      types:
+        Heat: 16
+
+- type: entity
+  id: LaserCannonBullet
+  parent: SidearmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: laser_repeater
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 20
+  - type: IgniteOnCollide
+    fireStacks: 1
+
+# Revolver
+
+- type: entity
+  id: MagFedLaserBase
+  name: laser
+  parent: BaseBullet
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      projectile: *projectile
+      fly-by: *flybyfixture
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: lightbolt
+      shader: unshaded
+      color: "#fc5d52"
+  - type: Projectile
+    damage:
+      types:
+        Heat: 8
+  - type: BlurOnCollide
+    blurTime: 3
+
+- type: entity
+  id: RevolverLaser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 16
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: heavylaser
+      shader: unshaded
+
+- type: entity
+  id: RevolverLaserIon
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ion: 16
+        Heat: 4
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      shader: unshaded
+      color: "#2684ff"
+
+- type: entity
+  id: RevolverLaserXray
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    penetrate: true
+    noPenetrateMask:
+    - BlobImpassable
+    damage:
+      types:
+        Heat: 12
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      shader: unshaded
+      color: "#27ff4b"
+
+- type: entity
+  id: RevolverLaserOverclocked
+  name: laser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 12
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      color: "#ff6122"
+  - type: IgniteOnCollide
+    fireStacks: 0.5
+
+# SMG
+
+- type: entity
+  id: SMGLaser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 7
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: heavylaser
+      shader: unshaded
+
+- type: entity
+  id: SMGLaserIon
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ion: 7
+        Heat: 2
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      color: "#2684ff"
+
+- type: entity
+  id: SMGLaserXray
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    penetrate: true
+    noPenetrateMask:
+    - BlobImpassable
+    damage:
+      types:
+        Heat: 5
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      color: "#27ff4b"
+
+- type: entity
+  id: SMGLaserOvercharge
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 5
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      color: "#fc5d52"
+  - type: IgniteOnCollide
+    fireStacks: 0.25
+
+# Sniper
+
+- type: entity
+  id: SniperLaser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 65
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: heavybolt
+      color: "#fc5d52"
+
+- type: entity
+  id: SniperLaserIon
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ion: 65
+        Heat: 13
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: heavybolt
+      color: "#2684ff"
+
+- type: entity
+  id: SniperLaserXray
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    penetrate: true
+    noPenetrateMask:
+    - BlobImpassable
+    damage:
+      types:
+        Heat: 52
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: heavybolt
+      color: "#27ff4b"
+
+- type: entity
+  id: SniperLaserOvercharge
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 35
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: heavybolt
+      color: "#fc5d52"
+  - type: IgniteOnCollide
+    fireStacks: 7
+
+# LMG
+
+- type: entity
+  id: LMGLaser
+  parent: MagFedLaserBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: heavylaser
+      shader: unshaded

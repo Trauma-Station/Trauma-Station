@@ -1,8 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared.Alert;
 using Content.Shared.Chat.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Changeling.Components;
 

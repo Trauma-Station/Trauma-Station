@@ -1,25 +1,7 @@
-// SPDX-FileCopyrightText: 2022 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Hannah Giovanna Dawson <karakkaraz@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Storage;
+using Content.Shared.Tag;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Shared.Materials;
@@ -34,23 +16,20 @@ using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Content.Shared.Tag; // Goobstation Change
-using Content.Shared._NF.Storage.Components; // Frontier
 
 namespace Content.Server.Materials;
 
 /// <summary>
 /// This handles <see cref="SharedMaterialStorageSystem"/>
 /// </summary>
-public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
+public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stackSystem = default!;
-    [Dependency] private readonly TagSystem _tag = default!; // Goobstation Change
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StackSystem _stackSystem = default!;
+    [Dependency] private TagSystem _tag = default!; // Goobstation Change
 
     private static readonly ProtoId<TagPrototype> OreTag = "Ore"; // Goobstation Change
     public override void Initialize()
@@ -88,23 +67,15 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!_actionBlocker.CanInteract(player, uid))
             return;
 
-        if (!component.CanEjectStoredMaterials || !_prototypeManager.TryIndex<MaterialPrototype>(msg.Material, out var material))
+        if (!component.CanEjectStoredMaterials || !ProtoMan.TryIndex<MaterialPrototype>(msg.Material, out var material))
             return;
 
         var volume = 0;
 
         if (material.StackEntity != null)
         {
-            // Goobstation Change Start
-            var proto = _prototypeManager.Index<EntityPrototype>(material.StackEntity);
-            if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
+            if (!ProtoMan.Index(material.StackEntity.Value).TryComp(out PhysicalCompositionComponent? composition, Factory)) // Trauma - use Factory
                 return;
-
-            if (proto.TryGetComponent<TagComponent>(out var tag, EntityManager.ComponentFactory)
-                && component.DisallowOreEjection
-                && _tag.HasTag(tag, OreTag))
-                return;
-            // Goobstation Change End
 
             var volumePerSheet = composition.MaterialComposition.FirstOrDefault(kvp => kvp.Key == msg.Material).Value;
             var sheetsToExtract = Math.Min(msg.SheetsToExtract, _stackSystem.GetMaxCount(material.StackEntity.Value));
@@ -144,15 +115,19 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!base.TryInsertMaterialEntity(user, toInsert, receiver, storage, material, composition))
             return false;
         _audio.PlayPvs(storage.InsertingSound, receiver);
-        if (user != receiver) // Goobstation - for automation to not spam popups
-            _popup.PopupEntity(Loc.GetString("machine-insert-item", ("user", user), ("machine", receiver),
-                ("item", toInsert)), receiver);
+        if (user != receiver) // Trauma - for automation to not spam popups
+            _popup.PopupEntity(Loc.GetString("machine-insert-item",
+                ("user", user),
+                ("machine", receiver),
+                ("item", toInsert)),
+            receiver);
         QueueDel(toInsert);
 
         // Logging
         TryComp<StackComponent>(toInsert, out var stack);
         var count = stack?.Count ?? 1;
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.Action,
+            LogImpact.Low,
             $"{ToPrettyString(user):player} inserted {count} {ToPrettyString(toInsert):inserted} into {ToPrettyString(receiver):receiver}");
         return true;
     }
@@ -177,7 +152,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
     public List<EntityUid> SpawnMultipleFromMaterial(int amount, string material, EntityCoordinates coordinates, out int overflowMaterial)
     {
         overflowMaterial = 0;
-        if (!_prototypeManager.TryIndex<MaterialPrototype>(material, out var stackType))
+        if (!ProtoMan.TryIndex<MaterialPrototype>(material, out var stackType))
         {
             Log.Error("Failed to index material prototype " + material);
             return new List<EntityUid>();
@@ -211,8 +186,8 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         if (amount <= 0 || materialProto.StackEntity == null)
             return new List<EntityUid>();
 
-        var entProto = _prototypeManager.Index<EntityPrototype>(materialProto.StackEntity);
-        if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
+        var entProto = ProtoMan.Index<EntityPrototype>(materialProto.StackEntity);
+        if (!entProto.TryComp<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
             return new List<EntityUid>();
 
         var materialPerStack = composition.MaterialComposition[materialProto.ID];

@@ -1,8 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Physics;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.PhaseShift;
 
@@ -33,6 +33,9 @@ public sealed partial class PhaseShiftedComponent : Component
     [DataField]
     public SoundSpecifier PhaseOutSound =
         new SoundPathSpecifier(new ResPath("/Audio/_EinsteinEngines/Shadowling/veilout.ogg"));
+
+    [DataField]
+    public bool RevealOnDamage = true;
 
     public int StoredMask;
     public int StoredLayer;

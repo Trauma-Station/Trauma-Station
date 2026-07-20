@@ -1,7 +1,7 @@
 - type: entity
   name: watcher
   id: MobWatcherBase
-  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable ]
   abstract: true
   description: It's like it's staring right through you.
   components:
@@ -43,9 +43,9 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      140: Dead
-  - type: Butcherable
-    spawned:
+      140: Dead # Trauma - was 80
+  - type: ToolRefinable
+    refineResult:
     - id: DiamondOre1
     - id: MaterialWatcherWing1
       maxAmount: 2

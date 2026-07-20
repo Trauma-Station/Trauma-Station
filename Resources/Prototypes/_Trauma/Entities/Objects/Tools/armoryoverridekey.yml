@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseCommandContraband ]
+  id: BaseArmoryOverrideItem
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/ntr_override.rsi
+    state: icon
+  - type: Item
+    sprite: _Goobstation/Objects/Misc/ntr_override.rsi
+    size: Tiny
+  - type: Construction
+    graph: ArmoryOverrideKey
+
+- type: entity
+  parent: BaseArmoryOverrideItem
+  id: ArmoryOverrideKey
+  name: armory override key
+  description: A device for overridding the armory alert level locks in dire situations.
+  components:
+  - type: Emag
+    emagType: Access
+  - type: EmagWhitelist
+    whitelist:
+      components:
+      - StationAlertLevelLock # basically jsut gun safes
+  - type: LimitedCharges
+    maxCharges: 6
+  - type: Construction
+    node: finished
+
+- type: entity
+  parent: BaseArmoryOverrideItem
+  id: ArmoryOverrideKeyComponents
+  name: armory override key components
+  description: Part of the armory override device, keep it close and do not give it away unless its an absolute emergency.
+  components:
+  - type: Construction
+    node: start
+    defaultTarget: finished
+  - type: Stack
+    count: 1
+    stackType: OverrideKeyComponents

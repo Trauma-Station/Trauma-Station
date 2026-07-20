@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -14,8 +9,8 @@ namespace Content.Client.Nyanotrasen.Overlays;
 
 public sealed partial class DogVisionOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] IEntityManager _entityManager = default!;
 
     public override bool RequestScreenTexture => true;

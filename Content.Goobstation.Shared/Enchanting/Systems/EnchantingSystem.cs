@@ -1,15 +1,13 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
 using Content.Shared.Examine;
 using Content.Shared.Item;
+using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Shared.Enchanting.Systems;
@@ -17,12 +15,12 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Provides API for enchanting with <see cref="EnchantComponent"/> and <see cref="EnchantedComponent"/>.
 /// </summary>
-public sealed class EnchantingSystem : EntitySystem
+public sealed partial class EnchantingSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     private EntityQuery<EnchantComponent> _query;
     private EntityQuery<EnchantedComponent> _enchantedQuery;
@@ -32,6 +30,8 @@ public sealed class EnchantingSystem : EntitySystem
     private HashSet<Entity<EnchantingTableComponent>> _tables = new();
     private HashSet<Entity<EnchanterComponent>> _enchanters = new();
     private HashSet<Entity<EnchantedComponent>> _enchantedItems = new();
+
+    private static readonly EntProtoId MagicalLiteracy = "MagicalLiteracyKnowledge";
 
     public override void Initialize()
     {
@@ -60,11 +60,18 @@ public sealed class EnchantingSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
+        var mastery = 0;
+        if (_knowledge.GetKnowledge(args.Examiner, MagicalLiteracy) is { } skill)
+            mastery = _knowledge.GetMastery(skill.Comp);
+
         using (args.PushGroup(nameof(EnchantedComponent)))
         {
             foreach (var uid in ent.Comp.Enchants)
             {
                 var comp = _query.Comp(uid);
+                if (mastery < comp.Level)
+                    continue;
+
                 var key = comp.ShowLevel ? "enchant-examine-level" : "enchant-examine";
                 args.PushMarkup(Loc.GetString(key, ("enchant", uid), ("level", comp.Level)));
             }
@@ -80,10 +87,9 @@ public sealed class EnchantingSystem : EntitySystem
     private void CacheEnchants()
     {
         _enchants.Clear();
-        var factory = EntityManager.ComponentFactory;
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.TryGetComponent<EnchantComponent>(out var comp, factory))
+            if (proto.TryGetComponent<EnchantComponent>(out var comp, Factory))
                 _enchants.Add(proto.ID, comp);
         }
     }
@@ -152,7 +158,7 @@ public sealed class EnchantingSystem : EntitySystem
     public Entity<EnchantComponent>? FindEnchant(EnchantedComponent comp, EntProtoId<EnchantComponent> id)
     {
         // bad prototype
-        if (_proto.Index(id).Name is not {} name)
+        if (ProtoMan.Index(id).Name is not {} name)
         {
             Log.Error($"Enchant prototype {id} has no name set!");
             return null;
@@ -218,7 +224,7 @@ public sealed class EnchantingSystem : EntitySystem
         }
 
         // spawn a new one
-        if (!TrySpawnInContainer(id, item, comp.ContainerId, out var spawned))
+        if (!PredictedTrySpawnInContainer(id, item, comp.ContainerId, out var spawned))
         {
             Log.Error($"Failed to spawn enchant {id} for {ToPrettyString(item)}!");
             // don't make it shiny without any enchants

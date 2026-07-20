@@ -1,21 +1,15 @@
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Projectiles.SpawnEntitiesOnHit;
 
-public sealed class SpawnEntitiesOnHitSystem : EntitySystem
+public sealed partial class SpawnEntitiesOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

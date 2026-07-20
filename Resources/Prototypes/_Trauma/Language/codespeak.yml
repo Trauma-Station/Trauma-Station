@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Traitor uplink language
+- type: language
+  id: Codespeak
+  speech:
+    color: "#ab4045"
+  obfuscation: !type:CodespeakObfuscation

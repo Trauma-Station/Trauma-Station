@@ -1,0 +1,104 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by AsardonicSailor",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "adamantine"
+        },
+        {
+            "name": "adamantinebrittle"
+        },
+        {
+            "name": "anvil_top"
+        },
+        {
+            "name": "anvil_top_unfinished"
+        },
+        {
+            "name": "anvil_bottom"
+        },
+        {
+            "name": "anvil_bottom_unfinished"
+        },
+        {
+            "name": "anvil_unwelded"
+        },
+        {
+            "name": "bag_open"
+        },
+        {
+            "name": "bag_closed"
+        },
+        {
+            "name": "brass"
+        },
+        {
+            "name": "brassbrittle"
+        },
+        {
+            "name": "gold"
+        },
+        {
+            "name": "silver"
+        },
+        {
+            "name": "steel"
+        },
+        {
+            "name": "steelbrittle"
+        },
+        {
+            "name": "plasteel"
+        },
+        {
+            "name": "plasteelbrittle"
+        },
+        {
+            "name": "bloombrass"
+        },
+        {
+            "name": "bloomsteel"
+        },
+        {
+            "name": "bloomplasteel"
+        },
+        {
+            "name": "bloomadamantine"
+        },
+        {
+            "name": "handlesmall"
+        },
+        {
+            "name": "handlemedium"
+        },
+        {
+            "name": "handlelarge"
+        },
+        {
+            "name": "ingot_adamantine"
+        },
+        {
+            "name": "ingot_brass"
+        },
+        {
+            "name": "ingot_gold"
+        },
+        {
+            "name": "ingot_silver"
+        },
+        {
+            "name": "ingot_steel"
+        },
+        {
+            "name": "ingot_plasteel"
+        },
+        {
+            "name": "unfinishedhandle"
+        }
+    ]
+}

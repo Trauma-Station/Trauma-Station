@@ -1,23 +1,24 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._White.Grab;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Grab;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;
 
-public sealed class TouchOfEvilSystem : EntitySystem
+public sealed partial class TouchOfEvilSystem : EntitySystem
 {
-    [Dependency] private readonly GrabThrownSystem _throw = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private CommonGrabThrownSystem _throw = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -59,7 +60,7 @@ public sealed class TouchOfEvilSystem : EntitySystem
             || !TryComp<MeleeWeaponComponent>(args.Target, out var melee))
             return;
 
-        _popups.PopupClient(Loc.GetString("revenant-touch-of-evil-start"), args.Target, args.Target, PopupType.LargeCaution);
+        _popups.PopupEntity(Loc.GetString("revenant-touch-of-evil-start"), args.Target, args.Target, PopupType.LargeCaution);
         _admin.Add(LogType.Action, LogImpact.Low, $"{args.Target}'s Touch of Evil duration has started");
 
         touch.OriginalDamage = melee.Damage;
@@ -78,7 +79,7 @@ public sealed class TouchOfEvilSystem : EntitySystem
             || touch.OriginalDamage == null)
             return;
 
-        _popups.PopupClient(Loc.GetString("revenant-touch-of-evil-end"), args.Target, args.Target, PopupType.Medium);
+        _popups.PopupEntity(Loc.GetString("revenant-touch-of-evil-end"), args.Target, args.Target, PopupType.Medium);
         _admin.Add(LogType.Action, LogImpact.Low, $"{args.Target}'s Touch of Evil duration has ended");
 
         melee.Damage = touch.OriginalDamage;

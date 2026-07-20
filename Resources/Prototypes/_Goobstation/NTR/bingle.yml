@@ -1,9 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # cargo bingle
 - type: entity
+  # not being parented from the MobBingle because it breaks a lot of things. maybe change this to a pitless bingle idk
+  parent: [ SimpleSpaceMobBase, MobNightVision ]
   id: MobBingleCargo
   name: cargo bingle
   description: Once a proud Bingle, now captured and forced to work 9 to 5 to repay for its crimes, you can see their tears.
-  parent: SimpleSpaceMobBase # not being parented from the MobBingle because it breaks a lot of things. maybe change this to a pitless bingle idk
   components:
   - type: GhostTakeoverAvailable
   - type: GhostRole
@@ -61,8 +64,9 @@
     overtime: 5
     sound: /Audio/Weapons/egloves.ogg
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Effects/Footsteps/slime1.ogg
@@ -73,7 +77,7 @@
   - type: Speech
     speechVerb: Bingle
     speechSounds: Slime
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Bingle
     understands:
@@ -83,15 +87,18 @@
     - Alive
     damage:
       types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.17
+        Ballistic: -0.17
+        Radiation: -0.17
+        Heat: -0.13
+        Cold: -0.13
+        Shock: -0.13
+        Caustic: -0.13
         Poison: -0.5
-      groups:
-        Brute: -0.5
-        Burn: -0.5
-  - type: NightVision
-    color: "#008080"
-    activateSound: null
-    deactivateSound: null
   - type: FlashImmunity
+    showInExamine: false
   - type: Access
     tags:
     - Maintenance

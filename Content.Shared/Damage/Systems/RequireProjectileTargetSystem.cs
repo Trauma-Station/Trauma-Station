@@ -13,13 +13,13 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.Damage.Systems;
 
-public sealed class RequireProjectileTargetSystem : EntitySystem
+public sealed partial class RequireProjectileTargetSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     // </Trauma>
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     private float _crawlHitzoneSquared; // Goob
 
@@ -43,10 +43,10 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
         // Goob edit start
         if (TryComp(other, out TargetedProjectileComponent? targeted))
         {
-            if (targeted.Target == null || targeted.Target == ent)
+            if (GetEntity(targeted.Target) is not {} target || target == ent.Owner)
                 return;
 
-            var ev = new ShouldTargetedProjectileCollideEvent(targeted.Target.Value);
+            var ev = new ShouldTargetedProjectileCollideEvent(target);
             RaiseLocalEvent(ent, ev);
             if (ev.Handled)
                 return;

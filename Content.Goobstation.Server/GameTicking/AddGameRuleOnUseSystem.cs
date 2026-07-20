@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.GameTicking;
@@ -13,10 +10,10 @@ namespace Content.Goobstation.Server.GameTicking;
 /// <summary>
 /// This system adds a gamerule once an entity uses an item.
 /// </summary>
-public sealed class AddGameRuleOnUseSystem : EntitySystem
+public sealed partial class AddGameRuleOnUseSystem : EntitySystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

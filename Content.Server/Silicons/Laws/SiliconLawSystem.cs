@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Shared.FixedPoint;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.Trauma.Common.Silicon;
+using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -22,6 +22,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -36,22 +37,24 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server.Silicons.Laws;
 
-public sealed class SiliconLawSystem : SharedSiliconLawSystem
+public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IonStormSystem _ionStorm = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IonLawSystem _ionLaw = default!;
+    [Dependency] private ResearchSystem _research = default!;
+    [Dependency] private RadioSystem _radio = default!;
     // </Trauma>
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
+    private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
+
+    /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
@@ -79,12 +82,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
 
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)
-            || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
-            return;
-        // Corvax-Next-AiRemoteControl-End
-
         var msg = Loc.GetString("laws-notify");
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
         _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.FromHex("#5ed7aa"));
@@ -109,10 +106,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnLawProviderMindRemoved(Entity<SiliconLawProviderComponent> ent, ref MindRemovedMessage args)
     {
-        if (!ent.Comp.Subverted)
+        if (!ent.Comp.Subverted || args.TransferEntity == null)
             return;
-        RemoveSubvertedSiliconRole(args.Mind);
 
+        RemoveSubvertedSiliconRole(args.Mind);
     }
 
 
@@ -176,11 +173,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)) // You can't emag controllable entities
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         // Show the silicon has been subverted.
         component.Subverted = true;
@@ -292,14 +284,14 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     /// </summary>
     public SiliconLawset GetLawset(ProtoId<SiliconLawsetPrototype> lawset)
     {
-        var proto = _prototype.Index(lawset);
+        var proto = ProtoMan.Index(lawset);
         var laws = new SiliconLawset()
         {
             Laws = new List<SiliconLaw>(proto.Laws.Count)
         };
         foreach (var law in proto.Laws)
         {
-            laws.Laws.Add(_prototype.Index<SiliconLawPrototype>(law).ShallowClone());
+            laws.Laws.Add(ProtoMan.Index<SiliconLawPrototype>(law).ShallowClone());
         }
         laws.ObeysTo = proto.ObeysTo;
 
@@ -358,35 +350,22 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
+        // <Trauma>
+        ent.Comp.LastLawset = provider.Laws; // Goob
+        var ev = new AILawUpdatedEvent();
+        // </Trauma>
         while (query.MoveNext(out var update))
         {
-            SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
-
-            // Corvax-Next-AiRemoteControl-Start
-            if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
-                && stationAiHeldComp.CurrentConnectedEntity != null
-                && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
+            if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
             {
-                SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
+                crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
+                Dirty(update, crewIconComp);
             }
-            // Corvax-Next-AiRemoteControl-End
+            SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
+            RaiseLocalEvent(update, new AILawUpdatedEvent());
         }
 
-        ent.Comp.LastLawset = provider.Laws; // Goob
     }
-
-    // Corvax-Next-AiRemoteControl-Start
-    public void SetLawsSilent(List<SiliconLaw> newLaws, EntityUid target, SoundSpecifier? cue = null)
-    {
-        if (!TryComp<SiliconLawProviderComponent>(target, out var component))
-            return;
-
-        if (component.Lawset == null)
-            component.Lawset = new SiliconLawset();
-
-        component.Lawset.Laws = newLaws;
-    }
-    // Corvax-Next-AiRemoteControl-End
 
     // Goob edit start
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
@@ -450,7 +429,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     private SiliconLawset GetRandomLaws(ProtoId<WeightedRandomPrototype> availableSetsId)
     {
         // try to swap it out with a random lawset
-        var lawsets = _prototype.Index(availableSetsId);
+        var lawsets = ProtoMan.Index(availableSetsId);
         var lawset = lawsets.Pick(_random);
         var laws = GetLawset(lawset);
 
@@ -474,7 +453,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         laws.Laws.RemoveAt(_random.Next(laws.Laws.Count));
 
         // generate a new law...
-        var newLaw = _ionStorm.GenerateLaw();
+        var newLaw = _ionLaw.GetIonLaw();
 
         // see if the law we add will replace a random existing law or be a new glitched order one
         if (laws.Laws.Count > 0)

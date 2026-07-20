@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.PhaseShift;
@@ -14,9 +10,9 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Ascension;
 /// This handles the Plane Shift ability.
 /// A toogleable ability that lets you phase through walls!
 /// </summary>
-public sealed class ShadowlingPlaneShiftSystem : EntitySystem
+public sealed partial class ShadowlingPlaneShiftSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

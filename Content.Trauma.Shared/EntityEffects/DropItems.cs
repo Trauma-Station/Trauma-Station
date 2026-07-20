@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Standing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Random.Helpers;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Trauma.Shared.EntityEffects;
+
+/// <summary>
+/// Makes the target drop a random item, then run entity effects on it.
+/// The effects have this mob set as the user.
+/// </summary>
+public sealed partial class DropRandomItem : EntityEffectBase<DropRandomItem>
+{
+    /// <summary>
+    /// Effects to run on the item after dropping it.
+    /// </summary>
+    [DataField]
+    public EntityEffect[] Effects = [];
+}
+
+public sealed partial class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
+{
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+
+    private List<EntityUid> _items = new();
+
+    protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<DropRandomItem> args)
+    {
+        _items.Clear();
+        foreach (var held in _hands.EnumerateHeld(ent.AsNullable()))
+        {
+            _items.Add(held);
+        }
+
+        if (_items.Count == 0)
+            return;
+
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
+        var item = rand.Pick(_items);
+        if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
+            return;
+
+        _effects.ApplyEffects(item, args.Effect.Effects, user: args.User ?? ent.Owner, predicted: args.Predicted);
+    }
+}

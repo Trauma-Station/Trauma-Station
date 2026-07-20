@@ -1,9 +1,12 @@
+// <Trauma>
+using System.Linq;
+// </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Implants.Components;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
+using Content.Shared.Store;
 
 namespace Content.Shared.Implants;
 
@@ -12,22 +15,43 @@ public abstract partial class SharedSubdermalImplantSystem
     public void InitializeRelay()
     {
         SubscribeLocalEvent<ImplantedComponent, MobStateChangedEvent>(RelayToImplantEvent);
-        SubscribeLocalEvent<ImplantedComponent, AfterInteractUsingEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, SuicideEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, TransformSpeakerNameEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, TransformSpeechEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, SeeIdentityAttemptEvent>(RelayToImplantEvent);
+
+        // Ref relays, for when you need to write to the event!
+        SubscribeLocalEvent<ImplantedComponent, CurrencyInsertAttemptEvent>(RefRelayToImplantEvent);
+        SubscribeLocalEvent<ImplantedComponent, GetStoreEvent>(RefRelayToImplantEvent);
     }
 
     /// <summary>
     /// Relays events from the implanted to the implant.
     /// </summary>
-    private void RelayToImplantEvent<T>(EntityUid uid, ImplantedComponent component, T args) where T : notnull
+    public void RelayToImplantEvent<T>(EntityUid uid, ImplantedComponent component, T args) where T : notnull // Trauma - made public
     {
         if (!_container.TryGetContainer(uid, ImplanterComponent.ImplantSlotId, out var implantContainer))
             return;
 
         var relayEv = new ImplantRelayEvent<T>(args, uid);
+        foreach (var implant in implantContainer.ContainedEntities.ToList()) // Trauma - copy contained entities to avoid exceptions if they get deleted in the process
+        {
+            if (args is HandledEntityEventArgs { Handled: true })
+                return;
+
+            RaiseLocalEvent(implant, relayEv);
+        }
+    }
+
+    /// <summary>
+    /// Relays events from the implanted to the implant.
+    /// </summary>
+    private void RefRelayToImplantEvent<T>(Entity<ImplantedComponent> entity, ref T args) where T : notnull
+    {
+        if (!_container.TryGetContainer(entity, ImplanterComponent.ImplantSlotId, out var implantContainer))
+            return;
+
+        var relayEv = new ImplantRelayEvent<T>(args, entity);
         foreach (var implant in implantContainer.ContainedEntities)
         {
             if (args is HandledEntityEventArgs { Handled: true })
@@ -35,6 +59,8 @@ public abstract partial class SharedSubdermalImplantSystem
 
             RaiseLocalEvent(implant, relayEv);
         }
+
+        args = relayEv.Event;
     }
 }
 
@@ -43,7 +69,7 @@ public abstract partial class SharedSubdermalImplantSystem
 /// </summary>
 public sealed class ImplantRelayEvent<T> where T : notnull
 {
-    public readonly T Event;
+    public T Event;
 
     public readonly EntityUid ImplantedEntity;
 

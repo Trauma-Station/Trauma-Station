@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.InternalResources.Data;
 using Content.Goobstation.Shared.InternalResources.EntitySystems;
 using Content.Server.Administration;
@@ -5,7 +7,6 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Administration;
 using Content.Shared.Prototypes;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 using System;
 using System.Linq;
 
@@ -13,10 +14,10 @@ using System.Linq;
 namespace Content.Goobstation.Server.InternalResources.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class AddInternalResourceCommand : LocalizedEntityCommands
+public sealed partial class AddInternalResourceCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedInternalResourcesSystem _internalResources = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedInternalResourcesSystem _internalResources = default!;
 
     public override string Command => "addinternalresource";
 

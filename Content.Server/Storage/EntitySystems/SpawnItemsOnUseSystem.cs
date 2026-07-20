@@ -1,22 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pancake <Pangogie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Systems;
 using Content.Server.Storage.Components;
@@ -31,14 +12,14 @@ using static Content.Shared.Storage.EntitySpawnCollection;
 
 namespace Content.Server.Storage.EntitySystems
 {
-    public sealed class SpawnItemsOnUseSystem : EntitySystem
+    public sealed partial class SpawnItemsOnUseSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly SharedHandsSystem _hands = default!;
-        [Dependency] private readonly PricingSystem _pricing = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private SharedHandsSystem _hands = default!;
+        [Dependency] private PricingSystem _pricing = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         public override void Initialize()
         {

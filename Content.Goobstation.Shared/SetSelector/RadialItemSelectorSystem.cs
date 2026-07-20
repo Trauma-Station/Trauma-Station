@@ -1,15 +1,14 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.UserInterface;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Common.RadialSelector;
 
 namespace Content.Goobstation.Shared.SetSelector;
 
-public sealed class RadialItemSelectorSystem : EntitySystem
+public sealed partial class RadialItemSelectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -30,7 +29,7 @@ public sealed class RadialItemSelectorSystem : EntitySystem
             return;
 
         var selected = args.SelectedItem;
-        if (!_proto.HasIndex(selected) || ent.Comp.Entries.All(x => x.Prototype != selected))
+        if (!ProtoMan.HasIndex(selected) || ent.Comp.Entries.All(x => x.Prototype != selected))
             return;
 
         var coords = Transform(ent).Coordinates;

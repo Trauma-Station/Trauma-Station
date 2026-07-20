@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: technology
   id: ED209
   name: research-technology-military-bots
@@ -113,7 +115,6 @@
   technologyPrerequisites:
   - RipleyAPLU
   - PortableMicrofusionWeaponry
-  - SmartWeaponry
   position: -8,2
 
 - type: technology
@@ -168,7 +169,6 @@
   tier: 3
   cost: 15000
   recipeUnlocks:
-  - UpgradedCyberneticHeart
   - UpgradedCyberneticLungs
   - JawsOfLifeLeftArm
   - JawsOfLifeRightArm
@@ -202,9 +202,7 @@
   - LeftFootCybernetic
   - RightFootCybernetic
   - BasicCyberneticEyes
-  - BasicCyberneticHeart
   - BasicCyberneticLungs
-  - BasicCyberneticLiver
   - HypoportSecure
   position: -6,4
   technologyPrerequisites:
@@ -243,7 +241,6 @@
   - AugmentUtilityPanelElectronics
   - AugmentBotanyPanelElectronics
   - AugmentSurgeryPanelElectronics
-  - AugmentPaperworkPanelElectronics
 
 - type: technology
   id: CombatAugmentation

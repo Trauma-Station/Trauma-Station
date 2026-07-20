@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: tile
+  parent: BasePlating
+  id: PlatingBurnt
+  name: tiles-plating
+  sprite: /Textures/_Trauma/Tiles/plating_burnt.png

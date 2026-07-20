@@ -1,29 +1,3 @@
-// SPDX-FileCopyrightText: 2020 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Exp <theexp111@gmail.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 theashtronaut <112137107+theashtronaut@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 qwerltaz <69696513+qwerltaz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Atmos.Components;
 using Content.Server.NodeContainer.Nodes;
@@ -34,18 +8,17 @@ using Content.Shared.Interaction;
 using Content.Shared.NodeContainer;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
-using static Content.Shared.Atmos.Components.GasAnalyzerComponent;
 
 namespace Content.Server.Atmos.EntitySystems;
 
 [UsedImplicitly]
-public sealed class GasAnalyzerSystem : EntitySystem
+public sealed partial class GasAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AtmosphereSystem _atmo = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AtmosphereSystem _atmo = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
 
     /// <summary>
     /// Minimum moles of a gas to be sent to the client.
@@ -127,6 +100,7 @@ public sealed class GasAnalyzerSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("gas-analyzer-shutoff"), user.Value, user.Value);
 
         entity.Comp.Enabled = false;
+        entity.Comp.User = null;
         Dirty(entity);
         _appearance.SetData(entity.Owner, GasAnalyzerVisuals.Enabled, entity.Comp.Enabled);
         RemCompDeferred<ActiveGasAnalyzerComponent>(entity.Owner);
@@ -165,15 +139,15 @@ public sealed class GasAnalyzerSystem : EntitySystem
             return false;
 
         // check if the user has walked away from what they scanned
-        if (component.Target.HasValue)
+        if (component.Target.HasValue && component.User.HasValue)
         {
             // Listen! Even if you don't want the Gas Analyzer to work on moving targets, you should use
             // this code to determine if the object is still generally in range so that the check is consistent with the code
             // in OnAfterInteract() and also consistent with interaction code in general.
-            if (!_interactionSystem.InRangeUnobstructed((component.User, null), (component.Target.Value, null)))
+            if (!_interactionSystem.InRangeUnobstructed((component.User.Value, null), (component.Target.Value, null)))
             {
-                if (component.User is { } userId && component.Enabled)
-                    _popup.PopupEntity(Loc.GetString("gas-analyzer-object-out-of-range"), userId, userId);
+                if (component.Enabled)
+                    _popup.PopupEntity(Loc.GetString("gas-analyzer-object-out-of-range"), component.User.Value, component.User.Value);
 
                 component.Target = null;
             }
@@ -282,18 +256,17 @@ public sealed class GasAnalyzerSystem : EntitySystem
     {
         var gases = new List<GasEntry>();
 
+        if (mixture == null)
+            return [];
+
         for (var i = 0; i < Atmospherics.TotalNumberOfGases; i++)
         {
-            var gas = _atmo.GetGas(i);
+            var gas = (Gas)i;
 
-            if (mixture?[i] <= UIMinMoles)
+            if (mixture[i] <= UIMinMoles)
                 continue;
 
-            if (mixture != null)
-            {
-                var gasName = Loc.GetString(gas.Name);
-                gases.Add(new GasEntry(gasName, mixture[i], gas.Color));
-            }
+            gases.Add(new GasEntry(gas, mixture[i]));
         }
 
         var gasesOrdered = gases.OrderByDescending(gas => gas.Amount);

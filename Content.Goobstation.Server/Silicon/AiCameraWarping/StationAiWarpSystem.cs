@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ThunderBear2006 <bearthunder06@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Silicon.AiCameraWarping;
@@ -12,11 +9,11 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Silicon.AiCameraWarping;
 
-public sealed class StationAiWarpSystem : SharedStationAiWarpSystem
+public sealed partial class StationAiWarpSystem : SharedStationAiWarpSystem
 {
-    [Dependency] private readonly SharedStationAiSystem _stationAiSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedStationAiSystem _stationAiSystem = default!;
+    [Dependency] private SharedTransformSystem _xformSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {
@@ -59,7 +56,7 @@ public sealed class StationAiWarpSystem : SharedStationAiWarpSystem
     {
         List<CameraWarpData> cameras = new();
 
-        var query = EntityManager.EntityQueryEnumerator<SurveillanceCameraComponent>();
+        var query = EntityQueryEnumerator<SurveillanceCameraComponent>();
 
         var aiGrid = _xformSystem.GetGrid(coreUid);
 

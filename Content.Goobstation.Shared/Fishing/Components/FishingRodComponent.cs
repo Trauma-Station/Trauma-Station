@@ -1,15 +1,5 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.Fishing.Components;
 
@@ -29,10 +19,11 @@ public sealed partial class FishingRodComponent : Component
     public float StartingProgress = 0.33f;
 
     /// <summary>
-    /// How many seconds we wait until fish starts to fight with us
+    /// How long we wait until fish starts to fight with us
+    /// Gives higher ping players a chance to react.
     /// </summary>
     [DataField]
-    public float StartingStruggleTime = 0.3f;
+    public TimeSpan StartingStruggleTime = TimeSpan.FromSeconds(0.3);
 
     /// <summary>
     /// If lure moves bigger than this distance away from the rod,
@@ -48,10 +39,10 @@ public sealed partial class FishingRodComponent : Component
     public SpriteSpecifier RopeSprite =
         new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Objects/Specific/Fishing/fishing_lure.rsi"), "rope");
 
-    [DataField, ViewVariables]
+    [DataField]
     public Vector2 RopeUserOffset = new (0f, 0f);
 
-    [DataField, ViewVariables]
+    [DataField]
     public Vector2 RopeLureOffset = new (0f, 0f);
 
     [DataField, AutoNetworkedField]

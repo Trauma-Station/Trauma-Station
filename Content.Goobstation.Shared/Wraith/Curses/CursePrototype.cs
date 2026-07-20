@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.StatusIcon;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;

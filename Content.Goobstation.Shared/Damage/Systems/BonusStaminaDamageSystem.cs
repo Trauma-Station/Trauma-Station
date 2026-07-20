@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Damage.Events;
 using Content.Goobstation.Shared.Damage.Components;
 
 namespace Content.Goobstation.Shared.Damage.System;
 
-public sealed class BonusStaminaDamageSystem : EntitySystem
+public sealed partial class BonusStaminaDamageSystem : EntitySystem
 {
     public override void Initialize()
     {

@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityEffect
+  id: DanRally
+  effects:
+  - !type:NestedEffect
+    proto: VampireRejuvII
+  - !type:SpawnAttached
+    entity: RallyOverlay
+
+- type: entityEffect
+  id: MassHysteria
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: HysteriaStatusEffect
+    time: 30
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectFlashed
+    time: 3

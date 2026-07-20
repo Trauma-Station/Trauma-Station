@@ -1,0 +1,138 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: AnvilTop
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+        doAfter: 5
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+  - node: finish
+    entity: AnvilTopUnfinished
+
+- type: constructionGraph
+  id: AnvilBottom
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+        doAfter: 5
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+  - node: finish
+    entity: AnvilBottomUnfinished
+
+- type: constructionGraph
+  id: SteelScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Steel
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: SteelScraps
+
+- type: constructionGraph
+  id: PlasteelScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Plasteel
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: PlasteelScraps
+
+- type: constructionGraph
+  id: BrassScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Brass
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: BrassScraps
+
+- type: constructionGraph
+  id: GoldScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Gold
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: GoldScraps
+
+- type: constructionGraph
+  id: SilverScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Silver
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: SilverScraps
+
+- type: constructionGraph
+  id: WetBrick
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: Cement
+        doAfter: 0.5
+        name: construction-graph-tag-cement
+        icon:
+          sprite: _Trauma/Objects/Materials/materials.rsi
+          state: cement
+  - node: finish
+    entity: WetBrick
+
+- type: constructionGraph # Todo, add leather
+  id: ClothingHandsGlovesForge
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Durathread
+        amount: 3
+        doAfter: 5
+      # TODO: some kind of insulation, your ass is not handling 2 thousand degree metals with some quirky gloves
+  - node: finish
+    entity: ClothingHandsGlovesForge

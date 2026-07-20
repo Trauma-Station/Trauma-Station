@@ -1,23 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 yahay505 <58685802+yahay505@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 yavuz <58685802+yahay505@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System;
@@ -45,9 +25,11 @@ using Content.Shared.Interaction;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
-using Content.Shared.Radiation.Components;
+using Content.Shared.Radiation.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -56,26 +38,29 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Timing;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Supermatter.Systems;
 
-public sealed class SupermatterSystem : SharedSupermatterSystem
+public sealed partial class SupermatterSystem : SharedSupermatterSystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambient = default!;
-    [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly AlertLevelSystem _alert = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private AmbientSoundSystem _ambient = default!;
+    [Dependency] private LightningSystem _lightning = default!;
+    [Dependency] private AlertLevelSystem _alert = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SharedRadiationSystem _radiation = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+
+    public static readonly ProtoId<ToolQualityPrototype> Slicing = "Slicing";
 
     private DelamType _delamType = DelamType.Explosion;
 
@@ -115,17 +100,14 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     {
         base.Update(frameTime);
 
-        if (!_gameTiming.IsFirstTimePredicted)
-            return;
-
-        foreach (var sm in EntityManager.EntityQuery<SupermatterComponent>())
+        var query = EntityQueryEnumerator<SupermatterComponent>();
+        while (query.MoveNext(out var uid, out var sm))
         {
             if (!sm.Activated)
                 continue;
 
-            var uid = sm.Owner;
+            // TODO: timespan bruh
             sm.UpdateAccumulator += frameTime;
-
             if (sm.UpdateAccumulator >= sm.UpdateTimer)
             {
                 sm.UpdateAccumulator -= sm.UpdateTimer;
@@ -247,11 +229,8 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
         sm.Power = Math.Max(absorbedGas.Temperature * tempFactor / Atmospherics.T0C * powerRatio + sm.Power, 0);
 
         //Radiate stuff
-        if (TryComp<RadiationSourceComponent>(uid, out var rad))
-        {
-            var transmittedpower = sm.Power * Math.Max(0, 1f + transmissionBonus / 10f);
-            rad.Intensity = transmittedpower * sm.RadiationOutputFactor;
-        }
+        var transmittedpower = sm.Power * Math.Max(0, 1f + transmissionBonus / 10f);
+        _radiation.SetIntensity(uid, transmittedpower * sm.RadiationOutputFactor);
 
         //Power * 0.55 * a value between 1 and 0.8
         var energy = sm.Power * sm.ReactionPowerModifier;
@@ -588,6 +567,10 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     {
         var target = args.OtherEntity;
 
+        // ignore non-hard fixture collisions, or the wrong event target
+        if (args.OurEntity != uid || !args.OtherFixture.Hard)
+            return;
+
         // Stop immune entities from activating the sm.
         if (args.OtherBody.BodyType == BodyType.Static
             || HasComp<SupermatterImmuneComponent>(target)
@@ -623,12 +606,13 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
 
         if (!HasComp<ProjectileComponent>(target))
         {
+            var impact = HasComp<ActorComponent>(target) ? LogImpact.Extreme : LogImpact.Medium;
             _adminLog.Add(LogType.Supermatter, LogImpact.Medium, $"Supermatter {ToPrettyString(uid)} has consumed {ToPrettyString(target)}");
-            EntityManager.SpawnEntity("Ash", Transform(target).Coordinates);
+            Spawn("Ash", Transform(target).Coordinates);
             _audio.PlayPvs(sm.DustSound, uid);
         }
 
-        EntityManager.QueueDeleteEntity(target);
+        QueueDel(target);
     }
 
     private void OnHandInteract(EntityUid uid, SupermatterComponent sm, ref InteractHandEvent args)
@@ -643,9 +627,10 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
 
         sm.MatterPower += 200;
 
-        EntityManager.SpawnEntity("Ash", Transform(target).Coordinates);
+        _adminLog.Add(LogType.Supermatter, LogImpact.Extreme, $"Supermatter {ToPrettyString(uid)} has consumed {ToPrettyString(target)}");
+        Spawn("Ash", Transform(target).Coordinates);
         _audio.PlayPvs(sm.DustSound, uid);
-        EntityManager.QueueDeleteEntity(target);
+        QueueDel(target);
     }
 
     private void OnItemInteract(EntityUid uid, SupermatterComponent sm, ref InteractUsingEvent args)
@@ -659,7 +644,7 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
         if (sm.SliverRemoved)
             return;
 
-        if (!HasComp<SharpComponent>(args.Used))
+        if (!_tool.HasQuality(args.Used, Slicing))
             return;
 
         var dae = new DoAfterArgs(EntityManager, args.User, 30f, new SupermatterDoAfterEvent(), uid)

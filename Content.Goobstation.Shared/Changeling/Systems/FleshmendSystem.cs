@@ -1,62 +1,47 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
-// TODO: move this to shared
 public sealed partial class FleshmendSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FleshmendComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<FleshmendComponent, ComponentRemove>(OnRemoved);
-    }
-
-    private void OnMapInit(Entity<FleshmendComponent> ent, ref MapInitEvent args)
+    [SubscribeLocalEvent]
+    private void OnApplied(Entity<FleshmendComponent> ent, ref StatusEffectAppliedEvent args)
     {
         if (ent.Comp.DoVisualEffect)
-            EnsureComp<FleshmendEffectComponent>(ent);
+            EnsureComp<FleshmendEffectComponent>(args.Target);
 
         if (ent.Comp.PassiveSound != null)
             DoFleshmendSound(ent);
 
         ent.Comp.UpdateTimer = _timing.CurTime + ent.Comp.UpdateDelay;
 
-        Cycle(ent);
+        Cycle(ent, args.Target);
     }
 
-    private void OnRemoved(Entity<FleshmendComponent> ent, ref ComponentRemove args)
+    [SubscribeLocalEvent]
+    private void OnRemoved(Entity<FleshmendComponent> ent, ref StatusEffectRemovedEvent args)
     {
         if (ent.Comp.DoVisualEffect)
-            RemComp<FleshmendEffectComponent>(ent);
+            RemComp<FleshmendEffectComponent>(args.Target);
 
         if (ent.Comp.PassiveSound != null)
             StopFleshmendSound(ent);
@@ -82,35 +67,33 @@ public sealed partial class FleshmendSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var query = EntityQueryEnumerator<FleshmendComponent>();
+        var query = EntityQueryEnumerator<FleshmendComponent, StatusEffectComponent>();
         var now = _timing.CurTime;
-        while (query.MoveNext(out var uid, out var comp))
+        while (query.MoveNext(out var uid, out var comp, out var effect))
         {
-            if (comp.UpdateTimer > now)
+            if (effect.AppliedTo is not { } target || now < comp.UpdateTimer)
                 continue;
 
             comp.UpdateTimer = now + comp.UpdateDelay;
 
-            Cycle((uid, comp));
+            Cycle((uid, comp), target);
         }
     }
 
-    private void Cycle(Entity<FleshmendComponent> ent)
+    private void Cycle(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        if (!TryFlammableChecks(ent))
-            return;
-
-        DoFleshmend(ent);
+        if (TryFlammableChecks(ent, target))
+            DoFleshmend(ent, target);
     }
 
-    private bool TryFlammableChecks(Entity<FleshmendComponent> ent)
+    private bool TryFlammableChecks(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        if (TryComp<FlammableComponent>(ent, out var flam)
-            && flam.OnFire
-            && !ent.Comp.IgnoreFire)
+        if (!ent.Comp.IgnoreFire &&
+            TryComp<FlammableComponent>(target, out var flam)
+            && flam.OnFire)
         {
             if (ent.Comp.DoVisualEffect)
-                RemComp<FleshmendEffectComponent>(ent);
+                RemComp<FleshmendEffectComponent>(target);
 
             if (ent.Comp.PassiveSound != null)
                 StopFleshmendSound(ent);
@@ -119,7 +102,7 @@ public sealed partial class FleshmendSystem : EntitySystem
         }
 
         if (ent.Comp.DoVisualEffect)
-            EnsureComp<FleshmendEffectComponent>(ent);
+            EnsureComp<FleshmendEffectComponent>(target);
 
         if (ent.Comp.PassiveSound != null
             && ent.Comp.SoundSource == null)
@@ -127,49 +110,17 @@ public sealed partial class FleshmendSystem : EntitySystem
         return true;
     }
 
-    public readonly ProtoId<DamageGroupPrototype> BruteDamageGroup = "Brute";
-    public readonly ProtoId<DamageGroupPrototype> BurnDamageGroup = "Burn";
-
-    private void DoFleshmend(Entity<FleshmendComponent> ent)
+    private void DoFleshmend(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        // the dmg groups
-        var bruteTypes = _proto.Index(BruteDamageGroup);
-        var burnTypes = _proto.Index(BurnDamageGroup);
-
-        // nuke this whole section when EvenHealthChange or smth similar becomes real
-        if (!TryComp<DamageableComponent>(ent, out var damage))
-            return;
-
-        var bruteDiv =
-            bruteTypes.DamageTypes.Count(type =>
-            damage.Damage.DamageDict.GetValueOrDefault(type)
-            != FixedPoint2.Zero);
-
-        var burnDiv =
-            burnTypes.DamageTypes.Count(type =>
-            damage.Damage.DamageDict.GetValueOrDefault(type)
-            != FixedPoint2.Zero);
-
-        var bruteHealAmount = ent.Comp.BruteHeal / bruteDiv;
-        var burnHealAmount = ent.Comp.BurnHeal / burnDiv;
-        //
-
-        var healSpec = new DamageSpecifier();
-
-        foreach (var brute in bruteTypes.DamageTypes)
-            healSpec.DamageDict.Add(brute, bruteHealAmount);
-
-        foreach (var burn in burnTypes.DamageTypes)
-            healSpec.DamageDict.Add(burn, burnHealAmount);
-
-        healSpec.DamageDict.Add("Asphyxiation", ent.Comp.AsphyxHeal);
-
         // heal the damage
-        _dmg.TryChangeDamage(ent.Owner, healSpec, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAllOrganic);
+        foreach (var (group, amount) in ent.Comp.Healing)
+        {
+            // negative values to heal, stupid API treats it like ChangeDamage but ignores positive values anyway...
+            _dmg.HealEvenly(target, -amount, group);
+        }
 
         // heal bleeding and restore blood
-        _bloodstream.TryModifyBleedAmount(ent.Owner, ent.Comp.BleedingAdjust);
-        //_wound.TryHealMostSevereBleedingWoundables(ent, -ent.Comp.BleedingAdjust, out _); - moved to trymodifybleedamount
-        _bloodstream.TryModifyBloodLevel(ent.Owner, ent.Comp.BloodLevelAdjust);
+        _bloodstream.TryModifyBleedAmount(target, ent.Comp.BleedingAdjust);
+        _bloodstream.TryModifyBloodLevel(target, ent.Comp.BloodLevelAdjust);
     }
 }

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: weightedRandom
   id: DiseaseBehaviorsStandard
   weights:
@@ -9,12 +11,7 @@
     DiseaseBehaviorHeadache: 1
     DiseaseBehaviorTemperature: 1.5
     DiseaseBehaviorCold: 1
-    DiseaseBehaviorFightImmunity: 0.5
     DiseaseBehaviorCough: 2
     DiseaseBehaviorHyperactive: 0.5
     DiseaseBehaviorHealing: 0.5
     DiseaseBehaviorRapidMutation: 0.5
-    # total of 0.05 for gravitosis
-    # DiseaseBehaviorGravitosisA: 0.025
-    # DiseaseBehaviorGravitosisB: 0.0125
-    # DiseaseBehaviorGravitosisC: 0.0125

@@ -1,0 +1,34 @@
+- files: ["last_call.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by mryikes"
+  source: "https://www.youtube.com/watch?v=WtDZEMxHY6U"
+
+- files: ["rescue_imminent.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by mrjajkes"
+  source: "https://www.youtube.com/watch?v=DjV0OMskwiE"
+
+- files: ["tansume.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Moranbong Band"
+  source: "https://goobstation.com"
+
+- files: ["blobin_time.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by mrjajkes"
+  source: "https://www.youtube.com/watch?v=nxJOCDh-M3s"
+
+- files: ["opposing_nuke.ogg"]
+  license: "Custom"
+  copyright: "Opposing Nuke by mrjajkes is licensed under the following terms: free use and modification with proper credit to the original creator, excluding usage by FulpStation, White Dream, Wizard's Den, and any ERP/sexually-oriented servers, or for commercial use unless granted permission by the author. For commercial use, please contact the author to discuss details."
+  source: "https://www.youtube.com/watch?v=OmU1Ilqhxgs"
+
+- files: ["sponsored-by-syndicate.ogg"]
+  license: "Custom"
+  copyright: "Sponsored By Syndicate by mrjajkes is licensed under the following terms: free use and modification with proper credit to the original creator, excluding usage by FulpStation, White Dream, and any ERP/sexually-oriented servers, or for commercial use unless granted permission by the author. For commercial use (Patreon is fine). please contact the author to discuss details."
+  source: "https://youtu.be/vO_dMp4d3ew"
+
+- files: ["EphedrineOverdose.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by mrjajkes"
+  source: "https://www.youtube.com/watch?v=3HC3igtVzuc"

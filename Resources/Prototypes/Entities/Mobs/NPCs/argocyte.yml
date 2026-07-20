@@ -1,33 +1,6 @@
-# SPDX-FileCopyrightText: 2023 I.K <45953835+notquitehadouken@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 notquitehadouken <1isthisameme>
-# SPDX-FileCopyrightText: 2024 Whisper <121047731+QuietlyWhisper@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-# SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Zokkie <6126135+Zokkie@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   save: false
-  parent: [ BaseSimpleMob, MobCombat ]
+  parent: [ BaseSimpleMob, BaseMobAnimal, MobCombat, MobBloodstream ]
   id: BaseMobArgocyte
   suffix: AI
   description: A dangerous alien found on the wrong side of planets, known for their propensity for munching on ruins.
@@ -41,8 +14,7 @@
       task: SimpleHostileCompound #todo custom argocyte AI
   - type: Sprite
     sprite: Mobs/Aliens/Argocyte/argocyte_common.rsi
-  - type: SolutionContainerManager
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Trauma - replaces ReplacementAccent
     speaks:
     - Xeno
     understands:
@@ -69,9 +41,6 @@
     damage:
       types:
         Slash: 5
-  - type: Body
-    prototype: Animal
-    bodyType: Simple
   - type: Flammable
     fireSpread: true
     canResistFire: true
@@ -87,7 +56,7 @@
   - type: Fauna # Lavaland Change
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteSlurva
   name: slurva
   description: A pathetic creature, incapable of doing much.
@@ -109,8 +78,8 @@
     thresholds:
       0: Alive
       30: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 1
   - type: MovementSpeedModifier
@@ -122,7 +91,7 @@
         Blunt: 3
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteBarrier
   name: barrier
   components:
@@ -143,8 +112,8 @@
     thresholds:
       0: Alive
       30: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 1
   - type: Fixtures
@@ -164,7 +133,7 @@
         Blunt: 3
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteSkitter
   name: skitter
   description: A devious little alien... Make sure they don't run off with your rations!
@@ -183,8 +152,8 @@
     thresholds:
       0: Alive
       30: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 1
   - type: Fixtures
@@ -204,7 +173,7 @@
         Slash: 3
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteSwiper
   name: swiper
   description: Where did that stack of steel go?
@@ -223,15 +192,15 @@
     thresholds:
       0: Alive
       60: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MovementSpeedModifier
     baseSprintSpeed : 5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteMolder
   name: molder
   components:
@@ -249,8 +218,8 @@
     thresholds:
       0: Alive
       100: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MovementSpeedModifier
@@ -258,7 +227,7 @@
     baseWalkSpeed : 3.5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocytePouncer
   name: pouncer
   components:
@@ -276,8 +245,8 @@
     thresholds:
       0: Alive
       100: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -287,7 +256,7 @@
         Slash: 7.5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteGlider
   name: glider
   components:
@@ -305,8 +274,8 @@
     thresholds:
       0: Alive
       100: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -319,7 +288,7 @@
     baseWalkSpeed: 4.5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteHarvester
   name: harvester
   components:
@@ -337,8 +306,8 @@
     thresholds:
       0: Alive
       150: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -349,7 +318,7 @@
         Structural: 5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteCrawler
   name: crawler
   description: Deadly, pack-animals that maul unsuspecting travelers.
@@ -368,8 +337,8 @@
     thresholds:
       0: Alive
       150: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -383,7 +352,7 @@
     baseWalkSpeed: 5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteEnforcer
   name: enforcer
   components:
@@ -401,8 +370,8 @@
     thresholds:
       0: Alive
       300: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 3
   - type: MeleeWeapon
@@ -432,7 +401,6 @@
       Dead:
         Base: founder_dead
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatXeno
       amount: 5
@@ -478,7 +446,6 @@
       Dead:
         Base: leviathing_dead
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatXeno
       amount: 10

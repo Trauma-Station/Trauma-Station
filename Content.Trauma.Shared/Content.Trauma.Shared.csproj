@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<NoWarn>CS0618</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 	<Import Project="../MSBuild/Content.props" />
@@ -13,4 +14,5 @@
 	<Import Project="../RobustToolbox/Imports/Shared.props" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.CompNetworkGenerator.targets" />
+    <Import Project="../RobustToolbox/MSBuild/Robust.EntitySystemSubscriptionsGenerator.targets" />
 </Project>

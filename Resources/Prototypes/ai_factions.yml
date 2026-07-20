@@ -10,15 +10,17 @@
   - AllHostile
   #- Wizard # Goob
   - Xenoborg
-  # <Goob>
+  # <Trauma>
   - Heretic
   - Blob
   - Shadowling
+  - Insurgent
   friendly:
   - Wizard # was hostile, now they're friendly
   - PirateFaction
   - Lavafauna
-  # </Goob>
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: NanoTrasen
@@ -41,13 +43,25 @@
   - AllHostile
   - Wizard
   - Xenoborg
+  # <Trauma>
+  - Insurgent
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: Mouse
   # Goobstation - not hostile to anything so they don't attack things
+  # <Trauma>
+  hostile:
+  - Insurgent
+  # </Trauma>
 
 - type: npcFaction
   id: Passive
+  # <Trauma>
+  hostile:
+  - Insurgent
+  # </Trauma>
 
 - type: npcFaction
   id: PetsNT
@@ -65,6 +79,10 @@
   - Xeno
   - AllHostile
   - Dragon
+  # <Trauma>
+  - Insurgent
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: SimpleHostile
@@ -85,6 +103,9 @@
   - Blob
   - PirateFaction
   - Lavafauna
+  # <Trauma>
+  - Insurgent
+  # </Trauma>
   friendly:
   - Wizard # was hostile, now they're friendly
   - Shadowling
@@ -93,6 +114,10 @@
 
 - type: npcFaction
   id: SimpleNeutral
+  # <Trauma>
+  hostile:
+  - Insurgent
+  # </Trauma>
 
 - type: npcFaction
   id: Syndicate
@@ -115,6 +140,10 @@
   - AllHostile
   - Wizard
   - Xenoborg
+  # <Trauma>
+  - Insurgent
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: Xeno
@@ -136,13 +165,20 @@
   #- Wizard # Goob - made friendly
   - Dragon
   - Xenoborg
+  # <Trauma>
+  - Insurgent
+  - CrabFaction
+  # </Trauma>
   friendly: # Goob - wizard is now friendly
   - Wizard
 
 - type: npcFaction
   id: Zombie
+  # <Trauma>
+  friendly:
+  - InitialInfected
   hostile:
-  # <Goob>
+  - Insurgent
   - Changeling
   - Heretic
   - Blob
@@ -150,7 +186,8 @@
   - PirateFaction
   - Wraith
   - Lavafauna
-  # </Goob>
+  - CrabFaction
+  # </Trauma>
   - NanoTrasen
   - SimpleNeutral
   - SimpleHostile
@@ -190,6 +227,10 @@
   - AllHostile
   - Wizard
   - Xenoborg
+  # <Trauma>
+  - Insurgent
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: AllHostile
@@ -216,6 +257,10 @@
   - Revolutionary
   - Wizard
   - Xenoborg
+  # <Trauma>
+  - Insurgent
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: Wizard
@@ -233,6 +278,9 @@
   - Revolutionary
   - AllHostile
   - Xenoborg
+  # <Trauma>
+  - Insurgent
+  # </Trauma>
 
 - type: npcFaction
   id: Xenoborg
@@ -254,3 +302,6 @@
   # cause they are hostile to them
   - SimpleHostile
   - AllHostile
+  # <Trauma>
+  - Insurgent
+  # </Trauma>

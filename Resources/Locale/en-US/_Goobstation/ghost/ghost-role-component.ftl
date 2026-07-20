@@ -1,14 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <142914808+Aineias1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ghost-role-information-nukie-reinforcement-name = Nuclear Operative
@@ -46,10 +35,6 @@ ghost-role-information-navy-captain-name = Navy Captain
 ghost-role-information-navy-captain-description = Classified.
 ghost-role-information-navy-captain-rules = You are beholden to no rules.
 
-ghost-role-information-special-operations-officer-name = Special Operations Officer
-ghost-role-information-special-operations-officer-description = Send, brief, and direct emergency response teams or other Nanotrasen forces. Release the nuclear codes, or don't.
-ghost-role-information-special-operations-officer-rules = Bring the Nanotrasen Representative in alive, the rest are just collateral. [color=#yellow][bold]Navy Captain[/bold][/color] orders may change this.
-
 ghost-role-information-navy-officer-name = Navy Officer
 ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
 ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color]. In the absence of one, make your own judgements.
@@ -76,12 +61,6 @@ ghost-role-information-trevor-description = Securities trusted battle steed.
 ghost-role-information-Gman-name = The G-Man
 ghost-role-information-Gman-description = The right man in the wrong place can make all the difference in the world.
 ghost-role-information-Gman-rules = You are beholden to no rules or boundaries. Death cannot hold you, and neither can Nanotrasen.
-
-# Blueshild Deputy
-
-ghost-role-information-bsd-name = Blueshield Deputy
-ghost-role-information-bsd-description = You were called onto the station by the NTR, obey him, protect Command, follow the law.
-ghost-role-information-bsd-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color], protect command.
 
 # interns
 ghost-role-intern-name = CentComm intern
@@ -125,28 +104,8 @@ ghost-role-information-rules-default-xeno = You are a [color={role-type-team-ant
                                             Your objective is to protect your Queen and expand your Hive.
                                             Achieve this by bringing your Queen crewmembers to infest.
 
-# Token Roles
-
-ghost-role-information-description-token-generic = Don't take this role unless you redeemed the token!
-
-ghost-role-information-space-ninja-name-token = Space Ninja (Token)
-ghost-role-information-space-dragon-name-token = Space Dragon (Token)
-ghost-role-information-revenant-name-token = Revenant (Token)
-ghost-role-information-loneop-name-token = Lone Operative (Token)
-ghost-role-information-derelict-cyborg-syndicate-name-token = Derelict Assault Cyborg (Token)
-ghost-role-information-bingle-name-token = Bingle (Token)
-blob-carrier-role-name-token = Blob Carrier (Token)
-abductor-lone-ghost-role-name-token = Lone Abductor (Token)
-roles-wizard-name-token = Wizard (Token)
-roles-slaughter-demon-name-token = Slaughter Demon (Token)
-roles-laughter-demon-name-token = Laughter Demon (Token)
-ghost-role-information-ancient-rogue-king-name-token = Ancient Rogue King (Token)
-ghost-role-information-wraith-name-token = Wraith (Token)
-
 # Misc-Midround Antags
 
-ghost-role-information-grey-tide-name = The Grey Tide
-ghost-role-information-grey-tide-description = Against all the evil that shitsec can conjure, all the wickedness that sci can produce, we will send unto them only you. Robust and shit until it is done.
 grey-tide-role-greeting = Long forgotten in the depths of maints, you are [color=#880808]THE GREY-TIDE [/color], the clothes you wear have fused with your body from extensive robusting, this station isn't theirs to conquer...
 tide-objective-kill-everyone-desc = This station has wronged you for the last time, robust and tide until they are all dead.
 tide-objective-condition-kill-everyone-else-title = Robust everyone.

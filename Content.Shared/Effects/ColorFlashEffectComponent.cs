@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 namespace Content.Shared.Effects;
 
 /// <summary>
@@ -12,6 +6,9 @@ namespace Content.Shared.Effects;
 [RegisterComponent]
 public sealed partial class ColorFlashEffectComponent : Component
 {
+    /// <summary>
+    /// The color in which the entity should flash.
+    /// </summary>
     [ViewVariables]
     public Color Color = Color.White;
 }

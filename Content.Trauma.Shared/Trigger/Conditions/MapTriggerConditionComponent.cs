@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Trigger.Components.Conditions;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Trigger.Conditions;
 

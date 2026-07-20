@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Shared.MedicalScanner;
 using JetBrains.Annotations;
@@ -25,8 +25,8 @@ namespace Content.Client.HealthAnalyzer.UI
 
             _window = this.CreateWindow<HealthAnalyzerWindow>();
             // <Shitmed>
-            _window.OnBodyPartSelected += SendBodyPartMessage;
-            _window.OnModeChanged += SendModeMessage;
+            _window.OnBodyPartSelected += (part, _) => SendBodyPartMessage(part);
+            _window.OnModeChanged += (mode, _) => SendModeMessage(mode);
             // </Shitmed>
             _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
         }
@@ -43,10 +43,9 @@ namespace Content.Client.HealthAnalyzer.UI
         }
 
         // <Shitmed>
-        // TODO SHITMED: just use target stored on the component holy goida
-        private void SendBodyPartMessage(TargetBodyPart? part, EntityUid target) => SendMessage(new HealthAnalyzerPartMessage(EntMan.GetNetEntity(target), part));
+        private void SendBodyPartMessage(ProtoId<OrganCategoryPrototype>? part) => SendMessage(new HealthAnalyzerPartMessage(part));
 
-        private void SendModeMessage(HealthAnalyzerMode mode, EntityUid target) => SendMessage(new HealthAnalyzerModeSelectedMessage(EntMan.GetNetEntity(target), mode));
+        private void SendModeMessage(HealthAnalyzerMode mode) => SendMessage(new HealthAnalyzerModeSelectedMessage(mode));
         // </Shitmed>
     }
 }

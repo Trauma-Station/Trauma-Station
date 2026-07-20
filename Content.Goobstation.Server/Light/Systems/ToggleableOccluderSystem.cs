@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.DeviceLinking.Systems;
 using Content.Goobstation.Server.Light.Components;
 using Content.Shared.DeviceLinking.Events;
@@ -7,10 +9,10 @@ namespace Content.Goobstation.Server.Light.EntitySystems;
 /// <summary>
 ///     Handles the logic between signals and toggling OccluderComponent, early upstream merge of #30743
 /// </summary>
-public sealed class ToggleableOccluderSystem : EntitySystem
+public sealed partial class ToggleableOccluderSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
 
     public override void Initialize()
     {

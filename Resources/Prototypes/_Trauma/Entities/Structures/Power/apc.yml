@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: APCHighCapacity
+  id: APCEmpProof
+  suffix: EMP Proof
+  components:
+  - type: EmpResistance
+    strengthMultiplier: 0

@@ -1,0 +1,12 @@
+ui-options-header-targeting = Targeting
+ui-options-function-target-head = Target head
+ui-options-function-target-chest = Target chest
+ui-options-function-target-groin = Target groin
+ui-options-function-target-left-arm = Target left arm
+ui-options-function-target-right-arm = Target right arm
+ui-options-function-target-left-hand = Target left hand
+ui-options-function-target-right-hand = Target right hand
+ui-options-function-target-left-leg = Target left leg
+ui-options-function-target-right-leg = Target right leg
+ui-options-function-target-left-foot = Target left foot
+ui-options-function-target-right-foot = Target right foot

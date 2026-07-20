@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 crasg <109207982+Scruq445@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Effects;
 using Content.Shared.Examine;
@@ -31,19 +20,17 @@ namespace Content.Shared.Teleportation.Systems;
 /// <summary>
 /// This handles <see cref="SwapTeleporterComponent"/>
 /// </summary>
-public sealed class SwapTeleporterSystem : EntitySystem
+public sealed partial class SwapTeleporterSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!; // goob edit - sparks everywhere
-
-    private EntityQuery<TransformComponent> _xformQuery;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SparksSystem _sparks = default!; // goob edit - sparks everywhere
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -54,8 +41,6 @@ public sealed class SwapTeleporterSystem : EntitySystem
         SubscribeLocalEvent<SwapTeleporterComponent, ExaminedEvent>(OnExamined);
 
         SubscribeLocalEvent<SwapTeleporterComponent, ComponentShutdown>(OnShutdown);
-
-        _xformQuery = GetEntityQuery<TransformComponent>();
     }
 
     private void OnInteract(Entity<SwapTeleporterComponent> ent, ref AfterInteractEvent args)
@@ -262,7 +247,7 @@ public sealed class SwapTeleporterSystem : EntitySystem
         if (HasComp<MapGridComponent>(parent) || HasComp<MapComponent>(parent))
             return ent;
 
-        if (!_xformQuery.TryGetComponent(parent, out var parentXform) || parentXform.Anchored)
+        if (!TryComp(parent, out TransformComponent? parentXform) || parentXform.Anchored)
             return ent;
 
         if (!TryComp<PhysicsComponent>(parent, out var body) || body.BodyType == BodyType.Static)

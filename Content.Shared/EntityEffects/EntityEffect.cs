@@ -10,8 +10,19 @@ namespace Content.Shared.EntityEffects;
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class EntityEffect
 {
-    public abstract void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user);
+    /// <summary>
+    /// Applies this effect to a target.
+    /// </summary>
+    /// <param name="target">Target we're applying an effect to.</param>
+    /// <param name="raiser">The type of effect raising the event.</param>
+    /// <param name="scale">Optional scale multiplier for the effect.</param>
+    /// <param name="user">The entity causing the effect.</param>
+    public abstract void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user,
+        bool predicted = true); // Trauma
 
+    /// <summary>
+    /// Conditions for this effect to happen.
+    /// </summary>
     [DataField]
     public EntityCondition[]? Conditions;
 
@@ -34,6 +45,12 @@ public abstract partial class EntityEffect
     [DataField]
     public float Probability = 1.0f;
 
+/// <summary>
+/// Generates the guidebook text for this effect.
+/// </summary>
+/// <param name="prototype">Prototype manager, to resolve prototype calls.</param>
+/// <param name="entSys">EntitySystem manager, to resolve system calls.</param>
+/// <returns>The guidebook text string, if generated. Null otherwise.</returns>
     public virtual string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null;
 
     /// <summary>
@@ -42,6 +59,9 @@ public abstract partial class EntityEffect
     [ViewVariables]
     public virtual LogImpact? Impact => null;
 
+    /// <summary>
+    /// The type of log this effect should cause.
+    /// </summary>
     [ViewVariables]
     public virtual LogType LogType => LogType.EntityEffect;
 }
@@ -52,11 +72,13 @@ public abstract partial class EntityEffect
 /// <typeparam name="T">The Condition wer are raising.</typeparam>
 public abstract partial class EntityEffectBase<T> : EntityEffect where T : EntityEffectBase<T>
 {
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user,
+        bool predicted = true) // Trauma
     {
         if (this is not T type)
             return;
 
-        raiser.RaiseEffectEvent(target, type, scale, user);
+        raiser.RaiseEffectEvent(target, type, scale, user,
+            predicted); // Trauma
     }
 }

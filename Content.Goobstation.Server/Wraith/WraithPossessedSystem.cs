@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Server.Ghost.Roles.Components;
 
 namespace Content.Goobstation.Server.Wraith;
 
-public sealed class WraithPossessedSystem : EntitySystem
+public sealed partial class WraithPossessedSystem : EntitySystem
 {
     /// <inheritdoc/>
     public override void Initialize()

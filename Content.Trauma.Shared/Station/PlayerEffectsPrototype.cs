@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Station;
 
@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Station;
 /// This probably includes borgs AI etc.
 /// </summary>
 [Prototype]
-public sealed partial class PlayerEffectsPrototype: IPrototype
+public sealed partial class PlayerEffectsPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = string.Empty;

@@ -1,4 +1,5 @@
-using Content.Goobstation.Shared.Overlays;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Thrall;
@@ -16,37 +17,35 @@ using Content.Shared.Destructible;
 using Content.Shared.Examine;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.Shadowling.Systems;
 
 /// <summary>
 /// This handles the Ascension Egg system.
 /// </summary>
-public sealed class ShadowlingAscensionEggSystem : EntitySystem
+public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
 {
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly ShadowlingSystem _shadowling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private ShadowlingSystem _shadowling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPoweredLightSystem _poweredLight = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
 
     public static readonly EntProtoId NightmareAbilities = "NightmareAbilities";
 
@@ -93,7 +92,7 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
             new Verb
             {
                 Act = () => TryAscend(args.User, args.Target, component),
-                Text = Loc.GetString(component.VerbName),
+                Text = component.VerbName,
                 Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")) //todo: custom icon
             });
     }
@@ -106,12 +105,12 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
         if (component.ShadowlingInsideEntity != null)
             QueueDel(component.ShadowlingInsideEntity);
 
-        if (component.Creator == null
+        if (component.Creator is not {} creator
             || !component.StartTimer) // This indicates that the shadowling was inside the egg
             return;
 
-        var shadowlingComp = EntityManager.GetComponent<ShadowlingComponent>(component.Creator.Value);
-        _shadowling.OnPhaseChanged(component.Creator.Value, shadowlingComp, ShadowlingPhases.FailedAscension);
+        var shadowlingComp = Comp<ShadowlingComponent>(creator);
+        _shadowling.OnPhaseChanged(creator, shadowlingComp, ShadowlingPhases.FailedAscension);
         component.StartTimer = false;
     }
 
@@ -234,7 +233,7 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
             _actions.RemoveAction(ascendant.ActionHatchEntity);
         }
 
-        var nightmareComps = _protoMan.Index(NightmareAbilities);
+        var nightmareComps = ProtoMan.Index(NightmareAbilities);
         foreach (var thrall in thralls)
         {
             if (HasComp<LesserShadowlingComponent>(thrall))

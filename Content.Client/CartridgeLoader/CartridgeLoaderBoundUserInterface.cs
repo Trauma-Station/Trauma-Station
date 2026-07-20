@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader;
 using Robust.Client.UserInterface;
@@ -75,7 +66,7 @@ public abstract class CartridgeLoaderBoundUserInterface : BoundUserInterface
     protected void ActivateCartridge(EntityUid cartridgeUid)
     {
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(cartridgeUid), CartridgeUiMessageAction.Activate);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     protected void DeactivateActiveCartridge()
@@ -84,19 +75,19 @@ public abstract class CartridgeLoaderBoundUserInterface : BoundUserInterface
             return;
 
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(_activeProgram.Value), CartridgeUiMessageAction.Deactivate);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     protected void InstallCartridge(EntityUid cartridgeUid)
     {
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(cartridgeUid), CartridgeUiMessageAction.Install);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     protected void UninstallCartridge(EntityUid cartridgeUid)
     {
         var message = new CartridgeLoaderUiMessage(_entManager.GetNetEntity(cartridgeUid), CartridgeUiMessageAction.Uninstall);
-        SendMessage(message);
+        SendPredictedMessage(message);
     }
 
     private List<(EntityUid, CartridgeComponent)> GetCartridgeComponents(List<EntityUid> programs)

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 namespace Content.Shared.StationRecords;
 
 /// <summary>
@@ -14,7 +6,8 @@ namespace Content.Shared.StationRecords;
 /// This refers to both the id and station. This is suitable for an access reader field etc,
 /// but when you already know the station just store the id itself.
 /// </summary>
-public readonly struct StationRecordKey : IEquatable<StationRecordKey>
+[DataRecord]
+public readonly partial struct StationRecordKey : IEquatable<StationRecordKey>
 {
     [DataField]
     public readonly uint Id;

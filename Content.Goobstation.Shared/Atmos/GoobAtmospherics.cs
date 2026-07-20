@@ -1,8 +1,5 @@
-// SPDX-FileCopyrightText: 2025 lambdatiger <11843718+lambdatiger@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Serialization;
 // ReSharper disable InconsistentNaming
 
 namespace Content.Goobstation.Shared.Atmos

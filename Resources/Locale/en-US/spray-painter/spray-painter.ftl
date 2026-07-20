@@ -5,6 +5,8 @@ spray-painter-ammo-after-interact-refilled = You refill the spray painter.
 
 spray-painter-interact-no-charges = Not enough paint left.
 spray-painter-interact-nothing-to-remove = Nothing to remove!
+spray-painter-interact-no-color-pick = Can't find a color to pick!
+spray-painter-interact-color-picked = Picked color from '{$id}'.
 
 spray-painter-on-examined-painted-message = It seems to have been freshly painted.
 spray-painter-style-not-available = Cannot apply the selected style to this object.
@@ -174,7 +176,8 @@ spray-painter-style-cratesecure-command = Command
 spray-painter-style-cratesecure-engineering = Engineering
 spray-painter-style-cratesecure-hydroponics = Hydroponics
 spray-painter-style-cratesecure-medical = Medical
-spray-painter-style-cratesecure-plasma = Plasma
+# Trauma - plasma -> phoron
+spray-painter-style-cratesecure-plasma = Phoron
 spray-painter-style-cratesecure-private = Private
 spray-painter-style-cratesecure-science = Science
 spray-painter-style-cratesecure-secgear = Secgear
@@ -188,7 +191,8 @@ spray-painter-style-canisters-frezon = Frezon
 spray-painter-style-canisters-nitrogen = Nitrogen
 spray-painter-style-canisters-nitrous-oxide = Nitrous oxide
 spray-painter-style-canisters-oxygen = Oxygen
-spray-painter-style-canisters-plasma = Plasma
+# Trauma - plasma -> phoron
+spray-painter-style-canisters-plasma = Phoron
 spray-painter-style-canisters-storage = Storage
 spray-painter-style-canisters-tritium = Tritium
 spray-painter-style-canisters-water-vapor = Water vapor

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Buckle.Components;
 using Content.Shared.Construction;
 using Content.Shared.Examine;
@@ -8,7 +9,6 @@ namespace Content.Trauma.Shared.Construction.Conditions;
 /// <summary>
 /// Requires that at least 1 entity is strapped to the construction entity.
 /// </summary>
-[DataDefinition]
 public sealed partial class HasStrappedEntity : IGraphCondition
 {
     public bool Condition(EntityUid uid, IEntityManager entMan)

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Storage.Components;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
@@ -11,9 +5,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class ClearBluespaceLockerLinks : IConsoleCommand
+public sealed partial class ClearBluespaceLockerLinks : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public string Command => "clearbluespacelockerlinks";
     public string Description => "Removes the bluespace links of the given uid. Does not remove links this uid is the target of.";

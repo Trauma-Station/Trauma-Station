@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity # For clothes that need suit sensors.
   parent: [UnsensoredClothingUniformBase, BaseFoldable]
@@ -85,14 +86,13 @@
   components:
   - type: IgniteFromGasImmunity
     parts:
-    - Chest
-    - Groin
-    - LeftArm
-    - RightArm
-    - LeftLeg
-    - RightLeg
-    - LeftFoot
-    - RightFoot
+    - Torso
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    - FootLeft
+    - FootRight
   - type: Clothing
     equipDelay: 0.4
     unequipDelay: 0.6 # Slightly higher delay to protect against accidental unequips

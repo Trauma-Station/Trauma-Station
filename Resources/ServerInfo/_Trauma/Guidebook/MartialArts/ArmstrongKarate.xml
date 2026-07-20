@@ -1,0 +1,75 @@
+<Document>
+
+  # Armstrong Style Karate
+
+  <Box>
+    <TextureEmbed Sprite="_Trauma/Interface/Misc/armstrongkarate.rsi" State="icon"/>
+  </Box>
+
+  A style of Karate developed out of pain and self reflection.
+
+  ## Combo attacks
+
+  ### Buster punches
+
+  <Box>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="grab"/>
+  </Box>
+
+  An armstrong classic.
+
+  ### Dropkick
+
+  <Box>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="grab"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+  </Box>
+
+  A flying double foot press.
+
+  ### Machine gun fist
+
+  <Box>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+  </Box>
+
+  A flurry of punches.
+
+  ### Fireball
+
+  <Box>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+  </Box>
+
+  A blast of flaming emotion.
+
+  ### Headbutt
+
+  <Box>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="grab"/>
+  </Box>
+
+  A full force slam with your head.
+
+  ### Horse Stance
+
+  <Box>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+  </Box>
+
+  Assume a sturdy Horse Stance.
+
+</Document>

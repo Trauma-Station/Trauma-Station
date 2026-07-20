@@ -1,138 +1,86 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Júlio César Ueti <52474532+Mirino97@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Morber <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pancake <Pangogie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 TekuNut <13456422+TekuNut@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-// SPDX-FileCopyrightText: 2022 drakewill <drake@drakewill-crl>
-// SPDX-FileCopyrightText: 2022 drakewill-CRL <46307022+drakewill-CRL@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 2013HORSEMEATSCANDAL <146540817+2013HORSEMEATSCANDAL@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Dakamakat <52600490+dakamakat@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 OctoRocket <88291550+OctoRocket@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Repo <47093363+Titian3@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Scribbles0 <91828755+Scribbles0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vyacheslav Titov <rincew1nd@ya.ru>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <55817627+coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 csqrb <56765288+CaptainSqrBeard@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 faint <46868845+ficcialfaint@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 lzk228 <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Титов Вячеслав Витальевич <rincew1nd@yandex.ru>
-// SPDX-FileCopyrightText: 2024 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Avalon <148660190+BYONDFuckery@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Firewatch <54725557+musicmanvr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kira Bridgeton <161087999+Verbalase@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LankLTE <135308300+LankLTE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <koolthunder019@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rainfall <rainfey0+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rainfey <rainfey0+github@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Wrexbe (Josh) <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 dolgovmi <96251346+dolgovmi@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2024 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Server.Chat.Systems;
+using Robust.Shared.Timing;
+// </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Nuke;
 using Content.Server.NukeOps;
+using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
+using Content.Server.StationRecords.Systems;
 using Content.Server.Store.Systems;
+using Content.Shared.Access.Systems;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nuke;
 using Content.Shared.NukeOps;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
+using Content.Shared.Roles.Jobs;
+using Content.Shared.Station;
+using Content.Shared.Station.Components;
+using Content.Shared.StationRecords;
 using Content.Shared.Store;
+using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
+using Robust.Server.Player;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using System.Data;
 using System.Linq;
-using Content.Shared.Station.Components;
-using Content.Shared.Store.Components;
-using Content.Server.Station.Systems;
-using Content.Server.Chat.Systems;
-using Robust.Server.Player;
-using Robust.Shared.Prototypes;
+using System.Text;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
+public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    // goob edit
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    // goob edit end
+    // <Trauma>
+    [Dependency] private ChatSystem _chat = default!;
+    // </Trauma>
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    //[Dependency] private NavMapSystem _navMap = default!; // Trauma - no longer used
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    //[Dependency] private SharedContainerSystem _containers = default!; // Trauma - no longer used
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
+    private static readonly ProtoId<TagPrototype> NukeOpsReinforcementUplinkTagPrototype = "NukeOpsReinforcementUplink"; // Goobstation
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string NukeOpsReinforcementUplinkTagPrototype = "NukeOpsReinforcementUplink"; // Goobstation
+    // TODO: This shouldn't be matching by ProtoId.
+    // It would be better if this were checked by component or something,
+    // but it needs to be distinct between the full Nukeops and Loneops rules,
+    // which NukeopsRuleComponent currently isn't.
+    // Better yet, maybe the behaviors this is used for could be moved to the rule component.
+    private static readonly EntProtoId NukeopsGameRule = "Nukeops";
 
     public override void Initialize()
     {
@@ -195,7 +143,64 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         }
 
         /* Goob edit - nukie objective
-        args.AddLine(Loc.GetString($"{component.LocalePrefix}list-start"));
+        // Print disk location if nuke didn't explode and is not armed
+        List<WinCondition> diskWinConditions = [WinCondition.NukeDiskOnCentCom, WinCondition.NukeDiskNotOnCentCom];
+        if (component.WinConditions.Any(diskWinConditions.Contains))
+        {
+            var diskQuery = AllEntityQuery<NukeDiskComponent, TransformComponent>();
+            while (diskQuery.MoveNext(out var diskUid, out _, out var transform))
+            {
+                StringBuilder text = new StringBuilder(Loc.GetString("nukeops-disk-location-title"));
+
+                List<String> containers = new List<String>();
+                bool carriedByMob = false;
+
+                var tempParent = diskUid;
+                while (_containers.TryGetContainingContainer((tempParent, null), out var container) && !carriedByMob)
+                {
+                    if (HasComp<MindContainerComponent>(container.Owner))
+                    {
+                        carriedByMob = true;
+                    }
+                    var containermeta = MetaData(container.Owner);
+                    containers.Add(containermeta.EntityName);
+                    tempParent = container.Owner;
+                }
+
+                string location = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((diskUid, transform)));
+
+                if (carriedByMob)
+                {
+                    GetDiskCarrierData(tempParent, out var name, out var job, out var username);
+                    text.Append(Loc.GetString("nukeops-disk-carried-by",
+                        ("name", name),
+                        ("job", job),
+                        ("user", username),
+                        ("location", location)));
+                }
+                else
+                {
+                    if (containers.Count > 0)
+                    {
+                        string hierarchy = string.Empty;
+                        for (var i = 0; i < containers.Count; i++)
+                        {
+                            hierarchy = (Loc.GetString(
+                                "storage-hierarchy-list",
+                                ("item", containers[i]),
+                                ("existing-text", hierarchy),
+                                ("items-left", containers.Count - i - 1)));
+                        }
+                        text.Append(hierarchy);
+                    }
+                    text.Append(" ");
+                    text.Append(location);
+                }
+                args.AddLine(text.ToString());
+            }
+        }
+
+        args.AddLine(Loc.GetString("nukeops-list-start"));
 
         var antags =_antag.GetAntagIdentifiers(uid);
 
@@ -217,7 +222,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 if (ev.OwningStation == GetOutpost(uid))
                 {
                     nukeops.WinConditions.Add(WinCondition.NukeExplodedOnNukieOutpost);
-                    SetWinType((uid, nukeops), WinType.CrewMajor);
+                    SetWinType((uid, nukeops), WinType.CrewMajor, GameTicker.IsGameRuleActive(NukeopsGameRule)); // End the round ONLY if the actual gamemode is NukeOps.
+                    if (!GameTicker.IsGameRuleActive(NukeopsGameRule)) // End the rule if the LoneOp shuttle got nuked, because that particular LoneOp clearly failed, and should not be considered a Syndie victory even if a future LoneOp wins.
+                        GameTicker.EndGameRule(uid);
                     continue;
                 }
 
@@ -246,9 +253,15 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             {
                 nukeops.WinConditions.Add(WinCondition.NukeExplodedOnIncorrectLocation);
             }
-
-            _roundEndSystem.EndRound();
         }
+
+        // <Trauma> - replace gamerule-specific shitcode, nuke exploding means round ended
+        // Timer.Spawn is evil but round ending shitcode is worse
+        Timer.Spawn(TimeSpan.FromSeconds(10), () =>
+        {
+            _roundEndSystem.EndRound();
+        });
+        // </Trauma>
     }
 
     private void OnRunLevelChanged(GameRunLevelChangedEvent ev)
@@ -493,7 +506,12 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         var nukiesCount = EntityQuery<NukeopsRoleComponent>().Count();
         if (nukiesCount == 0)
             return rule.WarTcAmountPerNukie;
-        var totalPlayersCount = _antag.GetTotalPlayerCount(_playerManager.Sessions);
+        var totalPlayersCount = 0;
+        foreach (var session in _player.Sessions)
+        {
+            if (!_antag.IsDisconnected(session))
+                totalPlayersCount++;
+        }
         var playersCount = Math.Max(0, totalPlayersCount - nukiesCount);
         var maxNukies = totalPlayersCount / rule.WarNukiePlayerRatio;
         var nukiesMissing = Math.Max(0, maxNukies - nukiesCount);
@@ -634,6 +652,74 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         }
 
         return null;
+    }
+
+    private void GetDiskCarrierData(EntityUid carrier,
+        out string name,
+        out string job,
+        out string username)
+    {
+        name = Name(carrier);
+        job = Loc.GetString("job-name-unknown");
+        username = "unknown"; // magic word in Fluent selector
+
+        Entity<MindComponent>? mind = null;
+
+        if (_mind.TryGetMind(carrier, out _, out var mindComp))
+        {
+            mind = (carrier, mindComp);
+        }
+        else
+        {
+            var allMinds = EntityQueryEnumerator<MindComponent>();
+            while (allMinds.MoveNext(out _, out mindComp))
+            {
+                if (mindComp.CharacterName != name)
+                    continue;
+
+                mind = (carrier, mindComp);
+                break;
+            }
+        }
+
+        if (mind is not null)
+        {
+            NetUserId? userId = mind.Value.Comp.UserId;
+            if (userId is not null && _player.TryGetPlayerData(userId.Value, out var sessionData))
+                username = sessionData.UserName;
+
+            // Role/job is the trickiest since it can be unknown in some cases
+            // For example, after "make ghost role" verb
+            var roles = _roles.MindGetAllRoleInfo(mind.Value.Owner);
+            if (roles.Count > 0)
+            {
+                job = Loc.GetString(roles.First().Name);
+                return;
+            }
+
+            if (_jobs.MindTryGetJobName(mind, out var jobName))
+            {
+                job = jobName;
+                return;
+            }
+        }
+
+        // Try station records
+        var xform = Transform(carrier);
+        var station = _station.GetStationInMap(xform.MapID);
+        if (station != null && _records.GetRecordByName(station.Value, name) is { } id)
+        {
+            var key = new StationRecordKey(id, station.Value);
+            if (_records.TryGetRecord<GeneralStationRecord>(key, out var record))
+            {
+                job = record.JobTitle;
+                return;
+            }
+        }
+
+        // Fallback to ID
+        if (_idCard.TryFindIdCard(carrier, out var idCard))
+            job = idCard.Comp.LocalizedJobTitle ?? job;
     }
 }
 

@@ -1,18 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr.@gmail.com>
-SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 JoeHammad1844 <130668733+JoeHammad1844@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <screens:DefaultGameScreen
     xmlns="https://spacestation14.io"
     xmlns:screens="clr-namespace:Content.Client.UserInterface.Screens"
@@ -24,7 +9,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     xmlns:hotbar="clr-namespace:Content.Client.UserInterface.Systems.Hotbar.Widgets"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:inventory="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Widgets"
-    xmlns:targeting="clr-namespace:Content.Client._Shitmed.UserInterface.Systems.Targeting.Widgets"
     Name="DefaultHud"
     VerticalExpand="False"
     VerticalAlignment="Bottom"
@@ -44,7 +28,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <widgets:GhostGui Name="Ghost" Access="Protected" />
     <inventory:InventoryGui Name="Inventory" Access="Protected" />
     <hotbar:HotbarGui Name="Hotbar" Access="Protected" />
-    <targeting:TargetingControl Name="Targeting" Access="Protected"/> <!-- Shitmed Change -->
     <chat:ResizableChatBox Name="Chat" Access="Protected" />
     <alerts:AlertsUI Name="Alerts" Access="Protected" />
 </screens:DefaultGameScreen>

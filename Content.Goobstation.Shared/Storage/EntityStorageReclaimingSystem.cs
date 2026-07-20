@@ -1,12 +1,14 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Storage.Components;
 using Content.Shared.Materials;
 using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Storage;
 
-public sealed class EntityStorageReclaimingSystem : EntitySystem
+public sealed partial class EntityStorageReclaimingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {

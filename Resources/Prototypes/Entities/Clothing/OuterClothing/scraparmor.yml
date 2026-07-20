@@ -74,7 +74,7 @@
         Piercing: 0.8
         Heat: .9
   - type: ExplosionResistance
-    damageCoefficient: 0.80
+    damageCoefficient: 0.7 # Trauma - was 0.8, no head coverage but it's still shitty
   - type: ClothingSpeedModifier
     walkModifier: 0.6
     sprintModifier: 0.6

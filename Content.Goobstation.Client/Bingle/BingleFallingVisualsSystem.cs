@@ -1,19 +1,7 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 unknown <Administrator@DESKTOP-PMRIVVA.kommune.indresogn.no>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Bingle;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
@@ -23,9 +11,9 @@ namespace Content.Goobstation.Client.Bingle;
 /// <summary>
 ///     Handles the falling animation for entities that fall into a Binglepit. shamlesly copied from chasm
 /// </summary>
-public sealed class BingleFallingVisualsSystem : EntitySystem
+public sealed partial class BingleFallingVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _anim = default!;
+    [Dependency] private AnimationPlayerSystem _anim = default!;
 
     private readonly string _chasmFallAnimationKey = "chasm_fall";
 

@@ -1,22 +1,5 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 unknown <Administrator@DESKTOP-PMRIVVA.kommune.indresogn.no>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System;
-using System.Numerics;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Shared.Bingle;
 using Content.Server.Chat.Systems;
@@ -24,61 +7,51 @@ using Content.Server.GameTicking;
 using Content.Server.Pinpointer;
 using Content.Server.Stunnable;
 using Content.Shared.Destructible;
-using Content.Shared.Destructible;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Destructible;
-using Content.Shared.StepTrigger.Systems;
-using Content.Shared.Stunnable;
-using Content.Shared.Humanoid;
-using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Movement.Events;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Sprite;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
+using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Bingle;
 
-public sealed class BinglePitSystem : EntitySystem
+public sealed partial class BinglePitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedScaleVisualsSystem _scale = default!;
-    [Dependency] private readonly BingleSystem _bingle = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly StepTriggerSystem _step = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ITileDefinitionManager _tiledef = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedScaleVisualsSystem _scale = default!;
+    [Dependency] private BingleSystem _bingle = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private StepTriggerSystem _step = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ITileDefinitionManager _tiledef = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     private EntityQuery<BingleComponent> _query;
     private EntityQuery<BinglePitFallingComponent> _fallingQuery;
@@ -169,7 +142,7 @@ public sealed class BinglePitSystem : EntitySystem
             component.BinglePoints += component.PointsForAlive;
         else
             component.BinglePoints++;
-        if (HasComp<HumanoidAppearanceComponent>(tripper))
+        if (HasComp<HumanoidProfileComponent>(tripper))
             component.BinglePoints += component.SpawnNewAt * component.Level; // throwing a humanoid in the pit  will spawn a new bingle
 
         if (_query.HasComp(tripper))
@@ -269,6 +242,7 @@ public sealed class BinglePitSystem : EntitySystem
     private void ScaleUpPit(EntityUid uid, BinglePitComponent component)
     {
         _scale.SetSpriteScale(uid, Vector2.One * component.Level);
+        _physics.ScaleFixtures(uid, component.HitBoxGrowthSize);
     }
 
     private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)

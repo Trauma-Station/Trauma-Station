@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.Emag;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Emag;
 
-public sealed class EmagWhitelistSystem : EntitySystem
+public sealed partial class EmagWhitelistSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -23,7 +24,7 @@ public sealed class EmagWhitelistSystem : EntitySystem
             return;
 
         var user = args.User;
-        _popup.PopupClient(Loc.GetString("emag-attempt-failed", ("tool", ent)), user, user);
+        _popup.PopupEntity(Loc.GetString("emag-attempt-failed", ("tool", ent)), user, user);
         args.Cancelled = true;
     }
 }

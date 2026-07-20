@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Interaction;
 
 namespace Content.Shared.MouseRotator;
@@ -13,9 +6,9 @@ namespace Content.Shared.MouseRotator;
 /// This handles rotating an entity based on mouse location
 /// </summary>
 /// <see cref="MouseRotatorComponent"/>
-public abstract class SharedMouseRotatorSystem : EntitySystem
+public abstract partial class SharedMouseRotatorSystem : EntitySystem
 {
-    [Dependency] private readonly RotateToFaceSystem _rotate = default!;
+    [Dependency] private RotateToFaceSystem _rotate = default!;
 
     public override void Initialize()
     {

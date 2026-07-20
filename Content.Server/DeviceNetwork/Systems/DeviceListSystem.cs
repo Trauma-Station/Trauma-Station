@@ -10,9 +10,10 @@ using Robust.Shared.Utility;
 namespace Content.Server.DeviceNetwork.Systems;
 
 [UsedImplicitly]
-public sealed class DeviceListSystem : SharedDeviceListSystem
+public sealed partial class DeviceListSystem : SharedDeviceListSystem
 {
-    [Dependency] private readonly NetworkConfiguratorSystem _configurator = default!;
+    [Dependency] private NetworkConfiguratorSystem _configurator = default!;
+    [Dependency] private EntityQuery<DeviceNetworkComponent> _deviceNetworkQuery = default!;
 
     public override void Initialize()
     {
@@ -33,28 +34,32 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
         if (!Resolve(listUid, ref listComp))
             return;
 
-        var config_query = GetEntityQuery<NetworkConfiguratorComponent>();
-        foreach (var conf_enty in listComp.Configurators)
+        var configQuery = GetEntityQuery<NetworkConfiguratorComponent>();
+        foreach (var conf in listComp.Configurators)
         {
-            if (Deleted(conf_enty)) continue;
-            if (!config_query.TryGetComponent(conf_enty, out var conf_comp))
+            if (Deleted(conf)) continue;
+            if (!configQuery.TryGetComponent(conf, out var comp))
             {
-                Log.Error("Failed to find NetworkConfiguratorComponent in DeviceListComponent Configurators");
+                Log.Error($"Failed to find NetworkConfiguratorComponent of {ToPrettyString(conf)} in {ToPrettyString(listUid)} Configurators");
                 continue;
             }
-            DebugTools.Assert(conf_comp.ActiveDeviceList == listUid);
+            DebugTools.Assert(comp.ActiveDeviceList == listUid);
         }
 
-        var device_query = GetEntityQuery<DeviceNetworkComponent>();
-        foreach (var dev_enty in listComp.Devices)
+        var deviceQuery = GetEntityQuery<DeviceNetworkComponent>();
+        foreach (var dev in listComp.Devices)
         {
-            if (Deleted(dev_enty)) continue;
-            if (!device_query.TryGetComponent(dev_enty, out var dev_comp))
+            if (Deleted(dev))
             {
-                Log.Error("Failed to find DeviceNetworkComponent in DeviceListComponent Devices");
+                Log.Error($"Found deleted device {ToPrettyString(dev)} in Devices of {ToPrettyString(listUid)}!");
                 continue;
             }
-            DebugTools.Assert(dev_comp.DeviceLists.Contains(listUid), $"{ToPrettyString(listUid)} is missing from {ToPrettyString(dev_enty)}'s device list");
+            if (!deviceQuery.TryGetComponent(dev, out var comp))
+            {
+                Log.Error($"Failed to find DeviceNetworkComponent of {ToPrettyString(dev)} in {ToPrettyString(listUid)} Devices");
+                continue;
+            }
+            DebugTools.Assert(comp.DeviceLists.Contains(listUid), $"{ToPrettyString(listUid)} is missing from {ToPrettyString(dev)}'s device list");
         }
     }
 
@@ -65,10 +70,9 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
             _configurator.OnDeviceListShutdown(conf, (uid, component));
         }
 
-        var query = GetEntityQuery<DeviceNetworkComponent>();
         foreach (var device in component.Devices)
         {
-            if (query.TryGetComponent(device, out var comp))
+            if (_deviceNetworkQuery.TryGetComponent(device, out var comp))
                 comp.DeviceLists.Remove(uid);
         }
         component.Devices.Clear();
@@ -166,7 +170,6 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
     private void OnMapSave(BeforeSerializationEvent ev)
     {
         List<EntityUid> toRemove = new();
-        var query = GetEntityQuery<TransformComponent>();
         var enumerator = AllEntityQuery<DeviceListComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out var device, out var xform))
         {
@@ -175,7 +178,7 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
 
             foreach (var ent in device.Devices)
             {
-                if (!query.TryGetComponent(ent, out var linkedXform))
+                if (!TryComp(ent, out TransformComponent? linkedXform))
                 {
                     // Entity was deleted.
                     // TODO remove these on deletion instead of on-save.
@@ -231,7 +234,6 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
             return DeviceListUpdateResult.TooManyDevices;
         }
 
-        var query = GetEntityQuery<DeviceNetworkComponent>();
         var oldDevices = deviceList.Devices.ToList();
         foreach (var device in oldDevices)
         {
@@ -239,13 +241,13 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
                 continue;
 
             deviceList.Devices.Remove(device);
-            if (query.TryGetComponent(device, out var comp))
+            if (_deviceNetworkQuery.TryGetComponent(device, out var comp))
                 comp.DeviceLists.Remove(uid);
         }
 
         foreach (var device in newDevices)
         {
-            if (!query.TryGetComponent(device, out var comp))
+            if (!_deviceNetworkQuery.TryGetComponent(device, out var comp))
                 continue;
 
             if (!deviceList.Devices.Add(device))

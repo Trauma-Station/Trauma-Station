@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.DoAfter;
+
+namespace Content.Medical.Shared.Surgery;
+
+[Serializable, NetSerializable]
+public sealed partial class SurgeryDoAfterEvent : SimpleDoAfterEvent
+{
+    public readonly EntProtoId Surgery;
+    public readonly EntProtoId Step;
+    public readonly bool ToolUsed;
+
+    public SurgeryDoAfterEvent(EntProtoId surgery, EntProtoId step, bool toolUsed)
+    {
+        Surgery = surgery;
+        Step = step;
+        ToolUsed = toolUsed;
+    }
+}

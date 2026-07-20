@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 11:02:08
+  time: 03/02/2026 21:14:39
   entityCount: 2491
 maps:
 - 1
@@ -793,6 +793,8 @@ entities:
     - type: RadiationGridResistance
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 979
@@ -860,7 +862,7 @@ entities:
     - type: GridFill
       addComponents:
       - type: NukeOpsShuttle
-      path: /Maps/_Goobstation/Shuttles/infiltrator.yml
+      path: /Maps/_Trauma/Shuttles/infiltrator.yml
 - proto: AirlockHatchSyndicate
   entities:
   - uid: 5
@@ -925,7 +927,7 @@ entities:
       pos: 35.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1982.8783
+      secondsUntilStateChange: -2040.1893
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1061,7 +1063,7 @@ entities:
       pos: 32.5,4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4485.227
+      secondsUntilStateChange: -4542.538
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -3785,13 +3787,6 @@ entities:
     - type: Transform
       pos: 3.5,-15.5
       parent: 2
-- proto: CardBoxSyndicate
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      pos: 38.6494,-10.402651
-      parent: 2
 - proto: CargoPallet
   entities:
   - uid: 639
@@ -4299,13 +4294,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 26.5,-17.5
       parent: 2
-- proto: ChemDispenser
-  entities:
-  - uid: 1456
-    components:
-    - type: Transform
-      pos: -7.5,-0.5
-      parent: 2
 - proto: ChemicalPayload
   entities:
   - uid: 619
@@ -4809,6 +4797,13 @@ entities:
     components:
     - type: Transform
       pos: 11.587524,-0.9412551
+      parent: 2
+- proto: EnergyChemDispenser
+  entities:
+  - uid: 1456
+    components:
+    - type: Transform
+      pos: -7.5,-0.5
       parent: 2
 - proto: FaxMachineSyndie
   entities:
@@ -5945,13 +5940,11 @@ entities:
   - uid: 151
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 14.5,3.5
       parent: 2
   - uid: 152
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 14.5,2.5
       parent: 2
   - uid: 275
@@ -5962,25 +5955,21 @@ entities:
   - uid: 289
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 31.5,-8.5
       parent: 2
   - uid: 627
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 32.5,-8.5
       parent: 2
   - uid: 738
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 33.5,-9.5
       parent: 2
   - uid: 743
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 33.5,-10.5
       parent: 2
   - uid: 772
@@ -6006,13 +5995,11 @@ entities:
   - uid: 849
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 11.5,6.5
       parent: 2
   - uid: 855
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 13.5,5.5
       parent: 2
   - uid: 859
@@ -6188,7 +6175,6 @@ entities:
   - uid: 913
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 14.5,-3.5
       parent: 2
   - uid: 914
@@ -6229,31 +6215,26 @@ entities:
   - uid: 1044
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 29.5,-8.5
       parent: 2
   - uid: 1053
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 30.5,-8.5
       parent: 2
   - uid: 1058
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 33.5,-12.5
       parent: 2
   - uid: 1079
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 33.5,-8.5
       parent: 2
   - uid: 1084
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 33.5,-11.5
       parent: 2
   - uid: 1259
@@ -6319,7 +6300,6 @@ entities:
   - uid: 1384
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 29.5,4.5
       parent: 2
   - uid: 1445
@@ -6330,25 +6310,21 @@ entities:
   - uid: 1525
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 14.5,4.5
       parent: 2
   - uid: 1683
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 6.5,-21.5
       parent: 2
   - uid: 1684
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 7.5,-21.5
       parent: 2
   - uid: 1685
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 8.5,-21.5
       parent: 2
   - uid: 1777
@@ -6359,7 +6335,6 @@ entities:
   - uid: 1817
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 27.5,4.5
       parent: 2
   - uid: 1831
@@ -8864,6 +8839,15 @@ entities:
     - type: Transform
       pos: 43.5,-13.5
       parent: 2
+- proto: RotaryPhoneStandHidden
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 3.5,-0.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: NO-CALLER-ID
 - proto: SheetPlasma10
   entities:
   - uid: 1858

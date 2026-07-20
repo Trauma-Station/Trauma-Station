@@ -1,7 +1,7 @@
 ## Belts that need/have visualizers
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband]
+  parent: [BaseClothingBeltSheath, BaseSheathCounterAttackMedium, BaseCommandContraband] # Trauma - Added BaseSheathCounterAttackMedium and BaseClothingBeltSheath. Removed ClothingBeltBase and ClothingSlotBase
   id: ClothingBeltSheath
   name: sabre sheath
   description: An ornate sheath designed to hold an officer's blade.
@@ -14,7 +14,6 @@
   - type: Item
     size: Ginormous
   - type: ItemSlots
-    smartEquip: true # Trauma
     slots:
       item:
         name: Sabre
@@ -37,7 +36,7 @@
   parent: ClothingBeltStorageBase
   id: ClothingBeltQuiver
   name: quiver
-  description: Can hold up to 15 arrows, and fits snug around your waist.
+  description: Can hold up to 16 arrows, and fits snug around your waist.
   components:
   - type: Sprite
     sprite: Clothing/Belt/quiver.rsi
@@ -108,6 +107,7 @@
   name: shoulder holster
   description: 'A holster to carry a handgun and ammo. WARNING: Badasses only.'
   components:
+  - type: QuickDrawable # Trauma
   - type: Sprite
     sprite: Clothing/Belt/holster.rsi
   - type: Clothing
@@ -149,7 +149,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,3,3
+    - 0,0,5,3 # Trauma, was 0,0,3,3
     whitelist:
       components:
       - Gun
@@ -237,7 +237,7 @@
   # </Goob>
 
 - type: entity
-  parent: ClothingBeltMilitaryWebbing
+  parent: [ BaseCentcommContraband, ClothingBeltMilitaryWebbing ]
   id: ClothingBeltMilitaryWebbingERT
   name: ERT chest rig
   description: A set of tactical webbing worn by Emergency Response Team operatives.

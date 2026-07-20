@@ -1,20 +1,12 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 namespace Content.Server.Nuke;
 
 /// <summary>
 ///     This handles labelling an entity with a nuclear bomb label.
 /// </summary>
-public sealed class NukeLabelSystem : EntitySystem
+public sealed partial class NukeLabelSystem : EntitySystem
 {
-    [Dependency] private readonly NukeSystem _nuke = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private NukeSystem _nuke = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

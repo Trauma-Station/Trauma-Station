@@ -46,13 +46,16 @@
   <Project Path="Content.Goobstation.Shared/Content.Goobstation.Shared.csproj" />
   <Project Path="Content.Goobstation.Client/Content.Goobstation.Client.csproj" />
   <Project Path="Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
-  <Project Path="Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
+  <Project Path="Content.Common/Content.Common.csproj" />
   <Project Path="Content.Goobstation.UIKit/Content.Goobstation.UIKit.csproj" />
   <Project Path="Content.Lavaland.Server/Content.Lavaland.Server.csproj" />
   <Project Path="Content.Lavaland.Shared/Content.Lavaland.Shared.csproj" />
   <Project Path="Content.Lavaland.Client/Content.Lavaland.Client.csproj" />
   <Project Path="Content.Lavaland.Common/Content.Lavaland.Common.csproj" />
-  <Project Path="Content.ModuleManager/Content.ModuleManager.csproj" />
+  <Project Path="Content.Medical.Server/Content.Medical.Server.csproj" />
+  <Project Path="Content.Medical.Shared/Content.Medical.Shared.csproj" />
+  <Project Path="Content.Medical.Client/Content.Medical.Client.csproj" />
+  <Project Path="Content.Medical.Common/Content.Medical.Common.csproj" />
   <!-- </Trauma> -->
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />
@@ -167,6 +170,7 @@
     <Project Path="RobustToolbox/Robust.Server.IntegrationTests/Robust.Server.IntegrationTests.csproj" />
     <Project Path="RobustToolbox/Robust.Server.Testing/Robust.Server.Testing.csproj" />
     <Project Path="RobustToolbox/Robust.Server/Robust.Server.csproj" />
+    <Project Path="RobustToolbox/Robust.Shared.EntitySystemSubscriptionsGenerator/Robust.Shared.EntitySystemSubscriptionsGenerator.csproj" />
     <Project Path="RobustToolbox/Robust.Shared.IntegrationTests/Robust.Shared.IntegrationTests.csproj" />
     <Project Path="RobustToolbox/Robust.Shared.Maths.Testing/Robust.Shared.Maths.Testing.csproj" />
     <Project Path="RobustToolbox/Robust.Shared.Maths.Tests/Robust.Shared.Maths.Tests.csproj" />

@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.DeviceLinking.Systems;
@@ -19,13 +10,13 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Contraband;
 
-public sealed class ContrabandDetectorSystem : SharedContrabandDetectorSystem
+public sealed partial class ContrabandDetectorSystem : SharedContrabandDetectorSystem
 {
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

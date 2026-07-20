@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseStructure
   id: XenomorphEgg
@@ -23,8 +25,9 @@
           Grown: { state: egg_grown }
           Growning: { state: egg_growing }
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resin
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:

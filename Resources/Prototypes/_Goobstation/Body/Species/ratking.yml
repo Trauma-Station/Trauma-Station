@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceRatKing
+  name: rat king appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganAnimalTorso
+      # Organs
+      Lungs: OrganRatLungs
+      Stomach: OrganRatKingStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys
+
+## Organs
+
+- type: entity
+  parent: OrganAnimalStomach
+  id: OrganRatKingStomach
+  suffix: "ratking"
+  description: "How hungry?"
+  components:
+  - type: SolutionManager
+    solutions:
+    - SolutionStomachRatKing
+
+- type: entity
+  parent: SolutionStomach
+  id: SolutionStomachRatKing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 800

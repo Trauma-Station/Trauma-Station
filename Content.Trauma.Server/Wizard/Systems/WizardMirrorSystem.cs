@@ -1,0 +1,102 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Mind;
+using Content.Server.Polymorph.Components;
+using Content.Server.Polymorph.Systems;
+using Content.Server.Popups;
+using Content.Trauma.Shared.Wizard.BindSoul;
+using Content.Trauma.Shared.Wizard.MagicMirror;
+using Content.Shared.Body;
+using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Polymorph;
+using Content.Shared.Preferences;
+
+namespace Content.Trauma.Server.Wizard.Systems;
+
+public sealed partial class WizardMirrorSystem : SharedWizardMirrorSystem
+{
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        Subs.BuiEvents<WizardMirrorComponent>(WizardMirrorUiKey.Key, subs =>
+        {
+            subs.Event<BoundUIClosedEvent>(OnUiClosed);
+            subs.Event<WizardMirrorMessage>(OnMessage);
+        });
+    }
+
+    private void OnMessage(Entity<WizardMirrorComponent> ent, ref WizardMirrorMessage args)
+    {
+        Log.Debug($"Mirror message for {ToPrettyString(ent.Comp.Target)}");
+        if (!TryComp(ent.Comp.Target, out HumanoidProfileComponent? humanoid))
+            return;
+
+        ForceLoadProfile(ent.Comp.Target.Value, ent.Comp, args.Profile, humanoid);
+    }
+
+    private void OnUiClosed(Entity<WizardMirrorComponent> ent, ref BoundUIClosedEvent args)
+    {
+        ent.Comp.Target = null;
+        Dirty(ent);
+    }
+
+    private void ForceLoadProfile(EntityUid target,
+        WizardMirrorComponent component,
+        HumanoidCharacterProfile profile,
+        HumanoidProfileComponent humanoid)
+    {
+        var age = humanoid.Age;
+        if (humanoid.Species != profile.Species && component.AllowedSpecies.Contains(profile.Species) &&
+            ProtoMan.TryIndex(profile.Species, out var speciesProto))
+        {
+            var config = new PolymorphConfiguration
+            {
+                Entity = speciesProto.Prototype,
+                TransferName = true,
+                TransferDamage = true,
+                Forced = true,
+                Inventory = PolymorphInventoryChange.Transfer,
+                RevertOnCrit = false,
+                RevertOnDeath = false,
+                ComponentsToTransfer = new()
+                {
+                    new("LanguageKnowledge"),
+                    new("LanguageSpeaker"),
+                    new("Grammar"),
+                    new("Wizard", mirror: true),
+                    new("Apprentice", mirror: true),
+                    new("UniversalLanguageSpeaker", mirror: true),
+                    new("TowerOfBabel", mirror: true),
+                    new("NpcFactionMember"),
+                },
+            };
+            if (_polymorph.PolymorphEntity(target, config) is {} newUid)
+            {
+                RemCompDeferred<PolymorphedEntityComponent>(newUid);
+                humanoid = EnsureComp<HumanoidProfileComponent>(newUid);
+                target = newUid;
+            }
+        }
+
+        _meta.SetEntityName(target, profile.Name);
+        Humanoid.ApplyProfileTo((target, humanoid), profile);
+        _visualBody.ApplyProfileTo(target, profile);
+
+        if (_mind.TryGetMind(target, out var mind, out _) && TryComp(mind, out SoulBoundComponent? soulBound))
+        {
+            soulBound.Name = profile.Name;
+            soulBound.Age = age;
+            soulBound.Gender = profile.Gender;
+            soulBound.Sex = profile.Sex;
+            Dirty(mind, soulBound);
+        }
+    }
+}

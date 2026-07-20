@@ -1,20 +1,16 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Goobstation.Server.Grab;
 
-public sealed class GrabbingItemSystem : EntitySystem
+public sealed partial class GrabbingItemSystem : EntitySystem
 {
 
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     public override void Initialize()
     {

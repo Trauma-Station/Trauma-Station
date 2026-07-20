@@ -1,10 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This holds all forms of the diseased rat
 - type: diseasedRatFormUnlock
   id: MediumDiseasedRat
   filthRequired: 6
   entity: MobPlagueRatMedium
   transferComponents:
-  - component: LanguageKnowledge
   - component: LanguageSpeaker
   - component: Grammar
   - component: EatFilth
@@ -15,7 +16,6 @@
   filthRequired: 12
   entity: MobPlagueRatLarge
   transferComponents:
-  - component: LanguageKnowledge
   - component: LanguageSpeaker
   - component: Grammar
   - component: EatFilth

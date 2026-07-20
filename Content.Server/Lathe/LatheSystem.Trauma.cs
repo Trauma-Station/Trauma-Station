@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.Lathe.Components;
@@ -15,19 +17,10 @@ namespace Content.Server.Lathe;
 /// </summary>
 public sealed partial class LatheSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private StationSystem _station = default!;
 
-    private EntityQuery<LatheComponent> _latheQuery;
-
-    private void InitializeTrauma()
-    {
-        _latheQuery = GetEntityQuery<LatheComponent>();
-
-        SubscribeLocalEvent<LatheComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<LatheProducingComponent, ComponentShutdown>(OnProducingShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<LatheComponent> ent, ref ComponentShutdown args)
     {
         // destroying a lathe stops its sound
@@ -35,26 +28,22 @@ public sealed partial class LatheSystem
         ent.Comp.SoundEntity = null;
     }
 
-    private void OnProducingShutdown(Entity<LatheProducingComponent> ent, ref ComponentShutdown args)
+    private void AnnounceAddedRecipes(Entity<LatheComponent> ent, List<string>? recipes)
     {
-        // lathe losing power or finishing stops its sound
-        if (!_latheQuery.TryComp(ent, out var lathe))
-            return;
-        lathe.SoundEntity = _audio.Stop(lathe.SoundEntity);
-        lathe.SoundEntity = null;
-    }
-
-    private void AnnounceAddedRecipes(Entity<LatheComponent> ent, List<ProtoId<LatheRecipePrototype>> recipes)
-    {
-        if (recipes.Count == 0)
+        if (recipes is not { } list || list.Count == 0)
             return;
 
         var recipesCount = 0;
         foreach (var pack in ent.Comp.DynamicPacks)
         {
-            if (!_proto.Resolve(pack, out var proto))
+            if (!ProtoMan.Resolve(pack, out var proto))
                 continue;
-            recipesCount += proto.Recipes.Intersect(recipes).Count(); // which recipes we can use are the ones just unlocked?
+            foreach (var recipe in proto.Recipes)
+            {
+                // which recipes we can use are the ones just unlocked?
+                if (list.Contains(recipe))
+                    recipesCount++;
+            }
         }
 
         if (recipesCount == 0)

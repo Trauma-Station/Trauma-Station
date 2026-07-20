@@ -1,11 +1,13 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Teleportation.Systems;
 
-public sealed class BlockTeleportSystem : EntitySystem
+public sealed partial class BlockTeleportSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -23,7 +25,7 @@ public sealed class BlockTeleportSystem : EntitySystem
 
         var msg = Loc.GetString(args.Message);
         if (args.Predicted)
-            _popup.PopupClient(msg, ent, ent);
+            _popup.PopupEntity(msg, ent, ent);
         else
             _popup.PopupEntity(msg, ent, ent);
     }

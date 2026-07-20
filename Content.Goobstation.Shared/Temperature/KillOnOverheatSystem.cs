@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Temperature.Components;
@@ -15,10 +10,10 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Temperature;
 
-public sealed class KillOnOverheatSystem : EntitySystem
+public sealed partial class KillOnOverheatSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Update(float frameTime)
     {
@@ -33,7 +28,7 @@ public sealed class KillOnOverheatSystem : EntitySystem
                 continue;
 
             var msg = Loc.GetString(comp.OverheatPopup, ("name", Identity.Name(uid, EntityManager)));
-            _popup.PopupPredicted(msg, uid, uid, PopupType.LargeCaution);
+            _popup.PopupEntity(msg, uid, uid, PopupType.LargeCaution);
             _mob.ChangeMobState(uid, MobState.Dead, mob);
         }
     }

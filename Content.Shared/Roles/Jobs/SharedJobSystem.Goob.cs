@@ -7,18 +7,9 @@ namespace Content.Shared.Roles.Jobs;
 
 public abstract partial class SharedJobSystem
 {
-    public int GetJobGoobcoins(ICommonSession player)
-    {
-        if (_playerSystem.ContentData(player) is not { Mind: { } mindId }
-            || !MindTryGetJob(mindId, out var prototype))
-            return 1;
-
-        return prototype.Goobcoins;
-    }
-
     public bool TryFindJobFromIcon(JobIconPrototype jobIcon, [NotNullWhen(true)] out JobPrototype? job)
     {
-        foreach (var jobPrototype in _prototypes.EnumeratePrototypes<JobPrototype>())
+        foreach (var jobPrototype in ProtoMan.EnumeratePrototypes<JobPrototype>())
         {
             if (jobPrototype.Icon == jobIcon.ID)
             {

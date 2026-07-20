@@ -1,25 +1,23 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Lavaland.Server.Biome;
 using Content.Lavaland.Server.Procedural.Components;
-using Content.Server.Atmos.Components;
 using Content.Lavaland.Shared.Procedural.Components;
 using Content.Lavaland.Shared.Procedural.Prototypes;
+using Content.Shared.Atmos.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Gravity;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Procedural.Systems;
 
 public sealed partial class LavalandSystem
 {
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+
     public bool SetupLavalandPlanet(
         ProtoId<LavalandMapPrototype> mapProto,
         out Entity<LavalandMapComponent>? lavaland,
@@ -41,10 +39,10 @@ public sealed partial class LavalandSystem
             }
         }
 
-        var proto = _proto.Index(mapProto);
-        var prototype = _proto.Index(proto.Planet);
-        var layout = _proto.Index(proto.Layout);
-        var pool = _proto.Index(proto.Ruins);
+        var proto = ProtoMan.Index(mapProto);
+        var prototype = ProtoMan.Index(proto.Planet);
+        var layout = ProtoMan.Index(proto.Layout);
+        var pool = ProtoMan.Index(proto.Ruins);
 
         // Basic setup.
         var lavalandMap = _map.CreateMap(out var lavalandMapId, runMapInit: false);
@@ -74,7 +72,7 @@ public sealed partial class LavalandSystem
         SetupRuins(pool, lavaland.Value, preloader.Value);
 
         // Hide all grids from the mass scanner.
-        foreach (var grid in _mapManager.GetAllGrids(lavalandMapId))
+        foreach (var grid in _map.GetAllGrids(lavalandMapId))
         {
             var flag = IFFFlags.HideLabel;
 
@@ -87,9 +85,7 @@ public sealed partial class LavalandSystem
 
         _map.InitializeMap(lavalandMapId);
 
-        // Assign all other components to the map
-        if (prototype.AddComponents != null)
-            EntityManager.AddComponents(lavalandMap, prototype.AddComponents);
+        _effects.ApplyEffects(lavalandMap, prototype.MapEffects);
 
         // Preload here to prevent biome entities from overlaying with everything else
         _biome.Preload(lavalandMap, Comp<BiomeComponent>(lavalandMap), loadBox);
@@ -103,7 +99,7 @@ public sealed partial class LavalandSystem
         _metaData.SetEntityName(lavalandMap, Loc.GetString(prototype.Name));
 
         // Biomes
-        _biome.EnsurePlanet(lavalandMap, _proto.Index(prototype.BiomePrototype), seed, mapLight: prototype.MapLight);
+        _biome.EnsurePlanet(lavalandMap, ProtoMan.Index(prototype.BiomePrototype), seed, mapLight: prototype.MapLight);
 
         // Marker Layers
         var biome = EnsureComp<BiomeComponent>(lavalandMap);

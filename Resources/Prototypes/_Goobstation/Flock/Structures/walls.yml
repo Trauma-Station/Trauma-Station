@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseStructure
   id: WallFlockBase
@@ -23,6 +25,7 @@
         - WallLayer
   - type: Damageable
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -433,6 +436,7 @@
         - WallLayer
   - type: Damageable
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -472,8 +476,9 @@
     sprite: _Goobstation/Flock/Structures/Walls/shuttle.rsi
     state: FZ1_Wall
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Physics
     bodyType: Static
   - type: Destructible

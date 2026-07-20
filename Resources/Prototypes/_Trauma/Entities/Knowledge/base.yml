@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Skills
+    learnedLevel: 0
+    experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
+    costs: [0, 1, 2, 3, 4, 5] # 1 point per mastery level by default

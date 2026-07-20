@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from: https://github.com/ProjectOmu/OmuStation/blob/3aeb0b663dfb2341c0fdddb5a1fb638703226f38/Resources/Textures/_Omu/Objects/Devices/pda.rsi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "id_overlay"
+    },
+    {
+      "name": "light_overlay"
+    },
+    {
+      "name": "light_overlay_wide"
+    },
+    {
+      "name": "id_overlay_wide"
+    },
+    {
+      "name": "pda-advisor"
+    },
+    {
+      "name": "pda",
+      "_comment": "YAML linter appeasement regarding chameleon PDA, removal TODO. Refer to /Resources/Textures/Objects/Devices/pda.rsi/meta.json for licensing information"
+    },
+    {
+      "name":"pda-altnanorep",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name":"pda-althop"
+    },
+    {
+      "name":"pda-altcaptain"
+    }
+  ]
+}

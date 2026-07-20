@@ -9,6 +9,7 @@
   abstract: true
   components:
     - type: StationBankAccount
+      primaryCut: 0.9 # Trauma
     - type: StationCargoOrderDatabase
       orders:
         Cargo: [ ]
@@ -51,7 +52,7 @@
   abstract: true
   components:
     - type: StationCargoShuttle
-      path: /Maps/Shuttles/cargo.yml
+      path: /Maps/_Trauma/Shuttles/cargo.yml # Trauma
     - type: GridSpawn
       groups:
         trade: !type:GridSpawnGroup
@@ -59,7 +60,7 @@
             - type: ProtectedGrid
             - type: TradeStation
           paths:
-            - /Maps/Shuttles/trading_outpost.yml
+            - /Maps/_Trauma/Shuttles/trading_outpost.yml # Trauma
           nameDataset: TradeStationNames
         # Spawn last
         ruins: !type:GridSpawnGroup
@@ -124,6 +125,7 @@
   abstract: true
   components:
     - type: StationCentcomm
+      map: /Maps/_Trauma/centcomm.yml # Trauma
 
 - type: entity
   id: BaseStationEvacuation

@@ -1,4 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: guideEntry
   id: SlaughterDemon
-  name: "Slaughter Demon"
+  name: guide-entry-slaughter-demon
   text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/SlaughterDemon.xml"

@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -9,6 +6,8 @@
   id: WeaponLauncherNonLethal
   description: Essentially a scaled up flare gun that takes 40mm shells; mechanical safety features prevent the loading and firing of lethal grenades.
   components:
+  - type: WeaponClass
+    class: NonLethal
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Launchers/riotlauncher.rsi
     layers:
@@ -41,7 +40,7 @@
   description: A single shot 84mm disposable Light Anti-structure Weapon for precisely taking out structures with little collateral damage. can be folded in order to be conveniantly stored. DO NOT ATTEMPT TO REMOVE ROCKET FROM TUBE.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Guns/Launchers/m172.rsi
+    sprite: _Goobstation/Objects/Weapons/Guns/Launchers/m172_icon_48x.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
@@ -53,6 +52,7 @@
     - Back
     - suitStorage
   - type: Item
+    sprite: _Goobstation/Objects/Weapons/Guns/Launchers/m172.rsi
     size: Normal
     shape:
     - 0,0,1,1 # normal size
@@ -82,7 +82,7 @@
   description: A single shot 93mm disposable anti-personnel thermobaric rocket launcher, considered a flamethrower by the manufacturer. can be folded in order to be conveniantly stored.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Guns/Launchers/shmel.rsi
+    sprite: _Goobstation/Objects/Weapons/Guns/Launchers/shmel_icon_48x.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
@@ -94,6 +94,7 @@
     - Back
     - suitStorage
   - type: Item
+    sprite: _Goobstation/Objects/Weapons/Guns/Launchers/shmel.rsi
     size: Normal
     shape:
     - 0,0,2,1

@@ -1,20 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Marcus F <marcus2008stoke@gmail.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 thebiggestbruh <marcus2008stoke@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
@@ -27,7 +10,7 @@
   color: "#8364BE"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:ModifyBloodLevel
         amount: 10
@@ -38,14 +21,13 @@
         conditions:
         - !type:MobStateCondition
           mobstate: Dead
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -20
-            Burn: -20
-            Airloss: -20
-            Toxin: -20
-            Genetic: -20
+          Brute: -20
+          Burn: -20
+          Airloss: -20
+          Toxin: -20
+          Genetic: -20
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -69,8 +51,7 @@
   flavor: clean
   color: "#ff0000"
   metabolisms:
-    Medicine:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -120,7 +101,7 @@
           sounds:
             collection: Paracusia
         - type: PainNumbness
-        - type: LegsStartParalyzed
+        - type: LegsParalyzed
         guidebookText: entity-effect-guidebook-removes-disabilities
 
 - type: reagent
@@ -133,8 +114,7 @@
   color: "#ff0000"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:AdjustReagent
         reagent: ChloralHydrate
@@ -149,22 +129,18 @@
         key: Stutter
         component: StutteringAccent
       - !type:Jitter
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyParalysis
         time: 5
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        conditions:
-        key: Drowsiness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        conditions:
-        key: ForcedSleep
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectForcedSleeping
         time: 10
         type: Remove
       - !type:GenericStatusEffect
@@ -176,9 +152,9 @@
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
       - !type:PopupMessage
-            type: Local
-            messages: [ "reagent-popup-lingdrenaline" ]
-            probability: 0.2
+        type: Local
+        messages: [ "reagent-popup-lingdrenaline" ]
+        probability: 0.2
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -199,12 +175,11 @@
   flavor: medicine
   color: "#ffff64"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1.5 # Lower than Bicardine, offloading healing onto mitotrophin
+          Brute: -1.5 # Lower than Bicardine, offloading healing onto mitotrophin
       - !type:TakeStaminaDamage
         conditions:
         - !type:ReagentCondition
@@ -229,15 +204,14 @@
           min: 20
         key: Stutter
         component: StutteringAccent
-      - !type:GenericStatusEffect # go to sleep once cycle elapses
+      - !type:ModifyStatusEffect # go to sleep once cycle elapses
         conditions:
         - !type:StaminaDamageCondition
           min: 100
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        key: ForcedSleep
-        component: ForcedSleeping
+        effectProto: StatusEffectForcedSleeping
         type: Add
         time: 10
       - !type:TakeStaminaDamage
@@ -262,7 +236,7 @@
   flavor: medicine
   color: "#ffc41a"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:Vomit
@@ -281,18 +255,20 @@
   flavor: terrible
   color: "#cc9c14"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups: # powerful due to abundance of food, but very inconvienient to use
-            Brute: -4
-            Burn: -2
+          # powerful due to abundance of food, but very inconvienient to use
+          Brute: -2
+          Burn: -2
       - !type:ModifyBleed
         amount: -0.5
       - !type:ModifyBloodLevel
         amount: 3
-    Food:
+    Digestion:
+      metabolites:
+        Mitotrophin: 0.2 # a little something for wasting it all on hunger
       effects:
       - !type:SatiateHunger
         factor: 1.5 # 50% less
@@ -306,7 +282,7 @@
   flavor: medicine
   color: "#ff6060"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -338,7 +314,7 @@
   flavor: medicine
   color: "#e1d758"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:HealthChange
@@ -346,12 +322,11 @@
           types:
             Poison: -1
       - !type:CleanBloodstream
-        excluded: Musiver # Trauma - Exclude from chempurge
+        excluded: [Musiver]
         cleanseRate: 1
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 0.1
+          Brute: 0.1
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -361,34 +336,6 @@
           types:
             Blunt: 5
 
-- type: reagent
-  id: Tehifin
-  name: reagent-name-tehifin
-  group: Medicine
-  desc: reagent-desc-tehifin
-  physicalDesc: reagent-physical-desc-nondescript
-  flavor: medicine
-  color: "#ff8af3"
-  metabolisms:
-    Medicine:
-      metabolismRate: 0.5
-      effects:
-      - !type:HealthChange
-        damage:
-          groups:
-            Burn: -16
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: Tehifin
-          min: 10
-        damage:
-          types:
-            Blunt: 5
 
 - type: reagent # in medicine.yml since it's a direct precursor/step
   id: ProcenylLazideSludge
@@ -408,15 +355,16 @@
   flavor: medicine
   color: "#ffdf97"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 3
       effects:
       - !type:HealthChange
         damage:
           types:
-            Slash: -4 # Trauma
-            Blunt: -4 # Trauma
-            Piercing: -4 # Trauma
+            Slash: -4
+            Blunt: -4
+            Piercing: -4
+            Ballistic: -4
       - !type:AdjustReagent
         reagent: Bozaide
         amount: 3
@@ -450,13 +398,12 @@
   flavor: medicine
   color: "#65583b"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1 # intentionally slow
+          Brute: -1 # intentionally slow
       - !type:HealthChange
         damage:
           types:
@@ -488,20 +435,14 @@
     - !type:PlantAdjustHealth
       amount: 10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
-      - !type:AdjustReagentsByGroup
-        group: Medicine
-        amount: -3
+      - !type:CleanBloodstream
+        excluded: [Multiver]
+        cleanseRate: -3
         conditions:
         - !type:BloodstreamCountCondition
           max: 3 # the gist is, 2 and below this sucks, 3 and above it's great; mix with water etc for good results
-      - !type:AdjustReagentsByGroup
-        group: Poison
-        amount: -3
-      - !type:AdjustReagentsByGroup
-        group: Narcotic
-        amount: -3
       - !type:HealthChange
         damage:
           types:
@@ -513,10 +454,9 @@
         damage:
           types:
             Poison: -3
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 0.5
+          Brute: 0.5
 
 - type: reagent
   id: Monover
@@ -534,7 +474,7 @@
     - !type:PlantAdjustHealth
       amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -543,10 +483,9 @@
         damage:
           types:
             Poison: -3 # slightly better than dylo, but the side effect is easy to fall into
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 1
+          Brute: 1
         conditions:
         - !type:BloodstreamCountCondition
           min: 1 # potential use for checking bloodstream cleanliness?
@@ -567,7 +506,7 @@
     - !type:PlantAdjustHealth
       amount: -50
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1
       effects:
       - !type:CleanBloodstream
@@ -577,8 +516,8 @@
           types:
             Poison: -3
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
       - !type:HealthChange
         damage:
           types:
@@ -618,12 +557,12 @@
   - !type:PlantAdjustHealth
     amount: -20
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.15
       effects:
-      - !type:AdjustReagentsByGroup
-        group: Poison
-        amount: -6
+      - !type:CleanBloodstream
+        excluded: [AmmoniatedMercury]
+        cleanseRate: 6
       - !type:HealthChange
         damage:
           types:
@@ -642,9 +581,14 @@
           max: 10
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Brute: 1
-              Burn: 1
+            types:
+              Blunt: 1
+              Slash: 1
+              Piercing: 1
+              Heat: 1
+              Cold: 1
+              Shock: 1
+              Caustic: 1
           inverted: true
 
 # Low-effect meds
@@ -664,12 +608,9 @@
     - !type:PlantAdjustHealth
       amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:TotalDamageCondition
-          min: 50
         damage:
           types:
             Poison: -1
@@ -691,22 +632,12 @@
   - !type:PlantAdjustHealth
     amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.15
       effects:
-      - !type:SuppressPain
-        amount: 10
-        time: 30
-      - !type:AdjustPainFeels
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ibuprofen
-          min: 15
-        amount: 0.04
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1
+          Brute: -1
       - !type:AdjustTemperature # 1/10 of lepo
         conditions:
         - !type:TemperatureCondition
@@ -725,16 +656,6 @@
         - !type:ReagentCondition
           reagent: Ibuprofen
           min: 20
-      - !type:AdjustConsciousness
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ibuprofen
-          min: 10
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -2.4
-        time: 12
 
 # Externally applied meds
 
@@ -763,6 +684,7 @@
           types:
             Blunt: -0.5
             Piercing: -0.25
+            Ballistic: -0.25
             Slash: -0.5
             Heat: -0.38
             Cold: -0.38
@@ -808,12 +730,11 @@
         - !type:NestedCondition
           proto: NoPressureProtection
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Toxin: -2
+          Toxin: -2
       - !type:HealthChange
         damage:
           types:
@@ -835,37 +756,21 @@
   - !type:PlantAdjustHealth
     amount: -10
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -12
+          Brute: -4
         conditions:
-        - !type:TypedDamageCondition
-          damage:
-            groups:
-              Brute: 25
         - !type:ReagentCondition
           reagent: SalicylicAcid
           max: 25
       - !type:HealthChange
         damage:
-          groups:
-            Brute: -3
-        conditions:
-        - !type:TypedDamageCondition
-          damage:
-            groups:
-              Brute: 25
-          inverted: true
-        - !type:ReagentCondition
-          reagent: SalicylicAcid
-          max: 25
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 3
+         types:
+          Blunt: 1
+          Slash: 1
+          Piercing : 1
         conditions:
         - !type:ReagentCondition
           reagent: SalicylicAcid
@@ -883,7 +788,7 @@
   - !type:PlantAdjustHealth
     amount: -8
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -895,28 +800,34 @@
         conditions:
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Burn: 25
+            types:
+              Heat: 25
+              Cold: 25
+              Shock: 25
+              Caustic: 25
         - !type:ReagentCondition
           reagent: Oxandrolone
           max: 25
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -4
+          Burn: -4
         conditions:
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Burn: 25
+            types:
+              Heat: 25
+              Cold: 25
+              Shock: 25
+              Caustic: 25
           inverted: true
         - !type:ReagentCondition
           reagent: Oxandrolone
           max: 25
       - !type:HealthChange
         damage:
-          groups:
-            Burn: 4
+         types:
+          Heat: 2
+          Cold: 2
         conditions:
         - !type:ReagentCondition
           reagent: Oxandrolone
@@ -936,19 +847,18 @@
     - !type:PlantAdjustToxins
       amount: -8
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:CleanBloodstream
-        excluded: PentenicAcid # Trauma - Exclude pentacid from its own chem purge
+        excluded: [PentenicAcid]
       - !type:HealthChange
         damage:
           types:
             Poison: -2
             Radiation: -2 # grants 100% protection from rads until higher rad values
-      - !type:GenericStatusEffect
-        key: RadiationProtection
-        component: RadiationProtection
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectRadiationProtection
         time: 2
         type: Add
 
@@ -966,19 +876,18 @@
     - !type:PlantAdjustHealth
       amount: -5
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Airloss: -4
-            Brute: -2
-            Burn: -2
-            Toxin: -2
+          Airloss: -4
+          Brute: -2
+          Burn: -2
+          Toxin: -2
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
         - !type:ReagentCondition
           reagent: Atropine
           min: 0
@@ -1030,13 +939,13 @@
     - !type:PlantAdjustHealth
       amount: -20
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1
       effects:
       - !type:HealthChange
         damage:
-          groups:
-            Genetic: -6
+          types:
+            Cellular: -10
       - !type:HealthChange # this + explosion rounds out to ~90dmg/15u
         damage:
           types:
@@ -1083,7 +992,7 @@
           min: 160.15
         amount: -10000
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -1140,7 +1049,7 @@
           max: 420
         amount: 10000
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -1172,12 +1081,9 @@
   flavor: medicine
   color: "#ad2cfa"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:SuppressPain
-        amount: 25
-        time: 30
       - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
@@ -1190,12 +1096,6 @@
         - !type:ReagentCondition
           reagent: Tramadol
           min: 15.5
-      - !type:AdjustConsciousness
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -10.5
-        time: 12
 
 - type: reagent
   id: Oxycodone
@@ -1206,12 +1106,9 @@
   flavor: medicine
   color: "#2cfa76"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:SuppressPain
-        amount: 400
-        time: 30
       - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
@@ -1224,12 +1121,6 @@
         - !type:ReagentCondition
           reagent: Oxycodone
           min: 10.5
-      - !type:AdjustConsciousness
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -50
-        time: 12
 
 # Wraith
 - type: reagent
@@ -1242,19 +1133,17 @@
   color: "#FFA500"
   worksOnTheDead: true
   metabolisms:
-    Poison:
-      metabolismRate: 0.03 # Trauma - harder to make, buffed to 33s/u
-      effects:
-      - !type:HealthChange
-        conditions: # Trauma - this shouldn't be a magic RR unless liver transplant chem
-          - !type:MobStateCondition
-            mobstate: Alive
-        damage:
-          types:
-            Poison: 0.1 # Trauma
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.03
       effects:
+      - !type:HealthChange
+        conditions: # this shouldn't be a magic RR unless liver transplant chem
+        - !type:MobStateCondition
+          mobstate: Alive
+        damage:
+          types:
+            Poison: 0.1
+
       - !type:ReduceRotting
         seconds: 1
         conditions:
@@ -1271,7 +1160,7 @@
 
 # For the slasher antag
 - type: reagent
-  id: slasherium
+  id: Slasherium
   name: reagent-name-slasherium
   group: Medicine
   desc: reagent-desc-slasherium
@@ -1279,26 +1168,20 @@
   flavor: medicine
   color: "#fcf7f9"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -3
-            Brute: -3
-            Toxin: -3
-            Airloss: -3
-            Genetic: -3
-      - !type:GenericStatusEffect
-        key: Stun
+          Burn: -3
+          Brute: -3
+          Toxin: -3
+          Airloss: -3
+          Genetic: -3
+      - !type:ModifyParalysis
         time: 3
         type: Remove
-    Narcotic:
-      metabolismRate: 0.25
-      effects:
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 3
         type: Remove
       - !type:ModifyStatusEffect
@@ -1316,12 +1199,10 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-      - !type:SuppressPain
-        amount: 1.2
-        time: 30
 
 # <Viro>
 
+# TODO KILL THIS DOGSHIT
 - type: reagent
   id: Immurin
   name: reagent-name-immurin
@@ -1331,7 +1212,7 @@
   flavor: terrible
   color: "#A2AF8A"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       # it's a cheap mass-produceable cure-all so it's rather weak
       - !type:ImmunityModifier
@@ -1348,7 +1229,7 @@
   flavor: medicine
   color: "#559955"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:DiseaseProgressChange
         affectedType: Bacterial
@@ -1367,7 +1248,7 @@
   flavor: medicine
   color: "#995555"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:DiseaseProgressChange
         affectedType: Viral

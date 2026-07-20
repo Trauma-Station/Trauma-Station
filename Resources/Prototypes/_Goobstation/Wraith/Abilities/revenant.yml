@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: RevenantAbilities
   name: Revenant Abilities
@@ -20,8 +22,10 @@
         Structural: 80
   - type: RevenantPush
     damageWhenThrown:
-      groups:
-        Brute: 30
+      types:
+        Blunt: 10
+        Slash: 10
+        Piercing: 10
   - type: WraithCommand
     blacklist:
       components:

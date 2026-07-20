@@ -52,6 +52,7 @@
     guides:
     - AtmosphericAlertsComputer
     - DeviceMonitoringAndControl
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -141,8 +142,6 @@
         enum.WiresUiKey.Key:
           type: WiresBoundUserInterface
   - type: RadarConsole
-  - type: WorldLoader
-    radius: 256
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -220,8 +219,6 @@
       - Syndicate
   - type: RadarConsole
     maxRange: 384
-  - type: WorldLoader
-    radius: 1536
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -356,6 +353,7 @@
         type: PowerMonitoringConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -381,6 +379,7 @@
     color: "#1f8c28"
   - type: Computer
     board: MedicalRecordsComputerCircuitboard
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -484,6 +483,7 @@
     receiveFrequencyId: CrewMonitor
   - type: WirelessNetworkConnection
     range: 1200
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -520,7 +520,10 @@
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 1000
   - type: Computer
     board: ResearchComputerCircuitboard
   - type: AccessReader
@@ -571,7 +574,10 @@
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 1000
   - type: Computer
     board: AnalysisComputerCircuitboard
   - type: PointLight
@@ -651,14 +657,13 @@
   name: body scanner computer
   description: A body scanner.
   components:
-  - type: ApcPowerReceiver
-    powerLoad: 500
   - type: Computer
     board: BodyScannerComputerCircuitboard
   - type: PointLight
     radius: 1.5
     energy: 1.6
     color: "#1f8c28"
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -666,6 +671,9 @@
   name: communications computer
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
+  # <Trauma>
+  - type: StationReportTarget # not given to aghost
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]
@@ -700,8 +708,9 @@
     energy: 1.6
     color: "#3c5eb5"
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
 
 - type: entity
   parent: ComputerComms
@@ -929,6 +938,7 @@
     color: "#c9c042"
   - type: AccessReader
     access: [["ChiefEngineer"]] # Trauma - use head access
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   id: ComputerCargoOrdersMedical
@@ -962,6 +972,7 @@
     color: "#41e0fc"
   - type: AccessReader
     access: [["ChiefMedicalOfficer"]] # Trauma - use head access
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   id: ComputerCargoOrdersScience
@@ -1096,7 +1107,7 @@
     energy: 1.6
     color: "#b89f25"
   - type: AccessReader
-    access: [["Quartermaster"]]
+    access: [["Cargo"]] # Trauma - Was QM.
   - type: GuideHelp
     guides:
     - CargoBounties
@@ -1161,8 +1172,6 @@
       state: generic_keys
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
-  - type: ApcPowerReceiver
-    powerLoad: 3100 #We want this to fail first so I transferred most of the scanner and pod's power here. (3500 in total)
   - type: Computer
     board: CloningConsoleComputerCircuitboard
   - type: PointLight
@@ -1186,8 +1195,9 @@
     speechVerb: Robotic
     speechSounds: Pai
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: GuideHelp
     guides:
     - Cloning
@@ -1532,7 +1542,11 @@
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 5
+  - type: PowerState
+    idlePowerDraw: 5
+    workingPowerDraw: 1000
+  - type: UIPowerState
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: RoboticsConsole
@@ -1577,7 +1591,10 @@
     channels:
     - Xenoborg
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 1000
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: Mothership
@@ -1604,7 +1621,10 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 1000
   - type: Computer
     board: StationAiUploadCircuitboard
   - type: AccessReader
@@ -1696,7 +1716,10 @@
           True: { visible: false }
           False: { visible: true }
   - type: ApcPowerReceiver
-    powerLoad: 1000
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 1000
   - type: Computer
     board: StationAiFixerCircuitboard
   - type: AccessReader

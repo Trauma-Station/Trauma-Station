@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling;
@@ -23,15 +19,15 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.PreAscension;
 /// This handles Icy Veins logic. An AOE ability that lowers the temperature
 /// of targets nearby and paralyzes them for a very short amount.
 /// </summary>
-public sealed class ShadowlingIcyVeinsSystem : EntitySystem
+public sealed partial class ShadowlingIcyVeinsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     public override void Initialize()
     {
         base.Initialize();

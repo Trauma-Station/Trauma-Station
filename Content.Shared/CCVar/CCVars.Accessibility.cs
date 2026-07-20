@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 noirogen <raethertechnologies@gmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
@@ -25,6 +18,19 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> ReducedMotion =
         CVarDef.Create("accessibility.reduced_motion", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Replaces the AI static camera effect with a plain gradient.
+    ///     Used for photosensitivity triggers.
+    /// </summary>
+    public static readonly CVarDef<bool> DisableAiStatic =
+        CVarDef.Create("accessibility.disable_ai_static", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Removes the noise from the night vision overlay.
+    /// </summary>
+    public static readonly CVarDef<bool> DisableNightVisionNoise =
+        CVarDef.Create("accessibility.disable_nv_noise", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> ChatEnableColorName =
         CVarDef.Create("accessibility.enable_color_name",

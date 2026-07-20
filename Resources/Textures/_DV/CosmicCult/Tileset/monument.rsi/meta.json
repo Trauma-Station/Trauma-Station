@@ -171,6 +171,9 @@
             "name": "stage3"
         },
         {
+            "name": "spawn-mark"
+        },
+        {
             "name": "transform-stage2",
             "delays": [
                 [

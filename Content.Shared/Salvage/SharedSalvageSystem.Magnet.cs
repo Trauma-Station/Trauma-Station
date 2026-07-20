@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Procedural;
 using Content.Shared.Procedural.DungeonLayers;
@@ -47,14 +40,15 @@ public abstract partial class SharedSalvageSystem
 
     public ISalvageMagnetOffering GetSalvageOffering(int seed)
     {
-        var rand = new System.Random(seed);
+        var rand = new RobustRandom();
+        rand.SetSeed(seed);
 
         var type = SharedRandomExtensions.Pick(_offeringWeights, rand);
         switch (type)
         {
             case AsteroidOffering:
                 var configId = _asteroidConfigs[rand.Next(_asteroidConfigs.Count)];
-                var configProto =_proto.Index(configId);
+                var configProto = ProtoMan.Index(configId);
                 var layers = new Dictionary<string, int>();
 
                 var config = new DungeonConfig
@@ -68,11 +62,11 @@ public abstract partial class SharedSalvageSystem
                 };
 
                 var count = _asteroidOreCount.Next(rand);
-                var weightedProto = _proto.Index(_asteroidOreWeights);
+                var weightedProto = ProtoMan.Index(_asteroidOreWeights);
                 for (var i = 0; i < count; i++)
                 {
                     var ore = weightedProto.Pick(rand);
-                    config.Layers.Add(_proto.Index<OreDunGenPrototype>(ore));
+                    config.Layers.Add(ProtoMan.Index<OreDunGenPrototype>(ore));
 
                     var layerCount = layers.GetOrNew(ore);
                     layerCount++;
@@ -94,7 +88,7 @@ public abstract partial class SharedSalvageSystem
             case SalvageOffering:
                 // Salvage map seed
                 _salvageMaps.Clear();
-                _salvageMaps.AddRange(_proto.EnumeratePrototypes<SalvageMapPrototype>());
+                _salvageMaps.AddRange(ProtoMan.EnumeratePrototypes<SalvageMapPrototype>());
                 _salvageMaps.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
                 var mapIndex = rand.Next(_salvageMaps.Count);
                 var map = _salvageMaps[mapIndex];

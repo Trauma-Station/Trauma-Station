@@ -1,24 +1,4 @@
-# for heretic ShadowCloak while active
-- type: entity
-  parent: StatusEffectSpeed
-  id: ShadowCloakStatusEffect
-  name: shadow cloak
-  components:
-  - type: StatusEffectAlert
-    alert: ShadowCloak
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 1.25
-    walkSpeedModifier: 1.25
-
-# for heretic ShadowCloak slowdown when attacked
-- type: entity
-  parent: StatusEffectSlowdown
-  id: ShadowCloakRevealStatusEffect
-  name: shadow cloak revealed
-  components:
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 0.75
-    walkSpeedModifier: 0.75
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 # for shadowling glare ability
 - type: entity
@@ -45,6 +25,16 @@
   parent: StatusEffectSlowdown
   id: OrganSlowdownStatusEffect
   name: destroyed organ slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.6
+    walkSpeedModifier: 0.6
+
+# applied when you are inside lava
+- type: entity
+  parent: StatusEffectSlowdown
+  id: InLavaStatusEffect
+  name: in lava
   components:
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.6

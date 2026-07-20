@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: decal
+  id: Footprint
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _CorvaxNext/Effects/footprint.rsi
+    state: foot
+
+- type: decal
+  id: BodySmear
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _CorvaxNext/Effects/footprint.rsi
+    state: body

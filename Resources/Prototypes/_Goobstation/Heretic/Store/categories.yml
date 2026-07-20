@@ -1,11 +1,5 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # heretic
 
 - type: storeCategory
@@ -16,34 +10,49 @@
 - type: storeCategory
   id: HereticPathLock
   name: store-heretic-path-lock
-  priority: 0
+  priority: 3
 
 - type: storeCategory
   id: HereticPathFlesh
   name: store-heretic-path-flesh
-  priority: 0
+  priority: 4
 
 - type: storeCategory
   id: HereticPathVoid
   name: store-heretic-path-void
-  priority: 0
+  priority: 1
 
 - type: storeCategory
   id: HereticPathBlade
   name: store-heretic-path-blade
-  priority: 0
+  priority: 5
 
 - type: storeCategory
   id: HereticPathRust
   name: store-heretic-path-rust
-  priority: 0
+  priority: 2
 
 - type: storeCategory
   id: HereticPathCosmos
   name: store-heretic-path-cosmos
-  priority: 0
+  priority: 6
 
 - type: storeCategory
-  id: HereticPathSide
-  name: store-heretic-path-side
-  priority: 999 # lowest possible
+  id: HereticPathSpecial
+  name: store-heretic-path-special
+  priority: 20
+
+- type: storeCategory
+  id: HereticPathSideT1
+  name: store-heretic-path-side-t1
+  priority: 21
+
+- type: storeCategory
+  id: HereticPathSideT2
+  name: store-heretic-path-side-t2
+  priority: 22
+
+- type: storeCategory
+  id: HereticPathSideT3
+  name: store-heretic-path-side-t3
+  priority: 23

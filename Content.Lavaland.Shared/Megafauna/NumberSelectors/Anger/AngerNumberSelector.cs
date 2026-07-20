@@ -1,4 +1,5 @@
-using System.Numerics;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Lavaland.Shared.Anger.Systems;
 
 namespace Content.Lavaland.Shared.Megafauna.NumberSelectors;
@@ -20,7 +21,7 @@ public sealed partial class AngerNumberSelector : MegafaunaNumberSelector
 
     public override float Get(MegafaunaCalculationBaseArgs args)
     {
-        var entMan = args.EntityManager;
+        var entMan = args.EntMan;
         var uid = args.Entity;
         var angerSystem = entMan.System<AngerSystem>();
         return angerSystem.GetAngerScale(uid, Range.X, Range.Y, Inverse);

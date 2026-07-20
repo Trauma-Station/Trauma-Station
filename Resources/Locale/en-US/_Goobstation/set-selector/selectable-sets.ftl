@@ -100,8 +100,9 @@ selectable-set-syndicate-fluclear-description =
 selectable-set-syndicate-friendship-name = Friendship Bundle
 selectable-set-syndicate-friendship-description =
     Friendship is magic! Go find yourself some friends with this bundle!
-    Contains: a contractor baton and handcuffs for you, 4 mindcontrol implanters
-    and Mosin rifles for your friends, and 5 syndicate encryption keys for you all.
+    Contains: a contractor baton and handcuffs for you, AKM, two magazines,
+    ammunition box, 4 mindcontrol implanters, 4 Mosin rifles for your friends,
+    and 5 syndicate encryption keys for you all.
 
 selectable-set-syndicate-carp-name = Carp Bundle
 selectable-set-syndicate-carp-description =
@@ -128,47 +129,6 @@ selectable-set-syndicate-builder-description =
     It is funnier to pull down than to build. But it is not as effective.
     Contains: 2 disposable ballistic turrets, a telecrystal miner flatpack,
     some tools and materials to get you started, and a syndicate encryption key.
-
-# Blueshield
-
-selectable-set-blueshield-shield-name = blueshield set
-selectable-set-blueshield-shield-description =
-    The iconic namesake of these soldiers.
-    Includes: The greatshield, and the DT-4 Atrocity customized stun baton.
-
-selectable-set-blueshield-revolver-name = revolver set
-selectable-set-blueshield-revolver-description =
-    Running out of ammo is the worst thing that could happen in a firefight.
-    Includes: The EG-4 energy revolver, capable of firing bolts using
-    recharging speedloaders, both lethal and not, and a shoulder holster.
-
-selectable-set-blueshield-dragon-name = kung fu manual set
-selectable-set-blueshield-dragon-description =
-    Sometimes you need to get your hands dirty.
-    Includes: A book capable of teaching the user
-    advanced kung fu martial art.
-
-selectable-set-blueshield-chester-name = chester set
-selectable-set-blueshield-chester-description =
-    Ready to go hunting?
-    Includes: 8 Gauge shotgun, the Chester. Spare ammo,
-    Alternate ammo, Spare magazines.
-
-selectable-set-blueshield-syringe-name = medical set
-selectable-set-blueshield-syringe-description =
-    Perfect for healing allies or poisioning foes in a pinch.
-    Includes: An explosive resistant chestrig, a combat injector, and
-    several vials of medicine.
-
-# Blueshield hardsuits
-
-selectable-set-blueshield-hardsuit-light-name = blueshield hardsuit
-selectable-set-blueshield-hardsuit-light-description =
-    An armoured hardsuit, allowing for more speed at the cost of protection.
-
-selectable-set-blueshield-modsuit-name = blueshield modsuit
-selectable-set-blueshield-modsuit-description =
-    A custom modular hardsuit, allowing for more customisation, at the cost of requiring power.
 
 # ERT
 

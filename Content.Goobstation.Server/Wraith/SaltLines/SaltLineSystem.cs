@@ -1,21 +1,25 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.SaltLines;
 using Content.Server.Administration.Logs;
-using Content.Server.Popups;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Robust.Shared.Map.Components;
 
 namespace Content.Goobstation.Server.Wraith.SaltLines;
 
-public sealed class SaltLineSystem : EntitySystem
+public sealed partial class SaltLineSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+
+    private static readonly ProtoId<ReagentPrototype> ReagentSalt = "TableSalt";
 
     public override void Initialize()
     {
@@ -43,7 +47,8 @@ public sealed class SaltLineSystem : EntitySystem
 
     private void OnSaltLineAfterInteract(Entity<SaltLinePlacerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach)
+        // We can only place on tiles, so target must be null
+        if (args.Handled || !args.CanReach || args.Target != null)
             return;
 
         if (!TryComp<MapGridComponent>(_transform.GetGrid(args.ClickLocation), out var grid))
@@ -74,25 +79,37 @@ public sealed class SaltLineSystem : EntitySystem
 
     private void OnAttemptSaltLine(Entity<ConsumeOnSaltLineComponent> ent, ref AttemptSaltLineEvent args)
     {
-        if (!_solution.TryGetSolution(ent.Owner, "food", out var sol, false))
+        foreach (var (_, solution) in _solution.EnumerateSolutions(ent.Owner))
         {
-            args.Cancelled = true;
-            return;
-        }
-        var reagentsalt = "TableSalt";
-        var solution = sol.Value;
-        var saltAmount = solution.Comp.Solution.GetTotalPrototypeQuantity(reagentsalt);
+            if (!solution.Comp.Solution.ContainsPrototype(ReagentSalt))
+                continue;
 
-        if (saltAmount < ent.Comp.Amount)
-        {
-            _popupSystem.PopupEntity(Loc.GetString("consume-on-salt-line-component-not-enough-salt-message"), ent.Owner, args.User);
-            args.Cancelled = true;
-            return;
+            // Try remove salt from the first found solution, if there's no salt return and check next container,
+            // else exit the function without cancelling it
+            if (TryRemoveSalt(solution, ent, args.User))
+                return;
         }
-        _solution.RemoveReagent(solution, reagentsalt, ent.Comp.Amount);
+
+        // No reagent was consumed, therefore the event failed
+        args.Cancelled = true;
     }
 
     #region Helpers
+
+    /// <summary>
+    ///  Removes salt from a solution
+    /// </summary>
+    public bool TryRemoveSalt(Entity<SolutionComponent> sol, Entity<ConsumeOnSaltLineComponent> ent, EntityUid user)
+    {
+        var solution = sol.Comp.Solution;
+        var saltAmount = solution.GetTotalPrototypeQuantity(ReagentSalt);
+        if (saltAmount < ent.Comp.Amount)
+            return false;
+
+        _solution.RemoveReagent(sol, ReagentSalt, ent.Comp.Amount);
+        return true;
+    }
+
     private void UpdateAppearance(Entity<SaltLineComponent> ent)
     {
         var transform = Transform(ent.Owner);

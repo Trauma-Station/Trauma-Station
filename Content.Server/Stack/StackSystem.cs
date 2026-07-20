@@ -1,29 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@gmail.com>
-// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2021 ike709 <ike709@github.com>
-// SPDX-FileCopyrightText: 2021 ike709 <ike709@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 Jessica M <jessica@jessicamaybe.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Goobstation.Common.Stack;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -38,17 +12,17 @@ namespace Content.Server.Stack
     /// This is a good example for learning how to code in an ECS manner.
     /// </summary>
     [UsedImplicitly]
-    public sealed class StackSystem : SharedStackSystem
+    public sealed partial class StackSystem : SharedStackSystem
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-
         #region Spawning
 
         /// <summary>
         /// Spawns a new entity and moves an amount to it from the stack.
         /// Moves nothing if amount is greater than ent's stack count.
         /// </summary>
-        /// <param name="amount"> How much to move to the new entity. </param>
+        /// <param name="ent">Entity to split in a new stack.</param>
+        /// <param name="amount">How much to move to the new entity.</param>
+        /// <param name="spawnPosition">Where to spawn the new stack</param>
         /// <returns>Null if StackComponent doesn't resolve, or amount to move is greater than ent has available.</returns>
         [PublicAPI]
         public override EntityUid? Split(Entity<StackComponent?> ent, int amount, EntityCoordinates spawnPosition) // Goob - override virtual method
@@ -60,7 +34,7 @@ namespace Content.Server.Stack
             if (!TryUse(ent, amount))
                 return null;
 
-            if (!_prototypeManager.Resolve(ent.Comp.StackTypeId, out var stackType))
+            if (!ProtoMan.Resolve(ent.Comp.StackTypeId, out var stackType))
                 return null;
 
             // Set the output parameter in the event instance to the newly split stack.
@@ -98,7 +72,7 @@ namespace Content.Server.Stack
         [PublicAPI]
         public EntityUid SpawnAtPosition(int count, ProtoId<StackPrototype> id, EntityCoordinates spawnPosition)
         {
-            var proto = _prototypeManager.Index(id);
+            var proto = ProtoMan.Index(id);
             return SpawnAtPosition(count, proto, spawnPosition);
         }
 
@@ -170,7 +144,7 @@ namespace Content.Server.Stack
                                                        int amount,
                                                        EntityCoordinates spawnPosition)
         {
-            var stackProto = _prototypeManager.Index(stackId);
+            var stackProto = ProtoMan.Index(stackId);
             return SpawnMultipleAtPosition(stackProto.Spawn,
                                             CalculateSpawns(stackProto, amount),
                                             spawnPosition);
@@ -192,7 +166,7 @@ namespace Content.Server.Stack
         [PublicAPI]
         public EntityUid SpawnNextToOrDrop(int amount, ProtoId<StackPrototype> id, EntityUid source)
         {
-            var proto = _prototypeManager.Index(id);
+            var proto = ProtoMan.Index(id);
             return SpawnNextToOrDrop(amount, proto, source);
         }
 
@@ -259,7 +233,7 @@ namespace Content.Server.Stack
                                                          int amount,
                                                          EntityUid target)
         {
-            var stackProto = _prototypeManager.Index(stackId);
+            var stackProto = ProtoMan.Index(stackId);
             return SpawnMultipleNextToOrDrop(stackProto.Spawn,
                                              CalculateSpawns(stackProto, amount),
                                              target);

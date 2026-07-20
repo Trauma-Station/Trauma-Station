@@ -1,15 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2024 lanse12 <cloudability.ez@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GitHubUser53123 <110841413+GitHubUser53123@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 JohnOakman <sremy2012@hotmail.fr>
-# SPDX-FileCopyrightText: 2025 Panela <107573283+AgentePanela@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 ent-SpawnPointGhostBlob = Blob spawner
     .suffix = DEBUG, Ghost Role Spawner
     .desc = { ent-MarkerBase.desc }
@@ -79,23 +67,6 @@ blob-target-already-connected = already connected
 
 # UI
 blob-chem-swap-ui-window-name = Swap chemicals
-blob-chem-reactivespines-info = Reactive Spines
-                                Deals 25 brute damage.
-blob-chem-blazingoil-info = Blazing Oil
-                            Deals 15 burn damage and lights targets on fire.
-                            Makes you vulnerable to water.
-blob-chem-regenerativemateria-info = Regenerative Materia
-                                    Deals 6 brute damage and 15 toxin damage.
-                                    The blob core regenerates health 10 times faster than normal and generates 1 extra resource.
-blob-chem-explosivelattice-info = Explosive Lattice
-                                    Deals 5 burn damage and explodes the target, dealing 10 brute damage.
-                                    Spores explode on death.
-                                    You become immune to explosions.
-                                    You take 50% more damage from burns and electrical shock.
-blob-chem-electromagneticweb-info = Electromagnetic Web
-                                    Deals 20 burn damage, 20% chance to cause an EMP pulse when attacking.
-                                    Blob tiles cause an EMP pulse when destroyed.
-                                    You take 25% more brute and heat damage.
 
 blob-alert-out-off-station = The blob was removed because it was found outside the station!
 
@@ -121,8 +92,6 @@ blob-carrier-role-greeting = You are a carrier of Blob. Find a secluded place at
 
 # Verbs
 blob-pod-verb-zombify = Zombify
-blob-verb-upgrade-to-strong = Upgrade to Strong Blob
-blob-verb-upgrade-to-reflective = Upgrade to Reflective Blob
 blob-verb-remove-blob-tile = Remove Blob
 
 # Alerts
@@ -143,21 +112,7 @@ blob-role-greeting =
 blob-zombie-greeting = You were infected and raised by a blob spore. Now you must help the blob take over the station. Use +e in chat to talk in the Blobmind.
 
 # End round
-blob-round-end-result =
-    { $blobCount ->
-        [one] There was one blob infection.
-        *[other] There were {$blobCount} blobs.
-    }
-
-blob-user-was-a-blob = [color=gray]{$user}[/color] was a blob.
-blob-user-was-a-blob-named = [color=White]{$name}[/color] ([color=gray]{$user}[/color]) was a blob.
-blob-was-a-blob-named = [color=White]{$name}[/color] was a blob.
-
-preset-blob-objective-issuer-blob = [color=#33cc00]Blob[/color]
-
-blob-user-was-a-blob-with-objectives = [color=gray]{$user}[/color] was a blob who had the following objectives:
-blob-user-was-a-blob-with-objectives-named = [color=White]{$name}[/color] ([color=gray]{$user}[/color]) was a blob who had the following objectives:
-blob-was-a-blob-with-objectives-named = [color=White]{$name}[/color] was a blob who had the following objectives:
+blob-round-end-agent-name = blob infection
 
 # Objectivies
 objective-condition-blob-capture-title = Take over the station

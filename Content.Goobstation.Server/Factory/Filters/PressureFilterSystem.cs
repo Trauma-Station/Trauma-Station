@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.Components;
@@ -11,7 +8,7 @@ using Content.Shared.Atmos.Piping.Unary.Components;
 
 namespace Content.Goobstation.Server.Factory.Filters;
 
-public sealed class PressureFilterSystem : EntitySystem
+public sealed partial class PressureFilterSystem : EntitySystem
 {
     public override void Initialize()
     {

@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ImWeax <59857479+ImWeax@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Weax <59857479+ImWeax@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Changeling.Objectives.Components;
@@ -22,11 +12,11 @@ namespace Content.Goobstation.Server.Changeling.Objectives.Systems;
 /// <summary>
 ///     Handles escaping on the shuttle while being another person detection.
 /// </summary>
-public sealed class ImpersonateConditionSystem : EntitySystem
+public sealed partial class ImpersonateConditionSystem : EntitySystem
 {
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

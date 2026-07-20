@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: SpawnPodEvaKit
   categories: [ HideSpawnMenu ]
@@ -78,15 +80,6 @@
   components:
   - type: SpawnOnDespawn
     prototype: InternCoin
-
-- type: entity
-  id: SpawnPodBsd
-  categories: [ HideSpawnMenu ]
-  name: SpawnSupplyBsd
-  parent: SpawnSupplyEmpty
-  components:
-  - type: SpawnOnDespawn
-    prototype: BlueShieldDeputySpawnBriefcase
 
 - type: entity
   id: SpawnPodHardsuitExperimental

@@ -1,17 +1,20 @@
-using System.Collections.Generic;
-using System.Numerics;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Research.Prototypes;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Research;
 
 [TestFixture]
-public sealed class TechnologyPrototypePositionTests
+public sealed class TechnologyPrototypePositionTests : GameTest
 {
     [Test]
     public async Task TechnologyPrototypePositionsAreUniqueTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var protoManager = server.ResolveDependency<IPrototypeManager>();
@@ -35,7 +38,5 @@ public sealed class TechnologyPrototypePositionTests
             var msg = string.Join("\n", fails) + "\n" + "Found duplicate positions for following" + nameof(TechnologyPrototype);
             Assert.Fail(msg);
         }
-
-        await pair.CleanReturnAsync();
     }
 }

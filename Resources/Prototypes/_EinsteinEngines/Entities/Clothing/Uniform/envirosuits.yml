@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuit
-  name: plasma envirosuit
-  description: A special containment suit that allows plasma-based lifeforms to exist safely in an oxygenated environment.
+  name: phoron envirosuit
+  description: A special containment suit that allows phoron-based lifeforms to exist safely in an oxygenated environment.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/plain.rsi
@@ -184,7 +186,7 @@
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitMedicalDoctor
   name: medical doctor's envirosuit
-  description: A suit designed for the station's more plasma-based doctors.
+  description: A suit designed for the station's more phoron-based doctors.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/medical.rsi
@@ -644,22 +646,6 @@
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/centcom_officer.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/centcom_officer.rsi
-
-- type: entity
-  parent: ClothingUniformEnvirosuitBase
-  id: ClothingUniformEnvirosuitBlueshield
-  name: blueshield's envirosuit
-  description: An envirosuit designed for Plasmamen employed as the Blueshield.
-  components:
-  - type: Sprite
-    sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/blueshield_officer.rsi
-  - type: Clothing
-    sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/blueshield_officer.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.95
-        Heat: 0.95
 
 - type: entity
   parent: ClothingUniformEnvirosuitCustomBase

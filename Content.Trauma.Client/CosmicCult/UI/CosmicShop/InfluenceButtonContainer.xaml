@@ -1,0 +1,12 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer xmlns="https://spacestation14.io"
+              Margin="5"
+              HorizontalAlignment="Right"
+              Name="InfluenceButton">
+    <PanelContainer StyleClasses="AngleRect">
+        <TextureButton Name="DetailButton" Scale="2 2" />
+    </PanelContainer>
+</BoxContainer>

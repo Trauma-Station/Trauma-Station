@@ -1,18 +1,3 @@
-# SPDX-FileCopyrightText: 2023 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Keer-Sar <144283718+Keer-Sar@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 TheWaffleJesus <106146578+TheWaffleJesus@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 icekot8 <93311212+icekot8@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 strO0pwafel <153459934+strO0pwafel@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 wafehling <wafehling@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 bounty-item-artifact = Alien artifact
 bounty-item-baseball-bat = Baseball bat
 bounty-item-box-hugs = Box of hugs
@@ -21,8 +6,6 @@ bounty-item-bread = Bread
 bounty-item-carp = Space carp
 bounty-item-carrot = Carrot
 bounty-item-carrot-fries = Carrot fries
-bounty-item-clown-mask = Clown mask
-bounty-item-clown-shoes = Clown shoes
 bounty-item-corn = Ear of corn
 bounty-item-crayon = Crayon
 bounty-item-cuban-carp = Cuban carp
@@ -43,7 +26,8 @@ bounty-item-monkey-cube = Monkey cube
 bounty-item-mouse = Dead mouse
 bounty-item-ore-bananium = Bananium ore
 bounty-item-ore-gold = Gold ore
-bounty-item-ore-plasma = Plasma ore
+# Trauma - plasma -> phoron
+bounty-item-ore-plasma = Phoron ore
 bounty-item-ore-silver = Silver ore
 bounty-item-ore-uranium = Uranium ore
 bounty-item-pancake = Pancake
@@ -74,7 +58,6 @@ bounty-item-food = Meat food
 bounty-item-fruit = Fruit
 bounty-item-vegetable = Vegetable
 bounty-item-chili = Bowl of chili
-bounty-item-rollerskates = Roller skates
 bounty-item-bedsheet = Bedsheet
 bounty-item-bandana = Bandana
 bounty-item-steak = Steak
@@ -102,7 +85,6 @@ bounty-description-bread = Problems with central planning have led to bread pric
 bounty-description-carrot = After failing to watch instructional videos for proper welder safety, the salvage division on Station 15 has been blinded. Ship them some carrots so they can restore their eyesight.
 bounty-description-carrot-fries = Night sight can mean life or death! A shipment of carrot fries is the order.
 bounty-description-carp = Admiral Pavlov has gone on strike ever since Central Command confiscated her "pet." She is demanding a space carp as a replacement, dead or alive.
-bounty-description-clown-costume = Due to a recent issue at a space carp petting zoo, we've unfortunately lost Bonobobonobo the Clown. Send us a new costume so the kids can see him once more.
 bounty-description-corn = After the recent destruction of Space Ohio, our corn imports are down 80%. Send us some so we can make up for it.
 bounty-description-crayon = Dr Jones's kid ate all our crayons again. Please send us yours.
 bounty-description-cuban-carp = To celebrate the birth of Castro XXVII, ship one cuban carp to CentComm.
@@ -120,7 +102,7 @@ bounty-description-lime = After a heavy drinking session, Admiral Pastich develo
 bounty-description-lung = The pro-smoking league has been fighting to keep cigarettes on our stations for millennia. Unfortunately, their lungs aren't fighting so hard anymore. Send them some new ones.
 bounty-description-monkey-cube = Due to a recent genetics accident, Central Command is in serious need of monkeys. Your mission is to ship monkey cubes.
 bounty-description-mouse = Station 13 ran out of freeze-dried mice. Ship some fresh ones so their janitor doesn't go on strike.
-bounty-description-pancake = Here at NanoTrasen we consider employees to be family. And you know what families love? Pancakes. Ship a baker's dozen.
+bounty-description-pancake = Here at NanoTrasen we consider employees to be family. And you know what families love? Pancakes. Ship half a dozen.
 bounty-description-pen = We are hosting the intergalactic pen balancing competition. We need you to send us some standardized ball point pens.
 bounty-description-percussion = Due to a poorly timed barfight, the United Galaxy-wide Mixed Percussion Ensemble lost all of their instruments. Send them a new set so they can jam once more.
 bounty-description-pie = 3.14159? No! CentComm management wants edible pie! Ship a whole one.
@@ -147,7 +129,6 @@ bounty-description-food = After the rat king invasion, a neighboring Unathi stat
 bounty-description-fruit = A heroic monkey helped the chaplain catch a troublemaker hiding in the chapel, and the crew wants to reward him for his good work.
 bounty-description-vegetable = The new chef is a vegetarian, and botany can't keep up with their demands. We need some additional veggies to help keep things stocked.
 bounty-description-chili = Today's the CentComm Chili Cookoff, and, well, a few of us forgot to make some. Please help cover for us.
-bounty-description-rollerskates = CentComm Security is proposing a new strategy for helping officers win foot pursuits. Send them a pair so they can learn how bad an idea this is.
 bounty-description-bedsheet = Someone in Atmos keeps turning down the heater, and we're all shivering in our beds. Please send us some extra sheets to stay warm.
 bounty-description-bandana =  Bzzzt... Transmission from prison planet OC-1001: We're... reorganizing our command structure. Send us some bandanas so we can tell gan- I mean, departments apart.
 bounty-description-steak = The vegetarian cook is refusing to make us anything with meat, and the lizards are getting restless. Can you smuggle us a few steaks to keep them happy?

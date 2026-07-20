@@ -1,28 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2021 Alexander Evgrashin <evgrashin.adl@gmail.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Visne <vincefvanwijk@gmail.com>
-// SPDX-FileCopyrightText: 2022 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2023 Daniil Sikinami <60344369+VigersRay@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ivan Rubinov <linuxkernelpatch8234@riseup.net>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-// SPDX-FileCopyrightText: 2024 faint <46868845+ficcialfaint@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 user424242420 <142989209+user424242420@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.GameTicking.Managers;
 using Content.Shared.PDA;
 using Robust.Shared.Utility;
@@ -40,9 +15,9 @@ namespace Content.Client.PDA
     [GenerateTypedNameReferences]
     public sealed partial class PdaMenu : PdaWindow
     {
-        [Dependency] private readonly IClipboardManager _clipboard = null!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+        [Dependency] private IClipboardManager _clipboard = null!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IEntitySystemManager _entitySystem = default!;
         private readonly ClientGameTicker _gameTicker;
 
         public const int HomeView = 0;
@@ -57,6 +32,7 @@ namespace Content.Client.PDA
         private string _stationName = Loc.GetString("comp-pda-ui-unknown");
         private string _alertLevel = Loc.GetString("comp-pda-ui-unknown");
         private string _instructions = Loc.GetString("comp-pda-ui-unknown");
+        private string _currentDate = Loc.GetString("comp-pda-ui-unknown"); // DeltaV - PDA date
 
 
         private int _currentView;
@@ -150,6 +126,12 @@ namespace Content.Client.PDA
                 _clipboard.SetText(_instructions);
             };
 
+            // Begin DeltaV additions
+            CurrentDateButton.OnPressed += _ =>
+            {
+                _clipboard.SetText(_currentDate);
+            };
+            // End DeltaV additions
 
 
 
@@ -213,6 +195,15 @@ namespace Content.Client.PDA
                 ("instructions", _instructions))
             );
 
+            // Begin DeltaV additions
+            if (state.PdaOwnerInfo.CurrentDate is { } curDate)
+                _currentDate = curDate.ToString("dd MMMM yyyy");
+                CurrentDateLabel.SetMarkup(Loc.GetString(
+                    "comp-pda-ui-current-date",
+                    ("date", _currentDate)
+                ));
+            // End DeltaV additions
+
             AddressLabel.Text = state.Address?.ToUpper() ?? " - ";
 
             EjectIdButton.IsActive = state.PdaOwnerInfo.IdOwner != null || state.PdaOwnerInfo.JobTitle != null;
@@ -225,10 +216,10 @@ namespace Content.Client.PDA
 
         public void UpdateAvailablePrograms(List<(EntityUid, CartridgeComponent)> programs)
         {
-            ProgramList.RemoveAllChildren();
-
             if (programs.Count == 0)
             {
+                ProgramList.RemoveAllChildren();
+
                 ProgramList.AddChild(new Label()
                 {
                     Text = Loc.GetString("comp-pda-io-no-programs-available"),
@@ -240,50 +231,43 @@ namespace Content.Client.PDA
                 return;
             }
 
-            var row = CreateProgramListRow();
-            var itemCount = 1;
-            ProgramList.AddChild(row);
-
-            foreach (var (uid, component) in programs)
+            if (ProgramList.ChildCount >= 1 && ProgramList.Children[0] is Label label)
             {
-                //Create a new row every second program item starting from the first
-                if (itemCount % 2 != 0)
+                label.Orphan();
+            }
+
+            while (ProgramList.ChildCount > programs.Count)
+            {
+                ProgramList.Children[ProgramList.ChildCount - 1].Orphan();
+            }
+
+            for (var i = 0; i < programs.Count; i++)
+            {
+                var cartridge = programs[i];
+
+                if (i < ProgramList.ChildCount)
                 {
-                    row = CreateProgramListRow();
-                    ProgramList.AddChild(row);
+                    var currentItem = ProgramList.Children[i];
+                    if (currentItem is PdaProgramItem programItem)
+                    {
+                        programItem.SetCartridge(cartridge);
+                        continue;
+                    }
+
+                    DebugTools.Assert(i == ProgramList.ChildCount-1);
+                    currentItem.Orphan();
                 }
 
-                var item = new PdaProgramItem();
-
-                if (component.Icon is not null)
-                    item.Icon.SetFromSpriteSpecifier(component.Icon);
-
-                item.OnPressed += _ => OnProgramItemPressed?.Invoke(uid);
-
-                switch (component.InstallationStatus)
-                {
-                    case InstallationStatus.Cartridge:
-                        item.InstallButton.Visible = true;
-                        item.InstallButton.Text = Loc.GetString("cartridge-bound-user-interface-install-button");
-                        item.InstallButton.OnPressed += _ => OnInstallButtonPressed?.Invoke(uid);
-                        break;
-                    case InstallationStatus.Installed:
-                        item.InstallButton.Visible = true;
-                        item.InstallButton.Text = Loc.GetString("cartridge-bound-user-interface-uninstall-button");
-                        item.InstallButton.OnPressed += _ => OnUninstallButtonPressed?.Invoke(uid);
-                        break;
-                }
-
-                item.ProgramName.Text = Loc.GetString(component.ProgramName);
-                item.SetHeight = 20;
-                row.AddChild(item);
-
-                itemCount++;
+                var item = new PdaProgramItem(cartridge);
+                item.OnProgramItemPressed += uid => OnProgramItemPressed?.Invoke(uid);
+                item.OnUninstallButtonPressed += uid => OnUninstallButtonPressed?.Invoke(uid);
+                item.OnInstallButtonPressed += uid => OnInstallButtonPressed?.Invoke(uid);
+                ProgramList.AddChild(item);
             }
 
             //Add a filler item to the last row when it only contains one item
-            if (itemCount % 2 == 0)
-                row.AddChild(new Control() { HorizontalExpand = true });
+            if (programs.Count % 2 == 0)
+                 ProgramList.AddChild(new Control() { HorizontalExpand = true });
         }
 
         /// <summary>
@@ -342,15 +326,6 @@ namespace Content.Client.PDA
             ViewContainer.GetChild(_currentView).Visible = false;
             ViewContainer.GetChild(view).Visible = true;
             _currentView = view;
-        }
-
-        private static BoxContainer CreateProgramListRow()
-        {
-            return new BoxContainer()
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                HorizontalExpand = true
-            };
         }
 
         private void HideAllViews()

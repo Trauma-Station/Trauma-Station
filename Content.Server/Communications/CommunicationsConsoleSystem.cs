@@ -1,54 +1,7 @@
-// SPDX-FileCopyrightText: 2022 Júlio César Ueti <52474532+Mirino97@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Morber <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <deltanedas@laptop>
-// SPDX-FileCopyrightText: 2023 deltanedas <user@zenith>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Justin Pfeifler <jrpl101998@gmail.com>
-// SPDX-FileCopyrightText: 2024 Kot <1192090+koteq@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 Robert V <vincerob@oregonstate.edu>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 avery <51971268+graevy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 coolboy911 <85909253+coolboy911@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 superjj18 <gagnonjake@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.AlertLevel;
+using Content.Trauma.Common.Chat;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
@@ -68,25 +21,25 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Content.Trauma.Common.AlertLevel; // Trauma
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 
 namespace Content.Server.Communications
 {
-    public sealed class CommunicationsConsoleSystem : EntitySystem
+    public sealed partial class CommunicationsConsoleSystem : EntitySystem
     {
-        [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-        [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-        [Dependency] private readonly ChatSystem _chatSystem = default!;
-        [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-        [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-        [Dependency] private readonly StationSystem _stationSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+        [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+        [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+        [Dependency] private ChatSystem _chatSystem = default!;
+        [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+        [Dependency] private EmergencyShuttleSystem _emergency = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private RoundEndSystem _roundEndSystem = default!;
+        [Dependency] private StationSystem _stationSystem = default!;
+        [Dependency] private UserInterfaceSystem _uiSystem = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private IdentitySystem _identity = default!;
 
         private const float UIUpdateInterval = 5.0f;
 
@@ -199,7 +152,7 @@ namespace Content.Server.Communications
                         foreach (var (id, detail) in alertComp.AlertLevels.Levels)
                         {
                             // <Trauma> - only show alert levels that won't get cancelled
-                            var attemptEv = new ChangeAlertLevelAttemptEvent(id);
+                            var attemptEv = new ChangeAlertLevelAttemptEvent(id, alertComp.CurrentLevel);
                             RaiseLocalEvent(stationUid.Value, ref attemptEv);
                             if (attemptEv.Cancelled)
                                 continue;
@@ -294,6 +247,12 @@ namespace Content.Server.Communications
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message.Message, maxLength);
             var author = Loc.GetString("comms-console-announcement-unknown-sender");
+            // <Trauma>
+            var attemptEv = new UserMessageAttemptEvent(message.Actor, msg);
+            RaiseLocalEvent(ref attemptEv);
+            if (attemptEv.Cancelled)
+                return;
+            // </Trauma>
             if (message.Actor is { Valid: true } mob)
             {
                 if (!CanAnnounce(comp))
@@ -307,9 +266,7 @@ namespace Content.Server.Communications
                     return;
                 }
 
-                var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(uid, mob);
-                RaiseLocalEvent(tryGetIdentityShortInfoEvent);
-                author = tryGetIdentityShortInfoEvent.Title;
+                author = _identity.GetIdentityShortInfo(mob, uid) ?? author;
             }
 
             comp.AnnouncementCooldownRemaining = comp.Delay;
@@ -375,8 +332,8 @@ namespace Content.Server.Communications
                 return;
             }
 
-            _roundEndSystem.RequestRoundEnd(uid);
-            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(mob):player} has called the shuttle.");
+            _roundEndSystem.RequestRoundEnd(mob, uid);
+            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(mob):player} has called the shuttle.");
         }
 
         private void OnRecallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleRecallEmergencyShuttleMessage message)
@@ -384,13 +341,15 @@ namespace Content.Server.Communications
             if (!CanCallOrRecall(comp))
                 return;
 
-            if (!CanUse(message.Actor, uid))
+            var mob = message.Actor;
+
+            if (!CanUse(mob, uid))
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
                 return;
             }
 
-            _roundEndSystem.CancelRoundEndCountdown(uid);
+            _roundEndSystem.CancelRoundEndCountdown(mob, uid);
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
         }
     }

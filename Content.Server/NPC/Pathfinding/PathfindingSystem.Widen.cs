@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Robust.Shared.Random;
 
@@ -14,7 +8,7 @@ public sealed partial class PathfindingSystem
     /// <summary>
     /// Widens the path by the specified amount.
     /// </summary>
-    public HashSet<Vector2i> GetWiden(WidenArgs args, Random random)
+    public HashSet<Vector2i> GetWiden(WidenArgs args, IRobustRandom random)
     {
         var tiles = new HashSet<Vector2i>(args.Path.Count * 2);
         var variance = (args.MaxWiden - args.MinWiden) / 2f + args.MinWiden;

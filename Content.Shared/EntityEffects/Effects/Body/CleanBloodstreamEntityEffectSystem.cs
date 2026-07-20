@@ -13,13 +13,18 @@ namespace Content.Shared.EntityEffects.Effects.Body;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class CleanBloodstreamEntityEffectSystem : EntityEffectSystem<BloodstreamComponent, CleanBloodstream>
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     protected override void Effect(Entity<BloodstreamComponent> entity, ref EntityEffectEvent<CleanBloodstream> args)
     {
         var scale = args.Scale * args.Effect.CleanseRate;
 
-        _bloodstream.FlushChemicals((entity, entity), scale, args.Effect.Excluded);
+        // <Trauma>
+        if (args.Effect.Excluded is { } excluded)
+            _bloodstream.FlushChemicals((entity, entity), scale, excluded);
+        else
+            _bloodstream.FlushChemicals((entity, entity), scale);
+        // </Trauma>
     }
 }
 
@@ -36,7 +41,7 @@ public sealed partial class CleanBloodstream : EntityEffectBase<CleanBloodstream
     ///     An optional chemical to ignore when doing removal.
     /// </summary>
     [DataField]
-    public ProtoId<ReagentPrototype>? Excluded;
+    public ProtoId<ReagentPrototype>[]? Excluded; // Trauma - made into an array
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-clean-bloodstream", ("chance", Probability));

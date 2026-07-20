@@ -1,43 +1,39 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Blob;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), Access(typeof(SharedBlobbernautSystem))]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class BlobbernautComponent : Component
 {
-    [DataField("color"), AutoNetworkedField]
-    [Access(Other = AccessPermissions.ReadWrite)]
-    public Color Color = Color.White;
+    [DataField, AutoNetworkedField]
+    public ProtoId<BlobChemPrototype> CurrentChem = "ReactiveSpines";
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("damageFrequency")]
-    public float DamageFrequency = 5;
+    [DataField]
+    public TimeSpan DamageDelay = TimeSpan.FromSeconds(5);
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float NextDamage = 0;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
+    public TimeSpan NextDamage;
 
-    [ViewVariables(VVAccess.ReadOnly), DataField("damage")]
+    [DataField]
     public DamageSpecifier Damage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Piercing", 25 },
         }
     };
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    [Access(Other = AccessPermissions.ReadWrite)]
-    public EntityUid? Factory = default!;
+    [DataField]
+    public EntityUid? Factory;
+
+    /// <summary>
+    /// Scale used with the chemical's attack effects.
+    /// </summary>
+    [DataField]
+    public float AttackEffectsScale = 4f;
 }

@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mobs;
@@ -11,7 +7,7 @@ namespace Content.Goobstation.Server.TeleportOnStateChange;
 
 public sealed partial class TeleportOnStateChangeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
     public override void Initialize()
     {
         base.Initialize();

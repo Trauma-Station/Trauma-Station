@@ -1,14 +1,9 @@
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Clothing;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Popups;
-using Content.Shared._Goobstation.Clothing;
+using Content.Trauma.Shared.Clothing;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -28,11 +23,11 @@ namespace Content.Goobstation.Server.Clothing.Systems;
 /// </summary>
 public sealed partial class ClothingAutoinjectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -100,7 +95,7 @@ public sealed partial class ClothingAutoinjectorSystem : EntitySystem
     private void OnUnequipped(EntityUid uid, ClothingAutoInjectComponent component, ref GotUnequippedEvent args)
     {
         if (component.AutoInjectOnAbility)
-            _actions.RemoveProvidedActions(args.Equipee, uid);
+            _actions.RemoveProvidedActions(args.EquipTarget, uid);
     }
 
     private void OnExamined(EntityUid uid, ClothingAutoInjectComponent component, ref ExaminedEvent args)

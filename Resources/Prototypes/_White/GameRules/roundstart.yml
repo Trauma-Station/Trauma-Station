@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseXenomorphsRule
+  components:
+  - type: AntagObjectives
+    objectives:
+    - XenomorphSurviveObjective
+  - type: XenomorphsRule
+    minTimeToAnnouncement: 900
+    maxTimeToAnnouncement: 900
+    xenomorphInfestationSound:
+      collection: XenoStart
+  - type: MaintsSpawnRule
+  - type: AntagSpawner
+    prototype: MobXenomorphLarva
+  - type: AntagSelection
+    agentName: xenomorph-round-end-agent-name
+
+- type: entity
+  parent: [ BaseXenomorphsRule, BaseRoundstartAntagRule ]
+  id: XenomorphsInfestationRoundstart
+  components:
+  - type: GameRule
+    minPlayers: 40
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Xenomorph
+      count: 4

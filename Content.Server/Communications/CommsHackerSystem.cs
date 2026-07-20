@@ -1,38 +1,27 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Server.Power.EntitySystems;
+// </Trauma>
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Ninja.Systems;
-using Content.Server.Power.EntitySystems; // goobstation - check power
 using Content.Shared.Communications;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Communications;
 
-public sealed class CommsHackerSystem : SharedCommsHackerSystem
+public sealed partial class CommsHackerSystem : SharedCommsHackerSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IRobustRandom _random = default!;
     // TODO: remove when generic check event is used
-    [Dependency] private readonly NinjaGlovesSystem _gloves = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!; // Goobstation check power
+    [Dependency] private NinjaGlovesSystem _gloves = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private PowerReceiverSystem _power = default!; // Goobstation check power
     public override void Initialize()
     {
         base.Initialize();
@@ -48,7 +37,7 @@ public sealed class CommsHackerSystem : SharedCommsHackerSystem
     {
         if (args.Handled || !HasComp<CommunicationsConsoleComponent>(args.Target))
             return;
-        if (!_powerReceiverSystem.IsPowered(args.Target)) // Goobstation - is powererd
+        if (!_power.IsPowered(args.Target)) // Goobstation - is powererd
             return;
         // TODO: generic check event
         if (!_gloves.AbilityCheck(uid, args, out var target))
@@ -72,12 +61,12 @@ public sealed class CommsHackerSystem : SharedCommsHackerSystem
     /// </summary>
     private void OnDoAfter(EntityUid uid, CommsHackerComponent comp, TerrorDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target == null || !_powerReceiverSystem.IsPowered(args.Target.Value)) // Goobsstation - is powered
+        if (args.Cancelled || args.Handled || args.Target == null || !_power.IsPowered(args.Target.Value)) // Goobstation - is powered
             return;
 
-        var threats = _proto.Index<WeightedRandomPrototype>(comp.Threats);
+        var threats = ProtoMan.Index<WeightedRandomPrototype>(comp.Threats);
         var threat = threats.Pick(_random);
-        CallInThreat(_proto.Index<NinjaHackingThreatPrototype>(threat));
+        CallInThreat(ProtoMan.Index<NinjaHackingThreatPrototype>(threat));
 
         // prevent calling in multiple threats
         RemComp<CommsHackerComponent>(uid);

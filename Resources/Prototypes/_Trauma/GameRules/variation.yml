@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BasicDecalGraffitiVariationPass
+  id: RevolutionaryDecalGraffitiVariationPass
+  components:
+  - type: EntitySpawnVariationPass
+    tilesPerEntityAverage: 40 # 3x as common

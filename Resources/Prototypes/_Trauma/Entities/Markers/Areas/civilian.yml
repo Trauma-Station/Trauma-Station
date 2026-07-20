@@ -1,0 +1,102 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaCivilian
+  name: civilian
+  components:
+  - type: DepartmentArea
+    department: Civilian
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaLibrary
+  name: library
+  components:
+  - type: Sprite
+    state: library
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaCourtRoom
+  name: court room
+  components:
+  - type: Sprite
+    state: courtroom
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaLawOffice
+  name: law office
+  components:
+  - type: Sprite
+    state: law_office
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaTheatre
+  name: theatre
+  components:
+  - type: Sprite
+    state: theatre
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaJanitor
+  name: janitor
+  components:
+  - type: Sprite
+    state: janitor
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaChapel
+  name: chapel
+  components:
+  - type: Sprite
+    state: chapel
+  - type: HolyArea
+
+- type: entity
+  parent: AreaChapel
+  id: AreaChapelOffice
+  name: chapel office
+  components:
+  - type: Sprite
+    state: chapel_office
+  - type: HolyArea
+
+- type: entity
+  parent: AreaChapel
+  id: AreaChapelCremate
+  name: crematorium
+  components:
+  - type: Sprite
+    state: cremate
+  - type: HolyArea
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaDojo
+  name: dojo
+  components:
+  - type: Sprite
+    state: dojo
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaToolStorage
+  name: tool storage
+  description: Birthplace of the assistants.
+  components:
+  - type: Sprite
+    state: tool_storage
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaNewsroom
+  name: news room
+  components:
+  - type: Sprite
+    state: newsroom

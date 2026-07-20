@@ -1,4 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: guideEntry
   id: Xenobiology
-  name: "Xenobiology"
+  name: guide-entry-xenobiology
   text: "/ServerInfo/_Goobstation/Guidebook/Science/Xenobiology.xml"

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Solutions;
@@ -8,19 +5,16 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Weapons.Melee;
-using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.Chemistry;
 
-public sealed class SpillableMeleePuddleSystem : EntitySystem
+public sealed partial class SpillableMeleePuddleSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapMan = default!;
-
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
 
     public override void Initialize()
     {
@@ -58,7 +52,7 @@ public sealed class SpillableMeleePuddleSystem : EntitySystem
 
         var splitSolution = _solution.SplitSolution(soln.Value, args.Amount);
 
-        if (!_mapMan.TryFindGridAt(coords, out var gridUid, out var mapGrid))
+        if (!_map.TryFindGridAt(coords, out var gridUid, out var mapGrid))
             return;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);

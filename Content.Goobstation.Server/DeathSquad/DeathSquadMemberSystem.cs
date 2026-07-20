@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Examine;
@@ -16,7 +13,7 @@ namespace Content.Goobstation.Server.DeathSquad;
 /// </summary>
 public sealed partial class DeathSquadMemberSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
     public override void Initialize()
     {
         base.Initialize();

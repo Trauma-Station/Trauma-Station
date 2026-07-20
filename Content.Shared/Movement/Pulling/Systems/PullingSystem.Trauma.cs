@@ -1,11 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Numerics;
 using Content.Goobstation.Common.Hands;
-using Content.Goobstation.Common.MartialArts;
-using Content.Shared._EinsteinEngines.Contests;
-using Content.Shared._White.Grab;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs;
-using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -18,18 +17,20 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Contests;
+using Content.Trauma.Common.Grab;
+using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Common.Weapons;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
-using System.Numerics;
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -38,14 +39,14 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// </summary>
 public sealed partial class PullingSystem
 {
-    [Dependency] private readonly ContestsSystem _contests = default!;
-    [Dependency] private readonly GrabThrownSystem _grabThrown = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private CommonGrabThrownSystem _grabThrown = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     public const float NudgeImpulse = 2f;
 
@@ -73,21 +74,22 @@ public sealed partial class PullingSystem
         TryStopPull(args.BlockingEntity, comp, uid, true);
 
         if (!_combatMode.IsInCombatMode(uid)
-            || HasComp<GrabThrownComponent>(args.BlockingEntity)
+            || _grabThrown.IsGrabThrown(args.BlockingEntity)
             || stage <= GrabStage.Soft)
             return;
 
         var distanceToCursor = args.Direction.Length();
         var direction = args.Direction.Normalized() * MathF.Min(distanceToCursor, component.ThrowingDistance);
 
-        var damage = new DamageSpecifier();
-        damage.DamageDict.Add("Blunt", 5);
-
+        // <Trauma>
+        var damageToUid = new DamageSpecifier();
+        damageToUid.DamageDict.Add("Blunt", 5);
+        // </Trauma>
         _grabThrown.Throw(args.BlockingEntity,
             uid,
             direction,
             component.GrabThrownSpeed,
-            damage * component.GrabThrowDamageModifier); // Throwing the grabbed person
+            damageToUid * component.GrabThrowDamageModifier); // Throwing the grabbed person
         _throwing.TryThrow(uid, -direction * throwerPhysics.InvMass); // Throws back the grabber
         _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), uid, uid);
         component.NextStageChange = _timing.CurTime.Add(TimeSpan.FromSeconds(3f)); // To avoid grab and throw spamming
@@ -113,9 +115,7 @@ public sealed partial class PullingSystem
             || !TryComp(args.User, out PullableComponent? pullable))
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
-        if (rand.Prob(pullable.GrabEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, pullable.GrabEscapeChance, GetNetEntity(ent)))
             TryLowerGrabStage((args.User, pullable), (ent.Owner, ent.Comp), true);
     }
 
@@ -129,20 +129,20 @@ public sealed partial class PullingSystem
         switch (releaseAttempt)
         {
             case GrabResistResult.Failed:
-                _popup.PopupEntity(Loc.GetString("popup-grab-release-fail-self"),
+                _popup.PopupClient(Loc.GetString("popup-grab-release-fail-self"),
                                 pullableUid,
                                 pullableUid,
                                 PopupType.SmallCaution);
                 return false;
             case GrabResistResult.TooSoon:
-                _popup.PopupEntity(Loc.GetString("popup-grab-release-too-soon"),
+                _popup.PopupClient(Loc.GetString("popup-grab-release-too-soon"),
                                 pullableUid,
                                 pullableUid,
                                 PopupType.SmallCaution);
                 return false;
         }
 
-        _popup.PopupEntity(Loc.GetString("popup-grab-release-success-self"),
+        _popup.PopupClient(Loc.GetString("popup-grab-release-success-self"),
             pullableUid,
             pullableUid,
             PopupType.SmallCaution);
@@ -182,6 +182,7 @@ public sealed partial class PullingSystem
     {
         if (!Resolve(pullable.Owner, ref pullable.Comp)
             || !Resolve(puller.Owner, ref puller.Comp)
+            || !pullable.Comp.CanBeGrabbed
             || HasComp<PacifiedComponent>(puller)
             || !HasComp<MobStateComponent>(pullable)
             || pullable.Comp.Puller != puller
@@ -206,8 +207,8 @@ public sealed partial class PullingSystem
         meleeWeapon.NextAttack = now + puller.Comp.StageChangeCooldown / attackRateEv.Multipliers;
         DirtyField(puller, meleeWeapon, nameof(MeleeWeaponComponent.NextAttack));
 
-        var beforeEvent = new BeforeHarmfulActionEvent(puller, HarmfulActionType.Grab);
-        RaiseLocalEvent(pullable, beforeEvent);
+        var beforeEvent = new BeforeHarmfulActionEvent(puller, pullable, HarmfulActionType.Grab);
+        RaiseLocalEvent(pullable, ref beforeEvent);
         if (beforeEvent.Cancelled)
             return false;
 
@@ -217,7 +218,7 @@ public sealed partial class PullingSystem
             _stamina.TakeStaminaDamage(pullable, puller.Comp.SuffocateGrabStaminaDamage);
 
             var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
-            RaiseLocalEvent(puller.Owner, comboEv);
+            RaiseLocalEvent(puller.Owner, ref comboEv);
             _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
             return true;
@@ -232,15 +233,19 @@ public sealed partial class PullingSystem
             _ => throw new ArgumentOutOfRangeException(),
         };
 
-        var newStage = puller.Comp.GrabStage + nextStageAddition;
+        var newStage = (GrabStage) ((int) puller.Comp.GrabStage + nextStageAddition);
 
-        if (HasComp<MartialArtsKnowledgeComponent>(puller) // i really hate this solution holy fuck
-            && TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
+        if (TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
             && layingDown.Active)
         {
             var ev = new CheckGrabOverridesEvent(newStage);
             RaiseLocalEvent(puller, ref ev);
             newStage = ev.Stage;
+        }
+        // allow entities to override starting grab stage
+        else if (newStage == GrabStage.Soft && puller.Comp.StartingGrabStage != GrabStage.Soft)
+        {
+            newStage = puller.Comp.StartingGrabStage;
         }
 
         if (grabStageOverride != null)
@@ -313,19 +318,18 @@ public sealed partial class PullingSystem
         _blocker.UpdateCanMove(pullable);
         _modifierSystem.RefreshMovementSpeedModifiers(puller);
 
-        _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-target",
-                ("puller", Identity.Entity(puller, EntityManager))),
+        var stageKey = puller.Comp.GrabStage.ToString().ToLower();
+        var pullerName = Identity.Entity(puller, EntityManager);
+        var pulledName = Identity.Entity(pullable, EntityManager);
+        _popup.PopupEntity(Loc.GetString($"popup-grab-{stageKey}-target", ("puller", pullerName)),
             pullable,
             pullable,
             popupType);
-        _popup.PopupClient(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-self",
-                ("target", Identity.Entity(pullable, EntityManager))),
+        _popup.PopupClient(Loc.GetString($"popup-grab-{stageKey}-self", ("target", pulledName)),
             pullable,
             puller,
             PopupType.Medium);
-        _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-others",
-                ("target", Identity.Entity(pullable, EntityManager)),
-                ("puller", Identity.Entity(puller, EntityManager))),
+        _popup.PopupEntity(Loc.GetString($"popup-grab-{stageKey}-others", ("target", pulledName), ("puller", pullerName)),
             pullable,
             filter,
             true,
@@ -333,12 +337,15 @@ public sealed partial class PullingSystem
         _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
         var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
-        RaiseLocalEvent(puller.Owner, comboEv);
+        RaiseLocalEvent(puller.Owner, ref comboEv);
         return true;
     }
 
     private bool TryUpdateGrabVirtualItems(Entity<PullerComponent> puller, Entity<PullableComponent> pullable)
     {
+        if (!ShouldSpawnVirtualItems(puller, pullable))
+            return true;
+
         // Updating virtual items
         var virtualItemsCount = puller.Comp.GrabVirtualItems.Count;
 
@@ -405,9 +412,7 @@ public sealed partial class PullingSystem
             _timing.CurTime < pullable.Comp.NextEscapeAttempt)
             return GrabResistResult.TooSoon;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(pullable).Id);
-        var rand = new System.Random(seed);
-        if (rand.Prob(pullable.Comp.GrabEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, pullable.Comp.GrabEscapeChance, GetNetEntity(pullable)))
             return GrabResistResult.Succeeded;
 
         pullable.Comp.NextEscapeAttempt = _timing.CurTime.Add(TimeSpan.FromSeconds(pullable.Comp.EscapeAttemptCooldown));
@@ -471,5 +476,12 @@ public sealed partial class PullingSystem
         var newStage = puller.Comp.GrabStage - 1;
         TrySetGrabStages((puller.Owner, puller.Comp), (pullable.Owner, pullable.Comp), newStage);
         return true;
+    }
+
+    private bool ShouldSpawnVirtualItems(EntityUid uid, EntityUid pulled)
+    {
+        var ev = new BeforeSpawnPullingVirtualItemsEvent(uid, pulled);
+        RaiseLocalEvent(uid, ref ev);
+        return !ev.Cancelled;
     }
 }

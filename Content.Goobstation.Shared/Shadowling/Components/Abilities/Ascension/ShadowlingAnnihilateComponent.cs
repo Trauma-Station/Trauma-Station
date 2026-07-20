@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chat.Prototypes;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Shadowling.Components.Abilities.Ascension;
 

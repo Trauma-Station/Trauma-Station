@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Blob.NPC.BlobPod;
@@ -18,16 +10,16 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed partial class BlobPodZombifyOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    private BlobPodSystem _blobPodSystem = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    private BlobPodSystem _blobPod = default!;
 
-    [DataField("zombifyKey")]
+    [DataField(required: true)]
     public string ZombifyKey = string.Empty;
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
-        _blobPodSystem = sysManager.GetEntitySystem<BlobPodSystem>();
+        _blobPod = sysManager.GetEntitySystem<BlobPodSystem>();
     }
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
@@ -49,10 +41,9 @@ public sealed partial class BlobPodZombifyOperator : HTNOperator
 
         if (pod.ZombifyTarget == null)
         {
-            if (_blobPodSystem.NpcStartZombify(owner, target, pod))
-                return HTNOperatorStatus.Continuing;
-            else
-                return HTNOperatorStatus.Failed;
+            return _blobPod.NpcStartZombify((owner, pod), target)
+                ? HTNOperatorStatus.Continuing
+                : HTNOperatorStatus.Failed;
         }
 
         pod.ZombifyTarget = null;

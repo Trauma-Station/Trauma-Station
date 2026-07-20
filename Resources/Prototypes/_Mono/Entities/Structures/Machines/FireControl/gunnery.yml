@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Monolith : Gunnery Server
 - type: entity
   id: GunneryServerBase
@@ -127,8 +129,8 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: ApcPowerReceiver
-    powerLoad: 200
+  - type: PowerState
+    workingPowerDraw: 200
   - type: ExtensionCableReceiver
   - type: ActivatableUIRequiresPower
   - type: Sprite
@@ -155,9 +157,7 @@
         enum.WiresUiKey.Key:
           type: WiresBoundUserInterface
   - type: RadarConsole
-    maxRange: 768 # Mono
-  - type: WorldLoader
-    radius: 384 # Mono
+    maxRange: 768
   - type: Computer
     board: GunneryControlComputerCircuitboard
   - type: PointLight

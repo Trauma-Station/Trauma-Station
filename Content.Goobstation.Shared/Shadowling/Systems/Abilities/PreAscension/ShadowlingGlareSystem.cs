@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
@@ -17,16 +13,18 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
 /// <summary>
 /// This handles the Glare ability
 /// </summary>
-public sealed class ShadowlingGlareSystem : EntitySystem
+public sealed partial class ShadowlingGlareSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedShadowlingSystem _shadowling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StatusEffectsSystem _effects = default!;
-    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _effectsNew = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedShadowlingSystem _shadowling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StatusEffectsSystem _statusOld = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _status = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+
+    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
 
     public override void Initialize()
     {
@@ -101,8 +99,8 @@ public sealed class ShadowlingGlareSystem : EntitySystem
         }
 
         // Glare mutes and slows down the target no matter what.
-        _effects.TryAddStatusEffect<MutedComponent>(target, "Muted", comp.MuteTime, true);
-        _effectsNew.TryUpdateStatusEffectDuration(target, comp.SlowdownStatusEffect, comp.SlowTime);
+        _statusOld.TryAddStatusEffect<MutedComponent>(target, Muted, comp.MuteTime, true);
+        _status.TryUpdateStatusEffectDuration(target, comp.SlowdownStatusEffect, comp.SlowTime);
 
         var effectEnt = PredictedSpawnAtPosition(comp.EffectGlare, Transform(uid).Coordinates);
         _transform.SetParent(effectEnt, uid);

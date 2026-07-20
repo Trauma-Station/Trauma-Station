@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using System.Numerics;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Weapons.Ranged.Events;
+
+using Content.Medical.Common.Targeting;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -18,10 +17,10 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Executions;
@@ -32,30 +31,27 @@ namespace Content.Trauma.Shared.Executions;
 /// This is basically copy of gun code except using <c>AmmoImpactEvent</c> instead of <c>CreateAndFireProjectiles</c>.
 /// <see cref="BeingExecutedComponent"/> allows damage to the target to get multiplied while the execution is being processed.
 /// </summary>
-public sealed class GunExecutionSystem : EntitySystem
+public sealed partial class GunExecutionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly PredictedProjectileSystem _projectile = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedExecutionSystem _execution = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
-
-    private EntityQuery<ProjectileComponent> _projectileQuery;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private PredictedProjectileSystem _projectile = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedExecutionSystem _execution = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrownItemSystem _thrownItem = default!;
+    [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         /* Interaction */
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
@@ -141,6 +137,8 @@ public sealed class GunExecutionSystem : EntitySystem
 
         var coords = Transform(args.Shooter).Coordinates;
         var projectile = PredictedSpawnAtPosition(ent.Comp.Prototype, coords);
+        var firedEv = new CartridgeFiredEvent(projectile);
+        RaiseLocalEvent(ent, ref firedEv);
         // now have the actual projectile impact the target
         // for most bullets this just does hit, shotguns will do it for each pellet
         DoImpact(args.Weapon, projectile, args.Shooter, args.Target);
@@ -267,7 +265,7 @@ public sealed class GunExecutionSystem : EntitySystem
         if (attemptEv.Cancelled)
         {
             if (attemptEv.Message is {} msg)
-                _popup.PopupClient(msg, weapon, attacker);
+                _popup.PopupEntity(msg, weapon, attacker);
             return false;
         }
 
@@ -391,8 +389,6 @@ public sealed class GunExecutionSystem : EntitySystem
     {
         var ev = new GunShotEvent(attacker, ammo);
         RaiseLocalEvent(gun, ref ev);
-        var userEv = new GunShotBodyEvent(gun, gun.Comp);
-        RaiseLocalEvent(attacker, userEv);
 
         _audio.PlayPredicted(gun.Comp.SoundGunshot, gun, attacker);
         var direction = GetDirection(target: victim, shooter: attacker);

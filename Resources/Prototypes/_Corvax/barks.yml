@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # alto
 - type: soundCollection
   id: AltoBark
@@ -125,21 +127,6 @@
     collection: VoxBark
   speciesWhitelist:
     - Vox
-
-# harpy
-- type: soundCollection
-  id: HarpyBark
-  files:
-  - /Audio/_DV/Voice/Harpy/chirp1.ogg
-
-- type: bark
-  id: Harpy
-  name: Harpy
-  volume: 1
-  soundCollection:
-    collection: HarpyBark
-  speciesWhitelist:
-    - Harpy
 
 # Squeak
 - type: soundCollection

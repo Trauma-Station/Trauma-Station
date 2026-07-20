@@ -1,25 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <scarky0@onet.eu>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.GameStates;
 using Robust.Shared.Audio;
 
@@ -31,6 +9,9 @@ namespace Content.Shared.Electrocution;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ElectrifiedComponent : Component
 {
+    /// <summary>
+    /// Check if it is actually electrified at the moment.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
 
@@ -63,6 +44,12 @@ public sealed partial class ElectrifiedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool OnInteractUsing = true;
+
+    /// <summary>
+    /// Whether the entity should electrocute on activation in world.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool OnActivateInWorld = false;
 
     /// <summary>
     /// Indicates if the entity requires power to function
@@ -118,6 +105,9 @@ public sealed partial class ElectrifiedComponent : Component
     [DataField, AutoNetworkedField]
     public float MediumVoltageTimeMultiplier = 1.5f;
 
+    /// <summary>
+    /// Base damage to be inflected upon electrocution.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float ShockDamage = 7.5f;
 
@@ -127,27 +117,51 @@ public sealed partial class ElectrifiedComponent : Component
     [DataField, AutoNetworkedField]
     public float ShockTime = 5f;
 
+    /// <summary>
+    /// Base conductivity, is combined coefficient of electrocution targets to check if electrocution attempts works.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float SiemensCoefficient = 1f;
 
+    /// <summary>
+    /// Noise to play when shocking.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier ShockNoises = new SoundCollectionSpecifier("sparks");
 
+    /// <summary>
+    /// Sound to play when disabled.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public SoundPathSpecifier AirlockElectrifyDisabled = new("/Audio/Machines/airlock_electrify_off.ogg");
 
+    /// <summary>
+    /// Sound to play when enabled.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public SoundPathSpecifier AirlockElectrifyEnabled = new("/Audio/Machines/airlock_electrify_on.ogg");
 
+    /// <summary>
+    /// If sound should be played upon shocking something or someone.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool PlaySoundOnShock = true;
 
+    /// <summary>
+    /// Volume of shock sound.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float ShockVolume = 20;
 
+    /// <summary>
+    /// The chance if it would shock someone.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float Probability = 1f;
 
+    /// <summary>
+    /// If the power wire of this component is cut, aka no longer electrified.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsWireCut = false;
 

@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
+  parent: [ BaseMob, MobCombat, MobNightVision ]
   id: MobPlagueRatSmall
-  suffix: Wraith
-  parent: [ BaseMob, MobCombat ]
   name: plague rat
+  suffix: Wraith
   description: A diseased looking rat.
   components:
   - type: MindContainer
@@ -81,15 +83,14 @@
       types:
         Slash: 3
         Blunt: 2
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
-          Quantity: 100
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
+        Quantity: 100
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 0.25
+    transferAmount: 0.10
   - type: InputMover
   - type: MobMover
   - type: HTN
@@ -99,12 +100,13 @@
     baseWalkSpeed: 3
     baseSprintSpeed: 6
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona # Weak to heat
+  - type: Injurable
+    damageContainer: Biological
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead
+      25: Dead
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
@@ -121,10 +123,6 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#00FF00"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   id: MobPlagueRatMedium
@@ -155,7 +153,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      80: Dead
+      45: Dead
 
 - type: entity
   id: MobPlagueRatLarge
@@ -198,7 +196,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      70: Dead
 
 - type: entity
   id: MobMadRat
@@ -243,15 +241,15 @@
       types:
         Slash: 3
         Blunt: 2
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
-          Quantity: 100
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
+        Quantity: 100
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 0.25
+    transferAmount: 0.1
   - type: InputMover
   - type: MobMover
   - type: HTN
@@ -261,13 +259,14 @@
     baseWalkSpeed: 3
     baseSprintSpeed: 6
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona # Weak to heat
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 30
+          damage: 25
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]

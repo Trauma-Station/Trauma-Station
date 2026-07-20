@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Thrall;
 using Content.Shared.Actions;
@@ -12,11 +14,11 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Thrall;
 /// Guise makes you become invisible only in the dark.
 /// That doesn't mean it doesn't work on light, however.
 /// </summary>
-public sealed class ThrallGuiseSystem : EntitySystem
+public sealed partial class ThrallGuiseSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

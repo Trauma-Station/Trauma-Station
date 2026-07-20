@@ -41,6 +41,7 @@
     ClothingUniformJumpsuitDameDane: 2
     ClothingShoesDameDane: 2
     ClothingOuterDameDane: 2
+    ClothingHeadHatMitreClown: 1
     ClothingOuterClownPriest: 1
     ClothingMaskSadMime: 1
     ClothingMaskScaredMime: 1
@@ -56,7 +57,14 @@
     ClothingShoesBootsCowboyBrown: 1
     ClothingShoesBootsCowboyBlack: 1
     ClothingShoesBootsCowboyWhite: 1
-    # <Goob>
+    ClothingHeadHatWizardFake: 1
+    ClothingOuterWizardFake: 1
+    # <Trauma>
+    ClothingHeadHelmetRoman: 2
+    ClothingHeadHelmetRomanCenturion: 2
+    ClothingUniformJumpsuitRoman: 3
+    ClothingShoesBootsRoman: 3
+    ClothingHeadHatLaurelWreath: 2
     ClothingCostumeAbductorHead: 1
     ClothingCostumeAbductor: 1
     ClothingHeadSanabi: 1
@@ -65,7 +73,7 @@
     ClothingOuterSuitHotDog: 1
     ClothingOuterSuitPickle: 1
     ClothingHeadHatTinfoilHat: 2
-    # </Goob>
+    # </Trauma>
   contrabandInventory:
     ClothingHeadHatRichard: 1
     ClothingShoesBling: 1
@@ -90,4 +98,6 @@
   emaggedInventory:
     ClothingOuterPonchoClassicRobust: 1
     ClothingHeadHatCowboyBrownRobust: 1
+    MobJonkBot: 1
+    MobClownGoblin: 1
     # </Trauma>

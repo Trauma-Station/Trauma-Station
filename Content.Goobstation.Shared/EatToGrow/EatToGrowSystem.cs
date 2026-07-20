@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.Nutrition;
 using Content.Shared.Mobs;
 using Content.Shared.Nutrition;
@@ -5,14 +7,13 @@ using Content.Shared.Sprite;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Systems;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.EatToGrow;
 
-public sealed class EatToGrowSystem : EntitySystem
+public sealed partial class EatToGrowSystem : EntitySystem
 {
-    [Dependency] private readonly SharedScaleVisualsSystem _scale = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedScaleVisualsSystem _scale = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

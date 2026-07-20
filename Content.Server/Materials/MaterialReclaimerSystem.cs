@@ -1,101 +1,41 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <65184747+Dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <JIPDawg93@gmail.com>
-// SPDX-FileCopyrightText: 2024 LucasTheDrgn <kirbyfan.95@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 PursuitInAshes <pursuitinashes@gmail.com>
-// SPDX-FileCopyrightText: 2024 QueerNB <176353696+QueerNB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-// SPDX-FileCopyrightText: 2024 Scribbles0 <91828755+Scribbles0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 stellar-novas <stellar_novas@riseup.net>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Logs;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
 using Content.Server.Popups;
 using Content.Server.Stack;
-using Content.Server.Wires;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Emag.Components;
+using Content.Shared.Gibbing;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Materials;
 using Content.Shared.Mind;
-using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Power;
 using Content.Shared.Repairable;
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Linq;
-using Content.Shared.Gibbing;
-using Content.Shared.Humanoid;
 
 namespace Content.Server.Materials;
 
 /// <inheritdoc/>
-public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
+public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -103,8 +43,6 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
         base.Initialize();
 
         SubscribeLocalEvent<MaterialReclaimerComponent, PowerChangedEvent>(OnPowerChanged);
-        SubscribeLocalEvent<MaterialReclaimerComponent, InteractUsingEvent>(OnInteractUsing,
-            before: [typeof(WiresSystem), typeof(SolutionTransferSystem)]);
         SubscribeLocalEvent<MaterialReclaimerComponent, SuicideByEnvironmentEvent>(OnSuicideByEnvironment);
         SubscribeLocalEvent<ActiveMaterialReclaimerComponent, PowerChangedEvent>(OnActivePowerChanged);
 
@@ -117,29 +55,6 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
         AmbientSound.SetAmbience(entity.Owner, entity.Comp.Enabled && args.Powered);
         entity.Comp.Powered = args.Powered;
         Dirty(entity);
-    }
-
-    private void OnInteractUsing(Entity<MaterialReclaimerComponent> entity, ref InteractUsingEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        // if we're trying to get a solution out of the reclaimer, don't destroy it
-        if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution) && outputSolution.Contents.Any())
-        {
-            if (TryComp<SolutionContainerManagerComponent>(args.Used, out var managerComponent) &&
-                _solutionContainer.EnumerateSolutions((args.Used, managerComponent)).Any(s => s.Solution.Comp.Solution.AvailableVolume > 0))
-            {
-                if (_openable.IsClosed(args.Used))
-                    return;
-
-                if (TryComp<SolutionTransferComponent>(args.Used, out var transfer) &&
-                    transfer.CanReceive)
-                    return;
-            }
-        }
-
-        args.Handled = TryStartProcessItem(entity.Owner, args.Used, entity.Comp, args.User);
     }
 
     private void OnSuicideByEnvironment(Entity<MaterialReclaimerComponent> entity, ref SuicideByEnvironmentEvent args)
@@ -241,7 +156,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 
         if (CanGib(uid, item, component))
         {
-            var logImpact = HasComp<HumanoidAppearanceComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
+            var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
             _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
             if (component.ReclaimSolutions)
                 SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
@@ -302,7 +217,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
         TransformComponent? xform = null,
         PhysicalCompositionComponent? composition = null)
     {
-        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform))
+        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform) || reclaimerComponent.SolutionContainerId == null)
             return;
 
         efficiency *= reclaimerComponent.Efficiency;
@@ -325,7 +240,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             // Are we a recycler? Only use drainable solution.
             if (_solutionContainer.TryGetDrainableSolution(item, out _, out var drainableSolution))
             {
-                totalChemicals.AddSolution(drainableSolution, _prototype);
+                totalChemicals.AddSolution(drainableSolution, ProtoMan);
             }
         }
         else
@@ -333,7 +248,7 @@ public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
             // Are we an industrial reagent grinder? Use extractable solution.
             if (_solutionContainer.TryGetExtractableSolution(item, out _, out var extractableSolution))
             {
-                totalChemicals.AddSolution(extractableSolution, _prototype);
+                totalChemicals.AddSolution(extractableSolution, ProtoMan);
             }
         }
 

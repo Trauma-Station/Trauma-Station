@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Threading;
@@ -20,19 +12,17 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed class BlobObserverMover : Job<object>
 {
-    public BlobObserverMover(EntityManager entityManager, ActionBlockerSystem blockerSystem, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, CancellationToken cancellation = default) : base(maxTime, cancellation)
+    public BlobObserverMover(EntityManager entityManager, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, CancellationToken cancellation = default) : base(maxTime, cancellation)
     {
         _observerSystem = observerSystem;
         _transform = transform;
-        //_blocker = blockerSystem;
         _entityManager = entityManager;
     }
 
-    public BlobObserverMover(EntityManager entityManager, ActionBlockerSystem blockerSystem, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, IStopwatch stopwatch, CancellationToken cancellation = default) : base(maxTime, stopwatch, cancellation)
+    public BlobObserverMover(EntityManager entityManager, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, IStopwatch stopwatch, CancellationToken cancellation = default) : base(maxTime, stopwatch, cancellation)
     {
         _observerSystem = observerSystem;
         _transform = transform;
-        //_blocker = blockerSystem;
         _entityManager = entityManager;
     }
     public EntityCoordinates NewPosition;
@@ -75,9 +65,6 @@ public sealed class BlobObserverMover : Job<object>
 
             if (nearestDistance > 3f)
             {
-                /*Observer.Comp.CanMove = false;
-                _blocker.UpdateCanMove(Observer);*/
-
                 var nearestEntityPos = _transform.GetMapCoordinates(nearestEntityUid.Value);
 
                 var direction = (nearestEntityPos.Position - newPos.Position);
@@ -86,12 +73,6 @@ public sealed class BlobObserverMover : Job<object>
                 _transform.SetMapCoordinates(Observer, newPosition);
                 return default;
             }
-
-            /*if (!Observer.Comp.CanMove)
-            {
-                Observer.Comp.CanMove = true;
-                _blocker.UpdateCanMove(Observer);
-            }*/
 
             return default;
         }

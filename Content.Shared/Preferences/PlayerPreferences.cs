@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2019 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 Leo <lzimann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Construction.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -26,11 +13,11 @@ namespace Content.Shared.Preferences
     [NetSerializable]
     public sealed class PlayerPreferences
     {
-        private Dictionary<int, ICharacterProfile> _characters;
+        private Dictionary<int, HumanoidCharacterProfile> _characters;
 
-        public PlayerPreferences(IEnumerable<KeyValuePair<int, ICharacterProfile>> characters, int selectedCharacterIndex, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites)
+        public PlayerPreferences(IEnumerable<KeyValuePair<int, HumanoidCharacterProfile>> characters, int selectedCharacterIndex, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites)
         {
-            _characters = new Dictionary<int, ICharacterProfile>(characters);
+            _characters = new Dictionary<int, HumanoidCharacterProfile>(characters);
             SelectedCharacterIndex = selectedCharacterIndex;
             AdminOOCColor = adminOOCColor;
             ConstructionFavorites = constructionFavorites;
@@ -39,9 +26,9 @@ namespace Content.Shared.Preferences
         /// <summary>
         ///     All player characters.
         /// </summary>
-        public IReadOnlyDictionary<int, ICharacterProfile> Characters => _characters;
+        public IReadOnlyDictionary<int, HumanoidCharacterProfile> Characters => _characters;
 
-        public ICharacterProfile GetProfile(int index)
+        public HumanoidCharacterProfile GetProfile(int index)
         {
             return _characters[index];
         }
@@ -54,7 +41,7 @@ namespace Content.Shared.Preferences
         /// <summary>
         ///     The currently selected character.
         /// </summary>
-        public ICharacterProfile SelectedCharacter => Characters[SelectedCharacterIndex];
+        public HumanoidCharacterProfile SelectedCharacter => Characters[SelectedCharacterIndex];
 
         public Color AdminOOCColor { get; set; }
 
@@ -63,12 +50,12 @@ namespace Content.Shared.Preferences
         /// </summary>
         public List<ProtoId<ConstructionPrototype>> ConstructionFavorites { get; set; } = [];
 
-        public int IndexOfCharacter(ICharacterProfile profile)
+        public int IndexOfCharacter(HumanoidCharacterProfile profile)
         {
             return _characters.FirstOrNull(p => p.Value == profile)?.Key ?? -1;
         }
 
-        public bool TryIndexOfCharacter(ICharacterProfile profile, out int index)
+        public bool TryIndexOfCharacter(HumanoidCharacterProfile profile, out int index)
         {
             return (index = IndexOfCharacter(profile)) != -1;
         }

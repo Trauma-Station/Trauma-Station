@@ -1,5 +1,5 @@
-markings-category-HairSpecial = Hair (Special)
-markings-category-FacialHairSpecial = Facial Hair (Special)
+markings-layer-HairSpecial = Hair (Special)
+markings-layer-FacialHairSpecial = Facial Hair (Special)
 
 marking-HairGradientRGB2Col = Simple Gradient (2 colors)
 marking-HairGradientRGB3Col = Simple Gradient (3 colors)

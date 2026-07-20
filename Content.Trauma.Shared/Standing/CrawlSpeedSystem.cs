@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Standing;
 
 /// <summary>
 /// Makes crawling speed depend on held items sizes.
 /// </summary>
-public sealed class CrawlSpeedSystem : EntitySystem
+public sealed partial class CrawlSpeedSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
 
     /// <summary>
     /// How many hands you need for 100% base crawling speed.
@@ -31,13 +31,9 @@ public sealed class CrawlSpeedSystem : EntitySystem
     /// </summary>
     public readonly Dictionary<ProtoId<ItemSizePrototype>, float> SpeedModifiers = new();
 
-    private EntityQuery<ItemComponent> _itemQuery;
-
     public override void Initialize()
     {
         base.Initialize();
-
-        _itemQuery = GetEntityQuery<ItemComponent>();
 
         SubscribeLocalEvent<HandsComponent, KnockedDownRefreshEvent>(OnKnockedDownRefresh);
 
@@ -81,7 +77,7 @@ public sealed class CrawlSpeedSystem : EntitySystem
     private void LoadPrototypes()
     {
         SpeedModifiers.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<ItemSizePrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<ItemSizePrototype>())
         {
             SpeedModifiers[proto.ID] = proto.CrawlSpeedModifier;
         }

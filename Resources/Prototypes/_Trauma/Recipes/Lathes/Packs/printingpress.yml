@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipePack
+  id: PrintingPressSimple
+  recipes:
+  - BookJanitor
+  - BookFabrication
+  - BookSurvival
+
+- type: latheRecipePack
+  id: PrintingPressAdvanced
+  recipes:
+  - BookFabricationPrinted
+  - BookSurvivalPrinted
+
+- type: latheRecipePack
+  id: PrintingPressBlueprints
+  recipes:
+  - BookDoors
+  - BookAirlocks
+  - BookToys
+  - BookBananium
+  - BookBots
+  - BookFurniture
+  - BookInfrastructure
+  - BookElectronics
+  - BookWalls
+  - BookWindows
+  - BookSmokeables

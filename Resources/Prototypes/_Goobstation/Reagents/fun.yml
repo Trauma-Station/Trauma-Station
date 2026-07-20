@@ -1,28 +1,18 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
   id: Tranquility
   name: reagent-name-tranquility
   group: Toxins
-  desc: reagent-desc-tranquility-trauma # Trauma
+  desc: reagent-desc-tranquility-trauma
   physicalDesc: reagent-physical-desc-calming
   flavor: mindful
   color: "#915E48"
   metabolisms:
-    Poison:
-      metabolismRate: 0.05 # Trauma
+    Bloodstream:
+      metabolismRate: 0.05
       effects:
-      - !type:AdjustReagent # Trauma - Gradually builds up if not "neutralized" with spicy food
+      - !type:AdjustReagent # Gradually builds up if not "neutralized" with spicy food
         reagent: Tranquility
         amount: 0.1 # 20s/1u after metabolism
         conditions:
@@ -32,7 +22,7 @@
       - !type:PopupMessage
         type: Local
         messages: [ "reagent-popup-tranquility" ]
-        probability: 0.05 # Trauma - Reduced so that it doesn't spam you over the course of your "infection"
+        probability: 0.05
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
@@ -46,7 +36,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Tranquility
-          min: 20 # Trauma - Threshold increased so you can ask medical for help
+          min: 20 # maybe ask medical for help
       - !type:Polymorph
         prototype: Gondola
         conditions:
@@ -63,7 +53,7 @@
   flavor: bitter
   color: "#1a6ac1"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:PopupMessage
@@ -86,7 +76,7 @@
   flavor: bitter
   color: "#bb26f9"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.05
       effects:
       - !type:Polymorph
@@ -130,8 +120,8 @@
   flavor: offensive
   color: "#BF5E5E"
   metabolisms:
-    Poison:
-      metabolismRate: 0.10
+    Bloodstream:
+      metabolismRate: 0.1
       effects:
       - !type:GenericStatusEffect
         key: Vulgarity
@@ -147,7 +137,7 @@
   flavor: tears
   color: "#fcb8f5"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:PopupMessage
         type: Local
@@ -164,7 +154,7 @@
   flavor: fizzy
   color: "#ffff40"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:Emote
@@ -207,7 +197,7 @@
   flavor: robust
   color: "#ffd648"
   metabolisms:
-    Drink:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:GenericStatusEffect
@@ -224,7 +214,7 @@
   flavor: horrible
   color: "#654321"
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 2.5
       effects:
       - !type:Emote

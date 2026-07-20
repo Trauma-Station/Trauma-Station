@@ -1,13 +1,5 @@
-// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Whitelist;
-using Robust.Shared.Audio; // Goobstation
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -25,17 +17,17 @@ public sealed partial class HandLabelerComponent : Component
     [DataField]
     public int MaxLabelChars = 50;
 
-    [DataField]
-    public EntityWhitelist Whitelist = new();
-
     /// <summary>
-    /// Goobstation - sound played when applying a label
+    /// Blacklist for entities that can be labeled.
     /// </summary>
     [DataField]
-    public SoundPathSpecifier PrintSound = new SoundPathSpecifier("/Audio/_Goobstation/Items/hand_labeler_print.ogg")
-    {
-        Params = AudioParams.Default.WithVolume(10f)
-    };
+    public EntityWhitelist? Whitelist;
+
+    /// <summary>
+    /// Blacklist for entities that cannot be labeled.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Blacklist;
 }
 
 [Serializable, NetSerializable]

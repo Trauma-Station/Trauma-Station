@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Mobs.Components;
@@ -9,13 +11,13 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Wraith.Systems.Mobs;
-public sealed class RushdownSystem : EntitySystem
+public sealed partial class RushdownSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private readonly HashSet<Entity<StatusEffectsComponent>> _statusEffects = new();
     public override void Initialize()
@@ -74,7 +76,7 @@ public sealed class RushdownSystem : EntitySystem
     }
     private void OnRushdown(Entity<RushdownComponent> ent, ref RushdownEvent args)
     {
-        _popup.PopupClient(Loc.GetString("wraith-voidhound-rushdown-leap"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-voidhound-rushdown-leap"), ent.Owner, ent.Owner);
 
         ent.Comp.IsLeaping = true;
         Dirty(ent);

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Emoting;
@@ -17,14 +11,14 @@ using Content.Shared.Throwing;
 
 namespace Content.Goobstation.Shared.Dash;
 
-public sealed class DashActionSystem : EntitySystem
+public sealed partial class DashActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAnimatedEmotesSystem _animatedEmotes = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAnimatedEmotesSystem _animatedEmotes = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     public override void Initialize()
     {

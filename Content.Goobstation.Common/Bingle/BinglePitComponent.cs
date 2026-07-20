@@ -1,22 +1,8 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 shibe <95730644+shibechef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 shibe <swiftshibe@gmail.com>
-// SPDX-FileCopyrightText: 2025 unknown <Administrator@DESKTOP-PMRIVVA.kommune.indresogn.no>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Goobstation.Common.Bingle;
@@ -62,7 +48,13 @@ public sealed partial class BinglePitComponent : Component
     /// </summary>
     public Container Pit = default!;
     [DataField]
-    public float MaxSize = 3f;
+    public float MaxSize = 999f;
+
+    /// <summary>
+    /// How much the bingle pits hitbox will expand with each level
+    /// </summary>
+    [DataField]
+    public float HitBoxGrowthSize = 1.3f;
 
     [DataField]
     public SoundSpecifier FallingSound = new SoundPathSpecifier("/Audio/Effects/falling.ogg");

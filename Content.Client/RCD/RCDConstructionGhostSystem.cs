@@ -1,42 +1,32 @@
-// SPDX-FileCopyrightText: 2024 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2024 Steve <marlumpy@gmail.com>
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Client.Hands.Systems;
+// <Trauma>
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
+using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
+// </Trauma>
+using Content.Client.Hands.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.RCD;
 using Content.Shared.RCD.Components;
 using Robust.Client.Placement;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Input;
-using Robust.Shared.Input.Binding;
-using Robust.Shared.Prototypes;
-
 
 namespace Content.Client.RCD;
 
 /// <summary>
 /// System for handling structure ghost placement in places where RCD can create objects.
 /// </summary>
-public sealed class RCDConstructionGhostSystem : EntitySystem
+public sealed partial class RCDConstructionGhostSystem : EntitySystem
 {
     private const string PlacementMode = nameof(AlignRCDConstruction);
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPlacementManager _placementManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPlacementManager _placementManager = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     private Direction _placementDirection = default;
     private bool _useMirrorPrototype = false;
-    public event EventHandler? FlipConstructionPrototype;
 
     public override void Initialize()
     {
@@ -67,7 +57,7 @@ public sealed class RCDConstructionGhostSystem : EntitySystem
             if (!TryComp<RCDComponent>(placerEntity, out var rcd))
                 return false;
 
-            var prototype = _protoManager.Index(rcd.ProtoId);
+            var prototype = ProtoMan.Index(rcd.ProtoId);
             if (string.IsNullOrEmpty(prototype.MirrorPrototype))
                 return false;
 
@@ -117,7 +107,7 @@ public sealed class RCDConstructionGhostSystem : EntitySystem
 
             return;
         }
-        var prototype = _protoManager.Index(rcd.ProtoId);
+        var prototype = ProtoMan.Index(rcd.ProtoId);
 
         // Update the direction the RCD prototype based on the placer direction
         if (_placementDirection != _placementManager.Direction)

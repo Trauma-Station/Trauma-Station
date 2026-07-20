@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatLaurelWreath
+  name: laurel wreath
+  description: Ave Imperator!
+  components:
+  - type: Sprite
+    sprite: _DV/Clothing/Head/Hats/laurel_wreath.rsi
+  - type: Clothing
+    sprite: _DV/Clothing/Head/Hats/laurel_wreath.rsi

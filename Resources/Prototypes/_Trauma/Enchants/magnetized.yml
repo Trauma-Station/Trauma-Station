@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseEnchant
+  id: EnchantMagnetized
+  name: Magnetized
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - ProtectedFromStepTriggers
+  - type: ComponentsEnchant
+    added:
+    - type: Magboots

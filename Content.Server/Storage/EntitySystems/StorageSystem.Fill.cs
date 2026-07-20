@@ -1,18 +1,5 @@
-// SPDX-FileCopyrightText: 2022 Fishfish458 <47410468+Fishfish458@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 fishfish458 <fishfish458>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using Content.Server.Spawners.Components;
-using Content.Server.Storage.Components;
 using Content.Shared.Item;
 using Content.Shared.Prototypes;
 using Content.Shared.Storage;
@@ -60,7 +47,7 @@ public sealed partial class StorageSystem
             var ent = Spawn(spawnPrototype, coordinates);
 
             // No, you are not allowed to fill a container with entity spawners.
-            DebugTools.Assert(!_prototype.Index<EntityPrototype>(spawnPrototype)
+            DebugTools.Assert(!ProtoMan.Index<EntityPrototype>(spawnPrototype)
                 .HasComponent(typeof(RandomSpawnerComponent)));
 
             if (!TryComp<ItemComponent>(ent, out var itemComp))
@@ -111,7 +98,7 @@ public sealed partial class StorageSystem
         foreach (var item in spawnItems)
         {
             // No, you are not allowed to fill a container with entity spawners.
-            DebugTools.Assert(!_prototype.Index<EntityPrototype>(item)
+            DebugTools.Assert(!ProtoMan.Index<EntityPrototype>(item)
                 .HasComponent(typeof(RandomSpawnerComponent)));
             var ent = Spawn(item, coordinates);
 

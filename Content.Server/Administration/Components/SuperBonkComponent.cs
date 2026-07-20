@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2023 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration.Systems;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -25,7 +20,7 @@ public sealed partial class SuperBonkComponent : Component
     /// How often should we bonk.
     /// </summary>
     [DataField]
-    public TimeSpan BonkCooldown = TimeSpan.FromMilliseconds(100);
+    public TimeSpan BonkCooldown = TimeSpan.FromMilliseconds(1500);
 
     /// <summary>
     /// Next time when we will bonk.

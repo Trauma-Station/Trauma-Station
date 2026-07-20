@@ -1,6 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: Hammer
   graph: Hammer
   category: construction-category-weapons
   targetNode: hammer
   objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    MetalworkingKnowledge: 1

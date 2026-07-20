@@ -1,21 +1,3 @@
-// SPDX-FileCopyrightText: 2022 KIBORG04 <bossmira4@gmail.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Sam Weaver <weaversam8@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 tgrkzus <tgrkzus@gmail.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Łukasz Mędrek <lukasz@lukaszm.xyz>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Construction.Components;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
@@ -29,7 +11,7 @@ namespace Content.Server.Construction
 {
     public sealed partial class ConstructionSystem
     {
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
 
         private readonly Dictionary<ConstructionPrototype, ConstructionGuide> _guideCache = new();
 
@@ -42,7 +24,7 @@ namespace Content.Server.Construction
 
         private void OnGuideRequested(RequestConstructionGuide msg, EntitySessionEventArgs args)
         {
-            if (!PrototypeManager.TryIndex(msg.ConstructionId, out ConstructionPrototype? prototype))
+            if (!ProtoMan.TryIndex(msg.ConstructionId, out ConstructionPrototype? prototype))
                 return;
 
             if(GetGuide(prototype) is {} guide)
@@ -58,7 +40,7 @@ namespace Content.Server.Construction
                 component.Node == component.DeconstructionNode)
                 return;
 
-            if (!PrototypeManager.TryIndex(component.Graph, out ConstructionGraphPrototype? graph))
+            if (!ProtoMan.TryIndex(component.Graph, out ConstructionGraphPrototype? graph))
                 return;
 
             if (component.DeconstructionNode == null)
@@ -162,7 +144,7 @@ namespace Content.Server.Construction
                 return guide;
 
             // If the graph doesn't actually exist, do nothing.
-            if (!PrototypeManager.Resolve(construction.Graph, out ConstructionGraphPrototype? graph))
+            if (!ProtoMan.Resolve(construction.Graph, out ConstructionGraphPrototype? graph))
                 return null;
 
             // If either the start node or the target node are missing, do nothing.

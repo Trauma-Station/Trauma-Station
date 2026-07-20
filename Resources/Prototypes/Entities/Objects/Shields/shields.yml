@@ -5,6 +5,46 @@
   description: A shield!
   abstract: true
   components:
+    # <Trauma>
+    - type: DisarmMalus
+      malus: 1
+    - type: CosmicTransmutable
+      transmuteTo: CosmicCultShield
+    - type: Parry
+      parryExhaustionCost: 0.25
+      parryMinSkill: 30
+      reflectMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/ric4.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    - type: HeldSpeedModifier
+      walkModifier: 0.8
+      sprintModifier: 0.8
+    - type: MeleeWeapon
+      wideAnimationRotation: -135
+      attackRate: 0.5
+      damage:
+        types:
+          Blunt: 8
+      soundHit:
+        collection: MetalThud
+      animation: WeaponArcFist
+      heavyStaminaCost: 10
+    - type: StaminaDamageOnHit
+      damage: 10
+    - type: FlashSoundSuppression
+      protectionRange: 2
+    - type: MeleeThrowOnHit
+      distance: 0.5
+      speed: 2
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/shields.rsi
       state: riot-icon
@@ -31,38 +71,31 @@
           Piercing: 1
           Heat: 1
     - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: ExaminableDamage
       messages: ShieldMessages
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 140
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-        - trigger:
-            !type:DamageTrigger
-            damage: 100 #This is probably enough damage before it breaks
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalBreak
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                SheetSteel:
-                  min: 2
-                  max: 2
-                SheetGlass:
-                  min: 2
-                  max: 2
+      - trigger:
+          !type:DamageTrigger
+          damage: 50 # Trauma - was 100
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel:
+              min: 2
+              max: 2
+            SheetGlass:
+              min: 2
+              max: 2
     - type: StaticPrice
       price: 100
-    - type: DisarmMalus # Goobstation
-      malus: 1
 
 - type: entity
   name: base repairable shield
@@ -73,10 +106,12 @@
   components:
   - type: Repairable # Negative values represent healing
     damage:
-      groups:
-        Brute: -60 # 20 of each Brute Type - 20% of a basic shield HP
       types:
+        Blunt: -20
+        Slash: -20
+        Piercing: -20
         Heat: -20
+        Ballistic: -20 # Trauma
     fuelCost: 10 # 1/2 of a Welder for a full repair
     doAfterDelay: 5
     allowSelfRepair: false
@@ -89,6 +124,18 @@
   id: RiotShield
   description: A large tower shield. Good for controlling crowds.
   components:
+    # <Trauma>
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 12
+    - type: StaminaDamageOnHit
+      damage: 20
+    - type: FlashSoundSuppression
+      protectionRange: 1
+    - type: MeleeThrowOnHit
+      distance: 1
+    # </Trauma>
     - type: StaticPrice
       price: 90
     - type: Blocking
@@ -110,6 +157,18 @@
   id: RiotLaserShield
   description: A shield built for withstanding lasers, but not much else.
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.25
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+      reflectSpread: 300
+      reflects:
+      - Energy
+    - type: FlashSoundSuppression
+      protectionRange: 1
+    # </Trauma>
     - type: Sprite
       state: riot_laser-icon
     - type: Item
@@ -130,20 +189,33 @@
   id: RiotBulletShield
   description: A shield built for protecting against ballistics, but not much else.
   components:
+    # <Trauma>
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 10
+    - type: MeleeThrowOnHit
+      distance: 1
+    # </Trauma>
     - type: Sprite
-      sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Goobstation
+      sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Trauma
       state: ballistic-icon
     - type: Item
+      sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Trauma
       heldPrefix: ballistic
     - type: Blocking
       passiveBlockModifier:
         coefficients:
-          Piercing: 0.7
+          Ballistic: 0.7 # Trauma
       activeBlockModifier:
         coefficients:
-          Piercing: 0.5
+          Ballistic: 0.5 # Trauma
         flatReductions:
-          Piercing: 1
+          Ballistic: 1 # Trauma
 
 #Craftable shields
 
@@ -153,6 +225,21 @@
   id: WoodenBuckler
   description: A small round wooden makeshift shield.
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 0.5
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 5
+    - type: StaminaDamageOnHit
+      damage: 5
+    - type: FlashSoundSuppression
+      protectionRange: 3
+    # </Trauma>
     - type: Sprite
       state: buckler-icon
     - type: Item
@@ -179,26 +266,20 @@
       node: woodenBuckler
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 60
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-        - trigger:
-            !type:DamageTrigger
-            damage: 30 #Weaker shield
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:PlaySoundBehavior
-              sound:
-                collection: WoodDestroy
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                MaterialWoodPlank:
-                  min: 5
-                  max: 5
+      - trigger:
+          !type:DamageTrigger
+          damage: 30 #Weaker shield
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: WoodDestroy
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            MaterialWoodPlank:
+              min: 5
+              max: 5
     - type: StaticPrice
       price: 150
 
@@ -208,6 +289,27 @@
   id: CardShield
   description: A shield made of cardboard. Won't protect you from much.
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1
+      parryMinSkill: 0
+      reflectMinSkill: 0
+      soundOnParry:
+        path: /Audio/Items/Toys/card_tube_bonk.ogg
+    - type: PhysicalComposition
+      materialComposition:
+        Cardboard: 300
+    - type: Tag
+      tags:
+      - Trash
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 1
+    - type: StaminaDamageOnHit
+      damage: 1
+    # </Trauma>
     - type: Sprite
       state: cardshield-icon
     - type: Item
@@ -216,6 +318,10 @@
       damageCoefficient: 0.95
       worn: true
     - type: Blocking
+      # <Trauma>
+      passiveBlockFraction: 0.1
+      activeBlockFraction: 0.2
+      # </Trauma>
       passiveBlockModifier:
         coefficients:
           Blunt: 1
@@ -235,12 +341,6 @@
       node: cardShield
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 25
-        behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
       - trigger:
           !type:DamageTrigger
           damage: 10 #Very very weak shield
@@ -263,9 +363,22 @@
   id: MakeshiftShield
   description: A rundown looking shield, not good for much.
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 0.5
+    - type: PhysicalComposition
+      materialComposition:
+        Steel: 250
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+    # </Trauma>
     - type: Tag #goobstation
       tags:
        - MakeshiftShield
+       - Trash # Trauma
     - type: Sprite
       state: makeshift-icon
     - type: Item
@@ -287,32 +400,26 @@
           Blunt: 0.5
           Slash: 0.5
           Piercing: 0.5
-          Heat: 1
+          Heat: 0.7 # Trauma - was 1
     - type: Construction
       graph: MakeshiftShield
       node: makeshiftShield
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 40
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-        - trigger:
-            !type:DamageTrigger
-            damage: 20 #Very weak shield
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalBreak
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                SheetSteel:
-                  min: 1
-                  max: 2
+      - trigger:
+          !type:DamageTrigger
+          damage: 25 # Trauma - was 20. I'm Fragile, but not that fragile.
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel:
+              min: 1
+              max: 2
 
 - type: entity
   name: web shield
@@ -320,6 +427,20 @@
   id: WebShield
   description: A stringy shield. It's weak, and doesn't seem to do well against heat.
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1
+      soundOnParry:
+        path: /Audio/Weapons/slash.ogg
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 5
+    - type: FlashSoundSuppression
+      protectionRange: 3
+    - type: StaminaDamageOnHit
+      damage: 5
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/web-shield.rsi
       state: icon
@@ -346,26 +467,20 @@
       node: shield
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 40
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-        - trigger:
-            !type:DamageTrigger
-            damage: 20
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                MaterialWebSilk:
-                  min: 1
-                  max: 1
-            - !type:PlaySoundBehavior
-              sound:
-                collection: WoodDestroy
+      - trigger:
+          !type:DamageTrigger
+          damage: 20
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            MaterialWebSilk:
+              min: 1
+              max: 1
+        - !type:PlaySoundBehavior
+          sound:
+            collection: WoodDestroy
 
 #Magic/Cult Shields (give these to wizard for now)
 
@@ -375,6 +490,17 @@
   id: ClockworkShield
   description: Ratvar oyrffrf lbh jvgu uvf cebgrpgvba.
   components:
+    # <Trauma>
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 10
+    - type: ReflectiveSurface
+    # </Trauma>
     - type: Sprite
       state: ratvarian-icon
     - type: Item
@@ -404,14 +530,30 @@
   id: MirrorShield
   description: Eerily glows red... you hear the geometer whispering
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.05
+      reflectMinSkill: 0
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+      reflectSpread: 300
+      reflects:
+        - Energy
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Slash: 10
+    # </Trauma>
     - type: Sprite
       state: mirror-icon
     - type: Item
       heldPrefix: mirror
-    - type: Reflect
-      reflectProb: 0.95
-      reflects:
-        - Energy
+    # - type: Reflect # Trauma
+    #   reflectProb: 0.95
+    #   reflects:
+    #     - Energy
     - type: Blocking #Mirror shield reflects heat/laser, but is relatively weak to everything else.
       passiveBlockModifier:
         coefficients:
@@ -431,27 +573,49 @@
         path: /Audio/Effects/glass_step.ogg
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 40
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:PlaySoundBehavior
-              sound:
-                collection: GlassBreak
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                SheetGlass:
-                  min: 5
-                  max: 5
+      - trigger:
+          !type:DamageTrigger
+          damage: 10 # Trauma - was 40
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: GlassBreak
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetGlass:
+              min: 5
+              max: 5
 
 - type: entity
   name: energy shield
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseShield, BaseSyndicateContraband] # Trauma - was BaseItem, instead of BaseShield
   id: EnergyShield
   description: Exotic energy shield, when folded, can even fit in your pocket.
   components:
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1.1
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Heat: 10
+    - type: StaminaDamageOnHit
+      damage: 15
+    - type: Battery
+      maxCharge: 35
+      startingCharge: 35
+    - type: BatterySelfRecharger
+      autoRechargeRate: 2
+    - type: RechargeableBlocking
+      dischargedRechargeRate: 2
+      chargedRechargeRate: 3
+    # </Trauma>
     - type: ItemToggle
       predictable: false # WD EDIT
       soundActivate:
@@ -527,22 +691,14 @@
           Piercing: 1
     - type: Appearance
     - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: ExaminableDamage
       messages: EnergyShieldMessages
-    # Trauma - removed Destructible
+    - type: Destructible
+      thresholds: [] # Trauma - removed Destructible thresholds
     - type: StaticPrice
       price: 350
-      # WD EDIT START
-    - type: Battery
-      maxCharge: 35
-      startingCharge: 35
-    - type: BatterySelfRecharger
-      autoRechargeRate: 2
-    - type: RechargeableBlocking
-      dischargedRechargeRate: 2
-      chargedRechargeRate: 3
-      # WD EDIT END
 
 - type: entity
   name: broken energy shield
@@ -564,6 +720,13 @@
   id: TelescopicShield
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:
+    # <Trauma>
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 10
+    # </Trauma>
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
@@ -602,28 +765,22 @@
     - type: Appearance
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 100
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-        - trigger:
-            !type:DamageTrigger
-            damage: 70
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalGlassBreak
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                SheetSteel:
-                  min: 1
-                  max: 1
-                SheetGlass:
-                  min: 2
-                  max: 2
+      - trigger:
+          !type:DamageTrigger
+          damage: 50 # Trauma - was 70
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalGlassBreak
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel:
+              min: 1
+              max: 1
+            SheetGlass:
+              min: 2
+              max: 2
     - type: StaticPrice
       price: 150

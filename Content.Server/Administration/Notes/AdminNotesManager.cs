@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
@@ -25,14 +15,14 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
+public sealed partial class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 {
-    [Dependency] private readonly IAdminManager _admins = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly EuiManager _euis = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IAdminManager _admins = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private EuiManager _euis = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     public const string SawmillId = "admin.notes";
 
@@ -62,7 +52,7 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
         return _admins.HasAdminFlag(admin, AdminFlags.ViewNotes);
     }
 
-    public async Task OpenEui(ICommonSession admin, Guid notedPlayer)
+    public async Task OpenEui(ICommonSession admin, NetUserId notedPlayer)
     {
         var ui = new AdminNotesEui();
         _euis.OpenEui(ui, admin);
@@ -87,6 +77,11 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
         // You can still ban them just fine, which is why we should allow admins to view their bans with the notes panel
         if (await _db.GetPlayerRecordByUserId((NetUserId) player) is null)
             return;
+
+        // <Trauma> - no watchlist for trialmins
+        if (type == NoteType.Watchlist && !CanWatchlist(createdBy))
+            return;
+        // </Trauma>
 
         var sb = new StringBuilder($"{createdBy.Name} added a");
 
@@ -154,8 +149,8 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 
         var note = new SharedAdminNote(
             noteId,
-            (NetUserId) player,
-            roundId,
+            [(NetUserId) player],
+            roundId.HasValue ? [roundId.Value] : [],
             serverName,
             playtime,
             type,
@@ -182,14 +177,17 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             NoteType.Note => (await _db.GetAdminNote(id))?.ToShared(),
             NoteType.Watchlist => (await _db.GetAdminWatchlist(id))?.ToShared(),
             NoteType.Message => (await _db.GetAdminMessage(id))?.ToShared(),
-            NoteType.ServerBan => (await _db.GetServerBanAsNoteAsync(id))?.ToShared(),
-            NoteType.RoleBan => (await _db.GetServerRoleBanAsNoteAsync(id))?.ToShared(),
+            NoteType.ServerBan or NoteType.RoleBan => (await _db.GetBanAsNoteAsync(id))?.ToShared(),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type")
         };
     }
 
     public async Task DeleteAdminRemark(int noteId, NoteType type, ICommonSession deletedBy)
     {
+        // <Trauma> - trialmins dont get to change watchlists
+        if (type == NoteType.Watchlist && !CanWatchlist(deletedBy))
+            return;
+        // </Traum>
         var note = await GetAdminRemark(noteId, type);
         if (note == null)
         {
@@ -210,11 +208,8 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             case NoteType.Message:
                 await _db.DeleteAdminMessage(noteId, deletedBy.UserId, deletedAt);
                 break;
-            case NoteType.ServerBan:
-                await _db.HideServerBanFromNotes(noteId, deletedBy.UserId, deletedAt);
-                break;
-            case NoteType.RoleBan:
-                await _db.HideServerRoleBanFromNotes(noteId, deletedBy.UserId, deletedAt);
+            case NoteType.ServerBan or NoteType.RoleBan:
+                await _db.HideBanFromNotes(noteId, deletedBy.UserId, deletedAt);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type");
@@ -226,6 +221,10 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 
     public async Task ModifyAdminRemark(int noteId, NoteType type, ICommonSession editedBy, string message, NoteSeverity? severity, bool secret, DateTime? expiryTime)
     {
+        // <Trauma> - trialmins dont get to change watchlists
+        if (type == NoteType.Watchlist && !CanWatchlist(editedBy))
+            return;
+        // </Traum>
         message = message.Trim();
 
         var note = await GetAdminRemark(noteId, type);
@@ -290,15 +289,10 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             case NoteType.Message:
                 await _db.EditAdminMessage(noteId, message, editedBy.UserId, editedAt, expiryTime);
                 break;
-            case NoteType.ServerBan:
+            case NoteType.ServerBan or NoteType.RoleBan:
                 if (severity is null)
                     throw new ArgumentException("Severity cannot be null for a ban", nameof(severity));
-                await _db.EditServerBan(noteId, message, severity.Value, expiryTime, editedBy.UserId, editedAt);
-                break;
-            case NoteType.RoleBan:
-                if (severity is null)
-                    throw new ArgumentException("Severity cannot be null for a role ban", nameof(severity));
-                await _db.EditServerRoleBan(noteId, message, severity.Value, expiryTime, editedBy.UserId, editedAt);
+                await _db.EditBan(noteId, message, severity.Value, expiryTime, editedBy.UserId, editedAt);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type");

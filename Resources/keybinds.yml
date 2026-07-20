@@ -1,5 +1,26 @@
 version: 1 # Not used right now, whatever.
 binds:
+# <Trauma>
+- function: NetBandwidth
+  type: State
+  key: F4
+- function: ResistGrab
+  type: State
+  key: B
+- function: Tackle
+  type: State
+  key: Q
+  mod1: Alt
+- function: Strafe
+  type: State
+  key: Shift
+- function: RotateMod
+  type: State
+  key: Control
+- function: TargetingMod
+  type: State
+  key: Shift
+# </Trauma>
 - function: UIClick
   type: State
   key: MouseLeft
@@ -44,12 +65,6 @@ binds:
 - function: Walk
   type: State
   key: Shift
-- function: Sprint # Goob
-  type: State
-  key: C
-- function: ResistGrab # Goob
-  type: State
-  key: B
 # Shuttle
 - function: ShuttleStrafeUp
   type: State
@@ -203,6 +218,9 @@ binds:
 - function: OpenLanguageMenu # Einstein Engines - Language
   type: State
   key: L
+- function: OpenMartialArtsMenu # Trauma
+  type: State
+  key: O
 - function: TextCursorSelect
   # TextCursorSelect HAS to be above ExamineEntity
   # So that LineEdit receives it correctly.
@@ -499,7 +517,7 @@ binds:
   type: State
   key: F8
 - function: ToggleRoundEndSummaryWindow
-  type: Toggle
+  type: State
   key: F9
 - function: OpenSandboxWindow
   type: State

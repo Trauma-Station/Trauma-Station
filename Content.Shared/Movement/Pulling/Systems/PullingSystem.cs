@@ -1,5 +1,6 @@
 // <Trauma>
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared.Weapons.Melee;
 // </Trauma>
 using Content.Shared.ActionBlocker;
@@ -42,21 +43,21 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// <summary>
 /// Allows one entity to pull another behind them via a physics distance joint.
 /// </summary>
-public sealed partial class PullingSystem : EntitySystem // Trauma - made partial
+public sealed partial class PullingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _modifierSystem = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private HeldSpeedModifierSystem _clothingMoveSpeed = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedVirtualItemSystem _virtual = default!;
 
     public override void Initialize()
     {
@@ -121,6 +122,11 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
         if (TryComp(args.PullerUid, out PullerComponent? pullerComp) && !pullerComp.NeedsHands)
             return;
 
+        // <Trauma>
+        if (!ShouldSpawnVirtualItems(uid, args.PulledUid))
+            return;
+        // </Trauma>
+
         if (!_virtual.TrySpawnVirtualItemInHand(args.PulledUid, uid))
         {
             DebugTools.Assert("Unable to find available hand when starting pulling??");
@@ -131,6 +137,8 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
     {
         if (args.PullerUid != uid)
             return;
+
+        _modifierSystem.RefreshMovementSpeedModifiers(uid); // Trauma
 
         // Try find hand that is doing this pull.
         // and clear it.
@@ -278,8 +286,15 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        // <Trauma>
+        var target = args.Target;
+        if (TryComp(target, out TargetInteractionRelayComponent? relay) && relay.RelayPulls &&
+            Exists(relay.RelayEntity))
+            target = relay.RelayEntity.Value;
+        // </Trauma>
+
         // Are they trying to pull themselves up by their bootstraps?
-        if (args.User == args.Target)
+        if (args.User == target) // Trama - args.Target -> target
             return;
 
         //TODO VERB ICONS add pulling icon
@@ -293,12 +308,12 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             };
             args.Verbs.Add(verb);
         }
-        else if (CanPull(args.User, args.Target))
+        else if (CanPull(args.User, target)) // Trauma - args.Target -> target
         {
             Verb verb = new()
             {
                 Text = Loc.GetString("pulling-verb-get-data-text"),
-                Act = () => TryStartPull(args.User, args.Target),
+                Act = () => TryStartPull(args.User, target), // Trauma - args.Target -> target
                 DoContactInteraction = false // pulling handle its own contact interaction.
             };
             args.Verbs.Add(verb);
@@ -308,13 +323,21 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
     private void OnRefreshMovespeed(EntityUid uid, PullerComponent component, RefreshMovementSpeedModifiersEvent args)
     {
         // <Trauma>
-        args.ModifySpeed(component.GrabStage switch
+		// skip this if ApplySpeedModifier is false
+        if (!component.ApplySpeedModifier)
+            return;
+
+        var speed = component.GrabStage switch
         {
             GrabStage.Soft => component.SoftGrabSpeedModifier,
             GrabStage.Hard => component.HardGrabSpeedModifier,
             GrabStage.Suffocate => component.ChokeGrabSpeedModifier,
             _ => 1f
-        });
+        };
+
+        var ev = new GetGrabMovespeedEvent(speed);
+        RaiseLocalEvent(uid, ref ev);
+        args.ModifySpeed(ev.Speed);
         // </Trauma>
 
         if (TryComp<HeldSpeedModifierComponent>(component.Pulling, out var heldMoveSpeed) && component.Pulling.HasValue)
@@ -486,7 +509,10 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             && !_handsSystem.TryGetEmptyHand(puller, out _)
             && pullerComp.Pulling == null)
         {
-            return false;
+            // <Trauma>
+            if (ShouldSpawnVirtualItems(puller, pullableUid))
+                return false;
+            // </Trauma>
         }
 
         if (!_blocker.CanInteract(puller, pullableUid))
@@ -692,8 +718,8 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             $"{ToPrettyString(pullerUid):user} started pulling {ToPrettyString(pullableUid):target}");
 
         // <Goob>
-        if (_combatMode.IsInCombatMode(pullerUid))
-            TryGrab(pullableUid, pullerUid, grabStageOverride: grabStageOverride, escapeAttemptModifier: escapeAttemptModifier);
+        if (grabStageOverride != null || _combatMode.IsInCombatMode(pullerUid))
+            TryGrab(pullableUid, pullerUid, true, grabStageOverride: grabStageOverride, escapeAttemptModifier: escapeAttemptModifier);
         // </Goob>
         return true;
     }
@@ -705,6 +731,11 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
 
         if (pullerUidNull == null)
             return true;
+
+        // <Trauma> - check action blockers so you cant break grabs while stunned asleep etc
+        if (user is { } userUid && !_blocker.CanInteract(userUid, pullableUid))
+            return false;
+        // </Trauma>
 
         var msg = new AttemptStopPullingEvent(user);
         RaiseLocalEvent(pullableUid, ref msg, true);

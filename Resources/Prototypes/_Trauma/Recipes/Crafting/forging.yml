@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: construction
+  abstract: true
+  id: BaseForgingItem
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+
+- type: construction
+  parent: BaseForgingItem
+  id: HandleShort
+  graph: Handle
+  targetNode: short handle
+  practical:
+    CarvingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: HandleShort
+  id: HandleMedium
+  targetNode: medium handle
+
+- type: construction
+  parent: HandleShort
+  id: HandleLong
+  targetNode: wooden pole
+
+- type: construction
+  parent: BaseForgingItem
+  id: ClothingHandsGlovesForge
+  graph: ClothingHandsGlovesForge
+  practical:
+    TailoringKnowledge: 3
+
+- type: construction
+  parent: BaseForgingItem
+  id: AnvilBottom
+  graph: AnvilBottom
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: AnvilBottom
+  id: AnvilTop
+  graph: AnvilTop
+
+- type: construction
+  parent: BaseForgingItem
+  id: SteelScraps
+  graph: SteelScraps
+  targetNode: scraps
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 0
+  useQuality: false
+
+- type: construction
+  parent: SteelScraps
+  id: BrassScraps
+  graph: BrassScraps
+
+- type: construction
+  parent: SteelScraps
+  id: PlasteelScraps
+  graph: PlasteelScraps
+
+- type: construction
+  parent: SteelScraps
+  id: GoldScraps
+  graph: GoldScraps
+
+- type: construction
+  parent: SteelScraps
+  id: SilverScraps
+  graph: SilverScraps
+
+- type: construction
+  parent: BaseForgingItem
+  id: WetBrick
+  graph: WetBrick
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false

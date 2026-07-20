@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Weapons.Penetration;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Destructible;
 using Content.Shared.Effects;
@@ -13,14 +14,15 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Executions;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Trauma.Shared.Projectiles;
 
@@ -28,29 +30,25 @@ namespace Content.Trauma.Shared.Projectiles;
 /// Handles predicting projectile hits.
 /// This was previously only done serverside.
 /// </summary>
-public sealed class PredictedProjectileSystem : EntitySystem
+public sealed partial class PredictedProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
 
-    private EntityQuery<ProjectileComponent> _query;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private EntityQuery<ProjectileComponent> _query = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ProjectileComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
     }
@@ -74,7 +72,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
     {
         if (!_query.TryComp(uid, out var comp) ||
             !_physicsQuery.TryComp(uid, out var physics) ||
-            FindHardFixture(target) is not {} otherFixture)
+            FindHardFixture(target) is not { } otherFixture)
             return;
 
         DoHit((uid, comp, physics), target, otherFixture);
@@ -100,11 +98,15 @@ public sealed class PredictedProjectileSystem : EntitySystem
     public void DoHit(Entity<ProjectileComponent, PhysicsComponent> ent, EntityUid target, Fixture otherFixture)
     {
         var (uid, comp, ourBody) = ent;
-        if (comp.ProjectileSpent || comp is { Weapon: null, OnlyCollideWhenShot: true })
+        if (comp is { Weapon: null, OnlyCollideWhenShot: true })
+            return;
+
+        // ignore spent in prediction ticks to allow for embedding to be predicted properly
+        if (comp.ProjectileSpent && _timing.IsFirstTimePredicted)
             return;
 
         // it's here so this check is only done once before possible hit
-        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false);
+        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false, target);
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {
@@ -115,21 +117,26 @@ public sealed class PredictedProjectileSystem : EntitySystem
         }
 
         var shooter = comp.Shooter;
-        var ev = new ProjectileHitEvent(comp.Damage * _damageable.UniversalProjectileDamageModifier, target, shooter);
+        var dmg = comp.Damage * _damageable.UniversalProjectileDamageModifier;
+        if (TryComp(ent, out TargetedProjectileComponent? targeted) &&
+            TryGetEntity(targeted.Target, out var t) && t == target)
+            dmg.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
+
+        var ev = new ProjectileHitEvent(dmg, target, shooter);
         RaiseLocalEvent(uid, ref ev);
+
+        var targetEv = new GotHitByProjectileEvent(uid);
+        RaiseLocalEvent(target, ref targetEv);
 
         var otherName = ToPrettyString(target);
         var damageRequired = _destructible.DestroyedAt(target);
         if (TryComp<DamageableComponent>(target, out var damageable))
         {
-            damageRequired -= damageable.TotalDamage;
+            damageRequired -= _damageable.GetTotalDamage((target, damageable));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 
-        var targetPart = _gun.GetTargetPart(shooter, target);
-        if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
-            !missComp.PerfectHitEntities.Contains(target))
-            targetPart = TargetBodyPart.Chest;
+        TargetBodyPart? targetPart = null;
         if (TryComp<BeingExecutedComponent>(target, out var executed)) // TODO: make this better idk why its shooting groin and shit
             targetPart = executed.TargetPart;
         var deleted = Deleted(target);

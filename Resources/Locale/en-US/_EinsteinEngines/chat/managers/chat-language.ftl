@@ -13,7 +13,6 @@ chat-language-Elyran-name = Elyran
 chat-language-Moffic-name = Moffic
 chat-language-RobotTalk-name = Binary
 chat-language-Calcic-name = Calcic
-chat-language-ValyrianStandard-name = Valyrian
 chat-language-Xeeplian-name = Xeeplian
 chat-language-NewKinPidgin-name = Ka'rakk
 

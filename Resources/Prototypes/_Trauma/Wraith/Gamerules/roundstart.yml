@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseRoundstartAntagRule
+  id: WraithRoundstart
+  components:
+  - type: GameRule
+    minPlayers: 35
+  - type: AntagSpawner
+    prototype: MobWraith
+  - type: AntagRandomSpawn
+  - type: AntagSelection
+    agentName: wraith-round-end-agent-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Wraith

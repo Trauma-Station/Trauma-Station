@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Changeling.Components;
@@ -17,12 +8,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Changeling;
 
-public sealed class ChangelingEggSystem : EntitySystem
+public sealed partial class ChangelingEggSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ChangelingSystem _changeling = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private ChangelingSystem _changeling = default!;
 
     public override void Update(float frameTime)
     {
@@ -60,8 +51,6 @@ public sealed class ChangelingEggSystem : EntitySystem
         _mind.TransferTo(comp.lingMind, newUid);
 
         EnsureComp<ChangelingIdentityComponent>(newUid);
-
-        EntityManager.AddComponent(newUid, comp.lingStore);
 
         if (comp.AugmentedEyesightPurchased)
             _changeling.InitializeAugmentedEyesight(newUid);

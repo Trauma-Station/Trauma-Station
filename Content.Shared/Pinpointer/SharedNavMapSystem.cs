@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tornado Tech <54727692+Tornado-Technology@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -24,7 +10,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Pinpointer;
 
-public abstract class SharedNavMapSystem : EntitySystem
+public abstract partial class SharedNavMapSystem : EntitySystem
 {
     public const int Categories = 3;
     public const int Directions = 4; // Not directly tied to number of atmos directions
@@ -37,11 +23,12 @@ public abstract class SharedNavMapSystem : EntitySystem
     public const int WallMask = AllDirMask << (int) NavMapChunkType.Wall;
     public const int FloorMask = AllDirMask << (int) NavMapChunkType.Floor;
 
-    [Robust.Shared.IoC.Dependency] private readonly TagSystem _tagSystem = default!;
-    [Robust.Shared.IoC.Dependency] private readonly INetManager _net = default!;
+    [Robust.Shared.IoC.Dependency] private TagSystem _tagSystem = default!;
+    [Robust.Shared.IoC.Dependency] private INetManager _net = default!;
+
+    [Robust.Shared.IoC.Dependency] private EntityQuery<NavMapDoorComponent> _doorQuery = default!;
 
     private static readonly ProtoId<TagPrototype>[] WallTags = {"Wall", "Window"};
-    private EntityQuery<NavMapDoorComponent> _doorQuery;
 
     public override void Initialize()
     {
@@ -50,8 +37,6 @@ public abstract class SharedNavMapSystem : EntitySystem
         // Data handling events
         SubscribeLocalEvent<NavMapComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<ConfigurableNavMapBeaconComponent, ExaminedEvent>(OnConfigurableExamined);
-
-        _doorQuery = GetEntityQuery<NavMapDoorComponent>();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

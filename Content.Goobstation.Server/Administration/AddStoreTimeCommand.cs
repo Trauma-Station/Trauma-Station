@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration.Managers;
@@ -17,10 +11,10 @@ using Content.Server.Administration;
 namespace Content.Goobstation.Server.Administration
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed class AddStoreTimeCommand : IConsoleCommand
+    public sealed partial class AddStoreTimeCommand : IConsoleCommand
     {
-        [Dependency] private readonly IAdminManager _adminManager = default!;
-        [Dependency] private readonly IEntityManager _entities = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
+        [Dependency] private IEntityManager _entities = default!;
 
         public string Command => "addstoretime";
         public string Description => "Reduces store listing restock time by specified seconds, DEBUG";
@@ -67,7 +61,7 @@ namespace Content.Goobstation.Server.Administration
                 return;
             }
 
-            var listing = store.Listings.FirstOrDefault(l => l.ID == listingId);
+            var listing = store.FullListingsCatalog.FirstOrDefault(l => l.ID == listingId);
 
             if (listing == null)
             {

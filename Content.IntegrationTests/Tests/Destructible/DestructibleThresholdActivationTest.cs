@@ -1,5 +1,6 @@
 using System.Linq;
-using Content.Shared.Destructible; // Trama - moved to shared
+using Content.IntegrationTests.Fixtures;
+using Content.Server.Destructible;
 using Content.Shared.Destructible.Thresholds; // Trauma - moved to shared
 using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Shared.Destructible.Thresholds.Behaviors; // Trauma
@@ -20,12 +21,12 @@ namespace Content.IntegrationTests.Tests.Destructible
     [TestFixture]
     [TestOf(typeof(DestructibleComponent))]
     [TestOf(typeof(DamageThreshold))]
-    public sealed class DestructibleThresholdActivationTest
+    public sealed class DestructibleThresholdActivationTest : GameTest
     {
         [Test]
         public async Task Test()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var sEntityManager = server.ResolveDependency<IEntityManager>();
@@ -196,7 +197,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 Assert.Multiple(() =>
                 {
                     // Check that the total damage matches
-                    Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.New(50)));
+                    Assert.That(sDamageableSystem.GetTotalDamage(sDestructibleEntity), Is.EqualTo(FixedPoint2.New(50)));
 
                     // Both thresholds should have triggered
                     Assert.That(sTestThresholdListenerSystem.ThresholdsReached, Has.Exactly(2).Items);
@@ -253,7 +254,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 sDamageableSystem.ClearAllDamage((sDestructibleEntity, sDamageableComponent));
 
                 // Check that the entity has 0 damage
-                Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.Zero));
+                Assert.That(sDamageableSystem.GetTotalDamage(sDestructibleEntity), Is.EqualTo(FixedPoint2.Zero));
 
                 // Set both thresholds to only trigger once
                 foreach (var destructibleThreshold in sDestructibleComponent.Thresholds)
@@ -268,7 +269,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 Assert.Multiple(() =>
                 {
                     // Check that the total damage matches
-                    Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.New(50)));
+                    Assert.That(sDamageableSystem.GetTotalDamage(sDestructibleEntity), Is.EqualTo(FixedPoint2.New(50)));
 
                     // No thresholds should have triggered as they were already triggered before, and they are set to only trigger once
                     Assert.That(sTestThresholdListenerSystem.ThresholdsReached, Is.Empty);
@@ -284,13 +285,12 @@ namespace Content.IntegrationTests.Tests.Destructible
                 Assert.Multiple(() =>
                 {
                     // Check that the total damage matches
-                    Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.New(50)));
+                    Assert.That(sDamageableSystem.GetTotalDamage(sDestructibleEntity), Is.EqualTo(FixedPoint2.New(50)));
 
                     // They shouldn't have been triggered by changing TriggersOnce
                     Assert.That(sTestThresholdListenerSystem.ThresholdsReached, Is.Empty);
                 });
             });
-            await pair.CleanReturnAsync();
         }
     }
 }

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Collisions;
 using Content.Shared.Physics;
 using Robust.Shared.Physics;
@@ -7,10 +9,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Server.Wraith;
 
-public sealed class StatusEffectOnCollideGhostSystem : SharedStatusEffectOnCollideGhostSystem
+public sealed partial class StatusEffectOnCollideGhostSystem : SharedStatusEffectOnCollideGhostSystem
 {
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private CollisionWakeSystem _collisionWake = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

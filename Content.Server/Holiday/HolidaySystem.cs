@@ -1,32 +1,17 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Content.Shared.Holiday;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Holiday
 {
-    public sealed class HolidaySystem : EntitySystem
+    public sealed partial class HolidaySystem : EntitySystem
     {
-        [Dependency] private readonly IConfigurationManager _configManager = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private IConfigurationManager _configManager = default!;
+        [Dependency] private IChatManager _chatManager = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
 
         [ViewVariables]
         private readonly List<HolidayPrototype> _currentHolidays = new();
@@ -53,7 +38,7 @@ namespace Content.Server.Holiday
 
             var now = DateTime.Now;
 
-            foreach (var holiday in _prototypeManager.EnumeratePrototypes<HolidayPrototype>())
+            foreach (var holiday in ProtoMan.EnumeratePrototypes<HolidayPrototype>())
             {
                 if (holiday.ShouldCelebrate(now))
                 {
@@ -87,7 +72,7 @@ namespace Content.Server.Holiday
 
         public bool IsCurrentlyHoliday(string holiday)
         {
-            if (!_prototypeManager.TryIndex(holiday, out HolidayPrototype? prototype))
+            if (!ProtoMan.TryIndex(holiday, out HolidayPrototype? prototype))
                 return false;
 
             return _currentHolidays.Contains(prototype);

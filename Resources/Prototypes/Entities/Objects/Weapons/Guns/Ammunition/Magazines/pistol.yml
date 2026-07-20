@@ -45,7 +45,7 @@
     whitelist:
       tags:
         - CartridgePistol
-    capacity: 15
+    capacity: 16 # Trauma, was 15
   - type: Item
     size: Small
   - type: ContainerContainer

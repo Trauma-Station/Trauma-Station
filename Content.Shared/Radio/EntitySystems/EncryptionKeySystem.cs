@@ -1,27 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Verm <32827189+Vermidia@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 chavonadelal <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 Booblesnoot42 <108703193+Booblesnoot42@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
@@ -35,10 +11,8 @@ using Content.Shared.Whitelist;
 using Content.Shared.Wires;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
 using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
 namespace Content.Shared.Radio.EntitySystems;
@@ -48,14 +22,13 @@ namespace Content.Shared.Radio.EntitySystems;
 /// </summary>
 public sealed partial class EncryptionKeySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedWiresSystem _wires = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation - Whitelisted radio channels
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedWiresSystem _wires = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!; // Goobstation - Whitelisted radio channels
 
     public override void Initialize()
     {
@@ -211,7 +184,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 AddChannelsExamine(component.Channels,
                     component.DefaultChannel,
                     args,
-                    _protoManager,
+                    ProtoMan,
                     "examine-encryption-channel");
             }
         }
@@ -225,7 +198,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if(component.Channels.Count > 0)
         {
             args.PushMarkup(Loc.GetString("examine-encryption-channels-prefix"));
-            AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel");
+            AddChannelsExamine(component.Channels, component.DefaultChannel, args, ProtoMan, "examine-encryption-channel");
         }
     }
 
@@ -240,7 +213,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         RadioChannelPrototype? proto;
         foreach (var id in channels)
         {
-            proto = _protoManager.Index<RadioChannelPrototype>(id);
+            proto = ProtoMan.Index<RadioChannelPrototype>(id);
 
             var key = id == SharedChatSystem.CommonChannel
                 ? SharedChatSystem.RadioCommonPrefix.ToString()
@@ -271,7 +244,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 ("deviceType", restictionText)));
         }
 
-        if (defaultChannel != null && _protoManager.TryIndex(defaultChannel, out proto))
+        if (defaultChannel != null && ProtoMan.TryIndex(defaultChannel, out proto))
         {
             if (HasComp<HeadsetComponent>(examineEvent.Examined))
             {

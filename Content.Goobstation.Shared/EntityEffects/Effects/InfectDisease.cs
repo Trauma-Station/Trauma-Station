@@ -1,7 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -23,9 +24,9 @@ public sealed partial class InfectDisease : EntityEffectBase<InfectDisease>
         => Loc.GetString("entity-effect-guidebook-infect-disease", ("chance", Probability), ("disease", prototype.Index(Disease).Name));
 }
 
-public sealed class InfectDiseaseEffectSystem : EntityEffectSystem<DiseaseCarrierComponent, InfectDisease>
+public sealed partial class InfectDiseaseEffectSystem : EntityEffectSystem<DiseaseCarrierComponent, InfectDisease>
 {
-    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
+    [Dependency] private SharedDiseaseSystem _disease = default!;
 
     protected override void Effect(Entity<DiseaseCarrierComponent> ent, ref EntityEffectEvent<InfectDisease> args)
     {

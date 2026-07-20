@@ -1,8 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
   name: Operative Spawner
@@ -318,51 +314,6 @@
   - type: ConditionalSpawner
     prototypes:
     - MobHumanWarden
-
-- type: entity
-  name: Blueshield Officer Base Spawner
-  id: SpawnMobHumanBSOBase
-  parent: MarkerBase
-  suffix: DEBUG
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Human/parts.rsi
-      state: full
-  - type: ConditionalSpawner
-    prototypes:
-    - MobHumanBSOBase
-
-- type: entity
-  name: Blueshield Officer Suit Spawner
-  id: SpawnMobHumanBSOSuit
-  parent: MarkerBase
-  suffix: DEBUG
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Human/parts.rsi
-      state: full
-  - type: ConditionalSpawner
-    prototypes:
-    - MobHumanBSOSuit
-
-- type: entity
-  name: Blueshield Officer ModSuit Spawner
-  id: SpawnMobHumanBSOModSuit
-  parent: MarkerBase
-  suffix: DEBUG
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - sprite: Mobs/Species/Human/parts.rsi
-      state: full
-  - type: ConditionalSpawner
-    prototypes:
-    - MobHumanBSOModSuit
 
 - type: entity
   name: Wizard Spawner

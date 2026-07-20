@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.StatusEffectNew;
@@ -7,9 +9,9 @@ namespace Content.Goobstation.Shared.Wraith.Other;
 /// <summary>
 /// Disables actions for the entity
 /// </summary>
-public sealed class WraithWeakenedSystem : EntitySystem
+public sealed partial class WraithWeakenedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

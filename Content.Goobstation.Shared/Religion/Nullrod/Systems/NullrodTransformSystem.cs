@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Coordinates.Helpers;
@@ -10,14 +6,13 @@ using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod;
 
-public sealed class NullrodTransformSystem : EntitySystem
+public sealed partial class NullrodTransformSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public static readonly ProtoId<TagPrototype> NullrodTag = "Nullrod";
 

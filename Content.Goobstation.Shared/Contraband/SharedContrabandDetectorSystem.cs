@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Contraband;
@@ -12,22 +8,19 @@ using Content.Shared.Storage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Power.EntitySystems;
 using System.Linq;
-using Robust.Shared.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Access.Systems;
 
 namespace Content.Goobstation.Shared.Contraband;
 
-public abstract class SharedContrabandDetectorSystem : EntitySystem
+public abstract partial class SharedContrabandDetectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly ContrabandSystem _contrabandSystem = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiverSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedIdCardSystem _idCardSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -75,7 +68,7 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
         return false;
     }
 
-    public List<EntityUid> FindContraband(EntityUid uid)
+    public List<EntityUid> FindContraband(EntityUid uid, bool recursive = true)
     {
         List<EntityUid> listOfContraband = new();
         List<EntityUid> itemsToCheck = new();
@@ -83,7 +76,8 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
         itemsToCheck.Add(uid);
 
         // Check items in inner storage
-        itemsToCheck.AddRange(RecursiveFindInStorage(uid));
+        if (recursive)
+            itemsToCheck.AddRange(RecursiveFindInStorage(uid));
 
         // Check items in inventory slots and storages
         var enumerator = _inventorySystem.GetSlotEnumerator(uid);
@@ -95,7 +89,8 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
                 continue;
 
             itemsToCheck.Add(item.Value);
-            itemsToCheck.AddRange(RecursiveFindInStorage(item.Value));
+            if (recursive)
+                itemsToCheck.AddRange(RecursiveFindInStorage(item.Value));
         }
 
         // Check items in hands
@@ -103,7 +98,8 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
         foreach (var handItem in handEnumerator)
         {
             itemsToCheck.Add(handItem);
-            itemsToCheck.AddRange(RecursiveFindInStorage(handItem));
+            if (recursive)
+                itemsToCheck.AddRange(RecursiveFindInStorage(handItem));
         }
 
         foreach (var item in itemsToCheck)
@@ -194,7 +190,7 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
         if (!Resolve(contraband, ref component))
             return true;
 
-        var jobs = component.AllowedJobs.Select(p => _prototypeMan.Index(p).LocalizedName).ToArray();
+        var jobs = component.AllowedJobs.Select(p => ProtoMan.Index(p).LocalizedName).ToArray();
 
         var job = "";
         List<ProtoId<DepartmentPrototype>> departments = new();

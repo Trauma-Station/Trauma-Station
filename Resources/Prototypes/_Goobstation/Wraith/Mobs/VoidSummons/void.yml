@@ -1,7 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This holds all mobs that can be summoned by Summon void creature action
 - type: entity
+  parent: [ BaseMob, MobCombat, MobNightVision ]
   id: MobSkeletonCommander
-  parent: [ BaseMob, MobCombat ]
   name: skeleton commander
   description: A bulky skeleton here to encourage his friends.
   components:
@@ -33,10 +35,7 @@
   - type: Vocal
     wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
     wilhelmProbability: 0.1
-    sounds:
-      Male: Skeleton
-      Female: Skeleton
-      Unsexed: Skeleton
+    emoteSounds: Skeleton
   - type: Sprite
     drawdepth: Mobs
     sprite: _Goobstation/Wraith/Mobs/skeletoncommander.rsi
@@ -65,8 +64,9 @@
         layer:
           - MobLayer
   - type: Damageable #Reduced blunt and heat damage according to code.
-    damageContainer: Inorganic
     damageModifierSet: SiliconProtected
+  - type: Injurable
+    damageContainer: Inorganic
   - type: NoSlip
   - type: Pullable
   - type: ZombieImmune
@@ -88,7 +88,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100 # Not parity, but the health system in Goonstation works completely differently so :shrug:
+          damage: 50
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -97,22 +97,18 @@
               path: /Audio/Effects/bone_rattle.ogg
           - !type:SpawnEntitiesBehavior
             spawn:
-              HeadSkeleton:
+              OrganSkeletonPersonHead:
                 min: 1
                 max: 1
-  - type: NightVision # Goobstation - Nigthvision
-    color: white
-    activateSound: null
-    deactivateSound: null
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5
 
 - type: entity
-  name: Tentacle fiend
-  parent: MobCorgiNarsi
+  parent: [ MobCorgiNarsi, MobNightVision ]
   id: MobVoidSpiker
+  name: tentacle fiend
   description: Standing still is probably not a good idea.
   components:
   - type: MindContainer
@@ -147,24 +143,25 @@
     damage:
       types:
         Slash: 4 #Very weak damage, but makes target sleep on attack. I'm not sure if our balance fits with Goon's balance, because 4 damage is pathetically weak, but this creature might be only for kidnapping.
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Nocturine
-          Quantity: 100
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 100
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 4
+    transferAmount: 1
   - type: TentacleHook
   - type: SpikerLash
   - type: SpikerShuffle
     statusEffectsToRemove:
-    - Stun
     - Electrocution
     - SlowedDown
     - Stutter
-    - TemporaryBlindness
+    newEffectsToRemove:
+    - StatusEffectBlindness
+    - StatusEffectStunned
   - type: ActionGrant
     actions:
     - ActionTentacleHook
@@ -182,35 +179,28 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead # Not parity, but the health system in Goonstation works completely differently so :shrug:
+      60: Dead
   - type: Grammar
     attributes:
       gender: male
       proper: true
   - type: Vocal
-    sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
-  - type: LanguageKnowledge
+    emoteSounds: UnisexArachnid
+  - type: LanguageSpeaker
     speaks:
     - Dog
     understands:
     - Dog
     - TauCetiBasic
-  - type: NightVision # Goobstation - Nigthvision
-    color: purple
-    activateSound: null
-    deactivateSound: null
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5
 
 - type: entity
-  name: Voidhound
-  parent: MobCorgiNarsi
+  parent: [ MobCorgiNarsi, MobNightVision ]
   id: MobVoidHound
+  name: voidhound
   description: You probably shouldn't be staring at this thing.
   components:
   - type: MindContainer
@@ -242,7 +232,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 8
+        Piercing: 5
         Slash: 5
   - type: Rushdown
   - type: Cloak
@@ -262,7 +252,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead # Not parity, but the health system in Goonstation works completely differently so :shrug:
+      50: Dead
   - type: Grammar
     attributes:
       gender: male
@@ -272,11 +262,8 @@
     - DoorBumpOpener
     - VimPilot
   - type: Vocal
-    sounds:
-      Male: Cerberus
-      Female: Cerberus
-      Unsexed: Cerberus
-  - type: LanguageKnowledge
+    emoteSounds: Cerberus
+  - type: LanguageSpeaker
     speaks:
     - Dog
     understands:
@@ -285,10 +272,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5
     baseSprintSpeed: 5
-  - type: NightVision # Goobstation - Nigthvision
-    color: purple
-    activateSound: null
-    deactivateSound: null
   - type: Prying
     pryPowered: true
     force: true

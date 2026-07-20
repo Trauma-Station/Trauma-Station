@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Kara D <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2023 Waylon Cude <waylon.cude@finzdani.net>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Drowsiness;
 using Content.Shared.StatusEffectNew;
@@ -21,15 +9,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Drowsiness;
 
-public sealed class DrowsinessOverlay : Overlay
+public sealed partial class DrowsinessOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Drowsiness";
 
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private readonly StatusEffectsSystem _statusEffects = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

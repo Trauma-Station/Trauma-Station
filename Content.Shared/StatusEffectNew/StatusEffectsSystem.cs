@@ -14,16 +14,14 @@ namespace Content.Shared.StatusEffectNew;
 /// </summary>
 public sealed partial class StatusEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    private EntityQuery<StatusEffectContainerComponent> _containerQuery;
-    private EntityQuery<StatusEffectComponent> _effectQuery;
+    [Dependency] private EntityQuery<StatusEffectContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectComponent> _effectQuery = default!;
 
-    public static HashSet<string> StatusEffectPrototypes = [];
+    public readonly HashSet<string> StatusEffectPrototypes = [];
 
     public override void Initialize()
     {
@@ -39,9 +37,6 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         SubscribeLocalEvent<RejuvenateRemovedStatusEffectComponent, StatusEffectRelayedEvent<RejuvenateEvent>>(OnRejuvenate);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
-        _containerQuery = GetEntityQuery<StatusEffectContainerComponent>();
-        _effectQuery = GetEntityQuery<StatusEffectComponent>();
 
         ReloadStatusEffectsCache();
     }
@@ -80,9 +75,9 @@ public sealed partial class StatusEffectsSystem : EntitySystem
     {
         StatusEffectPrototypes.Clear();
 
-        foreach (var ent in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var ent in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            if (ent.TryGetComponent<StatusEffectComponent>(out _, _factory))
+            if (ent.HasComp<StatusEffectComponent>(Factory))
                 StatusEffectPrototypes.Add(ent.ID);
         }
     }
@@ -168,10 +163,10 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
     public bool CanAddStatusEffect(EntityUid uid, EntProtoId effectProto)
     {
-        if (!_proto.Resolve(effectProto, out var effectProtoData))
+        if (!ProtoMan.Resolve(effectProto, out var effectProtoData) || TerminatingOrDeleted(uid)) // Trauma - skip deleting entities
             return false;
 
-        if (!effectProtoData.TryGetComponent<StatusEffectComponent>(out var effectProtoComp, Factory))
+        if (!effectProtoData.TryComp<StatusEffectComponent>(out var effectProtoComp, Factory))
             return false;
 
         if (!_whitelist.CheckBoth(uid, effectProtoComp.Blacklist, effectProtoComp.Whitelist))
@@ -195,7 +190,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
     /// <param name="duration">Duration of status effect. Leave null and the effect will be permanent until it is removed using <c>TryRemoveStatusEffect</c>.</param>
     /// <param name="delay">The delay of the effect. Leave null and the effect will be immediate.</param>
     /// <param name="statusEffect">The EntityUid of the status effect we have just created or null if we couldn't create one.</param>
-    public bool TryAddStatusEffect( // Goobstation, apparently? blame @LuciferEOS on Github if this isn't goob code.
+    public bool TryAddStatusEffect( // Trauma - made public
         EntityUid target,
         EntProtoId effectProto,
         [NotNullWhen(true)] out EntityUid? statusEffect,
@@ -227,7 +222,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
         var endTime = delay == null ? _timing.CurTime + duration : _timing.CurTime + delay + duration;
         SetStatusEffectEndTime((effect.Value, effectComp), endTime);
-        var startTime = delay == null ? TimeSpan.Zero : _timing.CurTime + delay.Value;
+        var startTime = delay == null ? _timing.CurTime : _timing.CurTime + delay.Value;
         SetStatusEffectStartTime(effect.Value, startTime);
 
         TryApplyStatusEffect((statusEffect.Value, effectComp));

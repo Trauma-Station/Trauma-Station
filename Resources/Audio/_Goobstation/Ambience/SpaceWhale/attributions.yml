@@ -1,7 +1,7 @@
 - files: ["leviathan-appear.ogg"]
   license: CC0-1.0
-  copyright: "Made by Crigence"
-  source: https://pixabay.com/sound-effects/deep-distant-unknowable-roar-186476/
+  copyright: "Made by Crigence, converted to mono by @deltanedas (github)"
+  source: "https://pixabay.com/sound-effects/deep-distant-unknowable-roar-186476/"
 
 - files: ["imafuckingworm.ogg"]
   license: CC-BY-SA-3.0

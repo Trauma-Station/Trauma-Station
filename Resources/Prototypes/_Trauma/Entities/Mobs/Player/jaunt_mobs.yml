@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: DesynchronizedPocket
+  id: VoidMagnetPocket
+  name: hole in reality
+  description: It's shaped an awful lot like a person.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Effects/void_pocket.rsi
+    state: void_pocket
+  - type: Spectral
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 0
+    baseWalkSpeed: 0
+
+- type: entity
+  parent: BasePolymorphBloodCrawlJaunt
+  id: PolymorphBloodCrawlJauntPrayer
+  suffix: Prayer

@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "license": "CC-BY-NC-SA-3.0",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/4c38793ed1dafdd7775e29e4af5f27c6c12f5801/icons/mob/simple/animal.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "morph",
+            "directions": 4,
+            "delays": [
+                [ 0.3, 0.3, 0.3 ],
+                [ 0.3, 0.3, 0.3 ],
+                [ 0.3, 0.3, 0.3 ],
+                [ 0.3, 0.3, 0.3 ]
+            ]
+        },
+        {
+            "name": "morph_dead",
+            "directions": 4
+        }
+    ]
+}

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Administration;
 using Content.Shared.CCVar.CVarAccess;
 using Content.Shared.Roles;
@@ -80,7 +75,7 @@ public sealed partial class CCVars
         /// </summary>
         [CVarControl(AdminFlags.VarEdit)]
         public static readonly CVarDef<float> PlaytestExplosionDamageModifier =
-            CVarDef.Create("playtest.explosion_damage_modifier", 0.5f, CVar.SERVER | CVar.REPLICATED); // Gppb edit
+            CVarDef.Create("playtest.explosion_damage_modifier", 1f, CVar.SERVER | CVar.REPLICATED);
 
         /// <summary>
         ///     Scales the damage dealt to mobs in the game (i.e. entities with MobStateComponent).

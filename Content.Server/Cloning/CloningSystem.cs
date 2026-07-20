@@ -13,6 +13,7 @@ using Robust.Shared.Utility;
 // </Trauma>
 using Content.Server.Humanoid;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body;
 using Content.Shared.Cloning;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Database;
@@ -41,20 +42,22 @@ namespace Content.Server.Cloning;
 public sealed partial class CloningSystem : SharedCloningSystem
 {
     // <Trauma>
-    [Dependency] private readonly ToggleableClothingSystem _toggleable = default!;
-    [Dependency] private readonly SharedSealableClothingSystem _sealable = default!;
+    [Dependency] private ToggleableClothingSystem _toggleable = default!;
+    // TODO: decouple this shitcode
+    [Dependency] private SealableClothingSystem _sealable = default!;
     // </Trauma>
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
-    [Dependency] private readonly NameModifierSystem _nameMod = default!;
-    [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private NameModifierSystem _nameMod = default!;
+    [Dependency] private Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
+
+    [Dependency] private EntityQuery<CloneableStatusEffectComponent> _cloneableEffectQuery = default!;
 
     /// <summary>
     ///     Spawns a clone of the given humanoid mob at the specified location or in nullspace.
@@ -62,15 +65,15 @@ public sealed partial class CloningSystem : SharedCloningSystem
     public bool TryCloning(EntityUid original, MapCoordinates? coords, ProtoId<CloningSettingsPrototype> settingsId, [NotNullWhen(true)] out EntityUid? clone)
     {
         clone = null;
-        if (!_prototype.Resolve(settingsId, out var settings))
+        if (!ProtoMan.Resolve(settingsId, out var settings))
             return false; // invalid settings
 
-        // Goobstation start
-        if (!TryComp<HumanoidAppearanceComponent>(original, out var humanoid) && !settings.AllowNonHumanoid)
+        // Goobstation start - non humanoid cloning
+        if (!TryComp<HumanoidProfileComponent>(original, out var humanoid) && !settings.AllowNonHumanoid)
             return false; // whatever body was to be cloned, was not a humanoid
 
         SpeciesPrototype? speciesPrototype = null;
-        if (humanoid != null && !_prototype.Resolve(humanoid.Species, out speciesPrototype))
+        if (humanoid != null && !ProtoMan.Resolve(humanoid.Species, out speciesPrototype))
             return false; // invalid species
 
         var proto = speciesPrototype?.Prototype.ToString() ?? Prototype(original)?.ID;
@@ -89,8 +92,8 @@ public sealed partial class CloningSystem : SharedCloningSystem
         if (attemptEv.Cancelled && !settings.ForceCloning)
             return false; // cannot clone, for example due to the unrevivable trait
 
-        clone = coords == null ? Spawn(proto) : Spawn(proto, coords.Value); // Goob edit
-        _humanoidSystem.CloneAppearance(original, clone.Value);
+        clone = coords == null ? Spawn(proto) : Spawn(proto, coords.Value); // Goob - use proto from above
+        _visualBody.CopyAppearanceFrom(original, clone.Value);
 
         CloneComponents(original, clone.Value, settings);
 
@@ -122,7 +125,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
     public override void CloneComponents(EntityUid original, EntityUid clone, ProtoId<CloningSettingsPrototype> settings)
     {
-        if (!_prototype.Resolve(settings, out var proto))
+        if (!ProtoMan.Resolve(settings, out var proto))
             return;
 
         CloneComponents(original, clone, proto);
@@ -187,7 +190,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
             // If the original does not have the component, then the clone shouldn't have it either.
             RemComp(clone, componentRegistration.Type);
-            if (EntityManager.TryGetComponent(original, componentRegistration.Type, out var sourceComp)) // Does the original have this component?
+            if (TryComp(original, componentRegistration.Type, out var sourceComp)) // Does the original have this component?
             {
                 CopyComp(original, clone, sourceComp);
             }
@@ -417,19 +420,10 @@ public sealed partial class CloningSystem : SharedCloningSystem
     /// </summary>
     public void CopyStatusEffects(Entity<StatusEffectContainerComponent?> original, Entity<StatusEffectContainerComponent?> target)
     {
-        if (!Resolve(original, ref original.Comp, false))
-            return;
-
-        if (original.Comp.ActiveStatusEffects is null)
-            return;
-
-        foreach (var effect in original.Comp.ActiveStatusEffects.ContainedEntities)
+        foreach (var effect in _statusEffects.EnumerateStatusEffects(original, _cloneableEffectQuery))
         {
-            if (!TryComp<StatusEffectComponent>(effect, out var effectComp))
-                continue;
-
             //We are not interested in temporary effects, only permanent ones.
-            if (effectComp.EndEffectTime is not null)
+            if (effect.Comp1.EndEffectTime is not null)
                 continue;
 
             var effectProto = Prototype(effect);

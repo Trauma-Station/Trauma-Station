@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling;
@@ -18,13 +14,13 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.PreAscension;
 /// This handles Destroy Engines ability.
 /// An ability that delays the evacuation shuttle by 10 minutes
 /// </summary>
-public sealed class ShadowlingDestroyEnginesSystem : EntitySystem
+public sealed partial class ShadowlingDestroyEnginesSystem : EntitySystem
 {
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

@@ -17,8 +17,9 @@ public static partial class PoolManager
         // @formatter:off
         // <Trauma>
         (LavalandCVars.LavalandEnabled.Name, "false"),
-        (TraumaCVars.GhostBarEnabled.Name, "false"),
         (TraumaCVars.DisablePathfinding.Name, "true"), // 5GB memory usage spike in some tests and potential deadlocking
+        (TraumaCVars.DisableVisionEffects.Name, "true"), // they spawn entities a lot, similar to how audio entities which are ignored
+        (TraumaCVars.StationTraitsEnabled.Name, "false"), // spawns game rules and tests dont like it
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),
         (CCVars.DatabaseSqliteDelay.Name,     "0"),
@@ -34,7 +35,6 @@ public static partial class PoolManager
         (CCVars.ArrivalsShuttles.Name,        "false"),
         (CCVars.EmergencyShuttleEnabled.Name, "false"),
         (CCVars.ProcgenPreload.Name,          "false"),
-        (CCVars.WorldgenEnabled.Name,         "false"),
         (CCVars.GatewayGeneratorEnabled.Name, "false"),
         (CCVars.GameDummyTicker.Name, "true"),
         (CCVars.GameLobbyEnabled.Name, "false"),

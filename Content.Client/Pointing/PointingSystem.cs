@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2022 ike709 <ike709@github.com>
-// SPDX-FileCopyrightText: 2022 ike709 <ike709@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Pointing.Components;
 using Content.Shared.Pointing;
 using Content.Shared.Verbs;
@@ -22,9 +8,9 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.Pointing;
 
-public sealed partial class PointingSystem : SharedPointingSystem
+public sealed partial class PointingSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -62,10 +48,19 @@ public sealed partial class PointingSystem : SharedPointingSystem
             Text = Loc.GetString("pointing-verb-get-data-text"),
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/point.svg.192dpi.png")),
             ClientExclusive = true,
-            Act = () => RaiseNetworkEvent(new PointingAttemptEvent(GetNetEntity(args.Target)))
+            Act = () => TryPointAtEntity(GetNetEntity(args.Target))
         };
 
         args.Verbs.Add(verb);
+    }
+
+    /// <summary>
+    /// Tries to point at a target entity
+    /// </summary>
+    /// <param name="target">The target to point at</param>
+    public void TryPointAtEntity(NetEntity target)
+    {
+        RaiseNetworkEvent(new PointingAttemptEvent(target));
     }
 
     private void OnArrowStartup(EntityUid uid, PointingArrowComponent component, ComponentStartup args)

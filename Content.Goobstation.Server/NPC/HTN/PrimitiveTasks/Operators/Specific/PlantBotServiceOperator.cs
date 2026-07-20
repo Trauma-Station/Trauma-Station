@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Silicon.Bots;
@@ -12,34 +8,27 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Shared.Chat;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PlantbotServiceOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private ChatSystem _chat = default!;
     private SharedAudioSystem _audio = default!;
     private SharedInteractionSystem _interaction = default!;
     private SharedPopupSystem _popup = default!;
     private PlantHolderSystem _plantHolderSystem = default!;
-    private DamageableSystem _damageableSystem = default!;
-    private TagSystem _tagSystem = default!;
 
     public const float RequiredWaterLevelToService = 80f;
     public const float RequiredWeedsAmountToWeed = 1f;
     public const float WaterTransferAmount = 10f;
     public const float WeedsRemovedAmount = 1f;
-    public const string SiliconTag = "SiliconMob";
 
     /// <summary>
     /// Target entity to inject.
@@ -74,7 +63,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
         if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out var botComp)
             || !_entMan.TryGetComponent<PlantHolderComponent>(target, out var plantHolderComponent)
             || !_interaction.InRangeUnobstructed(owner, target)
-            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed, Harvest: false} && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f))) // Trauma
+            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed, Harvest: false} && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)))
             return HTNOperatorStatus.Failed;
 
         if (botComp.IsEmagged)
@@ -96,7 +85,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
                 _audio.PlayPvs(botComp.WeedSound, target);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-remove-weeds"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
-            else if (plantHolderComponent.Harvest) // Trauma
+            else if (plantHolderComponent.Harvest)
             {
                 _plantHolderSystem.DoHarvest(target, owner, plantHolderComponent);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-harvest"), InGameICChatType.Speak, hideChat: true, hideLog: true);

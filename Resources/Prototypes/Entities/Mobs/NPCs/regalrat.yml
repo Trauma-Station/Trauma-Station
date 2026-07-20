@@ -1,10 +1,31 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision ] # Trauma - added AppearanceRatKing
   description: He's da rat. He make da roolz.
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: VentCrawler
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Poison: -0.5
+        Blunt: -0.1
+        Slash: -0.1
+        Piercing: -0.1
+        Heat: -0.1
+        Cold: -0.1
+        Shock: -0.1
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Mouse
+    understands:
+    - TauCetiBasic
+    - Mouse
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 4.00
@@ -34,6 +55,8 @@
     proto: regal
   - type: Physics
     bodyType: KinematicController
+  - type: Puller
+    needsHands: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -60,9 +83,6 @@
       types:
         Slash: 12
         Piercing: 8
-  - type: Body
-    prototype: RatKing # Trauma - was Rat
-    requiredLegs: 0 # TODO: Make more than 1 leg, set to 0 to avoid sprint speed being reset by the body system
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 400
@@ -103,6 +123,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.5 # rat king touches more wires, see?
   - type: Rummager
   - type: RatKing
     hungerPerArmyUse: 25
@@ -110,15 +132,8 @@
   - type: MobsterAccent
   - type: Speech
     speechVerb: SmallMob
-  - type: LanguageKnowledge # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - Mouse
-    understands:
-    - TauCetiBasic
-    - Mouse
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHeadHatFancyCrown #how did that get there?
       amount: 1
   - type: MobPrice
@@ -134,24 +149,8 @@
   - type: Grammar
     attributes:
       gender: male
-  - type: Sharp
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#d14343"
-    activateSound: null
-    deactivateSound: null
-  - type: Insulated # Goobstation
-    coefficient: 0.5
-  - type: CombatPower # Goobstation
-    factor: 2
-  - type: PassiveDamage #passive Healing
-    allowedStates:
-    - Alive
-    damage:
-      types:
-        Poison: -0.5
-      groups:
-        Brute: -0.3
-        Burn: -0.3
+  - type: Tool
+    qualities: Slicing
 
 - type: entity
   id: MobRatKingBuff
@@ -194,11 +193,24 @@
 - type: entity
   name: rat servant
   id: MobRatServant
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision ] # Trauma - added MobNightVision
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - type: Bloodstream
+    bloodReferenceSolution: # he is very small
+      reagents:
+      - ReagentId: Blood
+        Quantity: 10
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 4.0
@@ -231,20 +243,6 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
       state: eyes
       shader: unshaded
-  - type: Insulated # Goobstation
-  - type: LanguageKnowledge # Einstein Engines - Language
-    speaks:
-    - Mouse
-    understands:
-    - Mouse
-    - TauCetiBasic
-  - type: PassiveDamage #passive Healing
-    allowedStates:
-    - Alive
-    damage:
-      groups:
-        Brute: -0.1
-        Burn: -0.1
   - type: SpriteMovement
     movementLayers:
       movement:
@@ -270,20 +268,21 @@
     thresholds:
       0: Alive
       15: Dead #goob
-  - type: Bloodstream
-    bloodReferenceSolution: # Goob - he is very small
-      reagents:
-      - ReagentId: Blood
-        Quantity: 10
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 15
+        damage: 10 # Trauma, was 15
       behaviors:
       - !type:GibBehavior
         deleteGibs: true # Trauma - no lag pls
         recursive: false
+      # <Trauma>
+      - !type:SpawnGasBehavior
+        gasMixture:
+          moles:
+            Ammonia: 25
+      # </Trauma>
   - type: Stamina
     baseCritThreshold: 60
   - type: MeleeWeapon
@@ -295,9 +294,6 @@
       types:
         Slash: 5
         Piercing: 3
-  - type: Body
-    prototype: Rat
-    requiredLegs: 0 # TODO: Make more than 1 leg, set to 0 to avoid sprint speed being reset by the body system
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 200
@@ -323,21 +319,20 @@
         Base: dead
       Dead:
         Base: splat
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatRat
       amount: 1
   - type: Vocal
-    sounds:
-      Male: Mouse
-      Female: Mouse
-      Unsexed: Mouse
+    emoteSounds: Mouse
     wilhelmProbability: 0.001
   - type: Tag
     tags:
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.2 # they don't make da roolz, but they sneaky
   - type: MobPrice
     price: 500 # rat wealth
   - type: MobsterAccent
@@ -350,14 +345,6 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
-  - type: Edible
-    edible: Food
-  - type: Item
-    size: Tiny # Delta V - Make them edible and pickable.
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entityTable
   id: RatKingLoot

@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Chemistry;
+using Content.Trauma.Common.Chemistry;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -34,20 +35,20 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// <seealso cref="InjectorModePrototype"/>
 public sealed partial class InjectorSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedForensicsSystem _forensics = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedForensicsSystem _forensics = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ReactiveSystem _reactiveSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private StandingStateSystem _standingState = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<InjectorComponent, BeforeRangedInteractEvent>(OnBeforeRangedInteract); // Trauma
         SubscribeLocalEvent<InjectorComponent, UseInHandEvent>(OnInjectorUse);
         SubscribeLocalEvent<InjectorComponent, AfterInteractEvent>(OnInjectorAfterInteract);
         SubscribeLocalEvent<InjectorComponent, InjectorDoAfterEvent>(OnInjectDoAfter);
@@ -59,7 +60,7 @@ public sealed partial class InjectorSystem : EntitySystem
     private void OnInjectorUse(Entity<InjectorComponent> injector, ref UseInHandEvent args)
     {
         if (args.Handled
-            || !_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeProto))
+            || !ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeProto))
             return;
 
         if (activeProto.InjectOnUse) // Injectors that can't toggle transferAmounts will be used.
@@ -122,7 +123,7 @@ public sealed partial class InjectorSystem : EntitySystem
     private void AddVerbs(Entity<InjectorComponent> injector, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null
-            || !_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+            || !ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return;
 
         var user = args.User;
@@ -203,7 +204,10 @@ public sealed partial class InjectorSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, doAfterTime, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {
-            BreakOnMove = true,
+            // <Trauma>
+            BreakOnMove = injector.Comp.BreakOnMove,
+            DistanceThreshold = injector.Comp.InteractionRangeOverride ?? 1.5f,
+            // </Trauma>
             BreakOnWeightlessMove = false,
             BreakOnDamage = true,
             NeedHand = injector.Comp.NeedHand,
@@ -217,7 +221,7 @@ public sealed partial class InjectorSystem : EntitySystem
             return true;
 
         if (GetSolution(injector) is not {} injectorSolution // Trauma - use GetSolution
-            || !_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+            || !ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
         // Create a pop-up for the user.
@@ -273,7 +277,7 @@ public sealed partial class InjectorSystem : EntitySystem
         amount = FixedPoint2.Zero;
 
         if (GetSolution(injector) is not {} injectorSolution // Trauma - use GetSolution
-            || !_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+            || !ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
         doAfterTime = activeMode.MobTime;
@@ -309,6 +313,12 @@ public sealed partial class InjectorSystem : EntitySystem
         else if (_standingState.IsDown(target))
             doAfterTime *= activeMode.DownedModifier;
 
+        // <Trauma>
+        var ev = new UserModifyInjectTimeEvent(user, injector, doAfterTime);
+        RaiseLocalEvent(user, ref ev);
+        doAfterTime = ev.Delay;
+        // </Trauma>
+
         return true;
     }
     #endregion Mob Interaction
@@ -321,7 +331,10 @@ public sealed partial class InjectorSystem : EntitySystem
 
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, doAfterTime, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {
-            BreakOnMove = true,
+            // <Trauma>
+            BreakOnMove = injector.Comp.BreakOnMove,
+            DistanceThreshold = injector.Comp.InteractionRangeOverride ?? 1.5f,
+            // </Trauma>
             BreakOnWeightlessMove = false,
             BreakOnDamage = true,
             NeedHand = injector.Comp.NeedHand,
@@ -342,7 +355,7 @@ public sealed partial class InjectorSystem : EntitySystem
     {
         doAfterTime = TimeSpan.Zero;
 
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
         // Check if the Injector has a draw time, but only when drawing.
@@ -384,7 +397,7 @@ public sealed partial class InjectorSystem : EntitySystem
     /// <exception cref="ArgumentOutOfRangeException">The injector has a different <see cref="InjectorBehavior"/>.</exception>
     private bool TryUseInjector(Entity<InjectorComponent> injector, EntityUid user, EntityUid target)
     {
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
         var isOpenOrIgnored = injector.Comp.IgnoreClosed || !_openable.IsClosed(target);
@@ -462,7 +475,7 @@ public sealed partial class InjectorSystem : EntitySystem
         }
 
         var injectorSolution = solutionEnt.Comp.Solution; // Trauma
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
             return false;
 
         var selfEv = new SelfBeforeInjectEvent(user, injector, target);
@@ -498,7 +511,7 @@ public sealed partial class InjectorSystem : EntitySystem
             // <Trauma> - use the fucking override message!?
             if (ev.OverrideMessage is {} msg)
             {
-                _popup.PopupPredicted(msg, user, user);
+                _popup.PopupEntity(msg, target, user, PopupType.SmallCaution);
                 return true;
             }
             // </Trauma>
@@ -539,14 +552,17 @@ public sealed partial class InjectorSystem : EntitySystem
         else
             _solutionContainer.Refill(target, targetSolution, removedSolution);
 
-        LocId msgSuccess = target == user ? "injector-component-inject-success-message-self" : "injector-component-inject-success-message";
+        // <Trauma> - localize it here, not below
+        var msgSuccess = Loc.GetString(target == user ? "injector-component-inject-success-message-self" : "injector-component-inject-success-message",
+            ("amount", removedSolution.Volume), ("target", Identity.Entity(target, EntityManager)));
+        // </Trauma>
 
         if (selfEv.OverrideMessage != null)
             msgSuccess = selfEv.OverrideMessage;
         else if (ev.OverrideMessage != null)
             msgSuccess = ev.OverrideMessage;
 
-        _popup.PopupClient(Loc.GetString(msgSuccess, ("amount", removedSolution.Volume), ("target", Identity.Entity(target, EntityManager))), target, user);
+        _popup.PopupClient(msgSuccess, target, user); // Trauma - dont localize here
 
         // it is IMPERATIVE that when an injector is instant, that it has a pop-up.
         if (activeMode.InjectPopupTarget != null && target != user)
@@ -580,7 +596,7 @@ public sealed partial class InjectorSystem : EntitySystem
     {
         if (GetSolutionEnt(injector) is not {} solutionEnt || solutionEnt.Comp.Solution.AvailableVolume == 0) // Trauma - use GetSolutionEnt
         {
-            _popup.PopupClient("injector-component-cannot-toggle-draw-message", user, user);
+            _popup.PopupClient(Loc.GetString("injector-component-cannot-toggle-draw-message"), user, user); // Trauma - added Loc.GetString
             return false;
         }
 
@@ -663,6 +679,16 @@ public sealed partial class InjectorSystem : EntitySystem
         var finalMessage = Loc.GetString(msg, ("amount", transferAmount), ("target", targetIdentity));
         _popup.PopupClient(finalMessage, target, user);
 
+        // <Trauma>
+        if (ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
+        {
+            if (activeMode.DrawPopupTarget != null && target.Owner != user)
+                _popup.PopupClient(Loc.GetString(activeMode.DrawPopupTarget), target, target);
+
+            _audio.PlayPredicted(activeMode.DrawSound, target, user);
+        }
+        // </Trauma>
+
         AfterDraw(injector, user, target);
     }
 
@@ -685,17 +711,17 @@ public sealed partial class InjectorSystem : EntitySystem
             || solution.Volume != 0)
             return;
 
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode)
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode)
             || activeMode.Behavior.HasFlag(InjectorBehavior.Dynamic))
             return;
 
         foreach (var mode in injector.Comp.AllowedModes)
         {
-            if (!_prototypeManager.Resolve(mode, out var proto)
+            if (!ProtoMan.Resolve(mode, out var proto)
                 || !proto.Behavior.HasFlag(InjectorBehavior.Draw))
                 continue;
 
-            ToggleMode(injector, user, proto);
+            ToggleMode(injector, user, proto, false);
             return;
         }
     }
@@ -716,44 +742,50 @@ public sealed partial class InjectorSystem : EntitySystem
             || solution.AvailableVolume != 0)
             return;
 
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode)
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode)
             || activeMode.Behavior.HasFlag(InjectorBehavior.Dynamic))
             return;
 
         foreach (var mode in injector.Comp.AllowedModes)
         {
-            if (!_prototypeManager.Resolve(mode, out var proto)
+            if (!ProtoMan.Resolve(mode, out var proto)
                 || !proto.Behavior.HasFlag(InjectorBehavior.Inject))
                 continue;
 
-            ToggleMode(injector, user, proto);
+            ToggleMode(injector, user, proto, false);
             return;
         }
     }
     #endregion Injecting/Drawing
 
     #region Mode Toggling
+
     /// <summary>
     /// Toggle modes of the injector if possible.
     /// </summary>
     /// <param name="injector">The injector whose mode is to be toggled.</param>
     /// <param name="user">The user toggling the mode.</param>
     /// <param name="mode">The desired mode.</param>
+    /// <param name="popup">Whether we should show popup text for the mode being changed.</param>
     /// <remarks>This will still check if the injector can use that mode.</remarks>
     [PublicAPI]
-    public void ToggleMode(Entity<InjectorComponent> injector, EntityUid user, InjectorModePrototype mode)
+    public void ToggleMode(Entity<InjectorComponent> injector, EntityUid user, InjectorModePrototype mode, bool popup = true)
     {
         var index = injector.Comp.AllowedModes.FindIndex(nextMode => mode == nextMode);
 
         injector.Comp.ActiveModeProtoId = injector.Comp.AllowedModes[index];
 
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var newMode))
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var newMode))
+            return;
+
+        Dirty(injector);
+
+        if (!popup)
             return;
 
         var modeName = Loc.GetString(newMode.Name);
         var message = Loc.GetString("injector-component-mode-changed-text", ("mode", modeName));
         _popup.PopupClient(message, user, user);
-        Dirty(injector);
     }
 
     /// <summary>
@@ -764,14 +796,14 @@ public sealed partial class InjectorSystem : EntitySystem
     [PublicAPI]
     public void ToggleMode(Entity<InjectorComponent> injector, EntityUid user)
     {
-        if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var activeProto))
+        if (!ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeProto))
             return;
 
         string? errorMessage = null;
 
         foreach (var allowedMode in injector.Comp.AllowedModes)
         {
-            if (!_prototypeManager.Resolve(allowedMode, out var proto)
+            if (!ProtoMan.Resolve(allowedMode, out var proto)
                 || proto.Behavior.HasFlag(activeProto.Behavior)
                 || GetSolution(injector) is not {} solution) // Trauma - use GetSolution
                 continue;

@@ -1,9 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.IntegrationTests.Fixtures;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -11,16 +6,17 @@ using Robust.Shared.Prototypes;
 namespace Content.IntegrationTests.Tests.Networking;
 
 [TestFixture]
-public sealed class PvsCommandTest
+public sealed class PvsCommandTest : GameTest
 {
     private static readonly EntProtoId TestEnt = "MobHuman";
+
+    public override PoolSettings PoolSettings => new() { Connected = true, DummyTicker = false };
 
     [Test]
     public async Task TestPvsCommands()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true, DummyTicker = false });
+        var pair = Pair;
         var (server, client) = pair;
-        await pair.RunTicksSync(5);
 
         // Spawn a complex entity.
         EntityUid entity = default;
@@ -52,6 +48,5 @@ public sealed class PvsCommandTest
         Assert.That(meta.LastStateApplied, Is.GreaterThan(lastApplied));
 
         await server.WaitPost(() => server.EntMan.DeleteEntity(entity));
-        await pair.CleanReturnAsync();
     }
 }

@@ -1,8 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
+// <Trauma>
+using Robust.Shared.GameStates;
+// </Trauma>
 
 namespace Content.Shared.Revenant.Components;
 
@@ -11,11 +9,12 @@ namespace Content.Shared.Revenant.Components;
 /// Meant to be used in conjunction with statusEffectSystem
 /// </summary>
 [RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState] // Trauma
 public sealed partial class CorporealComponent : Component
 {
     /// <summary>
     /// The debuff applied when the component is present.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float MovementSpeedDebuff = 0.3f; // Goobstation change, corporeal makes you much slower.
+    [DataField, AutoNetworkedField] // Trauma - replaced ViewVariables
+    public float MovementSpeedDebuff = 0.3f;
 }

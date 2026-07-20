@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -16,14 +13,14 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Shared.Keyring;
 
-public sealed class KeyringSystem : EntitySystem
+public sealed partial class KeyringSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedDoorSystem _doorSystem = default!;
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IRobustRandom _random = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -58,7 +55,8 @@ public sealed class KeyringSystem : EntitySystem
                 keyring.Comp.UnlockAttemptDuration,
                 new KeyringDoAfterEvent(),
                 keyring,
-                args.Target)
+                args.Target,
+                used: keyring)
             {
                 BlockDuplicate = true,
                 BreakOnMove = true,
@@ -69,9 +67,9 @@ public sealed class KeyringSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
 
         var popup = Loc.GetString("keyring-start-unlock-popup");
-        _popupSystem.PopupClient(popup, args.User, args.User);
+        _popup.PopupEntity(popup, args.User, args.User);
 
-        _audioSystem.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
+        _audio.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
 
         args.Handled = true;
     }
@@ -86,10 +84,10 @@ public sealed class KeyringSystem : EntitySystem
 
         if (_access.AreAccessTagsAllowed(keyring.Comp.Tags, accessReader))
         {
-            _doorSystem.StartOpening(target);
+            _door.StartOpening(target);
 
             var successPopup = Loc.GetString("keyring-finish-unlock-popup");
-            _popupSystem.PopupPredicted(successPopup, args.User, args.User);
+            _popup.PopupEntity(successPopup, args.User, args.User);
 
             args.Handled = true;
 
@@ -98,7 +96,7 @@ public sealed class KeyringSystem : EntitySystem
 
 
         var failPopup = Loc.GetString("keyring-unlock-fail-popup");
-        _popupSystem.PopupPredicted(failPopup, args.User, args.User);
+        _popup.PopupEntity(failPopup, args.User, args.User);
 
         args.Handled = true;
     }

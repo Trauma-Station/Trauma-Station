@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: ChemVendInventory
   startingInventory:
-    Jug: 4
+    Jug: 8 #Goob edit - Energy Chem
     JugAluminium: 2
     JugCarbon: 4
     JugChlorine: 1
@@ -26,9 +26,15 @@
     DrinkLithiumFlask: 1
     StrangePill: 3
     ChemistryBottleToxin: 1
+    # <Trauma>
     ChemistryBottleLead: 2
-  emaggedInventory: # Goobsation
+    SyringePoisonFent: 2
+  emaggedInventory:
     VestineChemistryVial: 1
+    VialRed: 1
+    VialExplosive: 1
+    ChemistryBottleMuteToxin: 1
+    # </Trauma>
 
 - type: vendingMachineInventory
   id: ChemVendInventorySyndicate

@@ -1,24 +1,17 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Power.Components;
-using Content.Shared.Power.EntitySystems;
-using Content.Shared.Stacks;
 using Content.Shared.Interaction;
 using Content.Shared.Materials;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Stacks;
 
 namespace Content.Goobstation.Shared.MaterialEnergy;
 
-public sealed class MaterialEnergySystem : EntitySystem
+public sealed partial class MaterialEnergySystem : EntitySystem
 {
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
 
     public override void Initialize()
     {

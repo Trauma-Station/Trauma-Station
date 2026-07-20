@@ -1,11 +1,9 @@
 - type: entity
   name: laser raptor
   id: MobLaserRaptor
-  parent: SimpleMobBase
+  parent: [AppearanceLaserRaptor, SimpleMobBase, BaseSlicingRefinable] # Trauma - added
   description: From the Viking age.
   components:
-    - type: Body # Shitmed Change
-      prototype: LaserRaptor
     - type: NpcFactionMember
       factions:
         - SimpleHostile
@@ -39,8 +37,8 @@
       thresholds:
         0: Alive
         100: Dead
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
       - id: FoodMeatChicken
         amount: 2
     - type: MovementSpeedModifier
@@ -71,7 +69,7 @@
   description: Looks like it's not you eating tomatoes today, it's the tomatoes eating you.
   components:
   - type: GhostRole
-    prob: 0.05
+    prob: 0 # Trauma - was 0.05
     makeSentient: true
     allowSpeech: true
     name: ghost-role-information-tomatokiller-name
@@ -79,8 +77,7 @@
     rules: ghost-role-information-familiar-rules
     mindRoles:
     - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: GhostTakeoverAvailable
   - type: CanEscapeInventory
     baseResistTime: 3
@@ -92,26 +89,23 @@
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -0.15
+          Brute: -0.15
     - reagents: [ Blood ]
       methods: [ Touch ]
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -0.25
-            Burn: -0.25
+          Brute: -0.25
+          Burn: -0.25
     - reagents: [ RobustHarvest ]
       methods: [ Touch ]
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1
-            Burn: -1
+          Brute: -1
+          Burn: -1
     - reagents: [ WeedKiller, PlantBGone ]
       methods: [ Touch ]
       effects:
@@ -135,7 +129,7 @@
   - type: NPCImprintingOnSpawnBehaviour
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: Sprite
     sprite: Mobs/Demons/tomatokiller.rsi
     noRot: true
@@ -153,8 +147,8 @@
         Base: alive
       Dead:
         Base: dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatTomato
       amount: 2
   - type: Destructible
@@ -192,8 +186,10 @@
   - type: MeleeWeapon
     hidden: true
     damage:
-      groups:
-        Brute: 9
+      types:
+        Blunt: 3
+        Piercing: 3
+        Slash: 3
     animation: WeaponArcBite
   - type: Climbing
   - type: NameIdentifier
@@ -217,7 +213,6 @@
   #  allowedStates:
   #  - Alive
   #  - Dead
-  #  damageCap: 50
   #  damage:
   #    types:
   #      Blunt: 0.11

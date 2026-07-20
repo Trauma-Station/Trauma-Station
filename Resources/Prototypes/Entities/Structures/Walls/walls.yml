@@ -9,6 +9,14 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 50
+    damagePenalty: 0.1
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: SoundBlocker
+  # </Trauma>
   - type: Anchorable
     flags:
     - Anchorable
@@ -33,8 +41,9 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
+    damageModifierSet: Walls # Trauma - was StructuralMetallic
+  - type: Injurable
     damageContainer: StructuralInorganic
-    damageModifierSet: Walls # Trauma, was StructuralMetallic
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -53,22 +62,18 @@
     price: 75
   - type: BlockWeather
   - type: SunShadowCast
-  # <Trauma>
-  - type: Penetratable
-    penetrateDamage: 50
-    damagePenalty: 0.1
-  - type: ExaminableDamage
-    messages: WindowMessages
-  - type: SoundBlocker
-  # </Trauma>
 
 - type: entity
   abstract: true
   parent: BaseStructureWall
   id: BaseWall
   components:
+    # <Trauma>
+  - type: FreezableWall
+  - type: Appearance
+  - type: BulletHole
+    # </Trauma>
   - type: Occluder # Breaks on diagonal walls
-  - type: FreezableWall # Trauma - all non diagonal walls can be frozen by artistocrat's way
 
 - type: entity
   abstract: true
@@ -108,6 +113,10 @@
   id: WallBrick
   name: brick wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/brick.rsi
   - type: Icon
@@ -132,16 +141,16 @@
   - type: IconSmooth
     key: walls
     base: brick
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallClock
   name: clock wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/clock.rsi
   - type: Icon
@@ -165,16 +174,18 @@
   - type: IconSmooth
     key: walls
     base: clock
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallClown
   name: bananium wall
   components:
+  # <Trauma>
+  - type: RadiationBlocker
+    resistance: 40
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/clown.rsi
   - type: Icon
@@ -186,8 +197,6 @@
     cost: 6
     delay: 8
     fx: EffectRCDDeconstruct8
-  - type: RadiationBlocker # Goobstation
-    resistance: 40
   - type: Destructible
     thresholds:
     - trigger:
@@ -215,10 +224,6 @@
         layer:
         - WallLayer
         density: 8000 # really good ramming wall, bananium is rare so it's probably fine
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
@@ -279,8 +284,6 @@
   - type: IconSmooth
     key: walls
     base: cult
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
 
 - type: entity
   parent: BaseWall
@@ -311,14 +314,16 @@
   - type: IconSmooth
     key: walls
     base: debug
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
 
 - type: entity
   parent: BaseWall
   id: WallDiamond
   name: diamond wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/diamond.rsi
   - type: Icon
@@ -343,16 +348,18 @@
   - type: IconSmooth
     key: walls
     base: diamond
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallGold
   name: gold wall
   components:
+  # <Trauma>
+  - type: RadiationBlocker
+    resistance: 10
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/gold.rsi
   - type: Icon
@@ -360,23 +367,12 @@
   - type: Construction
     graph: Girder
     node: goldWall
-  - type: RadiationBlocker # Goobstation
-    resistance: 10
   - type: RCDDeconstructable
     cost: 6
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 150
@@ -402,14 +398,17 @@
   - type: IconSmooth
     key: walls
     base: gold
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseStructureWall # Trauma - don't inherit FreezableWall
   id: WallIce
   name: ice wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  - type: Occluder # from BaseWall
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/ice.rsi
   - type: Icon
@@ -430,19 +429,16 @@
   - type: IconSmooth
     key: walls
     base: ice
-  # <Trauma>
-  - type: RustRequiresPathStage
-    pathStage: 4 # Mark of rust
-  - type: CosmicCorruptible
-    convertTo: WallCosmicCult
-  - type: Occluder # from BaseWall
-  # </Trauma>
 
 - type: entity
   parent: BaseWall
   id: WallPlasma
   name: plasma wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/plasma.rsi
   - type: Icon
@@ -458,15 +454,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-    - trigger:
-        !type:DamageTrigger
         damage: 150
       behaviors:
       - !type:PlaySoundBehavior
@@ -480,15 +467,17 @@
     key: walls
     base: plasma
   - type: RadiationBlocker
-    resistance: 10 # Goobstation - Radiation Overhaul
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
+    resistance: 10 # Trauma - was 5
 
 - type: entity
   parent: BaseWall
   id: WallPlastic
   name: plastic wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/plastic.rsi
   - type: Icon
@@ -504,15 +493,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-    - trigger:
-        !type:DamageTrigger
         damage: 150
       behaviors:
       - !type:PlaySoundBehavior
@@ -525,8 +505,6 @@
   - type: IconSmooth
     key: walls
     base: plastic
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
@@ -534,6 +512,13 @@
   name: plastitanium wall
   suffix: indestructible
   components:
+    # <Trauma>
+    - type: RustRequiresPathStage
+      pathStage: 11 # Can't rust
+    - type: Penetratable
+      penetrateDamage: 1000
+      damagePenalty: 0.8
+    # </Trauma>
     - type: Sprite
       sprite: Structures/Walls/plastitanium.rsi
     - type: Icon
@@ -552,16 +537,12 @@
           layer:
           - WallLayer
           density: 4000
-    - type: RustRequiresPathStage # Goobstation
-      pathStage: 11 # Can't rust
-    - type: Penetratable # Goobstation - Better snipers
-      penetrateDamage: 1000
-      damagePenalty: 0.8
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallicStrong
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: RadiationBlocker
-      resistance: 10
+      resistance: 10 # Trauma - was 5
 
 - type: entity
   parent: WallPlastitaniumIndestructible
@@ -569,24 +550,26 @@
   name: plastitanium wall
   suffix: ""
   components:
-    - type: Destructible
-      thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 1000
-          behaviors:
-            - !type:SpawnEntitiesBehavior
-              spawn:
-                Girder:
-                  min: 1
-                  max: 1
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-    - type: RustRequiresPathStage # Goobstation
-      pathStage: 10 # Ascension
-    - type: Penetratable # Goobstation - Better snipers
-      penetrateDamage: 200
-      damagePenalty: 0.5
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 10 # Ascension
+  - type: Penetratable
+    penetrateDamage: 200
+    damagePenalty: 0.5
+  # </Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: WallDiagonalBase
@@ -602,10 +585,11 @@
     sprite: Structures/Walls/plastitanium_diagonal.rsi
     state: state0
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: RadiationBlocker
-    resistance: 10
+    resistance: 10 # Trauma - was 5
 
 - type: entity
   parent: WallPlastitaniumDiagonalIndestructible
@@ -642,6 +626,23 @@
   id: WallReinforced
   name: reinforced wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  - type: Penetratable
+    penetrateDamage: 100
+    damagePenalty: 0.25
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Iron
+        Quantity: 33
+      - ReagentId: Carbon
+        Quantity: 7
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Structures/Walls/solid.rsi # Trauma
   - type: Icon
@@ -651,19 +652,11 @@
     graph: Girder
     node: reinforcedWall
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 400
@@ -706,30 +699,17 @@
         layer:
         - WallLayer
         density: 2000
-  # <Goobstation>
-  - type: RustRequiresPathStage
-    pathStage: 7 # Toxic blade
-  - type: Penetratable
-    penetrateDamage: 100
-    damagePenalty: 0.25
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 40
-        reagents:
-        - ReagentId: Iron
-          Quantity: 33
-        - ReagentId: Carbon
-          Quantity: 7
-  # </Goobstation>
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: WallReinforced
   id: WallReinforcedRust
   suffix: rusted
   components:
+  # <Trauma>
+  - type: RustedWall
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/solid_rust.rsi
   - type: Icon
@@ -741,18 +721,8 @@
   - type: IconSmooth
     key: walls
     base: reinf_over
-  - type: RustedWall # Goobstation
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 500
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 350
@@ -764,14 +734,16 @@
         node: girder
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: WallDiagonalBase
   id: WallReinforcedDiagonal
   name: reinforced wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  # </Trauma>
   - type: Tag
     tags:
     - Wall # Goobstation
@@ -784,19 +756,11 @@
     sprite: Structures/Walls/reinforced_diagonal.rsi
     state: state0
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 300
@@ -810,8 +774,6 @@
         acts: ["Destruction"]
   - type: RadiationBlocker
     resistance: 5
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 7 # Toxic blade
 
 # Riveting
 - type: entity
@@ -819,13 +781,21 @@
   id: WallRiveted
   name: riveted wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 10 # Ascension
+  - type: Penetratable
+    penetrateDamage: 200
+    damagePenalty: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/riveted.rsi
   - type: Icon
     sprite: Structures/Walls/riveted.rsi
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -844,11 +814,6 @@
     base: riveted
   - type: StaticPrice
     price: 150
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 10 # Ascension
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 200
-    damagePenalty: 0.5
 
 - type: entity
   parent: BaseWall
@@ -900,15 +865,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-    - trigger:
-        !type:DamageTrigger
         damage: 150
       behaviors:
       - !type:PlaySoundBehavior
@@ -930,6 +886,13 @@
   id: WallShuttleDiagonal
   name: shuttle wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  - type: Penetratable
+    penetrateDamage: 90
+    damagePenalty: 0.3
+  # </Trauma>
   - type: Sprite
     drawdepth: Walls
     sprite: Structures/Walls/shuttle_diagonal.rsi
@@ -937,8 +900,8 @@
   - type: Icon
     sprite: Structures/Walls/shuttle_diagonal.rsi
     state: state0
-  - type: Reflect
-    reflectProb: 1
+  #- type: Reflect # Trauma - annoying, serves no purpose
+  #  reflectProb: 1
   - type: Pullable
   - type: Airtight
     noAirWhenFullyAirBlocked: false
@@ -960,21 +923,11 @@
         - WallLayer
         density: 2000
   - type: Damageable
+    damageModifierSet: StructuralMetallic # Trauma - was StructuralMetallicStrong
+  - type: Injurable
     damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
-  - type: Physics
-    bodyType: Static
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 300
@@ -989,11 +942,6 @@
   - type: Construction
     graph: Girder
     node: diagonalshuttleWall
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 7 # Toxic blade
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 90
-    damagePenalty: 0.3
   - type: RadiationBlocker
     resistance: 5
   - type: StaticPrice
@@ -1004,20 +952,21 @@
   id: WallShuttle
   name: shuttle wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  - type: Penetratable
+    penetrateDamage: 90
+    damagePenalty: 0.3
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 400
@@ -1030,7 +979,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: StaticPrice
-    price: 250
+    price: 300
   - type: RadiationBlocker
     resistance: 5
   - type: Sprite
@@ -1056,8 +1005,8 @@
           3: { state: shuttle_construct-3, visible: true}
           4: { state: shuttle_construct-4, visible: true}
           5: { state: shuttle_construct-5, visible: true}
-  - type: Reflect
-    reflectProb: 1
+  #- type: Reflect # Trauma - annoying, serves no purpose
+  #  reflectProb: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -1069,19 +1018,25 @@
         layer:
         - WallLayer
         density: 2000
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 7 # Toxic blade
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 90
-    damagePenalty: 0.3
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallSolid
   name: solid wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Iron
+        Quantity: 28
+      - ReagentId: Carbon
+        Quantity: 2
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Structures/Walls/solid.rsi # Trauma
   - type: WallReplacementMarker
@@ -1098,15 +1053,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-    - trigger:
-        !type:DamageTrigger
         damage: 200
       behaviors:
       - !type:PlaySoundBehavior
@@ -1119,17 +1065,6 @@
   - type: IconSmooth
     key: walls
     base: solid
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
-  - type: SolutionContainerManager # Goobstation
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Iron
-          Quantity: 28
-        - ReagentId: Carbon
-          Quantity: 2
 
 - type: entity
   parent: WallDiagonalBase
@@ -1147,15 +1082,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalSlam
-    - trigger:
-        !type:DamageTrigger
         damage: 200
       behaviors:
       - !type:ChangeConstructionNodeBehavior
@@ -1171,6 +1097,11 @@
   id: WallSolidRust
   suffix: rusted
   components:
+  # <Trauma>
+  - type: RustedWall
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/solid_rust.rsi
   - type: Icon
@@ -1182,18 +1113,8 @@
   - type: IconSmooth
     key: walls
     base: solid
-  - type: RustedWall # Goobstation
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 150
@@ -1205,8 +1126,6 @@
         node: girder
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: WallPlastitanium
@@ -1249,15 +1168,6 @@
     node: uraniumWall
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 150
@@ -1305,15 +1215,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: WoodDestroyHeavy
-    - trigger:
-        !type:DamageTrigger
         damage: 150
       behaviors:
       - !type:PlaySoundBehavior
@@ -1348,15 +1249,6 @@
     sprite: Structures/Walls/web.rsi
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: WoodDestroy
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 30
@@ -1449,19 +1341,11 @@
     sprite: Structures/Walls/mining_diagonal.rsi
     state: state0
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalSlam
     - trigger:
         !type:DamageTrigger
         damage: 300
@@ -1560,65 +1444,69 @@
   id: WallForce
   name: force wall
   components:
-    - type: TimedDespawn
-      lifetime: 30 # Goob edit
-    - type: Tag
-      tags:
-        - Wall
-        - BlockLightning # Goobstation
-    - type: Physics
-      bodyType: Static
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape:
-            !type:PhysShapeAabb
-            bounds: "-0.5,-0.5,0.5,0.5"
-          mask:
-            - SpecialWallLayer
-          layer:
-            - SpecialWallLayer
-    - type: Airtight
-    - type: Sprite
-      sprite: Structures/Magic/forcewall.rsi
-      layers:
-      - state: forcewall
-        map: [ "base" ]
-    - type: Icon
-      sprite: Structures/Magic/forcewall.rsi
-      state: forcewallspawn
-    # Goobstation start
-    - type: SpawnAnimation
-      animationLength: 1
-    - type: Appearance
-    - type: GenericVisualizer
-      visuals:
-        enum.SpawnAnimationVisuals.Spawned:
-          base:
-            True: { state: forcewall }
-            False: { state: forcewallspawn }
-    - type: RustRequiresPathStage
-      pathStage: 11 # Can't rust
-    - type: PreventCollide
-      whitelist:
-        components:
-        - Wizard
-        - Apprentice
-        - BibleUser
-    - type: Damageable
-    - type: Clickable
-    - type: Destructible
-      thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 350
-        behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: WindowShatter
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    # Goobstation end
+  # <Trauma>
+  - type: SpawnAnimation
+    animationLength: 1
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SpawnAnimationVisuals.Spawned:
+        base:
+          True: { state: forcewall }
+          False: { state: forcewallspawn }
+  - type: RustRequiresPathStage
+    pathStage: 11 # Can't rust
+  - type: PreventCollide
+    whitelist:
+      components:
+      - Wizard
+      - Apprentice
+      - BibleUser
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Clickable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 350
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  # </Trauma>
+  - type: TimedDespawn
+    lifetime: 15 # Trauma - was 10
+  - type: Tag
+    tags:
+    - BlockLightning # Trauma
+    - Wall
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - SpecialWallLayer
+        layer:
+        - SpecialWallLayer
+  - type: Airtight
+  - type: Sprite
+    sprite: Structures/Magic/forcewall.rsi
+    # <Trauma> - replace single state with a mapped layer, for animation to work
+    layers:
+    - state: forcewall
+      map: [ "base" ]
+    # </Trauma>
+  - type: Icon
+    sprite: Structures/Magic/forcewall.rsi
+    state: forcewallspawn # Trauma - was forcewall
 
 - type: entity
   parent: BaseWall
@@ -1758,8 +1646,9 @@
     node: cardwall
     deconstructionTarget: start
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Card
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -1774,12 +1663,6 @@
         - FlimsyLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 80 #excess damage (nuke?). avoid computational cost of spawning entities.
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 40

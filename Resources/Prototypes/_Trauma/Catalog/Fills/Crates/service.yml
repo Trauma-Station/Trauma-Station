@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: CrateRotaryPhone
+  parent: CrateGenericSteel
+  name: rotary phone crate
+  description: A crate with 5 phones inside, prank calls are a punishable offense
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: RotaryPhoneFlatPack
+        amount: 5
+
+- type: entity
+  parent: CrateHydroSecure
+  id: CrateServiceCoconutCrab
+  name: coconut crab crate
+  description: This is crabtually insane!
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MobCoconutCrab
+          amount: 1
+        - id: MobCrabTiny
+          amount: 6

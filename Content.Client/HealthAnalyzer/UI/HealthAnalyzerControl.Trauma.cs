@@ -1,38 +1,41 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Goobstation.Shared.Disease;
+
+using System.Globalization;
+using System.Linq;
+using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Wounds;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.FixedPoint;
 using Content.Shared.MedicalScanner;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Client.HealthAnalyzer.UI;
 
 public sealed partial class HealthAnalyzerControl
 {
-    public event Action<TargetBodyPart?, EntityUid>? OnBodyPartSelected;
+
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
 
     private WoundSystem _wound = default!;
     private EntityUid? _target;
     private EntityUid? _spriteViewEntity;
-    private Dictionary<TargetBodyPart, TextureButton> _bodyPartControls = default!;
+    private Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton> _bodyPartControls = default!;
 
     private static readonly EntProtoId _bodyView = "AlertSpriteView";
 
@@ -40,19 +43,18 @@ public sealed partial class HealthAnalyzerControl
     {
         _wound = _entityManager.System<WoundSystem>();
 
-        _bodyPartControls = new Dictionary<TargetBodyPart, TextureButton>
+        _bodyPartControls = new Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton>
         {
-            { TargetBodyPart.Head, HeadButton },
-            { TargetBodyPart.Chest, ChestButton },
-            { TargetBodyPart.Groin, GroinButton },
-            { TargetBodyPart.LeftArm, LeftArmButton },
-            { TargetBodyPart.LeftHand, LeftHandButton },
-            { TargetBodyPart.RightArm, RightArmButton },
-            { TargetBodyPart.RightHand, RightHandButton },
-            { TargetBodyPart.LeftLeg, LeftLegButton },
-            { TargetBodyPart.LeftFoot, LeftFootButton },
-            { TargetBodyPart.RightLeg, RightLegButton },
-            { TargetBodyPart.RightFoot, RightFootButton },
+            { "Head", HeadButton },
+            { "Torso", TorsoButton },
+            { "ArmLeft", LeftArmButton },
+            { "HandLeft", LeftHandButton },
+            { "ArmRight", RightArmButton },
+            { "HandRight", RightHandButton },
+            { "LegLeft", LeftLegButton },
+            { "FootLeft", LeftFootButton },
+            { "LegRight", RightLegButton },
+            { "FootRight", RightFootButton },
         };
 
         foreach (var (part, button) in _bodyPartControls)
@@ -66,7 +68,7 @@ public sealed partial class HealthAnalyzerControl
         ChemicalsButton.OnPressed += _ => SetMode(HealthAnalyzerMode.Chemicals);
     }
 
-    public void SetActiveBodyPart(TargetBodyPart part)
+    public void SetActiveBodyPart(ProtoId<OrganCategoryPrototype> part)
     {
         if (_target is {} target)
             OnBodyPartSelected?.Invoke(part, target);
@@ -93,7 +95,7 @@ public sealed partial class HealthAnalyzerControl
     public void PopulateTrauma(EntityUid target, HealthAnalyzerUiState state)
     {
         _target = target;
-        var humanoid = _entityManager.HasComponent<HumanoidAppearanceComponent>(target);
+        var humanoid = _entityManager.HasComponent<HumanoidProfileComponent>(target);
         SetActiveButtons(humanoid);
 
         // Patient Information
@@ -105,10 +107,14 @@ public sealed partial class HealthAnalyzerControl
 
         PartView.Visible = SpriteView.Visible;
 
+        var bloodLevelLow = !float.IsNaN(state.BloodLevel)
+                            && _entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream)
+                            && state.BloodLevel < bloodstream.BloodlossThreshold;
+
         switch (state.ScanState)
         {
             case HealthAnalyzerBodyState body:
-                PopulateBody(target, state, body);
+                PopulateBody(target, state, body, bloodLevelLow);
                 break;
             case HealthAnalyzerOrgansState organs:
                 PopulateOrgans(organs);
@@ -130,7 +136,7 @@ public sealed partial class HealthAnalyzerControl
 
     #region Scan state populate methods
 
-    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body)
+    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body, bool bloodLevelLow = false)
     {
         var part = _entityManager.GetEntity(state.Part);
         if (part != null)
@@ -144,20 +150,22 @@ public sealed partial class HealthAnalyzerControl
         PartNameLabel.Visible = isPart;
         DamageLabelHeading.Visible = true;
         DamageLabel.Visible = true;
-        DamageLabel.Text = damageable.TotalDamage.ToString();
+        var damage = _damageable.GetAllDamage((target, damageable));
+        DamageLabel.Text = damage.GetTotal().ToString();
 
+        var identity = Identity.Name(target, _entityManager);
         if (isPart)
         {
             PartNameLabel.Text = _entityManager.HasComponent<MetaDataComponent>(target)
-                ? Identity.Name(target, _entityManager)
+                ? identity
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         }
 
-        var damageSortedGroups =
-            damageable.DamagePerGroup.OrderByDescending(damage => damage.Value)
-                .ToDictionary(x => x.Key, x => x.Value);
+        var damageSortedGroups = _damageable.GetDamagePerGroup((target, damageable))
+            .OrderByDescending(damage => damage.Value)
+            .ToDictionary(x => x.Key, x => x.Value);
 
-        var damagePerType = damageable.Damage.DamageDict;
+        var damagePerType = damage.DamageDict;
 
         DrawDiagnosticGroups(damageSortedGroups, damagePerType);
 
@@ -171,16 +179,21 @@ public sealed partial class HealthAnalyzerControl
         if (state.Unrevivable == true)
             ConditionsListContainer.AddChild(new RichTextLabel
             {
-                Text = Loc.GetString("condition-body-unrevivable", ("entity", Identity.Name(target, _entityManager))),
+                Text = Loc.GetString("condition-body-unrevivable", ("entity", identity)),
                 Margin = new Thickness(0, 4),
             });
 
-        foreach (var (bodyPart, isBleeding) in state.Bleeding)
-        {
-            if (!isBleeding)
-                continue;
+        if (bloodLevelLow)
+            ConditionsListContainer.AddChild(new RichTextLabel
+            {
+                Text = Loc.GetString("condition-body-low-blood", ("entity", identity)),
+                Margin = new Thickness(0, 4),
+            });
 
-            var locString = Loc.GetString($"condition-body-bleeding-{bodyPart.ToString()}", ("entity", Identity.Name(target, _entityManager)));
+        foreach (var bleeding in state.Bleeding)
+        {
+            var name = _prototypes.Index(bleeding).Name.ToLowerInvariant();
+            var locString = Loc.GetString("condition-body-part-bleeding", ("entity", identity), ("part", name));
 
             ConditionsListContainer.AddChild(new RichTextLabel
             {
@@ -218,24 +231,6 @@ public sealed partial class HealthAnalyzerControl
                 });
             }
         }
-
-        /*foreach (var (woundablePain, pain) in body.NervePainFeels)
-        {
-            if (pain == 1.0
-                || !TryGetEntityName(woundablePain, out var woundableName)
-                || isPart
-                && woundablePain != state.Part)
-                continue;
-
-            var painString = pain > 1.0 ? "increased" : "decreased";
-            var locString = Loc.GetString($"condition-body-pain-{painString}", ("woundable", woundableName));
-
-            ConditionsListContainer.AddChild(new RichTextLabel
-            {
-                Text = locString,
-                Margin = new Thickness(0, 4),
-            });
-        }*/
     }
 
     public void PopulateOrgans(HealthAnalyzerOrgansState state)
@@ -296,7 +291,7 @@ public sealed partial class HealthAnalyzerControl
         ConditionsListContainer.RemoveAllChildren();
         GroupsContainer.RemoveAllChildren();
 
-        DrawSolutionDiagnostics(state.Solutions);
+        DrawSolutionDiagnostics(state.SolutionEntities);
 
         ConditionsListContainer.AddChild(new RichTextLabel
         {
@@ -333,8 +328,8 @@ public sealed partial class HealthAnalyzerControl
     /// <summary>
     /// Sets up the Body Doll using Alert Entity to use in Health Analyzer.
     /// </summary>
-    private EntityUid? SetupIcon(Dictionary<TargetBodyPart, WoundableSeverity>? body,
-        Dictionary<TargetBodyPart, bool> bleeding)
+    private EntityUid? SetupIcon(Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity>? body,
+        HashSet<ProtoId<OrganCategoryPrototype>> bleeding)
     {
         if (body is null)
             return null;
@@ -348,21 +343,21 @@ public sealed partial class HealthAnalyzerControl
             return null;
 
         int layer = 0;
-        foreach (var (bodyPart, integrity) in body)
+        foreach (var (part, integrity) in body)
         {
             // TODO: PartStatusUIController and make it use layers instead of TextureRects when EE refactors alerts.
-            string enumName = Enum.GetName(typeof(TargetBodyPart), bodyPart) ?? "Unknown";
+            var name = part.ToString().ToLowerInvariant();
             int enumValue = (int) integrity;
-            var baseRsiPath = new ResPath($"/Textures/_Shitmed/Interface/Targeting/Status/{enumName.ToLowerInvariant()}.rsi");
-            var rsi = new SpriteSpecifier.Rsi(baseRsiPath, $"{enumName.ToLowerInvariant()}_{enumValue}");
+            var baseRsiPath = new ResPath($"/Textures/_Shitmed/Interface/Targeting/Status/{name}.rsi");
+            var rsi = new SpriteSpecifier.Rsi(baseRsiPath, $"{enumValue}");
             // Shitcode with love from Russia :)
             // fuck you mocho
             CreateOrAddToLayer(sprite, rsi, layer);
             layer++;
 
-            if (bleeding.TryGetValue(bodyPart, out var isBleeding) && isBleeding)
+            if (bleeding.Contains(part))
             {
-                var bleedRsi = new SpriteSpecifier.Rsi(baseRsiPath, $"{enumName.ToLowerInvariant()}_bleed");
+                var bleedRsi = new SpriteSpecifier.Rsi(baseRsiPath, "bleed");
                 CreateOrAddToLayer(sprite, bleedRsi, layer);
                 layer++;
             }
@@ -401,41 +396,45 @@ public sealed partial class HealthAnalyzerControl
         GroupsContainer.AddChild(groupContainer);
     }
 
-    private void DrawSolutionDiagnostics(Dictionary<NetEntity, Solution> solutions)
+    private void DrawSolutionDiagnostics(List<NetEntity> sources)
     {
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-        foreach (var (ent, data) in solutions)
+        foreach (var source in sources)
         {
-            // TODO SHITMED: get SolutionComponent off ent??? it should be networked
-            var groupTitleText = Loc.GetString("group-solution-name",
-                ("solution", data.Name ?? Loc.GetString("group-solution-unknown")));
-
-            var groupContainer = new BoxContainer
+            var uid = _entityManager.GetEntity(source);
+            foreach (var (name, ent) in _solution.EnumerateSolutions(uid))
             {
-                Align = BoxContainer.AlignMode.Begin,
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-            };
+                // TODO SHITMED: get SolutionComponent off ent??? it should be networked
+                var groupTitleText = Loc.GetString("group-solution-name",
+                    ("solution", name ?? Loc.GetString("group-solution-unknown")));
 
-            groupContainer.AddChild(CreateDiagnosticGroupTitle(textInfo.ToTitleCase(groupTitleText), "metaphysical"));
+                var groupContainer = new BoxContainer
+                {
+                    Align = BoxContainer.AlignMode.Begin,
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                };
 
-            GroupsContainer.AddChild(groupContainer);
+                groupContainer.AddChild(CreateDiagnosticGroupTitle(textInfo.ToTitleCase(groupTitleText), "metaphysical"));
 
-            foreach (var reagent in data.Contents)
-            {
-                if (reagent.Quantity == 0)
-                    continue;
+                GroupsContainer.AddChild(groupContainer);
 
-                var reagentName = Loc.GetString("chem-master-window-unknown-reagent-text");
-                if (_prototypes.Resolve<ReagentPrototype>(reagent.Reagent.Prototype, out var proto))
-                    reagentName = proto.LocalizedName;
+                foreach (var reagent in ent.Comp.Solution.Contents)
+                {
+                    if (reagent.Quantity == 0)
+                        continue;
 
-                var reagentString = $"{Loc.GetString(
-                    "group-solution-contents",
-                    ("reagent", textInfo.ToTitleCase(reagentName)),
-                    ("quantity", reagent.Quantity)
-                )}";
+                    var reagentName = Loc.GetString("chem-master-window-unknown-reagent-text");
+                    if (_prototypes.Resolve<ReagentPrototype>(reagent.Reagent.Prototype, out var proto))
+                        reagentName = proto.LocalizedName;
 
-                groupContainer.AddChild(CreateDiagnosticItemLabel(reagentString.Insert(0, " · ")));
+                    var reagentString = $"{Loc.GetString(
+                        "group-solution-contents",
+                        ("reagent", textInfo.ToTitleCase(reagentName)),
+                        ("quantity", reagent.Quantity)
+                    )}";
+
+                    groupContainer.AddChild(CreateDiagnosticItemLabel(reagentString.Insert(0, " · ")));
+                }
             }
         }
     }

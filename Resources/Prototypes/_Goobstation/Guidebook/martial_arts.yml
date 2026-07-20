@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: guideEntry
   id: MartialArts
   name: guide-entry-martial-arts
@@ -9,8 +11,8 @@
   - CorporateJudo
   - Capoeira
   - Ninjutsu
-  - DragonKungFu
   - HellRip
+  - ArmstrongKarate
 
 - type: guideEntry
   id: CQC
@@ -48,6 +50,6 @@
   text: "/ServerInfo/_Goobstation/Guidebook/MartialArts/Ninjutsu.xml"
 
 - type: guideEntry
-  id: DragonKungFu
-  name: guide-entry-dragon-kung-fu
-  text: "/ServerInfo/_Goobstation/Guidebook/MartialArts/DragonKungFu.xml"
+  id: ArmstrongKarate
+  name: guide-entry-armstrong-karate
+  text: "/ServerInfo/_Trauma/Guidebook/MartialArts/ArmstrongKarate.xml"

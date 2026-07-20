@@ -1,7 +1,4 @@
 <!--
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
@@ -14,6 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   <ItemGroup>
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
+    <ProjectReference Include="../Content.Medical.Shared/Content.Medical.Shared.csproj" /> <!-- code too shit, have to do this -->
   </ItemGroup>
 
   <Import Project="..\RobustToolbox\Imports\Shared.props" />
@@ -25,4 +23,5 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\Robust.CompNetworkGenerator.targets" />
+  <Import Project="../RobustToolbox/MSBuild/Robust.EntitySystemSubscriptionsGenerator.targets" />
 </Project>

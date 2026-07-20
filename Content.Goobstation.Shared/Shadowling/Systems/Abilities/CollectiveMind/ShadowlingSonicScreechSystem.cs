@@ -1,12 +1,7 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.CollectiveMind;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -15,8 +10,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind;
 
@@ -24,17 +19,18 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind
 /// This handles the Sonic Screech ability logic.
 /// Sonic Screech "confuses" and "deafens" (flash effect + tinnitus sound) nearby people, damages windows, and stuns silicons/borgs. All in one pack!
 /// </summary>
-public sealed class ShadowlingSonicScreechSystem : EntitySystem
+public sealed partial class ShadowlingSonicScreechSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
 
     public override void Initialize()
     {
@@ -56,7 +52,7 @@ public sealed class ShadowlingSonicScreechSystem : EntitySystem
         if (args.Handled)
             return;
 
-        _popups.PopupPredicted(Loc.GetString("shadowling-sonic-screech-complete"), uid, uid, PopupType.Medium);
+        _popups.PopupEntity(Loc.GetString("shadowling-sonic-screech-complete"), uid, uid, PopupType.Medium);
         _audio.PlayPredicted(component.ScreechSound, uid, uid);
 
         var effectEnt = PredictedSpawnAtPosition(component.SonicScreechEffect, Transform(uid).Coordinates);
@@ -79,13 +75,13 @@ public sealed class ShadowlingSonicScreechSystem : EntitySystem
                 HasComp<ShadowlingComponent>(entity))
                 continue;
 
-            if (HasComp<SiliconComponent>(entity))
+            if (_silicon.IsSilicon(entity))
             {
                 _stun.TryAddParalyzeDuration(entity, component.SiliconStunTime);
                 continue;
             }
 
-            if (HasComp<HumanoidAppearanceComponent>(entity))
+            if (HasComp<HumanoidProfileComponent>(entity))
                 PredictedSpawnAtPosition(component.ProtoFlash, Transform(entity).Coordinates);
         }
 

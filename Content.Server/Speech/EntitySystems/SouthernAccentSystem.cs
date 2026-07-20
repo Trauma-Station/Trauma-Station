@@ -1,17 +1,10 @@
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 UBlueberry <161545003+UBlueberry@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
 using Content.Shared.Speech;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class SouthernAccentSystem : EntitySystem
+public sealed partial class SouthernAccentSystem : EntitySystem
 {
     private static readonly Regex RegexLowerIng = new(@"ing\b");
     private static readonly Regex RegexUpperIng = new(@"ING\b");
@@ -20,7 +13,7 @@ public sealed class SouthernAccentSystem : EntitySystem
     private static readonly Regex RegexLowerDve = new(@"d've\b");
     private static readonly Regex RegexUpperDve = new(@"D'VE\b");
 
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

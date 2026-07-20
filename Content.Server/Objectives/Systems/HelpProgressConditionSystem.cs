@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 psykana <36602558+psykana@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.GameTicking.Rules;
 using Content.Server.Objectives.Components;
 using Content.Shared.Mind;
@@ -18,10 +9,10 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles help progress condition logic.
 /// </summary>
-public sealed class HelpProgressConditionSystem : EntitySystem
+public sealed partial class HelpProgressConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
 
     public override void Initialize()
     {

@@ -1,14 +1,10 @@
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Threading.Tasks;
 using Content.Shared.Doors.Components;
 using Content.Shared.Procedural;
 using Content.Shared.Procedural.PostGeneration;
 using Robust.Shared.Collections;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Procedural.DungeonJob;
@@ -18,7 +14,7 @@ public sealed partial class DungeonJob
     /// <summary>
     /// <see cref="CorridorDecalSkirtingDunGen"/>
     /// </summary>
-    private async Task PostGen(CorridorDecalSkirtingDunGen decks, Dungeon dungeon, HashSet<Vector2i> reservedTiles, Random random)
+    private async Task PostGen(CorridorDecalSkirtingDunGen decks, Dungeon dungeon, HashSet<Vector2i> reservedTiles, IRobustRandom random)
     {
         var directions = new ValueList<DirectionFlag>(4);
         var pocketDirections = new ValueList<Direction>(4);

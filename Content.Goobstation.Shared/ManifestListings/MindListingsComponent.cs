@@ -1,6 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Store;
-using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.ManifestListings;
 
@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.ManifestListings;
 public sealed partial class MindListingsComponent : Component
 {
     [DataField]
-    public Dictionary<int, List<ListingData>> Listings = new();
+    public Dictionary<int, List<ListingDataWithCostModifiers>> Listings = new();
 
     [DataField]
     public SpriteSpecifier.Texture DefaultTexture = new(new ResPath("/Textures/Interface/Actions/shop.png"));

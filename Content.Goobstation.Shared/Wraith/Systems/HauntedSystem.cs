@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Shared.Examine;
 using Robust.Shared.Timing;
@@ -6,7 +8,7 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 
 public sealed partial class HauntedSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();

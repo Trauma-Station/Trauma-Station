@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Clothing.EntitySystems;
@@ -10,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.ChangePrefixAfterDelay;
 
-public sealed class ChangePrefixAfterDelaySystem : EntitySystem
+public sealed partial class ChangePrefixAfterDelaySystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

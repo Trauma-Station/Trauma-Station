@@ -1,10 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reagent
   parent: Nocturine
   id: NocturineWonderprod
   name: reagent-name-nocturine-wonderprod
   desc: reagent-desc-nocturine-wonderprod
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         conditions:

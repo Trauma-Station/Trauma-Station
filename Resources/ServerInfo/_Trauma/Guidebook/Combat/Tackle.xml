@@ -1,0 +1,32 @@
+<Document>
+# Tackle
+
+Tackle is a combat move that allows the user to dive some distance forward, knocking down the first victim on their path.
+
+To perform a tackle you must have a special kind of gloves with tackle ability.
+
+<Box>
+  <GuideEntityEmbed Entity="ClothingHandsGlovesSecurity"/>
+  <GuideEntityEmbed Entity="ClothingHandsGlovesGorilla"/>
+  <GuideEntityEmbed Entity="ClothingHandsGlovesGuerrilla"/>
+</Box>
+
+<Box>
+  <GuideEntityEmbed Entity="ClothingHandsGlovesRocket"/>
+  <GuideEntityEmbed Entity="ClothingHandsGlovesDolphin"/>
+  <GuideEntityEmbed Entity="ClothingHandsGlovesGripper"/>
+</Box>
+
+Tackle can be performed once every 3 seconds with [color=yellow]Alt-Q[/color] key by default.
+
+Be aware that you will knock yourself down and drop all held items when performing a tackle. Also avoid any obstacles such as walls, as they may cause an unhappy landing.
+
+Tackle outcome is determined by multiple factors (modifiers), such as: user/victim health, stamina damage, weight, user speed, victim stamina protection and the gloves modifier itself.
+
+Tackle will guaranteed knock down your target and deal some stamina damage to them, and good tackle with high modifier will disarm them as well and make the user stand up. Some gloves, such as [color=red]guerrilla gloves[/color] can automatically hard grab the target as the result of your target as well!
+
+Different kind of gloves have different tackle modifier to them, as well as different speed, range and knockdown time. Some gloves, such as [color=orange]rocket gloves[/color], [color=blue]dolphin gloves[/color] and [color=brown]improvised gripper gloves[/color] have "unsafe" minimum tackle distance - if you fly range is any lower than that and you hit something, your head will hurt, especially if you hit a wall.
+
+Tackle costs some amount of stamina to perform, this value varies depending on the gloves.
+
+</Document>

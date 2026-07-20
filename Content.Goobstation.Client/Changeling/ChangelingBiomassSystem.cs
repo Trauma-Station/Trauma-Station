@@ -1,14 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Alerts;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Changeling;
 
 public sealed partial class ChangelingBiomassSystem : SharedChangelingBiomassSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

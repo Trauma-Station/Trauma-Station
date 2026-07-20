@@ -1,43 +1,33 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
-using Content.Shared._Goobstation.Weapons.SmartGun;
+using Content.Goobstation.Shared.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Hands.Components;
 using Content.Shared.Wieldable.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Weapons.LaserPointer;
 
-public sealed class LaserPointerSystem : SharedLaserPointerSystem
+public sealed partial class LaserPointerSystem : SharedLaserPointerSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IStateManager _state = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IStateManager _state = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _overlay.AddOverlay(new LaserPointerOverlay(EntityManager, _prototype));
+        _overlay.AddOverlay(new LaserPointerOverlay(EntityManager, ProtoMan));
     }
 
     public override void Shutdown()

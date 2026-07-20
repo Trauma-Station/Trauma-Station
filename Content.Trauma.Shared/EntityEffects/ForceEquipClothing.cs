@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -30,9 +30,9 @@ public sealed partial class ForceEquipClothing : EntityEffectBase<ForceEquipClot
     }
 }
 
-public sealed class ForceEquipClothingEffectSystem : EntityEffectSystem<InventoryComponent, ForceEquipClothing>
+public sealed partial class ForceEquipClothingEffectSystem : EntityEffectSystem<InventoryComponent, ForceEquipClothing>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     protected override void Effect(Entity<InventoryComponent> ent, ref EntityEffectEvent<ForceEquipClothing> args)
     {

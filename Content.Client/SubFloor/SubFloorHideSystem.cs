@@ -1,20 +1,6 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <slambamactionman@gmail.com>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 qwerltaz <msmarcinpl@gmail.com>
-// SPDX-FileCopyrightText: 2025 ss14-Starlight <ss14-Starlight@outlook.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.Atmos.Components;  //Goobstation - Ventcrawler
+// <Trauma>
+using Content.Shared.Atmos.Components;
+// </Trauma>
 using Content.Shared.DrawDepth;
 using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Shared.SubFloor;
@@ -24,11 +10,11 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SubFloor;
 
-public sealed class SubFloorHideSystem : SharedSubFloorHideSystem
+public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private bool _showAll;
     private bool _showVentPipe; //Goobstation - Ventcrawler
@@ -125,7 +111,8 @@ public sealed class SubFloorHideSystem : SharedSubFloorHideSystem
         {
             // Allows sandbox mode to make wires visible over other stuff.
             component.OriginalDrawDepth ??= args.Sprite.DrawDepth;
-            _sprite.SetDrawDepth((uid, args.Sprite), (int)Shared.DrawDepth.DrawDepth.Overdoors);
+            var drawDepthDifference = Shared.DrawDepth.DrawDepth.ThickPipe - (Shared.DrawDepth.DrawDepth.Overdoors + 1);
+            _sprite.SetDrawDepth((uid, args.Sprite), args.Sprite.DrawDepth - drawDepthDifference);
         }
         else if (scannerRevealed)
         {
@@ -133,8 +120,8 @@ public sealed class SubFloorHideSystem : SharedSubFloorHideSystem
             if (component.OriginalDrawDepth is not null)
                 return;
             component.OriginalDrawDepth = args.Sprite.DrawDepth;
-            var drawDepthDifference = Shared.DrawDepth.DrawDepth.ThickPipe - Shared.DrawDepth.DrawDepth.Puddles;
-            _sprite.SetDrawDepth((uid, args.Sprite), args.Sprite.DrawDepth - (drawDepthDifference - 1));
+            var drawDepthDifference = Shared.DrawDepth.DrawDepth.ThickPipe - (Shared.DrawDepth.DrawDepth.Puddles + 1);
+            _sprite.SetDrawDepth((uid, args.Sprite), args.Sprite.DrawDepth - drawDepthDifference);
         }
         else if (component.OriginalDrawDepth.HasValue)
         {

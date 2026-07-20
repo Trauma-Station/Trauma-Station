@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Lavaland.Shared.EntityConditions;
 using Content.Lavaland.Shared.Procedural.Components;
 using Content.Server.Atmos.EntitySystems;
@@ -5,9 +7,9 @@ using Content.Shared.EntityConditions;
 
 namespace Content.Lavaland.Server.EntityConditions;
 
-public sealed class PressureConditionSystem : EntityConditionSystem<TransformComponent, PressureCondition>
+public sealed partial class PressureConditionSystem : EntityConditionSystem<TransformComponent, PressureCondition>
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
 
     protected override void Condition(Entity<TransformComponent> ent, ref EntityConditionEvent<PressureCondition> args)
     {

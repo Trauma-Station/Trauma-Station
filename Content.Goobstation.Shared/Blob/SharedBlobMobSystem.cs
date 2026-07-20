@@ -1,69 +1,50 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
+using Content.Goobstation.Common.Blob;
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Medical.Common.Targeting;
+using Content.Shared.Chat;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Content.Shared.Radio;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
+using Content.Shared.Speech;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract class SharedBlobMobSystem : EntitySystem
+public abstract partial class SharedBlobMobSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    private EntityQuery<BlobTileComponent> _tileQuery;
-    private EntityQuery<BlobMobComponent> _mobQuery;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
+    [Dependency] private EntityQuery<BlobMobComponent> _mobQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BlobMobComponent, AttackAttemptEvent>(OnBlobAttackAttempt);
-        SubscribeNetworkEvent<BlobMobGetPulseEvent>(OnPulse);
-        _tileQuery = GetEntityQuery<BlobTileComponent>();
-        _mobQuery = GetEntityQuery<BlobMobComponent>();
-
-        // SubscribeLocalEvent<BlobSpeakComponent, GetDefaultRadioChannelEvent>(OnGetDefaultRadioChannel);
+        SubscribeLocalEvent<BlobSpeakComponent, SpeakAttemptEvent>(OnSpeakAttempt, after: [ typeof(SpeechSystem) ]);
     }
 
-    private void OnGetDefaultRadioChannel(Entity<BlobSpeakComponent> ent, ref GetDefaultRadioChannelEvent args)
+    public virtual void NodePulse(Entity<BlobMobComponent> ent)
     {
-        //args.Channel = ent.Comp.Channel;
+        _damage.ChangeDamage(ent.Owner, ent.Comp.HealthOfPulse, targetPart: TargetBodyPart.All);
     }
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string HealEffect = "EffectHealPlusTripleYellow";
-
-    private void OnPulse(BlobMobGetPulseEvent ev)
-    {
-        if (!TryGetEntity(ev.BlobEntity, out var blobEntity))
-            return;
-
-        SpawnAttachedTo(HealEffect, new EntityCoordinates(blobEntity.Value, Vector2.Zero));
-    }
-
-    private void OnBlobAttackAttempt(EntityUid uid, BlobMobComponent component, AttackAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnBlobAttackAttempt(Entity<BlobMobComponent> ent, ref AttackAttemptEvent args)
     {
         if (args.Cancelled || !_tileQuery.HasComp(args.Target) && !_mobQuery.HasComp(args.Target))
             return;
 
-        _popupSystem.PopupCursor(Loc.GetString("blob-mob-attack-blob"), PopupType.Large);
+        _popup.PopupCursor(Loc.GetString("blob-mob-attack-blob"), ent, PopupType.Large);
         args.Cancel();
+    }
+
+    private void OnSpeakAttempt(Entity<BlobSpeakComponent> ent, ref SpeakAttemptEvent args)
+    {
+        if (HasComp<BlobCarrierComponent>(ent))
+            return;
+
+        args.Uncancel(); // very sus...
     }
 }

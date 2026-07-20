@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   id: PlantAnalyzer
-  result: PlantAnalyzerEmpty
+  result: PlantAnalyzer
   completetime: 4
   materials: # Values taken from the health analyzer, reduced slightly for bluespace inclusion #Funky removed bluespace line
     Glass: 400

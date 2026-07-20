@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 AstroDogeDX <48888500+AstroDogeDX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-# SPDX-FileCopyrightText: 2025 GMWQ <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity # Goobstation - Sweet jani door recolour
@@ -53,16 +47,3 @@
     occludes: false
   - type: Occluder
     enabled: false
-
-- type: entity
-  parent: AirlockGlass
-  id: AirlockRobotics
-  suffix: Robotics
-  components:
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsRobotics ]
-  - type: Sprite
-    sprite: _Goobstation/Structures/Doors/Airlocks/Glass/robotics.rsi
-  - type: Wires
-    layoutId: AirlockScience

@@ -1,18 +1,21 @@
+// <Trauma>
+using Content.Goobstation.Common.Movement;
+using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Standing;
 using Robust.Shared.Configuration;
-using Content.Goobstation.Common.Movement; // Goobstation
-using Content.Goobstation.Common.CCVar; // Goobstation
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Movement.Systems
 {
-    public sealed class MovementSpeedModifierSystem : EntitySystem
+    public sealed partial class MovementSpeedModifierSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IConfigurationManager _configManager = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private IConfigurationManager _configManager = default!;
 
         private float _frictionModifier;
         private float _airDamping;
@@ -101,22 +104,27 @@ namespace Content.Shared.Movement.Systems
             if (_timing.ApplyingState)
                 return;
 
-            // <Goobstation Change>
+            // <Trauma>
             var isImmune = false;
             if (HasComp<SpeedModifierImmunityComponent>(uid))
                 isImmune = true;
-            // </Goobstation Change>
+            // </Trauma>
 
             var ev = new RefreshMovementSpeedModifiersEvent(isImmune);
             RaiseLocalEvent(uid, ev);
 
-            if (MathHelper.CloseTo(ev.WalkSpeedModifier, move.WalkSpeedModifier) &&
-                MathHelper.CloseTo(ev.SprintSpeedModifier, move.SprintSpeedModifier))
+            // <Trauma>
+            var ev2 = new BeforeMovespeedModifierAppliedEvent(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
+            RaiseLocalEvent(uid, ref ev2);
+
+            // Changed ev.Walk/SprintSpeedModifier to ev2.Walk/SprintModifier
+            if (MathHelper.CloseTo(ev2.WalkModifier, move.WalkSpeedModifier) &&
+                MathHelper.CloseTo(ev2.SprintModifier, move.SprintSpeedModifier))
                 return;
 
-
-            move.WalkSpeedModifier = Math.Min(ev.WalkSpeedModifier, _maxSpeed); // Goobstation Change
-            move.SprintSpeedModifier = Math.Min(ev.SprintSpeedModifier, _maxSpeed); // Goobstation Change
+            move.WalkSpeedModifier = Math.Min(ev2.WalkModifier, _maxSpeed);
+            move.SprintSpeedModifier = Math.Min(ev2.SprintModifier, _maxSpeed);
+            // </Trauma>
             Dirty(uid, move);
         }
 

@@ -1,3 +1,6 @@
+reagent-name-cement = cement
+reagent-desc-cement = A chemical used for making bricks.
+
 reagent-name-potassium-sulfate = potassium sulfate
 reagent-desc-potassium-sulfate = Potassium in a water-soluble form, providing both potassium and sulfur. Used primarily as a fertilizer for plants.
 
@@ -39,3 +42,21 @@ reagent-desc-nanomachines = A black, dark fluid that seems to move on it's own. 
 
 reagent-name-nanoprocessor = nanoprocessor
 reagent-desc-nanoprocessor = A white fluid that is responsible for computing at the nanoscopic level.
+
+reagent-name-calcium-carbonate = calcium carbonate
+reagent-desc-calcium-carbonate = Also known as lime, typically found in limestone and egg shells.
+
+reagent-name-calcium-oxide = calcium oxide
+reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts with water to produce heat and calcium hydroxide
+
+reagent-name-calcium-hydroxide = calcium hydroxide
+reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.
+
+reagent-name-unstable-compound = unstable compound
+reagent-desc-unstable-compound = An incredibly volatile variant of unstable mutagen, much more effective at mutating viruses and plants compared to normal mutagen.
+
+reagent-name-reaper-delight = reaper's delight
+reagent-desc-reaper-delight = A very potent fertilizer with no limit to its potency-boosting effects on plants. Use it in limited quantities however, as excessive usage can easily kill almost any plant.
+
+reagent-name-stellarium = stellarium
+reagent-desc-stellarium = An artifically synthesized anti-toxin that is incredibly effective against poisons, Also works very well as a fertilizer to keep your plants alive.

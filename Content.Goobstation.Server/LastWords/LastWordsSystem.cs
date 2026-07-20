@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chat;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mind;
@@ -6,9 +8,9 @@ using Content.Shared.Mobs.Components;
 
 namespace Content.Goobstation.Server.LastWords;
 
-public sealed class LastWordsSystem : EntitySystem
+public sealed partial class LastWordsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<MobStateComponent, EntitySpokeEvent>(OnEntitySpoke);

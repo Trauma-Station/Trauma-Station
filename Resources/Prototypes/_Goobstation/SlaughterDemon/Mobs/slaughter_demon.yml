@@ -1,12 +1,11 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
   parent:
-    - SimpleSpaceMobBase
-    - MobPolymorphable
+  - AppearanceSlaughterDemon
+  - SimpleSpaceMobBase
+  - MobPolymorphable
+  - MobNightVision
   id: BaseMobSlaughterDemon
   name: slaughter demon
   suffix: ""
@@ -17,23 +16,18 @@
     state: daemon
   - type: Stamina
     baseCritThreshold: 150
-  - type: NightVision
-    color: "#AA4A44"
-    activateSound: null
-    deactivateSound: null
   - type: Insulated
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: SlaughterDemon
+  - type: Injurable
+    damageContainer: Biological
   - type: StatusEffects # Overwriting basesimplemob to remove flash
     allowed:
     - SlowedDown
     - Stutter
     - Electrocution
     - ForcedSleep
-    - TemporaryBlindness
     - Pacified
-    - RadiationProtection
     - Drowsiness
     - Adrenaline
   - type: MobMover
@@ -51,7 +45,7 @@
     description: ghost-role-information-slaughter-demon-description
     rules: ghost-role-information-slaughter-demon-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleSlaughterDemon
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -72,6 +66,7 @@
       types:
         Slash: 25
         Structural: 50
+  - type: Evil
   - type: SlaughterDemon # main component
     speedModWalk: 2.5
     speedModRun: 2.5
@@ -80,30 +75,22 @@
       params:
         volume: 2
   - type: SlaughterDevour # allows the demon to devour
-    toHeal: # Healing done when eating someone
-      groups:
-        Brute: -100
-        Burn: -100
-        Airloss: -100
-        Toxin: -100
-        Genetic: -100
-        Metaphysical: -100
-    toHealNonCrew: # Healing done when eating a robot
-      groups:
-        Brute: -50
-        Burn: -50
-        Airloss: -50
-        Toxin: -50
-        Genetic: -50
-        Metaphysical: -50
-    toHealAnythingElse:  # Healing when previous conditions weren't met
-      groups:
-        Brute: -25
-        Burn: -25
-        Airloss: -25
-        Toxin: -25
-        Genetic: -25
-        Metaphysical: -25
+    healDamage:
+      types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Caustic: -1
+        Poison: -1
+        Radiation: -1
+        Asphyxiation: -1
+        Bloodloss: -1
+        Cellular: -1
+        Holy: -1
     doAfterDelay: 2
   - type: DemonicWhisper # allows the demon to demonic whisper
   - type: DemonicAccent # the accent
@@ -122,8 +109,6 @@
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90
-  - type: Body
-    prototype: SlaughterDemon
   - type: StandingState
   - type: Fixtures
     fixtures:
@@ -147,9 +132,8 @@
       - DemonicWhisperAction
   - type: ReplacementAccent
     accent: slaughterDemon
-  - type: GrantHellRip
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: KnowledgeHolder
+  - type: AlwaysTakeHoly
   - type: Hands
   - type: PressureImmunity
   - type: TriggerOnMobstateChange
@@ -159,10 +143,7 @@
     sound:
       path: /Audio/Effects/demon_dies.ogg
   - type: Vocal
-    sounds:
-      Male: SlaughterDemon
-      Female: SlaughterDemon
-      Unsexed: SlaughterDemon
+    emoteSounds: SlaughterDemon
   - type: ZombieImmune
   - type: SlowOnDamage
     speedModifierThresholds:
@@ -172,7 +153,7 @@
       reagents:
       - ReagentId: Sulfur
         Quantity: 300
-    bleedReductionAmount: 5
+    bleedReductionAmount: 30
   - type: TemperatureDamage
     coldDamage:
       types:
@@ -182,6 +163,13 @@
         Heat: 0
     heatDamageThreshold: 666
     coldDamageThreshold: 66
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
 
 # laughter demon
 - type: entity
@@ -212,16 +200,8 @@
         Slash: 20
         Structural: 50
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-laughter-demon-name
     description: ghost-role-information-laughter-demon-description
-    rules: ghost-role-information-slaughter-demon-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: default
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/sadtrombone.ogg

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Mech;
@@ -9,9 +6,9 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Goobstation.Shared.Mech;
 
-public sealed class SharedMechSystem : EntitySystem
+public sealed partial class SharedMechSystem : EntitySystem
 {
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     public override void Initialize()
     {

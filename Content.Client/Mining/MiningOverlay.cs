@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Shared.Mining.Components;
 using Robust.Client.GameObjects;
@@ -14,11 +9,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Mining;
 
-public sealed class MiningOverlay : Overlay
+public sealed partial class MiningOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private readonly EntityLookupSystem _lookup;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _xform;

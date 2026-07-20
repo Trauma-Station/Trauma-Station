@@ -1,41 +1,36 @@
-# SPDX-FileCopyrightText: 2024 Jeff <velcroboy333@hotmail.com>
-# SPDX-FileCopyrightText: 2024 Velcroboy <107660393+IamVelcroboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: entity
   name: random curtain spawner
   id: CurtainSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Structures/Decoration/Curtains/hospital.rsi
-          state: closed
-    - type: RandomSpawner
-      prototypes:
-        - HospitalCurtains
-        - CurtainsBlack
-        - CurtainsBlue
-        - CurtainsSkyBlue
-        - CurtainsCyan
-        - CurtainsGreen
-        - CurtainsOrange
-        - CurtainsPink
-        - CurtainsPurple
-        - CurtainsRed
-        - CurtainsWhite
-        - CurtainsWhiteOpen
-        - CurtainsRedOpen
-        - CurtainsPurpleOpen
-        - CurtainsPinkOpen
-        - CurtainsOrangeOpen
-        - CurtainsGreenOpen
-        - CurtainsCyanOpen
-        - CurtainsSkyBlueOpen
-        - CurtainsBlueOpen
-        - CurtainsBlackOpen
-        - HospitalCurtainsOpen
-      offset: 0.0
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Decoration/Curtains/hospital.rsi
+      state: closed
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: HospitalCurtains
+      - id: CurtainsBlack
+      - id: CurtainsBlue
+      - id: CurtainsSkyBlue
+      - id: CurtainsCyan
+      - id: CurtainsGreen
+      - id: CurtainsOrange
+      - id: CurtainsPink
+      - id: CurtainsPurple
+      - id: CurtainsRed
+      - id: CurtainsWhite
+      - id: CurtainsWhiteOpen
+      - id: CurtainsRedOpen
+      - id: CurtainsPurpleOpen
+      - id: CurtainsPinkOpen
+      - id: CurtainsOrangeOpen
+      - id: CurtainsGreenOpen
+      - id: CurtainsCyanOpen
+      - id: CurtainsSkyBlueOpen
+      - id: CurtainsBlueOpen
+      - id: CurtainsBlackOpen
+      - id: HospitalCurtainsOpen
+    offset: 0.0

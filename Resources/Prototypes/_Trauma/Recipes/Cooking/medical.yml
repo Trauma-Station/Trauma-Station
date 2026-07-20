@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: microwaveMealRecipe
+  id: BoneGelMakeshift
+  name: makeshift bone gel
+  result: BoneGelMakeshift
+  time: 15
+  group: Medicinal
+  solids:
+    DrinkWaterBottleFull: 1 # survival box has this, shitcode cant just use tags lol
+    MaterialCloth1: 1
+  reagents:
+    Milk: 10 # good for bones
+    SpaceGlue: 15

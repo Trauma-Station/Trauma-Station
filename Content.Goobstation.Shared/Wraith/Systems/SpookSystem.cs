@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Content.Shared.UserInterface;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
@@ -13,12 +14,11 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 /// Handles UI opening of spook menu and activating an action.
 /// The actions exist in the server-sided system.
 /// </summary>
-public sealed class SpookSystem : EntitySystem
+public sealed partial class SpookSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -35,7 +35,7 @@ public sealed class SpookSystem : EntitySystem
 
         _userInterfaceSystem.SetUiState(ent.Owner,
             RadialSelectorUiKey.Key,
-            new TrackedRadialSelectorState(ent.Comp.Actions));
+            new RadialSelectorState(ent.Comp.Actions));
     }
 
     private void OnRadialSelectorSelected(Entity<SpookComponent> ent, ref RadialSelectorSelectedMessage args)
@@ -49,7 +49,8 @@ public sealed class SpookSystem : EntitySystem
     private void DoSelectedAction(EntityUid uid, string? action)
     {
         if (action == null
-            || !_prototypeManager.TryIndex(action, out var actionProto)
+            || !ProtoMan.TryIndex(action, out var actionProto)
+            || !actionProto.HasComponent<ActionComponent>()
             || !TryComp<ActionsComponent>(uid, out var actions))
             return;
 

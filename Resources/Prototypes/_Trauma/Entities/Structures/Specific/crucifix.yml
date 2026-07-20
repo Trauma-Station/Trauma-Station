@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseStructure
   id: Crucifix
@@ -20,8 +22,9 @@
         mask:
         - TableMask
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -37,7 +40,7 @@
     selfUnBuckleDelay: 10 # only works before you get nailed onto it
     whitelist:
       components:
-      - HumanoidAppearance # monkey/kobold has this too, dont worry
+      - HumanoidProfile # monkey/kobold has this too, dont worry
   - type: StrapLock
   - type: ChangeNodeOnUnstrap
     node: cross # revert to uncrucified if entity is deleted or whatever

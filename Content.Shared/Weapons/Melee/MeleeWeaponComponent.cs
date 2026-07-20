@@ -1,35 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 Arimah Greene <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Darkie <darksaiyanis@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Errant <35878406+dmnct@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 HerCoyote23 <131214189+HerCoyote23@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 I.K <45953835+notquitehadouken@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 jicksaw <jicksaw@pm.me>
-// SPDX-FileCopyrightText: 2023 notquitehadouken <1isthisameme>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Scribbles0 <91828755+Scribbles0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Eagle <lincoln.mcqueen@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 VMSolidus <evilexecutive@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-// SPDX-FileCopyrightText: 2025 vanx <61917534+Vaaankas@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -125,13 +93,6 @@ public sealed partial class MeleeWeaponComponent : Component
     [DataField, AutoNetworkedField]
     public float Range = 1.5f;
 
-    // goob edit - stunmeta
-    /// <summary>
-    ///     Applies stamina damage on each successful wideswing hit to the attacker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float HeavyStaminaCost = 10f;
-
     /// <summary>
     /// Total width of the angle for wide attacks.
     /// </summary>
@@ -139,32 +100,10 @@ public sealed partial class MeleeWeaponComponent : Component
     public Angle Angle = Angle.FromDegrees(60);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Animation = "WeaponArcThrust"; // Goob Edit
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId MissAnimation = "WeaponArcPunch"; // Goob Edit
-
-    [DataField, AutoNetworkedField]
-    public bool FlipAnimation = true; // Goob Edit
+    public EntProtoId Animation = "WeaponArcThrust";
 
     [DataField, AutoNetworkedField]
     public EntProtoId WideAnimation = "WeaponArcSlash";
-
-    // WD EDIT START
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId DisarmAnimation = "WeaponArcDisarm";
-
-    [DataField, AutoNetworkedField]
-    public bool CanHeavyAttack = true;
-
-    /// <summary>
-    /// Rotation of the animation.
-    /// 0 degrees means the top faces the attacker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public Angle AnimationRotation = Angle.Zero;
-    // WD EDIT END
 
     /// <summary>
     /// Rotation of the animation.
@@ -175,7 +114,6 @@ public sealed partial class MeleeWeaponComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SwingLeft;
-
 
     // Sounds
 
@@ -211,30 +149,6 @@ public sealed partial class MeleeWeaponComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool MustBeEquippedToUse = false;
-
-    // Shitmed Change Start
-
-    /// <summary>
-    ///     Shitmed Change: Part damage is multiplied by this amount for single-target attacks
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float ClickPartDamageMultiplier = 1.00f;
-
-    /// <summary>
-    ///     Shitmed Change: Part damage is multiplied by this amount for heavy swings
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float HeavyPartDamageMultiplier = 1.00f;
-
-    // Shitmed Change End
-
-    // Goobstation
-    [DataField, AutoNetworkedField]
-    public bool CanWideSwing = true;
-
-    // Goobstation
-    [DataField, AutoNetworkedField]
-    public float HeavyAttackWoundMultiplier = 0.5f;
 }
 
 /// <summary>

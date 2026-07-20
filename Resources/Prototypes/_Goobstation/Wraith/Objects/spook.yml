@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: SpookObject
   name: ???
@@ -54,7 +56,7 @@
   - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
   - type: FlipLights
   - type: BurnLights
   - type: CreateEctoplasm
@@ -81,15 +83,14 @@
       tags:
         - Trash
         - Ectoplasm
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          maxVol: 50
-          reagents:
-            - ReagentId: Ash
-              Quantity: 25
-            - ReagentId: Coldsauce
-              Quantity: 25
+    - type: Solution
+      solution:
+        maxVol: 50
+        reagents:
+          - ReagentId: Ash
+            Quantity: 25
+          - ReagentId: Coldsauce
+            Quantity: 25
     - type: GuideHelp
       guides:
       - MinorAntagonists

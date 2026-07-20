@@ -4,6 +4,10 @@
   abstract: true
   description: Mobs without physical bodies
   components:
+  # <Trauma>
+  - type: Viewcone
+    baseConeAngle: 36000 # observers wraiths etc can see everything basically no matter what
+  # </Trauma>
   - type: Sprite
     noRot: true
     overrideContainerOcclusion: true # Always show up regardless of where they're contained.
@@ -11,6 +15,7 @@
   - type: FTLSmashImmune
   - type: CargoSellBlacklist
   - type: MovementSpeedModifier
+    backwardsAngle: 360 # Trauma - ghosts can moonwalk
     baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: MovementIgnoreGravity
@@ -39,26 +44,81 @@
   description: Boo!
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: GhostColor
+  - type: CollectiveMind
+    hearAll: true
+    seeAllNames: true
+  - type: Speech
+    speechVerb: Dead
+  - type: LanguageSpeaker
+  - type: UniversalLanguageSpeaker
+  - type: UserInterface
+    interfaces:
+      enum.RevivalContractUiKey.Key:
+        type: RevivalContractBoundUserInterface
+        requireInputValidation: false
+  # </Trauma>
   - type: Sprite
     sprite: Mobs/Ghosts/ghost_human.rsi
     color: "#fff8"
     layers:
     - state: animated
+      map: [ "ghostVariant" ]
       shader: unshaded
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.GhostVisuals.Damage:
+        ghostVariant:
+          ghost_Blunt0: { state: ghost_Blunt0 } # this is an icki way of doing this u.u -Thinbug
+          ghost_Blunt1: { state: ghost_Blunt1 }
+          ghost_Blunt2: { state: ghost_Blunt2 }
+          ghost_Slash0: { state: ghost_Slash0 }
+          ghost_Slash1: { state: ghost_Slash1 }
+          ghost_Slash2: { state: ghost_Slash2 }
+          ghost_Piercing0: { state: ghost_Piercing0 }
+          ghost_Piercing1: { state: ghost_Piercing1 }
+          ghost_Piercing2: { state: ghost_Piercing2 }
+          ghost_Heat0: { state: ghost_Heat0 }
+          ghost_Cold0: { state: ghost_Cold0 }
+          ghost_Shock0: { state: ghost_Shock0 }
+          ghost_Radiation0: { state: ghost_Radiation0 }
+          ghost_Cellular0: { state: ghost_Cellular0 }
+          ghost_Poison0: { state: ghost_Poison0 }
+          ghost_Asphyxiation0: { state: ghost_Asphyxiation0 }
+          ghost_Explosion0: { state: ghost_Explosion0 }
+          ghost_Explosion1: { state: ghost_Explosion1 }
+          ghost_Explosion2: { state: ghost_Explosion2 }
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye
     drawFov: false
     visMask:
+      # <Trauma>
+      - CosmicCultMonument
+      - Abductor
+      # </Trauma>
       - Ghost
       - Normal
-      - CosmicCultMonument # DeltaV - Cosmic Cult
-      - Abductor # Shitmed - Starlight Abductors
   - type: Input
     context: "ghost"
   - type: Examiner
     skipChecks: true
   - type: Ghost
+  - type: GhostSpriteState
+    damageMap:
+      Blunt: 3
+      Slash: 3
+      Piercing: 3
+      Heat: 1
+      Cold: 1
+      Shock: 1
+      Radiation: 1
+      Cellular: 1
+      Poison: 1
+      Asphyxiation: 1
+    prefix: "ghost_"
   - type: GhostHearing
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
@@ -68,24 +128,15 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
-  - type: PointLight
+  - type: NightVision
     netsync: false
-    radius: 6
-    castShadows: false
     enabled: false
-  - type: Speech #Goobstation - Dead chat verbs
-    speechVerb: Dead
-  - type: GhostColor
-  - type: CollectiveMind
-    hearAll: true
-    seeAllNames: true
-  - type: LanguageSpeaker # Einstein Engines - Languages
-  - type: UniversalLanguageSpeaker # Einstein Engines - Languages
-  - type: UserInterface
-    interfaces:
-      enum.RevivalContractUiKey.Key: # Goobstation - Devil
-        type: RevivalContractBoundUserInterface
-        requireInputValidation: false
+    prioritized: false
+    relayOverlay: false # In case default values change
+    lightingColor: '#FFFFFF20'
+    overlayColor: '#FFFFFF00'
+    noiseAmount: 0 # In case default values change
+    noiseMultiplier: 0 # In case default values change
 
 # proto for player ghosts specifically
 - type: entity
@@ -119,7 +170,7 @@
     icon: Interface/Actions/scream.png
     checkCanInteract: false
     startDelay: true
-    useDelay: 120
+    useDelay: 30 # Trauma, was 120
   - type: InstantAction
     event: !type:BooActionEvent
 

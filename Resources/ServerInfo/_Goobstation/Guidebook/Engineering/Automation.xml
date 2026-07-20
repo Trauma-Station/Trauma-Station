@@ -1,7 +1,7 @@
 <Document>
 <GuideEntityEmbed Entity="RoboticArm" Caption="The factory must grow."/>
 
-On goob many machines and processes can be automated.
+On Trauma Station many machines and processes can be automated.
 
 The first step is getting science to unlock [bold]Industrial Engineering[/bold] which unlocks everything you need.
 
@@ -22,15 +22,13 @@ It has a [italic]Moved[/italic] signal port which is invoked after an item is mo
 
 ## Automated Machines
 
-A variety of machines can be automated by installing an [bold]Automation Upgrade[/bold] on them.
-
-This can unlock:
+A variety of machines can be automated using a multitool and special ports:
 - signal ports to control the machine by linking it to buttons, logic gates, etc.
 - signal ports that get invoked when the machine does something, like a disposal unit being ready to flush
 - item automation ports for the [bold]robotic arm[/bold] to use
 - a combination of both
 
-Here is every machine that accepts automation upgrades:
+Here is every machine that can be automated:
 
 <GuideAutomationSlotsEmbed/>
 

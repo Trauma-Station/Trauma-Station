@@ -1,3 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: factionIcon
+  id: CosmicCultLesserIcon
+  isShaded: false
+  priority: 11
+  showTo:
+    components:
+    - CosmicCult
+    - CosmicColossus
+    - CosmicAstralBody
+    - ShowAntagIcons
+    - CosmicLesserCultist
+  icon:
+    sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
+    state: CosmicCult
+
 - type: factionIcon
   id: CosmicCultIcon
   isShaded: false
@@ -5,21 +22,10 @@
   showTo:
     components:
     - CosmicCult
+    - CosmicColossus
     - CosmicAstralBody
     - ShowAntagIcons
-  icon:
-    sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
-    state: CosmicCult
-
-- type: factionIcon
-  id: CosmicCultLeadIcon
-  isShaded: false
-  priority: 11
-  showTo:
-    components:
-    - CosmicCult
-    - CosmicAstralBody
-    - ShowAntagIcons
+    - CosmicLesserCultist
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCultLead

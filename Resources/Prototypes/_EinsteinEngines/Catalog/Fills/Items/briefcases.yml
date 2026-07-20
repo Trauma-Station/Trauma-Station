@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: BriefcaseSyndieLobbyingBundlePlasmamanFilled
   parent: BriefcaseSyndie
@@ -9,13 +11,11 @@
         children:
         - id: ClothingUniformEnvirosuitTacticool
         - id: ClothingHeadEnvirohelmTacticool
-        - id: ClothingOuterCoatJensenFilled
         - id: ClothingHandsGlovesCombat
         - id: ClothingEyesGlassesSunglasses
         - id: SpaceCash30000
         - id: EncryptionKeySyndie
         - id: RubberStampTrader
-        - id: PhoneInstrumentSyndicate
 
 - type: entity # No more space in briefcase due to envirohelm so put the syndicate flag in the jensen coat
   id: ClothingOuterCoatJensenFilled
@@ -27,6 +27,7 @@
       storagebase: !type:AllSelector
         children:
         - id: SyndieHandyFlag
+        - id: VialCocaine # Trauma
 
 - type: entity
   id: BriefcaseThiefBribingBundlePlasmamanFilled

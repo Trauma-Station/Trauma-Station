@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-// SPDX-FileCopyrightText: 2025 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.StationEvents.Events;
 using Content.Shared.Atmos;
 using Robust.Shared.Map;
@@ -19,44 +7,105 @@ namespace Content.Server.StationEvents.Components;
 [RegisterComponent, Access(typeof(GasLeakRule))]
 public sealed partial class GasLeakRuleComponent : Component
 {
-    public readonly Gas[] LeakableGases =
+    /// <summary>
+    /// Gas types that can be selected for the leak event.
+    /// </summary>
+    [DataField]
+    public Gas[] LeakableGases =
     {
         Gas.Ammonia,
         Gas.Plasma,
         Gas.Tritium,
         Gas.Frezon,
-        Gas.WaterVapor, // the fog
-        Gas.Healium, // Assmos - /tg/ gases
-        Gas.Nitrium, // Assmos - /tg/ gases
-        Gas.Pluoxium, // Assmos - /tg/ gases
+        Gas.WaterVapor,
+        // <Goob>
+        Gas.Healium,
+        Gas.Nitrium,
+        Gas.Pluoxium,
+        // </Goob>
     };
 
     /// <summary>
-    ///     Running cooldown of how much time until another leak.
+    /// Time remaining until the next gas addition to the leak tile.
     /// </summary>
+    [DataField]
     public float TimeUntilLeak;
 
     /// <summary>
-    ///     How long between more gas being added to the tile.
+    /// Fixed interval in seconds between gas additions to the leak tile.
     /// </summary>
+    [DataField]
     public float LeakCooldown = 1.0f;
 
-    // Event variables
+    /// <summary>
+    /// The station where the leak is located.
+    /// </summary>
+    [DataField]
     public EntityUid TargetStation;
-    public EntityUid TargetGrid;
-    public Vector2i TargetTile;
-    public EntityCoordinates TargetCoords;
-    public bool FoundTile;
-    public Gas LeakGas;
-    public float MolesPerSecond;
-    public readonly int MinimumMolesPerSecond = 80;
 
     /// <summary>
-    ///     Don't want to make it too fast to give people time to flee.
+    /// The specific grid where the leak is located.
     /// </summary>
+    [DataField]
+    public EntityUid TargetGrid;
+
+    /// <summary>
+    /// The tile coordinates where the leak is located.
+    /// </summary>
+    [DataField]
+    public Vector2i TargetTile;
+
+    /// <summary>
+    /// The world coordinates of the leak location.
+    /// </summary>
+    [DataField]
+    public EntityCoordinates TargetCoords;
+
+    /// <summary>
+    /// Whether a suitable tile for leaking has been found.
+    /// </summary>
+    [DataField]
+    public bool FoundTile;
+
+    /// <summary>
+    /// The specific gas type currently leaking.
+    /// </summary>
+    [DataField]
+    public Gas LeakGas;
+
+    /// <summary>
+    /// Current leak rate in moles per second.
+    /// </summary>
+    [DataField]
+    public float MolesPerSecond;
+
+    /// <summary>
+    /// Minimum leak rate in moles per second.
+    /// </summary>
+    [DataField]
+    public int MinimumMolesPerSecond = 80;
+
+    /// <summary>
+    /// Maximum leak rate in moles per second. Limited to give people time to flee.
+    /// </summary>
+    [DataField]
     public int MaximumMolesPerSecond = 200;
 
+    /// <summary>
+    /// Minimum total amount of gas to leak over the entire event duration.
+    /// </summary>
+    [DataField]
     public int MinimumGas = 1000;
+
+    /// <summary>
+    /// Maximum total amount of gas to leak over the entire event duration.
+    /// </summary>
+    [DataField]
     public int MaximumGas = 4000;
+
+    /// <summary>
+    /// Chance to create an ignition spark when the event ends.
+    /// </summary>
+    [DataField]
     public float SparkChance = 0.05f;
 }

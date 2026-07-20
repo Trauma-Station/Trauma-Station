@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.Audio;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Audio.Components;
@@ -7,14 +8,13 @@ using Robust.Shared.Configuration;
 
 namespace Content.Trauma.Client.Audio;
 
-public sealed class CopyrightedAudioSystem : EntitySystem
+public sealed partial class CopyrightedAudioSystem : EntitySystem
 {
 // entire thing is disabled on debug because its evil and debug asserts immediately without engine update
 #if !DEBUG
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-
-    private EntityQuery<AudioComponent> _query;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityQuery<AudioComponent> _query = default!;
 
     /// <summary>
     /// Whether streamer mode is enabled.
@@ -25,8 +25,6 @@ public sealed class CopyrightedAudioSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<AudioComponent>();
 
         SubscribeLocalEvent<CopyrightedAudioComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<CopyrightedAudioComponent, ComponentShutdown>(OnShutdown);

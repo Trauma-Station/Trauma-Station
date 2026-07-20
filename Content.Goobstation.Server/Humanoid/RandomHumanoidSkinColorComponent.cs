@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Decals;
+
 namespace Content.Goobstation.Server.Humanoid;
 
 /// <summary>
@@ -10,5 +14,5 @@ public sealed partial class RandomHumanoidSkinColorComponent : Component
     ///     The color palette to use.
     /// </summary>
     [DataField(required: true)]
-    public string Palette;
+    public ProtoId<ColorPalettePrototype> Palette;
 }

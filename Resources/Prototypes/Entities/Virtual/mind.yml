@@ -3,12 +3,13 @@
   name: mind
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: LastWords
+  - type: MindLastMob
+  - type: MindMessages
+  # </Trauma>
   - type: Mind
   - type: ContainerContainer
     containers:
       mind_roles: !type:Container
         ents: []
-  # <Trauma>
-  - type: LastWords
-  - type: MindLastMob
-  # </Trauma>

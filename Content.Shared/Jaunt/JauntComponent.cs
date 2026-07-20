@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -21,7 +14,7 @@ public sealed partial class JauntComponent : Component
     ///     Which Jaunt Action the component should grant.
     /// </summary>
     [DataField]
-    public EntProtoId JauntAction = "ActionPolymorphJaunt";
+    public EntProtoId? JauntAction = "ActionPolymorphJaunt"; // Trauma - made nullable
 
     /// <summary>
     ///     The jaunt action itself.

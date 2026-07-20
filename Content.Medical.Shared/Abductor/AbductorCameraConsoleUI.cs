@@ -1,0 +1,56 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using static Content.Shared.Pinpointer.SharedNavMapSystem;
+
+namespace Content.Medical.Shared.Abductor;
+
+[Serializable, NetSerializable]
+public sealed class AbductorCameraConsoleBuiState : BoundUserInterfaceState
+{
+    public required Dictionary<int, StationBeacons> Stations { get; init; }
+}
+
+[Serializable, NetSerializable]
+public sealed class AbductorConsoleBuiState : BoundUserInterfaceState
+{
+    public NetEntity? Target { get; init; }
+    public string? TargetName { get; init; }
+    public string? VictimName { get; init; }
+    public bool AlienPadFound { get; init; }
+    public bool ExperimentatorFound { get; init; }
+    public bool ArmorFound { get; init; }
+    public bool ArmorLocked { get; init; }
+    public AbductorArmorModeType CurrentArmorMode { get; init; }
+}
+
+[Serializable, NetSerializable]
+public sealed class StationBeacons
+{
+    public required int StationId { get; init; }
+    public required string Name { get; init; }
+    public required List<NavMapBeacon> Beacons { get; init; }
+}
+[Serializable, NetSerializable]
+public sealed class AbductorBeaconChosenBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+[Serializable, NetSerializable]
+public sealed class AbductorAttractBuiMsg : BoundUserInterfaceMessage
+{
+}
+[Serializable, NetSerializable]
+public sealed class AbductorCompleteExperimentBuiMsg : BoundUserInterfaceMessage
+{
+}
+
+[Serializable, NetSerializable]
+public sealed class AbductorVestModeChangeBuiMsg : BoundUserInterfaceMessage
+{
+    public required AbductorArmorModeType Mode { get; init; }
+}
+
+[Serializable, NetSerializable]
+public sealed class AbductorLockBuiMsg : BoundUserInterfaceMessage
+{
+}

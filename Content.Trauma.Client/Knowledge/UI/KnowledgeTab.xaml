@@ -1,0 +1,17 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<Control
+        xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls">
+
+    <BoxContainer Orientation="Vertical">
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Orientation="Vertical" Margin="8">
+                <BoxContainer Orientation="Vertical" Name="KnowledgeBox" Access="Public"/>
+                <controls:Placeholder Name="KnowledgePlaceholder" Access="Public" PlaceholderText="{Loc 'ui-character-knowledge-placeholder-text'}"/>
+            </BoxContainer>
+        </ScrollContainer>
+    </BoxContainer>
+</Control>

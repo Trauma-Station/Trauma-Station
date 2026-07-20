@@ -1,25 +1,17 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 deathride58 <deathride58@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+// <Trauma>
+using Content.Trauma.Common.Sprite;
+// </Trauma>
 using Content.Shared.Decals;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Sprite;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Sprite;
 
-public sealed class RandomSpriteSystem: SharedRandomSpriteSystem
+public sealed partial class RandomSpriteSystem : SharedRandomSpriteSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -63,7 +55,7 @@ public sealed class RandomSpriteSystem: SharedRandomSpriteSystem
                         color = previousColor;
                     else
                     {
-                        color = _random.Pick(_prototype.Index<ColorPalettePrototype>(selectedState.Value).Colors.Values);
+                        color = _random.Pick(ProtoMan.Index<ColorPalettePrototype>(selectedState.Value).Colors.Values);
                         previousColor = color;
                     }
                 }
@@ -73,6 +65,10 @@ public sealed class RandomSpriteSystem: SharedRandomSpriteSystem
         }
 
         Dirty(uid, component);
+        // <Trauma>
+        var ev = new RandomSpriteChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
     }
 
     private void OnGetState(EntityUid uid, RandomSpriteComponent component, ref ComponentGetState args)

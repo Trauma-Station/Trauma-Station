@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MobWraithMidround
+  parent: MobWraith
+  name: Wraith
+  description: A KINDA spooky ghostie.
+  components:
+  - type: Wraith
+    abilities: MidroundWraithAbilities

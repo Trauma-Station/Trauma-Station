@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: AltarConvert
   graph: AltarsGraph
@@ -7,5 +9,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
+  theory:
+    FurnitureKnowledge: 0
   conditions:
   - !type:TileNotBlocked

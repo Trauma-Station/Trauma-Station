@@ -1,56 +1,10 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 Martynas6ha4 <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 NotActuallyMarty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 NotActuallyMarty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
 using Content.Goobstation.Common.Clothing;
+using Content.Medical.Common.Clothing;
+using Content.Trauma.Common.Clothing;
+using System.Linq;
+// </Trauma>
 using Content.Shared.Actions;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -58,7 +12,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Strip;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -66,32 +19,31 @@ using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
-using System.Linq;
+
 namespace Content.Shared.Clothing.EntitySystems;
 
 // GOOBSTATION - MODSUITS - THIS SYSTEM FULLY CHANGED
-public sealed class ToggleableClothingSystem : EntitySystem
+public sealed partial class ToggleableClothingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedStrippableSystem _strippable = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    // <Trauma>
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    // </Trauma>
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedStrippableSystem _strippable = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ToggleableClothingComponent, ComponentInit>(OnToggleableInit);
+        SubscribeLocalEvent<ToggleableClothingComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ToggleableClothingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ToggleableClothingComponent, ToggleClothingEvent>(OnToggleClothingAction);
         SubscribeLocalEvent<ToggleableClothingComponent, GetItemActionsEvent>(OnGetActions);
@@ -123,12 +75,10 @@ public sealed class ToggleableClothingSystem : EntitySystem
     {
         var comp = toggleable.Comp;
 
-        if (!args.CanAccess || !args.CanInteract || args.Hands == null || comp.ClothingUids.Count == 0 || comp.Container == null)
+        if (!args.CanAccess || !args.CanInteract || args.Hands == null || comp.ClothingUids.Count == 0 || comp.Container == null ||
+            !args.CanComplexInteract) // Trauma
             return;
 
-        var text = comp.VerbText ?? (comp.ActionEntity == null ? null : Name(comp.ActionEntity.Value));
-        if (text == null)
-            return;
 
         if (!_inventorySystem.InSlotWithFlags(toggleable.Owner, comp.RequiredFlags))
             return;
@@ -142,7 +92,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         var verb = new EquipmentVerb()
         {
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/outfit.svg.192dpi.png")),
-            Text = Loc.GetString(text),
+            Text = comp.ActionEntity is { } action ? Name(action) : Loc.GetString(comp.VerbText), // Trauma - use action's name if it exists
         };
 
         if (user == wearer)
@@ -246,7 +196,6 @@ public sealed class ToggleableClothingSystem : EntitySystem
     }
 
     public bool IsToggled(Entity<ToggleableClothingComponent> ent, EntityUid clothing) // Goobstation
-///
     {
         return !ent.Comp.Container.Contains(clothing);
     }
@@ -284,7 +233,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (GetAttachedToggleStatus(args.UnEquipTarget, toggleable, true) == ToggleableClothingAttachedStatus.NoneToggled)
             return;
 
-        _popupSystem.PopupClient(Loc.GetString("toggleable-clothing-remove-all-attached-first"), args.Unequipee, args.Unequipee);
+        _popupSystem.PopupClient(Loc.GetString("toggleable-clothing-remove-all-attached-first"), args.UnEquipTarget, args.User);
 
         args.Cancel();
     }
@@ -300,6 +249,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
+        // <Trauma> - shitcode fully rewritten...
         _clothing.SetEquippedPrefix(toggleable, null);
 
         // Check if container exists and we have linked clothings
@@ -308,6 +258,28 @@ public sealed class ToggleableClothingSystem : EntitySystem
 
         var parts = comp.ClothingUids;
         var affectedParts = new List<(EntityUid, string)>();
+
+        // if e.g. a modsuit gets deleted, delete all of its parts immediately. unequipping will be done automatically
+        if (TerminatingOrDeleted(toggleable))
+        {
+            // only restore if the mob wearing it isn't being deleted too
+            var restore = !TerminatingOrDeleted(args.EquipTarget);
+            foreach (var (partUid, slot) in parts)
+            {
+                // it's being deleted not taken off, no contact here
+                _inventorySystem.TryUnequip(args.EquipTarget, slot, force: true, triggerHandContact: false);
+                PredictedQueueDel(partUid);
+                if (restore &&
+                    CompOrNull<AttachedClothingComponent>(partUid)?.ClothingContainer?.ContainedEntity is {} stored &&
+                    !Deleted(stored))
+                {
+                    _containerSystem.TryRemoveFromContainer(stored);
+                    _inventorySystem.TryEquip(args.EquipTarget, stored, slot,
+                        force: true, triggerHandContact: false);
+                }
+            }
+            return;
+        }
 
         // if your toggleable clothing is a backslot and gets forcefully removed i.e. gibbing, Robust likes to forcefully eject the container(s)
         // you can try this by making a regular outerclothing item a back item with VV and equipping the toggle, then smiting yourself
@@ -320,7 +292,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
             {
                 if (comp.Container.Contains(partUid))
                     continue;
-                _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: true);
+                _inventorySystem.TryUnequip(args.EquipTarget, slot, force: true, triggerHandContact: true);
                 // unnecessary for gibbing behaviour fix
                 // but this makes it so that if you unequip and there's items stored
                 // it doesn't just eat the items
@@ -329,7 +301,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
                 !Deleted(stored))
                 {
                     _containerSystem.TryRemoveFromContainer(stored);             // pop it out
-                    _inventorySystem.TryEquip(args.Equipee, stored, slot,    // put it on
+                    _inventorySystem.TryEquip(args.EquipTarget, stored, slot,    // put it on
                         force: true, triggerHandContact: true);
                 }
                 _containerSystem.Insert(partUid, comp.Container); // instant insert we dont wait for OnAttachedUnequip
@@ -337,7 +309,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
             }
             if (affectedParts.Count > 0)
             {
-                var ev = new ToggledBackClothingFullUnequipAndInsertedEvent(toggleable.Owner, args.Equipee, affectedParts);
+                var ev = new ToggledBackClothingFullUnequipAndInsertedEvent(toggleable.Owner, args.EquipTarget, affectedParts);
                 RaiseLocalEvent(toggleable.Owner, ref ev);
             }
             return;
@@ -348,8 +320,9 @@ public sealed class ToggleableClothingSystem : EntitySystem
             if (comp.Container.Contains(partUid) || string.IsNullOrEmpty(slot))
                 continue;
 
-            _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: true);
+            _inventorySystem.TryUnequip(args.EquipTarget, slot, force: true, triggerHandContact: true);
         }
+        // </Trauma>
     }
 
     private void OnRemoveToggleable(Entity<ToggleableClothingComponent> toggleable, ref ComponentRemove args)
@@ -393,13 +366,13 @@ public sealed class ToggleableClothingSystem : EntitySystem
             return;
 
         var attachedEnt = new Entity<AttachedClothingComponent>(args.Equipment, attachedComp);
-        if (args.UnEquipTarget != args.Unequipee)
+        if (args.UnEquipTarget != args.User)
         {
-            StartAttachedDoAfter(args.Unequipee, attachedEnt, args.UnEquipTarget);
+            StartAttachedDoAfter(args.User, attachedEnt, args.UnEquipTarget);
             args.Cancel(); // Cancel original unequip, DoAfter will handle it
         }
         else
-            UnequipClothing(args.Unequipee, new Entity<ToggleableClothingComponent>(toggleable, toggleableComp), args.UnEquipTarget, args.Slot);
+            UnequipClothing(args.User, new Entity<ToggleableClothingComponent>(toggleable, toggleableComp), args.UnEquipTarget, args.Slot);
     }
 
     private void OnRemoveAttached(Entity<AttachedClothingComponent> attached, ref ComponentRemove args)
@@ -452,28 +425,24 @@ public sealed class ToggleableClothingSystem : EntitySystem
 
         // As unequipped gets called in the middle of container removal, we cannot call a container-insert without causing issues.
         // So we delay it and process it during a system update:
+        // <Trauma>
         if (!toggleableComp.ClothingUids.ContainsKey(attached.Owner))
             return;
 
         if (!toggleableComp.ClothingUids.TryGetValue(attached.Owner, out var slot))
             return;
-        // I'm just assuming any toggleable backslot is a modsuit and deffering sanity checks there
-        if (TryComp<ClothingComponent>(comp.AttachedUid, out var clothingComp) &&
-        (clothingComp.Slots & SlotFlags.BACK) != 0)
-        {
-            var ev = new OnToggleableUnequipAttemptEvent(comp.AttachedUid, attached.Owner, args.Equipee, false);
-            RaiseLocalEvent(comp.AttachedUid, ev);
-            // I fucking hate these naming schemes but im not changing them at this point
-            // AttachedUid = Toggleable Part
-            // Owner       = Toggled Part
-
-        }
+        var ev = new AttachedClothingRemovedEvent(attached);
+        RaiseLocalEvent(comp.AttachedUid, ref ev);
 
         // Handle re-equipping contained items
-        UnequipClothing(args.Equipee, (comp.AttachedUid, toggleableComp), attached.Owner, slot);
+        UnequipClothing(args.EquipTarget, (comp.AttachedUid, toggleableComp), attached.Owner, slot);
 
-        if (toggleableComp.Container != null)
-            _containerSystem.Insert(attached.Owner, toggleableComp.Container);
+        if (toggleableComp.Container is {} container && !TerminatingOrDeleted(container.Owner))
+        {
+            var succ = _containerSystem.Insert(attached.Owner, container, force: true);
+            Log.Debug($"Trying to insert {ToPrettyString(attached)} into {ToPrettyString(container.Owner)}: {succ}");
+        }
+        // </Trauma>
     }
 
     /// <summary>
@@ -506,7 +475,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (comp.ClothingUids.Count == 1)
             ToggleClothing(args.Performer, toggleable, comp.ClothingUids.First().Key);
         else
-            _uiSystem.OpenUi(toggleable.Owner, ToggleClothingUiKey.Key, args.Performer);
+            _ui.OpenUi(toggleable.Owner, ToggleClothingUiKey.Key, args.Performer);
     }
 
     /// <summary>
@@ -623,14 +592,15 @@ public sealed class ToggleableClothingSystem : EntitySystem
         }
 
         // If attached have clothing in container - equip it
-        if (!TryComp<AttachedClothingComponent>(clothing, out var attachedComp) || attachedComp.ClothingContainer == null)
+        // <Trauma> - rewrote shitcode
+        if (CompOrNull<AttachedClothingComponent>(clothing)?.ClothingContainer?.ContainedEntity is not {} stored)
             return;
 
-        var storedClothing = attachedComp.ClothingContainer.ContainedEntity;
-
-        if (storedClothing != null)
-            _inventorySystem.TryEquip(parent, storedClothing.Value, slot, force: true, triggerHandContact: true, silent:true);
+        if (!_inventorySystem.TryEquip(parent, stored, slot, force: true, triggerHandContact: true, silent: true))
+            _containerSystem.TryRemoveFromContainer(stored); // don't just keep it inside the attached piece if equipping fails
+        // </Trauma>
     }
+
     public bool EquipClothing(EntityUid user, Entity<ToggleableClothingComponent> toggleable, EntityUid clothing, string slot, bool silent = false) // Goobstation
     {
         var parent = Transform(toggleable.Owner).ParentUid;
@@ -670,7 +640,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         args.AddAction(comp.ActionEntity.Value);
     }
 
-    private void OnToggleableInit(Entity<ToggleableClothingComponent> toggleable, ref ComponentInit args)
+    private void OnInit(Entity<ToggleableClothingComponent> toggleable, ref ComponentInit args)
     {
         var comp = toggleable.Comp;
 
@@ -702,9 +672,9 @@ public sealed class ToggleableClothingSystem : EntitySystem
             return;
 
         // Add prototype from ClothingPrototype and Slot field to ClothingPrototypes dictionary
-        if (comp.ClothingPrototype != null && !string.IsNullOrEmpty(comp.Slot) && !comp.ClothingPrototypes.ContainsKey(comp.Slot))
+        if (comp.ClothingPrototype is { } proto && comp.Slot is { } slot && !comp.ClothingPrototypes.ContainsKey(slot)) // Trauma - use nullables properly for everything
         {
-            comp.ClothingPrototypes.Add(comp.Slot, comp.ClothingPrototype.Value);
+            comp.ClothingPrototypes.Add(slot, proto); // Trauma - use nullables for everything
         }
 
         var xform = Transform(toggleable.Owner);
@@ -752,7 +722,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         {
             if (container.Contains(attached.Key)
                 && unequipping
-                || CheckEquipped(Transform(toggleable).ParentUid, attached.Key, attached.Value) < EquipAbility.MissingSlot)
+                || !CheckEquipped(Transform(toggleable).ParentUid, attached.Key, attached.Value))
                 continue;
 
             toggledCount++;
@@ -786,38 +756,20 @@ public sealed class ToggleableClothingSystem : EntitySystem
     /// <param name="equipment">The item to be equipped</param>
     /// <param name="equipTarget">The entity attempting to wear the clothing</param>
     /// <param name="slot">The slot the clothing is being equipped to</param>
-    /// <returns>An enum indicating the equipment ability status</returns>
-    public EquipAbility CheckEquipped(EntityUid equipTarget, EntityUid toEquip, string slot)
+    /// <returns>True if the item could be equipped to this slot</returns>
+    public bool CheckEquipped(EntityUid equipTarget, EntityUid toEquip, string slot)
     {
-        if (!TryComp(equipTarget, out BodyComponent? targetBody)
-            || targetBody.Prototype == null
-            || HasComp<BorgChassisComponent>(equipTarget))
-            return EquipAbility.CannotEquip;
-
         // Does their species proto include the slot?
         if (!_inventorySystem.TryGetSlotContainer(equipTarget, slot, out var slotContainer, out var slotDefinition))
-            return EquipAbility.MissingSlot;
+            return true; // don't care then
 
         // Does the slot NOT have the item equipped?
         if (slotContainer.ContainedEntity != toEquip)
-            return EquipAbility.SlotOccupiedOrEmpty;
+            return false;
 
-        // Is there a body part associated with the slot?
-        if (_body.TryGetPartFromSlotContainer(slot, out var bodyPart)) // If this fails, that means there's not an associated part.
-        {
-            var bodyPartString = bodyPart.Value.ToString().ToLower();
-            var prototype = _prototypes.Index(targetBody.Prototype.Value);
-
-            var hasPartConnection = prototype.Slots.Values.Any(protoSlot =>
-                protoSlot.Connections.Contains(bodyPartString));
-
-            // If this is a slot that requires a body part, and the part is missing
-            if (hasPartConnection && !_body.GetBodyChildrenOfType(equipTarget, bodyPart.Value).Any())
-                return EquipAbility.MissingPart;
-        }
-
-        // If there's no body part associated with the slot, we can equip the clothing.
-        return EquipAbility.CanEquip;
+        var ev = new CheckEquipmentPartEvent(slot);
+        RaiseLocalEvent(equipTarget, ref ev);
+        return ev.Handled;
     }
 }
 
@@ -871,20 +823,6 @@ public sealed class OnAttachedUnequipAttemptEvent(
     public EntityUid UnEquipTarget { get; } = unequiptarget;
     public bool Multiple { get; } = multiple;
 }
-
-public sealed class OnToggleableUnequipAttemptEvent(
-    EntityUid toggleable,
-    EntityUid attached,
-    EntityUid unequiptarget,
-    bool multiple)
-    : CancellableEntityEventArgs
-{
-    public EntityUid Toggleable { get; } = toggleable;
-    public EntityUid Attached { get; } = attached;
-    public EntityUid UnEquipTarget { get; } = unequiptarget;
-    public bool Multiple { get; } = multiple;
-}
-
 
 /// <summary>
 /// Raised when a toggleable clothing BACK part is fully unequipped and inserted into its container.

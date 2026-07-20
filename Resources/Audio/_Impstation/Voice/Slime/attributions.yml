@@ -5,10 +5,10 @@
 
 - files: ["s_bubble.ogg"]
   license: "CC-BY-4.0"
-  copyright: "Audiolarx on freesound.org. Shortened and cut by lewcc."
+  copyright: "Audiolarx on freesound.org. Shortened and cut by lewcc. Converted to mono by @deltanedas (github)."
   source: "https://freesound.org/people/audiolarx/sounds/263945/"
 
 - files: ["s_pop.ogg"]
   license: "CC0-1.0"
-  copyright: "greenvwbeetle on freesound.org"
+  copyright: "greenvwbeetle on freesound.org. Converted to mono by @deltanedas (github)."
   source: "https://freesound.org/people/greenvwbeetle/sounds/244653/"

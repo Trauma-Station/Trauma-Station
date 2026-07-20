@@ -1,28 +1,10 @@
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 LankLTE <135308300+LankLTE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pancake <Pangogie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
+using Content.Server.Database;
 using Content.Server.Discord.WebhookMessages;
+using Content.Server.GameTicking;
 using Content.Server.Voting.Managers;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -34,10 +16,10 @@ using Robust.Shared.Console;
 namespace Content.Server.Voting
 {
     [AnyCommand]
-    public sealed class CreateVoteCommand : LocalizedEntityCommands
+    public sealed partial class CreateVoteCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
 
         public override string Command => "createvote";
 
@@ -84,13 +66,15 @@ namespace Content.Server.Voting
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class CreateCustomCommand : LocalizedEntityCommands
+    public sealed partial class CreateCustomCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly VoteWebhooks _voteWebhooks = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private IChatManager _chatManager = default!;
+        [Dependency] private VoteWebhooks _voteWebhooks = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IServerDbManager _dbManager = default!;
+        [Dependency] private IEntitySystemManager _esm = default!;
 
         private ISawmill _sawmill = default!;
 
@@ -98,7 +82,7 @@ namespace Content.Server.Voting
 
         public override string Command => "customvote";
 
-        public override void Execute(IConsoleShell shell, string argStr, string[] args)
+        public override async void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             _sawmill = Logger.GetSawmill("vote");
 
@@ -130,9 +114,15 @@ namespace Content.Server.Voting
 
             var vote = _voteManager.CreateVote(options);
 
+            var voteLogId = await _dbManager.CustomVoteLogAdd(
+                title,
+                GameTicker.GetRoundId(_esm),
+                shell.Player?.UserId,
+                [..options.Options.Select(x => x.text)]);
+
             var webhookState = _voteWebhooks.CreateWebhookIfConfigured(options, _cfg.GetCVar(CCVars.DiscordVoteWebhook));
 
-            vote.OnFinished += (_, eventArgs) =>
+            vote.OnFinished += async (_, eventArgs) =>
             {
                 if (eventArgs.Winner == null)
                 {
@@ -147,11 +137,13 @@ namespace Content.Server.Voting
                 }
 
                 _voteWebhooks.UpdateWebhookIfConfigured(webhookState, eventArgs);
+                await _dbManager.CustomVoteLogFinish(voteLogId, [..eventArgs.Votes]);
             };
 
-            vote.OnCancelled += _ =>
+            vote.OnCancelled += async _ =>
             {
                 _voteWebhooks.UpdateCancelledWebhookIfConfigured(webhookState);
+                await _dbManager.CustomVoteLogCancel(voteLogId);
             };
         }
 
@@ -169,9 +161,9 @@ namespace Content.Server.Voting
     }
 
     [AnyCommand]
-    public sealed class VoteCommand : LocalizedEntityCommands
+    public sealed partial class VoteCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
 
         public override string Command => "vote";
 
@@ -227,9 +219,9 @@ namespace Content.Server.Voting
     }
 
     [AnyCommand]
-    public sealed class ListVotesCommand : LocalizedEntityCommands
+    public sealed partial class ListVotesCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
 
         public override string Command => "listvotes";
 
@@ -243,10 +235,10 @@ namespace Content.Server.Voting
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class CancelVoteCommand : LocalizedEntityCommands
+    public sealed partial class CancelVoteCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
 
         public override string Command => "cancelvote";
 

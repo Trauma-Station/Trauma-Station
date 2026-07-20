@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipePack
   id: RevForgeStatic
   recipes:
@@ -11,11 +13,15 @@
   - RevNut
   - ClothingOuterArmorRev
   - RevArmorPlate
+  - RevCuffs
+  - RevBallBearings
 
 - type: latheRecipePack
   id: RevPrintingPress
   recipes:
   - RevPropaganda
+  - BookMeleePrintedRev
+  - BookShootingPrintedRev
 
 - type: latheRecipePack
   id: RevTelecommsWorkbenchStatic
@@ -58,6 +64,7 @@
   recipes:
   - RevGunParts
   - RevTurretMagazine
+  - RevTurretMagazineHeavy
   - RevSMGMagazine
 
 - type: latheRecipePack
@@ -101,6 +108,16 @@
   - DataChipReflectivePlate
   - DataChipFakeMindshield
   - DataChipShieldRipper
+  - MoldMeleeUpgrades
+
+- type: latheRecipePack
+  id: RevMedicalStatic
+  recipes:
+  - MedicatedSuture
+  - RegenerativeMesh
+  - RevGauze
+  - RevBrutepack
+  - RevOintment
 
 - type: latheRecipePack
   id: RevFoundryStatic

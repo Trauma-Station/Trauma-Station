@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityTable.EntitySelectors;
+
+namespace Content.Trauma.Shared.Knowledge.Components;
+
+/// <summary>
+/// Grants some knowledge when used in hand.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class KnowledgeGrantOnUseComponent : Component
+{
+    /// <summary>
+    /// Knowledge cap that can be used.
+    /// </summary>
+    [DataField, AlwaysPushInheritance]
+    public Dictionary<EntProtoId, int> Skills = new();
+
+    /// <summary>
+    /// Experience that will be added per use.
+    /// </summary>
+    /// <remarks>
+    /// Does nothing right now
+    /// </remarks>
+    [DataField, AlwaysPushInheritance]
+    public Dictionary<EntProtoId, int> Experience = new();
+
+    /// <summary>
+    /// Grants literally every single skill at level 100 if true.
+    /// </summary>
+    [DataField]
+    public bool GrantEverything;
+
+    /// <summary>
+    /// Length of a single doafter to learn this knowledge.
+    /// </summary>
+    [DataField]
+    public TimeSpan DoAfter = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// If true, you will instantly gain all the skills when used instead of a doafter.
+    /// </summary>
+    [DataField]
+    public bool Instant = true;
+
+    /// <summary>
+    /// If true and <see cref="Instant"/> is true, the item is ashed after using it.
+    /// Only <see cref="Skills"/> is used, <see cref="Experience"/> is ignored.
+    /// </summary>
+    [DataField]
+    public bool SingleUse = true;
+
+    /// <summary>
+    /// Ash to spawn.
+    /// </summary>
+    [DataField]
+    public EntProtoId Ash = "Ash";
+}

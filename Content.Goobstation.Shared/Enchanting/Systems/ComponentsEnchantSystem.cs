@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
@@ -11,7 +8,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// Adds or removes components from an item enchanted with <see cref="ComponentsEnchantComponent"/>
 /// Multiple levels do nothing.
 /// </summary>
-public sealed class ComponentsEnchantSystem : EntitySystem
+public sealed partial class ComponentsEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

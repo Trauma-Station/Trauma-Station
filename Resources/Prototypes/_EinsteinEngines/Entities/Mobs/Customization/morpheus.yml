@@ -1,16 +1,9 @@
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: marking
   id: CyberLimbsMarkingMorpheusHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -23,8 +16,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusHeadAlt
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -37,8 +29,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusChest
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -51,8 +42,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusLArm
   bodyPart: LArm
-  markingCategory: LeftArm
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -65,8 +55,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusLHand
   bodyPart: LHand
-  markingCategory: LeftHand
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -79,8 +68,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusLLeg
   bodyPart: LLeg
-  markingCategory: LeftLeg
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -94,8 +82,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusLFoot
   bodyPart: LFoot
-  markingCategory: LeftFoot
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -110,8 +97,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusRArm
   bodyPart: RArm
-  markingCategory: RightArm
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -125,8 +111,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusRHand
   bodyPart: RHand
-  markingCategory: RightHand
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -139,8 +124,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusRLeg
   bodyPart: RLeg
-  markingCategory: RightLeg
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:
@@ -154,8 +138,7 @@
 - type: marking
   id: CyberLimbsMarkingMorpheusRFoot
   bodyPart: RFoot
-  markingCategory: RightFoot
-  speciesRestriction: [IPC]
+  groupWhitelist: [IPC]
   coloring:
     default:
       type:

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: CrateFreezer
+  id: CrateFreezerAbductor
+  suffix: Abductor spare parts
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: OrganReptilianTailDefault
+          amount: 2
+        - id: OrganMothWingsDefault
+          amount: 2

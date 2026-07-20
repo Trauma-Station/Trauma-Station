@@ -1,22 +1,27 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: BaseBullet
-  id: PelletShotgunBreaching
+  parent: BaseBulletTrigger
+  id: PelletShotgunTearGas
+  name: bullet (12 Gauge tear gas)
   categories: [ HideSpawnMenu ]
-  name: pellet (.50)
   components:
+  - type: SmokeOnTrigger
+    duration: 5
+    smokePrototype: Smoke
+    solution:
+      reagents:
+      - ReagentId: TearGas
+        Quantity: 20
+    spreadAmount: 1
+  - type: AutoStartTimer
+  - type: TimerTrigger
+    examinable: false
+    delay: 1
+  - type: DeleteOnTrigger
   - type: Projectile
     damage:
       types:
-        Piercing: 5
-        Structural: 35
-      armorPenetration: 0.5 # Give it some use in actual combat
-
-- type: entity
-  parent: PelletShotgunBreaching
-  id: PelletShotgunBreachingSpread
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ProjectileSpread
-    proto: PelletShotgunBreaching
-    count: 6
-    spread: 15
+        Blunt: 10
+  - type: StaminaDamageOnCollide
+    damage: 30

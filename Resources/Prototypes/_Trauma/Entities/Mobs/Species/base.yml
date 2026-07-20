@@ -1,7 +1,0 @@
-# just so vox doesn't inherit it
-- type: entity
-  abstract: true
-  parent: BaseMobSpeciesOrganicUnperishable
-  id: BaseMobSpeciesOrganic
-  components:
-  - type: Perishable

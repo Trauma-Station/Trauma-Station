@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: BaseItem
+  parent: [ OrganBaseInternal ]
   id: XenomorphInfection
   name: xenomorph larva embryo
   description: A parasitic life form in its early stages of development. It has a worm-like body shape, underdeveloped limbs, and a tail appendage.
@@ -8,12 +10,15 @@
     sprite: _White/Mobs/Species/Xenomorph/organs.rsi
     state: embryon
   - type: Organ
-    slotId: xenomorph_larva
+    category: XenomorphLarva
+  - type: ChildOrgan
+    parents: [ Torso ]
   - type: StaticPrice
     price: 2000
   - type: XenomorphInfection
     maxGrowthStage: 6
-    growProb: 0.5
+    growProb: 1.0
+    growTime: 40
     infectedIcons:
       0: XenomorphInfectionIconStageZero
       1: XenomorphInfectionIconStageOne
@@ -35,12 +40,10 @@
         type: Add
         time: 1
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 1
-        refresh: true
       - !type:Jitter
         time: 2
       3:
@@ -55,12 +58,10 @@
         type: Add
         time: 2
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 2
-        refresh: true
       - !type:Jitter
         time: 4
       4:
@@ -75,12 +76,10 @@
         type: Add
         time: 4
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 4
-        refresh: true
       - !type:Jitter
         time: 8
       6:
@@ -95,15 +94,14 @@
         type: Add
         time: 8
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 8
-        refresh: true
       - !type:HealthChange
         damage:
           types:
-            Blunt: 40
+            Blunt: 1000
+            Piercing: 1000
       - !type:Jitter
         time: 16

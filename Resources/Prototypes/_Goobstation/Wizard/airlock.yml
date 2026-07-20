@@ -1,7 +1,5 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Door electronics
 - type: entity
   parent: DoorElectronics
@@ -90,7 +88,6 @@
 - type: construction
   id: AirlockUranium
   graph: AirlockUranium
-  startNode: start
   targetNode: airlock
   category: construction-category-structures
   objectType: Structure
@@ -98,11 +95,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  theory:
+    AirlocksKnowledge: 0
 
 - type: construction
   id: AirlockUraniumGlass
   graph: AirlockUranium
-  startNode: start
   targetNode: glassAirlock
   category: construction-category-structures
   objectType: Structure
@@ -110,6 +108,8 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  theory:
+    AirlocksKnowledge: 0
 
 # Construction
 - type: constructionGraph

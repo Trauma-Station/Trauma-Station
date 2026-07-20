@@ -1,15 +1,10 @@
-// SPDX-FileCopyrightText: 2024 HoofedEar <HoofedEar@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Destructible;
 
 namespace Content.Server.RequiresGrid;
 
-public sealed class RequiresGridSystem : EntitySystem
+public sealed partial class RequiresGridSystem : EntitySystem
 {
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
 
     public override void Initialize()
     {

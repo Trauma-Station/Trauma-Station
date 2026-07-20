@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2025 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2025 pa.pecherskij <pa.pecherskij@interfax.ru>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Numerics;
 using Content.Shared.Input;
@@ -236,7 +228,6 @@ public class RadialMenu : BaseWindow
 /// Base class for radial menu buttons. Excludes all actions except clicks and alt-clicks
 /// from interactions.
 /// </summary>
-[Virtual]
 public abstract class RadialMenuButtonBase : BaseButton
 {
     /// <inheritdoc />
@@ -248,11 +239,15 @@ public abstract class RadialMenuButtonBase : BaseButton
     /// <inheritdoc />
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
-        if (args.Function == EngineKeyFunctions.UIClick
-            || args.Function == ContentKeyFunctions.AltActivateItemInWorld)
-        {
+        if (args.Function.IsClickOrAltClick())
             base.KeyBindUp(args);
-        }
+    }
+
+    /// <inheritdoc />
+    protected override void KeyBindDown(GUIBoundKeyEventArgs args)
+    {
+        if (args.Function.IsClickOrAltClick())
+            base.KeyBindDown(args);
     }
 }
 
@@ -294,11 +289,15 @@ public sealed class RadialMenuContextualCentralTextureButton : TextureButton
     /// <inheritdoc />
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
-        if (args.Function == EngineKeyFunctions.UIClick
-            || args.Function == ContentKeyFunctions.AltActivateItemInWorld)
-        {
+        if (args.Function.IsClickOrAltClick())
             base.KeyBindUp(args);
-        }
+    }
+
+    /// <inheritdoc />
+    protected override void KeyBindDown(GUIBoundKeyEventArgs args)
+    {
+        if (args.Function.IsClickOrAltClick())
+            base.KeyBindDown(args);
     }
 }
 
@@ -314,7 +313,7 @@ public sealed class RadialMenuOuterAreaButton : RadialMenuButtonBase
     /// <inheritdoc />
     protected override bool HasPoint(Vector2 point)
     {
-        return false; // Goobstation edit
+        return false; /* Goobstation edit
 
         if (ParentCenter == null)
         {
@@ -327,6 +326,7 @@ public sealed class RadialMenuOuterAreaButton : RadialMenuButtonBase
 
         // comparing to squared values is faster, then making sqrt
         return distSquared > outerRadiusSquared;
+        */
     }
 }
 
@@ -693,5 +693,14 @@ public class RadialMenuButtonWithSector : RadialMenuButton, IRadialMenuItemWithS
     private static bool IsWholeCircle(float angleSectorFrom, float angleSectorTo)
     {
         return new Angle(angleSectorFrom).EqualsApprox(new Angle(angleSectorTo));
+    }
+}
+
+static file class RadialMenuButtonsHelpers
+{
+    public static bool IsClickOrAltClick(this BoundKeyFunction function)
+    {
+        return function == EngineKeyFunctions.UIClick
+               || function == ContentKeyFunctions.AltActivateItemInWorld;
     }
 }

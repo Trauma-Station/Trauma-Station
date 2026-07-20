@@ -1,13 +1,10 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: WeaponStasisGunBase
-  abstract: true
   parent: BaseItem
+  id: WeaponStasisGun
+  name: stasis gun
+  description: A device to stop the temporal flow of any living (or not) creature
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/ChronoLegionnaire/stasisgun.rsi
@@ -39,18 +36,9 @@
   - type: UseDelay
     delay: 0.25
   - type: ClothingSlotAmmoProvider
+  - type: SlotBasedConnectedContainer
     targetSlot: BACK
-    providerWhitelist:
+    containerWhitelist:
       tags:
       - StasisBattery
-
-- type: entity
-  id: WeaponStasisGun
-  parent: WeaponStasisGunBase
-  name: stasis gun
-  description: A device to stop the temporal flow of any living (or not) creature
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Guns/ChronoLegionnaire/stasisgun.rsi
-    state: icon
   - type: StasisGun

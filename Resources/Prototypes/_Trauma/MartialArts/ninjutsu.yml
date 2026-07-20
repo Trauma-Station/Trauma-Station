@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: combo
+  id: NinjutsuTakedown
+  attacks:
+  - Hug
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  conditions:
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Muted # can't spam it on the same person immediately
+  opponentEffects:
+  - !type:ModifyStatusEffect
+    effectProto: NinjutsuTakedownStatusEffect
+    time: 5
+  - !type:GenericStatusEffect
+    key: Muted
+    component: Muted
+    time: 10
+  levelRequired: 50
+
+- type: combo
+  id: BiteTheDust
+  attacks:
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 9
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Slash: 10
+  levelRequired: 10
+
+- type: combo
+  id: DirtyKill
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 7
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Slash: 20
+  levelRequired: 10

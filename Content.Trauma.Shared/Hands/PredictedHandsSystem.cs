@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Hands;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
@@ -22,27 +23,25 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.Hands;
 
 /// <summary>
 /// Predicting hand-related stuff that is serverside for no reason.
 /// </summary>
-public sealed class PredictedHandsSystem : EntitySystem
+public sealed partial class PredictedHandsSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<VirtualItemComponent> _virtualQuery;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<VirtualItemComponent> _virtualQuery = default!;
 
     /// <summary>
     /// Items dropped when the holder falls down will be launched in
@@ -61,9 +60,6 @@ public sealed class PredictedHandsSystem : EntitySystem
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.ThrowItemInHand, new PointerInputCmdHandler(HandleThrowItem))
             .Register<PredictedHandsSystem>();
-
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _virtualQuery = GetEntityQuery<VirtualItemComponent>();
     }
 
     public override void Shutdown()
@@ -78,8 +74,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         if (!rand.Prob(args.DisarmProbability))
             return;
 
@@ -198,8 +193,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         var holderVelocity = _physicsQuery.CompOrNull(entity)?.LinearVelocity ?? Vector2.Zero;
         var spreadMaxAngle = Angle.FromDegrees(DropHeldItemsSpread);
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(entity).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(entity));
 
         foreach (var hand in entity.Comp.Hands.Keys)
         {

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Religion;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Chaplain;
@@ -10,9 +11,9 @@ namespace Content.Trauma.Server.EntityEffects;
 /// This raises an the Ignite event on a given entity.
 /// </summary>
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
-public sealed partial class HolyIgniteEntityEffectSystem : EntityEffectSystem<WeakToHolyComponent, HolyIgnite>
+public sealed partial class HolyIgniteEntityEffectSystem : EntityEffectSystem<ShouldTakeHolyComponent, HolyIgnite>
 {
-    protected override void Effect(Entity<WeakToHolyComponent> entity, ref EntityEffectEvent<HolyIgnite> args)
+    protected override void Effect(Entity<ShouldTakeHolyComponent> entity, ref EntityEffectEvent<HolyIgnite> args)
     {
         var ev = new HolyIgniteEvent
         {

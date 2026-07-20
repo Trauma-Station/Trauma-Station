@@ -1,15 +1,9 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
 using Content.Goobstation.Shared.Enchanting.Systems;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Enchanting.Systems;
@@ -17,11 +11,12 @@ namespace Content.Goobstation.Client.Enchanting.Systems;
 /// <summary>
 /// Gives enchanted items a cool shader
 /// </summary>
-public sealed class EnchantVisualsSystem : EntitySystem
+public sealed partial class EnchantVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public readonly ProtoId<ShaderPrototype> Shader = "Enchant";
+    private ShaderInstance _shader = default!;
 
     public override void Initialize()
     {
@@ -30,6 +25,10 @@ public sealed class EnchantVisualsSystem : EntitySystem
         SubscribeLocalEvent<EnchantedComponent, AfterAutoHandleStateEvent>(OnHandleState);
         SubscribeLocalEvent<EnchantedComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
         SubscribeLocalEvent<EnchantedComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
+
+        SubscribeLocalEvent<EnchanterComponent, AfterAutoHandleStateEvent>(OnEnchanterHandleState);
+
+        _shader = ProtoMan.Index(Shader).InstanceUnique();
     }
 
     private void OnHandleState(Entity<EnchantedComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -37,7 +36,7 @@ public sealed class EnchantVisualsSystem : EntitySystem
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        sprite.PostShader = _proto.Index(Shader).InstanceUnique();
+        sprite.PostShader = _shader;
     }
 
     private void OnHeldVisualsUpdated(Entity<EnchantedComponent> ent, ref HeldVisualsUpdatedEvent args)
@@ -50,15 +49,22 @@ public sealed class EnchantVisualsSystem : EntitySystem
         SetLayers(args.Equipee, args.RevealedLayers);
     }
 
+    private void OnEnchanterHandleState(Entity<EnchanterComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (_sprite.TryGetLayer(ent.Owner, EnchanterVisuals.Layer, out var layer, false))
+            _sprite.LayerSetVisible(layer, ent.Comp.Enchants.Count > 0);
+    }
+
     private void SetLayers(EntityUid uid, HashSet<string> keys)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
+        var ent = (uid, sprite);
         foreach (var key in keys)
         {
-            if (sprite.LayerMapTryGet(key, out var index))
-                sprite.LayerSetShader(index, Shader);
+            if (_sprite.TryGetLayer(ent, key, out var layer, true))
+                layer.Shader = _shader;
         }
     }
 }

@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Trigger;
 using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Trigger.Conditions;
 
-public sealed class MapTriggerConditionSystem : EntitySystem
+public sealed partial class MapTriggerConditionSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

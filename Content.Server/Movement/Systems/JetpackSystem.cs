@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2022 CommieFlowers <rasmus.cedergren@hotmail.com>
-// SPDX-FileCopyrightText: 2022 Júlio César Ueti <52474532+Mirino97@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 rolfero <45628623+rolfero@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Wrexbe (Josh) <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos.Components;
@@ -20,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Movement.Systems;
 
-public sealed class JetpackSystem : SharedJetpackSystem
+public sealed partial class JetpackSystem : SharedJetpackSystem
 {
-    [Dependency] private readonly GasTankSystem _gasTank = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private GasTankSystem _gasTank = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override bool CanEnable(EntityUid uid, JetpackComponent component)
     {

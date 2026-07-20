@@ -1,13 +1,15 @@
-using Content.Shared._Shitmed.Medical.Surgery;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Shared.Surgery;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Surgery.Steps;
 
-public sealed class SurgeryDamageUserSystem : EntitySystem
+public sealed partial class SurgeryDamageUserSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -22,7 +24,7 @@ public sealed class SurgeryDamageUserSystem : EntitySystem
         if (ent.Comp.Popup is {} popup)
         {
             var msg = Loc.GetString(popup, ("target", args.Body), ("part", args.Part));
-            _popup.PopupPredicted(msg, args.Body, args.User, PopupType.SmallCaution);
+            _popup.PopupEntity(msg, args.Body, args.User, PopupType.SmallCaution);
         }
     }
 }

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.DoAfter;
@@ -6,12 +8,12 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Virology;
 
-public sealed class SharedDiseasePenSystem : EntitySystem
+public sealed partial class SharedDiseasePenSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDiseaseSystem _disease = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.StationRadio.Components;
 using Content.Goobstation.Shared.StationRadio.Events;
 using Content.Trauma.Common.Audio;
@@ -5,15 +7,14 @@ using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.StationRadio.Systems;
 
-public sealed class StationRadioReceiverSystem : EntitySystem
+public sealed partial class StationRadioReceiverSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {
@@ -43,7 +44,6 @@ public sealed class StationRadioReceiverSystem : EntitySystem
             return;
 
         comp.SoundEntity = audio.Entity;
-        Dirty(uid, comp);
         EnsureComp<CopyrightedAudioComponent>(audio.Entity);
 
         UpdateAudible((uid, comp));
@@ -51,11 +51,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void OnMediaStopped(EntityUid uid, StationRadioReceiverComponent comp, ref StationRadioMediaStoppedEvent args)
     {
-        if (comp.SoundEntity == null)
-            return;
-
         comp.SoundEntity = _audio.Stop(comp.SoundEntity);
-        Dirty(uid, comp);
     }
 
     private void UpdateAudible(Entity<StationRadioReceiverComponent> ent)
@@ -65,7 +61,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void SetAudible(StationRadioReceiverComponent comp, bool audible)
     {
-        if (comp.SoundEntity is {} sound)
+        if (comp.SoundEntity is {} sound && !TerminatingOrDeleted(sound))
             _audio.SetVolume(sound, audible ? comp.DefaultParams.Volume : float.NegativeInfinity);
     }
 }

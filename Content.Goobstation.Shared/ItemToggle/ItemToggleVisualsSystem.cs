@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Item;
@@ -8,10 +5,10 @@ using Content.Shared.Item.ItemToggle.Components;
 
 namespace Content.Goobstation.Shared.ItemToggle;
 
-public sealed class ItemToggleVisualsSystem : EntitySystem
+public sealed partial class ItemToggleVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedItemSystem _item = default!;
     public override void Initialize()
     {
         base.Initialize();

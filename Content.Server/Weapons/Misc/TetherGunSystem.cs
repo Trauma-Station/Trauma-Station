@@ -5,10 +5,10 @@ using Robust.Shared.Physics.Components;
 
 namespace Content.Server.Weapons.Misc;
 
-public sealed class TetherGunSystem : SharedTetherGunSystem
+public sealed partial class TetherGunSystem : SharedTetherGunSystem
 {
-    [Dependency] private readonly PowerCellSystem _cell = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private PowerCellSystem _cell = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
 
     public override void Initialize()
     {
@@ -40,7 +40,8 @@ public sealed class TetherGunSystem : SharedTetherGunSystem
         _toggle.TryActivate(gunUid);
     }
 
-    protected override void StopTether(EntityUid gunUid, BaseForceGunComponent component, bool land = true, bool transfer = false)
+    // Trauma - made public, WHY THE FUCK IS THIS IN SERVER
+    public override void StopTether(EntityUid gunUid, BaseForceGunComponent component, bool land = true, bool transfer = false)
     {
         base.StopTether(gunUid, component, land, transfer);
         _toggle.TryDeactivate(gunUid);

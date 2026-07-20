@@ -1,23 +1,6 @@
-// SPDX-FileCopyrightText: 2020 L.E.D <10257081+unusualcrow@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2020 Remie Richards <remierichards@gmail.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <zddm@outlook.es>
-// SPDX-FileCopyrightText: 2020 unusualcrow <unusualcrow@protonmail.com>
-// SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Threading;
 using Content.Shared.DeviceLinking;
+using Content.Shared.Radio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -114,6 +97,42 @@ public sealed partial class EmitterComponent : Component
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<SinkPortPrototype>, EntProtoId> SetTypePorts = new();
+
+    /// <summary>
+    /// The radio channel to broadcast on when something happens to this emitter
+    /// </summary>
+    [DataField]
+    public ProtoId<RadioChannelPrototype> RadioChannel = "Engineering";
+
+    /// <summary>
+    /// Whether a radio channel should be alerted if anything happens to this emitter (i.e. emitters near singularity/tesla containment)
+    /// </summary>
+    [DataField]
+    public bool AlertRadio = false;
+
+    /// <summary>
+    /// Localized string to use when this emitter is destroyed and AlertRadio is set to true
+    /// </summary>
+    [DataField]
+    public LocId LocDestroyed = "emitter-destroyed-broadcast";
+
+    /// <summary>
+    /// Localized string to use when this emitter is deconstructed and AlertRadio is set to true
+    /// </summary>
+    [DataField]
+    public LocId LocDeconstructed = "emitter-deconstructed-broadcast";
+
+    /// <summary>
+    /// Localized string to use when this emitter is unlocked and AlertRadio is set to true
+    /// </summary>
+    [DataField]
+    public LocId LocUnlocked = "emitter-unlocked-broadcast";
+
+    /// <summary>
+    /// Localized string to use when this emitter is unpowered and AlertRadio is set to true
+    /// </summary>
+    [DataField]
+    public LocId LocUnpowered = "emitter-unpowered-broadcast";
 }
 
 [NetSerializable, Serializable]

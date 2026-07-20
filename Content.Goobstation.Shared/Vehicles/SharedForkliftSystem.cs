@@ -1,28 +1,26 @@
-// SPDX-FileCopyrightText...
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Shared.Training;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Destructible;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Vehicles;
 
-public sealed class ForkliftSystem : EntitySystem
+public sealed partial class ForkliftSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private const string CrateContainerId = "crate_storage";
     private static readonly ProtoId<TagPrototype> CrateTag = "Crate";
@@ -36,11 +34,11 @@ public sealed class ForkliftSystem : EntitySystem
         SubscribeLocalEvent<ForkliftComponent, ComponentInit>(OnUpdate);
         SubscribeLocalEvent<ForkliftComponent, EntInsertedIntoContainerMessage>(OnUpdate);
         SubscribeLocalEvent<ForkliftComponent, EntRemovedFromContainerMessage>(OnUpdate);
-        SubscribeLocalEvent<ForkliftComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<ForkliftComponent, StrapAttemptEvent>(OnStrapAttempt);
+        SubscribeLocalEvent<ForkliftComponent, VehicleDismountedEvent>(OnDismounted);
+        SubscribeLocalEvent<ForkliftComponent, VehicleMountedEvent>(OnMounted);
         SubscribeLocalEvent<ForkliftActionEvent>(OnLiftForks);
         SubscribeLocalEvent<ForkliftComponent, UnforkliftActionEvent>(OnUnliftForks);
-
+        SubscribeLocalEvent<ForkliftComponent, DestructionEventArgs>(OnDestruction);
     }
 
     public override void Update(float frameTime)
@@ -72,6 +70,12 @@ public sealed class ForkliftSystem : EntitySystem
         if (!_container.Remove(crateToUnload, container, destination: targetCoords))
             return;
         args.Handled = true;
+    }
+
+    private void OnDestruction(Entity<ForkliftComponent> ent, ref DestructionEventArgs args)
+    {
+        if (_container.TryGetContainer(ent.Owner, CrateContainerId, out var container))
+            _container.EmptyContainer(container);
     }
 
     private void OnLiftForks(ForkliftActionEvent args)
@@ -106,19 +110,16 @@ public sealed class ForkliftSystem : EntitySystem
         forklift.Comp.LiftSoundEndTime = _timing.CurTime + action.Comp.UseDelay.Value;
     }
 
-    private void OnUnstrapped(Entity<ForkliftComponent> ent, ref UnstrappedEvent args)
+    private void OnDismounted(Entity<ForkliftComponent> ent, ref VehicleDismountedEvent args)
     {
-        if (ent.Comp.LiftAction == null)
-            return;
-
-        _action.RemoveAction(args.Buckle.Owner, ent.Comp.LiftAction);
-        _action.RemoveAction(args.Buckle.Owner, ent.Comp.UnliftAction);
+        _action.RemoveAction(args.Driver, ent.Comp.LiftAction);
+        _action.RemoveAction(args.Driver, ent.Comp.UnliftAction);
     }
 
-    private void OnStrapAttempt(Entity<ForkliftComponent> ent, ref StrapAttemptEvent args)
+    private void OnMounted(Entity<ForkliftComponent> ent, ref VehicleMountedEvent args)
     {
-        _action.AddAction(args.Buckle.Owner, ref ent.Comp.LiftAction, LiftForkActionId, ent);
-        _action.AddAction(args.Buckle.Owner, ref ent.Comp.UnliftAction, UnliftForkActionId, ent);
+        _action.AddAction(args.Driver, ref ent.Comp.LiftAction, LiftForkActionId, ent);
+        _action.AddAction(args.Driver, ref ent.Comp.UnliftAction, UnliftForkActionId, ent);
     }
 
     private void OnUpdate<T>(Entity<ForkliftComponent> ent, ref T args)

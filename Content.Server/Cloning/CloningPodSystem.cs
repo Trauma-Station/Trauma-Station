@@ -1,10 +1,6 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Goobstation.Common.Cloning; // Goobstation
+// <Trauma>
+using Content.Goobstation.Common.Cloning;
+// </Trauma>
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning.Components;
@@ -14,10 +10,8 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Atmos;
 using Content.Shared.CCVar;
-using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Cloning;
 using Content.Shared.Chat;
@@ -39,31 +33,33 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.Cloning;
 
-public sealed class CloningPodSystem : EntitySystem
+public sealed partial class CloningPodSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = null!;
-    [Dependency] private readonly EuiManager _euiManager = null!;
-    [Dependency] private readonly CloningConsoleSystem _cloningConsoleSystem = default!;
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly PuddleSystem _puddleSystem = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly MaterialStorageSystem _material = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = null!;
+    [Dependency] private EuiManager _euiManager = null!;
+    [Dependency] private CloningConsoleSystem _cloningConsoleSystem = default!;
+    [Dependency] private ContainerSystem _containerSystem = default!;
+    //[Dependency] private MobStateSystem _mobStateSystem = default!; // Trauma - now unused
+    [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private PuddleSystem _puddleSystem = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] private MaterialStorageSystem _material = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     // Goobstation - killed
     //public readonly Dictionary<MindComponent, EntityUid> ClonesWaitingForMind = new();
@@ -98,6 +94,7 @@ public sealed class CloningPodSystem : EntitySystem
         var query = EntityQueryEnumerator<BeingClonedComponent, MindContainerComponent>();
         var found = false;
         EntityUid mob;
+
         while (query.MoveNext(out mob, out var cloned, out var mc))
         {
             if (cloned.Mind == mind && mc.Mind == null)
@@ -216,7 +213,7 @@ public sealed class CloningPodSystem : EntitySystem
 
         // genetic damage checks
         if (TryComp<DamageableComponent>(bodyToClone, out var damageable) &&
-            damageable.Damage.DamageDict.TryGetValue("Cellular", out var cellularDmg))
+            _damageable.GetAllDamage((bodyToClone, damageable)).DamageDict.TryGetValue("Cellular", out var cellularDmg))
         {
             var chance = Math.Clamp((float)(cellularDmg / 100), 0, 1);
             chance *= failChanceModifier;

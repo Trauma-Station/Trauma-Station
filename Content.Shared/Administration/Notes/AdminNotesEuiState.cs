@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Database;
 using Content.Shared.Eui;
 using Robust.Shared.Serialization;
@@ -16,13 +7,15 @@ namespace Content.Shared.Administration.Notes;
 [Serializable, NetSerializable]
 public sealed class AdminNotesEuiState : EuiStateBase
 {
-    public AdminNotesEuiState(string notedPlayerName, Dictionary<(int, NoteType), SharedAdminNote> notes, bool canCreate, bool canDelete, bool canEdit)
+    public AdminNotesEuiState(string notedPlayerName, Dictionary<(int, NoteType), SharedAdminNote> notes, bool canCreate, bool canDelete, bool canEdit,
+        bool canWatchlist) // Trauma
     {
         NotedPlayerName = notedPlayerName;
         Notes = notes;
         CanCreate = canCreate;
         CanDelete = canDelete;
         CanEdit = canEdit;
+        CanWatchlist = canWatchlist; // Trauma
     }
 
     public string NotedPlayerName { get; }
@@ -30,6 +23,7 @@ public sealed class AdminNotesEuiState : EuiStateBase
     public bool CanCreate { get; }
     public bool CanDelete { get; }
     public bool CanEdit { get; }
+    public bool CanWatchlist { get; } // Trauma
 }
 
 public static class AdminNoteEuiMsg

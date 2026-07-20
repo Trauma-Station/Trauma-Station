@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Access.Components;
@@ -16,8 +13,8 @@ namespace Content.Goobstation.Shared.Restriction.RestrictById
 {
     public sealed partial class RestrictByIdSystem : EntitySystem
     {
-        [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-        [Dependency] private readonly EmagSystem _emag = default!;
+        [Dependency] private AccessReaderSystem _accessReader = default!;
+        [Dependency] private EmagSystem _emag = default!;
 
         public override void Initialize()
         {

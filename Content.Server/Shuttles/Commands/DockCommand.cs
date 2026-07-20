@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
@@ -13,9 +7,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Shuttles.Commands;
 
 [AdminCommand(AdminFlags.Mapping)]
-public sealed class DockCommand : LocalizedEntityCommands
+public sealed partial class DockCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly DockingSystem _dockSystem = default!;
+    [Dependency] private DockingSystem _dockSystem = default!;
 
     public override string Command => "dock";
 

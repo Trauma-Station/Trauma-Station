@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Weapons.Melee.Events;
@@ -16,9 +9,9 @@ namespace Content.Goobstation.Server.Weapons;
 /// <summary>
 /// Gib this Person
 /// </summary>
-public sealed class GibThisGuySystem : EntitySystem
+public sealed partial class GibThisGuySystem : EntitySystem
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     public override void Initialize()
     {

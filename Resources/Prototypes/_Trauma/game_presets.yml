@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: gamePreset
   id: Insurgency
   alias:
@@ -8,26 +10,14 @@
   description: insurgency-description
   showInVote: false
   rules:
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
-  - Insurgency
-
-# survival+ but it has roundstart abductors and maybe thieves
-- type: gamePreset
-  id: Abductors
-  alias:
-  - ayylmao
-  name: abductors-title
-  description: abductors-description
-  showInVote: false
-  minPlayers: 20
-  rules:
-  - DuoAbductorRoundstart
   - SubGamemodesRule
-  - SecretPlusRampingMid
-  - BasicRoundstartVariation
+  - Insurgency
 
 - type: gamePreset
   id: Heretics
@@ -38,10 +28,14 @@
   description: heretics-description
   showInVote: false
   rules:
-  - HereticGamemode
-  - BasicStationEventScheduler
   - BasicRoundstartVariation
-  - SubGamemodesRule
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRuleNoHeretic
+  - HereticRoundstart
 
 - type: gamePreset
   id: Shadowlings
@@ -52,7 +46,11 @@
   description: shadowling-description
   showInVote: false
   rules:
-  - ShadowlingGamemode
-  - BasicStationEventScheduler
   - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
+  - ShadowlingGamemode

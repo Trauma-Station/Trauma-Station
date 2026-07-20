@@ -65,16 +65,11 @@
     temperature: 1000
     ignited: true
   - type: RepeatingTrigger
-    delay: 0.5 # line of fire as well as if it hits something
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: FireBomb
-    totalIntensity: 5 # low intensity, the point is to burn attackers not to break open walls, dragons can just eat them
-    intensitySlope: 1
-    maxIntensity: 3
-    canCreateVacuum: false
-    deleteAfterExplosion: false
-    repeatable: true
+    delay: 0.2 # Trauma - was 0.5
+  # <Trauma> - replaced exploding with spawning tile fires
+  - type: SpawnOnTrigger
+    proto: MolotovFire
+  # </Trauma>
   - type: TimedDespawn
     lifetime: 5
 
@@ -129,8 +124,7 @@
     deleteOnCollide: false
     onlyCollideWhenShot: true
     damage:
-      types:
-        Brute: 0
+      types: {}
   - type: Sprite
     noRot: true
     sprite: Structures/Storage/closet.rsi
@@ -281,16 +275,8 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
-    layers:
-    - state: magicm_yellow # Goob edit
-      shader: unshaded
-  - type: Projectile
-    damage:
-      types:
-        Heat: 0 # Goob edit
-  - type: RejuvenateOnProjectileHit # Goobstation
+  # <Trauma>
+  - type: RejuvenateOnProjectileHit
     undeadList:
       components:
       - Zombie
@@ -299,11 +285,11 @@
     damage:
       types:
         Heat: 600
-  - type: Reflective # Goobstation
+  - type: Reflective
     reflective: Magic
-  - type: Ammo # Goobstation
+  - type: Ammo
     muzzleFlash: null
-  - type: Trail # Goobstation
+  - type: Trail
     lerpTime: 0.05
     frequency: 0.02
     lifetime: 1
@@ -312,6 +298,16 @@
     sprite:
       sprite: /Textures/Objects/Weapons/Guns/Projectiles/magic.rsi
       state: magicm_yellow
+  # </Trauma>
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: magicm_yellow # Goob edit
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types: {} # Trauma - removed slop -200 every damage, just use rejuvenate instead
+    ignoreResistances: true
 
 - type: entity
   id: BulletInstakillMagic
@@ -323,7 +319,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 300
+        Ballistic: 300 # Trauma
     ignoreResistances: true
   - type: Reflective
     reflective: Magic
@@ -358,7 +354,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Ballistic: 20 # Trauma
         Cold: 20
         Structural: 50
 

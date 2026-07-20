@@ -1,45 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Alice "Arimah" Heurlin <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kira Bridgeton <161087999+Verbalase@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PoTeletubby <ajcraigaz@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <logkedr18@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Lathe;
 using Content.Shared.Research.Components;
@@ -51,11 +9,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Research.Systems;
 
-public abstract class SharedResearchSystem : EntitySystem
+public abstract partial class SharedResearchSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedLatheSystem _lathe = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedLatheSystem _lathe = default!;
 
     public override void Initialize()
     {
@@ -96,7 +53,7 @@ public abstract class SharedResearchSystem : EntitySystem
 
         var availableTechnologies = new List<TechnologyPrototype>();
         var disciplineTiers = GetDisciplineTiers(component);
-        foreach (var tech in PrototypeManager.EnumeratePrototypes<TechnologyPrototype>())
+        foreach (var tech in ProtoMan.EnumeratePrototypes<TechnologyPrototype>())
         {
             if (IsTechnologyAvailable(component, tech, disciplineTiers))
                 availableTechnologies.Add(tech);
@@ -143,17 +100,17 @@ public abstract class SharedResearchSystem : EntitySystem
 
     public int GetHighestDisciplineTier(TechnologyDatabaseComponent component, string disciplineId)
     {
-        return GetHighestDisciplineTier(component, PrototypeManager.Index<TechDisciplinePrototype>(disciplineId));
+        return GetHighestDisciplineTier(component, ProtoMan.Index<TechDisciplinePrototype>(disciplineId));
     }
 
     public int GetHighestDisciplineTier(TechnologyDatabaseComponent component, TechDisciplinePrototype techDiscipline)
     {
-        var allTech = PrototypeManager.EnumeratePrototypes<TechnologyPrototype>()
+        var allTech = ProtoMan.EnumeratePrototypes<TechnologyPrototype>()
             .Where(p => p.Discipline == techDiscipline.ID && !p.Hidden).ToList();
         var allUnlocked = new List<TechnologyPrototype>();
         foreach (var recipe in component.UnlockedTechnologies)
         {
-            var proto = PrototypeManager.Index<TechnologyPrototype>(recipe);
+            var proto = ProtoMan.Index<TechnologyPrototype>(recipe);
             if (proto.Discipline != techDiscipline.ID)
                 continue;
             allUnlocked.Add(proto);
@@ -198,7 +155,7 @@ public abstract class SharedResearchSystem : EntitySystem
         var description = new FormattedMessage();
         if (includeTier)
         {
-            disciplinePrototype ??= PrototypeManager.Index(technology.Discipline);
+            disciplinePrototype ??= ProtoMan.Index(technology.Discipline);
             description.AddMarkupOrThrow(Loc.GetString("research-console-tier-discipline-info",
                 ("tier", technology.Tier), ("color", disciplinePrototype.Color), ("discipline", Loc.GetString(disciplinePrototype.Name))));
             description.PushNewline();
@@ -215,7 +172,7 @@ public abstract class SharedResearchSystem : EntitySystem
             description.AddMarkupOrThrow(Loc.GetString("research-console-prereqs-list-start"));
             foreach (var recipe in technology.TechnologyPrerequisites)
             {
-                var techProto = PrototypeManager.Index(recipe);
+                var techProto = ProtoMan.Index(recipe);
                 description.PushNewline();
                 description.AddMarkupOrThrow(Loc.GetString("research-console-prereqs-list-entry",
                     ("text", Loc.GetString(techProto.Name))));
@@ -226,7 +183,7 @@ public abstract class SharedResearchSystem : EntitySystem
         description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-start"));
         foreach (var recipe in technology.RecipeUnlocks)
         {
-            var recipeProto = PrototypeManager.Index(recipe);
+            var recipeProto = ProtoMan.Index(recipe);
             description.PushNewline();
             description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-entry",
                 ("name", _lathe.GetRecipeName(recipeProto))));
@@ -264,7 +221,7 @@ public abstract class SharedResearchSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        var discipline = PrototypeManager.Index(prototype.Discipline);
+        var discipline = ProtoMan.Index(prototype.Discipline);
         if (prototype.Tier < discipline.LockoutTier)
             return;
         component.MainDiscipline = prototype.Discipline;
@@ -279,7 +236,7 @@ public abstract class SharedResearchSystem : EntitySystem
     /// </summary>
     public bool TryRemoveTechnology(Entity<TechnologyDatabaseComponent> entity, ProtoId<TechnologyPrototype> tech)
     {
-        return TryRemoveTechnology(entity, PrototypeManager.Index(tech));
+        return TryRemoveTechnology(entity, ProtoMan.Index(tech));
     }
 
     /// <summary>
@@ -299,7 +256,7 @@ public abstract class SharedResearchSystem : EntitySystem
             var hasTechElsewhere = false;
             foreach (var unlockedTech in entity.Comp.UnlockedTechnologies)
             {
-                var unlockedTechProto = PrototypeManager.Index<TechnologyPrototype>(unlockedTech);
+                var unlockedTechProto = ProtoMan.Index<TechnologyPrototype>(unlockedTech);
 
                 if (!unlockedTechProto.RecipeUnlocks.Contains(recipe))
                     continue;
@@ -343,7 +300,7 @@ public abstract class SharedResearchSystem : EntitySystem
         component.UnlockedRecipes.Add(recipe);
         Dirty(uid, component);
 
-        var ev = new TechnologyDatabaseModifiedEvent();
+        var ev = new TechnologyDatabaseModifiedEvent(new List<string> { recipe });
         RaiseLocalEvent(uid, ref ev);
     }
 }

@@ -1,8 +1,6 @@
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat;
@@ -28,26 +26,23 @@ namespace Content.Shared.Medical;
 /// <summary>
 /// This handles interactions and logic relating to <see cref="DefibrillatorComponent"/>
 /// </summary>
-public abstract class SharedDefibrillatorSystem : EntitySystem
+public abstract partial class SharedDefibrillatorSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
-    // </Trauma>
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedElectrocutionSystem _electrocution = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedElectrocutionSystem _electrocution = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedRottingSystem _rotting = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
 
     private readonly HashSet<EntityUid> _interacters = new();
 
@@ -218,22 +213,14 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
             if (_mobState.IsDead(target, targetMobState))
             {
                 // <Shitmed>
-                if (_consciousness.TryGetNerveSystem(target, out _))
-                {
-                    // TODO SHITMED: very fucking suspicious, should this not use TryGetNerveSystem result?
-                    _consciousness.RemoveConsciousnessModifier(target, target, "Suffocation");
-                    _consciousness.RemoveConsciousnessModifier(target, target, "DeathThreshold");
-                }
-
                 _damageable.TryChangeDamage(target, ent.Comp.ZapHeal, true, origin: user,
                     targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 // </Shitmed>
             }
 
             if (TryComp<MobThresholdsComponent>(target, out var targetThresholds) &&
-                TryComp<DamageableComponent>(target, out var targetDamageable) &&
                 _mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold, targetThresholds) &&
-                targetDamageable.TotalDamage < threshold)
+                _mobThreshold.CheckVitalDamage(target) < threshold) // Trauma - check vital damage instead
             {
                 _mobState.ChangeMobState(target, MobState.Critical, targetMobState, user);
                 failedRevive = false;

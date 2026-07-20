@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Antag;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Server.Antag;
 
-public sealed class AntagPlayerEffectsSystem : EntitySystem
+public sealed partial class AntagPlayerEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -17,6 +18,6 @@ public sealed class AntagPlayerEffectsSystem : EntitySystem
 
     private void OnEntitySelected(Entity<AntagPlayerEffectsComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        _effects.ApplyEffects(args.EntityUid, ent.Comp.Effects);
+        _effects.ApplyEffects(args.EntityUid, ent.Comp.Effects, predicted: false);
     }
 }

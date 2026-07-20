@@ -3,7 +3,7 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>../bin/Content.Server/</OutputPath>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<NoWarn>1998</NoWarn>
+		<NoWarn>0618</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>
@@ -17,4 +17,5 @@
 	<Import Project="../RobustToolbox/Imports/Server.props" />
 	<Import Project="../RobustToolbox/Imports/Shared.props" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
+	<Import Project="../RobustToolbox/MSBuild/Robust.EntitySystemSubscriptionsGenerator.targets" />
 </Project>

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: Ancient Xeno AI Timed Spawner
   id: AncientXenoAITimedSpawner
@@ -9,7 +11,6 @@
       - sprite: _Goobstation/Mobs/Xenos/drone.rsi
         state: drone
       - state: ai
-    - type: Timer
     - type: TimedSpawner
       prototypes:
       - CMMobXenoDrone

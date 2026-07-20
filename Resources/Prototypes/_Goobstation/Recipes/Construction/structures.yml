@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Thom <119594676+ItsMeThom@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
@@ -15,6 +9,10 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    WallsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
 
 - type: construction
   id: SolarPanel
@@ -23,6 +21,8 @@
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
+  theory:
+    ElectronicsKnowledge: 0
 
 # Barricades
 
@@ -35,6 +35,12 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    FabricationKnowledge: 0
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 1 # good cading is hard
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadeSteelFolding
@@ -45,6 +51,12 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    FabricationKnowledge: 0
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 2
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteel
@@ -55,6 +67,12 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    FabricationKnowledge: 1
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 2
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteelFolding
@@ -65,13 +83,18 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    FabricationKnowledge: 1
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 2
+    MetalworkingKnowledge: 4
 
 # Airlocks
 
 - type: construction
   id: AirlockSealed
   graph: Airlock
-  startNode: start
   targetNode: sealedAirlock
   category: construction-category-structures
   objectType: Structure
@@ -79,11 +102,14 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
 
 - type: construction
   id: AirlockSealedGlass
   graph: Airlock
-  startNode: start
   targetNode: sealedGlassAirlock
   category: construction-category-structures
   objectType: Structure
@@ -91,3 +117,7 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2

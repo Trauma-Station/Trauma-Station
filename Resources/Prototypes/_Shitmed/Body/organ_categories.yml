@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+## Parts
+
+- type: organCategory
+  id: Tail
+
+## Organs
+
+# IPC
+
+- type: organCategory
+  id: IPCBrain
+
+- type: organCategory
+  id: IPCPump
+
+# Augments
+
+- type: organCategory
+  id: AugmentCharger
+
+- type: organCategory
+  id: AugmentPowerCell
+
+- type: organCategory
+  id: ArmAugment

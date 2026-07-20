@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -92,11 +84,18 @@
 
 - type: entity
   name: supermatter halberd
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
   id: SupermatterHalberd
   description: The revered weapon of Oblivion Enforcers, used to enforce the Order's will.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
     sprite: _Goobstation/Wizard/Objects/Weapons/smhalberd.rsi
     state: icon
@@ -109,7 +108,7 @@
         Piercing: 2
         Radiation: 5
         Structural: 5
-      armorPenetration: 0.8
+      armorPenetration: 1
       woundSeverityMultipliers:
         Slash: 2.5
         Piercing: 2.5
@@ -123,7 +122,7 @@
         Piercing: 8
         Radiation: 15
         Structural: 10
-      armorPenetration: 0.8
+      armorPenetration: 1
   - type: Item
     size: Huge
   - type: Clothing
@@ -196,7 +195,7 @@
 
 - type: entity
   name: high frequency blade
-  parent: [BaseSword, BaseMagicalContraband]
+  parent: [KnifeDurabilitySharpenOnly, BaseSword, BaseMagicalContraband]
   id: HighFrequencyBlade
   description: A sword reinforced by a powerful alternating current and resonating at extremely high vibration frequencies. This oscillation weakens the molecular bonds of anything it cuts, thereby increasing its cutting ability.
   components:
@@ -228,10 +227,7 @@
       - state: equipped-BACKPACK
       suitstorage:
       - state: equipped-BACKPACK
-  - type: Reflect
-    reflectProb: .3
-    slotFlags:
-      - NONE
+  - type: Parry
   - type: LightAttackDamageMultiplier
     multiplier: 3
     extraSound:
@@ -249,7 +245,7 @@
 
 - type: entity
   name: spellblade
-  parent: [BaseSword, BaseMagicalContraband]
+  parent: [ KnifeDurabilitySharpenOnly, BaseSword, BaseMagicalContraband]
   id: Spellblade
   description: An enchanted blade with a series of runes along the side.
   components:
@@ -294,10 +290,10 @@
     price: 50000
 
 - type: entity
+  parent: [ KnifeDurabilitySharpenOnly, LavalandBaseKatana, BaseMagicalContraband ]
+  id: EchoKatana
   name: echo katana
   description: Vibrations are constantly flowing through this sword, like they desperately try to find a way out.
-  parent: [ LavalandBaseKatana, BaseMagicalContraband ]
-  id: EchoKatana
   components:
   - type: Sprite
     layers:

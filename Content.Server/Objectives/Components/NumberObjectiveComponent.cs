@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Objectives.Systems;
 
 namespace Content.Server.Objectives.Components;
@@ -22,13 +16,13 @@ public sealed partial class NumberObjectiveComponent : Component
     public int Target;
 
     /// <summary>
-    /// Minimum number for target to roll.
+    /// Minimum number for target to roll. (Inclusive)
     /// </summary>
     [DataField(required: true)]
     public int Min;
 
     /// <summary>
-    /// Maximum number for target to roll.
+    /// Maximum number for target to roll. (Inclusive)
     /// </summary>
     [DataField(required: true)]
     public int Max;

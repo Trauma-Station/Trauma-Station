@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Requires that the target entity isn't wearing any pressure protecting gear
 - type: entityCondition
   id: NoPressureProtection
@@ -7,12 +9,20 @@
       whitelist:
         components:
         - PressureProtection
-      guidebookText: entity-effect-condition-guidebook-pressure-protection
+      guidebookText: entity-condition-guidebook-pressure-protection
 
 - type: entityCondition
   id: IsHumanoid
   condition: !type:WhitelistCondition
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     guidebookText: entity-condition-guidebook-is-humanoid
+
+- type: entityCondition
+  id: IsAwake
+  condition: !type:WhitelistCondition
+    whitelist:
+      components:
+      - AwakeMob
+    guidebookText: entity-condition-guidebook-is-awake

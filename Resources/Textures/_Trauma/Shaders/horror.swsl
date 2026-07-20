@@ -1,0 +1,48 @@
+uniform highp float zoom;
+uniform highp float radius;
+uniform highp float pulseSpeed;
+uniform highp float shadowSoftness;
+
+highp float calcTendrils(highp vec2 uv, highp vec2 center) {
+    highp vec2 diff = uv - center;
+
+    highp float r = length(diff);
+    highp float a = atan(diff.y, diff.x);
+    highp float t = -TIME * 0.2;
+
+    highp float writhe = zFBM(vec2(r * 2.0 - t, a * 3.0));
+    highp float distorted_a = a + (writhe - 0.5) * 1.5;
+
+    highp float val = abs(fract(distorted_a * 2.5) - 0.5);
+
+    highp float thickness = 0.05 + smoothstep(0.0, 1.0, r) * 0.05;
+
+    highp float line = smoothstep(thickness + 0.015, thickness, val);
+
+    highp float mask = smoothstep(r, 0.0, clamp(radius - 0.35, 0.0, 1.0));
+
+    highp float tendrils = line * mask * 0.5;
+    return clamp(tendrils, 0.0, 1.0);
+}
+
+void fragment()
+{
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+    uv -= 0.5;
+    uv.x *= SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+
+    highp vec2 center = vec2(0.0);
+    center.x += (zFBM(vec2(TIME * 0.3, 10.0)) - 0.5) * 0.6;
+    center.y += (zFBM(vec2(20.0, TIME * 0.4)) - 0.5) * 0.6;
+
+    highp float tendrils = calcTendrils(uv, center);
+
+    highp float pulse = 1.0 + 0.07 * sin(TIME * pulseSpeed);
+    highp float curRadius = clamp(pulse * radius / zoom, 0.0, 1.0);
+
+    highp float dist = length(uv);
+    highp float vignette = smoothstep(curRadius, curRadius - 0.3, dist);
+
+    COLOR.rgb *= vignette;
+    COLOR.a = clamp(tendrils + 1.0 - vignette, 0.0, 1.0);
+}

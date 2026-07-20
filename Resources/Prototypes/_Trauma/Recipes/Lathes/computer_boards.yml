@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
+  id: GeneticsConsoleCircuitboard
+  result: GeneticsConsoleCircuitboard
+  icon:
+    sprite: _Trauma/Structures/Machines/Computers/icons.rsi
+    state: genetics

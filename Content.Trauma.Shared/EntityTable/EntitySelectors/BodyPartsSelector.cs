@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared.Body.Prototypes;
+
+using Content.Medical.Common.Body;
+using Content.Shared.Body;
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
 
@@ -12,17 +14,37 @@ namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
 public sealed partial class BodyPartsSelector : EntityTableSelector
 {
     [DataField(required: true)]
-    public ProtoId<BodyPrototype> Proto;
+    public EntProtoId<InitialBodyComponent> Proto;
 
-    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
+    // everything is guaranteed so no rolling is done
+    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(IRobustRandom rand,
         IEntityManager entMan,
         IPrototypeManager proto,
         EntityTableContext ctx)
     {
-        foreach (var slot in proto.Index(Proto).Slots.Values)
+        foreach (var (id, _) in ListSpawnsImplementation(entMan, proto, ctx))
         {
-            if (slot.Part is {} part)
-                yield return part;
+            yield return id;
         }
     }
+
+    protected override IEnumerable<(EntProtoId spawn, double)> ListSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+    {
+        var ent = proto.Index(Proto);
+        var factory = entMan.ComponentFactory;
+        if (!ent.TryGetComponent<InitialBodyComponent>(out var body, factory))
+            yield break; // unreachable
+
+        foreach (var organId in body.Organs.Values)
+        {
+            // filter out internal organs from the fill
+            var organ = proto.Index(organId);
+            if (!organ.HasComp<InternalOrganComponent>(factory))
+                yield return (organId, 1.0);
+        }
+    }
+
+    // since everything is guaranteed, average == prob == 1, these can be the same
+    protected override IEnumerable<(EntProtoId spawn, double)> AverageSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+        => ListSpawnsImplementation(entMan, proto, ctx);
 }

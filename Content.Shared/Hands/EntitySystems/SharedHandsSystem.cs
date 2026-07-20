@@ -1,44 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr.@gmail.com>
-// SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2022 Jezithyr <jmaster9999@gmail.com>
-// SPDX-FileCopyrightText: 2022 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Menshin <Menshin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 PixelTK <85175107+PixelTheKermit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 coolboy911 <85909253+coolboy911@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.ActionBlocker;
@@ -51,7 +10,6 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Network; // Goob
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -59,16 +17,15 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem
 {
-    [Dependency] private readonly INetManager _net = default!; // Goobstation
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] protected readonly SharedContainerSystem ContainerSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] protected SharedContainerSystem ContainerSystem = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualSystem = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
 
     public event Action<Entity<HandsComponent>, string, HandLocation>? OnPlayerAddHand;
     public event Action<Entity<HandsComponent>, string>? OnPlayerRemoveHand;
@@ -133,6 +90,8 @@ public abstract partial class SharedHandsSystem
 
         ent.Comp.Hands.Add(handName, hand);
         ent.Comp.SortedHands.Add(handName);
+        // we use LINQ + ToList instead of the list sort because it's a stable sort vs the list sort
+        ent.Comp.SortedHands = ent.Comp.SortedHands.OrderBy(handId => ent.Comp.Hands[handId].Location).ToList();
         Dirty(ent);
 
         OnPlayerAddHand?.Invoke((ent, ent.Comp), handName, hand.Location);
@@ -155,11 +114,11 @@ public abstract partial class SharedHandsSystem
 
         TryDrop(ent, handName, null, false);
 
-        if (!ent.Comp.Hands.Remove(handName))
-            return;
-
         if (ContainerSystem.TryGetContainer(ent, handName, out var container))
             ContainerSystem.ShutdownContainer(container);
+
+        if (!ent.Comp.Hands.Remove(handName))
+            return;
 
         ent.Comp.SortedHands.Remove(handName);
         if (ent.Comp.ActiveHandId == handName)
@@ -382,6 +341,27 @@ public abstract partial class SharedHandsSystem
         return true;
     }
 
+    /// <summary>
+    ///     Cycles the currently active hand.
+    /// </summary>
+    public void SwapHands(Entity<HandsComponent?> ent, bool checkActionBlocker = false, bool reverse = false)
+    {
+        if (!Resolve(ent, ref ent.Comp, false)) // Trauma - add false, dont let people use X macro to spam error logs...
+            return;
+
+        if (checkActionBlocker && !_actionBlocker.CanInteract(ent.Owner, null))
+            return;
+
+        if (ent.Comp.ActiveHandId == null || ent.Comp.Hands.Count < 2)
+            return;
+
+        var currentIndex = ent.Comp.SortedHands.IndexOf(ent.Comp.ActiveHandId);
+        var newActiveIndex = (currentIndex + (reverse ? -1 : 1) + ent.Comp.Hands.Count) % ent.Comp.Hands.Count;
+        var nextHand = ent.Comp.SortedHands[newActiveIndex];
+
+        TrySetActiveHand(ent, nextHand);
+    }
+
     public bool IsHolding(Entity<HandsComponent?> entity, [NotNullWhen(true)] EntityUid? item)
     {
         return IsHolding(entity, item, out _);
@@ -429,18 +409,27 @@ public abstract partial class SharedHandsSystem
     }
 
     /// <summary>
-    /// Gets the item currently held in the entity's specified hand. Returns null if no hands are present or there is no item.
+    /// Retrieves the item currently held in the specified hand of an entity.
     /// </summary>
-    public EntityUid? GetHeldItem(Entity<HandsComponent?> ent, string? handId)
+    /// <param name="ent">The entity whose hands are being checked.</param>
+    /// <param name="handId">The ID of the specific hand to check.</param>
+    /// <param name="hideVirtualItems">If true, treats hands holding virtual items as if they are empty.</param>
+    /// <returns>The UID of the held item, or null if the hand is empty, the hand ID is invalid, or the entity has no hands.</returns>
+    public EntityUid? GetHeldItem(Entity<HandsComponent?> ent, string? handId, bool hideVirtualItems = false)
     {
-        TryGetHeldItem(ent, handId, out var held);
+        TryGetHeldItem(ent, handId, out var held, hideVirtualItems);
         return held;
     }
 
     /// <summary>
-    /// Gets the item currently held in the entity's specified hand. Returns false if no hands are present or there is no item.
+    /// Attempts to retrieve the item currently held in the specified hand of an entity.
     /// </summary>
-    public bool TryGetHeldItem(Entity<HandsComponent?> ent, string? handId, [NotNullWhen(true)] out EntityUid? held)
+    /// <param name="ent">The entity whose hands are being checked.</param>
+    /// <param name="handId">The ID of the specific hand to check.</param>
+    /// <param name="held">Outputs the UID of the held item, if one is found.</param>
+    /// <param name="hideVirtualItems">If true, ignores virtual items and returns false if only a virtual item is present.</param>
+    /// <returns>True if a valid item is found in the hand; otherwise, false.</returns>
+    public bool TryGetHeldItem(Entity<HandsComponent?> ent, string? handId, [NotNullWhen(true)] out EntityUid? held, bool hideVirtualItems = false)
     {
         held = null;
         if (!Resolve(ent, ref ent.Comp, false))
@@ -454,6 +443,10 @@ public abstract partial class SharedHandsSystem
             return false;
 
         held = container.ContainedEntities.FirstOrNull();
+
+        if (hideVirtualItems && HasComp<VirtualItemComponent>(held))
+            held = null;
+
         return held != null;
     }
 

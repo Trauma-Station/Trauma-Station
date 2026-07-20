@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Robust.Shared.Random;
 
 namespace Content.Server.Wires;
@@ -12,7 +7,7 @@ namespace Content.Server.Wires;
 /// </summary>
 public sealed partial class CutWireOnMapInitSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

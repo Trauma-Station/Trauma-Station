@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.EntitySystems;
@@ -7,21 +9,18 @@ using Content.Shared.Nutrition;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Lollypop;
 
-public sealed class LollypopSystem : EntitySystem
+public sealed partial class LollypopSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IngestionSystem _ingestion = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly FlavorProfileSystem _flavorProfile = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private FlavorProfileSystem _flavorProfile = default!;
 
     public override void Initialize()
     {
@@ -71,7 +70,7 @@ public sealed class LollypopSystem : EntitySystem
 
     private void OnBeforeIngested(Entity<EquippedLollypopComponent> ent, ref BeforeIngestedEvent args)
     {
-        if (args.Max > ent.Comp.MaxEaten);
+        if (args.Max > ent.Comp.MaxEaten)
             args.Max = ent.Comp.MaxEaten;
     }
 
@@ -105,10 +104,10 @@ public sealed class LollypopSystem : EntitySystem
             return;
 
         var flavors = _flavorProfile.GetLocalizedFlavorsMessage(user, soln);
-        var proto = _proto.Index(edible.Edible);
-        var msg = Loc.GetString(proto.Message, ("food", uid), ("flavors", flavors));
+        var proto = ProtoMan.Index(edible.Edible);
+        var msg = Loc.GetString(proto.Message, ("food", uid), ("flavors", flavors), ("satiated", false));
         if (predicted)
-            _popup.PopupClient(msg, user, user);
+            _popup.PopupEntity(msg, user, user);
         else
             _popup.PopupEntity(msg, user, user);
     }

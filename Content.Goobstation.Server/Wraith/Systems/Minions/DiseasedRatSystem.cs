@@ -1,21 +1,21 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Polymorph;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wraith.Systems.Minions;
 
-public sealed class DiseasedRatSystem : SharedDiseasedRatSystem
+public sealed partial class DiseasedRatSystem : SharedDiseasedRatSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
 
     protected override void Evolve(EntityUid uid, ProtoId<DiseasedRatFormUnlockPrototype> newProto)
     {
         base.Evolve(uid, newProto);
 
-        if (!_proto.TryIndex(newProto, out var index)
+        if (!ProtoMan.Resolve(newProto, out var index)
             || index.Entity == null
             || index.TransferComponents == null)
             return;

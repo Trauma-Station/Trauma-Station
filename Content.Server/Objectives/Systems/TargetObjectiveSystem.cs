@@ -1,31 +1,24 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Robust.Shared.Utility; // Goob
+using Content.Trauma.Common.Wizard;
+// </Trauma>
 using Content.Server.Objectives.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles.Jobs;
 using System.Diagnostics.CodeAnalysis;
-using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Mind;
 using Content.Shared.Mind.Components;
-using Robust.Shared.Utility; // Goob
 
 namespace Content.Server.Objectives.Systems;
 
 /// <summary>
 /// Provides API for other components and handles setting the title.
 /// </summary>
-public sealed class TargetObjectiveSystem : EntitySystem
+public sealed partial class TargetObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly MindSystem _mind = default!; // Goobstation
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedJobSystem _job = default!;
 
     public override void Initialize()
     {
@@ -33,55 +26,19 @@ public sealed class TargetObjectiveSystem : EntitySystem
 
         SubscribeLocalEvent<TargetObjectiveComponent, ObjectiveAfterAssignEvent>(OnAfterAssign);
 
-        SubscribeLocalEvent<DynamicObjectiveTargetMindComponent, MindGotAddedEvent>(OnMindAdded); // Goobstation
-        SubscribeLocalEvent<EntityRenamedEvent>(OnRenamed); // Goobstation
     }
-
-    // Goobstation start
-    private void OnMindAdded(Entity<DynamicObjectiveTargetMindComponent> ent, ref MindGotAddedEvent args)
-    {
-        UpdateAllDynamicObjectiveNamesWithTarget(ent.Owner);
-    }
-
-    private void OnRenamed(ref EntityRenamedEvent ev)
-    {
-        if (_mind.TryGetMind(ev.Uid, out var mind, out _) && HasComp<DynamicObjectiveTargetMindComponent>(mind))
-            UpdateAllDynamicObjectiveNamesWithTarget(mind);
-    }
-
-    private void UpdateAllDynamicObjectiveNamesWithTarget(EntityUid target)
-    {
-        var query = AllEntityQuery<TargetObjectiveComponent, MetaDataComponent>();
-
-        while (query.MoveNext(out var uid, out var comp, out var meta))
-        {
-            if (!comp.DynamicName || comp.Target != target)
-                continue;
-
-            _metaData.SetEntityName(uid, GetTitle(target, comp.Title, true, comp.ShowJobTitle), meta);
-        }
-    }
-
-    public void SetName(EntityUid uid, TargetObjectiveComponent? comp = null)
-    {
-        if (!Resolve(uid, ref comp))
-            return;
-
-        if (!GetTarget(uid, out var target, comp))
-            return;
-
-        _metaData.SetEntityName(uid, GetTitle(target.Value, comp.Title, comp.DynamicName, comp.ShowJobTitle));
-    }
-    // Goobstation end
 
     private void OnAfterAssign(EntityUid uid, TargetObjectiveComponent comp, ref ObjectiveAfterAssignEvent args)
     {
         if (!GetTarget(uid, out var target, comp))
             return;
 
+        if (comp.Title == null) // Trauma - skip setting name if title is null, also added dynamicName and showJobTitle too
+            return;
+
         _metaData.SetEntityName(uid,
             GetTitle(target.Value, comp.Title, comp.DynamicName, comp.ShowJobTitle),
-            args.Meta); // Goob edit
+            args.Meta); // Trauma - dynamic name stuff was changed
     }
 
     /// <summary>
@@ -109,8 +66,7 @@ public sealed class TargetObjectiveSystem : EntitySystem
         return target != null;
     }
 
-    private string
-        GetTitle(EntityUid target, string title, bool dynamicName = false, bool showJobTitle = true) // Goob edit
+    public string GetTitle(EntityUid target, string? title, bool dynamicName = false, bool showJobTitle = true) // Trauma - title made nullable
     {
         var targetName = "Unknown";
         // Goob edit start
@@ -121,6 +77,9 @@ public sealed class TargetObjectiveSystem : EntitySystem
             else if (mind.CharacterName != null)
                 targetName = FormattedMessage.EscapeText(mind.CharacterName); // Goob Sanitize Text
         }
+
+        if (title == null) // Trauma - return empty if no title is set
+            return string.Empty;
 
         if (!showJobTitle)
             return Loc.GetString(title, ("targetName", targetName));

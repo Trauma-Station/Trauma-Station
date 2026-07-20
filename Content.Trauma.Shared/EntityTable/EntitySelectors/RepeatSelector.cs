@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared.Body.Prototypes;
+
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
@@ -19,7 +19,7 @@ public sealed partial class RepeatSelector : EntityTableSelector
     [DataField(required: true)]
     public int Count;
 
-    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
+    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(IRobustRandom rand,
         IEntityManager entMan,
         IPrototypeManager proto,
         EntityTableContext ctx)
@@ -31,6 +31,19 @@ public sealed partial class RepeatSelector : EntityTableSelector
             {
                 yield return id;
             }
+        }
+    }
+
+    // the same probabilities
+    protected override IEnumerable<(EntProtoId, double)> ListSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+        => Repeated.ListSpawns(entMan, proto, ctx);
+
+    // but scaled averages
+    protected override IEnumerable<(EntProtoId, double)> AverageSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+    {
+        foreach (var (id, average) in Repeated.AverageSpawns(entMan, proto, ctx))
+        {
+            yield return (id, average * Count);
         }
     }
 }

@@ -1,11 +1,7 @@
-// SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Threading.Tasks;
 using Robust.Shared.Asynchronous;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Common.ServerCurrency;
 
@@ -80,4 +76,9 @@ public interface ICommonCurrencyManager
     /// <remarks>Null implies the client is calling this</remarks>
     /// <returns>The players balance.</returns>
     public int GetBalance(NetUserId? userId = null);
+
+    /// <summary>
+    /// Wipe the entire server's currency balances...
+    /// </summary>
+    public Task Wipe();
 }

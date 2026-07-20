@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Poips <Hanakohashbrown@gmail.com>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 kamkoi <poiiiple1@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text.RegularExpressions;
@@ -16,9 +7,9 @@ using Content.Shared.Speech;
 
 namespace Content.Goobstation.Server.Speech;
 
-public sealed class GlorpAccentSystem : EntitySystem
+public sealed partial class GlorpAccentSystem : EntitySystem
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
     private static readonly string[] StartingLetters = { "n", "x", "z", "v", "g" };
     private static readonly string[] Suffixes = { "narp", "lorp", "leeb", "orp", "orple", "ip", "op", "eegle" };
     private static readonly string[] RandomInserts = { "Glupshitto", "Glorpshit" };

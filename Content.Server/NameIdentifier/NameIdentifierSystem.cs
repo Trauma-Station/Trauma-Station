@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.GameTicking;
 using Content.Shared.NameIdentifier;
 using Content.Shared.NameModifier.EntitySystems;
@@ -20,11 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Server.NameIdentifier;
 
-public sealed class NameIdentifierSystem : SharedNameIdentifierSystem
+public sealed partial class NameIdentifierSystem : SharedNameIdentifierSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
 
     /// <summary>
     /// Free IDs available per <see cref="NameIdentifierGroupPrototype"/>.
@@ -68,7 +54,7 @@ public sealed class NameIdentifierSystem : SharedNameIdentifierSystem
     /// </summary>
     public string GenerateUniqueName(EntityUid uid, ProtoId<NameIdentifierGroupPrototype> proto, out int randomVal)
     {
-        return GenerateUniqueName(uid, _prototypeManager.Index(proto), out randomVal);
+        return GenerateUniqueName(uid, ProtoMan.Index(proto), out randomVal);
     }
 
     /// <summary>
@@ -101,7 +87,7 @@ public sealed class NameIdentifierSystem : SharedNameIdentifierSystem
         if (ent.Comp.Group is null)
             return;
 
-        if (!_prototypeManager.Resolve(ent.Comp.Group, out var group))
+        if (!ProtoMan.Resolve(ent.Comp.Group, out var group))
             return;
 
         int id;
@@ -160,7 +146,7 @@ public sealed class NameIdentifierSystem : SharedNameIdentifierSystem
 
     private void EnsureIds()
     {
-        foreach (var proto in _prototypeManager.EnumeratePrototypes<NameIdentifierGroupPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<NameIdentifierGroupPrototype>())
         {
             var ids = GetOrCreateIdList(proto);
 
@@ -177,7 +163,7 @@ public sealed class NameIdentifierSystem : SharedNameIdentifierSystem
 
         foreach (var proto in CurrentIds.Keys)
         {
-            if (!_prototypeManager.HasIndex<NameIdentifierGroupPrototype>(proto))
+            if (!ProtoMan.HasIndex<NameIdentifierGroupPrototype>(proto))
             {
                 toRemove.Add(proto);
             }

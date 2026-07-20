@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ ClothingEyesBase, BaseRevMajorContraband, ShowSecurityIcons ]
   id: ClothingEyesRevolutionaryVisor
@@ -32,4 +34,3 @@
       OrganDamage: 0.13
       BoneDamage: 0.13
       VeinsDamage: 0
-      NerveDamage: 0

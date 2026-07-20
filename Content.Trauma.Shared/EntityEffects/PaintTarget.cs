@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Paint;
 using Content.Trauma.Shared.Tools;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -16,11 +16,11 @@ public sealed partial class PaintTarget : EntityEffectBase<PaintTarget>
         => Loc.GetString("entity-effect-paint-target-guidebook-text", ("chance", Probability));
 }
 
-public sealed class PaintTargetEffectSystem : EntityEffectSystem<TransformComponent, PaintTarget>
+public sealed partial class PaintTargetEffectSystem : EntityEffectSystem<TransformComponent, PaintTarget>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly EffectsToolSystem _tool = default!;
-    [Dependency] private readonly PaintSystem _paint = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private EffectsToolSystem _tool = default!;
+    [Dependency] private PaintSystem _paint = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PaintTarget> args)
     {

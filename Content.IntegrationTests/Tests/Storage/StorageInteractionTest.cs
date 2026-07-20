@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.UserInterface.Systems.Hotbar.Widgets;
 using Content.Client.UserInterface.Systems.Storage.Controls;
 using Content.IntegrationTests.Tests.Interaction;
@@ -18,6 +13,27 @@ namespace Content.IntegrationTests.Tests.Storage;
 
 public sealed class StorageInteractionTest : InteractionTest
 {
+    // <Trauma> - give this test mob 2 hands
+    protected override string PlayerPrototype => "InteractionTestMobStorage";
+
+    [TestPrototypes]
+    private const string TestPrototypes = @"
+- type: entity
+  parent: InteractionTestMob
+  id: InteractionTestMobStorage
+  components:
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands:
+    - hand_left
+    - hand_right
+    ";
+    // </Trauma>
+
     /// <summary>
     /// Check that players can interact with items in storage if the storage UI is open
     /// </summary>
@@ -55,6 +71,13 @@ public sealed class StorageInteractionTest : InteractionTest
         Assert.That(sys.IsEntityInContainer(sPda), Is.True);
         Assert.That(sys.TryGetContainingContainer((sPda, null), out var container));
         Assert.That(container!.Owner, Is.EqualTo(SPlayer));
+
+        // <Trauma> - pick up the backpack as well to allow interactions with the pda inside of it
+        await Server.WaitPost(() =>
+        {
+            Assert.That(HandSys.TryPickupAnyHand(SPlayer, backpack!.Value));
+        });
+        // </Trauma>
 
         // Insert the PDA into the backpack
         await Interact();

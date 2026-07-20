@@ -1,16 +1,7 @@
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Sprite;
+using Robust.Shared.Random;
+// </Trauma>
 using Content.Server.Chat.Systems;
 using Content.Server.NPC;
 using Content.Server.NPC.Systems;
@@ -25,7 +16,6 @@ using System.Numerics;
 using Content.Shared.Damage.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
-using Robust.Shared.Random; // Goobstation - Buff carp rift
 using Robust.Shared.Utility;
 
 namespace Content.Server.Dragon;
@@ -33,15 +23,17 @@ namespace Content.Server.Dragon;
 /// <summary>
 /// Handles events for rift entities and rift updating.
 /// </summary>
-public sealed class DragonRiftSystem : EntitySystem
+public sealed partial class DragonRiftSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DragonSystem _dragon = default!;
-    [Dependency] private readonly IRobustRandom _random = default!; // Goobstation - Buff carp rift
-    [Dependency] private readonly ISerializationManager _serManager = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    // <Trauma>
+    [Dependency] private IRobustRandom _random = default!;
+    // </Trauma>
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DragonSystem _dragon = default!;
+    [Dependency] private ISerializationManager _serManager = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -111,6 +103,10 @@ public sealed class DragonRiftSystem : EntitySystem
                     var spawnedSprite = EnsureComp<RandomSpriteComponent>(ent);
                     _serManager.CopyTo(randomSprite, ref spawnedSprite, notNullableOverride: true);
                     Dirty(ent, spawnedSprite);
+                    // <Trauma>
+                    var ev = new RandomSpriteChangedEvent();
+                    RaiseLocalEvent(ent, ref ev);
+                    // </Trauma>
                 }
 
                 if (comp.Dragon != null)

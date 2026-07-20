@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -58,6 +54,7 @@
       230: 0.5
   - type: Insulated
   - type: FlashImmunity
+    showInExamine: false
   - type: Bloodstream
     maxBleedAmount: 0
   - type: Respirator
@@ -71,7 +68,7 @@
 - type: entity
   name: monkey
   id: MobMonkeyAngry
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, MobBaseAncestor ]
   suffix: Angry
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
@@ -89,10 +86,10 @@
       task: SimpleHumanoidHostileCompound
 
 - type: entity
-  name: kobold
-  id: MobKoboldAngry
-  suffix: Angry # Trauma, this one wasn't suffixed for some reason.
   parent: MobBaseKobold
+  id: MobKoboldAngry
+  name: kobold
+  suffix: Angry
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   components:
   - type: NpcFactionMember

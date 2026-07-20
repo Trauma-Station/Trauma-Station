@@ -1,37 +1,10 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
-## Navy Shit
 
 # Central Command!
 
 - type: randomHumanoidSettings
   id: CentcommHumanoid
-  speciesBlacklist:
-  - Monkey
-  - Kobold
-  - Abductor
-  - IPC
-  - Diona
-  - Harpy
-  - Vox # Pasha
-  - Gingerbread # Soecusn
-  - Plasmaman
-  - Reptilian
-  - Moth
-  - Arachnid
-  - Vulpkanin
-  - SlimePerson
-  - Dwarf
-  - Feroxi
-  - Chitinid
+  speciesWhitelist: Human
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
@@ -41,6 +14,8 @@
   - type: Speech
     speechVerb: HolierThanThou
   - type: GhostRole
+
+## Navy Shit
 
 # Navy Officer
 
@@ -159,46 +134,6 @@
   - type: RandomMetadata
     nameSegments:
     - NamesMilitaryFirstLeader
-    - NamesMilitaryLast
-    nameFormat: name-format-standard
-
-# Special Operations Officer
-
-- type: entity
-  id: RandomHumanoidSpawnerSpecialOperationsOfficers
-  name: Special Operations Officer
-  suffix: CentComm
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navy_gold.rsi
-    state: icon
-  - type: RandomMetadata
-    nameSegments:
-    - NamesMilitaryFirstHighRank
-    - NamesMilitaryLast
-    nameFormat: name-format-standard
-  - type: RandomHumanoidSpawner
-    settings: SpecialOperationsOfficer
-
-- type: randomHumanoidSettings
-  id: SpecialOperationsOfficer
-  parent: CentcommHumanoid
-  randomizeName: false
-  components:
-  - type: AutoImplant
-    implants: [ FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant]
-  - type: GhostRole
-    name: ghost-role-information-special-operations-officer-name
-    description: ghost-role-information-special-operations-officer-description
-    rules: ghost-role-information-special-operations-officer-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ SpecialOperationsOfficerGear ]
-    roleLoadout: [ RoleSurvivalEVA ]
-  - type: RandomMetadata
-    nameSegments:
-    - NamesMilitaryFirstHighRank
     - NamesMilitaryLast
     nameFormat: name-format-standard
 
@@ -421,7 +356,6 @@
     implants: [ FreedomImplant, NutrimentPumpImplant, SpaceProofImplant ]
   - type: RandomHumanoidAppearance
     randomizeName: false
-    hair: HairBald
   - type: GhostRole
     name: ghost-role-information-conquest-name
     description: ghost-role-information-conquest-description
@@ -495,12 +429,13 @@
     - Alive
     - Critical
     - Dead
-    damageCap: 0
     damage:
       types:
         Heat: -3
-      groups:
-        Brute: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
   - type: StatusEffects
     allowed:
     - PressureImmunity

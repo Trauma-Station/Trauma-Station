@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: WraithRoundstart
+  name: roles-antag-wraith-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-wraith-objective
+  guides: [ Wraith ]
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 10h
+
+- type: antagSpecifier
+  id: Wraith
+  prefRoles: [ WraithRoundstart ]
+  spawnerPrototype: SpawnPointGhostWraithRoundstart
+  mindRoles: [ MindRoleGhostRoleSoloAntagonist ]
+  briefing:
+    text: wraith-role-greeting
+    sound: /Audio/_Goobstation/Wraith/Ambience/Void_Calls.ogg
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesWraith
+    - NamesWraithTitle
+    nameFormat: name-format-wraith
+  - type: Banishment
+    lives: 0
+    popup: wraith-banishment
+
+- type: antagSpecifier
+  parent: Wraith
+  id: WraithMidround
+  spawnerPrototype: SpawnPointGhostWraith

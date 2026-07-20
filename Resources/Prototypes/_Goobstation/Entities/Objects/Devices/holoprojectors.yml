@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: Holoprojector
+  parent: [ Holoprojector, BaseSecurityContraband ]
   id: HoloprojectorSecurityAdvanced
   name: advanced holobarrier projector
   description: An advanced barrier projector, capable of projecting more durable & secure barriers.

@@ -1,0 +1,10 @@
+knowledge-category-Martial = Martial Arts
+knowledge-category-Languages = Languages
+knowledge-category-Recipes = Recipes
+knowledge-category-Crafting = Crafting
+knowledge-category-MeleeCombat = Melee Combat
+knowledge-category-RangedCombat = Ranged Combat
+knowledge-category-Medical = Medical
+knowledge-category-Physical = Physical
+knowledge-category-Intellectual = Intellectual
+knowledge-category-Scientific = Scientific

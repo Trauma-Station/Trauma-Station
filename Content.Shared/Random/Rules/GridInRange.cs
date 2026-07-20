@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -33,13 +27,13 @@ public sealed partial class GridInRangeRule : RulesRule
         }
 
         var transform = entManager.System<SharedTransformSystem>();
-        var mapManager = IoCManager.Resolve<IMapManager>();
+        var maps = entManager.System<SharedMapSystem>();
 
         var worldPos = transform.GetWorldPosition(xform);
         var gridRange = new Vector2(Range, Range);
 
         _grids.Clear();
-        mapManager.FindGridsIntersecting(xform.MapID, new Box2(worldPos - gridRange, worldPos + gridRange), ref _grids);
+        maps.FindGridsIntersecting(xform.MapID, new Box2(worldPos - gridRange, worldPos + gridRange), ref _grids);
         if (_grids.Count > 0)
             return !Inverted;
 

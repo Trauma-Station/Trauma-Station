@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Popups;
@@ -7,12 +9,12 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.Wraith.Systems.Mobs;
-public sealed class RallySystem : EntitySystem
+public sealed partial class RallySystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _status = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _status = default!;
 
     private readonly HashSet<Entity<MeleeWeaponComponent>> _melee = new();
     public override void Initialize()
@@ -38,7 +40,7 @@ public sealed class RallySystem : EntitySystem
 
             _status.TryAddStatusEffect(affected, ent.Comp.StatusEffectRally, out _, ent.Comp.Duration);
 
-            _popup.PopupClient(Loc.GetString("wraith-skeleton-rally-howl", ("user", ent.Owner)), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-skeleton-rally-howl", ("user", ent.Owner)), ent.Owner, ent.Owner);
         }
 
         args.Handled = true;

@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Common.Body;
+using Content.Shared.Body;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 
@@ -8,30 +12,20 @@ namespace Content.Shared.Damage.Systems;
 /// </summary>
 public sealed partial class DamageableSystem
 {
+    [Dependency] private CommonBodyPartSystem _part = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<InorganicComponent> _inorganicQuery = default!;
+    [Dependency] private EntityQuery<InternalOrganComponent> _internalQuery = default!;
+
     private static readonly ProtoId<DamageGroupPrototype>[] _vitalOnlyDamageGroups = { "Airloss", "Toxin", "Genetic", "Metaphysical" };
     private readonly List<ProtoId<DamageTypePrototype>> _vitalOnlyDamageTypes = new();
-
-    private void InitializeTrauma()
-    {
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
-        CacheVitalPrototypes();
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (!args.WasModified<DamageGroupPrototype>())
-            return;
-
-        CacheVitalPrototypes();
-    }
 
     private void CacheVitalPrototypes()
     {
         _vitalOnlyDamageTypes.Clear();
         foreach (var groupId in _vitalOnlyDamageGroups)
         {
-            var group = _prototypeManager.Index(groupId);
+            var group = ProtoMan.Index(groupId);
             foreach (var type in group.DamageTypes)
             {
                 _vitalOnlyDamageTypes.Add(type);

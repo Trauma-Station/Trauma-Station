@@ -1,29 +1,31 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wraith;
 
 /// <summary>
 /// This handles evolving into a higher form with Wraith.
 /// </summary>
-public sealed class WraithEvolveSystem : EntitySystem
+public sealed partial class WraithEvolveSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -53,7 +55,7 @@ public sealed class WraithEvolveSystem : EntitySystem
             return;
 
         _ui.TryToggleUi(ent.Owner, RadialSelectorUiKey.Key, ent.Owner);
-        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new TrackedRadialSelectorState(ent.Comp.AvailableEvolutions));
+        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new RadialSelectorState(ent.Comp.AvailableEvolutions));
 
         args.Handled = true;
     }
@@ -69,7 +71,8 @@ public sealed class WraithEvolveSystem : EntitySystem
     {
         var uid = ent.Owner;
         if (evolve == null
-            || !_proto.TryIndex(evolve, out _)
+            || !ProtoMan.TryIndex(evolve, out var evolvePrototype)
+            || !evolvePrototype.HasComponent<WraithComponent>()
             || !_mind.TryGetMind(uid, out var mindUid, out var mind))
             return;
 
@@ -82,7 +85,7 @@ public sealed class WraithEvolveSystem : EntitySystem
         _mind.TransferTo(mindUid, newForm, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
-        EntityManager.CopyComponents(uid, newForm);
+        CopyComps(uid, newForm);
 
         _admin.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent.Owner)} evolved to {ToPrettyString(newForm)} as a Wraith");
 

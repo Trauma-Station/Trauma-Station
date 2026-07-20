@@ -1,26 +1,13 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Clothing.Components;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.XAML;
 
 namespace Content.Goobstation.Client.Clothing;
 
 public sealed partial class ToggleableClothingRadialMenu : RadialMenu
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     public event Action<EntityUid>? SendToggleClothingMessageAction;
 

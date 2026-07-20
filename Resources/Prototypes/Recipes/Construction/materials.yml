@@ -1,23 +1,5 @@
-# SPDX-FileCopyrightText: 2020 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Git-Nivrak <59925169+Git-Nivrak@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2022 EmoGarbage404 <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Martin Petkovski <63034378+martin69420@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2023 AsikKEsel <115815982+AsikKEsel@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: construction
+  parent: BaseMaterial # Trauma
   id: MetalRod
   graph: MetalRod
   startNode: start
@@ -26,6 +8,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRGlass
   graph: Glass
   startNode: start
@@ -34,6 +17,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetClockworkGlass
   graph: Glass
   startNode: start
@@ -42,6 +26,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetPGlass
   graph: Glass
   startNode: start
@@ -50,6 +35,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRPGlass
   graph: Glass
   startNode: start
@@ -58,6 +44,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRPGlass0
   graph: Glass
   startNode: start
@@ -66,6 +53,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRPGlass1
   graph: Glass
   startNode: start
@@ -75,6 +63,7 @@
 
 # <Trauma> remove durathread handcraft
 #- type: construction
+#  parent: BaseMaterial # Trauma
 #  id: MaterialDurathread
 #  graph: Durathread
 #  startNode: start
@@ -84,6 +73,7 @@
 # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetUGlass
   graph: Glass
   startNode: start
@@ -92,6 +82,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRUGlass
   graph: Glass
   startNode: start
@@ -100,6 +91,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRUGlass0
   graph: Glass
   startNode: start
@@ -108,6 +100,7 @@
   objectType: Item
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRUGlass1
   graph: Glass
   startNode: start

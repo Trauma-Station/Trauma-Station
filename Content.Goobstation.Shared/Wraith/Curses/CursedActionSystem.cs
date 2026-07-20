@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;
 
@@ -12,31 +13,23 @@ namespace Content.Goobstation.Shared.Wraith.Curses;
 /// This handles applying curses to an entity.
 /// This system also handles entities that are not allowed to get curses
 /// </summary>
-public sealed class CursedActionSystem : EntitySystem
+public sealed partial class CursedActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
 
     private const int MaxCursesBeforeFinal = 4;
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<ApplyCurseActionEvent>(OnApplyCurseAction);
-
-        SubscribeLocalEvent<SiliconComponent, AttemptCurseEvent>(OnSiliconAttempt);
-        SubscribeLocalEvent<CurseImmuneComponent, AttemptCurseEvent>(OnAttemptCurseImmune);
-    }
-
+    [SubscribeLocalEvent]
     private void OnApplyCurseAction(ApplyCurseActionEvent args)
     {
         if (args.Curse == null)
             return;
 
-        var attemptEv = new AttemptCurseEvent(args.Performer);
+        var attemptEv = new AttemptCurseEvent(args.Target, args.Performer);
         RaiseLocalEvent(args.Target, ref attemptEv);
 
         if (attemptEv.Cancelled)
@@ -49,7 +42,7 @@ public sealed class CursedActionSystem : EntitySystem
         {
             if (curseHolder.ActiveCurses.Count < MaxCursesBeforeFinal)
             {
-                _popup.PopupClient(Loc.GetString("curse-fail-require-all"), args.Performer, args.Performer);
+                _popup.PopupEntity(Loc.GetString("curse-fail-require-all"), args.Performer, args.Performer);
                 return;
             }
         }
@@ -61,10 +54,10 @@ public sealed class CursedActionSystem : EntitySystem
             return;
 
         if (args.Popup.HasValue)
-            _popup.PopupClient(Loc.GetString(args.Popup.Value), args.Performer, args.Performer, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString(args.Popup.Value), args.Performer, args.Performer, PopupType.Medium);
 
         // play curse sound if it exists
-        if (args.CurseSound != null && _netManager.IsServer)
+        if (args.CurseSound != null && _net.IsServer)
             _audio.PlayEntity(args.CurseSound, args.Target, args.Target);
 
         // Reset timers on all curses for the user
@@ -83,15 +76,18 @@ public sealed class CursedActionSystem : EntitySystem
     }
 
     #region Cancel Events
-    private void OnSiliconAttempt(Entity<SiliconComponent> ent, ref AttemptCurseEvent args)
+    [SubscribeLocalEvent]
+    private void OnSiliconAttempt(ref AttemptCurseEvent args)
     {
-        _popup.PopupClient(Loc.GetString("curse-fail-robot"), args.Curser, args.Curser);
+        if (_silicon.IsSilicon(args.Entity))
+            _popup.PopupEntity(Loc.GetString("curse-fail-robot"), args.Curser, args.Curser);
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptCurseImmune(Entity<CurseImmuneComponent> ent, ref AttemptCurseEvent args)
     {
-        _popup.PopupClient(Loc.GetString("curse-immune-fail"), args.Curser, args.Curser);
+        _popup.PopupEntity(Loc.GetString("curse-immune-fail"), args.Curser, args.Curser);
         args.Cancelled = true;
     }
     #endregion

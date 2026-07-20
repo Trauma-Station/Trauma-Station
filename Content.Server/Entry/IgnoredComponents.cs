@@ -4,6 +4,14 @@ namespace Content.Server.Entry
     public static class IgnoredComponents
     {
         public static string[] List => new[] {
+            // <Trauma>
+            "RotationDrawDepth",
+            "ToggleableLightWieldable",
+            "HideClothingLayerClothing",
+            "MultiShaderSprite",
+            "ItemSlotRenderer",
+            "ShowSpriteLayerStatusEffect",
+            // </Trauma>
             "ConstructionGhost",
             "IconSmooth",
             "InteractionOutline",
@@ -22,11 +30,7 @@ namespace Content.Server.Entry
             "OptionsVisualizer",
             "AnomalyScannerScreen",
             "MultipartMachineGhost",
-            "ShowSpriteLayerStatusEffect", // Trauma
-            "RotationDrawDepth", // RMC14
-            "ToggleableLightWieldable", // Goobstation
-            "HideClothingLayerClothing", // Goobstation
-            "ItemSlotRenderer", // WWDP EDIT
+            "DirectionalArrowIndicator"
         };
     }
 }

@@ -1,44 +1,22 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Júlio César Ueti <52474532+Mirino97@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Morbo <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2023 Daniil Sikinami <60344369+VigersRay@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.AlertLevel;
+// </Trauma>
 using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.CCVar;
-using Content.Trauma.Common.AlertLevel; // Trauma
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.AlertLevel;
 
-public sealed class AlertLevelSystem : EntitySystem
+public sealed partial class AlertLevelSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
 
     // Until stations are a prototype, this is how it's going to have to be.
     public const string DefaultAlertLevelSet = "stationAlerts";
@@ -74,7 +52,7 @@ public sealed class AlertLevelSystem : EntitySystem
         if (!TryComp<AlertLevelComponent>(args.Station, out var alertLevelComponent))
             return;
 
-        if (!_prototypeManager.TryIndex(alertLevelComponent.AlertLevelPrototype, out AlertLevelPrototype? alerts))
+        if (!ProtoMan.TryIndex(alertLevelComponent.AlertLevelPrototype, out AlertLevelPrototype? alerts))
         {
             return;
         }
@@ -183,7 +161,7 @@ public sealed class AlertLevelSystem : EntitySystem
             }
 
             // <Trauma>
-            var attemptEv = new ChangeAlertLevelAttemptEvent(level);
+            var attemptEv = new ChangeAlertLevelAttemptEvent(level, component.CurrentLevel);
             RaiseLocalEvent(station, ref attemptEv);
             if (attemptEv.Cancelled)
                 return;

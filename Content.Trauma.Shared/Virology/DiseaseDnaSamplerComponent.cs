@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Virology;
 using Content.Trauma.Shared.Disease;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Virology;
 

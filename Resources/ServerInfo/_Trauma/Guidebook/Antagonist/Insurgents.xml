@@ -1,0 +1,28 @@
+<Document>
+  # Insurgents
+
+  <Box>
+    <GuideEntityEmbed Entity="ClothingMaskGas" Caption=""/>
+    <GuideEntityEmbed Entity="ClothingNeckBombCollarBroken" Caption=""/>
+  </Box>
+
+  Insurgents spawn in a small shuttle every round, their goal is just to be shitters and mess around.
+
+  There are currently no real objectives, so you have the freedom to be creative! Make a shotgun factory in maints, take science hostage, smash up the bar, etc.
+
+  # Bomb collar
+
+  <Box>
+    <GuideEntityEmbed Entity="ClothingNeckBombCollarBroken"/>
+  </Box>
+
+  Insurgents are rebel D-class subjects who once had bomb collars. These collars are now disabled, but they cannot be removed.
+  Seeing a [color=red]bomb collar[/color] is [italic]usually[/italic] definitive proof someone is an [color=red]insurgent[/color]!
+
+  # Special Rules
+
+  Insurgents have to follow special rules, from [bold]Rule S5[/bold]:
+  - Unlike other antagonists, [bold]you still have to escalate in violence[/bold].
+  - Don't mass murder unless it is extremely justified or creative / funny.
+  - Don't AHelp about being killed, it's part of this role and will happen very often.
+</Document>

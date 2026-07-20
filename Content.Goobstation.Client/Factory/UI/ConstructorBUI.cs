@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Construction;
@@ -10,18 +5,15 @@ using Content.Client.Construction.UI;
 using Content.Goobstation.Shared.Factory;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Knowledge.Systems;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;
 
-public sealed class ConstructorBUI : BoundUserInterface
+public sealed partial class ConstructorBUI : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    private readonly CommonKnowledgeSystem _knowledge = default!;
     private readonly ConstructionSystem _construction;
     private readonly EntityWhitelistSystem _whitelist;
     private readonly SpriteSystem _sprite;
@@ -34,6 +26,7 @@ public sealed class ConstructorBUI : BoundUserInterface
 
     public ConstructorBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _knowledge = EntMan.System<CommonKnowledgeSystem>();
         _construction = EntMan.System<ConstructionSystem>();
         _whitelist = EntMan.System<EntityWhitelistSystem>();
         _sprite = EntMan.System<SpriteSystem>();
@@ -50,16 +43,20 @@ public sealed class ConstructorBUI : BoundUserInterface
         PopulateCategories();
         PopulateRecipes(string.Empty, string.Empty);
         _menu.PopulateRecipes += (_, args) => PopulateRecipes(args.Item1, args.Item2);
-        _menu.RecipeSelected += (_, item) =>
+        _menu.RecipeSelected += (_, recipe) =>
         {
             _menu.ClearRecipeInfo();
-            if (item != null && item.Prototype != null)
+            if (recipe is { } item)
             {
-                _id = item.Prototype.ID;
-                _menu.SetRecipeInfo(item.Prototype.Name ?? "", item.Prototype.Description ?? "", item?.TargetPrototype,
-                    item!.Prototype.Type != ConstructionType.Item, true); // TODO: favourites
+                var proto = item.ConstructionProto;
+                var ent = item.EntityProto;
+                _id = proto.ID;
+                _menu.SetRecipeInfo(proto.Name ?? ent.Name, proto.Description ?? ent.Description, ent,
+                    proto.Type != ConstructionType.Item, true, // TODO: favourites
+                    true,
+                    proto);
 
-                GenerateStepList(item.Prototype);
+                GenerateStepList(proto);
             }
             else
             {
@@ -124,12 +121,27 @@ public sealed class ConstructorBUI : BoundUserInterface
         var isEmptyCategory = string.IsNullOrEmpty(category) || category == _forAllCategoryName;
 
         _recipes.Clear();
+        var skills = _knowledge.GetSkillMasteries(user);
+        var useKnowledge = _construction.IsKnowledgeHolder(user);
+        // FUCK YOU, copy pasta
+        bool CanUnderstand(ConstructionPrototype recipe)
+        {
+            foreach (var (id, needed) in recipe.Theory)
+            {
+                if (!skills.TryGetValue(id, out var mastery) || mastery < needed)
+                    return false;
+            }
+            return true;
+        }
         foreach (var recipe in _proto.EnumeratePrototypes<ConstructionPrototype>())
         {
             if (recipe.Hide)
                 continue;
 
             if (_whitelist.IsWhitelistFail(recipe.EntityWhitelist, user))
+                continue;
+
+            if (useKnowledge && !CanUnderstand(recipe))
                 continue;
 
             if (searching
@@ -157,13 +169,13 @@ public sealed class ConstructorBUI : BoundUserInterface
             _recipes.Add(new(recipe, proto));
         }
 
-        _recipes.Sort((a, b) => string.Compare(a.Prototype.Name, b.Prototype.Name, StringComparison.InvariantCulture));
+        _recipes.Sort((a, b) => string.Compare(a.ConstructionProto.Name, b.ConstructionProto.Name, StringComparison.InvariantCulture));
 
-        var recipesList = menu.Recipes;
+        var recipesList = menu.ListViewRecipes;
         recipesList.PopulateList(_recipes);
 
-        menu.RecipesGridScrollContainer.Visible = false;
-        menu.Recipes.Visible = true;
+        menu.GridViewRecipesScrollContainer.Visible = false;
+        menu.ListViewRecipes.Visible = true;
     }
 
     private void GenerateStepList(ConstructionPrototype proto)

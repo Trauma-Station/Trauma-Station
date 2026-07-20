@@ -1,8 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: marking
   id: FacePaintSplitter
   bodyPart: Face
-  markingCategory: Overlay
-  speciesRestriction: [Human, Dwarf]
+  groupWhitelist: [Human]
   forcedColoring: true
   sprites:
   - sprite: _Trauma/Mobs/Customization/facepaint.rsi

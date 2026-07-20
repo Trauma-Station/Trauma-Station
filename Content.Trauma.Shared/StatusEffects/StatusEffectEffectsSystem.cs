@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.StatusEffectNew.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-public sealed class StatusEffectEffectsSystem : EntitySystem
+public sealed partial class StatusEffectEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -39,7 +39,7 @@ public sealed class StatusEffectEffectsSystem : EntitySystem
             comp.NextUpdate = now + comp.UpdateDelay;
             Dirty(uid, comp);
 
-            _effects.ApplyEffects(target, comp.Effects);
+            _effects.ApplyEffects(target, comp.Effects, user: target);
         }
     }
 

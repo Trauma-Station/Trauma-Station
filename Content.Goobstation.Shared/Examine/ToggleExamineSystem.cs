@@ -1,11 +1,13 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle;
 
 namespace Content.Goobstation.Shared.Examine;
 
-public sealed class ToggleExamineSystem : EntitySystem
+public sealed partial class ToggleExamineSystem : EntitySystem
 {
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
 
     public override void Initialize()
     {

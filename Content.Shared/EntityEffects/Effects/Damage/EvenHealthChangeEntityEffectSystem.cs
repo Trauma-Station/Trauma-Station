@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.EntityEffects.Effects;
+using Content.Medical.Common.EntityEffects;
 using Content.Shared.Temperature.Components;
 // </Trauma>
 using Content.Shared.Damage.Components;
@@ -18,7 +18,7 @@ namespace Content.Shared.EntityEffects.Effects.Damage;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class EvenHealthChangeEntityEffectSystem : EntityEffectSystem<DamageableComponent, EvenHealthChange>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     protected override void Effect(Entity<DamageableComponent> entity, ref EntityEffectEvent<EvenHealthChange> args)
     {

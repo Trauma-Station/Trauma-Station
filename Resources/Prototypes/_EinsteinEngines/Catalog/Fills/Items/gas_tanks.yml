@@ -1,13 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: EmergencyOxygenTank
   id: EmergencyPlasmaTank
-  name: emergency plasma tank
-  description: An easily portable tank for emergencies. Contains very little plasma, rated for survival use only.
+  name: emergency phoron tank
+  description: An easily portable tank for emergencies. Contains very little phoron, rated for survival use only.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
   - type: Item
     sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
+    storedRotation: -45
+    storedOffset: 10,0
+    storedSprite:
+      state: icon
+      sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
   - type: Tag
@@ -20,7 +27,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 16 minutes with Plasmaman lungs
       volume: 0.66
@@ -31,13 +38,18 @@
 - type: entity
   parent: ExtendedEmergencyOxygenTank
   id: ExtendedEmergencyPlasmaTank
-  name: extended capacity emergency plasma tank
+  name: extended-capacity emergency phoron tank
   description: An emergency tank with extended capacity. Technically rated for prolonged use.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
   - type: Item
     sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
+    storedRotation: -45
+    storedOffset: 10,0
+    storedSprite:
+      state: icon
+      sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
   - type: Tag
@@ -50,7 +62,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 36 minutes with Plasmaman lungs
       volume: 1.5
@@ -61,13 +73,18 @@
 - type: entity
   parent: DoubleEmergencyOxygenTank
   id: DoubleEmergencyPlasmaTank
-  name: plasma internals tank
-  description: A tank of plasma designed to be internals for Plasmamen.
+  name: phoron internals tank
+  description: A tank of phoron gas designed to be internals for Plasmamen.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
   - type: Item
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
+    storedRotation: -45
+    storedOffset: 10,0
+    storedSprite:
+      state: icon
+      sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
   - type: Tag
@@ -80,10 +97,10 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 60 minutes with Plasmaman lungs
-      volume: 1.5
+      volume: 3
       moles:
         Plasma: 1.025689525
       temperature: 293.15
@@ -91,12 +108,12 @@
 - type: entity
   id: PlasmaTankFilledInternals
   parent: PlasmaTankFilled
-  name: plasma tank
+  name: phoron tank
   suffix: Filled, Plasmaman Internals
   components:
   - type: GasTank
     # 120 minutes with Plasmaman lungs
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 125.2 minutes with plasmaman lungs
       volume: 5

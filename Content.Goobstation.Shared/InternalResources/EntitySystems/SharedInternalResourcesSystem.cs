@@ -1,18 +1,18 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Alert.Events;
 using Content.Goobstation.Shared.InternalResources.Components;
 using Content.Goobstation.Shared.InternalResources.Data;
 using Content.Goobstation.Shared.InternalResources.Events;
 using Content.Shared.Alert;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Goobstation.Shared.InternalResources.EntitySystems;
-public sealed class SharedInternalResourcesSystem : EntitySystem
+public sealed partial class SharedInternalResourcesSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private readonly TimeSpan _systemUpdateRate = TimeSpan.FromSeconds(1);
     private TimeSpan _systemNextUpdate = TimeSpan.Zero;
@@ -32,7 +32,7 @@ public sealed class SharedInternalResourcesSystem : EntitySystem
     {
         foreach (var type in entity.Comp.CurrentInternalResources)
         {
-            if (_protoMan.Index(type.InternalResourcesType).AlertPrototype != args.Alert.ID)
+            if (ProtoMan.Index(type.InternalResourcesType).AlertPrototype != args.Alert.ID)
                 continue;
 
             args.CurrentValue = type.CurrentAmount;
@@ -47,7 +47,7 @@ public sealed class SharedInternalResourcesSystem : EntitySystem
     /// </summary>
     private void UpdateAppearance(Entity<InternalResourcesComponent> entity, ProtoId<InternalResourcesPrototype> protoId)
     {
-        if (!_protoMan.TryIndex(protoId, out var proto))
+        if (!ProtoMan.TryIndex(protoId, out var proto))
             return;
 
         _alertsSystem.ShowAlert(entity.Owner, proto.AlertPrototype);
@@ -105,7 +105,7 @@ public sealed class SharedInternalResourcesSystem : EntitySystem
     {
         data = null;
 
-        if (!_protoMan.TryIndex<InternalResourcesPrototype>(protoId, out var proto))
+        if (!ProtoMan.TryIndex<InternalResourcesPrototype>(protoId, out var proto))
         {
             Log.Debug($"Failed to add {protoId} internal resource type to entity {ToPrettyString(uid):uid}. Internal resource prototype does not exist.");
             return false;

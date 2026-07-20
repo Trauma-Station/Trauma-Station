@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Power.Components;
 using Content.Shared.PowerCell;
@@ -9,9 +11,9 @@ namespace Content.Trauma.Shared.Power;
 /// <summary>
 /// Allows energy gun magazines to be used as batteries for IPC power eating.
 /// </summary>
-public sealed class MagazineBatterySystem : EntitySystem
+public sealed partial class MagazineBatterySystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
 
     public override void Initialize()
     {

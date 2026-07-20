@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Wraith.Other;
 
@@ -15,10 +16,10 @@ public sealed partial class DamageOnCollideComponent : Component
     public DamageSpecifier Damage;
 
     [DataField]
-    public EntityWhitelist? IgnoreWhitelist = new();
+    public EntityWhitelist? IgnoreWhitelist;
 
     [DataField]
-    public EntityWhitelist? Whitelist = new();
+    public EntityWhitelist? Whitelist;
 
     /// <summary>
     /// If true, the damage is applied to the entity colliding with us (args.OtherEntity)

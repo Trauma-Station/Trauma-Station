@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Chat;
 using Robust.Shared.Audio.Systems;
 // </Trauma>
 using Content.Shared.Administration.Logs;
@@ -14,17 +15,17 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.Labels.EntitySystems;
 
-public abstract class SharedHandLabelerSystem : EntitySystem
+public abstract partial class SharedHandLabelerSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     // </Trauma>
-    [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly LabelSystem _labelSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] protected SharedUserInterfaceSystem UserInterfaceSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private LabelSystem _labelSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -73,6 +74,13 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             return;
         }
 
+        // <Trauma>
+        var ev = new UserMessageAttemptEvent(user, ent.Comp.AssignedLabel);
+        RaiseLocalEvent(ent, ref ev, true);
+        if (ev.Cancelled)
+            return;
+        // </Trauma>
+
         if (_netManager.IsServer)
             _labelSystem.Label(target, ent.Comp.AssignedLabel);
 
@@ -99,11 +107,12 @@ public abstract class SharedHandLabelerSystem : EntitySystem
 
     private void OnUtilityVerb(Entity<HandLabelerComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
     {
-        if (args.Target is not { Valid: true } target || _whitelistSystem.IsWhitelistFail(ent.Comp.Whitelist, target) || !args.CanAccess)
+        if (args.Target is not { Valid: true } target || !_whitelistSystem.CheckBoth(target, ent.Comp.Blacklist, ent.Comp.Whitelist) || !args.CanAccess)
             return;
 
         var user = args.User;   // can't use ref parameter in lambdas
 
+        // Don't add the Label verb if the labeler's text is blank.
         if (ent.Comp.AssignedLabel != string.Empty)
         {
             var labelVerb = new UtilityVerb()
@@ -118,23 +127,27 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             args.Verbs.Add(labelVerb);
         }
 
-        // add the unlabel verb to the menu even when the labeler has text
-        var unLabelVerb = new UtilityVerb()
+        // Add the Remove Label verb whether or not the labeler's text is blank,
+        // but only if the target is already labeled.
+        if (_labelSystem.HasLabel(target))
         {
-            Act = () =>
+            var unLabelVerb = new UtilityVerb()
             {
-                RemoveLabelFrom(ent, user, target);
-            },
-            Text = Loc.GetString("hand-labeler-remove-label-text"),
-            Priority = -1,
-        };
+                Act = () =>
+                {
+                    RemoveLabelFrom(ent, user, target);
+                },
+                Text = Loc.GetString("hand-labeler-remove-label-text"),
+                Priority = -1,
+            };
 
-        args.Verbs.Add(unLabelVerb);
+            args.Verbs.Add(unLabelVerb);
+        }
     }
 
     private void AfterInteractOn(Entity<HandLabelerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target is not { Valid: true } target || _whitelistSystem.IsWhitelistFail(ent.Comp.Whitelist, target) || !args.CanReach)
+        if (args.Target is not { Valid: true } target || !_whitelistSystem.CheckBoth(target, ent.Comp.Blacklist, ent.Comp.Whitelist) || !args.CanReach)
             return;
 
         AddLabelTo(ent, args.User, target);

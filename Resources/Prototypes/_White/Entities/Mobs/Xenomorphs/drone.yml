@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone, BaseXenoTailed ]
   id: BaseMobXenomorphDrone
   name: xenomorph drone
   description: A specialized individual designed to build and maintain a hive. Less aggressive than other xenomorph forms, but still deadly when approached.
@@ -19,23 +21,14 @@
       visible: false
   - type: Xenomorph
     caste: Drone
-  #- type: ActionGrant # Goobstation - moved to orgnas
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnWallResin
-  #  - ActionSpawnResinMembrane # no membrane its for chuds
-  #  - ActionSpawnResinNest
-  #  - ActionSpawnResinWeedNode
   - type: VentCrawler
   - type: Cuffable
-  - type: Body
-    prototype: XenomorphDrone
   # - type: GuideHelp
   #   guides:
   #   - XenomorphDrone
 
 - type: entity
-  parent: BaseMobXenomorphDrone
+  parent: [ BaseMobXenomorphDrone, BaseXenomorphGhostRole ]
   id: MobXenomorphDrone
   components:
   - type: XenomorphEvolution
@@ -43,17 +36,8 @@
     evolvesTo:
     - prototype: MobXenomorphPraetorian
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-drone-name
     description: ghost-role-information-xenomorph-drone-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
   - type: UserInterface
     interfaces:
       enum.StrippingUiKey.Key:
@@ -62,7 +46,7 @@
         type: InstrumentBoundUserInterface
         requireInputValidation: false
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphDrone]

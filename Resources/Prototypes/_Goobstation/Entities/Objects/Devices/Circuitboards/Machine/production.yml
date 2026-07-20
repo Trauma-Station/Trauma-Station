@@ -1,10 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 holorain <scratchysenior@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -23,7 +16,7 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
-  - type: Tag # Trauma
+  - type: Tag
     tags:
     - TechfabMachineBoard
     - DroneUsable
@@ -44,7 +37,7 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
-  - type: Tag # Trauma
+  - type: Tag
     tags:
     - TechfabMachineBoard
     - DroneUsable
@@ -65,7 +58,7 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
-  - type: Tag # Trauma
+  - type: Tag
     tags:
     - TechfabMachineBoard
     - DroneUsable
@@ -86,7 +79,7 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
-  - type: Tag # Trauma
+  - type: Tag
     tags:
     - TechfabMachineBoard
     - DroneUsable
@@ -136,6 +129,26 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
+
+- type: entity
+  id: EnergyChemDispenserMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: energy chem dispenser machine board
+  description: A machine printed circuit board for an energy chem dispenser.
+  components:
+    - type: Sprite
+      state: medical
+    - type: MachineBoard
+      prototype: EnergyChemDispenser
+      stackRequirements:
+        Manipulator: 1
+        Glass: 5
+        Steel: 5
+        BSCrystal: 1
+      tagRequirements:
+        GlassBeaker:
+          amount: 2
+          defaultPrototype: Beaker
 
 - type: entity
   id: TelecomTransmitterCircuitboard

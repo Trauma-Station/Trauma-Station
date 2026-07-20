@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: speechSounds
+  id: RMCPhoneSpeakSounds
+  saySound:
+    collection: RMCPhoneSpeak
+  askSound:
+    collection: RMCPhoneSpeak
+  exclaimSound:
+    collection: RMCPhoneSpeak
+
+- type: speechSounds
+  id: Morph
+  saySound:
+    path: /Audio/Effects/Fluids/glug.ogg
+  askSound:
+    path: /Audio/Effects/Fluids/glug.ogg
+  exclaimSound:
+    path: /Audio/Effects/Fluids/glug.ogg

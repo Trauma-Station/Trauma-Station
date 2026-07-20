@@ -14,11 +14,11 @@ public sealed partial class PuddleSystem
 
         SubscribeLocalEvent<SpillableComponent, LandEvent>(SpillOnLand);
         // Openable handles the event if it's closed
-        SubscribeLocalEvent<SpillableComponent, SolutionContainerOverflowEvent>(OnOverflow);
+        SubscribeLocalEvent<SpillableComponent, SolutionOverflowEvent>(OnOverflow);
         SubscribeLocalEvent<SpillableComponent, SpillDoAfterEvent>(OnDoAfter);
     }
 
-    private void OnOverflow(Entity<SpillableComponent> entity, ref SolutionContainerOverflowEvent args)
+    private void OnOverflow(Entity<SpillableComponent> entity, ref SolutionOverflowEvent args)
     {
         if (args.Handled)
             return;
@@ -32,7 +32,7 @@ public sealed partial class PuddleSystem
         if (!entity.Comp.SpillWhenThrown || Openable.IsClosed(entity.Owner))
             return;
 
-        if (TrySplashSpillAt(entity.Owner, Transform(entity).Coordinates, out _, out var solution) && args.User != null)
+        if (TrySplashSpillAt(entity.Owner, Transform(entity).Coordinates, out _, out var solution, user: args.User) && args.User != null) // Goob
         {
             AdminLogger.Add(LogType.Landed,
                 $"{ToPrettyString(entity.Owner):entity} spilled a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution} on landing");

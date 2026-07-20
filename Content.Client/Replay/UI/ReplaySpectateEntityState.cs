@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
@@ -16,9 +10,9 @@ namespace Content.Client.Replay.UI;
 /// Gameplay state when observing/spectating an entity during a replay.
 /// </summary>
 [Virtual]
-public class ReplaySpectateEntityState : GameplayState
+public partial class ReplaySpectateEntityState : GameplayState
 {
-    [Dependency] private readonly ContentReplayPlaybackManager _replayManager = default!;
+    [Dependency] private ContentReplayPlaybackManager _replayManager = default!;
 
     protected override void Startup()
     {

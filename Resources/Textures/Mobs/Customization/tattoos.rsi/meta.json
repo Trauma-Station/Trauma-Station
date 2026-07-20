@@ -16,10 +16,6 @@
       "directions": 4
     },
     {
-      "name": "tattoo_nanotrasen_chest",
-      "directions": 4
-    },
-    {
       "name": "tattoo_campbell_r_arm",
       "directions": 4
     },
@@ -57,6 +53,14 @@
     },
     {
       "name": "tattoo_eye_moth_l",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_eye_vulpkanin_r",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_eye_vulpkanin_l",
       "directions": 4
     },
     {

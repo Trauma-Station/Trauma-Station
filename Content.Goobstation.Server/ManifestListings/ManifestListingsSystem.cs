@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using System.Text;
 using Content.Shared.FixedPoint;
@@ -5,24 +7,21 @@ using Content.Goobstation.Shared.ManifestListings;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Store;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.ManifestListings;
 
-public sealed class ManifestListingsSystem : EntitySystem
+public sealed partial class ManifestListingsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    private CompName _actionName;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindComponent, ListingPurchasedEvent>(OnPurchase);
-
-        SubscribeLocalEvent<MindListingsComponent, PrependObjectivesSummaryTextEvent>(OnPrepend);
+        _actionName = Factory.CompName<ActionComponent>();
     }
 
+    [SubscribeLocalEvent]
     private void OnPurchase(Entity<MindComponent> ent, ref ListingPurchasedEvent args)
     {
         var listings = EnsureComp<MindListingsComponent>(ent);
@@ -38,6 +37,7 @@ public sealed class ManifestListingsSystem : EntitySystem
         list.Add(data);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrepend(Entity<MindListingsComponent> ent, ref PrependObjectivesSummaryTextEvent args)
     {
         var sb = new StringBuilder();
@@ -47,7 +47,7 @@ public sealed class ManifestListingsSystem : EntitySystem
         foreach (var list in ent.Comp.Listings.Values)
         {
             var storeSb = new StringBuilder();
-            HashSet<string> ignoredIds = new();
+            Dictionary<string, ListingDataWithCostModifiers> ignoredIds = new();
             // Data id -> amount purchased (needed for action upgrades)
             Dictionary<string, int> info = new();
             foreach (var data in list)
@@ -61,44 +61,44 @@ public sealed class ManifestListingsSystem : EntitySystem
                 if (data.ProductUpgradeId == null)
                     continue;
 
-                ignoredIds.Add(data.ProductUpgradeId);
                 var upgrade = list.FirstOrDefault(x => x.ID == data.ProductUpgradeId);
                 if (upgrade != null)
                 {
+                    // This assumes each upgrade corresponds to a single listing
+                    ignoredIds[data.ProductUpgradeId] = upgrade;
                     info[data.ID] += upgrade.PurchaseAmount;
                 }
             }
 
             foreach (var (dataId, count) in info)
             {
-                if (ignoredIds.Contains(dataId))
+                if (ignoredIds.ContainsKey(dataId))
                     continue;
 
                 var data = list.FirstOrDefault(x => x.ID == dataId);
                 if (data == null)
                     continue;
 
-                Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> cost = new();
-                var costMultiplier = count;
+                Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> totalCost = new();
 
-                if (data.SaleCost != null)
+                foreach (var cost in data.PurchaseCostHistory)
                 {
-                    var salePurchases = Math.Min(data.SaleLimit, count);
-                    foreach (var (currency, amount) in data.SaleCost)
+                    foreach (var (currency, amount) in cost)
                     {
-                        if (!cost.TryAdd(currency, amount * salePurchases))
-                            cost[currency] += amount * salePurchases;
+                        if (!totalCost.TryAdd(currency, amount))
+                            totalCost[currency] += amount;
                     }
-
-                    costMultiplier -= salePurchases;
                 }
 
-                if (costMultiplier != 0)
+                if (data.ProductUpgradeId != null && ignoredIds.TryGetValue(data.ProductUpgradeId, out var upgrade))
                 {
-                    foreach (var (currency, amount) in data.Cost)
+                    foreach (var cost in upgrade.PurchaseCostHistory)
                     {
-                        if (!cost.TryAdd(currency, amount * costMultiplier))
-                            cost[currency] += amount * costMultiplier;
+                        foreach (var (currency, amount) in cost)
+                        {
+                            if (!totalCost.TryAdd(currency, amount))
+                                totalCost[currency] += amount;
+                        }
                     }
                 }
 
@@ -141,13 +141,13 @@ public sealed class ManifestListingsSystem : EntitySystem
                 else
                 {
                     if (data.ProductEntity != null)
-                        name = Loc.GetString(_proto.Index(data.ProductEntity.Value).Name);
+                        name = Loc.GetString(ProtoMan.Index(data.ProductEntity.Value).Name);
                     else if (data.ProductAction != null)
-                        name = Loc.GetString(_proto.Index(data.ProductAction.Value).Name);
+                        name = Loc.GetString(ProtoMan.Index(data.ProductAction.Value).Name);
                 }
 
                 var costSb = new StringBuilder();
-                foreach (var (currencyId, amount) in cost)
+                foreach (var (currencyId, amount) in totalCost)
                 {
                     if (!totalSpent.TryAdd(currencyId, amount))
                         totalSpent[currencyId] += amount;
@@ -155,7 +155,7 @@ public sealed class ManifestListingsSystem : EntitySystem
                     if (costSb.Length > 0)
                         costSb.Append(", ");
 
-                    var currency = _proto.Index(currencyId);
+                    var currency = ProtoMan.Index(currencyId);
                     costSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
                 }
 
@@ -182,7 +182,7 @@ public sealed class ManifestListingsSystem : EntitySystem
             if (totalSpentSb.Length > 0)
                 totalSpentSb.Append(", ");
 
-            var currency = _proto.Index(currencyId);
+            var currency = ProtoMan.Index(currencyId);
             totalSpentSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
         }
 
@@ -197,7 +197,8 @@ public sealed class ManifestListingsSystem : EntitySystem
         sprite = "";
         state = "";
 
-        if (!_proto.Index(proto).TryGetComponent("Action", out ActionComponent? actionComp) || actionComp.Icon == null)
+        // TODO: change to appearance data
+        if (!ProtoMan.Index(proto).TryComp<ActionComponent>(_actionName, out var actionComp) || actionComp.Icon == null)
             return false;
 
         switch (actionComp.Icon)

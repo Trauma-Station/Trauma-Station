@@ -1,16 +1,25 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Blob.Components;
+using Content.Shared.EntityEffects;
+using Content.Shared.Weapons.Melee.Events;
+using System.Linq;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract class SharedBlobbernautSystem : EntitySystem
+public abstract partial class SharedBlobbernautSystem : EntitySystem
 {
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
+    [SubscribeLocalEvent]
+    private void OnMeleeHit(Entity<BlobbernautComponent> ent, ref MeleeHitEvent args)
+    {
+        if (args.HitEntities.Count < 1)
+            return;
+
+        var chem = ProtoMan.Index(ent.Comp.CurrentChem);
+        var target = args.HitEntities.FirstOrDefault();
+        if (chem.AttackEffects is { } effects)
+            _effects.ApplyEffects(target, effects, scale: ent.Comp.AttackEffectsScale, user: args.User);
+    }
 }

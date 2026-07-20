@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ImWeax <59857479+ImWeax@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Implants.Components;
@@ -14,11 +9,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Implants.Systems;
 
-public sealed class NutrimentPumpImplantSystem : EntitySystem
+public sealed partial class NutrimentPumpImplantSystem : EntitySystem
 {
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly ThirstSystem _thirst = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private ThirstSystem _thirst = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Update(float frameTime)
     {

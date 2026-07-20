@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: jobIcon
@@ -31,27 +26,11 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBlueshield
-  icon:
-    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
-    state: blueshield
-  jobName: job-name-bs
-
-- type: jobIcon
-  parent: JobIcon
   id: JobIconRadioHost
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: radiohost
   jobName: job-name-radiohost
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconNanotrasenTrainer
-  icon:
-    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
-    state: trainer
-  jobName: job-name-nct
 
 - type: jobIcon
   parent: JobIcon

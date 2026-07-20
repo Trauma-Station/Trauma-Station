@@ -1,0 +1,674 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: GaussRifleGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - tag: RifleStock
+        icon:
+          sprite: Objects/Misc/rifle_stock.rsi
+          state: icon
+        name: construction-graph-tag-rifle-stock
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussRifle1
+    edges:
+    - to: 2
+      steps:
+      - tag: ModularReceiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+        name: construction-graph-tag-modular-receiver
+        doAfter: 0.5
+
+  - node: 2
+    entity: CraftingGaussRifle2
+    edges:
+    - to: 3
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 3
+    entity: CraftingGaussRifle3
+    edges:
+    - to: 4
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: construction-graph-tag-pipe
+        doAfter: 0.5
+
+  - node: 4
+    entity: CraftingGaussRifle4
+    edges:
+    - to: 5
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 5
+    entity: CraftingGaussRifle5
+    edges:
+    - to: 6
+      steps:
+      - tool: Welding
+        doAfter: 1
+      - material: CableHV
+        amount: 10
+        doAfter: 0.5
+      - tag: RechargingBoard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        name: construction-graph-tag-recharging-board
+        doAfter: 0.5
+
+  - node: 6
+    entity: CraftingGaussRifle6
+    edges:
+    - to: 7
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 7
+    entity: CraftingGaussRifle7
+    edges:
+    - to: 8
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 8
+    entity: CraftingGaussRifle8
+    edges:
+    - to: 9
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 9
+    entity: CraftingGaussRifle9
+    edges:
+    - to: 10
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Cable
+        amount: 1
+        doAfter: 0.5
+
+  - node: 10
+    entity: CraftingGaussRifle10
+    edges:
+    - to: 11
+      steps:
+      - material: CableMV
+        amount: 1
+        doAfter: 0.5
+
+  - node: 11
+    entity: CraftingGaussRifle11
+    edges:
+    - to: finish
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: finish
+    entity: WeaponGaussgunImprov
+
+
+# Pistol
+
+- type: constructionGraph
+  id: GaussPistolGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - tag: RifleStock
+        icon:
+          sprite: Objects/Misc/rifle_stock.rsi
+          state: icon
+        name: construction-graph-tag-rifle-stock
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussPistol1
+    edges:
+    - to: 2
+      steps:
+      - tag: ModularReceiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+        name: construction-graph-tag-modular-receiver
+        doAfter: 0.5
+
+  - node: 2
+    entity: CraftingGaussPistol2
+    edges:
+    - to: 3
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 3
+    entity: CraftingGaussPistol3
+    edges:
+    - to: 4
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: construction-graph-tag-pipe
+        doAfter: 0.5
+
+  - node: 4
+    entity: CraftingGaussPistol4
+    edges:
+    - to: 5
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 5
+    entity: CraftingGaussPistol5
+    edges:
+    - to: 6
+      steps:
+      - tool: Welding
+        doAfter: 1
+      - material: CableHV
+        amount: 3
+        doAfter: 0.5
+      - tag: RechargingBoard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        name: construction-graph-tag-recharging-board
+        doAfter: 0.5
+
+  - node: 6
+    entity: CraftingGaussPistol6
+    edges:
+    - to: 7
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 7
+    entity: CraftingGaussPistol7
+    edges:
+    - to: 8
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 8
+    entity: CraftingGaussPistol8
+    edges:
+    - to: 9
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Cable
+        amount: 1
+        doAfter: 0.5
+
+  - node: 9
+    entity: CraftingGaussPistol9
+    edges:
+    - to: 10
+      steps:
+      - material: CableMV
+        amount: 1
+        doAfter: 0.5
+
+  - node: 10
+    entity: CraftingGaussPistol10
+    edges:
+    - to: finish
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: finish
+    entity: WeaponGaussgunPistol
+
+# Magazine
+
+- type: constructionGraph
+  id: GaussImprovMagazineGraph
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - tag: MetalContainer
+        icon:
+          sprite: Objects/Consumable/Drinks/mug_metal.rsi
+          state: icon
+        name: construction-graph-tag-part-metal-container
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussMagazineImprov
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 3
+
+  - node: finish
+    entity: MagazineGaussgunImprov
+
+# Ammo
+
+- type: constructionGraph
+  id: GaussImprovAmmoGraph
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - material: MetalRod
+        amount: 1
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussAmmoImprov
+    edges:
+    - to: finish
+      steps:
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      completed:
+      - !type:SpawnPrototype
+        prototype: CartridgeBallBearing
+        amount: 7
+
+  - node: finish
+    entity: CartridgeBallBearing
+
+# NailBoard
+
+- type: constructionGraph
+  id: NailBoard
+  start: start
+  graph:
+
+    - node: start
+      edges:
+        - to: incompleteBoard
+          steps:
+          - material: WoodPlank
+            amount: 1
+
+    - node: incompleteBoard
+      entity: NailBoardUnfinished
+      edges:
+        - to: finish
+          steps:
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+
+    - node: finish
+      entity: NailBoardWeapon
+
+# Spear bomb
+
+- type: constructionGraph
+  id: IEDSpear
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: Spear
+        name: construction-graph-tag-any-spear
+        icon:
+          sprite: Objects/Weapons/Melee/spear.rsi
+          state: spear
+      - material: Cable
+        amount: 5
+        doAfter: 3
+      - tag: Firebomb
+        name: construction-graph-tag-firebomb
+        icon:
+          sprite: Objects/Weapons/Bombs/ied.rsi
+          state: base
+  - node: finish
+    entity: SpearIED
+
+- type: constructionGraph
+  id: PipebombSpear
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: Spear
+        name: construction-graph-tag-any-spear
+        icon:
+          sprite: Objects/Weapons/Melee/spear.rsi
+          state: spear
+      - material: Cable
+        amount: 5
+        doAfter: 3
+      - tag: Pipebomb
+        name: construction-graph-tag-pipebomb
+        icon:
+          sprite: Objects/Weapons/Bombs/pipebomb.rsi
+          state: base
+  - node: finish
+    entity: SpearPipebomb
+
+# Pipe Shank
+
+- type: constructionGraph
+  id: PipeShank
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: construction-graph-tag-pipe
+        doAfter: 1
+
+  - node: unfinished
+    entity: PipeSpearUnfinished
+    edges:
+    - to: finish
+      steps:
+      - tool: Sharpening
+        doAfter: 3
+
+  - node: finish
+    entity: PipeSpear
+
+# Wooden Sword
+
+- type: constructionGraph
+  id: WoodenSword
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: uncarved
+      steps:
+      - material: WoodPlank
+        amount: 5
+        doAfter: 4
+  - node: uncarved
+    entity: IncompleteWoodenSword
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 4
+  - node: finish
+    entity: SwordWood
+
+- type: constructionGraph
+  id: NailSword
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - tag: WoodenSword
+        name: construction-graph-tag-woodensword
+        icon:
+          sprite: _Trauma/Objects/Weapons/Melee/sword_wooden.rsi
+          state: icon
+
+  - node: unfinished
+    entity: SwordNailUnfinished
+    edges:
+    - to: finish
+      steps:
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 0.5
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 0.5
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 0.5
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 0.5
+      - tag: Nail
+        name: construction-graph-tag-nail
+        icon:
+          sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+          state: icon
+      - tool: Hammering
+        doAfter: 0.5
+
+  - node: finish
+    entity: SwordNail
+
+- type: constructionGraph
+  id: ScrapSword
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - tag: WoodenSword
+        name: construction-graph-tag-woodensword
+        icon:
+          sprite: _Trauma/Objects/Weapons/Melee/sword_wooden.rsi
+          state: icon
+
+  - node: unfinished
+    entity: SwordScrapUnfinished
+    edges:
+    - to: finish
+      steps:
+      - material: Steel
+      - tool: Hammering
+        doAfter: 1
+      - material: HexNut
+      - material: Screw
+      - tool: Sharpening
+        doAfter: 3
+      - material: Steel
+      - tool: Hammering
+        doAfter: 1
+      - material: HexNut
+      - material: Screw
+      - tool: Sharpening
+        doAfter: 3
+      - material: Steel
+      - tool: Hammering
+        doAfter: 1
+      - material: HexNut
+      - material: Screw
+      - tool: Sharpening
+        doAfter: 3
+
+  - node: finish
+    entity: SwordScrap
+
+# Welded Sword
+
+- type: constructionGraph
+  id: WeldedSword
+  start: start
+  graph:
+  - node: start
+    edges:
+
+    - to: unfinished
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 4
+
+  - node: unfinished
+    entity: SwordWeldedUnfinished
+    edges:
+    - to: finish
+      steps:
+      - tool: Welding
+        doAfter: 5
+      - tool: Welding
+        doAfter: 5
+      - tool: Sharpening
+        doAfter: 5
+
+  - node: finish
+    entity: SwordWelded
+
+# Barbcuffs
+
+- type: constructionGraph
+  id: BarbCuffs
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: BarbedWire
+        amount: 2
+        doAfter: 3
+
+  - node: finish
+    entity: BarbHandcuffs

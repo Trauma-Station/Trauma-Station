@@ -1,21 +1,22 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Speech;
 using Content.Goobstation.Shared.Loudspeaker.Components;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Speech;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Loudspeaker.Systems;
 
-public sealed class LoudSpeakerSystem : EntitySystem
+public sealed partial class LoudSpeakerSystem : EntitySystem
 {
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -27,8 +28,8 @@ public sealed class LoudSpeakerSystem : EntitySystem
         SubscribeLocalEvent<LoudspeakerComponent, GotEquippedHandEvent>(OnEquippedHands);
         SubscribeLocalEvent<LoudspeakerComponent, GotUnequippedHandEvent>(OnUnequippedHands);
 
-        SubscribeLocalEvent<LoudspeakerHolderComponent, GetLoudspeakerEvent>(GetLoudSpeakers);
-        SubscribeLocalEvent<LoudspeakerComponent, GetLoudspeakerDataEvent>(OnGetLoudspeakerData);
+        SubscribeLocalEvent<LoudspeakerHolderComponent, SpeechFontSizeOverrideEvent>(OnGetLoudspeakerHolder);
+        SubscribeLocalEvent<LoudspeakerComponent, SpeechFontSizeOverrideEvent>(OnGetLoudspeakerData);
         SubscribeLocalEvent<LoudspeakerHolderComponent, GetSpeechSoundEvent>(OnGetSpeechSound);
 
         SubscribeLocalEvent<LoudspeakerComponent, ExaminedEvent>(OnExamined);
@@ -41,17 +42,17 @@ public sealed class LoudSpeakerSystem : EntitySystem
         if (!args.SlotFlags.HasFlag(comp.RequiredSlot))
             return;
 
-        EnsureComp<LoudspeakerHolderComponent>(args.Equipee).Loudspeakers.Add(uid);
+        EnsureComp<LoudspeakerHolderComponent>(args.EquipTarget).Loudspeakers.Add(uid);
     }
 
     private void OnUnequipped(EntityUid uid, LoudspeakerComponent comp, GotUnequippedEvent args)
     {
-        if (!TryComp<LoudspeakerHolderComponent>(args.Equipee, out var holder))
+        if (!TryComp<LoudspeakerHolderComponent>(args.EquipTarget, out var holder))
             return;
 
         holder.Loudspeakers.Remove(uid);
 
-        DoRemovalCheck(args.Equipee, holder);
+        DoRemovalCheck(args.EquipTarget, holder);
     }
 
     private void OnEquippedHands(EntityUid uid, LoudspeakerComponent comp, GotEquippedHandEvent args)
@@ -72,12 +73,25 @@ public sealed class LoudSpeakerSystem : EntitySystem
         DoRemovalCheck(args.User, holder);
     }
 
-    private void GetLoudSpeakers(Entity<LoudspeakerHolderComponent> ent, ref GetLoudspeakerEvent args)
+    private void OnGetLoudspeakerHolder(Entity<LoudspeakerHolderComponent> ent, ref SpeechFontSizeOverrideEvent args)
     {
-        args.Loudspeakers = ent.Comp.Loudspeakers;
+        foreach (var loudspeaker in ent.Comp.Loudspeakers)
+        {
+            var speechEv = new SpeechFontSizeOverrideEvent();
+            RaiseLocalEvent(loudspeaker, ref speechEv);
+            if (speechEv.IsActive)
+            {
+                args.IsActive = true;
+                args.FontSize = speechEv.FontSize;
+                args.AffectRadio = speechEv.AffectRadio;
+                args.AffectChat = speechEv.AffectChat;
+                args.SpeechSounds = speechEv.SpeechSounds;
+                return;
+            }
+        }
     }
 
-    private void OnGetLoudspeakerData(Entity<LoudspeakerComponent> ent, ref GetLoudspeakerDataEvent args)
+    private void OnGetLoudspeakerData(Entity<LoudspeakerComponent> ent, ref SpeechFontSizeOverrideEvent args)
     {
         args.IsActive = ent.Comp.IsActive;
 
@@ -89,18 +103,16 @@ public sealed class LoudSpeakerSystem : EntitySystem
 
     private void OnGetSpeechSound(Entity<LoudspeakerHolderComponent> ent, ref GetSpeechSoundEvent args)
     {
+        if (args.Handled)
+            return;
 
-        foreach (var loudspeaker in ent.Comp.Loudspeakers)
+        var ev = new SpeechFontSizeOverrideEvent();
+        RaiseLocalEvent(ent, ref ev);
+
+        if (ev.SpeechSounds is { })
         {
-            var speechEv = new GetLoudspeakerDataEvent();
-            RaiseLocalEvent(loudspeaker, ref speechEv);
-
-            if (speechEv.SpeechSounds != null)
-            {
-                args.SpeechSoundProtoId = speechEv.SpeechSounds;
-                return;
-            }
-
+            args.SpeechSoundProtoId = ev.SpeechSounds;
+            args.Handled = true;
         }
     }
 
@@ -154,7 +166,7 @@ public sealed class LoudSpeakerSystem : EntitySystem
         var state = !loudspeaker.Comp.IsActive ? "on" : "off";
 
         _audio.PlayPredicted(loudspeaker.Comp.ToggleSound, user, user);
-        _popup.PopupClient(Loc.GetString("loudspeaker-toggle-popup", ("state", state)), user, user);
+        _popup.PopupEntity(Loc.GetString("loudspeaker-toggle-popup", ("state", state)), user, user);
     }
 
     #endregion

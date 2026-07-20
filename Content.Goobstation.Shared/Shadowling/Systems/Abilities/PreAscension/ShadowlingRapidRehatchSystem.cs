@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling;
@@ -19,15 +15,15 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
 /// <summary>
 /// This handles Rapid Re-Hatch logic. An ability that heals all wounds and status effects.
 /// </summary>
-public sealed class ShadowlingRapidRehatchSystem : EntitySystem
+public sealed partial class ShadowlingRapidRehatchSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -77,7 +73,7 @@ public sealed class ShadowlingRapidRehatchSystem : EntitySystem
             || args.Handled)
             return;
 
-        _popup.PopupPredicted(Loc.GetString("shadowling-rapid-rehatch-complete"), uid, uid, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("shadowling-rapid-rehatch-complete"), uid, uid, PopupType.Medium);
         _rejuvenate.PerformRejuvenate(uid);
 
         var effectEnt = Spawn(comp.RapidRehatchEffect, _transform.GetMapCoordinates(uid));

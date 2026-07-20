@@ -11,8 +11,6 @@ namespace Content.Server.Magic;
 
 public sealed class MagicSystem : SharedMagicSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-
     public override void Initialize()
     {
         base.Initialize();

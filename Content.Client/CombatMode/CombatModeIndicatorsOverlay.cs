@@ -1,13 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Artjom <artjombebenin@gmail.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 I.K <45953835+notquitehadouken@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Trauma.Common.CombatMode; // Trauma
 using System.Numerics;
 using Content.Client.Hands.Systems;
 using Content.Shared.Weapons.Ranged.Components;
@@ -26,7 +17,7 @@ namespace Content.Client.CombatMode;
 ///   while for all other types of weapons and items in hand, as well as for an empty hand,
 ///   a crosshair of a different type is displayed. These crosshairs simply show the state of combat mode (on|off).
 /// </summary>
-public sealed class CombatModeIndicatorsOverlay : Overlay
+public sealed partial class CombatModeIndicatorsOverlay : Overlay // Trauma - added partial
 {
     private readonly IInputManager _inputManager;
     private readonly IEntityManager _entMan;
@@ -47,11 +38,13 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     public CombatModeIndicatorsOverlay(IInputManager input, IEntityManager entMan,
             IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands)
     {
+        IoCManager.InjectDependencies(this); // Trauma
         _inputManager = input;
         _entMan = entMan;
         _eye = eye;
         _combat = combatSys;
         _hands = hands;
+        _sprite = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>(); // Trauma
 
         var spriteSys = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _gunSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
@@ -89,6 +82,15 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
         var limitedScale = uiScale > 1.25f ? 1.25f : uiScale;
 
         var sight = isHandGunItem ? (isGunBolted ? _gunSight : _gunBoltSight) : _meleeSight;
+        // <Trauma>
+        if (_player.LocalEntity is { } player)
+        {
+            var ev = new GetCombatModeCursorEvent();
+            _entMan.EventBus.RaiseLocalEvent(player, ref ev);
+            if (ev.Sprite is { } sprite)
+                sight = _sprite.Frame0(sprite);
+        }
+        // </Trauma>
         DrawSight(sight, args.ScreenHandle, mousePos, limitedScale * Scale);
     }
 

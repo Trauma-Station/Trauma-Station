@@ -1,8 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -76,6 +76,7 @@ public sealed partial class LightDetectionDamageComponent : Component
             ["Blunt"] = -10,
             ["Slash"] = -10,
             ["Piercing"] = -10,
+            ["Ballistic"] = -10,
             ["Heat"] = -10,
             ["Cold"] = -10,
             ["Shock"] = -10,

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -12,7 +6,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SetSelector;
 
@@ -20,16 +13,15 @@ namespace Content.Goobstation.Shared.SetSelector;
 /// <see cref="SetSelectorComponent"/>
 /// this system links the interface to the logic, and will spawn sets selected by the player in the interface
 /// </summary>
-public sealed class SetSelectorSystem : EntitySystem
+public sealed partial class SetSelectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -76,7 +68,7 @@ public sealed class SetSelectorSystem : EntitySystem
 
         foreach (var setIndex in selector.Comp.SelectedSets)
         {
-            var set = _proto.Index(selector.Comp.AvailableSets[setIndex]);
+            var set = ProtoMan.Index(selector.Comp.AvailableSets[setIndex]);
 
             // Spawn guaranteed content
             spawnedEntities.AddRange(set.Content.Select(item => Spawn(item, coordinates)));
@@ -84,7 +76,7 @@ public sealed class SetSelectorSystem : EntitySystem
             // Spawn from entity tables
             foreach (var tableId in set.Tables)
             {
-                var tablePrototype = _proto.Index(tableId);
+                var tablePrototype = ProtoMan.Index(tableId);
                 var tableSpawns = _entityTable.GetSpawns(tablePrototype.Table);
                 spawnedEntities.AddRange(tableSpawns.Select(spawn => Spawn(spawn, coordinates)));
             }
@@ -143,7 +135,7 @@ public sealed class SetSelectorSystem : EntitySystem
 
         for (var i = 0; i < component.AvailableSets.Count; i++)
         {
-            var set = _proto.Index(component.AvailableSets[i]);
+            var set = ProtoMan.Index(component.AvailableSets[i]);
             var selected = component.SelectedSets.Contains(i);
             var info = new SelectableSetInfo(
                 set.Name,

@@ -1,24 +1,24 @@
-// SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.ServerCurrency;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
+using System.Threading.Tasks;
 
 namespace Content.Goobstation.Client.ServerCurrency;
 
-public sealed class ClientCurrencyManager : ICommonCurrencyManager, IEntityEventSubscriber, IPostInjectInit
+public sealed partial class ClientCurrencyManager : ICommonCurrencyManager, IEntityEventSubscriber, IPostInjectInit
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPlayerManager _playMan = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPlayerManager _playMan = default!;
 
     private static int _cachedBalance = -1;
     public event Action? ClientBalanceChange;
+    // supposedly this is needed to implement the interface, so...
+    #pragma warning disable CS0067
     public event Action<PlayerBalanceChangeEvent>? BalanceChange;
+    #pragma warning restore CS0067
 
     public void PostInject()
     {
@@ -96,4 +96,8 @@ public sealed class ClientCurrencyManager : ICommonCurrencyManager, IEntityEvent
         return _cachedBalance;
     }
 
+    public Task Wipe()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Jajsha <101492056+Zap527@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -37,7 +29,7 @@ public sealed partial class SiliconLawset
         var laws = new List<string>(Laws.Count);
         foreach (var law in Laws)
         {
-            laws.Add($"{law.Order}: {Loc.GetString(law.LawString)}");
+            laws.Add($"{law.Order}: {(Loc.TryGetString(law.LawString, out var line) ? line : law.LawString)}"); // Trauma - use Loc.TryGetString, it might be loc from prototype or already localized
         }
 
         return string.Join(" / ", laws);

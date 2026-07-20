@@ -1,13 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Animals.Components;
 using Content.Shared.Actions;
+
+namespace Content.Trauma.Server.Animals;
 
 /// <summary>
 /// Removes egg laying action when <see cref="EggLayerComponent"/> is removed from an entity.
 /// </summary>
-public sealed class TraumaEggLayerSystem : EntitySystem
+public sealed partial class TraumaEggLayerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

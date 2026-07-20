@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  name: malign barrier
+  parent: [ BaseRepairableShield, BaseCosmicContraband ]
+  id: CosmicCultShield
+  description: A heavy shield wrought of constantly shifting malign plating, it appears to slightly bend reality to protect it's user.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Objects/shield.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        shader: unshaded
+  - type: Item
+    sprite: _DV/CosmicCult/Objects/shield.rsi
+    heldPrefix: null
+    size: Ginormous
+  - type: CosmicEquipment
+  - type: PassiveDamage
+    damage:
+      types: # .25 per second per type
+        Blunt: -0.25
+        Slash: -0.25
+        Piercing: -0.25
+        Ballistic: -0.25
+        Heat: -0.25
+        Cold: -0.25
+        Shock: -0.25
+        Caustic: -0.25
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 300 # Overkill threshold
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 200
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging
+  - type: Parry
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.125
+    reflectMinSkill: 25
+    soundOnReflect:
+      path: /Audio/Weapons/Guns/Hits/ric4.ogg
+      params:
+        variation: 0.2
+        volume: -11
+    reflectSpread: 300
+    reflects:
+    - NonEnergy
+    - Energy
+    soundOnParry:
+      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: FlashSoundSuppression
+    protectionRange: 1
+  - type: MeleeThrowOnHit
+    distance: 1

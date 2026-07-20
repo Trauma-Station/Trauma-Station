@@ -1,9 +1,23 @@
 - type: entity
   name: stun prod
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [BaseItem, BaseMinorContraband, BracingDurabilityWeak] # Trauma - durability
   id: Stunprod
   description: A stun prod for illegal incapacitation.
   components:
+  # <Trauma>
+  - type: DelayedKnockdownOnHit
+    useDelay: stunbaton
+  - type: UseDelayBlockMelee
+    delays:
+    - stunbaton
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Plastic: 25
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunprod.rsi
     layers:
@@ -28,24 +42,21 @@
         Shock: 5
   - type: Stunbaton
     energyPerUse: 120
-  - type: MeleeWeapon # goob edited
-    angle: 0
+  - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
         Blunt: 9
+    angle: 0 # Trauma - was 60, git gud
     animation: WeaponArcThrust
-  - type: StaminaDamageOnHit # goob edited
-    damage: 15
+  - type: StaminaDamageOnHit
+    lightAttackDamageMultiplier: 4 # Trauma
+    damage: 15 # Trauma - was 35, more overtime damage instead
     overtime: 40
-    lightAttackDamageMultiplier: 4
-    lightAttackOvertimeDamageMultiplier: 0
     sound: /Audio/Weapons/egloves.ogg
-  - type: DelayedKnockdownOnHit # Goobstation
-    useDelay: stunbaton
-  - type: UseDelayBlockMelee # Goobstation
-    delays:
-    - stunbaton
+  #- type: StaminaDamageOnCollide # Trauma - throwing batongs being guaranteed stun is dogshit
+  #  damage: 35
+  #  sound: /Audio/Weapons/egloves.ogg
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 360
@@ -56,7 +67,11 @@
         length: 2.5
   - type: Item
     heldPrefix: off
-    size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # </Trauma>
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunprod.rsi
     quickEquip: false

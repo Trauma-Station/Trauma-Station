@@ -1,12 +1,6 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Xenobiology.Components;
 
@@ -16,21 +10,15 @@ namespace Content.Goobstation.Shared.Xenobiology.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SlimeDamageOvertimeComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid? SourceEntityUid;
-
     [DataField]
-    public TimeSpan Interval = TimeSpan.FromSeconds(1);
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public TimeSpan NextTickTime = TimeSpan.Zero;
+    public EntityUid? SourceEntityUid;
 
     [DataField]
     public DamageSpecifier Damage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
-            { "Caustic", 2.5 },
-        },
+            { "Caustic", 2.5 }
+        }
     };
 }

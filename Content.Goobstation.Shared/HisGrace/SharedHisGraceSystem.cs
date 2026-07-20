@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Item;
@@ -10,8 +7,8 @@ namespace Content.Goobstation.Shared.HisGrace;
 
 public abstract partial class SharedHisGraceSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = null!;
-    [Dependency] private readonly SharedItemSystem _item = null!;
+    [Dependency] private SharedAppearanceSystem _appearance = null!;
+    [Dependency] private SharedItemSystem _item = null!;
 
     protected virtual void VisualsChanged(Entity<HisGraceComponent> ent, string key)
     {

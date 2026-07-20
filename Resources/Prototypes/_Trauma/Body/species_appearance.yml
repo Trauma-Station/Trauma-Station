@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  save: false
+  parent: BaseSpeciesAppearanceOrganless
+  id: BaseSpeciesAppearance
+  components:
+  - type: NeedsTongue # almost all humanoids need to have a tongue to speak
+  - type: EatingNeedsOrgan # need a mouth/head to eat

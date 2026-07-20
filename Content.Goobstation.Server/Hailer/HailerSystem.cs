@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nikita Rαmses Abdoelrahman <ramses@starwolves.io>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Hailer;
@@ -21,13 +13,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Hailer;
 
-public sealed class HailerSystem : EntitySystem
+public sealed partial class HailerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -40,14 +32,14 @@ public sealed class HailerSystem : EntitySystem
     {
         if (args.SlotFlags == SlotFlags.MASK)
         {
-            _actionsSystem.AddAction(args.Equipee, ref component.HailActionEntity, component.HailerAction, args.Equipee);
+            _actionsSystem.AddAction(args.EquipTarget, ref component.HailActionEntity, component.HailerAction, args.EquipTarget);
         }
     }
     private void OnGotUnequipped(EntityUid uid, HailerComponent component, GotUnequippedEvent args)
     {
         if (args.SlotFlags == SlotFlags.MASK)
         {
-            _actionsSystem.RemoveAction(args.Equipee, component.HailActionEntity);
+            _actionsSystem.RemoveAction(args.EquipTarget, component.HailActionEntity);
         }
     }
     string[] _sounds = [

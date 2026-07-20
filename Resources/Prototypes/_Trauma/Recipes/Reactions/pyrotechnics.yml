@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reaction
   id: Methanol
   reactants:
@@ -38,7 +40,7 @@
     WeldingFuel:
       amount: 1
   products:
-    AmmoniumNitrateFuelOil: 2
+    AmmoniumNitrateFuelOil: 3
 
 - type: reaction
   id: Octogen

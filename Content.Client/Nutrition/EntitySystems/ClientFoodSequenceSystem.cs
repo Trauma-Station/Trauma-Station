@@ -8,10 +8,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Nutrition.EntitySystems;
 
-public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
+public sealed partial class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!; // Goob
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -40,17 +39,22 @@ public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 
         //Add new layers
         // <Trauma> change it to regular for loop so it can modify layer sprite which is a struct
-        for (int counter = 0; counter < start.Comp.FoodLayers.Count;)
+        for (int counter = 0; counter < start.Comp.FoodLayers.Count; counter++)
         {
             var state = start.Comp.FoodLayers[counter];
             // </Trauma>
-            if (state.Sprite is null && state.EntProto != null && _proto.Resolve(state.EntProto, out var prototype)) // Goobstation - anythingburgers HOLY FUCK THIS IS SO BAD!!! BUT IT WORKS!!
+            if (state.Sprite is null && state.EntProto != null && ProtoMan.Resolve(state.EntProto, out var prototype)) // Goobstation - anythingburgers HOLY FUCK THIS IS SO BAD!!! BUT IT WORKS!!
             {
                 if (prototype.TryGetComponent<SpriteComponent>(out var spriteComp))
                 {
                     var rsiPath = spriteComp.BaseRSI?.Path.ToString();
                     if (rsiPath == null)
+                    // <Trauma> - this is a programmer error, log it instead of silently ignoring it
+                    {
+                        Log.Error($"Prototype {prototype.Name} ({prototype.ID}) had no sprite path!");
                         continue;
+                    }
+                    // </Trauma>
                     var layercount = 0;
                     foreach (var layer in spriteComp.AllLayers)
                     {
@@ -80,7 +84,7 @@ public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 
                     }
                 }
-                counter++;
+                //counter++; // Trauma - use for loop instead
                 continue;
             }
 

@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Access.Systems;
 using Content.Shared.Trigger;
 
 namespace Content.Trauma.Shared.Trigger.Conditions;
 
-public sealed class AccessTriggerConditionSystem : EntitySystem
+public sealed partial class AccessTriggerConditionSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
 
     public override void Initialize()
     {

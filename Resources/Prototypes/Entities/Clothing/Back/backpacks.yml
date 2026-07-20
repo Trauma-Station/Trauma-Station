@@ -371,7 +371,7 @@
     deleteOnDrop: false
 
 - type: entity
-  parent: ClothingBackpack
+  parent: [ ClothingBackpack, BaseBatteryShock ] # Trauma - add BaseBatteryShock
   id: ClothingBackpackElectropack
   name: electropack
   suffix: SelfUnremovable

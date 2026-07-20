@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Xenomorph
 
 - type: infectionIcon
@@ -9,6 +11,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_0
@@ -22,6 +25,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_1
@@ -35,6 +39,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_2
@@ -48,6 +53,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_3
@@ -61,6 +67,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_4
@@ -74,6 +81,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_5
@@ -87,6 +95,7 @@
   showTo:
     components:
     - Xenomorph
+    - LarvaInfestationVision
   icon:
     sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_6

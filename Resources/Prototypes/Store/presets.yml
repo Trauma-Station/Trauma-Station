@@ -16,18 +16,13 @@
     - UplinkWearables
     - UplinkJob
     - UplinkPointless
-    - UplinkSales # WD EDIT
+    - UplinkObjective
     currencyWhitelist:
     - Telecrystal
     balance:
       Telecrystal: 0
-    sales: # WD EDIT
-      enabled: true
-      minMultiplier: 0.2
-      maxMultiplier: 0.8
-      minItems: 4
-      maxItems: 8
-      salesCategory: UplinkSales
+    expectedFaction:
+    - Syndicate
 
 - type: entity
   id: StorePresetSpellbook
@@ -46,3 +41,23 @@
     - SpellbookBundles      #Goobstation
     currencyWhitelist:
     - WizCoin
+    expectedFaction:
+    - Wizard
+
+- type: entity
+  id: StorePresetChangeling
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-changeling
+    categories:
+    - ChangelingAbilities
+    currencyWhitelist:
+    - ChangelingDNA
+
+- type: entity
+  parent: StorePresetUplink
+  id: StorePresetRemoteUplink
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RingerAccessUplink

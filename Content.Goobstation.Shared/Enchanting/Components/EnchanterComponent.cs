@@ -1,14 +1,7 @@
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Systems;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Enchanting.Components;
 
@@ -17,6 +10,7 @@ namespace Content.Goobstation.Shared.Enchanting.Components;
 /// Requires an altar with this and the target item placed on it, then click on the target with a bible.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(EnchanterSystem))]
+[AutoGenerateComponentState(true)]
 public sealed partial class EnchanterComponent : Component
 {
     /// <summary>
@@ -39,17 +33,15 @@ public sealed partial class EnchanterComponent : Component
     public float MinLevel = 1f;
 
     /// <summary>
-    /// Maxmimum enchant level to roll.
-    /// If the enchant already exists it will get added to its level.
-    /// Rolled with <see cref="MinLevel"/> and floored.
+    /// Level adjustment applied to the enchantment based on the used item.
     /// </summary>
     [DataField]
-    public float MaxLevel = 2.5f;
+    public float AdjustLevel = 0;
 
     /// <summary>
     /// The possible enchants that can be rolled.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public List<EntProtoId<EnchantComponent>> Enchants = new();
 
     /// <summary>
@@ -57,4 +49,13 @@ public sealed partial class EnchanterComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_Goobstation/Wizard/repulse.ogg");
+}
+
+/// <summary>
+/// Sprite layer that gets hidden/shown based on <c>Enchants</c> being empty.
+/// </summary>
+[Serializable, NetSerializable]
+public enum EnchanterVisuals : byte
+{
+    Layer
 }

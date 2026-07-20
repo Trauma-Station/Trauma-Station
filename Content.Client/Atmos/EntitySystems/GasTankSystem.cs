@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
 
@@ -14,6 +9,12 @@ public sealed class GasTankSystem : SharedGasTankSystem
     {
         base.Initialize();
         SubscribeLocalEvent<GasTankComponent, AfterAutoHandleStateEvent>(OnGasTankState);
+    }
+
+    protected override void DeviceUpdated(Entity<GasTankComponent> entity, ref AtmosDeviceUpdateEvent args)
+    {
+        // Atmos not predicted :(
+        throw new NotImplementedException();
     }
 
     private void OnGasTankState(Entity<GasTankComponent> ent, ref AfterAutoHandleStateEvent args)

@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: ShadowDemon
+  name: guide-entry-shadow-demon
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/ShadowDemon.xml"

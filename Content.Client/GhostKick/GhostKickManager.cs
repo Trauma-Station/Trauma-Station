@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.GhostKick;
 using Robust.Client;
 using Robust.Shared;
@@ -12,13 +6,13 @@ using Robust.Shared.Network;
 
 namespace Content.Client.GhostKick;
 
-public sealed class GhostKickManager
+public sealed partial class GhostKickManager
 {
     private bool _fakeLossEnabled;
 
-    [Dependency] private readonly IBaseClient _baseClient = default!;
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IBaseClient _baseClient = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public void Initialize()
     {

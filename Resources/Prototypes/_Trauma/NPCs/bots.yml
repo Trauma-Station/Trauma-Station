@@ -1,9 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: htnCompound
   id: ED209Compound
   branches:
   - tasks:
     - !type:HTNCompoundTask
       task: WantedInnateRangedCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: SecbotPatrolCompound
   - tasks:
     - !type:HTNCompoundTask
       task: IdleCompound

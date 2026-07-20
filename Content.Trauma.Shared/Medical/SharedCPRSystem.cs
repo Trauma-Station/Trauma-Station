@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._Shitmed.Medical.Surgery.Traumas;
+
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Traumas;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -20,51 +20,41 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.Body;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Medical;
 
-public abstract class SharedCPRSystem : EntitySystem
+public abstract partial class SharedCPRSystem : EntitySystem
 {
-    [Dependency] private readonly IngestionSystem _ingestion = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ActiveCPRComponent> _activeQuery = default!;
+    [Dependency] private EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<InternalOrganComponent> _organQuery = default!;
+    [Dependency] private EntityQuery<RottingComponent> _rottingQuery = default!;
+    [Dependency] private EntityQuery<UnrevivableComponent> _unrevivableQuery = default!;
 
     /// <summary>
     /// Modifier for inhale volume on mobs that have CPR being done on them.
     /// </summary>
     public const float InhaleModifier = 3f;
 
-    private EntityQuery<ActiveCPRComponent> _activeQuery;
-    private EntityQuery<CPRTrainingComponent> _trainingQuery;
-    private EntityQuery<DamageableComponent> _damageQuery;
-    private EntityQuery<MobStateComponent> _mobQuery;
-    private EntityQuery<OrganComponent> _organQuery;
-    private EntityQuery<RottingComponent> _rottingQuery;
-    private EntityQuery<UnrevivableComponent> _unrevivableQuery;
+    public static readonly ProtoId<OrganCategoryPrototype> LungsCategory = "Lungs";
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _activeQuery = GetEntityQuery<ActiveCPRComponent>();
-        _trainingQuery = GetEntityQuery<CPRTrainingComponent>();
-        _damageQuery = GetEntityQuery<DamageableComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
-        _organQuery = GetEntityQuery<OrganComponent>();
-        _rottingQuery = GetEntityQuery<RottingComponent>();
-        _unrevivableQuery = GetEntityQuery<UnrevivableComponent>();
 
         SubscribeLocalEvent<CPRTrainingComponent, GetVerbsEvent<InnateVerb>>(OnGetVerbs);
 
@@ -101,7 +91,7 @@ public abstract class SharedCPRSystem : EntitySystem
             return;
 
         var userIdentity = Identity.Entity(ent, EntityManager);
-        _popup.PopupClient(Loc.GetString("cpr-start-second-person", ("target", identity)), target, ent);
+        _popup.PopupEntity(Loc.GetString("cpr-start-second-person", ("target", identity)), target, ent);
         _popup.PopupEntity(Loc.GetString("cpr-start-second-person-patient", ("user", userIdentity)), target, target);
 
         var doAfterArgs = new DoAfterArgs(
@@ -134,7 +124,7 @@ public abstract class SharedCPRSystem : EntitySystem
     {
         if (_activeQuery.HasComp(target))
         {
-            _popup.PopupClient(Loc.GetString("cpr-already-performing", ("entity", identity)), ent, ent, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("cpr-already-performing", ("entity", identity)), ent, ent, PopupType.Medium);
             return false;
         }
 
@@ -145,19 +135,19 @@ public abstract class SharedCPRSystem : EntitySystem
     {
         if (_rottingQuery.HasComp(target))
         {
-            _popup.PopupClient(Loc.GetString("cpr-target-rotting", ("entity", identity)), ent, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("cpr-target-rotting", ("entity", identity)), ent, ent, PopupType.LargeCaution);
             return false;
         }
 
         if (GetLungs(target) == null || GetLungs(ent) == null)
         {
-            _popup.PopupClient(Loc.GetString("cpr-target-cantbreathe", ("entity", identity)), ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cpr-target-cantbreathe", ("entity", identity)), ent, ent, PopupType.MediumCaution);
             return false;
         }
 
         if (_inventory.TryGetSlotEntity(target, "outerClothing", out var outer))
         {
-            _popup.PopupClient(Loc.GetString("cpr-must-remove", ("clothing", outer)), ent, ent, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("cpr-must-remove", ("clothing", outer)), ent, ent, PopupType.Medium);
             return false;
         }
 
@@ -192,13 +182,12 @@ public abstract class SharedCPRSystem : EntitySystem
 
         if (!HasHealthyLungs(ent))
         {
-            _popup.PopupClient(Loc.GetString("cpr-failed-lungs-damaged", ("target", identity)), user, user, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("cpr-failed-lungs-damaged", ("target", identity)), user, user, PopupType.LargeCaution);
             RemCompDeferred(ent, ent.Comp);
             return;
         }
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         if (mob.CurrentState == MobState.Dead && rand.Prob(training.ReviveChance) && CanRevive(ent))
             _mob.ChangeMobState(ent.Owner, MobState.Critical, origin: user);
 
@@ -228,17 +217,10 @@ public abstract class SharedCPRSystem : EntitySystem
             // has to be below death threshold
             _threshold.TryGetThresholdForState(uid, MobState.Dead, out var threshold) &&
             _damageQuery.TryComp(uid, out var damage) &&
-            _threshold.CheckVitalDamage(uid, damage) < threshold;
+            _threshold.CheckVitalDamage((uid, damage)) < threshold;
 
     private EntityUid? GetLungs(EntityUid mob)
-    {
-        foreach (var organ in _body.GetBodyOrganEntityComps<LungComponent>(mob))
-        {
-            return organ;
-        }
-
-        return null;
-    }
+        => _body.GetOrgan(mob, LungsCategory);
 
     // respiration is serverside :(
     protected virtual void TryInhale(EntityUid uid)

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -16,9 +10,9 @@ namespace Content.Goobstation.Shared.Containers.ExtendedContainer;
 
 public sealed partial class ExtendedContainerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistsystem = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistsystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

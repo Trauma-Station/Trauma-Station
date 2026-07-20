@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Zekins <zekins3366@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Goobstation.Common.Barks;
 using System.Linq;
 
@@ -35,7 +30,7 @@ public sealed partial class HumanoidProfileEditor
             .Where(o => o.RoundStart &&
                         (o.SpeciesWhitelist is null ||
                          o.SpeciesWhitelist.Contains(Profile.Species)))
-            .OrderBy(o => Loc.GetString(o.ID))
+            .OrderBy(o => o.Name)
             .ToList();
 
         BarkVoiceButton.Clear();
@@ -47,7 +42,7 @@ public sealed partial class HumanoidProfileEditor
             if (bark == Profile.BarkVoice)
                 selectedBarkId = i;
 
-            BarkVoiceButton.AddItem(Loc.GetString(bark.Name), i);
+            BarkVoiceButton.AddItem(bark.Name, i);
         }
 
         if (selectedBarkId == -1)

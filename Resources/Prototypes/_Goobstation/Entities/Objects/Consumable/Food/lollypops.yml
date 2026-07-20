@@ -1,10 +1,5 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Gareth Quaile <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Base Prototypes
 # Lollypops are meant to hold chems. If you can implement them injecting chems while on the mask slot, that'd be cool.
 
@@ -32,9 +27,9 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  parent: [FoodUnperishableBase, FoodInjectableBase] # Trauma - Update lollypops to not rot
-  id: FoodSnackLollypopBase
   abstract: true
+  parent: FoodUnperishableInjectableBase
+  id: FoodSnackLollypopBase
   description: A plain old lollypop. It's cherry flavoured.
   components:
   - type: FlavorProfile
@@ -69,13 +64,12 @@
       right:
       - state: inhand-right
         color: "#FFC0CB"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 20 # Room for extra chems
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
   - type: Extractable
     grindableSolutionName: food
     juiceSolution:
@@ -127,13 +121,6 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#FFC0CB" # Color can change later if you want to be able to tell it apart.
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -180,13 +167,6 @@
       map: [ "enum.AmmoVisualLayers.Base" ]
     - state: lollypop-captain
       map: [ "enum.AmmoVisualLayers.Tip" ]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 40 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -233,13 +213,9 @@
       map: [ "enum.AmmoVisualLayers.Base" ]
     - state: lollypop-centcomm
       map: [ "enum.AmmoVisualLayers.Tip" ]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 100 # Cram this baby FULL of omnizine.
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 100 # Cram this baby FULL of omnizine.
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -350,43 +326,6 @@
       map: [ "enum.AmmoVisualLayers.Base" ]
     - state: lollypop-carp
       map: [ "enum.AmmoVisualLayers.Tip" ]
-
-# Blueshield
-
-- type: entity
-  parent: FoodSnackLollypopWrappedBase # Todo, give this to blueshield.
-  id: FoodSnackLollypopWrappedBlueshield
-  name: wrapped blueshield lollypop
-  description: A deep blue lollypop. It's still in the wrapper
-  components:
-  - type: Tag
-    tags:
-    - FoodSnack
-  - type: SpawnItemsOnUse
-    items:
-    - id: FoodSnackLollypopTrashNanotrasen
-    - id: FoodSnackLollypopBlueshield
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-- type: entity
-  parent: FoodSnackLollypopBase
-  id: FoodSnackLollypopBlueshield
-  name: blueshield lollypop
-  description: A deep blue lollypop, imbuing you with a sense of determination. Get out there soldier!
-  components:
-  - type: Tag
-    tags:
-    - FoodSnack
-    - ClothMade
-  - type: Sprite # Don't think about it. Don't think about it. Don't think about it.
-    sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
-    layers:
-    - state: lollypop
-      map: [ "enum.AmmoVisualLayers.Base" ]
-    - state: color
-      map: [ "enum.AmmoVisualLayers.Tip" ]
-      color: "#040273"
 
 # Captain
 
@@ -499,15 +438,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#ffaa00"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Bicaridine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Bicaridine
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -551,15 +488,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#ffff64"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Probital
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Probital
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -603,15 +538,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#bf3d19"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Kelotane
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Kelotane
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -655,15 +588,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#215263"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Dermaline
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Dermaline
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -707,15 +638,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#00e5ff"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Tricordrazine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Tricordrazine
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -759,15 +688,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#3a1d8a"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Dylovene
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Dylovene
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -811,15 +738,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#fcf7f9"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Omnizine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Omnizine
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -863,15 +788,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#4da0bd"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: DexalinPlus
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: DexalinPlus
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -915,15 +838,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#4cb580"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Hyronalin
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Hyronalin
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -967,15 +888,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#be5c5c"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Ibuprofen
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Ibuprofen
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1019,15 +938,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#40ffec"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Antihol
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Antihol
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1071,15 +988,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#cc9c14"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Mitotrophin
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Mitotrophin
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1311,13 +1226,12 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#810e0e"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30 # Syndi lollypops hold more
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 30 # Syndi lollypops hold more
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1351,15 +1265,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Lexorin
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Lexorin
+        Quantity: 10
 
 # Romerol Lollypop - Very Rare
 
@@ -1390,15 +1302,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Romerol
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Romerol
+        Quantity: 10
 
 # Nocturine
 
@@ -1432,15 +1342,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Nocturine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Nocturine
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1474,15 +1382,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Stimulants
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Stimulants
+        Quantity: 10
 
 # Synaptizine
 
@@ -1513,15 +1419,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Synaptizine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Synaptizine
+        Quantity: 10
 
 # Carpotoxin
 
@@ -1560,15 +1464,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: CarpoToxin
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: CarpoToxin
+        Quantity: 15
 
 # Fentanyl
 
@@ -1602,15 +1504,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Fentanyl # We do a little bit of trolling.
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Fentanyl # We do a little bit of trolling.
+        Quantity: 10
 
 # Phlogiston
 
@@ -1641,15 +1541,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Phlogiston
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Phlogiston
+        Quantity: 10
 
 # Cyanide
 
@@ -1680,15 +1578,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Cyanide
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Cyanide
+        Quantity: 10
 
 # Tirizene
 
@@ -1719,15 +1615,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Tirizene
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Tirizene
+        Quantity: 10
 
 # Anacea
 
@@ -1758,15 +1652,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Anacea
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Anacea
+        Quantity: 10
 
 # Potassium Bomb
 
@@ -1797,18 +1689,16 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        canReact: false
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Water
-          Quantity: 5
-        - ReagentId: Potassium
-          Quantity: 5
+  - type: Solution
+    solution:
+      canReact: false
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Water
+        Quantity: 5
+      - ReagentId: Potassium
+        Quantity: 5
 
 
 # Non-medication Lollypops
@@ -1853,15 +1743,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#b50ee8"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Cognizine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Cognizine
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1904,15 +1792,13 @@
       map: [ "enum.AmmoVisualLayers.Base" ]
     - state: lollypop-weh
       map: [ "enum.AmmoVisualLayers.Tip" ]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: JuiceThatMakesYouWeh
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: JuiceThatMakesYouWeh
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -1953,15 +1839,13 @@
       map: [ "enum.AmmoVisualLayers.Base" ]
     - state: lollypop-carp
       map: [ "enum.AmmoVisualLayers.Tip" ]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: Carpolin
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: Carpolin
+        Quantity: 10
 
 # Mousebites
 
@@ -1993,15 +1877,13 @@
     tags:
     - FoodSnack
     - ClothMade
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: MouseBites
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: MouseBites
+        Quantity: 10
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     layers:
@@ -2051,15 +1933,13 @@
     - state: color
       map: [ "enum.AmmoVisualLayers.Tip" ]
       color: "#77b58e"
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20 # Room for extra chems
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 5
-        - ReagentId: MindbreakerToxin
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+      - ReagentId: MindbreakerToxin
+        Quantity: 10
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
@@ -2092,13 +1972,13 @@
     flavors:
     - paper
   - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 1
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 5
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 5
   - type: PhysicalComposition
     materialComposition:
       Paper: 25

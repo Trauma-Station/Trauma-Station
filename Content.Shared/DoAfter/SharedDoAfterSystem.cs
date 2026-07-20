@@ -1,14 +1,15 @@
 // <Trauma>
 using Content.Goobstation.Common.DoAfter;
-using Content.Shared._Shitmed.DoAfter;
+using Content.Medical.Common.DoAfter;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -20,10 +21,13 @@ namespace Content.Shared.DoAfter;
 
 public abstract partial class SharedDoAfterSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private TagSystem _tag = default!;
+
+    private ModifyDoAfterDelayEvent _modifyEv = new(); // Trauma - reused object because it can't be a struct
 
     /// <summary>
     ///     We'll use an excess time so stuff like finishing effects can show.
@@ -40,7 +44,28 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         SubscribeLocalEvent<DoAfterComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<DoAfterComponent, ComponentGetState>(OnDoAfterGetState);
         SubscribeLocalEvent<DoAfterComponent, ComponentHandleState>(OnDoAfterHandleState);
+        SubscribeLocalEvent<DoAfterComponent, EffectiveMoverChangedEvent>(OnEffectiveMoverChanged);
         SubscribeLocalEvent<GetInteractingEntitiesEvent>(OnGetInteractingEntities);
+    }
+
+    private void OnEffectiveMoverChanged(EntityUid uid, DoAfterComponent comp, ref EffectiveMoverChangedEvent args)
+    {
+        // Effective mover changed, so move-sensitive do-afters cancel now
+        var dirty = false;
+        foreach (var doAfter in comp.DoAfters.Values)
+        {
+            if (doAfter.Cancelled || doAfter.Completed || !doAfter.Args.BreakOnMove)
+                continue;
+
+            if (doAfter.MovementEntity != args.OldMover)
+                continue;
+
+            InternalCancel(doAfter, comp);
+            dirty = true;
+        }
+
+        if (dirty)
+            Dirty(uid, comp);
     }
 
     private void OnUnpaused(EntityUid uid, DoAfterComponent component, ref EntityUnpausedEvent args)
@@ -129,6 +154,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             // Networking yay (if you have an easier way dear god please).
             newDoAfter.UserPosition = EnsureCoordinates<DoAfterComponent>(newDoAfter.NetUserPosition, uid);
             newDoAfter.InitialItem = EnsureEntity<DoAfterComponent>(newDoAfter.NetInitialItem, uid);
+            newDoAfter.MovementEntity = EnsureEntity<DoAfterComponent>(newDoAfter.NetMovementEntity, uid);
 
             var doAfterArgs = newDoAfter.Args;
             doAfterArgs.Target = EnsureEntity<DoAfterComponent>(doAfterArgs.NetTarget, uid);
@@ -231,14 +257,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             return false;
         }
 
-        // Goobstation start
+        // <Trauma>
         if (args.MultiplyDelay)
         {
-            var delayMultiplierEv = new GetDoAfterDelayMultiplierEvent();
-            RaiseLocalEvent(args.User, delayMultiplierEv);
-            args.Delay *= delayMultiplierEv.Multiplier;
+            _modifyEv.Multiplier = 1f;
+            RaiseLocalEvent(args.User, _modifyEv);
+            args.Delay *= _modifyEv.Multiplier;
         }
-        // Goobstation end
+        // </Trauma>
 
         id = new DoAfterId(args.User, comp.NextId++);
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
@@ -250,7 +276,10 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         args.NetEventTarget = GetNetEntity(args.EventTarget);
 
         if (args.BreakOnMove)
-            doAfter.UserPosition = Transform(args.User).Coordinates;
+        {
+            doAfter.MovementEntity = _mover.GetEffectiveMover(args.User);
+            doAfter.UserPosition = Transform(doAfter.MovementEntity).Coordinates;
+        }
 
         if (args.Target != null && args.BreakOnMove)
         {
@@ -259,6 +288,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
 
         doAfter.NetUserPosition = GetNetCoordinates(doAfter.UserPosition);
+        doAfter.NetMovementEntity = GetNetEntity(doAfter.MovementEntity);
 
         // For this we need to stay on the same hand slot and need the same item in that hand slot
         // (or if there is no item there we need to keep it free).
@@ -274,7 +304,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         doAfter.NetInitialItem = GetNetEntity(doAfter.InitialItem);
 
         // Initial checks
-        if (ShouldCancel(doAfter, GetEntityQuery<TransformComponent>(), GetEntityQuery<HandsComponent>()))
+        if (ShouldCancel(doAfter))
             return false;
 
         if (args.AttemptFrequency == AttemptFrequency.StartAndEnd && !TryAttemptEvent(doAfter))
@@ -375,7 +405,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
 
         if (!comp.DoAfters.TryGetValue(id, out var doAfter))
         {
-            Log.Error($"Attempted to cancel do after with an invalid id ({id}) on entity {ToPrettyString(entity)}");
+            Log.Warning($"Attempted to cancel do after with an invalid id ({id}) on entity {ToPrettyString(entity)}"); // Trauma - warning not error, this has 0 debuggable info
             return;
         }
 

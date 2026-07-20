@@ -1,0 +1,400 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoProduct
+  id: RandomSkillbooks
+  icon:
+    sprite: Objects/Misc/books.rsi
+    state: book_icon
+  product: CrateRandomSkillbooks
+  cost: 2000
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateRandomSkillbooks
+  name: skillbooks crate
+  description: Contains skillbooks.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomSkillbook
+
+- type: entityTable
+  id: RandomSkillbook
+  table: !type:GroupSelector
+    children:
+    - id: BookJanitor
+    - id: BookFabrication
+    - id: BookSurvival
+    - id: BookDoors
+    - id: BookAirlocks
+    - id: BookToys
+    - id: BookBananium
+    - id: BookBots
+    - id: BookFurniture
+    - id: BookInfrastructure
+    - id: BookElectronics
+    - id: BookWalls
+    - id: BookWindows
+    - id: BookSmokeables
+
+- type: entity
+  parent: BaseItem
+  id: BookSkillbook
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/skillbooks.rsi
+    layers:
+    - state: base
+  - type: StaticPrice
+    price: 20
+  - type: KnowledgeGrantOnUse
+    singleUse: false # crew books are for sharing
+    instant: false
+  - type: Tag
+    tags:
+    - Book
+  - type: Item
+    size: Small
+
+# Debug
+
+- type: entity
+  parent: [BookSkillbook, BaseMagicalContraband]
+  id: BookDebug
+  name: The Hitchikers Guide to the Galaxy
+  suffix: debug
+  description: Teaches you everything.
+  components:
+  - type: Sprite
+    layers:
+    - state: melee
+  - type: KnowledgeGrantOnUse
+    grantEverything: true
+    instant: true
+
+# TODO: These should just give you an xp gain buff rather than make you stronger bruh
+- type: entity
+  parent: BookSkillbook
+  id: BookSchematic
+  name: blueprint
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/schematics.rsi
+
+# Melee
+
+- type: entity
+  parent: [BookSkillbook, BaseRevMinorContraband]
+  id: BookMeleePrintedRev
+  name: ГОЙДА! Д
+  suffix: melee
+  description: It contains cyrillic instructions about melee combat and some of the weapons used.
+  components:
+  - type: Sprite
+    layers:
+    - state: melee
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 35
+      WeaponsKnowledge: 35
+    experience:
+      MeleeKnowledge: 15
+      WeaponsKnowledge: 15
+    doAfter: 2
+
+# Shooting
+
+- type: entity
+  parent: [BookSkillbook, BaseRevMinorContraband]
+  id: BookShootingPrintedRev
+  name: ГОЙДА! Б
+  suffix: shooting
+  description: It contains cyrillic instructions about firearms and their manufacturing.
+  components:
+  - type: Sprite
+    layers:
+    - state: shooting
+  - type: KnowledgeGrantOnUse
+    skills:
+      ShootingKnowledge: 35
+      WeaponsKnowledge: 35
+    experience:
+      ShootingKnowledge: 5
+      WeaponsKnowledge: 4
+    doAfter: 2
+
+# Magic
+
+- type: entity
+  parent: BookSkillbook
+  id: BookJanitor
+  name: WHY I LOVE SOAP AND WHY YOU SHOULD TOO
+  suffix: janitor
+  description: Voxes supposedly love this one, its mostly useless rambling.
+  components:
+  - type: Sprite
+    layers:
+    - state: janitor
+  - type: KnowledgeGrantOnUse
+    skills:
+      ThrowingKnowledge: 25
+      JanitorKnowledge: 25
+    experience:
+      ThrowingKnowledge: 3
+      JanitorKnowledge: 3
+    doAfter: 2
+
+# Fabrication
+
+- type: entity
+  parent: BookSkillbook
+  id: BookFabrication
+  name: Home Crafters Monthly
+  suffix: fabrication
+  description: Mostly advertisements, but there are some nice tips in here.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      FabricationKnowledge: 10
+    experience:
+      FabricationKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookFabricationPrinted
+  name: Principles of Engineering in Space - 17th Edition
+  suffix: fabrication
+  description: Used to guarantee you a bright future. Now it guarantees you wage slavery.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      FabricationKnowledge: 25
+    experience:
+      FabricationKnowledge: 4
+    doAfter: 2
+
+# Carving
+
+- type: entity
+  parent: BookSkillbook
+  id: BookSurvival
+  name: BSA handbook
+  suffix: survival
+  description: Has a plethora of knowledge on plants you will never see and animals that died out long ago. At least it teaches you how to carve.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      CarvingKnowledge: 10
+    experience:
+      CarvingKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookSurvivalPrinted
+  name: Wood and Bone Carving Techniques
+  suffix: survival
+  description: Niche books for niche hobbies.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      CarvingKnowledge: 25
+    experience:
+      CarvingKnowledge: 4
+    doAfter: 2
+
+# Blueprints
+
+- type: entity
+  parent: BookSchematic
+  id: BookDoors
+  suffix: doors
+  description: A blueprint with designs for doors.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      DoorsKnowledge: 25
+    experience:
+      DoorsKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: doors
+
+- type: entity
+  parent: BookSchematic
+  id: BookAirlocks
+  suffix: airlocks
+  description: A blueprint with designs for airlocks.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      AirlocksKnowledge: 25
+    experience:
+      AirlocksKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: airlocks
+
+- type: entity
+  parent: BookSchematic
+  id: BookToys
+  suffix: toys
+  description: A blueprint with designs for toys.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ToysKnowledge: 25
+    experience:
+      ToysKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: toys
+
+- type: entity
+  parent: BookSchematic
+  id: BookBananium
+  suffix: bananium
+  description: A blueprint with designs for bananium structures.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      BananiumKnowledge: 25
+    experience:
+      BananiumKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: bananium
+
+- type: entity
+  parent: BookSchematic
+  id: BookBots
+  suffix: bots
+  description: A blueprint with designs for robots.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      BotsKnowledge: 25
+    experience:
+      BotsKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: bots
+
+- type: entity
+  parent: BookSchematic
+  id: BookFurniture
+  suffix: furniture
+  description: A blueprint with designs for furniture.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      FurnitureKnowledge: 25
+    experience:
+      FurnitureKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: furniture
+
+- type: entity
+  parent: BookSchematic
+  id: BookInfrastructure
+  suffix: infrastructure
+  description: A blueprint with designs for various pieces of infrastructure.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      InfrastructureKnowledge: 25
+    experience:
+      InfrastructureKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: infrastructure
+
+- type: entity
+  parent: BookSchematic
+  id: BookElectronics
+  suffix: electronics
+  description: A blueprint with designs for various electronics.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ElectronicsKnowledge: 25
+    experience:
+      ElectronicsKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: electronics
+
+- type: entity
+  parent: BookSchematic
+  id: BookWalls
+  suffix: walls
+  description: A blueprint with designs for walls.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WallsKnowledge: 25
+    experience:
+      WallsKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: walls
+
+- type: entity
+  parent: BookSchematic
+  id: BookWindows
+  suffix: windows
+  description: A blueprint with designs for windows.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WindowsKnowledge: 25
+    experience:
+      WindowsKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: windows
+
+- type: entity
+  parent: BookSchematic
+  id: BookSmokeables
+  suffix: smokeables
+  description: A blueprint with designs for blunts.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      SmokeablesKnowledge: 25
+    experience:
+      SmokeablesKnowledge: 5
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: smokeables

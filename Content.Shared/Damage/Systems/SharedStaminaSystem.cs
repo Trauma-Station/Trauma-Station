@@ -1,11 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Damage.Events;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Stunnable;
-using Content.Shared._Shitcode.Weapons.Misc;
-using Content.Shared.Jittering;
-using Content.Shared.Speech.EntitySystems;
-using Robust.Shared.Random;
+using Content.Trauma.Common.Damage;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -42,17 +38,19 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 {
     public static readonly EntProtoId StaminaLow = "StatusEffectStaminaLow";
 
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] protected readonly SharedStunSystem StunSystem = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
+    [Dependency] private MovementModStatusSystem _movementMod = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] protected SharedStunSystem StunSystem = default!;
+
+    [Dependency] private EntityQuery<StaminaComponent> _stamQuery = default!;
 
     /// <summary>
     /// How much of a buffer is there between the stun duration and when stuns can be re-applied.
@@ -165,64 +163,50 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             return;
         }
 
-        // Goobstation - Martial Arts
-        if (TryComp<MartialArtsKnowledgeComponent>(args.User, out var knowledgeComp)
-            && TryComp<MartialArtBlockedComponent>(args.Weapon, out var blockedComp)
-            && knowledgeComp.MartialArtsForm == blockedComp.Form)
-            return;
-        // Goobstation
-
         var ev = new StaminaDamageOnHitAttemptEvent(args.Direction == null, false); // Goob edit
         RaiseLocalEvent(uid, ref ev);
         if (ev.Cancelled)
             return;
 
-        var stamQuery = GetEntityQuery<StaminaComponent>();
-        var toHit = new List<(EntityUid Entity, StaminaComponent Component)>();
+        var toHit = new List<EntityUid>();
 
         // Split stamina damage between all eligible targets.
         foreach (var ent in args.HitEntities)
         {
-            if (!stamQuery.TryGetComponent(ent, out var stam))
+            if (!_stamQuery.TryGetComponent(ent, out var stam))
                 continue;
 
-            toHit.Add((ent, stam));
+            toHit.Add(ent);
         }
 
         // Goobstation
         RaiseLocalEvent(uid, new StaminaDamageMeleeHitEvent(toHit, args.Direction));
 
-        // goobstation
-        foreach (var (ent, comp) in toHit)
+        // <Goob>
+        // raise event to modify outgoing stamina damage by multiplier or something
+        var damage = 1.0f;
+        var overtime = 1.0f;
+        var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
+        RaiseLocalEvent(args.User, ref outgoingModifier);
+        if (args.Direction == null)
         {
-            var hitEvent = new BeforeStaminaDamageEvent(1f);
-            // raise event for each entity hit
-            RaiseLocalEvent(ent, ref hitEvent);
+            damage *= component.LightAttackDamageMultiplier * outgoingModifier.Value;
+            overtime *= component.LightAttackOvertimeDamageMultiplier * outgoingModifier.Value;
+        }
+        // goobstation
+        foreach (var ent in toHit)
+        {
+            if (!_stamQuery.TryGetComponent(ent, out var comp))
+                continue;
 
-            // <Goob>
-            // raise event to modify outgoing stamina damage by multiplier or something
-            var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
-            RaiseLocalEvent(args.User, ref outgoingModifier);
-
-            var damageImmediate = component.Damage;
-            var damageOvertime = component.Overtime;
-            damageImmediate *= hitEvent.Value * outgoingModifier.Value;
-            damageOvertime *= hitEvent.Value * outgoingModifier.Value;
-            // </Goob>
-            if (args.Direction == null)
-            {
-                damageImmediate *= component.LightAttackDamageMultiplier;
-                damageOvertime *= component.LightAttackOvertimeDamageMultiplier;
-            }
-
-            TakeStaminaDamage(ent, damageImmediate / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
-            TakeOvertimeStaminaDamage(ent, damageOvertime);
+            TakeStaminaDamage(ent, component.Damage * damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
+            TakeOvertimeStaminaDamage(ent, component.Overtime * overtime);
         }
     }
 
     private void OnProjectileHit(EntityUid uid, StaminaDamageOnCollideComponent component, ref ProjectileHitEvent args)
     {
-        OnCollide(uid, component, args.Target);
+        OnCollide(uid, component, args.Target, args.Shooter); // Goob - added shooter
     }
 
     private void OnProjectileEmbed(EntityUid uid, StaminaDamageOnEmbedComponent component, ref EmbedEvent args)
@@ -238,7 +222,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         OnCollide(uid, component, args.Target);
     }
 
-    private void OnCollide(EntityUid uid, StaminaDamageOnCollideComponent component, EntityUid target)
+    private void OnCollide(EntityUid uid, StaminaDamageOnCollideComponent component, EntityUid target, EntityUid? source = null) // Goob - added source
     {
         // you can't inflict stamina damage on things with no stamina component
         // this prevents stun batons from using up charges when throwing it at lockers or lights
@@ -250,18 +234,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        // goobstation
-        var hitEvent = new BeforeStaminaDamageEvent(1f);
-        RaiseLocalEvent(target, ref hitEvent);
-
-        var damage = component.Damage;
-        var overtime = component.Overtime;
-
-        damage *= hitEvent.Value;
-        overtime *= hitEvent.Value;
-
-        TakeStaminaDamage(target, damage, source: uid, sound: component.Sound);
-        TakeOvertimeStaminaDamage(target, overtime); // Goobstation
+        TakeStaminaDamage(target, component.Damage, source: source ?? uid, sound: component.Sound); // Goob edit - use source as damage source if not null
+        TakeOvertimeStaminaDamage(target, component.Overtime); // Goobstation
     }
 
     private void UpdateStaminaVisuals(Entity<StaminaComponent> entity)
@@ -312,8 +286,12 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (!hasComp)
             overtime = EnsureComp<OvertimeStaminaDamageComponent>(uid);
 
-        overtime!.Amount = hasComp ? overtime.Amount + value : value;
-        overtime!.Damage = hasComp ? overtime.Damage + value : value;
+        // <Trauma>
+        var ev = new BeforeStaminaDamageEvent(value);
+        RaiseLocalEvent(uid, ref ev);
+        overtime!.Amount = hasComp ? overtime.Amount + ev.Value : ev.Value;
+        overtime!.Damage = hasComp ? overtime.Damage + ev.Value : ev.Value;
+        // </Trauma>
     }
 
     public void TakeStaminaDamage(EntityUid uid, float value, StaminaComponent? component = null,
@@ -391,6 +369,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
                 _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
         }
 
+        // <Trauma>
+        var tookEv = new TookStaminaDamageEvent(uid, value);
+        RaiseLocalEvent(uid, ref tookEv);
+        // </Trauma>
+
         if (visual)
         {
             _color.RaiseEffect(Color.Aqua, new List<EntityUid>() { uid }, Filter.Pvs(uid, entityManager: EntityManager));
@@ -440,15 +423,15 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var stamQuery = GetEntityQuery<StaminaComponent>();
         var query = EntityQueryEnumerator<ActiveStaminaComponent>();
         var curTime = Timing.CurTime;
 
         while (query.MoveNext(out var uid, out _))
         {
-            // Goob Edit: Just in case we have active but not stamina we'll check and account for it.
-            if (!stamQuery.TryGetComponent(uid, out var comp) ||
-                comp.StaminaDamage <= 0f && !comp.Critical && comp.ActiveDrains.Count == 0)
+            // Just in case we have active but not stamina we'll check and account for it.
+            if (!_stamQuery.TryComp(uid, out var comp) ||
+                comp.StaminaDamage <= 0f && !comp.Critical
+                && comp.ActiveDrains.Count == 0) // Trauma
             {
                 RemComp<ActiveStaminaComponent>(uid);
                 continue;
@@ -505,8 +488,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         component.Critical = true;
         component.StaminaDamage = component.CritThreshold;
 
-        if (StunSystem.TryUpdateParalyzeDuration(uid, component.StunTime))
-            StunSystem.TrySeeingStars(uid);
+        StunSystem.TryUpdateParalyzeDuration(uid, component.StunTime, true);
+
 
         // Goobstation - Modularization
         var modifierEv = new GetClothingStunModifierEvent(uid);

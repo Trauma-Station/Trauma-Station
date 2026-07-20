@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityConditions;
 using Content.Shared.Mind;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -36,16 +36,13 @@ public sealed partial class WhitelistCondition : EntityConditionBase<WhitelistCo
     public bool CheckMind;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
-    {
-        return GuidebookText == null ? string.Empty : Loc.GetString(GuidebookText);
-    }
+        => GuidebookText == null ? string.Empty : Loc.GetString(GuidebookText);
 }
 
-public sealed class WhitelistConditionSystem : EntityConditionSystem<MetaDataComponent, WhitelistCondition>
+public sealed partial class WhitelistConditionSystem : EntityConditionSystem<MetaDataComponent, WhitelistCondition>
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     protected override void Condition(Entity<MetaDataComponent> ent, ref EntityConditionEvent<WhitelistCondition> args)
     {

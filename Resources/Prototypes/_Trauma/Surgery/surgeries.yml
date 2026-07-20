@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Hypoport
+
 - type: entity
   parent: SurgeryOpenCavityBase
   id: SurgeryOpenCavityHypoport
@@ -12,7 +16,7 @@
   - type: SurgeryPartCondition
     parts: [ Head ]
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -26,10 +30,9 @@
     - SurgeryStepInsertHypoport
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -37,5 +40,95 @@
   name: Extract Hypoport
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
+
+# Tail
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenTailSlot
+  name: Create Tail Joint
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tail
+
+# Tongue
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveTongue
+  name: Remove Tongue
+  components:
+  - type: SurgeryOrganCondition
+    organ: Tongue
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertTongue
+  name: Insert Tongue
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tongue
+  - type: SurgeryOrganCondition
+    organ: Tongue
+
+# Kidneys
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveKidneys
+  name: Remove Kidneys
+  components:
+  - type: SurgeryOrganCondition
+    organ: Kidneys
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertKidneys
+  name: Insert Kidneys
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Kidneys
+  - type: SurgeryOrganCondition
+    organ: Kidneys
+
+# Wings
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenWingsSlot
+  name: Create Wing Joints
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Wings
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachWings
+  name: Attach Wings
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: Wings

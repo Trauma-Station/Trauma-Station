@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: BulletNeurotoxin
   parent: BulletAcid
@@ -5,8 +7,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: StaminaDamageOnCollide
-    damage: 65
+    damage: 35
   - type: Projectile
     damage:
       types:
-        Caustic: 1
+        Caustic: 12

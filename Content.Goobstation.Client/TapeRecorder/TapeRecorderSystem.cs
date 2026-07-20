@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.TapeRecorder;
@@ -11,7 +7,7 @@ namespace Content.Goobstation.Client.TapeRecorder;
 /// <summary>
 /// Required for client side prediction stuff
 /// </summary>
-public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
+public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
 {
     private TimeSpan _lastTickTime = TimeSpan.Zero;
 

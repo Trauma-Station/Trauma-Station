@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Speech;
@@ -10,10 +7,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Trigger.Triggers;
 
-public sealed class TriggerOnSpeakSystem : EntitySystem
+public sealed partial class TriggerOnSpeakSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

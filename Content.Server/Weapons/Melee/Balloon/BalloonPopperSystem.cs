@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LankLTE <135308300+LankLTE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Shared.IdentityManagement;
@@ -21,12 +13,12 @@ namespace Content.Server.Weapons.Melee.Balloon;
 /// <summary>
 /// This handles popping ballons when attacked with <see cref="BalloonPopperComponent"/>
 /// </summary>
-public sealed class BalloonPopperSystem : EntitySystem
+public sealed partial class BalloonPopperSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

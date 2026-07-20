@@ -1,14 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Alerts;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.LightDetection;
 
-public sealed class LightDetectionDamageSystem : SharedLightDetectionDamageSystem
+public sealed partial class LightDetectionDamageSystem : SharedLightDetectionDamageSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

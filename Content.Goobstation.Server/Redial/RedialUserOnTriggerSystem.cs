@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Trigger.Effects;
@@ -13,9 +8,9 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Redial;
 
-public sealed class RedialUserOnTriggerSystem : EntitySystem
+public sealed partial class RedialUserOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly RedialManager _redial = default!;
+    [Dependency] private RedialManager _redial = default!;
 
     public override void Initialize()
     {

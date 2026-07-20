@@ -1,31 +1,14 @@
-// SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration;
-using Content.Server.Disposal.Tube;
 using Content.Shared.Administration;
+using Content.Shared.Disposal.Tube;
 using Robust.Shared.Console;
 
 namespace Content.Server.Disposal
 {
     [AdminCommand(AdminFlags.Debug)]
-    public sealed class TubeConnectionsCommand : IConsoleCommand
+    public sealed partial class TubeConnectionsCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _entities = default!;
+        [Dependency] private IEntityManager _entities = default!;
 
         public string Command => "tubeconnections";
         public string Description => Loc.GetString("tube-connections-command-description");
@@ -71,7 +54,7 @@ namespace Content.Server.Disposal
                 return;
             }
 
-            _entities.System<DisposalTubeSystem>().PopupDirections(id.Value, tube, player.AttachedEntity.Value);
+            _entities.System<DisposalTubeSystem>().PopupDirections((id.Value, tube), player.AttachedEntity.Value);
         }
     }
 }

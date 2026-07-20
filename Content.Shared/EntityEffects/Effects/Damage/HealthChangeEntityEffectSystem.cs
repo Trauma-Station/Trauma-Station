@@ -1,9 +1,9 @@
 // <Trauma>
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.EntityEffects.Effects;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Heretic;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.EntityEffects;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Temperature.Components;
+using Content.Trauma.Common.Damage;
 // </Trauma>
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -22,7 +22,7 @@ namespace Content.Shared.EntityEffects.Effects.Damage;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<DamageableComponent, HealthChange>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     protected override void Effect(Entity<DamageableComponent> entity, ref EntityEffectEvent<HealthChange> args)
     {
@@ -31,22 +31,16 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         damageSpec *= args.Scale;
 
         // <Goob>
-        if (args.Effect.ScaleByTemperature is {} scaleTemp)
+        if (args.Effect.ScaleByTemperature is { } scaleTemp)
         {
             damageSpec *= TryComp<TemperatureComponent>(entity, out var temp)
                 ? scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false)
                 : FixedPoint2.Zero;
         }
 
-        // heretics can heal instead of being poisoned
-        var ev = new ImmuneToPoisonDamageEvent();
+        var ev = new OnHealthChangeEvent(damageSpec);
         RaiseLocalEvent(entity, ref ev);
-        if (ev.Immune)
-        {
-            damageSpec = DamageSpecifier.GetNegative(damageSpec);
-            if (damageSpec.GetTotal() == FixedPoint2.Zero)
-                return;
-        }
+        damageSpec = ev.Damage;
         // </Goob>
 
         _damageable.TryChangeDamage(
@@ -70,10 +64,13 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     [DataField(required: true)]
     public DamageSpecifier Damage = default!;
 
+    /// <summary>
+    /// Should this effect ignore damage resistances?
+    /// </summary>
     [DataField]
     public bool IgnoreResistances = true;
 
-    // <Shitmed>
+    // <Trauma>
     /// <summary>
     /// How to scale the effect based on the temperature of the target entity.
     /// </summary>

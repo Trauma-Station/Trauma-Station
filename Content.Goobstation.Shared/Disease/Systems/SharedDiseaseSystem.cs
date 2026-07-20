@@ -1,12 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -14,13 +13,12 @@ namespace Content.Goobstation.Shared.Disease.Systems;
 
 public abstract partial class SharedDiseaseSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] protected readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private TimeSpan _lastUpdated = TimeSpan.FromSeconds(0);
     private List<Entity<DiseaseCarrierComponent>> _carriers = new();
@@ -167,8 +165,10 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
 
         if (!args.Ent.Comp.EffectImmune)
         {
-            foreach (var effectUid in ent.Comp.Effects.ContainedEntities)
+            // not using foreach incase it gets modified by event handlers
+            for (int i = 0; i < ent.Comp.Effects.Count; i++)
             {
+                var effectUid = ent.Comp.Effects.ContainedEntities[i];
                 if (!EffectQuery.TryComp(effectUid, out var effect))
                     continue;
 

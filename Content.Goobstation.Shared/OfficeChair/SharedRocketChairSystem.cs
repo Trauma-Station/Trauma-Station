@@ -1,10 +1,7 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -13,11 +10,11 @@ namespace Content.Goobstation.Shared.OfficeChair;
 
 public abstract partial class SharedRocketChairSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Ripley MK-II
 - type: latheRecipe
   id: RipleyMKIIHarness
@@ -76,7 +72,7 @@
 
 # Durand
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandHarness
   result: DurandHarness
   categories:
@@ -88,7 +84,7 @@
     Silver: 1500
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandArmor
   result: DurandArmorPlate
   categories:
@@ -99,7 +95,7 @@
     Silver: 900
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandHead
   result: DurandHead
   categories:
@@ -112,7 +108,7 @@
     Diamond: 100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandLArm
   result: DurandLArm
   categories:
@@ -123,7 +119,7 @@
     Silver: 250
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandLLeg
   result: DurandLLeg
   categories:
@@ -134,7 +130,7 @@
     Silver: 250
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandRLeg
   result: DurandRLeg
   categories:
@@ -145,7 +141,7 @@
     Silver: 250
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandRArm
   result: DurandRArm
   categories:
@@ -157,7 +153,7 @@
 
 # Gygax
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxHarness
   result: GygaxHarness
   categories:
@@ -168,7 +164,7 @@
     Glass: 2000
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxArmor
   result: GygaxArmorPlate
   categories:
@@ -178,7 +174,7 @@
     Steel: 3000
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxHead
   result: GygaxHead
   categories:
@@ -190,7 +186,7 @@
     Diamond: 100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxLArm
   result: GygaxLArm
   categories:
@@ -200,7 +196,7 @@
     Steel: 1100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxLLeg
   result: GygaxLLeg
   categories:
@@ -210,7 +206,7 @@
     Steel: 1100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxRLeg
   result: GygaxRLeg
   categories:
@@ -220,7 +216,7 @@
     Steel: 1100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxRArm
   result: GygaxRArm
   categories:
@@ -234,7 +230,9 @@
   id: MechEquipmentDrill
   result: WeaponMechMeleeDrill
   categories:
+  - Mech
   - MechEquipment
+  - Clarke
   completetime: 10
   materials:
     Steel: 1000
@@ -244,7 +242,9 @@
   id: MechEquipmentDrillDiamond
   result: WeaponMechMeleeDrillDiamond
   categories:
+  - Mech
   - MechEquipment
+  - Clarke
   completetime: 10
   materials:
     Steel: 1000
@@ -256,7 +256,9 @@
   id: MechEquipmentHonkerBananaMortar
   result: WeaponMechSpecialBananaMortar
   categories:
+  - Mech
   - MechEquipment
+  - Honker
   completetime: 10
   materials:
     Steel: 1150
@@ -266,7 +268,9 @@
   id: MechEquipmentHonkerMousetrapMortar
   result: WeaponMechSpecialMousetrapMortar
   categories:
+  - Mech
   - MechEquipment
+  - Honker
   completetime: 10
   materials:
     Steel: 1200
@@ -277,6 +281,8 @@
   id: MechAirTank
   result: MechAirTank
   categories:
+  - Mech
+  - Parts
   - MechEquipment
   completetime: 10
   materials:
@@ -284,11 +290,6 @@
     Glass: 150
 
 - type: latheRecipe
+  parent: MechAirTank
   id: MechThruster
   result: MechThruster
-  categories:
-  - MechEquipment
-  completetime: 10
-  materials:
-    Steel: 1000
-    Glass: 150

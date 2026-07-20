@@ -1,18 +1,12 @@
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Radiation.Components;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Radiation.Systems;
 
-public sealed class RadiationPulseSystem : EntitySystem
+public sealed partial class RadiationPulseSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

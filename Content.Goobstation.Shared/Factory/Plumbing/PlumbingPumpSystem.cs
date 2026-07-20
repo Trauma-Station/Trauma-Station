@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.Chemistry.Components;
@@ -7,13 +9,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Factory.Plumbing;
 
-public sealed class PlumbingPumpSystem : EntitySystem
+public sealed partial class PlumbingPumpSystem : EntitySystem
 {
-    [Dependency] private readonly ExclusiveSlotsSystem _exclusive = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PlumbingFilterSystem _filter = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private ExclusiveSlotsSystem _exclusive = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PlumbingFilterSystem _filter = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     private EntityQuery<SolutionTransferComponent> _transferQuery;
 

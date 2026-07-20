@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.CloneProjector.Clone;
@@ -13,10 +9,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.CloneProjector;
 
-public abstract class SharedCloneProjectorSystem : EntitySystem
+public abstract partial class SharedCloneProjectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -54,7 +50,7 @@ public abstract class SharedCloneProjectorSystem : EntitySystem
             || !hostProjector.Comp.RestrictRangedWeapons)
             return;
 
-        _popupSystem.PopupClient(Loc.GetString("gun-disabled"), ent, ent);
+        _popupSystem.PopupEntity(Loc.GetString("gun-disabled"), ent, ent);
         args.Cancel();
     }
 

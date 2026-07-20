@@ -1,5 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -30,4 +31,10 @@ public sealed partial class ProjectileComponent
 
     [DataField]
     public Vector2 TargetCoordinates;
+
+    /// <summary>
+    /// Original shooter, used for prediction purposes
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? OriginalShooter;
 }

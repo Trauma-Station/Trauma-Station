@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: componentRegistry
+  id: ComponentsToRemoveOnGhoulify
+  components:
+  - type: Respirator
+    damage: !type:DamageSpecifier
+    damageRecovery: !type:DamageSpecifier
+  - type: Barotrauma
+    damage: !type:DamageSpecifier
+  - type: Hunger
+  - type: Thirst
+  - type: Reproductive
+    offspring: []
+    partnerWhitelist: !type:EntityWhitelist
+  - type: ReproductivePartner
+  - type: Temperature
+  - type: Pacified
+  - type: Xenomorph
+    caste: Drone
+  - type: RatKing
+    hungerPerDomainUse: 50
+    hungerPerArmyUse: 25
+  - type: Dragon
+    carpRiftHealing: !type:DamageSpecifier
+  - type: DiseaseCarrier
+
+- type: componentRegistry
+  id: ComponentsToRemoveOnUnGhoulify
+  components:
+  - type: Ghoul
+  - type: HereticMinion
+  - type: WeakToHoly
+  - type: GhostTakeoverAvailable
+  - type: HereticBladeUserBonusDamage
+  - type: HolyIgniteOnCollide
+  - type: HolyFlammable

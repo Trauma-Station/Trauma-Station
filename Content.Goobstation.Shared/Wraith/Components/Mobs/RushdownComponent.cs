@@ -1,7 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Components.Mobs;
 
@@ -44,12 +44,6 @@ public sealed partial class RushdownComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? JumpSound = new SoundCollectionSpecifier("Werewolf_Attack");
-
-    /// <summary>
-    /// Status effect to make you stunned.
-    /// </summary>
-    [DataField]
-    public ProtoId<StatusEffectPrototype> Stunned = "Stun";
 
     [DataField]
     public SoundSpecifier? ShockwaveSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_footstep_charge2.ogg");

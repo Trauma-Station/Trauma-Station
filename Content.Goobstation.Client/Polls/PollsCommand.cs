@@ -1,13 +1,14 @@
-using Robust.Client.UserInterface;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Console;
 using Content.Shared.Administration;
 
 namespace Content.Goobstation.Client.Polls;
 
 [AnyCommand]
-public sealed class PollsCommand : LocalizedCommands
+public sealed partial class PollsCommand : LocalizedCommands
 {
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     public override string Command => "polls";
     public override string Description => "Opens the community polls window.";

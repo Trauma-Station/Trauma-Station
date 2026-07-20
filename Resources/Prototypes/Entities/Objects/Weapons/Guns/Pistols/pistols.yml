@@ -5,6 +5,10 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Pistol
+  # </Trauma>
   - type: Sprite
     layers:
       - state: base
@@ -68,10 +72,6 @@
   - type: Appearance
   - type: StaticPrice
     price: 500
-  - type: Multishot # Goobstation V
-    missChance: 0.4
-    spreadMultiplier: 2
-    spreadAddition: 40
   - type: EmitSoundOnPickup
     sound:
       collection: PistolsPickUp
@@ -142,11 +142,11 @@
   description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
   components:
   - type: Gun
-    fireRate: 4 # Trauma
+    fireRate: 4 # Trauma - was 6
     selectedMode: SemiAuto
     availableModes:
-      - SemiAuto
-      - FullAuto
+    - SemiAuto
+    - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: Sprite
@@ -167,7 +167,7 @@
     proto: CartridgePistol
     cycleable: false # No synthesizing ammo for your syndicate masters.
   - type: BallisticAmmoSelfRefiller
-    autoRefillRate: 4s
+    autoRefillRate: 2s
     affectedByEmp: true
   - type: AmmoCounter
 
@@ -292,5 +292,3 @@
         whitelist:
           tags:
             - CartridgeMagnum
-  - type: Multishot #Goob
-    spreadMultiplier: 30

@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Client.Movement.Components;
 using Content.Client.Viewport;
@@ -19,8 +12,8 @@ namespace Content.Client.Movement.Systems;
 
 public sealed partial class EyeCursorOffsetSystem : EntitySystem
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
 
     // This value is here to make sure the user doesn't have to move their mouse
     // all the way out to the edge of the screen to get the full offset.

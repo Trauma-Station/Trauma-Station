@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Shared.Atmos;
 using Content.Shared.Charges.Systems;
@@ -10,7 +12,6 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Wraith.SpiritCandle;
@@ -22,16 +23,16 @@ namespace Content.Goobstation.Shared.Wraith.SpiritCandle;
 /// </summary>
 public sealed partial class SharedSpiritCandleSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedVisibilitySystem _visibility = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly Content.Shared.StatusEffect.StatusEffectsSystem _oldStatusEffects = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedVisibilitySystem _visibility = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _oldStatusEffects = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -119,6 +120,9 @@ public sealed partial class SharedSpiritCandleSystem : EntitySystem
         if (ent.Comp.AreaUid is {} areaUid)
             QueueDel(areaUid);
 
+        if (TerminatingOrDeleted(args.Entity))
+            return;
+
         var spawn = SpawnAttachedTo(ent.Comp.SpiritArea, Transform(args.Entity).Coordinates);
         _transform.SetParent(spawn, args.Entity);
         ent.Comp.AreaUid = spawn;
@@ -145,7 +149,7 @@ public sealed partial class SharedSpiritCandleSystem : EntitySystem
                 continue;
 
             _oldStatusEffects.TryAddStatusEffect<CorporealComponent>(ghostUid, ent.Comp.Corporeal, ent.Comp.CorporealDuration, true);
-            _statusEffects.TryAddStatusEffectDuration(ghostUid, ent.Comp.Weakened, out _, ent.Comp.WeakenedDuration);
+            _status.TryAddStatusEffectDuration(ghostUid, ent.Comp.Weakened, out _, ent.Comp.WeakenedDuration);
         }
 
         _popup.PopupEntity(Loc.GetString("spirit-candle-caught-wraith"), args.User, args.User, PopupType.LargeCaution);

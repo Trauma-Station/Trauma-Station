@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This is where the wraith mob exists, and all its variants (Harbinger, Plaguebringer, Trickster)
 
 - type: entity
@@ -14,9 +16,15 @@
     allowedStates:
     - Alive
     damage:
-      groups:
-        Brute: -0.2
-        Burn: -0.2
+      types:
+        Blunt: -0.07
+        Slash: -0.07
+        Piercing: -0.07
+        Ballistic: -0.05
+        Heat: -0.05
+        Cold: -0.05
+        Shock: -0.05
+        Caustic: -0.05
   - type: Emag
     emagType: All
     successText: wraith-decay-object1
@@ -52,8 +60,9 @@
     - Stun
     - Corporeal
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: NoSlip
   - type: PointLight
     enabled: true
@@ -87,15 +96,10 @@
         component: Corporeal
         time: 15
         type: Add
-        probability: 1
-      - !type:GenericStatusEffect
-        key: Stunned
-        component: Stunned
+      - !type:ModifyParalysis
         time: 3
         type: Add
-        probability: 1
-  - type: WeakToHoly
-    alwaysTakeHoly: true
+  - type: AlwaysTakeHoly
   - type: Access # Only realistically used while corporeal.
     groups:
     - AllAccess
@@ -127,15 +131,15 @@
         type: InstrumentBoundUserInterface
         requireInputValidation: false
       enum.RadialSelectorUiKey.Key: # WWDP
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
       enum.ListViewSelectorUiKey.Key: # WWDP
         type: ListViewSelectorBUI
-  - type: TriggerOnMobstateChange
-    mobState:
-      - Dead
-  - type: SmokeOnTrigger
-    duration: 3
-    spreadAmount: 3
+  #- type: TriggerOnMobstateChange  | disabled because it was only used for 2nd life
+  #  mobState:
+  #    - Dead
+  #- type: SmokeOnTrigger
+  #  duration: 3
+  #  spreadAmount: 3
   - type: Puller
     needsHands: false
   - type: GhostRole

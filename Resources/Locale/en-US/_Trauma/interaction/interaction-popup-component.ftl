@@ -3,3 +3,5 @@ petting-success-duckbot = You pet {THE($target)} on {POSS-ADJ($target)} metal he
 
 petting-failure-boogiebot = You reach out to pet {THE($target)}, but {SUBJECT($target)} boogies outta the way!
 petting-success-boogiebot = You pet {THE($target)} on {POSS-ADJ($target)} disco head.
+
+desk-bell-ding = Ding!

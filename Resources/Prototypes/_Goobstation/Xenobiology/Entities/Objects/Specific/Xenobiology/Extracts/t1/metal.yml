@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: MetalSlimeExtract
   parent: BaseSlimeExtract
@@ -15,7 +17,7 @@
       methods: [ Touch, Injection ]
       effects:
       - !type:NestedEffect
-        proto: XenobioExtractReagent
+        proto: XenobioExtractReaction
       - !type:SpawnEntity
         entity: SheetGlass15
       - !type:SpawnEntity

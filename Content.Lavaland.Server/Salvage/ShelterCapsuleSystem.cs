@@ -1,24 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Fluids.EntitySystems;
@@ -28,18 +7,16 @@ using Content.Shared.Chemistry.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Salvage;
 
-public sealed class ShelterCapsuleSystem : SharedShelterCapsuleSystem
+public sealed partial class ShelterCapsuleSystem : SharedShelterCapsuleSystem
 {
-    [Dependency] private readonly GridPreloaderSystem _preloader = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private GridPreloaderSystem _preloader = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -66,7 +43,7 @@ public sealed class ShelterCapsuleSystem : SharedShelterCapsuleSystem
 
         var xform = Transform(ent);
         var comp = ent.Comp;
-        var proto = _protoMan.Index(comp.PreloadedGrid);
+        var proto = ProtoMan.Index(comp.PreloadedGrid);
         var worldPos = _transform.GetMapCoordinates(ent, xform);
 
         if (!CheckCanDeploy(ent) || xform.MapUid == null)

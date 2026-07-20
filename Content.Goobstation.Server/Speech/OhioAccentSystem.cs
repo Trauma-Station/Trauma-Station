@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Speech.EntitySystems;
@@ -12,10 +6,10 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Speech;
 
-public sealed class OhioAccentSystem : EntitySystem
+public sealed partial class OhioAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

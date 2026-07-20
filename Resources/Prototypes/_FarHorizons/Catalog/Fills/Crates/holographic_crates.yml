@@ -1,0 +1,23 @@
+- type: entity
+  parent: CrateEngineeringSecure
+  id: CrateEngineeringHolographicFieldGenerator
+  name: Holographic Field Generator Crate
+  description: A crate containing a pair of Holographic Field Generator Flatpacks.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: HolographicFieldGeneratorFlatpack
+        amount: 2
+
+- type: entity
+  parent: CrateEngineeringSecure
+  id: CrateSecurityHolographicBarrierGenerator
+  name: Holographic Barrier Generator Crate
+  description: A crate containing a pair of Holographic Barrier Generator Flatpacks.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: HolographicBarrierGeneratorFlatpack
+        amount: 2

@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Eui;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
@@ -20,10 +7,17 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.EUI
 {
-    public sealed class EuiManager : IPostInjectInit
+    /// <summary>
+    /// Manager for server-side EUI handling.
+    /// </summary>
+    /// <remarks>
+    /// An EUI is a system for making a relatively-easy connection between client and server
+    /// for the purposes of UIs.
+    /// </remarks>
+    public sealed partial class EuiManager : IPostInjectInit
     {
-        [Dependency] private readonly IPlayerManager _players = default!;
-        [Dependency] private readonly IServerNetManager _net = default!;
+        [Dependency] private IPlayerManager _players = default!;
+        [Dependency] private IServerNetManager _net = default!;
 
         private readonly Dictionary<ICommonSession, PlayerEuiData> _playerData =
             new();
@@ -42,6 +36,9 @@ namespace Content.Server.EUI
             _players.PlayerStatusChanged += PlayerStatusChanged;
         }
 
+        /// <summary>
+        /// Initialisation of the EuIManager.
+        /// </summary>
         public void Initialize()
         {
             _net.RegisterNetMessage<MsgEuiCtl>();
@@ -49,6 +46,9 @@ namespace Content.Server.EUI
             _net.RegisterNetMessage<MsgEuiMessage>(RxMsgMessage);
         }
 
+        /// <summary>
+        /// Dispatches all queued state updates to the respective clients.
+        /// </summary>
         public void SendUpdates()
         {
             while (_stateUpdateQueue.TryDequeue(out var tuple))
@@ -66,6 +66,12 @@ namespace Content.Server.EUI
             }
         }
 
+        /// <summary>
+        /// Sends an "open" message to a client.
+        /// </summary>
+        /// <param name="eui">The Eui to open.</param>
+        /// <param name="player">The player client to receive the message.</param>
+        /// <exception cref="ArgumentException">Throws if the Eui is somehow already open.</exception>
         public void OpenEui(BaseEui eui, ICommonSession player)
         {
             if (eui.Id != 0)
@@ -87,10 +93,19 @@ namespace Content.Server.EUI
             _net.ServerSendMessage(msg, player.Channel);
         }
 
+        /// <summary>
+        /// Sends a "close" message to whatever client holds the provded Eui.
+        /// </summary>
+        /// <param name="eui">Eui to close.</param>
         public void CloseEui(BaseEui eui)
         {
             eui.Shutdown();
             _playerData[eui.Player].OpenUIs.Remove(eui.Id);
+
+            // <Trauma> - no error when closing EUI for disconnected player, doesn't matter
+            if (!eui.Player.Channel.IsConnected)
+                return;
+            // </Trauma>
 
             var msg = new MsgEuiCtl();
             msg.Id = eui.Id;
@@ -140,6 +155,10 @@ namespace Content.Server.EUI
             }
         }
 
+        /// <summary>
+        /// Queues an update notification for a specific Eui.
+        /// </summary>
+        /// <param name="eui">The Eui to be updated.</param>
         public void QueueStateUpdate(BaseEui eui)
         {
             DebugTools.Assert(eui.Id != 0, "EUI has not been opened yet.");

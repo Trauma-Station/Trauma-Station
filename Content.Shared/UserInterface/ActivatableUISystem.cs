@@ -15,12 +15,12 @@ namespace Content.Shared.UserInterface;
 
 public sealed partial class ActivatableUISystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
-    [Dependency] private readonly ActionBlockerSystem _blockerSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private ISharedAdminManager _adminManager = default!;
+    [Dependency] private ActionBlockerSystem _blockerSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -36,20 +36,21 @@ public sealed partial class ActivatableUISystem : EntitySystem
         SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<ActivationVerb>>(GetActivationVerb);
         SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<Verb>>(GetVerb);
 
-        SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<AlternativeVerb>>(GetAltVerb); // Goobstation
-
         SubscribeLocalEvent<UserInterfaceComponent, OpenUiActionEvent>(OnActionPerform);
 
+        InitializeTrauma(); // Trauma
         InitializePower();
     }
 
     private void OnStartup(Entity<ActivatableUIComponent> ent, ref ComponentStartup args)
     {
+        /* Goob edit
         if (ent.Comp.Key == null)
         {
             Log.Error($"Missing UI Key for entity: {ToPrettyString(ent)}");
             return;
         }
+        */
 
         // TODO BUI
         // set interaction range to zero to avoid constant range checks.
@@ -87,20 +88,6 @@ public sealed partial class ActivatableUISystem : EntitySystem
             return;
 
         args.Verbs.Add(new Verb
-        {
-            Act = () => InteractUI(args.User, uid, component),
-            Text = Loc.GetString(component.VerbText),
-            // TODO VERB ICON find a better icon
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
-        });
-    }
-
-    private void GetAltVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<AlternativeVerb> args) // Goobstation
-    {
-        if (!component.AltVerb || !ShouldAddVerb(uid, component, args))
-            return;
-
-        args.Verbs.Add(new AlternativeVerb
         {
             Act = () => InteractUI(args.User, uid, component),
             Text = Loc.GetString(component.VerbText),

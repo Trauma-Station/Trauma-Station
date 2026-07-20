@@ -1,8 +1,5 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Mime Malaise
 - type: entity
   parent: ActionMimeMalaise
@@ -10,7 +7,7 @@
   name: Mime Malaise II
   components:
   - type: Action
-    useDelay: 25
+    useDelay: 20
 
 - type: entity
   parent: ActionMimeMalaise
@@ -18,7 +15,7 @@
   name: Mime Malaise III
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 - type: entity
   parent: ActionMimeMalaise
@@ -26,7 +23,7 @@
   name: Mime Malaise IV
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 5
 
 - type: entity
   parent: ActionMimeMalaise
@@ -34,7 +31,7 @@
   name: Mime Malaise V
   components:
   - type: Action
-    useDelay: 10
+    useDelay: 1
 
 # Curse of the Cluwne
 - type: entity
@@ -43,7 +40,7 @@
   name: Curse of the Cluwne II
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 20
 
 - type: entity
   parent: ActionCluwneCurse
@@ -51,7 +48,7 @@
   name: Curse of the Cluwne III
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 # Banana Touch
 - type: entity
@@ -60,7 +57,7 @@
   name: Banana Touch II
   components:
   - type: Action
-    useDelay: 25
+    useDelay: 20
 
 - type: entity
   parent: ActionBananaTouch
@@ -68,7 +65,7 @@
   name: Banana Touch III
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 - type: entity
   parent: ActionBananaTouch
@@ -76,7 +73,7 @@
   name: Banana Touch IV
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 5
 
 - type: entity
   parent: ActionBananaTouch
@@ -84,7 +81,7 @@
   name: Banana Touch V
   components:
   - type: Action
-    useDelay: 10
+    useDelay: 1
 
 # Magic Missile
 - type: entity
@@ -93,7 +90,7 @@
   name: Magic Missile II
   components:
   - type: Action
-    useDelay: 13
+    useDelay: 10
 
 - type: entity
   parent: ActionMagicMissile
@@ -101,7 +98,7 @@
   name: Magic Missile III
   components:
   - type: Action
-    useDelay: 6
+    useDelay: 5
 
 # Disable Technology
 - type: entity
@@ -110,7 +107,7 @@
   name: Disable Technology II
   components:
   - type: Action
-    useDelay: 16
+    useDelay: 15
 
 - type: entity
   parent: ActionDisableTech
@@ -118,7 +115,7 @@
   name: Disable Technology III
   components:
   - type: Action
-    useDelay: 12
+    useDelay: 10
 
 - type: entity
   parent: ActionDisableTech
@@ -126,7 +123,7 @@
   name: Disable Technology IV
   components:
   - type: Action
-    useDelay: 8
+    useDelay: 5
 
 - type: entity
   parent: ActionDisableTech
@@ -134,7 +131,7 @@
   name: Disable Technology V
   components:
   - type: Action
-    useDelay: 4
+    useDelay: 1
 
 # Smoke
 - type: entity
@@ -160,7 +157,7 @@
   name: Repulse II
   components:
   - type: Action
-    useDelay: 33.75
+    useDelay: 30
 
 - type: entity
   parent: ActionRepulse
@@ -168,7 +165,7 @@
   name: Repulse III
   components:
   - type: Action
-    useDelay: 27.5
+    useDelay: 20
 
 - type: entity
   parent: ActionRepulse
@@ -176,7 +173,7 @@
   name: Repulse IV
   components:
   - type: Action
-    useDelay: 21.25
+    useDelay: 10
 
 - type: entity
   parent: ActionRepulse
@@ -184,7 +181,7 @@
   name: Repulse V
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 5
 
 # Stop Time
 - type: entity
@@ -193,7 +190,7 @@
   name: Stop Time II
   components:
   - type: Action
-    useDelay: 35
+    useDelay: 25
 
 - type: entity
   parent: ActionStopTime
@@ -201,7 +198,7 @@
   name: Stop Time III
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 # Blind
 - type: entity
@@ -210,7 +207,7 @@
   name: Blind II
   components:
   - type: Action
-    useDelay: 12
+    useDelay: 11
 
 - type: entity
   parent: ActionBlindSpell
@@ -218,7 +215,7 @@
   name: Blind III
   components:
   - type: Action
-    useDelay: 9
+    useDelay: 7
 
 - type: entity
   parent: ActionBlindSpell
@@ -226,7 +223,7 @@
   name: Blind IV
   components:
   - type: Action
-    useDelay: 6
+    useDelay: 3
 
 - type: entity
   parent: ActionBlindSpell
@@ -234,7 +231,7 @@
   name: Blind V
   components:
   - type: Action
-    useDelay: 3
+    useDelay: 1
 
 # Mutate
 - type: entity
@@ -285,7 +282,7 @@
   name: Lightning Bolt II
   components:
   - type: Action
-    useDelay: 6.75
+    useDelay: 6
 
 - type: entity
   parent: ActionLightningBolt
@@ -293,7 +290,7 @@
   name: Lightning Bolt III
   components:
   - type: Action
-    useDelay: 5.5
+    useDelay: 5
 
 - type: entity
   parent: ActionLightningBolt
@@ -301,7 +298,7 @@
   name: Lightning Bolt IV
   components:
   - type: Action
-    useDelay: 4.25
+    useDelay: 2
 
 - type: entity
   parent: ActionLightningBolt
@@ -309,7 +306,7 @@
   name: Lightning Bolt V
   components:
   - type: Action
-    useDelay: 3
+    useDelay: 1
 
 # Homing Toolbox
 - type: entity
@@ -318,7 +315,7 @@
   name: Homing Toolbox II
   components:
   - type: Action
-    useDelay: 6.75
+    useDelay: 6
 
 - type: entity
   parent: ActionHomingToolbox
@@ -326,7 +323,7 @@
   name: Homing Toolbox III
   components:
   - type: Action
-    useDelay: 5.5
+    useDelay: 4
 
 - type: entity
   parent: ActionHomingToolbox
@@ -334,7 +331,7 @@
   name: Homing Toolbox IV
   components:
   - type: Action
-    useDelay: 4.25
+    useDelay: 2
 
 - type: entity
   parent: ActionHomingToolbox
@@ -342,7 +339,7 @@
   name: Homing Toolbox V
   components:
   - type: Action
-    useDelay: 3
+    useDelay: 0.5
 
 # Arcane Barrage
 - type: entity
@@ -385,7 +382,7 @@
   name: Curse of the Barnyard II
   components:
   - type: Action
-    useDelay: 9
+    useDelay: 7.5
 
 - type: entity
   parent: ActionBarnyardCurse
@@ -393,7 +390,7 @@
   name: Curse of the Barnyard III
   components:
   - type: Action
-    useDelay: 3
+    useDelay: 1
 
 # Scream For Me
 - type: entity
@@ -402,7 +399,7 @@
   name: Scream For Me II
   components:
   - type: Action
-    useDelay: 50
+    useDelay: 40
 
 - type: entity
   parent: ActionScreamForMe
@@ -410,7 +407,7 @@
   name: Scream For Me III
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 30
 
 - type: entity
   parent: ActionScreamForMe
@@ -418,7 +415,7 @@
   name: Scream For Me IV
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 20
 
 - type: entity
   parent: ActionScreamForMe
@@ -426,7 +423,7 @@
   name: Scream For Me V
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 10
 
 # Teleport
 - type: entity
@@ -519,7 +516,7 @@
   name: Swap II
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 7
 
 - type: entity
   parent: ActionSwapSpell
@@ -527,7 +524,7 @@
   name: Swap III
   components:
   - type: Action
-    useDelay: 5
+    useDelay: 3
 
 # Blink
 - type: entity
@@ -536,7 +533,7 @@
   name: Blink II
   components:
   - type: Action
-    useDelay: 2
+    useDelay: 1.5
 
 - type: entity
   parent: ActionBlinkSpell
@@ -544,7 +541,7 @@
   name: Blink III
   components:
   - type: Action
-    useDelay: 1
+    useDelay: 0.5
 
 # Force Wall
 - type: entity
@@ -553,7 +550,7 @@
   name: Force Wall II
   components:
   - type: Action
-    useDelay: 8.75
+    useDelay: 20
 
 - type: entity
   parent: ActionForceWall
@@ -561,7 +558,7 @@
   name: Force Wall III
   components:
   - type: Action
-    useDelay: 7.5
+    useDelay: 15
 
 - type: entity
   parent: ActionForceWall
@@ -569,7 +566,7 @@
   name: Force Wall IV
   components:
   - type: Action
-    useDelay: 6.25
+    useDelay: 7
 
 - type: entity
   parent: ActionForceWall
@@ -577,7 +574,7 @@
   name: Force Wall V
   components:
   - type: Action
-    useDelay: 5
+    useDelay: 4
 
 # Charge
 - type: entity
@@ -586,7 +583,7 @@
   name: Charge II
   components:
   - type: Action
-    useDelay: 50
+    useDelay: 30
 
 - type: entity
   parent: ActionChargeSpell
@@ -594,7 +591,7 @@
   name: Charge III
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 15
 
 - type: entity
   parent: ActionChargeSpell
@@ -602,7 +599,7 @@
   name: Charge IV
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 5
 
 - type: entity
   parent: ActionChargeSpell
@@ -610,7 +607,7 @@
   name: Charge V
   components:
   - type: Action
-    useDelay: 20
+    useDelay: 1
 
 # Mind Swap
 - type: entity
@@ -653,7 +650,7 @@
   name: Knock II
   components:
   - type: Action
-    useDelay: 6
+    useDelay: 5
 
 - type: entity
   parent: ActionKnock
@@ -661,7 +658,7 @@
   name: Knock III
   components:
   - type: Action
-    useDelay: 2
+    useDelay: 0.5
 
 # Spell Cards
 - type: entity
@@ -669,16 +666,16 @@
   id: ActionSpellCardsII
   name: Spell Cards II
   components:
-  - type: SpellCardsAction
-    useDelay: 4
+  - type: AutoRecharge
+    rechargeDuration: 1.5
 
 - type: entity
   parent: ActionSpellCards
   id: ActionSpellCardsIII
   name: Spell Cards III
   components:
-  - type: SpellCardsAction
-    useDelay: 2
+  - type: AutoRecharge
+    rechargeDuration: 1
 
 # Rod Form
 - type: entity

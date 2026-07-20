@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Morber <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Morbo <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Station.Systems;
@@ -20,10 +7,10 @@ using Robust.Shared.Console;
 namespace Content.Server.AlertLevel.Commands
 {
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class SetAlertLevelCommand : LocalizedEntityCommands
+    public sealed partial class SetAlertLevelCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-        [Dependency] private readonly StationSystem _stationSystem = default!;
+        [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+        [Dependency] private StationSystem _stationSystem = default!;
 
         public override string Command => "setalertlevel";
 

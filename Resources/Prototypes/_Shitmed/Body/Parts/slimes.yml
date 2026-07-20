@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+## Parts
+
+- type: entity
+  parent: OrganAnimalTorso
+  id: OrganSlimesTorso
+  name: slime body
+  components:
+  - type: BodyPart
+    slots:
+    - Brain # sentient slime core
+    - Lungs # slime lungs
+  - type: Woundable
+    boneEntity: null

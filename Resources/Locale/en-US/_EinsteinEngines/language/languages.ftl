@@ -62,12 +62,6 @@ language-RobotTalk-description = A language consisting of harsh binary chirps, w
 language-Calcic-name = Calcic
 language-Calcic-description = The bone-rattling language of Skeletons and Plasmamen. It sounds like a harmonic trousle of bones with a humerus tone, sans any off-tune ribbing.
 
-language-ValyrianStandard-name = Valyrian Standard
-language-ValyrianStandard-description =
-    A language descended from eastern european languages of old earth - Valyrian Standard is the commonly spoken tongue of Harpies brought up on their homeworld of Valyrian 4b
-    It is rarely spoken outside of the worlds of its native speakers, and has in modern times been supplanted by the 'Conlangs of the Sol Alliance.
-    Its speakers are those who wish to uphold the traditions and beliefs of ancient peoples from before the colonial era.
-
 language-Xeeplian-name = Xeeplian
 language-Xeeplian-description =
     Our language is highly advanced, efficient and to the point.

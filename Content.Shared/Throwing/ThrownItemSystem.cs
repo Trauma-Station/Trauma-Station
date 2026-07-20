@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.TimeStop;
+using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Throwing;
 using Robust.Shared.Player;
 // </Trauma>
@@ -21,15 +21,18 @@ namespace Content.Shared.Throwing
     /// <summary>
     ///     Handles throwing landing and collisions.
     /// </summary>
-    public sealed class ThrownItemSystem : EntitySystem
+    public sealed partial class ThrownItemSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly INetManager _netMan = default!;
-        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly FixtureSystem _fixtures = default!;
-        [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-        [Dependency] private readonly SharedGravitySystem _gravity = default!;
+        // <Trauma>
+        [Dependency] private CommonWizardSystem _wizard = default!;
+        // </Trauma>
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private INetManager _netMan = default!;
+        [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private FixtureSystem _fixtures = default!;
+        [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+        [Dependency] private SharedPhysicsSystem _physics = default!;
+        [Dependency] private SharedGravitySystem _gravity = default!;
 
         private const string ThrowingFixture = "throw-fixture";
 
@@ -97,7 +100,7 @@ namespace Content.Shared.Throwing
 
         public void StopThrow(EntityUid uid, ThrownItemComponent thrownItemComponent)
         {
-            if (HasComp<FrozenComponent>(uid)) // Goobstation
+            if (_wizard.IsMovementBlocked(uid)) // Goobstation
                 return;
 
             if (TryComp<PhysicsComponent>(uid, out var physics))
@@ -129,7 +132,7 @@ namespace Content.Shared.Throwing
 
         public void LandComponent(EntityUid uid, ThrownItemComponent thrownItem, PhysicsComponent physics, bool playSound)
         {
-            if (HasComp<FrozenComponent>(uid)) // Goobstation
+            if (_wizard.IsMovementBlocked(uid)) // Goobstation
                 return;
 
             if (thrownItem.Landed || thrownItem.Deleted || _gravity.IsWeightless(uid) || Deleted(uid))
@@ -167,14 +170,13 @@ namespace Content.Shared.Throwing
             base.Update(frameTime);
 
             var query = EntityQueryEnumerator<ThrownItemComponent, PhysicsComponent>();
-            var frozenQuery = GetEntityQuery<FrozenComponent>(); // Goobstation
             while (query.MoveNext(out var uid, out var thrown, out var physics))
             {
                 // If you remove this check verify slipping for other entities is networked properly.
                 if (_netMan.IsClient && !physics.Predict)
                     continue;
 
-                if (frozenQuery.HasComp(uid)) // Goobstation
+                if (_wizard.IsMovementBlocked(uid)) // Goobstation
                     continue;
 
                 if (thrown.LandTime <= _gameTiming.CurTime)

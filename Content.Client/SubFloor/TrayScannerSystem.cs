@@ -1,43 +1,48 @@
-// SPDX-FileCopyrightText: 2021 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <slambamactionman@gmail.com>
-// SPDX-FileCopyrightText: 2025 qwerltaz <msmarcinpl@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.Hands.EntitySystems;
+using Content.Client.Items;
+using Content.Client.Items.UI;
+using Content.Client.Message;
+using Content.Client.Power.Visualizers;
+using Content.Client.Stylesheets;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Disposal.Tube;
+using Content.Shared.Input;
 using Content.Shared.Inventory;
 using Content.Shared.SubFloor;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.Input;
 using Robust.Client.Player;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 
 namespace Content.Client.SubFloor;
 
-public sealed class TrayScannerSystem : SharedTrayScannerSystem
+public sealed partial class TrayScannerSystem : SharedTrayScannerSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TrayScanRevealSystem _trayScanReveal = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TrayScanRevealSystem _trayScanReveal = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private EntityQuery<TrayScannerComponent> _trayScannerQuery = default!;
+    [Dependency] private EntityQuery<SubFloorHideComponent> _subFloorHideQuery = default!;
 
     private const string TRayAnimationKey = "trays";
     private const double AnimationLength = 0.3;
 
     public const LookupFlags Flags = LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Approximate;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        Subs.ItemStatus<TrayScannerComponent>(OnCollectItemStatus);
+    }
 
     public override void Update(float frameTime)
     {
@@ -48,46 +53,27 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
 
         // TODO: Multiple viewports or w/e
         var player = _player.LocalEntity;
-        var xformQuery = GetEntityQuery<TransformComponent>();
 
-        if (!xformQuery.TryGetComponent(player, out var playerXform))
+        if (!TryComp(player, out TransformComponent? playerXform))
             return;
 
-        var playerPos = _transform.GetWorldPosition(playerXform, xformQuery);
+        var playerPos = _transform.GetWorldPosition(playerXform);
         var playerMap = playerXform.MapID;
         var range = 0f;
+        var mode = TrayScannerMode.All;
         HashSet<Entity<SubFloorHideComponent>> inRange;
-        var scannerQuery = GetEntityQuery<TrayScannerComponent>();
 
         // TODO: Should probably sub to player attached changes / inventory changes but inventory's
         // API is extremely skrungly. If this ever shows up on dottrace ping me and laugh.
         var canSee = false;
 
-        // TODO: Common iterator for both systems.
-        if (_inventory.TryGetContainerSlotEnumerator(player.Value, out var enumerator))
+        foreach (var item in _inventory.GetHandOrInventoryEntities(player.Value, SlotFlags.POCKET))
         {
-            while (enumerator.MoveNext(out var slot))
-            {
-                foreach (var ent in slot.ContainedEntities)
-                {
-                    if (!scannerQuery.TryGetComponent(ent, out var sneakScanner) || !sneakScanner.Enabled)
-                        continue;
-
-                    canSee = true;
-                    range = MathF.Max(range, sneakScanner.Range);
-                }
-            }
-        }
-
-        foreach (var hand in _hands.EnumerateHands(player.Value))
-        {
-            if (!_hands.TryGetHeldItem(player.Value, hand, out var heldEntity))
+            if (!_trayScannerQuery.TryGetComponent(item, out var scanner) || !scanner.Enabled)
                 continue;
 
-            if (!scannerQuery.TryGetComponent(heldEntity, out var heldScanner) || !heldScanner.Enabled)
-                continue;
-
-            range = MathF.Max(heldScanner.Range, range);
+            range = MathF.Max(scanner.Range, range);
+            mode = scanner.Mode;
             canSee = true;
             break;
         }
@@ -96,23 +82,28 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
 
         if (canSee)
         {
-            _lookup.GetEntitiesInRange(playerMap, playerPos, range, inRange, flags: Flags);
+            var entitiesInRange = new HashSet<Entity<SubFloorHideComponent>>();
+            _lookup.GetEntitiesInRange(playerMap, playerPos, range, entitiesInRange, flags: Flags);
 
-            foreach (var (uid, comp) in inRange)
+            foreach (var (uid, comp) in entitiesInRange)
             {
+                if (!MatchesMode(uid, mode))
+                    continue;
+
+                inRange.Add((uid, comp));
+
                 if (comp.IsUnderCover || _trayScanReveal.IsUnderRevealingEntity(uid))
                     EnsureComp<TrayRevealedComponent>(uid);
             }
         }
 
         var revealedQuery = AllEntityQuery<TrayRevealedComponent, SpriteComponent>();
-        var subfloorQuery = GetEntityQuery<SubFloorHideComponent>();
 
         while (revealedQuery.MoveNext(out var uid, out _, out var sprite))
         {
             // Revealing
             // Add buffer range to avoid flickers.
-            if (subfloorQuery.TryGetComponent(uid, out var subfloor) &&
+            if (_subFloorHideQuery.TryGetComponent(uid, out var subfloor) &&
                 inRange.Contains((uid, subfloor)))
             {
                 // Due to the fact client is predicting this server states will reset it constantly
@@ -187,4 +178,66 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
     {
         _appearance.SetData(uid, SubFloorVisuals.ScannerRevealed, value);
     }
+
+    private bool MatchesMode(EntityUid uid, TrayScannerMode mode)
+    {
+        return mode switch
+        {
+            TrayScannerMode.All => true,
+            TrayScannerMode.Wiring => HasComp<CableVisualizerComponent>(uid),
+            TrayScannerMode.Piping => HasComp<AtmosPipeLayersComponent>(uid) || HasComp<DisposalTubeComponent>(uid),
+            _ => false,
+        };
+    }
+
+    #region UI
+    private Control OnCollectItemStatus(Entity<TrayScannerComponent> entity)
+    {
+        _inputManager.TryGetKeyBinding((ContentKeyFunctions.AltUseItemInHand), out var binding);
+        return new StatusControl(entity, binding?.GetKeyString() ?? "");
+    }
+
+    private sealed class StatusControl : PollingItemStatusControl<StatusControl.TRayData>
+    {
+        private readonly RichTextLabel _label;
+        private readonly TrayScannerComponent _scanner;
+        private readonly string _keyBindingName;
+
+        public StatusControl(TrayScannerComponent scanner, string keyBindingName)
+        {
+            _scanner = scanner;
+            _keyBindingName = keyBindingName;
+            _label = new RichTextLabel { StyleClasses = { StyleClass.ItemStatus } };
+            AddChild(_label);
+        }
+
+        protected override TRayData PollData()
+        {
+            return new TRayData(_scanner.Enabled, _scanner.Mode);
+        }
+
+        protected override void Update(in TRayData data)
+        {
+            if (!data.Enabled)
+            {
+                _label.SetMarkup(string.Empty);
+                return;
+            }
+
+            var modeLocString = data.Mode switch
+            {
+                TrayScannerMode.All => "tray-scanner-examine-mode-all",
+                TrayScannerMode.Wiring => "tray-scanner-examine-mode-wiring",
+                TrayScannerMode.Piping => "tray-scanner-examine-mode-piping",
+                _ => "",
+            };
+
+            _label.SetMarkup(Robust.Shared.Localization.Loc.GetString("tray-scanner-item-status-label",
+                ("mode", Robust.Shared.Localization.Loc.GetString(modeLocString)),
+                ("keybinding", _keyBindingName)));
+        }
+
+        public readonly record struct TRayData(bool Enabled, TrayScannerMode Mode);
+    }
+    #endregion
 }

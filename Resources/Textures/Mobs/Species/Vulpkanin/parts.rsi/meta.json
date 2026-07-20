@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Made by FairlySadPanda (Github/Discord); with help from ScarKy0 (Github/Discord). chest and groin split from torso by @deltanedas (github)",
+    "copyright": "Made by FairlySadPanda (Github/Discord); with help from ScarKy0 (Github/Discord)",
     "size": {
         "x": 32,
         "y": 32
@@ -14,11 +14,7 @@
             "name": "icon"
         },
         {
-            "name": "head_f",
-            "directions": 4
-        },
-        {
-            "name": "head_m",
+            "name": "head",
             "directions": 4
         },
         {
@@ -54,19 +50,11 @@
             "directions": 4
         },
         {
-            "name": "chest_f",
+            "name": "torso_f",
             "directions": 4
         },
         {
-            "name": "chest_m",
-            "directions": 4
-        },
-        {
-            "name": "groin_f",
-            "directions": 4
-        },
-        {
-            "name": "groin_m",
+            "name": "torso_m",
             "directions": 4
         },
         {

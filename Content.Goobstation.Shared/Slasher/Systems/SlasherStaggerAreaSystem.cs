@@ -1,29 +1,29 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Shared.Actions;
-using Content.Shared.Body.Components;
+using Content.Shared.Body;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 
 /// <summary>
 /// Handles the Slasher Stagger Area action. When used, slows nearby mobs in range for a short duration.
 /// </summary>
-public sealed class SlasherStaggerAreaSystem : EntitySystem
+public sealed partial class SlasherStaggerAreaSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly EntProtoId StaggerEffect = "SlasherStaggerStatusEffect";
 

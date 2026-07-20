@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: CharcoalForge
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unlit
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 5
+      - material: Charcoal
+        amount: 15
+        doAfter: 5
+  - node: unlit
+    entity: CharcoalForgeUnlit
+    edges:
+    - to: lit
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: lit
+    entity: CharcoalForgeLit

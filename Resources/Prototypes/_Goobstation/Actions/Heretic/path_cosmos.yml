@@ -1,8 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: ActionHereticCosmicRune
   name: Cosmic Rune
   description: Creates a cosmic rune at your position, only two can exist at a time. Invoking one rune transports you to the other. Anyone with a star mark gets transported along with you.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -25,7 +26,6 @@
   id: ActionHereticStarTouch
   name: Star Touch
   description: Can be used to apply a star mark to a target. If your victim is already star marked, tethers you to your target with a cosmic ray. If the tether remains unbroken for 8 seconds, they will be put to sleep and teleported to you. Star Touch can also remove Cosmic Runes, or teleport you to your Star Gazer when used in hand.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 1
@@ -34,18 +34,25 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: star_touch
   - type: InstantAction
-    event: !type:EventHereticStarTouch
+    event: !type:TouchSpellEvent
+      touchSpell: TouchSpellStar
+      touchSpellWhitelist:
+        components:
+        - StarTouch
   - type: HereticAction
     requireMagicItem: true
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   id: ActionHereticStarBlast
   name: Star Blast
   description: This spell fires an unstoppable disk with cosmic energies at a target, spreading the star mark. When recasted, you will be teleported to the disk, and cosmic fields will generate from the disk and from the caster, pulling nearby heathens into it.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
+    raiseOnAction: true
     useDelay: 1
     itemIconStyle: NoItem
     sound:
@@ -58,6 +65,12 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:EventHereticStarBlast
+    # Replace with its used in yml chud
+    # anyway
+    # its a shitcode way just murder it all
+    # add a marker component to the star blast action yml and check for it in there
+    # instead of getting the event shitcode
+    # then make the star blast event just inherit WorldTargetActionEvent
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction
@@ -68,7 +81,6 @@
   id: ActionHereticCosmicExpansion
   name: Cosmic Expansion
   description: This spell generates a 5x5 domain of cosmic fields. Creatures up to 7 tiles away will also receive a star mark.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -90,7 +102,6 @@
   id: ActionStarGaze
   name: Star Gaze
   description: Generates a massive death beam that eradicates everything in it's path. Has it's own gravitational pull, sucking in new victims.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -109,7 +120,6 @@
   id: ActionResetStarGazerConsciousness
   name: Reset Star Gazer Consciousness
   description: Replaces the mind of your summon with that of a different ghost.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -127,7 +137,6 @@
   id: ActionStarGazerSeekMaster
   name: Seek Master
   description: Teleports you to your master.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -138,3 +147,4 @@
       state: stargazer
   - type: InstantAction
     event: !type:StarGazerSeekMasterEvent
+  - type: HereticAction
