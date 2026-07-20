@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.Silicons.Borgs.Components;
 /// <summary>
 /// Enables a borg to disguise as another borg. This holds data about the disguise needed.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedBorgDisguiseSystem)), AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedBorgDisguiseSystem)), AutoGenerateComponentState(true)]
 public sealed partial class BorgDisguiseComponent : Component
 {
     /// <summary>

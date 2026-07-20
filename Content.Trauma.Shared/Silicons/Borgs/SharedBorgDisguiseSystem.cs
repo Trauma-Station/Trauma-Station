@@ -14,11 +14,14 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private MetaDataSystem _meta = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+
+    private CompName _accessName;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _accessName = Factory.CompName<AccessReaderComponent>();
 
         SubscribeLocalEvent<BorgDisguiseComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BorgDisguiseComponent, ComponentShutdown>(OnCompRemove);
@@ -34,7 +37,7 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
         if (!ProtoMan.TryIndex(comp.DisguisedPrototype, out var disguisedProto))
             return;
 
-        if (!disguisedProto.TryGetComponent<AccessReaderComponent>("AccessReader", out var disguisedAccessReader))
+        if (!disguisedProto.TryComp(_accessName, out AccessReaderComponent? disguisedAccessReader))
             return;
 
         args.OverrideAccessLists = disguisedAccessReader.AccessLists;
@@ -50,7 +53,7 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
         if (!TryPrototype(uid, out var entityPrototype))
             return;
 
-        if (comp.Disguised && _prototypeManager.TryIndex(comp.DisguisedPrototype, out var disguisedPrototype))
+        if (comp.Disguised && ProtoMan.TryIndex(comp.DisguisedPrototype, out var disguisedPrototype))
         {
             _meta.SetEntityName(uid, disguisedPrototype.Name);
             _meta.SetEntityDescription(uid, disguisedPrototype.Description);
