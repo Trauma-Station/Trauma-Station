@@ -1,6 +1,4 @@
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Emoting;
 

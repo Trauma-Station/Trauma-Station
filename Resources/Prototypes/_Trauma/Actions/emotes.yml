@@ -4,7 +4,7 @@
   chatMessages: ["chat-emote-msg-blush"]
   whitelist:
     components:
-    - HumanoidAppearance
+    - HumanoidProfile
   blacklist:
     tags:
     - SiliconEmotes
@@ -15,7 +15,7 @@
     - blushes
     - blushes.
     - blushes!
-  event: !type:AnimationVisualEmoteEvent # Trauma
+  event: !type:AnimationVisualEmoteEvent
     layer: Blush
     time: 5.2
     key: emoteAnimBlush
@@ -26,7 +26,7 @@
   chatMessages: ["chat-emote-msg-tongue"]
   whitelist:
     components:
-    - HumanoidAppearance
+    - HumanoidProfile
   blacklist:
     tags:
     - SiliconEmotes
@@ -37,7 +37,7 @@
     - sticks her tongue out
     - sticks their tongue out
     - sticks its tongue out
-  event: !type:AnimationVisualEmoteEvent # Trauma
+  event: !type:AnimationVisualEmoteEvent
     layer: Tongue
     time: 5.2
     key: emoteAnimTongue

@@ -11,6 +11,7 @@ namespace Content.Server.Entry
             "MultiShaderSprite",
             "ItemSlotRenderer",
             "ShowSpriteLayerStatusEffect",
+            "AnimatedEmotesBlacklist",
             // </Trauma>
             "ConstructionGhost",
             "IconSmooth",

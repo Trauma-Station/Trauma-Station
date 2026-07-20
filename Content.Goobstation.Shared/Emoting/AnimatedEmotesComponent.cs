@@ -48,6 +48,9 @@ public sealed partial class AnimationVisualEmoteEvent : EntityEventArgs
     public bool SetVisible = true;
 }
 
+[ByRefEvent]
+public record struct AnimationVisualEmoteAttemptEvent(HumanoidVisualEmoteLayers Layer, bool Cancelled = false, Color? ColorOverride = null);
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAnimatedEmotesSystem))]
 [AutoGenerateComponentState(true)]
 public sealed partial class AnimatedEmotesComponent : Component
@@ -93,10 +96,12 @@ public sealed partial class AnimatedEmotesComponent : Component
     #endregion
 }
 
+[Flags, Serializable, NetSerializable]
 public enum HumanoidVisualEmoteLayers : byte
 {
-    Sigh = 0,
-    Cry,
-    Blush,
-    Tongue,
+    None = 0,
+    Sigh = 1 << 0,
+    Cry = 1 << 1,
+    Blush = 1 << 2,
+    Tongue = 1 << 3,
 }

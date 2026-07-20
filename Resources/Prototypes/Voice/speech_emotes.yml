@@ -73,6 +73,12 @@
 - type: emote
   id: Sigh
   name: chat-emote-name-sigh
+  # <Trauma>
+  event: !type:AnimationVisualEmoteEvent
+    layer: Sigh
+    time: 1.5
+    key: emoteAnimSigh
+  # </Trauma>
   category: Vocal
   icon: Interface/Emotes/sigh.png
   whitelist:
@@ -86,10 +92,6 @@
     - sigh
     - sighs
     - sighed
-  event: !type:AnimationVisualEmoteEvent # Trauma
-    layer: Sigh
-    time: 1.5
-    key: emoteAnimSigh
 
 - type: emote
   id: Whistle
@@ -110,6 +112,12 @@
 
 - type: emote
   id: Crying
+  # <Trauma>
+  event: !type:AnimationVisualEmoteEvent
+    layer: Cry
+    time: 3.2
+    key: emoteAnimCry
+  # </Trauma>
   name: chat-emote-name-crying
   category: Vocal
   icon: Interface/Emotes/cry.png
@@ -127,10 +135,6 @@
     - sob
     - sobs
     - sobbing
-  event: !type:AnimationVisualEmoteEvent # Trauma
-    layer: Cry
-    time: 3.2
-    key: emoteAnimCry
 
 - type: emote
   id: Squish
