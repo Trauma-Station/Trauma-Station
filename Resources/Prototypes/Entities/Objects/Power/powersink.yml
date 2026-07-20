@@ -55,9 +55,6 @@
       sprite: Objects/Power/powersink.rsi
       state: powersink
     - type: WarpPoint
-      location: powersink
-      #blacklist: Not merged yet?
-      #  tags:
-      #  - GhostOnlyWarp
+      location: location-powersink
     - type: StaticPrice
       price: 3000
