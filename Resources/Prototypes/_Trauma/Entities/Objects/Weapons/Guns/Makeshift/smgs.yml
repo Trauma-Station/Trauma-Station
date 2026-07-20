@@ -39,7 +39,7 @@
        priority: 2
        whitelist:
         tags:
-        - MagazineCustom725SMG
+        - MagazineCustomSMG
        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
        name: Chamber
@@ -60,8 +60,8 @@
   - type: Gun
     minAngle: 30
     maxAngle: 60
-    fireRate: 3
-    burstFireRate: 3
+    fireRate: 5
+    burstFireRate: 5
     angleIncrease: 3
     angleDecay: 16
     selectedMode: FullAuto
@@ -78,4 +78,4 @@
       gun_magazine:
        whitelist:
         tags:
-        - MagazinePatented725SMG
+        - MagazinePatentedSMG

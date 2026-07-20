@@ -1,2 +1,133 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: MagazineCustomSMG
+  name: "makeshift box magazine (7.62x25mm Tokarev)"
+  description: A makeshift box magazine that holds 32 rounds of 7.62x25mm Tokarev.
+  components:
+  - type: Tag
+    tags:
+      - MagazineCustomSMG
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - Cartridge725Makeshift
+    capacity: 32
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\custom_smg_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: MagazinePatentedSMG
+  name: "makeshift curved magazine (7.62x25mm Tokarev)"
+  description: A makeshift curved magazine that holds 35 rounds of 7.62x25mm Tokarev.
+  components:
+  - type: Tag
+    tags:
+      - MagazinePatentedSMG
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - Cartridge725Makeshift
+    capacity: 35
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\patented_smg_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: MagazineSAR
+  name: "makeshift box magazine (7.62x51mm NATO)"
+  description: A makeshift box magazine that holds 20 rounds of 7.62x51mm NATO.
+  components:
+  - type: Tag
+    tags:
+      - MagazineSAR
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - Cartridge751Makeshift
+    capacity: 20
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\makeshift_sar_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: MagazineAKMakeshift
+  name: "makeshift box magazine (7.62x39mm Soviet)"
+  description: A makeshift box magazine that holds 20 rounds of 7.62x39mm Soviet.
+  components:
+  - type: Tag
+    tags:
+      - MagazineAKMakeshift
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - Cartridge739Makeshift
+    capacity: 30
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\makeshift_ak_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance

@@ -1,4 +1,115 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseMajorContraband, ]
+  parent: [ BaseMajorContraband, BaseGunWieldable, BaseWeaponRifle ]
+  id: MakeshiftAK
+  name: Makeshift assault rifle
+  description: A makeshift assault rifle based on the iconic AK design, it lacks select-fire capabilities. Feeds from 7.62x39mm makeshift magazines.
+  components:
+  - type: Gun
+    fireRate: 4
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/Gunshots/battle_rifle.ogg
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-assault-rifle.rsi
+  - type: Clothing
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-assault-rifle.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+       name: Magazine
+       startingItem: null
+       insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
+       ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
+       priority: 2
+       whitelist:
+        tags:
+        - MagazineAKMakeshift
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+       name: Chamber
+       priority: 1
+       whitelist:
+        tags:
+        - Cartridge739Makeshift
+       proto: null
+  - type: ContainerContainer
+    containers:
+     gun_magazine: !type:ContainerSlot
+     gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseMajorContraband, BaseGunWieldable, BaseWeaponRifle ]
+  id: MakeshiftSAR
+  name: Makeshift battle rifle
+  description: A makeshift battle rifle, it lacks select-fire capabilities. Feeds from 7.62x51mm makeshift box magazines.
+  components:
+  - type: Gun
+    fireRate: 2.5
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/Gunshots/battle_rifle.ogg
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
+  - type: Clothing
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+       name: Magazine
+       startingItem: null
+       insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
+       ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
+       priority: 2
+       whitelist:
+        tags:
+        - MagazineSAR
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+       name: Chamber
+       priority: 1
+       whitelist:
+        tags:
+        - Cartridge751Makeshift
+       proto: null
+  - type: ContainerContainer
+    containers:
+     gun_magazine: !type:ContainerSlot
+     gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
+  id: MakeshiftBoltActionRifle
+  name: Makeshift bolt-action rifle
+  description: A makeshift bolt-action rifle cobbled together from bits of wood and an atmospheric pipe. Feeds from 7.62x51mm cartridges.
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
+  - type: Clothing
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
+  - type: BallisticAmmoProvider
+    autoCycle: false
+    capacity: 5
+    proto: null
+    whitelist:
+      tags:
+      - Cartridge751Makeshift
+  - type: GunRequiresWield
+  - type: Appearance

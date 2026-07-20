@@ -9,15 +9,25 @@
   - type: Projectile
     damage:
       types:
-        Ballistic: 9
+        Ballistic: 10
+      armorPenetration: -0.5
 
 - type: entity
-  parent: PelletShotgunImprovised
+  parent: BaseBulletKinetic
+  id: Pellet20gImprovised
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 2.5
+
+- type: entity
+  parent: Pellet20gImprovised
   id: PelletShotgunMakeshift20gSpread
   categories: [ HideSpawnMenu ]
   components:
   - type: ProjectileSpread
-    proto: PelletShotgunImprovised
+    proto: Pellet20gImprovised
     count: 8
     spread: 45
 
@@ -31,3 +41,28 @@
     damage:
       types:
         Ballistic: 4
+      armorPenetration: -0.3
+
+- type: entity
+  parent: BaseBullet
+  id: Bullet739Makeshift
+  name: makeshift bullet (7.62x39mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 10
+      armorPenetration: -0.2
+
+- type: entity
+  parent: BaseBullet
+  id: Bullet751Makeshift
+  name: makeshift bullet (7.62x51mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 12
+      armorPenetration: -0.1

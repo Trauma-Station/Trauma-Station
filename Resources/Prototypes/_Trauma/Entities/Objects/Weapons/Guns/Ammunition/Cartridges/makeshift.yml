@@ -45,9 +45,45 @@
   description: An old makeshift cartridge that was often used in pistols and SMGs. It was known to boast a high velocity and penetration, unfortunately this one lacks the craftsmanship to share the same qualities.
   - type: Tag
     tags:
-      - Cartridge725
+      - Cartridge725Makeshift
   - type: CartridgeAmmo
     proto: Bullet725Makeshift
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/makeshift_casing.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+- type: entity
+  parent: [ BaseCartridge, BaseMajorContraband ]
+  id: Cartridge739Makeshift
+  name: makeshift cartridge (7.62x39mm Soviet)
+  description: An old makeshift cartridge that was used in assault rifles. It was known for its use in the iconic AK-47.
+  - type: Tag
+    tags:
+      - Cartridge739
+  - type: CartridgeAmmo
+    proto: Bullet739Makeshift
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/makeshift_casing.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+- type: entity
+  parent: [ BaseCartridge, BaseMajorContraband ]
+  id: Cartridge751Makeshift
+  name: makeshift cartridge (7.62x51mm NATO)
+  description: An old makeshift cartridge that was used in battle rifles.
+  - type: Tag
+    tags:
+      - Cartridge751
+  - type: CartridgeAmmo
+    proto: Bullet751Makeshift
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/makeshift_casing.rsi
     layers:
