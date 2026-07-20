@@ -364,6 +364,7 @@ entity-effect-guidebook-extinguish-reaction =
         *[other] extinguish
     } fire
 
+# Trauma - $direction is set from the Flammable effect's multiplier sign, so negative Flammable reagents read "Decreases flammability"; defaults to increase
 entity-effect-guidebook-flammable-reaction =
     { $chance ->
         [1] { $direction ->
