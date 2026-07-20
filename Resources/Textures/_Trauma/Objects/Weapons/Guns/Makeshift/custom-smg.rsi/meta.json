@@ -11,16 +11,10 @@
       "name": "base"
     },
     {
-      "name": "muzzle"
-    },
-    {
-      "name": "grip"
-    },
-    {
       "name": "bolt-open"
     },
     {
-      "name": "equipped-backpack",
+      "name": "equipped-BACKPACK",
       "directions": 4
     },
     {
