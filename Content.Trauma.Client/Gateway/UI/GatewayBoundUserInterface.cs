@@ -1,24 +1,20 @@
-using Content.Shared.Gateway;
-using JetBrains.Annotations;
-using Robust.Client.UserInterface;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Client.Gateway.UI;
+using Content.Trauma.Shared.Gateway;
 
-[UsedImplicitly]
-public sealed class GatewayBoundUserInterface : BoundUserInterface
+namespace Content.Trauma.Client.Gateway.UI;
+
+public sealed class GatewayBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private GatewayWindow? _window;
-
-    public GatewayBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
 
     protected override void Open()
     {
         base.Open();
 
         _window = this.CreateWindow<GatewayWindow>();
-        _window.SetEntity(EntMan.GetNetEntity(Owner));
+        _window.NetOwner = EntMan.GetNetEntity(Owner);
+        _window.Owner = Owner;
 
         _window.OpenPortal += destination =>
         {

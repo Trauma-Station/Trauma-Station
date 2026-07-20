@@ -1,44 +1,41 @@
-using Content.Server.Gateway.Systems;
-using Content.Shared.Tag; // Goobstation
-using Robust.Shared.Audio;
-using Robust.Shared.Prototypes; // Goobstation
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Server.Gateway.Components;
+using Content.Shared.Tag;
+using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
+namespace Content.Trauma.Shared.Gateway;
 
 /// <summary>
 /// Controlling gateway that links to other gateway destinations on the server.
 /// </summary>
-[RegisterComponent, Access(typeof(GatewaySystem)), AutoGenerateComponentPause]
+[RegisterComponent, Access(typeof(GatewaySystem))]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class GatewayComponent : Component
 {
     /// <summary>
     /// Whether this destination is shown in the gateway ui.
     /// If you are making a gateway for an admeme set this once you are ready for players to select it.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public bool Enabled;
 
     /// <summary>
     /// Can the gateway be interacted with? If false then only settable via admins / mappers.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public bool Interactable = true;
 
     /// <summary>
     /// Name as it shows up on the ui of station gateways.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public FormattedMessage Name = new();
 
     /// <summary>
     /// Sound to play when opening the portal.
     /// </summary>
-    /// <remarks>
-    /// Originally named PortalSound as it was used for opening and closing.
-    /// </remarks>
-    [DataField("portalSound")]
+    [DataField]
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/Effects/Lightning/lightningbolt.ogg");
 
     /// <summary>
@@ -63,10 +60,9 @@ public sealed partial class GatewayComponent : Component
     /// The time at which the portal can next be opened.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
+    [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextReady;
 
-    // Goobstation
     /// <summary>
     /// Restrict this gate's destinations and sources to gates tagged with this.
     /// </summary>

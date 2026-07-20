@@ -2,7 +2,12 @@
 
 - type: entity
   parent: BaseGateway
-  id: GatewayLavalandEmpty
-  name: lavaland gateway
-  description: To hell you don't go.
-  suffix: OFF
+  id: Gateway
+  components:
+  - type: ActivatableUI
+    key: enum.GatewayUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GatewayUiKey.Key:
+        type: GatewayBoundUserInterface
+  - type: Gateway
