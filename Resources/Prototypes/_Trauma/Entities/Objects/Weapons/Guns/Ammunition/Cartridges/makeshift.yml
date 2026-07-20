@@ -43,6 +43,7 @@
   id: Cartridge725Makeshift
   name: makeshift cartridge (7.62x25mm Tokarev)
   description: An old makeshift cartridge that was often used in pistols and SMGs. It was known to boast a high velocity and penetration, unfortunately this one lacks the craftsmanship to share the same qualities.
+  components:
   - type: Tag
     tags:
       - Cartridge725Makeshift
