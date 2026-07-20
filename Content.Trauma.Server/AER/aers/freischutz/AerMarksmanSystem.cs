@@ -17,7 +17,7 @@ namespace Content.Trauma.Server.AER;
 /// system for Aer-169, lets them summon a restricted devil contract
 /// TO DO: add id gear and research event for spawning player version of Magic Bullet
 /// </summary>
-public sealed partial class FreischutzSystem : EntitySystem
+public sealed partial class AerMarksmanSystem : EntitySystem
 {
 
     [Dependency] private HandsSystem _hands = default!;
@@ -25,7 +25,7 @@ public sealed partial class FreischutzSystem : EntitySystem
     [Dependency] private PopupSystem _popup = default!;
 
     [SubscribeLocalEvent]
-    private void OnContractCreated(Entity<FreischutzComponent> devil, ref CreateContractEventAer args)
+    private void OnContractCreated(Entity<AerMarksmanComponent> devil, ref CreateContractEventAer args)
     {
         if (!TryUseAbility(args))
             return;

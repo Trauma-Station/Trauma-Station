@@ -4,5 +4,5 @@ using Content.Shared.Actions;
 
 namespace Content.Trauma.Shared.AER;
 
-//event for aer-169 contract summoning
+//event for aer-1821 contract summoning
 public sealed partial class CreateContractEventAer : InstantActionEvent;

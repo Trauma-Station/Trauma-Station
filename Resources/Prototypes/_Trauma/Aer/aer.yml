@@ -50,7 +50,7 @@
   id: MachineAERContainmentSensor
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: AER Analysis Sensor
-  description: A sensor able to examine an anomalous entity to produce usable research data.
+  description: A sensor able to examine an abnormal entity to produce usable research data.
   components:
   - type: Sprite
     drawdepth: FloorObjects
@@ -227,14 +227,14 @@
 
 # lob corp magic bullet at home player version, shoot really fucking slow adds burn stacks on melee
 # todo: add something to make the seventh bullet fuck you over
-#       needs something to stop at walls to not make it the ultimate wall-banger and make 169 more containable
+#       needs something to stop at walls to not make it the ultimate wall-banger and make 1821 more containable
 #       maybe reloading as a verb?
 - type: entity
   name: Magic Bullet
   parent: [BaseItem, BaseGunWieldable, BaseSecurityScienceContraband]
   id: IdGearMagicBullet
   suffix: I.D. Gear
-  description: I.D. Gear extracted from AER-169, capabable of shooting bullets that can penetrate multiple targets.
+  description: I.D. Gear extracted from AER-1821. Just as the Devil said, the bullets will puncture anything you please. Forever.
   components:
   - type: WeaponClass
     class: Rifle
@@ -294,7 +294,7 @@
     sound:
       collection: RiflesDrop
 
-# bullet shot by the Magic Bullet rifle needs something to make it not capable of wall-banging
+# bullet shot by the Freischütz rifle needs something to make it not capable of wall-banging
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBulletKinetic
@@ -308,15 +308,19 @@
   - type: Projectile
     damage:
       types:
-        Ballistic: 30
+        Ion: 40
+        Asphyxiation: 40
+        Structural: 120
     penetrationThreshold: 300
+    penetrationDamageTypeRequirement:
+      - Asphyxiation
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectOmnilaser
 
 # Aer Version of the rifle shoot at double the fire rat and has a more robust buttstock whack
 # TO DO add pen functionality to the rifle?
 - type: entity
-  name: Magic Bullet
+  name: Freischütz
   parent: IdGearMagicBullet
   id: AerMagicBullet
   suffix: Aer Unremovable
@@ -325,21 +329,26 @@
   - type: Gun
     fireRate: 0.5
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 1.9
+    rechargeCooldown: 66
   - type: Unremoveable
     deleteOnDrop: true
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+       Structural: 12
   - type: IgniteOnMeleeHit
     fireStacks: 1
 
-# aer-169 version of devil contract no soul stealing, keep only gun related positive clauses
+# aer-1821 version of devil contract no soul stealing, keep only gun related positive clauses
 - type: entity
-  name: Aer-169 Contract
+  name: Aer-1821 Contract
   id: AerContract
   description: Despite apparently working similarly to \[REDACTED\] contracts, \[REDACTED\] called them a low quality imitation
   parent: [ BaseScienceContraband, BaseDevilContract ]
   components:
   - type: Sprite
-    sprite: /Textures/_Trauma/Mobs/Aer/freischutzContract.rsi
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
     state: contract-written
   - type: Paper
     content: default-aer-contract-content
@@ -348,32 +357,32 @@
     - soulownership
     - brokeness
 
-# action for summoning 169 contracts
+# action for summoning 1821 contracts
 - type: entity
   parent: BaseAction
   id: ActionCreateContractAer
   name: Summon contract
-  description: Creates a contract in AER-169's hand.
+  description: Creates a contract in AER-1821's hand.
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 600
     itemIconStyle: NoItem
     icon:
-      sprite: /Textures/_Trauma/Mobs/Aer/freischutzContract.rsi
+      sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
       state: contract-written
   - type: InstantAction
     event: !type:CreateContractEventAer {}
 
-# aer-169 freischutz at home mostly copypasted from demon stuff or stuff stolen to base humanoids, has two hand to wield it's rifle
+# aer-1821 freischutz at home mostly copypasted from demon stuff or stuff stolen from base humanoids, has two hand to wield it's rifle
 - type: entity
   parent: [MobSpaceBasic, MobCombat, InventoryBase]
-  id: AerFreischutz
-  name: AER-169
-  description: AER-169 has a black wispy form with no discernible features besides his eyes, head, arms, and legs. He carries a large gun with them.
+  id: AerMarksman
+  name: AER-1821
+  description: AER-1821 wears the tattered remains of its previous life... not that anyone can recognize it. In place of a face, all that's left is a mass of twisting shadows, with piercing blue eyes within. Is it a devil? A man? Would you know?
   components:
   - type: Sprite
-    sprite: _Trauma/Mobs/Aer/freischutz.rsi
+    sprite: _Trauma/Mobs/Aer/aerMarksman.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -440,7 +449,7 @@
         true
       NavSmash: !type:Bool
         true
-  - type: Freischutz
+  - type: AerMarksman
   - type: ActionGrant
     actions:
     - ActionCreateContractAer

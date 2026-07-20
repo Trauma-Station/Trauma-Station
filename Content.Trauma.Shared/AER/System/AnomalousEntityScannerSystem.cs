@@ -16,7 +16,9 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    /// <summary> Updates device with passed anomaly data. </summary>
+    /// <summary> 
+    /// Updates device with passed anomaly data. 
+    /// </summary>
     public void UpdateScannerWithNewAnomaly(EntityUid scanner, EntityUid anomaly, AnomalousEntityScannerComponent? scannerComp = null, AnomalousEntityComponent? anomalyComp = null)
     {
         if (!Resolve(scanner, ref scannerComp) || !Resolve(anomaly, ref anomalyComp))

@@ -3,10 +3,10 @@
 namespace Content.Trauma.Shared.AER;
 
 /// <summary>
-/// Component for Aer-169, lets them summon a restricted devil contract
+/// Component for Aer-1821, lets them summon a restricted devil contract
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class FreischutzComponent : Component
+public sealed partial class AerMarksmanComponent : Component
 {
     [DataField]
     public EntProtoId ContractPrototype = "AerContract";

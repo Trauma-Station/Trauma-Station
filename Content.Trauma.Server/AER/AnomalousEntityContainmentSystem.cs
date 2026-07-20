@@ -5,7 +5,6 @@ using Content.Trauma.Shared.AER;
 
 namespace Content.Trauma.Server.AER;
 
-
 public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 {
     [Dependency] private ResearchSystem _research = default!;
