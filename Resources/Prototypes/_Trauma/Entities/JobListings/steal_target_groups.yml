@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: stealTargetGroup
   id: CommsComputer
   name: steal-target-groups-comms-computer
