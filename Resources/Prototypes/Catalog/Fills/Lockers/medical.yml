@@ -138,8 +138,10 @@
   components:
   - type: StorageFill
     contents:
+    # <Trauma>
       - id: TelescopicMace # Trauma - New Paramed Gear
       - id: HoloprojectorMedical # Trauma - New Paramed Gear
+    # </Trauma>
       - id: UndeterminedVoidsuitParamedic # Goob edit
       - id: OxygenTankFilled
       - id: NitrogenTankFilled
