@@ -153,7 +153,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (firstRuneResolved && secondRuneResolved)
         {
-            EnsureComp<FadingTimedDespawnComponent>(runeAction.FirstRune!.Value).Lifetime = 0f;
+            EnsureComp<FadingTimedDespawnComponent>(runeAction.FirstRune!.Value).Lifetime = TimeSpan.Zero;
             var newRune = Spawn(args.Rune, coords);
             _transform.AttachToGridOrMap(newRune);
             var newRuneComp = EnsureComp<HereticCosmicRuneComponent>(newRune);

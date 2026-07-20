@@ -85,6 +85,9 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                 {
                     foreach (var (currency, amount) in cost)
                     {
+                        if (amount <= FixedPoint2.Zero)
+                            continue;
+
                         if (!totalCost.TryAdd(currency, amount))
                             totalCost[currency] += amount;
                     }
@@ -96,6 +99,9 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                     {
                         foreach (var (currency, amount) in cost)
                         {
+                            if (amount <= FixedPoint2.Zero)
+                                continue;
+
                             if (!totalCost.TryAdd(currency, amount))
                                 totalCost[currency] += amount;
                         }
@@ -107,18 +113,15 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                 switch (data.Icon)
                 {
                     case SpriteSpecifier.Texture tex:
-                    {
                         sprite = tex.TexturePath.ToString();
                         if (!sprite.StartsWith("/Textures/"))
                             sprite = $"/Textures/{sprite}";
                         break;
-                    }
                     case SpriteSpecifier.Rsi rsi:
                         sprite = rsi.RsiPath.ToString();
                         state = rsi.RsiState;
                         break;
                     default:
-                    {
                         if (data.ProductEntity != null)
                             sprite = data.ProductEntity.Value;
                         else if (data.ProductAction != null && TryGetActionIcon(data.ProductAction.Value,
@@ -132,7 +135,6 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                             sprite = ent.Comp.DefaultTexture.TexturePath.ToString();
 
                         break;
-                    }
                 }
 
                 var name = "";
@@ -146,23 +148,24 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                         name = Loc.GetString(ProtoMan.Index(data.ProductAction.Value).Name);
                 }
 
-                var costSb = new StringBuilder();
-                foreach (var (currencyId, amount) in totalCost)
+                var costSb = new StringBuilder($"{name}");
+                if (totalCost.Count > 0)
                 {
-                    if (!totalSpent.TryAdd(currencyId, amount))
-                        totalSpent[currencyId] += amount;
+                    costSb.Append(" - ");
+                    foreach (var (currencyId, amount) in totalCost)
+                    {
+                        if (!totalSpent.TryAdd(currencyId, amount))
+                            totalSpent[currencyId] += amount;
 
-                    if (costSb.Length > 0)
-                        costSb.Append(", ");
+                        if (costSb.Length > 0)
+                            costSb.Append(", ");
 
-                    var currency = ProtoMan.Index(currencyId);
-                    costSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
+                        var currency = ProtoMan.Index(currencyId);
+                        costSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
+                    }
                 }
 
-                var information = Loc.GetString("manifest-listing-entry-info",
-                    ("name", name),
-                    ("spent", costSb.ToString()));
-
+                var information = costSb.ToString();
                 information = information.Replace("\"", ""); // Fuck this
                 information = information.Replace("\'", ""); // Fuck this
 
@@ -177,16 +180,20 @@ public sealed partial class ManifestListingsSystem : EntitySystem
         }
 
         var totalSpentSb = new StringBuilder();
-        foreach (var (currencyId, amount) in totalSpent)
+        if (totalSpent.Count > 0)
         {
-            if (totalSpentSb.Length > 0)
-                totalSpentSb.Append(", ");
+            foreach (var (currencyId, amount) in totalSpent)
+            {
+                if (totalSpentSb.Length > 0)
+                    totalSpentSb.Append(", ");
 
-            var currency = ProtoMan.Index(currencyId);
-            totalSpentSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
+                var currency = ProtoMan.Index(currencyId);
+                totalSpentSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
+            }
+
+            sb.AppendLine(Loc.GetString("manifest-listing-entry-start", ("spent", totalSpentSb.ToString())));
         }
 
-        sb.AppendLine(Loc.GetString("manifest-listing-entry-start", ("spent", totalSpentSb.ToString())));
         sb.AppendLine();
         sb.AppendLine(sb2.ToString());
         args.Text += sb.ToString();
@@ -204,12 +211,10 @@ public sealed partial class ManifestListingsSystem : EntitySystem
         switch (actionComp.Icon)
         {
             case SpriteSpecifier.Texture tex:
-            {
                 sprite = tex.TexturePath.ToString();
                 if (!sprite.StartsWith("/Textures/"))
                     sprite = $"/Textures/{sprite}";
                 return true;
-            }
             case SpriteSpecifier.Rsi rsi:
                 sprite = rsi.RsiPath.ToString();
                 state = rsi.RsiState;

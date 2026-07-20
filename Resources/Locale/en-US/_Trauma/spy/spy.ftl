@@ -18,3 +18,7 @@ spy-uplink-no-rewards = No rewards available!
 
 spy-uplink-ammo-name = Ammunition
 spy-uplink-ammo-desc = Some ammo of your choice
+
+spy-role-claimed-bounties =
+    {CAPITALIZE($name)} has claimed a total of [color=red]{$amount}[/color] bounties.
+    {" "}

@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Goobstation.Shared.ManifestListings;
 using Content.Server.DoAfter;
 using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
@@ -8,6 +9,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Roles.Components;
+using Content.Shared.Store;
 using Content.Shared.Verbs;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Content.Trauma.Shared.Roles;
@@ -49,12 +51,14 @@ public sealed partial class SpyUplinkSystem : EntitySystem
 
         // TODO chance to send it to black market when its real
         var despawn = Factory.GetComponent<FadingTimedDespawnComponent>();
-        despawn.Lifetime = 0f;
+        despawn.Lifetime = TimeSpan.Zero;
+        despawn.FadeOutTime = TimeSpan.FromSeconds(2);
         AddComp(target, despawn);
 
         args.Handled = true;
 
         bounty.Claimed = true;
+        role.Comp2.ClaimedBounties++;
         _audio.PlayPvs(ent.Comp.StealEndSound, ent);
 
         var reward = bounty.Reward;
@@ -72,6 +76,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         RefreshUi(ruleComp.NextRefresh, ruleComp.CurrentBounties);
     }
 
+    // TODO make this a verb
     [SubscribeLocalEvent]
     private void OnInteract(Entity<SpyUplinkComponent> ent, ref BeforeRangedInteractEvent args)
     {
@@ -110,26 +115,38 @@ public sealed partial class SpyUplinkSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnCollectReward(Entity<SpyUplinkComponent> ent, ref SpyRewardSelectedMessage args)
     {
-        if (TryGetSpyRole(args.Actor) is not { } role || !role.Comp2.AvailableRewards.Contains(args.Id))
+        if (!_mind.TryGetMind(args.Actor, out var mind, out _) ||
+            TryGetSpyRoleMind(mind) is not { } role ||
+            TryGetSpyRule(role.Comp2) is not { } rule ||
+            !role.Comp2.AvailableRewards.Contains(args.Id))
             return;
 
-        EntProtoId? reward = null;
+        ListingPrototype? listingProto = null;
         if (ProtoMan.HasIndex<SpyRewardPrototype>(args.Id))
         {
             if (!ProtoMan.Index<SpyRewardPrototype>(args.Id).RewardSelection.Contains(args.Listing))
                 return;
 
-            reward = ProtoMan.Index(args.Listing).ProductEntity;
+            listingProto = ProtoMan.Index(args.Listing);
         }
         else if (args.Id == args.Listing)
-            reward = ProtoMan.Index(args.Listing).ProductEntity;
+            listingProto = ProtoMan.Index(args.Listing);
 
         role.Comp2.AvailableRewards.Remove(args.Id);
 
-        if (reward is not { } proto)
+        if (listingProto is not { } proto)
             return;
 
-        var product = Spawn(proto, Transform(args.Actor).Coordinates);
+        // Raise purchase event so that listing appears in roundend screen
+        var listing = new ListingDataWithCostModifiers(proto);
+        listing.AddCostModifier("spyuplink", listing.Cost.ToDictionary(x => x.Key, x => -x.Value));
+        listing.PurchaseAmount =
+            CompOrNull<MindListingsComponent>(mind)?.Listings[rule.Id].FirstOrDefault(x => x.ID == listing.ID)?.PurchaseAmount ?? 0;
+        listing.PurchaseAmount++;
+        var ev = new ListingPurchasedEvent(args.Actor, rule, listing);
+        RaiseLocalEvent(mind, ref ev);
+
+        var product = Spawn(proto.ProductEntity, Transform(args.Actor).Coordinates);
         _hands.PickupOrDrop(args.Actor, product);
     }
 
@@ -239,12 +256,20 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         _ui.SetUiState(ent, SpyUplinkUiKey.Key, state);
     }
 
-    public Entity<MindRoleComponent, SpyRoleComponent>? TryGetSpyRole(EntityUid user)
+    public Entity<MindRoleComponent, SpyRoleComponent>? TryGetSpyRoleMind(EntityUid mind)
     {
-        if (!_mind.TryGetMind(user, out var mind, out _) || !_role.MindHasRole<SpyRoleComponent>(mind, out var role))
+        if (!_role.MindHasRole<SpyRoleComponent>(mind, out var role))
             return null;
 
         return role;
+    }
+
+    public Entity<MindRoleComponent, SpyRoleComponent>? TryGetSpyRole(EntityUid user)
+    {
+        if (!_mind.TryGetMind(user, out var mind, out _))
+            return null;
+
+        return TryGetSpyRoleMind(mind);
     }
 
     public EntityUid? TryGetSpyRule(EntityUid user)

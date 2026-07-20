@@ -1,5 +1,6 @@
 light_mode unshaded;
 
+uniform highp float zoom;
 uniform highp float ratio;
 uniform highp vec3 scanColor;
 uniform highp float scanDensity;
@@ -19,7 +20,7 @@ void fragment()
 
     if (UV.x <= ratio)
     {
-        highp float scanPattern = sin(UV.x * scanDensity) * 0.5 + 0.5;
+        highp float scanPattern = sin(UV.x * scanDensity / zoom) * 0.5 + 0.5;
 
         highp vec3 areaColor = scanColor * (scanPattern * 0.6 + 0.4);
         effectColor = vec4(areaColor, scanAlpha);

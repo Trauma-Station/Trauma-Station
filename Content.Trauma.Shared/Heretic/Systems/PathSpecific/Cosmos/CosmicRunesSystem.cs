@@ -53,9 +53,9 @@ public sealed partial class CosmicRunesSystem : EntitySystem
         if (HasComp<StarTouchComponent>(args.Used))
         {
             _touchSpell.InvokeTouchSpell(args.Used, args.User);
-            EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = 0f;
+            EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = TimeSpan.Zero;
             if (Exists(ent.Comp.LinkedRune))
-                EnsureComp<FadingTimedDespawnComponent>(ent.Comp.LinkedRune.Value).Lifetime = 0f;
+                EnsureComp<FadingTimedDespawnComponent>(ent.Comp.LinkedRune.Value).Lifetime = TimeSpan.Zero;
             args.Handled = true;
             return;
         }
@@ -67,7 +67,7 @@ public sealed partial class CosmicRunesSystem : EntitySystem
 
         _useDelay.TryResetDelay(args.Used, false, useDelay);
         _audio.PlayPredicted(bible.HealSoundPath, Transform(ent).Coordinates, args.User);
-        EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = 0f;
+        EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = TimeSpan.Zero;
         args.Handled = true;
     }
 

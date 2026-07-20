@@ -3,6 +3,6 @@
   kind: source
   path: "/Textures/_Trauma/Shaders/scan.swsl"
   params:
-    scanDensity: 400.0
+    scanDensity: 100.0
     scanAlpha: 0.5
     scanColor: 1.0, 0.1, 0.1

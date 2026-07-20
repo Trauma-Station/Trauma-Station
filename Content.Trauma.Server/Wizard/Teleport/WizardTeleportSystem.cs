@@ -102,10 +102,10 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
             _ui.CloseUis(ent.Owner);
 
             // Don't Queuedel right away so that client doesn't throw debug assert exception
-            var fading = EnsureComp<FadingTimedDespawnComponent>(ent.Owner);
-            fading.Lifetime = 0f;
-            fading.FadeOutTime = 2f;
-            Dirty(ent.Owner, fading);
+            var fading = Factory.GetComponent<FadingTimedDespawnComponent>();
+            fading.Lifetime = TimeSpan.Zero;
+            fading.FadeOutTime = TimeSpan.FromSeconds(2);
+            AddComp(ent.Owner, fading);
         }
 
         Dirty(ent);

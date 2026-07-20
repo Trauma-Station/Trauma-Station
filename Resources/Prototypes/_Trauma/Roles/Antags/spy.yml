@@ -23,5 +23,5 @@
   rule: Spies
   ruleComp: SpyRule
   icon:
-    sprite: Clothing/Mask/gas.rsi # TODO
+    sprite: _ShitChap/Objects/Weapons/Nullrod/atheist.rsi
     state: icon

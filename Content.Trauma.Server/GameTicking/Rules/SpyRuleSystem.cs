@@ -1,7 +1,11 @@
 using System.Linq;
+using System.Text;
+using Content.Goobstation.Server.ManifestListings;
+using Content.Goobstation.Shared.ManifestListings;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
+using Content.Server.Objectives;
 using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
@@ -10,7 +14,6 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Content.Trauma.Server.Spy;
@@ -34,6 +37,14 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private StoreSystem _store = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PrependObjectivesSummaryTextEvent>(OnPrepend, before: [typeof(ManifestListingsSystem)]);
+    }
+
 
     protected override void ActiveTick(EntityUid uid,
         SpyRuleComponent component,
@@ -217,10 +228,19 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     public void GetRandomBounty(EntityUid uid, SpyRuleComponent comp, ProtoId<SpyBountyPrototype> bountyId)
     {
         var index = ProtoMan.Index(bountyId);
+        // TODO no duplicate rewards in 1 bounty list
         var reward = _random.Pick(comp.LootPool[index.Difficulty]);
 
         var ev = index.Selector.GetEvent();
         RaiseLocalEvent(uid, ev.Initialize(bountyId, reward));
+    }
+
+    private void OnPrepend(ref PrependObjectivesSummaryTextEvent args)
+    {
+        if (_spyUplink.TryGetSpyRoleMind(args.Mind) is not { } role)
+            return;
+
+        args.Text += Loc.GetString("spy-role-claimed-bounties", ("name", args.Name), ("amount", role.Comp2.ClaimedBounties));
     }
 
     [SubscribeLocalEvent]
@@ -258,6 +278,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [SubscribeLocalEvent]
     private void OnPrototype(Entity<SpyRuleComponent> ent, ref SpyPrototypeBountySelectorEvent args)
     {
+        // TODO make sure that yaml bounties using this don't need to verify map existance
         var proto = ProtoMan.Index(args.Protos[0]);
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {

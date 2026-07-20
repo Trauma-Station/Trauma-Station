@@ -14,4 +14,8 @@ public sealed partial class SpyRoleComponent : BaseMindRoleComponent
     // Either SpyRewardPrototype or ListingPrototype
     [DataField]
     public List<string> AvailableRewards = new();
+
+    // Used for roundend manifest
+    [DataField]
+    public int ClaimedBounties;
 }

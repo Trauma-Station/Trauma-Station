@@ -7,7 +7,7 @@
 - type: spyBounty
   id: ComputerSolarControl
   difficulty: Easy
-  selector: !type:SpyPrototypeBountySelectorEvent
+  selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerSolarControl]
     queryComp: SolarControlConsole
 

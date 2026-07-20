@@ -3,4 +3,3 @@ manifest-listing-entry-listing = [font size=30]\[[tex path="{$sprite}" state="{$
     [1] {""}
     *[other] x{$amount}
 }\][/font]
-manifest-listing-entry-info = {$name} - {$spent}

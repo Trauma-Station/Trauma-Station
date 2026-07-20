@@ -97,9 +97,10 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
 
     private void KillStarGazer(EntityUid starGazer)
     {
-        var fading = EnsureComp<FadingTimedDespawnComponent>(starGazer);
-        fading.FadeOutTime = 5f;
-        fading.Lifetime = 0f;
+        var fading = Factory.GetComponent<FadingTimedDespawnComponent>();
+        fading.FadeOutTime = TimeSpan.FromSeconds(5f);
+        fading.Lifetime = TimeSpan.Zero;
+        AddComp(starGazer, fading);
     }
 
     private void OnTakeGhostRole(Entity<StarGazerComponent> ent, ref TakeGhostRoleEvent args)

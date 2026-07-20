@@ -80,7 +80,10 @@ public sealed partial class FreezeContactsSystem : EntitySystem
             despawn.Lifetime -= comp.FreezeTime;
 
         if (TryComp(uid, out FadingTimedDespawnComponent? fading) && !fading.FadeOutStarted)
-            fading.Lifetime -= comp.FreezeTime;
+        {
+            fading.Timer += TimeSpan.FromSeconds(comp.FreezeTime);
+            Dirty(uid, fading);
+        }
 
         if (!TryComp(uid, out ThrownItemComponent? thrownItem) || thrownItem.LandTime == null)
             return;
@@ -214,7 +217,10 @@ public sealed partial class FreezeContactsSystem : EntitySystem
                 otherDespawn.Lifetime += difference;
 
             if (TryComp(otherUid, out fading) && !fading.FadeOutStarted)
-                fading.Lifetime += difference;
+            {
+                fading.Lifetime -= TimeSpan.FromSeconds(difference);
+                Dirty(otherUid, fading);
+            }
 
             frozen.FreezeTime = despawn.Lifetime;
             return;
@@ -229,7 +235,10 @@ public sealed partial class FreezeContactsSystem : EntitySystem
             otherDespawn.Lifetime += despawn.Lifetime;
 
         if (TryComp(otherUid, out fading) && !fading.FadeOutStarted)
-            fading.Lifetime += despawn.Lifetime;
+        {
+            fading.Lifetime -= TimeSpan.FromSeconds(despawn.Lifetime);
+            Dirty(otherUid, fading);
+        }
 
         if (!TryComp(otherUid, out thrownItem) || thrownItem.LandTime == null)
             return;

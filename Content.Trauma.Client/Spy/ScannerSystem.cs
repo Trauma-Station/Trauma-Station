@@ -44,6 +44,12 @@ public sealed partial class ScannerSystem : EntitySystem
         var ratio = InverseLerp(scanner.ScanStartTime, scanner.ScanEndTime, _timing.CurTime);
         args.Instance.SetParameter("ratio", ratio);
         ent.Comp.Ratio = ratio;
+        var zoom = 1f;
+
+        if (args.Viewport.Eye is { } eye)
+            zoom = eye.Zoom.X;
+
+        args.Instance.SetParameter("zoom", zoom);
     }
 
     private void OnScannedShutdown(Entity<BeingScannedComponent> ent, ref ComponentShutdown args)

@@ -268,10 +268,10 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
 
         Appearance.SetData(uid, TrapVisuals.Alpha, 0.8f);
 
-        var fading = EnsureComp<FadingTimedDespawnComponent>(uid);
-        fading.Lifetime = 0.5f;
-        fading.FadeOutTime = 1f;
-        Dirty(uid, fading);
+        var fading = Factory.GetComponent<FadingTimedDespawnComponent>();
+        fading.Lifetime = TimeSpan.FromSeconds(0.5f);
+        fading.FadeOutTime = TimeSpan.FromSeconds(1f);
+        AddComp(uid, fading);
     }
 
     private void OnExamineAttempt(Entity<WizardTrapComponent> ent, ref ExamineAttemptEvent args)

@@ -527,21 +527,19 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
                 continue;
             }
 
-            FadingTimedDespawnComponent? weaponDespawn;
-            if (despawnQuery.TryComp(mob, out var despawn))
-            {
-                weaponDespawn = EnsureComp<FadingTimedDespawnComponent>(weapon);
-                weaponDespawn.Lifetime = despawn.Lifetime + 30f;
-                weaponDespawn.FadeOutTime = 4f;
-                Dirty(weapon, weaponDespawn);
-            }
-            else if (fadingQuery.TryComp(mob, out var fading))
-            {
-                weaponDespawn = EnsureComp<FadingTimedDespawnComponent>(weapon);
-                weaponDespawn.Lifetime = fading.Lifetime + 30f;
-                weaponDespawn.FadeOutTime = 4f;
-                Dirty(weapon, weaponDespawn);
-            }
+            TimeSpan? lifetime = CompOrNull<TimedDespawnComponent>(mob)?.Lifetime is { } t
+                ? TimeSpan.FromSeconds(t)
+                : null;
+
+            lifetime ??= CompOrNull<FadingTimedDespawnComponent>(mob)?.Lifetime;
+
+            if (lifetime is not { } time)
+                return;
+
+            var weaponDespawn = Factory.GetComponent<FadingTimedDespawnComponent>();
+            weaponDespawn.Lifetime = time + TimeSpan.FromSeconds(30f);
+            weaponDespawn.FadeOutTime = TimeSpan.FromSeconds(4f);
+            AddComp(weapon, weaponDespawn);
         }
     }
 

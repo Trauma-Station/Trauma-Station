@@ -1,0 +1,12 @@
+- type: weightedRandom
+  id: SpyObjectiveGroups
+  weights:
+    SpyObjectiveGroupFinale: 1
+
+- type: weightedRandom
+  id: SpyObjectiveGroupFinale
+  weights:
+    SpyEscapeShuttleObjective: 80
+    SpySurviveObjective: 15
+    SpyDieObjective: 4
+    SpyHijackShuttleObjective: 1
