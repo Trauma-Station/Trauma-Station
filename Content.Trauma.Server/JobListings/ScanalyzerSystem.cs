@@ -8,6 +8,7 @@ using Content.Shared.Mind;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Shared.JobListings;
+using Content.Shared.Trigger.Systems;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -16,6 +17,7 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
 {
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private JobListingsSystem _jobs = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {
@@ -49,6 +51,9 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
             return;
         RegisterScan((mind, mindComp), target);
         _jobs.UpdateUis((mind, mindComp));
+
+        if (TryComp<TriggerOnScanComponent>(entity.Owner, out var triggerComp))
+            _trigger.Trigger(entity.Owner, user, triggerComp.KeyOut, false);
     }
 
     private void OnGetProgress(Entity<StealConditionRequireScanComponent> entity, ref ObjectiveGetProgressEvent args)
