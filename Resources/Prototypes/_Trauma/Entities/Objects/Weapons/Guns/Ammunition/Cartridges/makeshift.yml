@@ -62,6 +62,7 @@
   id: Cartridge739Makeshift
   name: makeshift cartridge (7.62x39mm Soviet)
   description: An old makeshift cartridge that was used in assault rifles. It was known for its use in the iconic AK-47.
+  components:
   - type: Tag
     tags:
       - Cartridge739
@@ -80,6 +81,7 @@
   id: Cartridge751Makeshift
   name: makeshift cartridge (7.62x51mm NATO)
   description: An old makeshift cartridge that was used in battle rifles.
+  components:
   - type: Tag
     tags:
       - Cartridge751
