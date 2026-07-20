@@ -6,14 +6,14 @@
   name: holobarrier projector
   description: Creates a solid but fragile holographic barrier.
   components:
-    - type: HolosignProjector
-      signProto: HolosignMedical
-      chargeUse: 90
-    - type: Sprite
-      sprite: _Trauma/Objects/Devices/Holoprojector/medical.rsi
-      state: icon
-    - type: Tag
-      tags:
-      - HolofanProjector
-    - type: StaticPrice
-      price: 50
+  - type: HolosignProjector
+    signProto: HolosignMedical
+    chargeUse: 90
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/Holoprojector/medical.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - HolofanProjector
+  - type: StaticPrice
+    price: 50

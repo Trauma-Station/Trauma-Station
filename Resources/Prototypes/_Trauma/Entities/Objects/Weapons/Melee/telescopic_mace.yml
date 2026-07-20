@@ -6,69 +6,69 @@
   name: Telescopic Mace
   description: A compact personal defense weapon. Perfect for fending off people who want to interrupt your rescue attempts or get in your way.
   components:
-    - type: WeaponClass
-        class: NonLethal
-    - type: Sprite
-      sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
-      layers:
-      - state: icon-off
-          map: ["enum.ItemToggleVisuals.Layer"]
-    - type: Item
-      sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
-      size: Small
-      storedRotation: -45
-    - type: ItemToggle
-      soundActivate:
-      path: /Audio/Weapons/telescopicon.ogg
-      params:
-        volume: -2
-      soundDeactivate:
-      path: /Audio/Weapons/telescopicoff.ogg
-      params:
-        volume: -2
-    - type: ItemToggleMeleeWeapon
-      activatedSoundOnHit:
-      collection: MetalThud
-      params:
-        variation: 0.250
-      activatedDamage:
+  - type: WeaponClass
+    class: NonLethal
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
+    layers:
+    - state: icon-off
+        map: ["enum.ItemToggleVisuals.Layer"]
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
+    size: Small
+    storedRotation: -45
+  - type: ItemToggle
+    soundActivate:
+    path: /Audio/Weapons/telescopicon.ogg
+    params:
+      volume: -2
+    soundDeactivate:
+    path: /Audio/Weapons/telescopicoff.ogg
+    params:
+      volume: -2
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+    collection: MetalThud
+    params:
+      variation: 0.250
+    activatedDamage:
+    types:
+      Blunt: 8
+    woundSeverityMultipliers:
+      Blunt: 0.5
+  - type: ItemToggleSize
+    activatedSize: Normal
+    activatedShape:
+    - 0,0,0,3
+  - type: UseDelay
+    delays:
+    default:
+      length: 1
+    telebaton:
+      length: 4
+  - type: MeleeThrowOnHit
+    distance: 1
+    speed: 5
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    bluntStaminaDamageFactor: 0.5
+    angle: 0
+    damage:
       types:
-        Blunt: 8
-      woundSeverityMultipliers:
-        Blunt: 0.5
-    - type: ItemToggleSize
-      activatedSize: Normal
-      activatedShape:
-      - 0,0,0,3
-    - type: UseDelay
-      delays:
-      default:
-        length: 1
-      telebaton:
-        length: 4
-    - type: MeleeThrowOnHit
-      distance: 1
-      speed: 5
-    - type: MeleeWeapon
-      wideAnimationRotation: -135
-      bluntStaminaDamageFactor: 0.5
-      angle: 0
-      damage:
-        types:
-          Blunt: 1
-    - type: Appearance
-    - type: ItemToggleVisuals
-    - type: GenericVisualizer
-      visuals:
-      enum.ItemToggleVisuals.State:
-        enum.ItemToggleVisuals.Layer:
-          True: { state: icon }
-          False: { state: icon-off }
-    - type: Clothing
-      sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
-      slots:
-      - Belt
-    - type: UseDelayBlockMelee
-      delays:
-      - default
-      - telebaton
+        Blunt: 1
+  - type: Appearance
+  - type: ItemToggleVisuals
+  - type: GenericVisualizer
+    visuals:
+    enum.ItemToggleVisuals.State:
+      enum.ItemToggleVisuals.Layer:
+        True: { state: icon }
+        False: { state: icon-off }
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
+    slots:
+    - Belt
+  - type: UseDelayBlockMelee
+    delays:
+    - default
+    - telebaton
