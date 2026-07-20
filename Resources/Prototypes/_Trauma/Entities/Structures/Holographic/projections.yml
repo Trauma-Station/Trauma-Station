@@ -15,12 +15,12 @@
     - type: Fixtures
       fixtures:
         fix1:
-          shape: !type:PhysShapeAabb
-            bounds: "-0.3,-0.3,0.3,0.3"
-          mask:
-            - TableMask
-          layer:
-            - TableLayer
+        shape: !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        mask:
+          - TableMask
+        layer:
+          - TableLayer
     - type: TimedDespawn
       lifetime: 180
     - type: PointLight
