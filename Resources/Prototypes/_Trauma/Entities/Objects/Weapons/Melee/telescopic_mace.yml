@@ -9,14 +9,14 @@
     - type: WeaponClass
       class: NonLethal
     - type: Sprite
-      sprite: _Trauma/Objects/Weapons/Melee/paramed_telebaton.rsi
+      sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
       layers:
         - state: icon-off
           map: ["enum.ItemToggleVisuals.Layer"]
     - type: Item
-      sprite: _Trauma/Objects/Weapons/Melee/paramed_telebaton.rsi
+      sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
       size: Small
-      storedRotation: -45 # Goobstation
+      storedRotation: -45
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
@@ -26,10 +26,6 @@
         path: /Audio/Weapons/telescopicoff.ogg
         params:
           volume: -2
-    - type: ComponentToggler # Goobstation
-      components:
-        - type: DisarmMalus
-          malus: 0.6
     - type: ItemToggleMeleeWeapon
       activatedSoundOnHit:
         collection: MetalThud
@@ -38,43 +34,41 @@
       activatedDamage:
         types:
           Blunt: 8
-        woundSeverityMultipliers: #Goob
-          Blunt: 0.5 # Im tired of this shit breaking bones, its meant to be nonlethal
+        woundSeverityMultipliers:
+          Blunt: 0.5
     - type: ItemToggleSize
       activatedSize: Normal
-      activatedShape: # Goobstation
+      activatedShape:
         - 0,0,0,3
     - type: UseDelay
-      # Goob edit start
       delays:
         default:
           length: 1
         telebaton:
           length: 4
-      # Goob edit end
     - type: MeleeThrowOnHit
       distance: 1
       speed: 5
     - type: MeleeWeapon
       wideAnimationRotation: -135
       bluntStaminaDamageFactor: 0.5
-      angle: 0 # Goob edit
+      angle: 0
       damage:
         types:
           Blunt: 1
     - type: Appearance
-    - type: ItemToggleVisuals # Goobstation
+    - type: ItemToggleVisuals
     - type: GenericVisualizer
       visuals:
         enum.ItemToggleVisuals.State:
           enum.ItemToggleVisuals.Layer:
             True: { state: icon }
             False: { state: icon-off }
-    - type: Clothing # Goobstation
-      sprite: _Trauma/Objects/Weapons/Melee/paramed_telebaton.rsi
+    - type: Clothing
+      sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
       slots:
         - Belt
-    - type: UseDelayBlockMelee # Goobstation
+    - type: UseDelayBlockMelee
       delays:
         - default
         - telebaton
