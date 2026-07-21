@@ -100,7 +100,7 @@ ghost-role-information-spacepol-hunter-description = You are a Space Police Offi
 ghost-role-information-spacepol-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Do not cause unnecessary casualties.
 
 ghost-role-information-russian-hunter-name = Fugitive Hunter
-ghost-role-information-russian-hunter-description = You are a Russian Space Smuggler. Spacepol has agreed to pardon your crimincal record if you bring in the fugitives stowing away on this station. Avoid unneccesary killing.
+ghost-role-information-russian-hunter-description = You are a Russian Space Smuggler. Spacepol has agreed to pardon your criminal record if you bring in the fugitives stowing away on this station. Avoid unneccesary killing.
 ghost-role-information-russian-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Try not to kill them or security in the process.
 
 ghost-role-information-bounty-hunter-name = Fugitive Hunter
