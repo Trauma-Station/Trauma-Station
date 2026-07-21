@@ -3,7 +3,7 @@
 - type: entity
   id: MakeshiftLaserPistolLethal
   parent: [ BaseWeaponBatterySmall, BaseMajorContraband ]
-  name: Prototype laser pistol
+  name: prototype laser pistol
   description: A prototype pistol that has been assembled from welded plasteel and phoron. Although powerful it is unreliable and overheats easily, this one has been configured to fire lethal shots.
   components:
   - type: Sprite
@@ -22,7 +22,7 @@
 - type: entity
   id: MakeshiftLaserPistolDisabler
   parent: [ BaseWeaponBatterySmall, BaseMajorContraband ]
-  name: Prototype laser pistol
+  name: prototype laser pistol
   description: A prototype pistol that has been assembled from welded plasteel and phoron, this one has been configured to fire disabler bolts. It lacks the correct fittings and power to shoot proper disabler bolts resulting in weaker shots and less internal battery capacity.
   components:
   - type: Sprite

@@ -3,7 +3,7 @@
 - type: entity
   parent: [ BaseMajorContraband, BaseGunWieldable, BaseWeaponRifle ]
   id: MakeshiftAK
-  name: Makeshift assault rifle
+  name: makeshift assault rifle
   description: A makeshift assault rifle based on the iconic AK design, it lacks select-fire capabilities. Feeds from 7.62x39mm makeshift magazines.
   components:
   - type: Gun
@@ -49,7 +49,7 @@
 - type: entity
   parent: [ BaseMajorContraband, BaseGunWieldable, BaseWeaponRifle ]
   id: MakeshiftSAR
-  name: Makeshift battle rifle
+  name: makeshift battle rifle
   description: A makeshift battle rifle, it lacks select-fire capabilities. Feeds from 7.62x51mm makeshift box magazines.
   components:
   - type: Gun
@@ -95,7 +95,7 @@
 - type: entity
   parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
   id: MakeshiftBoltActionRifle
-  name: Makeshift bolt-action rifle
+  name: makeshift bolt-action rifle
   description: A makeshift bolt-action rifle cobbled together from bits of wood and an atmospheric pipe. Feeds from 7.62x51mm cartridges.
   components:
   - type: Item

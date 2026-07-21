@@ -3,7 +3,7 @@
 - type: entity
   parent: [ BaseWeaponSubMachineGun, BaseMajorContraband ]
   id: MakeshiftSMGCustom
-  name: Custom SMG
+  name: custom SMG
   description: A high-firerate innaccurate machine gun made from an atmospheric pipe and hammered steel sheets, for when you need to pepper anything in a general direction. It feeds from 7.62x25 box magazines.
   components:
   - type: Sprite
@@ -52,7 +52,7 @@
 - type: entity
   parent: MakeshiftSMGCustom
   id: MakeshiftPatentedSMG
-  name: Patented SMG
+  name: patented SMG
   description: A makeshift submachine gun based off of an iconic old terra design, it was known for its incredibly high firerate, unfortunately this model lacks the craftsmanship to share the same qualities. It feeds from 7.62x25 curved magazines.
   components:
   - type: Sprite
