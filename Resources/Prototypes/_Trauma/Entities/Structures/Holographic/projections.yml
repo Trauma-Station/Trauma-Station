@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: HolosignMedical
   parent: HolosignWetFloor
+  id: HolosignMedical
   name: holographic barrier
   description: A barrier of hard light that blocks movement, but is pretty weak to damage.
   components:
@@ -14,13 +14,13 @@
     state: icon
   - type: Fixtures
     fixtures:
-      fix1:
-      shape: !type:PhysShapeAabb
-        bounds: "-0.3,-0.3,0.3,0.3"
-      mask:
-        - TableMask
-      layer:
-        - TableLayer
+    fix1:
+    shape: !type:PhysShapeAabb
+    bounds: "-0.3,-0.3,0.3,0.3"
+    mask:
+    - TableMask
+    layer:
+    - TableLayer
   - type: TimedDespawn
     lifetime: 180
   - type: PointLight
