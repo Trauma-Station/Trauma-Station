@@ -418,8 +418,9 @@ namespace Content.Server.Construction
             EntityManager.InitializeAndStartEntity(newUid);
 
             // <Trauma> - stupid fucking chuds put the events in server idc to refactor them
-            var goidaEv = new ConstructionChangedEvent(newUid);
+            var goidaEv = new ConstructionChangedEvent(newUid, uid, userUid);
             RaiseLocalEvent(uid, ref goidaEv);
+            RaiseLocalEvent(newUid, ref goidaEv);
             // </Trauma>
             QueueDel(uid);
 

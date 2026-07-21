@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MarkerBase
+  id: RandomInkSpawner
+  name: random magic ink
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: Icon
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MagicInkAsimel
+      - id: MagicInkAshartine
+      - id: MagicInkAzurapetra
+      - id: MagicInkCatwink
+      - id: MagicInkEndozult
+      - id: MagicInkHithine
+      - id: MagicInkHoundsgall
+      - id: MagicInkIndothine
+      - id: MagicInkMarakat
+      - id: MagicInkNillycant
+      - id: MagicInkNocimat
+      - id: MagicInkOrpimentexultant
+      - id: MagicInkPerhibiate
+      - id: MagicInkPerinsabate
+      - id: MagicInkPerinculate
+      - id: MagicInkPorphyrine
+      - id: MagicInkPosithane
+      - id: MagicInkPurpuraatramentum
+      - id: MagicInkPyrathene
+      - id: MagicInkPyroendine
+      - id: MagicInkRaggath
+      - id: MagicInkRubiginosus
+      - id: MagicInkStargallink
+      - id: MagicInkTerragall
+      - id: MagicInkUnden
+      - id: MagicInkUzult
+      - id: MagicInkYewgallink

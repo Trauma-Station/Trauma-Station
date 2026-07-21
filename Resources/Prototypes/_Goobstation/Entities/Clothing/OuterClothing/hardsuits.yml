@@ -61,7 +61,7 @@
 # Cybersun Stealth
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContrabandUnscannable]
   id: ClothingOuterHardsuitCybersunStealth
   suffix: stealth
   name: cybersun stealth hardsuit
@@ -96,7 +96,7 @@
 # cybersun dreadnought suit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateAnchoredContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContrabandUnscannable ]
   id: ClothingOuterHardsuitCybersunDreadnought
   name: Cybersun dreadnought suit
   description: The Syndicate places its glory on your shoulders, do not disappoint.

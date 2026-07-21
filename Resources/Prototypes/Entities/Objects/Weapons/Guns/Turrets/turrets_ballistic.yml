@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseWeaponBallisticTurret, BaseSyndicateAnchoredContraband]
+  parent: [BaseWeaponBallisticTurret, BaseSyndicateContrabandUnscannable] # Trauma - unscannable
   id: WeaponTurretSyndicate
   suffix: Syndicate
   components:
