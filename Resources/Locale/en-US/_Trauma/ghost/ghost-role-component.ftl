@@ -56,8 +56,8 @@ ghost-role-information-wailing-horse-desc = It hurts...Why does it hurt so much?
 ghost-role-information-ratma-name = Ratma
 ghost-role-information-ratma-desc = Hunt and kill.
 
-ghost-role-information-breadling-namee = Breadling
-ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
+ghost-role-information-breadling-name = Breadling
+ghost-role-information-breadling-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
 
 ghost-role-information-coconutcrab-name = Coconut Crab
 

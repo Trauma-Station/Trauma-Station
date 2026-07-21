@@ -11737,3 +11737,21 @@ Entries:
   id: 1297
   time: '2026-07-19T20:21:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3624
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Bluespace crystals now violently react with bluespace portals.
+  - type: Tweak
+    message: Space whales now move faster and are gibbed if they go through a portal.
+  id: 1298
+  time: '2026-07-21T11:22:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3646
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Demons, chaplain familiars and syndie reinforcements now get told who
+      summoned them in their character menu.
+  id: 1299
+  time: '2026-07-21T13:08:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3649
