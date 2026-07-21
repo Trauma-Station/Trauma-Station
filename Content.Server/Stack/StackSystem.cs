@@ -16,21 +16,15 @@ namespace Content.Server.Stack
     {
         [Dependency] private SharedHandsSystem _hands = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         [Dependency] private EntityQuery<StackComponent> _stackQuery;
 
         #region Spawning
 
-        /// <summary>
-        /// Spawns a new entity and moves an amount to it from the stack.
-        /// Moves nothing if amount is greater than ent's stack count.
-        /// </summary>
-        /// <param name="ent">Entity to split in a new stack.</param>
-        /// <param name="amount">How much to move to the new entity.</param>
-        /// <param name="spawnPosition">Where to spawn the new stack</param>
-        /// <returns>Null if StackComponent doesn't resolve, or amount to move is greater than ent has available.</returns>
+        /// <inheritdoc />
         [PublicAPI]
-        public override EntityUid? Split(Entity<StackComponent?> ent, int amount, EntityCoordinates spawnPosition) // Goob - override virtual method
+        public override EntityUid? Split(Entity<StackComponent?> ent, int amount, EntityCoordinates spawnPosition, EntityUid? user = null)
         {
             if (!_stackQuery.Resolve(ent.Owner, ref ent.Comp))
                 return null;
@@ -52,7 +46,7 @@ namespace Content.Server.Stack
             stackComp.Unlimited = false; // Don't let people dupe unlimited stacks
             Dirty(newEntity, stackComp);
 
-            var ev = new StackSplitEvent(newEntity);
+            var ev = new StackSplitEvent(newEntity, user);
             RaiseLocalEvent(ent, ref ev);
 
             return newEntity;
