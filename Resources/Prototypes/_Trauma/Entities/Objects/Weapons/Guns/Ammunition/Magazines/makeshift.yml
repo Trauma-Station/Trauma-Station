@@ -21,7 +21,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\custom_smg_mag.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Makeshift/custom_smg_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -54,7 +54,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\patented_smg_mag.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Makeshift/patented_smg_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -87,7 +87,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\makeshift_sar_mag.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Makeshift/makeshift_sar_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -120,7 +120,7 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Makeshift\makeshift_ak_mag.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Makeshift/makeshift_ak_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

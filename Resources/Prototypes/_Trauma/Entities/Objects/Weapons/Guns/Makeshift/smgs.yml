@@ -7,7 +7,7 @@
   description: A high-firerate innaccurate machine gun made from an atmospheric pipe and hammered steel sheets, for when you need to pepper anything in a general direction. It feeds from 7.62x25 box magazines.
   components:
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
   - type: Gun
     minAngle: 45
     maxAngle: 90
@@ -56,7 +56,7 @@
   description: A makeshift submachine gun based off of an iconic old terra design, it was known for its incredibly high firerate, unfortunately this model lacks the craftsmanship to share the same qualities. It feeds from 7.62x25 curved magazines.
   components:
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
   - type: Gun
     minAngle: 30
     maxAngle: 60

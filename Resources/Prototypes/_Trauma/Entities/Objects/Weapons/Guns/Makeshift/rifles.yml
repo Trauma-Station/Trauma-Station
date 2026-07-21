@@ -14,9 +14,9 @@
     soundGunshot:
       path: /Audio/_Trauma/Weapons/Guns/Gunshots/battle_rifle.ogg
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-assault-rifle.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-assault-rifle.rsi
   - type: Clothing
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-assault-rifle.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-assault-rifle.rsi
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -60,9 +60,9 @@
     soundGunshot:
       path: /Audio/_Trauma/Weapons/Guns/Gunshots/battle_rifle.ogg
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
   - type: Clothing
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -101,9 +101,9 @@
   - type: Item
     size: Large
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
   - type: Clothing
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
   - type: BallisticAmmoProvider
     autoCycle: false
     capacity: 5

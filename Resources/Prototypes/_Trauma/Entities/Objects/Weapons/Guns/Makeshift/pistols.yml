@@ -7,7 +7,7 @@
   description: An underpowered revolver cobbled together from pieces of scrap metal that have been ziptied and glued together. It boasts an 8 round cylinder and is chambered in .22 Magnum, at least it won't jam.
   components:
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/revolver.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/revolver.rsi
   - type: RevolverAmmoProvider
     whitelist:
       tags:
@@ -28,7 +28,7 @@
   description: An extremely decroded handcannon made from an atmospheric pipe ziptied to a crude wooden handle, it has been fitted for 12 gauge shells, extremely unreliable.
   components:
   - type: Sprite
-    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/eoka_pistol.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/eoka_pistol.rsi
   - type: Item
     size: Small
     shape:
