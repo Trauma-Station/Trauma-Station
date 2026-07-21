@@ -1,1 +1,1 @@
-connecting-title-trauma = Trauma Station
+connecting-title-trauma = R.O.N. Station
