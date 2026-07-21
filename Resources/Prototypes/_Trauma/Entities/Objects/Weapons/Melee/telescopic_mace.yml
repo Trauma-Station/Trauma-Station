@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [TelescopicBaton, BaseMedicalContraband]
+  parent: [ TelescopicBaton, BaseMedicalContraband ]
   id: TelescopicMace
   name: telecopic mace
   description: A compact personal defense weapon. Perfect for fending off people who want to interrupt your rescue attempts or get in your way.
