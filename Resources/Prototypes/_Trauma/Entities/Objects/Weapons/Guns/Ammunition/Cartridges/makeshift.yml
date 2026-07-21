@@ -8,7 +8,7 @@
   components:
   - type: Tag
     tags:
-    - Cartridge22Magnum
+    - Cartridge22MagnumMakeshift
   - type: CartridgeAmmo
     proto: Bullet22MagnumMakeshift
   - type: Sprite
@@ -67,7 +67,7 @@
   components:
   - type: Tag
     tags:
-      - Cartridge739
+      - Cartridge739Makeshift
   - type: CartridgeAmmo
     proto: Bullet739Makeshift
   - type: Sprite

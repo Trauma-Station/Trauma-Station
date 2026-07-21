@@ -34,6 +34,21 @@
 ## C ##
 
 - type: Tag
+  id: Cartridge20GaugeMakeshift # Ammo whitelist: MakeshiftGaspipeShotgun
+
+- type: Tag
+  id: Cartridge22MagnumMakeshift # Ammo whitelist: MakeshiftRevolver
+
+- type: Tag
+  id: Cartridge725Makeshift # Ammo whitelist: MakeshiftSMGCustom, MakeshiftPatentedSMG, MagazinePatentedSMG, MagazineCustomSMG
+
+- type: Tag
+  id: Cartridge739Makeshift # Ammo whitelist: MakeshiftAK, MagazineAKMakeshift
+
+- type: Tag
+  id: Cartridge751Makeshift # Ammo whitelist: MakeshiftSAR, MagazineSAR
+
+- type: Tag
   id: CartridgeGaussgun # Ammo whitelist: BaseMagazineGaussgun
 
 - type: Tag
@@ -145,6 +160,18 @@
   id: Katana # Used for sheath whitelist
 
 ## M ##
+
+- type: Tag
+  id: MagazineAKMakeshift # Ammo whitelist: MakeshiftAK
+
+- type: Tag
+  id: MagazineCustomSMG # Ammo whitelist: MakeshiftSMGCustom
+
+- type: Tag
+  id: MagazinePatentedSMG # Ammo whitelist: MakeshiftPatentedSMG
+
+- type: Tag
+  id: MagazineSAR # Ammo whitelist: MakeshiftSAR
 
 - type: Tag
   id: MagazineGaussgun # Ammo whitelist: BaseWeaponGaussgun
