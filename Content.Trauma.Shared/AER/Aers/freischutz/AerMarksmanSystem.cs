@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Devil;
-using Content.Goobstation.Shared.Devil.Contract;
-using Content.Server.Hands.Systems;
-using Content.Shared.Actions;
-using Content.Trauma.Shared.AER;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Content.Server.Popups;
 using Content.Shared.Popups;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Actions;
+using Content.Goobstation.Shared.Devil;
+using Content.Goobstation.Shared.Devil.Contract;
+using Content.Trauma.Shared.AER;
+
+
 
 namespace Content.Trauma.Server.AER;
 
@@ -20,9 +21,9 @@ namespace Content.Trauma.Server.AER;
 public sealed partial class AerMarksmanSystem : EntitySystem
 {
 
-    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     [SubscribeLocalEvent]
     private void OnContractCreated(Entity<AerMarksmanComponent> devil, ref CreateContractEventAer args)
@@ -30,7 +31,7 @@ public sealed partial class AerMarksmanSystem : EntitySystem
         if (!TryUseAbility(args))
             return;
 
-        var contract = Spawn(devil.Comp.ContractPrototype, Transform(devil).Coordinates);
+        var contract = PredictedSpawnAtPosition(devil.Comp.ContractPrototype, Transform(devil).Coordinates);
         _hands.TryPickupAnyHand(devil, contract);
 
         if (!TryComp<DevilContractComponent>(contract, out var contractComponent))
@@ -39,8 +40,14 @@ public sealed partial class AerMarksmanSystem : EntitySystem
         contractComponent.ContractOwner = args.Performer;
         Dirty(contract, contractComponent);
 
-        PlayFwooshSound(devil);
-        DoContractFlavor(devil, Identity.Name(devil, EntityManager));
+        var audioparam = new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f);
+        _audio.PlayPredicted(devil.Comp.FwooshPath, devil.Owner, devil.Owner, audioparam);
+
+
+        var name = Identity.Name(devil, EntityManager);
+        var flavor = Loc.GetString("contract-summon-flavor", ("name", name));
+        _popup.PopupEntity(flavor, devil, PopupType.Medium);
+
     }
 
     private static bool TryUseAbility(BaseActionEvent action)
@@ -50,19 +57,5 @@ public sealed partial class AerMarksmanSystem : EntitySystem
 
         action.Handled = true;
         return true;
-    }
-
-    private void PlayFwooshSound(EntityUid uid, DevilComponent? comp = null)
-    {
-        if (!Resolve(uid, ref comp))
-            return;
-
-        _audio.PlayPvs(comp.FwooshPath, uid, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f));
-    }
-
-    private void DoContractFlavor(EntityUid devil, string name)
-    {
-        var flavor = Loc.GetString("contract-summon-flavor", ("name", name));
-        _popup.PopupEntity(flavor, devil, PopupType.Medium);
     }
 }
