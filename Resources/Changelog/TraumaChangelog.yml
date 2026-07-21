@@ -11031,3 +11031,12 @@ Entries:
   id: 1232
   time: '2026-07-18T09:10:52.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/83
+- author: bruhmogus
+  changes:
+  - type: Tweak
+    message: >-
+      Felinids are no longer outright looked down upon by the generic game
+      narrator.
+  id: 1233
+  time: '2026-07-21T16:03:26.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/84
