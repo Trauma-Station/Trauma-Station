@@ -16,7 +16,7 @@ public sealed partial class FamiliarSystem : CommonFamiliarSystem
     [SubscribeLocalEvent]
     private void OnGhostRoleCreatedMind(Entity<FamiliarMasterComponent> ent, ref GhostRoleCreatedMindEvent args)
     {
-        CopyMaster(ent, args.Mind);
+        CopyMaster(ent.AsNullable(), args.Mind);
     }
 
     [SubscribeLocalEvent]
