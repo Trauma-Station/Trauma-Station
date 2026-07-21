@@ -28,7 +28,7 @@
   description: An extremely decroded handcannon made from an atmospheric pipe ziptied to a crude wooden handle, it has been fitted for 12 gauge shells, extremely unreliable.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/eoka_pistol.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/eoka-pistol.rsi
   - type: Item
     size: Small
     shape:
