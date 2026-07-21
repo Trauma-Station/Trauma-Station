@@ -8,13 +8,14 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
-  - type: Item
-    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
-    size: Small
+    layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
   - type: Gun
@@ -65,15 +66,16 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
     size: Large
     shape:
     - 0,0,2,3
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
   - type: Gun
