@@ -19,7 +19,7 @@ public sealed partial class AnomalousEntityContainmentComponent : Component
     /// if the aer sensor is linked to an aer
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Linked = false;
+    public bool Linked;
 
     /// <summary>
     /// A multiplier applied to the amount of points generated.

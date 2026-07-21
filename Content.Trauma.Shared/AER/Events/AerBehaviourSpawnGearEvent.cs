@@ -6,12 +6,4 @@ namespace Content.Trauma.Shared.AER;
 /// event raised for spawning an aer I.D. gear on an aer behaviour
 /// </summary>
 [ByRefEvent]
-public record struct AerBehaviourSpawnGearEvent
-{
-    public EntityUid Aer;
-
-    public AerBehaviourSpawnGearEvent(EntityUid aer)
-    {
-        Aer = aer;
-    }
-}
+public record struct AerBehaviourSpawnGearEvent(EntityUid Aer);

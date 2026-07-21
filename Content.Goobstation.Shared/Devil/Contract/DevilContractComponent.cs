@@ -28,7 +28,7 @@ public sealed partial class DevilContractComponent : Component
     /// <summary>
     /// Clause blacklist for restricting available clauses
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<ProtoId<DevilClausePrototype>> ClauseBlacklist = [];
 
     /// <summary>
