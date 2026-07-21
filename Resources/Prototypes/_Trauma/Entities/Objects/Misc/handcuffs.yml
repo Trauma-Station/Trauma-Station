@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ Handcuffs, BaseMinorContraband ]
+  parent: [ BaseMinorContraband, Hnadcuffs ]
   id: BarbHandcuffs # TODO: Needs to damage on remove attempt
   name: barbed wire handcuffs
   description: Used to detain people you intend to kill.
@@ -19,25 +19,11 @@
     node: finish
 
 - type: entity
+  parent: [BaseMajorContraband, AbductorHandcuffs]
+  id: WonderprodCuffs
   name: printed wondercuffs
   description: Made out of a metal more durable than anything Nanotrasen could dream of. Dissolves when removed.
-  id: WonderprodCuffs
-  parent: [ BaseMajorContraband, Handcuffs ]
   components:
   - type: Handcuff
-    cuffTime: 1.5
-    uncuffTime: 4.5
-    breakoutTime: 30
-    stunBonus: 1.0
-    cuffedRSI: _Shitmed/Objects/Misc/handcuffs.rsi
-    bodyIconState: body-overlay
     breakOnRemove: true
     brokenPrototype: Ash
-  - type: Sprite
-    sprite: _Shitmed/Objects/Misc/handcuffs.rsi
-    state: handcuff
-  - type: GuideHelp
-    guides:
-    - Abductors
-  - type: UseDelay
-    delay: 1.5
