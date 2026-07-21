@@ -27,14 +27,16 @@
   components:
   - type: Tag
     tags:
-      - Cartridge20Gauge
-  - type: CartridgeAmmo
-    soundEject:
-      collection: ShellEject
+    - Cartridge20GaugeMakeshift
   - type: CartridgeAmmo
     proto: PelletShotgunMakeshift20gSpread
+    soundEject:
+     collection: ShellEject
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/20g_shell.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
   - type: Appearance
   - type: SpentAmmoVisuals
 
@@ -84,7 +86,7 @@
   components:
   - type: Tag
     tags:
-      - Cartridge751
+      - Cartridge751Makeshift
   - type: CartridgeAmmo
     proto: Bullet751Makeshift
   - type: Sprite

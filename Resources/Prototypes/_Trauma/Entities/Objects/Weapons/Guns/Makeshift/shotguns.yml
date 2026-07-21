@@ -1,20 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
-  parent: BaseWeaponShotgun
-  id: BaseWeaponShotgun20gMakeshift
-  name: BaseWeaponShotgun20gMakeshift
-  components:
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - Cartridge20GaugeMakeshift
-    capacity: 7
-    proto: Cartridge20GaugeMakeshift
-
-- type: entity
-  parent: [ BaseWeaponShotgun20gMakeshift, BaseGunWieldable, BaseMajorContraband ]
+  parent: [ BaseWeaponShotgun, BaseGunWieldable, BaseMajorContraband ]
   id: MakeshiftGaspipeShotgun
   name: Gaspipe shotgun
   description: A makeshift under-over shotgun made from a gas pipe and a few other industrial parts, it seats two 20 gauge shells. Due to it's smoothbore pipe barrel it lacks accuracy.
@@ -25,9 +12,6 @@
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/gaspipe-shotgun.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/gaspipe-shotgun.rsi
-  - type: BallisticAmmoProvider
-    capacity: 2
-    proto: null
   - type: GunRequiresWield
   - type: GunSpreadModifier
     spread: 1.4
@@ -35,3 +19,9 @@
     firerate: 2
     soundGunshot:
       path: /Audio/_Trauma/Weapons/Guns/Gunshots/shotgun_blast.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - Cartridge20GaugeMakeshift
+    capacity: 2
+    proto: null

@@ -36,8 +36,8 @@
 - type: entity
   parent: [ BaseItem, BaseMajorContraband ]
   id: MagazinePatentedSMG
-  name: "makeshift curved magazine (7.62x25mm Tokarev)"
-  description: A makeshift curved magazine that holds 35 rounds of 7.62x25mm Tokarev.
+  name: "makeshift banana magazine (7.62x25mm Tokarev)"
+  description: A makeshift banana magazine that holds 35 rounds of 7.62x25mm Tokarev.
   components:
   - type: Tag
     tags:
@@ -102,8 +102,8 @@
 - type: entity
   parent: [ BaseItem, BaseMajorContraband ]
   id: MagazineAKMakeshift
-  name: "makeshift box magazine (7.62x39mm Soviet)"
-  description: A makeshift box magazine that holds 20 rounds of 7.62x39mm Soviet.
+  name: "makeshift banana magazine (7.62x39mm Soviet)"
+  description: A makeshift banana magazine that holds 30 rounds of 7.62x39mm Soviet.
   components:
   - type: Tag
     tags:
