@@ -8,6 +8,15 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
+    size: Small
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
   - type: Gun
     minAngle: 45
     maxAngle: 90
@@ -55,6 +64,17 @@
   description: A makeshift submachine gun based off of an iconic old terra design, it was known for its incredibly high firerate, unfortunately this model lacks the craftsmanship to share the same qualities. It feeds from 7.62x25 curved magazines.
   components:
   - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
+    size: Large
+    shape:
+    - 0,0,2,3
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
   - type: Gun
     minAngle: 30
