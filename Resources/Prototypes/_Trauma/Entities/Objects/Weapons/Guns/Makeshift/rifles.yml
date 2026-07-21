@@ -127,9 +127,6 @@
   - type: Item
     size: Large
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-semi-automatic-rifle.rsi
-    size: Huge
-    shape:
-    - 0,0,4,1
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
   - type: Clothing
