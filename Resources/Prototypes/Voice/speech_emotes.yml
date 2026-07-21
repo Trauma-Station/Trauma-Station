@@ -72,13 +72,13 @@
 
 - type: emote
   id: Sigh
-  name: chat-emote-name-sigh
   # <Trauma>
   event: !type:AnimationVisualEmoteEvent
     layer: Sigh
     time: 1.5
     key: emoteAnimSigh
   # </Trauma>
+  name: chat-emote-name-sigh
   category: Vocal
   icon: Interface/Emotes/sigh.png
   whitelist:

@@ -25,7 +25,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     private const int TweakAnimationDurationMs = 1100; // 11 frames * 100ms per frame
     private const int FlexAnimationDurationMs = 200 * 7; // 7 frames * 200ms per frame
 
-    private static readonly Dictionary<HumanoidVisualEmoteLayers, ProtoId<OrganCategoryPrototype>> EnoteOrganDict = new()
+    private static readonly Dictionary<HumanoidVisualEmoteLayers, ProtoId<OrganCategoryPrototype>> EmoteOrganDict = new()
     {
         {HumanoidVisualEmoteLayers.Tongue, "Tongue"},
         {HumanoidVisualEmoteLayers.Cry, "Eyes"},
@@ -70,11 +70,10 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
             args.Cancelled = true;
     }
 
-
     [SubscribeLocalEvent]
     private void OnBodyAttempt(Entity<BodyComponent> ent, ref AnimationVisualEmoteAttemptEvent args)
     {
-        if (args.Cancelled || !EnoteOrganDict.TryGetValue(args.Layer, out var organ))
+        if (args.Cancelled || !EmoteOrganDict.TryGetValue(args.Layer, out var organ))
             return;
 
         if (_body.GetOrgan(ent.AsNullable(), organ) == null)
