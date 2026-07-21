@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    if: github.actor != 'SlopBot' && github.event.pull_request.draft == false
+    if: github.actor != 'RonStationCentralAI' && github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
