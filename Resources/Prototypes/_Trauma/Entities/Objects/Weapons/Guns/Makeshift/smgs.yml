@@ -47,7 +47,6 @@
        whitelist:
         tags:
         - Cartridge725Makeshift
-       proto: null
 
 - type: entity
   parent: MakeshiftSMGCustom

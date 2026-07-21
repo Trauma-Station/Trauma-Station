@@ -13,12 +13,12 @@
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/gaspipe-shotgun.rsi
   - type: GunRequiresWield
-  - type: GunSpreadModifier
-    spread: 1.4
   - type: Gun
-    firerate: 2
+    fireRate: 2
     soundGunshot:
       path: /Audio/_Trauma/Weapons/Guns/Gunshots/shotgun_blast.ogg
+  - type: GunSpreadModifier
+    spread: 1.4
   - type: BallisticAmmoProvider
     whitelist:
       tags:
