@@ -1,0 +1,6 @@
+# test clause for freischutz gonna add more gun themed clauses
+- type: clause
+  id: lackofrifle
+  clauseWeight: -30
+  spawnedItems:
+  - WeaponSniperMosin
