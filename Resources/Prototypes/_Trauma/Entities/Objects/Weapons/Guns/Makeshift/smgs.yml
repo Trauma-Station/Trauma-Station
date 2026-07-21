@@ -19,10 +19,10 @@
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
   - type: Gun
-    minAngle: 45
-    maxAngle: 90
-    fireRate: 13
-    burstFireRate: 13
+    minAngle: 25
+    maxAngle: 75
+    fireRate: 10
+    burstFireRate: 10
     angleIncrease: 4
     angleDecay: 16
     selectedMode: FullAuto
@@ -34,8 +34,8 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -25
-    maxAngle: -20
+    minAngle: -16
+    maxAngle: -15
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
