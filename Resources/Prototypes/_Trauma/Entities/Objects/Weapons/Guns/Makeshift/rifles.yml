@@ -132,10 +132,6 @@
     - 0,0,4,1
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-bolt-action-rifle.rsi
   - type: BallisticAmmoProvider
