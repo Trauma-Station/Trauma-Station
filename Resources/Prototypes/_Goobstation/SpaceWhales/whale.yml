@@ -55,7 +55,7 @@
     spacing: 1
     prototype: SpaceWhaleSegment
   - type: MovementSpeedModifier
-    baseSprintSpeed: 40
+    baseSprintSpeed: 70
     baseWalkSpeed: 11
     baseWeightlessFriction: 4
     weightlessFriction: 4
@@ -141,6 +141,12 @@
         Slash: 45
         Structural: 800 #lol
   - type: NoRotateOnMove
+  - type: PortalTransitEffects # its like an apple getting cored
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Slash: 4000
 
 - type: entity
   parent: [MobSpaceLeviathanSegmentBase, FlyingMobBase]
