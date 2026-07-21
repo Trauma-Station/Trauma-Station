@@ -16,9 +16,6 @@
   - type: Appearance
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Makeshift/makeshift-laser-pistol.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
   - type: Item
   - type: BatteryAmmoProvider
     proto: BulletMakeshiftLaser
