@@ -43,36 +43,9 @@ public sealed partial class QualitySystem : EntitySystem
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
     private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        // quality effects
-        SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
-        SubscribeLocalEvent<QualityComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
-        SubscribeLocalEvent<ArmorComponent, ApplyQualityEvent>(OnArmorApplyQuality);
-        SubscribeLocalEvent<ClothingComponent, ApplyQualityEvent>(OnClothingApplyQuality);
-        SubscribeLocalEvent<ExplosionResistanceComponent, ApplyQualityEvent>(OnExplosionResistApplyQuality);
-        SubscribeLocalEvent<StaminaResistanceComponent, ApplyQualityEvent>(OnStaminaResistApplyQuality);
-        SubscribeLocalEvent<DestructibleComponent, ApplyQualityEvent>(OnDestructibleApplyQuality);
-        SubscribeLocalEvent<DamageOnHitComponent, ApplyQualityEvent>(OnSelfDamageApplyQuality);
-        SubscribeLocalEvent<DamageOtherOnHitComponent, ApplyQualityEvent>(OnDamageApplyQuality);
-        SubscribeLocalEvent<MeleeWeaponComponent, ApplyQualityEvent>(OnMeleeDamageApplyQuality);
-        SubscribeLocalEvent<GunComponent, ApplyQualityEvent>(OnGunApplyQuality);
-        SubscribeLocalEvent<ProjectileComponent, ApplyQualityEvent>(OnProjectileApplyQuality);
-        SubscribeLocalEvent<DurabilityComponent, ApplyQualityEvent>(OnDurabilityApplyQuality);
-        SubscribeLocalEvent<BlockingComponent, ApplyQualityEvent>(OnShieldApplyQuality);
-
-        // interactions
-        SubscribeLocalEvent<QualityComponent, ConstructionChangedEvent>(OnConstructionChanged);
-        SubscribeLocalEvent<QualityComponent, CartridgeFiredEvent>(OnCartridgeFired);
-        SubscribeLocalEvent<QualityComponent, SpreadPelletFiredEvent>(OnSpreadPelletFired);
-        SubscribeLocalEvent<QualityComponent, StackSplitEvent>(OnStackSplit);
-        SubscribeLocalEvent<QualityComponent, AttemptMergeStackEvent>(OnAttemptMergeStack);
-    }
-
     #region Quality effects
 
+    [SubscribeLocalEvent]
     private void OnRefreshNameModifiers(Entity<QualityComponent> ent, ref RefreshNameModifiersEvent args)
     {
         // TODO: quality should be clamped separately...
@@ -80,6 +53,7 @@ public sealed partial class QualitySystem : EntitySystem
         args.AddModifier($"quality-name-{clamped}");
     }
 
+    [SubscribeLocalEvent]
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
     {
         // 60% spread at +5, 170% at -5
@@ -88,6 +62,7 @@ public sealed partial class QualitySystem : EntitySystem
         args.MaxAngle *= modifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnArmorApplyQuality(Entity<ArmorComponent> ent, ref ApplyQualityEvent args)
     {
         // -5 is half as good, 5 is twice as good
@@ -100,6 +75,7 @@ public sealed partial class QualitySystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnClothingApplyQuality(Entity<ClothingComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.ClothingDelay);
@@ -107,6 +83,7 @@ public sealed partial class QualitySystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnExplosionResistApplyQuality(Entity<ExplosionResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.ExplosionResist);
@@ -114,6 +91,7 @@ public sealed partial class QualitySystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnStaminaResistApplyQuality(Entity<StaminaResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.StaminaResist);
@@ -121,6 +99,7 @@ public sealed partial class QualitySystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnDestructibleApplyQuality(Entity<DestructibleComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.Health);
@@ -128,6 +107,7 @@ public sealed partial class QualitySystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnSelfDamageApplyQuality(Entity<DamageOnHitComponent> ent, ref ApplyQualityEvent args)
     {
         ent.Comp.Damage *= args.Modifier(args.Proto.SelfDamage);
@@ -135,6 +115,7 @@ public sealed partial class QualitySystem : EntitySystem
     }
 
     // not specific to spears but holy class name
+    [SubscribeLocalEvent]
     private void OnDamageApplyQuality(Entity<DamageOtherOnHitComponent> ent, ref ApplyQualityEvent args)
     {
         // 180% damage at +5 quality
@@ -142,6 +123,7 @@ public sealed partial class QualitySystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMeleeDamageApplyQuality(Entity<MeleeWeaponComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.MeleeDamage);
@@ -151,24 +133,28 @@ public sealed partial class QualitySystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGunApplyQuality(Entity<GunComponent> ent, ref ApplyQualityEvent args)
     {
         _gun.RefreshModifiers(ent.AsNullable());
         // TODO: add gun jamming exploding in your face etc at low gun quality
     }
 
+    [SubscribeLocalEvent]
     private void OnProjectileApplyQuality(Entity<ProjectileComponent> ent, ref ApplyQualityEvent args)
     {
         ent.Comp.Damage *= args.Modifier(args.Proto.Projectile);
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnDurabilityApplyQuality(Entity<DurabilityComponent> ent, ref ApplyQualityEvent args)
     {
         ent.Comp.DamageProbability /= args.Modifier(args.Proto.Durability);
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnShieldApplyQuality(Entity<BlockingComponent> ent, ref ApplyQualityEvent args)
     {
         var modifierMinus = args.Modifier(args.Proto.Shield);
@@ -206,21 +192,26 @@ public sealed partial class QualitySystem : EntitySystem
 
     #region Interactions
 
+    [SubscribeLocalEvent]
     private void OnConstructionChanged(Entity<QualityComponent> ent, ref ConstructionChangedEvent args)
     {
-        CopyQuality(ent, args.Target);
+        if (ent.Owner == args.Old)
+            CopyQuality(ent, args.New);
     }
 
+    [SubscribeLocalEvent]
     private void OnCartridgeFired(Entity<QualityComponent> ent, ref CartridgeFiredEvent args)
     {
         CopyQuality(ent, args.Bullet);
     }
 
+    [SubscribeLocalEvent]
     private void OnSpreadPelletFired(Entity<QualityComponent> ent, ref SpreadPelletFiredEvent args)
     {
         CopyQuality(ent, args.Pellet);
     }
 
+    [SubscribeLocalEvent]
     private void OnStackSplit(Entity<QualityComponent> ent, ref StackSplitEvent args)
     {
         var comp = EnsureComp<QualityComponent>(args.NewId);
@@ -232,6 +223,7 @@ public sealed partial class QualitySystem : EntitySystem
         ApplyQuality((args.NewId, comp));
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptMergeStack(Entity<QualityComponent> ent, ref AttemptMergeStackEvent args)
     {
         if (!_query.TryComp(args.OtherStack, out var other))
