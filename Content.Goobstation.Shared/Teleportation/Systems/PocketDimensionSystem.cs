@@ -9,6 +9,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Teleportation.Systems;
 
@@ -17,6 +18,7 @@ namespace Content.Goobstation.Shared.Teleportation.Systems;
 /// </summary>
 public sealed partial class PocketDimensionSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private LinkedEntitySystem _link = default!;
     [Dependency] private MapLoaderSystem _mapLoader = default!;
