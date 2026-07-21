@@ -34,7 +34,7 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
             return;
 
         // new mutation added to an already scanned subject, create a sequence for it
-        TryAddSequence(ent, args.Id);
+        TryAddSequence(ent.AsNullable(), args.Id);
     }
 
     [SubscribeLocalEvent]
