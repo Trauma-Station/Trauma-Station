@@ -176,7 +176,7 @@
   suffix: despawns
   components:
   - type: TimedDespawn
-    lifetime: 190 # to further prevent shitters from abusing it if something came up
+    lifetime: 110 # to further prevent shitters from abusing it if something came up
 
 - type: entity
   id: SpaceLeviathanMobCaller
