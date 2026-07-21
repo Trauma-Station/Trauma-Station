@@ -8,6 +8,9 @@
 # WallSolid: Window
 # Table: null
 
+# <Trauma> -
+WeaponShotgunHandmade: null # Replace WeaponShotgunHandmade with EOKA pistol once its finished
+
 # <Trauma> - too lazy to port debugoks multi migration thing
 # 2025-10-19
 LockerBlueshieldOfficerFilled: null
