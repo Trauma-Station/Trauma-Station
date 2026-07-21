@@ -68,10 +68,6 @@ public sealed partial class EmotePrototype : IPrototype
     /// </summary>
     [DataField]
     public HashSet<string> ChatTriggers = new();
-
-    // goob edit - animations
-    [DataField]
-    public object? Event = null;
 }
 
 /// <summary>

@@ -2,6 +2,7 @@
 
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.EntityEffects;
 using Content.Shared.Medical;
 using Content.Shared.StatusEffectNew;
 
@@ -11,15 +12,9 @@ public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private VomitSystem _vomit = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AnimatedEmotesComponent, EmoteEvent>(OnEmote);
-        SubscribeLocalEvent<AnimatedEmotesComponent, BeforeEmoteEvent>(OnBeforeEmote);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBeforeEmote(Entity<AnimatedEmotesComponent> ent, ref BeforeEmoteEvent args)
     {
         var emote = ProtoMan.Index<EmotePrototype>(args.Emote);
@@ -30,9 +25,10 @@ public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnEmote(Entity<AnimatedEmotesComponent> ent, ref EmoteEvent args)
     {
-        PlayEmoteAnimation(ent.AsNullable(), args.Emote.ID);
+        PlayEmoteAnimation(ent.AsNullable(), args.Emote);
 
         var emote = ProtoMan.Index<EmotePrototype>(args.Emote);
         if (emote.Event is not AnimationEmoteEvent { CausesVomit: true })
@@ -58,10 +54,18 @@ public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
 
     public void PlayEmoteAnimation(Entity<AnimatedEmotesComponent?> ent, ProtoId<EmotePrototype> prot)
     {
+        PlayEmoteAnimation(ent, ProtoMan.Index(prot));
+    }
+
+    public void PlayEmoteAnimation(Entity<AnimatedEmotesComponent?> ent, EmotePrototype prot)
+    {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        ent.Comp.Emote = prot;
+        ent.Comp.Emote = prot.ID;
         Dirty(ent);
+
+        if (prot.EffectsOnEmote is { } effects)
+            _effects.ApplyEffects(ent, effects, 1f, ent);
     }
 }

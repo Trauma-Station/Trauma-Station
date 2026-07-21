@@ -507,6 +507,10 @@
    - flutters her wings
    - flutters their wings
    - flutters its wings
+  effectsOnEmote:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectWingsOpen
+    time: 1
 
 # Machine Emotes
 - type: emote
