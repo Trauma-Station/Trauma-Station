@@ -489,8 +489,8 @@
     chatsan-word-goob-4: chatsan-replacement-goob-4
     # </Goob>
     # <Trauma>
-    chatsan-word-trauma-1: traumasan-replacement-1
-    chatsan-word-trauma-2: traumasan-replacement-2
+    chatsan-word-trauma-1: chatsan-replacement-trauma-1
+    chatsan-word-trauma-2: chatsan-replacement-trauma-2
     # </Trauma>
 - type: accent
   id: liar
