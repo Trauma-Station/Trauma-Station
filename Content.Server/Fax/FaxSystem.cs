@@ -45,7 +45,6 @@ public sealed partial class FaxSystem : EntitySystem
     // <Trauma>
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private TransformSystem _transform = default!;
-    [Dependency] private ExplosionSystem _explosion = default!;
     // </Trauma>
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IAdminManager _adminManager = default!;
@@ -359,8 +358,8 @@ public sealed partial class FaxSystem : EntitySystem
     {
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-        else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // goobstation
-            _explosion.QueueExplosion(uid, "Default", 20, 65, 3.4f, 1f, 0, false, uid);
+        else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // ronstation
+            return;
         else
             Copy(uid, component, args);
     }
@@ -380,8 +379,8 @@ public sealed partial class FaxSystem : EntitySystem
 
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-        else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // goobstation
-            _explosion.QueueExplosion(uid, "Default", 20, 65, 3.4f, 1f, 0, false, uid);
+        else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // ronstation
+            return;
         else
             Send(uid, component, args);
     }
