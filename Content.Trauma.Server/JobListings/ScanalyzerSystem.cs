@@ -65,3 +65,15 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
             args.Progress = 1.0f;
     }
 }
+
+/// <summary>
+/// Raised on the scanalyzer entity before it tries to do a scan.
+/// </summary>
+[ByRefEvent]
+public record struct AttemptScanalyzerScanEvent(EntityUid Target, bool Cancelled = false);
+
+/// <summary>
+/// Raised on the scanalyzer entity once a scan has finished.
+/// </summary>
+[ByRefEvent]
+public record struct ScanalyzerScanFinishedEvent(EntityUid Target);
