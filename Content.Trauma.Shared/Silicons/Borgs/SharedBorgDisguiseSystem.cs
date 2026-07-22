@@ -27,6 +27,9 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
         _accessName = Factory.CompName<AccessReaderComponent>();
     }
 
+    /// <summary>
+    /// When disguised, makes the borg's access reader show the access of whatever it's pretending to be.
+    /// </summary>
     [SubscribeLocalEvent]
     private void OnGetAccessReaderDisplay(Entity<BorgDisguiseComponent> ent, ref GetAccessReaderDisplayEvent args)
     {
