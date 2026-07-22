@@ -40,7 +40,7 @@ public abstract partial class SharedVisualBodySystem : EntitySystem
             if (!_marking.TryGetMarking(marking, out var proto))
                 continue;
 
-            if (!ResolveChildMarkings(marking, proto, forcedColors))
+            if (!ResolveChildMarkings(marking, proto, forcedColors)) // Trauma
                 continue;
 
             if (!proto.ForcedColoring && appearances.GetValueOrDefault(proto.BodyPart)?.MatchSkin != true)
