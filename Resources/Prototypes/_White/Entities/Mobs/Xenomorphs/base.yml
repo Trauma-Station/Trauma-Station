@@ -175,8 +175,8 @@
   abstract: true
   components:
   - type: MovementSpeedModifier
-    baseweightlessAcceleration: 1.7
-    baseweightlessFriction: 1
+    baseWeightlessAcceleration: 1.7
+    baseWeightlessFriction: 1
     baseWeightlessModifier: 1
   - type: FootstepModifier
     footstepSoundCollection:
