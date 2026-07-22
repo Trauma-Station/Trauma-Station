@@ -65,6 +65,17 @@
 
   - type: CollideMaterialReclaimer
   - type: MaterialReclaimer
+    # <Trauma>
+    emagComponents:
+    - type: DamageContacts
+      damageSound:
+        path: /Audio/Effects/saw.ogg
+        params:
+          volume: -3
+      damage:
+        types:
+          Slash: 20
+    # </Trauma>
     enabled: false
     scaleProcessSpeed: false #instant!
     minimumProcessDuration: 0

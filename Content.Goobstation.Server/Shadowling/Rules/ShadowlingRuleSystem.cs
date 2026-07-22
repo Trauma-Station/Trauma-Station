@@ -25,6 +25,7 @@ public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRule
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private NpcFactionSystem _npc = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_EinsteinEngines/Shadowling/shadowling.ogg");
 
@@ -68,6 +69,8 @@ public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRule
 
     private void OnAscend(ShadowlingAscendEvent args)
     {
+        var deathSquad = "SpawnDeathSquad";
+        _ticker.StartGameRule(deathSquad);
         var rulesQuery = QueryActiveRules();
         while (rulesQuery.MoveNext(out _, out var shadowling, out _))
         {

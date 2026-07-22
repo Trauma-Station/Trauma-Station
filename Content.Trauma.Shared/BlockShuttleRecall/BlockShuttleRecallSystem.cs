@@ -1,0 +1,32 @@
+using Content.Shared.Electrocution;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Xenoborgs.Components;
+
+namespace Content.Trauma.Shared.BlockShuttleRecall;
+
+/// <summary>
+/// Blocks shuttle recalls from things like abductors.
+/// </summary>
+public sealed partial class BlockShuttleRecallSystem : EntitySystem
+{
+    [Dependency] private SharedElectrocutionSystem _electrocution = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<BlockShuttleRecallComponent, InteractionAttemptEvent>(OnInteractAttempt);
+    }
+
+    private void OnInteractAttempt(Entity<BlockShuttleRecallComponent> ent, ref InteractionAttemptEvent args)
+    {
+        if (!HasComp<TraumaCommsConsoleComponent>(args.Target))
+            return;
+
+        if (HasComp<XenoborgComponent>(ent.Owner)) // Xenoborgs can't be stunned for some reason?
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        _electrocution.TryDoElectrocution(ent.Owner, null, ent.Comp.ShockDamage, ent.Comp.ShockTime, true, ignoreInsulation: true);
+    }
+}

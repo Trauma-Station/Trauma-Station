@@ -103,6 +103,10 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         if (_emag.CheckFlag(uid, EmagType.Interaction))
             return;
 
+        // <Trauma>
+        EntityManager.AddComponents(uid, component.EmagComponents);
+        // </Trauma>
+
         args.Handled = true;
     }
 

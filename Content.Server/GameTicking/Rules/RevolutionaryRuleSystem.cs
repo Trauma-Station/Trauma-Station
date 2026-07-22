@@ -46,6 +46,10 @@ namespace Content.Server.GameTicking.Rules;
 // Heavily edited by goobstation. If you want to upstream something think twice
 public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
 {
+    // <Trauma>
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private EuiManager _euiMan = default!;
@@ -102,6 +106,12 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
                         colorOverride: Color.Gold);
 
                     component.HasRevAnnouncementPlayed = true;
+
+                    // <Trauma>
+                    var ert = "SpawnERTSecurity";
+                    _ticker.StartGameRule(ert);
+                    _roundEndSystem.EndRound(TimeSpan.FromMinutes(10));
+                    // </Trauma>
                 }
 
                 foreach (var ms in EntityQuery<MindShieldComponent, MobStateComponent>())
@@ -118,6 +128,10 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
+                // <Trauma>
+                _roundEndSystem.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(10), cantRecall: true);
+                // </Trauma>
+
                 _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("revolutionaries-lose-announcement"),
                     Loc.GetString("revolutionaries-sender-cc"),

@@ -12,6 +12,7 @@ using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Map;
@@ -29,6 +30,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TargetSystem _target = default!;
     [Dependency] private EntityQuery<BlobCoreComponent> _query = default!;
     [Dependency] private EntityQuery<BlobFactoryComponent> _factoryQuery = default!;
     [Dependency] private EntityQuery<BlobNodeComponent> _nodeQuery = default!;
@@ -46,6 +48,8 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         if (!TileQuery.TryComp(ent, out var tile) ||
             !_nodeQuery.TryComp(ent, out var node))
             return;
+
+        ent.Comp.AmountAliveOnSpawn = _target.GetAliveHumans().Count;
 
         ConnectBlobTile((ent, tile), ent.AsNullable(), (ent, node));
 

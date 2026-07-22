@@ -23,7 +23,7 @@ public sealed partial class XenoborgsRuleComponent : Component
     /// After this amount of the crew become xenoborgs, the shuttle will be automatically called.
     /// </summary>
     [DataField]
-    public float XenoborgShuttleCallPercentage = 0.7f;
+    public float XenoborgShuttleCallPercentage = 0.4f; // - Trauma was 0.7
 
     /// <summary>
     /// The most xenoborgs that existed at one point.

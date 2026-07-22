@@ -17,8 +17,12 @@ using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
+using Content.Shared.Destructible;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Gibbing;
+using Content.Shared.Mobs;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
 using Robust.Server.Player;
 using Robust.Shared.Player;
 
@@ -26,6 +30,9 @@ namespace Content.Goobstation.Server.Blob.GameTicking;
 
 public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
 {
+    private float _percentNeededForNewAntag = 0.6f;
+
+    [Dependency] private TargetSystem _target = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private StationSystem _station = default!;
@@ -35,6 +42,26 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<BlobCoreComponent, DestructionEventArgs>(OnMobStateChanged);
+    }
+
+    private void OnMobStateChanged(Entity<BlobCoreComponent> ent, ref DestructionEventArgs args)
+    {
+        if ((float)_target.GetAliveHumans().Count / ent.Comp.AmountAliveOnSpawn >= _percentNeededForNewAntag)
+        {
+            var newAntags = "ModerateAntagEventScheduler";
+            _ticker.StartGameRule(newAntags);
+        }
+        else
+        {
+            _roundEnd.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(5), cantRecall: true);
+        }
+    }
 
     protected override void Started(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

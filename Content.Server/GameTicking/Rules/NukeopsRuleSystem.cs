@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Server.Chat.Systems;
 using Robust.Shared.Timing;
+using Content.Shared.Objectives.Systems;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
@@ -52,7 +53,11 @@ namespace Content.Server.GameTicking.Rules;
 public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
     // <Trauma>
+    private float _percentNeededForNewAntag = 0.6f;
+    private int _amountAliveOnSpawn;
     [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private TargetSystem _target = default!;
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
@@ -102,7 +107,16 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
+
+        SubscribeLocalEvent<NukeOperativeComponent, MapInitEvent>(OnMapInit); // Trauma
     }
+
+    // <Trauma>
+    private void OnMapInit(Entity<NukeOperativeComponent> ent, ref MapInitEvent args)
+    {
+        _amountAliveOnSpawn = _target.GetAliveHumans().Count;
+    }
+    // </Trauma>
 
     protected override void Started(EntityUid uid,
         NukeopsRuleComponent component,
@@ -530,12 +544,19 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
     private void CheckRoundShouldEnd(bool announce = true) // Goobstation
     {
+        var rules = new List<(EntityUid, NukeopsRuleComponent)>(); // Trauma
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var nukeops, out _))
         {
-            CheckRoundShouldEnd((uid, nukeops),
-                                announce); // Goobstation
+            rules.Add((uid, nukeops)); // Trauma
         }
+
+        // <Trauma>
+        foreach (var (uid, nukeops) in rules)
+        {
+            CheckRoundShouldEnd((uid, nukeops), announce);
+        }
+        // </Trauma>
     }
 
     private void CheckRoundShouldEnd(Entity<NukeopsRuleComponent> ent,
@@ -600,6 +621,18 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
             _chat.DispatchGlobalAnnouncement(
                 Loc.GetString(nukeops.RoundEndTextAnnouncement),
                 Loc.GetString(nukeops.RoundEndTextSender));
+
+        // <Trauma>
+        if ((float)_target.GetAliveHumans().Count / _amountAliveOnSpawn >= _percentNeededForNewAntag)
+        {
+            var newAntags = "ModerateAntagEventScheduler";
+            _ticker.StartGameRule(newAntags);
+        }
+        else
+        {
+            _roundEndSystem.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(3));
+        }
+        // </Trauma>
 
         // prevent it called multiple times
         nukeops.RoundEndBehavior = RoundEndBehavior.Nothing;

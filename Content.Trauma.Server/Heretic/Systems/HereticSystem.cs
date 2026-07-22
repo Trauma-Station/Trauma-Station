@@ -488,6 +488,11 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (ent.Comp.Ascended || !ent.Comp.CanAscend)
             return;
 
+        // starts the evac countdown call
+        var ascendEv = new HereticAscendedEvent();
+        RaiseNetworkEvent(ascendEv);
+        RaiseLocalEvent(ascendEv);
+
         ent.Comp.Ascended = true;
         RemoveRituals(ent.AsNullable(), [AscensionRitualTag, FeastOfOwlsRitualTag]);
         ent.Comp.ChosenRitual = null;

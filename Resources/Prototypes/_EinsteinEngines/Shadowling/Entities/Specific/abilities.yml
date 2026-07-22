@@ -12,7 +12,7 @@
   - type: ShadowlingRapidRehatch
   - type: ShadowlingShadowWalk
   - type: ShadowlingIcyVeins
-  - type: ShadowlingDestroyEngines
+#  - type: ShadowlingDestroyEngines
   - type: ShadowlingCollectiveMind
     availableAbilities:
     - SonicScreech
@@ -53,7 +53,7 @@
   - type: ShadowlingHypnosis
   - type: ShadowlingVeil
   - type: ShadowlingIcyVeins
-  - type: ShadowlingDestroyEngines
+#  - type: ShadowlingDestroyEngines
   - type: ShadowlingBlindnessSmoke
   - type: ShadowlingNullCharge
   - type: ShadowlingSonicScreech
