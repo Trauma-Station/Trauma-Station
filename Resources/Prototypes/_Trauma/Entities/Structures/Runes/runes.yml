@@ -2,33 +2,30 @@
 
 - type: entity
   abstract: true
-  parent: [BaseStructure, BaseMagicalContraband]
+  parent: [ BaseStructure, BaseMagicalContraband ]
   id: BaseSummoningRune
   components:
+  - type: Sprite
+    state: icon
+    snapCardinals: true
   - type: Clickable
   - type: IgnoresFingerprints
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
-  - type: Fixtures
-    fixtures: # TODO: why the fuck is this here?
-      rune:
-        shape:
-          !type:PhysShapeCircle
-          radius: 1.5
-        hard: false
-        mask:
-         - ItemMask
-        layer:
-         - SlipLayer
   - type: Physics
     canCollide: false
 
 - type: entity
   abstract: true
-  parent: [BaseStructure, DrinkBase, BaseMagicalContraband]
+  parent: [ BaseStructure, DrinkBase, BaseMagicalContraband ]
   id: BaseCarvedRune
   components:
+  - type: Sprite
+    state: carved
+    snapCardinals: true
+  - type: Construction
+    node: carved
   - type: Destructible
     thresholds:
     - trigger:
@@ -43,6 +40,7 @@
   - type: InteractionOutline
   - type: Physics
     canCollide: false
+
 # Enchanting
 
 - type: entity
@@ -53,11 +51,8 @@
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/enchanting.rsi
-    state: carved
-    snapCardinals: true
   - type: Construction
     graph: EnchantingRune
-    node: carved
 
 - type: entity
   parent: BaseSummoningRune
@@ -70,13 +65,11 @@
   - type: Sprite
     sprite: _Trauma/Structures/Runes/enchanting.rsi
     state: icon
-    snapCardinals: true
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 30
-      behaviors:
+      behaviors: &rune_break
       - !type:DoActsBehavior
         acts: ["Destruction"]
       - !type:PlaySoundBehavior
@@ -86,36 +79,55 @@
     graph: EnchantingRune
     node: finish
 
+## Demons
+
+- type: entity
+  abstract: true
+  parent: BaseSummoningRune
+  id: BaseDemonRune
+  components:
+  - type: RandomDemonSpawner
+  - type: Construction
+    node: finish
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: TimedDespawn
+    lifetime: 60
+  - type: SpawnOnDespawn
+    prototype: DemonSoulFragment # gets changed by RandomDemonSpawner mapinit
+
 # Minor
 
 - type: entity
-  parent: BaseSummoningRune
+  parent: BaseDemonRune
   id: MinorDemonRune
   name: minor summoning circle
   description: A rune used to summon minor demons.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/minor.rsi
-    state: icon
-    snapCardinals: true
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 30
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+      behaviors: *rune_break
   - type: Construction
     graph: MinorSummoning
-    node: finish
-  - type: TimedDespawn
-    lifetime: 3
-  - type: SpawnOnDespawn
-    prototype: RandomMinorSummoningRune
+  - type: RandomDemonSpawner
+    hostileChance: 0.25 # minor demons are more friendly
+    demons:
+    - MinorDemonGuy
+    - MinorDemonIncel
+    - MinorDemonUrist
+    - MinorDemonIan
+    - MinorDemonVox
+    - MinorDemonVulp
 
 - type: entity
   parent: BaseCarvedRune
@@ -125,42 +137,35 @@
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/minor.rsi
-    state: carved
-    snapCardinals: true
   - type: Construction
     graph: MinorSummoning
-    node: carved
 
 # Medium
 
 - type: entity
-  parent: BaseSummoningRune
+  parent: BaseDemonRune
   id: MediumDemonRune
   name: summoning circle
   description: A rune used to summon demons.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/medium.rsi
-    state: icon
-    snapCardinals: true
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 60
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+      behaviors: *rune_break
   - type: Construction
     graph: MediumSummoning
-    node: finish
-  - type: TimedDespawn
-    lifetime: 3
-  - type: SpawnOnDespawn
-    prototype: RandomMediumSummoningRune
+  - type: RandomDemonSpawner
+    demons:
+    - MediumDemonChad
+    - MediumDemonGhost
+    - MediumDemonHamlet
+    - MediumDemon64Fat
+    - MediumDemon64Buff
+    - MediumDemon64
+    - MediumDemonCentifiend
 
 - type: entity
   parent: BaseCarvedRune
@@ -170,42 +175,33 @@
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/medium.rsi
-    state: carved
-    snapCardinals: true
   - type: Construction
     graph: MediumSummoning
-    node: carved
 
 # Major
 
 - type: entity
-  parent: BaseSummoningRune
+  parent: BaseDemonRune
   id: MajorDemonRune
   name: major summoning circle
   description: A rune used to summon major demons.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/major.rsi
-    state: icon
-    snapCardinals: true
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 90
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+      behaviors: *rune_break
   - type: Construction
     graph: MajorSummoning
-    node: finish
-  - type: TimedDespawn
-    lifetime: 3
-  - type: SpawnOnDespawn
-    prototype: RandomMajorSummoningRune
+  - type: RandomDemonSpawner
+    demons:
+    - MajorDemonBosche
+    - MajorDemonFeverbird
+    - MajorDemonHanged
+    - MajorDemonHiver
+    - MajorDemonSteamer
 
 - type: entity
   parent: BaseCarvedRune
@@ -215,8 +211,5 @@
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Runes/major.rsi
-    state: carved
-    snapCardinals: true
   - type: Construction
     graph: MajorSummoning
-    node: carved

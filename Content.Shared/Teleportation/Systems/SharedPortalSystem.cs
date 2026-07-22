@@ -1,5 +1,8 @@
+// <Trauma>
+using Content.Goobstation.Common.BlockTeleport;
+using Content.Trauma.Common.Teleportation;
+// </Trauma>
 using System.Linq;
-using Content.Goobstation.Common.BlockTeleport; // Goob
 using Content.Shared.Ghost;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -235,12 +238,12 @@ public abstract partial class SharedPortalSystem : EntitySystem
             return;
         }
 
-        // Goobstation start
-        var ev = new TeleportAttemptEvent(false);
-        RaiseLocalEvent(subject, ref ev);
-        if (ev.Cancelled)
+        // <Trauma>
+        var attemptEv = new TeleportAttemptEvent(false);
+        RaiseLocalEvent(subject, ref attemptEv);
+        if (attemptEv.Cancelled)
             return;
-        // Goobstation end
+        // </Trauma>
 
         var arrivalSound = CompOrNull<PortalComponent>(targetEntity)?.ArrivalSound ?? ent.Comp.ArrivalSound;
         var departureSound = ent.Comp.DepartureSound;
@@ -256,6 +259,10 @@ public abstract partial class SharedPortalSystem : EntitySystem
         LogTeleport(ent, subject, Transform(subject).Coordinates, target);
 
         _transform.SetCoordinates(subject, target);
+        // <Trauma>
+        var ev = new PortalTeleportedEvent(ent, targetEntity);
+        RaiseLocalEvent(subject, ref ev);
+        // </Trauma>
 
         if (!playSound)
             return;

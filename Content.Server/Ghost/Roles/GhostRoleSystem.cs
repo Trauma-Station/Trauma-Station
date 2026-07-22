@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Ghost;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -617,11 +620,14 @@ public sealed partial class GhostRoleSystem : EntitySystem
         _mindSystem.TransferTo(newMind, mob);
 
         _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
-        // <Trauma> - always add the job too
+        // <Trauma>
+        // always add the job too
         if (role.JobProto is { } job)
         {
             _roleSystem.MindAddJobRole(newMind, newMind.Comp, silent: false, job);
         }
+        var ev = new GhostRoleCreatedMindEvent(mob, newMind);
+        RaiseLocalEvent(roleUid, ref ev);
         // </Trauma>
     }
 

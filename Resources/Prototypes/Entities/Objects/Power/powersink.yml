@@ -1,6 +1,6 @@
 - type: entity
   id: PowerSink
-  parent: [BaseMachine, BaseSyndicateAnchoredContraband]
+  parent: [BaseMachine, BaseSyndicateContrabandUnscannable] # Trauma - unscannable
   name: power sink
   description: Drains immense amounts of electricity from the grid.
   components:

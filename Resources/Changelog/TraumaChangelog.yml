@@ -11737,3 +11737,48 @@ Entries:
   id: 1297
   time: '2026-07-19T20:21:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3624
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Bluespace crystals now violently react with bluespace portals.
+  - type: Tweak
+    message: Space whales now move faster and are gibbed if they go through a portal.
+  id: 1298
+  time: '2026-07-21T11:22:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3646
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Demons, chaplain familiars and syndie reinforcements now get told who
+      summoned them in their character menu.
+  id: 1299
+  time: '2026-07-21T13:08:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3649
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed killdozer getting filled with casings when you use its mosin.
+  id: 1300
+  time: '2026-07-21T22:31:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3655
+- author: Aviu
+  changes:
+  - type: Add
+    message: Cry and sigh emotes now have visual effects.
+  - type: Add
+    message: Added blush and stick tongue out emotes.
+  - type: Add
+    message: >-
+      Alcohol will make you blush, peppersprays and tear gas will make you cry
+      visually.
+  id: 1301
+  time: '2026-07-21T22:34:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/631
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed carp callers not working.
+  id: 1302
+  time: '2026-07-21T23:54:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3657

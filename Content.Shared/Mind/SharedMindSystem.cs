@@ -191,7 +191,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     public EntityUid? GetMind(EntityUid uid, MindContainerComponent? mind = null)
     {
-        if (!Resolve(uid, ref mind))
+        if (!Resolve(uid, ref mind, false)) // Trauma - dont log missing, shit api
             return null;
 
         if (mind.HasMind)
