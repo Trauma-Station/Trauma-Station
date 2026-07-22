@@ -54,8 +54,8 @@ marking-MothWingsMoonfly-moonfly = 1
 marking-MothWingsMoonfly-moonfly = 2
 
 marking-MothWingsRosy = Wings (Rosy)
-marking-MothWingsRosy-rosy = 1
-marking-MothWingsRosy-rosy = 2
+marking-MothWingsRosy-rosy_1 = 1
+marking-MothWingsRosy-rosy_2 = 2
 
 marking-MothWingsLightbearer = Wings (Lightbearer)
 marking-MothWingsLightbearer-lightbearer_1 = 1
