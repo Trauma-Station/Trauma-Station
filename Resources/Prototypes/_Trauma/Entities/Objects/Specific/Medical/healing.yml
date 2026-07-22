@@ -20,7 +20,7 @@
       types:
         Bloodloss: 0 #What are you replenishing? it's empty!
   - type: Stack
-    stackType: BloodpackEmpty
+    stackType: BloodpackEmptyStack #BloodpackEmpty is taken by the engine
     count: 15
 
 - type: entity
@@ -29,7 +29,7 @@
   suffix: Single
   components:
   - type: Stack
-    stackType: BloodpackEmpty
+    stackType: BloodpackEmptyStack
     count: 1
 
 # keep entry weight in RandomSafePillTable synced with number of items here

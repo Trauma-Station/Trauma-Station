@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: latheRecipe
-  id: BloodPackEmpty
+  id: BloodpackEmpty
   result: BloodpackEmpty
   completetime: 1
   materials:
