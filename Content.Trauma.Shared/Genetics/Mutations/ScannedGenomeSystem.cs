@@ -96,7 +96,7 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
         if (!_query.Resolve(ent, ref ent.Comp) ||
             !_mutation.AllMutations.TryGetValue(id, out var mutation) ||
             _mutation.GetRoundData(id) is not {} data ||
-            Sequences.Any(s => s.Mutation == id)) // no dupes
+            ent.Comp.Sequences.Any(s => s.Mutation == id)) // no dupes
         {
             return;
         }
