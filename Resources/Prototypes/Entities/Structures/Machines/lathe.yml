@@ -613,7 +613,7 @@
     - GrenadeTriggersStatic
     - SyringeCase
     - TraumaMedicalStatic
-    - BloodpackEmpty
+    - BloodpackEmptyStatic
     # </Trauma>
     - TopicalsStatic
     - ChemistryStatic

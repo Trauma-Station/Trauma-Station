@@ -4,6 +4,13 @@
 
 - type: latheRecipePack
   parent:
+  - TopicalsStatic
+  id: BloodpackEmptyStatic
+  recipes:
+  - BloodpackEmpty
+
+- type: latheRecipePack
+  parent:
   - TraumaCyberneticsStatic
   id: TraumaMedicalStatic
   recipes:
