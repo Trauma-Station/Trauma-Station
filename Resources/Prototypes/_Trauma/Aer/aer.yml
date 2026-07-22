@@ -311,11 +311,10 @@
         Ion: 40
         Asphyxiation: 40
         Structural: 120
-    penetrationThreshold: 300
-    penetrationDamageTypeRequirement:
-      - Asphyxiation
+    penetrationThreshold: 2500
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectOmnilaser
+  - type: SpendProjectileOnTag
 
 # Aer Version of the rifle shoot at double the fire rat and has a more robust buttstock whack
 # TO DO add pen functionality to the rifle?
