@@ -19,7 +19,7 @@
     node: finish
 
 - type: entity
-  parent: [ AbductorHandcuffs ]
+  parent: AbductorHandcuffs
   id: WonderprodCuffs
   name: printed wondercuffs
   description: Made out of a metal more durable than anything Nanotrasen could dream of. Dissolves when removed.
