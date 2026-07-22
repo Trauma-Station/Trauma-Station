@@ -47,7 +47,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: ClothingHeadHelmetBase
   id: ClothingHeadLightBase
   name: base helmet with light
   categories: [ HideSpawnMenu ]
