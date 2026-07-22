@@ -9,7 +9,4 @@ public partial record struct Marking
 {
     public override string ToString()
         => ToLegacyDbString();
-
-    [DataField]
-    public bool IsChildMarking;
 }
