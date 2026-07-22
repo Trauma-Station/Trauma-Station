@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Server.Actions;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Ghost;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 

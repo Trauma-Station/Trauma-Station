@@ -3,8 +3,11 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.Bible.Components;
 
 /// <summary>
-/// EntityQuery tracking component for summonables that are waiting for a respawn.
+/// Marks entity as bible user.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(BibleSystem))]
-public sealed partial class SummonableRespawningComponent : Component;
+public sealed partial class BibleUserComponent : Component
+{
+    public override bool SendOnlyToOwner => true;
+}

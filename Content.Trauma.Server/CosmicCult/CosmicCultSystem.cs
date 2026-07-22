@@ -36,26 +36,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
     private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, ComponentInit>(OnStartCultist);
-        SubscribeLocalEvent<CosmicCultComponent, GetVisMaskEvent>(OnGetVisMask);
-
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotEquippedEvent>(OnGotCosmicItemEquipped);
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotUnequippedEvent>(OnGotCosmicItemUnequipped);
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotEquippedHandEvent>(OnGotHeld);
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotUnequippedHandEvent>(OnGotUnheld);
-
-        SubscribeLocalEvent<InfluenceStrideComponent, ComponentInit>(OnStartInfluenceStride);
-        SubscribeLocalEvent<InfluenceStrideComponent, ComponentRemove>(OnEndInfluenceStride);
-        SubscribeLocalEvent<InfluenceStrideComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
-        SubscribeLocalEvent<CosmicImposingComponent, ComponentInit>(OnStartImposition);
-        SubscribeLocalEvent<CosmicImposingComponent, ComponentRemove>(OnEndImposition);
-        SubscribeLocalEvent<CosmicImposingComponent, RefreshMovementSpeedModifiersEvent>(OnImpositionMoveSpeed);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -102,6 +82,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     /// <summary>
     /// Add the starting powers to the cultist.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnStartCultist(Entity<CosmicCultComponent> uid, ref ComponentInit args)
     {
         _eye.RefreshVisibilityMask(uid.Owner);
@@ -115,6 +96,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
             _eye.SetVisibilityMask(uid, eyeComp.VisibilityMask | (int) VisibilityFlags.CosmicCultMonument);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVisMask(Entity<CosmicCultComponent> uid, ref GetVisMaskEvent args)
     {
         args.VisibilityMask |= (int) VisibilityFlags.CosmicCultMonument;
@@ -122,6 +104,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #endregion
 
     #region Equipment Pickup
+    [SubscribeLocalEvent]
     private void OnGotCosmicItemEquipped(Entity<CosmicEquipmentComponent> ent, ref GotEquippedEvent args)
     {
         var target = args.EquipTarget;
@@ -129,11 +112,13 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
             EnsureComp<CosmicDegenComponent>(target);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotCosmicItemUnequipped(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedEvent args)
     {
         RemComp<CosmicDegenComponent>(args.EquipTarget); // Cultists shouldn't have it in the first place so we don't check if entity is a cultist
     }
 
+    [SubscribeLocalEvent]
     private void OnGotHeld(Entity<CosmicEquipmentComponent> ent, ref GotEquippedHandEvent args)
     {
         if (EntityIsCultist(args.User)) return;
@@ -142,6 +127,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotUnheld(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedHandEvent args)
     {
         RemComp<CosmicDegenComponent>(args.User);
@@ -186,18 +172,24 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #endregion
 
     #region Movespeed
-    private void OnStartImposition(Entity<CosmicImposingComponent> uid, ref ComponentInit args) => // these functions just make sure
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnEndImposition(Entity<CosmicImposingComponent> uid, ref ComponentRemove args) => // as various cosmic cult effects get added and removed
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentInit args) => // that movespeed applies more-or-less correctly
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentRemove args) => // i wish movespeed was easier to work with
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
+    [SubscribeLocalEvent]
+    private void OnStartImposition(Entity<CosmicImposingComponent> ent, ref ComponentInit args) => // these functions just make sure
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnEndImposition(Entity<CosmicImposingComponent> ent, ref ComponentRemove args) => // as various cosmic cult effects get added and removed
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> ent, ref ComponentInit args) => // that movespeed applies more-or-less correctly
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> ent, ref ComponentRemove args) => // i wish movespeed was easier to work with
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
 
-    private void OnRefreshMoveSpeed(EntityUid uid, InfluenceStrideComponent comp, RefreshMovementSpeedModifiersEvent args) =>
+    [SubscribeLocalEvent]
+    private void OnRefreshMoveSpeed(Entity<InfluenceStrideComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(1.4f, 1.4f);
-    private void OnImpositionMoveSpeed(EntityUid uid, CosmicImposingComponent comp, RefreshMovementSpeedModifiersEvent args) =>
+    [SubscribeLocalEvent]
+    private void OnImpositionMoveSpeed(Entity<CosmicImposingComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(0.80f, 0.80f);
     #endregion
 }
