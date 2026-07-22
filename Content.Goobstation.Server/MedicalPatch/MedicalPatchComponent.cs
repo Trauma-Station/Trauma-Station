@@ -28,11 +28,11 @@ public sealed partial class MedicalPatchComponent : Component
     /// <summary>
     /// How often the patch should transfer solution
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
+    [DataField]
     public TimeSpan UpdateTime = TimeSpan.FromSeconds(1);
 
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan NextUpdate = TimeSpan.Zero;
     /// <summary>
     /// if any set ammount shud be transfered when the patch is attatched,
