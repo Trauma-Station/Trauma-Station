@@ -1,6 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: latheRecipe
+  id: BloodPackEmpty
+  result: BloodPackEmpty
+  completetime: 1
+  materials:
+    Plastic: 50
+
+- type: latheRecipe
   id: Hypoport
   result: Hypoport
   completetime: 4

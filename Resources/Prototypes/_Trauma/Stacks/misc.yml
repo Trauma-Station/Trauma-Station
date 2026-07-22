@@ -2,6 +2,13 @@
 
 - type: stack
   parent: BaseTinyStack
+  id: BloodPackEmpty
+  name: stack-bloodpack-empty
+  icon: { sprite: /Textures/Objects/Specific/Medical/medical.rsi, state: bloodpack-empty }
+  maxCount: 15
+
+- type: stack
+  parent: BaseTinyStack
   id: OverrideKeyComponents
   name: stack-override-key-components
   icon: { sprite: /Textures/_Trauma/Objects/Tools/overridecomponents.rsi, state: icon }
