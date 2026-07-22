@@ -174,6 +174,10 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
+  - type: MovementSpeedModifier
+    BaseweightlessAcceleration: 1.7
+    BaseweightlessFriction: 1
+    BaseWeightlessModifier: 1
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepXenomorph
