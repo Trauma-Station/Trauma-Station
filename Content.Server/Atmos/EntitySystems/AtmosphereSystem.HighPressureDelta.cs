@@ -1,6 +1,9 @@
+// <Trauma>
+using Content.Shared.Humanoid;
+// </Trauma>
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Humanoid;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -11,6 +14,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Atmos.EntitySystems;
+
 public sealed partial class AtmosphereSystem
 {
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
@@ -103,8 +107,10 @@ public sealed partial class AtmosphereSystem
 
     private void HighPressureMovements(Entity<GridAtmosphereComponent> gridAtmosphere, TileAtmosphere tile)
     {
+        // <Trauma>
         if (tile.PressureDifference < SpaceWindMinimumCalculatedMass * SpaceWindMinimumCalculatedMass)
             return;
+        // </Trauma>
         // TODO ATMOS finish this
 
         // Don't play the space wind sound on tiles that are on fire...
@@ -213,7 +219,6 @@ public sealed partial class AtmosphereSystem
     /// For a human sized entity with a standard weight of 80kg and a spacing between a hard vacuum and a room pressurized at 101kpa,
     /// The human shall only be moved if he is either very close to the hole, or is standing in a region of high airflow
     /// </notes>
-
     public void ExperiencePressureDifference(
         Entity<MovedByPressureComponent> ent,
         int cycle,
