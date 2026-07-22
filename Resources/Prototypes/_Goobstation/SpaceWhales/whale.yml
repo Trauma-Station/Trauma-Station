@@ -55,7 +55,7 @@
     spacing: 1
     prototype: SpaceWhaleSegment
   - type: MovementSpeedModifier
-    baseSprintSpeed: 40
+    baseSprintSpeed: 70
     baseWalkSpeed: 11
     baseWeightlessFriction: 4
     weightlessFriction: 4
@@ -141,6 +141,12 @@
         Slash: 45
         Structural: 800 #lol
   - type: NoRotateOnMove
+  - type: PortalTransitEffects # its like an apple getting cored
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Slash: 4000
 
 - type: entity
   parent: [MobSpaceLeviathanSegmentBase, FlyingMobBase]
@@ -170,7 +176,7 @@
   suffix: despawns
   components:
   - type: TimedDespawn
-    lifetime: 190 # to further prevent shitters from abusing it if something came up
+    lifetime: 110 # to further prevent shitters from abusing it if something came up
 
 - type: entity
   id: SpaceLeviathanMobCaller

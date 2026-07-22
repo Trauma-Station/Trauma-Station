@@ -109,19 +109,6 @@
     radius: 0
     energy: 0
 
-- type: entity
-  id: ControlledDemon
-  abstract: true
-  components:
-  - type: GhostRole
-    name: ghost-role-information-demon-tame-name
-    description: ghost-role-information-demon-tame-desc
-    rules: ghost-role-information-familiar-rules
-    mindRoles:
-    - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: short
-
 # Minor Demons
 
 - type: entity
@@ -150,14 +137,9 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonGuy ]
-  id: MinorDemonGuyControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -185,14 +167,9 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonIncel ]
-  id: MinorDemonIncelControlled
-  suffix: Controlled
 
 - type: entity
   parent: [ BaseDemon, InventoryBase ]
@@ -220,7 +197,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
   - type: Crawler
@@ -232,11 +209,6 @@
       Hand:
         location: Left
   - type: ComplexInteraction
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonUrist ]
-  id: MinorDemonUristControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -266,7 +238,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
           MaterialHideCorgi:
@@ -275,11 +247,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 7.5
     baseSprintSpeed: 1.5
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonIan ]
-  id: MinorDemonIanControlled
-  suffix: Controlled
 
 - type: entity
   parent: [ BaseDemon, InventoryBase ]
@@ -307,7 +274,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
   - type: Crawler
@@ -373,11 +340,6 @@
   - type: ComplexInteraction
 
 - type: entity
-  parent: [ ControlledDemon, MinorDemonVox ]
-  id: MinorDemonVoxControlled
-  suffix: Controlled
-
-- type: entity
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonVulp
   name: wrathful beast
@@ -403,7 +365,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
   - type: Crawler
@@ -415,11 +377,6 @@
       Hand:
         location: Left
   - type: ComplexInteraction
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonVulp ]
-  id: MinorDemonVulpControlled
-  suffix: Controlled
 
 # Medium
 
@@ -449,7 +406,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
   - type: Solution
@@ -466,11 +423,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 8
     solution: melee
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonCentifiend ]
-  id: MediumDemonCentifiendControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -499,14 +451,9 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonChad ]
-  id: MediumDemonChadControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -534,7 +481,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 2
   - type: Fixtures
@@ -546,11 +493,6 @@
         hard: false
         mask:
         - Opaque
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonGhost ]
-  id: MediumDemonGhostControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -579,7 +521,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 2
   - type: MovementSpeedModifier
@@ -601,11 +543,6 @@
     insertingState: inserting_hamster
   - type: FaxSlip
     slipChance: 0.3
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonHamlet ]
-  id: MediumDemonHamletControlled
-  suffix: Controlled
 
 # Major demons
 
@@ -635,17 +572,12 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
   - type: ActionGrant
     actions:
       - ActionDemonRift
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemon64Fat ]
-  id: MediumDemon64FatControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -673,17 +605,12 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
   - type: ActionGrant
     actions:
       - ActionDemonRift
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemon64Buff ]
-  id: MediumDemon64BuffControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -711,17 +638,12 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
   - type: ActionGrant
     actions:
     - ActionDemonRift
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemon64 ]
-  id: MediumDemon64Controlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -749,7 +671,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: Devourer
@@ -769,11 +691,6 @@
       - Item
       tags:
       - Wall
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonBosche ]
-  id: MajorDemonBoscheControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -805,7 +722,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: MovementIgnoreGravity
@@ -827,11 +744,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 17
     solution: melee
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonFeverbird ]
-  id: MajorDemonFeverbirdControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -859,7 +771,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: Hands
@@ -879,11 +791,6 @@
     chokeGrabSpeedModifier: 1
     suffocateGrabStaminaDamage: 1000
     grabThrowDamageModifier: 4
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonHanged ]
-  id: MajorDemonHangedControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
@@ -911,7 +818,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: TimedSpawner
@@ -920,11 +827,6 @@
     intervalSeconds: 3
     minimumEntitiesSpawned: 5
     maximumEntitiesSpawned: 10
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonHiver ]
-  id: MajorDemonHiverControlled
-  suffix: Controlled
 
 - type: entity
   parent: BeeLaughter
@@ -961,7 +863,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: GunRequiresWield
@@ -990,469 +892,3 @@
   - type: HTN
     rootTask:
       task: SimpleRangedHostileCompound
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonSteamer ]
-  id: MajorDemonSteamerControlled
-  suffix: Controlled
-
-# Demon spawners
-
-- type: entity
-  abstract: true
-  id: BaseDemonSummoningRuneHostile
-  name: summoning circle
-  description: A demon could be here any second...
-  placement:
-    mode: SnapgridCenter
-  components:
-  - type: Animateable
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Transform
-    anchored: true
-  - type: GhostRole
-    name: ghost-role-information-demon-name
-    description: ghost-role-information-demon-desc
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: short
-  - type: TimedDespawn
-    lifetime: 60
-
-- type: entity
-  abstract: true
-  parent: BaseDemonSummoningRuneHostile
-  id: BaseDemonSummoningRuneFamiliar
-  components:
-  - type: GhostRole
-    name: ghost-role-information-demon-tame-name
-    description: ghost-role-information-demon-tame-desc
-    rules: ghost-role-information-familiar-rules
-    mindRoles:
-    - MindRoleGhostRoleFamiliar
-
-- type: entity
-  id: BaseMinorSummoningRune
-  components:
-  - type: Sprite
-    sprite: _Trauma/Structures/Runes/minor.rsi
-    state: icon
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 30
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
-
-- type: entity
-  id: BaseMediumSummoningRune
-  components:
-  - type: Sprite
-    sprite: _Trauma/Structures/Runes/medium.rsi
-    state: icon
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 60
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
-
-- type: entity
-  id: BaseMajorSummoningRune
-  components:
-  - type: Sprite
-    sprite: _Trauma/Structures/Runes/major.rsi
-    state: icon
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 90
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
-
-# Minor
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneGuy
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonGuy
-  - type: SpawnOnDespawn
-    prototype: MinorDemonGuy
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneGuyTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonGuyControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonGuyControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneIncel
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIncel
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIncel
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneIncelTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIncelControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIncelControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneUrist
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonUrist
-  - type: SpawnOnDespawn
-    prototype: MinorDemonUrist
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneUristTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonUristControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonUristControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneIan
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIan
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIan
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneIanTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIanControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIanControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneVox
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVox
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVox
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneVoxTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVoxControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVoxControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneVulp
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVulp
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVulp
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneVulpTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVulpControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVulpControlled
-
-# Medium
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneCentifiend
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonCentifiend
-  - type: SpawnOnDespawn
-    prototype: MediumDemonCentifiend
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneCentifiendTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonCentifiend
-  - type: SpawnOnDespawn
-    prototype: MediumDemonCentifiend
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneChad
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonChad
-  - type: SpawnOnDespawn
-    prototype: MediumDemonChad
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneChadTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonChadControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonChadControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneGhost
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonGhost
-  - type: SpawnOnDespawn
-    prototype: MediumDemonGhost
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneGhostTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonGhostControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonGhostControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneHamlet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonHamlet
-  - type: SpawnOnDespawn
-    prototype: MediumDemonHamlet
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneHamletTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonHamletControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonHamletControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64Fat
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64Fat
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64Fat
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64FatTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64FatControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64FatControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64Buff
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64Buff
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64Buff
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64BuffTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64BuffControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64BuffControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64Tame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64Controlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64Controlled
-
-# Major
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneBosche
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonBosche
-  - type: SpawnOnDespawn
-    prototype: MajorDemonBosche
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneBoscheTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonBoscheControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonBoscheControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneFeverbird
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonFeverbird
-  - type: SpawnOnDespawn
-    prototype: MajorDemonFeverbird
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneFeverbirdTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonFeverbirdControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonFeverbirdControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneHanged
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHanged
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHanged
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneHangedTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHangedControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHangedControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneHiver
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHiver
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHiver
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneHiverTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHiverControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHiverControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneSteamer
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonSteamer
-  - type: SpawnOnDespawn
-    prototype: MajorDemonSteamer
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneSteamerTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonSteamerControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonSteamerControlled
