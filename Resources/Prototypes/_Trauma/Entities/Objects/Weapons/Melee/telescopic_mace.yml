@@ -21,21 +21,21 @@
     soundActivate:
     path: /Audio/Weapons/telescopicon.ogg
     params:
-      volume: -2
+    volume: -2
     soundDeactivate:
     path: /Audio/Weapons/telescopicoff.ogg
     params:
-      volume: -2
+    volume: -2
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
     collection: MetalThud
     params:
-      variation: 0.250
+    variation: 0.250
     activatedDamage:
     types:
-      Blunt: 8
+    Blunt: 8
     woundSeverityMultipliers:
-      Blunt: 0.5
+    Blunt: 0.5
   - type: ItemToggleSize
     activatedSize: Normal
     activatedShape:
@@ -43,9 +43,9 @@
   - type: UseDelay
     delays:
     default:
-      length: 1
+    length: 1
     telebaton:
-      length: 4
+    length: 4
   - type: MeleeThrowOnHit
     distance: 1
     speed: 5
@@ -54,16 +54,16 @@
     bluntStaminaDamageFactor: 0.5
     angle: 0
     damage:
-      types:
-        Blunt: 1
+    types:
+    Blunt: 1
   - type: Appearance
   - type: ItemToggleVisuals
   - type: GenericVisualizer
     visuals:
     enum.ItemToggleVisuals.State:
-      enum.ItemToggleVisuals.Layer:
-        True: { state: icon }
-        False: { state: icon-off }
+    enum.ItemToggleVisuals.Layer:
+    True: { state: icon }
+    False: { state: icon-off }
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
     slots:
