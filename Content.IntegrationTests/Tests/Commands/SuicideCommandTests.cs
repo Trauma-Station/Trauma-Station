@@ -58,6 +58,9 @@ public sealed class SuicideCommandTests : GameTest
     # <Trauma>
     emagComponents:
     - type: DamageContacts
+      damage:
+        types:
+          Slash: 20
     # </Trauma>";
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
     private static readonly ProtoId<DamageTypePrototype> DamageType = "Slash";
