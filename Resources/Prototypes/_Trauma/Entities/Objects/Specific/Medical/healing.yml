@@ -16,7 +16,9 @@
   - type: Healing
     damageContainers:
       - Biological
-    #What are you replenishing? it's empty!
+    damage:
+      types:
+        Bloodloss: 0 #What are you replenishing? it's empty!
   - type: Stack
     stackType: BloodPackEmpty
     count: 15
