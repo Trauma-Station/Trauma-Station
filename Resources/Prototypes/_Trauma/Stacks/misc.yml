@@ -5,6 +5,7 @@
   id: BloodPackEmpty
   name: stack-bloodpack-empty
   icon: { sprite: /Textures/Objects/Specific/Medical/medical.rsi, state: bloodpack-empty }
+  spawn: BloodPackEmpty
   maxCount: 15
 
 - type: stack
