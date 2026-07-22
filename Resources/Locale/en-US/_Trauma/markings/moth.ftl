@@ -50,8 +50,8 @@ marking-MothWingsLovers-lovers_1 = 1
 marking-MothWingsLovers-lovers_2 = 2
 
 marking-MothWingsMoonfly = Wings (Moonfly)
-marking-MothWingsMoonfly-moonfly = 1
-marking-MothWingsMoonfly-moonfly = 2
+marking-MothWingsMoonfly-moonfly_1 = 1
+marking-MothWingsMoonfly-moonfly_2 = 2
 
 marking-MothWingsRosy = Wings (Rosy)
 marking-MothWingsRosy-rosy_1 = 1

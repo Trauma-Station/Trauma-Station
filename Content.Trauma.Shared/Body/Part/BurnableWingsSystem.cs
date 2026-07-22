@@ -22,10 +22,7 @@ public sealed partial class BurnableWingsSystem : EntitySystem
         var coords = Transform(ent).Coordinates;
 
         _audio.PlayPredicted(ent.Comp.BurnSound, coords, args.Origin);
-        _popup.PopupCoordinates(Loc.GetString("wings-burned-message", ("ent", ent)),
-            coords,
-            args.Origin,
-            PopupType.MediumCaution);
+        _popup.PopupCoordinates(Loc.GetString("wings-burned-message", ("ent", ent)), coords, PopupType.MediumCaution);
 
         var newWings = PredictedSpawnAtPosition(ent.Comp.BurntWings, coords);
 
