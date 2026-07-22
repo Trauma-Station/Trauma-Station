@@ -2,7 +2,7 @@
 
 - type: latheRecipe
   id: BloodpackEmpty
-  result: BloodpackEmpty
+  result: BloodpackEmpty1
   completetime: 1
   materials:
     Plastic: 50
