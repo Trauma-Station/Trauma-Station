@@ -1,8 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  name: empty blood pack
+  description: Can be filled with blood for transfusions.
+  parent: BaseHealingItem
   id: BloodPackEmpty
-  parent: BloodPack
+  components:
+  - type: Item
+    heldPrefix: emptybloodpack
+  - type: Tag
+  tags: - Bloodpack
   - type: Sprite
     state: bloodpack-empty
   - type: Healing
