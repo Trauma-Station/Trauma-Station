@@ -18,26 +18,4 @@ public sealed partial class AerHorseSystem : EntitySystem
         var researchEvent = new AerBehaviourAddResearchEvent(ent.Owner);
         RaiseLocalEvent(ent.Owner, ref researchEvent);
     }
-
-    /// <summary>
-    /// handling of the aer active status for mobs it determines if aer is healty enough to produce rd points
-    /// </summary>
-    [SubscribeLocalEvent]
-    private void OnMobStateChanged(Entity<AerHorseComponent> ent, ref MobStateChangedEvent args)
-    {
-        switch (args.NewMobState)
-        {
-            case MobState.Dead:
-                var deadEvent = new AerUpdateActiveStatusEvent(ent.Owner, false);
-                RaiseLocalEvent(ent.Owner, ref deadEvent);
-                break;
-            case MobState.Alive:
-                var aliveEvent = new AerUpdateActiveStatusEvent(ent.Owner, true);
-                RaiseLocalEvent(ent.Owner, ref aliveEvent);
-                break;
-            default:
-                break;
-        }
-    }
-
 }

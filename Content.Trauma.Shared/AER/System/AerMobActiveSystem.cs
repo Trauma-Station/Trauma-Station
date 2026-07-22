@@ -15,7 +15,7 @@ public sealed partial class AerMobActiveSystem : EntitySystem
     {
         if (TryComp<MobStateComponent>(aerMob.Owner, out var mobComponent))
         {
-            bool active = MobStateToActiveEvent(mobComponent.CurrentState);
+            bool active = mobComponent.CurrentState == MobState.Alive;
 
             var activeEvent = new AerUpdateActiveStatusEvent(aerMob.Owner, active);
             RaiseLocalEvent(aerMob.Owner, ref activeEvent);
@@ -28,32 +28,9 @@ public sealed partial class AerMobActiveSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<AerMobActiveComponent> ent, ref MobStateChangedEvent args)
     {
-        bool active = MobStateToActiveEvent(args.NewMobState);
+        bool active = args.NewMobState == MobState.Alive;
 
         var activeEvent = new AerUpdateActiveStatusEvent(ent.Owner, active);
         RaiseLocalEvent(ent.Owner, ref activeEvent);
     }
-
-    /// <summary>
-    /// helper function returns the active flag value correspondent to state value
-    /// </summary>
-    private bool MobStateToActiveEvent(MobState state)
-    {
-        switch (state)
-        {
-            case MobState.Dead:
-                return false;
-            case MobState.Critical:
-                return true;
-            case MobState.SoftCrit:
-                return true;
-            case MobState.Alive:
-                return true;
-            case MobState.Invalid:
-                return false;
-            default:
-                return false;
-        }
-    }
-
 }

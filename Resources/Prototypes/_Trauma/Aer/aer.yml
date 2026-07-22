@@ -453,3 +453,7 @@
   - type: ActionGrant
     actions:
     - ActionCreateContractAer
+  - type: AnomalousEntity
+    researchPerSecond: 100
+    researchOnBehaviour: 5000
+    idGear: IdGearMagicBullet
