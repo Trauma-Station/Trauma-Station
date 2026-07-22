@@ -1,4 +1,5 @@
-# test clause for freischutz gonna add more gun themed clauses
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: clause
   id: lackofrifle
   clauseWeight: -30
