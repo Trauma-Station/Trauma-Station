@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: entity
+- type: stack
   parent: BaseTinyStack
   id: BloodpackEmptyStack #BloodpackEmpty is taken by the engine
   name: stack-bloodpack-empty
