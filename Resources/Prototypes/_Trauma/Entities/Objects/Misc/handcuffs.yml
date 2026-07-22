@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseMinorContraband, Hnadcuffs ]
+  parent: [BaseMinorContraband, Handcuffs]
   id: BarbHandcuffs # TODO: Needs to damage on remove attempt
   name: barbed wire handcuffs
   description: Used to detain people you intend to kill.
