@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Electrocution;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Xenoborgs.Components;
