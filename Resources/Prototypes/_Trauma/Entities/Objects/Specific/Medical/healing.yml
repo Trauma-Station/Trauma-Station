@@ -4,7 +4,7 @@
   name: empty blood pack
   description: Can be filled with blood for transfusions.
   parent: BaseHealingItem
-  id: BloodPackEmpty
+  id: BloodpackEmpty
   components:
   - type: Item
     heldPrefix: emptybloodpack
@@ -20,8 +20,17 @@
       types:
         Bloodloss: 0 #What are you replenishing? it's empty!
   - type: Stack
-    stackType: BloodPackEmpty
+    stackType: BloodpackEmpty
     count: 15
+
+- type: entity
+  parent: BloodpackEmpty
+  id: BloodpackEmpty1
+  suffix: Single
+  components:
+  - type: Stack
+    stackType: BloodpackEmpty
+    count: 1
 
 # keep entry weight in RandomSafePillTable synced with number of items here
 - type: entityTable

@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: stack
+- type: entity
   parent: BaseTinyStack
-  id: BloodPackEmpty
+  id: BloodpackEmpty
   name: stack-bloodpack-empty
   icon: { sprite: /Textures/Objects/Specific/Medical/medical.rsi, state: bloodpack-empty }
-  spawn: BloodPackEmpty
+  spawn: BloodpackEmpty
   maxCount: 15
 
 - type: stack

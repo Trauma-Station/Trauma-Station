@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: microwaveMealRecipe
+  id: Bloodpack
+  name: blood pack
+  result: Bloodpack1
+  time: 5
+  group: Medicinal
+  solids:
+    BloodpackEmpty: 1
+  reagents:
+    Blood: 60 #60u in, 60u out
+- type: microwaveMealRecipe
   id: BoneGelMakeshift
   name: makeshift bone gel
   result: BoneGelMakeshift
