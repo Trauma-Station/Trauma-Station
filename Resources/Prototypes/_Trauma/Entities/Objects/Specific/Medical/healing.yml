@@ -1,5 +1,18 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entity
+  id: BloodPackEmpty
+  parent: BloodPack
+  - type: Sprite
+    state: bloodpack-empty
+  - type: Healing
+    damageContainers:
+      - Biological
+    #What are you replenishing? it's empty!
+  - type: Stack
+    stackType: BloodPackEmpty
+    count: 15
+
 # keep entry weight in RandomSafePillTable synced with number of items here
 - type: entityTable
   id: RandomSafePillTrauma
