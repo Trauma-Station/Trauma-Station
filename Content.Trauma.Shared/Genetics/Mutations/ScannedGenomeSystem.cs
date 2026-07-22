@@ -2,6 +2,7 @@
 
 using Content.Shared.Polymorph;
 using Robust.Shared.Random;
+using System.Linq;
 using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
