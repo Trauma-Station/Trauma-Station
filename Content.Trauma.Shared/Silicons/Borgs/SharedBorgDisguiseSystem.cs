@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
@@ -14,27 +15,25 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] protected AccessReaderSystem _accessReader = default!;
+    [Dependency] protected SharedPointLightSystem _light = default!;
 
-    private CompName _accessName;
+    protected CompName _accessName;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _accessName = Factory.CompName<AccessReaderComponent>();
-
-        SubscribeLocalEvent<BorgDisguiseComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<BorgDisguiseComponent, ComponentShutdown>(OnCompRemove);
-        SubscribeLocalEvent<BorgDisguiseComponent, GetAccessReaderDisplayEvent>(OnGetAccessReaderDisplay);
-
     }
 
-    private void OnGetAccessReaderDisplay(EntityUid uid, BorgDisguiseComponent comp, ref GetAccessReaderDisplayEvent args)
+    [SubscribeLocalEvent]
+    private void OnGetAccessReaderDisplay(Entity<BorgDisguiseComponent> ent, ref GetAccessReaderDisplayEvent args)
     {
-        if (!comp.Disguised)
+        if (!ent.Comp.Disguised)
             return;
 
-        if (!ProtoMan.TryIndex(comp.DisguisedPrototype, out var disguisedProto))
+        if (!TryGetDisguisedPrototype(ent.Comp, out var disguisedProto))
             return;
 
         if (!disguisedProto.TryComp(_accessName, out AccessReaderComponent? disguisedAccessReader))
@@ -44,24 +43,30 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
     }
 
     /// <summary>
+    /// Resolves the entity prototype this disguise turns the borg into, if any.
+    /// </summary>
+    protected bool TryGetDisguisedPrototype(BorgDisguiseComponent comp, [NotNullWhen(true)] out EntityPrototype? disguisedProto)
+    {
+        return ProtoMan.Resolve(comp.DisguisedPrototype, out disguisedProto);
+    }
+
+    /// <summary>
     /// Swaps the shared parts of the entity's components based on the disguise state.
     /// </summary>
-    /// <param name="uid">The entity to swap</param>
-    /// <param name="comp">The component to use for getting the disguise state and description.</param>
-    protected void UpdateSharedAppearance(EntityUid uid, BorgDisguiseComponent comp)
+    protected void UpdateSharedAppearance(Entity<BorgDisguiseComponent> ent)
     {
-        if (!TryPrototype(uid, out var entityPrototype))
+        if (!TryPrototype(ent.Owner, out var entityPrototype))
             return;
 
-        if (comp.Disguised && ProtoMan.TryIndex(comp.DisguisedPrototype, out var disguisedPrototype))
+        if (ent.Comp.Disguised && TryGetDisguisedPrototype(ent.Comp, out var disguisedPrototype))
         {
-            _meta.SetEntityName(uid, disguisedPrototype.Name);
-            _meta.SetEntityDescription(uid, disguisedPrototype.Description);
+            _meta.SetEntityName(ent.Owner, disguisedPrototype.Name);
+            _meta.SetEntityDescription(ent.Owner, disguisedPrototype.Description);
         }
         else
         {
-            _meta.SetEntityName(uid, entityPrototype.Name);
-            _meta.SetEntityDescription(uid, entityPrototype.Description);
+            _meta.SetEntityName(ent.Owner, entityPrototype.Name);
+            _meta.SetEntityDescription(ent.Owner, entityPrototype.Description);
         }
     }
 
@@ -70,17 +75,19 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
     /// <summary>
     /// Gives the action to disguise
     /// </summary>
-    private void OnMapInit(EntityUid uid, BorgDisguiseComponent comp, MapInitEvent args)
+    [SubscribeLocalEvent]
+    private void OnMapInit(Entity<BorgDisguiseComponent> ent, ref MapInitEvent args)
     {
-        _actionsSystem.AddAction(uid, ref comp.ActionEntity, comp.Action);
+        _actionsSystem.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action);
     }
 
     /// <summary>
     /// Takes away the action to disguise from the entity.
     /// </summary>
-    private void OnCompRemove(EntityUid uid, BorgDisguiseComponent comp, ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnCompRemove(Entity<BorgDisguiseComponent> ent, ref ComponentShutdown args)
     {
-        _actionsSystem.RemoveAction(uid, comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
     }
 
     #endregion

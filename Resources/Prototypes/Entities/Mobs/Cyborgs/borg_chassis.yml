@@ -198,6 +198,22 @@
   description: A streamlined engineering cyborg, equipped with covert modules. Its chameleon projector lets it disguise itself as a Nanotrasen cyborg.
   components:
     # <Trauma>
+    - type: BorgDisguise
+      action: ActionBorgDisguiseToggle
+      disguisedPrototype: BorgChassisEngineer
+      hasMindState: engineer_e
+      noMindState: engineer_e_r
+      disguisedLight: engineer_l
+      realLight: synd_engi_l
+    - type: GenericVisualizer
+      visuals:
+        enum.BorgDisguiseVisuals.IsDisguised:
+          enum.BorgVisualLayers.Body:
+            True: { visible: false }
+            False: { visible: true }
+          enum.BorgDisguiseVisualLayers.Body:
+            True: { visible: true }
+            False: { visible: false }
     - type: ModifyKnowledgeGrant
       skills:
         FabricationKnowledge: 60
@@ -257,24 +273,6 @@
       interactFailureString: petting-failure-syndicate-cyborg
       interactSuccessSound:
         path: /Audio/Ambience/Objects/periodic_beep.ogg
-    # <Trauma>
-    - type: BorgDisguise
-      action: ActionBorgDisguiseToggle
-      disguisedPrototype: BorgChassisEngineer
-      hasMindState: engineer_e
-      noMindState: engineer_e_r
-      disguisedLight: engineer_l
-      realLight: synd_engi_l
-    - type: GenericVisualizer
-      visuals:
-        enum.BorgDisguiseVisuals.IsDisguised:
-          enum.BorgVisualLayers.Body:
-            True: { visible: false }
-            False: { visible: true }
-          enum.BorgDisguiseVisualLayers.Body:
-            True: { visible: true }
-            False: { visible: false }
-    # </Trauma>
 
 - type: entity
   id: BorgChassisDerelict

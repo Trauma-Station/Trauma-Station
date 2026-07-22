@@ -10,9 +10,9 @@ namespace Content.Trauma.Client.Silicons.Borgs;
 public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
-    [Dependency] private BorgSystem _borgSystem = default!;
-    [Dependency] private SharedPointLightSystem _pointLightSystem = default!;
-    [Dependency] private SpriteSystem _sprites = default!;
+    [Dependency] private BorgSystem _borg = default!;
+    [Dependency] private SharedPointLightSystem _borgLight = default!;
+    [Dependency] private SpriteSystem _borgSprite = default!;
 
     private CompName _chassisName;
     private CompName _lightName;
@@ -28,61 +28,54 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
         SubscribeLocalEvent<BorgDisguiseComponent, AppearanceChangeEvent>(OnBorgAppearanceChanged);
     }
 
-    private void OnStateUpdate(EntityUid uid, BorgDisguiseComponent comp, ref AfterAutoHandleStateEvent args)
+    private void OnStateUpdate(Entity<BorgDisguiseComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateAppearance(uid, comp);
+        UpdateAppearance(ent);
     }
 
     /// <summary>
     /// Handles updates to the appearance of the entity.
     /// </summary>
-    /// <param name="uid">The entity updated.</param>
-    /// <param name="comp">The disguise component of the updated entity.</param>
-    /// <param name="args"></param>
-    private void OnBorgAppearanceChanged(EntityUid uid, BorgDisguiseComponent comp, ref AppearanceChangeEvent args)
+    private void OnBorgAppearanceChanged(Entity<BorgDisguiseComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
-        UpdateAppearance(uid, comp);
+        UpdateAppearance(ent);
     }
 
     /// <summary>
     /// Updates the appearance data of the entity.
     /// </summary>
-    /// <param name="uid">The entity to update.</param>
-    /// <param name="comp">The component holding the disguise data.</param>
-    private void UpdateAppearance(EntityUid uid, BorgDisguiseComponent comp)
+    private void UpdateAppearance(Entity<BorgDisguiseComponent> ent)
     {
-        AppearanceComponent? appearance = null;
-        SpriteComponent? sprite = null;
-
-        if (!Resolve(uid, ref appearance, ref sprite))
+        if (!TryComp<AppearanceComponent>(ent.Owner, out var appearance)
+            || !TryComp<SpriteComponent>(ent.Owner, out var sprite))
             return;
 
-        _appearance.SetData(uid, BorgDisguiseVisuals.IsDisguised, comp.Disguised, appearance);
-        // Change method in BorgSystem gets automatically called via observer
+        _appearance.SetData(ent.Owner, BorgDisguiseVisuals.IsDisguised, ent.Comp.Disguised, appearance);
 
-        if (TryPrototype(uid, out var entityPrototype))
+        // Change method in BorgSystem gets automatically called via observer
+        if (TryPrototype(ent.Owner, out var entityPrototype))
         {
             if (entityPrototype.TryComp(_chassisName, out BorgChassisComponent? borgPrototype))
             {
-                _borgSystem.SetMindStates((uid, Comp<BorgChassisComponent>(uid)),
-                    comp.Disguised ? comp.HasMindState : borgPrototype.HasMindState,
-                    comp.Disguised ? comp.NoMindState : borgPrototype.NoMindState);
+                _borg.SetMindStates((ent.Owner, Comp<BorgChassisComponent>(ent.Owner)),
+                    ent.Comp.Disguised ? ent.Comp.HasMindState : borgPrototype.HasMindState,
+                    ent.Comp.Disguised ? ent.Comp.NoMindState : borgPrototype.NoMindState);
             }
 
             if (entityPrototype.TryComp(_lightName, out PointLightComponent? lightPrototype))
             {
-                _pointLightSystem.SetColor(uid,
-                    comp.Disguised
-                        ? comp.DisguisedLightColor
+                _borgLight.SetColor(ent.Owner,
+                    ent.Comp.Disguised
+                        ? ent.Comp.DisguisedLightColor
                         : lightPrototype.Color);
             }
         }
 
-        _sprites.LayerSetRsiState((uid, sprite), "light",
-            comp.Disguised ? comp.DisguisedLight : comp.RealLight);
+        _borgSprite.LayerSetRsiState((ent.Owner, sprite), "light",
+            ent.Comp.Disguised ? ent.Comp.DisguisedLight : ent.Comp.RealLight);
 
-        UpdateSharedAppearance(uid, comp);
+        UpdateSharedAppearance(ent);
     }
 }
