@@ -283,7 +283,7 @@
 
 - type: entity
   name: Bingus
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable]
+  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
   id: MobBingus
   description: Bingus my beloved...
   components:
@@ -346,7 +346,7 @@
 
 - type: entity
   name: McGriff
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable]
+  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
   id: MobMcGriff
   description: This dog can tell something smells around here, and that something is CRIME!
   components:
@@ -480,7 +480,7 @@
 
 - type: entity
   name: Walter
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable]
+  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
   id: MobWalter
   description: He likes chems and treats. Walter.
   components:

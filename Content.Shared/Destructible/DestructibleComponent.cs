@@ -19,6 +19,7 @@ public sealed partial class DestructibleComponent : Component
     /// includes their triggers and resultant behaviors
     /// </summary>
     [DataField(customTypeSerializer: typeof(DamageThresholdsSerializer))]
+    [AlwaysPushInheritance]
     public List<DamageThreshold> Thresholds = new();
 
     /// <summary>

@@ -44,8 +44,6 @@
       100: SoftCrit
       150: Critical
       200: Dead
-  - type: Destructible
-    thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
   - type: CounterAttacker
   - type: KnowledgeHolder
@@ -212,6 +210,7 @@
   - MobAtmosStandard
   - MobFlammable
   - BaseSpeciesMob
+  #- BaseMobDestructible # Trauma - parts handle gibbing
   id: BaseSpeciesMobOrganicUnperishable # Trauma - made unperishable for vox
   save: false
   components:
