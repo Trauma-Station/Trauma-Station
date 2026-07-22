@@ -9,7 +9,8 @@
   - type: Item
     heldPrefix: emptybloodpack
   - type: Tag
-  tags: - Bloodpack
+    tags:
+    - Bloodpack
   - type: Sprite
     state: bloodpack-empty
   - type: Healing
