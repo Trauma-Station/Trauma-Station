@@ -54,7 +54,11 @@ public sealed class SuicideCommandTests : GameTest
   id: TestMaterialReclaimer
   name: test version of the material reclaimer
   components:
-  - type: MaterialReclaimer";
+  - type: MaterialReclaimer
+    # <Trauma>
+    emagComponents:
+    - type: DamageContacts
+    # </Trauma>";
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
     private static readonly ProtoId<DamageTypePrototype> DamageType = "Slash";
 
