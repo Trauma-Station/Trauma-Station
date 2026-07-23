@@ -13,7 +13,9 @@
   - type: SpeedModifierOrgan
     weightlessAcceleration: 0.5 # 50% faster base acceleration in space/0G
     weightlessModifier: 0.3
-  - type: BurnableWings
+  - type: BurnableBodyPart
+    burntPart: OrganMothWingsBurntOff
+    burnMessage: wings-burned-message
   - type: DashWings
     speciesWhitelist:
     # need to have a body adapted to controlling wings

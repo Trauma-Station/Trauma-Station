@@ -91,16 +91,11 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         args.ColorOverride = color.NudgeLightness(0.3f);
     }
 
-    [SubscribeLocalEvent]
-    private void OnAutoHandleState(Entity<AnimatedEmotesComponent> ent, ref AfterAutoHandleStateEvent args)
+    [SubscribeNetworkEvent]
+    private void OnVisualEmote(AnimationVisualEmoteEvent args)
     {
-        if (ProtoMan.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is { } ev)
-            RaiseLocalEvent(ent, ev);
-    }
+        var ent = GetEntity(args.Entity);
 
-    [SubscribeLocalEvent]
-    private void OnVisualEmote(Entity<AnimatedEmotesComponent> ent, ref AnimationVisualEmoteEvent args)
-    {
         if (!TryComp(ent, out SpriteComponent? sprite) ||
             !_sprite.TryGetLayer((ent, sprite), args.Layer, out var layer, false) || layer.Visible == args.SetVisible)
             return;
@@ -132,9 +127,11 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a, args.Key);
     }
 
-    [SubscribeLocalEvent]
-    private void OnFlip(Entity<AnimatedEmotesComponent> ent, ref AnimationFlipEmoteEvent args)
+    [SubscribeNetworkEvent]
+    private void OnFlip(AnimationFlipEmoteEvent args)
     {
+        var ent = GetEntity(args.Entity);
+
         var a = new Animation
         {
             Length = TimeSpan.FromMilliseconds(500),
@@ -157,9 +154,11 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a);
     }
 
-    [SubscribeLocalEvent]
-    private void OnSpin(Entity<AnimatedEmotesComponent> ent, ref AnimationSpinEmoteEvent args)
+    [SubscribeNetworkEvent]
+    private void OnSpin(AnimationSpinEmoteEvent args)
     {
+        var ent = GetEntity(args.Entity);
+
         var a = new Animation
         {
             Length = TimeSpan.FromMilliseconds(600),
@@ -188,9 +187,11 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a, "emoteAnimSpin");
     }
 
-    [SubscribeLocalEvent]
-    private void OnJump(Entity<AnimatedEmotesComponent> ent, ref AnimationJumpEmoteEvent args)
+    [SubscribeNetworkEvent]
+    private void OnJump(AnimationJumpEmoteEvent args)
     {
+        var ent = GetEntity(args.Entity);
+
         var a = new Animation
         {
             Length = TimeSpan.FromMilliseconds(250),
@@ -213,10 +214,17 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a);
     }
 
-    [SubscribeLocalEvent]
-    private void OnTweak(Entity<AnimatedEmotesComponent> ent, ref AnimationTweakEmoteEvent args)
+    [SubscribeNetworkEvent]
+    private void OnTweak(AnimationTweakEmoteEvent args)
     {
-        if (ent.Comp.TweakState is not { } tweak)
+        var ent = GetEntity(args.Entity);
+
+        if (!TryComp(ent, out AnimatedEmotesComponent? comp))
+            return;
+
+        var key = DamageStateVisualLayers.Base;
+
+        if (TryGetStateId(ent, comp.TweakState, key) is not { } stateId)
             return;
 
         var a = new Animation
@@ -226,10 +234,10 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
             {
                 new AnimationTrackSpriteFlick
                 {
-                    LayerKey = DamageStateVisualLayers.Base,
+                    LayerKey = key,
                     KeyFrames =
                     {
-                        new AnimationTrackSpriteFlick.KeyFrame(new RSI.StateId(tweak), 0f)
+                        new AnimationTrackSpriteFlick.KeyFrame(stateId, 0f)
                     }
                 }
             }
@@ -237,16 +245,22 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a);
     }
 
-    [SubscribeLocalEvent]
-    private void OnFlex(Entity<AnimatedEmotesComponent> ent, ref AnimationFlexEmoteEvent args)
+    [SubscribeNetworkEvent]
+    private void OnFlex(AnimationFlexEmoteEvent args)
     {
-        if (ent.Comp.FlexState is not { } flex ||
-            ent.Comp.FlexDefaultState is not { } defaultState ||
-            ent.Comp.FlexDamageState is not { } damage ||
-            ent.Comp.FlexDefaultDamageState is not { } defaultDamage)
-        {
+        var ent = GetEntity(args.Entity);
+
+        if (!TryComp(ent, out AnimatedEmotesComponent? comp))
             return;
-        }
+
+        var damageKey = DamageStateVisualLayers.Base;
+        var unshadedKey = DamageStateVisualLayers.BaseUnshaded;
+
+        if (TryGetStateId(ent, comp.FlexState, damageKey) is not { } flexId ||
+            TryGetStateId(ent, comp.FlexDefaultState, damageKey) is not { } defaultId ||
+            TryGetStateId(ent, comp.FlexDamageState, unshadedKey) is not { } flexDamageId ||
+            TryGetStateId(ent, comp.FlexDefaultDamageState, unshadedKey) is not { } defaultDamageId)
+            return;
 
         var a = new Animation
         {
@@ -255,26 +269,40 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
             {
                 new AnimationTrackSpriteFlick
                 {
-                    LayerKey = DamageStateVisualLayers.Base,
+                    LayerKey = damageKey,
                     KeyFrames =
                     {
                         // TODO: replace this shitcode with component fields holy shit
-                        new AnimationTrackSpriteFlick.KeyFrame(new RSI.StateId(flex), 0f),
-                        new AnimationTrackSpriteFlick.KeyFrame(new RSI.StateId(defaultState), FlexAnimationDurationMs / 1000f)
+                        new AnimationTrackSpriteFlick.KeyFrame(flexId, 0f),
+                        new AnimationTrackSpriteFlick.KeyFrame(defaultId, FlexAnimationDurationMs / 1000f)
                     }
                 },
                 // don't display the glow while flexing
                 new AnimationTrackSpriteFlick
                 {
-                    LayerKey = DamageStateVisualLayers.BaseUnshaded,
+                    LayerKey = unshadedKey,
                     KeyFrames =
                     {
-                        new AnimationTrackSpriteFlick.KeyFrame(new RSI.StateId(damage), 0f),
-                        new AnimationTrackSpriteFlick.KeyFrame(new RSI.StateId(defaultDamage), FlexAnimationDurationMs / 1000f)
+                        new AnimationTrackSpriteFlick.KeyFrame(flexDamageId, 0f),
+                        new AnimationTrackSpriteFlick.KeyFrame(defaultDamageId, FlexAnimationDurationMs / 1000f)
                     }
                 }
             }
         };
         PlayEmote(ent, a);
+    }
+
+    private RSI.StateId? TryGetStateId(EntityUid uid, string? state, Enum key)
+    {
+        if (state == null)
+            return null;
+
+        var stateId = new RSI.StateId(state);
+
+        if (_sprite.LayerGetEffectiveRsi(uid, key, stateId) is { } rsi &&
+            rsi.TryGetState(stateId, out _))
+            return null;
+
+        return stateId;
     }
 }

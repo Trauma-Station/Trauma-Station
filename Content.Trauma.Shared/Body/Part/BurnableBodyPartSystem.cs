@@ -15,7 +15,7 @@ public sealed partial class BurnableWingsSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
 
     [SubscribeLocalEvent]
-    private void OnDamageChanged(Entity<BurnableWingsComponent> ent, ref DamageDealtEvent args)
+    private void OnDamageChanged(Entity<BurnableBodyPartComponent> ent, ref DamageDealtEvent args)
     {
         var allDmg = _dmg.GetAllDamage(ent.Owner);
         if (!allDmg.DamageDict.TryGetValue(ent.Comp.DamageType, out var dmg) || dmg < ent.Comp.DamageThreshold)
@@ -24,14 +24,14 @@ public sealed partial class BurnableWingsSystem : EntitySystem
         var coords = Transform(ent).Coordinates;
 
         _audio.PlayPredicted(ent.Comp.BurnSound, coords, args.Origin);
-        _popup.PopupCoordinates(Loc.GetString("wings-burned-message", ("ent", ent)), coords, PopupType.MediumCaution);
+        if (ent.Comp.BurnMessage is { } msg)
+            _popup.PopupCoordinates(Loc.GetString(msg, ("ent", ent)), coords, PopupType.MediumCaution);
 
-        var newWings = PredictedSpawnAtPosition(ent.Comp.BurntWings, coords);
+        var newWings = PredictedSpawnAtPosition(ent.Comp.BurntPart, coords);
 
-        if (TryComp(ent, out OrganComponent? organ) && Exists(organ.Body))
+        if (_body.GetBody(ent.Owner) is { } body)
         {
-            var body = organ.Body.Value;
-            if (_body.RemoveOrgan(body, (ent, organ)))
+            if (_body.RemoveOrgan(body, ent.Owner))
                 _body.InsertOrgan(body, newWings);
         }
 

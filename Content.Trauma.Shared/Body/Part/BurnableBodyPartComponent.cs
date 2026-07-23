@@ -8,7 +8,7 @@ using Robust.Shared.Audio;
 namespace Content.Trauma.Shared.Body.Part;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BurnableWingsComponent : Component
+public sealed partial class BurnableBodyPartComponent : Component
 {
     [DataField]
     public FixedPoint2 DamageThreshold = 35;
@@ -16,9 +16,12 @@ public sealed partial class BurnableWingsComponent : Component
     [DataField]
     public ProtoId<DamageTypePrototype> DamageType = "Heat";
 
-    [DataField]
-    public EntProtoId<OrganComponent> BurntWings = "OrganMothWingsBurntOff";
+    [DataField(required: true)]
+    public EntProtoId<OrganComponent> BurntPart;
 
     [DataField]
-    public SoundSpecifier BurnSound = new SoundPathSpecifier("/Audio/Effects/lightburn.ogg");
+    public SoundSpecifier? BurnSound = new SoundPathSpecifier("/Audio/Effects/lightburn.ogg");
+
+    [DataField]
+    public LocId? BurnMessage;
 }

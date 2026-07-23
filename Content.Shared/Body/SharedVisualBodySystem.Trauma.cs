@@ -13,7 +13,7 @@ public abstract partial class SharedVisualBodySystem
 
         foreach (var suffix in proto.ChildMarkingsSuffix)
         {
-            if (!ProtoMan.TryIndex<MarkingPrototype>($"{marking.MarkingId}{suffix}", out var childProto))
+            if (!ProtoMan.Resolve<MarkingPrototype>($"{marking.MarkingId}{suffix}", out var childProto))
                 continue;
 
             var childMarking = new Marking(childProto.ID, marking.MarkingColors.Count)

@@ -14,6 +14,10 @@ public sealed partial class ModifyMarkingStatusEffectComponent : Component
     [DataField(required: true)]
     public ProtoId<OrganCategoryPrototype> Organ;
 
+    /// <summary>
+    /// Suffix of "Toggled" version of the marking id
+    /// So if our id is "MothWingsDefault" and suffix is "Open", we toggle it and use marking with id "MothWingsDefaultOpen"
+    /// </summary>
     [DataField(required: true)]
     public string Suffix;
 }

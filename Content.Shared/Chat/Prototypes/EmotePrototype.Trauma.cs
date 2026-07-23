@@ -1,3 +1,4 @@
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Shared.Chat.Prototypes;
@@ -5,8 +6,8 @@ namespace Content.Shared.Chat.Prototypes;
 public sealed partial class EmotePrototype
 {
     [DataField]
-    public object? Event;
+    public EntityEffect[]? EffectsOnEmote;
 
     [DataField]
-    public EntityEffect[]? EffectsOnEmote;
+    public EntityCondition[]? Conditions;
 }

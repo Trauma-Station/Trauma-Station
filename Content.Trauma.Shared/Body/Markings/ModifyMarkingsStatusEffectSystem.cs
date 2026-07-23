@@ -64,13 +64,13 @@ public sealed partial class ModifyMarkingsStatusEffectSystem : EntitySystem
                     else
                     {
                         newMarkingId = currentMarkingId;
-                        Log.Warning($"Unable to revert marking override for {currentMarkingId}");
+                        Log.Error($"Unable to revert marking override for {currentMarkingId}");
                     }
                 }
 
                 if (!ProtoMan.HasIndex<MarkingPrototype>(newMarkingId))
                 {
-                    Log.Warning($"{ToPrettyString(uid):ent} tried toggling marking {newMarkingId} that doesn't exist");
+                    Log.Error($"{ToPrettyString(uid):ent} tried toggling marking {newMarkingId} that doesn't exist");
                     continue;
                 }
 
