@@ -170,6 +170,8 @@
   - type: ThermalVision
     color: white
     toggleAction: null
+    thermalShader: null
+    isActive: true
 
 - type: entity
   parent: [BaseMobGhoulLock, MobGhoulStalkerBase]
@@ -390,8 +392,8 @@
   - type: IgniteOnMeleeHit
     fireStacks: 2
   - type: MovementSpeedModifier
-    baseWalkSpeed: 7
-    baseSprintSpeed: 7
+    baseWalkSpeed: 6
+    baseSprintSpeed: 6
   - type: MeleeWeapon
     altDisarm: false
     angle: 0

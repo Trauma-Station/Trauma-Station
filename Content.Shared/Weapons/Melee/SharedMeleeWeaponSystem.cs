@@ -149,14 +149,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-melee"));
 
-        // <Goob> - partial armor penetration
-        var ap = component.ResistanceBypass ? 100 : (int)Math.Round(damageSpec.ArmorPenetration * 100);
-        if (ap == 0)
-            return;
-
-        var abs = Math.Abs(ap);
-        args.Message.AddMarkupPermissive("\n" + Loc.GetString("armor-penetration", ("arg", ap/abs), ("abs", abs)));
-        // </Goob>
+        AddExtraDamageExamine(component, damageSpec, args.Message); // Trauma
     }
     private void OnMeleeSelected(EntityUid uid, MeleeWeaponComponent component, HandSelectedEvent args)
     {

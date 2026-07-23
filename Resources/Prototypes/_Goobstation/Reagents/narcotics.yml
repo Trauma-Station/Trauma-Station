@@ -334,6 +334,10 @@
       - !type:Jitter
       - !type:ModifyStatusEffect
         effectProto: OleoresinSlowdownStatusEffect
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
 
 - type: reagent
   id: Heroin # hunter biden's favourite snack

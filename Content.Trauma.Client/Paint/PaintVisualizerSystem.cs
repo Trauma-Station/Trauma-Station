@@ -7,7 +7,7 @@ using Content.Trauma.Shared.Paint;
 namespace Content.Trauma.Client.Paint;
 
 /// <summary>
-/// Colours layers of painted entities that don't have a shader set.
+/// Colours layers of painted entities that aren't unshaded.
 /// Also colours the spray can colour layers.
 /// </summary>
 public sealed partial class PaintVisualizerSystem : EntitySystem
@@ -15,24 +15,7 @@ public sealed partial class PaintVisualizerSystem : EntitySystem
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
-    public static readonly ProtoId<ShaderPrototype> ShaderId = "Greyscale";
-    public ShaderInstance Shader = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        Shader = ProtoMan.Index(ShaderId).Instance();
-
-        SubscribeLocalEvent<PaintCanComponent, ComponentInit>(OnCanInit);
-
-        SubscribeLocalEvent<PaintVisualsComponent, AfterAutoHandleStateEvent>(OnHandleState);
-        SubscribeLocalEvent<PaintVisualsComponent, PaintedEvent>(OnPainted);
-        SubscribeLocalEvent<PaintVisualsComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<PaintVisualsComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
-        SubscribeLocalEvent<PaintVisualsComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
-    }
-
+    [SubscribeLocalEvent]
     private void OnCanInit(Entity<PaintCanComponent> ent, ref ComponentInit args)
     {
         // get layer before hand, don't error if no layer is found
@@ -40,16 +23,19 @@ public sealed partial class PaintVisualizerSystem : EntitySystem
             _sprite.LayerSetColor(layer, ent.Comp.Color);
     }
 
+    [SubscribeLocalEvent]
     private void OnHandleState(Entity<PaintVisualsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         PaintSprite(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPainted(Entity<PaintVisualsComponent> ent, ref PaintedEvent args)
     {
         PaintSprite(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<PaintVisualsComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent) || !_spriteQuery.TryComp(ent, out var sprite))
@@ -58,16 +44,17 @@ public sealed partial class PaintVisualizerSystem : EntitySystem
         var spriteEnt = new Entity<SpriteComponent?>(ent, sprite);
         foreach (var (key, color) in ent.Comp.LayerColors)
         {
-            sprite.LayerSetShader(key, null, null);
             _sprite.LayerSetColor(spriteEnt, key, color);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnHeldVisualsUpdated(Entity<PaintVisualsComponent> ent, ref HeldVisualsUpdatedEvent args)
     {
         SetLayers(args.User, ent.Comp.Color, args.RevealedLayers);
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipmentVisualsUpdated(Entity<PaintVisualsComponent> ent, ref EquipmentVisualsUpdatedEvent args)
     {
         SetLayers(args.Equipee, ent.Comp.Color, args.RevealedLayers);
@@ -84,14 +71,12 @@ public sealed partial class PaintVisualizerSystem : EntitySystem
         foreach (var iLayer in sprite.AllLayers)
         {
             int i = index++;
-            // don't replace layers that already have a custom shader set
+            // don't replace layers that are unshaded (lights etc)
             if (iLayer is not SpriteComponent.Layer layer ||
-                layer.ShaderPrototype == SpriteSystem.UnshadedId ||
-                (layer.Shader != null && layer.Shader != Shader))
+                layer.ShaderPrototype == SpriteSystem.UnshadedId)
                 continue;
 
             colors[i] = layer.Color;
-            sprite.LayerSetShader(i, Shader, ShaderId);
             _sprite.LayerSetColor(layer, ent.Comp.Color);
         }
     }
@@ -108,7 +93,6 @@ public sealed partial class PaintVisualizerSystem : EntitySystem
             if (!_sprite.LayerMapTryGet(spriteEnt, key, out var index, true))
                 continue;
 
-            sprite.LayerSetShader(index, Shader, ShaderId);
             _sprite.LayerSetColor(spriteEnt, index, color);
         }
     }

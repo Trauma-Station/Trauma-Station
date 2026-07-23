@@ -457,6 +457,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
+      # </Trauma>
       - !type:PopupMessage
         type: Local
         probability: 0.08

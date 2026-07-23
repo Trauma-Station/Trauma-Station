@@ -85,6 +85,11 @@
   - type: HumanoidProfile
     species: IPC
   - type: KnowledgeHolder
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 - type: entity
   parent:
