@@ -1,6 +1,5 @@
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Humanoid.Markings;
-using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
@@ -28,7 +27,7 @@ public sealed class ChildMarkingTest : GameTest
                     foreach (var suffix in marking.ChildMarkingsSuffix)
                     {
                         var id = $"{marking.ID}{suffix}";
-                        Assert.That(protoMan.HasIndex<HereticKnowledgePrototype>(id),
+                        Assert.That(protoMan.HasIndex<MarkingPrototype>(id),
                             Is.True,
                             $"Child marking {id} does not exist.");
                     }
