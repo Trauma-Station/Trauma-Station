@@ -38,7 +38,7 @@
   - type: MeleeWeapon
     animationRotation: -135 # WWDP
     wideAnimationRotation: -135
-    canWideSwing: false # Trauma
+    heavyPartDamageMultiplier: 0.75 # Trauma
     damage:
       types:
         Slash: 10

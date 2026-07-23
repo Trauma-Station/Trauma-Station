@@ -537,7 +537,7 @@
       shader: unshaded
   - type: Projectile
     deleteOnCollide: false
-    penetrate: true
+    penetrationThreshold: 200
     damage:
       types:
         Radiation: 20

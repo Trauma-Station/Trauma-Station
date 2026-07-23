@@ -188,6 +188,11 @@
     canBeGrabbed: false
   - type: Viewcone
     baseConeAngle: 360
+  - type: ThermalVision
+    color: white
+    toggleAction: null
+    thermalShader: null
+    isActive: true
 
 - type: entity
   parent: MobHereticFleshAscendSegmentBase

@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Robust.Shared.Physics.Dynamics;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.FixedPoint;
 
 namespace Content.Shared.Projectiles;
 
@@ -20,13 +19,7 @@ public sealed partial class ProjectileComponent
     [DataField]
     public bool Penetrate;
 
-    /// <summary>
-    ///     Collision mask of what not to penetrate if <see cref="Penetrate"/> is true.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>))]
-    public int NoPenetrateMask = 0;
-
-    [NonSerialized]
+    [DataField]
     public List<EntityUid> IgnoredEntities = new();
 
     [DataField]
@@ -37,4 +30,22 @@ public sealed partial class ProjectileComponent
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? OriginalShooter;
+
+    /// <summary>
+    ///     When a projectile has this threshold set, it will continue to penetrate entities until the damage dealt reaches this threshold.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 PenetrationThreshold = 10f;
+
+    /// <summary>
+    ///     If set, the projectile will not penetrate objects that lack the ability to take these damage types.
+    /// </summary>
+    [DataField]
+    public List<string>? PenetrationDamageTypeRequirement;
+
+    /// <summary>
+    ///     Tracks the amount of damage dealt for penetration purposes.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 PenetrationAmount = FixedPoint2.Zero;
 }
