@@ -872,7 +872,7 @@
     whitelist:
     - UplinkAutosurgeonRightMantisBlade
     - UplinkAutosurgeonLeftMantisBlade
-    - UplinkAutosurgeonSandevistan
+    - UplinkAutosurgeonStatvekaSandevistan
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
