@@ -11842,3 +11842,10 @@ Entries:
   id: 1310
   time: '2026-07-23T01:06:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3680
+- author: DinoPercent
+  changes:
+  - type: Tweak
+    message: buffed Xenomorph Weightless speed (no more gabity issues yippy!!!)
+  id: 1311
+  time: '2026-07-23T03:42:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3662
