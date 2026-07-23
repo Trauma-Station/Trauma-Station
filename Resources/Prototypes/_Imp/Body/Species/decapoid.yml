@@ -47,7 +47,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseSpeciesAppearance
+  parent: BaseSpeciesAppearanceDecapoid
   id: AppearanceDecapoid
   name: Decapoid appearance
   components:
