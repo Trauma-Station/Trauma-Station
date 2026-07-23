@@ -5,6 +5,9 @@ using Content.Shared.Humanoid;
 
 namespace Content.Trauma.Shared.Body.Markings;
 
+/// <summary>
+/// Toggles some organ marking to use another marking
+/// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ModifyMarkingStatusEffectComponent : Component
 {
