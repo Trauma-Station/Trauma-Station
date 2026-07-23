@@ -3,6 +3,7 @@
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.NukeOps;
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.GameTicking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
@@ -11,6 +12,7 @@ namespace Content.Server.GameTicking.Rules;
 public sealed partial class NukeopsRuleSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private CommonRequestNewAntagOrCallEvacSystem _antagEvacRequest = default!;
 
     private EntProtoId _newAntag = "ModerateAntagEventScheduler";
     private void InitializeTrauma()

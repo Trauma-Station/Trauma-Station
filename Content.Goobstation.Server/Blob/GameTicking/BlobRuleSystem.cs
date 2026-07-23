@@ -20,7 +20,7 @@ using Content.Shared.Destructible;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Trauma.Common.CCVar;
-using Content.Trauma.Common.GameTicking.Events;
+using Content.Trauma.Common.GameTicking;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -42,6 +42,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private CommonRequestNewAntagOrCallEvacSystem _antagEvacRequest = default!;
 
     private EntProtoId _newAntag = "ModerateAntagEventScheduler";
 
@@ -228,13 +229,11 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [SubscribeLocalEvent]
     private void OnDestruction(Entity<BlobCoreComponent> ent, ref DestructionEventArgs args)
     {
-        var ev = new RequestNewAntagOrCallEvacEvent(_percentNeededForNewAntag,
+        _antagEvacRequest.SpawnNewAntagIfBelowPercent(_percentNeededForNewAntag,
             ent.Comp.AmountAliveOnSpawn,
             TimeSpan.FromMinutes(5),
             _newAntag,
             true);
-
-        RaiseLocalEvent(ref ev);
     }
 
     [SubscribeLocalEvent]

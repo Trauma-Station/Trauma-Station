@@ -4,7 +4,6 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Shared.Mindshield.Components;
-using Content.Trauma.Common.GameTicking.Events;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 // </Trauma>
@@ -134,13 +133,11 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
                 // <Trauma>
-                var ev = new RequestNewAntagOrCallEvacEvent(_percentNeededForNewAntag,
+                _antagEvacRequest.SpawnNewAntagIfBelowPercent(_percentNeededForNewAntag,
                     _amountAliveOnSpawn,
                     TimeSpan.FromMinutes(10),
                     _newAntag,
                     true);
-
-                RaiseLocalEvent(ref ev);
                 // </Trauma>
 
                 _chat.DispatchGlobalAnnouncement(

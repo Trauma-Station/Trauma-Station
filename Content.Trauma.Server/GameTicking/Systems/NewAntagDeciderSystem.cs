@@ -3,25 +3,22 @@
 using Content.Server.GameTicking;
 using Content.Server.RoundEnd;
 using Content.Shared.Objectives.Systems;
-using Content.Trauma.Common.GameTicking.Events;
+using Content.Trauma.Common.GameTicking;
 
 namespace Content.Trauma.Server.GameTicking.Systems;
 
-/// <summary>
-/// Helper method for deciding if a new antag is required
-/// </summary>
-public sealed partial class NewAntagDeciderSystem : EntitySystem
+
+public sealed partial class NewAntagDeciderSystem : CommonRequestNewAntagOrCallEvacSystem
 {
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private TargetSystem _target = default!;
     [Dependency] private RoundEndSystem _roundEndSystem = default!;
 
-    [SubscribeLocalEvent]
-    public void SpawnNewAntagIfBelowPercent(ref RequestNewAntagOrCallEvacEvent args)
+    public override void SpawnNewAntagIfBelowPercent(float percent, int aliveOnSpawn, TimeSpan countDownTime, EntProtoId antagsToSpawn, bool cantRecall, bool endIfUnderPercent = true)
     {
-        if ((float)_target.GetAliveHumans().Count / args.AliveOnSpawn >= args.Percent)
-            _ticker.StartGameRule(args.AntagsToSpawn);
-        else if(args.EndIfUnderPercent)
-            _roundEndSystem.RequestRoundEnd(countdownTime: args.CountDownTime, cantRecall: args.CantRecall);
+        if ((float)_target.GetAliveHumans().Count / aliveOnSpawn >= percent)
+            _ticker.StartGameRule(antagsToSpawn);
+        else if(endIfUnderPercent)
+            _roundEndSystem.RequestRoundEnd(countdownTime: countDownTime, cantRecall: cantRecall);
     }
 }

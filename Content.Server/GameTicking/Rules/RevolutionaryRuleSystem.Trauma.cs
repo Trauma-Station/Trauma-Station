@@ -3,6 +3,7 @@
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Revolutionary.Components;
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.GameTicking;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
@@ -12,6 +13,7 @@ public sealed partial class RevolutionaryRuleSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private TargetSystem _target = default!;
+    [Dependency] private CommonRequestNewAntagOrCallEvacSystem _antagEvacRequest = default!;
 
     private EntProtoId _newAntag = "ModerateAntagEventScheduler";
     private float _percentNeededForNewAntag;

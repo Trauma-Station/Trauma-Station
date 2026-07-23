@@ -2,7 +2,7 @@
 using Content.Server.Chat.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.Objectives.Systems;
-using Content.Trauma.Common.GameTicking.Events;
+using Content.Trauma.Common.GameTicking;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
@@ -615,13 +615,11 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
                 Loc.GetString(nukeops.RoundEndTextSender));
 
         // <Trauma>
-        var ev = new RequestNewAntagOrCallEvacEvent(_percentNeededForNewAntag,
+        _antagEvacRequest.SpawnNewAntagIfBelowPercent(_percentNeededForNewAntag,
             ent.Comp.AmountAliveOnSpawn,
             TimeSpan.FromMinutes(3),
             _newAntag,
             true);
-
-        RaiseLocalEvent(ref ev);
         // </Trauma>
 
         // prevent it called multiple times
