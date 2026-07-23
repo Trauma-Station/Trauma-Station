@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -80,4 +81,22 @@ public sealed partial class ProjectileComponent : Component
     /// </summary>
     [DataField]
     public bool ProjectileSpent;
+
+    /// <summary>
+    ///     When a projectile has this threshold set, it will continue to penetrate entities until the damage dealt reaches this threshold.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 PenetrationThreshold = 10f; // Trauma - was FixedPoint2.Zero
+
+    /// <summary>
+    ///     If set, the projectile will not penetrate objects that lack the ability to take these damage types.
+    /// </summary>
+    [DataField]
+    public List<string>? PenetrationDamageTypeRequirement;
+
+    /// <summary>
+    ///     Tracks the amount of damage dealt for penetration purposes.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 PenetrationAmount = FixedPoint2.Zero;
 }
