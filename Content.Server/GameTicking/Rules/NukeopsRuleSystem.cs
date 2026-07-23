@@ -2,6 +2,7 @@
 using Content.Server.Chat.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.Objectives.Systems;
+using Content.Trauma.Common.GameTicking.Events;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
@@ -53,10 +54,8 @@ namespace Content.Server.GameTicking.Rules;
 public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
     // <Trauma>
-    private float _percentNeededForNewAntag = 0.6f;
-    private int _amountAliveOnSpawn;
+    private float _percentNeededForNewAntag;
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private GameTicker _ticker = default!;
     [Dependency] private TargetSystem _target = default!;
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
@@ -108,15 +107,8 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
 
-        SubscribeLocalEvent<NukeOperativeComponent, MapInitEvent>(OnMapInit); // Trauma
+        InitializeTrauma(); // Trauma
     }
-
-    // <Trauma>
-    private void OnMapInit(Entity<NukeOperativeComponent> ent, ref MapInitEvent args)
-    {
-        _amountAliveOnSpawn = _target.GetAliveHumans().Count;
-    }
-    // </Trauma>
 
     protected override void Started(EntityUid uid,
         NukeopsRuleComponent component,
@@ -623,15 +615,13 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
                 Loc.GetString(nukeops.RoundEndTextSender));
 
         // <Trauma>
-        if ((float)_target.GetAliveHumans().Count / _amountAliveOnSpawn >= _percentNeededForNewAntag)
-        {
-            var newAntags = "ModerateAntagEventScheduler";
-            _ticker.StartGameRule(newAntags);
-        }
-        else
-        {
-            _roundEndSystem.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(3));
-        }
+        var ev = new RequestNewAntagOrCallEvacEvent(_percentNeededForNewAntag,
+            ent.Comp.AmountAliveOnSpawn,
+            TimeSpan.FromMinutes(3),
+            _newAntag,
+            true);
+
+        RaiseLocalEvent(ref ev);
         // </Trauma>
 
         // prevent it called multiple times

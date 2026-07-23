@@ -7,6 +7,6 @@ public sealed partial class DamagedByContactComponent
     /// <summary>
     /// The sound to play when damage is done
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SoundPathSpecifier? DamageSound;
 }

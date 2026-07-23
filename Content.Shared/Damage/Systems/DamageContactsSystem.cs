@@ -3,6 +3,7 @@ using Robust.Shared.Audio.Systems;
 // </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.Whitelist;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -14,6 +15,7 @@ public sealed partial class DamageContactsSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
     // </Trauma>
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
@@ -42,16 +44,16 @@ public sealed partial class DamageContactsSystem : EntitySystem
             damaged.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
 
             if (damaged.Damage != null)
+            // <Trauma>
             {
                 _damageable.TryChangeDamage(ent, damaged.Damage, interruptsDoAfters: false);
 
-                // <Trauma>
-                if (damaged.DamageSound is null)
-                    return;
+                if (_net.IsServer)
+                    continue;
 
-                _audio.PlayPvs(damaged.DamageSound, ent);
-                // </Trauma>
+                _audio.PlayLocal(damaged.DamageSound, ent, ent);
             }
+            // </Trauma>
         }
     }
 
@@ -89,6 +91,7 @@ public sealed partial class DamageContactsSystem : EntitySystem
 
         // <Trauma>
         damagedByContact.DamageSound = component.DamageSound;
+        Dirty(uid, component);
         // </Trauma>
     }
 }

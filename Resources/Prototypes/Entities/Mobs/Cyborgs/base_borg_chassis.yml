@@ -510,7 +510,7 @@
   components:
   # <Trauma>
   - type: BlockShuttleRecall
-  #</Trauma>
+  # </Trauma>
   - type: RandomMetadata
     nameSegments:
     - NamesXenoborg

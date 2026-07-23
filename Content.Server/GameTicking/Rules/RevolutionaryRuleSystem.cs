@@ -4,6 +4,9 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Shared.Mindshield.Components;
+using Content.Trauma.Common.GameTicking.Events;
+using Content.Trauma.Common.CCVar;
+using Robust.Shared.Configuration;
 // </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
@@ -79,6 +82,8 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 
         SubscribeLocalEvent<RevolutionaryRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
+        InitializeTrauma(); // Trauma
+
     }
 
     protected override void Started(EntityUid uid, RevolutionaryRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
@@ -110,7 +115,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
                     // <Trauma>
                     var ert = "SpawnERTSecurity";
                     _ticker.StartGameRule(ert);
-                    _roundEndSystem.EndRound(TimeSpan.FromMinutes(10));
+                    _roundEndSystem.RequestRoundEnd(TimeSpan.FromMinutes(10), cantRecall: true);
                     // </Trauma>
                 }
 
@@ -129,7 +134,13 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
                 // <Trauma>
-                _roundEndSystem.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(10), cantRecall: true);
+                var ev = new RequestNewAntagOrCallEvacEvent(_percentNeededForNewAntag,
+                    _amountAliveOnSpawn,
+                    TimeSpan.FromMinutes(10),
+                    _newAntag,
+                    true);
+
+                RaiseLocalEvent(ref ev);
                 // </Trauma>
 
                 _chat.DispatchGlobalAnnouncement(

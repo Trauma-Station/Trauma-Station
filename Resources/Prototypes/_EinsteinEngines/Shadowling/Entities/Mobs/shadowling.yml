@@ -111,7 +111,6 @@
   components:
   - type: ShadowlingVeil
   - type: ShadowlingIcyVeins
-  - type: ShadowlingDestroyEngines
   - type: ShadowlingBlindnessSmoke
   - type: ShadowlingNullCharge
   - type: ShadowlingSonicScreech

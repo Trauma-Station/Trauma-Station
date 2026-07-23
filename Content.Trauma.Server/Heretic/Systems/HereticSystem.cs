@@ -73,6 +73,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
     private const float PassivePointCooldown = 20f * 60f;
 
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
+    private bool _hasAHereticAscended = false;
 
     public static readonly ProtoId<NpcFactionPrototype> HereticFactionId = "Heretic";
     public static readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
@@ -489,9 +490,12 @@ public sealed partial class HereticSystem : SharedHereticSystem
             return;
 
         // starts the evac countdown call
-        var ascendEv = new HereticAscendedEvent();
-        RaiseNetworkEvent(ascendEv);
-        RaiseLocalEvent(ascendEv);
+        if (!_hasAHereticAscended)
+        {
+            var ascendEv = new HereticAscendedEvent();
+            RaiseNetworkEvent(ascendEv);
+            RaiseLocalEvent(ascendEv);
+        }
 
         ent.Comp.Ascended = true;
         RemoveRituals(ent.AsNullable(), [AscensionRitualTag, FeastOfOwlsRitualTag]);

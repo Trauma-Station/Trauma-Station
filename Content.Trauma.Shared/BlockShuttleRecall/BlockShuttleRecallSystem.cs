@@ -13,11 +13,7 @@ public sealed partial class BlockShuttleRecallSystem : EntitySystem
 {
     [Dependency] private SharedElectrocutionSystem _electrocution = default!;
 
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<BlockShuttleRecallComponent, InteractionAttemptEvent>(OnInteractAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInteractAttempt(Entity<BlockShuttleRecallComponent> ent, ref InteractionAttemptEvent args)
     {
         if (!HasComp<TraumaCommsConsoleComponent>(args.Target))
