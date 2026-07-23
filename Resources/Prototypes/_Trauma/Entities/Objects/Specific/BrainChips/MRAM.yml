@@ -1,4 +1,5 @@
-# MRAM - (Memory Read-Only Access Modules) provide specialized knowledge and skills
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseSkillChipMRAM
   id: SkillChipArmorsmithing

@@ -195,4 +195,3 @@ chatsan-replacement-68 = i don't know
 
 chatsan-word-69 = wya
 chatsan-replacement-69 = where you at
-

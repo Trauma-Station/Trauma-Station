@@ -45,14 +45,3 @@ uplink-skill-chip-weapons-heavy-desc = A skill chip that makes the user proficen
 
 uplink-skill-chip-weapons-smg-name = APTR-Chip (SMG Training)
 uplink-skill-chip-weapons-smg-desc = A skill chip that makes the user proficent with SMGs.
-
-
-
-
-
-
-
-
-
-
-
