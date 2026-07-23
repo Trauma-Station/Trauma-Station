@@ -103916,13 +103916,6 @@ entities:
     - type: Transform
       pos: -23.5,87.5
       parent: 2
-- proto: CrateHydroponicsSeedsExotic
-  entities:
-  - uid: 16793
-    components:
-    - type: Transform
-      pos: 3.5,-39.5
-      parent: 2
 - proto: CrateHydroponicsTools
   entities:
   - uid: 16794
