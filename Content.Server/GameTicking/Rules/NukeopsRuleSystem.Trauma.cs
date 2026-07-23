@@ -15,7 +15,6 @@ public sealed partial class NukeopsRuleSystem
     private EntProtoId _newAntag = "ModerateAntagEventScheduler";
     private void InitializeTrauma()
     {
-        base.Initialize();
         Subs.CVar(_cfg, TraumaCVars.NukiePercentNeededForNewAntag, x => _percentNeededForNewAntag = x, true);
     }
 
