@@ -11782,3 +11782,63 @@ Entries:
   id: 1302
   time: '2026-07-21T23:54:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3657
+- author: jshoe2
+  changes:
+  - type: Fix
+    message: Fixed atmos fire helmet and fire helmet protecting torso instead of head
+  id: 1303
+  time: '2026-07-22T16:45:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3661
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed spray painted clothes looking weird on dwarves.
+  id: 1304
+  time: '2026-07-22T21:28:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3669
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys/kobolds jumpsuits using human-sized sprites.
+  id: 1305
+  time: '2026-07-22T22:18:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3671
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fishing ponds no longer phase through walls.
+  id: 1306
+  time: '2026-07-22T23:18:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3675
+- author: Graves
+  changes:
+  - type: Remove
+    message: Removed Slop-I mean sleep mode on the wonderprod.
+  - type: Tweak
+    message: Made the cuff mode on the wonderprod stronger.
+  - type: Tweak
+    message: Barbwire Handcuffs are now properly contraband.
+  id: 1307
+  time: '2026-07-22T23:31:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3643
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to automate industrial grinders with reagent pumps.
+  id: 1308
+  time: '2026-07-22T23:37:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3676
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wizard's bind soul spell not letting you resurrect when it should.
+  id: 1309
+  time: '2026-07-23T00:44:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3678
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed strength training with melee weapons.
+  id: 1310
+  time: '2026-07-23T01:06:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3680

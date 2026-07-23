@@ -284,7 +284,7 @@ public abstract partial class SharedMechSystem : EntitySystem
         if (component.CurrentSelectedEquipment == toRemove)
             CycleEquipment(uid, component);
 
-        if (forced && equipmentComponent != null)
+        if (equipmentComponent != null) // Trauma - removed forced check bruh
             equipmentComponent.EquipmentOwner = null;
 
         _container.Remove(toRemove, component.EquipmentContainer);
