@@ -189,12 +189,10 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     {
         var ent = GetEntity(args.Entity);
 
-        if (!TryComp(ent, out AnimatedEmotesComponent? comp))
+        if (!TryComp(ent, out AnimatedEmotesComponent? comp) || !TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        var key = DamageStateVisualLayers.Base;
-
-        if (TryGetStateId(ent, comp.TweakState, key) is not { } stateId)
+        if (TryGetStateId(sprite, comp.TweakState) is not { } stateId)
             return;
 
         var a = new Animation
@@ -204,7 +202,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
             {
                 new AnimationTrackSpriteFlick
                 {
-                    LayerKey = key,
+                    LayerKey = DamageStateVisualLayers.Base,
                     KeyFrames =
                     {
                         new AnimationTrackSpriteFlick.KeyFrame(stateId, 0f)
@@ -220,16 +218,13 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     {
         var ent = GetEntity(args.Entity);
 
-        if (!TryComp(ent, out AnimatedEmotesComponent? comp))
+        if (!TryComp(ent, out AnimatedEmotesComponent? comp) || !TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        var damageKey = DamageStateVisualLayers.Base;
-        var unshadedKey = DamageStateVisualLayers.BaseUnshaded;
-
-        if (TryGetStateId(ent, comp.FlexState, damageKey) is not { } flexId ||
-            TryGetStateId(ent, comp.FlexDefaultState, damageKey) is not { } defaultId ||
-            TryGetStateId(ent, comp.FlexDamageState, unshadedKey) is not { } flexDamageId ||
-            TryGetStateId(ent, comp.FlexDefaultDamageState, unshadedKey) is not { } defaultDamageId)
+        if (TryGetStateId(sprite, comp.FlexState) is not { } flexId ||
+            TryGetStateId(sprite, comp.FlexDefaultState) is not { } defaultId ||
+            TryGetStateId(sprite, comp.FlexDamageState) is not { } flexDamageId ||
+            TryGetStateId(sprite, comp.FlexDefaultDamageState) is not { } defaultDamageId)
             return;
 
         var a = new Animation
@@ -239,7 +234,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
             {
                 new AnimationTrackSpriteFlick
                 {
-                    LayerKey = damageKey,
+                    LayerKey = DamageStateVisualLayers.Base,
                     KeyFrames =
                     {
                         // TODO: replace this shitcode with component fields holy shit
@@ -250,7 +245,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 // don't display the glow while flexing
                 new AnimationTrackSpriteFlick
                 {
-                    LayerKey = unshadedKey,
+                    LayerKey = DamageStateVisualLayers.BaseUnshaded,
                     KeyFrames =
                     {
                         new AnimationTrackSpriteFlick.KeyFrame(flexDamageId, 0f),
@@ -262,15 +257,14 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a);
     }
 
-    private RSI.StateId? TryGetStateId(EntityUid uid, string? state, Enum key)
+    private RSI.StateId? TryGetStateId(SpriteComponent sprite, string? state)
     {
         if (state == null)
             return null;
 
         var stateId = new RSI.StateId(state);
 
-        if (_sprite.LayerGetEffectiveRsi(uid, key, stateId) is { } rsi &&
-            rsi.TryGetState(stateId, out _))
+        if (sprite.BaseRSI?.TryGetState(stateId, out _) is not true)
             return null;
 
         return stateId;

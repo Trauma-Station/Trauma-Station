@@ -5,7 +5,7 @@ using Content.Trauma.Common.EntityEffects;
 
 namespace Content.Trauma.Shared.Heretic.Rituals.EntityEffects;
 
-public sealed class RaiseNetworkEventsEffectSystem : EntityEffectSystem<MetaDataComponent, RaiseNetworkEvents>
+public sealed partial class RaiseNetworkEventsEffectSystem : EntityEffectSystem<MetaDataComponent, RaiseNetworkEvents>
 {
     [Dependency] private INetManager _net = default!;
 
