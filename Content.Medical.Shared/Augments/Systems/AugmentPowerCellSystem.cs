@@ -139,14 +139,14 @@ public sealed partial class AugmentPowerCellSystem : EntitySystem
         var user = args.User;
         if (GetBodyAugment(ent) is not { } augment || !_powerCell.TryGetBatteryFromSlot(augment.Owner, out var battery))
         {
-            _popup.PopupClient(Loc.GetString("power-cell-no-battery"), user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("power-cell-no-battery"), user, user, PopupType.MediumCaution);
             return;
         }
 
         var batt = battery.Value;
         var percent = _battery.GetMaxUses(batt.AsNullable(), batt.Comp.MaxCharge * 0.01f);
         var draw = _cellDrawQuery.CompOrNull(augment)?.DrawRate ?? 0f;
-        _popup.PopupClient(Loc.GetString("augments-power-cell-info", ("percent", percent), ("draw", draw)), user, user);
+        _popup.PopupEntity(Loc.GetString("augments-power-cell-info", ("percent", percent), ("draw", draw)), user, user);
     }
 
     public float GetBodyDraw(EntityUid body)
@@ -202,19 +202,19 @@ public sealed partial class AugmentPowerCellSystem : EntitySystem
     {
         if (GetBodyAugment(body) is not { } slot)
         {
-            _popup.PopupClient(Loc.GetString("augments-no-power-cell-slot"), body, body, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("augments-no-power-cell-slot"), body, body, PopupType.MediumCaution);
             return false;
         }
 
         if (!_powerCell.TryGetBatteryFromSlot(slot.Owner, out var battery))
         {
-            _popup.PopupClient(Loc.GetString("power-cell-no-battery"), body, body, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("power-cell-no-battery"), body, body, PopupType.MediumCaution);
             return false;
         }
 
         if (!_battery.TryUseCharge(battery.Value.AsNullable(), amount))
         {
-            _popup.PopupClient(Loc.GetString("power-cell-insufficient"), body, body, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("power-cell-insufficient"), body, body, PopupType.MediumCaution);
             return false;
         }
 

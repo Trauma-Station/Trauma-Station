@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # these don't have the relevant department etc, they're for maints rooms
 - type: entity
   abstract: true

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Looks like a shockwave, expands upwards using a circle shape.
 - type: particleEffect
   id: VampireStompShockwave

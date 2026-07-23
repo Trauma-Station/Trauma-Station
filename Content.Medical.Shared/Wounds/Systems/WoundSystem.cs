@@ -33,7 +33,6 @@ public sealed partial class WoundSystem : EntitySystem
     [Dependency] private EntityQuery<WoundComponent> _query = default!;
     [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
 
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -97,7 +96,6 @@ public sealed partial class WoundSystem : EntitySystem
         SubscribeLocalEvent<WoundableComponent, ComponentGetState>(OnWoundableComponentGet);
         SubscribeLocalEvent<WoundableComponent, ComponentHandleState>(OnWoundableComponentHandleState);
         InitWounding();
-        InitializeHealing();
 
         Subs.CVar(_cfg, SurgeryCVars.MedicalHealingTickrate, val => _medicalHealingTickrate = val, true);
         Subs.CVar(_cfg, SurgeryCVars.MinimumTimeBeforeHeal, val => _minimumTimeBeforeHeal = TimeSpan.FromSeconds(val), true);

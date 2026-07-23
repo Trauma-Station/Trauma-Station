@@ -411,6 +411,7 @@
         Blunt: -5
         Slash: -5
         Piercing: -5
+        Ballistic: -5
   - type: SurgeryRepeatableStep
 
 - type: entity

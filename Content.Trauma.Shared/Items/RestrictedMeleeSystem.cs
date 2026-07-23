@@ -45,7 +45,7 @@ public sealed partial class RestrictedMeleeSystem : EntitySystem
             _audioSystem.PlayPredicted(comp.FallSound, args.User, args.User);
 
         // Display the message to the player and cancel the melee attempt.
-        _popupSystem.PopupClient(args.Message, uid, PopupType.Large);
+        _popupSystem.PopupEntity(args.Message, uid, PopupType.Large);
         args.Cancelled = true;
     }
 }

@@ -93,6 +93,11 @@ public abstract partial class SharedHandsSystem
         if (!BeforeDoPickup((uid, handsComp), entity))
             return false;
 
+        // <Trauma>
+        if (_thieving.IsStealthy(uid))
+            animate = false;
+        // </Trauma>
+
         if (animate)
         {
             var xform = Transform(uid);

@@ -12,7 +12,6 @@ namespace Content.Goobstation.Shared.Factory;
 
 public sealed partial class AutomationSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedStealthSystem _stealth = default!;
     [Dependency] private EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
@@ -91,7 +90,7 @@ public sealed partial class AutomationSystem : EntitySystem
     {
         _automatable.Clear();
         var name = Factory.GetComponentName<AutomationSlotsComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.Components.ContainsKey(name))
                 _automatable.Add(proto.ID);

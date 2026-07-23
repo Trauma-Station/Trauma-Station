@@ -18,7 +18,7 @@ namespace Content.YAMLLinter
 {
     internal static class Program
     {
-        private static readonly ExternalTestContext TestContext = new("YAML Linter", StreamWriter.Null);
+        private static readonly ExternalTestContext TestContext = new("YAML Linter", Console.Out); // Trauma - doesn't void output...
 
         private static async Task<int> Main(string[] _)
         {
@@ -58,27 +58,8 @@ namespace Content.YAMLLinter
             return -1;
         }
 
-        private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
-            ValidateClient()
-        {
-            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
-            var client = pair.Client;
-            var result = await ValidateInstance(client);
-            await pair.CleanReturnAsync();
-            return result;
-        }
-
-        private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
-            ValidateServer()
-        {
-            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
-            var server = pair.Server;
-            var result = await ValidateInstance(server);
-            await pair.CleanReturnAsync();
-            return result;
-        }
-
-        private static async Task<(Dictionary<string, HashSet<ErrorNode>>, List<string>)> ValidateInstance(
+        // Trauma - removed ValidateClient/ValidateServer, named these tuple fields
+        private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)> ValidateInstance(
             RobustIntegrationTest.IntegrationInstance instance)
         {
             var protoMan = instance.ResolveDependency<IPrototypeManager>();
@@ -116,14 +97,26 @@ namespace Content.YAMLLinter
         public static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
             RunValidation()
         {
-            var (clientAssemblies, serverAssemblies) = await GetClientServerAssemblies();
+            // <Trauma> - get pair once, get assemblies individually
+            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
+            var clientAssemblies = GetAssemblies(pair.Client);
+            var serverAssemblies = GetAssemblies(pair.Server);
+            // </Trauma>
             var serverTypes = serverAssemblies.SelectMany(n => n.GetTypes()).Select(t => t.Name).ToHashSet();
             var clientTypes = clientAssemblies.SelectMany(n => n.GetTypes()).Select(t => t.Name).ToHashSet();
 
             var yamlErrors = new Dictionary<string, HashSet<ErrorNode>>();
 
-            var serverErrors = await ValidateServer();
-            var clientErrors = await ValidateClient();
+            // <Trauma> - do it in parallel bruh
+            var serverTask = ValidateInstance(pair.Server);
+            var clientTask = ValidateInstance(pair.Client);
+            await Task.WhenAll(serverTask, clientTask);
+            await pair.CleanReturnAsync();
+            #pragma warning disable RA0004
+            var serverErrors = serverTask.Result;
+            var clientErrors = clientTask.Result;
+            #pragma warning restore RA0004
+            // </Trauma>
 
             foreach (var (key, val) in serverErrors.YamlErrors)
             {
@@ -180,22 +173,12 @@ namespace Content.YAMLLinter
             return (yamlErrors, fieldErrors);
         }
 
-        private static async Task<(Assembly[] clientAssemblies, Assembly[] serverAssemblies)>
-            GetClientServerAssemblies()
+        // <Trauma> - removed GetClientServerAssemblies, moved this out of it
+        private static Assembly[] GetAssemblies(RobustIntegrationTest.IntegrationInstance instance)
         {
-            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
-
-            var result = (GetAssemblies(pair.Client), GetAssemblies(pair.Server));
-
-            await pair.CleanReturnAsync();
-
-            return result;
-
-            Assembly[] GetAssemblies(RobustIntegrationTest.IntegrationInstance instance)
-            {
-                var refl = instance.ResolveDependency<IReflectionManager>();
-                return refl.Assemblies.ToArray();
-            }
+            var refl = instance.ResolveDependency<IReflectionManager>();
+            return refl.Assemblies.ToArray();
         }
+        // </Trauma>
     }
 }

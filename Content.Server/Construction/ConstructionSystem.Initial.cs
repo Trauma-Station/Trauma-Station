@@ -334,13 +334,13 @@ namespace Content.Server.Construction
         // LEGACY CODE. See warning at the top of the file!
         public async Task<bool> TryStartItemConstruction(string prototype, EntityUid user)
         {
-            if (!PrototypeManager.TryIndex(prototype, out ConstructionPrototype? constructionPrototype))
+            if (!ProtoMan.TryIndex(prototype, out ConstructionPrototype? constructionPrototype))
             {
                 Log.Error($"Tried to start construction of invalid recipe '{prototype}'!");
                 return false;
             }
 
-            if (!PrototypeManager.TryIndex(constructionPrototype.Graph,
+            if (!ProtoMan.TryIndex(constructionPrototype.Graph,
                     out ConstructionGraphPrototype? constructionGraph))
             {
                 Log.Error(
@@ -426,7 +426,7 @@ namespace Content.Server.Construction
         // LEGACY CODE. See warning at the top of the file!
         private async void HandleStartStructureConstruction(TryStartStructureConstructionMessage ev, EntitySessionEventArgs args)
         {
-            // <Goobstation> - use public API
+            // <Trauma> - use public API
             if (args.SenderSession.AttachedEntity is {} user)
                 await TryStartStructureConstruction(user,
                     ev.PrototypeName,
@@ -447,8 +447,8 @@ namespace Content.Server.Construction
             int ack = 0,
             ICommonSession? senderSession = null)
         {
-            // </Goobstation>
-            if (!PrototypeManager.TryIndex(prototypeName, out ConstructionPrototype? constructionPrototype))
+            // </Trauma>
+            if (!ProtoMan.TryIndex(prototypeName, out ConstructionPrototype? constructionPrototype))
             {
                 Log.Error($"Tried to start construction of invalid recipe '{prototypeName}'!");
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
@@ -465,7 +465,7 @@ namespace Content.Server.Construction
             }
             // </Trauma>
 
-            if (!PrototypeManager.TryIndex(constructionPrototype.Graph, out ConstructionGraphPrototype? constructionGraph))
+            if (!ProtoMan.TryIndex(constructionPrototype.Graph, out ConstructionGraphPrototype? constructionGraph))
             {
                 Log.Error($"Invalid construction graph '{constructionPrototype.Graph}' in recipe '{prototypeName}'!");
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);

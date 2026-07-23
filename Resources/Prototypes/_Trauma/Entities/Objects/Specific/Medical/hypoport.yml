@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Hyposprays can't inject unless the target mob has a hypoport surgically installed (on their head)
 # It's assumed that all hardsuits have a passthrough port so you don't need to take them off.
 - type: entity

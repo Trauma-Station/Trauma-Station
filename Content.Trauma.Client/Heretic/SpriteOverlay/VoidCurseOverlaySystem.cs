@@ -21,7 +21,7 @@ public sealed class VoidCurseOverlaySystem : SpriteOverlaySystem<VoidCurseCompon
     {
         base.UpdateOverlayLayer(ent, comp, layer, source);
 
-        var state = comp.Stacks >= comp.MaxLifetime ? comp.OverlayStateMax : comp.OverlayStateNormal;
+        var state = comp.Stacks >= comp.MaxStacks ? comp.OverlayStateMax : comp.OverlayStateNormal;
 
         Sprite.LayerSetRsiState(ent.AsNullable(), layer, state);
     }

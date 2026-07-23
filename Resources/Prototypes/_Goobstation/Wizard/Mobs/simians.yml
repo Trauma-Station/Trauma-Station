@@ -54,6 +54,7 @@
       230: 0.5
   - type: Insulated
   - type: FlashImmunity
+    showInExamine: false
   - type: Bloodstream
     maxBleedAmount: 0
   - type: Respirator

@@ -12,7 +12,6 @@ namespace Content.Trauma.Client.Paint;
 /// </summary>
 public sealed partial class PaintVisualizerSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
@@ -23,7 +22,7 @@ public sealed partial class PaintVisualizerSystem : EntitySystem
     {
         base.Initialize();
 
-        Shader = _proto.Index(ShaderId).Instance();
+        Shader = ProtoMan.Index(ShaderId).Instance();
 
         SubscribeLocalEvent<PaintCanComponent, ComponentInit>(OnCanInit);
 

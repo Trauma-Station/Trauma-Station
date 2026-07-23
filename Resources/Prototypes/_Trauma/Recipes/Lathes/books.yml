@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   id: BaseBluePrintRecipe
   abstract: true
@@ -20,11 +22,6 @@
     Paper: 1000
 
 # Blueprints
-
-- type: latheRecipe
-  id: BookMaterials
-  parent: BaseBluePrintRecipe
-  result: BookMaterials
 
 - type: latheRecipe
   id: BookDoors

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -9,6 +10,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Rituals;
@@ -35,19 +37,17 @@ public sealed partial class InfusedItemSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MansusInfusedComponent, ExaminedEvent>(OnInfusedExamine);
-        SubscribeLocalEvent<MansusInfusedComponent, InteractHandEvent>(OnInfusedInteract);
         SubscribeLocalEvent<MansusInfusedComponent, MeleeHitEvent>(OnInfusedMeleeHit,
             after: new[] { typeof(HereticBladeSystem) });
-        SubscribeLocalEvent<MansusInfusedComponent, ComponentStartup>(OnInfusedStartup);
-        SubscribeLocalEvent<MansusInfusedComponent, ComponentShutdown>(OnInfusedShutdown);
     }
 
+    [SubscribeLocalEvent]
     private void OnInfusedExamine(Entity<MansusInfusedComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString("mansus-infused-item-examine"));
     }
 
+    [SubscribeLocalEvent]
     private void OnInfusedInteract(Entity<MansusInfusedComponent> ent, ref InteractHandEvent args)
     {
         var target = args.User;
@@ -66,18 +66,28 @@ public sealed partial class InfusedItemSystem : EntitySystem
         SpendInfusionCharges(ent);
     }
 
+    [SubscribeLocalEvent]
+    private void OnThrowHit(Entity<MansusInfusedComponent> ent, ref ThrowDoHitEvent args)
+    {
+        if (args.Component.Thrower is { } user && HasComp<DamageOtherOnHitComponent>(ent))
+            ApplyInfusionEffects(ent, user, args.Target);
+    }
+
     private void OnInfusedMeleeHit(Entity<MansusInfusedComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit || args.HitEntities.Count == 0 || args.Direction != null)
             return;
 
-        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind) ||
+        ApplyInfusionEffects(ent, args.User, args.HitEntities[0]);
+    }
+
+    private void ApplyInfusionEffects(Entity<MansusInfusedComponent> ent, EntityUid user, EntityUid target)
+    {
+        if (!_heretic.TryGetHereticComponent(user, out var heretic, out var mind) ||
             heretic.CurrentPath is not { } path)
             return;
 
-        var target = args.HitEntities[0];
-
-        if (target == args.User)
+        if (target == user)
             return;
 
         if (!HasComp<StatusEffectsComponent>(target) || !TryComp(target, out MobStateComponent? mobState) ||
@@ -86,10 +96,10 @@ public sealed partial class InfusedItemSystem : EntitySystem
 
         var raiser = EnsureComp<HereticRitualRaiserComponent>(ent);
         raiser.Blackboard.Clear();
-        raiser.Blackboard[SharedHereticRitualSystem.Performer] = args.User;
+        raiser.Blackboard[SharedHereticRitualSystem.Performer] = user;
         raiser.Blackboard[SharedHereticRitualSystem.Mind] = mind;
 
-        _effects.TryApplyEffect(target, ent.Comp.InfusedHitEffect, (ent, raiser), args.User);
+        _effects.TryApplyEffect(target, ent.Comp.InfusedHitEffect, (ent, raiser), user);
         _grasp.ApplyMark(target, path, heretic.PassiveLevel);
 
         raiser.Blackboard.Clear();
@@ -106,12 +116,14 @@ public sealed partial class InfusedItemSystem : EntitySystem
             RemComp(ent.Owner, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnInfusedStartup(Entity<MansusInfusedComponent> ent, ref ComponentStartup args)
     {
         _appearance.SetData(ent, InfusedBladeVisuals.Infused, true);
         _item.SetHeldPrefix(ent, ent.Comp.HeldPrefix);
     }
 
+    [SubscribeLocalEvent]
     private void OnInfusedShutdown(Entity<MansusInfusedComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))

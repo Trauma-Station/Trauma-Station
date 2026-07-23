@@ -36,6 +36,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7 # Trauma
         Heat: 0.8
 
 - type: entity
@@ -86,12 +87,13 @@
       coefficients: # Trauma - changed completely
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.55
+        Piercing: 0.6 # Trauma, was 0.55
+        Ballistic: 0.55 # Trauma
         Heat: 0.55
         Caustic: 0.6
       # <Trauma> - This is done so shotguns are worse against armor
       flatReductions:
-        Piercing: 3
+        Ballistic: 3
       # </Trauma>
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
@@ -122,6 +124,7 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6 # Trauma
         Heat: 0.7
         Caustic: 0.9
 
@@ -509,6 +512,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7 # Trauma
         Heat: 0.8
         Caustic: 0.4
   - type: ModifyDelayedKnockdown # Goobstation

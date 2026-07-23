@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobNightVision, BaseSlicingRefinable ]
   id: MobMorphBase
   name: morph
   description: A revolting, pulsating pile of flesh.
@@ -134,8 +136,8 @@
       - Wall
       - Window
     disguiseProto: ChameleonDisguiseMorph
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatDragon
       amount: 2
   - type: TypingIndicator
@@ -157,10 +159,6 @@
     factions:
     - SimpleHostile
   - type: VentCrawler
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   parent: MobMorphBase

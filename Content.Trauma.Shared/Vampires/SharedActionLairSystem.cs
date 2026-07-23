@@ -15,7 +15,6 @@ namespace Content.Trauma.Shared.Vampires;
 public abstract partial class SharedActionLairSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ActionLairTeleportSystem _lair = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -48,17 +47,17 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         if (!_lairQuery.TryComp(target, out var lair))
         {
-            _popup.PopupClient("This only works on coffins!", user, user, PopupType.Medium);
+            _popup.PopupEntity("This only works on coffins!", user, user, PopupType.Medium);
             return;
         }
 
         if (lair.Vampire is not null)
         {
-            _popup.PopupClient("This coffin serves another and refuses to bend to your will!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("This coffin serves another and refuses to bend to your will!", user, user, PopupType.MediumCaution);
             return;
         }
 
-        _popup.PopupClient("You begin making the coffin!", user, user, PopupType.Medium);
+        _popup.PopupEntity("You begin making the coffin!", user, user, PopupType.Medium);
         _leecher.CreateBeam(user, target, BeamProto);
 
         _audio.PlayPredicted(ent.Comp.BeforeCreationSound, target, user);
@@ -88,7 +87,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         if (_bloodQuery.TryComp(user, out var blood))
         {
-            _appearance.SetData(vampiricRune, VampiricRuneVisuals.Color, blood.BloodReferenceSolution.GetColor(_proto));
+            _appearance.SetData(vampiricRune, VampiricRuneVisuals.Color, blood.BloodReferenceSolution.GetColor(ProtoMan));
         }
 
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
@@ -106,7 +105,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.CreationSound, target, user);
 
-        EntityManager.AddComponents(target, _proto.Index(ent.Comp.LairComponents).Components);
+        EntityManager.AddComponents(target, ProtoMan.Index(ent.Comp.LairComponents).Components);
         if (!_lairQuery.TryComp(target, out var lair))
             return;
 

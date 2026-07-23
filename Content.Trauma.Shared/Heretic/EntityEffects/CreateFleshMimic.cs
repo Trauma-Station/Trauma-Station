@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
-using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 namespace Content.Trauma.Shared.Heretic.EntityEffects;
@@ -18,7 +17,7 @@ public sealed partial class CreateFleshMimic : EntityEffectBase<CreateFleshMimic
     public bool MakeGhostRole = true;
 
     [DataField]
-    public FixedPoint2 Health = 50;
+    public FixedPoint2 Health = 25;
 }
 
 public sealed partial class CreateFleshMimicEffectSystem : EntityEffectSystem<MobStateComponent, CreateFleshMimic>

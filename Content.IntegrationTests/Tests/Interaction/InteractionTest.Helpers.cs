@@ -477,7 +477,7 @@ public abstract partial class InteractionTest
         var actualTarget = SEntMan.GetCoordinates(target ?? TargetCoords);
         var result = false;
         // Trauma - use PredictedHands
-        await Server.WaitPost(() => result = PredictedHands.ThrowHeldItem(SEntMan.GetEntity(Player), actualTarget, minDistance));
+        await Server.WaitPost(() => result = SPredictedHands.ThrowHeldItem(SEntMan.GetEntity(Player), actualTarget, minDistance));
         return result;
     }
 
@@ -791,7 +791,7 @@ public abstract partial class InteractionTest
         var pos = Transform.ToMapCoordinates(serverCoords);
         await Server.WaitPost(() =>
         {
-            if (MapMan.TryFindGridAt(pos, out var gridUid, out var grid))
+            if (MapSystem.TryFindGridAt(pos, out var gridUid, out var grid))
                 tile = MapSystem.GetTileRef(gridUid, grid, serverCoords).Tile;
         });
 
@@ -1150,7 +1150,7 @@ public abstract partial class InteractionTest
                 MapSystem.SetTile(gridEnt, SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
                 return;
             }
-            else if (MapMan.TryFindGridAt(pos, out var gUid, out var gComp))
+            else if (MapSystem.TryFindGridAt(pos, out var gUid, out var gComp))
             {
                 MapSystem.SetTile(gUid, gComp, SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
                 return;
@@ -1159,7 +1159,7 @@ public abstract partial class InteractionTest
             if (proto == null)
                 return;
 
-            gridEnt = MapMan.CreateGridEntity(MapData.MapId);
+            gridEnt = MapSystem.CreateGridEntity(MapData.MapId);
             grid = gridEnt;
             gridUid = gridEnt;
             gridComp = gridEnt.Comp;
@@ -1167,7 +1167,7 @@ public abstract partial class InteractionTest
             Transform.SetWorldPosition((gridUid, gridXform), pos.Position);
             MapSystem.SetTile((gridUid, gridComp), SEntMan.GetCoordinates(coords ?? TargetCoords), tile);
 
-            if (!MapMan.TryFindGridAt(pos, out _, out _))
+            if (!MapSystem.TryFindGridAt(pos, out _, out _))
                 Assert.Fail("Failed to create grid?");
         });
         await AssertTile(proto, coords);
@@ -1189,11 +1189,6 @@ public abstract partial class InteractionTest
     protected async Task RunTicks(int ticks)
     {
         await Pair.RunTicksSync(ticks);
-    }
-
-    protected async Task RunSeconds(float seconds)
-    {
-        await Pair.RunSeconds(seconds);
     }
 
     #endregion

@@ -40,8 +40,8 @@ public abstract partial class SharedCorporealSystem : EntitySystem
         {
             var fixture = fixtures.Fixtures.First();
 
-            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, (int) CollisionGroup.MobMask, fixtures); // Goobstation - mob layer is set to regular mobs to prevent walking under doors.
-            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, (int) CollisionGroup.MobLayer, fixtures); // Goobstation - mob layer is set to regular mobs to prevent walking under doors.
+            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, (int) CollisionGroup.MobMask, fixtures); // Trauma - use MobMask to regular mobs walking under doors.
+            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, (int) (CollisionGroup.MobLayer | CollisionGroup.GhostImpassable), fixtures); // Trauma - use MobLayer
         }
         _movement.RefreshMovementSpeedModifiers(uid);
     }
@@ -54,8 +54,8 @@ public abstract partial class SharedCorporealSystem : EntitySystem
         {
             var fixture = fixtures.Fixtures.First();
 
-            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, 0, fixtures); // Goobstation - Set mask to 0
-            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, (int) CollisionGroup.GhostImpassable, fixtures); // Goobstation - Set layer to CollisionGroup.GhostImpassable
+            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, 0, fixtures);
+            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, (int) CollisionGroup.GhostImpassable, fixtures);
         }
         component.MovementSpeedDebuff = 1; //just so we can avoid annoying code elsewhere
         Dirty(uid, component); // Trauma

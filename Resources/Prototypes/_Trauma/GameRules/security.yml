@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Random antags sec can summon if they killed all the roundstart ones
 - type: entity
   parent: BaseGameRule

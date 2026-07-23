@@ -17,7 +17,6 @@ public sealed partial class ShelterCapsuleSystem : SharedShelterCapsuleSystem
     [Dependency] private MapSystem _mapSystem = default!;
     [Dependency] private SmokeSystem _smoke = default!;
     [Dependency] private TransformSystem _transform = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
 
     public override void Initialize()
     {
@@ -44,7 +43,7 @@ public sealed partial class ShelterCapsuleSystem : SharedShelterCapsuleSystem
 
         var xform = Transform(ent);
         var comp = ent.Comp;
-        var proto = _protoMan.Index(comp.PreloadedGrid);
+        var proto = ProtoMan.Index(comp.PreloadedGrid);
         var worldPos = _transform.GetMapCoordinates(ent, xform);
 
         if (!CheckCanDeploy(ent) || xform.MapUid == null)

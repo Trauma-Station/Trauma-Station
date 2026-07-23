@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: BaseItem
   id: BaseLightbulb
@@ -28,12 +26,6 @@
         Blunt: 5
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 5
@@ -89,12 +81,6 @@
     bulb: Tube
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 5
@@ -240,9 +226,9 @@
   description: A light fixture.
   components:
   - type: LightBulb
-    color: "#FFE4CE" # 5000k temp
-    lightEnergy: 1
-    lightRadius: 12.5
+    color: "#FFBE7E" # Trauma - was 5000K, now 3300K color temp
+    lightEnergy: 0.8
+    lightRadius: 10
     lightSoftness: 1
     PowerUse: 25
 
@@ -253,7 +239,7 @@
   description: An aging light fixture.
   components:
   - type: LightBulb
-    color: "#FFBE7E" # 3300K temp
+    color: "#FFDABB" # old fluorescents are yellower-4500K temp
     lightEnergy: 0.5
     lightRadius: 10
     lightSoftness: 1

@@ -1,276 +1,40 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Goobstation.Server.Blob.Components;
+using Content.Goobstation.Server.Blob.GameTicking;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Goobstation.Shared.Blob.Events;
-using Content.Server.Actions;
 using Content.Server.Chat.Managers;
-using Content.Server.Hands.Systems;
-using Content.Server.Mind;
-using Content.Server.Roles;
-using Content.Shared.ActionBlocker;
-using Content.Shared.Alert;
-using Content.Shared.Coordinates.Helpers;
-using Content.Shared.Hands.Components;
+using Content.Server.GameTicking;
+using Content.Shared.Actions;
 using Content.Shared.Mind;
-using Content.Shared.Popups;
-using Robust.Server.GameObjects;
-using Robust.Server.Player;
+using Content.Shared.Roles;
 using Robust.Shared.CPUJob.JobQueues.Queues;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
+using System.Linq;
 
 namespace Content.Goobstation.Server.Blob;
 
 public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
 {
-    [Dependency] private ActionsSystem _action = default!;
-    [Dependency] private BlobCoreSystem _blobCoreSystem = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private ActionBlockerSystem _blocker = default!;
-    [Dependency] private UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private MindSystem _mindSystem = default!;
-    [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private ILogManager _logMan = default!;
-    [Dependency] private RoleSystem _roleSystem = default!;
-    [Dependency] private IChatManager _chatManager = default!;
-    [Dependency] private ISharedPlayerManager _actorSystem = default!;
-    [Dependency] private ViewSubscriberSystem _viewSubscriberSystem = default!;
-    [Dependency] private MapSystem _mapSystem = default!;
-    [Dependency] private HandsSystem _hands = default!;
-    [Dependency] private BlobTileSystem _blobTileSystem = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
-    private EntityQuery<BlobTileComponent> _tileQuery;
+    private static readonly EntProtoId BlobCaptureObjective = "BlobCaptureObjective";
+    private static readonly EntProtoId BlobRule = "BlobRule";
 
     private const double MoverJobTime = 0.005;
     private readonly JobQueue _moveJobQueue = new(MoverJobTime);
-
-    private ISawmill _logger = default!;
-
-    private static readonly EntProtoId BlobCaptureObjective = "BlobCaptureObjective";
-    private static readonly EntProtoId MobObserverBlobController = "MobObserverBlobController";
-    private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BlobCoreComponent, CreateBlobObserverEvent>(OnCreateBlobObserver);
-
-        SubscribeLocalEvent<BlobObserverComponent, PlayerAttachedEvent>(OnPlayerAttached, before: [typeof(ActionsSystem)]);
-        SubscribeLocalEvent<BlobObserverComponent, PlayerDetachedEvent>(OnPlayerDetached, before: [typeof(ActionsSystem)]);
-
-        SubscribeLocalEvent<BlobCoreComponent, BlobCreateBlobbernautActionEvent>(OnCreateBlobbernaut);
-        SubscribeLocalEvent<BlobCoreComponent, BlobToCoreActionEvent>(OnBlobToCore);
-        SubscribeLocalEvent<BlobCoreComponent, BlobSwapChemActionEvent>(OnBlobSwapChem);
-        SubscribeLocalEvent<BlobCoreComponent, BlobSwapCoreActionEvent>(OnSwapCore);
-        SubscribeLocalEvent<BlobCoreComponent, BlobSplitCoreActionEvent>(OnSplitCore);
-
-        SubscribeLocalEvent<BlobObserverComponent, MoveEvent>(OnMoveEvent);
-        SubscribeLocalEvent<BlobObserverComponent, BlobChemSwapPrototypeSelectedMessage>(OnChemSelected);
-
-        SubscribeLocalEvent<BlobObserverComponent, ComponentStartup>(OnStartup);
-
-
-        _logger = _logMan.GetSawmill("blob.core");
-        _tileQuery = GetEntityQuery<BlobTileComponent>();
-    }
-
-    private void OnStartup(Entity<BlobObserverComponent> ent, ref ComponentStartup args)
-    {
-        _hands.AddHand(ent.Owner,"BlobHand",HandLocation.Middle);
-
-        ent.Comp.VirtualItem = Spawn(MobObserverBlobController, Transform(ent).Coordinates);
-        var comp = EnsureComp<BlobObserverControllerComponent>(ent.Comp.VirtualItem);
-        comp.Blob = ent;
-        Dirty(ent);
-
-        if (!_hands.TryPickup(ent, ent.Comp.VirtualItem, "BlobHand", false, false, false))
-        {
-            QueueDel(ent);
-        }
-    }
-
-    private void SendBlobBriefing(EntityUid mind)
-    {
-        if (_playerManager.TryGetSessionByEntity(mind, out var session))
-        {
-            _chatManager.DispatchServerMessage(session, Loc.GetString("blob-role-greeting"));
-        }
-    }
-
-    private void OnCreateBlobObserver(EntityUid blobCoreUid, BlobCoreComponent core, CreateBlobObserverEvent args)
-    {
-        var observer = Spawn(core.ObserverBlobPrototype, Transform(blobCoreUid).Coordinates);
-
-        core.Observer = observer;
-
-        if (!TryComp<BlobObserverComponent>(observer, out var blobObserverComponent))
-        {
-            args.Cancel();
-            return;
-        }
-
-        blobObserverComponent.Core = (blobCoreUid, core);
-        Dirty(observer,blobObserverComponent);
-
-
-        var isNewMind = false;
-        if (!_mindSystem.TryGetMind(blobCoreUid, out var mindId, out var mind))
-        {
-            if (
-                !_playerManager.TryGetSessionById(args.UserId, out var playerSession) ||
-                playerSession.AttachedEntity == null ||
-                !_mindSystem.TryGetMind(playerSession.AttachedEntity.Value, out mindId, out mind))
-            {
-                mindId = _mindSystem.CreateMind(args.UserId, "Blob Player");
-                mind = Comp<MindComponent>(mindId);
-                isNewMind = true;
-            }
-        }
-
-        if (!isNewMind)
-        {
-            String name;
-            if (_playerManager.TryGetSessionById(mind.UserId, out var session1))
-                name = session1.Name;
-            else
-                name = "???";
-            _mindSystem.WipeMind(mindId, mind);
-            mindId = _mindSystem.CreateMind(args.UserId, $"Blob Player ({name})");
-            mind = Comp<MindComponent>(mindId);
-        }
-
-        _roleSystem.MindAddRole(mindId, core.MindRoleBlobPrototypeId.Id);
-        SendBlobBriefing(mindId);
-
-        var blobRule = EntityQuery<GameTicking.BlobRuleComponent>().FirstOrDefault();
-        blobRule?.Blobs.Add((mindId,mind));
-
-        _mindSystem.TransferTo(mindId, observer, true, mind: mind);
-        if (_actorSystem.TryGetSessionById(args.UserId, out var session))
-        {
-            _actorSystem.SetAttachedEntity(session, observer, true);
-        }
-
-        _mindSystem.TryAddObjective(mindId, mind, BlobCaptureObjective);
-
-        UpdateUi(observer, core);
-    }
-
-    private void UpdateActions(ICommonSession playerSession, EntityUid uid, BlobObserverComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-        {
-            return;
-        }
-
-        if (component.Core == null || TerminatingOrDeleted(component.Core.Value))
-        {
-            _logger.Error("It is not possible to find a core for the observer!");
-            return;
-        }
-
-        _action.GrantActions(uid, component.Core.Value.Comp.Actions, component.Core.Value.Owner);
-        _viewSubscriberSystem.AddViewSubscriber(component.Core.Value, playerSession); // GrantActions require keep in pvs
-    }
-
-    private void OnPlayerAttached(EntityUid uid, BlobObserverComponent component, PlayerAttachedEvent args)
-    {
-        UpdateActions(args.Player, uid, component);
-        _blobCoreSystem.UpdateAllAlerts(component.Core!.Value);
-    }
-
-    private void OnPlayerDetached(EntityUid uid, BlobObserverComponent component, PlayerDetachedEvent args)
-    {
-        if (component.Core.HasValue && !TerminatingOrDeleted(component.Core.Value))
-        {
-            _viewSubscriberSystem.RemoveViewSubscriber(component.Core.Value, args.Player);
-        }
-    }
-
-    private void OnBlobSwapChem(EntityUid uid,
-        BlobCoreComponent blobCoreComponent,
-        BlobSwapChemActionEvent args)
-    {
-        if (!TryComp<BlobObserverComponent>(args.Performer, out var observerComponent))
-            return;
-
-        TryOpenUi(args.Performer, args.Performer, observerComponent);
-        args.Handled = true;
-    }
-
-    private void OnChemSelected(EntityUid uid, BlobObserverComponent component, BlobChemSwapPrototypeSelectedMessage args)
-    {
-        if (component.Core == null || !TryComp<BlobCoreComponent>(component.Core.Value, out var blobCoreComponent))
-            return;
-
-        if (component.SelectedChemId == args.SelectedId)
-            return;
-
-        if (!_blobCoreSystem.TryUseAbility(component.Core.Value, blobCoreComponent.SwapChemCost))
-            return;
-
-        if (!ChangeChem(uid, args.SelectedId, component))
-            return;
-    }
-
-    private bool ChangeChem(EntityUid uid, BlobChemType newChem, BlobObserverComponent component)
-    {
-        if (component.Core == null || !TryComp<BlobCoreComponent>(component.Core.Value, out var blobCoreComponent))
-            return false;
-
-        var core = component.Core.Value;
-
-        component.SelectedChemId = newChem;
-
-        _blobCoreSystem.ChangeChem(core, newChem, blobCoreComponent);
-        UpdateUi(uid, blobCoreComponent);
-
-        return true;
-    }
-
-    private void TryOpenUi(EntityUid uid, EntityUid user, BlobObserverComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        if (!TryComp(user, out ActorComponent? actor))
-            return;
-
-        _uiSystem.TryToggleUi(uid, BlobChemSwapUiKey.Key, actor.PlayerSession);
-    }
-
-    private void UpdateUi(EntityUid uid, BlobCoreComponent blobCoreComponent)
-    {
-        if (!TryComp<BlobObserverComponent>(uid, out var observerComponent))
-        {
-            return;
-        }
-        var state = new BlobChemSwapBoundUserInterfaceState(blobCoreComponent.ChemСolors, observerComponent.SelectedChemId);
-
-        _uiSystem.SetUiState(uid, BlobChemSwapUiKey.Key, state);
-    }
-
-    // TODO: This is very bad, but it is clearly better than invisible walls, let someone do better.
-    private void OnMoveEvent(EntityUid uid, BlobObserverComponent observerComponent, ref MoveEvent args)
-    {
-        if (observerComponent.IsProcessingMoveEvent)
-            return;
-
-        observerComponent.IsProcessingMoveEvent = true;
-
-        var job = new BlobObserverMover(EntityManager, _blocker, _transform,this, MoverJobTime)
-        {
-            Observer = (uid,observerComponent),
-            NewPosition = args.NewPosition
-        };
-
-        _moveJobQueue.EnqueueJob(job);
+        SubscribeLocalEvent<BlobCoreComponent, PlayerAttachedEvent>(OnCorePlayerAttached, before: [typeof(SharedActionsSystem)]);
     }
 
     public override void Update(float frameTime)
@@ -279,184 +43,96 @@ public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
         _moveJobQueue.Process();
     }
 
-    private void OnSplitCore(EntityUid uid,
-        BlobCoreComponent blobCoreComponent,
-        BlobSplitCoreActionEvent args)
+    private void OnCorePlayerAttached(Entity<BlobCoreComponent> ent, ref PlayerAttachedEvent args)
     {
-        if (args.Handled)
+        var xform = Transform(ent);
+        if (!_gridQuery.HasComp(xform.GridUid))
             return;
 
-        if (!blobCoreComponent.CanSplit)
-        {
-            _popup.PopupEntity(Loc.GetString("blob-cant-split"), args.Performer, args.Performer, PopupType.Large);
+        if (!TerminatingOrDeleted(ent.Comp.Observer))
             return;
-        }
 
-        var gridUid = _transform.GetGrid(args.Target);
+        CreateBlobObserver(ent, args.Player.UserId);
+    }
 
-        if (!TryComp<MapGridComponent>(gridUid, out var grid))
-        {
+    // TODO: This is very bad, but it is clearly better than invisible walls, let someone do better.
+    [SubscribeLocalEvent]
+    private void OnMoveEvent(Entity<BlobObserverComponent> ent, ref MoveEvent args)
+    {
+        if (ent.Comp.IsProcessingMoveEvent)
             return;
-        }
-        var centerTile = _mapSystem.GetLocalTilesIntersecting(gridUid.Value,
-            grid,
-            new Box2(args.Target.Position, args.Target.Position))
-            .ToArray();
 
-        EntityUid? blobTile = null;
+        ent.Comp.IsProcessingMoveEvent = true;
 
-        foreach (var tileref in centerTile)
+        var job = new BlobObserverMover(EntityManager, Xform, this, MoverJobTime)
         {
-            foreach (var ent in _mapSystem.GetAnchoredEntities(gridUid.Value, grid,tileref.GridIndices))
+            Observer = ent,
+            NewPosition = args.NewPosition
+        };
+
+        _moveJobQueue.EnqueueJob(job);
+    }
+
+    public void CreateBlobObserver(Entity<BlobCoreComponent> core, NetUserId userId)
+    {
+        var coords = Transform(core).Coordinates;
+        var observer = PredictedSpawnAtPosition(core.Comp.ObserverBlobPrototype, coords);
+        var observerComp = Comp<BlobObserverComponent>(observer);
+
+        core.Comp.Observer = observer;
+        DirtyField(core, core.Comp, nameof(BlobCoreComponent.Observer));
+
+        observerComp.Core = core;
+        Dirty(observer, observerComp);
+
+        var isNewMind = false;
+        if (!_mind.TryGetMind(core.Owner, out var mindId, out var mind))
+        {
+            if (!_player.TryGetSessionById(userId, out var session) ||
+                session.AttachedEntity is not { } uid ||
+                !_mind.TryGetMind(uid, out mindId, out mind))
             {
-                if (!_tileQuery.HasComponent(ent))
-                    continue;
-                blobTile = ent;
-                break;
+                (mindId, mind) = _mind.CreateMind(userId, "Blob Player");
+                isNewMind = true;
             }
         }
 
-        if (blobTile == null || !HasComp<BlobNodeComponent>(blobTile) || HasComp<BlobCoreComponent>(blobTile))
+        if (!isNewMind)
         {
-            _popup.PopupEntity(Loc.GetString("blob-target-node-blob-invalid"), args.Performer, args.Performer, PopupType.Large);
-            args.Handled = true;
-            return;
+            var name = "???";
+            if (_player.TryGetSessionById(mind.UserId, out var session1))
+                name = session1.Name;
+            _mind.WipeMind(mindId, mind);
+            (mindId, mind) = _mind.CreateMind(userId, $"Blob Player ({name})");
         }
 
-        if (!_blobCoreSystem.TryUseAbility((uid, blobCoreComponent), blobCoreComponent.SplitCoreCost))
+        _role.MindAddRole(mindId, core.Comp.MindRoleBlobPrototypeId.Id);
+        SendBlobBriefing(mindId);
+
+        var ruleExists = false;
+        foreach (var rule in EntityQueryEnumerator<BlobRuleComponent>())
         {
-            args.Handled = true;
-            return;
+            // TODO: check station or something
+            rule.Comp.Blobs.Add((mindId, mind));
+            ruleExists = true;
         }
 
-        QueueDel(blobTile.Value);
-        var newCore = Spawn(blobCoreComponent.TilePrototypes[BlobTileType.Core], args.Target);
-
-        blobCoreComponent.CanSplit = false;
-        _action.RemoveAction(args.Action.Owner);
-
-        if (TryComp<BlobCoreComponent>(newCore, out var newBlobCoreComponent))
+        if (!ruleExists)
         {
-            newBlobCoreComponent.CanSplit = false;
-            newBlobCoreComponent.BlobTiles.Add(newCore);
+            _ticker.StartGameRule(BlobRule, out var rule);
+            Comp<BlobRuleComponent>(rule).Blobs.Add((mindId, mind));
         }
 
-        args.Handled = true;
+        _mind.TransferTo(mindId, observer, true, mind: mind);
+
+        _mind.TryAddObjective(mindId, mind, BlobCaptureObjective);
     }
 
-    private void OnSwapCore(EntityUid uid,
-        BlobCoreComponent blobCoreComponent,
-        BlobSwapCoreActionEvent args)
+    private void SendBlobBriefing(EntityUid mind)
     {
-        if (args.Handled)
-            return;
-
-        var gridUid = _transform.GetGrid(args.Target);
-
-        if (!TryComp<MapGridComponent>(gridUid, out var grid))
+        if (_player.TryGetSessionByEntity(mind, out var session))
         {
-            return;
+            _chat.DispatchServerMessage(session, Loc.GetString("blob-role-greeting"));
         }
-
-        var centerTile = _mapSystem.GetLocalTilesIntersecting(gridUid.Value,
-            grid,
-            new Box2(args.Target.Position, args.Target.Position))
-            .ToArray();
-
-        EntityUid? blobTile = null;
-
-        foreach (var tileRef in centerTile)
-        {
-            foreach (var ent in _mapSystem.GetAnchoredEntities(gridUid.Value, grid, tileRef.GridIndices))
-            {
-                if (!_tileQuery.HasComponent(ent))
-                    continue;
-                blobTile = ent;
-                break;
-            }
-        }
-
-        if (blobTile == null || !HasComp<BlobNodeComponent>(blobTile))
-        {
-            _popup.PopupEntity(Loc.GetString("blob-target-node-blob-invalid"), args.Performer, args.Performer, PopupType.Large);
-            args.Handled = true;
-            return;
-        }
-
-        if (!_blobCoreSystem.TryUseAbility((uid, blobCoreComponent), blobCoreComponent.SwapCoreCost))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        // Swap positions of blob's core and node.
-        var nodePos = Transform(blobTile.Value).Coordinates;
-        var corePos = Transform(uid).Coordinates;
-        _transform.SetCoordinates(uid, nodePos.SnapToGrid());
-        _transform.SetCoordinates(blobTile.Value, corePos.SnapToGrid());
-        var xformCore = Transform(uid);
-        if (!xformCore.Anchored)
-        {
-            _transform.AnchorEntity(uid, xformCore);
-        }
-        var xformNode = Transform(blobTile.Value);
-        if (!xformNode.Anchored)
-        {
-            _transform.AnchorEntity(blobTile.Value, xformNode);
-        }
-
-        // And then swap their BlobNodeComponents, so they will work properly.
-
-        _blobTileSystem.SwapSpecials(
-            (blobTile.Value, EnsureComp<BlobNodeComponent>(blobTile.Value)),
-            (uid, EnsureComp<BlobNodeComponent>(uid)));
-
-        args.Handled = true;
-    }
-
-    private void OnCreateBlobbernaut(EntityUid uid,
-        BlobCoreComponent blobCoreComponent,
-        BlobCreateBlobbernautActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (!_blobCoreSystem.TryGetTargetBlobTile(args, out var blobTile))
-            return;
-
-        if (blobTile == null || !TryComp<BlobFactoryComponent>(blobTile, out var blobFactoryComponent))
-        {
-            _popup.PopupEntity(Loc.GetString("blob-target-factory-blob-invalid"), args.Performer, args.Performer, PopupType.LargeCaution);
-            return;
-        }
-
-        if (blobFactoryComponent.Blobbernaut != null)
-        {
-            _popup.PopupEntity(Loc.GetString("blob-target-already-produce-blobbernaut"), args.Performer, args.Performer, PopupType.LargeCaution);
-            return;
-        }
-
-        if (!_blobCoreSystem.TryUseAbility((uid, blobCoreComponent), blobCoreComponent.BlobbernautCost, args.Target.AlignWithClosestGridTile()))
-            return;
-
-        var ev = new ProduceBlobbernautEvent();
-        RaiseLocalEvent(blobTile.Value, ev);
-
-        _popup.PopupEntity(Loc.GetString("blob-spent-resource", ("point", blobCoreComponent.BlobbernautCost)),
-            blobTile.Value,
-            uid,
-            PopupType.LargeCaution);
-
-        args.Handled = true;
-    }
-
-    private void OnBlobToCore(EntityUid uid,
-        BlobCoreComponent blobCoreComponent,
-        BlobToCoreActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        _transform.SetCoordinates(args.Performer, Transform(uid).Coordinates);
     }
 }

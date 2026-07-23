@@ -56,7 +56,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private StationSystem _station = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
@@ -73,19 +72,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     #endregion
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<EventHereticOpenStore>(OnStore);
-
-        SubscribeLocalEvent<EventHereticLivingHeart>(OnLivingHeart);
-        SubscribeLocalEvent<EventHereticLivingHeartActivate>(OnLivingHeartActivate);
-
-        SubscribeLocalEvent<EventHereticMansusLink>(OnMansusLink);
-        SubscribeLocalEvent<HereticMansusLinkDoAfter>(OnMansusLinkDoafter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStore(EventHereticOpenStore args)
     {
         if (!TryUseAbility(args))
@@ -100,6 +87,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         _store.ToggleUi(args.Performer, ent, store);
     }
 
+    [SubscribeLocalEvent]
     private void OnLivingHeart(EventHereticLivingHeart args)
     {
         if (!TryUseAbility(args))
@@ -122,6 +110,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         _ui.OpenUi((mind, uic), HereticLivingHeartKey.Key, uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnLivingHeartActivate(EventHereticLivingHeartActivate args)
     {
         string loc;
@@ -158,7 +147,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             var isOnStation = targetStation != null && targetStation == ownStation;
 
             var ang = Angle.Zero;
-            if (_mapMan.TryFindGridAt(_transform.GetMapCoordinates(Transform(uid)), out var grid, out _))
+            if (_map.TryFindGridAt(_transform.GetMapCoordinates(Transform(uid)), out var grid, out _))
                 ang = Transform(grid).LocalRotation;
 
             var vector = targetMapCoords.Position - ourMapCoords.Position;
@@ -177,6 +166,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             AudioParams.Default.WithVolume(-3f));
     }
 
+    [SubscribeLocalEvent]
     private void OnMansusLink(EventHereticMansusLink args)
     {
         if (!TryUseAbility(args))
@@ -213,6 +203,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         DoAfter.TryStartDoAfter(dargs);
     }
 
+    [SubscribeLocalEvent]
     private void OnMansusLinkDoafter(HereticMansusLinkDoAfter args)
     {
         if (args.Cancelled || args.Target is not { } target)

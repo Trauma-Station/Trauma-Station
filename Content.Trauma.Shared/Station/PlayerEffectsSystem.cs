@@ -13,7 +13,6 @@ public sealed partial class PlayerEffectsSystem : EntitySystem
 {
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed partial class PlayerEffectsSystem : EntitySystem
     private void OnSpawnCompleted(PlayerSpawnCompleteEvent args)
     {
         var uid = args.Mob;
-        foreach (var proto in _proto.EnumeratePrototypes<PlayerEffectsPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<PlayerEffectsPrototype>())
         {
             if (_conditions.TryConditions(uid, proto.Conditions))
                 _effects.ApplyEffects(uid, proto.Effects, predicted: false);

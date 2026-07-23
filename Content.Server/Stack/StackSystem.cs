@@ -14,8 +14,6 @@ namespace Content.Server.Stack
     [UsedImplicitly]
     public sealed partial class StackSystem : SharedStackSystem
     {
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
-
         #region Spawning
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace Content.Server.Stack
             if (!TryUse(ent, amount))
                 return null;
 
-            if (!_prototypeManager.Resolve(ent.Comp.StackTypeId, out var stackType))
+            if (!ProtoMan.Resolve(ent.Comp.StackTypeId, out var stackType))
                 return null;
 
             // Set the output parameter in the event instance to the newly split stack.
@@ -74,7 +72,7 @@ namespace Content.Server.Stack
         [PublicAPI]
         public EntityUid SpawnAtPosition(int count, ProtoId<StackPrototype> id, EntityCoordinates spawnPosition)
         {
-            var proto = _prototypeManager.Index(id);
+            var proto = ProtoMan.Index(id);
             return SpawnAtPosition(count, proto, spawnPosition);
         }
 
@@ -146,7 +144,7 @@ namespace Content.Server.Stack
                                                        int amount,
                                                        EntityCoordinates spawnPosition)
         {
-            var stackProto = _prototypeManager.Index(stackId);
+            var stackProto = ProtoMan.Index(stackId);
             return SpawnMultipleAtPosition(stackProto.Spawn,
                                             CalculateSpawns(stackProto, amount),
                                             spawnPosition);
@@ -168,7 +166,7 @@ namespace Content.Server.Stack
         [PublicAPI]
         public EntityUid SpawnNextToOrDrop(int amount, ProtoId<StackPrototype> id, EntityUid source)
         {
-            var proto = _prototypeManager.Index(id);
+            var proto = ProtoMan.Index(id);
             return SpawnNextToOrDrop(amount, proto, source);
         }
 
@@ -235,7 +233,7 @@ namespace Content.Server.Stack
                                                          int amount,
                                                          EntityUid target)
         {
-            var stackProto = _prototypeManager.Index(stackId);
+            var stackProto = ProtoMan.Index(stackId);
             return SpawnMultipleNextToOrDrop(stackProto.Spawn,
                                              CalculateSpawns(stackProto, amount),
                                              target);

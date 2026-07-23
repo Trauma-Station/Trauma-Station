@@ -103,10 +103,11 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.6
-        Heat: 0.6
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Ballistic: 0.6
+        Heat: 0.8
         Radiation: 0.6
 
 - type: entity
@@ -133,9 +134,9 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.45
-        Heat: 0.5
-        Caustic: 0.5
+        Piercing: 0.5
+        Ballistic: 0.45
+        Heat: 0.7
         Radiation: 0.5
   - type: ClothingAutoInject
     reagents:
@@ -161,9 +162,9 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.85
+        Piercing: 0.9
+        Ballistic: 0.85
         Heat: 0.8
-        Caustic: 0.6
         Radiation: 0.3
   - type: ModifyDelayedKnockdown
     delayDelta: 1
@@ -189,7 +190,6 @@
         Piercing: 0.8
         Heat: 0.7
         Shock: 0.8
-        Caustic: 0.5
         Radiation: 0.01
   - type: ModifyDelayedKnockdown
     delayDelta: 1

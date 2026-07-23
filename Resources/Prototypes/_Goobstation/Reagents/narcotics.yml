@@ -388,8 +388,7 @@
     Bloodstream:
       effects:
       - !type:Jitter
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyParalysis
         time: 3
         type: Remove
       - !type:ModifyKnockdown

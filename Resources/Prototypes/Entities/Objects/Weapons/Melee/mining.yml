@@ -4,6 +4,10 @@
   id: Pickaxe
   description: Notched to perfection, for jamming it into rocks.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Mining
+  # </Trauma>
   - type: Tag
     tags:
     - Pickaxe
@@ -47,6 +51,14 @@
   id: MiningDrill
   description: Powerful tool used to quickly drill through rocks.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Mining
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 125
+      Plastic: 25
+  # </Trauma>
   - type: Item
     storedRotation: -90
   - type: Tag
@@ -56,22 +68,20 @@
     sprite: Objects/Tools/handdrill.rsi
     state: handdrill
   - type: MeleeWeapon
+    # <Trauma>
+    animationRotation: -90
+    heavyStaminaCost: 0 # Mining drill is for mining
+    # </Trauma>
     autoAttack: true
     angle: 0
-    animationRotation: -90 # WWDP
     wideAnimationRotation: -90
     soundHit:
       path: "/Audio/Items/drill_hit.ogg"
     attackRate: 4
-    heavyStaminaCost: 0 # Shitmed: Mining drill is for mining
     damage:
       types:
         Piercing: 3
         Structural: 15
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 125
-      Plastic: 25
 
 - type: entity
   name: diamond tipped mining drill
@@ -92,7 +102,7 @@
     attackRate: 4
     damage:
       types:
-        #Piercing: 6 # Trauma
+        Piercing: 6
         Structural: 31 # Trauma - was 30
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:

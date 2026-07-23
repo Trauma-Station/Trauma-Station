@@ -38,7 +38,7 @@ public sealed partial class VampireSystem : EntitySystem
     {
         var usable = ent.Comp.UsableBlood;
 
-        _popup.PopupClient($"You have {usable} usable blood", ent.Owner, ent.Owner, PopupType.Large);
+        _popup.PopupEntity($"You have {usable} usable blood", ent.Owner, ent.Owner, PopupType.Large);
     }
 
     private void OnGlare(Entity<VampireComponent> ent, ref GlareAttemptEvent args)

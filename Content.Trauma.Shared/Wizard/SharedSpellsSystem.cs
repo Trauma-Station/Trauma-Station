@@ -94,7 +94,6 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected IRobustRandom Random = default!;
-    [Dependency] protected IMapManager MapManager = default!;
     [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] protected EntityLookupSystem Lookup = default!;
     [Dependency] private RandomTeleportSystem _randomTeleport = default!;
@@ -141,46 +140,9 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] private CommonSiliconSystem _silicon = default!;
     #endregion
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private static readonly EntProtoId BlurryVision = "StatusEffectBlurryVision";
 
-        SubscribeLocalEvent<CluwneCurseEvent>(OnCluwneCurse);
-        SubscribeLocalEvent<BananaTouchEvent>(OnBananaTouch);
-        SubscribeLocalEvent<MimeMalaiseEvent>(OnMimeMalaise);
-        SubscribeLocalEvent<MagicMissileEvent>(OnMagicMissile);
-        SubscribeLocalEvent<DisableTechEvent>(OnDisableTech);
-        SubscribeLocalEvent<SmokeSpellEvent>(OnSmoke);
-        SubscribeLocalEvent<RepulseEvent>(OnRepulse);
-        SubscribeLocalEvent<StopTimeEvent>(OnStopTime);
-        SubscribeLocalEvent<CorpseExplosionEvent>(OnCorpseExplosion);
-        SubscribeLocalEvent<BlindSpellEvent>(OnBlind);
-        SubscribeLocalEvent<BindSoulEvent>(OnBindSoul);
-        SubscribeLocalEvent<PolymorphSpellEvent>(OnPolymorph);
-        SubscribeLocalEvent<MutateSpellEvent>(OnMutate);
-        SubscribeLocalEvent<TeslaBlastEvent>(OnTeslaBlast);
-        SubscribeLocalEvent<LightningBoltEvent>(OnLightningBolt);
-        SubscribeLocalEvent<HomingToolboxEvent>(OnHomingToolbox);
-        SubscribeLocalEvent<SpellCardsEvent>(OnSpellCards);
-        SubscribeLocalEvent<ArcaneBarrageEvent>(OnArcaneBarrage);
-        SubscribeLocalEvent<LesserSummonGunsEvent>(OnLesserSummonGuns);
-        SubscribeLocalEvent<BarnyardCurseEvent>(OnBarnyardCurse);
-        SubscribeLocalEvent<ScreamForMeEvent>(OnScreamForMe);
-        SubscribeLocalEvent<InstantSummonsEvent>(OnInstantSummons);
-        SubscribeLocalEvent<WizardTeleportEvent>(OnTeleport);
-        SubscribeLocalEvent<SummonMobsEvent>(OnSummonMobs);
-        SubscribeLocalEvent<SummonSimiansEvent>(OnSimians);
-        SubscribeLocalEvent<ExsanguinatingStrikeEvent>(OnExsangunatingStrike);
-        SubscribeLocalEvent<ChuuniInvocationsEvent>(OnChuuniInvocations);
-        SubscribeLocalEvent<SwapSpellEvent>(OnSwap);
-        SubscribeLocalEvent<SoulTapEvent>(OnSoulTap);
-        SubscribeLocalEvent<ThrownLightningEvent>(OnThrownLightning);
-        SubscribeLocalEvent<ChargeMagicEvent>(OnCharge);
-        SubscribeLocalEvent<BlinkSpellEvent>(OnBlink);
-        SubscribeLocalEvent<EntityEffectSpellEvent>(OnEntityEffect);
-        SubscribeAllEvent<SetSwapSecondaryTarget>(OnSwapSecondaryTarget);
-    }
-
+    [SubscribeLocalEvent, SubscribeNetworkEvent]
     private void OnSwapSecondaryTarget(SetSwapSecondaryTarget ev)
     {
         var action = GetEntity(ev.Action);
@@ -198,6 +160,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     #region Spells
 
+    [SubscribeLocalEvent]
     private void OnCluwneCurse(CluwneCurseEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -218,6 +181,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBananaTouch(BananaTouchEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -243,6 +207,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnMimeMalaise(MimeMalaiseEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -268,6 +233,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnMagicMissile(MagicMissileEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -310,6 +276,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnDisableTech(DisableTechEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -320,6 +287,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSmoke(SmokeSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -330,6 +298,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnRepulse(RepulseEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -340,6 +309,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStopTime(StopTimeEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -354,6 +324,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnCorpseExplosion(CorpseExplosionEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -408,6 +379,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBlind(BlindSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -424,23 +396,21 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
         _status.TryUpdateStatusEffectDuration(ev.Target, BlindnessSystem.BlindingStatusEffect, ev.BlindDuration);
 
-        _statusOld.TryAddStatusEffect<BlurryVisionComponent>(ev.Target,
-            "BlurryVision",
-            ev.BlurDuration,
-            true);
+        _status.TryUpdateStatusEffectDuration(ev.Target, BlurryVision, ev.BlurDuration);
 
         if (_net.IsServer)
         {
             if (TryComp(ev.Target, out VocalComponent? vocal) && !HasComp<BorgChassisComponent>(ev.Target))
                 Emote(ev.Target, vocal.ScreamId);
-
-            if (ev.Effect != null)
-                Spawn(ev.Effect.Value, Transform(ev.Target).Coordinates);
         }
+
+        if (ev.Effect is { } effect)
+            PredictedSpawnAtPosition(effect, Transform(ev.Target).Coordinates);
 
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBindSoul(BindSoulEvent ev)
     {
         if (ev.Handled || _mobState.IsCritical(ev.Performer))
@@ -522,6 +492,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorph(PolymorphSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -530,6 +501,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = Polymorph(ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnMutate(MutateSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -546,6 +518,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnTeslaBlast(TeslaBlastEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -562,6 +535,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         _teslaBlast.StartCharging(ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnLightningBolt(LightningBoltEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -584,6 +558,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnHomingToolbox(HomingToolboxEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -607,6 +582,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSpellCards(SpellCardsEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -626,6 +602,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnArcaneBarrage(ArcaneBarrageEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -637,6 +614,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnLesserSummonGuns(LesserSummonGunsEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -653,6 +631,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBarnyardCurse(BarnyardCurseEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -704,6 +683,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnScreamForMe(ScreamForMeEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -727,6 +707,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnInstantSummons(InstantSummonsEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -808,6 +789,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnTeleport(WizardTeleportEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -816,6 +798,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         _teleport.OnTeleportSpell(ev.Performer, ev.Action);
     }
 
+    [SubscribeLocalEvent]
     private void OnSummonMobs(SummonMobsEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -826,6 +809,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSimians(SummonSimiansEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -836,6 +820,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnExsangunatingStrike(ExsanguinatingStrikeEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -870,6 +855,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnChuuniInvocations(ChuuniInvocationsEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -900,6 +886,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSwap(SwapSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -944,6 +931,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSoulTap(SoulTapEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -1014,6 +1002,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
             Popup(ev.Performer, "spell-soul-tap-message", PopupType.MediumCaution);
     }
 
+    [SubscribeLocalEvent]
     private void OnThrownLightning(ThrownLightningEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -1029,6 +1018,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnCharge(ChargeMagicEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -1091,6 +1081,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnBlink(BlinkSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -1100,6 +1091,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         ev.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnEntityEffect(EntityEffectSpellEvent ev)
     {
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
@@ -1259,12 +1251,12 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     private void Popup(EntityUid uid, string message, PopupType type = PopupType.Small)
     {
-        _popup.PopupClient(Loc.GetString(message), uid, uid, type);
+        _popup.PopupEntity(Loc.GetString(message), uid, uid, type);
     }
 
     private void PopupLoc(EntityUid uid, string locMessage, PopupType type = PopupType.Small)
     {
-        _popup.PopupClient(locMessage, uid, uid, type);
+        _popup.PopupEntity(locMessage, uid, uid, type);
     }
 
     private bool IsTouchSpellDenied(EntityUid target)
@@ -1318,7 +1310,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         var mapCoords = TransformSystem.ToMapCoordinates(coords);
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
-        var spawnCoords = MapManager.TryFindGridAt(mapCoords, out var gridUid, out _)
+        var spawnCoords = Map.TryFindGridAt(mapCoords, out var gridUid, out _)
             ? TransformSystem.WithEntityId(coords, gridUid)
             : new(Map.GetMapOrInvalid(mapCoords.MapId), mapCoords.Position);
 

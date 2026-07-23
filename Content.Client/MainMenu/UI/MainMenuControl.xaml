@@ -24,7 +24,10 @@ SPDX-License-Identifier: MIT
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   HorizontalExpand="True"
-                  VerticalExpand="True">
+                  VerticalExpand="True"
+                  SeparationOverride="24">
+        <TextureRect Name="Logo"
+                     Stretch="KeepCentered" />
         <PanelContainer StyleClasses="BackgroundPanel">
             <BoxContainer Orientation="Vertical"
                           HorizontalAlignment="Center"
@@ -32,9 +35,8 @@ SPDX-License-Identifier: MIT
                           HorizontalExpand="True"
                           VerticalExpand="True"
                           StyleIdentifier="mainMenuVBox"
-                          Margin="4 16">
-                <TextureRect Name="Logo"
-                             Stretch="KeepCentered" />
+                          MinWidth="320"
+                          Margin="0 4 0 12">
                 <GridContainer Columns="2" Margin="0 4">
                     <Label Text="{Loc 'main-menu-username-label'}" />
                     <LineEdit Name="UsernameBox"

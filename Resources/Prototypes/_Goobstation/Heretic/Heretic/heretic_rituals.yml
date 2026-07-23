@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # TODO: reduce yaml bloat somehow
 
 - type: entity
@@ -33,6 +35,7 @@
           whitelist:
             components:
             - Heretic
+            - HereticBody
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -378,6 +381,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:OnFireCondition
     - !type:SacrificeEffect
       applyOn: Targets
@@ -540,6 +544,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:HasOrgan
         organCategory: Head
         inverted: true
@@ -914,6 +919,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -922,7 +928,7 @@
         result: Targets
         min: 4
         max: 4
-        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+        cancelLoc: heretic-ritual-fail-sacrifice-soul
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1082,6 +1088,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -1090,7 +1097,7 @@
         result: Targets
         min: 3
         max: 3
-        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+        cancelLoc: heretic-ritual-fail-sacrifice-soul
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1243,6 +1250,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:WhitelistCondition
         whitelist:
           components:
@@ -1415,6 +1423,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -1646,6 +1655,50 @@
         LabyrinthHandbook: 1
 
 - type: entity
+  id: RitualSerpentclave
+  name: Wrong Key
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/serpentclave.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: true
+            components:
+            - Insulated
+            - Clothing
+            - FingerprintMask
+          name: heretic-ritual-ingredient-insuls
+        - whitelist:
+            tags:
+            - Wirecutter
+          name: heretic-ritual-ingredient-wirecutter
+        - whitelist:
+            tags:
+            - Screwdriver
+          name: heretic-ritual-ingredient-screwdriver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        Serpentclave: 1
+
+- type: entity
   id: RitualAscensionLock
   name: Unlock the Labyrinth
   components:
@@ -1676,6 +1729,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:HasOrgan
         organCategory: Heart
         inverted: true
@@ -1762,8 +1816,8 @@
   name: Priest's Ritual
   components:
   - type: Sprite
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
+    sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi
+    state: icon
   - type: HereticRitual
     effects:
     - !type:LookupRitualEffect
@@ -1889,6 +1943,7 @@
     state: fire_shark_icon
   - type: HereticRitual
     limit: 6
+    limitGhoulCleanupIterations: 3
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform
@@ -2113,6 +2168,82 @@
         ClothingMaskMadHeretic: 1
 
 - type: entity
+  id: RitualEldritchCoin
+  name: Eldritch Coin
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    state: heretic
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GoldBar
+          name: heretic-ritual-ingredient-gold
+        - whitelist:
+            tags:
+            - SilverBar
+          name: heretic-ritual-ingredient-silver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        EldritchCoin: 1
+
+- type: entity
+  id: RitualIceSpear
+  name: Mysteries of Creation
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/ice_spear.rsi
+    state: spear
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Spear
+          name: heretic-ritual-ingredient-spear
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        SpearIceHeretic: 1
+
+## T2
+- type: entity
   id: RitualUnfathomableCurio
   name: Unfathomable Curio
   components:
@@ -2154,44 +2285,6 @@
       output:
         UnfathomableCurio: 1
 
-- type: entity
-  id: RitualEldritchCoin
-  name: Eldritch Coin
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
-    state: heretic
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SplitIngredientsRitualEffect
-      applyOn: Split
-      conditions:
-      - !type:ProcessIngredientsCondition
-        applyOn: Look
-        deleteEntitiesKey: Delete
-        splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            tags:
-            - GoldBar
-          name: heretic-ritual-ingredient-gold
-        - whitelist:
-            tags:
-            - SilverBar
-          name: heretic-ritual-ingredient-silver
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-    - !type:SpawnRitualEffect
-      applyOn: Platform
-      output:
-        EldritchCoin: 1
-
-## T2
 - type: entity
   id: RitualRusted
   name: Rusted Ritual
@@ -2672,3 +2765,45 @@
       applyOn: Platform
       output:
         MobGhoulMirrorMaid: 1
+
+- type: entity
+  id: RitualSharpMedal
+  name: Sharp Medal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - HandOrgan
+          name: heretic-ritual-ingredient-hand
+          amount: 2
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingNeckSharpMedal: 1

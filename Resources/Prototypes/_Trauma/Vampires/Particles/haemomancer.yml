@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Looks like blood (Note: if we want to expand this to be for everyone, we need to account for their blood color)
 - type: particleEffect
   id: BloodParticles

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Cartridges
 
 - type: entity
@@ -145,7 +147,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Ballistic: 20
   - type: Sprite
     state: bullet
 
@@ -168,7 +170,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 4
+        Ballistic: 4
       armorPenetration: -10
   - type: Sprite
     state: shard
@@ -182,7 +184,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10
         Slash: 5
       armorPenetration: 0.1
   - type: Sprite

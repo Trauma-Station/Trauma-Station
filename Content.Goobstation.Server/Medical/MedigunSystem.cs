@@ -80,8 +80,10 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
 
             var toHeal = component.HealedEntities.ToArray();
             foreach (var healed in toHeal)
+            {
                 if (!MediGunHealingTick(medGunEnt, healed))
                     DisableConnection(medGunEnt, healed);
+            }
 
             if (component.HealedEntities.Count == 0)
             {
@@ -104,6 +106,9 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
     /// </summary>
     private bool MediGunHealingTick(Entity<MediGunComponent> ent, EntityUid healed)
     {
+        if (TerminatingOrDeleted(healed))
+            return false;
+
         var comp = ent.Comp;
 
         // Calculate positions of all targets and remove ones that out of range

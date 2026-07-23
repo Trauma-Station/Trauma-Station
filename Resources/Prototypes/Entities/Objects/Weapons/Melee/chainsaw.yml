@@ -12,11 +12,15 @@
       path: /Audio/Weapons/chainsaw_pull.ogg
     endSound:
       path: /Audio/Weapons/chainsaw_rev.ogg
+  - type: Sharp
   # <Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
+    - Sawing
   - type: Wieldable
     wieldSound: !type:SoundPathSpecifier
       path: /Audio/Weapons/chainsaw_pull.ogg
-  - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/chainsaw.rsi
     state: icon

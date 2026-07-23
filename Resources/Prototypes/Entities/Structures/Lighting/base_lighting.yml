@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
 #==Suffix Guide==
 #Always Powered - light doesn't need power to give off life
 #Empty - on map init, light spawns without bulb
@@ -34,8 +33,8 @@
     state: base
   - type: PointLight
     color: "#FFE4CE" # 5000K color temp
-    energy: 1
-    radius: 12.5
+    energy: 0.8
+    radius: 10
     softness: 1
     offset: "0, -0.5"
   - type: Damageable
@@ -61,15 +60,6 @@
         - TabletopMachineLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
     - trigger:
         !type:DamageTrigger
         damage: 50
@@ -123,6 +113,7 @@
     range: 200
   - type: DeviceLinkSink
     ports:
+      - Control # Trauma
       - On
       - Off
       - Toggle
@@ -295,12 +286,6 @@
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100
-        behaviors: #excess damage, don't spawn entities.
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
           damage: 25
         behaviors:
         - !type:EmptyAllContainersBehaviour
@@ -352,6 +337,7 @@
       burned: burned
   - type: DeviceLinkSink
     ports:
+      - Control # Trauma
       - On
       - Off
       - Toggle
@@ -488,15 +474,6 @@
     node: emergencyLight
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
     - trigger:
         !type:DamageTrigger
         damage: 25

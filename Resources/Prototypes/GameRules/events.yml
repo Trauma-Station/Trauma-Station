@@ -17,7 +17,6 @@
     - id: JobDistributionError
     - id: KudzuGrowth
     - id: MassHallucinations
-    # - id: MimicVendorRule - Trauma, moved to basic antag
     - id: MouseMigration
     - id: PowerGridCheck
     - id: RandomSentience
@@ -35,7 +34,6 @@
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     # <Trauma>
-    - id: MimicVendorRule
     - id: SlimesSpawnHorde
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
@@ -601,17 +599,6 @@
     reoccurrenceDelay: 20
     duration: 1
   - type: IonStormRule
-
-- type: entity
-  id: MimicVendorRule
-  parent: BaseGameRule
-  components:
-  - type: StationEvent
-    earliestStart: 0
-    minimumPlayers: 20
-    maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
-    weight: 5
-  - type: MobReplacementRule
 
 - type: entity
   id: GreytideVirus

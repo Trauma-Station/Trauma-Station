@@ -11,7 +11,7 @@ using Content.Trauma.Shared.Strip.Components;
 namespace Content.Trauma.Shared.Strip;
 
 /// <summary>
-/// Enforces the free-hand strip limit and provides direct bag/storage access verbs.
+/// Enforces the free-hand strip limit and provides direct bag/storage access and quickdraw verbs.
 /// Stripping someone requires a free hand per active doafter.
 /// </summary>
 public sealed partial class TraumaStrippingSystem : EntitySystem
@@ -30,12 +30,18 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
         SubscribeLocalEvent<ActiveStrippingComponent, StrippableDoAfterEvent>(OnStripDoAfterFinished);
         SubscribeLocalEvent<HandsComponent, BeforeStripEvent>(OnBeforeStripEnsureComp);
 
-        InitializeBagAccess();
+        InitializeStripActions();
     }
 
     private void OnBeforeStripEnsureComp(Entity<HandsComponent> user, ref BeforeStripEvent args)
     {
         EnsureComp<ActiveStrippingComponent>(user.Owner);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        UpdateBagAccess();
     }
 
     private void OnStripAttempt(Entity<ActiveStrippingComponent> user, ref DoAfterAttemptEvent<StrippableDoAfterEvent> args)

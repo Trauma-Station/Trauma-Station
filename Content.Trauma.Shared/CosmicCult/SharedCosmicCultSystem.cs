@@ -34,7 +34,6 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -108,12 +107,12 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         {
             if (!TryComp<CosmicCultComponent>(args.User, out var cultComp)) // Only the cultists can absorb entropy
             {
-                _popup.PopupClient(Loc.GetString("cosmic-entropy-interact-noncultist"), args.User, args.User);
+                _popup.PopupEntity(Loc.GetString("cosmic-entropy-interact-noncultist"), args.User, args.User);
                 return;
             }
             if (cultComp.EntropyLocked) // Can't absorb any more
             {
-                _popup.PopupClient(Loc.GetString("cosmicability-siphon-full"), args.User, args.User);
+                _popup.PopupEntity(Loc.GetString("cosmicability-siphon-full"), args.User, args.User);
                 return;
             }
             var total = _stack.GetCount(ent.Owner); // Absorb as much as possible
@@ -123,12 +122,12 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
             var ev = new CosmicSiphonIndicatorEvent();
             RaiseLocalEvent(args.User, ev);
 
-            _popup.PopupClient(Loc.GetString(total == absorbed ? "cosmic-entropy-interact-absorb" : "cosmic-entropy-interact-absorb-partial"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString(total == absorbed ? "cosmic-entropy-interact-absorb" : "cosmic-entropy-interact-absorb-partial"), args.User, args.User);
         }
         else // Not a part of the cult, destroy the mote
         {
             _audio.PlayPredicted(ent.Comp.ShatterSFX, args.User, args.User);
-            _popup.PopupPredicted(
+            _popup.PopupEntity(
                 Loc.GetString("cosmic-entropy-interact-shatter"),
                 Loc.GetString("cosmic-entropy-interact-shatter-others", ("user", Identity.Entity(args.User, EntityManager))),
                 args.User,
@@ -180,7 +179,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     /// <param name="force">If true, unlocks the influence even if the cultist didn't reach the required level yet</param>
     public bool UnlockInfluence(Entity<CosmicCultComponent> ent, ProtoId<InfluencePrototype> influence, bool force = false)
     {
-        if (!_proto.TryIndex(influence, out var proto) || !force && proto.Tier > ent.Comp.CurrentLevel)
+        if (!ProtoMan.TryIndex(influence, out var proto) || !force && proto.Tier > ent.Comp.CurrentLevel)
             return false;
         ent.Comp.OwnedInfluences.Remove(influence);
         ent.Comp.UnlockedInfluences.Add(influence);
@@ -278,7 +277,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         cultComp.EntropyRequirementOffset = cultComp.TotalEntropy;
         Dirty(args.Actor, cultComp);
 
-        foreach (var influenceProto in _proto.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == cultComp.CurrentLevel))
+        foreach (var influenceProto in ProtoMan.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == cultComp.CurrentLevel))
             cultComp.UnlockedInfluences.Add(influenceProto.ID);
 
         switch (cultComp.CurrentLevel)

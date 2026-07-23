@@ -104,6 +104,6 @@ public sealed partial class ChemSpikeMutationSystem : EntitySystem
         if (target != null)
             _popup.PopupEntity(msg, user, user); // projectile embed isn't predicted FSR
         else
-            _popup.PopupClient(msg, user, user);
+            _popup.PopupEntity(msg, user, user);
     }
 }

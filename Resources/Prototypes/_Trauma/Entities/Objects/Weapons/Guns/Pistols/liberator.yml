@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponPistolLiberator
@@ -5,6 +7,8 @@
   description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
   suffix: Full
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Item
     size: Small
     shape:

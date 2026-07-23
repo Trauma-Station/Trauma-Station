@@ -6,6 +6,14 @@
   name: derelict syndicate assasult cyborg
   description: A lean, mean killing machine with access to a variety of deadly modules. This one is in a state of great disrepair.
   components:
+  # <Trauma>
+  - type: Speech
+    speechSounds: SyndieBorg
+  - type: Vocal
+    emoteSounds: UnisexSiliconSyndicate
+  - type: SpeechSynthesis
+    voice: BorgSyndie
+  # </Trauma>
   - type: Sprite
     sprite: _Goobstation/Mobs/Silicon/chassis.rsi
     layers:
@@ -41,13 +49,6 @@
     tags:
     - NuclearOperative
     - SyndicateAgent
-  - type: Speech # Goobstation - Cyborg emote sounds
-    speechSounds: SyndieBorg
-  - type: Vocal # Goobstation - Cyborg emote sounds
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
-  - type: SpeechSynthesis # Corvax-Frontier-Barks
-    voice: BorgSyndie
 
 - type: entity
   id: BorgChassisUrist

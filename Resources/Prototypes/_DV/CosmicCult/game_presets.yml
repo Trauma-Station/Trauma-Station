@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: gamePreset
   id: CosmicCult
   alias:
@@ -14,4 +16,3 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - CosmicCult
-  - CalmTraitor # Trauma

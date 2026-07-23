@@ -111,7 +111,7 @@ public abstract partial class InventorySystem
         // before we drop the item, check that it can be equipped in the first place.
         if (!CanEquip(actor, held.Value, ev.Slot, out var reason))
         {
-            _popup.PopupCursor(Loc.GetString(reason));
+            _popup.PopupCursor(Loc.GetString(reason), actor);
             return;
         }
 
@@ -133,7 +133,7 @@ public abstract partial class InventorySystem
         if (!Resolve(target, ref inventory, false))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString("inventory-component-can-equip-cannot"));
+                _popup.PopupCursor(Loc.GetString("inventory-component-can-equip-cannot"), actor);
             return false;
         }
 
@@ -144,14 +144,14 @@ public abstract partial class InventorySystem
         if (!TryGetSlotContainer(target, slot, out var slotContainer, out var slotDefinition, inventory))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString("inventory-component-can-equip-cannot"));
+                _popup.PopupCursor(Loc.GetString("inventory-component-can-equip-cannot"), actor);
             return false;
         }
 
         if (!force && !CanEquip(actor, target, itemUid, slot, out var reason, slotDefinition, inventory, clothing))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString(reason));
+                _popup.PopupCursor(Loc.GetString(reason), actor);
             return false;
         }
 
@@ -189,7 +189,7 @@ public abstract partial class InventorySystem
         if (!_containerSystem.Insert(itemUid, slotContainer))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"));
+                _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"), actor);
             return false;
         }
 
@@ -408,14 +408,14 @@ public abstract partial class InventorySystem
         if (!Resolve(target, ref inventory, false))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"));
+                _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"), actor);
             return false;
         }
 
         if (!TryGetSlotContainer(target, slot, out var slotContainer, out var slotDefinition, inventory))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"));
+                _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"), actor);
             return false;
         }
 
@@ -427,7 +427,7 @@ public abstract partial class InventorySystem
         if (!force && !CanUnequip(actor, target, slot, out var reason, slotContainer, slotDefinition, inventory))
         {
             if (!silent)
-                _popup.PopupCursor(Loc.GetString(reason));
+                _popup.PopupCursor(Loc.GetString(reason), actor);
             return false;
         }
 

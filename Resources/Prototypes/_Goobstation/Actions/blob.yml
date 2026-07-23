@@ -1,9 +1,6 @@
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+# TODO: make action component for blob points cost that also suffixes the action name
 
 - type: entity
   parent: BaseAction
@@ -15,7 +12,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobFactory
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: TargetAction
     range: 200
@@ -34,7 +31,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobResource
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: TargetAction
     range: 200
@@ -53,7 +50,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobNode
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: TargetAction
     range: 200
@@ -61,6 +58,7 @@
     event: !type:BlobTransformTileActionEvent
       transformFrom: Normal
       tileType: Node
+      requireNode: false
 
 - type: entity
   parent: BaseAction
@@ -69,7 +67,7 @@
   description: Creates a blobbernaut on the selected factory. Each factory can only do this once. The blobbernaut will take damage outside of blob tiles and heal when close to nodes.
   components:
   - type: Action
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobBlobbernaut
@@ -89,7 +87,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobSplit
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: TargetAction
     range: 200
@@ -106,7 +104,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobSwap
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: TargetAction
     range: 200
@@ -123,7 +121,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobToCore
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: InstantAction
     event: !type:BlobToCoreActionEvent
@@ -138,6 +136,7 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobChemSwap
+    itemIconStyle: NoItem
     useDelay: 0.5
   - type: InstantAction
     event: !type:BlobSwapChemActionEvent
@@ -168,10 +167,10 @@
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobDowngrade
     useDelay: 0.5
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem
   - type: TargetAction
     range: 200
   - type: WorldTargetAction
     event: !type:BlobTransformTileActionEvent
-      transformFrom: Invalid
+      transformFrom: null
       tileType: Normal

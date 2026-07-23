@@ -1,25 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Blob;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), Access(typeof(SharedBlobbernautSystem))]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class BlobbernautComponent : Component
 {
-    [DataField("color"), AutoNetworkedField]
-    [Access(Other = AccessPermissions.ReadWrite)]
-    public Color Color = Color.White;
+    [DataField, AutoNetworkedField]
+    public ProtoId<BlobChemPrototype> CurrentChem = "ReactiveSpines";
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("damageFrequency")]
-    public float DamageFrequency = 5;
+    [DataField]
+    public TimeSpan DamageDelay = TimeSpan.FromSeconds(5);
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float NextDamage = 0;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
+    public TimeSpan NextDamage;
 
-    [ViewVariables(VVAccess.ReadOnly), DataField("damage")]
+    [DataField]
     public DamageSpecifier Damage = new()
     {
         DamageDict = new()
@@ -28,7 +28,12 @@ public sealed partial class BlobbernautComponent : Component
         }
     };
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    [Access(Other = AccessPermissions.ReadWrite)]
-    public EntityUid? Factory = default!;
+    [DataField]
+    public EntityUid? Factory;
+
+    /// <summary>
+    /// Scale used with the chemical's attack effects.
+    /// </summary>
+    [DataField]
+    public float AttackEffectsScale = 4f;
 }

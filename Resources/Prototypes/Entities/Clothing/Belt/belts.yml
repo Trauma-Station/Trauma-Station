@@ -1,7 +1,7 @@
 ## Belts that need/have visualizers
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband, BaseSheathCounterAttackMedium] # Trauma - BaseSheathCounterAttackMedium
+  parent: [BaseClothingBeltSheath, BaseSheathCounterAttackMedium, BaseCommandContraband] # Trauma - Added BaseSheathCounterAttackMedium and BaseClothingBeltSheath. Removed ClothingBeltBase and ClothingSlotBase
   id: ClothingBeltSheath
   name: sabre sheath
   description: An ornate sheath designed to hold an officer's blade.
@@ -14,7 +14,6 @@
   - type: Item
     size: Ginormous
   - type: ItemSlots
-    smartEquip: true # Trauma
     slots:
       item:
         name: Sabre
@@ -108,6 +107,7 @@
   name: shoulder holster
   description: 'A holster to carry a handgun and ammo. WARNING: Badasses only.'
   components:
+  - type: QuickDrawable # Trauma
   - type: Sprite
     sprite: Clothing/Belt/holster.rsi
   - type: Clothing

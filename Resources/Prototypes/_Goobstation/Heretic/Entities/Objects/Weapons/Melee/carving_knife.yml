@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: carving knife
   description: A small knife made of cold steel, pure and perfect. Its sharpness can carve into titanium itself - but only few can evoke the dangers that lurk beneath reality.
@@ -20,7 +22,6 @@
         Slash: 10
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Sharp
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
   - type: ThrowingAngle

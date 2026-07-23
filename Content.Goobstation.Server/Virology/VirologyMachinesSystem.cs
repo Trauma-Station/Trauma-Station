@@ -19,7 +19,6 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PowerReceiverSystem _power = default!;
@@ -147,7 +146,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         var report = new StringBuilder();
         report.AppendLine(Loc.GetString("disease-analyzer-report-title"));
         report.AppendLine(Loc.GetString("disease-analyzer-report-genotype", ("genotype", disease.Genotype)));
-        report.AppendLine(Loc.GetString("disease-analyzer-report-type", ("type", _proto.Index(disease.DiseaseType).LocalizedName)));
+        report.AppendLine(Loc.GetString("disease-analyzer-report-type", ("type", ProtoMan.Index(disease.DiseaseType).LocalizedName)));
         report.AppendLine(Loc.GetString("disease-analyzer-report-infection-rate", ("rate", disease.InfectionRate)));
         report.AppendLine(Loc.GetString("disease-analyzer-report-immunity-gain", ("rate", disease.ImmunityGainRate)));
         report.AppendLine(Loc.GetString("disease-analyzer-report-mutation-rate", ("rate", disease.MutationRate)));

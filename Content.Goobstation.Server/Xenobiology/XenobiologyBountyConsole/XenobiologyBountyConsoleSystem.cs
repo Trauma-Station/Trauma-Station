@@ -28,7 +28,6 @@ public sealed partial class XenobiologyBountyConsoleSystem : EntitySystem
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private AccessReaderSystem _access = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ResearchSystem _research = default!;
     [Dependency] private StationXenobiologyBountyDatabaseSystem _xenoDatabase = default!;
 
@@ -72,7 +71,7 @@ public sealed partial class XenobiologyBountyConsoleSystem : EntitySystem
             return;
         }
 
-        if (!_proto.TryIndex(bounty.Bounty, out var bountyProto)
+        if (!ProtoMan.TryIndex(bounty.Bounty, out var bountyProto)
             || bountyProto.PointsAwarded <= 0
             || !_research.TryGetClientServer(console, out var server, out var serverComponent))
             return;
@@ -80,7 +79,7 @@ public sealed partial class XenobiologyBountyConsoleSystem : EntitySystem
         foreach (var bountyEnt in bountyEntities)
             Del(bountyEnt);
 
-        var pointsToAward = !_proto.TryIndex(bounty.Bounty, out var bp) ? 0 : bp.PointsAwarded;
+        var pointsToAward = !ProtoMan.TryIndex(bounty.Bounty, out var bp) ? 0 : bp.PointsAwarded;
         _research.ModifyServerPoints(server.Value, (int) pointsToAward, serverComponent);
         _xenoDatabase.TryRemoveBounty(station, bounty, false, args.Actor);
 
@@ -121,7 +120,7 @@ public sealed partial class XenobiologyBountyConsoleSystem : EntitySystem
     #region Bounty Management
     private bool IsBountyComplete(EntityUid entity, XenobiologyBountyData data, out HashSet<EntityUid> bountyEntities)
     {
-        if (_proto.TryIndex(data.Bounty, out var proto))
+        if (ProtoMan.TryIndex(data.Bounty, out var proto))
             return IsBountyComplete(entity, proto.Entries, out bountyEntities);
 
         bountyEntities = [];
@@ -130,12 +129,12 @@ public sealed partial class XenobiologyBountyConsoleSystem : EntitySystem
 
     public bool IsBountyComplete(EntityUid entity, string id)
     {
-        return _proto.TryIndex<XenobiologyBountyPrototype>(id, out var proto) && IsBountyComplete(entity, proto.Entries);
+        return ProtoMan.TryIndex<XenobiologyBountyPrototype>(id, out var proto) && IsBountyComplete(entity, proto.Entries);
     }
 
     public bool IsBountyComplete(EntityUid entity, ProtoId<XenobiologyBountyPrototype> prototypeId)
     {
-        var prototype = _proto.Index(prototypeId);
+        var prototype = ProtoMan.Index(prototypeId);
 
         return IsBountyComplete(entity, prototype.Entries);
     }

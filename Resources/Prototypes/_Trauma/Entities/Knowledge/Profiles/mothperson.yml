@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Default for any species that has no knowledge profile of its own
 - type: knowledgeProfile
   id: Mothperson
@@ -5,7 +7,6 @@
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
     DoorsKnowledge: 2
     AirlocksKnowledge: 1
     ToysKnowledge: 0
@@ -15,7 +16,6 @@
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
     WallsKnowledge: 2
-    ScienceKnowledge: 0
     WindowsKnowledge: 2
     SmokeablesKnowledge: 0
     # Intelectual Skills

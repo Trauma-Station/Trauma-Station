@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # base area prototype
 # this is like markerbase without marker, clickable and interaction outline to not make mapping very annoying
 - type: entity

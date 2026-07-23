@@ -8,13 +8,11 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Magic;
 using Content.Shared.Popups;
-using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Mimery;
 
 public sealed partial class AdvancedMimerySystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedMagicSystem _magic = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -44,7 +42,7 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
             EnsureComp<MimePowersComponent>(args.User);
         else if (!powers.Enabled || powers.VowBroken)
         {
-            _popup.PopupClient(Loc.GetString(ent.Comp.VowBrokenMessage), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.VowBrokenMessage), args.User, args.User);
             args.Cancelled = true;
         }
     }
@@ -55,7 +53,7 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
             return;
 
         if (ent.Comp.PopupMessage is { } msg)
-            _popup.PopupClient(Loc.GetString(msg), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString(msg), args.User, args.User);
 
         args.Cancelled = true;
     }
@@ -69,7 +67,7 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
         foreach (var position in _magic.GetInstantSpawnPositions(transform, new TargetInFront()))
         {
             args.Handled = true;
-            PredictedSpawnAttachedTo(ent.Comp.WallPrototype, position.SnapToGrid(EntityManager, _mapMan));
+            PredictedSpawnAttachedTo(ent.Comp.WallPrototype, position.SnapToGrid(EntityManager));
         }
 
         if (!args.Handled)
@@ -79,6 +77,6 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
             ("mime", Identity.Entity(ent.Owner, EntityManager)));
         var messageOthers = Loc.GetString("mime-invisible-wall-popup-others",
             ("mime", Identity.Entity(ent.Owner, EntityManager)));
-        _popup.PopupPredicted(messageSelf, messageOthers, ent, ent);
+        _popup.PopupEntity(messageSelf, messageOthers, ent, ent);
     }
 }

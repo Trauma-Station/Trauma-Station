@@ -132,6 +132,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic # Trauma
     - Heat
     - Shock
     - Cold
@@ -238,7 +239,7 @@
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
-        Heat: 0.1 # Trauma, 10% fire damage to fix issues with limb damage, was 1.5
+        Heat: 0.3 # Trauma, was 1.5 - 0.2x multiplier to compensate for limb damage
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -274,3 +275,15 @@
     bloodlossHealDamage:
       types:
         Bloodloss: -1
+
+# Used for mobs that should slightly see in the dark
+- type: entity
+  save: false
+  id: MobNightVision
+  abstract: true
+  components:
+  - type: NightVision
+    action: ActionToggleNightVision # Trauma
+    prioritized: false
+    relayOverlay: false # In case default value ever changes
+    lightingColor: '#FFFFFF33' # Basically makes it impossible for things to be "Pitch black" but can still be dark. # Trauma - was "#FFFFFF15"

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: vampireAbility
   id: RejuvenateI
   onUnlock:
@@ -52,6 +54,7 @@
   - !type:AddComponents
     components:
     - type: NightVision
+      lightingColor: white
   - !type:PopupPredicted
     message: You gain night vision.
     visualType: Large

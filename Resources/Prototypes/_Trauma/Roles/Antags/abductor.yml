@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 #- type: antagSpecifier
 #  abstract: true
 #  id: BaseAbductor
@@ -26,6 +28,35 @@
 #    - AbductorScientistPrefix
 #    - AbductorNames
 #    nameFormat: name-format-standard
+
+- type: antagSpecifier
+  abstract: true
+  id: BaseAbductor
+  unequipOldGear: true
+  briefing:
+    text: abductor-role-greeting
+    color: Green
+    sound: /Audio/_Shitmed/Misc/abductor.ogg
+  components:
+  - type: Abductor
+  - type: ActionGrant
+    actions:
+    - ActionReturnToShip
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Tag
+    tags:
+    - Abductor
+    - AbductorScientist
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+  - type: RandomMetadata
+    nameSegments:
+    - AbductorScientistPrefix
+    - AbductorNames
+    nameFormat: name-format-standard
 
 #- type: antagSpecifier
 #  parent: BaseAbductor

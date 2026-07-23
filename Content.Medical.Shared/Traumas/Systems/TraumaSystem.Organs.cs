@@ -43,7 +43,7 @@ public partial class TraumaSystem
             || args.NewSeverity < args.OldSeverity)
             return;
 
-        _popup.PopupClient(Loc.GetString($"popup-trauma-OrganDamage-{args.NewSeverity.ToString()}", ("part", bodyPart)),
+        _popup.PopupEntity(Loc.GetString($"popup-trauma-OrganDamage-{args.NewSeverity.ToString()}", ("part", bodyPart)),
             body,
             body,
             PopupType.SmallCaution);
@@ -170,7 +170,7 @@ public partial class TraumaSystem
         var nearestSeverity = organ.OrganSeverity;
         foreach (var (severity, value) in organ.IntegrityThresholds.OrderByDescending(kv => kv.Value))
         {
-            if (organ.OrganIntegrity > value)
+            if (organ.OrganIntegrity < value)
                 continue;
 
             nearestSeverity = severity;

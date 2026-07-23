@@ -29,7 +29,7 @@ public sealed partial class ShootOrganActionSystem : EntitySystem
         var user = args.Performer;
         if (RemoveOrgan(ent, user) is not {} organ)
         {
-            _popup.PopupClient(Loc.GetString("MutationTongueSpike-popup-no-organ", ("organ", ent.Comp.Organ)), user, user);
+            _popup.PopupEntity(Loc.GetString("MutationTongueSpike-popup-no-organ", ("organ", ent.Comp.Organ)), user, user);
             return;
         }
 

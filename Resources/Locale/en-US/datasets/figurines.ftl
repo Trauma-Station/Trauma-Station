@@ -51,7 +51,8 @@ figurines-ce-4 = SINGULOOSE!
 figurines-ce-5 = TESLOOSE!
 figurines-ce-6 = Power's out again.
 
-figurines-atmostech-1 = I put plasma in distro.
+# Trauma - plasma -> phoron
+figurines-atmostech-1 = I put phoron in distro.
 figurines-atmostech-2 = I will burn you in a burn chamber.
 figurines-atmostech-3 = Frezon...
 figurines-atmostech-4 = Tritium...
@@ -160,7 +161,8 @@ figurines-hop-7 = Has anyone seen Ian?
 figurines-bartender-1 = Where's my monkey?
 figurines-bartender-2 = Sec won't drink.
 figurines-bartender-3 = I mixed a little something in there...
-figurines-bartender-4 = The recipe? Plasma and vomit. Why?
+# Trauma - plasma -> phoron
+figurines-bartender-4 = The recipe? Phoron and vomit. Why?
 figurines-bartender-5 = I need those toxins for my drinks, officer!
 figurines-bartender-6 = Read the room.
 figurines-bartender-7 = I've got a shotgun.

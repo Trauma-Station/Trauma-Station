@@ -76,7 +76,7 @@ public sealed partial class RushdownSystem : EntitySystem
     }
     private void OnRushdown(Entity<RushdownComponent> ent, ref RushdownEvent args)
     {
-        _popup.PopupClient(Loc.GetString("wraith-voidhound-rushdown-leap"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-voidhound-rushdown-leap"), ent.Owner, ent.Owner);
 
         ent.Comp.IsLeaping = true;
         Dirty(ent);

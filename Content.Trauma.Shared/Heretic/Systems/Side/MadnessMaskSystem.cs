@@ -1,12 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
+using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Flash;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NightVision;
 using Content.Trauma.Shared.Heretic.Components.Side;
+using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -23,6 +28,8 @@ public sealed partial class MadnessMaskSystem : EntitySystem
     [Dependency] private SharedFearSystem _fear = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private SharedFlashSystem _flash = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _targets = new();
 
@@ -30,9 +37,44 @@ public sealed partial class MadnessMaskSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MadnessMaskComponent, BeingUnequippedAttemptEvent>(OnUnequip);
+        Subs.SubscribeWithRelay<MadnessMaskComponent, GetEyeProtectionEvent>(OnEyeProt, baseEvent: false, held: false);
+        Subs.SubscribeWithRelay<MadnessMaskComponent, FlashAttemptEvent>(OnFlashAttempt, baseEvent: false, held: false);
     }
 
+    private void OnFlashAttempt(Entity<MadnessMaskComponent> ent, ref FlashAttemptEvent args)
+    {
+        if (ent.Comp.IsActive && _heretic.IsHereticOrGhoul(args.Target))
+            args.Cancelled = true;
+    }
+
+    private void OnEyeProt(Entity<MadnessMaskComponent> ent, ref GetEyeProtectionEvent args)
+    {
+        if (ent.Comp.IsActive && _heretic.IsHereticOrGhoul(args.Target))
+            args.Protection += TimeSpan.FromSeconds(10);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnToggle(ToggleAbyssalMaskEvent args)
+    {
+        if (args.Action.Comp.Container is not { } uid)
+            return;
+
+        if (!TryComp(uid, out MadnessMaskComponent? comp))
+            return;
+
+        args.Handled = true;
+
+        if (!_heretic.IsHereticOrGhoul(args.Performer))
+        {
+            var time = comp.NonHereticToggleFlahsDuration;
+            _flash.Flash(args.Performer, null, uid, time, 0.5f, stunDuration: time);
+            return;
+        }
+
+        SetActive((uid, comp), !comp.IsActive, args.Performer);
+    }
+
+    [SubscribeLocalEvent]
     private void OnUnequip(Entity<MadnessMaskComponent> ent, ref BeingUnequippedAttemptEvent args)
     {
         var user = args.User;
@@ -43,6 +85,19 @@ public sealed partial class MadnessMaskSystem : EntitySystem
             return;
 
         args.Cancel();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnEquip(Entity<MadnessMaskComponent> ent, ref ClothingGotEquippedEvent args)
+    {
+        SetActive(ent, true, args.Wearer);
+    }
+
+    private void SetActive(Entity<MadnessMaskComponent> ent, bool active, EntityUid wearer)
+    {
+        ent.Comp.IsActive = active;
+        Dirty(ent);
+        _nightVision.SetEnabled(ent.Owner, !active, wearer);
     }
 
     public override void Update(float frameTime)
@@ -56,7 +111,7 @@ public sealed partial class MadnessMaskSystem : EntitySystem
         var query = EntityQueryEnumerator<MadnessMaskComponent, ClothingComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var mask, out var clothing, out var xform))
         {
-            if (clothing.InSlotFlag is null or SlotFlags.POCKET || now < mask.NextUpdate)
+            if (!mask.IsActive || clothing.InSlotFlag is null or SlotFlags.POCKET || now < mask.NextUpdate)
                 continue;
 
             mask.NextUpdate = now + mask.UpdateDelay;

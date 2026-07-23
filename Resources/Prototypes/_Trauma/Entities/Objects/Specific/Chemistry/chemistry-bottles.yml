@@ -3,10 +3,25 @@
 - type: entity
   parent: BaseChemistryBottleFilled
   id: ChemistryBottleBingleJuice
-  suffix: vingle juice
+  suffix: bingle juice
   components:
+  - type: Label
+    currentLabel: reagent-name-binglejuice
   - type: Solution
     solution:
       reagents:
       - ReagentId: BingleJuice
+        Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: ChemistryBottlePlasma
+  suffix: plasma
+  components:
+  - type: Label
+    currentLabel: reagent-name-plasma
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Plasma
         Quantity: 30

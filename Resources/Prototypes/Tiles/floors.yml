@@ -1841,7 +1841,7 @@
 
 - type: tile
   id: FloorMowedAstroGrass
-  parent: [ BaseStationTile, FloorGrass ]
+  parent: FloorAstroGrass # Trauma - inherit astro grass not real grass
   name: tiles-mowed-astro-grass
   isSubfloor: false
   deconstructTools: [ Cutting ]
@@ -1850,7 +1850,7 @@
 
 - type: tile
   id: FloorJungleAstroGrass
-  parent: [ BaseStationTile, FloorGrassJungle ]
+  parent: FloorAstroGrassJungle # Trauma - inherit astro grass not real grass
   name: tiles-jungle-astro-grass
   isSubfloor: false
   deconstructTools: [ Cutting ]

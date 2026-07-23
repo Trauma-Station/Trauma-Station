@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -11,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-abductors
+    issuer: Abductor
   - type: RoleRequirement
     roles:
     - Abductor
@@ -38,7 +34,7 @@
   components:
   - type: Objective
     difficulty: 1
-    issuer: objective-issuer-voices
+    issuer: AbductorVictim
   - type: RoleplayObjective
   - type: RoleRequirement
     roles:
@@ -419,7 +415,7 @@
   parent: BaseAbductorVictimObjective
   id: AbductorVictimEscapeStation
   name: Escape the station.
-  description: You must escape the station! Get the shuttle called!
+  description: You must escape the station!
   components:
   - type: Objective
     icon:

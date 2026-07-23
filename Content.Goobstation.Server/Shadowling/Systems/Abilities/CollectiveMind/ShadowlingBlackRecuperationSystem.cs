@@ -39,7 +39,6 @@ public sealed partial class ShadowlingBlackRecuperationSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
     [Dependency] private ISharedPlayerManager _playerMan = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private EuiManager _euiManager = default!;
 
     public override void Initialize()
@@ -131,7 +130,7 @@ public sealed partial class ShadowlingBlackRecuperationSystem : EntitySystem
             if (newUid == null)
                 return;
 
-            var comps = _protoMan.Index(component.LesserSlingComponents);
+            var comps = ProtoMan.Index(component.LesserSlingComponents);
             EntityManager.AddComponents(newUid.Value, comps);
 
             _body.AddOrganMarking(newUid.Value, component.MarkingOrgan, component.MarkingId, Color.Red, true);

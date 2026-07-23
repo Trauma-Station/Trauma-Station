@@ -11,7 +11,6 @@ namespace Content.Trauma.Server.Genetics.Console;
 
 public sealed partial class GeneticsResearchConsoleSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MutationSystem _mutation = default!;
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private ResearchSystem _research = default!;
@@ -33,7 +32,7 @@ public sealed partial class GeneticsResearchConsoleSystem : EntitySystem
         var difficulty = _mutation.AllMutations[args.Mutation].Difficulty;
         var points = difficulty * ent.Comp.PointsPerDifficulty;
         _research.ModifyServerPoints(server, points);
-        var name = _proto.Index(args.Mutation).Name;
+        var name = ProtoMan.Index(args.Mutation).Name;
         var msg = Loc.GetString("genetics-console-radio-message", ("points", points), ("mutation", name));
         _radio.SendRadioMessage(ent, msg, ent.Comp.Channel, ent);
     }
