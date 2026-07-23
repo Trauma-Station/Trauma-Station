@@ -14,7 +14,7 @@
   - does a flip.
   - does a flip!
   conditions:
-  - !type:HasStatusEffect
+  - !type:HasStatusEffectCondition
     effectProto: BlockVomitEmotesStatusEffect
     inverted: true
   effectsOnEmote:
@@ -22,8 +22,7 @@
     status: EmoteVomitCounterStatusEffect
     updateTime: 1
   - !type:IfElse
-    condition:
-    - !type:CheckCounterStatusEffectCondition
+    condition: !type:CheckCounterStatusEffectCondition
       status: EmoteVomitCounterStatusEffect
       max: 5
     trueEffects:
@@ -86,7 +85,7 @@
   - spins.
   - spins!
   conditions:
-  - !type:HasStatusEffect
+  - !type:HasStatusEffectCondition
     effectProto: BlockVomitEmotesStatusEffect
     inverted: true
   effectsOnEmote:
@@ -94,8 +93,7 @@
     status: EmoteVomitCounterStatusEffect
     updateTime: 1
   - !type:IfElse
-    condition:
-    - !type:CheckCounterStatusEffectCondition
+    condition: !type:CheckCounterStatusEffectCondition
       status: EmoteVomitCounterStatusEffect
       max: 5
     trueEffects:
