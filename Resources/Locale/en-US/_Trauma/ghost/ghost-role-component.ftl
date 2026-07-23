@@ -92,7 +92,7 @@ ghost-role-information-pirate-captain-name = Pirate Scooner Captain
 ghost-role-information-pirate-captain-description = Order your crewmen around. Get rich.
 
 ghost-role-information-syndicate-hunter-name = Fugitive Hunter
-ghost-role-information-syndicate-hunter-name = You are a Syndicate Recovery Agent disguised as a Space Police Officer. You have been tasked with catching the fugitives hiding out in this station. Do not get caught. Do not fail.
+ghost-role-information-syndicate-hunter-description = You are a Syndicate Recovery Agent disguised as a Space Police Officer. You have been tasked with catching the fugitives hiding out in this station. Do not get caught. Do not fail.
 ghost-role-information-syndicate-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Try not to kill them or security in the process.
 
 ghost-role-information-spacepol-hunter-name = Fugitive Hunter

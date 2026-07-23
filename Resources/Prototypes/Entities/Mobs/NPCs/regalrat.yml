@@ -195,9 +195,11 @@
   id: MobRatServant
   parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision ] # Trauma - added MobNightVision
   description: He's da mini rat. He don't make da roolz.
-  categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
+  # categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
   # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 5
   - type: VentCrawler
   - type: LanguageSpeaker
     speaks:
