@@ -31,7 +31,6 @@ public sealed class MutationTest : GameTest
     [Test]
     public async Task AddRemoveAllMutations()
     {
-        var server = Pair.Server;
         var map = await Pair.CreateTestMap();
 
         var factory = SEntMan.ComponentFactory;
@@ -75,25 +74,22 @@ public sealed class MutationTest : GameTest
     [Test]
     public async Task MutationsPolymorphTest()
     {
-        var server = Pair.Server;
-
         var map = await Pair.CreateTestMap();
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             var dorf = SEntMan.SpawnEntity(TestMob, map.GridCoords);
 
             // scan him and compare sequences later
             _genome.ScanGenome(dorf);
-            var started = GetSequenceIds(dorf);
 
             // make him short
             Assert.That(_mutation.AddMutation(dorf, TestMutation),
                 $"Failed to give {SEntMan.ToPrettyString(dorf)} {TestMutation}!");
             Assert.That(_mutation.HasMutation(dorf, TestMutation),
                 $"{TestMutation} was not present in {SEntMan.ToPrettyString(dorf)}!");
-
-            Assert.That(GetSequenceIds(dorf).Contains(TestMutation),
+            var started = GetSequenceIds(dorf);
+            Assert.That(started.Contains(TestMutation),
                 $"{TestMutation} did not get added to already scanned genomes of {SEntMan.ToPrettyString(dorf)}!");
 
             // return to monke
@@ -111,6 +107,8 @@ public sealed class MutationTest : GameTest
 
             // and still have everything scanned
             var ended = GetSequenceIds(monkey);
+            Assert.That(ended.Contains(TestMutation),
+                $"{TestMutation} was not moved to scanned genomes of {SEntMan.ToPrettyString(monkey)}!");
             Assert.That(ended, Is.EquivalentTo(started),
                 "Lost some scanned genome sequences when turning into a monkey!");
 
