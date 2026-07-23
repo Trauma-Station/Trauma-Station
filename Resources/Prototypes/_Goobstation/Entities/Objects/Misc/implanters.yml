@@ -158,6 +158,9 @@
   components:
   - type: Implanter
     implant: NutrimentPumpImplant
+    whitelist:
+      components:
+      - HumanoidProfile
 
 - type: entity
   id: StypticStimulatorImplanter
