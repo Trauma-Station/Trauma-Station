@@ -141,7 +141,7 @@
   - type: FactionException
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound
   - type: InteractionPopup
     successChance: 0.4
     interactSuccessString: petting-success-generic
@@ -715,6 +715,8 @@
   name: dart frog
   description: A brilliantly colored amphibian. Its skin secretes a potent paralytic toxin.
   components:
+  - type: Penetratable
+    penetrateDamage: 3
   - type: ZombieImmune
   - type: Extractable
     grindableSolutionName: poison
