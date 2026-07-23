@@ -1,24 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.Animations;
 using Content.Client.DamageState;
 using Content.Client.Stylesheets.Colorspace;
 using Content.Goobstation.Shared.Emoting;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Trauma.Common.Wizard;
 using Robust.Client.Animations;
 using Robust.Shared.Animations;
-using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Emoting;
 
 public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 {
     [Dependency] private AnimationPlayerSystem _anim = default!;
-    [Dependency] private CommonRaysSystem _rays = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private TransformSystem _transform = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private BodySystem _body = default!;
 
@@ -30,30 +24,6 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         {HumanoidVisualEmoteLayers.Tongue, "Tongue"},
         {HumanoidVisualEmoteLayers.Cry, "Eyes"},
     };
-
-    [SubscribeNetworkEvent]
-    public void OnBibleSmite(BibleFartSmiteEvent args)
-    {
-        EntityUid uid = GetEntity(args.Bible);
-        if (!_timing.IsFirstTimePredicted || uid == EntityUid.Invalid)
-            return;
-
-        var rays = _rays.DoRays(_transform.GetMapCoordinates(uid),
-            Color.LightGoldenrodYellow,
-            Color.AntiqueWhite,
-            10,
-            15,
-            minMaxRadius: new Vector2(3f, 6f),
-            minMaxEnergy: new Vector2(2f, 4f),
-            proto: "EffectRayCharge",
-            server: false);
-
-        if (rays == null)
-            return;
-
-        var track = EnsureComp<TrackUserComponent>(rays.Value);
-        track.User = uid;
-    }
 
     public void PlayEmote(EntityUid uid, Animation anim, string animationKey = "emoteAnimKeyId")
     {
