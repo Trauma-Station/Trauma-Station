@@ -64,14 +64,15 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     [SubscribeNetworkEvent]
     private void OnVisualEmote(AnimationVisualEmoteEvent args)
     {
-        var ent = GetEntity(args.Entity);
+        if (!TryGetEntity(args.Entity, out var ent))
+            return;
 
-        if (!TryComp(ent, out SpriteComponent? sprite) ||
-            !_sprite.TryGetLayer((ent, sprite), args.Layer, out var layer, false) || layer.Visible == args.SetVisible)
+        if (!TryComp(ent.Value, out SpriteComponent? sprite) ||
+            !_sprite.TryGetLayer((ent.Value, sprite), args.Layer, out var layer, false) || layer.Visible == args.SetVisible)
             return;
 
         var ev = new AnimationVisualEmoteAttemptEvent(args.Layer);
-        RaiseLocalEvent(ent, ref ev);
+        RaiseLocalEvent(ent.Value, ref ev);
         if (ev.Cancelled)
             return;
 
@@ -94,13 +95,14 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 }
             }
         };
-        PlayEmote(ent, a, args.Key);
+        PlayEmote(ent.Value, a, args.Key);
     }
 
     [SubscribeNetworkEvent]
     private void OnFlip(AnimationFlipEmoteEvent args)
     {
-        var ent = GetEntity(args.Entity);
+        if (!TryGetEntity(args.Entity, out var ent))
+            return;
 
         var a = new Animation
         {
@@ -121,13 +123,14 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 }
             }
         };
-        PlayEmote(ent, a);
+        PlayEmote(ent.Value, a);
     }
 
     [SubscribeNetworkEvent]
     private void OnSpin(AnimationSpinEmoteEvent args)
     {
-        var ent = GetEntity(args.Entity);
+        if (!TryGetEntity(args.Entity, out var ent))
+            return;
 
         var a = new Animation
         {
@@ -154,13 +157,14 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 }
             }
         };
-        PlayEmote(ent, a, "emoteAnimSpin");
+        PlayEmote(ent.Value, a, "emoteAnimSpin");
     }
 
     [SubscribeNetworkEvent]
     private void OnJump(AnimationJumpEmoteEvent args)
     {
-        var ent = GetEntity(args.Entity);
+        if (!TryGetEntity(args.Entity, out var ent))
+            return;
 
         var a = new Animation
         {
@@ -181,15 +185,16 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 }
             }
         };
-        PlayEmote(ent, a);
+        PlayEmote(ent.Value, a);
     }
 
     [SubscribeNetworkEvent]
     private void OnTweak(AnimationTweakEmoteEvent args)
     {
-        var ent = GetEntity(args.Entity);
+        if (!TryGetEntity(args.Entity, out var ent))
+            return;
 
-        if (!TryComp(ent, out AnimatedEmotesComponent? comp) || !TryComp(ent, out SpriteComponent? sprite))
+        if (!TryComp(ent.Value, out AnimatedEmotesComponent? comp) || !TryComp(ent.Value, out SpriteComponent? sprite))
             return;
 
         if (TryGetStateId(sprite, comp.TweakState) is not { } stateId)
@@ -210,15 +215,16 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 }
             }
         };
-        PlayEmote(ent, a);
+        PlayEmote(ent.Value, a);
     }
 
     [SubscribeNetworkEvent]
     private void OnFlex(AnimationFlexEmoteEvent args)
     {
-        var ent = GetEntity(args.Entity);
+        if (!TryGetEntity(args.Entity, out var ent))
+            return;
 
-        if (!TryComp(ent, out AnimatedEmotesComponent? comp) || !TryComp(ent, out SpriteComponent? sprite))
+        if (!TryComp(ent.Value, out AnimatedEmotesComponent? comp) || !TryComp(ent.Value, out SpriteComponent? sprite))
             return;
 
         if (TryGetStateId(sprite, comp.FlexState) is not { } flexId ||
@@ -254,7 +260,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
                 }
             }
         };
-        PlayEmote(ent, a);
+        PlayEmote(ent.Value, a);
     }
 
     private RSI.StateId? TryGetStateId(SpriteComponent sprite, string? state)

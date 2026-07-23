@@ -6,5 +6,5 @@ namespace Content.Trauma.Common.EntityEffects;
 public abstract partial class EntityEffectNetworkEvent : EntityEventArgs
 {
     [DataField]
-    public NetEntity Entity;
+    public NetEntity? Entity;
 }
