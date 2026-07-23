@@ -2849,17 +2849,11 @@
     thresholds:
       0: Alive
       120: Dead # Trauma - was 90
-      120: Dead # Trauma - was 90 / R.O.N. Station - Might be changed later, this comment will be here just incase
   - type: SolutionManager
     solutions:
     - SolutionVenomSpider
-#  - type: SolutionRegeneration # Trauma - moved to solution SolutionVenomSpider
-#    generated:
-#      reagents:
-#      - ReagentId: Mechanotoxin
-#        Quantity: 1
   - type: MeleeChemicalInjector
-    transferAmount: 0.5 # Trauma - was 0.75 / R.O.N. Station - Set Value To 0.5 from 1.5
+    transferAmount: 1.5 # Trauma - was 0.75
     solution: melee
   - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
