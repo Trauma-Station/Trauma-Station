@@ -9,6 +9,7 @@ using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Shared.JobListings;
 using Content.Shared.Trigger.Systems;
+using Content.Server.Power.EntitySystems;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -23,6 +24,7 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
     {
         base.Initialize();
         SubscribeLocalEvent<StealConditionRequireScanComponent, ObjectiveGetProgressEvent>(OnGetProgress, after: [typeof(StealConditionSystem)]);
+        SubscribeLocalEvent<TriggerOnScanComponent, ScanalyzerScanFinishedEvent>(OnScan);
     }
 
     /// <summary>
@@ -51,9 +53,6 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
             return;
         RegisterScan((mind, mindComp), target);
         _jobs.UpdateUis((mind, mindComp));
-
-        if (TryComp<TriggerOnScanComponent>(entity.Owner, out var triggerComp))
-            _trigger.Trigger(entity.Owner, user, triggerComp.KeyOut, false);
     }
 
     private void OnGetProgress(Entity<StealConditionRequireScanComponent> entity, ref ObjectiveGetProgressEvent args)
@@ -64,16 +63,9 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
         if (IsScanned((args.MindId, args.Mind), stealComp.StealGroup))
             args.Progress = 1.0f;
     }
+
+    private void OnScan(Entity<TriggerOnScanComponent> entity, ref ScanalyzerScanFinishedEvent args)
+    {
+        _trigger.Trigger(entity.Owner, args.User, entity.Comp.KeyOut, false);
+    }
 }
-
-/// <summary>
-/// Raised on the scanalyzer entity before it tries to do a scan.
-/// </summary>
-[ByRefEvent]
-public record struct AttemptScanalyzerScanEvent(EntityUid Target, bool Cancelled = false);
-
-/// <summary>
-/// Raised on the scanalyzer entity once a scan has finished.
-/// </summary>
-[ByRefEvent]
-public record struct ScanalyzerScanFinishedEvent(EntityUid Target);

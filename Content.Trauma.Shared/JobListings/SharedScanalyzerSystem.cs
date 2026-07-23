@@ -3,10 +3,10 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
-using Content.Shared.Mind;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Popups;
+using Content.Shared.Power.EntitySystems;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -16,9 +16,10 @@ namespace Content.Trauma.Shared.JobListings;
 /// </summary>
 public abstract partial class SharedScanalyzerSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager _proto = default!;
-    [Dependency] protected SharedDoAfterSystem _doAfter = default!;
-    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {
@@ -26,6 +27,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         SubscribeLocalEvent<ScanalyzerComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<StealTargetComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<ScanalyzerComponent, ScanalyzerScanDoAfterEvent>(OnScan);
+        SubscribeLocalEvent<ScanalyzerRequiresPowerComponent, AttemptScanalyzerScanEvent>(OnAttemptScanWhenPowered);
     }
 
     /// <summary>
@@ -58,7 +60,10 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         return true;
     }
 
-    protected virtual void AfterScan(Entity<ScanalyzerComponent> entity, EntityUid user, ProtoId<StealTargetGroupPrototype> target) {}
+    protected virtual void AfterScan(Entity<ScanalyzerComponent> entity, EntityUid user, ProtoId<StealTargetGroupPrototype> target)
+    {
+
+    }
 
     private void OnInteractUsing(Entity<StealTargetComponent> entity, ref InteractUsingEvent args)
     {
@@ -69,15 +74,22 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         if (!CanScan((args.Used, scanalyzer), entity))
             return;
 
+        var ev = new AttemptScanalyzerScanEvent(entity.Owner);
+        RaiseLocalEvent(args.Used, ref ev);
+        if (ev.Cancelled)
+            return;
+
         StartScan((args.Used, scanalyzer), args.User, entity.Owner);
         args.Handled = true;
     }
 
     private void OnScan(Entity<ScanalyzerComponent> entity, ref ScanalyzerScanDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled || args.Cancelled || args.Target is null)
             return;
         if (!TryComp<StealTargetComponent>(args.Target, out var steal))
+            return;
+        if (!CanScan(entity, (args.Target.Value, steal)))
             return;
 
         entity.Comp.Used = true;
@@ -85,6 +97,8 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("scanalyzer-popup-used"), args.User, PopupType.Medium);
 
         AfterScan(entity, args.User, steal.StealGroup);
+        var ev = new ScanalyzerScanFinishedEvent(args.Target.Value, args.User);
+        RaiseLocalEvent(entity, ref ev);
         args.Handled = true;
     }
 
@@ -98,7 +112,27 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
             : Loc.GetString("scanalyzer-examine-not-used"));
     }
 
+    private void OnAttemptScanWhenPowered(Entity<ScanalyzerRequiresPowerComponent> entity, ref AttemptScanalyzerScanEvent args)
+    {
+        if (!_power.IsPowered(args.Target))
+            args.Cancelled = true;
+    }
 }
 
+/// <summary>
+/// Do after even for scanning an item.
+/// </summary>
 [Serializable, NetSerializable]
 public sealed partial class ScanalyzerScanDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// Raised on the scanalyzer entity before it tries to do a scan.
+/// </summary>
+[ByRefEvent]
+public record struct AttemptScanalyzerScanEvent(EntityUid Target, bool Cancelled = false);
+
+/// <summary>
+/// Raised on the scanalyzer entity once a scan has finished.
+/// </summary>
+[ByRefEvent]
+public record struct ScanalyzerScanFinishedEvent(EntityUid Target, EntityUid User);

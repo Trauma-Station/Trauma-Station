@@ -71,6 +71,7 @@
   components:
   - type: Scanalyzer
     stealTarget: CommsComputer
+  - type: ScanalyzerRequiresPower
   - type: TriggerOnScan
   - type: AddGameRuleOnTrigger
     gameRule: SyndicateBattlecruiserRule
