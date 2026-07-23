@@ -3,6 +3,7 @@ using Content.Trauma.Common.Nutrition;
 using Content.Trauma.Common.Heretic;
 using Content.Shared.Clothing.EntitySystems;
 // </Trauma>
+using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
@@ -94,6 +95,9 @@ public sealed partial class IngestionSystem : EntitySystem
         // Misc
         SubscribeLocalEvent<EdibleComponent, AttemptShakeEvent>(OnAttemptShake);
         SubscribeLocalEvent<EdibleComponent, BeforeToolRefinedEvent>(OnBeforeToolRefined);
+
+        // Actions
+        SubscribeLocalEvent<ActionRequireMouthUncoveredComponent, ActionAttemptEvent>(OnMouthUncoveredActionAttempt);
 
         InitializeBlockers();
         InitializeUtensils();
@@ -551,6 +555,12 @@ public sealed partial class IngestionSystem : EntitySystem
     private void OnAttemptShake(Entity<EdibleComponent> entity, ref AttemptShakeEvent args)
     {
         if (IsEmpty(entity))
+            args.Cancelled = true;
+    }
+
+    private void OnMouthUncoveredActionAttempt(Entity<ActionRequireMouthUncoveredComponent> ent, ref ActionAttemptEvent args)
+    {
+        if (!HasMouthAvailable(args.User, args.User, ent.Comp.Slots))
             args.Cancelled = true;
     }
 }
