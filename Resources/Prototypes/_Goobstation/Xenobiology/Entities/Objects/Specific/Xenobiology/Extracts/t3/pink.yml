@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: PinkSlimeExtract
   parent: BaseSlimeExtract
@@ -24,12 +26,9 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:RelaySolution
-        name: extract
-        effects:
-        - !type:AdjustReagent
-          reagent: XenobioJellyPink
-          amount: 10
+      - !type:AdjustReagent
+        reagent: XenobioJellyPink
+        amount: 10
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:

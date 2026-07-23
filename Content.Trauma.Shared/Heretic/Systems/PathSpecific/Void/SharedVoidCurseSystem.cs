@@ -16,15 +16,7 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<VoidCurseComponent, TemperatureChangeAttemptEvent>(OnTemperatureChangeAttempt);
-        SubscribeLocalEvent<VoidCurseComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
-        SubscribeLocalEvent<VoidCurseComponent, ComponentRemove>(OnRemove);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<VoidCurseComponent> ent, ref ComponentRemove args)
     {
         if (TerminatingOrDeleted(ent))
@@ -33,18 +25,20 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
         _modifier.RefreshMovementSpeedModifiers(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnTemperatureChangeAttempt(Entity<VoidCurseComponent> ent, ref TemperatureChangeAttemptEvent args)
     {
         if (!args.Cancelled && ent.Comp.Stacks >= ent.Comp.MaxStacks && args.CurrentTemperature > args.LastTemperature)
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnRefreshMoveSpeed(Entity<VoidCurseComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var modifier = 1f - ent.Comp.Stacks * 0.14f;
+        var modifier = 1f - ent.Comp.Stacks * 0.07f;
         if (TryComp(ent, out TemperatureSpeedComponent? tempSpeed) &&
-            tempSpeed.CurrentSpeedModifier != null && tempSpeed.CurrentSpeedModifier != 0f)
-            modifier /= 1.2f * tempSpeed.CurrentSpeedModifier.Value;
+            tempSpeed.CurrentSpeedModifier is { } current && current != 0f)
+            modifier /= 1.2f * current;
 
         modifier = Math.Clamp(modifier, 0f, 1f);
 

@@ -4,6 +4,7 @@ using Content.Shared.Throwing;
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Server.Atmos.Reactions;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Shared.Atmos;
@@ -30,7 +31,6 @@ namespace Content.Server.Atmos.EntitySystems;
 [UsedImplicitly]
 public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IParallelManager _parallel = default!;
@@ -74,6 +74,7 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         CacheDecals();
+        CacheGases();
     }
 
     public override void Shutdown()
@@ -95,6 +96,8 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     {
         if (ev.WasModified<DecalPrototype>())
             CacheDecals();
+        if (ev.WasModified<GasReactionPrototype>())
+            CacheGases();
     }
 
     public override void Update(float frameTime)

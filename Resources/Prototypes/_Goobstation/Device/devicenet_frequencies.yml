@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Used by virology servers to send data over to receivers
 - type: deviceFrequency
   id: VirologyServer

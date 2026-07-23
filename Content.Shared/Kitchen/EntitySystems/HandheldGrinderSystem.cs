@@ -16,7 +16,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Kitchen.EntitySystems;
 
-internal sealed partial class HandheldGrinderSystem : EntitySystem
+public sealed partial class HandheldGrinderSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private INetManager _net = default!;
@@ -66,7 +66,13 @@ internal sealed partial class HandheldGrinderSystem : EntitySystem
         }
 
         if (_reagentGrinder.GetGrinderSolution(item, ent.Comp.Program) is null)
+        // <Trauma> - user feedback..?
+        {
+            var verb = ent.Comp.Program == GrinderProgram.Grind ? "grind" : "juice";
+            _popup.PopupClient("You can't grind that!", ent, args.User);
             return;
+        }
+        // </Trauma>
 
         if (!_solution.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.GrinderSolution))
             return;

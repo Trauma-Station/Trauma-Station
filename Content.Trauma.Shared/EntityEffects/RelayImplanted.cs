@@ -31,7 +31,7 @@ public sealed partial class RelayImplantedEffectSystem : EntityEffectSystem<Subd
             return;
 
         _data.CopyData(ent, user);
-        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale, args.User);
+        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale, args.User, args.Predicted);
         _data.ClearData(user);
     }
 }

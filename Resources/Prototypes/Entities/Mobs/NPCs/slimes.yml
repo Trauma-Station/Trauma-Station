@@ -1,7 +1,7 @@
 - type: entity
   name: basic slime
-  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
   id: BaseMobAdultSlimes
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision ]
   abstract: true
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
@@ -37,9 +37,8 @@
     tags:
     - FootstepSound
     - DoorBumpOpener
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSlime
       amount: 2
   - type: Respirator
@@ -125,10 +124,7 @@
     - Bubblish
     - TauCetiBasic
   - type: Vocal
-    sounds:
-      Male: AnimalSlime
-      Female: AnimalSlime
-      Unsexed: AnimalSlime
+    emoteSounds: AnimalSlime
   # </Trauma>
   - type: GhostTakeoverAvailable
   - type: GhostRole
@@ -136,8 +132,7 @@
     name: ghost-role-information-slimes-name
     description: ghost-role-information-slimes-description
     rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
@@ -177,8 +172,7 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-      raffle:
-        settings: short
+      raffle: null # Trauma - removed mob raffle timer
 
 - type: entity
   name: green slime
@@ -217,8 +211,7 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-      raffle:
-        settings: short
+      raffle: null # Trauma - removed mob raffle timer
 
 - type: entity
   name: yellow slime
@@ -256,5 +249,4 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-      raffle:
-        settings: short
+      raffle: null # Trauma - removed mob raffle timer

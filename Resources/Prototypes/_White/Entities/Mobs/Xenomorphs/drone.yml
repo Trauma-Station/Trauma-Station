@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone, BaseXenoTailed ]
   id: BaseMobXenomorphDrone
@@ -26,7 +28,7 @@
   #   - XenomorphDrone
 
 - type: entity
-  parent: BaseMobXenomorphDrone
+  parent: [ BaseMobXenomorphDrone, BaseXenomorphGhostRole ]
   id: MobXenomorphDrone
   components:
   - type: XenomorphEvolution
@@ -34,17 +36,8 @@
     evolvesTo:
     - prototype: MobXenomorphPraetorian
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-drone-name
     description: ghost-role-information-xenomorph-drone-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
   - type: UserInterface
     interfaces:
       enum.StrippingUiKey.Key:

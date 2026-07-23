@@ -29,7 +29,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] protected IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected IPrototypeManager _proto = default!;
     [Dependency] protected ISharedPlayerManager _player = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedLanguageSystem _language = default!;
@@ -42,13 +41,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// Every knowledge prototype and its data.
     /// </summary>
     public Dictionary<EntProtoId, KnowledgeComponent> AllKnowledges = new();
-    public static readonly LocId[] MasteryNames = [
-        "unskilled",
-        "novice",
-        "average",
-        "advanced",
-        "expert",
-        "master"
+    public static readonly string[] MasteryNames = [
+        "Unskilled",
+        "Novice",
+        "Average",
+        "Advanced",
+        "Expert",
+        "Master"
     ];
 
     private bool _skillGain;
@@ -61,21 +60,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         base.Initialize();
 
-        InitializeLanguage();
         InitializeMartialArts();
+        InitializeLanguage();
         InitializeOnWear();
-
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnContainerShutdown);
-        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
-        SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
-        SubscribeLocalEvent<KnowledgeContainerComponent, TransferredToCloneEvent>(OnCloneTransfer);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, PolymorphedEvent>(OnPolymorphed);
-        SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
@@ -117,11 +104,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
     {
         EnsureContainer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Container is { } container)
@@ -168,37 +157,44 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.Holder));
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganInserted(Entity<KnowledgeContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
         LinkContainer(args.Target, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganRemoved(Entity<KnowledgeContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
         UnlinkContainer(args.Target, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBorgBrainInserted(Entity<KnowledgeContainerComponent> ent, ref BorgBrainInsertedEvent args)
     {
         LinkContainer(args.Chassis, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBorgBrainRemoved(Entity<KnowledgeContainerComponent> ent, ref BorgBrainRemovedEvent args)
     {
         UnlinkContainer(args.Chassis, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnCloneTransfer(Entity<KnowledgeContainerComponent> ent, ref TransferredToCloneEvent args)
     {
         TransferKnowledge(ent, args.Cloned);
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<KnowledgeHolderComponent> ent, ref PolymorphedEvent args)
     {
         if (ent.Owner == args.OldEntity)
             TransferKnowledge(ent, args.NewEntity);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindAdded(Entity<KnowledgeHolderComponent> ent, ref MindAddedMessage args)
     {
         // all player-controlled mobs can use knowledge
@@ -206,6 +202,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         EnsureKnowledgeContainer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
@@ -216,7 +213,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         AllKnowledges.Clear();
         var name = Factory.GetComponentName<KnowledgeComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: replace with TryComp after engine update
             if (!proto.TryGetComponent<KnowledgeComponent>(name, out var comp))
@@ -270,7 +267,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (GetKnowledge(ent, id) is not { } unit)
         {
             // Can't add it with experience if you can't comprehend complexity.
-            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+            if (ProtoMan.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
                 return;
 
             // if you don't have it, you have a small change to learn it when gaining some xp
@@ -338,10 +335,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public (ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
     {
-        var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
+        var meta = MetaData(ent);
+        var name = meta.EntityName;
+        var desc = meta.EntityDescription;
+        var levelStr = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)));
+        var knowledgeInfo = new KnowledgeInfo(name, desc, levelStr, ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
         // TODO: make this an event raised on ent
-        var name = Name(ent);
-        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
         if (_langQuery.TryComp(ent, out var languageKnowledge))
         {
             var locKey = (languageKnowledge.Speaks, languageKnowledge.Understands) switch
@@ -479,6 +478,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetContainer(target) is { } ent
             ? GetKnowledge(ent, id)
             : null;
+
+    /// <summary>
+    /// Get the net level of knowledge an entity has for an ID, defaulting to 0 if missing.
+    /// </summary>
+    public int GetKnowledgeLevel(EntityUid target, [ForbidLiteral] EntProtoId id)
+        => GetContainer(target) is { } ent
+            ? GetKnowledge(ent, id)?.Comp.NetLevel ?? 0
+            : 0;
 
     public Entity<KnowledgeComponent>? GetKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)
         => ent.Comp.KnowledgeDict.TryGetValue(id, out var unit) && _query.TryComp(unit, out var comp)
@@ -644,16 +651,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
     public override string GetMasteryString(int mastery)
-        => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
+        => MasteryNames[Math.Clamp(mastery, 0, 5)];
 
     public override int GetMastery(int level)
         => level switch
         {
             >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
-            >= 76 => 4,
-            >= 51 => 3,
-            >= 26 => 2,
+            >= 75 => 4,
+            >= 50 => 3,
+            >= 25 => 2,
             >= 1 => 1,
             _ => 0,
         };
@@ -675,9 +682,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
-            >= 4 => 76,
-            >= 3 => 51,
-            >= 2 => 26,
+            >= 4 => 75,
+            >= 3 => 50,
+            >= 2 => 25,
             >= 1 => 1,
             _ => 0,
         };

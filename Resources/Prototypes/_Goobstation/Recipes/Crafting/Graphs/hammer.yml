@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Total cost: 2 wood, 3 steel
 - type: constructionGraph
   id: Hammer

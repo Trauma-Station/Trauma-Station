@@ -12,7 +12,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HereticCombatMarkComponent, ComponentStartup>(OnStart);
+        SubscribeLocalEvent<HereticCombatMarkComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HereticCombatMarkComponent, ComponentRemove>(OnRemove);
 
         SubscribeLocalEvent<HereticCosmicMarkComponent, ComponentRemove>(OnCosmicRemove);
@@ -24,17 +24,17 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         var now = Timing.CurTime;
 
-        foreach (var comp in EntityQuery<HereticCombatMarkComponent>())
+        var query = EntityQueryEnumerator<HereticCombatMarkComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
-            if (now > comp.Timer)
-                RemComp(comp.Owner, comp);
+            if (now > comp.NextDisappear)
+                RemComp(uid, comp);
         }
     }
 
-    private void OnStart(Entity<HereticCombatMarkComponent> ent, ref ComponentStartup args)
+    private void OnMapInit(Entity<HereticCombatMarkComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.Timer == TimeSpan.Zero)
-            ent.Comp.Timer = Timing.CurTime + TimeSpan.FromSeconds(ent.Comp.DisappearTime);
+        ent.Comp.NextDisappear = Timing.CurTime + ent.Comp.DisappearTime;
     }
 
     private void OnRemove(Entity<HereticCombatMarkComponent> ent, ref ComponentRemove args)

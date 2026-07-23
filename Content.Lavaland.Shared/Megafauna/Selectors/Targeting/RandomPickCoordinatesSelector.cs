@@ -12,8 +12,7 @@ public sealed partial class RandomPickCoordinatesSelector : MegafaunaSelector
 
     protected override float InvokeImplementation(MegafaunaCalculationBaseArgs args)
     {
-        var system = args.EntityManager.System<MegafaunaSystem>();
-        system.PickRandomPosition(args, Radius);
+        args.System.PickRandomPosition(args, Radius);
 
         return DelaySelector.Get(args);
     }

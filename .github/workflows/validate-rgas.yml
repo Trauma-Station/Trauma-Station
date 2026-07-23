@@ -16,11 +16,11 @@ jobs:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.2.2
+    - uses: actions/checkout@v7
     - name: Setup Submodule
       run: git submodule update --init
     - name: Pull engine updates
-      uses: Trauma-Station/submodule-dependency@v0.2.1
+      uses: Trauma-Station/submodule-dependency@v0.2.2
       with:
         map: |
           {

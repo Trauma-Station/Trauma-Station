@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  id: MaterialSilo
   parent: [ BaseMachinePowered, ConstructibleMachine ]
-  name: material silo
-  description: Bluespace storage connected to most lathes on the station.
+  id: MachineMasterMaterialSilo
+  name: master material silo
+  description: Master silo which distributes inserted materials to all silos on the station.
   components:
   - type: Physics
     bodyType: Static
@@ -16,32 +18,18 @@
     - state: inserting
       visible: false
       map: ["enum.MaterialStorageVisualLayers.Inserting"]
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-  - type: WirelessNetworkConnection
-    range: 1000
-  - type: DeviceLinkSource
-    range: 1000
-    ports:
-    - MaterialSilo
   - type: Machine
     board: MaterialSiloMachineCircuitboard
   - type: Appearance
-  - type: MaterialStorage
-    ignoreColor: true
-  - type: Silo
-
-- type: entity
-  id: BaseSiloUtilizer
-  abstract: true
-  components:
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-  - type: WirelessNetworkConnection
-    range: 1000
-  - type: DeviceLinkSink
-    ports:
-    - MaterialSiloUtilizer
-  - type: SiloUtilizer
-  - type: MaterialStorage
-    connectToSilo: true
+  - type: MasterSilo
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+    blacklist:
+      components:
+      - Unremoveable
+      - UnclaimedOre
+      tags:
+      - Ore # oreproc uses it not silos

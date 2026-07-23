@@ -443,7 +443,7 @@
   # <Goob> - Added embeddable properties for syringe gun
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    canHeavyAttack: false
+    canWideSwing: false
     angle: 0
     damage:
       types:

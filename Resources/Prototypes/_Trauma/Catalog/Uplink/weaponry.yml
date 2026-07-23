@@ -1,8 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: listing
   id: UplinkRevolverPython
   name: uplink-revolver-python-name
   description: uplink-revolver-python-desc
   productEntity: WeaponRevolverPythonAP
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRealFoamCutlass
+  name: uplink-foam-cutlass-name
+  description: uplink-foam-cutlass-desc
+  productEntity: RealFoamCutlass
+  icon: { sprite: /Textures/Objects/Weapons/Melee/cutlass.rsi, state: foam_icon }
   cost:
     Telecrystal: 20
   categories:
@@ -54,36 +67,3 @@
     whitelist:
       tags:
       - NukeOpsUplink
-
-- type: listing
-  id: uplinkRiggedBoxingGlovesRed
-  name: uplink-rigged-boxing-gloves-name
-  description: uplink-rigged-boxing-gloves-desc
-  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi, state: icon }
-  productEntity: ClothingHandsGlovesBoxingRiggedRed
-  cost:
-    Telecrystal: 20
-  categories:
-  - UplinkWeaponry
-
-- type: listing
-  id: uplinkRiggedBoxingGlovesGreen
-  name: uplink-rigged-boxing-gloves-name
-  description: uplink-rigged-boxing-gloves-desc
-  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxinggreen.rsi, state: icon }
-  productEntity: ClothingHandsGlovesBoxingRiggedGreen
-  cost:
-    Telecrystal: 20
-  categories:
-  - UplinkWeaponry
-
-- type: listing
-  id: uplinkRiggedBoxingGlovesYellow
-  name: uplink-rigged-boxing-gloves-name
-  description: uplink-rigged-boxing-gloves-desc
-  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingyellow.rsi, state: icon }
-  productEntity: ClothingHandsGlovesBoxingRiggedYellow
-  cost:
-    Telecrystal: 20
-  categories:
-  - UplinkWeaponry

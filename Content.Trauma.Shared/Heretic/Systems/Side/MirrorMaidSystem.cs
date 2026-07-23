@@ -68,7 +68,7 @@ public sealed partial class MirrorMaidSystem : EntitySystem
             Filter.Pvs(ent).RemovePlayerByAttachedEntity(args.Examiner),
             0.5f);
 
-        _popup.PopupClient(Loc.GetString("mirror-maid-examine-message-user",
+        _popup.PopupEntity(Loc.GetString("mirror-maid-examine-message-user",
                 ("ent", Identity.Entity(ent, EntityManager, args.Examiner))),
             ent,
             args.Examiner);

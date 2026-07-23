@@ -223,3 +223,40 @@ Entries:
   id: 29
   time: '2026-06-01T08:48:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2960
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ALL antag reinforcements not showing up as antags to the admin
+      overlay.
+  id: 30
+  time: '2026-06-21T19:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3259
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed access scanners detecting your universal ID cards.
+  id: 31
+  time: '2026-07-01T13:10:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3390
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: CC fax alert shows the player and fax used.
+  id: 32
+  time: '2026-07-06T00:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3448
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added ban webhook!
+  id: 33
+  time: '2026-07-17T19:39:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3591
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Sec department rolebans now include brigmedic reinforcements.
+  id: 34
+  time: '2026-07-22T23:06:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3673

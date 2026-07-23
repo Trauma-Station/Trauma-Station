@@ -131,6 +131,7 @@
   weight: 20
   roles:
   # <Trauma>
+  - Brigmedic
   - SecurityClown
   # </Trauma>
   - HeadOfSecurity

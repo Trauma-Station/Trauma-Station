@@ -34,7 +34,7 @@ public sealed partial class CloakSystem : EntitySystem
             if (_timing.CurTime >= comp.EndTime)
             {
                 RemCompDeferred<StealthComponent>(uid);
-                _popup.PopupClient(Loc.GetString("wraith-voidhound-cloak-reappear"), uid, uid);
+                _popup.PopupEntity(Loc.GetString("wraith-voidhound-cloak-reappear"), uid, uid);
                 comp.IsActive = false;
                 Dirty(uid, comp);
             }
@@ -46,7 +46,7 @@ public sealed partial class CloakSystem : EntitySystem
         var stealth = EnsureComp<StealthComponent>(ent.Owner);
         _stealth.SetVisibility(ent.Owner, 0.3f, stealth);
 
-        _popup.PopupClient(Loc.GetString("wraith-voidhound-cloak-slip"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-voidhound-cloak-slip"), ent.Owner, ent.Owner);
         ent.Comp.IsActive = true;
         ent.Comp.EndTime = _timing.CurTime + ent.Comp.CloakDuration;
         Dirty(ent);
@@ -56,7 +56,7 @@ public sealed partial class CloakSystem : EntitySystem
 
     private void OnRushdown(Entity<CloakComponent> ent, ref RushdownEvent args)
     {
-        _popup.PopupClient(Loc.GetString("wraith-voidhound-rushdown-leap"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-voidhound-rushdown-leap"), ent.Owner, ent.Owner);
         if (!ent.Comp.IsActive)
             return;
 

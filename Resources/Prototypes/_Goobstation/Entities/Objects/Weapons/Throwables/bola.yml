@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: BolaEnergy
   parent: BaseBola
@@ -7,7 +9,7 @@
   - type: Item
     size: Small
     shape:
-    - 0,0,1,1
+    - 0,0,0,1
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Throwable/energy_bola.rsi
   - type: Ensnaring

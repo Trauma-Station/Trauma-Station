@@ -36,6 +36,7 @@ public sealed partial class StypticStimulatorImplantComponent : Component
             ["Blunt"] = -6,
             ["Slash"] = -6,
             ["Piercing"] = -6,
+            ["Ballistic"] = -6,
             ["Heat"] = -6,
             ["Cold"] = -6,
             ["Shock"] = -6,

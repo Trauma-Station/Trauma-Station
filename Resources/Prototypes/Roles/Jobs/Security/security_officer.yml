@@ -20,11 +20,16 @@
   - External
   - Cryogenics
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipSecurityOfficer
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # Trauma
-    components:
-      - type: SecurityStaff
 
 - type: startingGear
   id: SecurityOfficerGear

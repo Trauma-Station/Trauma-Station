@@ -35,7 +35,6 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const char EmotesAltPrefix = '*';
     public const char AdminPrefix = ']';
     public const char WhisperPrefix = ',';
-    public const char CollectiveMindPrefix = '+'; // Goobstation - Starlight collective mind port
     public const char DefaultChannelKey = 'h';
 
     public const int VoiceRange = 10; // how far voice goes in world units
@@ -43,14 +42,12 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units
     public static readonly SoundSpecifier DefaultAnnouncementSound
         = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
-    public const float DefaultObfuscationFactor = 0.2f; // Goob - Percentage of symbols in a whispered message that can be seen even by "far" listeners
 
     public static readonly ProtoId<RadioChannelPrototype> CommonChannel = "Common";
 
     public static readonly string DefaultChannelPrefix = $"{RadioChannelPrefix}{DefaultChannelKey}";
     public static readonly ProtoId<SpeechVerbPrototype> DefaultSpeechVerb = "Default";
 
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
@@ -63,45 +60,34 @@ public abstract partial class SharedChatSystem : EntitySystem
     /// </summary>
     private FrozenDictionary<char, RadioChannelPrototype> _keyCodes = default!;
 
-    // Goobstation - Starlight collective mind port
-    private FrozenDictionary<char, CollectiveMindPrototype> _mindKeyCodes = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        DebugTools.Assert(_prototypeManager.HasIndex(CommonChannel));
+        DebugTools.Assert(ProtoMan.HasIndex(CommonChannel));
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
         CacheRadios();
         CacheEmotes();
-        CacheCollectiveMinds(); // Goobstation - Starlight collective mind port
+        CacheCollectiveMinds(); // Trauma
     }
 
     protected virtual void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
+        // <Trauma>
+        if (obj.WasModified<CollectiveMindPrototype>())
+            CacheCollectiveMinds();
+        // </Trauma>
         if (obj.WasModified<RadioChannelPrototype>())
             CacheRadios();
 
         if (obj.WasModified<EmotePrototype>())
             CacheEmotes();
-        // <Goob> - Starlight collective mind port
-        if (obj.WasModified<CollectiveMindPrototype>())
-            CacheCollectiveMinds();
-        // </Goob>
     }
 
     private void CacheRadios()
     {
-        _keyCodes = _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>()
-            .ToFrozenDictionary(x => x.KeyCode);
-    }
-
-    // Goobstation - Starlight collective mind port
-    private void CacheCollectiveMinds()
-    {
-        _prototypeManager.PrototypesReloaded -= OnPrototypeReload;
-        _mindKeyCodes = _prototypeManager.EnumeratePrototypes<CollectiveMindPrototype>()
+        _keyCodes = ProtoMan.EnumeratePrototypes<RadioChannelPrototype>()
             .ToFrozenDictionary(x => x.KeyCode);
     }
 
@@ -112,13 +98,13 @@ public abstract partial class SharedChatSystem : EntitySystem
     public SpeechVerbPrototype GetSpeechVerb(EntityUid source, string message, SpeechComponent? speech = null)
     {
         if (!Resolve(source, ref speech, false))
-            return _prototypeManager.Index(DefaultSpeechVerb);
+            return ProtoMan.Index(DefaultSpeechVerb);
 
         // check for a suffix-applicable speech verb
         SpeechVerbPrototype? current = null;
         foreach (var (str, id) in speech.SuffixSpeechVerbs)
         {
-            var proto = _prototypeManager.Index(id);
+            var proto = ProtoMan.Index(id);
             if (message.EndsWith(Loc.GetString(str)) && proto.Priority >= (current?.Priority ?? 0))
             {
                 current = proto;
@@ -126,7 +112,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         }
 
         // if no applicable suffix verb return the normal one used by the entity
-        return current ?? _prototypeManager.Index(speech.SpeechVerb);
+        return current ?? ProtoMan.Index(speech.SpeechVerb);
     }
 
     /// <summary>
@@ -184,7 +170,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         if (input.StartsWith(RadioCommonPrefix))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
-            channel = _prototypeManager.Index<RadioChannelPrototype>(CommonChannel);
+            channel = ProtoMan.Index<RadioChannelPrototype>(CommonChannel);
             return true;
         }
 
@@ -209,7 +195,7 @@ public abstract partial class SharedChatSystem : EntitySystem
             RaiseLocalEvent(source, ev);
 
             if (ev.Channel != null)
-                _prototypeManager.TryIndex(ev.Channel, out channel);
+                ProtoMan.TryIndex(ev.Channel, out channel);
             return true;
         }
 
@@ -220,59 +206,6 @@ public abstract partial class SharedChatSystem : EntitySystem
         }
 
         return true;
-    }
-
-    // Goobstation - Starlight collective mind port
-    public bool TryProccessCollectiveMindMessage(
-        EntityUid source,
-        string input,
-        out string output,
-        out CollectiveMindPrototype? channel,
-        bool quiet = false)
-    {
-        output = input.Trim();
-        channel = null;
-
-        if (input.Length == 0)
-            return false;
-
-        if (!input.StartsWith(CollectiveMindPrefix))
-            return false;
-
-        ProtoId<CollectiveMindPrototype>? defaultChannel = null;
-        if (TryComp<CollectiveMindComponent>(source, out var mind))
-            defaultChannel = mind.DefaultChannel;
-
-        if (input.Length < 2 || (char.IsWhiteSpace(input[1]) && defaultChannel == null))
-        {
-            output = SanitizeMessageCapital(input[1..].TrimStart());
-            if (!quiet)
-                _popup.PopupEntity(Loc.GetString("chat-manager-no-radio-key"), source, source);
-            return true;
-        }
-
-        var channelKey = input[1];
-        channelKey = char.ToLower(channelKey);
-
-        if (_mindKeyCodes.TryGetValue(channelKey, out channel))
-        {
-            output = SanitizeMessageCapital(input[2..].TrimStart());
-            return true;
-        }
-        else if (defaultChannel != null)
-        {
-            output = SanitizeMessageCapital(input[1..].TrimStart());
-            channel = _prototypeManager.Index<CollectiveMindPrototype>(defaultChannel.Value);
-            return true;
-        }
-
-        if (quiet)
-            return false;
-
-        var msg = Loc.GetString("chat-manager-no-such-channel", ("key", channelKey));
-        _popup.PopupEntity(msg, source, source);
-
-        return false;
     }
 
     public string SanitizeMessageCapital(string message)

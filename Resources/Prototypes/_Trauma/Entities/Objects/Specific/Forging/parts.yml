@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Cement
 - type: entity
   parent: [ReagentPacketBase, ItemHeftyBase]
@@ -25,6 +27,7 @@
       reagents:
       - ReagentId: Cement
         Quantity: 200
+      maxVol: 200
 
 - type: entity
   parent: BaseItem

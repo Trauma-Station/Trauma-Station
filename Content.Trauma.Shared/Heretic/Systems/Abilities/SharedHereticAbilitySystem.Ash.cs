@@ -10,11 +10,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
-    protected virtual void SubscribeAsh()
-    {
-        SubscribeLocalEvent<EventHereticVolcanoBlast>(OnVolcanoBlast);
-    }
-
+    [SubscribeLocalEvent]
     private void OnVolcanoBlast(EventHereticVolcanoBlast args)
     {
         if (!TryUseAbility(args, false))

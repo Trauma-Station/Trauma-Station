@@ -19,7 +19,6 @@ namespace Content.Goobstation.Shared.Silicon;
 
 public sealed partial class IntellicardExtrasSystem : EntitySystem
 {
-    [Dependency] private INetManager _net = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private NameModifierSystem _nameMod = default!;
@@ -57,7 +56,7 @@ public sealed partial class IntellicardExtrasSystem : EntitySystem
         var cardBrain = _slots.GetItemOrNull(ent.Owner, "station_ai_mind_slot");
         if (TryComp<MindContainerComponent>(cardBrain, out var cardMind) && !cardMind.HasMind)
         {
-            _popup.PopupClient(Loc.GetString("intellicard-extras-contained-missing"), user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("intellicard-extras-contained-missing"), user, user, PopupType.MediumCaution);
             PredictedQueueDel(cardBrain);
             args.Handled = true;
             return;
@@ -69,7 +68,7 @@ public sealed partial class IntellicardExtrasSystem : EntitySystem
         if (cardHasAi == brainHasAi)
         {
             var key = cardHasAi ? "occupied" : "empty";
-            _popup.PopupClient(Loc.GetString($"intellicard-extras-target-{key}"), user, user, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString($"intellicard-extras-target-{key}"), user, user, PopupType.Medium);
             args.Handled = true;
             return;
         }

@@ -25,7 +25,6 @@ namespace Content.Server.Station.Systems;
 [PublicAPI]
 public sealed partial class StationSystem : SharedStationSystem
 {
-    [Dependency] private ILogManager _logManager = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private ChatSystem _chatSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -43,7 +42,7 @@ public sealed partial class StationSystem : SharedStationSystem
     {
         base.Initialize();
 
-        _sawmill = _logManager.GetSawmill("station");
+        _sawmill = LogManager.GetSawmill("station");
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRoundEnd);
         SubscribeLocalEvent<PostGameMapLoad>(OnPostGameMapLoad);
@@ -69,6 +68,7 @@ public sealed partial class StationSystem : SharedStationSystem
             return;
 
         stationData.Grids.Remove(uid);
+        stationData.OwnedGrids.Remove(uid); // Trauma
         Dirty(uid, component);
     }
 
@@ -306,7 +306,8 @@ public sealed partial class StationSystem : SharedStationSystem
 
         foreach (var grid in gridIds ?? Array.Empty<EntityUid>())
         {
-            AddGridToStation(station, grid, null, data, name);
+            AddGridToStation(station, grid, null, data, name,
+                owned: true); // Trauma
         }
 
         var ev = new StationPostInitEvent((station, data));
@@ -324,7 +325,8 @@ public sealed partial class StationSystem : SharedStationSystem
     /// <param name="stationData">Resolve pattern, station data component of station.</param>
     /// <param name="name">The name to assign to the grid if any.</param>
     /// <exception cref="ArgumentException">Thrown when mapGrid or station are not a grid or station, respectively.</exception>
-    public void AddGridToStation(EntityUid station, EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null, string? name = null)
+    public void AddGridToStation(EntityUid station, EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null, string? name = null,
+        bool owned = false) // Trauma
     {
         if (!Resolve(mapGrid, ref gridComponent))
             throw new ArgumentException("Tried to initialize a station on a non-grid entity!", nameof(mapGrid));
@@ -337,6 +339,10 @@ public sealed partial class StationSystem : SharedStationSystem
         var stationMember = EnsureComp<StationMemberComponent>(mapGrid);
         stationMember.Station = station;
         stationData.Grids.Add(mapGrid);
+        // <Trauma>
+        if (owned)
+            stationData.OwnedGrids.Add(mapGrid);
+        // </Trauma>
         Dirty(station, stationData);
         Dirty(mapGrid, stationMember);
 

@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Random;
@@ -18,7 +19,7 @@ namespace Content.Trauma.Server.Botany.Systems;
 
 public sealed partial class PlantAnalyzerSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAtmosphereSystem _atmos = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
@@ -99,7 +100,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                 // Delete seed
                 Del(target);
             }
-            else if (seedComp.SeedId != null && _proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else if (seedComp.SeedId != null && ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 // Copy genes to databank.
                 GetGeneFromInteger(ent, protoSeed);
@@ -125,7 +126,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
         else
         {
-            if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            if (seedComp.SeedId == null || !ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
                 return;
             seedComp.Seed = protoSeed.Clone();
             SetGeneFromInteger(ent, ref seedComp.Seed);
@@ -146,7 +147,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
         else
         {
-            if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            if (seedComp.SeedId == null || !ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
                 return;
             seedComp.Seed = protoSeed.Clone();
             seedComp.Seed.Mutations.Clear();
@@ -163,7 +164,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                 var state = ObtainingGeneDataSeed(ent, seedComp.Seed, target, false);
                 _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);  //Funkystation - Swapped to set state instead of UI message
             }
-            else if (seedComp.SeedId != null && _proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else if (seedComp.SeedId != null && ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 var state = ObtainingGeneDataSeed(ent, protoSeed, target, false);
                 _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
@@ -193,7 +194,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         ent.Comp.StoredMutationStrings.Clear();
         foreach (var mutationProto in mutationProtos)
         {
-            if (_proto.Resolve<SeedPrototype>(mutationProto, out var seed))
+            if (ProtoMan.Resolve<SeedPrototype>(mutationProto, out var seed))
             {
                 ent.Comp.StoredMutationStrings.Add(seed.DisplayName);
             }
@@ -242,7 +243,6 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         return ret;
     }
 
-    //Funkystation - Adjusted to work for new gases
     public string[] GetGasFlags(IEnumerable<Gas> gases)
     {
         int gasLength = gases.Count();
@@ -250,7 +250,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         int i = 0;
         foreach (var gas in gases)
         {
-            plantGases[i] = Loc.GetString($"gases-{gas}");
+            plantGases[i] = Loc.GetString(_atmos.GetGas(gas).Name);
             i++;
         }
         return plantGases;

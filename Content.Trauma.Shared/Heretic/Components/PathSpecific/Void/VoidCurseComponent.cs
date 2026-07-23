@@ -8,19 +8,22 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 public sealed partial class VoidCurseComponent : BaseSpriteOverlayComponent
 {
     [DataField]
-    public float Lifetime = 5f; // 8s on 1 stack, 20s on max stack
+    public float Lifetime = 6f; // 8s on 1 stack, 20s on max stack
 
     [DataField]
-    public float MaxLifetime = 5f;
+    public float MaxLifetime = 6f;
 
     [DataField]
-    public float LifetimeIncreasePerLevel = 3f;
+    public float LifetimeIncreasePerLevel = 2f;
 
     [DataField, AutoNetworkedField]
     public float Stacks;
 
     [DataField]
-    public float MaxStacks = 5f;
+    public float MinStacksToMute = 4f;
+
+    [DataField]
+    public float MaxStacks = 7f;
 
     [DataField]
     public TimeSpan Timer = TimeSpan.FromSeconds(1);

@@ -98,6 +98,8 @@
   name: drunk
   components: # Trauma
   - type: DrunknessLimit
+  - type: ShowSpriteLayerStatusEffect
+    layer: enum.HumanoidVisualEmoteLayers.Blush
 
 # Prevents the target from seeing
 - type: entity
@@ -110,4 +112,19 @@
       components:
       - MobState
       - Blindable
+      requireAll: true
   - type: BlindnessStatusEffect
+
+# Obstructs the target's vision with the flash overlay.
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectFlashed
+  name: flashed
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobState
+      - Blindable
+      requireAll: true
+  - type: FlashedStatusEffect

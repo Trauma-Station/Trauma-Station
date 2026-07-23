@@ -1,7 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseScientificKnowledge
   id: JanitorKnowledge
   name: Janitor
+  description: Helps you throw out trash. That's it.
   components:
   - type: Knowledge
     experienceCost: 5

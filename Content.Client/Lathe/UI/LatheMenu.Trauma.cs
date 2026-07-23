@@ -1,4 +1,3 @@
-using Content.Goobstation.Common.Silo;
 using Content.Trauma.Common.Salvage;
 using Robust.Client.Player;
 using Robust.Shared.Timing;
@@ -10,7 +9,6 @@ public sealed partial class LatheMenu
 {
     [Dependency] private IPlayerManager _player = default!;
     private CommonMiningPointsSystem _miningPoints = default!;
-    private CommonSiloSystem _silo = default!;
 
     public event Action? OnResetQueueList;
     public event Action? OnClaimMiningPoints;
@@ -21,7 +19,6 @@ public sealed partial class LatheMenu
     private void InitializeTrauma()
     {
         _miningPoints = _entityManager.System<CommonMiningPointsSystem>();
-        _silo = _entityManager.System<CommonSiloSystem>();
 
         ResetQueueList.OnPressed += _ => OnResetQueueList?.Invoke();
     }
@@ -37,13 +34,6 @@ public sealed partial class LatheMenu
             return;
 
         UpdateMiningPoints(points.Points);
-        if (IsSiloConnected(Entity, out var warning, true))
-            return;
-
-        MiningPointsNoConnectionWarning.Visible = true;
-
-        if (warning != null)
-            MiningPointsNoConnectionWarning.SetMessage(FormattedMessage.FromMarkupOrThrow(warning));
     }
 
     /// <summary>
@@ -59,38 +49,6 @@ public sealed partial class LatheMenu
 
         _lastMiningPoints = points;
         MiningPointsLabel.Text = Loc.GetString("lathe-menu-mining-points", ("points", points));
-    }
-
-    /// <summary>
-    /// Check if the lathe is connected to a silo, for warning miners.
-    /// </summary>
-    private bool IsSiloConnected(EntityUid uid, out string? warning, bool checkGrid = false)
-    {
-        warning = null;
-        var silo = _silo.GetSilo(uid);
-        if (silo != null
-            && checkGrid)
-        {
-            if (_entityManager.TryGetComponent<TransformComponent>(uid, out var uidTransform)
-                && _entityManager.TryGetComponent<TransformComponent>(silo.Value, out var siloTransform))
-            {
-                if (uidTransform.MapID != siloTransform.MapID)
-                {
-                    warning = Loc.GetString("lathe-menu-mining-points-silo-not-on-same-grid");
-                    return false;
-                }
-
-                return true;
-            }
-
-            warning = Loc.GetString("lathe-menu-mining-points-silo-not-on-same-grid");
-            return false;
-        }
-
-        if (silo == null)
-            warning = Loc.GetString("lathe-menu-mining-points-no-connection-warning");
-
-        return silo != null;
     }
 
     /// <summary>

@@ -20,11 +20,7 @@ public sealed partial class LatheSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private StationSystem _station = default!;
 
-    private void InitializeTrauma()
-    {
-        SubscribeLocalEvent<LatheComponent, ComponentShutdown>(OnShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<LatheComponent> ent, ref ComponentShutdown args)
     {
         // destroying a lathe stops its sound
@@ -40,7 +36,7 @@ public sealed partial class LatheSystem
         var recipesCount = 0;
         foreach (var pack in ent.Comp.DynamicPacks)
         {
-            if (!_proto.Resolve(pack, out var proto))
+            if (!ProtoMan.Resolve(pack, out var proto))
                 continue;
             foreach (var recipe in proto.Recipes)
             {

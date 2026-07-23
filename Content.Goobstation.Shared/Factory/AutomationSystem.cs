@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory.Slots;
+using Content.Shared.Eye;
 using Content.Shared.Prototypes;
+using Content.Shared.Stealth;
+using Content.Shared.Stealth.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 
@@ -9,9 +12,13 @@ namespace Content.Goobstation.Shared.Factory;
 
 public sealed partial class AutomationSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
     [Dependency] private EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
+    [Dependency] private EntityQuery<StealthComponent> _stealthQuery = default!;
+    [Dependency] private EntityQuery<VisibilityComponent> _visibilityQuery = default!;
+
+    public const short NormalMask = (short) VisibilityFlags.Normal;
 
     private List<EntProtoId> _automatable = new();
     /// <summary>
@@ -83,7 +90,7 @@ public sealed partial class AutomationSystem : EntitySystem
     {
         _automatable.Clear();
         var name = Factory.GetComponentName<AutomationSlotsComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.Components.ContainsKey(name))
                 _automatable.Add(proto.ID);
@@ -111,9 +118,15 @@ public sealed partial class AutomationSystem : EntitySystem
     }
 
     public bool HasSlot(Entity<AutomationSlotsComponent?> ent, string port, bool input)
-    {
-        return GetSlot(ent, port, input) != null;
-    }
+        => GetSlot(ent, port, input) != null;
+
+    /// <summary>
+    /// Returns true if an entity has normal visibility bit and not stealthed.
+    /// This is considered visible to machines.
+    /// </summary>
+    public bool CanMachineDetect(EntityUid uid)
+        => (!_visibilityQuery.TryComp(uid, out var visibility) || (visibility.Layer & NormalMask) == NormalMask) &&
+            (!_stealthQuery.TryComp(uid, out var stealth) || !stealth.Enabled || _stealth.GetVisibility(uid, stealth) > stealth.ExamineThreshold);
 
     #endregion
 }

@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ ClothingMaskGas, BaseRevMajorContraband ]
+  parent: [ ClothingMaskGas, BaseRevMajorContraband, BaseClothingViewconeSmall ]
   id: ClothingMaskGasRev
   name: gas mask
   description: A reliable military-style gas mask.
@@ -23,6 +25,24 @@
     graph: RevMask
     deconstructionTarget: null
     node: finished
+
+- type: entity
+  parent: [ ClothingMaskBaseButcherable, BaseMinorContraband ]
+  id: KnittedBalaclava
+  name: 3-hole knit balaclava
+  description: For the budding robber, or the experienced terrorist.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: [ ClothingMaskGas, BaseCentcommContraband ]

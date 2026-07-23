@@ -22,6 +22,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Trauma.Shared.Projectiles;
 
@@ -116,7 +117,12 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         }
 
         var shooter = comp.Shooter;
-        var ev = new ProjectileHitEvent(comp.Damage * _damageable.UniversalProjectileDamageModifier, target, shooter);
+        var dmg = comp.Damage * _damageable.UniversalProjectileDamageModifier;
+        if (TryComp(ent, out TargetedProjectileComponent? targeted) &&
+            TryGetEntity(targeted.Target, out var t) && t == target)
+            dmg.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
+
+        var ev = new ProjectileHitEvent(dmg, target, shooter);
         RaiseLocalEvent(uid, ref ev);
 
         var targetEv = new GotHitByProjectileEvent(uid);
@@ -130,10 +136,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 
-        var targetPart = _gun.GetTargetPart(shooter, target);
-        if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
-            !missComp.PerfectHitEntities.Contains(target))
-            targetPart = TargetBodyPart.Chest;
+        TargetBodyPart? targetPart = null;
         if (TryComp<BeingExecutedComponent>(target, out var executed)) // TODO: make this better idk why its shooting groin and shit
             targetPart = executed.TargetPart;
         var deleted = Deleted(target);

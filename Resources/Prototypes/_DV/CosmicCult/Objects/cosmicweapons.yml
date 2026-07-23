@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: entropic blade
   parent: [BaseSword, BaseCosmicContraband] # Trauma - Contraband marker (YES WE ARE MAKING A NEW ONE)
@@ -15,13 +17,12 @@
     angle: 90
     animation: WeaponArcCosmic
     attackRate: 1
-    clickDamageModifier: 1.1
     damage:
       types:
-        Slash: 20
-        Asphyxiation: 15
+        Slash: 12
+        Asphyxiation: 9
         Structural: 15
-        Ion: 25
+        Ion: 15
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg
       params:
@@ -48,8 +49,6 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
-    maxParries: 2
-    maxReflects: 0
     soundOnReflect:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
@@ -81,9 +80,9 @@
     attackRate: 0.6
     damage:
       types:
-        Piercing: 30
+        Piercing: 12
         Asphyxiation: 10
-        Ion: 25
+        Ion: 15
     animationRotation: 225
     wideAnimationRotation: 225
     soundHit:
@@ -125,7 +124,6 @@
     damage:
       types:
         Piercing: 10
-        Asphyxiation: 5
   - type: Item
     size: Large
     shape:
@@ -159,11 +157,12 @@
     doAfterDuration: 4.0
 
 - type: entity
-  name: astral razor
   parent: [BaseItem, BaseCosmicContraband]
+  name: astral razor
   id: ScytheCosmicCult
   description: An preternatural scythe, wrought of indescribable material. Even just looking at it makes you feel cold.
   components:
+  - type: Sharp
   - type: CosmicEquipment
   - type: Sprite
     sprite: _DV/CosmicCult/Objects/cosmicscythe.rsi
@@ -180,6 +179,7 @@
         Blunt: -20
         Slash: -20
         Piercing: -20
+        Ballistic: -20
         Heat: -20
         Cold: -20
         Shock: -20
@@ -207,7 +207,7 @@
     heavyStaminaCost: 0 # This thing is challenging enough to use already, and you can't lightswing anyway
     damage:
       types:
-        Slash: 20
+        Slash: 12
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg
       params:
@@ -243,14 +243,17 @@
     slots:
     - Back
     - suitStorage
-  - type: UnholyItem # Goobstation Shitchap
-  - type: Sharp
+  - type: UnholyItem
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true
   - type: Parry
-    maxParries: 2
-    maxReflects: 4
+    reflectExhaustionCost: 0.25
     soundOnReflect:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:

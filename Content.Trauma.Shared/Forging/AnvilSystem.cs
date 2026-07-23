@@ -14,7 +14,6 @@ namespace Content.Trauma.Shared.Forging;
 public sealed partial class AnvilSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private ForgingSystem _forging = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -35,8 +34,8 @@ public sealed partial class AnvilSystem : EntitySystem
 
     private void OnStartItem(Entity<ForgingAnvilComponent> ent, ref AnvilStartItemMessage args)
     {
-        if (!_proto.TryIndex(args.Metal, out var metal) ||
-            !_proto.TryIndex(args.Item, out var item) ||
+        if (!ProtoMan.TryIndex(args.Metal, out var metal) ||
+            !ProtoMan.TryIndex(args.Item, out var item) ||
             !_forging.CanMakeFrom(item, args.Metal))
             return;
 
@@ -46,7 +45,7 @@ public sealed partial class AnvilSystem : EntitySystem
         if (_ingots.Count < cost)
         {
             var missing = cost - _ingots.Count;
-            _popup.PopupClient($"You are missing {missing} more hot {metal.Name} ingots!",
+            _popup.PopupEntity($"You are missing {missing} more hot {metal.Name} ingots!",
                 ent, user, PopupType.MediumCaution);
             return;
         }
@@ -62,11 +61,11 @@ public sealed partial class AnvilSystem : EntitySystem
 
         // then create the unfinished item
         var uid = _forging.SpawnUnfinished(coords, args.Metal, args.Item, ent.Comp.WorkScale);
-        _popup.PopupClient($"You get ready to work on your {Name(uid)}",
+        _popup.PopupEntity($"You get ready to work on your {Name(uid)}",
             ent, user, PopupType.Medium);
         _audio.PlayPredicted(ent.Comp.StartSound, ent, user);
 
-        _adminLog.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(user):player} created {ToPrettyString(uid):item} on anvil {ToPrettyString(ent):used}");
+        _adminLog.Add(LogType.EntitySpawn, LogImpact.Low, $"{user:player} created {uid:item} on anvil {ent.Owner:used}");
     }
 
     private EntityCoordinates FindIngots(Entity<ForgingAnvilComponent> ent, [ForbidLiteral] ProtoId<MetalPrototype> metal)

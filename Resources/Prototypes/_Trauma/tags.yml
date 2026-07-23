@@ -1,7 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## A ##
 
 - type: Tag
+  id: AdamantineScraps # Construction: AdamantineIngot
+
+- type: Tag
   id: AdvancedMagboots # Construction: RevPlasmaFoundry
+
+- type: Tag
+  id: AirlockAssembly # Used for airlock assemblies so that heretic void conduit can damage them
 
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
@@ -95,6 +103,9 @@
 ## F ##
 
 - type: Tag
+  id: Firebomb
+
+- type: Tag
   id: FlamethrowerBackpack # used for rev flamethrower's ammo provider
 
 - type: Tag
@@ -154,13 +165,15 @@
 
 ## O ##
 
-- type: Tag
-  id: OverrideKeyComponents # Construction: ArmoryOverrideKey
+# :o nothing
 
 ## P ##
 
 - type: Tag
   id: PartCapacitor # Construction: WeaponGaussgunImprov
+
+- type: Tag
+  id: Pipebomb
 
 - type: Tag
   id: PlasteelScraps # Construction: BloomeryColdPlasteel
@@ -220,6 +233,9 @@
   id: Scimitar # Used for scabbad whitelist
 
 - type: Tag
+  id: SharpMedal # Heretic - Sharp Medal item, used for blades boomerang throw logic
+
+- type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision
 
 - type: Tag
@@ -267,3 +283,6 @@
 
 - type: Tag
   id: Whetstone # Durability repair of spears and knives
+
+- type: Tag
+  id: WoodenSword

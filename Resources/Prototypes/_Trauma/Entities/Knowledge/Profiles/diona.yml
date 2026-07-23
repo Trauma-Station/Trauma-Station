@@ -1,10 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: knowledgeProfile
   id: Diona
   pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
     ToysKnowledge: 1
@@ -14,7 +15,6 @@
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
     WallsKnowledge: 1
-    ScienceKnowledge: 0
     WindowsKnowledge: 1
     SmokeablesKnowledge: 4
     # Intelectual Skills
@@ -39,7 +39,7 @@
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
     MetalworkingKnowledge: 0
-    CarvingKnowledge: 2 # Made of wood, so uh. yeah.
+    CarvingKnowledge: 0
     GunsmithingKnowledge: 0
     MechanicsKnowledge: 0
     TailoringKnowledge: 0

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: betrayal knife
   description: Watch your back!
@@ -18,7 +20,6 @@
         Slash: 4
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Sharp
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
   - type: ThrowingAngle

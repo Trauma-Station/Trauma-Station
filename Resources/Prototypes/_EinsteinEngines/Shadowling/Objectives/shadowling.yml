@@ -1,10 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseCodeObjective
   id: ShadowlingAscendObjective
   description: I must ascend at all costs.
   components:
   - type: Objective
-    issuer: objective-issuer-shadowling
+    issuer: Shadowling
     unique: true
     difficulty: 3
     icon:

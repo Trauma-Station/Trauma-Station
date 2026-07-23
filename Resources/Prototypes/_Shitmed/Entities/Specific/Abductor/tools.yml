@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Abductor's Crowbar
 - type: entity
   parent: [ BaseCrowbar, BaseMajorContraband ]
@@ -114,8 +115,6 @@
     speed: 0.45
   - type: Tending
     speed: 0.65
-  - type: Screwdriver
-    speed: 1.5 # wow!
   - type: SurgeryTool
     startSound:
       collection: Screwdriver

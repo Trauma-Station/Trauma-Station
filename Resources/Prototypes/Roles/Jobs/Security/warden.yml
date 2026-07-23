@@ -29,11 +29,16 @@
   - GenpopEnter
   - GenpopLeave
   special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # Trauma
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipWarden
+  - !type:AddComponentSpecial
     components:
     - type: SecurityStaff
+  # </Trauma>
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
 
 - type: startingGear
   id: WardenGear

@@ -13,7 +13,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature.Components;
 using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Heretic.Components;
@@ -35,12 +35,10 @@ public sealed partial class LeechingWalkSystem : EntitySystem
     [Dependency] private TemperatureSystem _temperature = default!;
     [Dependency] private SharedStaminaSystem _stam = default!;
     [Dependency] private StunSystem _stun = default!;
-    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private EntityQuery<DamageableComponent> _damageableQuery = default!;
     [Dependency] private EntityQuery<TemperatureComponent> _temperatureQuery = default!;
     [Dependency] private EntityQuery<StaminaComponent> _staminaQuery = default!;
-    [Dependency] private EntityQuery<StatusEffectsComponent> _statusQuery = default!;
     [Dependency] private EntityQuery<RespiratorComponent> _respiratorQuery = default!;
     [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
@@ -146,14 +144,9 @@ public sealed partial class LeechingWalkSystem : EntitySystem
             _stun.TryAddStunDuration(uid, -reduction);
             _stun.AddKnockdownTime(uid, -reduction);
 
-            _statusNew.TryRemoveStatusEffect(uid, leech.SleepStatus);
-            _statusNew.TryRemoveStatusEffect(uid, leech.DrowsinessStatus);
-            _statusNew.TryRemoveStatusEffect(uid, leech.RainbowStatus);
-
-            if (_statusQuery.TryComp(uid, out var status))
+            foreach (var id in leech.RemovedStatusEffects)
             {
-                _status.TryRemoveStatusEffect(uid, "BlurryVision", status);
-                _status.TryRemoveStatusEffect(uid, "TemporaryBlindness", status);
+                _status.TryRemoveStatusEffect(uid, id);
             }
         }
     }

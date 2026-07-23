@@ -1220,6 +1220,7 @@
     - item: HydroponicsToolMiniHoe
     - item: HydroponicsToolSpade
     - item: HydroponicsToolClippers
+    - item: PlantAnalyzer # Trauma
     - item: Syringe # Trauma
     - item: Bucket
     - hand: # Trauma - make service borgs 1% useful
@@ -1514,8 +1515,17 @@
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
         whitelist:
+          # <Trauma> - mirror XenoborgMaterialBag's whitelist so you can use it properly
           tags:
+          - Sheet
           - ConstructionMaterial
+          - RawMaterial
+          - Ingot
+          components:
+          - Circuitboard
+          - Flatpack
+          - FloorTile
+          # </Trauma>
     - item: XenoborgMaterialBag
     - item: PinpointerMothership
     - item: HandheldGPSBasic

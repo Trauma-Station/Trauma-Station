@@ -5,6 +5,7 @@
   - AppearanceSlaughterDemon
   - SimpleSpaceMobBase
   - MobPolymorphable
+  - MobNightVision
   id: BaseMobSlaughterDemon
   name: slaughter demon
   suffix: ""
@@ -15,10 +16,6 @@
     state: daemon
   - type: Stamina
     baseCritThreshold: 150
-  - type: NightVision
-    color: "#AA4A44"
-    activateSound: null
-    deactivateSound: null
   - type: Insulated
   - type: Damageable
     damageModifierSet: SlaughterDemon
@@ -48,7 +45,7 @@
     description: ghost-role-information-slaughter-demon-description
     rules: ghost-role-information-slaughter-demon-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleSlaughterDemon
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -83,6 +80,7 @@
         Blunt: -1
         Slash: -1
         Piercing: -1
+        Ballistic: -1
         Heat: -1
         Cold: -1
         Shock: -1
@@ -145,10 +143,7 @@
     sound:
       path: /Audio/Effects/demon_dies.ogg
   - type: Vocal
-    sounds:
-      Male: SlaughterDemon
-      Female: SlaughterDemon
-      Unsexed: SlaughterDemon
+    emoteSounds: SlaughterDemon
   - type: ZombieImmune
   - type: SlowOnDamage
     speedModifierThresholds:
@@ -205,16 +200,8 @@
         Slash: 20
         Structural: 50
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-laughter-demon-name
     description: ghost-role-information-laughter-demon-description
-    rules: ghost-role-information-slaughter-demon-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: default
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/sadtrombone.ogg

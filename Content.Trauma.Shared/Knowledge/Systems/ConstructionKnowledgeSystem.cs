@@ -16,7 +16,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private QualitySystem _quality = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -34,7 +33,7 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 
     private void OnConstructAttempt(Entity<KnowledgeHolderComponent> ent, ref ConstructAttemptEvent args)
     {
-        if (args.Cancelled || !_proto.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
+        if (args.Cancelled || !ProtoMan.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
             return;
 
         if (_knowledge.GetContainer(ent) is not { } brain)
@@ -54,7 +53,7 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
                 if (args.LogError)
                 {
                     var masteryName = _knowledge.GetMasteryString(mastery);
-                    var name = _proto.Index(id).Name;
+                    var name = ProtoMan.Index(id).Name;
                     _popup.PopupEntity($"You are missing {masteryName} {name} to construct that!", ent, ent, PopupType.MediumCaution);
                 }
                 args.Cancelled = true;
@@ -65,23 +64,23 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 
     private void OnConstructed(Entity<KnowledgeHolderComponent> ent, ref ConstructedEvent args)
     {
-        if (!_proto.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
+        if (!ProtoMan.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
             return;
 
         // TODO: grant xp when building shit
 
         // combines practical and theory knowledge together
         var levelDeltas = new Dictionary<EntProtoId, int>();
-        if (proto.Practical is { })
+        if (proto.Practical is { } practical)
         {
-            foreach (var (id, mastery) in (proto.Practical))
+            foreach (var (id, mastery) in practical)
             {
                 levelDeltas[id] = mastery;
             }
         }
-        foreach (var (id, mastery) in (proto.Theory))
+        foreach (var (id, mastery) in proto.Theory)
         {
-            if (levelDeltas.ContainsKey(id) && levelDeltas[id] > mastery)
+            if (levelDeltas.TryGetValue(id, out var existing) && existing > mastery)
                 continue;
 
             levelDeltas[id] = mastery;
@@ -89,21 +88,7 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 
         // ignore quality code if the prototype doesn't want it
         if (!proto.UseQuality)
-        {
-            // Grants experience to the user even if the item doesn't get a quality.
-            if (_knowledge.GetContainer(ent) is not { } brain)
-                return;
-
-            var (knowledgeToUse, lowestId, _, skillDelta) = _quality.FindLowestDelta(brain, levelDeltas);
-
-            _knowledge.AddExperience(brain, knowledgeToUse, 3, _knowledge.GetInverseMastery(skillDelta + 2));
-
-            if (lowestId is not { } actualId)
-                return;
-
-            _knowledge.AddExperience(brain, actualId, 3, _knowledge.GetInverseMastery(skillDelta + 2));
             return;
-        }
 
         var item = args.Entity;
         var quality = EnsureComp<QualityComponent>(item);

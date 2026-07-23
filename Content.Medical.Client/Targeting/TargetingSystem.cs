@@ -37,7 +37,6 @@ public sealed partial class TargetingSystem : SharedTargetingSystem
 
         SubscribeAllEvent<TargetIntegrityChangedMessage>(OnTargetIntegrityChanged);
 
-        // TODO SHITMED: change this to scrolling "height" and symmetry
         CommandBinds.Builder
         .Bind(TraumaKeyFunctions.TargetHead,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.Head)))
@@ -125,5 +124,26 @@ public sealed partial class TargetingSystem : SharedTargetingSystem
             return;
 
         TargetChange?.Invoke(target);
+    }
+
+    public void CycleTargeting(int delta)
+    {
+        if (_player.LocalEntity is not { } player || !TryComp(player, out TargetingComponent? targeting))
+            return;
+
+        var max = (int) TargetBodyPartNonFlag.Max;
+
+        // delta = 1
+        // 0 -> 1 (1 % 13)
+        // 12 -> 0 (13 % 13)
+        // delta = -1
+        // 0 -> 12
+        // 12 -> 11
+        var next = (int) targeting.TargetNonFlag + delta;
+        if (next < 0)
+            next = max;
+        next %= max + 1;
+
+        TargetChange?.Invoke((TargetBodyPart) (1 << next));
     }
 }

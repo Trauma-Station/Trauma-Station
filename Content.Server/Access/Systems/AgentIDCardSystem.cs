@@ -1,25 +1,24 @@
 // <Trauma>
 using Content.Trauma.Common.NanoChat;
 // </Trauma>
-using Content.Server.Access.Components;
-using Content.Server.Popups;
-using Content.Shared.UserInterface;
-using Content.Shared.Access.Components;
-using Content.Shared.Access.Systems;
-using Content.Shared.Interaction;
-using Content.Shared.StatusIcon;
-using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
-using Content.Shared.Roles;
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.Access.Components;
 using Content.Server.Clothing.Systems;
 using Content.Server.Implants;
-using Content.Server.VoiceMask;
+using Content.Server.Popups;
+using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Implants;
+using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Lock;
 using Content.Shared.PDA;
+using Content.Shared.Roles;
+using Content.Shared.StatusIcon;
+using Content.Shared.UserInterface;
 using Content.Shared.VoiceMask;
+using Robust.Server.GameObjects;
 
 namespace Content.Server.Access.Systems
 {
@@ -31,7 +30,6 @@ namespace Content.Server.Access.Systems
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private IdCardSystem _cardSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private ChameleonClothingSystem _chameleon = default!;
         [Dependency] private ChameleonControllerSystem _chamController = default!;
         [Dependency] private LockSystem _lock = default!;
@@ -48,17 +46,6 @@ namespace Content.Server.Access.Systems
             SubscribeLocalEvent<AgentIDCardComponent, AgentIDCardJobIconChangedMessage>(OnJobIconChanged);
             SubscribeLocalEvent<AgentIDCardComponent, InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent>>(OnChameleonControllerOutfitChangedItem);
             SubscribeLocalEvent<AgentIDCardComponent, InventoryRelayedEvent<VoiceMaskNameUpdatedEvent>>(OnVoiceMaskNameChanged);
-            SubscribeLocalEvent<AgentIDCardComponent, AgentIDCardNumberChangedMessage>(OnNumberChanged); // DeltaV
-        }
-
-        // DeltaV - Add number change handler
-        private void OnNumberChanged(Entity<AgentIDCardComponent> ent, ref AgentIDCardNumberChangedMessage args)
-        {
-            if (!TryComp<NanoChatCardComponent>(ent, out var comp))
-                return;
-
-            _nanoChat.SetNumber((ent, comp), args.Number);
-            Dirty(ent, comp);
         }
 
         private void OnChameleonControllerOutfitChangedItem(Entity<AgentIDCardComponent> ent, ref InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent> args)
@@ -66,13 +53,13 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(ent, out var idCardComp))
                 return;
 
-            _prototypeManager.Resolve(args.Args.ChameleonOutfit.Job, out var jobProto);
+            ProtoMan.Resolve(args.Args.ChameleonOutfit.Job, out var jobProto);
 
             var jobIcon = args.Args.ChameleonOutfit.Icon ?? jobProto?.Icon;
             var jobName = args.Args.ChameleonOutfit.Name ?? jobProto?.Name ?? "";
 
             if (jobIcon != null)
-                _cardSystem.TryChangeJobIcon(ent, _prototypeManager.Index(jobIcon.Value), idCardComp);
+                _cardSystem.TryChangeJobIcon(ent, ProtoMan.Index(jobIcon.Value), idCardComp);
 
             if (jobName != "")
                 _cardSystem.TryChangeJobTitle(ent, Loc.GetString(jobName), idCardComp);
@@ -93,8 +80,8 @@ namespace Content.Server.Access.Systems
             if (idSlotGear == null)
                 return;
 
-            var proto = _prototypeManager.Index(idSlotGear);
-            if (!proto.TryGetComponent<PdaComponent>(out var comp, EntityManager.ComponentFactory))
+            var proto = ProtoMan.Index(idSlotGear);
+            if (!proto.TryComp<PdaComponent>(out var comp, EntityManager.ComponentFactory))
                 return;
 
             _chameleon.SetSelectedPrototype(ent, comp.IdCard);
@@ -165,16 +152,10 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(uid, out var idCard))
                 return;
 
-            // DeltaV - Get current number if it exists
-            uint? currentNumber = null;
-            if (TryComp<NanoChatCardComponent>(uid, out var comp))
-                currentNumber = comp.Number;
-
             var state = new AgentIDCardBoundUserInterfaceState(
                 idCard.FullName ?? "",
                 idCard.LocalizedJobTitle ?? "",
-                idCard.JobIcon,
-                currentNumber); // DeltaV - Pass current number
+                idCard.JobIcon);
 
             _uiSystem.SetUiState(uid, AgentIDCardUiKey.Key, state);
         }
@@ -200,7 +181,7 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(uid, out var idCard))
                 return;
 
-            if (!_prototypeManager.Resolve(args.JobIconId, out var jobIcon))
+            if (!ProtoMan.Resolve(args.JobIconId, out var jobIcon))
                 return;
 
             _cardSystem.TryChangeJobIcon(uid, jobIcon, idCard);
@@ -213,7 +194,7 @@ namespace Content.Server.Access.Systems
 
         private bool TryFindJobProtoFromIcon(JobIconPrototype jobIcon, [NotNullWhen(true)] out JobPrototype? job)
         {
-            foreach (var jobPrototype in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            foreach (var jobPrototype in ProtoMan.EnumeratePrototypes<JobPrototype>())
             {
                 if (jobPrototype.Icon == jobIcon.ID)
                 {

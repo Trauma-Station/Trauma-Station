@@ -15,7 +15,6 @@ namespace Content.Trauma.Shared.Language.Systems;
 
 public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedGameTicker _ticker = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
@@ -34,7 +33,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 
     public LanguagePrototype? GetLanguagePrototype(ProtoId<LanguagePrototype> id)
     {
-        _prototype.TryIndex(id, out var proto);
+        ProtoMan.TryIndex(id, out var proto);
         return proto;
     }
 
@@ -42,13 +41,30 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
     {
         _builder.Clear();
         var ratio = 1.0f;
-        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+        if (_knowledge.GetContainer(messageSource) is { } brain)
         {
-            if (_knowledge.GetMastery(skill.Comp) > 1)
-                ratio = 0.0f;
+            if (_knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+            {
+                if (_knowledge.GetMastery(skill.Comp) > 1)
+                    ratio = 0.0f;
+                else
+                    ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+            }
             else
-                ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+            {
+                ratio = 1.0f;
+            }
         }
+        else
+        {
+            // In case source does not have a knowledge holder then it speaks/listens in perfect tongue.
+            ratio = 0.0f;
+        }
+
+        // Catch incase obfuscation method doesn't use a ratio. Very important, do not remove.
+        if (ratio <= 0.0f)
+            return message;
+
         language.Obfuscation.Obfuscate(_builder, message, this, ratio);
 
         return _builder.ToString();
@@ -95,7 +111,12 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
-        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language);
+        // Kind of important that knowledge holders don't understand everything so they use the obfuscation logic.
+        var canUnderstand = true;
+        if (_knowledge.GetContainer(ent.Owner) is { } brain)
+            canUnderstand = _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } unit && _knowledge.GetMastery(unit.Comp) >= 2;
+
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && canUnderstand;
     }
 
     public bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
@@ -113,7 +134,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
     {
         if (!Resolve(ent, ref ent.Comp, logMissing: false)
             || string.IsNullOrEmpty(ent.Comp.CurrentLanguage)
-            || !_prototype.Resolve(ent.Comp.CurrentLanguage, out var proto))
+            || !ProtoMan.Resolve(ent.Comp.CurrentLanguage, out var proto))
             return Universal;
 
         return proto;
@@ -181,6 +202,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
             ent.Comp.Speaks.Remove(language);
         if (removeUnderstood)
             ent.Comp.Understands.Remove(language);
+        EnsureValidLanguage(ent.AsNullable());
         Dirty(ent);
     }
 
@@ -189,8 +211,11 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
     ///   If not, sets it to the first entry of its SpokenLanguages list, or universal if it's empty.
     /// </summary>
     /// <returns>True if the current language was modified, false otherwise.</returns>
-    public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent> ent)
+    public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent?> ent)
     {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
         if (!ent.Comp.Speaks.Contains(ent.Comp.CurrentLanguage))
         {
             ent.Comp.CurrentLanguage = ent.Comp.Speaks.FirstOrDefault(UniversalPrototype);

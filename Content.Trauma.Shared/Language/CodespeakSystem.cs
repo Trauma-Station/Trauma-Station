@@ -15,7 +15,6 @@ namespace Content.Trauma.Shared.Language;
 /// </summary>
 public sealed partial class CodespeakSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public static ProtoId<LocalizedDatasetPrototype> NamesFirstMale = "NamesFirstMale";
     public static ProtoId<LocalizedDatasetPrototype> NamesFirstFemale = "NamesFirstFemale";
@@ -55,7 +54,7 @@ public sealed partial class CodespeakSystem : EntitySystem
     private void LoadPrototypes()
     {
         _jobs.Clear();
-        foreach (var job in _proto.EnumeratePrototypes<JobPrototype>())
+        foreach (var job in ProtoMan.EnumeratePrototypes<JobPrototype>())
         {
             // no deathsquad or borg?
             if (!job.SetPreference || !job.ApplyTraits)
@@ -117,9 +116,9 @@ public sealed partial class CodespeakSystem : EntitySystem
                         }
                         else
                         {
-                            builder.Append(rand.Pick(_proto.Index(rand.Prob(0.5f) ? NamesFirstMale : NamesFirstFemale)));
+                            builder.Append(rand.Pick(ProtoMan.Index(rand.Prob(0.5f) ? NamesFirstMale : NamesFirstFemale)));
                             builder.Append(" ");
-                            builder.Append(rand.Pick(_proto.Index(NamesLast)));
+                            builder.Append(rand.Pick(ProtoMan.Index(NamesLast)));
                         }
                     }
                     else
@@ -138,7 +137,7 @@ public sealed partial class CodespeakSystem : EntitySystem
             }
 
             if (dataset != null)
-                builder.Append(rand.Pick(_proto.Index(dataset)).ToLower());
+                builder.Append(rand.Pick(ProtoMan.Index(dataset)).ToLower());
 
             builder.Append(words == 1 ? "." : ", ");
         }

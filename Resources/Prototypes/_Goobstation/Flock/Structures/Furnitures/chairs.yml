@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: strange glass chair
   description: Looks comfortable, despite the edges.

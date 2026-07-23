@@ -2,7 +2,7 @@
 
 - type: entity
   id: EngineeringTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: engineering techfab
   description: Prints equipment and circuitboards for use by engineering department.
   components:
@@ -39,6 +39,7 @@
     - MiscSignallersStatic
     - NailgunStatic
     - NailsStatic
+    - ReactorPartsBasic
     dynamicPacks:
     - ConstructionBagOfHolding
     - AdvancedTools
@@ -46,7 +47,6 @@
     - EngineeringWeapons
     - PowerCells
     - Equipment
-    # - ServiceWeapons
     - SpecOpsGoogles
     - EngineeringBoards
     - SharedBoards
@@ -56,6 +56,7 @@
     - ScienceClothing
     - TraumaScienceClothing
     - UpgradeKits
+    - ReactorCircuitboards
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NailgunEvilStatic
@@ -71,7 +72,7 @@
 
 - type: entity
   id: CargoTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: cargo techfab
   description: Prints equipment and circuitboards for use by cargo department.
   components:
@@ -135,7 +136,7 @@
 
 - type: entity
   id: ScienceTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: science techfab
   description: Prints equipment and circuitboards for use by science department.
   components:
@@ -222,7 +223,7 @@
 
 - type: entity
   id: ServiceTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: service techfab
   description: Prints equipment and circuitboards for use by service department.
   components:
@@ -256,10 +257,12 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
+    - ServiceBoardsTrauma
+    - ServiceBoardsGoob
+    - Translators
     - Janitor
     - Instruments
     - FauxTiles
-    # - ServiceWeapons
     - MedicalMisc
     - MechBoardsCivilian
     - MechWeaponsCivilian
@@ -267,12 +270,10 @@
     - SharedBoards
     - CameraBoards
     - ServiceTools
-    - ServiceBoardsGoob # goob
-    # Einstein Engines Packs
-    - Translators
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ServiceBoardsEvilStatic # Donk Co microwave circiutboard
+  - type: MasterSiloClient # probably only lathe in service
   - type: MaterialStorage
     whitelist:
       tags:

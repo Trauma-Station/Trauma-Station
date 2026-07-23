@@ -59,9 +59,6 @@ public sealed partial class SpeechOverrideInfo
     [DataField]
     public string? BoldFontId; // Goob Edit - Custom Bolded Fonts
 
-    [DataField]
-    public bool AllowRadio = true;
-
     /// <summary>
     ///     If false, the entity can use this language even when it's unable to speak (i.e. muffled or muted),
     ///     and accents are not applied to messages in this language.

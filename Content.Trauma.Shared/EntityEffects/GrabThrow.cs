@@ -23,9 +23,6 @@ public sealed partial class GrabThrow : EntityEffectBase<GrabThrow>
 
     [DataField]
     public bool DropItems = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
 }
 
 public sealed partial class GrabThrowEffectSystem : EntityEffectSystem<TransformComponent, GrabThrow>

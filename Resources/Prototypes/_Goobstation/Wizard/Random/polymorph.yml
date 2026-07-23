@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: weightedRandomEntity
@@ -87,6 +79,27 @@
 - type: weightedRandomEntity
   id: WabbajackAnimal
   weights:
+    MobBearSea: 1
+    MobSquidSea: 1
+    MobSpiderCrabSea: 1
+    MobKraitSea: 1
+    MobArcherSea: 1
+    MobEelSea: 1
+    MobCobra: 1
+    MobSnakeGrass: 1
+    MobYellowBellySnake: 1
+    MobMantis: 1
+    MobMantisShrimp: 1
+    MobShrimp: 1
+    MobDartFrog1: 1
+    MobDartFrog2: 1
+    MobDartFrog3: 1
+    MobDartFrog4: 1
+    MobDartFrog5: 1
+    MobDartFrog6: 1
+    MobBunny: 1
+    MobBunnySea: 1
+    MobBunnyEvil: 1
     MobBat: 1
     MobBee: 1
     MobChicken: 0.33

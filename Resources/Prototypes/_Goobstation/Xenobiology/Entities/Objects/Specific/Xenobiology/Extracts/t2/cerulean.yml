@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: CeruleanSlimeExtract
   parent: BaseSlimeExtract
@@ -35,12 +37,9 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:RelaySolution
-        name: extract
-        effects:
-        - !type:AdjustReagent
-          reagent: XenobioJellyCerulean
-          amount: 1
+      - !type:AdjustReagent
+        reagent: XenobioJellyCerulean
+        amount: 1
   - type: Tag
     tags:
     - XenobiologyCeruleanExtract

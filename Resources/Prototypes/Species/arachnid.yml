@@ -12,3 +12,9 @@
   sexes:
   - Unsexed
   knowledge: Arachnid # Trauma
+  defaultSoundsBySex:
+  - UnisexArachnid
+  - UnisexArachnid
+  - UnisexArachnid
+  voices:
+  - UnisexArachnid

@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Firewatch <54725557+musicmanvr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # Operative Balloons, looks just like the real thing!
 
 - type: entity
@@ -10,7 +5,6 @@
   id: BaseDecoy
   abstract: true
   components:
-  - type: Rotatable
   - type: Sprite
     sprite: Objects/Tools/Decoys/operative_decoy.rsi
     layers:
@@ -25,11 +19,11 @@
         !type:DamageTrigger
         damage: 100
       behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:PlaySoundBehavior
-          sound:
-            path: /Audio/Effects/pop_high.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/pop_high.ogg
   - type: Appearance
   - type: Item
     size: Normal

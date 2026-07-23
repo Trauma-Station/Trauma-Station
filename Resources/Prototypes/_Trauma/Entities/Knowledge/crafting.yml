@@ -1,14 +1,17 @@
-# Level 0 - 0
-# Level 1 - 1-25
-# Level 2 = 26 - 50
-# Level 3 = 51 - 75
-# Level 4 = 76 - 87
-# Level 5 = 88 - 100
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Mastery 0 - 0
+# Mastery 1 - 1-24
+# Mastery 2 = 25 - 49
+# Mastery 3 = 50 - 74
+# Mastery 4 = 75 - 87
+# Mastery 5 = 88 - 100
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: FabricationKnowledge
   name: Fabrication
+  description: Higher tiers of fabrication allow you to craft and construct more advanced recipes from memory.
   components:
   - type: Knowledge
     experienceCost: 15
@@ -17,37 +20,44 @@
 - type: entity
   parent: BaseCraftingKnowledge
   id: WeaponsKnowledge
-  name: Weaponsmith
+  name: Weaponsmithing
+  description: Determines quality of handmade and forged weapons.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: ArmorKnowledge
-  name: Armorsmith
+  name: Armorsmithing
+  description: Determines quality of handmade armor.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: MetalworkingKnowledge
   name: Metalworking
+  description: Determines quality of metal construction and all forged items.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: CarvingKnowledge
   name: Carving
+  description: Determines quality of wooden construction.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: GunsmithingKnowledge
   name: Gunsmithing
+  description: Determines quality of handmade firearms.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: MechanicsKnowledge
   name: Mechanics
+  description: Determines quality of some machines and improvised devices.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: TailoringKnowledge
   name: Tailoring
+  description: Determines quality of handmade clothing.
 
 # - type: entity - Also effects quality, but has a few recipes.
 #   parent: BaseCraftingKnowledge

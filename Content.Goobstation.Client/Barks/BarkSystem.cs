@@ -15,7 +15,6 @@ public sealed partial class BarkSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAudioSystem _sharedAudio = default!;
 
@@ -33,7 +32,7 @@ public sealed partial class BarkSystem : EntitySystem
 
     public void OnPreviewBark(PreviewBarkEvent ev)
     {
-        if (!_prototypeManager.TryIndex<BarkPrototype>(ev.BarkProtoID, out var proto))
+        if (!ProtoMan.TryIndex<BarkPrototype>(ev.BarkProtoID, out var proto))
             return;
 
         var messageLength = _random.Next(5, 20);
@@ -50,7 +49,7 @@ public sealed partial class BarkSystem : EntitySystem
         var sourceEntity = GetEntity(ev.SourceUid);
         if (!TryComp<SpeechSynthesisComponent>(sourceEntity, out var comp)
             || comp.VoicePrototypeId is null
-            || !_prototypeManager.TryIndex<BarkPrototype>(comp.VoicePrototypeId, out var proto))
+            || !ProtoMan.TryIndex<BarkPrototype>(comp.VoicePrototypeId, out var proto))
             return;
 
         PlayBark(sourceEntity, ev.Message, ev.Whisper, proto);
@@ -138,7 +137,7 @@ public sealed partial class BarkSystem : EntitySystem
 
             if (sound is ResolvedCollectionSpecifier collection && collection.Collection != null)
             {
-                var soundCollection = _prototypeManager.Index<SoundCollectionPrototype>(collection.Collection);
+                var soundCollection = ProtoMan.Index<SoundCollectionPrototype>(collection.Collection);
                 var index = hashCode % soundCollection.PickFiles.Count;
                 sound = new ResolvedCollectionSpecifier(collection.Collection, index);
             }

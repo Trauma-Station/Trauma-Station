@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Clothing.Components;
+using Content.Shared.Examine;
+using Content.Shared.Inventory;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
@@ -11,21 +14,30 @@ public sealed class SlowdownResistanceSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SlowdownResistanceComponent, BeforeMovespeedModifierAppliedEvent>(OnBeforeModifierApplied);
+        Subs.SubscribeWithRelay<SlowdownResistanceComponent, BeforeMovespeedModifierAppliedEvent>(
+            OnBeforeModifierApplied,
+            held: false);
+
+        SubscribeLocalEvent<SlowdownResistanceComponent, ExaminedEvent>(OnExamine);
+    }
+
+    private void OnExamine(Entity<SlowdownResistanceComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasComp<ClothingComponent>(ent))
+            return;
+
+        var reduction = MathF.Round(ent.Comp.Reduction * 100f);
+        args.PushMarkup(Loc.GetString("slowdown-resistance-component-examine-message", ("reduction", reduction)));
     }
 
     private void OnBeforeModifierApplied(Entity<SlowdownResistanceComponent> ent, ref BeforeMovespeedModifierAppliedEvent args)
     {
-        args.WalkModifier = ModifySlowdown(args.WalkModifier, ent.Comp.Factor);
-        args.SprintModifier = ModifySlowdown(args.SprintModifier, ent.Comp.Factor);
+        args.WalkModifier = ModifySlowdown(args.WalkModifier, ent.Comp.Reduction);
+        args.SprintModifier = ModifySlowdown(args.SprintModifier, ent.Comp.Reduction);
     }
 
-    private float ModifySlowdown(float movementModifier, float factor)
+    private float ModifySlowdown(float movementModifier, float reduction)
     {
-        if (movementModifier >= 1f)
-            return movementModifier;
-        var slowdown = 1f - movementModifier;
-        var modified = slowdown * factor;
-        return 1f - modified;
+        return MathF.Min(MathF.Max(1f, movementModifier), movementModifier + reduction);
     }
 }

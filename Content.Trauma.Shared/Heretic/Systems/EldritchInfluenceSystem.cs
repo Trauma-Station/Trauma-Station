@@ -5,16 +5,15 @@ using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Store.Components;
+using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
-using Content.Trauma.Shared.Wizard;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -23,6 +22,7 @@ namespace Content.Trauma.Shared.Heretic.Systems;
 
 public sealed partial class EldritchInfluenceSystem : EntitySystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedDoAfterSystem _doafter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -31,17 +31,17 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
-    [Dependency] private ISharedChatManager _chatMan = default!;
-    [Dependency] private ISharedPlayerManager _playerMan = default!;
+    [Dependency] private ISharedChatManager _chat = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private INetManager _net = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     public static EntProtoId RealityShiftIntermediate = "EldritchInfluenceIntermediate";
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<EldritchInfluenceComponent, InteractHandEvent>(OnInteract);
         SubscribeLocalEvent<EldritchInfluenceComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<EldritchInfluenceComponent, EldritchInfluenceDoAfterEvent>(OnDoAfter);
@@ -53,30 +53,23 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (HasComp<SpectralComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner) ||
-            HasComp<WizardComponent>(args.Examiner) || HasComp<ApprenticeComponent>(args.Examiner) ||
-            _heretic.IsHereticOrGhoul(args.Examiner))
+        if (_whitelist.IsWhitelistPass(ent.Comp.Blacklist, args.Examiner) ||
+            !_actorQuery.TryComp(args.Examiner, out var actor) ||
+            _heretic.IsHereticOrGhoul(args.Examiner) ||
+            _status.HasStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect))
             return;
 
-        if (_status.HasStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect))
-            return;
-
-        if (!_mind.TryGetMind(args.Examiner, out _, out var mind))
-            return;
-
-        if (!_playerMan.TryGetSessionById(mind.UserId, out var session))
-            return;
-
+        var session = actor.PlayerSession;
         _status.TryAddStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect, out _, ent.Comp.ExamineDelay);
 
         _audio.PlayGlobal(ent.Comp.ExamineSound, session);
 
         var baseMessage = ent.Comp.ExamineBaseMessage;
-        var message = _random.Pick(_proto.Index(ent.Comp.HeathenExamineMessages));
+        var message = _random.Pick(ProtoMan.Index(ent.Comp.HeathenExamineMessages));
         var size = ent.Comp.FontSize;
         var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
         SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
-        _chatMan.ChatMessageToOne(ChatChannel.Server,
+        _chat.ChatMessageToOne(ChatChannel.Server,
             message,
             loc,
             default,
@@ -85,7 +78,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             canCoalesce: false);
 
         var effects = _random.Pick(ent.Comp.PossibleExamineEffects);
-        _effects.ApplyEffects(args.Examiner, effects);
+        _effects.ApplyEffects(args.Examiner, effects, predicted: false);
     }
 
     public bool CollectInfluence(Entity<EldritchInfluenceComponent> influence, EntityUid user, EntityUid? used = null)
@@ -113,7 +106,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             Hidden = true,
         };
 
-        _popup.PopupPredicted(Loc.GetString("heretic-influence-start"), influence, user);
+        _popup.PopupEntity(Loc.GetString("heretic-influence-start"), influence, user);
 
         if (!_doafter.TryStartDoAfter(dargs))
             return false;
@@ -158,6 +151,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
 
         if (args.Cancelled || args.Target == null ||
             !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind) ||
+            // TODO: move heretic mind to the mind role
             !TryComp(mind, out StoreComponent? store) || !TryComp(mind, out MindComponent? mindComp))
             return;
 

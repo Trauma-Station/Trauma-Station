@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: trait
   id: Swedish
   name: trait-swedish-name
@@ -11,3 +13,14 @@
   - !type:AddMutation
     mutation: MutationSwedish
     automatic: true
+
+- type: trait
+  id: Caveman
+  name: trait-caveman-name
+  description: trait-caveman-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: CavemanAccent
+  - type: ReplacementAccent
+    accent: Caveman

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   abstract: true
   id: BaseRevComponent
@@ -34,3 +36,10 @@
   result: RevHandcuffs
   materials:
     Steel: 200
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevBallBearings
+  result: RevBallBearings
+  materials:
+    Steel: 300

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Valid rev items that you can get flogged for
 - type: entity
   abstract: true
@@ -37,3 +39,19 @@
   components:
   - type: Contraband
     allowedJobs: [ Chaplain ]
+
+- type: entity
+  abstract: true
+  id: BaseEngineeringCargoContraband # for workboots
+  parent: BaseRestrictedContraband
+  components:
+  - type: Contraband
+    allowedDepartments: [ Engineering, Cargo ]
+
+- type: entity
+  abstract: true
+  parent: BaseRestrictedContraband
+  id: BaseLibrarianContraband # for librarian blade non-traitor edition
+  components:
+  - type: Contraband
+    allowedJobs: [ Librarian ]

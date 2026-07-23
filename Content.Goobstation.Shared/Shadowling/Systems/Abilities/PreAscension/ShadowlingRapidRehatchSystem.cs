@@ -73,7 +73,7 @@ public sealed partial class ShadowlingRapidRehatchSystem : EntitySystem
             || args.Handled)
             return;
 
-        _popup.PopupPredicted(Loc.GetString("shadowling-rapid-rehatch-complete"), uid, uid, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("shadowling-rapid-rehatch-complete"), uid, uid, PopupType.Medium);
         _rejuvenate.PerformRejuvenate(uid);
 
         var effectEnt = Spawn(comp.RapidRehatchEffect, _transform.GetMapCoordinates(uid));

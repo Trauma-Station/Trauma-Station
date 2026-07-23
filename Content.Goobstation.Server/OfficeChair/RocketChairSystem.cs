@@ -17,7 +17,6 @@ namespace Content.Goobstation.Server.OfficeChair;
 public sealed partial class RocketChairSystem : SharedRocketChairSystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _tx = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -91,7 +90,7 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
         if (!_solution.TryGetSolution(uid, comp.FuelSolution, out var solnEnt))
             return;
 
-        var color = _proto.Index<ReagentPrototype>(comp.FuelReagent).SubstanceColor.WithAlpha(1f);
+        var color = ProtoMan.Index<ReagentPrototype>(comp.FuelReagent).SubstanceColor.WithAlpha(1f);
 
         var chairPos = _tx.GetMapCoordinates(uid);
         var dir = -comp.BoostDir;

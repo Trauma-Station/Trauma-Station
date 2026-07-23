@@ -2402,7 +2402,6 @@ entities:
   - uid: 375
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 18.5,12.5
       parent: 1
   - uid: 376
@@ -2478,19 +2477,16 @@ entities:
   - uid: 390
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 17.5,13.5
       parent: 1
   - uid: 391
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -5.5,-1.5
       parent: 1
   - uid: 392
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -5.5,1.5
       parent: 1
   - uid: 393
@@ -2541,7 +2537,6 @@ entities:
   - uid: 402
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 20.5,-6.5
       parent: 1
   - uid: 403

@@ -35,6 +35,19 @@ public sealed partial class CircuitSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveCircuitComponent, CircuitComponent>();
         while (query.MoveNext(out var uid, out _, out var comp))
         {
+            // change any momentary pulses back to low since theyve been processed
+            for (var i = 0; i < comp.Inputs.Count; i++)
+            {
+                if (comp.Inputs[i] != Pulse.Instance)
+                    continue;
+
+                comp.Inputs[i] = False.Instance;
+                foreach (var input in comp.LinkedInputs[i])
+                {
+                    ValueChanged(comp, input, False.Instance);
+                }
+            }
+
             var changed = comp.Changed;
             if (changed.Count == 0)
                 return;
@@ -54,19 +67,6 @@ public sealed partial class CircuitSystem : EntitySystem
                 foreach (var output in gate.LinkedOutputs)
                 {
                     ValueChanged(comp, output, gate.Output);
-                }
-            }
-
-            // change any momentary pulses back to low since theyve been processed
-            for (var i = 0; i < comp.Inputs.Count; i++)
-            {
-                if (comp.Inputs[i] is not Pulse p)
-                    continue;
-
-                comp.Inputs[i] = False.Instance;
-                foreach (var input in comp.LinkedInputs[i])
-                {
-                    ValueChanged(comp, input, False.Instance);
                 }
             }
         }

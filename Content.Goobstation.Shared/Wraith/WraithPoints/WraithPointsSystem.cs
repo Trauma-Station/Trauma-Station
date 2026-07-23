@@ -83,7 +83,7 @@ public sealed partial class WraithPointsSystem : EntitySystem
         if (GetCurrentWp(args.User) >= ent.Comp.WpConsume)
             return;
 
-        _popupSystem.PopupClient(Loc.GetString(ent.Comp.Popup), args.User, args.User);
+        _popupSystem.PopupEntity(Loc.GetString(ent.Comp.Popup), args.User, args.User);
         args.Cancelled = true;
     }
 

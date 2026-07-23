@@ -7,8 +7,6 @@ ghost-role-information-reinforcement-specialist-riot-melee-name = Station Reinfo
 ghost-role-information-reinforcement-specialist-riot-ranged-name = Station Reinforcement (Security Specialist - Riot Ranged)
 ghost-role-information-reinforcement-specialist-heavy-laser-name = Station Reinforcement (Security Specialist - Heavy Laser)
 ghost-role-information-reinforcement-specialist-shield-name = Station Reinforcement (Security Specialist - Shield)
-ghost-role-information-reinforcement-specialist-bodyguard-name = Station Reinforcement (Security Specialist - Bodyguard)
-ghost-role-information-reinforcement-specialist-advisor-name = Station Reinforcement (Security Specialist - Advisor)
 ghost-role-information-reinforcement-specialist-brigmedic-name = Station Reinforcement (Security Specialist - Brigmedic)
 ghost-role-information-reinforcement-cadet-name = Station Reinforcement (Security Cadet)
 
@@ -58,8 +56,8 @@ ghost-role-information-wailing-horse-desc = It hurts...Why does it hurt so much?
 ghost-role-information-ratma-name = Ratma
 ghost-role-information-ratma-desc = Hunt and kill.
 
-ghost-role-information-breadling-namee = Breadling
-ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
+ghost-role-information-breadling-name = Breadling
+ghost-role-information-breadling-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
 
 ghost-role-information-coconutcrab-name = Coconut Crab
 
@@ -108,3 +106,26 @@ ghost-role-information-demon-desc = KILL THOSE WHO DARE SUMMON YOU!!!
 
 ghost-role-information-demon-tame-name = Demon
 ghost-role-information-demon-tame-desc = Your will is bound to those who summoned you...
+
+ghost-role-information-cobra-space-name = Cobra
+ghost-role-information-cobra-space-description = Long fangs and a glowing hood, and the alluring look begs to come closer.
+
+ghost-role-information-purple-snake-name = Purple Snake
+ghost-role-information-purple-snake-description = A menacing purple snake from Kepler-283c.
+
+ghost-role-information-small-purple-snake-name = Small Purple Snake
+ghost-role-information-small-purple-snake-description = A smaller version of the menacing purple snake from Kepler-283c.
+
+ghost-role-information-sea-bunny-name = Sea Bunny
+ghost-role-information-sea-bunny-description = A sea version of the adorable bunny.
+
+ghost-role-information-bunny-name = Bunny
+ghost-role-information-bunny-description = The beloved bunny, cute, fluffy, and adorable.
+
+ghost-role-information-evil-bunny-name = Evil Bunny
+ghost-role-information-evil-bunny-description = KILL, MAIM, SLAUGHTER!!!
+
+ghost-role-information-syndicate-cyborg-medical-name = Syndicate Medical Cyborg
+
+ghost-role-information-syndicate-behonker-name = Syndicate Behonker
+ghost-role-information-syndicate-behonker-desc = A disciple of the Honkmother needs you. Aid them in their time of need.

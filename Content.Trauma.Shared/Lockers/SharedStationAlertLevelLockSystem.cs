@@ -31,7 +31,7 @@ public abstract partial class SharedStationAlertLevelLockSystem : EntitySystem
             return;
 
         if (!args.Silent)
-            _popup.PopupClient(Loc.GetString("access-failed-wrong-station-alert-level"), ent.Owner, args.User);
+            _popup.PopupEntity(Loc.GetString("access-failed-wrong-station-alert-level"), ent.Owner, args.User);
 
         args.Cancelled = true;
     }

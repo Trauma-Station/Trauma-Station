@@ -155,12 +155,9 @@ public sealed partial class SealableClothingSystem : EntitySystem
         var (uid, comp) = control;
         var user = args.User;
 
-        if (!args.CanComplexInteract)
+        if (!args.CanInteract || !args.CanComplexInteract)
             return;
 
-        // Prevent Station AI from toggling modsuit seals
-        if (HasComp<StationAiHeldComponent>(user))
-            throw new Exception("AI Should never be allowed to get strip verbs");
         // Since sealing control in wearer's container system just won't show verb on args.CanAccess
         if (!_interaction.InRangeUnobstructed(user, uid))
             return;
@@ -193,7 +190,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
 
     private void StartSealDoAfter(EntityUid user, Entity<SealableClothingControlComponent> control, EntityUid wearer)
     {
-        _popup.PopupClient("You start the suit's sealing process", wearer, user);
+        _popup.PopupEntity("You start the suit's sealing process", wearer, user);
         var args = new DoAfterArgs(EntityManager, user, control.Comp.NonWearerSealingTime, new StartSealingProcessDoAfterEvent(), control, wearer, control)
         {
             BreakOnDamage = true,
@@ -241,7 +238,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
 
         if (comp.IsInProcess)
         {
-            _popup.PopupClient(comp.IsCurrentlySealed
+            _popup.PopupEntity(comp.IsCurrentlySealed
                     ? Loc.GetString(comp.SealedInProcessToggleFailPopup)
                     : Loc.GetString(comp.UnsealedInProcessToggleFailPopup),
                 uid,
@@ -315,7 +312,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         // Popup if currently sealing
         if (comp.IsInProcess)
         {
-            _popup.PopupClient(Loc.GetString(comp.UnsealedInProcessToggleFailPopup), uid, args.User);
+            _popup.PopupEntity(Loc.GetString(comp.UnsealedInProcessToggleFailPopup), uid, args.User);
             _audio.PlayPvs(comp.FailSound, uid);
             args.Cancel();
             return;
@@ -334,7 +331,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         // Popup for attempting to singular unequip with full seal
         if (!args.Multiple)
         {
-            _popup.PopupClient(Loc.GetString(comp.CurrentlySealedToggleFailPopup), uid, args.User);
+            _popup.PopupEntity(Loc.GetString(comp.CurrentlySealedToggleFailPopup), uid, args.User);
             _audio.PlayPvs(comp.FailSound, uid);
             args.Cancel();
             return;
@@ -384,7 +381,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         {
             if (user == wearer) // Popup spam prevent
             {
-                _popup.PopupClient(Loc.GetString(comp.ToggleFailedPopup), uid, user);
+                _popup.PopupEntity(Loc.GetString(comp.ToggleFailedPopup), uid, user);
                 _audio.PlayPredicted(comp.FailSound, user.Value, user);
                 return false;
             }
@@ -449,7 +446,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
 
             if (!TryComp<SealableClothingComponent>(processingPart, out var sealableComponent) || !comp.IsInProcess)
             {
-                _popup.PopupClient(Loc.GetString(comp.ToggleFailedPopup), uid, comp.WearerEntity);
+                _popup.PopupEntity(Loc.GetString(comp.ToggleFailedPopup), uid, comp.WearerEntity);
                 _audio.PlayPredicted(comp.FailSound, uid, comp.WearerEntity);
 
                 continue;
@@ -589,7 +586,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         // Cancel if the control unit is sealed.
         if (TryComp<SealableClothingControlComponent>(toggleableEnt, out var controlSeal) && controlSeal.IsCurrentlySealed || controlSeal!.IsInProcess)
         {
-            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.UnEquipTarget);
+            _popup.PopupEntity(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.UnEquipTarget);
             args.Cancel();
             return;
         }
@@ -602,7 +599,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         {
             if (!TryComp<SealableClothingComponent>(partUid, out var partSeal) || !partSeal.IsSealed)
                 continue;
-            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.UnEquipTarget);
+            _popup.PopupEntity(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.UnEquipTarget);
             args.Cancel();
             return;
         }
@@ -614,7 +611,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         // Cancel if the control unit is sealed.
         if (TryComp<SealableClothingControlComponent>(toggleableEnt, out var controlSeal) && controlSeal.IsCurrentlySealed || controlSeal!.IsInProcess)
         {
-            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.User);
+            _popup.PopupEntity(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.User);
             args.Cancel();
             return;
         }
@@ -627,7 +624,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         {
             if (!TryComp<SealableClothingComponent>(partUid, out var partSeal) || !partSeal.IsSealed)
                 continue;
-            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.User);
+            _popup.PopupEntity(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.User);
             args.Cancel();
             return;
         }

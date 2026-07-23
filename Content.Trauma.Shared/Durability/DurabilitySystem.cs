@@ -35,7 +35,6 @@ public sealed partial class DurabilitySystem : EntitySystem
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly Dictionary<DurabilityState, Color> AssociatedColors = new()
     {
@@ -101,7 +100,8 @@ public sealed partial class DurabilitySystem : EntitySystem
         DirtyField(args.Weapon, comp, nameof(DurabilityComponent.CustomDurabilityModifiers));
     }
 
-    public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null, EntityUid? attacker = null, HashSet<EntityUid>? targets = null, EntityUid? used = null)
+    public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null,
+        EntityUid? attacker = null, HashSet<EntityUid>? targets = null, EntityUid? used = null)
     {
         if (!Resolve(uid, ref comp))
             return false;
@@ -125,14 +125,15 @@ public sealed partial class DurabilitySystem : EntitySystem
         // Don't raise the event if it didn't actually change.
         if (comp.DurabilityState != oldState)
         {
-            var stateEv = new DurabilityStateChangedEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
+            var stateEv = new DurabilityStateChangedEvent(oldState,
+                comp.DurabilityState, uid, attacker, targets, used);
             RaiseLocalEvent(uid, ref stateEv);
         }
 
         if (used is { } item)
         {
-            var stateUsedEv =
-                new DurabilityStateChangedByEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
+            var stateUsedEv = new DurabilityStateChangedByEvent(oldState,
+                comp.DurabilityState, uid, attacker, targets, used);
             RaiseLocalEvent(item, ref stateUsedEv);
         }
 
@@ -180,7 +181,7 @@ public sealed partial class DurabilitySystem : EntitySystem
         ExamineMats.Clear();
         foreach (var material in comp.RepairMaterials.Keys)
         {
-            if (!_proto.Resolve(material, out var proto))
+            if (!ProtoMan.Resolve(material, out var proto))
                 continue;
             ExamineMats.Add(proto);
         }
@@ -317,10 +318,9 @@ public sealed partial class DurabilitySystem : EntitySystem
             {
                 var locId = args.OldDamage <= 0 && args.Damage <= 0 ? "durability-reinforce-popup" : "durability-repair-popup";
                 var amount = args.OldDamage - FixedPoint2.Max(args.Damage, -ent.Comp.MaxRepairBonus);
-                _popup.PopupPredictedCoordinates(
+                _popup.PopupCoordinates(
                     Loc.GetString(locId, ("weapon", Name(ent.Owner)), ("amount", amount)),
-                    Transform(ent.Owner).Coordinates,
-                    null);
+                    Transform(ent.Owner).Coordinates);
                 break;
             }
             case > 0:
@@ -328,18 +328,16 @@ public sealed partial class DurabilitySystem : EntitySystem
                 if (!ent.Comp.DamagePopups.TryGetValue(ent.Comp.DurabilityState, out var pool))
                     return;
                 var locId = _random.Pick(pool);
-                _popup.PopupPredictedCoordinates(Loc.GetString(locId),
+                _popup.PopupCoordinates(Loc.GetString(locId),
                     Transform(ent.Owner).Coordinates,
-                    null,
                     PopupType.SmallCaution);
                 break;
             }
             case 0 when ent.Comp.Damage <= -ent.Comp.MaxRepairBonus:
             {
-                _popup.PopupPredictedCoordinates(
+                _popup.PopupCoordinates(
                     Loc.GetString("durability-repair-max", ("weapon", Name(ent.Owner))),
-                    Transform(ent.Owner).Coordinates,
-                    null);
+                    Transform(ent.Owner).Coordinates);
                 break;
             }
         }
@@ -370,7 +368,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             return;
 
         if (ent.Comp.OnBreakEffects is { } effects)
-            _effects.ApplyEffects(ent, effects, 1f, args.Attacker);
+            _effects.ApplyEffects(ent, effects, user: args.Attacker);
         if (!ent.Comp.DeleteOnDestroyed)
             return;
         PredictedQueueDel(ent.Owner);

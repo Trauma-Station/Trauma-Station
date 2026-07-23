@@ -41,8 +41,6 @@ public readonly record struct ArenaParticipantStatusChangedEvent(EntityUid Arena
 
 public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IChatManager _chatMan = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private SharedMapSystem _map = default!;
@@ -279,7 +277,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
             _transform.AnchorEntity(uid, xform);
         }
 
-        var tileId = _proto.Index(ent.Comp.Tile).TileId;
+        var tileId = ProtoMan.Index(ent.Comp.Tile).TileId;
 
         foreach (var indices in ent.Comp.TilesToRestore)
         {
@@ -300,7 +298,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
         }
 
         var coords = _transform.GetMapCoordinates(ent);
-        if (!_mapManager.TryFindGridAt(coords, out var grid, out var gridComp))
+        if (!_map.TryFindGridAt(coords, out var grid, out var gridComp))
         {
             QueueDel(ent);
             return;
@@ -405,7 +403,9 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
         Entity<MapGridComponent> grid)
     {
         var spawned = Spawn(proto, coords);
-        _transform.AnchorEntity((spawned, Transform(spawned)), grid);
+        var xform = Transform(spawned);
+        if (!xform.Anchored)
+            _transform.AnchorEntity((spawned, xform), grid);
         arena.SpawnedEntities.Add(spawned);
     }
 
@@ -415,7 +415,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
         int minRadius,
         int tileRadius)
     {
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coords), out var grid, out var gridComp))
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(coords), out var grid, out var gridComp))
             return null;
 
         var center = _map.TileIndicesFor(grid, gridComp, coords);
@@ -430,7 +430,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
         if (max < minRadius)
             return null;
 
-        var replacement = _proto.Index(tileReplacement);
+        var replacement = ProtoMan.Index(tileReplacement);
 
         var arena = EntityManager.CreateEntityUninitialized(proto, coords);
         var comp = EnsureComp<BladeArenaComponent>(arena);

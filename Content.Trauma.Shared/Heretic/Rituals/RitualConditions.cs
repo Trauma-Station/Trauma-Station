@@ -17,21 +17,19 @@ public abstract partial class BaseRitualCondition<T> : EntityConditionBase<T>, I
     public virtual bool ForceApplyOnRitual => false;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
-    {
-        return string.Empty;
-    }
+        => string.Empty;
 
-    public override bool RaiseEvent(EntityUid target, IEntityConditionRaiser raiser)
+    public override bool RaiseEvent(EntityUid target, EntityUid? user, IEntityConditionRaiser raiser)
     {
         if (raiser is not HereticRitualRaiser ritualRaiser)
-            return base.RaiseEvent(target, raiser);
+            return base.RaiseEvent(target, user, raiser);
 
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
-            return base.RaiseEvent(target, raiser);
+            return base.RaiseEvent(target, user, raiser);
 
         foreach (var t in ritualRaiser.GetTargets<EntityUid>(ApplyOn))
         {
-            if (base.RaiseEvent(t, raiser))
+            if (base.RaiseEvent(t, user, raiser))
                 continue;
 
             if (CancelLoc != null)
@@ -55,7 +53,7 @@ public sealed partial class InputCountCondition : BaseRitualCondition<InputCount
     [DataField]
     public string Result = string.Empty;
 
-    public override bool RaiseEvent(EntityUid target, IEntityConditionRaiser raiser)
+    public override bool RaiseEvent(EntityUid target, EntityUid? user, IEntityConditionRaiser raiser)
     {
         if (raiser is not HereticRitualRaiser ritualRaiser)
             return false;

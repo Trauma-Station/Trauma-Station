@@ -1,21 +1,5 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BeeRobynn <166929042+BeeRobynn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BeeRobynn <robynthewarcrime@proton.me>
-# SPDX-FileCopyrightText: 2025 Cattowo <2spoopy4u2handle@gmail.com>
-# SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-# SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 smudge <138918973+Cerise-Cattowo@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Accents that work off of word replacements.
 - type: accent #(Goobstation) New Yowie Accent, to whoever ends up reading this, remember to spell each word exactly
   id: bogan
@@ -346,7 +330,6 @@
     accent-scottish-words-62: accent-scottish-words-replace-62
     accent-scottish-words-63: accent-scottish-words-replace-63
     accent-scottish-words-64: accent-scottish-words-replace-64
-    accent-scottish-words-65: accent-scottish-words-replace-65
     accent-scottish-words-66: accent-scottish-words-replace-66
     accent-scottish-words-67: accent-scottish-words-replace-67
     accent-scottish-words-68: accent-scottish-words-replace-68
@@ -370,7 +353,6 @@
     accent-scottish-words-86: accent-scottish-words-replace-86
     accent-scottish-words-87: accent-scottish-words-replace-87
     accent-scottish-words-88: accent-scottish-words-replace-88
-    accent-scottish-words-89: accent-scottish-words-replace-89
     accent-scottish-words-90: accent-scottish-words-replace-90
     accent-scottish-words-91: accent-scottish-words-replace-91
     accent-scottish-words-92: accent-scottish-words-replace-92
@@ -391,22 +373,15 @@
     accent-scottish-words-107: accent-scottish-words-replace-107
     accent-scottish-words-108: accent-scottish-words-replace-108
     accent-scottish-words-109: accent-scottish-words-replace-109
-    accent-scottish-words-110: accent-scottish-words-replace-110
     accent-scottish-words-111: accent-scottish-words-replace-111
     accent-scottish-words-112: accent-scottish-words-replace-112
     accent-scottish-words-113: accent-scottish-words-replace-113
     accent-scottish-words-114: accent-scottish-words-replace-114
     accent-scottish-words-115: accent-scottish-words-replace-115
     accent-scottish-words-116: accent-scottish-words-replace-116
-    accent-scottish-words-117: accent-scottish-words-replace-117
-    accent-scottish-words-118: accent-scottish-words-replace-118
-    accent-scottish-words-119: accent-scottish-words-replace-119
-    accent-scottish-words-120: accent-scottish-words-replace-120
     accent-scottish-words-121: accent-scottish-words-replace-121
     accent-scottish-words-122: accent-scottish-words-replace-122
     accent-scottish-words-123: accent-scottish-words-replace-123
-    accent-scottish-words-124: accent-scottish-words-replace-124
-    accent-scottish-words-125: accent-scottish-words-replace-125
     accent-scottish-words-126: accent-scottish-words-replace-126
     accent-scottish-words-127: accent-scottish-words-replace-127
     accent-scottish-words-128: accent-scottish-words-replace-128
@@ -559,7 +534,6 @@
     accent-medieval-words-122: accent-medieval-words-replace-122
     accent-medieval-words-123: accent-medieval-words-replace-123
     accent-medieval-words-124: accent-medieval-words-replace-124
-    accent-medieval-words-125: accent-medieval-words-replace-125
     accent-medieval-words-126: accent-medieval-words-replace-126
     accent-medieval-words-127: accent-medieval-words-replace-127
     accent-medieval-words-128: accent-medieval-words-replace-128
@@ -670,9 +644,6 @@
     accent-medieval-words-233: accent-medieval-words-replace-233
     accent-medieval-words-234: accent-medieval-words-replace-234
     accent-medieval-words-235: accent-medieval-words-replace-235
-    accent-medieval-words-236: accent-medieval-words-replace-236
-    accent-medieval-words-237: accent-medieval-words-replace-237
-    accent-medieval-words-238: accent-medieval-words-replace-238
 
 - type: accent
   id: cheese

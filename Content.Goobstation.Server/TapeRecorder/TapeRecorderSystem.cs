@@ -16,7 +16,6 @@ public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private HandsSystem _hands = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private PaperSystem _paper = default!;
 
     public override void Initialize()
@@ -45,10 +44,10 @@ public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
             voice.NameOverride = message.Name ?? ent.Comp.DefaultName;
             // TODO: mimic the exact string chosen when the message was recorded
             var verb = message.Verb ?? SharedChatSystem.DefaultSpeechVerb;
-            speech.SpeechVerb = _proto.Index<SpeechVerbPrototype>(verb);
+            speech.SpeechVerb = ProtoMan.Index<SpeechVerbPrototype>(verb);
             //Play the message
             _chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false,
-                languageOverride: _proto.Index(message.Language ?? tape.DefaultLanguage));
+                languageOverride: ProtoMan.Index(message.Language ?? tape.DefaultLanguage));
         }
     }
 

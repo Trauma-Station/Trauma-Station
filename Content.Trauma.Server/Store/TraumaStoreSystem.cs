@@ -50,7 +50,7 @@ public sealed partial class TraumaStoreSystem : EntitySystem
             return;
         }
 
-        _admin.Add(LogType.StoreRefund, LogImpact.Low, $"{ToPrettyString(buyer):player} has refunded their purchases from {ToPrettyString(uid):store}");
+        _admin.Add(LogType.StoreRefund, LogImpact.Low, $"{buyer:player} has refunded their purchases from {uid:store}");
 
         for (var i = component.BoughtEntities.Count - 1; i >= 0; i--)
         {

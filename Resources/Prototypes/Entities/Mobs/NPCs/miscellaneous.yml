@@ -1,7 +1,7 @@
 - type: entity
   name: laser raptor
   id: MobLaserRaptor
-  parent: [ AppearanceLaserRaptor, SimpleMobBase ] # Shitmed
+  parent: [AppearanceLaserRaptor, SimpleMobBase, BaseSlicingRefinable] # Trauma - added
   description: From the Viking age.
   components:
     - type: NpcFactionMember
@@ -37,8 +37,8 @@
       thresholds:
         0: Alive
         100: Dead
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
       - id: FoodMeatChicken
         amount: 2
     - type: MovementSpeedModifier
@@ -77,8 +77,7 @@
     rules: ghost-role-information-familiar-rules
     mindRoles:
     - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: GhostTakeoverAvailable
   - type: CanEscapeInventory
     baseResistTime: 3
@@ -148,8 +147,8 @@
         Base: alive
       Dead:
         Base: dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatTomato
       amount: 2
   - type: Destructible

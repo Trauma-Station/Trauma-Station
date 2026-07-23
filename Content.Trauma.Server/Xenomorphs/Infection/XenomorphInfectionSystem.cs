@@ -73,7 +73,8 @@ public sealed partial class XenomorphInfectionSystem : EntitySystem
             if (!infection.Infected.HasValue || infection.GrowthStage >= infection.MaxGrowthStage || time < infection.NextPointsAt)
                 continue;
 
-            infection.NextPointsAt = time + infection.GrowTime;
+            var growTime = _mobState.IsCritical(infection.Infected.Value) ? infection.GrowTime * 2 : infection.GrowTime;
+            infection.NextPointsAt = time + growTime;
 
             if (_mobState.IsDead(infection.Infected.Value) || !_random.Prob(infection.GrowProb))
                 continue;
@@ -87,7 +88,7 @@ public sealed partial class XenomorphInfectionSystem : EntitySystem
 
             if (infection.Effects.TryGetValue(infection.GrowthStage, out var effects))
             {
-                _effects.ApplyEffects(infection.Infected.Value, effects);
+                _effects.ApplyEffects(infection.Infected.Value, effects, predicted: false);
             }
 
             if (infection.GrowthStage < infection.MaxGrowthStage)

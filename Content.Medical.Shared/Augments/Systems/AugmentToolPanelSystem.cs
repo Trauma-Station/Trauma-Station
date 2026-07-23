@@ -93,7 +93,7 @@ public sealed partial class AugmentToolPanelSystem : EntitySystem
         }
 
         // no hand found rip bozo
-        _popup.PopupClient(Loc.GetString("augment-tool-panel-no-hand"), body, body, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("augment-tool-panel-no-hand"), body, body, PopupType.LargeCaution);
     }
 
     /// <summary>
@@ -115,11 +115,11 @@ public sealed partial class AugmentToolPanelSystem : EntitySystem
                 }
 
                 if (desiredTool == null) // don't double popup, only show it when deselecting
-                    _popup.PopupClient(Loc.GetString("augment-tool-panel-retracted", ("item", item)), body, body);
+                    _popup.PopupEntity(Loc.GetString("augment-tool-panel-retracted", ("item", item)), body, body);
             }
             else
             {
-                _popup.PopupClient(Loc.GetString("augment-tool-panel-hand-full"), body, body, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString("augment-tool-panel-hand-full"), body, body, PopupType.SmallCaution);
                 return;
             }
 
@@ -139,12 +139,12 @@ public sealed partial class AugmentToolPanelSystem : EntitySystem
 
         if (!_hands.TryPickup(body, tool, hand))
         {
-            _popup.PopupClient(Loc.GetString("augment-tool-panel-cannot-pick-up"), body, body, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("augment-tool-panel-cannot-pick-up"), body, body, PopupType.SmallCaution);
             return;
         }
 
         EnsureComp<AugmentToolPanelActiveItemComponent>(tool);
         _toggle.TryActivate(augment.Owner, user: body);
-        _popup.PopupClient(Loc.GetString("augment-tool-panel-selected", ("item", tool)), body, body);
+        _popup.PopupEntity(Loc.GetString("augment-tool-panel-selected", ("item", tool)), body, body);
     }
 }

@@ -10,7 +10,6 @@
     layers:
     - state: base
   - type: Anchorable
-  - type: Rotatable
   - type: Construction
     graph: LogicGate
     node: empty
@@ -20,11 +19,6 @@
   parent: LogicEmptyCircuit
   id: BaseLogicItem
   components:
-  # <Trauma>
-  - type: SubFloorHide # sneaky
-  - type: Visibility
-  - type: CollideOnAnchor
-  # </Trauma>
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice

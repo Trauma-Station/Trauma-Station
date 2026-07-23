@@ -1,13 +1,10 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: fermid
-  id: MobFermidBase
-  parent: [ SimpleSpaceMobBase, MobCombat, AppearanceSpaceAnimal ]
   abstract: true
+  parent: [ AppearanceSpaceAnimal, SimpleSpaceMobBase, BaseSlicingRefinable, MobNightVision ]
+  id: MobFermidBase
+  name: fermid
   description: Extremely hostile asteroid-dwelling bugs. Best to avoid them wherever possible.
   components:
   - type: VentCrawler
@@ -33,8 +30,8 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSpider
       amount: 2
   - type: Bloodstream
@@ -81,10 +78,6 @@
     allowedEmotes: ['Click', 'Chitter']
   - type: TypingIndicator
     proto: spider
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: Fauna
 
 - type: entity

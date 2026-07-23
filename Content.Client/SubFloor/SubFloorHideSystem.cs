@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared.Atmos.Components;
-using Content.Trauma.Common.Sprite;
 // </Trauma>
 using Content.Shared.DrawDepth;
 using Content.Client.UserInterface.Systems.Sandbox;
@@ -13,7 +12,6 @@ namespace Content.Client.SubFloor;
 
 public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
 {
-    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!; // Trauma
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
@@ -107,16 +105,14 @@ public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
             hasVisibleLayer = true;
         }
 
-        // <Trauma>
-        _spriteVis.UpdateVisibilityModifiers(uid, nameof(SubFloorHideComponent), hasVisibleLayer || revealed ? 1f : 0f);
-        // _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
-        // </Trauma>
+        _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
 
         if (ShowAll)
         {
             // Allows sandbox mode to make wires visible over other stuff.
             component.OriginalDrawDepth ??= args.Sprite.DrawDepth;
-            _sprite.SetDrawDepth((uid, args.Sprite), (int)Shared.DrawDepth.DrawDepth.Overdoors);
+            var drawDepthDifference = Shared.DrawDepth.DrawDepth.ThickPipe - (Shared.DrawDepth.DrawDepth.Overdoors + 1);
+            _sprite.SetDrawDepth((uid, args.Sprite), args.Sprite.DrawDepth - drawDepthDifference);
         }
         else if (scannerRevealed)
         {
@@ -124,8 +120,8 @@ public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
             if (component.OriginalDrawDepth is not null)
                 return;
             component.OriginalDrawDepth = args.Sprite.DrawDepth;
-            var drawDepthDifference = Shared.DrawDepth.DrawDepth.ThickPipe - Shared.DrawDepth.DrawDepth.Puddles;
-            _sprite.SetDrawDepth((uid, args.Sprite), args.Sprite.DrawDepth - (drawDepthDifference - 1));
+            var drawDepthDifference = Shared.DrawDepth.DrawDepth.ThickPipe - (Shared.DrawDepth.DrawDepth.Puddles + 1);
+            _sprite.SetDrawDepth((uid, args.Sprite), args.Sprite.DrawDepth - drawDepthDifference);
         }
         else if (component.OriginalDrawDepth.HasValue)
         {

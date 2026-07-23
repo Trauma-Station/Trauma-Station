@@ -27,12 +27,6 @@ reinforcement-sec-specialist-heavy-laser-desc = Hire an armored security special
 reinforcement-sec-specialist-shield-name = Hire Security Specialist (Shield)
 reinforcement-sec-specialist-shield-desc = Hire an armored security specialist equipped with a ballistic shield. Minimum arrival time of three minutes.
 
-reinforcement-sec-specialist-bodyguard-name = Hire Security Specialist (Bodyguard)
-reinforcement-sec-specialist-bodyguard-desc = Hire a plainclothes security specialist assigned to protect a command member. Minimum arrival time of three minutes.
-
-reinforcement-sec-specialist-advisor-name = Hire Security Specialist (Advisor)
-reinforcement-sec-specialist-advisor-desc = Hire a senior security specialist and tactical advisor. Minimum arrival time of three minutes.
-
 reinforcement-sec-specialist-brigmedic-name = Hire Security Specialist (Brigmedic)
 reinforcement-sec-specialist-brigmedic-desc = Hire a security brigmedic trained in both combat and medicine. Minimum arrival time of three minutes.
 
@@ -82,7 +76,7 @@ reinforcement-engineer-name = Hire Engineer
 reinforcement-engineer-desc = Hire an engineer to repair the station and curse the power grid. Tools included. Minimum arrival time of three minutes.
 
 reinforcement-atmos-name = Hire Atmos Tech
-reinforcement-atmos-desc = Hire an atmos tech to keep the air breathable and the plasma contained. Tools included. Minimum arrival time of three minutes.
+reinforcement-atmos-desc = Hire an atmos tech to keep the air breathable and the phoron contained. Tools included. Minimum arrival time of three minutes.
 
 reinforcement-technician-name = Hire Technical Assistant
 reinforcement-technician-desc = Hire a technical assistant to help engineers with maintenance duties. Minimum arrival time of three minutes.

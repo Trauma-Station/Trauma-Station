@@ -13,10 +13,8 @@ using Content.Shared.Storage;
 
 namespace Content.Trauma.Server.Traits.Assorted;
 
-
 public sealed partial class ForeignerTraitSystem : EntitySystem
 {
-    [Dependency] private EntityManager _entMan = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private LanguageSystem _languages = default!;
@@ -46,27 +44,47 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
             return;
         }
 
-        if (TryGiveTranslator(entity.Owner, entity.Comp.BaseTranslator, entity.Comp.BaseLanguage, alternateLanguage, out var translator))
+        // Prefer a translator built specifically for this language pair,
+        // over the generic foreigner's translator, since dedicated ones are usable by
+        // both parties in a conversation rather than just configured one-way for this entity.
+        var dedicated = GetDedicatedTranslator(alternateLanguage);
+        var translatorProto = dedicated ?? entity.Comp.BaseTranslator;
+
+        if (TryGiveTranslator(entity.Owner, translatorProto, entity.Comp.BaseLanguage, alternateLanguage, overwriteLanguages: dedicated == null, out var translator))
         {
             _languages.RemoveLanguage(entity.Owner, entity.Comp.BaseLanguage, entity.Comp.CantSpeak, entity.Comp.CantUnderstand);
         }
     }
 
     /// <summary>
-    ///     Tries to create and give the entity a translator that translates speech between the two specified languages.
+    /// Looks for a translator prototype specifically built for the given language,
+    /// Returns null if no such prototype exists.
+    /// </summary>
+    private EntProtoId? GetDedicatedTranslator(ProtoId<LanguagePrototype> language)
+    {
+        var id = $"{language.Id}Translator";
+        if (!ProtoMan.HasIndex<EntityPrototype>(id))
+            return null;
+
+        return new EntProtoId(id);
+    }
+
+    /// <summary>
+    /// Tries to create and give the entity a translator that translates speech between the two specified languages.
     /// </summary>
     public bool TryGiveTranslator(
         EntityUid uid,
-        string baseTranslatorPrototype,
+        EntProtoId translatorPrototype,
         ProtoId<LanguagePrototype> translatorLanguage,
         ProtoId<LanguagePrototype> entityLanguage,
+        bool overwriteLanguages,
         out EntityUid result)
     {
         result = EntityUid.Invalid;
         if (translatorLanguage == entityLanguage)
             return false;
 
-        var translator = _entMan.SpawnNextToOrDrop(baseTranslatorPrototype, uid);
+        var translator = SpawnNextToOrDrop(translatorPrototype, uid);
         result = translator;
 
         if (!TryComp<HandheldTranslatorComponent>(translator, out var handheld))
@@ -76,10 +94,15 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
             handheld.SetLanguageOnInteract = true;
         }
 
-        // Allows to speak the specified language and requires entities language.
-        handheld.SpokenLanguages = [translatorLanguage];
-        handheld.UnderstoodLanguages = [translatorLanguage];
-        handheld.RequiredLanguages = [entityLanguage];
+        // Dedicated translator prototypes already ship with the correct
+        // spoken/understood/required languages in YAML for both parties - don't stomp on them.
+        if (overwriteLanguages)
+        {
+            // Allows to speak the specified language and requires entities language.
+            handheld.SpokenLanguages = [translatorLanguage];
+            handheld.UnderstoodLanguages = [translatorLanguage];
+            handheld.RequiredLanguages = [entityLanguage];
+        }
 
         // Try to put it in entities hand
         if (_hands.TryPickupAnyHand(uid, translator, false, false, false))
@@ -94,13 +117,10 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
 
         // Try to put the translator into entities bag, if it has one
         if (_inventory.TryGetSlotEntity(uid, "back", out var bag)
-            && TryComp<StorageComponent>(bag, out var storage)
-            && _storage.Insert(bag.Value, translator, out _, null, storage, false, false))
-            return true;
-
-        // If all of the above has failed, just drop it at the same location as the entity
-        // This should ideally never happen, but who knows.
-        Transform(translator).Coordinates = Transform(uid).Coordinates;
+            && TryComp<StorageComponent>(bag, out var storage))
+        {
+            _storage.Insert(bag.Value, translator, out _, null, storage, false, false);
+        }
 
         return true;
     }

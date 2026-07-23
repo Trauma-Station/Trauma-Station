@@ -100,7 +100,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
                 if (!sheath.Comp.CanCounterNpc && HasComp<ActiveNPCComponent>(ent))
                 {
-                    _popup.PopupClient(Loc.GetString("counter-attack-fail-npc-message"), user, user);
+                    _popup.PopupEntity(Loc.GetString("counter-attack-fail-npc-message"), user, user);
                     return;
                 }
 
@@ -120,7 +120,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
                 var userIdentity = Identity.Entity(user, EntityManager);
                 var targetIdentity = Identity.Entity(ent.Owner, EntityManager, user);
 
-                _popup.PopupPredicted(Loc.GetString("counter-attack-self-message",
+                _popup.PopupEntity(Loc.GetString("counter-attack-self-message",
                         ("target", targetIdentity)),
                     Loc.GetString("counter-attack-others-message",
                         ("user", userIdentity),
@@ -157,7 +157,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
         // Predicting would result in lunge animation playing twice for args.User
         if (_net.IsClient || args.Cancelled || !args.CanRiposte || !CanCounterAttack(ent.Owner) ||
             !_blocker.CanInteract(ent.Owner, args.Target) ||
-            TryComp(args.Used, out MeleeWeaponComponent? melee) && !melee.CanParryLight)
+            TryComp(args.Used, out MeleeWeaponComponent? melee) && !melee.CanBeParried)
             return;
 
         if (!_status.TryEffectsWithComp<CounterAttackingStatusEffectComponent>(ent, out var effects) ||
