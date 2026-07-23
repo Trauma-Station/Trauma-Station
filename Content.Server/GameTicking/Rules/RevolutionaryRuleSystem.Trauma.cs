@@ -19,7 +19,6 @@ public sealed partial class RevolutionaryRuleSystem
 
     private void InitializeTrauma()
     {
-        base.Initialize();
         Subs.CVar(_cfg, TraumaCVars.RevPercentNeededForNewAntag, x => _percentNeededForNewAntag = x, true);
     }
 
