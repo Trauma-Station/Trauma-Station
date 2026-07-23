@@ -682,7 +682,6 @@
   # <Trauma>
   - type: Destructible
     thresholds:
-    # <Trauma> - upstream removed gibbing lol
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
@@ -710,6 +709,8 @@
         damage: 40
       behaviors:
       - !type:VomitBehavior
+  - type: StaticPrice
+    price: 32500
   # </Trauma>
   - type: InteractionPopup
     successChance: 1
