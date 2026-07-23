@@ -96,4 +96,5 @@
   components:
   - type: Thrall
   - type: NightVision
+    lightingColor: white
   - type: ThrallGuise

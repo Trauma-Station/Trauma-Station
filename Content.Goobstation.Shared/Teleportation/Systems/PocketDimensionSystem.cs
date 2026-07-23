@@ -9,53 +9,52 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
-namespace Content.Systems;
+namespace Content.Goobstation.Shared.Teleportation.Systems;
 
 /// <summary>
 /// This handles pocket dimensions and their portals.
 /// </summary>
 public sealed partial class PocketDimensionSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private LinkedEntitySystem _link = default!;
     [Dependency] private MapLoaderSystem _mapLoader = default!;
 
-    /// <inheritdoc/>
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<PocketDimensionComponent> ent, ref ComponentShutdown args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<PocketDimensionComponent, ComponentRemove>(OnRemoved);
-        SubscribeLocalEvent<PocketDimensionComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
+        if (ent.Comp.PocketDimensionMap is { } map && Exists(map))
+            PredictedQueueDel(map);
     }
 
-    private void OnRemoved(EntityUid uid, PocketDimensionComponent comp, ComponentRemove args)
+    [SubscribeLocalEvent]
+    private void OnGetVerbs(Entity<PocketDimensionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!Deleted(comp.PocketDimensionMap))
-            QueueDel(comp.PocketDimensionMap.Value);
-    }
-
-    private void OnGetVerbs(EntityUid uid, PocketDimensionComponent comp, GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!args.CanAccess || !args.CanInteract || !HasComp<HandsComponent>(args.User))
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || args.Hands == null)
             return;
 
-        AlternativeVerb verb = new()
+        var user = args.User;
+        args.Verbs.Add(new()
         {
             Text = Loc.GetString("pocket-dimension-verb-text"),
-            Act = () => HandleActivation(uid, comp, args.User)
-        };
-        args.Verbs.Add(verb);
+            Act = () => HandleActivation(ent, user)
+        });
     }
 
     /// <summary>
     /// Handles toggling the portal to the pocket dimension.
     /// </summary>
-    private void HandleActivation(EntityUid uid, PocketDimensionComponent comp, EntityUid user)
+    private void HandleActivation(Entity<PocketDimensionComponent> ent, EntityUid user)
     {
+        var (uid, comp) = ent;
         if (Deleted(comp.PocketDimensionMap))
         {
+            if (!_timing.IsFirstTimePredicted)
+                return; // dont want to try loading a map 10 times lol
+
             if (!_mapLoader.TryLoadMap(comp.PocketDimensionPath, out var map, out var roots,
                 options: new Robust.Shared.EntitySerialization.DeserializationOptions { InitializeMaps = true }))
             {
@@ -73,28 +72,33 @@ public sealed partial class PocketDimensionSystem : EntitySystem
                 if (!HasComp<MapGridComponent>(root))
                     continue;
 
+                comp.RootGrid = root;
+
                 // spawn the permanent portal into the pocket dimension, now ready to be used
-                var pos = new EntityCoordinates(root, 0, 0);
-                comp.ExitPortal = Spawn(comp.ExitPortalPrototype, pos);
-                EnsureComp<PortalComponent>(comp.ExitPortal!.Value, out var portal);
+                SpawnExitPortal(ent, root);
                 // the TryUnlink cleanup when first trying to create portal will fail without this
-                EnsureComp<LinkedEntityComponent>(uid);
-                portal.CanTeleportToOtherMaps = true;
+                EnsureComp<LinkedEntityComponent>(ent);
 
                 Log.Info($"Created pocket dimension on grid {root} of map {map}");
 
                 // if someone closes your portal you can use the one inside to escape
-                _link.OneWayLink(comp.ExitPortal.Value, uid);
+                _link.OneWayLink(comp.ExitPortal!.Value, uid);
                 foundGrid = true;
                 break;
             }
             if (!foundGrid)
             {
                 Log.Error($"Pocket dimension {comp.PocketDimensionPath} had no grids!");
-                Del(comp.PocketDimensionMap);
+                Del(map);
+                comp.PocketDimensionMap = null;
                 return;
             }
+            Dirty(ent);
         }
+
+        // respawn exit portal if something deleted it
+        if (Deleted(comp.ExitPortal))
+            SpawnExitPortal(ent, comp.RootGrid!.Value);
 
         var dimension = comp.ExitPortal!.Value;
         if (comp.PortalEnabled)
@@ -116,5 +120,13 @@ public sealed partial class PocketDimensionSystem : EntitySystem
             comp.PortalEnabled = true;
             _audio.PlayPvs(comp.OpenPortalSound, uid);
         }
+    }
+
+    private void SpawnExitPortal(Entity<PocketDimensionComponent> ent, EntityUid grid)
+    {
+        var pos = new EntityCoordinates(grid, 0, 0);
+        var portal = PredictedSpawnAtPosition(ent.Comp.ExitPortalPrototype, pos);
+        ent.Comp.ExitPortal = portal;
+        Dirty(ent);
     }
 }

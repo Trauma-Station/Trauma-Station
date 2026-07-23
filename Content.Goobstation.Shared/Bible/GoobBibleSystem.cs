@@ -74,7 +74,7 @@ public sealed partial class GoobBibleSystem : EntitySystem
         if (!_mobState.IsIncapacitated(target))
         {
             var popup = Loc.GetString("weaktoholy-component-bible-sizzle", ("target", target), ("item", bible));
-            _popup.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+            _popup.PopupEntity(popup, target, performer, PopupType.LargeCaution);
             _audio.PlayPredicted(bibleComp.SizzleSoundPath, target, performer);
             _damage.ChangeDamage(target,
                 bibleComp.SmiteDamage * multiplier,
@@ -103,7 +103,7 @@ public sealed partial class GoobBibleSystem : EntitySystem
 
             _doAfter.TryStartDoAfter(doAfterArgs);
             var popup = Loc.GetString("devil-banish-begin", ("target", target), ("user", performer));
-            _popup.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+            _popup.PopupEntity(popup, target, performer, PopupType.LargeCaution);
         }
 
         return true;

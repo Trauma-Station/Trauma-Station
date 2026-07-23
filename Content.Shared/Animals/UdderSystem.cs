@@ -64,7 +64,7 @@ public sealed partial class UdderSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            if (!_solutionContainerSystem.ResolveSolution(uid, udder.SolutionName, ref udder.Solution, out var solution))
+            if (!_solutionContainerSystem.ResolveSolution(uid, udder.SolutionName, ref udder.Solution, out var solution, logMissing: false)) // Trauma - dont log missing
                 continue;
 
             if (solution.AvailableVolume == 0)

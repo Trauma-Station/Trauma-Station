@@ -76,7 +76,7 @@ reinforcement-engineer-name = Hire Engineer
 reinforcement-engineer-desc = Hire an engineer to repair the station and curse the power grid. Tools included. Minimum arrival time of three minutes.
 
 reinforcement-atmos-name = Hire Atmos Tech
-reinforcement-atmos-desc = Hire an atmos tech to keep the air breathable and the plasma contained. Tools included. Minimum arrival time of three minutes.
+reinforcement-atmos-desc = Hire an atmos tech to keep the air breathable and the phoron contained. Tools included. Minimum arrival time of three minutes.
 
 reinforcement-technician-name = Hire Technical Assistant
 reinforcement-technician-desc = Hire a technical assistant to help engineers with maintenance duties. Minimum arrival time of three minutes.

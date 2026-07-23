@@ -158,7 +158,7 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
             return report;
         }
 
-        var species = PrototypeManager.Index(humanoid.Species);
+        var species = ProtoMan.Index(humanoid.Species);
 
         report.AddMarkupOrThrow(Loc.GetString("fugitive-report-species", ("species", Loc.GetString(species.Name))));
         report.PushNewline();
@@ -188,24 +188,20 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
     /// DNA string of fugitive, or "?" if unavailable somehow
     /// </summary>
     private string GetDNA(EntityUid uid)
-    {
-        return CompOrNull<DnaComponent>(uid)?.DNA ?? "?";
-    }
+        => CompOrNull<DnaComponent>(uid)?.DNA ?? "?";
 
     /// <summary>
     /// Fingerprints of fugitive, or "?" if unavailable somehow
     /// </summary>
     private string GetPrints(EntityUid uid)
-    {
-        return CompOrNull<FingerprintComponent>(uid)?.Fingerprint ?? "?";
-    }
+        => CompOrNull<FingerprintComponent>(uid)?.Fingerprint ?? "?";
 
     /// <summary>
     /// Picks a random set of unique crimes from the dataset and adds them to the report, each with a random count(within the range)
     /// </summary>
     private void AddCharges(FormattedMessage report, FugitiveRuleComponent rule)
     {
-        var crimeTypes = PrototypeManager.Index(rule.CrimeDataset);
+        var crimeTypes = ProtoMan.Index(rule.CrimeDataset);
         var crimes = new HashSet<LocId>();
         var total = RobustRandom.Next(rule.MinCrimes, rule.MaxCrimes + 1);
         while (crimes.Count < total)

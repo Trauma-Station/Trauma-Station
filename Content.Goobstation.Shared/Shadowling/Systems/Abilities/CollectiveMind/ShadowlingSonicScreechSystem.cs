@@ -52,7 +52,7 @@ public sealed partial class ShadowlingSonicScreechSystem : EntitySystem
         if (args.Handled)
             return;
 
-        _popups.PopupPredicted(Loc.GetString("shadowling-sonic-screech-complete"), uid, uid, PopupType.Medium);
+        _popups.PopupEntity(Loc.GetString("shadowling-sonic-screech-complete"), uid, uid, PopupType.Medium);
         _audio.PlayPredicted(component.ScreechSound, uid, uid);
 
         var effectEnt = PredictedSpawnAtPosition(component.SonicScreechEffect, Transform(uid).Coordinates);

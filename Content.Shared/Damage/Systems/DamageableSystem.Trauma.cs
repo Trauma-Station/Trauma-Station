@@ -25,7 +25,7 @@ public sealed partial class DamageableSystem
         _vitalOnlyDamageTypes.Clear();
         foreach (var groupId in _vitalOnlyDamageGroups)
         {
-            var group = _prototypeManager.Index(groupId);
+            var group = ProtoMan.Index(groupId);
             foreach (var type in group.DamageTypes)
             {
                 _vitalOnlyDamageTypes.Add(type);

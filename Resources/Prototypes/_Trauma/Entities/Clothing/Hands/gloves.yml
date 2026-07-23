@@ -105,7 +105,7 @@
   - type: TackleModifier
     staminaCostMultiplier: 2
     knockdownTimeMultiplier: 2
-    speedMultiplier: 1.5
+    speedMultiplier: 2.25
     rangeMultiplier: 3
     minDistance: 3
     skillMod: 7
@@ -135,7 +135,7 @@
     staminaCostMultiplier: 0.3
     knockdownTimeMultiplier: 0.5
     rangeMultiplier: 1.2
-    speedMultiplier: 0.65
+    speedMultiplier: 1
     minDistance: 1
     skillMod: -2
 

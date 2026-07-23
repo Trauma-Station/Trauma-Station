@@ -10,6 +10,7 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -89,7 +90,7 @@ public sealed partial class CombatDoAfterSystem : EntitySystem
         if (!combatModeActivated)
             return;
 
-        var rand = new Random((int) _timing.CurTick.Value);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(item.Value));
         var delay = rand.NextFloat(combatDoAfter.Delay - combatDoAfter.DelayVariation,
             combatDoAfter.Delay + combatDoAfter.DelayVariation);
 

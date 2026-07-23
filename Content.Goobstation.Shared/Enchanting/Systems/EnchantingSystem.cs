@@ -19,7 +19,6 @@ public sealed partial class EnchantingSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
@@ -88,7 +87,7 @@ public sealed partial class EnchantingSystem : EntitySystem
     private void CacheEnchants()
     {
         _enchants.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.TryGetComponent<EnchantComponent>(out var comp, Factory))
                 _enchants.Add(proto.ID, comp);
@@ -159,7 +158,7 @@ public sealed partial class EnchantingSystem : EntitySystem
     public Entity<EnchantComponent>? FindEnchant(EnchantedComponent comp, EntProtoId<EnchantComponent> id)
     {
         // bad prototype
-        if (_proto.Index(id).Name is not {} name)
+        if (ProtoMan.Index(id).Name is not {} name)
         {
             Log.Error($"Enchant prototype {id} has no name set!");
             return null;

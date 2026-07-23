@@ -30,8 +30,8 @@
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewire the brain to give you memories of skills you never learned.
   components:
   # TODO: sprite
-  # TODO: examining with diagnostic hud lists the skills
   - type: KnowledgeGrantOnWear
+    examinable: true
 
 - type: entity
   abstract: true

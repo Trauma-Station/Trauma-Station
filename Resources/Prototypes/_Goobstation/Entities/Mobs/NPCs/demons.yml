@@ -118,176 +118,173 @@
       id: DiamondOre1Unprocessed
 
 - type: entity
-  name: glutton
-  parent: [ SimpleSpaceMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable ]
   id: BaseMobGlutton
+  name: glutton
   description: Something that was once a clown.
   components:
-    - type: HTN
-      rootTask:
-        task: SimpleHostileCompound
-    - type: SpamEmitSound
-      minInterval: 15
-      maxInterval: 45
-      sound:
-        path: /Audio/Voice/Cluwne/cluwnelaugh1.ogg
-        params:
-          volume: -5
-          maxDistance: 10
-          variation: 0.5
-    - type: NpcFactionMember
-      factions:
-        - SimpleHostile
-    - type: MovementSpeedModifier
-      baseWalkSpeed: 2
-      baseSprintSpeed: 3
-    - type: Sprite
-      sprite: _Goobstation/Mobs/Demons/glutton.rsi
-      layers:
-        - map: [ "enum.DamageStateVisualLayers.Base" ]
-          state: glutton
-    - type: DamageStateVisuals
-      states:
-        Alive:
-          Base: glutton
-        Dead:
-          Base: glutton_dead
-    - type: FootstepModifier
-      footstepSoundCollection:
-        collection: FootstepThud
-    - type: Physics
-      bodyType: KinematicController
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape:
-            !type:PhysShapeCircle
-            radius: 0.40
-          density: 100
-          mask:
-            - MobMask
-          layer:
-            - MobLayer
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        400: Dead
-    - type: PassiveDamage
-      allowedStates:
-        - Alive
-      damage:
-        types:
-          Heat: -1
-          Blunt: -0.33
-          Slash: -0.33
-          Piercing: -0.33
-          Ballistic: -0.33
-    - type: Butcherable
-      spawned:
-        - id: MaterialBananium1
-          amount: 5
-        - id: WeaponBehonkerLaser
-          amount: 1
-          prob: 0.05
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
-      damage:
-        types:
-          Piercing: 20
-          Slash: 10
-    - type: StaticPrice
-      price: 3000
-    - type: Bloodstream
-      bloodReferenceSolution:
-        reagents:
-        - ReagentId: Laughter
-          Quantity: 300
-    - type: Fauna
-
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: SpamEmitSound
+    minInterval: 15
+    maxInterval: 45
+    sound:
+      path: /Audio/Voice/Cluwne/cluwnelaugh1.ogg
+      params:
+        volume: -5
+        maxDistance: 10
+        variation: 0.5
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: Sprite
+    sprite: _Goobstation/Mobs/Demons/glutton.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: glutton
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: glutton
+      Dead:
+        Base: glutton_dead
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Dead
+  - type: PassiveDamage
+    allowedStates:
+      - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -0.33
+        Slash: -0.33
+        Piercing: -0.33
+        Ballistic: -0.33
+  - type: ToolRefinable
+    refineResult:
+    - id: MaterialBananium1
+      amount: 5
+    - id: WeaponBehonkerLaser
+      prob: 0.05
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Piercing: 20
+        Slash: 10
+  - type: StaticPrice
+    price: 3000
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Laughter
+        Quantity: 300
+  - type: Fauna
 
 - type: entity
-  name: abyss crawler
-  parent: [ SimpleSpaceMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable ]
   id: MobAbyssCrawler
+  name: abyss crawler
   description: A pale mass of heaving flesh that gropes around in the gloom. It doesn't appear to have any eyes.
   components:
-    - type: HTN
-      rootTask:
-        task: SimpleHostileCompound
-    - type: SpamEmitSound
-      minInterval: 5
-      maxInterval: 10
-      sound:
-        path: /Audio/_Goobstation/Animals/breath1.ogg
-        params:
-          volume: -5
-          maxDistance: 15
-          variation: 0.5
-    - type: NpcFactionMember
-      factions:
-        - SimpleHostile
-    - type: MovementSpeedModifier
-      baseWalkSpeed: 2
-      baseSprintSpeed: 2
-    - type: Sprite
-      sprite: _Goobstation/Mobs/Animals/abysscrawler.rsi
-      layers:
-        - map: [ "enum.DamageStateVisualLayers.Base" ]
-          state: abyss_crawler
-    - type: DamageStateVisuals
-      states:
-        Alive:
-          Base: abyss_crawler
-        Dead:
-          Base: crawler_dead
-    - type: FootstepModifier
-      footstepSoundCollection:
-        collection: FootstepThud
-    - type: Physics
-      bodyType: KinematicController
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape:
-            !type:PhysShapeCircle
-            radius: 0.40
-          density: 100
-          mask:
-            - MobMask
-          layer:
-            - MobLayer
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        300: Dead
-    - type: PassiveDamage
-      allowedStates:
-        - Alive
-      damage:
-        types:
-          Heat: -1
-          Blunt: -0.33
-          Slash: -0.33
-          Piercing: -0.33
-          Ballistic: -0.33
-    - type: StaticPrice
-      price: 3000
-    - type: TileMovement
-    - type: MeleeWeapon
-      soundHit:
-        path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
-      damage:
-        types:
-          Piercing: 20
-          Slash: 10
-    - type: Butcherable
-      spawned:
-      - id: DiamondOre1 # not unprocessed
-        amount: 1
-    - type: Bloodstream
-      bloodReferenceSolution:
-        reagents:
-        - ReagentId: Haloperidol
-          Quantity: 300
-    - type: Fauna
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: SpamEmitSound
+    minInterval: 5
+    maxInterval: 10
+    sound:
+      path: /Audio/_Goobstation/Animals/breath1.ogg
+      params:
+        volume: -5
+        maxDistance: 15
+        variation: 0.5
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
+  - type: Sprite
+    sprite: _Goobstation/Mobs/Animals/abysscrawler.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: abyss_crawler
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: abyss_crawler
+      Dead:
+        Base: crawler_dead
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      300: Dead
+  - type: PassiveDamage
+    allowedStates:
+      - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -0.33
+        Slash: -0.33
+        Piercing: -0.33
+        Ballistic: -0.33
+  - type: StaticPrice
+    price: 3000
+  - type: TileMovement
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Piercing: 20
+        Slash: 10
+  - type: ToolRefinable
+    refineResult:
+    - id: DiamondOre1 # not unprocessed
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Haloperidol
+        Quantity: 300
+  - type: Fauna

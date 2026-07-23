@@ -25,11 +25,11 @@
     transmuteTo: SwordCosmicCult
   - type: WeaponClass
     class: Knife
+  - type: Sharp
   # </Trauma>
   - type: Tag
     tags:
     - Knife
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
   - type: Utensil
@@ -49,7 +49,7 @@
     size: Small
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
 
@@ -92,8 +92,8 @@
   description: A huge blade used for chopping and chopping up meat. This includes clowns and clown-by-products.
   components:
   # <Trauma>
-  - type: Sharp
-    butcherDelayModifier: 0.75 # it's designed for butchering
+  - type: Tool
+    speedModifier: 1.4 # it's designed for butchering
   - type: Scalpel
     speed: 0.3
   - type: BoneSaw # Better than tg 25% because its a cleaver its meant to hack off limbs
@@ -443,7 +443,6 @@
     components:
     - type: Execution
       doAfterDuration: 4.0
-    - type: Sharp
     - type: Utensil
       types:
       - Knife

@@ -19,16 +19,7 @@ public sealed partial class VinylPlayerSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<VinylPlayerComponent, EntInsertedIntoContainerMessage>(OnVinylInserted);
-        SubscribeLocalEvent<VinylPlayerComponent, EntRemovedFromContainerMessage>(OnVinylRemove);
-        SubscribeLocalEvent<VinylPlayerComponent, DestructionEventArgs>(OnDestruction);
-        SubscribeLocalEvent<VinylPlayerComponent, PowerChangedEvent>(OnPowerChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPowerChanged(EntityUid uid, VinylPlayerComponent comp, PowerChangedEvent args)
     {
         if (comp.SoundEntity != null && !args.Powered)
@@ -41,6 +32,7 @@ public sealed partial class VinylPlayerSystem : EntitySystem
             StopReceivers();
     }
 
+    [SubscribeLocalEvent]
     private void OnDestruction(EntityUid uid, VinylPlayerComponent comp, DestructionEventArgs args)
     {
         if (!CheckForRadioRig(uid))
@@ -49,6 +41,7 @@ public sealed partial class VinylPlayerSystem : EntitySystem
         StopReceivers();
     }
 
+    [SubscribeLocalEvent]
     private void OnVinylInserted(EntityUid uid, VinylPlayerComponent comp, EntInsertedIntoContainerMessage args)
     {
         if (!TryComp(args.Entity, out VinylComponent? vinylcomp) || _net.IsClient || vinylcomp.Song == null || !_power.IsPowered(uid))
@@ -76,6 +69,7 @@ public sealed partial class VinylPlayerSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnVinylRemove(EntityUid uid, VinylPlayerComponent comp, EntRemovedFromContainerMessage args)
     {
         if (comp.SoundEntity != null)

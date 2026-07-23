@@ -46,7 +46,6 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private NuclearMachineSystem _machine = default!;
     [Dependency] private RadioSystem _radio = default!;
@@ -103,7 +102,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     #region Prefab
     private void ApplyPrefab(Entity<NuclearReactorComponent> ent)
     {
-        var prefab = ent.Comp.Prefab is { } id ? _proto.Index(id).Parts : GenerateRandomPrefab(ent.Comp);
+        var prefab = ent.Comp.Prefab is { } id ? ProtoMan.Index(id).Parts : GenerateRandomPrefab(ent.Comp);
         var container = ent.Comp.PartsContainerName;
         foreach (var (pos, partId) in prefab)
         {
@@ -123,7 +122,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     private Dictionary<Vector2i, EntProtoId> GenerateRandomPrefab(NuclearReactorComponent comp)
     {
         var parts = new Dictionary<Vector2i, EntProtoId>();
-        var pool = _proto.Index(NuclearReactorRandomParts);
+        var pool = ProtoMan.Index(NuclearReactorRandomParts);
         for (var x = 0; x < comp.GridWidth; x++)
         {
             for (var y = 0; y < comp.GridHeight; y++)
@@ -472,7 +471,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         if (comp.Melted)
             return;
 
-        var engi = _proto.Index(ent.Comp.AlertsChannel);
+        var engi = ProtoMan.Index(ent.Comp.AlertsChannel);
         if (comp.Temperature >= comp.ReactorOverheatTemp)
         {
             if (!comp.IsSmoking)

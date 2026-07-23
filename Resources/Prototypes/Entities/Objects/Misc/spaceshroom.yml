@@ -5,6 +5,11 @@
   suffix: Structure
   description: A cluster of wild mushrooms that likes to grow in dark, moist environments.
   components:
+    # <Trauma>
+    - type: Tag
+      tags:
+      - Fungus # used for plague rat to be able to eat maints shrooms in structure form.
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Misc/spaceshroom.rsi
       state: structure
@@ -33,15 +38,12 @@
       damageContainer: StructuralInorganic
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 150
-          behaviors:
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
-    - type: Tag
-      tags:
-      - Fungus # Goobstation. used for plague rat to be able to eat maints shrooms in structure form.
+      - trigger:
+          !type:DamageTrigger
+          damage: 150
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
 
 - type: entity
   name: spaceshroom

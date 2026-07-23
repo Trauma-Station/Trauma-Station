@@ -165,8 +165,7 @@
 
 ## O ##
 
-- type: Tag
-  id: OverrideKeyComponents # Construction: ArmoryOverrideKey
+# :o nothing
 
 ## P ##
 
@@ -232,6 +231,9 @@
 
 - type: Tag
   id: Scimitar # Used for scabbad whitelist
+
+- type: Tag
+  id: SharpMedal # Heretic - Sharp Medal item, used for blades boomerang throw logic
 
 - type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision

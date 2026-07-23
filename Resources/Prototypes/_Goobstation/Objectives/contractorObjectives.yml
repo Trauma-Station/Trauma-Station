@@ -7,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1
-    issuer: objective-issuer-syndicate
+    issuer: TheSyndicate
     icon:
       sprite: _Goobstation/Objects/Weapons/Melee/contractor_baton.rsi
       state: icon

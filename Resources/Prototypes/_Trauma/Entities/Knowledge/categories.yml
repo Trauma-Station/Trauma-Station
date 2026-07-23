@@ -71,6 +71,7 @@
   abstract: true
   parent: BaseKnowledge
   id: BaseLanguageKnowledge
+  name: Language
   description: The ability to speak and understand a language.
   components:
   - type: Knowledge

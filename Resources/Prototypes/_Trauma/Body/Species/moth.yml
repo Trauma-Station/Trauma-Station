@@ -12,6 +12,20 @@
       state: empty # no sprite since the markings actually control it
   - type: SpeedModifierOrgan
     weightlessAcceleration: 0.5 # 50% faster base acceleration in space/0G
+  - type: DashWings
+    speciesWhitelist:
+    # need to have a body adapted to controlling wings
+    # every species still gets tackle bonus and innate tackle but it knocks you down and doesn't dodge bullets
+    # if you aren't moth or vox
+    - Moth
+    - Vox # They are birds I guess
+    toAdd:
+    - type: TackleModifier # Innate tackle
+      allowCollision: false
+      speedMultiplier: 1
+      rangeMultiplier: 1
+      cooldownMultiplier: 2.167 # Roughly 6.5s
+      userEffect: MothDash
 
 - type: entity
   parent: OrganMothWings
@@ -28,3 +42,22 @@
       Wings:
       - markingId: MothWingsDefault
         markingColor: [ "#FFDA93FF" ]
+
+- type: entityEffect
+  id: MothDash
+  conditions:
+  - !type:AnyCondition
+    conditions:
+    - !type:SpeciesCondition
+      species: Moth
+    - !type:SpeciesCondition
+      species: Vox
+  effects:
+  - !type:Emote
+    emote: Flip
+  - !type:PlaySoundEffect
+    positional: false
+    sound: /Audio/_Goobstation/Effects/moth_wings.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectProjectileImmunity # Dark souls
+    time: 0.65

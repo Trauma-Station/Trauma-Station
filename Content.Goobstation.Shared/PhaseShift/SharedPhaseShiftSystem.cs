@@ -64,6 +64,7 @@ public abstract partial class SharedPhaseShiftSystem : EntitySystem
     private void OnRefresh(Entity<PhaseShiftedComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(ent.Comp.MovementSpeedBuff, ent.Comp.MovementSpeedBuff);
 
+    // TODO: status effect component to remove it when attacking
     private void OnAttackAttempt(Entity<PhaseShiftedComponent> ent, ref AttackAttemptEvent args)
     {
         if (_statusEffects.HasStatusEffect(ent, ent.Comp.StatusEffectId))

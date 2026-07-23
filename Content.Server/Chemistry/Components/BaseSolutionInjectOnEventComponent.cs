@@ -48,7 +48,7 @@ public abstract partial class BaseSolutionInjectOnEventComponent : Component
     /// By how much to downscale the transfer amount by in respect to damage types
     /// </summary>
     [DataField]
-    public Dictionary<string, float> DamageModifierResistances = new() {["Piercing"] = 1f}; // lower transfer amount by 1% per 1% piercing resist
+    public Dictionary<string, float> DamageModifierResistances = new() {["Piercing"] = 1f, ["Ballistic"] = 2f}; // lower transfer amount by 1% per 1% piercing resist, 2% per 1% ballistic
 
     /// <summary>
     /// Contents of popup message to display to the attacker when injection

@@ -38,14 +38,7 @@ public sealed partial class HereticAbilitySystem
     private static readonly ProtoId<OrganCategoryPrototype> StomachCategory = "Stomach";
     private static readonly SoundSpecifier MimicSpawnSound = new SoundCollectionSpecifier("gib");
 
-    protected override void SubscribeFlesh()
-    {
-        base.SubscribeFlesh();
-
-        SubscribeLocalEvent<FleshPassiveComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<FleshPassiveComponent, ConsumingFoodEvent>(OnConsumingFood);
-    }
-
+    [SubscribeLocalEvent]
     private void OnConsumingFood(Entity<FleshPassiveComponent> ent, ref ConsumingFoodEvent args)
     {
         if (HasComp<LordOfTheNightComponent>(ent))
@@ -95,6 +88,7 @@ public sealed partial class HereticAbilitySystem
         return multiplier;
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<FleshPassiveComponent> ent, ref MapInitEvent args)
     {
         RemCompDeferred<DiseaseCarrierComponent>(ent);
@@ -114,6 +108,10 @@ public sealed partial class HereticAbilitySystem
 
         if (_solution.TryGetSolution(uid, StomachSystem.DefaultSolutionName, out var sol))
             _solution.SetCapacity(sol.Value, 1984); // hungry
+
+        if (TryComp<StomachComponent>(uid, out var stomachComp))
+            stomachComp.IsSpecialDigestibleExclusive = false;
+
         if (TryComp<InternalOrganComponent>(uid, out var organ))
         {
             organ.IntegrityCap = 1984;

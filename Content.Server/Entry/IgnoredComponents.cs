@@ -10,6 +10,8 @@ namespace Content.Server.Entry
             "HideClothingLayerClothing",
             "MultiShaderSprite",
             "ItemSlotRenderer",
+            "ShowSpriteLayerStatusEffect",
+            "AnimatedEmotesBlacklist",
             // </Trauma>
             "ConstructionGhost",
             "IconSmooth",
@@ -29,6 +31,7 @@ namespace Content.Server.Entry
             "OptionsVisualizer",
             "AnomalyScannerScreen",
             "MultipartMachineGhost",
+            "DirectionalArrowIndicator"
         };
     }
 }

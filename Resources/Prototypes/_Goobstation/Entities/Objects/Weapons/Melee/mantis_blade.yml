@@ -9,7 +9,6 @@
   components:
   - type: WeaponClass
     class: Sword
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
@@ -27,7 +26,7 @@
         Structural: 15
       woundSeverityMultipliers:
         Slash: 2.5
-    soundHit:
+    soundHit: &sound
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tag
     tags:
@@ -40,6 +39,8 @@
   - type: Item
     size: Ginormous
     heldPrefix: popout
+  - type: Sharp
   - type: Tool
     qualities:
     - Slicing
+    useSound: *sound

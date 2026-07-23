@@ -19,10 +19,6 @@ public sealed partial class VelocityModifierContactsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<VelocityModifierContactsComponent, StartCollideEvent>(OnEntityEnter);
-        SubscribeLocalEvent<VelocityModifierContactsComponent, EndCollideEvent>(OnEntityExit);
-        SubscribeLocalEvent<VelocityModifierContactsComponent, ComponentShutdown>(OnShutdown);
-
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
@@ -45,12 +41,13 @@ public sealed partial class VelocityModifierContactsSystem : EntitySystem
         _toUpdate.Clear();
     }
 
-    private void OnShutdown(EntityUid uid, VelocityModifierContactsComponent component, ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<VelocityModifierContactsComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp(uid, out PhysicsComponent? phys))
+        if (!TryComp(ent, out PhysicsComponent? phys))
             return;
 
-        _toUpdate.UnionWith(_physics.GetContactingEntities(uid, phys));
+        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
     private void RefreshVelocity(EntityUid uid)
@@ -95,25 +92,27 @@ public sealed partial class VelocityModifierContactsSystem : EntitySystem
         }
     }
 
-    private void OnEntityExit(EntityUid uid, VelocityModifierContactsComponent component, ref EndCollideEvent args)
+    [SubscribeLocalEvent]
+    private void OnEntityEnter(Entity<VelocityModifierContactsComponent> ent, ref EndCollideEvent args)
     {
-        if (!component.IsActive)
+        if (!ent.Comp.IsActive || ent.Comp.CollisionFixture != args.OurFixtureId)
             return;
 
         var otherUid = args.OtherEntity;
 
-        if (!CheckWhitelist(otherUid, component))
+        if (!CheckWhitelist(otherUid, ent.Comp))
             return;
 
         _toUpdate.Add(otherUid);
     }
 
-    private void OnEntityEnter(EntityUid uid, VelocityModifierContactsComponent component, ref StartCollideEvent args)
+    [SubscribeLocalEvent]
+    private void OnEntityEnter(Entity<VelocityModifierContactsComponent> ent, ref StartCollideEvent args)
     {
-        if (!component.IsActive)
+        if (!ent.Comp.IsActive || ent.Comp.CollisionFixture != args.OurFixtureId)
             return;
 
-        if (!CheckWhitelist(args.OtherEntity, component))
+        if (!CheckWhitelist(args.OtherEntity, ent.Comp))
             return;
 
         AddModifiedEntity(args.OtherEntity);

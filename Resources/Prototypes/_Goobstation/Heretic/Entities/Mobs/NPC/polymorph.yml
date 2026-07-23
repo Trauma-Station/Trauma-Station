@@ -43,10 +43,10 @@
   - type: AshJaunt
 
 - type: entity
+  parent: BaseMobJaunt
   id: PolymorphSpaceJaunt
   name: Unknown
   description: You can't figure out what that is.
-  parent: BaseMobJaunt
   categories: [ HideSpawnMenu ]
   components:
   - type: Actions
@@ -56,10 +56,7 @@
     sprite: Structures/Specific/Anomalies/Cores/gravity_core.rsi
     state: core
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: Eye
     visMask:
     - Ghost
@@ -83,10 +80,7 @@
     channels:
     - MansusLink
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: ActionGrant
     actions:
     - ActionMirrorJaunt

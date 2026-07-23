@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: nanite swarm
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable ]
   id: MobNanites
-  parent: [ SimpleSpaceMobBase, MobCombat ]
+  name: nanite swarm
   description: A swarm of angry nanites.
   components:
   - type: Sprite
     drawdepth: Mobs
-    sprite: /Textures/_Goobstation/Mobs/Silicon/nanites.rsi
+    sprite: _Goobstation/Mobs/Silicon/nanites.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: nanites_attack
@@ -40,8 +40,8 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: SheetPlasteel1
       amount: 2
   - type: Bloodstream

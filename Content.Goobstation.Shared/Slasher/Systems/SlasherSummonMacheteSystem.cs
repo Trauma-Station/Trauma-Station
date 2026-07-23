@@ -13,7 +13,6 @@ public sealed partial class SlasherSummonMacheteSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private IPrototypeManager _protos = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
@@ -44,7 +43,7 @@ public sealed partial class SlasherSummonMacheteSystem : EntitySystem
         // Fail if the user has no hands.
         if (!TryComp<HandsComponent>(ent.Owner, out var hands) || hands.Hands.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("wieldable-component-no-hands"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wieldable-component-no-hands"), ent.Owner, ent.Owner);
             args.Handled = true;
             return;
         }
@@ -54,7 +53,7 @@ public sealed partial class SlasherSummonMacheteSystem : EntitySystem
 
         if (machete == null || Deleted(machete))
         {
-            if (!_protos.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
+            if (!ProtoMan.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
                 return;
 
             machete = PredictedSpawnAtPosition(ent.Comp.MachetePrototype, _xform.GetMoverCoordinates(ent.Owner));

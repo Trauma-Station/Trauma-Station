@@ -107,7 +107,7 @@ public abstract partial class SharedBladeArenaSystem : EntitySystem
 
         var msg = Loc.GetString(args.Message);
         if (args.Predicted)
-            _popup.PopupClient(msg, ent, ent);
+            _popup.PopupEntity(msg, ent, ent);
         else
             _popup.PopupEntity(msg, ent, ent);
     }

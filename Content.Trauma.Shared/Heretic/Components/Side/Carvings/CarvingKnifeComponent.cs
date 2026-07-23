@@ -44,13 +44,17 @@ public enum CarvingKnifeUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed partial class CarveRuneDoAfterEvent(EntProtoId carving) : DoAfterEvent
+public sealed partial class CarveRuneDoAfterEvent : DoAfterEvent
 {
-    public EntProtoId Carving = carving;
+    public EntProtoId Carving;
 
-    public CarveRuneDoAfterEvent() : this(default) { }
+    public CarveRuneDoAfterEvent() {}
+    public CarveRuneDoAfterEvent(EntProtoId carving)
+    {
+        Carving = carving;
+    }
 
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new CarveRuneDoAfterEvent(Carving);
 }
 
 public sealed partial class DeleteAllCarvingsEvent : InstantActionEvent;

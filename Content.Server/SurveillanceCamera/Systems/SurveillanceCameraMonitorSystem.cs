@@ -1,3 +1,11 @@
+// <Trauma>
+using Content.Goobstation.Common.SurveillanceCamera;
+using Content.Shared.UserInterface;
+using Robust.Server.GameStates;
+using Robust.Shared.Map;
+using System.Runtime.InteropServices;
+// </Trauma>
+using System.Linq;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
@@ -6,24 +14,16 @@ using Content.Shared.SurveillanceCamera;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
-// Goobstation
-using Content.Goobstation.Common.SurveillanceCamera;
-using Content.Shared.UserInterface;
-using Robust.Server.GameStates;
-using Robust.Shared.Map;
-using System.Runtime.InteropServices;
-
 namespace Content.Server.SurveillanceCamera;
 
 public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
+    // </Trauma>
     [Dependency] private SurveillanceCameraSystem _surveillanceCameras = default!;
     [Dependency] private UserInterfaceSystem _userInterface = default!;
     [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
-
-    // Goobstation
-    [Dependency] private PvsOverrideSystem _pvsOverrideSystem = default!;
-    [Dependency] private EntityManager _entityManager = default!;
 
     public override void Initialize()
     {
@@ -43,18 +43,14 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         });
     }
 
-    private const float MaxHeartbeatTime = 3f; // Goobstation
-    private const float HeartbeatDelay = 1f; // Goobstation
+    private const float MaxHeartbeatTime = 3f; // Trauma - was 300
+    private const float HeartbeatDelay = 1f; // Trauma - was 30
 
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<ActiveSurveillanceCameraMonitorComponent, SurveillanceCameraMonitorComponent>();
         while (query.MoveNext(out var uid, out _, out var monitor))
         {
-            /*if (Paused(uid))
-            {
-                continue;
-            } Goobstation remove */
             monitor.LastHeartbeatSent += frameTime;
             SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor); // Goobstation
             monitor.LastHeartbeat += frameTime;
@@ -102,7 +98,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
                     SendHeartbeat(uid, key, monitor);
 
                     if (lastHeartbeat > MaxHeartbeatTime)
-                        expiredCameras[key] = _entityManager.GetEntity(cameraData.Item2.Item2.NetEntity);
+                        expiredCameras[key] = GetEntity(cameraData.Item2.Item2.NetEntity);
                 }
 
                 // Remove PVS overrides for all viewers in a single pass
@@ -112,7 +108,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
                         continue;
 
                     foreach (var entity in expiredCameras.Values)
-                        _pvsOverrideSystem.RemoveSessionOverride(entity, actor.PlayerSession);
+                        _pvsOverride.RemoveSessionOverride(entity, actor.PlayerSession);
                 }
 
                 // Remove expired cameras from all dictionaries
@@ -213,7 +209,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
                             component.KnownMobileCameras.Add(address, (name, netEntity.Value));
                             foreach (var player in component.Viewers)
                                 if (TryComp<ActorComponent>(player, out var actor))
-                                    _pvsOverrideSystem.AddSessionOverride(_entityManager.GetEntity(netEntity.Value.Item2.NetEntity), actor.PlayerSession);
+                                    _pvsOverride.AddSessionOverride(GetEntity(netEntity.Value.Item2.NetEntity), actor.PlayerSession);
                         }
                     }
                     else if (!component.KnownCameras.ContainsKey(address))
@@ -253,7 +249,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         foreach (var player in component.Viewers)
             if (TryComp<ActorComponent>(player, out var actor))
                 foreach (var camera in component.KnownMobileCameras)
-                    _pvsOverrideSystem.RemoveSessionOverride(_entityManager.GetEntity(camera.Value.Item2.Item2.NetEntity), actor.PlayerSession);
+                    _pvsOverride.RemoveSessionOverride(GetEntity(camera.Value.Item2.Item2.NetEntity), actor.PlayerSession);
         component.KnownCameras.Clear();
         component.KnownMobileCameras.Clear();
         RequestKnownSubnetsInfo(uid, component);
@@ -330,6 +326,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
             };
 
             _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
+            monitor.LastHeartbeatSent = 0;
         }
         // Goobstation end
     }
@@ -459,7 +456,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         // Goobstation start
         if (TryComp<ActorComponent>(player, out var actor))
             foreach (var camera in monitor.KnownMobileCameras)
-                _pvsOverrideSystem.AddSessionOverride(_entityManager.GetEntity(camera.Value.Item2.Item2.NetEntity), actor.PlayerSession);
+                _pvsOverride.AddSessionOverride(GetEntity(camera.Value.Item2.Item2.NetEntity), actor.PlayerSession);
         // Goobstation end
 
         if (monitor.ActiveCamera != null)
@@ -483,7 +480,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         // Goobstation end
         if (TryComp<ActorComponent>(player, out var actor))
             foreach (var camera in monitor.KnownMobileCameras)
-                _pvsOverrideSystem.RemoveSessionOverride(_entityManager.GetEntity(camera.Value.Item2.Item2.NetEntity), actor.PlayerSession);
+                _pvsOverride.RemoveSessionOverride(GetEntity(camera.Value.Item2.Item2.NetEntity), actor.PlayerSession);
         // Goobstation start
 
         if (monitor.ActiveCamera != null)

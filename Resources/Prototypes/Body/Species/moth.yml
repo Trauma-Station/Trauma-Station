@@ -182,10 +182,7 @@
   #      sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
   - type: MothAccent
   - type: Vocal
-    sounds:
-      Male: UnisexMoth
-      Female: UnisexMoth
-      Unsexed: UnisexMoth
+    emoteSounds: UnisexMoth
   - type: BodyEmotes
     soundsId: MothBodyEmotes
   #- type: MovementSpeedModifier # Trauma - moved to wings
@@ -195,7 +192,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 0.25 # Trauma, was 2.5
+        Heat: 0.5 # Trauma, was 2.5 - 0.2x multiplier to compensate for limb damage
   - type: Temperature
     currentTemperature: 310.15
     specificHeat: 46
@@ -215,7 +212,7 @@
       250: 0.7
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganMoth
   abstract: true
   suffix: Moth

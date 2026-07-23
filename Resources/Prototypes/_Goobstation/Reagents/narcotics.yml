@@ -335,6 +335,10 @@
       - !type:Jitter
       - !type:ModifyStatusEffect
         effectProto: OleoresinSlowdownStatusEffect
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
 
 - type: reagent
   id: Heroin # hunter biden's favourite snack
@@ -389,8 +393,7 @@
     Bloodstream:
       effects:
       - !type:Jitter
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyParalysis
         time: 3
         type: Remove
       - !type:ModifyKnockdown

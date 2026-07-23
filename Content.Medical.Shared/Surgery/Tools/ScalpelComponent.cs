@@ -5,11 +5,19 @@ using Content.Medical.Common.Surgery.Tools;
 namespace Content.Medical.Shared.Surgery.Tools;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class ScalpelComponent : Component, ISurgeryToolComponent
+public sealed partial class ScalpelComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "a scalpel";
-    [DataField]
-    public bool? Used { get; set; } = null;
-    [DataField, AutoNetworkedField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "a scalpel";
+    [AutoNetworkedField]
+    public new float Speed
+    {
+        get
+        {
+            return base.Speed;
+        }
+        set
+        {
+            base.Speed = value;
+        }
+    }
 }

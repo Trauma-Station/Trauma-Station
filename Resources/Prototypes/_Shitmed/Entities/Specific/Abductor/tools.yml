@@ -115,8 +115,6 @@
     speed: 0.45
   - type: Tending
     speed: 0.65
-  - type: Screwdriver
-    speed: 1.5 # wow!
   - type: SurgeryTool
     startSound:
       collection: Screwdriver

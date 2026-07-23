@@ -29,7 +29,7 @@
     - !type:NestedSelector # Trauma
       tableId: FillLockerWardenTrauma
     - id: FlashlightSeclite
-    #- id: WeaponDisabler # Goobstation (Disablers in belts)
+    #- id: WeaponDisabler # Trauma - disablers are in belts
     - id: ClothingBeltSecurityFilled
     - id: Flash
     - id: ClothingEyesGlassesSecurity
@@ -76,8 +76,7 @@
       tableId: FillLockerSecurityTrauma
     - id: FlashlightSeclite
       prob: 0.8
-    #- id: WeaponDisabler # Goobstation (Disablers in belts)
-    #- id: WeaponTaser # Trauma - lol no
+    #- id: WeaponDisabler # Trauma - disablers are in belts
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic
@@ -115,14 +114,8 @@
   table: !type:AllSelector
     children:
     - id: ClothingEyesGlassesSecurity
-    # <Trauma>
-    #- id: WeaponDisabler
-    #- id: TrackingImplanter
-    #  amount: 2
-    #- id: ClothingOuterHardsuitBrigmedic
-    #- id: OxygenTankFilled
-    #- id: NitrogenTankFilled
-    - id: MaterialBones1 # Remains of a longrotten brigmedic. Idfk Armok asked for it.
+    # <Trauma> - replaced all real gear with bones
+    - id: MaterialBones1 # Remains of a longrotten brigmedic.
       amount: 5
     # </Trauma>
     - id: ClothingUniformJumpskirtOfLife

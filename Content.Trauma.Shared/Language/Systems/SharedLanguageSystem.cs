@@ -15,7 +15,6 @@ namespace Content.Trauma.Shared.Language.Systems;
 
 public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedGameTicker _ticker = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
@@ -34,7 +33,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 
     public LanguagePrototype? GetLanguagePrototype(ProtoId<LanguagePrototype> id)
     {
-        _prototype.TryIndex(id, out var proto);
+        ProtoMan.TryIndex(id, out var proto);
         return proto;
     }
 
@@ -135,7 +134,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
     {
         if (!Resolve(ent, ref ent.Comp, logMissing: false)
             || string.IsNullOrEmpty(ent.Comp.CurrentLanguage)
-            || !_prototype.Resolve(ent.Comp.CurrentLanguage, out var proto))
+            || !ProtoMan.Resolve(ent.Comp.CurrentLanguage, out var proto))
             return Universal;
 
         return proto;

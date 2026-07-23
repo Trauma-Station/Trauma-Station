@@ -17,6 +17,17 @@ public sealed partial class NoteEdit : FancyWindow
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IClientConsoleHost _console = default!;
 
+    private enum Multipliers
+    {
+        Minutes,
+        Hours,
+        Days,
+        Weeks,
+        Months,
+        Years,
+        Centuries
+    }
+
     public event Action<int, NoteType, string, NoteSeverity?, bool, DateTime?>? SubmitPressed;
 
     public NoteEdit(SharedAdminNote? note, string playerName, bool canCreate, bool canEdit,
@@ -32,6 +43,20 @@ public sealed partial class NoteEdit : FancyWindow
         CanWatchlist = canWatchlist; // Trauma
 
         ResetSubmitButton();
+
+        // It's weird to use minutes as the IDs, but it works and makes sense kind of :)
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-minutes"), (int) Multipliers.Minutes);
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-hours"), (int) Multipliers.Hours);
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-days"), (int) Multipliers.Days);
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-weeks"), (int) Multipliers.Weeks);
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-months"), (int) Multipliers.Months);
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-years"), (int) Multipliers.Years);
+        ExpiryLengthDropdown.AddItem(Loc.GetString("admin-note-button-centuries"), (int) Multipliers.Centuries);
+        ExpiryLengthDropdown.OnItemSelected += OnLengthChanged;
+
+        ExpiryLengthDropdown.SelectId((int) Multipliers.Weeks);
+
+        ExpiryLineEdit.OnTextChanged += OnTextChanged;
 
         TypeOption.AddItem(Loc.GetString("admin-note-editor-type-note"), (int) NoteType.Note);
         TypeOption.AddItem(Loc.GetString("admin-note-editor-type-message"), (int) NoteType.Message);
@@ -83,11 +108,33 @@ public sealed partial class NoteEdit : FancyWindow
             {
                 PermanentCheckBox.Pressed = false;
                 UpdatePermanentCheckboxFields();
-                ExpiryLineEdit.Text = ExpiryTime.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
+
+                var timeLeft = ConvertDateToTimeFromNow(ExpiryTime.Value.ToLocalTime());
+
+                ExpiryLineEdit.Text = Math.Round(timeLeft.Item2, 2).ToString();
+                ExpiryLengthDropdown.SelectId((int)timeLeft.Item1);
             }
         }
 
         UpdateSubmitButton();
+    }
+
+    // Convert the given date time into a multiplier and value.
+    // This is for having a simple format like 2 weeks instead of everything being in hours.
+    // For example, a 2 weeks old date would return (Multipliers.Days, 14)
+    private (Multipliers, double) ConvertDateToTimeFromNow(DateTime expirationDate)
+    {
+        var deltaTime = expirationDate - DateTime.Now;
+
+        if (deltaTime.TotalMinutes <= 0)
+            return (Multipliers.Minutes, 0.0);
+
+        return deltaTime.TotalDays switch
+        {
+            < 1 => (Multipliers.Minutes, deltaTime.TotalMinutes), // Less than a day
+            < 365 => (Multipliers.Days, deltaTime.TotalDays),     // Less than a year
+            _ => (Multipliers.Months, deltaTime.TotalDays / 30)   // More than a year
+        };
     }
 
     private void OnSubmitButtonMouseEntered(GUIMouseHoverEventArgs args)
@@ -176,8 +223,9 @@ public sealed partial class NoteEdit : FancyWindow
     {
         ExpiryLabel.Visible = !PermanentCheckBox.Pressed;
         ExpiryLineEdit.Visible = !PermanentCheckBox.Pressed;
+        ExpiryLengthDropdown.Visible = !PermanentCheckBox.Pressed;
 
-        ExpiryLineEdit.Text = !PermanentCheckBox.Pressed ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") : string.Empty;
+        ExpiryLineEdit.Text = !PermanentCheckBox.Pressed ? 1.ToString() : string.Empty;
     }
 
     private void OnSecretPressed(BaseButton.ButtonEventArgs _)
@@ -189,6 +237,16 @@ public sealed partial class NoteEdit : FancyWindow
     {
         NoteSeverity = args.Id == -1 ? NoteSeverity = null : (NoteSeverity) args.Id;
         SeverityOption.SelectId(args.Id);
+    }
+
+    private void OnLengthChanged(OptionButton.ItemSelectedEventArgs args)
+    {
+        ExpiryLengthDropdown.SelectId(args.Id);
+    }
+
+    private void OnTextChanged(HistoryLineEdit.LineEditEventArgs args)
+    {
+        ParseExpiryTime();
     }
 
     private void OnSubmitButtonPressed(BaseButton.ButtonEventArgs args)
@@ -267,13 +325,25 @@ public sealed partial class NoteEdit : FancyWindow
             return true;
         }
 
-        if (string.IsNullOrWhiteSpace(ExpiryLineEdit.Text) || !DateTime.TryParse(ExpiryLineEdit.Text, out var result) || DateTime.UtcNow > result)
+        if (string.IsNullOrWhiteSpace(ExpiryLineEdit.Text) || !double.TryParse(ExpiryLineEdit.Text, out var inputDouble) || inputDouble < 0)
         {
             ExpiryLineEdit.ModulateSelfOverride = Color.Red;
             return false;
         }
 
-        ExpiryTime = result.ToUniversalTime();
+        var mult = ExpiryLengthDropdown.SelectedId switch
+        {
+            (int) Multipliers.Minutes => TimeSpan.FromMinutes(1).TotalMinutes,
+            (int) Multipliers.Hours => TimeSpan.FromHours(1).TotalMinutes,
+            (int) Multipliers.Days => TimeSpan.FromDays(1).TotalMinutes,
+            (int) Multipliers.Weeks => TimeSpan.FromDays(7).TotalMinutes,
+            (int) Multipliers.Months => TimeSpan.FromDays(30).TotalMinutes,
+            (int) Multipliers.Years => TimeSpan.FromDays(365).TotalMinutes,
+            (int) Multipliers.Centuries => TimeSpan.FromDays(36525).TotalMinutes,
+            _ => throw new ArgumentOutOfRangeException(nameof(ExpiryLengthDropdown.SelectedId), "Multiplier out of range :(")
+        };
+
+        ExpiryTime = DateTime.UtcNow.AddMinutes(inputDouble * mult);
         ExpiryLineEdit.ModulateSelfOverride = null;
         return true;
     }

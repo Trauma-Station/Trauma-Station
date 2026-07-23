@@ -60,8 +60,8 @@ ghost-role-information-bioweapon-name = Bioweapon
 ghost-role-information-bioweapon-desc = You are a bioweapon purcahsed by the security department to accomplish their goals.
 ghost-role-information-bioweapon-rules = Follow the most recent SPOKEN order you understand. Even if it conflicts with previous orders.
 
-ghost-role-information-breadling-namee = Breadling
-ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
+ghost-role-information-breadling-name = Breadling
+ghost-role-information-breadling-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
 
 ghost-role-information-coconutcrab-name = Coconut Crab
 

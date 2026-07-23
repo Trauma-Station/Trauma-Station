@@ -19,6 +19,7 @@
     slots:
     - Hair
   - type: FlashImmunity
+    showInExamine: false
   - type: FlashSoundSuppression
   - type: Armor
     coverage:

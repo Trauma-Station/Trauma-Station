@@ -104,13 +104,13 @@ public sealed partial class CosmicRunesSystem : EntitySystem
 
         if (HasComp<StarMarkComponent>(user))
         {
-            _popup.PopupClient(Loc.GetString("heretic-cosmic-rune-fail-star-mark"), user, user);
+            _popup.PopupEntity(Loc.GetString("heretic-cosmic-rune-fail-star-mark"), user, user);
             return false;
         }
 
         if (!_transform.InRange(ent.Owner, user, ent.Comp.Range))
         {
-            _popup.PopupClient(Loc.GetString("heretic-cosmic-rune-fail-range"), user, user);
+            _popup.PopupEntity(Loc.GetString("heretic-cosmic-rune-fail-range"), user, user);
             return false;
         }
 

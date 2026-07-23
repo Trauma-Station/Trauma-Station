@@ -13,35 +13,28 @@ public sealed partial class EffectActionSystem : EntitySystem
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<EffectActionComponent, ActionPerformedEvent>(OnActionPerformed);
-        SubscribeLocalEvent<EffectActionComponent, EffectInstantActionEvent>(OnInstantAction);
-        SubscribeLocalEvent<EffectActionComponent, EffectTargetActionEvent>(OnTargetAction);
-
-        SubscribeLocalEvent<ToggleEffectActionComponent, EffectToggleActionEvent>(OnToggle);
-    }
-
+    [SubscribeLocalEvent]
     private void OnActionPerformed(Entity<EffectActionComponent> ent, ref ActionPerformedEvent args)
     {
         if (ent.Comp.OnPerformed)
             _effects.ApplyEffects(args.Performer, ent.Comp.Effects);
     }
 
+    [SubscribeLocalEvent]
     private void OnInstantAction(Entity<EffectActionComponent> ent, ref EffectInstantActionEvent args)
     {
         _effects.ApplyEffects(args.Performer, ent.Comp.Effects);
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnTargetAction(Entity<EffectActionComponent> ent, ref EffectTargetActionEvent args)
     {
         _effects.ApplyEffects(args.Target, ent.Comp.Effects);
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnToggle(Entity<ToggleEffectActionComponent> ent, ref EffectToggleActionEvent args)
     {
         bool targetState = !ent.Comp.Toggled;

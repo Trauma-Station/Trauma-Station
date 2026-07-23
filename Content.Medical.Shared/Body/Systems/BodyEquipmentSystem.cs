@@ -46,7 +46,7 @@ public sealed partial class BodyEquipmentSystem : EntitySystem
 
         var ident = Identity.Entity(ent, EntityManager);
         var partName = part.ToString().ToLower();
-        _popup.PopupClient(Loc.GetString("equip-part-missing-error",
+        _popup.PopupEntity(Loc.GetString("equip-part-missing-error",
             ("target", ident), ("part", partName)), args.EquipTarget, args.User);
         args.Cancel();
     }

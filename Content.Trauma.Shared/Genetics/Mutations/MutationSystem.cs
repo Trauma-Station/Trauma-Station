@@ -25,7 +25,6 @@ public sealed partial class MutationSystem : CommonMutationSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -143,7 +142,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
         var popup = Loc.GetString(id + "-mutated");
         if (predicted)
-            _popup.PopupClient(popup, ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
         else
             _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
     }
@@ -167,7 +166,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
             return;
 
         if (predicted)
-            _popup.PopupClient(popup, ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
         else
             _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
     }
@@ -191,7 +190,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         MutationCount = 0;
         AllMutations.Clear();
         UnlockedMutations.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (!proto.TryGetComponent<MutationComponent>(out var comp, Factory))
                 continue;
@@ -707,7 +706,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         {
             var msg = Loc.GetString(key);
             if (predicted)
-                _popup.PopupClient(msg, ent, ent);
+                _popup.PopupEntity(msg, ent, ent);
             else
                 _popup.PopupEntity(msg, ent, ent);
         }

@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: [ BaseMob, MobCombat, MobNightVision ]
   id: MobRotHulk
+  name: bloated abomination
   suffix: Wraith
-  parent: [ BaseMob, MobCombat ]
-  name: Bloated abomination
   description: A rotting, walking mass of flesh.
   components:
   - type: DeleteOnTrigger
@@ -96,10 +96,6 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#00FF00"
-    activateSound: null
-    deactivateSound: null
   - type: MobThresholds
     thresholds:
       0: Alive

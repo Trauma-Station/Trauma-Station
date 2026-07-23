@@ -125,6 +125,11 @@ public abstract partial class SharedEmitSoundSystem : EntitySystem
 
     private void OnEmitSoundOnPickup(EntityUid uid, EmitSoundOnPickupComponent component, GotEquippedHandEvent args)
     {
+        // <Trauma>
+        if (_thieving.IsStealthy(args.User))
+            return;
+        // </Trauma>
+
         TryEmitSound(uid, component, args.User);
     }
 
