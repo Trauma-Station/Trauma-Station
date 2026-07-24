@@ -33,7 +33,7 @@
   id: CommandBlacklistedAntag
   jobBlacklist:
   # <Trauma>
-  # - Captain
+  - Captain
   # - HeadOfPersonnel
   - HeadOfSecurity
   # - ChiefMedicalOfficer
