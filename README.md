@@ -1,23 +1,7 @@
-<p align="center"> <img alt="Space Station 14" width="750" height="600" src="https://github.com/Trauma-Station/Trauma-Station/blob/master/Resources/Textures/Logo/logo.png" /></p>
+<p align="center"> <img width="853" height="508" alt="silly station-trauma logo" src="https://github.com/user-attachments/assets/c7e46e1a-e870-481b-8b46-f5aac5ef464b" />
 
-This is a fork of [SS14](https://github.com/space-wizards/space-station-14) called Trauma Station.
 
-## Links
-
-[Trauma Station Discord](https://discord.gg/7ZKs7HadK5) | [Trauma Station Wiki](https://wiki.traumastation.com/wiki/Main_Page) | [Devbus Discord Server](https://discord.gg/f3rJaCuK)
-
-## Documentation/Wiki
-
-Trauma itself has a non-technical wiki on its content [here](https://wiki.traumastation.com/wiki/Main_Page)
-
-SS14 Docs [docs site](https://docs.spacestation14.com/) has documentation on SS14's content, engine, game design, and more. It also has lots of resources for new contributors to the project.
-
-## Contributing
-
-We are happy to accept contributions from anybody. Get in [our Discord Server](https://discord.gg/7ZKs7HadK5) if you want to help. Feel free to check the [list of issues](https://github.com/Trauma-Station/Trauma-Station/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
-Please read the [Contribution Guidelines](/CONTRIBUTING.md) before opening a pull request.
-
-We are not accepting translations of the game on our repository.
+This is a fork of [SS14](https://github.com/Trauma-Station/Trauma-Station) called Silly Station-trauma.
 
 ## AI-generated contributions disclaimer
 This project does not accept low-effort or wholesale AI-generated contributions. Examples include, but are not limited to:
