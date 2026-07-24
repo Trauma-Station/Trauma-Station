@@ -74,7 +74,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         if (!CanScan((args.Used, scanalyzer), entity))
             return;
 
-        var ev = new AttemptScanalyzerScanEvent(entity.Owner);
+        var ev = new AttemptScanalyzerScanEvent(entity.Owner, args.User);
         RaiseLocalEvent(args.Used, ref ev);
         if (ev.Cancelled)
             return;
@@ -129,7 +129,7 @@ public sealed partial class ScanalyzerScanDoAfterEvent : SimpleDoAfterEvent;
 /// Raised on the scanalyzer entity before it tries to do a scan.
 /// </summary>
 [ByRefEvent]
-public record struct AttemptScanalyzerScanEvent(EntityUid Target, bool Cancelled = false);
+public record struct AttemptScanalyzerScanEvent(EntityUid Target, EntityUid User, bool Cancelled = false);
 
 /// <summary>
 /// Raised on the scanalyzer entity once a scan has finished.
