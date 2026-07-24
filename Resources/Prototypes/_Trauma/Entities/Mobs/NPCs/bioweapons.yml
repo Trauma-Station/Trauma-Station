@@ -90,6 +90,7 @@
     - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: short
+  - type: GhostTakeoverAvailable
   - type: NoSlip
   - type: Explosive
     explosionType: Default
