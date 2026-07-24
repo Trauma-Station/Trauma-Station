@@ -326,7 +326,7 @@ public sealed partial class JobListingsSystem : EntitySystem
     {
         if (!TryComp<JobListingsOwnerComponent>(mind.Owner, out var jobBoard))
             return;
-        if (!TryComp<JobListingsComponent>(jobBoard.JobListings, out var jobListingsComp) )
+        if (!TryComp<JobListingsComponent>(jobBoard.JobListings, out var jobListingsComp))
             return;
         UpdateUis((jobBoard.JobListings, jobListingsComp));
     }
@@ -352,7 +352,7 @@ public sealed partial class JobListingsSystem : EntitySystem
     /// </summary>
     public void Link(Entity<JobListingsComponent> jobBoard, EntityUid remote)
     {
-        AddComp(remote, new RemoteJobListingsComponent {JobListings = jobBoard.Owner});
+        AddComp(remote, new RemoteJobListingsComponent { JobListings = jobBoard.Owner });
         jobBoard.Comp.Remotes.Add(remote);
     }
 
@@ -429,7 +429,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         if (mind is null)
             return;
         jobListingsComp.Mind = mind.Value;
-        AddComp(mind.Value, new JobListingsOwnerComponent{JobListings = args.Store});
+        AddComp(mind.Value, new JobListingsOwnerComponent { JobListings = args.Store });
 
         FillSideJobs((args.Store, jobListingsComp));
         Link((args.Store, jobListingsComp), args.Host);
@@ -453,7 +453,7 @@ public sealed partial class JobListingsSystem : EntitySystem
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))
             return;
-        ClaimSideJob(jobBoard.Value, msg.Actor,GetEntity(msg.Job));
+        ClaimSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
         UpdateUi(owner.Owner);
     }
 
