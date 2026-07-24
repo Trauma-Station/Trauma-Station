@@ -153,8 +153,17 @@
   - sprite: Mobs/Customization/Moth/moth_antennas.rsi
     state: underwing_secondary
 
-# Wings # Trauma - removed wings from here, heavily changed and moved to _Trauma folder
+# Wings # Trauma - removed most wings from here, heavily changed and moved to _Trauma folder
 
+- type: marking
+  id: MothWingsUnderwing
+  bodyPart: Wings # Trauma - wings not tail
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: Mobs/Customization/Moth/moth_wings.rsi
+    state: underwing_primary
+  - sprite: Mobs/Customization/Moth/moth_wings.rsi
+    state: underwing_secondary
 
 # Body markings:
 # Charred

@@ -1,4 +1,6 @@
-marking-MothWingsDefault-plain = Wing
+marking-MothWingsStellar-plain = Wing
+
+marking-MothWingsDefault-atlas = Wing
 
 marking-MothWingsDeathhead-deathhead_1 = 1
 marking-MothWingsDeathhead-deathhead_2 = 2
@@ -24,34 +26,28 @@ marking-MothWingsRoyal-royal_2 = 2
 marking-MothWingsWitchwing-witchwing_1 = 1
 marking-MothWingsWitchwing-witchwing_2 = 2
 
-marking-MothWingsAtlas = Wings (Atlas)
-marking-MothWingsAtlas-atlas = Wing
-
 marking-MothWingsMonarch = Wings (Monarch)
 marking-MothWingsMonarch-monarch = Wing
 
-marking-MothWingsRagged = Wings (Ragged)
-marking-MothWingsRagged-ragged = Wing
+marking-MothWingsFan-ragged = Wing
+
+marking-MothWingsDfan-poison = Wing
 
 marking-MothWingsBluespace = Wings (Bluespace)
 marking-MothWingsBluespace-bluespace_1 = 1
 marking-MothWingsBluespace-bluespace_2 = 2
 
-marking-MothWingsSnow = Wings (Snow)
-marking-MothWingsSnow-snow_1 = 1
-marking-MothWingsSnow-snow_2 = 2
+marking-MothWingsLadybug-snow_1 = 1
+marking-MothWingsLadybug-snow_2 = 2
 
-marking-MothWingsBrown = Wings (Brown)
-marking-MothWingsBrown-brown_1 = 1
-marking-MothWingsBrown-brown_2 = 2
+marking-MothWingsDbushy-brown_1 = 1
+marking-MothWingsDbushy-brown_2 = 2
 
-marking-MothWingsLovers = Wings (Lovers)
-marking-MothWingsLovers-lovers_1 = 1
-marking-MothWingsLovers-lovers_2 = 2
+marking-MothWingsStriped-lovers_1 = 1
+marking-MothWingsStriped-lovers_2 = 2
 
-marking-MothWingsMoonfly = Wings (Moonfly)
-marking-MothWingsMoonfly-moonfly_1 = 1
-marking-MothWingsMoonfly-moonfly_2 = 2
+marking-MothWingsSwirly-moonfly_1 = 1
+marking-MothWingsSwirly-moonfly_2 = 2
 
 marking-MothWingsRosy = Wings (Rosy)
 marking-MothWingsRosy-rosy_1 = 1

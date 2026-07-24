@@ -23,10 +23,10 @@
           category: Wings
           index: 0
 
-# Default
+# Stellar
 
 - type: marking
-  id: MothWingsDefault
+  id: MothWingsStellar
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -35,7 +35,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsDefaultBehind
+  id: MothWingsStellarBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -49,7 +49,7 @@
           index: 0
 
 - type: marking
-  id: MothWingsDefaultOpen
+  id: MothWingsStellarOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -58,7 +58,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsDefaultOpenBehind
+  id: MothWingsStellarOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -212,9 +212,56 @@
           category: Wings
           index: 0
 
-# Ragged
+# Dfan
 - type: marking
-  id: MothWingsRagged
+  id: MothWingsDfan
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: poison
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDfanBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: poison_behind
+  coloring:
+    layers:
+      poison_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsDfanOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: poison
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDfanOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: poison_behind
+  coloring:
+    layers:
+      poison_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Fan
+- type: marking
+  id: MothWingsFan
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -223,7 +270,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsRaggedBehind
+  id: MothWingsFanBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -237,7 +284,7 @@
           index: 0
 
 - type: marking
-  id: MothWingsRaggedOpen
+  id: MothWingsFanOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -246,7 +293,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsRaggedOpenBehind
+  id: MothWingsFanOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -306,9 +353,9 @@
           category: Wings
           index: 0
 
-# Atlas
+# Default
 - type: marking
-  id: MothWingsAtlas
+  id: MothWingsDefault
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -317,7 +364,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsAtlasBehind
+  id: MothWingsDefaultBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -331,7 +378,7 @@
           index: 0
 
 - type: marking
-  id: MothWingsAtlasOpen
+  id: MothWingsDefaultOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -340,7 +387,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsAtlasOpenBehind
+  id: MothWingsDefaultOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -968,9 +1015,9 @@
           category: Wings
           index: 1
 
-# Snow
+# Ladybug
 - type: marking
-  id: MothWingsSnow
+  id: MothWingsLadybug
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -981,7 +1028,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsSnowBehind
+  id: MothWingsLadybugBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1001,7 +1048,7 @@
           index: 1
 
 - type: marking
-  id: MothWingsSnowOpen
+  id: MothWingsLadybugOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -1012,7 +1059,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsSnowOpenBehind
+  id: MothWingsLadybugOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1094,9 +1141,9 @@
           category: Wings
           index: 1
 
-# Lovers
+# Striped
 - type: marking
-  id: MothWingsLovers
+  id: MothWingsStriped
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -1107,7 +1154,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsLoversBehind
+  id: MothWingsStripedBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1127,7 +1174,7 @@
           index: 1
 
 - type: marking
-  id: MothWingsLoversOpen
+  id: MothWingsStripedOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -1138,7 +1185,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsLoversOpenBehind
+  id: MothWingsStripedOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1157,9 +1204,9 @@
           category: Wings
           index: 1
 
-# Brown
+# Dbushy
 - type: marking
-  id: MothWingsBrown
+  id: MothWingsDbushy
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -1170,7 +1217,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsBrownBehind
+  id: MothWingsDbushyBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1190,7 +1237,7 @@
           index: 1
 
 - type: marking
-  id: MothWingsBrownOpen
+  id: MothWingsDbushyOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -1201,7 +1248,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsBrownOpenBehind
+  id: MothWingsDbushyOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1220,9 +1267,9 @@
           category: Wings
           index: 1
 
-# Moonfly
+# Swirly
 - type: marking
-  id: MothWingsMoonfly
+  id: MothWingsSwirly
   bodyPart: Wings
   groupWhitelist: [Moth]
   sprites:
@@ -1233,7 +1280,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsMoonflyBehind
+  id: MothWingsSwirlyBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:
@@ -1253,7 +1300,7 @@
           index: 1
 
 - type: marking
-  id: MothWingsMoonflyOpen
+  id: MothWingsSwirlyOpen
   bodyPart: Wings
   groupWhitelist: []
   sprites:
@@ -1264,7 +1311,7 @@
   childMarkingsSuffix: [Behind]
 
 - type: marking
-  id: MothWingsMoonflyOpenBehind
+  id: MothWingsSwirlyOpenBehind
   bodyPart: WingsBehind
   groupWhitelist: []
   sprites:

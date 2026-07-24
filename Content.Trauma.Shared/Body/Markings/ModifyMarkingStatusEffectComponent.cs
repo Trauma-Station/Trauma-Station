@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Body.Markings;
 /// <summary>
 /// Toggles some organ marking to use another marking
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ModifyMarkingStatusEffectComponent : Component
 {
     [DataField(required: true)]
@@ -23,4 +23,10 @@ public sealed partial class ModifyMarkingStatusEffectComponent : Component
     /// </summary>
     [DataField(required: true)]
     public string Suffix;
+
+    /// <summary>
+    /// newmarking -> oldmarking ids saved when toggled for easier revert
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, string> CachedMarkings = new();
 }

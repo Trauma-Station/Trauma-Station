@@ -55,28 +55,23 @@ public sealed partial class ModifyMarkingsStatusEffectSystem : EntitySystem
 
                     newMarkingId = $"{currentMarkingId}{status.Comp.Suffix}";
                 }
+                else if (status.Comp.CachedMarkings.TryGetValue(currentMarkingId, out var marking))
+                    newMarkingId = marking;
                 else
-                {
-                    if (currentMarkingId.Id.EndsWith(status.Comp.Suffix))
-                    {
-                        newMarkingId = currentMarkingId.Id[..^status.Comp.Suffix.Length];
-                    }
-                    else
-                    {
-                        newMarkingId = currentMarkingId;
-                        Log.Error($"Unable to revert marking override for {currentMarkingId}");
-                    }
-                }
+                    newMarkingId = currentMarkingId;
 
                 if (!ProtoMan.HasIndex<MarkingPrototype>(newMarkingId))
-                {
-                    Log.Error($"{ToPrettyString(uid):ent} tried toggling marking {newMarkingId} that doesn't exist");
                     continue;
-                }
+
+                if (apply)
+                    status.Comp.CachedMarkings[newMarkingId] = currentMarkingId;
 
                 layerMarkings[i] = new Marking(newMarkingId, layerMarkings[i].MarkingColors);
             }
         }
+
+        if (apply)
+            Dirty(status);
 
         _visualBody.ApplyMarkings(uid,
             new()

@@ -256,6 +256,14 @@
       "directions": 4
     },
     {
+      "name": "poison",
+      "directions": 4
+    },
+    {
+      "name": "poison_behind",
+      "directions": 4
+    },
+    {
       "name": "rosy_1",
       "directions": 4
     },

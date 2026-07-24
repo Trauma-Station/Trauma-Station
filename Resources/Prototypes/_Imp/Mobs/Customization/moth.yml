@@ -480,131 +480,130 @@
 
 # Wings
 
-# Commented out due to lack of open wing sprite
-#- type: marking
-#  id: LunaWings
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: luna1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: luna2
-#
-#- type: marking
-#  id: MothBee
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: bee1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: bee2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: bee3
-#
-#- type: marking
-#  id: MothBeetleTail
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: beetle1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: beetle2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: beetle3
-#
-#- type: marking
-#  id: MothFirefly
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: firefly2
-#
-#- type: marking
-#  id: MothGlasswing
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: glasswing1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: glasswing2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: glasswing3
-#
-#- type: marking
-#  id: MothRhinoBeetle
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: rhinobeetle1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: rhinobeetle2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: rhinobeetle3
-#
-#- type: marking
-#  id: MothSnoth
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: snoth1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: snoth2
-#
-#- type: marking
-#  id: MothTrueButterfly
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: truebutterfly1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: truebutterfly2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: truebutterfly3
-#
-#- type: marking
-#  id: WingsBackstabbed
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: backstabbed
-#
-#- type: marking
-#  id: WingsDragonfly
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: dragonfly1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: dragonfly2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: dragonfly3
-#
-#- type: marking
-#  id: WingsFly
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: fly1
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: fly2
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: fly3
-#
-#- type: marking
-#  id: WingsLanternfly
-#  bodyPart: Wings
-#  groupWhitelist: [ Moth ]
-#  sprites:
-#  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
-#    state: lanternfly
+- type: marking
+  id: LunaWings
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: luna1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: luna2
+
+- type: marking
+  id: MothBee
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: bee1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: bee2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: bee3
+
+- type: marking
+  id: MothBeetleTail
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: beetle1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: beetle2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: beetle3
+
+- type: marking
+  id: MothFirefly
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: firefly2
+
+- type: marking
+  id: MothGlasswing
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: glasswing1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: glasswing2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: glasswing3
+
+- type: marking
+  id: MothRhinoBeetle
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: rhinobeetle1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: rhinobeetle2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: rhinobeetle3
+
+- type: marking
+  id: MothSnoth
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: snoth1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: snoth2
+
+- type: marking
+  id: MothTrueButterfly
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: truebutterfly1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: truebutterfly2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: truebutterfly3
+
+- type: marking
+  id: WingsBackstabbed
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: backstabbed
+
+- type: marking
+  id: WingsDragonfly
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: dragonfly1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: dragonfly2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: dragonfly3
+
+- type: marking
+  id: WingsFly
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: fly1
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: fly2
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: fly3
+
+- type: marking
+  id: WingsLanternfly
+  bodyPart: Wings
+  groupWhitelist: [ Moth ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/Moth/wings.rsi
+    state: lanternfly

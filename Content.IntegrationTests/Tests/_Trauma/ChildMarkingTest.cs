@@ -1,6 +1,5 @@
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Humanoid.Markings;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -14,20 +13,17 @@ public sealed class ChildMarkingTest : GameTest
     public async Task ValidateChildMarkings()
     {
         var pair = Pair;
-        var server = pair.Server;
 
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
-                foreach (var  marking in protoMan.EnumeratePrototypes<MarkingPrototype>())
+                foreach (var  marking in SProtoMan.EnumeratePrototypes<MarkingPrototype>())
                 {
                     foreach (var suffix in marking.ChildMarkingsSuffix)
                     {
                         var id = $"{marking.ID}{suffix}";
-                        Assert.That(protoMan.HasIndex<MarkingPrototype>(id),
+                        Assert.That(SProtoMan.HasIndex<MarkingPrototype>(id),
                             Is.True,
                             $"Child marking {id} does not exist.");
                     }
