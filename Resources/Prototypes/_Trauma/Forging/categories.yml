@@ -3,6 +3,7 @@
 - type: forgingCategory
   id: Armor
   name: armor
+  abstract: true
   icon:
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
     state: icon

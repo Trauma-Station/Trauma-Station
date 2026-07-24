@@ -66,8 +66,8 @@
         vgroid: !type:DungeonSpawnGroup # Trauma, made this spawn first
           hide: false
           nameGrid: true
-          minimumDistance: 400
-          maximumDistance: 600
+          minimumDistance: 400 # Was 300
+          maximumDistance: 600 # Was 350
           nameDataset: NamesBorer
           stationGrid: false
           addComponents:
