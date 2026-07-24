@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: forgingCategory
-  abstract: true # TODO: enable once its implemented
   id: Armor
   name: armor
   icon:

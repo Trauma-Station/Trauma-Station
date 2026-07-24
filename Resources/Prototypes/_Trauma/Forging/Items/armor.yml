@@ -13,18 +13,21 @@
   id: ForgedChainmailSheet
 
 - type: forgedItem
-  abstract: true
   id: ArmorPlate
   category: Armor
   name: plate
   tag: ForgedArmorPlate
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+  work: 200 # its a fucking warhammer
+  cost: 2
+  skills:
+    MetalworkingKnowledge: 2
+    ArmorKnowledge: 2
 
 - type: Tag
   id: ForgedArmorPlate
 
 - type: forgedItem
-  abstract: true
   id: ShieldBoss
   category: Armor
   name: shield boss # big boss
