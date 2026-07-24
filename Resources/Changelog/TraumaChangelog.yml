@@ -11987,3 +11987,14 @@ Entries:
   id: 1315
   time: '2026-07-24T02:11:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3689
+- author: TraumaTised
+  changes:
+  - type: Tweak
+    message: Changed multiple demon sprites, the urists are (mostly) no more!
+  - type: Tweak
+    message: Reworked "Strange man" demon
+  - type: Tweak
+    message: Added descriptions to all demons!
+  id: 1316
+  time: '2026-07-24T17:58:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3691
