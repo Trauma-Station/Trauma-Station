@@ -70,10 +70,10 @@
       types:
         Piercing: 15
   - type: Item
-    size: Large # Goob edit
-    shape: # Goob
-    - 0,0,8,0
-    storedRotation: 45 # Goob
+    size: Large # Trauma - was Ginormous
+    shape:
+    - 0,0,0,6
+    storedRotation: -45
   - type: Clothing
     quickEquip: false
     slots:

@@ -1,7 +1,9 @@
 using Content.Goobstation.Common.StationReport;
 using Content.Goobstation.UIKit.UserInterface.Controls;
+using Content.Client.Message;
 using Content.Client.Stylesheets;
-using Content.Shared.Mobs;
+using Robust.Client.UserInterface.Controls;
+using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.RoundEnd;
 
@@ -38,7 +40,7 @@ public sealed partial class RoundEndSummaryWindow
             Orientation = LayoutOrientation.Vertical
         };
         var label = new RichTextLabel();
-        label.SetMarkup(message);
+        label.SetMarkup(report);
         reportContainer.AddChild(label);
 
         scroll.AddChild(reportContainer);
