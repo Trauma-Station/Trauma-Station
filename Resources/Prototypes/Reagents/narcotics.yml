@@ -388,12 +388,13 @@
   meltingPoint: 36.0
   metabolisms:
     Bloodstream:
+      metabolismRate: 10 # Trauma
       effects:
       - !type:GenericStatusEffect
         key: Muted
         component: Muted
         type: Add
-        time: 10
+        time: 10 # 1 second per unit
 
 - type: reagent
   id: NorepinephricAcid

@@ -22,7 +22,8 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SkillChipAtmosphericTechnician
-        - id: SkillChipStationEngineer
-        - id: SkillChipTechnicalAssistant
+        - id: SkillChipDatabase
           amount: 3
+        - id: SkillChipTool
+          amount: 3
+        - id: SkillChipBludgeon

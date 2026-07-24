@@ -84,15 +84,15 @@
       state: icon
 
 - type: entity
-  categories: [ HideSpawnMenu, Spawner ]
+  categories: [ Spawner ]
   parent: BaseAntagSpawner
-  id: SpawnPointGhostRoleHunter
-  name: fugitive hunter spawn
+  id: SpawnPointGhostRoleHunterSyndicate
+  name: fugitive hunter spawn (syndicate)
   components:
   - type: GhostRole
-    name: ghost-role-information-hunter-name
-    description: ghost-role-information-hunter-description
-    rules: ghost-role-information-hunter-rules
+    name: ghost-role-information-syndicate-hunter-name
+    description: ghost-role-information-syndicate-hunter-name
+    rules: ghost-role-information-syndicate-hunter-rules
     mindRoles:
     - MindRoleGhostRoleHunter
     raffle:
@@ -105,7 +105,40 @@
       state: icon
 
 - type: entity
-  categories: [ HideSpawnMenu, Spawner ]
+  categories: [ Spawner ]
+  parent: SpawnPointGhostRoleHunterSyndicate
+  id: SpawnPointGhostRoleHunterSpacepol
+  name: fugitive hunter spawn (spacepol)
+  components:
+  - type: GhostRole
+    name: ghost-role-information-spacepol-hunter-name
+    description: ghost-role-information-spacepol-hunter-name
+    rules: ghost-role-information-spacepol-hunter-rules
+
+- type: entity
+  categories: [ Spawner ]
+  parent: SpawnPointGhostRoleHunterSyndicate
+  id: SpawnPointGhostRoleHunterRussian
+  name: fugitive hunter spawn (russian)
+  components:
+  - type: GhostRole
+    name: ghost-role-information-russian-hunter-name
+    description: ghost-role-information-russian-hunter-name
+    rules: ghost-role-information-russian-hunter-rules
+
+- type: entity
+  categories: [ Spawner ]
+  parent: SpawnPointGhostRoleHunterSyndicate
+  id: SpawnPointGhostRoleHunterBounty
+  name: fugitive hunter spawn (bounty)
+  components:
+  - type: GhostRole
+    name: ghost-role-information-bounty-hunter-name
+    description: ghost-role-information-bounty-hunter-name
+    rules: ghost-role-information-bounty-hunter-rules
+
+- type: entity
+  categories: [ Spawner ]
   parent: BaseAntagSpawner
   id: SpawnPointPirateCaptain
   name: Pirate spawn point

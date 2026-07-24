@@ -25,7 +25,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipSecurityCadet
+    - SkillChipCombatEducation
+    - SkillChipLaser
+    - SkillChipNonLethal
   - !type:AddComponentSpecial
     components:
     - type: SecurityStaff

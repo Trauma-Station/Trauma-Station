@@ -530,7 +530,7 @@
           type: [ Animal, Vox, Plant ]
           inverted: true
       - !type:InfectDisease
-        probability: 0.05
+        probability: 0.005
         scaleProbability: true
         conditions:
         - !type:MetabolizerTypeCondition

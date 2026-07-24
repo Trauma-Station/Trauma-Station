@@ -246,7 +246,7 @@
   name: uplink-contractor-baton-name
   description: uplink-contractor-baton-desc
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Melee/contractor_baton.rsi, state: uplink }
-  productEntity: ContractorBaton
+  productEntity: BriefcaseWeaponContractorBatonFilled
   cost:
     Telecrystal: 35
   categories:
@@ -263,7 +263,8 @@
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  productEntity: FireAxeFlaming
+  icon: { sprite: /Textures/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponFireaxeFilled # Trauma
   cost:
     Telecrystal: 65
   categories:
@@ -274,7 +275,7 @@
   name: uplink-weapon-burner-name
   description: uplink-weapon-burner-desc
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Rifles/burner.rsi, state: icon }
-  productEntity: WeaponRifleBurner
+  productEntity: BriefcaseWeaponBurnerFilled
   cost:
     Telecrystal: 100
   categories:
@@ -290,9 +291,9 @@
   name: uplink-hardlight-bow-name
   description: uplink-hardlight-bow-desc
   icon: { sprite:  /Textures/_Goobstation/Objects/Weapons/Guns/Bow/hardlight_bow.rsi, state: icon }
-  productEntity: BowHardlight
+  productEntity: BriefcaseWeaponHardlightBowFilled
   cost:
-    Telecrystal: 60
+    Telecrystal: 90
   categories:
   - UplinkWeaponry
   conditions:
@@ -316,7 +317,8 @@
   id: UplinkPistolAnaconda
   name: uplink-anaconda-name
   description: uplink-anaconda-desc
-  productEntity: WeaponPistolAnaconda
+  icon: { sprite:  /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/anaconda.rsi, state: icon }
+  productEntity: BriefcaseWeaponAnacondaFilled
   cost:
     Telecrystal: 40
   categories:
@@ -819,37 +821,37 @@
   categories:
   - UplinkImplants
 
-- type: listing
-  id: UplinkAutosurgeonSandevistan
-  name: uplink-autosurgeon-sandevistan-name
-  description: uplink-autosurgeon-sandevistan-desc
-  icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
-  productEntity: AutosurgeonSandevistan
-  cost:
-    Telecrystal: 66 # The urge to make it 65...
-  categories:
-  - UplinkImplants
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
+# - type: listing
+#   id: UplinkAutosurgeonSandevistan
+#   name: uplink-autosurgeon-sandevistan-name
+#   description: uplink-autosurgeon-sandevistan-desc
+#   icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
+#   productEntity: AutosurgeonSandevistan
+#   cost:
+#     Telecrystal: 66 # The urge to make it 65...
+#   categories:
+#   - UplinkImplants
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#     blacklist:
+#       tags:
+#       - NukeOpsUplink
 
-- type: listing
-  id: NukieUplinkAutosurgeonSandevistan
-  name: uplink-autosurgeon-sandevistan-name
-  description: uplink-autosurgeon-sandevistan-desc
-  icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
-  productEntity: AutosurgeonSandevistan
-  cost:
-    Telecrystal: 124
-  categories:
-  - UplinkImplants
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - LoneOpsUplink
+# - type: listing
+#   id: NukieUplinkAutosurgeonSandevistan
+#   name: uplink-autosurgeon-sandevistan-name
+#   description: uplink-autosurgeon-sandevistan-desc
+#   icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
+#   productEntity: AutosurgeonSandevistan
+#   cost:
+#     Telecrystal: 124
+#   categories:
+#   - UplinkImplants
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#     whitelist:
+#       tags:
+#       - LoneOpsUplink
 
 
 - type: listing
@@ -869,7 +871,7 @@
     whitelist:
     - UplinkAutosurgeonRightMantisBlade
     - UplinkAutosurgeonLeftMantisBlade
-    - UplinkAutosurgeonSandevistan
+    - UplinkAutosurgeonStatvekaSandevistan
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -897,16 +899,16 @@
   categories:
   - UplinkImplants
 
-- type: listing
-  id: UplinkAutosurgeonBerserkerHeart
-  name: uplink-autosurgeon-berserker-heart-name
-  description: uplink-autosurgeon-berserker-heart-desc
-  icon: { sprite: _Goobstation/Objects/Misc/berserker_heart.rsi, state: icon }
-  productEntity: AutosurgeonBerserker
-  cost:
-    Telecrystal: 66
-  categories:
-  - UplinkImplants
+# - type: listing
+#   id: UplinkAutosurgeonBerserkerHeart
+#   name: uplink-autosurgeon-berserker-heart-name
+#   description: uplink-autosurgeon-berserker-heart-desc
+#   icon: { sprite: _Goobstation/Objects/Misc/berserker_heart.rsi, state: icon }
+#   productEntity: AutosurgeonBerserker
+#   cost:
+#     Telecrystal: 66
+#   categories:
+#   - UplinkImplants
 
 - type: listing
   id: UplinkAutosurgeonJumpstarter
@@ -1257,7 +1259,7 @@
   name: uplink-energy-pickaxe-name
   description: uplink-energy-pickaxe-desc
   icon: { sprite: /Textures/_NF/Objects/Weapons/Melee/energy_pickaxe.rsi, state: icon }
-  productEntity: NFEnergyPickaxe
+  productEntity: BriefcaseWeaponEnergyPickaxeFilled
   cost:
     Telecrystal: 32 # Worse than esword for combat, better for breaching
   categories:

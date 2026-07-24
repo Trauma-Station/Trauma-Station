@@ -2538,7 +2538,7 @@
         Quantity: 5
       - ReagentId: Nutriment
         Quantity: 5
-      - ReagentId: Pax
+      - ReagentId: Tilenol
         Quantity: 5
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/world_pea.rsi

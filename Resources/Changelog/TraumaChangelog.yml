@@ -11881,3 +11881,84 @@ Entries:
   id: 1313
   time: '2026-07-23T19:50:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3656
+- author: Armok
+  changes:
+  - type: Add
+    message: >-
+      Three new unique types of fugitive hunters; russian raiders, real
+      spacepol, and an elite bountyhunter.
+  - type: Add
+    message: Tons of new inspectable wound descriptions.
+  - type: Add
+    message: The security bioweapon (first of many)
+  - type: Add
+    message: Headrev radio channel
+  - type: Add
+    message: Tons of briefcases for syndie weapons.
+  - type: Add
+    message: TONS OF SKILLCHIPS AND OTHER COOL STUFF
+  - type: Add
+    message: Almost every station animal now fights back when attacked.
+  - type: Add
+    message: SMG skill
+  - type: Add
+    message: Word replacements
+  - type: Add
+    message: >-
+      Most small animals like mice have bullets pierce them, and hit targets
+      behind them
+  - type: Add
+    message: Vgroid
+  - type: Tweak
+    message: Significantly nerfed blind and mute toxin
+  - type: Tweak
+    message: Blob removed until its node bug is fixed
+  - type: Tweak
+    message: Gutworms are harder to contract
+  - type: Tweak
+    message: >-
+      Welding fuel tanks no longer blow up with pierce damage, instead its
+      ballistic now.
+  - type: Tweak
+    message: You can now have 3 skillchips.
+  - type: Tweak
+    message: It is easier to parry and reflect, 50 > 26 skill req
+  - type: Tweak
+    message: Coscult armor nerfed slightly.
+  - type: Tweak
+    message: Coscult weapons nerfed.
+  - type: Tweak
+    message: Increased hardlight bow price from 60 > 90
+  - type: Tweak
+    message: Nerfed changeling claw poison
+  - type: Tweak
+    message: Nerfed devastator rev shotgun
+  - type: Tweak
+    message: Monkeys / kobolds turned human via xenobio now get real names
+  - type: Tweak
+    message: Much harder for botany to get a hold of nettle.
+  - type: Tweak
+    message: Removed northstars wideswing
+  - type: Tweak
+    message: Nerfed dragon ichor heal.
+  - type: Tweak
+    message: Worldpeas now have Tilenol
+  - type: Tweak
+    message: Chainsaw nerfed slightly
+  - type: Remove
+    message: Berserker heart and sandivestan
+  - type: Remove
+    message: Antag, hat, and abuse tokens from store.
+  - type: Remove
+    message: Several knowledge types.
+  - type: Tweak
+    message: All bombs can only be purchased 5 minutes into the round as of now.
+  - type: Fix
+    message: Decapoid sprite layering
+  - type: Fix
+    message: Abductor welder not working
+  - type: Fix
+    message: Bingle and facehugger ghostroles are now instant to claim
+  id: 1314
+  time: '2026-07-24T01:47:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3683

@@ -1325,9 +1325,9 @@
       - MobState
     damage:
       types:
+        Ballistic: -100 # Trauma
         Blunt: -100
         Piercing: -100
-        Ballistic: -100 # Trauma
         Slash: -100
         Heat: -100
         Cold: -100

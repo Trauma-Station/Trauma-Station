@@ -8,6 +8,8 @@
     interfaces:
       enum.EsColorPickerMenu.Key:
         type: EsColorPickerBUI
+  - type: WeaponClass
+    class: Energy
   # </Trauma>
   - type: EnergySword
   - type: ItemToggle
