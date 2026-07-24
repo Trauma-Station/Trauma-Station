@@ -81818,21 +81818,6 @@ entities:
         moles:
           Oxygen: 8.402782
           Nitrogen: 31.610466
-- proto: CrateHydroponicsSeedsExotic
-  entities:
-  - uid: 13213
-    components:
-    - type: Transform
-      pos: -47.5,-70.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14957
-        moles:
-          Oxygen: 8.402782
-          Nitrogen: 31.610466
 - proto: CrateLockBoxSecurity
   entities:
   - uid: 13214

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage.Systems;
+using Content.Shared.EntityEffects;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weather;
@@ -13,13 +13,12 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Shared.Weather;
 
 /// <summary>
-/// Handles weather damage for exposed mobs.
+/// Handles weather effects for exposed mobs.
 /// </summary>
-public sealed partial class WeatherDamageSystem : EntitySystem
+public sealed partial class WeatherEffectsSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
@@ -36,55 +35,52 @@ public sealed partial class WeatherDamageSystem : EntitySystem
             return;
 
         var now = _timing.CurTime;
-        var query = EntityQueryEnumerator<WeatherDamageComponent>();
+        var query = EntityQueryEnumerator<WeatherEffectsComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             if (now < comp.NextUpdate)
                 continue;
 
             comp.NextUpdate = now + comp.UpdateDelay;
-            Dirty(uid, comp);
+            if (_net.IsServer) // dont dirty clientside so it doesnt reset state, server can sync itself if needed
+                Dirty(uid, comp);
 
             if (Transform(uid).MapUid is not {} map)
-            {
-                Log.Error($"Ash storm {ToPrettyString(uid)} happened in nullspace!");
                 continue;
-            }
 
-            // client only predicts damage for itself
+            // client only predicts effects for itself
             if (_player.LocalEntity is {} player)
-                UpdateDamage(map, player, comp);
+                UpdateEffects(map, player, comp);
             else if (_net.IsServer)
-                UpdateAllDamage(map, comp);
+                UpdateAllEffects(map, comp);
         }
     }
 
-    private void UpdateAllDamage(EntityUid map, WeatherDamageComponent weather)
+    private void UpdateAllEffects(EntityUid map, WeatherEffectsComponent weather)
     {
         var query = EntityQueryEnumerator<MobStateComponent>();
         while (query.MoveNext(out var uid, out var mob))
         {
-            UpdateDamage(map, uid, mob, weather);
+            UpdateEffects(map, uid, mob, weather);
         }
     }
 
-    private void UpdateDamage(EntityUid map, EntityUid uid, WeatherDamageComponent weather)
+    private void UpdateEffects(EntityUid map, EntityUid uid, WeatherEffectsComponent weather)
     {
         if (!_mobQuery.TryComp(uid, out var mob))
             return;
 
-        UpdateDamage(map, uid, mob, weather);
+        UpdateEffects(map, uid, mob, weather);
     }
 
-    private void UpdateDamage(EntityUid map, EntityUid uid, MobStateComponent mob, WeatherDamageComponent weather)
+    private void UpdateEffects(EntityUid map, EntityUid uid, MobStateComponent mob, WeatherEffectsComponent weather)
     {
         // don't give dead bodies 10000 burn, that's not fun for anyone
         if (mob.CurrentState == MobState.Dead)
             return;
 
         var xform = Transform(uid);
-        if (xform.MapUid != map ||
-            _whitelist.IsWhitelistPass(weather.Blacklist, uid))
+        if (xform.MapUid != map)
             return;
 
         if (xform.GridUid is {} gridUid)
@@ -107,6 +103,6 @@ public sealed partial class WeatherDamageSystem : EntitySystem
             }
         }
 
-        _damageable.ChangeDamage(uid, weather.Damage, interruptsDoAfters: false);
+        _effects.ApplyEffects(uid, weather.Effects);
     }
 }

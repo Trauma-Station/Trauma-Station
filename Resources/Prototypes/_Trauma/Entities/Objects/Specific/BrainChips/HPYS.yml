@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStrength
+  name: HPYS-Chip (Strength Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStrengthTampered
+  name: HPYS-Chip (Tampered Strength Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 75
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStamina
+  name: HPYS-Chip (Stamina Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      AthleticsKnowledge: 28 # ~ 9.25% stam damage reduction
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStaminaTampered
+  name: HPYS-Chip (Tampered Stamina Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      AthleticsKnowledge: 50 # ~ 18.5% stam damage reduction
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipToughness
+  name: HPYS-Chip (Pain Dampening)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToughnessKnowledge: 28 # ~ 9.25% stam damage reduction
+
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipToughnessTampered
+  name: HPYS-Chip (Tampered Pain Dampening)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToughnessKnowledge: 50 # ~ 18.5% damage reduction
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipThrowing
+  name: HPYS-Chip (Hand-Eye Coordination)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipThrowingTampered
+  name: HPYS-Chip (Tampered Hand-Eye Coordination)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipEnhancer
+  name: HPYS-Chip (EGP-Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 28
+      ToughnessKnowledge: 28
+      StrengthKnowledge: 50
+      AthleticsKnowledge: 28

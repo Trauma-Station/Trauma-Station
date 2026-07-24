@@ -24,13 +24,16 @@
     BolaEnergy: 5 # was Bola: 6
     PepperSpray: 3
     SkillChipBludgeon: 2
-    SkillChipKnife: 2
+    SkillChipShortBlade: 2
     SkillChipPolearm: 2
     SkillChipNonLethal: 2
     SkillChipPistol: 2
     SkillChipRifle: 2
     SkillChipShotgun: 2
     SkillChipLaser: 2
+    SkillChipMarksmanship: 2
+    SkillChipLongBlade: 2
+    SkillChipUnarmed: 2
     SecHypo: 2
     CartridgeEpinephrine: 2
     CartridgeSaline: 2
@@ -48,4 +51,5 @@
     SarinGasGrenade: 2
     EmpGrenade: 2
     SkillChipHeavy: 1
+    SkillChipSniper: 1
   # </Trauma>

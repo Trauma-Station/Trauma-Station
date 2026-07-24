@@ -25,7 +25,8 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipVirologist
+    - SkillChipEducation
+    - SkillChipDoctor
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier

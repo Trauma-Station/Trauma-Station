@@ -169,6 +169,7 @@ public abstract partial class SharedBindSoulSystem : EntitySystem
         Meta.SetEntityName(ent, Loc.GetString("ensouled-item-name", ("item", ent)));
 
         EnsureComp<DamageableComponent>(ent);
+        EnsureComp<InjurableComponent>(ent);
 
         MakeDestructible(ent);
     }

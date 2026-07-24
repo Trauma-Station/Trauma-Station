@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Trauma.Shared.Genetics.Abilities;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Server.Polymorph.Systems;
@@ -8,6 +9,7 @@ using Content.Shared.Polymorph;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -15,9 +17,12 @@ namespace Content.IntegrationTests.Tests._Trauma;
 public sealed class MutationTest : GameTest
 {
     private static readonly EntProtoId TestMob = "MobHuman";
-    private static readonly EntProtoId TestMobPoly = "MobDwarf";
     private static readonly EntProtoId<MutationComponent> TestMutation = "MutationDwarfism";
     private static readonly ProtoId<PolymorphPrototype> TestPolymorph = "MutationMonkey";
+
+    [SidedDependency(Side.Server)] private MutationSystem _mutation = default!;
+    [SidedDependency(Side.Server)] private PolymorphSystem _polymorph = default!;
+    [SidedDependency(Side.Server)] private ScannedGenomeSystem _genome = default!;
 
     /// <summary>
     /// Makes sure no errors happen when adding, updating and removing every mutation.
@@ -26,47 +31,41 @@ public sealed class MutationTest : GameTest
     [Test]
     public async Task AddRemoveAllMutations()
     {
-        var pair = Pair;
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
+        var map = await Pair.CreateTestMap();
 
-        var entMan = server.EntMan;
-        var protoMan = server.ProtoMan;
-        var mutation = entMan.System<MutationSystem>();
-        var factory = entMan.ComponentFactory;
+        var factory = SEntMan.ComponentFactory;
         // monkey polymorph mutation messes it up so exclude it
-        var blacklisted = factory.GetComponentName<PolymorphMutationComponent>();
-
+        var blacklisted = factory.CompName<PolymorphMutationComponent>();
         var mobs = new List<EntityUid>();
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
-                foreach (var id in mutation.AllMutations.Keys)
+                foreach (var id in _mutation.AllMutations.Keys)
                 {
-                    if (!protoMan.Resolve(id, out var proto) || proto.Components.ContainsKey(blacklisted))
+                    if (!SProtoMan.Resolve(id, out var proto) || proto.HasComp(blacklisted))
                         continue;
 
-                    var mob = entMan.SpawnEntity(TestMob, map.GridCoords);
-                    Assert.That(mutation.AddMutation(mob, id), $"Failed to add {id} to {entMan.ToPrettyString(mob)}");
-                    Assert.That(mutation.HasMutation(mob, id), $"Added {id} but it was not present in {entMan.ToPrettyString(mob)}");
+                    var mob = SEntMan.SpawnEntity(TestMob, map.GridCoords);
+                    Assert.That(_mutation.AddMutation(mob, id), $"Failed to add {id} to {SEntMan.ToPrettyString(mob)}");
+                    Assert.That(_mutation.HasMutation(mob, id), $"Added {id} but it was not present in {SEntMan.ToPrettyString(mob)}");
                     mobs.Add(mob);
                 }
             });
         });
 
-        await server.WaitRunTicks(300); // 10 seconds
+        await RunSeconds(10);
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             foreach (var mob in mobs)
             {
-                mutation.ClearMutations(mob);
-                entMan.DeleteEntity(mob);
+                _mutation.ClearMutations(mob);
+                SEntMan.DeleteEntity(mob);
             }
         });
 
-        await server.WaitRunTicks(150); // 5 seconds
+        await RunSeconds(2);
     }
 
     /// <summary>
@@ -75,60 +74,68 @@ public sealed class MutationTest : GameTest
     [Test]
     public async Task MutationsPolymorphTest()
     {
-        var pair = Pair;
-        var server = pair.Server;
-        var entMan = server.EntMan;
-        var mutation = entMan.System<MutationSystem>();
-        var polymorph = entMan.System<PolymorphSystem>();
-        var genome = entMan.System<ScannedGenomeSystem>();
+        var map = await Pair.CreateTestMap();
 
-        var map = await pair.CreateTestMap();
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            var dorf = entMan.SpawnEntity(TestMobPoly, map.GridCoords);
+            var dorf = SEntMan.SpawnEntity(TestMob, map.GridCoords);
 
-            // scan him and compare sequence count later
-            genome.ScanGenome(dorf);
-            var started = entMan.GetComponent<ScannedGenomeComponent>(dorf).Sequences.Count;
+            // scan him and compare sequences later
+            _genome.ScanGenome(dorf);
 
-            // give the dwarf dwarfism
-            Assert.That(mutation.AddMutation(dorf, TestMutation),
-                $"Failed to give {entMan.ToPrettyString(dorf)} {TestMutation}!");
-            Assert.That(mutation.HasMutation(dorf, TestMutation),
-                $"{TestMutation} was not present in {entMan.ToPrettyString(dorf)}!");
+            // make him short
+            Assert.That(_mutation.AddMutation(dorf, TestMutation),
+                $"Failed to give {SEntMan.ToPrettyString(dorf)} {TestMutation}!");
+            Assert.That(_mutation.HasMutation(dorf, TestMutation),
+                $"{TestMutation} was not present in {SEntMan.ToPrettyString(dorf)}!");
+            var started = GetSequenceIds(dorf);
+            Assert.That(started.Contains(TestMutation),
+                $"{TestMutation} did not get added to already scanned genomes of {SEntMan.ToPrettyString(dorf)}!");
 
             // return to monke
-            if (polymorph.PolymorphEntity(dorf, TestPolymorph) is not {} monkey)
+            if (_polymorph.PolymorphEntity(dorf, TestPolymorph) is not {} monkey)
             {
-                Assert.Fail($"Failed to polymorph {entMan.ToPrettyString(dorf)} into {TestPolymorph}!");
+                Assert.Fail($"Failed to polymorph {SEntMan.ToPrettyString(dorf)} into {TestPolymorph}!");
                 return;
             }
 
             // the monkey must have taken all mutations
-            Assert.That(mutation.HasMutation(monkey, TestMutation),
-                $"{TestMutation} was not moved to {entMan.ToPrettyString(monkey)}!");
-            Assert.That(!mutation.HasMutation(dorf, TestMutation),
-                $"{TestMutation} was not moved from {entMan.ToPrettyString(dorf)}!");
+            Assert.That(_mutation.HasMutation(monkey, TestMutation),
+                $"{TestMutation} was not moved to {SEntMan.ToPrettyString(monkey)}!");
+            Assert.That(!_mutation.HasMutation(dorf, TestMutation),
+                $"{TestMutation} was not moved from {SEntMan.ToPrettyString(dorf)}!");
 
             // and still have everything scanned
-            var ended = entMan.GetComponent<ScannedGenomeComponent>(monkey).Sequences.Count;
-            Assert.That(ended, Is.EqualTo(started),
-                "Lost some scanned genome squences when turning into a monkey!");
+            var ended = GetSequenceIds(monkey);
+            Assert.That(ended.Contains(TestMutation),
+                $"{TestMutation} was not moved to scanned genomes of {SEntMan.ToPrettyString(monkey)}!");
+            Assert.That(ended, Is.EquivalentTo(started),
+                "Lost some scanned genome sequences when turning into a monkey!");
 
             // return from monke
-            Assert.That(polymorph.Revert(monkey), Is.EqualTo(dorf),
-                $"Failed to revert polymorph from {entMan.ToPrettyString(monkey)} back to {entMan.ToPrettyString(dorf)}!");
+            Assert.That(_polymorph.Revert(monkey), Is.EqualTo(dorf),
+                $"Failed to revert polymorph from {SEntMan.ToPrettyString(monkey)} back to {SEntMan.ToPrettyString(dorf)}!");
 
             // dwarf should have his mutations back
-            Assert.That(mutation.HasMutation(dorf, TestMutation),
-                $"{TestMutation} was not moved back to {entMan.ToPrettyString(dorf)}!");
+            Assert.That(_mutation.HasMutation(dorf, TestMutation),
+                $"{TestMutation} was not moved back to {SEntMan.ToPrettyString(dorf)}!");
 
-            ended = entMan.GetComponent<ScannedGenomeComponent>(dorf).Sequences.Count;
-            Assert.That(ended, Is.EqualTo(started),
-                "Lost some scanned genome squences when turning back from a monkey!");
+            ended = GetSequenceIds(dorf);
+            Assert.That(ended, Is.EquivalentTo(started),
+                "Lost some scanned genome sequences when turning back from a monkey!");
 
-            entMan.DeleteEntity(dorf);
+            SEntMan.DeleteEntity(dorf);
         });
+    }
+
+    private List<string> GetSequenceIds(EntityUid uid)
+    {
+        var comp = SEntMan.GetComponent<ScannedGenomeComponent>(uid);
+        var ids = new List<string>(comp.Sequences.Count);
+        foreach (var sequence in comp.Sequences)
+        {
+            ids.Add(sequence.Mutation);
+        }
+        return ids;
     }
 }

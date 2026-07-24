@@ -33,7 +33,7 @@
         messages: [ "reagent-popup-lab-grown-nutriment" ]
         probability: 0.05
       - !type:InfectDisease
-        probability: 0.05
+        probability: 0.005
         scaleProbability: true
         conditions:
         - !type:MetabolizerTypeCondition

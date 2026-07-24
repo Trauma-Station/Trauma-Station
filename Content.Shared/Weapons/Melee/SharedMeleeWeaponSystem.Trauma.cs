@@ -3,6 +3,7 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Weapons;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Item;
 using Content.Shared.Tag;
@@ -14,6 +15,7 @@ using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Weapons.Melee;
 
@@ -84,6 +86,25 @@ public abstract partial class SharedMeleeWeaponSystem
         {
             staminaDamage *= 1 - _knowledge.SharpCurve(melee);
         }
+    }
+
+    private void AddExtraDamageExamine(MeleeWeaponComponent component, DamageSpecifier damageSpec, FormattedMessage message)
+    {
+        var ap = component.ResistanceBypass ? 100 : (int) Math.Round(damageSpec.ArmorPenetration * 100);
+        var clickMult = (int) Math.Round((component.ClickPartDamageMultiplier * component.ClickDamageModifier.Float() - 1f) * 100);
+        var heavyMult = (int) Math.Round((component.HeavyPartDamageMultiplier - 1f) * 100);
+
+        ModifyMessage(message, "armor-penetration", ap);
+        ModifyMessage(message, "click-damage-modifier", clickMult);
+        ModifyMessage(message, "heavy-damage-modifier", heavyMult);
+    }
+
+    private void ModifyMessage(FormattedMessage message, LocId loc, int value)
+    {
+        if (value == 0)
+            return;
+        var abs = Math.Abs(value);
+        message.AddMarkupPermissive("\n" + Loc.GetString(loc, ("arg", value / abs), ("abs", abs)));
     }
 
     protected bool RaiseInRangeEvent(EntityUid ent,

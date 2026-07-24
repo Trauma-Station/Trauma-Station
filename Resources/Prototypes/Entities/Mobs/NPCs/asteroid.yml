@@ -8,6 +8,9 @@
   - BaseMobAnimal
   abstract: true
   components:
+  # <Trauma>
+  - type: AshStormImmune
+  # </Trauma>
   - type: Reactive
     groups:
       Flammable: [Touch]
@@ -24,7 +27,6 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-  - type: WeatherImmune # Lavaland Change
 
 - type: entity
   id: MobGoliath

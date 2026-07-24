@@ -11849,3 +11849,152 @@ Entries:
   id: 1311
   time: '2026-07-23T03:42:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3662
+- author: Aviu
+  changes:
+  - type: Add
+    message: Added toggle helmet action back for clothes.
+  - type: Add
+    message: Knives wide swing again but with 25% damage penalty.
+  - type: Fix
+    message: Fixed hristov and burner dealing more damage than intended.
+  - type: Tweak
+    message: Fire sharks move slower.
+  - type: Tweak
+    message: Flesh worm got thermal vision and healing rate from eating arms increased.
+  - type: Fix
+    message: Fixed flesh stalker not having thermal vision.
+  - type: Fix
+    message: Fix wizard lich ensouled items being indestructible.
+  - type: Tweak
+    message: >-
+      Xray projectiles have a limit to penetration and their damage drops when
+      penetrating stuff.
+  - type: Tweak
+    message: Nutripump implanter only works on humanoids now.
+  id: 1312
+  time: '2026-07-23T19:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3685
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Radiation storms now cause negative mutations but do less damage.
+  id: 1313
+  time: '2026-07-23T19:50:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3656
+- author: Armok
+  changes:
+  - type: Add
+    message: >-
+      Three new unique types of fugitive hunters; russian raiders, real
+      spacepol, and an elite bountyhunter.
+  - type: Add
+    message: Tons of new inspectable wound descriptions.
+  - type: Add
+    message: The security bioweapon (first of many)
+  - type: Add
+    message: Headrev radio channel
+  - type: Add
+    message: Tons of briefcases for syndie weapons.
+  - type: Add
+    message: TONS OF SKILLCHIPS AND OTHER COOL STUFF
+  - type: Add
+    message: Almost every station animal now fights back when attacked.
+  - type: Add
+    message: SMG skill
+  - type: Add
+    message: Word replacements
+  - type: Add
+    message: >-
+      Most small animals like mice have bullets pierce them, and hit targets
+      behind them
+  - type: Add
+    message: Vgroid
+  - type: Tweak
+    message: Significantly nerfed blind and mute toxin
+  - type: Tweak
+    message: Blob removed until its node bug is fixed
+  - type: Tweak
+    message: Gutworms are harder to contract
+  - type: Tweak
+    message: >-
+      Welding fuel tanks no longer blow up with pierce damage, instead its
+      ballistic now.
+  - type: Tweak
+    message: You can now have 3 skillchips.
+  - type: Tweak
+    message: It is easier to parry and reflect, 50 > 26 skill req
+  - type: Tweak
+    message: Coscult armor nerfed slightly.
+  - type: Tweak
+    message: Coscult weapons nerfed.
+  - type: Tweak
+    message: Increased hardlight bow price from 60 > 90
+  - type: Tweak
+    message: Nerfed changeling claw poison
+  - type: Tweak
+    message: Nerfed devastator rev shotgun
+  - type: Tweak
+    message: Monkeys / kobolds turned human via xenobio now get real names
+  - type: Tweak
+    message: Much harder for botany to get a hold of nettle.
+  - type: Tweak
+    message: Removed northstars wideswing
+  - type: Tweak
+    message: Nerfed dragon ichor heal.
+  - type: Tweak
+    message: Worldpeas now have Tilenol
+  - type: Tweak
+    message: Chainsaw nerfed slightly
+  - type: Remove
+    message: Berserker heart and sandivestan
+  - type: Remove
+    message: Antag, hat, and abuse tokens from store.
+  - type: Remove
+    message: Several knowledge types.
+  - type: Tweak
+    message: All bombs can only be purchased 5 minutes into the round as of now.
+  - type: Fix
+    message: Decapoid sprite layering
+  - type: Fix
+    message: Abductor welder not working
+  - type: Fix
+    message: Bingle and facehugger ghostroles are now instant to claim
+  id: 1314
+  time: '2026-07-24T01:47:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3683
+- author: Armok
+  changes:
+  - type: Add
+    message: Traitor token to token store.
+  - type: Remove
+    message: antag, hat, and abuse tokens from store.
+  - type: Tweak
+    message: All bombs can only be purchased 5 minutes into the round as of now.
+  - type: Tweak
+    message: >-
+      Retrieval gloves, combat gloves, jackboots, and combat boots all protect
+      from explosives.
+  - type: Tweak
+    message: Reduce traitor token cost to 100 EC
+  - type: Tweak
+    message: Death nettle base damage 16 > 1, it is now more reliant on chems
+  - type: Tweak
+    message: Add fancy death nettle durability.
+  - type: Tweak
+    message: Death nettle and gatfruit storage shapes changed
+  - type: Tweak
+    message: Reinforcement cadets can be taken by anyone
+  id: 1315
+  time: '2026-07-24T02:11:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3689
+- author: TraumaTised
+  changes:
+  - type: Tweak
+    message: Changed multiple demon sprites, the urists are (mostly) no more!
+  - type: Tweak
+    message: Reworked "Strange man" demon
+  - type: Tweak
+    message: Added descriptions to all demons!
+  id: 1316
+  time: '2026-07-24T17:58:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3691
