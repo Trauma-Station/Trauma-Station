@@ -31,14 +31,14 @@
   - type: Solution
     id: melee
     solution:
-      maxVol: 30
+      maxVol: 5
   - type: SolutionRegeneration
     generated:
       reagents:
       - ReagentId: Amatoxin
-        Quantity: 5
+        Quantity: 1
       - ReagentId: MuteToxin
-        Quantity: 10
+        Quantity: 4
   - type: MeleeChemicalInjector
-    transferAmount: 2
+    transferAmount: 5
     solution: melee

@@ -34,7 +34,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipQuartermaster
+    - SkillChipEchelonEducation
+    - SkillChipUnarmed
+    - SkillChipMining
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

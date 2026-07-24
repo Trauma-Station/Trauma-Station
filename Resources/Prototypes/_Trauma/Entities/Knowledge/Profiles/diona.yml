@@ -8,7 +8,6 @@
     CookingKnowledge: 0
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
-    ToysKnowledge: 1
     BananiumKnowledge: 0
     BotsKnowledge: 0
     FurnitureKnowledge: 1
@@ -18,7 +17,7 @@
     WindowsKnowledge: 1
     SmokeablesKnowledge: 4
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 1 # Preemptive magical knowledge for when it matters. Magic tree ent lore larp or smth.
     # Language Skills
     LanguageRootSpeak: 3

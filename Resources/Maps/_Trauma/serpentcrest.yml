@@ -72520,13 +72520,6 @@ entities:
     - type: Transform
       pos: 69.5,19.5
       parent: 2
-- proto: CrateHydroponicsSeedsExotic
-  entities:
-  - uid: 11462
-    components:
-    - type: Transform
-      pos: 52.5,-14.5
-      parent: 2
 - proto: CrateHydroponicsSeedsMedicinal
   entities:
   - uid: 11463

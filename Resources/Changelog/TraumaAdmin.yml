@@ -253,3 +253,10 @@ Entries:
   id: 33
   time: '2026-07-17T19:39:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3591
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Sec department rolebans now include brigmedic reinforcements.
+  id: 34
+  time: '2026-07-22T23:06:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3673

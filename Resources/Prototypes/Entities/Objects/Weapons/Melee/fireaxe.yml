@@ -50,6 +50,8 @@
         Slash: 10
         Structural: 40
   - type: Item
+    shape:
+    - 0,0,4,3
     size: Ginormous
   - type: Clothing
     sprite: Objects/Weapons/Melee/fireaxe.rsi

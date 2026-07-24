@@ -488,7 +488,10 @@
     chatsan-word-goob-3: chatsan-replacement-goob-3
     chatsan-word-goob-4: chatsan-replacement-goob-4
     # </Goob>
-
+    # <Trauma>
+    chatsan-word-trauma-1: chatsan-replacement-trauma-1
+    chatsan-word-trauma-2: chatsan-replacement-trauma-2
+    # </Trauma>
 - type: accent
   id: liar
   replacementChance: 0.15

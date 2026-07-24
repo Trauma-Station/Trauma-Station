@@ -21,6 +21,7 @@
     woundVisibility: Always
     scarWound: BluntScar
     mangleSeverity: Severe
+    textString: Blunt
   - type: TraumaInflicter
     severityThreshold: 12
     allowedTraumas:
@@ -66,6 +67,7 @@
     woundVisibility: Always
     scarWound: PiercingScar
     mangleSeverity: Severe
+    textString: Pierce
   - type: TraumaInflicter
     severityThreshold: 12
     allowedTraumas:
@@ -108,11 +110,36 @@
     scalingSpeed: 0.8
 
 - type: entity
-  parent: Piercing
   id: Ballistic
+  parent: WoundBase
   components:
   - type: Wound
     damageType: Ballistic
+    woundType: External
+    woundVisibility: Always
+    scarWound: PiercingScar
+    mangleSeverity: Severe
+    textString: Ballistic
+  - type: TraumaInflicter
+    severityThreshold: 12
+    allowedTraumas:
+    - OrganDamage
+    - BoneDamage
+    - VeinsDamage
+    allowArmourDeduction:
+    - OrganDamage
+    - BoneDamage
+    - VeinsDamage
+    traumasChances:
+      Dismemberment: -2
+      OrganDamage: 0.08
+      BoneDamage: 0.14
+      VeinsDamage: -0.4 # goes through rather easy.
+    mangledMultipliers:
+      BoneDamage: 0.1
+  - type: BleedInflicter
+    severityThreshold: 9
+    scalingSpeed: 0.5
 
 - type: entity
   id: ArmorPiercing
@@ -123,6 +150,7 @@
     woundVisibility: Always
     scarWound: PiercingScar
     selfHealMultiplier: 0
+    textString: Pierce
   - type: TraumaInflicter
     severityThreshold: 6
     allowArmourDeduction:
@@ -152,6 +180,7 @@
     woundVisibility: Always
     scarWound: SlashScar
     mangleSeverity: Severe
+    textString: Slash
   - type: TraumaInflicter
     severityThreshold: 9
     allowedTraumas:
@@ -196,6 +225,7 @@
     woundType: External
     woundVisibility: Always
     scarWound: BurnScar
+    textString: Burn
   - type: TraumaInflicter
     severityThreshold: 17
     allowedTraumas:
@@ -263,6 +293,7 @@
     woundType: External
     woundVisibility: Always
     scarWound: BurnScar
+    textString: Cold
   - type: TraumaInflicter
     severityThreshold: 12
     allowedTraumas:
@@ -281,6 +312,7 @@
     damageType: Holy
     woundType: Internal
     woundVisibility: AdvancedScanner
+    textString: Holy
   - type: TraumaInflicter
     severityThreshold: 0
     allowedTraumas: []
@@ -299,6 +331,7 @@
     woundType: Internal
     woundVisibility: HandScanner
     scarWound: BurnScar
+    textString: Shock
   - type: TraumaInflicter
     severityThreshold: 9
     allowedTraumas:
@@ -341,6 +374,7 @@
     woundType: Internal
     woundVisibility: AdvancedScanner
     scarWound: BurnScar
+    textString: Caustic
   - type: TraumaInflicter
     severityThreshold: 12
     allowedTraumas:

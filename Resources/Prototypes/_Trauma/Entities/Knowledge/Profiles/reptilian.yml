@@ -8,7 +8,6 @@
     CookingKnowledge: 0
     DoorsKnowledge: 0
     AirlocksKnowledge: 0
-    ToysKnowledge: 0
     BananiumKnowledge: 0
     BotsKnowledge: 0
     FurnitureKnowledge: 0
@@ -18,7 +17,7 @@
     WindowsKnowledge: 0
     SmokeablesKnowledge: 0
     # Intelectual Skills
-    LiteracyKnowledge: 2
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageDraconic: 3

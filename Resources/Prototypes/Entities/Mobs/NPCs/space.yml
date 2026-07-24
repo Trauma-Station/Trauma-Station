@@ -536,6 +536,9 @@
   name: snail
   description: Revolting unless you're french.
   components:
+  #<Trauma>
+  - type: ZombieImmune
+  #</Trauma>
   - type: GhostRole
     prob: 0 # Trauma
     makeSentient: true

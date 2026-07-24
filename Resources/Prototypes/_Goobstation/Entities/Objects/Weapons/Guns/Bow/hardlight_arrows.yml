@@ -153,9 +153,7 @@
   - type: PointLight
     color: "#1AE51A"
   - type: Projectile
-    penetrate: true
-    noPenetrateMask:
-    - BlobImpassable
+    penetrationThreshold: 300
     damage:
       types:
         Heat: 30

@@ -78,8 +78,7 @@ public abstract partial class SharedBindSoulSystem : EntitySystem
 
     private void OnMindGetRemoved(Entity<SoulBoundComponent> ent, ref MindGotRemovedEvent args)
     {
-        if (_net.IsClient || HasComp<MindSwappingComponent>(args.Container) || HasComp<GhostComponent>(args.Container) ||
-            Terminating(args.Container))
+        if (_net.IsClient || HasComp<MindSwappingComponent>(args.Container) || HasComp<GhostComponent>(args.Container))
             return;
 
         var xform = Transform(args.Container);
@@ -170,6 +169,7 @@ public abstract partial class SharedBindSoulSystem : EntitySystem
         Meta.SetEntityName(ent, Loc.GetString("ensouled-item-name", ("item", ent)));
 
         EnsureComp<DamageableComponent>(ent);
+        EnsureComp<InjurableComponent>(ent);
 
         MakeDestructible(ent);
     }
