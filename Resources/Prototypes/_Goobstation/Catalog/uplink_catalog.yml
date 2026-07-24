@@ -41,6 +41,7 @@
     Telecrystal: 15 # Not on the same level as other grenades
   categories:
   - UplinkExplosives
+  restockTime: 300 # Trauma
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
@@ -1167,6 +1168,13 @@
     Telecrystal: 10  # Goob
   categories:
   - UplinkExplosives
+  restockTime: 300 # Trauma
+  conditions:
+  - UplinkExplosives
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkPizzaParty
@@ -1177,6 +1185,7 @@
     Telecrystal: 50  # Goob Bundle, get 8 pizza bombs and 7 regular pizzas. Bundle + Pizza boxes not telling the dangerous ones justifies the discount.
   categories:
   - UplinkExplosives
+  restockTime: 300
 
 - type: listing
   id: UplinkM172
