@@ -56,6 +56,8 @@
         Shock: -10
         Cold: -10
         Caustic: -10
+        Radiation: -10
+        Poison: -10
   - !type:AdjustReagentGroup
     amount: -10
     group: Toxins

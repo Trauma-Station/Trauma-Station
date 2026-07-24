@@ -20,7 +20,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipCaptain # TODO: better chip
+    - SkillChipERT
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   # </Trauma>
@@ -123,8 +123,7 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipChaplain
-    - SkillChipRifle
+    - SkillChipERT
   # </Trauma>
   - !type:AddComponentSpecial
     components:
@@ -227,8 +226,7 @@
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipChiefEngineer
-    - SkillChipRifle
+    - SkillChipERT
   # </Trauma>
 
 - type: startingGear
@@ -348,8 +346,7 @@
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipSecurityOfficer
-    - SkillChipRifle
+    - SkillChipERT
   # </Trauma>
 
 - type: startingGear
@@ -528,8 +525,7 @@
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipMedicalDoctor
-    - SkillChipRifle
+    - SkillChipERT
   # </Trauma>
 
 - type: startingGear
@@ -637,8 +633,7 @@
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipJanitor
-    - SkillChipRifle
+    - SkillChipERT
   # </Trauma>
 
 - type: startingGear

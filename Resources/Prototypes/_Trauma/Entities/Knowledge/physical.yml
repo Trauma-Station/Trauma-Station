@@ -12,7 +12,7 @@
   - type: DamageModifyKnowledge
     # same as stamina damage im lazy
     # no debuff for lvl 0
-    curve: !type:QuadraticSkillCurve
+    curve: !type:QuadraticSkillCurve # Todo, make linear
       skillScale: 0.6
       skillOffset: -2.8
       curveScale: 0.05
@@ -37,14 +37,14 @@
   parent: BasePhysicalKnowledge
   id: AthleticsKnowledge
   name: Athletics
-  description: Gives you more stamina, making it harder to stun you among other things. Sometimes known as shitter-fu.
+  description: Gives you more stamina, making it harder to stun you among other things. Also allows you to parry attacks and reflect lasers.
   components:
   - type: Knowledge
     experienceCost: 12
   - type: StaminaKnowledge
     # no debuff at lvl 0, 37% damage reduction at lvl 100
     # you are in good shape not insulated from batong
-    curve: !type:QuadraticSkillCurve
+    curve: !type:QuadraticSkillCurve # Todo, make linear
       skillScale: 0.6
       skillOffset: -2.8
       curveScale: 0.05

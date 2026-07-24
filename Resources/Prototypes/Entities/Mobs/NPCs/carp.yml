@@ -6,7 +6,7 @@
   abstract: true
   components:
     # </Trauma>
-    - type: WeatherImmune
+    - type: AshStormImmune
     - type: VentCrawler
     - type: Fauna
     # <Trauma>

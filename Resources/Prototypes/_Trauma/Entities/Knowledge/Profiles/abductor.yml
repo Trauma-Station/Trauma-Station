@@ -8,7 +8,6 @@
     CookingKnowledge: 0
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
-    ToysKnowledge: 1
     BananiumKnowledge: 0 # Not roundstart, blueprint required.
     BotsKnowledge: 0 # Not roundstart, blueprint required.
     FurnitureKnowledge: 1
@@ -18,7 +17,7 @@
     WindowsKnowledge: 1
     SmokeablesKnowledge: 0 # Not roundstart, blueprint required.
     # Intelectual Skills
-    LiteracyKnowledge: 2
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageSolCommon: 0

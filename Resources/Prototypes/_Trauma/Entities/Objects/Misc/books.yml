@@ -41,6 +41,27 @@
     - Book
 
 - type: entity
+  parent: [ BaseItem, BaseBookSounds, BaseSecurityContraband ]
+  id: MilTechManual
+  name: bioweapon manual
+  description: A book that teaches the coded phrases needed to command bioweapons, losing this means anyone can command bioweapons!
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: paper
+    - state: cover_old
+      color: "#272626"
+  - type: UseRequiresSight
+  - type: KnowledgeGrantOnUse
+    skills:
+      LanguageMiltech: 100
+    singleUse: false
+  - type: Tag
+    tags:
+    - Book
+
+- type: entity
   parent: CodespeakManual
   id: DeluxeCodespeakManual
   name: deluxe codespeak manual

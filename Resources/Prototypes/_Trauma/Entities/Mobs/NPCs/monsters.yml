@@ -170,9 +170,9 @@
     size: Small
   - type: GhostRole
     prob: 1
-    name: ghost-role-information-breadling-namee
+    name: ghost-role-information-breadling-name
     allowMovement: true
-    description: ghost-role-information-BreadLing-desc
+    description: ghost-role-information-breadling-desc
     rules: ghost-role-information-nonantagonist-rules
     raffle:
       settings: short

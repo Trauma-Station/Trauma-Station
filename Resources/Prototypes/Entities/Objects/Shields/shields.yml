@@ -12,8 +12,6 @@
       transmuteTo: CosmicCultShield
     - type: Parry
       parryExhaustionCost: 0.25
-      parryMinSkill: 30
-      reflectMinSkill: 30
       soundOnParry:
         path: /Audio/Weapons/block_metal1.ogg
         params:

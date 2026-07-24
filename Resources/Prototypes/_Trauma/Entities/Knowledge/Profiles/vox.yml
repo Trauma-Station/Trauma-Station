@@ -2,13 +2,12 @@
 
 - type: knowledgeProfile
   id: Vox # lobotomite species
-  pointsLimit: 1
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
     DoorsKnowledge: 0
     AirlocksKnowledge: 0
-    ToysKnowledge: 0
     BananiumKnowledge: 0
     BotsKnowledge: 0
     FurnitureKnowledge: 0

@@ -2,7 +2,7 @@
 
 - type: entity
   parent: CrateSyndicate
-  id: CrateSydicateCombatSkillChips
+  id: CrateSyndicateCombatSkillChips
   name: combat skill chips crate
   description: A sinister looking crate filled with the finest skill chips taken from a landfill.
   components:
@@ -16,11 +16,12 @@
           children:
           - id: SkillChipUnarmed
           - id: SkillChipBludgeon
-          - id: SkillChipKnife
-          - id: SkillChipSword
+          - id: SkillChipShortBlade
+          - id: SkillChipLongBlade
           - id: SkillChipPolearm
           - id: SkillChipNonLethal
           - id: SkillChipTool
+          - id: SkillChipEnergy
         - !type:GroupSelector
           children:
           - id: SkillChipPistol
@@ -29,6 +30,7 @@
           - id: SkillChipSniper
           - id: SkillChipLaser
           - id: SkillChipHeavy
+          - id: SkillChipSMG
 
 - type: entity
   parent: CrateSyndicate

@@ -45,6 +45,13 @@
   categories: [ HideSpawnMenu ]
   name: skeletonperson appearance
   components:
+  # <Trauma>
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
+  # </Trauma>
   - type: Inventory
     femaleDisplacements:
       jumpsuit:

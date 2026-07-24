@@ -65,7 +65,7 @@ gs-balanceui-shop-footer = ⚠ Ahelp to use your token. Only 1 use per day.
 gs-balanceui-shop-token-label = Tokens
 gs-balanceui-shop-tittle-label = Titles
 
-gs-balanceui-shop-buy-token-antag = Buy an Antag Token - {$price} Evil Coins
+gs-balanceui-shop-buy-token-antag = Buy a Traitor Token - {$price} Evil Coins
 gs-balanceui-shop-buy-token-admin-abuse = Buy an Admin Abuse Token - {$price} Evil Coins
 gs-balanceui-shop-buy-token-hat = Buy a Hat Token - {$price} Evil Coins
 
@@ -73,7 +73,7 @@ gs-balanceui-shop-token-antag = High Tier Antag Token
 gs-balanceui-shop-token-admin-abuse = Admin Abuse Token
 gs-balanceui-shop-token-hat = Hat Token
 
-gs-balanceui-shop-buy-token-antag-desc = Allows you become any antag. (Excluding Wizards)
+gs-balanceui-shop-buy-token-antag-desc = Allows you become a traitor or thief.
 gs-balanceui-shop-buy-token-admin-abuse-desc = Allows you to request an admin to abuse their powers against you. Admins are encouraged to go wild.
 gs-balanceui-shop-buy-token-hat-desc = An admin will give you a random hat.
 

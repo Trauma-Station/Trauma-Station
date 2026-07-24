@@ -183,6 +183,10 @@
   name: advanced jackboots
   description: This pair of jackboots was designed for the Head of Security. No one knows why are they called advanced, but they are for sure advanced in drip.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: _Goobstation/Clothing/Shoes/Boots/advanced_jackboots.rsi
   - type: Clothing

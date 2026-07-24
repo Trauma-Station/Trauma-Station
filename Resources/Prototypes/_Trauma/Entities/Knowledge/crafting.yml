@@ -15,7 +15,7 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [0, 1, 2, 3]
+    costs: [0, 1, 3, 5]
 
 - type: entity
   parent: BaseCraftingKnowledge

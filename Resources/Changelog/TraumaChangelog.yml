@@ -11709,3 +11709,281 @@ Entries:
   id: 1293
   time: '2026-07-18T08:44:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3603
+- author: Aviu
+  changes:
+  - type: Add
+    message: Automation no longer needs to be researched.
+  id: 1294
+  time: '2026-07-19T15:42:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3615
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed martial arts not working.
+  id: 1295
+  time: '2026-07-19T17:56:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3621
+- author: bobbble
+  changes:
+  - type: Tweak
+    message: Minor decapoid displacement changes.
+  id: 1296
+  time: '2026-07-19T18:31:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3570
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Resprited some of wraith's summons!
+  id: 1297
+  time: '2026-07-19T20:21:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3624
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Bluespace crystals now violently react with bluespace portals.
+  - type: Tweak
+    message: Space whales now move faster and are gibbed if they go through a portal.
+  id: 1298
+  time: '2026-07-21T11:22:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3646
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Demons, chaplain familiars and syndie reinforcements now get told who
+      summoned them in their character menu.
+  id: 1299
+  time: '2026-07-21T13:08:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3649
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed killdozer getting filled with casings when you use its mosin.
+  id: 1300
+  time: '2026-07-21T22:31:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3655
+- author: Aviu
+  changes:
+  - type: Add
+    message: Cry and sigh emotes now have visual effects.
+  - type: Add
+    message: Added blush and stick tongue out emotes.
+  - type: Add
+    message: >-
+      Alcohol will make you blush, peppersprays and tear gas will make you cry
+      visually.
+  id: 1301
+  time: '2026-07-21T22:34:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/631
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed carp callers not working.
+  id: 1302
+  time: '2026-07-21T23:54:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3657
+- author: jshoe2
+  changes:
+  - type: Fix
+    message: Fixed atmos fire helmet and fire helmet protecting torso instead of head
+  id: 1303
+  time: '2026-07-22T16:45:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3661
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed spray painted clothes looking weird on dwarves.
+  id: 1304
+  time: '2026-07-22T21:28:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3669
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys/kobolds jumpsuits using human-sized sprites.
+  id: 1305
+  time: '2026-07-22T22:18:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3671
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fishing ponds no longer phase through walls.
+  id: 1306
+  time: '2026-07-22T23:18:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3675
+- author: Graves
+  changes:
+  - type: Remove
+    message: Removed Slop-I mean sleep mode on the wonderprod.
+  - type: Tweak
+    message: Made the cuff mode on the wonderprod stronger.
+  - type: Tweak
+    message: Barbwire Handcuffs are now properly contraband.
+  id: 1307
+  time: '2026-07-22T23:31:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3643
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to automate industrial grinders with reagent pumps.
+  id: 1308
+  time: '2026-07-22T23:37:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3676
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wizard's bind soul spell not letting you resurrect when it should.
+  id: 1309
+  time: '2026-07-23T00:44:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3678
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed strength training with melee weapons.
+  id: 1310
+  time: '2026-07-23T01:06:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3680
+- author: DinoPercent
+  changes:
+  - type: Tweak
+    message: buffed Xenomorph Weightless speed (no more gabity issues yippy!!!)
+  id: 1311
+  time: '2026-07-23T03:42:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3662
+- author: Aviu
+  changes:
+  - type: Add
+    message: Added toggle helmet action back for clothes.
+  - type: Add
+    message: Knives wide swing again but with 25% damage penalty.
+  - type: Fix
+    message: Fixed hristov and burner dealing more damage than intended.
+  - type: Tweak
+    message: Fire sharks move slower.
+  - type: Tweak
+    message: Flesh worm got thermal vision and healing rate from eating arms increased.
+  - type: Fix
+    message: Fixed flesh stalker not having thermal vision.
+  - type: Fix
+    message: Fix wizard lich ensouled items being indestructible.
+  - type: Tweak
+    message: >-
+      Xray projectiles have a limit to penetration and their damage drops when
+      penetrating stuff.
+  - type: Tweak
+    message: Nutripump implanter only works on humanoids now.
+  id: 1312
+  time: '2026-07-23T19:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3685
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Radiation storms now cause negative mutations but do less damage.
+  id: 1313
+  time: '2026-07-23T19:50:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3656
+- author: Armok
+  changes:
+  - type: Add
+    message: >-
+      Three new unique types of fugitive hunters; russian raiders, real
+      spacepol, and an elite bountyhunter.
+  - type: Add
+    message: Tons of new inspectable wound descriptions.
+  - type: Add
+    message: The security bioweapon (first of many)
+  - type: Add
+    message: Headrev radio channel
+  - type: Add
+    message: Tons of briefcases for syndie weapons.
+  - type: Add
+    message: TONS OF SKILLCHIPS AND OTHER COOL STUFF
+  - type: Add
+    message: Almost every station animal now fights back when attacked.
+  - type: Add
+    message: SMG skill
+  - type: Add
+    message: Word replacements
+  - type: Add
+    message: >-
+      Most small animals like mice have bullets pierce them, and hit targets
+      behind them
+  - type: Add
+    message: Vgroid
+  - type: Tweak
+    message: Significantly nerfed blind and mute toxin
+  - type: Tweak
+    message: Blob removed until its node bug is fixed
+  - type: Tweak
+    message: Gutworms are harder to contract
+  - type: Tweak
+    message: >-
+      Welding fuel tanks no longer blow up with pierce damage, instead its
+      ballistic now.
+  - type: Tweak
+    message: You can now have 3 skillchips.
+  - type: Tweak
+    message: It is easier to parry and reflect, 50 > 26 skill req
+  - type: Tweak
+    message: Coscult armor nerfed slightly.
+  - type: Tweak
+    message: Coscult weapons nerfed.
+  - type: Tweak
+    message: Increased hardlight bow price from 60 > 90
+  - type: Tweak
+    message: Nerfed changeling claw poison
+  - type: Tweak
+    message: Nerfed devastator rev shotgun
+  - type: Tweak
+    message: Monkeys / kobolds turned human via xenobio now get real names
+  - type: Tweak
+    message: Much harder for botany to get a hold of nettle.
+  - type: Tweak
+    message: Removed northstars wideswing
+  - type: Tweak
+    message: Nerfed dragon ichor heal.
+  - type: Tweak
+    message: Worldpeas now have Tilenol
+  - type: Tweak
+    message: Chainsaw nerfed slightly
+  - type: Remove
+    message: Berserker heart and sandivestan
+  - type: Remove
+    message: Antag, hat, and abuse tokens from store.
+  - type: Remove
+    message: Several knowledge types.
+  - type: Tweak
+    message: All bombs can only be purchased 5 minutes into the round as of now.
+  - type: Fix
+    message: Decapoid sprite layering
+  - type: Fix
+    message: Abductor welder not working
+  - type: Fix
+    message: Bingle and facehugger ghostroles are now instant to claim
+  id: 1314
+  time: '2026-07-24T01:47:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3683
+- author: Armok
+  changes:
+  - type: Add
+    message: Traitor token to token store.
+  - type: Remove
+    message: antag, hat, and abuse tokens from store.
+  - type: Tweak
+    message: All bombs can only be purchased 5 minutes into the round as of now.
+  - type: Tweak
+    message: >-
+      Retrieval gloves, combat gloves, jackboots, and combat boots all protect
+      from explosives.
+  - type: Tweak
+    message: Reduce traitor token cost to 100 EC
+  - type: Tweak
+    message: Death nettle base damage 16 > 1, it is now more reliant on chems
+  - type: Tweak
+    message: Add fancy death nettle durability.
+  - type: Tweak
+    message: Death nettle and gatfruit storage shapes changed
+  - type: Tweak
+    message: Reinforcement cadets can be taken by anyone
+  id: 1315
+  time: '2026-07-24T02:11:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3689

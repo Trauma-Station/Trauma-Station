@@ -44,6 +44,11 @@
       Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
     species: Shadow
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 # used for nightmares and lesser shadowlings
 - type: entity

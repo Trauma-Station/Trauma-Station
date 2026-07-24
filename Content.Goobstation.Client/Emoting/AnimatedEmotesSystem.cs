@@ -2,7 +2,10 @@
 
 using Content.Client.Animations;
 using Content.Client.DamageState;
+using Content.Client.Stylesheets.Colorspace;
 using Content.Goobstation.Shared.Emoting;
+using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Content.Trauma.Common.Wizard;
 using Robust.Client.Animations;
 using Robust.Shared.Animations;
@@ -16,24 +19,19 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     [Dependency] private CommonRaysSystem _rays = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private BodySystem _body = default!;
 
     private const int TweakAnimationDurationMs = 1100; // 11 frames * 100ms per frame
     private const int FlexAnimationDurationMs = 200 * 7; // 7 frames * 200ms per frame
 
-    public override void Initialize()
+    private static readonly Dictionary<HumanoidVisualEmoteLayers, ProtoId<OrganCategoryPrototype>> EmoteOrganDict = new()
     {
-        base.Initialize();
+        {HumanoidVisualEmoteLayers.Tongue, "Tongue"},
+        {HumanoidVisualEmoteLayers.Cry, "Eyes"},
+    };
 
-        SubscribeLocalEvent<AnimatedEmotesComponent, AfterAutoHandleStateEvent>(OnAutoHandleState);
-
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationFlipEmoteEvent>(OnFlip);
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationSpinEmoteEvent>(OnSpin);
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationJumpEmoteEvent>(OnJump);
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationTweakEmoteEvent>(OnTweak);
-        SubscribeLocalEvent<AnimatedEmotesComponent, AnimationFlexEmoteEvent>(OnFlex);
-        SubscribeNetworkEvent<BibleFartSmiteEvent>(OnBibleSmite);
-    }
-
+    [SubscribeNetworkEvent]
     public void OnBibleSmite(BibleFartSmiteEvent args)
     {
         EntityUid uid = GetEntity(args.Bible);
@@ -65,12 +63,76 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         _anim.Play(uid, anim, animationKey);
     }
 
+    [SubscribeLocalEvent]
+    private void OnBlacklistAttempt(Entity<AnimatedEmotesBlacklistComponent> ent, ref AnimationVisualEmoteAttemptEvent args)
+    {
+        if (!args.Cancelled && (ent.Comp.Blacklist & args.Layer) != 0x0)
+            args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBodyAttempt(Entity<BodyComponent> ent, ref AnimationVisualEmoteAttemptEvent args)
+    {
+        if (args.Cancelled || !EmoteOrganDict.TryGetValue(args.Layer, out var organ))
+            return;
+
+        if (_body.GetOrgan(ent.AsNullable(), organ) == null)
+            args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBloodstreamAttempt(Entity<BloodstreamComponent> ent, ref AnimationVisualEmoteAttemptEvent args)
+    {
+        if (args.Cancelled || args.Layer is not (HumanoidVisualEmoteLayers.Blush or HumanoidVisualEmoteLayers.Tongue))
+            return;
+
+        var color = ent.Comp.BloodReferenceSolution.GetColor(ProtoMan);
+
+        args.ColorOverride = color.NudgeLightness(0.3f);
+    }
+
+    [SubscribeLocalEvent]
     private void OnAutoHandleState(Entity<AnimatedEmotesComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (ProtoMan.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is { } ev)
             RaiseLocalEvent(ent, ev);
     }
 
+    [SubscribeLocalEvent]
+    private void OnVisualEmote(Entity<AnimatedEmotesComponent> ent, ref AnimationVisualEmoteEvent args)
+    {
+        if (!TryComp(ent, out SpriteComponent? sprite) ||
+            !_sprite.TryGetLayer((ent, sprite), args.Layer, out var layer, false) || layer.Visible == args.SetVisible)
+            return;
+
+        var ev = new AnimationVisualEmoteAttemptEvent(args.Layer);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
+            return;
+
+        if (ev.ColorOverride is { } color)
+            _sprite.LayerSetColor(layer, color);
+
+        var a = new Animation
+        {
+            Length = args.Time,
+            AnimationTracks =
+            {
+                new AnimationTrackShowSpriteLayer
+                {
+                    LayerKey = args.Layer,
+                    KeyFrames =
+                    {
+                        new AnimationTrackShowSpriteLayer.KeyFrame(args.SetVisible, 0f),
+                        new AnimationTrackShowSpriteLayer.KeyFrame(!args.SetVisible, (float) args.Time.TotalSeconds),
+                    }
+                }
+            }
+        };
+        PlayEmote(ent, a, args.Key);
+    }
+
+    [SubscribeLocalEvent]
     private void OnFlip(Entity<AnimatedEmotesComponent> ent, ref AnimationFlipEmoteEvent args)
     {
         var a = new Animation
@@ -94,6 +156,8 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         };
         PlayEmote(ent, a);
     }
+
+    [SubscribeLocalEvent]
     private void OnSpin(Entity<AnimatedEmotesComponent> ent, ref AnimationSpinEmoteEvent args)
     {
         var a = new Animation
@@ -123,6 +187,8 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         };
         PlayEmote(ent, a, "emoteAnimSpin");
     }
+
+    [SubscribeLocalEvent]
     private void OnJump(Entity<AnimatedEmotesComponent> ent, ref AnimationJumpEmoteEvent args)
     {
         var a = new Animation
@@ -146,6 +212,8 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         };
         PlayEmote(ent, a);
     }
+
+    [SubscribeLocalEvent]
     private void OnTweak(Entity<AnimatedEmotesComponent> ent, ref AnimationTweakEmoteEvent args)
     {
         if (ent.Comp.TweakState is not { } tweak)
@@ -169,6 +237,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         PlayEmote(ent, a);
     }
 
+    [SubscribeLocalEvent]
     private void OnFlex(Entity<AnimatedEmotesComponent> ent, ref AnimationFlexEmoteEvent args)
     {
         if (ent.Comp.FlexState is not { } flex ||

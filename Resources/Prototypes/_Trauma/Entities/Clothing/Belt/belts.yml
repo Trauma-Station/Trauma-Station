@@ -152,6 +152,8 @@
     state: sheath
   - type: Clothing
     sprite: _Trauma/Clothing/Belt/snakesfang_sheath.rsi
+  - type: Item
+    size: Ginormous
   - type: ItemSlots
     slots:
       item:

@@ -27,7 +27,7 @@
     - !type:GrantSkills
       skills:
         AthleticsKnowledge: 30
-        KnowledgeWeaponsSword: 60
+        KnowledgeWeaponsLongBlade: 60
         KnowledgeWeaponsTool: 60
   - type: DynamicRuleCost
     cost: 150

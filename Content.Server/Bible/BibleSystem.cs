@@ -4,6 +4,7 @@ using Content.Goobstation.Shared.Bible;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
+using Content.Trauma.Common.Familiar;
 // </Trauma>
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Popups;
@@ -29,6 +30,9 @@ namespace Content.Server.Bible
 {
     public sealed partial class BibleSystem : EntitySystem
     {
+        // <Trauma>
+        [Dependency] private CommonFamiliarSystem _familiar = default!;
+        // </Trauma>
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private ActionBlockerSystem _blocker = default!;
         [Dependency] private DamageableSystem _damageableSystem = default!;
@@ -265,6 +269,7 @@ namespace Content.Server.Bible
             }
             component.AlreadySummoned = true;
             _actionsSystem.RemoveAction(user, component.SummonActionEntity);
+            _familiar.SetMaster(familiar, user); // Trauma
         }
     }
 }
