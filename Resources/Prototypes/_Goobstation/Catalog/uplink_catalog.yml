@@ -38,7 +38,7 @@
   cost:
     Telecrystal: 15 # Not on the same level as other grenades
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   restockTime: 300 # Trauma
   conditions:
   - !type:StoreWhitelistCondition
@@ -56,7 +56,7 @@
   cost:
     Telecrystal: 10
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -71,7 +71,7 @@
   cost:
     Telecrystal: 5
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -86,7 +86,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -101,7 +101,7 @@
   cost:
     Telecrystal: 12
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -116,7 +116,7 @@
   cost:
     Telecrystal: 10
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -131,7 +131,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -146,7 +146,7 @@
   cost:
     Telecrystal: 4
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -161,7 +161,7 @@
   cost:
     Telecrystal: 24
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -176,7 +176,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -191,7 +191,7 @@
   cost:
     Telecrystal: 11
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -206,7 +206,7 @@
   cost:
     Telecrystal: 4
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -221,7 +221,7 @@
   cost:
     Telecrystal: 4
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -1165,10 +1165,9 @@
   cost:
     Telecrystal: 10  # Goob
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   restockTime: 300 # Trauma
   conditions:
-  - UplinkExplosives
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
@@ -1182,7 +1181,7 @@
   cost:
     Telecrystal: 50  # Goob Bundle, get 8 pizza bombs and 7 regular pizzas. Bundle + Pizza boxes not telling the dangerous ones justifies the discount.
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   restockTime: 300
 
 - type: listing
@@ -1194,7 +1193,7 @@
   cost:
     Telecrystal: 6 # Basically a worse C4 but ranged
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -1210,7 +1209,7 @@
   cost:
     Telecrystal: 40 #Should be alot, its an investment item
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
 
 - type: listing
   id: UplinkExplosivePayloadBlueprint
@@ -1221,7 +1220,7 @@
   cost:
     Telecrystal: 6 # one and a half incendiary grenades, takes up the same space as three
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
