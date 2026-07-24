@@ -1,37 +1,37 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#- type: entity
-#  abstract: true
-#  parent: BaseGameRule
-#  id: BaseAbductorRule
-#  components:
-#  - type: RuleGrids
-#  - type: LoadMapRule
-#    gridPath: /Maps/_Trauma/Shuttles/abductor_shuttle.yml
-#  - type: AntagObjectives
-#    objectives:
-#    - AbductObjective
-#  - type: AbductorRule
-#  - type: AntagLoadProfileRule
-#    speciesHardOverride: Abductor
-#  - type: AntagSelection
-#    agentName: abductor-round-end-agent-name
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseAbductorRule
+  components:
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/abductor_shuttle.yml
+  - type: AntagObjectives
+    objectives:
+    - AbductObjective
+  - type: AbductorRule
+  - type: AntagLoadProfileRule
+    speciesHardOverride: Abductor
+  - type: AntagSelection
+    agentName: abductor-round-end-agent-name
 
-#- type: entity
-#  parent: [ BaseAbductorRule, BaseAntagGhostRoleRule ]
-#  id: LoneAbductorSpawn
-#  components:
-#  - type: GhostroleAlert
-#  - type: StationEvent
-#    earliestStart: 15
-#    reoccurrenceDelay: 70
-#    weight: 1
-#    minimumPlayers: 20 # They're nigh impossible to catch even with a full sec team
-#    duration: null
-#  - type: AntagSelection
-#    antags:
-#    - !type:FixedAntagCount
-#      proto: LoneAbductor
+- type: entity
+  parent: [ BaseAbductorRule, BaseAntagGhostRoleRule ]
+  id: LoneAbductorSpawn
+  components:
+  - type: GhostroleAlert
+  - type: StationEvent
+    earliestStart: 15
+    reoccurrenceDelay: 70
+    weight: 1
+    minimumPlayers: 20 # They're nigh impossible to catch even with a full sec team
+    duration: null
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: LoneAbductor
 
 - type: entity
   parent: BaseGameRule
@@ -50,17 +50,17 @@
     - maxPicks: 1
       groups: AbductorVictimObjectiveGroups
 
-#- type: entity
-#  parent: LoneAbductorSpawn
-#  id: DuoAbductorSpawn
-#  components:
-#  - type: StationEvent
-#    minimumPlayers: 20
-#    earliestStart: 45
-#    weight: 3
-#  - type: AntagSelection
-#    antags:
-#    - !type:FixedAntagCount
-#      proto: AbductorScientist
-#    - !type:FixedAntagCount
-#      proto: AbductorAgent
+- type: entity
+  parent: LoneAbductorSpawn
+  id: DuoAbductorSpawn
+  components:
+  - type: StationEvent
+    minimumPlayers: 20
+    earliestStart: 45
+    weight: 3
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: AbductorScientist
+    - !type:FixedAntagCount
+      proto: AbductorAgent
