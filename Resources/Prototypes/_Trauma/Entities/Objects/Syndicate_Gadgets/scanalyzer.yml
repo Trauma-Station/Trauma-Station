@@ -67,8 +67,11 @@
   parent: BaseSyndicateScanalyzer
   id: SyndicateBroadcastDevice
   name: syndicate broadcast device
-  description: Capable of hacking a communications computer and broadcasting a message out to the whole syndicate.
+  description: Capable of hijacking a communications computer.
   components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_broadcast_device.rsi
+    state: icon
   - type: Scanalyzer
     stealTarget: CommsComputer
   - type: ScanalyzerRequiresPower
