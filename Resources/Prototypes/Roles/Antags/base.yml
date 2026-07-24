@@ -12,7 +12,7 @@
   - Diplomat
   - Inspector
   - HecuOperative
-  # </Trauma>
+  # <Trauma>
   - CentralCommandOfficial
   - DeathSquad
   - ERTLeader
@@ -32,7 +32,7 @@
   parent: BaseAntagSpecifier
   id: CommandBlacklistedAntag
   jobBlacklist:
-  # </Trauma>
+  # <Trauma>
   - Captain
   # - HeadOfPersonnel
   - HeadOfSecurity
@@ -40,7 +40,7 @@
   # - ResearchDirector
   # - ChiefEngineer
   # - Quartermaster
-  # </Trauma>
+  # <Trauma>
 
 # Borgs
 - type: antagSpecifier
