@@ -11998,3 +11998,28 @@ Entries:
   id: 1316
   time: '2026-07-24T17:58:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3691
+- author: Armok
+  changes:
+  - type: Add
+    message: Vgroid properly spawns
+  - type: Add
+    message: Sprites to get ready for armor forging.
+  - type: Add
+    message: Air resistance to space to prevent raider DDOS tech
+  - type: Add
+    message: More space wrecks spawn
+  - type: Tweak
+    message: Bioweapons price / restock timers changed
+  - type: Tweak
+    message: >-
+      Sandi overdose now does genetics damage so it cannot be outchemmed /
+      ignored
+  - type: Tweak
+    message: Sandi afterimages disappear faster
+  - type: Tweak
+    message: Crafted weapon quality does not effect damage
+  - type: Tweak
+    message: Crafted weapon quality significantly effects sell price
+  id: 1317
+  time: '2026-07-24T20:40:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3703
