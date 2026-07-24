@@ -23,19 +23,6 @@ public sealed partial class TraumaCVars
 
     #endregion
 
-    #region Antags
-
-    public static readonly CVarDef<float> BlobPercentNeededForNewAntag =
-        CVarDef.Create("game.blob_new_antag_percent", 0.6f, CVar.SERVER | CVar.ARCHIVE);
-
-    public static readonly CVarDef<float> NukiePercentNeededForNewAntag =
-        CVarDef.Create("game.nukie_new_antag_percent", 0.6f, CVar.SERVER | CVar.ARCHIVE);
-
-    public static readonly CVarDef<float> RevPercentNeededForNewAntag =
-        CVarDef.Create("game.rev_new_antag_percent", 0.7f, CVar.SERVER | CVar.ARCHIVE);
-
-    #endregion
-
     #region AudioMuffle
 
     /// <summary>

@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Medical.Common.Targeting;
-// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;

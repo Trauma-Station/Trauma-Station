@@ -2,22 +2,14 @@
 
 using System.Linq;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Goobstation.Shared.Blob.Events;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Destructible;
 using Content.Shared.Explosion.Components;
-using Content.Shared.Explosion.EntitySystems;
-using Content.Shared.GameTicking.Components;
-using Content.Shared.Objectives.Components;
-using Content.Shared.Objectives.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.Blob;
 
@@ -30,7 +22,6 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private TargetSystem _target = default!;
     [Dependency] private EntityQuery<BlobCoreComponent> _query = default!;
     [Dependency] private EntityQuery<BlobFactoryComponent> _factoryQuery = default!;
     [Dependency] private EntityQuery<BlobNodeComponent> _nodeQuery = default!;

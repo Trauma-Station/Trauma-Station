@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Server.Chat.Systems;
 using Robust.Shared.Timing;
-using Content.Shared.Objectives.Systems;
-using Content.Trauma.Common.GameTicking;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
@@ -54,9 +52,7 @@ namespace Content.Server.GameTicking.Rules;
 public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
     // <Trauma>
-    private float _percentNeededForNewAntag;
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private TargetSystem _target = default!;
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
@@ -106,7 +102,6 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
-
     }
 
     protected override void Started(EntityUid uid,

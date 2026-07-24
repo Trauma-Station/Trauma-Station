@@ -18,28 +18,21 @@ using Content.Server.Station.Systems;
 using Content.Shared.Audio;
 using Content.Shared.Destructible;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Objectives.Systems;
-using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.GameTicking;
-using Robust.Server.Player;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob.GameTicking;
 
 public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
 {
-    [Dependency] private TargetSystem _target = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private IChatManager _chatMan = default!;
-    [Dependency] private IPlayerManager _player = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private CommonNewAntagOrEvacSystem _antagEvac = default!;
 
     protected override void Started(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
