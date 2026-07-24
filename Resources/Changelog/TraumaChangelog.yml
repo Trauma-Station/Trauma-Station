@@ -11069,3 +11069,10 @@ Entries:
   id: 1234
   time: '2026-07-24T17:57:40.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/16
+- author: magelfik
+  changes:
+  - type: Tweak
+    message: Removed explosions from NTR documents.
+  id: 1235
+  time: '2026-07-24T18:00:12.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/87
