@@ -50,7 +50,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 {
     // <Trauma>
     [Dependency] private GameTicker _ticker = default!;
-    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
@@ -80,8 +80,6 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
         SubscribeLocalEvent<HeadRevolutionaryComponent, MobStateChangedEvent>(OnHeadRevMobStateChanged);
 
         SubscribeLocalEvent<RevolutionaryRoleComponent, GetBriefingEvent>(OnGetBriefing);
-
-        InitializeTrauma(); // Trauma
 
     }
 
@@ -114,7 +112,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
                     // <Trauma>
                     var ert = "SpawnERTSecurity";
                     _ticker.StartGameRule(ert);
-                    _roundEndSystem.RequestRoundEnd(TimeSpan.FromMinutes(10), cantRecall: true);
+                    _roundEnd.RequestRoundEnd(TimeSpan.FromMinutes(10), cantRecall: true);
                     // </Trauma>
                 }
 
@@ -133,11 +131,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
                 // <Trauma>
-                _antagEvacRequest.SpawnNewAntagIfBelowPercent(_percentNeededForNewAntag,
-                    _amountAliveOnSpawn,
-                    TimeSpan.FromMinutes(10),
-                    _newAntag,
-                    true);
+                _antagEvac.SpawnNewAntagIfBelowPercent(uid, TimeSpan.FromMinutes(10), false);
                 // </Trauma>
 
                 _chat.DispatchGlobalAnnouncement(

@@ -29,8 +29,6 @@ namespace Content.Goobstation.Server.Blob.GameTicking;
 
 public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
 {
-    private float _percentNeededForNewAntag;
-
     [Dependency] private TargetSystem _target = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private ChatSystem _chat = default!;
@@ -42,16 +40,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private CommonRequestNewAntagOrCallEvacSystem _antagEvacRequest = default!;
-
-    private EntProtoId _newAntag = "ModerateAntagEventScheduler";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        Subs.CVar(_cfg, TraumaCVars.BlobPercentNeededForNewAntag, x => _percentNeededForNewAntag = x, true);
-    }
+    [Dependency] private CommonNewAntagOrEvacSystem _antagEvac = default!;
 
     protected override void Started(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -229,11 +218,13 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [SubscribeLocalEvent]
     private void OnDestruction(Entity<BlobCoreComponent> ent, ref DestructionEventArgs args)
     {
-        _antagEvacRequest.SpawnNewAntagIfBelowPercent(_percentNeededForNewAntag,
-            ent.Comp.AmountAliveOnSpawn,
-            TimeSpan.FromMinutes(5),
-            _newAntag,
-            true);
+        var query = EntityQueryEnumerator<BlobRuleComponent>();
+
+        while (query.MoveNext(out var uid, out _))
+        {
+            _antagEvac.SpawnNewAntagIfBelowPercent(uid, TimeSpan.FromMinutes(5), true);
+            break;
+        }
     }
 
     [SubscribeLocalEvent]

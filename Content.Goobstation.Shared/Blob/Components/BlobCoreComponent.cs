@@ -30,9 +30,6 @@ public sealed partial class BlobCoreComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<BlobChemPrototype> CurrentChem = "ReactiveSpines";
 
-    [DataField]
-    public int AmountAliveOnSpawn;
-
     #endregion
 
     #region Balance

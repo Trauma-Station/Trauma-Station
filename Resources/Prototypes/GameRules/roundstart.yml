@@ -166,6 +166,9 @@
   parent: BaseGameRule
   id: BaseNukeopsRule
   components:
+  # <Trauma>
+  - type: NewAntagOrEvac
+  # </Trauma>
   - type: RandomMetadata #this generates the random operation name cuz it's cool.
     nameSegments:
     - NamesOperationPrefix
@@ -314,6 +317,10 @@
   id: Revolutionary
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
+  # <Trauma>
+  - type: NewAntagOrEvac
+    event: SpawnERTSecurity
+  # </Trauma>
   - type: GameRule
     minPlayers: 20 # Trauma - was 15
   - type: RevolutionaryRule

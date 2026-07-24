@@ -49,8 +49,6 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
             !_nodeQuery.TryComp(ent, out var node))
             return;
 
-        ent.Comp.AmountAliveOnSpawn = _target.GetAliveHumans().Count;
-
         ConnectBlobTile((ent, tile), ent.AsNullable(), (ent, node));
 
         UpdateAllAlerts(ent.AsNullable());

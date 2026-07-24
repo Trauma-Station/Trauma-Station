@@ -12,6 +12,6 @@ public sealed partial class EntityEffectOnEmaggedSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnEmagged(Entity<EntityEffectOnEmaggedComponent> ent, ref GotEmaggedEvent args)
     {
-        _effects.ApplyEffects(ent.Owner, ent.Comp.Effects, ent.Comp.Scale);
+        _effects.ApplyEffects(ent.Owner, ent.Comp.Effects, ent.Comp.Scale, args.UserUid);
     }
 }

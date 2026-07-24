@@ -107,7 +107,6 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
 
-        InitializeTrauma(); // Trauma
     }
 
     protected override void Started(EntityUid uid,
@@ -615,11 +614,7 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
                 Loc.GetString(nukeops.RoundEndTextSender));
 
         // <Trauma>
-        _antagEvacRequest.SpawnNewAntagIfBelowPercent(_percentNeededForNewAntag,
-            ent.Comp.AmountAliveOnSpawn,
-            TimeSpan.FromMinutes(3),
-            _newAntag,
-            true);
+        _antagEvac.SpawnNewAntagIfBelowPercent(ent.Owner, TimeSpan.FromMinutes(3), true);
         // </Trauma>
 
         // prevent it called multiple times
