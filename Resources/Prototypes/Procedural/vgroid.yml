@@ -32,69 +32,69 @@
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockIron
-      count: 50
-      minGroupSize: 20
-      maxGroupSize: 30
+      count: 25
+      minGroupSize: 10
+      maxGroupSize: 15
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockCoal
-      count: 50
-      minGroupSize: 15
-      maxGroupSize: 20
-    - !type:OreDunGen
-      replacement: IronRock
-      entity: IronRockQuartz
-      count: 50
-      minGroupSize: 20
-      maxGroupSize: 30
-    - !type:OreDunGen
-      replacement: IronRock
-      entity: IronRockGold
-      count: 50
-      minGroupSize: 10
-      maxGroupSize: 20
-    - !type:OreDunGen
-      replacement: IronRock
-      entity: IronRockSilver
-      count: 50
-      minGroupSize: 10
-      maxGroupSize: 20
-    - !type:OreDunGen
-      replacement: IronRock
-      entity: IronRockPlasma
-      count: 50
-      minGroupSize: 10
-      maxGroupSize: 20
-    - !type:OreDunGen
-      replacement: IronRock
-      entity: IronRockUranium
-      count: 50
-      minGroupSize: 10
-      maxGroupSize: 20
-    - !type:OreDunGen #Goob wiznerf partial revert
-      replacement: IronRock
-      entity: IronRockBananium
-      count: 50
+      count: 25
       minGroupSize: 5
       maxGroupSize: 10
     - !type:OreDunGen
       replacement: IronRock
-      entity: IronRockArtifactFragment
-      count: 50
+      entity: IronRockQuartz
+      count: 25
+      minGroupSize: 10
+      maxGroupSize: 15
+    - !type:OreDunGen
+      replacement: IronRock
+      entity: IronRockGold
+      count: 15
       minGroupSize: 2
       maxGroupSize: 4
     - !type:OreDunGen
       replacement: IronRock
-      entity: IronRockDiamond
+      entity: IronRockSilver
       count: 15
+      minGroupSize: 5
+      maxGroupSize: 7
+    - !type:OreDunGen
+      replacement: IronRock
+      entity: IronRockPlasma
+      count: 15
+      minGroupSize: 8
+      maxGroupSize: 10
+    - !type:OreDunGen
+      replacement: IronRock
+      entity: IronRockUranium
+      count: 10
+      minGroupSize: 5
+      maxGroupSize: 6
+    - !type:OreDunGen #Goob wiznerf partial revert
+      replacement: IronRock
+      entity: IronRockBananium
+      count: 10
+      minGroupSize: 2
+      maxGroupSize: 4
+    - !type:OreDunGen
+      replacement: IronRock
+      entity: IronRockArtifactFragment
+      count: 20
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: IronRock
+      entity: IronRockDiamond
+      count: 40
       minGroupSize: 1
       maxGroupSize: 2
     - !type:OreDunGen # Goobstation
       replacement: IronRock
       entity: IronRockBSCrystal
-      count: 40
-      minGroupSize: 2
-      maxGroupSize: 5
+      count: 20
+      minGroupSize: 1
+      maxGroupSize: 2
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockGibtonite
