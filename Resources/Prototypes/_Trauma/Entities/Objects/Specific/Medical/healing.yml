@@ -2,7 +2,7 @@
 
 - type: entity
   name: empty blood pack
-  description: Can be filled with blood for transfusions.
+  description: Can be filled with NanoTrasen's signature mix of artiplates, dexalin plus, and iron, then microwaved, to make a universal blood replacement.
   parent: BaseHealingItem
   id: BloodpackEmpty
   components:

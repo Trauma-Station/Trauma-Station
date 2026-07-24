@@ -9,7 +9,9 @@
   solids:
     BloodpackEmpty: 1
   reagents:
-    Blood: 60 #60u in, 60u out
+    Artiplates: 4 #As described in the empty bloodpack's item description
+    DexalinPlus: 2
+    Iron: 4
 - type: microwaveMealRecipe
   id: BoneGelMakeshift
   name: makeshift bone gel
