@@ -32,69 +32,69 @@
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockIron
-      count: 25
-      minGroupSize: 10
-      maxGroupSize: 15
+      count: 25 # Trauma, was 50
+      minGroupSize: 10 # Trauma, was 20
+      maxGroupSize: 15 # Trauma, was 30
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockCoal
-      count: 25
-      minGroupSize: 5
-      maxGroupSize: 10
+      count: 25 # Trauma, was 50
+      minGroupSize: 5 # Trauma, was 15
+      maxGroupSize: 10 # Trauma, was 20
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockQuartz
-      count: 25
-      minGroupSize: 10
-      maxGroupSize: 15
+      count: 25 # Trauma, was 50
+      minGroupSize: 10 # Trauma, was 20
+      maxGroupSize: 15 # Trauma, was 30
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockGold
-      count: 15
-      minGroupSize: 2
-      maxGroupSize: 4
+      count: 15 # Trauma, was 50
+      minGroupSize: 2 # Trauma, was 10
+      maxGroupSize: 4 # Trauma, was 20
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockSilver
-      count: 15
-      minGroupSize: 5
-      maxGroupSize: 7
+      count: 15 # Trauma, was 50
+      minGroupSize: 5 # Trauma, was 10
+      maxGroupSize: 7 # Trauma, was 20
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockPlasma
-      count: 15
-      minGroupSize: 8
-      maxGroupSize: 10
+      count: 15 # Trauma, was 50
+      minGroupSize: 8 # Trauma, was 10
+      maxGroupSize: 10 # Trauma, was 20
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockUranium
-      count: 10
-      minGroupSize: 5
-      maxGroupSize: 6
+      count: 10 # Trauma, was 50
+      minGroupSize: 5 # Trauma, was 10
+      maxGroupSize: 6 # Trauma, was 20
     - !type:OreDunGen #Goob wiznerf partial revert
       replacement: IronRock
       entity: IronRockBananium
-      count: 10
-      minGroupSize: 2
-      maxGroupSize: 4
+      count: 10 # Trauma, was 50
+      minGroupSize: 2 # Trauma, was 5
+      maxGroupSize: 4 # Trauma, was 10
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockArtifactFragment
-      count: 20
-      minGroupSize: 1
-      maxGroupSize: 2
+      count: 20 # Trauma, was 50
+      minGroupSize: 1 # Trauma, was 2
+      maxGroupSize: 2 # Trauma, was 4
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockDiamond
-      count: 40
+      count: 40 # Trauma, was 15
       minGroupSize: 1
       maxGroupSize: 2
     - !type:OreDunGen # Goobstation
       replacement: IronRock
       entity: IronRockBSCrystal
-      count: 20
-      minGroupSize: 1
-      maxGroupSize: 2
+      count: 20 # Trauma, was 40
+      minGroupSize: 1 # Trauma, was 2
+      maxGroupSize: 2 # Trauma, was 5
     - !type:OreDunGen
       replacement: IronRock
       entity: IronRockGibtonite

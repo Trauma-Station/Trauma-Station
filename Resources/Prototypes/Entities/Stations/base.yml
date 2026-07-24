@@ -62,7 +62,8 @@
           paths:
             - /Maps/_Trauma/Shuttles/trading_outpost.yml # Trauma
           nameDataset: TradeStationNames
-        vgroid: !type:DungeonSpawnGroup
+        # <Trauma>
+        vgroid: !type:DungeonSpawnGroup # Trauma, made this spawn first
           hide: false
           nameGrid: true
           minimumDistance: 400
@@ -77,6 +78,7 @@
             color: "#d67e27"
           protos:
           - VGRoid
+        # </Trauma>
         # Spawn last
         ruins: !type:GridSpawnGroup
           hide: false

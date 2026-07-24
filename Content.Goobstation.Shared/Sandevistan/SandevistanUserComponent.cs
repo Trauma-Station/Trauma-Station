@@ -59,7 +59,7 @@ public sealed partial class SandevistanUserComponent : Component
     {
         DamageDict = new()
         {
-            { "Genetic", 6.5 },
+            { "Cellular", 6.5 },
         },
     };
 
