@@ -19,3 +19,11 @@
     sprite: _Ronstation/Clothing/Eyes/Hud/commandvisor.rsi
   - type: Clothing
     sprite: _Ronstation/Clothing/Eyes/Hud/commandvisor.rsi
+
+- type: entity
+  parent: ClothingEyesGlassesDeathsquad
+  name: central command officer glasses
+  description: The gaze and wrath of the phoenix shines through. Remind anyone who tries to take it from you that they are indeed under contract.
+  id: ClothingEyesGlassesCCInsideAgent # The calm before the storm.
+  components:
+    - type: SolutionScanner # Makes this more flexible, extends the list of possible roles to fill to chemist and bartender for example.
