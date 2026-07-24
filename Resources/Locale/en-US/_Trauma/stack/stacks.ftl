@@ -5,6 +5,7 @@ stack-steel-ingot = steel ingot
 stack-plasteel-ingot = plasteel ingot
 stack-charcoal = charcoal
 stack-barbwire = barbed wire
+stack-bloodpack-empty = empty bloodpack
 stack-rev-gear = gear
 stack-rev-bolt = bolt
 stack-rev-nut = nut
