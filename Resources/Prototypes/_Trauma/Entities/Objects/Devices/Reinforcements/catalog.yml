@@ -184,7 +184,7 @@
   id: Bioweapon
   name: bioweapon-name
   description: bioweapon-desc
-  productEntity: MilTechManual
+  productEntity: MobBioweapon
   icon:
     sprite: _Trauma/Mobs/Monsters/bioweapon.rsi
     state: alive
