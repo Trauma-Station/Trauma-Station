@@ -25,6 +25,7 @@
       KnowledgeWeaponsRifle: -1000
       KnowledgeWeaponsShotgun: -1000
       KnowledgeWeaponsSniper: -1000
+      KnowledgeWeaponsShield: -1000
       KnowledgeWeaponsBludgeon: -1000
       KnowledgeWeaponsShortBlade: -1000
       KnowledgeWeaponsLongBlade: -1000
@@ -48,6 +49,7 @@
       KnowledgeWeaponsRifle: -1000
       KnowledgeWeaponsShotgun: -1000
       KnowledgeWeaponsSniper: -1000
+      KnowledgeWeaponsShield: -1000
       KnowledgeWeaponsBludgeon: -1000
       KnowledgeWeaponsShortBlade: -1000
       KnowledgeWeaponsLongBlade: -1000

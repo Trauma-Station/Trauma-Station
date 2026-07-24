@@ -2,7 +2,7 @@
 
 - type: knowledgeProfile
   id: Slimeperson
-  pointsLimit: 5
+  pointsLimit: 3
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -24,15 +24,12 @@
     # Medical Skill
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
-    ChemistryKnowledge: 3 # Currently non-functional but they are made of fluids.
-    # Physical Skill
-    ThrowingKnowledge: 0
-    AthleticsKnowledge: 1
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 0
+    ChemistryKnowledge: 2 # Currently non-functional but they are made of fluids.
     # Combat Skill
+    ThrowingKnowledge: 0
     MeleeKnowledge: 0
     ShootingKnowledge: 0
+    KnowledgeWeaponsShield: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

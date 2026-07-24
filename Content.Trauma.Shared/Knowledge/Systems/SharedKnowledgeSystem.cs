@@ -43,7 +43,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public Dictionary<EntProtoId, KnowledgeComponent> AllKnowledges = new();
     public static readonly string[] MasteryNames = [
         "Unskilled",
-        "Novice",
         "Average",
         "Advanced",
         "Expert",
@@ -651,7 +650,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
     public override string GetMasteryString(int mastery)
-        => MasteryNames[Math.Clamp(mastery, 0, 5)];
+        => MasteryNames[Math.Clamp(mastery, 0, 4)];
 
     public override int GetMastery(int level)
         => level switch
@@ -661,7 +660,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             >= 75 => 4,
             >= 50 => 3,
             >= 25 => 2,
-            >= 1 => 1,
             _ => 0,
         };
 
@@ -680,12 +678,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetInverseMastery(int mastery)
         => mastery switch
         {
-            >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
-            >= 5 => 88,
-            >= 4 => 75,
-            >= 3 => 50,
-            >= 2 => 25,
-            >= 1 => 1,
+            >= 5 => 100, // 5th mastery doesn't exist, but we can use this to say max level
+            >= 4 => 88,
+            >= 3 => 75,
+            >= 2 => 50,
+            >= 1 => 25,
             _ => 0,
         };
 
@@ -693,11 +690,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         return (GetMastery(ent.Comp) + shift) switch
         {
-            >= 5 => 3,
-            >= 4 => 4,
-            >= 3 => 6,
-            >= 2 => 8,
-            >= 1 => 12,
+            >= 4 => 3,
+            >= 3 => 4,
+            >= 2 => 6,
+            >= 1 => 8,
             _ => 12,
         };
     }

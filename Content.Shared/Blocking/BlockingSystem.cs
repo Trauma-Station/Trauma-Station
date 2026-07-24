@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
@@ -303,8 +306,16 @@ public sealed partial class BlockingSystem : EntitySystem
             return;
 
         var fraction = component.IsBlocking ? component.ActiveBlockFraction : component.PassiveBlockFraction;
-        if (!_toggle.IsActivated(uid)) // Goobstation
+        // <Trauma>
+        if (!_toggle.IsActivated(uid))
             fraction = 0f;
+        else
+        {
+            var fractionEv = new GetBlockFractionEvent(args.User, uid, fraction);
+            RaiseLocalEvent(args.User, ref fractionEv);
+            fraction = Math.Clamp(fractionEv.Fraction, 0f, 1f);
+        }
+        // </Trauma>
         var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
 
         var msg = new FormattedMessage();

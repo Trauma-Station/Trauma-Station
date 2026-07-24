@@ -22,3 +22,10 @@ public record struct UpdateExperienceEvent();
 /// </summary>
 [ByRefEvent]
 public record struct UpdateItemQualityEvent(EntityUid User);
+
+/// <summary>
+/// Called in order to invoke modifier to an item quality.
+/// </summary>
+[ByRefEvent]
+public record struct GetBlockFractionEvent(EntityUid User, EntityUid Blocker, float Fraction);
+

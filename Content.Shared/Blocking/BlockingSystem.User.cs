@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -57,6 +60,11 @@ public sealed partial class BlockingSystem
             return;
 
         var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+        // <Trauma>
+        var fractionEv = new GetBlockFractionEvent(uid, component.BlockingItem.Value, blockFraction);
+        RaiseLocalEvent(uid, ref fractionEv);
+        blockFraction = fractionEv.Fraction;
+        // </Trauma>
         var modifier = blocking.IsBlocking ? blocking.ActiveBlockDamageModifier : blocking.PassiveBlockDamageModifer;
         blockFraction = Math.Clamp(blockFraction, 0, 1);
         _damageable.TryChangeDamage((item, dmgComp), blockFraction * args.OriginalDamage);

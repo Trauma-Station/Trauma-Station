@@ -23,6 +23,7 @@
     # <Trauma>
     BolaEnergy: 5 # was Bola: 6
     PepperSpray: 3
+    SkillChipShield: 2
     SkillChipBludgeon: 2
     SkillChipShortBlade: 2
     SkillChipPolearm: 2
