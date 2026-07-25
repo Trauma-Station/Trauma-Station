@@ -68,6 +68,7 @@
     - id: ArmoryOverrideKeyComponents
     - id: SecAntagSummoner
     - id: ClothingHandsGlovesGorilla
+    - id: HeadOfSecurityWeaponUndetermined # R.O.N
 
 - type: entityTable
   id: LockerFillCaptainTrauma

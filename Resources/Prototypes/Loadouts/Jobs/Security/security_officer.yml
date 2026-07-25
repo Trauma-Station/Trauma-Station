@@ -148,3 +148,31 @@
     proto: SeniorOfficer
   equipment:
     id: SeniorOfficerPDA
+
+# Baton
+- type: loadout
+  id: SecurityStunBaton
+  storage:
+    back:
+    - Stunbaton
+
+- type: loadout
+  id: SecurityBillyClub
+  storage:
+    back:
+    - WeaponBillyClub
+
+- type: loadout
+  id: SecurityPolymerBaton
+  storage:
+    back:
+    - PolymerBaton
+
+- type: loadout
+  id: SecurityTruncheon
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorOfficer
+  storage:
+    back:
+    - Truncheon
