@@ -417,6 +417,17 @@
   name: lesser centifiend
   description: A juvenile demon, it progresses the potent diseases of its greater brethren.
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/smolcentifiend.rsi
   - type: MeleeWeapon
@@ -951,12 +962,15 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
   - type: MeleeWeapon
+    angle: 45
     range: 2
     soundHit:
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Slash: 25
+        Slash: 30
+        Structural: 50
+    animation: WeaponArcSlash
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -974,8 +988,7 @@
             max: 6
   - type: ActionGrant
     actions:
-    - ActionSlasherIncorporealize
-    - ActionSlasherCorporealize
+      - ActionDemonRift
 
 - type: entity
   parent: BaseDemon
