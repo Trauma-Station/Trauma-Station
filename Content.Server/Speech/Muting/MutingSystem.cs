@@ -2,7 +2,7 @@
 using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using Content.Server.Popups;
-using Content.Server.Speech.EntitySystems;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Abilities.Mime;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;

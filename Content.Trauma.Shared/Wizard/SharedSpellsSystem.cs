@@ -120,7 +120,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedJitteringSystem _jitter = default!;
-    [Dependency] private SharedStutteringSystem _stutter = default!;
+    [Dependency] private StutteringSystem _stutter = default!;
     [Dependency] private SharedMagicSystem _magic = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedGunSystem _gun = default!;

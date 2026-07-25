@@ -2,8 +2,8 @@
 
 using Content.Server.Chat.Systems;
 using Content.Server.Hands.Systems;
-using Content.Server.Speech;
-using Content.Server.Speech.Components;
+using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
 using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Shared.Speech;
@@ -17,14 +17,6 @@ public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private PaperSystem _paper = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TapeRecorderComponent, ListenEvent>(OnListen);
-        SubscribeLocalEvent<TapeRecorderComponent, PrintTapeRecorderMessage>(OnPrintMessage);
-    }
 
     /// <summary>
     /// Given a time range, play all messages on a tape within said range, [start, end)].
@@ -54,6 +46,7 @@ public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
     /// <summary>
     /// Whenever someone speaks within listening range, record it to tape
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnListen(Entity<TapeRecorderComponent> ent, ref ListenEvent args)
     {
         // mode should never be set when it isn't active but whatever
@@ -81,6 +74,7 @@ public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
         cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(pos, name, verb, args.Message, language));
     }
 
+    [SubscribeLocalEvent]
     private void OnPrintMessage(Entity<TapeRecorderComponent> ent, ref PrintTapeRecorderMessage args)
     {
         var (uid, comp) = ent;
