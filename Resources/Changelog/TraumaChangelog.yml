@@ -11076,3 +11076,34 @@ Entries:
   id: 1235
   time: '2026-07-24T18:00:12.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/87
+- author: DOPEy and ophiuchiko
+  changes:
+  - type: Tweak
+    message: >-
+      Amber - minor atmos and TEG changes, added vent/scrubber to xenobio, added
+      spare captains id to captains room
+  - type: Tweak
+    message: >-
+      Omega - Reworked TEG, botany smartfridge changed to unlocked, added
+      scrubbers/vents to xenobio
+  - type: Tweak
+    message: >-
+      Packed - Reworked Atmos/TEG, botany smartfridge changed to unlocked,
+      Medbay reworked, added vent/scrubber to xenobio
+  - type: Tweak
+    message: >-
+      Atlas - Minor change to atmos power, reworked TEG, botany smartfridge
+      changed to unlocked, removed excess windows from medbay triage
+  - type: Tweak
+    message: Box - Reworked TEG, botany smartfridge changed to unlocked
+  - type: Tweak
+    message: >-
+      Saltern - Reworked TEG, botany smartfridge changed to unlocked, added
+      genetics
+  - type: Tweak
+    message: >-
+      Cluster - Reworked atmos, added TEG, new maints bar, new maints
+      fishing/botany, maints design change, redesigned bso and ntr rooms
+  id: 1236
+  time: '2026-07-25T21:29:19.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/90
