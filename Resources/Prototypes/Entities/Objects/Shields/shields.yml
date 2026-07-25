@@ -509,13 +509,13 @@
 
 - type: entity
   name: energy shield
-  parent: [BaseShield, BaseSyndicateContraband] # Trauma - was BaseItem, instead of BaseShield
+  parent: [BaseItem, BaseSyndicateContraband]
   id: EnergyShield
   description: Exotic energy shield, when folded, can even fit in your pocket.
   components:
     # <Trauma>
-    - type: Parry
-      parryExhaustionCost: 1.1
+    - type: CosmicTransmutable
+      transmuteTo: CosmicCultShield
     - type: HeldSpeedModifier
       walkModifier: 0.9
       sprintModifier: 0.9
@@ -536,17 +536,16 @@
       chargedRechargeRate: 3
     # </Trauma>
     - type: ItemToggle
-      predictable: false # WD EDIT
-      soundActivate:
-        path: /Audio/Weapons/ebladeon.ogg
-      soundDeactivate:
-        path: /Audio/Weapons/ebladeoff.ogg
-      # WD EDIT START
+      # <Trauma>
       soundFailToActivate:
         path: /Audio/Machines/button.ogg
         params:
           variation: 0.250
-      # WD EDIT END
+      # </Trauma>
+      soundActivate:
+        path: /Audio/Weapons/ebladeon.ogg
+      soundDeactivate:
+        path: /Audio/Weapons/ebladeoff.ogg
     - type: ItemToggleActiveSound
       activeSound:
         path: /Audio/Weapons/ebladehum.ogg
@@ -556,8 +555,12 @@
       - 0,0,3,3
     - type: ComponentToggler
       components:
+      # <Trauma>
+      - type: Parry
+        parryExhaustionCost: 1.1
       - type: DisarmMalus
-        malus: 1 # Goob edit
+        malus: 1 # was 0.6
+      # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/e_shield.rsi
       layers:
@@ -609,8 +612,7 @@
       damageContainer: Shield
     - type: ExaminableDamage
       messages: EnergyShieldMessages
-    - type: Destructible
-      thresholds: [] # Trauma - removed Destructible thresholds
+    # Trauma - removed Destructible
     - type: StaticPrice
       price: 350
 

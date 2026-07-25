@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Timing;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Blocking.Components;
@@ -26,6 +29,7 @@ namespace Content.Shared.Blocking;
 public sealed partial class BlockingSystem : EntitySystem
 {
     // <Trauma>
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
     // </Trauma>
     [Dependency] private ActionContainerSystem _actionContainer = default!;
@@ -86,7 +90,7 @@ public sealed partial class BlockingSystem : EntitySystem
 
     private void OnEquip(Entity<BlockingComponent> entity, ref GotEquippedHandEvent args)
     {
-        if (!CanBlock(entity.AsNullable()))
+        if (_timing.ApplyingState || !CanBlock(entity.AsNullable())) // Trauma - check applyingstate because you cant AddComp while resetting entities
             return;
 
         StartBlocking(entity, args.User);

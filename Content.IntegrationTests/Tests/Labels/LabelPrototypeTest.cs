@@ -8,6 +8,7 @@ public sealed class LabelPrototypeTest : GameTest
 {
     private static string[] _entitiesWithLabel = GameDataScrounger.EntitiesWithComponent("Label");
 
+    // TODO: inline this slop bruh
     [Test]
     [TestOf(typeof(LabelComponent))]
     [TestCaseSource(nameof(_entitiesWithLabel))]

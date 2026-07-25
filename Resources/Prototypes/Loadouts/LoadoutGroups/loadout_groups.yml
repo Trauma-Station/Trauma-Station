@@ -90,6 +90,9 @@
   minLimit: 0
   maxLimit: 1 # Increase this limit in the future once there's more assistive items than just canes!
   loadouts:
+  # <Trauma>
+  - WhiteCane
+  # </Trauma>
   - OffsetCane
   - OffsetCaneWood
   - OffsetCaneClown
@@ -723,6 +726,9 @@
   minLimit: 0
   maxLimit: 2
   loadouts:
+  # <Trauma>
+  - FretlessBassGuitar
+  # </Trauma>
   - Glockenspiel
   - MusicBox
   - Xylophone

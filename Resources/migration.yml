@@ -151,6 +151,8 @@ MaterialSilo: MachineMasterMaterialSilo
 # 2026-06-21
 GunSafeLaserSpec: GunSafeSurplusBallistics
 
+# 2026-07-25
+WehMedipen: WehMedipenTiny
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

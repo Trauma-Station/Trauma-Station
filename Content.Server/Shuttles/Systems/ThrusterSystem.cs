@@ -177,7 +177,7 @@ public sealed partial class ThrusterSystem : EntitySystem
 
     private void UpdatePowerLoad(Entity<ThrusterComponent> ent, ApcPowerReceiverComponent? apcPowerReceiver = null)
     {
-        if (!Resolve(ent, ref apcPowerReceiver))
+        if (!Resolve(ent, ref apcPowerReceiver, false)) // Trauma - dont log for unpowered thrusters
             return;
 
         apcPowerReceiver.Load = ent.Comp.BasePowerLoad * GetInertiaThresholdScale(ent);

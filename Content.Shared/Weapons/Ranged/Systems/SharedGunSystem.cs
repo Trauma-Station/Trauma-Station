@@ -133,7 +133,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (gun.Comp.NextFire > Timing.CurTime)
             Log.Warning($"Initializing a map that contains an entity that is on cooldown. Entity: {ToPrettyString(gun)}");
 
-        DebugTools.Assert((gun.Comp.AvailableModes & gun.Comp.SelectedMode) != 0x0);
+        DebugTools.Assert((gun.Comp.AvailableModes & gun.Comp.SelectedMode) != 0x0, $"Bad fire mode during {ToPrettyString(gun)} mapinit!"); // Trauma - add a message bruh
 #endif
 
         RefreshModifiers((gun, gun));

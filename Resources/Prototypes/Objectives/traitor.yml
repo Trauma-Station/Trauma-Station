@@ -110,8 +110,6 @@
   - type: PickRandomPerson
     conditions:
     - !type:BodyWhitelistCondition
-      inverted: true
-    - !type:BodyWhitelistCondition
       # <Trauma>
       blacklist:
         components:

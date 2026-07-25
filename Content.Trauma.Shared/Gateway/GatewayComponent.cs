@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Gateway;
 /// <summary>
 /// Controlling gateway that links to other gateway destinations on the server.
 /// </summary>
-[RegisterComponent, Access(typeof(GatewaySystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(GatewaySystem))]
 [AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class GatewayComponent : Component
 {

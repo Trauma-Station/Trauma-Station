@@ -754,8 +754,8 @@
         !type:DamageTrigger
         damage: 300
       behaviors:
-      - !type:ChangeConstructionNodeBehavior
-        node: girder
+      #- !type:ChangeConstructionNodeBehavior # Trauma - it has no construction
+      #  node: girder
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam
@@ -1073,8 +1073,8 @@
         !type:DamageTrigger
         damage: 200
       behaviors:
-      - !type:ChangeConstructionNodeBehavior
-        node: girder
+      #- !type:ChangeConstructionNodeBehavior # Trauma - it has no construction
+      #  node: girder
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam

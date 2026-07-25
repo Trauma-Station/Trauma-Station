@@ -23,7 +23,7 @@ public sealed partial class RelayNearby : EntityEffectBase<RelayNearby>
     /// Use the rarest component you can for best performance.
     /// You don't need to include this in <see cref="Whitelist"/>.
     /// </summary>
-    [DataField(required: true, serverOnly: true)]
+    [DataField(required: true)]
     public string CompName = string.Empty;
     // TODO: use CompName if plant holder is moved to shared
 
