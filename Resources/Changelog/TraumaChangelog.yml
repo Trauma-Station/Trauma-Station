@@ -12030,3 +12030,12 @@ Entries:
   id: 1318
   time: '2026-07-25T05:19:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3700
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: >-
+      Judo Safe no longer has an alert level requirement to unlock, returning to
+      requiring armory access.
+  id: 1319
+  time: '2026-07-25T10:15:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3706
