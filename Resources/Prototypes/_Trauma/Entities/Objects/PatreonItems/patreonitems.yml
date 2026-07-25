@@ -208,9 +208,9 @@
   name: real headslime
   description: Squishy... ew.
   components:
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: dementia
+  - type: ReplacementAccent
+    accent: dementia
+    relayAccent: true
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
   - type: Clothing

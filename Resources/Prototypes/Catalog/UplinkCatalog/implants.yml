@@ -129,7 +129,7 @@
   id: UplinkUplinkImplanter # uplink uplink real
   name: uplink-uplink-implanter-name
   description: uplink-uplink-implanter-desc
-  icon: { sprite: /Textures/Objects/Devices/communication.rsi, state: old-radio }
+  icon: { sprite: Objects/Devices/communication.rsi, state: radio } # Trauma - old-radio -> radio
   productEntity: UplinkImplanter
   cost:
     Telecrystal: 5 # Trauma - was 1, 5x

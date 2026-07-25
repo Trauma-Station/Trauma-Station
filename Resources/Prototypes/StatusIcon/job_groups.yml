@@ -89,15 +89,17 @@
   - JobIconHeadOfPersonnel
   - JobIconBartender
   - JobIconBotanist
-  - JobIconBoxer
-  - JobIconChaplain
+  # <Trauma> - moved non service to civilian/entertainer
+  #- JobIconBoxer
+  #- JobIconChaplain
   - JobIconChef
-  - JobIconJanitor
-  - JobIconLawyer
-  - JobIconLibrarian
-  - JobIconReporter
+  #- JobIconJanitor
+  #- JobIconLawyer
+  #- JobIconLibrarian
+  #- JobIconReporter
   - JobIconServiceWorker
-  - JobIconZookeeper
+  #- JobIconZookeeper
+  # </Trauma>
 
 # Not exactly service workers, but not civilians either
 - type: jobIconGroup
@@ -107,6 +109,10 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Clown
   icons:
+  # <Trauma>
+  - JobIconBoxer
+  - JobIconRadioHost
+  # </Trauma>
   - JobIconClown
   - JobIconMime
   - JobIconMusician
@@ -118,6 +124,14 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Passenger
   icons:
+  # <Trauma>
+  - JobIconChaplain
+  - JobIconJanitor
+  - JobIconLawyer
+  - JobIconLibrarian
+  - JobIconReporter
+  - JobIconZookeeper
+  # </Trauma>
   - JobIconPassenger
   - JobIconVisitor
 
@@ -128,6 +142,9 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Nanotrasen
   icons:
+  # <Trauma>
+  - JobIconNanotrasenRepresentative
+  # </Trauma>
   - JobIconCBURN
   - JobIconDeathSquad
   - JobIconERTChaplain
@@ -166,6 +183,10 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Syndicate
   icons:
+  # <Trauma>
+  - JobIconDClass
+  - JobIconSpacePol
+  # </Trauma>
   - JobIconNinja
   - JobIconPirate
   - JobIconPrisoner

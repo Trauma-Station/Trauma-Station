@@ -27,8 +27,8 @@
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
-  - type: AddAccentClothing
-    accent: RussianAccent
+  - type: RussianAccent
+    relayAccent: true
   - type: Unremoveable
   - type: FactionClothing
     faction: Insurgent

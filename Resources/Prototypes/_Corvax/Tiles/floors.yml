@@ -46,6 +46,7 @@
   itemDrop: FloorTileItemWoodDark
 
 - type: tile
+  parent: FloorWood
   id: FloorWoodLargeDark
   name: tiles-wood-large-dark
   sprite: /Textures/_Corvax/Tiles/wood_large_dark.png

@@ -58,6 +58,7 @@
           Blunt: 10
           Slash: 10
           Piercing: 10
+          Ballistic: 10 # Trauma
           Heat: 10
     - type: Damageable
     - type: Injurable
@@ -138,6 +139,7 @@
           Blunt: 15
           Slash: 15
           Piercing: 5
+          Ballistic: 2 # Trauma
           Heat: 5
 
 - type: entity
@@ -168,6 +170,7 @@
           Blunt: 5
           Slash: 10
           Piercing: 5
+          Ballistic: 2 # Trauma
           Heat: 20
 
 - type: entity

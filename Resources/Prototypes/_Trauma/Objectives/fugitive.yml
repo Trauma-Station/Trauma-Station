@@ -63,7 +63,8 @@
   - type: PickRandomPerson
     conditions:
     - !type:ObjectiveTargetCondition
-      blacklist:
+      inverted: true
+      whitelist:
         components:
         - KillPersonCondition
   - type: KillPersonCondition
@@ -119,7 +120,8 @@
   - type: PickRandomPerson
     conditions:
     - !type:ObjectiveTargetCondition
-      blacklist:
+      inverted: true
+      whitelist:
         components:
         - KillPersonCondition
   - type: KillPersonCondition

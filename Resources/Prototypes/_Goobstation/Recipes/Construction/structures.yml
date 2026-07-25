@@ -80,3 +80,4 @@
   id: ReinforcedSecretDoor
   name: recipes-secret-door-reinforced-name
   graph: ReinforcedSecretDoor
+  targetNode: ReinforcedSecretDoor
