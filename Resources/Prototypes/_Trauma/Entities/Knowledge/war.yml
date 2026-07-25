@@ -9,16 +9,13 @@
   components:
   - type: Knowledge
     category: MeleeCombat
-    costs: [0, 1, 3, 6] # reasonable that you could get good at a random melee style
+    costs: [0, 2, 4]
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
   id: MeleeKnowledge # holdover
   name: Unarmed Training
   description: How good you are at punching others, usually with your bare hands or claws.
-  components:
-  - type: Knowledge
-    costs: [0, 1, 2, 3] # lots of people get in fights
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
@@ -28,17 +25,14 @@
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
-  id: KnowledgeWeaponsKnife
-  name: Knife Training
+  id: KnowledgeWeaponsShortBlade
+  name: Short Blade Training
   description: Using knives and other small blades effectively needs quick and powerful stabs and cuts.
-  components:
-  - type: Knowledge
-    costs: [0, 1, 2, 3] # knives are really common
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
-  id: KnowledgeWeaponsSword
-  name: Sword Training
+  id: KnowledgeWeaponsLongBlade
+  name: Long Blade Training
   description: Large blades are best used by stabbing and slashing your enemies, with enough heft to even parry attacks.
 
 - type: entity
@@ -59,6 +53,15 @@
   name: Tool Combat Training
   description: Most laymen think it's easy to fight with hedge trimmers and nailguns, a real tradie knows the secret to it.
 
+- type: entity
+  parent: BaseKnowledgeWeaponsMelee
+  id: KnowledgeWeaponsEnergy
+  name: Energy Weapon Training
+  description: Modern energy weapons are highly dangerous and unintuitive, it takes lots of training to use them correctly.
+  components:
+  - type: Knowledge
+    costs: null # Eswords
+
 # Ranged Combat
 
 - type: entity
@@ -68,7 +71,7 @@
   components:
   - type: Knowledge
     category: RangedCombat
-    costs: [0, 2, 4] # harder to be trained with assault rifles and shit as a random assistant
+    costs: [0, 2, 4]
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
@@ -91,8 +94,14 @@
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
   id: KnowledgeWeaponsRifle
-  name: Rifle Training
+  name: Longarm Training
   description: How good you are with ballistic long arms like assault rifles and mosins.
+
+- type: entity
+  parent: BaseKnowledgeWeaponsRanged
+  id: KnowledgeWeaponsSMG
+  name: SMG Training
+  description: How good you are with ballistic sub machine guns.
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
@@ -104,10 +113,10 @@
   parent: BaseKnowledgeWeaponsRanged
   id: KnowledgeWeaponsSniper
   name: Sniper Training
-  description: "How well you can snipe using a scoped rifle at long range. 🦋"
+  description: "How well you can snipe using a scoped rifle at long range."
   components:
   - type: Knowledge
-    costs: [0, 3, 6] # not exactly common
+    costs: null # my sparkledog med intern actually used to be an isis rocketeer
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged

@@ -21,6 +21,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
+    - SkillChipEducation
     - SkillChipChemist
   - !type:AddComponentSpecial
     components:

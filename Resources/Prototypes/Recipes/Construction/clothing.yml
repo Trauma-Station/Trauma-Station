@@ -8,9 +8,8 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 0
-    ToysKnowledge: 0 # billions must honk
   practical:
-    ToysKnowledge: 1
+    FabricationKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -23,9 +22,8 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 0
-    ToysKnowledge: 0 # billions must ...
   practical:
-    ToysKnowledge: 1
+    FabricationKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -153,7 +151,7 @@
   # <Trauma>
   theory:
     TailoringKnowledge: 0
-    ToysKnowledge: 0
+    FabricationKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -166,7 +164,7 @@
   # <Trauma>
   theory:
     TailoringKnowledge: 0
-    ToysKnowledge: 0
+    FabricationKnowledge: 0
   # </Trauma>
 
 - type: construction

@@ -22,7 +22,7 @@
   name: uplink-betrayal-knife-name
   description: uplink-betrayal-knife-desc
   icon: { sprite: /Textures/_White/Objects/Weapons/Melee/Daggers/betrayal_knife.rsi, state: icon }
-  productEntity: BetrayalKnife
+  productEntity: BriefcaseWeaponBetrayalKnifeFilled
   cost:
     Telecrystal: 30 # goob
   categories:

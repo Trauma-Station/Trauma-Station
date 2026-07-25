@@ -18,7 +18,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipBotanist
+    - SkillChipEducation
+    - SkillChipTool
+    - SkillChipStoner
   # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: FourTwenty

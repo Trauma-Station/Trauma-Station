@@ -172,7 +172,7 @@
       - MobState
       - Item # Trauma
     chemical: Ichor
-    healRate: 7.5
+    healRate: 5 # Trauma, was 7.5
     whitelist:
       components:
       - MobState

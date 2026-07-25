@@ -332,6 +332,10 @@
   name: combat gloves
   description: These tactical gloves are fireproof and shock resistant.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/combat.rsi
   - type: Clothing
@@ -375,6 +379,10 @@
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
   - type: Clothing
@@ -485,6 +493,8 @@
     animation: WeaponArcFist
     mustBeEquippedToUse: true
     heavyStaminaCost: 3 # goob edit
+    canWideSwing: false # Trauma
+
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue

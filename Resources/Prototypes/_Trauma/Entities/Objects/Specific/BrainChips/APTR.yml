@@ -1,0 +1,176 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipHeavy
+  name: APTR-Chip (Heavy Weapon Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsHeavy: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipLaser
+  name: APTR-Chip (Laser Weapon Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsLaser: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipMarksmanship
+  name: APTR-Chip (Marksmanship)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ShootingKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipMining
+  name: APTR-Chip (Mining Tool Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsMining: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipTool
+  name: APTR-Chip (Combat Tool Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsTool: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipPistol
+  name: APTR-Chip (Pistol Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsPistol: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipRifle
+  name: APTR-Chip (Longarms Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsRifle: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipSMG
+  name: APTR-Chip (SMG Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsSMG: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipShotgun
+  name: APTR-Chip (Shotgun Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsShotgun: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipSniper
+  name: APTR-Chip (Sniper Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsSniper: 28
+
+# Melee Weapons
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipBludgeon
+  name: APTR-Chip (Bludgeon Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsBludgeon: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipShortBlade
+  name: APTR-Chip (Short Blade Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsShortBlade: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipLongBlade
+  name: APTR-Chip (Long Blade Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsLongBlade: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipNonLethal
+  name: APTR-Chip (Non-Lethal Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsNonLethal: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipPolearm
+  name: APTR-Chip (Polearm Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsPolearm: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipUnarmed
+  name: APTR-Chip (Unarmed Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipEnergy
+  name: APTR/HYPS-Chip (Energy Weapon Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsEnergy: 28
+      AthleticsKnowledge: 28
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipCombatHOS
+  name: MRAM-Chip (Extended Combat Training)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsLaser: 28
+      ShootingKnowledge: 28
+      KnowledgeWeaponsPistol: 28
+      KnowledgeWeaponsRifle: 28
+      KnowledgeWeaponsShotgun: 28
+      KnowledgeWeaponsBludgeon: 28
+      KnowledgeWeaponsShortBlade: 28
+      KnowledgeWeaponsLongBlade: 28
+      KnowledgeWeaponsNonLethal: 28
+      KnowledgeWeaponsPolearm: 28
+      MeleeKnowledge: 28

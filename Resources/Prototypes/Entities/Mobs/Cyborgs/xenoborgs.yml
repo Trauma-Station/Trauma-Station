@@ -247,9 +247,9 @@
       WallsKnowledge: 20
       WindowsKnowledge: 20
       MeleeKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 28
+      AthleticsKnowledge: 28
       WeaponsKnowledge: 51
   # </Trauma>
 

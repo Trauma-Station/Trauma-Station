@@ -40,7 +40,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipHeadOfSecurity
+    - SkillChipCombatEducation
+    - SkillChipCombatHOS
+    - SkillChipEnhancer
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

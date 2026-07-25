@@ -1,0 +1,429 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipArmorsmithing
+  name: MRAM-Chip (Memories of an Armorsmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ArmorKnowledge: 50
+      MetalworkingKnowledge: 25
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipArmorsmithing2
+  name: MRAM-Chip (Memories of a Master Armorsmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ArmorKnowledge: 75
+      MetalworkingKnowledge: 25
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipWeaponsmithing
+  name: MRAM-Chip (Memories of a Weaponsmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      WeaponsKnowledge: 50
+      MetalworkingKnowledge: 25
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipWeaponsmithing2
+  name: MRAM-Chip (Memories of a Master Weaponsmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      WeaponsKnowledge: 75
+      MetalworkingKnowledge: 25
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipBlacksmith
+  name: MRAM-Chip (Memories of a Blacksmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MetalworkingKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipBlacksmith2
+  name: MRAM-Chip (Memories of a Master Blacksmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MetalworkingKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipWoodworker
+  name: MRAM-Chip (Memories of a Woodworker)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      CarvingKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipWoodworker2
+  name: MRAM-Chip (Memories of a Master Woodworker)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      CarvingKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipGunsmith
+  name: MRAM-Chip (Memories of a Gunsmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      GunsmithingKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipGunsmith2
+  name: MRAM-Chip (Memories of a Master Gunsmith)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      GunsmithingKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipMechanic
+  name: MRAM-Chip (Memories of a Mechanic)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MechanicsKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipMechanic2
+  name: MRAM-Chip (Memories of a Master Mechanic)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MechanicsKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipElectronics
+  name: MRAM-Chip (Memories of an Electrician)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ElectronicsKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipElectronics2
+  name: MRAM-Chip (Memories of a Master Electrician)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ElectronicsKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipTailor
+  name: MRAM-Chip (Memories of a Tailor)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TailoringKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipTailor2
+  name: MRAM-Chip (Memories of a Master Tailor)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TailoringKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipStoner
+  name: MRAM-Chip (Memories of a Stoner)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      SmokeablesKnowledge: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipDatabase
+  name: MRAM-Chip (Crafting Database)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FabricationKnowledge: 50
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      ArmorKnowledge: 25
+      MetalworkingKnowledge: 25
+      WeaponsKnowledge: 25
+      CarvingKnowledge: 25
+      GunsmithingKnowledge: 25
+      MechanicsKnowledge: 25
+      TailoringKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipEducation
+  name: MRAM-Chip (Standard Clone Education)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 100
+      LanguageTauCetiBasic: 100
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      SmokeablesKnowledge: 50
+      FabricationKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipCombatEducation
+  name: MRAM/HPYS-Chip (Combat Clone Education)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 100
+      LanguageTauCetiBasic: 100
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 28
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      SmokeablesKnowledge: 50
+      FabricationKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipEchelonEducation
+  name: MRAM/HPYS-Chip (Echelon Clone Education)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 100
+      LanguageTauCetiBasic: 100
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 28
+      KnowledgeWeaponsBludgeon: 28 # Telebatong
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      SmokeablesKnowledge: 50
+      FabricationKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipMagLit
+  name: MRAM-Chip (Memories of a Cultist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MagicalLiteracyKnowledge: 100
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipJanitor
+  name: MRAM-Chip (Memories of a Janitor)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      JanitorKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipChef
+  name: MRAM-Chip (Memories of a Chef)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtCQCChef: 1
+      LanguageSpaceItalian: 100
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipClown
+  name: MRAM-Chip (Memories of a Clown)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      BananiumKnowledge: 100
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipDoctor
+  name: MRAM/APTR-Chip (Memories of a Doctor)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 50
+      KnowledgeWeaponsLaser: -25
+      ShootingKnowledge: -25
+      KnowledgeWeaponsMining: -25
+      KnowledgeWeaponsTool: -25
+      KnowledgeWeaponsPistol: -25
+      KnowledgeWeaponsRifle: -25
+      KnowledgeWeaponsShotgun: -25
+      KnowledgeWeaponsBludgeon: -25
+      KnowledgeWeaponsShortBlade: -25
+      KnowledgeWeaponsLongBlade: -25
+      KnowledgeWeaponsNonLethal: -25
+      KnowledgeWeaponsPolearm: -25
+      MeleeKnowledge: -25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipChemist
+  name: MRAM/APTR-Chip (Memories of a Chemist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ChemistryKnowledge: 100
+      KnowledgeWeaponsLaser: -25
+      ShootingKnowledge: -25
+      KnowledgeWeaponsMining: -25
+      KnowledgeWeaponsTool: -25
+      KnowledgeWeaponsPistol: -25
+      KnowledgeWeaponsRifle: -25
+      KnowledgeWeaponsShotgun: -25
+      KnowledgeWeaponsBludgeon: -25
+      KnowledgeWeaponsShortBlade: -25
+      KnowledgeWeaponsLongBlade: -25
+      KnowledgeWeaponsNonLethal: -25
+      KnowledgeWeaponsPolearm: -25
+      MeleeKnowledge: -25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipSurgeon
+  name: MRAM/APTR-Chip (Memories of a Surgeon)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      SurgeryKnowledge: 50
+      KnowledgeWeaponsLaser: -25
+      ShootingKnowledge: -25
+      KnowledgeWeaponsMining: -25
+      KnowledgeWeaponsTool: -25
+      KnowledgeWeaponsPistol: -25
+      KnowledgeWeaponsRifle: -25
+      KnowledgeWeaponsShotgun: -25
+      KnowledgeWeaponsBludgeon: -25
+      KnowledgeWeaponsShortBlade: -25
+      KnowledgeWeaponsLongBlade: -25
+      KnowledgeWeaponsNonLethal: -25
+      KnowledgeWeaponsPolearm: -25
+      MeleeKnowledge: -25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipCMO
+  name: MRAM-Chip (Memories of a Surgeon General)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 75
+      ChemistryKnowledge: 100
+      SurgeryKnowledge: 75
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipLibrarian
+  name: MRAM-Chip (Memories of a Translator)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageCat: 50
+      LanguageDog: 50
+      LanguageFox: 50
+      LanguageXeno: 50
+      LanguageMonkey: 50
+      LanguageMouse: 50
+      LanguageChicken: 50
+      LanguageDuck: 50
+      LanguageCow: 50
+      LanguageSheep: 50
+      LanguageKangaroo: 50
+      LanguagePig: 50
+      LanguageCrab: 50
+      LanguageKobold: 50
+      LanguageHissing: 50
+      LanguagePenguin: 50
+      LanguageDeer: 50
+      LanguageUniversal: 50
+      LanguageRobotTalk: 50
+      LanguageDroneTalk: 50
+      LanguagePsychomantic: 50
+      LanguageBlob: 50
+      LanguageEldritch: 50
+      LanguageRootSpeak: 50
+      LanguageMoffic: 50
+      LanguageDraconic: 50
+      LanguageBubblish: 50
+      LanguageNewKinPidgin: 50
+      LanguageXeeplian: 50
+      LanguageElyran: 50
+      LanguageFreespeak: 50
+      LanguageNovuNederic: 50
+      LanguageSolCommon: 50
+      LanguageTauCetiBasic: 50
+      LanguageTradeband: 50
+      LanguageSpaceItalian: 50
+      LanguageCarptongue: 50
+      LanguageFloorGoblin: 50
+      LanguageCheval: 50
+      LanguageBingle: 50
+      LanguageXenoHivemind: 50
+      LanguageAzaziba: 50
+      LanguageCalcic: 50

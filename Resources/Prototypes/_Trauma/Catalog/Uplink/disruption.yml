@@ -79,6 +79,7 @@
   discountCategory: null # WAY too free
   categories:
   - UplinkDisruption
+  restockTime: 900
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
