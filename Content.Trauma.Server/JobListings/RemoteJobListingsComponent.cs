@@ -15,4 +15,16 @@ public sealed partial class RemoteJobListingsComponent : Component
     /// </summary>
     [DataField]
     public EntityUid JobListings;
+
+    /// <summary>
+    /// Action gained when this component is on an implanted entity.
+    /// </summary>
+    [DataField]
+    public EntProtoId ActionOnImplant = "ActionOpenJobListingsImplant";
+
+    /// <summary>
+    /// When the action is created it is stored here so it can be removed upon implant removal.
+    /// </summary>
+    [DataField]
+    public EntityUid? StoredActionOnImplant;
 }

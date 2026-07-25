@@ -51,6 +51,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsRefreshMessage>(OnMessage);
 
         InitializeReward();
+        InitializeImplant();
     }
 
     /// <summary>

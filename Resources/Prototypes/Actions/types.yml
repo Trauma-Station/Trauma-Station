@@ -148,7 +148,7 @@
   parent: BaseAction
   id: ActionOpenUplinkImplant
   name: Open Uplink
-  description: Opens the syndicate uplink embedded under your skin
+  description: Opens the syndicate uplink store embedded under your skin #Trauma - changed description
   components:
   - type: Action
     itemIconStyle: BigAction

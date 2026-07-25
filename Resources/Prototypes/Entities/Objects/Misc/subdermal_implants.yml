@@ -179,6 +179,9 @@
   description: This implant lets the user access a hidden Syndicate uplink at will.
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: RemoteJobListings
+  # </Trauma>
   - type: SubdermalImplant
     implantAction: ActionOpenUplinkImplant
     whitelist:
@@ -189,6 +192,10 @@
     interfaces:
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
+      # <Trauma>
+      enum.JobListingsUiKey:
+        type: JobListingsBoundUserInterface
+      # </Trauma>
 
 - type: entity
   parent: BaseSubdermalImplant
