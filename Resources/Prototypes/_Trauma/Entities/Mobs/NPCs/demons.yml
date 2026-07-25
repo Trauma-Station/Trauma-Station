@@ -411,12 +411,56 @@
         location: Left
   - type: ComplexInteraction
 
+- type: entity
+  parent: BaseDemon
+  id: MinorDemonCentifiend
+  name: lesser centifiend
+  description: A juvenile demon, it progresses the potent diseases of its greater brethren.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/smolcentifiend.rsi
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Piercing: 1
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: UnstableCompound
+        Quantity: 1
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+
 # Medium
 
 - type: entity
   parent: BaseDemon
   id: MediumDemonCentifiend
-  name: Centifiend
+  name: centifiend
   description: One of the most common demons in Hell, this oversized arthropod spreads pestilence with its bite.
   components:
   - type: Sprite
