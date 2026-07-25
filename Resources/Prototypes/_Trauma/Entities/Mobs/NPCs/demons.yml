@@ -948,7 +948,6 @@
   name: butcher
   description: The butchers march through hell, like a plague of locusts, cutting and consuming all in their path.
   components:
-  - type: SlasherIncorporeal
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
   - type: MeleeWeapon
@@ -975,7 +974,8 @@
             max: 6
   - type: ActionGrant
     actions:
-    - ActionDemonRift
+    - ActionSlasherIncorporealize
+    - ActionSlasherCorporealize
 
 - type: entity
   parent: BaseDemon
