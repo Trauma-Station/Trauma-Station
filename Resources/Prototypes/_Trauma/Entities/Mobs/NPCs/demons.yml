@@ -944,6 +944,41 @@
 
 - type: entity
   parent: BaseDemon
+  id: MajorDemonButcher
+  name: butcher
+  description: The butchers march through hell, like a plague of locusts, cutting and consuming all in their path.
+  components:
+  - type: SlasherIncorporeal
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 25
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 4
+            max: 6
+  - type: ActionGrant
+    actions:
+    - ActionDemonRift
+
+- type: entity
+  parent: BaseDemon
   id: MajorDemonGhost
   name: Spectre
   description: Torn from their bodies, they seek to warm their hands on the warm flesh of the living.

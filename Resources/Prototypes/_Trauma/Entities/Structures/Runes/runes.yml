@@ -203,6 +203,7 @@
     - MajorDemonHanged
     - MajorDemonHiver
     - MajorDemonSteamer
+    - MajorDemonButcher
 
 - type: entity
   parent: BaseCarvedRune
