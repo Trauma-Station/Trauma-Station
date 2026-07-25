@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.NanoChat;
+// </Trauma>
 using Content.Shared.Access.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -9,7 +12,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using System.Text;
-using Content.Trauma.Common.NanoChat;
+using Robust.Shared.Audio;
 
 namespace Content.Shared.CartridgeLoader.Cartridges;
 

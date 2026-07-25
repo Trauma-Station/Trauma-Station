@@ -779,7 +779,9 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         if (playSound && TryComp<CartridgeAmmoComponent>(entity, out var cartridge))
         {
-            Audio.PlayPredicted(cartridge.EjectSound, entity, user, AudioParams.Default.WithVariation(SharedContentAudioSystem.DefaultVariation).WithVolume(-1f));
+            var audioParams = cartridge.EjectSound?.Params ?? AudioParams.Default;
+            audioParams = audioParams.AddVolume(-1f).WithVariation(SharedContentAudioSystem.DefaultVariation);
+            Audio.PlayPredictd(cartridge.EjectSound, entity, user, audioParams);
         }
     }
 
@@ -973,12 +975,16 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             if (type != null && rangedSound.SoundTypes?.TryGetValue(type, out var damageSoundType) == true)
             {
-                Audio.PlayLocal(damageSoundType, otherEntity, null, AudioParams.Default.WithVariation(MeleeSoundSystem.DamagePitchVariation));
+                var damageSoundTypeParams = damageSoundType?.Params ?? AudioParams.Default;
+                damageSoundTypeParams = damageSoundTypeParams.WithVariation(DamagePitchVariation);
+                Audio.PlayLocal(damageSoundType, otherEntity, null, damageSoundTypeParams);
                 return;
             }
             if (type != null && rangedSound.SoundGroups?.TryGetValue(type, out var damageSoundGroup) == true)
             {
-                Audio.PlayLocal(damageSoundGroup, otherEntity, null, AudioParams.Default.WithVariation(MeleeSoundSystem.DamagePitchVariation));
+                var damageSoundGroupParams = damageSoundGroup?.Params ?? AudioParams.Default;
+                damageSoundGroupParams = damageSoundGroupParams.WithVariation(DamagePitchVariation);
+                Audio.PlayLocal(damageSoundGroup, otherEntity, null, damageSoundGroupParams);
                 return;
             }
         }
