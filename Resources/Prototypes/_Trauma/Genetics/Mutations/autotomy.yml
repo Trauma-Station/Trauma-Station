@@ -17,11 +17,12 @@
   name: Drop a limb
   description: Concentrate to make a random limb pop right off your body.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: autotomy
   - type: Action
     useDelay: 10
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: autotomy
     itemIconStyle: BigAction
   - type: InstantAction
     event: !type:EffectInstantActionEvent

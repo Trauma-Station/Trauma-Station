@@ -6,12 +6,13 @@
   name: Cockatrice's power
   description: The Cockatrice's egg has given you the power to turn people into stone statues!
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/ranching.rsi
+    layers:
+    - state: cockatrice
   - type: Action
     raiseOnAction: true
     useDelay: 10
-    icon:
-      sprite: _Trauma/Actions/ranching.rsi
-      state: cockatrice
   - type: TargetAction
     interactOnMiss: false
     range: 4
@@ -35,11 +36,12 @@
   name: Zappy's power
   description: The Zappy's egg has given you the power to summon clouds of thunder!
   components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Ranch/chicken-zappy.rsi
+    layers:
+    - state: rooster
   - type: Action
     useDelay: 10
-    icon:
-      sprite: _Trauma/Mobs/Ranch/chicken-zappy.rsi
-      state: rooster
     itemIconStyle: BigAction
     raiseOnAction: true
   - type: InstantAction
@@ -58,16 +60,14 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Wizard/actions.rsi
-    state: fireball
+    layers:
+    - state: fireball
   - type: Action
     useDelay: 10
     itemIconStyle: BigAction
     raiseOnUser: true
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: fireball
   - type: TargetAction
     range: 60
     checkCanAccess: false
