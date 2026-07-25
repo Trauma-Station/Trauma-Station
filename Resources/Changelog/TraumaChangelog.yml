@@ -12023,3 +12023,10 @@ Entries:
   id: 1317
   time: '2026-07-24T20:40:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3703
+- author: EN Wizards Den Lizard NA West
+  changes:
+  - type: Remove
+    message: Removed bioweapon reinforcement
+  id: 1318
+  time: '2026-07-25T05:19:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3700
