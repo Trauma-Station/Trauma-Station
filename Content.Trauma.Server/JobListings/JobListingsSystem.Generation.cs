@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Actions;
 using Content.Trauma.Shared.JobListings;
 
 namespace Content.Trauma.Server.JobListings;
 
 /// <summary>
-/// System that manages the the generation of sidejobs by subscribing to the <see cref=SideJobCreatedEvent/>.
+/// System that manages the generation of sidejobs by subscribing to the <see cref=SideJobCreatedEvent/>.
 /// </summary>
 public sealed partial class JobListingsSystem
 {
