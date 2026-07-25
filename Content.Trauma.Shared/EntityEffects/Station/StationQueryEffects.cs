@@ -15,7 +15,8 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
     /// Name of the component to query.
     /// </summary>
     [DataField(required: true)]
-    public CompName CompName;
+    public string CompName = string.Empty;
+    // TODO: use CompName if SpawnPoint is moved to shared...
 
     /// <summary>
     /// The effects to apply to each entity.
@@ -39,7 +40,7 @@ public sealed partial class StationQueryEffectsSystem : EntityEffectSystem<Stati
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationQueryEffects> args)
     {
         var e = args.Effect;
-        var type = Factory.GetRegistration(e.CompName.Name).Type;
+        var type = Factory.GetRegistration(e.CompName).Type;
         var effects = e.Effects;
 
         var station = ent.Owner;
