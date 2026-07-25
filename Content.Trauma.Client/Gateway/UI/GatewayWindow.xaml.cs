@@ -23,6 +23,7 @@ public sealed partial class GatewayWindow : FancyWindow,
     public EntityUid Owner;
 
     private NetEntity? _current;
+    private TimeSpan _nextReady;
 
     public GatewayWindow()
     {
@@ -133,6 +134,8 @@ public sealed partial class GatewayWindow : FancyWindow,
         if (!_ent.TryGetComponent<GatewayComponent>(Owner, out var comp))
             return;
 
+        _nextReady = comp.NextReady;
+
         // if its not going to close then show it as empty
         if (_current == null)
         {
@@ -150,7 +153,7 @@ public sealed partial class GatewayWindow : FancyWindow,
         else
         {
             var cooldown = comp.Cooldown;
-            var remaining = comp.NextReady - now;
+            var remaining = _nextReady - now;
             NextReadyBar.Value = 1f - (float) (remaining.TotalSeconds / cooldown.TotalSeconds);
             NextCloseText.Text = $"{remaining.Minutes:00}:{remaining.Seconds:00}";
         }

@@ -5,7 +5,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Destructible.Thresholds.Behaviors;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -57,6 +57,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                 executions = stack.Count;
             }
 
+            var stackName = system.EntityManager.ComponentFactory.CompName<StackComponent>(); // Trauma
             foreach (var (entityId, minMax) in Spawn)
             {
                 for (var execution = 0; execution < executions; execution++)
@@ -80,7 +81,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                             system.EntityManager.System<SpawnOnDespawnSystem>().SetPrototype((spawner, spawnOnDespawn), entityId);
                         }
                     }
-                    else if (EntityPrototypeHelpers.HasComponent<StackComponent>(entityId, system.PrototypeManager, system.EntityManager.ComponentFactory))
+                    else if (system.PrototypeManager.Index(entityId).HasComp(stackName)) // Trauma - use stackName
                     {
                         var spawned = SpawnInContainer
                             ? system.EntityManager.SpawnNextToOrDrop(entityId, owner)

@@ -7,7 +7,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Glue;
 using Content.Shared.Lube;
 using Content.Shared.Nutrition;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Rejuvenate;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffect;

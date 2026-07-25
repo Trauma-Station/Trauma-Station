@@ -24,7 +24,7 @@ public sealed partial class RelayNearby : EntityEffectBase<RelayNearby>
     /// You don't need to include this in <see cref="Whitelist"/>.
     /// </summary>
     [DataField(required: true)]
-    public string CompName = string.Empty;
+    public CompName CompName;
 
     /// <summary>
     /// Cached type for the component.
@@ -74,7 +74,7 @@ public sealed partial class RelayNearbyEffectSystem : EntityEffectSystem<Transfo
         var effect = args.Effect;
         if (effect.Comp == null)
         {
-            var reg = Factory.GetRegistration(effect.CompName);
+            var reg = Factory.GetRegistration(effect.CompName.Name);
             effect.Comp = reg.Type;
         }
         var type = effect.Comp;
