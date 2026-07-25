@@ -25,8 +25,6 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private PricingSystem _pricing = default!;
     //[Dependency] private SharedMapSystem _map = default!; // Trauma - no longer used
 
-    private const float DamagePitchVariation = 0.05f;
-
     public override void Initialize()
     {
         base.Initialize();

@@ -781,7 +781,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             var audioParams = cartridge.EjectSound?.Params ?? AudioParams.Default;
             audioParams = audioParams.AddVolume(-1f).WithVariation(SharedContentAudioSystem.DefaultVariation);
-            Audio.PlayPredictd(cartridge.EjectSound, entity, user, audioParams);
+            Audio.PlayPredicted(cartridge.EjectSound, entity, user, audioParams);
         }
     }
 
