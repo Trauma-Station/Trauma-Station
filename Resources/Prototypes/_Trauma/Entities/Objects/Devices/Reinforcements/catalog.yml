@@ -192,9 +192,9 @@
     Spesos: 15000
   categories:
   - Bioweapons
-  restockTime: 1800
+  restockTime: 2700
   resetRestockOnPurchase: true
-  restockAfterPurchase: 1800
+  restockAfterPurchase: 2700
 
 # Medical
 
