@@ -1,18 +1,10 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.FixedPoint;
-using Content.Medical.Common.Surgery.Tools;
 using Content.Medical.Common.Traumas;
 using Robust.Shared.Audio;
 
-namespace Content.Medical.Common.Body;
+namespace Content.Shared.Body;
 
-/// <summary>
-/// Organ component specifically for internal organs, e.g. lungs, heart.
-/// </summary>
-[RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState(fieldDeltas: true)]
-public sealed partial class InternalOrganComponent : BaseSurgeryToolComponent
+public sealed partial class InternalChildOrganComponent
 {
     public override string ToolName => "An organ";
 

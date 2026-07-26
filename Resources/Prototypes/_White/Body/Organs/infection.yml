@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ OrganBaseInternal ]
+  parent: [ OrganBaseChildInternal ]
   id: XenomorphInfection
   name: xenomorph larva embryo
   description: A parasitic life form in its early stages of development. It has a worm-like body shape, underdeveloped limbs, and a tail appendage.

@@ -41,7 +41,7 @@ public abstract partial class SharedCPRSystem : EntitySystem
     [Dependency] private EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
     [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
-    [Dependency] private EntityQuery<InternalOrganComponent> _organQuery = default!;
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _organQuery = default!;
     [Dependency] private EntityQuery<RottingComponent> _rottingQuery = default!;
     [Dependency] private EntityQuery<UnrevivableComponent> _unrevivableQuery = default!;
 

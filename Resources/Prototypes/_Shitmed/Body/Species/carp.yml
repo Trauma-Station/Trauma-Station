@@ -72,7 +72,7 @@
   id: OrganCarpLungs
   name: space animal lungs
   components:
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 28
     integrity: 28
     integrityThresholds:
@@ -88,7 +88,7 @@
   id: OrganCarpHeart
   name: space animal heart
   components:
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 21
     integrity: 21
     integrityThresholds:
