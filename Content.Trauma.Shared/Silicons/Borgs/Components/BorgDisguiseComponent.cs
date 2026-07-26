@@ -15,6 +15,7 @@ public sealed partial class BorgDisguiseComponent : Component
     /// so it can be restored when the disguise is toggled off. Display-only. Does not
     /// affect actual access checks.
     /// </summary>
+    [DataField]
     [ViewVariables]
     public List<HashSet<ProtoId<AccessLevelPrototype>>>? RealAccessListsOriginal;
 
@@ -22,12 +23,9 @@ public sealed partial class BorgDisguiseComponent : Component
     /// The entity needed to actually disguise. This will be granted (and removed) upon the entity's creation.
     /// </summary>
     [DataField(required: true)]
-    [ViewVariables(VVAccess.ReadWrite)]
-    [AutoNetworkedField]
     public EntProtoId Action;
 
-    [DataField]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
 
     /// <summary>

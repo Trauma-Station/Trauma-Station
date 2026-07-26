@@ -23,11 +23,9 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
 
         _chassisName = Factory.CompName<BorgChassisComponent>();
         _lightName = Factory.CompName<PointLightComponent>();
-
-        SubscribeLocalEvent<BorgDisguiseComponent, AfterAutoHandleStateEvent>(OnStateUpdate);
-        SubscribeLocalEvent<BorgDisguiseComponent, AppearanceChangeEvent>(OnBorgAppearanceChanged);
     }
 
+    [SubscribeLocalEvent]
     private void OnStateUpdate(Entity<BorgDisguiseComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         UpdateAppearance(ent);
@@ -36,6 +34,7 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
     /// <summary>
     /// Handles updates to the appearance of the entity.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnBorgAppearanceChanged(Entity<BorgDisguiseComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
