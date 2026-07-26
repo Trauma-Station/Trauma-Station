@@ -51,7 +51,6 @@ public sealed partial class StarGazeSystem : EntitySystem
         SubscribeLocalEvent<StarGazeComponent, BeforeContinuousBeamDamagedEvent>(OnBeforeDamage, after: [typeof(GhoulSystem)]);
     }
 
-    [SubscribeLocalEvent]
     private void OnBeforeDamage(Entity<StarGazeComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
     {
         if (args.Cancelled || !_mobState.IsIncapacitated(args.Target))
