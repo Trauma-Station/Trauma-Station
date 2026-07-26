@@ -29,6 +29,11 @@
   id: LivingHeart
   ritualPrototypes:
   - RitualLivingHeart
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SimpleWaypointer
+      waypointerProtoIds:
+        HereticSacrificeTargetsWaypointer: true
   actionPrototypes:
   - ActionHereticLivingHeart
 

@@ -44,17 +44,17 @@ public sealed partial class StarGazeSystem : EntitySystem
 
     private readonly HashSet<Entity<PhysicsComponent>> _pullTargets = new();
 
-    [SubscribeLocalEvent]
-    private void BeforeDamage(Entity<StarGazeComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
+    public override void Initialize()
     {
-        var minion = _minionQuery.CompOrNull(ent);
-        if (args.Target == minion?.BoundHeretic)
-        {
-            args.Cancelled = true;
-            return;
-        }
+        base.Initialize();
 
-        if (!_mobState.IsIncapacitated(args.Target))
+        SubscribeLocalEvent<StarGazeComponent, BeforeContinuousBeamDamagedEvent>(OnBeforeDamage, after: [typeof(GhoulSystem)]);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBeforeDamage(Entity<StarGazeComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
+    {
+        if (args.Cancelled || !_mobState.IsIncapacitated(args.Target))
             return;
 
         var coords = Transform(args.Target).Coordinates;

@@ -537,7 +537,7 @@
   components:
   - type: Ghoul
     spawnOnDeathPrototype: Ash
-    totalHealth: 100
+    totalHealth: 75
     ghostRoleName: ghostrole-ash-spirit-name
     ghostRoleDesc: ghostrole-ash-spirit-desc
   - type: GhostRole
@@ -557,8 +557,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      125: Critical
-      150: Dead
+      90: Critical
+      100: Dead
   - type: IgniteOnMeleeHit
     fireStacks: 3
   - type: MeleeWeapon

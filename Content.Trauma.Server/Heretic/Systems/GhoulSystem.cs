@@ -51,6 +51,7 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -98,6 +99,13 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
         SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(InitialBodySystem)]);
         SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBeforeBeamDamaged(Entity<HereticMinionComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
+    {
+        if (ent.Comp.BoundHeretic == args.Target)
+            args.Cancelled = true;
     }
 
     [SubscribeLocalEvent]

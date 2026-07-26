@@ -51,3 +51,14 @@
   color: Red
   maxRange: 50
   radialMenuIconPath: Markers/Waypointers/rift_waypointer.rsi
+
+- type: waypointer
+  parent: BaseWaypointer
+  id: HereticSacrificeTargetsWaypointer
+  name: Living Heart Waypointer
+  trackedComponents:
+  - type: HereticSacrificeTarget
+  workOnGrid: true
+  worksInCombat: true
+  color: Orange
+  radialMenuIconPath: Markers/Waypointers/rift_waypointer.rsi
