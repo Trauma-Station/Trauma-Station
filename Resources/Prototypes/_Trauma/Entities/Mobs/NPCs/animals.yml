@@ -1239,5 +1239,3 @@
     lifetime: 1
   - type: SpawnOnDespawn
     prototype: MobGiantSpiderAngry
-
-
