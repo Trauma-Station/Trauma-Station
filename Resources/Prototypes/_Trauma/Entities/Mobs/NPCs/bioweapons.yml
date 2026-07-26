@@ -128,3 +128,137 @@
     rootTask:
       task: IdleCompound
   - type: Climbing
+
+- type: entity
+  parent: [ AppearanceBioweapon, BaseMobAnimal, SimpleMobBase ]
+  id: batonioweapon
+  description: A bioweapon supplied to security by one of Nanotrasens many human genetic experimentation subsidiaries. It follow the orders of whoever has it's translator.
+  name: PX-31 "Compliance Unit"
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4
+    baseSprintSpeed: 5
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/batonioweapon.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: alive
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Dead
+  - type: PassiveDamage
+    allowedStates:
+      - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -.25
+        Slash: -.25
+        Piercing: -.25
+        Ballistic: -.25
+  - type: MeleeWeapon
+    range: 1.5
+    attackRate: 0.33
+    soundHit:
+      path: /Audio/Effects/metal_thud1.ogg
+    damage:
+      types:
+        blunt: 15
+    animation: WeaponArcSlash
+    altDisarm: false
+    canWideSwing: true
+  - type: StaminaDamageOnHit
+    lightAttackDamageMultiplier: 4
+    damage: 15
+    overtime: 40
+  - type: StaticPrice
+    price: 750
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 200
+      - ReagentId: Desoxyephedrine
+        Quantity: 100
+    bleedReductionAmount: 30
+  - type: Prying
+    speedModifier: 3
+    pryPowered: true
+    useSound: /Audio/Machines/airlock_creaking.ogg
+  - type: LanguageSpeaker
+    speaks:
+    - Miltech
+    understands:
+    - Miltech
+  - type: Stamina
+    baseCritThreshold: 9999
+  - type: FlashImmunity
+  - type: GhostRole
+    name: ghost-role-information-bioweapon-name
+    description: ghost-role-information-bioweapon-desc
+    rules: ghost-role-information-bioweapon-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable
+  - type: NoSlip
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 120
+    canCreateVacuum: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:TriggerBehavior
+  - type: TimerTrigger
+    keysIn:
+    - trigger
+    delay: 5
+    initialBeepDelay: 0
+    beepSound: /Audio/Machines/Nuke/general_beep.ogg
+  - type: ExplodeOnTrigger
+    keysIn:
+    - timer
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      400: 1
+  - type: Targeting
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Puller
+    needsHands: false
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: Climbing
