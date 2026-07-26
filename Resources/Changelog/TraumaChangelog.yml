@@ -12062,3 +12062,14 @@ Entries:
   id: 1322
   time: '2026-07-26T11:31:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3688
+- author: TraumaTised
+  changes:
+  - type: Add
+    message: 'Added new major demon: THE BUTCHER!'
+  - type: Add
+    message: 'Added new minor demon: The lesser centifiend!'
+  - type: Tweak
+    message: Minor demon tweaks
+  id: 1323
+  time: '2026-07-26T16:09:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3719
