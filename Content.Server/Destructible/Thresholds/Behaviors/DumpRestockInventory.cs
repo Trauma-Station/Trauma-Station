@@ -2,7 +2,7 @@ using Robust.Shared.Random;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Shared.Stacks;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma -d ie
 using Content.Shared.VendingMachines;
 
 namespace Content.Server.Destructible.Thresholds.Behaviors
@@ -36,13 +36,14 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
             if (!system.PrototypeManager.TryIndex(randomInventory, out VendingMachineInventoryPrototype? packPrototype))
                 return;
 
+            var stackName = system.EntityManager.ComponentFactory.CompName<StackComponent>(); // Trauma
             foreach (var (entityId, count) in packPrototype.StartingInventory)
             {
                 var toSpawn = (int) Math.Round(count * Percent);
 
                 if (toSpawn == 0) continue;
 
-                if (EntityPrototypeHelpers.HasComponent<StackComponent>(entityId, system.PrototypeManager, system.EntityManager.ComponentFactory))
+                if (system.PrototypeManager.Index(entityId).HasComp(stackName)) // Trauma - use stackName
                 {
                     var spawned = system.EntityManager.SpawnEntity(entityId, xform.Coordinates.Offset(system.Random.NextVector2(-Offset, Offset)));
                     system.StackSystem.SetCount((spawned, null), toSpawn);

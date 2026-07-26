@@ -20,9 +20,9 @@
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: mumble
+  - type: ReplacementAccent
+    accent: mumble
+    relayAccent: true
   - type: FaceHugger
     blacklist:
       components:

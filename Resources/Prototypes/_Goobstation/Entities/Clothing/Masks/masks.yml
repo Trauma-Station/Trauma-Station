@@ -108,8 +108,8 @@
     equipDelay: 3
     unequipDelay: 10
   - type: IngestionBlocker
-  - type: AddAccentClothing
-    accent: MumbleAccent
+  - type: MumbleAccent
+    relayAccent: true
   - type: Tag
     tags:
     - Muzzle

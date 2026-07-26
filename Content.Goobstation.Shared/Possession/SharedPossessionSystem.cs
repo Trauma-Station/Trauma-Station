@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Actions;
+using Content.Shared.Bible.Components;
 using Content.Shared.Examine;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;

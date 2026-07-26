@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
@@ -23,7 +22,7 @@ public abstract partial class SharedMindSystem
 
         foreach (var obj in mind.Comp.Objectives)
         {
-            QueueDel(obj);
+            PredictedQueueDel(obj);
         }
         mind.Comp.Objectives.Clear();
         Dirty(mind, mind.Comp);
@@ -33,9 +32,9 @@ public abstract partial class SharedMindSystem
     {
         var speaker = EnsureComp<LanguageSpeakerComponent>(uid);
 
-        // If the entity already speaks some language at basic level (like monkey or robot), we do nothing else.
+        // If the entity already speaks some language (like monkey or robot), we do nothing else.
         // Otherwise, we give them the fallback language
-        if (speaker.Speaks.Count > 0 && speaker.Speaks.Any(x => _knowledge.GetKnowledge(uid, _knowledge.LanguageUnit(x))?.Comp.LearnedLevel is > 25))
+        if (speaker.Speaks.Count > 0)
             return;
 
         _language.AddLanguage(uid, CommonLanguageSystem.FallbackLanguagePrototype);

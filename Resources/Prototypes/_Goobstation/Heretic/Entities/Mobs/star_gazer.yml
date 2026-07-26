@@ -110,7 +110,7 @@
   - type: StarGazer
   - type: WarpPoint
     follow: true
-    location: star gazer
+    location: location-star-gazer
   - type: SupermatterImmune
   - type: EventHorizonIgnore
   - type: SpacetimeSpellbladeEnchantment # It's not a spellblade, trust
