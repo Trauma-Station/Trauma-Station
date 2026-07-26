@@ -530,7 +530,7 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
     private void CheckRoundShouldEnd(bool announce = true) // Goobstation
     {
-        var rules = new List<(EntityUid, NukeopsRuleComponent)>(); // Trauma
+        var rules = new List<Entity<NukeopsRuleComponent>>(); // Trauma
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var nukeops, out _))
         {

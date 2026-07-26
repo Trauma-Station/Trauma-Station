@@ -1,9 +1,9 @@
 // <Trauma>
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 // </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.Whitelist;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -44,7 +44,7 @@ public sealed partial class DamageContactsSystem : EntitySystem
             damaged.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
 
             if (damaged.Damage != null)
-            // <Trauma>
+            // <Trauma> - play clientside sound
             {
                 _damageable.TryChangeDamage(ent, damaged.Damage, interruptsDoAfters: false);
 

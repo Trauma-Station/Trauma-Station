@@ -26,8 +26,11 @@ public record struct HereticBladeBreakFailOverrideEvent(EntityUid User, bool Sho
 [ByRefEvent]
 public readonly record struct UserInvokeTouchSpellEvent;
 
-[Serializable, NetSerializable]
-public sealed partial class HereticAscendedEvent : EntityEventArgs;
+/// <summary>
+/// Broadcasted when a heretic ascends.
+/// </summary>
+[ByRefEvent, Serializable, NetSerializable]
+public record struct HereticAscendedEvent;
 
 [DataDefinition]
 public sealed partial class EventHereticAscension : EntityEventArgs;

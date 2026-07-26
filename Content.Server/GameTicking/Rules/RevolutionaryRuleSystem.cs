@@ -51,6 +51,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
     // <Trauma>
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
+    private static readonly EntProtoId ErtSecurity = "SpawnERTSecurity";
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
@@ -110,8 +111,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
                     component.HasRevAnnouncementPlayed = true;
 
                     // <Trauma>
-                    var ert = "SpawnERTSecurity";
-                    _ticker.StartGameRule(ert);
+                    _ticker.StartGameRule(ErtSecurity);
                     _roundEnd.RequestRoundEnd(TimeSpan.FromMinutes(10), cantRecall: true);
                     // </Trauma>
                 }

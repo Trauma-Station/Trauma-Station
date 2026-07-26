@@ -8,7 +8,8 @@ public sealed partial class NewAntagOrEvacComponent : Component
     /// <summary>
     /// How many alive players there were when this game-rule started.
     /// </summary>
-    public int PlayersOnstart;
+    [DataField]
+    public int PlayersOnStart;
 
     /// <summary>
     /// The percent required for a new antag to be spawned.

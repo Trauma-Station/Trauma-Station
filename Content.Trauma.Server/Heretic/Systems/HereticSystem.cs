@@ -493,8 +493,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (!_hasAHereticAscended)
         {
             var ascendEv = new HereticAscendedEvent();
-            RaiseNetworkEvent(ascendEv);
-            RaiseLocalEvent(ascendEv);
+            RaiseLocalEvent(ref ascendEv);
         }
 
         ent.Comp.Ascended = true;

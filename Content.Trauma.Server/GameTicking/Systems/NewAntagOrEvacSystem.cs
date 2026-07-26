@@ -19,19 +19,19 @@ public sealed partial class NewAntagOrEvacSystem : CommonNewAntagOrEvacSystem
     {
         if (!TryComp<NewAntagOrEvacComponent>(uid, out var comp))
         {
-            Log.Error("Tried to SpawnNewAntagIfBelowPercent on entity: " + uid + " but it didn't have NewAntagOrEvacComponent");
+            Log.Error($"Tried to SpawnNewAntagIfBelowPercent on entity: {uid} but it didn't have NewAntagOrEvacComponent");
             return;
         }
 
-        if ((float)_target.GetAliveHumans().Count / comp.PlayersOnstart >= comp.Percent)
+        if ((float)_target.GetAliveHumans().Count / comp.PlayersOnStart >= comp.Percent)
             _ticker.StartGameRule(comp.Event);
-        else if(endIfUnderPercent)
+        else if (endIfUnderPercent)
             _roundEndSystem.RequestRoundEnd(countdownTime: countDownTime, cantRecall: cantRecall);
     }
 
     [SubscribeLocalEvent]
     private void OnGameRuleStarted(Entity<NewAntagOrEvacComponent> ent, ref GameRuleStartedEvent args)
     {
-        ent.Comp.PlayersOnstart = _target.GetAliveHumans().Count;
+        ent.Comp.PlayersOnStart = _target.GetAliveHumans().Count;
     }
 }
