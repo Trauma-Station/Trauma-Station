@@ -149,9 +149,6 @@
         Base: alive
       Dead:
         Base: alive
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepThud
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -191,7 +188,6 @@
     altDisarm: false
     canWideSwing: true
   - type: StaminaDamageOnHit
-    lightAttackDamageMultiplier: 4
     damage: 15
     overtime: 40
   - type: StaticPrice
@@ -226,28 +222,6 @@
       settings: short
   - type: GhostTakeoverAvailable
   - type: NoSlip
-  - type: Explosive
-    explosionType: Default
-    maxIntensity: 10
-    intensitySlope: 3
-    totalIntensity: 120
-    canCreateVacuum: false
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 400
-      behaviors:
-      - !type:TriggerBehavior
-  - type: TimerTrigger
-    keysIn:
-    - trigger
-    delay: 5
-    initialBeepDelay: 0
-    beepSound: /Audio/Machines/Nuke/general_beep.ogg
-  - type: ExplodeOnTrigger
-    keysIn:
-    - timer
   - type: SlowOnDamage
     speedModifierThresholds:
       400: 1
