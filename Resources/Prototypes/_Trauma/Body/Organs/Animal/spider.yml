@@ -1,0 +1,21 @@
+- type: entity
+  id: OrganBloodsuckerStomachFast
+  parent: [ OrganBloodsucker, OrganAnimalStomach ]
+  components:
+  - type: Metabolizer
+    updateInterval: 0.1
+
+- type: entity
+  id: BaseMobGiantSpider
+  abstract: true
+  components:
+  - type: BodyCache
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganAnimalTorso
+      Lungs: OrganAnimalLungs
+      Heart: OrganArachnidHeart
+      Stomach: OrganBloodsuckerStomachFast
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
