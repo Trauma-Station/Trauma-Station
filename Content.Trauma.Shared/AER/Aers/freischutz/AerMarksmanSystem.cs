@@ -6,16 +6,12 @@ using Content.Shared.Popups;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Actions;
-using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Contract;
-using Content.Trauma.Shared.AER;
 
-
-
-namespace Content.Trauma.Server.AER;
+namespace Content.Trauma.Shared.AER;
 
 /// <summary>
-/// system for Aer-169, lets them summon a restricted devil contract
+/// system for Aer-1821, lets them summon a restricted devil contract
 /// TO DO: add id gear and research event for spawning player version of Magic Bullet
 /// </summary>
 public sealed partial class AerMarksmanSystem : EntitySystem

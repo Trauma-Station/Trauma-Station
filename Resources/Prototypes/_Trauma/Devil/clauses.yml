@@ -2,6 +2,18 @@
 
 - type: clause
   id: lackofrifle
+  clauseWeight: -25
+  spawnedItems:
+  - GunForSoul
+
+- type: clause
+  id: lackofgunpowder
   clauseWeight: -30
   spawnedItems:
-  - WeaponSniperMosin
+  - GunpowderBottleFull
+
+- type: clause
+  id: lackofpipe
+  clauseWeight: -5
+  spawnedItems:
+  - PipeCase

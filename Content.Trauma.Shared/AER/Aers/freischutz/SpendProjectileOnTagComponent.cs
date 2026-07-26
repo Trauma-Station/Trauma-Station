@@ -5,6 +5,7 @@ using Content.Shared.Tag;
 namespace Content.Trauma.Shared.AER;
 
 [RegisterComponent]
+//component for spending projectile on hitting targets with the corresponding tag
 public sealed partial class SpendProjectileOnTagComponent : Component
 {
     [DataField]

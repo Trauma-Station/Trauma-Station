@@ -9,7 +9,10 @@ using Content.Shared.Damage.Systems;
 
 namespace Content.Trauma.Shared.AER;
 
-// i dont know if putting it in predicted projectile will get me crucified so i placed this behaviour here in a separate system
+/// <summary>
+/// system for expending projectiles on hitting a wall
+/// i dont know if putting it in predicted projectile will get me crucified so i placed this behaviour here in a separate system
+/// </summary>
 public sealed partial class SpendProjectileOnTagSystem : EntitySystem
 {
     [Dependency] private TagSystem _tag = default!;

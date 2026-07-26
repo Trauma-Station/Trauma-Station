@@ -294,11 +294,11 @@
     sound:
       collection: RiflesDrop
 
-# bullet shot by the Freischütz rifle needs something to make it not capable of wall-banging
+# bullet shot by the Freischütz rifle
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBulletKinetic
-  id: BulletIdMagicBullet
+  id: BulletAerMagicBullet
   name: bullet devilish
   components:
   - type: Sprite
@@ -308,13 +308,27 @@
   - type: Projectile
     damage:
       types:
-        Ion: 40
-        Asphyxiation: 40
+        Ion: 80
+        Asphyxiation: 80
         Structural: 120
     penetrationThreshold: 2500
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectOmnilaser
   - type: SpendProjectileOnTag
+
+# I.D. Gear version of Freischütz rifle bullets
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletAerMagicBullet
+  id: BulletIdMagicBullet
+  name: bullet devilish
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ion: 40
+        Asphyxiation: 40
+        Structural: 60
 
 # Aer Version of the rifle shoot at double the fire rat and has a more robust buttstock whack
 # TO DO add pen functionality to the rifle?
@@ -335,7 +349,7 @@
     damage:
       types:
        Blunt: 12
-       Structural: 12
+       Structural: 50
   - type: IgniteOnMeleeHit
     fireStacks: 1
 
@@ -355,6 +369,74 @@
     clauseBlacklist:
     - soulownership
     - brokeness
+
+#spawner for lack of rifle devil clause
+- type: entity
+  parent: MarkerBase
+  id: GunForSoul
+  name: guns from the devil
+  components:
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+    state: contract-written
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: GunForSoulTable
+
+#table for lack of rifle devil clause
+- type: entityTable
+  id: GunForSoulTable
+  table: !type:GroupSelector
+    children:
+    #weak guns
+    - id: WeaponSniperMosin
+      weight: 25 #25/100
+    - id: WeaponShotgunDoubleBarreled
+      weight: 25 #25/100 
+    #normal sec buyable guns
+    - id: WeaponSubMachineGunWt550 #12/100
+      weight: 12
+    - id: WeaponShotgunEnforcer #12/100
+      weight: 12
+    - id: WeaponRifleLecter #12/100
+      weight: 12
+    #evil rev smg
+    - id: WeaponSMGResistance
+      weight: 8 #8/100
+    - id: WeaponShotgunKammerer
+      weight: 3 #3/100
+    - id: WeaponRifleAk
+      weight: 3 #3/100
+
+#pipe case for lack of pipe devil deal, resized medal case with pipe and engraved flippo and tobacco
+- type: entity
+  id: PipeCase
+  parent: [ BaseStorageItem, BaseBagOpenClose ]
+  name: pipe case
+  description: A case for holding your pipe and tobacco when you are not smoking.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/medalcase.rsi
+    layers:
+    - state: closed
+      map: ["closeLayer"]
+    - state: open
+      map: ["openLayer"]
+  - type: Appearance
+  - type: Item
+    sprite: Objects/Storage/medalcase.rsi
+    size: Normal
+  - type: Storage
+    grid:
+    - 0,0,1,1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SmokingPipeFilledTobacco
+        - id: FlippoEngravedLighter
+        - id: GroundTobacco
+          amount: 2
 
 # action for summoning 1821 contracts
 - type: entity
