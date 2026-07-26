@@ -141,8 +141,8 @@
       types:
         Slash: 5
     animation: WeaponArcFist
-    altDisarm: false
-    canWideSwing: true
+    altDisarm: true
+    canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -164,9 +164,9 @@
     generated:
       reagents:
       - ReagentId: Honk
-        Quantity: 3
+        Quantity: 7
   - type: MeleeChemicalInjector
-    transferAmount: 3
+    transferAmount: 7
     solution: melee
 
 - type: entity
@@ -183,7 +183,9 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 10
+        Blunt: 5
+        Slash: 5
+    animation: WeaponArcBite
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -215,6 +217,7 @@
     damage:
       types:
         Blunt: 5
+    animation: WeaponArcFist
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -236,7 +239,9 @@
   - type: Hands
     activeHandId: Hand
     hands:
-      Hand:
+       hand_right:
+        location: Right
+       hand_left:
         location: Left
   - type: ComplexInteraction
 
@@ -385,7 +390,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 5
+        Slash: 5
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -957,7 +962,7 @@
   parent: BaseDemon
   id: MajorDemonButcher
   name: butcher
-  description: The butchers march through hell, like a plague of locusts, cutting and consuming all in their path.
+  description: The butchers march through hell, like a plague of locusts, flaying and consuming all in their path.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
