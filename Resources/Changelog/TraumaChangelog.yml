@@ -11040,3 +11040,70 @@ Entries:
   id: 1233
   time: '2026-07-21T16:03:26.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/84
+- author: sempervali
+  changes:
+  - type: Add
+    message: >-
+      Additional, Alternative ERT Leader loadout with a rifle instead of a
+      shotgun, separate bag fill with spare mags.
+  - type: Add
+    message: Formal now starts with a gas mask and carapace.
+  - type: Add
+    message: >-
+      CC Insider Agent admeme! Gloves to match, signature stolen syndie tech.
+      Also comes with a skillchip.
+  - type: Tweak
+    message: >-
+      CC Formal and ERT leader now start with the CentComm Shades, but no
+      thermal vision.
+  - type: Tweak
+    message: >-
+      Fill contents for ERT Leader's Chester bag have been reworked slightly,
+      including adding Jaws of Life. 
+  - type: Tweak
+    message: >-
+      Skillchips for all existing outfits befitting their role, or kept flexible
+      when needed
+  - type: Fix
+    message: (Chester) Leader's modsuit no longer thinks its for an engineer.
+  id: 1234
+  time: '2026-07-24T17:57:40.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/16
+- author: magelfik
+  changes:
+  - type: Tweak
+    message: Removed explosions from NTR documents.
+  id: 1235
+  time: '2026-07-24T18:00:12.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/87
+- author: DOPEy and ophiuchiko
+  changes:
+  - type: Tweak
+    message: >-
+      Amber - minor atmos and TEG changes, added vent/scrubber to xenobio, added
+      spare captains id to captains room
+  - type: Tweak
+    message: >-
+      Omega - Reworked TEG, botany smartfridge changed to unlocked, added
+      scrubbers/vents to xenobio
+  - type: Tweak
+    message: >-
+      Packed - Reworked Atmos/TEG, botany smartfridge changed to unlocked,
+      Medbay reworked, added vent/scrubber to xenobio
+  - type: Tweak
+    message: >-
+      Atlas - Minor change to atmos power, reworked TEG, botany smartfridge
+      changed to unlocked, removed excess windows from medbay triage
+  - type: Tweak
+    message: Box - Reworked TEG, botany smartfridge changed to unlocked
+  - type: Tweak
+    message: >-
+      Saltern - Reworked TEG, botany smartfridge changed to unlocked, added
+      genetics
+  - type: Tweak
+    message: >-
+      Cluster - Reworked atmos, added TEG, new maints bar, new maints
+      fishing/botany, maints design change, redesigned bso and ntr rooms
+  id: 1236
+  time: '2026-07-25T21:29:19.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/90
