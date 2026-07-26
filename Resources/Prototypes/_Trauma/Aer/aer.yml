@@ -393,7 +393,7 @@
     - id: WeaponSniperMosin
       weight: 25 #25/100
     - id: WeaponShotgunDoubleBarreled
-      weight: 25 #25/100 
+      weight: 25 #25/100
     #normal sec buyable guns
     - id: WeaponSubMachineGunWt550 #12/100
       weight: 12
