@@ -6,13 +6,12 @@
   - Conquest
   - GovernmentMan
   - SyndicateHighCommander # already ontag...
-  # - NanotrasenRepresentative
   - NavyCaptain
   - NavyOfficerUndercover
   - Diplomat
   - Inspector
   - HecuOperative
-  # <Trauma>
+  # </Trauma>
   - CentralCommandOfficial
   - DeathSquad
   - ERTLeader
@@ -40,7 +39,7 @@
   # - ResearchDirector
   # - ChiefEngineer
   # - Quartermaster
-  # <Trauma>
+  # </Trauma>
 
 # Borgs
 - type: antagSpecifier
