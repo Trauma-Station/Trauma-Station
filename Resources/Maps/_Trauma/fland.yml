@@ -22587,7 +22587,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -54.5,58.5
-- proto: AlwaysPoweredLightLED
+- proto: PoweredlightLED
   entities:
   - uid: 829
     components:
@@ -22595,7 +22595,7 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 91.5,-54.5
-- proto: AlwaysPoweredlightRed
+- proto: PoweredlightRed
   entities:
   - uid: 830
     components:
@@ -22625,7 +22625,7 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: -60.5,56.5
-- proto: AlwaysPoweredLightSodium
+- proto: PoweredlightSodium
   entities:
   - uid: 835
     components:
