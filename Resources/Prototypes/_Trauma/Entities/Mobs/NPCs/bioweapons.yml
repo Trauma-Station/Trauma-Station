@@ -78,7 +78,7 @@
     - Miltech
     understands:
     - Miltech
-  - type: NightVison
+  - type: NightVision
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
