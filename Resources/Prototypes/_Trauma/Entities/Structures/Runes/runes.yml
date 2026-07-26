@@ -160,7 +160,6 @@
   - type: RandomDemonSpawner
     demons:
     - MediumDemonChad
-    - MediumDemonGhost
     - MediumDemonHamlet
     - MediumDemon64Fat
     - MediumDemon64Buff
@@ -197,6 +196,7 @@
     graph: MajorSummoning
   - type: RandomDemonSpawner
     demons:
+    - MajorDemonGhost
     - MajorDemonBosche
     - MajorDemonFeverbird
     - MajorDemonHanged
