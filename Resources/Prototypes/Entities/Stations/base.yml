@@ -55,6 +55,11 @@
       path: /Maps/_Trauma/Shuttles/cargo.yml # Trauma
     - type: GridSpawn
       groups:
+        # <Trauma>
+        mining: !type:GridSpawnGroup
+          paths:
+          - /Maps/Shuttles/mining.yml
+        # <Trauma>
         trade: !type:GridSpawnGroup
           addComponents:
             - type: ProtectedGrid
