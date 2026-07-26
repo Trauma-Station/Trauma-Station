@@ -1,0 +1,10 @@
+- type: polymorph
+  id: SpiderGrowth
+  configuration:
+    entity: MobGiantSpiderAngry
+    forced: true
+    transferName: false
+    transferHumanoidAppearance: false
+    inventory: Drop
+    revertOnDeath: false
+    revertOnCrit: false

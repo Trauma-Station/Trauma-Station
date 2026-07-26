@@ -3000,7 +3000,7 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
-  name: tarantula
+  name: giant spider
   parent: MobSpiderBase
   id: MobGiantSpider
   description: Widely recognized to be the literal worst thing in existence.
@@ -3016,28 +3016,30 @@
     whitelist:
       tags:
       - Mouse
+  # - type: ShadowCocoonMaker
+  #   shadowCocoon:
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
-      state: tarantula
+      state: nurse # Trauma
       sprite: Mobs/Animals/spider.rsi
   - type: SpriteMovement
     movementLayers:
       movement:
-        state: tarantula-moving
+        state: nurse-moving # Trauma
     noMovementLayers:
       movement:
-        state: tarantula
+        state: nurse # Trauma
   - type: DamageStateVisuals
     states:
       Alive:
-        Base: tarantula
+        Base: nurse # Trauma
       Critical:
-        Base: tarantula_dead
+        Base: nurse_dead # Trauma
       Dead:
-        Base: tarantula_dead
+        Base: nurse_dead # Trauma
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
