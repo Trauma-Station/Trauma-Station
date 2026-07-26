@@ -12073,3 +12073,14 @@ Entries:
   id: 1323
   time: '2026-07-26T16:09:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3719
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Tweaked some uplink prices a bit.
+  - type: Fix
+    message: Fixed mice and stuff all speaking tau ceti basic...
+  - type: Fix
+    message: Fixed edge case bugs with circuits.
+  id: 1324
+  time: '2026-07-26T16:17:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3715
