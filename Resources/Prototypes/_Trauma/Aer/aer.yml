@@ -9,6 +9,7 @@
     researchPerSecond: 1000
     contained: false
   - type: AerMobActive
+  - type: AerShyGuy
 
 - type: entity
   parent: SoapHomemadeBanana
@@ -538,3 +539,79 @@
     researchPerSecond: 100
     researchOnBehaviour: 5000
     idGear: IdGearMagicBullet
+
+- type: entity
+  parent: [MobSpaceBasic, MobCombat, InventoryBase]
+  id: NewBaseAer
+  name: AER-123
+  description: AER-123? how queer you dont remember this one in the files
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerMarksman.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Piercing: -1
+        Slash: -1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 300
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands:
+    - hand_right
+    - hand_left
+  - type: ComplexInteraction
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: SoftCrit
+      250: Critical
+      300: Dead
+  - type: ZombieImmune
+  - type: Puller
+    needsHands: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+
+- type: entity
+  parent: [NewBaseAer]
+  id: AerShyGuy
+  name: AER-096
+  description: AER-123? how queer you dont remember this one in the files
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: AerShyGuy

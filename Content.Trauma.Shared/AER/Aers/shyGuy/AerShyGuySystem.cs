@@ -16,6 +16,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using System.Linq;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Trauma.Shared.Viewcone.Components;
+using Content.Shared.Coordinates;
 
 
 
@@ -35,7 +37,7 @@ public sealed partial class AerShyGuySystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private MobStateSystem _mobState = default!;
-
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Update(float frameTime)
     {
@@ -108,7 +110,15 @@ public sealed partial class AerShyGuySystem : EntitySystem
 
             if (_interaction.InRangeUnobstructed(other, uid, checkRange, CollisionGroup.Opaque))
             {
-                killList.Add(uid);
+                if (TryComp<ViewconeComponent>(other, out var cone))
+                {
+                    if (IsVisible((other, cone), _transform.GetWorldPosition(other), _transform.GetWorldPosition(ent.Owner)))
+                        killList.Add(other);
+                }
+                else
+                {
+                    killList.Add(other);
+                }
             }
         }
         return killList;
@@ -121,5 +131,21 @@ public sealed partial class AerShyGuySystem : EntitySystem
     private void OnMapInit(Entity<AerShyGuyComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextCheck = _timing.CurTime + ent.Comp.UpdateCooldown;
+    }
+
+    /// <summary>
+    /// stolen function from client side ViewconeOverlaySystem 
+    /// </summary>
+    public bool IsVisible(Entity<ViewconeComponent> ent, Vector2 eyePos, Vector2 pos)
+    {
+        var dist = pos - eyePos;
+        var r = ent.Comp.ConeIgnoreRadius;
+        var r2 = r * r;
+        if (dist.LengthSquared() < r2)
+            return true; // within cone ignore radius so always visible regardless of angle
+
+        var eyeRot = ent.Comp.ViewAngle;
+        var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
+        return angleDist < MathHelper.DegreesToRadians(ent.Comp.CurrentConeAngle) * 0.5f;
     }
 }
