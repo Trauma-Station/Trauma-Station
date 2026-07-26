@@ -136,8 +136,8 @@
   description: A cheaper, more refined alternative to the standard bioweapon, with less lethal fixtures and assist in suspect apprehension. It follow the orders of whoever has it's translator.
   components:
   - type: MovementSpeedModifier
-    baseWalkSpeed: 4
-    baseSprintSpeed: 5
+    baseWalkSpeed: 2
+    baseSprintSpeed: 4
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/batonioweapon.rsi
     layers:
@@ -178,12 +178,12 @@
         Ballistic: -.25
   - type: MeleeWeapon
     range: 1.5
-    attackRate: 0.33
+    attackRate: 1
     soundHit:
       path: /Audio/Effects/metal_thud1.ogg
     damage:
       types:
-        blunt: 15
+        Shock: 15
     animation: WeaponArcSlash
     altDisarm: false
     canWideSwing: true
@@ -198,7 +198,9 @@
       - ReagentId: Blood
         Quantity: 200
       - ReagentId: Desoxyephedrine
-        Quantity: 100
+        Quantity: 50
+      - ReagentId: AdvancedMutationToxin
+        Quantity: 50
     bleedReductionAmount: 30
   - type: Prying
     speedModifier: 3
@@ -222,9 +224,6 @@
       settings: short
   - type: GhostTakeoverAvailable
   - type: NoSlip
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      400: 1
   - type: Targeting
   - type: Tag
     tags:
