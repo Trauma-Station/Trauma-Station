@@ -22,7 +22,7 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
+        _modifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     [SubscribeLocalEvent]

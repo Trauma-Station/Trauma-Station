@@ -79,7 +79,7 @@
   discountCategory: null # WAY too free
   categories:
   - UplinkDisruption
-  restockTime: 900
+  restockTime: 15m
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
@@ -90,3 +90,13 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkDuffelSurgery
+  name: uplink-duffel-surgery-name
+  description: uplink-duffel-surgery-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledMedical
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkDisruption

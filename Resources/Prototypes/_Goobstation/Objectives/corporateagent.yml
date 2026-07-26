@@ -79,7 +79,7 @@
 # kill
 
 - type: entity
-  parent: [BaseCorporateObjective, BaseKillObjective]
+  parent: [BaseCorporateObjective, BaseKillRandomObjective]
   id: CorporateKillRandomPersonObjective
   description: They are suspected of being a Traitor. Do it however you like, just make sure they don't get off the station.
   components:
@@ -88,12 +88,11 @@
     unique: false
   - type: TargetObjective
     title: objective-condition-maroon-person-title
-  - type: PickRandomPerson
   - type: KillPersonCondition
     requireMaroon: true
 
 - type: entity
-  parent: [BaseCorporateObjective, BaseKillObjective]
+  parent: [BaseCorporateObjective, BaseKillRandomObjective]
   id: CorporateKillRandomHeadObjective
   description: They've spoken out against us one too many times. Make them disappear. Good luck, agent.
   components:
@@ -105,8 +104,11 @@
   - type: TargetObjective
     title: objective-condition-kill-maroon-title
   - type: PickRandomPerson
-    filters:
-    - !type:BodyMindFilter
+    conditions:
+    - !type:BodyWhitelistCondition
+      blacklist:
+        components:
+        - NukeOperative
       whitelist:
         components:
         - CommandStaff
@@ -128,8 +130,8 @@
   - type: TargetObjective
     title: objective-condition-other-traitor-alive-title
   - type: PickRandomPerson
-    filters:
-    - !type:HasRoleMindFilter
+    conditions:
+    - !type:RoleCondition
       whitelist:
         components:
         - TraitorRole
@@ -144,8 +146,8 @@
   - type: TargetObjective
     title: objective-condition-other-traitor-progress-title
   - type: PickRandomPerson
-    filters:
-    - !type:HasRoleMindFilter
+    conditions:
+    - !type:RoleCondition
       whitelist:
         components:
         - TraitorRole
@@ -332,7 +334,7 @@
 # random person
 # This is a separate objective to prevent metagaming by having a different condition for killing traitors, by also requiring you just kill someone entirely
 - type: entity
-  parent: [BaseCorporateObjective, BaseKillObjective]
+  parent: [BaseCorporateObjective, BaseKillRandomObjective]
   id: CorporatePermaKillRandomPersonObjective
   description: Do it however you like, as long as they're not breathing anymore.
   components:
@@ -341,7 +343,6 @@
     unique: false
   - type: TargetObjective
     title: objective-condition-pkill-person
-  - type: PickRandomPerson
   - type: KillPersonCondition
     requireDead: true
 

@@ -398,7 +398,7 @@
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseGeneralMachineRecipeCategory ]
   id: ReagentGrinderIndustrialMachineCircuitboard
-  icon: { sprite:  Structures/Machines/recycling.rsi, state: grinder-b0 } # Goobstation
+  icon: { sprite:  Structures/Machines/industrial_reagent_grinder.rsi, state: industrial-reagent-grinder-off } # Trauma
   result: ReagentGrinderIndustrialMachineCircuitboard
 
 - type: latheRecipe

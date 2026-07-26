@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;

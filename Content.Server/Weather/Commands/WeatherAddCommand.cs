@@ -1,6 +1,6 @@
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Weather;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
@@ -71,9 +71,10 @@ public sealed partial class WeatherAddCommand : LocalizedEntityCommands
         if (args.Length == 2)
         {
             var opts = new List<CompletionOption>();
+            var weatherName = _compFactory.CompName<WeatherStatusEffectComponent>(); // Trauma
             foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
             {
-                if (!proto.HasComponent<WeatherStatusEffectComponent>(_compFactory))
+                if (!proto.HasComp(weatherName)) // Trauma - use weatherName
                     continue;
 
                 opts.Add(new CompletionOption(proto.ID, proto.Name));

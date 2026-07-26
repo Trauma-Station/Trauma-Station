@@ -152,25 +152,25 @@ namespace Content.Server.Cargo.Systems
             /* Trauma - use per-account access below instead
             if (!_accessReaderSystem.IsAllowed(player, uid))
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-order-not-allowed"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
             */
 
-            // <Goob> - resource siphon blocking access
-            var eqe = EntityQueryEnumerator<ResourceSiphonComponent>();
-            while (eqe.MoveNext(out var sip))
+            // <Trauma> - resource siphon blocking access
+            var siphons = EntityQueryEnumerator<ResourceSiphonComponent>();
+            while (siphons.MoveNext(out var sip))
             {
                 // it's over. the crew won't know what hit em.
                 if (sip.Active)
                 {
-                    ConsolePopup(args.Actor, Loc.GetString("console-block-something"));
+                    _popup.PopupCursor(Loc.GetString("console-block-something"), args.Actor);
                     PlayDenySound(uid, component);
                     return;
                 }
             }
-            // </Goob>
+            // </Trauma>
 
             var station = _station.GetOwningStation(uid);
 
@@ -179,7 +179,7 @@ namespace Content.Server.Cargo.Systems
                 !TryComp(station, out StationDataComponent? stationData) ||
                 !TryGetOrderDatabase(station, out var orderDatabase))
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-station-not-found"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-station-not-found"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -199,7 +199,7 @@ namespace Content.Server.Cargo.Systems
             // Invalid order
             if (!ProtoMan.Resolve(order.Product, out var product))
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-invalid-product"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-invalid-product"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -210,7 +210,7 @@ namespace Content.Server.Cargo.Systems
             // Too many orders, avoid them getting spammed in the UI.
             if (amount >= capacity)
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-too-many"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-too-many"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -221,7 +221,7 @@ namespace Content.Server.Cargo.Systems
             if (cappedAmount != order.OrderQuantity)
             {
                 order.OrderQuantity = cappedAmount;
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-snip-snip"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-snip-snip"), args.Actor);
                 PlayDenySound(uid, component);
             }
 
@@ -236,7 +236,7 @@ namespace Content.Server.Cargo.Systems
             // Not enough balance
             if (cost > accountBalance)
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-insufficient-funds", ("cost", cost)));
+                _popup.PopupCursor(Loc.GetString("cargo-console-insufficient-funds", ("cost", cost)), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -249,13 +249,13 @@ namespace Content.Server.Cargo.Systems
                 {
                     var timeLeft = (cooldownTime - _timing.CurTime);
                     (int count, string units) timeInfo = (timeLeft.Minutes > 0) ? (timeLeft.Minutes, "minutes") : (timeLeft.Seconds, "seconds");
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-cooldown-active", ("product", product.Name), ("timeCount", timeInfo.count), ("timeUnits", timeInfo.units)));
+                    _popup.PopupCursor(Loc.GetString("cargo-console-cooldown-active", ("product", product.Name), ("timeCount", timeInfo.count), ("timeUnits", timeInfo.units)), args.Actor);
                     PlayDenySound(uid, component);
                     return;
                 }
                 if (order.OrderQuantity > 1)
                 {
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-cooldown-count", ("product", product.Name)));
+                    _popup.PopupCursor(Loc.GetString("cargo-console-cooldown-count", ("product", product.Name)), args.Actor);
                     PlayDenySound(uid, component);
                     return;
                 }
@@ -267,7 +267,7 @@ namespace Content.Server.Cargo.Systems
 
             if (GetEntity(component.Destination) is not {} dest || Deleted(dest) || Transform(dest).MapID != Transform(uid).MapID)
             {
-                ConsolePopup(player, Loc.GetString("cargo-console-destination-lost"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-destination-lost"), player);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -290,7 +290,7 @@ namespace Content.Server.Cargo.Systems
 
                 if (ev.FulfillmentEntity == null)
                 {
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-unfulfilled"));
+                    _popup.PopupCursor(Loc.GetString("cargo-console-unfulfilled"), args.Actor);
                     PlayDenySound(uid, component);
                     order.Approver = null;
                     return;
@@ -318,7 +318,7 @@ namespace Content.Server.Cargo.Systems
                     _radio.SendRadioMessage(uid, message, CargoOrderConsoleComponent.BaseAnnouncementChannel, uid, escapeMarkup: false);
             }
 
-            ConsolePopup(args.Actor, Loc.GetString("cargo-console-trade-station", ("destination", MetaData(ev.FulfillmentEntity.Value).EntityName)));
+            _popup.PopupCursor(Loc.GetString("cargo-console-trade-station", ("destination", MetaData(ev.FulfillmentEntity.Value).EntityName)), args.Actor);
 
             // Log order approval
             _adminLogger.Add(LogType.Action,
@@ -525,11 +525,6 @@ namespace Content.Server.Cargo.Systems
             var otherOrders = station.Comp.Orders[bank.PrimaryAccount].Where(order => order.Account == console.Comp.Account);
 
             return ourOrders.Concat(otherOrders).ToList();
-        }
-
-        private void ConsolePopup(EntityUid actor, string text)
-        {
-            _popup.PopupCursor(text, actor);
         }
 
         private void PlayDenySound(EntityUid uid, CargoOrderConsoleComponent component)

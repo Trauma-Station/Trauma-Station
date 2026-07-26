@@ -1,12 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Speech.EntitySystems;
+using Content.Shared.Speech.Components;
 
 namespace Content.Goobstation.Server.Speech;
 
 [RegisterComponent]
-[Access(typeof(CheeseAccentSystem))]
-public sealed partial class CheeseAccentComponent : Component
-{
-
-}
+public sealed partial class CheeseAccentComponent : BaseAccentComponent;

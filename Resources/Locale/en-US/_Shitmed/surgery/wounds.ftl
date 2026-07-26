@@ -8,9 +8,9 @@ inspect-wound-Bleeding-minor = is bleeding a little
 inspect-wound-Bleeding-moderate = is bleeding
 inspect-wound-Bleeding-severe = is bleeding profusely
 
-inspect-wound-Brute-minor = bruised
-inspect-wound-Brute-moderate = battered
-inspect-wound-Brute-severe = heavily bruised
+inspect-wound-Blunt-minor = bruised
+inspect-wound-Blunt-moderate = battered
+inspect-wound-Blunt-severe = heavily bruised
 inspect-wound-Slash-minor = cut
 inspect-wound-Slash-moderate = lacerated
 inspect-wound-Slash-severe = almost severed.

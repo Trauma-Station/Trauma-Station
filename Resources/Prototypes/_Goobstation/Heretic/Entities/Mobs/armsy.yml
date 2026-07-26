@@ -149,7 +149,7 @@
     prototype: MobHereticFleshAscendSegment
   - type: WarpPoint
     follow: true
-    location: lord of the night
+    location: location-lord-of-the-night
   - type: Speech
     speechVerb: LargeMob
   - type: StatusIcon

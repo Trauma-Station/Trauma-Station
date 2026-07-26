@@ -21,11 +21,12 @@ public sealed partial class EnchantingSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityQuery<EnchantComponent> _query = default!;
+    [Dependency] private EntityQuery<EnchantedComponent> _enchantedQuery = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
 
-    private EntityQuery<EnchantComponent> _query;
-    private EntityQuery<EnchantedComponent> _enchantedQuery;
-    private EntityQuery<ItemComponent> _itemQuery;
-    private EntityQuery<StackComponent> _stackQuery;
+    private CompName _enchantName;
     private Dictionary<EntProtoId<EnchantComponent>, EnchantComponent> _enchants = new();
     private HashSet<Entity<EnchantingTableComponent>> _tables = new();
     private HashSet<Entity<EnchanterComponent>> _enchanters = new();
@@ -37,24 +38,18 @@ public sealed partial class EnchantingSystem : EntitySystem
     {
         base.Initialize();
 
-        _query = GetEntityQuery<EnchantComponent>();
-        _enchantedQuery = GetEntityQuery<EnchantedComponent>();
-        _itemQuery = GetEntityQuery<ItemComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
-
-        SubscribeLocalEvent<EnchantedComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<EnchantedComponent, ExaminedEvent>(OnExamined);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        _enchantName = Factory.CompName<EnchantComponent>();
 
         CacheEnchants();
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<EnchantedComponent> ent, ref ComponentInit args)
     {
         ent.Comp.Container = _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<EnchantedComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -78,6 +73,7 @@ public sealed partial class EnchantingSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
@@ -89,7 +85,7 @@ public sealed partial class EnchantingSystem : EntitySystem
         _enchants.Clear();
         foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.TryGetComponent<EnchantComponent>(out var comp, Factory))
+            if (proto.TryComp<EnchantComponent>(_enchantName, out var comp))
                 _enchants.Add(proto.ID, comp);
         }
     }
