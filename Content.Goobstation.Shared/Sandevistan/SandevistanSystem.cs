@@ -321,7 +321,7 @@ public sealed partial class SandevistanSystem : EntitySystem
                     continue;
 
                 var despawn = EnsureComp<TimedDespawnComponent>(afterimageUid);
-                despawn.Lifetime = 3f;
+                despawn.Lifetime = 0.5f;
             }
         });
     }
