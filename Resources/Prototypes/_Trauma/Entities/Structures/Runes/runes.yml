@@ -128,6 +128,7 @@
     - MinorDemonIan
     - MinorDemonVox
     - MinorDemonVulp
+    - MinorDemonCentifiend
 
 - type: entity
   parent: BaseCarvedRune
@@ -202,6 +203,7 @@
     - MajorDemonHanged
     - MajorDemonHiver
     - MajorDemonSteamer
+    - MajorDemonButcher
 
 - type: entity
   parent: BaseCarvedRune

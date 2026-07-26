@@ -1,10 +1,10 @@
 {
   "version": 1,
   "license": "CC-BY-NC-SA-3.0",
-  "copyright": "Trauma_Tised",
+  "copyright": "Gravest0ne, directional sprites edited by Moxie_is_moxie",
   "size": {
-    "x": 48,
-    "y": 48
+    "x": 32,
+    "y": 32
   },
   "states": [
     {
