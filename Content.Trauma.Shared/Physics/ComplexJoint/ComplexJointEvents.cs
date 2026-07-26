@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Physics;
 
 namespace Content.Trauma.Shared.Physics.ComplexJoint;
