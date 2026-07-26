@@ -239,9 +239,7 @@
   - type: Hands
     activeHandId: Hand
     hands:
-       hand_right:
-        location: Right
-       hand_left:
+      Hand:
         location: Left
   - type: ComplexInteraction
 
