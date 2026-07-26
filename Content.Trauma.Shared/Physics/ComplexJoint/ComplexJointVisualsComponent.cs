@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Physics.ComplexJoint;
 /// <summary>
 /// Works like JointVisualsComponent, but supports multiple targets and more customization.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ComplexJointVisualsComponent : Component
 {
     [DataField, AutoNetworkedField]

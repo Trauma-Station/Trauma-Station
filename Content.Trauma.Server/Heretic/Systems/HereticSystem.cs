@@ -71,6 +71,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private EntityQuery<HereticActionComponent> _hereticActionQuery = default!;
     [Dependency] private EntityQuery<ChangeUseDelayOnAscensionComponent> _changeUseDelayQuery = default!;
     [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private EntityQuery<HereticSacrificeTargetComponent> _targetQuery = default!;
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;
@@ -455,6 +456,10 @@ public sealed partial class HereticSystem : SharedHereticSystem
             if (IsHereticOrGhoul(session.AttachedEntity.Value))
                 return false;
 
+            if (_targetQuery.TryComp(session.AttachedEntity.Value, out var target) &&
+                target.HereticMinds.Contains(ent))
+                return false;
+
             if (!_mind.TryGetMind(session.AttachedEntity.Value, out var mind, out _) ||
                 mind == ent.Owner || !_job.MindTryGetJobId(mind, out _))
                 return false;
@@ -498,9 +503,9 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (!ent.Comp.SacrificeTargets.Contains(data))
             return;
 
-        targets ??= GetHereticTargets(ent);
-
         RemoveSacrificeTarget(ent, data);
+
+        targets ??= GetHereticTargets(ent);
 
         if (targets.Count == 0)
             return;
@@ -521,14 +526,14 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [SubscribeLocalEvent]
     private void OnRerollTargets(Entity<HereticComponent> ent, ref EventHereticRerollTargets args)
     {
-        var targets = GetHereticTargets(ent);
-        if (targets.Count == 0)
-            return;
-
         foreach (var target in ent.Comp.SacrificeTargets)
         {
             RemoveSacrificeTarget(ent, target);
         }
+
+        var targets = GetHereticTargets(ent);
+        if (targets.Count == 0)
+            return;
 
         var pickedTargets = new List<SacrificeTargetData>();
 

@@ -16,7 +16,7 @@ public sealed partial class TackleModifierComponent : Component
 }
 
 [Serializable, NetSerializable, DataRecord]
-public partial class TackleModifier : IComparable<TackleModifier>
+public sealed partial class TackleModifier : IComparable<TackleModifier>
 {
     /// <summary>
     /// Whether values of this will affect other tackle modifiers
