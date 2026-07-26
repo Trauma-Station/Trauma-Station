@@ -189,12 +189,12 @@
     sprite: _Trauma/Mobs/Monsters/bioweapon.rsi
     state: alive
   cost:
-    Spesos: 10000
+    Spesos: 15000
   categories:
   - Bioweapons
-  restockTime: 600
+  restockTime: 900
   resetRestockOnPurchase: true
-  restockAfterPurchase: 300
+  restockAfterPurchase: 1800
 
 # Medical
 

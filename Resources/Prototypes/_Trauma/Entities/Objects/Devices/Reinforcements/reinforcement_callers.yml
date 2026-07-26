@@ -35,7 +35,6 @@
   - type: Store
     categories:
     - ReinforcementsHoS
-    - Bioweapons
 
 - type: entity
   parent: BaseReinforcementCaller
