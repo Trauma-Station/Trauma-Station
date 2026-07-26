@@ -44,7 +44,7 @@
     sprite: Structures/Shuttles/thruster.rsi
     state: base
   product: CrateSpaceThruster
-  cost: 750 # Trauma - was 1500
+  cost: 750 # Trauma - Was 1500
   category: cargoproduct-category-name-space
   group: market
 
