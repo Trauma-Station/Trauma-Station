@@ -108,7 +108,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (e.NewStatus != SessionStatus.InGame)
             return;
 
-        var query = EntityManager.AllEntityQueryEnumerator<HereticComponent, MindComponent>();
+        var query = AllEntityQuery<HereticComponent, MindComponent>();
         while (query.MoveNext(out var uid, out var comp, out var mind))
         {
             HereticTargetsUpdated((uid, comp, mind));
