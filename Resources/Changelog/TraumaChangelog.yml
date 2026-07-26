@@ -12091,3 +12091,10 @@ Entries:
   id: 1325
   time: '2026-07-26T21:23:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3730
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Resprited the Shadowling Ascendant!
+  id: 1326
+  time: '2026-07-26T23:29:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3682
