@@ -2807,3 +2807,41 @@
       applyOn: Platform
       output:
         ClothingNeckSharpMedal: 1
+
+- type: entity
+  id: RitualAshSpirit
+  name: Ashen Ritual
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: ash_walker
+  - type: HereticRitual
+    limit: 2
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Bonfire
+          name: heretic-ritual-ingredient-bonfire
+        - whitelist:
+            tags:
+            - Book
+          name: heretic-ritual-ingredient-book
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        MobGhoulAshSpirit: 1

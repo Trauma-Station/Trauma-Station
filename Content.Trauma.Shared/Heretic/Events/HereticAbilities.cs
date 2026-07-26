@@ -86,6 +86,7 @@ public record struct HereticMagicCastAttemptEvent(EntityUid User, EntityUid Acti
 
 // basic
 public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
+
 public sealed partial class EventHereticOpenStore : InstantActionEvent;
 
 public sealed partial class TouchSpellEvent : InstantActionEvent
@@ -99,6 +100,7 @@ public sealed partial class TouchSpellEvent : InstantActionEvent
     [DataField(required: true)]
     public EntityWhitelist TouchSpellWhitelist;
 }
+
 public sealed partial class EventHereticLivingHeart : InstantActionEvent; // opens ui
 
 [ByRefEvent]
@@ -145,6 +147,9 @@ public sealed partial class EventHereticVolcanoBlast : InstantActionEvent
 {
     [DataField]
     public float Radius = 5;
+
+    [DataField]
+    public EntProtoId StatusEffect = "StatusEffectFireBlasted";
 }
 
 public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
@@ -188,11 +193,11 @@ public sealed partial class HereticVoidBlastEvent : InstantActionEvent;
 public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
 {
     [DataField]
-    public DamageSpecifier Damage = new ()
+    public DamageSpecifier Damage = new()
     {
         DamageDict =
         {
-            {"Cold", 20},
+            { "Cold", 20 },
         },
     };
 
@@ -209,11 +214,11 @@ public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
 public sealed partial class HereticVoidPullEvent : InstantActionEvent
 {
     [DataField]
-    public DamageSpecifier Damage = new ()
+    public DamageSpecifier Damage = new()
     {
         DamageDict =
         {
-            {"Cold", 30},
+            { "Cold", 30 },
         },
     };
 
@@ -411,7 +416,8 @@ public sealed partial class StarGazeEvent : InstantActionEvent // Giga lazor
     public EntProtoId OrbEffect = "EffectGazerOrb";
 
     [DataField]
-    public SoundSpecifier BeamStartSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/stargazer/beam_open.ogg");
+    public SoundSpecifier BeamStartSound =
+        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/stargazer/beam_open.ogg");
 }
 
 public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEvent;
@@ -433,10 +439,10 @@ public sealed partial class EventHereticCleave : EntityTargetActionEvent
     {
         DamageDict =
         {
-            {"Blunt", 4f},
-            {"Slash", 4f},
-            {"Piercing", 4f},
-            {"Bloodloss", 3f},
+            { "Blunt", 4f },
+            { "Slash", 4f },
+            { "Piercing", 4f },
+            { "Bloodloss", 3f },
         },
     };
 
@@ -494,16 +500,20 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);
 }
+
 #endregion
 
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;
 
 [Serializable, NetSerializable]
-public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates coords) : EntityEventArgs
+public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates coords, bool shouldFire)
+    : EntityEventArgs
 {
     public NetEntity Uid = uid;
 
     public MapCoordinates Coordinates = coords;
+
+    public bool ShouldFire = shouldFire;
 }
 
 [Virtual, DataDefinition, ImplicitDataDefinitionForInheritors]

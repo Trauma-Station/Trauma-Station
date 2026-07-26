@@ -2,12 +2,19 @@
 
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class FireBlastedComponent : BaseSpriteOverlayComponent
 {
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate;
+
+    [DataField]
+    public TimeSpan UpdateDelay = TimeSpan.FromMilliseconds(200);
+
     [DataField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/Magic/fireball.ogg");
 
@@ -15,13 +22,7 @@ public sealed partial class FireBlastedComponent : BaseSpriteOverlayComponent
     public int BouncesForBonusEffect = 4;
 
     [DataField]
-    public float TickInterval = 0.2f;
-
-    [DataField]
     public bool ShouldBounce = true;
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float Accumulator;
 
     [DataField]
     public int MaxBounces = 4;

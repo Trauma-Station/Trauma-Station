@@ -12,6 +12,7 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Polymorph.Systems;
+using Content.Server.Popups;
 using Content.Server.Roles;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Administration.Systems;
@@ -35,6 +36,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Polymorph;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Species.Components;
@@ -87,6 +89,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     [Dependency] private HolyFlammableSystem _holyFlam = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private SharedEntityEffectsSystem _effect = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -326,6 +329,8 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
         EntityManager.RemoveComponents(ent, ProtoMan.Index(ComponentsToRemoveOnUnGhoulify).Components);
+
+        _popup.PopupEntity(Loc.GetString("ghoul-unghoulify-message", ("ent", Identity.Entity(ent, EntityManager))), ent, PopupType.LargeCaution);
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)

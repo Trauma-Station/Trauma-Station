@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 
-namespace Content.Goobstation.Shared.Medical.Components;
+namespace Content.Trauma.Shared.Medical.Medigun.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MediGunHealedComponent : Component
