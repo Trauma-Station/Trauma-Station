@@ -26,7 +26,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipSecurityOfficer # TODO: give it some clown one later
+    - SkillChipCombatEducation
+    - SkillChipClown
+    - SkillChipUnarmed
   - !type:AddComponentSpecial
     components:
     - type: Clumsy

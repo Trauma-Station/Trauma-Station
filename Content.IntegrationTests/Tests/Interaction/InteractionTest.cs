@@ -16,8 +16,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Mind;
 using Content.Shared.Players;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Trauma.Shared.Hands; // Trauma
 using Robust.Client.Input;
 using Robust.Client.State;
 using Robust.Client.Timing;
@@ -120,7 +120,7 @@ public abstract partial class InteractionTest : GameTest
     [SidedDependency(Side.Server)] protected SharedUserInterfaceSystem SUiSys = default!;
     [SidedDependency(Side.Server)] protected SharedCombatModeSystem SCombatMode = default!;
     [SidedDependency(Side.Server)] protected SharedGunSystem SGun = default!;
-    [SidedDependency(Side.Server)] protected PredictedHandsSystem SPredictedHands = default!; // Trauma
+    [SidedDependency(Side.Server)] protected SharedMeleeWeaponSystem SMelee = default!;
 
     // CLIENT dependencies
     protected IClientGameTiming CTiming => CGameTiming;

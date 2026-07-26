@@ -8,3 +8,138 @@
   components:
   - type: NeedsTongue # almost all humanoids need to have a tongue to speak
   - type: EatingNeedsOrgan # need a mouth/head to eat
+
+- type: entity
+  abstract: true
+  save: false
+  parent: BaseSpeciesAppearanceOrganlessDecapoid
+  id: BaseSpeciesAppearanceDecapoid
+  components:
+  - type: NeedsTongue # almost all humanoids need to have a tongue to speak
+  - type: EatingNeedsOrgan # need a mouth/head to eat
+
+- type: entity
+  abstract: true
+  id: DecapoidLayers
+  components:
+  - type: Sprite
+    layers:
+    # Torso
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+
+    # Head
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Face" ] # Trauma
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.Special" ] # Trauma
+
+    # Limbs
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+
+    # Underwear & clothing
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: ["jumpsuit"]
+
+    # Extremities
+    - map: ["enum.HumanoidVisualLayers.LFoot"]
+    - map: ["enum.HumanoidVisualLayers.RFoot"]
+
+    # Stuff that goes over the body but below equipment
+    - map: ["enum.HumanoidVisualLayers.Overlay"]
+
+    # More equipment
+
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    # <Trauma>
+    - map: [ "enum.HumanoidVisualEmoteLayers.Blush" ]
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: blush
+      visible: false
+    - map: [ "enum.HumanoidVisualEmoteLayers.Cry" ]
+      color: cyan
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: tears
+      visible: false
+    # </Trauma>
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "outerClothing" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "suitstorage" ]
+
+    # Stuff that goes in front of equipment
+    - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    # <Trauma>
+    - map: [ "enum.HumanoidVisualEmoteLayers.Tongue" ]
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: tongue
+      visible: false
+    - map: [ "maskalt" ]
+    # </Trauma>
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOverlay" ]
+    - map: [ "enum.HumanoidVisualLayers.Wings" ] # Trauma
+
+    # Stuff that goes in front of stuff that goes in front of equipment
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+
+    # For their hands overlapping backpacks
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
+    - map: [ "gloves" ]
+
+    # Extra stuff
+    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    # <Trauma>
+    - map: [ "enum.HumanoidVisualEmoteLayers.Sigh" ]
+      loop: false
+      sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
+      state: sigh
+      visible: false
+    # </Trauma>
+
+- type: entity
+  id: BaseSpeciesAppearanceOrganlessDecapoid
+  parent:
+  - InventoryBase
+  - DecapoidLayers
+  abstract: true
+  save: false
+  components:
+  # <Shitmed>
+  - type: Legs # prevent standing etc with not enough legs
+  - type: BodyEquipment # prevent equipping items if you are missing the relevant limbs
+  - type: BodyCache # cache which organ is in which slot to avoid O(N) lookups
+  # </Shitmed>
+  - type: Body
+  - type: VisualBody
+  - type: Hands
+  - type: ComplexInteraction
+  - type: ContainerContainer
+  - type: Appearance
+  - type: HideableHumanoidLayers
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface

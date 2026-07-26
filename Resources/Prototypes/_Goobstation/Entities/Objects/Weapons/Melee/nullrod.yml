@@ -359,19 +359,12 @@
     passiveBlockFraction: 0.15
     activeBlockFraction: 1
     passiveBlockModifier:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Ballistic: 1
-        Heat: 1
-    activeBlockModifier:
-      coefficients:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Ballistic: 1
-        Heat: 1
+      flatReductions:
+        Blunt: 15
+        Slash: 10
+        Piercing: 10
+        Ballistic: 5
+        Heat: 10
   - type: Tag
     tags:
     - Bulwark

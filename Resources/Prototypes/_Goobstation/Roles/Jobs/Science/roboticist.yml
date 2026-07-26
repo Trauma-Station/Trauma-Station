@@ -20,7 +20,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipRoboticist
+    - SkillChipEducation
 
 - type: startingGear
   id: RoboticistGear

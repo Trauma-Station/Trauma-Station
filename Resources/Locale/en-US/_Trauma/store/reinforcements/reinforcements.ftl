@@ -119,3 +119,9 @@ reinforcement-service-worker-desc = Hire a service worker to fill whatever role 
 
 reinforcement-assistant-name = Hire Assistant
 reinforcement-assistant-desc = Hire an assistant, fent not included. Minimum arrival time of three minutes.
+
+bioweapon-manual-name = Purchase a bioweapon instruction manual
+bioweapon-manual-desc = Purchase a bioweapon manual that teaches the codes needed to command bioweapons.
+
+bioweapon-name = Purchase a bioweapon
+bioweapon-desc = Purchase a bioweapon mutant to carry out the orders of security.

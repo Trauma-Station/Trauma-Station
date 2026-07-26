@@ -35,13 +35,13 @@ public sealed partial class ChampionStanceSystem : EntitySystem
             return;
 
         MakeOrgansRemovable(ent, true);
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnChampionStartup(Entity<ChampionStanceComponent> ent, ref ComponentStartup args)
     {
         MakeOrgansRemovable(ent, false);
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void MakeOrgansRemovable(EntityUid uid, bool removable)

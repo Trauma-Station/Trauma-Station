@@ -26,12 +26,6 @@
 
 - type: entity
   parent: BaseRecipesKnowledge
-  id: ToysKnowledge
-  name: Toys
-  description: Determines the quality of toys you build.
-
-- type: entity
-  parent: BaseRecipesKnowledge
   id: BananiumKnowledge
   name: Bananium
   description: Determines the quality of bananium items you craft.

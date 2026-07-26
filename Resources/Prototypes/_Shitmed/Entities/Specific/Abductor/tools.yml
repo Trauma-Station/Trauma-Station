@@ -152,29 +152,17 @@
 
 - type: entity
   name: high-tech welding tool
-  parent: [ Welder, BaseMajorContraband ]
+  parent: [ WelderExperimental, BaseMajorContraband ]
   id: WelderAbductor
   description: "A highly advanced welder capable of producing infinite fuel."
   components:
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Abductor/welder.rsi
     state: abductor
-  - type: Solution
-    id: Welder
-    solution:
-      maxVol: 1000
-      reagents:
-      - ReagentId: WeldingFuel
-        Quantity: 1000
   - type: PointLight
     enabled: false
     radius: 1.5
     color: lightblue
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-      - ReagentId: WeldingFuel
-        Quantity: 10
   - type: Tool
     speedModifier: 2.0
     useSound:

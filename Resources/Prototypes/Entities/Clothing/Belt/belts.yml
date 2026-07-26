@@ -13,6 +13,10 @@
     sprite: Clothing/Belt/sheath.rsi
   - type: Item
     size: Ginormous
+    shape:
+    - 0,0,1,2
+    storedOffset: 0,-2
+    storedRotation: 45
   - type: ItemSlots
     slots:
       item:
@@ -21,6 +25,7 @@
         ejectVerbText: sheath-eject-verb
         insertSound: /Audio/Items/sheath.ogg
         ejectSound: /Audio/Items/unsheath.ogg
+        ejectOnBreak: true
         whitelist:
           tags:
           - CaptainSabre
@@ -53,6 +58,10 @@
       tags:
       - Arrow
       - Plunger
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,5,2
   - type: Appearance
   - type: StorageContainerVisuals
     maxFillLevels: 3
@@ -107,21 +116,8 @@
   name: shoulder holster
   description: 'A holster to carry a handgun and ammo. WARNING: Badasses only.'
   components:
-  - type: QuickDrawable # Trauma
-  - type: Sprite
-    sprite: Clothing/Belt/holster.rsi
-  - type: Clothing
-    sprite: Clothing/Belt/holster.rsi
-  - type: Storage
-    grid:
-    - 0,0,3,1
-    whitelist: # Goob
-      components:
-      - BallisticAmmoProvider
-      - CartridgeAmmo
-      tags:
-      - EnergySpeedloader
-  # <Goob>
+  # <Trauma>
+  - type: QuickDrawable
   - type: ContainerContainer
     containers:
       item: !type:ContainerSlot
@@ -134,7 +130,26 @@
         whitelist:
           tags:
           - Sidearm
-  # </Goob>
+  # </Trauma>
+  - type: Sprite
+    sprite: Clothing/Belt/holster.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/holster.rsi
+  - type: Storage
+    # <Trauma>
+    whitelist:
+      components:
+      - BallisticAmmoProvider
+      - CartridgeAmmo
+      tags:
+      - EnergySpeedloader
+    # </Trauma>
+    grid:
+    - 0,0,3,1
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,4,1
 
 - type: entity
   parent: [ClothingBeltHolster, BaseSyndicateContraband] # Goob - inherit from regular holster
@@ -151,12 +166,14 @@
     grid:
     - 0,0,5,3 # Trauma, was 0,0,3,3
     whitelist:
+      # <Trauma>
+      tags: # Goob
+      - EnergySpeedloader
+      # </Trauma>
       components:
       - Gun
       - BallisticAmmoProvider
       - CartridgeAmmo
-      tags: # Goob
-      - EnergySpeedloader
   - type: ItemSlots # Goob - hold ANY gun instead of just sidearms
     slots:
       item:
@@ -164,6 +181,10 @@
         whitelist:
           components:
           - Gun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,4,2
   - type: StaticPrice
     price: 500
 

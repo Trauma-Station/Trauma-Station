@@ -1,7 +1,7 @@
 - type: entity
   name: laser raptor
   id: MobLaserRaptor
-  parent: [AppearanceLaserRaptor, SimpleMobBase, BaseSlicingRefinable] # Trauma - added
+  parent: [AppearanceLaserRaptor, SimpleMobBase, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceLaserRaptor
   description: From the Viking age.
   components:
     - type: NpcFactionMember

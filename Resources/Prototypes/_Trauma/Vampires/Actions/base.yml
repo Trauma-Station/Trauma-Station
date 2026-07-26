@@ -28,6 +28,7 @@
   components:
   - type: Action
     useDelay: 20
+    checkConsciousness: false
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_rejuv.ogg
     icon:

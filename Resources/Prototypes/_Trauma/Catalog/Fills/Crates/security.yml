@@ -33,8 +33,9 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SkillChipDetective
-        - id: SkillChipWarden
-        - id: SkillChipSecurityOfficer
-        - id: SkillChipSecurityCadet
+        - id: SkillChipMarksmanship
+          amount: 3
+        - id: SkillChipNonLethal
+          amount: 3
+        - id: SkillChipShortBlade
           amount: 3

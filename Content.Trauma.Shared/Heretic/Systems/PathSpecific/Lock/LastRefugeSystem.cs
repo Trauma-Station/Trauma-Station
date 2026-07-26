@@ -92,7 +92,7 @@ public sealed partial class LastRefugeSystem : EntitySystem
         if (ent.Comp.HadStrippable)
             EnsureComp<StrippableComponent>(ent);
 
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
 
         var actions = _actions.GetActions(ent);
         foreach (var (actionUid, _) in actions)
@@ -110,7 +110,7 @@ public sealed partial class LastRefugeSystem : EntitySystem
         ent.Comp.HadStrippable = RemCompDeferred<StrippableComponent>(ent);
         Dirty(ent);
 
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
 
         if (ent.Comp.HadStealth)
             return;
@@ -121,6 +121,7 @@ public sealed partial class LastRefugeSystem : EntitySystem
         stealth.RevealOnAttack = false;
         stealth.RevealOnDamage = false;
         stealth.ThermalsImmune = true;
+        Dirty(ent, stealth);
 
         _stealth.SetVisibility(ent.Owner, ent.Comp.Visibility, stealth);
         _stealth.SetEnabled(ent.Owner, true, stealth);

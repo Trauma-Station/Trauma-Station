@@ -34,7 +34,8 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipResearchDirector
+    - SkillChipEchelonEducation
+    - SkillChipToughness
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
