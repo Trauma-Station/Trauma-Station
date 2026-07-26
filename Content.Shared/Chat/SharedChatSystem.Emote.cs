@@ -175,7 +175,9 @@ public abstract partial class SharedChatSystem
         param.Pitch += ev.Pitch;
         // </Trauma>
 
-        _audio.PlayPredicted(sound, uid, uid, param);
+        if (_net.IsServer) // Chat is not predicted.
+            _audio.PlayPvs(sound, uid, param);
+
         return true;
     }
     /// <summary>
