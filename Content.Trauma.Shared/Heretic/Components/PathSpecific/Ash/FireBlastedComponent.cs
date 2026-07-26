@@ -92,7 +92,7 @@ public sealed partial class FireBlastedComponent : BaseSpriteOverlayComponent
 
 
     [DataField]
-    public EntProtoId FireBlastBeamDataId = "fireblast";
+    public string FireBlastBeamDataId = "fireblast";
 
     [DataField]
     public SpriteSpecifier FireBlastBeamSprite =
