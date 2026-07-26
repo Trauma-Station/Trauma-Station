@@ -316,7 +316,7 @@ public sealed partial class PullingSystem
         _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
 
         _blocker.UpdateCanMove(pullable);
-        _modifierSystem.RefreshMovementSpeedModifiers(puller);
+        _modifierSystem.RefreshMovementSpeedModifiers(puller.Owner);
 
         var stageKey = puller.Comp.GrabStage.ToString().ToLower();
         var pullerName = Identity.Entity(puller, EntityManager);

@@ -17,7 +17,7 @@ public sealed partial class AnyNearbyCondition : EntityConditionBase<AnyNearbyCo
     /// You don't need to include this in <see cref="Whitelist"/>.
     /// </summary>
     [DataField(required: true)]
-    public string CompName = string.Empty;
+    public CompName CompName;
 
     /// <summary>
     /// Cached type for the component.
@@ -71,7 +71,7 @@ public sealed partial class AnyNearbyConditionSystem : EntityConditionSystem<Tra
         var condition = args.Condition;
         if (condition.Comp == null)
         {
-            var reg = Factory.GetRegistration(condition.CompName);
+            var reg = Factory.GetRegistration(condition.CompName.Name);
             condition.Comp = reg.Type;
         }
         var type = condition.Comp;

@@ -69,13 +69,13 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
     private void OnStarGazeShutdown(Entity<StarGazeComponent> ent, ref ComponentShutdown args)
     {
         if (!TerminatingOrDeleted(ent))
-            _movement.RefreshMovementSpeedModifiers(ent);
+            _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     [SubscribeLocalEvent]
     private void OnStarGazeStartup(Entity<StarGazeComponent> ent, ref ComponentStartup args)
     {
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     [SubscribeLocalEvent]
@@ -110,17 +110,13 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
             return;
         }
 
-        args.Handled = true;
-
-        var now = Timing.CurTime;
-
         if (_beam.ShootLaser(uid, uid, Xform.ToCoordinates(coords)) == null)
         {
             RemCompDeferred(uid, comp);
             return;
         }
 
-        Dirty(ent);
+        args.Handled = true;
     }
 
     [SubscribeLocalEvent]

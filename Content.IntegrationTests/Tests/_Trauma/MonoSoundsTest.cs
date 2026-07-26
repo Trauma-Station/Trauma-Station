@@ -26,7 +26,7 @@ public sealed class MonoSoundsTests : GameTest
     {
         // NFI why i have to do this but sure, loading resources completely fails without it
         IoCManager.InitThread(Client.InstanceDependencyCollection, true);
-        var proto = Client.ProtoMan;
+        var proto = CProtoMan;
         var cache = Client.ResolveDependency<IResourceCache>();
         var failed = new List<string>();
         void AssertMono(ResPath path)
@@ -46,10 +46,11 @@ public sealed class MonoSoundsTests : GameTest
             AssertMono(jukebox.Path.Path);
         }
 
+        var vinylName = CEntMan.ComponentFactory.CompName<VinylComponent>();
         foreach (var id in _vinyls)
         {
             var ent = proto.Index(id);
-            ent.TryGetComponent<VinylComponent>("Vinyl", out var vinyl); // scrounger shouldnt return it if it's missing
+            ent.TryComp<VinylComponent>(vinylName, out var vinyl); // scrounger shouldnt return it if it's missing
             if (vinyl?.Song is SoundPathSpecifier sound)
                 AssertMono(sound.Path);
             else

@@ -47,7 +47,7 @@ namespace Content.Server.Roles
                 return;
             }
 
-            if (_jobSystem.MindHasJobWithId(mind, jobPrototype.Name))
+            if (_jobSystem.MindHasJobWithId(mind, jobPrototype.ID)) // Trauma - use the id not loc string jfc
             {
                 shell.WriteLine(Loc.GetString($"cmd-addrole-mind-already-has-role"));
                 return;

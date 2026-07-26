@@ -25,8 +25,6 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private PricingSystem _pricing = default!;
     //[Dependency] private SharedMapSystem _map = default!; // Trauma - no longer used
 
-    private const float DamagePitchVariation = 0.05f;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -50,8 +48,6 @@ public sealed partial class GunSystem : SharedGunSystem
     }
 
     // Trauma - moved almost everything to shared
-
-    protected override void Popup(string message, EntityUid? uid, EntityUid? user) { }
 
     protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null)
     {

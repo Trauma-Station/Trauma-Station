@@ -87,7 +87,7 @@
     guides:
     - CosmicCult
   - type: WarpPoint
-    location: The Monument
+    location: location-the-monument
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-forthecult
   - type: CosmicCorrupting

@@ -1,81 +1,53 @@
+# region Base
 - type: construction
+  abstract: true
+  id: BaseCloset
+  targetNode: done
+  category: construction-category-storage
+  canRotate: false
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
+    MechanicsKnowledge: 1
+  # </Trauma>
+# endregion
+
+# region Closets
+- type: construction
+  parent: BaseCloset
   id: ClosetSteel
   graph: ClosetSteel
-  startNode: start
-  targetNode: done
-  category: construction-category-storage
-  objectType: Structure
-  # <Trauma>
-  theory:
-    FurnitureKnowledge: 0
-  practical:
-    MetalworkingKnowledge: 1
-    MechanicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseCloset
   id: ClosetSteelSecure
   graph: ClosetSteelSecure
-  startNode: start
-  targetNode: done
-  category: construction-category-storage
-  objectType: Structure
-  # <Trauma>
-  theory:
-    FurnitureKnowledge: 0
-    ElectronicsKnowledge: 0
-  practical:
-    MetalworkingKnowledge: 1
-    MechanicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseCloset
   id: ClosetFreezer
   name: construction-recipe-closet-freezer
   graph: ClosetFreezer
-  startNode: start
-  targetNode: done
-  category: construction-category-storage
-  objectType: Structure
-  # <Trauma>
-  theory:
-    FurnitureKnowledge: 0
-  practical:
-    MetalworkingKnowledge: 1
-    MechanicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseCloset
   id: GunSafe
   graph: GunSafe
-  startNode: start
-  targetNode: done
-  category: construction-category-storage
-  objectType: Structure
   # <Trauma>
-  theory:
-    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
     MechanicsKnowledge: 2
   # </Trauma>
 
 - type: construction
+  parent: BaseCloset
   id: ClosetWall
   graph: ClosetWall
-  startNode: start
-  targetNode: done
-  category: construction-category-storage
-  objectType: Structure
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
   conditions:
-    - !type:WallmountCondition
-  # <Trauma>
-  theory:
-    FurnitureKnowledge: 0
-  practical:
-    MetalworkingKnowledge: 1
-    MechanicsKnowledge: 1
-  # </Trauma>
+  - !type:WallmountCondition
+# endregion Closets
