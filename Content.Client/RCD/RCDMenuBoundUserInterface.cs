@@ -14,6 +14,10 @@ namespace Content.Client.RCD;
 [UsedImplicitly]
 public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 {
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private PopupSystem _popup = default!;
+
     private const string TopLevelActionCategory = "Main";
 
     private static readonly Dictionary<string, (string Tooltip, SpriteSpecifier Sprite)> PrototypesGroupingInfo
@@ -31,14 +35,10 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
             ["Vents"] = ("rcd-component-vents", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Radial/RPD/vent_passive.png"))),
         };
 
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
-    [Dependency] private ISharedPlayerManager _playerManager = default!;
-
     private SimpleRadialMenu? _menu;
 
     public RCDMenuBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        IoCManager.InjectDependencies(this);
     }
 
     protected override void Open()
@@ -139,8 +139,7 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
         }
 
         // Popup message
-        var popup = EntMan.System<PopupSystem>();
-        popup.PopupClient(msg, Owner, _playerManager.LocalSession.AttachedEntity);
+        _popup.PopupEntity(msg, Owner);
     }
 
     private string GetTooltip(RCDPrototype proto)

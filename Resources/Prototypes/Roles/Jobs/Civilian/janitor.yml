@@ -15,7 +15,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
+    - SkillChipEducation
     - SkillChipJanitor
+    - SkillChipThrowing
   # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: GarbageDay

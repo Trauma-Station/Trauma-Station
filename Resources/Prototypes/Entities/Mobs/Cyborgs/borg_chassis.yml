@@ -132,10 +132,10 @@
     - type: ModifyKnowledgeGrant
       skills:
         MeleeKnowledge: 51
-        StrengthKnowledge: 51
-        ShootingKnowledge: 51
-        ToughnessKnowledge: 51
-        AthleticsKnowledge: 51
+        StrengthKnowledge: 50
+        ShootingKnowledge: 50
+        ToughnessKnowledge: 28
+        AthleticsKnowledge: 28
         WeaponsKnowledge: 51
     # </Trauma>
 
@@ -152,7 +152,7 @@
         FirstAidKnowledge: 60
         ChemistryKnowledge: 60
         MeleeKnowledge: 20
-        StrengthKnowledge: 20
+        StrengthKnowledge: 50
         ShootingKnowledge: 20
         ToughnessKnowledge: 20
         AthleticsKnowledge: 20
@@ -213,7 +213,7 @@
         MechanicsKnowledge: 60
         BotsKnowledge: 60
         MeleeKnowledge: 20
-        StrengthKnowledge: 20
+        StrengthKnowledge: 50
         ShootingKnowledge: 20
         ToughnessKnowledge: 20
         AthleticsKnowledge: 20

@@ -283,7 +283,7 @@
     grindableSolutionName: food
 
 - type: entity
-  parent: [ ProduceBase, BaseMajorContraband ]
+  parent: [ ProduceBase, BaseMajorContraband, DeathNettleDurability ]
   id: DeathNettle
   name: death nettle
   description: This nettle's out for blood.
@@ -294,11 +294,15 @@
     size: Small
     sprite: Objects/Specific/Hydroponics/death_nettle.rsi
     heldPrefix: produce
+    shape: # Trauma
+    - 0,1,0,2
+    - 1,0,1,1
+    storedRotation: 90 # Trauma
   - type: MeleeWeapon
     damage:
       types:
-        Heat: 8
-        Caustic: 8
+        # Heat: 8
+        Caustic: 1 # Trauma, was 8
   - type: Solution
     solution:
       reagents:
@@ -330,23 +334,23 @@
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Voice/Diona/diona_salute.ogg
-          params:
-            volume: -5
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnHit
-    damage:
-      types:
-        Blunt: 5 # The nettle will "wilt" after 5 hits.
+  # - type: Destructible
+  #   thresholds:
+  #   - trigger:
+  #       !type:DamageTrigger
+  #       damage: 25
+  #     behaviors:
+  #     - !type:PlaySoundBehavior
+  #       sound:
+  #         path: /Audio/Voice/Diona/diona_salute.ogg
+  #         params:
+  #           volume: -5
+  #     - !type:DoActsBehavior
+  #       acts: [ "Destruction" ]
+  # - type: DamageOnHit
+  #   damage:
+  #     types:
+  #       Blunt: 5 # The nettle will "wilt" after 5 hits.
 
 - type: entity
   name: banana
@@ -1921,6 +1925,17 @@
   id: FoodGatfruit
   description: A delicious, gun-shaped fruit with a thick wooden stem.
   components:
+  # <Trauma>
+  - type: Item
+    size: Small
+    sprite: Objects/Specific/Hydroponics/death_nettle.rsi
+    heldPrefix: produce
+    shape: # Trauma
+    - 0,1,2,1
+    - 0,0,0,0
+    storedRotation: 270 # Trauma
+    storedOffset: -5,5
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - gunpowder
@@ -2523,7 +2538,7 @@
         Quantity: 5
       - ReagentId: Nutriment
         Quantity: 5
-      - ReagentId: Pax
+      - ReagentId: Tilenol
         Quantity: 5
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/world_pea.rsi

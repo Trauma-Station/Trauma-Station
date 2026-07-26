@@ -114,8 +114,7 @@
 
                     <controls:StripeBack>
                         <PanelContainer>
-                        	<!-- Trauma - removed Loc -->
-                            <Label Text="Controls"
+                            <Label Text="{Loc 'station-ai-fixer-console-window-controls'}"
                                    HorizontalExpand="True"
                                    HorizontalAlignment="Center"/>
                         </PanelContainer>

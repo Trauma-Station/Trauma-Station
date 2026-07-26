@@ -16,35 +16,35 @@ public sealed partial class EffectActionSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnActionPerformed(Entity<EffectActionComponent> ent, ref ActionPerformedEvent args)
     {
+        var user = args.Performer;
         if (ent.Comp.OnPerformed)
-            _effects.ApplyEffects(args.Performer, ent.Comp.Effects);
+            _effects.ApplyEffects(user, ent.Comp.Effects, user: user);
     }
 
     [SubscribeLocalEvent]
     private void OnInstantAction(Entity<EffectActionComponent> ent, ref EffectInstantActionEvent args)
     {
-        _effects.ApplyEffects(args.Performer, ent.Comp.Effects);
+        var user = args.Performer;
+        _effects.ApplyEffects(user, ent.Comp.Effects, user: user);
         args.Handled = true;
     }
 
     [SubscribeLocalEvent]
     private void OnTargetAction(Entity<EffectActionComponent> ent, ref EffectTargetActionEvent args)
     {
-        _effects.ApplyEffects(args.Target, ent.Comp.Effects);
+        var user = args.Performer;
+        _effects.ApplyEffects(args.Target, ent.Comp.Effects, user: user);
         args.Handled = true;
     }
 
     [SubscribeLocalEvent]
     private void OnToggle(Entity<ToggleEffectActionComponent> ent, ref EffectToggleActionEvent args)
     {
-        bool targetState = !ent.Comp.Toggled;
-        if (targetState && ent.Comp.OnToggleConditions is { } conditions)
-        {
-            if (!_conditions.TryConditions(args.Performer, conditions, user: args.Performer))
-            {
-                return;
-            }
-        }
+        var user = args.Performer;
+        var targetState = !ent.Comp.Toggled;
+        if (targetState && ent.Comp.OnToggleConditions is { } conditions &&
+            !_conditions.TryConditions(user, conditions, sourceEnt: user))
+            return;
 
         args.Handled = true;
 
@@ -62,13 +62,13 @@ public sealed partial class EffectActionSystem : EntitySystem
             if (ent.Comp.OnToggle is not { } onEffects)
                 return;
 
-            _effects.ApplyEffects(args.Performer, onEffects);
+            _effects.ApplyEffects(user, onEffects, user: user);
             return;
         }
 
         if (ent.Comp.OffToggle is not { } offToggleEffects)
             return;
 
-        _effects.ApplyEffects(args.Performer, offToggleEffects);
+        _effects.ApplyEffects(user, offToggleEffects, user: user);
     }
 }

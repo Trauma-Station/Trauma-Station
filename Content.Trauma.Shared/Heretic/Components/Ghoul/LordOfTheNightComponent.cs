@@ -38,7 +38,7 @@ public sealed partial class LordOfTheNightComponent : Component
     };
 
     [DataField]
-    public FixedPoint2 HealPerArm = 80;
+    public FixedPoint2 HealPerArm = 250;
 
     [DataField]
     public FixedPoint2 HealthPerSegment = 250;

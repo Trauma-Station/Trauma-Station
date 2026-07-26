@@ -6,7 +6,7 @@
   suffix: bananadine
   components:
   - type: Label
-    currentLabel: reagent-name-bananadine
+    localizedLabel: reagent-name-bananadine
   - type: Solution
     solution:
       reagents:

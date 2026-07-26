@@ -41,6 +41,12 @@
   suffix: Gun, Empty
   description: Useful for aspiring mercenaries, whether you're fighting for a company, a nation or anyone else. Or just making a really big omelette.
   components:
+  # <Trauma>
+  - type: Storage
+    grid:
+    - 0,0,6,3
+    maxItemSize: Ginormous
+  # </Trauma>
   - type: Appearance
   - type: Sprite
     sprite: Objects/Storage/Briefcases/weapon_case_large.rsi
@@ -73,8 +79,8 @@
   - type: Sprite
     sprite: Objects/Storage/Briefcases/weapon_case.rsi
   - type: Item
-    size: Large
+    size: Ginormous
   - type: Storage
-    maxItemSize: Large
+    maxItemSize: Ginormous
     grid:
     - 0,0,3,1

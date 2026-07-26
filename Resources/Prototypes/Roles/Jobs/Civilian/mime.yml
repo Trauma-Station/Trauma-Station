@@ -16,7 +16,7 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipMime
+    - SkillChipEducation
   # moved to skill chip
   #- !type:AddComponentSpecial
   #  components:

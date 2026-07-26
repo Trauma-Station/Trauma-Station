@@ -4,6 +4,7 @@ using Content.Shared.Dataset;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
+using Content.Shared.StationRecords.Components;
 using Robust.Shared.Random;
 using System.Text;
 
@@ -41,10 +42,10 @@ public sealed partial class CodespeakSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<JobPrototype>())

@@ -1,0 +1,188 @@
+# Implants
+
+- type: listing
+  id: UplinkStorageImplanter
+  name: uplink-storage-implanter-name
+  description: uplink-storage-implanter-desc
+  icon: { sprite: /Textures/Clothing/Back/Backpacks/backpack.rsi, state: icon }
+  productEntity: StorageImplanter
+  cost:
+    Telecrystal: 35 # Trauma - was 8, 5x and cheaper. surgery exists
+  categories:
+    - UplinkImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+
+- type: listing
+  id: UplinkFreedomImplanter
+  name: uplink-freedom-implanter-name
+  description: uplink-freedom-implanter-desc
+  icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: freedom }
+  productEntity: FreedomImplanter
+  cost:
+    Telecrystal: 10 # Trauma - was 2, 5x. instant KOS
+  categories:
+    - UplinkImplants
+
+# <Trauma> - chuddy
+#- type: listing
+#  id: UplinkScramImplanter
+#  name: uplink-scram-implanter-name
+#  description: uplink-scram-implanter-desc
+#  icon: { sprite: /Textures/Structures/Specific/anomaly.rsi, state: anom4 }
+#  productEntity: ScramImplanter
+#  cost:
+#    Telecrystal: 15 # Trauma - was 2, 5x and more expensive
+#  categories:
+#    - UplinkImplants
+# </Trauma>
+
+- type: listing
+  id: UplinkDnaScramblerImplant
+  name: uplink-dna-scrambler-implanter-name
+  description: uplink-dna-scrambler-implanter-desc
+  icon: { sprite: /Textures/Mobs/Species/Human/parts.rsi, state: full }
+  productEntity: DnaScramblerImplanter
+  cost:
+    Telecrystal: 15 # Trauma - was 3, 5x
+  categories:
+    - UplinkImplants
+
+- type: listing
+  id: UplinkEmpImplanter
+  name: uplink-emp-implanter-name
+  description: uplink-emp-implanter-desc
+  icon: { sprite: /Textures/Effects/emp.rsi, state: emp_disable }
+  productEntity: EmpImplanter
+  cost:
+    Telecrystal: 10 # Trauma - was 2, 5x
+  categories:
+    - UplinkImplants
+
+- type: listing
+  id: UplinkRadioImplanter
+  name: uplink-radio-implanter-name
+  description: uplink-radio-implanter-desc
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: synd_label }
+  productEntity: RadioImplanter
+  # <Trauma>
+  cost:
+    Telecrystal: 6 # was 2, 5x and cheaper to promote use
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+  # </Trauma>
+  categories:
+  - UplinkImplants
+
+- type: listing
+  id: UplinkMicroBombImplanter
+  name: uplink-micro-bomb-implanter-name
+  description: uplink-micro-bomb-implanter-desc
+  icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
+  productEntity: MicroBombImplanter
+  cost:
+    Telecrystal: 15 # Trauma - was 2, 5x and more expensive
+  categories:
+  - UplinkImplants
+  # Trauma - removed conditions, traitor jihad
+
+- type: listing
+  id: UplinkMacroBombImplanter
+  name: uplink-macro-bomb-implanter-name
+  description: uplink-macro-bomb-implanter-desc
+  icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
+  productEntity: MacroBombImplanter
+  cost:
+    Telecrystal: 65 # Trauma - was 13, 5x
+  categories:
+    - UplinkImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - ContravendUplink # Trauma
+          - NukeOpsUplink
+    - !type:BuyerWhitelistCondition
+      blacklist:
+        components:
+          - SurplusBundle
+
+- type: listing
+  id: UplinkDeathAcidifierImplanter
+  name: uplink-death-acidifier-implant-name
+  description: uplink-death-acidifier-implant-desc
+  icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: gib }
+  productEntity: DeathAcidifierImplanter
+  cost:
+    Telecrystal: 15 # Trauma - was 4, 5x and cheaper its soy
+  categories:
+    - UplinkImplants
+  # Trauma - removed conditions, traitor jihad
+
+- type: listing
+  id: UplinkUplinkImplanter # uplink uplink real
+  name: uplink-uplink-implanter-name
+  description: uplink-uplink-implanter-desc
+  icon: { sprite: Objects/Devices/communication.rsi, state: radio } # Trauma - old-radio -> radio
+  productEntity: UplinkImplanter
+  cost:
+    Telecrystal: 5 # Trauma - was 1, 5x
+  categories:
+  - UplinkImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+
+- type: listing
+  id: UplinkDeathRattle
+  name: uplink-deathrattle-implant-name
+  description: uplink-deathrattle-implant-desc
+  productEntity: BoxDeathRattleImplants
+  cost:
+    Telecrystal: 20 # Trauma - was 4, 5x
+  categories:
+  - UplinkImplants
+  conditions:
+    - !type:StoreWhitelistCondition
+      # <Trauma>
+      blacklist:
+        tags:
+        - ContravendUplink
+      # </Trauma>
+      whitelist:
+        tags:
+          - NukeOpsUplink
+    - !type:BuyerWhitelistCondition
+      blacklist:
+        components:
+          - SurplusBundle
+
+- type: listing
+  id: UplinkFakeMindshield
+  name: uplink-fake-mindshield-name
+  description: uplink-fake-mindshield-desc
+  icon: { sprite: Interface/Actions/actions_fakemindshield.rsi, state: icon-on }
+  productEntity: FakeMindShieldImplanter
+  cost:
+    Telecrystal: 15 # Trauma - was 4, 5x and cheaper to promote infiltrating sec
+  categories:
+  - UplinkImplants
+
+- type: listing
+  id: UplinkVoiceMaskImplant
+  name: uplink-voice-mask-implanter-name
+  description: uplink-voice-mask-implanter-desc
+  icon: { sprite: Interface/Actions/voice-mask.rsi, state: icon }
+  productEntity: VoiceMaskImplanter
+  cost:
+    Telecrystal: 10 # Trauma - was 2, 5x
+  categories:
+  - UplinkImplants

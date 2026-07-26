@@ -180,12 +180,12 @@
     - id: ClothingUniformOveralls
     - id: ClothingHeadHatTrucker
       prob: 0.3
-    - id: GatfruitSeeds
-      prob: 0.1
-    - id: FlyAmanitaSeeds
-      prob: 0.5
-    - id: NettleSeeds
-      prob: 0.7
+    # - id: GatfruitSeeds # Scammer
+    #   prob: 0.1
+    # - id: FlyAmanitaSeeds
+    #   prob: 0.5
+    # - id: NettleSeeds
+    #   prob: 0.7
 
 - type: entity
   id: ClosetJanitorBombFilled

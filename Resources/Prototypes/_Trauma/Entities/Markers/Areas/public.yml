@@ -114,6 +114,8 @@
   components:
   - type: Sprite
     state: pool
+  - type: Tag
+    tags: [ AreaBeach ]
 
 - type: entity
   parent: BaseAreaStation

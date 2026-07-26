@@ -1,15 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ OrganBaseEyes, OrganSpriteHumanInternal, OrganSlimePersonInternal ]
-  id: OrganSlimePersonEyes
-  components:
-  - type: VisualOrganMarkings
-    markingData:
-      group: Slime
-  # TODO: custom sprite
-
-- type: entity
   parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganSlimePersonInternal ]
   id: OrganSlimePersonTongue
   # TODO: custom sprite

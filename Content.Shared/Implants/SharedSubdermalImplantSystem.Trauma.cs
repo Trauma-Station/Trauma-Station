@@ -18,6 +18,6 @@ public abstract partial class SharedSubdermalImplantSystem
         {
             RaiseLocalEvent(implant, relayEv);
         }
-        args = relayEv.Event; // set the original event at the end
+        args = relayEv.Args; // set the original event at the end
     }
 }

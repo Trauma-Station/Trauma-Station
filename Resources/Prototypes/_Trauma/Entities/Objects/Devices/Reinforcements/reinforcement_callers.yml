@@ -59,6 +59,11 @@
   priority: 0
 
 - type: storeCategory
+  id: Bioweapons
+  name: store-category-bioweapons
+  priority: 1
+
+- type: storeCategory
   id: ServiceHoP
   name: store-category-service
   priority: 0

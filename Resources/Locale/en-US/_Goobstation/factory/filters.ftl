@@ -25,9 +25,6 @@ anchor-filter-examine-enabled = It is set to only allow anchored, anchorable obj
 anchor-filter-examine-disabled = It is set to only allow unanchored, anchorable objects.
 
 mob-filter-window-title = Edit Mob Filter
-mob-state-Alive = Alive
-mob-state-Dead = Dead
-mob-state-Critical = Critical
 mob-state-SoftCrit = Soft-crit
 mob-filter-examine-unset = No mob states are configured
 mob-filter-examine-set = It is configured to allow mobs in these states: {$states}

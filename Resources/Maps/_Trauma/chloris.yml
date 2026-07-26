@@ -27447,7 +27447,7 @@ entities:
     - type: Transform
       pos: 33.5,108.5
       parent: 2
-- proto: AlwaysPoweredlightCyan
+- proto: PoweredlightCyan
   entities:
   - uid: 1403
     components:
@@ -27461,7 +27461,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 39.5,150.5
       parent: 2
-- proto: AlwaysPoweredLightExterior
+- proto: PoweredlightExterior
   entities:
   - uid: 1405
     components:

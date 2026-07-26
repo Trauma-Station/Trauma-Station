@@ -60,7 +60,7 @@ public abstract partial class SharedSubdermalImplantSystem
             RaiseLocalEvent(implant, relayEv);
         }
 
-        args = relayEv.Event;
+        args = relayEv.Args;
     }
 }
 
@@ -69,13 +69,13 @@ public abstract partial class SharedSubdermalImplantSystem
 /// </summary>
 public sealed class ImplantRelayEvent<T> where T : notnull
 {
-    public T Event;
+    public T Args;
 
     public readonly EntityUid ImplantedEntity;
 
     public ImplantRelayEvent(T ev, EntityUid implantedEntity)
     {
-        Event = ev;
+        Args = ev;
         ImplantedEntity = implantedEntity;
     }
 }
