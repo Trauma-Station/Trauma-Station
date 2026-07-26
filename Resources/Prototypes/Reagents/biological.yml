@@ -45,7 +45,8 @@
         damage:
           Brute: -3
           Burn: -1.25
-          Poison: -1.25 # Trauma
+          Airloss: -3 # Trauma
+          Toxin: -1.25 # Trauma
     Bloodstream: # Don't inject someone else's blood into yourself! Your own blood won't actually metabolise.
       effects:
       - !type:HealthChange
