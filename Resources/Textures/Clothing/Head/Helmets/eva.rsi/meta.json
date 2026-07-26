@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Sprite edited by Flareguy for SS14, original unedited sprite can be found in https://github.com/tgstation/tgstation/commit/40d89d11ea4a5cb81d61dc1018b46f4e7d32c62a. equipped-HELMET-dog modified from equipped-HELMET in parts and collaboration by Sparlight (GitHub) and Raccoononi (GitHub). Vulpkanin and Reptilian state by TiniestShark (Github).",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/43e7628b03a24fbfb499d5f1369ab3e5dd5c4a4c/icons/obj/clothing/head/spacehelm.dmi, vox by 10kee (Github), equipped-HELMET-dog modified from equipped-HELMET in parts and collaboration by Sparlight (GitHub) and Raccoononi (GitHub). Vulpkanin and Reptilian state by TiniestShark (Github).",
     "size": {
         "x": 32,
         "y": 32

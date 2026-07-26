@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprites by Flareguy & cboyjet, heavily edited from space suit sprites found in https://github.com/tgstation/tgstation/commit/fb2d71495bfe81446159ef528534193d09dd8d34, monkey derivative made by brainfood1183 (github) for ss14",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/f86e978d64cb6a9843dabba1066067221f95d512/icons/obj/clothing/suits/spacesuit.dmi, vox by 10kee (Github) monkey derivative made by brainfood1183 (github) for ss14",
   "size": {
     "x": 32,
     "y": 32

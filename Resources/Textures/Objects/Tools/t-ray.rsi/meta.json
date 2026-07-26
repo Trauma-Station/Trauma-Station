@@ -1,7 +1,7 @@
 {
 	"version": 1,
 	"license": "CC-BY-SA-3.0",
-	"copyright": "/tg/station, 'icons/obj/device.dmi' commit 2b8b045d, redrawn by Ubaser, inhands by TiniestShark (github).",
+	"copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/7b6b482eed2b2b08d780c0f1ec0f0365aaa4ed6b/icons/obj/devices/scanner.dmi, inhands by TiniestShark (github).",
 	"size": {
         "x": 32,
         "y": 32

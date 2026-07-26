@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/c838ba21dae97db345e0113f99596decd1d66039 and modified by Flareguy for Space Station 14",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/f86e978d64cb6a9843dabba1066067221f95d512/icons/mob/clothing/feet.dmi and https://github.com/tgstation/tgstation/blob/f86e978d64cb6a9843dabba1066067221f95d512/icons/obj/clothing/shoes.dmi, and modified by Flareguy for Space Station 14",
   "size": {
     "x": 32,
     "y": 32

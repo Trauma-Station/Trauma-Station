@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/4f6190e2895e09116663ef282d3ce1d8b35c032e, texture edited by TeaMaki (On github TeaMakiNL), Inhands by onesch",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/43e7628b03a24fbfb499d5f1369ab3e5dd5c4a4c/icons/obj/clothing/head/hats.dmi, Inhands by onesch",
   "size": {
     "x": 32,
     "y": 32

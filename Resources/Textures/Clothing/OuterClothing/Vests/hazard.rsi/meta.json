@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/c838ba21dae97db345e0113f99596decd1d66039. Vox state made by Flareguy for Space Station 14. Modified and splited into shaded-unshaded states by kosticia.",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/f86e978d64cb6a9843dabba1066067221f95d512/icons/obj/clothing/suits/utility.dmi, Vox state made by Flareguy for Space Station 14. Modified and splited into shaded-unshaded states by kosticia.",
   "size": {
     "x": 32,
     "y": 32
