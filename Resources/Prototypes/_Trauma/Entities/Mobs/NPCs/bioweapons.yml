@@ -40,16 +40,6 @@
     thresholds:
       0: Alive
       450: Dead
-  - type: PassiveDamage
-    allowedStates:
-      - Alive
-    damage:
-      types:
-        Heat: -1.5
-        Blunt: -.25
-        Slash: -.25
-        Piercing: -.25
-        Ballistic: -.50
   - type: MeleeWeapon
     range: 1.5
     attackRate: 0.5
