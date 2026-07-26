@@ -15,7 +15,7 @@
     organs:
       Torso: OrganAnimalTorso
       Lungs: OrganAnimalLungs
-      Heart: OrganArachnidHeart
+      Heart: OrganAnimalHeart
       Stomach: OrganBloodsuckerStomachFast
       Liver: OrganAnimalLiver
       Kidneys: OrganAnimalKidneys
