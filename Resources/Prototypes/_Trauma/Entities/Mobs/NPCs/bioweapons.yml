@@ -132,8 +132,8 @@
 - type: entity
   parent: [ AppearanceBioweapon, BaseMobAnimal, SimpleMobBase ]
   id: batonioweapon
-  description: A bioweapon supplied to security by one of Nanotrasens many human genetic experimentation subsidiaries. It follow the orders of whoever has it's translator.
-  name: PX-31 "Compliance Unit"
+  name: Bioweapon2
+  description: A cheaper, more refined alternative to the standard bioweapon, with less lethal fixtures and assist in suspect apprehension. It follow the orders of whoever has it's translator.
   components:
   - type: MovementSpeedModifier
     baseWalkSpeed: 4
