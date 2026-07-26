@@ -59,7 +59,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
         SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
     }
 
-    private void OnHereticAscended(HereticAscendedEvent ev)
+    private void OnHereticAscended(ref HereticAscendedEvent ev)
     {
         _ticker.StartGameRule(ERTChaplainEvent);
         _roundEnd.RequestRoundEnd(checkCooldown: false, cantRecall: true, countdownTime: TimeSpan.FromMinutes(10));
