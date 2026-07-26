@@ -12046,3 +12046,19 @@ Entries:
   id: 1320
   time: '2026-07-26T03:07:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3721
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Readded the Reclaimer for Salvage
+  - type: Add
+    message: Added space modkits to the salvage vendor
+  id: 1321
+  time: '2026-07-26T11:13:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3723
+- author: tsarevichvanya
+  changes:
+  - type: Add
+    message: Added the ability for the NTR, HoP, CE, RD, QM, and CMO to roll antag.
+  id: 1322
+  time: '2026-07-26T11:31:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3688
