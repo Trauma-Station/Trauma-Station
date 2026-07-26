@@ -2987,8 +2987,9 @@
   - type: InputMover
   - type: MobMover
   - type: HTN
+    constantlyReplan: false
     rootTask:
-      task: SimpleHostileCompound
+      task: SimpleHostile # Trauma
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-giant-spider-name
@@ -3003,22 +3004,9 @@
   name: giant spider
   parent: MobSpiderBase
   id: MobGiantSpider
+  abstract: true
   description: Widely recognized to be the literal worst thing in existence.
   components:
-  # <Trauma>
-  - type: EggLayer
-    eggSpawn:
-    - id: SpawnMobMouse
-  - type: ActionGrant
-    actions:
-    - ActionMouseCall
-  - type: MobCallSource
-    whitelist:
-      tags:
-      - Mouse
-  # - type: ShadowCocoonMaker
-  #   shadowCocoon:
-  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -3058,6 +3046,45 @@
   - MobSpiderAngryBase
   - MobGiantSpider
   id: MobGiantSpiderAngry
+  # <Trauma>
+  components:
+  - type: Tag
+    tags:
+    - Spider
+  - type: ActionGrant
+    actions:
+    - ActionSpiderCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Spider
+  - type: MobCallable
+  - type: HTN
+    constantlyReplan: false
+    rootTask:
+      task: SpiderCompound # Trauma
+  # - type: ShadowCocoonMaker
+  #   shadowCocoon:
+  - type: EggLayer
+    eggSpawn:
+    - id: SpiderEggs
+    hungerUsage: 100
+    eggLayAction: SpiderMultiply
+    hungerRequired: true
+  - type: Hunger
+    startingHunger: 15 # Goobstation change
+    thresholds:
+      Overfed: 150
+      Okay: 100
+      Peckish: 15
+      Starving: 10
+      Dead: 0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  # </Trauma>
+
 
 - type: entity
   name: clown spider

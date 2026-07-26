@@ -1193,6 +1193,7 @@
       path: /Audio/Animals/snake_hiss.ogg
   - type: NoSlip
   - type: Spider
+    spawnsWebsAsNonPlayer: false
   - type: IgnoreSpiderWeb
   - type: Bloodstream
     bloodReferenceSolution:
@@ -1233,6 +1234,6 @@
     sprite: _Trauma/Mobs/Animals/babyspider.rsi
     state: babyspider
   - type: TimedDespawn
-    lifetime: 1
+    lifetime: 120
   - type: SpawnOnDespawn
     prototype: MobGiantSpiderAngry

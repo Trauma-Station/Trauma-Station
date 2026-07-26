@@ -41,3 +41,9 @@
       - id: MagicInkUnden
       - id: MagicInkUzult
       - id: MagicInkYewgallink
+
+# - type: entity
+#   parent: MarkerBase
+#   id: BabySpiderSpawner
+#   name: baby spider spawner
+#   components:
