@@ -159,7 +159,7 @@
   - type: Lock
     unlockOnClick: false
   - type: WarpPoint
-    location: Nuclear Reactor
+    location: location-nuclear-reactor
     blacklist:
       tags:
       - GhostOnlyWarp

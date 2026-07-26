@@ -15,7 +15,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipRadioHost
+    - SkillChipEducation
 
 - type: startingGear
   id: RadioHostGear

@@ -141,7 +141,7 @@
   - type: FactionException
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound
   - type: InteractionPopup
     successChance: 0.4
     interactSuccessString: petting-success-generic
@@ -715,12 +715,15 @@
   name: dart frog
   description: A brilliantly colored amphibian. Its skin secretes a potent paralytic toxin.
   components:
+  - type: Penetratable
+    penetrateDamage: 3
+  - type: ZombieImmune
   - type: Extractable
     grindableSolutionName: poison
   - type: VentCrawler
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 4
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -735,13 +738,13 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      25: Dead
+      12: Dead
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 50
+        damage: 15
       behaviors:
       - !type:GibBehavior
         recursive: false
@@ -749,7 +752,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: Blood
-        Quantity: 20
+        Quantity: 3
   - type: Item
     size: Tiny
   - type: CombatMode
@@ -762,7 +765,6 @@
     damage:
       types:
         Piercing: 1
-        Poison: 1
   - type: InteractionPopup
     successChance: 0.6
     interactSuccessString: petting-success-frog
@@ -785,6 +787,11 @@
   - type: Tag
     tags:
     - VimPilot
+  - type: DamageOnHolding # Danger to hold
+    enabled: true
+    damage:
+      types:
+        Poison: 10
 
 - type: entity
   parent: MobDartFrogBase
@@ -871,12 +878,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1.5
     solution: melee
-  - type: NpcFactionMember
-    factions:
-    - SimpleHostile
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
 
 - type: entity
   parent: [SolutionWeapon, SolutionTiny]
@@ -979,12 +980,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
-  - type: NpcFactionMember
-    factions:
-    - SimpleHostile
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
 
 - type: entity
   parent: [SolutionWeapon, SolutionTiny]
@@ -1036,12 +1031,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 2
     solution: melee
-  - type: NpcFactionMember
-    factions:
-    - SimpleHostile
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
 
 - type: entity
   parent: [SolutionWeapon, SolutionTiny]

@@ -26,7 +26,7 @@
     sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devastator.rsi
   - type: GunRequiresWield # ah yes let me one-hand the quad barrel shotgun
   - type: Gun
-    fireRate: 3 # Was 4 but I nerfed it a bit because it felt fucky at 4
+    fireRate: 1.5 # Was 4 but I nerfed it a bit because it felt fucky at 4
   - type: GunSpreadModifier
     spread: 1.5 # Was 2 but I wanted it to be more useful at range... still shit though.
   - type: BallisticAmmoProvider

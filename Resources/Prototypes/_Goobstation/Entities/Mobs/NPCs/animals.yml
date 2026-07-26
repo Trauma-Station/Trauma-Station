@@ -362,6 +362,7 @@
       types:
         Blunt: 10
         Slash: 10
+        Structural: 10
   - type: TypingIndicator
     proto: alien
   - type: Tag
@@ -713,6 +714,17 @@
   id: MobHorse
   description: Very foul creature. For those that feel like punching.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    angle: 0
+    damage:
+      types:
+        Blunt: 10
+  # </Trauma>
   - type: MovementSpeedModifier
     baseSprintSpeed: 5.5
     baseWalkSpeed: 4.5 # default walking speed

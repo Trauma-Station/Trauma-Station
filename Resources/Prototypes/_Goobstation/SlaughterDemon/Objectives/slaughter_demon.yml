@@ -137,6 +137,7 @@
   - type: TargetObjective
     title: objective-show-power-title
   - type: PickRandomPerson
+    conditions: []
 
 - type: entity
   parent: SlaughterFluffBaseObjective
@@ -150,6 +151,7 @@
   - type: TargetObjective
     title: objective-drive-insane-title
   - type: PickRandomPerson
+    conditions: []
 
 - type: entity
   parent: SlaughterFluffBaseObjective

@@ -57,9 +57,9 @@
     generated:
       reagents:
       - ReagentId: MuteToxin
-        Quantity: 1
+        Quantity: 5
   - type: MeleeChemicalInjector
-    transferAmount: 0.1
+    transferAmount: 5
     solution: melee
 
 # TODO: inherit BaseSword
@@ -203,7 +203,7 @@
         volume: -8
   - type: MeleeWeapon
     animationRotation: -45
-    canWideSwing: false
+    heavyPartDamageMultiplier: 0.75
     damage:
       types:
         Slash: 12
@@ -431,7 +431,7 @@
     graph: RevKunai
   - type: MeleeWeapon
     animationRotation: -130
-    canWideSwing: false
+    heavyPartDamageMultiplier: 0.75
     damage:
       types:
         Piercing: 10

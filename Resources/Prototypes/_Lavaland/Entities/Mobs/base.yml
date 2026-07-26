@@ -25,4 +25,4 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-  - type: WeatherImmune
+  - type: AshStormImmune

@@ -30,7 +30,7 @@ public sealed partial class TileEntityEffectSystem : EntitySystem
         var otherUid = args.Tripper;
 
         // <Trauma>
-        if (!_condition.TryConditions(otherUid, ent.Comp.Conditions, user: otherUid))
+        if (!_condition.TryConditions(otherUid, ent.Comp.Conditions, sourceEnt: otherUid))
             return;
         // </Trauma>
 

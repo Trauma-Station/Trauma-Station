@@ -13,6 +13,8 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
+    - SkillChipEducation
+    - SkillChipNonLethal
     - SkillChipClown
   # </Trauma>
   - !type:AddComponentSpecial

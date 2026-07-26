@@ -125,9 +125,6 @@
   - type: ActiveRadio
     receiveAllChannels: true
     globalReceive: true
-  - type: Tag
-    tags:
-    - BypassInteractionRangeChecks
   - type: NightVision
     netsync: false
     enabled: false
@@ -143,11 +140,7 @@
   parent: MobObserverBase
   id: MobObserver
   components:
-  - type: Spectral
-  - type: Tag
-    tags: # BAD: Intentional removal of inherited tag
-    - AllowGhostShownByEvent
-  # <Goobstation>
+  # <Trauma>
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -158,7 +151,13 @@
         toggleAction: ActionGhostShowRadar
   - type: RadarConsole
     followEntity: true
-  # </Goobstation>
+  # </Trauma>
+  - type: Spectral
+  - type: Tag
+    tags:
+    - AllowGhostShownByEvent
+    - AllowPortalTraversal
+    - PreventPortalCollision
 
 - type: entity
   parent: BaseMentalAction

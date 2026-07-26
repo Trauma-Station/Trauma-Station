@@ -74,7 +74,7 @@
 - type: entity
   name: space bear
   id: MobBearSpace
-  parent: [AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Fauna # Goob
@@ -124,7 +124,7 @@
 - type: entity
   name: space kangaroo
   id: MobKangarooSpace
-  parent: [AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It looks friendly. Why don't you give it a hug?
   components:
   # <Trauma>
@@ -195,7 +195,7 @@
 - type: entity
   name: space spider
   id: MobSpiderSpace
-  parent: [AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It's so glowing, it looks dangerous.
   components:
   # <Goob>
@@ -315,7 +315,7 @@
 - type: entity
   name: space cobra
   id: MobCobraSpace
-  parent: [AppearanceSpaceCobra, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceCobra
+  parent: [ AppearanceSpaceCobra, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceCobra
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Trauma>
@@ -440,7 +440,7 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobSheepBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobSheepBase, BaseMobDestructible ]
   id: MobSheepSpace
   name: space sheep
   description: A sheep... in space!
@@ -536,6 +536,9 @@
   name: snail
   description: Revolting unless you're french.
   components:
+  #<Trauma>
+  - type: ZombieImmune
+  #</Trauma>
   - type: GhostRole
     prob: 0 # Trauma
     makeSentient: true

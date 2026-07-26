@@ -71,6 +71,11 @@
       Kidneys: OrganPlasmamanKidneys
   - type: HumanoidProfile
     species: Plasmaman
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 - type: entity
   parent:

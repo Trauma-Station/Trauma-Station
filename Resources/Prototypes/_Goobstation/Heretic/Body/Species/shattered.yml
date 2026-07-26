@@ -24,6 +24,11 @@
       Brain: OrganHumanBrain
   - type: HumanoidProfile
     species: Shattered
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 - type: entity
   save: false

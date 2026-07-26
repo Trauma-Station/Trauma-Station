@@ -1,0 +1,96 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseSkillChipPSON, BaseCentcommContraband ]
+  id: SkillChipDeathSquad
+  name: PSON-Chip (Deathsquad Overwrite)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      CookingKnowledge: 100
+      DoorsKnowledge: 100
+      AirlocksKnowledge: 100
+      BananiumKnowledge: 100
+      BotsKnowledge: 100
+      FurnitureKnowledge: 100
+      InfrastructureKnowledge: 100
+      ElectronicsKnowledge: 100
+      WallsKnowledge: 100
+      WindowsKnowledge: 100
+      LiteracyKnowledge: 100
+      LanguageSolCommon: 100
+      SurgeryKnowledge: 100
+      FirstAidKnowledge: 100
+      ChemistryKnowledge: 100
+      ThrowingKnowledge: 100
+      AthleticsKnowledge: 100
+      StrengthKnowledge: 100
+      ToughnessKnowledge: 100
+      MeleeKnowledge: 100
+      ShootingKnowledge: 100
+      KnowledgeWeaponsBludgeon: 100
+      KnowledgeWeaponsShortBlade: 100
+      KnowledgeWeaponsLongBlade: 100
+      KnowledgeWeaponsPolearm: 100
+      KnowledgeWeaponsPistol: 100
+      KnowledgeWeaponsRifle: 100
+      KnowledgeWeaponsShotgun: 100
+      KnowledgeWeaponsSniper: 100
+      KnowledgeWeaponsHeavy: 100
+      KnowledgeWeaponsLaser: 100
+      FabricationKnowledge: 100
+      WeaponsKnowledge: 100
+      ArmorKnowledge: 100
+      MetalworkingKnowledge: 100
+      CarvingKnowledge: 100
+      GunsmithingKnowledge: 100
+      MechanicsKnowledge: 100
+      TailoringKnowledge: 100
+      JanitorKnowledge: 100
+
+- type: entity
+  parent: [ BaseSkillChipPSON, BaseCentcommContraband ]
+  id: SkillChipERT
+  name: PSON-Chip (ERT Overwrite)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BananiumKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      LiteracyKnowledge: 100
+      LanguageSolCommon: 100
+      SurgeryKnowledge: 50
+      FirstAidKnowledge: 50
+      ChemistryKnowledge: 50
+      ThrowingKnowledge: 50
+      AthleticsKnowledge: 50
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 50
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      KnowledgeWeaponsBludgeon: 50
+      KnowledgeWeaponsShortBlade: 50
+      KnowledgeWeaponsLongBlade: 50
+      KnowledgeWeaponsPolearm: 50
+      KnowledgeWeaponsPistol: 50
+      KnowledgeWeaponsRifle: 50
+      KnowledgeWeaponsShotgun: 50
+      KnowledgeWeaponsSniper: 50
+      KnowledgeWeaponsHeavy: 50
+      KnowledgeWeaponsLaser: 50
+      FabricationKnowledge: 50
+      WeaponsKnowledge: 50
+      ArmorKnowledge: 50
+      MetalworkingKnowledge: 50
+      CarvingKnowledge: 50
+      GunsmithingKnowledge: 50
+      MechanicsKnowledge: 50
+      TailoringKnowledge: 50
+      JanitorKnowledge: 50

@@ -6,7 +6,6 @@
   - Conquest
   - GovernmentMan
   - SyndicateHighCommander # already ontag...
-  - NanotrasenRepresentative
   - NavyCaptain
   - NavyOfficerUndercover
   - Diplomat
@@ -32,13 +31,15 @@
   parent: BaseAntagSpecifier
   id: CommandBlacklistedAntag
   jobBlacklist:
+  # <Trauma>
   - Captain
-  - HeadOfPersonnel
+  # - HeadOfPersonnel
   - HeadOfSecurity
-  - ChiefMedicalOfficer
-  - ResearchDirector
-  - ChiefEngineer
-  - Quartermaster
+  # - ChiefMedicalOfficer
+  # - ResearchDirector
+  # - ChiefEngineer
+  # - Quartermaster
+  # </Trauma>
 
 # Borgs
 - type: antagSpecifier

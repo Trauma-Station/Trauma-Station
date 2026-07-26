@@ -104,7 +104,7 @@
       - Binary
     - type: IntellicardableMind
     - type: OrganChipContainer
-      limit: 2 # TODO: make 3 or maybe something different because robot
+      limit: 3
     - type: ContainerContainer
       containers:
         knowledge: !type:Container

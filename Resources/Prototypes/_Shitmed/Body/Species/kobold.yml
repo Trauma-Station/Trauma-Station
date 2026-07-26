@@ -18,7 +18,13 @@
   id: AppearanceKobold
   name: kobold appearance
   components:
-  # TODO SHITMED: displacements??
+  - type: Inventory
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _Trauma/Mobs/Animals/displacements.rsi
+            state: jumpsuit-kobold
   - type: InitialBody
     organs:
       Torso: OrganKoboldTorso

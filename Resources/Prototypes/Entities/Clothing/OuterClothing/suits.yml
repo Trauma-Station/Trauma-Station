@@ -225,14 +225,13 @@
     parent: true
     components:
     - type: Stealth
-      maxVisibility: 0.1
+      # <Trauma>
       hadOutline: true
-      thermalsImmune: true # Goobstation
-    - type: StealthOnMove
-      invisibilityPenalty: 3
-      maxInvisibilityPenalty: 1.6
-      passiveVisibilityRate: -1 # cloak very fast
-      movementVisibilityRate: 0.15 # only some cloak if moving
+      thermalsImmune: true
+      # </Trauma>
+      minVisibility: 0.1
+      lastVisibility: 0.1
+      shimmerFrequency: 0.05
   - type: PowerCellDraw
     drawRate: 3.6 # 100 seconds on the default cell # Goob edit
   - type: ToggleCellDraw
@@ -354,8 +353,8 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
-  - type: AddAccentClothing
-    accent: BarkAccent
+  - type: BarkAccent
+    relayAccent: true
 
 - type: entity
   parent: [ ClothingOuterBase, ClothingOuterBaseToggleable ]

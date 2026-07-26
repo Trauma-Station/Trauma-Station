@@ -13,7 +13,7 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipMusician
+    - SkillChipEducation
   # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: MikuDay

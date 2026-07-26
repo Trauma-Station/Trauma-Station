@@ -11,14 +11,7 @@ public sealed partial class FireStackSpeedSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _mod = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FireStackSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
-        SubscribeLocalEvent<FireStackSpeedComponent, FireStacksChangedEvent>(OnFireStacksChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRefreshMovespeed(Entity<FireStackSpeedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (!TryComp(ent, out FlammableComponent? flam) || !flam.OnFire || flam.FireStacks <= 0f)
@@ -28,8 +21,9 @@ public sealed partial class FireStackSpeedSystem : EntitySystem
         args.ModifySpeed(mod);
     }
 
+    [SubscribeLocalEvent]
     private void OnFireStacksChanged(Entity<FireStackSpeedComponent> ent, ref FireStacksChangedEvent args)
     {
-        _mod.RefreshMovementSpeedModifiers(ent);
+        _mod.RefreshMovementSpeedModifiers(ent.Owner);
     }
 }

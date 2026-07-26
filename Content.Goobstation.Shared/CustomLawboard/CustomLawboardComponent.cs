@@ -4,7 +4,6 @@ using Content.Shared.Silicons.Laws;
 
 namespace Content.Goobstation.Shared.CustomLawboard;
 
-
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CustomLawboardComponent : Component
 {
