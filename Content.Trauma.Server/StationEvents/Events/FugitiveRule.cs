@@ -28,7 +28,7 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedContainerSystem _container = default!;
 
-    private static readonly EntProtoId HunterSpawnProto = "FugitiveHunterRule";
+    private static readonly EntProtoId HunterSpawnProto = "FugitiveHunterRandom";
 
     public override void Initialize()
     {

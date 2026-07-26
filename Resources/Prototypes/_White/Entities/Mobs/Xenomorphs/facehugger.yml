@@ -23,6 +23,8 @@
   - type: GhostRole
     name: ghost-role-information-facehugger-name
     description: ghost-role-information-facehugger-description
+    raffle:
+      settings: insta
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]

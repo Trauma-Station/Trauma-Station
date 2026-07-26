@@ -29093,13 +29093,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 16.5,-27.5
-- proto: CrateHydroponicsSeedsExotic
-  entities:
-  - uid: 4423
-    components:
-    - type: Transform
-      parent: 2
-      pos: -2.5,-4.5
 - proto: CrateMedicalSurgery
   entities:
   - uid: 4424

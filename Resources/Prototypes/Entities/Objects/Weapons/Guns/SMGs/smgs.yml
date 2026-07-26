@@ -7,7 +7,7 @@
   components:
   # <Trauma>
   - type: WeaponClass
-    class: Rifle
+    class: SMG
   # </Trauma>
   - type: Sprite
   - type: Item

@@ -183,7 +183,7 @@
       - PetsNT
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: RuminantHostileCompound # Trauma
   - type: Grammar
     attributes:
       proper: true
@@ -350,6 +350,20 @@
   id: MobMcGriff
   description: This dog can tell something smells around here, and that something is CRIME!
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 10
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/mcgriff.rsi
@@ -665,6 +679,39 @@
   id: MobFoxRenault
   description: The captain's trustworthy fox.
   components:
+  # <Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 400
+      behaviors:
+      - !type:GibBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Telecrystal1:
+            min: 25
+            max: 40
+    # </Trauma>
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Radiation
+        damage: 15
+      behaviors:
+      - !type:PopupBehavior
+        popup: mouth-taste-metal
+        popupType: LargeCaution
+        targetOnly: true
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Radiation
+        damage: 40
+      behaviors:
+      - !type:VomitBehavior
+  - type: StaticPrice
+    price: 32500
+  # </Trauma>
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: petting-success-soft-floofy
@@ -897,6 +944,12 @@
   parent: [MobAdultSlimes, StripableInventoryBase, BaseSlicingRefinable]
   description: This masterpiece has gone through thousands of experiments. But it is the sweetest creature in the world. Smile Slime!
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  # </Trauma>
   - type: Sprite
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -954,8 +1007,12 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 1
-        Caustic: 1
+        # Blunt: 1
+        Caustic: 5 # Trauma, was 1
+    # <Trauma>
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+    # </Trauma>
   - type: MultiHandedItem
   - type: Item
     sprite: Mobs/Pets/Smile/smile.rsi

@@ -8,7 +8,29 @@
   cost:
     Telecrystal: 12
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
+  restockTime: 300
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGrenadeShrapnelFoamNukies
+  name: uplink-explosive-foam-grenade-name
+  description: uplink-explosive-foam-grenade-desc
+  productEntity: GrenadeShrapnelFoam
+  cost:
+    Telecrystal: 12
+  categories:
+    - UplinkExplosives
+  restockTime: 300
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkStickyGrenade
@@ -18,7 +40,28 @@
   cost:
     Telecrystal: 15
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
+  restockTime: 300
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkStickyGrenadeNukeops
+  name: uplink-sticky-grenade-name
+  description: uplink-sticky-grenade-desc
+  productEntity: StickyGrenade
+  cost:
+    Telecrystal: 15
+  categories:
+    - UplinkExplosives
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkClusterGrenade
@@ -28,9 +71,60 @@
   cost:
     Telecrystal: 22
   categories:
-  - UplinkExplosives
+    - UplinkExplosives
+  restockTime: 300
   conditions: # 11tc for nukies
   - !type:StoreWhitelistCondition
     blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkPizzaBombNukeops
+  name: uplink-pizza-bomb-name
+  description: uplink-pizza-bomb-desc
+  productEntity: FoodBoxPizzaBomb
+  cost:
+    Telecrystal: 10
+  categories:
+    - UplinkExplosives
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkExplodingPenNukeops
+  name: uplink-exploding-pen-name-trauma
+  description: uplink-exploding-pen-desc
+  icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
+  productEntity: PenExplodingBox
+  cost:
+    Telecrystal: 12
+  categories:
+    - UplinkExplosives
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGrenadePenguinNukeops
+  name: uplink-penguin-grenade-name
+  description: uplink-penguin-grenade-desc
+  productEntity: MobGrenadePenguin
+  cost:
+    Telecrystal: 15 # Trauma - was 4, 5x and less expensive to promote use
+  categories:
+    - UplinkExplosives
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
       tags:
       - NukeOpsUplink

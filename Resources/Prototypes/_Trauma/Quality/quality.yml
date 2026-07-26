@@ -12,12 +12,12 @@
   staminaResist: 0.95
   health: 1.05
   selfDamage: 0.95
-  damage: 1.05 # This is throwing damage for some reason
-  projectile: 1.05
+  damage: 1.0 # This is throwing damage for some reason
+  projectile: 1.0
   durability: 1.05
   shield: 1.05
   shieldFlat: 1.05
-  meleeDamage: 1.03
+  meleeDamage: 1.0
   price: 1.25
 
 - type: quality
@@ -29,12 +29,12 @@
   staminaResist: 0.99
   health: 1.01
   selfDamage: 0.99
-  damage: 1.01
-  projectile: 1.01
+  damage: 1.0
+  projectile: 1.0
   durability: 1.01
   shield: 1.01
   shieldFlat: 1.01
-  meleeDamage: 1.01
+  meleeDamage: 1.0
   price: 1.25
 
 - type: quality

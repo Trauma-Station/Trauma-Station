@@ -16,7 +16,7 @@
   components:
   - type: Knowledge
     category: Physical
-    costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
+    costs: [0, 2, 4]
     color: "#16e720"
 
 - type: entity
@@ -76,7 +76,7 @@
   components:
   - type: Knowledge
     category: Language
-    learnedLevel: 25
+    learnedLevel: 0
     experienceCost: 16
     color: "#ADD8E6"
     costs: null # its currently fucked, have to use traits still :(

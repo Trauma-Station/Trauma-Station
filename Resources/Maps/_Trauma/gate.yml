@@ -80499,13 +80499,6 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: CrateHydroponicsSeedsExotic
-  entities:
-  - uid: 9216
-    components:
-    - type: Transform
-      pos: -9.5,-1.5
-      parent: 2
 - proto: CrateMedicalSurgery
   entities:
   - uid: 22734

@@ -23,9 +23,9 @@
       - ReagentId: Nocturine
         Quantity: 2
       - ReagentId: MuteToxin
-        Quantity: 1
+        Quantity: 10
   - type: SolutionTransfer
-    maxTransferAmount: 3.5
+    maxTransferAmount: 12
 
 - type: entity
   parent: BaseCartridgeCaselessRifle

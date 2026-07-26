@@ -94,8 +94,7 @@
   components:
   # <Trauma>
   - type: Penetratable
-    penetrateDamage: 1
-    damagePenalty: 0.95
+    penetrateDamage: 0
   # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
@@ -170,7 +169,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 20
+        damage: 5 # Trauma, was 20
       behaviors:
       - !type:GibBehavior
         recursive: false
@@ -367,6 +366,9 @@
   description: This station is just crawling with bugs.
   components:
   # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 0
+  - type: ZombieImmune
   - type: LanguageSpeaker
     speaks:
     - Hissing
@@ -826,6 +828,10 @@
   id: MobButterfly
   description: Despite popular misconceptions, it's not actually made of butter.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 1
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 6
@@ -968,7 +974,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma
   - type: GuideHelp
     guides:
     - Chef
@@ -1058,7 +1064,7 @@
     - Crab # Trauma
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma
 
 - type: entity
   name: goat
@@ -1287,7 +1293,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma
   - type: MovementSpeedModifier
     baseWalkSpeed: 0.6
     baseSprintSpeed: 0.8
@@ -1994,6 +2000,9 @@
   description: Squeak!
   components:
   # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 3 # 3-5 kills per bullet
+  - type: ZombieImmune
   - type: VentCrawler
     enterDelay: 0.5
   - type: AnimatedEmotes
@@ -2458,6 +2467,16 @@
   id: MobFrog
   description: Hop hop hop. Lookin' moist.
   components:
+  #<Trauma>
+  - type: Penetratable
+    penetrateDamage: 3 # 3-5 kills per bullet
+  - type: ZombieImmune
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      10: Critical
+      20: Dead
+  #</Trauma>
   - type: VentCrawler # goobstation - Ventcrawl
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
@@ -2533,6 +2552,18 @@
   description: Infiltrates your domain, spies on you, and somehow still a cool pet.
   components:
   # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 5
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
@@ -3072,6 +3103,20 @@
   id: MobPossum
   description: '"O Possum! My Possum!" -- Walt Whitman, 1865'
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 10
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/possum.rsi
@@ -3151,6 +3196,20 @@
   id: MobRaccoon
   description: Trash panda!
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 10
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/raccoon.rsi
@@ -3272,7 +3331,7 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 8
+        Piercing: 15 # Trauma, was 8
   - type: NpcFactionMember
     factions:
     - Passive
@@ -3299,6 +3358,20 @@
   name: corgi
   description: Finally, a space corgi!
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 15
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -3465,10 +3538,16 @@
 
 - type: entity
   name: cat
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable]
+  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, MobCombat] # Trauma
   id: MobCat
   description: Feline pet, very funny.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
@@ -3521,12 +3600,12 @@
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    animation: WeaponArcBite
+    animation: WeaponArcSlash
     soundHit:
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 5
+        Slash: 10 # Trauma, was 5
   - type: Grammar
     attributes:
       gender: epicene
@@ -3716,6 +3795,20 @@
   id: MobSloth
   description: Very slow animal. For people with low energy.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 10
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 0.5
     baseSprintSpeed : 1
@@ -3779,6 +3872,20 @@
   id: MobFerret
   description: Just a silly little guy!
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 10
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/ferret.rsi
@@ -4003,6 +4110,17 @@
   id: MobPig
   description: Oink.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 15
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -4070,7 +4188,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma
 
 - type: entity
   name: diona nymph

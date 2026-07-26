@@ -22,7 +22,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipStationEngineer
+    - SkillChipEducation
+    - SkillChipDatabase
+    - SkillChipTool
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff

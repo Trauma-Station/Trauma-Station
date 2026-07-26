@@ -4,7 +4,8 @@
   id: UplinkRevolverPython
   name: uplink-revolver-python-name
   description: uplink-revolver-python-desc
-  productEntity: WeaponRevolverPythonAP
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Revolvers/python.rsi, state: icon }
+  productEntity: BriefcaseWeaponPythonFilled
   cost:
     Telecrystal: 20
   categories:
@@ -14,7 +15,7 @@
   id: UplinkRealFoamCutlass
   name: uplink-foam-cutlass-name
   description: uplink-foam-cutlass-desc
-  productEntity: RealFoamCutlass
+  productEntity: BriefcaseWeaponCutlassFilled
   icon: { sprite: /Textures/Objects/Weapons/Melee/cutlass.rsi, state: foam_icon }
   cost:
     Telecrystal: 20
@@ -36,7 +37,8 @@
   id: UplinkRifleFAL
   name: uplink-rifle-FAL-name
   description: uplink-rifle-FAL-description
-  productEntity: WeaponRifleFAL
+  icon: { sprite: _Trauma/Objects/Weapons/Guns/Rifles/fn_fal.rsi, state: icon }
+  productEntity: BriefcaseWeaponSaiveFilled
   cost:
     Telecrystal: 50
   categories:
@@ -46,7 +48,8 @@
   id: UplinkRifleM90
   name: uplink-rifle-M90-name
   description: uplink-rifle-M90-description
-  productEntity: WeaponRifleM90
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Rifles/m90.rsi, state: icon }
+  productEntity: BriefcaseWeaponM90Filled
   cost:
     Telecrystal: 50
   categories:
@@ -57,7 +60,7 @@
   name: uplink-eshield-name
   description: uplink-eshield-desc
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
-  productEntity: EnergyShield
+  productEntity: BriefcaseWeaponEnergyShieldFilled # Trauma
   cost:
     Telecrystal: 60
   categories:
