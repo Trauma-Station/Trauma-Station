@@ -236,10 +236,11 @@
   - type: Crawler
   - type: Inventory
     templateId: demon
-  - type: Hands
-    activeHandId: Hand
+    activeHandId: hand_right
     hands:
-      Hand:
+      hand_right:
+        location: Right
+      hand_left:
         location: Left
   - type: ComplexInteraction
 
