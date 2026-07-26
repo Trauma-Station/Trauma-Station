@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Actions;
+using Content.Shared.Bible.Components;
 using Content.Shared.Examine;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -93,7 +94,7 @@ public abstract partial class SharedPossessionSystem : EntitySystem
 
         // Paralyze, so you can't just magdump them.
         _stun.TryAddParalyzeDuration(possessed, TimeSpan.FromSeconds(2));
-        _popup.PopupClient(Loc.GetString("possession-end-popup", ("target", possessed)), possessed, possessed, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("possession-end-popup", ("target", possessed)), possessed, possessed, PopupType.LargeCaution);
 
         PossessionEnded(possessed);
     }

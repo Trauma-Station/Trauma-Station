@@ -98,6 +98,8 @@
   name: drunk
   components: # Trauma
   - type: DrunknessLimit
+  - type: ShowSpriteLayerStatusEffect
+    layer: enum.HumanoidVisualEmoteLayers.Blush
 
 # Prevents the target from seeing
 - type: entity

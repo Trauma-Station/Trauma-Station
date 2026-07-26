@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [SolutionCryo, SolutionCompositeNormalStackable, BaseItem]
+  parent: [SolutionCryo, SolutionCompositeNormalStackable, BaseItem, BaseItemDestructible]
   id: MaterialBase
   description: A raw material.
   components:
@@ -15,17 +15,6 @@
     tags:
     - DroneUsable # Trauma
     - RawMaterial
-  - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Extractable
     grindableSolutionName: composite
 

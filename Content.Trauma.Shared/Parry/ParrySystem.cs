@@ -46,7 +46,7 @@ public sealed partial class ParrySystem : EntitySystem
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
     [Dependency] private EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
 
-    private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+    private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
     private static readonly TimeSpan ExhaustionRegenDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextRegen = TimeSpan.Zero;
 
@@ -241,18 +241,15 @@ public sealed partial class ParrySystem : EntitySystem
     /// Check if the entity has sufficient knowledge to parry/reflect
     /// </summary>
     private bool CheckKnowledge(EntityUid user, int minLevel)
-    {
-        return GetSkillLevel(user) >= minLevel;
-    }
+        => GetSkillLevel(user) >= minLevel;
 
+    // TODO: make it also account for weapon class's skill
     private int GetSkillLevel(EntityUid user)
-    {
-        return ProtoMan.Resolve(MeleeKnowledge, out var skillProto)
+        => ProtoMan.Resolve(AthleticsKnowledge, out var skillProto)
                && _knowledge.GetContainer(user) is { } brain
                && _knowledge.GetKnowledge(brain, skillProto) is { } skill
             ? skill.Comp.NetLevel
             : 0;
-    }
 
     /// <summary>
     /// Check if the entity is too exhausted to parry/reflect and add an appropriate amount of exhaustion
@@ -341,7 +338,7 @@ public sealed partial class ParrySystem : EntitySystem
 
     private void PlayAudioAndPopup(SoundSpecifier? sound, EntityUid user, EntityUid? shooter)
     {
-        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, shooter);
+        _popup.PopupEntity(Loc.GetString("reflect-shot"), user, shooter);
         _audio.PlayPredicted(sound, user, shooter);
     }
 

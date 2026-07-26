@@ -1,9 +1,5 @@
 name: Build & Test Debug
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   push:
     branches: [ master, staging, stable ]
@@ -11,6 +7,10 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
     branches: [ master, staging, stable ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'merge_group' }}
 
 jobs:
   build:
@@ -71,6 +71,8 @@ jobs:
     steps:
     - *checkout
     - *submodule
+    - *submodule_pull
+    - *submodule_update
     - *restore
     - name: Build Project
       run: dotnet build --configuration Release --no-restore /m

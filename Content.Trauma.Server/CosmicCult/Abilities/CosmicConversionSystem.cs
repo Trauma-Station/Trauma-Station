@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Server.Actions;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Ghost;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -54,22 +54,22 @@ public sealed partial class CosmicConversionSystem : EntitySystem
 
         if (!_mind.TryGetMind(target, out _, out _)) // TODO uncomment before release!!!!
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
             return;
         }
         if (HasComp<MindShieldComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
             return;
         }
         if (HasComp<BibleUserComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
             return;
         }
         if (_rotting.IsRotten(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-rotten"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-rotten"), ent, ent);
             return;
         }
 

@@ -52,7 +52,7 @@ public sealed partial class MimePowersSystem : EntitySystem
 
             mime.ReadyToRepent = true;
             Dirty(uid, mime);
-            _popupSystem.PopupClient(Loc.GetString("mime-ready-to-repent"), uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("mime-ready-to-repent"), uid, uid);
         }
     }
 
@@ -98,13 +98,13 @@ public sealed partial class MimePowersSystem : EntitySystem
         // Check if the tile is blocked by a wall or mob, and don't create the wall if so
         if (_turf.IsTileBlocked(tile.Value, CollisionGroup.Impassable | CollisionGroup.Opaque))
         {
-            _popupSystem.PopupClient(Loc.GetString("mime-invisible-wall-failed"), ent, ent);
+            _popupSystem.PopupEntity(Loc.GetString("mime-invisible-wall-failed"), ent, ent);
             return;
         }
 
         var messageSelf = Loc.GetString("mime-invisible-wall-popup-self", ("mime", Identity.Entity(ent.Owner, EntityManager)));
         var messageOthers = Loc.GetString("mime-invisible-wall-popup-others", ("mime", Identity.Entity(ent.Owner, EntityManager)));
-        _popupSystem.PopupPredicted(messageSelf, messageOthers, ent, ent);
+        _popupSystem.PopupEntity(messageSelf, messageOthers, ent, ent);
 
         // Make sure we set the invisible wall to despawn properly
         PredictedSpawnAttachedTo(ent.Comp.WallPrototype, _turf.GetTileCenter(tile.Value)); // Trauma - AttachedTo instead of AtPosition
@@ -171,7 +171,7 @@ public sealed partial class MimePowersSystem : EntitySystem
 
         if (!mimePowers.ReadyToRepent)
         {
-            _popupSystem.PopupClient(Loc.GetString("mime-not-ready-repent"), uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("mime-not-ready-repent"), uid, uid);
             return;
         }
 

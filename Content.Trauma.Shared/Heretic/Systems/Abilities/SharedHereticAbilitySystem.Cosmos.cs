@@ -139,7 +139,7 @@ public abstract partial class SharedHereticAbilitySystem
         // No placing runes on top of runes
         if (Lookup.GetEntitiesInRange<HereticCosmicRuneComponent>(coords, 0.4f).Count > 0)
         {
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), args.Performer, args.Performer);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-occupied"), args.Performer, args.Performer);
             return;
         }
 

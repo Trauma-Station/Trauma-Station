@@ -149262,7 +149262,7 @@ entities:
     - type: Transform
       pos: 29.74261,2.6673565
       parent: 2
-- proto: WehMedipen
+- proto: WehMedipenTiny
   entities:
   - uid: 23156
     components:

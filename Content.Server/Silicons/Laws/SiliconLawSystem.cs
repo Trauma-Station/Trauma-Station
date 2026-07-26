@@ -1,23 +1,16 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Server.Radio.EntitySystems;
-using Content.Server.Research.Systems;
 using Content.Trauma.Common.Silicon;
-using Content.Shared.FixedPoint;
-using Content.Shared.Radio;
-using Content.Shared.Random;
-using Content.Shared.Random.Helpers;
-using Content.Shared.Research.Components;
-using Content.Shared.Silicons.StationAi;
-using Robust.Shared.Random;
 // </Trauma>
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Chat.Managers;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Database;
 using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
@@ -39,18 +32,13 @@ namespace Content.Server.Silicons.Laws;
 
 public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 {
-    // <Trauma>
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IonLawSystem _ionLaw = default!;
-    [Dependency] private ResearchSystem _research = default!;
-    [Dependency] private RadioSystem _radio = default!;
-    // </Trauma>
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private UserInterfaceSystem _userInterface = default!;
     [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
 
@@ -99,6 +87,8 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnLawProviderMindAdded(Entity<SiliconLawProviderComponent> ent, ref MindAddedMessage args)
     {
+        _adminLogger.Add(LogType.SiliconLaw, LogImpact.Low, $"{ent.Owner} laws at MindAdded are [{ent.Comp.Lawset?.LoggingString()}]");
+
         if (!ent.Comp.Subverted)
             return;
         EnsureSubvertedSiliconRole(args.Mind);
@@ -127,7 +117,7 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
         TryComp(uid, out IntrinsicRadioTransmitterComponent? intrinsicRadio);
         var radioChannels = intrinsicRadio?.Channels;
 
-        var state = new SiliconLawBuiState(GetLaws(uid).Laws, radioChannels);
+        var state = new SiliconLawBuiState(GetLaws(uid).Laws, radioChannels, component.Version);
         _userInterface.SetUiState(args.Entity, SiliconLawsUiKey.Key, state);
     }
 
@@ -149,21 +139,21 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
         args.Handled = true;
     }
 
-    private void OnIonStormLaws(EntityUid uid, SiliconLawProviderComponent component, ref IonStormLawsEvent args)
+    private void OnIonStormLaws(Entity<SiliconLawProviderComponent> ent, ref IonStormLawsEvent args)
     {
         // Emagged borgs are immune to ion storm
-        if (!_emag.CheckFlag(uid, EmagType.Interaction))
+        if (!_emag.CheckFlag(ent, EmagType.Interaction))
         {
-            component.Lawset = args.Lawset;
+            ent.Comp.Lawset = args.Lawset;
 
             // gotta tell player to check their laws
-            NotifyLawsChanged(uid, component.LawUploadSound);
+            NotifyLawsChanged(ent, ent.Comp.LawUploadSound);
 
             // Show the silicon has been subverted.
-            component.Subverted = true;
+            ent.Comp.Subverted = true;
 
             // new laws may allow antagonist behaviour so make it clear for admins
-            if(_mind.TryGetMind(uid, out var mindId, out _))
+            if(_mind.TryGetMind(ent, out var mindId, out _))
                 EnsureSubvertedSiliconRole(mindId);
 
         }
@@ -264,18 +254,21 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
         return ev.Laws;
     }
 
-    public override void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
+    public override void NotifyLawsChanged(Entity<SiliconLawProviderComponent> ent, SoundSpecifier? cue = null)
     {
-        base.NotifyLawsChanged(uid, cue);
+        base.NotifyLawsChanged(ent, cue);
 
-        if (!TryComp<ActorComponent>(uid, out var actor))
+        _adminLogger.Add(LogType.SiliconLaw, LogImpact.Low, $"{ent} laws changed to [{ent.Comp.Lawset?.LoggingString()}]");
+
+        if (!TryComp<ActorComponent>(ent, out var actor))
             return;
 
         var msg = Loc.GetString("laws-update-notify");
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+        UpdateLawVersion(ent.Owner);
         _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, actor.PlayerSession.Channel, colorOverride: Color.Red);
 
-        if (cue != null && _mind.TryGetMind(uid, out var mindId, out _))
+        if (cue != null && _mind.TryGetMind(ent, out var mindId, out _))
             _roles.MindPlaySound(mindId, cue);
     }
 
@@ -310,7 +303,8 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
             component.Lawset = new SiliconLawset();
 
         component.Lawset.Laws = newLaws;
-        NotifyLawsChanged(target, cue);
+        RankLaws(component.Lawset.Laws);
+        NotifyLawsChanged((target,component), cue);
     }
 
     protected override void OnUpdaterInsert(Entity<SiliconLawUpdaterComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -351,7 +345,7 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
         // <Trauma>
-        ent.Comp.LastLawset = provider.Laws; // Goob
+        ent.Comp.LastLawset = provider.Laws;
         var ev = new AILawUpdatedEvent();
         // </Trauma>
         while (query.MoveNext(out var update))
@@ -367,132 +361,56 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 
     }
 
-    // Goob edit start
-    private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
+    /// Updates the version on a target SiliconLawBoundComponent. This is used in the law UI as flair to show the
+    /// number of updates a silicon player's laws has had
+    /// </summary>
+    private void UpdateLawVersion(Entity<SiliconLawBoundComponent?> target)
     {
-        var laws = GetRandomLaws(experiment.Comp1.RandomLawsets);
-        var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
+        if (!Resolve(target, ref target.Comp))
+            return;
 
-        while (query.MoveNext(out var update))
-            SetLaws(laws.Laws, update, experiment.Comp2.LawUploadSound);
-
-        var activeProv = EnsureComp<ActiveExperimentalLawProviderComponent>(ent);
-        activeProv.Timer = experiment.Comp1.RewardTime;
-        activeProv.RewardPoints = experiment.Comp1.RewardPoints;
-        activeProv.OldSiliconLawsetId = ent.Comp.LastLawset;
-
-        var message = Loc.GetString("experimental-law-provider-start", ("timeLeft", (int) experiment.Comp1.RewardTime));
-        _radio.SendRadioMessage(ent, message, AnnouncementChannel, ent, escapeMarkup: false);
-
-        QueueDel(experiment); // Don't need this experimental board anymore
-    }
-
-    private static readonly ProtoId<RadioChannelPrototype> AnnouncementChannel = "Science";
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var activeExperimental = EntityQueryEnumerator<ActiveExperimentalLawProviderComponent>();
-        while (activeExperimental.MoveNext(out var uid, out var provider))
-        {
-            provider.Timer -= frameTime;
-            if (provider.Timer >= 0)
-                continue;
-
-            // Reward time!!!
-            if (!TryComp(uid, out ResearchClientComponent? researchClient) ||
-                !researchClient.ConnectedToServer ||
-                researchClient.Server == null)
-                continue;
-
-            if (!TryComp(uid, out SiliconLawUpdaterComponent? updater))
-                continue;
-
-            // Replace laws back
-            var lawset = GetLawset(provider.OldSiliconLawsetId).Laws;
-            var query = EntityManager.CompRegistryQueryEnumerator(updater.Components);
-
-            while (query.MoveNext(out var update))
-                SetLaws(lawset, update, provider.LawRewardSound);
-
-            RemCompDeferred(uid, provider);
-            _research.ModifyServerPoints(researchClient.Server.Value, provider.RewardPoints);
-            var message = Loc.GetString("experimental-law-provider-success", ("amount", provider.RewardPoints));
-            _radio.SendRadioMessage(uid, message, AnnouncementChannel, uid, escapeMarkup: false);
-        }
+        target.Comp.Version++;
     }
 
     /// <summary>
-    /// Goob edit: generates random ion storm lawset without an actual silicon.
+    /// Given a list of laws, sets all unobfuscated laws' identifier in order from highest to lowest priority.
     /// </summary>
-    private SiliconLawset GetRandomLaws(ProtoId<WeightedRandomPrototype> availableSetsId)
+    /// <param name="laws">The lawset to deduce identifiers for.</param>
+    public static void RankLaws(List<SiliconLaw> laws)
     {
-        // try to swap it out with a random lawset
-        var lawsets = ProtoMan.Index(availableSetsId);
-        var lawset = lawsets.Pick(_random);
-        var laws = GetLawset(lawset);
-
-        // clone it so not modifying stations lawset
-        laws = laws.Clone();
-
-        // shuffle them all
-        // hopefully work with existing glitched laws if there are multiple ion storms
-        var baseOrder = FixedPoint2.New(1);
-        foreach (var law in laws.Laws)
-            if (law.Order < baseOrder)
-                baseOrder = law.Order;
-
-        _random.Shuffle(laws.Laws);
-
-        // change order based on shuffled position
-        for (var i = 0; i < laws.Laws.Count; i++)
-            laws.Laws[i].Order = baseOrder + i;
-
-        // remove a random law
-        laws.Laws.RemoveAt(_random.Next(laws.Laws.Count));
-
-        // generate a new law...
-        var newLaw = _ionLaw.GetIonLaw();
-
-        // see if the law we add will replace a random existing law or be a new glitched order one
-        if (laws.Laws.Count > 0)
+        // Sort laws first since there can be cases where law order != list order
+        laws.Sort();
+        // Don't need to set any overrides if there are no corrupted laws and law order already makes sense
+        // (i.e. order is non-negative and monotonically increasing by 1)
+        var overrideIdentifiers = false;
+        for (var i = 0; i < laws.Count; i++)
         {
-            var i = _random.Next(laws.Laws.Count);
-            laws.Laws[i] = new SiliconLaw()
+            if (laws[i].Corrupted
+                || laws[i].Order < 0
+                || i > 0 && laws[i].Order - laws[i - 1].Order != 1)
             {
-                LawString = newLaw,
-                Order = laws.Laws[i].Order
-            };
+                overrideIdentifiers = true;
+                break;
+            }
         }
-        else
+        if (!overrideIdentifiers)
         {
-            laws.Laws.Insert(0,
-                new SiliconLaw
-                {
-                    LawString = newLaw,
-                    Order = -1,
-                    LawIdentifierOverride = Loc.GetString("ion-storm-law-scrambled-number", ("length", _random.Next(5, 10)))
-                });
+            return;
         }
 
-        // sets all unobfuscated laws' indentifier in order from highest to lowest priority
-        // This could technically override the Obfuscation from the code above, but it seems unlikely enough to basically never happen
         var orderDeduction = -1;
-
-        for (var i = 0; i < laws.Laws.Count; i++)
+        for (var i = 0; i < laws.Count; i++)
         {
-            var notNullIdentifier = laws.Laws[i].LawIdentifierOverride ?? (i - orderDeduction).ToString();
-
-            if (notNullIdentifier.Any(char.IsSymbol))
+            if (laws[i].Corrupted)
+            {
                 orderDeduction += 1;
+            }
             else
-                laws.Laws[i].LawIdentifierOverride = (i - orderDeduction).ToString();
+            {
+                laws[i].LawIdentifierOverride = (i - orderDeduction).ToString();
+            }
         }
-
-        return laws;
     }
-    // Goob edit end
 }
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]

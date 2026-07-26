@@ -41,6 +41,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveVirologyMachineComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            // TODO: kys israelgpt using events that 1 thing handles IN AN UPDATE LOOP
             var checkEv = new VirologyMachineCheckEvent();
             RaiseLocalEvent(uid, ref checkEv);
             if (checkEv.Cancelled)
@@ -54,7 +55,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
             if (!_power.IsPowered(uid))
             {
                 SetAppearance(uid, false);
-                comp.EndTime += TimeSpan.FromSeconds(frameTime);
+                comp.EndTime += TimeSpan.FromSeconds(frameTime); // TODO: kys israelgpt
                 continue;
             }
 
@@ -78,6 +79,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         if (!TryComp<DiseaseSwabComponent>(args.Entity, out _))
             return;
 
+        _audio.Stop(ent.Comp.SoundEntity);
         EnsureComp<ActiveVirologyMachineComponent>(ent, out var active);
         var audio = _audio.PlayPvs(ent.Comp.AnalysisSound, ent, AudioParams.Default.WithLoop(true).WithVariation(0.15f));
         if (audio.HasValue)
@@ -101,18 +103,15 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
     private void OnMachineDone(Entity<VirologyMachineComponent> ent, ref VirologyMachineDoneEvent args)
     {
         RemCompDeferred<ActiveVirologyMachineComponent>(ent);
-        if (ent.Comp.SoundEntity != null)
-        {
-            _audio.Stop(ent.Comp.SoundEntity);
-            ent.Comp.SoundEntity = null;
-        }
+
+        ent.Comp.SoundEntity = _audio.Stop(ent.Comp.SoundEntity);
 
         if (!args.Success
             || !_itemSlots.TryGetSlot(ent, VirologyMachineComponent.SwabSlotId, out var slot)
             || slot.Item == null)
             return;
 
-        if(!ent.Comp.Vaccinator)
+        if (!ent.Comp.Vaccinator) // TODO: kys israelgpt blindly using events with 0 human thought then pulling this shit
             AnalyzeSwab(ent, (slot.Item.Value, null));
         else
             CreatePen(ent, (slot.Item.Value, null));

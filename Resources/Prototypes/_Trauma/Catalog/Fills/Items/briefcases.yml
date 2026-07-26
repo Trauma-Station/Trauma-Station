@@ -1,0 +1,272 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BriefcaseWeaponEDaggerFilled
+  parent: BriefcaseWeaponSmall
+  name: secure energy dagger case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: EnergyDaggerBox
+        - id: SkillChipEnergy
+
+- type: entity
+  id: BriefcaseWeaponViperFilled
+  parent: BriefcaseWeaponSmall
+  name: secure viper case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolViper
+        - id: MagazinePistolHighCapacity
+        - id: SkillChipPistol
+
+- type: entity
+  id: BriefcaseWeaponCobraFilled
+  parent: BriefcaseWeaponSmall
+  name: secure cobra case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolCobra
+        - id: MagazinePistolCaselessRifle
+        - id: SkillChipPistol
+
+- type: entity
+  id: BriefcaseWeaponCutlassFilled
+  parent: BriefcaseWeaponSmall
+  name: secure cutlass case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RealFoamCutlass
+        - id: SkillChipLongBlade
+
+- type: entity
+  id: BriefcaseWeaponPythonFilled
+  parent: BriefcaseWeaponSmall
+  name: secure python case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRevolverPythonAP
+        - id: SpeedLoaderMagnumAP
+        - id: SkillChipPistol
+
+- type: entity
+  id: BriefcaseWeaponBoxingGlovesFilled
+  parent: BriefcaseWeaponSmall
+  name: secure rigged boxing gloves case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: UndeterminedSelectorBoxingRiggedRadial
+        - id: SkillChipUnarmed
+
+# - type: entity
+#   id: BriefcaseWeaponSnakesfangFilled
+#   parent: BriefcaseWeaponSmall
+#   name: secure snakesfang case
+#   components:
+#   - type: EntityTableContainerFill
+#     containers:
+#       storagebase: !type:AllSelector
+#         children:
+#         - id: ClothingBeltSheathSnakesfangFilled
+#         - id: SkillChipLongBlade
+
+- type: entity
+  id: BriefcaseWeaponBetrayalKnifeFilled
+  parent: BriefcaseWeaponSmall
+  name: secure betrayal knife case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BetrayalKnife
+        - id: SkillChipShortBlade
+
+- type: entity
+  id: BriefcaseWeaponEnergyCrossbowFilled
+  parent: BriefcaseWeaponSmall
+  name: secure energy crossbow case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponEnergyCrossbow
+        - id: SkillChipPistol
+
+- type: entity
+  id: BriefcaseWeaponEnergyShieldFilled
+  parent: BriefcaseWeaponSmall
+  name: secure energy shield case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: EnergyShield
+        - id: SkillChipStamina
+
+- type: entity
+  id: BriefcaseWeaponNorthStarFilled
+  parent: BriefcaseWeaponSmall
+  name: secure gloves of the north star case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingHandsGlovesNorthStar
+        - id: SkillChipUnarmed
+
+- type: entity
+  id: BriefcaseWeaponEnergyPickaxeFilled
+  parent: BriefcaseWeaponSmall
+  name: secure energy pickaxe case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: NFEnergyPickaxe
+        - id: SkillChipEnergy
+
+- type: entity
+  id: BriefcaseWeaponContractorBatonFilled
+  parent: BriefcaseWeaponSmall
+  name: secure contractor baton case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ContractorBaton
+        - id: SkillChipNonLethal
+
+- type: entity
+  id: BriefcaseWeaponEnergySwordFilled
+  parent: BriefcaseWeaponSmall
+  name: secure energy sword case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: EnergySword
+        - id: SkillChipEnergy
+
+- type: entity
+  id: BriefcaseWeaponAnacondaFilled
+  parent: BriefcaseWeaponSmall
+  name: secure anaconda case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolAnaconda
+        - id: SkillChipPistol
+
+- type: entity
+  id: BriefcaseWeaponSaiveFilled
+  parent: BriefcaseWeapon
+  name: secure saive automatique case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRifleFAL
+        - id: MagazineLightRifle20rd
+        - id: SkillChipRifle
+
+- type: entity
+  id: BriefcaseWeaponM90Filled
+  parent: BriefcaseWeapon
+  name: secure M-90 case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRifleM90
+        - id: MagazineRifle
+        - id: SkillChipRifle
+
+- type: entity
+  id: BriefcaseWeaponEstocFilled
+  parent: BriefcaseWeapon
+  name: secure Esctoc DMR case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRifleEstoc
+        - id: MagazineRifle
+        - id: SkillChipRifle
+
+- type: entity
+  id: BriefcaseWeaponHardlightBowFilled
+  parent: BriefcaseWeapon
+  name: secure Hardlight Bow case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowHardlight
+
+- type: entity
+  id: BriefcaseWeaponFireaxeFilled
+  parent: BriefcaseWeapon
+  name: secure Fireaxe case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FireAxeFlaming
+        - id: SkillChipTool
+
+- type: entity
+  id: BriefcaseWeaponL6Filled
+  parent: BriefcaseWeapon
+  name: secure L6 Saw case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponLightMachineGunL6
+        - id: MagazineLightRifleBox
+        - id: SkillChipHeavy
+
+- type: entity
+  id: BriefcaseWeaponBurnerFilled
+  parent: BriefcaseWeapon
+  name: secure burner case
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRifleBurner
+        - id: MagazineHighCaliber
+        - id: SkillChipHeavy

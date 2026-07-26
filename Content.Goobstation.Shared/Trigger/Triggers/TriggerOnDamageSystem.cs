@@ -13,18 +13,10 @@ public sealed partial class TriggerOnDamageSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TriggerSystem _trigger = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<TriggerOnDamageComponent> ent, ref DamageDealtEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<TriggerOnDamageComponent, DamageChangedEvent>(OnDamageChanged);
-    }
-
-    private void OnDamageChanged(Entity<TriggerOnDamageComponent> ent, ref DamageChangedEvent args)
-    {
-        if (args.DamageDelta is not {} delta ||
-            !delta.AnyPositive() ||
-            delta.GetTotal() <= ent.Comp.Threshold) // don't trigger on low damage
+        if (args.Damage.GetTotal() <= ent.Comp.Threshold) // don't trigger on low damage
             return;
 
         if (!SharedRandomExtensions.PredictedProb(_timing, ent.Comp.Probability, GetNetEntity(ent)))

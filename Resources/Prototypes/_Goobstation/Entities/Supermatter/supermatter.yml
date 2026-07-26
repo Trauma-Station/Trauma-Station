@@ -71,7 +71,7 @@
       guides: [ Supermatter, Power ]
     - type: WarpPoint
       follow: true
-      location: supermatter
+      location: location-supermatter
     - type: StealTarget
       stealGroup: SupermatterSliver # uses to verify sm existense on map
     - type: PhysicsGunBlacklist

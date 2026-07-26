@@ -30,6 +30,23 @@
     radius:
       min: 2
       max: 5
+  # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
+  - type: PortalTransitEffects
+    effects:
+    - !type:Explosion
+      explosionType: Cryo
+      maxIntensity: 3
+      intensityPerUnit: 6
+    - !type:Delete
+      queued: true
+    sourceEffects: &portalEffects
+    - !type:Delete
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - PocketDimension # dont delete the dimension pot one
+    destEffects: *portalEffects
   - type: Tag
     tags:
     - Ore

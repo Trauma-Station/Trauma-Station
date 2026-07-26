@@ -11,3 +11,17 @@
       amount: 1
   products:
     Dewormer: 5
+
+- type: reaction
+  id: Suffocatium
+  reactants:
+    Leporazine:
+      amount: 1
+    SodiumHydroxide:
+      amount: 1
+    HeartbreakerToxin:
+      amount: 1
+    Lithium:
+      amount: 1
+  products:
+    Suffocatium: 2

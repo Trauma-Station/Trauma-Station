@@ -14819,7 +14819,7 @@ entities:
       parent: 2
     - type: Gun
       burstCooldownModified: 0.75
-- proto: WehMedipen
+- proto: WehMedipenTiny
   entities:
   - uid: 2388
     components:

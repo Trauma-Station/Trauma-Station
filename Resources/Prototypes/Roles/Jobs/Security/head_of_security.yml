@@ -40,7 +40,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipHeadOfSecurity
+    - SkillChipCombatEducation
+    - SkillChipCombatHOS
+    - SkillChipEnhancer
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -71,5 +73,6 @@
   job: HeadOfSecurity
   hasMindShield: true
   equipment:
+    head: ClothingHeadHatBeretHoS
     mask: ClothingMaskGasSecurity
     neck: ClothingNeckCloakHos

@@ -27,7 +27,7 @@ public sealed partial class EatFilthSystem : EntitySystem
     {
         if (!_entityWhitelist.IsWhitelistPass(ent.Comp.AllowedEntities, args.Target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 
@@ -45,7 +45,7 @@ public sealed partial class EatFilthSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(doAfterArgs);
 
-        _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-you-start", ("target", args.Target)), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-you-start", ("target", args.Target)), ent.Owner, ent.Owner);
         args.Handled = true;
     }
 
@@ -53,14 +53,14 @@ public sealed partial class EatFilthSystem : EntitySystem
     {
         if (args.Cancelled || args.Handled|| args.Target is not { } target)
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-interrupt"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-interrupt"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 
         // First, check if its compatible reagent
         if (!CanEatTarget(ent, target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-not-satisfy"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 
@@ -72,7 +72,7 @@ public sealed partial class EatFilthSystem : EntitySystem
 
         PredictedQueueDel(args.Target);
 
-        _popup.PopupClient(Loc.GetString("wraith-plaguerat-eat-you-finish", ("target", args.Target)), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-you-finish", ("target", args.Target)), ent.Owner, ent.Owner);
     }
 
     #region Helper

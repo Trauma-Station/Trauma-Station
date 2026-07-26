@@ -13,6 +13,8 @@
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
       collection: MetalThud
+  - type: WeaponClass
+    class: Pistol
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/energy_crossbow.rsi

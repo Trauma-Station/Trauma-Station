@@ -37,7 +37,7 @@ public sealed partial class CosmicIngressSystem : EntitySystem
             {
                 if (!ent.Comp.CosmicEmpowered)
                 {
-                    _popup.PopupClient(Loc.GetString("cosmicability-ingress-not-empowered-door"), ent, ent);
+                    _popup.PopupEntity(Loc.GetString("cosmicability-ingress-not-empowered-door"), ent, ent);
                     return;
                 }
                 _door.SetBoltsDown((target, boltComp), false, user: ent, predicted: true);

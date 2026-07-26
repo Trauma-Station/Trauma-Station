@@ -244,7 +244,7 @@ public abstract partial class SharedHereticAbilitySystem
             return true;
 
         if (user != null)
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-rust-stage-low"), user.Value, user.Value);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-rust-stage-low"), user.Value, user.Value);
 
         return false;
     }
@@ -330,7 +330,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (!IsTileRust(args.Target, out var pos))
         {
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-not-rusted"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-not-rusted"), ent, ent);
             return;
         }
 
@@ -344,7 +344,7 @@ public abstract partial class SharedHereticAbilitySystem
             if (fix.Fixtures.All(x => (x.Value.CollisionLayer & (int) mask) == 0))
                 continue;
 
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-occupied"), ent, ent);
             return;
         }
 
@@ -386,7 +386,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (!IsTileRust(xform.Coordinates, out _))
         {
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
             return;
         }
 

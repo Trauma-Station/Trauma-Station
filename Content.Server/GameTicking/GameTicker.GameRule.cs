@@ -6,7 +6,7 @@ using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauam - die
 using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Console;

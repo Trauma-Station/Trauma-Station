@@ -6,7 +6,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-tramadol
+    localizedLabel: reagent-name-tramadol
   - type: Solution
     solution:
       reagents:
@@ -19,7 +19,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-oxycodone
+    localizedLabel: reagent-name-oxycodone
   - type: Solution
     solution:
       reagents:
@@ -32,7 +32,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-ibuprofen
+    localizedLabel: reagent-name-ibuprofen
   - type: Solution
     solution:
       reagents:

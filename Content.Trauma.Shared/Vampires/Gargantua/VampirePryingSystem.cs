@@ -42,7 +42,7 @@ public sealed partial class VampirePryingSystem : EntitySystem
         if (_vampire.HasUsableBlood(ent.Owner, ent.Comp.BloodToRemove))
             return;
 
-        _popup.PopupClient("You do not have enough blood to pry open this door!", ent.Owner, ent.Owner, PopupType.SmallCaution);
+        _popup.PopupEntity("You do not have enough blood to pry open this door!", ent.Owner, ent.Owner, PopupType.SmallCaution);
         args.Cancelled = true;
     }
 

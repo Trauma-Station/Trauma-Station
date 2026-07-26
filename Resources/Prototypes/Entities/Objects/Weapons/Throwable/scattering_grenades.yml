@@ -101,7 +101,7 @@
     deconstructionTarget: null
 
 - type: entity
-  parent: [FragileGrenadeBase, ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
+  parent: [ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
   id: ClusterBananaPeel
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!

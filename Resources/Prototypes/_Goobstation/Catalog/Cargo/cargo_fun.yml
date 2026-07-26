@@ -80,3 +80,13 @@
   cost: 1500
   category: cargoproduct-category-name-fun
   group: market
+
+- type: cargoProduct
+  id: FunDigitalAudioWorkstation
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: daw-base
+  product: DawInstrument
+  cost: 2500
+  category: cargoproduct-category-name-fun
+  group: market

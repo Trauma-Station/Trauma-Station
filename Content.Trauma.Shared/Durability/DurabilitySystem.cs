@@ -318,10 +318,9 @@ public sealed partial class DurabilitySystem : EntitySystem
             {
                 var locId = args.OldDamage <= 0 && args.Damage <= 0 ? "durability-reinforce-popup" : "durability-repair-popup";
                 var amount = args.OldDamage - FixedPoint2.Max(args.Damage, -ent.Comp.MaxRepairBonus);
-                _popup.PopupPredictedCoordinates(
+                _popup.PopupCoordinates(
                     Loc.GetString(locId, ("weapon", Name(ent.Owner)), ("amount", amount)),
-                    Transform(ent.Owner).Coordinates,
-                    null);
+                    Transform(ent.Owner).Coordinates);
                 break;
             }
             case > 0:
@@ -329,18 +328,16 @@ public sealed partial class DurabilitySystem : EntitySystem
                 if (!ent.Comp.DamagePopups.TryGetValue(ent.Comp.DurabilityState, out var pool))
                     return;
                 var locId = _random.Pick(pool);
-                _popup.PopupPredictedCoordinates(Loc.GetString(locId),
+                _popup.PopupCoordinates(Loc.GetString(locId),
                     Transform(ent.Owner).Coordinates,
-                    null,
                     PopupType.SmallCaution);
                 break;
             }
             case 0 when ent.Comp.Damage <= -ent.Comp.MaxRepairBonus:
             {
-                _popup.PopupPredictedCoordinates(
+                _popup.PopupCoordinates(
                     Loc.GetString("durability-repair-max", ("weapon", Name(ent.Owner))),
-                    Transform(ent.Owner).Coordinates,
-                    null);
+                    Transform(ent.Owner).Coordinates);
                 break;
             }
         }

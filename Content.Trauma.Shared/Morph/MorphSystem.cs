@@ -90,7 +90,7 @@ public sealed partial class MorphSystem : EntitySystem
         if (_whitelist.CheckBoth(target, ent.Comp.BiomassBlacklist, ent.Comp.BiomassWhitelist))
             ChangeBiomassAmount(ent, GetBiomass(target));
         else
-            _popup.PopupClient(Loc.GetString("morph-no-biomass-target"), ent, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("morph-no-biomass-target"), ent, user, PopupType.MediumCaution);
 
         // make sure the food is dead
         if (_mobQuery.TryComp(target, out var mob) && !_mob.IsDead(target, mob))
@@ -107,13 +107,13 @@ public sealed partial class MorphSystem : EntitySystem
 
         if (ent.Comp.Biomass < ent.Comp.ReplicateCost)
         {
-            _popup.PopupClient("Not enough biomass!", ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity("Not enough biomass!", ent, ent, PopupType.MediumCaution);
             return;
         }
 
         if (_disguisedQuery.HasComp(ent))
         {
-            _popup.PopupClient("You can't replicate while morphed!", ent, ent, PopupType.SmallCaution);
+            _popup.PopupEntity("You can't replicate while morphed!", ent, ent, PopupType.SmallCaution);
             return;
         }
 
@@ -128,7 +128,7 @@ public sealed partial class MorphSystem : EntitySystem
         args.Handled = _doAfter.TryStartDoAfter(doafterArgs);
 
         if (args.Handled)
-            _popup.PopupClient("You start to reproduce...", ent, ent, PopupType.Medium);
+            _popup.PopupEntity("You start to reproduce...", ent, ent, PopupType.Medium);
     }
 
     private void OnMorphReplicateDoAfter(Entity<MorphComponent> ent, ref ReplicateDoAfterEvent args)
@@ -196,7 +196,7 @@ public sealed partial class MorphSystem : EntitySystem
         if (!_disguisedQuery.HasComp(ent))
             return;
 
-        _popup.PopupClient("You can't attack while morphed!", ent, ent);
+        _popup.PopupEntity("You can't attack while morphed!", ent, ent);
         args.Cancelled = true;
     }
 

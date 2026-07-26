@@ -5,7 +5,7 @@
 # random person
 # This is a separate objective to prevent metagaming by having a different condition for killing traitors, by also requiring you just kill someone entirely
 - type: entity
-  parent: [BaseTraitorObjective, BaseKillObjective]
+  parent: [BaseTraitorObjective, BaseKillRandomObjective]
   id: PermaKillRandomPersonObjective
   description: Do it however you like, as long as they're not breathing anymore.
   components:
@@ -14,7 +14,6 @@
     unique: false
   - type: TargetObjective
     title: objective-condition-pkill-person
-  - type: PickRandomPerson
   - type: KillPersonCondition
     requireDead: true
 

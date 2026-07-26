@@ -180,6 +180,22 @@
     - TauCetiBasic
 
 - type: entity
+  id: BioweaponTranslator
+  parent: [ TranslatorPoweredBase ]
+  name: Bioweapon translator
+  description: Translates speech between Miltech and Galactic Common, losing this means anyone can command bioweapons!
+  components:
+  - type: HandheldTranslator
+    spoken:
+    - TauCetiBasic
+    - Miltech
+    understood:
+    - TauCetiBasic
+    - Miltech
+    requires:
+    - TauCetiBasic
+
+- type: entity
   id: AnimalTranslator
   parent: [ TranslatorPoweredBase ]
   name: Animal translator

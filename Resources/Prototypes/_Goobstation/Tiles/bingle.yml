@@ -5,11 +5,6 @@
   name: tiles-bingle-floor
   sprite: /Textures/_Trauma/Tiles/binglefloortile.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]

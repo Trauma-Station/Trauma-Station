@@ -18,7 +18,6 @@
   recipes:
   - BookDoors
   - BookAirlocks
-  - BookToys
   - BookBananium
   - BookBots
   - BookFurniture

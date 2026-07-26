@@ -79,7 +79,7 @@ public sealed partial class HealingSystem : EntitySystem
                 var popup = (args.User == target.Owner)
                     ? Loc.GetString("medical-item-stop-bleeding-self")
                     : Loc.GetString("medical-item-stop-bleeding", ("target", Identity.Entity(target.Owner, EntityManager)));
-                _popupSystem.PopupClient(popup, target, args.User);
+                _popupSystem.PopupEntity(popup, target, args.User);
             }
         }
 
@@ -128,7 +128,7 @@ public sealed partial class HealingSystem : EntitySystem
 
         if (!args.Repeat)
         {
-            _popupSystem.PopupClient(Loc.GetString("medical-item-finished-using", ("item", args.Used)), target.Owner, args.User);
+            _popupSystem.PopupEntity(Loc.GetString("medical-item-finished-using", ("item", args.Used)), target.Owner, args.User);
             return;
         }
 
@@ -220,7 +220,7 @@ public sealed partial class HealingSystem : EntitySystem
 
         if (!anythingToDo)
         {
-            _popupSystem.PopupClient(Loc.GetString("medical-item-cant-use", ("item", healing.Owner)), healing, user);
+            _popupSystem.PopupEntity(Loc.GetString("medical-item-cant-use", ("item", healing.Owner)), healing, user);
             return false;
         }
         // Shitmed Change End

@@ -284,8 +284,9 @@ public sealed partial class ForgingSystem : EntitySystem
 
         SetPrice(uid, metal, item);
 
-        var ev = new ConstructionChangedEvent(uid);
+        var ev = new ConstructionChangedEvent(uid, part, user);
         RaiseLocalEvent(part, ref ev);
+        RaiseLocalEvent(uid, ref ev);
     }
 
     /// <summary>

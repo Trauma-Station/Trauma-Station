@@ -60,7 +60,7 @@ public abstract partial class SharedHereticAbilitySystem
         if (!Examine.InRangeUnOccluded(ent, target, SharedInteractionSystem.MaxRaycastRange))
         {
             // can only dash if the destination is visible on screen
-            Popup.PopupClient(Loc.GetString("dash-ability-cant-see"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("dash-ability-cant-see"), ent, ent);
             return;
         }
 

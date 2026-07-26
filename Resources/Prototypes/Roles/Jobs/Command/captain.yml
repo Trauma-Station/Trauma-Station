@@ -32,7 +32,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipCaptain
+    - SkillChipEchelonEducation
+    - SkillChipLaser
+    - SkillChipLongBlade
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
