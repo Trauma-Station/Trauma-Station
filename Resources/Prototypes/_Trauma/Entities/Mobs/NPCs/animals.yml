@@ -1210,19 +1210,16 @@
   - type: Tag
     tags:
     - FootstepSound
-  - type: PassiveDamage
-    allowedStates:
-    - Alive
-    damage:
-      types:
-        Poison: -0.07
-        Blunt: -0.03
-        Slash: -0.03
-        Piercing: -0.03
-        Ballistic: -0.03
-        Heat: -0.03
-        Cold: -0.03
-        Shock: -0.03
+  - type: Penetratable
+    penetrateDamage: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
   - type: NpcFactionMember
     factions:
       - Xeno
