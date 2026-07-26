@@ -188,7 +188,7 @@
       types:
         Heat : 1
   - type: Temperature
-    currentTemperature: 310
+    temperature: 310
     specificHeat: 42
   - type: TemperatureSpeed
     thresholds: # lol

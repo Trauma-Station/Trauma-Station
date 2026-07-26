@@ -18,7 +18,7 @@
     castShadows: false
     falloff: 4
   - type: Temperature
-    currentTemperature: 290
+    temperature: 290
     specificHeat: 500
     atmosTemperatureTransferEfficiency: 0.005
   - type: InternalTemperature
@@ -103,7 +103,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 900
+    temperature: 900
 
 - type: entity
   abstract: true
@@ -113,7 +113,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 1300
+    temperature: 1300
 
 - type: entity
   abstract: true
@@ -123,7 +123,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 1499
+    temperature: 1499
 
 - type: entity
   abstract: true
@@ -133,7 +133,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 973
+    temperature: 973
 
 - type: entity
   abstract: true
@@ -143,7 +143,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 973
+    temperature: 973
 
 - type: entity
   abstract: true
@@ -153,4 +153,4 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 2050
+    temperature: 2050

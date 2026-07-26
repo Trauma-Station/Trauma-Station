@@ -299,7 +299,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingOuterWizardBase, ClothingOuterWizardBaseArmor, ClothingOuterStorageToggleableBase]
+  parent: [ ClothingOuterWizardBase, ClothingOuterWizardBaseArmor, ClothingOuterJacketBase ]
   id: ClothingOuterOblivionEnforcer
   name: oblivion enforcer's robes
   description: A set of armored, radiation-proof robes worn by Oblivion Enforcers.

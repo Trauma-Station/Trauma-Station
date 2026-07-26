@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Trauma.Server.CosmicCult.Abilities;
 using Content.Trauma.Server.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
 using Content.Shared.Bible.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;

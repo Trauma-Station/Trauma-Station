@@ -13,7 +13,7 @@
     stage: 1
   - type: AtmosExposed
   - type: Temperature
-    currentTemperature: 290
+    temperature: 290
     specificHeat: 25
   - type: TemperatureDamage
   - type: InternalTemperature

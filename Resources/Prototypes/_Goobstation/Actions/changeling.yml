@@ -587,6 +587,10 @@
     - state: void_adaptation
   - type: InstantAction
     event: !type:ActionVoidAdaptEvent
+      addedComponents:
+      - type: SpecialBreathingImmunity
+      - type: SpecialPressureImmunity
+      - type: SpecialLowTempImmunity
   - type: ChangelingAction
     chemicalCost: 0
     useInLesserForm: true

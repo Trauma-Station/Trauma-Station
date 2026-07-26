@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Goobstation.Common.Temperature.Components;
+namespace Content.Trauma.Shared.Temperature;
 
 /// <summary>
-///     Used to ensure that LowTempImmunityComponent is not overriden (when it is made eventually)
+/// Prevetns cooling down below body temp of 37C.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class SpecialLowTempImmunityComponent : Component
 {
     public override bool SessionSpecific => true;

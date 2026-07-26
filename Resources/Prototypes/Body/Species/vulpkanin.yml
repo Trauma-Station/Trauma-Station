@@ -174,8 +174,6 @@
       types:
         Piercing: 2
         Slash: 3
-  - type: Temperature
-    specificHeat: 44
   - type: TemperatureDamage
     heatDamageThreshold: 320
     coldDamageThreshold: 230
@@ -185,11 +183,11 @@
     heatDamage:
       types:
         Heat: 2.5 # Per second, scales with temperature & other constants
-  #- type: Wagging # Trauma - moved to tail
-  #  action: ActionToggleWaggingVulpkanin
   - type: TemperatureProtection
     heatingCoefficient: 1.2
     coolingCoefficient: 0.3
+  #- type: Wagging # Trauma - moved to tail
+  #  action: ActionToggleWaggingVulpkanin
   - type: JumpAbility
     action: ActionVulpkaninGravityJump
     canCollide: true

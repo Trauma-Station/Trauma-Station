@@ -192,7 +192,7 @@
         type: ChameleonBoundUserInterface
 
 - type: entity
-  parent: [ ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseSyndicateContraband ]
+  parent: [ ClothingOuterBaseMedium, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseSyndicateContraband ]
   id: ClothingOuterArmorCloakSith
   name: dark lord cloak
   description: What began as a simple cosplay cloak was illegally reinforced with armored plates, transforming it into a functional piece of armor. Looks like it's even capable of protecting the user from the lack of pressure in space.

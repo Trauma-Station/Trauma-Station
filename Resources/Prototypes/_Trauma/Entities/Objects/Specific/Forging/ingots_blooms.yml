@@ -459,7 +459,7 @@
     - state: bloomadamantine # not using the overheated version because it doesn't need to be smashed
       shader: Emissive
   - type: Temperature
-    currentTemperature: 2200
+    temperature: 2200
   - type: Workable
     remaining: 500 # bring an army, you'll need it
     result: AdamantineIngot

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
@@ -44,6 +43,7 @@ using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Components.Examine;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
 using Content.Trauma.Shared.Roles;
+using Content.Trauma.Shared.Temperature;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;

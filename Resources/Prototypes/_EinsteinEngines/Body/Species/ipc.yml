@@ -232,7 +232,7 @@
         layer:
         - MobLayer
   - type: Temperature
-    currentTemperature: 310.15 # 310K is the standard operating temperature of a home circuit breaker
+    temperature: 310.15 # 310K is the standard operating temperature of a home circuit breaker
     specificHeat: 42
     atmosTemperatureTransferEfficiency: 0.05
   - type: TemperatureDamage

@@ -73,7 +73,7 @@
 
 #Paramedic Void Helmet
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase # goobstation - why didnt this have a light
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ] # goobstation - why didnt this have a light
   id: ClothingHeadHelmetVoidParamed
   name: paramedic void helmet
   description: A void helmet made for paramedics.
