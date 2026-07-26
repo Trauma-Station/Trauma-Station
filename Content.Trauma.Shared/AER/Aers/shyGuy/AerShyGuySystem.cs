@@ -134,7 +134,7 @@ public sealed partial class AerShyGuySystem : EntitySystem
     }
 
     /// <summary>
-    /// stolen function from client side ViewconeOverlaySystem 
+    /// stolen function from client side ViewconeOverlaySystem
     /// </summary>
     public bool IsVisible(Entity<ViewconeComponent> ent, Vector2 eyePos, Vector2 pos)
     {
