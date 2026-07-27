@@ -605,7 +605,7 @@
 - type: entity
   parent: BaseDemon
   id: MediumDemon64Fat
-  name: angel
+  name: Aspect of Glamour
   description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one is a bit on the fat side.
   components:
   - type: Sprite
@@ -685,7 +685,9 @@
     animation: WeaponArcPurplePunch
     damage:
       types:
-        Asphyxiation: 25
+        Asphyxiation: 20
+        Ion: 15
+        Holy: 5
     altDisarm: false
     canWideSwing: false
   - type: Destructible
