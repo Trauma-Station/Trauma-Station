@@ -328,6 +328,20 @@ entities:
     - type: Transform
       pos: 13.85193,9.576048
       parent: 1
+- proto: SalvageSpawnerMobShark
+  entities:
+  - uid: 460
+    components:
+    -type: Transform
+    pos: 13.47,7.54
+    parent: 1
+- proto: SpawnMobCarp
+  entities:
+  - uid: 461
+    components:
+    -type: Transform
+    pos: 15.45,7.54
+    parent: 1
 - proto: ClothingOuterHardsuitSalvage
   entities:
   - uid: 18
