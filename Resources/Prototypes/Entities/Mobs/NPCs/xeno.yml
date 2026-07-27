@@ -24,6 +24,12 @@
         Base: dead_purple_snake
       Dead:
         Base: dead_purple_snake
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      55: Dead
+  - type: Stamina
+    baseCritThreshold: 150
   - type: ToolRefinable
     refineResult:
     - id: FoodMeatSnake
