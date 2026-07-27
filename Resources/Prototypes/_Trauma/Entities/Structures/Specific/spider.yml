@@ -75,7 +75,7 @@
     fireSpread: true
     damage:
       types:
-        Heat: 3 
+        Heat: 3
   - type: Appearance
   - type: FireVisuals
     sprite: Effects/fire.rsi
@@ -158,7 +158,7 @@
     fireSpread: true
     damage:
       types:
-        Heat: 3 
+        Heat: 3
   - type: Appearance
   - type: FireVisuals
     sprite: Effects/fire.rsi
