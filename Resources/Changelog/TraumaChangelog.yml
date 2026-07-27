@@ -11107,3 +11107,10 @@ Entries:
   id: 1236
   time: '2026-07-25T21:29:19.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/90
+- author: Magelfik
+  changes:
+  - type: Remove
+    message: Removed problematic entities from game.
+  id: 1237
+  time: '2026-07-27T20:19:33.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/96
