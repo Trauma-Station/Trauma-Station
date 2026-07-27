@@ -14,6 +14,8 @@
       Stomach: OrganSpiderStomach
       Liver: OrganArachnidLiver
       Kidneys: OrganArachnidKidneys
+      ArmLeft: OrganArachnidArmLeft
+      HandLeft: OrganArachnidHandLeft
 
 - type: entity
   parent: OrganBloodsuckerStomach

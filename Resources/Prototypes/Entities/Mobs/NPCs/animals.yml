@@ -2882,6 +2882,7 @@
   - type: VentCrawler
   - type: UseDelay # For insta prying
     delay: 1
+  - type: FoliageIgnoringVision
   # </Trauma>
   - type: Physics
   - type: ToolRefinable
@@ -3074,6 +3075,12 @@
     thresholds:
       0: Alive
       40: Dead
+  # - type: Hands # TODO - Make spiders only able to hold webs when the whitelist code actually works
+  - type: Puller
+    needsHands: false
+  - type: Inventory
+    templateId: xenomorph
+  - type: ComplexInteraction
   # </Trauma>
 
 - type: entity

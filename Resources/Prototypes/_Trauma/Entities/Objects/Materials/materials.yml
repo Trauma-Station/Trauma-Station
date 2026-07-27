@@ -151,3 +151,13 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity # For eventual use with spiders
+  parent: MaterialWebSilk
+  id: MaterialWebSilkLingering0
+  suffix: Lingering, 0
+  components:
+  - type: Stack
+    lingering: true
+    count: 0
+  - type: Unremoveable
