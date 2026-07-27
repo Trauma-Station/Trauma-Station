@@ -3065,7 +3065,7 @@
       task: SpiderCompound # Trauma
   - type: ShadowCocoonMaker
     cocoonDelay: 15
-    shadowCocoon:
+    shadowCocoon: SpiderEggsHuman
   - type: EggLayer
     eggSpawn:
     - id: SpiderEggs
