@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: OrganBloodsuckerStomachFast
   parent: [ OrganBloodsucker, OrganAnimalStomach ]
+  id: OrganBloodsuckerStomachFast
   components:
   - type: Metabolizer
     updateInterval: 0.1

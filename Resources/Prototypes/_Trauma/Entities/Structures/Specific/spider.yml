@@ -1,16 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+
 - type: entity
   parent: BaseStructure
-  id: SpiderEggs
-  name: egg sac
-  description: A bundle of spider eggs, you see squirming within.
+  id: BaseSpiderStructure
   components:
-  - type: Sprite
-    sprite: _Trauma/Structures/spiders.rsi
-    drawdepth: SmallObjects
-    snapCardinals: true
-    state: icon
   - type: Fixtures
     fixtures:
       fix1:
@@ -21,6 +15,42 @@
           bounds: "-0.5,-0.5,0.5,0.5"
         layer:
         - MidImpassable
+  - type: Sprite
+    sprite: _Trauma/Structures/spiders.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: icon
+  - type: InteractionOutline
+  - type: Damageable
+  - type: Injurable
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderplace.ogg
+      params:
+        volume: 0.7
+  - type: AmbientSound
+    range: 15
+    volume: -2
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3 
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+
+- type: entity
+  parent: BaseSpiderStructure
+  id: SpiderEggs
+  name: egg sac
+  description: A bundle of spider eggs, you see them squirming within.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/spiders.rsi
   - type: Destructible
     thresholds:
     - trigger:
@@ -43,9 +73,6 @@
     soundGroups:
       Brute:
         collection: desecration
-  - type: InteractionOutline
-  - type: Damageable
-  - type: Injurable
   - type: TimedDespawn
     lifetime: 121
   - type: TimedSpawner
@@ -61,47 +88,15 @@
       - ReagentId: Egg
         Quantity: 150
     id: egg
-  - type: EmitSoundOnSpawn
-    sound:
-      path: /Audio/_Trauma/Specific/spider/spiderplace.ogg
-      params:
-        volume: 0.7
-  - type: AmbientSound
-    range: 15
-    volume: -2
-    sound:
-      path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
-  - type: Flammable
-    fireSpread: true
-    damage:
-      types:
-        Heat: 3 
-  - type: Appearance
-  - type: FireVisuals
-    sprite: Effects/fire.rsi
-    normalState: 1
 
 - type: entity
   parent: BaseStructure
-  id: SpiderEggsHuman
+  id: BaseSpiderStructure
   name: infested crewmate
   description: A once living crewmate, turned into a home for spiders.
   components:
   - type: Sprite
-    sprite: _Trauma/Structures/spiders.rsi
-    drawdepth: SmallObjects
-    snapCardinals: true
     state: webbed
-  - type: Fixtures
-    fixtures:
-      fix1:
-        hard: false
-        density: 7
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        layer:
-        - MidImpassable
   - type: Destructible
     thresholds:
     - trigger:
@@ -123,9 +118,6 @@
       Brute:
         path:
           "/Audio/Weapons/slash.ogg"
-  - type: InteractionOutline
-  - type: Damageable
-  - type: Injurable
   - type: TimedSpawner
     prototypes:
     - MobBabySpider
@@ -144,22 +136,3 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
-  - type: EmitSoundOnSpawn
-    sound:
-      path: /Audio/_Trauma/Specific/spider/spiderplace.ogg
-      params:
-        volume: 0.7
-  - type: AmbientSound
-    range: 15
-    volume: -2
-    sound:
-      path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
-  - type: Flammable
-    fireSpread: true
-    damage:
-      types:
-        Heat: 3 
-  - type: Appearance
-  - type: FireVisuals
-    sprite: Effects/fire.rsi
-    normalState: 1

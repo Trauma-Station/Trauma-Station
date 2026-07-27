@@ -24,8 +24,8 @@
       hungerRequired: true
 
 - type: entity
+  parent: OrganAnimalStomach
   id: OrganAnimalStomachFast
-  parent: [ OrganAnimalStomach ]
   components:
   - type: Metabolizer
     updateInterval: 0.1

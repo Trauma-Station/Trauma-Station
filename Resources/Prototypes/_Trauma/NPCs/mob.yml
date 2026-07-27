@@ -3,15 +3,15 @@
 - type: htnCompound
   id: SpiderCompound
   branches:
-    - tasks:
-        - !type:HTNCompoundTask
-          task: MeleeCombatCompound
-    - tasks:
-        - !type:HTNCompoundTask
-          task: MoveCallTargetCompound
-    # - tasks: - Leave it for player controlled spiders
-    #     - !type:HTNCompoundTask
-    #       task: FoodCompound
-    - tasks:
-        - !type:HTNCompoundTask
-          task: IdleCompound
+  - tasks:
+      - !type:HTNCompoundTask
+        task: MeleeCombatCompound
+  - tasks:
+      - !type:HTNCompoundTask
+        task: MoveCallTargetCompound
+  # - tasks: - Leave it for player controlled spiders
+  #     - !type:HTNCompoundTask
+  #       task: FoodCompound
+  - tasks:
+      - !type:HTNCompoundTask
+        task: IdleCompound

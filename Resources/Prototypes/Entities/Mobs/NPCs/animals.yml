@@ -2987,7 +2987,7 @@
   - type: InputMover
   - type: MobMover
   - type: HTN
-    constantlyReplan: false
+    constantlyReplan: false # Trauma
     rootTask:
       task: SimpleHostileCompound # Trauma
   - type: GhostRole
@@ -3001,10 +3001,10 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
-  name: giant spider
   parent: MobSpiderBase
   id: MobGiantSpider
   abstract: true
+  name: giant spider # Trauma
   description: Widely recognized to be the literal worst thing in existence.
   components:
   - type: Sprite
@@ -3062,7 +3062,7 @@
   - type: HTN
     constantlyReplan: false
     rootTask:
-      task: SpiderCompound # Trauma
+      task: SpiderCompound
   - type: ShadowCocoonMaker
     cocoonDelay: 15
     shadowCocoon: SpiderEggsHuman
@@ -3073,7 +3073,7 @@
     eggLayAction: SpiderMultiply
     hungerRequired: true
   - type: Hunger
-    startingHunger: 15 # Goobstation change
+    startingHunger: 15 
     thresholds:
       Overfed: 150
       Okay: 100
