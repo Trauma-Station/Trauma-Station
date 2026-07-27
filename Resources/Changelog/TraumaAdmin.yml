@@ -269,3 +269,12 @@ Entries:
   id: 35
   time: '2026-07-26T11:15:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3726
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Bans can now specify a webhook reason override e.g. to not have slurs or
+      player info posted publicly.
+  id: 36
+  time: '2026-07-27T14:25:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3757

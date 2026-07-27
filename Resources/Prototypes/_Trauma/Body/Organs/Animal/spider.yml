@@ -14,9 +14,11 @@
       Stomach: OrganSpiderStomach
       Liver: OrganArachnidLiver
       Kidneys: OrganArachnidKidneys
+      ArmLeft: OrganArachnidArmLeft
+      HandLeft: OrganArachnidHandLeft
 
 - type: entity
-  parent: [ OrganArachnidMetabolizer, OrganBloodsucker, OrganAnimalStomach ]
+  parent: OrganBloodsuckerStomach
   id: OrganSpiderStomach
   components:
   - type: Metabolizer
