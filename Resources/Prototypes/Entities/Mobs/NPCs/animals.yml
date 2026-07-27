@@ -2864,7 +2864,7 @@
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ BaseMobGiantSpider, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ]
+  parent: [ BaseMobGiantSpider, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added BaseMobGiantSpider
   id: MobSpiderBase
   abstract: true
   components:
@@ -2879,20 +2879,12 @@
       types:
         Slash: 3
         Piercing: 7
+  - type: VentCrawler
+  - type: UseDelay # For insta prying
+    delay: 1
+  - type: FoliageIgnoringVision
   # </Trauma>
-  - type: VentCrawler # goobstation - Ventcrawl
   - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 130
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
   - type: ToolRefinable
     refineResult:
     - id: FoodMeatSpider
@@ -2949,8 +2941,6 @@
     speedModifier: 4 # Trauma, was 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: UseDelay # Goobstation - For insta prying
-    delay: 1
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
     allowedStates:
     - Alive
@@ -3048,6 +3038,7 @@
   id: MobGiantSpiderAngry
   # <Trauma>
   components:
+  - type: MobSpam
   - type: Tag
     tags:
     - Spider
@@ -3069,23 +3060,28 @@
   - type: EggLayer
     eggSpawn:
     - id: SpiderEggs
-    hungerUsage: 100
+    hungerUsage: 140
     eggLayAction: SpiderMultiply
     hungerRequired: true
   - type: Hunger
     startingHunger: 15
     thresholds:
       Overfed: 150
-      Okay: 100
-      Peckish: 15
+      Okay: 140
+      Peckish: 139
       Starving: 10
       Dead: 0
   - type: MobThresholds
     thresholds:
       0: Alive
       40: Dead
+  # - type: Hands # TODO - Make spiders only able to hold webs when the whitelist code actually works
+  - type: Puller
+    needsHands: false
+  - type: Inventory
+    templateId: xenomorph
+  - type: ComplexInteraction
   # </Trauma>
-
 
 - type: entity
   name: clown spider

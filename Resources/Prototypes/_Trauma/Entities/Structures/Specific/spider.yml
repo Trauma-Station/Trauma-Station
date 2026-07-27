@@ -79,7 +79,7 @@
     prototypes:
     - MobBabySpider
     intervalSeconds: 120
-    minimumEntitiesSpawned: 6
+    minimumEntitiesSpawned: 3
     maximumEntitiesSpawned: 6
   - type: Solution
     solution:
@@ -106,7 +106,7 @@
       - !type:PlaySoundBehavior
         sound:
           collection: desecration
-      - !type:SpawnEntitiesBehavior # Balloon Loot and spawn
+      - !type:SpawnEntitiesBehavior
          spawn:
           MaterialWebSilk:
             min: 1
