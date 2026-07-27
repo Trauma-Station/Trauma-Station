@@ -95,7 +95,7 @@ public sealed partial class BibleSystem : EntitySystem
         if (!TryComp<UseDelayComponent>(ent, out var useDelay) || _delay.IsDelayed((ent, useDelay)))
             return;
 
-        if (args.Target == null || args.Target == args.User || _mobState.IsDead(args.Target.Value)) // Trauma - was IsAlive bible heals crit targets now
+        if (args.Target == null || args.Target == args.User || !_mobState.IsAlive(args.Target.Value))
             return;
 
         // <Trauma>

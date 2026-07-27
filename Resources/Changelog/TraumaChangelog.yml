@@ -12160,10 +12160,3 @@ Entries:
   id: 1332
   time: '2026-07-27T17:20:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3761
-- author: momoyawn
-  changes:
-  - type: Tweak
-    message: Bible healing can now be used to save the critically injured.
-  id: 1333
-  time: '2026-07-27T19:32:25.0000000+00:00'
-  url: https://github.com/Trauma-Station/Trauma-Station/pull/3763
