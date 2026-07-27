@@ -12151,3 +12151,12 @@ Entries:
   id: 1331
   time: '2026-07-27T13:38:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3751
+- author: Armok
+  changes:
+  - type: Fix
+    message: Spiders can now eat raw meat
+  - type: Tweak
+    message: Baby spiders now walk slowly
+  id: 1332
+  time: '2026-07-27T17:20:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3761
