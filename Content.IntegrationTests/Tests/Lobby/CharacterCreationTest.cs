@@ -148,6 +148,7 @@ public sealed class CharacterCreationTest : GameTest
             $"Skin color changed for {species} from {a.SkinColor} to {b.SkinColor}!");
         Assert.That(a.Markings, Is.EquivalentTo(b.Markings),
             $"Markings changed for {species}!");
+        Assert.Fail($"Appearance not equal for {species}");
         // </Trauma>
     }
 }

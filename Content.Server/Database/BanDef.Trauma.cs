@@ -10,14 +10,6 @@ namespace Content.Server.Database;
 /// </summary>
 public sealed partial class BanDef
 {
-    public string? WebhookReason;
-
-    public BanDef WithWebhookReason(string? reason)
-    {
-        WebhookReason = reason;
-        return this;
-    }
-
     private static string GetUsername(string? userId)
     {
         if (userId == null)

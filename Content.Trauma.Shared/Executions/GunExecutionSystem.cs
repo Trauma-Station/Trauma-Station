@@ -218,7 +218,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         }
 
         var key = prefix + "-popup-gun-initial-";
-        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, weapon);
+        _execution.ShowExecutionPopup(key + "-internal", key + "-external", attacker, victim, weapon);
 
         var doAfter = new DoAfterArgs(EntityManager,
             attacker,

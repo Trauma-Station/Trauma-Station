@@ -63,7 +63,7 @@
   id: Bandana # CargoBounty: BountyBandana
 
 - type: Tag
-  id: BaseballBat # CargoBounty: BountyBaseballBat, Trauma: nail/wire bat crafting
+  id: BaseballBat # CargoBounty: BountyBaseballBat
 
 - type: Tag
   id: BBQsauce # Storage whitelist: ClothingBeltChef and FoodCartHot. ItemMapper: ClothingBeltChef and FoodCartHot
@@ -1341,7 +1341,7 @@
   id: Soup # CargoBounty: BountySoup
 
 - type: Tag
-  id: Spear # CargoBounty: BountySpear, Trauma: pipebomb/ied spear crafting
+  id: Spear # CargoBounty: BountySpear
 
 - type: Tag
   id: SpeedLoaderCap # Ammo: RevolverCapGun, RevolverCapGunFake

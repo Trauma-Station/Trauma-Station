@@ -7,29 +7,24 @@ namespace Content.Goobstation.Client.Emoting;
 public sealed partial class ShowSpriteLayerStatusEffectSystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
-    [SubscribeLocalEvent]
-    private void OnApply(Entity<ShowSpriteLayerStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
+    public override void Initialize()
     {
-        SetVisible(ent.Comp.Layer, args.Target, ent.Comp.SetVisible);
+        base.Initialize();
+
+        SubscribeLocalEvent<ShowSpriteLayerStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
+        SubscribeLocalEvent<ShowSpriteLayerStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
     }
 
-    [SubscribeLocalEvent]
     private void OnRemove(Entity<ShowSpriteLayerStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        SetVisible(ent.Comp.Layer, args.Target, !ent.Comp.SetVisible);
+        if (TryComp(args.Target, out SpriteComponent? sprite))
+            _sprite.LayerSetVisible((args.Target, sprite), ent.Comp.Layer, !ent.Comp.SetVisible);
     }
 
-    private void SetVisible(Enum key, EntityUid uid, bool visible)
+    private void OnApply(Entity<ShowSpriteLayerStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        if (!_spriteQuery.TryComp(uid, out var sprite))
-            return;
-
-        var ent = (uid, sprite);
-        if (!_sprite.TryGetLayer(ent, key, out var layer, false)) // dont care if its missing
-            return;
-
-        _sprite.LayerSetVisible(layer, visible);
+        if (TryComp(args.Target, out SpriteComponent? sprite))
+            _sprite.LayerSetVisible((args.Target, sprite), ent.Comp.Layer, ent.Comp.SetVisible);
     }
 }

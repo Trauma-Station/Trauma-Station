@@ -12125,38 +12125,3 @@ Entries:
   id: 1329
   time: '2026-07-27T01:56:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3732
-- author: Wizard25671
-  changes:
-  - type: Add
-    message: Added RTG's to the random loot pool for space debris
-  - type: Tweak
-    message: Reduced the cost to buy gyroscopes and thrusters
-  - type: Tweak
-    message: Reduced the sell value of gyroscopes
-  id: 1330
-  time: '2026-07-27T10:19:45.0000000+00:00'
-  url: https://github.com/Trauma-Station/Trauma-Station/pull/3733
-- author: deltanedas
-  changes:
-  - type: Fix
-    message: Fixed every uplink item upstream removed having missing locale strings.
-  - type: Fix
-    message: Fixed gun execution popups.
-  - type: Tweak
-    message: Spiders are now immune to their venom...
-  - type: Add
-    message: Added a durathread cargo order since upstream killed textiles crate.
-  - type: Add
-    message: Automation machines can now be made in a circuit printer.
-  id: 1331
-  time: '2026-07-27T13:38:34.0000000+00:00'
-  url: https://github.com/Trauma-Station/Trauma-Station/pull/3751
-- author: Armok
-  changes:
-  - type: Fix
-    message: Spiders can now eat raw meat
-  - type: Tweak
-    message: Baby spiders now walk slowly
-  id: 1332
-  time: '2026-07-27T17:20:43.0000000+00:00'
-  url: https://github.com/Trauma-Station/Trauma-Station/pull/3761

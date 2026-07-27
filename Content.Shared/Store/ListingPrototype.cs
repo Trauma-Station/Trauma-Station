@@ -55,9 +55,9 @@ public partial class ListingData : IEquatable<ListingData>
     }
 
     public ListingData(
-        LocId? name, // Trauma - use LocId
+        string? name,
         ProtoId<DiscountCategoryPrototype>? discountCategory,
-        LocId? description, // Trauma - use LocId
+        string? description,
         List<ListingCondition>? conditions,
         SpriteSpecifier? icon,
         int priority,
@@ -121,7 +121,7 @@ public partial class ListingData : IEquatable<ListingData>
     /// The name of the listing. If empty, uses the entity's name (if present)
     /// </summary>
     [DataField]
-    public LocId? Name; // Trauma - use LocId
+    public string? Name;
 
     /// <summary>
     /// Discount category for listing item. This marker describes chance of how often will item be discounted.
@@ -133,7 +133,7 @@ public partial class ListingData : IEquatable<ListingData>
     /// The description of the listing. If empty, uses the entity's description (if present)
     /// </summary>
     [DataField]
-    public LocId? Description; // Trauma - use LocId
+    public string? Description;
 
     /// <summary>
     /// The categories that this listing applies to. Used for filtering a listing for a store.

@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponEDaggerFilled
+  parent: BriefcaseWeaponSmall
   name: secure energy dagger case
   components:
   - type: EntityTableContainerFill
@@ -13,8 +13,8 @@
         - id: SkillChipEnergy
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponViperFilled
+  parent: BriefcaseWeaponSmall
   name: secure viper case
   components:
   - type: EntityTableContainerFill
@@ -26,8 +26,8 @@
         - id: SkillChipPistol
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponCobraFilled
+  parent: BriefcaseWeaponSmall
   name: secure cobra case
   components:
   - type: EntityTableContainerFill
@@ -39,8 +39,8 @@
         - id: SkillChipPistol
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponCutlassFilled
+  parent: BriefcaseWeaponSmall
   name: secure cutlass case
   components:
   - type: EntityTableContainerFill
@@ -51,8 +51,8 @@
         - id: SkillChipLongBlade
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponPythonFilled
+  parent: BriefcaseWeaponSmall
   name: secure python case
   components:
   - type: EntityTableContainerFill
@@ -64,8 +64,8 @@
         - id: SkillChipPistol
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponBoxingGlovesFilled
+  parent: BriefcaseWeaponSmall
   name: secure rigged boxing gloves case
   components:
   - type: EntityTableContainerFill
@@ -88,8 +88,8 @@
 #         - id: SkillChipLongBlade
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponBetrayalKnifeFilled
+  parent: BriefcaseWeaponSmall
   name: secure betrayal knife case
   components:
   - type: EntityTableContainerFill
@@ -100,8 +100,8 @@
         - id: SkillChipShortBlade
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponEnergyCrossbowFilled
+  parent: BriefcaseWeaponSmall
   name: secure energy crossbow case
   components:
   - type: EntityTableContainerFill
@@ -112,8 +112,8 @@
         - id: SkillChipPistol
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponEnergyShieldFilled
+  parent: BriefcaseWeaponSmall
   name: secure energy shield case
   components:
   - type: EntityTableContainerFill
@@ -124,8 +124,8 @@
         - id: SkillChipStamina
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponNorthStarFilled
+  parent: BriefcaseWeaponSmall
   name: secure gloves of the north star case
   components:
   - type: EntityTableContainerFill
@@ -136,8 +136,8 @@
         - id: SkillChipUnarmed
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponEnergyPickaxeFilled
+  parent: BriefcaseWeaponSmall
   name: secure energy pickaxe case
   components:
   - type: EntityTableContainerFill
@@ -148,8 +148,8 @@
         - id: SkillChipEnergy
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponContractorBatonFilled
+  parent: BriefcaseWeaponSmall
   name: secure contractor baton case
   components:
   - type: EntityTableContainerFill
@@ -160,8 +160,8 @@
         - id: SkillChipNonLethal
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponEnergySwordFilled
+  parent: BriefcaseWeaponSmall
   name: secure energy sword case
   components:
   - type: EntityTableContainerFill
@@ -172,8 +172,8 @@
         - id: SkillChipEnergy
 
 - type: entity
-  parent: BriefcaseWeaponSmall
   id: BriefcaseWeaponAnacondaFilled
+  parent: BriefcaseWeaponSmall
   name: secure anaconda case
   components:
   - type: EntityTableContainerFill
@@ -184,8 +184,8 @@
         - id: SkillChipPistol
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponSaiveFilled
+  parent: BriefcaseWeapon
   name: secure saive automatique case
   components:
   - type: EntityTableContainerFill
@@ -197,8 +197,8 @@
         - id: SkillChipRifle
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponM90Filled
+  parent: BriefcaseWeapon
   name: secure M-90 case
   components:
   - type: EntityTableContainerFill
@@ -210,8 +210,8 @@
         - id: SkillChipRifle
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponEstocFilled
+  parent: BriefcaseWeapon
   name: secure Esctoc DMR case
   components:
   - type: EntityTableContainerFill
@@ -223,8 +223,8 @@
         - id: SkillChipRifle
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponHardlightBowFilled
+  parent: BriefcaseWeapon
   name: secure Hardlight Bow case
   components:
   - type: EntityTableContainerFill
@@ -234,8 +234,8 @@
         - id: BowHardlight
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponFireaxeFilled
+  parent: BriefcaseWeapon
   name: secure Fireaxe case
   components:
   - type: EntityTableContainerFill
@@ -243,11 +243,11 @@
       storagebase: !type:AllSelector
         children:
         - id: FireAxeFlaming
-        - id: SkillChipBludgeon
+        - id: SkillChipTool
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponL6Filled
+  parent: BriefcaseWeapon
   name: secure L6 Saw case
   components:
   - type: EntityTableContainerFill
@@ -259,8 +259,8 @@
         - id: SkillChipHeavy
 
 - type: entity
-  parent: BriefcaseWeapon
   id: BriefcaseWeaponBurnerFilled
+  parent: BriefcaseWeapon
   name: secure burner case
   components:
   - type: EntityTableContainerFill

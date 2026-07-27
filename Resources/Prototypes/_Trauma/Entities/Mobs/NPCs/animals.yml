@@ -1206,9 +1206,6 @@
     allowedEmotes: ['Click', 'Chitter']
   - type: Vocal
     emoteSounds: UnisexArachnid
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 0.25
-    baseSprintSpeed: 0.25
   - type: TypingIndicator
     proto: spider
   - type: Tag
