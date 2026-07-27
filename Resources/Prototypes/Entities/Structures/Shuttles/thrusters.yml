@@ -238,7 +238,7 @@
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: StaticPrice
-    price: 2000
+    price: 250 # Trauma - Was 2000
 
 - type: entity
   id: GyroscopeUnanchored

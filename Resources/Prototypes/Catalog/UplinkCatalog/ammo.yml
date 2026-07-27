@@ -86,7 +86,7 @@
 # For the Estoc
 - type: listing
   id: UplinkEstocAmmo
-  name: uplink-estoc-ammo-name-trauma # Trauma
+  name: uplink-estoc-ammo-name
   description: uplink-estoc-ammo-desc
   productEntity: MagazineRifle
   # <Trauma>
@@ -104,7 +104,7 @@
 # For the Hristov
 - type: listing
   id: UplinkHristovAmmo
-  name: uplink-sniper-ammo-name-trauma # Trauma
+  name: uplink-sniper-ammo-name
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
