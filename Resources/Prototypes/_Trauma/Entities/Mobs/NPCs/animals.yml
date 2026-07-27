@@ -466,12 +466,6 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
       state: glow
       shader: unshaded
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      55: Dead
-  - type: Stamina
-    baseCritThreshold: 150
   - type: DamageStateVisuals
     states:
       Alive:
