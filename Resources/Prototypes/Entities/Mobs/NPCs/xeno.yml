@@ -16,12 +16,12 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: purple_snake
-  # Trauma
+  # <Trauma>
   - type: MobThresholds
     thresholds:
       0: Alive
       55: Dead
-  # Trauma
+  # <Trauma>
   - type: Stamina
     baseCritThreshold: 150
   - type: DamageStateVisuals
