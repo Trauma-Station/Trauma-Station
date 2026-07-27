@@ -120,7 +120,7 @@
 - type: entity
   parent: PlasmaOre
   id: PlasmaOreUnprocessed
-  name: unprocessed phoron ore
+  name: unprocessed plasma ore
   suffix: Full
   components:
   - type: Stack

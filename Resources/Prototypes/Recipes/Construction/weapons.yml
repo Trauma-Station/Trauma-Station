@@ -55,7 +55,7 @@
   graph: PlasmaShiv
   # <Trauma>
   theory:
-    FabricationKnowledge: 1 # need to be careful with phoron
+    FabricationKnowledge: 1 # need to be careful with plasma
     WeaponsKnowledge: 0
   practical:
     WeaponsKnowledge: 1

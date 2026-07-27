@@ -64,7 +64,7 @@
 - type: construction
   parent: BaseRevMachine
   id: RevPlasmaFoundry
-  targetNode: phoron foundry
+  targetNode: plasma foundry
 
 - type: construction
   parent: BaseRevMachine

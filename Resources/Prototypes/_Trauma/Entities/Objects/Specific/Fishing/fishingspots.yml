@@ -128,8 +128,8 @@
 - type: entity
   parent: BaseFishingPool
   id: PlasmaFishingPool
-  name: phoron fishing pond
-  description: A fishing pool linked via portal to a massive hatchery. This one is full of phoron!
+  name: plasma fishing pond
+  description: A fishing pool linked via portal to a massive hatchery. This one is full of plasma!
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Fishing/plasmapond.rsi
