@@ -77,7 +77,7 @@ public sealed partial class TailedEntityComponent : Component
     public List<SegmentData> TailSegments = new();
 
     [DataField]
-    public NetCoordinates LastPos;
+    public NetCoordinates? LastPos;
 
     /// <summary>
     /// allows the user to offset the tails position on the head entity
