@@ -35,8 +35,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           Eggshells:
-            min: 11
-            max: 12
+            min: 6
+            max: 6
       - !type:SpillBehavior
         solution: egg
   - type: MeleeSound
@@ -52,8 +52,8 @@
     prototypes:
     - MobBabySpider
     intervalSeconds: 120
-    minimumEntitiesSpawned: 12
-    maximumEntitiesSpawned: 12
+    minimumEntitiesSpawned: 6
+    maximumEntitiesSpawned: 6
   - type: Solution
     solution:
       maxVol: 150
@@ -67,10 +67,19 @@
       params:
         volume: 0.7
   - type: AmbientSound
-    range: 2
+    range: 15
     volume: -2
     sound:
       path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3 
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
 
 - type: entity
   parent: BaseStructure
@@ -120,7 +129,7 @@
   - type: TimedSpawner
     prototypes:
     - MobBabySpider
-    intervalSeconds: 30
+    intervalSeconds: 60
     minimumEntitiesSpawned: 1
     maximumEntitiesSpawned: 1
   - type: EntityStorage
@@ -141,7 +150,16 @@
       params:
         volume: 0.7
   - type: AmbientSound
-    range: 2
+    range: 15
     volume: -2
     sound:
       path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3 
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
