@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Shared.Bitrunning.Components;
 using Content.Shared.Access.Systems;
 
