@@ -12125,3 +12125,14 @@ Entries:
   id: 1329
   time: '2026-07-27T01:56:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3732
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added RTG's to the random loot pool for space debris
+  - type: Tweak
+    message: Reduced the cost to buy gyroscopes and thrusters
+  - type: Tweak
+    message: Reduced the sell value of gyroscopes
+  id: 1330
+  time: '2026-07-27T10:19:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3733
