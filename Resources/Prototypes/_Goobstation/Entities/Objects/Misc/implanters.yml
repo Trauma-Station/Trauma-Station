@@ -152,15 +152,12 @@
     implant: SmokeImplant
 
 - type: entity
+  parent: BaseImplantOnlyImplanterSyndi
   id: NutrimentImplanter
   suffix: Nutriment Pump
-  parent: BaseImplantOnlyImplanterSyndi
   components:
   - type: Implanter
     implant: NutrimentPumpImplant
-    whitelist:
-      components:
-      - HumanoidProfile
 
 - type: entity
   id: StypticStimulatorImplanter
@@ -169,14 +166,6 @@
   components:
   - type: Implanter
     implant: StypticStimulatorImplant
-
-- type: entity
-  parent: BaseImplantOnlyImplanterSyndi
-  id: KravMagaImplanter
-  suffix: Krav Maga
-  components:
-  - type: Implanter
-    implant: KravMagaImplant
 
 - type: entity
   parent: BaseImplantOnlyImplanterSyndi
