@@ -83,7 +83,7 @@ knowledge-path-flesh-s8-desc =
     An ever shapeshifting mass of flesh, it knew well my goals. The Marshal approved.
 
     Allows you to transmute a heart, a stomach, lungs and a pen to create a Stalker.
-    Stalkers use Crimson Cleave spell, shapeshift into different creatures, and are strong in combat.
+    Stalkers can use the Crimson Cleave spell, shapeshift into different creatures, and are strong in combat.
 
 knowledge-path-flesh-s9-name = Priest’s Final Hymn
 knowledge-path-flesh-s9-desc =

@@ -78,10 +78,10 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
 
-    private static readonly Dictionary<SacrificeTargetType, Func<EntityUid, EntityManager, bool>> SacrificePredicates = new()
+    private static readonly Dictionary<SacrificeTargetType, Type> SacrificeTypes = new()
     {
-        {SacrificeTargetType.Command, (x, e) => e.HasComponent<CommandStaffComponent>(x)},
-        {SacrificeTargetType.Security, (x, e) => e.HasComponent<SecurityStaffComponent>(x)},
+        { SacrificeTargetType.Command, typeof(CommandStaffComponent) },
+        { SacrificeTargetType.Security, typeof(SecurityStaffComponent) },
     };
 
     public static readonly ProtoId<NpcFactionPrototype> HereticFactionId = "Heretic";
@@ -510,8 +510,8 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (targets.Count == 0)
             return;
 
-        var picked = SacrificePredicates.TryGetValue(data.Type, out var pred)
-            ? _rand.Pick(targets.Where(x => pred(x, EntityManager)).ToList())
+        var picked = SacrificeTypes.TryGetValue(data.Type, out var type)
+            ? _rand.Pick(targets.Where(x => HasComp(x, type)).ToList())
             : _rand.Pick(targets);
         targets.Remove(picked);
         ent.Comp.SacrificeTargets.Add(GetData(picked, data.Type));
@@ -537,9 +537,9 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
         var pickedTargets = new List<SacrificeTargetData>();
 
-        foreach (var (type, predicate) in SacrificePredicates)
+        foreach (var (type, compType) in SacrificeTypes)
         {
-            var list = targets.Where(x => predicate(x, EntityManager)).ToList();
+            var list = targets.Where(x => HasComp(x, compType)).ToList();
 
             if (list.Count == 0)
                 continue;

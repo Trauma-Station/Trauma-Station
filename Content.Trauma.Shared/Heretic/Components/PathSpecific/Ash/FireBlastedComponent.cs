@@ -6,7 +6,8 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
-[RegisterComponent, AutoGenerateComponentPause, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class FireBlastedComponent : BaseSpriteOverlayComponent
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]

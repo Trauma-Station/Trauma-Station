@@ -14,17 +14,16 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
         base.Initialize();
 
         TransformSystem.OnGlobalMoveEvent += OnMove;
-
-        SubscribeLocalEvent<TailedEntityComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
-        SubscribeLocalEvent<TailedEntitySegmentComponent, AfterAutoHandleStateEvent>(OnSegmentAfterAutoHandleState);
     }
 
+    [SubscribeLocalEvent]
     private void OnAfterAutoHandleState(Entity<TailedEntityComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (_spriteQuery.TryGetComponent(ent.Owner, out var sprite))
             sprite.RenderOrder = (uint) ent.Comp.TailSegments.Count + 5;
     }
 
+    [SubscribeLocalEvent]
     private void OnSegmentAfterAutoHandleState(Entity<TailedEntitySegmentComponent> ent,
         ref AfterAutoHandleStateEvent args)
     {

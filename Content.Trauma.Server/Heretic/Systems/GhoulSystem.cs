@@ -12,7 +12,6 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Polymorph.Systems;
-using Content.Server.Popups;
 using Content.Server.Roles;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Administration.Systems;
@@ -90,7 +89,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     [Dependency] private HolyFlammableSystem _holyFlam = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private SharedEntityEffectsSystem _effect = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
