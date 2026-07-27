@@ -12167,3 +12167,12 @@ Entries:
   id: 1333
   time: '2026-07-27T19:32:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3763
+- author: tsarevichvanya
+  changes:
+  - type: Remove
+    message: Removed Corporate Agents
+  - type: Fix
+    message: Non-QM command can no longer roll headrev
+  id: 1334
+  time: '2026-07-27T20:17:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3770
