@@ -12136,3 +12136,18 @@ Entries:
   id: 1330
   time: '2026-07-27T10:19:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed every uplink item upstream removed having missing locale strings.
+  - type: Fix
+    message: Fixed gun execution popups.
+  - type: Tweak
+    message: Spiders are now immune to their venom...
+  - type: Add
+    message: Added a durathread cargo order since upstream killed textiles crate.
+  - type: Add
+    message: Automation machines can now be made in a circuit printer.
+  id: 1331
+  time: '2026-07-27T13:38:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3751

@@ -2,8 +2,8 @@
 
 - type: listing
   id: UplinkHypopen
-  name: uplink-hypopen-name-trauma # Trauma
-  description: uplink-hypopen-desc
+  name: uplink-hypopen-name
+  description: uplink-hypopen-desc-trauma # Trauma
   icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
   productEntity: HypopenBox
   cost:
