@@ -45,7 +45,7 @@
 
 - type: entity
   parent: BaseSpiderStructure
-  id: SpiderEggsHuman
+  id: SpiderEggs
   name: egg sac
   description: A bundle of spider eggs, you see them squirming within.
   components:
@@ -90,8 +90,8 @@
     id: egg
 
 - type: entity
-  parent: BaseStructure
-  id: BaseSpiderStructure
+  parent: BaseSpiderStructure
+  id: SpiderEggsHuman
   name: infested crewmate
   description: A once living crewmate, turned into a home for spiders.
   components:
