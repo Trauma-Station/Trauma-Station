@@ -5,7 +5,7 @@
   suffix: Bitrunning
   components:
   - type: BitrunningDomainEnemyObjective
-  - type: Perishable 
+  - type: Perishable
     molsPerSecondPerUnitMass: 0
 
 - type: entity

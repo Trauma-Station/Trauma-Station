@@ -182,7 +182,7 @@
   parent: SpawnMobDeathSquadPhoronSabre
   id: SpawnMobExperimentalSoldier
   name: Experimental Syndicate soldier spawner
-  suffix: AI 
+  suffix: AI
   components:
   - type: ConditionalSpawner
     prototypes:
@@ -192,7 +192,7 @@
   parent: SpawnMobDeathSquadPhoronSabre
   id: SpawnMobSyndicateSoldier
   name: Syndicate soldier spawner
-  suffix: AI 
+  suffix: AI
   components:
   - type: ConditionalSpawner
     prototypes:

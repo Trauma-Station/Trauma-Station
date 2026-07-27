@@ -4,12 +4,12 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     back: ClothingBackpackDeathSquad
     mask: ClothingMaskGasDeathSquad
-    suitstorage: OxygenTankFilled   
+    suitstorage: OxygenTankFilled
     eyes: ClothingEyesGlassesDeathsquad
     neck: ExecutiveIDCard
     gloves: ClothingHandsGlovesDeathsquadUnremovable
     outerClothing: ClothingOuterHardsuitDeathsquadUnremovable
     shoes: ClothingShoesBootsMagDeathsquadOn
-    head: ClothingHeadHelmetHardsuitDeathsquad 
+    head: ClothingHeadHelmetHardsuitDeathsquad
     id: DeathsquadPDA
     belt: ClothingBeltDeathsquadWebbing

@@ -111,7 +111,7 @@
   description: The L6 SAW with an integrated self-charging system. An internal nanofabricator synthesizes rounds in real-time, powered by a self-discharging battery.
   suffix: Infinite
   components:
-    - type: Gun 
+    - type: Gun
       minAngle: 12
       maxAngle: 20
       fireRate: 3
