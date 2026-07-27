@@ -21,7 +21,7 @@
     thresholds:
       0: Alive
       55: Dead
-  # <Trauma>
+  # </Trauma>
   - type: Stamina
     baseCritThreshold: 150
   - type: DamageStateVisuals
