@@ -12114,3 +12114,14 @@ Entries:
   id: 1328
   time: '2026-07-27T01:45:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3736
+- author: Armok
+  changes:
+  - type: Add
+    message: Spiders can now multiply
+  - type: Add
+    message: Spiders can now consume blood off the floor to lay eggs.
+  - type: Add
+    message: Spiders can now lay eggs in dead people.
+  id: 1329
+  time: '2026-07-27T01:56:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3732
