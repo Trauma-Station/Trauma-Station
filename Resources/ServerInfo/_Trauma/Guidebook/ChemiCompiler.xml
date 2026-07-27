@@ -4,10 +4,7 @@
 The ChemiCompiler is a chemistry machine you program instead of click. It holds ten beakers, and runs
 short programs that move reagents between them, heat them, and package the results into pills or vials.
 
-Build one from a [bold]ChemiCompiler CCS1000 machine board[/bold], printed at a medical lathe.
-
-The machine and its language are lifted in spirit from Goonstation's ChemiCompiler. Nothing here is a port,
-so the details below are what [italic]this[/italic] machine actually does, not what that one does.
+Build one from a [bold]ChemiCompiler M7 machine board[/bold], printed at a medical lathe.
 
 # The Interface
 
@@ -98,8 +95,8 @@ except at the ejection port, which is what the ejection port is for.
 # Speed
 
 Instructions are not free. Moving the pointer and counting up and down are quick, shuffling registers costs
-a little more, and anything that reaches into a beaker — transferring, isolating, measuring — takes about a
-second on its own.
+a little more, and anything that reaches into a beaker — transferring, isolating, measuring — takes about
+half a second on its own.
 
 That means the expensive part of a program is the chemistry, not the arithmetic, which is how it should be.
 Don't agonise over shaving \+ signs off your constants; think about how many times you're moving reagents.

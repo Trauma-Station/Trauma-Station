@@ -56,8 +56,8 @@
 - type: entity
   parent: BaseMachineCircuitboard
   id: ChemiCompilerMachineCircuitboard
-  name: ChemiCompiler CCS1000 machine board
-  description: A machine printed circuit board for a ChemiCompiler CCS1000.
+  name: ChemiCompiler M7 machine board
+  description: A machine printed circuit board for a ChemiCompiler M7.
   components:
   - type: Sprite
     state: medical

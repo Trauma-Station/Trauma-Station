@@ -86,7 +86,7 @@ public sealed partial class ChemiCompilerComponent : Component
     /// This is the number that decides how fast the machine can actually do chemistry.
     /// </summary>
     [DataField]
-    public TimeSpan PhysicalDelay = TimeSpan.FromSeconds(1);
+    public TimeSpan PhysicalDelay = TimeSpan.FromSeconds(0.5);
 
     /// <summary>
     /// Most instructions that may be run in a single tick.

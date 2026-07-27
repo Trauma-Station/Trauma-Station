@@ -1,6 +1,6 @@
 chemicompiler-slot-reservoir = Reservoir
 
-chemicompiler-window-title = ChemiCompiler CCS1000
+chemicompiler-window-title = ChemiCompiler M7
 chemicompiler-window-code = Code
 chemicompiler-window-save = Save
 chemicompiler-window-load = Load

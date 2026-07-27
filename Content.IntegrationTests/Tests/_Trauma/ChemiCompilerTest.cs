@@ -466,18 +466,18 @@ public sealed class ChemiCompilerTest : GameTest
         const string registersOnly = "+}>+++++++++)>++++++++++'";
 
         await Start(uid, registersOnly);
-        await Pair.RunSeconds(2f);
+        await Pair.RunSeconds(1.5f);
         await Pair.RunTicksSync(1);
 
         await Pair.Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.False,
-                "Setting registers alone took over two seconds, so the cheap tiers are not cheap");
+                "Setting registers alone took over a second and a half, so the cheap tiers are not cheap");
         });
 
-        // the exact same work plus three transfers, which should add roughly three seconds
+        // the exact same work plus three transfers, which should add about another second and a half
         await Start(uid, registersOnly + "@@@");
-        await Pair.RunSeconds(2f);
+        await Pair.RunSeconds(1.5f);
         await Pair.RunTicksSync(1);
 
         await Pair.Server.WaitAssertion(() =>

@@ -34,15 +34,15 @@
   name: guide-entry-chemist
   text: "/ServerInfo/Guidebook/Medical/Chemist.xml"
   children:
-  # <Trauma>
-  - ChemiCompiler
-  # </Trauma>
   # - Medicine
   # Duplicate guide entries are currently not supported
   # TODO GUIDEBOOK Maybe allow duplicate entries?
   - Botanicals
   - AdvancedBrute
   - PlasticProduction
+  # <Trauma>
+  - ChemiCompiler
+  # </Trauma>
 
 - type: guideEntry
   id: Medicine

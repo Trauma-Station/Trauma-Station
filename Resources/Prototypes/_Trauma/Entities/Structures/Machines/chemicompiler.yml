@@ -6,7 +6,7 @@
 - type: entity
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   id: ChemiCompiler
-  name: ChemiCompiler CCS1000
+  name: ChemiCompiler M7
   description: A complicated chemistry device programmed in a language derived from Brainfuck. Ten reagent reservoirs, five registers, and absolutely no error messages.
   placement:
     mode: SnapgridCenter
