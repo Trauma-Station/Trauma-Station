@@ -348,7 +348,7 @@
         0: Alive
         55: Dead # Trauma was 70
     - type: Stamina
-      baseCritThreshold: 55
+      baseCritThreshold: 150
     - type: DamageStateVisuals
       states:
         Alive:
