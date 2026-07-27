@@ -39,14 +39,14 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
                 return;
 
             ent.Comp.RealAccessListsOriginal = accessReader.AccessListsOriginal;
-            _accessReader.SetAccessListsOriginal((ent.Owner, accessReader), new(disguisedAccessReader.AccessLists));
+            _access.SetAccessListsOriginal((ent.Owner, accessReader), new(disguisedAccessReader.AccessLists));
         }
         else
         {
             if (ent.Comp.RealAccessListsOriginal == null)
                 return;
 
-            _accessReader.SetAccessListsOriginal((ent.Owner, accessReader), ent.Comp.RealAccessListsOriginal);
+            _access.SetAccessListsOriginal((ent.Owner, accessReader), ent.Comp.RealAccessListsOriginal);
             ent.Comp.RealAccessListsOriginal = null;
         }
     }

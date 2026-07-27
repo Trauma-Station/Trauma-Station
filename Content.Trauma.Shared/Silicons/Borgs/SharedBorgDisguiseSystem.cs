@@ -13,9 +13,9 @@ namespace Content.Trauma.Shared.Silicons.Borgs;
 /// </summary>
 public abstract partial class SharedBorgDisguiseSystem : EntitySystem
 {
-    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private MetaDataSystem _meta = default!;
-    [Dependency] protected AccessReaderSystem _accessReader = default!;
+    [Dependency] protected AccessReaderSystem _access = default!;
     [Dependency] protected SharedPointLightSystem _light = default!;
 
     protected CompName _accessName;
@@ -81,7 +81,7 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<BorgDisguiseComponent> ent, ref MapInitEvent args)
     {
-        _actionsSystem.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action);
+        _actions.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action);
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ public abstract partial class SharedBorgDisguiseSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnCompRemove(Entity<BorgDisguiseComponent> ent, ref ComponentShutdown args)
     {
-        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
     }
 
     #endregion

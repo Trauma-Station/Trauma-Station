@@ -11,7 +11,6 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private BorgSystem _borg = default!;
-    [Dependency] private SharedPointLightSystem _borgLight = default!;
     [Dependency] private SpriteSystem _borgSprite = default!;
 
     private CompName _chassisName;
@@ -28,7 +27,9 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
     [SubscribeLocalEvent]
     private void OnStateUpdate(Entity<BorgDisguiseComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateAppearance(ent);
+        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
+            return;
+        UpdateAppearance(ent, sprite);
     }
 
     /// <summary>
@@ -39,16 +40,15 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
     {
         if (args.Sprite == null)
             return;
-        UpdateAppearance(ent);
+        UpdateAppearance(ent, args.Sprite);
     }
 
     /// <summary>
     /// Updates the appearance data of the entity.
     /// </summary>
-    private void UpdateAppearance(Entity<BorgDisguiseComponent> ent)
+    private void UpdateAppearance(Entity<BorgDisguiseComponent> ent, SpriteComponent sprite)
     {
-        if (!TryComp<AppearanceComponent>(ent.Owner, out var appearance)
-            || !TryComp<SpriteComponent>(ent.Owner, out var sprite))
+        if (!TryComp<AppearanceComponent>(ent.Owner, out var appearance))
             return;
 
         _appearance.SetData(ent.Owner, BorgDisguiseVisuals.IsDisguised, ent.Comp.Disguised, appearance);
@@ -65,7 +65,7 @@ public sealed partial class BorgDisguiseSystem : SharedBorgDisguiseSystem
 
             if (entityPrototype.TryComp(_lightName, out PointLightComponent? lightPrototype))
             {
-                _borgLight.SetColor(ent.Owner,
+                _light.SetColor(ent.Owner,
                     ent.Comp.Disguised
                         ? ent.Comp.DisguisedLightColor
                         : lightPrototype.Color);
