@@ -2989,7 +2989,7 @@
   - type: HTN
     constantlyReplan: false
     rootTask:
-      task: SimpleHostile # Trauma
+      task: SimpleHostileCompound # Trauma
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-giant-spider-name
