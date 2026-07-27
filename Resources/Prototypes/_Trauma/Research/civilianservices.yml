@@ -1,6 +1,24 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: technology
+  id: AdvancedCleaning
+  name: research-technology-advanced-cleaning
+  icon:
+    sprite: Objects/Specific/Janitorial/advmop.rsi
+    state: advmop
+  discipline: CivilianServices
+  tier: 2
+  cost: 5000 # Trauma - Was 10000
+  recipeUnlocks:
+  - AdvMopItem
+  - MegaSprayBottle
+  - BorgModuleAdvancedCleaning
+  - TrashBagHolding
+  position: 0,4
+  technologyPrerequisites:
+  - AdvancedEntertainment
+
+- type: technology
   id: ServiceBluespaceChemistry
   name: research-technology-service-energy-chem
   icon:
