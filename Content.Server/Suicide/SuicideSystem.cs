@@ -6,7 +6,6 @@ using Content.Trauma.Common.Xenomorphs;
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
@@ -17,13 +16,14 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Suicide;
 using Content.Shared.Tag;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.Chat;
+namespace Content.Server.Suicide;
 
-public sealed partial class SuicideSystem : EntitySystem
+public sealed partial class SuicideSystem : SharedSuicideSystem
 {
     // <Trauma>
     [Dependency] private CommonSiliconSystem _silicon = default!;
@@ -36,7 +36,6 @@ public sealed partial class SuicideSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private GhostSystem _ghostSystem = default!;
-    [Dependency] private SharedSuicideSystem _suicide = default!;
     [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
 
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
@@ -175,18 +174,16 @@ public sealed partial class SuicideSystem : EntitySystem
 
         if (args.DamageSpecifier != null)
         {
-            _suicide.ApplyLethalDamage(victim, args.DamageSpecifier);
+            ApplyLethalDamage(victim, args.DamageSpecifier);
             args.Handled = true;
             return;
         }
 
-        if (_silicon.IsSilicon(victim)) // Goobstation
-            args.DamageType ??= "Shock";
-        else
-            args.DamageType ??= "Slash";
-
-        _suicide.ApplyLethalDamage(victim, args.DamageType);
-
+        // <Trauma> - use slash for mobs and shock for clanker
+        args.DamageType ??= _silicon.IsSilicon(victim))
+            ? "Shock" : "Slash";
+        // </Trauma>
+        ApplyLethalDamage(victim, args.DamageType);
         args.Handled = true;
     }
 }
