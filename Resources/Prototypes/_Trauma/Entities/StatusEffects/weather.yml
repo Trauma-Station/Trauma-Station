@@ -21,6 +21,7 @@
   - type: WeatherEffects
     effects:
     - !type:HealthChange
+      ignoreResistances: false
       splitDamage: None
       damage:
         types:
