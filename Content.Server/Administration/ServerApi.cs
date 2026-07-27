@@ -359,6 +359,7 @@ public sealed partial class ServerApi : IPostInjectInit
 
             var reason = body.Reason ?? "No reason supplied";
             var info = new CreateServerBanInfo(reason);
+            info.WithWebhookReason(body.WebhookReason); // Trauma
 
             info.AddHWId(located.LastHWId);
             info.AddUser(located.UserId, located.Username);
@@ -735,6 +736,7 @@ public sealed partial class ServerApi : IPostInjectInit
     {
         public required Guid Guid { get; init; }
         public string? Reason { get; init; }
+        public string? WebhookReason { get; init; } // Trauma
         public NoteSeverity Severity { get; init; }
         public uint? Minutes { get; init; }
     }

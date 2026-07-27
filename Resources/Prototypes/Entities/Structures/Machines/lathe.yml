@@ -314,16 +314,17 @@
     idleState: icon
     runningState: building
     staticPacks:
-    #- ScienceBoardsStatic - Goobstation - Moved to Scifab
-    - ServiceBoardsStatic
-    - CargoBoardsStatic
-    #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
-    #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    # Goobstation Packs
+    # <Trauma>
     - SharedBoardsStatic
     - MedicalBoardsStaticGoob
     - SecurityBoardsStaticGoob
     - ServiceBoardsStaticGoob
+    # </Trauma>
+    #- ScienceBoardsStatic - Goobstation - Moved to Scifab
+    - ServiceBoardsStatic
+    - CargoBoardsStatic
+    #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
+    - EngineeringBoardsStatic
     dynamicPacks:
     # <Trauma>
     - SharedBoards

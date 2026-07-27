@@ -76,6 +76,7 @@ public sealed partial class BanPanelEui : BaseEui
         var isRoleBan = ban.BannedJobs?.Length > 0 || ban.BannedAntags?.Length > 0;
 
         CreateBanInfo banInfo = isRoleBan ? new CreateRoleBanInfo(ban.Reason) : new CreateServerBanInfo(ban.Reason);
+        banInfo.WithWebhookReason(ban.WebhookReason); // Trauma
 
         banInfo.WithBanningAdmin(Player.UserId);
         banInfo.WithSeverity(ban.Severity);

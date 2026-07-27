@@ -11,7 +11,7 @@ namespace Content.Goobstation.Shared.Wraith.Actions;
 public sealed partial class ActionUserWhitelistComponent : Component
 {
     [DataField]
-    public EntityWhitelist? Whitelist = new();
+    public EntityWhitelist? Whitelist;
 
     [DataField]
     public LocId? Popup = "whitelist-action-generic-fail";
