@@ -24,7 +24,6 @@
       Steel: 50
   - type: Tag
     tags:
-    - BaseballBat
     - Recyclable
   - type: Solution
     id: melee
@@ -67,7 +66,6 @@
       Steel: 50
   - type: Tag
     tags:
-    - BaseballBat
     - Recyclable
   - type: Item
     storedSprite:
@@ -130,7 +128,6 @@
       Steel: 50
   - type: Tag
     tags:
-    - BaseballBat
     - Recyclable
   - type: UndetectableContraband
   - type: SpawnAfterInteract
@@ -313,7 +310,6 @@
     tags:
     - Grenade
     - HandGrenade
-    - Spear
   - type: TriggerOnEmbed
   - type: ToggleComponentsOnTrigger
     components:
