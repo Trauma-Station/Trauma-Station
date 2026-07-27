@@ -21,9 +21,9 @@
     thresholds:
       0: Alive
       55: Dead
-  # </Trauma>
   - type: Stamina
     baseCritThreshold: 150
+  # </Trauma>
   - type: DamageStateVisuals
     states:
       Alive:
@@ -94,7 +94,7 @@
     generated:
       reagents:
         - ReagentId: Toxin
-          Quantity: 0.25
+          Quantity: 0.25 # Trauma - Was 0.5
   # </Trauma>
 
 - type: entity

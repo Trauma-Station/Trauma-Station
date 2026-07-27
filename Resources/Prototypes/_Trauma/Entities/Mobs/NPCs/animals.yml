@@ -409,7 +409,7 @@
     - SolutionVenomCobra
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 2.0
+    transferAmount: 2
   - type: NpcFactionMember
     factions:
     - Xeno
