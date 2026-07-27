@@ -38,9 +38,6 @@
   - type: Battery
     maxCharge: 2000
     startingCharge: 2000
-  - type: HitscanBatteryAmmoProvider
-    proto: RedMediumLaser
-    fireCost: 40
   - type: Wieldable
 
 - type: entity
@@ -82,9 +79,6 @@
   - type: Battery
     maxCharge: 7500
     startingCharge: 7500
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
-    fireCost: 60
   - type: Wieldable
   - type: UseDelay
     delay: 1
@@ -110,9 +104,6 @@
     - state: mag-unshaded-2
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
-    fireCost: 62.5
   - type: MagazineVisuals
     magState: mag
     steps: 3

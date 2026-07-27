@@ -6,7 +6,7 @@ using Content.Shared.Humanoid.Prototypes;
 
 namespace Content.Shared._Orion.Bitrunning.Prototypes;
 
-[Prototype("bitrunningVirtualDomain")]
+[Prototype]
 public sealed partial class BitrunningVirtualDomainPrototype : IPrototype
 {
     [IdDataField]

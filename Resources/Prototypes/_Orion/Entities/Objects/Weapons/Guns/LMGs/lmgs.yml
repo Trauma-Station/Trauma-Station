@@ -115,5 +115,3 @@
       minAngle: 12
       maxAngle: 20
       fireRate: 3
-    - type: ProjectileBatteryAmmoProvider
-      fireCost: 10
