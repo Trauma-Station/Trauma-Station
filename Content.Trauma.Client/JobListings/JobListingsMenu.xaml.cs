@@ -56,7 +56,8 @@ public sealed partial class JobListingsMenu : DefaultWindow
         ReputationInfo.Text = Loc.GetString($"job-listings-ui-reputation-level-{level}");
     }
 
-    public void SetRefresh(bool bonus, TimeSpan? refreshTime, TimeSpan refreshWaitDuration) {
+    public void SetRefresh(bool bonus, TimeSpan? refreshTime, TimeSpan refreshWaitDuration)
+    {
         RefreshButton.Disabled = true;
 
         if (bonus)
@@ -69,7 +70,8 @@ public sealed partial class JobListingsMenu : DefaultWindow
             return;
         }
 
-        if (refreshTime is null) {
+        if (refreshTime is null)
+        {
             RefreshTimerProgressBar.MaxValue = 1;
             RefreshTimerProgressBar.Value = 0;
             RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label", ("time", FormatTime(refreshWaitDuration)));
@@ -89,7 +91,8 @@ public sealed partial class JobListingsMenu : DefaultWindow
 
         RefreshButton.Disabled = true;
 
-        if (_timing.CurTime >= _refreshTimerBarTime.Value) {
+        if (_timing.CurTime >= _refreshTimerBarTime.Value)
+        {
             RefreshTimerProgressBar.MaxValue = 1;
             RefreshTimerProgressBar.Value = 1;
             RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label-available");
@@ -102,7 +105,8 @@ public sealed partial class JobListingsMenu : DefaultWindow
         RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label", ("time", FormatTime(time)));
     }
 
-    private String FormatTime(TimeSpan time) {
+    private String FormatTime(TimeSpan time)
+    {
         return $"{Math.Floor(time.TotalMinutes):0}m {time.Seconds}s";
     }
 
