@@ -180,7 +180,8 @@
   categories: [ HideSpawnMenu ]
   components:
   # <Trauma>
-  - type: RemoteJobListings
+  - type: JobListingsImplant
+    action: ActionOpenJobListingsImplant
   # </Trauma>
   - type: SubdermalImplant
     implantAction: ActionOpenUplinkImplant
