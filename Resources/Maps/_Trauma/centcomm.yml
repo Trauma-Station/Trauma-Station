@@ -41114,7 +41114,7 @@ entities:
     - type: Transform
       parent: 1668
       pos: 5.5,35.5
-- proto: WehMedipen
+- proto: WehMedipenTiny
   entities:
   - uid: 1371
     components:

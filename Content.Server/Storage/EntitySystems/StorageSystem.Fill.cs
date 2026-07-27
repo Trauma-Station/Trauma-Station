@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Server.Spawners.Components;
 using Content.Shared.Item;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Robust.Shared.Prototypes;
@@ -47,8 +47,7 @@ public sealed partial class StorageSystem
             var ent = Spawn(spawnPrototype, coordinates);
 
             // No, you are not allowed to fill a container with entity spawners.
-            DebugTools.Assert(!ProtoMan.Index<EntityPrototype>(spawnPrototype)
-                .HasComponent(typeof(RandomSpawnerComponent)));
+            DebugTools.Assert(!HasComp<RandomSpawnerComponent>(ent)); // Trauma - check the spawned ent not prototype bruh
 
             if (!TryComp<ItemComponent>(ent, out var itemComp))
             {
@@ -98,9 +97,8 @@ public sealed partial class StorageSystem
         foreach (var item in spawnItems)
         {
             // No, you are not allowed to fill a container with entity spawners.
-            DebugTools.Assert(!ProtoMan.Index<EntityPrototype>(item)
-                .HasComponent(typeof(RandomSpawnerComponent)));
             var ent = Spawn(item, coordinates);
+            DebugTools.Assert(!HasComp<RandomSpawnerComponent>(ent)); // Trauma - check the spawned ent not prototype bruh, moved it post spawn
 
             // handle depending on storage component, again this should be unified after ECS
             if (entityStorageComp != null && EntityStorage.Insert(ent, uid, entityStorageComp))

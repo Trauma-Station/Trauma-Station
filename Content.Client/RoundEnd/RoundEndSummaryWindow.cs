@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Common.StationReport;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Content.Client.Stylesheets;
 using Content.Shared.Mobs;
@@ -15,7 +14,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.RoundEnd
 {
-    public sealed class RoundEndSummaryWindow : DefaultWindow
+    public sealed partial class RoundEndSummaryWindow : DefaultWindow
     {
         private readonly IEntityManager _entityManager;
         public int RoundId;
@@ -316,47 +315,6 @@ namespace Content.Client.RoundEnd
             playerManifestTab.AddChild(playerInfoContainerScrollbox);
 
             return playerManifestTab;
-        }
-        // TODO: make this shitcode injected instead of shitting this up
-        private BoxContainer MakeStationReportTab()
-        {
-            string stationReportText = Loc.GetString("no-station-report-summited");
-            //gets the stationreport varibible and sets the station report tab text to it if the map doesn't have a tablet will say No station report submitted
-            var stationReportSystem = _entityManager.System<CommonNtrStationReportSystem>();
-            if (!string.IsNullOrWhiteSpace(stationReportSystem.StationReportText) && stationReportSystem.StationReportText != Loc.GetString("station-report-text"))
-            {
-                stationReportText = Loc.GetString(
-                    "station-report-end-round-text",
-                    ("bodytext", stationReportSystem.StationReportText),
-                    ("roundid", RoundId)
-                );
-            }
-
-            var stationReportTab = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Name = Loc.GetString("round-end-summary-window-station-report-tab-title")
-            };
-            var StationReportContainerScrollbox = new ScrollContainer
-            {
-                VerticalExpand = true,
-                Margin = new Thickness(10),
-                HScrollEnabled = false,
-            };
-            var StationReportContainer = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical
-            };
-            var StationReportLabel = new RichTextLabel();
-            var StationReportmessage = new FormattedMessage();
-            StationReportmessage.AddMarkupOrThrow(stationReportText);
-            StationReportLabel.SetMessage(StationReportmessage);
-            StationReportContainer.AddChild(StationReportLabel);
-
-
-            StationReportContainerScrollbox.AddChild(StationReportContainer);
-            stationReportTab.AddChild(StationReportContainerScrollbox);
-            return stationReportTab;
         }
         #endregion
     }

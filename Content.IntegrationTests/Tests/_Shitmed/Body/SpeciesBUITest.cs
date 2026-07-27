@@ -42,7 +42,7 @@ public sealed class SpeciesBUiTest : GameTest
 
             var baseEnt = proto.Index(BaseMobSpeciesTest);
             Assert.That(baseEnt, Is.Not.Null);
-            Assert.That(baseEnt.TryGetComponent<UserInterfaceComponent>(out var bUiBase, factoryComp), Is.True);
+            Assert.That(baseEnt.TryComp<UserInterfaceComponent>(out var bUiBase, factoryComp), Is.True);
             Assert.That(bUiBase, Is.Not.Null);
             var baseKeys = GetInterfaces(bUiBase).Keys.ToArray();
 
@@ -51,7 +51,7 @@ public sealed class SpeciesBUiTest : GameTest
                 foreach (var species in proto.EnumeratePrototypes<SpeciesPrototype>())
                 {
                     var ent = proto.Index(species.Prototype);
-                    Assert.That(ent.TryGetComponent<UserInterfaceComponent>(out var bUi, factoryComp), Is.True);
+                    Assert.That(ent.TryComp<UserInterfaceComponent>(out var bUi, factoryComp), Is.True);
                     Assert.That(bUi, Is.Not.Null);
                     var states = GetInterfaces(bUi);
                     foreach (var key in baseKeys)

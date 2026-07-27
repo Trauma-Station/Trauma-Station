@@ -2,7 +2,6 @@
 
 using System.Text.RegularExpressions;
 using Content.Goobstation.Common.Morgue;
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Server.Devil.Condemned;
 using Content.Goobstation.Server.Devil.Contract;
 using Content.Goobstation.Server.Devil.Objectives.Components;
@@ -28,6 +27,7 @@ using Content.Server.Stunnable;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;

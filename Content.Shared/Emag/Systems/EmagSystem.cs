@@ -71,7 +71,7 @@ public sealed partial class EmagSystem : EntitySystem
         Entity<LimitedChargesComponent?> chargesEnt = ent.Owner;
         if (_sharedCharges.IsEmpty(chargesEnt))
         {
-            _popup.PopupClient(Loc.GetString("emag-no-charges"), user, user);
+            _popup.PopupEntity(Loc.GetString("emag-no-charges"), user, user);
             return false;
         }
 
@@ -89,7 +89,7 @@ public sealed partial class EmagSystem : EntitySystem
         if (!emaggedEvent.Handled)
             return false;
 
-        _popup.PopupPredicted(Loc.GetString(ent.Comp.SuccessText, ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium); // Goobstation - Success text de-hardcoded
+        _popup.PopupEntity(Loc.GetString(ent.Comp.SuccessText, ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium); // Trauma - unhardcode the loc id
 
         _audio.PlayPredicted(ent.Comp.EmagSound, ent, ent);
         _sparks.DoSparks(Transform(target).Coordinates); // goob edit - sparks everywhere

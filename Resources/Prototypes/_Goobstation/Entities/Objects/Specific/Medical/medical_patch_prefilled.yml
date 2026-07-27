@@ -31,7 +31,7 @@
   suffix: Bicaridine
   components:
   - type: Label
-    currentLabel: Bicaridine 30u
+    localizedLabel: reagent-name-bicaridine
   - type: Solution
     solution:
       reagents:
@@ -45,7 +45,7 @@
   suffix: Dermaline
   components:
   - type: Label
-    currentLabel: Dermaline 30u
+    localizedLabel: reagent-name-dermaline
   - type: Solution
     solution:
       reagents:
