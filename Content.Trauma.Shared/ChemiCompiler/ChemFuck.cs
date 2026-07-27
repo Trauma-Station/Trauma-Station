@@ -49,11 +49,16 @@ public static class ChemFuck
         /// Anything that reaches into a beaker. The expensive tier, and the one that gates a program's output.
         /// </summary>
         Physical,
+
+        /// <summary>
+        /// Deliberately standing still, for when a program needs to give the chemistry a moment.
+        /// </summary>
+        Slow,
     }
 
     /// <summary>
     /// Which speed tier an instruction runs at.
-    /// <see cref="Heat"/> and <see cref="Nop"/> set their own, longer waits, so their tier is never asked for.
+    /// <see cref="Heat"/> works out its own, much longer wait, so its tier is never asked for.
     /// </summary>
     public static Speed SpeedOf(char c)
     {
@@ -71,6 +76,9 @@ public static class ChemFuck
             case Transfer:
             case Isolate:
                 return Speed.Physical;
+
+            case Nop:
+                return Speed.Slow;
 
             default:
                 return Speed.Normal;

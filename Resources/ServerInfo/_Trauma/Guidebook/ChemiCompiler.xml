@@ -96,7 +96,8 @@ except at the ejection port, which is what the ejection port is for.
 
 Instructions are not free. Moving the pointer and counting up and down are quick, shuffling registers costs
 a little more, and anything that reaches into a beaker — transferring, isolating, measuring — takes about
-half a second on its own.
+half a second on its own. Standing still on purpose with [bold]*[/bold] is the slowest single instruction
+there is, at a full second.
 
 That means the expensive part of a program is the chemistry, not the arithmetic, which is how it should be.
 Don't agonise over shaving \+ signs off your constants; think about how many times you're moving reagents.

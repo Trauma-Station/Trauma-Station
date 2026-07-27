@@ -496,6 +496,46 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
+    /// Doing nothing on purpose still has to cost the slow tier, which is the only reason the instruction
+    /// exists. It does no work, so nothing but the delay distinguishes it from a no-op.
+    /// </summary>
+    [Test]
+    public async Task NopCostsTheSlowTier()
+    {
+        var (uid, _) = await Setup(new());
+
+        // twenty fast instructions, about 0.4s
+        await Start(uid, Count(20));
+        await Pair.RunSeconds(0.8f);
+        await Pair.RunTicksSync(1);
+
+        await Pair.Server.WaitAssertion(() =>
+        {
+            Assert.That(IsRunning(uid), Is.False,
+                "Twenty fast instructions took longer than expected, so this test proves nothing");
+        });
+
+        // the same work plus one nop, which should push it past a second on its own
+        await Start(uid, Count(20) + "*");
+        await Pair.RunSeconds(0.8f);
+        await Pair.RunTicksSync(1);
+
+        await Pair.Server.WaitAssertion(() =>
+        {
+            Assert.That(IsRunning(uid), Is.True,
+                "A nop cost no more than a fast instruction, so it is in the wrong speed tier");
+        });
+
+        await Pair.RunSeconds(2f);
+        await Pair.RunTicksSync(1);
+
+        await Pair.Server.WaitAssertion(() =>
+        {
+            Assert.That(IsRunning(uid), Is.False, "The nop never finished");
+        });
+    }
+
+    /// <summary>
     /// The runtime cap, not the instruction count, is what stops a stuck program now that instructions are
     /// slow enough that the old limit would take hours to reach.
     /// </summary>

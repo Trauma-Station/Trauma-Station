@@ -155,10 +155,12 @@ public sealed partial class ChemiCompilerComponent : Component
     public TimeSpan MinHeatDelay = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// How long <see cref="ChemFuck.Nop"/> waits for, so reactions with a time component can finish.
+    /// How long a <see cref="ChemFuck.Speed.Slow"/> instruction takes.
+    /// The slowest thing a single instruction can cost, so a program can give reactions with a time
+    /// component a moment to finish.
     /// </summary>
     [DataField]
-    public TimeSpan NopDelay = TimeSpan.FromSeconds(1);
+    public TimeSpan SlowDelay = TimeSpan.FromSeconds(1);
 
     // A program can fire hundreds of these, so they are all mixed well below the volume a one-shot machine sound
     // would use. The transfer hum in particular is meant to be background noise, not an event.
@@ -220,6 +222,7 @@ public sealed partial class ChemiCompilerComponent : Component
         {
             ChemFuck.Speed.Fast => FastDelay,
             ChemFuck.Speed.Physical => PhysicalDelay,
+            ChemFuck.Speed.Slow => SlowDelay,
             _ => InstructionDelay,
         };
 }

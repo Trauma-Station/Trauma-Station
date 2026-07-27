@@ -52,7 +52,8 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
         Failed,
 
         /// <summary>
-        /// The instruction takes time. Stop for this tick and pick up once the wait is over.
+        /// The instruction scheduled a long operation of its own and set its own deadline for it.
+        /// Only heating does this; everything else is paced by its speed tier.
         /// </summary>
         Wait,
     }
@@ -155,7 +156,7 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
                 break;
 
             case Step.Wait:
-                // heating and waiting set their own, longer, delays that must not be trampled
+                // heating works out its own, much longer, deadline that must not be trampled
                 return true;
         }
 
@@ -247,8 +248,8 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
                 return Step.Next;
 
             case ChemFuck.Nop:
-                active.NextStep = _timing.CurTime + ent.Comp.NopDelay;
-                return Step.Wait;
+                // doing nothing is the whole instruction, the slow tier is what makes it take a moment
+                return Step.Next;
 
             default:
                 return Step.Next;
