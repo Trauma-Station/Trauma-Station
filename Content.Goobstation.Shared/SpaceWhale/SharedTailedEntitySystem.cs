@@ -194,12 +194,14 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
             var data = comp.TailSegments[i];
 
             var segPos = GetCoordinates(data.Coords);
-            var nextPos = i <= 0 ? headPos : GetCoordinates(comp.TailSegments[i - 1].Coords);
+            var nextPos = i <= 0 ? headPos : GetCoordinates(comp.TailSegments[i - 1].Coords) ?? headPos;
 
             // Compute the desired position: keep `Spacing` units behind the next entity along the line
             // from the segment to the next entity. If the segment is exactly on top of the target, fall back
             // to using the target's forward vector.
-            var toTarget = nextPos.Position - TransformSystem.WithEntityId(segPos, nextPos.EntityId).Position;
+            var toTarget = segPos is not { } pos
+                ? Vector2.Zero
+                : nextPos.Position - TransformSystem.WithEntityId(pos, nextPos.EntityId).Position;
             var distance = toTarget.Length();
 
             var nextRot = Angle.FromWorldVec(toTarget);

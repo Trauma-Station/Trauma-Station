@@ -87,13 +87,13 @@ public sealed partial class TailedEntityComponent : Component
 }
 
 [Serializable, NetSerializable, DataRecord]
-public sealed partial class SegmentData(NetEntity segment, NetCoordinates coords)
+public sealed partial class SegmentData(NetEntity segment, NetCoordinates? coords)
 {
-    public SegmentData() : this(NetEntity.Invalid, NetCoordinates.Invalid) { }
+    public SegmentData() : this(NetEntity.Invalid, null) { }
 
     public NetEntity Segment = segment;
 
-    public NetCoordinates Coords = coords;
+    public NetCoordinates? Coords = coords;
 }
 
 [Serializable, NetSerializable]

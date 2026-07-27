@@ -13,6 +13,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
@@ -296,6 +297,8 @@ public sealed partial class TackleSystem : EntitySystem
             source.Modify(copy);
         }
 
+        var modifier = CompOrNull<MovementSpeedModifierComponent>(ent)?.SprintSpeedModifier ?? 1f;
+
         var knockdownTime = ent.Comp1.KnockdownTime * copy.KnockdownTimeMultiplier;
 
         if (knockdownTime > TimeSpan.Zero && !_stun.TryKnockdown(ent.Owner, knockdownTime, true, false))
@@ -306,7 +309,7 @@ public sealed partial class TackleSystem : EntitySystem
         if (staminaCost > 0f)
             _stam.TakeStaminaDamage(ent, staminaCost, ignoreResist: true);
 
-        var range = ent.Comp1.Range * copy.RangeMultiplier;
+        var range = ent.Comp1.Range * copy.RangeMultiplier * modifier;
 
         dir *= Math.Min(range, len) / len;
 
@@ -321,7 +324,7 @@ public sealed partial class TackleSystem : EntitySystem
         Entity<TacklerComponent, TacklingComponent> dirty = (ent, ent.Comp1, tackle);
         Dirty(dirty);
 
-        var speed = ent.Comp1.Speed * copy.SpeedMultiplier;
+        var speed = ent.Comp1.Speed * copy.SpeedMultiplier * modifier;
 
         _throwing.TryThrow(ent,
             dir,
