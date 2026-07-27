@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ AppearanceBioweapon, BaseMobAnimal, SimpleMobBase ]
+  parent: [ AppearanceBioweapon, BaseMobAnimal, SimpleMobBase, BaseMobNightVision ]
   id: MobBioweapon
   description: A bioweapon supplied to the security department by one of Nanotrasen's many genetic alteration subsidiaries. It follow the orders of those who speak the proper dialect.
   name: Bioweapon
@@ -68,7 +68,6 @@
     - Miltech
     understands:
     - Miltech
-  - type: BaseMobNightVision
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
