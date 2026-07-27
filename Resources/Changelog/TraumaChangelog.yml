@@ -12183,3 +12183,10 @@ Entries:
   id: 1335
   time: '2026-07-27T20:37:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3771
+- author: Chubbygummibear
+  changes:
+  - type: Fix
+    message: Directional and rotating lights are once again working as expected.
+  id: 1336
+  time: '2026-07-27T22:44:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3779
