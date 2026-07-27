@@ -1,0 +1,47 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+        Title="{Loc 'chemicompiler-window-title'}"
+        SetSize="640 560"
+        MinSize="520 480">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="4">
+
+        <!-- the code being edited, saved to and loaded from the slots below -->
+        <Label Text="{Loc 'chemicompiler-window-code'}" StyleClasses="LabelKeyText"/>
+        <PanelContainer HorizontalExpand="True" VerticalExpand="True" RectClipContent="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#101014FF"/>
+            </PanelContainer.PanelOverride>
+            <TextEdit Name="CodeEdit" MinHeight="180" Margin="4" HorizontalExpand="True" VerticalExpand="True"/>
+        </PanelContainer>
+
+        <!-- save and load arm the slot buttons, otherwise pressing a slot runs it -->
+        <BoxContainer Orientation="Horizontal" SeparationOverride="4" Margin="0 4 0 0">
+            <Button Name="SaveButton" Text="{Loc 'chemicompiler-window-save'}" ToggleMode="True" MinWidth="70"/>
+            <Button Name="LoadButton" Text="{Loc 'chemicompiler-window-load'}" ToggleMode="True" MinWidth="70"/>
+            <Control MinWidth="16"/>
+            <BoxContainer Name="SlotContainer" Orientation="Horizontal" SeparationOverride="4" HorizontalExpand="True"/>
+        </BoxContainer>
+        <Label Name="ModeLabel" Text="{Loc 'chemicompiler-window-mode-run'}" StyleClasses="LabelSubText"/>
+
+        <!-- beaker slots, five to a row like the real thing -->
+        <Label Text="{Loc 'chemicompiler-window-reservoirs'}" StyleClasses="LabelKeyText" Margin="0 8 0 0"/>
+        <BoxContainer Name="ReservoirTop" Orientation="Horizontal" SeparationOverride="4"/>
+        <BoxContainer Name="ReservoirBottom" Orientation="Horizontal" SeparationOverride="4" Margin="0 4 0 0"/>
+
+        <!-- register readout, only meaningful once a program has stopped -->
+        <Label Text="{Loc 'chemicompiler-window-registers'}" StyleClasses="LabelKeyText" Margin="0 8 0 0"/>
+        <Label Name="RegisterLabel"/>
+        <Label Name="OutputLabel"/>
+
+        <BoxContainer Orientation="Horizontal" Margin="0 8 0 0">
+            <Label Name="StatusLabel" HorizontalExpand="True"/>
+            <Button Name="HaltButton" Text="{Loc 'chemicompiler-window-halt'}" MinWidth="70" Disabled="True"/>
+        </BoxContainer>
+
+    </BoxContainer>
+</controls:FancyWindow>

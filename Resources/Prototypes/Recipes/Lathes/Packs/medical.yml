@@ -80,6 +80,8 @@
 #  - MedkitCombat #goob - Move combat kit to research
 
 - type: latheRecipePack
+  parent:
+  - TraumaMedicalBoardsStatic # Trauma
   id: MedicalBoardsStatic
   recipes:
   - ElectrolysisUnitMachineCircuitboard

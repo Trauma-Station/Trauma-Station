@@ -1,0 +1,116 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# The ChemiCompiler is a reimplementation of Goonstation's machine of the same name, written from the behaviour
+# documented at https://wiki.ss13.co/ChemiCompiler. No Goonstation code or assets were used.
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: ChemiCompiler
+  name: ChemiCompiler CCS1000
+  description: A complicated chemistry device programmed in a language derived from Brainfuck. Ten reagent reservoirs, five registers, and absolutely no error messages.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/mixer.rsi
+    snapCardinals: true
+    color: "#B7C9E0" # tinted so it doesn't read as a ChemMaster at a glance
+    layers:
+    - state: mixer_empty
+    - state: mixer_screens
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: Structures/Machines/mixer.rsi
+    state: mixer_empty
+  - type: ChemiCompiler
+  - type: ActivatableUI
+    key: enum.ChemiCompilerUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ChemiCompilerUiKey.Key:
+        type: ChemiCompilerBUI
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ApcPowerReceiver
+    powerLoad: 500
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ItemMapper
+    containerWhitelist: [reservoir1, reservoir2, reservoir3, reservoir4, reservoir5, reservoir6, reservoir7, reservoir8, reservoir9, reservoir10]
+    mapLayers:
+      mixer_loaded:
+        whitelist:
+          components:
+          - FitsInDispenser
+  # ten identical beaker slots, r1 through r10
+  - type: ItemSlots
+    slots:
+      reservoir1: &reservoir
+        name: chemicompiler-slot-reservoir
+        # without this, clicking the machine always swaps with reservoir 1 instead of filling the next free one
+        swap: false
+        whitelist:
+          components:
+          - FitsInDispenser
+      reservoir2: *reservoir
+      reservoir3: *reservoir
+      reservoir4: *reservoir
+      reservoir5: *reservoir
+      reservoir6: *reservoir
+      reservoir7: *reservoir
+      reservoir8: *reservoir
+      reservoir9: *reservoir
+      reservoir10: *reservoir
+  - type: WiresPanel
+  - type: Machine
+    board: ChemiCompilerMachineCircuitboard
+  - type: ContainerContainer
+    containers:
+      reservoir1: !type:ContainerSlot
+      reservoir2: !type:ContainerSlot
+      reservoir3: !type:ContainerSlot
+      reservoir4: !type:ContainerSlot
+      reservoir5: !type:ContainerSlot
+      reservoir6: !type:ContainerSlot
+      reservoir7: !type:ContainerSlot
+      reservoir8: !type:ContainerSlot
+      reservoir9: !type:ContainerSlot
+      reservoir10: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.4,0.25,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: GuideHelp
+    guides:
+    - ChemiCompiler
