@@ -2,10 +2,10 @@
 using Content.Shared.Chat;
 // </Trauma>
 using System.Linq;
-using Content.Server._Orion.Bitrunning.Components;
+using Content.Trauma.Server.Bitrunning.Components;
 using Content.Server.Administration.Logs;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Shared._Orion.Bitrunning.Components;
+using Content.Trauma.Shared.Bitrunning.Components;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;

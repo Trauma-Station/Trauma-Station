@@ -2,8 +2,8 @@
 
 using Content.Shared.Access.Systems;
 using Content.Trauma.Shared.Salvage.Systems;
-using Content.Shared._Orion.Bitrunning.Components;
-using Content.Shared._Orion.Bitrunning.Systems;
+using Content.Trauma.Shared.Bitrunning.Components;
+using Content.Trauma.Shared.Bitrunning.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Popups;
 using Content.Shared.Power;
