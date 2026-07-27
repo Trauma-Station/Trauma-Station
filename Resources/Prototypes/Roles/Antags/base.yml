@@ -31,15 +31,14 @@
   parent: BaseAntagSpecifier
   id: CommandBlacklistedAntag
   jobBlacklist:
-  # <Trauma>
   - Captain
-  # - HeadOfPersonnel
+  - BlueShieldOfficer
+  - HeadOfPersonnel
   - HeadOfSecurity
-  # - ChiefMedicalOfficer
-  # - ResearchDirector
-  # - ChiefEngineer
-  # - Quartermaster
-  # </Trauma>
+  - ChiefMedicalOfficer
+  - ResearchDirector
+  - ChiefEngineer
+  - Quartermaster
 
 # Borgs
 - type: antagSpecifier
