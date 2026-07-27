@@ -25,7 +25,8 @@ jobs:
       with:
         filters: |
           rsi:
-          - '**.rsi/**'
+          - '**/*.rsi'
+          - '**/*.rsi/**'
     - name: Setup Submodule
       if: steps.filter.outputs.rsi == 'true'
       run: git submodule update --init
