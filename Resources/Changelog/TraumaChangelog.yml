@@ -12098,3 +12098,30 @@ Entries:
   id: 1326
   time: '2026-07-26T23:29:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3682
+- author: Graves
+  changes:
+  - type: Tweak
+    message: 'Tweaked bioweapons. Weaker now. Rarer now. '
+  - type: Remove
+    message: Removed bioweapon regeneration
+  id: 1327
+  time: '2026-07-27T01:43:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3729
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed kinetic dagger/machete/claws not using mining skill.
+  id: 1328
+  time: '2026-07-27T01:45:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3736
+- author: Armok
+  changes:
+  - type: Add
+    message: Spiders can now multiply
+  - type: Add
+    message: Spiders can now consume blood off the floor to lay eggs.
+  - type: Add
+    message: Spiders can now lay eggs in dead people.
+  id: 1329
+  time: '2026-07-27T01:56:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3732
