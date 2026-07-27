@@ -272,7 +272,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
 
         var ev = new SurveillanceCameraDeactivateEvent(camera);
 
-        RemoveActiveViewers(camera, new(component.ActivePvsViewers), null, component); // Orion-Edit
+        RemoveActiveViewers(camera, new(component.ActivePvsViewers), null, component);
         component.Active = false;
 
         // Send a targetted event to all monitors.
@@ -416,6 +416,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         UpdateVisuals(camera, component);
     }
 
+    // Orion-Start
     public void ClearActiveViewers(EntityUid camera, SurveillanceCameraComponent? component = null)
     {
         if (!Resolve(camera, ref component))
@@ -434,7 +435,6 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         UpdateVisuals(camera, component);
     }
 
-    // Orion-Start: Resolve subscribe target for netpod/relay avatars
     private EntityUid ResolveSubscribeTarget(EntityUid camera)
     {
         if (TryComp<AvatarNavRelayComponent>(camera, out var relay) && relay.RelayEntity is { } relayUid && Exists(relayUid))
@@ -482,7 +482,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
             key = SurveillanceCameraVisuals.Active;
         }
 
-        if (component.ActivePvsViewers.Count > 0 || component.ActiveMonitors.Count > 0)
+        if (component.ActivePvsViewers.Count > 0 || component.ActiveMonitors.Count > 0) // Orion-Edit
         {
             key = SurveillanceCameraVisuals.InUse;
         }
@@ -490,7 +490,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         _appearance.SetData(uid, SurveillanceCameraVisualsKey.Key, key, appearance);
     }
 
-    private void OnEmpPulse(EntityUid uid, SurveillanceCameraComponent component, ref EmpPulseEvent args)
+    /* private void OnEmpPulse(EntityUid uid, SurveillanceCameraComponent component, ref EmpPulseEvent args)
     {
         if (component.Active)
         {
@@ -503,7 +503,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
     private void OnEmpDisabledRemoved(EntityUid uid, SurveillanceCameraComponent component, ref EmpDisabledRemovedEvent args)
     {
         SetActive(uid, true);
-    }
+    } */
 }
 
 public sealed class OnSurveillanceCameraViewerAddEvent : EntityEventArgs

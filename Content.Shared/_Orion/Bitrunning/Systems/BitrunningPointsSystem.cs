@@ -3,9 +3,9 @@ using Content.Shared.Access.Systems;
 
 namespace Content.Shared._Orion.Bitrunning.Systems;
 
-public sealed class BitrunningPointsSystem : EntitySystem
+public sealed partial class BitrunningPointsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
 
     private EntityQuery<BitrunningPointsComponent> _query;
 

@@ -1,1 +1,0 @@
-ent-StatusEffectBitrunningExitBlindness = нейро-слепота

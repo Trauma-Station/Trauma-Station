@@ -14,13 +14,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Orion.Bitrunning.Systems;
 
-public sealed class QuantumConsoleSystem : EntitySystem
+public sealed partial class QuantumConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly QuantumServerSystem _server = default!;
-    [Dependency] private readonly BitrunningDomainSystem _domains = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private QuantumServerSystem _server = default!;
+    [Dependency] private BitrunningDomainSystem _domains = default!;
+    [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly TimeSpan UiRefresh = TimeSpan.FromSeconds(1);
     private const string ServerSinkPort = "BitrunningConsoleSink";

@@ -24,16 +24,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Orion.Bitrunning.Systems;
 
-public sealed class BitrunningObjectiveSystem : EntitySystem
+public sealed partial class BitrunningObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly QuantumServerSystem _server = default!;
-    [Dependency] private readonly ByteforgeSystem _byteforge = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private QuantumServerSystem _server = default!;
+    [Dependency] private ByteforgeSystem _byteforge = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -148,7 +148,7 @@ public sealed class BitrunningObjectiveSystem : EntitySystem
         if (ent.Comp.DomainMapUid != null)
             return;
 
-        if (!TryComp<TransformComponent>(ent, out var xform) || xform.MapUid is not { } mapUid)
+        if (!TryComp(ent, out TransformComponent? xform) || xform.MapUid is not { } mapUid)
             return;
 
         ent.Comp.DomainMapUid = mapUid;

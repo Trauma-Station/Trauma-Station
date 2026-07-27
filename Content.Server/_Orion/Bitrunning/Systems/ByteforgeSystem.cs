@@ -23,17 +23,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Orion.Bitrunning.Systems;
 
-public sealed class ByteforgeSystem : EntitySystem
+public sealed partial class ByteforgeSystem : EntitySystem
 {
-    [Dependency] private readonly BitrunningDomainSystem _domains = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly StorageSystem _storage = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!;
+    [Dependency] private BitrunningDomainSystem _domains = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private StorageSystem _storage = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SparksSystem _sparks = default!;
 
     private const string ServerSourcePort = "BitrunningServerSource";
     private const string ByteforgeSinkPort = "BitrunningByteforgeSink";
@@ -120,7 +120,7 @@ public sealed class ByteforgeSystem : EntitySystem
             return false;
 
         var byteforgeUid = server.LinkedByteforge!.Value;
-        if (!TryComp<TransformComponent>(byteforgeUid, out var byteforgeXform))
+        if (!TryComp(byteforgeUid, out TransformComponent? byteforgeXform))
             return false;
 
         if (!_prototype.HasIndex<EntityPrototype>(server.RewardCachePrototype))

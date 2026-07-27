@@ -1,9 +1,0 @@
-ent-MobNukeopsSoldierBitrunning = Солдат Синдиката
-    .suffix = Битраннинг
-    .desc = { ent-MobHuman.desc }
-ent-MobSyndicateSoldierBitrunning = Солдат Синдиката
-    .suffix = Битраннинг
-    .desc = { ent-MobHuman.desc }
-ent-MobExperimentalSoldierBitrunning = Экспериментальный солдат Синдиката
-    .suffix = Битраннинг
-    .desc = { ent-MobHuman.desc }

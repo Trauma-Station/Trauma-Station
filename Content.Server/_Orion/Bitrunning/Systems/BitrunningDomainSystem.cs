@@ -12,9 +12,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._Orion.Bitrunning.Systems;
 
-public sealed class BitrunningDomainSystem : EntitySystem
+public sealed partial class BitrunningDomainSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly List<BitrunningVirtualDomainPrototype> _allDomains = new();
 

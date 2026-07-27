@@ -25,16 +25,16 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Orion.Bitrunning.Systems;
 
-public sealed class BitrunningDiskSystem : EntitySystem
+public sealed partial class BitrunningDiskSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StorageSystem _storage = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StorageSystem _storage = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly Dictionary<EntityUid, EntityUid> _avatarByBody = new();
 
@@ -289,7 +289,7 @@ public sealed class BitrunningDiskSystem : EntitySystem
 
         var ancestors = new HashSet<EntityUid>();
         var current = entity;
-        while (TryComp<TransformComponent>(current, out var xform))
+        while (TryComp(current, out TransformComponent? xform))
         {
             ancestors.Add(current);
 

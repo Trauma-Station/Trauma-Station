@@ -95,7 +95,7 @@ public sealed partial class DevourSystem : EntitySystem
         // Orion-Start
         if (IsIndestructibleStructure(target))
         {
-            _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
+            _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
             return;
         }
         // Orion-End
@@ -126,7 +126,7 @@ public sealed partial class DevourSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-/* // Orion-Edit: Moved down
+        /* // Orion-Edit: Moved down
         var ichorInjection = new Solution(ent.Comp.Chemical, ent.Comp.HealRate);
 
         // Grant ichor if the devoured thing meets the dragon's food preference
@@ -138,7 +138,7 @@ public sealed partial class DevourSystem : EntitySystem
         if (args.Args.Target is {} target && _solution.TryGetSolution(target, "food", out _, out var food))
             _bloodstreamSystem.TryAddToBloodstream(ent.Owner, food);
         // </Goobstation>
-*/
+    */
 
         // Orion-Start
         if (args.Args.Target == null)
@@ -163,18 +163,18 @@ public sealed partial class DevourSystem : EntitySystem
         // Delete if the thing isn't in the stomach storage whitelist (or the stomach whitelist is null/empty)
         else // Orion-Edit
         {
-//            PredictedQueueDel(args.Args.Target.Value); // Orion-Edit
+            // PredictedQueueDel(args.Args.Target.Value); // Orion-Edit
 
             // Orion-Start: Protect indestructible from devour
             if (IsIndestructibleStructure(args.Args.Target.Value))
             {
-                _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
+                _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
                 return;
             }
 
             if (!_destructible.DestroyEntity(args.Args.Target.Value))
             {
-                _popupSystem.PopupClient(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
+                _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
                 return;
             }
             // Orion-End

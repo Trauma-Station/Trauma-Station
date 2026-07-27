@@ -24,17 +24,17 @@ namespace Content.Server._Orion.CloningAppearance.Systems;
 // License-Identifier: AGPL-3.0-or-later
 //
 
-public sealed class CloningAppearanceSystem : EntitySystem
+public sealed partial class CloningAppearanceSystem : EntitySystem
 {
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly StationSystem _stations = default!;
-    [Dependency] private readonly StationSpawningSystem _spawning = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly OutfitSystem _outfitSystem = default!;
-    [Dependency] private readonly TraitSystem _traitSystem = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private StationSystem _stations = default!;
+    [Dependency] private StationSpawningSystem _spawning = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private OutfitSystem _outfitSystem = default!;
+    [Dependency] private TraitSystem _traitSystem = default!;
 
     public override void Initialize()
     {
@@ -66,7 +66,7 @@ public sealed class CloningAppearanceSystem : EntitySystem
         foreach (var entry in ev.Component.Components.Values)
         {
             var comp = (Component) _serialization.CreateCopy(entry.Component, notNullableOverride: true);
-            EntityManager.AddComponent(mobUid, comp, true);
+            AddComp(mobUid, comp);
         }
 
         if (ev.Component.StartingGear != null)
@@ -80,7 +80,7 @@ public sealed class CloningAppearanceSystem : EntitySystem
             if (!TryComp<CryostorageComponent>(nearbyEntity, out var cryostorageComponent))
                 continue;
 
-            if(!_container.TryGetContainer(nearbyEntity, cryostorageComponent.ContainerId, out var container))
+            if (!_container.TryGetContainer(nearbyEntity, cryostorageComponent.ContainerId, out var container))
                 continue;
 
             if (!_container.CanInsert(mobUid, container, true))
@@ -98,7 +98,7 @@ public sealed class CloningAppearanceSystem : EntitySystem
 
     private void OnPlayerAttached(Entity<CloningAppearanceComponent> ent, ref PlayerAttachedEvent args)
     {
-        if(TerminatingOrDeleted(ent))
+        if (TerminatingOrDeleted(ent))
             return;
 
         QueueLocalEvent(new CloningAppearanceEvent

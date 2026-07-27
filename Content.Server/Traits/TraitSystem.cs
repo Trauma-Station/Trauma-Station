@@ -65,7 +65,7 @@ public sealed partial class TraitSystem : EntitySystem
             // End Goobstation: Species trait support
 
             // Add all components required by the prototype
-            EntityManager.AddComponents(mob, traitPrototype.Components, false);
+            EntityManager.AddComponents(mob, traitPrototype.Components, false); // Idk is it correct
 
             // Add all JobSpecials required by the prototype
             foreach (var special in traitPrototype.Specials)
@@ -89,7 +89,7 @@ public sealed partial class TraitSystem : EntitySystem
                 foreach (var lang in traitPrototype.RemoveLanguagesSpoken)
                     _language.RemoveLanguage(mob, lang, true, false);
 
-        if (traitPrototype.RemoveLanguagesUnderstood is not null)
+            if (traitPrototype.RemoveLanguagesUnderstood is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesUnderstood)
 
                     _language.RemoveLanguage(mob, lang, false);

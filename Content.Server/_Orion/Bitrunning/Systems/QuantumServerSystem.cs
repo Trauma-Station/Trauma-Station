@@ -70,39 +70,39 @@ using Content.Shared.Body.Components;
 
 namespace Content.Server._Orion.Bitrunning.Systems;
 
-public sealed class QuantumServerSystem : EntitySystem
+public sealed partial class QuantumServerSystem : EntitySystem
 {
-    [Dependency] private readonly BitrunningDomainSystem _domains = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly NetpodSystem _netpod = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly OutfitSystem _outfit = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly BitrunningPointsSystem _bitrunningPoints = default!;
-    [Dependency] private readonly ByteforgeSystem _byteforge = default!;
-    [Dependency] private readonly BitrunningDiskSystem _bitrunningDisk = default!;
-    [Dependency] private readonly SurveillanceCameraSystem _surveillanceCamera = default!;
-    [Dependency] private readonly IServerPreferencesManager _preferences = default!;
-    [Dependency] private readonly CloningAppearanceSystem _cloningAppearance = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly DeathgaspSystem _deathgasp = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedInternalsSystem _internals = default!;
-    [Dependency] private readonly SharedGasTankSystem _gasTank = default!;
+    [Dependency] private BitrunningDomainSystem _domains = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private NetpodSystem _netpod = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private OutfitSystem _outfit = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private BitrunningPointsSystem _bitrunningPoints = default!;
+    [Dependency] private ByteforgeSystem _byteforge = default!;
+    [Dependency] private BitrunningDiskSystem _bitrunningDisk = default!;
+    [Dependency] private SurveillanceCameraSystem _surveillanceCamera = default!;
+    [Dependency] private IServerPreferencesManager _preferences = default!;
+    [Dependency] private CloningAppearanceSystem _cloningAppearance = default!;
+    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private DeathgaspSystem _deathgasp = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SharedInternalsSystem _internals = default!;
+    [Dependency] private SharedGasTankSystem _gasTank = default!;
 
     private static readonly EntProtoId ExitBlindnessStatusEffect = "StatusEffectBitrunningExitBlindness";
     private const string ServerSourcePort = "BitrunningServerSource";
@@ -805,7 +805,7 @@ public sealed class QuantumServerSystem : EntitySystem
                 var spawnedNearAvatar = false;
                 foreach (var avatar in serverEnt.Comp.ActiveConnections)
                 {
-                    if (!TryComp<TransformComponent>(avatar, out var xform))
+                    if (!TryComp(avatar, out TransformComponent? xform))
                         continue;
 
                     SpawnRewardCache(serverEnt.Comp, xform.Coordinates);

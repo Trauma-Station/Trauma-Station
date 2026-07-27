@@ -72,7 +72,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
             return;
         // Orion-End
 
-        if (_points.GetPointComp(args.User) is {} idCard && _points.RemovePoints(idCard, args.Cost)) // Goobstation - borg Miningpoints
+        if (_points.GetPointComp(args.User) is { } idCard && _points.RemovePoints(idCard, args.Cost)) // Goobstation - borg Miningpoints
             args.Paid = true;
     }
 
@@ -87,7 +87,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
         if (args.Paid)
             return;
 
-        if (_bitrunningPoints.GetPointComp(args.User) is {} account && _bitrunningPoints.RemovePoints(account, args.Cost))
+        if (_bitrunningPoints.GetPointComp(args.User) is { } account && _bitrunningPoints.RemovePoints(account, args.Cost))
             args.Paid = true;
     }
     // Orion-End
