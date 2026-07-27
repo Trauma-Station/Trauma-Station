@@ -681,7 +681,7 @@
   - type: MeleeWeapon
     range: 10
     soundHit:
-      path: Audio/_Goobstation/Heretic/repulse.ogg
+      path: /Audio/_Goobstation/Heretic/repulse.ogg
     animation: WeaponArcPurplePunch
     damage:
       types:
