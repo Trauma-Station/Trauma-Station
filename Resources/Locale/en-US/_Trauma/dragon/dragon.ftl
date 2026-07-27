@@ -1,0 +1,1 @@
+dragon-rifts-announcement = Hello crew! due to the placement of 3 dragon rifts in your local area the escape shuttle will now be called, please note that all crew should remain working until it arrives.

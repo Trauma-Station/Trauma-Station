@@ -49,7 +49,7 @@ public sealed partial class CarpRiftsConditionSystem : EntitySystem
 
         // <Trauma>
         if (comp.RiftsCharged > 2)
-            _roundEnd.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(5));
+            _roundEnd.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(5), name: Loc.GetString("dragon-rifts-announcement"));
         // </Trauma>
     }
 

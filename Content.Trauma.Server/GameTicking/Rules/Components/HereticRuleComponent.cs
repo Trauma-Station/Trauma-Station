@@ -5,11 +5,14 @@ using Content.Trauma.Server.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Components;
 
-[RegisterComponent, Access(typeof(HereticRuleSystem))]
+[RegisterComponent]
 public sealed partial class HereticRuleComponent : Component
 {
     [DataField]
     public int RealityShiftPerHeretic = 1;
+
+    [DataField]
+    public bool HasAHereticAscended;
 
     public readonly List<EntityUid> Minds = new();
 

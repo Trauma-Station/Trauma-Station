@@ -29,8 +29,8 @@ public readonly record struct UserInvokeTouchSpellEvent;
 /// <summary>
 /// Broadcasted when a heretic ascends.
 /// </summary>
-[ByRefEvent, Serializable, NetSerializable]
-public record struct HereticAscendedEvent;
+[ByRefEvent]
+public readonly record struct HereticAscendedEvent;
 
 [DataDefinition]
 public sealed partial class EventHereticAscension : EntityEventArgs;

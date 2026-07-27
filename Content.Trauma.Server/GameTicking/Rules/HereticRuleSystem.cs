@@ -34,7 +34,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private GameTicker _ticker = default!;
 
-    public EntProtoId ERTChaplainEvent = "SpawnERTChaplain";
+    private static readonly EntProtoId ERTEvent = "SpawnERTSecurity";
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -54,14 +54,14 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
         SubscribeLocalEvent<HereticRuleComponent, ObjectivesTextPrependEvent>(OnTextPrepend);
 
         SubscribeLocalEvent<HereticRoleComponent, GetBriefingEvent>(OnGetBriefing);
-        SubscribeLocalEvent<HereticAscendedEvent>(OnHereticAscended);
 
         SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
     }
 
+    [SubscribeLocalEvent]
     private void OnHereticAscended(ref HereticAscendedEvent ev)
     {
-        _ticker.StartGameRule(ERTChaplainEvent);
+        _ticker.StartGameRule(ERTEvent);
         _roundEnd.RequestRoundEnd(checkCooldown: false, cantRecall: true, countdownTime: TimeSpan.FromMinutes(10));
     }
 

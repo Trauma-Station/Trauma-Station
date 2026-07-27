@@ -73,7 +73,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     private const float PassivePointCooldown = 20f * 60f;
 
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
-    private bool _hasAHereticAscended = false;
 
     public static readonly ProtoId<NpcFactionPrototype> HereticFactionId = "Heretic";
     public static readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
@@ -489,9 +488,15 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (ent.Comp.Ascended || !ent.Comp.CanAscend)
             return;
 
+        var query = EntityQueryEnumerator<HereticRuleComponent>();
+
         // starts the evac countdown call
-        if (!_hasAHereticAscended)
+        while (query.MoveNext(out _, out var rule))
         {
+            if (rule.HasAHereticAscended)
+                break;
+
+            rule.HasAHereticAscended = true;
             var ascendEv = new HereticAscendedEvent();
             RaiseLocalEvent(ref ascendEv);
         }

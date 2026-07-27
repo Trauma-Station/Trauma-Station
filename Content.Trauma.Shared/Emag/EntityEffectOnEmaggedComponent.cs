@@ -10,7 +10,7 @@ public sealed partial class EntityEffectOnEmaggedComponent : Component
     /// <summary>
     /// The effects to apply.
     /// </summary>
-    [DataField(required:true)]
+    [DataField(required: true)]
     public EntityEffect[] Effects;
 
     /// <summary>
