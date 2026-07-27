@@ -2946,7 +2946,7 @@
   - type: Prying # Open door from xeno.yml.
     pryPowered: true
     force: true
-    speedModifier: 1.5
+    speedModifier: 4 # Trauma, was 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: UseDelay # Goobstation - For insta prying

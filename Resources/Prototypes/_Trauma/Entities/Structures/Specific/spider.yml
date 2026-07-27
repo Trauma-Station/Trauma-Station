@@ -44,7 +44,7 @@
     normalState: 1
 
 - type: entity
-  parent: BaseSpiderStructure
+  parent: SpiderEggsHuman
   id: SpiderEggs
   name: egg sac
   description: A bundle of spider eggs, you see them squirming within.
