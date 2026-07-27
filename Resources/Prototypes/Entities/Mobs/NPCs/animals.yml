@@ -3073,7 +3073,7 @@
     eggLayAction: SpiderMultiply
     hungerRequired: true
   - type: Hunger
-    startingHunger: 15 
+    startingHunger: 15
     thresholds:
       Overfed: 150
       Okay: 100
