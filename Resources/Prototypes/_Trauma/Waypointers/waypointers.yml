@@ -1,5 +1,4 @@
-# If you add a new waypointer, you'll need to add the "WaypointerTrackable" component to every entity that you want to be tracked EXCEPT grids.
-# Why not grids? As Todd Howard would say, they just work.
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: waypointer
   abstract: true
