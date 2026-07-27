@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Thrall;
-using Content.Server.AlertLevel;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
@@ -11,6 +10,7 @@ using Content.Server.Polymorph.Systems;
 using Content.Server.Station.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Actions;
+using Content.Shared.AlertLevel;
 using Content.Shared.Audio;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
@@ -48,6 +48,7 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
     [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
 
     public static readonly EntProtoId NightmareAbilities = "NightmareAbilities";
+    public static readonly ProtoId<AlertLevelPrototype> DeltaSling = "DeltaSling";
 
     public override void Initialize()
     {
@@ -177,9 +178,8 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
 
         _chatSystem.DispatchStationAnnouncement(eggUid, message, "Central Command", false, null, Color.Red);
 
-        var stationUid = _station.GetStationInMap(Transform(uid).MapID);
-        if (stationUid != null)
-            _alertLevel.SetLevel(stationUid.Value, "delta", true, true, true, true);
+        if (_station.GetStationInMap(Transform(uid).MapID) is { } station)
+            _alertLevel.SetLevel(station, DeltaSling, force: true);
 
         var effectEnt = Spawn(component.ShadowlingInside, Transform(eggUid).Coordinates);
         component.ShadowlingInsideEntity = effectEnt;

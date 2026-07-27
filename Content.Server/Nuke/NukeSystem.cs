@@ -2,7 +2,6 @@
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 // </Trauma>
-using Content.Server.AlertLevel;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
@@ -10,6 +9,7 @@ using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
+using Content.Shared.AlertLevel;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -514,10 +514,8 @@ public sealed partial class NukeSystem : EntitySystem
         // The nuke may not be on a station, so it's more important to just
         // let people know that a nuclear bomb was armed in their vicinity instead.
         // Otherwise, you could set every station to whatever AlertLevelOnActivate is.
-        if (stationUid != null && !isOverride)
-            _alertLevel.SetLevel(stationUid.Value, component.AlertLevelOnActivate, true, true, true, true);
-        else if (stationUid != null && isOverride)
-            _alertLevel.SetLevel(stationUid.Value, component.AlertLevelOnOverride, true, true, true, true );
+        if (stationUid != null)
+            _alertLevel.SetLevel(stationUid.Value, isOverride ? component.AlertLevelOnOverride : component.AlertLevelOnActivate, true, true, true); // Trauma - try override alert level
 
         var pos = _transform.GetMapCoordinates(uid, xform: nukeXform);
         var x = (int) pos.X;
