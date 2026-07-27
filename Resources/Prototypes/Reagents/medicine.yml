@@ -1237,6 +1237,7 @@
             Heat: -0.2
             Shock: -0.2
             Cold: -0.2
+            Asphyxiation: -2 # Trauma - Hydrate the injured so they may have the strength to stand (Space Station 13:14, KJV)
   reactiveEffects:
     Extinguish:
       methods: [ Touch ]
