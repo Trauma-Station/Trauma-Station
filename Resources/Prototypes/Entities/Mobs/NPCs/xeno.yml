@@ -92,7 +92,7 @@
     generated:
       reagents:
         - ReagentId: Toxin
-          Quantity: 0.4
+          Quantity: 0.25
   # </Trauma>
 
 - type: entity
