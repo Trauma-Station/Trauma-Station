@@ -12107,3 +12107,10 @@ Entries:
   id: 1327
   time: '2026-07-27T01:43:30.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3729
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed kinetic dagger/machete/claws not using mining skill.
+  id: 1328
+  time: '2026-07-27T01:45:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3736
