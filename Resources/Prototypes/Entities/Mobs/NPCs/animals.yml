@@ -2884,17 +2884,6 @@
     delay: 1
   # </Trauma>
   - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 130
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
   - type: ToolRefinable
     refineResult:
     - id: FoodMeatSpider
@@ -3048,6 +3037,7 @@
   id: MobGiantSpiderAngry
   # <Trauma>
   components:
+  - type: MobSpam
   - type: Tag
     tags:
     - Spider
@@ -3069,15 +3059,15 @@
   - type: EggLayer
     eggSpawn:
     - id: SpiderEggs
-    hungerUsage: 100
+    hungerUsage: 140
     eggLayAction: SpiderMultiply
     hungerRequired: true
   - type: Hunger
     startingHunger: 15
     thresholds:
       Overfed: 150
-      Okay: 100
-      Peckish: 15
+      Okay: 140
+      Peckish: 139
       Starving: 10
       Dead: 0
   - type: MobThresholds
@@ -3085,7 +3075,6 @@
       0: Alive
       40: Dead
   # </Trauma>
-
 
 - type: entity
   name: clown spider

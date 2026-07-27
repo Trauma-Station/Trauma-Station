@@ -16,7 +16,7 @@
       Kidneys: OrganArachnidKidneys
 
 - type: entity
-  parent: [ OrganArachnidMetabolizer, OrganBloodsucker, OrganAnimalStomach ]
+  parent: OrganBloodsuckerStomach
   id: OrganSpiderStomach
   components:
   - type: Metabolizer
