@@ -21,7 +21,7 @@ public abstract partial class SharedJobListingsImplantSystem : EntitySystem
 
     private void OnImplantImplanted(Entity<JobListingsImplantComponent> entity, ref ImplantImplantedEvent args)
     {
-        entity.Comp.StoredAction = _actions.AddAction(args.Implanted, entity.Comp.Action);
+        entity.Comp.StoredAction = _actions.AddAction(args.Implanted, entity.Comp.Action, entity.Owner);
     }
 
     private void OnImplantRemoved(Entity<JobListingsImplantComponent> entity, ref ImplantRemovedEvent args)

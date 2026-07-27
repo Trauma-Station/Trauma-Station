@@ -44,6 +44,7 @@ public sealed partial class JobListingsSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<UplinkAssignedEvent>(OnUplinkAssigned);
+        SubscribeLocalEvent<UplinkLinkedEvent>(OnUplinkLinked);
         SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsClaimJobMessage>(OnMessage);
@@ -422,18 +423,26 @@ public sealed partial class JobListingsSystem : EntitySystem
 
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
-        if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
+        if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
             return;
 
         var mind = _mind.GetMind(args.User);
         if (mind is null)
             return;
         jobListingsComp.Mind = mind.Value;
-        AddComp(mind.Value, new JobListingsOwnerComponent { JobListings = args.Store });
+        AddComp(mind.Value, new JobListingsOwnerComponent { JobListings = args.Uplink });
 
-        FillSideJobs((args.Store, jobListingsComp));
-        Link((args.Store, jobListingsComp), args.Host);
-        SetRefreshTime((args.Store, jobListingsComp));
+        FillSideJobs((args.Uplink, jobListingsComp));
+        Link((args.Uplink, jobListingsComp), args.Host);
+        SetRefreshTime((args.Uplink, jobListingsComp));
+    }
+
+    private void OnUplinkLinked(ref UplinkLinkedEvent args)
+    {
+        if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
+            return;
+
+        Link((args.Uplink, jobListingsComp), args.Host);
     }
 
     private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
