@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Chemistry.EntitySystems;
+// </Trauma>
 using System.Collections.Frozen;
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -279,7 +282,8 @@ namespace Content.Shared.Chemistry.Reaction
                     return;
             }
 
-            Log.Error($"{nameof(Solution)} {soln.Owner} could not finish reacting in under {MaxReactionIterations} loops.");
+            // Trauma - pretty string for the solution and list its contents
+            Log.Error($"{ToPrettyString(soln)} could not finish reacting in under {MaxReactionIterations} loops.\nContents: {SharedSolutionContainerSystem.ToPrettyString(soln.Comp)}");
         }
     }
 
