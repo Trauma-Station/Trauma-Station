@@ -2864,10 +2864,22 @@
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ SimpleMobBase, BaseMobHemocyanin, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ]
+  parent: [ BaseMobGiantSpider, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ]
   id: MobSpiderBase
   abstract: true
   components:
+  # <Trauma>
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Slash: 3
+        Piercing: 7
+  # </Trauma>
   - type: VentCrawler # goobstation - Ventcrawl
   - type: Physics
   - type: Fixtures
@@ -2889,12 +2901,12 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      120: Dead # Trauma - was 90
+      90: Dead
   - type: SolutionManager
     solutions:
     - SolutionVenomSpider
   - type: MeleeChemicalInjector
-    transferAmount: 1.5 # Trauma - was 0.75
+    transferAmount: 0.75
     solution: melee
   - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
@@ -2934,7 +2946,7 @@
   - type: Prying # Open door from xeno.yml.
     pryPowered: true
     force: true
-    speedModifier: 1.5
+    speedModifier: 4 # Trauma, was 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: UseDelay # Goobstation - For insta prying
@@ -2975,8 +2987,9 @@
   - type: InputMover
   - type: MobMover
   - type: HTN
+    constantlyReplan: false # Trauma
     rootTask:
-      task: SimpleHostileCompound
+      task: SimpleHostileCompound # Trauma
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-giant-spider-name
@@ -2988,32 +3001,33 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
-  name: tarantula
   parent: MobSpiderBase
   id: MobGiantSpider
+  abstract: true
+  name: giant spider # Trauma
   description: Widely recognized to be the literal worst thing in existence.
   components:
   - type: Sprite
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
-      state: tarantula
+      state: nurse # Trauma
       sprite: Mobs/Animals/spider.rsi
   - type: SpriteMovement
     movementLayers:
       movement:
-        state: tarantula-moving
+        state: nurse-moving # Trauma
     noMovementLayers:
       movement:
-        state: tarantula
+        state: nurse # Trauma
   - type: DamageStateVisuals
     states:
       Alive:
-        Base: tarantula
+        Base: nurse # Trauma
       Critical:
-        Base: tarantula_dead
+        Base: nurse_dead # Trauma
       Dead:
-        Base: tarantula_dead
+        Base: nurse_dead # Trauma
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -3024,7 +3038,7 @@
       types:
         # <Trauma>
         Slash: 3
-        Piercing: 3 # was 6, split into slash so it can (slowly) break grilles
+        Piercing: 7 # was 6, split into slash so it can (slowly) break grilles
         # </Trauma>
 
 - type: entity
@@ -3032,6 +3046,46 @@
   - MobSpiderAngryBase
   - MobGiantSpider
   id: MobGiantSpiderAngry
+  # <Trauma>
+  components:
+  - type: Tag
+    tags:
+    - Spider
+  - type: ActionGrant
+    actions:
+    - ActionSpiderCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Spider
+  - type: MobCallable
+  - type: HTN
+    constantlyReplan: false
+    rootTask:
+      task: SpiderCompound
+  - type: ShadowCocoonMaker
+    cocoonDelay: 15
+    shadowCocoon: SpiderEggsHuman
+  - type: EggLayer
+    eggSpawn:
+    - id: SpiderEggs
+    hungerUsage: 100
+    eggLayAction: SpiderMultiply
+    hungerRequired: true
+  - type: Hunger
+    startingHunger: 15
+    thresholds:
+      Overfed: 150
+      Okay: 100
+      Peckish: 15
+      Starving: 10
+      Dead: 0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  # </Trauma>
+
 
 - type: entity
   name: clown spider

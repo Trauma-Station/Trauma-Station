@@ -22,3 +22,10 @@
       hungerUsage: 20
       eggLayAction: MouseMultiply
       hungerRequired: true
+
+- type: entity
+  parent: OrganAnimalStomach
+  id: OrganAnimalStomachFast
+  components:
+  - type: Metabolizer
+    updateInterval: 0.1

@@ -44,9 +44,7 @@ jobs:
         ENGINE_TAG=$(git describe --tags --abbrev=0)
         cd ..
         rm -rf RobustToolbox
-        git clone --recursive https://github.com/space-wizards/RobustToolbox
-        cd RobustToolbox
-        git checkout $ENGINE_TAG
+        git clone --recursive https://github.com/space-wizards/RobustToolbox -b $ENGINE_TAG
 
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
