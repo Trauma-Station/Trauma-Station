@@ -3063,8 +3063,9 @@
     constantlyReplan: false
     rootTask:
       task: SpiderCompound # Trauma
-  # - type: ShadowCocoonMaker
-  #   shadowCocoon:
+  - type: ShadowCocoonMaker
+    cocoonDelay: 15
+    shadowCocoon:
   - type: EggLayer
     eggSpawn:
     - id: SpiderEggs

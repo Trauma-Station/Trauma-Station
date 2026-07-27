@@ -61,3 +61,85 @@
       - ReagentId: Egg
         Quantity: 150
     id: egg
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderplace.ogg
+      params:
+        volume: 0.7
+  - type: AmbientSound
+    range: 2
+    volume: -2
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
+
+- type: entity
+  parent: BaseStructure
+  id: SpiderEggsHuman
+  name: infested crewmate
+  description: A once living crewmate, turned into a home for spiders.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/spiders.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: webbed
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: desecration
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+          MaterialWebSilk:
+            min: 1
+            max: 3
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: InteractionOutline
+  - type: Damageable
+  - type: Injurable
+  - type: TimedSpawner
+    prototypes:
+    - MobBabySpider
+    intervalSeconds: 30
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+  - type: EntityStorage
+    capacity: 1
+    openOnMove: false
+  - type: Lock
+    locked: true
+    showLockVerbs: false
+    showExamine: false
+    breakOnAccessBreaker: false
+    unlockOnClick: false
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderplace.ogg
+      params:
+        volume: 0.7
+  - type: AmbientSound
+    range: 2
+    volume: -2
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
