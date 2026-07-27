@@ -43,7 +43,6 @@
       MobBingleSlavering: 0.10
       MobBingleBoney: 0.10
       BinglePit: 0.01
-      MobTurkle: 0.01
 
 - type: entity
   parent: MarkerBase
