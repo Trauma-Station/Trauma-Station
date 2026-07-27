@@ -14,7 +14,7 @@
 - type: listing
   id: UplinkSpeedLoaderMagnumAP
   name: uplink-speedloader-magnum-name
-  description: uplink-speedloader-magnu-desc # lol typo
+  description: uplink-speedloader-magnum-desc
   icon: { sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
   productEntity: SpeedLoaderMagnumAP
   cost:
