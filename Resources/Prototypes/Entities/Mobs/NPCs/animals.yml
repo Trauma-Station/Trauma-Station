@@ -3057,6 +3057,7 @@
   - type: ShadowCocoonMaker
     cocoonDelay: 15
     shadowCocoon: SpiderEggsHuman
+    verbText: "Infest victim"
   - type: EggLayer
     eggSpawn:
     - id: SpiderEggs
