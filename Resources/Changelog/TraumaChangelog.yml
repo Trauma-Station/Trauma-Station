@@ -12176,3 +12176,10 @@ Entries:
   id: 1334
   time: '2026-07-27T20:17:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3770
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed spiders being able to spam way too many eggs.
+  id: 1335
+  time: '2026-07-27T20:37:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3771
