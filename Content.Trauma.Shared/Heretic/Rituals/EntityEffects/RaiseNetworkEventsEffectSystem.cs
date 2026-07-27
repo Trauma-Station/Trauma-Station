@@ -14,7 +14,7 @@ public sealed partial class RaiseNetworkEventsEffectSystem : EntityEffectSystem<
         if (_net.IsClient)
             return;
 
-        var netEnt = GetNetEntity(entity);
+        var netEnt = GetNetEntity(entity, entity.Comp);
 
         foreach (var ev in args.Effect.Events)
         {

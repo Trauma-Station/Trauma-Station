@@ -12,13 +12,11 @@ public sealed class ChildMarkingTest : GameTest
     [Test]
     public async Task ValidateChildMarkings()
     {
-        var pair = Pair;
-
         await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
-                foreach (var  marking in SProtoMan.EnumeratePrototypes<MarkingPrototype>())
+                foreach (var marking in SProtoMan.EnumeratePrototypes<MarkingPrototype>())
                 {
                     foreach (var suffix in marking.ChildMarkingsSuffix)
                     {
