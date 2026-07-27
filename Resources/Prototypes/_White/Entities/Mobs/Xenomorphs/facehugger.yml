@@ -30,9 +30,9 @@
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: mumble
+  - type: ReplacementAccent
+    accent: mumble
+    relayAccent: true
   - type: Damageable
     damageModifierSet: Xenomorph
   - type: Injurable
@@ -143,8 +143,6 @@
   - type: Speech
     speechSounds: Xenomorph
     speechVerb: SmallMob
-  - type: ReplacementAccent
-    accent: xeno
   - type: Vocal
     emoteSounds: Xenomorph
   - type: CollectiveMind

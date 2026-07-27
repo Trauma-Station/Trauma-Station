@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Armor;
-using Content.Shared.Blocking;
+using Content.Shared.Blocking.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
@@ -162,7 +162,7 @@ public sealed partial class QualitySystem : EntitySystem
         ent.Comp.PassiveBlockFraction *= modifierPlus;
         ent.Comp.ActiveBlockFraction *= modifierPlus;
 
-        if (ent.Comp.PassiveBlockDamageModifer is { } passive)
+        if (ent.Comp.PassiveBlockModifier is { } passive)
         {
             foreach (var (key, number) in passive.Coefficients)
             {
@@ -174,7 +174,7 @@ public sealed partial class QualitySystem : EntitySystem
             }
         }
 
-        if (ent.Comp.ActiveBlockDamageModifier is { } active)
+        if (ent.Comp.ActiveBlockModifier is { } active)
         {
             foreach (var (key, number) in active.Coefficients)
             {

@@ -116,7 +116,7 @@
   description: "How well you can snipe using a scoped rifle at long range."
   components:
   - type: Knowledge
-    costs: null # my sparkledog med intern actually used to be an isis rocketeer
+    costs: null # my sparkledog med intern actually used to be Quiet
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged

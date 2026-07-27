@@ -538,8 +538,8 @@
   description: High-quality rubber gloves, squeaky to do some cleaning!
   components:
   # <Trauma> - todo above done...
-  - type: LubeImmune
-  - type: GlueImmune
+  - type: LubedImmune
+  - type: GluedImmune
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/janitor.rsi

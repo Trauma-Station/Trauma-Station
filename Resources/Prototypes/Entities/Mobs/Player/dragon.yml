@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable, MobNightVision ] # Trauma - added AppearanceDragon
+  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added AppearanceDragon
   id: BaseMobDragon
   suffix: ""
   name: space dragon

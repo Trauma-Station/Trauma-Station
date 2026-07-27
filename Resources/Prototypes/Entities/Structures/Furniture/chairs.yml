@@ -1,7 +1,7 @@
 - type: entity
-  name: chair
-  id: SeatBase
   abstract: true
+  id: SeatBase
+  name: chair
   description: You sit in this. Either by will or force.
   placement:
     mode: PlaceFree
@@ -31,17 +31,6 @@
     damageModifierSet: Metallic
   - type: Injurable
     damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
   - type: StaticPrice
     price: 50
   - type: Tag # goob edit
@@ -81,6 +70,17 @@
   components:
   - type: Rotatable
     rotateWhileAnchored: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 #Starts anchored, can be rotated while anchored
 - type: entity
@@ -106,6 +106,17 @@
   - type: Construction
     graph: Seat
     node: chair
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   name: chair
@@ -129,6 +140,17 @@
   - type: Construction
     graph: Seat
     node: stool
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   name: bar stool
@@ -182,13 +204,26 @@
   parent: ChairBase
   description: It looks comfy.
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicChair
+  # </Trauma>
   - type: Sprite
     state: comfy
   - type: Construction
     graph: Seat
     node: chairComfy
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: CosmicChair
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   name: pilot seat
@@ -196,13 +231,26 @@
   parent: ChairBase
   description: The pilot seat of a prestigious ship.
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicChair
+  # </Trauma>
   - type: Sprite
     state: shuttle
   - type: Construction
     graph: Seat
     node: chairPilotSeat
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: CosmicChair
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   name: wooden chair
@@ -278,18 +326,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 25
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Voice/Human/womanlaugh.ogg
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank:
-            min: 1
-            max: 1
   - type: Construction
     graph: RitualSeat
     node: chairCursed
@@ -358,6 +399,17 @@
     graph: Seat
     node: chairFolding
   - type: DamageExaminable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   parent: ChairFolding
@@ -380,6 +432,17 @@
   - type: Construction
     graph: Seat
     node: chairSteelBench
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   name: cardboard stool
@@ -394,8 +457,6 @@
     node: stoolCard
   - type: Damageable
     damageModifierSet: Card
-  - type: Injurable
-    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

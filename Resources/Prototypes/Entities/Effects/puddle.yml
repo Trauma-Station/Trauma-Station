@@ -142,7 +142,6 @@
     mode: SnapgridCenter
   components:
   # <Trauma>
-  - type: BadFood # stop mice treating to drink slime off the floor its too op
   - type: ViewconeOccludable # seeing some guy bleeding behind you... not very good
     occludeIfAnchored: true # they're always anchored
   # </Trauma>
@@ -194,7 +193,7 @@
   - type: Edible
     edible: Drink
     delay: 3
-    transferAmount: 1
+    transferAmount: 5 # Trauma, was 1, temp until i learn Csharp well enough to give mice, ratkings, and spiders the ability to drink puddles fast
     solution: puddle
     utensil: Spoon
   - type: ExaminableSolution

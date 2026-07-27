@@ -14,6 +14,25 @@
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
 
+# Area whitelist tags for ambient music
+- type: Tag
+  id: AreaBeach
+
+- type: Tag
+  id: AreaCold
+
+- type: Tag
+  id: AreaDojo
+
+- type: Tag
+  id: AreaDetective
+
+- type: Tag
+  id: AreaInterrogation
+
+- type: Tag
+  id: AreaMorgue
+
 ## B ##
 
 - type: Tag
@@ -240,6 +259,9 @@
 
 - type: Tag
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
+
+- type: Tag
+  id: Spider # Spider mobcaller
 
 - type: Tag
   id: SteelScraps # Construction: BloomeryColdSteel

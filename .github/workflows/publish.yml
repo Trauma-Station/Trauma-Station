@@ -44,9 +44,7 @@ jobs:
         ENGINE_TAG=$(git describe --tags --abbrev=0)
         cd ..
         rm -rf RobustToolbox
-        git clone --recursive https://github.com/space-wizards/RobustToolbox
-        cd RobustToolbox
-        git checkout $ENGINE_TAG
+        git clone --recursive https://github.com/space-wizards/RobustToolbox -b $ENGINE_TAG
 
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
@@ -58,7 +56,6 @@ jobs:
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
 
     - name: Publish changelog (Discord)
-      continue-on-error: true
       run: Tools/actions_changelogs_since_last_run.py
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

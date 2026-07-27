@@ -22,7 +22,6 @@
     - BaseStationRecords
     - BaseStationNtrTasks
     - BaseStationArrivals
-    #- BaseStationGateway # Trauma - slop loading 3 maps for no reason
     - BaseStationShuttles
     - BaseStationCentcomm
     - BaseStationEvacuation

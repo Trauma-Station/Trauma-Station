@@ -77,7 +77,7 @@ public sealed partial class SlowOnDamageSystem : EntitySystem
 
     private void OnExamined(Entity<ClothingSlowOnDamageModifierComponent> ent, ref ExaminedEvent args)
     {
-        var msg = Loc.GetString("slow-on-damage-modifier-examine", ("mod", Math.Round(100 - ent.Comp.Modifier * 100))); // Goob edit
+        var msg = Loc.GetString("slow-on-damage-modifier-examine", ("mod", Math.Round(ent.Comp.Modifier * 100))); // Trauma - round it
         args.PushMarkup(msg);
     }
 
@@ -93,12 +93,12 @@ public sealed partial class SlowOnDamageSystem : EntitySystem
 
     private void OnIgnoreStartup(Entity<IgnoreSlowOnDamageComponent> ent, ref ComponentStartup args)
     {
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnIgnoreShutdown(Entity<IgnoreSlowOnDamageComponent> ent, ref ComponentShutdown args)
     {
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnIgnoreModifySpeed(Entity<IgnoreSlowOnDamageComponent> ent, ref ModifySlowOnDamageSpeedEvent args)
