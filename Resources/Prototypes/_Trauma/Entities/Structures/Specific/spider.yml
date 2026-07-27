@@ -37,15 +37,15 @@
     fireSpread: true
     damage:
       types:
-        Heat: 3
+        Heat: 3 
   - type: Appearance
   - type: FireVisuals
     sprite: Effects/fire.rsi
     normalState: 1
 
 - type: entity
-  parent: SpiderEggsHuman
-  id: SpiderEggs
+  parent: BaseSpiderStructure
+  id: SpiderEggsHuman
   name: egg sac
   description: A bundle of spider eggs, you see them squirming within.
   components:
