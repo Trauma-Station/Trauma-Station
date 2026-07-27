@@ -4178,13 +4178,6 @@ entities:
     - type: Transform
       pos: -28.5,22.5
       parent: 2
-- proto: DefibrillatorEmpty
-  entities:
-  - uid: 431
-    components:
-    - type: Transform
-      pos: -14.50,29.64
-      parent: 2
 - proto: MaintenanceWeaponSpawner
   entities:
   - uid: 2188
