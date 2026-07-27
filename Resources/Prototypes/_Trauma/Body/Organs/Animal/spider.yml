@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ OrganBloodsucker, OrganAnimalStomach ]
+  id: OrganBloodsuckerStomachFast
+  components:
+  - type: Metabolizer
+    updateInterval: 0.1
+
+- type: entity
+  id: BaseMobGiantSpider
+  abstract: true
+  components:
+  - type: BodyCache
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganAnimalTorso
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganBloodsuckerStomachFast
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

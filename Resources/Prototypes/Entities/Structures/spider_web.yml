@@ -6,6 +6,11 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+  # </Trauma>
   - type: PlacementReplacement
     key: web
   - type: MeleeSound

@@ -10,6 +10,6 @@
     icon:
       sprite: _Goobstation/Actions/call.rsi
       state: icon
-    useDelay: 15
+    useDelay: 5
   - type: InstantAction
     event: !type:MobCallActionEvent

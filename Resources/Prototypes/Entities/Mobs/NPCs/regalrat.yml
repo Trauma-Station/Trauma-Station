@@ -6,6 +6,7 @@
   components:
   # <Trauma>
   - type: VentCrawler
+  - type: Targeting
   - type: PassiveDamage
     allowedStates:
     - Alive
