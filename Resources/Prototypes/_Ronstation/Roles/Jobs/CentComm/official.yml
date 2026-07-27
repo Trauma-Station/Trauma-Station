@@ -4,7 +4,10 @@
     jumpsuit: ClothingUniformJumpsuitCentcomFormal
     back: ClothingBackpackSatchelHoldingCentcomFormalFilled
     shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesMedSec
+    mask: ClothingMaskGasCentcom
+    outerClothing: ClothingOuterArmorCentcommCarapace
+    neck: ExecutiveIDCard # This is effectively an access breaker. Keep that in mind when making custom loadouts with it.
+    eyes: ClothingEyesGlassesCentCommNoThermal # Actually fits better with the loadout and was clearly designed for this purpose. Appears equivalent to medsec.
     gloves: ClothingHandsGlovesCombat
     id: CentcomPDA
     ears: ClothingHeadsetCentCom
@@ -12,7 +15,7 @@
     pocket1: WeaponDisablerAdvanced
     pocket2: WeaponRevolverMateba
   inhand:
-  - MindShieldImplanter
+  - CentcommMindShieldImplanter
   - DeathRattleImplanterCentcomm
 
 - type: startingGear
@@ -31,7 +34,9 @@
   inhand:
   - BriefcaseCentcomInspector
 - type: startingGear
-# This is the loadout I've typically given Semper. I feel like it could be useful to more than just myself to have it here.
+# This loadout is meant for very specific circumstances, or if the relevant character will remain on CentComm.
+# Due to the items inside, any character ON STATION with this loadout should have ERT Sec guards.
+# Example usage: In-character investigations ordeals with corrupt command (in-character, not OOC rulebreaks.)
   id: CentcomOfficerGear
   equipment:
     jumpsuit: ClothingUniformJumpskirtCentcomFormalDress
@@ -40,13 +45,14 @@
     head: ClothingHeadHatCentcomcap
     mask: ClothingMaskGasCentcom
     outerClothing: ClothingOuterArmorCentcommCarapace
-    gloves: ClothingHandsGlovesCombat # Whoops. Forgot something.
-    eyes: ClothingEyesGlassesDeathsquad # Experimenting. Item in game is called "Central Commander Shades"
+    neck: ExecutiveIDCard
+    gloves: ClothingHandsGlovesCombat
+    eyes: ClothingEyesGlassesCCInsideAgent
     id: CentcomPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSheathFilled
     pocket1: WeaponDisablerAdvanced
     pocket2: WeaponRevolverMateba
   inhand:
-  - MindShieldImplanter
+  - CentcommMindShieldImplanter
   - DeathRattleImplanterCentcomm
