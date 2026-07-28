@@ -12098,3 +12098,56 @@ Entries:
   id: 1326
   time: '2026-07-26T23:29:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3682
+- author: Graves
+  changes:
+  - type: Tweak
+    message: 'Tweaked bioweapons. Weaker now. Rarer now. '
+  - type: Remove
+    message: Removed bioweapon regeneration
+  id: 1327
+  time: '2026-07-27T01:43:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3729
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed kinetic dagger/machete/claws not using mining skill.
+  id: 1328
+  time: '2026-07-27T01:45:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3736
+- author: Armok
+  changes:
+  - type: Add
+    message: Spiders can now multiply
+  - type: Add
+    message: Spiders can now consume blood off the floor to lay eggs.
+  - type: Add
+    message: Spiders can now lay eggs in dead people.
+  id: 1329
+  time: '2026-07-27T01:56:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3732
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added RTG's to the random loot pool for space debris
+  - type: Tweak
+    message: Reduced the cost to buy gyroscopes and thrusters
+  - type: Tweak
+    message: Reduced the sell value of gyroscopes
+  id: 1330
+  time: '2026-07-27T10:19:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed every uplink item upstream removed having missing locale strings.
+  - type: Fix
+    message: Fixed gun execution popups.
+  - type: Tweak
+    message: Spiders are now immune to their venom...
+  - type: Add
+    message: Added a durathread cargo order since upstream killed textiles crate.
+  - type: Add
+    message: Automation machines can now be made in a circuit printer.
+  id: 1331
+  time: '2026-07-27T13:38:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3751

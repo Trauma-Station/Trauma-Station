@@ -261,6 +261,9 @@
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
 
 - type: Tag
+  id: Spider # Spider mobcaller
+
+- type: Tag
   id: SteelScraps # Construction: BloomeryColdSteel
 
 ## T ##

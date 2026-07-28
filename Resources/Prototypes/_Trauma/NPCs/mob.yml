@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: htnCompound
+  id: SpiderCompound
+  branches:
+  - tasks:
+      - !type:HTNCompoundTask
+        task: MeleeCombatCompound
+  - tasks:
+      - !type:HTNCompoundTask
+        task: MoveCallTargetCompound
+  # - tasks: - Leave it for player controlled spiders
+  #     - !type:HTNCompoundTask
+  #       task: FoodCompound
+  - tasks:
+      - !type:HTNCompoundTask
+        task: IdleCompound
