@@ -227,7 +227,7 @@ public sealed partial class OrganChipSystem : EntitySystem
 
         var user = args.User;
         _popup.PopupEntity($"You inserted a chip into the {OrganName(ent)}.", user, user);
-        _adminLog.Add(LogType.Verb, "{user:user} inserted organ chip {chip:chip} into {ent:target}");
+        _adminLog.Add(LogType.Verb, $"{user:user} inserted organ chip {chip:chip} into {ent:target}");
     }
 
     [SubscribeLocalEvent]
@@ -242,7 +242,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         var user = args.User;
         _popup.PopupEntity($"You pulled a chip out of the {OrganName(ent)}.", user, user);
         _hands.TryPickupAnyHand(user, chip);
-        _adminLog.Add(LogType.Verb, "{user:user} removed organ chip {chip:chip} from {ent:target}");
+        _adminLog.Add(LogType.Verb, $"{user:user} removed organ chip {chip:chip} from {ent:target}");
     }
 
     private void StartInsertingChip(EntityUid organ, EntityUid chip, EntityUid user)
