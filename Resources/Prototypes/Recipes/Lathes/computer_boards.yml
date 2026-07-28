@@ -73,6 +73,11 @@
   icon: { sprite: Structures/Machines/tech_disk_printer.rsi, state: icon } # Goobstation
   result: TechDiskComputerCircuitboard
 
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
+  id: StationTeleportersControlCircuitboard
+  result: StationTeleportersControlCircuitboard
+
 # Cameras
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseSecurityComputerRecipeCategory ]
