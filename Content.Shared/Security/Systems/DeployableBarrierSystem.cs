@@ -43,20 +43,20 @@ public sealed partial class DeployableBarrierSystem : EntitySystem
 
         if (isDeployed && transform.GridUid != null)
         {
-            // Orion-Edit-Start
+            // <Trauma>
             if (!transform.Anchored)
                 _transform.AnchorEntity(uid, transform);
-            // Orion-Edit-End
+            // <Trauma>
 
             if (fixture != null)
                 _physics.SetHard(uid, fixture, true);
         }
         else
         {
-            // Orion-Edit-Start
+            // <Trauma>
             if (transform.Anchored)
                 _transform.Unanchor(uid, transform);
-            // Orion-Edit-End
+            // <Trauma>
 
             if (fixture != null)
                 _physics.SetHard(uid, fixture, false);

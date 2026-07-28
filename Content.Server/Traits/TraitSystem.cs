@@ -40,10 +40,10 @@ public sealed partial class TraitSystem : EntitySystem
             return;
         }
 
-        ApplyTraits(args.Mob, args.Profile); // Orion-Edit
+        ApplyTraits(args.Mob, args.Profile); // Trauma
     }
 
-    // Orion-Edit-Start
+    // <Trauma>
     public void ApplyTraits(EntityUid mob, HumanoidCharacterProfile profile)
     {
         foreach (var traitId in profile.TraitPreferences)
@@ -118,5 +118,5 @@ public sealed partial class TraitSystem : EntitySystem
                 handsComp: handsComponent);
         }
     }
-    // Orion-Edit-End
+    // <Trauma>
 }

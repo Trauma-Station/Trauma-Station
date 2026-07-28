@@ -33,10 +33,10 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
 
         SubscribeLocalEvent<PointsVendorComponent, ShopVendorBalanceEvent>(OnPointsBalance);
         SubscribeLocalEvent<PointsVendorComponent, ShopVendorPurchaseEvent>(OnPointsPurchase);
-        // Orion-Start
+        // <Trauma>
         SubscribeLocalEvent<BitrunningPointsVendorComponent, ShopVendorBalanceEvent>(OnBitrunningPointsBalance);
         SubscribeLocalEvent<BitrunningPointsVendorComponent, ShopVendorPurchaseEvent>(OnBitrunningPointsPurchase);
-        // Orion-End
+        // <Trauma>
 
         SubscribeLocalEvent<ShopVendorComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<ShopVendorComponent, BreakageEventArgs>(OnBreak);
@@ -67,16 +67,16 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
 
     private void OnPointsPurchase(Entity<PointsVendorComponent> ent, ref ShopVendorPurchaseEvent args)
     {
-        // Orion-Start
+        // <Trauma>
         if (args.Paid)
             return;
-        // Orion-End
+        // <Trauma>
 
         if (_points.GetPointComp(args.User) is { } idCard && _points.RemovePoints(idCard, args.Cost)) // Goobstation - borg Miningpoints
             args.Paid = true;
     }
 
-    // Orion-Start
+    // <Trauma>
     private void OnBitrunningPointsBalance(Entity<BitrunningPointsVendorComponent> ent, ref ShopVendorBalanceEvent args)
     {
         args.Balance = _bitrunningPoints.GetPointComp(args.User)?.Comp?.Points ?? 0;
@@ -90,7 +90,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
         if (_bitrunningPoints.GetPointComp(args.User) is { } account && _bitrunningPoints.RemovePoints(account, args.Cost))
             args.Paid = true;
     }
-    // Orion-End
+    // <Trauma>
     #endregion
 
     private void OnPowerChanged(Entity<ShopVendorComponent> ent, ref PowerChangedEvent args)

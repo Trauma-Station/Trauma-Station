@@ -602,7 +602,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
             return;
         }
 
-        // Orion-Start
+        // <Trauma>
         var activeCamera = monitor.ActiveCamera;
         if (activeCamera is { } activeCameraUid)
         {
@@ -623,9 +623,9 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
             activeCamera = activeForUi;
         }
-        // Orion-End
+        // <Trauma>
 
-        var state = new SurveillanceCameraMonitorUiState(GetNetEntity(activeCamera), // Goobstation | Orion-Edit
+        var state = new SurveillanceCameraMonitorUiState(GetNetEntity(activeCamera), // <Trauma>
             monitor.ActiveCameraAddress, monitor.KnownCameras, monitor.KnownMobileCameras); // Goobstation
         _userInterface.SetUiState(uid, SurveillanceCameraMonitorUiKey.Key, state);
     }
