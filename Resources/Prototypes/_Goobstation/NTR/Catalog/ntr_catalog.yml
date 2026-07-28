@@ -157,7 +157,7 @@
   productEntity: SpawnPodCoin
   icon:
     sprite: Objects/Misc/coins.rsi
-    state: coin_gold
+    state: coinGold_1
   cost:
     NTLoyaltyPoint: 10
   categories:
