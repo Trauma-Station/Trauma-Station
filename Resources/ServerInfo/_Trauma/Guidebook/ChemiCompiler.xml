@@ -71,8 +71,8 @@ Each register has one instruction to write it from the current cell, and one to 
 - [bold])[/bold] and [bold]([/bold] write and read [bold]tx[/bold]
 - [bold]'[/bold] and [bold]^[/bold] write and read [bold]ax[/bold]
 
-Getting these backwards is the single most common mistake. If the machine buzzes at you the first time you
-run something, check these first.
+The brace-style symbol of each pair writes the register from memory; the other reads it back. A program that
+appears to run cleanly but moves nothing has almost always got one of these pairs the wrong way round.
 
 ## Chemistry
 
@@ -90,7 +90,7 @@ except at the ejection port, which is what the ejection port is for.
 
 - [bold].[/bold] append the current cell to the output text as a character
 - [bold]~[/bold] lock this program so Load can no longer read it back. It can still be overwritten.
-- [bold]*[/bold] do nothing for a moment, for reactions that need time to finish
+- [bold]*[/bold] pauses briefly, for reactions that take time.
 
 # Speed
 

@@ -7,7 +7,7 @@
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   id: ChemiCompiler
   name: ChemiCompiler M7
-  description: A complicated chemistry device programmed in a language derived from Brainfuck. Ten reagent reservoirs, five registers, and absolutely no error messages.
+  description: A programmable chemical workbench with ten reservoir slots. Does exactly what your program says, which is rarely what you meant.
   placement:
     mode: SnapgridCenter
   components:

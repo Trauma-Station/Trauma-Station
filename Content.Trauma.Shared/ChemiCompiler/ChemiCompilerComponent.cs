@@ -156,8 +156,7 @@ public sealed partial class ChemiCompilerComponent : Component
 
     /// <summary>
     /// How long a <see cref="ChemFuck.Speed.Slow"/> instruction takes.
-    /// The slowest thing a single instruction can cost, so a program can give reactions with a time
-    /// component a moment to finish.
+    /// The slowest thing a single instruction can cost, so a program can pause long enough for a reaction
     /// </summary>
     [DataField]
     public TimeSpan SlowDelay = TimeSpan.FromSeconds(1);
