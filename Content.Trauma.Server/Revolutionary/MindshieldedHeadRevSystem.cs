@@ -5,7 +5,7 @@ using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
 
-namespace Content.Server.Revolutionary;
+namespace Content.Trauma.Server.Revolutionary;
 
 /// <summary>
 /// Handles putting fake mindshield implants into headrevs that start with a real one

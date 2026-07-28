@@ -1,6 +1,6 @@
-using Robust.Shared.Prototypes;
 
-namespace Content.Server.Revolutionary;
+
+namespace Content.Trauma.Server.Revolutionary;
 
 /// <summary>
 /// Component for headrev that needs a fake mindshield
