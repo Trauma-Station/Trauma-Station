@@ -68,7 +68,7 @@ public sealed partial class BorgDisguiseComponent : Component
     /// <summary>
     /// The color of the light when the borg is disguised.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public Color DisguisedLightColor = Color.White;
 
     #endregion
