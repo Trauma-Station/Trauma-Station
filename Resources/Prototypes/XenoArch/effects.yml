@@ -757,11 +757,12 @@
     - type: EntityTableSpawner
       absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
+      autoStack: true
       table:
         id: SilverOre1
         rolls: !type:ConstantNumberSelector
           value: 6
-        prob: 0.3
+        prob: 0.7
 
 - type: entity
   parent: BaseXenoArtifactEffect
@@ -780,6 +781,7 @@
     - type: EntityTableSpawner
       absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
+      autoStack: true
       table:
         id: PlasmaOre1
         rolls: !type:ConstantNumberSelector
@@ -803,6 +805,7 @@
     - type: EntityTableSpawner
       absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
+      autoStack: true
       table:
         id: GoldOre1
         rolls: !type:ConstantNumberSelector
@@ -826,6 +829,7 @@
     - type: EntityTableSpawner
       absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
+      autoStack: true
       table:
         id: UraniumOre1
         amount: !type:BinomialNumberSelector
@@ -1185,7 +1189,11 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+<<<<<<< HEAD
       absolute: true # Trauma
+=======
+      autoStack: true
+>>>>>>> 0687a19cd7 (feat: ConditionalSpawnerComponent can now stack items it spawns automatically (#39096))
       deleteSpawnerAfterSpawn: false
       table:
         id: SheetGlass
@@ -1200,7 +1208,11 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+<<<<<<< HEAD
       absolute: true # Trauma
+=======
+      autoStack: true
+>>>>>>> 0687a19cd7 (feat: ConditionalSpawnerComponent can now stack items it spawns automatically (#39096))
       deleteSpawnerAfterSpawn: false
       table:
         id: SheetSteel
@@ -1215,7 +1227,11 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+<<<<<<< HEAD
       absolute: true # Trauma
+=======
+      autoStack: true
+>>>>>>> 0687a19cd7 (feat: ConditionalSpawnerComponent can now stack items it spawns automatically (#39096))
       deleteSpawnerAfterSpawn: false
       table:
         id: SheetPlastic
