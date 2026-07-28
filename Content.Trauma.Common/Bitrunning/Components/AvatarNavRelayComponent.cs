@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Server.Bitrunning.Systems;
-
-namespace Content.Trauma.Server.Bitrunning.Components;
+namespace Content.Trauma.Common.Bitrunning.Components;
 
 [RegisterComponent]
-[Access(typeof(QuantumServerSystem), typeof(NetpodSystem))]
 public sealed partial class AvatarNavRelayComponent : Component
 {
     /// <summary>

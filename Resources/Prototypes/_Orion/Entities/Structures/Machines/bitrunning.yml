@@ -146,6 +146,7 @@
     nameSet: true
     mobile: true
   - type: Netpod
+  - type: NetpodLoadout
     allowedLoadout:
     - BitrunnerAvatarGear
     - BitrunnerAvatarPassengerGear

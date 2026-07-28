@@ -6,9 +6,8 @@ using Robust.Shared.Map;
 using System.Runtime.InteropServices;
 // </Trauma>
 using System.Linq;
-using Content.Trauma.Server.Bitrunning.Components;
+using Content.Trauma.Common.Bitrunning.Components;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Trauma.Shared.Bitrunning.Components;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power;

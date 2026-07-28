@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Trauma.Server.Bitrunning.Components;
 using Content.Trauma.Shared.Bitrunning;
 using Content.Trauma.Shared.Bitrunning.Components;
+using Content.Trauma.Common.Bitrunning.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Emag.Components;

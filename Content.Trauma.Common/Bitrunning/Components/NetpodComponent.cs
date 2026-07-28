@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Content.Shared.Humanoid.Prototypes;
 
-namespace Content.Trauma.Shared.Bitrunning.Components;
+namespace Content.Trauma.Common.Bitrunning.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class NetpodComponent : Component
 {
     [DataField]
@@ -30,18 +27,6 @@ public sealed partial class NetpodComponent : Component
     /// Internal re-entrancy guard while removing occupant from the pod container.
     /// </summary>
     public bool EjectingOccupant;
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<StartingGearPrototype>? PreferredLoadout = "BitrunnerAvatarGear";
-
-    [DataField]
-    public Dictionary<ProtoId<SpeciesPrototype>, ProtoId<StartingGearPrototype>> PreferredLoadoutSpecie = new();
-
-    [DataField]
-    public List<ProtoId<StartingGearPrototype>> AllowedLoadout = new();
-
-    [DataField]
-    public Dictionary<ProtoId<SpeciesPrototype>, List<ProtoId<StartingGearPrototype>>> AllowedLoadoutSpecie = new();
 
     [DataField]
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/_Orion/Machines/tram/tramopen.ogg", AudioParams.Default.WithVolume(-2f).WithVariation(0.1f));

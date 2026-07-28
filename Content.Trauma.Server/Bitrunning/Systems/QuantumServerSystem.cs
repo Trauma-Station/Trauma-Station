@@ -23,6 +23,7 @@ using Content.Server.Stunnable;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.SurveillanceCamera.Components;
 using Content.Lavaland.Common.Mobs;
+using Content.Trauma.Common.Bitrunning.Components;
 using Content.Trauma.Shared.Bitrunning;
 using Content.Trauma.Shared.Bitrunning.Components;
 using Content.Trauma.Shared.Bitrunning.Prototypes;
@@ -536,7 +537,7 @@ public sealed partial class QuantumServerSystem : EntitySystem
         _mind.TransferTo(mindId, avatar, mind: mind);
         PlayLocalSound(user, pod.ConnectStasisSound);
         PlayLocalSound(avatar, pod.ConnectAvatarSound);
-        TryApplyAvatarOutfit(avatar, user, server, pod);
+        TryApplyAvatarOutfit(avatar, user, server, podUid);
 
         if (HasComp<InternalsComponent>(avatar) && _internals.FindBestGasTank(avatar) is { } tank)
             _gasTank.ConnectToInternals(tank, user: avatar);
@@ -612,15 +613,15 @@ public sealed partial class QuantumServerSystem : EntitySystem
         return domain.DeleteAvatarOnDisconnect;
     }
 
-    private void TryApplyAvatarOutfit(EntityUid avatar, EntityUid user, QuantumServerComponent server, NetpodComponent pod)
+    private void TryApplyAvatarOutfit(EntityUid avatar, EntityUid user, QuantumServerComponent server, EntityUid podUid)
     {
-        if (!TryResolveLoadout(user, server, pod, out var loadoutId))
+        if (!TryResolveLoadout(user, server, podUid, out var loadoutId))
             return;
 
         _outfit.SetOutfit(avatar, loadoutId);
     }
 
-    private bool TryResolveLoadout(EntityUid user, QuantumServerComponent server, NetpodComponent pod, out string loadout)
+    private bool TryResolveLoadout(EntityUid user, QuantumServerComponent server, EntityUid podUid, out string loadout)
     {
         loadout = string.Empty;
 
@@ -632,7 +633,7 @@ public sealed partial class QuantumServerSystem : EntitySystem
             return true;
         }
 
-        if (_netpod.GetResolvedPreferredLoadout(pod, user) is { } preferredLoadout)
+        if (TryComp<NetpodLoadoutComponent>(podUid, out var loadoutComp) && _netpod.GetResolvedPreferredLoadout(loadoutComp, user) is { } preferredLoadout)
         {
             loadout = preferredLoadout;
             return true;

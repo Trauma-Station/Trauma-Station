@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Bitrunning.Components;
 using Content.Server.Popups;
-using Content.Trauma.Server.Bitrunning.Components;
 using Content.Server.Power.Components;
+using Content.Trauma.Server.Bitrunning.Components;
 using Content.Trauma.Shared.Bitrunning;
 using Content.Trauma.Shared.Bitrunning.Components;
 using Content.Shared.Destructible;
@@ -258,36 +259,39 @@ public sealed partial class NetpodSystem : EntitySystem
         if (!_prototype.HasIndex<StartingGearPrototype>(args.LoadoutId))
             return;
 
-        HashSet<ProtoId<StartingGearPrototype>> allowed = GetAllowedLoadouts(ent.Comp, args.Actor);
+        if (!TryComp<NetpodLoadoutComponent>(ent.Owner, out var loadout))
+            return;
+
+        HashSet<ProtoId<StartingGearPrototype>> allowed = GetAllowedLoadouts(loadout, args.Actor);
 
         if (!allowed.Contains(args.LoadoutId))
             return;
 
-        ent.Comp.PreferredLoadout = args.LoadoutId;
-        Dirty(ent);
+        loadout.PreferredLoadout = args.LoadoutId;
+        Dirty(ent.Owner, loadout);
         UpdateUi(ent, args.Actor);
     }
 
-    private HashSet<ProtoId<StartingGearPrototype>> GetAllowedLoadouts(NetpodComponent pod, EntityUid user)
+    private HashSet<ProtoId<StartingGearPrototype>> GetAllowedLoadouts(NetpodLoadoutComponent loadout, EntityUid user)
     {
-        if (HasCompInContainerTree<BitrunningProfileDiskComponent>(user) && TryComp<HumanoidProfileComponent>(user, out var humanoid) && pod.AllowedLoadoutSpecie.TryGetValue(humanoid.Species, out var speciesLoadouts))
+        if (HasCompInContainerTree<BitrunningProfileDiskComponent>(user) && TryComp<HumanoidProfileComponent>(user, out var humanoid) && loadout.AllowedLoadoutSpecie.TryGetValue(humanoid.Species, out var speciesLoadouts))
             return new HashSet<ProtoId<StartingGearPrototype>>(speciesLoadouts);
 
-        return new HashSet<ProtoId<StartingGearPrototype>>(pod.AllowedLoadout);
+        return new HashSet<ProtoId<StartingGearPrototype>>(loadout.AllowedLoadout);
     }
 
-    public ProtoId<StartingGearPrototype>? GetResolvedPreferredLoadout(NetpodComponent pod, EntityUid user)
+    public ProtoId<StartingGearPrototype>? GetResolvedPreferredLoadout(NetpodLoadoutComponent loadout, EntityUid user)
     {
         if (HasCompInContainerTree<BitrunningProfileDiskComponent>(user) && TryComp<HumanoidProfileComponent>(user, out var humanoid))
         {
-            if (pod.PreferredLoadout != null && pod.AllowedLoadoutSpecie.TryGetValue(humanoid.Species, out var allowed) && allowed.Contains(pod.PreferredLoadout.Value))
-                return pod.PreferredLoadout;
+            if (loadout.PreferredLoadout != null && loadout.AllowedLoadoutSpecie.TryGetValue(humanoid.Species, out var allowed) && allowed.Contains(loadout.PreferredLoadout.Value))
+                return loadout.PreferredLoadout;
 
-            if (pod.PreferredLoadoutSpecie.TryGetValue(humanoid.Species, out var speciePreferred))
+            if (loadout.PreferredLoadoutSpecie.TryGetValue(humanoid.Species, out var speciePreferred))
                 return speciePreferred;
         }
 
-        return pod.PreferredLoadout;
+        return loadout.PreferredLoadout;
     }
 
     private bool HasCompInContainerTree<T>(EntityUid root) where T : Component
@@ -323,18 +327,26 @@ public sealed partial class NetpodSystem : EntitySystem
     {
         _startingGearToJobName ??= BuildStartingGearLookup();
         var loadouts = new List<NetpodLoadoutEntry>();
-        HashSet<ProtoId<StartingGearPrototype>> allowed = GetAllowedLoadouts(ent.Comp, user);
 
-        foreach (ProtoId<StartingGearPrototype> loadoutId in allowed)
+        if (TryComp<NetpodLoadoutComponent>(ent.Owner, out var loadoutComp))
         {
-            if (!_prototype.TryIndex(loadoutId, out _))
-                continue;
+            HashSet<ProtoId<StartingGearPrototype>> allowed = GetAllowedLoadouts(loadoutComp, user);
 
-            loadouts.Add(new NetpodLoadoutEntry(loadoutId, GetLoadoutDisplayName(loadoutId)));
+            foreach (ProtoId<StartingGearPrototype> loadoutId in allowed)
+            {
+                if (!_prototype.TryIndex(loadoutId, out _))
+                    continue;
+
+                loadouts.Add(new NetpodLoadoutEntry(loadoutId, GetLoadoutDisplayName(loadoutId)));
+            }
+
+            loadouts.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+            _ui.SetUiState(ent.Owner, NetpodUiKey.Key, new NetpodBoundUiState(GetResolvedPreferredLoadout(loadoutComp, user), loadouts));
         }
-
-        loadouts.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
-        _ui.SetUiState(ent.Owner, NetpodUiKey.Key, new NetpodBoundUiState(GetResolvedPreferredLoadout(ent.Comp, user), loadouts));
+        else
+        {
+            _ui.SetUiState(ent.Owner, NetpodUiKey.Key, new NetpodBoundUiState(null, loadouts));
+        }
     }
 
     public bool EjectOccupant(EntityUid podUid)
