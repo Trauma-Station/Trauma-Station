@@ -7,6 +7,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
@@ -26,9 +27,10 @@ public sealed partial class OrganChipSystem : EntitySystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private EntityQuery<PullableComponent> _pullableQuery = default!;
+    [Dependency] private EntityQuery<BypassInteractionChecksComponent> _bypassQuery = default!;
     [Dependency] private EntityQuery<OrganChipComponent> _query = default!;
     [Dependency] private EntityQuery<OrganChipContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<PullableComponent> _pullableQuery = default!;
 
     public static readonly VerbCategory ChipsCategory = new("verb-categories-organ-chips", "/Textures/_Trauma/Objects/Specific/brain_chips.rsi/icon.png");
 
@@ -158,7 +160,7 @@ public sealed partial class OrganChipSystem : EntitySystem
 
         var user = args.User;
         // you remember which skill chip is installing in yourself, for others they are just numbered
-        var known = _body.GetBody(ent.Owner) == user;
+        var known = _body.GetBody(ent.Owner) == user || _bypassQuery.HasComp(user);
 
         var i = 0;
         foreach (var chip in ent.Comp.Container.ContainedEntities)
