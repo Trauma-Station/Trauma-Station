@@ -24,7 +24,7 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
-    - id: MorphRule
+    - id: MorphMidroundRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma

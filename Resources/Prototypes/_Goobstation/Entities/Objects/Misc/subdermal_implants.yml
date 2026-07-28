@@ -57,17 +57,6 @@
 
 - type: entity
   parent: BaseSubdermalImplant
-  id: KravMagaImplant
-  name: krav maga implant
-  description: This implant allows the user to perform various Krav Maga moves.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ComponentsImplant
-    added:
-    # - type: KravMaga
-
-- type: entity
-  parent: BaseSubdermalImplant
   id: AutoinjectorImplant
   name: autoinjector implant
   description: This implant allows the user to inject themselves with a chemical on use. Ephedrine by default.
@@ -88,6 +77,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: NutrimentPumpImplant
+  - type: SubdermalImplant
+    whitelist:
+      components:
+      - HumanoidProfile
 
 - type: entity
   parent: BaseSubdermalImplant

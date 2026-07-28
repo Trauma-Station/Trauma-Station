@@ -2917,6 +2917,7 @@
     needsHands: false
   - type: NoSlip
   - type: Spider
+    spawnsWebsAsNonPlayer: false
   - type: IgnoreSpiderWeb
   - type: Bloodstream
     bloodReferenceSolution:
@@ -2991,10 +2992,9 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
+  name: giant spider # Trauma
   parent: MobSpiderBase
   id: MobGiantSpider
-  abstract: true
-  name: giant spider # Trauma
   description: Widely recognized to be the literal worst thing in existence.
   components:
   - type: Sprite
@@ -3057,6 +3057,7 @@
   - type: ShadowCocoonMaker
     cocoonDelay: 15
     shadowCocoon: SpiderEggsHuman
+    verbText: "Infest victim"
   - type: EggLayer
     eggSpawn:
     - id: SpiderEggs

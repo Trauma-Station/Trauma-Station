@@ -19,3 +19,4 @@
     minimumPlayers: 30
     duration: null
     maxOccurrences: 1
+  - type: WraithRule

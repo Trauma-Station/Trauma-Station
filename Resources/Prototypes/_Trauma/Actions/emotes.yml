@@ -17,10 +17,13 @@
     - blushes
     - blushes.
     - blushes!
-  event: !type:AnimationVisualEmoteEvent
-    layer: Blush
-    time: 5.2
-    key: emoteAnimBlush
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationVisualEmoteEvent
+      layer: Blush
+      time: 5.2
+      key: emoteAnimBlush
 
 - type: emote
   id: Tongue
@@ -39,7 +42,10 @@
     - sticks her tongue out
     - sticks their tongue out
     - sticks its tongue out
-  event: !type:AnimationVisualEmoteEvent
-    layer: Tongue
-    time: 5.2
-    key: emoteAnimTongue
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationVisualEmoteEvent
+      layer: Tongue
+      time: 5.2
+      key: emoteAnimTongue
