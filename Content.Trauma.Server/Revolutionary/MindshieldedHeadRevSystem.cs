@@ -1,35 +1,27 @@
-using Content.Server.Roles.Jobs;
+using Content.Server.Antag;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
-using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
-using Content.Shared.Revolutionary.Components;
 
 namespace Content.Server.Revolutionary;
 
 /// <summary>
-/// Handles the QM's ability to get a fake mindshield implant if they roll Head Rev.
+/// Handles putting fake mindshield implants into headrevs that start with a real one
 /// </summary>
-public sealed partial class HeadRevQMSystem : EntitySystem
+public sealed partial class MindshieldedHeadRevSystem : EntitySystem
 {
-    [Dependency] private JobSystem _jobSystem = default!;
     [Dependency] private SharedSubdermalImplantSystem _subdermal = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentInit>(OnHeadRevInit);
+        SubscribeLocalEvent<MindshieldedHeadRevComponent, AfterAntagEntitySelectedEvent>(OnAntagSelected);
     }
 
-    private void OnHeadRevInit(EntityUid uid, HeadRevolutionaryComponent comp, ComponentInit args)
+    private void OnAntagSelected(Entity<MindshieldedHeadRevComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        if (!TryComp<MindContainerComponent>(uid, out var mindContainer) ||
-            !_jobSystem.MindTryGetJob(mindContainer.Mind, out var job) ||
-            job.ID != "Quartermaster")
-        {
-            return;
-        }
+        var uid = args.EntityUid;
 
         if (TryComp<FakeMindShieldComponent>(uid, out var fakeMindShield) && fakeMindShield.IsEnabled)
             return;
@@ -46,7 +38,7 @@ public sealed partial class HeadRevQMSystem : EntitySystem
             break;
         }
 
-        _subdermal.AddImplant(uid, "FakeMindShieldImplant");
+        _subdermal.AddImplant(uid, ent.Comp.FakeMindShieldImplant);
 
         if (TryComp<FakeMindShieldComponent>(uid, out fakeMindShield))
         {
