@@ -12280,3 +12280,14 @@ Entries:
   id: 1346
   time: '2026-07-28T22:07:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3590
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen getting thirsty, having fingerprints, etc.
+  - type: Fix
+    message: Fixed plasmamen being able to gib from limb damage instead of torso only.
+  - type: Fix
+    message: Fixed not being able to ash people with extreme heat damage.
+  id: 1347
+  time: '2026-07-28T22:18:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3809
