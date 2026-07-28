@@ -19,7 +19,7 @@ public sealed partial class MindshieldRemovingAntagSystem : EntitySystem
     {
         var uid = args.EntityUid;
 
-        if (TryComp<FakeMindShieldComponent>(uid, out var fakeMindShield) && fakeMindShield.IsEnabled)
+        if (TryComp<FakeMindShieldComponent>(uid, out var fakeMindShield))
             return;
 
         if (!TryComp<ImplantedComponent>(uid, out var implanted))
