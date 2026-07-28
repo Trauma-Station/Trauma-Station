@@ -12,13 +12,7 @@ public sealed partial class MindshieldedHeadRevSystem : EntitySystem
 {
     [Dependency] private SharedSubdermalImplantSystem _subdermal = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MindshieldedHeadRevComponent, AfterAntagEntitySelectedEvent>(OnAntagSelected);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAntagSelected(Entity<MindshieldedHeadRevComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         var uid = args.EntityUid;
