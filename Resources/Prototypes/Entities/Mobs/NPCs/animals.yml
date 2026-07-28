@@ -2991,10 +2991,9 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
+  name: giant spider # Trauma
   parent: MobSpiderBase
   id: MobGiantSpider
-  abstract: true
-  name: giant spider # Trauma
   description: Widely recognized to be the literal worst thing in existence.
   components:
   - type: Sprite
