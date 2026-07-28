@@ -8,14 +8,14 @@ using Content.Shared.Mindshield.Components;
 namespace Content.Trauma.Server.Revolutionary;
 
 /// <summary>
-/// Handles putting fake mindshield implants into headrevs that start with a real one
+/// Handles removing a real mindshield and replacing it with a fake one for antags who start with a real mindshield
 /// </summary>
-public sealed partial class MindshieldedHeadRevSystem : EntitySystem
+public sealed partial class MindshieldRemovingAntagSystem : EntitySystem
 {
     [Dependency] private SharedSubdermalImplantSystem _subdermal = default!;
 
     [SubscribeLocalEvent]
-    private void OnAntagSelected(Entity<MindshieldedHeadRevComponent> ent, ref AfterAntagEntitySelectedEvent args)
+    private void OnAntagSelected(Entity<MindshieldRemovingAntagComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         var uid = args.EntityUid;
 
