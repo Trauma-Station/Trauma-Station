@@ -20,10 +20,10 @@
   components:
   - type: WeatherEffects
     conditions:
-      - !type:WhitelistCondition
-        blacklist:
-          components:
-          - RadStormImmune
+    - !type:WhitelistCondition
+      blacklist:
+        components:
+        - RadStormImmune
     effects:
     - !type:HealthChange
       ignoreResistances: false
