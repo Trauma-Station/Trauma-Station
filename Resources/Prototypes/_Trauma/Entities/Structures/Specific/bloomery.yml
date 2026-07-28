@@ -174,7 +174,7 @@
 # Lit
 
 - type: entity
-  parent: BaseBloomery
+  parent: BaseBloomeryLit
   id: BloomeryLitBrass
   suffix: Brass
   description: Loaded with brass, give it some time to burn and it will be ready.
@@ -195,7 +195,7 @@
     node: bloomerybrasslit
 
 - type: entity
-  parent: BaseBloomery
+  parent: BaseBloomeryLit
   id: BloomeryLitSteel
   suffix: Steel
   description: Loaded with steel, give it some time to burn and it will be ready.
@@ -216,7 +216,7 @@
     node: bloomerysteellit
 
 - type: entity
-  parent: BaseBloomery
+  parent: BaseBloomeryLit
   id: BloomeryLitPlasteel
   name: lit bloomery
   description: Loaded with plasteel, give it some time to burn and it will be ready.
