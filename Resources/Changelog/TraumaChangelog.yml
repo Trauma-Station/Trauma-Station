@@ -12236,3 +12236,12 @@ Entries:
   id: 1340
   time: '2026-07-28T11:52:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3792
+- author: dasgooty
+  changes:
+  - type: Tweak
+    message: CE's Hardsuit now makes you immune to radiation storms.
+  - type: Tweak
+    message: Xenobio slimes are now immune to radiation storms.
+  id: 1341
+  time: '2026-07-28T12:06:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3782
