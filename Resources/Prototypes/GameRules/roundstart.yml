@@ -36,7 +36,7 @@
     #- id: SubXenoborgs # no
     #  prob: 0.05
     - id: SubHeretic
-      prob: 0.2
+      prob: 0.1
     - id: Devil
       prob: 0.05
     - id: ShadowlingRoundstart
@@ -46,9 +46,9 @@
     - id: WraithRoundstart
       prob: 0.02
     - id: SubVampire
-      prob: 0.2
+      prob: 0.1
     - id: SubChangeling
-      prob: 0.1 # extinct predator species...
+      prob: 0.5 # extinct predator species...
     # </Trauma>
 
 - type: entity
