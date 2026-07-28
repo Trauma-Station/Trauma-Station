@@ -12,8 +12,5 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/Holoprojector/medical.rsi
     state: icon
-  - type: Tag
-    tags:
-    - HolofanProjector
   - type: StaticPrice
     price: 50
