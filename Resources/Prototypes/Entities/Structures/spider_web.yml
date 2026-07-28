@@ -82,7 +82,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      # - !type:SpawnEntitiesBehavior # Lag prevention, todo, add way to get silk without webs
+      # - !type:SpawnEntitiesBehavior # Trauma, Lag prevention, todo, add way to get silk without webs
       #   spawn:
       #     MaterialWebSilk:
       #       min: 0
