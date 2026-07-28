@@ -799,32 +799,6 @@
       map: [ "enum.MiningScannerVisualLayers.Overlay", "gib" ]
 
 - type: entity
-  id: WallRockAndesiteGibtonite
-  parent: [ BaseRockGibtonite ] # Trauma, small refractor
-  name: andesite # Trauma, small refractor
-  components:
-  #<Trauma>
-  - type: Icon
-    sprite: Structures/Walls/rock.rsi
-    state: rock_andesite
-  #</Trauma>
-  - type: Sprite
-    sprite: Structures/Walls/rock.rsi # Trauma
-    layers:
-    - state: rock_andesite
-    - map: [ "enum.EdgeLayer.South" ]
-      state: rock_andesite_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: rock_andesite_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: rock_andesite_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: rock_andesite_west
-    - state: gibtonite_inactive
-      visible: false
-      map: [ "enum.MiningScannerVisualLayers.Overlay", "gib" ]
-
-- type: entity
   id: IronRockDiamond
   parent: IronRock
   suffix: Diamond
