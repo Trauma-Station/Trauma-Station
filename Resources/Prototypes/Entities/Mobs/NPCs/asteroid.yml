@@ -34,6 +34,9 @@
   name: goliath
   description: A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions.
   components:
+  # <Trauma>
+  - type: Fauna
+  # </Trauma>
   - type: Sprite
     sprite: Mobs/Aliens/Asteroid/goliath.rsi
     layers:
@@ -98,7 +101,6 @@
       amount: 1
     - id: MaterialBones1 # Lavaland Change
       maxAmount: 2
-  - type: Fauna # Lavaland Change
 
 - type: entity
   parent: BaseAction
@@ -412,7 +414,7 @@
         Quantity: 200
   - type: NpcFactionMember
     factions:
-    - SimpleHostile
+    - Lavafauna # Trauma - was SimpleHostile
   - type: HTN
     rootTask:
       task: BasiliskCompound
