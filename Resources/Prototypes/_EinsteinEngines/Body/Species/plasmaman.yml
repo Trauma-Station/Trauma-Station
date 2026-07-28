@@ -91,6 +91,7 @@
   - type: Absorbable
   - type: WraithAbsorbable
   - type: Scent
+  - type: Mutatable # mutating the fungus..?
   - type: ZombieImmune
   - type: Blindable
   - type: FireVisuals
