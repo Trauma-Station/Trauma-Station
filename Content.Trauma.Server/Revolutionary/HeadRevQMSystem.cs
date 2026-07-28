@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Roles.Jobs;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
