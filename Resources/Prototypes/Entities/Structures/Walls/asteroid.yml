@@ -81,7 +81,7 @@
   - type: Transform
     noRot: true
   - type: Damageable
-    damageModifierSet: Rock 
+    damageModifierSet: Rock
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: IconSmooth
