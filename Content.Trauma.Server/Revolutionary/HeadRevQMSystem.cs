@@ -10,7 +10,7 @@ namespace Content.Server.Revolutionary;
 /// <summary>
 /// Handles the QM's ability to get a fake mindshield implant if they roll Head Rev.
 /// </summary>
-public sealed class HeadRevQMSystem : EntitySystem
+public sealed partial class HeadRevQMSystem : EntitySystem
 {
     [Dependency] private JobSystem _jobSystem = default!;
     [Dependency] private SharedSubdermalImplantSystem _subdermal = default!;
