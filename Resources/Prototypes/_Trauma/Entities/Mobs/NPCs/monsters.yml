@@ -600,6 +600,8 @@
   id: MobCrabTiny
   name: red crab
   components:
+  - type: Penetratable
+    penetrateDamage: 3
   - type: Temperature
   - type: TemperatureDamage
     heatDamageThreshold: 423
