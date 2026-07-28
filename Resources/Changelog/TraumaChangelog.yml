@@ -12190,3 +12190,20 @@ Entries:
   id: 1336
   time: '2026-07-27T22:44:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3779
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      "Flap wings" emote as moth now actually flaps your wings. Also dash flaps
+      your wings.
+  - type: Add
+    message: Moth wings can now burn upon taking 35 heat damage.
+  - type: Add
+    message: Some wings were added.
+  - type: Fix
+    message: Fix not being able to change wing/tail marking color.
+  - type: Remove
+    message: Farts removed because of shitcode crimes.
+  id: 1337
+  time: '2026-07-28T00:44:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3659
