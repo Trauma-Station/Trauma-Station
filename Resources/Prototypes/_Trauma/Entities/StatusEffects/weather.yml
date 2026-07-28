@@ -42,6 +42,7 @@
     - AreaRadstorm
     - AreaLootRoom
     - AreaPrisonShower # not quite toilet
+    - AreaToilet
     - AreaShuttleAbductor
     - AreaShuttleNukie
 
