@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: tokenListing
   id: MinorRoundstartAntagToken
   name: trauma-balanceui-shop-buy-minor-roundstart-token-antag
