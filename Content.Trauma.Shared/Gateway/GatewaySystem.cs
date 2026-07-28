@@ -137,13 +137,13 @@ public sealed partial class GatewaySystem : EntitySystem
             return;
 
         // TODO: admin log???
-        ClosePortal(ent.AsNullable(), update: false);
+        ClosePortal(ent.AsNullable());
         OpenPortal(ent, (dest, destComp));
     }
 
     private void OpenPortal(Entity<GatewayComponent> ent, Entity<GatewayComponent> dest)
     {
-        _linkedEntity.OneWayLink(ent.Owner, dest.Owner);
+        _linkedEntity.TryLink(ent.Owner, dest.Owner);
 
         var sourcePortal = EnsureComp<PortalComponent>(ent);
         var targetPortal = EnsureComp<PortalComponent>(dest);
@@ -166,7 +166,7 @@ public sealed partial class GatewaySystem : EntitySystem
         UpdateAppearance(dest);
     }
 
-    private void ClosePortal(Entity<GatewayComponent?> ent, bool update = true)
+    private void ClosePortal(Entity<GatewayComponent?> ent)
     {
         if (!_query.Resolve(ent, ref ent.Comp))
             return;
@@ -187,9 +187,6 @@ public sealed partial class GatewaySystem : EntitySystem
 
         _linkedEntity.TryUnlink(ent.Owner, dest.Value);
         RemComp<PortalComponent>(dest.Value);
-
-        if (!update)
-            return;
 
         UpdateUI((ent, ent.Comp));
         UpdateAppearance(ent);
