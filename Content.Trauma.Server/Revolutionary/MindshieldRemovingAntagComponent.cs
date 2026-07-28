@@ -1,4 +1,3 @@
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Revolutionary;
 
