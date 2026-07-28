@@ -12214,3 +12214,18 @@ Entries:
   id: 1338
   time: '2026-07-28T04:02:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3785
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Spider cocoons prevent bodies rotting
+  - type: Tweak
+    message: Spiders web cooldown is now 10 seconds
+  - type: Tweak
+    message: AI spiders no longer make webs (they spam it endlessly)
+  - type: Tweak
+    message: Webs no longer drop silk
+  - type: Tweak
+    message: Cocoons spawn baby spiders 50% slower
+  id: 1339
+  time: '2026-07-28T04:30:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3781
