@@ -12229,3 +12229,10 @@ Entries:
   id: 1339
   time: '2026-07-28T04:30:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3781
+- author: SPCR
+  changes:
+  - type: Fix
+    message: Fixed bloomeries no longer damaging themselves
+  id: 1340
+  time: '2026-07-28T11:52:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3792
