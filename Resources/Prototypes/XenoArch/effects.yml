@@ -1189,11 +1189,8 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
-<<<<<<< HEAD
       absolute: true # Trauma
-=======
       autoStack: true
->>>>>>> 0687a19cd7 (feat: ConditionalSpawnerComponent can now stack items it spawns automatically (#39096))
       deleteSpawnerAfterSpawn: false
       table:
         id: SheetGlass
@@ -1208,11 +1205,8 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
-<<<<<<< HEAD
       absolute: true # Trauma
-=======
       autoStack: true
->>>>>>> 0687a19cd7 (feat: ConditionalSpawnerComponent can now stack items it spawns automatically (#39096))
       deleteSpawnerAfterSpawn: false
       table:
         id: SheetSteel
@@ -1227,11 +1221,8 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
-<<<<<<< HEAD
       absolute: true # Trauma
-=======
       autoStack: true
->>>>>>> 0687a19cd7 (feat: ConditionalSpawnerComponent can now stack items it spawns automatically (#39096))
       deleteSpawnerAfterSpawn: false
       table:
         id: SheetPlastic

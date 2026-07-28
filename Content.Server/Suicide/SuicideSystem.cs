@@ -180,7 +180,7 @@ public sealed partial class SuicideSystem : SharedSuicideSystem
         }
 
         // <Trauma> - use slash for mobs and shock for clanker
-        args.DamageType ??= _silicon.IsSilicon(victim))
+        args.DamageType ??= _silicon.IsSilicon(victim)
             ? "Shock" : "Slash";
         // </Trauma>
         ApplyLethalDamage(victim, args.DamageType);
