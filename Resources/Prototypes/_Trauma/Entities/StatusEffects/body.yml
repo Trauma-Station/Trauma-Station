@@ -18,3 +18,13 @@
   - type: GrantComponentsStatusEffect
     components:
     - type: BlurryVision
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectWingsOpen
+  name: wings open
+  components:
+  - type: ModifyMarkingStatusEffect
+    layer: Wings
+    organ: Wings
+    suffix: Open
