@@ -4,19 +4,16 @@ using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Mobs;
 
-/// <see cref="DeathgaspComponent"/>
-public sealed partial class DeathgaspSystem: EntitySystem
+/// <summary>
+/// A system that handles death gasps, an emote a character makes when they die.
+/// </summary>
+/// <seealso cref="DeathgaspComponent"/>
+public sealed partial class DeathgaspSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<DeathgaspComponent, MobStateChangedEvent>(OnMobStateChanged);
-    }
-
-    private void OnMobStateChanged(EntityUid uid, DeathgaspComponent component, MobStateChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnMobStateChanged(Entity<DeathgaspComponent> ent, ref MobStateChangedEvent args)
     {
         // don't deathgasp if they arent going straight from crit to dead
         if (component.NeedsCritical // Goobstation
@@ -24,7 +21,7 @@ public sealed partial class DeathgaspSystem: EntitySystem
             || args.NewMobState != MobState.Dead)
             return;
 
-        Deathgasp(uid, component);
+        Deathgasp(ent, ent.Comp);
     }
 
     /// <summary>
