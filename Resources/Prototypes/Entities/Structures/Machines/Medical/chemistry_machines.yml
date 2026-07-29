@@ -1,15 +1,6 @@
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2024 Trevor Day <tday93@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: BaseTabletopChemicalMachine
-  parent: [ BaseMachinePowered, SmallConstructibleMachine ]
+  parent: [ BaseMachinePowered, SmallConstructibleMachine, BaseSmallConstructibleMachineDestructible ]
   abstract: true
   components:
   - type: Transform
@@ -45,6 +36,14 @@
       mixer: !type:ContainerSlot
       machine_board: !type:Container
       machine_parts: !type:Container
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
 
 - type: entity
   id: MachineElectrolysisUnit
@@ -85,9 +84,9 @@
   - type: Machine
     board: ElectrolysisUnitMachineCircuitboard
   - type: ApcPowerReceiver
-    powerLoad: 0
+    powerLoad: 5
   - type: PowerState
-    idlePowerDraw: 0
+    idlePowerDraw: 5
     workingPowerDraw: 1000 # for a lab-grade machine
 
 # TODO centrifuge should spill the vial if the lid is off
@@ -137,7 +136,7 @@
   - type: Machine
     board: CentrifugeMachineCircuitboard
   - type: ApcPowerReceiver
-    powerLoad: 0
+    powerLoad: 5
   - type: PowerState
-    idlePowerDraw: 0
+    idlePowerDraw: 5
     workingPowerDraw: 500

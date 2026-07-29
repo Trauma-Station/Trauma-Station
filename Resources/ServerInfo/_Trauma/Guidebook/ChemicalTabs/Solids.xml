@@ -103,7 +103,7 @@ A cloud of smoke can be created by combining the following ingredients:
 
 Smoke carries any extra chems in its reaction medium up to the amount of smoke you make, for example;
 
-a 5-5-5 mix can carry 5u of mutagen and pass it onto anyone who enteres the smoke cloud.
+a 5-5-5 mix can carry 5u of mutagen and pass it onto anyone who enters the smoke cloud.
 
 ## Suture
   <Box>
@@ -124,7 +124,19 @@ Sutures can be created by microwaving the following ingredients for 10 seconds:
 - 20 units of Tranexamic Acid
 - 20 units of Cryptobiolin
 
+  ## Synthmeat
+    <Box>
+      <GuideEntityEmbed Entity="FoodMeatSynth" Captain="Synthmeat"/>
+    </Box>
 
-<GuideReagentGroupEmbed Group="Solids"/>
+  Synthmeat can be created by combining the following ingredients
+  - 10 Sodium Polyacrylate
+  - 5 Phenol
+  - 5 Blood
+  - 10 Carbon
+
+  Once created you can grind synthmeat into synthflesh to then be centrifuged into synthcells which are an extremely effective treatment for toxin damage when sprayed upon someone
+
+  <GuideReagentGroupEmbed Group="Solids"/>
 
 </Document>

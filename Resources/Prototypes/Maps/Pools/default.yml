@@ -6,6 +6,7 @@
   - AreaMaints # for ambience and maints spawn rules
   - AreaHallway # for carp migration
   requiredEntities:
+  - SpawnPointExtraAiCore # for maps with AI (almost all of them) to work with triumvirate station trait
   - MachineMaterialSilo # for main departments
   - MachineMasterMaterialSilo # for cargo to easily distribute mats to department silos
   maps:
@@ -21,7 +22,7 @@
   - Oasis
   - Omega
   - Origin
-  - Saltern # We love Saltern around here - Ronstation
+  #- Saltern # DEATH TO SALTERN
   - Packed
   #- Barratry
   - Kettle
@@ -30,7 +31,7 @@
   #- Delta # decals are overlapping everywhere and have Z fighting
   #- Chloris
   - Cog
-  #- Reach # Kill it. - Ronstation
+  - Reach
   #- Serpentcrest
-  - Nume
-  #- Freighter # Also kill it - Ronstation
+  #- Nume # slop
+  #- Freighter #people hate it

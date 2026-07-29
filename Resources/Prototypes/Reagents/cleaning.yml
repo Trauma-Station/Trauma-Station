@@ -11,6 +11,13 @@
   boilingPoint: 111.0
   meltingPoint: -5.0
   metabolisms:
+    # <Trauma>
+    Digestion:
+      effects:
+      - !type:DiseaseProgressChange
+        affectedType: Parasite
+        progressModifier: -0.15
+    # </Trauma>
     Bloodstream:
       effects:
       - !type:HealthChange
@@ -26,9 +33,6 @@
       - !type:Emote
         emote: Scream
         probability: 0.15
-      - !type:DiseaseProgressChange # Goob
-        affectedType: Viral
-        progressModifier: -0.15 # extremely strong antiviral
   tileReactions:
   - !type:CleanTileReaction
     cleanCost: 0.01

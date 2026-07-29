@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 qwerltaz <69696513+qwerltaz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: BaseWallmountMetallic
   id: StationMapBroken
@@ -15,22 +5,22 @@
   description: A virtual map of the surrounding station.
   suffix: Wall broken
   components:
-    - type: Sprite
-      sprite: Structures/Machines/station_map.rsi
-      drawdepth: WallMountedItems
-      layers:
-        - state: station_map_broken
-    - type: Destructible
-      thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 100
-          behaviors:
-            - !type:PlaySoundBehavior
-              sound:
-                collection: GlassBreak
-            - !type:DoActsBehavior
-              acts: [ "Destruction" ]
+  - type: Sprite
+    sprite: Structures/Machines/station_map.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: station_map_broken
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: BaseWallmountMachine
@@ -39,83 +29,75 @@
   description: A virtual map of the surrounding station.
   suffix: Wall
   components:
-    - type: WallMount
-      arc: 360
-    - type: Appearance
-    - type: StationMap
-    - type: Sprite
-      sprite: Structures/Machines/station_map.rsi
-      layers:
-      - state: station_map0
-      - state: unshaded
-        shader: unshaded
-        map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-    - type: Icon
-      sprite: Structures/Machines/station_map.rsi
-      state: station_map0
-    - type: GenericVisualizer
-      visuals:
-        enum.PowerDeviceVisuals.Powered:
-          enum.PowerDeviceVisualLayers.Powered:
-            True: { visible: true }
-            False: { visible: false }
-    - type: ContainerFill
-      containers:
-        board: [ StationMapCircuitboard ]
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-    - type: ApcPowerReceiver
-      powerLoad: 50
-    - type: PowerState
-      idlePowerDraw: 50
-      workingPowerDraw: 200
-    - type: UIPowerState
-    - type: Construction
-      graph: StationMap
-      node: station_map
-    - type: ActivatableUIRequiresPower
-    - type: ActivatableUI
-      key: enum.StationMapUiKey.Key
-    - type: Destructible
-      thresholds:
-      - trigger: # Excess damage, don't spawn entities
-          !type:DamageTrigger
-          damage: 200
-        behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: GlassBreak
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: GlassBreak
-        - !type:SpawnEntitiesBehavior
-          spawn:
-            StationMapBroken:
-              min: 1
-              max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - type: UserInterface
-      interfaces:
-        enum.StationMapUiKey.Key:
-          type: StationMapBoundUserInterface
-    - type: EmitSoundOnUIOpen
-      sound:
-        collection: Keyboard
-        params:
-          volume: -1
-          variation: 0.10
-          pitch: 1.10  # low pitch keyboard sounds feel kinda weird
-      blacklist:
-        tags:
-        - NoConsoleSound
+  - type: WallMount
+    arc: 360
+  - type: Appearance
+  - type: StationMap
+  - type: Sprite
+    sprite: Structures/Machines/station_map.rsi
+    layers:
+    - state: station_map0
+    - state: unshaded
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Icon
+    sprite: Structures/Machines/station_map.rsi
+    state: station_map0
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ContainerFill
+    containers:
+      board: [ StationMapCircuitboard ]
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: ApcPowerReceiver
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 200
+  - type: UIPowerState
+  - type: Construction
+    graph: StationMap
+    node: station_map
+  - type: ActivatableUIRequiresPower
+  - type: ActivatableUI
+    key: enum.StationMapUiKey.Key
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          StationMapBroken:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserInterface
+    interfaces:
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+      params:
+        volume: -1
+        variation: 0.10
+        pitch: 1.10  # low pitch keyboard sounds feel kinda weird
+    blacklist:
+      tags:
+      - NoConsoleSound
 
 - type: entity
   parent: BaseWallmountMetallic

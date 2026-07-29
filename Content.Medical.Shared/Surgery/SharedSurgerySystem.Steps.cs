@@ -168,7 +168,7 @@ public abstract partial class SharedSurgerySystem
 
             args.Invalid = StepInvalidReason.MissingTool;
 
-            if (reg.Component is ISurgeryToolComponent required)
+            if (reg.Component is BaseSurgeryToolComponent required)
                 args.Popup = $"You need {required.ToolName} to perform this step!";
             else
                 Log.Error($"Surgery step {ToPrettyString(ent)} wants bad component {reg.Component} which isn't a ISurgeryTool");
@@ -192,7 +192,7 @@ public abstract partial class SharedSurgerySystem
 
     private string GetDamageGroupByType(string id)
     {
-        return (from @group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>() where @group.DamageTypes.Contains(id) select @group.ID).FirstOrDefault()!;
+        return (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>() where @group.DamageTypes.Contains(id) select @group.ID).FirstOrDefault()!;
     }
 
     private void OnTendWoundsStep(Entity<SurgeryTendWoundsEffectComponent> ent, ref SurgeryStepEvent args)
@@ -211,7 +211,7 @@ public abstract partial class SharedSurgerySystem
 
         var adjustedDamage = new DamageSpecifier(ent.Comp.Damage);
 
-        var group = _prototypes.Index<DamageGroupPrototype>(ent.Comp.MainGroup);
+        var group = ProtoMan.Index<DamageGroupPrototype>(ent.Comp.MainGroup);
         foreach (var type in group.DamageTypes)
             adjustedDamage.DamageDict[type] -= bonus;
 
@@ -287,7 +287,7 @@ public abstract partial class SharedSurgerySystem
             return;
 
         // We reward players for properly affixing the parts by healing a little bit of damage, and enabling the part temporarily.
-        _wounds.TryHealWoundsOnWoundable(targetPart, 12f, out _, damageGroup: _prototypes.Index(Brute));
+        _wounds.TryHealWoundsOnWoundable(targetPart, 12f, out _, damageGroup: ProtoMan.Index(Brute));
         RemComp<OrganReattachedComponent>(targetPart);
     }
 
@@ -317,7 +317,7 @@ public abstract partial class SharedSurgerySystem
         if (_wounds.AmputateWoundableSafely(parent, args.Part))
             _hands.TryPickupAnyHand(args.User, args.Part);
         else
-            _popup.PopupClient(Loc.GetString("surgery-popup-step-SurgeryStepRemovePart-failed"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("surgery-popup-step-SurgeryStepRemovePart-failed"), args.User, args.User);
     }
 
     private void OnRemovePartCheck(Entity<SurgeryRemovePartStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
@@ -384,7 +384,7 @@ public abstract partial class SharedSurgerySystem
         if (_part.RemoveOrgan(args.Part, organ))
             _hands.TryPickupAnyHand(args.User, organ);
         else
-            _popup.PopupClient(Loc.GetString("surgery-popup-step-SurgeryStepRemoveOrgan-failed"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("surgery-popup-step-SurgeryStepRemoveOrgan-failed"), args.User, args.User);
     }
 
     private void OnRemoveOrganCheck(Entity<SurgeryRemoveOrganStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
@@ -521,7 +521,7 @@ public abstract partial class SharedSurgerySystem
             surgeryTargetComponent.SepsisImmune)
             return;
 
-        var sepsis = new DamageSpecifier(_prototypes.Index(Poison), 5);
+        var sepsis = new DamageSpecifier(ProtoMan.Index(Poison), 5);
         var ev = new SurgeryStepDamageEvent(args.User, args.Body, args.Part, args.Surgery, sepsis, 0.5f);
         RaiseLocalEvent(args.Body, ref ev);
     }
@@ -715,7 +715,7 @@ public abstract partial class SharedSurgerySystem
         if (!Loc.TryGetString(locName, out var locResult, ("user", userName), ("target", targetName), ("part", part)))
             locResult = Loc.GetString($"surgery-popup-step-{stepId}", ("user", userName), ("target", targetName), ("part", part));
 
-        _popup.PopupPredicted(locResult, user, user);
+        _popup.PopupEntity(locResult, user, user);
         return true;
     }
 
@@ -810,7 +810,7 @@ public abstract partial class SharedSurgerySystem
         bool doPopup,
         out string? popup,
         out StepInvalidReason reason,
-        out ISurgeryToolComponent? data)
+        out BaseSurgeryToolComponent? data)
     {
         data = null;
 
@@ -842,7 +842,7 @@ public abstract partial class SharedSurgerySystem
             return true;
 
         if (doPopup && check.Popup != null)
-            _popup.PopupClient(check.Popup, user, user, PopupType.SmallCaution);
+            _popup.PopupEntity(check.Popup, user, user, PopupType.SmallCaution);
 
         return false;
     }
@@ -868,9 +868,9 @@ public abstract partial class SharedSurgerySystem
         return !ev.Cancelled;
     }
 
-    private ISurgeryToolComponent? GetSurgeryComp(EntityUid tool, IComponent component)
+    private BaseSurgeryToolComponent? GetSurgeryComp(EntityUid tool, IComponent component)
     {
-        if (EntityManager.TryGetComponent(tool, component.GetType(), out var found) && found is ISurgeryToolComponent data)
+        if (TryComp(tool, component.GetType(), out var found) && found is BaseSurgeryToolComponent data)
             return data;
 
         return null;

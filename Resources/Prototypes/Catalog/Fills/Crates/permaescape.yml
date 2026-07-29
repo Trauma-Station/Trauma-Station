@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: CrateEmptySpawner
   id: CratePermaEscapeSpawner
@@ -20,7 +14,6 @@
         # Please alphabetize <3
         - id: ClosetMaintenanceFilledRandom
           weight: 3
-        - id: CrateEngineeringMiniJetpack
         - id: CratePermaEscapeBureaucracy
         - id: CratePermaEscapeComs
           weight: 2
@@ -37,6 +30,7 @@
           weight: 2
         - id: CrateTrashCartFilled
         - id: CrateServiceCustomSmokable
+        - id: CrateSpaceMiniJetpack
     offset: 0.0
 
 - type: entity

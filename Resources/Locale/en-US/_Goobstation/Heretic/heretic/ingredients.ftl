@@ -56,3 +56,7 @@ heretic-ritual-ingredient-lantern-flashlight = lantern or flashlight
 heretic-ritual-ingredient-utility-belt = utility belt
 heretic-ritual-ingredient-cartridge-ammo = cartridge ammo
 heretic-ritual-ingredient-pda = PDA
+heretic-ritual-ingredient-spear = spear
+heretic-ritual-ingredient-screwdriver = screwdriver
+heretic-ritual-ingredient-wirecutter = wirecutter
+heretic-ritual-ingredient-hand = hand

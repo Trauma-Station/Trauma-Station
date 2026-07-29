@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseImplantOnlyImplanterSyndi
   id: HellRipImplanter
@@ -82,3 +84,13 @@
         implantOnly:
           True: {state: broken}
           False: {state: implanter1}
+
+- type: entity
+  id: RadioImplanterRev
+  suffix: Revolutionary Radio
+  parent: [BaseImplantOnlyImplanter, BaseRevMajorContraband]
+  name: revolutionary radio implanter
+  description: This implanter grants access to the Revolutionary channel and the Head Revolutionary channel without a headset, use "j" to talk in head revolutionary.
+  components:
+  - type: Implanter
+    implant: RadioImplantRev

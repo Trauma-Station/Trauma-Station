@@ -24,7 +24,6 @@ namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed partial class SpellsGrantSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
@@ -156,7 +155,7 @@ public sealed partial class SpellsGrantSystem : EntitySystem
         List<string>? ignoredSpells = null)
     {
         List<string> chosenSpells = new();
-        if (totalWeight <= 0f || !_proto.TryIndex(spells, out var randomActions))
+        if (totalWeight <= 0f || !ProtoMan.TryIndex(spells, out var randomActions))
             return (totalWeight, chosenSpells);
 
         var weights = FilterDictionary(randomActions.Weights, ignoredSpells);

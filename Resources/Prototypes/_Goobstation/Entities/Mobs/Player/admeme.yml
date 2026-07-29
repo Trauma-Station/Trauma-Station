@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Central Command!
 
 - type: randomHumanoidSettings
@@ -433,6 +435,7 @@
         Blunt: -1
         Slash: -1
         Piercing: -1
+        Ballistic: -1
   - type: StatusEffects
     allowed:
     - PressureImmunity

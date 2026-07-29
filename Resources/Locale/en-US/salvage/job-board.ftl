@@ -24,7 +24,8 @@ salv-job-board-name-BountySalvageOreGold = Gold (Ore)
 salv-job-board-name-BountySalvageOreSilver = Silver (Ore)
 
 salv-job-board-name-BountySalvageOreUranium = Uranium (Ore)
-salv-job-board-name-BountySalvageOrePlasma = Plasma (Ore)
+
+salv-job-board-name-BountySalvageOrePlasma = PLasma (Ore)
 salv-job-board-name-BountySalvageOreBananium = Bananium (Ore)
 salv-job-board-name-BountyTeethSharkminnow = Sharkminnow
 

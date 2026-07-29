@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # T3 chems for mapping
 
 - type: entity
@@ -7,7 +8,7 @@
   suffix: gold
   components:
   - type: Label
-    currentLabel: reagent-name-gold
+    localizedLabel: reagent-name-gold
   - type: Solution
     solution:
       reagents:
@@ -20,7 +21,7 @@
   suffix: silver
   components:
   - type: Label
-    currentLabel: reagent-name-silver
+    localizedLabel: reagent-name-silver
   - type: Solution
     solution:
       reagents:
@@ -33,7 +34,7 @@
   suffix: uranium
   components:
   - type: Label
-    currentLabel: reagent-name-uranium
+    localizedLabel: reagent-name-uranium
   - type: Solution
     solution:
       reagents:
@@ -46,7 +47,7 @@
   suffix: tirimol
   components:
   - type: Label
-    currentLabel: reagent-name-tirimol
+    localizedLabel: reagent-name-tirimol
   - type: Solution
     solution:
       reagents:
@@ -59,7 +60,7 @@
   suffix: omnizine
   components:
   - type: Label
-    currentLabel: reagent-name-omnizine
+    localizedLabel: reagent-name-omnizine
   - type: Solution
     solution:
       reagents:
@@ -72,7 +73,7 @@
   suffix: procenyl lazide
   components:
   - type: Label
-    currentLabel: reagent-name-procenyl-lazide
+    localizedLabel: reagent-name-procenyl-lazide
   - type: Solution
     solution:
       reagents:

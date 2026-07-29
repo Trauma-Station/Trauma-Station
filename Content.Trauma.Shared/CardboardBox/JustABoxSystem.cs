@@ -27,39 +27,29 @@ public sealed partial class JustABoxSystem : EntitySystem
 
     private HashSet<Entity<AwakeMobComponent>> _witnesses = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<JustABoxComponent, BoxAlertAttemptEvent>(OnAlertAttempt);
-        SubscribeLocalEvent<JustABoxComponent, BoxAlertedEvent>(OnAlerted);
-
-        SubscribeLocalEvent<DisabledBoxComponent, BoxAlertAttemptEvent>(OnDisabledAlertAttempt);
-        SubscribeLocalEvent<DisabledBoxComponent, BoxStealthAttemptEvent>(OnDisabledStealthAttempt);
-        SubscribeLocalEvent<DisabledBoxComponent, ComponentRemove>(OnDisabledRemove);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<DisabledBoxComponent>();
         var now = _timing.CurTime;
-        while (query.MoveNext(out var uid, out var comp))
+        foreach (var ent in query)
         {
-            if (comp.NextStealth > now)
+            if (ent.Comp.NextStealth > now)
                 continue;
 
-            RemCompDeferred(uid, comp);
+            RemCompDeferred(ent, ent.Comp);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAlertAttempt(Entity<JustABoxComponent> ent, ref BoxAlertAttemptEvent args)
     {
         // no alert if you open it unseen
         args.Cancelled |= WasUnseen(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnAlerted(Entity<JustABoxComponent> ent, ref BoxAlertedEvent args)
     {
         var disabled = EnsureComp<DisabledBoxComponent>(ent);
@@ -67,16 +57,19 @@ public sealed partial class JustABoxSystem : EntitySystem
         Dirty(ent, disabled);
     }
 
+    [SubscribeLocalEvent]
     private void OnDisabledAlertAttempt(Entity<DisabledBoxComponent> ent, ref BoxAlertAttemptEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnDisabledStealthAttempt(Entity<DisabledBoxComponent> ent, ref BoxStealthAttemptEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnDisabledRemove(Entity<DisabledBoxComponent> ent, ref ComponentRemove args)
     {
         if (TerminatingOrDeleted(ent) || // don't care

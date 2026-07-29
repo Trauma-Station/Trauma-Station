@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Orion-416 <cliveocelot@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -35,7 +32,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10
 
 - type: entity
   id: BulletGrenadeSpread00Buckshot

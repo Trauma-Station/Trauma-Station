@@ -72,11 +72,8 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
                 continue;
             }
 
-            if (!Proto.TryIndex(clauseKey, out DevilClausePrototype? clause))
-            {
-                Log.Warning($"Unknown contract clause: {clauseKey}");
+            if (!ProtoMan.TryIndex(clauseKey, out DevilClausePrototype? clause))
                 continue;
-            }
 
             // no duplicates
             if (!processedClauses.Add(clauseKey))
@@ -158,9 +155,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
         foreach (var item in clause.SpawnedItems)
         {
-            if (!Proto.TryIndex(item, out _))
-                continue;
-
             var spawnedItem = SpawnNextToOrDrop(item, target);
             _hands.TryPickupAnyHand(target, spawnedItem, false, false, false);
 
@@ -195,7 +189,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomNegativeClause(EntityUid target)
     {
-        var negativeClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var negativeClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight >= 0)
             .ToList();
 
@@ -210,7 +204,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomNegativeClauseSlasher(EntityUid target)
     {
-        var negativeClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var negativeClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight >= 0 && c.ID != "humanity")
             .ToList();
 
@@ -225,7 +219,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomPositiveClause(EntityUid target)
     {
-        var positiveClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var positiveClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight <= 0)
             .ToList();
 
@@ -240,7 +234,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomClause(EntityUid target)
     {
-        var clauses = Proto.EnumeratePrototypes<DevilClausePrototype>().ToList();
+        var clauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>().ToList();
 
         if (clauses.Count == 0)
             return;

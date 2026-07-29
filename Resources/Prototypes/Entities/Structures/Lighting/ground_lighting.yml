@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: LightPostSmall
   name: post light
@@ -47,12 +45,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 100
       behaviors:
       - !type:DoActsBehavior
@@ -96,6 +88,7 @@
     range: 200
   - type: DeviceLinkSink
     ports:
+      - Control # Trauma
       - On
       - Off
       - Toggle

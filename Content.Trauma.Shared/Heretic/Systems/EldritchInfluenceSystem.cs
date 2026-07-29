@@ -33,7 +33,6 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private ISharedChatManager _chat = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
@@ -66,7 +65,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
         _audio.PlayGlobal(ent.Comp.ExamineSound, session);
 
         var baseMessage = ent.Comp.ExamineBaseMessage;
-        var message = _random.Pick(_proto.Index(ent.Comp.HeathenExamineMessages));
+        var message = _random.Pick(ProtoMan.Index(ent.Comp.HeathenExamineMessages));
         var size = ent.Comp.FontSize;
         var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
         SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
@@ -107,7 +106,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             Hidden = true,
         };
 
-        _popup.PopupPredicted(Loc.GetString("heretic-influence-start"), influence, user);
+        _popup.PopupEntity(Loc.GetString("heretic-influence-start"), influence, user);
 
         if (!_doafter.TryStartDoAfter(dargs))
             return false;

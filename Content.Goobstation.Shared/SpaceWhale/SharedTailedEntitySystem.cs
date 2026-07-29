@@ -236,7 +236,7 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
 
     protected void ResetSegmentPosition(Entity<TailedEntitySegmentComponent> segment)
     {
-        if (segment.Comp.Coords is { } coords)
+        if (segment.Comp.Coords is { } coords && coords.MapId != MapId.Nullspace)
             TransformSystem.SetMapCoordinates(segment, coords);
         TransformSystem.SetWorldRotation(segment, segment.Comp.WorldRotation);
     }

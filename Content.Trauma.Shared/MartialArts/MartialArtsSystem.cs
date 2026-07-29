@@ -21,7 +21,6 @@ namespace Content.Trauma.Shared.MartialArts;
 public sealed partial class MartialArtsSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     //[Dependency] private MovementSpeedModifierSystem _speed = default!;

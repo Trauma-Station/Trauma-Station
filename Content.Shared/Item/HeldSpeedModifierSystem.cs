@@ -1,7 +1,7 @@
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Containers; // Goobstation
 
 namespace Content.Shared.Item;
 
@@ -11,7 +11,6 @@ namespace Content.Shared.Item;
 public sealed partial class HeldSpeedModifierSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private SharedContainerSystem _container = default!; // Goobstation
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -19,20 +18,17 @@ public sealed partial class HeldSpeedModifierSystem : EntitySystem
         SubscribeLocalEvent<HeldSpeedModifierComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<HeldSpeedModifierComponent, GotUnequippedHandEvent>(OnGotUnequippedHand);
         SubscribeLocalEvent<HeldSpeedModifierComponent, HeldRelayedEvent<RefreshMovementSpeedModifiersEvent>>(OnRefreshMovementSpeedModifiers);
-
-        // Goobstation
-        SubscribeLocalEvent<HeldSpeedModifierComponent, ComponentStartup>(OnComponentStartup);
-        SubscribeLocalEvent<HeldSpeedModifierComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<HeldSpeedModifierComponent, HeldRelayedEvent<RefreshWeightlessModifiersEvent>>(OnRefreshWeightlessModifiers);
     }
 
     private void OnGotEquippedHand(Entity<HeldSpeedModifierComponent> ent, ref GotEquippedHandEvent args)
     {
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        _movementSpeedModifier.RefreshMovementModifiers(args.User);
     }
 
     private void OnGotUnequippedHand(Entity<HeldSpeedModifierComponent> ent, ref GotUnequippedHandEvent args)
     {
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        _movementSpeedModifier.RefreshMovementModifiers(args.User);
     }
 
     public (float,float) GetHeldMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component)
@@ -54,16 +50,8 @@ public sealed partial class HeldSpeedModifierSystem : EntitySystem
         args.Args.ModifySpeed(walkMod, sprintMod);
     }
 
-    // Everything below is Goobstation
-    private void OnComponentStartup(Entity<HeldSpeedModifierComponent> ent, ref ComponentStartup args)
+    private void OnRefreshWeightlessModifiers(Entity<HeldSpeedModifierComponent> ent, ref HeldRelayedEvent<RefreshWeightlessModifiersEvent> args)
     {
-        if (_container.TryGetContainingContainer((ent, null, null), out var container))
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(container.Owner);
-    }
-
-    private void OnComponentRemove(Entity<HeldSpeedModifierComponent> ent, ref ComponentRemove args)
-    {
-        if (_container.TryGetContainingContainer((ent, null, null), out var container))
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(container.Owner);
+        args.Args.ModifyAcceleration(ent.Comp.WeightlessAcceleration);
     }
 }

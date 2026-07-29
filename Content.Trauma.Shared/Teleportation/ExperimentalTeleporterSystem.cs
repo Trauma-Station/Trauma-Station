@@ -77,16 +77,16 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
             return;
 
         // has to be defered because of interaction system's expectations that the user isn't being deleted
-        _popup.PopupClient("Teleporter malfunction", ent, user, PopupType.LargeCaution);
+        _popup.PopupEntity("Teleporter malfunction", ent, user, PopupType.LargeCaution);
         _gibQueue.Add(user);
     }
 
-    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, System.Random rand, EntityCoordinates oldCoords, Vector2 offset)
+    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, IRobustRandom rand, EntityCoordinates oldCoords, Vector2 offset)
     {
         if (_charges.IsEmpty(ent.Owner))
             return false;
 
-        _popup.PopupClient("Emergency teleport saved your life!", ent, user, PopupType.LargeCaution);
+        _popup.PopupEntity("Emergency teleport saved your life!", ent, user, PopupType.LargeCaution);
         var newOffset = offset + RandomEmergencyOffset(ent, rand, offset);
         var coords = user.Comp.Coordinates.Offset(newOffset).SnapToGrid(EntityManager);
 
@@ -128,7 +128,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         return false;
     }
 
-    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, System.Random rand, Vector2 offset)
+    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, IRobustRandom rand, Vector2 offset)
     {
         if (ent.Comp.RandomRotations.Count == 0)
             return Vector2.Zero;

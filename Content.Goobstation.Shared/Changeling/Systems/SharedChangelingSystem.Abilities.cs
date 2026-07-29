@@ -69,7 +69,7 @@ public abstract partial class SharedChangelingSystem
 
         if (ammoSelector.Prototypes.Count == 0)
         {
-            Popup.PopupClient(Loc.GetString("changeling-dartgun-no-stings"), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-dartgun-no-stings"), uid, uid);
             comp.Equipment.Remove(DartGunPrototype);
             Dirty(uid, comp);
             PredictedDel(dartgun.Value);
@@ -95,7 +95,7 @@ public abstract partial class SharedChangelingSystem
     {
         if (!TryToggleArmor(uid, comp, [(ArmorHelmetPrototype, "head"), (ArmorPrototype, "outerClothing")]))
         {
-            Popup.PopupClient(Loc.GetString("changeling-equip-armor-fail"), uid, uid);
+            Popup.PopupEntity(Loc.GetString("changeling-equip-armor-fail"), uid, uid);
             return;
         }
 

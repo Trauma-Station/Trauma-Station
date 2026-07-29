@@ -28,7 +28,6 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private WoundSystem _wounds = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
 
@@ -77,7 +76,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
     private DamageGroupPrototype? GetDamageGroupByType(string id)
     {
-        return (from @group in _proto.EnumeratePrototypes<DamageGroupPrototype>() where @group.DamageTypes.Contains(id) select @group).FirstOrDefault();
+        return (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>() where @group.DamageTypes.Contains(id) select @group).FirstOrDefault();
     }
 
     private void SetDamage(EntityUid body,

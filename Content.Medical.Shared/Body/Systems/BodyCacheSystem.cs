@@ -3,6 +3,7 @@
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Containers;
+using Content.Shared.Polymorph;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;
@@ -29,6 +30,7 @@ public sealed partial class BodyCacheSystem : CommonBodyCacheSystem
         SubscribeLocalEvent<BodyCacheComponent, OrganInsertedIntoEvent>(OnBodyInsertedInto);
         SubscribeLocalEvent<BodyCacheComponent, OrganRemovedFromEvent>(OnBodyRemovedFrom);
         SubscribeLocalEvent<BodyCacheComponent, BodyInitEvent>(OnBodyInit);
+        SubscribeLocalEvent<BodyCacheComponent, PolymorphedEvent>(OnPolymorphed);
 
         SubscribeLocalEvent<ChildOrganComponent, OrganInsertAttemptEvent>(OnChildInsertAttempt);
         SubscribeLocalEvent<ChildOrganComponent, OrganGotInsertedEvent>(OnChildInserted);
@@ -88,6 +90,26 @@ public sealed partial class BodyCacheSystem : CommonBodyCacheSystem
 
             // let the part track its child too
             _part.OrganInserted(parent, organ);
+        }
+    }
+
+    private void OnPolymorphed(Entity<BodyCacheComponent> ent, ref PolymorphedEvent args)
+    {
+        if (ent.Owner != args.OldEntity)
+            return;
+
+        var target = args.NewEntity;
+        if (!_query.TryComp(target, out var cache))
+            return;
+
+        foreach (var (category, organ) in ent.Comp.Organs)
+        {
+            if (!cache.Organs.TryGetValue(category, out var newOrgan))
+                continue;
+
+            var ev = new PolymorphedEvent(organ, newOrgan, args.IsRevert);
+            RaiseLocalEvent(organ, ref ev);
+            RaiseLocalEvent(newOrgan, ref ev);
         }
     }
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ############ [ HARDSUIT ] ############
 
 # COSMIC CULT HARDSUIT BODY
@@ -24,9 +26,9 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.4
-        Heat: 0.5
-        Asphyxiation: 0.6 # Kinda their whole thing so why not
+        Piercing: 0.6 # Trauma, was 0.4
+        Ballistic: 0.5 # Trauma
+        Heat: 0.6
   - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -120,6 +122,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5 # Trauma
         Heat: 0.5
         Radiation: 0.5
         Caustic: 0.5
@@ -129,8 +132,5 @@
   - type: TypingIndicatorClothing
     proto: CosmicTyping
   - type: SpeechOverride
-    emoteIDs:
-      Unsexed: CosmicEmotes
-      Female: CosmicEmotes
-      Male: CosmicEmotes
-    speechIDs: CosmicSpeech
+    emoteSounds: CosmicEmotes
+    speechSounds: CosmicSpeech

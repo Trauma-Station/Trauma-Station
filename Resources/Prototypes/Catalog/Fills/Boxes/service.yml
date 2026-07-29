@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 DenisShvalov <115770678+DenisShvalov@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ian <ignaz.k@live.de>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 PraxisMapper <praxismapper@gmail.com>
-# SPDX-FileCopyrightText: 2024 drakewill-CRL <46307022+drakewill-CRL@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   name: cleanades box
   parent: BoxCardboard
@@ -22,6 +13,22 @@
     layers:
       - state: box
       - state: flashbang
+
+- type: entity
+  name: mousetrap box
+  parent: BoxCardboard
+  id: BoxMousetrap
+  description: This box is filled with mousetraps. Try not to get your hand stuck in one.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: Mousetrap
+        amount: 4
+  - type: Sprite
+    layers:
+      - state: box
+      - state: mousetraps
 
 - type: entity
   name: NT "AgriChem Is Fun" kit

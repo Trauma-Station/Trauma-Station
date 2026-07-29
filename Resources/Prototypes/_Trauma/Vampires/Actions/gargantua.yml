@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Rejuv Garg
 - type: entity
   parent: BaseRejuvAction
@@ -179,7 +181,7 @@
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: ProjectileDemonicHand
-      speed: 9
+      projectileSpeed: 9
   - type: VampireCostAction
     bloodCost: 20
 

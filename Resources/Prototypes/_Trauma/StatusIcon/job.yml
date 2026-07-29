@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: jobIcon
   parent: JobIcon
   id: JobIconPhoneMerchant
@@ -5,7 +7,6 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Phonemerchant
   jobName: job-name-phonemerchant
-  allowSelection: false
 
 - type: jobIcon
   parent: JobIcon

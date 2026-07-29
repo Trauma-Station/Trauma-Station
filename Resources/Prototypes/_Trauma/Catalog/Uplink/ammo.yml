@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: listing
   id: Uplink20rdLightRifleMagazine
   name: uplink-ammo-20rdmagazine-name
@@ -28,5 +30,27 @@
   productEntity: BoxLethalshot
   cost:
     Telecrystal: 10
+  categories:
+  - UplinkAmmo
+
+- type: listing
+  id: UplinkPistolMagazineCaselessTranquilizer
+  name: uplink-caseless-pistol-tranq-name
+  description: uplink-caseless-pistol-tranq-desc
+  icon: { sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: tranq }
+  productEntity: MagazinePistolCaselessRifleTranquilizer
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkAmmo
+
+- type: listing
+  id: UplinkPistolMagazineCaselessPoison
+  name: uplink-caseless-pistol-poison-name
+  description: uplink-caseless-pistol-poison-desc
+  icon: { sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: poison }
+  productEntity: MagazinePistolCaselessRiflePoison
+  cost:
+    Telecrystal: 25
   categories:
   - UplinkAmmo

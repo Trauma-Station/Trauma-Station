@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: CrateFreezer
   id: CrateFreezerAbductor
@@ -8,6 +10,6 @@
       entity_storage: !type:AllSelector
         children:
         - id: OrganReptilianTailDefault
-          amount: 2
+          amount: 10
         - id: OrganMothWingsDefault
-          amount: 2
+          amount: 10

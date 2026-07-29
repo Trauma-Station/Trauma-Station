@@ -38,4 +38,10 @@ public sealed partial class BoomerangComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int CurrentHops = 0;
+
+    /// <summary>
+    /// If boomerang is currently returning to user
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsReturning;
 }

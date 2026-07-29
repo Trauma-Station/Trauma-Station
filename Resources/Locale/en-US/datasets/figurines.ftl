@@ -160,6 +160,7 @@ figurines-hop-7 = Has anyone seen Ian?
 figurines-bartender-1 = Where's my monkey?
 figurines-bartender-2 = Sec won't drink.
 figurines-bartender-3 = I mixed a little something in there...
+
 figurines-bartender-4 = The recipe? Plasma and vomit. Why?
 figurines-bartender-5 = I need those toxins for my drinks, officer!
 figurines-bartender-6 = Read the room.

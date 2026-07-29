@@ -14,6 +14,14 @@ public sealed partial class HereticRitualComponent : Component
     [DataField]
     public int Limit;
 
+    /// <summary>
+    /// If ritual creates ghouls and <see cref="Limit"/> is greater than 0 and reached,
+    /// this is value corresponds to the amount of times we kill existing inactive ghoul to free up the limit
+    /// Basically set this to the amount of ghouls that is spawned by this ritual
+    /// </summary>
+    [DataField]
+    public int LimitGhoulCleanupIterations = 1;
+
     [DataField, AutoNetworkedField]
     public EntityUid? RitualOwner;
 

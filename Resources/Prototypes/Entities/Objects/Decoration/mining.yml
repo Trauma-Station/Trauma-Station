@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: WoodenSign
   name: wooden sign
@@ -35,12 +29,6 @@
           variation: 0.05
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 10
@@ -62,28 +50,36 @@
     state: sign_right
 
 - type: entity
-  id: WoodenSupport
+  abstract: true
   parent: BaseStructure
-  name: wooden support
-  description: Increases your confidence that a rock won't fall on your head.
+  id: BaseWoodenSupport
   placement:
     mode: SnapgridCenter
   components:
   - type: PlacementReplacement
     key: walls
-  - type: Tag
-    tags:
-    - Wooden
   - type: Sprite
     noRot: true
     sprite: Objects/Decoration/mines.rsi
-    state: support
   - type: Damageable
     damageModifierSet: Wood
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: Physics
     bodyType: Static
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+
+- type: entity
+  parent: BaseWoodenSupport
+  id: WoodenSupport
+  name: wooden support
+  description: Increases your confidence that a rock won't fall on your head.
+  components:
   - type: Fixtures
     fixtures:
       fix1:
@@ -95,20 +91,8 @@
         layer:
         - WallLayer
         density: 1000
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path: /Audio/Effects/chop.ogg
-        params:
-          variation: 0.05
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 50
@@ -122,12 +106,11 @@
             max: 3
 
 - type: entity
+  parent: BaseWoodenSupport
   id: WoodenSupportBeam
   name: wooden support beam
-  parent: WoodenSupport
   components:
   - type: Sprite
-    sprite: Objects/Decoration/mines.rsi
     state: support_beams
   - type: Fixtures
     fixtures:
@@ -143,29 +126,16 @@
         density: 1000
 
 - type: entity
+  parent: BaseWoodenSupport
   id: WoodenSupportWall
-  parent: BaseStructure
   name: wooden support wall
   description: An old, rotten wall.
-  placement:
-    mode: SnapgridCenter
   components:
-  - type: PlacementReplacement
-    key: walls
   - type: Tag
     tags:
     - Wall
-    - Wooden
   - type: Sprite
-    noRot: true
-    sprite: Objects/Decoration/mines.rsi
     state: support_wall
-  - type: Damageable
-    damageModifierSet: Wood
-  - type: Injurable
-    damageContainer: StructuralInorganic
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -179,12 +149,6 @@
         density: 1000
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 75
@@ -198,20 +162,16 @@
             max: 5
 
 - type: entity
+  parent: BaseWoodenSupport
   id: WoodenSupportWallBroken
-  parent: WoodenSupportWall
   components:
+  - type: Tag
+    tags:
+    - Wall
   - type: Sprite
-    sprite: Objects/Decoration/mines.rsi
     state: support_wall_broken
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 50

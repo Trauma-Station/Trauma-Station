@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: tile
@@ -64,11 +60,6 @@
   name: tiles-cosmiccult-floor-malign
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_malign.png
   variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]

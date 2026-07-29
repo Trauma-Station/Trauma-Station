@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -11,7 +6,7 @@
   id: BaseBlobObjective
   components:
   - type: Objective
-    issuer: objective-issuer-blob
+    issuer: Blob
     unique: true
     difficulty: 1
     icon:
@@ -22,9 +17,9 @@
     - BlobRole
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: BaseBlobObjective
   id: BlobCaptureObjective
+  name: Take over the station
   components:
   - type: BlobCaptureCondition
     target: 400

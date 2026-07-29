@@ -5,13 +5,7 @@ using Content.Medical.Common.Surgery.Tools;
 namespace Content.Medical.Shared.Surgery.Tools;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BoneGelComponent : Component, ISurgeryToolComponent
+public sealed partial class BoneGelComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "bone gel";
-
-    [DataField]
-    public bool? Used { get; set; } = null;
-
-    [DataField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "bone gel";
 }

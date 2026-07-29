@@ -1,7 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BasePhysicalKnowledge
   id: ToughnessKnowledge
   name: Toughness
+  description: How resistant your ha and ka are to damage.
   components:
   - type: Knowledge
     experienceCost: 20
@@ -9,7 +12,7 @@
   - type: DamageModifyKnowledge
     # same as stamina damage im lazy
     # no debuff for lvl 0
-    curve: !type:QuadraticSkillCurve
+    curve: !type:QuadraticSkillCurve # Todo, make linear
       skillScale: 0.6
       skillOffset: -2.8
       curveScale: 0.05
@@ -19,6 +22,7 @@
   parent: BasePhysicalKnowledge
   id: StrengthKnowledge
   name: Strength
+  description: How powerful your arm muscles are, mostly affects melee weapons.
   components:
   - type: Knowledge
     experienceCost: 12
@@ -33,13 +37,14 @@
   parent: BasePhysicalKnowledge
   id: AthleticsKnowledge
   name: Athletics
+  description: Gives you more stamina, making it harder to stun you among other things. Also allows you to parry attacks and reflect lasers.
   components:
   - type: Knowledge
     experienceCost: 12
   - type: StaminaKnowledge
     # no debuff at lvl 0, 37% damage reduction at lvl 100
     # you are in good shape not insulated from batong
-    curve: !type:QuadraticSkillCurve
+    curve: !type:QuadraticSkillCurve # Todo, make linear
       skillScale: 0.6
       skillOffset: -2.8
       curveScale: 0.05
@@ -49,6 +54,7 @@
   parent: BasePhysicalKnowledge
   id: ThrowingKnowledge
   name: Throwing
+  description: Makes you throw items faster and with more precision.
   components:
   - type: Knowledge
     experienceCost: 5

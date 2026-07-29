@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Dummy Entity for ghost roles to choose a void creature
 - type: entity
   id: SummonVoidGhost

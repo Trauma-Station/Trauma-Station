@@ -27,7 +27,6 @@ public sealed partial class XenomorphEvolutionSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private DoAfterSystem _doAfter = default!;
@@ -155,7 +154,7 @@ public sealed partial class XenomorphEvolutionSystem : EntitySystem
     public bool Evolve(EntityUid uid, string? evolveTo, TimeSpan evolutionDelay, bool checkNeedCasteDeath = true)
     {
         if (evolveTo == null
-            || !_protoManager.TryIndex(evolveTo, out var xenomorphPrototype)
+            || !ProtoMan.TryIndex(evolveTo, out var xenomorphPrototype)
             || !xenomorphPrototype.TryGetComponent<XenomorphComponent>(out var xenomorph, Factory)) // Goobstation
             return false;
 

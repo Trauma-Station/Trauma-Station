@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: MobLavalandGoliath
   parent: MobGoliath
@@ -16,8 +18,8 @@
         Base: goliath_dead
 
 - type: entity
-  id: MobLavalandGoliathAncient
   parent: MobGoliath
+  id: MobLavalandGoliathAncient
   name: ancient goliath
   suffix: Lavaland
   components:
@@ -60,8 +62,8 @@
         10
       NavSmash: !type:Bool
         true
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatGoliath
       amount: 3
     - id: MaterialGoliathHide1

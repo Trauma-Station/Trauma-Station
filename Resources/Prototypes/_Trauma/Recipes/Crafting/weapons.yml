@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # - type: construction
 #   id: GaussRiflePrefab
 #   graph: GaussRiflePrefabGraph
@@ -19,7 +21,7 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 4
   practical:
     GunsmithingKnowledge: 3
     WeaponsKnowledge: 2
@@ -34,7 +36,7 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 4
   practical:
     GunsmithingKnowledge: 3
     WeaponsKnowledge: 2
@@ -118,7 +120,7 @@
   objectType: Item
   qualityPrototype: ShitCraft
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 3
   practical:
     WeaponsKnowledge: 4
     CarvingKnowledge: 4
@@ -132,7 +134,7 @@
   objectType: Item
   qualityPrototype: ShitCraft
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 3
   practical:
     WeaponsKnowledge: 4
     CarvingKnowledge: 4

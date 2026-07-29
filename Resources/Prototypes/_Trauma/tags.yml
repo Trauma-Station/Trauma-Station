@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## A ##
 
 - type: Tag
@@ -11,6 +13,25 @@
 
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
+
+# Area whitelist tags for ambient music
+- type: Tag
+  id: AreaBeach
+
+- type: Tag
+  id: AreaCold
+
+- type: Tag
+  id: AreaDojo
+
+- type: Tag
+  id: AreaDetective
+
+- type: Tag
+  id: AreaInterrogation
+
+- type: Tag
+  id: AreaMorgue
 
 ## B ##
 
@@ -163,8 +184,7 @@
 
 ## O ##
 
-- type: Tag
-  id: OverrideKeyComponents # Construction: ArmoryOverrideKey
+# :o nothing
 
 ## P ##
 
@@ -230,6 +250,9 @@
 
 - type: Tag
   id: Scimitar # Used for scabbad whitelist
+
+- type: Tag
+  id: SharpMedal # Heretic - Sharp Medal item, used for blades boomerang throw logic
 
 - type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision

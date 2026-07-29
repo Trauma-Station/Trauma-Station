@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Eris <eris@erisws.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: reaction
   id: EZNutrient
   reactants:
@@ -62,3 +53,16 @@
       amount: 4
   products:
     PlantBGone: 5
+
+- type: reaction
+  id: PestKillerBreakdown
+  source: true
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    PestKiller:
+      amount: 5
+  products:
+    Ethanol: 2
+    Mercury: 1.5
+    Chlorine: 1.5

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: [BaseItem, BaseCommandContraband]
@@ -55,6 +57,11 @@
   id: ReinforcementsHoS
   name: store-category-security
   priority: 0
+
+- type: storeCategory
+  id: Bioweapons
+  name: store-category-bioweapons
+  priority: 1
 
 - type: storeCategory
   id: ServiceHoP

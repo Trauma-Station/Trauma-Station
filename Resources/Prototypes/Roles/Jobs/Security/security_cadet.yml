@@ -6,10 +6,10 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 10h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 5h
-      inverted: true # stop playing intern if you're good at security!
+    # - !type:DepartmentTimeRequirement
+    #   department: Security
+    #   time: 5h
+    #   inverted: true # stop playing intern if you're good at security!
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
@@ -25,7 +25,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipSecurityCadet
+    - SkillChipCombatEducation
+    - SkillChipLaser
+    - SkillChipNonLethal
   - !type:AddComponentSpecial
     components:
     - type: SecurityStaff

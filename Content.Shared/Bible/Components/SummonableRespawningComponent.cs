@@ -1,9 +1,10 @@
-namespace Content.Shared.Bible.Components
-{
-    /// <summary>
-    /// EntityQuery Tracking Component for Summonables that are counting up a respawn.
-    /// </summary>
-    [RegisterComponent]
-    public sealed partial class SummonableRespawningComponent : Component
-    {}
-}
+using Robust.Shared.GameStates;
+
+namespace Content.Shared.Bible.Components;
+
+/// <summary>
+/// EntityQuery tracking component for summonables that are waiting for a respawn.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(BibleSystem))]
+public sealed partial class SummonableRespawningComponent : Component;

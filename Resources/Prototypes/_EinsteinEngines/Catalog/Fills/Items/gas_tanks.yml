@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: EmergencyOxygenTank
   id: EmergencyPlasmaTank
@@ -36,7 +38,7 @@
 - type: entity
   parent: ExtendedEmergencyOxygenTank
   id: ExtendedEmergencyPlasmaTank
-  name: extended capacity emergency plasma tank
+  name: extended-capacity emergency plasma tank
   description: An emergency tank with extended capacity. Technically rated for prolonged use.
   components:
   - type: Sprite
@@ -72,7 +74,7 @@
   parent: DoubleEmergencyOxygenTank
   id: DoubleEmergencyPlasmaTank
   name: plasma internals tank
-  description: A tank of plasma designed to be internals for Plasmamen.
+  description: A tank of plasma gas designed to be internals for Plasmamen.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi

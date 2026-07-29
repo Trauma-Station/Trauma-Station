@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Abstract garlic entity used by foods that include garlic, in order for them to apply bad effects on vampires (garlic bad for vamps)
 - type: entity
   abstract: true

@@ -1,6 +1,6 @@
 - type: entity
   id: BaseLatheNoSilo # Trauma - add NoSilo, BaseLathe has OreSiloClient
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   abstract: true
   name: lathe
   components:
@@ -15,6 +15,10 @@
     - !type:AutomatedPorts
       sinks:
       - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
   - type: LatheAutomation
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -51,15 +55,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 175
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -640,6 +640,7 @@
   - type: OreSiloClient
   #- type: LatheAnnouncing # Trauma - not cherry picked
   #  channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseLathe

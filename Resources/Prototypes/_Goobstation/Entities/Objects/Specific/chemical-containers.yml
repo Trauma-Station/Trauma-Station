@@ -7,7 +7,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Label
-    currentLabel: reagent-name-holywater
+    localizedLabel: reagent-name-holywater
   - type: Solution
     solution:
       reagents:
@@ -21,7 +21,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Label
-    currentLabel: reagent-name-salicylic-acid
+    localizedLabel: reagent-name-salicylic-acid
   - type: Solution
     solution:
       reagents:
@@ -35,7 +35,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Label
-    currentLabel: reagent-name-oxandrolone
+    localizedLabel: reagent-name-oxandrolone
   - type: Solution
     solution:
       reagents:

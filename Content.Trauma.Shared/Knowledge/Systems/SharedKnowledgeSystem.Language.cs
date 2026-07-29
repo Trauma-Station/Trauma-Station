@@ -22,18 +22,8 @@ public abstract partial class SharedKnowledgeSystem
     {
         SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
-        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
-        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
-
-        SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
-        SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
-        SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
         SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
             after: [ typeof(InitialBodySystem) ]);
-
-        // Experience methods
-        SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRangeEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -42,12 +32,14 @@ public abstract partial class SharedKnowledgeSystem
         _meta.SetEntityName(ent.Owner, _language.GetLanguagePrototype(ent.Comp.LanguageId)!.Name);
     }
 
+    [SubscribeLocalEvent]
     private void OnLanguageAdded(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
     {
         var speaker = EnsureComp<LanguageSpeakerComponent>(args.Holder);
         UpdateEntityLanguages((args.Holder, speaker));
     }
 
+    [SubscribeLocalEvent]
     private void OnLanguageRemoved(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveLanguage == ent.Owner)
@@ -69,10 +61,10 @@ public abstract partial class SharedKnowledgeSystem
     /// <summary>
     /// Get the corresponding knowledge entity prototype for a given language.
     /// </summary>
-    public EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
+    public override EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
     {
         var id = $"Language{lang}";
-        DebugTools.Assert(_proto.HasIndex<EntityPrototype>(id), $"Language {lang} has no knowledge prototype!");
+        DebugTools.Assert(ProtoMan.HasIndex<EntityPrototype>(id), $"Language {lang} has no knowledge prototype!");
         return id;
     }
 
@@ -137,7 +129,8 @@ public abstract partial class SharedKnowledgeSystem
         ChangeLanguage(brain, null);
     }
 
-    public void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
+    [SubscribeLocalEvent]
+    private void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
             return;
@@ -148,6 +141,8 @@ public abstract partial class SharedKnowledgeSystem
         var lang = args.Language;
         if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
         {
+            existing.Comp.LearnedLevel = Math.Max(26, existing.Comp.LearnedLevel);
+            Dirty(existing);
             UpdateEntityLanguages(ent);
             return;
         }
@@ -157,7 +152,8 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
+    [SubscribeLocalEvent]
+    private void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
     {
         var id = LanguageUnit(args.Language);
         if (GetContainer(ent.Owner) is not { } brain ||
@@ -181,13 +177,16 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageUpdate(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
+    [SubscribeLocalEvent]
+    private void OnLanguageUpdate(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
     {
         UpdateEntityLanguages(ent);
     }
 
-    public void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
+    private void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
+        // always start with spoken language regardless of knowledge
+        _language.EnsureValidLanguage(ent.AsNullable());
         if (GetContainer(ent.Owner) is not { } brain)
         {
             // just use mob yml languages
@@ -227,27 +226,7 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageSpoke(Entity<KnowledgeHolderComponent> ent, ref EntitySpokeEvent args)
-    {
-        if (GetContainer(ent.Owner) is not { } brain)
-            return;
-
-        var id = LanguageUnit(args.Language);
-        if (GetKnowledge(brain, id) is not { } unit)
-        {
-            Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
-            return;
-        }
-
-        var comp = _langQuery.Comp(unit);
-
-        var now = _timing.CurTime;
-
-        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn. Doesn't award anything for small sentences. Already does auto xp shit.
-
-        Dirty(unit, comp);
-    }
-
+    [SubscribeLocalEvent]
     private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
         if (args.Source == ent.Owner)
@@ -255,9 +234,6 @@ public abstract partial class SharedKnowledgeSystem
 
         if (GetContainer(ent.Owner) is not { } brain)
             return;
-
-        AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
-
         var languageId = LanguageUnit(args.Language);
 
         // Try obfuscate speech if can't listen well.
@@ -265,7 +241,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         // Use Obfuscate logic through language system.
-        var languageProto = _proto.Index(args.Language);
+        var languageProto = ProtoMan.Index(args.Language);
         args.Message = _language.ObfuscateSpeech(args.Message, languageProto, ent.Owner);
         if (args.Speech is { } speech)
             args.WrappedMessage = _chat.WrapPublicMessage(args.Source, args.Name, args.Message, speech, languageProto, args.Color);

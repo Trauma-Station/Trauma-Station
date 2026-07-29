@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [OrganBaseTorso, OrganAnimalSpriteExternal]
   id: OrganTorsoGhoul
@@ -90,6 +92,9 @@
     - TauCetiBasic
     understands:
     - TauCetiBasic
+  - type: Stamina
+    baseCritThreshold: 300
+    animationThreshold: 150
 
 - type: entity
   id: BaseMobHereticGhoul
@@ -136,6 +141,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
   - type: FlashImmunity
+    showInExamine: false
   - type: MeleeWeapon
     animation: WeaponArcClaw
     damage:
@@ -144,7 +150,7 @@
         Piercing: 10
 
 - type: entity
-  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase]
+  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase, MobNightVision]
   id: MobGhoulStalker
   components:
   - type: Ghoul
@@ -162,12 +168,10 @@
     - ActionActivateEmp
     - ActionHereticShapeshift
   - type: ThermalVision
+    color: white
+    toggleAction: null
     thermalShader: null
     isActive: true
-    color: white
-    drawOverlay: false
-    lightRadius: 0
-    toggleAction: null
 
 - type: entity
   parent: [BaseMobGhoulLock, MobGhoulStalkerBase]
@@ -237,10 +241,7 @@
     mindRoles:
     - MindRoleGhoul
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: Eye
     drawFov: false
   - type: Viewcone
@@ -287,10 +288,9 @@
     baseWalkSpeed: 5
     baseSprintSpeed: 5
   - type: FlashImmunity
+    showInExamine: false
   - type: NightVision
-    color: aquamarine
-    activateSound: null
-    deactivateSound: null
+    lightingColor: aquamarine
   - type: MeleeWeapon
     animation: WeaponArcPunch
     soundHit:
@@ -331,6 +331,7 @@
         Blunt: -1
         Slash: -1
         Piercing: -1
+        Ballistic: -1
         Heat: -1
         Cold: -1
         Shock: -1
@@ -391,8 +392,8 @@
   - type: IgniteOnMeleeHit
     fireStacks: 2
   - type: MovementSpeedModifier
-    baseWalkSpeed: 7
-    baseSprintSpeed: 7
+    baseWalkSpeed: 6
+    baseSprintSpeed: 6
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -558,6 +559,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic
     - Heat
     - Shock
     locPrefix: silicon
@@ -581,6 +583,7 @@
     baseWalkSpeed: 4.5
     baseSprintSpeed: 4.5
   - type: FlashImmunity
+    showInExamine: false
   - type: HTN
     rootTask:
       task: HereticSummonCompound

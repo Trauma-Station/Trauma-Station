@@ -75,16 +75,10 @@ knowledge-path-side-t1-mask-desc =
     "Why? Why was I cursed with sight to witness this?"
 
     Allows you to transmute any mask, a stun baton, and a liver to create a Mask of Madness.
-    The mask protects you from bright flashes and instills extreme fear into heathens who witness it.
+    The mask protects you from bright flashes and instills extreme fear into heathens who witness it,
+    making them perceive everyone as a person who wears the mask.
+    It can be toggled to give you night vision instead, disabling fear and eye protection.
     It can also be forced onto a heathen, to make them unable to take it off...
-
-knowledge-path-side-t1-curio-name = Unfatomable Curio
-knowledge-path-side-t1-curio-desc =
-    The Mansus holds many curiosities, some are not meant for the mortal eye.
-
-    Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
-    a belt that has a lot of storage space. Whilst worn it will veil you,
-    blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
 
 knowledge-path-side-t1-coin-name = Eldritch Coin
 knowledge-path-side-t1-coin-desc =
@@ -93,12 +87,23 @@ knowledge-path-side-t1-coin-desc =
     Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
     The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
-## T2
-knowledge-path-side-t2-ice-spear-name = Mysteries of Creation
-knowledge-path-side-t2-ice-spear-desc =
+knowledge-path-side-t1-ice-spear-name = Mysteries of Creation
+knowledge-path-side-t1-ice-spear-desc =
     Artifacts linked to the Winter Dawn exude unnatural stillness. Time slows around them. Fires choke. Thoughts become brittle. Proximity breeds hallucinations of endless white fields, a sky with no sun, and a voice that speaks only in cracking ice.
 
-    Grants you Mysteries of Creation, a spell that allows you to summon the Glacier Spear at will. This magical spear chills victims upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube. If the spear is destroyed, activating this ability will create a new one, otherwise it will summon the existing spear into your hand.
+    Allows you to transmute a spear in a cold environment to create Glacier Spear. This magical spear chills victims
+    upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube.
+    Spear can be freely recalled in your hand unless it is destroyed.
+
+## T2
+knowledge-path-side-t2-curio-name = Unfatomable Curio
+knowledge-path-side-t2-curio-desc =
+    The Mansus holds many curiosities, some are not meant for the mortal eye.
+
+    Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
+    a belt that has a lot of storage space. Whilst worn it will veil you,
+    blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
+    Additionally, when veil is active, you gan an aura that massively slows down projectiles passing by.
 
 knowledge-path-side-t2-rustwalker-name = Rusted Ritual
 knowledge-path-side-t2-rustwalker-desc =
@@ -232,3 +237,12 @@ knowledge-path-side-t3-admonitions-desc =
     You are also visible to people close to you.
     Forest Admonitions is harder to reveal by damage compared to Cloak Of Shadow, but it has longer cooldown as well.
     While active, you also spread pale fog around your position, which muffles sounds, debuffs heathens and disables shadow cloak for other heretics.
+
+knowledge-path-side-t3-medal-name = Sharp Medal
+knowledge-path-side-t3-medal-desc =
+    They say that the blacksmith who forged this charm did not use ordinary fuel,
+    but his own fingers, which he threw into the forge one by one.
+    The Sharp Medal remembers this and demands more.
+
+    Transmute 2 hands, eyes and a knife to create the Sharp Medal.
+    The Sharp Medal allows you to throw your blades akin to boomerangs, and also functions as a focus.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Markings
 
 - type: markingsGroup
@@ -83,6 +85,11 @@
   - type: HumanoidProfile
     species: IPC
   - type: KnowledgeHolder
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 - type: entity
   parent:
@@ -168,7 +175,7 @@
     guides:
     - IPC
   - type: Silicon
-    entityType: enum.SiliconType.Player
+    entityType: Player
     batteryPowered: true
     drainPerSecond: 1.5
     chargeThresholdMid: 0.80
@@ -203,9 +210,10 @@
     selfRepairPenalty: 2.0
     damage:
       types:
-        Blunt: -15
-        Piercing: -15
-        Slash: -15
+        Blunt: -10
+        Piercing: -10
+        Slash: -10
+        Ballistic: -10
   - type: DamagedSiliconAccent
     enableChargeCorruption: false
   - type: Uncloneable # it a fucking robot

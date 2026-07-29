@@ -10,3 +10,10 @@
   femaleFirstNames: NamesReptilianFemale
   naming: FirstDashFirst
   knowledge: Reptilian # Trauma
+  defaultSoundsBySex:
+  - MaleReptilian
+  - FemaleReptilian
+  - MaleReptilian
+  voices:
+  - MaleReptilian
+  - FemaleReptilian

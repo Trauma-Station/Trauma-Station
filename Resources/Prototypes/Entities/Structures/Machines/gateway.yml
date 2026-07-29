@@ -1,14 +1,7 @@
-# SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  abstract: true
+  abstract: true # Trauma
   parent: BaseStructure
-  id: BaseGateway
+  id: BaseGateway # Trauma - this is base one
   name: gateway
   description: A mysterious gateway built by unknown hands, it allows for faster than light travel to far-flung locations.
   components:
@@ -19,18 +12,20 @@
     - state: frame
     - state: portal
       shader: unshaded
-      map: ["enum.GatewayVisualLayers.Portal"]
+      map: ["enum.GatewayVisualLayers.Portal"] # Trauma
     - state: on
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: GenericVisualizer
     visuals:
-      enum.PowerDeviceVisuals.Powered:
-        enum.PowerDeviceVisualLayers.Powered:
-          True: { visible: true }
-          False: { visible: false }
+      # <Trauma>
       enum.GatewayVisuals.Active:
         enum.GatewayVisualLayers.Portal:
+          True: { visible: true }
+          False: { visible: false }
+      # </Trauma>
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
   - type: InteractionOutline
@@ -50,15 +45,3 @@
         - WallLayer
         hard: false
   - type: Appearance
-
-- type: entity
-  parent: BaseGateway
-  id: Gateway
-  components:
-  - type: ActivatableUI
-    key: enum.GatewayUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.GatewayUiKey.Key:
-        type: GatewayBoundUserInterface
-  - type: Gateway

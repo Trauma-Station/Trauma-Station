@@ -6,7 +6,9 @@ using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Whitelist;
 // </Trauma>
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
+using Content.Server.Ghost;
 using Content.Server.Power.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -36,9 +38,10 @@ public sealed partial class RadioSystem : EntitySystem
     [Dependency] private INetManager _netMan = default!;
     [Dependency] private IReplayRecordingManager _replay = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private GhostSystem _ghost = default!;
     [Dependency] private EntityQuery<TelecomExemptComponent> _exemptQuery = default!;
 
     // set used to prevent radio feedback loops.
@@ -49,7 +52,6 @@ public sealed partial class RadioSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<IntrinsicRadioReceiverComponent, RadioReceiveEvent>(OnIntrinsicReceive);
         SubscribeLocalEvent<IntrinsicRadioTransmitterComponent, EntitySpokeEvent>(OnIntrinsicSpeak);
-        SubscribeLocalEvent<IntrinsicRadioReceiverComponent, RadioReceiveAttemptEvent>(OnIntrinsicReceiveAttempt); // Goobstation
     }
 
     private void OnIntrinsicSpeak(EntityUid uid, IntrinsicRadioTransmitterComponent component, EntitySpokeEvent args)
@@ -65,23 +67,27 @@ public sealed partial class RadioSystem : EntitySystem
 
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
-        if (TryComp(uid, out ActorComponent? actor))
+        if (!TryComp(uid, out ActorComponent? actor))
+            return;
+
+        // <Trauma> - replaced event's MsgChatMessage with the inner messages, add language obfuscation
+        var msg = args.OriginalChatMsg;
+        if (_ghost.CanGhostWarp(actor.PlayerSession, out _))
         {
-            // Einstein Engines - Languages begin
-            var msg = args.OriginalChatMsg;
-
-            if (!_language.CanUnderstand(uid, args.Language.ID))
-                msg = args.LanguageObfuscatedChatMsg;
-
-            _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);
-            // Einstein Engines - Languages end
+            msg = new ChatMessage(msg)
+            {
+                WrappedMessage = _chatManager.PrependFollowButtonIfAppropriate(
+                    msg.WrappedMessage,
+                    args.MessageSource,
+                    actor.PlayerSession.Channel),
+            };
         }
-    }
 
-    // Goobstation - Whitelisted radio channels
-    private void OnIntrinsicReceiveAttempt(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveAttemptEvent args)
-    {
-        args.Cancelled = _whitelist.IsWhitelistFail(args.Channel.ReceiveWhitelist, uid);
+        if (!_language.CanUnderstand(uid, args.Language.ID))
+            msg = args.LanguageObfuscatedChatMsg;
+
+        _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);
+        // <Trauma>
     }
 
     /// <summary>
@@ -92,10 +98,11 @@ public sealed partial class RadioSystem : EntitySystem
         string message,
         ProtoId<RadioChannelPrototype> channel,
         EntityUid radioSource,
-        LanguagePrototype? language = null,
+        LanguagePrototype? language = null, // Trauma
         bool escapeMarkup = true)
     {
-        SendRadioMessage(messageSource, message, _prototype.Index(channel), radioSource, escapeMarkup: escapeMarkup, language: language); // Einstein Engines - Language
+        SendRadioMessage(messageSource, message, ProtoMan.Index(channel), radioSource, escapeMarkup: escapeMarkup,
+            language: language); // Trauma
     }
 
     /// <summary>
@@ -108,16 +115,10 @@ public sealed partial class RadioSystem : EntitySystem
         string message,
         RadioChannelPrototype channel,
         EntityUid radioSource,
-        LanguagePrototype? language = null,
+        LanguagePrototype? language = null, // Trauma
         bool escapeMarkup = true)
     {
-        // Einstein Engines - Language begin
-        if (language == null)
-            language = _language.GetLanguage(messageSource);
-
-        if (!language.SpeechOverride.AllowRadio)
-            return;
-        // Einstein Engines - Language end
+        language ??= _language.GetLanguage(messageSource); // Trauma
 
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
@@ -141,7 +142,7 @@ public sealed partial class RadioSystem : EntitySystem
         name = FormattedMessage.EscapeText(name);
 
         SpeechVerbPrototype speech;
-        if (evt.SpeechVerb != null && _prototype.Resolve(evt.SpeechVerb, out var evntProto))
+        if (evt.SpeechVerb != null && ProtoMan.Resolve(evt.SpeechVerb, out var evntProto))
             speech = evntProto;
         else
             speech = _chat.GetSpeechVerb(messageSource, message);

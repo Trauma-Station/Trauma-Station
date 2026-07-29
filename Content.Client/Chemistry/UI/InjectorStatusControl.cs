@@ -39,9 +39,29 @@ public sealed class InjectorStatusControl : Control
     {
         base.FrameUpdate(args);
 
-        if (_injector.GetSolution(_parent) is not {} solution // Trauma - use GetSolution
-            || !_prototypeManager.Resolve(_parent.Comp.ActiveModeProtoId, out var activeMode))
+        // <Trauma> - use GetSolution and set the label to empty if it has no solution. only bail completely for invalid mode
+        if (!_prototypeManager.Resolve(_parent.Comp.ActiveModeProtoId, out var activeMode))
             return;
+
+        if (_injector.GetSolution(_parent) is not {} solution)
+        {
+            var changed = _prevBehavior != activeMode.Behavior;
+            if (_prevMaxVolume != 0)
+            {
+                // empty so 0 by definition...
+                _prevVolume = 0;
+                _prevMaxVolume = 0;
+                changed = true;
+            }
+
+            _prevBehavior = activeMode.Behavior;
+
+            if (changed)
+                _label.SetMarkup($"Empty\nMode: [color=white]{Loc.GetString(activeMode.Name)}[/color]");
+
+            return;
+        }
+        // </Trauma>
 
         // only updates the UI if any of the details are different than they previously were
         if (_prevVolume == solution.Volume

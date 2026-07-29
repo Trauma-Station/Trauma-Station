@@ -10,6 +10,8 @@
       Plastic: 25
   - type: FloorCleaner
     radius: 1.5
+  - type: WeaponClass
+    class: Bludgeon # it hit hard
   # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Janitorial/mop.rsi

@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -11,7 +6,7 @@
   suffix: NTR
   components:
   - type: Label
-    currentLabel: holopad-command-ntr
+    localizedLabel: holopad-command-ntr
 
 - type: entity
   parent: HolopadBluespace
@@ -19,4 +14,4 @@
   suffix: Centcomm
   components:
   - type: Label
-    currentLabel: holopad-centcomm
+    localizedLabel: holopad-centcomm

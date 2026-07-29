@@ -1,8 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent:
   - BaseMob
   - MobCombat
   - FlyingMobBase
+  - MobNightVision
   id: MobStarGazer
   name: star gazer
   description: A creature that has been tasked to watch over the stars.
@@ -78,6 +81,7 @@
     baseWalkSpeed: 4
     baseSprintSpeed: 4
   - type: FlashImmunity
+    showInExamine: false
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
@@ -106,12 +110,7 @@
   - type: StarGazer
   - type: WarpPoint
     follow: true
-    location: star gazer
-  - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    location: location-star-gazer
   - type: SupermatterImmune
   - type: EventHorizonIgnore
   - type: SpacetimeSpellbladeEnchantment # It's not a spellblade, trust

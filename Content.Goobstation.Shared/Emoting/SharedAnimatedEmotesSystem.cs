@@ -9,7 +9,6 @@ namespace Content.Goobstation.Shared.Emoting;
 
 public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private VomitSystem _vomit = default!;
 
@@ -23,7 +22,7 @@ public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
 
     private void OnBeforeEmote(Entity<AnimatedEmotesComponent> ent, ref BeforeEmoteEvent args)
     {
-        var emote = _proto.Index<EmotePrototype>(args.Emote);
+        var emote = ProtoMan.Index<EmotePrototype>(args.Emote);
         if (emote.Event is not AnimationEmoteEvent { CausesVomit: true })
             return;
 
@@ -35,7 +34,7 @@ public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
     {
         PlayEmoteAnimation(ent.AsNullable(), args.Emote.ID);
 
-        var emote = _proto.Index<EmotePrototype>(args.Emote);
+        var emote = ProtoMan.Index<EmotePrototype>(args.Emote);
         if (emote.Event is not AnimationEmoteEvent { CausesVomit: true })
             return;
 

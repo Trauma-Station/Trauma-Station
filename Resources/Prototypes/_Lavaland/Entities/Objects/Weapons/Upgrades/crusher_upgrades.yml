@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Important Note!
 # Crusher upgrade entities have the exact same ID as their respective TagPrototype.
 # Remember to take this into account when adding new upgrades!

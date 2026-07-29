@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Security
 
 - type: startingGear
@@ -452,7 +454,6 @@
     id: ChaplainPDA
     ears: ClothingHeadsetService
   inhand:
-  - Nullrod
   - ArmamentsBeacon
 
 - type: startingGear

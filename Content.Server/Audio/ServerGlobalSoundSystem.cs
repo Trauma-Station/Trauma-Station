@@ -57,7 +57,7 @@ public sealed partial class ServerGlobalSoundSystem : SharedGlobalSoundSystem
 
     public void DispatchStationEventMusic(EntityUid source, ResolvedSoundSpecifier specifier, StationEventMusicType type, AudioParams? audioParams = null) // goob edit
     {
-        var audio = audioParams ?? AudioParams.Default.WithVolume(-8); // goob edit
+        var audio = audioParams ?? AudioParams.Default.AddVolume(-8); // Trauma - use audioParams first
         var msg = new StationEventMusicEvent(specifier, type, audio);
 
         var filter = GetStationAndPvs(source);

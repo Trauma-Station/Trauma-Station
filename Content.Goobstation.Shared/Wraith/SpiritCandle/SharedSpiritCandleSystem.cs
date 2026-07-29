@@ -25,7 +25,7 @@ public sealed partial class SharedSpiritCandleSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedVisibilitySystem _visibility = default!;
-    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _oldStatusEffects = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -149,7 +149,7 @@ public sealed partial class SharedSpiritCandleSystem : EntitySystem
                 continue;
 
             _oldStatusEffects.TryAddStatusEffect<CorporealComponent>(ghostUid, ent.Comp.Corporeal, ent.Comp.CorporealDuration, true);
-            _statusEffects.TryAddStatusEffectDuration(ghostUid, ent.Comp.Weakened, out _, ent.Comp.WeakenedDuration);
+            _status.TryAddStatusEffectDuration(ghostUid, ent.Comp.Weakened, out _, ent.Comp.WeakenedDuration);
         }
 
         _popup.PopupEntity(Loc.GetString("spirit-candle-caught-wraith"), args.User, args.User, PopupType.LargeCaution);

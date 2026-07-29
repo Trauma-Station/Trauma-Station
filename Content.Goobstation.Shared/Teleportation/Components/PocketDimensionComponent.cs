@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Systems;
+using Content.Goobstation.Shared.Teleportation.Systems;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.Teleportation.Components;
@@ -9,27 +9,33 @@ namespace Content.Goobstation.Shared.Teleportation.Components;
 /// Creates a map for a pocket dimension on spawn.
 /// When activated by alt verb, spawns a portal to this dimension or closes it.
 /// </summary>
-[RegisterComponent]
-[Access(typeof(PocketDimensionSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(PocketDimensionSystem))]
+[AutoGenerateComponentState]
 public sealed partial class PocketDimensionComponent : Component
 {
     /// <summary>
     /// Whether this pocket dimension portal is enabled.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public bool PortalEnabled = false;
 
     /// <summary>
     /// The portal in the pocket dimension. Created when the entry portal is first opened.
     /// </summary>
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? ExitPortal;
 
     /// <summary>
     /// The pocket dimension map. Created when the entry portal is first opened.
     /// </summary>
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? PocketDimensionMap;
+
+    /// <summary>
+    /// The first grid found on <see cref="PocketDimensionMap"/>.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? RootGrid;
 
     /// <summary>
     /// Path to the pocket dimension's map file
@@ -41,7 +47,7 @@ public sealed partial class PocketDimensionComponent : Component
     /// The prototype to spawn for the portal spawned in the pocket dimension.
     /// </summary>
     [DataField]
-    public EntProtoId ExitPortalPrototype = "PortalBlue";
+    public EntProtoId ExitPortalPrototype = "DimensionPotExitPortal";
 
     [DataField]
     public SoundSpecifier OpenPortalSound = new SoundPathSpecifier("/Audio/Machines/high_tech_confirm.ogg")

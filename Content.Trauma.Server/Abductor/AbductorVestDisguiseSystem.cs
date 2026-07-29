@@ -17,7 +17,6 @@ public sealed partial class AbductorVestDisguiseSystem : EntitySystem
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private IdentitySystem _identity = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private EntityQuery<VisualOrganMarkingsComponent> _organMarkingsQuery = default!;
@@ -37,22 +36,25 @@ public sealed partial class AbductorVestDisguiseSystem : EntitySystem
         "OrganHumanEyes",
     };
 
+    private CompName _visualOrganName;
+    private CompName _organMarkingsName;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AbductorVestDisguiseComponent, ComponentInit>(OnDisguiseAdded);
-        SubscribeLocalEvent<AbductorVestDisguiseComponent, ComponentShutdown>(OnDisguiseRemoved);
-
-        SubscribeLocalEvent<AbductorDisguiseStateComponent, DisguiseRevertEvent>(OnRevertEvent);
+        _visualOrganName = Factory.CompName<VisualOrganComponent>();
+        _organMarkingsName = Factory.CompName<VisualOrganMarkingsComponent>();
     }
 
-    private void OnRevertEvent(Entity<AbductorDisguiseStateComponent> ent, ref DisguiseRevertEvent args)
+    [SubscribeLocalEvent]
+    private void OnDisguiseRevert(Entity<AbductorDisguiseStateComponent> ent, ref DisguiseRevertEvent args)
     {
         args.Handled = true;
         RestoreAppearance(ent.AsNullable(), args.RaiseRenameEvents);
     }
 
+    [SubscribeLocalEvent]
     private void OnDisguiseAdded(Entity<AbductorVestDisguiseComponent> ent, ref ComponentInit args)
     {
         var user = Transform(ent).ParentUid;
@@ -62,6 +64,7 @@ public sealed partial class AbductorVestDisguiseSystem : EntitySystem
         ApplyDisguise(user);
     }
 
+    [SubscribeLocalEvent]
     private void OnDisguiseRemoved(Entity<AbductorVestDisguiseComponent> ent, ref ComponentShutdown args)
     {
         var user = Transform(ent).ParentUid;
@@ -162,9 +165,9 @@ public sealed partial class AbductorVestDisguiseSystem : EntitySystem
 
         foreach (var protoId in HumanVisualOrgans)
         {
-            var entityProto = _prototype.Index<EntityPrototype>(protoId);
-            if (!entityProto.TryGetComponent<VisualOrganComponent>(out var visualOrgan, Factory) ||
-                !entityProto.TryGetComponent<VisualOrganMarkingsComponent>(out var markings, Factory))
+            var proto = ProtoMan.Index<EntityPrototype>(protoId);
+            if (!proto.TryComp<VisualOrganComponent>(_visualOrganName, out var visualOrgan) ||
+                !proto.TryComp<VisualOrganMarkingsComponent>(_organMarkingsName, out var markings))
                 continue;
 
             organData[visualOrgan.Layer] =

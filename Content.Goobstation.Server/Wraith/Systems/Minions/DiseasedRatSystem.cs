@@ -9,14 +9,13 @@ namespace Content.Goobstation.Server.Wraith.Systems.Minions;
 
 public sealed partial class DiseasedRatSystem : SharedDiseasedRatSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private PolymorphSystem _polymorph = default!;
 
     protected override void Evolve(EntityUid uid, ProtoId<DiseasedRatFormUnlockPrototype> newProto)
     {
         base.Evolve(uid, newProto);
 
-        if (!_proto.TryIndex(newProto, out var index)
+        if (!ProtoMan.Resolve(newProto, out var index)
             || index.Entity == null
             || index.TransferComponents == null)
             return;

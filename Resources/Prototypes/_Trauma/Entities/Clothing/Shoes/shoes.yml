@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: ClothingShoesColorWhite
+  id: ClothingShoesColorWhiteSilent
+  suffix: Silent
+  components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSilence
+  - type: ViewconeSilentFootsteps

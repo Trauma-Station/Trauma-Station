@@ -1,7 +1,7 @@
 # Blueshield Officer
 - type: entity
   id: LockerBlueshield
-  parent: LockerBaseSecure
+  parent: LockerBase
   name: blueshield officer's locker
   components:
   - type: Appearance

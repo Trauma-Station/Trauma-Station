@@ -175,9 +175,10 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
+  - type: ToggleableClothing
+    clothingPrototypes: # Trauma - changed to dictionary for modsuits
       head: ClothingHeadHatHoodRad
+    verbText: toggle-clothing-verb-hood
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: HideClothingLayerClothing # Goobstation
@@ -224,14 +225,13 @@
     parent: true
     components:
     - type: Stealth
-      maxVisibility: 0.1
+      # <Trauma>
       hadOutline: true
-      thermalsImmune: true # Goobstation
-    - type: StealthOnMove
-      invisibilityPenalty: 3
-      maxInvisibilityPenalty: 1.6
-      passiveVisibilityRate: -1 # cloak very fast
-      movementVisibilityRate: 0.15 # only some cloak if moving
+      thermalsImmune: true
+      # </Trauma>
+      minVisibility: 0.1
+      lastVisibility: 0.1
+      shimmerFrequency: 0.05
   - type: PowerCellDraw
     drawRate: 3.6 # 100 seconds on the default cell # Goob edit
   - type: ToggleCellDraw
@@ -340,6 +340,7 @@
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodIan
+    verbText: toggle-clothing-verb-hood
   - type: Construction
     graph: ClothingOuterSuitIan
     node: suit
@@ -352,8 +353,8 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
-  - type: AddAccentClothing
-    accent: BarkAccent
+  - type: BarkAccent
+    relayAccent: true
 
 - type: entity
   parent: [ ClothingOuterBase, ClothingOuterBaseToggleable ]
@@ -361,6 +362,11 @@
   name: carp suit
   description: A special suit that makes you look just like a space carp, if your eyesight is bad.
   components:
+  # <Trauma>
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
+  # </Trauma>
   - type: AllowSuitStorage
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
@@ -371,9 +377,10 @@
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodCarp
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
+    verbText: toggle-clothing-verb-hood
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterSuitCarp

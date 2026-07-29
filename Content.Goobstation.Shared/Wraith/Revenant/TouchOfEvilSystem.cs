@@ -60,7 +60,7 @@ public sealed partial class TouchOfEvilSystem : EntitySystem
             || !TryComp<MeleeWeaponComponent>(args.Target, out var melee))
             return;
 
-        _popups.PopupClient(Loc.GetString("revenant-touch-of-evil-start"), args.Target, args.Target, PopupType.LargeCaution);
+        _popups.PopupEntity(Loc.GetString("revenant-touch-of-evil-start"), args.Target, args.Target, PopupType.LargeCaution);
         _admin.Add(LogType.Action, LogImpact.Low, $"{args.Target}'s Touch of Evil duration has started");
 
         touch.OriginalDamage = melee.Damage;
@@ -79,7 +79,7 @@ public sealed partial class TouchOfEvilSystem : EntitySystem
             || touch.OriginalDamage == null)
             return;
 
-        _popups.PopupClient(Loc.GetString("revenant-touch-of-evil-end"), args.Target, args.Target, PopupType.Medium);
+        _popups.PopupEntity(Loc.GetString("revenant-touch-of-evil-end"), args.Target, args.Target, PopupType.Medium);
         _admin.Add(LogType.Action, LogImpact.Low, $"{args.Target}'s Touch of Evil duration has ended");
 
         melee.Damage = touch.OriginalDamage;

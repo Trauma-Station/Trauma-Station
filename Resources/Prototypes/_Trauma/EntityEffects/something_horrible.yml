@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # What happens to you if you mutate and stay at 100 instability for too long
 
 - type: entityEffect

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponSMGResistance
@@ -5,6 +7,8 @@
   description: A small and innaccurate gun, cannot hit anything but at least it has a magazine.
   suffix: Full
   components:
+  - type: WeaponClass
+    class: SMG
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/SMGs/resistance.rsi
     layers:
@@ -45,7 +49,7 @@
         priority: 2
         whitelist:
           tags:
-            - MagazinePistolSubMachineGun
+          - MagazinePistolSubMachineGun
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -53,7 +57,7 @@
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+          - CartridgePistol
   - type: ContainerFill
     containers:
       gun_magazine: [ MagazinePistolSubMachineGun ]

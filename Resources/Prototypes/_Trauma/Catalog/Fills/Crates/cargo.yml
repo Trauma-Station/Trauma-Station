@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: CrateGenericSteel
   id: CrateSkillChipsCargo
@@ -9,5 +11,9 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SkillChipCargoTechnician
+        - id: SkillChipStrength
+          amount: 3
+        - id: SkillChipToughness
+          amount: 3
+        - id: SkillChipMining
           amount: 3

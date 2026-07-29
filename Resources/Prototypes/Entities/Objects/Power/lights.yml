@@ -1,9 +1,7 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  parent: BaseItem
-  id: BaseLightbulb
   abstract: true
+  parent: BaseItem
+  id: BaseReplacementLight
   components:
   - type: MeleeSound
     soundGroups:
@@ -12,8 +10,8 @@
   - type: Sprite
     sprite: Objects/Power/light_bulb.rsi
     layers:
-      - map: [ enum.LightBulbVisualLayers.Base ]
-        state: normal
+    - map: [ enum.LightBulbVisualLayers.Base ]
+      state: normal
   - type: LightBulb
   - type: Damageable
   - type: Injurable
@@ -30,22 +28,16 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 5
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
           params:
-            volume: -8
+            volume: -4
       - !type:DoActsBehavior
         acts: [ "Breakage" ]
-    - trigger:
+    - trigger: &DamageTrigger10
         !type:DamageTrigger
         damage: 10
       behaviors:
@@ -53,12 +45,7 @@
         sound:
           collection: GlassBreak
           params:
-            volume: -8
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
+            volume: -4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Appearance
@@ -79,9 +66,24 @@
         Blunt: 5
 
 - type: entity
-  parent: BaseLightbulb
-  id: BaseLightTube
   abstract: true
+  parent: BaseReplacementLight
+  id: BaseLightbulb
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger: *DamageTrigger10
+      behaviors: &BehaviorsSpawnShardGlass
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 1
+
+- type: entity
+  abstract: true
+  parent: BaseReplacementLight
+  id: BaseLightTube
   components:
   - type: Sprite
     sprite:  Objects/Power/light_tube.rsi
@@ -89,35 +91,8 @@
     bulb: Tube
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 5
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:DoActsBehavior
-        acts: [ "Breakage" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+    - trigger: *DamageTrigger10
+      behaviors: *BehaviorsSpawnShardGlass
 
 # Lighting color values gathered from
 # https://andi-siess.de/rgb-to-color-temperature/
@@ -240,9 +215,9 @@
   description: A light fixture.
   components:
   - type: LightBulb
-    color: "#FFE4CE" # 5000k temp
-    lightEnergy: 1
-    lightRadius: 12.5
+    color: "#FFBE7E" # Trauma - was 5000K, now 3300K color temp
+    lightEnergy: 0.8
+    lightRadius: 10
     lightSoftness: 1
     PowerUse: 25
 
@@ -253,7 +228,7 @@
   description: An aging light fixture.
   components:
   - type: LightBulb
-    color: "#FFBE7E" # 3300K temp
+    color: "#FFDABB" # old fluorescents are yellower-4500K temp
     lightEnergy: 0.5
     lightRadius: 10
     lightSoftness: 1

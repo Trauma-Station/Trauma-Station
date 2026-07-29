@@ -20,16 +20,22 @@
     bodyType: Static
   - type: Fixtures
     fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
+      fishing:
+        shape: !type:PhysShapeAabb
           bounds: "-0.25,-0.25,0.25,0.25"
         layer:
         - ItemMask
         mask:
         - HighImpassable
-        density: 1000
         hard: false
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.4
+        density: 1000 # water..?
+        mask:
+        - MachineMask
+        layer:
+        - None
   - type: Solution
     id: tank
     solution:

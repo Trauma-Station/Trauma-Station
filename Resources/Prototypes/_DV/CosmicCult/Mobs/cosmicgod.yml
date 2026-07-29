@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   id: MobCosmicGodBase
@@ -91,7 +93,7 @@
   - type: CanMoveInAir
   - type: WarpPoint
     follow: true
-    location: The Unknown
+    location: location-the-unknown
   - type: CosmicGod
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-god

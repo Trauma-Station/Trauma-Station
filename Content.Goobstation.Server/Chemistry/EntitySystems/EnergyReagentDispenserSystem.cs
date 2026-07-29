@@ -21,192 +21,190 @@ using Robust.Shared.Player;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Power.Components;
 
-namespace Content.Goobstation.Server.Chemistry.EntitySystems
+namespace Content.Goobstation.Server.Chemistry.EntitySystems;
+
+/// <summary>
+/// Contains all the server-side logic for reagent dispensers.
+/// <seealso cref="EnergyReagentDispenserComponent"/>
+/// </summary>
+[UsedImplicitly]
+public sealed partial class EnergyReagentDispenserSystem : EntitySystem
 {
-    /// <summary>
-    /// Contains all the server-side logic for reagent dispensers.
-    /// <seealso cref="EnergyReagentDispenserComponent"/>
-    /// </summary>
-    [UsedImplicitly]
-    public sealed partial class EnergyReagentDispenserSystem : EntitySystem
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private BatterySystem _battery = default!;
+
+    public override void Initialize()
     {
-        [Dependency] private AudioSystem _audioSystem = default!;
-        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
-        [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
-        [Dependency] private BatterySystem _battery = default!;
+        base.Initialize();
 
-        public override void Initialize()
-        {
-            base.Initialize();
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, ComponentStartup>(SubscribeUpdateUiState);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, SolutionChangedEvent>(SubscribeUpdateUiState);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, EntInsertedIntoContainerMessage>(SubscribeUpdateUiState);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, EntRemovedFromContainerMessage>(SubscribeUpdateUiState);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
 
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, ComponentStartup>(SubscribeUpdateUiState);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, SolutionChangedEvent>(SubscribeUpdateUiState);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, EntInsertedIntoContainerMessage>(SubscribeUpdateUiState);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, EntRemovedFromContainerMessage>(SubscribeUpdateUiState);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserSetDispenseAmountMessage>(OnSetDispenseAmountMessage);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserDispenseReagentMessage>(OnDispenseReagentMessage);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserClearContainerSolutionMessage>(OnClearContainerSolutionMessage);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, PowerChangedEvent>(OnPowerChanged);
 
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserSetDispenseAmountMessage>(OnSetDispenseAmountMessage);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserDispenseReagentMessage>(OnDispenseReagentMessage);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserClearContainerSolutionMessage>(OnClearContainerSolutionMessage);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, PowerChangedEvent>(OnPowerChanged);
-
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, MapInitEvent>(OnMapInit, before: [typeof(ItemSlotsSystem)]);
-        }
-
-        private void SubscribeUpdateUiState<T>(Entity<EnergyReagentDispenserComponent> ent, ref T ev) => UpdateUiState(ent);
-
-        private void UpdateUiState(Entity<EnergyReagentDispenserComponent> reagentDispenser)
-        {
-            var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
-            var outputContainerInfo = BuildOutputContainerInfo(outputContainer);
-            var inventory = GetInventory(reagentDispenser.Comp);
-            var batteryCharge = 0f;
-            var batteryMaxCharge = 0f;
-            var currentReceivingEnergy = 0f;
-            var usingBattery = false;
-            var idleUse = 0f;
-            var hasPower = false;
-
-            if (TryComp<BatteryComponent>(reagentDispenser, out var batteryComp))
-            {
-                batteryCharge = _battery.GetCharge((reagentDispenser, batteryComp));
-                batteryMaxCharge = batteryComp.MaxCharge;
-            }
-
-            if (TryComp<ApcPowerReceiverBatteryComponent>(reagentDispenser, out var apcPower))
-            {
-                currentReceivingEnergy = apcPower.BatteryRechargeRate;
-                usingBattery = apcPower.Enabled;
-                idleUse = apcPower.IdleLoad;
-            }
-
-            if (TryComp<ApcPowerReceiverComponent>(reagentDispenser, out var apc))
-                hasPower = apc.Powered;
-
-            var state = new EnergyReagentDispenserBoundUserInterfaceState(
-                outputContainerInfo,
-                GetNetEntity(outputContainer),
-                inventory,
-                reagentDispenser.Comp.DispenseAmount,
-                batteryCharge,
-                batteryMaxCharge,
-                currentReceivingEnergy,
-                idleUse,
-                usingBattery,
-                hasPower
-            );
-            _userInterfaceSystem.SetUiState(reagentDispenser.Owner, EnergyReagentDispenserUiKey.Key, state);
-        }
-
-        private ContainerInfo? BuildOutputContainerInfo(EntityUid? container)
-        {
-            if (container is not { Valid: true })
-                return null;
-
-            if (_solutionContainerSystem.TryGetFitsInDispenser(container.Value, out _, out var solution))
-            {
-                return new ContainerInfo(Name(container.Value), solution.Volume, solution.MaxVolume)
-                {
-                    Reagents = solution.Contents,
-                };
-            }
-
-            return null;
-        }
-
-        private List<EnergyReagentInventoryItem> GetInventory(EnergyReagentDispenserComponent comp)
-        {
-            var inventory = new List<EnergyReagentInventoryItem>();
-
-            foreach (var (reagentId, cost) in comp.Reagents)
-            {
-                if (!_prototypeManager.TryIndex<ReagentPrototype>(reagentId, out var reagentProto))
-                    continue;
-
-                inventory.Add(new EnergyReagentInventoryItem(
-                    reagentId,
-                    reagentProto.LocalizedName,
-                    cost,
-                    reagentProto.SubstanceColor
-                ));
-            }
-
-            inventory.Sort((a, b) => string.Compare(a.ReagentLabel, b.ReagentLabel, StringComparison.Ordinal));
-            return inventory;
-        }
-
-        private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> ent, ref EnergyReagentDispenserSetDispenseAmountMessage args)
-        {
-            var amount = args.Amount;
-            if (ent.Comp.DispenseAmount == amount || amount > ent.Comp.MaxDispenseAmount || amount < ent.Comp.MinDispenseAmount)
-                return;
-
-            ent.Comp.DispenseAmount = amount;
-            UpdateUiState(ent);
-            ClickSound(ent);
-        }
-
-        private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> ent, ref PowerChangedEvent args) =>
-            UpdateUiState(ent);
-
-        private void OnDispenseReagentMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserDispenseReagentMessage message)
-        {
-            var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
-            if (outputContainer is not { Valid: true }
-                || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer.Value, out var solution, out _))
-                return;
-
-            if (!TryComp<BatteryComponent>(reagentDispenser, out var batteryComp))
-                return;
-
-            var amount = (int) reagentDispenser.Comp.DispenseAmount;
-            var powerRequired = GetPowerCostForReagent(message.ReagentId, amount, reagentDispenser.Comp);
-            var currentCharge = _battery.GetCharge((reagentDispenser, batteryComp));
-
-            if (currentCharge < powerRequired)
-            {
-                _audioSystem.PlayPvs(reagentDispenser.Comp.PowerSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
-                return;
-            }
-
-
-            var sol = new Solution(message.ReagentId, amount);
-            if (!_solutionContainerSystem.TryAddSolution(solution.Value, sol))
-                return;
-
-            _battery.SetCharge(reagentDispenser.Owner, currentCharge - powerRequired);
-            ClickSound(reagentDispenser);
-            UpdateUiState(reagentDispenser);
-        }
-
-        private void OnClearContainerSolutionMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserClearContainerSolutionMessage message)
-        {
-            var outputContainerNullable = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
-            if (outputContainerNullable is not { Valid: true } outputContainer
-                || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer, out var solution, out var soln))
-                return;
-
-            var refundedPower = soln.Sum(reagent => GetPowerCostForReagent(reagent.Reagent.Prototype, (int) reagent.Quantity, reagentDispenser));
-            var currentCharge = _battery.GetCharge(reagentDispenser.Owner);
-            if (refundedPower > 0)
-                _battery.SetCharge(reagentDispenser.Owner, currentCharge + refundedPower);
-
-            _solutionContainerSystem.RemoveAllSolution(solution.Value);
-            UpdateUiState(reagentDispenser);
-            ClickSound(reagentDispenser);
-        }
-
-        private void ClickSound(Entity<EnergyReagentDispenserComponent> reagentDispenser) =>
-            _audioSystem.PlayPvs(reagentDispenser.Comp.ClickSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
-
-        private static float GetPowerCostForReagent(string reagentId, int amount, EnergyReagentDispenserComponent comp)
-            => comp.Reagents.TryGetValue(reagentId, out var cost)
-                ? cost * amount
-                : 0f;
-
-        private void OnMapInit(Entity<EnergyReagentDispenserComponent> entity, ref MapInitEvent args) =>
-            _itemSlotsSystem.AddItemSlot(entity.Owner, SharedEnergyReagentDispenser.OutputSlotName, entity.Comp.EnergyBeakerSlot);
+        SubscribeLocalEvent<EnergyReagentDispenserComponent, MapInitEvent>(OnMapInit, before: [typeof(ItemSlotsSystem)]);
     }
+
+    private void SubscribeUpdateUiState<T>(Entity<EnergyReagentDispenserComponent> ent, ref T ev) => UpdateUiState(ent);
+
+    private void UpdateUiState(Entity<EnergyReagentDispenserComponent> reagentDispenser)
+    {
+        var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
+        var outputContainerInfo = BuildOutputContainerInfo(outputContainer);
+        var inventory = GetInventory(reagentDispenser.Comp);
+        var batteryCharge = 0f;
+        var batteryMaxCharge = 0f;
+        var currentReceivingEnergy = 0f;
+        var usingBattery = false;
+        var idleUse = 0f;
+        var hasPower = false;
+
+        if (TryComp<BatteryComponent>(reagentDispenser, out var batteryComp))
+        {
+            batteryCharge = _battery.GetCharge((reagentDispenser, batteryComp));
+            batteryMaxCharge = batteryComp.MaxCharge;
+        }
+
+        if (TryComp<ApcPowerReceiverBatteryComponent>(reagentDispenser, out var apcPower))
+        {
+            currentReceivingEnergy = apcPower.BatteryRechargeRate;
+            usingBattery = apcPower.Enabled;
+            idleUse = apcPower.IdleLoad;
+        }
+
+        if (TryComp<ApcPowerReceiverComponent>(reagentDispenser, out var apc))
+            hasPower = apc.Powered;
+
+        var state = new EnergyReagentDispenserBoundUserInterfaceState(
+            outputContainerInfo,
+            GetNetEntity(outputContainer),
+            inventory,
+            reagentDispenser.Comp.DispenseAmount,
+            batteryCharge,
+            batteryMaxCharge,
+            currentReceivingEnergy,
+            idleUse,
+            usingBattery,
+            hasPower
+        );
+        _userInterfaceSystem.SetUiState(reagentDispenser.Owner, EnergyReagentDispenserUiKey.Key, state);
+    }
+
+    private ContainerInfo? BuildOutputContainerInfo(EntityUid? container)
+    {
+        if (container is not { Valid: true })
+            return null;
+
+        if (_solutionContainerSystem.TryGetFitsInDispenser(container.Value, out _, out var solution))
+        {
+            return new ContainerInfo(Name(container.Value), solution.Volume, solution.MaxVolume)
+            {
+                Reagents = solution.Contents,
+            };
+        }
+
+        return null;
+    }
+
+    private List<EnergyReagentInventoryItem> GetInventory(EnergyReagentDispenserComponent comp)
+    {
+        var inventory = new List<EnergyReagentInventoryItem>();
+
+        foreach (var (reagentId, cost) in comp.Reagents)
+        {
+            if (!ProtoMan.TryIndex<ReagentPrototype>(reagentId, out var reagentProto))
+                continue;
+
+            inventory.Add(new EnergyReagentInventoryItem(
+                reagentId,
+                reagentProto.LocalizedName,
+                cost,
+                reagentProto.SubstanceColor
+            ));
+        }
+
+        inventory.Sort((a, b) => string.Compare(a.ReagentLabel, b.ReagentLabel, StringComparison.Ordinal));
+        return inventory;
+    }
+
+    private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> ent, ref EnergyReagentDispenserSetDispenseAmountMessage args)
+    {
+        var amount = args.Amount;
+        if (ent.Comp.DispenseAmount == amount || amount > ent.Comp.MaxDispenseAmount || amount < ent.Comp.MinDispenseAmount)
+            return;
+
+        ent.Comp.DispenseAmount = amount;
+        UpdateUiState(ent);
+        ClickSound(ent);
+    }
+
+    private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> ent, ref PowerChangedEvent args) =>
+        UpdateUiState(ent);
+
+    private void OnDispenseReagentMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserDispenseReagentMessage message)
+    {
+        var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
+        if (outputContainer is not { Valid: true }
+            || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer.Value, out var solution, out _))
+            return;
+
+        if (!TryComp<BatteryComponent>(reagentDispenser, out var batteryComp))
+            return;
+
+        var amount = (int) reagentDispenser.Comp.DispenseAmount;
+        var powerRequired = GetPowerCostForReagent(message.ReagentId, amount, reagentDispenser.Comp);
+        var currentCharge = _battery.GetCharge((reagentDispenser, batteryComp));
+
+        if (currentCharge < powerRequired)
+        {
+            _audioSystem.PlayPvs(reagentDispenser.Comp.PowerSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
+            return;
+        }
+
+
+        var sol = new Solution(message.ReagentId, amount);
+        if (!_solutionContainerSystem.TryAddSolution(solution.Value, sol))
+            return;
+
+        _battery.SetCharge(reagentDispenser.Owner, currentCharge - powerRequired);
+        ClickSound(reagentDispenser);
+        UpdateUiState(reagentDispenser);
+    }
+
+    private void OnClearContainerSolutionMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserClearContainerSolutionMessage message)
+    {
+        var outputContainerNullable = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
+        if (outputContainerNullable is not { Valid: true } outputContainer
+            || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer, out var solution, out var soln))
+            return;
+
+        var refundedPower = soln.Sum(reagent => GetPowerCostForReagent(reagent.Reagent.Prototype, (int) reagent.Quantity, reagentDispenser));
+        var currentCharge = _battery.GetCharge(reagentDispenser.Owner);
+        if (refundedPower > 0)
+            _battery.SetCharge(reagentDispenser.Owner, currentCharge + refundedPower);
+
+        _solutionContainerSystem.RemoveAllSolution(solution.Value);
+        UpdateUiState(reagentDispenser);
+        ClickSound(reagentDispenser);
+    }
+
+    private void ClickSound(Entity<EnergyReagentDispenserComponent> reagentDispenser) =>
+        _audioSystem.PlayPvs(reagentDispenser.Comp.ClickSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
+
+    private static float GetPowerCostForReagent(string reagentId, int amount, EnergyReagentDispenserComponent comp)
+        => comp.Reagents.TryGetValue(reagentId, out var cost)
+            ? cost * amount
+            : 0f;
+
+    private void OnMapInit(Entity<EnergyReagentDispenserComponent> entity, ref MapInitEvent args) =>
+        _itemSlotsSystem.AddItemSlot(entity.Owner, SharedEnergyReagentDispenser.OutputSlotName, entity.Comp.EnergyBeakerSlot);
 }

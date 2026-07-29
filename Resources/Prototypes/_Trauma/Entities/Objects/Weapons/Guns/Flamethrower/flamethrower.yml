@@ -1,9 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponFlamethrower
   name: flamethrower
   description: A flamethrower, draws its fuel from the backpack tank.
   components:
+  - type: WeaponClass
+    class: Heavy
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Flamethrower/flamethrower.rsi
     state: icon

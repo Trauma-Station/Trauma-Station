@@ -50,7 +50,7 @@ public sealed partial class TriggerInsideBodyPartSystem : EntitySystem
         Dirty(ent, active);
 
         if (ent.Comp.Popup is {} loc)
-            _popup.PopupClient(Loc.GetString(loc, ("delay", ent.Comp.Delay.TotalSeconds)), ent, ent);
+            _popup.PopupEntity(Loc.GetString(loc, ("delay", ent.Comp.Delay.TotalSeconds)), ent, ent);
     }
 
     private void OnRemovedFromCavity(Entity<TriggerInsideBodyPartComponent> ent, ref RemovedFromCavityEvent args)

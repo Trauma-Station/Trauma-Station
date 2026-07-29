@@ -11,7 +11,6 @@ namespace Content.Goobstation.Server.SpecialAnimation;
 
 public sealed partial class SpecialAnimationSystem : SharedSpecialAnimationSystem
 {
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
@@ -27,7 +26,7 @@ public sealed partial class SpecialAnimationSystem : SharedSpecialAnimationSyste
         args.ApplyDelay = true;
 
         var animation = SpecialAnimationData.DefaultAnimation;
-        if (_protoMan.TryIndex(ent.Comp.AnimationDataId, out var animationProto))
+        if (ProtoMan.TryIndex(ent.Comp.AnimationDataId, out var animationProto))
             animation = animationProto.Animation;
 
         if (ent.Comp.OverrideText != null)
@@ -109,7 +108,7 @@ public sealed partial class SpecialAnimationSystem : SharedSpecialAnimationSyste
         ProtoId<SpecialAnimationPrototype>? animationDataId = null,
         string? overrideText = null)
     {
-        if (!_protoMan.TryIndex(animationDataId, out var animationPrototype))
+        if (!ProtoMan.TryIndex(animationDataId, out var animationPrototype))
             return;
 
         PlayAnimationFiltered(sprite, filter, animationPrototype.Animation, overrideText);

@@ -45,8 +45,18 @@ public abstract partial class SharedHereticRitualSystem
 
         fleshMind.Ghouls = fleshMind.Ghouls.Where(Exists).ToList();
         args.Result = fleshMind.Ghouls.Count < fleshMind.GhoulLimit;
+
+        // Below we kill 1 existing ghoul that is ssd to free up the limit
+        // This _net check WILL cause misspredicts if any ghoul is successfully killed, but it is checking for
+        // player sessions which client doesn't see anyway
+        if (args.Result || _net.IsClient)
+            return;
+
+        if (fleshMind.Ghouls.Any(x => _ghoul.TryKillAndDeconvertInactiveGhoul(x)))
+            args.Result = fleshMind.Ghouls.Count < fleshMind.GhoulLimit;
+
         if (!args.Result)
-            _popup.PopupClient(Loc.GetString("heretic-ritual-fail-ghoul-limit"), user, user);
+            _popup.PopupEntity(Loc.GetString("heretic-ritual-fail-ghoul-limit"), user, user);
     }
 
     private void OnRustWall(Entity<TransformComponent> ent,
