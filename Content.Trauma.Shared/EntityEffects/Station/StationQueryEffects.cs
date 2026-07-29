@@ -16,6 +16,7 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
     /// </summary>
     [DataField(required: true)]
     public string CompName = string.Empty;
+    // TODO: use CompName if SpawnPoint is moved to shared...
 
     /// <summary>
     /// The effects to apply to each entity.

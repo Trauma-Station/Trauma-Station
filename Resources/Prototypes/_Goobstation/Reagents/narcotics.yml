@@ -99,11 +99,12 @@
   meltingPoint: 36.0
   metabolisms:
     Bloodstream:
+      metabolismRate: 10 # Trauma
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectBlindness
         type: Add
-        time: 3
+        time: 10
 
 - type: reagent
   id: Amnestizine
@@ -334,6 +335,10 @@
       - !type:Jitter
       - !type:ModifyStatusEffect
         effectProto: OleoresinSlowdownStatusEffect
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
 
 - type: reagent
   id: Heroin # hunter biden's favourite snack

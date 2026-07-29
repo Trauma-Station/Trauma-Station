@@ -47,7 +47,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: ClothingHeadHelmetBase # Trauma - was ClothingHeadBase
   id: ClothingHeadLightBase
   name: base helmet with light
   categories: [ HideSpawnMenu ]
@@ -70,7 +70,7 @@
     enabled: false
     radius: 5 # Trauma - was 3
     energy: 1
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
   - type: Appearance
@@ -164,7 +164,6 @@
       chanceMultipliers:
         Aerial: 0
   # </Trauma>
-
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]
@@ -246,7 +245,7 @@
     enabled: false
     radius: 3
     energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
   - type: Appearance

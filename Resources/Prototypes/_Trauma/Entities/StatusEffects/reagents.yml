@@ -116,3 +116,11 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.7
     walkSpeedModifier: 0.7
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: VisualTearsStatusEffect
+  name: tears
+  components:
+  - type: ShowSpriteLayerStatusEffect
+    layer: enum.HumanoidVisualEmoteLayers.Cry

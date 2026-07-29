@@ -9,7 +9,6 @@
     CookingKnowledge: 0
     DoorsKnowledge: 2
     AirlocksKnowledge: 1
-    ToysKnowledge: 0
     BananiumKnowledge: 0
     BotsKnowledge: 0
     FurnitureKnowledge: 2
@@ -19,7 +18,7 @@
     WindowsKnowledge: 2
     SmokeablesKnowledge: 0
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageMoffic: 3
@@ -36,7 +35,7 @@
     MeleeKnowledge: 0
     ShootingKnowledge: 0
     # Crafting Quality
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
     MetalworkingKnowledge: 0

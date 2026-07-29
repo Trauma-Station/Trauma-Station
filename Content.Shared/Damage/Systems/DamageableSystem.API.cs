@@ -281,7 +281,7 @@ public sealed partial class DamageableSystem
         if (amount >= 0)
         {
             var name = group?.Id ?? "all damage";
-            Log.Error($"Tried to evenly heal {ToPrettyString(ent)} with a non-negative amount {amount} of {name}");
+            Log.Error($"Tried to evenly heal {ToPrettyString(ent)} with a non-negative amount {amount} of {name}\nStack trace:\n{Environment.StackTrace}");
             return damageChange;
         }
 

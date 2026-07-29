@@ -1,3 +1,5 @@
+using Robust.Shared.Serialization;
+
 namespace Content.Shared.Security;
 
 /// <summary>
@@ -16,6 +18,7 @@ namespace Content.Shared.Security;
 /// Brutalize - the person should be non-lethally beaten
 /// Demote - the person should be demoted
 /// </summary>
+[Serializable, NetSerializable]
 public enum SecurityStatus : byte
 {
     None,

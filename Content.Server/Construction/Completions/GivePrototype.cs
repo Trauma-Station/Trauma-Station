@@ -2,7 +2,7 @@ using Content.Server.Stack;
 using Content.Shared.Construction;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Stacks;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -24,7 +24,8 @@ public sealed partial class GivePrototype : IGraphAction
         if (string.IsNullOrEmpty(Prototype))
             return;
 
-        if (EntityPrototypeHelpers.HasComponent<StackComponent>(Prototype))
+        var proto = IoCManager.Resolve<IPrototypeManager>(); // Trauma
+        if (proto.Index(Prototype).HasComp<StackComponent>(entityManager.ComponentFactory)) // Trauma - use proper check
         {
             var stackSystem = entityManager.EntitySysManager.GetEntitySystem<StackSystem>();
             var stacks = stackSystem.SpawnMultipleNextToOrDrop(Prototype, Amount, userUid ?? uid);

@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
+using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
@@ -21,6 +20,7 @@ using Content.Server.Shuttles.Systems;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Audio;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Eye;
 using Content.Shared.GameTicking.Components;
@@ -76,7 +76,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private CuffableSystem _cuffable = default!; // goob edit
+    [Dependency] private CuffableSystem _cuffable = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private RottingSystem _rotting = default!;
@@ -279,10 +279,10 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     private bool CultistsAlive()
     {
         var query = EntityQueryEnumerator<CosmicCultComponent, MobStateComponent>();
-        while (query.MoveNext(out var ent, out var comp, out var mob)) // goob edit
+        while (query.MoveNext(out var ent, out var comp, out var mob))
         {
 
-            if (TryComp<CuffableComponent>(ent, out var cuffComp) && _cuffable.IsCuffed((ent, cuffComp))) // goob edit
+            if (TryComp<CuffableComponent>(ent, out var cuffComp) && _cuffable.IsCuffed((ent, cuffComp)))
                 continue; // dont count restrained cultists as counting towards objectives.
 
             if (!mob.Running
@@ -544,7 +544,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         cosmicGamerule.TotalCult--;
         cosmicGamerule.Cultists.Remove(ent);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnComponentShutdown(Entity<CosmicLesserCultistComponent> ent, ref ComponentShutdown args)

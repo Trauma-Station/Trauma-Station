@@ -1,9 +1,9 @@
 // <Trauma>
 using Content.Trauma.Common.Storage;
-using Content.Shared.Tag;
 // </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -29,9 +29,7 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private StackSystem _stackSystem = default!;
-    [Dependency] private TagSystem _tag = default!; // Goobstation Change
 
-    private static readonly ProtoId<TagPrototype> OreTag = "Ore"; // Goobstation Change
     public override void Initialize()
     {
         base.Initialize();
@@ -117,7 +115,7 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
         _audio.PlayPvs(storage.InsertingSound, receiver);
         if (user != receiver) // Trauma - for automation to not spam popups
             _popup.PopupEntity(Loc.GetString("machine-insert-item",
-                ("user", user),
+                ("user", Identity.Entity(user, EntityManager)),
                 ("machine", receiver),
                 ("item", toInsert)),
             receiver);

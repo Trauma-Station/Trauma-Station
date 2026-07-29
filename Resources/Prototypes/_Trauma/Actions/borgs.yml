@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionBorgDisguiseToggle
+  name: Toggle Chameleon Projector
+  description: Use this to toggle your chameleon projector, allowing you to hide as a Nanotrasen cyborg.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Trauma/Interface/Actions/actions_borg.rsi
+      state: projector
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:BorgDisguiseToggleActionEvent

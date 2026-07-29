@@ -30,7 +30,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -95,6 +94,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
+    private CompName _graspName;
+
     public static readonly DamageSpecifier AllDamage = new();
 
     public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
@@ -102,6 +103,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _graspName = Factory.CompName<MansusGraspComponent>();
 
         SubscribeBlade();
 
@@ -135,7 +138,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             return;
         }
 
-        if (!ProtoMan.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
+        if (!ProtoMan.Index(args.Args.TouchSpell).HasComp(_graspName))
             return;
 
         if (!Heretic.TryGetHereticComponent(ent.AsNullable(), out var heretic, out var mind))

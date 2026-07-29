@@ -19,20 +19,15 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SkillChipPassenger
-        - id: SkillChipBartender
-        - id: SkillChipBotanist
-        - id: SkillChipChaplain
-        - id: SkillChipChef
+        - id: SkillChipEducation
+          amount: 6
+        - id: SkillChipCombatEducation
+          amount: 4
+        - id: SkillChipEchelonEducation
         - id: SkillChipClown
-        - id: SkillChipJanitor
-        - id: SkillChipLawyer
-        - id: SkillChipLibrarian
-        - id: SkillChipMime
-        - id: SkillChipMusician
-        - id: SkillChipRadioHost
-        - id: SkillChipReporter
-        - id: SkillChipServiceWorker
+        - id: SkillChipChef
+        - id: SkillChipStoner
+
 
 - type: entity
   parent: BoxSkillChipsBase
@@ -43,11 +38,18 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SkillChipQuartermaster
-        - id: SkillChipSalvageSpecialist
-          amount: 2
-        - id: SkillChipCargoTechnician
+        - id: SkillChipMining
           amount: 3
+        - id: SkillChipStrength
+          amount: 3
+        - id: SkillChipToughness
+          amount: 3
+        - id: SkillChipMagicalDampener
+          amount: 2
+        - id: SkillChipCombatDampener
+          amount: 2
+        - id: SkillChipMindPurge
+          amount: 1
 
 - type: entity
   parent: BoxSkillChipsBase
@@ -58,12 +60,10 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SkillChipChiefEngineer
-        - id: SkillChipAtmosphericTechnician
-        - id: SkillChipStationEngineer
-          amount: 3
-        - id: SkillChipTechnicalAssistant
-          amount: 2
+        - id: SkillChipTool
+          amount: 6
+        - id: SkillChipDatabase
+          amount: 6
 
 - type: entity
   parent: BoxSkillChipsBase
@@ -74,11 +74,11 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SkillChipChiefMedicalOfficer
-        - id: SkillChipParamedic
-        - id: SkillChipMedicalDoctor
-          amount: 2
-        - id: SkillChipMedicalIntern
+        - id: SkillChipDoctor
+          amount: 5
+        - id: SkillChipSurgeon
+          amount: 5
+        - id: SkillChipChemist
           amount: 2
 
 - type: entity
@@ -90,13 +90,8 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SkillChipResearchDirector
-        - id: SkillChipScientist
-          amount: 2
-        - id: SkillChipGeneticist
-        - id: SkillChipRoboticist
-        - id: SkillChipResearchAssistant
-          amount: 2
+        - id: SkillChipDatabase
+          amount: 6
 
 - type: entity
   parent: BoxSkillChipsBase
@@ -107,9 +102,11 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: SkillChipHeadOfSecurity
-        - id: SkillChipWarden
-        - id: SkillChipSecurityOfficer
-          amount: 2
-        - id: SkillChipSecurityCadet
-          amount: 2
+        - id: SkillChipToughness
+          amount: 3
+        - id: SkillChipStrength
+          amount: 3
+        - id: SkillChipStamina
+          amount: 3
+        - id: SkillChipThrowing
+          amount: 3

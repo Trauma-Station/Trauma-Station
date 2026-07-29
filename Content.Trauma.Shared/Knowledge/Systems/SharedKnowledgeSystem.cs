@@ -60,6 +60,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         base.Initialize();
 
+        InitializeMartialArts();
         InitializeLanguage();
         InitializeOnWear();
 

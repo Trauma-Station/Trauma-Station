@@ -24,14 +24,12 @@ internal sealed partial class StoreOnCollideSystem : EntitySystem
         SubscribeLocalEvent<StoreOnCollideComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<StoreOnCollideComponent, StorageAfterOpenEvent>(AfterOpen);
         // TODO: Add support to stop colliding after throw, wands will need a WandComp
-
-        SubscribeLocalEvent<StoreOnCollideComponent, TimedDespawnEvent>(OnTimedDespawn); // Goobstation
-        SubscribeLocalEvent<StoreOnCollideComponent, LockToggledEvent>(OnLockToggle); // Goobstation
-        SubscribeLocalEvent<StoreOnCollideComponent, PhysicsSleepEvent>(OnSleep); // Goobstation
     }
 
     // Goobstation start
 
+    // TODO: kys
+    [SubscribeLocalEvent]
     private void OnSleep(Entity<StoreOnCollideComponent> ent, ref PhysicsSleepEvent args)
     {
         var comp = ent.Comp;
@@ -40,6 +38,7 @@ internal sealed partial class StoreOnCollideSystem : EntitySystem
             Disable(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnLockToggle(Entity<StoreOnCollideComponent> ent, ref LockToggledEvent args)
     {
         if (args.Locked)
@@ -51,9 +50,10 @@ internal sealed partial class StoreOnCollideSystem : EntitySystem
             Disable(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnTimedDespawn(Entity<StoreOnCollideComponent> ent, ref TimedDespawnEvent args)
     {
-        _storage.OpenStorage(ent);
+        _storage.OpenStorage(ent.Owner);
     }
 
     private void Disable(Entity<StoreOnCollideComponent> ent)

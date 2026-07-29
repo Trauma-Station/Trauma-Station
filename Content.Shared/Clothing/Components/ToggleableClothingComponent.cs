@@ -25,7 +25,7 @@ public sealed partial class ToggleableClothingComponent : Component
     ///     Action used to toggle the clothing on or off.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId? Action;
+    public EntProtoId? Action = "ActionToggleSuitPiece"; // Trauma - added ActionToggleSuitPiece
 
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;

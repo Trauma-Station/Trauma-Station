@@ -7,7 +7,6 @@ using Content.Server.Mind;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
 
@@ -26,26 +25,25 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popups = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
 
+    private CompName _wraithName;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EvolveComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<EvolveComponent, ComponentShutdown>(OnShutdown);
-
-        SubscribeLocalEvent<EvolveComponent, WraithEvolveEvent>(OnWraithEvolve);
-        SubscribeLocalEvent<EvolveComponent, RadialSelectorSelectedMessage>(OnWraithEvolveRecieved);
-
-        SubscribeLocalEvent<AbsorbCorpseComponent, WraithEvolveAttemptEvent>(OnWraithEvolveAttempt);
+        _wraithName = Factory.CompName<WraithComponent>();
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<EvolveComponent> ent, ref MapInitEvent args) =>
         _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<EvolveComponent> ent, ref ComponentShutdown args) =>
         _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
 
+    [SubscribeLocalEvent]
     private void OnWraithEvolve(Entity<EvolveComponent> ent, ref WraithEvolveEvent args)
     {
         var ev = new WraithEvolveAttemptEvent(ent.Comp.CorpsesRequired);
@@ -60,6 +58,7 @@ public sealed partial class WraithEvolveSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnWraithEvolveRecieved(Entity<EvolveComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         Evolve(ent, args.SelectedItem);
@@ -71,8 +70,8 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     {
         var uid = ent.Owner;
         if (evolve == null
-            || !ProtoMan.TryIndex(evolve, out var evolvePrototype)
-            || !evolvePrototype.HasComponent<WraithComponent>()
+            || !ProtoMan.Resolve(evolve, out var evolvePrototype)
+            || !evolvePrototype.HasComp(_wraithName)
             || !_mind.TryGetMind(uid, out var mindUid, out var mind))
             return;
 
@@ -93,6 +92,7 @@ public sealed partial class WraithEvolveSystem : EntitySystem
         Del(uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnWraithEvolveAttempt(Entity<AbsorbCorpseComponent> ent, ref WraithEvolveAttemptEvent args)
     {
         if (ent.Comp.CorpsesAbsorbed < args.CorpsesRequired)

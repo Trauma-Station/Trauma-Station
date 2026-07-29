@@ -114,8 +114,8 @@ public partial class MartialArtsSystem
 
         if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
             !list.SequenceEqual(attackList) ||
-            !_conditions.TryConditions(user, proto.UserConditions, user: user) ||
-            !_conditions.TryConditions(target, proto.Conditions, user: user))
+            !_conditions.TryConditions(user, proto.UserConditions, sourceEnt: user) ||
+            !_conditions.TryConditions(target, proto.Conditions, sourceEnt: user))
             return false;
 
         return true;

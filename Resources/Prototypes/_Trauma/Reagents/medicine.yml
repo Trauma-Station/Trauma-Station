@@ -14,3 +14,56 @@
       - !type:DiseaseProgressChange
         affectedType: Parasite
         progressModifier: -0.10
+
+- type: reagent
+  id: Suffocatium
+  name: reagent-name-suffocatium
+  group: Medicine
+  desc: reagent-desc-suffocatium
+  physicalDesc: reagent-physical-desc-frosty
+  flavor: medicine
+  color: "#a8e4f0"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.25
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: -0.75
+      - !type:Flammable # douses 1.35 stacks/s with natural fade; max fire out in ~7s
+        multiplier: -1.25
+        conditions:
+        - !type:OnFireCondition
+      - !type:HealthChange # no fire, smothers the patient instead
+        conditions:
+        - !type:OnFireCondition
+          inverted: true
+        damage:
+          types:
+            Asphyxiation: 0.5
+      - !type:AdjustTemperature # cools toward baseline (Leporazine sidegrade)
+        conditions:
+        - !type:TemperatureCondition
+          min: 293.15
+        amount: -12000 # thermal energy, not temperature!
+      - !type:AdjustReagent
+        reagent: Phlogiston
+        amount: -2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Suffocatium
+          min: 16
+        damage:
+          types:
+            Asphyxiation: 1.5
+            Slash: 0.5
+  reactiveEffects:
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+  tileReactions:
+  - !type:ExtinguishTileReaction { }
+  - !type:SpillIfPuddlePresentTileReaction { }

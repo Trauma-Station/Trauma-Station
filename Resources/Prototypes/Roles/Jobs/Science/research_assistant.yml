@@ -22,7 +22,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipResearchAssistant
+    - SkillChipEducation
   # </Trauma>
 
 - type: startingGear

@@ -114,7 +114,7 @@
 
 - type: entity
   id: AntimovCircuitBoard
-  parent: [BaseSiliconLawboard, BaseSyndicateAnchoredContraband] # Goob - NTR can't sell it
+  parent: [BaseSiliconLawboard, BaseSyndicateContrabandUnscannable] # Trauma - unscannable
   name: law board (Antimov)
   description: An electronics board containing the Antimov lawset.
   components:
