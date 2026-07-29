@@ -266,7 +266,7 @@ ReverseEngineeringMachine: null
 Roboisseur: null
 SalvagePartsSpawnerLow: null
 SalvagePartsSpawnerMid: null
-SecBreachingHammer: null
+# SecBreachingHammer: null Trauma
 Shinai: null
 ShockCollar: null
 shuttle_manipulator: null
