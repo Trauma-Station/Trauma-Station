@@ -12,6 +12,7 @@
   access:
   - Service
   - Hydroponics
+  - Maintenance
 
 - type: startingGear
   id: RancherGear
