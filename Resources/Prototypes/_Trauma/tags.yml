@@ -126,7 +126,7 @@
   id: Ed209WeaponsControl
 
 - type: Tag
-  id: OrganEggSack
+  id: EggPlant
 
 - type: Tag
   id: EnchantingScroll # Enchanting ink's EnchantAdder whitelist
@@ -203,12 +203,14 @@
 - type: Tag
   id: MimicToolbox # Emote: Tweak
 
-## O ##
-
-# :o nothing
 - type: Tag
   id: MagicMushroom
+  
+## O ##
 
+- type: Tag
+  id: OrganEggSack
+  
 ## P ##
 
 - type: Tag
