@@ -7,7 +7,7 @@
     edges:
     - to: bot
       steps:
-      - tag: Egg
+      - tag: OrganMouseEggSack
         icon:
           sprite: Objects/Consumable/Food/egg.rsi
           state: rainbow
