@@ -332,3 +332,14 @@ Entries:
   id: 35
   time: '2026-07-27T21:53:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3768
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Fland,Kettle,Origin now have roboticist mapped
+  - type: Add
+    message: Box,Kettle,Fland,Oasis's AI now have access to a turret AI control panel
+  - type: Fix
+    message: Fland,Oasis's Master Silo has been moved from Vault to Cargo
+  id: 36
+  time: '2026-07-29T01:47:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3817

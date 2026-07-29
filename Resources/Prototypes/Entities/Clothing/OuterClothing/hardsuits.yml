@@ -459,6 +459,7 @@
       head: ClothingHeadHelmetHardsuitEngineeringWhite
   - type: ClothingGrantComponent # Goobstation - Make sure the CE doesn't get cooked by supermatter
     component:
+    - type: RadStormImmune
     - type: SupermatterImmune
     # tesla immunity too
     - type: EventHorizonIgnore
