@@ -101,7 +101,7 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
             if (!SetPopupCooldown((uid, component)))
                 return;
 
-            _popup.PopupClient(Loc.GetString("self-extinguisher-refill-full"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("self-extinguisher-refill-full"), args.User, args.User);
             return;
         }
 
@@ -117,7 +117,7 @@ public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
 
         Dirty(uid, component);
 
-        _popup.PopupClient(Loc.GetString("self-extinguisher-refill"), args.User, args.User);
+        _popup.PopupEntity(Loc.GetString("self-extinguisher-refill"), args.User, args.User);
         _audio.PlayPredicted(component.RefillSound, uid, args.User);
 
         QueueDel(args.Used);

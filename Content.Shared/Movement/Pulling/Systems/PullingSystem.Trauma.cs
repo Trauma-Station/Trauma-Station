@@ -242,6 +242,11 @@ public sealed partial class PullingSystem
             RaiseLocalEvent(puller, ref ev);
             newStage = ev.Stage;
         }
+        // allow entities to override starting grab stage
+        else if (newStage == GrabStage.Soft && puller.Comp.StartingGrabStage != GrabStage.Soft)
+        {
+            newStage = puller.Comp.StartingGrabStage;
+        }
 
         if (grabStageOverride != null)
         {
@@ -311,7 +316,7 @@ public sealed partial class PullingSystem
         _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
 
         _blocker.UpdateCanMove(pullable);
-        _modifierSystem.RefreshMovementSpeedModifiers(puller);
+        _modifierSystem.RefreshMovementSpeedModifiers(puller.Owner);
 
         var stageKey = puller.Comp.GrabStage.ToString().ToLower();
         var pullerName = Identity.Entity(puller, EntityManager);

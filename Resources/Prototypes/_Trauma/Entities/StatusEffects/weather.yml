@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: WeatherSnowfallHeavy
   id: WeatherSnowfallMagic
@@ -16,10 +18,15 @@
   parent: WeatherFallout
   id: WeatherRadiationStorm
   components:
-  - type: WeatherDamage
-    damage:
-      types:
-        Radiation: 2
+  - type: WeatherEffects
+    effects:
+    - !type:HealthChange
+      splitDamage: None
+      damage:
+        types:
+          Radiation: 0.25
+    - !type:RandomNegativeMutation
+      probability: 0.1 # average 10s of exposure per mutation
     safeIndoors: false # entire station is indoors...
     safeAreas:
     - AreaAiUpload

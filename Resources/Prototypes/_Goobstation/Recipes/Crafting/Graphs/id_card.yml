@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Total mats: 4 plastic, 8 cable, 4 steel
 - type: constructionGraph
   id: MakeshiftIDCard

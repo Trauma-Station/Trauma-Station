@@ -1,26 +1,13 @@
-# SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 NULL882 <104377798+NULL882@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 cohanna <conornhanna@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Southbridge <7013162+southbridge-fur@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
+  parent: [BaseWindowStructure, BaseRCDResistant]
   id: MiningWindow
   name: mining window
-  parent: WindowRCDResistant
   components:
   - type: Sprite
-    drawdepth: WallTops
     sprite: Structures/Windows/mining.rsi
   - type: Icon
     sprite: Structures/Windows/mining.rsi
+    state: full
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -30,12 +17,6 @@
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 100
@@ -55,20 +36,15 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     base: mwindow
-  - type: Appearance
   - type: DamageVisuals
-    thresholds: [5, 10, 20]
     damageDivisor: 4
-    trackAllDamage: true
-    damageOverlay:
-      sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
     price: 100
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WindowCosmicCult
 
 - type: entity
-  parent: ShuttleWindow
+  parent: MiningWindow
   id: MiningWindowDiagonal
   suffix: diagonal
   placement:

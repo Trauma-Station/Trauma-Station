@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseMutation
@@ -34,7 +36,7 @@
     added:
     - type: SpecialHighTempImmunity
     - type: FireImmunity
-    - type: WeatherImmune # safe from ash storms
+    - type: AshStormImmune
 
 - type: entity
   parent: BaseMutation

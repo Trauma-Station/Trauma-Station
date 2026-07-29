@@ -1,9 +1,23 @@
 - type: entity
   parent: BaseItem
   id: FloorTileItemBase
-  description: The floor was meant to hold this, not you.
+  description: These could work as a pretty decent throwing weapon.
   abstract: true
   components:
+  # <Trauma>
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+  - type: Tag
+    tags:
+    - DroneUsable
+  - type: ThrowableBlocked
+    behavior: Damage
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Nostalgia # for making Tilenol
+        Quantity: 1
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tiles/tile.rsi
   - type: Item
@@ -12,25 +26,14 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Blunt: 2 # Goob - was 5
-  - type: EmbeddableProjectile # Goob
-    sound: /Audio/Weapons/star_hit.ogg
+        Blunt: 2 # Trauma - was 5
   - type: Stack
     count: 1
-  - type: Tag
-    tags:
-      - DroneUsable # Goobstation
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 40 # Goob - was 30
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20
@@ -45,20 +48,10 @@
   - type: DamageOnLand
     damage:
       types:
-        Blunt: 5
-  - type: ThrowableBlocked # Goobstation
-    behavior: Damage
-    damage:
-      types:
-        Blunt: 20
+        Blunt: 20 # Trauma - was 5
   - type: GuideHelp
     guides:
     - ExpandingRepairingStation
-  - type: Extractable # Goobstation - Tilenol
-    juiceSolution:
-      reagents:
-      - ReagentId: Nostalgia
-        Quantity: 1
 
 - type: entity
   name: steel dark checker tile
@@ -266,6 +259,14 @@
   parent: FloorTileItemBase
   id: FloorTileItemSteel
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 #Metal floor tiles deal more damage than standard
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/block_metal1.ogg
+  # </Trauma>
   - type: Sprite
     state: steel
   - type: Item
@@ -279,12 +280,6 @@
   - type: Construction
     graph: TileSteel
     node: steeltile
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 #Metal floor tiles deal more damage than standard
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/block_metal1.ogg
 
 - type: entity
   name: offset steel tile
@@ -615,7 +610,7 @@
 
 - type: entity
   name: steel tile
-  parent: FloorTileItemSteel
+  parent: FloorTileItemSteel # Trauma - made of steel for damage/sound
   id: FloorTileItemMetalDiamond
   components:
   - type: Sprite

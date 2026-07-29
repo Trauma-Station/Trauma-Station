@@ -19,11 +19,11 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
     [Dependency] private BorgSystem _borgSystem = default!;
     [Dependency] private ServerInventorySystem _inventorySystem = default!;
 
-    // Goob - added borgSubtype
-    protected override void SelectBorgModule(Entity<BorgSwitchableTypeComponent> ent, ProtoId<BorgTypePrototype> borgType, ProtoId<BorgSubtypePrototype> borgSubtype)
+    protected override void SelectBorgModule(Entity<BorgSwitchableTypeComponent> ent, ProtoId<BorgTypePrototype> borgType,
+        ProtoId<BorgSubtypePrototype> borgSubtype) // Trauma
     {
-        var prototype = Prototypes.Index(borgType);
-        var subtypePrototype = Prototypes.Index(borgSubtype); // goob
+        var prototype = ProtoMan.Index(borgType);
+        var subtypePrototype = ProtoMan.Index(borgSubtype); // Trauma
 
         // Assign radio channels
         string[] radioChannels = [.. ent.Comp.InherentRadioChannels, .. prototype.RadioChannels];
@@ -75,7 +75,7 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
         // End DeltaV Code
 
         // Configure special components
-        if (Prototypes.Resolve(ent.Comp.SelectedBorgType, out var previousPrototype))
+        if (ProtoMan.Resolve(ent.Comp.SelectedBorgType, out var previousPrototype))
         {
             if (previousPrototype.AddComponents is { } removeComponents)
                 EntityManager.RemoveComponents(ent, removeComponents);

@@ -2,6 +2,7 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
 using Content.Shared.Timing;
@@ -18,7 +19,6 @@ public abstract partial class SharedHereticRitualSystem
     private void SubscribeEffects()
     {
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<LookupRitualEffect>>(OnLookup);
-        SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SacrificeEffect>>(OnSacrifice);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SpawnRitualEffect>>(OnSpawn);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<PathBasedSpawnEffect>>(OnPathSpawn);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<GhoulifyEffect>>(OnGhoulify);
@@ -26,15 +26,15 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<FindLostLimitedOutputEffect>>(OnFindLimited);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<OpenRuneBuiEffect>>(OnBui);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<EffectsRitualEffect>>(OnEffects);
-        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<UpdateKnowledgeEffect>>(OnUpdateKnowledge);
-        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<RemoveRitualsEffect>>(OnRemoveRituals);
-        SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<SplitIngredientsRitualEffect>>(OnSplit);
-        SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<IfElseRitualEffect>>(OnIfElse);
-
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<NestedRitualEffect>>(OnNested);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SpawnCosmicField>>(OnCosmicField);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SetBlackboardValuesRitualEffect>>(
             OnBlackboard);
+        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<UpdateKnowledgeEffect>>(OnUpdateKnowledge);
+        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<RemoveRitualsEffect>>(OnRemoveRituals);
+        SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<SplitIngredientsRitualEffect>>(OnSplit);
+        SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<IfElseRitualEffect>>(OnIfElse);
+        SubscribeLocalEvent<MindContainerComponent, HereticRitualEffectEvent<SacrificeEffect>>(OnSacrifice);
         SubscribeLocalEvent<RustGraspComponent, HereticRitualEffectEvent<ResetRustGraspDelayEffect>>(OnRustDelay);
         SubscribeLocalEvent<GhoulComponent, HereticRitualEffectEvent<AddToFleshGhoulLimit>>(OnAddToFleshLimit);
     }
@@ -257,7 +257,7 @@ public abstract partial class SharedHereticRitualSystem
         }
     }
 
-    private void OnSacrifice(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<SacrificeEffect> args)
+    private void OnSacrifice(Entity<MindContainerComponent> ent, ref HereticRitualEffectEvent<SacrificeEffect> args)
     {
         if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) ||
             !TryComp(mind, out MindComponent? mindComp) || !TryComp(mind, out StoreComponent? store) ||
@@ -265,13 +265,33 @@ public abstract partial class SharedHereticRitualSystem
             return;
 
         var knowledgeGain = 0f;
+
+        bool isHeretic;
+        EntityUid otherMind;
+        HereticComponent? otherHeretic;
+        // Don't sacrifice ourselves and don't sacrifice heretics that are attached to other (living) entity
+        if (HasComp<HereticBodyComponent>(ent) && ent.Comp.OldMind is { } oldMind && oldMind != mind &&
+            TryComp(oldMind, out MindComponent? oldMindComp) && _mind.IsCharacterDeadIc(oldMindComp))
+        {
+            isHeretic = true;
+            otherMind = oldMind;
+            otherHeretic = CompOrNull<HereticComponent>(otherMind);
+        }
+        else
+            isHeretic = _heretic.TryGetHereticComponent(ent.AsNullable(), out otherHeretic, out otherMind);
+
         var (isCommand, isSec) = IsCommandOrSec(ent);
-        var isHeretic = _heretic.TryGetHereticComponent(ent.Owner, out var otherHeretic, out var otherMind);
         knowledgeGain += isHeretic || IsSacrificeTarget((mind, heretic), ent)
             ? isCommand || isSec || isHeretic ? 3f : 2f
             : 0f;
 
         _gibbing.Gib(ent);
+
+        if (otherHeretic != null)
+            RemCompDeferred(otherMind, otherHeretic);
+
+        if (knowledgeGain == 0)
+            return;
 
         var ev = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeObjective);
         RaiseLocalEvent(mind, ref ev);
@@ -281,12 +301,6 @@ public abstract partial class SharedHereticRitualSystem
             var ev2 = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeHeadObjective);
             RaiseLocalEvent(mind, ref ev2);
         }
-
-        if (otherHeretic != null)
-            RemCompDeferred(otherMind, otherHeretic);
-
-        if (knowledgeGain == 0)
-            return;
 
         var dict = new Dictionary<string, FixedPoint2>()
         {

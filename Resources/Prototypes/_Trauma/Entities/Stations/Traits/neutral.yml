@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: stationTrait
   id: BananiumShipment
   name: "Bananium Shipment"
@@ -16,6 +18,7 @@
     effects:
     - !type:TeleportRandomArea
       safe: true
+      compName: Area
     # TODO: spawn poof effects
 
 - type: stationTrait

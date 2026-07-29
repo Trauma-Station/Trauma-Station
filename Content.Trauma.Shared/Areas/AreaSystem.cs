@@ -12,7 +12,6 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed partial class AreaSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MapAreaSystem _mapArea = default!;
     [Dependency] private TurfSystem _turf = default!;
@@ -67,7 +66,7 @@ public sealed partial class AreaSystem : EntitySystem
         DepartmentAreas.Clear();
         var name = Factory.GetComponentName<AreaComponent>();
         var dept = Factory.GetComponentName<DepartmentAreaComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: proto.HasComp(name) after engine update
             if (!proto.Components.ContainsKey(name))

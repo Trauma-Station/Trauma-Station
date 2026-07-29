@@ -45,20 +45,8 @@ public sealed partial class CrackedLanternSystem : EntitySystem
 
     private readonly HashSet<Entity<NpcFactionMemberComponent>> _targets = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CrackedLanternComponent, GotEquippedHandEvent>(OnEquipHand);
-        SubscribeLocalEvent<CrackedLanternComponent, GotUnequippedHandEvent>(OnUnequipHand);
-        SubscribeLocalEvent<CrackedLanternComponent, MeleeHitEvent>(OnMelee);
-        SubscribeLocalEvent<CrackedLanternComponent, EntityUnpausedEvent>(OnUnpaused);
-
-        SubscribeLocalEvent<CrackedLanternSummonComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<CrackedLanternSummonComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
-    }
-
     // Refresh hint when heretic exits from jaunt
+    [SubscribeLocalEvent]
     private void OnUnpaused(Entity<CrackedLanternComponent> ent, ref EntityUnpausedEvent args)
     {
         var parent = Transform(ent).ParentUid;
@@ -68,6 +56,7 @@ public sealed partial class CrackedLanternSystem : EntitySystem
         SpawnHint(ent, parent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMelee(Entity<CrackedLanternComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit || args.HitEntities.Count == 0 || !_heretic.IsHereticOrGhoul(args.User))
@@ -88,20 +77,23 @@ public sealed partial class CrackedLanternSystem : EntitySystem
             CompOrNull<CrackedLanternSummonComponent>(ent.Comp.Summoned)?.TargetCoords = coords;
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeDamageChanged(Entity<CrackedLanternSummonComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (ent.Comp.TargetCoords == ent.Comp.UserCoords)
             args.Cancelled = true;
     }
 
-    private void OnDamageChanged(Entity<CrackedLanternSummonComponent> ent, ref DamageChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<CrackedLanternSummonComponent> ent, ref DamageDealtEvent args)
     {
         if (ent.Comp.TargetCoords == ent.Comp.UserCoords)
             return;
-        if (_threshold.CheckVitalDamage((ent, args.Damageable)) < ent.Comp.Health)
+
+        if (_threshold.CheckVitalDamage(ent.Owner) < ent.Comp.Health)
             return;
 
-        _dmg.SetAllDamage((ent, args.Damageable), FixedPoint2.Zero);
+        _dmg.ClearAllDamage(ent.Owner);
         ent.Comp.TargetCoords = ent.Comp.UserCoords;
     }
 
@@ -186,6 +178,7 @@ public sealed partial class CrackedLanternSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequipHand(Entity<CrackedLanternComponent> ent, ref GotUnequippedHandEvent args)
     {
         if (!Exists(ent.Comp.Summoned) || !TryComp(ent.Comp.Summoned, out CrackedLanternSummonComponent? comp))
@@ -194,6 +187,7 @@ public sealed partial class CrackedLanternSystem : EntitySystem
         comp.ShouldDespawn = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipHand(Entity<CrackedLanternComponent> ent, ref GotEquippedHandEvent args)
     {
         if (!_mob.IsAlive(args.User))

@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: base katana
+  abstract: true
   parent: BaseSword
   id: LavalandBaseKatana
-  abstract: true
   components:
   - type: Sprite
     sprite: _Lavaland/Objects/Weapons/Melee/katana.rsi
@@ -82,7 +81,7 @@
   parent: [ LavalandBaseKatana, BaseMajorContraband ]
   id: LavaKatana
   name: lava katana
-  description: One thousand degree knife, that somehow always keeps intact.
+  description: One thousand degree knife, that somehow always keeps its edge.
   categories: [ DoNotMap ]
   components:
   - type: Sprite
@@ -117,10 +116,10 @@
     heat: 150000
 
 - type: entity
-  name: shadow katana
-  description: Legendary sword that emits the darkness itself. Has an ability to pierce through any armor with enough luck and determination.
   parent: BaseSword
   id: ShadowKatana
+  name: shadow katana
+  description: Legendary sword that emits the darkness itself. Has an ability to pierce through any armor with enough luck and determination. # BS
   categories: [ DoNotMap ]
   components:
   - type: Sprite

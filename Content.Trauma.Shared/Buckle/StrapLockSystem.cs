@@ -111,7 +111,7 @@ public sealed partial class StrapLockSystem : EntitySystem
         {
             args.Cancelled = true;
             if (args.Popup)
-                _popup.PopupClient(Loc.GetString("strap-lock-self", ("strap", ent.Owner)), ent, user);
+                _popup.PopupEntity(Loc.GetString("strap-lock-self", ("strap", ent.Owner)), ent, user);
             return;
         }
 
@@ -123,7 +123,7 @@ public sealed partial class StrapLockSystem : EntitySystem
             return;
 
         var msg = Loc.GetString("strap-lock-need-hands", ("hands", ent.Comp.RequiredHands), ("strap", ent.Owner));
-        _popup.PopupClient(msg, ent, user);
+        _popup.PopupEntity(msg, ent, user);
     }
 
     private void OnUnstrapAttempt(Entity<StrapLockComponent> ent, ref UnstrapAttemptEvent args)
@@ -138,7 +138,7 @@ public sealed partial class StrapLockSystem : EntitySystem
         var buckled = Identity.Entity(args.Buckle, EntityManager);
         var key = args.User == args.Buckle.Owner ? "you" : "others";
         var msg = Loc.GetString($"strap-lock-unstrap-locked-{key}", ("buckled", buckled), ("strap", ent.Owner));
-        _popup.PopupClient(msg, ent, args.User);
+        _popup.PopupEntity(msg, ent, args.User);
     }
 
     private void OnUnstrapped(Entity<StrapLockComponent> ent, ref UnstrappedEvent args)
@@ -258,7 +258,7 @@ public sealed partial class StrapLockSystem : EntitySystem
         var buckled = Identity.Entity(target, EntityManager);
         var you = Loc.GetString("strap-lock-raising-you", ("buckled", buckled), ("strap", ent.Owner));
         var others = Loc.GetString("strap-lock-raising-others", ("buckled", buckled), ("strap", ent.Owner), ("user", userIdent));
-        _popup.PopupPredicted(you, others, target, user);
+        _popup.PopupEntity(you, others, target, user);
 
         var comp = EnsureComp<StrapLockHoldingComponent>(user);
         comp.Strap = ent;
@@ -292,7 +292,7 @@ public sealed partial class StrapLockSystem : EntitySystem
         var buckled = Identity.Entity(target, EntityManager);
         var you = Loc.GetString("strap-lock-dropped-you", ("buckled", buckled));
         var others = Loc.GetString("strap-lock-dropped-others", ("buckled", buckled), ("user", userIdent));
-        _popup.PopupPredicted(you, others, target, _player.LocalEntity); // all clients will predict it
+        _popup.PopupEntity(you, others, target, _player.LocalEntity); // all clients will predict it
 
         _effects.TryApplyEffect(target, ent.Comp.DropEffect);
 

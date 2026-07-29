@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: SidearmBulletBase
   parent: BaseBullet
@@ -141,9 +143,7 @@
     - state: xray
       shader: unshaded
   - type: Projectile
-    penetrate: true
-    noPenetrateMask:
-    - BlobImpassable
+    penetrationThreshold: 300
     damage:
       types:
         Heat: 16
@@ -237,9 +237,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    penetrate: true
-    noPenetrateMask:
-    - BlobImpassable
+    penetrationThreshold: 200
     damage:
       types:
         Heat: 12
@@ -306,9 +304,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    penetrate: true
-    noPenetrateMask:
-    - BlobImpassable
+    penetrationThreshold: 200
     damage:
       types:
         Heat: 5
@@ -374,9 +370,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    penetrate: true
-    noPenetrateMask:
-    - BlobImpassable
+    penetrationThreshold: 400
     damage:
       types:
         Heat: 52

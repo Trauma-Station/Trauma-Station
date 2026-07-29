@@ -1,24 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: knowledgeProfile
   id: IPC
-  pointsLimit: 2
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
-    ToysKnowledge: 1
     BananiumKnowledge: 0
     BotsKnowledge: 2 # I AM
     FurnitureKnowledge: 1
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 2
     WallsKnowledge: 1
-    ScienceKnowledge: 2
     WindowsKnowledge: 1
     SmokeablesKnowledge: 0
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageSolCommon: 3

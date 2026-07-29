@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   categories: [ HideSpawnMenu ]
   id: WeaponArcCosmic
@@ -274,7 +276,7 @@
     cultistText: cosmic-examine-text-malignecho
   - type: InteractionOutline
   - type: Sprite
-    drawdepth: 2
+    drawdepth: SmallObjects
     layers:
     - sprite: _DV/CosmicCult/Effects/effect_echo.rsi
       state: vfx
@@ -394,7 +396,7 @@
   - type: TimedDespawn
     lifetime: 0.6
   - type: Sprite
-    drawdepth: 5
+    drawdepth: Items
     layers:
     - sprite: _DV/CosmicCult/Effects/ability_sundervfx.rsi
       state: vfx
@@ -416,7 +418,7 @@
     lifetime: 6
   - type: Sprite
     offset: 0,0.6
-    drawdepth: 5
+    drawdepth: Items
     layers:
     - sprite: _DV/CosmicCult/Tileset/cosmiceffigy.rsi # Asset reuse go BRRRR
       state: unshaded_bg

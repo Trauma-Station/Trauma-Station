@@ -1,12 +1,6 @@
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 - type: entity
   id: MachineAnomalySynchronizer
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: anomaly synchronizer
   description: A sophisticated device that reads changes in anomalous waves, and converts them into energy signals.
   components:
@@ -49,6 +43,14 @@
         mask:
         - ItemMask
         hard: True
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 175
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
   - type: Transform
     anchored: true
     noRot: false

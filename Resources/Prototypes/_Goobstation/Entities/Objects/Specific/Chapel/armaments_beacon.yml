@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: armaments beacon
   description: Summon a set of standard issue chaplain armaments, as dictated by I.C.R.A.

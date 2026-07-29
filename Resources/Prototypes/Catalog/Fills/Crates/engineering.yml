@@ -1,35 +1,3 @@
-# SPDX-FileCopyrightText: 2020 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Vera Aguilera Puerto <zddm@outlook.es>
-# SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2022 Easypoller <117361103+Easypoller@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rinkashikachi <15rinkashikachi15@gmail.com>
-# SPDX-FileCopyrightText: 2022 Scribbles0 <91828755+Scribbles0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 corentt <36075110+corentt@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 magmodius <88403244+magmodius@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Puro <103608145+PuroSlavKing@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk228 <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-# SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 PoTeletubby <ajcraigaz@gmail.com>
-# SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Dinner <180707738+DinnerCalzone@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Southbridge <7013162+southbridge-fur@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-# SPDX-FileCopyrightText: 2025 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: CrateEngineering
   id: CrateEngineeringGear
@@ -173,30 +141,6 @@
         amount: 5
 
 - type: entity
-  parent: CrateGenericSteel
-  id: CrateEngineeringJetpack
-  name: jetpack crate
-  description: Two jetpacks for those who don't know how to use fire extinguishers.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage:
-        id: JetpackBlue
-        amount: 2
-
-- type: entity
-  parent: CrateGenericSteel
-  id: CrateEngineeringMiniJetpack
-  name: mini jetpack crate
-  description: Two mini jetpacks for those who want an extra challenge.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage:
-        id: JetpackMini
-        amount: 2
-
-- type: entity
   parent: CrateEngineering
   id: CrateAirlockKit
   name: airlock kit
@@ -210,21 +154,6 @@
         - id: CableApcStack
         - id: DoorElectronics
           amount: 6
-
-- type: entity
-  parent: CrateCommandSecure
-  id: CrateEvaKit
-  name: EVA kit
-  description: A set consisting of two prestigious EVA suits and helmets.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: ClothingHeadHelmetEVA
-          amount: 2
-        - id: ClothingOuterHardsuitEVA
-          amount: 2
 
 - type: entity
   parent: CrateEngineering

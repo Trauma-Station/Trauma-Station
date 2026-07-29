@@ -11,13 +11,12 @@ using Robust.Shared.Timing;
 namespace Content.Lavaland.Shared.Megafauna.Systems;
 
 /// <summary>
-/// This handles...
+/// This handles... rider major
 /// </summary>
 public sealed partial class MegafaunaBlinkSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<MegafaunaBlinkComponent> _blinkQuery;
@@ -52,7 +51,7 @@ public sealed partial class MegafaunaBlinkSystem : EntitySystem
                 continue;
             }
 
-            _xform.SetCoordinates(uid, blink.Coordinates.SnapToGrid(EntityManager, _mapMan));
+            _xform.SetCoordinates(uid, blink.Coordinates.SnapToGrid(EntityManager));
             _audio.PlayPredicted(blink.Sound, blink.Coordinates, uid);
             RemComp(uid, blink);
         }

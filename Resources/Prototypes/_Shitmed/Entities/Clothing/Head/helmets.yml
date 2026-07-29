@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -23,11 +14,12 @@
         Blunt: 0.35
         Slash: 0.35
         Piercing: 0.35
+        Ballistic: 0.35
         Heat: 0.35
         Radiation: 0.5
         Caustic: 0.5
       flatReductions: # This is done so shotguns are worse against armor
-        Piercing: 3.5
+        Ballistic: 3.5
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: Sprite

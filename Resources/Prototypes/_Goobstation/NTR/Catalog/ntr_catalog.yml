@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # station
 - type: listing
   id: NTRExecutiveCargoBingle
@@ -183,8 +185,8 @@
 
 #- type: listing
 #  id: NTRExecutiveDagger
-#  name: Phoron dagger
-#  description: A fancy and expensive phoron dagger, used by elite CentComm fighters and important people.
+#  name: Plasma dagger
+#  description: A fancy and expensive plasma dagger, used by elite CentComm fighters and important people.
 #  productEntity: SpawnPodDagger
 #  icon:
 #    sprite: _Goobstation/Objects/Weapons/Melee/e_daggerntr.rsi

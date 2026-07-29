@@ -139,7 +139,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
         ent.Comp.Setting %= ent.Comp.Settings.Count;
         Dirty(ent);
         var setting = ent.Comp.Settings[ent.Comp.Setting];
-        _popup.PopupClient($"You set the scanner to {setting.Range}m range", ent, args.User);
+        _popup.PopupEntity($"You set the scanner to {setting.Range}m range", ent, args.User);
         _audio.PlayPredicted(ent.Comp.CycleSound, ent, args.User);
         _power.SetLoad(ent.Owner, setting.Power);
     }

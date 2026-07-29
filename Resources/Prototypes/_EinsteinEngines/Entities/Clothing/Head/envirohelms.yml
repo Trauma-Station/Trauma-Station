@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelm
@@ -186,6 +188,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.8
   - type: FaceHuggerBlocker
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: job
   id: RadioHost
   name: job-name-radiohost
@@ -13,7 +15,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipRadioHost
+    - SkillChipEducation
 
 - type: startingGear
   id: RadioHostGear

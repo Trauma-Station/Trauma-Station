@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: ClothingHandsBase
   id: BaseGlovesTackle
@@ -16,6 +18,8 @@
   name: enhanced retrieval gloves
   description: Special gloves that manipulate the blood vessels in the wearer's hands, granting them the ability to launch headfirst into walls and tackle fleeing criminals in a single bound.
   components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
   - type: Clothing
@@ -103,7 +107,7 @@
   - type: TackleModifier
     staminaCostMultiplier: 2
     knockdownTimeMultiplier: 2
-    speedMultiplier: 1.5
+    speedMultiplier: 2.25
     rangeMultiplier: 3
     minDistance: 3
     skillMod: 7
@@ -133,7 +137,7 @@
     staminaCostMultiplier: 0.3
     knockdownTimeMultiplier: 0.5
     rangeMultiplier: 1.2
-    speedMultiplier: 0.65
+    speedMultiplier: 1
     minDistance: 1
     skillMod: -2
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: DiseaseBehaviorHyperactive
   parent: DiseaseBehaviorBase
@@ -34,6 +36,7 @@
           Blunt: -0.13
           Slash: -0.13
           Piercing: -0.13
+          Ballistic: -0.13
           Poison: -0.2
           Heat: -0.2
           Shock: -0.2

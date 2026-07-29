@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent:
   - BaseMob
@@ -15,6 +17,7 @@
         Blunt: -1.33
         Slash: -1.33
         Piercing: -1.33
+        Ballistic: -1.33
         Heat: -1
         Cold: -1
         Shock: -1
@@ -140,20 +143,15 @@
     speechSounds: Xenomorph
     speechVerb: SmallMob
   - type: Vocal
-    sounds:
-      Male: Xenomorph
-      Female: Xenomorph
-      Unsexed: Xenomorph
+    emoteSounds: Xenomorph
   - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     understands:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - Hissing
     - Draconic
-  - type: CollectiveMind # Goobstation
+  - type: CollectiveMind
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
@@ -161,22 +159,25 @@
   - type: Emoting
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
-  - type: Access # Goobstation - xeno doors
+  - type: Access
     enabled: true
     groups:
     - XenomorphAccess
-  - type: BloodSplatterer # Trauma
+  - type: BloodSplatterer
   - type: KnowledgeGrant
     skills:
       ThrowingKnowledge: 50
       StrengthKnowledge: 50
-
 
 - type: entity
   parent: [BaseMobXenomorph, StripableInventoryBase]
   id: BaseMobXenomorphAdult
   abstract: true
   components:
+  - type: MovementSpeedModifier
+    baseWeightlessAcceleration: 1.7
+    baseWeightlessFriction: 1
+    baseWeightlessModifier: 1
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepXenomorph
@@ -191,6 +192,7 @@
   - type: ShowHealthIcons
   - type: Puller
     needsHands: false
+    startingGrabStage: Hard
   - type: IdExaminable
   - type: Inventory
     templateId: xenomorph
@@ -210,10 +212,7 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
-  - type: XenomorphShoveTracker
-    shoveThreshold: 1
-    knockdownDuration: 3
-  - type: MovementAlwaysTouching # Trauma
+  - type: MovementAlwaysTouching
 
 - type: entity
   id: BaseMobXenomorphDungeon

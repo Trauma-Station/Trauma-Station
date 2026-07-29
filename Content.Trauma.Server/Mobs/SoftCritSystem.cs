@@ -10,21 +10,22 @@ namespace Content.Trauma.Server.Mobs;
 /// <summary>
 /// Prevents screaming while in softcrit, you can only whisper chud.
 /// </summary>
-public sealed class SoftCritSystem : SharedSoftCritSystem
+public sealed partial class SoftCritSystem : SharedSoftCritSystem
 {
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SoftCritMobComponent, ScreamActionEvent>(OnScreamAction, before: new[] { typeof(VocalSystem) });
-        SubscribeLocalEvent<SoftCritMobComponent, RadioSendAttemptEvent>(OnRadioSendAttempt); // event in server for no reason award
+        SubscribeLocalEvent<SoftCritMobComponent, EmoteActionEvent>(OnEmoteAction, before: new[] { typeof(VocalSystem) });
     }
 
-    private void OnScreamAction(Entity<SoftCritMobComponent> ent, ref ScreamActionEvent args)
+    private void OnEmoteAction(Entity<SoftCritMobComponent> ent, ref EmoteActionEvent args)
     {
         args.Handled = true; // shush
     }
 
+    // event in server for no reason award
+    [SubscribeLocalEvent]
     private void OnRadioSendAttempt(Entity<SoftCritMobComponent> ent, ref RadioSendAttemptEvent args)
     {
         args.Cancelled = true; // no yapping on radio chuddy

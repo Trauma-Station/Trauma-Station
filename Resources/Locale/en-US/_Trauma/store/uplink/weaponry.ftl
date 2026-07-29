@@ -6,3 +6,8 @@ uplink-snakesfang-desc = The Snakesfang is a fork-tipped scimitar with a sharp e
 
 uplink-rifle-M90-name = M-90
 uplink-rifle-M90-description = An older bullpup carbine model, a revision of the M-90 GL, this one doesn't have the inbuilt grenade launcher.
+
+uplink-foam-cutlass-name = Sharp Foam Cutlass
+uplink-foam-cutlass-desc = A blade disguised as a toy foam cutlass. Perfect for assassins that pretend playing around.
+
+uplink-bulk-mosin-name-trauma = Syndicate Bulk Rifle Crate

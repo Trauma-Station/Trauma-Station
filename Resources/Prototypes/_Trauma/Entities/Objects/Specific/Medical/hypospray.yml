@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseHypospray
   id: MedicalHyposprayEmpty
@@ -57,3 +59,15 @@
     containers:
       vial:
       - ChemistryEmptyVial
+
+- type: entity
+  parent: EmergencyMedipen
+  id: EmergencyMedipenMute
+  suffix: Mute Toxin
+  components:
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: MuteToxin
+        Quantity: 15

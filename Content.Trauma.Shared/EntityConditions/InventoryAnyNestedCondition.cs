@@ -34,13 +34,13 @@ public sealed partial class InventoryAnyNestedConditionSystem : EntityConditionS
     protected override void Condition(Entity<InventoryComponent> ent, ref EntityConditionEvent<InventoryAnyNestedCondition> args)
     {
         var flags = args.Condition.Flags;
-        if (!_inventory.TryGetContainerSlotEnumerator((ent, ent), out var slots, flags))
+        if (!_inventory.TryGetContainerSlotEnumerator(ent.AsNullable(), out var slots, flags))
             return;
 
         var condition = args.Condition.Condition;
         while (slots.NextItem(out var item))
         {
-            if (_conditions.TryCondition(item, condition, args.User))
+            if (_conditions.TryCondition(item, condition, args.SourceEnt))
             {
                 args.Result = true;
                 return;

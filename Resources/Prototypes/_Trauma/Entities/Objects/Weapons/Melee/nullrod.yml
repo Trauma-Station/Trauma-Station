@@ -1,9 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: iradomini
   parent: [ BaseItem, BaseChaplainContraband ]
   id: WeaponPistolIradomini
   description: A powerful crossbow for the crusader with style.
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Nullrod
     damageOnUntrainedUse:
       types:
@@ -40,9 +44,6 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
-  - type: Tag
-    tags:
-    - Nullrod
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1
@@ -60,6 +61,8 @@
   name: faith
   description: "`Cause you gotta have Faith."
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Nullrod
     damageOnUntrainedUse:
       types:
@@ -100,9 +103,6 @@
       path: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
       params:
         volume: 0.1
-  - type: Tag
-    tags:
-    - Nullrod
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1

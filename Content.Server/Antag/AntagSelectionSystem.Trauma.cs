@@ -52,7 +52,7 @@ public sealed partial class AntagSelectionSystem
         if (TryAssignNextAvailableAntag(rule, player))
             return;
 
-        if (rule.Comp.Antags.LastOrDefault() is not { } antag || !Proto.Resolve(antag.Proto, out var proto))
+        if (rule.Comp.Antags.LastOrDefault() is not { } antag || !ProtoMan.Resolve(antag.Proto, out var proto))
             return;
 
         PreSelectSession(rule, proto, player);

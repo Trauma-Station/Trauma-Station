@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: envy's knife
   description: Their success will be yours.
@@ -19,7 +21,6 @@
         Slash: 18
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Sharp
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
   - type: ThrowingAngle

@@ -80,9 +80,12 @@
   - type: GameRule
     minPlayers: 40
   - type: AntagSelection
+    agentName: blob-round-end-agent-name
     antags:
     - !type:FixedAntagCount
       proto: Blob
+  - type: DynamicRuleCost
+    cost: 80
 
 - type: entity
   parent: [ BaseNukeopsRule, BaseRoundstartAntagRule ]
@@ -128,3 +131,5 @@
     antags:
     - !type:FixedAntagCount
       proto: Devil
+  - type: DynamicRuleCost
+    cost: 40

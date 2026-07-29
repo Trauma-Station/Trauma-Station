@@ -25,30 +25,26 @@ public sealed class ActionEventTest : GameTest
     [Test]
     public async Task CheckTargetActions()
     {
-        var pair = Pair;
-        var server = pair.Server;
+        var factory = SEntMan.ComponentFactory;
 
-        var factory = server.EntMan.ComponentFactory;
-        var protoMan = server.ProtoMan;
+        var actionName = factory.CompName<ActionComponent>();
+        var entName = factory.CompName<EntityTargetActionComponent>();
+        var targetName = factory.CompName<TargetActionComponent>();
+        var worldName = factory.CompName<WorldTargetActionComponent>();
 
-        var actionName = factory.GetComponentName<ActionComponent>();
-        var entName = factory.GetComponentName<EntityTargetActionComponent>();
-        var targetName = factory.GetComponentName<TargetActionComponent>();
-        var worldName = factory.GetComponentName<WorldTargetActionComponent>();
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
-                foreach (var proto in protoMan.EnumeratePrototypes<EntityPrototype>())
+                foreach (var proto in SProtoMan.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (!proto.Components.ContainsKey(targetName) || ActionBlacklist.Contains(proto.ID))
+                    if (!proto.HasComp(targetName) || ActionBlacklist.Contains(proto.ID))
                         continue; // only process actions with TargetAction
 
-                    Assert.That(proto.Components.ContainsKey(actionName), $"Action {proto.ID} is missing ActionComponent");
+                    Assert.That(proto.HasComp(actionName), $"Action {proto.ID} is missing ActionComponent");
 
-                    var hasEnt = proto.TryGetComponent<EntityTargetActionComponent>(entName, out var entTarget);
-                    var hasWorld = proto.TryGetComponent<WorldTargetActionComponent>(worldName, out var worldTarget);
+                    var hasEnt = proto.TryComp<EntityTargetActionComponent>(entName, out var entTarget);
+                    var hasWorld = proto.TryComp<WorldTargetActionComponent>(worldName, out var worldTarget);
                     var entAction = hasEnt && entTarget.Event != null;
                     var worldAction = hasWorld && worldTarget.Event != null;
 

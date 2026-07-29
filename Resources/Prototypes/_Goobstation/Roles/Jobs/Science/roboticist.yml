@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: job
   id: Roboticist
   name: job-name-roboticist
@@ -18,7 +20,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipRoboticist
+    - SkillChipEducation
 
 - type: startingGear
   id: RoboticistGear

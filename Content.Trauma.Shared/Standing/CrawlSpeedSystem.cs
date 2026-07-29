@@ -12,7 +12,6 @@ namespace Content.Trauma.Shared.Standing;
 /// </summary>
 public sealed partial class CrawlSpeedSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
 
@@ -78,7 +77,7 @@ public sealed partial class CrawlSpeedSystem : EntitySystem
     private void LoadPrototypes()
     {
         SpeedModifiers.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<ItemSizePrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<ItemSizePrototype>())
         {
             SpeedModifiers[proto.ID] = proto.CrawlSpeedModifier;
         }

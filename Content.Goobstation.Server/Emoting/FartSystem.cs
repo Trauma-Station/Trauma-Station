@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Emoting;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared.Atmos;
+using Content.Shared.Bible.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Chat;
 using Content.Shared.Camera;

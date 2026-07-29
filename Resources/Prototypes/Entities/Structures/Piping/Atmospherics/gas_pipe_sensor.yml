@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: [AirSensorBase, GasBinaryBase]
   id: GasPipeSensor
@@ -79,7 +73,7 @@
   suffix: Distribution
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-distribution-loop
+    localizedLabel: gas-pipe-sensor-distribution-loop
   - type: AtmosPipeLayers
     alternativePrototypes:
       Primary: GasPipeSensorDistribution
@@ -96,7 +90,7 @@
   suffix: Waste
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-waste-loop
+    localizedLabel: gas-pipe-sensor-waste-loop
   - type: AtmosPipeLayers
     alternativePrototypes:
       Primary: GasPipeSensorWaste
@@ -113,7 +107,7 @@
   suffix: Mixed air
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-mixed-air
+    localizedLabel: gas-pipe-sensor-mixed-air
   - type: AtmosPipeLayers
     alternativePrototypes:
       Primary: GasPipeSensorMixedAir
@@ -130,7 +124,7 @@
   suffix: TEG hot
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-teg-hot-loop
+    localizedLabel: gas-pipe-sensor-teg-hot-loop
   - type: AtmosPipeLayers
     alternativePrototypes:
       Primary: GasPipeSensorTEGHot
@@ -147,7 +141,7 @@
   suffix: TEG cold
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-teg-cold-loop
+    localizedLabel: gas-pipe-sensor-teg-cold-loop
   - type: AtmosPipeLayers
     alternativePrototypes:
       Primary: GasPipeSensorTEGCold

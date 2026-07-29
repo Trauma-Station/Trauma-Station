@@ -1,13 +1,20 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Night Vision Goggles
 
 - type: entity
-  parent: ClothingEyesBase
+  abstract: true
+  id: BaseNightVisionGoggles
+  components:
+  - type: NightVision
+    action: ActionToggleNightVision
+    #flashDurationMultiplier: 2
+    relayOverlay: true
+    lightingColor: "#98FB9833"
+    overlayColor: "#98FB98"
+
+- type: entity
+  parent: [ ClothingEyesBase, BaseNightVisionGoggles ]
   id: ClothingEyesNightVisionGoggles
   name: night vision goggles
   description: Now you can see in the dark!
@@ -16,9 +23,6 @@
     sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
   - type: Clothing
     sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
-  - type: NightVision
-    flashDurationMultiplier: 2
-    isEquipment: true
   - type: IdentityBlocker
     coverage: EYES
 

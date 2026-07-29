@@ -4843,7 +4843,6 @@ entities:
   - uid: 709
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,-19.5
       parent: 1
   - uid: 710

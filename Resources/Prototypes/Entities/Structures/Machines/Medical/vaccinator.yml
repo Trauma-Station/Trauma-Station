@@ -1,17 +1,6 @@
-# SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 rolfero <45628623+rolfero@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 degradka <69397649+degradka@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: Vaccinator
-  parent: BaseMachinePowered
+  parent: [ BaseMachinePowered, BaseMachineDestructible ]
   name: vaccinator
   description: A machine that creates vaccines.
   placement:
@@ -23,7 +12,7 @@
     - state: icon
     - state: unlit
       shader: unshaded
-  # <Goobstation>
+  # <Trauma>
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: running
       visible: false
@@ -31,7 +20,6 @@
   - type: Appearance
   - type: Machine
     board: VaccinatorMachineCircuitboard
-  - type: RequireProjectileTarget
   - type: ItemSlots
     slots:
       disease_swab_slot:
@@ -80,4 +68,13 @@
         running:
           True: { visible: true }
           False: { visible: false }
-  # </Goobstation>
+  # </Trauma>
+  - type: RequireProjectileTarget
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 175
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak

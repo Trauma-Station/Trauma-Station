@@ -12,20 +12,9 @@ namespace Content.Medical.Common.Body;
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
-public sealed partial class InternalOrganComponent : Component, ISurgeryToolComponent
+public sealed partial class InternalOrganComponent : BaseSurgeryToolComponent
 {
-    #region ISurgeryToolComponent
-
-    [DataField]
-    public string ToolName { get; set; } = "An organ";
-
-    [DataField]
-    public float Speed { get; set; } = 1f;
-
-    [DataField]
-    public bool? Used { get; set; }
-
-    #endregion
+    public override string ToolName => "An organ";
 
     /// <summary>
     ///     Maximum organ integrity, do keep in mind that Organs are supposed to be VERY and VERY damage sensitive

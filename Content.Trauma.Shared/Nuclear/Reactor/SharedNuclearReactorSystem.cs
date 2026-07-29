@@ -147,14 +147,14 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
         // One does not simply move a reactor that has welded itself in place
         if (comp.Melted)
         {
-            Popup.PopupClient(Loc.GetString("reactor-unanchor-melted"), user, user, PopupType.LargeCaution);
+            Popup.PopupEntity(Loc.GetString("reactor-unanchor-melted"), user, user, PopupType.LargeCaution);
             args.Cancel();
             return;
         }
 
         if (comp.Temperature >= Atmospherics.T0C + 80 || !CheckEmpty(comp))
         {
-            Popup.PopupClient(Loc.GetString("reactor-unanchor-warning"), user, user, PopupType.LargeCaution);
+            Popup.PopupEntity(Loc.GetString("reactor-unanchor-warning"), user, user, PopupType.LargeCaution);
             args.Cancel();
         }
     }

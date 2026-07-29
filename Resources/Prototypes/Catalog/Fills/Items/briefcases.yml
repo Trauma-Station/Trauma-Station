@@ -28,6 +28,7 @@
         - id: ClothingHandsGlovesLatex
         - id: ClothingUniformJumpsuitLawyerBlack
         - id: BarberScissors
+        - id: SkillChipSniper # Trauma
 
 - type: entity
   id: BriefcaseSyndieLobbyingBundleFilled
@@ -76,26 +77,41 @@
         children:
         - id: WeaponShotgunHushpup
         - id: TreasureCoinIron
+        - id: SkillChipShotgun # Trauma
+        - id: MagazineShotgun # Trauma
 
 - type: entity
   id: BriefcaseWeaponC20Filled
   parent: BriefcaseWeaponSmall
   name: secure C-20r case
   components:
+  # <Trauma>
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,4,0
+    - 0,1,3,1
+  # </Trauma>
   - type: EntityTableContainerFill
     containers:
-      storagebase:
-        id: WeaponSubMachineGunC20r
+      storagebase: !type:AllSelector
+        children: # Trauma
+        - id: WeaponSubMachineGunC20r
+        - id: MagazinePistolSubMachineGun # Trauma
+        - id: SkillChipSMG # Trauma
 
 - type: entity
   id: BriefcaseWeaponBulldogFilled
-  parent: BriefcaseWeaponSmall
-  name: secure bulldog case
+  parent: BriefcaseWeapon # Trauma
+  name: secure Bulldog case
   components:
   - type: EntityTableContainerFill
     containers:
-      storagebase:
-        id: WeaponShotgunBulldog
+      storagebase: !type:AllSelector # Trauma
+        children:
+        - id: WeaponShotgunBulldog
+        - id: MagazineShotgun # Trauma
+        - id: SkillChipShotgun # Trauma
 
 - type: entity
   id: BriefcaseWeaponChinaLakeFilled
@@ -109,3 +125,4 @@
         - id: WeaponLauncherChinaLake
         - id: GrenadeFrag
           amount: 2
+        - id: SkillChipHeavy

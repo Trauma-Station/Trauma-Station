@@ -33,7 +33,6 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
 
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
@@ -85,7 +84,7 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
         ref BeforeXenomorphEvolutionEvent args
     )
     {
-        if (!_protoManager.TryIndex(args.Caste, out var cast) || cast.MaxCount == 0)
+        if (!ProtoMan.TryIndex(args.Caste, out var cast) || cast.MaxCount == 0)
             return;
 
         var query = QueryActiveRules();

@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -9,7 +6,7 @@
   suffix: SM hot
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-sm-hot-loop
+    localizedLabel: gas-pipe-sensor-sm-hot-loop
 
 - type: entity
   parent: GasPipeSensor
@@ -17,4 +14,4 @@
   suffix: SM cold
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-sm-cold-loop
+    localizedLabel: gas-pipe-sensor-sm-cold-loop

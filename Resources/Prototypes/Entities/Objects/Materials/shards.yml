@@ -15,8 +15,11 @@
       types:
         Blunt: 100
   - type: ReflectiveSurface
-  # </Trauma>
   - type: Sharp
+  # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
@@ -67,16 +70,6 @@
   - type: SpaceGarbage
   - type: Damageable
     damageModifierSet: Glass
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: StepTrigger
     intersectRatio: 0.2
     triggerGroups: # Goobstation

@@ -47,11 +47,11 @@
           - !type:PlayerCountCondition
             min: 10
         # <Trauma>
-        - id: Changeling
-          weight: 25
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
+#        - id: Changeling
+#          weight: 25
+#          conditions:
+#          - !type:HasBudgetCondition
+#          - !type:MaxRuleOccurenceCondition
         - id: HereticRoundstart
           weight: 20
           conditions:

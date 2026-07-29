@@ -24,7 +24,7 @@ public sealed partial class MetalSystem : SharedMetalSystem
     private void OnMetalStartup(Entity<MetallicComponent> ent, ref ComponentStartup args)
     {
         if (ent.Comp.Metal is {} metal)
-            UpdateSprites(ent.Owner, Proto.Index(metal));
+            UpdateSprites(ent.Owner, ProtoMan.Index(metal));
     }
 
     private void OnSpriteChanged(Entity<SpriteComponent> ent, ref MetalChangedEvent args)

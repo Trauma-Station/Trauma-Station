@@ -100,7 +100,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
                 if (!sheath.Comp.CanCounterNpc && HasComp<ActiveNPCComponent>(ent))
                 {
-                    _popup.PopupClient(Loc.GetString("counter-attack-fail-npc-message"), user, user);
+                    _popup.PopupEntity(Loc.GetString("counter-attack-fail-npc-message"), user, user);
                     return;
                 }
 
@@ -120,7 +120,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
                 var userIdentity = Identity.Entity(user, EntityManager);
                 var targetIdentity = Identity.Entity(ent.Owner, EntityManager, user);
 
-                _popup.PopupPredicted(Loc.GetString("counter-attack-self-message",
+                _popup.PopupEntity(Loc.GetString("counter-attack-self-message",
                         ("target", targetIdentity)),
                     Loc.GetString("counter-attack-others-message",
                         ("user", userIdentity),

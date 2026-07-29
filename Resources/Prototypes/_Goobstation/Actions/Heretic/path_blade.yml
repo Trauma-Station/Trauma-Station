@@ -1,20 +1,4 @@
-- type: entity
-  parent: BaseAction
-  id: ActionHereticChampionHook
-  name: Champion Hook
-  description: Knockdown and hook your next heretic blade light attack target.
-  components:
-  - type: Action
-    checkCanInteract: false
-    itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: hook
-    iconOn:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: hook_on
-  - type: InstantAction
-    event: !type:EventHereticToggleChampionHook
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
   parent: BaseAction

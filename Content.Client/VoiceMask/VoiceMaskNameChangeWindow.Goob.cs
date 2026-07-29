@@ -2,16 +2,18 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.Stylesheets;
 using Content.Shared.StatusIcon;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.VoiceMask;
 
-
 public sealed partial class VoiceMaskNameChangeWindow
 {
-    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    private SpriteSystem _sprite = default!;
 
     public Action<ProtoId<JobIconPrototype>>? OnJobIconChanged;
 
@@ -22,11 +24,15 @@ public sealed partial class VoiceMaskNameChangeWindow
 
     private const int JobIconColumnCount = 10;
 
+    private void InitializeTrauma()
+    {
+        IoCManager.InjectDependencies(this);
+        _sprite = _ent.System<SpriteSystem>();
+    }
 
     public void ReloadJobIcons()
     {
-        var icons = _protoManager.EnumeratePrototypes<JobIconPrototype>()
-            .Where(icon => icon.AllowSelection)
+        var icons = _proto.EnumeratePrototypes<JobIconPrototype>()
             .ToList();
 
         icons.Sort((x, y) => string.Compare(x.LocalizedJobName, y.LocalizedJobName, StringComparison.CurrentCulture));
@@ -40,7 +46,7 @@ public sealed partial class VoiceMaskNameChangeWindow
 
         for (var i = 0; i < _jobIcons.Count; i++)
         {
-            var jobIcon = _protoManager.Index(_jobIcons[i]);
+            var jobIcon = _proto.Index(_jobIcons[i]);
 
             var styleBase = StyleClass.ButtonOpenBoth;
             var mod = i % JobIconColumnCount;
@@ -62,7 +68,7 @@ public sealed partial class VoiceMaskNameChangeWindow
 
             var jobIconTexture = new TextureRect
             {
-                Texture = _spriteSystem.Frame0(jobIcon.Icon),
+                Texture = _sprite.Frame0(jobIcon.Icon),
                 TextureScale = new Vector2(2.5f, 2.5f),
                 Stretch = TextureRect.StretchMode.KeepCentered,
             };

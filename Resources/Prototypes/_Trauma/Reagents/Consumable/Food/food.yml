@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reagent
   id: LabGrownNutriment
   name: reagent-name-lab-grown-nutriment
@@ -29,10 +31,10 @@
       - !type:PopupMessage
         type: Local
         messages: [ "reagent-popup-lab-grown-nutriment" ]
-        probability: 0 # Ronstation - was 0.05
+        probability: 0.05
       - !type:InfectDisease
-        probability: 0 # Ronstation - was 0.05
-        scaleProbability: false # Ronstation - was true
+        probability: 0.005
+        scaleProbability: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Rat, Vox ]

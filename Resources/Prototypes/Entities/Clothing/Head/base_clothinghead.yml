@@ -30,14 +30,12 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseSlicingRefinable]
   id: ClothingHeadBaseButcherable
   components:
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialCloth1
-      amount: 1
   - type: PhysicalComposition # 50% of the amount of cloth you'd obtain upon butchering
     materialComposition:
       Cloth: 50
@@ -49,7 +47,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: ClothingHeadHelmetBase # Trauma - was ClothingHeadBase
   id: ClothingHeadLightBase
   name: base helmet with light
   categories: [ HideSpawnMenu ]
@@ -152,12 +150,20 @@
 
 - type: entity
   abstract: true
-  parent: BaseClothingViewconeSmallIncrease # Trauma
+  parent: BaseClothingViewconeSmall # Trauma
   # No parent since we aren't actually an item.
   id: ClothingHeadHardsuitBase
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: DiseaseProtection
+    incoming:
+      powerModifiers:
+        Aerial: -1
+      chanceMultipliers:
+        Aerial: 0
+  # </Trauma>
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]

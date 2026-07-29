@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Shared.DoAfter;
 using Content.Shared.Wires;
+using Content.Trauma.Common.Doors;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Access.Components;
@@ -291,10 +292,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Denying, door))
             return;
 
+        var audioParams = door.DenySound?.Params ?? AudioParams.Default;
+        audioParams = audioParams.AddVolume(-3);
+
         if (predicted)
-            Audio.PlayPredicted(door.DenySound, uid, user, AudioParams.Default.WithVolume(-3));
+            Audio.PlayPredicted(door.DenySound, uid, user, audioParams);
         else if (_net.IsServer)
-            Audio.PlayPvs(door.DenySound, uid, AudioParams.Default.WithVolume(-3));
+            Audio.PlayPvs(door.DenySound, uid, audioParams);
     }
 
     public bool TryToggleDoor(EntityUid uid, DoorComponent? door = null, EntityUid? user = null, bool predicted = false)
@@ -374,10 +378,17 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
+        // <Trauma>
+        var ev = new DoorOpenedEvent(uid, user);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
+
+        var audioParams = door.OpenSound?.Params ?? AudioParams.Default;
+        audioParams = audioParams.AddVolume(-5);
         if (predicted)
-            Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
+            Audio.PlayPredicted(door.OpenSound, uid, user, audioParams);
         else if (_net.IsServer)
-            Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
+            Audio.PlayPvs(door.OpenSound, uid, audioParams);
 
         if (lastState == DoorState.Emagging && TryComp<DoorBoltComponent>(uid, out var doorBoltComponent))
             SetBoltsDown((uid, doorBoltComponent), true, user, true);
@@ -470,10 +481,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Closing, door))
             return;
 
+        var audioParams = door.CloseSound?.Params ?? AudioParams.Default;
+        audioParams = audioParams.AddVolume(-5);
+
         if (predicted)
-            Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
+            Audio.PlayPredicted(door.CloseSound, uid, user, audioParams);
         else if (_net.IsServer)
-            Audio.PlayPvs(door.CloseSound, uid, AudioParams.Default.WithVolume(-5));
+            Audio.PlayPvs(door.CloseSound, uid, audioParams);
     }
 
     /// <summary>
@@ -544,8 +558,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!Resolve(uid, ref door))
             return;
 
-        if (!door.CanCrush)
+        // <Trauma>
+        var ev = new ShouldDoorCrushEvent(door.CanCrush, door.DoorStunTime);
+        RaiseLocalEvent(uid, ref ev);
+
+        if (!ev.ShouldCrush)
             return;
+        // <Trauma>
 
         // Find entities and apply curshing effects
         var stunTime = door.DoorStunTime + door.OpenTimeOne;
@@ -562,7 +581,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             return;
 
         // queue the door to open so that the player is no longer stunned once it has FINISHED opening.
-        door.NextStateChange = GameTiming.CurTime + door.DoorStunTime;
+        door.NextStateChange = GameTiming.CurTime + ev.CrushDelay; // Trauma - door.DoorStunTime -> ev.CrushDelay
         door.Partial = false;
     }
 

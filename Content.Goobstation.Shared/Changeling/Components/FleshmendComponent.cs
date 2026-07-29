@@ -3,16 +3,19 @@
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Changeling.Components;
 
 /// <summary>
-///     Component responsible for Fleshmend's passive effects.
+/// Status effect component responsible for Fleshmend's passive effects.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause]
 public sealed partial class FleshmendComponent : Component
 {
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan UpdateTimer;
 
     /// <summary>

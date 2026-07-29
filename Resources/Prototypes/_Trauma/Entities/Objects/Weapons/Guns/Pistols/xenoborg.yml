@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseItem
   id: DartGunXenoborg
@@ -57,7 +59,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
   - type: Solution
     id: ammo
     solution:

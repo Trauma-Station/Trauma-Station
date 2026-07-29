@@ -1,29 +1,3 @@
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
-# SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 SweptWasTaken <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 themias <89101928+themias@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 GreyMario <mariomister541@gmail.com>
-# SPDX-FileCopyrightText: 2024 Psychpsyo <60073468+Psychpsyo@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 RumiTiger <154005209+RumiTiger@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # Plate
 # In the future, I (Swept) want a system for putting stuff on plates and it'll provide more nutrition
 # If it's on that plate. I've modified all load/slices to fit on the plate, so all we need
@@ -33,23 +7,13 @@
 # Large Plate
 
 - type: entity
-  name: large plate
+  abstract: true
   parent: BaseItem
-  id: FoodPlate
-  description: A large plate, excellent for bread.
+  id: BaseFoodPlate
   components:
-  - type: Sprite
-    sprite: Objects/Consumable/Food/plates.rsi
-    state: plate
   - type: Item
     shape:
     - 0,0,1,0
-    storedOffset: 0,-6
-    inhandVisuals:
-      left:
-      - state: plate-inhand-left
-      right:
-      - state: plate-inhand-right
   - type: DamageOnLand
     damage:
       types:
@@ -72,19 +36,11 @@
           collection: GlassBreak
           params:
             volume: -8
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FoodPlateTrash:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Tag
     tags:
     - Trash
-  - type: PhysicalComposition
-    materialComposition:
-      Glass: 50
   - type: SpaceGarbage
   - type: ThrowableBlocked # Goobstation
     behavior: Damage
@@ -93,9 +49,40 @@
         Blunt: 5
 
 - type: entity
-  name: broken plate
+  parent: BaseFoodPlate
+  id: FoodPlate
+  name: large plate
+  description: A large plate, excellent for bread.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/plates.rsi
+    state: plate
+  - type: Item
+    storedOffset: 0,-6
+    inhandVisuals:
+      left:
+      - state: plate-inhand-left
+      right:
+      - state: plate-inhand-right
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPlateTrash:
+            min: 1
+            max: 1
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+
+- type: entity
   parent: BaseItem
   id: FoodPlateTrash
+  name: broken plate
   description: A broken plate. Useless.
   components:
   - type: Sprite
@@ -113,9 +100,9 @@
 # Small Plate
 
 - type: entity
-  name: small plate
-  parent: FoodPlate
+  parent: BaseFoodPlate
   id: FoodPlateSmall
+  name: small plate
   description: A small plate. Delicate.
   components:
   - type: Sprite
@@ -128,25 +115,17 @@
       - state: plate-inhand-left
       right:
       - state: plate-inhand-right
-# Needs the full thing because inherting is dumb sometimes.
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
         damage: 5
       behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -8
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodPlateSmallTrash:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: PhysicalComposition
     materialComposition:
       Glass: 25
@@ -164,7 +143,7 @@
 # Plastic Plate
 
 - type: entity
-  parent: BaseItem
+  parent: BaseFoodPlate
   id: FoodPlatePlastic
   name: large plastic plate
   description: A large blue plastic plate, excellent for a birthday cake.
@@ -173,8 +152,6 @@
     sprite: Objects/Consumable/Food/plates.rsi
     state: plate-plastic
   - type: Item
-    shape:
-    - 0,0,1,0
     storedOffset: 0,-6
     inhandVisuals:
       left:
@@ -186,7 +163,7 @@
     - Trash
 
 - type: entity
-  parent: BaseItem
+  parent: BaseFoodPlate
   id: FoodPlateSmallPlastic
   name: small plastic plate
   description: A blue plastic plate, excellent for slices of birthday cake.
@@ -195,8 +172,6 @@
     sprite: Objects/Consumable/Food/plates.rsi
     state: plate-small-plastic
   - type: Item
-    shape:
-    - 0,0,1,0
     storedOffset: 0,-3
     inhandVisuals:
       left:
@@ -210,9 +185,9 @@
 # Pie Tin
 
 - type: entity
-  name: pie tin
   parent: BaseItem
   id: FoodPlateTin
+  name: pie tin
   description: A cheap foil tin for pies.
   components:
   - type: Sprite

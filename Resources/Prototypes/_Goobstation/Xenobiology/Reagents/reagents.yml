@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reagent
   id: BaseXenobioReagent
   abstract: true
@@ -48,7 +50,7 @@
         time: 60
         type: Add
       - !type:ModifyStatusEffect
-        effectProto: StatusEffectWeatherImmune
+        effectProto: StatusEffectAshStormImmune
         time: 60
         type: Add
 

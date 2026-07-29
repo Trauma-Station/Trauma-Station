@@ -44,6 +44,21 @@
   description: Boo!
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: GhostColor
+  - type: CollectiveMind
+    hearAll: true
+    seeAllNames: true
+  - type: Speech
+    speechVerb: Dead
+  - type: LanguageSpeaker
+  - type: UniversalLanguageSpeaker
+  - type: UserInterface
+    interfaces:
+      enum.RevivalContractUiKey.Key:
+        type: RevivalContractBoundUserInterface
+        requireInputValidation: false
+  # </Trauma>
   - type: Sprite
     sprite: Mobs/Ghosts/ghost_human.rsi
     color: "#fff8"
@@ -80,10 +95,12 @@
   - type: Eye
     drawFov: false
     visMask:
+      # <Trauma>
+      - CosmicCultMonument
+      - Abductor
+      # </Trauma>
       - Ghost
       - Normal
-      - CosmicCultMonument # DeltaV - Cosmic Cult
-      - Abductor # Shitmed - Starlight Abductors
   - type: Input
     context: "ghost"
   - type: Examiner
@@ -108,38 +125,22 @@
   - type: ActiveRadio
     receiveAllChannels: true
     globalReceive: true
-  - type: Tag
-    tags:
-    - BypassInteractionRangeChecks
-  - type: PointLight
+  - type: NightVision
     netsync: false
-    radius: 6
-    castShadows: false
     enabled: false
-  - type: Speech #Goobstation - Dead chat verbs
-    speechVerb: Dead
-  - type: GhostColor
-  - type: CollectiveMind
-    hearAll: true
-    seeAllNames: true
-  - type: LanguageSpeaker # Einstein Engines - Languages
-  - type: UniversalLanguageSpeaker # Einstein Engines - Languages
-  - type: UserInterface
-    interfaces:
-      enum.RevivalContractUiKey.Key: # Goobstation - Devil
-        type: RevivalContractBoundUserInterface
-        requireInputValidation: false
+    prioritized: false
+    relayOverlay: false # In case default values change
+    lightingColor: '#FFFFFF20'
+    overlayColor: '#FFFFFF00'
+    noiseAmount: 0 # In case default values change
+    noiseMultiplier: 0 # In case default values change
 
 # proto for player ghosts specifically
 - type: entity
   parent: MobObserverBase
   id: MobObserver
   components:
-  - type: Spectral
-  - type: Tag
-    tags: # BAD: Intentional removal of inherited tag
-    - AllowGhostShownByEvent
-  # <Goobstation>
+  # <Trauma>
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -150,7 +151,13 @@
         toggleAction: ActionGhostShowRadar
   - type: RadarConsole
     followEntity: true
-  # </Goobstation>
+  # </Trauma>
+  - type: Spectral
+  - type: Tag
+    tags:
+    - AllowGhostShownByEvent
+    - AllowPortalTraversal
+    - PreventPortalCollision
 
 - type: entity
   parent: BaseMentalAction

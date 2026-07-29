@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
@@ -140,7 +142,7 @@
     - yellow
 
 - type: entity
-  parent: BaseTraumaGunSafe
+  parent: [ GunSafeBaseSecure, BaseSecurityContraband ] # Reparent to one above BaseTraumaGunSafe to remove access lock bs.
   id: GunSafeJudo
   name: judo safe
   components:
@@ -148,10 +150,6 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeJudoT1
-  - type: StationAlertLevelLock
-    lockedAlertLevels:
-    - green
-    - yellow
 
 - type: entity
   parent: BaseTraumaGunSafe

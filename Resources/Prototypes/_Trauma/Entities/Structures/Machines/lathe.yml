@@ -360,7 +360,7 @@
   parent: BaseRevIndustry
   id: RevPlasmaFoundry
   name: plasma foundry
-  description: An advanced foundry powered by plasma, it melts metals incredibly fast and produces advanced components.
+  description: An advanced foundry powered by plasma sheets, it melts metals incredibly fast and produces advanced components.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/plasmaforge.rsi
@@ -407,7 +407,7 @@
     node: start
   - type: Strap
     buckleOnInteractHand: false
-    addBuckleverb: false
+    addBuckleVerb: false
     buckleOffset: "0, 0.2"
     whitelist:
       tags:

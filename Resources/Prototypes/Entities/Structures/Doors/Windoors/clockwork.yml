@@ -1,14 +1,8 @@
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
+  abstract: true
+  parent: BaseWindoorGeneric
   id: BaseClockworkWindoor
   name: clockwork windoor
-  parent: BaseWindoor
-  abstract: true
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/clockwork_windoor.rsi
@@ -41,12 +35,6 @@
       map: ["enum.ElectrifiedLayers.Sparks"]
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 400
-      behaviors: #excess damage (nuke?). avoid computational cost of spawning entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 200

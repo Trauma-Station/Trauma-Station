@@ -10,7 +10,6 @@ namespace Content.Client.Nutrition.EntitySystems;
 
 public sealed partial class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!; // Goob
     [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
@@ -44,7 +43,7 @@ public sealed partial class ClientFoodSequenceSystem : SharedFoodSequenceSystem
         {
             var state = start.Comp.FoodLayers[counter];
             // </Trauma>
-            if (state.Sprite is null && state.EntProto != null && _proto.Resolve(state.EntProto, out var prototype)) // Goobstation - anythingburgers HOLY FUCK THIS IS SO BAD!!! BUT IT WORKS!!
+            if (state.Sprite is null && state.EntProto != null && ProtoMan.Resolve(state.EntProto, out var prototype)) // Goobstation - anythingburgers HOLY FUCK THIS IS SO BAD!!! BUT IT WORKS!!
             {
                 if (prototype.TryGetComponent<SpriteComponent>(out var spriteComp))
                 {

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: Traitor
   id: SubTraitor
@@ -39,13 +41,22 @@
         max: 2
       playerRatio: 20
 
-#- type: entity
-#  parent: [BaseRoundstartAntagRule, DuoAbductorSpawn ]
-#  id: SubDuoAbductor
-#  components:
-#  - type: AntagSelection
-#    antags:
-#    - !type:FixedAntagCount
-#      proto: AbductorScientist
-#    - !type:FixedAntagCount
-#      proto: AbductorAgent
+- type: entity
+  parent: [BaseRoundstartAntagRule, DuoAbductorSpawn ]
+  id: SubDuoAbductor
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: AbductorScientist
+    - !type:FixedAntagCount
+      proto: AbductorAgent
+
+- type: entity
+  parent: Changeling
+  id: SubChangeling
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Changeling

@@ -104,11 +104,8 @@ public sealed partial class SelfExtinguisherSystem : SharedSelfExtinguisherSyste
         _color.RaiseEffect(_extinguishColor, [target], Filter.Pvs(target, entityManager: EntityManager), ExtinguishAnimationLength);
         _audio.PlayPvs(selfExtinguisher.Sound, uid, selfExtinguisher.Sound.Params.WithVariation(0.125f));
 
-        _popup.PopupPredicted(
-            Loc.GetString("self-extinguisher-extinguish-other", ("item", uid), ("target", targetIdentity)),
-            target, target, PopupType.Medium
-        );
         _popup.PopupEntity(
+            Loc.GetString("self-extinguisher-extinguish-other", ("item", uid), ("target", targetIdentity)),
             Loc.GetString("self-extinguisher-extinguish-self", ("item", uid)),
             target, target, PopupType.Medium
         );

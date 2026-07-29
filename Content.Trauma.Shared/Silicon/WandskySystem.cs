@@ -39,13 +39,13 @@ public sealed partial class WandskySystem : EntitySystem
 
         if (ent.Comp.MasterEntity == args.Used)
         {
-            _popup.PopupClient("Bond deleted.", ent.Owner, args.User, PopupType.Medium);
+            _popup.PopupEntity("Bond deleted.", ent.Owner, args.User, PopupType.Medium);
             ent.Comp.MasterEntity = null;
             Dirty(ent);
             return;
         }
 
-        _popup.PopupClient("Bond formed.", ent.Owner, args.User, PopupType.Medium);
+        _popup.PopupEntity("Bond formed.", ent.Owner, args.User, PopupType.Medium);
 
         ent.Comp.MasterEntity = args.Used;
 
@@ -60,7 +60,7 @@ public sealed partial class WandskySystem : EntitySystem
         var message = ent.Comp.IsPatrolling ? "PATROL ENABLED!" : "PATROL DISABLED!";
 
         Dirty(ent);
-        _popup.PopupClient(message, ent.Owner, args.Performer, PopupType.Medium);
+        _popup.PopupEntity(message, ent.Owner, args.Performer, PopupType.Medium);
     }
 
     public void OnWaypointAction(Entity<PatrolCommanderComponent> ent, ref WaypointActionEvent args)
@@ -76,7 +76,7 @@ public sealed partial class WandskySystem : EntitySystem
             if (!ent.Comp.Waypoints.Contains(waypoint))
                 return;
 
-            _popup.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
+            _popup.PopupEntity("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
 
             ent.Comp.Waypoints.Remove(waypoint);
             PredictedQueueDel(waypoint);
@@ -84,7 +84,7 @@ public sealed partial class WandskySystem : EntitySystem
             return;
         }
 
-        _popup.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
+        _popup.PopupEntity("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
         var waypointEntity = PredictedSpawnAtPosition(ent.Comp.WaypointId, args.Target);
         ent.Comp.Waypoints.Add(waypointEntity);
         Dirty(ent);
@@ -97,11 +97,11 @@ public sealed partial class WandskySystem : EntitySystem
 
         if (count == 0)
         {
-            _popup.PopupClient("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
+            _popup.PopupEntity("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
             return;
         }
 
-        _popup.PopupClient($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
+        _popup.PopupEntity($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
 
         foreach (var waypoint in waypoints)
         {

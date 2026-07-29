@@ -98,7 +98,7 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         var user = args.User;
         if (!_fuelQuery.HasComp(item) || !_propsQuery.TryComp(item, out var props))
         {
-            _popup.PopupClient(Loc.GetString("nuclear-centrifuge-wrong-item", ("item", item)), ent, user);
+            _popup.PopupEntity(Loc.GetString("nuclear-centrifuge-wrong-item", ("item", item)), ent, user);
             return;
         }
 
@@ -110,7 +110,7 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         }
 
         var ident = Identity.Entity(user, EntityManager);
-        _popup.PopupPredicted(Loc.GetString("nuclear-centrifuge-insert-item", ("user", ident), ("machine", ent.Owner), ("item", item)), ent, user);
+        _popup.PopupEntity(Loc.GetString("nuclear-centrifuge-insert-item", ("user", ident), ("machine", ent.Owner), ("item", item)), ent, user);
         _audio.PlayPredicted(ent.Comp.SoundLoad, ent, user);
 
         ent.Comp.FuelToExtract += props.SpentFuel;

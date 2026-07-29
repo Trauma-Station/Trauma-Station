@@ -128,8 +128,8 @@ public sealed partial class CCVars
         CVarDef.Create("ui.admin_strip_menu_overlay_default", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
-    /// A newline-separated list of saved labels for the hand labeler tool
+    /// If true, ghosts will see an "(F)" button next to chat messages, which can be used to follow the sender.
     /// </summary>
-    public static readonly CVarDef<string> HandLabelerSavedLabels =
-        CVarDef.Create("interface.hand_labeler_saved_labels", "", CVar.CLIENTONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<bool> InterfaceChatFollowButton =
+        CVarDef.Create("ui.chat_follow_button", true, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 }

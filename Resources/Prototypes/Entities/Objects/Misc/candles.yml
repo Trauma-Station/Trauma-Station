@@ -1,17 +1,6 @@
-# SPDX-FileCopyrightText: 2023 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 faint <46868845+ficcialfaint@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Lamrr <96937466+Lamrr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   name: candle
-  parent: BaseItem
+  parent: [ BaseItem, BaseItemDestructible ]
   id: Candle
   description: A thin wick threaded through fat.
   components:
@@ -63,15 +52,6 @@
           shader: unshaded
     - type: Damageable
       damageModifierSet: Wood
-    - type: Injurable
-    - type: Destructible
-      thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
 
 - type: entity
   name: red candle
@@ -179,15 +159,6 @@
       normalState: fire-small
     - type: Flammable
       firestacksOnIgnite: 2.0
-    - type: Destructible
-      thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 60
-        behaviors:
-        - !type:SpawnEntitiesBehavior
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
 
 - type: entity
   name: small red candle

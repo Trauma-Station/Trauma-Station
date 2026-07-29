@@ -1,31 +1,8 @@
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
-# SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 BismarckShuffle <107375341+BismarckShuffle@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Electro <no>
-# SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Profane McBane <profanedbane+github@gmail.com>
-# SPDX-FileCopyrightText: 2022 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  id: BaseStructureComputer
-  parent: BaseStructure
   abstract: true
+  parent: BaseStructure
+  id: BaseStructureComputerIndestructible
   components:
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -42,9 +19,17 @@
   - type: Anchorable
   - type: Construction
     graph: Computer
-    node: frameUnsecured
   - type: Sprite
     drawdepth: Objects
+
+- type: entity
+  abstract: true
+  parent: BaseStructureComputerIndestructible
+  id: BaseStructureComputer
+  components:
+  - type: Construction
+    graph: Computer
+    node: frameUnsecured
   - type: Damageable
     damageModifierSet: Electronic
   - type: Injurable
@@ -86,7 +71,7 @@
           monitorUnsecured: { state: 4 }
 
 - type: entity
-  parent: BaseStructureComputer
+  parent: BaseStructureComputerIndestructible
   id: ComputerBroken
   name: broken computer
   description: This computer has seen better days.
@@ -100,12 +85,6 @@
     state: broken
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 50

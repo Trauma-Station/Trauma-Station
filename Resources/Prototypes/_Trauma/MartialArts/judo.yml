@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: combo
   id: JudoDiscombobulate
   attacks:
@@ -33,9 +35,8 @@
   - !type:ModifyStatusEffect
     effectProto: StatusEffectBlindness
     time: 2
-  - !type:GenericStatusEffect
-    key: BlurryVision
-    component: BlurryVision
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
     time: 5
   - !type:HealthChange
     targetPart: Head

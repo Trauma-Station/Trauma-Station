@@ -1,3 +1,5 @@
+# Holographic Generator
+
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: HolographicFieldGeneratorCircuitboard

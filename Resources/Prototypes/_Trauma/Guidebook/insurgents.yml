@@ -1,4 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: guideEntry
   id: Insurgents
   name: guide-entry-insurgents
-  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Insurgents.xml"
+  # RonStation - overriding insurgents
+  text: "/ServerInfo/_Ronstation/Guidebook/Antagonist/Insurgents.xml"

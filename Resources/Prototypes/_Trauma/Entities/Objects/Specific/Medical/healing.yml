@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # keep entry weight in RandomSafePillTable synced with number of items here
 - type: entityTable
   id: RandomSafePillTrauma
@@ -22,7 +24,7 @@
   suffix: Space Mirage 15u, 15
   components:
   - type: Label
-    currentLabel: space mirage 15u
+    localizedLabel: reagent-name-space-drugs
   - type: EntityTableContainerFill
     containers:
       storagebase:

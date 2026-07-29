@@ -174,7 +174,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         if (_mobState.IsDead(target))
         {
             var targetDeadPopup = Loc.GetString("slime-latch-fail-target-dead", ("ent", target));
-            _popup.PopupClient(targetDeadPopup, ent, ent);
+            _popup.PopupEntity(targetDeadPopup, ent, ent);
 
             return false;
         }
@@ -182,13 +182,13 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         if (ent.Comp.Stomach.Count >= ent.Comp.MaxContainedEntities)
         {
             var maxEntitiesPopup = Loc.GetString("slime-latch-fail-max-entities", ("ent", target));
-            _popup.PopupClient(maxEntitiesPopup, ent, ent);
+            _popup.PopupEntity(maxEntitiesPopup, ent, ent);
 
             return false;
         }
 
         var attemptPopup = Loc.GetString("slime-latch-attempt", ("slime", ent), ("ent", target));
-        _popup.PopupPredicted(attemptPopup, ent, ent, PopupType.MediumCaution);
+        _popup.PopupEntity(attemptPopup, ent, ent, PopupType.MediumCaution);
 
         var doAfterArgs = new DoAfterArgs(EntityManager, ent, ent.Comp.LatchDoAfterDuration, new SlimeLatchDoAfterEvent(), ent, target)
         {
@@ -258,7 +258,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         Dirty(target, comp);
 
         _audio.PlayPredicted(ent.Comp.EatSound, ent, ent);
-        _popup.PopupPredicted(Loc.GetString("slime-action-latch-success", ("slime", ent), ("target", target)), ent, ent, PopupType.SmallCaution);
+        _popup.PopupEntity(Loc.GetString("slime-action-latch-success", ("slime", ent), ("target", target)), ent, ent, PopupType.SmallCaution);
 
         // We also need to set a new state for the slime when it's consuming,
         // this will be easy however it's important to take MobGrowthSystem into account... possibly we should use layers?

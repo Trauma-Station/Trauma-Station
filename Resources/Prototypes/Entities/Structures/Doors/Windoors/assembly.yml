@@ -1,30 +1,13 @@
-# SPDX-FileCopyrightText: 2021 Kara D <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2021 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2024 Sphiral <145869023+SphiraI@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  id: WindoorAssembly
+  abstract: true
+  parent: BaseStructure
+  id: BaseWindoorAssembly
   name: windoor assembly
   description: It opens, it closes, and you can see through it!
-  parent: BaseStructure
+  placement:
+    mode: SnapgridCenter
   components:
   - type: InteractionOutline
-  - type: Sprite
-    sprite: Structures/Doors/Windoors/windoor.rsi
-    layers:
-    - state: assembly
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -49,28 +32,39 @@
     fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
-    - trigger:
+    - trigger: &DamageTrigger300
         !type:DamageTrigger
         damage: 300
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+
+- type: entity
+  parent: BaseWindoorAssembly
+  id: WindoorAssembly
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Windoors/windoor.rsi
+    layers:
+    - state: assembly
+  - type: Destructible
+    thresholds:
+    - trigger: *DamageTrigger300
+      behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetSteel1:
+          SheetSteel1: &BaseWindoorDrop
             min: 1
             max: 3
   - type: Construction
     graph: Windoor
     node: assembly
-  placement:
-    mode: SnapgridCenter
 
 - type: entity
+  parent: BaseWindoorAssembly
   id: WindoorAssemblySecure
   name: secure windoor assembly
   description: It opens, it closes, and you can see through it! This one looks tough.
-  parent: WindoorAssembly
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/windoor.rsi
@@ -79,26 +73,20 @@
     - state: assembly
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetPlasteel1:
-            min: 1
-            max: 2
+          SheetPlasteel1: *BaseWindoorDrop
   - type: Construction
     graph: Windoor
     node: assemblySecure
 
 - type: entity
+  parent: BaseWindoorAssembly
   id: WindoorAssemblyClockwork
   name: clockwork windoor assembly
   description: It opens, it closes, and you can see through it! This one looks tough.
-  parent: WindoorAssembly
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/clockwork_windoor.rsi
@@ -106,27 +94,21 @@
     - state: open
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 450
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetBrass1:
-            min: 1
-            max: 2
+          SheetBrass1: *BaseWindoorDrop
   - type: Construction
     graph: Windoor
     node: assemblyClockwork
 
 #plasma windoor assemblies
 - type: entity
+  parent: BaseWindoorAssembly
   id: WindoorAssemblyPlasma
   name: plasma windoor assembly
   description: It opens, it closes, and you can see through it! This one looks purp-, no, pink. Wait...
-  parent: WindoorAssembly
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/plasma.rsi
@@ -134,29 +116,21 @@
     - state: assembly
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 360
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetSteel1:
-            min: 1
-            max: 2
-          SheetPGlass1:
-            min: 1
-            max: 3
+          SheetSteel1: *BaseWindoorDrop
+          SheetPGlass1: *BaseWindoorDrop
   - type: Construction
     graph: Windoor
     node: pglass
 
 - type: entity
+  parent: BaseWindoorAssembly
   id: WindoorAssemblySecurePlasma
   name: secure plasma windoor assembly
   description: It opens, it closes, and you can see through it! This one looks strong and pin-, no, purple. Hold on...
-  parent: WindoorAssembly
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/plasma.rsi
@@ -165,30 +139,24 @@
     - state: assembly
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 1200
+    - trigger: *DamageTrigger300
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetPlasteel1:
-            min: 1
-            max: 2
-          SheetRPGlass1:
-            min: 1
-            max: 3
+          SheetPlasteel1: *BaseWindoorDrop
+          SheetRPGlass1: *BaseWindoorDrop
   - type: Construction
     graph: Windoor
     node: pglassSecure
 
 #uranium windoor assemblies
 - type: entity
+  parent: BaseWindoorAssembly
   id: WindoorAssemblyUranium
   name: uranium windoor assembly
   description: It opens, it closes, and you can see through it! This one looks sickly green...
-  parent: WindoorAssembly
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/uranium.rsi
@@ -196,29 +164,21 @@
     - state: assembly
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetSteel1:
-            min: 1
-            max: 2
-          SheetUGlass1:
-            min: 1
-            max: 3
+          SheetSteel1: *BaseWindoorDrop
+          SheetUGlass1: *BaseWindoorDrop
   - type: Construction
     graph: Windoor
     node: uglass
 
 - type: entity
+  parent: BaseWindoorAssembly
   id: WindoorAssemblySecureUranium
   name: secure uranium windoor assembly
   description: It opens, it closes, and you can see through it! This one looks strong and radioactive-lime-green!
-  parent: WindoorAssembly
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/uranium.rsi
@@ -227,20 +187,12 @@
     - state: assembly
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 1200
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
-          SheetPlasteel1:
-            min: 1
-            max: 2
-          SheetRUGlass1:
-            min: 1
-            max: 3
+          SheetPlasteel1: *BaseWindoorDrop
+          SheetRUGlass1: *BaseWindoorDrop
   - type: Construction
     graph: Windoor
     node: uglassSecure

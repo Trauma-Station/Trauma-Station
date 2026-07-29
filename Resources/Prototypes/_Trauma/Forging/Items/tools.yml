@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: forgedItem
   id: HammerHead
   category: Tools
@@ -14,6 +16,14 @@
   construction: ForgedShortHandle
   finished: ForgedScrewdriver
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+
+# - type: forgedItem
+#   id: ForgedRod
+#   category: Tools
+#   name: fishing rod
+#   construction: ForgedShortHandle
+#   finished: ForgedScrewdriver
+#   sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
 
 - type: forgedItem
   id: PickaxeHead

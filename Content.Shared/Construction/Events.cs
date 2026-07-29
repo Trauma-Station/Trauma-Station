@@ -133,6 +133,6 @@ public sealed partial class ConstructionInteractDoAfterEvent : DoAfterEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class WelderRefineDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class ToolRefineDoAfterEvent : SimpleDoAfterEvent
 {
 }

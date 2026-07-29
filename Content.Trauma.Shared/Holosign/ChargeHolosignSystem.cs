@@ -146,7 +146,7 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
         var container = ent.Comp1.Container;
         if (container.Count == 0 || !_charges.TryUseCharge((ent, ent.Comp2)))
         {
-            _popup.PopupClient(Loc.GetString("charge-holoprojector-no-charges", ("item", ent)), ent, user);
+            _popup.PopupEntity(Loc.GetString("charge-holoprojector-no-charges", ("item", ent)), ent, user);
             return false;
         }
 
@@ -164,7 +164,7 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
         // don't overfill
         if (_charges.GetCurrentCharges((ent, ent.Comp2)) >= ent.Comp2.MaxCharges)
         {
-            _popup.PopupClient(Loc.GetString("charge-holoprojector-charges-full", ("item", ent)), sign, user);
+            _popup.PopupEntity(Loc.GetString("charge-holoprojector-charges-full", ("item", ent)), sign, user);
             return false;
         }
 
@@ -178,7 +178,7 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
 
         var othersStr = showIdentity ? Loc.GetString("charge-holoprojector-reclaim-others", ("sign", sign), ("user", Identity.Name(user, EntityManager)))
                                      : Loc.GetString("charge-holoprojector-recall-others", ("sign", sign));
-        _popup.PopupPredicted(
+        _popup.PopupEntity(
             Loc.GetString("charge-holoprojector-reclaim", ("sign", sign)),
             othersStr,
             ent,

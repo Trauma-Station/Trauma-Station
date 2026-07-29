@@ -1,25 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Default for any species that has no knowledge profile of its own
 - type: knowledgeProfile
   id: Human
-  pointsLimit: 10 # Most points to work with for customization.
+  pointsLimit: 5 # Most points to work with for customization.
   mastery:
     # Crafting Recipe Skills - 1 is standard unless stated otherwise.
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
-    ToysKnowledge: 1
     BananiumKnowledge: 0 # Not roundstart, blueprint required.
     BotsKnowledge: 0 # Not roundstart, blueprint required.
     FurnitureKnowledge: 1
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
     WallsKnowledge: 1
-    ScienceKnowledge: 0 # Not roundstart, blueprint required.
     WindowsKnowledge: 1
     SmokeablesKnowledge: 0 # Not roundstart, blueprint required.
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageSolCommon: 3

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Overlays;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Thrall;
@@ -18,6 +17,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Examine;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
@@ -33,7 +33,6 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
 {
     [Dependency] private EntityStorageSystem _entityStorage = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private PolymorphSystem _polymorph = default!;
@@ -234,7 +233,7 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
             _actions.RemoveAction(ascendant.ActionHatchEntity);
         }
 
-        var nightmareComps = _protoMan.Index(NightmareAbilities);
+        var nightmareComps = ProtoMan.Index(NightmareAbilities);
         foreach (var thrall in thralls)
         {
             if (HasComp<LesserShadowlingComponent>(thrall))

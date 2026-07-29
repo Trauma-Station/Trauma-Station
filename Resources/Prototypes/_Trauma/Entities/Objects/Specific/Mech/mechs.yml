@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: Killdozer
   parent: [ BaseMech, IndustrialMech, BaseRevMajorContraband ]
@@ -44,7 +46,6 @@
     baseWalkSpeed: 2
     baseSprintSpeed: 2
   - type: Damageable
-    damageModifierSet: MediumArmorNT
   - type: StaticPrice
     price: 1000
   - type: Tag

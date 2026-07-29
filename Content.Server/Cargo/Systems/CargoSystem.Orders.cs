@@ -69,7 +69,7 @@ namespace Content.Server.Cargo.Systems
             if (!TryGetOrderDatabase(stationUid, out var orderDatabase))
                 return;
 
-            if (!_protoMan.TryIndex(slip.Product, out var product))
+            if (!ProtoMan.TryIndex(slip.Product, out var product))
             {
                 Log.Error($"Tried to add invalid cargo product {slip.Product} as order!");
                 return;
@@ -152,25 +152,25 @@ namespace Content.Server.Cargo.Systems
             /* Trauma - use per-account access below instead
             if (!_accessReaderSystem.IsAllowed(player, uid))
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-order-not-allowed"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
             */
 
-            // <Goob> - resource siphon blocking access
-            var eqe = EntityQueryEnumerator<ResourceSiphonComponent>();
-            while (eqe.MoveNext(out var sip))
+            // <Trauma> - resource siphon blocking access
+            var siphons = EntityQueryEnumerator<ResourceSiphonComponent>();
+            while (siphons.MoveNext(out var sip))
             {
                 // it's over. the crew won't know what hit em.
                 if (sip.Active)
                 {
-                    ConsolePopup(args.Actor, Loc.GetString("console-block-something"));
+                    _popup.PopupCursor(Loc.GetString("console-block-something"), args.Actor);
                     PlayDenySound(uid, component);
                     return;
                 }
             }
-            // </Goob>
+            // </Trauma>
 
             var station = _station.GetOwningStation(uid);
 
@@ -179,14 +179,14 @@ namespace Content.Server.Cargo.Systems
                 !TryComp(station, out StationDataComponent? stationData) ||
                 !TryGetOrderDatabase(station, out var orderDatabase))
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-station-not-found"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-station-not-found"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
 
             // Find our order again. It might have been dispatched or approved already
             var order = orderDatabase.Orders[component.Account].Find(order => args.OrderId == order.OrderId && !order.Approved);
-            if (order == null || !_protoMan.Resolve(order.Account, out var account))
+            if (order == null || !ProtoMan.Resolve(order.Account, out var account))
             {
                 return;
             }
@@ -197,9 +197,9 @@ namespace Content.Server.Cargo.Systems
             // </Trauma>
 
             // Invalid order
-            if (!_protoMan.Resolve(order.Product, out var product))
+            if (!ProtoMan.Resolve(order.Product, out var product))
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-invalid-product"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-invalid-product"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -210,7 +210,7 @@ namespace Content.Server.Cargo.Systems
             // Too many orders, avoid them getting spammed in the UI.
             if (amount >= capacity)
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-too-many"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-too-many"), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
@@ -221,7 +221,7 @@ namespace Content.Server.Cargo.Systems
             if (cappedAmount != order.OrderQuantity)
             {
                 order.OrderQuantity = cappedAmount;
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-snip-snip"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-snip-snip"), args.Actor);
                 PlayDenySound(uid, component);
             }
 
@@ -236,41 +236,49 @@ namespace Content.Server.Cargo.Systems
             // Not enough balance
             if (cost > accountBalance)
             {
-                ConsolePopup(args.Actor, Loc.GetString("cargo-console-insufficient-funds", ("cost", cost)));
+                _popup.PopupCursor(Loc.GetString("cargo-console-insufficient-funds", ("cost", cost)), args.Actor);
                 PlayDenySound(uid, component);
                 return;
             }
 
-            // GoobStation - cooldown on Cargo Orders (specifically gamba)
+            // <Trauma>
+            // cooldown on Cargo Orders (specifically gamba)
             if (product.Cooldown > TimeSpan.Zero)
             {
                 if (orderDatabase.ProductCooldownTime.TryGetValue(product.ID, out var cooldownTime) && cooldownTime > _timing.CurTime)
                 {
                     var timeLeft = (cooldownTime - _timing.CurTime);
                     (int count, string units) timeInfo = (timeLeft.Minutes > 0) ? (timeLeft.Minutes, "minutes") : (timeLeft.Seconds, "seconds");
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-cooldown-active", ("product", product.Name), ("timeCount", timeInfo.count), ("timeUnits", timeInfo.units)));
+                    _popup.PopupCursor(Loc.GetString("cargo-console-cooldown-active", ("product", product.Name), ("timeCount", timeInfo.count), ("timeUnits", timeInfo.units)), args.Actor);
                     PlayDenySound(uid, component);
                     return;
                 }
                 if (order.OrderQuantity > 1)
                 {
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-cooldown-count", ("product", product.Name)));
+                    _popup.PopupCursor(Loc.GetString("cargo-console-cooldown-count", ("product", product.Name)), args.Actor);
                     PlayDenySound(uid, component);
                     return;
                 }
             }
 
-            // <Trauma> can't buy guns on green, also handle if the destination was deleted
+            // can't buy guns on green, also handle if the destination was deleted
             if (!CheckAlertPopup((uid, component), player, product, station.Value))
                 return;
 
             if (GetEntity(component.Destination) is not {} dest || Deleted(dest) || Transform(dest).MapID != Transform(uid).MapID)
             {
-                ConsolePopup(player, Loc.GetString("cargo-console-destination-lost"));
+                _popup.PopupCursor(Loc.GetString("cargo-console-destination-lost"), player);
                 PlayDenySound(uid, component);
                 return;
             }
             // </Trauma>
+
+            var emagged = _emag.CheckFlag(uid, EmagType.Interaction);
+
+            if (!emagged)
+            {
+                order.SetApproverData(_identity.GetIdentityShortInfo(player, uid));
+            }
 
             var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));
             RaiseLocalEvent(dest, ref ev); // Trauma - raise it on the destination
@@ -282,8 +290,9 @@ namespace Content.Server.Cargo.Systems
 
                 if (ev.FulfillmentEntity == null)
                 {
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-unfulfilled"));
+                    _popup.PopupCursor(Loc.GetString("cargo-console-unfulfilled"), args.Actor);
                     PlayDenySound(uid, component);
+                    order.Approver = null;
                     return;
                 }
             }
@@ -297,10 +306,8 @@ namespace Content.Server.Cargo.Systems
             order.Approved = true;
             _audio.PlayPvs(ApproveSound, uid);
 
-            if (!_emag.CheckFlag(uid, EmagType.Interaction))
+            if (!emagged)
             {
-                order.SetApproverData(_identity.GetIdentityShortInfo(player, uid));
-
                 var message = Loc.GetString("cargo-console-unlock-approved-order-broadcast",
                     ("productName", product.Name), // Trauma - remove Loc.GetString its already localized
                     ("orderAmount", order.OrderQuantity),
@@ -311,7 +318,7 @@ namespace Content.Server.Cargo.Systems
                     _radio.SendRadioMessage(uid, message, CargoOrderConsoleComponent.BaseAnnouncementChannel, uid, escapeMarkup: false);
             }
 
-            ConsolePopup(args.Actor, Loc.GetString("cargo-console-trade-station", ("destination", MetaData(ev.FulfillmentEntity.Value).EntityName)));
+            _popup.PopupCursor(Loc.GetString("cargo-console-trade-station", ("destination", MetaData(ev.FulfillmentEntity.Value).EntityName)), args.Actor);
 
             // Log order approval
             _adminLogger.Add(LogType.Action,
@@ -375,18 +382,23 @@ namespace Content.Server.Cargo.Systems
         {
             var station = _station.GetOwningStation(uid);
 
-            if (component.Mode != CargoOrderConsoleMode.DirectOrder)
+            if (component.Mode == CargoOrderConsoleMode.PrintSlip)
                 return;
 
             if (!TryGetOrderDatabase(station, out var orderDatabase))
                 return;
 
-            RemoveOrder(station.Value, component.Account, args.OrderId, orderDatabase);
+            if (!TryComp<StationBankAccountComponent>(station, out var bank))
+                return;
+
+            var targetAccount = component.Mode == CargoOrderConsoleMode.SendToPrimary ? bank.PrimaryAccount : component.Account;
+
+            RemoveOrder(station.Value, targetAccount, args.OrderId, orderDatabase);
         }
 
         private void OnAddOrderMessageSlipPrinter(EntityUid uid, CargoOrderConsoleComponent component, CargoConsoleAddOrderMessage args, CargoProductPrototype product)
         {
-            if (!_protoMan.Resolve(component.Account, out var account))
+            if (!ProtoMan.Resolve(component.Account, out var account))
                 return;
 
             if (Timing.CurTime < component.NextPrintTime)
@@ -433,7 +445,7 @@ namespace Content.Server.Cargo.Systems
             if (!TryComp<StationBankAccountComponent>(stationUid, out var bank))
                 return;
 
-            if (!_protoMan.TryIndex<CargoProductPrototype>(args.CargoProductId, out var product))
+            if (!ProtoMan.TryIndex<CargoProductPrototype>(args.CargoProductId, out var product))
             {
                 Log.Error($"Tried to add invalid cargo product {args.CargoProductId} as order!");
                 return;
@@ -513,11 +525,6 @@ namespace Content.Server.Cargo.Systems
             var otherOrders = station.Comp.Orders[bank.PrimaryAccount].Where(order => order.Account == console.Comp.Account);
 
             return ourOrders.Concat(otherOrders).ToList();
-        }
-
-        private void ConsolePopup(EntityUid actor, string text)
-        {
-            _popup.PopupCursor(text, actor);
         }
 
         private void PlayDenySound(EntityUid uid, CargoOrderConsoleComponent component)
@@ -680,7 +687,7 @@ namespace Content.Server.Cargo.Systems
         /// </summary>
         private bool FulfillOrder(CargoOrderData order, ProtoId<CargoAccountPrototype> account, EntityCoordinates spawn, string? paperProto)
         {
-            if (!_protoMan.Resolve(order.Product, out var product))
+            if (!ProtoMan.Resolve(order.Product, out var product))
                 return false;
 
             // Create the item itself
@@ -717,7 +724,7 @@ namespace Content.Server.Cargo.Systems
                 var val = Loc.GetString("cargo-console-paper-print-name", ("orderNumber", order.OrderId));
                 _metaSystem.SetEntityName(printed, val);
 
-                var accountProto = _protoMan.Index(account);
+                var accountProto = ProtoMan.Index(account);
                 _paperSystem.SetContent((printed, paper),
                     Loc.GetString(
                         "cargo-console-paper-print-text",
@@ -753,7 +760,7 @@ namespace Content.Server.Cargo.Systems
 
             // Note that a market must be both on the station and on the console to be available.
             var markets = ent.Comp.AllowedGroups.Intersect(db.Markets).ToList();
-            foreach (var product in _protoMan.EnumeratePrototypes<CargoProductPrototype>())
+            foreach (var product in ProtoMan.EnumeratePrototypes<CargoProductPrototype>())
             {
                 if (!markets.Contains(product.Group))
                     continue;

@@ -44,7 +44,6 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tile = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
@@ -62,7 +61,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     [Dependency] private SharedStaminaSystem _stamina = default!;
     [Dependency] private SharedRatvarianLanguageSystem _language = default!;
     [Dependency] private UseDelaySystem _delay = default!;
-    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedHereticAbilitySystem _ability = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -182,9 +181,9 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!triggerGrasp || !TryComp(target, out StatusEffectsComponent? status))
             return;
 
-        _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime);
+        _stun.TryKnockdown(target, ent.Comp.KnockdownTime);
         _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage, source: args.User, ignoreResist: true);
-        _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
+        _language.DoRatvarian(target, ent.Comp.SpeechTime, true);
         Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);
     }
 
@@ -193,7 +192,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!Status.HasStatusEffect(args.User, GraspAffectedStatus))
             return;
 
-        _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
+        _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
     }
 
     private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
@@ -201,7 +200,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (args.User is { } user && Status.HasStatusEffect(user, GraspAffectedStatus))
         {
             args.Cancelled = true;
-            _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
+            _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
         }
         else if (Status.HasStatusEffect(Transform(ent).ParentUid, GraspAffectedStatus))
         {
@@ -421,12 +420,12 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!args.ClickLocation.IsValid(EntityManager))
             return;
 
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(args.ClickLocation),
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(args.ClickLocation),
                 out var gridUid,
                 out var mapGrid))
             return;
 
-        var tileRef = _mapSystem.GetTileRef(gridUid, mapGrid, args.ClickLocation);
+        var tileRef = _map.GetTileRef(gridUid, mapGrid, args.ClickLocation);
         var tileDef = (ContentTileDefinition) _tile[tileRef.Tile.TypeId];
 
         if (!_ability.CanRustTile(tileDef))

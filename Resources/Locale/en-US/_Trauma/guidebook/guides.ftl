@@ -15,6 +15,7 @@ guide-entry-civilian = Civilian Jobs
 guide-entry-bingle = Bingle
 guide-entry-changelings = Changelings
 guide-entry-changeling-abilities = Changeling Abilities
+guide-entry-corporate-agents = Corporate Agents
 guide-entry-devil = Devil
 guide-entry-devil-clauses = Devil Clauses
 guide-entry-insurgents = Insurgents

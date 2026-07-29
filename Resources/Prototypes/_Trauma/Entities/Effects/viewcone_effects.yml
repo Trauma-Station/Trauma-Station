@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Effects spawned when certain things happen
 # that only appear to viewcone users when out of vision.
 # TODO these would probably look better as actual animations modulating alpha

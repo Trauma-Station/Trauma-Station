@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # marlen
 
 - type: entity
@@ -20,6 +22,8 @@
     - 0,0,2,0
     storedRotation: 45
   - type: Sharp
+  - type: Tool
+    qualities: Slicing
   - type: MeleeWeapon
     animationRotation: 225
     wideAnimationRotation: -135
@@ -43,6 +47,8 @@
           - 0,0,2,0
           storedRotation: 45
         - type: Sharp
+        - type: Tool
+          qualities: Slicing
         - type: MeleeWeapon
           animationRotation: 225
           wideAnimationRotation: -135
@@ -162,4 +168,4 @@
     solution:
       reagents:
       - ReagentId: Whiskey # lmao
-        Quantity: 500
+        Quantity: 480

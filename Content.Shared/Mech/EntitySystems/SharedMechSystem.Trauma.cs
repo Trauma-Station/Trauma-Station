@@ -1,62 +1,18 @@
-using Content.Trauma.Common.Mech;
-using Content.Trauma.Common.TileMovement;
-using Content.Shared.Emag.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Equipment.Components;
-using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Containers;
+using Content.Trauma.Common.TileMovement;
 
 namespace Content.Shared.Mech.EntitySystems;
 
 public abstract partial class SharedMechSystem
 {
-    [Dependency] private EmagSystem _emag = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private EntityQuery<TileMovementComponent> _tileQuery = default!;
-
-    private void InitializeTrauma()
-    {
-        SubscribeLocalEvent<MechEquipmentComponent, ShotAttemptedEvent>(OnShotAttempted);
-        SubscribeLocalEvent<MechPilotComponent, EntGotRemovedFromContainerMessage>(OnEntGotRemovedFromContainer);
-        SubscribeLocalEvent<MechComponent, GotEmaggedEvent>(OnEmagged);
-    }
-
-    // TODO: this has no reason to be here
-    private void OnShotAttempted(EntityUid uid, MechEquipmentComponent component, ref ShotAttemptedEvent args)
-    {
-        if ((component.EquipmentOwner is not {} mech ||
-            !HasComp<MechComponent>(mech)))
-        {
-            args.Cancel();
-            return;
-        }
-
-        // TODO: this should not be in an attempt event
-        var ev = new MechGunFiredEvent();
-        RaiseLocalEvent(uid, ref ev);
-    }
-
-    // TODO: this has no reason to be here
-    private void OnEntGotRemovedFromContainer(EntityUid uid, MechPilotComponent component, EntGotRemovedFromContainerMessage args)
-    {
-        // Fixes scram implants or teleports locking the pilot out of being able to move.
-        TryEject(component.Mech, pilot: uid);
-    }
-
-    // TODO: this has no reason to be here
-    private void OnEmagged(EntityUid uid, MechComponent component, ref GotEmaggedEvent args)
-    {
-        if (!component.BreakOnEmag || !_emag.CompareFlag(args.Type, EmagType.Interaction))
-            return;
-        args.Handled = true;
-        component.EquipmentWhitelist = null;
-        Dirty(uid, component);
-    }
 
     private void CopyTileMovement(EntityUid mech, EntityUid pilot)
     {

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: species
   id: Plasmaman
   name: species-name-plasmaman
@@ -15,3 +17,9 @@
   sexes:
   - Unsexed
   knowledge: Plasmaman
+  defaultSoundsBySex:
+  - UnisexPlasmaman
+  - UnisexPlasmaman
+  - UnisexPlasmaman
+  voices:
+  - UnisexPlasmaman

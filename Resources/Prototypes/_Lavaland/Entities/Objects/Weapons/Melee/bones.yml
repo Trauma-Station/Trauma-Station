@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: bone axe
   parent: [ BaseItem, BaseMajorContraband, KnifeDurability ]
@@ -33,11 +35,12 @@
     slots:
     - back
     - suitStorage
+  - type: Sharp
   - type: Tool
     qualities:
     - Prying
     - Axing
-  - type: Sharp
+    - Slicing
   - type: Execution
     doAfterDuration: 5.0
     decapitation: true
