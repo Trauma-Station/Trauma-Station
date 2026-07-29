@@ -7,11 +7,7 @@
     edges:
     - to: bot
       steps:
-bot-egg-sack
       - tag: OrganEggSack
-
-      - tag: OrganMouseEggSack
-patch-10
         icon:
           sprite: _White/Mobs/Species/Xenomorph/organs.rsi
           state: egg_sack
