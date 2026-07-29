@@ -12356,3 +12356,26 @@ Entries:
   id: 1354
   time: '2026-07-29T11:38:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3777
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fixes moth wings being stuck open forever when removed while they are
+      open.
+  - type: Fix
+    message: Fix other people not seeing vampire ability particle effects.
+  - type: Fix
+    message: Fix client spawning more particles than intended.
+  - type: Fix
+    message: Fix flipping/spinning once roundstart making you vomit.
+  - type: Fix
+    message: Fixed flesh heretic spamming popups when eating bad food.
+  - type: Tweak
+    message: Forged warhammer size increased.
+  - type: Tweak
+    message: >-
+      Default mod key for changing targeting with mouse wheel is Alt instead of
+      Shift.
+  id: 1355
+  time: '2026-07-29T11:44:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3822
