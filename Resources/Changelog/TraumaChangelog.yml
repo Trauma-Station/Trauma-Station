@@ -12338,3 +12338,12 @@ Entries:
   id: 1352
   time: '2026-07-29T07:54:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2576
+- author: DieselMohawkTheSequel
+  changes:
+  - type: Tweak
+    message: >-
+      Tongue removal made simplier and no longer requiring an open incision. Get
+      your hand in their mouth.
+  id: 1353
+  time: '2026-07-29T10:43:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3821
