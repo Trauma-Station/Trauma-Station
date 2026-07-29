@@ -285,3 +285,12 @@ Entries:
   id: 37
   time: '2026-07-28T00:16:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3776
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Skillchips now have verb logs for adding and removing them.
+  - type: Tweak
+    message: Aghosts can now always see peoples exact skillchips.
+  id: 38
+  time: '2026-07-29T02:29:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3812
