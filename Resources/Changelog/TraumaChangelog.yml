@@ -12379,3 +12379,12 @@ Entries:
   id: 1355
   time: '2026-07-29T11:44:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3822
+- author: tsarevichvanya
+  changes:
+  - type: Tweak
+    message: Gives headrevs that had a roundstart mindshield implant a fake one instead
+  - type: Fix
+    message: Disallowed the NTR from rolling Head Rev
+  id: 1356
+  time: '2026-07-29T19:28:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3805
