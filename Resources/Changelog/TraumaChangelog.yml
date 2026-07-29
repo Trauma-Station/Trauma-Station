@@ -11121,3 +11121,10 @@ Entries:
   id: 1238
   time: '2026-07-29T17:47:44.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/91
+- author: Magelfik
+  changes:
+  - type: Tweak
+    message: Changed Insurgent role rules.
+  id: 1239
+  time: '2026-07-29T21:09:46.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/97
