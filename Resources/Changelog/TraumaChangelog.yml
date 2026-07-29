@@ -12388,3 +12388,10 @@ Entries:
   id: 1356
   time: '2026-07-29T19:28:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not being mimes.
+  id: 1357
+  time: '2026-07-29T19:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3828
