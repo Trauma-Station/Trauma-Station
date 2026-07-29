@@ -2,6 +2,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.EntityConditions;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Timing;
@@ -27,6 +28,20 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
     private void OnReactive(Entity<ReactiveComponent> entity, ref ReactionEntityEvent args)
     {
         var scale = entity.Comp.ScaleOverride ?? args.ReagentQuantity.Quantity.Float(); // Trauma - use ScaleOverride
+
+        // <Trauma> Prevent's reagent effects if proper eye protection.
+        if (args.Method == ReactionMethod.Eyes)
+        {
+            var ev = new GetEyeProtectionEvent()
+            {
+                Target = entity.Owner
+            };
+            RaiseLocalEvent(entity.Owner, ev);
+
+            if (ev.Protection > TimeSpan.Zero)
+                return;
+        }
+        // </Trauma>
 
         if (args.Reagent.ReactiveEffects != null && entity.Comp.ReactiveGroups != null
             && AllowedToReact(entity)) // Trauma

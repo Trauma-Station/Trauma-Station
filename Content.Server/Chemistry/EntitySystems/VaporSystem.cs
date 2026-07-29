@@ -40,18 +40,9 @@ namespace Content.Server.Chemistry.EntitySystems
 
         private void HandleCollide(Entity<VaporComponent> entity, ref StartCollideEvent args)
         {
-            // <Trauma>
-            var ev = new GetEyeProtectionEvent()
-            {
-                Target = args.OtherEntity
-            };
-            RaiseLocalEvent(args.OtherEntity, ev);
-
-            if (ev.Protection > TimeSpan.Zero)
-                return;
-            // </Trauma>
             var solution = Comp<SolutionComponent>(entity).Solution;
-            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch | ReactionMethod.Eyes);
+            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch);
+            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Eyes);
 
             // Check for collision with a impassable object (e.g. wall) and stop
             if ((args.OtherFixture.CollisionLayer & (int)CollisionGroup.Impassable) != 0 && args.OtherFixture.Hard)
