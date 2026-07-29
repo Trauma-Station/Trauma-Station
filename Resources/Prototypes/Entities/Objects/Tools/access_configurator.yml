@@ -59,7 +59,6 @@
       - Robotics
       - Genetics
       # </Trauma>
-      - Bitrun # Orion
       privilegedIdSlot:
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg
@@ -111,7 +110,6 @@
     - Wizard
     - Xenoborg
     # </Trauma>
-    - Bitrun # Orion
     privilegedIdSlot:
       name: id-card-console-privileged-id
       startingItem: UniversalIDCard

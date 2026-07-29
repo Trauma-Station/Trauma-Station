@@ -35,6 +35,9 @@
     magState: mag
     steps: 3
     zeroVisible: true
+  - type: BatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 50
   - type: Battery
     maxCharge: 2000
     startingCharge: 2000
@@ -77,8 +80,11 @@
     steps: 3
     zeroVisible: true
   - type: Battery
-    maxCharge: 7500
-    startingCharge: 7500
+    maxCharge: 3000
+    startingCharge: 3000
+  - type: BatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 30
   - type: Wieldable
   - type: UseDelay
     delay: 1
@@ -111,3 +117,9 @@
   - type: Appearance
   - type: StaticPrice
     price: 250
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 30

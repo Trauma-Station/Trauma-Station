@@ -8,7 +8,6 @@
   components:
   - type: Battery
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 50000
   - type: PowerNetworkBattery
     maxSupply: 1.0e9

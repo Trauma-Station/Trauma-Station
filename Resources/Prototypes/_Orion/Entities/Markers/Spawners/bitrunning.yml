@@ -189,7 +189,7 @@
   - type: Sprite
     layers:
     - state: red
-    - sprite: _White/Mobs/Aliens/Xenomorphs/queen.rsi
+    - sprite: _Trauma/Mobs/Xenos/queen.rsi
       state: xenomorph
   - type: ConditionalSpawner
     prototypes:

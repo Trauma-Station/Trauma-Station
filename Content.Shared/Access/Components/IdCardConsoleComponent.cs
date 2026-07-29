@@ -82,7 +82,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Journalism",
         "Library",
         // </Trauma>
-        "Bitrun" // Orion
     };
 
     [Serializable, NetSerializable]

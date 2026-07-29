@@ -7,14 +7,16 @@
   startingGear: BitrunAvatarGear
   icon: "JobIconBitrunAvatar"
   supervisors: job-supervisors-qm
-  canBeAntag: false
-  goobcoins: 20
   access:
   - Cargo
-  - Bitrun
   - Maintenance
   extendedAccess:
   - Salvage
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned
+
 
 - type: startingGear
   id: BitrunAvatarGear

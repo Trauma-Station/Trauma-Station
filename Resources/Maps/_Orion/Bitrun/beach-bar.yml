@@ -4378,7 +4378,7 @@ entities:
     - type: Transform
       pos: 24.5,12.5
       parent: 1
-- proto: FloorFlockZone2
+- proto: FloorFlockZone
   entities:
   - uid: 645
     components:
@@ -5086,13 +5086,6 @@ entities:
     - type: Transform
       pos: 15.5,23.5
       parent: 1
-- proto: KvassTankFull
-  entities:
-  - uid: 750
-    components:
-    - type: Transform
-      pos: 1.5,11.5
-      parent: 1
 - proto: Lantern
   entities:
   - uid: 751
@@ -5702,23 +5695,6 @@ entities:
     components:
     - type: Transform
       pos: 15.5,18.5
-      parent: 1
-- proto: SuitStorageExplorerSuit
-  entities:
-  - uid: 846
-    components:
-    - type: Transform
-      pos: -1.5,-0.5
-      parent: 1
-  - uid: 847
-    components:
-    - type: Transform
-      pos: -1.5,0.5
-      parent: 1
-  - uid: 848
-    components:
-    - type: Transform
-      pos: -1.5,1.5
       parent: 1
 - proto: SyndicateMicrowave
   entities:

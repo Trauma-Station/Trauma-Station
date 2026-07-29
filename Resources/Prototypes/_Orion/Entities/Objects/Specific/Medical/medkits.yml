@@ -17,7 +17,6 @@
         - CigPack
         - PillCanister
         - SurgeryTool
-        - MedicalPatch
         - Mask
       components:
         - FingerprintMask

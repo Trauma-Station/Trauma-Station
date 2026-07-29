@@ -40,7 +40,7 @@
   - type: Sprite
     sprite: _Orion/Structures/Storage/Crates/bitrun_secure.rsi
   - type: AccessReader
-    access: [["Bitrun"]]
+    access: [["Cargo"]]
 
 - type: entity
   parent: CrateBitrunSecure

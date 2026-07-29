@@ -8,3 +8,61 @@
     sprite: _Orion/Clothing/Uniforms/Jumpsuit/camouflage.rsi
   - type: Clothing
     sprite: _Orion/Clothing/Uniforms/Jumpsuit/camouflage.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  id: ClothingUniformJumpsuitBitrunner
+  name: bitrunner jumpsuit
+  description: A sturdy and comfortable jumpsuit, handed out to bitrunners so they can enjoy a cozy little rest in the netpod while their brains are gently cooked by a quantum-scale computing technology still under analysis.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Uniforms/Jumpsuit/Cargo/bitrunner.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#3f3f3f"
+      right:
+      - state: inhand-right
+        color: "#3f3f3f"
+
+- type: entity
+  parent: ClothingUniformJumpsuitBitrunner
+  id: ClothingUniformJumpsuitMilitaryBitrunner
+  suffix: Military
+  components:
+  - type: Sprite
+    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
+    layers:
+    - state: icon-base-bottom
+      color: "#1f2026"
+    - state: icon-base-top-jumpsuit
+      color: "#2d2d33"
+    - state: icon-decor-department
+      color: "#39393f"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base-bottom
+        color: "#1f2026"
+      - state: inhand-left-base-top-jumpsuit
+        color: "#2d2d33"
+      - state: inhand-left-decor-department
+        color: "#39393f"
+      right:
+      - state: inhand-right-base-bottom
+        color: "#1f2026"
+      - state: inhand-right-base-top-jumpsuit
+        color: "#2d2d33"
+      - state: inhand-right-decor-department
+        color: "#39393f"
+  - type: Clothing
+    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-base-bottom
+        color: "#1f2026"
+      - state: equipped-base-top-jumpsuit
+        color: "#2d2d33"
+      - state: equipped-decor-department
+        color: "#39393f"

@@ -410,23 +410,6 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: SuitStorageExplorerSuit
-  entities:
-  - uid: 34
-    components:
-    - type: Transform
-      pos: -1.5,-0.5
-      parent: 1
-  - uid: 35
-    components:
-    - type: Transform
-      pos: -1.5,0.5
-      parent: 1
-  - uid: 36
-    components:
-    - type: Transform
-      pos: -1.5,1.5
-      parent: 1
 - proto: Table
   entities:
   - uid: 37

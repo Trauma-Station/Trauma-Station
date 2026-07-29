@@ -102,7 +102,6 @@
   - type: Body
     prototype: AnimalHuman
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 5

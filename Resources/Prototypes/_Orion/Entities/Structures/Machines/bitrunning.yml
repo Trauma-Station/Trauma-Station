@@ -54,7 +54,7 @@
     - map: ["computerLayerKeyboard"]
       state: generic_keyboard
     - map: ["computerLayerScreen"]
-    - sprite: _Dumont/Structures/Machines/computers.rsi
+    - sprite: _Orion/Structures/Machines/computers.rsi
       state: bitrunner
     - map: ["computerLayerKeys"]
       state: generic_keys

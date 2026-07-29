@@ -7958,7 +7958,7 @@ entities:
     - type: Transform
       pos: -6.4643273,14.5225935
       parent: 1
-- proto: WeaponRifleWSPR
+- proto: WeaponRifleAk
   entities:
   - uid: 828
     components:

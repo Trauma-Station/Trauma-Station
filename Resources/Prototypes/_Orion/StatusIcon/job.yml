@@ -1,13 +1,5 @@
 - type: jobIcon
   parent: JobIcon
-  id: JobIconBitrunner
-  icon:
-    sprite: /Textures/_Orion/Interface/Misc/job_icons.rsi
-    state: Bitrunner
-  jobName: job-name-bitrunner
-
-- type: jobIcon
-  parent: JobIcon
   id: JobIconBitrunAvatar
   icon:
     sprite: /Textures/_Orion/Interface/Misc/job_icons.rsi

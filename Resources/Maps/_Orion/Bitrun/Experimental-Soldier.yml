@@ -2428,13 +2428,6 @@ entities:
     - type: Transform
       pos: -2.5,8.5
       parent: 1
-- proto: CardBoxSyndicate
-  entities:
-  - uid: 559
-    components:
-    - type: Transform
-      pos: 7.5,13.5
-      parent: 1
 - proto: CarpetBlack
   entities:
   - uid: 154
@@ -2750,7 +2743,7 @@ entities:
     - type: Transform
       pos: -5.6376915,22.4312
       parent: 1
-- proto: ClothingEyesGlassesMedChem
+- proto: ClothingEyesGlassesMed
   entities:
   - uid: 561
     components:
@@ -2892,7 +2885,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -5.5,25.5
       parent: 1
-- proto: ComputerContractor
+- proto: ComputerBroken
   entities:
   - uid: 739
     components:
@@ -3912,7 +3905,7 @@ entities:
     - type: Transform
       pos: -6.5,12.5
       parent: 1
-- proto: MedicalBiofabricator
+- proto: MachineFrameDestroyed
   entities:
   - uid: 631
     components:
@@ -3926,18 +3919,6 @@ entities:
     - type: Transform
       pos: -4.5,26.5
       parent: 1
-- proto: MedkitBSOFilled
-  entities:
-  - uid: 1160
-    components:
-    - type: Transform
-      pos: -1.3202844,3.4518352
-      parent: 1
-  - uid: 1163
-    components:
-    - type: Transform
-      pos: -1.3202844,3.7487102
-      parent: 1
 - proto: MedkitCombatFilled
   entities:
   - uid: 265
@@ -3949,6 +3930,16 @@ entities:
     components:
     - type: Transform
       pos: -6.50387,15.640993
+      parent: 1
+  - uid: 1160
+    components:
+    - type: Transform
+      pos: -1.3202844,3.4518352
+      parent: 1
+  - uid: 1163
+    components:
+    - type: Transform
+      pos: -1.3202844,3.7487102
       parent: 1
 - proto: OperatingTable
   entities:
@@ -4721,7 +4712,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -9.5,20.5
       parent: 1
-- proto: RightHandHuman
+- proto: RightArmHuman
   entities:
   - uid: 650
     components:
@@ -7971,7 +7962,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -0.3396623,1.1897535
       parent: 1
-- proto: WeaponRifleWSPR
+- proto: WeaponRifleAk
   entities:
   - uid: 1107
     components:

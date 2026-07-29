@@ -1,3 +1,4 @@
+loadout-Bitrunneravatargear = Bitrunner
 loadout-bitrunneravatarpassengergear = Assistant
 loadout-bitrunneravatarclowngear = Clown
 loadout-bitrunneravatarmimegear = Mime
