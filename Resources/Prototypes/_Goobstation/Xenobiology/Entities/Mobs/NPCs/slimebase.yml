@@ -8,6 +8,11 @@
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
   - type: Appearance
+  - type: JigglePhysics # wobble wobble
+    mass: 20 # almost all of the fixtures mass
+    springiness: 0.4
+    jiggleLimit: 10
+    displacementCount: 4
   - type: ZombieImmune # xenobio II way too op
   - type: Hunger
     startingHunger: 40
@@ -29,7 +34,7 @@
     drawdepth: OverMobs
     sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
     layers:
-    - map: [ "enum.DamageStateVisualLayers.Base" ]
+    - map: [ "enum.DamageStateVisualLayers.Base", "enum.JigglePhysicsVisuals.Layer" ]
       state: base
   - type: DamageStateVisuals
     states:
@@ -167,9 +172,11 @@
     drawdepth: Mobs
     sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
     layers:
-    - map: [ "enum.DamageStateVisualLayers.Base" ]
+    - map: [ "enum.DamageStateVisualLayers.Base", "enum.JigglePhysicsVisuals.Layer" ]
       state: base
       color: "#FFFFFF"
+  - type: JigglePhysics # fbi open up
+    displacementsRsi: _Trauma/Mobs/Animals/baby_slime_jiggle.rsi
   - type: MobGrowth
     hungerRequired: 75
     currentStage: baby
@@ -186,21 +193,12 @@
   parent: MobSlimeXenobioBaby
   id: MobSlimeXenobioAdult
   categories: [ HideSpawnMenu ]
-  name: slime
   suffix: Adult
-  description: It looks so much like jelly. I wonder what it tastes like?
   components:
+  - type: JigglePhysics
+    displacementsRsi: _Trauma/Mobs/Animals/slime_jiggle.rsi
   - type: MobGrowth
-    hungerRequired: 75
     currentStage: adult
-    stages:
-      baby:
-        nextStage: adult
-        sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
-        displayName: baby
-      adult:
-        sprite: _Goobstation/Xenobiology/Mobs/slimesAdult.rsi
-        displayName: adult
 
 - type: entity
   abstract: true

@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by @deltanedas (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "load": {
+        "srgb": false
+    },
+    "states": [
+        {
+            "name": "jiggle_1"
+        },
+        {
+            "name": "jiggle_2"
+        },
+        {
+            "name": "jiggle_3"
+        },
+        {
+            "name": "jiggle_4"
+        },
+        {
+            "name": "jiggle_-1"
+        },
+        {
+            "name": "jiggle_-2"
+        },
+        {
+            "name": "jiggle_-3"
+        },
+        {
+            "name": "jiggle_-4"
+        }
+    ]
+}
