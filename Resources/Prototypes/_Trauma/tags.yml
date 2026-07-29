@@ -126,7 +126,7 @@
   id: Ed209WeaponsControl
 
 - type: Tag
-  id: EggPlant
+  id: OrganEggSack
 
 - type: Tag
   id: EnchantingScroll # Enchanting ink's EnchantAdder whitelist
