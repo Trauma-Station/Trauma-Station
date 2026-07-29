@@ -222,11 +222,15 @@
       amount: 3
     - id: BoxShotgunTearGas
       amount: 2
+    - id: BoxLethalshot # R.O.N
+      amount: 2
     - id: WeaponGaussgun
       amount: 2
     - id: BaseMagazineGaussgun
       amount: 2
     - id: MagazineBoxGaussgunBullet
+      amount: 2
+    - id: PowerCellHigh # R.O.N
       amount: 2
 
 - type: entityTable

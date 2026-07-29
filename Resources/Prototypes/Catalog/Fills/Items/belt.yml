@@ -55,7 +55,7 @@
   id: BeltSecurityEntityTable
   table: !type:AllSelector
     children:
-    - id: Stunbaton
+    # - id: Stunbaton R.O.N
     - id: Handcuffs
       amount: 2
     - id: HoloprojectorSecurity

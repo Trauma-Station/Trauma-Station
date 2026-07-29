@@ -526,6 +526,7 @@
   - HeadofSecurityJumpsuit
   - SecurityBackpack
   - SecurityMelee # Goobstation
+  - SecurityBaton # R.O.N
   - SecurityBelt
   - HeadofSecurityOuterClothing
   - HeadofSecurityShoes # Goobstation edit
@@ -547,6 +548,7 @@
   - WardenJumpsuit
   - SecurityBackpack
   - SecurityMelee # Goobstation
+  - SecurityBaton # R.O.N
   - SecurityNeck
   - SecurityBelt
   - WardenOuterClothing
@@ -569,6 +571,7 @@
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityMelee # Goobstation
+  - SecurityBaton # R.O.N
   - SecurityOuterClothing
   - SecurityShoes
   - SecurityNeck
@@ -612,6 +615,7 @@
   - SecurityCadetJumpsuit
   - SecurityBackpack
   - SecurityMelee # Goobstation
+  - SecurityBaton # R.O.N - Ideally have them only have the regular stun baton...?
   - AssistiveItems
   - SurvivalSecurity
   - SecurityNeck

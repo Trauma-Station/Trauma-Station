@@ -1356,6 +1356,15 @@
   - SecurityPDA
   - SeniorOfficerPDA
 
+- type: loadoutGroup # R.O.N
+  id: SecurityBaton
+  name: loadout-group-security-baton
+  loadouts:
+  - SecurityStunBaton
+  - SecurityBillyClub
+  - SecurityPolymerBaton
+  - SecurityTruncheon
+
 - type: loadoutGroup
   id: SecurityJobTrinkets
   name: loadout-group-jobtrinkets
