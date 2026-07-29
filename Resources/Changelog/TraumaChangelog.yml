@@ -12416,3 +12416,10 @@ Entries:
   id: 1360
   time: '2026-07-29T22:54:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3838
+- author: dasgooty
+  changes:
+  - type: Fix
+    message: Fixed Peppersprays
+  id: 1361
+  time: '2026-07-29T23:59:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3836
