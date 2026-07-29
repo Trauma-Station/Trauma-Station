@@ -64,10 +64,14 @@
 # Tongue
 
 - type: entity
-  parent: BaseSurgeryRemoveOrgan
+  parent: SurgeryBase
   id: SurgeryRemoveTongue
   name: Remove Tongue
   components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepRemoveOrganHand
   - type: SurgeryOrganCondition
     organ: Tongue
 
