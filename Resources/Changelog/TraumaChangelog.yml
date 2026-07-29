@@ -12323,3 +12323,18 @@ Entries:
   id: 1351
   time: '2026-07-29T03:53:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3819
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: 'Added all 35 chickens from goonstations ranching '
+  - type: Add
+    message: Added the ranching job from goonstation 13
+  - type: Add
+    message: >-
+      Added new plants from botanists that tie in with ranching and are requried
+      for chickens
+  - type: Add
+    message: Added water cans for botany
+  id: 1352
+  time: '2026-07-29T07:54:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2576
