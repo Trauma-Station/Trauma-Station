@@ -39,6 +39,7 @@
   # <Trauma>
   jobBlacklist:
   - Mime
+  - NanotrasenRepresentative
   - HeadOfPersonnel
   - ChiefMedicalOfficer
   - ResearchDirector
