@@ -94,3 +94,11 @@
   components:
   - type: Sprite
     state: service_hall
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaRanch
+  name: ranch
+  components:
+  - type: Sprite
+    state: ranch
