@@ -32,11 +32,6 @@
     enum.HumanoidVisualLayers.RLeg:
       limit: 1
       required: false
-  # <Trauma>
-  appearances:
-    enum.HumanoidVisualLayers.Wings:
-      matchSkin: true
-  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
