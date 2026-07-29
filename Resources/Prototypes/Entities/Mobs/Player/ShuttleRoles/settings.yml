@@ -545,7 +545,7 @@
   id: VisitorMime
   parent: VisitorCivilian
   components:
-    #- type: MimePowers # Trauma - moved to skillchip
+    - type: MimePowers
     - type: GhostRole
       job: Mime # Trauma
       name: job-name-mime
