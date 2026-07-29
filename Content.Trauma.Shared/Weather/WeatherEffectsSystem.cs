@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
+using Content.Shared.EntityConditions;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weather;
@@ -19,6 +20,7 @@ public sealed partial class WeatherEffectsSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
@@ -75,6 +77,10 @@ public sealed partial class WeatherEffectsSystem : EntitySystem
 
     private void UpdateEffects(EntityUid map, EntityUid uid, MobStateComponent mob, WeatherEffectsComponent weather)
     {
+        // check against conditions (like hardsuit immunity)
+        if (!_conditions.TryConditions(uid, weather.Conditions))
+            return;
+
         // don't give dead bodies 10000 burn, that's not fun for anyone
         if (mob.CurrentState == MobState.Dead)
             return;

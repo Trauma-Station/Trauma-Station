@@ -128,6 +128,10 @@
   id: MobCorgiMouse
   description: It's 100% a real hungry mouse.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+    attackMemoryLength: 0
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -881,7 +885,7 @@
         Piercing: 8
         Poison: 8
   - type: Spider
-    spawnsWebsAsNonPlayer: false
+    spawnsWebsAsNonPlayer: false # Trauma
   - type: Grammar
     attributes:
       proper: true

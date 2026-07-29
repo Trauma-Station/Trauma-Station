@@ -155,3 +155,6 @@
     understands:
     - TauCetiBasic
     - Eldritch
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound

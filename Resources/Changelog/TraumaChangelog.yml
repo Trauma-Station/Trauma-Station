@@ -12183,3 +12183,236 @@ Entries:
   id: 1335
   time: '2026-07-27T20:37:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3771
+- author: Chubbygummibear
+  changes:
+  - type: Fix
+    message: Directional and rotating lights are once again working as expected.
+  id: 1336
+  time: '2026-07-27T22:44:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3779
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      "Flap wings" emote as moth now actually flaps your wings. Also dash flaps
+      your wings.
+  - type: Add
+    message: Moth wings can now burn upon taking 35 heat damage.
+  - type: Add
+    message: Some wings were added.
+  - type: Fix
+    message: Fix not being able to change wing/tail marking color.
+  - type: Remove
+    message: Farts removed because of shitcode crimes.
+  id: 1337
+  time: '2026-07-28T00:44:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3659
+- author: Armok
+  changes:
+  - type: Fix
+    message: Gibtonite works properly now
+  id: 1338
+  time: '2026-07-28T04:02:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3785
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Spider cocoons prevent bodies rotting
+  - type: Tweak
+    message: Spiders web cooldown is now 10 seconds
+  - type: Tweak
+    message: AI spiders no longer make webs (they spam it endlessly)
+  - type: Tweak
+    message: Webs no longer drop silk
+  - type: Tweak
+    message: Cocoons spawn baby spiders 50% slower
+  id: 1339
+  time: '2026-07-28T04:30:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3781
+- author: SPCR
+  changes:
+  - type: Fix
+    message: Fixed bloomeries no longer damaging themselves
+  id: 1340
+  time: '2026-07-28T11:52:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3792
+- author: dasgooty
+  changes:
+  - type: Tweak
+    message: CE's Hardsuit now makes you immune to radiation storms.
+  - type: Tweak
+    message: Xenobio slimes are now immune to radiation storms.
+  id: 1341
+  time: '2026-07-28T12:06:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3782
+- author: Cerzix
+  changes:
+  - type: Add
+    message: Added the Telescopic Mace
+  id: 1342
+  time: '2026-07-28T12:36:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3636
+- author: tbmo
+  changes:
+  - type: Fix
+    message: Fixed disposals and other utility constructions requiring a wall to build.
+  id: 1343
+  time: '2026-07-28T18:01:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3795
+- author: buunie099
+  changes:
+  - type: Add
+    message: Added Conveyor belts and other production related recipes to cargo techfab
+  id: 1344
+  time: '2026-07-28T21:29:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3804
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed spiders getting poisoned from drinking blood
+  id: 1345
+  time: '2026-07-28T22:04:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3796
+- author: TechnicFighter, WarPigeon
+  changes:
+  - type: Add
+    message: Added Chameleon Projection to the Syndicate Saboteur Borg.
+  id: 1346
+  time: '2026-07-28T22:07:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3590
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen getting thirsty, having fingerprints, etc.
+  - type: Fix
+    message: Fixed plasmamen being able to gib from limb damage instead of torso only.
+  - type: Fix
+    message: Fixed not being able to ash people with extreme heat damage.
+  id: 1347
+  time: '2026-07-28T22:18:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3809
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Toilets now protect you from radiation storms
+  id: 1348
+  time: '2026-07-28T22:49:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed vgroid basilisks fighting the other mobs.
+  id: 1349
+  time: '2026-07-28T22:53:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3814
+- author: Armok
+  changes:
+  - type: Add
+    message: >-
+      Cargo can order 20 crates at a time, so the ATS can now receive 20 at a
+      time
+  id: 1350
+  time: '2026-07-29T02:43:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3818
+- author: Armok
+  changes:
+  - type: Tweak
+    message: >-
+      replaced pulse carbine and robust toolbox with other weapons in lottery
+      crate
+  id: 1351
+  time: '2026-07-29T03:53:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3819
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: 'Added all 35 chickens from goonstations ranching '
+  - type: Add
+    message: Added the ranching job from goonstation 13
+  - type: Add
+    message: >-
+      Added new plants from botanists that tie in with ranching and are requried
+      for chickens
+  - type: Add
+    message: Added water cans for botany
+  id: 1352
+  time: '2026-07-29T07:54:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2576
+- author: DieselMohawkTheSequel
+  changes:
+  - type: Tweak
+    message: >-
+      Tongue removal made simplier and no longer requiring an open incision. Get
+      your hand in their mouth.
+  id: 1353
+  time: '2026-07-29T10:43:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3821
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: >-
+      Holy water can now be used to heal asphyxiation and all brute danage
+      types.
+  id: 1354
+  time: '2026-07-29T11:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3777
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fixes moth wings being stuck open forever when removed while they are
+      open.
+  - type: Fix
+    message: Fix other people not seeing vampire ability particle effects.
+  - type: Fix
+    message: Fix client spawning more particles than intended.
+  - type: Fix
+    message: Fix flipping/spinning once roundstart making you vomit.
+  - type: Fix
+    message: Fixed flesh heretic spamming popups when eating bad food.
+  - type: Tweak
+    message: Forged warhammer size increased.
+  - type: Tweak
+    message: >-
+      Default mod key for changing targeting with mouse wheel is Alt instead of
+      Shift.
+  id: 1355
+  time: '2026-07-29T11:44:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3822
+- author: tsarevichvanya
+  changes:
+  - type: Tweak
+    message: Gives headrevs that had a roundstart mindshield implant a fake one instead
+  - type: Fix
+    message: Disallowed the NTR from rolling Head Rev
+  id: 1356
+  time: '2026-07-29T19:28:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not being mimes.
+  id: 1357
+  time: '2026-07-29T19:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3828
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Rancher has been mapped to Cog
+  id: 1358
+  time: '2026-07-29T19:41:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3827
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bloodsuckers being poisoned when drinking blood.
+  id: 1359
+  time: '2026-07-29T19:56:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3830
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Goidabot is no longer hostile to insurgents
+  id: 1360
+  time: '2026-07-29T22:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3838

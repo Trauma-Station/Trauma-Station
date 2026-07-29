@@ -36,7 +36,7 @@
     #- id: SubXenoborgs # no
     #  prob: 0.05
     - id: SubHeretic
-      prob: 0.2
+      prob: 0.1
     - id: Devil
       prob: 0.05
     - id: ShadowlingRoundstart
@@ -46,9 +46,9 @@
     - id: WraithRoundstart
       prob: 0.02
     - id: SubVampire
-      prob: 0.2
+      prob: 0.1
     - id: SubChangeling
-      prob: 0.1 # extinct predator species...
+      prob: 0.05 # extinct predator species...
     # </Trauma>
 
 - type: entity
@@ -314,6 +314,7 @@
   id: Revolutionary
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
+  - type: MindshieldRemovingAntag # Trauma - puts fake mindshields into headrevs that start with a real one
   - type: GameRule
     minPlayers: 20 # Trauma - was 15
   - type: RevolutionaryRule

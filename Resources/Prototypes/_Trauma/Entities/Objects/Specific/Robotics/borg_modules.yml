@@ -183,18 +183,3 @@
     - item: BorgHandheldGPSBasic
   - type: BorgModuleIcon
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: defib }
-
-- type: entity
-  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule, BaseSyndicateContraband ]
-  id: BorgModuleSyndicateChameleonProjector
-  name: chameleon projector cyborg module
-  components:
-  - type: Sprite
-    layers:
-    - state: syndicate
-    - state: icon-syndicate
-  - type: ItemBorgModule
-    hands:
-    - item: ChameleonProjectorNoBattery
-  - type: BorgModuleIcon
-    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: projector}

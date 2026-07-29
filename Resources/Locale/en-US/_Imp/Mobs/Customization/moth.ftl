@@ -191,57 +191,57 @@ marking-AntennaShort-nub = Antennae
 
 # Tail
 
-marking-LunaWings = Wings (Luna Moth)
+marking-LunaWings = Wings (Luna Moth, No open wing visuals)
 marking-LunaWings-luna1 = Wings
 marking-LunaWings-luna2 = Spots
 
-marking-MothBee = Wings (Bumblebee)
+marking-MothBee = Wings (Bumblebee, No open wing visuals)
 marking-MothBee-bee1 = Outer stripes
 marking-MothBee-bee2 = Wings
 marking-MothBee-bee3 = Inner stripe
 
-marking-MothBeetleTail = Wings (Junebug)
+marking-MothBeetleTail = Wings (Junebug, No open wing visuals)
 marking-MothBeetleTail-beetle1 = Outline
 marking-MothBeetleTail-beetle2 = Wings
 marking-MothBeetleTail-beetle3 = Shine
 
-marking-MothFirefly = Wings (Firefly Underlay)
+marking-MothFirefly = Wings (Firefly Underlay, No open wing visuals)
 marking-MothFirefly-firefly2 = Firefly Wings
 
-marking-MothFireflyOverlay = Firefly (Overlay)
+marking-MothFireflyOverlay = Firefly (Overlay, No open wing visuals)
 marking-MothFireflyOverlay-firefly1 = Firefly (Overlay)
 
-marking-MothGlasswing = Wings (Glasswing)
+marking-MothGlasswing = Wings (Glasswing, No open wing visuals)
 marking-MothGlasswing-glasswing1 = Outer
 marking-MothGlasswing-glasswing2 = Inner
 marking-MothGlasswing-glasswing3 = Stripe
 
-marking-MothRhinoBeetle = Wings (Rhino Beetle)
+marking-MothRhinoBeetle = Wings (Rhino Beetle, No open wing visuals)
 marking-MothRhinoBeetle-rhinobeetle1 = Outline
 marking-MothRhinoBeetle-rhinobeetle2 = Shine
 marking-MothRhinoBeetle-rhinobeetle3 = Wings
 
-marking-MothSnoth = Wings (Snoth)
+marking-MothSnoth = Wings (Snoth, No open wing visuals)
 marking-MothSnoth-snoth1 = Wings
 marking-MothSnoth-snoth2 = Shell
 
-marking-MothTrueButterfly = Wings (Rainbow)
+marking-MothTrueButterfly = Wings (Rainbow, No open wing visuals)
 marking-MothTrueButterfly-truebutterfly1 = Stripes
 marking-MothTrueButterfly-truebutterfly2 = Dots
 marking-MothTrueButterfly-truebutterfly3 = Wings
 
-marking-WingsBackstabbed = Wings (Backstabbed)
+marking-WingsBackstabbed = Wings (Backstabbed, No open wing visuals)
 marking-WingsBackstabbed-backstabbed = Wings
 
-marking-WingsFly = Wings (Fly)
+marking-WingsFly = Wings (Fly, No open wing visuals)
 marking-WingsFly-fly1 = Neck
 marking-WingsFly-fly2 = Wings
 marking-WingsFly-fly3 = Tail
 
-marking-WingsDragonfly = Wings (Dragonfly)
+marking-WingsDragonfly = Wings (Dragonfly, No open wing visuals)
 marking-WingsDragonfly-dragonfly1 = Neck
 marking-WingsDragonfly-dragonfly2 = Wings
 marking-WingsDragonfly-dragonfly3 = Tail
 
-marking-WingsLanternfly = Wings (Lanternfly)
+marking-WingsLanternfly = Wings (Lanternfly, No open wing visuals)
 marking-WingsLanternfly-lanternfly = Wings
