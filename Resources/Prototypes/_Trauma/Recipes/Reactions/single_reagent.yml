@@ -11,12 +11,12 @@
   products:
     Ash: 0.1
   effects:
-    - !type:Explosion
-      explosionType: DemolitionCharge #Better at breaking walls and stuff
-      maxIntensity: 50
-      intensityPerUnit: 7 # RDX's RE factor is 1.6 of tnt
-      intensitySlope: 20 # more controlled explosion
-      maxTotalIntensity: 700
+  - !type:Explosion
+    explosionType: DemolitionCharge #Better at breaking walls and stuff
+    maxIntensity: 15
+    intensityPerUnit: 1 # RDX's RE factor is 1.6 of tnt
+    intensitySlope: 3 # more controlled explosion
+    maxTotalIntensity: 100
 
 - type: reaction
   id: AmmoniumNitrateDecomposition
@@ -51,12 +51,12 @@
   products:
     Ash: 0.1
   effects:
-    - !type:Explosion
-      explosionType: DemolitionCharge #ANFO is used in mining
-      maxIntensity: 12
-      intensityPerUnit: 3 # you need a lot of it for a large explosion
-      intensitySlope: 1
-      maxTotalIntensity: 3000 # max explosion requires 5000 units which is A LOT
+  - !type:Explosion
+    explosionType: DemolitionCharge #ANFO is used in mining
+    maxIntensity: 15
+    intensityPerUnit: 1 # you need a lot of it for a large explosion
+    intensitySlope: 1
+    maxTotalIntensity: 100
 
 - type: reaction
   id: VinegarDecomposition
@@ -79,9 +79,9 @@
   products:
     Ash: 0.1
   effects:
-    - !type:Explosion
-      explosionType: HardBomb # very high detonation velocity
-      maxIntensity: 20
-      intensityPerUnit: 3 # Lower because hardbomb
-      intensitySlope: 2 # very high detonation velocity
-      maxTotalIntensity: 3000 # very high detonation velocity # this sounds horrifying, but we'll just have to see whether it should be tweaked - Speebro
+  - !type:Explosion
+    explosionType: HardBomb # very high detonation velocity
+    maxIntensity: 8
+    intensityPerUnit: 1 # Lower because hardbomb
+    intensitySlope: 0.5 # very high detonation velocity
+    maxTotalIntensity: 100

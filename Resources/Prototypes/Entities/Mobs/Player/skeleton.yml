@@ -43,10 +43,10 @@
   # <Trauma>
   - type: KnowledgeGrant # Combat skills advanced, crafting skills master
     skills:
-      ThrowingKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
+      ThrowingKnowledge: 50
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 28
+      AthleticsKnowledge: 28
       MeleeKnowledge: 51
       ShootingKnowledge: 51
       FirstAidKnowledge: 51

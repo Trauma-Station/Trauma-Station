@@ -194,12 +194,12 @@ public sealed partial class SandevistanSystem : EntitySystem
             RaiseLocalEvent(ent, ref ev);
         }
 
-        _speed.RefreshMovementSpeedModifiers(ent);
+        _speed.RefreshMovementSpeedModifiers(ent.Owner);
 
         EnsureComp<DogVisionComponent>(ent);
 
         if (ent.Comp.SlowfieldEnabled)
-            CreateSlowfieldFixture(ent, ent.Comp);
+            CreateSlowfieldFixture(ent, ent.Comp.SlowfieldRadius);
 
         _audio.PlayPredicted(ent.Comp.StartSound, ent, ent);
         Dirty(ent);
@@ -244,7 +244,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         {
             if (comp.SlowfieldEnabled)
             {
-                DestroySlowfieldFixture(uid, comp);
+                DestroySlowfieldFixture(uid);
 
                 // Remove slowdown from all affected entities
                 var query = EntityQueryEnumerator<SandevistanSlowedComponent>();
@@ -321,7 +321,7 @@ public sealed partial class SandevistanSystem : EntitySystem
                     continue;
 
                 var despawn = EnsureComp<TimedDespawnComponent>(afterimageUid);
-                despawn.Lifetime = 3f;
+                despawn.Lifetime = 0.5f;
             }
         });
     }
@@ -374,29 +374,29 @@ public sealed partial class SandevistanSystem : EntitySystem
             ApplySlowdown(ent, projectile, comp);
     }
 
-    private void CreateSlowfieldFixture(EntityUid uid, SandevistanUserComponent comp)
+    public void CreateSlowfieldFixture(EntityUid uid, float radius, string id = SlowfieldFixtureId)
     {
         if (!TryComp<PhysicsComponent>(uid, out var physics))
             return;
 
-        var shape = new PhysShapeCircle(comp.SlowfieldRadius);
+        var shape = new PhysShapeCircle(radius);
 
         _fixtures.TryCreateFixture(
             uid,
             shape,
-            SlowfieldFixtureId,
+            id,
             collisionLayer: (int) CollisionGroup.ThrownItem,
             collisionMask: (int) (CollisionGroup.MobMask | CollisionGroup.BulletImpassable | CollisionGroup.ThrownItem),
             hard: false,
             body: physics);
     }
 
-    private void DestroySlowfieldFixture(EntityUid uid, SandevistanUserComponent comp)
+    public void DestroySlowfieldFixture(EntityUid uid, string id = SlowfieldFixtureId)
     {
         if (!TryComp<PhysicsComponent>(uid, out var physics))
             return;
 
-        _fixtures.DestroyFixture(uid, SlowfieldFixtureId, body: physics);
+        _fixtures.DestroyFixture(uid, id, body: physics);
     }
 
     private void OnStartCollide(Entity<ActiveSandevistanUserComponent> ent, ref StartCollideEvent args)
@@ -518,7 +518,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         // Mobs
         if (ent.Comp.IsMob)
         {
-            _speed.RefreshMovementSpeedModifiers(ent);
+            _speed.RefreshMovementSpeedModifiers(ent.Owner);
             if (HasComp<DogVisionComponent>(ent))
                 RemCompDeferred<DogVisionComponent>(ent);
         }

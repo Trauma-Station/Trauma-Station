@@ -17,7 +17,6 @@ namespace Content.Trauma.Client.Particles;
 public sealed partial class ParticleSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -125,7 +124,7 @@ public sealed partial class ParticleSystem : EntitySystem
         EntityUid? attachedEntity = null,
         Color? colorOverride = null)
     {
-        if (!_proto.Resolve(effectId, out var proto))
+        if (!ProtoMan.Resolve(effectId, out var proto))
             return null;
 
         // Skip quality check if this is a gameplay-critical particle

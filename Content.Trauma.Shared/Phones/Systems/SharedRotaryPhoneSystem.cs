@@ -180,7 +180,7 @@ public abstract partial class SharedRotaryPhoneSystem : EntitySystem
 
                 var state = Loc.GetString(ent.Comp.SpeakerPhone ? "handheld-radio-component-on-state" : "handheld-radio-component-off-state");
                 var message = Loc.GetString("phone-speakerphone-onoff", ("status", state));
-                _popup.PopupPredicted(message, ent.Owner, user);
+                _popup.PopupEntity(message, ent.Owner, user);
             }
         };
         args.Verbs.Add(verb);

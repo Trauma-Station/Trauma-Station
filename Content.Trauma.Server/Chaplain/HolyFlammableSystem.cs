@@ -220,7 +220,7 @@ public sealed partial class HolyFlammableSystem : EntitySystem
         if (!flammable.OnFire)
             return;
 
-        _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):entity} stopped being on holy fire damage");
+        _adminLogger.Add(LogType.Flammable, $"{uid:entity} stopped being on holy fire damage");
         flammable.OnFire = false;
         flammable.FireStacks = 0;
 
@@ -244,12 +244,12 @@ public sealed partial class HolyFlammableSystem : EntitySystem
 
         if (flammable.FireStacks > 0 && !flammable.OnFire)
         {
-            if (ignitionSourceUser != null)
-                _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire by {ToPrettyString(ignitionSourceUser.Value):actor} with {ToPrettyString(ignitionSource):tool}");
-            else if (ignitionSource != null)
-                _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire by {ToPrettyString(ignitionSource):actor}");
+            if (ignitionSourceUser is { } user)
+                _adminLogger.Add(LogType.Flammable, $"{uid:target} set on holy fire by {user:actor} with {ignitionSource:tool}");
+            else if (ignitionSource is { } source)
+                _adminLogger.Add(LogType.Flammable, $"{uid:target} set on holy fire by {source:actor}");
             else
-                _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on holy fire");
+                _adminLogger.Add(LogType.Flammable, $"{uid:target} set on holy fire");
             flammable.OnFire = true;
 
             //var extinguished = new HolyIgnitedEvent();

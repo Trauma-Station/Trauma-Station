@@ -32,11 +32,6 @@
     enum.HumanoidVisualLayers.RLeg:
       limit: 1
       required: false
-  # <Trauma>
-  appearances:
-    enum.HumanoidVisualLayers.Wings:
-      matchSkin: true
-  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -140,10 +135,7 @@
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
   - type: Vocal
-    sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
+    emoteSounds: UnisexArachnid
   - type: TypingIndicator
     proto: spider
   - type: CreamPied
@@ -152,7 +144,7 @@
       state: creampie_arachnid
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganArachnid
   abstract: true
   suffix: Arachnid

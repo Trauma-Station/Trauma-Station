@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: tile
+  parent: FloorAstroGrass
+  id: FloorAstroGrassJungle
+  sprite: /Textures/Tiles/grassjungle.png
+  itemDrop: FloorTileItemJungleAstroGrass
+  variants: 1

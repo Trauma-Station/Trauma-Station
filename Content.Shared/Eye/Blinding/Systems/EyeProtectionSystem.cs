@@ -44,7 +44,12 @@ namespace Content.Shared.Eye.Blinding.Systems
             if (!TryComp<BlindableComponent>(args.User, out var blindable) || blindable.IsBlind)
                 return;
 
-            var ev = new GetEyeProtectionEvent();
+            var ev = new GetEyeProtectionEvent()
+            // <Trauma>
+            {
+                Target = args.User,
+            };
+            // </Trauma>
             RaiseLocalEvent(args.User, ev);
 
             var time = (float) (component.StatusEffectTime - ev.Protection).TotalSeconds;

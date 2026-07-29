@@ -1,6 +1,6 @@
 - type: entity
   id: BaseLatheNoSilo # Trauma - add NoSilo, BaseLathe has OreSiloClient
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   abstract: true
   name: lathe
   components:
@@ -15,6 +15,10 @@
     - !type:AutomatedPorts
       sinks:
       - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
   - type: LatheAutomation
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -51,15 +55,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 175
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -314,17 +314,22 @@
     idleState: icon
     runningState: building
     staticPacks:
-    #- ScienceBoardsStatic - Goobstation - Moved to Scifab
-    - ServiceBoardsStatic
-    - CargoBoardsStatic
-    #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
-    #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    # Goobstation Packs
+    # <Trauma>
     - SharedBoardsStatic
     - MedicalBoardsStaticGoob
     - SecurityBoardsStaticGoob
     - ServiceBoardsStaticGoob
+    # </Trauma>
+    #- ScienceBoardsStatic - Goobstation - Moved to Scifab
+    - ServiceBoardsStatic
+    - CargoBoardsStatic
+    #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
+    - EngineeringBoardsStatic
     dynamicPacks:
+    # <Trauma>
+    - SharedBoards
+    - ReactorCircuitboards
+    # </Trauma>
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
@@ -333,8 +338,6 @@
     - CameraBoards
     #- MechBoards - Goobstation - split between departmental lathes
     - ShuttleBoards
-    # Goobstation Packs
-    - SharedBoards
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient
@@ -572,6 +575,7 @@
   description: Prints equipment and circuitboards for use by the medbay.
   components:
   # <Trauma>
+  - type: MasterSiloClient # it's the only lathe in med
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SyndicateCartridgesStatic
@@ -637,6 +641,7 @@
   - type: OreSiloClient
   #- type: LatheAnnouncing # Trauma - not cherry picked
   #  channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseLathe
@@ -739,6 +744,13 @@
   name: ore processor
   description: It produces sheets and ingots using ores.
   components:
+    # <Trauma>
+    - type: MiningPoints
+    - type: MiningPointsLathe
+    - type: MaterialStorageMagnetPickup
+      magnetEnabled: true
+    - type: MasterSiloFeeder # shitsalv 1984
+    # </Trauma>
     - type: Sprite
       sprite: Structures/Machines/ore_processor.rsi
       layers:
@@ -756,7 +768,6 @@
     - type: MaterialStorage
       # <Trauma>
       ignoreMaterialWhiteList: true
-      disallowOreEjection: false
       # </Trauma>
       ignoreColor: true
       whitelist:
@@ -769,13 +780,9 @@
       idleState: icon
       runningState: building
       defaultProductionAmount: 10
-      outputToStorage: true # Goob edit
       staticPacks:
       - OreSmelting
       - RGlassSmelting
-    - type: MiningPoints # DeltaV - Source of mining points for miners
-    - type: MiningPointsLathe # DeltaV
-    - type: MaterialStorageMagnetPickup # Frontier
 
 - type: entity
   parent: OreProcessor

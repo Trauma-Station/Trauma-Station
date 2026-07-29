@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: ancient base xeno
-  id: CMBaseXeno
-  parent: SimpleSpaceMobBase
-  description: An alien drone.
   abstract: true
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable, MobNightVision ]
+  id: CMBaseXeno
+  name: ancient base xeno
+  description: An alien drone.
   components:
   - type: CombatMode
   - type: InputMover
@@ -28,7 +28,7 @@
     speedModifier: 2
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: UseDelay # Goobstation - For insta prying
+  - type: UseDelay
     delay: 1
   - type: Reactive
     groups:
@@ -94,9 +94,8 @@
       Dead:
         Base: dead
   - type: Puller
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 5
   - type: TypingIndicator
@@ -135,20 +134,16 @@
         Caustic: -0.13
   - type: StaticPrice
     price: 3000
-  - type: Insulated # Goobstation
+  - type: Insulated
     coefficient: 0.5
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#d14343"
-    activateSound: null
-    deactivateSound: null
   - type: TileMovement
   - type: VentCrawler
-  - type: LanguageSpeaker # Einstein Engines - Language
+  - type: LanguageSpeaker
     speaks:
     - Xeno
     understands:
     - Xeno
-  - type: Fauna # Lavaland Change
+  - type: Fauna
 
 - type: entity
   name: ancient drone
@@ -370,9 +365,9 @@
         volume: -6
 
 - type: entity
-  name: ancient queen
-  id: CMMobXenoQueen
   parent: CMBaseXeno
+  id: CMMobXenoQueen
+  name: ancient queen
   description: The Queen, in all her glory.
   components:
   - type: Sprite
@@ -423,10 +418,9 @@
       collection: XenoFootstepLarge
       params:
         volume: -6
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingOuterArmorQueenCarapace
-      amount: 1
   - type: Devourer
     foodPreferenceWhitelist:
       components:
@@ -444,9 +438,9 @@
       - Wall
 
 - type: entity
-  name: ancient rogue king
-  id: CMMobXenoRogueKing
   parent: CMMobXenoQueen
+  id: CMMobXenoRogueKing
+  name: ancient rogue king
   description: Driven into isolation, after all these years, this King has grown to be an unstoppable killing machine.
   components:
   - type: Sprite
@@ -462,11 +456,11 @@
       collection: AlienClaw
     animation: WeaponArcBite
     damage:
-        types:
-          Piercing: 15
-          Slash: 15
-          Blunt: 10
-          Structural: 120
+      types:
+        Piercing: 15
+        Slash: 15
+        Blunt: 10
+        Structural: 120
   - type: MovementSpeedModifier
     baseWalkSpeed: 5
     baseSprintSpeed: 5
@@ -499,10 +493,9 @@
         volume: 1
   - type: DashAction
     actionProto: ActionDashGeneric
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: RogueTailWeapon
-      amount: 1
 
 - type: entity
   id: CMMobXenoDroneSentient

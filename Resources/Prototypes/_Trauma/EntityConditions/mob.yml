@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityCondition
+  id: MobCritical
+  condition: !type:AnyCondition
+    conditions:
+    - !type:MobStateCondition
+      mobstate: SoftCrit
+    - !type:MobStateCondition
+      mobstate: Critical

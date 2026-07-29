@@ -76,7 +76,7 @@ reinforcement-engineer-name = Hire Engineer
 reinforcement-engineer-desc = Hire an engineer to repair the station and curse the power grid. Tools included. Minimum arrival time of three minutes.
 
 reinforcement-atmos-name = Hire Atmos Tech
-reinforcement-atmos-desc = Hire an atmos tech to keep the air breathable and the plasma contained. Tools included. Minimum arrival time of three minutes.
+reinforcement-atmos-desc = Hire an atmos tech to keep the air breathable and the phoron contained. Tools included. Minimum arrival time of three minutes.
 
 reinforcement-technician-name = Hire Technical Assistant
 reinforcement-technician-desc = Hire a technical assistant to help engineers with maintenance duties. Minimum arrival time of three minutes.
@@ -119,3 +119,9 @@ reinforcement-service-worker-desc = Hire a service worker to fill whatever role 
 
 reinforcement-assistant-name = Hire Assistant
 reinforcement-assistant-desc = Hire an assistant, fent not included. Minimum arrival time of three minutes.
+
+bioweapon-manual-name = Purchase a bioweapon instruction manual
+bioweapon-manual-desc = Purchase a bioweapon manual that teaches the codes needed to command bioweapons.
+
+bioweapon-name = Purchase a bioweapon
+bioweapon-desc = Purchase a bioweapon mutant to carry out the orders of security.

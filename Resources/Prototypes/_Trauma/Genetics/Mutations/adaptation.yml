@@ -36,7 +36,7 @@
     added:
     - type: SpecialHighTempImmunity
     - type: FireImmunity
-    - type: WeatherImmune # safe from ash storms
+    - type: AshStormImmune
 
 - type: entity
   parent: BaseMutation

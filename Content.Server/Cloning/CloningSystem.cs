@@ -48,7 +48,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
     // </Trauma>
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -66,7 +65,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
     public bool TryCloning(EntityUid original, MapCoordinates? coords, ProtoId<CloningSettingsPrototype> settingsId, [NotNullWhen(true)] out EntityUid? clone)
     {
         clone = null;
-        if (!_prototype.Resolve(settingsId, out var settings))
+        if (!ProtoMan.Resolve(settingsId, out var settings))
             return false; // invalid settings
 
         // Goobstation start - non humanoid cloning
@@ -74,7 +73,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
             return false; // whatever body was to be cloned, was not a humanoid
 
         SpeciesPrototype? speciesPrototype = null;
-        if (humanoid != null && !_prototype.Resolve(humanoid.Species, out speciesPrototype))
+        if (humanoid != null && !ProtoMan.Resolve(humanoid.Species, out speciesPrototype))
             return false; // invalid species
 
         var proto = speciesPrototype?.Prototype.ToString() ?? Prototype(original)?.ID;
@@ -126,7 +125,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
     public override void CloneComponents(EntityUid original, EntityUid clone, ProtoId<CloningSettingsPrototype> settings)
     {
-        if (!_prototype.Resolve(settings, out var proto))
+        if (!ProtoMan.Resolve(settings, out var proto))
             return;
 
         CloneComponents(original, clone, proto);
@@ -191,7 +190,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
             // If the original does not have the component, then the clone shouldn't have it either.
             RemComp(clone, componentRegistration.Type);
-            if (EntityManager.TryGetComponent(original, componentRegistration.Type, out var sourceComp)) // Does the original have this component?
+            if (TryComp(original, componentRegistration.Type, out var sourceComp)) // Does the original have this component?
             {
                 CopyComp(original, clone, sourceComp);
             }

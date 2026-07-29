@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseFish
   id: BaseFishTrauma
   components:
@@ -10,16 +11,15 @@
     sprite: _Trauma/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  parent: BaseFishTrauma
+  parent: [ BaseFishTrauma, BaseSlicingRefinable ]
   id: FishAbductor
   name: abductor fish
   description: It's creepy..
   components:
   - type: Sprite
     state: abductor
-  - type: Item
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: AbductorFishLootTable
@@ -32,7 +32,6 @@
   components:
   - type: Sprite
     state: dumbguy
-  - type: Item
 
 - type: entity
   parent: BaseFishTrauma
@@ -42,7 +41,6 @@
   components:
   - type: Sprite
     state: fatfuckingcunt
-  - type: Item
 
 - type: entity
   parent: BaseFishTrauma
@@ -52,19 +50,17 @@
   components:
   - type: Sprite
     state: needlefish
-  - type: Item
 
 - type: entity
-  parent: BaseFishTrauma
+  parent: [ BaseFishTrauma, BaseSlicingRefinable, BaseMagicalContraband ]
   id: FishSquid
   name: squid
   description: Full of ink!
   components:
   - type: Sprite
     state: squid
-  - type: Item
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: MagicInkRandom

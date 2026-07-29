@@ -20,7 +20,6 @@ namespace Content.Trauma.Shared.Teleportation.Systems;
 public sealed partial class RandomTeleportSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedMapSystem _map = default!;
@@ -47,7 +46,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         if (!RandomTeleport(args.User, ent.Comp, out var wp, user: args.User))
             return;
 
-        _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.User):actor} randomly teleported to {wp} using {ToPrettyString(ent):used}");
+        _adminLog.Add(LogType.Action, LogImpact.Low, $"{args.User:actor} randomly teleported to {wp} using {ent:used}");
 
         if (!ent.Comp.ConsumeOnUse)
             return;
@@ -128,7 +127,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
             targetCoords = entityCoords.Offset(GetTeleportVector(rand, radius.Min, extraRadius));
 
             // Try to not teleport into open space
-            if (!_mapMan.TryFindGridAt(targetCoords, out var gridUid, out var grid))
+            if (!_map.TryFindGridAt(targetCoords, out var gridUid, out var grid))
                 continue;
 
             // Check if we picked a position inside a solid object

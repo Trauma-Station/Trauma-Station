@@ -7,7 +7,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-formaldehyde
+    localizedLabel: reagent-name-formaldehyde
   - type: Solution
     solution:
       reagents:

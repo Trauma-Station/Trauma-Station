@@ -57,6 +57,6 @@ public abstract partial class SharedAbductorSystem
 
         console.Armor = GetNetEntity(ent);
         Dirty(target, console);
-        _popup.PopupClient(Loc.GetString("abductors-ui-vest-linked"), ent, args.User);
+        _popup.PopupEntity(Loc.GetString("abductors-ui-vest-linked"), ent, args.User);
     }
 }

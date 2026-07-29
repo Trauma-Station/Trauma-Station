@@ -19,7 +19,6 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private LanguageSystem _languages = default!;
     [Dependency] private StorageSystem _storage = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -64,7 +63,7 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
     private EntProtoId? GetDedicatedTranslator(ProtoId<LanguagePrototype> language)
     {
         var id = $"{language.Id}Translator";
-        if (!_prototype.HasIndex<EntityPrototype>(id))
+        if (!ProtoMan.HasIndex<EntityPrototype>(id))
             return null;
 
         return new EntProtoId(id);

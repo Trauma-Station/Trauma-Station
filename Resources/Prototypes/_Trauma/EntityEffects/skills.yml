@@ -7,7 +7,7 @@
     skills:
       MeleeKnowledge: 51
       ShootingKnowledge: 51
-      StrengthKnowledge: 51
+      StrengthKnowledge: 50
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51
       WeaponsKnowledge: 51
@@ -20,7 +20,7 @@
   - !type:GrantSkills
     skills:
       MeleeKnowledge: 51
-      StrengthKnowledge: 51
+      StrengthKnowledge: 50
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51
       WeaponsKnowledge: 51
@@ -35,7 +35,7 @@
   - !type:GrantTemporarySkills
     skills:
       MeleeKnowledge: 51
-      StrengthKnowledge: 51
+      StrengthKnowledge: 50
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51
       WeaponsKnowledge: 51
@@ -50,7 +50,7 @@
   - !type:RemoveTemporarySkills
     skills:
       MeleeKnowledge: 51
-      StrengthKnowledge: 51
+      StrengthKnowledge: 50
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51
       WeaponsKnowledge: 51
@@ -65,7 +65,7 @@
   - !type:GrantSkills
     skills:
       MeleeKnowledge: 51
-      StrengthKnowledge: 51
+      StrengthKnowledge: 50
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51
       WeaponsKnowledge: 51
@@ -108,5 +108,5 @@
   - !type:GrantSkills
     skills:
       MartialArtHellRip: 88
-      StrengthKnowledge: 70
+      StrengthKnowledge: 50
       AthleticsKnowledge: 40

@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelm
-  name: plasma envirosuit helmet
-  description: A special containment helmet that allows plasma-based lifeforms to exist safely in an oxygenated environment.
+  name: phoron envirosuit helmet
+  description: A special containment helmet that allows phoron-based lifeforms to exist safely in an oxygenated environment.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/plain.rsi
@@ -188,6 +188,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.8
   - type: FaceHuggerBlocker
 

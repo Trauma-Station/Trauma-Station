@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseWeaponBallisticTurret, BaseSyndicateAnchoredContraband]
+  parent: [BaseWeaponBallisticTurret, BaseSyndicateContrabandUnscannable] # Trauma - unscannable
   id: WeaponTurretSyndicate
   suffix: Syndicate
   components:
@@ -8,7 +8,7 @@
     - Syndicate
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponBallisticTurretIndestructible
   id: WeaponTurretSyndicateDisposable
   name: disposable ballistic turret
   suffix: Syndicate, Disposable
@@ -16,17 +16,14 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
+  - type: Damageable
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 250 # Goobstation
+        damage: 250 # Trauma - was 100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -85,7 +82,7 @@
     - AllHostile
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponBallisticTurretIndestructible
   id: WeaponTurretXeno
   name: xeno turret
   suffix: Xeno

@@ -35,9 +35,22 @@ public sealed partial class CircuitSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveCircuitComponent, CircuitComponent>();
         while (query.MoveNext(out var uid, out _, out var comp))
         {
+            // change any momentary pulses back to low since theyve been processed
+            for (var i = 0; i < comp.Inputs.Count; i++)
+            {
+                if (comp.Inputs[i] != Pulse.Instance)
+                    continue;
+
+                comp.Inputs[i] = False.Instance;
+                foreach (var input in comp.LinkedInputs[i])
+                {
+                    ValueChanged(comp, input, False.Instance);
+                }
+            }
+
             var changed = comp.Changed;
             if (changed.Count == 0)
-                return;
+                continue;
 
             comp.Changed = new();
             var gates = comp.Data.Gates;
@@ -54,19 +67,6 @@ public sealed partial class CircuitSystem : EntitySystem
                 foreach (var output in gate.LinkedOutputs)
                 {
                     ValueChanged(comp, output, gate.Output);
-                }
-            }
-
-            // change any momentary pulses back to low since theyve been processed
-            for (var i = 0; i < comp.Inputs.Count; i++)
-            {
-                if (comp.Inputs[i] is not Pulse p)
-                    continue;
-
-                comp.Inputs[i] = False.Instance;
-                foreach (var input in comp.LinkedInputs[i])
-                {
-                    ValueChanged(comp, input, False.Instance);
                 }
             }
         }
@@ -128,7 +128,7 @@ public sealed partial class CircuitSystem : EntitySystem
         // send expected values when a circuit is repowered installed etc
         for (var i = 0; i < comp.LastOutputs.Count; i++)
         {
-            SendOutput(comp.Housing, i + 1, comp.LastOutputs[i]);
+            SendOutput(comp.Housing, i, comp.LastOutputs[i]);
         }
     }
 
@@ -141,7 +141,7 @@ public sealed partial class CircuitSystem : EntitySystem
         for (var i = 0; i < CircuitComponent.PortsCount; i++)
         {
             if (!comp.LastOutputs[i].Equals(False.Instance))
-                SendOutput(comp.Housing, i + 1, False.Instance);
+                SendOutput(comp.Housing, i, False.Instance);
         }
     }
 

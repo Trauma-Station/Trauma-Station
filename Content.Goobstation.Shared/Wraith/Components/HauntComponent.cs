@@ -43,12 +43,6 @@ public sealed partial class HauntComponent : Component
     public TimeSpan HauntFlashDuration = TimeSpan.FromSeconds(2);
 
     /// <summary>
-    /// The status effect to flash anyone who gets haunted.
-    /// </summary>
-    [DataField]
-    public ProtoId<StatusEffectPrototype> FlashedId = "Flashed";
-
-    /// <summary>
     /// Is the action active?
     /// </summary>
     [ViewVariables, AutoNetworkedField]

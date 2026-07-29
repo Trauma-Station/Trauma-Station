@@ -1,3 +1,4 @@
+job-description-brigmedic = Fight in the rear of the security service, for the lives of your comrades! You are the first and last hope of your squad. Hippocrates bless you.
 job-description-geneticist = Modify the genes of organisms, including your fellow crewmembers!
 
 # upstream never made these lol

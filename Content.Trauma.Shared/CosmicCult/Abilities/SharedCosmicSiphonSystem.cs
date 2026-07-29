@@ -42,12 +42,12 @@ public abstract partial class SharedCosmicSiphonSystem : EntitySystem
     {
         if (ent.Comp.EntropyLocked)
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-siphon-full"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-siphon-full"), ent, ent);
             return;
         }
         if (_cosmicCult.EntityIsCultist(args.Target) || _mobState.IsDead(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-siphon-fail", ("target", Identity.Entity(args.Target, EntityManager))), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-siphon-fail", ("target", Identity.Entity(args.Target, EntityManager))), ent, ent);
             return;
         }
         if (args.Handled)
@@ -91,7 +91,7 @@ public abstract partial class SharedCosmicSiphonSystem : EntitySystem
         }
 
         RaiseLocalEvent(target, new CosmicSiphonIndicatorEvent());
-        _popup.PopupClient(Loc.GetString("cosmicability-siphon-success", ("target", Identity.Entity(target, EntityManager))), ent, ent);
+        _popup.PopupEntity(Loc.GetString("cosmicability-siphon-success", ("target", Identity.Entity(target, EntityManager))), ent, ent);
         _cosmicCult.AddEntropy(ent, entropyQuantity);
     }
 }

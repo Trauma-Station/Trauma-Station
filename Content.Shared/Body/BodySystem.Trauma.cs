@@ -22,7 +22,6 @@ public sealed partial class BodySystem
     [Dependency] private CommonBodyCacheSystem _cache = default!;
     [Dependency] private CommonBodyPartSystem _part = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private StandingStateSystem _standing = default!;
 
@@ -367,7 +366,7 @@ public sealed partial class BodySystem
             return false; // organ doesn't support markings
 
         var markingData = organ.Comp.MarkingData;
-        var proto = _proto.Index(marking);
+        var proto = ProtoMan.Index(marking);
         var layer = proto.BodyPart;
         if (!force)
         {

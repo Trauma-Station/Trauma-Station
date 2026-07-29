@@ -8,6 +8,15 @@
   objective: roles-antag-slasher-objectives
   guides: [ Slasher ]
 
+- type: antagSmite
+  id: Slasher
+  antag: Slasher
+  rule: SlasherRule
+  ruleComp: SlasherRule
+  icon:
+    sprite: _Goobstation/Objects/Specific/Slasher/machete.rsi
+    state: icon
+
 - type: antagSpecifier
   id: Slasher
   spawnerPrototype: SpawnPointGhostSlasher
@@ -32,8 +41,7 @@
     popupText: slasher-cannot-use-guns
   - type: WeakToHoly
   - type: NightVision
-    activateSound: null
-    deactivateSound: null
+    lightingColor: '#FF777715'
   - type: Hunger
     baseDecayRate: 0
   - type: Thirst

@@ -15,7 +15,6 @@ namespace Content.Trauma.Server.Station;
 public sealed partial class StationTraitsSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
@@ -67,7 +66,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
         // then apply them
         foreach (var id in ent.Comp.Picked)
         {
-            var trait = _proto.Index(id);
+            var trait = ProtoMan.Index(id);
             Log.Info($"Added station trait {id}");
             try
             {
@@ -123,7 +122,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
         var station = ent.Owner;
         foreach (var id in ent.Comp.Picked)
         {
-            var trait = _proto.Index(id);
+            var trait = ProtoMan.Index(id);
             if (getEffects(trait) is not { } effects)
                 continue;
 
@@ -147,7 +146,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllTraits.Clear();
-        foreach (var trait in _proto.EnumeratePrototypes<StationTraitPrototype>())
+        foreach (var trait in ProtoMan.EnumeratePrototypes<StationTraitPrototype>())
         {
             if (!AllTraits.TryGetValue(trait.Group, out var list))
                 AllTraits[trait.Group] = list = new();
@@ -193,7 +192,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
         sb.AppendLine("[bold]Identified shift divergencies:[/bold]");
         foreach (var id in traits.Reported)
         {
-            var trait = _proto.Index(id);
+            var trait = ProtoMan.Index(id);
             if (trait.Report is { } report) // should always be true...
                 sb.AppendLine($"[italic]{trait.Name}[/italic] - {report}");
         }
@@ -206,7 +205,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
     /// </summary>
     public bool ForceTrait(string id)
     {
-        if (!_enabled || !_proto.HasIndex<StationTraitPrototype>(id))
+        if (!_enabled || !ProtoMan.HasIndex<StationTraitPrototype>(id))
             return false;
 
         _forced.Add(id);
@@ -218,7 +217,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
     /// </summary>
     public void ForceAllTraits()
     {
-        foreach (var trait in _proto.EnumeratePrototypes<StationTraitPrototype>())
+        foreach (var trait in ProtoMan.EnumeratePrototypes<StationTraitPrototype>())
         {
             ForceTrait(trait.ID);
         }

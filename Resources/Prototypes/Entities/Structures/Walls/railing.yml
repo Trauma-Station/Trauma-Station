@@ -6,7 +6,7 @@
   description: Basic railing meant to protect idiots like you from falling.
   components:
   - type: Sprite
-    drawdepth: 5 # Trauma - changed for platforms, was SmallObjects (2)
+    drawdepth: Items # Trauma - changed for platforms, was SmallObjects (2)
     sprite: Structures/Walls/railing.rsi
   - type: Icon
     sprite: Structures/Walls/railing.rsi
@@ -47,12 +47,6 @@
         - TableLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20
@@ -104,12 +98,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 20
       behaviors:
       - !type:PlaySoundBehavior
@@ -148,12 +136,6 @@
         - TableLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20
@@ -212,12 +194,6 @@
           - TableLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20

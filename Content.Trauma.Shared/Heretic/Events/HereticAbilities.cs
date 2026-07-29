@@ -252,8 +252,6 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
     public EntProtoId Status = "SacramentsOfPowerStatusEffect";
 }
 
-public sealed partial class EventHereticToggleChampionHook : InstantActionEvent;
-
 public sealed partial class EventHereticFuriousSteel : InstantActionEvent
 {
     [DataField]
@@ -288,8 +286,6 @@ public sealed partial class HereticBladePassiveRiposteEvent : HereticKnowledgeEv
 }
 
 // lock
-public sealed partial class EventHereticBulglarFinesse : EntityTargetActionEvent;
-
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
 
 public sealed partial class HereticXRayVisionEvent : HereticKnowledgeEvent;
@@ -423,9 +419,11 @@ public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEven
 public sealed partial class StarGazerSeekMasterEvent : InstantActionEvent;
 
 // side
-public sealed partial class EventHereticIceSpear : InstantActionEvent;
+public sealed partial class ToggleAbyssalMaskEvent : InstantActionEvent;
 
-public sealed partial class EventHereticCleave : WorldTargetActionEvent
+public sealed partial class RecallItemEvent : InstantActionEvent;
+
+public sealed partial class EventHereticCleave : EntityTargetActionEvent
 {
     [DataField]
     public float Range = 1f;

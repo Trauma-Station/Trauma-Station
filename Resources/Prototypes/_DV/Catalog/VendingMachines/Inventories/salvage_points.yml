@@ -58,6 +58,8 @@
     cost: 1000
   - id: PKAUpgradeFireRate
     cost: 1000
+  - id: PKAUpgradeSpace
+    cost: 1000
   - id: ShelterCapsule
     cost: 1000
   - id: LavalandEquipmentExplorerSuit
@@ -85,6 +87,8 @@
     cost: 1500
   - id: LuxuryMedipen
     cost: 1500
+  - id: SkillChipMining
+    cost: 1500
   - id: WeaponPlasmaCutter
     cost: 1700
   - id: BorgModuleAdvancedMining
@@ -99,7 +103,7 @@
     cost: 2000
   - id: ClothingOuterHardsuitSalvage
     cost: 2000
-    #TODO:  super resonator for 2500
+  # TODO: super resonator for 2500
   - id: ClothingShoesBootsJump
     cost: 2500
   - id: ClothingOuterHardsuitLuxury

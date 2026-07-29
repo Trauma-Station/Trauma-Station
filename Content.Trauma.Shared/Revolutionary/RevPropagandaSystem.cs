@@ -31,7 +31,6 @@ public sealed partial class RevPropagandaSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
@@ -55,7 +54,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         SubscribeLocalEvent<RevPropagandaComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RevPropagandaComponent, AfterInteractEvent>(OnAfterInteract);
 
-        _speechLocalization = _proto.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
+        _speechLocalization = ProtoMan.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
     }
 
     private void OnUseInHand(Entity<RevPropagandaComponent> ent, ref UseInHandEvent args)
@@ -124,7 +123,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         // rev shitcode is horrific...
         RemComp<RevolutionEnemyComponent>(target);
         _faction.AddFaction(target, Faction);
-        _adminLog.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(user)} converted {ToPrettyString(target)} into a Revolutionary");
+        _adminLog.Add(LogType.Mind, LogImpact.Medium, $"{user:user} converted {target:target} into a Revolutionary");
 
         // good boy points
         if (_mind.TryGetMind(user, out var userMindId, out var userMind) &&
@@ -165,7 +164,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
 
         if (!CanConvert(converter.AsNullable(), user, target))
         {
-            _popup.PopupClient("You can't convert them!", target, user);
+            _popup.PopupEntity("You can't convert them!", target, user);
             return;
         }
 

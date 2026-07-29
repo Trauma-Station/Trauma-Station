@@ -19,6 +19,7 @@
     slots:
     - Hair
   - type: FlashImmunity
+    showInExamine: false
   - type: FlashSoundSuppression
   - type: Armor
     coverage:
@@ -62,6 +63,7 @@
           Blunt: 0.4
           Slash: 0.4
           Piercing: 0.4
+          Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
       traumaDeductions:
@@ -82,6 +84,7 @@
           Blunt: 0.7
           Slash: 0.7
           Piercing: 0.7
+          Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
       traumaDeductions:

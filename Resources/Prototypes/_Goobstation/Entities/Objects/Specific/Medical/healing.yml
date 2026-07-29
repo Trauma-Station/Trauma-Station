@@ -7,7 +7,7 @@
   id: SyringePax
   components:
   - type: Label
-    currentLabel: reagent-name-pax
+    localizedLabel: reagent-name-pax
   - type: Solution
     solution:
       reagents:
@@ -21,7 +21,7 @@
   id: SyringePoisonCentcomm
   components:
   - type: Label
-    currentLabel: reagent-name-amatoxin
+    localizedLabel: reagent-name-amatoxin
   - type: Solution
     solution:
       reagents:
@@ -29,14 +29,10 @@
         Quantity: 15
 
 - type: entity
-  suffix: fent
-  parent: PrefilledSyringe
-  name: used fent syringe
-  description: What the fuck?!
+  parent: SyringePoisonFent
   id: SyringePoisonFentUsed
+  name: used fent syringe
   components:
-  - type: Label
-    currentLabel: fentanyl
   - type: Solution
     solution:
       reagents:
@@ -44,14 +40,14 @@
         Quantity: 7
 
 - type: entity
-  suffix: fent
   parent: PrefilledSyringe
-  name: fentanyl syringe
-  description: What the fuck?!
   id: SyringePoisonFent
+  name: fentanyl syringe
+  suffix: fent
+  description: What the fuck?!
   components:
   - type: Label
-    currentLabel: fentanyl
+    localizedLabel: reagent-name-fentanyl
   - type: Solution
     solution:
       reagents:
@@ -66,7 +62,7 @@
   suffix: lethal injection
   components:
   - type: Label
-    currentLabel: Lethal Injection
+    localizedLabel: syringe-lethal-injection
   - type: Solution
     solution:
       reagents:
@@ -86,7 +82,7 @@
   - type: Sprite
     state: pill18
   - type: Label
-    currentLabel: tramadol 7.5u
+    localizedLabel: reagent-name-tramadol
   - type: Solution
     solution:
       reagents:
@@ -100,7 +96,7 @@
   suffix: Tramadol 7.5u, 15
   components:
   - type: Label
-    currentLabel: tramadol 7.5u
+    localizedLabel: reagent-name-tramadol
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -118,7 +114,7 @@
   - type: Sprite
     state: pill19
   - type: Label
-    currentLabel: oxycodone 5u
+    localizedLabel: reagent-name-oxycodone
   - type: Solution
     solution:
       reagents:
@@ -132,7 +128,7 @@
   suffix: Oxycodone 5u, 15
   components:
   - type: Label
-    currentLabel: oxycodone 5u
+    localizedLabel: reagent-name-oxycodone
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -150,7 +146,7 @@
   - type: Sprite
     state: pill1
   - type: Label
-    currentLabel: Ibuprofen 10u
+    localizedLabel: reagent-name-ibuprofen
   - type: Solution
     solution:
       reagents:
@@ -164,7 +160,7 @@
   suffix: Ibuprofen 10u, 15
   components:
   - type: Label
-    currentLabel: Ibuprofen 10u
+    localizedLabel: reagent-name-ibuprofen
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -179,7 +175,7 @@
   suffix: Tramadol 15u
   components:
   - type: Label
-    currentLabel: Tramadol
+    localizedLabel: reagent-name-tramadol
   - type: Solution
     solution:
       reagents:
@@ -194,7 +190,7 @@
   suffix: Oxycodone 15u
   components:
   - type: Label
-    currentLabel: Oxycodone
+    localizedLabel: reagent-name-oxycodone
   - type: Solution
     solution:
       reagents:
@@ -209,7 +205,7 @@
   suffix: Ibuprofen 15u
   components:
   - type: Label
-    currentLabel: Ibuprofen
+    localizedLabel: reagent-name-ibuprofen
   - type: Solution
     solution:
       reagents:
@@ -224,7 +220,7 @@
   suffix: heroin 15u
   components:
   - type: Label
-    currentLabel: Heroin
+    localizedLabel: reagent-name-heroin
   - type: Solution
     solution:
       reagents:
@@ -238,7 +234,7 @@
   description: Humanity used to macrodose themselves with this. Now its just a medicine for vox.
   components:
   - type: Label
-    currentLabel: reagent-name-microplastics
+    localizedLabel: reagent-name-microplastics
   - type: Solution
     solution:
       reagents:

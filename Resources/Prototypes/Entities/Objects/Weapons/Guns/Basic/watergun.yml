@@ -20,6 +20,8 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
+  - type: SolutionItemStatus
+    solution: chamber
   - type: SolutionAmmoProvider
     solutionId: chamber
     proto: BulletWaterShot
@@ -110,6 +112,10 @@
   name: super water blaster
   description: No! No! Not in the eyes!
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Rifle # big boy toy
+  # </Trauma>
   - type: Gun
     cameraRecoilScalar: 0 #no recoil
     fireRate: 8

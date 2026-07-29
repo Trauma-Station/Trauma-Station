@@ -12,11 +12,11 @@
     solution:
       reagents:
       - ReagentId: Synthflesh
-        Quantity: 20
+        Quantity: 40
       - ReagentId: UncookedAnimalProteins
-        Quantity: 5
+        Quantity: 10
       - ReagentId: GastroToxin
-        Quantity: 5
+        Quantity: 10
   - type: Tag
     tags:
     - SynthMeat

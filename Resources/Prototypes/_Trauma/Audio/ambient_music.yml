@@ -1,0 +1,206 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# It's best to use fadeIn and interruptable parameters when creating a new ambientMusic prototype for areas,
+# with a high priority number (e.g. 10) so it has a higher chance to play the music.
+# IMPORTANT, set general department area (e.g. medical) priority to around 5 then set specific areas (e.g. morgue) to around 10 this will give the department general ambience but will allow for sub areas to have its own ambience
+
+# Specific areas
+
+- type: ambientMusic
+  id: MorgueArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceSpooky
+  fadeIn: true
+  interruptable: true
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaMorgue ]
+  priority: 10
+
+- type: ambientMusic
+  id: HolyArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceHoly
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      components:
+      - HolyArea
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: DetectiveArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceDetective
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaDetective ]
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: PoolArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceBeach
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaBeach ]
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: ColdArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceCold
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaCold ]
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: DojoArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceDojo
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaDojo ]
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: InterrogationArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceInterrogation
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaInterrogation ]
+  fadeIn: true
+  interruptable: true
+  priority: 7
+
+# Departments
+- type: ambientMusic
+  id: MedicalArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceMedical
+  conditions:
+  - !type:InDepartmentArea
+    department: Medical
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+- type: ambientMusic
+  id: EngineeringArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceEngineering
+  conditions:
+  - !type:InDepartmentArea
+    department: Engineering
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+- type: ambientMusic
+  id: SecurityArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceSecurity
+  conditions:
+  - !type:InDepartmentArea
+    department: Security
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+# General areas
+- type: ambientMusic
+  id: MaintenanceArea
+  sound:
+    params:
+      volume: -10
+    collection: AmbienceMaintenance
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      components:
+      - MaintsSpawnLocation
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+# Collections
+
+- type: soundCollection
+  id: AmbienceDetective
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/detective/detectivesroom.ogg
+
+- type: soundCollection
+  id: AmbienceBeach
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/seag1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/seag2.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/seag3.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/shore.ogg
+
+- type: soundCollection
+  id: AmbienceCold
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicemelody1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicemelody2.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicemelody3.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting2.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting3.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting4.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting5.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicetheme.ogg
+
+- type: soundCollection
+  id: AmbienceInterrogation
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/security/iknewaguy.ogg
+
+- type: soundCollection
+  id: AmbienceSecurity
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/security/ambidet1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/security/ambidet2.ogg
+
+- type: soundCollection
+  id: AmbienceDojo
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/dojo/dojoambi.ogg

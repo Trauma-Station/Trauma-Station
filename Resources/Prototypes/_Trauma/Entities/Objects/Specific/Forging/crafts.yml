@@ -183,6 +183,8 @@
   description: A powerful polearm with an oddly shaped head.
   categories: [ HideSpawnMenu ]
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
   - type: Item
@@ -246,6 +248,8 @@
   description: Every dwarf's gotta have one of these, or maybe forty thousand of them.
   categories: [ HideSpawnMenu ]
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
   - type: Item
@@ -370,6 +374,8 @@
   description: You REALLY don't want to get your skull caved in by this...
   categories: [ HideSpawnMenu ]
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
   - type: Item

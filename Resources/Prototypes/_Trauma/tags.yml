@@ -3,9 +3,6 @@
 ## A ##
 
 - type: Tag
-  id: Apple
-
-- type: Tag
   id: AdamantineScraps # Construction: AdamantineIngot
 
 - type: Tag
@@ -16,6 +13,25 @@
 
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
+
+# Area whitelist tags for ambient music
+- type: Tag
+  id: AreaBeach
+
+- type: Tag
+  id: AreaCold
+
+- type: Tag
+  id: AreaDojo
+
+- type: Tag
+  id: AreaDetective
+
+- type: Tag
+  id: AreaInterrogation
+
+- type: Tag
+  id: AreaMorgue
 
 ## B ##
 
@@ -30,9 +46,6 @@
 
 - type: Tag
   id: Bracing # given to WeaponBracing, used to repair durability on a lot of weapons
-
-- type: Tag
-  id: Butt # Construction: MobButtBot
 
 ## C ##
 
@@ -65,9 +78,6 @@
 
 - type: Tag
   id: CookedEgg # Construction: FoodMealFriedegg, FoodEggToast
-
-- type: Tag
-  id: CyberButt # Construction: MobButtBotCyber (currently unused)
 
 - type: Tag
   id: DataChip # Blueprint whitelist: RevMicroelectronicsAssembler
@@ -192,11 +202,9 @@
 
 ## O ##
 
+# :o nothing
 - type: Tag
   id: MagicMushroom
-
-- type: Tag
-  id: OverrideKeyComponents # Construction: ArmoryOverrideKey
 
 ## P ##
 
@@ -279,10 +287,16 @@
   id: Scimitar # Used for scabbad whitelist
 
 - type: Tag
+  id: SharpMedal # Heretic - Sharp Medal item, used for blades boomerang throw logic
+
+- type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision
 
 - type: Tag
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
+
+- type: Tag
+  id: Spider # Spider mobcaller
 
 - type: Tag
   id: SteelScraps # Construction: BloomeryColdSteel

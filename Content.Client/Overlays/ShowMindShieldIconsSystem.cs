@@ -1,14 +1,11 @@
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Overlays;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.Overlays;
 
 public sealed partial class ShowMindShieldIconsSystem : EquipmentHudSystem<ShowMindShieldIconsComponent>
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -20,9 +17,9 @@ public sealed partial class ShowMindShieldIconsSystem : EquipmentHudSystem<ShowM
     //  ...imagine cheating in a game about silly paper dolls
     private void OnGetStatusIconsEventFake(EntityUid uid, FakeMindShieldComponent component, ref GetStatusIconsEvent ev)
     {
-        if(!IsActive)
+        if (!IsActive)
             return;
-        if (component.IsEnabled && _prototype.Resolve(component.MindShieldStatusIcon, out var fakeStatusIconPrototype))
+        if (component.IsEnabled && ProtoMan.Resolve(component.MindShieldStatusIcon, out var fakeStatusIconPrototype))
             ev.StatusIcons.Add(fakeStatusIconPrototype);
     }
 
@@ -31,12 +28,10 @@ public sealed partial class ShowMindShieldIconsSystem : EquipmentHudSystem<ShowM
         if (!IsActive)
             return;
 
-        var statusIcon = component.MindShieldStatusIcon; // Goobstation - check if mindshield is broken
-
-        if (component.Broken)
-            statusIcon = component.MindShieldBrokenStatusIcon; // Goobstation - check if mindshield is broken
-
-        if (_prototype.Resolve(statusIcon, out var iconPrototype)) // Goobstation
+        // <Trauma> - different icon when broken
+        var icon = component.Broken ? component.MindShieldBrokenStatusIcon : component.MindShieldStatusIcon;
+        if (ProtoMan.Resolve(icon, out var iconPrototype))
+        // </Trauma>
             ev.StatusIcons.Add(iconPrototype);
     }
 }

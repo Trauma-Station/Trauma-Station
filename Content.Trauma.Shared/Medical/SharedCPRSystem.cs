@@ -91,7 +91,7 @@ public abstract partial class SharedCPRSystem : EntitySystem
             return;
 
         var userIdentity = Identity.Entity(ent, EntityManager);
-        _popup.PopupClient(Loc.GetString("cpr-start-second-person", ("target", identity)), target, ent);
+        _popup.PopupEntity(Loc.GetString("cpr-start-second-person", ("target", identity)), target, ent);
         _popup.PopupEntity(Loc.GetString("cpr-start-second-person-patient", ("user", userIdentity)), target, target);
 
         var doAfterArgs = new DoAfterArgs(
@@ -124,7 +124,7 @@ public abstract partial class SharedCPRSystem : EntitySystem
     {
         if (_activeQuery.HasComp(target))
         {
-            _popup.PopupClient(Loc.GetString("cpr-already-performing", ("entity", identity)), ent, ent, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("cpr-already-performing", ("entity", identity)), ent, ent, PopupType.Medium);
             return false;
         }
 
@@ -135,19 +135,19 @@ public abstract partial class SharedCPRSystem : EntitySystem
     {
         if (_rottingQuery.HasComp(target))
         {
-            _popup.PopupClient(Loc.GetString("cpr-target-rotting", ("entity", identity)), ent, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("cpr-target-rotting", ("entity", identity)), ent, ent, PopupType.LargeCaution);
             return false;
         }
 
         if (GetLungs(target) == null || GetLungs(ent) == null)
         {
-            _popup.PopupClient(Loc.GetString("cpr-target-cantbreathe", ("entity", identity)), ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cpr-target-cantbreathe", ("entity", identity)), ent, ent, PopupType.MediumCaution);
             return false;
         }
 
         if (_inventory.TryGetSlotEntity(target, "outerClothing", out var outer))
         {
-            _popup.PopupClient(Loc.GetString("cpr-must-remove", ("clothing", outer)), ent, ent, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("cpr-must-remove", ("clothing", outer)), ent, ent, PopupType.Medium);
             return false;
         }
 
@@ -182,7 +182,7 @@ public abstract partial class SharedCPRSystem : EntitySystem
 
         if (!HasHealthyLungs(ent))
         {
-            _popup.PopupClient(Loc.GetString("cpr-failed-lungs-damaged", ("target", identity)), user, user, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("cpr-failed-lungs-damaged", ("target", identity)), user, user, PopupType.LargeCaution);
             RemCompDeferred(ent, ent.Comp);
             return;
         }

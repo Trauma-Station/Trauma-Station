@@ -52,6 +52,15 @@ reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts wit
 reagent-name-calcium-hydroxide = calcium hydroxide
 reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.
 
+reagent-name-unstable-compound = unstable compound
+reagent-desc-unstable-compound = An incredibly volatile variant of unstable mutagen, much more effective at mutating viruses and plants compared to normal mutagen.
+
+reagent-name-reaper-delight = reaper's delight
+reagent-desc-reaper-delight = A very potent fertilizer with no limit to its potency-boosting effects on plants. Use it in limited quantities however, as excessive usage can easily kill almost any plant.
+
+reagent-name-stellarium = stellarium
+reagent-desc-stellarium = An artifically synthesized anti-toxin that is incredibly effective against poisons, Also works very well as a fertilizer to keep your plants alive.
+
 reagent-name-hephaestium = hephaestium
 reagent-desc-hephaestium = hephaestium, named after the greek god of stone Hephaestus, known to turn anything injected with it into stone.
 

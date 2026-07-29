@@ -50,6 +50,7 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
     private void OnOpen(Entity<DeepFryerComponent> ent, ref StorageAfterOpenEvent args)
     {
         _appearance.SetData(ent.Owner, DeepFryerVisuals.Open, true);
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
         Deactivate(ent);
     }
 
@@ -68,14 +69,15 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
             || deepFryerSolution.Volume <= 100f)
         {
             args.Cancelled = true;
-            _popup.PopupEntity(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner);
+            _popup.PopupEntity(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner, args.User);
             return;
         }
 
         if (!_power.IsPowered(ent.Owner))
         {
             args.Cancelled = true;
-            _popup.PopupEntity(Loc.GetString("deep-fryer-no-power"), ent.Owner);
+            _popup.PopupEntity(Loc.GetString("deep-fryer-no-power"), ent.Owner, args.User);
+            return;
         }
 
         ent.Comp.LastUser = args.User;
@@ -91,14 +93,11 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
     private void OnActivated(Entity<ActiveDeepFryerComponent> ent, ref ComponentStartup args)
     {
         _ambientSound.SetAmbience(ent.Owner, true);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, true);
     }
 
     private void OnDeactivated(Entity<ActiveDeepFryerComponent> ent, ref ComponentShutdown args)
     {
         _ambientSound.SetAmbience(ent.Owner, false);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, false);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
     }
 
     #region Helper Methods
@@ -115,6 +114,7 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
         if (!TryComp<EntityStorageComponent>(ent.Owner, out var entStorage))
             return;
 
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
         foreach (var entity in entStorage.Contents.ContainedEntities)
         {
             ent.Comp.StoredObjects.Add(entity);
@@ -150,7 +150,7 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
     {
         ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
 
-        _popup.PopupPredicted(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
 
         foreach (var storedObject in ent.Comp.StoredObjects)
         {

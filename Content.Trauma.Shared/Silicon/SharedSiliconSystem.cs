@@ -122,13 +122,5 @@ public enum SiliconType
 /// <summary>
 ///     Event raised when a Silicon's charge state needs to be updated.
 /// </summary>
-[Serializable, NetSerializable]
-public sealed class SiliconChargeStateUpdateEvent : EntityEventArgs
-{
-    public short ChargePercent { get; }
-
-    public SiliconChargeStateUpdateEvent(short chargePercent)
-    {
-        ChargePercent = chargePercent;
-    }
-}
+[ByRefEvent]
+public record struct SiliconChargeStateUpdateEvent(short ChargePercent);

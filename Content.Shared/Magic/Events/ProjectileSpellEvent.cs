@@ -11,7 +11,9 @@ public sealed partial class ProjectileSpellEvent : WorldTargetActionEvent
     [DataField(required: true)]
     public EntProtoId Prototype;
 
-    // Goobstation
+    /// <summary>
+    /// How fast the projectile should travel
+    /// </summary>
     [DataField]
-    public float Speed = 40f;
+    public float ProjectileSpeed = 40f; // Trauma - was 25
 }

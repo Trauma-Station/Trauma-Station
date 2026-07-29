@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Stunnable;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Emoting;
@@ -12,7 +14,10 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.Speech;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Interaction;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -27,6 +32,8 @@ public abstract partial class SharedIceCubeSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private INetManager _net = default!;
+
+    public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 
     public override void Initialize()
     {
@@ -50,6 +57,32 @@ public abstract partial class SharedIceCubeSystem : EntitySystem
         SubscribeLocalEvent<IceCubeComponent, DownAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<IceCubeComponent, ChangeDirectionAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<IceCubeComponent, DamageModifyEvent>(OnModify);
+        SubscribeLocalEvent<IceCubeComponent, BeforeStaminaDamageEvent>(OnStamina);
+        SubscribeLocalEvent<IceCubeComponent, KnockDownAttemptEvent>(OnKnockDown);
+        SubscribeLocalEvent<IceCubeComponent, BeforeStatusEffectAddedEvent>(OnStatus);
+        SubscribeLocalEvent<IceCubeComponent, CanBeInteractedWithEvent>(OnCanBeInteractedWith);
+    }
+
+    private void OnCanBeInteractedWith(Entity<IceCubeComponent> ent, ref CanBeInteractedWithEvent args)
+    {
+        // This prevents cuffs/hyposprays/etc but allows pulls
+        args.Handled = true;
+    }
+
+    private void OnStatus(Entity<IceCubeComponent> ent, ref BeforeStatusEffectAddedEvent args)
+    {
+        if (args.Effect == StatusEffectStunned)
+            args.Cancelled = true;
+    }
+
+    private void OnKnockDown(Entity<IceCubeComponent> ent, ref KnockDownAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnStamina(Entity<IceCubeComponent> ent, ref BeforeStaminaDamageEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private void OnModify(Entity<IceCubeComponent> ent, ref DamageModifyEvent args)

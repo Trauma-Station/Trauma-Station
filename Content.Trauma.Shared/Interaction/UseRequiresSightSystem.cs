@@ -24,7 +24,7 @@ public sealed partial class UseRequiresSightSystem : EntitySystem
         if (args.Cancelled || !_query.TryComp(user, out var comp) || !comp.IsBlind)
             return;
 
-        _popup.PopupClient(Loc.GetString("blindness-fail-attempt"), user, user);
+        _popup.PopupEntity(Loc.GetString("blindness-fail-attempt"), user, user);
         args.Cancelled = true;
     }
 }

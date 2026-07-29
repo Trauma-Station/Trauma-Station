@@ -32,7 +32,7 @@ public abstract partial class SharedSurgerySystem
 
         if (_noSelfOperate && user == target)
         {
-            _popup.PopupClient(Loc.GetString("surgery-error-self-surgery"), user, user);
+            _popup.PopupEntity(Loc.GetString("surgery-error-self-surgery"), user, user);
             return;
         }
 

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseSimpleMob, FlyingMobBase ]
+  parent: [ BaseSimpleMob, FlyingMobBase, MobNightVision ]
   id: MobCosmicBase
   abstract: true
   components:
@@ -96,10 +96,6 @@
   - type: ActiveRadio
     channels:
     - CosmicRadio
-  - type: NightVision
-    color: "#42a4ae"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   parent: MobCosmicBase

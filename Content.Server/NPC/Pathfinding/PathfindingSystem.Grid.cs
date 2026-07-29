@@ -8,6 +8,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -400,11 +401,13 @@ public sealed partial class PathfindingSystem
 
     private void BuildBreadcrumbs(GridPathfindingChunk chunk, Entity<MapGridComponent> grid)
     {
-        var sw = new Stopwatch();
-        sw.Start();
+        //var sw = new Stopwatch();
+        //sw.Start();
         var points = chunk.Points;
         var gridOrigin = chunk.Origin * ChunkSize;
-        var tileEntities = new ValueList<Entity<FixturesComponent>>(); // Trauma - keep the component bruh
+        var tileEntities = new ValueList<Entity<FixturesComponent>>();
+        var fixtureList = new ValueList<(EntityUid, TransformComponent, ValueList<Fixture>)>();
+
         var chunkPolys = chunk.BufferPolygons;
 
         for (var i = 0; i < chunkPolys.Length; i++)
@@ -452,7 +455,24 @@ public sealed partial class PathfindingSystem
                         continue;
                     }
 
-                    tileEntities.Add(ent);
+                    tileEntities.Add(ent); // Trauma - pass ent from the lookup as-is
+                }
+
+                // Cache fixtures list so we resolve everything once.
+                fixtureList.Clear();
+                foreach (var ent in tileEntities)
+                {
+                    if(!TryComp(ent, out TransformComponent? xform))
+                        continue;
+
+                    var entFixtures = new ValueList<Fixture>();
+                    foreach (var fixture in ent.Comp.Fixtures.Values)
+                    {
+                        if (fixture.Hard)
+                            entFixtures.Add(fixture);
+                    }
+
+                    fixtureList.Add((ent.Owner, xform, entFixtures));
                 }
 
                 for (var subX = 0; subX < SubStep; subX++)
@@ -468,17 +488,12 @@ public sealed partial class PathfindingSystem
                         var collisionLayer = 0x0;
                         var damage = 0f;
 
-                        foreach (var ent in tileEntities)
+                        foreach (var (ent, xform, fixtures) in fixtureList)
                         {
-                            var fixtures = ent.Comp; // Trauma - reuse it instead of trycomping again
-
                             var colliding = false;
-
-                            foreach (var fixture in fixtures.Fixtures.Values)
+                            foreach (var fixture in fixtures)
                             {
-                                // Don't need to re-do it.
-                                if (!fixture.Hard ||
-                                    (collisionMask & fixture.CollisionMask) == fixture.CollisionMask &&
+                                if ((collisionMask & fixture.CollisionMask) == fixture.CollisionMask &&
                                     (collisionLayer & fixture.CollisionLayer) == fixture.CollisionLayer)
                                 {
                                     continue;
@@ -493,10 +508,10 @@ public sealed partial class PathfindingSystem
                                         continue;
 
                                     intersects = true;
+                                    break;
                                 }
 
-                                if (!intersects ||
-                                    !TryComp(ent, out TransformComponent? xform))
+                                if (!intersects)
                                 {
                                     continue;
                                 }
@@ -632,10 +647,6 @@ public sealed partial class PathfindingSystem
 
         // Log.Debug($"Built breadcrumbs in {sw.Elapsed.TotalMilliseconds}ms");
         SendBreadcrumbs(chunk, grid);
-        // <Trauma>
-        if (sw.Elapsed.TotalMilliseconds > 1000)
-            Log.Warning($"Took way too long ({sw.Elapsed.TotalMilliseconds}ms) building breadcrumbs for grid {ToPrettyString(grid)}!");
-        // </Trauma>
     }
 
     /// <summary>

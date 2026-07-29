@@ -41,3 +41,61 @@
         damage:
           types:
             Caustic: 1
+
+- type: reagent
+  id: UnstableCompound
+  name: reagent-name-unstable-compound
+  group: Botanical
+  desc: reagent-desc-unstable-compound
+  physicalDesc: reagent-physical-desc-odorless
+  flavor: bitter
+  color: "#2c4c3b"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:MutateDiseases
+        mutationRate: 0.24
+      - !type:HealthChange
+        damage:
+          types:
+            Radiation: 4.5
+  plantMetabolism:
+  - !type:PlantAdjustMutationLevel
+    amount: 3
+
+- type: reagent
+  id: ReaperDelight
+  name: reagent-name-reaper-delight
+  group: Botanical
+  desc: reagent-desc-reaper-delight
+  physicalDesc: reagent-physical-desc-sickly
+  flavor: bitter
+  color: Black
+  plantMetabolism:
+  - !type:PlantAdjustHealth
+    amount: -5
+  - !type:PlantAdjustToxins
+    amount: 15
+  - !type:PlantAdjustPotency
+    amount: 1
+
+- type: reagent
+  id: Stellarium
+  name: reagent-name-stellarium
+  group: Botanical
+  desc: reagent-desc-stellarium
+  physicalDesc: reagent-physical-desc-starry
+  flavor: medicine
+  color : "#8000FF"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: -6
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: -15
+  - !type:PlantAdjustHealth
+    amount: 3

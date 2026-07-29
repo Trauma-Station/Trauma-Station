@@ -2,7 +2,7 @@
 
 # Note: ShadowGrapple exists on the heart of the shadow demon
 - type: entity
-  parent: [AppearanceShadowDemon, SimpleSpaceMobBase, FlyingMobBase]
+  parent: [AppearanceShadowDemon, SimpleSpaceMobBase, FlyingMobBase, MobNightVision]
   id: BaseMobShadowDemon
   name: shadow demon
   suffix: ""
@@ -13,10 +13,6 @@
     state: shadow_demon
   - type: Stamina
     baseCritThreshold: 150
-  - type: NightVision
-    color: "#AA4A44"
-    activateSound: null
-    deactivateSound: null
   - type: Insulated
   - type: Damageable
     damageModifierSet: ShadowDemon
@@ -109,10 +105,7 @@
     sound:
       path: /Audio/_Trauma/Mobs/ShadowDemon/shadowdeath.ogg
   - type: Vocal
-    sounds:
-      Male: ShadowDemon
-      Female: ShadowDemon
-      Unsexed: ShadowDemon
+    emoteSounds: ShadowDemon
   - type: ZombieImmune
   - type: SlowOnDamage
     speedModifierThresholds:

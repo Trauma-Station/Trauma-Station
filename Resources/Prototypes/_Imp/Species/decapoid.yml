@@ -14,3 +14,9 @@
   sexes:
   - Unsexed
   knowledge: Decapoid
+  defaultSoundsBySex:
+  - UnisexDecapoid
+  - UnisexDecapoid
+  - UnisexDecapoid
+  voices:
+  - UnisexDecapoid

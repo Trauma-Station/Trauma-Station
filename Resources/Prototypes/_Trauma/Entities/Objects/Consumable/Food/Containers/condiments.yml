@@ -18,3 +18,25 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: packet-solid-
+
+- type: entity
+  parent: FoodShakerPepper
+  id: FoodShakerPepperLead
+  suffix: Lead
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Lead
+        Quantity: 15
+
+- type: entity
+  parent: Pitcher
+  id: PitcherNapalm
+  suffix: Napalm
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Napalm
+        Quantity: 60

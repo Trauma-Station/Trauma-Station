@@ -6,3 +6,14 @@ uplink-snakesfang-desc = The Snakesfang is a fork-tipped scimitar with a sharp e
 
 uplink-rifle-M90-name = M-90
 uplink-rifle-M90-description = An older bullpup carbine model, a revision of the M-90 GL, this one doesn't have the inbuilt grenade launcher.
+
+uplink-foam-cutlass-name = Sharp Foam Cutlass
+uplink-foam-cutlass-desc = A blade disguised as a toy foam cutlass. Perfect for assassins that pretend playing around.
+
+uplink-bulk-mosin-name-trauma = Syndicate Bulk Rifle Crate
+
+uplink-fire-axe-flaming-name = Fire Axe
+uplink-fire-axe-flaming-desc = A classic-style weapon infused with advanced atmos technology to allow it to set targets on fire. Now with rugged rubberized handle!
+
+uplink-revolver-python-name = Python
+uplink-revolver-python-desc = A brutally simple, effective, and loud Syndicate revolver. Comes loaded with armor-piercing rounds. Uses .45 magnum.

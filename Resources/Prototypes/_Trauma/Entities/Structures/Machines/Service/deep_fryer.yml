@@ -10,13 +10,10 @@
     sprite: _Trauma/Structures/Machines/Service/deep_fryer.rsi
     layers:
     - state: deep_fryer_open
-      map: ["fryer_open"]
+      map: ["open"]
     - state: deep_fryer_closed
       visible: false
-      map: ["fryer_closed"]
-    - state: deep_fryer_closed_big
-      visible: false
-      map: ["fryer_closed_big"]
+      map: ["closed"]
   - type: Transform
     noRot: false
   # Deep fryer stuff
@@ -123,17 +120,16 @@
   - type: GenericVisualizer
     visuals:
       enum.DeepFryerVisuals.Open:
-        fryer_open:
+        open:
           True: { visible: true }
           False: { visible: false }
-      enum.DeepFryerVisuals.Frying:
-        fryer_closed:
-          True: { visible: true }
-          False: { visible: false }
+        closed:
+          True: { visible: false }
+          False: { visible: true }
       enum.DeepFryerVisuals.BigFrying:
-        fryer_closed_big:
-          True: { visible: true }
-          False: { visible: false }
+        closed:
+          True: { state: deep_fryer_closed_big }
+          False: { state: deep_fryer_closed }
   - type: Destructible
     thresholds:
     - trigger:

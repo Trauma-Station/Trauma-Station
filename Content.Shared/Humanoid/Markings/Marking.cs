@@ -11,6 +11,11 @@ namespace Content.Shared.Humanoid.Markings;
 [DataDefinition, Serializable, NetSerializable]
 public partial record struct Marking
 {
+    // <Trauma> - can't move into partial struct cause of ordering issues
+    [DataField]
+    public bool IsChildMarking;
+    // </Trauma>
+
     /// <summary>
     /// The <see cref="MarkingPrototype"/> referred to by this marking
     /// </summary>

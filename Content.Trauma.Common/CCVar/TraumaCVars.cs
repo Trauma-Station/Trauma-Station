@@ -117,14 +117,14 @@ public sealed partial class TraumaCVars
     /// Disabled if this is empty.
     /// </summary>
     public static readonly CVarDef<string> ErrorWebhookUrl =
-        CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVER);
+        CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     /// Delay between each error message in seconds.
     /// Used to avoid hitting ratelimits
     /// </summary>
     public static readonly CVarDef<float> ErrorWebhookDelay =
-        CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
+        CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVERONLY);
 
     /// <summary>
     /// How many messages can be queued at once.
@@ -132,7 +132,7 @@ public sealed partial class TraumaCVars
     /// Changing this ingame drops all currently queued messages.
     /// </summary>
     public static readonly CVarDef<int> ErrorWebhookLimit =
-        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVER);
+        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVERONLY);
 
     #endregion
 

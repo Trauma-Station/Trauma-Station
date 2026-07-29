@@ -12,7 +12,6 @@ namespace Content.Goobstation.Shared.InternalResources.EntitySystems;
 public sealed partial class SharedInternalResourcesSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private readonly TimeSpan _systemUpdateRate = TimeSpan.FromSeconds(1);
@@ -33,7 +32,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
     {
         foreach (var type in entity.Comp.CurrentInternalResources)
         {
-            if (_protoMan.Index(type.InternalResourcesType).AlertPrototype != args.Alert.ID)
+            if (ProtoMan.Index(type.InternalResourcesType).AlertPrototype != args.Alert.ID)
                 continue;
 
             args.CurrentValue = type.CurrentAmount;
@@ -48,7 +47,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
     /// </summary>
     private void UpdateAppearance(Entity<InternalResourcesComponent> entity, ProtoId<InternalResourcesPrototype> protoId)
     {
-        if (!_protoMan.TryIndex(protoId, out var proto))
+        if (!ProtoMan.TryIndex(protoId, out var proto))
             return;
 
         _alertsSystem.ShowAlert(entity.Owner, proto.AlertPrototype);
@@ -106,7 +105,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
     {
         data = null;
 
-        if (!_protoMan.TryIndex<InternalResourcesPrototype>(protoId, out var proto))
+        if (!ProtoMan.TryIndex<InternalResourcesPrototype>(protoId, out var proto))
         {
             Log.Debug($"Failed to add {protoId} internal resource type to entity {ToPrettyString(uid):uid}. Internal resource prototype does not exist.");
             return false;

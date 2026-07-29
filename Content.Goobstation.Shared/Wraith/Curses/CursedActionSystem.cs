@@ -17,22 +17,13 @@ public sealed partial class CursedActionSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private CommonSiliconSystem _silicon = default!;
 
     private const int MaxCursesBeforeFinal = 4;
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<ApplyCurseActionEvent>(OnApplyCurseAction);
-
-        SubscribeLocalEvent<AttemptCurseEvent>(OnSiliconAttempt);
-        SubscribeLocalEvent<CurseImmuneComponent, AttemptCurseEvent>(OnAttemptCurseImmune);
-    }
-
+    [SubscribeLocalEvent]
     private void OnApplyCurseAction(ApplyCurseActionEvent args)
     {
         if (args.Curse == null)
@@ -51,7 +42,7 @@ public sealed partial class CursedActionSystem : EntitySystem
         {
             if (curseHolder.ActiveCurses.Count < MaxCursesBeforeFinal)
             {
-                _popup.PopupClient(Loc.GetString("curse-fail-require-all"), args.Performer, args.Performer);
+                _popup.PopupEntity(Loc.GetString("curse-fail-require-all"), args.Performer, args.Performer);
                 return;
             }
         }
@@ -63,10 +54,10 @@ public sealed partial class CursedActionSystem : EntitySystem
             return;
 
         if (args.Popup.HasValue)
-            _popup.PopupClient(Loc.GetString(args.Popup.Value), args.Performer, args.Performer, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString(args.Popup.Value), args.Performer, args.Performer, PopupType.Medium);
 
         // play curse sound if it exists
-        if (args.CurseSound != null && _netManager.IsServer)
+        if (args.CurseSound != null && _net.IsServer)
             _audio.PlayEntity(args.CurseSound, args.Target, args.Target);
 
         // Reset timers on all curses for the user
@@ -85,16 +76,18 @@ public sealed partial class CursedActionSystem : EntitySystem
     }
 
     #region Cancel Events
+    [SubscribeLocalEvent]
     private void OnSiliconAttempt(ref AttemptCurseEvent args)
     {
         if (_silicon.IsSilicon(args.Entity))
-            _popup.PopupClient(Loc.GetString("curse-fail-robot"), args.Curser, args.Curser);
+            _popup.PopupEntity(Loc.GetString("curse-fail-robot"), args.Curser, args.Curser);
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptCurseImmune(Entity<CurseImmuneComponent> ent, ref AttemptCurseEvent args)
     {
-        _popup.PopupClient(Loc.GetString("curse-immune-fail"), args.Curser, args.Curser);
+        _popup.PopupEntity(Loc.GetString("curse-immune-fail"), args.Curser, args.Curser);
         args.Cancelled = true;
     }
     #endregion

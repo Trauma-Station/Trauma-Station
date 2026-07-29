@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
+using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.CartridgeLoader.Cartridges;

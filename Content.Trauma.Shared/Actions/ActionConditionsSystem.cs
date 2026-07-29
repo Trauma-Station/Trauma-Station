@@ -20,11 +20,12 @@ public sealed partial class ActionConditionsSystem : EntitySystem
 
     private void OnAttempt(Entity<ActionConditionsComponent> ent, ref ActionAttemptEvent args)
     {
+        var user = args.User;
         args.Cancelled = ent.Comp.Any
-            ? !_conditions.TryAnyCondition(args.User, ent.Comp.Conditions)
-            : !_conditions.TryConditions(args.User, ent.Comp.Conditions);
+            ? !_conditions.TryAnyCondition(user, ent.Comp.Conditions, sourceEnt: user)
+            : !_conditions.TryConditions(user, ent.Comp.Conditions, sourceEnt: user);
 
-        DoPopup(args.Cancelled, ent.Comp.FailPopup, args.User);
+        DoPopup(args.Cancelled, ent.Comp.FailPopup, user);
     }
 
     #region  Helper
@@ -36,7 +37,7 @@ public sealed partial class ActionConditionsSystem : EntitySystem
         if (!passed)
             return;
 
-        _popup.PopupClient(popup, user, user, PopupType.MediumCaution);
+        _popup.PopupEntity(popup, user, user, PopupType.MediumCaution);
     }
     #endregion
 }

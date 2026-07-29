@@ -16,3 +16,20 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: ball
+
+- type: entity
+  parent: BaseBullet
+  id: BulletBubble
+  name: bubble
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 15
+  - type: StaminaDamageOnCollide
+    damage: 20
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/bubble.rsi
+    layers:
+    - state: bubble

@@ -43,14 +43,14 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
         var name = Name(ent);
         if (ent.Comp.Used)
         {
-            _popup.PopupClient($"The {name} has already been used!", ent, user, PopupType.SmallCaution);
+            _popup.PopupEntity($"The {name} has already been used!", ent, user, PopupType.SmallCaution);
             return;
         }
 
         var target = args.Buckle.Owner;
         if (!HasComp<BodyComponent>(target))
         {
-            _popup.PopupClient($"{Name(target)} can't be operated on!", ent, user, PopupType.SmallCaution);
+            _popup.PopupEntity($"{Name(target)} can't be operated on!", ent, user, PopupType.SmallCaution);
             return;
         }
 
@@ -69,7 +69,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             }))
             return;
 
-        _popup.PopupClient($"You start up the {name}...", ent, user, PopupType.Medium);
+        _popup.PopupEntity($"You start up the {name}...", ent, user, PopupType.Medium);
 
         var ev = new TransferDnaEvent { Donor = target, Recipient = ent };
         RaiseLocalEvent(target, ref ev);

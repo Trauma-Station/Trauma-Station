@@ -25,6 +25,8 @@
   special:
   - !type:OrganChipsSpecial
     chips:
+    - SkillChipEducation
+    - SkillChipShortBlade
     - SkillChipChef
   # </Trauma>
 

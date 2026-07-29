@@ -1,6 +1,6 @@
 # Trauma Station contribution guidelines and standards
 
-For the basics and anything not listed here, read [SS14's upstream documentation](https://docs.ss14.io)
+For the basics and anything not listed here, read [SS14's upstream documentation](https://docs.spacestation14.com)
 
 ## Core guidelines
 

@@ -9,7 +9,6 @@ namespace Content.Trauma.Shared.Forging;
 /// </summary>
 public abstract partial class SharedMetalSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<MetallicComponent> _query = default!;
 
@@ -58,7 +57,7 @@ public abstract partial class SharedMetalSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllMetals.Clear();
-        foreach (var metal in Proto.EnumeratePrototypes<MetalPrototype>())
+        foreach (var metal in ProtoMan.EnumeratePrototypes<MetalPrototype>())
         {
             AllMetals.Add(metal);
         }
@@ -81,7 +80,7 @@ public abstract partial class SharedMetalSystem : EntitySystem
 
     public void SetMetal(Entity<MetallicComponent?> ent, [ForbidLiteral] ProtoId<MetalPrototype> metal)
     {
-        if (!Resolve(ent, ref ent.Comp) || ent.Comp.Metal == metal || !Proto.Resolve(metal, out var proto))
+        if (!Resolve(ent, ref ent.Comp) || ent.Comp.Metal == metal || !ProtoMan.Resolve(metal, out var proto))
             return;
 
         ent.Comp.Metal = metal;

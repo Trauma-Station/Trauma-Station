@@ -47,7 +47,6 @@ public sealed partial class DelayedDeathSystem : EntitySystem
             _mob.ChangeMobState(ent, MobState.Critical, mob);
             _mob.ChangeMobState(ent, MobState.Dead, mob);
 
-            // goob code
             var ev = new DelayedDeathEvent(ent, PreventRevive: comp.PreventAllRevives);
             RaiseLocalEvent(ent, ref ev);
 
@@ -57,7 +56,7 @@ public sealed partial class DelayedDeathSystem : EntitySystem
                 continue;
             }
 
-            if (!string.IsNullOrWhiteSpace(comp.DeathMessageId)) // Goobstation
+            if (!string.IsNullOrWhiteSpace(comp.DeathMessageId))
                 _popup.PopupEntity(Loc.GetString(comp.DeathMessageId), ent, ent, PopupType.LargeCaution);
         }
     }
@@ -67,7 +66,7 @@ public sealed partial class DelayedDeathSystem : EntitySystem
         // can't defib someone without a heart or brain pal
         args.Cancel();
 
-        var failPopup = Loc.GetString(ent.Comp.DefibFailMessageId); // Goobstation
+        var failPopup = Loc.GetString(ent.Comp.DefibFailMessageId);
         _chat.TrySendInGameICMessage(args.Defib, failPopup, InGameICChatType.Speak, true);
     }
 

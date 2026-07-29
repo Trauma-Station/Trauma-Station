@@ -17,7 +17,6 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed partial class MapAreaSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private ProfManager _prof = default!;
     [Dependency] private EntityQuery<AreaGridComponent> _query = default!;
@@ -94,7 +93,7 @@ public sealed partial class MapAreaSystem : EntitySystem
         // verify that none of the areas used got removed, skip any that were
         foreach (var (mapped, id) in ent.Comp.AreaMap)
         {
-            if (_proto.HasIndex(id))
+            if (ProtoMan.HasIndex(id))
                 continue;
 
             Log.Error($"Area {id} ({mapped}) used by grid {ToPrettyString(ent)} does not exist!");

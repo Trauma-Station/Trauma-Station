@@ -166,6 +166,7 @@
     rules: ghost-role-information-drone-rules
     mindRoles:
     - MindRoleGhostRoleSilicon
+    job: Borg
   - type: GhostTakeoverAvailable
   - type: SiliconLawBound
   - type: SiliconLawProvider

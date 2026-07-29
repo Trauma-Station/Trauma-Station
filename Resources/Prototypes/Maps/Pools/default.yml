@@ -6,6 +6,7 @@
   - AreaMaints # for ambience and maints spawn rules
   - AreaHallway # for carp migration
   requiredEntities:
+  - SpawnPointExtraAiCore # for maps with AI (almost all of them) to work with triumvirate station trait
   - MachineMaterialSilo # for main departments
   - MachineMasterMaterialSilo # for cargo to easily distribute mats to department silos
   maps:
@@ -32,5 +33,5 @@
   - Cog
   - Reach
   #- Serpentcrest
-  - Nume
-  - Freighter
+  #- Nume # slop
+  #- Freighter #people hate it
