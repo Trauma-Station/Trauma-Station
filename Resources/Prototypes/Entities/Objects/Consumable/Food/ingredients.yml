@@ -210,6 +210,11 @@
   name: sugar bag
   description: A big bag of tasty spacey sugar.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Sugar
+  # </Trauma>
   - type: Appearance
   - type: GenericVisualizer
     visuals:
