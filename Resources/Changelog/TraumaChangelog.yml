@@ -12409,3 +12409,10 @@ Entries:
   id: 1359
   time: '2026-07-29T19:56:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3830
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Goidabot is no longer hostile to insurgents
+  id: 1360
+  time: '2026-07-29T22:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3838
