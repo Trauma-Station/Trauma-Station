@@ -30,7 +30,7 @@ soft_max_players = 30
 # Controls the lobby timer in seconds.
 lobbyduration = 150
 # Should roles be restricted based on time?
-role_timers = true
+role_timers = false # Trauma - was true
 # Check connecting player ip against the IPIntel API (aka stop VPN/Proxy connections). Useful for hosts.
 # Read more here https://getipintel.net/
 ipintel_enabled = false

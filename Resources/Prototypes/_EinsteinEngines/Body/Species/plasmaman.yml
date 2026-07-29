@@ -192,6 +192,8 @@
       243: 0.8
   - type: Hunger
     baseDecayRate: 0 # don't get hungry, still able to eat
+  - type: Thirst
+    baseDecayRate: 0
 
 ## Base
 
