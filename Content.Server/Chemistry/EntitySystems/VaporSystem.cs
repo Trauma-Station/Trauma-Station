@@ -17,6 +17,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Spawners;
 using System.Numerics;
 using Content.Shared.Vapor;
+using Content.Shared.Eye.Blinding.Systems;
 
 namespace Content.Server.Chemistry.EntitySystems
 {
@@ -40,14 +41,17 @@ namespace Content.Server.Chemistry.EntitySystems
         private void HandleCollide(Entity<VaporComponent> entity, ref StartCollideEvent args)
         {
             // <Trauma>
-            var ev = new VaporCheckEyeProtectionEvent();
-            RaiseLocalEvent(args.OtherEntity, ref ev);
+            var ev = new GetEyeProtectionEvent()
+            {
+                Target = args.OtherEntity
+            };
+            RaiseLocalEvent(args.OtherEntity, ev);
 
-            if (ev.Protected)
+            if (ev.Protection > TimeSpan.Zero)
                 return;
             // </Trauma>
             var solution = Comp<SolutionComponent>(entity).Solution;
-            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch);
+            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch | ReactionMethod.Eyes);
 
             // Check for collision with a impassable object (e.g. wall) and stop
             if ((args.OtherFixture.CollisionLayer & (int)CollisionGroup.Impassable) != 0 && args.OtherFixture.Hard)
