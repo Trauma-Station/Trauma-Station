@@ -17,7 +17,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Spawners;
 using System.Numerics;
 using Content.Shared.Vapor;
-using Content.Shared.Eye.Blinding.Systems;
 
 namespace Content.Server.Chemistry.EntitySystems
 {
