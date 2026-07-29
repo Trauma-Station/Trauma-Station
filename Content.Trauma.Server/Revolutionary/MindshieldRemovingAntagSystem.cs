@@ -19,7 +19,7 @@ public sealed partial class MindshieldRemovingAntagSystem : EntitySystem
     {
         var uid = args.EntityUid;
 
-        if (TryComp<FakeMindShieldComponent>(uid, out var fakeMindShield))
+        if (HasComp<FakeMindShieldComponent>(uid))
             return;
 
         if (!TryComp<ImplantedComponent>(uid, out var implanted))
@@ -36,7 +36,7 @@ public sealed partial class MindshieldRemovingAntagSystem : EntitySystem
 
         _subdermal.AddImplant(uid, ent.Comp.FakeMindShieldImplant);
 
-        if (TryComp<FakeMindShieldComponent>(uid, out fakeMindShield))
+        if (TryComp<FakeMindShieldComponent>(uid, out var fakeMindShield))
         {
             fakeMindShield.IsEnabled = true;
             Dirty(uid, fakeMindShield);
