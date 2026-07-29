@@ -3,12 +3,35 @@
 using Content.Shared.Body;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 
 namespace Content.Trauma.Shared.Body.Markings;
 
 public sealed partial class ModifyMarkingsStatusEffectSystem : EntitySystem
 {
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
+
+    [Dependency] private EntityQuery<ModifyMarkingStatusEffectComponent> _markingStatusQuery = default!;
+
+    [SubscribeLocalEvent]
+    private void OnOrganRemove(Entity<StatusEffectContainerComponent> ent, ref OrganRemovedFromEvent args)
+    {
+        if (args.Organ.Comp.Category is not { } category)
+            return;
+
+        if (ent.Comp.ActiveStatusEffects?.ContainedEntities is not { } list)
+            return;
+
+        foreach (var effect in list)
+        {
+            if (!_markingStatusQuery.TryComp(effect, out var markingStatus) || markingStatus.Organ != category)
+                continue;
+
+            ToggleMarkings(ent, (effect, markingStatus), false);
+            markingStatus.CachedMarkings.Clear();
+            PredictedQueueDel(effect);
+        }
+    }
 
     [SubscribeLocalEvent]
     private void OnApply(Entity<ModifyMarkingStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
@@ -24,6 +47,9 @@ public sealed partial class ModifyMarkingsStatusEffectSystem : EntitySystem
 
     private void ToggleMarkings(EntityUid uid, Entity<ModifyMarkingStatusEffectComponent> status, bool apply)
     {
+        if (!apply && status.Comp.CachedMarkings.Count == 0)
+            return;
+
         if (!_visualBody.TryGatherMarkingsData(uid, [status.Comp.Layer], out _, out _, out var applied))
             return;
 

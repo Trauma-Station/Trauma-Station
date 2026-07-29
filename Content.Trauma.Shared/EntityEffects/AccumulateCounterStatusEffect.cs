@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.StatusEffects;
 
 namespace Content.Trauma.Shared.EntityEffects;
@@ -20,12 +19,12 @@ public sealed partial class AccumulateCounterStatusEffect : EntityEffectBase<Acc
 }
 
 public sealed partial class
-    AccumulateCounterStatusEffectEffectSystem : EntityEffectSystem<StatusEffectContainerComponent,
+    AccumulateCounterStatusEffectEffectSystem : EntityEffectSystem<TransformComponent,
     AccumulateCounterStatusEffect>
 {
     [Dependency] private StatusEffectsSystem _status = default!;
 
-    protected override void Effect(Entity<StatusEffectContainerComponent> ent,
+    protected override void Effect(Entity<TransformComponent> ent,
         ref EntityEffectEvent<AccumulateCounterStatusEffect> args)
     {
         if (!_status.TryUpdateStatusEffectDuration(ent,
