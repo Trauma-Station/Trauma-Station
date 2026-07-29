@@ -12347,3 +12347,12 @@ Entries:
   id: 1353
   time: '2026-07-29T10:43:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3821
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: >-
+      Holy water can now be used to heal asphyxiation and all brute danage
+      types.
+  id: 1354
+  time: '2026-07-29T11:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3777
