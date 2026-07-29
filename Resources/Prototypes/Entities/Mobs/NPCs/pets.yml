@@ -885,7 +885,7 @@
         Piercing: 8
         Poison: 8
   - type: Spider
-    spawnsWebsAsNonPlayer: false
+    spawnsWebsAsNonPlayer: false # Trauma
   - type: Grammar
     attributes:
       proper: true

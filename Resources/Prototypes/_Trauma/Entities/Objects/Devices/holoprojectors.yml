@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ Holoprojector, BaseMedicalContraband ]
+  id: HoloprojectorMedical
+  name: holobarrier projector
+  description: Creates a solid but fragile holographic barrier.
+  components:
+  - type: HolosignProjector
+    signProto: HolosignMedical
+    chargeUse: 90
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/Holoprojector/medical.rsi
+    state: icon
+  - type: StaticPrice
+    price: 50

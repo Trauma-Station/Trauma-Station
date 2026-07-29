@@ -79,6 +79,7 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
+    - Xeno
   - type: PointLight
     radius: 3
     energy: 2.3
