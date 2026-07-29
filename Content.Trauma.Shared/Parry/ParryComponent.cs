@@ -22,7 +22,7 @@ public sealed partial class ParryComponent : Component
     [DataField, AutoNetworkedField]
     public float ParryExhaustionCost = 0.5f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float ReflectExhaustionCost = 1.1f; // > 1 means can't reflect
 
     /// <summary>

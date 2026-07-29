@@ -531,8 +531,9 @@
     - type: BatterySelfRecharger
       autoRechargeRate: 2
     - type: RechargeableBlocking
-      dischargedRechargeRate: 2
-      chargedRechargeRate: 3
+      rechargePercentage: 0.9
+      dischargedRechargeRate: 1.5
+      chargedRechargeRate: 2
     # </Trauma>
     - type: ItemToggle
       # <Trauma>
@@ -556,7 +557,7 @@
       components:
       # <Trauma>
       - type: Parry
-        parryExhaustionCost: 1.1
+        parryExhaustionCost: 0.25
       - type: DisarmMalus
         malus: 1 # was 0.6
       # </Trauma>

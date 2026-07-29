@@ -655,11 +655,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetMastery(int level)
         => level switch
         {
-            >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
-            >= 88 => 5,
-            >= 75 => 4,
-            >= 50 => 3,
-            >= 25 => 2,
+            >= 100 => 5, // 5th mastery doesn't exist, but we can use this to say max level
+            >= 88 => 4,
+            >= 75 => 3,
+            >= 50 => 2,
+            >= 25 => 1,
             _ => 0,
         };
 

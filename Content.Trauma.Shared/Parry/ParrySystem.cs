@@ -236,10 +236,14 @@ public sealed partial class ParrySystem : EntitySystem
         => _classQuery.TryComp(weapon, out var classComp)
            && ProtoMan.Resolve(classComp.Class, out var classProto)
            && ProtoMan.Resolve(classProto.Knowledge, out var skillProto)
-           && _knowledge.GetContainer(user) is { } brain
+            ? GetSkillLevel(user, skillProto)
+            : 88; // No knowledge defined, assume we can just freely parry with this
+
+    private int GetSkillLevel(EntityUid user, EntProtoId skillProto)
+        => _knowledge.GetContainer(user) is { } brain
            && _knowledge.GetKnowledge(brain, skillProto) is { } skill
             ? skill.Comp.NetLevel
-            : 88; // No knowledge defined, assume we can just freely parry with this
+            : 0;
 
     /// <summary>
     /// Check if the entity is too exhausted to parry/reflect and add an appropriate amount of exhaustion

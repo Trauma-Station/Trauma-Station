@@ -41,7 +41,7 @@ public sealed partial class ThrowingKnowledgeSystem : EntitySystem
         if (_knowledge.GetKnowledge(brain, ThrowingKnowledge) is { } throwing &&
             _knowledge.GetMastery(throwing.Comp) > 2)
         {
-            baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
+            baseThrowSpeed *= 0.75f * _knowledge.SharpCurve(throwing, 200, 200);
         }
 
         // Make it so you gotta throw it further then just at a wall in front.
