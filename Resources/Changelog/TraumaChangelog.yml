@@ -12305,3 +12305,12 @@ Entries:
   id: 1349
   time: '2026-07-28T22:53:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3814
+- author: Armok
+  changes:
+  - type: Add
+    message: >-
+      Cargo can order 20 crates at a time, so the ATS can now receive 20 at a
+      time
+  id: 1350
+  time: '2026-07-29T02:43:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3818
