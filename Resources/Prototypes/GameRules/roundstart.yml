@@ -314,6 +314,7 @@
   id: Revolutionary
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
+  - type: MindshieldRemovingAntag # Trauma - puts fake mindshields into headrevs that start with a real one
   - type: GameRule
     minPlayers: 20 # Trauma - was 15
   - type: RevolutionaryRule

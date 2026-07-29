@@ -12323,3 +12323,89 @@ Entries:
   id: 1351
   time: '2026-07-29T03:53:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3819
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: 'Added all 35 chickens from goonstations ranching '
+  - type: Add
+    message: Added the ranching job from goonstation 13
+  - type: Add
+    message: >-
+      Added new plants from botanists that tie in with ranching and are requried
+      for chickens
+  - type: Add
+    message: Added water cans for botany
+  id: 1352
+  time: '2026-07-29T07:54:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2576
+- author: DieselMohawkTheSequel
+  changes:
+  - type: Tweak
+    message: >-
+      Tongue removal made simplier and no longer requiring an open incision. Get
+      your hand in their mouth.
+  id: 1353
+  time: '2026-07-29T10:43:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3821
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: >-
+      Holy water can now be used to heal asphyxiation and all brute danage
+      types.
+  id: 1354
+  time: '2026-07-29T11:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3777
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fixes moth wings being stuck open forever when removed while they are
+      open.
+  - type: Fix
+    message: Fix other people not seeing vampire ability particle effects.
+  - type: Fix
+    message: Fix client spawning more particles than intended.
+  - type: Fix
+    message: Fix flipping/spinning once roundstart making you vomit.
+  - type: Fix
+    message: Fixed flesh heretic spamming popups when eating bad food.
+  - type: Tweak
+    message: Forged warhammer size increased.
+  - type: Tweak
+    message: >-
+      Default mod key for changing targeting with mouse wheel is Alt instead of
+      Shift.
+  id: 1355
+  time: '2026-07-29T11:44:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3822
+- author: tsarevichvanya
+  changes:
+  - type: Tweak
+    message: Gives headrevs that had a roundstart mindshield implant a fake one instead
+  - type: Fix
+    message: Disallowed the NTR from rolling Head Rev
+  id: 1356
+  time: '2026-07-29T19:28:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not being mimes.
+  id: 1357
+  time: '2026-07-29T19:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3828
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Rancher has been mapped to Cog
+  id: 1358
+  time: '2026-07-29T19:41:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3827
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bloodsuckers being poisoned when drinking blood.
+  id: 1359
+  time: '2026-07-29T19:56:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3830
