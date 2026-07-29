@@ -13,12 +13,12 @@ trauma-balanceui-shop-wizard-token-antag = Wizard Antag Token
 # TODO: Add Spy and Werewolf once they're done
 trauma-balanceui-shop-buy-minor-roundstart-token-antag-desc = Allows you to choose from these antags: Insurgents, Vampire, Thief, Traitor, Devil.
 trauma-balanceui-shop-buy-major-roundstart-token-antag-desc = Allows you to choose from these antags: Wraith, Xenomorphs, Heretic, Changeling, Shadowling, HeadRev, Initial Infected, Cosmic Cult, Xenoborgs, Blob.
-trauma-balanceui-shop-buy-minor-midround-token-antag-desc = Allows you to choose from these antags: Midround Wraith, Lone Xenomorph, Lone Abductor, Paradox Clone, Rat King, Tunnel Clown, Mime Assassin, Dark Priest, Greytide.
-trauma-balanceui-shop-buy-major-midround-token-antag-desc = Allows you to choose from these antags: Space Dragon, Bingle, Ninja, Entropic Colossus, Slaughter/Shadow Demon, Morph, Blob, LoneOp, Singuloth Knights, Vox Raiders, Dark Lord.
+trauma-balanceui-shop-buy-minor-midround-token-antag-desc = Allows you to choose from these antags: Midround Wraith, Lone Xenomorph, Lone Abductor, Paradox Clone, Rat King, Tunnel Clown, Mime Assassin, Dark Priest.
+trauma-balanceui-shop-buy-major-midround-token-antag-desc = Allows you to choose from these antags: Space Dragon, Bingle, Ninja, Entropic Colossus, Slaughter/Shadow Demon, Morph, Blob, LoneOp, Singuloth Knights, Vox Raiders.
 trauma-balanceui-shop-buy-wizard-token-antag-desc = Allows you to become a wizard.
 
 trauma-balanceui-remark-minor-roundstart-token-antag = Bought a minor roundstart antag token. Can be exchanged for these antags: Insurgents, Vampire, Thief, Traitor, Devil.
 trauma-balanceui-remark-major-roundstart-token-antag = Bought a major roundstart antag token. Can be exchanged for these antags: Wraith, Xenomorphs, Heretic, Changeling, Shadowling, HeadRev, Initial Infected, Cosmic Cult, Xenoborgs, Blob.
-trauma-balanceui-remark-minor-midround-token-antag = Bought a minor midround antag token. Can be exchanged for these antags: Midround Wraith, Lone Xenomorph, Lone Abductor, Paradox Clone, Rat King, Tunnel Clown, Mime Assassin, Dark Priest, Greytide.
-trauma-balanceui-remark-major-midround-token-antag = Bought a major midround antag token. Can be exchanged for these antags: Space Dragon, Bingle, Ninja, Entropic Colossus, Slaughter/Shadow Demon, Morph, Blob, LoneOp, Singuloth Knights, Vox Raiders, Dark Lord.
+trauma-balanceui-remark-minor-midround-token-antag = Bought a minor midround antag token. Can be exchanged for these antags: Midround Wraith, Lone Abductor, Paradox Clone, Rat King, Tunnel Clown, Mime Assassin, Dark Priest.
+trauma-balanceui-remark-major-midround-token-antag = Bought a major midround antag token. Can be exchanged for these antags: Space Dragon, Lone Xenomorph, Bingle, Ninja, Entropic Colossus, Slaughter/Shadow Demon, Morph, Blob, LoneOp, Singuloth Knights, Vox Raiders.
 trauma-balanceui-remark-wizard-token-antag = Bought a wizard antag token.
