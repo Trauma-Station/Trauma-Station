@@ -119,8 +119,10 @@ public abstract partial class SharedXenoArtifactSystem
         foreach (var nodeIndex in GetAllNodeIndices((ent, ent)))
         {
             var artifactComponent = ent.Comp2;
-            var curNode = GetNode((ent, artifactComponent), nodeIndex);
-            if (!curNode.Comp.Locked || !CanUnlockNode((curNode, curNode)))
+            // <Trauma> - use TryGetNode, curNode is now nullable
+            if (!TryGetNode((ent, artifactComponent), nodeIndex, out var curNode) ||
+                !curNode.Value.Comp.Locked || !CanUnlockNode(curNode.Value.AsNullable()))
+            // </Trauma>
                 continue;
 
             var requiredIndices = GetPredecessorNodes((ent, artifactComponent), nodeIndex);
@@ -143,7 +145,7 @@ public abstract partial class SharedXenoArtifactSystem
                 requiredIndices.Count - 1 != artifactUnlockingComponent.TriggeredNodeIndexes.Count)
                 continue;
 
-            potentialNodes.Add(curNode);
+            potentialNodes.Add(curNode.Value); // Trauma - added .Value shit language
         }
 
         if (potentialNodes.Count != 0)
