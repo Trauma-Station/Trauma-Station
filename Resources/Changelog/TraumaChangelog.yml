@@ -12252,3 +12252,56 @@ Entries:
   id: 1342
   time: '2026-07-28T12:36:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3636
+- author: tbmo
+  changes:
+  - type: Fix
+    message: Fixed disposals and other utility constructions requiring a wall to build.
+  id: 1343
+  time: '2026-07-28T18:01:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3795
+- author: buunie099
+  changes:
+  - type: Add
+    message: Added Conveyor belts and other production related recipes to cargo techfab
+  id: 1344
+  time: '2026-07-28T21:29:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3804
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed spiders getting poisoned from drinking blood
+  id: 1345
+  time: '2026-07-28T22:04:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3796
+- author: TechnicFighter, WarPigeon
+  changes:
+  - type: Add
+    message: Added Chameleon Projection to the Syndicate Saboteur Borg.
+  id: 1346
+  time: '2026-07-28T22:07:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3590
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen getting thirsty, having fingerprints, etc.
+  - type: Fix
+    message: Fixed plasmamen being able to gib from limb damage instead of torso only.
+  - type: Fix
+    message: Fixed not being able to ash people with extreme heat damage.
+  id: 1347
+  time: '2026-07-28T22:18:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3809
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Toilets now protect you from radiation storms
+  id: 1348
+  time: '2026-07-28T22:49:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed vgroid basilisks fighting the other mobs.
+  id: 1349
+  time: '2026-07-28T22:53:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3814
