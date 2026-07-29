@@ -42,12 +42,6 @@
     - type: StationArrivals
 
 - type: entity
-  id: BaseStationGateway
-  abstract: true
-  components:
-    - type: GatewayGenerator
-
-- type: entity
   id: BaseStationShuttles
   abstract: true
   components:
@@ -55,6 +49,11 @@
       path: /Maps/_Trauma/Shuttles/cargo.yml # Trauma
     - type: GridSpawn
       groups:
+        # <Trauma>
+        mining: !type:GridSpawnGroup
+          paths:
+          - /Maps/Shuttles/mining.yml
+        # <Trauma>
         trade: !type:GridSpawnGroup
           addComponents:
             - type: ProtectedGrid
@@ -62,12 +61,31 @@
           paths:
             - /Maps/_Trauma/Shuttles/trading_outpost.yml # Trauma
           nameDataset: TradeStationNames
+        # <Trauma>
+        vgroid: !type:DungeonSpawnGroup # Trauma, made this spawn first
+          hide: false
+          nameGrid: true
+          minimumDistance: 400 # Was 300
+          maximumDistance: 600 # Was 350
+          nameDataset: NamesBorer
+          stationGrid: false
+          addComponents:
+          - type: Gravity
+            enabled: true
+            inherent: true
+          - type: IFF
+            color: "#d67e27"
+          protos:
+          - VGRoid
+        # </Trauma>
         # Spawn last
         ruins: !type:GridSpawnGroup
-          hide: true
-          nameGrid: true
-          minCount: 2
-          maxCount: 2
+          hide: false
+          nameGrid: false
+          minCount: 3 # Trauma, was 2
+          maxCount: 5 # Trauma, was 2
+          minimumDistance: 200 # Trauma, was 100
+          maximumDistance: 300 # Trauma, was 300
           stationGrid: false
           paths:
           - /Maps/Ruins/abandoned_outpost.yml
@@ -85,12 +103,20 @@
           - /Maps/Ruins/whiteship_bluespacejumper.yml
           - /Maps/Ruins/wrecklaimer.yml
           - /Maps/Ruins/displaced_telescience.yml
+          addComponents:
+          - type: Gravity
+            enabled: true
+            inherent: true
+          - type: IFF
+            color: "#b14918"
         wrecks: !type:DungeonSpawnGroup
-          minimumDistance: 150
-          maximumDistance: 300
+          hide: true
+          nameGrid: false
+          minimumDistance: 100 # Trauma, was 150
+          maximumDistance: 200 # Trauma, was 300
           stationGrid: false
-          minCount: 12
-          maxCount: 16
+          minCount: 10 # Trauma, was 12 make 32 when grid bug fixed
+          maxCount: 10 # Trauma. was 16 make 64 when grid bug fixed
           addComponents:
           - type: Gravity
             enabled: true
@@ -104,20 +130,6 @@
           - ChunkDebrisSmall
           - ChunkDebrisSmall
           - ChunkDebris
-        vgroid: !type:DungeonSpawnGroup
-         minimumDistance: 300
-         maximumDistance: 350
-         nameDataset: NamesBorer
-         stationGrid: false
-         addComponents:
-         - type: Gravity
-           enabled: true
-           inherent: true
-         - type: IFF
-           flags: HideLabel
-           color: "#d67e27"
-         protos:
-         - VGRoid
 
 - type: entity
   id: BaseStationCentcomm

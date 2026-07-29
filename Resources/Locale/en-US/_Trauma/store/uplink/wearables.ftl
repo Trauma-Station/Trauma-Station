@@ -20,3 +20,9 @@ uplink-bomb-collar-desc = The perfect way to coerce someone into doing you a fav
 uplink-clothing-no-slips-shoes-name-trauma = No-Slip Shoes
 
 uplink-clothing-shoes-boots-mag-syndie-name-trauma = Blood-Red Magboots
+
+uplink-clothing-chameleon-thieving-gloves-name = Chameleon Thieving Gloves
+uplink-clothing-chameleon-thieving-gloves-desc = Discreetly steal from pockets and improve your thieving technique with these fancy new gloves. They can change appearance to match any pair of gloves!
+
+uplink-holster-name = Shoulder Holster
+uplink-holster-desc = A deep shoulder holster capable of holding many types of ballistics.

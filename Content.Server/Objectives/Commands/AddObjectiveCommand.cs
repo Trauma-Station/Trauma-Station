@@ -3,7 +3,7 @@ using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
@@ -41,7 +41,7 @@ public sealed partial class AddObjectiveCommand : LocalizedEntityCommands
         }
 
         if (!_prototypes.TryIndex<EntityPrototype>(args[1], out var proto) ||
-            !proto.HasComponent<ObjectiveComponent>())
+            !proto.HasComp<ObjectiveComponent>(EntityManager.ComponentFactory)) // Trauma - use factory variant
         {
             shell.WriteError(Loc.GetString("cmd-addobjective-objective-not-found", ("obj", args[1])));
             return;

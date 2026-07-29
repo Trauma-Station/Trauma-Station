@@ -14,7 +14,7 @@ public sealed partial class ToggleComponent : EntityEffectBase<ToggleComponent>
     /// Name of the component to toggle.
     /// </summary>
     [DataField(required: true)]
-    public string CompName = string.Empty;
+    public CompName CompName;
 
     /// <summary>
     /// Cached type for the component.
@@ -38,9 +38,10 @@ public sealed class ToggleComponentEffectSystem : EntityEffectSystem<MetaDataCom
         var effect = args.Effect;
         if (effect.Comp == null)
         {
-            var reg = Factory.GetRegistration(effect.CompName);
+            var reg = Factory.GetRegistration(effect.CompName.Name);
             effect.Comp = reg.Type;
         }
+
         var type = effect.Comp;
         if (HasComp(ent, type))
             RemComp(ent, type);

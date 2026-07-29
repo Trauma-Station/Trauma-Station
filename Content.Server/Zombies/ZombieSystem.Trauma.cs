@@ -1,4 +1,4 @@
-using Content.Shared.Blocking;
+using Content.Shared.Blocking.Components;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Prototypes;
 
@@ -11,5 +11,5 @@ public sealed partial class ZombieSystem
     private bool IsUserBlocking(EntityUid uid)
         => TryComp<BlockingUserComponent>(uid, out var user) &&
             TryComp<BlockingComponent>(user.BlockingItem, out var blockComp) &&
-            blockComp.IsBlocking;
+            blockComp.IsRaised;
 }

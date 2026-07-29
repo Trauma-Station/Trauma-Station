@@ -978,6 +978,12 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new("Interface/Actions/voice-mask.rsi"), "icon"),
             Act = () =>
             {
+                // <Trauma>
+                EnsureComp<GlorpAccentComponent>(args.Target);
+                EnsureComp<MedievalAccentComponent>(args.Target);
+                EnsureComp<OhioAccentComponent>(args.Target);
+                EnsureComp<PirateAccentComponent>(args.Target);
+                // </Trauma>
                 EnsureComp<BarkAccentComponent>(args.Target);
                 EnsureComp<BleatingAccentComponent>(args.Target);
                 EnsureComp<FrenchAccentComponent>(args.Target);
@@ -990,12 +996,6 @@ public sealed partial class AdminVerbSystem
                 EnsureComp<SouthernAccentComponent>(args.Target);
                 EnsureComp<SpanishAccentComponent>(args.Target);
                 EnsureComp<StutteringAccentComponent>(args.Target);
-                // <Goob>
-                EnsureComp<MedievalAccentComponent>(args.Target);
-                EnsureComp<OhioAccentComponent>(args.Target);
-                EnsureComp<PirateAccentComponent>(args.Target);
-                EnsureComp<VulgarAccentComponent>(args.Target);
-                // </Goob>
 
                 if (_random.Next(0, 8) == 0)
                 {

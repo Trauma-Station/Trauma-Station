@@ -1,11 +1,12 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision ] # Trauma - added AppearanceRatKing
+  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added AppearanceRatKing
   description: He's da rat. He make da roolz.
   components:
   # <Trauma>
   - type: VentCrawler
+  - type: Targeting
   - type: PassiveDamage
     allowedStates:
     - Alive

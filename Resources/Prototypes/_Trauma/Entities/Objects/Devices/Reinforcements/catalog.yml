@@ -173,12 +173,12 @@
     sprite: Objects/Misc/books.rsi
     state: cover_old
   cost:
-    Spesos: 1000
+    Spesos: 5000
   categories:
   - Bioweapons
   restockTime: 0
   resetRestockOnPurchase: false
-  restockAfterPurchase: 0
+  restockAfterPurchase: 900
 
 - type: listing
   id: Bioweapon
@@ -189,12 +189,12 @@
     sprite: _Trauma/Mobs/Monsters/bioweapon.rsi
     state: alive
   cost:
-    Spesos: 10000
+    Spesos: 15000
   categories:
   - Bioweapons
-  restockTime: 600
+  restockTime: 45m
   resetRestockOnPurchase: true
-  restockAfterPurchase: 300
+  restockAfterPurchase: 45m
 
 # Medical
 

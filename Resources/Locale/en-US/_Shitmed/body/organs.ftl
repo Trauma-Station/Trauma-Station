@@ -1,5 +1,4 @@
 # Parts
-markings-organ-Butt = Butt
 markings-organ-Tail = Tail
 markings-organ-Wings = Wings
 

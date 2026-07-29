@@ -57,7 +57,7 @@ ghost-role-information-ratma-name = Ratma
 ghost-role-information-ratma-desc = Hunt and kill.
 
 ghost-role-information-bioweapon-name = Bioweapon
-ghost-role-information-bioweapon-desc = You are a bioweapon purcahsed by the security department to accomplish their goals.
+ghost-role-information-bioweapon-desc = You are a bioweapon bought by the security department. Follow your orders.
 ghost-role-information-bioweapon-rules = Follow the most recent SPOKEN order you understand. Even if it conflicts with previous orders.
 
 ghost-role-information-breadling-name = Breadling
@@ -108,7 +108,7 @@ ghost-role-information-bounty-hunter-description = You are a Bounty Hunter. You 
 ghost-role-information-bounty-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Do not cause unnecessary casualties.
 
 ghost-role-information-fugitive-name = Fugitive
-ghost-role-information-fugitive-description = You are a Syndicate Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
+ghost-role-information-fugitive-description = You are an Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
 ghost-role-information-fugitive-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Focus on laying low rather than engaging the hunters or security directly.
 
 ghost-role-information-syndicate-reinforcement-grenadier-name = Syndicate Grenadier

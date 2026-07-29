@@ -14,6 +14,25 @@
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
 
+# Area whitelist tags for ambient music
+- type: Tag
+  id: AreaBeach
+
+- type: Tag
+  id: AreaCold
+
+- type: Tag
+  id: AreaDojo
+
+- type: Tag
+  id: AreaDetective
+
+- type: Tag
+  id: AreaInterrogation
+
+- type: Tag
+  id: AreaMorgue
+
 ## B ##
 
 - type: Tag
@@ -27,9 +46,6 @@
 
 - type: Tag
   id: Bracing # given to WeaponBracing, used to repair durability on a lot of weapons
-
-- type: Tag
-  id: Butt # Construction: MobButtBot
 
 ## C ##
 
@@ -53,9 +69,6 @@
 
 - type: Tag
   id: CookedEgg # Construction: FoodMealFriedegg, FoodEggToast
-
-- type: Tag
-  id: CyberButt # Construction: MobButtBotCyber (currently unused)
 
 - type: Tag
   id: DataChip # Blueprint whitelist: RevMicroelectronicsAssembler
@@ -240,6 +253,9 @@
 
 - type: Tag
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
+
+- type: Tag
+  id: Spider # Spider mobcaller
 
 - type: Tag
   id: SteelScraps # Construction: BloomeryColdSteel

@@ -16,6 +16,7 @@
   id: Xenomorph
   prefRoles: [ Xenomorph ]
   spawnerPrototype: SpawnPointGhostXenomorph
+  allowNonHumans: true
   briefing:
     text: xenomorph-role-greeting
     color: "#8c3986"
