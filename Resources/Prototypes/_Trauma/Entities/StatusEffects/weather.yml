@@ -19,8 +19,14 @@
   id: WeatherRadiationStorm
   components:
   - type: WeatherEffects
+    conditions:
+    - !type:WhitelistCondition
+      blacklist:
+        components:
+        - RadStormImmune
     effects:
     - !type:HealthChange
+      ignoreResistances: false
       splitDamage: None
       damage:
         types:
@@ -36,6 +42,7 @@
     - AreaRadstorm
     - AreaLootRoom
     - AreaPrisonShower # not quite toilet
+    - AreaToilet
     - AreaShuttleAbductor
     - AreaShuttleNukie
 

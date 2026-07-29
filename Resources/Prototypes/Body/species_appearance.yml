@@ -4,6 +4,8 @@
   components:
   - type: Sprite
     layers:
+    - map: [ "enum.HumanoidVisualLayers.WingsBehind" ] # Trauma
+
     # Torso
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
 

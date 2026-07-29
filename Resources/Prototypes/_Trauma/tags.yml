@@ -47,9 +47,6 @@
 - type: Tag
   id: Bracing # given to WeaponBracing, used to repair durability on a lot of weapons
 
-- type: Tag
-  id: Butt # Construction: MobButtBot
-
 ## C ##
 
 - type: Tag
@@ -72,9 +69,6 @@
 
 - type: Tag
   id: CookedEgg # Construction: FoodMealFriedegg, FoodEggToast
-
-- type: Tag
-  id: CyberButt # Construction: MobButtBotCyber (currently unused)
 
 - type: Tag
   id: DataChip # Blueprint whitelist: RevMicroelectronicsAssembler

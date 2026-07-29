@@ -103,6 +103,7 @@
     - MiningToolsStatic
     - MiscSignallersStatic
     - CargoStatic
+    - PartsStatic
     dynamicPacks:
     - AdvancedTools
     - Mining

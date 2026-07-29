@@ -278,3 +278,10 @@ Entries:
   id: 36
   time: '2026-07-27T14:25:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3757
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added antag smite verbs for a bunch of antags.
+  id: 37
+  time: '2026-07-28T00:16:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3776

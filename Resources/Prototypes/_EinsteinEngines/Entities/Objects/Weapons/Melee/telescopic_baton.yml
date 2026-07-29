@@ -1,22 +1,23 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: TelescopicBaton
-  parent: [BaseItem, BaseCommandContraband]
+  abstract: true
+  parent: BaseItem
+  id: BaseTelescopicBaton
   name: telescopic baton
-  description: A compact and harmless personal defense weapon. Sturdy enough to knock the feet out from under attackers. If you hit a person immediately after extending the baton, it will force them drop held items as well. # Goob edit
+  description: A compact and harmless personal defense weapon. Sturdy enough to knock the feet out from under attackers. If you hit a person immediately after extending the baton, it will force them drop held items as well.
   components:
   - type: WeaponClass
     class: NonLethal
   - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Melee/telebaton.rsi # Goob edit
+    sprite: _Goobstation/Objects/Weapons/Melee/telebaton.rsi
     layers:
     - state: icon-off
       map: [ "enum.ItemToggleVisuals.Layer" ]
   - type: Item
-    sprite: _Goobstation/Objects/Weapons/Melee/telebaton.rsi # Goob edit
+    sprite: _Goobstation/Objects/Weapons/Melee/telebaton.rsi
     size: Small
-    storedRotation: -45 # Goobstation
+    storedRotation: -45
   - type: ItemToggle
     soundActivate:
       path: /Audio/Weapons/telescopicon.ogg
@@ -26,10 +27,49 @@
       path: /Audio/Weapons/telescopicoff.ogg
       params:
         volume: -2
-  - type: ComponentToggler # Goobstation
+  - type: ItemToggleSize
+    activatedSize: Normal
+    activatedShape:
+    - 0,0,0,3
+  - type: UseDelay
+    delays:
+      default:
+        length: 1
+      telebaton:
+        length: 4
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    angle: 0
+    damage:
+      types:
+        Blunt: 1
+  - type: Appearance
+  - type: ItemToggleVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemToggleVisuals.State:
+        enum.ItemToggleVisuals.Layer:
+          True: { state: icon }
+          False: { state: icon-off }
+  - type: UseDelayBlockMelee
+    delays:
+    - default
+    - telebaton
+
+- type: entity
+  parent: [ BaseTelescopicBaton, BaseCommandContraband ]
+  id: TelescopicBaton
+  name: telescopic baton
+  description: A compact and harmless personal defense weapon. Sturdy enough to knock the feet out from under attackers. If you hit a person immediately after extending the baton, it will force them drop held items as well.
+  components:
+  - type: ComponentToggler
     components:
     - type: DisarmMalus
       malus: 0.6
+  - type: Clothing
+    sprite: _Goobstation/Objects/Weapons/Melee/telebaton.rsi
+    slots:
+    - Belt
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
       path: /Audio/_Goobstation/Weapons/Baton/woodhit.ogg
@@ -38,44 +78,11 @@
     activatedDamage:
       types:
         Blunt: 12
-      woundSeverityMultipliers: #Goob
-        Blunt: 0.5 # Im tired of this shit breaking bones, its meant to be nonlethal
-  - type: ItemToggleSize
-    activatedSize: Normal
-    activatedShape: # Goobstation
-    - 0,0,0,3
-  - type: UseDelay
-    # Goob edit start
-    delays:
-      default:
-        length: 1
-      telebaton:
-        length: 4
-    # Goob edit end
+      woundSeverityMultipliers:
+        Blunt: 0.5
   - type: TelescopicBaton
   - type: KnockdownOnHit
     duration: 1.5
-    dropItems: true # Goob
+    dropItems: true
   - type: MeleeWeapon
-    wideAnimationRotation: -135
     bluntStaminaDamageFactor: 1.5
-    angle: 0 # Goob edit
-    damage:
-      types:
-        Blunt: 1
-  - type: Appearance
-  - type: ItemToggleVisuals # Goobstation
-  - type: GenericVisualizer
-    visuals:
-      enum.ItemToggleVisuals.State:
-        enum.ItemToggleVisuals.Layer:
-          True: { state: icon }
-          False: { state: icon-off }
-  - type: Clothing # Goobstation
-    sprite: _Goobstation/Objects/Weapons/Melee/telebaton.rsi
-    slots:
-    - Belt
-  - type: UseDelayBlockMelee # Goobstation
-    delays:
-    - default
-    - telebaton
