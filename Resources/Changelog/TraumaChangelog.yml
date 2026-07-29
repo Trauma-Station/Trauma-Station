@@ -12314,3 +12314,12 @@ Entries:
   id: 1350
   time: '2026-07-29T02:43:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3818
+- author: Armok
+  changes:
+  - type: Tweak
+    message: >-
+      replaced pulse carbine and robust toolbox with other weapons in lottery
+      crate
+  id: 1351
+  time: '2026-07-29T03:53:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3819
