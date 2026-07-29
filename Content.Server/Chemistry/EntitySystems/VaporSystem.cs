@@ -41,7 +41,7 @@ namespace Content.Server.Chemistry.EntitySystems
         {
             var solution = Comp<SolutionComponent>(entity).Solution;
             _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch);
-            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Eyes);
+            _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Eyes); // Trauma - for peppersprays.
 
             // Check for collision with a impassable object (e.g. wall) and stop
             if ((args.OtherFixture.CollisionLayer & (int)CollisionGroup.Impassable) != 0 && args.OtherFixture.Hard)
