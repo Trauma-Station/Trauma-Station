@@ -227,10 +227,10 @@
   available: false
   icon: _Goobstation/Interface/Emotes/caw.png
   whitelist:
-    tags:
-    - ShadowkinEmotes
-    - HarpyEmotes
-    components:
+    tags: # Ron start - We don't have those tags.
+    #- ShadowkinEmotes
+    #- HarpyEmotes
+    components: # Ron end - We don't have those tags.
     - Vocal
   blacklist:
     components:
