@@ -34,7 +34,9 @@ public sealed partial class DamageableSystem
         TargetBodyPart.LeftLeg,
         TargetBodyPart.LeftFoot,
         TargetBodyPart.RightLeg,
-        TargetBodyPart.RightFoot
+        TargetBodyPart.RightFoot,
+        TargetBodyPart.Wings,
+        TargetBodyPart.Tail,
     ];
 
     /// <summary>

@@ -119,11 +119,13 @@
         path:
           "/Audio/Weapons/slash.ogg"
   - type: TimedSpawner
+    chance: .5
     prototypes:
     - MobBabySpider
     intervalSeconds: 60
     minimumEntitiesSpawned: 1
     maximumEntitiesSpawned: 1
+  - type: AntiRottingContainer
   - type: EntityStorage
     capacity: 1
     openOnMove: false

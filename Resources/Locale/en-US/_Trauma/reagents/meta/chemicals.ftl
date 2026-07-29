@@ -60,3 +60,9 @@ reagent-desc-reaper-delight = A very potent fertilizer with no limit to its pote
 
 reagent-name-stellarium = stellarium
 reagent-desc-stellarium = An artifically synthesized anti-toxin that is incredibly effective against poisons, Also works very well as a fertilizer to keep your plants alive.
+
+reagent-name-hephaestium = hephaestium
+reagent-desc-hephaestium = hephaestium, named after the greek god of stone Hephaestus, known to turn anything injected with it into stone.
+
+reagent-name-ageium = ageium
+reagent-desc-ageium = ageium, causes subjects injected with it to not age!

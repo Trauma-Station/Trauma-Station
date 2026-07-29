@@ -133,7 +133,8 @@ marking-MothWingsWitchwing = Wings (Witch Wing)
 
 marking-MothWingsUnderwing-underwing_primary = Primary
 marking-MothWingsUnderwing-underwing_secondary = Secondary
-marking-MothWingsUnderwing = Wings (Underwing)
+# Trauma - no open wing visuals
+marking-MothWingsUnderwing = Wings (Underwing, No open wing visuals)
 
 
 
