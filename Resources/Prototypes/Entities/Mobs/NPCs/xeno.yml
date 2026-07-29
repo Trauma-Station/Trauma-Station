@@ -24,7 +24,6 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: purple_snake
-  # <Trauma>
   - type: DamageStateVisuals
     states:
       Alive:
