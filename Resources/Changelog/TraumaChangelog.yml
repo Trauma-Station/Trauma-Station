@@ -11114,3 +11114,10 @@ Entries:
   id: 1237
   time: '2026-07-27T20:19:33.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/96
+- author: Magelfik
+  changes:
+  - type: Add
+    message: Synced upstream.
+  id: 1238
+  time: '2026-07-29T17:47:44.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/91
