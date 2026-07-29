@@ -76,18 +76,19 @@
     organ: Tongue
 
 - type: entity
-  parent: BaseSurgeryInsertOrgan
+  parent: SurgeryBase
   id: SurgeryInsertTongue
   name: Insert Tongue
   components:
   - type: Surgery
     steps:
-    - SurgeryStepSawBones
     - SurgeryStepInsertOrgan
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
     organSlot: Tongue
   - type: SurgeryOrganCondition
+    inverse: true
+    reattaching: true
     organ: Tongue
 
 # Kidneys
