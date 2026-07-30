@@ -12450,3 +12450,12 @@ Entries:
   id: 1364
   time: '2026-07-30T00:57:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3837
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Head Revolutionaries now have a radio implant with the regular rev channel
+      and a special headrev channel they can use with :j at any time.
+  id: 1365
+  time: '2026-07-30T12:47:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3846
