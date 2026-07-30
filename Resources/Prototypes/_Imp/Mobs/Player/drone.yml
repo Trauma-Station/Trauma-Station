@@ -185,7 +185,6 @@
     allowed:
     - Stun
     - SlowedDown
-    - Flashed
   - type: SlowOnDamage
     speedModifierThresholds:
       30: 0.7

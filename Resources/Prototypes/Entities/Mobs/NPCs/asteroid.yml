@@ -22,7 +22,6 @@
   - type: StatusEffects
     allowed:
     - Electrocution
-    - Adrenaline
   - type: StandingState
   - type: Tag
     tags:

@@ -29,7 +29,6 @@
     - ForcedSleep
     - Pacified
     - Drowsiness
-    - Adrenaline
   - type: MobMover
   - type: InputMover
   - type: Input

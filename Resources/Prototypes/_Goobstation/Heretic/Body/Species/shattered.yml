@@ -143,7 +143,6 @@
     - PressureImmunity
     - Pacified
     - StaminaModifier
-    - Adrenaline
   - type: Identity
   - type: IdExaminable
   - type: Hands

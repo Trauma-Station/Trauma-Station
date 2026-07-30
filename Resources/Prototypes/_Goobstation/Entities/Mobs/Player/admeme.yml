@@ -439,4 +439,3 @@
   - type: StatusEffects
     allowed:
     - PressureImmunity
-    - Adrenaline
