@@ -12491,3 +12491,12 @@ Entries:
   id: 1369
   time: '2026-07-30T19:30:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3855
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Traitor objectives now only pick people who have jobs. No more kill nukie
+      or admin objective.
+  id: 1370
+  time: '2026-07-30T20:07:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3856
