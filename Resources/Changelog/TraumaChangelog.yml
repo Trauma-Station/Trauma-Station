@@ -12484,3 +12484,10 @@ Entries:
   id: 1368
   time: '2026-07-30T19:00:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3848
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Stripping cuffed people is now 25% faster.
+  id: 1369
+  time: '2026-07-30T19:30:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3855
