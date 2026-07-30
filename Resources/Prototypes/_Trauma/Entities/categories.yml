@@ -19,3 +19,8 @@
   id: HereticRituals
   name: entity-category-name-heretic-rituals
   hideSpawnMenu: true
+
+- type: entityCategory
+  id: Implants
+  name: entity-category-name-implants
+  hideSpawnMenu: true

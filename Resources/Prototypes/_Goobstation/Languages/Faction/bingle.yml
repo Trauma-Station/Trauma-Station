@@ -5,7 +5,7 @@
   speech:
     fontId: Eatday
     boldFontId: Eatday
-    color: "#33528d"
+    color: "#8d3333"
   obfuscation:
     !type:PhraseObfuscation
     proportion: 0.66

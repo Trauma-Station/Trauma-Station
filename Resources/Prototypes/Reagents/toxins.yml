@@ -517,7 +517,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant ] # Trauma - Plant
+          type: [ Animal, Vox, Plant, Bloodsucker ] # Trauma - Plant
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -527,14 +527,14 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant ]
+          type: [ Animal, Vox, Plant, Bloodsucker ] # Trauma, Bloodsucker
           inverted: true
       - !type:InfectDisease
-        probability: 0.005
-        scaleProbability: true
+        probability: 0.05
+        scaleProbability: false
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Rat, Vox ]
+          type: [ Rat, Vox, Bloodsucker ] # Trauma, Bloodsucker
           inverted: true
         - !type:ReagentCondition
           reagent: UncookedAnimalProteins
@@ -547,7 +547,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant ]
+          type: [ Animal, Vox, Plant, Arachnid ]  # Trauma, Arachnid
           inverted: true
         damage:
           types:

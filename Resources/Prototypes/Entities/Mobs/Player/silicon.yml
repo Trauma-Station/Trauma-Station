@@ -633,7 +633,6 @@
       borg_module:
         # <Trauma>
         - BorgModuleRCD
-        - BorgModuleSyndicateChameleonProjector
         - BorgModuleSyndicateJammer
         - BorgModuleSyndicateDoorControl
         # </Trauma>

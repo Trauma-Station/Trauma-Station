@@ -1232,6 +1232,12 @@
         conditions:
         damage:
           types:
+            # <Trauma> - Now slightly works on ALL brute and effectively on asphyxiation
+            Asphyxiation: -2 #Hydrate the injured so they may have the strength to stand (Space Station 13:14, KJV)
+            Piercing: -0.2
+            Ballistic: -0.2
+            Slash: -0.2
+            # </Trauma>
             Blunt: -0.2
             Poison: -0.2
             Heat: -0.2

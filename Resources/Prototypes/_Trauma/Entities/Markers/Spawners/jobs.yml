@@ -27,3 +27,18 @@
     layers:
     - state: green
     - state: geneticist
+
+# Service
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: SpawnPointRancher
+  name: rancher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Rancher
+  - type: Sprite
+    layers:
+    - state: green
+    - state: rancher
+      sprite: _Trauma/Markers/jobs.rsi

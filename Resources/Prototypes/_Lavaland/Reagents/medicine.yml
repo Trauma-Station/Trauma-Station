@@ -84,16 +84,19 @@
           Burn: -6
           Airloss: -6
       # Improper pressure effects below
-      - !type:EvenHealthChange
+      - !type:HealthChange
         conditions:
         - !type:PressureCondition
           inverted: true
           min: 0
           max: 50
         damage:
-          Toxin: 1
-          Brute: 1
-          Airloss: 1
+          types:
+            Poison: 0.5
+            Radiation: 0.5
+            Blunt: 0.5
+            Slash: 0.5
+            Asphyxiation: 1
       - !type:Emote
         conditions:
         - !type:PressureCondition # five billion pressure conditions :joel:
@@ -144,10 +147,12 @@
         amount: -1
       - !type:ModifyBloodLevel
         amount: 1
-      - !type:EvenHealthChange # Overdose can cause blood to clot in the veins
+      - !type:HealthChange # Overdose can cause blood to clot in the veins
         conditions:
         - !type:ReagentCondition
           reagent: SerakaExtract
           min: 8
         damage:
-          Airloss: 7
+          types:
+            Asphyxiation: 3.5
+            Bloodloss: 3.5

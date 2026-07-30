@@ -110,26 +110,11 @@
 
 - type: listing
   id: UplinkSupermatterGrenadeNukeops
-  name: uplink-supermatter-grenade-name
-  description: uplink-supermatter-grenade-desc
+  name: uplink-singularity-grenade-name
+  description: uplink-singularity-grenade-desc
   productEntity: SupermatterGrenade
   cost:
     Telecrystal: 10
-  categories:
-    - UplinkExplosives
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
-  id: UplinkWhiteholeGrenadeNukeops
-  name: uplink-whitehole-grenade-name
-  description: uplink-whitehole-grenade-desc
-  productEntity: WhiteholeGrenade
-  cost:
-    Telecrystal: 2
   categories:
     - UplinkExplosives
   conditions:
@@ -230,17 +215,6 @@
 
 # Weaponry
 
-# - type: listing
-#   id: UplinkEswordDouble
-#   name: uplink-esword-double-name
-#   description: uplink-esword-double-desc
-#   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword_double.rsi, state: icon }
-#   productEntity: EnergySwordDouble
-#   cost:
-#     Telecrystal: 80
-#   categories:
-#   - UplinkWeaponry
-
 - type: listing
   id: UplinkContractorBaton
   name: uplink-contractor-baton-name
@@ -263,8 +237,8 @@
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  icon: { sprite: /Textures/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon } # Trauma
-  productEntity: BriefcaseWeaponFireaxeFilled # Trauma
+  icon: { sprite: /Textures/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
+  productEntity: BriefcaseWeaponFireaxeFilled
   cost:
     Telecrystal: 65
   categories:
@@ -764,30 +738,6 @@
   categories:
   - UplinkImplants
 
-# I don't know if this is balanced, so i'm just going to leave it commented out.
-# If you want to add this in the future, feel free. - Sol
-#- type: listing
-#  id: UplinkStypticStimulatorImplanter
-#  name: uplink-styptic-stimulator-implant-name
-#  description: uplink-styptic-stimulator-implant-desc
-#  icon: { sprite: Objects/Specific/Medical/medical.rsi, state: brutepack }
-#  productEntity: StypticStimulatorImplanter
-#  cost:
-#    Telecrystal: 40
-#  categories:
-#  - UplinkImplants
-
-#- type: listing - Warden exclusive martial art
-#  id: UplinkKravMagaImplanter
-#  name: uplink-krav-maga-implant-name
-#  description: uplink-krav-maga-implant-desc
-#  icon: { sprite: /Textures/_Goobstation/Clothing/Hands/Gloves/kravgloves.rsi, state: icon }
-#  productEntity: KravMagaImplanter
-#  cost:
-#    Telecrystal: 40
-#  categories:
-#    - UplinkImplants
-
 - type: listing
   id: UplinkBinaryImplant
   name: uplink-binary-implant-name
@@ -795,7 +745,7 @@
   icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: ai_label }
   productEntity: BinaryImplanter
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 5
   categories:
   - UplinkImplants
 
@@ -820,39 +770,6 @@
     Telecrystal: 17
   categories:
   - UplinkImplants
-
-# - type: listing
-#   id: UplinkAutosurgeonSandevistan
-#   name: uplink-autosurgeon-sandevistan-name
-#   description: uplink-autosurgeon-sandevistan-desc
-#   icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
-#   productEntity: AutosurgeonSandevistan
-#   cost:
-#     Telecrystal: 66 # The urge to make it 65...
-#   categories:
-#   - UplinkImplants
-#   conditions:
-#   - !type:StoreWhitelistCondition
-#     blacklist:
-#       tags:
-#       - NukeOpsUplink
-
-# - type: listing
-#   id: NukieUplinkAutosurgeonSandevistan
-#   name: uplink-autosurgeon-sandevistan-name
-#   description: uplink-autosurgeon-sandevistan-desc
-#   icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
-#   productEntity: AutosurgeonSandevistan
-#   cost:
-#     Telecrystal: 124
-#   categories:
-#   - UplinkImplants
-#   conditions:
-#   - !type:StoreWhitelistCondition
-#     whitelist:
-#       tags:
-#       - LoneOpsUplink
-
 
 - type: listing
   id: UplinkClothingOuterDavidsJacketValid

@@ -80,11 +80,22 @@
 - type: entity
   parent:
   - AppearancePlasmaman
-  - BaseSpeciesMobOrganic
+  - BaseSpeciesMob
+  - MobAtmosStandard
+  - MobBloodstream
+  - MobFlammable
   id: MobPlasmaman
   name: Urist McPlasma
   components:
+  # stuff from organic that applies, notably no hunger or thirst
+  - type: Absorbable
+  - type: WraithAbsorbable
+  - type: Scent
+  - type: Mutatable # mutating the fungus..?
   - type: ZombieImmune
+  - type: Blindable
+  - type: FireVisuals
+    alternateState: Standing
   - type: Bloodstream
     bloodlossThreshold: 0
     bleedReductionAmount: 0
@@ -109,8 +120,8 @@
   - type: Speech
     speechVerb: Skeleton
   - type: Vocal
-    wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg" # Goobstation
-    wilhelmProbability: 0.1 # Goobstation
+    wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
+    wilhelmProbability: 0.1
     emoteSounds: UnisexPlasmaman
   - type: Butcherable
     spawned:
@@ -164,12 +175,6 @@
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibBehavior
-    - trigger:
-        !type:DamageTypeTrigger
         damageType: Heat
         damage: 1500
       behaviors:
@@ -190,10 +195,6 @@
   - type: TemperatureSpeed
     thresholds:
       243: 0.8
-  - type: Fart
-    gasToFart: Plasma
-  - type: Hunger
-    baseDecayRate: 0 # don't get hungry, still able to eat
 
 ## Base
 
