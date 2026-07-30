@@ -27,13 +27,7 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedTransformSystem Xform = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
-    }
-
+    [SubscribeLocalEvent, SubscribeNetworkEvent]
     private void OnGetPosition(LaserBeamEndpointPositionEvent ev, EntitySessionEventArgs args)
     {
         if (!TryGetEntity(ev.Uid, out var uid) || args.SenderSession.AttachedEntity is not { } player)

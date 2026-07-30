@@ -57,7 +57,7 @@ public sealed partial class StarGazeSystem : EntitySystem
             return;
 
         var coords = Transform(args.Target).Coordinates;
-        _admin.Add(LogType.Gib, LogImpact.Medium, $"{ent} ashed {args.Target} using star gazer laser beam");
+        _admin.Add(LogType.Gib, LogImpact.Medium, $"{ent.Owner} ashed {args.Target} using star gazer laser beam");
         _popup.PopupCoordinates(Loc.GetString("heretic-stargaze-obliterate-user"),
             coords,
             args.Target,
