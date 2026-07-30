@@ -52,6 +52,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsRefreshMessage>(OnMessage);
 
         InitializeReward();
+        InitializeRoundEnd();
     }
 
     /// <summary>
@@ -192,6 +193,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         }
 
         GainReputation(jobBoard, sideJobComp.ReputationGain);
+        jobBoard.Comp.JobsCompleted += 1;
         QueueDel(sideJob);
     }
 

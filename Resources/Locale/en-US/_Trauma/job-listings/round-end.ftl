@@ -1,0 +1,1 @@
+job-listings-round-end = {$name} completed {$count} side jobs and earned {$reputation} reputation, achieving the title [color=red]{$title}[/color].

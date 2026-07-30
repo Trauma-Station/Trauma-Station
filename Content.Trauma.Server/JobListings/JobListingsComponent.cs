@@ -79,6 +79,13 @@ public sealed partial class JobListingsComponent : Component
     public List<int> ReputationLevels;
 
     /// <summary>
+    /// The number of jobs this job board has completed.
+    /// Tracked for the end of round summary.
+    /// </summary>
+    [DataField]
+    public int JobsCompleted = 0;
+
+    /// <summary>
     /// A list of <see cref="RemoteJobListingsComponent"/> that are targeting this entity.
     /// Should only be edited by <see cref="JobListingsSystem.Link"/>
     /// </summary>
