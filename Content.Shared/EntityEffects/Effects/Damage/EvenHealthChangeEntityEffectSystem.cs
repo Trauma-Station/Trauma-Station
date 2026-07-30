@@ -24,7 +24,7 @@ public sealed partial class EvenHealthChangeEntityEffectSystem : EntityEffectSys
     {
         foreach (var (group, amount) in args.Effect.Damage)
         {
-            // <Goob>
+            // <Trauma> - pass healing to HealEvenly, modify it with temperature if set to
             var healing = amount * args.Scale;
             if (args.Effect.ScaleByTemperature is {} scaleTemp)
             {
@@ -32,9 +32,11 @@ public sealed partial class EvenHealthChangeEntityEffectSystem : EntityEffectSys
                     return; // condition stays the same so this is actually a good return in loop
 
                 healing *= scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false);
+                if (healing >= 0)
+                    continue; // efficiency multiplier was 0? skip
             }
             _damageable.HealEvenly(entity.AsNullable(), healing, group);
-            // </Goob>
+            // </Trauma>
         }
     }
 }
