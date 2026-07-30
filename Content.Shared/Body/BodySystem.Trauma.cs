@@ -56,10 +56,10 @@ public sealed partial class BodySystem
     /// Tries to enable a given organ, letting systems run logic.
     /// Returns true if it is valid and now enabled.
     /// </summary>
-    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null)
+    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null, bool logMissing = true)
     {
         // allow the user to pass in a body incase it's null here
-        if (!_organQuery.Resolve(organ, ref organ.Comp) || (bodyUid ?? organ.Comp.Body) is not {} body)
+        if (!_organQuery.Resolve(organ, ref organ.Comp, logMissing) || (bodyUid ?? organ.Comp.Body) is not {} body)
             return false;
 
         if (HasComp<EnabledOrganComponent>(organ))
