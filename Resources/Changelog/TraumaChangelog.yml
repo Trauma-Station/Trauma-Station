@@ -12468,3 +12468,12 @@ Entries:
   id: 1366
   time: '2026-07-30T13:00:30.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3847
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Skeletons now gib properly: 150 blunt damage gibs the part, not the entire
+      mob from breaking a skellys leg.
+  id: 1367
+  time: '2026-07-30T17:26:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3852
