@@ -3,23 +3,24 @@
 using Content.Client.Guidebook;
 using Content.Client.Guidebook.Richtext;
 using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Server.Chemistry.Components;
 using Content.Server.Power.Components;
-using Content.Shared.Guidebook;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.ContentPack;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
+using Content.Shared.Guidebook;
+using Content.Shared.Materials;
 using Content.Shared.Speech;
 using Content.Trauma.Client.ChemiCompiler.UI;
 using Content.Trauma.Shared.ChemiCompiler;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
@@ -29,9 +30,20 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// </summary>
 public sealed class ChemiCompilerTest : GameTest
 {
+    [SidedDependency(Side.Server)] private readonly IResourceManager _sResources = default!;
+    [SidedDependency(Side.Server)] private readonly ItemSlotsSystem _slots = default!;
+    [SidedDependency(Side.Server)] private readonly SharedMaterialStorageSystem _materials = default!;
+    [SidedDependency(Side.Server)] private readonly SharedSolutionContainerSystem _solutions = default!;
+    [SidedDependency(Side.Server)] private readonly SharedUserInterfaceSystem _sUi = default!;
+
+    [SidedDependency(Side.Client)] private readonly DocumentParsingManager _parser = default!;
+    [SidedDependency(Side.Client)] private readonly IResourceManager _cResources = default!;
+    [SidedDependency(Side.Client)] private readonly SharedUserInterfaceSystem _cUi = default!;
+
     private static readonly EntProtoId Machine = "ChemiCompiler";
     private static readonly EntProtoId Beaker = "LargeBeaker";
     private static readonly EntProtoId Hotplate = "ChemistryHotplate";
+    private static readonly EntProtoId Player = "MobHuman";
 
     // same id as the machine, but a different kind of prototype
     private static readonly ProtoId<GuideEntryPrototype> GuideEntry = "ChemiCompiler";
@@ -43,55 +55,84 @@ public sealed class ChemiCompilerTest : GameTest
     private static readonly ProtoId<ReagentPrototype> Water = "Water";
 
     /// <summary>
-    /// Builds the run of + signs needed to get a memory cell to a value, since ChemFuck can't just say a number.
+    /// The machine <see cref="Setup"/> made, for talking to its interface on the client.
+    /// </summary>
+    private NetEntity _machine;
+
+    /// <summary>
+    /// A run of + signs, the only way to write a number in ChemFuck.
     /// </summary>
     private static string Count(int n)
         => new('+', n);
 
     /// <summary>
-    /// Sets up a machine with beakers in every reservoir named, and the reagents they should start with.
+    /// Spawns a machine with beakers in every reservoir named, attaches a player and opens the interface.
     /// </summary>
     private async Task<(EntityUid Machine, Dictionary<int, EntityUid> Beakers)> Setup(
         Dictionary<int, Solution> contents)
     {
-        var server = Pair.Server;
-        var entMan = server.EntMan;
-        var slots = entMan.System<ItemSlotsSystem>();
-        var solutions = entMan.System<SharedSolutionContainerSystem>();
-
         var map = await Pair.CreateTestMap();
         var uid = EntityUid.Invalid;
         var beakers = new Dictionary<int, EntityUid>();
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            uid = entMan.SpawnAtPosition(Machine, map.GridCoords);
+            uid = SEntMan.SpawnAtPosition(Machine, map.GridCoords);
             // these tests aren't about the power grid
-            entMan.RemoveComponent<ApcPowerReceiverComponent>(uid);
+            SEntMan.RemoveComponent<ApcPowerReceiverComponent>(uid);
+            _machine = SEntMan.GetNetEntity(uid);
 
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
 
             foreach (var (reservoir, fill) in contents)
             {
-                var beaker = entMan.SpawnAtPosition(Beaker, map.GridCoords);
-                Assert.That(slots.TryInsert(uid, comp.SlotId(reservoir), beaker, null),
+                var beaker = SEntMan.SpawnAtPosition(Beaker, map.GridCoords);
+                Assert.That(_slots.TryInsert(uid, comp.SlotId(reservoir), beaker, null),
                     $"Failed to put a beaker in reservoir {reservoir}");
 
                 if (fill.Volume > FixedPoint2.Zero)
                 {
-                    Assert.That(solutions.TryGetFitsInDispenser(beaker, out var soln, out _));
-                    solutions.AddSolution(soln.Value, fill);
+                    Assert.That(_solutions.TryGetFitsInDispenser(beaker, out var soln, out _));
+                    _solutions.AddSolution(soln.Value, fill);
                 }
 
                 beakers[reservoir] = beaker;
             }
+
+            // the ui only opens for an attached player, and the machine has to be in its view for the
+            // client to ever hear about it
+            var player = SEntMan.SpawnAtPosition(Player, map.GridCoords);
+            Server.PlayerMan.SetAttachedEntity(ServerSession!, player);
         });
+
+        await RunTicksSync(15);
+
+        await Server.WaitPost(() => _sUi.OpenUi(uid, ChemiCompilerUiKey.Key, ServerSession!));
+
+        await RunTicksSync(15);
 
         return (uid, beakers);
     }
 
     /// <summary>
-    /// Saves a program into slot 1 and starts it, without waiting for it to finish.
+    /// Sends a message from the client's interface, the way pressing a button in it would.
+    /// </summary>
+    private async Task SendBui(BoundUserInterfaceMessage msg)
+    {
+        await Client.WaitAssertion(() =>
+        {
+            var clientUid = CEntMan.GetEntity(_machine);
+            Assert.That(CEntMan.TryGetComponent<UserInterfaceComponent>(clientUid, out var ui),
+                "Machine has no user interface component on the client");
+            Assert.That(ui!.ClientOpenInterfaces.TryGetValue(ChemiCompilerUiKey.Key, out var bui),
+                "The ChemiCompiler interface is not open on the client");
+
+            bui!.SendMessage(msg);
+        });
+    }
+
+    /// <summary>
+    /// Saves a program into slot 1 through the interface and runs it, without waiting for it to finish.
     /// </summary>
     private async Task Start(
         EntityUid uid,
@@ -99,37 +140,41 @@ public sealed class ChemiCompilerTest : GameTest
         int? maxInstructions = null,
         TimeSpan? maxRuntime = null)
     {
-        var server = Pair.Server;
-        var entMan = server.EntMan;
+        Assert.That(ChemFuck.BuildJumpTable(program), Is.Not.Null, "Program has unbalanced brackets");
 
-        await server.WaitAssertion(() =>
+        await SendBui(new ChemiCompilerSaveMessage(0, program));
+        await RunTicksSync(5);
+
+        await Server.WaitAssertion(() =>
         {
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
-            comp.Programs[0] = program;
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            Assert.That(comp.Programs[0], Is.EqualTo(program), "The save message never reached the machine");
+
+            // neither limit has a button in the interface
             if (maxInstructions is { } max)
                 comp.MaxInstructions = max;
             if (maxRuntime is { } runtime)
                 comp.MaxRuntime = runtime;
-
-            var jumps = ChemFuck.BuildJumpTable(program);
-            Assert.That(jumps, Is.Not.Null, "Program has unbalanced brackets");
-
-            // starting through the UI would need an actor with the window open, so start it directly
-            var active = entMan.AddComponent<ActiveChemiCompilerComponent>(uid);
-            active.Program = program;
-            active.JumpTable = jumps!;
-            // mirror what the run message does, or the machine starts with a deadline far in the past
-            var now = server.ResolveDependency<IGameTiming>().CurTime;
-            active.Started = now;
-            active.NextStep = now;
         });
+
+        await SendBui(new ChemiCompilerRunMessage(0));
+
+        // tick one at a time, since everything after this is timed from the moment the program started
+        var running = false;
+        for (var i = 0; i < 20 && !running; i++)
+        {
+            await RunTicksSync(1);
+            await Server.WaitPost(() => running = SEntMan.HasComponent<ActiveChemiCompilerComponent>(uid));
+        }
+
+        Assert.That(running, "The run message never started the program");
     }
 
     /// <summary>
     /// True if the machine is still working through a program.
     /// </summary>
     private bool IsRunning(EntityUid uid)
-        => Pair.Server.EntMan.HasComponent<ActiveChemiCompilerComponent>(uid);
+        => SEntMan.HasComponent<ActiveChemiCompilerComponent>(uid);
 
     /// <summary>
     /// Saves a program into slot 1, runs it, and waits for it to stop.
@@ -138,25 +183,18 @@ public sealed class ChemiCompilerTest : GameTest
     {
         await Start(uid, program, maxInstructions);
 
-        var server = Pair.Server;
-        var entMan = server.EntMan;
+        await RunSeconds(seconds);
+        await RunTicksSync(1);
 
-        await Pair.RunSeconds(seconds);
-        await Pair.RunTicksSync(1);
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            Assert.That(entMan.HasComponent<ActiveChemiCompilerComponent>(uid), Is.False,
+            Assert.That(IsRunning(uid), Is.False,
                 "Program was still running after it should have finished");
         });
     }
 
     private FixedPoint2 Quantity(EntityUid beaker, ProtoId<ReagentPrototype> reagent)
-    {
-        var entMan = Pair.Server.EntMan;
-        var solutions = entMan.System<SharedSolutionContainerSystem>();
-        return solutions.GetTotalPrototypeQuantity(beaker, reagent);
-    }
+        => _solutions.GetTotalPrototypeQuantity(beaker, reagent);
 
     /// <summary>
     /// The registers plus @ should move exactly the amount asked for, from the reservoir asked for.
@@ -173,7 +211,7 @@ public sealed class ChemiCompilerTest : GameTest
         // cell0 = 1 -> sx, cell1 = 9 -> tx, cell2 = 13 -> ax, then move
         await Run(uid, $"+}}>{Count(9)})>{Count(13)}'@");
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
@@ -200,7 +238,7 @@ public sealed class ChemiCompilerTest : GameTest
         // cell2 counts down from 5 adding 2 to cell3 each time, leaving 10 in cell3 for the amount register
         await Run(uid, $"+}}>{Count(9)})>{Count(5)}[->++<]>'@");
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(Quantity(beakers[9], Water), Is.EqualTo(FixedPoint2.New(10)),
                 "Loop did not build an amount of 10");
@@ -221,15 +259,15 @@ public sealed class ChemiCompilerTest : GameTest
             [9] = new Solution(),
         });
 
-        // 10 sulfur, 20 oxygen and 10 hydrogen into r9, which is the 1:2:1 sulfuric acid recipe.
+        // 10 sulfur, 20 oxygen and 10 hydrogen into r9, the 1:2:1 sulfuric acid recipe.
         // after the first move sx is in cell0 and ax is in cell2, so the rest just adjusts those two cells.
         var sulfur = $"+}}>{Count(9)})>{Count(10)}'@";
         var oxygen = $"<<+}}>>{Count(10)}'@"; // sx 1 -> 2, ax 10 -> 20
         var hydrogen = $"<<+}}>>{new string('-', 10)}'@"; // sx 2 -> 3, ax 20 -> 10
 
-        await Run(uid, sulfur + oxygen + hydrogen, seconds: 15f);
+        await Run(uid, $"{sulfur}{oxygen}{hydrogen}", seconds: 15f);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(Quantity(beakers[9], SulfuricAcid), Is.GreaterThan(FixedPoint2.Zero),
                 "No sulfuric acid was produced in the mixing reservoir");
@@ -247,21 +285,19 @@ public sealed class ChemiCompilerTest : GameTest
             [1] = new Solution(Water, FixedPoint2.New(50)),
         });
 
-        // sx = 1, tx = 0, ax = 100, so 373K. 50u of water needs ~4000J, which at the hotplate's 160J/s is ~25s
+        // sx = 1, tx = 0, ax = 100, so 373K. 50u of water needs ~4000J, which at 160J/s is ~25s
         await Run(uid, $"+}}>)>{Count(100)}'$", seconds: 40f);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            var solutions = Pair.Server.EntMan.System<SharedSolutionContainerSystem>();
-            Assert.That(solutions.TryGetFitsInDispenser(beakers[1], out _, out var solution));
+            Assert.That(_solutions.TryGetFitsInDispenser(beakers[1], out _, out var solution));
             Assert.That(solution.Temperature, Is.EqualTo(373f).Within(0.5f),
                 "Heat instruction did not reach the temperature the registers asked for");
         });
     }
 
     /// <summary>
-    /// Heating has to cost the same energy a hotplate would, so automating chemistry doesn't also make it
-    /// faster than doing it by hand.
+    /// Heating has to cost the same energy a hotplate would, so automating chemistry isn't also faster.
     /// </summary>
     [Test]
     public async Task HeatingIsNoFasterThanAHotplate()
@@ -271,43 +307,27 @@ public sealed class ChemiCompilerTest : GameTest
             [1] = new Solution(Water, FixedPoint2.New(50)),
         });
 
-        var server = Pair.Server;
-        var entMan = server.EntMan;
-        var solutions = entMan.System<SharedSolutionContainerSystem>();
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            // the machine must be rated to exactly what a hotplate does, not something quietly better
-            var protoMan = server.ResolveDependency<IPrototypeManager>();
-            var compFactory = server.ResolveDependency<IComponentFactory>();
-            var hotplate = protoMan.Index(Hotplate);
-            Assert.That(hotplate.TryComp<SolutionHeaterComponent>(out var heater, compFactory),
+            var hotplate = SProtoMan.Index(Hotplate);
+            Assert.That(hotplate.TryComp<SolutionHeaterComponent>(out var heater, SEntMan.ComponentFactory),
                 "The hotplate prototype no longer has a SolutionHeater to compare against");
 
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
             Assert.That(comp.HeatPerSecond, Is.EqualTo(heater!.HeatPerSecond),
                 "The ChemiCompiler heats at a different rate to a hotplate");
         });
 
-        // start heating 50u of water to 373K. that's ~50 J/K * ~80K = ~4000J, so ~25s at 160 J/s
-        await server.WaitAssertion(() =>
-        {
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
-            var program = $"+}}>)>{Count(100)}'$";
-            comp.Programs[0] = program;
-
-            var active = entMan.AddComponent<ActiveChemiCompilerComponent>(uid);
-            active.Program = program;
-            active.JumpTable = ChemFuck.BuildJumpTable(program)!;
-        });
+        // heat 50u of water to 373K: ~50 J/K * ~80K = ~4000J, so ~25s at 160 J/s
+        await Start(uid, $"+}}>)>{Count(100)}'$");
 
         // a third of the way in it must be under way but nowhere near done
-        await Pair.RunSeconds(10f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(10f);
+        await RunTicksSync(1);
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            Assert.That(solutions.TryGetFitsInDispenser(beakers[1], out _, out var solution));
+            Assert.That(_solutions.TryGetFitsInDispenser(beakers[1], out _, out var solution));
             Assert.Multiple(() =>
             {
                 Assert.That(solution!.Temperature, Is.GreaterThan(300f),
@@ -315,16 +335,15 @@ public sealed class ChemiCompilerTest : GameTest
                 Assert.That(solution.Temperature, Is.LessThan(360f),
                     "Heating got most of the way there far quicker than a hotplate would");
             });
-            Assert.That(entMan.HasComponent<ActiveChemiCompilerComponent>(uid),
-                "The program finished before the heating could have");
+            Assert.That(IsRunning(uid), "The program finished before the heating could have");
         });
 
-        await Pair.RunSeconds(30f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(30f);
+        await RunTicksSync(1);
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            Assert.That(solutions.TryGetFitsInDispenser(beakers[1], out _, out var solution));
+            Assert.That(_solutions.TryGetFitsInDispenser(beakers[1], out _, out var solution));
             Assert.That(solution!.Temperature, Is.EqualTo(373f).Within(0.5f),
                 "Heating never reached the target temperature");
         });
@@ -344,7 +363,7 @@ public sealed class ChemiCompilerTest : GameTest
         // sx = 1, tx = 13, ax = 30
         await Run(uid, $"+}}>{Count(13)})>{Count(30)}'@");
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(20)),
                 "Ejection port did not discard exactly what it was given");
@@ -362,22 +381,26 @@ public sealed class ChemiCompilerTest : GameTest
             [1] = new Solution(Water, FixedPoint2.New(50)),
         });
 
+        var pills = 0;
+        await Server.WaitAssertion(() =>
+        {
+            // other tests in the run may have left pills lying around, so only the difference matters
+            pills = SEntMan.Count<PillComponent>();
+
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            Assert.That(_materials.TryChangeMaterialAmount(uid, comp.VialMaterial, comp.VialGlassCost),
+                "Failed to load the machine with glass for the vial");
+        });
+
         // sx = 1, tx = 11, ax = 30. the dosage limit is 20, so that's two pills
         await Run(uid, $"+}}>{Count(11)})>{Count(30)}'@");
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            var entMan = Pair.Server.EntMan;
-            var pills = 0;
-            var query = entMan.EntityQueryEnumerator<PillComponent>();
-            while (query.MoveNext(out _, out _))
-            {
-                pills++;
-            }
-
             Assert.Multiple(() =>
             {
-                Assert.That(pills, Is.EqualTo(2), "Pill generator did not split 30u across two pills");
+                Assert.That(SEntMan.Count<PillComponent>() - pills, Is.EqualTo(2),
+                    "Pill generator did not split 30u across two pills");
                 Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(20)),
                     "Pill generator did not take 30u from the source reservoir");
             });
@@ -386,10 +409,47 @@ public sealed class ChemiCompilerTest : GameTest
         // sx = 1, tx = 12, ax = 10
         await Run(uid, $"+}}>{Count(12)})>{Count(10)}'@");
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(10)),
-                "Vial generator did not take 10u from the source reservoir");
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            Assert.Multiple(() =>
+            {
+                Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(10)),
+                    "Vial generator did not take 10u from the source reservoir");
+                Assert.That(_materials.GetMaterialAmount(uid, comp.VialMaterial), Is.Zero,
+                    "Vial generator did not spend the glass it was loaded with");
+            });
+        });
+    }
+
+    /// <summary>
+    /// The vial generator has to fail without glass, and give the reagents back when it does.
+    /// </summary>
+    [Test]
+    public async Task VialGeneratorNeedsGlass()
+    {
+        var (uid, beakers) = await Setup(new()
+        {
+            [1] = new Solution(Water, FixedPoint2.New(50)),
+        });
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(SEntMan.HasComponent<MaterialStorageComponent>(uid),
+                "The machine has nowhere to keep glass, so this test proves nothing");
+
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            Assert.That(_materials.GetMaterialAmount(uid, comp.VialMaterial), Is.Zero,
+                "The machine started with glass in it");
+        });
+
+        // sx = 1, tx = 12, ax = 10, with nothing to make the vial out of
+        await Run(uid, $"+}}>{Count(12)})>{Count(10)}'@");
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(50)),
+                "A vial was made with no glass loaded, or the reagents were not given back");
         });
     }
 
@@ -411,7 +471,7 @@ public sealed class ChemiCompilerTest : GameTest
         // sx = 1, tx = 9, ax = 10, then walk back to a cell holding 1 so # takes the first reagent
         await Run(uid, $"+}}>{Count(9)})>{Count(10)}'<<#");
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             var water = Quantity(beakers[9], Water);
             var sulfur = Quantity(beakers[9], Sulfur);
@@ -420,7 +480,6 @@ public sealed class ChemiCompilerTest : GameTest
             {
                 Assert.That(water + sulfur, Is.EqualTo(FixedPoint2.New(10)),
                     "Isolate did not move exactly 10u");
-                // whichever reagent is listed first, only that one should have moved
                 Assert.That(water == FixedPoint2.Zero || sulfur == FixedPoint2.Zero,
                     "Isolate moved more than one kind of reagent");
             });
@@ -428,8 +487,7 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
-    /// Instructions have to cost time. Without this the machine finishes any program in the tick you start
-    /// it, which makes it strictly better than a chemist at everything.
+    /// Instructions have to cost time, or the machine finishes any program in the tick you start it.
     /// </summary>
     [Test]
     public async Task InstructionsTakeTime()
@@ -439,27 +497,26 @@ public sealed class ChemiCompilerTest : GameTest
         // 100 increments at the fast tier is about two seconds of work
         await Start(uid, Count(100));
 
-        await Pair.RunSeconds(1f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(1f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.True,
                 "A hundred instructions finished in under a second, so they are effectively free");
         });
 
-        await Pair.RunSeconds(4f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(4f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.False, "The program never finished");
         });
     }
 
     /// <summary>
-    /// Touching a beaker has to cost much more than shuffling numbers around, since that is the part that
-    /// decides how fast the machine can actually do chemistry.
+    /// Touching a beaker has to cost much more than shuffling numbers around.
     /// </summary>
     [Test]
     public async Task PhysicalOperationsCostMore()
@@ -474,38 +531,37 @@ public sealed class ChemiCompilerTest : GameTest
         const string registersOnly = "+}>+++++++++)>++++++++++'";
 
         await Start(uid, registersOnly);
-        await Pair.RunSeconds(1.5f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(1.5f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.False,
                 "Setting registers alone took over a second and a half, so the cheap tiers are not cheap");
         });
 
         // the exact same work plus three transfers, which should add about another second and a half
-        await Start(uid, registersOnly + "@@@");
-        await Pair.RunSeconds(1.5f);
-        await Pair.RunTicksSync(1);
+        await Start(uid, $"{registersOnly}@@@");
+        await RunSeconds(1.5f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.True,
                 "Three transfers finished as quickly as the registers alone, so they cost nothing extra");
         });
 
-        await Pair.RunSeconds(5f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(5f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.False, "The transfers never finished");
         });
     }
 
     /// <summary>
-    /// Doing nothing on purpose still has to cost the slow tier, which is the only reason the instruction
-    /// exists. It does no work, so nothing but the delay distinguishes it from a no-op.
+    /// Doing nothing on purpose still has to cost the slow tier, which is the only reason the instruction exists.
     /// </summary>
     [Test]
     public async Task NopCostsTheSlowTier()
@@ -514,38 +570,37 @@ public sealed class ChemiCompilerTest : GameTest
 
         // twenty fast instructions, about 0.4s
         await Start(uid, Count(20));
-        await Pair.RunSeconds(0.8f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(0.8f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.False,
                 "Twenty fast instructions took longer than expected, so this test proves nothing");
         });
 
         // the same work plus one nop, which should push it past a second on its own
-        await Start(uid, Count(20) + "*");
-        await Pair.RunSeconds(0.8f);
-        await Pair.RunTicksSync(1);
+        await Start(uid, $"{Count(20)}*");
+        await RunSeconds(0.8f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.True,
                 "A nop cost no more than a fast instruction, so it is in the wrong speed tier");
         });
 
-        await Pair.RunSeconds(2f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(2f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.False, "The nop never finished");
         });
     }
 
     /// <summary>
-    /// The runtime cap, not the instruction count, is what stops a stuck program now that instructions are
-    /// slow enough that the old limit would take hours to reach.
+    /// The runtime cap, not the instruction count, is what stops a stuck program.
     /// </summary>
     [Test]
     public async Task RuntimeLimitHaltsStuckPrograms()
@@ -554,16 +609,15 @@ public sealed class ChemiCompilerTest : GameTest
 
         await Start(uid, "+[]", maxRuntime: TimeSpan.FromSeconds(3));
 
-        await Pair.RunSeconds(8f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(8f);
+        await RunTicksSync(1);
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            var entMan = Pair.Server.EntMan;
             Assert.That(IsRunning(uid), Is.False, "A stuck program outlived its runtime limit");
 
             // it should be nowhere near the instruction limit, proving time is what stopped it
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
             Assert.That(comp.MaxInstructions, Is.GreaterThan(1000),
                 "This test only means something while the instruction limit is the looser of the two");
         });
@@ -585,48 +639,21 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
-    /// The interface has to actually open on the client, which is the only thing that checks the BUI prototype
-    /// points at a real class and that the window can be built.
+    /// Checks the BUI prototype points at a real class and that the window can be built.
     /// </summary>
     [Test]
     public async Task InterfaceOpensOnClient()
     {
-        var (uid, _) = await Setup(new()
+        await Setup(new()
         {
             [1] = new Solution(Water, FixedPoint2.New(10)),
         });
 
-        var server = Pair.Server;
-        var netEnt = default(NetEntity);
-
-        await server.WaitAssertion(() =>
-        {
-            var entMan = server.EntMan;
-
-            // put the player next to the machine so it's actually in view, otherwise the client never hears about it
-            var coords = entMan.GetComponent<TransformComponent>(uid).Coordinates;
-            var player = entMan.SpawnAtPosition("MobHuman", coords);
-            server.PlayerMan.SetAttachedEntity(ServerSession!, player);
-
-            netEnt = entMan.GetNetEntity(uid);
-        });
-
-        await Pair.RunTicksSync(15);
-
-        await server.WaitAssertion(() =>
-        {
-            var ui = server.EntMan.System<SharedUserInterfaceSystem>();
-            ui.OpenUi(uid, ChemiCompilerUiKey.Key, ServerSession!);
-        });
-
-        await Pair.RunTicksSync(15);
-
         await Client.WaitAssertion(() =>
         {
-            var entMan = Client.EntMan;
-            var clientUid = entMan.GetEntity(netEnt);
+            var clientUid = CEntMan.GetEntity(_machine);
 
-            Assert.That(entMan.TryGetComponent<UserInterfaceComponent>(clientUid, out var ui),
+            Assert.That(CEntMan.TryGetComponent<UserInterfaceComponent>(clientUid, out var ui),
                 "Machine has no user interface component on the client");
             Assert.That(ui!.ClientOpenInterfaces.TryGetValue(ChemiCompilerUiKey.Key, out var bui),
                 "The ChemiCompiler interface did not open on the client");
@@ -636,96 +663,68 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
-    /// Putting a beaker in must not blank out the saved programs on the client. Inserting is predicted, so the
-    /// client also handles the container event, and it has no idea what the programs are.
+    /// Inserting is predicted, so the client also handles the container event and must not blank the programs
+    /// it has no idea about.
     /// </summary>
     [Test]
     public async Task InsertingABeakerKeepsSavedPrograms()
     {
         var (uid, _) = await Setup(new());
 
-        var server = Pair.Server;
-        var entMan = server.EntMan;
-        var netEnt = default(NetEntity);
+        await SendBui(new ChemiCompilerSaveMessage(0, "+++"));
+        await RunTicksSync(15);
 
-        await server.WaitAssertion(() =>
+        await AssertSlotFilled("before inserting a beaker");
+
+        await Server.WaitAssertion(() =>
         {
-            var coords = entMan.GetComponent<TransformComponent>(uid).Coordinates;
-            var player = entMan.SpawnAtPosition("MobHuman", coords);
-            server.PlayerMan.SetAttachedEntity(ServerSession!, player);
-            netEnt = entMan.GetNetEntity(uid);
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            var beaker = SEntMan.SpawnAtPosition(Beaker, SEntMan.GetComponent<TransformComponent>(uid).Coordinates);
+            Assert.That(_slots.TryInsert(uid, comp.SlotId(1), beaker, null));
         });
 
-        await Pair.RunTicksSync(15);
+        await RunTicksSync(15);
 
-        await server.WaitAssertion(() =>
-        {
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
-            comp.Programs[0] = "+++";
-
-            entMan.System<SharedUserInterfaceSystem>().OpenUi(uid, ChemiCompilerUiKey.Key, ServerSession!);
-            entMan.System<ChemiCompilerSystem>().UpdateUi((uid, comp));
-        });
-
-        await Pair.RunTicksSync(15);
-
-        AssertSlotFilled(netEnt, "before inserting a beaker");
-
-        // now put a beaker in, which is what used to wipe the interface
-        await server.WaitAssertion(() =>
-        {
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
-            var beaker = entMan.SpawnAtPosition(Beaker, entMan.GetComponent<TransformComponent>(uid).Coordinates);
-            Assert.That(entMan.System<ItemSlotsSystem>().TryInsert(uid, comp.SlotId(1), beaker, null));
-        });
-
-        await Pair.RunTicksSync(15);
-
-        AssertSlotFilled(netEnt, "after inserting a beaker");
+        await AssertSlotFilled("after inserting a beaker");
     }
 
-    private void AssertSlotFilled(NetEntity netEnt, string when)
+    private async Task AssertSlotFilled(string when)
     {
-        var entMan = Client.EntMan;
-        var ui = entMan.System<SharedUserInterfaceSystem>();
-        var clientUid = entMan.GetEntity(netEnt);
+        await Client.WaitAssertion(() =>
+        {
+            var clientUid = CEntMan.GetEntity(_machine);
 
-        Assert.That(ui.TryGetUiState<ChemiCompilerState>(clientUid, ChemiCompilerUiKey.Key, out var state),
-            $"The client had no interface state {when}");
-        Assert.That(state!.Filled[0], Is.True,
-            $"The client forgot that slot 1 holds a program {when}");
+            Assert.That(_cUi.TryGetUiState<ChemiCompilerState>(clientUid, ChemiCompilerUiKey.Key, out var state),
+                $"The client had no interface state {when}");
+            Assert.That(state!.Filled[0], Is.True,
+                $"The client forgot that slot 1 holds a program {when}");
+        });
     }
 
     /// <summary>
-    /// Clicking the machine with a beaker should fill the next free reservoir, not swap with whatever is
-    /// in the first one. Item slots swap by default, which is wrong for a machine with ten of them.
+    /// Item slots swap by default, which on a machine with ten of them means clicking never fills the second.
     /// </summary>
     [Test]
     public async Task BeakersFillTheNextFreeReservoir()
     {
-        var server = Pair.Server;
-        var entMan = server.EntMan;
-        var slots = entMan.System<ItemSlotsSystem>();
-
         var map = await Pair.CreateTestMap();
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            var uid = entMan.SpawnAtPosition(Machine, map.GridCoords);
-            var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
+            var uid = SEntMan.SpawnAtPosition(Machine, map.GridCoords);
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
 
             // fill them one at a time the way the interact handler does, and check nothing gets displaced
             for (var i = 1; i <= ChemiCompilerComponent.Reservoirs; i++)
             {
-                var beaker = entMan.SpawnAtPosition(Beaker, map.GridCoords);
-                Assert.That(slots.TryGetSlot(uid, comp.SlotId(i), out var slot));
-                Assert.That(slots.CanInsert(uid, beaker, null, slot!, slot!.Swap), Is.True,
+                var beaker = SEntMan.SpawnAtPosition(Beaker, map.GridCoords);
+                Assert.That(_slots.TryGetSlot(uid, comp.SlotId(i), out var slot));
+                Assert.That(_slots.CanInsert(uid, beaker, null, slot!, slot!.Swap), Is.True,
                     $"Reservoir {i} would not accept a beaker while empty");
 
-                slots.TryInsert(uid, comp.SlotId(i), beaker, null);
+                _slots.TryInsert(uid, comp.SlotId(i), beaker, null);
 
-                // now that it's full it must refuse, so the interact handler moves on to the next reservoir
-                Assert.That(slots.CanInsert(uid, entMan.SpawnAtPosition(Beaker, map.GridCoords), null, slot, slot.Swap),
+                Assert.That(_slots.CanInsert(uid, SEntMan.SpawnAtPosition(Beaker, map.GridCoords), null, slot, slot.Swap),
                     Is.False,
                     $"Reservoir {i} still accepted a beaker while full, so clicking would swap instead of filling the next one");
             }
@@ -733,73 +732,66 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
-    /// Runs a program, waits, and reports the line the machine has built up but not said yet.
+    /// Runs a program and reports the line the machine has built up but not said yet.
     /// The program must still be running at that point, so end it with nops.
     /// </summary>
     private async Task<string> PendingOutput(EntityUid uid, string program, float seconds)
     {
         await Start(uid, program);
-        await Pair.RunSeconds(seconds);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(seconds);
+        await RunTicksSync(1);
 
         var buffer = string.Empty;
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.That(IsRunning(uid), Is.True,
                 "The program finished before its buffer could be looked at, so this proves nothing");
-            buffer = Pair.Server.EntMan.GetComponent<ActiveChemiCompilerComponent>(uid).Output;
+            buffer = SEntMan.GetComponent<ActiveChemiCompilerComponent>(uid).Output;
         });
 
         // let it run itself out so the next program can start
-        await Pair.RunSeconds(8f);
-        await Pair.RunTicksSync(1);
+        await RunSeconds(8f);
+        await RunTicksSync(1);
         return buffer;
     }
 
     /// <summary>
-    /// The . instruction builds up a line, and a newline is what sends it. Anything still pending gets said
-    /// when the program halts.
+    /// The . instruction builds up a line and a newline sends it. Anything pending is said when the program halts.
     /// </summary>
     [Test]
     public async Task OutputBuffersUntilNewline()
     {
         var (uid, _) = await Setup(new());
 
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            // without this the machine has no voice and the bubble can never appear
-            Assert.That(Pair.Server.EntMan.HasComponent<SpeechComponent>(uid), Is.True,
+            Assert.That(SEntMan.HasComponent<SpeechComponent>(uid), Is.True,
                 "The machine can't speak, so . has nowhere to put its output");
         });
 
         // 'A' is 65, then bump to 'B'. the nops keep the program alive while the buffer is inspected.
-        const string write = "." + "+" + ".";
+        const string write = ".+.";
         var nops = new string('*', 4);
 
-        var pending = await PendingOutput(uid, Count(65) + write + nops, seconds: 3f);
+        var pending = await PendingOutput(uid, $"{Count(65)}{write}{nops}", seconds: 3f);
         Assert.That(pending, Is.EqualTo("AB"), "Characters written with . did not build up into a line");
 
         // same again, but a newline (10) between the writing and the nops should have sent the line
-        var flushed = await PendingOutput(uid, Count(65) + write + ">" + Count(10) + "." + nops, seconds: 3f);
+        var flushed = await PendingOutput(uid, $"{Count(65)}{write}>{Count(10)}.{nops}", seconds: 3f);
         Assert.That(flushed, Is.Empty, "A newline did not send the line and clear the buffer");
     }
 
     /// <summary>
-    /// Every sound has to point at a real file and be loud enough to actually hear.
-    /// Volume here is gain = 10^(dB/10), not the usual 10^(dB/20), so the numbers drop away much faster than
-    /// they look like they should — the machine has already been silently inaudible once because of it.
+    /// Sounds must exist and be audible. Gain is 10^(dB/10), so -16dB is near silent.
     /// </summary>
     [Test]
     public async Task SoundsAreAudibleAndExist()
     {
         var (uid, _) = await Setup(new());
 
-        var server = Pair.Server;
-        var resMan = server.ResolveDependency<IResourceManager>();
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
-            var comp = server.EntMan.GetComponent<ChemiCompilerComponent>(uid);
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
 
             var sounds = new (string Name, SoundSpecifier Sound)[]
             {
@@ -817,7 +809,7 @@ public sealed class ChemiCompilerTest : GameTest
                     Assert.That(sound, Is.TypeOf<SoundPathSpecifier>(), $"The {name} sound is not a file path");
 
                     var path = ((SoundPathSpecifier) sound).Path;
-                    Assert.That(resMan.ContentFileExists(path), Is.True,
+                    Assert.That(_sResources.ContentFileExists(path), Is.True,
                         $"The {name} sound points at {path}, which does not exist");
 
                     var gain = SharedAudioSystem.VolumeToGain(sound.Params.Volume);
@@ -829,32 +821,24 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
-    /// The guidebook entry has to parse. The upstream test that checks every guide entry is disabled,
-    /// and this document is full of square brackets that the markup parser would otherwise choke on.
+    /// The upstream test that checks every guide entry is disabled, and this document is full of brackets.
     /// </summary>
     [Test]
     public async Task GuidebookEntryParses()
     {
-        var client = Client;
-        await client.WaitIdleAsync();
-
-        var protoMan = client.ResolveDependency<IPrototypeManager>();
-        var resMan = client.ResolveDependency<IResourceManager>();
-        var parser = client.ResolveDependency<DocumentParsingManager>();
-
-        await client.WaitAssertion(() =>
+        await Client.WaitAssertion(() =>
         {
-            var proto = protoMan.Index(GuideEntry);
-            using var reader = resMan.ContentFileReadText(proto.Text);
+            var proto = CProtoMan.Index(GuideEntry);
+            using var reader = _cResources.ContentFileReadText(proto.Text);
             var text = reader.ReadToEnd();
 
             Assert.Multiple(() =>
             {
-                Assert.That(parser.TryAddMarkup(new Document(), text),
+                Assert.That(_parser.TryAddMarkup(new Document(), text),
                     "The ChemiCompiler guidebook entry could not be parsed");
 
-                // guidebook documents look like XML but aren't, so entities render as literal "&gt;" to the player.
-                // angle brackets have to be written as \> and \<, which is easy to forget in a document full of them.
+                // guidebook documents look like XML but aren't, so entities render verbatim.
+                // angle brackets have to be written as \> and \<.
                 foreach (var entity in new[] { "&gt;", "&lt;", "&amp;" })
                 {
                     Assert.That(text, Does.Not.Contain(entity),
@@ -870,7 +854,7 @@ public sealed class ChemiCompilerTest : GameTest
     [Test]
     public async Task UnbalancedBracketsAreRejected()
     {
-        await Pair.Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {

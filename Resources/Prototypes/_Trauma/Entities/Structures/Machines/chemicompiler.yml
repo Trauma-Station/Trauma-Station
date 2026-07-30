@@ -4,7 +4,7 @@
 # documented at https://wiki.ss13.co/ChemiCompiler. No Goonstation code or assets were used.
 
 - type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: ChemiCompiler
   name: ChemiCompiler M7
   description: A programmable chemical workbench with ten reservoir slots. Does exactly what your program says, which is rarely what you meant.
@@ -64,6 +64,12 @@
       reservoir8: *reservoir
       reservoir9: *reservoir
       reservoir10: *reservoir
+  # glass for the vial generator
+  - type: MaterialStorage
+    materialWhiteList: [ Glass ]
+    whitelist:
+      tags:
+      - Sheet
   - type: WiresPanel
   - type: Machine
     board: ChemiCompilerMachineCircuitboard
@@ -94,19 +100,6 @@
         - MachineMask
         layer:
         - MachineLayer
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalGlassBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: GuideHelp
     guides:
     - ChemiCompiler

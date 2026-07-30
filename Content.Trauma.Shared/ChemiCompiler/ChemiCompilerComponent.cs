@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
+using Content.Shared.Materials;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.ChemiCompiler;
@@ -140,6 +141,19 @@ public sealed partial class ChemiCompilerComponent : Component
     /// </summary>
     [DataField]
     public EntProtoId VialPrototype = "ChemistryEmptyVial";
+
+    /// <summary>
+    /// What the vial generator makes vials out of.
+    /// </summary>
+    [DataField]
+    public ProtoId<MaterialPrototype> VialMaterial = "Glass";
+
+    /// <summary>
+    /// How much <see cref="VialMaterial"/> a single vial costs.
+    /// The vial's own composition, so a machine full of glass gives back exactly what was put in it.
+    /// </summary>
+    [DataField]
+    public int VialGlassCost = 100;
 
     /// <summary>
     /// How much heat <see cref="ChemFuck.Heat"/> can push into a reservoir per second, in joules.

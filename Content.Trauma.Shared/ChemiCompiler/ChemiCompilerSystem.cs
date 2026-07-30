@@ -122,7 +122,7 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.StartSound, ent);
         _adminLog.Add(LogType.ChemiCompiler,
             LogImpact.Medium,
-            $"{ToPrettyString(args.Actor):user} ran ChemiCompiler program {args.Slot + 1} ({program.Length} instructions) on {ToPrettyString(ent):machine}");
+            $"{args.Actor:user} ran ChemiCompiler program {args.Slot + 1} ({program.Length} instructions) on {ent:machine}");
 
         UpdateUi(ent);
     }

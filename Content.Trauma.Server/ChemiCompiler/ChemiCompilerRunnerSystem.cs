@@ -14,6 +14,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.Materials;
 using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.ChemiCompiler;
 using Robust.Shared.Audio.Systems;
@@ -25,20 +26,22 @@ namespace Content.Trauma.Server.ChemiCompiler;
 
 /// <summary>
 /// Runs ChemFuck programs on a <see cref="ChemiCompilerComponent"/>, a few instructions per tick.
-/// Server only, because programs and their memory are far too big to network and pills have to be spawned
-/// authoritatively.
+/// Server only, because programs and their memory are far too big to network.
 /// </summary>
 public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ChemiCompilerSystem _compiler = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMaterialStorageSystem _material = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
+
+    [Dependency] private EntityQuery<ChemiCompilerComponent> _query = default!;
+    [Dependency] private EntityQuery<MaterialStorageComponent> _storageQuery = default!;
 
     /// <summary>
     /// What a single instruction did, and so what the machine should do next.
@@ -62,18 +65,12 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
         Wait,
     }
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        // A program can stop five different ways, and two of them live in the shared system where the chat
-        // system isn't available. Hooking the shutdown catches every route with one subscription.
-        SubscribeLocalEvent<ActiveChemiCompilerComponent, ComponentShutdown>(OnActiveShutdown);
-    }
-
     /// <summary>
     /// Says whatever the program had written but not yet finished a line with.
+    /// A program can stop five different ways, and two of them live in the shared system where the chat
+    /// system isn't available. Hooking the shutdown catches every route with one subscription.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnActiveShutdown(Entity<ActiveChemiCompilerComponent> ent, ref ComponentShutdown args)
     {
         // the component also shuts down when the machine itself is being deleted, and a dying entity
@@ -81,7 +78,7 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
         if (TerminatingOrDeleted(ent.Owner))
             return;
 
-        if (!TryComp<ChemiCompilerComponent>(ent, out var comp))
+        if (!_query.TryComp(ent, out var comp))
             return;
 
         Speak((ent.Owner, comp), ent.Comp);
@@ -154,18 +151,14 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
 
         if (_timing.CurTime - active.Started > comp.MaxRuntime)
         {
-            _adminLog.Add(LogType.ChemiCompiler,
-                LogImpact.Low,
-                $"ChemiCompiler {ToPrettyString(ent):machine} ran out of time on program {active.Slot + 1}");
+            Log.Debug($"ChemiCompiler {ToPrettyString(ent)} ran out of time on program {active.Slot + 1}");
             _compiler.Halt(ent, "chemicompiler-halted-timeout");
             return false;
         }
 
         if (++active.Executed > comp.MaxInstructions)
         {
-            _adminLog.Add(LogType.ChemiCompiler,
-                LogImpact.Low,
-                $"ChemiCompiler {ToPrettyString(ent):machine} hit its instruction limit running program {active.Slot + 1}");
+            Log.Debug($"ChemiCompiler {ToPrettyString(ent)} hit its instruction limit running program {active.Slot + 1}");
             _compiler.Halt(ent, "chemicompiler-halted-limit");
             return false;
         }
@@ -370,7 +363,7 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
     /// </summary>
     private TimeSpan HeatDuration(Entity<ChemiCompilerComponent> ent, Solution solution, float target)
     {
-        var energy = solution.GetHeatCapacity(_proto) * MathF.Abs(target - solution.Temperature);
+        var energy = solution.GetHeatCapacity(ProtoMan) * MathF.Abs(target - solution.Temperature);
         var seconds = energy / ent.Comp.HeatPerSecond;
 
         var delay = TimeSpan.FromSeconds(seconds);
@@ -469,7 +462,11 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
                 break;
 
             case ChemiCompilerComponent.TargetVial:
-                MakeVial(ent, split);
+                if (!MakeVial(ent, split))
+                {
+                    Refund(source, split);
+                    return Step.Failed;
+                }
                 break;
 
             case ChemiCompilerComponent.TargetEject:
@@ -519,24 +516,36 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
 
             _adminLog.Add(LogType.ChemiCompiler,
                 LogImpact.Low,
-                $"ChemiCompiler {ToPrettyString(ent):machine} printed {ToPrettyString(pill):pill} {SharedSolutionContainerSystem.ToPrettyString(solution.Comp.Solution)}");
+                $"ChemiCompiler {ent.Owner:machine} printed {pill:pill} {SharedSolutionContainerSystem.ToPrettyString(solution.Comp.Solution)}");
         }
     }
 
     /// <summary>
-    /// Fills a fresh vial with as much as it will hold.
+    /// Fills a fresh vial with as much as it will hold, if there's glass in the machine to make one out of.
     /// </summary>
-    private void MakeVial(Entity<ChemiCompilerComponent> ent, Solution split)
+    /// <returns>False if the machine couldn't afford the glass.</returns>
+    private bool MakeVial(Entity<ChemiCompilerComponent> ent, Solution split)
     {
-        var vial = Spawn(ent.Comp.VialPrototype, Transform(ent).Coordinates);
+        var comp = ent.Comp;
+
+        // no material storage means no glass, so it can't be used as a glass mill either way
+        if (comp.VialGlassCost > 0 &&
+            (!_storageQuery.TryComp(ent, out var storage) ||
+             !_material.TryChangeMaterialAmount(ent.Owner, comp.VialMaterial, -comp.VialGlassCost, storage)))
+        {
+            return false;
+        }
+
+        var vial = Spawn(comp.VialPrototype, Transform(ent).Coordinates);
         if (!_solution.TryGetFitsInDispenser(vial, out var soln, out _))
-            return;
+            return true;
 
         _solution.TryTransferSolution(soln.Value, split, split.Volume);
 
         _adminLog.Add(LogType.ChemiCompiler,
             LogImpact.Low,
-            $"ChemiCompiler {ToPrettyString(ent):machine} filled {ToPrettyString(vial):vial} {SharedSolutionContainerSystem.ToPrettyString(soln.Value.Comp.Solution)}");
+            $"ChemiCompiler {ent.Owner:machine} filled {vial:vial} {SharedSolutionContainerSystem.ToPrettyString(soln.Value.Comp.Solution)}");
+        return true;
     }
 
     /// <summary>
