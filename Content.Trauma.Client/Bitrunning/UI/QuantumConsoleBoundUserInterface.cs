@@ -19,7 +19,6 @@ public sealed class QuantumConsoleBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<QuantumConsoleWindow>();
         _window.OnLoadDomain += id => SendMessage(new QuantumConsoleLoadDomainMessage(id));
-        _window.OnBroadcastToggle += enabled => SendMessage(new QuantumConsoleBroadcastMessage(enabled));
         _window.OnRandomDomain += () => SendMessage(new QuantumConsoleRandomDomainMessage());
         _window.OnStopDomain += () => SendMessage(new QuantumConsoleStopDomainMessage());
         _window.OnRefresh += () => SendMessage(new QuantumConsoleRefreshMessage());

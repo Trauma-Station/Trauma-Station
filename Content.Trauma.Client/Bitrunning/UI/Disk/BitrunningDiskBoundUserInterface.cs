@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 namespace Content.Trauma.Client.Bitrunning.UI.Disk;
 
 [UsedImplicitly]
-public sealed class BitrunningDiskBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class BitrunningDiskBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private BitrunningDiskWindow? _window;
 

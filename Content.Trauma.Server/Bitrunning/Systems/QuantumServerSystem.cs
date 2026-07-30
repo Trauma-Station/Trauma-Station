@@ -6,7 +6,6 @@ using Content.Goobstation.Common.Effects;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Trauma.Server.Bitrunning.Components;
-using Content.Trauma.Server.CloningAppearance.Systems;
 using Content.Server.Actions;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
@@ -20,8 +19,6 @@ using Content.Server.NPC.HTN;
 using Content.Server.Polymorph.Components;
 using Content.Server.Preferences.Managers;
 using Content.Server.Stunnable;
-using Content.Server.SurveillanceCamera;
-using Content.Shared.SurveillanceCamera.Components;
 using Content.Lavaland.Common.Mobs;
 using Content.Trauma.Common.Bitrunning.Components;
 using Content.Trauma.Shared.Bitrunning;
@@ -64,8 +61,11 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Body;
 using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Prototypes;
 
 namespace Content.Trauma.Server.Bitrunning.Systems;
 
@@ -92,9 +92,7 @@ public sealed partial class QuantumServerSystem : EntitySystem
     [Dependency] private BitrunningPointsSystem _bitrunningPoints = default!;
     [Dependency] private ByteforgeSystem _byteforge = default!;
     [Dependency] private BitrunningDiskSystem _bitrunningDisk = default!;
-    [Dependency] private SurveillanceCameraSystem _surveillanceCamera = default!;
     [Dependency] private IServerPreferencesManager _preferences = default!;
-    [Dependency] private CloningAppearanceSystem _cloningAppearance = default!;
     [Dependency] private SparksSystem _sparks = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -102,6 +100,8 @@ public sealed partial class QuantumServerSystem : EntitySystem
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private SharedInternalsSystem _internals = default!;
     [Dependency] private SharedGasTankSystem _gasTank = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private HumanoidProfileSystem _humanoidProfile = default!;
 
     private static readonly EntProtoId ExitBlindnessStatusEffect = "StatusEffectBitrunningExitBlindness";
     private const string ServerSourcePort = "BitrunningServerSource";
@@ -542,7 +542,7 @@ public sealed partial class QuantumServerSystem : EntitySystem
         if (HasComp<InternalsComponent>(avatar) && _internals.FindBestGasTank(avatar) is { } tank)
             _gasTank.ConnectToInternals(tank, user: avatar);
 
-        SetAvatarBroadcastEnabled((avatar, connection), server, server.BroadcastEnabled);
+        // SetAvatarBroadcastEnabled((avatar, connection), server, server.BroadcastEnabled);
         _actions.AddAction(avatar, ref connection.DisconnectActionEntity, connection.DisconnectActionPrototype, avatar);
         var objectivePopupText = server.ObjectiveCompleted
             ? Loc.GetString("bitrunning-objective-completed")
@@ -642,26 +642,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
         return false;
     }
 
-    private void SetAvatarBroadcastEnabled(Entity<AvatarConnectionComponent> avatar, QuantumServerComponent server, bool enabled)
-    {
-        var cameraEntity = avatar.Owner;
-
-        if (!enabled)
-        {
-            RemCompDeferred<SurveillanceCameraComponent>(cameraEntity);
-            RemCompDeferred<DeviceNetworkComponent>(cameraEntity);
-            RemCompDeferred<WirelessNetworkComponent>(cameraEntity);
-            return;
-        }
-
-        EnsureComp<WirelessNetworkComponent>(cameraEntity).Range = server.BroadcastWirelessRange;
-
-        var device = EnsureComp<DeviceNetworkComponent>(cameraEntity);
-        device.NetIdEnum = DeviceNetworkComponent.DeviceNetIdDefaults.Wireless;
-        EnsureComp<SurveillanceCameraComponent>(cameraEntity);
-        _surveillanceCamera.ConfigureCameraNetwork(cameraEntity, "SurveillanceCameraEntertainment", "SurveillanceCamera");
-    }
-
     public void DisconnectAvatar(EntityUid avatarUid, bool harmful)
     {
         if (!TryComp<AvatarConnectionComponent>(avatarUid, out var connection))
@@ -693,9 +673,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
 
         if (podUid != null && TryComp<NetpodComponent>(podUid.Value, out var pod))
         {
-            if (TryComp<SurveillanceCameraComponent>(podUid.Value, out var camera))
-                _surveillanceCamera.ClearActiveViewers(podUid.Value, camera);
-
             EnsureComp<AvatarNavRelayComponent>(podUid.Value).RelayEntity = null;
 
             pod.Occupant = TryComp<NetpodContainerComponent>(podUid.Value, out var containerComp)
@@ -1206,10 +1183,20 @@ public sealed partial class QuantumServerSystem : EntitySystem
     {
         var avatar = !ShouldLoadProfileAvatar(server, user) || !TryGetHumanoidProfile(user, out var profile)
             ? Spawn(server.AvatarPrototype, coordinates)
-            : _cloningAppearance.SpawnProfileEntity(coordinates, profile);
+            : SpawnProfileAvatar(profile, coordinates);
 
         EnsureComp<AntagImmuneComponent>(avatar);
         return avatar;
+    }
+
+    private EntityUid SpawnProfileAvatar(HumanoidCharacterProfile profile, EntityCoordinates coordinates)
+    {
+        var species = ProtoMan.Index<SpeciesPrototype>(profile.Species);
+        var entity = Spawn(species.Prototype, coordinates);
+        _visualBody.ApplyProfileTo(entity, profile);
+        _humanoidProfile.ApplyProfileTo(entity, profile);
+        _metaData.SetEntityName(entity, profile.Name);
+        return entity;
     }
 
     private bool TryGetHumanoidProfile(EntityUid user, out HumanoidCharacterProfile profile)
@@ -1295,23 +1282,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
             return false;
 
         return containerComp.BodyContainer.ContainedEntity == bodyUid;
-    }
-
-    public void SetBroadcastState(EntityUid serverUid, bool enabled)
-    {
-        if (!TryComp<QuantumServerComponent>(serverUid, out var server))
-            return;
-
-        server.BroadcastEnabled = enabled;
-        Dirty(serverUid, server);
-
-        foreach (var avatar in server.ActiveConnections)
-        {
-            if (!TryComp<AvatarConnectionComponent>(avatar, out var connection))
-                continue;
-
-            SetAvatarBroadcastEnabled((avatar, connection), server, enabled);
-        }
     }
 
     public string? GetRandomDomainId(EntityUid serverUid)

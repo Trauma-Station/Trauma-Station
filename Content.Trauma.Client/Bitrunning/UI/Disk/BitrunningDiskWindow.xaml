@@ -2,12 +2,13 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<DefaultWindow xmlns="https://spacestation14.io"
+<controls:FancyWindow xmlns="https://spacestation14.io"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                MinSize="260 200"
                SetSize="320 260"
                Title="{Loc 'bitrunning-disk-ui-title'}">
     <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
         <BoxContainer Name="OptionsContainer" Orientation="Vertical" SeparationOverride="4" Margin="8"/>
     </ScrollContainer>
-</DefaultWindow>
+</controls:FancyWindow>

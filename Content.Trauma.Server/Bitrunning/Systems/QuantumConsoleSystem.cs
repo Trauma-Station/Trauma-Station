@@ -39,7 +39,6 @@ public sealed partial class QuantumConsoleSystem : EntitySystem
         SubscribeLocalEvent<QuantumConsoleComponent, QuantumConsoleRandomDomainMessage>(OnRandomDomain);
         SubscribeLocalEvent<QuantumConsoleComponent, QuantumConsoleStopDomainMessage>(OnStopDomain);
         SubscribeLocalEvent<QuantumConsoleComponent, QuantumConsoleRefreshMessage>(OnRefresh);
-        SubscribeLocalEvent<QuantumConsoleComponent, QuantumConsoleBroadcastMessage>(OnBroadcast);
         SubscribeLocalEvent<QuantumConsoleComponent, NewLinkEvent>(OnNewLink);
         SubscribeLocalEvent<QuantumConsoleComponent, PortDisconnectedEvent>(OnPortDisconnected);
     }
@@ -144,16 +143,6 @@ public sealed partial class QuantumConsoleSystem : EntitySystem
         UpdateUi(ent);
     }
 
-    private void OnBroadcast(Entity<QuantumConsoleComponent> ent, ref QuantumConsoleBroadcastMessage args)
-    {
-        var serverUid = FindServer(ent);
-        if (serverUid == null || !HasComp<QuantumServerComponent>(serverUid))
-            return;
-
-        _server.SetBroadcastState(serverUid.Value, args.Enabled);
-        UpdateUi(ent);
-    }
-
     private void UpdateUi(Entity<QuantumConsoleComponent> ent)
     {
         var serverUid = FindServer(ent);
@@ -170,7 +159,6 @@ public sealed partial class QuantumConsoleSystem : EntitySystem
                 serverPoints: 0,
                 scannerTier: 0,
                 state: BitrunningServerState.Ready,
-                broadcast: false,
                 extremeDifficultyUnlocked: false,
                 cooldownTotalSeconds: 0f,
                 cooldownRemainingSeconds: 0f,
@@ -232,7 +220,6 @@ public sealed partial class QuantumConsoleSystem : EntitySystem
             serverPoints: server.Points,
             scannerTier: server.ScannerTier,
             state: server.State,
-            broadcast: server.BroadcastEnabled,
             extremeDifficultyUnlocked: emagged,
             cooldownTotalSeconds: cooldownTotal,
             cooldownRemainingSeconds: cooldownRemaining,

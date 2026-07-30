@@ -1,9 +1,11 @@
+// <Trauma>
+using Content.Shared.Destructible;
+// <Trauma>
 using Content.Goobstation.Common.Devour;
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Destructible;
+using Content.Shared.Chemistry.EntitySystems; // Goobstation
 using Content.Shared.Devour.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Gibbing;
@@ -27,7 +29,7 @@ public sealed partial class DevourSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!; // Goobstation
-    [Dependency] private SharedDestructibleSystem _destructible = default!; // Orion
+    [Dependency] private SharedDestructibleSystem _destructible = default!; // Trauma
 
     public override void Initialize()
     {
@@ -187,10 +189,8 @@ public sealed partial class DevourSystem : EntitySystem
         if (_whitelistSystem.IsWhitelistPassOrNull(ent.Comp.FoodPreferenceWhitelist, args.Args.Target.Value))
             _bloodstreamSystem.TryAddToBloodstream(ent.Owner, ichorInjection);
 
-        // <Goobstation> voring walls is good for iron intake
         if (_solution.TryGetSolution(args.Args.Target.Value, "food", out _, out var food))
             _bloodstreamSystem.TryAddToBloodstream(ent.Owner, food);
-        // </Goobstation>
         // <Trauma>
 
         _audioSystem.PlayPredicted(ent.Comp.SoundDevour, ent.Owner, ent.Owner);
@@ -211,9 +211,8 @@ public sealed partial class DevourSystem : EntitySystem
 
         // <Goob>
         foreach (var entity in ent.Comp.Stomach.ContainedEntities)
-        {
             RemComp<PreventSelfRevivalComponent>(entity);
-        }
+        // <Goob>
         _containerSystem.EmptyContainer(ent.Comp.Stomach);
     }
 }

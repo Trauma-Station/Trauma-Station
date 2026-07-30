@@ -3,12 +3,12 @@ namespace Content.Shared.DeviceLinking.Events
     public sealed class PortDisconnectedEvent : EntityEventArgs
     {
         public readonly string Port;
-        public readonly EntityUid? RemovedPortUid;
+        public readonly EntityUid? RemovedPortUid; // Trauma
 
-        public PortDisconnectedEvent(string port, EntityUid? removedPortUid = null)
+        public PortDisconnectedEvent(string port, EntityUid? removedPortUid = null) // Trauma: EntityUid? removedPortUid = null
         {
             Port = port;
-            RemovedPortUid = removedPortUid;
+            RemovedPortUid = removedPortUid; // Trauma
         }
     }
 }

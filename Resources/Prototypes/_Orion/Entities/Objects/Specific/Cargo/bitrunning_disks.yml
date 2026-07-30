@@ -13,7 +13,7 @@
   - type: UserInterface
     interfaces:
       enum.BitrunningDiskUiKey.Key:
-        type: BitrunningDiskBoundUserInterface
+        type: BitrunningDiskBUI
 
 - type: entity
   parent: BaseBitrunningDisk

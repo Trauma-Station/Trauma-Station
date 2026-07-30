@@ -6,7 +6,6 @@ using Robust.Shared.Map;
 using System.Runtime.InteropServices;
 // </Trauma>
 using System.Linq;
-using Content.Trauma.Common.Bitrunning.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
@@ -602,30 +601,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
             return;
         }
 
-        // <Trauma>
-        var activeCamera = monitor.ActiveCamera;
-        if (activeCamera is { } activeCameraUid)
-        {
-            EntityUid? activeForUi = activeCameraUid;
-            if (TryComp<AvatarNavRelayComponent>(activeCameraUid, out var relay))
-            {
-                activeForUi = relay.RelayEntity is { } relayUid && Exists(relayUid)
-                    ? relayUid
-                    : null;
-            }
-
-            if (TryComp<NetpodComponent>(activeCameraUid, out var pod) && activeForUi == null)
-            {
-                activeForUi = pod.Avatar is { } avatarUid && Exists(avatarUid)
-                    ? avatarUid
-                    : null;
-            }
-
-            activeCamera = activeForUi;
-        }
-        // <Trauma>
-
-        var state = new SurveillanceCameraMonitorUiState(GetNetEntity(activeCamera), // <Trauma>
+        var state = new SurveillanceCameraMonitorUiState(GetNetEntity(monitor.ActiveCamera), // Goobstation
             monitor.ActiveCameraAddress, monitor.KnownCameras, monitor.KnownMobileCameras); // Goobstation
         _userInterface.SetUiState(uid, SurveillanceCameraMonitorUiKey.Key, state);
     }

@@ -17,7 +17,6 @@ namespace Content.Trauma.Client.Bitrunning.UI;
 public sealed partial class QuantumConsoleWindow : DefaultWindow
 {
     public Action<string>? OnLoadDomain;
-    public Action<bool>? OnBroadcastToggle;
     public Action? OnRandomDomain;
     public Action? OnStopDomain;
     public Action? OnRefresh;
@@ -25,7 +24,7 @@ public sealed partial class QuantumConsoleWindow : DefaultWindow
     private QuantumConsoleBoundUiState? _lastState;
     private BitrunningDifficulty? _selectedDifficulty;
     private string? _expandedDomainId;
-    private bool _updatingToggle;
+    // private bool _updatingToggle;
     private readonly Dictionary<string, DomainRowWidgets> _domainRows = new();
 
     public QuantumConsoleWindow()
@@ -38,13 +37,6 @@ public sealed partial class QuantumConsoleWindow : DefaultWindow
         RandomButton.OnPressed += _ => OnRandomDomain?.Invoke();
         StopButton.OnPressed += _ => OnStopDomain?.Invoke();
         RefreshButton.OnPressed += _ => OnRefresh?.Invoke();
-        BroadcastToggle.OnToggled += args =>
-        {
-            if (_updatingToggle)
-                return;
-
-            OnBroadcastToggle?.Invoke(args.Pressed);
-        };
     }
 
     public void UpdateState(QuantumConsoleBoundUiState state)
@@ -68,10 +60,6 @@ public sealed partial class QuantumConsoleWindow : DefaultWindow
 
         CurrentDomainValue.Text = ResolveCurrentDomainName(state.CurrentDomain, state.Domains);
         CurrentDomainValue.FontColorOverride = state.CurrentDomain == null ? Color.Silver : Color.AliceBlue;
-
-        _updatingToggle = true;
-        BroadcastToggle.Pressed = state.Broadcast;
-        _updatingToggle = false;
 
         StopButton.Disabled = !state.Connected || state.State != BitrunningServerState.Running;
         RandomButton.Disabled = !state.Connected || state.State != BitrunningServerState.Ready;

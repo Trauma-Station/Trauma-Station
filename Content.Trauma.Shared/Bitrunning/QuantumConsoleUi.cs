@@ -37,7 +37,6 @@ public sealed class QuantumConsoleBoundUiState : BoundUserInterfaceState
         int serverPoints,
         int scannerTier,
         BitrunningServerState state,
-        bool broadcast,
         bool extremeDifficultyUnlocked,
         float cooldownTotalSeconds,
         float cooldownRemainingSeconds,
@@ -52,7 +51,6 @@ public sealed class QuantumConsoleBoundUiState : BoundUserInterfaceState
         ServerPoints = serverPoints;
         ScannerTier = scannerTier;
         State = state;
-        Broadcast = broadcast;
         ExtremeDifficultyUnlocked = extremeDifficultyUnlocked;
         CooldownTotalSeconds = cooldownTotalSeconds;
         CooldownRemainingSeconds = cooldownRemainingSeconds;

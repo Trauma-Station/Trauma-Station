@@ -5,7 +5,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Content.Shared.Whitelist;
@@ -40,83 +39,68 @@ public sealed partial class TraitSystem : EntitySystem
             return;
         }
 
-        ApplyTraits(args.Mob, args.Profile); // Trauma
-    }
-
-    // <Trauma>
-    public void ApplyTraits(EntityUid mob, HumanoidCharacterProfile profile)
-    {
-        foreach (var traitId in profile.TraitPreferences)
+        foreach (var traitId in args.Profile.TraitPreferences)
         {
             if (!ProtoMan.TryIndex<TraitPrototype>(traitId, out var traitPrototype))
             {
                 Log.Error($"No trait found with ID {traitId}!");
-                continue;
+                return;
             }
 
-            if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, mob) ||
-                _whitelistSystem.IsWhitelistPass(traitPrototype.Blacklist, mob))
+            if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, args.Mob) ||
+                _whitelistSystem.IsWhitelistPass(traitPrototype.Blacklist, args.Mob))
                 continue;
 
             // Begin Goobstation: Species trait support
-            if (traitPrototype.IncludedSpecies.Count > 0 && !traitPrototype.IncludedSpecies.Contains(profile.Species) ||
-                traitPrototype.ExcludedSpecies.Contains(profile.Species))
+            if (traitPrototype.IncludedSpecies.Count > 0 && !traitPrototype.IncludedSpecies.Contains(args.Profile.Species) ||
+                traitPrototype.ExcludedSpecies.Contains(args.Profile.Species))
                 continue;
             // End Goobstation: Species trait support
 
             // Add all components required by the prototype
-            EntityManager.AddComponents(mob, traitPrototype.Components, false); // Idk is it correct
+            if (traitPrototype.Components.Count > 0)
+                EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
 
             // Add all JobSpecials required by the prototype
             foreach (var special in traitPrototype.Specials)
             {
-                special.AfterEquip(mob);
+                special.AfterEquip(args.Mob);
             }
 
-            _effects.ApplyEffects(mob, traitPrototype.Effects, predicted: false); // Trauma
-
-            // Add all JobSpecials required by the prototype
-            foreach (var special in traitPrototype.Specials)
-            {
-                special.AfterEquip(mob);
-            }
-
-            _effects.ApplyEffects(mob, traitPrototype.Effects, predicted: false); // Trauma
+            _effects.ApplyEffects(args.Mob, traitPrototype.Effects, predicted: false); // Trauma
 
             // Einstein Engines - Language begin (remove this if trait system refactor)
             // Remove/Add Languages required by the prototype
             if (traitPrototype.RemoveLanguagesSpoken is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesSpoken)
-                    _language.RemoveLanguage(mob, lang, true, false);
+                    _language.RemoveLanguage(args.Mob, lang, true, false);
 
             if (traitPrototype.RemoveLanguagesUnderstood is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesUnderstood)
-
-                    _language.RemoveLanguage(mob, lang, false);
+                    _language.RemoveLanguage(args.Mob, lang, false, true);
 
             if (traitPrototype.LanguagesSpoken is not null)
                 foreach (var lang in traitPrototype.LanguagesSpoken)
-                    _language.AddLanguage(mob, lang, true, false);
+                    _language.AddLanguage(args.Mob, lang, true, false);
 
             if (traitPrototype.LanguagesUnderstood is not null)
                 foreach (var lang in traitPrototype.LanguagesUnderstood)
-                    _language.AddLanguage(mob, lang, false, true);
+                    _language.AddLanguage(args.Mob, lang, false, true);
             // Einstein Engines - Language end
 
             // Add item required by the trait
             if (traitPrototype.TraitGear == null)
                 continue;
 
-            if (!TryComp(mob, out HandsComponent? handsComponent))
+            if (!TryComp(args.Mob, out HandsComponent? handsComponent))
                 continue;
 
-            var coords = Transform(mob).Coordinates;
+            var coords = Transform(args.Mob).Coordinates;
             var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
-            _sharedHandsSystem.TryPickup(mob,
+            _sharedHandsSystem.TryPickup(args.Mob,
                 inhandEntity,
                 checkActionBlocker: false,
                 handsComp: handsComponent);
         }
     }
-    // <Trauma>
 }
