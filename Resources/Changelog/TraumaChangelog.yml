@@ -12477,3 +12477,10 @@ Entries:
   id: 1367
   time: '2026-07-30T17:26:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3852
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: You can actually make incubators now in the service techfab.
+  id: 1368
+  time: '2026-07-30T19:00:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3848
