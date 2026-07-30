@@ -50,14 +50,16 @@
         solution: tank
     - trigger:
         !type:DamageTypeTrigger
-        damageType: Ballistic
+        damageType: Ballistic # Trauma Bullets aren't piercing anymore
         damage: 5
-      behaviors:
-      - !type:SolutionExplosionBehavior
-        solution: tank
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
+        #<Trauma>
+#      behaviors:
+#      - !type:SolutionExplosionBehavior
+#        solution: tank
+#    - trigger:
+#        !type:DamageTrigger
+#        damage: 10
+        #</Trauma>
       behaviors:
       - !type:SpillBehavior
         solution: tank
