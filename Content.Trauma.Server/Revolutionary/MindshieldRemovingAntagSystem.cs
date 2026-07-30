@@ -25,14 +25,19 @@ public sealed partial class MindshieldRemovingAntagSystem : EntitySystem
         if (!TryComp<ImplantedComponent>(uid, out var implanted))
             return;
 
+        var found = false;
         foreach (var implant in implanted.ImplantContainer.ContainedEntities)
         {
             if (!HasComp<MindShieldImplantComponent>(implant))
                 continue;
 
+            found = true;
             _subdermal.ForceRemove((uid, implanted), implant);
             break;
         }
+
+        if (!found)
+            return; // no free implant for randoms
 
         _subdermal.AddImplant(uid, ent.Comp.FakeMindShieldImplant);
 
