@@ -228,6 +228,11 @@
   name: ian hood
   description: A hood to complete the 'Good boy' look.
   components:
+  # <Trauma>
+  - type: ReplacementAccent
+    accent: dog
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hoods/iansuit.rsi
   - type: Clothing
@@ -235,9 +240,6 @@
   - type: HideLayerClothing
     slots:
     - Hair
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: dog
   - type: Tag
     tags:
     - CorgiWearable

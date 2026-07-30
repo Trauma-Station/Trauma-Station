@@ -3,7 +3,7 @@
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Bible;
+using Content.Shared.Bible.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;

@@ -61,6 +61,9 @@
     mindRoles:
     - MindRoleGhostRoleFreeAgent
   - type: GhostTakeoverAvailable
+  - type: NpcFactionMember
+    factions:
+    - InsurgentFriend
 
 - type: localizedDataset
   id: Goida

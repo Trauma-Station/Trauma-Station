@@ -253,3 +253,53 @@ Entries:
   id: 33
   time: '2026-07-17T19:39:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3591
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Sec department rolebans now include brigmedic reinforcements.
+  id: 34
+  time: '2026-07-22T23:06:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3673
+- author: Nousagi37
+  changes:
+  - type: Tweak
+    message: >-
+      Removed the two extra faxes from the Central Command Map and labeled the
+      remaining one as Centcomm.
+  id: 35
+  time: '2026-07-26T11:15:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3726
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Bans can now specify a webhook reason override e.g. to not have slurs or
+      player info posted publicly.
+  id: 36
+  time: '2026-07-27T14:25:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3757
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added antag smite verbs for a bunch of antags.
+  id: 37
+  time: '2026-07-28T00:16:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3776
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Skillchips now have verb logs for adding and removing them.
+  - type: Tweak
+    message: Aghosts can now always see peoples exact skillchips.
+  id: 38
+  time: '2026-07-29T02:29:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3812
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: >-
+      Added new antag token types! The admin remark they give the player says
+      what they can be redeemed for.
+  id: 39
+  time: '2026-07-30T00:45:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3801

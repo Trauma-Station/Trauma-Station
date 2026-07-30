@@ -24,7 +24,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipBartender
+    - SkillChipEducation
+    - SkillChipShotgun
+    - SkillChipUnarmed
   # </Trauma>
 
 - type: startingGear

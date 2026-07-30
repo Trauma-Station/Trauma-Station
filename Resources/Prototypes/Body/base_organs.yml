@@ -404,7 +404,7 @@
   - type: ChildOrgan
     parents: [ Head ]
   - type: OrganChipContainer
-    limit: 2 # TODO: change to 3 once skillchips are split up more
+    limit: 3
   - type: ContainerContainer
     containers:
       knowledge: !type:Container

@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# implanted in headrevs automatically
 - type: entity
   parent: BaseSubdermalImplant
-  id: HellRipImplant
-  name: hell ripte implant
-  description: This implant allows the user to perform various Hell Rip moves.
-  categories: [ HideSpawnMenu ]
+  id: RadioImplantHeadrev
+  name: headrev radio implant
+  description: This implant grants access to the Revolutionary and special Head Rev radio channels.
   components:
-  - type: ComponentsImplant
-    added:
-    # - type: GrantHellRip
+  - type: RadioImplant
+    radioChannels:
+    - Revolutionary
+    - HeadRevolutionary

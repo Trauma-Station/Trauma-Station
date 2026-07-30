@@ -85,18 +85,13 @@
         type: GasCanisterBoundUserInterface
   - type: Destructible
     thresholds:
-    - trigger:
+    - trigger: &DamageTrigger300
         !type:DamageTrigger
         damage: 300
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          GasCanisterBrokenBase:
-            min: 1
-            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:DumpCanisterBehavior
@@ -237,21 +232,13 @@
       temperature: 293.15
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
           AirCanisterBroken:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:DumpCanisterBehavior
 
 - type: entity
   parent: GasCanister
@@ -282,21 +269,13 @@
       temperature: 293.15
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
           OxygenCanisterBroken:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:DumpCanisterBehavior
 
 - type: entity
   id: LiquidOxygenCanister
@@ -342,21 +321,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             NitrogenCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
 
 - type: entity
   id: LiquidNitrogenCanister
@@ -402,21 +373,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             CarbonDioxideCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
     - type: Lock
       locked: true
 
@@ -464,21 +427,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             PlasmaCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
     - type: Lock
       locked: true
 
@@ -511,21 +466,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             TritiumCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
     - type: Lock
       locked: true
 
@@ -558,21 +505,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             WaterVaporCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
 
 - type: entity
   parent: GasCanister
@@ -603,21 +542,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             AmmoniaCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
     - type: Lock
       locked: true
 
@@ -650,21 +581,13 @@
         temperature: 293.15
     - type: Destructible
       thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 300
+      - trigger: *DamageTrigger300
         behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: MetalBreak
         - !type:SpawnEntitiesBehavior
           spawn:
             NitrousOxideCanisterBroken:
               min: 1
               max: 1
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:DumpCanisterBehavior
     - type: Lock
       locked: true
 
@@ -697,21 +620,13 @@
       temperature: 293.15
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
+    - trigger: *DamageTrigger300
       behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
           FrezonCanisterBroken:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:DumpCanisterBehavior
   - type: Lock
     locked: true
 

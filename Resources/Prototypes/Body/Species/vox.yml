@@ -70,11 +70,6 @@
       limit: 1
       required: false
       nudityDefault: [ UndergarmentBottomBoxersVox ]
-  # <Trauma>
-  appearances:
-    enum.HumanoidVisualLayers.Tail:
-      matchSkin: true
-  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -208,19 +203,15 @@
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
-        damageType: Radiation
-        damage: 15
+        damageType: Heat
+        damage: 1500
       behaviors:
-      - !type:PopupBehavior
-        popup: mouth-taste-metal
-        popupType: LargeCaution
-        targetOnly: true
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Radiation
-        damage: 40
-      behaviors:
-      - !type:VomitBehavior
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          FoodMeatChickenFriedVox:
+            min: 3
+            max: 5
   - type: PassiveDamage
     # Augment normal health regen to be able to tank some Poison damage
     # This allows Vox to take their mask off temporarily to eat something without needing a trip to medbay afterwards.

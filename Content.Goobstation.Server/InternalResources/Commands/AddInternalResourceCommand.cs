@@ -5,19 +5,16 @@ using Content.Goobstation.Shared.InternalResources.EntitySystems;
 using Content.Server.Administration;
 using Content.Shared.Actions.Components;
 using Content.Shared.Administration;
-using Content.Shared.Prototypes;
 using Robust.Shared.Console;
-using System;
 using System.Linq;
-
 
 namespace Content.Goobstation.Server.InternalResources.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
 public sealed partial class AddInternalResourceCommand : LocalizedEntityCommands
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
-    [Dependency] private SharedInternalResourcesSystem _internalResources = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedInternalResourcesSystem _res = default!;
 
     public override string Command => "addinternalresource";
 
@@ -34,13 +31,13 @@ public sealed partial class AddInternalResourceCommand : LocalizedEntityCommands
             return;
         }
 
-        if (!_prototypeManager.TryIndex<InternalResourcesPrototype>(args[1], out var proto))
+        if (!_proto.TryIndex<InternalResourcesPrototype>(args[1], out var proto))
         {
             shell.WriteError(Loc.GetString("cmd-addinternalresource-type-not-found", ("type", args[1])));
             return;
         }
 
-        _internalResources.EnsureInternalResources(targetEntity.Value, proto, out _);
+        _res.EnsureInternalResources(targetEntity.Value, proto, out _);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
@@ -53,7 +50,7 @@ public sealed partial class AddInternalResourceCommand : LocalizedEntityCommands
         if (args.Length != 2)
             return CompletionResult.Empty;
 
-        var resourcesPrototypes = _prototypeManager.EnumeratePrototypes<InternalResourcesPrototype>().Select(p => p.ID); ;
+        var resourcesPrototypes = _proto.EnumeratePrototypes<InternalResourcesPrototype>().Select(p => p.ID);
 
         return CompletionResult.FromHintOptions(resourcesPrototypes, Loc.GetString("cmd-addinternalresource-type-completion"));
     }

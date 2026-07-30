@@ -6,7 +6,7 @@
   components:
   - type: Action
     icon: Interface/Actions/web.png
-    useDelay: 25
+    useDelay: 10 # Truama, was 25
   - type: InstantAction
     event: !type:SpiderWebActionEvent
 

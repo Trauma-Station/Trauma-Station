@@ -20,4 +20,10 @@ public sealed partial class ShadowCocoonMakerComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan CocoonDelay = TimeSpan.FromSeconds(4);
+
+    /// <summary>
+    /// Text of the verb to make a shadow cocoon.
+    /// </summary>
+    [DataField]
+    public string VerbText = "Make Shadow Cocoon";
 }

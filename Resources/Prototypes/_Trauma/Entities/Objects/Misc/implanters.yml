@@ -1,14 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseImplantOnlyImplanterSyndi
-  id: HellRipImplanter
-  suffix: Hell Rip
-  components:
-  - type: Implanter
-    implant: HellRipImplant
-
-- type: entity
   parent: [ BaseFastDrawImplanter, BaseRevMajorContraband ]
   id: RevShieldRipper
   name: shield ripper

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Humanoid;
-using Content.Shared.Prototypes;
 using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.StatusEffects;
 using Robust.Client.Player;
@@ -22,6 +21,8 @@ public sealed partial class HysteriaOverlay : Overlay
     private readonly CommonSpriteVisibilitySystem _spriteVis;
     private readonly SharedTransformSystem _transform;
     private readonly EntityLookupSystem _lookup;
+
+    private readonly CompName _spriteName;
 
     /// <summary>
     /// Attaches an entity to a random entity prototype, and draws the sprite of the entity prototype on top of the entity.
@@ -61,6 +62,8 @@ public sealed partial class HysteriaOverlay : Overlay
         _spriteVis = _entMan.System<CommonSpriteVisibilitySystem>();
         _transform = _entMan.System<SharedTransformSystem>();
         _lookup = _entMan.System<EntityLookupSystem>();
+
+        _spriteName = _entMan.ComponentFactory.CompName<SpriteComponent>();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -116,8 +119,7 @@ public sealed partial class HysteriaOverlay : Overlay
             var worldPos = _transform.GetWorldPosition(xform);
             var eyeRot = args.Viewport.Eye?.Rotation ?? Angle.Zero;
 
-            if (!_proto.TryIndex(disguiseProto, out var disguise)
-                || !disguise.HasComponent<SpriteComponent>())
+            if (!_proto.TryIndex(disguiseProto, out var disguise) || !disguise.HasComp(_spriteName))
                 continue;
 
             var disguiseTexture = _sprite.Frame0(disguise);

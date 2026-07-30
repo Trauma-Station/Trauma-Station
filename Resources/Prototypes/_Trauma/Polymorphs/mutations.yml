@@ -17,8 +17,8 @@
 - type: polymorph
   id: MutationHuman
   configuration:
-    entity: MobHuman
-    transferName: true # human named monkey (MK-28) kino
+    entity: MobHumanRandom
+    transferName: false
     stripNameModifier: false
     # yes language so monkey is still forced to speak monkey
     forced: true
@@ -45,8 +45,8 @@
 - type: polymorph
   id: MutationReptilian
   configuration:
-    entity: MobReptilian
-    transferName: true # human named monkey (MK-28) kino
+    entity: MobReptilianRandom
+    transferName: false
     stripNameModifier: false
     # yes language so monkey is still forced to speak monkey
     forced: true

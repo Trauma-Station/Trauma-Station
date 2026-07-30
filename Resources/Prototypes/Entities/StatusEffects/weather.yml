@@ -28,13 +28,18 @@
   id: WeatherAshfall
   components:
   # <Trauma>
-  - type: WeatherDamage
-    damage:
-      types:
-        Heat: 4
-    blacklist:
-      components:
-      - WeatherImmune
+  - type: WeatherEffects
+    effects:
+    - !type:HealthChange
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - AshStormImmune
+      splitDamage: None
+      damage:
+        types:
+          Heat: 4
   # </Trauma>
   - type: WeatherStatusEffect
     sprite:

@@ -1,0 +1,292 @@
+# Weaponry
+
+- type: listing
+  id: UplinkPistolViper
+  name: uplink-pistol-viper-name
+  description: uplink-pistol-viper-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Pistols/viper.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponViperFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 13 # Trauma - was 3, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+
+# Inbuilt suppressor so it's sneaky + more expensive.
+- type: listing
+  id: UplinkPistolCobra
+  name: uplink-pistol-cobra-name
+  description: uplink-pistol-cobra-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Pistols/cobra.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponCobraFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 17 # Trauma - was 4, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+
+# Poor accuracy, slow to fire, cheap option
+- type: listing
+  id: UplinkRifleMosin
+  name: uplink-rifle-mosin-name
+  description: uplink-rifle-mosin-desc
+  productEntity: WeaponSniperMosin
+  cost:
+    Telecrystal: 4 # Trauma - was 1, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkEsword
+  name: uplink-esword-name
+  description: uplink-esword-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
+  productEntity: BriefcaseWeaponEnergySwordFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 35 # Trauma - was 8, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkEnergyDagger
+  name: uplink-edagger-name
+  description: uplink-edagger-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/e_dagger.rsi, state: icon }
+  productEntity: BriefcaseWeaponEDaggerFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 10 # Trauma - was 2, 5x
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkEnergyCrossbow
+  name: uplink-energycrossbow-name
+  description: uplink-energycrossbow-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Basic/energy_crossbow.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponEnergyCrossbowFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 30 # Trauma - was 5, 5x and more expensive
+  categories:
+  - UplinkWeaponry
+  conditions:
+  # <Trauma>
+  #- !type:ListingLimitedStockCondition
+  #  stock: 1
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  # </Trauma>
+
+- type: listing
+  id: UplinkThrowingKnivesKit
+  name: uplink-knives-kit-name
+  description: uplink-knives-kit-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/throwing_knife.rsi, state: icon } # Trauma
+  productEntity: ClothingBeltKnifeRig # Trauma - rig instead of box
+  cost:
+    Telecrystal: 30 # Trauma - was 6, 5x
+  categories:
+    - UplinkWeaponry
+
+- type: listing
+  id: UplinkGlovesNorthStar
+  name: uplink-gloves-north-star-name
+  description: uplink-gloves-north-star-desc
+  icon: { sprite: /Textures/Clothing/Hands/Gloves/northstar.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponNorthStarFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 30 # Trauma - was 8, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+
+# <Trauma> - needs to be readable
+#- type: listing
+#  id: UplinkGlovesKnuckleDusters
+#  name: uplink-gloves-knuckleduster-name
+#  description: uplink-gloves-knuckleduster-desc
+#  icon: { sprite: Clothing/Hands/Gloves/KnuckleDusters/syndicateknuckleduster.rsi, state: syndicateknuckleduster }
+#  productEntity: ClothingHandsKnuckleDustersSyndicate
+#  cost:
+#    Telecrystal: 20 # Trauma - was 4, 5x
+#  categories:
+#  - UplinkWeaponry
+# </Trauma>
+
+- type: listing
+  id: UplinkEshield
+  name: uplink-eshield-name
+  description: uplink-eshield-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
+  productEntity: BriefcaseWeaponEnergyShieldFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 30 # Trauma - was 8, 5x and less expensive
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist: # Trauma - invert it, nukies have a more expensive version
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: uplinkRiggedBoxingGloves
+  name: uplink-rigged-boxing-gloves-name
+  description: uplink-rigged-boxing-gloves-desc
+  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: icon }
+  productEntity: BriefcaseWeaponBoxingGlovesFilled # Trauma - briefcase
+  cost:
+    Telecrystal: 20 # Trauma - was 10, 5x and way cheaper, it's a gimmick item and not viable
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkSniperBundle
+  name: uplink-sniper-bundle-name
+  description: uplink-sniper-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: base }
+  productEntity: BriefcaseSyndieSniperBundleFilled
+  cost:
+    Telecrystal: 50 # Trauma - was 10, 5x
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkHushpup
+  name: uplink-hushpup-name
+  description: uplink-hushpup-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/hushpup.rsi, state: icon }
+  productEntity: BriefcaseWeaponHushpupFilled
+  cost:
+    Telecrystal: 40 # Trauma - was 10, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkC20R
+  name: uplink-c20r-name
+  description: uplink-c20r-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/SMGs/c20r.rsi, state: icon }
+  productEntity: BriefcaseWeaponC20Filled
+  cost:
+    Telecrystal: 50 # Trauma - was 14, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+  # <Trauma> - its fine for nukies
+  # conditions:
+  # - !type:StoreWhitelistCondition
+  #   blacklist:
+  #     tags:
+  #     - NukeOpsUplink
+  # </Trauma>
+
+# <Trauma>
+#- type: listing
+#  id: UplinkC20RBundle
+#  name: uplink-c20r-bundle-name
+#  description: uplink-c20r-bundle-desc
+#  icon: { sprite: /Textures/Objects/Weapons/Guns/SMGs/c20r.rsi, state: icon }
+#  productEntity: ClothingBackpackDuffelSyndicateFilledSMG
+#  cost:
+#    Telecrystal: 65 # Trauma - was 17, 5x and cheaper
+#  categories:
+#  - UplinkWeaponry
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+# </Trauma>
+
+- type: listing
+  id: UplinkBulldog
+  name: uplink-bulldog-name
+  description: uplink-bulldog-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
+  productEntity: BriefcaseWeaponBulldogFilled
+  cost:
+    Telecrystal: 60 # Trauma - was 14, 5x and cheaper
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist: # Trauma - move big guns to nukies
+      tags:
+      - NukeOpsUplink
+
+# <Trauma>
+#- type: listing
+#  id: UplinkBulldogBundle
+#  name: uplink-bulldog-bundle-name
+#  description: uplink-bulldog-bundle-desc
+#  icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
+#  productEntity: ClothingBackpackDuffelSyndicateFilledShotgun
+#  cost:
+#    Telecrystal: 80 # Trauma - was 20, 5x and cheaper
+#  categories:
+#  - UplinkWeaponry
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+# </Trauma>
+
+- type: listing
+  id: UplinkEstocBundle
+  name: uplink-estoc-bundle-name
+  description: uplink-estoc-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
+  productEntity: BriefcaseWeaponEstocFilled # Trauma - briefcases
+  cost:
+    Telecrystal: 55 # Trauma - was 18, 5x and way cheaper, shit gun
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGrenadeLauncher
+  name: uplink-grenade-launcher-name
+  description: uplink-grenade-launcher-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
+  productEntity: BriefcaseWeaponChinaLakeFilled
+  cost:
+    Telecrystal: 60 # Trauma - was 20, 5x and way cheaper
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist: # Trauma - was blacklist
+      tags:
+      - NukeOpsUplink
+
+# <Trauma>
+#- type: listing
+#  id: UplinkGrenadeLauncherBundle
+#  name: uplink-grenade-launcher-bundle-name
+#  description: uplink-grenade-launcher-bundle-desc
+#  icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
+#  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
+#  cost:
+#    Telecrystal: 110 # Trauma - was 25, 5x and cheaper
+#  categories:
+#  - UplinkWeaponry
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+# </Trauma>
+
+- type: listing
+  id: UplinkL6SawBundle
+  name: uplink-l6-saw-bundle-name
+  description: uplink-l6-saw-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/LMGs/l6.rsi, state: icon }
+  productEntity: BriefcaseWeaponL6Filled # Trauma - briefcases
+  cost:
+    Telecrystal: 100 # Trauma - was 30, 5x and cheaper
+  categories:
+  - UplinkWeaponry

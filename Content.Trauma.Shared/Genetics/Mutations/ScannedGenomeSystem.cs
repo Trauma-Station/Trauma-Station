@@ -2,6 +2,7 @@
 
 using Content.Shared.Polymorph;
 using Robust.Shared.Random;
+using System.Linq;
 using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
@@ -15,14 +16,7 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
 
     private StringBuilder _builder = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ScannedGenomeComponent, PolymorphedEvent>(OnPolymorphed);
-        SubscribeLocalEvent<ScannedGenomeComponent, MutationRemovedEvent>(OnMutationRemoved);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<ScannedGenomeComponent> ent, ref PolymorphedEvent args)
     {
         var target = args.NewEntity;
@@ -34,6 +28,17 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
         TransferSequences(ent, (target, comp));
     }
 
+    [SubscribeLocalEvent]
+    private void OnMutationAdded(Entity<ScannedGenomeComponent> ent, ref MutationAddedEvent args)
+    {
+        if (ent.Owner != args.Target.Owner || args.Automatic)
+            return;
+
+        // new mutation added to an already scanned subject, create a sequence for it
+        TryAddSequence(ent.AsNullable(), args.Id);
+    }
+
+    [SubscribeLocalEvent]
     private void OnMutationRemoved(Entity<ScannedGenomeComponent> ent, ref MutationRemovedEvent args)
     {
         // check just incase you are VERY evil and have a mutation that is a mob or something crazy
@@ -91,7 +96,8 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
     {
         if (!_query.Resolve(ent, ref ent.Comp) ||
             !_mutation.AllMutations.TryGetValue(id, out var mutation) ||
-            _mutation.GetRoundData(id) is not {} data)
+            _mutation.GetRoundData(id) is not {} data ||
+            ent.Comp.Sequences.Any(s => s.Mutation == id)) // no dupes
         {
             return;
         }

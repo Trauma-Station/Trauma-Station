@@ -6,3 +6,18 @@
   keycode: 'r'
   frequency: 1215
   color: "#ff0004"
+
+- type: radioChannel
+  id: HeadRevolutionary
+  name: chat-radio-head-revolutionary
+  keycode: 'j'
+  frequency: 1216
+  color: "#ff0000"
+  longRange: true
+
+- type: radioChannel
+  id: EggRadio
+  name: chat-radio-egg
+  keycode: 'p'
+  frequency: 577
+  color: "#f9f0c9"

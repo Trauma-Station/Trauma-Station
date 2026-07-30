@@ -12,34 +12,34 @@
     sprite: _Goobstation/Clothing/Belt/cmowebbing.rsi
   - type: Storage
     grid:
-      - 0,0,6,2
+    - 0,0,6,2
     whitelist: # I have no idea why is, say, wrench here, but it's just copied from medical belt.
       tags:
-        - Wrench
-        - Bottle
-        - Spray
-        - Brutepack
-        - Bloodpack
-        - Gauze
-        - Ointment
-        - CigPack
-        - PillCanister
-        - Radio
-        - DiscreteHealthAnalyzer
-        - SurgeryTool
-        - Dropper
-        - Tourniquet #Goobstation
-        - MedicalPatch # Goobstation
-        - HandheldCrewMonitor # Goobstation
-        - SyringeCase # Goobstation
+      - Tourniquet
+      - HandheldCrewMonitor
+      - SyringeCase
+      - Wrench
+      - Bottle
+      - Spray
+      - Brutepack
+      - Bloodpack
+      - Gauze
+      - Ointment
+      - CigPack
+      - PillCanister
+      - Radio
+      - DiscreteHealthAnalyzer
+      - SurgeryTool
+      - Dropper
       components:
-        - Injector
-        - Pill
-        - HandLabeler
-        - SurgeryTool # Shitmed Change
-        - Defibrillator # Goobstation
-        - GunApplySolution # Goobstation - Syndicate dart gun
-        - SolutionCartridge
+      - SurgeryTool
+      - Defibrillator
+      - GunApplySolution
+      - MedicalPatch
+      - SolutionCartridge
+      - Injector
+      - Pill
+      - HandLabeler
   - type: ExplosionResistance
     damageCoefficient: 0.25
 
@@ -136,22 +136,22 @@
   - type: Storage
     whitelist:
       tags:
-        - PillCanister
-        - Syringe
-        - Dropper
-        - MedicalPatch
-        - Brutepack
-        - Bloodpack
-        - Gauze
-        - Ointment
+      - PillCanister
+      - Syringe
+      - Dropper
+      - Brutepack
+      - Bloodpack
+      - Gauze
+      - Ointment
       components:
-        - Pill
-        - Injector
-        - SyringeGun
-        - SurgeryTool
-        - Defibrillator
-        - SolutionTransfer
-        - GunApplySolution # Dart gun
+      - MedicalPatch
+      - Pill
+      - Injector
+      - SyringeGun
+      - SurgeryTool
+      - Defibrillator
+      - SolutionTransfer
+      - GunApplySolution # Dart gun
 
 
 - type: entity

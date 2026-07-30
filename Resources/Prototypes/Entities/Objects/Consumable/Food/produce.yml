@@ -283,7 +283,7 @@
     grindableSolutionName: food
 
 - type: entity
-  parent: [ ProduceBase, BaseMajorContraband ]
+  parent: [ ProduceBase, BaseMajorContraband, DeathNettleDurability ]
   id: DeathNettle
   name: death nettle
   description: This nettle's out for blood.
@@ -294,11 +294,15 @@
     size: Small
     sprite: Objects/Specific/Hydroponics/death_nettle.rsi
     heldPrefix: produce
+    shape: # Trauma
+    - 0,1,0,2
+    - 1,0,1,1
+    storedRotation: 90 # Trauma
   - type: MeleeWeapon
     damage:
       types:
-        Heat: 8
-        Caustic: 8
+        # Heat: 8
+        Caustic: 1 # Trauma, was 8
   - type: Solution
     solution:
       reagents:
@@ -330,23 +334,23 @@
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Voice/Diona/diona_salute.ogg
-          params:
-            volume: -5
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnHit
-    damage:
-      types:
-        Blunt: 5 # The nettle will "wilt" after 5 hits.
+  # - type: Destructible
+  #   thresholds:
+  #   - trigger:
+  #       !type:DamageTrigger
+  #       damage: 25
+  #     behaviors:
+  #     - !type:PlaySoundBehavior
+  #       sound:
+  #         path: /Audio/Voice/Diona/diona_salute.ogg
+  #         params:
+  #           volume: -5
+  #     - !type:DoActsBehavior
+  #       acts: [ "Destruction" ]
+  # - type: DamageOnHit
+  #   damage:
+  #     types:
+  #       Blunt: 5 # The nettle will "wilt" after 5 hits.
 
 - type: entity
   name: banana
@@ -355,6 +359,14 @@
   description: Rich in potassium.
   components:
   # <Trauma>
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:AddComponents
+      components:
+      - type: EggFertilizer
+        specialReplacement: MobChickClown
+    entityWhitelist:
+    - MobWhiteRooster
   - type: Healing # Bananas heal clown car
     damageContainers:
     - ClowncarDamageContainer
@@ -997,6 +1009,7 @@
         acts: [ "Destruction" ]
   - type: Tag
     tags:
+    - Tomato # Trauma
     - Fruit
     - Vegetable
   - type: FoodSequenceElement
@@ -1121,6 +1134,7 @@
     tags:
     - Fruit
     - Vegetable
+    - EggPlant # Trauma
 
 - type: entity
   name: apple
@@ -1160,6 +1174,7 @@
   - type: Tag
     tags:
     - Fruit
+    - Apple # Trauma
   - type: FoodSequenceElement
     entries:
       Burger: Apple
@@ -1528,6 +1543,7 @@
   - type: Tag
     tags:
     - Vegetable
+    - Chili # Trauma
   - type: FoodSequenceElement
     entries:
       Taco: ChiliPepper
@@ -1564,6 +1580,11 @@
       Taco: ChillyPepper
       Burger: ChillyPepper
       Skewer: ChillyPepperSkewer
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Chilly
+    # </Trauma>
 
 - type: entity
   name: aloe
@@ -1921,6 +1942,17 @@
   id: FoodGatfruit
   description: A delicious, gun-shaped fruit with a thick wooden stem.
   components:
+  # <Trauma>
+  - type: Item
+    size: Small
+    sprite: Objects/Specific/Hydroponics/death_nettle.rsi
+    heldPrefix: produce
+    shape: # Trauma
+    - 0,1,2,1
+    - 0,0,0,0
+    storedRotation: 270 # Trauma
+    storedOffset: -5,5
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - gunpowder
@@ -2021,6 +2053,11 @@
         Quantity: 15
   - type: Produce
     seedId: rice
+    # <Trauma>
+  - type: Tag
+    tags:
+    - Rice
+    # </Trauma>
 
 - type: entity
   name: soybeans
@@ -2502,6 +2539,7 @@
   - type: Tag
     tags:
     - Vegetable
+    - Peas # Trauma
   - type: FoodSequenceElement
     entries:
       Taco: Pea
@@ -2523,7 +2561,7 @@
         Quantity: 5
       - ReagentId: Nutriment
         Quantity: 5
-      - ReagentId: Pax
+      - ReagentId: Tilenol
         Quantity: 5
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/world_pea.rsi

@@ -74,7 +74,7 @@
     inHandsMaxFillLevels: 2
     inHandsFillBaseName: -fill-
   - type: Label
-    currentLabel: reagent-name-milk
+    localizedLabel: reagent-name-milk
   - type: Sealable
   - type: Tag
     tags:

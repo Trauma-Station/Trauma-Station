@@ -18,7 +18,7 @@ public sealed partial class ActionUserWhitelistSystem : EntitySystem
             return;
 
         if (ent.Comp.Popup is { } popup)
-            _popup.PopupEntity(popup, args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString(popup), args.User, PopupType.MediumCaution);
 
         args.Cancelled = true;
     }

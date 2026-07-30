@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature.Components;
 using Content.Trauma.Server.CosmicCult.Abilities;
 using Content.Trauma.Server.CosmicCult.Components;
-using Content.Server.Actions;
-using Content.Goobstation.Shared.Bible; // Goobstation - Bible
-using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Shared.Bible.Components;
+using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Atmos.Components;
 using Content.Shared.DoAfter;
@@ -25,10 +23,10 @@ namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
 public sealed partial class CosmicRiftSystem : EntitySystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedCosmicCultSystem _cult = default!;

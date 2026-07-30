@@ -1,6 +1,6 @@
 - type: entity
   id: Vaccinator
-  parent: BaseMachinePowered
+  parent: [ BaseMachinePowered, BaseMachineDestructible ]
   name: vaccinator
   description: A machine that creates vaccines.
   placement:
@@ -12,7 +12,7 @@
     - state: icon
     - state: unlit
       shader: unshaded
-  # <Goobstation>
+  # <Trauma>
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: running
       visible: false
@@ -20,7 +20,6 @@
   - type: Appearance
   - type: Machine
     board: VaccinatorMachineCircuitboard
-  - type: RequireProjectileTarget
   - type: ItemSlots
     slots:
       disease_swab_slot:
@@ -69,4 +68,13 @@
         running:
           True: { visible: true }
           False: { visible: false }
-  # </Goobstation>
+  # </Trauma>
+  - type: RequireProjectileTarget
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 175
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
