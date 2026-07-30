@@ -4,7 +4,9 @@
 // Goonstation, written from the behaviour documented at https://wiki.ss13.co/ChemiCompiler.
 // No Goonstation code was used, this is an original implementation of the described machine.
 
+using Content.Server.Chat.Systems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chat;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -17,6 +19,7 @@ using Content.Trauma.Shared.ChemiCompiler;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace Content.Trauma.Server.ChemiCompiler;
 
@@ -27,6 +30,7 @@ namespace Content.Trauma.Server.ChemiCompiler;
 /// </summary>
 public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
 {
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ChemiCompilerSystem _compiler = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _proto = default!;
@@ -56,6 +60,31 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
         /// Only heating does this; everything else is paced by its speed tier.
         /// </summary>
         Wait,
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        // A program can stop five different ways, and two of them live in the shared system where the chat
+        // system isn't available. Hooking the shutdown catches every route with one subscription.
+        SubscribeLocalEvent<ActiveChemiCompilerComponent, ComponentShutdown>(OnActiveShutdown);
+    }
+
+    /// <summary>
+    /// Says whatever the program had written but not yet finished a line with.
+    /// </summary>
+    private void OnActiveShutdown(Entity<ActiveChemiCompilerComponent> ent, ref ComponentShutdown args)
+    {
+        // the component also shuts down when the machine itself is being deleted, and a dying entity
+        // has no business talking
+        if (TerminatingOrDeleted(ent.Owner))
+            return;
+
+        if (!TryComp<ChemiCompilerComponent>(ent, out var comp))
+            return;
+
+        Speak((ent.Owner, comp), ent.Comp);
     }
 
     public override void Update(float frameTime)
@@ -239,8 +268,7 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
                 return Isolate(ent, active);
 
             case ChemFuck.Output:
-                if (active.Output.Length < ent.Comp.MaxOutputLength)
-                    active.Output += (char) active.Memory[active.Pointer];
+                Write(ent, active, active.Memory[active.Pointer]);
                 return Step.Next;
 
             case ChemFuck.Lock:
@@ -254,6 +282,52 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
             default:
                 return Step.Next;
         }
+    }
+
+    /// <summary>
+    /// Adds a character to the line the program is building up.
+    /// A newline sends the line, and so does filling the buffer, so a program that never writes one still
+    /// gets its text out instead of silently losing characters.
+    /// </summary>
+    private void Write(Entity<ChemiCompilerComponent> ent, ActiveChemiCompilerComponent active, byte value)
+    {
+        if (value == '\n')
+        {
+            Speak(ent, active);
+            return;
+        }
+
+        active.Output += (char) value;
+
+        if (active.Output.Length >= ent.Comp.MaxOutputLength)
+            Speak(ent, active);
+    }
+
+    /// <summary>
+    /// Says the line the program has built up, then clears it.
+    /// </summary>
+    private void Speak(Entity<ChemiCompilerComponent> ent, ActiveChemiCompilerComponent active)
+    {
+        var line = active.Output;
+        active.Output = string.Empty;
+
+        if (line.Length == 0)
+            return;
+
+        // a program can write any byte it likes, and most of the low ones are control codes that would
+        // come out as rubbish in a speech bubble
+        var text = new StringBuilder(line.Length);
+        foreach (var c in line)
+        {
+            if (!char.IsControl(c))
+                text.Append(c);
+        }
+
+        if (text.Length == 0)
+            return;
+
+        // hidden from chat so a program in a loop can't bury the round's chat log
+        _chat.TrySendInGameICMessage(ent, text.ToString(), InGameICChatType.Speak, hideChat: true);
     }
 
     /// <summary>

@@ -36,7 +36,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- register readout, only meaningful once a program has stopped -->
         <Label Text="{Loc 'chemicompiler-window-registers'}" StyleClasses="LabelKeyText" Margin="0 8 0 0"/>
         <Label Name="RegisterLabel"/>
-        <Label Name="OutputLabel"/>
 
         <BoxContainer Orientation="Horizontal" Margin="0 8 0 0">
             <Label Name="StatusLabel" HorizontalExpand="True"/>

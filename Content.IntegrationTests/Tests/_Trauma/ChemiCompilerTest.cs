@@ -14,6 +14,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
+using Content.Shared.Speech;
 using Content.Trauma.Client.ChemiCompiler.UI;
 using Content.Trauma.Shared.ChemiCompiler;
 using Robust.Shared.GameObjects;
@@ -724,6 +725,58 @@ public sealed class ChemiCompilerTest : GameTest
                     $"Reservoir {i} still accepted a beaker while full, so clicking would swap instead of filling the next one");
             }
         });
+    }
+
+    /// <summary>
+    /// Runs a program, waits, and reports the line the machine has built up but not said yet.
+    /// The program must still be running at that point, so end it with nops.
+    /// </summary>
+    private async Task<string> PendingOutput(EntityUid uid, string program, float seconds)
+    {
+        await Start(uid, program);
+        await Pair.RunSeconds(seconds);
+        await Pair.RunTicksSync(1);
+
+        var buffer = string.Empty;
+        await Pair.Server.WaitAssertion(() =>
+        {
+            Assert.That(IsRunning(uid), Is.True,
+                "The program finished before its buffer could be looked at, so this proves nothing");
+            buffer = Pair.Server.EntMan.GetComponent<ActiveChemiCompilerComponent>(uid).Output;
+        });
+
+        // let it run itself out so the next program can start
+        await Pair.RunSeconds(8f);
+        await Pair.RunTicksSync(1);
+        return buffer;
+    }
+
+    /// <summary>
+    /// The . instruction builds up a line, and a newline is what sends it. Anything still pending gets said
+    /// when the program halts.
+    /// </summary>
+    [Test]
+    public async Task OutputBuffersUntilNewline()
+    {
+        var (uid, _) = await Setup(new());
+
+        await Pair.Server.WaitAssertion(() =>
+        {
+            // without this the machine has no voice and the bubble can never appear
+            Assert.That(Pair.Server.EntMan.HasComponent<SpeechComponent>(uid), Is.True,
+                "The machine can't speak, so . has nowhere to put its output");
+        });
+
+        // 'A' is 65, then bump to 'B'. the nops keep the program alive while the buffer is inspected.
+        const string write = "." + "+" + ".";
+        var nops = new string('*', 4);
+
+        var pending = await PendingOutput(uid, Count(65) + write + nops, seconds: 3f);
+        Assert.That(pending, Is.EqualTo("AB"), "Characters written with . did not build up into a line");
+
+        // same again, but a newline (10) between the writing and the nops should have sent the line
+        var flushed = await PendingOutput(uid, Count(65) + write + ">" + Count(10) + "." + nops, seconds: 3f);
+        Assert.That(flushed, Is.Empty, "A newline did not send the line and clear the buffer");
     }
 
     /// <summary>

@@ -88,7 +88,8 @@ except at the ejection port, which is what the ejection port is for.
 
 ## Everything else
 
-- [bold].[/bold] append the current cell to the output text as a character
+- [bold].[/bold] add the current cell to a line of text, as a character. Writing a newline (10) makes the
+  machine say the line out loud; anything still unsaid is spoken when the program stops.
 - [bold]~[/bold] lock this program so Load can no longer read it back. It can still be overwritten.
 - [bold]*[/bold] pauses briefly, for reactions that take time.
 

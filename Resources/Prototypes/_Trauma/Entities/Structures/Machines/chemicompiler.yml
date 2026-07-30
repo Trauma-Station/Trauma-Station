@@ -24,6 +24,9 @@
     sprite: _Trauma/Structures/Machines/chemicompiler.rsi
     state: chemicompiler_base
   - type: ChemiCompiler
+  # lets the . instruction put a speech bubble over the machine.
+  # deliberately has no speechSounds, the machine's own beeps are all the audio feedback it needs
+  - type: Speech
   - type: ActivatableUI
     key: enum.ChemiCompilerUiKey.Key
   - type: ActivatableUIRequiresPower

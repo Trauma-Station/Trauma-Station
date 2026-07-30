@@ -208,8 +208,7 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
             HasComp<ActiveChemiCompilerComponent>(ent),
             active?.Source ?? 0,
             active?.Target ?? 0,
-            active?.Amount ?? 0,
-            active?.Output ?? string.Empty);
+            active?.Amount ?? 0);
 
         _ui.SetUiState(ent.Owner, ChemiCompilerUiKey.Key, state);
     }

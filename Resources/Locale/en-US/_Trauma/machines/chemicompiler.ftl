@@ -7,7 +7,6 @@ chemicompiler-window-load = Load
 chemicompiler-window-reservoirs = Reservoirs
 chemicompiler-window-registers = Registers
 chemicompiler-window-registers-values = sx { $source }   tx { $target }   ax { $amount }
-chemicompiler-window-output = Output: { $output }
 chemicompiler-window-halt = Halt
 
 chemicompiler-window-mode-run = Press a slot to run it.

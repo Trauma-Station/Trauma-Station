@@ -97,7 +97,8 @@ public sealed partial class ChemiCompilerComponent : Component
     public int MaxInstructionsPerTick = 64;
 
     /// <summary>
-    /// Longest the output buffer written by <see cref="ChemFuck.Output"/> can get.
+    /// Longest a line written by <see cref="ChemFuck.Output"/> can get before the machine says it anyway.
+    /// Without this a program that never writes a newline would build a string forever.
     /// </summary>
     [DataField]
     public int MaxOutputLength = 256;
@@ -249,8 +250,7 @@ public sealed class ChemiCompilerState(
     bool running,
     int source,
     int target,
-    int amount,
-    string output
+    int amount
 ) : BoundUserInterfaceState
 {
     /// <summary>
@@ -279,11 +279,6 @@ public sealed class ChemiCompilerState(
     public readonly int Source = source;
     public readonly int Target = target;
     public readonly int Amount = amount;
-
-    /// <summary>
-    /// Whatever the last program wrote with <see cref="ChemFuck.Output"/>.
-    /// </summary>
-    public readonly string Output = output;
 }
 
 /// <summary>

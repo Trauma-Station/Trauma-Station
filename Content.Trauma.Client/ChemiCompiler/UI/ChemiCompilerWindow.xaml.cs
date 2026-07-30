@@ -112,9 +112,6 @@ public sealed partial class ChemiCompilerWindow : FancyWindow
             ("target", state.Target),
             ("amount", state.Amount));
 
-        OutputLabel.Text = Loc.GetString("chemicompiler-window-output", ("output", state.Output));
-        OutputLabel.Visible = state.Output.Length > 0;
-
         StatusLabel.Text = Loc.GetString(_running
             ? "chemicompiler-window-status-running"
             : "chemicompiler-window-status-idle");
