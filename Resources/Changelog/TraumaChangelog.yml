@@ -12338,3 +12338,165 @@ Entries:
   id: 1352
   time: '2026-07-29T07:54:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2576
+- author: DieselMohawkTheSequel
+  changes:
+  - type: Tweak
+    message: >-
+      Tongue removal made simplier and no longer requiring an open incision. Get
+      your hand in their mouth.
+  id: 1353
+  time: '2026-07-29T10:43:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3821
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: >-
+      Holy water can now be used to heal asphyxiation and all brute danage
+      types.
+  id: 1354
+  time: '2026-07-29T11:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3777
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fixes moth wings being stuck open forever when removed while they are
+      open.
+  - type: Fix
+    message: Fix other people not seeing vampire ability particle effects.
+  - type: Fix
+    message: Fix client spawning more particles than intended.
+  - type: Fix
+    message: Fix flipping/spinning once roundstart making you vomit.
+  - type: Fix
+    message: Fixed flesh heretic spamming popups when eating bad food.
+  - type: Tweak
+    message: Forged warhammer size increased.
+  - type: Tweak
+    message: >-
+      Default mod key for changing targeting with mouse wheel is Alt instead of
+      Shift.
+  id: 1355
+  time: '2026-07-29T11:44:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3822
+- author: tsarevichvanya
+  changes:
+  - type: Tweak
+    message: Gives headrevs that had a roundstart mindshield implant a fake one instead
+  - type: Fix
+    message: Disallowed the NTR from rolling Head Rev
+  id: 1356
+  time: '2026-07-29T19:28:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not being mimes.
+  id: 1357
+  time: '2026-07-29T19:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3828
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Rancher has been mapped to Cog
+  id: 1358
+  time: '2026-07-29T19:41:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3827
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bloodsuckers being poisoned when drinking blood.
+  id: 1359
+  time: '2026-07-29T19:56:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3830
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Goidabot is no longer hostile to insurgents
+  id: 1360
+  time: '2026-07-29T22:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3838
+- author: dasgooty
+  changes:
+  - type: Fix
+    message: Fixed Peppersprays
+  id: 1361
+  time: '2026-07-29T23:59:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3836
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Rev constructions are no longer listed for everyone since they can't craft
+      them anyway.
+  id: 1362
+  time: '2026-07-30T00:39:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3840
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added new antag token types!
+  id: 1363
+  time: '2026-07-30T00:45:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3801
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the slowmode of the breaching hammer while equipped.
+  - type: Tweak
+    message: Changed the prying speed of the breaching hammer, you are now faster.
+  - type: Tweak
+    message: Changed the amount of breaching hammers sec gets. You only get 1 now.
+  id: 1364
+  time: '2026-07-30T00:57:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3837
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Head Revolutionaries now have a radio implant with the regular rev channel
+      and a special headrev channel they can use with :j at any time.
+  id: 1365
+  time: '2026-07-30T12:47:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3846
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed xenobio oil extract not exploding and silver extract not making
+      metal foam.
+  id: 1366
+  time: '2026-07-30T13:00:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3847
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Skeletons now gib properly: 150 blunt damage gibs the part, not the entire
+      mob from breaking a skellys leg.
+  id: 1367
+  time: '2026-07-30T17:26:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3852
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: You can actually make incubators now in the service techfab.
+  id: 1368
+  time: '2026-07-30T19:00:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3848
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Stripping cuffed people is now 25% faster.
+  id: 1369
+  time: '2026-07-30T19:30:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3855
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Traitor objectives now only pick people who have jobs. No more kill nukie
+      or admin objective.
+  id: 1370
+  time: '2026-07-30T20:07:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3856

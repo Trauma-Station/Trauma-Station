@@ -255,8 +255,9 @@
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
     storedRotation: -45
+    size: Large
     shape:
-    - 0,0,0,2
+    - 0,0,1,2
   - type: MeleeWeapon
     attackRate: 1
     damage:

@@ -23,3 +23,18 @@
   icon:
     sprite: Structures/smalldispensers.rsi
     state: soda
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: RanchIncubatorCircuitboard
+  result: RanchIncubatorCircuitboard
+  icon:
+    sprite: _Trauma/Structures/Machines/ranchobjects.rsi
+    state: incubator
+
+- type: latheRecipe
+  id: ChickenCarrier
+  result: ChickenCarrier
+  materials:
+    Steel: 600
+    Plastic: 200

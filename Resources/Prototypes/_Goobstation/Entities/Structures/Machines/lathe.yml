@@ -248,7 +248,6 @@
     runningState: icon
     staticPacks:
     - ServiceBoardsStatic
-    - ServiceBoardsStaticGoob
     - MaterialsStatic
     - LightsStatic
     - ServiceStatic
@@ -258,8 +257,6 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
-    - ServiceBoardsTrauma
-    - ServiceBoardsGoob
     - Translators
     - Janitor
     - Instruments

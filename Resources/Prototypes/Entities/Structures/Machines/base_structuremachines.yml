@@ -3,6 +3,13 @@
   parent: BaseStructure
   id: BaseMachine
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  # </Trauma>
   - type: Animateable
   - type: InteractionOutline
   - type: Anchorable
@@ -28,11 +35,6 @@
   id: BaseMachineDestructible
   components:
   # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    understands:
-    - TauCetiBasic
   - type: Penetratable
     penetrateDamage: 5
     damagePenalty: .5
