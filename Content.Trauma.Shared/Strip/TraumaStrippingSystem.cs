@@ -22,21 +22,10 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
     private static readonly ProtoId<InventorySlotPrototype> JumpsuitSlot = "jumpsuit";
     private static readonly ProtoId<InventorySlotPrototype> OuterClothingSlot = "outerClothing";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActiveStrippingComponent, DoAfterAttemptEvent<StrippableDoAfterEvent>>(OnStripAttempt);
-        SubscribeLocalEvent<ActiveStrippingComponent, StrippableDoAfterEvent>(OnStripDoAfterFinished);
-        SubscribeLocalEvent<HandsComponent, BeforeStripEvent>(OnBeforeStripEnsureComp);
-
-        InitializeStripActions();
-    }
-
-    private void OnBeforeStripEnsureComp(Entity<HandsComponent> user, ref BeforeStripEvent args)
-    {
-        EnsureComp<ActiveStrippingComponent>(user.Owner);
-    }
+    /// <summary>
+    /// Multiplier on strip time of cuffed mobs.
+    /// </summary>
+    private const float CuffedStripTime = 0.75f;
 
     public override void Update(float frameTime)
     {
@@ -44,6 +33,13 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
         UpdateBagAccess();
     }
 
+    [SubscribeLocalEvent]
+    private void OnBeforeStripEnsureComp(Entity<HandsComponent> user, ref BeforeStripEvent args)
+    {
+        EnsureComp<ActiveStrippingComponent>(user.Owner);
+    }
+
+    [SubscribeLocalEvent]
     private void OnStripAttempt(Entity<ActiveStrippingComponent> user, ref DoAfterAttemptEvent<StrippableDoAfterEvent> args)
     {
         // Only limit removals, inserting items back doesn't require a free hand slot.
@@ -88,6 +84,7 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
         Dirty(user.Owner, user.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnStripDoAfterFinished(Entity<ActiveStrippingComponent> user, ref StrippableDoAfterEvent args)
     {
         if (args.InsertOrRemove)
@@ -95,6 +92,15 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
 
         user.Comp.TrackedDoAfters.Remove(args.DoAfter.Index);
         DecrementActiveCount(user);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCuffedGettingStripped(Entity<CuffableComponent> ent, ref BeforeGettingStrippedEvent args) // kinky!
+    {
+        if (ent.Comp.CuffedHandCount == 0)
+            return;
+
+        args.Multiplier *= CuffedStripTime;
     }
 
     /// <summary>

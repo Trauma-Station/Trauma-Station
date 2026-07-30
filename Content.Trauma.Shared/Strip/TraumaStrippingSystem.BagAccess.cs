@@ -38,14 +38,6 @@ public sealed partial class TraumaStrippingSystem
 
     private readonly List<EntityUid> _bagAccessScratch = new(); // Reused buffer for UpdateBagAccess, avoid per-tick allocation
 
-    private void InitializeStripActions()
-    {
-        SubscribeLocalEvent<StrippingComponent, GetVerbsEvent<Verb>>(OnGetStripActionVerbs);
-        SubscribeLocalEvent<BagAccessComponent, BagAccessDoAfterEvent>(OnBagAccessDoAfter);
-        SubscribeLocalEvent<BagAccessComponent, QuickDrawDoAfterEvent>(OnQuickDrawDoAfter);
-        SubscribeLocalEvent<BoundUIClosedEvent>(OnStorageUiClosed);
-    }
-
     private void UpdateBagAccess()
     {
         var curTime = _timing.CurTime;
@@ -85,6 +77,7 @@ public sealed partial class TraumaStrippingSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGetStripActionVerbs(Entity<StrippingComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Target == args.User)
@@ -189,6 +182,7 @@ public sealed partial class TraumaStrippingSystem
         Dirty(user, activeComp);
     }
 
+    [SubscribeLocalEvent]
     private void OnBagAccessDoAfter(Entity<BagAccessComponent> ent, ref BagAccessDoAfterEvent args)
     {
         // Always decrement, fires on both success and cancellation.
@@ -261,6 +255,7 @@ public sealed partial class TraumaStrippingSystem
         Dirty(user, activeComp);
     }
 
+    [SubscribeLocalEvent]
     private void OnQuickDrawDoAfter(Entity<BagAccessComponent> ent, ref QuickDrawDoAfterEvent args)
     {
         // Always decrement, fires on both success and cancellation.
@@ -285,6 +280,7 @@ public sealed partial class TraumaStrippingSystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStorageUiClosed(BoundUIClosedEvent args)
     {
         if (args.UiKey is not StorageComponent.StorageUiKey)
