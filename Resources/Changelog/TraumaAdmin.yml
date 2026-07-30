@@ -294,3 +294,12 @@ Entries:
   id: 38
   time: '2026-07-29T02:29:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3812
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: >-
+      Added new antag token types! The admin remark they give the player says
+      what they can be redeemed for.
+  id: 39
+  time: '2026-07-30T00:45:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3801

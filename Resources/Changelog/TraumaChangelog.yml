@@ -12416,3 +12416,37 @@ Entries:
   id: 1360
   time: '2026-07-29T22:54:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3838
+- author: dasgooty
+  changes:
+  - type: Fix
+    message: Fixed Peppersprays
+  id: 1361
+  time: '2026-07-29T23:59:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3836
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Rev constructions are no longer listed for everyone since they can't craft
+      them anyway.
+  id: 1362
+  time: '2026-07-30T00:39:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3840
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added new antag token types!
+  id: 1363
+  time: '2026-07-30T00:45:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3801
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the slowmode of the breaching hammer while equipped.
+  - type: Tweak
+    message: Changed the prying speed of the breaching hammer, you are now faster.
+  - type: Tweak
+    message: Changed the amount of breaching hammers sec gets. You only get 1 now.
+  id: 1364
+  time: '2026-07-30T00:57:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3837
