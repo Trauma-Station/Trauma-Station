@@ -31,10 +31,10 @@ namespace Content.Client.Ghost
 
         private bool _ghostVisibility = true;
 
-        private bool GhostVisibility
+        public bool GhostVisibility
         {
             get => _ghostVis.GhostsVisible() || _ghostVisibility; // Goob edit
-            set
+            private set
             {
                 if (_ghostVis.GhostsVisible()) // Goobstation
                     value = true;
