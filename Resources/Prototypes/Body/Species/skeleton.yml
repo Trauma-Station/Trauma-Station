@@ -119,13 +119,7 @@
       0: Alive
       100: Dead
   - type: TransferMindOnGib
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:GibBehavior
+  # Trauma - removed Destructible
   - type: SlowOnDamage
     speedModifierThresholds:
       60: 0.9
@@ -229,19 +223,26 @@
   id: OrganSkeletonPerson
   abstract: true
   suffix: SkeletonPerson
-  # <Shitmed>
+  # <Trauma>
   components:
   - type: Inorganic
-  # </Shitmed>
+  # </Trauma>
 
 - type: entity
   parent: OrganSkeletonPerson
   id: OrganSkeletonPersonExternal
   abstract: true
   components:
-  # <Shitmed>
+  # <Trauma>
   - type: BodyPart
-  # </Shitmed>
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 150 # ME FEMUR ACK ACK!
+      behaviors:
+      - !type:GibBehavior
+  # </Trauma>
   - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
   - type: VisualOrgan
