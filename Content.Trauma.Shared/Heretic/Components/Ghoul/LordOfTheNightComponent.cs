@@ -27,8 +27,8 @@ public sealed partial class LordOfTheNightComponent : Component
     [DataField]
     public EntityWhitelist UnanchorWhitelist = new()
     {
-        Components = new[] { "Door", "Destructible" },
-        Tags = new() { "Wall", "Window", "Structure" },
+        Components = new[] { "Door", "Destructible", "Wall" },
+        Tags = new() { "Window", "Structure" },
     };
 
     [DataField]

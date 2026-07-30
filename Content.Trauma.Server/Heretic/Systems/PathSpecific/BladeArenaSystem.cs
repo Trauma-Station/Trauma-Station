@@ -17,6 +17,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Tag;
+using Content.Shared.Wall;
 using Content.Shared.Whitelist;
 using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Content.Trauma.Server.Wizard.Systems;
@@ -60,6 +61,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
     [Dependency] private HereticSystem _heretic = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
 
     private readonly List<TileRef> _tilesToConvert = new();
     private readonly HashSet<Entity<AirtightComponent>> _intersecting = new();
@@ -319,7 +321,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
         _lookup.GetEntitiesIntersecting(coords.MapId, bounds, _intersecting, LookupFlags.Static);
         foreach (var uid in _intersecting)
         {
-            if (_tag.HasTag(uid, ent.Comp.WallTag))
+            if (_wallQuery.HasComp(uid))
             {
                 DetachEntity(uid, originIndices, gridEnt, ent.Comp, ent.Comp.WallReplacement);
                 continue;

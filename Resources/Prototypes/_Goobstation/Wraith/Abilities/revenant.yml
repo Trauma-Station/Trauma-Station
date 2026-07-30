@@ -20,6 +20,11 @@
     structureDamage:
       types:
         Structural: 80
+    structureWhitelist:
+      components:
+      - Wall
+      tags:
+      - Window
   - type: RevenantPush
     damageWhenThrown:
       types:

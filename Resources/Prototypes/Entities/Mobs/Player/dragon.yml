@@ -174,10 +174,9 @@
     healRate: 5 # Trauma, was 7.5
     whitelist:
       components:
+      - Item # Trauma
       - MobState
       - Door
-      - Item # Trauma
-      tags:
       - Wall
   - type: Tag
     tags:
@@ -292,10 +291,9 @@
     canTargetSelf: false
     whitelist:
       components:
+      - Item # Trauma
       - MobState
       - Door
-      - Item # Goobstation
-      tags:
       - Wall
     event: !type:DevourActionEvent
 
