@@ -12459,3 +12459,12 @@ Entries:
   id: 1365
   time: '2026-07-30T12:47:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3846
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed xenobio oil extract not exploding and silver extract not making
+      metal foam.
+  id: 1366
+  time: '2026-07-30T13:00:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3847
