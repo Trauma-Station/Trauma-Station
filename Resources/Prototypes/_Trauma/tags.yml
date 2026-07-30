@@ -203,11 +203,13 @@
 - type: Tag
   id: MimicToolbox # Emote: Tweak
 
-## O ##
-
-# :o nothing
 - type: Tag
   id: MagicMushroom
+
+## O ##
+
+- type: Tag
+  id: OrganEggSack # Construction: DuckBot
 
 ## P ##
 
