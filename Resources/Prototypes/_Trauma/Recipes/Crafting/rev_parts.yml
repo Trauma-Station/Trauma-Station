@@ -4,12 +4,10 @@
 # only for bootstrapping if you lose your starting parts
 - type: construction
   abstract: true
+  parent: BaseRev
   id: BaseRevParts
   graph: RevParts
-  category: construction-category-antagonist
   objectType: Item
-  theory:
-    RevolutionaryKnowledge: 0
   practical:
     FabricationKnowledge: 1
     MetalworkingKnowledge: 1
