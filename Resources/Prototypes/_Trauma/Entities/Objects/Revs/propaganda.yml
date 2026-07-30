@@ -33,7 +33,6 @@
       - AlwaysRevolutionaryConvertible
     blacklist:
       components:
-      - MindShield
       - Revolutionary # no wasting propaganda on someone already converted
       - Deaf # have to hear the headrevs words
       - Zombie

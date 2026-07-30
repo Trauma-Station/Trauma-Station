@@ -1,64 +1,26 @@
-// <Trauma>
-using Content.Trauma.Common.Mindshield;
-// </Trauma>
-using Content.Shared.IdentityManagement;
-using Content.Shared.Mindshield.Components;
-using Content.Shared.Popups;
 using Content.Shared.Revolutionary.Components;
-using Content.Shared.Stunnable;
 using Robust.Shared.GameStates;
 using Robust.Shared.Player;
 using Content.Shared.Antag;
+using Content.Shared.StatusIcon.Components;
 
 namespace Content.Shared.Revolutionary;
 
-public abstract partial class SharedRevolutionarySystem : EntitySystem
+public sealed partial class RevolutionarySystem : EntitySystem
 {
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private SharedStunSystem _sharedStun = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindShieldComponent, MapInitEvent>(MindShieldImplanted);
-        SubscribeLocalEvent<RevolutionaryComponent, ComponentGetStateAttemptEvent>(OnRevCompGetStateAttempt);
-        SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentGetStateAttemptEvent>(OnRevCompGetStateAttempt);
-
         SubscribeLocalEvent<RevolutionaryComponent, ComponentStartup>(DirtyRevComps);
         SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentStartup>(DirtyRevComps);
         SubscribeLocalEvent<ShowAntagIconsComponent, ComponentStartup>(DirtyRevComps);
-        // <Trauma>
-        SubscribeLocalEvent<HeadRevolutionaryComponent, RemoveMindShieldEvent>(OnMindshieldRemoval);
-        // </Trauma>
-        SubscribeLocalEvent<RevolutionaryComponent, AttemptConvertRevolutionaryEvent>(OnAttemptConvert);
-    }
-
-    /// <summary>
-    /// When the mindshield is implanted in the rev it will popup saying they were deconverted. In Head Revs it will remove the mindshield component.
-    /// </summary>
-    private void MindShieldImplanted(EntityUid uid, MindShieldComponent comp, MapInitEvent init)
-    {
-        if (HasComp<HeadRevolutionaryComponent>(uid))
-        {
-            comp.Broken = true; // Goobstation - Break the mindshield implant instead of removing it
-            Dirty(uid, comp);
-            return;
-        }
-
-        if (HasComp<RevolutionaryComponent>(uid))
-        {
-            var stunTime = TimeSpan.FromSeconds(4);
-            var name = Identity.Entity(uid, EntityManager);
-            RemComp<RevolutionaryComponent>(uid);
-            _sharedStun.TryUpdateParalyzeDuration(uid, stunTime);
-            _popupSystem.PopupEntity(Loc.GetString("rev-break-control", ("name", name)), uid);
-        }
     }
 
     /// <summary>
     /// Determines if a HeadRev component should be sent to the client.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnRevCompGetStateAttempt(EntityUid uid, HeadRevolutionaryComponent comp, ref ComponentGetStateAttemptEvent args)
     {
         args.Cancelled = !CanGetState(args.Player);
@@ -67,6 +29,7 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem
     /// <summary>
     /// Determines if a Rev component should be sent to the client.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnRevCompGetStateAttempt(EntityUid uid, RevolutionaryComponent comp, ref ComponentGetStateAttemptEvent args)
     {
         args.Cancelled = !CanGetState(args.Player);
@@ -88,6 +51,7 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem
 
         return HasComp<ShowAntagIconsComponent>(uid);
     }
+
     /// <summary>
     /// Dirties all the Rev components so they are sent to clients.
     ///
@@ -110,8 +74,32 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptConvert(Entity<RevolutionaryComponent> ent, ref AttemptConvertRevolutionaryEvent args)
     {
         args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnAttemptConvertImmune(Entity<RevolutionaryImmuneComponent> ent, ref AttemptConvertRevolutionaryEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void GetRevIcon(Entity<RevolutionaryComponent> ent, ref GetStatusIconsEvent args)
+    {
+        if (HasComp<HeadRevolutionaryComponent>(ent))
+            return;
+
+        if (ProtoMan.Resolve(ent.Comp.StatusIcon, out var iconPrototype))
+            args.StatusIcons.Add(iconPrototype);
+    }
+
+    [SubscribeLocalEvent]
+    private void GetHeadRevIcon(Entity<HeadRevolutionaryComponent> ent, ref GetStatusIconsEvent args)
+    {
+        if (ProtoMan.Resolve(ent.Comp.StatusIcon, out var iconPrototype))
+            args.StatusIcons.Add(iconPrototype);
     }
 }

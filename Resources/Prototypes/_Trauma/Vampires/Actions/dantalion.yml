@@ -23,7 +23,6 @@
       - Body
     blacklist:
       components:
-      - MindShield    # parity?
       - BibleUser     # makes sense
       - VampireThrall # cant thrall other thralls or already thralled
       - Vampire       # makes sense

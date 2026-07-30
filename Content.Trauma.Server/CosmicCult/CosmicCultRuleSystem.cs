@@ -28,7 +28,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -77,6 +77,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private CuffableSystem _cuffable = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private RottingSystem _rotting = default!;
@@ -450,7 +451,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     {
         if (AssociatedGamerule(converter) is not { } cult
         || !_mind.TryGetMind(uid, out var mindId, out var mind)
-        || HasComp<MindShieldComponent>(uid)
+        || _mindShield.IsShielded(uid)
         || HasComp<BibleUserComponent>(uid)
         || _rotting.IsRotten(uid))
             return;

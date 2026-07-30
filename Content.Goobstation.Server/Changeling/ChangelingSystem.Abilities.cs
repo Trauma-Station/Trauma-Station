@@ -39,7 +39,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Actions.Components;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Trauma.Common.CollectiveMind;
@@ -49,6 +49,7 @@ namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingSystem
 {
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private WeldableSystem _weldable = default!; // for biodegrade unweld
     [Dependency] private GibbingSystem _gibbing = default!;
@@ -260,7 +261,7 @@ public sealed partial class ChangelingSystem
             return;
         }
 
-        if (HasComp<MindShieldComponent>(target) && !HasImplant(uid, comp.FakeMindShieldId))
+        if (_mindShield.IsShielded(target))
         {
             _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
         }
