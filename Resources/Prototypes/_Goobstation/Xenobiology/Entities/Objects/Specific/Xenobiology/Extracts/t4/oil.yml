@@ -25,7 +25,7 @@
       methods: [ Touch, Injection ]
       effects:
       - !type:NestedEffect
-        proto: XenobioExtractEvil
+        proto: XenobioExtractEvilBase # the status effect will delete it
       - !type:Jitter
         time: 5
         frequency: 20
@@ -40,3 +40,4 @@
   - type: Tag
     tags:
     - XenobiologyOilExtract
+  # tastes like freedom

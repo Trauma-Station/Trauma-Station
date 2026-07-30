@@ -7,11 +7,11 @@
     edges:
     - to: bot
       steps:
-      - tag: Egg
+      - tag: OrganEggSack
         icon:
-          sprite: Objects/Consumable/Food/egg.rsi
-          state: rainbow
-        name: construction-graph-tag-egg
+          sprite: _White/Mobs/Species/Xenomorph/organs.rsi
+          state: egg_sack
+        name: construction-graph-tag-egg-sack
       - tag: ProximitySensor
         icon:
           sprite: Objects/Misc/proximity_sensor.rsi

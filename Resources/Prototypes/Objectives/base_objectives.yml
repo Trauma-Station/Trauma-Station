@@ -60,6 +60,12 @@
   components:
   - type: PickRandomPerson
     conditions:
+    # <Trauma>
+    - !type:RoleCondition # pls kill operator met a. game
+      whitelist:
+        components:
+        - JobRole
+    # </Trauma>
     # Can't have multiple objectives to kill the same person.
     - !type:ObjectiveTargetCondition
       inverted: true
