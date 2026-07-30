@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: tokenListing
+  id: MinorRoundstartAntagToken
+  name: trauma-balanceui-shop-buy-minor-roundstart-token-antag
+  label: trauma-balanceui-shop-minor-roundstart-token-antag
+  description: trauma-balanceui-shop-buy-minor-roundstart-token-antag-desc
+  price: 100
+  adminNote: trauma-balanceui-remark-minor-roundstart-token-antag
+
+- type: tokenListing
+  id: MajorRoundstartAntagToken
+  name: trauma-balanceui-shop-buy-major-roundstart-token-antag
+  label: trauma-balanceui-shop-major-roundstart-token-antag
+  description: trauma-balanceui-shop-buy-major-roundstart-token-antag-desc
+  price: 200
+  adminNote: trauma-balanceui-remark-major-roundstart-token-antag
+
+- type: tokenListing
+  id: MinorMidroundAntagToken
+  name: trauma-balanceui-shop-buy-minor-midround-token-antag
+  label: trauma-balanceui-shop-minor-midround-token-antag
+  description: trauma-balanceui-shop-buy-minor-midround-token-antag-desc
+  price: 150
+  adminNote: trauma-balanceui-remark-minor-midround-token-antag
+
+- type: tokenListing
+  id: MajorMidroundAntagToken
+  name: trauma-balanceui-shop-buy-major-midround-token-antag
+  label: trauma-balanceui-shop-major-midround-token-antag
+  description: trauma-balanceui-shop-buy-major-midround-token-antag-desc
+  price: 250
+  adminNote: trauma-balanceui-remark-major-midround-token-antag
+
+- type: tokenListing
+  id: WizardAntagToken
+  name: trauma-balanceui-shop-buy-wizard-token-antag
+  label: trauma-balanceui-shop-wizard-token-antag
+  description: trauma-balanceui-shop-buy-wizard-token-antag-desc
+  price: 500
+  adminNote: trauma-balanceui-remark-wizard-token-antag
