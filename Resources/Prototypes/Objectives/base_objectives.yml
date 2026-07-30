@@ -61,7 +61,7 @@
   - type: PickRandomPerson
     conditions:
     # <Trauma>
-    - !type:RoleWhitelist # pls kill operator met a. game
+    - !type:RoleCondition # pls kill operator met a. game
       whitelist:
         components:
         - JobRole
