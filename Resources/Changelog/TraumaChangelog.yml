@@ -12432,3 +12432,10 @@ Entries:
   id: 1362
   time: '2026-07-30T00:39:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3840
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added new antag token types!
+  id: 1363
+  time: '2026-07-30T00:45:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3801
