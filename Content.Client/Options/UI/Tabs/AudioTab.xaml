@@ -28,6 +28,7 @@
                 <CheckBox Name="AdminSoundsCheckBox" Text="{Loc 'ui-options-admin-sounds'}" />
                 <CheckBox Name="BwoinkSoundCheckBox" Text="{Loc 'ui-options-bwoink-sound'}" />
                 <CheckBox Name="StreamerModeCheckBox" Text="{Loc 'ui-options-streamer-mode'}" /> <!-- Trauma -->
+                <CheckBox Name="AudioHrtfCheckBox" Text="{Loc 'ui-options-audio-hrtf'}" />
             </BoxContainer>
         </BoxContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />

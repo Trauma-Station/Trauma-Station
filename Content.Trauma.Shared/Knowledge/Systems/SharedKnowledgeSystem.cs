@@ -6,6 +6,7 @@ using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Whitelist;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -26,6 +27,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] protected IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
@@ -49,7 +51,19 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         "Expert",
         "Master"
     ];
+    /// <summary>
+    /// When knowledge is disabled only these skills can be added.
+    /// </summary>
+    public static readonly EntityWhitelist DisabledSkillWhitelist = new()
+    {
+        Components =
+        [
+            "LanguageKnowledge",
+            "MartialArtsKnowledge"
+        ]
+    };
 
+    public bool SkillsEnabled;
     private bool _skillGain;
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
@@ -60,9 +74,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         base.Initialize();
 
+        InitializeMartialArts();
         InitializeLanguage();
         InitializeOnWear();
 
+        Subs.CVar(_cfg, TraumaCVars.SkillsEnabled, x => SkillsEnabled = x, true);
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
         LoadSkillPrototypes();
@@ -372,6 +388,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </returns>
     public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool popup = true)
     {
+        if (!SkillsEnabled && _whitelist.IsWhitelistFail(DisabledSkillWhitelist, id))
+            return null; // no crafting etc skills when disabled
+
         if (GetKnowledge(ent, id) is { } existing)
         {
             if (existing.Comp.LearnedLevel < level)

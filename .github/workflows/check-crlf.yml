@@ -1,12 +1,12 @@
 name: CRLF Check
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true  # We only care about latest.
 
 jobs:
   build:

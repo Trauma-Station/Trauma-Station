@@ -39,7 +39,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipNanotrasenRepresentative
+    - SkillChipEchelonEducation
+    - SkillChipLongBlade
+    - SkillChipLaser
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial

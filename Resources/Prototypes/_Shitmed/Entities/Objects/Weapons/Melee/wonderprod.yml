@@ -102,25 +102,4 @@
           angle: 60
           animation: WeaponArcThrust
         - type: CuffsOnHit
-          proto: Cablecuffs
-
-      sleep: !type:ItemSwitchState
-        verb: sleep
-        sprite:
-          sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi
-          state: sleep-icon
-        components:
-        - type: MeleeWeapon
-          wideAnimationRotation: -135
-          attackRate: 1
-          damage:
-            types:
-              Ion: 30
-          angle: 60
-          animation: WeaponArcThrust
-        - type: InjectOnHit
-          reagents:
-          - ReagentId: NocturineWonderprod
-            Quantity: 5
-          limit: 20
-          needsRestrain: true
+          proto: WonderprodCuffs

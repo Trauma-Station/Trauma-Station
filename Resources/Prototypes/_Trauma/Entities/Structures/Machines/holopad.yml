@@ -7,7 +7,7 @@
   suffix: Xenobio
   components:
   - type: Label
-    currentLabel: station-beacon-xenobio
+    localizedLabel: station-beacon-xenobio
 
 - type: entity
   parent: Holopad
@@ -15,4 +15,4 @@
   suffix: Genetics
   components:
   - type: Label
-    currentLabel: station-beacon-genetics
+    localizedLabel: station-beacon-genetics

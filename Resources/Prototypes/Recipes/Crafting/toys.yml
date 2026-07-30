@@ -1,42 +1,29 @@
 - type: construction
+  parent: BaseItemMisc
   id: PlushieGhostRevenant
   graph: PlushieGhostRevenant
-  startNode: start
   targetNode: plushie
-  category: construction-category-misc
-  objectType: Item
   # <Trauma>
   theory:
-    ToysKnowledge: 0
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingOuterSuitIan
   graph: ClothingOuterSuitIan
-  startNode: start
   targetNode: suit
-  category: construction-category-misc
-  objectType: Item
-  # <Trauma>
-  theory:
-    ToysKnowledge: 0
-  practical:
-    TailoringKnowledge: 2
-  # </Trauma>
 
 - type: construction
+  parent: BaseItemMisc
   id: MoproachShoes
   graph: MoproachShoes
-  startNode: start
   targetNode: shoes
-  category: construction-category-misc
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 0
-    ToysKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>

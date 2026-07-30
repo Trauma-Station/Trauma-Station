@@ -181,9 +181,10 @@
         targetEffects:
         - !type:ModifyBloodLevel
           amount: -10
-        - !type:EvenHealthChange
+        - !type:HealthChange
           damage:
-            Brute: 5
+            types:
+              Slash: 5
         - !type:SpawnParticles
           particleProto: BloodParticles
     offToggle:

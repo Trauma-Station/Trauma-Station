@@ -19,8 +19,8 @@
     attackRate: 1
     damage:
       types:
-        Slash: 12
-        Asphyxiation: 9
+        Slash: 8
+        Asphyxiation: 12
         Structural: 15
         Ion: 15
     soundHit:
@@ -66,6 +66,8 @@
   id: SpearCosmicCult
   description: An unnerving spear, wrought of indescribable material. Being near it feels like a prickle of static spreading through your nerves.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: CosmicEquipment
   - type: Sprite
     sprite: _DV/CosmicCult/Objects/cosmiclance.rsi
@@ -81,8 +83,6 @@
     damage:
       types:
         Piercing: 12
-        Asphyxiation: 10
-        Ion: 15
     animationRotation: 225
     wideAnimationRotation: 225
     soundHit:
@@ -123,7 +123,8 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 10
+        Asphyxiation: 10
+        Ion: 15
   - type: Item
     size: Large
     shape:

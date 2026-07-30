@@ -32,7 +32,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipWarden
+    - SkillChipCombatEducation
+    - SkillChipLaser
+    - SkillChipEnhancer
   - !type:AddComponentSpecial
     components:
     - type: SecurityStaff

@@ -54,3 +54,15 @@
     remove: null
     add:
     - type: JointStitched
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepRemoveOrganHand
+  name: Remove organ
+  components:
+  - type: SurgeryStep
+    duration: 8
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
+    state: insertion
+  - type: SurgeryRemoveOrganStep

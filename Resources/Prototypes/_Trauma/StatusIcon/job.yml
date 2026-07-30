@@ -7,7 +7,6 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Phonemerchant
   jobName: job-name-phonemerchant
-  allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
@@ -26,3 +25,11 @@
     state: SpacePol
   jobName: job-name-spacepol
   isCrewJob: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconRancher
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: Rancher
+  jobName: job-name-rancher

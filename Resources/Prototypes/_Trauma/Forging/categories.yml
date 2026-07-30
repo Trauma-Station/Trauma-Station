@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: forgingCategory
-  abstract: true # TODO: enable once its implemented
   id: Armor
   name: armor
+  abstract: true
   icon:
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
     state: icon

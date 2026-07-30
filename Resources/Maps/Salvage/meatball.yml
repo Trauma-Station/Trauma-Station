@@ -1459,12 +1459,6 @@ entities:
       anchored: True
       pos: -3.5,-4.5
       parent: 1
-    - type: Solution
-      solution:
-        maxVol: 1500
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 1500
     - type: Explosive
       totalIntensity: 25
       intensitySlope: 3

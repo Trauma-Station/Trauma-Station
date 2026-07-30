@@ -125,7 +125,7 @@ public sealed partial class MobCallerSystem : EntitySystem
                 for (var j = 0; j < steps; j++)
                 {
                     // space isn't continuous, discard direction
-                    if (_map.TryFindGridAt(center, out _, out _))
+                    if (_map.TryFindGridAt(checkPos, out _, out _))
                         return false;
 
                     checkPos = checkPos.Offset(gridStepVec);

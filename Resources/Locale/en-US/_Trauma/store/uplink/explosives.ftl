@@ -7,3 +7,6 @@ uplink-sticky-grenade-desc = A sticky version of the simplistic grenade with a 3
 uplink-exploding-pen-name-trauma = Exploding Pen
 
 uplink-c4-bundle-name-trauma = C-4 Bundle
+
+uplink-cluster-grenade-name = Cluster Grenade
+uplink-cluster-grenade-desc = Three explosive grenades bundled together. The cluster splits after 3.5 seconds.

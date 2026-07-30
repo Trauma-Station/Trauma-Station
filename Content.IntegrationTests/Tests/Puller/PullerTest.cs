@@ -1,7 +1,7 @@
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Hands.Components;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -22,8 +22,8 @@ public sealed class PullerTest : GameTest
         var server = pair.Server;
 
         // <Trauma> - microoptimisation shit
-        var compFactory = server.EntMan.ComponentFactory;
-        var protoManager = server.ProtoMan;
+        var compFactory = SEntMan.ComponentFactory;
+        var protoManager = SProtoMan;
         var handsName = compFactory.CompName<HandsComponent>();
         var pullerName = compFactory.CompName<PullerComponent>();
         // </Trauma>

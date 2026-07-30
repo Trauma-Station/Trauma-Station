@@ -121,9 +121,10 @@
       showInChat: true
     - !type:SpawnEntity
       entity: PuddleBloodSmall
-    - !type:EvenHealthChange
+    - !type:HealthChange
       damage:
-        Brute: 10
+        types:
+          Slash: 10
 #    - !type:PlaySoundBehavior This causes the ProtoID to be invalid for some reason
 #     sound:
 #      collection: Flesh_Tear

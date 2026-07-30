@@ -17,7 +17,7 @@ using System.Linq;
 using System.Text;
 using Content.Server.Objectives.Commands;
 using Content.Shared.CCVar;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Roles.Jobs;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -33,6 +33,7 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private SharedJobSystem _job = default!;
 
+    private CompName _objName; // Trauma
     private IEnumerable<string>? _objectives;
 
     private bool _showGreentext;
@@ -40,6 +41,7 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
     public override void Initialize()
     {
         base.Initialize();
+        _objName = Factory.CompName<ObjectiveComponent>(); // Trauma
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndText);
 
@@ -256,7 +258,7 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
             var objectives = group.Weights.ShallowClone();
             while (_random.TryPickAndTake(objectives, out var objectiveProto))
             {
-                if (!ProtoMan.Index(objectiveProto).TryComp<ObjectiveComponent>(out var objectiveComp, EntityManager.ComponentFactory))
+                if (!ProtoMan.Index(objectiveProto).TryComp<ObjectiveComponent>(_objName, out var objectiveComp)) // Trauma - use _objName
                     continue;
 
                 if (objectiveComp.Difficulty <= maxDifficulty && TryCreateObjective((mindId, mind), objectiveProto, out var objective))
@@ -331,7 +333,7 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
     private void CreateCompletions()
     {
         _objectives = ProtoMan.EnumeratePrototypes<EntityPrototype>()
-            .Where(p => p.HasComponent<ObjectiveComponent>())
+            .Where(p => p.HasComp(_objName)) // Trauma - use _objName
             .Select(p => p.ID)
             .Order();
     }

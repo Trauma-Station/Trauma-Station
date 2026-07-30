@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceBioweapon
+  name: bioweapon appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganHumanTorso
+      Head: OrganHumanHead
+      # Organs
+      Heart: OrganAnimalHeart
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+      Brain: OrganBioweaponBrain
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganReptilianInternal ]
+  id: OrganBioweaponBrain

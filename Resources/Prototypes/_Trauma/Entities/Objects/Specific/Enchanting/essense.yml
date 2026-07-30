@@ -2,7 +2,7 @@
 
 - type: entity
   parent: [BaseItem, BaseMagicalContraband]
-  id: BaseDemonSoulFragment
+  id: DemonSoulFragment
   name: demonic soul fragment
   description: The soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
   components:

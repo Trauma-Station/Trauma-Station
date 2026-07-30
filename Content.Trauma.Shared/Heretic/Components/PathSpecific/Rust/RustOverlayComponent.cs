@@ -20,7 +20,7 @@ public sealed partial class RustOverlayComponent : BaseSpriteOverlayComponent
 
     [DataField]
     public override SpriteSpecifier? Sprite { get; set; } =
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "rune_default");
+        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "rust_default");
 }
 
 public enum RustOverlayKey : byte

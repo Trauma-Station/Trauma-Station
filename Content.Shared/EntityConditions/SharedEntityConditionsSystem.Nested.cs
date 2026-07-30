@@ -11,9 +11,9 @@ public sealed partial class SharedEntityConditionsSystem
     /// <c>TryCondition</c> overload that uses a <see cref="EntityConditionPrototype"/> instead of <see cref="EntityCondition"/>.
     /// </summary>
     public bool TryCondition(EntityUid target, [ForbidLiteral] ProtoId<EntityConditionPrototype> id,
-        EntityUid? user = null) // Trauma
+        EntityUid? sourceEnt = null) // Trauma
     {
         var proto = ProtoMan.Index(id);
-        return TryCondition(target, proto.Condition, user); // Trauma - pass user
+        return TryCondition(target, proto.Condition, sourceEnt: sourceEnt); // Trauma - pass sourceEnt
     }
 }

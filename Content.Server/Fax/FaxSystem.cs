@@ -717,7 +717,7 @@ public sealed partial class FaxSystem : EntitySystem
         // </Trauma>
 
         // Goobstation - Admin Notifications / Admin Notifications
-        // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));
+        // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.AddVolume(-8f));
         foreach (var admin in _adminManager.ActiveAdmins)
             RaiseNetworkEvent(new AdminNotificationEvent(new SoundPathSpecifier("/Audio/Machines/high_tech_confirm.ogg")), admin);
     }

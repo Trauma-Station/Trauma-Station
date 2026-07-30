@@ -809,3 +809,26 @@
       DrillHead: 100, 100
     maxRepairBonus: 0
     deleteOnDestroyed: false
+
+- type: entity
+  id: DeathNettleDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      1: Worn
+      2: Damaged
+      3: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-nettle-0
+      Damaged:
+      - durability-nettle-1
+      Destroyed:
+      - durability-nettle-2
+    minDamageRoll: 1
+    maxDamageRoll: 1
+    maxRepairBonus: 0
+    repairable: false

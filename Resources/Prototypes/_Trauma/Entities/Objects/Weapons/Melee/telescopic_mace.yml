@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseMedicalContraband, BaseTelescopicBaton ]
+  id: TelescopicMace
+  name: telescopic mace
+  description: A compact personal defense weapon. Perfect for fending off people who want to interrupt your rescue attempts or get in your way.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
+    layers:
+    - state: icon-off
+      map: [ "enum.ItemToggleVisuals.Layer" ]
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Melee/telescopic_mace.rsi
+    slots:
+    - Belt
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      collection: MetalThud
+      params:
+        variation: 0.250
+    activatedDamage:
+      types:
+        Blunt: 8
+      woundSeverityMultipliers:
+        Blunt: 0.5
+  - type: MeleeThrowOnHit
+    distance: 1
+    speed: 5
+  - type: MeleeWeapon
+    bluntStaminaDamageFactor: 0

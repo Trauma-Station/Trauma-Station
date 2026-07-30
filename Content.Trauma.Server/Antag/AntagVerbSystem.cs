@@ -16,13 +16,7 @@ public sealed partial class AntagVerbSystem : EntitySystem
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GetAntagVerbsEvent>(OnGetAntagVerbs);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetAntagVerbs(ref GetAntagVerbsEvent args)
     {
         var session = args.Session;

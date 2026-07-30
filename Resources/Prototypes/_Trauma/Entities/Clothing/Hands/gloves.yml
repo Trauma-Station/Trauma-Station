@@ -18,6 +18,8 @@
   name: enhanced retrieval gloves
   description: Special gloves that manipulate the blood vessels in the wearer's hands, granting them the ability to launch headfirst into walls and tackle fleeing criminals in a single bound.
   components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
   - type: Clothing

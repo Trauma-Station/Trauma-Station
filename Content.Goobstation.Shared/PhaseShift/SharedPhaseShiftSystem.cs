@@ -58,7 +58,7 @@ public abstract partial class SharedPhaseShiftSystem : EntitySystem
         if (TryComp(ent, out PullableComponent? pullable))
             _pulling.TryStopPull(ent, pullable);
 
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnRefresh(Entity<PhaseShiftedComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
@@ -94,6 +94,6 @@ public abstract partial class SharedPhaseShiftSystem : EntitySystem
         RemComp<StealthComponent>(ent);
 
         ent.Comp.MovementSpeedBuff = 1;
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 }
