@@ -32,7 +32,6 @@
   - type: ReplacementAccent
     accent: Heckacious # not the same as ss13 but dear god im not writing all that byond shitcode
 
-# fun fact: mimes can take this then remove it to speak with vow intact
 - type: entity
   parent: BaseMutation
   id: MutationMute
@@ -44,9 +43,15 @@
   - type: RemovesMutation
     removes:
     - MutationUnintelligible # no free -70
-  - type: ComponentMutation
+  - type: EffectsMutation
     added:
-    - type: Muted
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMutedMutation
+      time: null
+    removed:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMutedMutation
+      type: Remove
 
 - type: entity
   parent: BaseMutation

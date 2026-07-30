@@ -116,7 +116,6 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedJitteringSystem _jitter = default!;
@@ -141,6 +140,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     #endregion
 
     private static readonly EntProtoId BlurryVision = "StatusEffectBlurryVision";
+    private static readonly EntProtoId MutedEffect = "StatusEffectMuted";
 
     [SubscribeLocalEvent, SubscribeNetworkEvent]
     private void OnSwapSecondaryTarget(SetSwapSecondaryTarget ev)
@@ -228,7 +228,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         if (!targetWizard)
             MakeMime(ev.Target);
         else
-            _statusOld.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true);
+            _status.TryUpdateStatusEffectDuration(ev.Target, MutedEffect, ev.WizardMuteDuration);
 
         ev.Handled = true;
     }

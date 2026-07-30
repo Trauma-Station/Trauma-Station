@@ -95,11 +95,9 @@
       amount: 100
     - !type:ModifyKnockdown
       time: 12
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMuted
       time: 16
-      type: Add
     - !type:Flash
       slowTo: 1
       maxRange: 0.5

@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedDevil
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedGhoul
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedJaunt
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedMutation

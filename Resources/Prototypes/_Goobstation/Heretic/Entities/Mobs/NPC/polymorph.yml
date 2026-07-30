@@ -51,7 +51,6 @@
   components:
   - type: Actions
   - type: ActionsContainer
-  - type: Muted
   - type: Sprite
     sprite: Structures/Specific/Anomalies/Cores/gravity_core.rsi
     state: core
@@ -63,15 +62,14 @@
     - Normal
 
 - type: entity
+  parent: BaseMobJaunt
   id: PolymorphMirrorJaunt
   name: Unknown
   description: You can't figure out what that is.
-  parent: BaseMobJaunt
   categories: [ HideSpawnMenu ]
   components:
   - type: Actions
   - type: ActionsContainer
-  - type: Muted
   - type: Sprite
     sprite: Structures/Specific/Anomalies/Cores/ice_core.rsi
     state: core

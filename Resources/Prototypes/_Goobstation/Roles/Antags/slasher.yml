@@ -41,7 +41,6 @@
       lastVisibility: -1.5
       maxVisibility: -1.5
       thermalsImmune: true
-    - type: Muted
     - type: MovementIgnoreGravity
     - type: SpecialPressureImmunity
     - type: SpecialBreathingImmunity

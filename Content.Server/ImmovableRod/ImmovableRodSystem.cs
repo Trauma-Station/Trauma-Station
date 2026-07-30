@@ -80,14 +80,16 @@ public sealed partial class ImmovableRodSystem : EntitySystem
             _physics.SetBodyStatus(uid, phys, BodyStatus.InAir);
 
             //var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
-            var vel = Transform(uid).LocalRotation.ToWorldVec() * component.MaxSpeed; // Trauma
+            var xform = Transform(uid);
+            var localRot = xform.LocalRotation;
+            var vel = localRot.ToWorldVec() * component.MaxSpeed; // Trauma
 
             if (component.RandomizeVelocity)
             {
                 vel = component.DirectionOverride.Degrees switch
                 {
                     0f => _random.NextVector2(component.MinSpeed, component.MaxSpeed),
-                    _ => xform.LocalRotation.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed) // Trauma
+                    _ => localRot.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed) // Trauma
                 };
 
                 xform.LocalRotation = vel.ToAngle(); // Trauma

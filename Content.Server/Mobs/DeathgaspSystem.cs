@@ -1,6 +1,7 @@
 using Content.Server.Chat.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Speech.Muting;
+using Content.Shared.StatusEffectNew;
 
 namespace Content.Server.Mobs;
 
@@ -11,12 +12,13 @@ namespace Content.Server.Mobs;
 public sealed partial class DeathgaspSystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<DeathgaspComponent> ent, ref MobStateChangedEvent args)
     {
         // don't deathgasp if they arent going straight from crit to dead
-        if (component.NeedsCritical // Goobstation
+        if (ent.Comp.NeedsCritical // Trauma
             && args.OldMobState != MobState.Critical
             || args.NewMobState != MobState.Dead)
             return;
@@ -32,7 +34,7 @@ public sealed partial class DeathgaspSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return false;
 
-        if (HasComp<MutedComponent>(uid))
+        if (_statusEffects.HasEffectComp<MutedStatusEffectComponent>(uid))
             return false;
 
         _chat.TryEmoteWithChat(uid, component.Prototype, ignoreActionBlocker: true);

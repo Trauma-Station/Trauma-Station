@@ -90,11 +90,9 @@
       types:
         Blunt: 5
     targetPart: Head
-  - !type:GenericStatusEffect
-    key: Muted
-    component: Muted
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectMuted
     time: 20
-    type: Update
   levelRequired: 26
 
 - type: combo

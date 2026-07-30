@@ -81,6 +81,10 @@
         effectProto: StatusEffectDrunk
         time: 10
         type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
+        time: 10
+        type: Remove
       - !type:EyeDamage
       - !type:RemoveComponents
         components:
@@ -92,7 +96,6 @@
           minDurationOfIncident: 0
           maxDurationOfIncident: 0
         - type: Unrevivable # i don't think this really affects lings, but might aswell to be safe
-        - type: Muted
         - type: Paracusia
           # chud shit
           minTimeBetweenIncidents: 0.1

@@ -95,9 +95,8 @@
     - !type:ModifyStatusEffect
       effectProto: StatusEffectDeaf
       time: 6
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMuted
       time: 6
   - type: Transform
     anchored: true
