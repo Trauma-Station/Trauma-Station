@@ -31,6 +31,10 @@ public sealed class ChemiCompilerTest : GameTest
 {
     private static readonly EntProtoId Machine = "ChemiCompiler";
     private static readonly EntProtoId Beaker = "LargeBeaker";
+    private static readonly EntProtoId Hotplate = "ChemistryHotplate";
+
+    // same id as the machine, but a different kind of prototype
+    private static readonly ProtoId<GuideEntryPrototype> GuideEntry = "ChemiCompiler";
 
     private static readonly ProtoId<ReagentPrototype> Sulfur = "Sulfur";
     private static readonly ProtoId<ReagentPrototype> Oxygen = "Oxygen";
@@ -275,8 +279,9 @@ public sealed class ChemiCompilerTest : GameTest
         {
             // the machine must be rated to exactly what a hotplate does, not something quietly better
             var protoMan = server.ResolveDependency<IPrototypeManager>();
-            var hotplate = protoMan.Index<EntityPrototype>("ChemistryHotplate");
-            Assert.That(hotplate.TryGetComponent<SolutionHeaterComponent>(out var heater),
+            var compFactory = server.ResolveDependency<IComponentFactory>();
+            var hotplate = protoMan.Index(Hotplate);
+            Assert.That(hotplate.TryComp<SolutionHeaterComponent>(out var heater, compFactory),
                 "The hotplate prototype no longer has a SolutionHeater to compare against");
 
             var comp = entMan.GetComponent<ChemiCompilerComponent>(uid);
@@ -839,7 +844,7 @@ public sealed class ChemiCompilerTest : GameTest
 
         await client.WaitAssertion(() =>
         {
-            var proto = protoMan.Index<GuideEntryPrototype>("ChemiCompiler");
+            var proto = protoMan.Index(GuideEntry);
             using var reader = resMan.ContentFileReadText(proto.Text);
             var text = reader.ReadToEnd();
 
