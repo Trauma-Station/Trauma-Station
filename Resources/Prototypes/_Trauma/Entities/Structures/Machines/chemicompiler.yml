@@ -12,17 +12,17 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Machines/mixer.rsi
+    sprite: _Trauma/Structures/Machines/chemicompiler.rsi
     snapCardinals: true
-    color: "#B7C9E0" # tinted so it doesn't read as a ChemMaster at a glance
     layers:
-    - state: mixer_empty
-    - state: mixer_screens
+    - state: chemicompiler_base
+    # the screens only animate while powered, so the base sprite is the machine's off state
+    - state: chemicompiler_screens
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: Icon
-    sprite: Structures/Machines/mixer.rsi
-    state: mixer_empty
+    sprite: _Trauma/Structures/Machines/chemicompiler.rsi
+    state: chemicompiler_base
   - type: ChemiCompiler
   - type: ActivatableUI
     key: enum.ChemiCompilerUiKey.Key
@@ -42,13 +42,6 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
-  - type: ItemMapper
-    containerWhitelist: [reservoir1, reservoir2, reservoir3, reservoir4, reservoir5, reservoir6, reservoir7, reservoir8, reservoir9, reservoir10]
-    mapLayers:
-      mixer_loaded:
-        whitelist:
-          components:
-          - FitsInDispenser
   # ten identical beaker slots, r1 through r10
   - type: ItemSlots
     slots:

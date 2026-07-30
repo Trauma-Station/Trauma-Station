@@ -106,6 +106,18 @@ Heating is slower still. The machine pushes heat at the same rate a hotplate doe
 up to reaction temperature takes the better part of a minute. Automating chemistry saves you clicking, not
 time.
 
+# Sounds
+
+You cannot see the registers while a program runs, so listening to the machine is how you follow it.
+
+- Two beeps as a program starts.
+- One beep every time reagents leave a reservoir, whether they go to another beaker, a pill, a vial or the
+  bin. Count them against your plan and you know how far it has got.
+- A low beep when heating begins, and the same low beep again once the reservoir is up to temperature.
+  Silence between the two is normal; heating is slow.
+- A high beep when the program finishes and the beakers unlock.
+- A buzzer when an instruction could not be carried out. This is the one to listen for.
+
 # Failures
 
 If an instruction can't be carried out, usually because sx or tx points at a reservoir with no beaker in it,

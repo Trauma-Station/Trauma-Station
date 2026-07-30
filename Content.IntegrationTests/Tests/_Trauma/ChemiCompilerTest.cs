@@ -6,6 +6,8 @@ using Content.IntegrationTests.Fixtures;
 using Content.Server.Chemistry.Components;
 using Content.Server.Power.Components;
 using Content.Shared.Guidebook;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.ContentPack;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -721,6 +723,50 @@ public sealed class ChemiCompilerTest : GameTest
                     Is.False,
                     $"Reservoir {i} still accepted a beaker while full, so clicking would swap instead of filling the next one");
             }
+        });
+    }
+
+    /// <summary>
+    /// Every sound has to point at a real file and be loud enough to actually hear.
+    /// Volume here is gain = 10^(dB/10), not the usual 10^(dB/20), so the numbers drop away much faster than
+    /// they look like they should — the machine has already been silently inaudible once because of it.
+    /// </summary>
+    [Test]
+    public async Task SoundsAreAudibleAndExist()
+    {
+        var (uid, _) = await Setup(new());
+
+        var server = Pair.Server;
+        var resMan = server.ResolveDependency<IResourceManager>();
+
+        await server.WaitAssertion(() =>
+        {
+            var comp = server.EntMan.GetComponent<ChemiCompilerComponent>(uid);
+
+            var sounds = new (string Name, SoundSpecifier Sound)[]
+            {
+                ("start", comp.StartSound),
+                ("fail", comp.FailSound),
+                ("transfer", comp.TransferSound),
+                ("heat", comp.HeatSound),
+                ("idle", comp.IdleSound),
+            };
+
+            Assert.Multiple(() =>
+            {
+                foreach (var (name, sound) in sounds)
+                {
+                    Assert.That(sound, Is.TypeOf<SoundPathSpecifier>(), $"The {name} sound is not a file path");
+
+                    var path = ((SoundPathSpecifier) sound).Path;
+                    Assert.That(resMan.ContentFileExists(path), Is.True,
+                        $"The {name} sound points at {path}, which does not exist");
+
+                    var gain = SharedAudioSystem.VolumeToGain(sound.Params.Volume);
+                    Assert.That(sound.Params.Volume, Is.GreaterThan(-10f),
+                        $"The {name} sound is {sound.Params.Volume}dB, which is {gain:P1} gain and effectively silent");
+                }
+            });
         });
     }
 

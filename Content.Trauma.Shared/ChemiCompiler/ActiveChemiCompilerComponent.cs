@@ -127,12 +127,4 @@ public sealed partial class ActiveChemiCompilerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan NextFailSound;
-
-    /// <summary>
-    /// When the machine may hum about moving reagents again.
-    /// Tracked separately from <see cref="NextFailSound"/> so a chatty program can't drown out its own errors.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
-    public TimeSpan NextTransferSound;
 }

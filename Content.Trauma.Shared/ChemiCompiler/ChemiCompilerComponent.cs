@@ -157,52 +157,57 @@ public sealed partial class ChemiCompilerComponent : Component
     /// <summary>
     /// How long a <see cref="ChemFuck.Speed.Slow"/> instruction takes.
     /// The slowest thing a single instruction can cost, so a program can pause long enough for a reaction
+    /// to settle before carrying on.
     /// </summary>
     [DataField]
     public TimeSpan SlowDelay = TimeSpan.FromSeconds(1);
 
-    // A program can fire hundreds of these, so they are all mixed well below the volume a one-shot machine sound
-    // would use. The transfer hum in particular is meant to be background noise, not an event.
+    // The machine talks in beeps, with the buzzer saved for things going wrong so an error never sounds like
+    // ordinary progress. Volumes sit around where other machines put their one-shots.
+    // Note that gain is 10^(dB/10) here, not the usual 10^(dB/20), so these numbers move faster than they look:
+    // -2dB is 63% gain, but -16dB is 2.5% and may as well be silence.
 
     /// <summary>
     /// Played when a program starts.
     /// </summary>
     [DataField]
     public SoundSpecifier StartSound = new SoundPathSpecifier("/Audio/Machines/twobeep.ogg",
-        AudioParams.Default.WithVolume(-10f));
+        AudioParams.Default.WithVolume(-2f));
 
     /// <summary>
     /// Played when an instruction fails, usually a missing beaker.
-    /// The loudest of the lot on purpose, since it's the one you need to notice.
+    /// The only sound that isn't a beep, because a failure should never be mistaken for progress.
     /// </summary>
     [DataField]
     public SoundSpecifier FailSound = new SoundPathSpecifier("/Audio/Machines/buzz-two.ogg",
-        AudioParams.Default.WithVolume(-8f));
+        AudioParams.Default.WithVolume(-2f));
 
     /// <summary>
-    /// Played when reagents move between reservoirs.
+    /// Played whenever reagents leave a reservoir, whether they land in another one or in a pill or vial.
+    /// Fires on every transfer, so a program's rhythm can be heard.
     /// </summary>
     [DataField]
     public SoundSpecifier TransferSound = new SoundPathSpecifier("/Audio/Machines/beep.ogg",
-        AudioParams.Default.WithVolume(-16f));
+        AudioParams.Default.WithVolume(-4f));
 
     /// <summary>
     /// Played at the start and end of heating a reservoir.
+    /// Pitched below <see cref="IdleSound"/> so the two are told apart by ear alone.
     /// </summary>
     [DataField]
-    public SoundSpecifier HeatSound = new SoundPathSpecifier("/Audio/Machines/button.ogg",
-        AudioParams.Default.WithVolume(-12f));
+    public SoundSpecifier HeatSound = new SoundPathSpecifier("/Audio/Machines/beep.ogg",
+        AudioParams.Default.WithVolume(-3f).WithPitchScale(0.85f));
 
     /// <summary>
     /// Played when a program finishes and the machine goes idle.
     /// </summary>
     [DataField]
-    public SoundSpecifier IdleSound = new SoundPathSpecifier("/Audio/Machines/chime.ogg",
-        AudioParams.Default.WithVolume(-10f));
+    public SoundSpecifier IdleSound = new SoundPathSpecifier("/Audio/Machines/beep.ogg",
+        AudioParams.Default.WithVolume(-2f).WithPitchScale(1.3f));
 
     /// <summary>
-    /// Shortest gap between two of the machine's repeatable sounds.
-    /// A tight loop full of transfers would otherwise be unbearable.
+    /// Shortest gap between two fail buzzes.
+    /// A program failing every instruction should sound annoyed, not continuous.
     /// </summary>
     [DataField]
     public TimeSpan SoundCooldown = TimeSpan.FromSeconds(1);

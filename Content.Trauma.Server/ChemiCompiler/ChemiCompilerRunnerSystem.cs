@@ -415,12 +415,9 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
                 break;
         }
 
-        // a loop can move reagents every few ticks, so the hum is capped rather than played per transfer
-        if (_timing.CurTime >= active.NextTransferSound)
-        {
-            _audio.PlayPvs(comp.TransferSound, ent);
-            active.NextTransferSound = _timing.CurTime + comp.SoundCooldown;
-        }
+        // every transfer beeps. physical instructions are half a second apart, so this stays a rhythm rather
+        // than a stream, and it is the only way to hear that the program is doing chemistry at all
+        _audio.PlayPvs(comp.TransferSound, ent);
 
         // whatever wouldn't fit goes back in the source beaker
         Refund(source, split);
