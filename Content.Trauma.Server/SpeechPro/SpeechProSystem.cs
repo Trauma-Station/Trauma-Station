@@ -4,6 +4,7 @@ using Content.Server.Chat.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Item.ItemToggle;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.SpeechPro;
 using Robust.Shared.Audio;
@@ -19,6 +20,7 @@ public sealed partial class SpeechProSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
     private static readonly ProtoId<LanguagePrototype> SpeechProLanguage = "TauCetiBasic";
@@ -35,7 +37,10 @@ public sealed partial class SpeechProSystem : EntitySystem
 
     private void OnPhraseSelected(EntityUid uid, SpeechProComponent component, SpeechProUiMessage args)
     {
-        if (args.Actor is not { Valid: true } speaker)
+        if (!_itemToggle.IsActivated(uid))
+            return;
+
+        if (args.Actor is not { Valid: true } speaker || !Exists(speaker))
             return;
 
         if (args.Phrase >= SpeechProPhrases.All.Count)
@@ -46,7 +51,7 @@ public sealed partial class SpeechProSystem : EntitySystem
         var language = _prototype.Index(SpeechProLanguage);
 
         _chat.TrySendInGameICMessage(
-            uid,
+            speaker,
             text,
             InGameICChatType.Speak,
             hideChat: false,

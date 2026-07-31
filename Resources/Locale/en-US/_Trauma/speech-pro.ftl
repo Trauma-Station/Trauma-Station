@@ -1,3 +1,6 @@
+speech-pro-verb-open = Open
+speech-pro-verb-close = Close
+
 speech-pro-ui-section-basic = Basics
 speech-pro-ui-section-tourism = Tourism
 speech-pro-ui-section-alerts = Expressions

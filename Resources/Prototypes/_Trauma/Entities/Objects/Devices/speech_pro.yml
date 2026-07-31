@@ -8,10 +8,35 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/speech_pro.rsi
-    state: icon
+    layers:
+    - state: closed
+      map: [ "enum.ItemToggleVisuals.Layer" ]
   - type: Item
     sprite: _Trauma/Objects/Devices/speech_pro.rsi
     size: Small
+    heldPrefix: closed
+  - type: Appearance
+  - type: ItemToggleVisuals
+    heldPrefixOn: open
+    heldPrefixOff: closed
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemToggleVisuals.State:
+        enum.ItemToggleVisuals.Layer:
+          True: { state: icon }
+          False: { state: closed }
+  - type: ItemToggle
+    onUse: false
+    verbToggleOn: speech-pro-verb-open
+    verbToggleOff: speech-pro-verb-close
+    soundActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.125
+    soundDeactivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.125
   - type: ActivatableUI
     key: enum.SpeechProUiKey.Key
     inHandsOnly: true

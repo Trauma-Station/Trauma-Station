@@ -4,11 +4,30 @@
     "x": 32,
     "y": 32
   },
-  "copyright": "Taken from Goonstation at commit 562f91fbe224c708b6a8d14cd0e402d17bebb687, state speech_pro in icons/obj/items/device.dmi. Converted to RSI for Trauma by Cerzix.",
+  "copyright": "Cerzix",
   "license": "CC-BY-NC-SA-3.0",
   "states": [
     {
       "name": "icon"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "closed-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "closed-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "open-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "open-inhand-right",
+      "directions": 4
     }
   ]
 }
