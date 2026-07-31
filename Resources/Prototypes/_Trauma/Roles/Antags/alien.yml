@@ -1,0 +1,8 @@
+- type: antagSpecifier
+  id: TheAlien
+  prefRoles: [ Xenomorph ]
+  spawnerPrototype: SpawnPointGhostAlien
+  allowNonHumans: true
+  briefing:
+    text: alien-role-greeting
+    color: "#8c3986"

@@ -129,3 +129,23 @@
   - type: StationEvent
     startAnnouncement: null
     startAudio: null
+
+## The Alien
+
+- type: entity
+  parent: BaseGameRule
+  id: AlienSpawnRule
+  components:
+  - type: StationEvent
+    earliestStart: 20
+    weight: 3
+    minimumPlayers: 30
+    duration: null
+    occursDuringRoundEnd: false
+  - type: MaintsSpawnRule
+  - type: AntagSpawner
+    prototype: MobAlien
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: TheAlien

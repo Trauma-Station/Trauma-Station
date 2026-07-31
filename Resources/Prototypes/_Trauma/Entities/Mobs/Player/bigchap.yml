@@ -1,0 +1,20 @@
+- type: entity
+  parent: [ BaseMobXenomorphDrone, BaseXenomorphGhostRole ]
+  id: MobAlien
+  name: Alien
+  description: The Perfect Organism
+  components:
+  - type: Sprite
+    sprite: _Trauma/Xenomorphs/the_alien.rsi
+  - type: GhostRole
+    name: ghost-role-information-alien-name
+    description: ghost-role-information-alien-description
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+      enum.RadialSelectorUiKey.Key:
+        type: RadialSelectorMenuBUI

@@ -1,17 +1,17 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: entity
-  parent: [ BaseXenomorphsRule, BaseAntagGhostRoleRule ]
-  id: XenomorphsInfestation
-  components:
-  - type: GhostroleAlert
-  - type: StationEvent
-    weight: 1.5
-    duration: null
-    minimumPlayers: 50
-    earliestStart: 50
-    maxOccurrences: 1
-  - type: AntagSelection
-    antags:
-    - !type:FixedAntagCount
-      proto: Xenomorph
+#- type: entity
+  #parent: [ BaseXenomorphsRule, BaseAntagGhostRoleRule ]
+  #id: XenomorphsInfestation
+  #components:
+  #- type: GhostroleAlert
+  #- type: StationEvent
+    #weight: 1.5
+    #duration: null
+    #minimumPlayers: 50
+    #earliestStart: 50
+    #maxOccurrences: 1
+  #- type: AntagSelection
+    #antags:
+    #- !type:FixedAntagCount
+      #proto: Xenomorph
