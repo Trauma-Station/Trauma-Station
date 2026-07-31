@@ -1,0 +1,5 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:ui="clr-namespace:Content.Trauma.Client.SpeechPro.UI"
+               MinSize="320 260">
+    <ui:SpeechProUiFragment Name="SpeechProFragment" />
+</DefaultWindow>

@@ -1,0 +1,23 @@
+<ui:SpeechProUiFragment xmlns:ui="clr-namespace:Content.Trauma.Client.SpeechPro.UI"
+                        xmlns="https://spacestation14.io"
+                        Orientation="Vertical"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        Margin="2">
+    <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
+    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 3">
+            <Label Text="{Loc 'speech-pro-ui-section-basic'}" StyleClasses="LabelSubText" Margin="2 0 2 1" />
+            <GridContainer Name="BasicGrid" Columns="3" HorizontalExpand="True" />
+
+            <Label Text="{Loc 'speech-pro-ui-section-needs'}" StyleClasses="LabelSubText" Margin="2 5 2 1" />
+            <GridContainer Name="NeedsGrid" Columns="3" HorizontalExpand="True" />
+
+            <Label Text="{Loc 'speech-pro-ui-section-tourism'}" StyleClasses="LabelSubText" Margin="2 5 2 1" />
+            <GridContainer Name="TourismGrid" Columns="3" HorizontalExpand="True" />
+
+            <Label Text="{Loc 'speech-pro-ui-section-alerts'}" StyleClasses="LabelSubText" Margin="2 5 2 1" />
+            <GridContainer Name="AlertsGrid" Columns="3" HorizontalExpand="True" />
+        </BoxContainer>
+    </ScrollContainer>
+</ui:SpeechProUiFragment>

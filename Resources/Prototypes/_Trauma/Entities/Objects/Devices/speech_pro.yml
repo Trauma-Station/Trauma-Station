@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseItem
+  id: SpeechPro
+  name: Speech Pro
+  description: A handheld speech assistance device which broadcasts simple messages for easy communication.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/speech_pro.rsi
+    state: icon
+  - type: Item
+    sprite: _Trauma/Objects/Devices/speech_pro.rsi
+    size: Small
+  - type: ActivatableUI
+    key: enum.SpeechProUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.SpeechProUiKey.Key:
+        type: SpeechProBoundUserInterface
+  - type: SpeechPro
