@@ -12507,3 +12507,36 @@ Entries:
   id: 1371
   time: '2026-07-31T09:57:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3864
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic living heart now shows waypointer towards selected target briefly.
+  - type: Add
+    message: Heretic targets autoreroll individually when deleted/cryod.
+  - type: Add
+    message: New heretic t3 side summon - ash spirit.
+  - type: Add
+    message: >-
+      Cosmic heretic armor lost some heat resists but gained rapid dash (tackle)
+      ability on cosmic fields.
+  - type: Tweak
+    message: Reduced max heretic sacrifice targets 6 -> 5.
+  - type: Tweak
+    message: Sec/command/heretic sacrifices give 2 main and 1 side points, not 3 main.
+  - type: Tweak
+    message: >-
+      Increased amounts of points/sacrificed needed for heretic objectives
+      slightly.
+  - type: Tweak
+    message: Flesh stalkers get crimson cleave instead of jaunt and emp.
+  - type: Tweak
+    message: Raw prophets jaunt is shorter.
+  - type: Tweak
+    message: Nerfed ghoul blade to 15 damage.
+  - type: Tweak
+    message: Void chill and flesh armor effect nerfed.
+  - type: Fix
+    message: Fixed entities with tails behaving weirdly on moving grids.
+  id: 1372
+  time: '2026-07-31T10:07:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3727
