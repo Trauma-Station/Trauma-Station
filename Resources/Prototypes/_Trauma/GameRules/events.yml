@@ -33,7 +33,6 @@
     - id: BlobMidround
     - id: DuoAbductorSpawn
     - id: BingleSpawn
-    - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
     - id: FugitiveSpawn

@@ -6,11 +6,6 @@
   rule: ColossusSpawn
 
 - type: ninjaHackingThreat
-  id: Xenomorphs
-  announcement: terror-xenomorphs
-  rule: XenomorphsInfestation
-
-- type: ninjaHackingThreat
   id: SleeperAgents
   announcement: station-event-communication-interception # replaces the event announcement
   rule: SleeperAgentsQuiet
