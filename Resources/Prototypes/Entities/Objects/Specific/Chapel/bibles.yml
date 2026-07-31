@@ -79,7 +79,7 @@
         Shock: -5
     damageOnFail:
       types:
-        Blunt: 5 # Trauma - no slash and pierce?
+        Blunt: 5 # Trauma - no slash and pierce
         Asphyxiation: 15
     damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
       types:
