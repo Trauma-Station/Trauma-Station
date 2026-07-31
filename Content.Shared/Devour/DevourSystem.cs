@@ -143,7 +143,7 @@ public sealed partial class DevourSystem : EntitySystem
     */
 
         // <Trauma>
-        if (args.Args.Target == null)
+        if (args.Args.Target is not { } target)
             return;
         // <Trauma>
 
@@ -199,8 +199,7 @@ public sealed partial class DevourSystem : EntitySystem
     // <Trauma>
     private bool IsIndestructibleStructure(EntityUid target)
     {
-        var prototypeId = MetaData(target).EntityPrototype?.ID;
-        return prototypeId != null && prototypeId.Contains("Indestructible", StringComparison.OrdinalIgnoreCase);
+        return !HasComp<DestructibleComponent>(target);
     }
     // <Trauma>
 

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.NPC;
+// </Trauma>
 using Content.Shared.Bed.Sleep;
 using Content.Shared.CCVar;
 using Content.Shared.StatusEffectNew;
@@ -5,7 +8,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Shared.NPC;
 
 namespace Content.Shared.SSDIndicator;
 
