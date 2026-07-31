@@ -41,6 +41,12 @@ public sealed partial class ChemiCompilerComponent : Component
     public const int TargetEject = Reservoirs + 3;
 
     /// <summary>
+    /// Target register value that fills the first entry in <see cref="PatchPrototypes"/>.
+    /// Each value after it fills the next entry.
+    /// </summary>
+    public const int TargetPatchFirst = TargetEject + 1;
+
+    /// <summary>
     /// How many memory cells a running program gets. Each cell holds a single byte.
     /// </summary>
     public const int MemorySize = 1024;
@@ -143,17 +149,36 @@ public sealed partial class ChemiCompilerComponent : Component
     public EntProtoId VialPrototype = "ChemistryEmptyVial";
 
     /// <summary>
-    /// What the vial generator makes vials out of.
+    /// What one vial costs. Matches its lathe recipe rather than what grinding one returns, so printing
+    /// here is never cheaper than printing it properly.
     /// </summary>
     [DataField]
-    public ProtoId<MaterialPrototype> VialMaterial = "Glass";
+    public Dictionary<ProtoId<MaterialPrototype>, int> VialCost = new()
+    {
+        ["Glass"] = 100,
+    };
 
     /// <summary>
-    /// How much <see cref="VialMaterial"/> a single vial costs.
-    /// The vial's own composition, so a machine full of glass gives back exactly what was put in it.
+    /// What the patch generators spawn, starting at <see cref="TargetPatchFirst"/>.
     /// </summary>
     [DataField]
-    public int VialGlassCost = 100;
+    public List<EntProtoId> PatchPrototypes = new()
+    {
+        "MedicalPatchBasic",
+        "MedicalPatchRapid",
+        "MedicalPatchLarge",
+        "MedicalPatchTherapeutic",
+    };
+
+    /// <summary>
+    /// What one patch costs, the same for every kind, matching their lathe recipes.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<MaterialPrototype>, int> PatchCost = new()
+    {
+        ["Cloth"] = 100,
+        ["Plastic"] = 100,
+    };
 
     /// <summary>
     /// How much heat <see cref="ChemFuck.Heat"/> can push into a reservoir per second, in joules.
@@ -232,6 +257,21 @@ public sealed partial class ChemiCompilerComponent : Component
     /// </summary>
     public string SlotId(int reservoir)
         => $"{SlotPrefix}{reservoir}";
+
+    /// <summary>
+    /// Gets the patch a target register value prints, if it points at a patch generator at all.
+    /// </summary>
+    public bool TryGetPatch(int target, out EntProtoId patch)
+    {
+        patch = default;
+
+        var index = target - TargetPatchFirst;
+        if (index < 0 || index >= PatchPrototypes.Count)
+            return false;
+
+        patch = PatchPrototypes[index];
+        return true;
+    }
 
     /// <summary>
     /// How long an instruction of a given speed ties the machine up for.

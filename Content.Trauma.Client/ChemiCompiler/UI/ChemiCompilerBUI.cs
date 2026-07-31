@@ -18,6 +18,9 @@ public sealed class ChemiCompilerBUI : BoundUserInterface
 
         _window = this.CreateWindow<ChemiCompilerWindow>();
 
+        // the material list reads the machine's storage itself, it isn't part of the ui state
+        _window.SetOwner(Owner);
+
         // programs only exist on the server, so none of these can be predicted
         _window.OnSave += (slot, code) => SendMessage(new ChemiCompilerSaveMessage(slot, code));
         _window.OnRun += slot => SendMessage(new ChemiCompilerRunMessage(slot));

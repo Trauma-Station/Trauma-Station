@@ -84,6 +84,15 @@ public sealed partial class ChemiCompilerWindow : FancyWindow
         HaltButton.OnPressed += _ => OnHalt?.Invoke();
     }
 
+    /// <summary>
+    /// Points the material list at the machine. It reads the storage itself rather than taking it from
+    /// the ui state, so this only needs doing once.
+    /// </summary>
+    public void SetOwner(EntityUid owner)
+    {
+        MaterialsList.SetOwner(owner);
+    }
+
     public void UpdateState(ChemiCompilerState state)
     {
         _programs = state.Programs;

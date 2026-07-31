@@ -5,6 +5,7 @@ chemicompiler-window-code = Code
 chemicompiler-window-save = Save
 chemicompiler-window-load = Load
 chemicompiler-window-reservoirs = Reservoirs
+chemicompiler-window-materials = Materials
 chemicompiler-window-registers = Registers
 chemicompiler-window-registers-values = sx { $source }   tx { $target }   ax { $amount }
 chemicompiler-window-halt = Halt

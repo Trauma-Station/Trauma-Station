@@ -38,11 +38,3 @@
   materials:
     Steel: 600
     Plastic: 200
-
-- type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
-  id: ChemiCompilerMachineCircuitboard
-  result: ChemiCompilerMachineCircuitboard
-  icon:
-    sprite: Structures/Machines/mixer.rsi
-    state: mixer_empty

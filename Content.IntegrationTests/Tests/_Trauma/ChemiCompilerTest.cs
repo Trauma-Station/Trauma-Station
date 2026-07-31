@@ -2,10 +2,12 @@
 
 using Content.Client.Guidebook;
 using Content.Client.Guidebook.Richtext;
+using Content.Goobstation.Server.MedicalPatch;
 using Content.IntegrationTests.Fixtures;
 using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Server.Chemistry.Components;
 using Content.Server.Power.Components;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -22,6 +24,7 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -44,6 +47,9 @@ public sealed class ChemiCompilerTest : GameTest
     private static readonly EntProtoId Beaker = "LargeBeaker";
     private static readonly EntProtoId Hotplate = "ChemistryHotplate";
     private static readonly EntProtoId Player = "MobHuman";
+    private static readonly EntProtoId Glass = "SheetGlass";
+    private static readonly EntProtoId Cloth = "MaterialCloth";
+    private static readonly EntProtoId Plastic = "SheetPlastic";
 
     // same id as the machine, but a different kind of prototype
     private static readonly ProtoId<GuideEntryPrototype> GuideEntry = "ChemiCompiler";
@@ -58,6 +64,11 @@ public sealed class ChemiCompilerTest : GameTest
     /// The machine <see cref="Setup"/> made, for talking to its interface on the client.
     /// </summary>
     private NetEntity _machine;
+
+    /// <summary>
+    /// The player <see cref="Setup"/> attached, for anything that needs someone to be doing it.
+    /// </summary>
+    private EntityUid _player;
 
     /// <summary>
     /// A run of + signs, the only way to write a number in ChemFuck.
@@ -101,8 +112,8 @@ public sealed class ChemiCompilerTest : GameTest
 
             // the ui only opens for an attached player, and the machine has to be in its view for the
             // client to ever hear about it
-            var player = SEntMan.SpawnAtPosition(Player, map.GridCoords);
-            Server.PlayerMan.SetAttachedEntity(ServerSession!, player);
+            _player = SEntMan.SpawnAtPosition(Player, map.GridCoords);
+            Server.PlayerMan.SetAttachedEntity(ServerSession!, _player);
         });
 
         await RunTicksSync(15);
@@ -195,6 +206,36 @@ public sealed class ChemiCompilerTest : GameTest
 
     private FixedPoint2 Quantity(EntityUid beaker, ProtoId<ReagentPrototype> reagent)
         => _solutions.GetTotalPrototypeQuantity(beaker, reagent);
+
+    /// <summary>
+    /// Puts one item's worth of materials into the machine.
+    /// </summary>
+    private void Load(EntityUid uid, Dictionary<ProtoId<MaterialPrototype>, int> cost)
+    {
+        Assert.That(_materials.TryChangeMaterialAmount(uid, cost),
+            $"Failed to load the machine with {string.Join(", ", cost.Keys)}");
+    }
+
+    /// <summary>
+    /// How much of everything named in a cost the machine is holding.
+    /// </summary>
+    private int Stored(EntityUid uid, Dictionary<ProtoId<MaterialPrototype>, int> cost)
+        => cost.Keys.Sum(material => _materials.GetMaterialAmount(uid, material));
+
+    /// <summary>
+    /// Every patch in the world right now.
+    /// </summary>
+    private List<EntityUid> Patches()
+    {
+        var found = new List<EntityUid>();
+        var query = SEntMan.EntityQueryEnumerator<MedicalPatchComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            found.Add(uid);
+        }
+
+        return found;
+    }
 
     /// <summary>
     /// The registers plus @ should move exactly the amount asked for, from the reservoir asked for.
@@ -388,8 +429,7 @@ public sealed class ChemiCompilerTest : GameTest
             pills = SEntMan.Count<PillComponent>();
 
             var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
-            Assert.That(_materials.TryChangeMaterialAmount(uid, comp.VialMaterial, comp.VialGlassCost),
-                "Failed to load the machine with glass for the vial");
+            Load(uid, comp.VialCost);
         });
 
         // sx = 1, tx = 11, ax = 30. the dosage limit is 20, so that's two pills
@@ -416,7 +456,7 @@ public sealed class ChemiCompilerTest : GameTest
             {
                 Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(10)),
                     "Vial generator did not take 10u from the source reservoir");
-                Assert.That(_materials.GetMaterialAmount(uid, comp.VialMaterial), Is.Zero,
+                Assert.That(Stored(uid, comp.VialCost), Is.Zero,
                     "Vial generator did not spend the glass it was loaded with");
             });
         });
@@ -439,7 +479,7 @@ public sealed class ChemiCompilerTest : GameTest
                 "The machine has nowhere to keep glass, so this test proves nothing");
 
             var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
-            Assert.That(_materials.GetMaterialAmount(uid, comp.VialMaterial), Is.Zero,
+            Assert.That(Stored(uid, comp.VialCost), Is.Zero,
                 "The machine started with glass in it");
         });
 
@@ -450,6 +490,134 @@ public sealed class ChemiCompilerTest : GameTest
         {
             Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(50)),
                 "A vial was made with no glass loaded, or the reagents were not given back");
+        });
+    }
+
+    /// <summary>
+    /// Every material the generators need has to be insertable by hand, not just settable in code.
+    /// Cloth is tagged RawMaterial rather than Sheet, so a Sheet-only whitelist silently refuses it.
+    /// </summary>
+    [Test]
+    public async Task MaterialsCanBeInsertedByHand()
+    {
+        var (uid, _) = await Setup(new());
+
+        await Server.WaitAssertion(() =>
+        {
+            var coords = SEntMan.GetComponent<TransformComponent>(uid).Coordinates;
+
+            foreach (var stack in new EntProtoId[] { Glass, Cloth, Plastic })
+            {
+                var sheets = SEntMan.SpawnAtPosition(stack, coords);
+                Assert.That(_materials.TryInsertMaterialEntity(_player, sheets, uid),
+                    $"{stack.Id} could not be put into the machine");
+            }
+        });
+    }
+
+    /// <summary>
+    /// Targets 14 up should each print their own kind of patch, filled with what was sent to them.
+    /// </summary>
+    [Test]
+    public async Task PatchGeneratorsWork()
+    {
+        var (uid, _) = await Setup(new()
+        {
+            [1] = new Solution(Water, FixedPoint2.New(100)),
+        });
+
+        var expected = new List<EntProtoId>();
+        await Server.WaitAssertion(() =>
+        {
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            expected = new List<EntProtoId>(comp.PatchPrototypes);
+
+            // one patch's worth of materials per target this test is about to use
+            for (var i = 0; i < expected.Count; i++)
+            {
+                Load(uid, comp.PatchCost);
+            }
+        });
+
+        var volumes = new Dictionary<string, FixedPoint2>();
+
+        for (var i = 0; i < expected.Count; i++)
+        {
+            var before = new List<EntityUid>();
+            await Server.WaitPost(() => before = Patches());
+
+            // sx = 1, tx = the patch target, ax = 10
+            var target = ChemiCompilerComponent.TargetPatchFirst + i;
+            await Run(uid, $"+}}>{Count(target)})>{Count(10)}'@");
+
+            var index = i;
+            await Server.WaitAssertion(() =>
+            {
+                var made = Patches().Except(before).ToList();
+                Assert.That(made, Has.Count.EqualTo(1),
+                    $"Target {target} did not print exactly one patch");
+
+                var patch = made[0];
+                var proto = SEntMan.GetComponent<MetaDataComponent>(patch).EntityPrototype;
+                Assert.Multiple(() =>
+                {
+                    Assert.That(proto?.ID, Is.EqualTo(expected[index].Id),
+                        $"Target {target} printed the wrong kind of patch");
+                    Assert.That(Quantity(patch, Water), Is.EqualTo(FixedPoint2.New(10)),
+                        $"Target {target} printed a patch with nothing in it");
+                });
+
+                Assert.That(_solutions.TryGetSolution(patch, SharedChemMaster.BottleSolutionName,
+                    out _, out var solution));
+                volumes[expected[index].Id] = solution!.MaxVolume;
+            });
+        }
+
+        await Server.WaitAssertion(() =>
+        {
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            Assert.That(Stored(uid, comp.PatchCost), Is.Zero,
+                "The patches did not use up the materials they were paid for with");
+
+            // the large patch is only worth having because it holds more, so filling must not flatten it
+            Assert.That(volumes["MedicalPatchLarge"], Is.GreaterThan(volumes["MedicalPatchBasic"]),
+                "The large patch lost its extra capacity, so the fill overrode the prototype's volume");
+        });
+    }
+
+    /// <summary>
+    /// The patch generators have to fail with no cloth or plastic, and give the reagents back when they do.
+    /// </summary>
+    [Test]
+    public async Task PatchGeneratorNeedsMaterials()
+    {
+        var (uid, beakers) = await Setup(new()
+        {
+            [1] = new Solution(Water, FixedPoint2.New(50)),
+        });
+
+        var patches = 0;
+        await Server.WaitAssertion(() =>
+        {
+            patches = SEntMan.Count<MedicalPatchComponent>();
+
+            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            Assert.That(Stored(uid, comp.PatchCost), Is.Zero,
+                "The machine started with patch materials in it");
+        });
+
+        // sx = 1, tx = 14, ax = 10, with nothing to make the patch out of
+        await Run(uid, $"+}}>{Count(ChemiCompilerComponent.TargetPatchFirst)})>{Count(10)}'@");
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(SEntMan.Count<MedicalPatchComponent>() - patches, Is.Zero,
+                    "A patch was printed with no materials loaded");
+                Assert.That(Quantity(beakers[1], Water), Is.EqualTo(FixedPoint2.New(50)),
+                    "The reagents were not given back when the patch failed");
+            });
         });
     }
 

@@ -20,6 +20,7 @@ using Content.Trauma.Shared.ChemiCompiler;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 
 namespace Content.Trauma.Server.ChemiCompiler;
@@ -475,6 +476,18 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
                 break;
 
             default:
+                // patch targets sit above the reservoirs, and there are too many of them to be cases
+                if (comp.TryGetPatch(active.Target, out var patch))
+                {
+                    if (!MakePatch(ent, patch, split))
+                    {
+                        Refund(source, split);
+                        return Step.Failed;
+                    }
+
+                    break;
+                }
+
                 if (active.Target < 1 || active.Target > ChemiCompilerComponent.Reservoirs ||
                     !TryGetReservoir(ent, active.Target, out var target, out _))
                 {
@@ -528,13 +541,8 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
     {
         var comp = ent.Comp;
 
-        // no material storage means no glass, so it can't be used as a glass mill either way
-        if (comp.VialGlassCost > 0 &&
-            (!_storageQuery.TryComp(ent, out var storage) ||
-             !_material.TryChangeMaterialAmount(ent.Owner, comp.VialMaterial, -comp.VialGlassCost, storage)))
-        {
+        if (!TrySpend(ent, comp.VialCost))
             return false;
-        }
 
         var vial = Spawn(comp.VialPrototype, Transform(ent).Coordinates);
         if (!_solution.TryGetFitsInDispenser(vial, out var soln, out _))
@@ -546,6 +554,47 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
             LogImpact.Low,
             $"ChemiCompiler {ent.Owner:machine} filled {vial:vial} {SharedSolutionContainerSystem.ToPrettyString(soln.Value.Comp.Solution)}");
         return true;
+    }
+
+    /// <summary>
+    /// Fills a fresh patch with as much as it will hold, if the machine has the cloth and plastic for one.
+    /// </summary>
+    /// <returns>False if the machine couldn't afford the materials.</returns>
+    private bool MakePatch(Entity<ChemiCompilerComponent> ent, EntProtoId proto, Solution split)
+    {
+        if (!TrySpend(ent, ent.Comp.PatchCost))
+            return false;
+
+        var patch = Spawn(proto, Transform(ent).Coordinates);
+
+        // patches don't fit in a dispenser, but they hold their dose in the same solution a bottle does.
+        // its volume is set per patch prototype, which is the only thing telling a large patch from a basic one
+        if (!_solution.TryGetSolution(patch, SharedChemMaster.BottleSolutionName, out var soln, out _))
+            return true;
+
+        _solution.TryTransferSolution(soln.Value, split, split.Volume);
+
+        _adminLog.Add(LogType.ChemiCompiler,
+            LogImpact.Low,
+            $"ChemiCompiler {ent.Owner:machine} filled {patch:patch} {SharedSolutionContainerSystem.ToPrettyString(soln.Value.Comp.Solution)}");
+        return true;
+    }
+
+    /// <summary>
+    /// Takes the cost of one printed item out of the machine's material storage, all of it or none.
+    /// </summary>
+    /// <returns>False if anything was missing, in which case nothing was spent.</returns>
+    private bool TrySpend(Entity<ChemiCompilerComponent> ent, Dictionary<ProtoId<MaterialPrototype>, int> cost)
+    {
+        if (cost.Count == 0)
+            return true;
+
+        // no material storage at all means nothing can be afforded, rather than everything being free
+        if (!_storageQuery.TryComp(ent, out var storage))
+            return false;
+
+        var spend = cost.ToDictionary(pair => pair.Key, pair => -pair.Value);
+        return _material.TryChangeMaterialAmount((ent.Owner, storage), spend);
     }
 
     /// <summary>

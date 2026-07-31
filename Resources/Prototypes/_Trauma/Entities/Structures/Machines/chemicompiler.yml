@@ -64,12 +64,15 @@
       reservoir8: *reservoir
       reservoir9: *reservoir
       reservoir10: *reservoir
-  # glass for the vial generator
+  # glass for the vial generator, cloth and plastic for the patch generators.
+  # cloth is tagged RawMaterial rather than Sheet, which is why all three tags are needed
   - type: MaterialStorage
-    materialWhiteList: [ Glass ]
+    materialWhiteList: [ Glass, Cloth, Plastic ]
     whitelist:
       tags:
       - Sheet
+      - RawMaterial
+      - Ingot
   - type: WiresPanel
   - type: Machine
     board: ChemiCompilerMachineCircuitboard
