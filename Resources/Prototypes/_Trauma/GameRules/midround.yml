@@ -134,7 +134,7 @@
 
 - type: entity
   parent: BaseGameRule
-  id: XenomorphSpawnRule
+  id: LoneXenomorphSpawnRule
   components:
   - type: StationEvent
     earliestStart: 20

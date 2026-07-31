@@ -102,7 +102,7 @@
 
 - type: entity
   parent: BaseAntagSpawner
-  id: SpawnPointGhostXenomorph
+  id: SpawnPointGhostLoneXenomorph
   categories: [ HideSpawnMenu, Spawner ]
   components:
   - type: Sprite
@@ -110,8 +110,8 @@
     - state: green
     - sprite: _Trauma/Xenomorphs/the_alien.rsi
   - type: GhostRole
-    name: ghost-role-information-alien-name
-    description: ghost-role-information-alien-description
-    rules: ghost-role-information-alien-rules
+    name: ghost-role-information-lone-xenomorph-name
+    description: ghost-role-information-lone-xenomorph-description
+    rules: ghost-role-information-lone-xenomorph-rules
     mindRoles:
     - MindRoleXenomorph

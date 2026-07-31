@@ -9,8 +9,8 @@
   - type: Sprite
     sprite: _Trauma/Xenomorphs/the_alien.rsi
   - type: GhostRole
-    name: ghost-role-information-alien-name
-    description: ghost-role-information-alien-description
+    name: ghost-role-information-lone-xenomorph-name
+    description: ghost-role-information-lone-xenomorph-description
   - type: UserInterface
     interfaces:
       enum.StrippingUiKey.Key:
