@@ -7,7 +7,6 @@ namespace Content.Trauma.Shared.SpeechPro;
 public enum SpeechProPhraseSection : byte
 {
     Basic,
-    Needs,
     Tourism,
     Alerts,
 }

@@ -48,7 +48,6 @@ public sealed partial class SpeechProUiFragment : BoxContainer
         return section switch
         {
             SpeechProPhraseSection.Basic => BasicGrid,
-            SpeechProPhraseSection.Needs => NeedsGrid,
             SpeechProPhraseSection.Tourism => TourismGrid,
             SpeechProPhraseSection.Alerts => AlertsGrid,
             _ => BasicGrid,
@@ -71,7 +70,6 @@ public sealed partial class SpeechProUiFragment : BoxContainer
 
         _columns = columns;
         BasicGrid.Columns = columns;
-        NeedsGrid.Columns = columns;
         TourismGrid.Columns = columns;
         AlertsGrid.Columns = columns;
     }
