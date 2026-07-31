@@ -99,6 +99,9 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         if (!TryComp<UserInterfaceComponent>(mind, out var uic))
             return;
 
+        var ev = new EventHereticUpdateTargets();
+        RaiseLocalEvent(mind, ev);
+
         var uid = args.Performer;
 
         if (heretic.SacrificeTargets.Count == 0)

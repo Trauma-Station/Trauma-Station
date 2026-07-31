@@ -4,23 +4,24 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Goobstation.Shared.Medical.Components;
+namespace Content.Trauma.Shared.Medical.Medigun.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class MediGunComponent : Component
 {
     /// <summary>
     /// Game time for the next tick of healing.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan? NextTick;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextTick;
 
     /// <summary>
     /// Time when uber should end if it's activated.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan? UberEndTime;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan UberEndTime;
 
     /// <summary>
     /// All entities that we're currently healing.
@@ -102,7 +103,7 @@ public sealed partial class MediGunComponent : Component
     /// Tick frequency in seconds
     /// </summary>
     [DataField]
-    public float Frequency = 1f;
+    public float Frequency = 0.2f;
 
     /// <summary>
     /// How many entities we can heal at once
@@ -154,4 +155,7 @@ public sealed partial class MediGunComponent : Component
 
     [DataField, AutoNetworkedField]
     public Color UberLineColor = Color.OrangeRed;
+
+    [DataField]
+    public string JointKey = "medigun";
 }

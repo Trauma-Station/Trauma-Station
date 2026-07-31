@@ -42,6 +42,9 @@
   id: BloodVial
 
 - type: Tag
+  id: Bonfire # Heretic: ashen ritual ingredient
+
+- type: Tag
   id: BowImprovised # Construction: AltarConvertOrange, given to improvised shortbow, used to get Iradomini nullrod's altar
 
 - type: Tag
