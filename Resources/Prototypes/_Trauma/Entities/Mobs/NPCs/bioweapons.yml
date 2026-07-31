@@ -76,7 +76,7 @@
     description: ghost-role-information-bioweapon-desc
     rules: ghost-role-information-bioweapon-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleGhostRoleFamiliar
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
