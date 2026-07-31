@@ -3,7 +3,7 @@
 - type: antagSpecifier
   id: TheXenomorph
   prefRoles: [ Xenomorph ]
-  spawnerPrototype: SpawnPointGhostAlien
+  spawnerPrototype: SpawnPointGhostXenomorph
   allowNonHumans: true
   briefing:
     text: alien-role-greeting
