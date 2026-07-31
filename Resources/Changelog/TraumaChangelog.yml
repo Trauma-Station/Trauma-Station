@@ -12500,3 +12500,10 @@ Entries:
   id: 1370
   time: '2026-07-30T20:07:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3856
+- author: buunie099
+  changes:
+  - type: Remove
+    message: De-handed the Hanged
+  id: 1371
+  time: '2026-07-31T09:57:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3864
