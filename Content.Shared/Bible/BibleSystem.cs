@@ -1,9 +1,9 @@
 // <Trauma>
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
+using Content.Shared.Mobs.Components;
 using Content.Trauma.Common.Bible;
 using Content.Trauma.Common.Familiar;
-using Content.Shared.Mobs.Components;
 // </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -96,10 +96,12 @@ public sealed partial class BibleSystem : EntitySystem
         if (!TryComp<UseDelayComponent>(ent, out var useDelay) || _delay.IsDelayed((ent, useDelay)))
             return;
 
+        // <Trauma> - Was IsAlive now works on critical, Added MobStateComponent to only targets creatures.
         if (args.Target == null || args.Target == args.User ||
-            !HasComp<MobStateComponent>(args.Target.Value) || // Trauma - Was IsAlive now works on critical, Added MobStateComponent to only targets creatures.
+            !HasComp<MobStateComponent>(args.Target.Value) ||
             _mobState.IsDead(args.Target.Value))
             return;
+        // </Trauma>
 
         // <Trauma>
         var bibleUsedEv = new BibleUsedEvent();
