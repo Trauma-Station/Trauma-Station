@@ -144,8 +144,8 @@
     occursDuringRoundEnd: false
   - type: MaintsSpawnRule
   - type: AntagSpawner
-    prototype: MobXenomorph
+    prototype: MobLoneXenomorph
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
-      proto: TheXenomorph
+      proto: LoneXenomorph

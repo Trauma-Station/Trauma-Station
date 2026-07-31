@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: antagSpecifier
-  id: TheXenomorph
+  id: LoneXenomorph
   prefRoles: [ Xenomorph ]
   spawnerPrototype: SpawnPointGhostLoneXenomorph
   allowNonHumans: true
