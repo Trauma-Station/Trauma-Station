@@ -116,7 +116,7 @@ public sealed partial class BanManager
         }
         desc.Append("\n\n> Reason: ");
         var reason = ban.WebhookReason ?? ban.Reason;
-        desc.Append(reason.Trim().Replace("\n", "\n> ");
+        desc.Append(reason.Trim().Replace("\n", "\n> "));
 
         var payload = new WebhookPayload
         {
