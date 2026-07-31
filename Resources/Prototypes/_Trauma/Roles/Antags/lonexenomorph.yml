@@ -2,7 +2,6 @@
 
 - type: antagSpecifier
   id: LoneXenomorph
-  prefRoles: [ Xenomorph ]
   spawnerPrototype: SpawnPointGhostLoneXenomorph
   allowNonHumans: true
   briefing:
