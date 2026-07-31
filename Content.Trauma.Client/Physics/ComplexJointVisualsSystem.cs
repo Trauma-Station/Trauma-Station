@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Shared.Timing;
 
-namespace Content.Goobstation.Client.Physics;
+namespace Content.Trauma.Client.Physics;
 
-public sealed partial class ComplexJointVisualsSystem : EntitySystem
+public sealed partial class ComplexJointVisualsSystem : SharedComplexJointVisualsSystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private IGameTiming _timing = default!;

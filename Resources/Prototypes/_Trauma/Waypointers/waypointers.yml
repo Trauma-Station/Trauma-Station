@@ -1,5 +1,4 @@
-# If you add a new waypointer, you'll need to add the "WaypointerTrackable" component to every entity that you want to be tracked EXCEPT grids.
-# Why not grids? As Todd Howard would say, they just work.
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: waypointer
   abstract: true
@@ -50,4 +49,15 @@
   workOnGrid: true
   color: Red
   maxRange: 50
+  radialMenuIconPath: Markers/Waypointers/rift_waypointer.rsi
+
+- type: waypointer
+  parent: BaseWaypointer
+  id: HereticSacrificeTargetsWaypointer
+  name: Living Heart Waypointer
+  trackedComponents:
+  - type: HereticSacrificeTarget
+  workOnGrid: true
+  workInCombat: true
+  color: Orange
   radialMenuIconPath: Markers/Waypointers/rift_waypointer.rsi

@@ -29,6 +29,11 @@
   id: LivingHeart
   ritualPrototypes:
   - RitualLivingHeart
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SimpleWaypointer
+      waypointerProtoIds:
+        HereticSacrificeTargetsWaypointer: true
   actionPrototypes:
   - ActionHereticLivingHeart
 
@@ -905,3 +910,9 @@
   stage: 7
   ritualPrototypes:
   - RitualSharpMedal
+
+- type: hereticKnowledge
+  id: AshSpirit
+  stage: 7
+  ritualPrototypes:
+  - RitualAshSpirit

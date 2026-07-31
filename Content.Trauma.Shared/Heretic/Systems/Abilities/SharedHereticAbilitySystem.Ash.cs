@@ -18,9 +18,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         var ent = args.Performer;
 
-        if (!StatusNew.TrySetStatusEffectDuration(ent,
-                SharedFireBlastSystem.FireBlastStatusEffect,
-                TimeSpan.FromSeconds(2)))
+        if (!StatusNew.TrySetStatusEffectDuration(ent, args.StatusEffect, TimeSpan.FromSeconds(2)))
             return;
 
         args.Handled = true;

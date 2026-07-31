@@ -48,6 +48,7 @@ knowledge-path-cosmos-armor-desc =
 
     Allows you to transmute a table (or a suit), a mask and a sheet of phoron to create a Starwoven Cloak,
     grants protection from the hazards of space while granting to the user the ability to move freely in no gravity.
+    Additionally, when standing on cosmic fields, allows you to dash (Tackle) short distance, dodging projectiles.
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.
 
