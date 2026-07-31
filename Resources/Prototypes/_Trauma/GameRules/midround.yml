@@ -130,7 +130,7 @@
     startAnnouncement: null
     startAudio: null
 
-## The Alien
+## Lone Xenomorph
 
 - type: entity
   parent: BaseGameRule
