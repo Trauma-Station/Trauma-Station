@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 
+using Robust.Shared.Map;
+
 namespace Content.Goobstation.Shared.SpaceWhale;
 
 /// <summary>
@@ -75,7 +77,7 @@ public sealed partial class TailedEntityComponent : Component
     public List<SegmentData> TailSegments = new();
 
     [DataField]
-    public Vector2 LastPos;
+    public NetCoordinates? LastPos;
 
     /// <summary>
     /// allows the user to offset the tails position on the head entity
@@ -85,13 +87,13 @@ public sealed partial class TailedEntityComponent : Component
 }
 
 [Serializable, NetSerializable, DataRecord]
-public sealed partial class SegmentData(NetEntity segment, Vector2 worldPosition)
+public sealed partial class SegmentData(NetEntity segment, NetCoordinates? coords)
 {
-    public SegmentData() : this(NetEntity.Invalid, Vector2.Zero) { }
+    public SegmentData() : this(NetEntity.Invalid, null) { }
 
     public NetEntity Segment = segment;
 
-    public Vector2 WorldPosition = worldPosition;
+    public NetCoordinates? Coords = coords;
 }
 
 [Serializable, NetSerializable]

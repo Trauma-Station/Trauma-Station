@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.SpaceWhale;
 public sealed partial class TailedEntitySegmentComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public MapCoordinates? Coords;
+    public NetCoordinates? Coords;
 
     [DataField, AutoNetworkedField]
     public Angle WorldRotation;

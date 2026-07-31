@@ -35,7 +35,7 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRefreshMoveSpeed(Entity<VoidCurseComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var modifier = 1f - ent.Comp.Stacks * 0.07f;
+        var modifier = 1f - ent.Comp.Stacks * 0.05f;
         if (TryComp(ent, out TemperatureSpeedComponent? tempSpeed) &&
             tempSpeed.CurrentSpeedModifier is { } current && current != 0f)
             modifier /= 1.2f * current;

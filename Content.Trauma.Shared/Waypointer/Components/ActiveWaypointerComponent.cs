@@ -6,9 +6,11 @@ namespace Content.Trauma.Shared.Waypointer.Components;
 /// This signifies an entity with an active waypointer trying to track something.
 /// This is NOT a pinpointer.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class ActiveWaypointerComponent : Component
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Virtual]
+public partial class ActiveWaypointerComponent : Component
 {
+    public override bool SessionSpecific => true;
+
     /// <summary>
     /// The actual UID for the action entity. It'll be saved here when the component is initialized.
     /// </summary>

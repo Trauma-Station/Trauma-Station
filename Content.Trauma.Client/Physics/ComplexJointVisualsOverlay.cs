@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Physics;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
 
-namespace Content.Goobstation.Client.Physics;
+namespace Content.Trauma.Client.Physics;
 
 public sealed class ComplexJointVisualsOverlay : Overlay
 {
@@ -49,17 +49,21 @@ public sealed class ComplexJointVisualsOverlay : Overlay
             foreach (var (netTarget, data) in beam.Data)
             {
                 if (!_entManager.TryGetEntity(netTarget, out var target) ||
-                    !xformQuery.TryComp(target.Value, out var targetXforn))
+                    !xformQuery.TryComp(target.Value, out var targetXform))
                     continue;
 
-                var targetCoords = _transform.GetMapCoordinates(target.Value, targetXforn);
+                var targetCoords = _transform.GetMapCoordinates(target.Value, targetXform);
 
                 if (targetCoords.MapId != coords.MapId)
                     continue;
 
                 var ourPos = coords.Position;
+                var targetPos = targetCoords.Position;
 
-                var dir = targetCoords.Position - ourPos;
+                if (data.ReverseBeam)
+                    (ourPos, targetPos) = (targetPos, ourPos);
+
+                var dir = targetPos - ourPos;
                 var dirLength = dir.Length();
                 var length = dirLength / data.Scale.Y;
                 if (length <= 0.01f)

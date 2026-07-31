@@ -21,11 +21,8 @@ public sealed partial class DashWingsComponent : Component
     public bool Changed;
 
     [DataField]
-    public float SkillMod = 2f;
+    public ComponentRegistry ToAdd = new();
 
     [DataField]
-    public float RangeModifier = 1f;
-
-    [DataField(required: true)]
-    public ComponentRegistry ToAdd = default!;
+    public ComponentRegistry ToAddWhitelisted = new();
 }
