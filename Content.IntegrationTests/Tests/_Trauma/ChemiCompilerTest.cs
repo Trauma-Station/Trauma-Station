@@ -914,7 +914,7 @@ public sealed class ChemiCompilerTest : GameTest
         {
             Assert.That(IsRunning(uid), Is.True,
                 "The program finished before its buffer could be looked at, so this proves nothing");
-            buffer = SEntMan.GetComponent<ActiveChemiCompilerComponent>(uid).Output;
+            buffer = SEntMan.GetComponent<ActiveChemiCompilerComponent>(uid).Output.ToString();
         });
 
         // let it run itself out so the next program can start

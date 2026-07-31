@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System.Text;
 
 namespace Content.Trauma.Shared.ChemiCompiler;
 
@@ -70,8 +71,7 @@ public sealed partial class ActiveChemiCompilerComponent : Component
     /// <summary>
     /// Text written so far by <see cref="ChemFuck.Output"/>.
     /// </summary>
-    [DataField(serverOnly: true)]
-    public string Output = string.Empty;
+    public StringBuilder Output = new();
 
     /// <summary>
     /// How many instructions have run, checked against <see cref="ChemiCompilerComponent.MaxInstructions"/>.

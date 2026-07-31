@@ -32,11 +32,7 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChemiCompilerComponent, BeforeActivatableUIOpenEvent>(OnUiOpen);
-        SubscribeLocalEvent<ChemiCompilerComponent, EntInsertedIntoContainerMessage>(OnReservoirChanged);
-        SubscribeLocalEvent<ChemiCompilerComponent, EntRemovedFromContainerMessage>(OnReservoirChanged);
-        SubscribeLocalEvent<ChemiCompilerComponent, PowerChangedEvent>(OnPowerChanged);
-
+        // the generator has no attribute for bui events, so this one subscription stays written out
         Subs.BuiEvents<ChemiCompilerComponent>(ChemiCompilerUiKey.Key, subs =>
         {
             subs.Event<ChemiCompilerSaveMessage>(OnSave);
@@ -46,21 +42,25 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnUiOpen(Entity<ChemiCompilerComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateUi(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnReservoirChanged(Entity<ChemiCompilerComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         UpdateUi(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnReservoirChanged(Entity<ChemiCompilerComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         UpdateUi(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPowerChanged(Entity<ChemiCompilerComponent> ent, ref PowerChangedEvent args)
     {
         // pulling the plug on a running program stops it wherever it got to
@@ -122,7 +122,7 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.StartSound, ent);
         _adminLog.Add(LogType.ChemiCompiler,
             LogImpact.Medium,
-            $"{args.Actor:user} ran ChemiCompiler program {args.Slot + 1} ({program.Length} instructions) on {ent:machine}");
+            $"{args.Actor:user} ran ChemiCompiler program {args.Slot + 1} ({program.Length} instructions) on {ent.Owner:machine}");
 
         UpdateUi(ent);
     }

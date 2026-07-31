@@ -291,7 +291,7 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
             return;
         }
 
-        active.Output += (char) value;
+        active.Output.Append((char) value);
 
         if (active.Output.Length >= ent.Comp.MaxOutputLength)
             Speak(ent, active);
@@ -302,20 +302,18 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
     /// </summary>
     private void Speak(Entity<ChemiCompilerComponent> ent, ActiveChemiCompilerComponent active)
     {
-        var line = active.Output;
-        active.Output = string.Empty;
-
-        if (line.Length == 0)
-            return;
-
         // a program can write any byte it likes, and most of the low ones are control codes that would
         // come out as rubbish in a speech bubble
-        var text = new StringBuilder(line.Length);
-        foreach (var c in line)
+        var text = new StringBuilder(active.Output.Length);
+        for (var i = 0; i < active.Output.Length; i++)
         {
+            var c = active.Output[i];
             if (!char.IsControl(c))
                 text.Append(c);
         }
+
+        // cleared before the early return, or a line of nothing but control codes would stick forever
+        active.Output.Clear();
 
         if (text.Length == 0)
             return;
