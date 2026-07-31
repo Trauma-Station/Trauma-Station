@@ -169,7 +169,7 @@
     - HidesHair
     - WhitelistChameleon
   - type: FireProtection
-    reduction: 0.1
+    reduction: 0.5
   - type: HideLayerClothing
     layers:
       Hair: HEAD

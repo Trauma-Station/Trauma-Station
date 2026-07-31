@@ -7,7 +7,7 @@ using Content.Shared.Projectiles;
 
 namespace Content.Trauma.Server.Atmos;
 
-public sealed class FireProjectileSystem : EntitySystem
+public sealed partial class FireProjectileSystem : EntitySystem
 {
     [Dependency] private FlammableSystem _flammable = default!;
     [Dependency] private EntityQuery<FlammableComponent> _query = default!;

@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Shared.Chemistry.EntitySystems;
-// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Shared.Atmos;
@@ -30,7 +27,6 @@ namespace Content.Client.HealthAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class HealthAnalyzerControl : BoxContainer
 {
-    private readonly SharedSolutionContainerSystem _solution;
     private readonly IEntityManager _entityManager;
     private readonly SpriteSystem _spriteSystem;
     private readonly IPrototypeManager _prototypes;
@@ -47,10 +43,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _prototypes = dependencies.Resolve<IPrototypeManager>();
         _cache = dependencies.Resolve<IResourceCache>();
         _damageable = _entityManager.System<DamageableSystem>();
-        // <Trauma>
-        _solution = _entityManager.System<SharedSolutionContainerSystem>();
         InitializeTrauma(); // Trauma
-        // </Trauma>
     }
 
     public void Populate(HealthAnalyzerUiState state)
@@ -151,7 +144,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
         DrawDiagnosticGroups(damageSortedGroups, damagePerType);
 
-        PopulateTrauma(target.Value, state); // Trauma
+        PopulateTrauma(target.Value, ref state); // Trauma
     }
 
     private static string GetStatus(MobState mobState)

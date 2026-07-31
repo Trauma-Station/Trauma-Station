@@ -41,7 +41,6 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
 
     public override void Initialize()
     {
-        InitializeTrauma(); // Trauma
         SubscribeLocalEvent<HealthAnalyzerComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HealthAnalyzerComponent, HealthAnalyzerDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<HealthAnalyzerComponent, EntGotInsertedIntoContainerMessage>(OnInsertedIntoContainer);
@@ -88,8 +87,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             }
 
             component.IsAnalyzerActive = true;
-            UpdateScannedUser(uid, patient, true,
-                component.CurrentMode, component.CurrentBodyPart); // Shitmed Change
+            UpdateScannedUser(uid, patient, true);
         }
     }
 
@@ -169,8 +167,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     /// </summary>
     /// <param name="healthAnalyzer">The health analyzer that should receive the updates</param>
     /// <param name="target">The entity to start analyzing</param>
-    /// <param name="part">Shitmed Change: The body part to analyze, if any</param>
-    private void BeginAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target, EntityUid? part = null)
+    private void BeginAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target,
+        EntityUid? part = null) // Trauma
     {
         //Link the health analyzer to the scanned entity
         healthAnalyzer.Comp.ScannedEntity = target;
@@ -178,8 +176,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
 
         _toggle.TryActivate(healthAnalyzer.Owner);
 
-        UpdateScannedUser(healthAnalyzer, target, true,
-            healthAnalyzer.Comp.CurrentMode, part); // Shitmed Change
+        UpdateScannedUser(healthAnalyzer, target, true);
     }
 
     /// <summary>
@@ -194,8 +191,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         healthAnalyzer.Comp.CurrentBodyPart = null; // Shitmed Change
         _toggle.TryDeactivate(healthAnalyzer.Owner);
 
-        UpdateScannedUser(healthAnalyzer, target, false,
-            healthAnalyzer.Comp.CurrentMode); // Shitmed
+        UpdateScannedUser(healthAnalyzer, target, false);
     }
 
 
@@ -209,8 +205,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         if (!healthAnalyzer.Comp.IsAnalyzerActive)
             return;
 
-        UpdateScannedUser(healthAnalyzer, target, false,
-            healthAnalyzer.Comp.CurrentMode); // Shitmed
+        UpdateScannedUser(healthAnalyzer, target, false);
         healthAnalyzer.Comp.IsAnalyzerActive = false;
     }
 
@@ -220,16 +215,14 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     /// <param name="healthAnalyzer">The health analyzer</param>
     /// <param name="target">The entity being scanned</param>
     /// <param name="scanMode">True makes the UI show ACTIVE, False makes the UI show INACTIVE</param>
-    /// <param name="part">Shitmed Change: The body part being scanned, if any</param>
-    public void UpdateScannedUser(EntityUid healthAnalyzer, EntityUid target, bool scanMode, HealthAnalyzerMode mode, EntityUid? part = null)
+    public void UpdateScannedUser(EntityUid healthAnalyzer, EntityUid target, bool scanMode)
     {
         if (!_uiSystem.HasUi(healthAnalyzer, HealthAnalyzerUiKey.Key)
             || !HasComp<DamageableComponent>(target))
             return;
 
-        var uiState = GetHealthAnalyzerUiState(target,
-            mode, part); // Shitmed
-        uiState.ScanMode = scanMode; // Shitmed
+        var uiState = GetHealthAnalyzerUiState(healthAnalyzer, target); // Trauma - pass the health analyzer...
+        uiState.ScanMode = scanMode;
 
         _uiSystem.ServerSendUiMessage(
             healthAnalyzer,
@@ -244,7 +237,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     /// <param name="target">The entity being scanned</param>
     /// <returns></returns>
     public HealthAnalyzerUiState GetHealthAnalyzerUiState(EntityUid? target,
-        HealthAnalyzerMode mode, EntityUid? part) // Shitmed
+        EntityUid? part) // Trauma
     {
         if (!target.HasValue || !HasComp<DamageableComponent>(target))
             return new HealthAnalyzerUiState();
@@ -268,46 +261,21 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             //bleeding = bloodstream.BleedAmount > 0;
         }
 
-        var bodyStatus = _wound.GetDamageableStatesOnBody(entity);
-
-        // <Goob>
-        var vitalDamage = FixedPoint2.Zero;
-        if (_damageQuery.TryComp(entity, out var damageable))
-            vitalDamage = _threshold.CheckVitalDamage((entity, damageable));
-        // </Goob>
-
         if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
-        // <Shitmed> - multimodal health analyzer
-        var state = new HealthAnalyzerUiState(
-            GetNetEntity(target),
+        return new HealthAnalyzerUiState(
+            GetNetEntity(entity),
             bodyTemperature,
             bloodAmount,
             null,
-            new(), // not fetched until it's needed below
+            // <Trauma>
+            FetchBleedData(entity), // was bleeding bool
             unrevivable,
-            bodyStatus,
-            vitalDamage,
-            part != null ? GetNetEntity(part) : null);
-        switch (mode)
-        {
-            case HealthAnalyzerMode.Body:
-                FetchBodyData(entity, out var traumas, out state.Bleeding);
-                state.ScanState = new HealthAnalyzerBodyState(traumas);
-                break;
-            case HealthAnalyzerMode.Organs:
-                state.Bleeding = FetchBleedData(entity);
-                var organs = FetchOrganData(entity);
-                state.ScanState = new HealthAnalyzerOrgansState(organs);
-                break;
-            case HealthAnalyzerMode.Chemicals:
-                state.Bleeding = FetchBleedData(entity);
-                var chemicals = FetchChemicalData(entity);
-                state.ScanState = new HealthAnalyzerChemicalsState(chemicals);
-                break;
-        }
-        return state;
-        // </Shitmed>
+            _wound.GetDamageableStatesOnBody(entity),
+            _threshold.CheckVitalDamage(entity),
+            GetNetEntity(part)
+            // </Trauma>
+        );
     }
 }

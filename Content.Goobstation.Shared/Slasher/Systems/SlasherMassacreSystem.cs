@@ -188,11 +188,8 @@ public sealed partial class SlasherMassacreSystem : EntitySystem
             return false;
 
         var pickedLimb = _random.Pick(severable);
-
-        if (!TryComp<WoundableComponent>(pickedLimb, out var woundable) || woundable.ParentWoundable is not {} parent)
+        if (!_body.RemoveOrgan(victim, pickedLimb.Owner))
             return false;
-
-        _wound.AmputateWoundableSafely(parent, pickedLimb, woundable);
 
         _popup.PopupEntity(Loc.GetString("slasher-massacre-limb"), victim, PopupType.Medium);
         return true;

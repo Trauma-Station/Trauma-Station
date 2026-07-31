@@ -508,7 +508,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 2
   - type: FireProtection
-    reduction: 0.25
+    reduction: 1
 
 - type: entity
   parent: [ BaseClothingModsuitHelmetHideIdentity, BaseModsuitPieceRD ]
