@@ -166,7 +166,7 @@
         - id: ClothingNeckAutismPin
     # Rare Group
     - !type:GroupSelector
-      weight: 2
+      weight: 15
       children:
       # <Trauma>
       - id: PonderingOrb
