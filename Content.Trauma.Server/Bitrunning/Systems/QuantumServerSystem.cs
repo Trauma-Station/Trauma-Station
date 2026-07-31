@@ -236,7 +236,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
             {
                 pod.DeployedAvatar = false;
                 pod.Avatar = null;
-                Dirty(uid, pod);
             }
         }
 
@@ -431,7 +430,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
             if (pod.LinkedServer == serverEnt.Owner)
             {
                 pod.DeployedAvatar = false;
-                Dirty(uid, pod);
             }
         }
 
@@ -515,7 +513,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
                 DisconnectAvatar(oldAvatar, true);
 
             pod.Avatar = null;
-            Dirty(podUid, pod);
         }
 
         pod.DeployedAvatar = true;
@@ -555,7 +552,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
 
         server.ActiveConnections.Add(avatar);
 
-        Dirty(podUid, pod);
         _netpod.UpdateVisuals((podUid, pod));
         Dirty(serverUid, server);
         _bitrunningDisk.RefreshAvatarEffects(avatar);
@@ -682,7 +678,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
             if (connection.DeleteOnDisconnect || _mobState.IsDead(avatarUid) || IsAvatarInCriticalState(avatarUid))
                 pod.Avatar = null;
 
-            Dirty(podUid.Value, pod);
             _netpod.UpdateVisuals((podUid.Value, pod));
 
             _netpod.EjectOccupant(podUid.Value);
@@ -1096,7 +1091,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
                 ? containerComp.BodyContainer.ContainedEntity
                 : null;
 
-            Dirty(podUid, pod);
             _netpod.UpdateVisuals((podUid, pod));
         }
 
@@ -1160,7 +1154,6 @@ public sealed partial class QuantumServerSystem : EntitySystem
 
             EnsureComp<AvatarNavRelayComponent>(podUid).RelayEntity = newAvatarUid;
 
-            Dirty(podUid, pod);
             _netpod.UpdateVisuals((podUid, pod));
         }
 

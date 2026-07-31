@@ -97,7 +97,6 @@ public sealed partial class NetpodSystem : EntitySystem
             if (!dirty)
                 continue;
 
-            Dirty(uid, pod);
             UpdateVisuals((uid, pod));
         }
     }
@@ -108,7 +107,6 @@ public sealed partial class NetpodSystem : EntitySystem
         var containerComp = EnsureComp<NetpodContainerComponent>(ent);
         containerComp.BodyContainer = _container.EnsureContainer<ContainerSlot>(ent, "netpod-body");
         ent.Comp.Occupant = containerComp.BodyContainer.ContainedEntity;
-        Dirty(ent);
         UpdateVisuals(ent);
     }
 
@@ -195,7 +193,6 @@ public sealed partial class NetpodSystem : EntitySystem
         }
 
         ent.Comp.Occupant = args.Entity;
-        Dirty(ent);
         SetVisualState(ent, NetpodVisualState.Closing);
         _audio.PlayPvs(ent.Comp.CloseSound, ent);
         AutoConnectDelay(ent.Owner, args.Entity, ent.Comp.AutoConnectDelay);
@@ -215,7 +212,6 @@ public sealed partial class NetpodSystem : EntitySystem
             return;
 
         ent.Comp.Occupant = null;
-        Dirty(ent);
         SetVisualState(ent, NetpodVisualState.Opening);
         _audio.PlayPvs(ent.Comp.OpenSound, ent);
         Timer.Spawn(PodAnimationDuration,
@@ -245,7 +241,6 @@ public sealed partial class NetpodSystem : EntitySystem
         ent.Comp.Occupant = TryComp<NetpodContainerComponent>(ent.Owner, out var containerComp)
             ? containerComp.BodyContainer.ContainedEntity
             : null;
-        Dirty(ent);
         UpdateVisuals(ent);
     }
 
@@ -368,7 +363,6 @@ public sealed partial class NetpodSystem : EntitySystem
             if (TryComp<NetpodComponent>(podUid, out var current))
             {
                 current.EjectingOccupant = false;
-                Dirty(podUid, current);
             }
         }
     }
@@ -391,7 +385,6 @@ public sealed partial class NetpodSystem : EntitySystem
             return;
 
         ent.Comp.LinkedServer = args.Source;
-        Dirty(ent);
     }
 
     private void OnPortDisconnected(Entity<NetpodComponent> ent, ref PortDisconnectedEvent args)
@@ -400,7 +393,6 @@ public sealed partial class NetpodSystem : EntitySystem
             return;
 
         ent.Comp.LinkedServer = null;
-        Dirty(ent);
     }
 
     private void RefreshLinkedServer(Entity<NetpodComponent> ent)
@@ -414,12 +406,10 @@ public sealed partial class NetpodSystem : EntitySystem
                 continue;
 
             ent.Comp.LinkedServer = source;
-            Dirty(ent);
             return;
         }
 
         ent.Comp.LinkedServer = null;
-        Dirty(ent);
     }
 
     private void AutoConnectDelay(EntityUid podUid, EntityUid user, TimeSpan delay)
