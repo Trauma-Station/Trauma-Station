@@ -2,8 +2,8 @@
 
 - type: entity
   parent: [ BaseMobXenomorphDrone, BaseXenomorphGhostRole ]
-  id: MobAlien
-  name: Alien
+  id: MobXenomorph
+  name: Xenomorph
   description: The Perfect Organism
   components:
   - type: Sprite

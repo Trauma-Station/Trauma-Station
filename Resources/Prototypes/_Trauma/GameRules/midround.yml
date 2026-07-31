@@ -134,7 +134,7 @@
 
 - type: entity
   parent: BaseGameRule
-  id: AlienSpawnRule
+  id: XenomorphSpawnRule
   components:
   - type: StationEvent
     earliestStart: 20
@@ -144,8 +144,8 @@
     occursDuringRoundEnd: false
   - type: MaintsSpawnRule
   - type: AntagSpawner
-    prototype: MobAlien
+    prototype: MobXenomorph
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
-      proto: TheAlien
+      proto: TheXenomorph
