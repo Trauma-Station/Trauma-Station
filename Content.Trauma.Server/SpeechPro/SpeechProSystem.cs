@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Systems;
+using Content.Server.Speech;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -24,6 +25,7 @@ public sealed partial class SpeechProSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototype = default!;
 
     private static readonly ProtoId<LanguagePrototype> SpeechProLanguage = "TauCetiBasic";
+    private readonly HashSet<EntityUid> _accentlessSpeakers = new();
 
     public override void Initialize()
     {
@@ -33,6 +35,8 @@ public sealed partial class SpeechProSystem : EntitySystem
         {
             subs.Event<SpeechProUiMessage>(OnPhraseSelected);
         });
+
+        SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech, before: [typeof(AccentSystem)]);
     }
 
     private void OnPhraseSelected(EntityUid uid, SpeechProComponent component, SpeechProUiMessage args)
@@ -50,19 +54,34 @@ public sealed partial class SpeechProSystem : EntitySystem
         var text = Loc.GetString(phrase.MessageLocId);
         var language = _prototype.Index(SpeechProLanguage);
 
-        _chat.TrySendInGameICMessage(
-            speaker,
-            text,
-            InGameICChatType.Speak,
-            hideChat: false,
-            hideLog: false,
-            ignoreActionBlocker: true,
-            nameOverride: "SpeechPro",
-            languageOverride: language);
+        _accentlessSpeakers.Add(speaker);
+
+        try
+        {
+            _chat.TrySendInGameICMessage(
+                speaker,
+                text,
+                InGameICChatType.Speak,
+                hideChat: false,
+                hideLog: false,
+                ignoreActionBlocker: true,
+                nameOverride: "SpeechPro",
+                languageOverride: language);
+        }
+        finally
+        {
+            _accentlessSpeakers.Remove(speaker);
+        }
 
         _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/quickbeep.ogg"), speaker);
 
         _adminLogger.Add(LogType.Action, LogImpact.Low,
             $"{ToPrettyString(speaker)} used Speech Pro phrase '{text}' with {ToPrettyString(uid)} at {_timing.CurTime}.");
+    }
+
+    private void OnTransformSpeech(TransformSpeechEvent args)
+    {
+        if (_accentlessSpeakers.Contains(args.Sender))
+            args.Cancel();
     }
 }
