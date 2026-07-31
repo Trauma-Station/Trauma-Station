@@ -3,6 +3,7 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Trauma.Common.Bible;
 using Content.Trauma.Common.Familiar;
+using Content.Shared.Mobs.Components;
 // </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -14,7 +15,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
@@ -97,7 +97,7 @@ public sealed partial class BibleSystem : EntitySystem
             return;
 
         if (args.Target == null || args.Target == args.User ||
-            !HasComp<MobStateComponent>(args.Target.Value) || // Trauma - no more bucket exploding, still heals crit targets.
+            !HasComp<MobStateComponent>(args.Target.Value) || // Trauma - Was IsAlive now works on critical, Added MobStateComponent to only targets creatures.
             _mobState.IsDead(args.Target.Value))
             return;
 
