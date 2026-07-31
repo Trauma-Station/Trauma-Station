@@ -232,7 +232,7 @@ public sealed partial class HealthAnalyzerControl
                 string locString;
                 if (_amputationQuery.TryComp(trauma, out var amputation))
                 {
-                    var source = _prototypes.Index(amputation.Source).Name;
+                    var source = _prototypes.Index(amputation.Source).Name.ToLower();
                     locString = Loc.GetString($"condition-body-trauma-{trauma.Comp.TraumaType}", ("source", source));
                 }
                 else
