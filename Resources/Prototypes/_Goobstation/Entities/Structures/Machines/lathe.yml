@@ -258,9 +258,7 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
-    - ServiceBoardsTrauma
     - TraumaSpeechPro # Trauma
-    - ServiceBoardsGoob
     - Translators
     - Janitor
     - Instruments
