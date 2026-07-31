@@ -457,7 +457,7 @@ public sealed partial class WoundSystem
     /// </summary>
     public void UpdateWoundableIntegrity(Entity<WoundableComponent?> part)
     {
-        if (!_woundableQuery.Resolve(part, ref part.Comp))
+        if (!_woundableQuery.Resolve(part, ref part.Comp) || part.Comp.Wounds == default) // it can be null while applying state if the entity is entering pvs right now
             return;
 
         // Calculate total damage on this part
