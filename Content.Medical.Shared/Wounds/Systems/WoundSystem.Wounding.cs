@@ -689,7 +689,7 @@ public sealed partial class WoundSystem
     /// <returns>An enumerable pointing to one of the found wounds</returns>
     public List<Entity<WoundComponent>> GetWoundableWounds(Entity<WoundableComponent?> part)
     {
-        if (!_woundableQuery.Resolve(part, ref part.Comp))
+        if (!_woundableQuery.Resolve(part, ref part.Comp) || part.Comp.Wounds == default) // it can be null while applying state if the entity is entering pvs right now
             return [];
 
         _wounds.Clear();
