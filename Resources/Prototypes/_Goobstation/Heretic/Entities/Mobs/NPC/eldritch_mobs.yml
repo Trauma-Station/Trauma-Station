@@ -6,8 +6,7 @@
   components:
   - type: BodyPart
     slots: []
-  - type: Woundable
-    boneEntity: null
+  - type: Boneless
   - type: Destructible
     thresholds: []
 
