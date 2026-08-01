@@ -53,13 +53,16 @@
   - type: MeleeThrowOnHit
     distance: 0.3
     speed: 1
+  - type: Solution
+    solution:
+      maxVol: 5
   - type: SolutionRegeneration
     generated:
       reagents:
       - ReagentId: MuteToxin
-        Quantity: 2
+        Quantity: 5
   - type: MeleeChemicalInjector
-    transferAmount: 2
+    transferAmount: 5
     solution: melee
 
 # TODO: inherit BaseSword
