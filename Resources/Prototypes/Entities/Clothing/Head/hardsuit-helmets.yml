@@ -61,7 +61,7 @@
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 0.2, 5x for limb coverage
   - type: Armor
     modifiers:
       coefficients:
@@ -491,7 +491,7 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 1, 5x for limb coverage
   - type: Armor
     modifiers:
       coefficients:
@@ -723,7 +723,7 @@
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 0.2, 5x for limb coverage
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.5
@@ -1155,7 +1155,7 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 1, 5x for limb coverage
   - type: Armor
     traumaDeductions: # prevents traumas at all (kinda)
       Dismemberment: 1

@@ -35,7 +35,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: FireProtection
-    reduction: 0.7
+    reduction: 0.88
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:Container {}

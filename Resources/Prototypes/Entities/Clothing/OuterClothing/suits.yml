@@ -67,7 +67,7 @@
     heatingCoefficient: 0.005
     coolingCoefficient: 0.05
   - type: FireProtection
-    reduction: 0.65 # doesnt have a full seal so not as good
+    reduction: 0.82 # Trauma - was 0.75, 1.25x for limb coverage
   - type: Armor
     coverage:
     - Torso
@@ -115,7 +115,7 @@
     heatingCoefficient: 0.001
     coolingCoefficient: 0.05
   - type: FireProtection
-    reduction: 0.8 # atmos firesuit offers best protection, hardsuits are a little vulnerable
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: Armor
     coverage:
     - Torso
