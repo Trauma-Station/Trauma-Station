@@ -115,7 +115,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.1 # chinalake meta would go hard
   - type: FireProtection
-    reduction: 0.9 # atmos fire suit is 0.8, so i guess this is fine? Reduction goes the opossite way right?
+    reduction: 1
   - type: Armor
     traumaDeductions: # not full protection so its damage can actually harm you
       Dismemberment: 0.9
@@ -262,7 +262,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitExperimentalNanorep
   - type: FireProtection
-    reduction: 0.4
+    reduction: 0.5
 
 # Singuloth hardsuit
 

@@ -141,10 +141,12 @@ public sealed partial class DungeonJob
                     }
                 }
 
+                /* Trauma - fuck off useless log spam
                 if (groupSize > 0)
                 {
                     _sawmill.Warning($"Found remaining group size for ore veins of {gen.Replacement ?? "null"}!");
                 }
+                */
             }
         }
     }

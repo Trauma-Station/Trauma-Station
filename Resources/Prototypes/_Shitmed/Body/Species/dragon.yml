@@ -44,8 +44,8 @@
   - type: VisualOrganMarkings
     markingData:
       group: None
+  - type: Boneless # cant exactly get bone surgery as a dragon
   - type: Woundable
-    boneEntity: null # cant exactly get bone surgery as a dragon
     integrity: 500
     integrityCap: 500
     thresholds:
@@ -87,7 +87,6 @@
     layers:
     - state: tail-icon
   - type: Woundable
-    boneEntity: null
     integrity: 500
     integrityCap: 500
     thresholds:

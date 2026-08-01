@@ -353,7 +353,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
-    reduction: 0.6
+    reduction: 0.75
 
 - type: entity
   parent: ClothingOuterArmorTemplar

@@ -34,7 +34,7 @@
     sealUpPopup: sealable-clothing-seal-up-chestplate
     sealDownPopup: sealable-clothing-seal-down-chestplate
   - type: FireProtection
-    reduction: 0.5
+    reduction: 0.63
   - type: StaminaResistance
     damageCoefficient: 0.9
   - type: SealableClothingVisuals
@@ -195,7 +195,7 @@
     delayDelta: 1
     knockdownTimeDelta: -1
   - type: FireProtection
-    reduction: 0.7 # 0.2 stronger than other modsuits
+    reduction: 0.88
 
 - type: entity
   parent: [ ClothingOuterModsuitBase, BaseModsuitPieceAtmos ]
@@ -229,7 +229,7 @@
     delayDelta: 1
     knockdownTimeDelta: -1
   - type: FireProtection
-    reduction: 0.75 # 0.25 better than other modsuits
+    reduction: 0.94
 
 - type: entity
   parent: [ ClothingOuterModsuitBase, BaseModsuitPieceRD ]
