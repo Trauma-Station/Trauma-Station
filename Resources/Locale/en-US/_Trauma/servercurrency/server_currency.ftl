@@ -1,8 +1,8 @@
-trauma-balanceui-shop-buy-minor-roundstart-token-antag = Buy a Minor Roundstart Antag Token - {$price} Evil Coins
-trauma-balanceui-shop-buy-major-roundstart-token-antag = Buy a Major Roundstart Antag Token - {$price} Evil Coins
-trauma-balanceui-shop-buy-minor-midround-token-antag = Buy a Minor Midround Antag Token - {$price} Evil Coins
-trauma-balanceui-shop-buy-major-midround-token-antag = Buy a Major Midround Antag Token - {$price} Evil Coins
-trauma-balanceui-shop-buy-wizard-token-antag = Buy a Wizard Antag Token - {$price} Evil Coins
+trauma-balanceui-shop-buy-minor-roundstart-token-antag = Buy a Minor Roundstart Antag Token - {$price} Ron Coins
+trauma-balanceui-shop-buy-major-roundstart-token-antag = Buy a Major Roundstart Antag Token - {$price} Ron Coins
+trauma-balanceui-shop-buy-minor-midround-token-antag = Buy a Minor Midround Antag Token - {$price} Ron Coins
+trauma-balanceui-shop-buy-major-midround-token-antag = Buy a Major Midround Antag Token - {$price} Ron Coins
+trauma-balanceui-shop-buy-wizard-token-antag = Buy a Wizard Antag Token - {$price} Ron Coins
 
 trauma-balanceui-shop-minor-roundstart-token-antag = Minor Roundstart Antag Token
 trauma-balanceui-shop-major-roundstart-token-antag = Major Roundstart Antag Token
