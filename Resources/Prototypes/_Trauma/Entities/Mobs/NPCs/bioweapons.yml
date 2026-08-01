@@ -76,7 +76,7 @@
     description: ghost-role-information-bioweapon-desc
     rules: ghost-role-information-bioweapon-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleSiliconBrain
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -117,3 +117,14 @@
     rootTask:
       task: IdleCompound
   - type: Climbing
+  - type: UserInterface
+    interfaces:
+      enum.SiliconLawsUiKey.Key:
+        type: SiliconLawBoundUserInterface
+        requireInputValidation: false
+  - type: SiliconLawBound
+  - type: SiliconLawProvider
+    laws: BioweaponLawset
+  - type: ActionGrant
+    actions:
+    - ActionViewLaws
