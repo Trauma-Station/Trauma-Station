@@ -380,7 +380,8 @@
       collection: FootstepThud
   - type: SlowOnDamage
     speedModifierThresholds:
-      50: 0.9
+      999: 1
+      0: 1
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -442,10 +443,6 @@
     damageModifierSet: CoconutCrabUnshelled
   - type: Injurable
     damageContainer: Biological
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      999: 1
-      0: 1
   - type: WeakToHoly
   - type: ToolRefinable
     refineResult:
