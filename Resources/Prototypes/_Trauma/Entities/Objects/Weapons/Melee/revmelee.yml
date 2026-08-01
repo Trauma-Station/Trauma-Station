@@ -26,7 +26,7 @@
     doAfterDuration: 1.0
 
 - type: entity
-  parent: [ BaseRevForgedWeapon, SolutionDart ]
+  parent: [ BaseRevForgedWeapon, SolutionCompositeSmallStackable ]
   id: RevMace
   name: forged mace
   description: A robust mace, stuns enemies. Knocks the air out of targets and makes them struggle to speak.
@@ -57,9 +57,9 @@
     generated:
       reagents:
       - ReagentId: MuteToxin
-        Quantity: 0.5
+        Quantity: 1
   - type: MeleeChemicalInjector
-    transferAmount: 1
+    transferAmount: 1.5
     solution: melee
 
 # TODO: inherit BaseSword
