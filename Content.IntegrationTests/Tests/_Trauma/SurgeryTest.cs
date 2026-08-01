@@ -81,7 +81,7 @@ public sealed class SurgeryTest : GameTest
 
             Assert.That(_body.GetBody(arm), Is.Null, $"{SEntMan.ToPrettyString(weapon)} failed to sever {SEntMan.ToPrettyString(arm)} in 20 hits!");
 
-            Assert.That(!_trauma.HasWoundableTrauma(torso, TraumaType.Dismemberment),
+            Assert.That(_trauma.HasWoundableTrauma(torso, TraumaType.Dismemberment),
                 "Arm was cut off but there was no dismemberment trauma left!");
 
             // TODO: do dismember surgery
