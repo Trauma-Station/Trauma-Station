@@ -7,6 +7,10 @@
   name: demon
   description: It came from hell.
   components:
+  - type: CollectiveMind
+    defaultChannel: Demonmind
+    channels:
+    - Demonmind
   - type: KnowledgeHolder
   - type: KnowledgeContainer # no skills lol
   - type: HTN
@@ -74,7 +78,7 @@
     description: ghost-role-information-demon-desc
     rules: ghost-role-information-antagonist-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleDemon
     raffle:
       settings: short
   - type: Sprite
@@ -752,7 +756,7 @@
       - Wall
 
 - type: entity
-  parent: BaseDemon
+  parent: [ BaseDemon, FlyingMobBase ]
   id: MajorDemonFeverbird
   name: feverbird
   description: Your head hurts. Something is wrong. Onion layer one. Onion layer two. Onion layer three…
@@ -985,7 +989,7 @@
       - ActionDemonRift
 
 - type: entity
-  parent: BaseDemon
+  parent: [ BaseDemon, FlyingMobBase ]
   id: MajorDemonGhost
   name: Spectre
   description: Torn from their bodies, they seek to warm their hands on the warm flesh of the living.

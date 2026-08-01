@@ -1,0 +1,5 @@
+- type: collectiveMind
+  id: Demonmind
+  name: collective-mind-demonmind
+  keycode: 'k'
+  color: "#990000"

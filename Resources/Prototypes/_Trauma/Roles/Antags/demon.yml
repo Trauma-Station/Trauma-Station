@@ -1,0 +1,8 @@
+- type: antag
+  id: Demon
+  name: ghost-role-information-demon-name
+  objective: ghost-role-information-demon-desc
+  antagonist: true
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 2h
