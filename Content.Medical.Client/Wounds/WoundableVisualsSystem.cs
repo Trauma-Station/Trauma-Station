@@ -228,7 +228,8 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
     {
         if (TerminatingOrDeleted(woundable) ||
             !TryComp<BodyPartComponent>(woundable, out var part) ||
-            _part.GetParentPart(woundable.Owner) is not {} parent)
+            _part.GetParentPart(woundable.Owner) is not {} parent ||
+            TerminatingOrDeleted(parent))
             return;
 
         var partKey = GetLimbBleedingKey(part);
