@@ -12595,3 +12595,12 @@ Entries:
   id: 1377
   time: '2026-08-01T10:21:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3865
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Drones now have crafting skills and can't summon demons.
+  - type: Fix
+    message: Fixed some lights being circular.
+  id: 1378
+  time: '2026-08-01T12:26:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3886
