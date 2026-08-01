@@ -12633,3 +12633,10 @@ Entries:
   id: 1381
   time: '2026-08-01T20:19:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3880
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Rancher has been mapped to Bagel.
+  id: 1382
+  time: '2026-08-01T21:13:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3874
