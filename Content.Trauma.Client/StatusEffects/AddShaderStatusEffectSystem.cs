@@ -7,42 +7,25 @@ namespace Content.Trauma.Client.StatusEffects;
 
 public sealed partial class AddShaderStatusEffectSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private SpriteSystem _sprite = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnApplied(Entity<AddShaderStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        base.Initialize();
-
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
-
-        SubscribeLocalEvent<AddShaderStatusEffectComponent, StatusEffectAppliedEvent>(OnStartUp);
-        SubscribeLocalEvent<AddShaderStatusEffectComponent, StatusEffectRemovedEvent>(OnShutdown);
+        var id = ent.Comp.Shader;
+        var shader = ProtoMan.Index<ShaderPrototype>(id).Instance();
+        var data = new SpriteComponent.PostShaderArgs(id, shader)
+        {
+            GetScreenTexture = true,
+            RaiseShaderEvent = true
+        };
+        _sprite.SetPostShader(args.Target, data);
     }
 
-    private void OnShutdown(Entity<AddShaderStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    [SubscribeLocalEvent]
+    private void OnRemoved(Entity<AddShaderStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
         if (!Terminating(args.Target))
-            SetShader(args.Target, false, ent.Comp.Shader);
-    }
-
-    private void OnStartUp(Entity<AddShaderStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        SetShader(args.Target, true, ent.Comp.Shader);
-    }
-
-    private void SetShader(EntityUid uid, bool enabled, ProtoId<ShaderPrototype> shaderproto)
-    {
-        if (!_spriteQuery.TryComp(uid, out var sprite))
-            return;
-
-        if (enabled)
-        {
-            var shader = _proto.Index(shaderproto).Instance();
-            sprite.PostShader = shader;
-        }
-
-        sprite.GetScreenTexture = enabled;
-        sprite.RaiseShaderEvent = enabled;
+            _sprite.RemovePostShader(args.Target, ent.Comp.Shader);
     }
 }
