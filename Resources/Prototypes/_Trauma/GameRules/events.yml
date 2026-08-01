@@ -111,12 +111,12 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     minimumPlayers: 30
-    weight: 3
+    weight: 1.5
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 3, 6
       children:
       - id: MobCoconutCrab
         weight: 0.75
