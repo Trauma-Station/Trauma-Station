@@ -57,7 +57,7 @@
     generated:
       reagents:
       - ReagentId: MuteToxin
-        Quantity: 1
+        Quantity: 2
   - type: MeleeChemicalInjector
     transferAmount: 2
     solution: melee
