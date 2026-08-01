@@ -43,7 +43,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         SubscribeLocalEvent<SurgeryStepSpawnEffectComponent, SurgeryStepEvent>(OnStepSpawnComplete);
     }
 
-    protected override void RefreshUI(EntityUid body)
+    public override void RefreshUI(EntityUid body)
     {
         var surgeries = new Dictionary<NetEntity, List<EntProtoId>>();
         foreach (var part in _body.GetExternalOrgans(body))

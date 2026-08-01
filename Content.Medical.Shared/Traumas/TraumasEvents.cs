@@ -16,8 +16,11 @@ public record struct OrganDamageSeverityChanged(OrganSeverity OldSeverity, Organ
 [ByRefEvent]
 public record struct OrganDamageSeverityChangedOnWoundable(Entity<InternalOrganComponent> Organ, OrganSeverity OldSeverity, OrganSeverity NewSeverity);
 
+/// <summary>
+/// Raised on the trauma inflicting wound when a trauma is remvoed.
+/// </summary>
 [ByRefEvent]
-public record struct TraumaBeingRemovedEvent(Entity<TraumaComponent> Trauma, EntityUid TraumaTarget, FixedPoint2 TraumaSeverity, TraumaType TraumaType);
+public record struct TraumaBeingRemovedEvent(Entity<TraumaComponent> Trauma);
 
 [ByRefEvent]
 public record struct BoneIntegrityChangedEvent(FixedPoint2 OldIntegrity, FixedPoint2 NewIntegrity);
