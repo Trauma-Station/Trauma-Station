@@ -12560,3 +12560,14 @@ Entries:
   id: 1374
   time: '2026-07-31T23:32:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3869
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed lag from wound self healing.
+  - type: Fix
+    message: >-
+      Fixed fire protection like firesuits not respecting part coverage. Wearing
+      only a suit no longer protects your head and vice versa.
+  id: 1375
+  time: '2026-08-01T01:04:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3875
