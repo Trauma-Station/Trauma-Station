@@ -2,8 +2,9 @@ using Robust.Shared.Random;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Shared.Stacks;
-//using Content.Shared.Prototypes; // Trauma -d ie
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.VendingMachines;
+using Content.Shared.VendingMachines.Components;
 
 namespace Content.Server.Destructible.Thresholds.Behaviors;
 
