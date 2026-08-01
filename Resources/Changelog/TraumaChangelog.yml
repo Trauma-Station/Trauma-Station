@@ -12571,3 +12571,18 @@ Entries:
   id: 1375
   time: '2026-08-01T01:04:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3875
+- author: It is no longer time for crab.
+  changes:
+  - type: Tweak
+    message: >-
+      Coconut Crabs can now be kited around easier, and don't knock you as far
+      back.
+  - type: Tweak
+    message: >-
+      Coconut Crabs are no longer slowed by damage when their shell is broken,
+      and are slightly faster.
+  - type: Tweak
+    message: Crab ventspawn rarer and spawns less crabs.
+  id: 1376
+  time: '2026-08-01T10:09:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3882
