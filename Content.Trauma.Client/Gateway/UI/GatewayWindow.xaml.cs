@@ -145,7 +145,7 @@ public sealed partial class GatewayWindow : FancyWindow,
         }
 
         var now = _timing.CurTime;
-        if (now < comp.NextReady)
+        if (now >= _nextReady)
         {
             NextReadyBar.Value = 1f;
             NextCloseText.Text = "00:00";

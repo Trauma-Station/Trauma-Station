@@ -11,7 +11,7 @@ namespace Content.Medical.Common.Body;
 /// Organ component specifically for internal organs, e.g. lungs, heart.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class InternalOrganComponent : BaseSurgeryToolComponent
 {
     public override string ToolName => "An organ";
@@ -43,6 +43,7 @@ public sealed partial class InternalOrganComponent : BaseSurgeryToolComponent
     /// <summary>
     ///     All the modifiers that are currently modifying the OrganIntegrity
     /// </summary>
+    //[AutoNetworkedField] // cant network until EntityUid NetSerializer is real
     public Dictionary<(string, EntityUid), FixedPoint2> IntegrityModifiers = new();
 
     /// <summary>

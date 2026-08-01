@@ -2,10 +2,20 @@
 
 - type: construction
   abstract: true
+  id: BaseRev
+  category: construction-category-antagonist
+  entityWhitelist: # if skills are disabled, prevents randoms making rev shit
+    components:
+    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 0
+
+- type: construction
+  abstract: true
+  parent: BaseRev
   id: BaseRevMachine
   graph: RevMachine
   placementMode: SnapgridCenter
-  category: construction-category-antagonist
   objectType: Structure
   canBuildInImpassable: false
   conditions:

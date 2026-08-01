@@ -6,21 +6,18 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
-using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
-using Robust.Server.GameStates;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed partial class StarGazerSystem : SharedStarGazerSystem
 {
-    [Dependency] private PvsOverrideSystem _pvs = default!;
     [Dependency] private GhostRoleSystem _ghostRole = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private PopupSystem _popup = default!;
@@ -31,32 +28,23 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<LaserBeamEndpointComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<LaserBeamEndpointComponent, ComponentShutdown>(OnShutdown);
-
-        SubscribeLocalEvent<CosmosPassiveComponent, ResetStarGazerConsciousnessEvent>(OnReset);
-
-        SubscribeLocalEvent<StarGazerComponent, HereticStateChangedEvent>(OnStateChanged);
-        SubscribeLocalEvent<StarGazerComponent, StarGazerSeekMasterEvent>(OnSeekMaster);
         SubscribeLocalEvent<StarGazerComponent, TakeGhostRoleEvent>(OnTakeGhostRole,
             after: [typeof(GhostRoleSystem)]);
-
-        SubscribeLocalEvent<GhostAttemptHandleEvent>(OnGhost);
     }
 
+    [SubscribeLocalEvent]
     private void OnGhost(GhostAttemptHandleEvent args)
     {
         if (HasComp<StarGazerComponent>(args.Mind.CurrentEntity))
             args.CanReturnGlobal = false;
     }
 
+    [SubscribeLocalEvent]
     private void OnSeekMaster(Entity<StarGazerComponent> ent, ref StarGazerSeekMasterEvent args)
     {
         if (!TryComp(ent, out HereticMinionComponent? minion) ||
             !Exists(minion.BoundHeretic))
             return;
-
 
         args.Handled = TeleportStarGazer(ent, minion.BoundHeretic.Value);
     }
@@ -76,6 +64,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStateChanged(Entity<StarGazerComponent> ent, ref HereticStateChangedEvent args)
     {
         if (!args.IsDead)
@@ -123,6 +112,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
             PopupType.Large);
     }
 
+    [SubscribeLocalEvent]
     private void OnReset(Entity<CosmosPassiveComponent> ent, ref ResetStarGazerConsciousnessEvent args)
     {
         args.Handled = true;
@@ -200,31 +190,5 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
             if (!Xform.InRange((uid, xform), minion.BoundHeretic.Value, starGazer.MaxDistance))
                 TeleportStarGazer((uid, starGazer), minion.BoundHeretic.Value);
         }
-    }
-
-    private void OnShutdown(Entity<LaserBeamEndpointComponent> ent, ref ComponentShutdown args)
-    {
-        if (ent.Comp.PvsOverride)
-            _pvs.RemoveGlobalOverride(ent);
-    }
-
-    private void OnStartup(Entity<LaserBeamEndpointComponent> ent, ref ComponentStartup args)
-    {
-        if (ent.Comp.PvsOverride)
-            _pvs.AddGlobalOverride(ent);
-    }
-
-    protected override void OnStarGazeStartup(Entity<StarGazeComponent> ent, ref ComponentStartup args)
-    {
-        base.OnStarGazeStartup(ent, ref args);
-
-        _pvs.AddGlobalOverride(ent);
-    }
-
-    protected override void OnStarGazeShutdown(Entity<StarGazeComponent> ent, ref ComponentShutdown args)
-    {
-        base.OnStarGazeShutdown(ent, ref args);
-
-        _pvs.RemoveGlobalOverride(ent);
     }
 }

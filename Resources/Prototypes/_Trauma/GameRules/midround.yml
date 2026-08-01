@@ -37,10 +37,9 @@
 ## Morph
 
 - type: entity
-  parent: [ BaseRoundstartAntagRule ]
+  parent: BaseGameRule
   id: MorphRule
   components:
-  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 20
     weight: 3
@@ -56,13 +55,19 @@
     - !type:FixedAntagCount
       proto: Morph
 
+- type: entity
+  parent: [ MorphRule, BaseAntagGhostRoleRule ]
+  id: MorphMidroundRule
+  components:
+  - type: GhostroleAlert
+
 ## Shadow demon
 
 - type: entity
-  abstract: true
   parent: BaseGameRule
-  id: BaseShadowDemonRule
+  id: ShadowDemonRule
   components:
+  - type: ShadowDemonRule
   - type: AntagSpawner
     prototype: BaseMobShadowDemon
   - type: MaintsSpawnRule
@@ -73,7 +78,7 @@
       proto: ShadowDemon
 
 - type: entity
-  parent: [ BaseShadowDemonRule, BaseAntagGhostRoleRule ]
+  parent: [ ShadowDemonRule, BaseAntagGhostRoleRule ]
   id: ShadowDemonSummon
   components:
   - type: GhostroleAlert
@@ -124,3 +129,23 @@
   - type: StationEvent
     startAnnouncement: null
     startAudio: null
+
+## Lone Xenomorph
+
+- type: entity
+  parent: BaseGameRule
+  id: LoneXenomorphSpawnRule
+  components:
+  - type: StationEvent
+    earliestStart: 20
+    weight: 3
+    minimumPlayers: 30
+    duration: null
+    occursDuringRoundEnd: false
+  - type: MaintsSpawnRule
+  - type: AntagSpawner
+    prototype: MobLoneXenomorph
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: LoneXenomorph

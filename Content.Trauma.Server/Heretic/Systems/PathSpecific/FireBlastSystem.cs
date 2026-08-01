@@ -1,54 +1,107 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Stunnable;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Body;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Physics;
+using Content.Shared.StatusEffectNew;
+using Content.Trauma.Server.Physics;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
-using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems;
-using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Shared.Physics;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed partial class FireBlastSystem : SharedFireBlastSystem
+public sealed partial class FireBlastSystem : EntitySystem
 {
-    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private FlammableSystem _flammable = default!;
     [Dependency] private StunSystem _stun = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private ComplexJointVisualsSystem _joint = default!;
     [Dependency] private EntityQuery<FlammableComponent> _flammableQuery = default!;
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<FireBlastedComponent> _fireBlastQuery = default!;
 
     private HashSet<Entity<MobStateComponent>> _targets = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private static readonly EntProtoId FireBlastStatusEffect = "StatusEffectFireBlasted";
 
-        SubscribeLocalEvent<FireBlastedComponent, ComponentRemove>(OnRemove);
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<FireBlastedComponent, DamageableComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var dmg))
+        {
+            if (now < comp.NextUpdate)
+                continue;
+
+            comp.NextUpdate = now + comp.UpdateDelay;
+
+            if (comp.Damage == 0f)
+                continue;
+
+            var damage = new DamageSpecifier
+            {
+                DamageDict =
+                {
+                    { "Heat", comp.Damage },
+                },
+            };
+
+            _dmg.ChangeDamage((uid, dmg),
+                damage * _body.GetVitalBodyPartRatio(uid),
+                true,
+                false,
+                targetPart: TargetBodyPart.All,
+                splitDamage: SplitDamageBehavior.SplitEnsureAll,
+                canMiss: false);
+
+            var stamDmg = comp.Damage * comp.StaminaDamageMultiplier;
+            _stam.TakeOvertimeStaminaDamage(uid, stamDmg);
+        }
     }
 
+    [SubscribeLocalEvent]
+    private void UpdateBeams(Entity<FireBlastedComponent> ent, ref ComplexJointUpdateEvent args)
+    {
+        if (args.UpdatedIds.ContainsKey(ent.Comp.FireBlastBeamDataId))
+            return;
+
+        ent.Comp.ShouldBounce = false;
+        _status.TryRemoveStatusEffect(ent, FireBlastStatusEffect);
+    }
+
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<FireBlastedComponent> ent, ref ComponentRemove args)
     {
         if (TerminatingOrDeleted(ent))
             return;
 
-        ClearBeamJoints((ent.Owner, ent.Comp));
+        _joint.ClearBeamJoints(ent.Owner, ent.Comp.FireBlastBeamDataId);
 
         if (!ent.Comp.ShouldBounce || TrySendBeam(ent) || ent.Comp.HitEntities.Count < ent.Comp.BouncesForBonusEffect)
             return;
@@ -76,8 +129,8 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
 
             _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime);
 
-            Dmg.TryChangeDamage(uid,
-                origin.Comp.FireBlastBonusDamage * Body.GetVitalBodyPartRatio(uid),
+            _dmg.TryChangeDamage(uid,
+                origin.Comp.FireBlastBonusDamage * _body.GetVitalBodyPartRatio(uid),
                 false,
                 false,
                 targetPart: TargetBodyPart.All,
@@ -90,15 +143,17 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
     {
         _targets.Clear();
         _lookup.GetEntitiesInRange(xform.Coordinates, range, _targets, flags: LookupFlags.Dynamic);
-        _targets.RemoveWhere(ent =>
-        {
-            var uid = ent.Owner;
-            if (_ghoulQuery.HasComp(uid))
-                return true; // leave ghouls alone
+        _targets.RemoveWhere(x => ShouldSkipTarget(x.Owner));
+    }
 
-            // ash heretics are immune
-            return _heretic.TryGetHereticComponent(uid, out var heretic, out _) && heretic.CurrentPath == HereticPath.Ash;
-        });
+    private bool ShouldSkipTarget(EntityUid uid)
+    {
+        if (_ghoulQuery.HasComp(uid))
+            return true; // leave ghouls alone
+
+        // ash heretics are immune
+        return _heretic.TryGetHereticComponent(uid, out var heretic, out _) &&
+               heretic.CurrentPath == HereticPath.Ash;
     }
 
     private bool TrySendBeam(Entity<FireBlastedComponent> origin)
@@ -118,16 +173,16 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
         }
 
         var xform = Transform(origin);
-        var pos = Xform.GetWorldPosition(xform);
+        var pos = _transform.GetWorldPosition(xform);
 
         GetTargets(xform, origin.Comp.FireBlastRange);
         // Prioritize alive targets on fire, closest to origin
         var result = _targets
             .Select(x => (x, _flammableQuery.CompOrNull(x),
-                (Xform.GetWorldPosition(x) - pos).LengthSquared()))
+                (_transform.GetWorldPosition(x) - pos).LengthSquared()))
             .Where(x => x.Item2 != null && x.Item1.Owner != origin.Owner &&
-                !Status.HasEffectComp<FireBlastedStatusEffectComponent>(x.Item1.Owner) &&
-                !origin.Comp.HitEntities.Contains(x.Item1.Owner))
+                        !_fireBlastQuery.HasComp(x.Item1.Owner) &&
+                        !origin.Comp.HitEntities.Contains(x.Item1.Owner))
             .OrderBy(x => x.Item1.Comp.CurrentState)
             .ThenByDescending(x => x.Item2!.OnFire)
             .ThenBy(x => x.Item3)
@@ -148,7 +203,7 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
         if (antimagic)
             time *= 2;
 
-        if (!Status.TrySetStatusEffectDuration(target, FireBlastStatusEffect, time))
+        if (!_status.TrySetStatusEffectDuration(target, FireBlastStatusEffect, time))
             return false;
 
         var fireBlasted = EnsureComp<FireBlastedComponent>(target);
@@ -160,10 +215,13 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
         Dirty(target, fireBlasted);
 
         // Send beam from target to origin so that we can easier remove it if we only have access to target
-        var beam = EnsureComp<ComplexJointVisualsComponent>(target);
-        beam.Data[GetNetEntity(origin)] =
-            new ComplexJointVisualsData(origin.Comp.FireBlastBeamDataId, origin.Comp.FireBlastBeamSprite);
-        Dirty(target, beam);
+        var data = new ComplexJointVisualsData(origin.Comp.FireBlastBeamDataId,
+            origin.Comp.FireBlastBeamSprite,
+            origin.Comp.FireBlastRange)
+        {
+            ReverseBeam = true,
+        };
+        _joint.CreateJoint(origin, target, data);
 
         _audio.PlayPvs(origin.Comp.Sound, xform.Coordinates);
 
@@ -172,8 +230,8 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
 
         _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
-        Dmg.TryChangeDamage(target.Owner,
-            origin.Comp.FireBlastDamage * Body.GetVitalBodyPartRatio(target.Owner),
+        _dmg.TryChangeDamage(target.Owner,
+            origin.Comp.FireBlastDamage * _body.GetVitalBodyPartRatio(target.Owner),
             origin: origin,
             targetPart: TargetBodyPart.All,
             splitDamage: SplitDamageBehavior.SplitEnsureAll,
@@ -182,63 +240,35 @@ public sealed partial class FireBlastSystem : SharedFireBlastSystem
         return true;
     }
 
-    protected override void BeamCollision(Entity<FireBlastedComponent> origin, EntityUid target)
+    [SubscribeLocalEvent]
+    private void BeamCollision(Entity<FireBlastedComponent> ent, ref ComplexJointCollisionEvent args)
     {
-        base.BeamCollision(origin, target);
-
-        var originPos = Xform.GetMapCoordinates(origin);
-        var targetPos = Xform.GetMapCoordinates(target);
-
-        var dir = originPos.Position - targetPos.Position;
-
-        var ray = new CollisionRay(targetPos.Position, dir.Normalized(), (int) CollisionGroup.Opaque);
-        var dist = MathF.Min(dir.Length(), origin.Comp.FireBlastRange);
-        var result = _physics.IntersectRay(originPos.MapId, ray, dist, origin, false);
-
-        foreach (var ent in result)
-        {
-            if (ent.HitEntity == target)
-                continue;
-
-            if (!_mobQuery.HasComp(ent.HitEntity))
-                return;
-
-            if (_ghoulQuery.HasComp(ent.HitEntity))
-                continue;
-
-            if (_heretic.TryGetHereticComponent(ent.HitEntity, out var heretic, out _) &&
-                heretic.CurrentPath == HereticPath.Ash)
-                continue;
-
-            if (_flammableQuery.TryComp(ent.HitEntity, out var flam))
-            {
-                _flammable.AdjustFireStacks(ent.HitEntity,
-                    origin.Comp.CollisionFireStacks,
-                    flam,
-                    true,
-                    origin.Comp.FireProtectionPenetration);
-            }
-
-            Dmg.TryChangeDamage(ent.HitEntity,
-                origin.Comp.FireBlastBeamCollideDamage * Body.GetVitalBodyPartRatio(ent.HitEntity),
-                false,
-                false,
-                targetPart: TargetBodyPart.All,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll,
-                canMiss: false);
-        }
-    }
-
-    private void ClearBeamJoints(Entity<FireBlastedComponent, ComplexJointVisualsComponent?> ent)
-    {
-        if (!Resolve(ent, ref ent.Comp2, false))
+        if (args.Data.Id != ent.Comp.FireBlastBeamDataId)
             return;
 
-        ent.Comp2.Data = ent.Comp2.Data.Where(x => x.Value.Id != ent.Comp1.FireBlastBeamDataId).ToDictionary();
+        var otherEntity = args.Hit.HitEntity;
 
-        if (ent.Comp2.Data.Count == 0)
-            RemComp(ent.Owner, ent.Comp2);
-        else
-            Dirty(ent.Owner, ent.Comp2);
+        if (!_mobQuery.HasComp(otherEntity))
+            return;
+
+        if (ShouldSkipTarget(otherEntity))
+            return;
+
+        if (_flammableQuery.TryComp(otherEntity, out var flam))
+        {
+            _flammable.AdjustFireStacks(otherEntity,
+                ent.Comp.CollisionFireStacks,
+                flam,
+                true,
+                ent.Comp.FireProtectionPenetration);
+        }
+
+        _dmg.TryChangeDamage(otherEntity,
+            ent.Comp.FireBlastBeamCollideDamage * _body.GetVitalBodyPartRatio(otherEntity),
+            false,
+            false,
+            targetPart: TargetBodyPart.All,
+            splitDamage: SplitDamageBehavior.SplitEnsureAll,
+            canMiss: false);
     }
 }

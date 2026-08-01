@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: antag
-  id: WraithRoundstart
+  id: Wraith
   name: roles-antag-wraith-name
   antagonist: true
   setPreference: true
@@ -13,8 +13,9 @@
 
 - type: antagSpecifier
   id: Wraith
-  prefRoles: [ WraithRoundstart ]
+  prefRoles: [ Wraith ]
   spawnerPrototype: SpawnPointGhostWraithRoundstart
+  allowNonHumans: true
   mindRoles: [ MindRoleGhostRoleSoloAntagonist ]
   briefing:
     text: wraith-role-greeting
@@ -33,3 +34,12 @@
   parent: Wraith
   id: WraithMidround
   spawnerPrototype: SpawnPointGhostWraith
+
+- type: antagSmite
+  id: Wraith
+  antag: Wraith
+  rule: WraithRoundstart
+  ruleComp: WraithRule
+  icon:
+    sprite: _Goobstation/Wraith/wraith.rsi
+    state: icon

@@ -19,7 +19,7 @@
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Armor
@@ -439,7 +439,7 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: Armor
@@ -459,6 +459,7 @@
       head: ClothingHeadHelmetHardsuitEngineeringWhite
   - type: ClothingGrantComponent # Goobstation - Make sure the CE doesn't get cooked by supermatter
     component:
+    - type: RadStormImmune
     - type: SupermatterImmune
     # tesla immunity too
     - type: EventHorizonIgnore
@@ -742,7 +743,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.5 # Goob edit
   - type: Armor
@@ -1116,7 +1117,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTEngineer
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
 
 #ERT Medic Hardsuit
 - type: entity
@@ -1202,7 +1203,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 1, 1.25x for limb coverage
   - type: StaminaResistance # Goobstation - Start
     damageCoefficient: 0
   - type: ClothingSlowOnDamageModifier

@@ -105,6 +105,11 @@
       - KitchenSpikeHooked # have to be on a spike to skin people
     skinnedSprite: _Trauma/Mobs/Species/Human/skinned.rsi
     unskinnedSprite: Mobs/Species/Human/parts.rsi
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 300
   # </Trauma>
   - type: Butcherable
     spawned:

@@ -16,7 +16,7 @@
 - type: entity
   parent: BaseChemistryBottleFilled
   id: ChemistryBottlePlasma
-  suffix: phroon
+  suffix: phoron
   components:
   - type: Label
     localizedLabel: reagent-name-plasma

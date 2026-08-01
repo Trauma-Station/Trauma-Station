@@ -35,6 +35,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Polymorph;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Species.Components;
@@ -49,6 +50,7 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -87,6 +89,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     [Dependency] private HolyFlammableSystem _holyFlam = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private SharedEntityEffectsSystem _effect = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -95,6 +98,13 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
         SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(InitialBodySystem)]);
         SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBeforeBeamDamaged(Entity<HereticMinionComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
+    {
+        if (ent.Comp.BoundHeretic == args.Target)
+            args.Cancelled = true;
     }
 
     [SubscribeLocalEvent]
@@ -326,6 +336,8 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
         EntityManager.RemoveComponents(ent, ProtoMan.Index(ComponentsToRemoveOnUnGhoulify).Components);
+
+        _popup.PopupEntity(Loc.GetString("ghoul-unghoulify-message", ("ent", Identity.Entity(ent, EntityManager))), ent, PopupType.LargeCaution);
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)

@@ -108,14 +108,14 @@
     enabled: false
     usesApcPower: true
   - type: PointLight
-    enabled: false
-    castShadows: false
-    # <Goob>
+    # <Trauma>
     radius: 2
     energy: 1.5
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
-    # </Goob>
+    # </Trauma>
+    enabled: false
+    castShadows: false
   - type: LitOnPowered
   - type: ApcPowerReceiver
     powerLoad: 200

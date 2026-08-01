@@ -380,7 +380,8 @@
       collection: FootstepThud
   - type: SlowOnDamage
     speedModifierThresholds:
-      50: 0.9
+      999: 1
+      0: 1
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -417,19 +418,17 @@
       types:
         Bloodloss:
           -0.25
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3.5
-    baseSprintSpeed: 3.5
   - type: MeleeWeapon
     altDisarm: false
+    range: 1 # Base is 1.5 so this nerfs them by making kiting them easier.
     angle: 0
     damage:
       types:
         Blunt: 12
         Structural: 15
   - type: MeleeThrowOnHit
-    distance: 5
-    speed: 10
+    distance: 2.5
+    speed: 5
   - type: LanguageSpeaker
     speaks:
     - Crab
@@ -448,7 +447,7 @@
   - type: ToolRefinable
     refineResult:
     - id: FoodMeatCrab
-      amount: 5
+      amount: 6
 
 - type: entity
   parent: MobCoconutCrabShellless
@@ -479,26 +478,22 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodCoconutHalf:
-            min: 1
+            min: 2
             max: 2
           MobCoconutCrabShellless:
             min: 1
             max: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 1.5
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
   - type: MeleeWeapon
     attackRate: 0.6
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      999: 1
-      0: 1
   - type: Damageable
     damageModifierSet: CoconutCrab
   - type: Injurable
     damageContainer: Biological
   - type: MobPrice
-    price: 500 # The fact that a test requires me to add this is fucking stupid
+    price: 1000 # The fact that a test requires me to add this is fucking stupid
 
 - type: entity
   parent: MobCoconutCrabShellless
@@ -510,10 +505,6 @@
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
     - state: floofycrab
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      999: 1
-      0: 1
   - type: Damageable
     damageModifierSet: CoconutCrab
   - type: Injurable
@@ -528,6 +519,7 @@
   - type: GhostTakeoverAvailable
   - type: MeleeWeapon
     altDisarm: false
+    range: 1.5 # This one is player controlled and meant to be more dangerous despite it being stupid
     angle: 0
     damage:
       types:
@@ -600,6 +592,8 @@
   id: MobCrabTiny
   name: red crab
   components:
+  - type: Penetratable
+    penetrateDamage: 3
   - type: Temperature
   - type: TemperatureDamage
     heatDamageThreshold: 423

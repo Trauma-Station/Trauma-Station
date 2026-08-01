@@ -1138,3 +1138,105 @@
         Quantity: 2
       - ReagentId: Laughter
         Quantity: 2
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat, MobNightVision, BaseMobDestructible ]
+  id: MobBabySpider
+  name: baby spider
+  description: A growing spider, better deal with it before it gets big.
+  components:
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 1
+  - type: VentCrawler
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 10
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: CombatMode
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      5: Dead
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomSpider
+  - type: MeleeChemicalInjector
+    transferAmount: 0.1
+    solution: melee
+  - type: LanguageSpeaker
+    speaks:
+    - Xeno
+    understands:
+    - Xeno
+    - TauCetiBasic
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-tarantula
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/snake_hiss.ogg
+  - type: NoSlip
+  - type: Spider
+    spawnsWebsAsNonPlayer: false
+  - type: IgnoreSpiderWeb
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 10
+  - type: Speech
+    speechVerb: Arachnid
+    speechSounds: Arachnid
+    allowedEmotes: ['Click', 'Chitter']
+  - type: Vocal
+    emoteSounds: UnisexArachnid
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0.25
+    baseSprintSpeed: 0.25
+  - type: TypingIndicator
+    proto: spider
+  - type: Tag
+    tags:
+    - FootstepSound
+  - type: Penetratable
+    penetrateDamage: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: NpcFactionMember
+    factions:
+      - Xeno
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/babyspider.rsi
+    state: babyspider
+  - type: TimedDespawn
+    lifetime: 120
+  - type: SpawnOnDespawn
+    prototype: MobGiantSpiderAngry

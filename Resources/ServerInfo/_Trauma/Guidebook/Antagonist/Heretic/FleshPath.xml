@@ -59,7 +59,7 @@
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Lonely Ritual</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Heart, Stomach, Lung, Pen</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a flesh stalker, a strong combat summon with a jaunt, shapeshift and EMP.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a flesh stalker, a strong combat summon with shapeshift and cleave.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Priest's Final Hymn</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Four corpses</Box></ColorBox>
@@ -94,7 +94,7 @@
   - You can recall your ghouls or summonned creatures by [color=yellow]Alt-Clicking[/color] the ritual rune using your mansus grasp.
   - Your Flesh Surgery spell can heal your summons. It also acts like a good surgery tool that bypasses surgery steps and works through clothes.
   - Raw Prophets can link you and other summons in a telepathic network, allowing for long distance co-ordination. They also have healing aura for you and your minions.
-  - Flesh Stalkers are decent combatants with the ability to disguise themselves as various creatures. They can also utilize an EMP spell.
+  - Flesh Stalkers are decent combatants with the ability to disguise themselves as various creatures. They can also utilize the Crimson Cleave spell.
   - Your success with this path is reliant on how knowledgable or robust your minions are. However, there is always power in numbers; the more minions, the higher your chances of success.
   - Your minions are more expendable than you are. Do not be afraid to tell them to go to their deaths. You can just recover them later... maybe.
 

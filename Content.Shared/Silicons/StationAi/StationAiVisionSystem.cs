@@ -127,6 +127,9 @@ public sealed partial class StationAiVisionSystem : EntitySystem
 
     private bool IsOccluded(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile)
     {
+        // <Trauma> - try catch this
+        try
+        {
         var tileBounds = _lookup.GetLocalBounds(tile, grid.Comp2.TileSize).Enlarged(-0.05f);
         _occluders.Clear();
         _lookup.GetLocalEntitiesIntersecting((grid.Owner, grid.Comp1), tileBounds, _occluders, query: _occluderQuery, flags: LookupFlags.Static | LookupFlags.Approximate);
@@ -134,6 +137,13 @@ public sealed partial class StationAiVisionSystem : EntitySystem
 
         foreach (var occluder in _occluders)
         {
+            // <Trauma>
+            if (occluder.Comp == default!)
+            {
+                Log.Error($"Somehow had null occluder {ToPrettyString(occluder)} when checking AI vision for {ToPrettyString(grid)} at {tile}");
+                continue;
+            }
+            // </Trauma>
             if (!occluder.Comp.Enabled)
                 continue;
 
@@ -142,6 +152,13 @@ public sealed partial class StationAiVisionSystem : EntitySystem
         }
 
         return anyOccluders;
+        }
+        catch (Exception e)
+        {
+            Log.Error($"IsOccluded for {ToPrettyString(grid)} at {tile} had an exception: {e}");
+            return false;
+        }
+        // </Trauma>
     }
 
     /// <summary>
@@ -322,6 +339,19 @@ public sealed partial class StationAiVisionSystem : EntitySystem
 
         public void Execute(int index)
         {
+            // <Trauma>
+            var total = Data.Count;
+            if (index >= total || index < 0)
+            {
+                System.Log.Error($"Job {index} is out of bounds, only {total} jobs exist!");
+                return;
+            }
+            if (total > Vis1.Count || total > Vis2.Count || total > SeedTiles.Count || total > BoundaryTiles.Count)
+            {
+                System.Log.Error($"AI vision job {index} has wrong bounds lists! Data={total} Vis1={Vis1.Count} Vis2={Vis2.Count} SeedTiles={SeedTiles.Count} BoundaryTiles={BoundaryTiles.Count}");
+                return;
+            }
+            // </Trauma>
             var seed = Data[index];
             var seedXform = EntManager.GetComponent<TransformComponent>(seed);
 

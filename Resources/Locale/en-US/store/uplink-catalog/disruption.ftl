@@ -1,7 +1,7 @@
 # Disruption
 
 # Trauma - ungimped it, back to supermatter
-uplink-ssingularity-grenade-name = Supermatter Grenade
+uplink-singularity-grenade-name = Supermatter Grenade
 uplink-singularity-grenade-desc = Grenade that simulates delamination of the supermatter engine, generates a powerful gravity well. Explosion comparable to a minibomb
 
 uplink-access-breaker-name = Access Breaker

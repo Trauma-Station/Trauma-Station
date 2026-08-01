@@ -10,6 +10,7 @@
   - type: FaceHuggerBlocker
   - type: NightVision
     action: ActionToggleAbyssalMask
+    prioritized: false
     enabled: false
     relayOverlay: true
     overlayColor: "#FFFFFF33"

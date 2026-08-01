@@ -1,15 +1,4 @@
-# Names
-chat-emote-name-fart = Fart
-chat-emote-name-fart-inhale = Breathe in a fart
-chat-emote-name-fart-super = Super Fart
-chat-emote-name-trill = Trill
-chat-emote-name-warble = Warble
-chat-emote-name-wurble = Wurble
-
 # Message
-chat-emote-msg-fart = farts.
-chat-emote-msg-fart-inhale = breathes in a big fart.
-chat-emote-msg-fart-super = super farts.
 chat-emote-msg-bagawk = bagawks!
 chat-emote-msg-trill = trills!
 chat-emote-msg-warble = warbles!

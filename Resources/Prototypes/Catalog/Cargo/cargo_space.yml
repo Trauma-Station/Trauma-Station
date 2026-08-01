@@ -34,7 +34,7 @@
     sprite: Structures/Shuttles/gyroscope.rsi
     state: base
   product: CrateSpaceGyroscope
-  cost: 4000
+  cost: 2000 # Trauma - Was 4000
   category: cargoproduct-category-name-space
   group: market
 
@@ -44,7 +44,7 @@
     sprite: Structures/Shuttles/thruster.rsi
     state: base
   product: CrateSpaceThruster
-  cost: 1500
+  cost: 750 # Trauma - Was 1500
   category: cargoproduct-category-name-space
   group: market
 

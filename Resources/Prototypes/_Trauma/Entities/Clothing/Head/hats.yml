@@ -40,3 +40,22 @@
     - CorgiWearable
     - HamsterWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRancher
+  name: ranchers hat
+  description: YEEEEEEEE HAAAAAAAA!!!!!!!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hats/rancher_hat.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hats/rancher_hat.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Recyclable
+    - PetWearable
+    - CorgiWearable
+    - HamsterWearable
+    - WhitelistChameleon
