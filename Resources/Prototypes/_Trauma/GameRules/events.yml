@@ -116,7 +116,7 @@
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 3, 6
       children:
       - id: MobCoconutCrab
         weight: 0.75
