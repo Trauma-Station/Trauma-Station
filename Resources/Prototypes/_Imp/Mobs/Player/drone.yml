@@ -97,15 +97,13 @@
   - type: StandingState
   - type: Alerts
   - type: ProtectedFromStepTriggers
-  - type: Targeting # Shitmed Change
-  # <Goobstation>
+  - type: Targeting
   - type: FlashVulnerable
   - type: TypingIndicator
     proto: robot
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg
-  # </Goobstation>
 
 - type: entity
   name: drone
@@ -126,12 +124,12 @@
       components:
       - Gun
       - EnergySword
-  - type: Instrument # imp
+  - type: Instrument
     allowPercussion: false
     handheld: false
     bank: 1
     program: 2
-  - type: Loadout # imp special. this replaces the InnateTool component.
+  - type: Loadout
     prototypes:
     - StartingGearDroneTools
   - type: NameIdentifier
@@ -146,19 +144,19 @@
         type: StrippableBoundUserInterface
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
-      enum.InstrumentUiKey.Key: #imp
+      enum.InstrumentUiKey.Key:
         type: InstrumentBoundUserInterface
         requireInputValidation: false
-      enum.StationMapUiKey.Key: #imp
+      enum.StationMapUiKey.Key:
         type: StationMapBoundUserInterface
         requireInputValidation: false
-  - type: IntrinsicUI # Goob edit
+  - type: IntrinsicUI
     uis:
       enum.StationMapUiKey.Key:
         toggleAction: ActionShowStationMap
       enum.InstrumentUiKey.Key:
         toggleAction: ActionDronePlayMidi
-  - type: StationMap #imp
+  - type: StationMap
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-drone-name
@@ -182,13 +180,12 @@
     thresholds:
       0: Alive
       60: Dead
-  #- type: Flash # Goobstation - Remove drone flashing.
   - type: NoSlip
   - type: StatusEffects
     allowed:
     - Stun
     - SlowedDown
-    - Flashed # Goobstation - counter to shitter drones
+    - Flashed
   - type: SlowOnDamage
     speedModifierThresholds:
       30: 0.7
@@ -205,7 +202,7 @@
     drawdepth: SmallMobs
     layers:
     - state: shell
-      sprite: _Imp/Drone/drone.rsi #Mobs/Silicon/drone.rsi
+      sprite: _Imp/Drone/drone.rsi
       map: ["base"]
   - type: BorgTransponder
     sprite:
@@ -231,7 +228,7 @@
         base:
           Off: { state: shell }
           On: { state: drone }
-  - type: LanguageSpeaker # Einstein Engines - Language
+  - type: LanguageSpeaker
     speaks:
     - DroneTalk
     understands:
@@ -254,7 +251,7 @@
     enabled: false
     radius: 3.5
     softness: 1
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection # Goobstation - Copied from borgs
@@ -271,8 +268,8 @@
     - EmagImmune
     - CanPilot
     - VimPilot
-    - Bot # Goobstation
-  - type: CollectiveMind # Goobstation
+    - Bot
+  - type: CollectiveMind
     defaultChannel: Dronemind
     channels:
     - Dronemind
@@ -280,5 +277,20 @@
     tags:
     - Engineering
     - Maintenance
-    - Atmospherics # Goobstation
-  - type: ContributorName # Goobstation - Maint drones get up to date contributor names
+    - Atmospherics
+  - type: ContributorName
+  - type: KnowledgeGrant
+    skills:
+      # same as engiborg
+      FabricationKnowledge: 60
+      DoorsKnowledge: 60
+      AirlocksKnowledge: 60
+      FurnitureKnowledge: 60
+      InfrastructureKnowledge: 60
+      ElectronicsKnowledge: 60
+      WallsKnowledge: 60
+      WindowsKnowledge: 60
+      MetalworkingKnowledge: 60
+      GunsmithingKnowledge: 60
+      MechanicsKnowledge: 60
+      BotsKnowledge: 60 # you will be upgraded

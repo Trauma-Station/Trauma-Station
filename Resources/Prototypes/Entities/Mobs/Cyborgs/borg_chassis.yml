@@ -135,7 +135,6 @@
         StrengthKnowledge: 50
         ShootingKnowledge: 50
         ToughnessKnowledge: 28
-        AthleticsKnowledge: 28
         WeaponsKnowledge: 51
     # </Trauma>
 
@@ -155,7 +154,6 @@
         StrengthKnowledge: 50
         ShootingKnowledge: 20
         ToughnessKnowledge: 20
-        AthleticsKnowledge: 20
         WeaponsKnowledge: 20
     # </Trauma>
     - type: Sprite
@@ -232,7 +230,6 @@
         StrengthKnowledge: 50
         ShootingKnowledge: 20
         ToughnessKnowledge: 20
-        AthleticsKnowledge: 20
         WeaponsKnowledge: 20
     - type: Sprite
       layers:
