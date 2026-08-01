@@ -36,5 +36,7 @@ public sealed partial class JobListingsSystem
             var title = Loc.GetString($"job-listings-ui-reputation-level-{level}");
             sb.AppendLine(Loc.GetString("job-listing-round-end", ("name", name), ("count", jobBoard.JobsCompleted), ("reputation", jobBoard.Reputation), ("title", title)));
         }
+
+        args.Text = sb.ToString();
     }
 }
