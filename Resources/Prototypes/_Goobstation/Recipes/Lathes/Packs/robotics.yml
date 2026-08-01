@@ -70,8 +70,8 @@
   - UpgradedCyberneticLungs
   - JawsOfLifeLeftArm
   - JawsOfLifeRightArm
-  - SpeedLeftLeg
-  - SpeedRightLeg
+  # - SpeedLeftLeg
+  # - SpeedRightLeg
   - DexLeftHand
   - DexRightHand
   - DiagnosticCyberneticEyes
