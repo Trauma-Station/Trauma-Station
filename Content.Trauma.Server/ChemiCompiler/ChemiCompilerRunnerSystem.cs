@@ -45,6 +45,11 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
     [Dependency] private EntityQuery<MaterialStorageComponent> _storageQuery = default!;
 
     /// <summary>
+    /// Reusable buffer so speaking doesn't allocate a new builder each time.
+    /// </summary>
+    private StringBuilder _builder = new();
+
+    /// <summary>
     /// What a single instruction did, and so what the machine should do next.
     /// </summary>
     private enum Step : byte
@@ -302,24 +307,26 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
     /// </summary>
     private void Speak(Entity<ChemiCompilerComponent> ent, ActiveChemiCompilerComponent active)
     {
+        _builder.Clear();
+        _builder.EnsureCapacity(active.Output.Length);
+
         // a program can write any byte it likes, and most of the low ones are control codes that would
         // come out as rubbish in a speech bubble
-        var text = new StringBuilder(active.Output.Length);
         for (var i = 0; i < active.Output.Length; i++)
         {
             var c = active.Output[i];
             if (!char.IsControl(c))
-                text.Append(c);
+                _builder.Append(c);
         }
 
         // cleared before the early return, or a line of nothing but control codes would stick forever
         active.Output.Clear();
 
-        if (text.Length == 0)
+        if (_builder.Length == 0)
             return;
 
         // hidden from chat so a program in a loop can't bury the round's chat log
-        _chat.TrySendInGameICMessage(ent, text.ToString(), InGameICChatType.Speak, hideChat: true);
+        _chat.TrySendInGameICMessage(ent, _builder.ToString(), InGameICChatType.Speak, hideChat: true);
     }
 
     /// <summary>
