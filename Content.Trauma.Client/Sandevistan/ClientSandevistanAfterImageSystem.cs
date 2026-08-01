@@ -9,7 +9,7 @@ namespace Content.Trauma.Client.Sandevistan;
 public sealed partial class ClientSandevistanAfterimageSystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> HideContextMenuTag = "HideContextMenu";
 
@@ -25,13 +25,14 @@ public sealed partial class ClientSandevistanAfterimageSystem : EntitySystem
         if (!TryComp<SpriteComponent>(ent.Comp.SourceEntity, out var userSprite))
             return;
 
-        _tagSystem.AddTag(ent, HideContextMenuTag);
+        _tag.AddTag(ent, HideContextMenuTag);
 
         var afterimageSprite = EnsureComp<SpriteComponent>(ent);
-        _sprite.CopySprite((ent.Comp.SourceEntity, userSprite), (ent.Owner, afterimageSprite));
-        _sprite.SetDrawDepth((ent.Owner, afterimageSprite), (int) DrawDepthEnum.FloorEffects);
-        _sprite.SetColor((ent.Owner, afterimageSprite), Color.FromHsv(new Vector4(ent.Comp.Hue, 1, 1, 0.7f)));
-        afterimageSprite.PostShader = null;
+        var dest = new Entity<SpriteComponent?>(ent, afterimageSprite);
+        _sprite.CopySprite((ent.Comp.SourceEntity, userSprite), dest);
+        _sprite.SetDrawDepth(dest, (int) DrawDepthEnum.FloorEffects);
+        _sprite.SetColor(dest, Color.FromHsv(new Vector4(ent.Comp.Hue, 1, 1, 0.7f)));
+        _sprite.ClearPostShaders(dest);
         afterimageSprite.RenderOrder = 0;
         afterimageSprite.EnableDirectionOverride = true;
         afterimageSprite.DirectionOverride = ent.Comp.DirectionOverride;

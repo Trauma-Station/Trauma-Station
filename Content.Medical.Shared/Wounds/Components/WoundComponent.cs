@@ -7,7 +7,7 @@ using Content.Shared.Damage.Prototypes;
 namespace Content.Medical.Shared.Wounds;
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState(fieldDeltas: true)]
+[AutoGenerateComponentState(true, fieldDeltas: true)]
 [EntityCategory("Wounds")]
 public sealed partial class WoundComponent : Component
 {

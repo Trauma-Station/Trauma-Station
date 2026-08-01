@@ -1,0 +1,58 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:gfx="using:Robust.Client.Graphics"
+        xmlns:mat="using:Content.Client.Materials.UI"
+        Title="{Loc 'chemicompiler-window-title'}"
+        SetSize="600 560"
+        MinSize="600 520">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="4">
+
+        <!-- the code being edited, saved to and loaded from the slots below -->
+        <Label Text="{Loc 'chemicompiler-window-code'}" StyleClasses="LabelKeyText"/>
+        <PanelContainer HorizontalExpand="True" VerticalExpand="True" RectClipContent="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#101014FF"/>
+            </PanelContainer.PanelOverride>
+            <TextEdit Name="CodeEdit" MinHeight="180" Margin="4" HorizontalExpand="True" VerticalExpand="True"/>
+        </PanelContainer>
+
+        <!-- save and load arm the slot buttons, otherwise pressing a slot runs it -->
+        <BoxContainer Orientation="Horizontal" SeparationOverride="4" Margin="0 4 0 0">
+            <Button Name="SaveButton" Text="{Loc 'chemicompiler-window-save'}" ToggleMode="True" MinWidth="70"/>
+            <Button Name="LoadButton" Text="{Loc 'chemicompiler-window-load'}" ToggleMode="True" MinWidth="70"/>
+            <Control MinWidth="16"/>
+            <BoxContainer Name="SlotContainer" Orientation="Horizontal" SeparationOverride="4"/>
+            <Control HorizontalExpand="True"/>
+            <Button Name="HaltButton" Text="{Loc 'chemicompiler-window-halt'}" MinWidth="70" Disabled="True"/>
+        </BoxContainer>
+        <Label Name="ModeLabel" Text="{Loc 'chemicompiler-window-mode-run'}" StyleClasses="LabelSubText"/>
+
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="0 8 0 0" VerticalExpand="True">
+
+            <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                <!-- beaker slots, five to a row like the real thing -->
+                <Label Text="{Loc 'chemicompiler-window-reservoirs'}" StyleClasses="LabelKeyText"/>
+                <BoxContainer Name="ReservoirTop" Orientation="Horizontal" SeparationOverride="4"/>
+                <BoxContainer Name="ReservoirBottom" Orientation="Horizontal" SeparationOverride="4"/>
+
+                <!-- register readout, only meaningful once a program has stopped -->
+                <Label Text="{Loc 'chemicompiler-window-registers'}" StyleClasses="LabelKeyText" Margin="0 8 0 0"/>
+                <Label Name="RegisterLabel"/>
+                <Label Name="StatusLabel" Margin="0 8 0 0"/>
+            </BoxContainer>
+
+            <!-- what the vial and patch generators are printing from.
+                 wide enough for the icon, the eject buttons and the amount beside them -->
+            <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="330">
+                <Label Text="{Loc 'chemicompiler-window-materials'}" StyleClasses="LabelKeyText"/>
+                <mat:MaterialStorageControl Name="MaterialsList" VerticalExpand="True"/>
+            </BoxContainer>
+
+        </BoxContainer>
+
+    </BoxContainer>
+</controls:FancyWindow>

@@ -224,7 +224,7 @@ public sealed partial class HealthAnalyzerControl
             if (isPart && part.Owner != selectedPart)
                 continue;
 
-            if (!_trauma.TryGetWoundableTrauma(part.AsNullable(), out var traumas))
+            if (!_trauma.GetPartTraumas(part.AsNullable(), out var traumas))
                 continue;
 
             foreach (var trauma in traumas)

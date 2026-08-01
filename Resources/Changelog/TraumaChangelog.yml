@@ -12604,3 +12604,39 @@ Entries:
   id: 1378
   time: '2026-08-01T12:26:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3886
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wounds sprites breaking when cutting off limbs.
+  - type: Fix
+    message: Fixed not being able to clean up dismemberments via surgery.
+  id: 1379
+  time: '2026-08-01T19:05:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3888
+- author: mickers7
+  changes:
+  - type: Add
+    message: Added Chemicompiler
+  id: 1380
+  time: '2026-08-01T19:26:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3844
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed the Ripley APLU missing a sprite with the bounty manifest on it.
+  - type: Fix
+    message: Fixed ALL wraith mobs having the wrong mindroles.
+  - type: Fix
+    message: Fixed Clown Decapoids not spawning with vaporizers or tanks.
+  - type: Fix
+    message: Fixed the forged mace injecting 2u of Mute Toxin, instead of 5u.
+  id: 1381
+  time: '2026-08-01T20:19:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3880
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Rancher has been mapped to Bagel.
+  id: 1382
+  time: '2026-08-01T21:13:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3874

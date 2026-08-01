@@ -22,33 +22,35 @@ public sealed partial class EnchantVisualsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EnchantedComponent, AfterAutoHandleStateEvent>(OnHandleState);
-        SubscribeLocalEvent<EnchantedComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
-        SubscribeLocalEvent<EnchantedComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
-
-        SubscribeLocalEvent<EnchanterComponent, AfterAutoHandleStateEvent>(OnEnchanterHandleState);
-
-        _shader = ProtoMan.Index(Shader).InstanceUnique();
+        _shader = ProtoMan.Index(Shader).Instance();
     }
 
-    private void OnHandleState(Entity<EnchantedComponent> ent, ref AfterAutoHandleStateEvent args)
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<EnchantedComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
-            return;
-
-        sprite.PostShader = _shader;
+        _sprite.SetPostShader(ent.Owner, new(Shader, _shader));
     }
 
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<EnchantedComponent> ent, ref ComponentShutdown args)
+    {
+        if (!Terminating(ent))
+            _sprite.RemovePostShader(ent.Owner, Shader);
+    }
+
+    [SubscribeLocalEvent]
     private void OnHeldVisualsUpdated(Entity<EnchantedComponent> ent, ref HeldVisualsUpdatedEvent args)
     {
         SetLayers(args.User, args.RevealedLayers);
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipmentVisualsUpdated(Entity<EnchantedComponent> ent, ref EquipmentVisualsUpdatedEvent args)
     {
         SetLayers(args.Equipee, args.RevealedLayers);
     }
 
+    [SubscribeLocalEvent]
     private void OnEnchanterHandleState(Entity<EnchanterComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (_sprite.TryGetLayer(ent.Owner, EnchanterVisuals.Layer, out var layer, false))
