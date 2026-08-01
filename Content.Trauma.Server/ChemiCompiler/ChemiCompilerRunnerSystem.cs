@@ -19,6 +19,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.ChemiCompiler;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -325,8 +326,10 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
         if (_builder.Length == 0)
             return;
 
+        var line = FormattedMessage.EscapeText(_builder.ToString());
+
         // hidden from chat so a program in a loop can't bury the round's chat log
-        _chat.TrySendInGameICMessage(ent, _builder.ToString(), InGameICChatType.Speak, hideChat: true);
+        _chat.TrySendInGameICMessage(ent, line, InGameICChatType.Speak, hideChat: true);
     }
 
     /// <summary>

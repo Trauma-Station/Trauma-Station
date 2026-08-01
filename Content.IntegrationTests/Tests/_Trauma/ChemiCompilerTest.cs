@@ -950,6 +950,18 @@ public sealed class ChemiCompilerTest : GameTest
     }
 
     /// <summary>
+    /// A program can write any byte, including the two that chat parses as markup. Saying those must not
+    /// crash the server.
+    /// </summary>
+    [Test]
+    public async Task MarkupCharactersDoNotCrashTheServer()
+    {
+        var (uid, _) = await Setup(new());
+
+        await Run(uid, $"{Count(91)}.+.", seconds: 5f);
+    }
+
+    /// <summary>
     /// Sounds must exist and be audible. Gain is 10^(dB/10), so -16dB is near silent.
     /// </summary>
     [Test]
