@@ -60,3 +60,17 @@
     antags:
     - !type:FixedAntagCount
       proto: Changeling
+
+- type: entity
+  parent: Demonologist
+  id: SubDemonologist
+  components:
+  - type: AntagSelection
+    agentName: demonologist-round-end-agent-name
+    antags:
+    - !type:LinearAntagCount
+      proto: Demonologist
+      range:
+        min: 1
+        max: 2
+      playerRatio: 20

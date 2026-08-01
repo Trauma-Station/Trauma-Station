@@ -101,3 +101,20 @@
       proto: InstallHypoportNukie
     - !type:InstallOrganChip
       chip: SkillChipNukie
+
+- type: entity
+  parent: BaseGameRule
+  id: Demonologist
+  components:
+  - type: DemonologistRule # TODO
+  - type: GameRule
+    minPlayers: 20
+  - type: AntagSelection
+    agentName: demonologist-round-end-agent-name
+    antags:
+    - !type:LinearAntagCount
+      proto: Demonologist
+      range:
+        min: 1
+        max: 2
+      playerRatio: 20

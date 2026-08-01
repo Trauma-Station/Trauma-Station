@@ -21,6 +21,10 @@
   jobBlacklist:
   - Chaplain
   mindRoles: [ DemonologistMindRole ]
+  briefing:
+    text: demonologist-role-greeting
+    color: "#990000"
+    sound: /Audio/_Trauma/Demonologist/demonologist.ogg
   startingGear: DemonologistStartingGear
 
 - type: startingGear
