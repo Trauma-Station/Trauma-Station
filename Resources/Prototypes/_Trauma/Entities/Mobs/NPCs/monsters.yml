@@ -422,14 +422,15 @@
     baseSprintSpeed: 3.5
   - type: MeleeWeapon
     altDisarm: false
+    range: 1 # Base is 1.5 so this nerfs them by making kiting them easier.
     angle: 0
     damage:
       types:
         Blunt: 12
         Structural: 15
   - type: MeleeThrowOnHit
-    distance: 5
-    speed: 10
+    distance: 2.5
+    speed: 5
   - type: LanguageSpeaker
     speaks:
     - Crab
@@ -528,6 +529,7 @@
   - type: GhostTakeoverAvailable
   - type: MeleeWeapon
     altDisarm: false
+    range: 1.5 # This one is player controlled and meant to be more dangerous despite it being stupid
     angle: 0
     damage:
       types:
