@@ -12613,3 +12613,10 @@ Entries:
   id: 1379
   time: '2026-08-01T19:05:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3888
+- author: mickers7
+  changes:
+  - type: Add
+    message: Added Chemicompiler
+  id: 1380
+  time: '2026-08-01T19:26:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3844
