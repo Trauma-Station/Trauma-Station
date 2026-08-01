@@ -57,9 +57,9 @@
     generated:
       reagents:
       - ReagentId: MuteToxin
-        Quantity: 5
+        Quantity: 0.5
   - type: MeleeChemicalInjector
-    transferAmount: 5
+    transferAmount: 1
     solution: melee
 
 # TODO: inherit BaseSword
