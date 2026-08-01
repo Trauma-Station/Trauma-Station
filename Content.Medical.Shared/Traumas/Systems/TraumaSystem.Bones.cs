@@ -59,20 +59,8 @@ public partial class TraumaSystem
     [SubscribeLocalEvent]
     private void OnBoneIntegrityChanged(Entity<BoneComponent> bone, ref BoneIntegrityChangedEvent args)
     {
-        if (_body.GetBody(bone.Owner) is not {} body)
-            return;
-
         if (args.NewIntegrity == bone.Comp.IntegrityCap)
-        {
-            if (TryGetWoundableTrauma(bone.Owner, out var traumas, TraumaType.BoneDamage))
-            {
-                foreach (var trauma in traumas)
-                {
-                    if (trauma.Comp.TraumaTarget == bone)
-                        RemoveTrauma(trauma);
-                }
-            }
-        }
+            RemoveTraumas(bone.Owner, TraumaType.BoneDamage);
     }
 
     [SubscribeLocalEvent]
