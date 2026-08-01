@@ -65,6 +65,7 @@
 - type: entity
   abstract: true
   id: BaseChristmasTinsel
+  name: tinsel
   description: Some white tinsel. It's a bit sparkly.
   components:
   - type: Sprite

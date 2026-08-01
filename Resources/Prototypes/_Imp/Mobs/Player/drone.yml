@@ -268,8 +268,8 @@
     - EmagImmune
     - CanPilot
     - VimPilot
-    - Bot # Goobstation
-  - type: CollectiveMind # Goobstation
+    - Bot
+  - type: CollectiveMind
     defaultChannel: Dronemind
     channels:
     - Dronemind
@@ -277,5 +277,20 @@
     tags:
     - Engineering
     - Maintenance
-    - Atmospherics # Goobstation
-  - type: ContributorName # Goobstation - Maint drones get up to date contributor names
+    - Atmospherics
+  - type: ContributorName
+  - type: KnowledgeGrant
+    skills:
+      # same as engiborg
+      FabricationKnowledge: 60
+      DoorsKnowledge: 60
+      AirlocksKnowledge: 60
+      FurnitureKnowledge: 60
+      InfrastructureKnowledge: 60
+      ElectronicsKnowledge: 60
+      WallsKnowledge: 60
+      WindowsKnowledge: 60
+      MetalworkingKnowledge: 60
+      GunsmithingKnowledge: 60
+      MechanicsKnowledge: 60
+      BotsKnowledge: 60 # you will be upgraded
