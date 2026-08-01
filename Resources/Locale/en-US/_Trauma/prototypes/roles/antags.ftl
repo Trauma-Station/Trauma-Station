@@ -11,6 +11,9 @@ insurgency-description = Insurgents are among us...
 roles-antag-shadow-demon-name = Shadow Demon
 roles-antag-shadow-demon-objective = The darkness needs a King, and you got summoned to wear that crown.
 
+roles-antag-demonologist-name = Demonologist
+roles-antag-demonologist-description = Summon demons, do sacrifices, bring about the end of the station.
+
 roles-antag-mind-controlled-name = Mind Controlled
 roles-antag-mind-controlled-objective = Help your Master
 

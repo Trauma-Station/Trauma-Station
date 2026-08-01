@@ -1,0 +1,49 @@
+- type: antag
+  id: Demonologist
+  name: roles-antag-demonologist-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-demonologist-description
+  guides: [ Demonologist ]
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 5h
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Plasmaman
+    - Decapoid
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Demonologist
+  prefRoles: [ Demonologist ]
+  jobBlacklist:
+  - Chaplain
+  mindRoles: [ DemonologistMindRole ]
+  startingGear: DemonologistStartingGear
+
+- type: startingGear
+  id: DemonologistStartingGear
+  storage:
+    back:
+    - BloodVialFull # 1
+    - BloodVialFull # 2
+    - BloodVialFull # 3
+    - BloodEnchanter
+    - RitualDagger
+    - MagicInkIndothine
+    - MagicInkAsimel
+    - MagicInkHithine
+    - EnchantingScrollEmpty # 1
+    - EnchantingScrollEmpty # 2
+    - EnchantingScrollEmpty # 3
+
+- type: antagSmite
+  id: Demonologist
+  antag: Demonologist
+  rule: Demonologist
+  ruleComp: DemonologistRule # TODO
+  icon:
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+    state: icon
