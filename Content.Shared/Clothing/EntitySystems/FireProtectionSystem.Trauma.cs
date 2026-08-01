@@ -16,11 +16,16 @@ public sealed partial class FireProtectionSystem : EntitySystem
         if (!_armorQuery.TryComp(ent, out var armor))
             return;
 
+        var isFlammable = _veryFlammableQuery.HasComp(ent);
+
         foreach (var type in armor.ArmorCoverage)
         {
             foreach (var part in BodySystem.PartTypeOrgans[type])
             {
-                args.PartReductions[part] = args.PartReductions.GetValueOrDefault(part) + ent.Comp.Reduction;
+                if (isFlammable)
+                    args.PartReductions[part] = 0f;
+                else
+                    args.PartReductions[part] = args.PartReductions.GetValueOrDefault(part) + ent.Comp.Reduction;
             }
         }
     }

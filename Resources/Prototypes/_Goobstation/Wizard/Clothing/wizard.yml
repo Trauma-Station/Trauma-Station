@@ -69,7 +69,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions: # prevents traumas at all (kinda)
       Dismemberment: 1
       OrganDamage: 1

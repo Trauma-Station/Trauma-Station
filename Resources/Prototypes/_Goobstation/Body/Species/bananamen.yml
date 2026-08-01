@@ -62,7 +62,7 @@
 
 - type: entity
   abstract: true
-  parent: [ OrganBananaMen, FoodBanana ]
+  parent: OrganBananaMen
   id: OrganBananaMenInternal
   name: banana
   components:
@@ -73,7 +73,7 @@
 
 - type: entity
   abstract: true
-  parent: [ OrganBananaMen, FoodBanana ]
+  parent: OrganBananaMen
   id: OrganBananaMenExternal
   components:
   - type: Sprite

@@ -22,6 +22,9 @@
   suffix: Limited
   components:
   - type: LimitedCharges
-  - type: AutoRecharge
+  # <Trauma>
+  - type: GiveChargeOnEmag
+  # - type: AutoRecharge
+  # </Trauma>
   - type: StaticPrice
     price: 2500

@@ -172,8 +172,8 @@
   - UpgradedCyberneticLungs
   - JawsOfLifeLeftArm
   - JawsOfLifeRightArm
-  - SpeedLeftLeg
-  - SpeedRightLeg
+  # - SpeedLeftLeg
+  # - SpeedRightLeg
   - DexLeftHand
   - DexRightHand
   - DiagnosticCyberneticEyes
@@ -242,18 +242,18 @@
   - AugmentBotanyPanelElectronics
   - AugmentSurgeryPanelElectronics
 
-- type: technology
-  id: CombatAugmentation
-  name: research-technology-combat-augmentation
-  icon:
-    sprite: _Shitmed/Objects/Augments/arm.rsi
-    state: strength
-  discipline: Robotics
-  tier: 2
-  cost: 10000
-  position: -6,5
-  technologyPrerequisites:
-  - ImplantedTools
-  recipeUnlocks:
-  - AugmentStrengthCasing
-  - AugmentStrengthElectronics
+#- type: technology
+#  id: CombatAugmentation
+#  name: research-technology-combat-augmentation
+#  icon:
+#    sprite: _Shitmed/Objects/Augments/arm.rsi
+#    state: strength
+#  discipline: Robotics
+#  tier: 2
+#  cost: 10000
+#  position: -6,5
+#  technologyPrerequisites:
+#  - ImplantedTools
+#  recipeUnlocks:
+#  - AugmentStrengthCasing
+#  - AugmentStrengthElectronics

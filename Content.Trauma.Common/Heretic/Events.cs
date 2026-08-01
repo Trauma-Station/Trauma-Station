@@ -55,7 +55,7 @@ public record struct CanStandWhileImmobileEvent(bool CanStand = false);
 [ByRefEvent]
 public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier) : IInventoryRelayEvent
 {
-    public SlotFlags TargetSlots => SlotFlags.FEET;
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
 [ByRefEvent]

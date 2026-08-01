@@ -8,18 +8,17 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Power;
 using JetBrains.Annotations;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Content.Shared.Labels.Components;
 using Content.Server.Power.Components;
-using Robust.Shared.Player;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Power.Components;
+using Content.Shared.Emag.Systems;
+using Content.Shared.Emag.Components;
 
 namespace Content.Goobstation.Server.Chemistry.EntitySystems;
 
@@ -35,6 +34,7 @@ public sealed partial class EnergyReagentDispenserSystem : EntitySystem
     [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
     [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     public override void Initialize()
     {
@@ -45,11 +45,6 @@ public sealed partial class EnergyReagentDispenserSystem : EntitySystem
         SubscribeLocalEvent<EnergyReagentDispenserComponent, EntInsertedIntoContainerMessage>(SubscribeUpdateUiState);
         SubscribeLocalEvent<EnergyReagentDispenserComponent, EntRemovedFromContainerMessage>(SubscribeUpdateUiState);
         SubscribeLocalEvent<EnergyReagentDispenserComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
-
-        SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserSetDispenseAmountMessage>(OnSetDispenseAmountMessage);
-        SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserDispenseReagentMessage>(OnDispenseReagentMessage);
-        SubscribeLocalEvent<EnergyReagentDispenserComponent, EnergyReagentDispenserClearContainerSolutionMessage>(OnClearContainerSolutionMessage);
-        SubscribeLocalEvent<EnergyReagentDispenserComponent, PowerChangedEvent>(OnPowerChanged);
 
         SubscribeLocalEvent<EnergyReagentDispenserComponent, MapInitEvent>(OnMapInit, before: [typeof(ItemSlotsSystem)]);
     }
@@ -136,6 +131,7 @@ public sealed partial class EnergyReagentDispenserSystem : EntitySystem
         return inventory;
     }
 
+    [SubscribeLocalEvent]
     private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> ent, ref EnergyReagentDispenserSetDispenseAmountMessage args)
     {
         var amount = args.Amount;
@@ -147,9 +143,11 @@ public sealed partial class EnergyReagentDispenserSystem : EntitySystem
         ClickSound(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> ent, ref PowerChangedEvent args) =>
         UpdateUiState(ent);
 
+    [SubscribeLocalEvent]
     private void OnDispenseReagentMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserDispenseReagentMessage message)
     {
         var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
@@ -180,6 +178,7 @@ public sealed partial class EnergyReagentDispenserSystem : EntitySystem
         UpdateUiState(reagentDispenser);
     }
 
+    [SubscribeLocalEvent]
     private void OnClearContainerSolutionMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserClearContainerSolutionMessage message)
     {
         var outputContainerNullable = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
@@ -195,6 +194,20 @@ public sealed partial class EnergyReagentDispenserSystem : EntitySystem
         _solutionContainerSystem.RemoveAllSolution(solution.Value);
         UpdateUiState(reagentDispenser);
         ClickSound(reagentDispenser);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnEmag(Entity<EnergyReagentDispenserComponent> ent, ref GotEmaggedEvent args)
+    {
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
+            return;
+
+        if (_emag.CheckFlag(ent, EmagType.Interaction))
+            return;
+
+        args.Handled = true;
+        ent.Comp.Reagents = ent.Comp.Reagents.Union(ent.Comp.EmaggedReagents).ToDictionary();
+        UpdateUiState(ent);
     }
 
     private void ClickSound(Entity<EnergyReagentDispenserComponent> reagentDispenser) =>
