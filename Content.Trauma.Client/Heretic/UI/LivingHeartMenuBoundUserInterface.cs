@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.Lobby.UI.ProfileEditorControls;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Client.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using JetBrains.Annotations;
 using Robust.Client.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic.UI;
 
@@ -14,9 +14,12 @@ namespace Content.Trauma.Client.Heretic.UI;
 public sealed partial class LivingHeartMenuBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private SimpleRadialMenu? _menu;
+
+    private static readonly EntProtoId Fallback = "CodexCicatrix";
 
     protected override void Open()
     {
@@ -39,17 +42,17 @@ public sealed partial class LivingHeartMenuBoundUserInterface(EntityUid owner, E
     private IEnumerable<RadialMenuActionOption<NetEntity>> ConvertToButtons(IReadOnlyList<SacrificeTargetData> datas)
     {
         var models = new RadialMenuActionOption<NetEntity>[datas.Count];
+        var spriteSys = _ent.System<SpriteSystem>();
         for (var i = 0; i < datas.Count; i++)
         {
             var data = datas[i];
 
-            var view = new ProfilePreviewSpriteView();
-            view.LoadPreview(data.Profile, _proto.Index(data.Job));
-
             models[i] = new RadialMenuActionOption<NetEntity>(HandleRadialMenuClick, data.Entity)
             {
-                IconSpecifier = new RadialMenuEntityIconSpecifier(view.Entity.GetValueOrDefault()),
-                ToolTip = data.Profile.Name,
+                IconSpecifier = _ent.TryGetEntity(data.Entity, out var e)
+                    ? new RadialMenuEntityIconSpecifier(e.Value)
+                    : new RadialMenuEntityPrototypeIconSpecifier(Fallback),
+                ToolTip = data.Name,
             };
         }
 
@@ -58,6 +61,8 @@ public sealed partial class LivingHeartMenuBoundUserInterface(EntityUid owner, E
 
     private void HandleRadialMenuClick(NetEntity ent)
     {
+        var comp = _ent.EnsureComponent<HereticSacrificeTargetComponent>(_ent.GetEntity(ent));
+        comp.RemovalTimer = _timing.CurTime + comp.RemovalTime;
         SendMessage(new EventHereticLivingHeartActivate(ent));
     }
 }

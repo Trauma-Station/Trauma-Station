@@ -43,6 +43,7 @@
     - ShapeshiftFireSharkLock
     - ShapeshiftRustWalkerLock
     - ShapeshiftShatteredLock
+    - ShapeshiftAshSpiritLock
   - type: UserInterface
     interfaces:
       enum.HereticShapeshiftUiKey.Key:

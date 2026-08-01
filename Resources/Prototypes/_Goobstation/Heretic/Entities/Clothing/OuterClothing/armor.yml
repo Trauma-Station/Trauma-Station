@@ -352,7 +352,7 @@
         Slash: 0.7
         Piercing: 0.7
         Ballistic: 0.6
-        Heat: 0.4
+        Heat: 0.5
         Caustic: 0.8
 
 - type: entity
@@ -375,6 +375,18 @@
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
     coolingCoefficient: 0.01
+  - type: TackleModifier # Allows tackling on cosmic fields
+    modifiers:
+    - priority: 25
+      allowCollision: false
+      affectsOtherModifiers: false
+      staminaCostMultiplier: 0
+      speedMultiplier: 0.5
+      knockdownTimeMultiplier: 0
+      rangeMultiplier: 0.5
+      cooldownMultiplier: 0.3
+      userEffect: CosmicDash
+      tackleCondition: CosmicFieldNearby
 
 - type: entity
   abstract: true

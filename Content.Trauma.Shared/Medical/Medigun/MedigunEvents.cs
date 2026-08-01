@@ -2,7 +2,7 @@
 
 using Content.Shared.Actions;
 
-namespace Content.Goobstation.Shared.Medical;
+namespace Content.Trauma.Shared.Medical.Medigun;
 
 /// <summary>
 /// Doctor! Are you sure this will work?!

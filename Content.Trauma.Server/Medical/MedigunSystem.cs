@@ -1,15 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Physics;
-using Content.Goobstation.Shared.Medical;
-using Content.Goobstation.Shared.Medical.Components;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
-using Content.Shared.Body;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -19,17 +15,17 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Power.Components;
 using Content.Shared.Timing;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Medical.Medigun;
+using Content.Trauma.Shared.Medical.Medigun.Components;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
-// ReSharper disable EnforceForeachStatementBraces
-namespace Content.Goobstation.Server.Medical;
+namespace Content.Trauma.Server.Medical;
 
-// TODO: Move this to Shared
-public sealed partial class MedigunSystem : SharedMedigunSystem
+public sealed partial class MedigunSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private AlertsSystem _alert = default!;
@@ -40,28 +36,16 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedComplexJointVisualsSystem _joint = default!;
 
-    private EntityQuery<BatteryComponent> _batteryQuery;
-    private EntityQuery<DamageableComponent> _damageableQuery;
-
-    public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _batteryQuery = GetEntityQuery<BatteryComponent>();
-        _damageableQuery = GetEntityQuery<DamageableComponent>();
-
-        SubscribeLocalEvent<MediGunComponent, AfterInteractEvent>(OnActivate);
-        SubscribeLocalEvent<MediGunComponent, MediGunUberActivateActionEvent>(OnUber);
-        SubscribeLocalEvent<MediGunComponent, EntParentChangedMessage>(OnParentChanged);
-        SubscribeLocalEvent<MediGunComponent, ItemToggledEvent>(OnToggled);
-    }
+    [Dependency] private EntityQuery<BatteryComponent> _batteryQuery = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageableQuery = default!;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        var now = _timing.CurTime;
 
         var query = EntityQueryEnumerator<MediGunComponent>();
         while (query.MoveNext(out var medical, out var component))
@@ -69,35 +53,42 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
             if (!component.IsActive)
                 continue;
 
-            if (_timing.CurTime < component.NextTick
-                || component.NextTick == null)
+            if (now < component.NextTick)
                 continue;
 
             var medGunEnt = (medical, component);
-            if (_timing.CurTime > component.UberEndTime
-                && component.UberEndTime != null)
+            if (now > component.UberEndTime)
                 DisableUber(medGunEnt);
 
-            var toHeal = component.HealedEntities.ToArray();
-            foreach (var healed in toHeal)
-            {
-                if (!MediGunHealingTick(medGunEnt, healed))
-                    DisableConnection(medGunEnt, healed);
-            }
-
-            if (component.HealedEntities.Count == 0)
-            {
-                DisableAllConnections(medGunEnt);
-                continue;
-            }
-
-            component.NextTick = _timing.CurTime + TimeSpan.FromSeconds(component.Frequency);
+            component.NextTick = now + TimeSpan.FromSeconds(component.Frequency);
 
             // Add uber action if we can
             if (component.UberPoints > component.PointsToUber
                 && component.ParentEntity != null
                 && !component.UberActivated)
                 _action.AddAction(component.ParentEntity.Value, ref component.UberAction, component.UberActionId, medical);
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void BeamCollision(Entity<MediGunComponent> ent, ref ComplexJointCollisionEvent args)
+    {
+        if (args.Data.Id != ent.Comp.JointKey || ent.Comp.HealedEntities.Contains(args.Hit.HitEntity))
+            return;
+
+        DisableConnection(ent, args.Target);
+    }
+
+    [SubscribeLocalEvent]
+    private void UpdateBeams(Entity<MediGunComponent> ent, ref ComplexJointUpdateEvent args)
+    {
+        if (!args.UpdatedIds.TryGetValue(ent.Comp.JointKey, out var set))
+            return;
+
+        foreach (var healed in ent.Comp.HealedEntities)
+        {
+            if (!set.Contains(healed) || !MediGunHealingTick(ent, healed))
+                DisableConnection(ent, healed);
         }
     }
 
@@ -110,15 +101,6 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
             return false;
 
         var comp = ent.Comp;
-
-        // Calculate positions of all targets and remove ones that out of range
-        var healedPos = _xform.GetMapCoordinates(healed);
-        var mediGunPos = _xform.GetMapCoordinates(ent);
-        var distance = (mediGunPos.Position - healedPos.Position).Length();
-
-        if (distance > comp.MaxRange ||
-            healedPos.MapId != mediGunPos.MapId)
-            return false;
 
         var batteryToWithdraw = comp.UberActivated ? comp.UberBatteryWithdraw: comp.BatteryWithdraw;
         if (_batteryQuery.TryComp(ent.Owner, out var batteryComp)
@@ -133,6 +115,7 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
             return false;
 
         var healing = comp.UberActivated ? comp.UberHealing : comp.Healing;
+        healing *= ent.Comp.Frequency;
         var originalDamage = _damage.GetTotalDamage((healed, damageable));
 
         _damage.ChangeDamage(
@@ -161,6 +144,7 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnToggled(Entity<MediGunComponent> ent, ref ItemToggledEvent args)
     {
         if (ent.Comp.ParentEntity != null)
@@ -174,6 +158,7 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
         DisableAllConnections(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnActivate(Entity<MediGunComponent> ent, ref AfterInteractEvent args)
     {
         var (uid, comp) = ent;
@@ -215,12 +200,14 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
         Dirty(uid, comp);
 
         // Joint visuals
-        var beam = EnsureComp<ComplexJointVisualsComponent>(uid);
         var sprite = comp.UberActivated ? comp.UberBeamSprite : comp.BeamSprite;
         var color = comp.UberActivated ? comp.UberLineColor : comp.DefaultLineColor;
-        var visuals = new ComplexJointVisualsData("medigun", sprite, color);
-        beam.Data.Add(GetNetEntity(target), visuals);
-        Dirty(uid, beam);
+        var visuals = new ComplexJointVisualsData(ent.Comp.JointKey, sprite, ent.Comp.MaxRange)
+        {
+            Color = color,
+            ReturnOnFirstHit = true,
+        };
+        _joint.CreateJoint(target, ent, visuals);
 
         // Target's component
         var mediGunned = EnsureComp<MediGunHealedComponent>(target);
@@ -256,6 +243,7 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
         _alert.ShowAlert(target, "MedigunUberBattery", severity);
     }
 
+    [SubscribeLocalEvent]
     private void OnParentChanged(Entity<MediGunComponent> ent, ref EntParentChangedMessage args)
     {
         if (args.Transform.ParentUid == ent.Comp.ParentEntity)
@@ -268,6 +256,7 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
         DisableAllConnections(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnUber(EntityUid uid, MediGunComponent component, MediGunUberActivateActionEvent args) =>
         EnableUber((uid, component));
 
@@ -315,7 +304,7 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
     {
         var comp = ent.Comp;
         comp.UberActivated = false;
-        comp.UberEndTime = null;
+        comp.UberEndTime = TimeSpan.Zero;
         Dirty(ent);
 
         var visuals = EnsureComp<ComplexJointVisualsComponent>(ent);
@@ -353,15 +342,21 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
             RemComp(healed, mediGunned);
         }
 
-        _toggle.TryDeactivate(ent.Owner, comp.ParentEntity);
-
         comp.HealedEntities.Clear();
-        comp.IsActive = false;
-        comp.ParentEntity = null;
-        RemComp<ComplexJointVisualsComponent>(ent);
+        ClearJoints(ent);
+    }
 
-        if (comp.ParentEntity != null)
-            UpdateAlert(comp.ParentEntity.Value, ent);
+    private void ClearJoints(Entity<MediGunComponent> ent)
+    {
+        _toggle.TryDeactivate(ent.Owner, ent.Comp.ParentEntity);
+
+        _joint.ClearBeamJoints(ent.Owner, ent.Comp.JointKey);
+
+        if (ent.Comp.ParentEntity != null)
+            UpdateAlert(ent.Comp.ParentEntity.Value, ent);
+
+        ent.Comp.IsActive = false;
+        ent.Comp.ParentEntity = null;
     }
 
     /// <summary>
@@ -369,14 +364,13 @@ public sealed partial class MedigunSystem : SharedMedigunSystem
     /// </summary>
     private void DisableConnection(Entity<MediGunComponent> ent, EntityUid toRemove)
     {
-        var comp = ent.Comp;
-        if (!comp.HealedEntities.Contains(toRemove))
-            return;
+        RemCompDeferred<MediGunHealedComponent>(toRemove);
+        ent.Comp.HealedEntities.Remove(toRemove);
+        Dirty(ent);
 
-        if (!TryComp<MediGunHealedComponent>(toRemove, out var mediGunned))
-            return;
-
-        RemComp(toRemove, mediGunned);
-        comp.HealedEntities.Remove(toRemove);
+        if (ent.Comp.HealedEntities.Count == 0)
+            ClearJoints(ent);
+        else
+            _joint.ClearBeamJoints(ent.Owner, ent.Comp.JointKey, toRemove);
     }
 }
