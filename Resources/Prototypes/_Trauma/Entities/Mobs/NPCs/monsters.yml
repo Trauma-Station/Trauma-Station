@@ -448,8 +448,6 @@
     refineResult:
     - id: FoodMeatCrab
       amount: 6
-  - type: MobPrice
-    price: 5000 # Rare as fuck
 
 - type: entity
   parent: MobCoconutCrabShellless
@@ -495,7 +493,7 @@
   - type: Injurable
     damageContainer: Biological
   - type: MobPrice
-    price: 500 # The fact that a test requires me to add this is fucking stupid
+    price: 1000 # The fact that a test requires me to add this is fucking stupid
 
 - type: entity
   parent: MobCoconutCrabShellless
