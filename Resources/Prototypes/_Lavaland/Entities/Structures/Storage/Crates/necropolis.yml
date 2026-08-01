@@ -27,7 +27,6 @@
   table: !type:GroupSelector
     children:
     - id: LavalandCursedHeart
-    - id: ClothingOuterArmorCult
     - id: LavalandVampirismCrystal
     # TODO add more interesting obtain methods for crusher upgrades (from megafauna, ruins, etc.)
     - id: CrusherUpgradeMainRudeBuster

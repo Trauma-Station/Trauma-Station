@@ -30,7 +30,7 @@
 - type: listing
   id: UplinkEmag
   name: uplink-emag-name
-  description: uplink-emag-desc-trauma # Trauma
+  description: uplink-emag-desc
   productEntity: Emag
   cost:
     Telecrystal: 20 # Trauma - was 5, 5x and cheaper

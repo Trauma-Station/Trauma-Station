@@ -22,9 +22,10 @@
   suffix: Limited
   components:
   - type: LimitedCharges
+  - type: AutoRecharge
   # <Trauma>
-  - type: GiveChargeOnEmag
-  # - type: AutoRecharge
+    rechargeDuration: 600
+  - type: ModifyRechargeTimeOnEmag
   # </Trauma>
   - type: StaticPrice
     price: 2500

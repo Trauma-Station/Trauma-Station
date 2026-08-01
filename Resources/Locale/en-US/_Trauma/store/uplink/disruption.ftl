@@ -20,5 +20,3 @@ uplink-super-surplus-bundle-desc = Contains 625 telecrystals worth of completely
 
 uplink-syndicate-segway-crate-name = Syndicate Segway
 uplink-syndicate-segway-crate-desc = Be an enemy of the corporation, in style!
-
-uplink-emag-desc-trauma = The business card of the syndicate, this sequencer is able to tamper with a variety of station devices. Has 3 charges that do not recharge automatically

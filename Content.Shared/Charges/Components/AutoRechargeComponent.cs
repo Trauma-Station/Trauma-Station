@@ -15,5 +15,6 @@ public sealed partial class AutoRechargeComponent : Component
     /// The time it takes to regain a single charge
     /// </summary>
     [DataField, AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWrite)] // Trauma
     public TimeSpan RechargeDuration = TimeSpan.FromSeconds(90);
 }
