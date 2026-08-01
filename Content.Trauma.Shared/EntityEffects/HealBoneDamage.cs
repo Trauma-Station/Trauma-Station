@@ -28,11 +28,13 @@ public sealed partial class HealBoneDamageEffectSystem : EntityEffectSystem<Body
     [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private BodySystem _body = default!;
 
-    protected override void Effect(Entity<BodyComponent> entity, ref EntityEffectEvent<HealBoneDamage> args)
+    protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<HealBoneDamage> args)
     {
         var amount = args.Effect.Amount * args.Scale;
 
-        foreach (var woundable in _body.GetOrgans<WoundableComponent>(entity.Owner))
-            _trauma.HealBone(woundable, amount);
+        foreach (var bone in _body.GetOrgans<BoneComponent>(ent.Owner))
+        {
+            _trauma.DamageBone(bone.AsNullable(), -amount);
+        }
     }
 }

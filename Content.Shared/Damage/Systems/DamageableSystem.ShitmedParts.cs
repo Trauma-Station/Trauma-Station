@@ -341,13 +341,4 @@ public sealed partial class DamageableSystem
                 return damage;
         }
     }
-
-    public void SetDamageContainerID(Entity<InjurableComponent?> ent, [ForbidLiteral] ProtoId<DamageContainerPrototype> id)
-    {
-        if (!_injurableQuery.Resolve(ent, ref ent.Comp) || ent.Comp.DamageContainer == id)
-            return;
-
-        ent.Comp.DamageContainer = id;
-        Dirty(ent);
-    }
 }

@@ -1,16 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Physics;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.Mobs.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;
@@ -18,8 +13,9 @@ using Content.Shared.Throwing;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Server.Audio;
-using Robust.Shared.Map;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -28,128 +24,138 @@ namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 public sealed partial class StarGazeSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private SharedStarMarkSystem _mark = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ThrowingSystem _throw = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private AudioSystem _audio = default!;
-    [Dependency] private BodySystem _body = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private SharedComplexJointVisualsSystem _joint = default!;
+    [Dependency] private SharedContinuousBeamSystem _beam = default!;
 
     [Dependency] private EntityQuery<HereticMinionComponent> _minionQuery = default!;
     [Dependency] private EntityQuery<VocalComponent> _vocalQuery = default!;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
-    private readonly HashSet<Entity<MobStateComponent>> _targets = new();
+    private readonly HashSet<Entity<PhysicsComponent>> _pullTargets = new();
 
-    public override void Update(float frameTime)
+    public override void Initialize()
     {
-        base.Update(frameTime);
+        base.Initialize();
 
-        var now = _timing.CurTime;
-
-        var query = EntityQueryEnumerator<StarGazeComponent, ComplexJointVisualsComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var gaze, out var joint, out var xform))
-        {
-            if (!gaze.StartedBlasting)
-                continue;
-
-            if (!UpdateBeamState(uid, gaze, joint, now, out var stage))
-                continue;
-
-            if (!UpdateBeamPosition(uid, gaze, joint, xform, now))
-                continue;
-
-            UpdateBeamDamage(uid, gaze, joint, xform, now, stage);
-        }
+        SubscribeLocalEvent<StarGazeComponent, BeforeContinuousBeamDamagedEvent>(OnBeforeDamage, after: [typeof(GhoulSystem)]);
     }
 
-    private void UpdateBeamDamage(EntityUid uid,
-        StarGazeComponent gaze,
-        ComplexJointVisualsComponent joint,
-        TransformComponent xform,
-        TimeSpan now,
-        int stage)
+    private void OnBeforeDamage(Entity<StarGazeComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
     {
-        if (now < gaze.DamageTimer || stage != 2)
+        if (args.Cancelled || !_mobState.IsIncapacitated(args.Target))
             return;
 
-        gaze.DamageTimer = now + gaze.DamageTime;
+        var coords = Transform(args.Target).Coordinates;
+        _admin.Add(LogType.Gib, LogImpact.Medium, $"{ent.Owner} ashed {args.Target} using star gazer laser beam");
+        _popup.PopupCoordinates(Loc.GetString("heretic-stargaze-obliterate-user"),
+            coords,
+            args.Target,
+            PopupType.LargeCaution);
+        _audio.PlayPvs(ent.Comp.ObliterateSound, coords);
+        Spawn(ent.Comp.AshProto, coords);
+        QueueDel(args.Target); // Goodbye
+        args.Cancelled = true;
+    }
 
-        if (!ResolveStarGazeEndpointData(uid, gaze, joint))
-            return;
+    [SubscribeLocalEvent]
+    private void AfterDamage(Entity<StarGazeComponent> ent, ref AfterContinuousBeamDamagedEvent args)
+    {
+        _mark.TryApplyStarMark(args.Target);
+        if (_random.Prob(ent.Comp.ScreamProb) && _vocalQuery.TryComp(args.Target, out var vocal))
+            _chat.TryEmoteWithChat(args.Target, vocal.ScreamId);
+    }
 
-        var pos = _transform.GetWorldPosition(gaze.Endpoint!.Value);
+    [SubscribeLocalEvent]
+    private void OnStopFiring(Entity<StarGazeComponent> ent, ref ContinuousBeamStoppedFiringEvent args)
+    {
+        RemCompDeferred(ent, ent.Comp);
+    }
 
-        var gazerPos = _transform.GetWorldPosition(xform);
+    [SubscribeLocalEvent]
+    private void OnBeforeDamageTick(Entity<StarGazeComponent> ent, ref BeforeContinuousBeamDamageTickEvent args)
+    {
+        Entity<StarGazeComponent, ContinuousBeamGunComponent, ComplexJointVisualsComponent> combined = (ent, ent,
+            args.Ent, args.Ent);
 
-        var c = pos - gazerPos;
-        var cLen = c.Length();
+        if (!UpdateBeamState(combined))
+            args.Cancelled = true;
+        else
+            PullVictims(combined);
+    }
 
-        if (cLen <= 0.01f)
-            return;
+    private bool UpdateBeamState(Entity<StarGazeComponent, ContinuousBeamGunComponent, ComplexJointVisualsComponent> ent)
+    {
+        var difference = ent.Comp2.BeamTimer - _timing.CurTime;
 
-        var cNorm = c / cLen;
-        var angle = c.ToAngle();
+        var stage = GetBeamStage((float) difference.TotalSeconds);
 
-        var offset = cNorm * gaze.BeamScale;
-        var box = new Box2(gazerPos + offset + new Vector2(0f, -gaze.LaserThickness),
-            gazerPos + offset + new Vector2(cLen, gaze.LaserThickness));
-        var boxRot = new Box2Rotated(box, angle, gazerPos + offset);
+        if (stage == ent.Comp1.LastStage)
+            return stage == 2;
 
-        var minion = _minionQuery.CompOrNull(uid);
+        ent.Comp1.LastStage = stage;
 
-        _targets.Clear();
-        _lookup.GetEntitiesIntersecting(xform.MapID, boxRot, _targets, LookupFlags.Dynamic);
-        foreach (var noob in _targets)
+        var jointData = _joint.GetJointData(ent.Comp3, SharedStarGazerSystem.JointId);
+        foreach (var data in jointData.Values)
         {
-            if (noob == minion?.BoundHeretic)
+            if (data.Id != SharedStarGazerSystem.JointId)
                 continue;
 
-            if (_mobState.IsIncapacitated(noob, noob.Comp))
+            var startSprite = ent.Comp1.Start2;
+            var beamSprite = ent.Comp1.Beam2;
+            var endSprite = ent.Comp1.End2;
+            switch (stage)
             {
-                var coords = Transform(noob).Coordinates;
-                _admin.Add(LogType.Gib,
-                    LogImpact.Medium,
-                    $"{ToPrettyString(uid):user} ashed {ToPrettyString(noob):target} using star gazer laser beam");
-                /* Annoying popup spam
-                _popup.PopupCoordinates(Loc.GetString("heretic-stargaze-obliterate-other",
-                        ("uid", Identity.Entity(noob, EntityManager))),
-                    coords,
-                    Filter.PvsExcept(noob),
-                    true,
-                    PopupType.LargeCaution);*/
-                _popup.PopupCoordinates(Loc.GetString("heretic-stargaze-obliterate-user"),
-                    coords,
-                    noob,
-                    PopupType.LargeCaution);
-                _audio.PlayPvs(gaze.ObliterateSound, coords);
-                Spawn(gaze.AshProto, coords);
-                QueueDel(noob); // Goodbye
-                continue;
+                case 1:
+                    startSprite = ent.Comp1.Start1;
+                    beamSprite = ent.Comp1.Beam1;
+                    endSprite = ent.Comp1.End1;
+                    break;
+                case 3:
+                    startSprite = ent.Comp1.Start3;
+                    beamSprite = ent.Comp1.Beam3;
+                    endSprite = ent.Comp1.End3;
+                    break;
             }
 
-            _mark.TryApplyStarMark(noob.AsNullable());
-            _dmg.TryChangeDamage(noob.Owner,
-                gaze.Damage * _body.GetVitalBodyPartRatio(noob.Owner),
-                origin: uid,
-                targetPart: TargetBodyPart.All,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            if (data.StartSprite == startSprite)
+                continue;
 
-            if (_random.Prob(gaze.ScreamProb) && _vocalQuery.TryComp(noob, out var vocal))
-                _chat.TryEmoteWithChat(noob, vocal.ScreamId);
+            data.StartSprite = startSprite;
+            data.Sprite = beamSprite;
+            data.EndSprite = endSprite;
+            Dirty(ent, ent.Comp2);
         }
 
-        var boxRot2 = new Box2Rotated(box.Enlarged(gaze.GravityPullSizeModifier), angle, gazerPos + offset);
-        _targets.Clear();
-        _lookup.GetEntitiesIntersecting(xform.MapID, boxRot2, _targets, LookupFlags.Dynamic);
-        foreach (var noob in _targets)
+        return stage == 2;
+    }
+
+    private void PullVictims(Entity<StarGazeComponent, ContinuousBeamGunComponent, ComplexJointVisualsComponent> ent)
+    {
+        if (_beam.CalculateBeamDamageData((ent, ent, ent)) is not { } tuple)
+            return;
+
+        var (boxRot1, angle, cLen, cNorm, offset, gazerPos, pos) = tuple;
+        var box = boxRot1.Box;
+
+        var heretic = _minionQuery.CompOrNull(ent)?.BoundHeretic;
+
+        var boxRot2 = new Box2Rotated(box.Enlarged(ent.Comp1.GravityPullSizeModifier), angle, gazerPos + offset);
+        _pullTargets.Clear();
+        _lookup.GetEntitiesIntersecting(Transform(ent).MapID, boxRot2, _pullTargets, LookupFlags.Dynamic);
+        foreach (var noob in _pullTargets)
         {
-            if (noob == minion?.BoundHeretic)
+            if (noob == ent.Comp2.Shooter || noob == heretic || _ghostQuery.HasComp(noob) || _ghoulQuery.HasComp(noob))
                 continue;
 
             var noobXform = Transform(noob);
@@ -188,148 +194,16 @@ public sealed partial class StarGazeSystem : EntitySystem
             if (result.Item2 <= 0.01f)
                 continue;
 
-            var throwDir = result.Item1 * MathF.Min(gaze.MaxThrowLength, result.Item2);
+            var throwDir = result.Item1 * MathF.Min(ent.Comp1.MaxThrowLength, result.Item2);
             _throw.TryThrow(noob,
                 throwDir,
-                gaze.ThrowSpeed,
+                ent.Comp1.ThrowSpeed,
                 recoil: false,
                 animated: false,
                 doSpin: false,
                 playSound: false,
-                predicted: false);
-        }
-    }
-
-    private bool UpdateBeamPosition(EntityUid uid,
-        StarGazeComponent gaze,
-        ComplexJointVisualsComponent joint,
-        TransformComponent xform,
-        TimeSpan now)
-    {
-        if (now < gaze.UpdateTimer)
-            return true;
-
-        gaze.UpdateTimer = now + gaze.UpdateTime;
-
-        if (!ResolveStarGazeEndpointData(uid, gaze, joint))
-            return false;
-
-        var target = gaze.CursorPosition!.Value;
-        var endpoint = gaze.Endpoint!.Value;
-        var endpointXform = Transform(endpoint);
-        var pos = _transform.GetWorldPosition(endpointXform);
-        var dir = target.Position - pos;
-        var len = dir.Length();
-
-        var gazerPos = _transform.GetWorldPosition(xform);
-        var newPos = pos + dir * gaze.LaserSpeed / len;
-        var dir2 = newPos - gazerPos;
-        var len2 = dir2.Length();
-
-        if (len2 < 0.01f)
-            return true;
-
-        if (len <= gaze.LaserSpeed)
-            _transform.SetMapCoordinates((endpoint, endpointXform), target);
-        else
-        {
-            var newLen = Math.Clamp(len2, gaze.MinMaxLaserRange.X, gaze.MinMaxLaserRange.Y);
-
-            _transform.SetMapCoordinates((endpoint, endpointXform),
-                new MapCoordinates(gazerPos + dir2 * newLen / len2, xform.MapID));
-        }
-
-        return true;
-    }
-
-    private bool UpdateBeamState(EntityUid uid,
-        StarGazeComponent gaze,
-        ComplexJointVisualsComponent joint,
-        TimeSpan now,
-        out int stage)
-    {
-        var difference = gaze.BeamTimer - now;
-
-        if (difference < TimeSpan.Zero)
-        {
-            stage = 1;
-            ClearJoints(uid, joint);
-            QueueDel(gaze.Endpoint);
-            RemCompDeferred(uid, gaze);
-            return false;
-        }
-
-        stage = GetBeamStage((float) difference.TotalSeconds);
-
-        if (stage == gaze.LastStage)
-            return true;
-
-        gaze.LastStage = stage;
-
-        var jointData = GetJointData(joint);
-        foreach (var data in jointData.Values)
-        {
-            if (data.Id != SharedStarGazerSystem.JointId)
-                continue;
-
-            var startSprite = gaze.Start2;
-            var beamSprite = gaze.Beam2;
-            var endSprite = gaze.End2;
-            switch (stage)
-            {
-                case 1:
-                    startSprite = gaze.Start1;
-                    beamSprite = gaze.Beam1;
-                    endSprite = gaze.End1;
-                    break;
-                case 3:
-                    startSprite = gaze.Start3;
-                    beamSprite = gaze.Beam3;
-                    endSprite = gaze.End3;
-                    break;
-            }
-
-            if (data.StartSprite == startSprite)
-                continue;
-
-            data.StartSprite = startSprite;
-            data.Sprite = beamSprite;
-            data.EndSprite = endSprite;
-            Dirty(uid, joint);
-        }
-
-        return true;
-    }
-
-    private bool ResolveStarGazeEndpointData(EntityUid uid,
-        StarGazeComponent gaze,
-        ComplexJointVisualsComponent joint)
-    {
-        var exists = Exists(gaze.Endpoint);
-        if (exists && gaze.CursorPosition != null)
-            return true;
-
-        ClearJoints(uid, joint);
-
-        if (exists)
-            QueueDel(gaze.Endpoint!.Value);
-
-        RemCompDeferred(uid, gaze);
-        return false;
-    }
-
-    private void ClearJoints(EntityUid uid,
-        ComplexJointVisualsComponent joint,
-        Dictionary<NetEntity, ComplexJointVisualsData>? jointData = null)
-    {
-        jointData ??= GetJointData(joint);
-
-        if (joint.Data.Count >= jointData.Count)
-            RemCompDeferred(uid, joint);
-        else
-        {
-            joint.Data = joint.Data.ExceptBy(jointData.Keys, kvp => kvp.Key).ToDictionary();
-            Dirty(uid, joint);
+                predicted: false,
+                throwInAir: false);
         }
     }
 
@@ -384,10 +258,5 @@ public sealed partial class StarGazeSystem : EntitySystem
     private static int GetBeamStage(float time)
     {
         return time < 0.8f ? 1 : time > 9.7f ? 3 : 2;
-    }
-
-    private static Dictionary<NetEntity, ComplexJointVisualsData> GetJointData(ComplexJointVisualsComponent joint)
-    {
-        return joint.Data.Where(x => x.Value.Id == SharedStarGazerSystem.JointId).ToDictionary();
     }
 }

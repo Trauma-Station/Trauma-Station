@@ -93,6 +93,11 @@
   - Insurgent
 
 - type: npcFaction
+  id: InsurgentFriend
+  friendly:
+  - Insurgent
+
+- type: npcFaction
   id: InitialInfected
   friendly:
   - Zombie

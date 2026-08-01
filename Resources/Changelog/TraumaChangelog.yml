@@ -12409,3 +12409,198 @@ Entries:
   id: 1359
   time: '2026-07-29T19:56:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3830
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Goidabot is no longer hostile to insurgents
+  id: 1360
+  time: '2026-07-29T22:54:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3838
+- author: dasgooty
+  changes:
+  - type: Fix
+    message: Fixed Peppersprays
+  id: 1361
+  time: '2026-07-29T23:59:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3836
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Rev constructions are no longer listed for everyone since they can't craft
+      them anyway.
+  id: 1362
+  time: '2026-07-30T00:39:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3840
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added new antag token types!
+  id: 1363
+  time: '2026-07-30T00:45:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3801
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the slowmode of the breaching hammer while equipped.
+  - type: Tweak
+    message: Changed the prying speed of the breaching hammer, you are now faster.
+  - type: Tweak
+    message: Changed the amount of breaching hammers sec gets. You only get 1 now.
+  id: 1364
+  time: '2026-07-30T00:57:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3837
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Head Revolutionaries now have a radio implant with the regular rev channel
+      and a special headrev channel they can use with :j at any time.
+  id: 1365
+  time: '2026-07-30T12:47:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3846
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed xenobio oil extract not exploding and silver extract not making
+      metal foam.
+  id: 1366
+  time: '2026-07-30T13:00:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3847
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Skeletons now gib properly: 150 blunt damage gibs the part, not the entire
+      mob from breaking a skellys leg.
+  id: 1367
+  time: '2026-07-30T17:26:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3852
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: You can actually make incubators now in the service techfab.
+  id: 1368
+  time: '2026-07-30T19:00:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3848
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Stripping cuffed people is now 25% faster.
+  id: 1369
+  time: '2026-07-30T19:30:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3855
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Traitor objectives now only pick people who have jobs. No more kill nukie
+      or admin objective.
+  id: 1370
+  time: '2026-07-30T20:07:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3856
+- author: buunie099
+  changes:
+  - type: Remove
+    message: De-handed the Hanged
+  id: 1371
+  time: '2026-07-31T09:57:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3864
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic living heart now shows waypointer towards selected target briefly.
+  - type: Add
+    message: Heretic targets autoreroll individually when deleted/cryod.
+  - type: Add
+    message: New heretic t3 side summon - ash spirit.
+  - type: Add
+    message: >-
+      Cosmic heretic armor lost some heat resists but gained rapid dash (tackle)
+      ability on cosmic fields.
+  - type: Tweak
+    message: Reduced max heretic sacrifice targets 6 -> 5.
+  - type: Tweak
+    message: Sec/command/heretic sacrifices give 2 main and 1 side points, not 3 main.
+  - type: Tweak
+    message: >-
+      Increased amounts of points/sacrificed needed for heretic objectives
+      slightly.
+  - type: Tweak
+    message: Flesh stalkers get crimson cleave instead of jaunt and emp.
+  - type: Tweak
+    message: Raw prophets jaunt is shorter.
+  - type: Tweak
+    message: Nerfed ghoul blade to 15 damage.
+  - type: Tweak
+    message: Void chill and flesh armor effect nerfed.
+  - type: Fix
+    message: Fixed entities with tails behaving weirdly on moving grids.
+  id: 1372
+  time: '2026-07-31T10:07:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3727
+- author: assripper.
+  changes:
+  - type: Add
+    message: Added solo xenomorph midround
+  id: 1373
+  time: '2026-07-31T12:12:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3863
+- author: momoyawn
+  changes:
+  - type: Add
+    message: minor holy fire on bible attacks
+  - type: Tweak
+    message: no pierce and slash on bible fails
+  - type: Fix
+    message: >-
+      bible cant heal or hurt objects anymore
+      https://github.com/Trauma-Station/Trauma-Station/issues/3868
+  id: 1374
+  time: '2026-07-31T23:32:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3869
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed lag from wound self healing.
+  - type: Fix
+    message: >-
+      Fixed fire protection like firesuits not respecting part coverage. Wearing
+      only a suit no longer protects your head and vice versa.
+  id: 1375
+  time: '2026-08-01T01:04:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3875
+- author: It is no longer time for crab.
+  changes:
+  - type: Tweak
+    message: >-
+      Coconut Crabs can now be kited around easier, and don't knock you as far
+      back.
+  - type: Tweak
+    message: >-
+      Coconut Crabs are no longer slowed by damage when their shell is broken,
+      and are slightly faster.
+  - type: Tweak
+    message: Crab ventspawn rarer and spawns less crabs.
+  id: 1376
+  time: '2026-08-01T10:09:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3882
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: Bioweapons now have a law to follow.
+  - type: Add
+    message: Bioweapon lawset can be an ion storm lawset.
+  id: 1377
+  time: '2026-08-01T10:21:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3865
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Drones now have crafting skills and can't summon demons.
+  - type: Fix
+    message: Fixed some lights being circular.
+  id: 1378
+  time: '2026-08-01T12:26:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3886

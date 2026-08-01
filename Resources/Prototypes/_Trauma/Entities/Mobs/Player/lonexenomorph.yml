@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseMobXenomorphDrone, BaseXenomorphGhostRole ]
+  id: MobLoneXenomorph
+  name: Lone Xenomorph
+  description: The Perfect Organism
+  components:
+  - type: Sprite
+    sprite: _Trauma/Xenomorphs/the_alien.rsi
+  - type: GhostRole
+    name: ghost-role-information-lone-xenomorph-name
+    description: ghost-role-information-lone-xenomorph-description
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+      enum.RadialSelectorUiKey.Key:
+        type: RadialSelectorMenuBUI

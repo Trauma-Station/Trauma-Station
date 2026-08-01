@@ -56,6 +56,7 @@ ghostrole-prophet-name = Raw Prophet
 ghostrole-stalker-name = Flesh Stalker
 ghostrole-maid-name = Maid in the Mirror
 ghostrole-fire-shark-name = Fire Shark
+ghostrole-ash-spirit-name = Ash Spirit
 ghostrole-rustwalker-name = Rust Walker
 ghostrole-stargazer-name = Star Gazer
 ghostrole-ghoul-desc = Aid your summoner in achieving ascension.
@@ -64,6 +65,7 @@ ghostrole-prophet-desc = Aid your summoner in achieving ascension. Connect other
 ghostrole-stalker-desc = Aid your summoner in achieving ascension. Jaunt and sabotage crew's lighting.
 ghostrole-maid-desc = Aid your summoner in achieving ascension. Jaunt in and out on reflective surfaces to scout or ambush crew.
 ghostrole-fire-shark-desc = Aid your summoner in achieving ascension. Burn your victims.
+ghostrole-ash-spirit-desc = Aid your summoner in achieving ascension. Melt your victims.
 ghostrole-rustwalker-desc = Aid your summoner in achieving ascension. Spread rust everywhere.
 ghostrole-stargazer-desc = Aid your summoner in wreaking havoc everywhere.
 ghostrole-ghoul-rules = You are a [color=red][bold]Team Antagonist[/bold][/color] with the one who summoned you and other eldritch beings.

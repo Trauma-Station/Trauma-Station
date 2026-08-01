@@ -1,13 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.Map;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class StarGazeComponent : Component
 {
     [DataField]
@@ -20,10 +17,10 @@ public sealed partial class StarGazeComponent : Component
     public float ScreamProb = 0.05f;
 
     [DataField]
-    public float MaxThrowLength = 0.05f;
+    public float MaxThrowLength = 0.01f;
 
     [DataField]
-    public float ThrowSpeed = 5f;
+    public float ThrowSpeed = 1f;
 
     [DataField]
     public SoundSpecifier ObliterateSound = new SoundPathSpecifier("/Audio/_Goobstation/Wizard/supermatter.ogg");
@@ -32,64 +29,7 @@ public sealed partial class StarGazeComponent : Component
     public EntProtoId AshProto = "Ash";
 
     [DataField]
-    public DamageSpecifier Damage = new()
-    {
-        DamageDict =
-        {
-            { "Heat", 5 },
-        },
-    };
-
-    [DataField]
-    public float BeamScale = 2f;
-
-    [DataField]
-    public float LaserThickness = 0.9f;
-
-    [DataField]
     public float GravityPullSizeModifier = 2f;
-
-    [DataField]
-    public Vector2 MinMaxLaserRange = new(4f, 14f);
-
-    [DataField]
-    public float LaserSpeed = 0.05f;
-
-    [ViewVariables, AutoNetworkedField]
-    public MapCoordinates? CursorPosition;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Endpoint;
-
-    [DataField]
-    public SoundSpecifier BeamSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/stargazer/beam_loop_one.ogg");
-
-    [DataField, NonSerialized]
-    public EntityUid? BeamSoundEnt;
-
-    [DataField]
-    public float LaserDuration = 10f;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan UpdateTimer;
-
-    [DataField]
-    public TimeSpan DamageTime = TimeSpan.FromMilliseconds(100);
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan DamageTimer;
-
-    [DataField]
-    public TimeSpan UpdateTime = TimeSpan.FromMilliseconds(10);
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan BeamTimer;
-
-    [DataField]
-    public TimeSpan BeamTime = TimeSpan.FromSeconds(10);
-
-    [DataField]
-    public bool StartedBlasting;
 
     [DataField]
     public SpriteSpecifier Beam1 =

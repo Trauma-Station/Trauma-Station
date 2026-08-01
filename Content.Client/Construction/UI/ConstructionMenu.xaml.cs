@@ -51,7 +51,7 @@ namespace Content.Client.Construction.UI
 
         void ClearRecipeInfo();
         void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite,
-            bool understands, ConstructionPrototype proto); // Trauma
+            bool understands, bool useSkills, ConstructionPrototype proto); // Trauma
         void ResetPlacement();
         void TrySelectCategory(int categoryId);
         void TrySelectListViewButton(ProtoId<ConstructionPrototype> constructionProtoId);
@@ -185,12 +185,14 @@ namespace Content.Client.Construction.UI
             bool isFavorite,
             // <Trauma>
             bool understands,
+            bool useSkills,
             ConstructionPrototype proto)
             // </Trauma>
         {
             // <Trauma> - disable button if you lack the theory, show the requirements
             BuildButton.Disabled = !understands;
-            AddSkillRequirements(proto);
+            if (useSkills)
+                AddSkillRequirements(proto);
             // </Trauma>
             BuildButton.Text = Loc.GetString(isItem ? "construction-menu-place-ghost" : "construction-menu-craft");
             TargetName.SetMessage(name);

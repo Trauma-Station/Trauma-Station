@@ -89,7 +89,6 @@ namespace Content.Server.Atmos.EntitySystems
 
             SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
             SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
-            SubscribeLocalEvent<IgniteOnCollideComponent, ProjectileHitEvent>(OnProjectileHit); // Goobstation
 
             SubscribeLocalEvent<IgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
 
@@ -124,21 +123,6 @@ namespace Content.Server.Atmos.EntitySystems
         private void OnIgniteLand(EntityUid uid, IgniteOnCollideComponent component, ref LandEvent args)
         {
             RemCompDeferred<IgniteOnCollideComponent>(uid);
-        }
-
-        private void OnProjectileHit(Entity<IgniteOnCollideComponent> ent, ref ProjectileHitEvent args) // Goobstation
-        {
-            var otherEnt = args.Target;
-
-            if (!TryComp(otherEnt, out FlammableComponent? flammable))
-                return;
-
-            flammable.FireStacks += ent.Comp.FireStacks;
-            Ignite(otherEnt, ent, flammable);
-            ent.Comp.Count--;
-
-            if (ent.Comp.Count == 0)
-                RemCompDeferred<IgniteOnCollideComponent>(ent);
         }
 
         private void IgniteOnCollide(EntityUid uid, IgniteOnCollideComponent component, ref StartCollideEvent args)
@@ -537,7 +521,7 @@ namespace Content.Server.Atmos.EntitySystems
                     if (!isImmune && TryComp(uid, out TemperatureComponent? temp)) // Trauma - isImmune
                         _temperatureSystem.ChangeHeat(uid, _addHeatFirestack * flammable.FireStacks, false, temp); // goob edit: 12500 -> 1500
 
-                    var ev = new GetFireProtectionEvent(uid); // Goobstation
+                    var ev = new GetFireProtectionEvent(uid); // Trauma - added uid
                     // let the thing on fire handle it
                     RaiseLocalEvent(uid, ref ev);
                     // and whatever it's wearing
@@ -545,10 +529,32 @@ namespace Content.Server.Atmos.EntitySystems
                         _inventory.RelayEvent((uid, inv), ref ev);
 
                     var multiplier = Math.Clamp(ev.Multiplier + flammable.FireProtectionPenetration, 0f, 1f); // Goob
-                    multiplier *= _body.GetVitalBodyPartRatio(uid); // Goob
 
-                    if (!isImmune && multiplier > 0f && !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid)) // Goob edit
-                        _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks * multiplier, interruptsDoAfters: false, targetPart: TargetBodyPart.All, partMultiplier: 2f); // Lavaland: Nerf fire delimbing
+                    // <Trauma> - custom damage logic and spellblade check
+                    if (!isImmune && multiplier > 0f && !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid))
+                    {
+                        var damage = flammable.Damage * flammable.FireStacks * multiplier;
+                        if (TryComp<BodyComponent>(uid, out var body))
+                        {
+                            foreach (var part in _body.GetExternalOrgans((uid, body)))
+                            {
+                                if (part.Comp.Category is not { } category || !ev.PartReductions.TryGetValue(category, out var reduction))
+                                    reduction = 0f;
+
+                                if (reduction >= 1f)
+                                    continue; // part is immune dont care
+
+                                var partDamage = reduction == 0f
+                                    ? damage
+                                    : damage * (1f - reduction);
+                                _damageableSystem.ChangeDamage(part.Owner, partDamage, interruptsDoAfters: false);
+                            }
+                        }
+                        else
+                        {
+                            _damageableSystem.ChangeDamage(uid, damage, interruptsDoAfters: false);
+                        }
+                    }
 
                     // <Trauma>
                     var fade = flammable.FirestackFade * (flammable.Resisting ? 15f : 1f);

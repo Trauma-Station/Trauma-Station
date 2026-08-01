@@ -108,7 +108,7 @@ public sealed partial class SharedAnimalAgeingSystem : EntitySystem
 
     private void OnExamine(Entity<AnimalAgeingComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("age-markup" + ent.Comp.CurrentAgeState.ToString().ToLower()));
+        args.PushMarkup(Loc.GetString("age-markup-" + ent.Comp.CurrentAgeState.ToString().ToLower()));
     }
 
     private void OnChangeState(Entity<AnimalAgeingComponent> ent, ref ChangeMobAgeStateEvent args)

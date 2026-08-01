@@ -124,7 +124,7 @@
     enabled: false
     radius: 3
     energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -209,7 +209,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -277,7 +277,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -339,7 +339,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -405,7 +405,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -478,7 +478,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -508,7 +508,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 2
   - type: FireProtection
-    reduction: 0.25
+    reduction: 1
 
 - type: entity
   parent: [ BaseClothingModsuitHelmetHideIdentity, BaseModsuitPieceRD ]
@@ -554,7 +554,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -632,7 +632,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight

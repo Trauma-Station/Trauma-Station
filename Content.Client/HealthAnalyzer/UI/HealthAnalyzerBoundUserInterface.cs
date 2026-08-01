@@ -1,7 +1,5 @@
 // <Trauma>
-using Content.Shared.Body;
 using Content.Trauma.Common.Medical.HealthAnalyzer;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Shared.MedicalScanner;
 using JetBrains.Annotations;
@@ -24,10 +22,9 @@ namespace Content.Client.HealthAnalyzer.UI
             base.Open();
 
             _window = this.CreateWindow<HealthAnalyzerWindow>();
-            // <Shitmed>
-            _window.OnBodyPartSelected += (part, _) => SendBodyPartMessage(part);
-            _window.OnModeChanged += (mode, _) => SendModeMessage(mode);
-            // </Shitmed>
+            // <Trauma>
+            _window.OnBodyPartSelected += (part, _) => SendMessage(new HealthAnalyzerPartMessage(part));
+            // </Trauma>
             _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
         }
 
@@ -41,11 +38,5 @@ namespace Content.Client.HealthAnalyzer.UI
 
             _window.Populate(cast);
         }
-
-        // <Shitmed>
-        private void SendBodyPartMessage(ProtoId<OrganCategoryPrototype>? part) => SendMessage(new HealthAnalyzerPartMessage(part));
-
-        private void SendModeMessage(HealthAnalyzerMode mode) => SendMessage(new HealthAnalyzerModeSelectedMessage(mode));
-        // </Shitmed>
     }
 }

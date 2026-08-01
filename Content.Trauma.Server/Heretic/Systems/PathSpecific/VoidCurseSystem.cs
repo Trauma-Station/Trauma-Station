@@ -58,7 +58,7 @@ public sealed partial class VoidCurseSystem : SharedVoidCurseSystem
         if (TryComp<TemperatureComponent>(ent, out var temp))
         {
             // temperaturesystem is not idiotproof :(
-            var t = temp.CurrentTemperature - 3f * ent.Comp.Stacks;
+            var t = temp.CurrentTemperature - 2f * ent.Comp.Stacks;
             _temp.ForceChangeTemperature(ent, Math.Clamp(t, Atmospherics.TCMB, Atmospherics.Tmax), temp);
         }
 

@@ -265,6 +265,7 @@ public abstract partial class SharedHereticRitualSystem
             return;
 
         var knowledgeGain = 0f;
+        var sideknowledgeGain = 0f;
 
         bool isHeretic;
         EntityUid otherMind;
@@ -281,16 +282,24 @@ public abstract partial class SharedHereticRitualSystem
             isHeretic = _heretic.TryGetHereticComponent(ent.AsNullable(), out otherHeretic, out otherMind);
 
         var (isCommand, isSec) = IsCommandOrSec(ent);
-        knowledgeGain += isHeretic || IsSacrificeTarget((mind, heretic), ent)
-            ? isCommand || isSec || isHeretic ? 3f : 2f
-            : 0f;
+        if (IsSacrificeTarget((mind, heretic), ent))
+        {
+            knowledgeGain += 2f;
+            if (isSec || isCommand || isHeretic)
+                sideknowledgeGain += 1f;
+        }
+        else if (isHeretic)
+        {
+            knowledgeGain += 2f;
+            sideknowledgeGain += 1f;
+        }
 
         _gibbing.Gib(ent);
 
         if (otherHeretic != null)
             RemCompDeferred(otherMind, otherHeretic);
 
-        if (knowledgeGain == 0)
+        if (knowledgeGain == 0f && sideknowledgeGain == 0f)
             return;
 
         var ev = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeObjective);
@@ -304,7 +313,8 @@ public abstract partial class SharedHereticRitualSystem
 
         var dict = new Dictionary<string, FixedPoint2>()
         {
-            {SharedHereticSystem.Currency, knowledgeGain}
+            { SharedHereticSystem.Currency, knowledgeGain },
+            { SharedHereticSystem.SideCurrency, sideknowledgeGain },
         };
 
         _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, dict);

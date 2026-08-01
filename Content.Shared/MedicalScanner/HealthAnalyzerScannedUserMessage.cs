@@ -33,32 +33,29 @@ public struct HealthAnalyzerUiState
     public float Temperature;
     public float BloodLevel;
     public bool? ScanMode;
-    // <Shitmed>
+    // <Trauma>
     public Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity>? Body;
     public HashSet<ProtoId<OrganCategoryPrototype>> Bleeding = new(); // per-part instead of global
     public FixedPoint2 VitalDamage;
     public NetEntity? Part;
-    public HealthAnalyzerScanState? ScanState;
-    // </Shitmed>
+    // </Traumaa>
     public bool? Unrevivable;
 
     public HealthAnalyzerUiState() {}
 
     public HealthAnalyzerUiState(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode,
-        // <Shitmed>
+        // <Trauma>
         HashSet<ProtoId<OrganCategoryPrototype>> bleeding,
         bool? unrevivable,
         Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity>? body,
         FixedPoint2 vitalDamage,
-        NetEntity? part = null,
-        HealthAnalyzerScanState? scanState = null)
-        // </Shitmed>
+        NetEntity? part = null)
+        // </Trauma>
     {
         // <Shitmed>
         Body = body;
         VitalDamage = vitalDamage;
         Part = part;
-        ScanState = scanState;
         // </Shitmed>
         TargetEntity = targetEntity;
         Temperature = temperature;

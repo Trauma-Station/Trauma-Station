@@ -27,6 +27,7 @@ void-ascend-begin = A snowstorm suddenly appears from outside the windows. An ov
 void-ascend-end = The snowstorm begins to fade away...
 void-ascend-restart = The snowstorm suddenly appears again...
 
+ghoul-unghoulify-message = {CAPITALIZE($ent)} has been freed from the chains of Mansus!
 ghoul-weapon-comp-examine = [color=red]This weapon seems extremely fragile. On further inspection it appears to be made of flesh and blood. It belongs to one of the creatures of the mansus and will disappear when the creature dies.[/color]
 
 injector-component-drain-mode-name = Drain

@@ -230,7 +230,7 @@
         Radiation: 0.7
         Caustic: 0.7
   - type: FireProtection
-    reduction: 0.4
+    reduction: 1
 
 # singuloth head
 
@@ -265,7 +265,7 @@
         Heat: -1.2
         Radiation: 0
   - type: FireProtection
-    reduction: 0.4
+    reduction: 1
   - type: FlashImmunity
   - type: FlashSoundSuppression
 

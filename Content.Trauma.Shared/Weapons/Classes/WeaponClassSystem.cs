@@ -25,7 +25,7 @@ public sealed partial class WeaponClassSystem : EntitySystem
 
     private void OnExamined(Entity<WeaponClassComponent> ent, ref ExaminedEvent args)
     {
-        if (!args.IsInDetailsRange || !ent.Comp.Examinable)
+        if (!_knowledge.SkillsEnabled || !args.IsInDetailsRange || !ent.Comp.Examinable)
             return;
 
         var name = ProtoMan.Index(ent.Comp.Class).Name;
@@ -34,6 +34,9 @@ public sealed partial class WeaponClassSystem : EntitySystem
 
     private void OnGetMeleeDamage(Entity<WeaponClassComponent> ent, ref GetMeleeDamageEvent args)
     {
+        if (!_knowledge.SkillsEnabled)
+            return;
+
         var proto = ProtoMan.Index(ent.Comp.Class);
         var level = GetSkillLevel(proto, args.User);
         args.Damage *= proto.MeleeDamage.GetCurve(level);
@@ -42,7 +45,7 @@ public sealed partial class WeaponClassSystem : EntitySystem
     // TODO: reduce aiming time instead of spread slop
     private void OnGetRecoilModifiers(Entity<WeaponClassComponent> ent, ref GetRecoilModifiersEvent args)
     {
-        if (args.User == ent.Owner)
+        if (args.User == ent.Owner || !_knowledge.SkillsEnabled)
             return; // no actual user welp
 
         var proto = ProtoMan.Index(ent.Comp.Class);

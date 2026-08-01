@@ -285,6 +285,9 @@
   - type: Sprite
     sprite: _White/Mobs/Species/Xenomorph/organs.rsi
     state: egg_sack
+  - type: Tag
+    tags:
+    - OrganEggSack
   - type: Organ
     category: EggSack
   - type: ChildOrgan
