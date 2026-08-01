@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.CloneProjector.Clone;
-using Content.Shared.Nyanotrasen.Holograms;
+using Content.Goobstation.Shared.Holograms;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
@@ -11,21 +11,16 @@ namespace Content.Goobstation.Shared.CloneProjector;
 
 public abstract partial class SharedCloneProjectorSystem : EntitySystem
 {
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedContainerSystem _container = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<HolographicCloneComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<HolographicCloneComponent, MeleeHitEvent>(OnMeleeHit);
-        SubscribeLocalEvent<HolographicCloneComponent, ShotAttemptedEvent>(OnShotAttempted);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<HolographicCloneComponent> clone, ref ComponentStartup args)
     {
         EnsureComp<HologramVisualsComponent>(clone);
     }
+
+    [SubscribeLocalEvent]
     private void OnMeleeHit(Entity<HolographicCloneComponent> clone, ref MeleeHitEvent args)
     {
         if (!args.IsHit
@@ -44,14 +39,14 @@ public abstract partial class SharedCloneProjectorSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnShotAttempted(Entity<HolographicCloneComponent> ent, ref ShotAttemptedEvent args)
     {
         if (ent.Comp.HostProjector is not { } hostProjector
             || !hostProjector.Comp.RestrictRangedWeapons)
             return;
 
-        _popupSystem.PopupEntity(Loc.GetString("gun-disabled"), ent, ent);
+        _popup.PopupEntity(Loc.GetString("gun-disabled"), ent, ent);
         args.Cancel();
     }
-
 }
