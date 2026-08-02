@@ -12647,3 +12647,10 @@ Entries:
   id: 1383
   time: '2026-08-02T03:27:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3894
+- author: dragydevi
+  changes:
+  - type: Remove
+    message: Removed Blob Midround spawn
+  id: 1384
+  time: '2026-08-02T06:50:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3901
