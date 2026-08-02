@@ -7,9 +7,11 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Chat.Systems;
+using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Revolutionary.Components;
+using Content.Server.RoundEnd;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -66,12 +68,16 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
     [Dependency] private SharedHereticRitualSystem _ritual = default!;
     [Dependency] private PvsOverrideSystem _pvs = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
 
     [Dependency] private EntityQuery<HereticMinionComponent> _minionQuery = default!;
     [Dependency] private EntityQuery<HereticActionComponent> _hereticActionQuery = default!;
     [Dependency] private EntityQuery<ChangeUseDelayOnAscensionComponent> _changeUseDelayQuery = default!;
     [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
     [Dependency] private EntityQuery<HereticSacrificeTargetComponent> _targetQuery = default!;
+
+    private static readonly EntProtoId ERTEvent = "SpawnERTSecurity";
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;
@@ -592,8 +598,8 @@ public sealed partial class HereticSystem : SharedHereticSystem
                 break;
 
             rule.HasAHereticAscended = true;
-            var ascendEv = new HereticAscendedEvent();
-            RaiseLocalEvent(ref ascendEv);
+            _ticker.StartGameRule(ERTEvent);
+            _roundEnd.RequestRoundEnd(checkCooldown: false, cantRecall: true, countdownTime: TimeSpan.FromMinutes(10));
         }
 
         ent.Comp.Ascended = true;

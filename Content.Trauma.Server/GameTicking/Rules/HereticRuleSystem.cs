@@ -31,10 +31,6 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private ObjectivesSystem _objective = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private RoundEndSystem _roundEnd = default!;
-    [Dependency] private GameTicker _ticker = default!;
-
-    private static readonly EntProtoId ERTEvent = "SpawnERTSecurity";
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -56,13 +52,6 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
         SubscribeLocalEvent<HereticRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
         SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnHereticAscended(ref HereticAscendedEvent ev)
-    {
-        _ticker.StartGameRule(ERTEvent);
-        _roundEnd.RequestRoundEnd(checkCooldown: false, cantRecall: true, countdownTime: TimeSpan.FromMinutes(10));
     }
 
     private void OnGetBriefing(Entity<HereticRoleComponent> ent, ref GetBriefingEvent args)
