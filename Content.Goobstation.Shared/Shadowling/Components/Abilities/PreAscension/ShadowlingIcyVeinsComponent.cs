@@ -26,7 +26,7 @@ public sealed partial class ShadowlingIcyVeinsComponent : Component
     /// Indicates how long the targets will be paralyzed for.
     /// </summary>
     [DataField]
-    public float ParalyzeTime = 1f;
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(1);
 
     /// <summary>
     /// The effect that is used once the ability activates.
