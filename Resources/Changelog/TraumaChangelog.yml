@@ -12654,3 +12654,14 @@ Entries:
   id: 1384
   time: '2026-08-02T06:50:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3901
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix moth wings weightless values not being applied properly and 0g
+      acceleration being higher than intended
+  - type: Tweak
+    message: Moths take more damage from fire.
+  id: 1385
+  time: '2026-08-02T07:47:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3903
