@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Clothing;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
+using Content.Shared.Movement.Components;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
@@ -24,7 +24,7 @@ public sealed class SlowdownResistanceSystem : EntitySystem
 
     private void OnExamine(Entity<SlowdownResistanceComponent> ent, ref ExaminedEvent args)
     {
-        if (!HasComp<ClothingComponent>(ent))
+        if (HasComp<MovementSpeedModifierComponent>(ent))
             return;
 
         var reduction = MathF.Round(ent.Comp.Reduction * 100f);

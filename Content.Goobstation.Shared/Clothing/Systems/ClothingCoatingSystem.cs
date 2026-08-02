@@ -13,6 +13,8 @@ public sealed partial class ClothingCoatingSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
+    private StringBuilder sb = new();
+
     [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<ClothingCoatingComponent> ent, ref AfterInteractEvent args)
     {
@@ -45,13 +47,15 @@ public sealed partial class ClothingCoatingSystem : EntitySystem
         if (ent.Comp.CoatingNames.Count == 0)
             return;
 
-        StringBuilder sb = new();
-        foreach (var coating in ent.Comp.CoatingNames)
-        {
-            sb.Append($"{Loc.GetString(coating)}, ");
-        }
+        sb.Clear();
 
-        sb.Remove(sb.Length - 2, 2);
+        var count = ent.Comp.CoatingNames.Count;
+        for (var i = 0; i < count; i++)
+        {
+            sb.Append(Loc.GetString(ent.Comp.CoatingNames[i]));
+            if (i < count - 1)
+                sb.Append(", ");
+        }
 
         args.PushMarkup(Loc.GetString("clothing-coating-inspect", ("coatings", sb.ToString())));
     }
