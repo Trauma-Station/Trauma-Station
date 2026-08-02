@@ -27,10 +27,10 @@
   announcement: terror-lone-operative
   rule: LoneOpsSpawn
 
-- type: ninjaHackingThreat
-  id: Blob
-  announcement: terror-blob
-  rule: BlobMidround
+# - type: ninjaHackingThreat # Disabled until its major bugs are fixed
+#   id: Blob
+#   announcement: terror-blob
+#   rule: BlobMidround
 
 - type: ninjaHackingThreat
   id: VoxRaiders
