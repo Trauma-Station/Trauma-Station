@@ -23,6 +23,7 @@ namespace Content.Medical.Shared.Traumas;
 public partial class TraumaSystem
 {
     [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private EntityQuery<AmputationTraumaComponent> _amputationQuery = default!;
     [Dependency] private EntityQuery<ArmorComponent> _armorQuery = default!;
     [Dependency] private EntityQuery<GodmodeComponent> _godmodeQuery = default!;
     [Dependency] private EntityQuery<TraumaComponent> _traumaQuery = default!;
@@ -40,6 +41,8 @@ public partial class TraumaSystem
     /// Should be replaced by arterial bleeding in the future...
     /// </summary>
     public const float MinBleedToStopHealing = 5f;
+
+    private readonly List<Entity<TraumaComponent>> _traumas = new(8);
 
     [SubscribeLocalEvent]
     private void OnTraumaInflicterInit(Entity<TraumaInflicterComponent> ent, ref ComponentInit args)
@@ -128,10 +131,7 @@ public partial class TraumaSystem
         var boneBroken = showAll && _boneQuery.TryComp(part, out var bone) && bone.BoneSeverity == BoneSeverity.Broken;
         foreach (var trauma in GetAllWoundTraumas(wound))
         {
-            if (trauma.Comp.TraumaTarget == null)
-                continue;
-
-            if (trauma.Comp.TraumaType != traumaType && traumaType != null)
+            if (traumaType != null && trauma.Comp.TraumaType != traumaType)
                 continue;
 
             if (!showAll)
@@ -147,28 +147,18 @@ public partial class TraumaSystem
         return false;
     }
 
-    public bool TryGetAssociatedTrauma(
+    public void AddWoundTraumas(
         Entity<TraumaInflicterComponent?> wound,
-        [NotNullWhen(true)] out List<Entity<TraumaComponent>>? traumas,
+        List<Entity<TraumaComponent>> traumas,
         TraumaType? traumaType = null)
     {
-        traumas = null;
-        if (!_query.Resolve(wound, ref wound.Comp))
-            return false;
-
-        traumas = new List<Entity<TraumaComponent>>();
         foreach (var trauma in GetAllWoundTraumas(wound))
         {
-            if (trauma.Comp.TraumaTarget == null)
-                continue;
-
-            if (trauma.Comp.TraumaType != traumaType && traumaType != null)
+            if (traumaType != null && trauma.Comp.TraumaType != traumaType)
                 continue;
 
             traumas.Add(trauma);
         }
-
-        return true;
     }
 
     public bool HasWoundableTrauma(
@@ -191,40 +181,53 @@ public partial class TraumaSystem
         return false;
     }
 
-    public bool TryGetWoundableTrauma(
+    /// <summary>
+    /// Get all traumas on a bodypart, optionally of a certain type.
+    /// The list is reused between calls, do not store it.
+    /// </summary>
+    public bool GetPartTraumas(
         Entity<WoundableComponent?> part,
-        [NotNullWhen(true)] out List<Entity<TraumaComponent>>? traumas,
+        out List<Entity<TraumaComponent>> traumas,
         TraumaType? traumaType = null)
     {
-        traumas = null;
-        if (!_woundableQuery.Resolve(part, ref part.Comp, false))
-            return false;
+        traumas = _traumas;
+        traumas.Clear();
+        AddPartTraumas(part, traumas, traumaType);
+        return traumas.Count > 0;
+    }
 
-        traumas = new List<Entity<TraumaComponent>>();
+    public void AddPartTraumas(
+        Entity<WoundableComponent?> part,
+        List<Entity<TraumaComponent>> traumas,
+        TraumaType? traumaType = null)
+    {
+        if (!_woundableQuery.Resolve(part, ref part.Comp, false))
+            return;
+
         foreach (var wound in _wound.GetWoundableWounds(part))
         {
             if (!_query.TryComp(wound, out var inflicter))
                 continue;
 
-            if (TryGetAssociatedTrauma((wound, inflicter), out var traumasFound, traumaType))
-                traumas.AddRange(traumasFound);
+            AddWoundTraumas((wound, inflicter), traumas, traumaType);
         }
-
-        return traumas.Count > 0;
     }
 
+    /// <summary>
+    /// Get all traumas on a body, optionally of a certain type.
+    /// The returned list is reused between calls, do not store it.
+    /// </summary>
     public List<Entity<TraumaComponent>> GetBodyTraumas(
         Entity<BodyComponent?> body,
         TraumaType? traumaType = null)
     {
-        var traumas = new List<Entity<TraumaComponent>>();
+        _traumas.Clear();
         foreach (var part in _body.GetOrgans<WoundableComponent>(body))
         {
-            if (TryGetWoundableTrauma(part.AsNullable(), out var traumasFound, traumaType))
-                traumas.AddRange(traumasFound);
+            AddPartTraumas(part.AsNullable(), _traumas, traumaType);
         }
 
-        return traumas;
+        return _traumas;
     }
 
     public List<TraumaType> RandomTraumaChance(
@@ -278,15 +281,15 @@ public partial class TraumaSystem
     }
 
     public FixedPoint2 GetTraumaChanceDeduction(
-        Entity<TraumaInflicterComponent> inflicter,
+        Entity<TraumaInflicterComponent> wound,
         EntityUid body,
-        Entity<WoundableComponent> traumaTarget,
+        Entity<WoundableComponent> part,
         FixedPoint2 severity,
         TraumaType traumaType,
         BodyPartType coverage)
     {
-        var deduction = traumaTarget.Comp.TraumaDeductions.GetValueOrDefault(traumaType, FixedPoint2.Zero);
-        deduction += GetArmourChanceDeduction(body, inflicter, traumaType, coverage);
+        var deduction = part.Comp.TraumaDeductions.GetValueOrDefault(traumaType, FixedPoint2.Zero);
+        deduction += GetArmourChanceDeduction(body, wound, traumaType, coverage);
         return deduction;
     }
 
@@ -451,15 +454,11 @@ public partial class TraumaSystem
         foreach (var trauma in wound.Comp.TraumaContainer.ContainedEntities)
         {
             var containedTraumaComp = _traumaQuery.Comp(trauma);
-            if (containedTraumaComp.TraumaType != traumaType
-                || containedTraumaComp.TraumaTarget != target)
+            if (containedTraumaComp.TraumaType != traumaType)
                 continue;
-            // Check for TraumaTarget isn't really necessary..
-            // Right now wounds on a specified woundable can't wound other woundables, but in case IF something happens or IF someone decides to do that
-            // (never happening take meds)
 
             // Allows us to create multiple dismemberment traumas on the same body part.
-            if (source != null && CompOrNull<AmputationTraumaComponent>(trauma)?.Source != source)
+            if (source != null && _amputationQuery.CompOrNull(trauma)?.Source != source)
                 continue;
 
             containedTraumaComp.TraumaSeverity = severity;
@@ -471,9 +470,8 @@ public partial class TraumaSystem
         var traumaComp = EnsureComp<TraumaComponent>(traumaEnt);
 
         traumaComp.TraumaSeverity = severity;
-
         traumaComp.TraumaTarget = target;
-
+        traumaComp.Wound = wound;
         traumaComp.HoldingWoundable = part;
         Dirty(traumaEnt, traumaComp);
 
@@ -487,34 +485,23 @@ public partial class TraumaSystem
         return traumaEnt;
     }
 
-    public void RemoveTrauma(Entity<TraumaComponent> trauma)
+    public void RemoveTraumas(Entity<WoundableComponent?> part, TraumaType type)
     {
-        if (trauma.Comp.TraumaTarget is not { } wound ||
-            !_query.TryComp(wound, out var inflicter))
+        if (!GetPartTraumas(part, out var traumas, type))
             return;
 
-        RemoveTrauma(trauma, (wound, inflicter));
+        foreach (var trauma in traumas)
+        {
+            RemoveTrauma(trauma);
+        }
     }
 
-    public void RemoveTrauma(
-        Entity<TraumaComponent> trauma,
-        Entity<TraumaInflicterComponent> wound)
+    public void RemoveTrauma(Entity<TraumaComponent> trauma)
     {
-        _container.Remove(trauma.Owner, wound.Comp.TraumaContainer, reparent: false, force: true);
+        var ev = new TraumaBeingRemovedEvent(trauma);
+        RaiseLocalEvent(trauma.Comp.Wound, ref ev);
 
-        if (trauma.Comp.TraumaTarget != null)
-        {
-            var ev = new TraumaBeingRemovedEvent(trauma, trauma.Comp.TraumaTarget.Value, trauma.Comp.TraumaSeverity, trauma.Comp.TraumaType);
-            RaiseLocalEvent(wound, ref ev);
-
-            if (trauma.Comp.HoldingWoundable != null)
-            {
-                var ev1 = new TraumaBeingRemovedEvent(trauma, trauma.Comp.TraumaTarget.Value, trauma.Comp.TraumaSeverity, trauma.Comp.TraumaType);
-                RaiseLocalEvent(trauma.Comp.HoldingWoundable.Value, ref ev1);
-            }
-        }
-
-        PredictedQueueDel(trauma);
+        PredictedDel(trauma.Owner);
     }
 
     #endregion
