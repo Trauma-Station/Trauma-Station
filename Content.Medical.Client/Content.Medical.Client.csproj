@@ -8,6 +8,11 @@
 		<Platforms>AnyCPU</Platforms>
 	</PropertyGroup>
 	<Import Project="../MSBuild/Content.props" />
+
+	<ItemGroup>
+		<PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="../Content.Client/Content.Client.csproj" />
 		<ProjectReference Include="../Content.Medical.Shared/Content.Medical.Shared.csproj" />
