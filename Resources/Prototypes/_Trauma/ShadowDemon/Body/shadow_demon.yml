@@ -67,5 +67,9 @@
     - type: LightSpeedModifier # Makes you run faster on light or darkness
       walkModifier: 1.5
       sprintModifier: 1.5
+    - type: CollectiveMind
+      defaultChannel: Demonmind
+      channels:
+      - Demonmind
   - type: StaticPrice
     price: 10000

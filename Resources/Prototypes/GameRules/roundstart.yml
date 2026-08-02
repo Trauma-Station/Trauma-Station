@@ -49,6 +49,8 @@
       prob: 0.1
     - id: SubChangeling
       prob: 0.05 # extinct predator species...
+    - id: SubDemonologist
+      prob: 0.1
     # </Trauma>
 
 - type: entity
@@ -344,7 +346,7 @@
   components:
   - type: SecretRule
 
-- type: entity
+- type: entity # TODO: copy logic
   abstract: true
   parent: BaseGameRule
   id: BaseWizardRule

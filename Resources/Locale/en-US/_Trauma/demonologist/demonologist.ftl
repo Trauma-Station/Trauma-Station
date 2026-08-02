@@ -1,7 +1,7 @@
 demonologist-round-end-agent-name = demonologist
 
 demonologist-role-greeting =
-    You are a demonologist! ( Use +K to use demonmind )
+    You are a demonologist! ( Use + or +K to use demonmind )
     The gates of Hell do not open freely. They demand sacrifice.
     Spill blood to fuel your rituals, unlocking darker magic and the power to summon infernal servants.
     As your sacrifices mount, ever more terrible demons will answer your call.

@@ -15,6 +15,8 @@
       prob: 0.02
     - id: WraithRoundstart
       prob: 0.1
+    - id: Demonologist
+      prob: 0.2
 
 - type: entity
   parent: BaseGameRule
@@ -112,9 +114,22 @@
   - type: AntagSelection
     agentName: demonologist-round-end-agent-name
     antags:
-    - !type:LinearAntagCount
+    - !type:FixedAntagCount
       proto: Demonologist
-      range:
-        min: 1
-        max: 2
-      playerRatio: 20
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: WizardSkills
+    - !type:ChangeFaction
+      newFaction: VampireFaction # TODO: demonologist faction and put under control demons inside it
+  - type: AntagObjectives
+    objectives: # TODO
+    - VampireBloodObjective
+    - VampireSurviveObjective
+    - VampireBloodsuckObjective
+  - type: LoadMapRule
+    mapPath: /Maps/_Goobstation/Nonstations/wizden.yml # TODO
+  - type: RuleGrids
+  - type: AntagLoadProfileRule # Fuck non-humans
+    speciesOverride: Human
+    alwaysUseSpeciesOverride: true

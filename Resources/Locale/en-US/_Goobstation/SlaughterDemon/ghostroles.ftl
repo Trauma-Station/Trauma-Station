@@ -1,5 +1,5 @@
 ghost-role-information-slaughter-demon-name = Slaughter Demon
-ghost-role-information-slaughter-demon-description = WHAT A TIME TO BE ALIVE! LET THOSE PUNY MORTALS FACE MY TRUE WRATH!
+ghost-role-information-slaughter-demon-description = WHAT A TIME TO BE ALIVE! LET THOSE PUNY MORTALS FACE MY TRUE WRATH! ( Use +K to use demonmind )
 ghost-role-information-slaughter-demon-rules =
     JUST SIT BACK AND ENJOY THE KILLING BECAUSE NOBODY ELSE WILL. HERE'S A COUPLE THINGS TO KEEP IN MIND THOUGH, DEMON TO DEMON.
         HIERARCHY:
@@ -14,4 +14,4 @@ ghost-role-information-slaughter-demon-rules =
 
 
 ghost-role-information-laughter-demon-name = Laughter Demon
-ghost-role-information-laughter-demon-description = WHAT A TIME TO BE ALIVE! YOU BETTER HUG EVERYONE YOU SEE, AND SHOW THEM WHAT TRUE LOVE FEELS LIKE!
+ghost-role-information-laughter-demon-description = WHAT A TIME TO BE ALIVE! YOU BETTER HUG EVERYONE YOU SEE, AND SHOW THEM WHAT TRUE LOVE FEELS LIKE! ( Use +K to use demonmind )

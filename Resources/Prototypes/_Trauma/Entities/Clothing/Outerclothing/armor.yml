@@ -189,3 +189,45 @@
     sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
+
+- type: entity
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, ClothingOuterBaseToggleable, BaseMajorContraband ]
+  id: ClothingOuterRobesDemonologist
+  name: demonologist robes
+  description: #TODO
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Armor/demonologist_robes.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Armor/demonologist_robes.rsi
+  - type: ToggleableClothing
+    stripDelay: null
+    clothingPrototypes:
+      head: ClothingHeadHatHoodDemonologist
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0.5
+      OrganDamage: 0.5
+      BoneDamage: 0.5
+      VeinsDamage: 0
+    coverage:
+    - Torso
+    - Arm
+    - Leg
+    - Tail
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Ballistic: 0.4
+        Heat: 0.4
+      flatReductions:
+        Ballistic: 3
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5

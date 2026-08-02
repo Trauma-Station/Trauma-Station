@@ -20,17 +20,40 @@
   parent: RestrictedAntag
   id: Demonologist
   prefRoles: [ Demonologist ]
-  jobBlacklist:
-  - Chaplain
+  blacklist:
+    components:
+    - AntagImmune
+    - BibleUser
   mindRoles: [ DemonologistMindRole ]
   briefing:
     text: demonologist-role-greeting
     color: "#990000"
     sound: /Audio/_Trauma/Demonologist/demonologist.ogg
   startingGear: DemonologistStartingGear
+  components:
+  - type: CollectiveMind
+    defaultChannel: Demonmind
+    channels:
+    - Demonmind
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
 
 - type: startingGear
   id: DemonologistStartingGear
+  equipment: # Placeholder # TODO
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    back: ClothingBackpack
+    head: ClothingHeadHelmetCult
+    neck: BedsheetCult
+    outerClothing: ClothingOuterRobesDemonologist
+    shoes: ClothingShoesCult
+    id: PassengerPDA
+    ears: ClothingHeadsetService
   storage:
     back:
     - BloodVialFull # 1

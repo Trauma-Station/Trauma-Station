@@ -68,9 +68,5 @@
   - type: AntagSelection
     agentName: demonologist-round-end-agent-name
     antags:
-    - !type:LinearAntagCount
+    - !type:FixedAntagCount
       proto: Demonologist
-      range:
-        min: 1
-        max: 2
-      playerRatio: 20

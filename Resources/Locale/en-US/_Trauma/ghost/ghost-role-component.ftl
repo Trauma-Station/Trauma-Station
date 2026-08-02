@@ -118,10 +118,10 @@ ghost-role-information-syndicate-reinforcement-hitman-name = Syndicate Hitman
 ghost-role-information-syndicate-reinforcement-hitman-description = Someone needs reinforcements. Your objective is to dispatch of someone that your agent needs gone.
 
 ghost-role-information-demon-name = Demon
-ghost-role-information-demon-desc = KILL THOSE WHO DARE SUMMON YOU!!! ( Use +K to use demonmind )
+ghost-role-information-demon-desc = KILL THOSE WHO DARE SUMMON YOU!!! ( Use + or +K to use demonmind )
 
 ghost-role-information-demon-tame-name = Demon
-ghost-role-information-demon-tame-desc = Your will is bound to those who summoned you... ( Use +K to use demonmind )
+ghost-role-information-demon-tame-desc = Your will is bound to those who summoned you... ( Use + or +K to use demonmind )
 
 ghost-role-information-cobra-space-name = Cobra
 ghost-role-information-cobra-space-description = Long fangs and a glowing hood, and the alluring look begs to come closer.
