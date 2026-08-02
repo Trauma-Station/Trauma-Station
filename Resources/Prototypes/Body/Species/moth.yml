@@ -192,7 +192,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 0.5 # Trauma, was 2.5 - 0.2x multiplier to compensate for limb damage
+        Heat: 0.75 # Trauma, was 2.5 - 0.3x multiplier to compensate for limb damage
   - type: Temperature
     currentTemperature: 310.15
     specificHeat: 46
