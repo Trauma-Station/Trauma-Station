@@ -2,9 +2,9 @@
 
 using Content.Shared.Whitelist;
 
-namespace Content.Trauma.Server.Wizard.Components;
+namespace Content.Trauma.Shared.Wizard.Traps;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class IceCubeOnProjectileHitComponent : Component
 {
     [DataField]
