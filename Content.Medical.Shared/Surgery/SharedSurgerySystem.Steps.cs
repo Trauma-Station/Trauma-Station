@@ -420,13 +420,7 @@ public abstract partial class SharedSurgerySystem
                 break;
 
             case TraumaType.Dismemberment:
-                if (_trauma.TryGetWoundableTrauma(args.Part, out var traumas, TraumaType.Dismemberment))
-                {
-                    foreach (var trauma in traumas)
-                    {
-                        _trauma.RemoveTrauma(trauma);
-                    }
-                }
+                _trauma.RemoveTraumas(args.Part, TraumaType.Dismemberment);
 
                 break;
         }

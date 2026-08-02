@@ -49,7 +49,7 @@ public partial class TraumaSystem
         if (args.NewSeverity != OrganSeverity.Destroyed)
             return;
 
-        if (TryGetWoundableTrauma(ent.AsNullable(), out var traumas, TraumaType.OrganDamage))
+        if (GetPartTraumas(ent.AsNullable(), out var traumas, TraumaType.OrganDamage))
         {
             foreach (var trauma in traumas)
             {
