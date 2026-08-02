@@ -92,6 +92,9 @@
     - !type:ModifyStatusEffect
       effectProto: StatusEffectBlurryVision
       time: 6
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectDeaf
+      time: 6
     - !type:GenericStatusEffect
       key: Muted
       component: Muted
@@ -123,8 +126,6 @@
       components:
       - Ghoul
       - ForestAdmonitions
-  - type: SoundBlocker
-    soundBlockPercent: 0.95
 
 - type: entity
   id: TileHereticVoid

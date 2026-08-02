@@ -49,7 +49,7 @@ public sealed partial class ChampionStanceSystem : EntitySystem
         foreach (var part in _body.GetOrgans<WoundableComponent>(uid))
         {
             part.Comp.CanRemove = removable;
-            Dirty(part);
+            DirtyField(part, part.Comp, nameof(WoundableComponent.CanRemove));
         }
     }
 
@@ -90,7 +90,7 @@ public sealed partial class ChampionStanceSystem : EntitySystem
             return;
 
         woundable.CanRemove = false;
-        Dirty(args.Organ, woundable);
+        DirtyField(args.Organ, woundable, nameof(WoundableComponent.CanRemove));
     }
 
     private void OnOrganRemovedFrom(Entity<ChampionStanceComponent> ent, ref OrganRemovedFromEvent args)
@@ -100,6 +100,6 @@ public sealed partial class ChampionStanceSystem : EntitySystem
             return;
 
         woundable.CanRemove = true;
-        Dirty(args.Organ, woundable);
+        DirtyField(args.Organ, woundable, nameof(WoundableComponent.CanRemove));
     }
 }

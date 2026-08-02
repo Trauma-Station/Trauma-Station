@@ -218,7 +218,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         }
 
         var key = prefix + "-popup-gun-initial-";
-        _execution.ShowExecutionPopup(key + "-internal", key + "-external", attacker, victim, weapon);
+        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, weapon);
 
         var doAfter = new DoAfterArgs(EntityManager,
             attacker,
@@ -405,7 +405,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         }
 
         var key = prefix + "-popup-gun-complete-";
-        _execution.ShowExecutionPopup(key + "-internal", key + "-external", attacker, victim, gun);
+        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, gun);
     }
 
     private void DoRecoil(EntityUid attacker, EntityUid victim, Vector2 direction)

@@ -161,7 +161,7 @@
     heatingCoefficient: 0.01
     coolingCoefficient: 0.01
   - type: FireProtection
-    reduction: 0.75 # almost perfectly sealed, atmos firesuit is better
+    reduction: 0.94 # Trauma - was 0.75, 1.25x for limb coverage
   - type: IgniteFromGasImmunity # Goob
     parts:
     - Torso

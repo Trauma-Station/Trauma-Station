@@ -24,7 +24,8 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
-    - id: MorphRule
+    - id: MorphMidroundRule
+    - id: LoneXenomorphSpawnRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -37,6 +38,7 @@
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
     - id: FugitiveSpawn
+
 
 - type: entity
   parent: BaseGameRule
@@ -109,12 +111,12 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     minimumPlayers: 30
-    weight: 3
+    weight: 1.5
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 3, 6
       children:
       - id: MobCoconutCrab
         weight: 0.75

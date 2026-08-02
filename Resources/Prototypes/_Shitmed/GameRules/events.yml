@@ -18,7 +18,16 @@
     agentName: abductor-round-end-agent-name
 
 - type: entity
-  parent: [ BaseAbductorRule, BaseAntagGhostRoleRule ]
+  parent: BaseAbductorRule
+  id: LoneAbductorRule
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: LoneAbductor
+
+- type: entity
+  parent: [ LoneAbductorRule, BaseAntagGhostRoleRule ]
   id: LoneAbductorSpawn
   components:
   - type: GhostroleAlert
@@ -28,10 +37,6 @@
     weight: 1
     minimumPlayers: 20 # They're nigh impossible to catch even with a full sec team
     duration: null
-  - type: AntagSelection
-    antags:
-    - !type:FixedAntagCount
-      proto: LoneAbductor
 
 - type: entity
   parent: BaseGameRule

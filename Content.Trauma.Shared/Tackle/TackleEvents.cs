@@ -5,16 +5,9 @@ using Content.Shared.Inventory;
 namespace Content.Trauma.Shared.Tackle;
 
 [ByRefEvent]
-public record struct TackleEvent(
-    float Range,
-    float Speed,
-    float StaminaCost,
-    float SkillMod,
-    TimeSpan KnockdownTime,
-    EntityUid User,
-    EntityUid? Source = null) : IInventoryRelayEvent
+public record struct TackleEvent(EntityUid User, List<TackleModifier> Sources) : IInventoryRelayEvent
 {
-    public SlotFlags TargetSlots => SlotFlags.GLOVES;
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
 [ByRefEvent]

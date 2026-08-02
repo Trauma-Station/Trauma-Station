@@ -312,17 +312,14 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
         if (boneHeal == null || boneHeal != FixedPoint2.Zero && Resolve(uid, ref uid.Comp2, false))
         {
-            var parts = _body.GetOrgans<WoundableComponent>((uid, uid.Comp2));
+            var bones = _body.GetOrgans<BoneComponent>((uid, uid.Comp2));
 
-            foreach (var part in parts)
+            foreach (var bone in bones)
             {
-                if (_trauma.GetBone(part.AsNullable()) is not {} bone)
-                    continue;
-
                 if (boneHeal is { } heal)
-                    _trauma.ApplyDamageToBone(bone, heal, bone.Comp);
+                    _trauma.DamageBone(bone.AsNullable(), heal); // heal is negative
                 else
-                    _trauma.SetBoneIntegrity(bone, bone.Comp.BoneIntegrity, bone.Comp);
+                    _trauma.SetBoneIntegrity(bone.AsNullable(), bone.Comp.BoneIntegrity);
             }
         }
 

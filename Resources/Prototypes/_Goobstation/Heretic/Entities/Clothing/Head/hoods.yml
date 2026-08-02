@@ -74,7 +74,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
     - type: FireProtection
-      reduction: 0.6
+      reduction: 1
     deactivateComponents:
     - type: Armor
       coverage:
@@ -95,7 +95,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0.50
     - type: FireProtection
-      reduction: 0.3
+      reduction: 1
 
 - type: entity
   parent: [ ArmorHereticVoid, ClothingHeadHatHoodHeretic ]

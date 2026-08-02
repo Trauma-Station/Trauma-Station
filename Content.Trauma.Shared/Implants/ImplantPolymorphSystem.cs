@@ -5,6 +5,8 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Whitelist;
 
+namespace Content.Trauma.Shared.Implants;
+
 /// <summary>
 /// Tries to transfer implants to the new entity when the old implanted one is polymorphed.
 /// </summary>
@@ -14,13 +16,7 @@ public sealed partial class ImplantPolymorphSystem : EntitySystem
     [Dependency] private SharedSubdermalImplantSystem _implant = default!;
     [Dependency] private EntityQuery<SubdermalImplantComponent> _query = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ImplantedComponent, PolymorphedEvent>(OnPolymorphed);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<ImplantedComponent> ent, ref PolymorphedEvent args)
     {
         // copy it to prevent collection modification error

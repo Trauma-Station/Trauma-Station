@@ -1,12 +1,4 @@
-# Names
-chat-emote-name-fart = Fart
-chat-emote-name-fart-inhale = Breathe in a fart
-chat-emote-name-fart-super = Super Fart
-
 # Message
-chat-emote-msg-fart = farts.
-chat-emote-msg-fart-inhale = breathes in a big fart.
-chat-emote-msg-fart-super = super farts.
 chat-emote-msg-bagawk = bagawks!
 
 

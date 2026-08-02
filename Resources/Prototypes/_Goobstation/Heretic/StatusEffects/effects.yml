@@ -61,7 +61,9 @@
   id: StatusEffectFireBlasted
   name: fire blasted
   components:
-  - type: FireBlastedStatusEffect
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: FireBlasted
 
 - type: entity
   parent: MobStatusEffectBase
@@ -76,6 +78,7 @@
   name: star touched
   components:
   - type: StarTouchedStatusEffect
+  - type: BlindnessStatusEffect
 
 - type: entity
   parent: MobStatusEffectBase
@@ -98,11 +101,9 @@
     statusEffects:
       StatusEffectCrucibleSoulCooldown: 120
   - type: CrucibleSoulStatusEffect
-  - type: AddShadersStatusEffect
-    postShaders:
-      SecondSkin:
-        color: "#fb793a"
-        renderOrder: 1
+  - type: AddShaderStatusEffect
+    shader: SecondSkin
+    #color: "#fb793a" # FIXME: PostShaders doesnt support shader params
 
 - type: entity
   parent: [MobStatusEffectDebuff, MobStatusEffectBase]
@@ -323,3 +324,12 @@
   name: influence xray
   components:
   - type: XRayVisionStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectDeaf
+  name: deaf
+  components:
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: Deaf

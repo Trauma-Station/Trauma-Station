@@ -17,5 +17,8 @@ public sealed partial class StarTouchComponent : Component
     public TimeSpan Duration = TimeSpan.FromSeconds(8);
 
     [DataField]
+    public float Range = 8f;
+
+    [DataField]
     public float CosmicFieldLifetime = 30f;
 }

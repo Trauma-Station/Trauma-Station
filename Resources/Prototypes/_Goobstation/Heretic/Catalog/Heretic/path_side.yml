@@ -595,3 +595,26 @@
     stock: 1
   - !type:HereticPathCondition
     stage: 6
+
+- type: listing
+  id: HereticSideT3AshSpirit
+  name: knowledge-path-side-t3-ash-spirit-name
+  description: knowledge-path-side-t3-ash-spirit-desc
+  icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: ash_walker }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AshSpirit
+  cost:
+    KnowledgePoint: 2
+    SideKnowledgePoint: 2
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT3
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 6

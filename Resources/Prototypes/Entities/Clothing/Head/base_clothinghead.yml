@@ -70,7 +70,7 @@
     enabled: false
     radius: 5 # Trauma - was 3
     energy: 1
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
   - type: Appearance
@@ -112,6 +112,11 @@
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
+  # <Trauma>
+  - type: IgniteFromGasImmunity
+    parts:
+    - Head
+  # </Trauma>
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]
@@ -124,9 +129,6 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.2
     coolingCoefficient: 0.2
-  - type: IgniteFromGasImmunity # EE Plasmeme Change
-    parts:
-    - Head
   - type: IngestionBlocker
   - type: Clothing
     #Copies ClothingHeadHardsuitBase behavior
@@ -163,6 +165,11 @@
         Aerial: -1
       chanceMultipliers:
         Aerial: 0
+  - type: FireProtection
+    reduction: 1
+  - type: IgniteFromGasImmunity
+    parts:
+    - Head
   # </Trauma>
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
@@ -184,11 +191,6 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
-  - type: FireProtection # EE Plasmeme Change
-    reduction: 0.2
-  - type: IgniteFromGasImmunity
-    parts:
-    - Head
   - type: Armor
     coverage:
     - Head
@@ -245,7 +247,7 @@
     enabled: false
     radius: 3
     energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
   - type: Appearance

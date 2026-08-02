@@ -18718,23 +18718,6 @@ entities:
     - type: Transform
       pos: -2.3069391,-46.406338
       parent: 2
-- proto: BoneWeak
-  entities:
-  - uid: 1272
-    components:
-    - type: Transform
-      pos: -21.874144,16.150238
-      parent: 2
-  - uid: 1273
-    components:
-    - type: Transform
-      pos: -21.733519,16.618988
-      parent: 2
-  - uid: 1274
-    components:
-    - type: Transform
-      pos: -21.467894,15.947113
-      parent: 2
 - proto: Bonfire
   entities:
   - uid: 1275
