@@ -728,6 +728,7 @@ public sealed partial class ChangelingSystem
         if (!comp.VoidAdaptActive)
         {
             EntityManager.AddComponents(uid, args.AddedComponents);
+            _status.AddEffects(uid, args.StatusEffects);
             Popup.PopupEntity("Our exterior adapts to the vacuum of space", uid, uid);
             comp.VoidAdaptActive = true;
             comp.ChemicalRegenMultiplier -= 0.25f; // chem regen slowed by a flat 25%
@@ -735,6 +736,7 @@ public sealed partial class ChangelingSystem
         else
         {
             EntityManager.RemoveComponents(uid, args.AddedComponents);
+            _status.RemoveEffects(uid, args.StatusEffects);
             Popup.PopupEntity("Our exterior returns to normal", uid, uid);
             comp.VoidAdaptActive = false;
             comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed

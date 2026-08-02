@@ -589,8 +589,9 @@
     event: !type:ActionVoidAdaptEvent
       addedComponents:
       - type: SpecialBreathingImmunity
-      - type: SpecialPressureImmunity
       - type: SpecialLowTempImmunity
+      statusEffects:
+      - StatusEffectPressureImmunityLing
   - type: ChangelingAction
     chemicalCost: 0
     useInLesserForm: true

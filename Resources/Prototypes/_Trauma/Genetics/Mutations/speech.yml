@@ -43,15 +43,9 @@
   - type: RemovesMutation
     removes:
     - MutationUnintelligible # no free -70
-  - type: EffectsMutation
-    added:
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectMutedMutation
-      time: null
-    removed:
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectMutedMutation
-      type: Remove
+  - type: StatusEffectsMutation
+    statusEffects:
+    - StatusEffectMutedMutation
 
 - type: entity
   parent: BaseMutation

@@ -95,8 +95,10 @@
 - type: clause
   id: fearofcrushing
   clauseWeight: -10
-  addedComponents:
-  - type: SpecialPressureImmunity
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityDevil
+    time: null
 
 - type: clause
   id: fearoffreezing

@@ -42,11 +42,13 @@
       maxVisibility: -1.5
       thermalsImmune: true
     - type: MovementIgnoreGravity
-    - type: SpecialPressureImmunity
     - type: SpecialBreathingImmunity
     - type: SpecialLowTempImmunity
     - type: SpecialHighTempImmunity
     - type: SupermatterImmune
+    statusEffects:
+    - StatusEffectMuted
+    - StatusEffectPressureImmunity
   - type: SlasherSoulSteal
   - type: SlasherSummonMeatSpike
   - type: BreathingImmunity

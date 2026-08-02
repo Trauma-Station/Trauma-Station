@@ -437,5 +437,4 @@
         Piercing: -1
         Ballistic: -1
   - type: StatusEffects
-    allowed:
-    - PressureImmunity
+    allowed: []

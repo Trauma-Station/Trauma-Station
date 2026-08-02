@@ -64,4 +64,10 @@ public sealed partial class SlasherIncorporealComponent : Component
     /// </summary>
     [DataField(required: true)]
     public ComponentRegistry IncorporealComponents = default!;
+
+    /// <summary>
+    /// Status effects added while incorporeal.
+    /// </summary>
+    [DataField(required: true)]
+    public List<EntProtoId> StatusEffects = default!;
 }

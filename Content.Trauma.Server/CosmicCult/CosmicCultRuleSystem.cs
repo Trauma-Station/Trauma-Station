@@ -35,6 +35,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Zombies;
 using Content.Trauma.Server.CosmicCult.Components;
 using Content.Trauma.Server.Objectives.Components;
@@ -80,8 +81,11 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
+
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
 
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_briefing.ogg");
     private readonly SoundSpecifier _deconvertSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_deconvert.ogg");
@@ -471,7 +475,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         Dirty(uid, cultComp);
 
         EnsureComp<CosmicSubtleMarkComponent>(uid);
-        EnsureComp<PressureImmunityComponent>(uid);
+        _status.TrySetStatusEffectDuration(uid, PressureImmunity);
         EnsureComp<SpecialLowTempImmunityComponent>(uid);
         EnsureComp<CosmicNonRespiratingComponent>(uid);
 
@@ -519,7 +523,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
 
         RemComp<InfluenceVitalityComponent>(ent);
         RemComp<InfluenceStrideComponent>(ent);
-        RemComp<PressureImmunityComponent>(ent);
+        _status.TryRemoveStatusEffect(ent, PressureImmunity);
         RemComp<SpecialLowTempImmunityComponent>(ent);
         RemComp<CosmicNonRespiratingComponent>(ent);
         RemComp<CosmicStarMarkComponent>(ent);
@@ -561,7 +565,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         if (TryComp<ActiveRadioComponent>(ent, out var radio))
             radio.Channels.Remove("CosmicRadio");
 
-        RemComp<PressureImmunityComponent>(ent);
+        _status.TryRemoveStatusEffect(ent, PressureImmunity);
         RemComp<SpecialLowTempImmunityComponent>(ent);
         RemComp<CosmicNonRespiratingComponent>(ent);
         RemComp<CosmicSubtleMarkComponent>(ent);

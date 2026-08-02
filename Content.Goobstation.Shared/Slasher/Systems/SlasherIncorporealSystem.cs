@@ -27,6 +27,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Electrocution;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Body;
 using Content.Shared.Pointing;
 using Content.Trauma.Common.Footprints;
@@ -46,6 +47,7 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -253,6 +255,7 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
         _eye.SetDrawFov(uid, false);
 
         EntityManager.AddComponents(uid, ent.Comp.IncorporealComponents);
+        _status.AddEffects(uid, ent.Comp.StatusEffects);
 
         // Raise event for server systems to handle additional logic (like disabling lights)
         var enteredEv = new SlasherIncorporealEnteredEvent();
@@ -264,6 +267,7 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
         ent.Comp.IsIncorporeal = false;
         Dirty(ent);
 
+        _status.RemoveEffects(uid, ent.Comp.StatusEffects);
         EntityManager.RemoveComponents(uid, ent.Comp.IncorporealComponents);
 
         // Restore frozen cooldowns

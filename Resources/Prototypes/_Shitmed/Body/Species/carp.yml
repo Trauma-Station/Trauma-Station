@@ -95,6 +95,6 @@
       Normal: 21
       Damaged: 12
       Destroyed: 0
-  - type: OrganComponents
-    onAdd:
-    - type: PressureImmunity
+  - type: OrganStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunityOrgan

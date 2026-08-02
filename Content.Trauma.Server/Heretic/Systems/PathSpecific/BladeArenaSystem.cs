@@ -16,6 +16,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Wall;
 using Content.Shared.Whitelist;
@@ -53,6 +54,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
     [Dependency] private PhysicsSystem _physics = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private SanguineStrikeSystem _lifesteal = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private RoleSystem _role = default!;
@@ -105,6 +107,8 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
                 ent.Comp.GrantedComponentDictionary[name] = false;
             }
 
+            _status.AddEffects(ent, ent.Comp.StatusEffects);
+
             return;
         }
 
@@ -113,6 +117,8 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
             if (!shouldKeep)
                 RemCompDeferred(ent, Factory.GetRegistration(name).Type);
         }
+
+        _status.RemoveEffects(ent, ent.Comp.StatusEffects);
     }
 
     private void OnGetBriefing(Entity<HereticArenaParticipantRoleComponent> ent, ref GetBriefingEvent args)

@@ -134,7 +134,6 @@
   - type: KnowledgeHolder
   - type: AlwaysTakeHoly
   - type: Hands
-  - type: PressureImmunity
   - type: TriggerOnMobstateChange
     mobState:
     - Dead

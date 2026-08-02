@@ -96,7 +96,6 @@
     factions:
     - DevilFaction
   - type: AlwaysTakeHoly
-  - type: PressureImmunity
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
