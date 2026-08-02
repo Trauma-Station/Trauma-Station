@@ -5428,7 +5428,6 @@ entities:
   - uid: 838
     components:
     - type: Transform
-      anchored: True
       pos: -0.5,37.5
       parent: 1
     - type: Physics
@@ -5440,7 +5439,6 @@ entities:
   - uid: 839
     components:
     - type: Transform
-      anchored: True
       pos: 0.5,37.5
       parent: 1
     - type: Physics
@@ -5452,7 +5450,6 @@ entities:
   - uid: 840
     components:
     - type: Transform
-      anchored: True
       pos: 1.5,37.5
       parent: 1
     - type: Physics

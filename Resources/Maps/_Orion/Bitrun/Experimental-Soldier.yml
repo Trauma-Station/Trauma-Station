@@ -8033,7 +8033,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,2.5
       parent: 1
-- proto: WehMedipen
+- proto: WehMedipenTiny
   entities:
   - uid: 644
     components:
