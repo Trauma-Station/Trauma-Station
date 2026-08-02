@@ -14,11 +14,7 @@ public sealed partial class AddShaderStatusEffectSystem : EntitySystem
     {
         var id = ent.Comp.Shader;
         var shader = ProtoMan.Index<ShaderPrototype>(id).Instance();
-        var data = new SpriteComponent.PostShaderArgs(id, shader)
-        {
-            GetScreenTexture = true,
-            RaiseShaderEvent = true
-        };
+        var data = new SpriteComponent.PostShaderArgs(id, shader);
         _sprite.SetPostShader(args.Target, data);
     }
 

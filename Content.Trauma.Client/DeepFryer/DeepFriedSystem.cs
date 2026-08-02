@@ -42,11 +42,7 @@ public sealed partial class DeepFriedSystem : EntitySystem
             return;
         }
 
-        var data = new SpriteComponent.PostShaderArgs(ShaderName, _shader)
-        {
-            GetScreenTexture = true,
-            RaiseShaderEvent = true
-        };
+        var data = new SpriteComponent.PostShaderArgs(ShaderName, _shader);
         _sprite.SetPostShader(uid, data);
     }
 

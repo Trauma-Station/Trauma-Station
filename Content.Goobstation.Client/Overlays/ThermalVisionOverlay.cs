@@ -23,7 +23,6 @@ public sealed partial class ThermalVisionOverlay : Overlay
     private readonly ContainerSystem _container;
     private readonly SharedPointLightSystem _light;
 
-    public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private readonly List<ThermalVisionRenderEntry> _entries = [];
@@ -48,7 +47,7 @@ public sealed partial class ThermalVisionOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (ScreenTexture is null || Comp is null)
+        if (Comp is null)
             return;
 
         var worldHandle = args.WorldHandle;
@@ -131,40 +130,15 @@ public sealed partial class ThermalVisionOverlay : Overlay
         var position = _transform.GetWorldPosition(xform);
         var rotation = _transform.GetWorldRotation(xform);
 
-        var originalColor = sprite.Color;
-        Dictionary<int, (ShaderInstance? shader, Color color)> layerData = new();
+        List<SpriteComponent.PostShaderEntry>? entries = null;
         if (shader != null)
         {
-            // Layer shaders break handle shader so we have to do this. It has a side effect of clothing not rendering
-            // on some species or on female characters but its fine cause shader itself makes things hard to see
-            var allLayers = sprite.AllLayers.ToList();
-            for (var i = 0; i < allLayers.Count; i++)
-            {
-                if (allLayers[i] is not SpriteComponent.Layer { Visible: true } layer)
-                    continue;
-
-                if (layer.ShaderPrototype?.Id is "DisplacedDraw" or "DisplacedStencilDraw")
-                    _sprite.LayerSetVisible((uid, sprite), i, false);
-
-                layerData[i] = (layer.Shader, layer.Color);
-                layer.Shader = null;
-                _sprite.LayerSetColor(layer, Color.White.WithAlpha(layer.Color.A));
-            }
-
-            _sprite.SetColor((uid, sprite), Color.White.WithAlpha(alpha));
-            handle.UseShader(_proto.Index<ShaderPrototype>(shader).Instance());
+            var instance = _proto.Index<ShaderPrototype>(shader).InstanceUnique();
+            instance.SetParameter("color", color.WithAlpha(alpha));
+            entries = new() { new SpriteComponent.PostShaderEntry(shader, instance) };
         }
-        else
-            _sprite.SetColor((uid, sprite), color.WithAlpha(alpha));
-        _sprite.RenderSprite((uid, sprite), handle, eyeRot, rotation, position);
-        _sprite.SetColor((uid, sprite), originalColor);
-        handle.UseShader(null);
-        foreach (var (key, value) in layerData)
-        {
-            ((SpriteComponent.Layer) sprite[key]).Shader = value.shader;
-            _sprite.LayerSetColor((uid, sprite), key, value.color);
-            _sprite.LayerSetVisible((uid, sprite), key, true);
-        }
+
+        _sprite.RenderSprite((uid, sprite), handle, eyeRot, rotation, position, entries);
     }
 
     private bool CanSee(EntityUid uid, SpriteComponent sprite)

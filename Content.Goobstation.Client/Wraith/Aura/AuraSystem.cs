@@ -26,11 +26,11 @@ public sealed partial class AuraSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnStartup(Entity<AuraComponent> ent, ref ComponentStartup args)
     {
-        _sprite.SetPostShader(ent.Owner, new(Shader, _shader)
-        {
-            GetScreenTexture = true,
-            RaiseShaderEvent = true
-        });
+        _sprite.SetPostShader(ent.Owner,
+            new(Shader, _shader)
+            {
+                RaiseShaderEvent = true
+            });
     }
 
     [SubscribeLocalEvent]
@@ -43,11 +43,12 @@ public sealed partial class AuraSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnShaderRender(Entity<AuraComponent> ent, ref BeforePostShaderRenderEvent args)
     {
-        if (args.Sprite.PostShader != _shader)
+        if (args.Id != Shader)
             return;
 
-        _shader.SetParameter("distortion", ent.Comp.Distortion);
-        _shader.SetParameter("auraColor", new Vector3(ent.Comp.AuraColor.R, ent.Comp.AuraColor.G, ent.Comp.AuraColor.B));
-        _shader.SetParameter("mango", ent.Comp.AuraFarm);
+        args.Shader.SetParameter("distortion", ent.Comp.Distortion);
+        args.Shader.SetParameter("auraColor",
+            new Vector3(ent.Comp.AuraColor.R, ent.Comp.AuraColor.G, ent.Comp.AuraColor.B));
+        args.Shader.SetParameter("mango", ent.Comp.AuraFarm);
     }
 }
