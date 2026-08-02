@@ -6,8 +6,7 @@
   components:
   - type: BodyPart
     slots: []
-  - type: Woundable
-    boneEntity: null
+  - type: Boneless
   - type: Destructible
     thresholds: []
 
@@ -164,9 +163,10 @@
     - MindRoleGhoul
   - type: ActionGrant
     actions:
-    - ActionHereticJaunt
-    - ActionActivateEmp
+    - ActionHereticCleave
     - ActionHereticShapeshift
+  - type: NightVision
+    lightingColor: white
   - type: ThermalVision
     color: white
     toggleAction: null
@@ -224,12 +224,12 @@
   - type: ShowHealthIcons
 
 - type: entity
-  parent: [BaseMobHereticGhoul, MobGhoulProphetBase]
+  parent: [BaseMobHereticGhoul, MobGhoulProphetBase, MobNightVision]
   id: MobGhoulProphet
   components:
   - type: ActionGrant
     actions:
-    - ActionHereticJauntLong
+    - ActionHereticJaunt
     - ActionHereticMansusLink
   - type: Ghoul
     totalHealth: 65
@@ -267,7 +267,7 @@
         Piercing: 15
 
 - type: entity
-  parent: [BaseMobHereticSummon, FlyingMobBase]
+  parent: [BaseMobHereticSummon, FlyingMobBase, MobNightVision]
   id: MobGhoulMirrorMaidBase
   name: maid in the mirror
   description: A floating and flowing wisp of chilled air. Glancing at it causes it to shimmer slightly.
@@ -326,7 +326,7 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damage:
+    damage: &alldamage
       types:
         Blunt: -1
         Slash: -1
@@ -467,6 +467,103 @@
         Heat: 8
         Slash: 8
         Piercing: 8
+
+- type: entity
+  parent: [BaseMobHereticSummon, FlyingMobBase, MobNightVision]
+  id: MobGhoulAshSpiritBase
+  name: ash spirit
+  description: A manifestation of ash, trailing a perpetual cloud of short-lived cinders.
+  abstract: true
+  components:
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: ash_walker
+  - type: IgniteOnMeleeHit
+    fireStacks: 2
+  - type: MeleeWeapon
+    canWideSwing: false
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Heat: 20
+  - type: ContinuousBeamGun
+    beamSound:
+      path: /Audio/_Trauma/Revs/foundryaudio.ogg
+      params:
+        loop: true
+        volume: -5
+    damage:
+      types:
+        Heat: 6
+    effects:
+    - !type:Flammable
+      multiplier: 2
+      multiplierOnExisting: 1
+      fireProtectionPenetration: 0.35
+    - !type:Ignite
+    data:
+      id: ashspirit
+      sprite: { sprite: /Textures/_Goobstation/Heretic/Effects/effects.rsi, state: solar_beam }
+      returnOnFirstHit: true
+      collisionMask:
+      - Opaque
+      - BulletImpassable
+  - type: Flammable
+    canResistFire: false
+    damage:
+      types:
+        Heat: 0
+  - type: TemperatureDamage
+    heatDamage:
+      types:
+        Heat: 0
+  - type: Damageable
+    damageModifierSet: FireShark # They are kinda like sharks?
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage: *alldamage
+  - type: NightVision
+    lightingColor: white
+
+- type: entity
+  parent: [BaseMobHereticGhoul, MobGhoulAshSpiritBase]
+  id: MobGhoulAshSpirit
+  components:
+  - type: Ghoul
+    spawnOnDeathPrototype: Ash
+    totalHealth: 75
+    ghostRoleName: ghostrole-ash-spirit-name
+    ghostRoleDesc: ghostrole-ash-spirit-desc
+  - type: GhostRole
+    name: ghostrole-ash-spirit-name
+    description: ghostrole-ash-spirit-name
+    mindRoles:
+    - MindRoleGhoul
+  - type: ActionGrant
+    actions:
+    - ActionHereticJauntLong
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobGhoulAshSpiritBase]
+  id: MobGhoulAshSpiritLock
+  name: empowered ash spirit
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Critical
+      100: Dead
+  - type: IgniteOnMeleeHit
+    fireStacks: 3
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 25
 
 - type: entity
   parent:

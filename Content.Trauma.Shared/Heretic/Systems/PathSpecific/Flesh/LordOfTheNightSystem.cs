@@ -43,8 +43,6 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
 
-    [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
-
     private readonly HashSet<Entity<MobStateComponent>> _lookMobs = new();
 
     public override void Initialize()
@@ -187,9 +185,8 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
 
             var arm = _body.GetOrgan(hit, ent.Comp.ArmLeft) ?? _body.GetOrgan(hit, ent.Comp.ArmRight);
 
-            if (arm is { } armEnt && _woundableQuery.TryComp(armEnt, out var woundable) &&
-                woundable.ParentWoundable is { } parent)
-                _wound.AmputateWoundable(parent, armEnt, woundable, args.User);
+            if (arm is { } armEnt)
+                _wound.AmputateWoundable(armEnt, args.User);
         }
     }
 }

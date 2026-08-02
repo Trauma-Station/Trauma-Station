@@ -11,6 +11,7 @@ namespace Content.Shared.Implants.Components;
 /// They're added and removed with implanters
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[EntityCategory("Implants")] // Trauma
 public sealed partial class SubdermalImplantComponent : Component
 {
     /// <summary>

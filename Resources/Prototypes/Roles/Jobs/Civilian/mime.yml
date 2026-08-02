@@ -17,13 +17,12 @@
   - !type:OrganChipsSpecial
     chips:
     - SkillChipEducation
-  # moved to skill chip
-  #- !type:AddComponentSpecial
-  #  components:
-  #  - type: MimePowers
-  #    preventWriting: true
-  #  - type: FrenchAccent
   # </Trauma>
+  - !type:AddComponentSpecial
+    components:
+    - type: MimePowers
+      preventWriting: true
+    - type: FrenchAccent
 
 - type: startingGear
   id: MimeGear

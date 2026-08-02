@@ -30,8 +30,8 @@ public abstract partial class SharedHereticSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected ISharedChatManager ChatMan = default!;
     [Dependency] protected ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
@@ -296,7 +296,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
+        if (Timing.ApplyingState || TerminatingOrDeleted(uid))
             return;
 
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)

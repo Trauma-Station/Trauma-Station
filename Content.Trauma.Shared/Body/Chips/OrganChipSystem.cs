@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
@@ -19,13 +22,15 @@ public sealed partial class OrganChipSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private EntityQuery<PullableComponent> _pullableQuery = default!;
+    [Dependency] private EntityQuery<BypassInteractionChecksComponent> _bypassQuery = default!;
     [Dependency] private EntityQuery<OrganChipComponent> _query = default!;
     [Dependency] private EntityQuery<OrganChipContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<PullableComponent> _pullableQuery = default!;
 
     public static readonly VerbCategory ChipsCategory = new("verb-categories-organ-chips", "/Textures/_Trauma/Objects/Specific/brain_chips.rsi/icon.png");
 
@@ -37,28 +42,15 @@ public sealed partial class OrganChipSystem : EntitySystem
 
         SubscribeLocalEvent<BodyComponent, InteractUsingEvent>(_body.RelayBodyEvent);
         SubscribeLocalEvent<BodyComponent, GetVerbsEvent<InteractionVerb>>(_body.RelayBodyEvent);
-
-        SubscribeLocalEvent<OrganChipContainerComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<OrganChipContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
-        SubscribeLocalEvent<OrganChipContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
-        SubscribeLocalEvent<OrganChipContainerComponent, ContainerIsInsertingAttemptEvent>(OnChipInsertAttempt);
-        SubscribeLocalEvent<OrganChipContainerComponent, EntInsertedIntoContainerMessage>(OnChipInserted);
-        SubscribeLocalEvent<OrganChipContainerComponent, EntRemovedFromContainerMessage>(OnChipRemoved);
-        SubscribeLocalEvent<OrganChipContainerComponent, PolymorphedEvent>(OnPolymorphed);
-
-        SubscribeLocalEvent<OrganChipContainerComponent, GetVerbsEvent<InteractionVerb>>(OnGetVerbs);
-        SubscribeLocalEvent<OrganChipContainerComponent, BodyRelayedEvent<GetVerbsEvent<InteractionVerb>>>(OnGetVerbs);
-        SubscribeLocalEvent<OrganChipContainerComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<OrganChipContainerComponent, BodyRelayedEvent<InteractUsingEvent>>(OnInteractUsing);
-        SubscribeLocalEvent<OrganChipContainerComponent, OrganChipInsertDoAfterEvent>(OnInsertDoAfter);
-        SubscribeLocalEvent<OrganChipContainerComponent, OrganChipRemoveDoAfterEvent>(OnRemoveDoAfter);
     }
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<OrganChipContainerComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.Container = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.ContainerName);
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganInserted(Entity<OrganChipContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
         if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
@@ -68,6 +60,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         RelayChips(ent, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganRemoved(Entity<OrganChipContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
         if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
@@ -77,6 +70,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         RelayChips(ent, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnChipInsertAttempt(Entity<OrganChipContainerComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
         if (args.Cancelled || args.Container != ent.Comp.Container || _body.GetCategory(ent.Owner) is not { } category)
@@ -101,6 +95,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnChipInserted(Entity<OrganChipContainerComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (!_timing.IsFirstTimePredicted || _timing.ApplyingState ||
@@ -113,6 +108,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         Dirty(args.Entity, chip);
     }
 
+    [SubscribeLocalEvent]
     private void OnChipRemoved(Entity<OrganChipContainerComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (!_timing.IsFirstTimePredicted || _timing.ApplyingState ||
@@ -125,6 +121,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         Dirty(args.Entity, chip);
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<OrganChipContainerComponent> ent, ref PolymorphedEvent args)
     {
         if (ent.Owner != args.OldEntity)
@@ -143,6 +140,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVerbs(Entity<OrganChipContainerComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
@@ -162,17 +160,16 @@ public sealed partial class OrganChipSystem : EntitySystem
 
         var user = args.User;
         // you remember which skill chip is installing in yourself, for others they are just numbered
-        var known = _body.GetBody(ent.Owner) == user;
+        var known = _body.GetBody(ent.Owner) == user || _bypassQuery.HasComp(user);
 
         var i = 0;
         foreach (var chip in ent.Comp.Container.ContainedEntities)
         {
-            i++;
             var chipCopy = chip; // amazing language
             var canRemove = true; // TODO: make it support self unremovable chips
             args.Verbs.Add(new()
             {
-                Text = known ? $"Remove {Name(chip)}" : $"Remove {name} chip {i++}",
+                Text = known ? $"Remove {Name(chip)}" : $"Remove {name} chip {++i}",
                 Category = ChipsCategory,
                 Disabled = !canRemove,
                 Act = () => StartRemovingChip(ent, chipCopy, user)
@@ -180,6 +177,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVerbs(Entity<OrganChipContainerComponent> ent, ref BodyRelayedEvent<GetVerbsEvent<InteractionVerb>> args)
     {
         var ev = args.Args;
@@ -187,6 +185,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         args.Args = ev;
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<OrganChipContainerComponent> ent, ref InteractUsingEvent args)
     {
         var chip = args.Used;
@@ -204,6 +203,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         StartInsertingChip(ent, chip, user);
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<OrganChipContainerComponent> ent, ref BodyRelayedEvent<InteractUsingEvent> args)
     {
         var chip = args.Args.Used;
@@ -216,6 +216,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         StartInsertingChip(ent, chip, user);
     }
 
+    [SubscribeLocalEvent]
     private void OnInsertDoAfter(Entity<OrganChipContainerComponent> ent, ref OrganChipInsertDoAfterEvent args)
     {
         if (args.Cancelled || args.Target is not { } chip)
@@ -226,8 +227,10 @@ public sealed partial class OrganChipSystem : EntitySystem
 
         var user = args.User;
         _popup.PopupEntity($"You inserted a chip into the {OrganName(ent)}.", user, user);
+        _adminLog.Add(LogType.Verb, $"{user:user} inserted organ chip {chip:chip} into {ent:target}");
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoveDoAfter(Entity<OrganChipContainerComponent> ent, ref OrganChipRemoveDoAfterEvent args)
     {
         if (args.Cancelled || args.Target is not { } chip)
@@ -239,6 +242,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         var user = args.User;
         _popup.PopupEntity($"You pulled a chip out of the {OrganName(ent)}.", user, user);
         _hands.TryPickupAnyHand(user, chip);
+        _adminLog.Add(LogType.Verb, $"{user:user} removed organ chip {chip:chip} from {ent:target}");
     }
 
     private void StartInsertingChip(EntityUid organ, EntityUid chip, EntityUid user)

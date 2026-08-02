@@ -15,6 +15,11 @@
   recipes:
   - Hypoport
 
+- type: latheRecipePack
+  id: TraumaMedicalBoardsStatic
+  recipes:
+  - ChemiCompilerMachineCircuitboard
+
 ## Dynamic
 
 - type: latheRecipePack

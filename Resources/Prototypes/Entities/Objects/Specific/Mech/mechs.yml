@@ -14,7 +14,7 @@
     enabled: false
     softness: 5
     autoRot: true
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     radius: 7
     energy: 3
     netsync: false
@@ -182,6 +182,11 @@
     layers:
     - map: [ "enum.MechVisualLayers.Base" ]
       state: ripley
+    # <Trauma>
+    - map: [ "enum.PaperLabelVisuals.Layer" ]
+      sprite: Structures/Storage/Crates/labels.rsi
+      state: paper
+    # </Trauma>
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg

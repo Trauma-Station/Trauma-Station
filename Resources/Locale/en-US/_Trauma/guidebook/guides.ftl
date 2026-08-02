@@ -9,8 +9,11 @@ guide-entry-tackle = Tackle
 guide-entry-forging = Forging
 guide-entry-fishing = Fishing
 guide-entry-circuits = Circuits
+guide-entry-chemicompiler = ChemiCompiler
 
 guide-entry-civilian = Civilian Jobs
+
+guide-entry-ranching = Ranching
 
 guide-entry-bingle = Bingle
 guide-entry-changelings = Changelings

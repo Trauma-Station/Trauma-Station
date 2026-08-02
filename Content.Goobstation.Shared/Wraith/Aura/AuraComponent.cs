@@ -26,8 +26,8 @@ public sealed partial class AuraComponent : Component
     public float Distortion = 0.05f;
 
     /// <summary>
-    /// If not null, it will use multi shader overlay to render with specified render order
+    /// If not null, shaders the aura shader has to run after.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public int? MultiShaderOrder = 5;
+    [DataField]
+    public string[]? AfterShaders;
 }

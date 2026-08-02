@@ -249,6 +249,7 @@ namespace Content.Client.Construction.UI
                 !_favoritedRecipes.Contains(prototype),
                 // <Trauma>
                 CanUnderstand(prototype),
+                _useSkills,
                 prototype);
                 // </Trauma>
 
@@ -783,7 +784,7 @@ namespace Content.Client.Construction.UI
                 // <Trauma> - update recipes whenever opening the window
                 if (_playerManager.LocalEntity is { } player)
                 {
-                    _useSkills = _constructionSystem!.IsKnowledgeHolder(player);
+                    _useSkills = _constructionSystem!.UsesKnowledge(player);
                     _skills = _knowledge.GetSkillMasteries(player);
                 }
                 // </Trauma>

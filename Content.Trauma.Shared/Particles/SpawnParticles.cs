@@ -39,18 +39,37 @@ public abstract class SharedSpawnParticlesEffectSystem : EntityEffectSystem<Tran
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnParticles> args)
     {
         var effect = args.Effect.ParticleProto;
-        var quantity = args.Effect.Number * (int)Math.Floor(args.Scale);
+        var quantity = args.Effect.Number * (int) Math.Floor(args.Scale);
         var color = args.Effect.Color;
         var attach = args.Effect.Attached;
+        var user = args.User;
 
-        for (int i = 0; i < quantity; i++)
-        {
-            SpawnParticles(effect, ent.Owner, color, attach);
-        }
+        SpawnParticles(effect, ent.Owner, color, attach, quantity, user);
     }
 
     /// <summary>
     /// Virtual function to spawn particles via the client
     /// </summary>
-    protected virtual void SpawnParticles(ProtoId<ParticleEffectPrototype> particleProto, EntityUid target, Color? color, bool attached) { }
+    protected virtual void SpawnParticles(ProtoId<ParticleEffectPrototype> particleProto,
+        EntityUid target,
+        Color? color,
+        bool attached,
+        int number,
+        EntityUid? user)
+    {
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed partial class SpawnParticlesEvent(NetEntity target,
+    ProtoId<ParticleEffectPrototype> proto,
+    bool attached,
+    int number,
+    Color? color) : EntityEventArgs
+{
+    public NetEntity Target = target;
+    public ProtoId<ParticleEffectPrototype> ParticleProto = proto;
+    public bool Attached = attached;
+    public int Number = number;
+    public Color? Color = color;
 }

@@ -38,6 +38,12 @@ public sealed partial class InternalResourcesPrototype : IPrototype
     public float BaseMaxAmount = 100f;
 
     /// <summary>
+    /// Base resources Minimum amount
+    /// </summary>
+    [DataField]
+    public float BaseMinAmount = 0f;
+
+    /// <summary>
     /// Base amount of resources when these internal resources is added to entity
     /// </summary>
     [DataField("startingAmount")]

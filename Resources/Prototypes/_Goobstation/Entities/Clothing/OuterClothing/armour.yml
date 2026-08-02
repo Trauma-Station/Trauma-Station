@@ -84,7 +84,7 @@
     color: "#e5af38"
     radius: 5
     energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
 
@@ -353,7 +353,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
-    reduction: 0.6
+    reduction: 0.75
 
 - type: entity
   parent: ClothingOuterArmorTemplar

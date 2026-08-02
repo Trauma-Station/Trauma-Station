@@ -2,8 +2,6 @@
 
 using System.Linq;
 using Content.Medical.Common.Body;
-using Content.Medical.Common.Traumas;
-using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Medical.Components;
 using Content.Shared.Body;
@@ -24,81 +22,30 @@ public sealed partial class HealthAnalyzerSystem
 {
     [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private BodySystem _body = default!;
-    [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private WoundSystem _wound = default!;
 
-    private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<DamageableComponent> _damageQuery;
-
-    private void InitializeTrauma()
-    {
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _damageQuery = GetEntityQuery<DamageableComponent>();
-
-        // not using BuiEvents so it works for cryo pods too for free
-        SubscribeLocalEvent<HealthAnalyzerComponent, HealthAnalyzerPartMessage>(OnHealthAnalyzerPartSelected);
-        SubscribeLocalEvent<HealthAnalyzerComponent, HealthAnalyzerModeSelectedMessage>(OnHealthAnalyzerModeSelected);
-    }
+    // not using BuiEvents for these subs so it works for cryo pods too for free
 
     /// <summary>
     /// Handle the selection of a body part on the health analyzer
     /// </summary>
     /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
     /// <param name="args">The message containing the selected part</param>
+    [SubscribeLocalEvent]
     private void OnHealthAnalyzerPartSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerPartMessage args)
     {
         if (healthAnalyzer.Comp.ScannedEntity is not { } target || !Exists(target))
             return;
 
-        healthAnalyzer.Comp.CurrentMode = HealthAnalyzerMode.Body; // If you press a part ye get redirected bozo.
         if (args.Category is not { } category)
             BeginAnalyzingEntity(healthAnalyzer, target, null);
         else if (_body.GetOrgan(target, category) is { } organ)
             BeginAnalyzingEntity(healthAnalyzer, target, organ);
     }
 
-    /// <summary>
-    /// Handle the selection of a different health analyzer mode
-    /// </summary>
-    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
-    /// <param name="args">The message containing the selected mode</param>
-    private void OnHealthAnalyzerModeSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerModeSelectedMessage args)
-    {
-        if (healthAnalyzer.Comp.ScannedEntity is not { } target || !Exists(target))
-            return;
-
-        healthAnalyzer.Comp.CurrentMode = args.Mode; // If you press a part ye get redirected bozo.
-        BeginAnalyzingEntity(healthAnalyzer, target);
-    }
-
     // can't keep scanning a deleted or detached part
     private bool IsPartInvalid(EntityUid? uid)
         => Deleted(uid) || _body.GetBody(uid.Value) == null;
-
-    public HealthAnalyzerUiState GetHealthAnalyzerUiState(Entity<HealthAnalyzerComponent?> ent, EntityUid? target)
-    {
-        if (!Resolve(ent, ref ent.Comp))
-            return new HealthAnalyzerUiState();
-
-        return GetHealthAnalyzerUiState(target, ent.Comp.CurrentMode, ent.Comp.CurrentBodyPart);
-    }
-
-    private void FetchBodyData(EntityUid target,
-        out Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
-        out HashSet<ProtoId<OrganCategoryPrototype>> bleeding)
-    {
-        traumas = new();
-        bleeding = new();
-
-        // TODO SHITMED: all of this shit should just be networked
-        foreach (var part in _body.GetOrgans<WoundableComponent>(target))
-        {
-            var ent = GetNetEntity(part);
-            traumas.Add(ent, FetchTraumaData(part, part.Comp));
-            if (part.Comp.Bleeds > 0 && _body.GetCategory(part.Owner) is {} category)
-                bleeding.Add(category);
-        }
-    }
 
     private HashSet<ProtoId<OrganCategoryPrototype>> FetchBleedData(Entity<BodyComponent?> body)
     {
@@ -112,69 +59,11 @@ public sealed partial class HealthAnalyzerSystem
         return bleeding;
     }
 
-    private List<WoundableTraumaData> FetchTraumaData(EntityUid target, WoundableComponent woundable)
+    public HealthAnalyzerUiState GetHealthAnalyzerUiState(Entity<HealthAnalyzerComponent?> ent, EntityUid? target)
     {
-        var traumasList = new List<WoundableTraumaData>();
-        if (!_trauma.TryGetWoundableTrauma(target, out var traumasFound))
-            return traumasList;
+        if (!Resolve(ent, ref ent.Comp))
+            return new HealthAnalyzerUiState();
 
-        foreach (var trauma in traumasFound)
-        {
-            if (trauma.Comp.TraumaType == TraumaType.BoneDamage
-                && trauma.Comp.TraumaTarget is { } boneWoundable
-                && TryComp(boneWoundable, out BoneComponent? boneComp))
-            {
-                traumasList.Add(new WoundableTraumaData(ToPrettyString(target),
-                    trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, boneComp.BoneSeverity.ToString(), trauma.Comp.TargetType));
-
-                continue;
-            }
-
-            traumasList.Add(new WoundableTraumaData(ToPrettyString(trauma),
-                    trauma.Comp.TraumaType.ToString(), trauma.Comp.TraumaSeverity, targetType: trauma.Comp.TargetType));
-        }
-
-        return traumasList;
-    }
-
-    private Dictionary<NetEntity, OrganTraumaData> FetchOrganData(EntityUid target)
-    {
-        var organs = new Dictionary<NetEntity, OrganTraumaData>();
-        if (!_bodyQuery.TryComp(target, out var body))
-            return organs;
-
-        foreach (var organ in _body.GetOrgans<InternalOrganComponent>((target, body)))
-        {
-            organs.Add(GetNetEntity(organ), new OrganTraumaData(organ.Comp.OrganIntegrity,
-                organ.Comp.IntegrityCap,
-                organ.Comp.OrganSeverity,
-                organ.Comp.IntegrityModifiers
-                    .Select(x => (x.Key.Item1, x.Value))
-                    .ToList()));
-        }
-
-        return organs;
-    }
-
-    private List<NetEntity> FetchChemicalData(EntityUid target)
-    {
-        var solutionsList = new List<NetEntity>();
-
-        if (TryComp<BloodstreamComponent>(target, out var blood) &&
-            _solutionContainerSystem.ResolveSolution(target, blood.BloodSolutionName, ref blood.BloodSolution, out var bloodSol))
-        {
-            solutionsList.Add(GetNetEntity(blood.BloodSolution.Value));
-        }
-
-        // TODO SHITMED: this is already networked????
-        foreach (var stomach in _body.GetOrgans<StomachComponent>(target))
-        {
-            if (stomach.Comp.Solution is not { } solution)
-                continue;
-
-            solutionsList.Add(GetNetEntity(solution));
-        }
-
-        return solutionsList;
+        return GetHealthAnalyzerUiState(target, ent.Comp.CurrentBodyPart);
     }
 }

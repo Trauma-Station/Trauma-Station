@@ -53,7 +53,7 @@
     hiddenSlots:
     - jumpsuit
   - type: FireProtection
-    reduction: 0.2
+    reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
 
@@ -90,7 +90,7 @@
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticRust
   - type: FireProtection
-    reduction: 0.3
+    reduction: 0.38
   - type: SalvagedRemains
   - type: Appearance
   - type: ItemToggle
@@ -132,7 +132,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
     - type: FireProtection
-      reduction: 0.6
+      reduction: 0.75
     deactivateComponents:
     - type: Armor
       coverage:
@@ -158,7 +158,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0.50
     - type: FireProtection
-      reduction: 0.3
+      reduction: 0.38
 
 - type: entity
   abstract: true
@@ -198,7 +198,7 @@
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticVoid
   - type: FireProtection
-    reduction: 0.4
+    reduction: 0.5
   - type: PressureProtection
     lowPressureMultiplier: 1000
   - type: HollowWeave
@@ -334,7 +334,7 @@
       head: ClothingHeadHatHoodHereticBlade
   - type: Insulated
   - type: FireProtection
-    reduction: 0.5
+    reduction: 0.63
   - type: ModifyDelayedKnockdown
     cancel: true
   - type: StaminaResistance
@@ -352,7 +352,7 @@
         Slash: 0.7
         Piercing: 0.7
         Ballistic: 0.6
-        Heat: 0.4
+        Heat: 0.5
         Caustic: 0.8
 
 - type: entity
@@ -375,6 +375,18 @@
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
     coolingCoefficient: 0.01
+  - type: TackleModifier # Allows tackling on cosmic fields
+    modifiers:
+    - priority: 25
+      allowCollision: false
+      affectsOtherModifiers: false
+      staminaCostMultiplier: 0
+      speedMultiplier: 0.5
+      knockdownTimeMultiplier: 0
+      rangeMultiplier: 0.5
+      cooldownMultiplier: 0.3
+      userEffect: CosmicDash
+      tackleCondition: CosmicFieldNearby
 
 - type: entity
   abstract: true

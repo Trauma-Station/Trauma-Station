@@ -271,7 +271,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.3 # Trauma - was 0.5
   - type: FireProtection
-    reduction: 0.85
+    reduction: 1 # Trauma - was 0.85, completely protects torso but nothing else
 
 #Mercenary web vest
 - type: entity

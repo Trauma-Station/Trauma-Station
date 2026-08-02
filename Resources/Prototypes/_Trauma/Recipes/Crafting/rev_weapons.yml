@@ -1,92 +1,60 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
+  abstract: true
+  parent: BaseRev
+  id: BaseRevGun
+  graph: RevGuns
+  objectType: Item
+  theory:
+    RevolutionaryKnowledge: 2
+    GunsmithingKnowledge: 0
+  practical:
+    WeaponsKnowledge: 2
+    GunsmithingKnowledge: 2
+
+- type: construction
+  parent: BaseRevGun
   id: RevLiberator
-  graph: RevGuns
   targetNode: liberator
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 0 # revs dont get automatic weapons knowledge :)
-  practical:
-    GunsmithingKnowledge: 2
-    WeaponsKnowledge: 2
 
 - type: construction
+  parent: BaseRevGun
   id: RevResistance
-  graph: RevGuns
   targetNode: resistance
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 0
-  practical:
-    GunsmithingKnowledge: 2
-    WeaponsKnowledge: 2
 
 - type: construction
-  id: RPG2
-  graph: RevGuns
+  parent: BaseRevGun
+  id: RevRPG2
   targetNode: RPG2
-  category: construction-category-antagonist
-  objectType: Item
   theory:
     RevolutionaryKnowledge: 2
+    GunsmithingKnowledge: 1
     WeaponsKnowledge: 1
   practical:
     GunsmithingKnowledge: 4
     WeaponsKnowledge: 3
 
 - type: construction
-  id: Flamethrower
-  graph: RevGuns
+  parent: RevRPG2
+  id: RevFlamethrower
   targetNode: Flamethrower
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 1
-  practical:
-    GunsmithingKnowledge: 4
-    WeaponsKnowledge: 3
 
 - type: construction
+  parent: RevRPG2
   id: Devastator
-  graph: RevGuns
   targetNode: Devastator
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 2
-  practical:
-    GunsmithingKnowledge: 2
-    WeaponsKnowledge: 2
 
 - type: construction
+  parent: RevRPG2
   id: Proletariat
-  graph: RevGuns
   targetNode: Proletariat
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 1
-  practical:
-    GunsmithingKnowledge: 4
-    WeaponsKnowledge: 3
 
 - type: construction
+  parent: BaseRevGun
   id: RevIED
   graph: RevIED
   targetNode: IED
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 2
   practical:
     MechanicsKnowledge: 2
     WeaponsKnowledge: 2

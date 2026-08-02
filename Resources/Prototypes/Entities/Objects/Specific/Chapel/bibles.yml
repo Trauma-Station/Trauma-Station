@@ -63,6 +63,8 @@
   parent: BaseStorageItem
   id: Bible
   components:
+  - type: HolyIgniteOnMeleeHit # Trauma - it makes holy water
+    fireStacks: 1.0
   - type: UseDelay
     delay: 10.0
   - type: Bible
@@ -77,9 +79,7 @@
         Shock: -5
     damageOnFail:
       types:
-        Blunt: 5
-        Piercing: 5
-        Slash: 5
+        Blunt: 15 # Trauma - no slash and pierce
         Asphyxiation: 15
     damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
       types:
