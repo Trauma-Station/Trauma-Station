@@ -4579,37 +4579,31 @@ entities:
   - uid: 827
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -1.5,2.5
       parent: 1
   - uid: 828
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 2.5,2.5
       parent: 1
   - uid: 829
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 3.5,0.5
       parent: 1
   - uid: 830
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 2.5,-2.5
       parent: 1
   - uid: 831
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -1.5,-2.5
       parent: 1
   - uid: 832
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -2.5,0.5
       parent: 1
 - proto: IngotGold

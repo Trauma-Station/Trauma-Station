@@ -1855,91 +1855,76 @@ entities:
   - uid: 146
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -1.5,15.5
       parent: 1
   - uid: 147
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 0.5,15.5
       parent: 1
   - uid: 148
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 1.5,15.5
       parent: 1
   - uid: 149
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 2.5,15.5
       parent: 1
   - uid: 150
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -0.5,15.5
       parent: 1
   - uid: 151
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 2.5,14.5
       parent: 1
   - uid: 152
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 3.5,14.5
       parent: 1
   - uid: 153
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -1.5,14.5
       parent: 1
   - uid: 154
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -2.5,14.5
       parent: 1
   - uid: 396
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,-12.5
       parent: 1
   - uid: 401
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,-11.5
       parent: 1
   - uid: 402
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -1.5,-13.5
       parent: 1
   - uid: 403
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -1.5,-12.5
       parent: 1
   - uid: 405
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -1.5,-11.5
       parent: 1
   - uid: 409
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,-13.5
       parent: 1
 - proto: GunneryServerMedium

@@ -3775,61 +3775,51 @@ entities:
   - uid: 44
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -0.5,3.5
       parent: 1
   - uid: 45
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 1.5,3.5
       parent: 1
   - uid: 136
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -3.5,4.5
       parent: 1
   - uid: 139
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -5.5,37.5
       parent: 1
   - uid: 156
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -4.5,4.5
       parent: 1
   - uid: 172
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -5.5,35.5
       parent: 1
   - uid: 281
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -12.5,27.5
       parent: 1
   - uid: 282
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -10.5,27.5
       parent: 1
   - uid: 299
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -9.5,29.5
       parent: 1
   - uid: 301
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -9.5,30.5
       parent: 1
   - uid: 395
@@ -3924,23 +3914,6 @@ entities:
     - type: Transform
       pos: -12.541359,30.375061
       parent: 1
-- proto: MagazineCaselessRifleShort
-  entities:
-  - uid: 829
-    components:
-    - type: Transform
-      pos: -8.364405,14.227091
-      parent: 1
-  - uid: 830
-    components:
-    - type: Transform
-      pos: -8.423476,14.7088995
-      parent: 1
-  - uid: 831
-    components:
-    - type: Transform
-      pos: -8.738525,14.531908
-      parent: 1
 - proto: MagazineHighCaliber
   entities:
   - uid: 719
@@ -3973,6 +3946,21 @@ entities:
     components:
     - type: Transform
       pos: -8.344844,11.408643
+      parent: 1
+  - uid: 829
+    components:
+    - type: Transform
+      pos: -8.364405,14.227091
+      parent: 1
+  - uid: 830
+    components:
+    - type: Transform
+      pos: -8.423476,14.7088995
+      parent: 1
+  - uid: 831
+    components:
+    - type: Transform
+      pos: -8.738525,14.531908
       parent: 1
 - proto: MagazinePulseShotgun
   entities:
@@ -4125,6 +4113,19 @@ entities:
       parent: 1
 - proto: OxygenTankFilled
   entities:
+  - uid: 444
+    components:
+    - type: Transform
+      pos: -2.5516665,11.626218
+      parent: 1
+    - type: GasTank
+      toggleActionEntity: 633
+    - type: ActionsContainer
+    - type: ContainerContainer
+      containers:
+        actions: !type:Container
+          ents:
+          - 633
   - uid: 447
     components:
     - type: Transform
@@ -4151,7 +4152,7 @@ entities:
         actions: !type:Container
           ents:
           - 95
-- proto: PosterContrabandGoobRedFOSS
+- proto: PosterContrabandWaffleCorp
   entities:
   - uid: 909
     components:
@@ -4899,7 +4900,7 @@ entities:
     - type: Transform
       pos: -5.5,41.5
       parent: 1
-- proto: RevFlash
+- proto: Flash
   entities:
   - uid: 841
     components:
@@ -7895,21 +7896,6 @@ entities:
     - type: Transform
       pos: -5.5,28.5
       parent: 1
-- proto: WaterVaporTankFilled
-  entities:
-  - uid: 444
-    components:
-    - type: Transform
-      pos: -2.5516665,11.626218
-      parent: 1
-    - type: GasTank
-      toggleActionEntity: 633
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 633
 - proto: WeaponLightMachineGunRPD
   entities:
   - uid: 903
