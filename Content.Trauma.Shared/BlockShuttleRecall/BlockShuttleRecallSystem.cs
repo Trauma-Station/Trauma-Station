@@ -19,12 +19,7 @@ public sealed partial class BlockShuttleRecallSystem : EntitySystem
         if (!HasComp<TraumaCommsConsoleComponent>(args.Target))
             return;
 
-        if (HasComp<XenoborgComponent>(ent.Owner)) // Xenoborgs can't be stunned for some reason?
-        {
-            args.Cancelled = true;
-            return;
-        }
-
+        args.Cancelled = true;
         _electrocution.TryDoElectrocution(ent.Owner, null, ent.Comp.ShockDamage, ent.Comp.ShockTime, true, ignoreInsulation: true);
     }
 }

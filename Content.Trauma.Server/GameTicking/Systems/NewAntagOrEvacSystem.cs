@@ -19,7 +19,7 @@ public sealed partial class NewAntagOrEvacSystem : CommonNewAntagOrEvacSystem
     {
         if (!TryComp<NewAntagOrEvacComponent>(uid, out var comp))
         {
-            Log.Error($"Tried to SpawnNewAntagIfBelowPercent on entity: {uid} but it didn't have NewAntagOrEvacComponent");
+            Log.Error($"Tried to SpawnNewAntagIfBelowPercent on entity: {ToPrettyString(uid)} but it didn't have NewAntagOrEvacComponent");
             return;
         }
 

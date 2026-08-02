@@ -1,11 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Shared.Revolutionary;
-using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Shared.Mindshield.Components;
-using Content.Trauma.Common.CCVar;
-using Robust.Shared.Configuration;
 // </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
@@ -48,11 +45,6 @@ namespace Content.Server.GameTicking.Rules;
 // Heavily edited by goobstation. If you want to upstream something think twice
 public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
 {
-    // <Trauma>
-    [Dependency] private GameTicker _ticker = default!;
-    [Dependency] private RoundEndSystem _roundEnd = default!;
-    private static readonly EntProtoId ErtSecurity = "SpawnERTSecurity";
-    // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private EuiManager _euiMan = default!;
