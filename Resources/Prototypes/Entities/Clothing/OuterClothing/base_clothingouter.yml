@@ -187,7 +187,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions: # having a suit on saves your limbs
       Dismemberment: 0.2
       OrganDamage: 0.2

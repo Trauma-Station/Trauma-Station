@@ -19,7 +19,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -76,7 +76,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions: # having a suit on saves your limbs
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -124,7 +124,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions: # having a suit on saves your limbs
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -167,7 +167,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Heat: 0.85
@@ -210,7 +210,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Blunt: 0.8

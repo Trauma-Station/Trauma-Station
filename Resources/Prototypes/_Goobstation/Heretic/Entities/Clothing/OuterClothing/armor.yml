@@ -41,6 +41,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHeretic
