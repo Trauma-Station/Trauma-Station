@@ -46,15 +46,15 @@ jobs:
           }
 
           await github.rest.issues.createComment({
-            owner,
-            repo,
+            owner: owner,
+            repo: repo,
             issue_number: pr_number,
             body: "This PR has been automatically closed for being a webedit.\nUse a git client and read [Git for the SS14 Developer](https://docs.spacestation14.com/en/general-development/setup/git-for-the-ss14-developer.html) or ask for help."
           });
 
           await github.rest.pulls.update({
-            owner,
-            repo,
+            owner: owner,
+            repo: repo,
             pull_number: pr_number,
             state: "closed"
           });
