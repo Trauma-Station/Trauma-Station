@@ -51,6 +51,7 @@
 - type: weightedRandom
   id: SpyBountiesMedium
   weights:
+    OrganMedium: 4
     EnergyChemDispenser: 1
     ComputerScienceXenobiologyBounty: 1
     ComputerShuttleCargo: 1
@@ -101,6 +102,7 @@
 - type: weightedRandom
   id: SpyBountiesHard
   weights:
+    OrganHard: 4
     Hypospray: 1
     ClothingOuterHardsuitRd: 1
     HandTeleporter: 1

@@ -286,3 +286,11 @@
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
     protos: [TelescopicBaton]
+
+- type: spyBounty
+  id: OrganMedium
+  difficulty: Medium
+  repeatable: true
+  selector: !type:SpyOrganBountySelectorEvent
+    validOrgans: [LegLeft, LegRight, ArmLeft, ArmRight, Stomach, Eyes, Kidneys, Liver]
+    departmentBlacklist: [Command, Security]

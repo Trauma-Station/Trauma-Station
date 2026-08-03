@@ -14,6 +14,26 @@
     - SpyRole
 
 - type: entity
+  parent: BaseSpyObjective
+  id: SpyRandomObjective
+  name: Do something
+  description: Don't fail.
+  components:
+  - type: Objective
+    unique: false
+  - type: RoleplayObjective
+  - type: RandomObjective
+    nameFormats: SpyObjectives
+    nameSegments:
+    - SpyStealables
+    - SpyDepartment
+    - SpyAffected
+    - SpyLocation
+    - SpyEscape
+    - SpyRivals
+    - SpyHappenings
+
+- type: entity
   parent: [BaseSpyObjective, BaseSurviveObjective]
   id: SpySurviveObjective
   name: Survive

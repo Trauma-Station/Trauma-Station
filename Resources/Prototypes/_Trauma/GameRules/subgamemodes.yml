@@ -61,11 +61,11 @@
   - type: AntagSelection
     antags:
     - !type:LinearAntagCount
-      proto: Traitor
+      proto: Spy
       range:
         min: 1
-        max: 5
-      playerRatio: 15
+        max: 3
+      playerRatio: 20
 
 - type: entity
   parent: Changeling

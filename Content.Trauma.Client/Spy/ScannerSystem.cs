@@ -1,5 +1,3 @@
-using Content.Goobstation.Client.Shaders;
-using Content.Goobstation.Common.Shaders;
 using Content.Trauma.Shared.Spy;
 using Robust.Shared.Timing;
 
@@ -9,21 +7,17 @@ public sealed partial class ScannerSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlayMan = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public static readonly ProtoId<ShaderPrototype> ScanShader = "Scan";
+    private ShaderInstance _shader = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _overlayMan.AddOverlay(new ScannerOverlay());
-
-        SubscribeLocalEvent<ActiveScannerComponent, AfterAutoHandleStateEvent>(OnState);
-        SubscribeLocalEvent<ActiveScannerComponent, ComponentShutdown>(OnScannerShutdown);
-
-        SubscribeLocalEvent<BeingScannedComponent, ComponentStartup>(OnScannedStartup);
-        SubscribeLocalEvent<BeingScannedComponent, ComponentShutdown>(OnScannedShutdown);
-        SubscribeLocalEvent<BeingScannedComponent, BeforePostMultiShaderRenderEvent>(OnBeforeRender);
+        _shader = ProtoMan.Index(ScanShader).InstanceUnique();
     }
 
     public override void Shutdown()
@@ -33,46 +27,46 @@ public sealed partial class ScannerSystem : EntitySystem
         _overlayMan.RemoveOverlay<ScannerOverlay>();
     }
 
-    private void OnBeforeRender(Entity<BeingScannedComponent> ent, ref BeforePostMultiShaderRenderEvent args)
+    [SubscribeLocalEvent]
+    private void OnBeforeRender(Entity<BeingScannedComponent> ent, ref BeforePostShaderRenderEvent args)
     {
-        if (args.Shader != ScanShader)
+        if (args.Id != ScanShader)
             return;
 
         if (!Exists(ent.Comp.Scanner) || !TryComp(ent.Comp.Scanner, out ActiveScannerComponent? scanner))
             return;
 
         var ratio = InverseLerp(scanner.ScanStartTime, scanner.ScanEndTime, _timing.CurTime);
-        args.Instance.SetParameter("ratio", ratio);
+        args.Shader.SetParameter("ratio", ratio);
         ent.Comp.Ratio = ratio;
         var zoom = 1f;
 
         if (args.Viewport.Eye is { } eye)
             zoom = eye.Zoom.X;
 
-        args.Instance.SetParameter("zoom", zoom);
+        args.Shader.SetParameter("zoom", zoom);
     }
 
+    [SubscribeLocalEvent]
     private void OnScannedShutdown(Entity<BeingScannedComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
             return;
 
-        var ev = new SetMultiShaderEvent(ScanShader,
-            false,
-            ent.Comp.MultiShaderOrder,
-            RaiseEvent: true);
-        RaiseLocalEvent(ent, ref ev);
+        _sprite.RemovePostShader(ent.Owner, ScanShader);
     }
 
+    [SubscribeLocalEvent]
     private void OnScannedStartup(Entity<BeingScannedComponent> ent, ref ComponentStartup args)
     {
-        var ev = new SetMultiShaderEvent(ScanShader,
-            true,
-            ent.Comp.MultiShaderOrder,
-            RaiseEvent: true);
-        RaiseLocalEvent(ent, ref ev);
+        _sprite.SetPostShader(ent.Owner,
+            new(ScanShader, _shader)
+            {
+                RaiseShaderEvent = true
+            });
     }
 
+    [SubscribeLocalEvent]
     private void OnScannerShutdown(Entity<ActiveScannerComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent.Comp.ScannedObject))
@@ -81,6 +75,7 @@ public sealed partial class ScannerSystem : EntitySystem
         RemCompDeferred<BeingScannedComponent>(ent.Comp.ScannedObject);
     }
 
+    [SubscribeLocalEvent]
     private void OnState(Entity<ActiveScannerComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (!Exists(ent.Comp.ScannedObject))

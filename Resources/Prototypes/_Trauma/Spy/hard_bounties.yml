@@ -171,3 +171,11 @@
     protos: [WeaponEnergyTurretSecurity]
     queryComp: TurretTargetSettings
     areas: [AreaArmory]
+
+- type: spyBounty
+  id: OrganHard
+  difficulty: Hard
+  repeatable: true
+  selector: !type:SpyOrganBountySelectorEvent
+    validOrgans: [LegLeft, LegRight, ArmLeft, ArmRight, Stomach, Eyes, Kidneys, Liver]
+    departmentWhitelist: [Command, Security]

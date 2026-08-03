@@ -28,8 +28,8 @@
         </Collapsible>
     </BoxContainer>
     <PanelContainer StyleClasses="SpyBountyClaimed" HorizontalExpand="True" VerticalExpand="True"
-                    Name="ClaimedPanel" Visible="False">
+                    Name="BlockedPanel" Visible="False">
         <Label StyleClasses="SpyBountyClaimed" HorizontalAlignment="Center" VerticalAlignment="Center"
-               Text="{Loc 'spy-uplink-claimed'}" />
+               Name="BlockedLabel" Text="{Loc 'spy-uplink-claimed'}" />
     </PanelContainer>
 </Control>

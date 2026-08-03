@@ -7,7 +7,6 @@ using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Interaction;
 using Content.Shared.Roles.Components;
 using Content.Shared.Store;
 using Content.Shared.Verbs;
@@ -17,6 +16,7 @@ using Content.Trauma.Shared.Spy;
 using Content.Trauma.Shared.Spy.Ui;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.Audio;
+using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -34,6 +34,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
     [SubscribeLocalEvent]
     private void OnSteal(Entity<SpyUplinkComponent> ent, ref SpyStealDoAfterEvent args)
@@ -45,7 +46,8 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target is not { } target || !TryGetEntity(args.Rule, out var rule) ||
             !TryComp(rule, out SpyRuleComponent? ruleComp) ||
             ruleComp.CurrentBounties.FirstOrDefault(x => x.BountyProto == protoId) is not { } bounty ||
-            !IsStealable(target, bounty) ||
+            !TryGetEntity(args.StealTarget, out var stealTarget) ||
+            !IsStealable(target, bounty, out var st) || st != stealTarget.Value ||
             TryGetSpyRole(args.User) is not { } role)
             return;
 
@@ -53,7 +55,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         var despawn = Factory.GetComponent<FadingTimedDespawnComponent>();
         despawn.Lifetime = TimeSpan.Zero;
         despawn.FadeOutTime = TimeSpan.FromSeconds(2);
-        AddComp(target, despawn);
+        AddComp(st, despawn);
 
         args.Handled = true;
 
@@ -76,20 +78,24 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         RefreshUi(ruleComp.NextRefresh, ruleComp.CurrentBounties);
     }
 
-    // TODO make this a verb
     [SubscribeLocalEvent]
-    private void OnInteract(Entity<SpyUplinkComponent> ent, ref BeforeRangedInteractEvent args)
+    private void OnInteract(Entity<SpyUplinkComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
     {
-        if (!args.CanReach || args.Handled || args.Target is not { } target || HasComp<ActiveScannerComponent>(ent))
+        if (!args.CanComplexInteract || !args.CanInteract || !args.CanAccess)
             return;
 
+        var target = args.Target;
         var user = args.User;
 
         if (TryGetSpyRule(user) is not { } rule)
             return;
 
-        if (TrySteal(target, ent, user, rule))
-            args.Handled = true;
+        args.Verbs.Add(new UtilityVerb
+        {
+            Priority = 20,
+            Act = () => TrySteal(target, ent, user, rule),
+            Text = Loc.GetString("spy-uplink-steal-verb"),
+        });
     }
 
     [SubscribeLocalEvent]
@@ -107,8 +113,6 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         {
             Act = () => OpenUi(user, ent, rule),
             Text = Loc.GetString("spy-uplink-open-verb"),
-            // TODO VERB ICON find a better icon
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
         });
     }
 
@@ -159,37 +163,41 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         args.PushMarkup(Loc.GetString("spy-uplink-examine-message"));
     }
 
-    private bool TrySteal(EntityUid uid,
+    private void TrySteal(EntityUid uid,
         Entity<SpyUplinkComponent> uplink,
         EntityUid user,
         Entity<SpyRuleComponent?> rule)
     {
         if (!Resolve(rule, ref rule.Comp))
-            return false;
+            return;
+
+        if (HasComp<ActiveScannerComponent>(uplink))
+            return;
 
         foreach (var bounty in rule.Comp.CurrentBounties)
         {
-            if (!IsStealable(uid, bounty))
+            if (!IsStealable(uid, bounty, out var target))
                 continue;
 
-            Steal(uid, uplink, user, bounty, rule);
-            return true;
+            Steal(uid, uplink, user, bounty, rule, target);
+            return;
         }
 
-        return false;
+        // TODO steal fail popup
     }
 
     private void Steal(EntityUid uid,
         Entity<SpyUplinkComponent> uplink,
         EntityUid user,
         SpyBounty bounty,
-        EntityUid rule)
+        EntityUid rule,
+        EntityUid stealTarget)
     {
         var proto = ProtoMan.Index(bounty.BountyProto);
         var doArgs = new DoAfterArgs(EntityManager,
             user,
             proto.TheftTime,
-            new SpyStealDoAfterEvent(bounty.BountyProto, GetNetEntity(rule)),
+            new SpyStealDoAfterEvent(bounty.BountyProto, GetNetEntity(rule), GetNetEntity(stealTarget)),
             uplink,
             uid,
             uplink)
@@ -288,8 +296,10 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         return rule;
     }
 
-    public bool IsStealable(EntityUid uid, SpyBounty bounty)
+    public bool IsStealable(EntityUid uid, SpyBounty bounty, out EntityUid stealTarget)
     {
+        stealTarget = uid;
+
         if (bounty.Claimed)
             return false;
 
@@ -299,6 +309,22 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         if (bounty.ValidEntities.Count == 0)
             return bounty.Protos is { } protos && Prototype(uid)?.ID is { } id && protos.Contains(id);
 
-        return bounty.ValidEntities.Contains(GetNetEntity(uid));
+        foreach (var netValid in bounty.ValidEntities)
+        {
+            var valid = GetEntity(netValid);
+            if (valid == uid)
+                return true;
+
+            foreach (var container in _container.GetContainingContainers(valid))
+            {
+                if (container.Owner != uid)
+                    continue;
+
+                stealTarget = valid;
+                return true;
+            }
+        }
+
+        return false;
     }
 }

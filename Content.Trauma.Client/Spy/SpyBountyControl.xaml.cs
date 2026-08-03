@@ -51,6 +51,6 @@ public sealed partial class SpyBountyControl : Control
 
         BountyRewardTexture.Texture = texture;
 
-        ClaimedPanel.Visible = data.Claimed;
+        BlockedPanel.Visible = data.Claimed;
     }
 }

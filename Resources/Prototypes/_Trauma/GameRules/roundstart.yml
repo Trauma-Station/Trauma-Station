@@ -99,11 +99,17 @@
     lateJoinAdditional: true
     antags:
     - !type:LinearAntagCount
-      playerRatio: 5
+      playerRatio: 6
       proto: Spy
       range:
         min: 1
-        max: 10
+        max: 8
+  # Get 3 random rp objectives and 1 real objective
+  - type: AntagObjectives
+    objectives:
+    - SpyRandomObjective
+    - SpyRandomObjective
+    - SpyRandomObjective
   - type: AntagRandomObjectives
     maxDifficulty: 10
     sets:

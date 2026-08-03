@@ -1,4 +1,6 @@
+using Content.Shared.Body;
 using Content.Shared.Objectives;
+using Content.Shared.Roles;
 using Content.Shared.Store;
 
 namespace Content.Trauma.Shared.Spy;
@@ -75,6 +77,9 @@ public sealed partial class SpyBountyPrototype : IPrototype
 
     [DataField]
     public TimeSpan TheftTime = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public bool Repeatable;
 }
 
 [Prototype]
@@ -158,7 +163,31 @@ public sealed partial class SpySpecificEntityBountySelectorEvent : BaseSpyBounty
     {
         return new SpySpecificEntityBountySelectorEvent
         {
-            Protos = new(Protos), QueryComp = QueryComp, Areas = Areas is not { } areas ? null : new(areas)
+            Protos = new(Protos),
+            QueryComp = QueryComp,
+            Areas = Areas is not { } areas ? null : new(areas)
+        };
+    }
+}
+
+public sealed partial class SpyOrganBountySelectorEvent : BaseSpyBountySelectorEvent
+{
+    [DataField(required: true)]
+    public HashSet<ProtoId<OrganCategoryPrototype>> ValidOrgans;
+
+    [DataField]
+    public HashSet<ProtoId<DepartmentPrototype>>? DepartmentWhitelist;
+
+    [DataField]
+    public HashSet<ProtoId<DepartmentPrototype>>? DepartmentBlacklist;
+
+    public override BaseSpyBountySelectorEvent GetEvent()
+    {
+        return new SpyOrganBountySelectorEvent
+        {
+            ValidOrgans = new(ValidOrgans),
+            DepartmentWhitelist = DepartmentWhitelist == null ? null : new(DepartmentWhitelist),
+            DepartmentBlacklist = DepartmentBlacklist == null ? null : new(DepartmentBlacklist)
         };
     }
 }

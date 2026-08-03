@@ -38,7 +38,10 @@ public sealed partial class SpyRuleComponent : Component
     public HashSet<SpyBounty> CurrentBounties = new();
 
     [DataField]
-    public TimeSpan RefreshTime = TimeSpan.FromMinutes(10);
+    public TimeSpan FirstRefreshTime = TimeSpan.FromMinutes(10);
+
+    [DataField]
+    public TimeSpan RefreshTime = TimeSpan.FromMinutes(5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextRefresh = TimeSpan.Zero;
