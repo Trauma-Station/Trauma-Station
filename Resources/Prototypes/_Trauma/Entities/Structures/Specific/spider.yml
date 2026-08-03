@@ -2,6 +2,7 @@
 
 
 - type: entity
+  abstract: true
   parent: BaseStructure
   id: BaseSpiderStructure
   components:
