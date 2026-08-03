@@ -37,8 +37,8 @@
     eggSpawn:
     - id: FoodEgg
   - type: SpamEmitSound
-    minInterval: 15
-    maxInterval: 30
+    minInterval: 60
+    maxInterval: 120
     sound:
       collection: AmusingDuckCollection
   - type: InteractionPopup

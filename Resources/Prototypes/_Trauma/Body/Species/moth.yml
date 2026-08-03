@@ -23,13 +23,34 @@
     # if you aren't moth or vox
     - Moth
     - Vox # They are birds I guess
-    toAdd:
+    toAddWhitelisted:
     - type: TackleModifier # Innate tackle
-      allowCollision: false
-      speedMultiplier: 1
-      rangeMultiplier: 1
-      cooldownMultiplier: 2.167 # Roughly 6.5s
-      userEffect: MothDash
+      modifiers:
+      - priority: null
+        affectsOtherModifiers: true
+        rangeMultiplier: 1.1
+        skillMod: 2
+      - priority: 1
+        allowCollision: false
+        staminaCostMultiplier: 1.4
+        knockdownTimeMultiplier: 0
+        speedMultiplier: 0.65
+        rangeMultiplier: 0.65
+        cooldownMultiplier: 2.167 # Roughly 6.5s
+        userEffect: MothDash
+    toAdd:
+    - type: TackleModifier # Worse innate tackle
+      modifiers:
+      - priority: null
+        affectsOtherModifiers: true
+        rangeMultiplier: 1.1
+        skillMod: 2
+      - priority: 1
+        allowCollision: false
+        staminaCostMultiplier: 1.4
+        speedMultiplier: 0.65
+        rangeMultiplier: 0.65
+        cooldownMultiplier: 2.167
 
 - type: entity
   parent: [ OrganBaseWings, OrganMothExternal ]

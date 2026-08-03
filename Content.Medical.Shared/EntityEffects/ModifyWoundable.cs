@@ -15,9 +15,6 @@ public sealed partial class ModifyWoundable : EntityEffectBase<ModifyWoundable>
 
     [DataField]
     public bool CanBleed;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
 }
 
 public sealed class ModifyWoundableEffectSystem : EntityEffectSystem<WoundableComponent, ModifyWoundable>
@@ -27,6 +24,6 @@ public sealed class ModifyWoundableEffectSystem : EntityEffectSystem<WoundableCo
         var effect = args.Effect;
         ent.Comp.CanRemove = effect.CanRemove;
         ent.Comp.CanBleed = effect.CanBleed;
-        Dirty(ent);
+        DirtyFields(ent, ent.Comp, null, nameof(WoundableComponent.CanRemove), nameof(WoundableComponent.CanBleed));
     }
 }

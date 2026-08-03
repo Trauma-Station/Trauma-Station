@@ -11,8 +11,7 @@ public abstract partial class SharedTargetingSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private BodyPartSystem _part = default!;
-
-    private EntityQuery<TargetingComponent> _query;
+    [Dependency] private EntityQuery<TargetingComponent> _query = default!;
 
     /// <summary>
     /// Array of all valid targeting enums.
@@ -32,16 +31,7 @@ public abstract partial class SharedTargetingSystem : EntitySystem
         TargetBodyPart.RightFoot,
     ];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _query = GetEntityQuery<TargetingComponent>();
-
-        SubscribeLocalEvent<TargetingComponent, GetTargetedPartEvent>(OnGetTargetedPart);
-        SubscribeAllEvent<ChangeTargetMessage>(OnChangeTarget);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetTargetedPart(Entity<TargetingComponent> ent, ref GetTargetedPartEvent args)
     {
         if (args.Part != null)
@@ -51,14 +41,21 @@ public abstract partial class SharedTargetingSystem : EntitySystem
         args.Part = _part.FindBodyPart(args.Target, partType, symmetry)?.Owner;
     }
 
+    [SubscribeLocalEvent, SubscribeNetworkEvent]
     private void OnChangeTarget(ChangeTargetMessage msg, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity is not {} user ||
-            !_query.TryComp(user, out var comp) ||
-            comp.Target == msg.BodyPart)
+        if (args.SenderSession.AttachedEntity is not { } user)
             return;
 
-        comp.Target = msg.BodyPart;
+        SetTarget(user, msg.BodyPart);
+    }
+
+    public void SetTarget(EntityUid user, TargetBodyPart target)
+    {
+        if (!_query.TryComp(user, out var comp) || comp.Target == target)
+            return;
+
+        comp.Target = target;
         Dirty(user, comp);
     }
 }

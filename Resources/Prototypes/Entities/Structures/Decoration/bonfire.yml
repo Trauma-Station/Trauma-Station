@@ -3,6 +3,11 @@
   parent: BaseStructure
   id: BaseBonfire
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Bonfire
+  # </Trauma>
   - type: Fixtures
     fixtures:
       fix1:

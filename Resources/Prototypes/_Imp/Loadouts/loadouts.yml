@@ -36,3 +36,5 @@
   storage:
     back:
     - BoxSurvivalSlotsVapor
+    - ClothingNeckDecapoidVaporizer
+    - DecapoidVaporTank

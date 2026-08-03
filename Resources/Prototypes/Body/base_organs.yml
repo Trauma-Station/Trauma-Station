@@ -121,7 +121,7 @@
       - Special
 
 - type: entity
-  parent: OrganBaseExternal # Shitmed
+  parent: OrganBaseExternal # Trauma
   id: OrganBaseHead
   name: head
   abstract: true
@@ -136,8 +136,10 @@
     - Ears
   - type: ChildOrgan
     parents: [ Torso ]
+  - type: Bone
+    integrityCap: 100
+    boneIntegrity: 100
   - type: Woundable
-    boneEntity: BoneNeck
     integrity: 80
     integrityCap: 80
     thresholds:

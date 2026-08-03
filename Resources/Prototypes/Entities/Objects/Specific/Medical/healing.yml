@@ -278,24 +278,33 @@
   name: tourniquet
   description: Stops bleeding! Hopefully.
   components:
-    - type: Item
-      heldPrefix: tourniquet
-    # <Shitmed> - fully reworked
-    - type: Tourniquet
-      blockedBodyParts:
-      - Head
-      - Torso
-      putOnSound:
-        path: "/Audio/Items/Medical/brutepack_begin.ogg"
-      putOffSound:
-        path: "/Audio/Items/Medical/brutepack_end.ogg"
     - type: Tag
       tags:
         - SecBeltEquip
         - Tourniquet
     - type: Sprite
       state: tourniquet
-    # </Shitmed>
+    - type: Item
+      heldPrefix: tourniquet
+    - type: Healing
+      damageContainers:
+        - Biological
+      damage:
+        types:
+          Blunt: 5 # Tourniquets HURT
+          Asphyxiation: 5 # Essentially Stopping all blood reaching a part of your body
+      bloodlossModifier: -10 # Tourniquets stop bleeding
+      delay: 0.5
+      healingBeginSound:
+        path: "/Audio/Items/Medical/brutepack_begin.ogg"
+        params:
+          volume: 1.0
+          variation: 0.125
+      healingEndSound:
+        path: "/Audio/Items/Medical/brutepack_end.ogg"
+        params:
+          volume: 1.0
+          variation: 0.125
 
 - type: entity
   name: roll of gauze

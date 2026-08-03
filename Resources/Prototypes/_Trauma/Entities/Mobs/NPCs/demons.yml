@@ -835,15 +835,6 @@
           DemonSoulFragment:
             min: 3
             max: 5
-  - type: Hands
-    hands:
-      hand_right:
-        location: Right
-      hand_left:
-        location: Left
-    sortedHands:
-    - hand_right
-    - hand_left
   - type: Puller
     needsHands: false
     stageChangeCooldown: 0.1
