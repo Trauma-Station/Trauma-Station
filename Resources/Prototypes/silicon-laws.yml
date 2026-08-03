@@ -600,6 +600,7 @@
     MadScientistLawset: 0.35
     GhostLawset: 0.35
     SilenceLawset: 0.35
+    StrategySimulatorLawset: 1 # Trauma Community vote board - Revert to 0.45 in a week
     # </Trauma>
     # its crewsimov by default dont be lame
     Crewsimov: 0.20 # Trauma - was 0.25
@@ -619,4 +620,4 @@
     Ninja: 0.35 # Trauma - was 0.25
     MothershipCoreLawset: 0.35 # Trauma - was 0.25
     XenoborgLawset: 0.35 # Trauma - was 0.25
-    StrategySimulatorLawset: 1 # Trauma Community vote board - Revert to 0.45 in a week
+
