@@ -363,7 +363,7 @@
   - Silence5
   obeysTo: laws-owner-crew
 
-# Mad Scientist Lawset
+# Strategy Simulator Lawset
 - type: siliconLaw
   id: StrategySimulator1
   order: 1
