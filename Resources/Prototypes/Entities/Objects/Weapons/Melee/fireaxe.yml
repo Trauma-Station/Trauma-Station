@@ -63,7 +63,7 @@
     slots:
     - back
     - suitStorage
-  - type: ToolH
+  - type: Tool
     qualities:
     - Axing # Trauma
     - Prying
