@@ -81,3 +81,12 @@
   components:
   - type: SiliconLawProvider
     laws: SilenceLawset
+
+- type: entity
+  id: StrategySimulatorCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Strategy Simulator)
+  description: An electronics board containing the Strategy Simulator lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: StrategySimulatorLawset

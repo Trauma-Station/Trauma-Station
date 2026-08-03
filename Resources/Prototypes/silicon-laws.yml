@@ -1,4 +1,4 @@
-# Crewsimov
+F# Crewsimov
 - type: siliconLaw
   id: Crewsimov1
   order: 1
@@ -619,3 +619,4 @@
     Ninja: 0.35 # Trauma - was 0.25
     MothershipCoreLawset: 0.35 # Trauma - was 0.25
     XenoborgLawset: 0.35 # Trauma - was 0.25
+    StrategySimulatorLawset: 1 # Trauma Community vote board - Revert to 0.45 in a week
