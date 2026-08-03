@@ -30,9 +30,9 @@
     # Head
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
-    - map: [ "enum.HumanoidVisualLayers.Face" ] # Trauma
+    - map: [ "enum.HumanoidVisualLayers.Face" ]
     - map: [ "enum.HumanoidVisualLayers.Eyes" ]
-    - map: [ "enum.HumanoidVisualLayers.Special" ] # Trauma
+    - map: [ "enum.HumanoidVisualLayers.Special" ]
 
     # Limbs
     - map: [ "enum.HumanoidVisualLayers.RArm" ]
@@ -56,7 +56,6 @@
 
     - map: [ "shoes" ]
     - map: [ "ears" ]
-    # <Trauma>
     - map: [ "enum.HumanoidVisualEmoteLayers.Blush" ]
       sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
       state: blush
@@ -66,7 +65,6 @@
       sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
       state: tears
       visible: false
-    # </Trauma>
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]
@@ -78,13 +76,11 @@
     # Stuff that goes in front of equipment
     - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
-    # <Trauma>
     - map: [ "enum.HumanoidVisualEmoteLayers.Tongue" ]
       sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
       state: tongue
       visible: false
     - map: [ "maskalt" ]
-    # </Trauma>
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
@@ -109,13 +105,11 @@
       sprite: Objects/Misc/handcuffs.rsi
       state: body-overlay-2
       visible: false
-    # <Trauma>
     - map: [ "enum.HumanoidVisualEmoteLayers.Sigh" ]
       loop: false
       sprite: _Trauma/Mobs/Effects/emote_visuals.rsi
       state: sigh
       visible: false
-    # </Trauma>
 
 - type: entity
   id: BaseSpeciesAppearanceOrganlessDecapoid
@@ -125,11 +119,9 @@
   abstract: true
   save: false
   components:
-  # <Shitmed>
   - type: Legs # prevent standing etc with not enough legs
   - type: BodyEquipment # prevent equipping items if you are missing the relevant limbs
   - type: BodyCache # cache which organ is in which slot to avoid O(N) lookups
-  # </Shitmed>
   - type: Body
   - type: VisualBody
   - type: Hands

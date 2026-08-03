@@ -118,6 +118,7 @@
   discountCategory: null
   categories:
   - UplinkSkills
+
 ## Ranged ##
 
 - type: listing
