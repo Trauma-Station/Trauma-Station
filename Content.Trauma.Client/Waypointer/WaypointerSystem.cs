@@ -69,17 +69,11 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
 
     private void OnPlayerAttached(EntityUid player, ActiveWaypointerComponent comp, LocalPlayerAttachedEvent args)
     {
-        if (args.Entity != _player.LocalEntity)
-            return;
-
         _overlay.AddOverlay(_waypointerOverlay);
     }
 
     private void OnPlayerDetached(EntityUid player, ActiveWaypointerComponent comp, LocalPlayerDetachedEvent args)
     {
-        if (args.Entity != _player.LocalEntity)
-            return;
-
         _overlay.RemoveOverlay(_waypointerOverlay);
     }
 }
