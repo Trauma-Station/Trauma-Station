@@ -1,0 +1,12 @@
+﻿- type: entity
+  id: StrategySimulatorLawboard
+  parent: [BaseElectronics]
+  name: strategy simulator lawboard
+  description: A lawboard that contains the Strategy Simulator lawset
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: StrategySimulatorLawset
+
