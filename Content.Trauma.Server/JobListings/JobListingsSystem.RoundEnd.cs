@@ -3,6 +3,7 @@
 using System.Text;
 using Content.Server.Objectives;
 using Content.Shared.Actions;
+using Content.Shared.Mind;
 using Content.Trauma.Shared.JobListings;
 
 namespace Content.Trauma.Server.JobListings;
@@ -28,13 +29,13 @@ public sealed partial class JobListingsSystem
             if (jobBoard.Mind is null)
                 return;
 
-            if (!_mind.TryGetMind(jobBoard.Mind.Value, out var mind, out var mindComp))
+            if (!TryComp<MindComponent>(jobBoard.Mind.Value, out var mindComp))
                 continue;
 
-            var name = _objectives.GetTitle((mind, mindComp), Name(mindComp.OwnedEntity ?? mind));
+            var name = _objectives.GetTitle((jobBoard.Mind.Value, mindComp), Name(mindComp.OwnedEntity ?? jobBoard.Mind.Value));
             var level = GetReputationLevel((uid, jobBoard));
             var title = Loc.GetString($"job-listings-ui-reputation-level-{level}");
-            sb.AppendLine(Loc.GetString("job-listing-round-end", ("name", name), ("count", jobBoard.JobsCompleted), ("reputation", jobBoard.Reputation), ("title", title)));
+            sb.AppendLine(Loc.GetString("job-listings-round-end", ("name", name), ("count", jobBoard.JobsCompleted), ("reputation", jobBoard.Reputation), ("title", title)));
         }
 
         args.Text = sb.ToString();
