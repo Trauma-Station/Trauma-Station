@@ -46,7 +46,7 @@ public sealed partial class HereticComponent : Component
     ///     How much targets can a heretic have?
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int MaxTargets = 6;
+    public int MaxTargets = 5;
 
     /// <summary>
     ///     Indicates a path the heretic is on.
@@ -175,17 +175,22 @@ public sealed partial class HereticComponent : Component
     public int PassiveLevel;
 }
 
-[DataDefinition, Serializable, NetSerializable]
+[DataRecord, Serializable, NetSerializable]
 public sealed partial class SacrificeTargetData
 {
-    [DataField]
     public NetEntity Entity;
 
-    [DataField]
-    public HumanoidCharacterProfile Profile;
+    public string Name = string.Empty;
 
-    [DataField]
-    public ProtoId<JobPrototype> Job;
+    public SacrificeTargetType Type;
+}
+
+[Serializable, NetSerializable]
+public enum SacrificeTargetType : byte
+{
+    None,
+    Security,
+    Command,
 }
 
 [Serializable, NetSerializable]

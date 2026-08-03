@@ -148,16 +148,19 @@
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
     notificationsEnabled: false
-    diskSpace: 10 # DeltaV
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NewsReaderCartridge
-    - LogProbeCartridge
-    - WantedListCartridge
-    - MedTekCartridge
-    - AstroNavCartridge
-    - NanoChatCartridge # DeltaV
+    diskSpace: 10
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NewsReaderCartridge
+        - id: LogProbeCartridge
+        - id: WantedListCartridge
+        - id: MedTekCartridge
+        - id: AstroNavCartridge
+        - id: NanoChatCartridge
 
 - type: entity
   parent: NavyCaptainPDA
@@ -220,10 +223,13 @@
     state: pda-highcommand
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
-    preinstalled:
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NanoChatCartridge # DeltaV
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NanoChatCartridge
 
 - type: entity
   parent: BaseMedicalPDA

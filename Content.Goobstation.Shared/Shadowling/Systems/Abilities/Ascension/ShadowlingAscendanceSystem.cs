@@ -50,7 +50,7 @@ public sealed partial class ShadowlingAscendanceSystem : EntitySystem
 
         if (!TileFree(uid))
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-ascendance-fail"), uid, uid, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-ascendance-fail"), uid, uid, PopupType.MediumCaution);
             return;
         }
 

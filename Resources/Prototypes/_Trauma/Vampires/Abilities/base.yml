@@ -54,6 +54,7 @@
   - !type:AddComponents
     components:
     - type: NightVision
+      lightingColor: white
   - !type:PopupPredicted
     message: You gain night vision.
     visualType: Large

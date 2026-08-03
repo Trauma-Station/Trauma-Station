@@ -1655,6 +1655,50 @@
         LabyrinthHandbook: 1
 
 - type: entity
+  id: RitualSerpentclave
+  name: Wrong Key
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/serpentclave.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: true
+            components:
+            - Insulated
+            - Clothing
+            - FingerprintMask
+          name: heretic-ritual-ingredient-insuls
+        - whitelist:
+            tags:
+            - Wirecutter
+          name: heretic-ritual-ingredient-wirecutter
+        - whitelist:
+            tags:
+            - Screwdriver
+          name: heretic-ritual-ingredient-screwdriver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        Serpentclave: 1
+
+- type: entity
   id: RitualAscensionLock
   name: Unlock the Labyrinth
   components:
@@ -1772,8 +1816,8 @@
   name: Priest's Ritual
   components:
   - type: Sprite
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
+    sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi
+    state: icon
   - type: HereticRitual
     effects:
     - !type:LookupRitualEffect
@@ -2124,6 +2168,82 @@
         ClothingMaskMadHeretic: 1
 
 - type: entity
+  id: RitualEldritchCoin
+  name: Eldritch Coin
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    state: heretic
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GoldBar
+          name: heretic-ritual-ingredient-gold
+        - whitelist:
+            tags:
+            - SilverBar
+          name: heretic-ritual-ingredient-silver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        EldritchCoin: 1
+
+- type: entity
+  id: RitualIceSpear
+  name: Mysteries of Creation
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/ice_spear.rsi
+    state: spear
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Spear
+          name: heretic-ritual-ingredient-spear
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        SpearIceHeretic: 1
+
+## T2
+- type: entity
   id: RitualUnfathomableCurio
   name: Unfathomable Curio
   components:
@@ -2165,44 +2285,6 @@
       output:
         UnfathomableCurio: 1
 
-- type: entity
-  id: RitualEldritchCoin
-  name: Eldritch Coin
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
-    state: heretic
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SplitIngredientsRitualEffect
-      applyOn: Split
-      conditions:
-      - !type:ProcessIngredientsCondition
-        applyOn: Look
-        deleteEntitiesKey: Delete
-        splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            tags:
-            - GoldBar
-          name: heretic-ritual-ingredient-gold
-        - whitelist:
-            tags:
-            - SilverBar
-          name: heretic-ritual-ingredient-silver
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-    - !type:SpawnRitualEffect
-      applyOn: Platform
-      output:
-        EldritchCoin: 1
-
-## T2
 - type: entity
   id: RitualRusted
   name: Rusted Ritual
@@ -2683,3 +2765,83 @@
       applyOn: Platform
       output:
         MobGhoulMirrorMaid: 1
+
+- type: entity
+  id: RitualSharpMedal
+  name: Sharp Medal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - HandOrgan
+          name: heretic-ritual-ingredient-hand
+          amount: 2
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingNeckSharpMedal: 1
+
+- type: entity
+  id: RitualAshSpirit
+  name: Ashen Ritual
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: ash_walker
+  - type: HereticRitual
+    limit: 2
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Bonfire
+          name: heretic-ritual-ingredient-bonfire
+        - whitelist:
+            tags:
+            - Book
+          name: heretic-ritual-ingredient-book
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        MobGhoulAshSpirit: 1

@@ -47,13 +47,6 @@
   spawn: KitchenKnife
   icon: { sprite: Objects/Weapons/Melee/kitchen_knife.rsi, state: icon }
 
-- type: tool #Goob
-  id: Ignition
-  name: tool-quality-ignition-name
-  toolName: tool-quality-ignition-tool-name
-  spawn: Matchstick
-  icon: { sprite: Objects/Tools/matches.rsi, state: match_lit }
-
 - type: tool
   id: Sawing
   name: tool-quality-sawing-name
@@ -81,3 +74,10 @@
   toolName: tool-quality-brushing-tool-name
   spawn: WireBrush
   icon: { sprite: Objects/Specific/Janitorial/wirebrush.rsi, state: icon }
+
+- type: tool
+  id: Shearing
+  name: tool-quality-shearing-name
+  toolName: tool-quality-shearing-tool-name
+  spawn: Wirecutter
+  icon: { sprite: Objects/Tools/wirecutters.rsi, state: cutters-map }

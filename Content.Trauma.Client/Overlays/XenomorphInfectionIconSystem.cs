@@ -8,7 +8,6 @@ namespace Content.Trauma.Client.Overlays;
 
 public sealed partial class XenomorphInfectionIconSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -21,13 +20,13 @@ public sealed partial class XenomorphInfectionIconSystem : EntitySystem
     private void OnXenomorphInfectedGetStatusIconsEvent(EntityUid uid, XenomorphInfectedComponent component, ref GetStatusIconsEvent args)
     {
         if (component.InfectedIcons.TryGetValue(component.GrowthStage, out var infectedIcon)
-            && _prototype.TryIndex(infectedIcon, out var icon))
+            && ProtoMan.TryIndex(infectedIcon, out var icon))
             args.StatusIcons.Add(icon);
     }
 
     private void OnXenomorphLarvaVictimGetStatusIconsEvent(EntityUid uid, XenomorphLarvaVictimComponent component, ref GetStatusIconsEvent args)
     {
-        if (component.InfectedIcon.HasValue && _prototype.TryIndex(component.InfectedIcon.Value, out var icon))
+        if (component.InfectedIcon.HasValue && ProtoMan.TryIndex(component.InfectedIcon.Value, out var icon))
             args.StatusIcons.Add(icon);
     }
 }

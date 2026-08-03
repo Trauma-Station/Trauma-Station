@@ -13,7 +13,6 @@ namespace Content.Trauma.Shared.CosmicCult.Abilities;
 public sealed partial class CosmicLapseSystem : EntitySystem
 {
     [Dependency] private SharedCosmicCultSystem _cult = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedPolymorphSystem _polymorph = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private INetManager _net = default!;
@@ -31,7 +30,7 @@ public sealed partial class CosmicLapseSystem : EntitySystem
         if (action.Handled
             || HasComp<CosmicBlankComponent>(action.Target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-generic-fail"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-generic-fail"), ent, ent);
             return;
         }
 
@@ -44,15 +43,15 @@ public sealed partial class CosmicLapseSystem : EntitySystem
         if (_net.IsServer) // Predicted spawn looks bad with animations
             PredictedSpawnAtPosition(ent.Comp.LapseVFX, tgtpos);
 
-        _popup.PopupClient(Loc.GetString("cosmicability-lapse-success",
+        _popup.PopupEntity(Loc.GetString("cosmicability-lapse-success",
             ("target", Identity.Entity(action.Target, EntityManager))),
             ent,
             ent);
         var species = Comp<HumanoidProfileComponent>(action.Target).Species;
         ProtoId<PolymorphPrototype> polymorphId = "CosmicLapseMob" + species;
-        if (!_prototype.HasIndex(polymorphId))
+        if (!ProtoMan.HasIndex(polymorphId))
             polymorphId = HumanLapse;
-        if (!_prototype.Resolve(polymorphId, out var polymorph)) return;
+        if (!ProtoMan.Resolve(polymorphId, out var polymorph)) return;
         var copy = polymorph.Configuration;
 
         if (_cult.EntityIsCultist(action.Target))

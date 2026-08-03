@@ -34,12 +34,6 @@
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 100
@@ -118,6 +112,7 @@
     requirePower: true
     highVoltageNode: input
     mediumVoltageNode: ame
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -170,12 +165,6 @@
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 100

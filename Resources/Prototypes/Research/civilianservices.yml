@@ -8,13 +8,15 @@
     state: seedextractor
   discipline: CivilianServices
   tier: 1
-  cost: 7500 # Delta Price. 5000 is pre-adjustment.
+  cost: 7500 # Trauma - was 5000
   recipeUnlocks:
-  - PlantBagOfHolding #DeltaV
+  # <Trauma>
+  - PlantBagOfHolding
+  - PlantAnalyzer
+  # </Trauma>
   - SeedExtractorMachineCircuitboard
   - HydroponicsTrayMachineCircuitboard
   - ReagentGrinderIndustrialMachineCircuitboard
-  - PlantAnalyzer # Frontier
   # Goobstation R&D Console rework start
   position: -2,4
   technologyPrerequisites:
@@ -191,6 +193,7 @@
   - AdvMopItem
   - MegaSprayBottle
   - BorgModuleAdvancedCleaning
+  - TrashBagHolding
   # Goobstation R&D Console rework start
   position: 0,4
   technologyPrerequisites:

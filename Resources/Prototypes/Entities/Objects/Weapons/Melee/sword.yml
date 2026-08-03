@@ -11,8 +11,8 @@
     class: Sword
   - type: CosmicTransmutable
     transmuteTo: SwordCosmicCult
-  # </Trauma>
   - type: Sharp
+  # </Trauma>
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true # Goobstation - Decapitation
@@ -261,6 +261,10 @@
     - type: Item
       size: Ginormous
       sprite: Objects/Weapons/Melee/Throngler-in-hand.rsi
+      shape:
+      - 0,0,3,3
+      - 1,4,2,6
+      storedRotation: -45
     - type: DisarmMalus
     - type: Grammar
       attributes:

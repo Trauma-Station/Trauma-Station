@@ -1,40 +1,35 @@
+# region Base
 - type: construction
+  abstract: true
+  id: BaseClothing
+  category: construction-category-clothing
+  objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
+# endregion Base
+
+# region Clothing
+- type: construction
+  parent: BaseClothing
   id: ClownHardsuit
   graph: ClownHardsuit
-  startNode: start
   targetNode: clownHardsuit
-  category: construction-category-clothing
-  objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 0
-    ToysKnowledge: 0 # billions must honk
-  practical:
-    ToysKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: MimeHardsuit
   graph: MimeHardsuit
-  startNode: start
   targetNode: mimeHardsuit
-  category: construction-category-clothing
-  objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 0
-    ToysKnowledge: 0 # billions must ...
-  practical:
-    ToysKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: BoneArmor
   graph: BoneArmor
-  startNode: start
   targetNode: armor
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 1
@@ -44,12 +39,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: BoneHelmet
   graph: BoneHelmet
-  startNode: start
   targetNode: helmet
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 1
@@ -59,12 +52,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: cardHelmet
   graph: cardHelmet
-  startNode: start
   targetNode: cardhelmet
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   qualityPrototype: ShitCraft
   theory: {} # it's cardboard
@@ -74,12 +65,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: cardArmour
   graph: cardArmour
-  startNode: start
   targetNode: cardarmour
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   qualityPrototype: ShitCraft
   theory: {} # it's cardboard
@@ -89,12 +78,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: BananaClownMask
   graph: BananaClownMask
-  startNode: start
   targetNode: mask
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     BananiumKnowledge: 0
@@ -103,12 +90,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: BananaClownJumpsuit
   graph: BananaClownJumpsuit
-  startNode: start
   targetNode: jumpsuit
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     BananiumKnowledge: 0
@@ -117,12 +102,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: BananaClownShoes
   graph: BananaClownShoes
-  startNode: start
   targetNode: shoes
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     BananiumKnowledge: 0
@@ -131,12 +114,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingEyesHudMedSec
   graph: HudMedSec
-  startNode: start
   targetNode: medsecHud
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 0
@@ -144,38 +125,22 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingShoeSlippersDuck
   graph: ClothingShoeSlippersDuck
-  startNode: start
   targetNode: shoes
-  category: construction-category-clothing
-  objectType: Item
-  # <Trauma>
-  theory:
-    TailoringKnowledge: 0
-    ToysKnowledge: 0
-  # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingShoeSlippersLizard
   graph: ClothingShoeSlippersLizard
-  startNode: start
   targetNode: shoes
-  category: construction-category-clothing
-  objectType: Item
-  # <Trauma>
-  theory:
-    TailoringKnowledge: 0
-    ToysKnowledge: 0
-  # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingEyesGlassesSecurity
   graph: GlassesSecHUD
-  startNode: start
   targetNode: glassesSec
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 0
@@ -183,12 +148,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingBeltQuiver
   graph: Quiver
-  startNode: start
   targetNode: Quiver
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 1 # medieval chuds figured it out come on
@@ -198,12 +161,10 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseClothing
   id: ClothingHeadHelmetJustice
   graph: HelmetJustice
-  startNode: start
   targetNode: helmet
-  category: construction-category-clothing
-  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 0
@@ -211,3 +172,4 @@
     FabricationKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
+# endregion Clothing

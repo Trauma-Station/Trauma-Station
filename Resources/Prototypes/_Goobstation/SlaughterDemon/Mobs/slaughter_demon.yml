@@ -5,6 +5,7 @@
   - AppearanceSlaughterDemon
   - SimpleSpaceMobBase
   - MobPolymorphable
+  - MobNightVision
   id: BaseMobSlaughterDemon
   name: slaughter demon
   suffix: ""
@@ -15,10 +16,6 @@
     state: daemon
   - type: Stamina
     baseCritThreshold: 150
-  - type: NightVision
-    color: "#AA4A44"
-    activateSound: null
-    deactivateSound: null
   - type: Insulated
   - type: Damageable
     damageModifierSet: SlaughterDemon
@@ -146,10 +143,7 @@
     sound:
       path: /Audio/Effects/demon_dies.ogg
   - type: Vocal
-    sounds:
-      Male: SlaughterDemon
-      Female: SlaughterDemon
-      Unsexed: SlaughterDemon
+    emoteSounds: SlaughterDemon
   - type: ZombieImmune
   - type: SlowOnDamage
     speedModifierThresholds:

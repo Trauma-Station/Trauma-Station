@@ -24,7 +24,6 @@
       Steel: 50
   - type: Tag
     tags:
-    - BaseballBat
     - Recyclable
   - type: Solution
     id: melee
@@ -67,7 +66,6 @@
       Steel: 50
   - type: Tag
     tags:
-    - BaseballBat
     - Recyclable
   - type: Item
     storedSprite:
@@ -130,7 +128,6 @@
       Steel: 50
   - type: Tag
     tags:
-    - BaseballBat
     - Recyclable
   - type: UndetectableContraband
   - type: SpawnAfterInteract
@@ -250,6 +247,11 @@
         restitution: 0.3
         friction: 0.2
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/spear_pipebomb.rsi
     layers:
@@ -285,8 +287,8 @@
     initialBeepDelay: 0
     beepSound: /Audio/Effects/lightburn.ogg
   - type: RandomTimerTrigger
-    min: 3
-    max: 5
+    min: 5
+    max: 8
   - type: ExplodeOnTrigger
     keysIn:
     - timer
@@ -308,7 +310,6 @@
     tags:
     - Grenade
     - HandGrenade
-    - Spear
   - type: TriggerOnEmbed
   - type: ToggleComponentsOnTrigger
     components:

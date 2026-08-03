@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [ BaseItem, BaseSlicingRefinable ]
   id: BaseFish
   name: fish
   description: Water-born creature from the infinite sea... Or toilet.
@@ -15,11 +15,13 @@
     difficulty: 0.029
   - type: StaticPrice
     price: 250
-  - type: Butcherable
-    butcherDelay: 2
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
+  - type: Tag
+    tags:
+    - Fish
 
 - type: entity
   abstract: true
@@ -40,8 +42,8 @@
   components:
   - type: Sprite
     state: alien
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: AlienFishLootTable
@@ -72,8 +74,8 @@
   components:
   - type: Sprite
     state: bingle
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatBingle
       amount: 2
     - id: BingleFishLootTable
@@ -104,8 +106,8 @@
   components:
   - type: Sprite
     state: boy_fisher
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MobMouseCancer
       amount: 5
     - id: BoyfisherFishLootTable
@@ -136,8 +138,8 @@
   components:
   - type: Sprite
     state: disk
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: NukeDiskFishLootTable
@@ -150,8 +152,8 @@
   components:
   - type: Sprite
     state: gib
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: GibFishLootTable
@@ -164,8 +166,8 @@
   components:
   - type: Sprite
     state: mutant
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: MutantFishLootTable
@@ -178,8 +180,8 @@
   components:
   - type: Sprite
     state: nuker
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: NukerFishLootTable
@@ -219,8 +221,8 @@
   components:
   - type: Sprite
     state: toxic
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: ToxicFishLootTable
@@ -242,8 +244,8 @@
   components:
   - type: Sprite
     state: ian
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatCorgiFish
       amount: 2
     - id: MaterialHideCorgi

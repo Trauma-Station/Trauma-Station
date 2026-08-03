@@ -15,7 +15,6 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private VampireSystem _vampire = default!;
     [Dependency] private MobClassSystem _mobClass = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     /// <summary>
     /// List of every vampire ability prototype.
@@ -62,7 +61,7 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
         var mobClass = _mobClass.GetClass(user);
         foreach (var ability in AllAbilities)
         {
-            if (!_proto.Resolve(ability, out var abilityProto))
+            if (!ProtoMan.Resolve(ability, out var abilityProto))
                 continue;
 
             // We tried to unlcok an ability, but we don't have enough total blood
@@ -94,7 +93,7 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllAbilities.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<VampireAbilityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<VampireAbilityPrototype>())
         {
             var id = proto.ID;
             AllAbilities.Add(id);

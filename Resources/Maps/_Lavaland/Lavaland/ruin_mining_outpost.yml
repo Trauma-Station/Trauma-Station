@@ -389,37 +389,31 @@ entities:
   - uid: 41
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 4.5,2.5
       parent: 1
   - uid: 42
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,2.5
       parent: 1
   - uid: 43
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,2.5
       parent: 1
   - uid: 44
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 4.5,8.5
       parent: 1
   - uid: 45
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,8.5
       parent: 1
   - uid: 46
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,8.5
       parent: 1
 - proto: DefaultStationBeaconRuinSmallOutpost

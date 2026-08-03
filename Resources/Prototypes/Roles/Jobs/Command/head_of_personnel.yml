@@ -65,7 +65,8 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipHeadOfPersonnel
+    - SkillChipEchelonEducation
+    - SkillChipLaser
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

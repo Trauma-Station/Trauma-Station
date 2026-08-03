@@ -28,7 +28,7 @@ public sealed partial class SpeechRequiresEquipmentSystem : EntitySystem
             || _whitelist.IsWhitelistFail(whitelist, item.Value))
             {
                 if (ent.Comp.FailMessage != null)
-                    _popup.PopupClient(Loc.GetString(ent.Comp.FailMessage), ent, ent);
+                    _popup.PopupEntity(Loc.GetString(ent.Comp.FailMessage), ent, ent);
 
                 args.Cancel();
                 return;

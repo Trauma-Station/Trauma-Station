@@ -1,25 +1,12 @@
 - type: entity
   id: DiseaseDiagnoser
-  parent: [ BaseMachinePowered, SmallConstructibleMachine ]
+  parent: [ BaseMachinePowered, SmallConstructibleMachine, BaseSmallConstructibleMachineDestructible ]
   name: Disease Diagnoser Delta Extreme
   description: A machine that analyzes disease samples.
   placement:
     mode: SnapgridCenter
   components:
-  - type: Sprite
-    sprite: Structures/Machines/diagnoser.rsi
-    layers:
-    - state: icon
-    - state: running
-      visible: false
-      map: ["running"]
-    - state: unlit
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"] # Goobstation
-  - type: Appearance
-  - type: Machine
-    board: DiagnoserMachineCircuitboard
-  # <Goobstation>
+  # <Trauma>
   - type: VirologyMachine
     idleState: icon
     runningState: running
@@ -38,17 +25,8 @@
   - type: ContainerContainer
     containers:
       disease_swab_slot: !type:ContainerSlot
-        showEnts: False
-        occludes: True
-        ent: null
       machine_board: !type:Container
-        showEnts: False
-        occludes: True
-        ents: []
       machine_parts: !type:Container
-        showEnts: False
-        occludes: True
-        ents: []
   - type: ItemSlots
   - type: GenericVisualizer
     visuals:
@@ -60,7 +38,28 @@
         running:
           True: { visible: true }
           False: { visible: false }
-  # </Goobstation>
+  # </Trauma>
+  - type: Sprite
+    sprite: Structures/Machines/diagnoser.rsi
+    layers:
+    - state: icon
+    - state: running
+      visible: false
+      map: ["running"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"] # Goobstation
+  - type: Appearance
+  - type: Machine
+    board: DiagnoserMachineCircuitboard
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
 
 - type: entity
   name: disease diagnoser report
@@ -81,7 +80,7 @@
   - type: PaperVisuals
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_perforated.svg.96dpi.png"
     headerImagePath: "/Textures/Interface/Paper/paper_heading_virus.svg.96dpi.png"
-    headerMargin: 0.0, 0.0, 0.0, 6.0
+    headerMargin: 0.0, 6.0, 0.0, 0.0
     backgroundImageTile: true
     backgroundPatchMargin: 0.0, 6.0, 0.0, 6.0
   # <Goob> - swabs in disease reports

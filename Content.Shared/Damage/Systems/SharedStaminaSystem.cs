@@ -488,7 +488,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         component.Critical = true;
         component.StaminaDamage = component.CritThreshold;
 
-        StunSystem.TryUpdateParalyzeDuration(uid, component.StunTime);
+        StunSystem.TryUpdateParalyzeDuration(uid, component.StunTime, true);
+
 
         // Goobstation - Modularization
         var modifierEv = new GetClothingStunModifierEvent(uid);

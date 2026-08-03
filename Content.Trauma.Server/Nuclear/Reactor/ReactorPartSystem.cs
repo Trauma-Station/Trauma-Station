@@ -25,7 +25,6 @@ public sealed partial class ReactorPartSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private DamageableSystem _damage = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private NuclearReactorSystem _reactor = default!;
     [Dependency] private SharedPointLightSystem _light = default!;

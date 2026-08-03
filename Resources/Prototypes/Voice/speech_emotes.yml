@@ -72,6 +72,15 @@
 
 - type: emote
   id: Sigh
+  # <Trauma>
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationVisualEmoteEvent
+      layer: Sigh
+      time: 1.5
+      key: emoteAnimSigh
+  # </Trauma>
   name: chat-emote-name-sigh
   category: Vocal
   icon: Interface/Emotes/sigh.png
@@ -106,6 +115,15 @@
 
 - type: emote
   id: Crying
+  # <Trauma>
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationVisualEmoteEvent
+      layer: Cry
+      time: 3.2
+      key: emoteAnimCry
+  # </Trauma>
   name: chat-emote-name-crying
   category: Vocal
   icon: Interface/Emotes/cry.png
@@ -475,6 +493,12 @@
 
 - type: emote
   id: Flap
+  # <Trauma>
+  effectsOnEmote:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectWingsOpen
+    time: 1
+  # </Trauma>
   name: chat-emote-name-flap
   category: Hands # Not really "hands", but how far it to vocal? (moth mimes want to flap too!)
   available: false

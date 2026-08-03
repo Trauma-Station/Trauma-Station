@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseSkillChipPSON
+  id: SkillChipMagicalDampener
+  name: PSON-Chip (Purge Magical Talent)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MagicalLiteracyKnowledge: -1000
+  - type: UnremoveableOrgan # Todo, make these work
+
+- type: entity
+  parent: BaseSkillChipPSON
+  id: SkillChipCombatDampener
+  name: PSON-Chip (Purge Combat Talent)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsHeavy: -1000
+      KnowledgeWeaponsLaser: -1000
+      ShootingKnowledge: -1000
+      KnowledgeWeaponsMining: -1000
+      KnowledgeWeaponsPistol: -1000
+      KnowledgeWeaponsRifle: -1000
+      KnowledgeWeaponsShotgun: -1000
+      KnowledgeWeaponsSniper: -1000
+      KnowledgeWeaponsBludgeon: -1000
+      KnowledgeWeaponsShortBlade: -1000
+      KnowledgeWeaponsLongBlade: -1000
+      KnowledgeWeaponsNonLethal: -1000
+      KnowledgeWeaponsPolearm: -1000
+      MeleeKnowledge: -1000
+  - type: UnremoveableOrgan
+
+- type: entity # Todo, add drooling marking when this gets used on you
+  parent: BaseSkillChipPSON
+  id: SkillChipMindPurge
+  name: PSON-Chip (Purge Mind)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsHeavy: -1000
+      KnowledgeWeaponsLaser: -1000
+      ShootingKnowledge: -1000
+      KnowledgeWeaponsMining: -1000
+      KnowledgeWeaponsPistol: -1000
+      KnowledgeWeaponsRifle: -1000
+      KnowledgeWeaponsShotgun: -1000
+      KnowledgeWeaponsSniper: -1000
+      KnowledgeWeaponsBludgeon: -1000
+      KnowledgeWeaponsShortBlade: -1000
+      KnowledgeWeaponsLongBlade: -1000
+      KnowledgeWeaponsNonLethal: -1000
+      KnowledgeWeaponsPolearm: -1000
+      MeleeKnowledge: -1000
+  - type: UnremoveableOrgan
+
+- type: entity
+  parent: BaseSkillChipPSON
+  id: SkillChipTiderDampener
+  name: PSON-Chip (Neural Dampener)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: -15
+      ShootingKnowledge: -15
+  - type: UnremoveableOrgan

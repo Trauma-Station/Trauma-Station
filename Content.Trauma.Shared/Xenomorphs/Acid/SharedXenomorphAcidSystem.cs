@@ -35,18 +35,18 @@ public abstract partial class SharedXenomorphAcidSystem : EntitySystem
         // Check if this is a plasma-cost action and get the cost
         if (!HasComp<StructureComponent>(args.Target)) // TODO: This should check whether the target is a structure.
         {
-            _popup.PopupClient(Loc.GetString("xenomorphs-acid-not-corrodible", ("target", target)), user, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("xenomorphs-acid-not-corrodible", ("target", target)), user, user, PopupType.SmallCaution);
             return;
         }
 
         if (HasComp<AcidCorrodingComponent>(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("xenomorphs-acid-already-corroding", ("target", target)), user, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("xenomorphs-acid-already-corroding", ("target", target)), user, user, PopupType.SmallCaution);
             return;
         }
 
         args.Handled = true;
-        _popup.PopupClient(Loc.GetString("xenomorphs-acid-apply", ("target", target)), user, user);
+        _popup.PopupEntity(Loc.GetString("xenomorphs-acid-apply", ("target", target)), user, user);
 
         var acid = PredictedSpawnAttachedTo(comp.AcidId, args.Target.ToCoordinates());
         var acidCorroding = new AcidCorrodingComponent

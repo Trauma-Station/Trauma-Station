@@ -9,14 +9,7 @@ public sealed partial class StatusEffectEffectsApplySystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<StatusEffectEffectsApplyComponent, StatusEffectAppliedEvent>(OnApplied);
-        SubscribeLocalEvent<StatusEffectEffectsApplyComponent, StatusEffectRemovedEvent>(OnRemoval);
-    }
-
+    [SubscribeLocalEvent]
     private void OnApplied(Entity<StatusEffectEffectsApplyComponent> ent, ref StatusEffectAppliedEvent args)
     {
         if (ent.Comp.EffectsOnApply is not { } effectsOnApply)
@@ -25,6 +18,7 @@ public sealed partial class StatusEffectEffectsApplySystem : EntitySystem
         _effects.ApplyEffects(args.Target, effectsOnApply);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoval(Entity<StatusEffectEffectsApplyComponent> ent, ref StatusEffectRemovedEvent args)
     {
         if (ent.Comp.EffectsOnRemoval is not { } effectsOnRemoval ||

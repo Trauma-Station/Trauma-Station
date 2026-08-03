@@ -30,7 +30,7 @@ public sealed partial class PossessObjectSystem : EntitySystem
         if (!_mind.TryGetMind(args.Performer, out var mindId, out _))
             return;
 
-        _popup.PopupClient(Loc.GetString("wraith-possess"), args.Target, args.Target);
+        _popup.PopupEntity(Loc.GetString("wraith-possess"), args.Target, args.Target);
         _audio.PlayPredicted(ent.Comp.PossessSound, args.Target, args.Target);
 
         // Make the object possessed

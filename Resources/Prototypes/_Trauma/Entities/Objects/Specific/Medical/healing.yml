@@ -24,7 +24,7 @@
   suffix: Space Mirage 15u, 15
   components:
   - type: Label
-    currentLabel: space mirage 15u
+    localizedLabel: reagent-name-space-drugs
   - type: EntityTableContainerFill
     containers:
       storagebase:

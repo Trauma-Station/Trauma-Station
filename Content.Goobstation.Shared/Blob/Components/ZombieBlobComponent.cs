@@ -1,25 +1,26 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Tag;
-using Robust.Shared.Audio;
 using Content.Trauma.Common.CollectiveMind;
+using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ZombieBlobComponent : Component
 {
+    [DataField]
     public List<string> OldFactions = new();
 
-    [AutoNetworkedField]
-    public EntityUid BlobPodUid = default!;
+    [DataField, AutoNetworkedField]
+    public EntityUid BlobPodUid;
 
-    public float? OldColdDamageThreshold = null;
+    public float? OldColdDamageThreshold;
 
-    [ViewVariables]
-    public Dictionary<string, int> DisabledFixtureMasks { get; } = new();
+    [DataField]
+    public Dictionary<string, int> DisabledFixtureMasks = new();
 
-    [DataField("greetSoundNotification")]
+    [DataField]
     public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/zombie_start.ogg");
 
     [DataField, AutoNetworkedField]

@@ -72,19 +72,6 @@ public sealed partial class TraumaCVars
 
     #region Skills
 
-    /// <summary>
-    /// Enables gaining XP and skills during rounds.
-    /// Character starting skills are not affected by this.
-    /// </summary>
-    public static readonly CVarDef<bool> SkillGain =
-        CVarDef.Create("trauma.skill_gain", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    /// Client setting to hide all skill-related popups.
-    /// </summary>
-    public static readonly CVarDef<bool> SkillPopups =
-        CVarDef.Create("trauma.skill_popups", true, CVar.CLIENTONLY | CVar.ARCHIVE);
-
     #endregion
 
     #region Chat
@@ -117,14 +104,14 @@ public sealed partial class TraumaCVars
     /// Disabled if this is empty.
     /// </summary>
     public static readonly CVarDef<string> ErrorWebhookUrl =
-        CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVER);
+        CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     /// Delay between each error message in seconds.
     /// Used to avoid hitting ratelimits
     /// </summary>
     public static readonly CVarDef<float> ErrorWebhookDelay =
-        CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
+        CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVERONLY);
 
     /// <summary>
     /// How many messages can be queued at once.
@@ -132,7 +119,7 @@ public sealed partial class TraumaCVars
     /// Changing this ingame drops all currently queued messages.
     /// </summary>
     public static readonly CVarDef<int> ErrorWebhookLimit =
-        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVER);
+        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVERONLY);
 
     #endregion
 

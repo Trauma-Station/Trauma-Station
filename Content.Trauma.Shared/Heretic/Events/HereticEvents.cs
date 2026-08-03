@@ -6,6 +6,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Audio;
 
@@ -19,6 +20,9 @@ public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId 
 
 [ByRefEvent]
 public readonly record struct SpawnHereticInfluenceEvent(int Amount = 1);
+
+[ByRefEvent]
+public record struct HereticBladeBreakFailOverrideEvent(EntityUid User, bool ShouldShatter = false);
 
 [ByRefEvent]
 public readonly record struct UserInvokeTouchSpellEvent;
@@ -142,7 +146,13 @@ public record struct TouchSpellAttemptEvent(EntityUid User, EntityUid Target, bo
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class HereticBladeBonusEvent : EntityEventArgs
 {
-    public MeleeHitEvent Args;
+    public List<EntityUid> HitEntities = new();
+
+    public DamageSpecifier BaseDamage = new();
+
+    public DamageSpecifier BonusDamage = new();
+
+    public EntityUid User;
 
     public int PathStage;
 }
@@ -151,7 +161,7 @@ public abstract partial class HereticBladeBonusEvent : EntityEventArgs
 public partial class HereticBladeBonusDamageEvent : HereticBladeBonusEvent
 {
     [DataField(required: true)]
-    public DamageSpecifier BonusDamage = default!;
+    public DamageSpecifier ExtraDamage = default!;
 }
 
 public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEvent

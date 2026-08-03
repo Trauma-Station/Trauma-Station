@@ -88,10 +88,7 @@
   - type: Vocal
     wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
     wilhelmProbability: 0.1
-    sounds:
-      Male: Skeleton
-      Female: Skeleton
-      Unsexed: Skeleton
+    emoteSounds: Skeleton
   - type: SkeletonAccent
   - type: TypingIndicator
     proto: skeleton
@@ -703,6 +700,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -723,6 +722,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -741,6 +742,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -762,6 +765,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -780,6 +785,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -798,6 +805,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -816,6 +825,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -834,6 +845,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -852,6 +865,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -870,6 +885,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -888,6 +905,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -906,6 +925,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -924,6 +945,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -942,6 +965,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -963,6 +988,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -984,6 +1011,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -1021,6 +1050,8 @@
     name: ghost-role-information-voidsummon-name
     description: ghost-role-information-voidsummon-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: short
   - type: GhostTakeoverAvailable

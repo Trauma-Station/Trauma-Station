@@ -60,7 +60,7 @@ public sealed partial class BloodBondSystem : EntitySystem
                 ClearBloodLinked(uid);
                 RemCompDeferred(uid, bloodLinker);
 
-                _popup.PopupClient("You don't have enough power to continue the link!", uid, PopupType.MediumCaution);
+                _popup.PopupEntity("You don't have enough power to continue the link!", uid, PopupType.MediumCaution);
                 continue;
             }
 
@@ -80,7 +80,7 @@ public sealed partial class BloodBondSystem : EntitySystem
 
         if (args.Toggle)
         {
-            _popup.PopupClient("You start the blood bond!", user, PopupType.MediumCaution);
+            _popup.PopupEntity("You start the blood bond!", user, PopupType.MediumCaution);
             var xform = Transform(user);
 
             _thralls.Clear();
@@ -116,7 +116,7 @@ public sealed partial class BloodBondSystem : EntitySystem
             return;
         }
 
-        _popup.PopupClient("The blood bond halts!", user, PopupType.MediumCaution);
+        _popup.PopupEntity("The blood bond halts!", user, PopupType.MediumCaution);
 
         ClearBloodLinked(user);
         RemCompDeferred<ActiveBloodLinkerComponent>(user);

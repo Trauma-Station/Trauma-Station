@@ -73,6 +73,6 @@ public sealed partial class EnchantSacrificeSystem : EntitySystem
             ? Loc.GetString("enchanting-sacrifice-single", ("target", identity), ("item", any))
             : Loc.GetString("enchanting-sacrifice-multiple", ("target", identity));
 
-        _popup.PopupPredicted(msg, mob, null, PopupType.LargeCaution);
+        _popup.PopupEntity(msg, mob, PopupType.LargeCaution);
     }
 }

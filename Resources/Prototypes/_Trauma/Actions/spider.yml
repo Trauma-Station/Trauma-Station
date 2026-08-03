@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: SpiderMultiply
+  name: Multiply
+  description: Uses hunger to multiply.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Structures/spiders.rsi
+      state: icon
+    useDelay: 1
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Effects/pop.ogg
+  - type: InstantAction
+    event: !type:EggLayInstantActionEvent
+  - type: InteractionOutline
+
+- type: entity
+  parent: ActionMouseCall
+  id: ActionSpiderCall
+  name: Spidercall
+  description: Call nearby spiders to your location.

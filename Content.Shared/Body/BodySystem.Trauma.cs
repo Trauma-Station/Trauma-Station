@@ -22,7 +22,6 @@ public sealed partial class BodySystem
     [Dependency] private CommonBodyCacheSystem _cache = default!;
     [Dependency] private CommonBodyPartSystem _part = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private StandingStateSystem _standing = default!;
 
@@ -44,6 +43,21 @@ public sealed partial class BodySystem
     ];
 
     /// <summary>
+    /// Map between a body part type and the organ categories with that type, regardless of symmetry.
+    /// </summary>
+    public static readonly Dictionary<BodyPartType, ProtoId<OrganCategoryPrototype>[]> PartTypeOrgans = new()
+    {
+        {BodyPartType.Head, [ "Head" ]},
+        {BodyPartType.Torso, [ "Torso" ]},
+        {BodyPartType.Arm, [ "ArmLeft", "ArmRight" ]},
+        {BodyPartType.Hand, [ "HandLeft", "HandRight" ]},
+        {BodyPartType.Leg, [ "LegLeft", "LegRight" ]},
+        {BodyPartType.Foot, [" FootLeft", "FootRight" ]},
+        {BodyPartType.Tail, [ "Tail" ]},
+        {BodyPartType.Wings, [ "Wings" ]}
+    };
+
+    /// <summary>
     /// Vital body parts' organ categories.
     /// </summary>
     public static readonly ProtoId<OrganCategoryPrototype>[] VitalParts =
@@ -53,14 +67,16 @@ public sealed partial class BodySystem
     ];
     // TODO: vital internal organs???
 
+    private readonly HashSet<ProtoId<OrganCategoryPrototype>> _coveredParts = new();
+
     /// <summary>
     /// Tries to enable a given organ, letting systems run logic.
     /// Returns true if it is valid and now enabled.
     /// </summary>
-    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null)
+    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null, bool logMissing = true)
     {
         // allow the user to pass in a body incase it's null here
-        if (!_organQuery.Resolve(organ, ref organ.Comp) || (bodyUid ?? organ.Comp.Body) is not {} body)
+        if (!_organQuery.Resolve(organ, ref organ.Comp, logMissing) || (bodyUid ?? organ.Comp.Body) is not {} body)
             return false;
 
         if (HasComp<EnabledOrganComponent>(organ))
@@ -367,7 +383,7 @@ public sealed partial class BodySystem
             return false; // organ doesn't support markings
 
         var markingData = organ.Comp.MarkingData;
-        var proto = _proto.Index(marking);
+        var proto = ProtoMan.Index(marking);
         var layer = proto.BodyPart;
         if (!force)
         {

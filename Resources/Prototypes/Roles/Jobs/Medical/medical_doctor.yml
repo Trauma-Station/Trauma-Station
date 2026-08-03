@@ -23,7 +23,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipMedicalDoctor
+    - SkillChipDoctor
+    - SkillChipEducation
+    - SkillChipSurgeon
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier

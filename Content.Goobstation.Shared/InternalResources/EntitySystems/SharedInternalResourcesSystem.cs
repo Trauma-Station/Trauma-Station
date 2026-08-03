@@ -12,7 +12,6 @@ namespace Content.Goobstation.Shared.InternalResources.EntitySystems;
 public sealed partial class SharedInternalResourcesSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private readonly TimeSpan _systemUpdateRate = TimeSpan.FromSeconds(1);
@@ -33,7 +32,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
     {
         foreach (var type in entity.Comp.CurrentInternalResources)
         {
-            if (_protoMan.Index(type.InternalResourcesType).AlertPrototype != args.Alert.ID)
+            if (ProtoMan.Index(type.InternalResourcesType).AlertPrototype != args.Alert.ID)
                 continue;
 
             args.CurrentValue = type.CurrentAmount;
@@ -48,7 +47,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
     /// </summary>
     private void UpdateAppearance(Entity<InternalResourcesComponent> entity, ProtoId<InternalResourcesPrototype> protoId)
     {
-        if (!_protoMan.TryIndex(protoId, out var proto))
+        if (!ProtoMan.TryIndex(protoId, out var proto))
             return;
 
         _alertsSystem.ShowAlert(entity.Owner, proto.AlertPrototype);
@@ -86,7 +85,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
             return false;
 
         var currentAmount = data.CurrentAmount;
-        var newAmount = Math.Clamp(data.CurrentAmount + amount, 0f, data.MaxAmount);
+        var newAmount = Math.Clamp(data.CurrentAmount + amount, data.MinAmount, data.MaxAmount);
 
         data.CurrentAmount = newAmount;
 
@@ -106,7 +105,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
     {
         data = null;
 
-        if (!_protoMan.TryIndex<InternalResourcesPrototype>(protoId, out var proto))
+        if (!ProtoMan.TryIndex<InternalResourcesPrototype>(protoId, out var proto))
         {
             Log.Debug($"Failed to add {protoId} internal resource type to entity {ToPrettyString(uid):uid}. Internal resource prototype does not exist.");
             return false;
@@ -130,8 +129,8 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
         if (resourcesComp.HasResourceData(proto.ID, out data))
             return true;
 
-        var startingAmount = Math.Clamp(proto.BaseStartingAmount, 0f, proto.BaseMaxAmount);
-        data = new InternalResourcesData(proto.BaseMaxAmount, proto.BaseRegenerationRate, startingAmount, proto.ID);
+        var startingAmount = Math.Clamp(proto.BaseStartingAmount, proto.BaseMinAmount, proto.BaseMaxAmount);
+        data = new InternalResourcesData(proto.BaseMaxAmount, proto.BaseRegenerationRate, startingAmount, proto.ID, proto.BaseMinAmount);
 
         resourcesComp.CurrentInternalResources.Add(data);
         Dirty(uid, resourcesComp);
@@ -161,11 +160,20 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
 
         _systemNextUpdate += _systemUpdateRate;
 
+        var toUpdate = new List<(EntityUid uid, InternalResourcesData data, InternalResourcesComponent comp)>();
+
         var query = EntityQueryEnumerator<InternalResourcesComponent>();
         while (query.MoveNext(out var uid, out var resourcesComp))
         {
             foreach (var resourceData in resourcesComp.CurrentInternalResources)
-                TryUpdateResourcesAmount(uid, resourceData, resourceData.RegenerationRate, resourcesComp);
+            {
+                toUpdate.Add((uid, resourceData, resourcesComp));
+            }
+        }
+
+        foreach (var (uid, resourceData, resourcesComp) in toUpdate)
+        {
+            TryUpdateResourcesAmount(uid, resourceData, resourceData.RegenerationRate, resourcesComp);
         }
     }
 }

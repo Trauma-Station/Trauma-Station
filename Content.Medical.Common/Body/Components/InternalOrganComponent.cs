@@ -11,21 +11,10 @@ namespace Content.Medical.Common.Body;
 /// Organ component specifically for internal organs, e.g. lungs, heart.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
-public sealed partial class InternalOrganComponent : Component, ISurgeryToolComponent
+[AutoGenerateComponentState(fieldDeltas: true)]
+public sealed partial class InternalOrganComponent : BaseSurgeryToolComponent
 {
-    #region ISurgeryToolComponent
-
-    [DataField]
-    public string ToolName { get; set; } = "An organ";
-
-    [DataField]
-    public float Speed { get; set; } = 1f;
-
-    [DataField]
-    public bool? Used { get; set; }
-
-    #endregion
+    public override string ToolName => "An organ";
 
     /// <summary>
     ///     Maximum organ integrity, do keep in mind that Organs are supposed to be VERY and VERY damage sensitive
@@ -54,6 +43,7 @@ public sealed partial class InternalOrganComponent : Component, ISurgeryToolComp
     /// <summary>
     ///     All the modifiers that are currently modifying the OrganIntegrity
     /// </summary>
+    //[AutoNetworkedField] // cant network until EntityUid NetSerializer is real
     public Dictionary<(string, EntityUid), FixedPoint2> IntegrityModifiers = new();
 
     /// <summary>

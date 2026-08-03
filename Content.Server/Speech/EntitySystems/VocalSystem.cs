@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Speech;
-using Content.Trauma.Common.Speech;
 // </Trauma>
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
@@ -10,15 +9,14 @@ using Content.Shared.Humanoid;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Speech.EntitySystems;
 
 public sealed partial class VocalSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ActionsSystem _actions = default!;
@@ -29,39 +27,48 @@ public sealed partial class VocalSystem : EntitySystem
 
         SubscribeLocalEvent<VocalComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<VocalComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
+        SubscribeLocalEvent<VocalComponent, VoiceChangedEvent>(OnVoiceChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
-        SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        SubscribeLocalEvent<VocalComponent, EmoteSoundsChangedEvent>(OnSoundsChanged); // DeltaV - support for changing vocal sounds on the go. Why it wasn't there in the first place is beyond me.
+        SubscribeLocalEvent<VocalComponent, EmoteActionEvent>(OnEmoteAction);
+    }
+
+    /// <summary>
+    /// Copy this component's datafields from one entity to another.
+    /// This can't use CopyComp because of the ScreamActionEntity DataField, which should not be copied.
+    /// </summary>
+    public void CopyComponent(Entity<VocalComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        var targetComp = EnsureComp<VocalComponent>(target);
+        targetComp.ScreamId = source.Comp.ScreamId;
+        targetComp.Wilhelm = source.Comp.Wilhelm;
+        targetComp.WilhelmProbability = source.Comp.WilhelmProbability;
+        LoadSounds(target, targetComp);
+
+        Dirty(target, targetComp);
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
     {
         // try to add scream action when vocal comp added
-        _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
-        LoadSounds(uid, component);
+        _actions.AddAction(uid, ref component.EmoteActionEntity, component.EmoteAction);
     }
 
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
     {
         // remove scream action when component removed
-        if (component.ScreamActionEntity != null)
+        if (component.EmoteActionEntity != null)
         {
-            _actions.RemoveAction(uid, component.ScreamActionEntity);
+            _actions.RemoveAction(uid, component.EmoteActionEntity);
         }
     }
 
-    private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
+    private void OnVoiceChanged(EntityUid uid, VocalComponent component, VoiceChangedEvent args)
     {
-        LoadSounds(uid, component, args.NewSex);
+        LoadSounds(uid, component, args.NewVoice);
     }
-
-// Begin DeltaV additions
-    private void OnSoundsChanged(EntityUid uid, VocalComponent component, ref EmoteSoundsChangedEvent args)
-    {
-        LoadSounds(uid, component);
-    }
-// End DeltaV additions
 
     private void OnEmote(EntityUid uid, VocalComponent component, ref EmoteEvent args)
     {
@@ -69,13 +76,13 @@ public sealed partial class VocalSystem : EntitySystem
             return;
 
         // snowflake case for wilhelm scream easter egg
-        if (args.Emote.ID == component.ScreamId)
+        if (args.Emote == component.ScreamId)
         {
             args.Handled = TryPlayScreamSound(uid, component);
             return;
         }
 
-        // Goobstation start
+        // <Trauma>
         var getSoundEv = new GetEmoteSoundsEvent();
         RaiseLocalEvent(uid, ref getSoundEv);
         if (getSoundEv.Handled)
@@ -83,27 +90,27 @@ public sealed partial class VocalSystem : EntitySystem
             if (getSoundEv.EmoteSoundProtoId is not { } proto)
                 return;
 
-            if (_proto.TryIndex(proto, out EmoteSoundsPrototype? evSounds))
+            if (ProtoMan.Resolve(proto, out EmoteSoundsPrototype? evSounds))
             {
                 args.Handled = _chat.TryPlayEmoteSound(uid, evSounds, args.Emote);
                 return;
             }
         }
-        // Goobstation end
+        // </Trauma>
 
         if (component.EmoteSounds is not { } sounds)
             return;
 
         // just play regular sound based on emote proto
-        args.Handled = _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), args.Emote);
+        args.Handled = _chat.TryPlayEmoteSound(uid, ProtoMan.Index(sounds), args.Emote);
     }
 
-    private void OnScreamAction(EntityUid uid, VocalComponent component, ScreamActionEvent args)
+    private void OnEmoteAction(EntityUid uid, VocalComponent component, EmoteActionEvent args)
     {
         if (args.Handled)
             return;
 
-        _chat.TryEmoteWithChat(uid, component.ScreamId, voluntary: true); // Goob - emotespam
+        _chat.TryEmoteWithChat(uid, args.Emote, voluntary: true); // Trauma - added voluntary
         args.Handled = true;
     }
 
@@ -113,7 +120,7 @@ public sealed partial class VocalSystem : EntitySystem
         var getSoundEv = new GetEmoteSoundsEvent();
         RaiseLocalEvent(uid, ref getSoundEv);
         if (getSoundEv.EmoteSoundProtoId != null &&
-            _proto.TryIndex(getSoundEv.EmoteSoundProtoId, out EmoteSoundsPrototype? evSounds))
+            ProtoMan.Resolve(getSoundEv.EmoteSoundProtoId, out EmoteSoundsPrototype? evSounds))
             return _chat.TryPlayEmoteSound(uid, evSounds, component.ScreamId);
         // Goobstation end
 
@@ -126,20 +133,20 @@ public sealed partial class VocalSystem : EntitySystem
         if (component.EmoteSounds is not { } sounds)
             return false;
 
-        return _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), component.ScreamId);
+        return _chat.TryPlayEmoteSound(uid, ProtoMan.Index(sounds), component.ScreamId);
     }
 
-    private void LoadSounds(EntityUid uid, VocalComponent component, Sex? sex = null)
+    /// <summary>
+    /// This only works on Humanoids. Mobs should have emoteSounds on <see cref="VocalComponent"/> set directly instead.
+    /// </summary>
+    private void LoadSounds(EntityUid uid, VocalComponent component, ProtoId<EmoteSoundsPrototype>? protoId = null)
     {
-        if (component.Sounds == null)
+        if (!TryComp<HumanoidProfileComponent>(uid, out var humanoid))
             return;
 
-        sex ??= CompOrNull<HumanoidProfileComponent>(uid)?.Sex ?? Sex.Unsexed;
+        protoId ??= humanoid.Voice;
 
-        if (!component.Sounds.TryGetValue(sex.Value, out var protoId))
-            return;
-
-        if (!_proto.HasIndex(protoId))
+        if (!ProtoMan.HasIndex(protoId))
             return;
 
         component.EmoteSounds = protoId;

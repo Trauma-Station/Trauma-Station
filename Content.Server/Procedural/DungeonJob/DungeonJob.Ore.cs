@@ -17,7 +17,7 @@ public sealed partial class DungeonJob
         OreDunGen gen,
         List<Dungeon> dungeons,
         HashSet<Vector2i> reservedTiles,
-        Random random)
+        IRobustRandom random)
     {
         foreach (var dungeon in dungeons)
         {
@@ -141,10 +141,12 @@ public sealed partial class DungeonJob
                     }
                 }
 
+                /* Trauma - fuck off useless log spam
                 if (groupSize > 0)
                 {
                     _sawmill.Warning($"Found remaining group size for ore veins of {gen.Replacement ?? "null"}!");
                 }
+                */
             }
         }
     }

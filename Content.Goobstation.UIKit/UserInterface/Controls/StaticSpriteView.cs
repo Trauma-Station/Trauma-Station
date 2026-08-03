@@ -29,11 +29,15 @@ public sealed class StaticSpriteView : Control
     public NetEntity? NetEnt { get; private set; }
 
     /// <summary>
+    /// This overrides fake entity sprite color alpha to avoid rendering transparent entity
+    /// </summary>
+    [ViewVariables]
+    public float? ColorAlphaOverride;
+
+    /// <summary>
     /// The original local entity which we are copying.
     /// </summary>
     public EntityUid? RealEntity;
-
-    public bool IsVisible { get; set; } = true;
 
     /// <summary>
     /// This field configures automatic scaling of the sprite. This automatic scaling is done before
@@ -198,6 +202,9 @@ public sealed class StaticSpriteView : Control
         var fakeSprite = EntMan.EnsureComponent<SpriteComponent>(fake);
         Entity = (fake, fakeSprite);
         _sprite.CopySprite((uid.Value, sprite), Entity.Value.AsNullable());
+        if (ColorAlphaOverride is { } a)
+            _sprite.SetColor(Entity.Value.AsNullable(), fakeSprite.Color.WithAlpha(a));
+        _sprite.SetVisible(Entity.Value.AsNullable(), true);
 
         NetEnt = EntMan.GetNetEntity(uid);
         RealEntity = uid;

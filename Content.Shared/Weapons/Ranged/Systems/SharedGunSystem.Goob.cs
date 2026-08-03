@@ -19,11 +19,7 @@ public abstract partial class SharedGunSystem
 
     private HashSet<Entity<BodyComponent>> _bodies = new();
 
-    private void InitializeGoob()
-    {
-        SubscribeLocalEvent<BasicEntityAmmoProviderComponent, DamageExamineEvent>(OnBasicEntityDamageExamine);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBasicEntityDamageExamine(Entity<BasicEntityAmmoProviderComponent> ent, ref DamageExamineEvent args)
     {
         if (ent.Comp.Proto is not {} proto || GetProjectileDamage(proto) is not {} damage)
@@ -45,7 +41,7 @@ public abstract partial class SharedGunSystem
     /// </summary>
     public int GetProjectilePenetration(EntProtoId id)
     {
-        if (!ProtoManager.Resolve(id, out var proto))
+        if (!ProtoMan.Resolve(id, out var proto))
             return 0;
 
         // goida

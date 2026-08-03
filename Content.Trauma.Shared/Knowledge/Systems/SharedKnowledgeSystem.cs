@@ -6,6 +6,7 @@ using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Whitelist;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -26,10 +27,10 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] protected IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected IPrototypeManager _proto = default!;
     [Dependency] protected ISharedPlayerManager _player = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedLanguageSystem _language = default!;
@@ -50,7 +51,19 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         "Expert",
         "Master"
     ];
+    /// <summary>
+    /// When knowledge is disabled only these skills can be added.
+    /// </summary>
+    public static readonly EntityWhitelist DisabledSkillWhitelist = new()
+    {
+        Components =
+        [
+            "LanguageKnowledge",
+            "MartialArtsKnowledge"
+        ]
+    };
 
+    public bool SkillsEnabled;
     private bool _skillGain;
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
@@ -61,22 +74,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         base.Initialize();
 
-        InitializeLanguage();
         InitializeMartialArts();
+        InitializeLanguage();
         InitializeOnWear();
 
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnContainerShutdown);
-        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
-        SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
-        SubscribeLocalEvent<KnowledgeContainerComponent, TransferredToCloneEvent>(OnCloneTransfer);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, PolymorphedEvent>(OnPolymorphed);
-        SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
+        Subs.CVar(_cfg, TraumaCVars.SkillsEnabled, x => SkillsEnabled = x, true);
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
         LoadSkillPrototypes();
@@ -117,11 +119,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
     {
         EnsureContainer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Container is { } container)
@@ -168,37 +172,44 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.Holder));
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganInserted(Entity<KnowledgeContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
         LinkContainer(args.Target, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganRemoved(Entity<KnowledgeContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
         UnlinkContainer(args.Target, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBorgBrainInserted(Entity<KnowledgeContainerComponent> ent, ref BorgBrainInsertedEvent args)
     {
         LinkContainer(args.Chassis, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBorgBrainRemoved(Entity<KnowledgeContainerComponent> ent, ref BorgBrainRemovedEvent args)
     {
         UnlinkContainer(args.Chassis, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnCloneTransfer(Entity<KnowledgeContainerComponent> ent, ref TransferredToCloneEvent args)
     {
         TransferKnowledge(ent, args.Cloned);
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<KnowledgeHolderComponent> ent, ref PolymorphedEvent args)
     {
         if (ent.Owner == args.OldEntity)
             TransferKnowledge(ent, args.NewEntity);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindAdded(Entity<KnowledgeHolderComponent> ent, ref MindAddedMessage args)
     {
         // all player-controlled mobs can use knowledge
@@ -206,6 +217,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         EnsureKnowledgeContainer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
@@ -216,7 +228,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         AllKnowledges.Clear();
         var name = Factory.GetComponentName<KnowledgeComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: replace with TryComp after engine update
             if (!proto.TryGetComponent<KnowledgeComponent>(name, out var comp))
@@ -270,7 +282,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (GetKnowledge(ent, id) is not { } unit)
         {
             // Can't add it with experience if you can't comprehend complexity.
-            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+            if (ProtoMan.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
                 return;
 
             // if you don't have it, you have a small change to learn it when gaining some xp
@@ -376,6 +388,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </returns>
     public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool popup = true)
     {
+        if (!SkillsEnabled && _whitelist.IsWhitelistFail(DisabledSkillWhitelist, id))
+            return null; // no crafting etc skills when disabled
+
         if (GetKnowledge(ent, id) is { } existing)
         {
             if (existing.Comp.LearnedLevel < level)

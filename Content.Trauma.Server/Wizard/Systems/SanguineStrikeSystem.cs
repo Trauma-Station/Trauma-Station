@@ -25,7 +25,6 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
     [Dependency] private BloodstreamSystem _bloodStream = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private PuddleSystem _puddle = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
     [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
 
@@ -138,7 +137,7 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
             var bloodToRemove = FixedPoint2.Min(blood.BloodSolution.Value.Comp.Solution.Volume,
                 bloodSuckAmount);
             tempSol.MaxVolume += bloodToRemove;
-            tempSol.AddSolution(_solution.SplitSolution(blood.BloodSolution.Value, bloodToRemove), _proto);
+            tempSol.AddSolution(_solution.SplitSolution(blood.BloodSolution.Value, bloodToRemove), ProtoMan);
         }
 
         var restoredBlood = FixedPoint2.Min(tempSol.Volume, missingBlood);

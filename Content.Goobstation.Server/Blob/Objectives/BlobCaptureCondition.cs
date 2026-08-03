@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Blob.Components;
+using Content.Goobstation.Shared.Blob.Components;
 
 namespace Content.Goobstation.Server.Blob.Objectives;
 
@@ -8,5 +8,5 @@ namespace Content.Goobstation.Server.Blob.Objectives;
 public sealed partial class BlobCaptureConditionComponent : Component
 {
     [DataField]
-    public int Target { get; set; } = StationBlobConfigComponent.DefaultStageEnd;
+    public int Target = StationBlobConfigComponent.DefaultStageEnd;
 }

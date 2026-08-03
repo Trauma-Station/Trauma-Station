@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Physics;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
@@ -12,10 +11,9 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Player;
-using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
@@ -26,41 +24,24 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedTransformSystem Xform = default!;
 
-    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedHereticAbilitySystem _hereticAbility = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private SharedContinuousBeamSystem _beam = default!;
 
     public const string JointId = "stargaze";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<StarGazerComponent, StarGazeEvent>(OnStarGaze);
-        SubscribeLocalEvent<StarGazerComponent, MeleeHitEvent>(OnStarGazerHit);
-        SubscribeLocalEvent<StarGazerComponent, AttackAttemptEvent>(OnStarGazerAttackAttempt);
-
-        SubscribeLocalEvent<StarGazeComponent, StarGazeDoAfterEvent>(OnStarGazeDoAfter);
-        SubscribeLocalEvent<StarGazeComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
-        SubscribeLocalEvent<StarGazeComponent, ComponentStartup>(OnStarGazeStartup);
-        SubscribeLocalEvent<StarGazeComponent, ComponentShutdown>(OnStarGazeShutdown);
-        SubscribeLocalEvent<StarGazeComponent, AttackAttemptEvent>(OnStarGazeAttackAttempt);
-
-        SubscribeLocalEvent<HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
-
-        SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStarGazerAttackAttempt(Entity<StarGazerComponent> ent, ref AttackAttemptEvent args)
     {
         if (Status.HasStatusEffect(ent, ent.Comp.InactiveStatus))
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnResolveStarGazer(Entity<HereticComponent> ent, ref EventHereticResolveStarGazer args)
     {
         if (!TryComp(ent, out MindComponent? mind) || mind.OwnedEntity is not { } uid)
@@ -69,6 +50,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
         ResolveStarGazer(uid, out _, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnStarGazerHit(Entity<StarGazerComponent> ent, ref MeleeHitEvent args)
     {
         foreach (var uid in args.HitEntities)
@@ -77,63 +59,41 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnStarGazeAttackAttempt(Entity<StarGazeComponent> ent, ref AttackAttemptEvent args)
     {
         args.Cancel();
     }
 
-    private void OnGetPosition(LaserBeamEndpointPositionEvent ev)
-    {
-        if (!TryGetEntity(ev.Uid, out var uid))
-            return;
-
-        if (!TryComp(uid.Value, out StarGazeComponent? starGaze) || !TryComp(uid.Value, out TransformComponent? xform))
-            return;
-
-        if (xform.MapID != ev.Coordinates.MapId)
-            return;
-
-        var pos = ev.Coordinates;
-        var ourPos = Xform.GetWorldPosition(xform);
-
-        var dir = pos.Position - ourPos;
-        var len = dir.Length();
-        var newLen = Math.Clamp(len, starGaze.MinMaxLaserRange.X, starGaze.MinMaxLaserRange.Y);
-        if (Math.Abs(len - newLen) > 0.01f)
-            pos = new MapCoordinates(ourPos + dir * newLen / len, xform.MapID);
-
-        if (starGaze.CursorPosition == pos)
-            return;
-
-        starGaze.CursorPosition = pos;
-        Dirty(uid.Value, starGaze);
-    }
-
-    protected virtual void OnStarGazeShutdown(Entity<StarGazeComponent> ent, ref ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnStarGazeShutdown(Entity<StarGazeComponent> ent, ref ComponentShutdown args)
     {
         if (!TerminatingOrDeleted(ent))
-            _movement.RefreshMovementSpeedModifiers(ent);
-
-        if (Exists(ent.Comp.BeamSoundEnt))
-            PredictedQueueDel(ent.Comp.BeamSoundEnt);
+            _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
-    protected virtual void OnStarGazeStartup(Entity<StarGazeComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent]
+    private void OnStarGazeStartup(Entity<StarGazeComponent> ent, ref ComponentStartup args)
     {
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnRefreshMovespeed(Entity<StarGazeComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (ent.Comp.LifeStage < ComponentLifeStage.Stopping)
             args.ModifySpeed(ent.Comp.Slowdown.X, ent.Comp.Slowdown.Y, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnStarGazeDoAfter(Entity<StarGazeComponent> ent, ref StarGazeDoAfterEvent args)
     {
         var (uid, comp) = ent;
 
-        if (args.Cancelled || args.Handled || comp.CursorPosition == null)
+        if (!TryComp(uid, out ContinuousBeamGunComponent? gun))
+            return;
+
+        if (args.Cancelled || args.Handled || gun.CursorPosition == null)
         {
             if (TryGetEntity(args.OrbEffect, out var orb) && Exists(orb.Value))
                 PredictedQueueDel(orb.Value);
@@ -142,41 +102,24 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
             return;
         }
 
-        if (comp.CursorPosition.Value.MapId != Transform(uid).MapID)
+        var coords = Xform.GetMapCoordinates(uid);
+
+        if (gun.CursorPosition.Value.MapId != coords.MapId)
+        {
+            RemCompDeferred(uid, comp);
+            return;
+        }
+
+        if (_beam.ShootLaser(uid, uid, Xform.ToCoordinates(coords)) == null)
         {
             RemCompDeferred(uid, comp);
             return;
         }
 
         args.Handled = true;
-
-        var now = Timing.CurTime;
-
-        if (_net.IsServer)
-        {
-            comp.Endpoint = Spawn(null, Xform.ToCoordinates(comp.CursorPosition.Value));
-            var endpoint = comp.Endpoint.Value;
-            EnsureComp<LaserBeamEndpointComponent>(endpoint);
-            EnsureComp<TimedDespawnComponent>(endpoint).Lifetime = comp.LaserDuration;
-            var beam = EnsureComp<ComplexJointVisualsComponent>(uid);
-            var data = new ComplexJointVisualsData(JointId, comp.Beam1, comp.Start1, comp.End1, now)
-            {
-                Scale = new Vector2(comp.BeamScale),
-            };
-            beam.Data[GetNetEntity(endpoint)] = data;
-
-            comp.BeamSoundEnt = _audio.PlayEntity(ent.Comp.BeamSound,
-                    Filter.Empty().AddInMap(comp.CursorPosition.Value.MapId, EntityManager),
-                    uid,
-                    true)
-                ?.Entity;
-        }
-
-        comp.StartedBlasting = true;
-        comp.BeamTimer = now + comp.BeamTime;
-        Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnStarGaze(Entity<StarGazerComponent> ent, ref StarGazeEvent args)
     {
         if (!_hereticAbility.TryUseAbility(args, false))

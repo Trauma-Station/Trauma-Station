@@ -8,6 +8,7 @@ using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Particles;
 
@@ -16,8 +17,8 @@ namespace Content.Trauma.Client.Particles;
 /// </summary>
 public sealed partial class ParticleSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IOverlayManager _overlay = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -125,7 +126,10 @@ public sealed partial class ParticleSystem : EntitySystem
         EntityUid? attachedEntity = null,
         Color? colorOverride = null)
     {
-        if (!_proto.Resolve(effectId, out var proto))
+        if (!_timing.IsFirstTimePredicted)
+            return null;
+
+        if (!ProtoMan.Resolve(effectId, out var proto))
             return null;
 
         // Skip quality check if this is a gameplay-critical particle

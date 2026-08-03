@@ -85,12 +85,12 @@
 
 - type: entity
   parent: BaseAction
-  id: ActionHereticVoidConduit
+  id: ActionHereticVoidConduitAscension
   name: Void Conduit
   description: Opens a gate to the Void; it releases an intermittent pulse that damages windows and airlocks, while afflicting Heathens with void chill. Affected Heretics instead receive low pressure resistance.
   components:
   - type: Action
-    useDelay: 90
+    useDelay: 60
     itemIconStyle: NoItem
     checkCanInteract: false
     icon:
@@ -102,6 +102,16 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-void-conduit
-  - type: ChangeUseDelayOnAscension
-    newUseDelay: 45
-    requiredPath: Void
+
+- type: entity
+  parent: ActionHereticVoidConduitAscension
+  id: ActionHereticVoidConduit
+  description: Opens a gate to the Void; it releases an intermittent pulse that damages windows and airlocks, while afflicting Heathens with void chill. Affected Heretics instead receive low pressure resistance. Has 1 charge that can be replenished by breaking (using) your blade in hand.
+  components:
+  - type: HereticActionBladeBreakRecharge
+  - type: LimitedCharges
+    lastCharges: 1
+    maxCharges: 1
+  - type: ActionUpgrade
+    effectedLevels:
+      2: ActionHereticVoidConduitAscension

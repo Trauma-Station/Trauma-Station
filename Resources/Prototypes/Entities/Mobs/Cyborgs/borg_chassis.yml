@@ -132,10 +132,9 @@
     - type: ModifyKnowledgeGrant
       skills:
         MeleeKnowledge: 51
-        StrengthKnowledge: 51
-        ShootingKnowledge: 51
-        ToughnessKnowledge: 51
-        AthleticsKnowledge: 51
+        StrengthKnowledge: 50
+        ShootingKnowledge: 50
+        ToughnessKnowledge: 28
         WeaponsKnowledge: 51
     # </Trauma>
 
@@ -152,10 +151,9 @@
         FirstAidKnowledge: 60
         ChemistryKnowledge: 60
         MeleeKnowledge: 20
-        StrengthKnowledge: 20
+        StrengthKnowledge: 50
         ShootingKnowledge: 20
         ToughnessKnowledge: 20
-        AthleticsKnowledge: 20
         WeaponsKnowledge: 20
     # </Trauma>
     - type: Sprite
@@ -198,6 +196,22 @@
   description: A streamlined engineering cyborg, equipped with covert modules. Its chameleon projector lets it disguise itself as a Nanotrasen cyborg.
   components:
     # <Trauma>
+    - type: BorgDisguise
+      action: ActionBorgDisguiseToggle
+      disguisedPrototype: BorgChassisEngineer
+      hasMindState: engineer_e
+      noMindState: engineer_e_r
+      disguisedLight: engineer_l
+      realLight: synd_engi_l
+    - type: GenericVisualizer
+      visuals:
+        enum.BorgDisguiseVisuals.IsDisguised:
+          enum.BorgVisualLayers.Body:
+            True: { visible: false }
+            False: { visible: true }
+          enum.BorgDisguiseVisualLayers.Body:
+            True: { visible: true }
+            False: { visible: false }
     - type: ModifyKnowledgeGrant
       skills:
         FabricationKnowledge: 60
@@ -213,15 +227,22 @@
         MechanicsKnowledge: 60
         BotsKnowledge: 60
         MeleeKnowledge: 20
-        StrengthKnowledge: 20
+        StrengthKnowledge: 50
         ShootingKnowledge: 20
         ToughnessKnowledge: 20
-        AthleticsKnowledge: 20
         WeaponsKnowledge: 20
-    # </Trauma>
     - type: Sprite
       layers:
+        - state: engineer_e
+          map: [ "enum.BorgDisguiseVisualLayers.Light" ]
+          shader: unshaded
+          visible: false
         - state: synd_engi
+          map: [ "enum.BorgVisualLayers.Body" ]
+        - state: engineer
+          map: [ "enum.BorgDisguiseVisualLayers.Body" ]
+          visible: false
+    # </Trauma>
         - state: synd_engi_e
           map: ["enum.BorgVisualLayers.Light"]
           shader: unshaded

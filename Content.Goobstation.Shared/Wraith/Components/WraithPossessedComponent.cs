@@ -2,6 +2,7 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Wraith.Components;
 
@@ -9,7 +10,7 @@ namespace Content.Goobstation.Shared.Wraith.Components;
 /// Marks the entity as possessed by another entity.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class WraithPossessedComponent : Component
 {
     /// <summary>
@@ -36,11 +37,9 @@ public sealed partial class WraithPossessedComponent : Component
     [DataField]
     public TimeSpan PossessionDuration = TimeSpan.FromSeconds(30f);
 
-    [ViewVariables, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextUpdate = TimeSpan.Zero;
-
-    [DataField, AutoNetworkedField]
-    public bool CancelEarly;
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier RevenantDamageOvertime = new()

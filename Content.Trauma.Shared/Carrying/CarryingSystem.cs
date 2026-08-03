@@ -229,7 +229,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
 
         if (length.TotalSeconds >= 9f)
         {
-            _popup.PopupClient(Loc.GetString("carry-too-heavy"), carried, carrier, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("carry-too-heavy"), carried, carrier, PopupType.SmallCaution);
             return;
         }
 

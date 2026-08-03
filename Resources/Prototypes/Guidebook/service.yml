@@ -9,6 +9,7 @@
   #- Chaplain # Trauma - moved to Civilian
   - Chef
   #- Janitorial # Trauma - moved to Civilian
+  - Ranching # Trauma
 
 - type: guideEntry
   id: Bartender

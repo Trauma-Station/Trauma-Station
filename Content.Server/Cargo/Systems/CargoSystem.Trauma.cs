@@ -24,7 +24,7 @@ public sealed partial class CargoSystem
         if (ent.Comp.IgnoreAccess || _emag.CheckFlag(ent, EmagType.Access) || _accessReaderSystem.UserHasAccess(user, account.ApproveAccess))
             return true;
 
-        ConsolePopup(user, Loc.GetString("cargo-console-order-not-allowed"));
+        _popup.PopupCursor(Loc.GetString("cargo-console-order-not-allowed"), user);
         PlayDenySound(ent, ent.Comp);
         return false;
     }
@@ -35,7 +35,7 @@ public sealed partial class CargoSystem
             && product.RequiredAlerts is {} alerts
             && (CompOrNull<AlertLevelComponent>(station)?.CurrentLevel is not {} current || !alerts.Contains(current)))
         {
-            ConsolePopup(user, Loc.GetString("cargo-console-alert-level", ("product", product.Name)));
+            _popup.PopupCursor(Loc.GetString("cargo-console-alert-level", ("product", product.Name)), user);
             PlayDenySound(ent, ent.Comp);
             return false;
         }

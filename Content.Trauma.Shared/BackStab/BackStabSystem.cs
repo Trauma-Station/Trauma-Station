@@ -14,7 +14,6 @@ namespace Content.Trauma.Shared.BackStab;
 
 public sealed partial class BackStabSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -47,7 +46,7 @@ public sealed partial class BackStabSystem : EntitySystem
 
         var damage = total * ent.Comp.DamageMultiplier;
 
-        args.BonusDamage += new DamageSpecifier(_prototypeManager.Index(Slash), damage - total);
+        args.BonusDamage += new DamageSpecifier(ProtoMan.Index(Slash), damage - total);
     }
 
     public bool TryBackstab(EntityUid target,

@@ -50,7 +50,7 @@
         time: 60
         type: Add
       - !type:ModifyStatusEffect
-        effectProto: StatusEffectWeatherImmune
+        effectProto: StatusEffectAshStormImmune
         time: 60
         type: Add
 

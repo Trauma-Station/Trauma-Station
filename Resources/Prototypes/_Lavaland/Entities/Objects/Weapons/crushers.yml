@@ -14,6 +14,9 @@
     size: Ginormous
   - type: MegafaunaWeaponLooter # TODO reconsider this component entirely
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: DisarmMalus

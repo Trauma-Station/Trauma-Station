@@ -25,7 +25,6 @@ public sealed partial class MutationSystem : CommonMutationSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -61,6 +60,11 @@ public sealed partial class MutationSystem : CommonMutationSystem
     /// </remarks>
     public Dictionary<EntProtoId<MutationComponent>, MutationData> RoundData = new();
     private HashSet<int> MutationNumbers = new();
+
+    /// <summary>
+    /// All <see cref="UnlockedMutations"/> which have negative instability, should just be negative effects.
+    /// </summary>
+    public List<EntProtoId<MutationComponent>> NegativeMutations = new();
 
     private static readonly ProtoId<DamageTypePrototype> Cellular = "Cellular";
 
@@ -143,7 +147,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
         var popup = Loc.GetString(id + "-mutated");
         if (predicted)
-            _popup.PopupClient(popup, ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
         else
             _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
     }
@@ -167,7 +171,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
             return;
 
         if (predicted)
-            _popup.PopupClient(popup, ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
         else
             _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
     }
@@ -191,15 +195,21 @@ public sealed partial class MutationSystem : CommonMutationSystem
         MutationCount = 0;
         AllMutations.Clear();
         UnlockedMutations.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        NegativeMutations.Clear();
+        var name = Factory.CompName<MutationComponent>();
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            if (!proto.TryGetComponent<MutationComponent>(out var comp, Factory))
+            if (!proto.TryComp<MutationComponent>(name, out var comp))
                 continue;
 
             MutationCount++;
             AllMutations[proto.ID] = comp;
-            if (!comp.Locked && !HasRecipe(proto.ID))
-                UnlockedMutations.Add(proto.ID);
+            if (comp.Locked || HasRecipe(proto.ID))
+                continue;
+
+            UnlockedMutations.Add(proto.ID);
+            if (comp.Instability < 0)
+                NegativeMutations.Add(proto.ID);
         }
     }
 
@@ -707,7 +717,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         {
             var msg = Loc.GetString(key);
             if (predicted)
-                _popup.PopupClient(msg, ent, ent);
+                _popup.PopupEntity(msg, ent, ent);
             else
                 _popup.PopupEntity(msg, ent, ent);
         }

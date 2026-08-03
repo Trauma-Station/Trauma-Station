@@ -2,7 +2,6 @@
 
 using System.Text.RegularExpressions;
 using Content.Goobstation.Common.Morgue;
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Server.Devil.Condemned;
 using Content.Goobstation.Server.Devil.Contract;
 using Content.Goobstation.Server.Devil.Objectives.Components;
@@ -28,6 +27,7 @@ using Content.Server.Stunnable;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
@@ -62,7 +62,6 @@ public sealed partial class DevilSystem : EntitySystem
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private PolymorphSystem _poly = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private StunSystem _stun = default!;
     [Dependency] private PopupSystem _popup = default!;
@@ -175,7 +174,7 @@ public sealed partial class DevilSystem : EntitySystem
         var popup = Loc.GetString($"devil-power-level-increase-{args.NewLevel.ToString().ToLowerInvariant()}");
         _popup.PopupEntity(popup, args.User, args.User, PopupType.Large);
 
-        if (!_prototype.TryIndex(devil.Comp.DevilBranchPrototype, out var proto))
+        if (!ProtoMan.TryIndex(devil.Comp.DevilBranchPrototype, out var proto))
             return;
 
         foreach (var ability in proto.PowerActions)
@@ -290,8 +289,8 @@ public sealed partial class DevilSystem : EntitySystem
     {
         var comp = ent.Comp;
         // Generate true name.
-        var firstNameOptions = _prototype.Index(comp.FirstNameTrue);
-        var lastNameOptions = _prototype.Index(comp.LastNameTrue);
+        var firstNameOptions = ProtoMan.Index(comp.FirstNameTrue);
+        var lastNameOptions = ProtoMan.Index(comp.LastNameTrue);
 
         comp.TrueName = string.Concat(_random.Pick(firstNameOptions.Values), " ", _random.Pick(lastNameOptions.Values));
         Dirty(ent);

@@ -1206,7 +1206,6 @@ entities:
   - uid: 132
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,-3.5
       parent: 201
 - proto: GroundTobacco

@@ -147,3 +147,12 @@
       path: /Audio/_EinsteinEngines/Voice/IPC/pai_whistle.ogg
       params:
         variation: 0.125
+
+- type: emoteSounds
+  parent: BaseMobEmotes
+  id: ClownChicken
+  params:
+    variation: 0.125
+  sounds:
+    Honk:
+      collection: BikeHorn

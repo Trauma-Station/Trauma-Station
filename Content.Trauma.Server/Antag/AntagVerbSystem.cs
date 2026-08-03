@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Antag;
+using Robust.Shared.Player;
 using System.Linq;
 
 namespace Content.Trauma.Server.Antag;
@@ -14,26 +15,19 @@ public sealed partial class AntagVerbSystem : EntitySystem
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GetAntagVerbsEvent>(OnGetAntagVerbs);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetAntagVerbs(ref GetAntagVerbsEvent args)
     {
         var session = args.Session;
         var verbs = args.Verbs.Verbs;
 
-        foreach (var smite in _proto.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
+        foreach (var smite in ProtoMan.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
         {
             if (!_whitelist.CheckBoth(args.Target, blacklist: smite.Blacklist, whitelist: smite.Whitelist))
                 continue;
 
-            var antag = _proto.Index(smite.Antag);
+            var antag = ProtoMan.Index(smite.Antag);
             var name = Loc.GetString(antag.Name);
             verbs.Add(new Verb()
             {
@@ -42,11 +36,21 @@ public sealed partial class AntagVerbSystem : EntitySystem
                 Icon = smite.Icon,
                 Act = () =>
                 {
-                    _antag.ForceMakeAntag(session, smite.Rule, smite.RuleComp);
+                    MakeAntag(session, smite);
                 },
                 Impact = LogImpact.High,
                 Message = Loc.GetString("admin-verb-make-antag", ("antag", name))
             });
         }
+    }
+
+    public void MakeAntag(ICommonSession player, [ForbidLiteral] ProtoId<AntagSmitePrototype> id)
+    {
+        MakeAntag(player, ProtoMan.Index(id));
+    }
+
+    public void MakeAntag(ICommonSession player, AntagSmitePrototype smite)
+    {
+        _antag.ForceMakeAntag(player, smite.Rule, smite.RuleComp);
     }
 }

@@ -28,11 +28,10 @@ namespace Content.Trauma.Shared.Heretic.Systems;
 public abstract partial class SharedHereticSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected ISharedChatManager ChatMan = default!;
     [Dependency] protected ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
@@ -95,7 +94,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
             var pathStr = path.ToString();
             var knowledgeId = $"{pathStr}Passive{i}";
 
-            if (_proto.HasIndex<HereticKnowledgePrototype>(knowledgeId))
+            if (ProtoMan.HasIndex<HereticKnowledgePrototype>(knowledgeId))
             {
                 TryAddKnowledge((ent, mind, ent.Comp), knowledgeId);
                 var passiveDesc = Loc.GetString($"knowledge-path-{pathStr.ToLower()}-passive-desc-{i}");
@@ -232,7 +231,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
         body ??= ent.Comp1.OwnedEntity;
 
-        var data = _proto.Index(id);
+        var data = ProtoMan.Index(id);
 
         if (data.MindEvent is { } hereticEv)
         {
@@ -297,7 +296,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
+        if (Timing.ApplyingState || TerminatingOrDeleted(uid))
             return;
 
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)

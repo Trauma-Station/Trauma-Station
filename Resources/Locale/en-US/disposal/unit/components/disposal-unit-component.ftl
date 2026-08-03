@@ -16,7 +16,7 @@
 
 ## UI
 
-ui-disposal-unit-title = Disposal Unit
+ui-disposal-unit-title = {CAPITALIZE($name)}
 
 ui-disposal-unit-label-state = State:
 ui-disposal-unit-label-pressure = Pressure:
@@ -28,11 +28,11 @@ ui-disposal-unit-button-power = Power
 
 ## Verbs
 disposal-flush-verb-get-data-text = Flush
-disposal-self-insert-verb-get-data-text = Jump inside
 disposal-eject-verb-get-data-text = Eject contents
 
-## No hands
+## Errors
 disposal-unit-no-hands = You don't have hands!
+disposal-unit-is-full = There's no more room inside.
 
 # state
 disposal-unit-state-Ready = Ready

@@ -7,14 +7,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    protected override void SubscribeBlade()
-    {
-        base.SubscribeBlade();
-
-        SubscribeLocalEvent<EventHereticFuriousSteel>(OnFuriousSteel);
-        SubscribeLocalEvent<EventHereticDomainExpansion>(OnDomainExpansion);
-    }
-
+    [SubscribeLocalEvent]
     private void OnDomainExpansion(EventHereticDomainExpansion args)
     {
         DebugTools.Assert(args.MinRadius <= args.TileRadius);
@@ -47,6 +40,7 @@ public sealed partial class HereticAbilitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnFuriousSteel(EventHereticFuriousSteel args)
     {
         if (!TryUseAbility(args))

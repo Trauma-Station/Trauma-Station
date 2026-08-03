@@ -4,6 +4,7 @@ using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
 
@@ -16,7 +17,7 @@ public sealed partial class BodyPartsSelector : EntityTableSelector
     public EntProtoId<InitialBodyComponent> Proto;
 
     // everything is guaranteed so no rolling is done
-    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
+    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(IRobustRandom rand,
         IEntityManager entMan,
         IPrototypeManager proto,
         EntityTableContext ctx)
@@ -38,8 +39,7 @@ public sealed partial class BodyPartsSelector : EntityTableSelector
         {
             // filter out internal organs from the fill
             var organ = proto.Index(organId);
-            // TODO: change this to .HasComp after engine update
-            if (!organ.TryGetComponent<InternalOrganComponent>(out _, factory))
+            if (!organ.HasComp<InternalOrganComponent>(factory))
                 yield return (organId, 1.0);
         }
     }

@@ -151,6 +151,7 @@
     guides:
     - Xenobiology
   - type: MobSpam # you can easily make hundreds of them...
+  - type: RadStormImmune
 
 # Begin Slimes
 

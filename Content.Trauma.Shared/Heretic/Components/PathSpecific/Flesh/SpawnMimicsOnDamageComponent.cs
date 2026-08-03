@@ -17,7 +17,7 @@ public sealed partial class SpawnMimicsOnDamageComponent : Component
     public float GhoulHealthMultiplier = 0.5f;
 
     [DataField]
-    public FixedPoint2 BaseGhoulHealth = 50;
+    public FixedPoint2 BaseGhoulHealth = 25;
 
     [DataField]
     public bool GiveBlade = true;

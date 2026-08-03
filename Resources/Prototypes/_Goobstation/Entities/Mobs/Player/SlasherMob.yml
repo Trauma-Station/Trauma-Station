@@ -2,7 +2,7 @@
 
 - type: entity
   name: Urist McSlasher
-  parent: MobHuman
+  parent: [ MobHuman, MobNightVision ]
   id: MobSlasher
   description: A terrifying slasher with supernatural abilities.
   suffix: Debug
@@ -19,11 +19,10 @@
   - type: SlasherSoulSteal
   - type: SlasherSummonMeatSpike
   - type: BreathingImmunity
+  - type: NightVision
+    lightingColor: '#FF777715'
   - type: GunBlocked
   - type: WeakToHoly
-  - type: NightVision
-    activateSound: null
-    deactivateSound: null
   - type: Hunger
     baseDecayRate: 0
   - type: Thirst

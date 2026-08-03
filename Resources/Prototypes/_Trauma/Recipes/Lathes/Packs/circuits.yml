@@ -1,8 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: latheRecipePack
-  id: ServiceBoardsTrauma
+  id: EngineeringBoardsStaticTrauma
   recipes:
-  - EnergyFoodSynthesizerMachineCircuitboard
-  - EnergyBoozeDispenserMachineCircuitboard
-  - EnergySodaDispenserMachineCircuitboard
+  - RoboticArmCircuitboard
+  - ConstructorCircuitboard
+  - StorageBinCircuitboard
+  - InteractorCircuitboard
+  - CondenserMachineCircuitBoard

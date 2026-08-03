@@ -61,7 +61,7 @@ public sealed partial class MetalSystem : SharedMetalSystem
     private void OnTemperatureForged(Entity<TemperatureComponent> ent, ref ItemForgedEvent args)
     {
         // TODO: base it off your input metals if that matters in the future
-        var temp = Proto.Index(GetMetalOrThrow(ent)).WorkingTemp;
+        var temp = ProtoMan.Index(GetMetalOrThrow(ent)).WorkingTemp;
         _temperature.ForceChangeTemperature(ent, temp, ent.Comp);
         if (_internalQuery.TryComp(ent, out var comp))
             comp.Temperature = temp;

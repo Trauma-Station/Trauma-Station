@@ -16,7 +16,7 @@
   - type: FlavorProfile
     flavors:
     - rich
-    - fish
+    - fishy
     - salty
   - type: Edible
     trash:
@@ -46,7 +46,7 @@
     openableByHand: true
   - type: FlavorProfile
     flavors:
-    - fish
+    - fishy
     - salty
   - type: Edible
     trash:

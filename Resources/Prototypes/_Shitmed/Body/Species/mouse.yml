@@ -14,7 +14,7 @@
       # Organs
       Heart: OrganAnimalHeart
       Lungs: OrganAnimalLungs
-      Stomach: OrganAnimalStomach
+      Stomach: OrganAnimalStomachFast
       Liver: OrganAnimalLiver
       Kidneys: OrganAnimalKidneys
       EggSack: OrganMouseEggSack

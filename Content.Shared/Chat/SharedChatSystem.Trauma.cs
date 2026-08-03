@@ -2,17 +2,28 @@ using Content.Shared.Radio;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
 using Content.Shared.StatusIcon;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Speech;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Collections.Frozen;
 
 namespace Content.Shared.Chat;
 
 public abstract partial class SharedChatSystem
 {
     [Dependency] private IGameTiming _timing = default!;
+
+    public const char CollectiveMindPrefix = '+';
+
+    /// <summary>
+    /// Chance of symbols in a whispered message to be seen even by "far" listeners.
+    /// </summary>
+    public const float DefaultObfuscationFactor = 0.2f;
+
+    private FrozenDictionary<char, CollectiveMindPrototype> _mindKeyCodes = default!;
 
     public readonly Color DefaultSpeakColor = Color.White;
 
@@ -111,5 +122,62 @@ public abstract partial class SharedChatSystem
         RaiseLocalEvent(source, ref fontSizeEv);
 
         return (Loc.GetString(verbId), fontEv.Font, fontSizeEv.FontSize.ToString());
+    }
+
+    private void CacheCollectiveMinds()
+    {
+        _mindKeyCodes = ProtoMan.EnumeratePrototypes<CollectiveMindPrototype>()
+            .ToFrozenDictionary(x => x.KeyCode);
+    }
+
+    public bool TryProccessCollectiveMindMessage(
+        EntityUid source,
+        string input,
+        out string output,
+        out CollectiveMindPrototype? channel,
+        bool quiet = false)
+    {
+        output = input.Trim();
+        channel = null;
+
+        if (input.Length == 0)
+            return false;
+
+        if (!input.StartsWith(CollectiveMindPrefix))
+            return false;
+
+        ProtoId<CollectiveMindPrototype>? defaultChannel = null;
+        if (TryComp<CollectiveMindComponent>(source, out var mind))
+            defaultChannel = mind.DefaultChannel;
+
+        if (input.Length < 2 || (char.IsWhiteSpace(input[1]) && defaultChannel == null))
+        {
+            output = SanitizeMessageCapital(input[1..].TrimStart());
+            if (!quiet)
+                _popup.PopupEntity(Loc.GetString("chat-manager-no-radio-key"), source, source);
+            return true;
+        }
+
+        var channelKey = input[1];
+        channelKey = char.ToLower(channelKey);
+
+        if (_mindKeyCodes.TryGetValue(channelKey, out channel))
+        {
+            output = SanitizeMessageCapital(input[2..].TrimStart());
+            return true;
+        }
+        else if (defaultChannel != null)
+        {
+            output = SanitizeMessageCapital(input[1..].TrimStart());
+            channel = ProtoMan.Index<CollectiveMindPrototype>(defaultChannel.Value);
+            return true;
+        }
+
+        if (quiet)
+            return false;
+
+        var msg = Loc.GetString("chat-manager-no-such-channel", ("key", channelKey));
+        _popup.PopupEntity(msg, source, source);
+        return false;
     }
 }

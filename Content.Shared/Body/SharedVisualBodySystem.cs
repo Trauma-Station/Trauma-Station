@@ -12,7 +12,6 @@ namespace Content.Shared.Body;
 /// </summary>
 public abstract partial class SharedVisualBodySystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private MarkingManager _marking = default!;
     [Dependency] private SharedContainerSystem _container = default!;
 
@@ -41,6 +40,11 @@ public abstract partial class SharedVisualBodySystem : EntitySystem
             if (!_marking.TryGetMarking(marking, out var proto))
                 continue;
 
+            // <Trauma>
+            if (!ResolveChildMarkings(marking, proto, forcedColors))
+                continue;
+            // </Trauma>
+
             if (!proto.ForcedColoring && appearances.GetValueOrDefault(proto.BodyPart)?.MatchSkin != true)
                 ret.Add(marking);
             else
@@ -57,6 +61,7 @@ public abstract partial class SharedVisualBodySystem : EntitySystem
 
             var markingWithColor = new Marking(marking.MarkingId, colors)
             {
+                IsChildMarking = marking.IsChildMarking, // Trauma
                 Forced = marking.Forced,
             };
             if (appearances.GetValueOrDefault(prototype.BodyPart) is { MatchSkin: true } appearance && skinColor is { } color)
@@ -143,7 +148,7 @@ public abstract partial class SharedVisualBodySystem : EntitySystem
         if (!args.Args.Markings.TryGetValue(category, out var markingSet))
             return;
 
-        var groupProto = _prototype.Index(ent.Comp.MarkingData.Group);
+        var groupProto = ProtoMan.Index(ent.Comp.MarkingData.Group);
         var organMarkings = ent.Comp.Markings.ShallowClone();
 
         foreach (var layer in ent.Comp.MarkingData.Layers)
