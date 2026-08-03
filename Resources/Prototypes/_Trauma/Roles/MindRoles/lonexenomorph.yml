@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleLoneXenomorph
+  name: lone xenomorph role
+  components:
+  - type: MindRole
+    antagPrototype: LoneXenomorph
+    roleType: SoloAntagonist
+    exclusiveAntag: true
+  - type: XenomorphRole
