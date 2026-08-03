@@ -2,9 +2,6 @@
 
 namespace Content.Shared.Revolutionary.Components;
 
-/// <summary>
-/// Trauma - headrev conversion field
-/// </summary>
 public sealed partial class HeadRevolutionaryComponent
 {
     /// <summary>

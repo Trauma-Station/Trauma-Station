@@ -5,9 +5,6 @@
   id: WallHierophantArena
   name: hierophant wall
   components:
-  - type: Tag
-    tags:
-      - Wall
   - type: Sprite
     sprite: _Lavaland/Structures/Walls/hierophant.rsi
   - type: Icon
@@ -31,9 +28,6 @@
   name: hierophant field
   description: "Keeps the salvager in and... Why are you looking at this in a middle of a fight? You have nothing to do?!"
   components:
-  - type: Tag
-    tags:
-      - Wall
   - type: Sprite
     sprite: _Lavaland/Structures/Walls/hierophant_temp.rsi
   - type: Icon

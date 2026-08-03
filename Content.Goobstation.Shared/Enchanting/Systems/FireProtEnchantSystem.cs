@@ -14,21 +14,13 @@ public sealed partial class FireProtEnchantSystem : EntitySystem
 {
     [Dependency] private EnchantingSystem _enchanting = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FireProtEnchantComponent, EnchantAddedEvent>(OnAdded);
-        SubscribeLocalEvent<FireProtEnchantComponent, EnchantUpgradedEvent>(OnUpgraded);
-        SubscribeLocalEvent<FireProtEnchantComponent, GetFireProtectionEvent>(OnGetFireProtection);
-        SubscribeLocalEvent<FireProtEnchantComponent, ModifyChangedTemperatureEvent>(OnTemperatureChangeAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAdded(Entity<FireProtEnchantComponent> ent, ref EnchantAddedEvent args)
     {
         Modify(ent, (float) args.Level);
     }
 
+    [SubscribeLocalEvent]
     private void OnUpgraded(Entity<FireProtEnchantComponent> ent, ref EnchantUpgradedEvent args)
     {
         Modify(ent, (float) args.Level / (float) args.OldLevel);
@@ -41,6 +33,7 @@ public sealed partial class FireProtEnchantSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetFireProtection(Entity<FireProtEnchantComponent> ent, ref GetFireProtectionEvent args)
     {
         if (Ignored(ent, args.Target))
@@ -49,13 +42,14 @@ public sealed partial class FireProtEnchantSystem : EntitySystem
         args.Reduce(ent.Comp.Reduction);
     }
 
-    private void OnTemperatureChangeAttempt(Entity<FireProtEnchantComponent> ent, ref ModifyChangedTemperatureEvent args)
+    [SubscribeLocalEvent]
+    private void OnBeforeHeatExchange(Entity<FireProtEnchantComponent> ent, ref BeforeHeatExchangeEvent args)
     {
         // don't care about cooling
-        if (args.TemperatureDelta < 0 || Ignored(ent, args.Target))
+        if (args.OurTemp > args.OtherTemp || Ignored(ent, args.Target))
             return;
 
-        args.TemperatureDelta *= ent.Comp.TempModifier;
+        args.HeatTransferModifier *= ent.Comp.TempModifier;
     }
 
     private bool Ignored(EntityUid uid, EntityUid target)

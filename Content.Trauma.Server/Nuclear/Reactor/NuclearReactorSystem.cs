@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.AlertLevel;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
@@ -10,6 +9,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
+using Content.Shared.AlertLevel;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage.Systems;

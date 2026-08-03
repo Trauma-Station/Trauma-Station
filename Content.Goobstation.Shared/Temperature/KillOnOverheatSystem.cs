@@ -14,6 +14,7 @@ public sealed partial class KillOnOverheatSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<GodmodeComponent> _godmodeQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -23,8 +24,8 @@ public sealed partial class KillOnOverheatSystem : EntitySystem
         while (query.MoveNext(out var uid, out var comp, out var temp, out var mob))
         {
             if (mob.CurrentState == MobState.Dead
-                || temp.CurrentTemperature < comp.OverheatThreshold
-                || HasComp<GodmodeComponent>(uid))
+                || temp.Temperature < comp.OverheatThreshold
+                || _godmodeQuery.HasComp(uid))
                 continue;
 
             var msg = Loc.GetString(comp.OverheatPopup, ("name", Identity.Name(uid, EntityManager)));

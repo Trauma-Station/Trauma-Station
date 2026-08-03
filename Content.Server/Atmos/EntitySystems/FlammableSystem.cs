@@ -517,9 +517,11 @@ namespace Content.Server.Atmos.EntitySystems
                     var source = EnsureComp<IgnitionSourceComponent>(uid);
                     _ignitionSourceSystem.SetIgnited((uid, source));
 
+                    // <Trauma> - check fire immune and use cvar instead of hardcoded energy
                     var isImmune = _fireImmuneQuery.HasComp(uid); // Trauma
-                    if (!isImmune && TryComp(uid, out TemperatureComponent? temp)) // Trauma - isImmune
-                        _temperatureSystem.ChangeHeat(uid, _addHeatFirestack * flammable.FireStacks, false, temp); // goob edit: 12500 -> 1500
+                    if (!isImmune)
+                        _temperatureSystem.ChangeHeat(uid, _addHeatFirestack * flammable.FireStacks, false);
+                    // </Trauma>
 
                     var ev = new GetFireProtectionEvent(uid); // Trauma - added uid
                     // let the thing on fire handle it

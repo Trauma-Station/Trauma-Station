@@ -7,6 +7,8 @@
   parent: BaseAction
   id: BaseVampireAction
   components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/actions.rsi
   - type: Action
     raiseOnAction: true
     itemIconStyle: BigAction
@@ -23,17 +25,18 @@
         - HolyArea
 
 - type: entity
+  abstract: true
   parent: BaseVampireAction
   id: BaseRejuvAction
   components:
+  - type: Sprite
+    layers:
+    - state: vampire_rejuvinate
   - type: Action
     useDelay: 20
     checkConsciousness: false
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_rejuv.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_rejuvinate
     checkCanInteract: false
   - type: InstantAction
     event: !type:EffectInstantActionEvent
@@ -72,9 +75,9 @@
     useDelay: 2
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_glare.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_glare
+  - type: Sprite
+    layers:
+    - state: vampire_glare
   - type: LimitedCharges
     maxCharges: 2
   - type: AutoRecharge
@@ -92,11 +95,9 @@
       amount: 100
     - !type:ModifyKnockdown
       time: 12
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMuted
       time: 16
-      type: Add
     - !type:Flash
       slowTo: 1
       maxRange: 0.5
@@ -120,12 +121,11 @@
   parent: BaseVampireAction
   id: ActionChooseSpecialization
   name: Choose Specialization
-  description: Choose Specialization
+  description: Choose your vampire class!
   components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: select_class
+  - type: Sprite
+    layers:
+    - state: select_class
   - type: InstantAction
     event: !type:OpenClassSelectorUiEvent
   - type: UserInterface
@@ -141,10 +141,9 @@
   name: Create Lair
   description: Use the action on a coffin to make it your lair. You will heal inside the lair, and be able to teleport to it on death. You can only make one lair, so be careful.
   components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: lair
+  - type: Sprite
+    layers:
+    - state: lair
   - type: TargetAction
     range: 2
   - type: EntityTargetAction
@@ -161,9 +160,9 @@
     checkCanInteract: false
     checkConsciousness: false
     useDelay: 500
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: lair_tp
+  - type: Sprite
+    layers:
+    - state: lair_tp
   - type: InstantAction
     event: !type:ActionLairTeleportEvent
   - type: ActionLairTeleport

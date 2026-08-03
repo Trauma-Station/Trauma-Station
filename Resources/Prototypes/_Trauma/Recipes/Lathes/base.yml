@@ -4,19 +4,25 @@
   abstract: true
   id: BaseRedAlert
   requiredAlerts:
-  - red
-  - gamma
-  - delta
-  - omicron
-  - octarine
+  - Red
+  - Gamma
+  - DeltaBlob
+  - DeltaDelam
+  - DeltaNuke
+  - DeltaSling
+  - Omicron
+  - Octarine
 
 - type: latheRecipe
   abstract: true
   id: BaseBlueAlert
   requiredAlerts:
-  - blue
-  - red
-  - gamma
-  - delta
-  - omicron
-  - octarine
+  - Blue
+  - Red
+  - Gamma
+  - DeltaBlob
+  - DeltaDelam
+  - DeltaNuke
+  - DeltaSling
+  - Omicron
+  - Octarine

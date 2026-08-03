@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Temperature;
 using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -11,6 +10,7 @@ using Content.Shared.Explosion;
 using Content.Shared.Popups;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Temperature;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Robust.Shared.Physics.Events;
@@ -26,39 +26,27 @@ public abstract partial class SharedBladeArenaSystem : EntitySystem
     [Dependency] private EntityQuery<InsideArenaComponent> _insideQuery = default!;
     [Dependency] protected EntityQuery<HereticArenaParticipantComponent> ParticipantQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HereticArenaParticipantComponent, TeleportAttemptEvent>(OnTeleportAttempt);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, TemperatureImmunityEvent>(OnTempImmunity);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, SlipAttemptEvent>(OnSlipAttempt);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
-        SubscribeLocalEvent<HereticArenaParticipantComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
-
-        SubscribeLocalEvent<HereticArenaOuterWallComponent, PreventCollideEvent>(OnPreventCollide);
-    }
-
+    [SubscribeLocalEvent]
     private void OnElectrocuteAttempt(Entity<HereticArenaParticipantComponent> ent, ref ElectrocutionAttemptEvent args)
     {
         if (IsInsideArena(ent))
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStatusEffect(Entity<HereticArenaParticipantComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
         if (args.Effect == StatusEffectStunned)
             args.Cancelled |= IsInsideArena(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStaminaDamage(Entity<HereticArenaParticipantComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         args.Cancelled |= IsInsideArena(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetExplosionResists(Entity<HereticArenaParticipantComponent> ent, ref GetExplosionResistanceEvent args)
     {
         if (!IsInsideArena(ent))
@@ -67,6 +55,7 @@ public abstract partial class SharedBladeArenaSystem : EntitySystem
         args.DamageCoefficient = 0f;
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageModify(Entity<HereticArenaParticipantComponent> ent, ref DamageModifyEvent args)
     {
         if (!IsInsideArena(ent))
@@ -75,19 +64,19 @@ public abstract partial class SharedBladeArenaSystem : EntitySystem
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.ModifierSet);
     }
 
+    [SubscribeLocalEvent]
     private void OnSlipAttempt(Entity<HereticArenaParticipantComponent> ent, ref SlipAttemptEvent args)
     {
         args.NoSlip |= IsInsideArena(ent);
     }
 
-    private void OnTempImmunity(Entity<HereticArenaParticipantComponent> ent, ref TemperatureImmunityEvent args)
+    [SubscribeLocalEvent]
+    private void OnBeforeHeatExchange(Entity<HereticArenaParticipantComponent> ent, ref BeforeHeatExchangeEvent args)
     {
-        if (!IsInsideArena(ent))
-            return;
-
-        args.CurrentTemperature = Atmospherics.T37C;
+        args.Cancelled |= IsInsideArena(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPreventCollide(Entity<HereticArenaOuterWallComponent> ent, ref PreventCollideEvent args)
     {
         var other = args.OtherEntity;
@@ -95,6 +84,7 @@ public abstract partial class SharedBladeArenaSystem : EntitySystem
                          HasComp<GhoulComponent>(other);
     }
 
+    [SubscribeLocalEvent]
     private void OnTeleportAttempt(Entity<HereticArenaParticipantComponent> ent, ref TeleportAttemptEvent args)
     {
         if (ent.Comp.IsVictor)
@@ -106,14 +96,9 @@ public abstract partial class SharedBladeArenaSystem : EntitySystem
             return;
 
         var msg = Loc.GetString(args.Message);
-        if (args.Predicted)
-            _popup.PopupEntity(msg, ent, ent);
-        else
-            _popup.PopupEntity(msg, ent, ent);
+        _popup.PopupEntity(msg, ent, ent);
     }
 
     protected bool IsInsideArena(EntityUid uid)
-    {
-        return _insideQuery.HasComp(uid);
-    }
+        => _insideQuery.HasComp(uid);
 }

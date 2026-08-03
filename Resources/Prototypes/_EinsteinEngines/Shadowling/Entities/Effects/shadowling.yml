@@ -71,7 +71,6 @@
     noRot: true
     sprite: _EinsteinEngines/Shadowling/Effects/collective_mind.rsi
     state: collective_mind
-    netsync: false
     drawdepth: Effects
   - type: PointLight
     color: "#e3432a"

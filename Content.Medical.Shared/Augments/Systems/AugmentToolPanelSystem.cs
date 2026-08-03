@@ -2,6 +2,7 @@
 
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
+using Content.Shared.Body;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item.ItemToggle;

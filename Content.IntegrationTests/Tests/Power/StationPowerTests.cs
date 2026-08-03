@@ -23,8 +23,9 @@ public sealed class StationPowerTests : GameTest
     private const float MinimumPowerDurationSeconds = 10 * 60;
 
     private static readonly string[] GameMaps =
-    [ // Goobstation only maps in rotation
-        "Freighter", // Trauma
+    [
+        // <Trauma>
+        "Freighter",
         "Atlas",
         "Amber",
         "Bagel",
@@ -47,6 +48,7 @@ public sealed class StationPowerTests : GameTest
         "Delta",
         "Chloris",
         "Cog"
+        // </Trauma>
     ];
 
     public override PoolSettings PoolSettings => new ()

@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Roles.Jobs;
-using Content.Server.Speech;
 // </Trauma>
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -16,6 +15,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.VoiceMask;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;

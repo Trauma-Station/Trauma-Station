@@ -4,7 +4,7 @@ using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Possession;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.EntitySystems;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Nutrition;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
@@ -22,6 +22,7 @@ namespace Content.Goobstation.Shared.Devil.Contract;
 public abstract partial class SharedDevilContractSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedExplosionSystem _explosion = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -289,8 +290,8 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<MindShieldComponent>(user)
-            && !HasComp<DevilComponent>(user))
+        if (_mindShield.IsShielded(user) &&
+            !HasComp<DevilComponent>(user))
         {
             failReason = Loc.GetString("devil-contract-mind-shielded-failed");
             return false;

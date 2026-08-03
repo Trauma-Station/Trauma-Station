@@ -36,6 +36,7 @@
   - Reporter
   - Visitor
   #- ServiceWorker # Trauma - moved to Service
+  - TramDriver
 
 - type: department
   id: CentralCommand
@@ -174,4 +175,5 @@
   roles:
   - Reporter
   - Psychologist
+  - TramDriver
   primary: false

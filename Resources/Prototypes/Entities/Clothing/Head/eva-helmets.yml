@@ -73,34 +73,35 @@
 
 #Paramedic Void Helmet
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase # goobstation - why didnt this have a light
+  parent: [ ClothingHeadSuitWithLightBase, ClothingHeadEVAHelmetBase ] #Despite acting like a hardsuit helmet, since it inherits from EVA Helmet, it goes here.
   id: ClothingHeadHelmetVoidParamed
   name: paramedic void helmet
   description: A void helmet made for paramedics.
   components:
+  # <Trauma>
+  - type: FaceHuggerBlocker
+  - type: Item
+    heldPrefix: off
+  # </Trauma>
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Hardsuits/goobparamed.rsi # goobstation - wizden sprites SUCK ASS!!!
   - type: Clothing
     sprite: _Goobstation/Clothing/Head/Hardsuits/goobparamed.rsi # goobstation - wizden sprites SUCK ASS!!!
-  - type: PointLight # goobstation
-    color: "#3385cc"
-  - type: TemperatureProtection
-    heatingCoefficient: 0.1
-    coolingCoefficient: 0.1
   - type: Armor
     coverage:
     - Head
     modifiers:
       coefficients:
-        Heat: 0.9
+        Heat: 0.90
         Radiation: 0.75
-        Caustic: 0.5
+        Caustic: 0.5 # Trauma
     traumaDeductions:
       Dismemberment: 0
       OrganDamage: 0.14
       BoneDamage: 0.14
       VeinsDamage: 0
-  - type: FaceHuggerBlocker # Trauma
+  - type: PointLight # goobstation
+    color: "#3385cc"
 
 #Ancient Void Helmet
 - type: entity

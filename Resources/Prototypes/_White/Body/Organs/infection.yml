@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ OrganBaseInternal ]
+  parent: [ OrganBaseChildInternal ]
   id: XenomorphInfection
   name: xenomorph larva embryo
   description: A parasitic life form in its early stages of development. It has a worm-like body shape, underdeveloped limbs, and a tail appendage.
@@ -34,15 +34,11 @@
         visualType: SmallCaution
       - !type:ModifyParalysis
         time: 1
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         time: 1
-        refresh: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectBlindness
-        type: Update
         time: 1
       - !type:Jitter
         time: 2
@@ -52,12 +48,9 @@
         visualType: SmallCaution
       - !type:ModifyParalysis
         time: 2
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         time: 2
-        refresh: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectBlindness
         type: Update
@@ -70,12 +63,9 @@
         visualType: SmallCaution
       - !type:ModifyParalysis
         time: 4
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         time: 4
-        refresh: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectBlindness
         type: Update
@@ -88,12 +78,9 @@
         visualType: Medium
       - !type:ModifyParalysis
         time: 8
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         time: 8
-        refresh: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectBlindness
         type: Update

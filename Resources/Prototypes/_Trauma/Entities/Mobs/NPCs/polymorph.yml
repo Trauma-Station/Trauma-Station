@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: PolymorphWailingJaunt
   parent: [ Incorporeal, BaseMob ]
-  categories: [HideSpawnMenu]
-  description: You can't figure out what that is.
+  id: PolymorphWailingJaunt
   name: Unknown
+  description: You can't figure out what that is.
+  categories: [HideSpawnMenu]
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/wailinghorse.rsi
@@ -34,6 +34,5 @@
     - Ghost
   - type: MindContainer
   - type: MindExaminable
-  - type: Muted # 古布空间站 - ARMOK 1984
   - type: IsDeadIC
     dead: false
