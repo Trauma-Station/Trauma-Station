@@ -10,7 +10,7 @@ public sealed partial class AccentSystem : EntitySystem
     [SubscribeLocalEvent]
     private void AccentHandler(TransformSpeechEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || string.IsNullOrEmpty(args.Message)) // Trauma - skip empty messages
             return;
 
         var accentEvent = new AccentGetEvent(args.Sender, args.Message);
