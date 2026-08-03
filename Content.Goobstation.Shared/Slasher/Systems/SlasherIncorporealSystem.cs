@@ -21,7 +21,7 @@ using Content.Shared.Speech.Muting;
 using Content.Shared.Emoting;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;

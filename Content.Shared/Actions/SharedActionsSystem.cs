@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Actions;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Heretic;
 using Robust.Shared.Network;

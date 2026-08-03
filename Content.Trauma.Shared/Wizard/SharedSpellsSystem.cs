@@ -24,7 +24,7 @@ using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Friction;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;

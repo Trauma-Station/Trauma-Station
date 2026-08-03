@@ -3,7 +3,6 @@ using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Roles.Jobs;
 using Content.Shared.CCVar;
-using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Voting;
 using Robust.Server.Player;
@@ -14,6 +13,7 @@ using Robust.Shared.Timing;
 using System.Threading.Tasks;
 using Content.Server.Players.Whitelist;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Server.Voting;
 

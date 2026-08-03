@@ -6,7 +6,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Gravity;
 using Content.Shared.Mind;

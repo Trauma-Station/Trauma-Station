@@ -5,7 +5,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Shared.Actions;
 using Content.Shared.Antag;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Interaction.Events;
