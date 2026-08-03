@@ -35,8 +35,7 @@
   components:
   - type: Sprite
     sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
-  - type: Woundable
-    boneEntity: null
+  - type: Boneless
   - type: VisualOrgan
     data:
       sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi

@@ -62,7 +62,7 @@
     color: "#42a4ae"
     radius: 7
     energy: 5.4
-    mask: /Textures/_DV/CosmicCult/LightMasks/cosmic.png
+    lightMask: Cosmic
     autoRot: true
     netsync: false
   - type: LightBehaviour

@@ -19,7 +19,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 public sealed class BodyTest : GameTest
 {
     public static EntProtoId Urist = "MobHuman";
-    public static EntProtoId<OrganChipComponent> TestChip = "SkillChipLaser";
+    public static EntProtoId<OrganChipComponent>[] TestChips = ["SkillChipLaser", "SkillChipHeavy", "SkillChipMining"];
     public static ProtoId<PolymorphPrototype> HumanoidPolymorph = "Bananamen";
 
     [SidedDependency(Side.Server)] private BodySystem _body = default!;
@@ -179,8 +179,11 @@ public sealed class BodyTest : GameTest
         {
             var urist = SEntMan.SpawnEntity(Urist, map.GridCoords);
             Assert.That(CountChips(urist), Is.EqualTo(0), "Fresh urist shouldnt have skillchips");
-            _chip.InstallChip(urist, TestChip);
-            Assert.That(CountChips(urist), Is.EqualTo(1), "Urist should have gained a skillchip after installing it");
+            foreach (var id in TestChips)
+            {
+                _chip.InstallChip(urist, id);
+            }
+            Assert.That(CountChips(urist), Is.EqualTo(3), "Urist should have gained 3 skillchips after installing them");
 
             if (_polymorph.PolymorphEntity(urist, HumanoidPolymorph) is not { } nana)
             {
@@ -189,7 +192,7 @@ public sealed class BodyTest : GameTest
             }
 
             Assert.That(CountChips(urist), Is.EqualTo(0), "Urist shouldnt have skillchips after being polymorphed");
-            Assert.That(CountChips(nana), Is.EqualTo(1), "Banana should have transferred urist's skillchip from polymorphing");
+            Assert.That(CountChips(nana), Is.EqualTo(3), "Banana should have transferred urist's skillchip from polymorphing");
             SEntMan.DeleteEntity(nana);
             SEntMan.DeleteEntity(urist);
         });

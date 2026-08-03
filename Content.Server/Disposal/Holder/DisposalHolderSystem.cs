@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Physics.Components;
+// </Trauma>
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Holder;
@@ -149,9 +152,14 @@ public sealed partial class DisposalHolderSystem : SharedDisposalHolderSystem
                 // Throw the entity
                 if (exitAngle != null && heldXform.ParentUid.IsValid())
                 {
-                    _physics.SetCanCollide(held, true); // Trauma
-                    _throwing.TryThrow(held, exitAngle.Value.ToWorldVec() * ent.Comp.ExitDistanceMultiplier, ent.Comp.TraversalSpeed * ent.Comp.ExitSpeedMultiplier,
-                        predicted: false); // Trauma
+                    // <Trauma> - physics check, set can collide, throwing is non-predicted
+                    if (TryComp<PhysicsComponent>(held, out var physics))
+                    {
+                        _physics.SetCanCollide(held, true, body: physics);
+                        _throwing.TryThrow(held, exitAngle.Value.ToWorldVec() * ent.Comp.ExitDistanceMultiplier, ent.Comp.TraversalSpeed * ent.Comp.ExitSpeedMultiplier,
+                            predicted: false);
+                    }
+                    // </Trauma>
                 }
             }
         }

@@ -305,8 +305,7 @@
     bleedingOverlay: null
     damageGroupColors:
       Brute: "#DD8822"
-  - type: Woundable
-    boneEntity: null
+  - type: Boneless
 
 ## Parts
 

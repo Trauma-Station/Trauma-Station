@@ -349,6 +349,7 @@ public sealed partial class StationAiVisionSystem : EntitySystem
             if (total > Vis1.Count || total > Vis2.Count || total > SeedTiles.Count || total > BoundaryTiles.Count)
             {
                 System.Log.Error($"AI vision job {index} has wrong bounds lists! Data={total} Vis1={Vis1.Count} Vis2={Vis2.Count} SeedTiles={SeedTiles.Count} BoundaryTiles={BoundaryTiles.Count}");
+                return;
             }
             // </Trauma>
             var seed = Data[index];
