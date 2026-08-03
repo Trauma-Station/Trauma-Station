@@ -13,3 +13,12 @@
     initialDuration: 10 # Trauma - was 15
     joinExtendsDurationBy: 0
     maxDuration: 10 # Trauma - was 15
+
+# <Trauma>
+- type: ghostRoleRaffleSettings
+  id: insta
+  settings:
+    initialDuration: 1 # Trauma - was 15
+    joinExtendsDurationBy: 0
+    maxDuration: 1 # Trauma - was 15
+# </Trauma>

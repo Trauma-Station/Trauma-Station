@@ -12665,10 +12665,3 @@ Entries:
   id: 1385
   time: '2026-08-02T07:47:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3903
-- author: Endothermix
-  changes:
-  - type: Fix
-    message: LoneOps can no longer buy the zombie bundle.
-  id: 1386
-  time: '2026-08-03T13:18:13.0000000+00:00'
-  url: https://github.com/Trauma-Station/Trauma-Station/pull/3913

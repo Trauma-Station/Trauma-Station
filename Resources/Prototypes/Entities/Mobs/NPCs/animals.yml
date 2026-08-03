@@ -983,7 +983,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantHostileCompound # Trauma - was RuminantCompound
+      task: RuminantHostileCompound # Trauma
   - type: GuideHelp
     guides:
     - Chef
@@ -1073,7 +1073,7 @@
     - Crab # Trauma
   - type: HTN
     rootTask:
-      task: RuminantHostileCompound # Trauma - was RuminantCompound
+      task: RuminantHostileCompound # Trauma
 
 - type: entity
   name: goat
@@ -1302,7 +1302,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantHostileCompound # Trauma - was RuminantCompound
+      task: RuminantHostileCompound # Trauma
   - type: MovementSpeedModifier
     baseWalkSpeed: 0.6
     baseSprintSpeed: 0.8
@@ -3662,12 +3662,12 @@
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    animation: WeaponArcSlash # Trauma - was WeaponArcBite
+    animation: WeaponArcSlash
     soundHit:
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Slash: 10 # Trauma - was 5 Piercing
+        Slash: 10 # Trauma, was 5
   - type: Grammar
     attributes:
       gender: epicene
@@ -4250,7 +4250,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantHostileCompound # Trauma - was RuminantCompound
+      task: RuminantHostileCompound # Trauma
 
 - type: entity
   name: diona nymph

@@ -50,7 +50,7 @@
         solution: tank
     - trigger:
         !type:DamageTypeTrigger
-        damageType: Ballistic # Trauma - was Piercing
+        damageType: Ballistic
         damage: 5
       behaviors:
       - !type:SolutionExplosionBehavior
