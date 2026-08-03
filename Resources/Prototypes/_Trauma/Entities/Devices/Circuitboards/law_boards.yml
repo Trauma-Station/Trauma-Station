@@ -1,4 +1,6 @@
-﻿- type: entity
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
   id: StrategySimulatorLawboard
   parent: [BaseElectronics]
   name: strategy simulator lawboard
@@ -9,4 +11,3 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: StrategySimulatorLawset
-
