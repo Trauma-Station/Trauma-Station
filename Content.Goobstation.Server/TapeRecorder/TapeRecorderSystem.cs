@@ -2,11 +2,10 @@
 
 using Content.Server.Chat.Systems;
 using Content.Server.Hands.Systems;
-using Content.Shared.Speech;
-using Content.Shared.Speech.Components;
 using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Shared.Speech;
+using Content.Shared.Speech.Components;
 using Content.Goobstation.Shared.TapeRecorder;
 using System.Text;
 

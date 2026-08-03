@@ -178,9 +178,9 @@
   - type: Vocalizer
     minVocalizeInterval: 10
     maxVocalizeInterval: 45
-    showChat: false
+    hideChat: true
   - type: DatasetVocalizer
-    pack: Shade
+    dataset: Shade
   - type: SpamEmitSound
     minInterval: 5
     maxInterval: 25
@@ -454,7 +454,7 @@
     minVocalizeInterval: 15
     maxVocalizeInterval: 45
   - type: DatasetVocalizer
-    pack: Repairbot
+    dataset: Repairbot
   - type: HTN
     rootTask:
       task: SimpleHostileCompound

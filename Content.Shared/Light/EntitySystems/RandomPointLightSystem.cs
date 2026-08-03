@@ -14,7 +14,7 @@ public sealed partial class RandomPointLightSystem : EntitySystem
     [Dependency] private SharedPointLightSystem _light = default!;
 
     [SubscribeLocalEvent]
-    private void RandomLight(Entity<RandomPointLightComponent> ent, ref ComponentStartup args)
+    private void RandomLight(Entity<RandomPointLightComponent> ent, ref MapInitEvent args) // Trauma - use MapInit bruh
     {
         if (_timing.ApplyingState)
             return;

@@ -1,10 +1,11 @@
+# disabled until its updated btw
 - type: gameMap
   id: Tram2
   mapName: 'Tram2'
   mapPath: /Maps/tram2.yml
   maxRandomOffset: 0
   minPlayers: 45
-  maxPlayers: 65
+  maxPlayers: 90
   stations:
     Tram2:
       stationProto: StandardNanotrasenStation
@@ -29,7 +30,7 @@
             Librarian: [ 1, 1 ]
             ServiceWorker: [ 1, 1 ]
             Detective: [ 1, 2 ]
-            TramDriver: [ 1, 1 ]
+            #TramDriver: [ 1, 1 ]
             #engineering 9
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]

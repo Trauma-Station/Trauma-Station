@@ -37,7 +37,7 @@
           !type:PhysShapeAabb
           bounds: "-0.25,-0.25,0.25,0.25"
         hard: false
-        density: 20
+        density: 0
         mask:
         - ItemMask
         - Opaque

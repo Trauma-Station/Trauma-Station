@@ -240,7 +240,10 @@ public sealed partial class BodyCacheSystem : CommonBodyCacheSystem
             return;
 
         if (organ.Comp.Parent is {} old)
+        {
             _part.OrganRemoved(old, organ.Owner);
+            _relation.Orphan(organ);
+        }
         _relation.Relate(parent, organ);
         _part.OrganInserted(parent, organ.Owner);
     }

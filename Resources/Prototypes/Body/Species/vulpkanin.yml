@@ -183,9 +183,6 @@
     heatDamage:
       types:
         Heat: 2.5 # Per second, scales with temperature & other constants
-  - type: TemperatureProtection
-    heatingCoefficient: 1.2
-    coolingCoefficient: 0.3
   #- type: Wagging # Trauma - moved to tail
   #  action: ActionToggleWaggingVulpkanin
   - type: JumpAbility

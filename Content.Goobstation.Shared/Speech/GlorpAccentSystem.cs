@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.Speech;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
-using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Speech.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -15,9 +14,6 @@ namespace Content.Goobstation.Shared.Speech;
 public sealed partial class GlorpAccentSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private ReplacementAccentSystem _replacement = default!;
-
-    private static readonly ProtoId<ReplacementAccentPrototype> Accent = "glorp_accent";
 
     private static readonly string[] StartingLetters = { "n", "x", "z", "v", "g" };
     private static readonly string[] Suffixes = { "narp", "lorp", "leeb", "orp", "orple", "ip", "op", "eegle" };
@@ -52,7 +48,7 @@ public sealed partial class GlorpAccentSystem : EntitySystem
         {
             var i = _sb.Length;
             _sb.Append(char.ToUpperInvariant(word[0]));
-            _sb.Append(word.AsSpan(1));
+            _sb.Append(word, 1, word.Length - 1);
         }
     }
 
@@ -149,7 +145,6 @@ public sealed partial class GlorpAccentSystem : EntitySystem
     public string Accentuate(string msg, IRobustRandom rand)
     {
         var allCaps = IsAllCaps(msg);
-        msg = _replacement.ApplyReplacements(msg, Accent);
         return ReplaceWithRandomAlienWords(msg, allCaps, rand);
     }
 

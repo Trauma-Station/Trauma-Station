@@ -46,10 +46,10 @@ public sealed partial class OrganRelationSystem : EntitySystem
     [PublicAPI]
     public void Relate(Entity<ParentOrganComponent?> parent, Entity<ChildOrganComponent?> child)
     {
-        if (!_parent.Resolve(parent, ref parent.Comp) || !_child.Resolve(child, ref child.Comp))
+        if (!_parent.Resolve(parent, ref parent.Comp) || !_child.Resolve(child, ref child.Comp) || child.Comp.Parent == parent.Owner) // Trauma - check if already parented to it
             return;
 
-        DebugTools.Assert(child.Comp.Parent == null);
+        DebugTools.Assert(child.Comp.Parent == null, $"Tried to parent {ToPrettyString(child)} to {ToPrettyString(parent)} but it was already {ToPrettyString(child.Comp.Parent)}"); // Trauma - add a message...
 
         parent.Comp.Children.Add(child);
         Dirty(parent, parent.Comp);

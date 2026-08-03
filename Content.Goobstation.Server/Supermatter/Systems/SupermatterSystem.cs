@@ -56,7 +56,6 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;
     [Dependency] private SharedToolSystem _tool = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     private static readonly ProtoId<AlertLevelPrototype> DeltaAlert = "DeltaDelam";
@@ -672,7 +671,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         var integrity = GetIntegrity(sm).ToString("0.00");
         SupermatterAnnouncement(uid, Loc.GetString("supermatter-announcement-cc-tamper", ("integrity", integrity)), true, "Central Command");
 
-        Spawn(sm.SliverPrototypeId, _transform.GetMapCoordinates(args.User));
+        Spawn(sm.SliverPrototypeId, _xform.GetMapCoordinates(args.User));
 
         if (sm.DelamTimer > 30f)
             sm.DelamTimer -= 10f;

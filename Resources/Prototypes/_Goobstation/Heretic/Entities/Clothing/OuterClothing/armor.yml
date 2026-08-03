@@ -56,6 +56,10 @@
     reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
 
 - type: entity
   abstract: true
@@ -203,7 +207,7 @@
     lowPressureMultiplier: 1000
   - type: HollowWeave
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
 
 - type: entity
   abstract: true
@@ -242,7 +246,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.1
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
+    coefficient: 0.01
   - type: ScorchedMantle
 
 - type: entity
@@ -374,7 +378,7 @@
     lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
   - type: TackleModifier # Allows tackling on cosmic fields
     modifiers:
     - priority: 25
@@ -519,3 +523,7 @@
         base:
           True: { state: transparent-icon }
           False: { state: icon }
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container

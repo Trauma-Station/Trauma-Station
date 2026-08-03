@@ -43,7 +43,7 @@ public sealed partial class MedievalAccentSystem : EntitySystem
             _sb.Append(char.ToUpperInvariant(message[0]));
         }
 
-        _sb.Append(message.AsSpan(1));
+        _sb.Append(message, 1, message.Length - 1);
 
         args.Message = _sb.ToString();
     }

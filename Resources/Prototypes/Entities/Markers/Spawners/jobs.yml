@@ -601,7 +601,7 @@
   name: tramdriver
   components:
   - type: SpawnPoint
-    job_id: TramDriver
+    job_id: Passenger # Trauma - disabled until map is updated
   - type: Sprite
     layers:
       - state: green

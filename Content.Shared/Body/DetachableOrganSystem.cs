@@ -1,3 +1,6 @@
+// <Trauma>
+using System.Linq;
+// </Trauma>
 using Content.Shared.Body;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
@@ -38,7 +41,7 @@ public sealed partial class DetachableOrganSystem : EntitySystem
             Log.Error($"{ToPrettyString(organ)} could not be transferred to new body {ToPrettyString(body)}.");
         }
 
-        foreach (var child in _organRelation.AllChildren(organ.Owner))
+        foreach (var child in _organRelation.AllChildren(organ.Owner).ToList()) // Trauma - use ToList, it gets modified when organs are moved around
         {
             if (!_container.Insert(child.Owner, container, force: true))
             {

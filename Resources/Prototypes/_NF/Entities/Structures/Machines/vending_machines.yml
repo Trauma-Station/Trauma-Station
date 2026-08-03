@@ -8,12 +8,6 @@
   components:
   - type: VendingMachine
     pack: EmptyVendingMachineInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
-    denyState: deny-unshaded
-    screenState: screen
   - type: DatasetVocalizer
     dataset: SyndieDrobeAds
   - type: Sprite

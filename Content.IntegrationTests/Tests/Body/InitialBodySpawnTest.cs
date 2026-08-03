@@ -33,6 +33,11 @@ public sealed class InitialBodySpawnTest : GameTest
 - type: entity
   id: InitialBodySpawnTestParentOrgan
   components:
+  # <Trauma>
+  - type: BodyPart
+    partType: Torso
+    slots: [ Head ]
+  # </Trauma>
   - type: Organ
     category: Torso # Trauma
   - type: ParentOrgan
@@ -41,6 +46,7 @@ public sealed class InitialBodySpawnTest : GameTest
   id: InitialBodySpawnTestChildOrgan
   components:
   - type: Organ
+    category: Head # Trauma
   - type: ChildOrgan
     parents: [ Torso ] # Trauma
 ";

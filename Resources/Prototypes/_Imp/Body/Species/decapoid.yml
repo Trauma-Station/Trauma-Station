@@ -189,7 +189,6 @@
         Heat : 1
   - type: Temperature
     temperature: 310
-    specificHeat: 42
   - type: TemperatureSpeed
     thresholds: # lol
       293: 1.0

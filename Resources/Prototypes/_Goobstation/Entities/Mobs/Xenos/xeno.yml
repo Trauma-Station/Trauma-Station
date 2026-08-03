@@ -434,7 +434,6 @@
       components:
       - MobState
       - Door
-      tags:
       - Wall
 
 - type: entity

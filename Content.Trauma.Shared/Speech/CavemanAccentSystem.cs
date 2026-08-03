@@ -15,7 +15,7 @@ public sealed partial class CavemanAccentSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ReplacementAccentSystem _replacement = default!;
 
-    private static readonly ProtoId<ReplacementAccentPrototype> Accent = "caveman";
+    private static readonly ProtoId<ReplacementAccentPrototype> Accent = "Caveman";
 
     private readonly StringBuilder _sb = new();
 
@@ -40,7 +40,7 @@ public sealed partial class CavemanAccentSystem : EntitySystem
             _sb.Append(char.ToLowerInvariant(msg[1]));
         }
 
-        _sb.Append(msg.AsSpan(1));
+        _sb.Append(msg, 1, msg.Length - 1);
 
         // Suffix
         if (rand.Prob(0.40f))

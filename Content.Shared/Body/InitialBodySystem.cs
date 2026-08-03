@@ -59,6 +59,12 @@ public sealed partial class InitialBodySystem : EntitySystem
             spawned[part] = spawn;
         }
 
+        // <Trauma> - raising an extra event so you dont need to spam order your events after InitialBodySystem
+        var ev = new BodyInitEvent();
+        RaiseLocalEvent(ent, ref ev);
+        // </Trauma>
+
+        /* Trauma - kill this slop its done by parts automatically
         if (ent.Comp.Relationships is null)
             return;
 
@@ -75,10 +81,6 @@ public sealed partial class InitialBodySystem : EntitySystem
                 _organRelation.Relate(parentUid, childUid);
             }
         }
-
-        // <Trauma> - raising an extra event so you dont need to spam order your events after InitialBodySystem
-        var ev = new BodyInitEvent();
-        RaiseLocalEvent(ent, ref ev);
-        // </Trauma>
+        */
     }
 }

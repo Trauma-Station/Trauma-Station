@@ -34,18 +34,29 @@ public sealed class DetachableOrganSystemTest : GameTest
 - type: entity
   id: {DetachTestGrandParentOrgan}
   components:
-  - type: Organ
-  - type: ParentOrgan
-  - type: ChildOrgan
-    parents: [ Torso ] # Trauma
-
-- type: entity
-  id: {DetachTestRootOrgan}
-  components:
+  # <Trauma>
+  - type: BodyPart
+    partType: Torso
+    slots: [ Head, ArmLeft ]
+  # </Trauma>
   - type: Organ
     category: Torso # Trauma
   - type: ParentOrgan
   #- type: ChildOrgan # Trauma
+
+- type: entity
+  id: {DetachTestRootOrgan}
+  components:
+  # <Trauma>
+  - type: BodyPart
+    partType: Head
+    slots: [ Brain ]
+  # </Trauma>
+  - type: Organ
+    category: Head # Trauma
+  - type: ParentOrgan
+  - type: ChildOrgan
+    parents: [ Torso ] # Trauma
   - type: DetachableOrgan
     detachedBody: DetachTestNewBody
 
@@ -53,13 +64,15 @@ public sealed class DetachableOrganSystemTest : GameTest
   id: {DetachTestChildOrgan}
   components:
   - type: Organ
+    category: Brain # Trauma
   - type: ChildOrgan
-    parents: [ Torso ] # Trauma
+    parents: [ Head ] # Trauma
 
 - type: entity
   id: {DetachTestSiblingOrgan}
   components:
   - type: Organ
+    category: ArmLeft # Trauma
   - type: ChildOrgan
     parents: [ Torso ] # Trauma
 ";

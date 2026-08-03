@@ -229,7 +229,7 @@
   - StationTeleporterMachineCircuitboard
   - TeleporterChipBlank
   # <Trauma>
-  position: -8,-5
+  position: -9,-6
   technologyPrerequisites:
-  - GravityManipulation
+  - BluespaceTheory
   # </Trauma>

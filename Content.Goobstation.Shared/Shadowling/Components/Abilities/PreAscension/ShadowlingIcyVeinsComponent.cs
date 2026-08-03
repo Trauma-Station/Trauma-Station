@@ -38,5 +38,5 @@ public sealed partial class ShadowlingIcyVeinsComponent : Component
     /// The sound that plays during the ability.
     /// </summary>
     [DataField]
-    public SoundSpecifier? IcyVeinsSound = new SoundPathSpecifier("/Audio/_EinsteinEngines/Effects/ghost2.ogg");
+    public SoundSpecifier IcyVeinsSound = new SoundPathSpecifier("/Audio/_EinsteinEngines/Effects/ghost2.ogg");
 }

@@ -10,9 +10,6 @@ namespace Content.Goobstation.Shared.PhaseShift;
 [AutoGenerateComponentState]
 public sealed partial class PhaseShiftedComponent : Component
 {
-    [DataField]
-    public ProtoId<StatusEffectPrototype> StatusEffectId = "PhaseShifted";
-
     [DataField, AutoNetworkedField]
     public float MovementSpeedBuff = 1.5f;
 

@@ -20,11 +20,9 @@
   - type: Temperature
     temperature: 290
     specificHeat: 500
-    atmosTemperatureTransferEfficiency: 0.005
+    heatCapacity: 2500
   - type: InternalTemperature
-    thickness: 0.1
-    area: 1
-    conductivity: 100
+    conductance: 1000 # TODO: get this from the metal
   - type: DamageOnHolding
     enabled: false # enabled when hot
     damage:

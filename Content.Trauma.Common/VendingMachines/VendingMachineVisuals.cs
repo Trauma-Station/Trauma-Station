@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace Content.Trauma.Common.VendingMachines; // Trauma - moved out of Content.Client and made them serializable...
 
 [Serializable, NetSerializable]

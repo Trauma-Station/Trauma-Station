@@ -10,9 +10,7 @@
     snap:
     - Wall
   components:
-  - type: Tag
-    tags:
-    - Wall
+  - type: Wall
   - type: PlacementReplacement
     key: walls
   - type: Physics

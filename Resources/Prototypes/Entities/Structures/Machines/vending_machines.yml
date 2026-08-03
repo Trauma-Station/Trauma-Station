@@ -1441,7 +1441,7 @@
     color: "#ffe599"
 
 - type: entity
-  parent: VendingMachine
+  parent: BaseVendingMachine # Trauma - use base to avoid inheriting VendingMachineVisuals
   id: VendingMachineSalvage
   name: Salvage Vendor
   description: A dwarf's best friend!

@@ -44,7 +44,7 @@ public sealed partial class BoganAccentSystem : EntitySystem
             _sb.Append(char.ToUpperInvariant(message[0]));
         }
 
-        _sb.Append(message.AsSpan(1));
+        _sb.Append(message, 1, message.Length - 1);
 
         // Suffixes
         if (rand.Prob(0.3f))

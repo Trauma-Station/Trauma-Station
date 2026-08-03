@@ -133,7 +133,6 @@
   - type: Inventory
     templateId: plasmaman
   - type: Temperature
-    specificHeat: 46
     temperature: 270.15  # -3 celsius
   - type: TemperatureDamage
     heatDamageThreshold: 308    # 35 celsius, -17 from base heat damage threshold

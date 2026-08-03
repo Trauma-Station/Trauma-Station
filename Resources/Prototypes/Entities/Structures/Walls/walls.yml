@@ -725,11 +725,10 @@
   # <Trauma>
   - type: RustRequiresPathStage
     pathStage: 7 # Toxic blade
-  # </Trauma>
   - type: Tag
     tags:
-    - Wall # Goobstation
     - Diagonal
+  # </Trauma>
   - type: Sprite
     drawdepth: Walls
     sprite: Structures/Walls/reinforced_diagonal.rsi

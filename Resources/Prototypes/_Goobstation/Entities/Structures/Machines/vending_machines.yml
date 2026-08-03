@@ -22,12 +22,6 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: FitnessVendInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
-    screenState: screen
   - type: DatasetVocalizer
     dataset: FitnessVendAds
   - type: SpeakOnUIClosed
@@ -61,16 +55,11 @@
     - state: heater
   - type: VendingMachine
     pack: HotfoodInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
   - type: Rotatable
     rotateWhileAnchored: false
     rotateWhilePulling: true
   - type: DatasetVocalizer
-    pack: HotfoodAds
+    dataset: HotfoodAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: PointLight
@@ -96,13 +85,8 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: SolsnackInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
-    denyState: deny-unshaded
   - type: DatasetVocalizer
-    pack: SolsnackAds
+    dataset: SolsnackAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
@@ -134,13 +118,8 @@
     - state: fan
   - type: VendingMachine
     pack: WeebVendInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
   - type: DatasetVocalizer
-    pack: WeebVendAds
+    dataset: WeebVendAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
@@ -160,11 +139,8 @@
   components:
   - type: VendingMachine
     pack: MailDrobeInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
   - type: DatasetVocalizer
-    pack: MailDrobeAds
+    dataset: MailDrobeAds
   - type: Sprite
     sprite: _Goobstation/Structures/Machines/VendingMachines/maildrobe.rsi
     layers:
@@ -204,14 +180,8 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: SweetToofInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
-    screenState: screen
   - type: DatasetVocalizer
-    pack: SweetToofAds
+    dataset: SweetToofAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
