@@ -8,3 +8,9 @@
   briefing:
     text: lone-xenomorph-role-greeting
     color: "#8c3986"
+
+- type: antag
+  id: LoneXenomorph
+  name: ghost-role-information-lone-xenomorph-name
+  objective: ghost-role-information-lone-xenomorph-description
+  antagonist: true
