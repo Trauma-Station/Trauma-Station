@@ -10,6 +10,7 @@ using Content.Server.PDA;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.EntityTable;
 using Content.Shared.Mind;
+using Content.Shared.Objectives.Components;
 using Content.Shared.PDA;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -110,14 +111,25 @@ public sealed partial class JobListingsSystem : EntitySystem
             if (!CanAddSideJob(jobBoard, job))
                 continue;
 
-            // spawn the objective in directly, ignoring the normal checks
-            // we only care about checks done via SideJobCreatedEvent
+            // spawn the objective in directly, ignoring RequirementCheckEvent
+            // (otherwise it would do things like cancel steal sidejobs for DAGD traitors or kill sidejobs for social traitors)
             var sideJob = Spawn(job);
+            if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
+            {
+                QueueDel(sideJob);
+                continue;
+            }
 
-            var ev = new SideJobCreatedEvent(effectiveLevel);
-            RaiseLocalEvent(sideJob, ref ev);
+            // raise events to initialise the objectives
+            var ev1 = new ObjectiveAssignedEvent(mind, mindComp);
+            RaiseLocalEvent(sideJob, ref ev1);
+            var ev2 = new ObjectiveAfterAssignEvent(mind, mindComp, objectiveComp, MetaData(sideJob));
+            RaiseLocalEvent(sideJob, ref ev2);
+            var ev3 = new SideJobCreatedEvent(effectiveLevel);
+            RaiseLocalEvent(sideJob, ref ev3);
 
-            if (ev.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
+            // if initialising failed then abort
+            if (ev1.Cancelled || ev3.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
             {
                 QueueDel(sideJob);
                 continue;
