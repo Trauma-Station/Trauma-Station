@@ -14,8 +14,10 @@ job-listings-ui-refresh-timer-label-available = Refresh Available
 job-listings-ui-no-accepted-note = No jobs currently accepted...
 job-listings-ui-no-available-note = No jobs currently offered...
 
-job-listings-ui-reputation-level-0 = Title: Goody Two-Shoes Nobody
-job-listings-ui-reputation-level-1 = Title: Up-and-Coming Crook
-job-listings-ui-reputation-level-2 = Title: Front Page News
-job-listings-ui-reputation-level-3 = Title: Terrifying Presence
-job-listings-ui-reputation-level-4 = Title: Living Legend
+job-listings-ui-reputation-title = Title: {$title}
+
+job-listings-ui-reputation-level-0 = Goody Two-Shoes Nobody
+job-listings-ui-reputation-level-1 = Up-and-Coming Crook
+job-listings-ui-reputation-level-2 = Front Page News
+job-listings-ui-reputation-level-3 = Terrifying Presence
+job-listings-ui-reputation-level-4 = Living Legend

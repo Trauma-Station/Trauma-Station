@@ -53,7 +53,8 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public void SetReputation(int reputation, int level)
     {
         ReputationText.Text = Loc.GetString("job-listings-ui-reputation", ("reputation", reputation));
-        ReputationInfo.Text = Loc.GetString($"job-listings-ui-reputation-level-{level}");
+        var title = Loc.GetString($"job-listings-ui-reputation-level-{level}");
+        ReputationInfo.Text = Loc.GetString($"job-listings-ui-reputation-title", ("title", title));
     }
 
     public void SetRefresh(bool bonus, TimeSpan? refreshTime, TimeSpan refreshWaitDuration)
