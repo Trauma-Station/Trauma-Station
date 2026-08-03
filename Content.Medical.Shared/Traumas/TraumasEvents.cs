@@ -14,24 +14,16 @@ public record struct OrganIntegrityChangedEvent(FixedPoint2 OldIntegrity, FixedP
 public record struct OrganDamageSeverityChanged(OrganSeverity OldSeverity, OrganSeverity NewSeverity);
 
 [ByRefEvent]
-public record struct OrganIntegrityChangedEventOnWoundable(Entity<InternalOrganComponent> Organ, FixedPoint2 OldIntegrity, FixedPoint2 NewIntegrity);
-
-[ByRefEvent]
 public record struct OrganDamageSeverityChangedOnWoundable(Entity<InternalOrganComponent> Organ, OrganSeverity OldSeverity, OrganSeverity NewSeverity);
+
+/// <summary>
+/// Raised on the trauma inflicting wound when a trauma is remvoed.
+/// </summary>
 [ByRefEvent]
-public record struct TraumaChanceDeductionEvent(FixedPoint2 TraumaSeverity, TraumaType TraumaType, FixedPoint2 ChanceDeduction);
+public record struct TraumaBeingRemovedEvent(Entity<TraumaComponent> Trauma);
 
 [ByRefEvent]
-public record struct BeforeTraumaInducedEvent(FixedPoint2 TraumaSeverity, EntityUid TraumaTarget, TraumaType TraumaType, bool Cancelled = false);
+public record struct BoneIntegrityChangedEvent(FixedPoint2 OldIntegrity, FixedPoint2 NewIntegrity);
 
 [ByRefEvent]
-public record struct TraumaInducedEvent(Entity<TraumaComponent> Trauma, EntityUid TraumaTarget, FixedPoint2 TraumaSeverity, TraumaType TraumaType);
-
-[ByRefEvent]
-public record struct TraumaBeingRemovedEvent(Entity<TraumaComponent> Trauma, EntityUid TraumaTarget, FixedPoint2 TraumaSeverity, TraumaType TraumaType);
-
-[ByRefEvent]
-public record struct BoneIntegrityChangedEvent(Entity<BoneComponent> Bone, FixedPoint2 OldIntegrity, FixedPoint2 NewIntegrity);
-
-[ByRefEvent]
-public record struct BoneSeverityChangedEvent(Entity<BoneComponent> Bone, BoneSeverity OldSeverity, BoneSeverity NewSeverity);
+public record struct BoneSeverityChangedEvent(BoneSeverity OldSeverity, BoneSeverity NewSeverity);

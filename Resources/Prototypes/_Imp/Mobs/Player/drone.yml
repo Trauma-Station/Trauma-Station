@@ -1,0 +1,296 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Drones and OneStar mech
+- type: entity
+  save: false
+  abstract: true
+  id: PlayerSiliconBase #for player controlled silicons. it's a shitty name, idk why they did it like that.
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
+  - type: Input
+    context: "human"
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: Clickable
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          # Circles, cuz rotation of rectangles looks very bad
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 4
+    baseSprintSpeed : 3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+  - type: Physics
+    bodyType: KinematicController
+  - type: Hands
+    hands:
+      # Unremovable tools
+      hand1:
+        location: Right
+      hand2: {}
+      hand3: {}
+      hand4:
+        location: Left
+      # Materials etc
+      hand5:
+        location: Right
+      hand6:
+        location: Left
+    sortedHands:
+    - hand1
+    - hand2
+    - hand3
+    - hand4
+    - hand5
+    - hand6
+    showInHands: false
+  - type: ComplexInteraction
+  - type: IntrinsicRadioReceiver
+  #- type: IntrinsicRadioTransmitter
+  #  channels:
+  #  - Binary # Goobstation - replaced with collective mind
+  - type: ActiveRadio
+    channels:
+    # - Binary # Goobstation - replaced with collective mind
+    - Common
+  # Goobstation
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: ZombieImmune
+  - type: DoAfter
+  - type: Pullable
+  - type: Examiner
+  - type: Puller
+  - type: StandingState
+  - type: Alerts
+  - type: ProtectedFromStepTriggers
+  - type: Targeting
+  - type: FlashVulnerable
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+
+- type: entity
+  name: drone
+  id: Drone
+  parent: [PlayerSiliconBase, BaseBorgTransponder]
+  components:
+  - type: Drone # this system has too much going on, it should really be like three different components
+    whitelist:
+      tags:
+      - DroneUsable
+      - Trash
+    blacklist:
+      tags:
+      - Syringe
+      - HighRiskItem
+      - Sidearm
+      - Taser
+      components:
+      - Gun
+      - EnergySword
+  - type: Instrument
+    allowPercussion: false
+    handheld: false
+    bank: 1
+    program: 2
+  - type: Loadout
+    prototypes:
+    - StartingGearDroneTools
+  - type: NameIdentifier
+    group: Drone
+  - type: Inventory
+    templateId: drone
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.SiliconLawsUiKey.Key:
+        type: SiliconLawBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+        requireInputValidation: false
+  - type: IntrinsicUI
+    uis:
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionShowStationMap
+      enum.InstrumentUiKey.Key:
+        toggleAction: ActionDronePlayMidi
+  - type: StationMap
+  - type: GhostRole
+    makeSentient: true
+    name: ghost-role-information-drone-name
+    description: ghost-role-information-drone-description
+    rules: ghost-role-information-drone-rules
+    mindRoles:
+    - MindRoleGhostRoleSilicon
+    job: Borg
+  - type: GhostTakeoverAvailable
+  - type: SiliconLawBound
+  - type: SiliconLawProvider
+    laws: Drone
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 5
+    baseSprintSpeed : 5
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Dead
+  - type: NoSlip
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - SlowedDown
+    - Flashed
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      30: 0.7
+      50: 0.5
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 42
+  - type: TemperatureDamage
+    heatDamageThreshold: 5000
+    heatDamage:
+      types:
+        Heat: 1 #per second, scales with temperature & other constants
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - state: shell
+      sprite: _Imp/Drone/drone.rsi
+      map: ["base"]
+  - type: BorgTransponder
+    sprite:
+      sprite: _Imp/Drone/drone.rsi
+      state: shell
+    name: drone
+  - type: MovementIgnoreGravity
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 30
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DroneVisuals.Status:
+        base:
+          Off: { state: shell }
+          On: { state: drone }
+  - type: LanguageSpeaker
+    speaks:
+    - DroneTalk
+    understands:
+    - DroneTalk
+    - TauCetiBasic
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: Repairable
+    fuelCost: 15
+    doAfterDelay: 8
+  - type: ActionGrant
+    actions:
+    - ActionViewLaws
+  - type: Actions
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 3.5
+    softness: 1
+    lightMask: ConeSingle
+    autoRot: true
+  - type: ProtectedFromStepTriggers
+  - type: DamageOnInteractProtection # Goobstation - Copied from borgs
+    damageProtection:
+      flatReductions:
+        Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
+  - type: InputMover
+  - type: MobMover
+  - type: ContentEye
+    maxZoom: 1.2, 1.2
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - EmagImmune
+    - CanPilot
+    - VimPilot
+    - Bot
+  - type: CollectiveMind
+    defaultChannel: Dronemind
+    channels:
+    - Dronemind
+  - type: Access
+    tags:
+    - Engineering
+    - Maintenance
+    - Atmospherics
+  - type: ContributorName
+  - type: KnowledgeGrant
+    skills:
+      # same as engiborg
+      FabricationKnowledge: 60
+      DoorsKnowledge: 60
+      AirlocksKnowledge: 60
+      FurnitureKnowledge: 60
+      InfrastructureKnowledge: 60
+      ElectronicsKnowledge: 60
+      WallsKnowledge: 60
+      WindowsKnowledge: 60
+      MetalworkingKnowledge: 60
+      GunsmithingKnowledge: 60
+      MechanicsKnowledge: 60
+      BotsKnowledge: 60 # you will be upgraded

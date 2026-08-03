@@ -115,7 +115,8 @@ public sealed partial class BanManager
             desc.Append(_random.Pick(PermaBanNames));
         }
         desc.Append("\n\n> Reason: ");
-        desc.Append(ban.WebhookReason ?? ban.Reason);
+        var reason = ban.WebhookReason ?? ban.Reason;
+        desc.Append(reason.Trim().Replace("\n", "\n> "));
 
         var payload = new WebhookPayload
         {

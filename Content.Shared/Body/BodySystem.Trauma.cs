@@ -43,6 +43,21 @@ public sealed partial class BodySystem
     ];
 
     /// <summary>
+    /// Map between a body part type and the organ categories with that type, regardless of symmetry.
+    /// </summary>
+    public static readonly Dictionary<BodyPartType, ProtoId<OrganCategoryPrototype>[]> PartTypeOrgans = new()
+    {
+        {BodyPartType.Head, [ "Head" ]},
+        {BodyPartType.Torso, [ "Torso" ]},
+        {BodyPartType.Arm, [ "ArmLeft", "ArmRight" ]},
+        {BodyPartType.Hand, [ "HandLeft", "HandRight" ]},
+        {BodyPartType.Leg, [ "LegLeft", "LegRight" ]},
+        {BodyPartType.Foot, [" FootLeft", "FootRight" ]},
+        {BodyPartType.Tail, [ "Tail" ]},
+        {BodyPartType.Wings, [ "Wings" ]}
+    };
+
+    /// <summary>
     /// Vital body parts' organ categories.
     /// </summary>
     public static readonly ProtoId<OrganCategoryPrototype>[] VitalParts =
@@ -51,6 +66,8 @@ public sealed partial class BodySystem
         "Torso"
     ];
     // TODO: vital internal organs???
+
+    private readonly HashSet<ProtoId<OrganCategoryPrototype>> _coveredParts = new();
 
     /// <summary>
     /// Tries to enable a given organ, letting systems run logic.

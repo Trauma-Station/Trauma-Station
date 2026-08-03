@@ -4,7 +4,6 @@ using Content.Goobstation.Server.Devil.Objectives.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Contract;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Wounds;
 using Content.Server.Hands.Systems;
 using Content.Server.Implants;
 using Content.Server.Mind;
@@ -28,13 +27,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
     [Dependency] private SubdermalImplantSystem _implant = default!;
     [Dependency] private PolymorphSystem _polymorph = default!;
     [Dependency] private MindSystem _mind = default!;
-    [Dependency] private WoundSystem _wound = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        InitializeSpecialActions();
-    }
 
     #region Helper Events
 
