@@ -240,7 +240,7 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.10 #per second, scales with pressure and other constants.
+        Blunt: 2 # Trauma - was 0.1
   - type: Flammable
     fireSpread: true
     damage:
