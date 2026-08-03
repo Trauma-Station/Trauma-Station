@@ -4,6 +4,7 @@
   id: LoneXenomorph
   spawnerPrototype: SpawnPointGhostLoneXenomorph
   allowNonHumans: true
+  mindRoles: [ MindRoleLoneXenomorph ]
   briefing:
     text: lone-xenomorph-role-greeting
     color: "#8c3986"
