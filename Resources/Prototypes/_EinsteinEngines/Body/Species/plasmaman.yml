@@ -83,6 +83,7 @@
   - BaseSpeciesMob
   - MobAtmosStandard
   - MobBloodstream
+  - MobRespirator
   - MobFlammable
   id: MobPlasmaman
   name: Urist McPlasma
