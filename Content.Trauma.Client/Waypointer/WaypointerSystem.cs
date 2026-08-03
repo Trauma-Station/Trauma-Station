@@ -26,14 +26,14 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ActiveWaypointerComponent, ComponentInit>(OnAddition);
-        SubscribeLocalEvent<ActiveWaypointerComponent, ComponentRemove>(OnRemoval);
+        SubscribeLocalEvent<ActiveWaypointerComponent, ComponentStartup>(OnAddition);
+        SubscribeLocalEvent<ActiveWaypointerComponent, ComponentShutdown>(OnRemoval);
 
         SubscribeLocalEvent<ActiveWaypointerComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<ActiveWaypointerComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        SubscribeLocalEvent<SimpleWaypointerComponent, ComponentInit>(OnAddition);
-        SubscribeLocalEvent<SimpleWaypointerComponent, ComponentRemove>(OnRemoval);
+        SubscribeLocalEvent<SimpleWaypointerComponent, ComponentStartup>(OnAddition);
+        SubscribeLocalEvent<SimpleWaypointerComponent, ComponentShutdown>(OnRemoval);
 
         SubscribeLocalEvent<SimpleWaypointerComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<SimpleWaypointerComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
@@ -41,19 +41,17 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
         _waypointerOverlay = new WaypointerOverlay();
     }
 
-    private void OnAddition(EntityUid player, ActiveWaypointerComponent comp, ref ComponentInit args)
+    private void OnAddition(EntityUid uid, ActiveWaypointerComponent comp, ref ComponentStartup args)
     {
-        if (_player.LocalEntity == null || player != _player.LocalEntity.Value
-            || _timing.ApplyingState)
+        if (_player.LocalEntity is not { } player || player != uid)
             return;
 
         _overlay.AddOverlay(_waypointerOverlay);
     }
 
-    private void OnRemoval(EntityUid player, ActiveWaypointerComponent comp, ref ComponentRemove args)
+    private void OnRemoval(EntityUid uid, ActiveWaypointerComponent comp, ref ComponentShutdown args)
     {
-        if (_player.LocalEntity == null || player != _player.LocalEntity.Value
-            || _timing.ApplyingState)
+        if (_player.LocalEntity is not { } player || player != uid)
             return;
 
         _overlay.RemoveOverlay(_waypointerOverlay);
@@ -69,7 +67,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
             _overlay.RemoveOverlay(_waypointerOverlay);
     }
 
-    private void OnPlayerAttached(EntityUid player, ActiveWaypointerComponent comp, LocalPlayerAttachedEvent args)
+    private void OnPlayerAttached(EntityUid uid, ActiveWaypointerComponent comp, LocalPlayerAttachedEvent args)
     {
         if (args.Entity != _player.LocalEntity)
             return;
@@ -77,7 +75,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
         _overlay.AddOverlay(_waypointerOverlay);
     }
 
-    private void OnPlayerDetached(EntityUid player, ActiveWaypointerComponent comp, LocalPlayerDetachedEvent args)
+    private void OnPlayerDetached(EntityUid uid, ActiveWaypointerComponent comp, LocalPlayerDetachedEvent args)
     {
         if (args.Entity != _player.LocalEntity)
             return;
