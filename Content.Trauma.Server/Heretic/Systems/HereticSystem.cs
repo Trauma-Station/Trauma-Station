@@ -438,8 +438,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         foreach (var target in ent.Comp1.SacrificeTargets)
         {
             if (TryGetEntity(target.Entity, out var tent) &&
-                Exists(tent.Value) && !Paused(tent.Value) &&
-                !EntityManager.IsQueuedForDeletion(tent.Value))
+                !TerminatingOrDeleted(tent.Value) && !Paused(tent.Value))
                 continue;
 
             targets ??= GetHereticTargets(ent);

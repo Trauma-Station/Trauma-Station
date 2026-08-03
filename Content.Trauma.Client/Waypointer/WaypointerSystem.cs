@@ -41,17 +41,17 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
         _waypointerOverlay = new WaypointerOverlay();
     }
 
-    private void OnAddition(EntityUid uid, ActiveWaypointerComponent comp, ref ComponentStartup args)
+    private void OnAddition(EntityUid player, ActiveWaypointerComponent comp, ref ComponentStartup args)
     {
-        if (_player.LocalEntity is not { } player || player != uid)
+        if (_player.LocalEntity != player)
             return;
 
         _overlay.AddOverlay(_waypointerOverlay);
     }
 
-    private void OnRemoval(EntityUid uid, ActiveWaypointerComponent comp, ref ComponentShutdown args)
+    private void OnRemoval(EntityUid player, ActiveWaypointerComponent comp, ref ComponentShutdown args)
     {
-        if (_player.LocalEntity is not { } player || player != uid)
+        if (_player.LocalEntity != player)
             return;
 
         _overlay.RemoveOverlay(_waypointerOverlay);
@@ -67,7 +67,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
             _overlay.RemoveOverlay(_waypointerOverlay);
     }
 
-    private void OnPlayerAttached(EntityUid uid, ActiveWaypointerComponent comp, LocalPlayerAttachedEvent args)
+    private void OnPlayerAttached(EntityUid player, ActiveWaypointerComponent comp, LocalPlayerAttachedEvent args)
     {
         if (args.Entity != _player.LocalEntity)
             return;
@@ -75,7 +75,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
         _overlay.AddOverlay(_waypointerOverlay);
     }
 
-    private void OnPlayerDetached(EntityUid uid, ActiveWaypointerComponent comp, LocalPlayerDetachedEvent args)
+    private void OnPlayerDetached(EntityUid player, ActiveWaypointerComponent comp, LocalPlayerDetachedEvent args)
     {
         if (args.Entity != _player.LocalEntity)
             return;
