@@ -9,4 +9,4 @@
     antagPrototype: Demonologist
     exclusiveAntag: true
     roleType: SoloAntagonist
-    subtype: roles-antag-demonologist-name
+    subtype: role-subtype-demonologist

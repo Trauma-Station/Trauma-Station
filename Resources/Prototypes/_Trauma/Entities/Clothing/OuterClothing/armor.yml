@@ -236,3 +236,5 @@
   - type: SelfExtinguisher
     cooldown: 1
     requiresIgniteFromGasImmune: false
+    sound:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
