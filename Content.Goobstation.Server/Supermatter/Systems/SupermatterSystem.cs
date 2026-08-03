@@ -6,7 +6,6 @@ using System.Text;
 using Content.Goobstation.Shared.Supermatter;
 using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Goobstation.Shared.Supermatter.Systems;
-using Content.Server.AlertLevel;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
@@ -16,6 +15,7 @@ using Content.Server.Lightning;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.AlertLevel;
 using Content.Shared.Atmos;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -30,7 +30,6 @@ using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -48,7 +47,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
-    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
     [Dependency] private LightningSystem _lightning = default!;
@@ -57,10 +56,11 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;
     [Dependency] private SharedToolSystem _tool = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
-    public static readonly ProtoId<ToolQualityPrototype> Slicing = "Slicing";
+    private static readonly ProtoId<AlertLevelPrototype> DeltaAlert = "DeltaDelam";
+    private static readonly ProtoId<AlertLevelPrototype> YellowAlert = "Yellow";
+    private static readonly ProtoId<ToolQualityPrototype> Slicing = "Slicing";
 
     private DelamType _delamType = DelamType.Explosion;
 
@@ -385,7 +385,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         {
             var sb = new StringBuilder();
             var loc = string.Empty;
-            var alertLevel = "yellow";
+            var alertLevel = YellowAlert;
 
             switch (_delamType)
             {
@@ -396,23 +396,22 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
 
                 case DelamType.Singulo:
                     loc = "supermatter-delam-overmass";
-                    alertLevel = "delta";
+                    alertLevel = DeltaAlert;
                     break;
 
                 case DelamType.Tesla:
                     loc = "supermatter-delam-tesla";
-                    alertLevel = "delta";
+                    alertLevel = DeltaAlert;
                     break;
 
                 case DelamType.Cascade:
                     loc = "supermatter-delam-cascade";
-                    alertLevel = "delta";
+                    alertLevel = DeltaAlert;
                     break;
             }
 
-            var station = _station.GetOwningStation(uid);
-            if (station != null)
-                _alert.SetLevel((EntityUid) station, alertLevel, true, true, true, false);
+            if (_station.GetOwningStation(uid) is { } station)
+                _alert.SetLevel(station, alertLevel, force: true);
 
             sb.AppendLine(Loc.GetString(loc));
             sb.AppendLine(Loc.GetString("supermatter-seconds-before-delam", ("seconds", sm.DelamTimer)));
@@ -672,7 +671,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         var integrity = GetIntegrity(sm).ToString("0.00");
         SupermatterAnnouncement(uid, Loc.GetString("supermatter-announcement-cc-tamper", ("integrity", integrity)), true, "Central Command");
 
-        Spawn(sm.SliverPrototypeId, _transform.GetMapCoordinates(args.User));
+        Spawn(sm.SliverPrototypeId, _xform.GetMapCoordinates(args.User));
 
         if (sm.DelamTimer > 30f)
             sm.DelamTimer -= 10f;

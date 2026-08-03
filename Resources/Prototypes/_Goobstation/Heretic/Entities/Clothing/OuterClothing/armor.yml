@@ -22,7 +22,7 @@
     damageCoefficient: 0.65
 
 - type: entity
-  parent: [ ArmorHeretic, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorHeretic
   name: ominous armor
   description: A ragged, dusty set of robes. Strange eyes line the inside.
@@ -56,6 +56,10 @@
     reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
 
 - type: entity
   abstract: true
@@ -203,7 +207,7 @@
     lowPressureMultiplier: 1000
   - type: HollowWeave
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
 
 - type: entity
   abstract: true
@@ -242,7 +246,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.1
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
+    coefficient: 0.01
   - type: ScorchedMantle
 
 - type: entity
@@ -374,7 +378,7 @@
     lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
   - type: TackleModifier # Allows tackling on cosmic fields
     modifiers:
     - priority: 25
@@ -457,7 +461,7 @@
     damageCoefficient: 0.7
 
 - type: entity
-  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorCloakVoid
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
@@ -519,3 +523,7 @@
         base:
           True: { state: transparent-icon }
           False: { state: icon }
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container

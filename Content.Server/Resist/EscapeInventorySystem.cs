@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Shared.Actions;
-using Robust.Shared.Prototypes;
-// </Trauma>
 using Content.Server.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.ActionBlocker;
@@ -23,16 +19,6 @@ public sealed partial class EscapeInventorySystem : EntitySystem
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
-    [Dependency] private SharedActionsSystem _actions = default!; // DeltaV
-
-    /// <summary>
-    /// Goob - You can't escape the hands of an entity this many times more massive than you.
-    /// </summary>
-    public const float MaximumMassDisadvantage = 6f;
-    /// <summary>
-    /// DeltaV - action to cancel inventory escape
-    /// </summary>
-    private static readonly EntProtoId _escapeCancelAction = "ActionCancelEscape";
 
     public override void Initialize()
     {
@@ -41,7 +27,6 @@ public sealed partial class EscapeInventorySystem : EntitySystem
         SubscribeLocalEvent<CanEscapeInventoryComponent, MoveInputEvent>(OnRelayMovement);
         SubscribeLocalEvent<CanEscapeInventoryComponent, EscapeInventoryEvent>(OnEscape);
         SubscribeLocalEvent<CanEscapeInventoryComponent, DroppedEvent>(OnDropped);
-        SubscribeLocalEvent<CanEscapeInventoryComponent, EscapeInventoryCancelActionEvent>(OnCancelEscape); // DeltaV
     }
 
     private void OnRelayMovement(EntityUid uid, CanEscapeInventoryComponent component, ref MoveInputEvent args)
@@ -78,9 +63,10 @@ public sealed partial class EscapeInventorySystem : EntitySystem
 
         var doAfterEventArgs = new DoAfterArgs(EntityManager, user, component.BaseResistTime * multiplier, new EscapeInventoryEvent(), user, target: container)
         {
+            CancelDuplicate = false, // Trauma
+            BreakOnMove = true,
             BreakOnDamage = true,
-            NeedHand = false,
-            CancelDuplicate = false, // Goobstation
+            NeedHand = false
         };
 
         if (!_doAfterSystem.TryStartDoAfter(doAfterEventArgs, out component.DoAfter))
@@ -89,18 +75,16 @@ public sealed partial class EscapeInventorySystem : EntitySystem
         _popupSystem.PopupEntity(Loc.GetString("escape-inventory-component-start-resisting"), user, user);
         _popupSystem.PopupEntity(Loc.GetString("escape-inventory-component-start-resisting-target"), container, container);
 
-        // DeltaV - escape cancel action
-        if (component.EscapeCancelAction is not { Valid: true })
-            _actions.AddAction(user, ref component.EscapeCancelAction, _escapeCancelAction);
+        _actions.AddAction(user, ref component.EscapeCancelAction, _escapeCancelAction); // Trauma
     }
 
     private void OnEscape(EntityUid uid, CanEscapeInventoryComponent component, EscapeInventoryEvent args)
     {
-        component.DoAfter = null;
-
-        // DeltaV - remove cancel action regardless of do-after result
+        // <Trauma>
         _actions.RemoveAction(uid, component.EscapeCancelAction);
         component.EscapeCancelAction = null;
+        // </Trauma>
+        component.DoAfter = null;
 
         if (args.Handled || args.Cancelled)
             return;
@@ -113,15 +97,5 @@ public sealed partial class EscapeInventorySystem : EntitySystem
     {
         if (component.DoAfter != null)
             _doAfterSystem.Cancel(component.DoAfter);
-    }
-
-    // DeltaV
-    private void OnCancelEscape(EntityUid uid, CanEscapeInventoryComponent component, EscapeInventoryCancelActionEvent args)
-    {
-        if (component.DoAfter != null)
-            _doAfterSystem.Cancel(component.DoAfter);
-
-        _actions.RemoveAction(uid, component.EscapeCancelAction);
-        component.EscapeCancelAction = null;
     }
 }

@@ -223,7 +223,8 @@
     conflicts:
     - MutationAntiGlow
   - type: RandomPointLight
-    energy: 0.5, 2.0
+    minEnergy: 0.5
+    maxEnergy: 2.0
 
 - type: entity
   parent: BaseLightMutation

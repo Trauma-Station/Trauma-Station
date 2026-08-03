@@ -1,17 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Advertise;
-using Content.Server.Advertise.Components;
 using Content.Trauma.Shared.VendingMachines;
-using Content.Shared.Advertise.Components;
-using Content.Shared.Advertise.Systems;
 
 namespace Content.Trauma.Server.VendingMachines;
 
 public sealed partial class ShopVendorSystem : SharedShopVendorSystem
 {
-    [Dependency] private SharedSpeakOnUIClosedSystem _speakOnUIClosed = default!;
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -41,11 +35,5 @@ public sealed partial class ShopVendorSystem : SharedShopVendorSystem
                 UpdateVisuals(ent);
             }
         }
-    }
-
-    protected override void AfterPurchase(Entity<ShopVendorComponent> ent)
-    {
-        if (TryComp<SpeakOnUIClosedComponent>(ent, out var speak))
-            _speakOnUIClosed.TrySetFlag((ent.Owner, speak));
     }
 }

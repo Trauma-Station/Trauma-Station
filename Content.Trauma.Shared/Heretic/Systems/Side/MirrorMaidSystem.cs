@@ -4,7 +4,7 @@ using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;

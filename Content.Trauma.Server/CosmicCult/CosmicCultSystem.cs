@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Events;
 using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
 using Content.Shared.Eye;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;

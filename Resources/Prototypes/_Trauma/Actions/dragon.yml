@@ -6,10 +6,11 @@
   name: Summon Carp Horde
   description: Summons 3 carps on the spot to protect you from danger!
   components:
+  - type: Sprite
+    sprite: _Goobstation/Actions/dragon.rsi
+    layers:
+    - state: carp_horde
   - type: Action
-    icon:
-      sprite: _Goobstation/Actions/dragon.rsi
-      state: carp_horde
     useDelay: 90
     priority: 4
   - type: InstantAction
@@ -21,10 +22,11 @@
   name: Wing flap
   description: Flap your wings to stun all enemies around you!
   components:
+  - type: Sprite
+    sprite: _Goobstation/Actions/dragon.rsi
+    layers:
+    - state: wing_flap
   - type: Action
-    icon:
-      sprite: _Goobstation/Actions/dragon.rsi
-      state: wing_flap
     useDelay: 45
     priority: 5
   - type: InstantAction

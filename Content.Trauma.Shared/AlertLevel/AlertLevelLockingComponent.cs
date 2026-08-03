@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.AlertLevel;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.AlertLevel;
@@ -8,7 +9,7 @@ namespace Content.Trauma.Shared.AlertLevel;
 /// Station component that locks an alert level, only allowing it once a required level has been active for a certain time.
 /// This is ignored by the admin set alert level command or any other forced set level mechanism.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedAlertLevelLockingSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(AlertLevelLockingSystem))]
 [AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class AlertLevelLockingComponent : Component
 {
@@ -16,13 +17,13 @@ public sealed partial class AlertLevelLockingComponent : Component
     /// The alert level that must be active for <see cref="LockTime"> to unlock <see cref="LockedLevel"/>.
     /// </summary>
     [DataField(required: true)]
-    public string RequiredLevel = string.Empty;
+    public ProtoId<AlertLevelPrototype> RequiredLevel;
 
     /// <summary>
     /// The alert level to be locked.
     /// </summary>
     [DataField(required: true)]
-    public string LockedLevel = string.Empty;
+    public ProtoId<AlertLevelPrototype> LockedLevel;
 
     /// <summary>
     /// How long <see cref="RequiredLevel"/> must be active for <see cref="LockedLevel"/> to unlock.

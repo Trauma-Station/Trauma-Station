@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedDevil
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedGhoul
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedJaunt
+
+- type: entity
+  parent: StatusEffectMuted
+  id: StatusEffectMutedMutation
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityArena
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityBuckle
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityDevil
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityHeretic
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityLing
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityOrgan
+
+- type: entity
+  parent: StatusEffectPressureImmunity
+  id: StatusEffectPressureImmunityMutation

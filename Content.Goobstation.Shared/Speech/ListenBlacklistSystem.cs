@@ -13,13 +13,7 @@ public sealed partial class ListenBlacklistSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ListenBlacklistComponent, ListenAttemptEvent>(OnListenAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnListenAttempt(Entity<ListenBlacklistComponent> ent, ref ListenAttemptEvent args)
     {
         if (_whitelist.IsWhitelistPass(ent.Comp.Blacklist, args.Source))

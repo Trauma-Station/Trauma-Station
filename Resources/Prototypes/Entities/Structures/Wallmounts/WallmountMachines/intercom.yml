@@ -15,6 +15,10 @@
     - RadioMessage
   - type: SignalRadioReceiver
     port: RadioMessage
+  - type: ListenBlacklist # its annoying as shit
+    blacklist:
+      components:
+      - Vocalizer
   # </Trauma>
   - type: StationAiWhitelist
   - type: Electrified
@@ -31,10 +35,6 @@
     toggleOnInteract: false
   - type: RadioSpeaker
     toggleOnInteract: false
-  - type: ListenBlacklist # Goobstation - its annoying as shit
-    blacklist:
-      components:
-      - Advertise
   - type: Intercom
   - type: Speech
     speechVerb: Robotic

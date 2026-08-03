@@ -14,9 +14,7 @@
       - Stun
       - SlowedDown
       - Electrocution
-      - PressureImmunity
       - SeeAll
-      - Flashed
     - type: Reactive
       groups:
         Flammable: [Touch]

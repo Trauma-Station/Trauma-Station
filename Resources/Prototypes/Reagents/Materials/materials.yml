@@ -86,6 +86,7 @@
 
 - type: material
   id: Meaterial # you can't take this pun from me
+  stackEntity: MaterialSheetMeat1
   name: materials-meat
   unit: materials-unit-slab
   icon: { sprite: _Trauma/Objects/Materials/Sheets/meaterial.rsi, state: meat } # Trauma
@@ -94,6 +95,7 @@
 
 - type: material
   id: WebSilk
+  stackEntity: MaterialWebSilk1
   name: materials-web
   unit: materials-unit-web
   icon: { sprite: _Trauma/Objects/Materials/silk.rsi, state: icon } # Trauma
@@ -102,6 +104,7 @@
 
 - type: material
   id: Cotton
+  stackEntity: MaterialCotton1
   name: materials-cotton
   unit: materials-unit-boll
   icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: cotton } # Trauma
@@ -110,7 +113,7 @@
 
 - type: material
   id: Bones
-  stackEntity: MaterialBones1 # Trauma
+  stackEntity: MaterialBones1
   name: materials-bones
   unit: materials-unit-piece
   icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones } # Trauma
@@ -128,7 +131,7 @@
 
 - type: material
   id: Gunpowder
-  stackEntity: MaterialGunpowder # Trauma
+  stackEntity: MaterialGunpowder
   name: materials-gunpowder
   unit: materials-unit-piece
   icon: { sprite: Objects/Misc/reagent_fillings.rsi, state: powderpile }

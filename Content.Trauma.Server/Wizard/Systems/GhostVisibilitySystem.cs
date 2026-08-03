@@ -9,7 +9,7 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Eye;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
