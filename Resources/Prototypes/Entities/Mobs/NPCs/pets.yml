@@ -187,7 +187,7 @@
       - PetsNT
   - type: HTN
     rootTask:
-      task: RuminantHostileCompound # Trauma
+      task: RuminantHostileCompound # Trauma - was SimpleHostileCompound
   - type: Grammar
     attributes:
       proper: true
@@ -697,7 +697,6 @@
           Telecrystal1:
             min: 25
             max: 40
-    # </Trauma>
     - trigger:
         !type:DamageTypeTrigger
         damageType: Radiation
@@ -1010,10 +1009,10 @@
     coldDamageThreshold: 0
   - type: MeleeWeapon
     damage:
+    # <Trauma>
       types:
         # Blunt: 1
-        Caustic: 5 # Trauma, was 1
-    # <Trauma>
+        Caustic: 5 # - was 1
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
     # </Trauma>

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: ghostRoleRaffleSettings
+  id: insta
+  settings:
+    initialDuration: 1
+    joinExtendsDurationBy: 0
+    maxDuration: 1
