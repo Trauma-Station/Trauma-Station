@@ -13,6 +13,4 @@
     tags:
     - NukeOpsUplink
     - LoneOpsUplink
-
-    # Trauma - So zed bundle is commander only
-    #- NukeOpsCommanderUplink
+    #- NukeOpsCommanderUplink Trauma - So zed bundle is commander only
