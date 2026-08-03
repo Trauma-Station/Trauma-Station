@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
+  id: BaseCosmicCultStructure
+  components:
+  - type: CosmicCorruptible
+    convertTo: null
+  - type: CosmicCultExamine
+
+- type: entity
   name: malign settee
   id: CosmicChair
-  parent: SeatBase
+  parent: [ SeatBase, BaseCosmicCultStructure ]
   placement:
     mode: SnapgridCenter
   components:
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/cosmicchair.rsi
     state: chair
@@ -32,10 +38,10 @@
     anchored: true
 
 - type: entity
-  parent: BaseStructure
+  parent: [ BaseStructure, BaseCosmicCultStructure ]
   id: CosmicObelisk
   name: malign obelisk
-  description: A mysterious-yet-inert sturcture. Unsettling.
+  description: A mysterious-yet-inert structure. Unsettling.
   components:
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/cosmicpillar.rsi
@@ -44,8 +50,6 @@
       - state: icon
     drawdepth: Mobs
     noRot: true
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: SpriteFade
   - type: Fixtures
     fixtures:
@@ -140,7 +144,7 @@
 
 - type: entity
   id: CosmicTable
-  parent: CounterBase
+  parent: [ CounterBase, BaseCosmicCultStructure ]
   name: malign table
   description: Unfathomably, cosmically.. Square.
   components:
@@ -153,8 +157,6 @@
     damageModifierSet: Metallic
   - type: Injurable
     damageContainer: Inorganic
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: Destructible
     thresholds:
     - trigger:
@@ -169,7 +171,7 @@
 
 
 - type: entity
-  parent: Bed
+  parent: [ Bed, BaseCosmicCultStructure ]
   id: CosmicBed
   name: malign bed
   description: This is used to lie in... okay, maybe not.
@@ -177,27 +179,19 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/furniture.rsi
     state: bed
-  - type: CosmicCorruptible
-    convertTo: null
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
 
 - type: entity
   parent: Rack
-  id: CosmicRack
+  id: [ CosmicRack, BaseCosmicCultStructure ]
   name: corrupted rack
   description: An eerie rack for storing eerie things on.
   components:
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/furniture.rsi
     state: rack
-  - type: CosmicCorruptible
-    convertTo: null
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
 
 - type: entity
-  parent: Railing
+  parent: [ Railing, BaseCosmicCultStructure ]
   id: CosmicRailing
   name: malign railing
   description: Unnerving railing meant to protect idiots like you from falling into endless void.
@@ -205,13 +199,9 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/railing.rsi
     state: side
-  - type: CosmicCorruptible
-    convertTo: null
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
 
 - type: entity
-  parent: RailingCorner
+  parent: [ RailingCorner, BaseCosmicCultStructure ]
   id: CosmicRailingCorner
   name: malign railing
   description: Unnerving railing meant to protect idiots like you from falling into endless void.
@@ -219,13 +209,9 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/railing.rsi
     state: corner
-  - type: CosmicCorruptible
-    convertTo: null
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
 
 - type: entity
-  parent: RailingCornerSmall
+  parent: [ RailingCornerSmall, BaseCosmicCultStructure ]
   id: CosmicRailingCornerSmall
   name: malign railing
   description: Unnerving railing meant to protect idiots like you from falling into endless void.
@@ -233,13 +219,9 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/railing.rsi
     state: corner_small
-  - type: CosmicCorruptible
-    convertTo: null
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
 
 - type: entity
-  parent: RailingRound
+  parent: [ RailingRound, BaseCosmicCultStructure ]
   id: CosmicRailingRound
   name: malign railing
   description: Unnerving railing meant to protect idiots like you from falling into endless void.
@@ -247,7 +229,3 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/railing.rsi
     state: round
-  - type: CosmicCorruptible
-    convertTo: null
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
