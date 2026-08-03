@@ -12672,3 +12672,12 @@ Entries:
   id: 1386
   time: '2026-08-03T13:18:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3913
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: Slayer overcoat now can toggle to broadcast to station radios.
+  - type: Tweak
+    message: Monarch coat can now be bought by non-human syndicate agents.
+  id: 1387
+  time: '2026-08-03T16:21:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3892
