@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.CosmicCult;
 [RegisterComponent]
 public sealed partial class CosmicCultExamineComponent : Component
 {
-    [DataField(required: true)]
+    [DataField]
     public LocId CultistText = "cosmic-examine-text-forthecult";
 
     [DataField]

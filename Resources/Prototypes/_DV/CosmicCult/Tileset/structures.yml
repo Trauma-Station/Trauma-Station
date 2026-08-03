@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
   id: BaseCosmicCultStructure
+  abstract: true
   components:
   - type: CosmicCorruptible
     convertTo: null
@@ -115,7 +115,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 200
-      behaviors: #excess damage, don't spawn entities.
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:PlaySoundBehavior
@@ -143,8 +143,8 @@
     color: "#42a4ae"
 
 - type: entity
-  id: CosmicTable
   parent: [ CounterBase, BaseCosmicCultStructure ]
+  id: CosmicTable
   name: malign table
   description: Unfathomably, cosmically.. Square.
   components:
