@@ -51,21 +51,18 @@
     Silver: 100
 
 - type: latheRecipe
+  parent: BaseToolRecipe
   id: MiningDrill
   result: MiningDrill
-  categories:
-  - Tools
   completetime: 3
   materials:
     Steel: 500
     Plastic: 100
 
 - type: latheRecipe
+  parent: MiningDrill
   id: MiningDrillDiamond
   result: MiningDrillDiamond
-  categories:
-  - Tools
-  completetime: 3
   materials:
     Steel: 600
     Plastic: 200

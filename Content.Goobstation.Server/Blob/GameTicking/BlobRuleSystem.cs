@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Goobstation.Common.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.AlertLevel;
 using Content.Server.Antag;
 using Content.Server.Audio;
 using Content.Server.Chat.Managers;
@@ -16,6 +15,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.AlertLevel;
 using Content.Shared.Audio;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Components;
@@ -35,6 +35,9 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
+
+    private static readonly ProtoId<AlertLevelPrototype> StationAlertCritical = "DeltaBlob";
+    private static readonly ProtoId<AlertLevelPrototype> StationAlertDetected = "Red";
 
     protected override void Started(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -95,9 +98,6 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
         return true;
     }
 
-    private const string StationAlertCritical = "delta";
-    private const string StationAlertDetected = "red";
-
     private void CheckChangeStage(
         Entity<StationBlobConfigComponent?> stationUid,
         BlobRuleComponent blobRuleComp,
@@ -146,7 +146,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     // Station is the source here because that's the only UID we have in this method. Гойда.
                     _sound.DispatchStationEventMusic(stationUid, detectedAudio, StationEventMusicType.Blob, detectedAudio.Params);
 
-                _alertLevel.SetLevel(stationUid, StationAlertDetected, true, true, true, true);
+                _alertLevel.SetLevel(stationUid.Owner, StationAlertDetected, force: true);
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
@@ -175,7 +175,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
                 blobRuleComp.BlobCBurnCalled = true;
 
-                _alertLevel.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
+                _alertLevel.SetLevel(stationUid.Owner, StationAlertCritical, true, true, true, true);
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent

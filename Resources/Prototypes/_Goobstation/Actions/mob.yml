@@ -6,10 +6,11 @@
   name: Mousecall
   description: Call nearby mice to your location.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Actions/call.rsi
+    layers:
+    - state: icon
   - type: Action
-    icon:
-      sprite: _Goobstation/Actions/call.rsi
-      state: icon
     useDelay: 5
   - type: InstantAction
     event: !type:MobCallActionEvent

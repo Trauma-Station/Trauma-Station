@@ -71,7 +71,6 @@
   - type: LightEaterUser
   - type: ShadowlingPlaneShift
   - type: Reflect
-  - type: PressureImmunity
 
 - type: entity
   id: LesserShadowlingAbilities

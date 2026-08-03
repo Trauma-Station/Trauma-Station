@@ -20,10 +20,11 @@
   name: Convoke Void
   description: A rare genome that attracts odd forces not usually observed. May sometimes pull you in randomly.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: void_magnet
   - type: Action
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: void_magnet
     useDelay: 60
   - type: InstantAction
     event: !type:EffectInstantActionEvent

@@ -10,9 +10,10 @@
     raiseOnUser: true
     useDelay: 60
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Actions/mime.rsi
-      state: invisible_blockade
+  - type: Sprite
+    sprite: _Goobstation/Actions/mime.rsi
+    layers:
+    - state: invisible_blockade
   - type: InstantAction
     event: !type:InvisibleBlockadeActionEvent
   - type: AdvancedMimeryAction
@@ -27,9 +28,10 @@
     raiseOnUser: true
     useDelay: 0.25
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Actions/mime.rsi
-      state: finger_guns
+  - type: Sprite
+    sprite: _Goobstation/Actions/mime.rsi
+    layers:
+    - state: finger_guns
   - type: TargetAction
     checkCanAccess: false
     repeat: true

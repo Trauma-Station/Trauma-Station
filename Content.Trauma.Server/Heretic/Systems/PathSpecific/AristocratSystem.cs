@@ -7,6 +7,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Effects;
@@ -18,7 +19,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Weather;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
@@ -56,19 +57,19 @@ public sealed partial class AristocratSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedGravitySystem _gravity = default!;
     [Dependency] private EntityQuery<AirlockComponent> _airlockQuery = default!;
-    [Dependency] private EntityQuery<StatusEffectsComponent> _statusQuery = default!;
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
     private static readonly EntProtoId IceWallPrototype = "WallIce";
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
     private static readonly EntProtoId SnowfallMagic = "WeatherSnowfallMagic";
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
-    private static readonly ProtoId<StatusEffectPrototype> PressureImmunity = "PressureImmunity";
     private static readonly ProtoId<TagPrototype> Window = "Window";
     private static readonly ProtoId<TagPrototype> AirlockAssembly = "AirlockAssembly";
 
     private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
 
+    private readonly HashSet<Entity<DamageableComponent>> _targets = new();
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
 
     [SubscribeLocalEvent]
@@ -240,8 +241,9 @@ public sealed partial class AristocratSystem : EntitySystem
             var rotated = new Box2Rotated(box, rot, pos);
 
             List<EntityUid> affected = new();
-            var result = _lookup.GetEntitiesIntersecting(xform.MapID, rotated);
-            foreach (var ent in result)
+            _targets.Clear();
+            _lookup.GetEntitiesIntersecting(xform.MapID, rotated, _targets);
+            foreach (var ent in _targets)
             {
                 if (ignored.Contains(ent))
                     continue;
@@ -249,15 +251,7 @@ public sealed partial class AristocratSystem : EntitySystem
                 if (_heretic.IsHereticOrGhoul(ent))
                 {
                     ignored.Add(ent);
-                    if (_statusQuery.TryComp(ent, out var status))
-                    {
-                        _status.TryAddStatusEffect<PressureImmunityComponent>(ent,
-                            PressureImmunity,
-                            TimeSpan.FromSeconds(2),
-                            true,
-                            status);
-                    }
-
+                    _status.TryUpdateStatusEffectDuration(ent.Owner, PressureImmunity, TimeSpan.FromSeconds(2));
                     continue;
                 }
 
@@ -275,7 +269,7 @@ public sealed partial class AristocratSystem : EntitySystem
                     _audio.PlayPvs(conduit.AirlockDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
                     affected.Add(ent);
-                    _damage.TryChangeDamage(ent,
+                    _damage.ChangeDamage(ent.AsNullable(),
                         dmg * _rand.NextFloat(conduit.MinMaxAirlockDamageMultiplier.X,
                             conduit.MinMaxAirlockDamageMultiplier.Y),
                         origin: ent);
@@ -285,7 +279,7 @@ public sealed partial class AristocratSystem : EntitySystem
                     _audio.PlayPvs(conduit.WindowDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
                     affected.Add(ent);
-                    _damage.TryChangeDamage(ent,
+                    _damage.ChangeDamage(ent.AsNullable(),
                         dmg * _rand.NextFloat(conduit.MinMaxWindowDamageMultiplier.X,
                             conduit.MinMaxWindowDamageMultiplier.Y),
                         origin: ent);

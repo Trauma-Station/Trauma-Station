@@ -39,7 +39,7 @@ public sealed partial class BodyPartsSelector : EntityTableSelector
         {
             // filter out internal organs from the fill
             var organ = proto.Index(organId);
-            if (!organ.HasComp<InternalOrganComponent>(factory))
+            if (!organ.HasComp<InternalChildOrganComponent>(factory))
                 yield return (organId, 1.0);
         }
     }

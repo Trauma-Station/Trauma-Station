@@ -76,9 +76,7 @@
           False: { visible: false }
   - type: Airtight
     noAirWhenFullyAirBlocked: true
-  - type: Tag
-    tags:
-    - Wall
+  - type: Wall
   - type: ExaminableBattery
   - type: WiresPanel
   - type: Lock
@@ -276,9 +274,7 @@
   - type: Transform
     anchored: true
   - type: BlockWeather
-  - type: Tag
-    tags:
-    - Wall
+  - type: Wall
   - type: PointLight
     enabled: true
     radius: 3
@@ -333,9 +329,7 @@
   - type: Transform
     anchored: true
   - type: BlockWeather
-  - type: Tag
-    tags:
-    - Wall
+  - type: Wall
   - type: PointLight
     enabled: true
     radius: 3

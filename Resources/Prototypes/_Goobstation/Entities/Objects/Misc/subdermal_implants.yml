@@ -86,13 +86,12 @@
   parent: BaseSubdermalImplant
   id: SpaceProofImplant
   name: space proofing implant
-  description: This implant allows the user to survive in space and without air.
+  description: This implant allows the user to survive without air or warmth.
   categories: [ HideSpawnMenu ]
   components:
   - type: ComponentsImplant
     added:
     - type: BreathingImmunity
-    - type: PressureImmunity
     - type: SpecialLowTempImmunity
 
 - type: entity

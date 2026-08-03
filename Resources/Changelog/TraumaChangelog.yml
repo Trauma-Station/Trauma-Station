@@ -12681,3 +12681,24 @@ Entries:
   id: 1387
   time: '2026-08-03T16:21:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3892
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Increased the contact damage of most contact chemicals specifically
+      sulfuric acid, fluorosulfuric acid, polytrinic acid, and razorium
+  - type: Tweak
+    message: >-
+      Tweaked the following chemicals to allow them to spill on the floor from
+      smoke/foam: fluorosulfuric acid, polytrinic acid, razorium, welding fuel,
+      chlorine trifluoride, and mold
+  id: 1388
+  time: '2026-08-03T20:19:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3616
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen not breathing.
+  id: 1389
+  time: '2026-08-03T23:39:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3928

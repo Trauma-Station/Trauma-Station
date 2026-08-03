@@ -232,9 +232,7 @@
         layer:
         - MobLayer
   - type: Temperature
-    currentTemperature: 310.15 # 310K is the standard operating temperature of a home circuit breaker
-    specificHeat: 42
-    atmosTemperatureTransferEfficiency: 0.05
+    temperature: 310.15 # 310K is the standard operating temperature of a home circuit breaker
   - type: TemperatureDamage
     heatDamageThreshold: 450 # Wanted to do 363.15 for le realism, but reptiles have 400K limit which is ????
     coldDamageThreshold: 260

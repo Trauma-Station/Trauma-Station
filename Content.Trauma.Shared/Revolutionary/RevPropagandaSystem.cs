@@ -13,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.NPC.Prototypes;
@@ -33,6 +34,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -50,13 +52,10 @@ public sealed partial class RevPropagandaSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RevPropagandaComponent, RevPropagandaDoAfterEvent>(OnConvertDoAfter);
-        SubscribeLocalEvent<RevPropagandaComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<RevPropagandaComponent, AfterInteractEvent>(OnAfterInteract);
-
         _speechLocalization = ProtoMan.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
     }
 
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<RevPropagandaComponent> ent, ref UseInHandEvent args)
     {
         if (!SpeakPropaganda(ent, args.User))
@@ -77,6 +76,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     public void OnConvertDoAfter(Entity<RevPropagandaComponent> ent, ref RevPropagandaDoAfterEvent args)
     {
         var user = args.User;
@@ -106,6 +106,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         return !ev.Blocked &&
             TryComp<MindContainerComponent>(target, out var mind) &&
             mind.HasMind &&
+            !_mindShield.IsShielded(target) &&
             _whitelist.CheckBoth(target, comp.Blacklist, comp.Whitelist) &&
             _whitelist.CheckBoth(user, comp.UserBlacklist, comp.UserWhitelist) &&
             TryComp<HeadRevolutionaryComponent>(user, out var head) &&
@@ -141,6 +142,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         RaiseLocalEvent(ref ev);
     }
 
+    [SubscribeLocalEvent]
     public void OnAfterInteract(Entity<RevPropagandaComponent> ent, ref AfterInteractEvent args)
     {
         var user = args.User;

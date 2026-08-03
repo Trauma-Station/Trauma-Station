@@ -11,11 +11,11 @@
     layers:
     - state: icon
       visible: true
-      map: ["enum.ChargesVisualLayers.ChargesLeft"]
+      map: ["base"]
   - type: GenericVisualizer
     visuals:
-      enum.ChargesVisuals.Charges:
-        enum.ChargesVisualLayers.ChargesLeft:
+      enum.LimitedChargesState.HasCharges:
+        base:
           True: {state: icon}
           False: {state: burnt}
   - type: FireVisuals
@@ -33,7 +33,6 @@
       - AlwaysRevolutionaryConvertible
     blacklist:
       components:
-      - MindShield
       - Revolutionary # no wasting propaganda on someone already converted
       - Deaf # have to hear the headrevs words
       - Zombie
