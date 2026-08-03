@@ -110,11 +110,12 @@ public sealed partial class JobListingsSystem : EntitySystem
             if (!CanAddSideJob(jobBoard, job))
                 continue;
 
-            if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
-                continue;
+            // spawn the objective in directly, ignoring the normal checks
+            // we only care about checks done via SideJobCreatedEvent
+            var sideJob = Spawn(job);
 
             var ev = new SideJobCreatedEvent(effectiveLevel);
-            RaiseLocalEvent(sideJob.Value, ref ev);
+            RaiseLocalEvent(sideJob, ref ev);
 
             if (ev.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
             {
@@ -122,7 +123,7 @@ public sealed partial class JobListingsSystem : EntitySystem
                 continue;
             }
 
-            jobBoard.Comp.AvailableSideJobs.Add(sideJob.Value);
+            jobBoard.Comp.AvailableSideJobs.Add(sideJob);
             return true;
         }
 
