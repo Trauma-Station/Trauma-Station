@@ -32,4 +32,4 @@ spy-uplink-magazine-sniper-name = Box of .60 anti-material magazines
 spy-uplink-magazine-sniper-desc = Contains 3 .60 anti-material magazines. Compatible with Hristov
 
 spy-uplink-magazine-magnum-name = Box of .45 magnum AP speedloaders
-npy-uplink-magazine-magnum-desc = Contains 3 .45 magnum AP speedloaders. Compatible with Python.
+spy-uplink-magazine-magnum-desc = Contains 3 .45 magnum AP speedloaders. Compatible with Python.

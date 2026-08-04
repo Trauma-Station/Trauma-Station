@@ -24,7 +24,7 @@
 
 - type: entity
   parent: BoxMagazine
-  id: BoxMagazineGrenadeSpy
+  id: BoxGrenadeSpy
   suffix: SpyReward
   components:
   - type: EntityTableContainerFill

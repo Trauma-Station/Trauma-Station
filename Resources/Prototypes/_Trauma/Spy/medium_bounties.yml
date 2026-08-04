@@ -30,7 +30,7 @@
   id: ComputerShuttleMiningLavaland
   difficulty: Medium
   departmentBlacklist: [Cargo]
-  selector: !type:SpyPrototypeBountySelectorEvent
+  selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerShuttleMiningLavaland]
     queryComp: DockingConsole
 

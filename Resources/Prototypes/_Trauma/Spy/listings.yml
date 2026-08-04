@@ -119,7 +119,7 @@
   id: UplinkSpyBoxMagazineLightRifle
   name: spy-uplink-magazine-light-rifle-name
   description: spy-uplink-magazine-light-rifle-desc
-  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: icon }
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: base }
   productEntity: BoxMagazineLightRifleSpy
   cost:
     Telecrystal: 20
