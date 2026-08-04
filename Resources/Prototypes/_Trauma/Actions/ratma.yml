@@ -6,10 +6,11 @@
   name: Jump
   description: Jump after the food.
   components:
+  - type: Sprite
+    sprite: Interface/Actions/jump.rsi
+    layers:
+    - state: icon
   - type: Action
     useDelay: 0.5
-    icon:
-      sprite: Interface/Actions/jump.rsi
-      state: icon
   - type: InstantAction
-    event: !type:GravityJumpEvent {}
+    event: !type:GravityJumpEvent

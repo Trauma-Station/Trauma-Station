@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.AlertLevel;
+using Content.Shared.AlertLevel;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Prototypes;
@@ -13,6 +13,8 @@ namespace Content.Server.Cargo.Systems;
 /// </summary>
 public sealed partial class CargoSystem
 {
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+
     private List<(string, NetEntity)> _dests = new();
 
     /// <summary>
@@ -33,7 +35,7 @@ public sealed partial class CargoSystem
     {
         if (!_emag.CheckFlag(ent, EmagType.Interaction)
             && product.RequiredAlerts is {} alerts
-            && (CompOrNull<AlertLevelComponent>(station)?.CurrentLevel is not {} current || !alerts.Contains(current)))
+            && !(_alertLevel.TryGetLevel(station, out var level) && alerts.Contains(level.Value)))
         {
             _popup.PopupCursor(Loc.GetString("cargo-console-alert-level", ("product", product.Name)), user);
             PlayDenySound(ent, ent.Comp);

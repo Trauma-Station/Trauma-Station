@@ -30,7 +30,9 @@
   - type: TemperatureDamage
     heatDamageThreshold: 423
     coldDamageThreshold: 0
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: Insulated
   - type: MeleeWeapon
     soundHit:
@@ -119,7 +121,9 @@
   - type: TemperatureDamage
     heatDamageThreshold: 423
     coldDamageThreshold: 0
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: Insulated
   - type: MeleeWeapon
     soundHit:

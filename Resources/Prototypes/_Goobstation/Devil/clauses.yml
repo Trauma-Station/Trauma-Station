@@ -95,8 +95,10 @@
 - type: clause
   id: fearofcrushing
   clauseWeight: -10
-  addedComponents:
-  - type: SpecialPressureImmunity
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityDevil
+    time: null
 
 - type: clause
   id: fearoffreezing
@@ -135,7 +137,9 @@
 - type: clause
   id: humanity
   clauseWeight: 80
-  polymorph: MobFrogPolymorph
+  effects:
+  - !type:Polymorph
+    prototype: MobFrogPolymorph
 
 - type: clause
   id: strength
@@ -164,8 +168,10 @@
 - type: clause
   id: voice
   clauseWeight: 20
-  addedComponents:
-  - type: Muted
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectMutedDevil
+    time: null
 
 - type: clause
   id: aleg

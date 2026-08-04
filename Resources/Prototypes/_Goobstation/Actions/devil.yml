@@ -12,11 +12,12 @@
   - type: Action
     useDelay: 10
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: summon-contract
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: summon-contract
   - type: InstantAction
-    event: !type:CreateContractEvent {}
+    event: !type:CreateContractEvent
 
 - type: entity
   parent: BaseAction
@@ -28,11 +29,12 @@
   - type: Action
     useDelay: 30
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: summon-contract-revival
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: summon-contract-revival
   - type: InstantAction
-    event: !type:CreateRevivalContractEvent {}
+    event: !type:CreateRevivalContractEvent
 
 - type: entity
   parent: BaseAction
@@ -46,11 +48,12 @@
     itemIconStyle: NoItem
     checkCanInteract: false
     checkConsciousness: false
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: shadow-jaunt
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: shadow-jaunt
   - type: InstantAction
-    event: !type:ShadowJauntEvent {}
+    event: !type:ShadowJauntEvent
 
 - type: entity
   parent: BaseAction
@@ -62,9 +65,10 @@
   - type: Action
     useDelay: 70
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: possess
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: possess
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -72,7 +76,7 @@
     whitelist:
       components:
       - Body
-    event: !type:DevilPossessionEvent {}
+    event: !type:DevilPossessionEvent
 
 - type: entity
   parent: BaseAction
@@ -85,11 +89,12 @@
     itemIconStyle: NoItem
     checkCanInteract: false
     checkConsciousness: false
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: possess
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: possess
   - type: InstantAction
-    event: !type:EndPossessionEarlyEvent {}
+    event: !type:EndPossessionEarlyEvent
 
 - type: entity
   parent: BaseAction
@@ -100,11 +105,12 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: devil-grip
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: devil-grip
   - type: InstantAction
-    event: !type:DevilGripEvent {}
+    event: !type:DevilGripEvent
 
 # Deals
 
@@ -120,8 +126,9 @@
     useDelay: 250
     checkCanInteract: false
     checkConsciousness: false
-    icon:
-      sprite: _Goobstation/Actions/devil.rsi
-      state: cheat-death
+  - type: Sprite
+    sprite: _Goobstation/Actions/devil.rsi
+    layers:
+    - state: cheat-death
   - type: InstantAction
-    event: !type:CheatDeathEvent {}
+    event: !type:CheatDeathEvent

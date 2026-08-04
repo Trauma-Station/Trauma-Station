@@ -3,7 +3,7 @@
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Shared.Actions;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Speech.Muting;
 using Robust.Shared.Timing;
@@ -20,11 +20,10 @@ public sealed partial class ShadowlingGlareSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedShadowlingSystem _shadowling = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private StatusEffectsSystem _statusOld = default!;
-    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
+    private static readonly EntProtoId MutedEffect = "StatusEffectMuted";
 
     public override void Initialize()
     {
@@ -99,7 +98,7 @@ public sealed partial class ShadowlingGlareSystem : EntitySystem
         }
 
         // Glare mutes and slows down the target no matter what.
-        _statusOld.TryAddStatusEffect<MutedComponent>(target, Muted, comp.MuteTime, true);
+        _status.TryUpdateStatusEffectDuration(target, MutedEffect, comp.MuteTime);
         _status.TryUpdateStatusEffectDuration(target, comp.SlowdownStatusEffect, comp.SlowTime);
 
         var effectEnt = PredictedSpawnAtPosition(comp.EffectGlare, Transform(uid).Coordinates);

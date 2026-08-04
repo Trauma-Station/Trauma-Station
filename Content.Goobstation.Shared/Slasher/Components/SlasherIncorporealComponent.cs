@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Slasher.Components;
 /// Grants the Slasher the ability to toggle incorporeal form.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class SlasherIncorporealComponent : Component
 {
     [ViewVariables]
@@ -56,6 +56,18 @@ public sealed partial class SlasherIncorporealComponent : Component
     /// <summary>
     /// The time when the slasher entered incorporeal state, used to calculate cooldown adjustments.
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoPausedField]
     public TimeSpan? IncorporealStartTime;
+
+    /// <summary>
+    /// Components added while incorporeal.
+    /// </summary>
+    [DataField(required: true)]
+    public ComponentRegistry IncorporealComponents = default!;
+
+    /// <summary>
+    /// Status effects added while incorporeal.
+    /// </summary>
+    [DataField(required: true)]
+    public List<EntProtoId> StatusEffects = default!;
 }

@@ -90,8 +90,7 @@
   - type: FireProtection
     reduction: 1
   - type: TemperatureProtection
-    heatingCoefficient: 0.1
-    coolingCoefficient: 0.1
+    coefficient: 0.1
   - type: ModifyDelayedKnockdown
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -299,7 +298,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingOuterWizardBase, ClothingOuterWizardBaseArmor, ClothingOuterStorageToggleableBase]
+  parent: [ ClothingOuterWizardBase, ClothingOuterWizardBaseArmor, ClothingOuterJacketBase ]
   id: ClothingOuterOblivionEnforcer
   name: oblivion enforcer's robes
   description: A set of armored, radiation-proof robes worn by Oblivion Enforcers.
@@ -331,6 +330,10 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatOblivionEnforcer
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
 
 - type: entity
   parent: [ClothingMaskGas, BaseMagicalContraband]

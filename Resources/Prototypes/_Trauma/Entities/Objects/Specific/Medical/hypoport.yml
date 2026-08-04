@@ -3,7 +3,7 @@
 # Hyposprays can't inject unless the target mob has a hypoport surgically installed (on their head)
 # It's assumed that all hardsuits have a passthrough port so you don't need to take them off.
 - type: entity
-  parent: OrganBaseInternal
+  parent: OrganBaseChildInternal
   id: Hypoport
   name: hypoport
   description: A hermetically sealing port to accept sterile injections without a needle. Compatible with all hyposprays.

@@ -180,6 +180,10 @@
   physicalDesc: reagent-physical-desc-reflective
   flavor: sharp
   color: "#e3fffb"
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
@@ -188,7 +192,7 @@
         ignoreResistances: false
         damage:
           types:
-            Slash: 0.25
+            Slash: 0.75 # Trauma - Was 0.25
       - !type:Emote
         emote: Scream
         probability: 0.7
@@ -394,40 +398,6 @@
         conditions:
         - !type:ReagentCondition
           reagent: JuiceThatMakesYouHew
-          min: 50
-
-- type: reagent
-  id: CorgiJuice
-  name: reagent-name-corgiessence
-  group: Toxins
-  desc: reagent-desc-corgiessence
-  physicalDesc: reagent-physical-desc-fluffy
-  flavor: dogfood
-  color: "#ed9715"
-  metabolisms:
-    Bloodstream:
-      metabolismRate: 0.2
-      effects:
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: CorgiJuice
-          min: 15
-        damage:
-          types:
-            Cellular: 0.5
-      - !type:Polymorph
-        prototype: SmartCorgiMorph
-        conditions:
-        - !type:ReagentCondition
-          reagent: CorgiJuice
-          min: 50
-      - !type:AdjustReagent
-        reagent: CorgiJuice
-        amount: -20
-        conditions:
-        - !type:ReagentCondition
-          reagent: CorgiJuice
           min: 50
 
 - type: reagent

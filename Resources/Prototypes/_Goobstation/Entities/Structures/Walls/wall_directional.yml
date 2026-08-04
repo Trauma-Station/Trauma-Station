@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: WallDirectional
   parent: BaseStructure
+  id: WallDirectional
   name: directional wall
   description: Cheap and cheerful metal plating.
   placement:
@@ -19,10 +19,10 @@
       Heat:
         collection:
           MetalLaserImpact
+  - type: Wall
   - type: Tag
     tags:
-      - Wall
-      - Directional
+    - Directional
   - type: MeleeSound
     soundGroups:
       Brute:

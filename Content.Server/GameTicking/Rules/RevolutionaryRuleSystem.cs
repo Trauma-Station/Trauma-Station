@@ -37,6 +37,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.Cuffs.Components;
 using Robust.Shared.Player;
+using Content.Shared.Mindshield;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -46,6 +47,9 @@ namespace Content.Server.GameTicking.Rules;
 // Heavily edited by goobstation. If you want to upstream something think twice
 public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
 {
+    // <Trauma>
+    [Dependency] private ChatSystem _chat = default!; // Goob
+    // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private EuiManager _euiMan = default!;
@@ -59,7 +63,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
     [Dependency] private RoleSystem _role = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private StationSystem _stationSystem = default!;
-    [Dependency] private ChatSystem _chat = default!; // Goob
+    [Dependency] private MindShieldSystem _mindShield = default!;
 
     //Used in OnPostFlash, no reference to the rule component is available
     public readonly ProtoId<NpcFactionPrototype> RevolutionaryNpcFaction = "Revolutionary";
@@ -104,13 +108,16 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
                     component.HasRevAnnouncementPlayed = true;
                 }
 
-                foreach (var ms in EntityQuery<MindShieldComponent, MobStateComponent>())
+                foreach (var ms in EntityQueryEnumerator<MindShieldStatusComponent, MobStateComponent>())
                 {
-                    var entity = ms.Item1.Owner;
+                    if (!ms.Comp1.IsMindshielded)
+                        continue;
+                    var entity = ms.Owner;
 
                     // assign eotrs
                     if (HasComp<RevolutionEnemyComponent>(entity))
                         continue;
+
                     var revenemy = EnsureComp<RevolutionEnemyComponent>(entity);
                     _antag.SendBriefing(entity, Loc.GetString("rev-eotr-gain"), Color.Red, revenemy.RevStartSound);
                 }

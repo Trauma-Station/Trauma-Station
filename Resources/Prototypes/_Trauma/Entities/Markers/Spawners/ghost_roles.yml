@@ -90,8 +90,8 @@
   name: fugitive hunter spawn (syndicate)
   components:
   - type: GhostRole
-    name: ghost-role-information-syndicate-hunter-name
-    description: ghost-role-information-syndicate-hunter-name
+    name: ghost-role-information-fugitive-hunter-name
+    description: ghost-role-information-syndicate-hunter-description
     rules: ghost-role-information-syndicate-hunter-rules
     mindRoles:
     - MindRoleGhostRoleHunter
@@ -111,8 +111,8 @@
   name: fugitive hunter spawn (spacepol)
   components:
   - type: GhostRole
-    name: ghost-role-information-spacepol-hunter-name
-    description: ghost-role-information-spacepol-hunter-name
+    name: ghost-role-information-fugitive-hunter-name
+    description: ghost-role-information-spacepol-hunter-description
     rules: ghost-role-information-spacepol-hunter-rules
 
 - type: entity
@@ -122,8 +122,8 @@
   name: fugitive hunter spawn (russian)
   components:
   - type: GhostRole
-    name: ghost-role-information-russian-hunter-name
-    description: ghost-role-information-russian-hunter-name
+    name: ghost-role-information-fugitive-hunter-name
+    description: ghost-role-information-russian-hunter-description
     rules: ghost-role-information-russian-hunter-rules
 
 - type: entity
@@ -133,8 +133,8 @@
   name: fugitive hunter spawn (bounty)
   components:
   - type: GhostRole
-    name: ghost-role-information-bounty-hunter-name
-    description: ghost-role-information-bounty-hunter-name
+    name: ghost-role-information-fugitive-hunter-name
+    description: ghost-role-information-bounty-hunter-description
     rules: ghost-role-information-bounty-hunter-rules
 
 - type: entity

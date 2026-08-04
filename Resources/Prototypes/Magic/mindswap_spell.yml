@@ -4,39 +4,42 @@
   name: Mind Swap
   description: Exchange bodies with another person!
   components:
-  - type: Action
-    raiseOnUser: true # Goobstation
-    useDelay: 180
-    #sound: !type:SoundPathSpecifier # Goob - event plays the sound
-    #  path: /Audio/Magic/staff_animation.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
-      state: mindswap # Goob edit
-  - type: EntityTargetAction
-    # Goob edit start
-    canTargetSelf: false
-    whitelist:
-      components:
-      - Body
-      - MobState
-      - MindContainer
-      - PAI # intended to mindswap pAIs and AIs
-      - StationAiCore
-    # Goob edit end
-    event: !type:MindSwapSpellEvent
-      sound: # Goobstation
-        path: /Audio/_Goobstation/Wizard/mandswap.ogg # ESL lmao
-      performerStunDuration: 5 # Goobstation
-      targetStunDuration: 5 # Goobstation
-  - type: Sprite # Goobstation - for apprentices
-    sprite: _Goobstation/Wizard/actions.rsi
-    state: mindswap
-  - type: Magic # Goobstation
+  # <Trauma>
+  - type: Magic
     requiresSpeech: true
     school: Transmutation
   - type: ActionUpgrade
     effectedLevels:
       2: ActionMindSwapII
       3: ActionMindSwapIII
+  # </Trauma>
+  - type: Action
+    raiseOnUser: true # Goobstation
+    useDelay: 180
+    #sound: !type:SoundPathSpecifier # Goob - event plays the sound
+    #  path: /Audio/Magic/staff_animation.ogg
+  - type: Sprite
+    # <Trauma> - replaced icon
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: mindswap
+    # </Trauma>
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      # <Trauma>
+      - Body
+      - MindContainer
+      # </Trauma>
+      - MobState
+      - PAI # intended to mindswap pAIs and AIs
+      - StationAiCore
+    event: !type:MindSwapSpellEvent
+      # <Trauma>
+      sound:
+        path: /Audio/_Goobstation/Wizard/mandswap.ogg # ESL lmao
+      performerStunDuration: 5
+      targetStunDuration: 5
+      # </Trauma>
   - type: SpeakOnAction
     sentence: action-speech-spell-mind-swap

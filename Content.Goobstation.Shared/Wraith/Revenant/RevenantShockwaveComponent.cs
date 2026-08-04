@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;
@@ -22,7 +22,7 @@ public sealed partial class RevenantShockwaveComponent : Component
     ///  How many tiles to pry
     /// </summary>
     [DataField]
-    public float TilesToPry = 10;
+    public int TilesToPry = 10;
 
     /// <summary>
     /// How long to knockdown people
@@ -30,11 +30,8 @@ public sealed partial class RevenantShockwaveComponent : Component
     [DataField]
     public TimeSpan KnockdownDuration = TimeSpan.FromSeconds(10f);
 
-    [ViewVariables]
-    public ProtoId<TagPrototype> WindowTag = "Window";
-
-    [ViewVariables]
-    public ProtoId<TagPrototype> WallTag = "Wall";
+    [DataField(required: true)]
+    public EntityWhitelist StructureWhitelist = default!;
 
     /// <summary>
     /// Damage dealt to windows and walls

@@ -25,6 +25,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Server.Audio;
@@ -43,6 +44,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private MindSystem _mind = default!;
@@ -52,30 +54,11 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
     [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
+
     private HashSet<Entity<MobStateComponent>> _targets = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HisGraceComponent, MapInitEvent>(OnInit);
-
-        SubscribeLocalEvent<HisGraceComponent, GotEquippedHandEvent>(OnEquipped);
-        SubscribeLocalEvent<HisGraceComponent, GotUnequippedHandEvent>(OnUnequipped);
-
-        SubscribeLocalEvent<HisGraceComponent, UseInHandEvent>(OnUse);
-        SubscribeLocalEvent<HisGraceComponent, MeleeHitEvent>(OnMeleeHit);
-
-        SubscribeLocalEvent<HisGraceComponent, HisGraceStateChangedEvent>(OnStateChanged);
-        SubscribeLocalEvent<HisGraceComponent, HisGraceEntityConsumedEvent>(OnEntityConsumed);
-
-        SubscribeLocalEvent<HisGraceComponent, HisGraceHungerChangedEvent>(UpdateHungerState);
-
-        SubscribeLocalEvent<HisGraceUserComponent, MapInitEvent>(OnUserInit);
-        SubscribeLocalEvent<HisGraceUserComponent, ComponentRemove>(OnUserRemoved);
-        SubscribeLocalEvent<HisGraceUserComponent, RefreshMovementSpeedModifiersEvent>(OnModifierRefresh);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInit(Entity<HisGraceComponent> hisGrace, ref MapInitEvent args)
     {
         hisGrace.Comp.Stomach = _containerSystem.EnsureContainer<Container>(hisGrace, "stomach");
@@ -89,6 +72,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         Dirty(hisGrace, melee);
     }
 
+    [SubscribeLocalEvent]
     private void OnUserInit(Entity<HisGraceUserComponent> user, ref MapInitEvent args)
     {
         if (!TryComp<StaminaComponent>(user, out var stamina))
@@ -100,30 +84,35 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         Dirty(user, stamina);
     }
 
+    [SubscribeLocalEvent]
     private void OnUserRemoved(Entity<HisGraceUserComponent> user, ref ComponentRemove args)
     {
         if (TryComp<StaminaComponent>(user, out var stamina))
             stamina.CritThreshold = user.Comp.BaseStamCritThreshold;
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipped(Entity<HisGraceComponent> hisGrace, ref GotEquippedHandEvent args)
     {
         hisGrace.Comp.IsHeld = true;
         hisGrace.Comp.Holder = args.User;
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequipped(Entity<HisGraceComponent> hisGrace, ref GotUnequippedHandEvent args)
     {
         hisGrace.Comp.IsHeld = false;
         hisGrace.Comp.Holder = null;
     }
 
+    [SubscribeLocalEvent]
     private void OnMeleeHit(Entity<HisGraceComponent> hisGrace, ref MeleeHitEvent args)
     {
         foreach (var hitEntity in args.HitEntities)
             TryDevour(hisGrace, hitEntity);
     }
 
+    [SubscribeLocalEvent]
     private void OnModifierRefresh(Entity<HisGraceUserComponent> hisGrace, ref RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(hisGrace.Comp.SpeedMultiplier);
 
@@ -136,7 +125,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         userComp.SpeedMultiplier = userComp.BaseSpeedMultiplier + bonus;
     }
 
-
+    [SubscribeLocalEvent]
     private void OnUse(Entity<HisGraceComponent> hisGrace, ref UseInHandEvent args)
     {
         if (hisGrace.Comp.CurrentState != HisGraceState.Dormant)
@@ -156,6 +145,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         SetUnremovable(hisGrace, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnEntityConsumed(Entity<HisGraceComponent> hisGrace, ref HisGraceEntityConsumedEvent args)
     {
         hisGrace.Comp.EntitiesAbsorbed++;
@@ -180,6 +170,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         Dirty(hisGrace, melee);
     }
 
+    [SubscribeLocalEvent]
     private void OnStateChanged(Entity<HisGraceComponent> hisGrace, ref HisGraceStateChangedEvent args)
     {
         if (hisGrace.Comp.User is not { } user)
@@ -379,6 +370,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void UpdateHungerState(Entity<HisGraceComponent> hisGrace, ref HisGraceHungerChangedEvent args)
     {
         foreach (var stateThreshold in hisGrace.Comp.OrderedStates)
@@ -420,12 +412,12 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
 
         // Log ascension with all relevant details
         _adminLog.Add(LogType.AdminMessage, LogImpact.Extreme,
-            $"HIS GRACE ASCENSION ACHIEVED: {ToPrettyString(user):actor} achieved ascension with {ToPrettyString(hisGrace):tool} at {Transform(hisGrace).Coordinates}. " +
+            $"HIS GRACE ASCENSION ACHIEVED: {user:actor} achieved ascension with {hisGrace.Owner:tool} at {Transform(hisGrace).Coordinates:pos}. " +
             $"Total entities consumed: {hisGrace.Comp.EntitiesAbsorbed}");
 
         // Apply ascension effects
         EnsureComp<ThermalVisionComponent>(user);
-        EnsureComp<PressureImmunityComponent>(user);
+        _status.TrySetStatusEffectDuration(user, PressureImmunity);
         EnsureComp<BreathingImmunityComponent>(user);
 
         UpdateSpeedMultiplier(hisGrace, hisGrace.Comp.SpeedAddition * hisGrace.Comp.SpeedIncrementMultiplier * hisGrace.Comp.SpeedIncrementMultiplier);

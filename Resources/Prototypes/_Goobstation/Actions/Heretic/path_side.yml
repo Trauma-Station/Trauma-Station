@@ -10,9 +10,10 @@
     checkCanInteract: false
     useDelay: 10
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: realignment
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: realignment
   - type: InstantAction
     event: !type:EventHereticRealignment
       removedEffects:
@@ -37,9 +38,10 @@
     itemIconStyle: NoItem
     sound:
       path: /Audio/_Goobstation/Heretic/ice_shovel.ogg
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: ice_spear
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: ice_spear
   - type: InstantAction
     event: !type:RecallItemEvent
   - type: SpeakOnAction
@@ -51,12 +53,13 @@
   name: Crimson Cleave
   description: A targeted spell that heals you while damaging the enemies. It cleanses you of all wounds as well.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: blood_siphon
   - type: Action
     useDelay: 30
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: blood_siphon
     checkCanInteract: false
   - type: TargetAction
     checkCanAccess: false
@@ -67,7 +70,6 @@
     whitelist:
       components:
       - MobState
-
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction
@@ -79,14 +81,15 @@
   name: Activate EMP
   description: Triggers EMP pulse around you
   components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/empgrenade.rsi
+    layers:
+    - state: icon
   - type: Action
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: Objects/Weapons/Grenades/empgrenade.rsi
-      state: icon
   - type: InstantAction
     event: !type:EventEmp
 
@@ -95,14 +98,15 @@
   name: Space Phase
   description: Allows you to phase in and out of existence while in space or a low-pressure, outdoor area.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: space_phase
   - type: Action
     predicted: false
     checkCanInteract: false
     useDelay: 3
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: space_phase
   - type: InstantAction
     event: !type:EventHereticSpacePhase
   - type: HereticAction
@@ -113,14 +117,15 @@
   name: Mirror Walk
   description: Allows you to traverse invisibly and freely across the station within the realm of the mirror. You can only enter and exit the realm of mirrors when near reflective items and surfaces, such windows or mirrors.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    layers:
+    - state: maid
   - type: Action
     predicted: false
     checkCanInteract: false
     useDelay: 5
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/eldritch_mobs.rsi
-      state: maid
   - type: InstantAction
     event: !type:EventMirrorJaunt
   - type: HereticAction
@@ -132,13 +137,14 @@
   name: Forest Admonitions
   description: Completely conceals your identity, and makes you invisible. Can be activated early to disable it. While cloaked, you move slightly faster, but undergo actions much slower. Taking damage while cloaked may cause it to lift suddenly. Spreads pale fog around while active.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: palecloak
   - type: Action
     checkCanInteract: false
     useDelay: 6
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: palecloak
   - type: InstantAction
     event: !type:EventHereticCloak
       status: ShadowCloakPaleStatusEffect

@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Atmos;
 using Content.Goobstation.Common.Body.Components;
 using Content.Goobstation.Common.Changeling;
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
@@ -41,7 +39,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Actions.Components;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Trauma.Common.CollectiveMind;
@@ -51,6 +49,7 @@ namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingSystem
 {
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private WeldableSystem _weldable = default!; // for biodegrade unweld
     [Dependency] private GibbingSystem _gibbing = default!;
@@ -262,7 +261,7 @@ public sealed partial class ChangelingSystem
             return;
         }
 
-        if (HasComp<MindShieldComponent>(target) && !HasImplant(uid, comp.FakeMindShieldId))
+        if (_mindShield.IsShielded(target))
         {
             _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
         }
@@ -728,18 +727,16 @@ public sealed partial class ChangelingSystem
     {
         if (!comp.VoidAdaptActive)
         {
-            EnsureComp<SpecialBreathingImmunityComponent>(uid);
-            EnsureComp<SpecialPressureImmunityComponent>(uid);
-            EnsureComp<SpecialLowTempImmunityComponent>(uid);
+            EntityManager.AddComponents(uid, args.AddedComponents);
+            _status.AddEffects(uid, args.StatusEffects);
             Popup.PopupEntity("Our exterior adapts to the vacuum of space", uid, uid);
             comp.VoidAdaptActive = true;
             comp.ChemicalRegenMultiplier -= 0.25f; // chem regen slowed by a flat 25%
         }
         else
         {
-            RemComp<SpecialBreathingImmunityComponent>(uid);
-            RemComp<SpecialPressureImmunityComponent>(uid);
-            RemComp<SpecialLowTempImmunityComponent>(uid);
+            EntityManager.RemoveComponents(uid, args.AddedComponents);
+            _status.RemoveEffects(uid, args.StatusEffects);
             Popup.PopupEntity("Our exterior returns to normal", uid, uid);
             comp.VoidAdaptActive = false;
             comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed

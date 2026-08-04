@@ -38,9 +38,7 @@
         - SpecialWallLayer
         layer:
         - SpecialWallLayer
-  - type: Tag
-    tags:
-      - Wall
+  - type: Wall
   - type: PreventCollide
     whitelist:
       components:
@@ -50,10 +48,10 @@
   - type: EntityEffectOnTrigger
     effects:
     - !type:RelayNearby
-      compName: Destructible
+      compName: Wall
       whitelist:
-        tags:
-        - Wall
+        components:
+        - Destructible
       blacklist:
         components:
         - PreventCollide
