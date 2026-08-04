@@ -110,9 +110,9 @@
     energy: 0
 
 - type: entity
+  parent: BaseBullet
   id: DemonAcid
   name: demonic acid spit
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -664,7 +664,7 @@
     damage:
       types:
         Blunt: 13
-    altDisarm: true
+    altDisarm: false
     canWideSwing: false
   - type: Destructible
     thresholds:
@@ -686,7 +686,7 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    soundGunshot: /Audio/_Goobstation/Changeling/armour_strip.oog
+    soundGunshot: /Audio/_Goobstation/Changeling/Effects/armour_strip.oog
   - type: BatteryAmmoProvider
     proto: DemonAcid
     fireCost: 25
@@ -711,7 +711,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Pierce: 10
+        Piercing: 10
     altDisarm: true
     canWideSwing: false
   - type: Destructible
