@@ -12716,3 +12716,10 @@ Entries:
   id: 1391
   time: '2026-08-04T03:20:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Syndicate snack box no longer gives you gutworms.
+  id: 1392
+  time: '2026-08-04T20:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3948
