@@ -12723,3 +12723,10 @@ Entries:
   id: 1392
   time: '2026-08-04T20:37:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3948
+- author: tsarevichvanya
+  changes:
+  - type: Fix
+    message: Fixed xeno resin not slowing you down.
+  id: 1393
+  time: '2026-08-04T20:41:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3946
