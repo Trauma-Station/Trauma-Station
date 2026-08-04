@@ -12702,3 +12702,10 @@ Entries:
   id: 1389
   time: '2026-08-03T23:39:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3928
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tendons surviving space.
+  id: 1390
+  time: '2026-08-04T00:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3937
