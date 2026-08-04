@@ -1,6 +1,9 @@
 spy-uplink-grenade-name = Box of 40mm grenades
 spy-uplink-grenade-desc = Contins 1 frag and 1 blast grenade. Compatible with China-Lake.
 
+spy-uplink-magazine-smart-name = Box of .160 smart magazines
+spy-uplink-magazine-smart-desc = Contains 3 smartgun magazines. Compatible with Abielle.
+
 spy-uplink-magazine-high-caliber-name = Box of .50 high-caliber magazines
 spy-uplink-magazine-high-caliber-desc = Contains 1 anti-material and 1 high-explosive magazines. Compatible with Burner
 

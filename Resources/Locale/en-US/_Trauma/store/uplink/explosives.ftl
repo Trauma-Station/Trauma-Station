@@ -10,3 +10,6 @@ uplink-c4-bundle-name-trauma = C-4 Bundle
 
 uplink-cluster-grenade-name = Cluster Grenade
 uplink-cluster-grenade-desc = Three explosive grenades bundled together. The cluster splits after 3.5 seconds.
+
+uplink-flashbang-pen-name = Flashbang Pen
+uplink-flashbang-pen-desc = A flashbang device contained within a standard pen. Comes with a 4 second fuse.

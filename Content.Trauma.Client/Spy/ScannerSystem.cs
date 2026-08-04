@@ -1,3 +1,4 @@
+using Content.Client.Graphics;
 using Content.Trauma.Shared.Spy;
 using Robust.Shared.Timing;
 
@@ -62,7 +63,8 @@ public sealed partial class ScannerSystem : EntitySystem
         _sprite.SetPostShader(ent.Owner,
             new(ScanShader, _shader)
             {
-                RaiseShaderEvent = true
+                RaiseShaderEvent = true,
+                Before = ContentPostShaderIds.BeforeOutlines,
             });
     }
 

@@ -123,6 +123,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
                 $"Job Role of {ToPrettyString(mind.OwnedEntity)} changed from '{jobRole.Value.Comp1.JobPrototype}' to '{jobPrototype}'");
 
             jobRole.Value.Comp1.JobPrototype = jobPrototype;
+            Dirty(jobRole.Value); // Trauma
         }
         else
             MindAddRoleDo(mindId, "MindRoleJob", mind, silent, jobPrototype);
@@ -164,6 +165,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         if (jobPrototype is not null)
         {
             mindRoleComp.JobPrototype = jobPrototype;
+            Dirty(mindRoleId.Value, mindRoleComp); // Trauma
             EnsureComp<JobRoleComponent>(mindRoleId.Value);
             DebugTools.AssertNull(mindRoleComp.AntagPrototype);
             DebugTools.Assert(!mindRoleComp.Antag);

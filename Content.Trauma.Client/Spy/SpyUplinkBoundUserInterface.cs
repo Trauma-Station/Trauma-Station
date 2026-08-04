@@ -1,5 +1,5 @@
-using System.Linq;
 using Content.Shared.Store;
+using Content.Trauma.Shared.Spy;
 using Content.Trauma.Shared.Spy.Ui;
 using JetBrains.Annotations;
 using Robust.Client.Player;
@@ -14,30 +14,38 @@ public sealed class SpyUplinkBoundUserInterface(EntityUid owner, Enum uiKey) : B
 
     [ViewVariables]
     private SpyUplinkMenu? _menu;
+    private SpyUplinkSystem? _system;
 
     protected override void Open()
     {
         base.Open();
 
         _menu = this.CreateWindow<SpyUplinkMenu>();
+        _system = _ent.System<SpyUplinkSystem>();
+
+        Update();
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
+    public override void Update()
     {
-        base.UpdateState(state);
+        base.Update();
 
-        if (state is not SpyUpdateState spyState || _player.LocalEntity is not { } player || _menu is not { } menu)
+        if (_player.LocalEntity is not { } player || _menu is not { } menu || _system is not { } sys)
             return;
 
-        menu.UpdateRefreshTime(spyState.NextRefresh);
-        menu.UpdateBounties(spyState.Bounties.ToList());
-        menu.UpdateRewards(spyState.Rewards[_ent.GetNetEntity(player)]);
+        if (sys.TryGetSpyRole(player) is not { } role || sys.TryGetSpyRule(role.Comp2) is not { } rule ||
+            !_ent.TryGetComponent(rule, out SpyRuleComponent? comp))
+            return;
+
+        menu.UpdateRefreshTime(comp.NextRefresh);
+        menu.UpdateBounties(comp.CurrentBounties);
+        menu.UpdateRewards(role.Comp2.AvailableRewards);
 
         menu.OnCollect += SendMessage;
     }
 
     private void SendMessage(string id, ProtoId<ListingPrototype> listing)
     {
-        SendMessage(new SpyRewardSelectedMessage(id, listing));
+        SendPredictedMessage(new SpyRewardSelectedMessage(id, listing));
     }
 }

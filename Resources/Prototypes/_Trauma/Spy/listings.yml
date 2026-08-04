@@ -1,7 +1,82 @@
 - type: listing
+  id: UplinkWeaponSmartGun
+  name: uplink-weapon-smartgun-name
+  description: uplink-weapon-smartgun-desc
+  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/SMGs/smartgun.rsi, state: icon }
+  productEntity: BriefcaseWeaponSmartGunFilled
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      components:
+      - SpyRule
+
+- type: listing
+  id: UplinkEswordDouble
+  name: uplink-double-esword-name
+  description: uplink-double-esword-desc
+  icon: { sprite: Objects/Weapons/Melee/e_sword_double.rsi, state: icon }
+  productEntity: BriefcaseWeaponEnergySwordDoubleFilled
+  cost:
+    Telecrystal: 70
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      components:
+      - SpyRule
+
+- type: listing
+  id: UplinkSpyFedora
+  name: uplink-spy-fedora-name
+  description: uplink-spy-fedora-desc
+  icon: { sprite: /Textures/_ShitChap/Objects/Weapons/Nullrod/atheist.rsi, state: icon }
+  productEntity: SpyFedora
+  cost:
+    Telecrystal: 30
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      components:
+      - SpyRule
+
+- type: listing
+  id: UplinkFlashbangPen
+  name: uplink-flashbang-pen-name
+  description: uplink-flashbang-pen-desc
+  icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
+  productEntity: PenFlashbangBox
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkExplosives
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      components:
+      - SpyRule
+
+## Ammunition
+- type: listing
+  id: UplinkSpyBoxMagazineSmart
+  name: spy-uplink-magazine-smart-name
+  description: spy-uplink-magazine-smart-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/smartgun.rsi, state: base }
+  productEntity: BoxMagazineSmartSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
   id: UplinkSpyBoxMagazineHighCaliber
-  name: spy-uplink-high-caliber-name
-  description: spy-uplink-high-caliber-desc
+  name: spy-uplink-magazine-high-caliber-name
+  description: spy-uplink-magazine-high-caliber-desc
   icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_rifle_mags.rsi, state: red }
   productEntity: BoxMagazineHighCaliberSpy
   cost:

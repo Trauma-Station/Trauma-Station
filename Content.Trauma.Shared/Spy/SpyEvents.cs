@@ -25,3 +25,7 @@ public sealed partial class SpyStealDoAfterEvent : DoAfterEvent
 
     public override DoAfterEvent Clone() => this;
 }
+
+
+[Serializable, NetSerializable]
+public sealed partial class SpyMakeUplinkDoAfterEvent : SimpleDoAfterEvent;

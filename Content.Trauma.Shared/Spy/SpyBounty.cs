@@ -72,11 +72,17 @@ public sealed partial class SpyBountyPrototype : IPrototype
     [DataField(required: true)]
     public SpyBountyDifficulty Difficulty;
 
+    [DataField]
+    public HashSet<ProtoId<DepartmentPrototype>>? DepartmentBlacklist;
+
+    [DataField]
+    public HashSet<ProtoId<JobPrototype>>? JobBlacklist;
+
     [DataField(required: true, serverOnly: true)]
     public BaseSpyBountySelectorEvent Selector = default!;
 
     [DataField]
-    public TimeSpan TheftTime = TimeSpan.FromSeconds(2);
+    public TimeSpan TheftTime = TimeSpan.FromSeconds(3);
 
     [DataField]
     public bool Repeatable;

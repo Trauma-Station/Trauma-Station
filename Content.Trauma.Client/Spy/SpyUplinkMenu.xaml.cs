@@ -14,7 +14,7 @@ public sealed partial class SpyUplinkMenu : FancyWindow
 
     public event Action<string, ProtoId<ListingPrototype>>? OnCollect;
 
-    private List<SpyBounty> _cachedBounties = new();
+    private HashSet<SpyBounty> _cachedBounties = new();
     private List<string> _cachedRewards = new();
 
     private TimeSpan _nextRefresh;
@@ -91,7 +91,7 @@ public sealed partial class SpyUplinkMenu : FancyWindow
         RewardsContainer.AddChild(newReward);
     }
 
-    public void UpdateBounties(List<SpyBounty> bounties)
+    public void UpdateBounties(HashSet<SpyBounty> bounties)
     {
         _cachedBounties = bounties;
 

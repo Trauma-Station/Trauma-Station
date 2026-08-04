@@ -20,12 +20,12 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Store.Components;
-using Content.Trauma.Server.GameTicking.Rules.Components;
-using Content.Trauma.Server.Spy;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.Roles;
 using Content.Trauma.Shared.Spy;
+using Robust.Server.GameStates;
 using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -48,6 +48,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [Dependency] private JobSystem _job = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private BodySystem _body = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
 
     [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
     [Dependency] private EntityQuery<BrainComponent> _brainQuery = default!;
@@ -58,8 +59,24 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         base.Initialize();
 
         SubscribeLocalEvent<PrependObjectivesSummaryTextEvent>(OnPrepend, before: [typeof(ManifestListingsSystem)]);
+
+        _player.PlayerStatusChanged -= StatusChanged;
     }
 
+    private void StatusChanged(object? sender, SessionStatusEventArgs e)
+    {
+        if (e.NewStatus != SessionStatus.InGame)
+            return;
+
+        if (!_mind.TryGetMind(e.Session.UserId, out var mind))
+            return;
+
+        if (_spyUplink.TryGetSpyRoleMind(mind.Value) is not { } role ||
+            _spyUplink.TryGetSpyRule(role.Comp2) is not { } rule)
+            return;
+
+        _pvs.AddSessionOverride(rule, e.Session);
+    }
 
     protected override void ActiveTick(EntityUid uid,
         SpyRuleComponent component,
@@ -69,6 +86,15 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         base.ActiveTick(uid, component, gameRule, frameTime);
 
         var now = _timing.CurTime;
+
+        if (component.LootPool.Count == 0)
+            GenerateLootPool((uid, component));
+
+        if (component.CurrentBounties.Count == 0)
+        {
+            RefreshBounties(uid, component, now, component.FirstRefreshTime);
+            return;
+        }
 
         if (component.NextRefresh > now)
             return;
@@ -81,13 +107,12 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         GameRuleComponent gameRule,
         GameRuleStartedEvent args)
     {
+        base.Started(uid, component, gameRule, args);
+
         foreach (var grid in _station.GetAllStationGrids())
         {
             component.StationMaps.Add(Transform(grid).MapID);
         }
-
-        GenerateLootPool((uid, component));
-        RefreshBounties(uid, component, _timing.CurTime, component.FirstRefreshTime);
     }
 
     private void GenerateLootPool(Entity<SpyRuleComponent, StoreComponent?> ent)
@@ -133,6 +158,16 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
                 rule.ClaimedBounties.Add(bounty.BountyProto);
         }
 
+        foreach (var (difficulty, dict) in rule.CachedRewards)
+        {
+            var target = rule.LootPool[difficulty];
+            foreach (var (key, value) in dict)
+            {
+                target[key] = value;
+            }
+        }
+
+        rule.CachedRewards.Clear();
         rule.CurrentBounties.Clear();
         rule.NextRefresh = curTime + refreshTime;
 
@@ -145,7 +180,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
                 break;
         }
 
-        _spyUplink.RefreshUi(rule.NextRefresh, rule.CurrentBounties);
+        Dirty(uid, rule);
     }
 
     private void GenerateBountyPool(SpyRuleComponent rule)
@@ -204,11 +239,14 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
     public bool MakeSpy(EntityUid spy, Entity<SpyRuleComponent> rule)
     {
-        if (!_mind.TryGetMind(spy, out var mindId, out _))
+        if (!_mind.TryGetMind(spy, out var mindId, out var mind))
         {
             Log.Debug($"MakeSpy {ToPrettyString(spy)} - failed, no Mind found");
             return false;
         }
+
+        if (_player.TryGetSessionById(mind.UserId, out var session))
+            _pvs.AddSessionOverride(rule, session);
 
         var briefing = Loc.GetString("spy-role-briefing-short");
 
@@ -219,6 +257,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         {
             role.Value.Comp2.Briefing = briefing;
             role.Value.Comp2.Rule = rule.Owner;
+            Dirty(role.Value);
         }
 
         if (rule.Comp.GiveBriefing)
@@ -232,7 +271,15 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         if (_uplink.FindUplinkTarget(spy) is not { } pda)
             return briefing + "\n" + Loc.GetString("spy-role-no-uplink-short");
 
-        EnsureComp<SpyUplinkComponent>(pda).OwnerMind = mind;
+        var uplink = EnsureComp<SpyUplinkComponent>(pda);
+        uplink.OwnerMind = mind;
+        Dirty(pda, uplink);
+
+        if (_spyUplink.TryGetSpyRoleMind(mind) is { } role)
+        {
+            role.Comp2.OwnedUplink = pda;
+            Dirty(role);
+        }
 
         return briefing + "\n" + Loc.GetString("spy-role-uplink-pda-short");
     }
@@ -244,10 +291,15 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         var selected = _random.Pick(comp.BountyPool);
         var index = ProtoMan.Index(selected);
+
         if (!index.Repeatable)
             comp.BountyPool.Remove(selected);
-        // TODO no duplicate rewards in 1 bounty list
-        var reward = _random.Pick(comp.LootPool[index.Difficulty]);
+
+        var rewards = comp.LootPool[index.Difficulty];
+        var reward = _random.Pick(rewards);
+        var weight = rewards[reward];
+        rewards.Remove(reward);
+        comp.CachedRewards.GetOrNew(index.Difficulty).Add(reward, weight);
 
         var ev = index.Selector.GetEvent();
         RaiseLocalEvent(uid, ev.Initialize(selected, reward));
@@ -265,7 +317,6 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [SubscribeLocalEvent]
     private void OnStealTarget(Entity<SpyRuleComponent> ent, ref SpyStealTargetBountySelectorEvent args)
     {
-        var target = ProtoMan.Index(args.StealTarget);
         List<NetEntity> validEntities = [];
         var query = EntityQueryEnumerator<StealTargetComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
@@ -283,13 +334,18 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
             return;
         }
 
+        var target = ProtoMan.Index(args.StealTarget);
+
+        var name = Loc.GetString("spy-bounty-default-name", ("item", Loc.GetString(target.Name)));
+        var desc = Loc.GetString("spy-bounty-specific-desc", ("item", Loc.GetString(target.Name)));
+
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
             ValidEntities = validEntities,
             BountyProto = args.Id,
             Sprite = target.Sprite,
-            Name = target.Name,
-            Description = "Test Description",
+            Name = name,
+            Description = desc,
             Reward = args.Reward,
         });
     }
@@ -297,14 +353,17 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [SubscribeLocalEvent]
     private void OnPrototype(Entity<SpyRuleComponent> ent, ref SpyPrototypeBountySelectorEvent args)
     {
-        // TODO make sure that yaml bounties using this don't need to verify map existance
         var proto = ProtoMan.Index(args.Protos[0]);
+
+        var name = Loc.GetString("spy-bounty-default-name", ("item", proto.Name));
+        var desc = Loc.GetString("spy-bounty-default-desc", ("item", proto.Name));
+
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
             Protos = args.Protos,
             BountyProto = args.Id,
-            Name = proto.Name,
-            Description = proto.Description,
+            Name = name,
+            Description = desc,
             Reward = args.Reward,
         });
     }
@@ -313,7 +372,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     private void OnSpecific(Entity<SpyRuleComponent> ent, ref SpySpecificEntityBountySelectorEvent args)
     {
         var proto = ProtoMan.Index(args.Protos[0]);
-        var type = Factory.GetComponent(args.QueryComp).GetType();
+        var type = Factory.GetRegistration(args.QueryComp).Type;
 
         Dictionary<string, List<NetEntity>> validEntities = [];
 
@@ -322,7 +381,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         var query = EntityManager.AllEntityQueryEnumerator(type);
         while (query.MoveNext(out var uid, out _))
         {
-            if (ent.Comp.StationMaps.Contains(Transform(uid).MapID) || Prototype(uid) is not { } p || !args.Protos.Contains(p))
+            if (!ent.Comp.StationMaps.Contains(Transform(uid).MapID) || Prototype(uid) is not { } p || !args.Protos.Contains(p))
                 continue;
 
             if (depts == null)
@@ -350,13 +409,24 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         var list = depts == null ? validEntities[string.Empty] :
             depts.Count == 0 ? _random.Pick(validEntities).Value : validEntities.SelectMany(x => x.Value).ToList();
 
+        var name = Loc.GetString("spy-bounty-default-name", ("item", proto.Name));
+
+        var separator = Loc.GetString("generic-or");
+        var deptsString = depts?.Count is > 0
+            ? string.Join($" {separator} ", depts.Select(x => Loc.GetEntityData(x).Name))
+            : null;
+
+        var desc = deptsString is { } str
+            ? Loc.GetString("spy-bounty-area-desc", ("item", proto.Name), ("areas", str))
+            : Loc.GetString("spy-bounty-specific-desc", ("item", proto.Name));
+
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
             ValidEntities = list,
             Protos = args.Protos,
             BountyProto = args.Id,
-            Name = proto.Name,
-            Description = proto.Description,
+            Name = name,
+            Description = desc,
             Reward = args.Reward,
         });
     }
@@ -381,13 +451,20 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         if (Prototype(organ.Value) is not { } proto)
             return;
 
+        // Shouldn't really happen
+        if (!_mind.TryGetMind(target, out var mind, out _) || !_job.MindTryGetJob(mind, out var job) || job is null)
+            return;
+
+        var name = Loc.GetString("spy-bounty-organ-name", ("uid", target), ("organ", organ));
+        var desc = Loc.GetString("spy-bounty-organ-desc", ("uid", target), ("job", job.LocalizedName), ("organ", organ));
+
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
             ValidEntities = [GetNetEntity(organ.Value)],
             Protos = [proto.ID],
             BountyProto = args.Id,
-            Name = proto.Name,
-            Description = proto.Description,
+            Name = name,
+            Description = desc,
             Reward = args.Reward,
         });
 

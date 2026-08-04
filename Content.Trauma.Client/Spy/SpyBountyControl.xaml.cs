@@ -1,5 +1,6 @@
 using Content.Shared.Store;
 using Content.Trauma.Shared.Spy;
+using Robust.Client.Player;
 
 namespace Content.Trauma.Client.Spy;
 
@@ -8,13 +9,18 @@ public sealed partial class SpyBountyControl : Control
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public SpyBountyControl(SpyBounty data)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
+        if (_player.LocalEntity is not { } player)
+            return;
+
         var spriteSys = _entity.System<SpriteSystem>();
+        var uplinkSys = _entity.System<SpyUplinkSystem>();
 
         var bountyProto = _proto.Index(data.BountyProto);
         var isRewardProto = _proto.HasIndex<SpyRewardPrototype>(data.Reward);
@@ -51,6 +57,14 @@ public sealed partial class SpyBountyControl : Control
 
         BountyRewardTexture.Texture = texture;
 
-        BlockedPanel.Visible = data.Claimed;
+        var claimable = uplinkSys.CanClaim(data, player);
+
+        BlockedPanel.Visible = !claimable;
+
+        if (claimable)
+            return;
+
+        var loc = data.Claimed ? "spy-uplink-claimed" : "spy-uplink-cant-claim";
+        BlockedLabel.Text = Loc.GetString(loc);
     }
 }

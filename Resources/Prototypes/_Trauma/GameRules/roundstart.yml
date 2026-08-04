@@ -83,11 +83,12 @@
     categories:
     - UplinkWeaponry
     - UplinkExplosives
+    - UplinkWearables
     - UplinkChemicals
     - UplinkDeception
     - UplinkDisruption
     - UplinkImplants
-    - UplinkWearables
+    - UplinkAllies
     currencyWhitelist:
     - Telecrystal
     balance:

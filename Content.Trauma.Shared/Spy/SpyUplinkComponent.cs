@@ -1,11 +1,13 @@
 using Robust.Shared.Audio;
 
-namespace Content.Trauma.Server.Spy;
+namespace Content.Trauma.Shared.Spy;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SpyUplinkComponent : Component
 {
-    [DataField]
+    public override bool SessionSpecific => true;
+
+    [DataField, AutoNetworkedField]
     public EntityUid OwnerMind;
 
     [DataField]

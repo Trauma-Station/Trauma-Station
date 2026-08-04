@@ -28,8 +28,8 @@ public sealed partial class RandomObjectiveSystem : EntitySystem
             copy.Remove(comp.PickedFormat);
         }
 
-        var format = copy.Count > 0 ? _random.Pick(copy) : _random.Pick(values);
-        var result = _randomMeta.GetRandomFromSegments(ent.Comp.NameSegments, format);
+        ent.Comp.PickedFormat = copy.Count > 0 ? _random.Pick(copy) : _random.Pick(values);
+        var result = _randomMeta.GetRandomFromSegments(ent.Comp.NameSegments, ent.Comp.PickedFormat);
         _metaData.SetEntityName(ent, result, args.Meta);
     }
 }

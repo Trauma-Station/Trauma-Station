@@ -9,9 +9,6 @@ using static Robust.Client.UserInterface.StylesheetHelpers;
 
 namespace Content.Trauma.Client.Stylesheets;
 
-/// <summary>
-/// Stylesheet used by abductor UIs.
-/// </summary>
 [LoadStylesheet]
 public sealed partial class SpyUplinkStylesheet : CommonStylesheet
 {

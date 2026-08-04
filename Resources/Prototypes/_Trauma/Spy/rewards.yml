@@ -1,7 +1,7 @@
 - type: spyReward
   id: SpyAmmunition
   difficulty: Easy
-  weight: 10
+  weight: 15
   removeFromPoolChanceOverride: 0
   rewardNameOverride: spy-uplink-ammo-name
   rewardDescriptionOverride: spy-uplink-ammo-desc
@@ -17,3 +17,4 @@
   - UplinkSpyMagazineBoxAntiMateriel
   - UplinkSpyBoxGrenade
   - UplinkMagazineLightRifleBox
+  - UplinkSpyBoxMagazineSmart

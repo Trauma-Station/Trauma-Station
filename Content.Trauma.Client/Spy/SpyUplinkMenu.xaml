@@ -35,7 +35,7 @@
                     Access="Public"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Text={Loc 'spy-uplink-no-rewards'}/>
+                    Text="{Loc 'spy-uplink-no-rewards'}"/>
                 <ScrollContainer
                     Name="RewardsScroll"
                     HScrollEnabled="False"
