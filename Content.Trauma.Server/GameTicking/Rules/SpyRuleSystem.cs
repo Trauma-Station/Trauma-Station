@@ -62,6 +62,13 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         SubscribeLocalEvent<PrependObjectivesSummaryTextEvent>(OnPrepend, before: [typeof(ManifestListingsSystem)]);
 
+        _player.PlayerStatusChanged += StatusChanged;
+    }
+
+    public override void Shutdown()
+    {
+        base.Initialize();
+
         _player.PlayerStatusChanged -= StatusChanged;
     }
 
