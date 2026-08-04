@@ -260,6 +260,13 @@
       Hand:
         location: Left
   - type: ComplexInteraction
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 25
+      - ReagentId: Blood
+        Quantity: 75
 
 - type: entity
   parent: BaseDemon
@@ -487,6 +494,54 @@
     transferAmount: 1
     solution: melee
 
+  - type: entity
+  parent: BaseDemon
+  id: MinorDemonFlesh
+  name: miserable flesh thing
+  description: A disgusting living mass of fat, muscle tissue, mucous and blood. The ritual must have failed somehow, and this wretched thing is the result.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/flesh.rsi
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 3
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
+
 # Medium
 
 - type: entity
@@ -631,7 +686,8 @@
       path: /Audio/_Goobstation/Wizard/disable_tech.ogg
     damage:
       types:
-        Airloss: 20
+        Asphyxiation: 15
+        Bloodloss: 5
         Ion: 20
     altDisarm: true
     canWideSwing: false

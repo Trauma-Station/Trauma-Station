@@ -129,6 +129,7 @@
     - MinorDemonVox
     - MinorDemonVulp
     - MinorDemonCentifiend
+    - MinorDemonFlesh
 
 - type: entity
   parent: BaseCarvedRune
