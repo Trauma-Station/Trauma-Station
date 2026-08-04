@@ -1,4 +1,4 @@
-- files: ["demonologist.ogg"]
+- files: ["demonologist.ogg"] # TODO: need to make mono
   license: "CC-BY-NC-4.0"
   copyright: "Taken from opengameart.org, converted to ogg by @TechnicFighter (Github)"
   source: "https://opengameart.org/content/demonium"

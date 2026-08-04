@@ -10,3 +10,14 @@
     exclusiveAntag: true
     roleType: SoloAntagonist
     subtype: role-subtype-demonologist
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: DemonologistApprenticeMindRole
+  name: Demonologist Apprentice Role
+  components:
+  - type: MindRole
+    antagPrototype: DemonologistApprentice
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+    subtype: role-subtype-demonologist-apprentice

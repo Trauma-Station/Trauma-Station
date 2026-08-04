@@ -1,23 +1,25 @@
 - type: factionIcon
   id: DemonologistFaction
   priority: 11
+  locationPreference: Left
   showTo:
     components:
     - ShowAntagIcons
     - Demonologist
     - DemonologistApprentice # TODO, also apply these factions to ppl
   icon:
-    sprite: Textures/_Trauma/Interface/Misc/job_icons.rsi
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Demonologist
 
 - type: factionIcon
   id: DemonologistApprenticeFaction
   priority: 11
+  locationPreference: Left
   showTo:
     components:
     - ShowAntagIcons
     - Demonologist
     - DemonologistApprentice
   icon:
-    sprite: Textures/_Trauma/Interface/Misc/job_icons.rsi
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: DemonologistApprentice

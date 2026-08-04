@@ -1,28 +1,28 @@
-using Content.Goobstation.Shared.Shadowling.Components;
-using Content.Goobstation.Shared.Shadowling.Systems;
 using Content.Shared.StatusIcon.Components;
 using Content.Trauma.Shared.Magic.Demonologist;
+using Content.Trauma.Shared.Magic.Demonologist.Components;
 
 namespace Content.Trauma.Client.Magic.Demonologist;
 
 /// <summary>
-/// This handles status icons for slings and thralls
-/// This also handles alerts
+/// This handles status icons for demonologists and their apprentices.
 /// </summary>
 public sealed partial class DemonologistSystem : SharedDemonologistSystem
 {
 
-    private void GetThrallIcon(Entity<ThrallComponent> ent, ref GetStatusIconsEvent args)
+    [SubscribeLocalEvent]
+    private void GetDemonologistIcon(Entity<DemonologistComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (HasComp<ShadowlingComponent>(ent))
-            return;
-
-        var iconProto = ProtoMan.Index(ent.Comp.StatusIcon);
-        args.StatusIcons.Add(iconProto);
+        if (ProtoMan.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
+            args.StatusIcons.Add(iconPrototype);
     }
 
-    private void GetShadowlingIcon(Entity<ShadowlingComponent> ent, ref GetStatusIconsEvent args)
+    [SubscribeLocalEvent]
+    private void GetApprenticeIcon(Entity<DemonologistApprenticeComponent> ent, ref GetStatusIconsEvent args)
     {
+        if (HasComp<DemonologistComponent>(ent))
+            return;
+
         if (ProtoMan.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }

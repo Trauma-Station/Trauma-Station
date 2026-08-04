@@ -11,6 +11,13 @@
   - !type:OverallPlaytimeRequirement
     time: 5h
 
+- type: antag
+  id: DemonologistApprentice
+  name: roles-antag-demonologist-apprentice-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-demonologist-apprentice-description
+
 - type: antagSpecifier
   parent: RestrictedAntag
   id: Demonologist
