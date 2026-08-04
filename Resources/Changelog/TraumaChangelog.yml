@@ -12730,3 +12730,10 @@ Entries:
   id: 1393
   time: '2026-08-04T20:41:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3946
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed robust harvest and saltpeter not healing ballistic damage on dionae.
+  id: 1394
+  time: '2026-08-04T22:35:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3953
