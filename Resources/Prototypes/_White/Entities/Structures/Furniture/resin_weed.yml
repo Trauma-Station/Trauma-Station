@@ -6,7 +6,6 @@
   name: resin floor
   description: A thick resin surface covers the floor.
   components:
-  # <Trauma>
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
@@ -20,7 +19,6 @@
           - Xenomorph
       effectProto: InXenoResinEffect
       time: 1
-  # </Trauma>
   - type: Sprite
     noRot: true
     drawdepth: FloorTiles
