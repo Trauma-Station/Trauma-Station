@@ -162,10 +162,11 @@
     demons:
     - MediumDemonChad
     - MediumDemonHamlet
-    - MediumDemon64Fat
-    - MediumDemon64Buff
-    - MediumDemon64
     - MediumDemonCentifiend
+    - MediumDemonAbomination
+    - MediumDemonMindflayer
+    - MediumDemonImp
+    - MediumDemonDark
 
 - type: entity
   parent: BaseCarvedRune
@@ -204,6 +205,9 @@
     - MajorDemonHiver
     - MajorDemonSteamer
     - MajorDemonButcher
+    - MajorAngelHuman
+    - MajorAngelLizard
+    - MajorAngelMoth
 
 - type: entity
   parent: BaseCarvedRune

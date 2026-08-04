@@ -109,6 +109,24 @@
     radius: 0
     energy: 0
 
+- type: entity
+  id: DemonAcid
+  name: demonic acid spit
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 15
+        Structural: 20
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
+    layers:
+    - state: xeno_toxic
+  - type: Ammo
+    muzzleFlash: null
+
 # Minor Demons
 
 - type: entity
@@ -599,12 +617,155 @@
   - type: FaxSlip
     slipChance: 0.3
 
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonMindflayer
+  name: mindflayer
+  description: A primordial beast, it's kin have existed since the dawn of hell. Barely intelligent, it uses inate psychic abilities to feed on the intellect of its prey.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/mindflayer.rsi
+  - type: MeleeWeapon
+    range: 5 
+    soundHit:
+      path: /Audio/_Goobstation/Wizard/disable_tech.ogg
+    damage:
+      types:
+        Airloss: 20
+        Ion: 20
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 2
+            max: 3
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonAbomination
+  name: abomination
+  description: A grotesque amalgamation of sickly flesh, muscle quivers underneath it's rotting skin and it constantly drools a corrosive mucus.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/abomination.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 13
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 3
+  - type: Gun
+    projectileSpeed: 20
+    fireRate: 0.5
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/_Goobstation/Changeling/armour_strip.oog
+  - type: BatteryAmmoProvider
+    proto: DemonAcid
+    fireCost: 25
+    examinable: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 25
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonImp
+  name: imp
+  description: Miserable, weak and disfigured beings, they often find themselves the lackeys of more powerful demons. Lords of Hell often use imps as cannon fodder for their armies.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/imp.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Pierce: 10
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonDark
+  name: darkling
+  description: Strange shadowy beings, darklings hide in the deepest recesses of Hell, only emerging to drag down the odd sinner into the darkness. 
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/dark.rsi
+  - type: MeleeWeapon
+    range: 3
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 10
+        Airloss: 5
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+
 # Major demons
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64Fat
-  name: angel
+  id: MajorAngelHuman
+  name: Aspect of Greed
   description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one is a bit on the fat side.
   components:
   - type: Sprite
@@ -637,8 +798,8 @@
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64Buff
-  name: angel
+  id: MajorAngelLizard
+  name: Aspect of Savagery
   description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one seems stronger.
   components:
   - type: Sprite
@@ -671,8 +832,8 @@
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64
-  name: angel
+  id: MajorAngelMoth
+  name: Aspect of Madness
   description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell.
   components:
   - type: Sprite
