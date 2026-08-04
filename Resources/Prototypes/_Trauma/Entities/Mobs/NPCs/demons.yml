@@ -748,7 +748,6 @@
       - MobState
       - Door
       - Item
-      tags:
       - Wall
 
 - type: entity

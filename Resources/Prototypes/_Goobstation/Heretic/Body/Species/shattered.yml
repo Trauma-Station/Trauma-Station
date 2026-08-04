@@ -85,7 +85,9 @@
         Cellular: -2
         Holy: -2
   - type: Targeting
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ZombieImmune
   - type: MobThresholds
     thresholds:
@@ -140,11 +142,8 @@
     - Drunk
     - SlurredSpeech
     - RatvarianLanguage
-    - PressureImmunity
-    - Muted
     - Pacified
     - StaminaModifier
-    - Adrenaline
   - type: Identity
   - type: IdExaminable
   - type: Hands

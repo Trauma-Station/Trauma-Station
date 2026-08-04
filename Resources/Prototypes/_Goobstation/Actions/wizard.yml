@@ -10,9 +10,10 @@
     raiseOnUser: true
     useDelay: 30
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: mime
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: mime
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -45,9 +46,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundCollectionSpecifier
       collection: CluwneHorn
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: cluwne
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: cluwne
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -81,9 +83,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundCollectionSpecifier
       collection: BikeHorn
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: clown
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: clown
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -119,9 +122,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/magic_missile.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: missile
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: missile
   - type: InstantAction
     event: !type:MagicMissileEvent
   - type: SpeakOnAction
@@ -148,9 +152,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/disable_tech.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: emp
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: emp
   - type: InstantAction
     event: !type:DisableTechEvent
   - type: SpeakOnAction
@@ -168,31 +173,6 @@
 
 - type: entity
   parent: BaseAction
-  id: ActionSmoke
-  name: Smoke
-  description: Spawns a cloud of choking smoke at your location.
-  components:
-  - type: Action
-    raiseOnUser: true
-    checkCanInteract: false
-    useDelay: 12
-    itemIconStyle: BigAction
-    sound: !type:SoundPathSpecifier
-      path: /Audio/_Goobstation/Wizard/smoke.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: smoke
-  - type: InstantAction
-    event: !type:SmokeSpellEvent
-  - type: Magic
-    school: Conjuration
-  - type: ActionUpgrade
-    effectedLevels:
-      2: ActionSmokeII
-      3: ActionSmokeIII
-
-- type: entity
-  parent: BaseAction
   id: ActionRepulse
   name: Repulse
   description: Throws everything around the user away.
@@ -204,9 +184,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/repulse.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: repulse
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: repulse
   - type: InstantAction
     event: !type:RepulseEvent
   - type: SpeakOnAction
@@ -244,9 +225,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/timeparadox2.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: time
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: time
   - type: InstantAction
     event: !type:StopTimeEvent
   - type: SpeakOnAction
@@ -273,9 +255,10 @@
     raiseOnUser: true
     useDelay: 10
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: corpse_explosion
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: corpse_explosion
   - type: TargetAction
     range: 15
     interactOnMiss: false
@@ -310,9 +293,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/blind.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: blind
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: blind
   - type: TargetAction
     interactOnMiss: false
     range: 15
@@ -347,9 +331,10 @@
     allowGhostAction: true
     useDelay: 1
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: skeleton
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: skeleton
   - type: InstantAction
     event: !type:BindSoulEvent
       sound: !type:SoundPathSpecifier
@@ -390,9 +375,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/mutate.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: mutate
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: mutate
   - type: InstantAction
     event: !type:MutateSpellEvent
   - type: SpeakOnAction
@@ -416,9 +402,10 @@
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: tesla
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: tesla
   - type: InstantAction
     event: !type:TeslaBlastEvent
       sound: !type:SoundPathSpecifier
@@ -446,9 +433,10 @@
     raiseOnUser: true
     useDelay: 8
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: lightning
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: lightning
   - type: TargetAction
     interactOnMiss: false
     range: 15
@@ -483,9 +471,10 @@
     itemIconStyle: BigAction
     sound:
       path: /Audio/Weapons/smash.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: toolbox
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: toolbox
   - type: TargetAction
     checkCanAccess: false
     interactOnMiss: false
@@ -523,9 +512,10 @@
     itemIconStyle: BigAction
     sound:
       path: /Audio/Magic/staff_healing.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: spellcard
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: spellcard
   - type: TargetAction
     checkCanAccess: false
     repeat: true
@@ -565,9 +555,10 @@
     raiseOnUser: true
     useDelay: 60
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: arcane_barrage
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: arcane_barrage
   - type: InstantAction
     event: !type:ArcaneBarrageEvent
   - type: Magic
@@ -584,16 +575,14 @@
   name: Lesser Summon Guns
   description: Summon an unending stream of bolt action rifles.
   components:
-  - type: Sprite # For apprentices
-    sprite: _Goobstation/Wizard/actions.rsi
-    state: bolt_action
   - type: Action
     raiseOnUser: true
     useDelay: 60
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: bolt_action
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: bolt_action
   - type: InstantAction
     event: !type:LesserSummonGunsEvent
   - type: Magic
@@ -615,9 +604,10 @@
     checkCanInteract: false
     useDelay: 15
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: barn
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: barn
   - type: TargetAction
     interactOnMiss: false
     range: 15
@@ -668,18 +658,16 @@
   name: Scream For Me
   description: This wicked spell inflicts many severe wounds on your target, causing them to likely bleed to death unless they receive immediate medical attention.
   components:
-  - type: Sprite # For apprentices
-    sprite: _Goobstation/Wizard/actions.rsi
-    state: scream_for_me
   - type: Action
     raiseOnUser: true
     useDelay: 60
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/exit_blood.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: scream_for_me
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: scream_for_me
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -711,9 +699,10 @@
     raiseOnUser: true
     useDelay: 10
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: summons
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: summons
   - type: InstantAction
     event: !type:InstantSummonsEvent
       summonSound:
@@ -739,9 +728,10 @@
     checkCanInteract: false
     useDelay: 60
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: teleport
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: teleport
   - type: InstantAction
     event: !type:WizardTeleportEvent
   - type: Magic
@@ -772,9 +762,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/Items/welder.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: the_traps
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: the_traps
   - type: InstantAction
     event: !type:TrapsSpellEvent
   - type: SpeakOnAction
@@ -796,9 +787,6 @@
   name: Lesser Summon Bees
   description: This spell magically kicks a transdimensional beehive, instantly summoning a swarm of bees to your location.
   components:
-  - type: Sprite # For apprentices
-    sprite: _Goobstation/Wizard/actions.rsi
-    state: bee
   - type: Action
     raiseOnUser: true
     checkCanInteract: false
@@ -806,9 +794,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/bee.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: bee
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: bee
   - type: InstantAction
     event: !type:SummonMobsEvent
       collisionMask:
@@ -853,9 +842,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/monkey.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: monkey
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: monkey
   - type: InstantAction
     event: !type:SummonSimiansEvent
       mobs: SummonSimiansMobTable
@@ -884,9 +874,10 @@
     checkCanInteract: false
     useDelay: 1
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: return_to_monkey
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: return_to_monkey
   - type: InstantAction
     event: !type:PolymorphSpellEvent
       protoId: WizardGorilla
@@ -912,9 +903,10 @@
     raiseOnUser: true
     useDelay: 15
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: exsanguinating_strike
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: exsanguinating_strike
   - type: InstantAction
     event: !type:ExsanguinatingStrikeEvent
   - type: SpeakOnAction
@@ -941,9 +933,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/bamf.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: chuuni
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: chuuni
   - type: InstantAction
     event: !type:ChuuniInvocationsEvent
   - type: SpeakOnAction
@@ -965,9 +958,10 @@
     checkCanInteract: false
     useDelay: 15
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: swap
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: swap
   - type: TargetAction
     checkCanAccess: false
     interactOnMiss: false
@@ -999,9 +993,10 @@
     checkCanInteract: false
     useDelay: 1
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: soultap
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: soultap
   - type: InstantAction
     event: !type:SoulTapEvent
   - type: SpeakOnAction
@@ -1021,9 +1016,10 @@
     raiseOnUser: true
     useDelay: 1
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: thrown_lightning
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: thrown_lightning
   - type: InstantAction
     event: !type:ThrownLightningEvent
       sound:
@@ -1044,9 +1040,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/blink.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: blink
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: blink
   - type: InstantAction
     event: !type:BlinkSpellEvent
   - type: Magic
@@ -1070,9 +1067,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wizard/summon_magic.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: art_summon
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: art_summon
   - type: InstantAction
     event: !type:SummonMobsEvent
       factionIgnoreSummoner: true
@@ -1097,9 +1095,10 @@
     checkCanInteract: false
     useDelay: 10
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: tile
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: tile
   - type: TargetAction
     range: 40
   - type: EntityTargetAction
@@ -1140,9 +1139,10 @@
 #      - Body
 #      - MindContainer
 #    itemIconStyle: BigAction
-#    icon:
-#      sprite: _Goobstation/Wizard/actions.rsi
-#      state: curseofbyond
+#  - type: Sprite
+#    sprite: _Goobstation/Wizard/actions.rsi
+#    layers:
+#    - state: curseofbyond
 #    event: !type:EntityEffectSpellEvent
 #      effects:
 #      - !type:ToggleComponent

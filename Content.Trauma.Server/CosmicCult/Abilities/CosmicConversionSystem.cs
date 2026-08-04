@@ -7,7 +7,7 @@ using Content.Shared.Bible.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.CosmicCult;
@@ -21,6 +21,7 @@ public sealed partial class CosmicConversionSystem : EntitySystem
 {
     [Dependency] private SharedCosmicCultSystem _cult = default!;
     [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private GhostSystem _ghost = default!;
@@ -57,7 +58,7 @@ public sealed partial class CosmicConversionSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
             return;
         }
-        if (HasComp<MindShieldComponent>(target))
+        if (_mindShield.IsShielded(target))
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
             return;

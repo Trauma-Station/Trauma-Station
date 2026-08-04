@@ -21,7 +21,6 @@
     - Electrocution
     - Pacified
     - Flashed
-    - Adrenaline
   - type: Buckle
   - type: StandingState
   - type: Tag
@@ -98,7 +97,6 @@
     - Electrocution
     - Pacified
     - Flashed
-    - Adrenaline
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:

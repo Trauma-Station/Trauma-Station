@@ -103,7 +103,7 @@
   components:
   - type: Sprite
     sprite: _Goobstation/SlaughterDemon/heart.rsi
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 30
     integrity: 30
     integrityThresholds:

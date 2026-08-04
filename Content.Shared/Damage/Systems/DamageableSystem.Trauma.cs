@@ -15,7 +15,7 @@ public sealed partial class DamageableSystem
     [Dependency] private CommonBodyPartSystem _part = default!;
     [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
     [Dependency] private EntityQuery<InorganicComponent> _inorganicQuery = default!;
-    [Dependency] private EntityQuery<InternalOrganComponent> _internalQuery = default!;
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _internalQuery = default!;
 
     private static readonly ProtoId<DamageGroupPrototype>[] _vitalOnlyDamageGroups = { "Airloss", "Toxin", "Genetic", "Metaphysical" };
     private readonly List<ProtoId<DamageTypePrototype>> _vitalOnlyDamageTypes = new();

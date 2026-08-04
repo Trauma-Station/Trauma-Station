@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2023 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Myra <vasilis@pikachu.systems>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 
 """
 Sends updates to a Discord webhook for new changelog entries since the last GitHub Actions publish run.
@@ -235,7 +227,7 @@ def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> lis
                 emoji = TYPES_TO_EMOJI.get(change["type"], "❓")
                 message = change["message"]
 
-                if "labels" in entry and EXPERIMENTAL_LABEL in entry["labels"]:
+                if "labels" in entry and EXPERIMENTAL_LABEL in entry["labels"]: # Trauma - check it exists first
                     emoji = f"{emoji}{EXPERIMENTAL_EMOJI}"
 
                 message_lines.append(create_change_line(emoji, message, url))

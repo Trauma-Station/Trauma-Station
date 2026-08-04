@@ -199,7 +199,7 @@ public sealed partial class ChatSystem
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange)) // UNEDIT FROM Einstein Engines - Language // They are out of date, this has been reverted to current ChatSystem
             {
                 // Scenario 2: if the listener is too far, they only hear fragments of the message
-                result = ObfuscateMessageReadability(perceivedMessage);
+                result = ObfuscateMessageReadability(perceivedMessage, _random); // Trauma - pass _random
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", nameIdentity, result, language, colorOverride);
             }
             else
@@ -208,7 +208,7 @@ public sealed partial class ChatSystem
                     continue;
 
                 // Scenario 3: If listener is too far and has no line of sight, they can't identify the whisperer's identity
-                result = ObfuscateMessageReadability(perceivedMessage);
+                result = ObfuscateMessageReadability(perceivedMessage, _random); // Trauma - pass _random
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-unknown-wrap-message", string.Empty, result, language, colorOverride);
             }
 

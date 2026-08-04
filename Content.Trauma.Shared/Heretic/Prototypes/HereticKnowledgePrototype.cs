@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Rituals;
@@ -24,11 +25,15 @@ public sealed partial class HereticKnowledgePrototype : IPrototype
     [DataField]
     public bool SideKnowledge;
 
+    // TODO: kill
     /// <summary>
     ///     What knowledge event should be raised (on body)
     /// </summary>
     [DataField, NonSerialized]
     public HereticKnowledgeEvent? Event;
+
+    [DataField]
+    public EntityEffect[]? Effects;
 
     /// <summary>
     ///     What event should be raised (on mind)

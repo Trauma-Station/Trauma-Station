@@ -14,15 +14,16 @@
     checkCanInteract: true
     checkConsciousness: true
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Actions/modsuit.rsi
-      state: activate
-    iconOn:
-      sprite: _Goobstation/Actions/modsuit.rsi
-      state: activate-ready
+  - type: Sprite
+    sprite: _Goobstation/Actions/modsuit.rsi
+    layers:
+    - state: activate
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: activate-ready
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
   - type: InstantAction
-    event: !type:SealClothingEvent {}
-
+    event: !type:SealClothingEvent
 
 - type: entity
   parent: BaseAction
@@ -36,11 +37,12 @@
     checkCanInteract: false
     checkConsciousness: true
     itemIconStyle: NoItem
-    icon:
-      sprite: Mobs/Silicon/station_ai.rsi
-      state: default
+  - type: Sprite
+    sprite: Mobs/Silicon/station_ai.rsi
+    layers:
+    - state: default
   - type: InstantAction
-    event: !type:CloneProjectorActivatedEvent {}
+    event: !type:CloneProjectorActivatedEvent
 
 - type: entity
   parent: BaseAction
@@ -49,6 +51,9 @@
   description: Audibly hail nearby crew, useful for giving quick orders.
   components:
   - type: Action
-    icon: { sprite: Clothing/Mask/gassecurity.rsi, state: icon }
+  - type: Sprite
+    sprite: Clothing/Mask/gassecurity.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:HailerActionEvent

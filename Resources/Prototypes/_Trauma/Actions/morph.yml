@@ -1,29 +1,37 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseAction
+  id: BaseMorphAction
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/morph.rsi
+
+- type: entity
+  parent: BaseMorphAction
   id: ActionMorphReplicate
   name: Replicate
   description: Copies your cells to create a replica of yourself. Costs 150 biomass.
   components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Mobs/morph.rsi
-      state: morph
+  - type: Sprite
+    layers:
+    - state: morph
   - type: InstantAction
     event: !type:MorphReplicateActionEvent
 
 - type: entity
-  parent: BaseAction
+  parent: BaseMorphAction
   id: ActionMorph
   name: Morph
   description: Warps your body to mimic the appearance of almost anything.
   components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/mug_one.rsi
+    layers:
+    - state: icon
   - type: Action
     itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Consumable/Drinks/mug_one.rsi
-      state: icon
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -37,15 +45,15 @@
     event: !type:MorphActionEvent
 
 - type: entity
-  parent: BaseAction
+  parent: BaseMorphAction
   id: ActionUnMorph
   name: Un-Morph
   description: Tries to revert you to your original form if you are morphed.
   components:
-  - type: Action
-    icon:
-      sprite: Objects/Devices/chameleon_projector.rsi
-      state: icon
+  - type: Sprite
+    sprite: Objects/Devices/chameleon_projector.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:UnMorphActionEvent
 

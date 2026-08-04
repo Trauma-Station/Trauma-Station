@@ -4,11 +4,14 @@
   abstract: true
   id: BaseRedAlert
   requiredAlerts:
-  - red
-  - gamma
-  - delta
-  - omicron
-  - octarine
+  - Red
+  - Gamma
+  - DeltaBlob
+  - DeltaDelam
+  - DeltaNuke
+  - DeltaSling
+  - Omicron
+  - Octarine
   # intentionally no epsilon, NT won't sell you guns to kill their deathsquads
   category: cargoproduct-category-name-armory
   group: market

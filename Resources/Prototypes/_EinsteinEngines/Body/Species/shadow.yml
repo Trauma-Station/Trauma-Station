@@ -82,7 +82,9 @@
       reagents:
       - ReagentId: FluorosulfuricAcid
         Quantity: 300
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ThermalVision
     thermalShader: null
     color: "#BF40BF"

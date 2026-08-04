@@ -185,14 +185,12 @@
     allowed:
     - Stun
     - SlowedDown
-    - Flashed
   - type: SlowOnDamage
     speedModifierThresholds:
       30: 0.7
       50: 0.5
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 5000
     heatDamage:

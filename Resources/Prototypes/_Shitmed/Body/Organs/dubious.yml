@@ -120,8 +120,10 @@
     - state: species
   - type: OrganComponents
     onAdd:
-    - type: PressureImmunity
-    - type: BreathingImmunity
+    - type: BreathingImmunity # TODO: make this a status effect
+  - type: OrganStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunityOrgan
 
 - type: entity
   parent: OrganDubiousBase

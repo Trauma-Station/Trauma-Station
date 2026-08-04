@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.AlertLevel;
 using Content.Shared.Atmos;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
@@ -167,7 +168,7 @@ public sealed partial class NuclearReactorComponent : Component
     /// Alert level to set after meltdown
     /// </summary>
     [DataField]
-    public string MeltdownAlertLevel = "yellow";
+    public ProtoId<AlertLevelPrototype> MeltdownAlertLevel = "Yellow";
 
     /// <summary>
     /// The minimum radiation from the melted reactor

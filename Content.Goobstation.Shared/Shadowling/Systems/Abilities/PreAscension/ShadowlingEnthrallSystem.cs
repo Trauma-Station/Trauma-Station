@@ -4,7 +4,7 @@ using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
@@ -14,25 +14,21 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
 /// </summary>
 public sealed partial class ShadowlingEnthrallSystem : EntitySystem
 {
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedShadowlingSystem _shadowling = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<ShadowlingEnthrallComponent, EnthrallEvent>(OnEnthrall);
-        SubscribeLocalEvent<ShadowlingEnthrallComponent, EnthrallDoAfterEvent>(OnEnthrallDoAfter);
-        SubscribeLocalEvent<ShadowlingEnthrallComponent, MapInitEvent>(OnStartup);
-        SubscribeLocalEvent<ShadowlingEnthrallComponent, ComponentShutdown>(OnShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<ShadowlingEnthrallComponent> ent, ref MapInitEvent args)
         => _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<ShadowlingEnthrallComponent> ent, ref ComponentShutdown args)
         => _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
 
+    [SubscribeLocalEvent]
     private void OnEnthrall(EntityUid uid, ShadowlingEnthrallComponent comp, EnthrallEvent args)
     {
         if (args.Handled)
@@ -60,7 +56,7 @@ public sealed partial class ShadowlingEnthrallSystem : EntitySystem
             return;
 
         // Basic Enthrall -> Can't melt Mindshields
-        if (HasComp<MindShieldComponent>(target))
+        if (_mindShield.IsShielded(target))
         {
             _popup.PopupEntity(Loc.GetString("shadowling-enthrall-mindshield"), uid, uid, PopupType.SmallCaution);
             return;
@@ -72,6 +68,7 @@ public sealed partial class ShadowlingEnthrallSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnEnthrallDoAfter(EntityUid uid, ShadowlingEnthrallComponent comp, EnthrallDoAfterEvent args)
     {
         if (args.Handled
