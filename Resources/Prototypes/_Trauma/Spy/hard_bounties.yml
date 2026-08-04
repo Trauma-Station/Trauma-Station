@@ -31,14 +31,14 @@
 - type: spyBounty
   id: BoxFolderQmClipboard
   difficulty: Hard
-  jobBlacklist: [Quertermaster]
+  jobBlacklist: [Quartermaster]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: BoxFolderQmClipboard
 
 - type: spyBounty
   id: ClothingHandsKnuckleDustersQM
   difficulty: Hard
-  jobBlacklist: [Quertermaster]
+  jobBlacklist: [Quartermaster]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingHandsKnuckleDustersQM
 
