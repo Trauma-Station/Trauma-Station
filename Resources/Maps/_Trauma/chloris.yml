@@ -4,7 +4,7 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/03/2026 23:53:31
+  time: 08/04/2026 18:52:42
   entityCount: 49298
 maps:
 - 1
@@ -30399,12 +30399,12 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 61.48916,140.60153
+      pos: 60.405544,140.65253
   - uid: 1968
     components:
     - type: Transform
       parent: 2
-      pos: 61.723534,140.4609
+      pos: 60.502766,140.63864
   - uid: 1969
     components:
     - type: Transform
@@ -106470,6 +106470,13 @@ entities:
     - type: Transform
       parent: 2
       pos: 57.295048,138.53581
+- proto: ChemiCompiler
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      parent: 2
+      pos: 61.5,140.5
 - proto: ChemistryBottleEpinephrine
   entities:
   - uid: 2685
@@ -106611,12 +106618,12 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 61.122284,140.72385
+      pos: 60.377766,140.61087
   - uid: 1933
     components:
     - type: Transform
       parent: 2
-      pos: 61.26291,140.83322
+      pos: 60.377766,140.66641
   - uid: 1934
     components:
     - type: Transform
@@ -131295,7 +131302,7 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 61.648087,140.78635
+      pos: 60.447212,139.58308
   - uid: 21301
     components:
     - type: Transform
@@ -226192,12 +226199,12 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 60.53845,140.75513
+      pos: 60.419434,140.59697
   - uid: 34910
     components:
     - type: Transform
       parent: 2
-      pos: 60.60095,140.63013
+      pos: 60.558323,140.70808
   - uid: 34911
     components:
     - type: Transform
@@ -230391,7 +230398,7 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 61.17666,140.0859
+      pos: 61.363876,139.73587
   - uid: 35608
     components:
     - type: Transform
@@ -272785,12 +272792,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 61.5,139.5
-  - uid: 42190
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: 61.5,140.5
   - uid: 42191
     components:
     - type: Transform
