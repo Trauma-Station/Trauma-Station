@@ -9,7 +9,7 @@ using Robust.Client.Player;
 namespace Content.Trauma.Client.Spy;
 
 [UsedImplicitly]
-public sealed class SpyUplinkBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class SpyUplinkBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IEntityManager _ent = default!;
