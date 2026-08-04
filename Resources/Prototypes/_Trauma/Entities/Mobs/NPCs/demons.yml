@@ -626,7 +626,7 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/mindflayer.rsi
   - type: MeleeWeapon
-    range: 5 
+    range: 5
     soundHit:
       path: /Audio/_Goobstation/Wizard/disable_tech.ogg
     damage:
@@ -732,7 +732,7 @@
   parent: BaseDemon
   id: MediumDemonDark
   name: darkling
-  description: Strange shadowy beings, darklings hide in the deepest recesses of Hell, only emerging to drag down the odd sinner into the darkness. 
+  description: Strange shadowy beings, darklings hide in the deepest recesses of Hell, only emerging to drag down the odd sinner into the darkness.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/dark.rsi
