@@ -12709,3 +12709,10 @@ Entries:
   id: 1390
   time: '2026-08-04T00:25:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3937
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Revamped the Mining Shuttle
+  id: 1391
+  time: '2026-08-04T03:20:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3938
