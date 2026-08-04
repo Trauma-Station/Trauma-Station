@@ -17,9 +17,9 @@
     damageContainer: StructuralInorganic
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entity
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
@@ -29,8 +29,8 @@
   components:
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
@@ -40,9 +40,9 @@
   components:
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entityTable
   id: FillLockerWardenTrauma
@@ -79,8 +79,8 @@
         tableId: FillGunSafeLaserT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -93,8 +93,8 @@
         tableId: FillGunSafeShotgunsT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -108,9 +108,9 @@
         tableId: FillGunSafeLaserT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -123,9 +123,9 @@
         tableId: FillGunSafeRandomBallistic
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -138,8 +138,8 @@
         tableId: FillGunSafeMeleeT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: [ GunSafeBaseSecure, BaseSecurityContraband ] # Reparent to one above BaseTraumaGunSafe to remove access lock bs.

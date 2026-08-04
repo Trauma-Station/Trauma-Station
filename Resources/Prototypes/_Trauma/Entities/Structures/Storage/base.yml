@@ -6,6 +6,6 @@
   components:
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow

@@ -599,7 +599,9 @@
     heatDamageThreshold: 423
     coldDamageThreshold: 0
   - type: MovementAlwaysTouching
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ProtectedFromStepTriggers
   - type: Respirator
     minSaturation: 5.0

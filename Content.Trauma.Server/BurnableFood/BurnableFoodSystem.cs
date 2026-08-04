@@ -17,14 +17,8 @@ public sealed partial class BurnableFoodSystem : EntitySystem
 
     private List<Entity<BurnableFoodComponent>> _burned = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BurnableFoodComponent, OnTemperatureChangeEvent>(OnTempChange);
-    }
-
-    private void OnTempChange(Entity<BurnableFoodComponent> ent, ref OnTemperatureChangeEvent args)
+    [SubscribeLocalEvent]
+    private void OnTempChange(Entity<BurnableFoodComponent> ent, ref TemperatureChangedEvent args)
     {
         if (TerminatingOrDeleted(ent))
             return;

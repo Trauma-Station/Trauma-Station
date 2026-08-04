@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Ghost.Components;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -11,7 +14,6 @@ using Content.Shared.Administration.Events;
 using Content.Shared.CCVar;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
-using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -342,12 +344,14 @@ public sealed partial class AdminSystem : EntitySystem
         // TODO Fix order dependent Cvars
         // Please for the sake of my sanity don't make cvars & order dependent.
         // Just make a bool field on the system instead of having some cvars automatically modify other cvars.
+        //
         // I.e., this:
         //   /sudo cvar game.panic_bunker.enabled true
         //   /sudo cvar game.panic_bunker.disable_with_admins true
         // and this:
         //   /sudo cvar game.panic_bunker.disable_with_admins true
         //   /sudo cvar game.panic_bunker.enabled true
+        //
         // should have the same effect, but currently setting the disable_with_admins can modify enabled.
 
         if (hasAdmins && PanicBunker.DisableWithAdmins)

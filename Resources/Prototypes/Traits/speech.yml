@@ -15,7 +15,6 @@
     - type: MothAccent
     - type: ReplacementAccent
       accent: dwarf
-    - type: CheeseAccent # goob edit
     - type: BoganAccent # goob edit
 
 # 1 Cost

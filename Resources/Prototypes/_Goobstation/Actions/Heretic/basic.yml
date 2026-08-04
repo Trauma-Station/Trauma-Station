@@ -9,9 +9,10 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: open_store
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: open_store
   - type: InstantAction
     event: !type:EventHereticOpenStore
   - type: HereticAction
@@ -28,9 +29,10 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: mansus_grasp
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: mansus_grasp
   - type: InstantAction
     event: !type:TouchSpellEvent
       touchSpell: TouchSpellMansus
@@ -57,9 +59,10 @@
   - type: Action
     useDelay: 2
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: living_heart
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: living_heart
   - type: InstantAction
     event: !type:EventHereticLivingHeart
   - type: HereticAction
@@ -77,9 +80,10 @@
   - type: Action
     useDelay: 10
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: mansus_link
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: mansus_link
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:EventHereticMansusLink
@@ -98,9 +102,10 @@
     checkCanInteract: false
     useDelay: 6
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: shadowcloak
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: shadowcloak
   - type: InstantAction
     event: !type:EventHereticCloak
       status: ShadowCloakStatusEffect
@@ -120,9 +125,10 @@
   - type: Action
     useDelay: 10
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: shapeshift
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: shapeshift
   - type: InstantAction
     event: !type:EventHereticShapeshift
   - type: ShapeshiftAction
@@ -173,8 +179,9 @@
     itemIconStyle: BigAction
     priority: -20
     useDelay: 1
-    icon:
-      sprite: _Goobstation/Heretic/mad_mask.rsi
-      state: icon
+  - type: Sprite
+    sprite: _Goobstation/Heretic/mad_mask.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:ToggleAbyssalMaskEvent

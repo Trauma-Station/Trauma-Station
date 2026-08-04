@@ -4,7 +4,7 @@ using Content.Trauma.Server.Xenomorphs.FaceHugger;
 using Content.Server.Popups;
 using Content.Trauma.Shared.Xenomorphs.Egg;
 using Content.Trauma.Shared.Xenomorphs.Xenomorph;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.StepTrigger.Systems;

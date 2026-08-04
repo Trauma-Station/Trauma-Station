@@ -13,15 +13,11 @@ public sealed class LatheUpdateState : BoundUserInterfaceState
 
     public ProtoId<LatheRecipePrototype>? CurrentlyProducing;
 
-    public string? AlertLevel; // Trauma
-
-    // Trauma - added alertLevel
-    public LatheUpdateState(List<ProtoId<LatheRecipePrototype>> recipes, LatheRecipeBatch[] queue, ProtoId<LatheRecipePrototype>? currentlyProducing = null, string? alertLevel = null)
+    public LatheUpdateState(List<ProtoId<LatheRecipePrototype>> recipes, LatheRecipeBatch[] queue, ProtoId<LatheRecipePrototype>? currentlyProducing = null)
     {
         Recipes = recipes;
         Queue = queue;
         CurrentlyProducing = currentlyProducing;
-        AlertLevel = alertLevel; // Trauma
     }
 }
 

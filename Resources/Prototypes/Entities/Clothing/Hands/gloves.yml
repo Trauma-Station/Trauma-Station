@@ -494,7 +494,6 @@
     mustBeEquippedToUse: true
     heavyStaminaCost: 3 # goob edit
     canWideSwing: false # Trauma
-
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue

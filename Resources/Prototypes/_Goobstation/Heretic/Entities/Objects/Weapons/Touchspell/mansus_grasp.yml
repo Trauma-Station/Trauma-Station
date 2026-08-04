@@ -175,7 +175,6 @@
           components:
           - Edible
           - ShadowCloakEntity
-          tags:
           - Wall # HereticRustGraspWallEffect handles walls
       damage:
         types:

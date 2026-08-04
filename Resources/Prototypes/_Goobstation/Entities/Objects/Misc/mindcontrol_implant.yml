@@ -22,7 +22,6 @@
         - MobState  # can implant ian.
       blacklist:
         components:
-        - MindShield
         - Changeling
         - BorgChassis #dermal means skin. borgs dont have skin
     - type: MindcontrolImplant

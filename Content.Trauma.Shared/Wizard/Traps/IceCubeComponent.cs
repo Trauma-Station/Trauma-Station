@@ -11,10 +11,11 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Trauma.Shared.Wizard.Traps;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
 {
-    [ViewVariables(VVAccess.ReadOnly)]
-    public BodyType? OldBodyType = null;
+    [DataField, AutoNetworkedField]
+    public BodyType? OldBodyType;
 
     [DataField]
     public BodyType FrozenBodyType = BodyType.Dynamic;
@@ -46,7 +47,7 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
     [DataField]
     public float DamageMeltProbabilityThreshold = 60f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float SustainedDamage;
 
     [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>))]

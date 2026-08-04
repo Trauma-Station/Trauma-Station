@@ -9,6 +9,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Collections.Frozen;
+using System.Text;
 
 namespace Content.Shared.Chat;
 
@@ -179,5 +180,25 @@ public abstract partial class SharedChatSystem
         var msg = Loc.GetString("chat-manager-no-such-channel", ("key", channelKey));
         _popup.PopupEntity(msg, source, source);
         return false;
+    }
+
+    public string ObfuscateMessageReadability(string message, IRobustRandom random, float chance = DefaultObfuscationFactor)
+    {
+        var modifiedMessage = new StringBuilder(message);
+
+        for (var i = 0; i < message.Length; i++)
+        {
+            if (char.IsWhiteSpace((modifiedMessage[i])))
+            {
+                continue;
+            }
+
+            if (random.Prob(1 - chance))
+            {
+                modifiedMessage[i] = '~';
+            }
+        }
+
+        return modifiedMessage.ToString();
     }
 }

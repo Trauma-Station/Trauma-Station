@@ -5,12 +5,12 @@
   id: ActionPumpCursedHeart
   name: Heartbeat
   description: Pump your own blood to live!
-  categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _Lavaland/Objects/Specific/Lavaland/loot.rsi
+    layers:
+    - state: cursed_heart
   - type: Action
-    icon:
-      sprite: _Lavaland/Objects/Specific/Lavaland/loot.rsi
-      state: cursed_heart
     checkCanInteract: false
     checkConsciousness: false
     itemIconStyle: BigAction

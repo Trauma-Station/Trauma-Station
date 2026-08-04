@@ -4,7 +4,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Shared.Disposal.Unit;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Physics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -15,6 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.LightDetection;
 
+// TDOO: kill use engine thing
 /// <summary>
 /// This system detects if an entity is standing on light.
 /// It casts rays from the PointLight to the player.

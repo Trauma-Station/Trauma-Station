@@ -65,10 +65,6 @@
     Telecrystal: 40
   categories:
   - UplinkWearables
-  conditions:
-  - !type:BuyerSpeciesCondition
-    whitelist:
-    - Human
 
 - type: listing
   id: UplinkClothingThievingGloves

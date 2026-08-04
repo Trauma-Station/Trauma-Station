@@ -31,7 +31,7 @@ public sealed partial class EnchantRelaySystem : EntitySystem
         SubInventory<AttackedEvent>(true);
         SubInventory<StepTriggerAttemptEvent>(true);
         SubInventory<GetFireProtectionEvent>();
-        SubInventory<ModifyChangedTemperatureEvent>();
+        SubInventory<BeforeHeatExchangeEvent>();
         SubInventory<ElectrocutionAttemptEvent>();
 
         // unremoveable stuff

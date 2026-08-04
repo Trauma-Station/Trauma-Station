@@ -3,7 +3,7 @@
 using Content.Server.Temperature.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Speech.Muting;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
@@ -15,9 +15,9 @@ public sealed partial class VoidCurseSystem : SharedVoidCurseSystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TemperatureSystem _temp = default!;
-    [Dependency] private StatusEffectsSystem _statusEffect = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
-    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
+    private static readonly EntProtoId StatusEffectMuted = "StatusEffectMuted";
 
     public override void Update(float frameTime)
     {
@@ -57,12 +57,12 @@ public sealed partial class VoidCurseSystem : SharedVoidCurseSystem
     {
         if (TryComp<TemperatureComponent>(ent, out var temp))
         {
-            // temperaturesystem is not idiotproof :(
-            var t = temp.CurrentTemperature - 2f * ent.Comp.Stacks;
-            _temp.ForceChangeTemperature(ent, Math.Clamp(t, Atmospherics.TCMB, Atmospherics.Tmax), temp);
+            // thermodymagics
+            var heat = -2f * ent.Comp.Stacks * temp.HeatCapacity;
+            _temp.ChangeHeat((ent, temp), heat);
         }
 
         if (ent.Comp.Stacks >= ent.Comp.MinStacksToMute)
-            _statusEffect.TryAddStatusEffect<MutedComponent>(ent, Muted, TimeSpan.FromSeconds(5), true);
+            _status.TryUpdateStatusEffectDuration(ent.Owner, StatusEffectMuted, TimeSpan.FromSeconds(5));
     }
 }

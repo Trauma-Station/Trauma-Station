@@ -9,9 +9,9 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_cloak
+  - type: Sprite
+    layers:
+    - state: vampire_cloak
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
@@ -58,9 +58,9 @@
     useDelay: 20
     sound:
       path: /Audio/_Trauma/Vampires/Actions/shadow_snare.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: shadow_snare
+  - type: Sprite
+    layers:
+    - state: shadow_snare
   - type: TargetAction
     range: 10
   - type: WorldTargetAction
@@ -79,9 +79,9 @@
   components:
   - type: Action
     useDelay: 300
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: shadow_anchor
+  - type: Sprite
+    layers:
+    - state: shadow_anchor
   - type: InstantAction
     event: !type:ShadowAnchorActionEvent
   - type: ActionShadowAnchor
@@ -105,9 +105,9 @@
     sound:
       path: /Audio/_Trauma/Vampires/Actions/dark_passage.ogg
     raiseOnAction: false
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: dark_passage
+  - type: Sprite
+    layers:
+    - state: dark_passage
   - type: EffectAction
     onPerformed: true
     effects:
@@ -125,9 +125,9 @@
   components:
   - type: Action
     useDelay: 20
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_extinguish
+  - type: Sprite
+    layers:
+    - state: vampire_extinguish
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -148,9 +148,9 @@
   components:
   - type: Action
     useDelay: 30
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: shadow_boxing
+  - type: Sprite
+    layers:
+    - state: shadow_boxing
   - type: TargetAction
     range: 2
   - type: EntityTargetAction
@@ -188,9 +188,9 @@
   components:
   - type: Action
     useDelay: 10
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: eternal_darkness
+  - type: Sprite
+    layers:
+    - state: eternal_darkness
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
