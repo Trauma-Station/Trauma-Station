@@ -104,7 +104,7 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
 
     private void TryUpdateVisualState(Entity<VendingMachineComponent?> entity, VendingMachineEjectComponent? ejectComponent = null)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
+        if (!Resolve(entity.Owner, ref entity.Comp, false)) // Trauma - dont require it since shop vendor doesnt use it
             return;
 
         Resolve(entity.Owner, ref ejectComponent, false);
