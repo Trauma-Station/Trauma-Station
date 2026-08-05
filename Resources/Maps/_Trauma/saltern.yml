@@ -4,7 +4,7 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/04/2026 17:25:15
+  time: 08/05/2026 17:32:00
   entityCount: 12246
 maps:
 - 1
@@ -1774,16 +1774,16 @@ entities:
             id: BrickTileSteelInnerSw
             color: '#D381C9E5'
           decals:
-          - -12,-20
           - -12,-31
+          - -12,-20
         - node:
             id: BrickTileSteelLineN
             color: '#D381C9E5'
           decals:
           - -11,-19
           - -10,-19
-          - -9,-19
           - -9,-26
+          - -9,-19
           - -8,-19
         - node:
             id: BrickTileSteelLineN
@@ -1810,8 +1810,8 @@ entities:
           - -16,-28
           - -15,-28
           - -14,-28
-          - -13,-20
           - -13,-31
+          - -13,-20
           - -11,-32
           - -6,-33
           - -5,-33
@@ -1862,18 +1862,18 @@ entities:
           - -38,-4
           - -38,7
           - -38,9
-          - -36,1
           - -36,-8
+          - -36,1
           - -36,8
-          - -25,-23
           - -25,-25
+          - -25,-23
           - -25,2
-          - -24,-9
           - -24,-24
           - -24,-22
+          - -24,-9
           - -24,3
-          - -23,-22
           - -23,-24
+          - -23,-22
           - -7,3
           - 7,5
           - 14,7
@@ -1883,17 +1883,17 @@ entities:
           - 16,10
           - 18,11
           - 19,13
-          - 20,14
           - 20,13
+          - 20,14
           - 21,13
           - 23,17
           - 24,16
           - 26,17
           - 27,3
           - 27,16
-          - 29,6
-          - 29,5
           - 29,-5
+          - 29,5
+          - 29,6
           - 30,-5
           - 33,0
           - 34,-5
@@ -1912,8 +1912,8 @@ entities:
             cleanable: True
           decals:
           - -35,8
-          - -25,-22
           - -25,-24
+          - -25,-22
           - -23,-25
           - 24,17
           - 26,17
@@ -1959,9 +1959,9 @@ entities:
             id: MiniTileSteelLineW
             color: '#D381C9E5'
           decals:
-          - -18,-21
-          - -18,-22
           - -18,-23
+          - -18,-22
+          - -18,-21
         - node:
             id: QuarterTileOverlayGreyscale270
             color: '#D381C996'
@@ -1978,17 +1978,17 @@ entities:
             id: WarnLineE
             color: '#FFFFFFFF'
           decals:
-          - -15,-30
           - -15,-31
-          - 6,-34
+          - -15,-30
           - 6,-35
+          - 6,-34
           - 14,-18
-          - 37,14
           - 37,13
+          - 37,14
           - 37,15
-          - 54,-4
-          - 54,-5
           - 54,-6
+          - 54,-5
+          - 54,-4
         - node:
             id: WarnLineN
             color: '#FFFFFFFF'
@@ -2020,13 +2020,13 @@ entities:
           - -15,19
           - -15,20
           - -15,21
-          - 5,-34
           - 5,-35
+          - 5,-34
           - 39,13
           - 39,14
           - 39,15
-          - 60,-10
           - 60,-11
+          - 60,-10
         - node:
             zIndex: 1
             id: WoodTrimThinCornerNe
@@ -2054,8 +2054,8 @@ entities:
             angle: 3.141592653589793 rad
           decals:
           - -13,8
-          - 22,27
           - 22,17
+          - 22,27
         - node:
             id: Bot
             color: '#FFFFFFFF'
@@ -2160,12 +2160,12 @@ entities:
           - 6,1
           - 7,1
           - 8,1
-          - 9,1
           - 9,-8
-          - 10,1
+          - 9,1
           - 10,-8
-          - 11,1
+          - 10,1
           - 11,-8
+          - 11,1
           - 14,-5
           - 15,-5
           - 16,-5
@@ -2188,14 +2188,14 @@ entities:
           - -17,5
           - -16,5
           - -15,5
-          - -14,11
           - -14,5
-          - -13,11
+          - -14,11
           - -13,5
-          - -12,11
+          - -13,11
           - -12,5
-          - -11,11
+          - -12,11
           - -11,5
+          - -11,11
           - -10,5
           - -9,5
           - -8,5
@@ -2246,36 +2246,36 @@ entities:
           - 1,19
           - 1,20
           - 1,21
-          - 6,29
           - 6,7
           - 6,8
           - 6,9
           - 6,10
           - 6,11
+          - 6,29
         - node:
             id: HalfTileOverlayGreyscale270
             color: '#A4610696'
           decals:
+          - 12,6
+          - 12,7
           - 12,9
           - 12,10
           - 12,11
           - 12,12
-          - 12,6
-          - 12,7
         - node:
             id: HalfTileOverlayGreyscale270
             color: '#EFB34196'
           decals:
-          - 29,-2
-          - 29,-3
-          - 29,-4
           - 29,-5
+          - 29,-4
+          - 29,-3
+          - 29,-2
           - 31,-1
-          - 31,2
           - 31,0
-          - 31,5
-          - 31,4
+          - 31,2
           - 31,3
+          - 31,4
+          - 31,5
           - 31,6
           - 37,2
           - 37,3
@@ -2289,10 +2289,10 @@ entities:
             id: HalfTileOverlayGreyscale270
             color: '#FFD886FF'
           decals:
-          - 14,0
-          - 14,-1
-          - 14,-2
           - 14,-3
+          - 14,-2
+          - 14,-1
+          - 14,0
         - node:
             id: HalfTileOverlayGreyscale90
             color: '#334E6DC8'
@@ -2313,29 +2313,29 @@ entities:
             id: HalfTileOverlayGreyscale90
             color: '#52B4E996'
           decals:
-          - 12,0
-          - 12,1
+          - 12,-11
+          - 12,-10
+          - 12,-9
           - 12,-6
           - 12,-5
           - 12,-4
           - 12,-3
           - 12,-2
           - 12,-1
-          - 12,-9
-          - 12,-10
-          - 12,-11
+          - 12,0
+          - 12,1
         - node:
             id: HalfTileOverlayGreyscale90
             color: '#A4610696'
           decals:
-          - 16,11
-          - 16,10
-          - 16,9
-          - 16,7
           - 16,6
-          - 24,13
-          - 24,12
+          - 16,7
+          - 16,9
+          - 16,10
+          - 16,11
           - 24,11
+          - 24,12
+          - 24,13
         - node:
             id: HalfTileOverlayGreyscale90
             color: '#EFB34196'
@@ -2344,17 +2344,17 @@ entities:
           - 29,4
           - 29,5
           - 29,6
-          - 35,6
-          - 35,5
-          - 35,4
-          - 35,3
-          - 35,2
-          - 35,-1
-          - 35,-2
-          - 35,-3
-          - 35,-4
           - 35,-5
+          - 35,-4
+          - 35,-3
+          - 35,-2
+          - 35,-1
           - 35,0
+          - 35,2
+          - 35,3
+          - 35,4
+          - 35,5
+          - 35,6
           - 44,6
           - 50,5
         - node:
@@ -2403,9 +2403,9 @@ entities:
             color: '#334E6DC8'
           decals:
           - 0,28
+          - 4,23
           - 4,24
           - 4,25
-          - 4,23
         - node:
             id: QuarterTileOverlayGreyscale90
             color: '#A4610696'
@@ -2492,6 +2492,380 @@ entities:
             angle: 3.141592653589793 rad
           decals:
           - 7,11
+        - node:
+            id: CheckerNWSE
+            color: '#D4D4D428'
+          decals:
+          - -40,4
+          - -40,5
+          - -40,6
+          - -37,-8
+          - -37,-7
+          - -37,-6
+          - -37,-5
+          - -37,0
+          - -37,1
+          - -37,2
+          - -37,8
+          - -37,9
+          - -37,10
+          - -36,4
+          - -36,5
+          - -36,6
+        - node:
+            id: QuarterTileOverlayGreyscale
+            color: '#D4D4D428'
+          decals:
+          - -40,3
+          - -39,3
+          - -38,3
+          - -37,3
+          - -36,3
+        - node:
+            id: QuarterTileOverlayGreyscale180
+            color: '#D4D4D428'
+          decals:
+          - -40,7
+          - -39,7
+          - -38,7
+          - -37,7
+          - -36,7
+        - node:
+            id: WarningLine
+            color: '#FFFFFFFF'
+            angle: -1.5707963267948966 rad
+          decals:
+          - -40,0
+          - -40,1
+          - -40,2
+          - -40,8
+          - -40,9
+          - -40,10
+        - node:
+            id: WarningLineCorner
+            color: '#FFFFFFFF'
+            angle: -1.5707963267948966 rad
+          decals:
+          - -40,3
+        - node:
+            id: WarningLineCornerFlipped
+            color: '#FFFFFFFF'
+            angle: -1.5707963267948966 rad
+          decals:
+          - -40,7
+        - node:
+            zIndex: 2
+            id: WoodTrimThinCornerSw
+            color: '#FFFFFFFF'
+          decals:
+          - -37,19
+        - node:
+            zIndex: 2
+            id: WoodTrimThinLineS
+            color: '#FFFFFFFF'
+          decals:
+          - -36,19
+        - node:
+            id: Arrows
+            color: '#FFFFFFFF'
+            angle: 4.71238898038469 rad
+          decals:
+          - -14,10
+        - node:
+            id: Arrows
+            color: '#FFFFFFFF'
+            angle: 6.283185307179586 rad
+          decals:
+          - -11,7
+          - -11,9
+        - node:
+            id: BrickTileDarkCornerNw
+            color: '#DE3A3A96'
+          decals:
+          - -2,14
+        - node:
+            id: BrickTileDarkCornerSw
+            color: '#DE3A3A96'
+          decals:
+          - -2,12
+        - node:
+            id: BrickTileDarkInnerSe
+            color: '#FFFFFFFF'
+          decals:
+          - -11,20
+          - 51,-28
+          - 52,-27
+        - node:
+            id: BrickTileDarkLineN
+            color: '#DE3A3A96'
+          decals:
+          - -1,14
+        - node:
+            id: BrickTileDarkLineS
+            color: '#DE3A3A96'
+          decals:
+          - -1,12
+        - node:
+            id: BrickTileDarkLineS
+            color: '#FFFFFFFF'
+          decals:
+          - -10,20
+          - -9,20
+          - -8,20
+          - 48,-29
+          - 50,-29
+        - node:
+            id: BrickTileDarkLineW
+            color: '#DE3A3A96'
+          decals:
+          - -2,13
+        - node:
+            zIndex: 2
+            id: BrickTileSteelLineE
+            color: '#FFFFFFFF'
+          decals:
+          - -7,12
+          - -7,14
+          - -7,16
+        - node:
+            zIndex: 2
+            id: BrickTileSteelLineW
+            color: '#FFFFFFFF'
+          decals:
+          - -9,12
+          - -9,14
+          - -9,16
+        - node:
+            id: DirtHeavy
+            color: '#FFFFFFFF'
+          decals:
+          - -26,37
+          - -17,11
+        - node:
+            zIndex: 2
+            id: DirtHeavy
+            color: '#FFFFFFFF'
+            cleanable: True
+          decals:
+          - -20,9
+          - -20,10
+          - -18,9
+        - node:
+            zIndex: 2
+            id: DirtHeavyMonotile
+            color: '#FFFFFFFF'
+            cleanable: True
+          decals:
+          - -20,8
+        - node:
+            id: DirtLight
+            color: '#FFFFFFFF'
+          decals:
+          - -25,41
+          - -20,40
+          - -18,10
+          - -18,38
+          - -17,9
+          - -16,39
+          - -15,38
+          - -12,37
+        - node:
+            zIndex: 2
+            id: DirtLight
+            color: '#FFFFFFFF'
+            cleanable: True
+          decals:
+          - -19,9
+        - node:
+            id: DirtMedium
+            color: '#FFFFFFFF'
+          decals:
+          - -19,42
+          - -17,10
+        - node:
+            zIndex: 2
+            id: DirtMedium
+            color: '#FFFFFFFF'
+            cleanable: True
+          decals:
+          - -19,8
+          - -19,10
+        - node:
+            id: HalfTileOverlayGreyscale180
+            color: '#DE3A3A96'
+          decals:
+          - -15,13
+          - -14,10
+          - -14,13
+          - -13,10
+          - -13,13
+          - -12,10
+          - -11,10
+          - -10,10
+          - -9,10
+          - -8,10
+          - -7,10
+        - node:
+            id: HalfTileOverlayGreyscale270
+            color: '#DE3A3A96'
+          decals:
+          - -10,12
+          - -10,13
+          - -10,14
+          - -10,15
+          - -10,16
+          - -10,17
+          - -6,6
+          - -6,7
+          - -6,8
+          - -6,9
+        - node:
+            id: HalfTileOverlayGreyscale90
+            color: '#DE3A3A96'
+          decals:
+          - -12,13
+          - -12,14
+          - -12,15
+          - -12,16
+          - -5,6
+          - -5,7
+          - -5,8
+          - -5,9
+          - -4,11
+          - -4,12
+          - -4,13
+          - -4,14
+        - node:
+            id: LoadingArea
+            color: '#FFFFFFFF'
+          decals:
+          - -11,5
+        - node:
+            id: MiniTileSteelCornerNe
+            color: '#FFFFFFFF'
+          decals:
+          - -16,11
+          - -13,8
+        - node:
+            id: MiniTileSteelCornerNw
+            color: '#FFFFFFFF'
+          decals:
+          - -20,10
+          - -18,11
+        - node:
+            id: MiniTileSteelCornerSe
+            color: '#FFFFFFFF'
+          decals:
+          - -13,7
+        - node:
+            id: MiniTileSteelCornerSw
+            color: '#FFFFFFFF'
+          decals:
+          - -20,8
+          - -18,7
+        - node:
+            id: MiniTileSteelInnerNe
+            color: '#FFFFFFFF'
+          decals:
+          - -16,8
+        - node:
+            id: MiniTileSteelInnerNw
+            color: '#FFFFFFFF'
+          decals:
+          - -18,10
+        - node:
+            id: MiniTileSteelInnerSw
+            color: '#FFFFFFFF'
+          decals:
+          - -18,8
+        - node:
+            id: MiniTileSteelLineE
+            color: '#FFFFFFFF'
+          decals:
+          - -16,9
+          - -16,10
+        - node:
+            id: MiniTileSteelLineN
+            color: '#FFFFFFFF'
+          decals:
+          - -19,10
+          - -17,11
+          - -15,8
+          - -14,8
+        - node:
+            id: MiniTileSteelLineS
+            color: '#FFFFFFFF'
+          decals:
+          - -19,8
+          - -17,7
+          - -16,7
+          - -15,7
+          - -15,7
+          - -14,7
+        - node:
+            id: MiniTileSteelLineW
+            color: '#FFFFFFFF'
+          decals:
+          - -20,9
+        - node:
+            id: QuarterTileOverlayGreyscale180
+            color: '#DE3A3A96'
+          decals:
+          - -5,10
+        - node:
+            id: QuarterTileOverlayGreyscale270
+            color: '#DE3A3A96'
+          decals:
+          - -14,11
+          - -12,13
+          - -6,10
+        - node:
+            id: QuarterTileOverlayGreyscale90
+            color: '#DE3A3A96'
+          decals:
+          - -19,5
+          - -5,5
+        - node:
+            id: ThreeQuarterTileOverlayGreyscale180
+            color: '#DE3A3A96'
+          decals:
+          - -4,10
+        - node:
+            id: WarnBox
+            color: '#FFFFFFFF'
+          decals:
+          - -26,24
+        - node:
+            id: WarningLine
+            color: '#FFFFFFFF'
+            angle: 1.5707963267948966 rad
+          decals:
+          - -1,16
+          - -1,17
+          - -1,18
+          - 53,1
+          - 53,2
+          - 53,3
+          - 60,0
+          - 60,1
+          - 60,2
+          - 60,3
+          - 60,4
+        - node:
+            id: WoodTrimThinEndW
+            color: '#FFFFFFFF'
+          decals:
+          - -5,29
+        - node:
+            id: WoodTrimThinInnerNw
+            color: '#FFFFFFFF'
+          decals:
+          - -4,29
+        - node:
+            id: WoodTrimThinInnerSw
+            color: '#FFFFFFFF'
+          decals:
+          - -4,29
         - node:
             id: Arrows
             color: '#FFFFFFFF'
@@ -2580,380 +2954,6 @@ entities:
           - 5,-36
           - 39,12
         - node:
-            id: Arrows
-            color: '#FFFFFFFF'
-            angle: 4.71238898038469 rad
-          decals:
-          - -14,10
-        - node:
-            id: Arrows
-            color: '#FFFFFFFF'
-            angle: 6.283185307179586 rad
-          decals:
-          - -11,7
-          - -11,9
-        - node:
-            id: BrickTileDarkCornerNw
-            color: '#DE3A3A96'
-          decals:
-          - -2,14
-        - node:
-            id: BrickTileDarkCornerSw
-            color: '#DE3A3A96'
-          decals:
-          - -2,12
-        - node:
-            id: BrickTileDarkInnerSe
-            color: '#FFFFFFFF'
-          decals:
-          - -11,20
-          - 51,-28
-          - 52,-27
-        - node:
-            id: BrickTileDarkLineN
-            color: '#DE3A3A96'
-          decals:
-          - -1,14
-        - node:
-            id: BrickTileDarkLineS
-            color: '#DE3A3A96'
-          decals:
-          - -1,12
-        - node:
-            id: BrickTileDarkLineS
-            color: '#FFFFFFFF'
-          decals:
-          - -10,20
-          - -9,20
-          - -8,20
-          - 48,-29
-          - 50,-29
-        - node:
-            id: BrickTileDarkLineW
-            color: '#DE3A3A96'
-          decals:
-          - -2,13
-        - node:
-            zIndex: 2
-            id: BrickTileSteelLineE
-            color: '#FFFFFFFF'
-          decals:
-          - -7,12
-          - -7,14
-          - -7,16
-        - node:
-            zIndex: 2
-            id: BrickTileSteelLineW
-            color: '#FFFFFFFF'
-          decals:
-          - -9,12
-          - -9,14
-          - -9,16
-        - node:
-            id: DirtHeavy
-            color: '#FFFFFFFF'
-          decals:
-          - -26,37
-          - -17,11
-        - node:
-            zIndex: 2
-            id: DirtHeavy
-            color: '#FFFFFFFF'
-            cleanable: True
-          decals:
-          - -20,10
-          - -20,9
-          - -18,9
-        - node:
-            zIndex: 2
-            id: DirtHeavyMonotile
-            color: '#FFFFFFFF'
-            cleanable: True
-          decals:
-          - -20,8
-        - node:
-            id: DirtLight
-            color: '#FFFFFFFF'
-          decals:
-          - -25,41
-          - -20,40
-          - -18,10
-          - -18,38
-          - -17,9
-          - -16,39
-          - -15,38
-          - -12,37
-        - node:
-            zIndex: 2
-            id: DirtLight
-            color: '#FFFFFFFF'
-            cleanable: True
-          decals:
-          - -19,9
-        - node:
-            id: DirtMedium
-            color: '#FFFFFFFF'
-          decals:
-          - -19,42
-          - -17,10
-        - node:
-            zIndex: 2
-            id: DirtMedium
-            color: '#FFFFFFFF'
-            cleanable: True
-          decals:
-          - -19,10
-          - -19,8
-        - node:
-            id: HalfTileOverlayGreyscale180
-            color: '#DE3A3A96'
-          decals:
-          - -15,13
-          - -14,10
-          - -14,13
-          - -13,10
-          - -13,13
-          - -12,10
-          - -11,10
-          - -10,10
-          - -9,10
-          - -8,10
-          - -7,10
-        - node:
-            id: HalfTileOverlayGreyscale270
-            color: '#DE3A3A96'
-          decals:
-          - -10,12
-          - -10,13
-          - -10,14
-          - -10,15
-          - -10,16
-          - -10,17
-          - -6,7
-          - -6,8
-          - -6,6
-          - -6,9
-        - node:
-            id: HalfTileOverlayGreyscale90
-            color: '#DE3A3A96'
-          decals:
-          - -12,13
-          - -12,14
-          - -12,15
-          - -12,16
-          - -5,6
-          - -5,7
-          - -5,8
-          - -5,9
-          - -4,14
-          - -4,13
-          - -4,12
-          - -4,11
-        - node:
-            id: LoadingArea
-            color: '#FFFFFFFF'
-          decals:
-          - -11,5
-        - node:
-            id: MiniTileSteelCornerNe
-            color: '#FFFFFFFF'
-          decals:
-          - -16,11
-          - -13,8
-        - node:
-            id: MiniTileSteelCornerNw
-            color: '#FFFFFFFF'
-          decals:
-          - -20,10
-          - -18,11
-        - node:
-            id: MiniTileSteelCornerSe
-            color: '#FFFFFFFF'
-          decals:
-          - -13,7
-        - node:
-            id: MiniTileSteelCornerSw
-            color: '#FFFFFFFF'
-          decals:
-          - -20,8
-          - -18,7
-        - node:
-            id: MiniTileSteelInnerNe
-            color: '#FFFFFFFF'
-          decals:
-          - -16,8
-        - node:
-            id: MiniTileSteelInnerNw
-            color: '#FFFFFFFF'
-          decals:
-          - -18,10
-        - node:
-            id: MiniTileSteelInnerSw
-            color: '#FFFFFFFF'
-          decals:
-          - -18,8
-        - node:
-            id: MiniTileSteelLineE
-            color: '#FFFFFFFF'
-          decals:
-          - -16,10
-          - -16,9
-        - node:
-            id: MiniTileSteelLineN
-            color: '#FFFFFFFF'
-          decals:
-          - -19,10
-          - -17,11
-          - -15,8
-          - -14,8
-        - node:
-            id: MiniTileSteelLineS
-            color: '#FFFFFFFF'
-          decals:
-          - -19,8
-          - -17,7
-          - -16,7
-          - -15,7
-          - -15,7
-          - -14,7
-        - node:
-            id: MiniTileSteelLineW
-            color: '#FFFFFFFF'
-          decals:
-          - -20,9
-        - node:
-            id: QuarterTileOverlayGreyscale180
-            color: '#DE3A3A96'
-          decals:
-          - -5,10
-        - node:
-            id: QuarterTileOverlayGreyscale270
-            color: '#DE3A3A96'
-          decals:
-          - -14,11
-          - -12,13
-          - -6,10
-        - node:
-            id: QuarterTileOverlayGreyscale90
-            color: '#DE3A3A96'
-          decals:
-          - -19,5
-          - -5,5
-        - node:
-            id: ThreeQuarterTileOverlayGreyscale180
-            color: '#DE3A3A96'
-          decals:
-          - -4,10
-        - node:
-            id: WarnBox
-            color: '#FFFFFFFF'
-          decals:
-          - -26,24
-        - node:
-            id: WarningLine
-            color: '#FFFFFFFF'
-            angle: 1.5707963267948966 rad
-          decals:
-          - -1,16
-          - -1,17
-          - -1,18
-          - 53,1
-          - 53,2
-          - 53,3
-          - 60,0
-          - 60,1
-          - 60,2
-          - 60,3
-          - 60,4
-        - node:
-            id: WoodTrimThinEndW
-            color: '#FFFFFFFF'
-          decals:
-          - -5,29
-        - node:
-            id: WoodTrimThinInnerNw
-            color: '#FFFFFFFF'
-          decals:
-          - -4,29
-        - node:
-            id: WoodTrimThinInnerSw
-            color: '#FFFFFFFF'
-          decals:
-          - -4,29
-        - node:
-            id: CheckerNWSE
-            color: '#D4D4D428'
-          decals:
-          - -40,4
-          - -40,5
-          - -40,6
-          - -37,0
-          - -37,1
-          - -37,2
-          - -37,8
-          - -37,9
-          - -37,10
-          - -37,-8
-          - -37,-7
-          - -37,-6
-          - -37,-5
-          - -36,4
-          - -36,5
-          - -36,6
-        - node:
-            id: QuarterTileOverlayGreyscale
-            color: '#D4D4D428'
-          decals:
-          - -40,3
-          - -39,3
-          - -38,3
-          - -37,3
-          - -36,3
-        - node:
-            id: QuarterTileOverlayGreyscale180
-            color: '#D4D4D428'
-          decals:
-          - -40,7
-          - -39,7
-          - -38,7
-          - -37,7
-          - -36,7
-        - node:
-            id: WarningLine
-            color: '#FFFFFFFF'
-            angle: -1.5707963267948966 rad
-          decals:
-          - -40,0
-          - -40,1
-          - -40,2
-          - -40,8
-          - -40,9
-          - -40,10
-        - node:
-            id: WarningLineCorner
-            color: '#FFFFFFFF'
-            angle: -1.5707963267948966 rad
-          decals:
-          - -40,3
-        - node:
-            id: WarningLineCornerFlipped
-            color: '#FFFFFFFF'
-            angle: -1.5707963267948966 rad
-          decals:
-          - -40,7
-        - node:
-            zIndex: 2
-            id: WoodTrimThinCornerSw
-            color: '#FFFFFFFF'
-          decals:
-          - -37,19
-        - node:
-            zIndex: 2
-            id: WoodTrimThinLineS
-            color: '#FFFFFFFF'
-          decals:
-          - -36,19
-        - node:
             id: BrickTileDarkCornerNe
             color: '#FFFFFFFF'
           decals:
@@ -3011,8 +3011,8 @@ entities:
             color: '#FFFFFFFF'
           decals:
           - 0,-25
-          - 53,-24
           - 53,-26
+          - 53,-24
         - node:
             id: BrickTileWhiteEndE
             color: '#52B4E996'
@@ -3324,8 +3324,8 @@ entities:
             id: BrickTileSteelLineE
             color: '#D381C9FF'
           decals:
-          - 0,-27
           - 0,-28
+          - 0,-27
         - node:
             zIndex: 2
             id: BrickTileWhiteCornerSw
@@ -3406,12 +3406,12 @@ entities:
             id: FullTileOverlayGreyscale
             color: '#52B4E996'
           decals:
-          - 9,-7
           - 9,-10
-          - 10,-7
+          - 9,-7
+          - 10,-11
           - 10,-10
           - 10,-9
-          - 10,-11
+          - 10,-7
           - 11,-10
           - 13,-7
         - node:
@@ -3447,12 +3447,12 @@ entities:
           - 6,-6
           - 7,-6
           - 8,-6
-          - 9,-6
           - 9,-12
-          - 10,-6
+          - 9,-6
           - 10,-12
-          - 11,-6
+          - 10,-6
           - 11,-12
+          - 11,-6
           - 15,-12
           - 16,-12
         - node:
@@ -3463,12 +3463,12 @@ entities:
           - 6,-11
           - 6,-9
           - 6,-8
-          - 14,-6
-          - 14,-7
-          - 14,-8
-          - 14,-9
-          - 14,-10
           - 14,-11
+          - 14,-10
+          - 14,-9
+          - 14,-8
+          - 14,-7
+          - 14,-6
         - node:
             id: HalfTileOverlayGreyscale270
             color: '#D381C996'
@@ -3557,6 +3557,17 @@ entities:
           decals:
           - 17.78125,-22.541683
         - node:
+            id: MiniTileSteelCornerSw
+            color: '#BE6BC3FF'
+          decals:
+          - -8,-36
+          - -3,-37
+        - node:
+            id: MiniTileSteelInnerSw
+            color: '#BE6BC3FF'
+          decals:
+          - -3,-36
+        - node:
             zIndex: 1
             id: BrickTileSteelEndE
             color: '#FFFFFFFF'
@@ -3639,17 +3650,6 @@ entities:
           decals:
           - -43,-4
         - node:
-            id: MiniTileSteelCornerSw
-            color: '#BE6BC3FF'
-          decals:
-          - -8,-36
-          - -3,-37
-        - node:
-            id: MiniTileSteelInnerSw
-            color: '#BE6BC3FF'
-          decals:
-          - -3,-36
-        - node:
             id: BrickTileSteelLineS
             color: '#FFFFFFFF'
           decals:
@@ -3694,10 +3694,10 @@ entities:
           - -16,37
           - -16,38
           - -16,42
-          - -15,42
           - -15,37
-          - -14,42
+          - -15,42
           - -14,41
+          - -14,42
           - -13,38
           - -13,41
         - node:
