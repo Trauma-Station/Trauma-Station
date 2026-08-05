@@ -12757,3 +12757,10 @@ Entries:
   id: 1396
   time: '2026-08-05T06:16:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3959
+- author: Kenkaitos
+  changes:
+  - type: Fix
+    message: Fixed slime not being able to move after being starved
+  id: 1397
+  time: '2026-08-05T07:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3957
