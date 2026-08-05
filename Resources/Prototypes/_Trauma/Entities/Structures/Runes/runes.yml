@@ -209,6 +209,7 @@
     - MajorAngelHuman
     - MajorAngelLizard
     - MajorAngelMoth
+    - MajorAngelSaturn
 
 - type: entity
   parent: BaseCarvedRune

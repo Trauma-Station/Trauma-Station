@@ -676,7 +676,7 @@
   parent: BaseDemon
   id: MediumDemonMindflayer
   name: mindflayer
-  description: A primordial beast, it's kin have existed since the dawn of hell. Barely intelligent, it uses inate psychic abilities to feed on the intellect of its prey.
+  description: A primordial beast, it's kin have existed since the dawn of Hell. Barely intelligent, it uses inate psychic abilities to feed on the intellect of its prey.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/mindflayer.rsi
@@ -691,6 +691,7 @@
         Ion: 20
     altDisarm: true
     canWideSwing: false
+    attackRate: 0.2
   - type: Destructible
     thresholds:
     - trigger:
@@ -704,6 +705,18 @@
           DemonSoulFragment:
             min: 2
             max: 3
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 5
+  - type: MeleeChemicalInjector
+    transferAmount: 5
+    solution: melee
 
 - type: entity
   parent: BaseDemon
@@ -822,7 +835,7 @@
   parent: BaseDemon
   id: MajorAngelHuman
   name: Aspect of Greed
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one is a bit on the fat side.
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Aspect. Humans embody the aspect of Greed.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
@@ -832,31 +845,29 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
+        Caustic: 15
+        Blunt: 10
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 275
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 1
-            max: 3
-  - type: ActionGrant
-    actions:
-      - ActionDemonRift
+            min: 4
+            max: 5
 
 - type: entity
   parent: BaseDemon
   id: MajorAngelLizard
   name: Aspect of Savagery
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one seems stronger.
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Lizards embody the aspect of Savagery.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
@@ -866,31 +877,42 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 17
+        Slash: 20
+    animation: WeaponArcSlash
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 400
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 1
-            max: 3
-  - type: ActionGrant
-    actions:
-      - ActionDemonRift
+            min: 4
+            max: 5
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Impedrezene
+        Quantity: 2
+  - type: MeleeChemicalInjector
+    transferAmount: 2
+    solution: melee
+
 
 - type: entity
   parent: BaseDemon
   id: MajorAngelMoth
   name: Aspect of Madness
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell.
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Moths embody the aspect of Madness.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
@@ -900,9 +922,10 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
-    altDisarm: true
-    canWideSwing: false
+        Piercing: 10
+    altDisarm: false
+    canWideSwing: true
+    attackRate: 3
   - type: Destructible
     thresholds:
     - trigger:
@@ -914,11 +937,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 1
-            max: 3
-  - type: ActionGrant
-    actions:
-    - ActionDemonRift
+            min: 4
+            max: 5
 
 - type: entity
   parent: BaseDemon
@@ -1215,7 +1235,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Cold: 13
+        Cold: 15
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -1240,3 +1260,36 @@
         hard: false
         mask:
         - Opaque
+
+- type: entity
+  parent: BaseDemon
+  id: MajorDemonSaturn
+  name: saturnite
+  description: Many demonologists perform rituals to give themselves stronger physical forms, saturnites form when said rituals go terribly wrong.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/saturn.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 15
+        Slash: 15
+    animation: WeaponArcBite
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 4
+            max: 5
