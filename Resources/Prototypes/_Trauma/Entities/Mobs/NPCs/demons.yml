@@ -691,7 +691,7 @@
         Ion: 20
     altDisarm: true
     canWideSwing: false
-    attackRate: 0.2
+    attackRate: 0.5
   - type: Destructible
     thresholds:
     - trigger:
