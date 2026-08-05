@@ -21,3 +21,24 @@
   - type: EntityTargetAction
     canTargetSelf: false
     event: !type:CombustionSpellEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodBoil
+  name: Blood Boil
+  description: Boil the target's blood.
+  components:
+  - type: Action
+    useDelay: 15
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/fireball.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: spell_default
+  - type: TargetAction
+    range: 10
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    event: !type:BloodBoilSpellEvent

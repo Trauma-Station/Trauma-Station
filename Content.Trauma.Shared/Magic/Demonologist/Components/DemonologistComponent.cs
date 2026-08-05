@@ -17,6 +17,12 @@ public sealed partial class DemonologistComponent : Component
     public EntProtoId BindApprenticeActionPrototype = "ActionBindApprentice";
 
     [DataField]
+    public EntProtoId BloodBoilActionPrototype = "ActionBloodBoil";
+
+    [DataField]
+    public EntityUid? BloodBoilAction;
+
+    [DataField]
     public EntityUid? CombustionAction;
 
     [DataField]

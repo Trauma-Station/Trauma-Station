@@ -12,6 +12,7 @@ using Content.Shared.Magic;
 using Content.Shared.PDA;
 using Content.Shared.Access.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.Temperature.Systems;
 using Content.Trauma.Shared.Magic.Demonologist.Components;
 using Content.Trauma.Shared.Magic.Demonologist.Events;
 
@@ -25,6 +26,7 @@ public sealed partial class DemonologistSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedMagicSystem _magic = default!;
     [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedTemperatureSystem _temperature = default!;
     [Dependency] private RoleSystem _roles = default!;
 
     [SubscribeLocalEvent]
@@ -32,6 +34,18 @@ public sealed partial class DemonologistSystem : EntitySystem
     {
         _actions.AddAction(ent, ref ent.Comp.CombustionAction, ent.Comp.CombustionActionPrototype);
         _actions.AddAction(ent, ref ent.Comp.BindApprenticeAction, ent.Comp.BindApprenticeActionPrototype);
+        _actions.AddAction(ent, ref ent.Comp.BloodBoilAction, ent.Comp.BloodBoilActionPrototype);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBloodBoil(BloodBoilSpellEvent args)
+    {
+        if (args.Handled || !_magic.PassesSpellPrerequisites(args.Action, args.Performer))
+            return;
+
+        _temperature.ChangeHeat(args.Target, 350000f, true);
+
+        args.Handled = true;
     }
 
     [SubscribeLocalEvent]
