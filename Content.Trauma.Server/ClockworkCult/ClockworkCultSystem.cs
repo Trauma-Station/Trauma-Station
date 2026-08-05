@@ -6,6 +6,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield;
 using Content.Shared.Popups;
+using Content.Shared.Speech.Components;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.ClockworkCult;
 using Content.Trauma.Shared.ClockworkCult.Components;
@@ -33,6 +34,7 @@ public sealed partial class ClockworkCultSystem : EntitySystem
 
     private void OnInit(Entity<ClockworkCultComponent> ent, ref ComponentInit args)
     {
+        EnsureComp<RatvarianLanguageComponent>(ent);
         ent.Comp.ConvertActionEntity = _actions.AddAction(ent, ent.Comp.ConvertAction);
         Dirty(ent);
     }
