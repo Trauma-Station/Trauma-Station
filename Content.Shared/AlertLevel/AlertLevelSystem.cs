@@ -172,7 +172,7 @@ public sealed partial class AlertLevelSystem : EntitySystem
             ("announcement", AlertLevelAnnouncement(prototype)));
 
         var ev = new AlertLevelChangedEvent(station, level);
-        RaiseLocalEvent(ref ev);
+        RaiseLocalEvent(station, ref ev, true); // Trauma - raise it on the station as well as broadcast
 
         if (_net.IsClient)
             return;

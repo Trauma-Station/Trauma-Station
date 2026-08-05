@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.AlertLevel;
-// </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.AlertLevel;
@@ -26,6 +23,7 @@ public sealed partial class CommunicationsConsoleBoundUserInterface(EntityUid ow
         base.Open();
 
         _menu = this.CreateWindow<CommunicationsConsoleMenu>();
+        _menu.AlertLevel = _alertLevel; // Trauma
         _menu.OnAnnounce += AnnounceButtonPressed;
         _menu.OnBroadcast += BroadcastButtonPressed;
         _menu.OnAlertLevel += AlertLevelSelected;
@@ -91,10 +89,7 @@ public sealed partial class CommunicationsConsoleBoundUserInterface(EntityUid ow
         if (_menu != null)
         {
             // <Trauma>
-            var ev = new CheckAlertLevelLockEvent();
-            EntMan.EventBus.RaiseLocalEvent(stationUid.Value, ref ev);
-            _menu.NextUnlock = ev.NextUnlock;
-            _menu.LockedLevel = ev.LockedLevel;
+            _menu.Station = stationUid.Value;
             _menu.UpdateUnlock();
             // </Trauma>
             _menu.CanAnnounce = commsState.CanAnnounce;
