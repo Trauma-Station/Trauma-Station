@@ -23,7 +23,7 @@
       Starving: 0.2
       Dead: 0.1
     baseDecayRate: 0.5
-    starvingSlowdownModifier: 0
+    starvingSlowdownModifier: 0.5 # Let them move
   - type: Sprite
     noRot: true
     drawdepth: OverMobs
