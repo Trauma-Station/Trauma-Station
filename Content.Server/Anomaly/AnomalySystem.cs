@@ -1,3 +1,6 @@
+//<Trauma>
+using Content.Server.Pinpointer;
+//</Trauma
 using Content.Server.Anomaly.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Audio;
@@ -38,6 +41,10 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
     [Dependency] private RadiationSystem _radiation = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+
+    //<Trauma>
+    [Dependency] private NavMapSystem _navmap = default!;
+    //</Trauma>
 
     public const float MinParticleVariation = 0.8f;
     public const float MaxParticleVariation = 1.2f;

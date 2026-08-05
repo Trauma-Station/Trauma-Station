@@ -33,6 +33,8 @@ public sealed partial class AnomalySystem
         args.PushText(component.Anomaly == null
             ? Loc.GetString("anomaly-vessel-component-not-assigned")
             : Loc.GetString("anomaly-vessel-component-assigned"));
+
+        args.PushText(component.BeaconLocation ?? Loc.GetString("anomaly-beacon-unknown"), -1); // Trauma
     }
 
     private void OnVesselShutdown(EntityUid uid, AnomalyVesselComponent component, ComponentShutdown args)
@@ -63,10 +65,15 @@ public sealed partial class AnomalySystem
         if (!TryComp<AnomalyComponent>(anomaly, out var anomalyComponent) || anomalyComponent.ConnectedVessel != null)
             return;
 
+        // <Trauma>
+        var beacon = _navmap.GetNearestBeaconString(_transform.GetMapCoordinates(scanner.ScannedAnomaly.Value), true);
+        component.BeaconLocation = Loc.GetString("anomaly-beacon-location", ("location", beacon));
+        // </Trauma>
+
         component.Anomaly = scanner.ScannedAnomaly;
         anomalyComponent.ConnectedVessel = uid;
         _radiation.SetSourceEnabled(uid, true);
-        UpdateVesselAppearance(uid,  component);
+        UpdateVesselAppearance(uid, component);
         Popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), uid);
     }
 
