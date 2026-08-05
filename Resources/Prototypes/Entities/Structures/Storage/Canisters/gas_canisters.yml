@@ -101,7 +101,7 @@
     damageContainer: Inorganic
   - type: Physics
     bodyType: Dynamic
-  - type: eFixtures
+  - type: Fixtures
     fixtures:
       fix1:
         shape:
