@@ -11,6 +11,9 @@
     },
     "states": [
         {
+            "name": "jiggle_0"
+        },
+        {
             "name": "jiggle_1"
         },
         {

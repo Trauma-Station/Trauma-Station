@@ -41,20 +41,14 @@ public sealed partial class JigglePhysicsComponent : Component
     public string DisplacementPrefix = "jiggle_";
 
     /// <summary>
-    /// Number of displacements there are for positive and negative momentum each.
+    /// Number of displacements there are for zero, positive and negative momentum each.
     /// Higher number means higher fidelity as momentum changes
     /// </summary>
     /// <example>
-    /// For count of 3, the states end with 1, 2, 3, -1, -2, -3
+    /// For count of 3, the states end with 1, 2, 3, 0, -1, -2, -3
     /// </example>
     [DataField(required: true), AutoNetworkedField]
     public int DisplacementCount;
-
-    /// <summary>
-    /// The sprite layer to apply displacements to.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public Enum LayerKey = JigglePhysicsVisuals.Layer;
 }
 
 [Serializable, NetSerializable]

@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.DisplacementMap;
+using Content.Shared.DisplacementMap;
 using Content.Trauma.Shared.Physics;
 using Robust.Shared.Physics.Components;
 
@@ -10,20 +12,12 @@ namespace Content.Trauma.Client.Physics;
 /// </summary>
 public sealed partial class JigglePhysicsSystem : EntitySystem
 {
+    [Dependency] private DisplacementMapSystem _displacement = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<JigglePhysicsVisualsComponent> _visualsQuery = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
-    private static readonly ProtoId<ShaderPrototype> DisplacedDraw = "DisplacedDraw";
-
-    private ShaderInstance _shader = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _shader = ProtoMan.Index(DisplacedDraw).Instance();
-    }
+    private DisplacementData _data = new();
 
     [SubscribeLocalEvent]
     private void OnStartup(Entity<JigglePhysicsComponent> ent, ref ComponentStartup args)
@@ -31,19 +25,18 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         if (!_spriteQuery.TryComp(ent, out var sprite))
             return;
 
-        var vis = EnsureComp<JigglePhysicsVisualsComponent>(ent);
-        var state = ent.Comp.DisplacementPrefix + 1;
-        var index = _sprite.LayerMapGet((ent, sprite), ent.Comp.LayerKey);
-        _sprite.AddRsiLayer((ent, sprite), state, ent.Comp.DisplacementsRsi, index);
-        _sprite.TryGetLayer((ent, sprite), index, out var layer, true);
-        _sprite.LayerSetVisible(layer!, false);
-        sprite.LayerSetShader(index, _shader);
-        layer.CopyToShaderParameters = new(ent.Comp.LayerKey)
+        _data.SizeMaps[32] = new()
         {
-            ParameterTexture = "displacementMap",
-            ParameterUV = "displacementUV"
+            RsiPath = ent.Comp.DisplacementsRsi.ToString(),
+            State = ent.Comp.DisplacementPrefix + "0"
         };
-        vis.Layer = layer;
+        var index = _sprite.LayerMapReserve((ent, sprite), JigglePhysicsVisuals.Layer);
+        if (!_displacement.TryAddDisplacement(_data, (ent, sprite), index, JigglePhysicsVisuals.Layer, out var key))
+            return;
+
+        _sprite.TryGetLayer((ent, sprite), key, out var layer, true);
+        var vis = EnsureComp<JigglePhysicsVisualsComponent>(ent);
+        vis.Layer = layer!;
     }
 
     [SubscribeLocalEvent]
@@ -62,6 +55,7 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
             return;
 
         _sprite.RemoveLayer(ent.Owner, JigglePhysicsVisuals.Layer);
+        _displacement.EnsureDisplacementIsNotOnSprite(ent.Owner, JigglePhysicsVisuals.Layer);
         RemComp<JigglePhysicsVisualsComponent>(ent);
     }
 
@@ -106,12 +100,7 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         if (!_spriteQuery.TryComp(quiet, out var sprite))
             return;
 
-        var active = number != 0;
         var layer = quiet.Comp2.Layer;
-        _sprite.LayerSetVisible(layer, active);
-        if (!active)
-            return;
-
         var state = quiet.Comp1.DisplacementPrefix + number;
         _sprite.LayerSetRsiState(layer, state);
     }
