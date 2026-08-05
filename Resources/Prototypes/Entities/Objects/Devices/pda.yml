@@ -102,10 +102,6 @@
     singleUser: true
   - type: UserInterface
     interfaces:
-      # <Trauma>
-      enum.SpyUplinkUiKey.Key:
-        type: SpyUplinkBoundUserInterface
-      # </Trauma>
       enum.PdaUiKey.Key:
         type: PdaBoundUserInterface
       enum.StoreUiKey.Key:
@@ -1593,10 +1589,6 @@
     requireTag: WhitelistChameleonPDA
   - type: UserInterface
     interfaces:
-      # <Trauma>
-      enum.SpyUplinkUiKey.Key:
-        type: SpyUplinkBoundUserInterface
-      # </Trauma>
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
       enum.RingerUiKey.Key:

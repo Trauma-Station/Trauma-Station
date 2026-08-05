@@ -46,6 +46,12 @@ public sealed partial class SpyUplinkSystem : EntitySystem
     [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
 
     [SubscribeLocalEvent]
+    private void OnMapInit(Entity<SpyUplinkComponent> ent, ref MapInitEvent args)
+    {
+        _ui.SetUi(ent.Owner, SpyUplinkUiKey.Key, new InterfaceData("SpyUplinkBoundUserInterface"));
+    }
+
+    [SubscribeLocalEvent]
     private void OnAfterAutoHandleState(Entity<SpyRuleComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         RefreshUi();
@@ -101,8 +107,8 @@ public sealed partial class SpyUplinkSystem : EntitySystem
 
         var difficulty = ProtoMan.Index(protoId).Difficulty;
         var chanceToRemoveFromPool = ruleComp.ChancesToRemoveRewardFromPool[difficulty];
-        if (ProtoMan.HasIndex<SpyRewardPrototype>(reward) &&
-            ProtoMan.Index<SpyRewardPrototype>(reward).RemoveFromPoolChanceOverride is { } chance)
+        if (ProtoMan.TryIndex<SpyRewardPrototype>(reward, out var index) &&
+            index.RemoveFromPoolChanceOverride is { } chance)
             chanceToRemoveFromPool = chance;
 
         if (_random.Prob(Math.Clamp(chanceToRemoveFromPool, 0f, 1f)))
