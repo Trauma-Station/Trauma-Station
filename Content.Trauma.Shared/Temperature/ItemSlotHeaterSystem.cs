@@ -14,17 +14,7 @@ public sealed partial class ItemSlotHeaterSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private SharedTemperatureSystem _temp = default!;
-    [Dependency] private EntityQuery<TemperatureComponent> _temperatureQuery = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ItemSlotHeaterComponent, EntInsertedIntoContainerMessage>(OnInserted);
-        SubscribeLocalEvent<ItemSlotHeaterComponent, EntRemovedFromContainerMessage>(OnRemoved);
-
-        SubscribeLocalEvent<ItemSlotHeaterComponent, ExaminedEvent>(OnExamine);
-    }
+    [Dependency] private EntityQuery<TemperatureComponent> _tempQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -39,14 +29,14 @@ public sealed partial class ItemSlotHeaterSystem : EntitySystem
             if (_itemSlots.GetItemOrNull(uid, heat.Slot) is not {} item)
                 continue;
 
-            if (!_temperatureQuery.TryComp(item, out var temp))
+            if (!_tempQuery.TryComp(item, out var temp))
                 continue;
 
             // In order to support cooling, we must check if we are heating the entity or not.
             // If we are heating, then check if we are higher than the Max Temperature set,
             // otherwise check if we are below the Max Temperature (if we are cooling).
-            if ( ( heat.Temp >= 0 && temp.CurrentTemperature >= heat.MaxTemp )
-                || ( heat.Temp < 0 && temp.CurrentTemperature <= heat.MaxTemp ) )
+            if ( ( heat.Temp >= 0 && temp.Temperature >= heat.MaxTemp )
+                || ( heat.Temp < 0 && temp.Temperature <= heat.MaxTemp ) )
                 continue;
 
             _temp.ChangeHeat(item, heat.Temp);
@@ -56,6 +46,7 @@ public sealed partial class ItemSlotHeaterSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnInserted(Entity<ItemSlotHeaterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         // Required to not cause mispredicts
@@ -64,14 +55,15 @@ public sealed partial class ItemSlotHeaterSystem : EntitySystem
 
         // Only apply the component if we inserted it into the correct item slot
         if (!_itemSlots.TryGetSlot(ent.Owner, ent.Comp.Slot, out var itemSlot))
-                return;
+            return;
 
         if (itemSlot.Item is not { } item || args.Entity != item)
-                return;
+            return;
 
         EnsureComp<ActiveItemSlotHeaterComponent>(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoved(Entity<ItemSlotHeaterComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         // Required to not cause mispredicts
@@ -85,13 +77,15 @@ public sealed partial class ItemSlotHeaterSystem : EntitySystem
         RemCompDeferred<ActiveItemSlotHeaterComponent>(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<ItemSlotHeaterComponent> ent, ref ExaminedEvent args)
     {
-        if (_itemSlots.GetItemOrNull(ent.Owner, ent.Comp.Slot) is not { } item || !_temperatureQuery.TryComp(item, out var temp))
+        if (_itemSlots.GetItemOrNull(ent.Owner, ent.Comp.Slot) is not { } item || !_tempQuery.TryComp(item, out var temp))
             return;
 
-        // Mispredicts
-        args.PushMarkup(Loc.GetString("item-slot-heater-temp", ("temp", temp.CurrentTemperature.ToString("F1"))));
+        var temperature = temp.Temperature;
+        // Mispredicts but oh well
+        args.PushMarkup(Loc.GetString("item-slot-heater-temp", ("temp", temperature.ToString("F1"))));
     }
 
 }

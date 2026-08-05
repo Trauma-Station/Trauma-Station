@@ -6,11 +6,12 @@
   name: Thank Driver
   description: Show the driver you enjoy being a passenger
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Vehicles/clowncar.rsi
+    layers:
+    - state: clowncar
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Objects/Vehicles/clowncar.rsi
-      state: clowncar
     useDelay: 60
   - type: InstantAction
     event: !type:ThankRiderActionEvent
@@ -21,11 +22,12 @@
   name: Quiet back there
   description: Tell the passengers to be quiet
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Vehicles/clowncar.rsi
+    layers:
+    - state: clowncar
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Objects/Vehicles/clowncar.rsi
-      state: clowncar
     useDelay: 30
   - type: InstantAction
     event: !type:QuietBackThereActionEvent
@@ -36,11 +38,12 @@
   name: JukeBox
   description: Drive with music
   components:
+  - type: Sprite
+    sprite: Structures/Machines/jukebox.rsi
+    layers:
+    - state: on
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: Structures/Machines/jukebox.rsi
-      state: "on"
     useDelay: 1
   - type: InstantAction
     event: !type:DrivingWithStyleActionEvent

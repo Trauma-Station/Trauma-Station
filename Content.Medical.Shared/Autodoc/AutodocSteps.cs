@@ -155,7 +155,7 @@ public sealed partial class GrabAnyOrganAutodocStep : GrabAnyItemAutodocStep
 {
     public override EntityWhitelist Whitelist => new EntityWhitelist()
     {
-        Components = ["InternalOrgan"]
+        Components = ["InternalChildOrgan"]
     };
 
     public override LocId Name => "autodoc-item-organ";

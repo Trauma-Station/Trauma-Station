@@ -23,7 +23,7 @@
         Structural: -8
     ignoreResistances: true
     whitelist:
-      tags:
+      components:
       - Wall # TODO: more types of nails for different structures
   - type: MeleeWeapon
     canWideSwing: false # How can you swing a nail

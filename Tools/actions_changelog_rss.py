@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2024 Matt <psykzz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 
 #
 # Updates an RSS file on a remote server with updates to the changelog.
@@ -190,7 +184,7 @@ def generate_description_for_entries(entries: List[Any]) -> str:
         for entry in sorted(group, key=lambda x: x["time"]):
             for change in entry["changes"]:
                 emoji = TYPES_TO_EMOJI.get(change["type"], "")
-                if EXPERIMENTAL_LABEL in entry["labels"]
+                if EXPERIMENTAL_LABEL in entry["labels"]:
                     emoji = f"{emoji}{EXPERIMENTAL_EMOJI}"
                 msg = change["message"]
                 desc.write(f"<li>{emoji} {html.escape(msg)}</li>")

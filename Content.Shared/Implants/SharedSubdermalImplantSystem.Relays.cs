@@ -5,6 +5,7 @@ using Content.Shared.Chat;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mindshield;
 using Content.Shared.Mobs;
 using Content.Shared.Store;
 
@@ -19,10 +20,14 @@ public abstract partial class SharedSubdermalImplantSystem
         SubscribeLocalEvent<ImplantedComponent, TransformSpeakerNameEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, TransformSpeechEvent>(RelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, SeeIdentityAttemptEvent>(RelayToImplantEvent);
+        //SubscribeLocalEvent<ImplantedComponent, VoiceMaskToggledEvent>(RelayToImplantEvent); // Trauma - wasnt cherry picked
+        SubscribeLocalEvent<ImplantedComponent, FakeMindShieldToggleEvent>(RelayToImplantEvent);
 
         // Ref relays, for when you need to write to the event!
         SubscribeLocalEvent<ImplantedComponent, CurrencyInsertAttemptEvent>(RefRelayToImplantEvent);
         SubscribeLocalEvent<ImplantedComponent, GetStoreEvent>(RefRelayToImplantEvent);
+        SubscribeLocalEvent<ImplantedComponent, GetMindShieldStatusEvent>(RefRelayToImplantEvent, after: [typeof(MindShieldSystem)]);
+        SubscribeLocalEvent<ImplantedComponent, ChameleonControllerOutfitSelectedEvent>(RefRelayToImplantEvent);
     }
 
     /// <summary>

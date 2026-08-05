@@ -355,13 +355,13 @@
 
 - type: latheRecipe
   parent: BaseMaintTileRecipe
-  id: FloorTileItemTechmaintDark
-  result: FloorTileItemTechmaintDark
+  id: FloorTileItemSteelMaint
+  result: FloorTileItemSteelMaint
 
 - type: latheRecipe
   parent: BaseMaintTileRecipe
-  id: FloorTileItemSteelMaint
-  result: FloorTileItemSteelMaint
+  id: FloorTileItemTechmaintDark
+  result: FloorTileItemTechmaintDark
 
 # Industrial
 - type: latheRecipe
@@ -446,74 +446,41 @@
   parent: BaseConcreteTileRecipe
   id: FloorTileItemConcreteMono
   result: FloorTileItemConcreteMono
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemConcreteSmooth
   result: FloorTileItemConcreteSmooth
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemGrayConcrete
   result: FloorTileItemGrayConcrete
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemGrayConcreteMono
   result: FloorTileItemGrayConcreteMono
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemGrayConcreteSmooth
   result: FloorTileItemGrayConcreteSmooth
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemOldConcrete
   result: FloorTileItemOldConcrete
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemOldConcreteMono
   result: FloorTileItemOldConcreteMono
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 - type: latheRecipe
+  parent: BaseConcreteTileRecipe
   id: FloorTileItemOldConcreteSmooth
   result: FloorTileItemOldConcreteSmooth
-  applyMaterialDiscount: false
-  completetime: 0.5
-  materials:
-    Steel: 25
-    Plastic: 25
 
 # Faux
 - type: latheRecipe

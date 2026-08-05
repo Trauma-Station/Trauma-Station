@@ -9,11 +9,7 @@ namespace Content.Trauma.Shared.EntityEffects.Effects;
 /// <summary>
 /// Unbuckles everything buckled to the target entity.
 /// </summary>
-public sealed partial class UnbuckleStrapped : EntityEffectBase<UnbuckleStrapped>
-{
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // its just used for crucifying idc
-}
+public sealed partial class UnbuckleStrapped : EntityEffectBase<UnbuckleStrapped>;
 
 public sealed partial class UnbuckleStrappedEffectSystem : EntityEffectSystem<StrapComponent, UnbuckleStrapped>
 {
@@ -21,6 +17,6 @@ public sealed partial class UnbuckleStrappedEffectSystem : EntityEffectSystem<St
 
     protected override void Effect(Entity<StrapComponent> ent, ref EntityEffectEvent<UnbuckleStrapped> args)
     {
-        _buckle.StrapRemoveAll(ent, ent.Comp);
+        _buckle.StrapRemoveAll(ent);
     }
 }

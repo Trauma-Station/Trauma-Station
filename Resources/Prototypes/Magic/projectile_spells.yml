@@ -5,29 +5,31 @@
   description: Fires an explosive fireball towards the clicked location.
   components:
   - type: Magic
-    requiresSpeech: true # Goobstation
-    school: Explosion # Goobstation
-  - type: Sprite # Goobstation - for apprentices
-    sprite: _Goobstation/Wizard/actions.rsi
-    state: fireball
+    # <Trauma>
+    requiresSpeech: true
+    school: Explosion
+    # </Trauma>
   - type: Action
-    useDelay: 6
+    useDelay: 6 # Trauma - was 15
     itemIconStyle: BigAction
     raiseOnUser: true
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
-      state: fireball # Goob edit
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi # Trauma
+    layers:
+    - state: fireball
   - type: TargetAction
     range: 60
     checkCanAccess: false
-  - type: EntityTargetAction # Goobstation
+  # <Trauma>
+  - type: EntityTargetAction
     canTargetSelf: false
+  # </Trauma>
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
-      prototype: ProjectileFireball
       projectileSpeed: 20 # Trauma
+      prototype: ProjectileFireball
   - type: SpeakOnAction
     sentence: action-speech-spell-fireball
   - type: ActionUpgrade
@@ -42,7 +44,7 @@
   description: Fires a fireball, but faster!
   components:
   - type: Action
-    useDelay: 4
+    useDelay: 4 # Trauma - was 10
 
 - type: entity
   parent: ActionFireball
@@ -51,4 +53,4 @@
   description: The fastest fireball in the west!
   components:
   - type: Action
-    useDelay: 2
+    useDelay: 2 # Trauma - was 8

@@ -225,9 +225,8 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 5
       - !type:TakeStaminaDamage
         amount: -5
@@ -352,9 +351,8 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 1.5
       - !type:HealthChange
         damage:

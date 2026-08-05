@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  parent: BaseToolRecipe # kinda
+  id: Drone
+  result: Drone
+  completetime: 6
+  materials:
+    Steel: 1000
+    Glass: 500
+    Plastic: 500
