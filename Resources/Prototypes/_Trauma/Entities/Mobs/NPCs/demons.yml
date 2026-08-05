@@ -494,7 +494,7 @@
     transferAmount: 1
     solution: melee
 
-  - type: entity
+- type: entity
   parent: BaseDemon
   id: MinorDemonFlesh
   name: miserable flesh thing
