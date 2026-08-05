@@ -19,7 +19,7 @@ public sealed partial class CarvingKnifeComponent : Component
     public int MaxRuneAmount = 3;
 
     [DataField]
-    public TimeSpan RuneDrawTime = TimeSpan.FromSeconds(3f);
+    public TimeSpan RuneDrawTime = TimeSpan.FromSeconds(1f);
 
     [DataField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/sheath.ogg");

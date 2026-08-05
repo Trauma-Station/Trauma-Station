@@ -12750,3 +12750,28 @@ Entries:
   id: 1395
   time: '2026-08-04T23:00:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3942
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed heretic blades not acting as bonesaws or scalpels
+  id: 1396
+  time: '2026-08-05T06:16:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3959
+- author: Kenkaitos
+  changes:
+  - type: Fix
+    message: Fixed slime not being able to move after being starved
+  id: 1397
+  time: '2026-08-05T07:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3957
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix rust ascended heretics being immune to melee.
+  - type: Tweak
+    message: Carving knife draws runes 3x faster but they are much more visible.
+  - type: Fix
+    message: Fix rust construction not working.
+  id: 1398
+  time: '2026-08-05T11:29:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3960

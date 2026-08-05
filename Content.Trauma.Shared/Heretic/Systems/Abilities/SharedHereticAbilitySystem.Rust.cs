@@ -57,7 +57,7 @@ public abstract partial class SharedHereticAbilitySystem
     [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<RustbringerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled || args.Type is HarmfulActionType.Disarm or HarmfulActionType.Grab)
+        if (args.Cancelled || args.Type is not (HarmfulActionType.Disarm or HarmfulActionType.Grab))
             return;
 
         if (!IsOnRust(ent))
@@ -352,6 +352,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         var mapCoords = _transform.ToMapCoordinates(args.Target);
 
+        _lookupMobs.Clear();
         Lookup.GetEntitiesInRange(args.Target, args.MobCheckRange, _lookupMobs, LookupFlags.Dynamic);
         foreach (var (entity, _) in _lookupMobs)
         {
