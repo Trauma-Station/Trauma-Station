@@ -30,13 +30,17 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
             RsiPath = ent.Comp.DisplacementsRsi.ToString(),
             State = ent.Comp.DisplacementPrefix + "0"
         };
-        var index = _sprite.LayerMapReserve((ent, sprite), JigglePhysicsVisuals.Layer);
-        if (!_displacement.TryAddDisplacement(_data, (ent, sprite), index, JigglePhysicsVisuals.Layer, out var key))
-            return;
 
-        _sprite.TryGetLayer((ent, sprite), key, out var layer, true);
         var vis = EnsureComp<JigglePhysicsVisualsComponent>(ent);
-        vis.Layer = layer!;
+        foreach (var sourceKey in ent.Comp.Layers)
+        {
+            var index = _sprite.LayerMapReserve((ent, sprite), sourceKey);
+            if (!_displacement.TryAddDisplacement(_data, (ent, sprite), index, sourceKey, out var key))
+                continue;
+
+            if (_sprite.TryGetLayer((ent, sprite), key, out var layer, true))
+                vis.Layers.Add(layer.Value);
+        }
     }
 
     [SubscribeLocalEvent]
@@ -45,7 +49,10 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         if (!_visualsQuery.TryComp(ent, out var vis))
             return;
 
-        _sprite.LayerSetRsi(vis.Layer, ent.Comp.DisplacementsRsi);
+        foreach (var layer in vis.Layers)
+        {
+            _sprite.LayerSetRsi(layer, ent.Comp.DisplacementsRsi);
+        }
     }
 
     [SubscribeLocalEvent]
@@ -54,8 +61,10 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _sprite.RemoveLayer(ent.Owner, JigglePhysicsVisuals.Layer);
-        _displacement.EnsureDisplacementIsNotOnSprite(ent.Owner, JigglePhysicsVisuals.Layer);
+        foreach (var key in ent.Comp.Layers)
+        {
+            _displacement.EnsureDisplacementIsNotOnSprite(ent.Owner, key);
+        }
         RemComp<JigglePhysicsVisualsComponent>(ent);
     }
 
@@ -100,9 +109,11 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         if (!_spriteQuery.TryComp(quiet, out var sprite))
             return;
 
-        var layer = quiet.Comp2.Layer;
         var state = quiet.Comp1.DisplacementPrefix + number;
-        _sprite.LayerSetRsiState(layer, state);
+        foreach (var layer in quiet.Comp2.Layers)
+        {
+            _sprite.LayerSetRsiState(layer, state);
+        }
     }
 
     private int NextDisplacementNumber(JigglePhysicsComponent comp, float jiggle)

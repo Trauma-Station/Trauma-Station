@@ -49,10 +49,10 @@ public sealed partial class JigglePhysicsComponent : Component
     /// </example>
     [DataField(required: true), AutoNetworkedField]
     public int DisplacementCount;
-}
 
-[Serializable, NetSerializable]
-public enum JigglePhysicsVisuals : byte
-{
-    Layer
+    /// <summary>
+    /// All sprite layers to apply displacements to, if they exist.
+    /// </summary>
+    [DataField(required: true)]
+    public List<Enum> Layers = default!;
 }

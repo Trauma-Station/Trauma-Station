@@ -34,8 +34,8 @@ public sealed partial class JigglePhysicsVisualsComponent : Component
     public int DisplacementNumber;
 
     /// <summary>
-    /// The displacement layer added.
+    /// The displacement layers added.
     /// </summary>
     [ViewVariables]
-    public SpriteComponent.Layer Layer = default!;
+    public List<SpriteComponent.Layer> Layers = new();
 }

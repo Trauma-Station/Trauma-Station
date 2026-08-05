@@ -13,6 +13,8 @@
     springiness: 0.4
     jiggleLimit: 10
     displacementCount: 4
+    layers:
+    - enum.DamageStateVisualLayers.Base
   - type: ZombieImmune # xenobio II way too op
   - type: Hunger
     startingHunger: 40
@@ -34,7 +36,7 @@
     drawdepth: OverMobs
     sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
     layers:
-    - map: [ "enum.DamageStateVisualLayers.Base", "enum.JigglePhysicsVisuals.Layer" ]
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: base
   - type: DamageStateVisuals
     states:
@@ -172,7 +174,7 @@
     drawdepth: Mobs
     sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
     layers:
-    - map: [ "enum.DamageStateVisualLayers.Base", "enum.JigglePhysicsVisuals.Layer" ]
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: base
       color: "#FFFFFF"
   - type: JigglePhysics # fbi open up
