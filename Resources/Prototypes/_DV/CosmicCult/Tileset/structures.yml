@@ -181,8 +181,8 @@
     state: bed
 
 - type: entity
-  parent: Rack
-  id: [ CosmicRack, BaseCosmicCultStructure ]
+  parent: [ Rack, BaseCosmicCultStructure ]
+  id: CosmicRack
   name: corrupted rack
   description: An eerie rack for storing eerie things on.
   components:
