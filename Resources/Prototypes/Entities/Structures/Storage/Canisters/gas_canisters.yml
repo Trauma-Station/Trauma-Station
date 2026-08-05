@@ -101,7 +101,7 @@
     damageContainer: Inorganic
   - type: Physics
     bodyType: Dynamic
-  - type: Fixtures
+  - type: eFixtures
     fixtures:
       fix1:
         shape:
@@ -111,6 +111,7 @@
         mask:
         - SmallMobMask
         layer:
+        - HighImpassable # Trauma - prevent canisters phasing through glass/edge firelocks
         - MachineLayer
   - type: AtmosDevice
     requireAnchored: false
