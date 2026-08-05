@@ -3,6 +3,7 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Mind;
 using Content.Server.Roles;
+using Content.Shared.Actions;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Interaction.Components;
@@ -20,10 +21,18 @@ public sealed partial class DemonologistSystem : EntitySystem
 {
     [Dependency] private FlammableSystem _flammable = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedMagicSystem _magic = default!;
     [Dependency] private SharedStunSystem _stun = default!;
-    [Dependency] private MindSystem _mind = default!;
     [Dependency] private RoleSystem _roles = default!;
+
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<DemonologistComponent> ent, ref ComponentStartup args)
+    {
+        _actions.AddAction(ent, ref ent.Comp.CombustionAction, ent.Comp.CombustionActionPrototype);
+        _actions.AddAction(ent, ref ent.Comp.BindApprenticeAction, ent.Comp.BindApprenticeActionPrototype);
+    }
 
     [SubscribeLocalEvent]
     private void OnCombustion(CombustionSpellEvent args)
