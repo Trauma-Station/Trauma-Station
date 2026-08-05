@@ -237,7 +237,11 @@
     runningState: building
     unlitIdleState: unlit
     unlitRunningState: unlit-building
-    #staticPacks: - Goobstation - Move static recipes to autolathe
+    staticPacks:
+    # <Trauma>
+    - TraumaSpeechPro
+    # </Trauma>
+    # Goobstation - Move static recipes to autolathe
     #- ChemistryStatic
     #- SurgeryStatic
     dynamicPacks:
@@ -266,7 +270,6 @@
     # <Trauma>
     - BotanyTrauma
     - TraumaScienceClothing
-    - TraumaSpeechPro
     # </Trauma>
   - type: EmagLatheRecipes
     emagDynamicPacks:

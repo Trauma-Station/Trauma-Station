@@ -91,6 +91,7 @@
   maxLimit: 1 # Increase this limit in the future once there's more assistive items than just canes!
   loadouts:
   # <Trauma>
+  - SpeechPro
   - WhiteCane
   # </Trauma>
   - OffsetCane

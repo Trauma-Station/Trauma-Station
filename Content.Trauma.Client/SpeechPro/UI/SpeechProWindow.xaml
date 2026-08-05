@@ -2,8 +2,9 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<DefaultWindow xmlns="https://spacestation14.io"
-               xmlns:ui="clr-namespace:Content.Trauma.Client.SpeechPro.UI"
-               MinSize="320 260">
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="using:Content.Client.UserInterface.Controls"
+                      xmlns:ui="using:Content.Trauma.Client.SpeechPro.UI"
+                      MinSize="320 260">
     <ui:SpeechProUiFragment Name="SpeechProFragment" />
-</DefaultWindow>
+</controls:FancyWindow>

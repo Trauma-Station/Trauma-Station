@@ -16,18 +16,3 @@
   position: -4,7
   technologyPrerequisites:
   - MeatManipulation
-
-- type: technology
-  id: SpeechPro
-  name: research-technology-speech-synthesis
-  icon:
-    sprite: _Trauma/Objects/Devices/speech_pro.rsi
-    state: icon
-  discipline: CivilianServices
-  tier: 1
-  cost: 5000
-  recipeUnlocks:
-  - SpeechPro
-  position: 4,4
-  technologyPrerequisites:
-  - AccessibilityTech

@@ -185,7 +185,6 @@
     - ScienceEquipment
     - ScienceClothing
     - TraumaScienceClothing
-    - TraumaSpeechPro # Trauma
     - ScienceWeapons
     - AtmosTools
     - EngineeringWeapons
@@ -258,7 +257,6 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
-    - TraumaSpeechPro # Trauma
     - Translators
     - Janitor
     - Instruments

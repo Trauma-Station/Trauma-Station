@@ -29,10 +29,6 @@
     onUse: false
     verbToggleOn: speech-pro-verb-open
     verbToggleOff: speech-pro-verb-close
-    soundActivate:
-      path: /Audio/Machines/button.ogg
-      params:
-        variation: 0.125
     soundDeactivate:
       path: /Audio/Machines/button.ogg
       params:

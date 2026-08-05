@@ -1,0 +1,163 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: speechProPhraseGroup
+  id: SpeechProBasic
+  name: speech-pro-ui-section-basic
+  order: 0
+  phrases:
+  - SpeechProGreeting
+  - SpeechProFarewell
+  - SpeechProAffirmation
+  - SpeechProRejection
+  - SpeechProGratitude
+  - SpeechProApology
+  - SpeechProPleaseRepeat
+  - SpeechProSlower
+  - SpeechProExplanation
+
+- type: speechProPhraseGroup
+  id: SpeechProTourism
+  name: speech-pro-ui-section-tourism
+  order: 1
+  phrases:
+  - SpeechProPermission
+  - SpeechProTrade
+  - SpeechProFollow
+  - SpeechProWhereShuttle
+
+- type: speechProPhraseGroup
+  id: SpeechProAlerts
+  name: speech-pro-ui-section-alerts
+  order: 2
+  phrases:
+  - SpeechProCongratulations
+  - SpeechProApplaud
+  - SpeechProHarmless
+  - SpeechProDangerous
+  - SpeechProPanic
+  - SpeechProHungry
+  - SpeechProThirsty
+  - SpeechProAssistance
+  - SpeechProConfusion
+  - SpeechProWait
+  - SpeechProLost
+
+- type: speechProPhrase
+  id: SpeechProGreeting
+  button: speech-pro-button-greeting
+  message: speech-pro-phrase-greeting
+
+- type: speechProPhrase
+  id: SpeechProFarewell
+  button: speech-pro-button-farewell
+  message: speech-pro-phrase-farewell
+
+- type: speechProPhrase
+  id: SpeechProAffirmation
+  button: speech-pro-button-affirmation
+  message: speech-pro-phrase-affirmation
+
+- type: speechProPhrase
+  id: SpeechProRejection
+  button: speech-pro-button-rejection
+  message: speech-pro-phrase-rejection
+
+- type: speechProPhrase
+  id: SpeechProGratitude
+  button: speech-pro-button-gratitude
+  message: speech-pro-phrase-gratitude
+
+- type: speechProPhrase
+  id: SpeechProApology
+  button: speech-pro-button-apology
+  message: speech-pro-phrase-apology
+
+- type: speechProPhrase
+  id: SpeechProPleaseRepeat
+  button: speech-pro-button-please-repeat
+  message: speech-pro-phrase-please-repeat
+
+- type: speechProPhrase
+  id: SpeechProSlower
+  button: speech-pro-button-slower
+  message: speech-pro-phrase-slower
+
+- type: speechProPhrase
+  id: SpeechProExplanation
+  button: speech-pro-button-explanation
+  message: speech-pro-phrase-explanation
+
+- type: speechProPhrase
+  id: SpeechProPermission
+  button: speech-pro-button-permission
+  message: speech-pro-phrase-permission
+
+- type: speechProPhrase
+  id: SpeechProTrade
+  button: speech-pro-button-trade
+  message: speech-pro-phrase-trade
+
+- type: speechProPhrase
+  id: SpeechProFollow
+  button: speech-pro-button-follow
+  message: speech-pro-phrase-follow
+
+- type: speechProPhrase
+  id: SpeechProWhereShuttle
+  button: speech-pro-button-where-shuttle
+  message: speech-pro-phrase-where-shuttle
+
+- type: speechProPhrase
+  id: SpeechProCongratulations
+  button: speech-pro-button-congratulations
+  message: speech-pro-phrase-congratulations
+
+- type: speechProPhrase
+  id: SpeechProApplaud
+  button: speech-pro-button-applaud
+  message: speech-pro-phrase-applaud
+
+- type: speechProPhrase
+  id: SpeechProHarmless
+  button: speech-pro-button-harmless
+  message: speech-pro-phrase-harmless
+
+- type: speechProPhrase
+  id: SpeechProDangerous
+  button: speech-pro-button-dangerous
+  message: speech-pro-phrase-dangerous
+
+- type: speechProPhrase
+  id: SpeechProPanic
+  button: speech-pro-button-panic
+  message: speech-pro-phrase-panic
+
+- type: speechProPhrase
+  id: SpeechProHungry
+  button: speech-pro-button-hungry
+  message: speech-pro-phrase-hungry
+
+- type: speechProPhrase
+  id: SpeechProThirsty
+  button: speech-pro-button-thirsty
+  message: speech-pro-phrase-thirsty
+
+- type: speechProPhrase
+  id: SpeechProAssistance
+  button: speech-pro-button-assistance
+  message: speech-pro-phrase-assistance
+
+- type: speechProPhrase
+  id: SpeechProConfusion
+  button: speech-pro-button-confusion
+  message: speech-pro-phrase-confusion
+
+- type: speechProPhrase
+  id: SpeechProWait
+  button: speech-pro-button-wait
+  message: speech-pro-phrase-wait
+
+- type: speechProPhrase
+  id: SpeechProLost
+  button: speech-pro-button-lost
+  message: speech-pro-phrase-lost

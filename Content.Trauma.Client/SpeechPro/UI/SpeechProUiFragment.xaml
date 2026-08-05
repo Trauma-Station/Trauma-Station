@@ -2,7 +2,7 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<ui:SpeechProUiFragment xmlns:ui="clr-namespace:Content.Trauma.Client.SpeechPro.UI"
+<ui:SpeechProUiFragment xmlns:ui="using:Content.Trauma.Client.SpeechPro.UI"
                         xmlns="https://spacestation14.io"
                         Orientation="Vertical"
                         HorizontalExpand="True"
@@ -10,15 +10,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         Margin="2">
     <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
     <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
-        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 3">
-            <Label Text="{Loc 'speech-pro-ui-section-basic'}" StyleClasses="LabelSubText" Margin="2 0 2 1" />
-            <GridContainer Name="BasicGrid" Columns="3" HorizontalExpand="True" />
-
-            <Label Text="{Loc 'speech-pro-ui-section-tourism'}" StyleClasses="LabelSubText" Margin="2 5 2 1" />
-            <GridContainer Name="TourismGrid" Columns="3" HorizontalExpand="True" />
-
-            <Label Text="{Loc 'speech-pro-ui-section-alerts'}" StyleClasses="LabelSubText" Margin="2 5 2 1" />
-            <GridContainer Name="AlertsGrid" Columns="3" HorizontalExpand="True" />
-        </BoxContainer>
+        <BoxContainer Name="GroupsContainer" Orientation="Vertical" HorizontalExpand="True" Margin="4 3" />
     </ScrollContainer>
 </ui:SpeechProUiFragment>
