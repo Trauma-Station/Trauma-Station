@@ -498,7 +498,7 @@
   parent: BaseDemon
   id: MinorDemonFlesh
   name: miserable flesh thing
-  description: A disgusting living mass of fat, muscle tissue, mucous and blood. The ritual must have failed somehow, and this wretched thing is the result.
+  description: A disgusting living mass of fat, muscle tissue, mucus and blood. The ritual must have failed somehow, and this wretched thing is the result.
   components:
   - type: Fixtures
     fixtures:
