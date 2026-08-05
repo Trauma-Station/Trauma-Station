@@ -12716,3 +12716,37 @@ Entries:
   id: 1391
   time: '2026-08-04T03:20:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Syndicate snack box no longer gives you gutworms.
+  id: 1392
+  time: '2026-08-04T20:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3948
+- author: tsarevichvanya
+  changes:
+  - type: Fix
+    message: Fixed xeno resin not slowing you down.
+  id: 1393
+  time: '2026-08-04T20:41:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3946
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed robust harvest and saltpeter not healing ballistic damage on dionae.
+  id: 1394
+  time: '2026-08-04T22:35:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3953
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Chickens only take 5 minutes to age from baby to adult now
+  - type: Tweak
+    message: Chickens ageing is no longer random
+  - type: Tweak
+    message: Happiness for each chicken when petted is now increased
+  - type: Tweak
+    message: Huger useable when laying an egg is decreased
+  id: 1395
+  time: '2026-08-04T23:00:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3942

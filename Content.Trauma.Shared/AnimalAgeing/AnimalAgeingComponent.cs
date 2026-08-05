@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.AnimalAgeing;
 public sealed partial class AnimalAgeingComponent : Component
 {
     [DataField]
-    public int AdultHoodYear = 15;
+    public int AdultHoodYear = 10;
 
     [DataField]
     public int SeniorHoodYear = 30;
@@ -21,16 +21,10 @@ public sealed partial class AnimalAgeingComponent : Component
     public int YearsOld;
 
     /// <summary>
-    ///     Minimum age time used.
+    /// The time to age up
     /// </summary>
     [DataField]
-    public float AgeTimeMin = 15f;
-
-    /// <summary>
-    ///     Maximum age time used.
-    /// </summary>
-    [DataField]
-    public float AgeTimeMax = 30f;
+    public TimeSpan AgeTime = TimeSpan.FromSeconds(20);
 
     [DataField]
     public int YearsPerUpdate = 1;
