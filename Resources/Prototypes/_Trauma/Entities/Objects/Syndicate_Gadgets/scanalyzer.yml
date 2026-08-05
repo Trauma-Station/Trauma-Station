@@ -67,7 +67,7 @@
   parent: BaseSyndicateScanalyzer
   id: SyndicateBroadcastDevice
   name: syndicate broadcast device
-  description: Capable of hijacking a communications computer.
+  description: A device capable of speaking through communications computer. Who will listen?
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Syndicate/syndicate_broadcast_device.rsi
