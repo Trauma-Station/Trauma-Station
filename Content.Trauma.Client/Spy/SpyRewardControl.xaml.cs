@@ -12,7 +12,7 @@ public sealed partial class SpyRewardControl : Control
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IEntityManager _ent = default!;
 
-    private readonly SpriteSystem _spriteSys = default!;
+    private readonly SpriteSystem _sprite = default!;
     private ProtoId<ListingPrototype>? _selected;
 
     public event Action<SpyRewardControl, string, ProtoId<ListingPrototype>>? OnCollect;
@@ -22,7 +22,7 @@ public sealed partial class SpyRewardControl : Control
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        _spriteSys = _ent.System<SpriteSystem>();
+        _sprite = _ent.System<SpriteSystem>();
 
         CollectButton.OnPressed += _ =>
         {
@@ -72,10 +72,10 @@ public sealed partial class SpyRewardControl : Control
         Texture? texture = null;
 
         if (proto.Icon is { } icon)
-            texture = _spriteSys.Frame0(icon);
+            texture = _sprite.Frame0(icon);
 
         if (proto.ProductEntity is { } ent)
-            texture ??= _spriteSys.GetPrototypeIcon(ent).Default;
+            texture ??= _sprite.GetPrototypeIcon(ent).Default;
 
         RewardTexture.Texture = texture;
     }

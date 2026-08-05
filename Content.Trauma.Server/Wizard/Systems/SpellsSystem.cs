@@ -82,6 +82,7 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedItemSystem _item = default!;
     [Dependency] private KnowledgeSystem _knowledge = default!;
+    [Dependency] private FadingTimedDespawnSystem _fadingDespawn = default!;
 
     public override event Action? StopTargeting;
 
@@ -536,10 +537,7 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
             if (lifetime is not { } time)
                 return;
 
-            var weaponDespawn = Factory.GetComponent<FadingTimedDespawnComponent>();
-            weaponDespawn.Lifetime = time + TimeSpan.FromSeconds(30f);
-            weaponDespawn.FadeOutTime = TimeSpan.FromSeconds(4f);
-            AddComp(weapon, weaponDespawn);
+            _fadingDespawn.FadeDespawnEntity(weapon, time + TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(4));
         }
     }
 

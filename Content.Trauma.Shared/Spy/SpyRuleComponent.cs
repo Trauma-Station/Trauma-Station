@@ -8,6 +8,10 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Spy;
 
+/// <summary>
+/// Gamerule comp for spy antag
+/// This one is in shared and is networked for all spies for convenience
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class SpyRuleComponent : Component
 {

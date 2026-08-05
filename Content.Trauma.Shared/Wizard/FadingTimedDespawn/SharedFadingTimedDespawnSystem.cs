@@ -78,4 +78,12 @@ public abstract partial class SharedFadingTimedDespawnSystem : EntitySystem
     }
 
     protected abstract bool CanDelete(EntityUid uid);
+
+    public void FadeDespawnEntity(EntityUid uid, TimeSpan lifetime, TimeSpan fadeOutTime)
+    {
+        var comp = Factory.GetComponent<FadingTimedDespawnComponent>();
+        comp.Lifetime = lifetime;
+        comp.FadeOutTime = fadeOutTime;
+        AddComp(uid, comp, true);
+    }
 }

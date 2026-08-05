@@ -43,6 +43,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedJobSystem _job = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
 
     [SubscribeLocalEvent]
     private void OnAfterAutoHandleState(Entity<SpyRuleComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -79,13 +80,10 @@ public sealed partial class SpyUplinkSystem : EntitySystem
             TryGetSpyRole(args.User) is not { } role)
             return;
 
-        _admin.Add(LogType.EntityDelete, LogImpact.Low, $"{args.User} used spy uplink to steal {st}");
+        _admin.Add(LogType.EntityDelete, LogImpact.Low, $"{args.User:user} used spy uplink to steal {st}");
 
         // TODO chance to send it to black market when its real
-        var despawn = Factory.GetComponent<FadingTimedDespawnComponent>();
-        despawn.Lifetime = TimeSpan.Zero;
-        despawn.FadeOutTime = TimeSpan.FromSeconds(2);
-        AddComp(st, despawn);
+        _fadeDespawn.FadeDespawnEntity(st, TimeSpan.Zero, TimeSpan.FromSeconds(2));
 
         args.Handled = true;
 

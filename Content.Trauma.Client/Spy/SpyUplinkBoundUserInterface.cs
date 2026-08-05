@@ -12,7 +12,6 @@ namespace Content.Trauma.Client.Spy;
 public sealed partial class SpyUplinkBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IEntityManager _ent = default!;
 
     [ViewVariables]
     private SpyUplinkMenu? _menu;
@@ -23,7 +22,9 @@ public sealed partial class SpyUplinkBoundUserInterface(EntityUid owner, Enum ui
         base.Open();
 
         _menu = this.CreateWindow<SpyUplinkMenu>();
-        _system = _ent.System<SpyUplinkSystem>();
+        _menu.OnCollect += SendMessage;
+
+        _system = EntMan.System<SpyUplinkSystem>();
 
         Update();
     }
@@ -36,14 +37,12 @@ public sealed partial class SpyUplinkBoundUserInterface(EntityUid owner, Enum ui
             return;
 
         if (sys.TryGetSpyRole(player) is not { } role || sys.TryGetSpyRule(role.Comp2) is not { } rule ||
-            !_ent.TryGetComponent(rule, out SpyRuleComponent? comp))
+            !EntMan.TryGetComponent(rule, out SpyRuleComponent? comp))
             return;
 
         menu.UpdateRefreshTime(comp.NextRefresh);
         menu.UpdateBounties(comp.CurrentBounties);
         menu.UpdateRewards(role.Comp2.AvailableRewards);
-
-        menu.OnCollect += SendMessage;
     }
 
     private void SendMessage(string id, ProtoId<ListingPrototype> listing)

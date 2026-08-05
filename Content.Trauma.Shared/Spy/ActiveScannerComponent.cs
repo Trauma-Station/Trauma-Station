@@ -4,6 +4,10 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Spy;
 
+/// <summary>
+/// Added to spy uplink entity that is scanning something
+/// Also applies scan visual effects on client
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class ActiveScannerComponent : Component
 {

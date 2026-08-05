@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.ManifestListings;
-using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Store;
 
@@ -12,14 +11,8 @@ namespace Content.Goobstation.Server.ManifestListings;
 
 public sealed partial class ManifestListingsSystem : EntitySystem
 {
-    private CompName _actionName;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _actionName = Factory.CompName<ActionComponent>();
-    }
+    private StringBuilder _sb = new();
+    private StringBuilder _sbIntermediate = new();
 
     [SubscribeLocalEvent]
     private void OnPurchase(Entity<MindComponent> ent, ref ListingPurchasedEvent args)
@@ -40,13 +33,14 @@ public sealed partial class ManifestListingsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnPrepend(Entity<MindListingsComponent> ent, ref PrependObjectivesSummaryTextEvent args)
     {
-        var sb = new StringBuilder();
-        var sb2 = new StringBuilder();
+        _sb.Clear();
+        _sb.AppendLine();
+        _sb.AppendLine();
+        _sbIntermediate.Clear();
 
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> totalSpent = new();
         foreach (var list in ent.Comp.Listings.Values)
         {
-            var storeSb = new StringBuilder();
             Dictionary<string, ListingDataWithCostModifiers> ignoredIds = new();
             // Data id -> amount purchased (needed for action upgrades)
             Dictionary<string, int> info = new();
@@ -139,54 +133,54 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                         name = Loc.GetString(ProtoMan.Index(data.ProductAction.Value).Name);
                 }
 
-                var costSb = new StringBuilder($"{name}");
+                _sbIntermediate.Clear();
+                _sbIntermediate.Append(name);
                 if (totalCost.Count > 0)
                 {
-                    costSb.Append(" - ");
+                    _sbIntermediate.Append(" - ");
                     foreach (var (currencyId, amount) in totalCost)
                     {
                         if (!totalSpent.TryAdd(currencyId, amount))
                             totalSpent[currencyId] += amount;
 
-                        if (costSb.Length > 0)
-                            costSb.Append(", ");
-
                         var currency = ProtoMan.Index(currencyId);
-                        costSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
+                        _sbIntermediate.Append(amount);
+                        _sbIntermediate.Append(' ');
+                        _sbIntermediate.Append(Loc.GetString(currency.DisplayName));
+                        _sbIntermediate.Append(", ");
                     }
+
+                    _sbIntermediate.Remove(_sbIntermediate.Length - 2, 2);
                 }
 
-                var information = costSb.ToString();
+                var information = _sbIntermediate.ToString();
                 information = information.Replace("\"", ""); // Fuck this
                 information = information.Replace("\'", ""); // Fuck this
 
-                storeSb.Append(Loc.GetString("manifest-listing-entry-listing",
+                _sb.Append(Loc.GetString("manifest-listing-entry-listing",
                     ("sprite", sprite),
                     ("state", state),
                     ("info", information),
                     ("amount", count)));
             }
-
-            sb2.Append(storeSb.ToString());
         }
 
-        var totalSpentSb = new StringBuilder();
+        _sbIntermediate.Clear();
+        var prependText = string.Empty;
         if (totalSpent.Count > 0)
         {
             foreach (var (currencyId, amount) in totalSpent)
             {
-                if (totalSpentSb.Length > 0)
-                    totalSpentSb.Append(", ");
+                if (_sbIntermediate.Length > 0)
+                    _sbIntermediate.Append(", ");
 
                 var currency = ProtoMan.Index(currencyId);
-                totalSpentSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
+                _sbIntermediate.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
             }
 
-            sb.AppendLine(Loc.GetString("manifest-listing-entry-start", ("spent", totalSpentSb.ToString())));
+            prependText = Loc.GetString("manifest-listing-entry-start", ("spent", _sbIntermediate.ToString()));
         }
 
-        sb.AppendLine();
-        sb.AppendLine(sb2.ToString());
-        args.Text += sb.ToString();
+        args.Text += prependText + _sb.ToString();
     }
 }

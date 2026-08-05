@@ -2,12 +2,13 @@
 
 namespace Content.Trauma.Client.Spy;
 
+/// <summary>
+/// Used for visual effect when entity is being scanned for spy bounty
+/// </summary>
 [RegisterComponent]
 public sealed partial class BeingScannedComponent : Component
 {
-    [DataField]
     public EntityUid Scanner;
 
-    [DataField]
     public float Ratio;
 }
