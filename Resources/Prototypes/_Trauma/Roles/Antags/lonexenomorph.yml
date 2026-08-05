@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antagSpecifier
+  id: LoneXenomorph
+  spawnerPrototype: SpawnPointGhostLoneXenomorph
+  allowNonHumans: true
+  briefing:
+    text: lone-xenomorph-role-greeting
+    color: "#8c3986"

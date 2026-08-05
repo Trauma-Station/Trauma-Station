@@ -12540,3 +12540,10 @@ Entries:
   id: 1372
   time: '2026-07-31T10:07:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3727
+- author: assripper.
+  changes:
+  - type: Add
+    message: Added solo xenomorph midround
+  id: 1373
+  time: '2026-07-31T12:12:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3863
