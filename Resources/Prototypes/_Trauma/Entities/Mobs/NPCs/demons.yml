@@ -862,6 +862,9 @@
           DemonSoulFragment:
             min: 4
             max: 5
+  - type: ActionGrant
+    actions:
+    - ActionDemonRift
 
 - type: entity
   parent: BaseDemon
@@ -906,6 +909,9 @@
   - type: MeleeChemicalInjector
     transferAmount: 2
     solution: melee
+  - type: ActionGrant
+    actions:
+    - ActionDemonRift
 
 
 - type: entity
@@ -939,6 +945,9 @@
           DemonSoulFragment:
             min: 4
             max: 5
+  - type: ActionGrant
+    actions:
+    - ActionDemonRift
 
 - type: entity
   parent: BaseDemon
@@ -1269,16 +1278,18 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/saturn.rsi
   - type: MeleeWeapon
-    range: 1
+    range: 2
     soundHit:
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
         Blunt: 15
         Slash: 15
+        Structural: 30
     animation: WeaponArcBite
     altDisarm: true
     canWideSwing: false
+    attackRate: 5
   - type: Destructible
     thresholds:
     - trigger:
