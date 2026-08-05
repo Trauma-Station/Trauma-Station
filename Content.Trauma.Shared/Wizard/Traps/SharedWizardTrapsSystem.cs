@@ -9,7 +9,7 @@ using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Magic;
 using Content.Shared.Maps;
 using Content.Shared.Mind;

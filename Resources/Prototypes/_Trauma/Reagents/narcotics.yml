@@ -42,9 +42,8 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectCocaineStamina
         time: 1.5
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 1.5
       # Side effects
       - !type:ModifyStatusEffect
@@ -62,9 +61,8 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 1
       - !type:RemoveComponents
         components:
@@ -123,9 +121,8 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectCocaineStamina
         time: 1.2
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 1.2
       # Side effects
       - !type:Jitter
@@ -148,9 +145,8 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 5
       - !type:RemoveComponents
         components:

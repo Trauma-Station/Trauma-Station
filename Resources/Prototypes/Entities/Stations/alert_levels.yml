@@ -1,0 +1,21 @@
+- type: entity
+  id: BaseStationAlertLevels
+  abstract: true
+  components:
+  - type: AlertLevel
+    availableAlertLevels:
+    # <Trauma>
+    - DeltaBlob
+    - DeltaDelam
+    - DeltaSling
+    - Octarine
+    - Omicron
+    # </Trauma>
+    - Blue
+    - DeltaNuke
+    - Epsilon
+    - Gamma
+    - Green
+    - Red
+    - Violet
+    - Yellow

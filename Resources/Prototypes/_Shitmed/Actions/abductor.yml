@@ -7,13 +7,14 @@
   name: Exit console
   description: Exit console.
   components:
+  - type: Sprite
+    sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
+    layers:
+    - state: exit
   - type: Action
     checkCanInteract: false
     priority: -20
     itemIconStyle: BigAction
-    icon:
-      sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
-      state: exit
   - type: InstantAction
     event: !type:ExitConsoleEvent
 
@@ -23,12 +24,13 @@
   name: Send yourself
   description: You need to FTL to the same map as the station to use this ability!
   components:
+  - type: Sprite
+    sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
+    layers:
+    - state: send-yourself
   - type: Action
     itemIconStyle: BigAction
     checkCanInteract: false
-    icon:
-      sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
-      state: send-yourself
     useDelay: 10
     priority: -19
   - type: TargetAction
@@ -43,11 +45,12 @@
   name: return
   description: return to the ship.
   components:
+  - type: Sprite
+    sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
+    layers:
+    - state: take
   - type: Action
     useDelay: 30
-    icon:
-      sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
-      state: take
     priority: -12
   - type: InstantAction
     event: !type:AbductorReturnToShipEvent
@@ -58,12 +61,13 @@
   name: Send from pad
   description: Teleport whoever is attached to the alien pad to the target location.
   components:
+  - type: Sprite
+    sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
+    layers:
+    - state: send-yourself
   - type: Action
     itemIconStyle: BigAction
     checkCanInteract: false
-    icon:
-      sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
-      state: send-yourself
     useDelay: 10
     priority: -19
   - type: TargetAction

@@ -82,9 +82,7 @@
     - Electrocution
     - Pacified
     - StaminaModifier
-    - Flashed
     - RadiationProtection
-    - Adrenaline
   - type: FloatingVisuals
   - type: LanguageSpeaker
     speaks:

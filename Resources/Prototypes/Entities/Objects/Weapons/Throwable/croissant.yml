@@ -3,6 +3,11 @@
   id: WeaponCroissant
   suffix: Weapon
   components:
+  # <Trauma>
+  - type: Temperature
+    heatCapacity: 1884.9557 # perishable foood gives it temperature
+  - type: ThrowableBlocked
+  # </Trauma>
   - type: Item
     sprite: null # Should be removed if croissant receives an inhand sprite
   - type: Fixtures
@@ -17,4 +22,3 @@
         friction: 0.2
   - type: ThrowingAngle
     angularVelocity: true # spins
-  - type: ThrowableBlocked # Goobstation

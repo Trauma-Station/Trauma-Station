@@ -17,12 +17,13 @@
   name: Adrenaline!
   description: Energize yourself, pushing your body to its limits!
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: adrenaline
   - type: Action
     checkCanInteract: false # its your heart or something
     useDelay: 2m
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: adrenaline
     itemIconStyle: BigAction
   - type: InjectChemicalsAction
     main:

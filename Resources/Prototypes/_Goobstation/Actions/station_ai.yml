@@ -11,8 +11,9 @@
     checkCanInteract: false
     priority: -9
     itemIconStyle: BigAction
-    icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: camera_jump
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: camera_jump
   - type: InstantAction
     event: !type:ToggleCameraWarpScreenEvent

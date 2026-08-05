@@ -73,7 +73,7 @@ public sealed partial class HereticAbilitySystem
             multiplier *= ent.Comp.MobMultiplier;
         if (HasComp<BrainComponent>(args.Food))
             multiplier *= ent.Comp.BrainMultiplier;
-        if (HasComp<InternalOrganComponent>(args.Food))
+        if (HasComp<InternalChildOrganComponent>(args.Food))
             multiplier *= ent.Comp.OrganMultiplier;
         else if (HasComp<OrganComponent>(args.Food))
             multiplier *= ent.Comp.BodyPartMultiplier;
@@ -112,7 +112,7 @@ public sealed partial class HereticAbilitySystem
         if (TryComp<StomachComponent>(uid, out var stomachComp))
             stomachComp.IsSpecialDigestibleExclusive = false;
 
-        if (TryComp<InternalOrganComponent>(uid, out var organ))
+        if (TryComp<InternalChildOrganComponent>(uid, out var organ))
         {
             organ.IntegrityCap = 1984;
             organ.OrganIntegrity = 1984;

@@ -16,6 +16,7 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Trigger.Systems;
 using Content.Shared.Zombies;
@@ -35,6 +36,7 @@ public sealed partial class ZombieBlobSystem : SharedZombieBlobSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IChatManager _chatMan = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private TriggerSystem _trigger = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -44,6 +46,7 @@ public sealed partial class ZombieBlobSystem : SharedZombieBlobSystem
 
     private readonly GasMixture _normalAtmos;
 
+    public static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
     public static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
 
     public ZombieBlobSystem()
@@ -118,7 +121,7 @@ public sealed partial class ZombieBlobSystem : SharedZombieBlobSystem
         _faction.AddFaction(uid, BlobFaction);
         component.OldFactions = oldFactions;
 
-        EnsureComp<PressureImmunityComponent>(uid);
+        _status.TryAddStatusEffect(uid, PressureImmunity, out _, null);
 
         if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage))
         {
@@ -166,8 +169,7 @@ public sealed partial class ZombieBlobSystem : SharedZombieBlobSystem
         RemComp<BlobSpeakComponent>(uid);
         RemComp<BlobMobComponent>(uid);
         RemComp<HTNComponent>(uid);
-        // RemComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
-        RemComp<PressureImmunityComponent>(uid);
+        _status.TryRemoveStatusEffect(uid, PressureImmunity);
 
         if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage) && component.OldColdDamageThreshold != null)
         {

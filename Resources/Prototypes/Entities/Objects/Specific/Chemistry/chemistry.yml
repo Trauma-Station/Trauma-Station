@@ -330,7 +330,7 @@
 
 - type: entity
   name: bluespace beaker
-  parent: [SolutionGinormous, BaseBeakerMetallic]
+  parent: [SolutionGinormous, BaseBeakerMetallic] # Bluespace items hold 8x the solution of regular items (240u a tile)
   description: Powered by experimental bluespace technology.
   id: BluespaceBeaker
   components:
@@ -352,6 +352,8 @@
       - state: beakerbluespace
   - type: SolutionContainerVisuals
     maxFillLevels: 0
+  - type: Item
+    size: Normal
 
 - type: entity
   name: dropper

@@ -5,7 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;

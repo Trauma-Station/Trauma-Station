@@ -4,7 +4,7 @@ using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Eye.Blinding.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;

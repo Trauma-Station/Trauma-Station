@@ -1,0 +1,13 @@
+// <Trauma>
+using Content.Medical.Common.Surgery.Tools;
+// </Trauma>
+using Robust.Shared.GameStates;
+
+namespace Content.Shared.Body;
+
+/// <summary>
+/// Marker components for child organs that are considered "internal" to their parent. e.g. kidneys are internal to a torso, but an arm isn't.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(fieldDeltas: true)] // Trauma
+public sealed partial class InternalChildOrganComponent : BaseSurgeryToolComponent; // Trauma - inherit surgery tool

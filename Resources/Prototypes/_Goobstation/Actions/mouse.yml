@@ -6,10 +6,11 @@
   name: Multiply
   description: Uses hunger to multiply.
   components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/ingredients.rsi
+    layers:
+    - state: cheesewedge
   - type: Action
-    icon:
-      sprite: Objects/Consumable/Food/ingredients.rsi
-      state: cheesewedge
     useDelay: 1
     sound: !type:SoundPathSpecifier
       path: /Audio/Effects/pop.ogg

@@ -6,8 +6,9 @@
   name: Toggle Patrol
   description: Toggle patrol on and off.
   components:
-  - type: Action
-    icon: Interface/AdminNotes/message.png
+  - type: Sprite
+    layers:
+    - texture: Interface/AdminNotes/message.png
   - type: InstantAction
     event: !type:TogglePatrolActionEvent
 
@@ -17,10 +18,12 @@
   name: Create/Remove Waypoint
   description: Creates a waypoint at the target location, clicking an existing waypoint will remove it instead.
   components:
+  - type: Sprite
+    layers:
+    - texture: Interface/AdminNotes/none_button.png
   - type: Action
     useDelay: 3
-    icon: Interface/AdminNotes/none_button.png
-    sound: !type:SoundPathSpecifier
+    sound:
       path: /Audio/Machines/chime.ogg
   - type: TargetAction
     range: 200
@@ -34,7 +37,8 @@
   name: Clear Waypoints
   description: Disables patrol and clears all existing waypoints.
   components:
-  - type: Action
-    icon: Interface/AdminNotes/high_button.png
+  - type: Sprite
+    layers:
+    - texture: Interface/AdminNotes/high_button.png
   - type: InstantAction
     event: !type:ClearWaypointsActionEvent

@@ -14,9 +14,9 @@
   - type: Transform
     anchored: true
   - type: Clickable
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - Diagonal
   - type: Sprite
     drawdepth: Walls

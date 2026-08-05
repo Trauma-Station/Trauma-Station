@@ -30,9 +30,8 @@
         - !type:ReagentCondition
           reagent: Tranquility
           min: 10
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         conditions:
         - !type:ReagentCondition
           reagent: Tranquility

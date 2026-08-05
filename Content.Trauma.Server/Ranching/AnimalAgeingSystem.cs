@@ -26,7 +26,7 @@ public sealed partial class AnimalAgeingSystem : EntitySystem
 
     private void OnMapInit(Entity<AnimalAgeingComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.NextAgeTime = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(ent.Comp.AgeTimeMin, ent.Comp.AgeTimeMax));
+        ent.Comp.NextAgeTime = _timing.CurTime + ent.Comp.AgeTime;
     }
 
     public override void Update(float frameTime)
@@ -44,7 +44,7 @@ public sealed partial class AnimalAgeingSystem : EntitySystem
             if (_timing.CurTime < ageComp.NextAgeTime)
                 continue;
 
-            ageComp.NextAgeTime += TimeSpan.FromSeconds(_random.NextFloat(ageComp.AgeTimeMin, ageComp.AgeTimeMax));
+            ageComp.NextAgeTime += ageComp.AgeTime;
 
             toAgeUp.Add((uid, ageComp));
         }

@@ -6,12 +6,13 @@
   name: Knit Flesh
   description: A touch spell that allows you to either perform quick surgery or restore flesh of target.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: flesh_surgery
   - type: Action
     useDelay: 1
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: flesh_surgery
     checkCanInteract: true
   - type: InstantAction
     event: !type:TouchSpellEvent
@@ -30,13 +31,14 @@
   name: Shed Form
   description: Shed your fragile form, become one with the arms, become one with the emperor. Instills intense fear in nearby mortals.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: final_hymn
   - type: Action
     checkCanInteract: false
     useDelay: 10
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: final_hymn
   - type: InstantAction
     event: !type:PolymorphSpellEvent
       protoId: EldritchHorror
@@ -51,12 +53,13 @@
   name: Force Contract
   description: Forces your body to contract onto a single tile.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: worm_contract
   - type: Action
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: BigAction
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: worm_contract
   - type: InstantAction
     event: !type:TailedEntityForceContractEvent
