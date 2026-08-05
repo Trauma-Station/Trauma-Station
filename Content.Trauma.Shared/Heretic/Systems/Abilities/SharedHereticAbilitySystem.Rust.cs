@@ -352,6 +352,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         var mapCoords = _transform.ToMapCoordinates(args.Target);
 
+        _lookupMobs.Clear();
         Lookup.GetEntitiesInRange(args.Target, args.MobCheckRange, _lookupMobs, LookupFlags.Dynamic);
         foreach (var (entity, _) in _lookupMobs)
         {
