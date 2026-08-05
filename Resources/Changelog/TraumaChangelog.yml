@@ -12750,3 +12750,10 @@ Entries:
   id: 1395
   time: '2026-08-04T23:00:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3942
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed heretic blades not acting as bonesaws or scalpels
+  id: 1396
+  time: '2026-08-05T06:16:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3959
