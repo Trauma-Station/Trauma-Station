@@ -1290,7 +1290,7 @@
     animation: WeaponArcBite
     altDisarm: true
     canWideSwing: false
-    attackRate: 5
+    attackRate: 2.5
   - type: Destructible
     thresholds:
     - trigger:
