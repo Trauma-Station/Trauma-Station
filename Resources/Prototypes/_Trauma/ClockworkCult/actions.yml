@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseAction, BaseMentalAction ]
+  id: ActionClockworkConvert
+  name: Ratvarian Conversion
+  description: Force your target to accept Ratvar and become a servant of his will.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    useDelay: 120
+  - type: Sprite
+    sprite: _ShitChap/Objects/clockwork_slab.rsi
+    state: icon
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+    blacklist:
+      components:
+      - ClockworkCult
+      - BibleUser
+    event: !type:EventClockworkConvert

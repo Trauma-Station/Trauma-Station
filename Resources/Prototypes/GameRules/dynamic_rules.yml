@@ -66,6 +66,13 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 25
+        - id: ClockworkCultRoundstart
+          weight: 8
+          conditions:
+          - !type:HasBudgetCondition
+          - !type:MaxRuleOccurenceCondition
+          - !type:PlayerCountCondition
+            min: 20
         # - id: BlobGameMode # Disabled until its major bugs are fixed
         #   weight: 10
         #   conditions:

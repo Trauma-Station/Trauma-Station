@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: ClockworkCultist
+  name: roles-antag-clockwork-cult-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-clockwork-cult-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 2h
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: ClockworkCultist
+  jobBlacklist: [ Chaplain ]
+  prefRoles: [ ClockworkCultist ]
+  components:
+  - type: ClockworkCult
+  - type: RatvarianLanguage
+  mindRoles: [ MindRoleClockworkCult ]

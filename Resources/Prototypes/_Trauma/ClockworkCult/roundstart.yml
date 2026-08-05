@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseGameRule, BaseRoundstartAntagRule ]
+  id: ClockworkCultRoundstart
+  components:
+  - type: ClockworkCultRule
+  - type: GameRule
+    minPlayers: 20
+  - type: AntagSelection
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      proto: ClockworkCultist
+      range:
+        min: 2
+        max: 6
+      playerRatio: 10
+  - type: AntagPlayerEffects
+    effects:
+    - !type:GrantSkills
+      skills:
+        AthleticsKnowledge: 20
+        WeaponsKnowledge: 20
+        KnowledgeWeaponsLongBlade: 20
+  - type: DynamicRuleCost
+    cost: 140
+
+- type: gamePreset
+  id: ClockworkCult
+  alias:
+  - clockcult
+  - clockwork
+  name: clockworkcult-title
+  description: clockworkcult-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - ClockworkCultRoundstart

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleClockworkCult
+  name: Clockwork Cult Role
+  components:
+  - type: MindRole
+    antagPrototype: ClockworkCultist
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+    subtype: role-subtype-clockwork-cultist
+  - type: ClockworkCultRole
+  - type: RoleBriefing
+    briefing: objective-clockworkcult-charactermenu
