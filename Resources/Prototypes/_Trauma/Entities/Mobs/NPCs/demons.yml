@@ -713,9 +713,9 @@
     generated:
       reagents:
       - ReagentId: ChloralHydrate
-        Quantity: 5
+        Quantity: 7
   - type: MeleeChemicalInjector
-    transferAmount: 5
+    transferAmount: 7
     solution: melee
 
 - type: entity
@@ -780,7 +780,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Piercing: 10
+        Piercing: 12
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -845,7 +845,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Caustic: 15
+        Caustic: 20
         Blunt: 10
     altDisarm: true
     canWideSwing: false
@@ -869,8 +869,8 @@
 - type: entity
   parent: BaseDemon
   id: MajorAngelLizard
-  name: Aspect of Savagery
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Lizards embody the aspect of Savagery.
+  name: Aspect of Predation
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Lizards embody the aspect of Predation.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
@@ -881,6 +881,7 @@
     damage:
       types:
         Slash: 20
+        Piercing: 5
     animation: WeaponArcSlash
     altDisarm: true
     canWideSwing: false
@@ -895,8 +896,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 4
-            max: 5
+            min: 5
+            max: 6
   - type: Solution
     id: melee
     solution:
@@ -905,9 +906,9 @@
     generated:
       reagents:
       - ReagentId: Impedrezene
-        Quantity: 2
+        Quantity: 4
   - type: MeleeChemicalInjector
-    transferAmount: 2
+    transferAmount: 4
     solution: melee
   - type: ActionGrant
     actions:
@@ -931,7 +932,7 @@
         Piercing: 10
     altDisarm: false
     canWideSwing: true
-    attackRate: 3
+    attackRate: 4
   - type: Destructible
     thresholds:
     - trigger:
@@ -963,7 +964,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 5
+        Blunt: 6
     altDisarm: true
     canWideSwing: false
   - type: Destructible
