@@ -948,7 +948,7 @@
             max: 5
   - type: ActionGrant
     actions:
-    - ActionDemonRift
+    - ActionDemonRepulse
 
 - type: entity
   parent: BaseDemon
@@ -1228,7 +1228,7 @@
             max: 6
   - type: ActionGrant
     actions:
-      - ActionDemonRift
+      - ActionDemonBlade
 
 - type: entity
   parent: BaseDemon

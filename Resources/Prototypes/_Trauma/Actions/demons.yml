@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Trauma Demons
+
 - type: entity
   parent: ActionBlink
   id: ActionDemonRift
@@ -20,6 +22,41 @@
     effects:
     - !type:SpawnParticles
       particleProto: DemonPassage
+
+- type: entity
+  parent: ActionSanguineStrike
+  id: ActionDemonBlade
+  name: Butcher's Strike
+  description: Use your unholy blade consume a portion of your enemies' soul, dealing more damage and healing yourself.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Actions/demon.rsi
+    layers:
+    - state: blade
+  - type: Action
+    useDelay: 15
+    raiseOnAction: false
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Trauma/Mobs/Biowepon/clang.ogg
+
+- type: entity
+  parent: ActionRepulseII
+  id: ActionDemonRepulse
+  name: Demonic Pulse
+  description: Release a pulse of raw demonic energy, pushing everyone away from you.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Actions/demon.rsi
+    layers:
+    - state: repulse
+  - type: Action
+    useDelay: 25
+    raiseOnAction: false
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Heretic/disintergrate.ogg
+
+
+# Goobstation heretic
 
 - type: entity
   id: ActionDemonGaze
