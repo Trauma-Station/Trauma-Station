@@ -12800,3 +12800,18 @@ Entries:
   id: 1401
   time: '2026-08-06T12:08:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3898
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix xray projectiles not penetrating through walls.
+  - type: Tweak
+    message: Assault laser has lower dps but much more ammo capacity, as intended.
+  - type: Tweak
+    message: Laser sniper clothing/held slowdown 25% -> 15%
+  - type: Tweak
+    message: Laser rifle projectile damage increased by 1
+  - type: Tweak
+    message: Laser lmg battery is now normal size not large.
+  id: 1402
+  time: '2026-08-06T13:03:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3976
