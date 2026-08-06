@@ -12793,3 +12793,10 @@ Entries:
   id: 1400
   time: '2026-08-06T12:05:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3977
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed dwarves being immune to thermal vision.
+  id: 1401
+  time: '2026-08-06T12:08:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3898
