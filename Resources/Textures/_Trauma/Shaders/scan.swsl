@@ -30,8 +30,8 @@ void fragment()
         effectColor = vec4(areaColor, scanAlpha);
     }
 
-    float laserCore = smoothstep(0.005, 0.0, scanned);
-    float laserGlow = exp(-scanned * 20.0);
+    highp float laserCore = smoothstep(0.005, 0.0, scanned);
+    highp float laserGlow = exp(-scanned * 20.0);
 
     highp vec3 glowColor = scanColor * (laserCore + laserGlow * 0.6);
 

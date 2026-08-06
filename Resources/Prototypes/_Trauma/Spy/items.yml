@@ -65,6 +65,7 @@
   description: Sharp-edged stylish fedora. Can be both worn on your head or be used to slice heads of your opponents.
   components:
   - type: TriggerOnThrown
+  - type: TriggerOnMeleeHit
   - type: EntityEffectOnTrigger
     targetUser: true
     effects:
