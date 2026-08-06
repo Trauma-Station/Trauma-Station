@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Graphics;
 using Content.Goobstation.Shared.Wraith.Aura;
 
 namespace Content.Goobstation.Client.Wraith.Aura;
@@ -12,6 +13,12 @@ public sealed partial class AuraSystem : EntitySystem
     [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly ProtoId<ShaderPrototype> Shader = "Aura";
+    private static readonly ProtoId<ShaderPrototype> SecondSkinShader = "SecondSkin";
+
+    private static readonly string[] AfterShaders =
+    {
+        SecondSkinShader.Id
+    };
 
     private ShaderInstance _shader = default!;
 
@@ -29,7 +36,9 @@ public sealed partial class AuraSystem : EntitySystem
         _sprite.SetPostShader(ent.Owner,
             new(Shader, _shader)
             {
-                RaiseShaderEvent = true
+                RaiseShaderEvent = true,
+                Before = ContentPostShaderIds.BeforeOutlines,
+                After = AfterShaders,
             });
     }
 

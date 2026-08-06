@@ -25,9 +25,13 @@ public sealed partial class ThermalVisionOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
+    private static readonly ProtoId<ShaderPrototype> ThermalShader = "ThermalVision";
+
     private readonly List<ThermalVisionRenderEntry> _entries = [];
 
     private EntityUid? _lightEntity;
+
+    private readonly ShaderInstance _thermalShader;
 
     public float LightRadius;
 
@@ -43,6 +47,8 @@ public sealed partial class ThermalVisionOverlay : Overlay
         _light = _entity.System<SharedPointLightSystem>();
 
         ZIndex = -1;
+
+        _thermalShader = _proto.Index(ThermalShader).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -109,7 +115,7 @@ public sealed partial class ThermalVisionOverlay : Overlay
 
         foreach (var entry in _entries)
         {
-            Render(entry.Ent, entry.Map, worldHandle, entry.EyeRot, Comp.Color, Comp.ThermalShader, alpha);
+            Render(entry.Ent, entry.Map, worldHandle, entry.EyeRot, Comp.Color, Comp.UseShader, alpha);
         }
 
         worldHandle.SetTransform(Matrix3x2.Identity);
@@ -120,7 +126,7 @@ public sealed partial class ThermalVisionOverlay : Overlay
         DrawingHandleWorld handle,
         Angle eyeRot,
         Color color,
-        string? shader,
+        bool useShader,
         float alpha)
     {
         var (uid, sprite, xform) = ent;
@@ -131,11 +137,10 @@ public sealed partial class ThermalVisionOverlay : Overlay
         var rotation = _transform.GetWorldRotation(xform);
 
         List<SpriteComponent.PostShaderEntry>? entries = null;
-        if (shader != null)
+        if (useShader)
         {
-            var instance = _proto.Index<ShaderPrototype>(shader).InstanceUnique();
-            instance.SetParameter("color", color.WithAlpha(alpha));
-            entries = new() { new SpriteComponent.PostShaderEntry(shader, instance) };
+            _thermalShader.SetParameter("color", color.WithAlpha(alpha));
+            entries = new() { new SpriteComponent.PostShaderEntry(ThermalShader, _thermalShader) };
         }
 
         _sprite.RenderSprite((uid, sprite), handle, eyeRot, rotation, position, entries);
