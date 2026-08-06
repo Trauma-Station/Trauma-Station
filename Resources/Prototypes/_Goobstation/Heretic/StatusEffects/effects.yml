@@ -153,7 +153,7 @@
   name: examined mirror maid
 
 - type: entity
-  parent: [StatusEffectWormBlacklist, MobStatusEffectBase]
+  parent: [ StatusEffectWormBlacklist, StatusEffectPressureImmunity ]
   id: StatusEffectNewbornEther
   name: eldritch sleep
   components:
@@ -164,7 +164,6 @@
     - type: SpecialHighTempImmunity
     - type: SpecialLowTempImmunity
     - type: SpecialBreathingImmunity
-    - type: SpecialPressureImmunity
     - type: MetabolismModifier
       modifier: 100
   - type: ForcedSleepingStatusEffect

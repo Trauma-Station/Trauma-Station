@@ -173,7 +173,6 @@
     allowed:
     - SlowedDown
     - Stutter
-    - Flashed
   - type: FloatingVisuals
   - type: Buckle
   - type: StandingState

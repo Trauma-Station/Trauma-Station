@@ -42,7 +42,7 @@
   conditions:
   - !type:WhitelistCondition
     whitelist:
-      tags:
+      components:
       - Wall
   - !type:TryMakeRustWallCondition
   effects:

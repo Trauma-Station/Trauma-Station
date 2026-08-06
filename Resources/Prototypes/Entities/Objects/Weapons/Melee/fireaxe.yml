@@ -103,7 +103,7 @@
         # Heat: 10
         Slash: 10
         Structural: 40 # Trauma, was 80
-  # <Trauma>
+  # </Trauma>
   - type: Item
     shape:
     - 1,0,2,5

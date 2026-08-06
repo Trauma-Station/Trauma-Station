@@ -42,6 +42,7 @@ using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Zombies;
 using Content.Trauma.Common.Silicon;
@@ -67,6 +68,7 @@ public sealed partial class DevilSystem : EntitySystem
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
     [Dependency] private DevilContractSystem _contract = default!;
@@ -75,6 +77,8 @@ public sealed partial class DevilSystem : EntitySystem
     [Dependency] private CondemnedSystem _condemned = default!;
     [Dependency] private MobStateSystem _state = default!;
     [Dependency] private JitteringSystem _jittering = default!;
+
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
 
     private static readonly Regex WhitespaceAndNonWordRegex = new(@"[\s\W]+", RegexOptions.Compiled);
 
@@ -110,7 +114,7 @@ public sealed partial class DevilSystem : EntitySystem
         // Adjust stats
         EnsureComp<ZombieImmuneComponent>(devil);
         EnsureComp<BreathingImmunityComponent>(devil);
-        EnsureComp<PressureImmunityComponent>(devil);
+        _status.TrySetStatusEffectDuration(devil, PressureImmunity);
         EnsureComp<ActiveListenerComponent>(devil);
         EnsureComp<AlwaysTakeHolyComponent>(devil);
         EnsureComp<CrematoriumImmuneComponent>(devil);
@@ -127,7 +131,7 @@ public sealed partial class DevilSystem : EntitySystem
         revival.CanCheatStanding = true;
 
         // Change damage modifier
-       _damageable.SetDamageModifierSetId(devil.Owner, devil.Comp.DevilDamageModifierSet);
+        _damageable.SetDamageModifierSetId(devil.Owner, devil.Comp.DevilDamageModifierSet);
 
         // No decapitating the devil
         foreach (var part in _body.GetOrgans<WoundableComponent>(devil.Owner))

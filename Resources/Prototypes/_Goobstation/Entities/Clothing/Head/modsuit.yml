@@ -109,8 +109,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
     - type: HideLayerClothing
@@ -194,8 +193,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
     - type: HideLayerClothing
@@ -270,8 +268,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
@@ -332,8 +329,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
@@ -398,8 +394,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
@@ -464,8 +459,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.005
-      coolingCoefficient: 0.005
+      coefficient: 0.005
     - type: IdentityBlocker
     - type: HideLayerClothing
       slots:
@@ -547,8 +541,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
@@ -617,8 +610,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
     - type: HideLayerClothing

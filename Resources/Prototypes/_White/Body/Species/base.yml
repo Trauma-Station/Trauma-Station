@@ -225,7 +225,7 @@
   # TODO SHITMED: make butchered/gibbed organs worth less than surgically extracted
 
 - type: entity
-  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  parent: [ OrganBaseChildInternal, OrganXenomorphInternal ]
   id: OrganXenomorphAcidGland
   name: acid gland
   description: A specialized tank with acid. The resulting corrosive mixture can melt most known materials.
@@ -246,7 +246,7 @@
     - ActionAcid
 
 - type: entity
-  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  parent: [ OrganBaseChildInternal, OrganXenomorphInternal ]
   id: OrganXenomorphNeurotoxinGland
   name: neurotoxin gland
   description: A specialized tank with neurotoxin. Consists of many microscopic tubes filled with clear liquid.
@@ -277,7 +277,7 @@
       soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
 
 - type: entity
-  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  parent: [ OrganBaseChildInternal, OrganXenomorphInternal ]
   id: OrganXenomorphEggSack
   name: egg sack
   description: Designed to produce and store eggs containing facehuggers, the organ's enormous size allows the xenomorph queen to lay thousands of eggs in a short period of time.
@@ -297,7 +297,7 @@
     - ActionSpawnXenomorphEgg
 
 - type: entity
-  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  parent: [ OrganBaseChildInternal, OrganXenomorphInternal ]
   id: OrganXenomorphResinSpinner
   name: resin spinner
   description: Designed for the production and isolation of resin-like biopolymer.
@@ -315,7 +315,7 @@
     - ActionSpawnResinNest
 
 - type: entity
-  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  parent: [ OrganBaseChildInternal, OrganXenomorphInternal ]
   id: OrganXenomorphHiveNode
   name: hive node
   description: The central organ of the xenomorphs, providing communication with the common mind.
@@ -332,7 +332,7 @@
     # TODO: Organ should give XenoHivemind language and Xeno faction
 
 - type: entity
-  parent: [ OrganBaseInternal, OrganXenomorphInternal ]
+  parent: [ OrganBaseChildInternal, OrganXenomorphInternal ]
   id: OrganXenomorphPlasmaVessel
   name: plasma vessel
   description: A reservoir containing concentrated and highly active plasma - the main source of energy and raw material for the xenomorph's biological weapons.

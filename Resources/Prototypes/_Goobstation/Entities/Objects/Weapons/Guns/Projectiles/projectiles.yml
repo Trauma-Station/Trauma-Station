@@ -537,8 +537,6 @@
   - type: EntityEffectOnTrigger
     targetUser: true # user is actually hit entity in this case
     effects:
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
-      type: Update
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMuted
       time: 20

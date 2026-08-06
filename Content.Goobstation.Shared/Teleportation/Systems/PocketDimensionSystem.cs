@@ -106,7 +106,7 @@ public sealed partial class PocketDimensionSystem : EntitySystem
             // unlink us
             _link.TryUnlink(dimension, uid);
             comp.PortalEnabled = false;
-            _audio.PlayPvs(comp.ClosePortalSound, uid);
+            _audio.PlayPredicted(comp.ClosePortalSound, uid, user);
 
             // if you are stuck inside the pocket dimension you can use the internal portal to escape
             _link.OneWayLink(dimension, uid);
@@ -118,7 +118,7 @@ public sealed partial class PocketDimensionSystem : EntitySystem
             // link us to the pocket dimension
             _link.TryLink(dimension, uid);
             comp.PortalEnabled = true;
-            _audio.PlayPvs(comp.OpenPortalSound, uid);
+            _audio.PlayPredicted(comp.OpenPortalSound, uid, user);
         }
     }
 

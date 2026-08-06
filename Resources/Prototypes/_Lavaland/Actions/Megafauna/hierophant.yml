@@ -2,17 +2,18 @@
 
 # Entity Shape Attacks
 - type: entity
-  id: ActionBaseHierophant
-  parent: BaseAction
-  name: hierophant action
   abstract: true
+  parent: BaseAction
+  id: ActionBaseHierophant
+  name: hierophant action
   components:
+  - type: Sprite
+    sprite: _Lavaland/Objects/Weapons/hierophant_club.rsi
+    layers:
+    - state: icon
   - type: Action
     priority: -21
     useDelay: 2
-    icon:
-      sprite: _Lavaland/Objects/Weapons/hierophant_club.rsi
-      state: icon
     itemIconStyle: NoItem
   - type: TargetAction
     checkCanAccess: false

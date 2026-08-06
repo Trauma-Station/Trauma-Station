@@ -50,7 +50,9 @@
     radius: 2
     softness: 1
     energy: 50
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: BreathingImmunity
   - type: SpecialLowTempImmunity
   - type: ThermalVision

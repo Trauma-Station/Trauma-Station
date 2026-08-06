@@ -37,14 +37,6 @@
 - type: entity
   abstract: true
   parent: OrganBase
-  id: OrganBaseInternal
-  components:
-  - type: InternalOrgan
-  - type: ChildOrgan # there are no internal organs that are roots
-
-- type: entity
-  abstract: true
-  parent: OrganBase
   id: OrganBaseFleshy # not bone or metal
   components:
   - type: SurgeryTool

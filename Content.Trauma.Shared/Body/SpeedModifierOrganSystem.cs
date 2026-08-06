@@ -16,9 +16,9 @@ public sealed partial class SpeedModifierOrganSystem : EntitySystem
         var comp = EnsureComp<MovementSpeedModifierComponent>(args.Body);
         comp.BaseWeightlessAcceleration += ent.Comp.WeightlessAcceleration;
         comp.BaseWeightlessModifier += ent.Comp.WeightlessModifier;
-        comp.BaseWeightlessAcceleration += ent.Comp.WeightlessAcceleration;
+        comp.BaseWeightlessFriction += ent.Comp.WeightlessFriction;
         Dirty(args.Body, comp);
-        _movement.RefreshWeightlessModifiers(ent.Owner);
+        _movement.RefreshWeightlessModifiers(args.Body);
     }
 
     [SubscribeLocalEvent]
@@ -29,8 +29,8 @@ public sealed partial class SpeedModifierOrganSystem : EntitySystem
 
         comp.BaseWeightlessAcceleration -= ent.Comp.WeightlessAcceleration;
         comp.BaseWeightlessModifier -= ent.Comp.WeightlessModifier;
-        comp.BaseWeightlessAcceleration -= ent.Comp.WeightlessAcceleration;
+        comp.BaseWeightlessFriction -= ent.Comp.WeightlessFriction;
         Dirty(args.Body, comp);
-        _movement.RefreshWeightlessModifiers(ent.Owner);
+        _movement.RefreshWeightlessModifiers(args.Body);
     }
 }

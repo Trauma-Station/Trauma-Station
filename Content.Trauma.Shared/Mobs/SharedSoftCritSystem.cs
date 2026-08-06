@@ -6,6 +6,8 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.Body;
 using Content.Trauma.Common.CCVar;
@@ -38,17 +40,17 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<SoftCritMobComponent, EmoteActionEvent>(OnEmoteAction, before: new[] { typeof(VocalSystem) });
         SubscribeLocalEvent<SoftCritMobComponent, ComponentStartup>(RefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, ComponentShutdown>(RefreshSpeed);
-        SubscribeLocalEvent<MobStateComponent, AttemptStopPullingEvent>(OnAttemptStopPulling);
-        SubscribeLocalEvent<SoftCritMobComponent, SpeechTypeOverrideEvent>(OnSpeechTypeOverride);
-        SubscribeLocalEvent<SoftCritMobComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
-        SubscribeLocalEvent<SoftCritMobComponent, StandUpAttemptEvent>(OnStandUpAttempt);
-        SubscribeLocalEvent<SoftCritMobComponent, ModifyInhaledVolumeEvent>(OnModifyInhaledVolume);
-        SubscribeLocalEvent<SoftCritMobComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
 
         Subs.CVar(_cfg, TraumaCVars.SoftCritMoveSpeed, x => SoftCritSpeed = x, true);
         Subs.CVar(_cfg, TraumaCVars.SoftCritInhaleModifier, x => InhaleVolumeModifier = x, true);
+    }
+
+    private void OnEmoteAction(Entity<SoftCritMobComponent> ent, ref EmoteActionEvent args)
+    {
+        args.Handled = true; // shush
     }
 
     private void RefreshSpeed(EntityUid uid, SoftCritMobComponent ent, EntityEventArgs args)
@@ -56,6 +58,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         _movement.RefreshMovementSpeedModifiers(uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptStopPulling(Entity<MobStateComponent> ent, ref AttemptStopPullingEvent args)
     {
         // too weak to resist being pulled away into maints if you aren't alive
@@ -63,6 +66,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSpeechTypeOverride(Entity<SoftCritMobComponent> ent, ref SpeechTypeOverrideEvent args)
     {
         // too fucked up to speak properly
@@ -70,16 +74,19 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
             args.DesiredType = InGameICChatType.Whisper;
     }
 
+    [SubscribeLocalEvent]
     private void OnRefreshSpeed(Entity<SoftCritMobComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         args.ModifySpeed(SoftCritSpeed);
     }
 
+    [SubscribeLocalEvent]
     private void OnStandUpAttempt(Entity<SoftCritMobComponent> ent, ref StandUpAttemptEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnModifyInhaledVolume(Entity<SoftCritMobComponent> ent, ref ModifyInhaledVolumeEvent args)
     {
         // don't reduce volume if someone else is helping you breathe
@@ -88,6 +95,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
             args.Volume *= InhaleVolumeModifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnUnbuckleAttempt(Entity<SoftCritMobComponent> ent, ref UnbuckleAttemptEvent args)
     {
         // can't unbuckle yourself if you are in softcrit

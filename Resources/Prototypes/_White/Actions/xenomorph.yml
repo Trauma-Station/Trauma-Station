@@ -1,69 +1,92 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Combat action
 - type: entity
-  id: ActionCombatModeToggleXenomorph
-  parent: ActionCombatModeToggle
+  abstract: true
+  parent: BaseAction
+  id: BaseXenomorphAction
   components:
   - type: Action
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: help }
-    iconOn: { sprite: _White/Interface/Actions/xenomorph.rsi, state: harm }
+    itemIconStyle: NoItem
+  - type: Sprite
+    sprite: _White/Interface/Actions/xenomorph.rsi
+
+# Combat action
+- type: entity
+  parent: [ BaseXenomorphAction, ActionCombatModeToggle ]
+  id: ActionCombatModeToggleXenomorph
+  components:
+  - type: Sprite
+    layers:
+    - state: help
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: harm
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
 
 # Thermal action
 - type: entity
+  parent: [ BaseXenomorphAction, ToggleThermalVision ]
   id: ToggleThermalVisionXenomorph
-  parent: ToggleThermalVision
   components:
-  - type: Action
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: vision_off }
-    iconOn: { sprite: _White/Interface/Actions/xenomorph.rsi, state: vision_on }
+  - type: Sprite
+    layers:
+    - state: vision_off
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: vision_on
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
 
 # Evolution actions
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionEvolution
-  parent: BaseAction
   name: Evolve
   description: Evolve into a higher xenomorph caste.
   components:
   - type: Action
     checkCanInteract: false
-    itemIconStyle: BigAction
     useDelay: 0
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: evolve }
+  - type: Sprite
+    layers:
+    - state: evolve
   - type: InstantAction
     event: !type:EvolutionsActionEvent
 
 - type: entity
-  id: ActionEvolutionPraetorian
   parent: ActionEvolution
+  id: ActionEvolutionPraetorian
   name: Evolve to praetorian (500)
   description: Evolve into the main defender of the hive.
   components:
-  - type: Action
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: evolve_praetorian }
+  - type: Sprite
+    layers:
+    - state: evolve_praetorian
   - type: PlasmaCostAction
-    plasmaCost: 500
+    plasmaCost: 500 # TODO: make this automatically suffix the actions
 
 - type: entity
-  id: ActionEvolutionQueen
   parent: ActionEvolutionPraetorian
+  id: ActionEvolutionQueen
   name: Evolve to queen (500)
   description: Produce an internal egg sac capable of spawning children. Only one queen can exist at a time.
   components:
-  - type: Action
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: evolve_queen }
+  - type: Sprite
+    layers:
+    - state: evolve_queen
 
 # Structures actions
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionSpawnResinWeedNode
-  parent: BaseAction
   name: Plant weeds (50)
   description: Plants some xenomorph weeds.
   components:
   - type: Action
-    itemIconStyle: BigAction
     useDelay: 2
-    icon: { sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi, state: constructionnode } # Goobstation new sprites
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    layers:
+    - state: constructionnode
   - type: InstantAction
     event: !type:SpawnTileEntityActionEvent
       entity: ResinWeedNode
@@ -74,18 +97,20 @@
       - MidImpassable
       - LowImpassable
   - type: PlasmaCostAction
-    plasmaCost: 50 # Goobstation
+    plasmaCost: 50
 
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionSpawnXenomorphEgg
   name: Lay egg (75)
   description: Lay an egg to produce facehuggers to impregnate prey with.
   components:
   - type: Action
     checkCanInteract: false
-    itemIconStyle: BigAction
     useDelay: 2
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: egg }
+  - type: Sprite
+    layers:
+    - state: egg
   - type: InstantAction
     event: !type:SpawnTileEntityActionEvent
       entity: XenomorphEgg
@@ -99,15 +124,17 @@
 
 # TODO: delete it
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionSpawnWallResin
-  parent: BaseAction
   name: Build a resin wall (50)
   description: Secrete tough malleable resin.
   components:
   - type: Action
-    useDelay: 2 # Goobstation
-    itemIconStyle: BigAction
-    icon: { sprite: _RMC14/Structures/Xenos/xeno_resin_wall.rsi, state: resin } # Goobstation new sprites
+    useDelay: 2
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_wall.rsi
+    layers:
+    - state: resin
   - type: TargetAction
     range: 2
   - type: WorldTargetAction
@@ -120,15 +147,16 @@
       - WallLayer
   - type: PlasmaCostAction
     immediate: false
-    plasmaCost: 50 # Goobstation
+    plasmaCost: 50
 
-- type: entity # Goobstation - new action
+- type: entity
   parent: ActionSpawnWallResin
   id: ActionSpawnResinDoor
   name: Build a resin door (75)
   components:
-  - type: Action
-    icon: { sprite :  _RMC14/Structures/Xenos/xeno_resin_door.rsi, state: resin }
+  - type: Sprite
+    layers:
+    - state: resin
   - type: WorldTargetAction
     event: !type:PlaceTileEntityEvent
       entity: ResinDoor
@@ -147,47 +175,52 @@
   id: ActionSpawnResinNest
   name: Build a resin nest (50)
   components:
+  - type: Sprite
+    sprite: _White/Structures/Windows/resin_membrane.rsi
+    layers:
+    - state: full
   - type: Action
     useDelay: 1
-    icon: { sprite : _White/Structures/Windows/resin_membrane.rsi, state: full }
   - type: WorldTargetAction
     event: !type:PlaceTileEntityEvent
       entity: ResinNest
-      length: 2 # Goobstation
+      length: 2
       blockedCollisionMask:
       - TableMask
       blockedCollisionLayer:
       - TableLayer
       - BulletImpassable
   - type: PlasmaCostAction
-    plasmaCost: 50 # Goobstation
+    plasmaCost: 50
 
 # Tail lash action
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionTailLash
-  parent: BaseAction
   name: Tail lash
   description: Hit your opponent with your tail.
   components:
   - type: Action
     useDelay: 11
-    itemIconStyle: BigAction
-    icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: tail_attack }
+  - type: Sprite
+    layers:
+    - state: tail_attack
   - type: TargetAction
     range: 10
   - type: WorldTargetAction
     event: !type:TailLashActionEvent
 
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionAcid
-  parent: BaseAction
   name: Corrosive acid (100)
   description: Drench an object in acid, destroying it over time.
   components:
   - type: Action
     useDelay: 11
-    itemIconStyle: BigAction
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: acid }
+  - type: Sprite
+    layers:
+    - state: acid
   - type: TargetAction
     interactOnMiss: false
     range: 2
@@ -200,17 +233,21 @@
 
 # Jump action
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionJumpXenomorph
-  parent: BaseAction
   name: Jump
   description: Stun your enemies with a quick jump.
   components:
   - type: Action
     priority: 0
     useDelay: 3
-    itemIconStyle: BigAction
-    icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: leap_off }
-    iconOn: { sprite : _White/Interface/Actions/xenomorph.rsi, state: leap_on }
+  - type: Sprite
+    layers:
+    - state: leap_off
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: leap_on
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
   - type: TargetAction
     range: 15
     checkCanAccess: false
@@ -219,16 +256,21 @@
 
 # Transfer plasma action
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionTransferPlasma
-  parent: BaseAction
   name: Transfer plasma (50)
   description: Passes plasma to your friend.
   components:
   - type: Action
     priority: 0
     raiseOnUser: true # TODO: make plasma vessel use body properly
-    icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: plasma_transfer_off }
-    iconOn: { sprite : _White/Interface/Actions/xenomorph.rsi, state: plasma_transfer_on }
+  - type: Sprite
+    layers:
+    - state: plasma_transfer_off
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: plasma_transfer_on
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
   - type: TargetAction
     interactOnMiss: false
     range: 2
@@ -237,16 +279,18 @@
 
 # Promotion action
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionXenomorphPromotion
-  parent: BaseAction
-  name: Promote to Praetorian (500) # Goobstation
-  description: Directly promote a xenomorph to Praetorian status. # Goobstation
+  name: Promote to Praetorian (500)
+  description: Directly promote a xenomorph to Praetorian status.
   components:
   - type: Action
     itemIconStyle: BigAction
-    useDelay: 5 # Goobstation
-    icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: promote }
-  - type: TargetAction # Goobstation start
+    useDelay: 5
+  - type: Sprite
+    layers:
+    - state: promote
+  - type: TargetAction
     checkCanAccess: true
     range: 2
   - type: EntityTargetAction
@@ -254,38 +298,43 @@
     whitelist:
       requireAll: true
       components:
-      - Xenomorph # Goobstation end
+      - Xenomorph
     event: !type:PromotionActionEvent
   - type: PlasmaCostAction
     plasmaCost: 500
 
 # Toggleable acid spit action
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionAcidSpit
-  parent: BaseAction
   name: Acid spit (20)
   description: Toggle the ability to spit neurotoxin. When enabled, use (M2) to shoot.
   components:
   - type: Action
     useDelay: 1
-    itemIconStyle: BigAction
-    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: acid } # TODO: Custom sprite
+  - type: Sprite
+    layers:
+    - state: acid # TODO: custom sprite...
   - type: InstantAction
     event: !type:ToggleAcidSpitEvent
 
 # Facehugger leap action
 - type: entity
+  parent: BaseXenomorphAction
   id: ActionFaceHuggerLeap
-  parent: BaseAction
   name: Leap
   description: Leap onto a target's face to attach yourself.
   components:
   - type: Action
     priority: 0
     useDelay: 5
-    itemIconStyle: BigAction
-    icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: leap_off }
-    iconOn: { sprite : _White/Interface/Actions/xenomorph.rsi, state: leap_on }
+  - type: Sprite
+    layers:
+    - state: leap_off
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: leap_on
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
   - type: TargetAction
     range: 15
     checkCanAccess: false
@@ -294,15 +343,15 @@
 
 # Queen roar action
 - type: entity
-  parent: BaseAction
+  parent: BaseXenomorphAction
   id: ActionQueenroar
   name: Roar
   description: Roar loudly to stun all enemies around you.
   components:
+  - type: Sprite
+    layers:
+    - state: screech
   - type: Action
-    icon:
-      sprite: _White/Interface/Actions/xenomorph.rsi
-      state: screech
     useDelay: 60
     priority: 5
   - type: InstantAction

@@ -12640,3 +12640,149 @@ Entries:
   id: 1382
   time: '2026-08-01T21:13:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3874
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed ranching chickens being able to equip anything.
+  id: 1383
+  time: '2026-08-02T03:27:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3894
+- author: dragydevi
+  changes:
+  - type: Remove
+    message: Removed Blob Midround spawn
+  id: 1384
+  time: '2026-08-02T06:50:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3901
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix moth wings weightless values not being applied properly and 0g
+      acceleration being higher than intended
+  - type: Tweak
+    message: Moths take more damage from fire.
+  id: 1385
+  time: '2026-08-02T07:47:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3903
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: LoneOps can no longer buy the zombie bundle.
+  id: 1386
+  time: '2026-08-03T13:18:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3913
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: Slayer overcoat now can toggle to broadcast to station radios.
+  - type: Tweak
+    message: Monarch coat can now be bought by non-human syndicate agents.
+  id: 1387
+  time: '2026-08-03T16:21:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3892
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Increased the contact damage of most contact chemicals specifically
+      sulfuric acid, fluorosulfuric acid, polytrinic acid, and razorium
+  - type: Tweak
+    message: >-
+      Tweaked the following chemicals to allow them to spill on the floor from
+      smoke/foam: fluorosulfuric acid, polytrinic acid, razorium, welding fuel,
+      chlorine trifluoride, and mold
+  id: 1388
+  time: '2026-08-03T20:19:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3616
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen not breathing.
+  id: 1389
+  time: '2026-08-03T23:39:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3928
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tendons surviving space.
+  id: 1390
+  time: '2026-08-04T00:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3937
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Revamped the Mining Shuttle
+  id: 1391
+  time: '2026-08-04T03:20:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Syndicate snack box no longer gives you gutworms.
+  id: 1392
+  time: '2026-08-04T20:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3948
+- author: tsarevichvanya
+  changes:
+  - type: Fix
+    message: Fixed xeno resin not slowing you down.
+  id: 1393
+  time: '2026-08-04T20:41:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3946
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed robust harvest and saltpeter not healing ballistic damage on dionae.
+  id: 1394
+  time: '2026-08-04T22:35:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3953
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Chickens only take 5 minutes to age from baby to adult now
+  - type: Tweak
+    message: Chickens ageing is no longer random
+  - type: Tweak
+    message: Happiness for each chicken when petted is now increased
+  - type: Tweak
+    message: Huger useable when laying an egg is decreased
+  id: 1395
+  time: '2026-08-04T23:00:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3942
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed heretic blades not acting as bonesaws or scalpels
+  id: 1396
+  time: '2026-08-05T06:16:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3959
+- author: Kenkaitos
+  changes:
+  - type: Fix
+    message: Fixed slime not being able to move after being starved
+  id: 1397
+  time: '2026-08-05T07:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3957
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix rust ascended heretics being immune to melee.
+  - type: Tweak
+    message: Carving knife draws runes 3x faster but they are much more visible.
+  - type: Fix
+    message: Fix rust construction not working.
+  id: 1398
+  time: '2026-08-05T11:29:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3960
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to go to red alert.
+  - type: Fix
+    message: Fixed some augments not being items usable in surgery.
+  - type: Remove
+    message: Command antags experiment has ended.
+  id: 1399
+  time: '2026-08-05T19:31:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3967
