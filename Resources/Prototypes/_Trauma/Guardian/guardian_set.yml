@@ -2,8 +2,8 @@
 
 - type: selectableSet
   id: GuardianStandardSet
-  name: Standard
-  description: A balanced guardian with a crushing strike and a fear aura that slows nearby enemies.
+  name: selectable-set-guardian-standard-name
+  description: selectable-set-guardian-standard-description
   sprite:
     sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
     state: icon
@@ -14,8 +14,8 @@
 
 - type: selectableSet
   id: GuardianAssassinSet
-  name: Assassin
-  description: A stealthy guardian with poisoned blades and a lethal ambush burst.
+  name: selectable-set-guardian-assassin-name
+  description: selectable-set-guardian-assassin-description
   sprite:
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
     state: icon
@@ -26,8 +26,8 @@
 
 - type: selectableSet
   id: GuardianLightningSet
-  name: Lightning
-  description: A crackling guardian that zaps targets with lightning and burns everything in its path.
+  name: selectable-set-guardian-lightning-name
+  description: selectable-set-guardian-lightning-description
   sprite:
     sprite: Clothing/Hands/Gloves/fingerlessinsuls.rsi
     state: icon

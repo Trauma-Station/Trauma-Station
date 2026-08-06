@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage.Prototypes;
-using Content.Trauma.Shared.Genetics.Mutations;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Guardian.Components;
 
@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Guardian.Components;
 /// action fires a targeted bolt that stuns and then chains to other enemies, and while the
 /// guardian exists its host is granted electricity resistance (a gene and a Shock modifier set).
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class GuardianLightningComponent : Component
 {
     // Passive arcs
@@ -87,29 +87,22 @@ public sealed partial class GuardianLightningComponent : Component
 
     // Host protection
     /// <summary>
-    /// Mutation granted to the host while the guardian exists, providing electricity resistance.
-    /// </summary>
-    [DataField]
-    public EntProtoId<MutationComponent> GeneId = "MutationInsulated";
-
-    /// <summary>
     /// Damage modifier set applied to the host while the guardian exists. Use a
     /// DamageModifierSetPrototype with a Shock coefficient of 0 for full insulation.
     /// </summary>
     [DataField]
     public ProtoId<DamageModifierSetPrototype>? HostDamageModifierSet = new("GuardianLightningHost");
 
-    // Runtime state (server only)
     /// <summary>
     /// Next time a passive arc fires.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextPassive;
 
     /// <summary>
     /// Host the protection was last applied to, so protection can be moved when the host
     /// changes (e.g. the host is polymorphed) and cleaned up on shutdown.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public EntityUid? ProtectedHost;
 }

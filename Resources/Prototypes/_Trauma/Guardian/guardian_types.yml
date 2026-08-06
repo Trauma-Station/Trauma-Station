@@ -1,17 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Standard
 - type: entity
-  id: MobHoloparasiteGuardianStandard
   parent: MobHoloparasiteGuardian
+  id: MobHoloparasiteGuardianStandard
   components:
-  - type: Sprite
-    layers:
-    - state: tech_base
-      map: [ "enum.DamageStateVisualLayers.Base" ]
-    - state: tech_flare
-      map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
-      color: "#15ffa1"
-      shader: unshaded
   - type: Guardian
     damageShare: 0.4
   - type: MeleeWeapon
@@ -26,25 +19,12 @@
   - type: GuardianFearAura
     radius: 2
 
-- type: entity
-  parent: StatusEffectSlowdown
-  id: GuardianFearSlowdownStatusEffect
-  name: guardian fear slowdown
-
 # Assassin
 - type: entity
-  id: MobHoloparasiteGuardianAssassin
   parent: MobHoloparasiteGuardian
+  id: MobHoloparasiteGuardianAssassin
   description: A shard of razor-sharp hard-light, perpetually flickering at the edge of visibility. It hunts, tuning into its owner's life to sustain itself.
   components:
-  - type: Sprite
-    layers:
-    - state: tech_base
-      map: [ "enum.DamageStateVisualLayers.Base" ]
-    - state: tech_flare
-      map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
-      color: "#a11616"
-      shader: unshaded
   - type: Guardian
     damageShare: 1.0
   - type: MeleeWeapon
@@ -57,46 +37,12 @@
     actions:
     - ActionGuardianAssassinStealth
 
-- type: entity
-  parent: BaseAction
-  id: ActionGuardianAssassinStealth
-  name: guardian-assassin-stealth-action-name
-  description: guardian-assassin-stealth-action-description
-  components:
-  - type: Action
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi
-      state: jaunt
-    useDelay: 12
-    itemIconStyle: BigAction
-  - type: InstantAction
-    event: !type:GuardianStealthToggleEvent
-
-- type: entity
-  parent: ForcedStealthStatusEffect
-  id: ForcedStealthStatusEffectAssassin
-  name: stealth
-  description: You are completely invisible.
-  components:
-  - type: ForcedStealthStatusEffect
-    visibility: 0.08
-    revealOnAttack: true
-    revealOnDamage: true
-
 # Lightning
 - type: entity
-  id: MobHoloparasiteGuardianLightning
   parent: MobHoloparasiteGuardian
+  id: MobHoloparasiteGuardianLightning
   description: A coiled serpent of crackling hard-light, snapping with static discharge. It weaves, tuning into its owner's life to sustain itself.
   components:
-  - type: Sprite
-    layers:
-    - state: tech_base
-      map: [ "enum.DamageStateVisualLayers.Base" ]
-    - state: tech_flare
-      map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
-      color: "#38bdf8"
-      shader: unshaded
   - type: Guardian
     damageShare: 0.6
   - type: MeleeWeapon
@@ -109,32 +55,9 @@
     - ActionGuardianLightningBolt
 
 - type: entity
-  parent: BaseAction
-  id: ActionGuardianLightningBolt
-  name: Lightning Bolt
-  description: Zap a target with a bolt of lightning, stunning it and chaining to nearby enemies. People with electricity resistance cannot be targeted.
-  components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: zap
-    useDelay: 5
-    itemIconStyle: BigAction
-  - type: TargetAction
-    interactOnMiss: false
-    range: 7
-  - type: EntityTargetAction
-    whitelist:
-      components:
-      - MobState
-    canTargetSelf: false
-    event: !type:GuardianLightningBoltEvent
-
-- type: entity
-  name: guardian lightning
-  id: GuardianLightning
   parent: ChargedLightning
-  categories: [ HideSpawnMenu ]
+  id: GuardianLightning
+  name: guardian lightning
   components:
   - type: Sprite
     layers:
@@ -152,10 +75,9 @@
     canArc: true
 
 - type: entity
-  name: guardian lightning discharge
-  id: GuardianLightningPassive
   parent: ChargedLightning
-  categories: [ HideSpawnMenu ]
+  id: GuardianLightningPassive
+  name: guardian lightning discharge
   components:
   - type: Sprite
     layers:
@@ -174,8 +96,8 @@
 
 # Explosive
 #- type: entity
-#  id: MobHoloparasiteGuardianExplosive
 #  parent: MobHoloparasiteGuardian
+#  id: MobHoloparasiteGuardianExplosive
 #  description: A knot of sullen hard-light that hungers for demolition, humming with barely restrained energy. It waits, tuning into its owner's life to sustain itself.
 #  components:
 #  - type: Sprite

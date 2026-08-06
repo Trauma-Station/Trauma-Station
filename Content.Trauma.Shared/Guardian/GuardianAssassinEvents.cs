@@ -9,4 +9,4 @@ namespace Content.Trauma.Shared.Guardian;
 /// </summary>
 public sealed partial class GuardianStealthToggleEvent : InstantActionEvent
 {
-}
+};

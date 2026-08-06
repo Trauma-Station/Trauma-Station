@@ -19,21 +19,13 @@ public abstract partial class SharedGuardianAssassinSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GuardianAssassinComponent, GuardianStealthToggleEvent>(OnStealthToggle);
-        SubscribeLocalEvent<GuardianAssassinComponent, GetUserMeleeDamageEvent>(OnGetUserMeleeDamage);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStealthToggle(Entity<GuardianAssassinComponent> ent, ref GuardianStealthToggleEvent args)
     {
         if (args.Handled)
             return;
 
-        GuardianComponent? guardian = null;
-        if (!Resolve(ent, ref guardian) || !guardian.GuardianLoose)
+        if (!TryComp<GuardianComponent>(ent, out var guardian) || !guardian.GuardianLoose)
         {
             _popup.PopupEntity(Loc.GetString("guardian-assassin-not-manifested"), ent, ent, PopupType.MediumCaution);
             return;
@@ -59,6 +51,7 @@ public abstract partial class SharedGuardianAssassinSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetUserMeleeDamage(Entity<GuardianAssassinComponent> ent, ref GetUserMeleeDamageEvent args)
     {
         if (!_statusEffects.HasStatusEffect(ent, ent.Comp.StealthEffect))

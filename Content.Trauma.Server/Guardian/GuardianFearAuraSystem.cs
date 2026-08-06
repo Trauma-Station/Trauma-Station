@@ -19,6 +19,8 @@ public sealed partial class GuardianFearAuraSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MovementModStatusSystem _movementMod = default!;
 
+    private readonly HashSet<Entity<MobStateComponent>> _mobStates = new();
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -32,7 +34,9 @@ public sealed partial class GuardianFearAuraSystem : EntitySystem
             aura.NextCheck = _timing.CurTime + aura.CheckInterval;
 
             var coords = _transform.GetMapCoordinates((uid, xform));
-            foreach (var target in _lookup.GetEntitiesInRange<MobStateComponent>(coords, aura.Radius, LookupFlags.Dynamic))
+            _mobStates.Clear();
+            _lookup.GetEntitiesInRange(coords, aura.Radius, _mobStates, LookupFlags.Dynamic);
+            foreach (var target in _mobStates)
             {
                 if (target.Owner == uid || target.Owner == guardian.Host)
                     continue;

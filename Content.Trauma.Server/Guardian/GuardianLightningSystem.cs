@@ -5,7 +5,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Guardian.Components;
 using Content.Shared.Physics;
-using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.Guardian;
 using Content.Trauma.Shared.Guardian.Components;
 using Robust.Shared.GameObjects;
@@ -17,34 +16,25 @@ namespace Content.Trauma.Server.Guardian;
 /// <summary>
 /// Server-side half of the lightning guardian: runs the passive arcs around the manifested
 /// guardian, applies the targeted bolt (damage + stun + chaining) and keeps the host's
-/// electricity resistance gene and Shock modifier set alive while the guardian exists.
+/// electricity resistance (an <see cref="InsulatedComponent"/> and Shock modifier set) alive while the guardian exists.
 /// </summary>
 public sealed partial class GuardianLightningSystem : SharedGuardianLightningSystem
 {
     [Dependency] private LightningSystem _lightning = default!;
-    [Dependency] private MutationSystem _mutation = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private IGameTiming _timing = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GuardianLightningComponent, ComponentShutdown>(OnGuardianShutdown);
-    }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<GuardianLightningComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var query = EntityQueryEnumerator<GuardianLightningComponent, GuardianComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var guardian))
         {
-            GuardianComponent? guardian = null;
-            if (!Resolve(uid, ref guardian) || guardian.Host is not { } host || Deleted(host))
+            if (guardian.Host is not { } host || Deleted(host))
                 continue;
 
-            KeepHostProtection(uid, comp, host);
+            KeepHostProtection((uid, comp), host);
 
             if (!guardian.GuardianLoose || _timing.CurTime < comp.NextPassive)
                 continue;
@@ -84,7 +74,7 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
     /// <summary>
     /// Configures a lightning beam so it shocks anything it touches (except the guardian) with
     /// the given damage and optional paralyze time. Insulation is respected so the host's
-    /// resistance gene and insulated enemies are actually protected.
+    /// <see cref="InsulatedComponent"/> and insulated enemies are actually protected.
     /// </summary>
     private Action<EntityUid> MakeBoltAction(EntityUid performer, float damage, float stunTimeSeconds)
     {
@@ -100,8 +90,7 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
             electrified.ShockDamage = damage;
             electrified.ShockTime = stunTimeSeconds;
 
-            Entity<PreventCollideComponent, ElectrifiedComponent> ent = (beam, preventCollide, electrified);
-            Dirty(ent);
+            Dirty<PreventCollideComponent, ElectrifiedComponent>((beam, preventCollide, electrified));
         };
     }
 
@@ -109,22 +98,23 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
     /// Grants the host the resistance gene and Shock modifier set, moving them over when the
     /// host changes (e.g. the host is polymorphed).
     /// </summary>
-    private void KeepHostProtection(EntityUid guardian, GuardianLightningComponent comp, EntityUid host)
+    private void KeepHostProtection(Entity<GuardianLightningComponent> guardian, EntityUid host)
     {
-        if (comp.ProtectedHost == host)
+        if (guardian.Comp.ProtectedHost == host)
             return;
 
-        if (comp.ProtectedHost is { } oldHost && oldHost != host)
-            RemoveHostProtection(oldHost, comp);
+        if (guardian.Comp.ProtectedHost is { } oldHost && oldHost != host)
+            RemoveHostProtection(oldHost, guardian.Comp);
 
-        _mutation.AddMutation(host, comp.GeneId, automatic: true);
+        EnsureComp<InsulatedComponent>(host);
 
-        if (comp.HostDamageModifierSet != null)
-            _damage.SetDamageModifierSetId(host, comp.HostDamageModifierSet);
+        if (guardian.Comp.HostDamageModifierSet != null)
+            _damage.SetDamageModifierSetId(host, guardian.Comp.HostDamageModifierSet);
 
-        comp.ProtectedHost = host;
+        guardian.Comp.ProtectedHost = host;
     }
 
+    [SubscribeLocalEvent]
     private void OnGuardianShutdown(Entity<GuardianLightningComponent> ent, ref ComponentShutdown args)
     {
         var host = ent.Comp.ProtectedHost ??
@@ -136,7 +126,7 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
 
     private void RemoveHostProtection(EntityUid host, GuardianLightningComponent comp)
     {
-        _mutation.RemoveMutation(host, comp.GeneId, automatic: true);
+        RemComp<InsulatedComponent>(host);
 
         if (comp.HostDamageModifierSet != null)
             _damage.SetDamageModifierSetId(host, null);
