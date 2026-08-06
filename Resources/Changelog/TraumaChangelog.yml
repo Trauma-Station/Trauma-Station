@@ -12786,3 +12786,10 @@ Entries:
   id: 1399
   time: '2026-08-05T19:31:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3967
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix woundmed damage healing being less than intended in some cases.
+  id: 1400
+  time: '2026-08-06T12:05:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3977
