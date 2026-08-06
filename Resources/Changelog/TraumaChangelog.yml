@@ -12839,3 +12839,10 @@ Entries:
   id: 1404
   time: '2026-08-06T13:29:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3981
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed hanged demon not being able to hardgrab people.
+  id: 1405
+  time: '2026-08-06T13:37:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3982
