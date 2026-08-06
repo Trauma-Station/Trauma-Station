@@ -111,6 +111,7 @@
         mask:
         - SmallMobMask
         layer:
+        - HighImpassable # Trauma - prevent canisters phasing through glass/edge firelocks
         - MachineLayer
   - type: AtmosDevice
     requireAnchored: false

@@ -89,15 +89,6 @@
       effectProto: ShadowCloakStatusEffect
       time: 180
       type: Remove
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectBlurryVision
-      time: 6
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectDeaf
-      time: 6
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectMuted
-      time: 6
   - type: Transform
     anchored: true
   - type: Physics
