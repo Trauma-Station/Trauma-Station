@@ -689,6 +689,7 @@
         Asphyxiation: 15
         Bloodloss: 5
         Ion: 20
+    animation: WeaponArcPurplePunch
     altDisarm: true
     canWideSwing: false
     attackRate: 0.5
@@ -781,6 +782,7 @@
     damage:
       types:
         Piercing: 12
+    animation: WeaponArcThrust
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -796,6 +798,9 @@
           DemonSoulFragment:
             min: 1
             max: 2
+    - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 7
 
 - type: entity
   parent: BaseDemon
@@ -828,7 +833,6 @@
           DemonSoulFragment:
             min: 1
             max: 2
-
 # Major demons
 
 - type: entity
@@ -1288,7 +1292,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
+        Blunt: 20
         Slash: 15
         Structural: 30
     animation: WeaponArcBite
