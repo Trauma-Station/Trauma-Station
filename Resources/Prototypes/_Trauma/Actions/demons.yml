@@ -38,9 +38,13 @@
     raiseOnAction: false
     sound: !type:SoundPathSpecifier
       path: /Audio/_Trauma/Mobs/Biowepon/clang.ogg
+  - type: Magic
+    requiresClothes: false
+    requiresSpeech: true
+    school: Evocation
 
 - type: entity
-  parent: ActionRepulseII
+  parent: ActionRepulseNoRobes
   id: ActionDemonRepulse
   name: Demonic Pulse
   description: Release a pulse of raw demonic energy, pushing everyone away from you.
@@ -53,7 +57,7 @@
     useDelay: 25
     raiseOnAction: false
     sound: !type:SoundPathSpecifier
-      path: /Audio/_Goobstation/Heretic/disintergrate.ogg
+      path: /Audio/_Goobstation/Heretic/disintegrate.ogg
 
 
 # Goobstation heretic
