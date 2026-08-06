@@ -28,20 +28,8 @@
   id: SlurredSpeech
 
 - type: statusEffect
-  id: PressureImmunity
-  alwaysAllowed: true # Shitmed: Used by space animal heart to work on anything
-
-- type: statusEffect
-  id: Muted
-  alert: Muted
-
-- type: statusEffect
   id: Corporeal
   alert: Corporeal
 
 - type: statusEffect
   id: Pacified #cannot attack
-
-- type: statusEffect
-  id: Adrenaline
-  alert: Adrenaline

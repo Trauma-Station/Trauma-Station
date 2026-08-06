@@ -112,6 +112,10 @@
   color: "#8a9a5b"
   recognizable: true
   physicalDesc: reagent-physical-desc-fuzzy
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   metabolisms:
     Bloodstream:
       effects:
@@ -146,6 +150,10 @@
   color: "#a1000b"
   boilingPoint: 78.2 # This isn't a real chemical...
   meltingPoint: -19.4
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: 20
@@ -161,7 +169,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.5
+            Caustic: 1 # Trauma - Was 0.5
       - !type:Emote
         emote: Scream
         probability: 0.3
@@ -213,6 +221,10 @@
   color: "#00ff5f" # Trauma
   boilingPoint: 165
   meltingPoint: -87
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
@@ -221,7 +233,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.3
+            Caustic: 0.75 # Trauma - Was 0.3
       - !type:Emote
         emote: Scream
         probability: 0.2
@@ -255,6 +267,10 @@
   recognizable: true
   boilingPoint: 337.0
   meltingPoint: 10.31
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: 10
@@ -270,7 +286,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.1
+            Caustic: 0.3 # Trauma - Was 0.1
       - !type:Emote
         emote: Scream
         probability: 0.1

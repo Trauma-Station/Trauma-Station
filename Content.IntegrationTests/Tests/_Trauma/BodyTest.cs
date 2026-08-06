@@ -38,7 +38,7 @@ public sealed class BodyTest : GameTest
 
         var map = await Pair.CreateTestMap();
 
-        var bodyName = factory.CompName<BodyComponent>();
+        var bodyName = factory.CompName<InitialBodyComponent>();
         await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>

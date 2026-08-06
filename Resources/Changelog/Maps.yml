@@ -343,3 +343,19 @@ Entries:
   id: 36
   time: '2026-07-29T01:47:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3817
+- author: Nousagi37
+  changes:
+  - type: Tweak
+    message: >-
+      Bagel: All Solar Beacons have been fixed, and Kitchen now has a backroom
+      due to Maintenance being pushed down to fit Ranching.
+  id: 37
+  time: '2026-08-01T21:13:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3874
+- author: mickers7
+  changes:
+  - type: Add
+    message: Added the chemicompiler into all chemlabs roundstart
+  id: 38
+  time: '2026-08-05T18:49:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3947

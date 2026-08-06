@@ -8,7 +8,6 @@ namespace Content.Server.Entry
             "RotationDrawDepth",
             "ToggleableLightWieldable",
             "HideClothingLayerClothing",
-            "MultiShaderSprite",
             "ItemSlotRenderer",
             "ShowSpriteLayerStatusEffect",
             "AnimatedEmotesBlacklist",

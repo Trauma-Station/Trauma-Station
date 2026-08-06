@@ -21,8 +21,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.01
-      heatingCoefficient: 0.01
+      coefficient: 0.01
   - type: Clothing
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
@@ -223,8 +222,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.001 # 10x better
-      heatingCoefficient: 0.001 # 10x better
+      coefficient: 0.001 # 10x better
   - type: ModifyDelayedKnockdown
     delayDelta: 1
     knockdownTimeDelta: -1

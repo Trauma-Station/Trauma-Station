@@ -1,7 +1,8 @@
 using System.Linq;
 using Content.Server.GameTicking;
 using Content.Shared.Administration;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
+using Content.Shared.Ghost.Systems;
 using Content.Shared.Mind;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;

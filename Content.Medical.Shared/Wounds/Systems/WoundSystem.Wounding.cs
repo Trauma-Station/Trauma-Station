@@ -12,6 +12,7 @@ using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Surgery;
 using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
@@ -38,6 +39,7 @@ public sealed partial class WoundSystem
 {
     [Dependency] private BodyStatusSystem _bodyStatus = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedSurgerySystem _surgery = default!;
 
     private const string WoundContainerId = "Wounds";
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
@@ -494,12 +496,14 @@ public sealed partial class WoundSystem
         if (!_container.Insert(wound.Owner, part.Comp.Wounds))
             return false;
 
+        if (_body.GetBody(part) is { } body)
+            _surgery.RefreshUI(body);
         return true;
     }
 
     private bool RemoveWound(EntityUid wound)
     {
-        if (!_query.HasComp(wound))
+        if (!_query.TryComp(wound, out var comp))
             return false;
 
         // We prevent removal if theres at least one wound holding traumas left.
@@ -509,19 +513,24 @@ public sealed partial class WoundSystem
                 return false;
         }
 
-        PredictedQueueDel(wound);
+        PredictedDel(wound);
+
+        if (_body.GetBody(comp.HoldingWoundable) is { } body)
+            _surgery.RefreshUI(body);
 
         return true;
     }
 
     [SubscribeLocalEvent]
-    private void OnTraumaBeingRemoved(Entity<TraumaInflicterComponent> ent, ref TraumaBeingRemovedEvent args)
+    private void OnTraumaBeingRemoved(Entity<WoundComponent> ent, ref TraumaBeingRemovedEvent args)
     {
-        if (_query.TryComp(ent, out var woundComp) &&
-            woundComp.WoundSeverity == WoundSeverity.Healed)
+        if (ent.Comp.WoundSeverity == WoundSeverity.Healed)
         {
             RemoveWound(ent); // Remove wound method will perform the check on if there are any other wounds pending treatment
         }
+
+        if (_body.GetBody(ent.Comp.HoldingWoundable) is { } body)
+            _surgery.RefreshUI(body);
     }
 
     [SubscribeLocalEvent]

@@ -1,5 +1,6 @@
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Inventory;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -28,9 +29,14 @@ public sealed class BeforeEmoteEvent(EntityUid source, EmotePrototype emote)
 /// Use it to play sound, change sprite or something else.
 /// </summary>
 [ByRefEvent]
-// Goob - added Voluntary
-public record struct EmoteEvent(EmotePrototype Emote, bool Voluntary = true)
+public record struct EmoteEvent(NetEntity Source, EmotePrototype Emote,
+    bool Voluntary = true) // Trauma
 {
+    /// <summary>
+    /// The entity that performed the emote.
+    /// </summary>
+    public NetEntity Source = Source;
+
     /// <summary>
     /// The used emote.
     /// </summary>

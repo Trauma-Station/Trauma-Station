@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Shadowling.Components;
 
@@ -7,17 +8,25 @@ namespace Content.Goobstation.Shared.Shadowling.Components;
 /// Marks target as affected by Icy Veins and applies its effects
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause]
 public sealed partial class IcyVeinsTargetComponent : Component
 {
+    /// <summary>
+    /// Temperature, not energy, to decrease every <see cref="DecreaseDelay"/>.
+    /// </summary>
     [DataField]
-    public float DecreaseTempByValue = 5.0f;
+    public float TempDecrease = 5f;
+
+    /// <summary>
+    /// When to end the effect
+    /// </summary>
+    [DataField]
+    public float MinTargetTemperature = 200f;
 
     [DataField]
-    public float MinTargetTemperature = 200.0f;
+    public TimeSpan DecreaseDelay = TimeSpan.FromSeconds(0.6);
 
-    [DataField]
-    public float TimeUntilNextDecrease = 0.6f;
-
-    [DataField]
-    public float Timer = 0.6f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
+    public TimeSpan NextDecrease;
 }

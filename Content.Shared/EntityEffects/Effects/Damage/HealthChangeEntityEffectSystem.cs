@@ -34,7 +34,7 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         if (args.Effect.ScaleByTemperature is { } scaleTemp)
         {
             damageSpec *= TryComp<TemperatureComponent>(entity, out var temp)
-                ? scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false)
+                ? scaleTemp.GetEfficiencyMultiplier(temp.Temperature, args.Scale, false)
                 : FixedPoint2.Zero;
         }
 

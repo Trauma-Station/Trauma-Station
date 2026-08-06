@@ -2561,7 +2561,7 @@
         Quantity: 5
       - ReagentId: Nutriment
         Quantity: 5
-      - ReagentId: Tilenol
+      - ReagentId: Tilenol # Trauma - was Pax
         Quantity: 5
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/world_pea.rsi

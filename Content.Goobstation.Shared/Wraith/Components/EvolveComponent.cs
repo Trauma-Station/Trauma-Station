@@ -19,11 +19,11 @@ public sealed partial class EvolveComponent : Component
     [DataField]
     public int CorpsesRequired = 3;
 
-    [ViewVariables]
+    [DataField]
     public EntityUid? ActionEnt;
 
-    [ViewVariables]
-    public EntProtoId ActionId = "ActionEvolve";
+    [DataField]
+    public EntProtoId ActionId = "ActionWraithEvolve";
 }
 
 /// <summary>

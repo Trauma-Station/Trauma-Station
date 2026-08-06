@@ -423,7 +423,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return false;
     }
 
-    protected virtual void RefreshUI(EntityUid body)
+    public virtual void RefreshUI(EntityUid body)
     {
     }
 

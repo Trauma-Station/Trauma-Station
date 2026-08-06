@@ -43,9 +43,12 @@
           radius: 0.35
         density: 8
         mask:
-        - MobMask
+        - SmallMobMask
         layer:
-        - MobLayer
+        - SmallMobLayer
+  - type: Inventory
+    speciesId: cat
+    templateId: pet
   - type: Speech
     speechVerb: SmallMob
     speechSounds: Cluck

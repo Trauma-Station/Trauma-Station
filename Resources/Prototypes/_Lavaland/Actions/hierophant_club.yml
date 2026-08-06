@@ -2,17 +2,18 @@
 
 # Hierophant club
 - type: entity
+  parent: BaseAction
   id: ActionHierophantClubTileMovement
   name: Curse of Tile Movement
   description: Makes the target move only by tiles.
-  categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _Lavaland/Interface/Alerts/hierophantbeat.rsi
+    layers:
+    - state: hierophant
   - type: Action
     priority: -23
     useDelay: 30
-    icon:
-      sprite: /Textures/_Lavaland/Interface/Alerts/hierophantbeat.rsi
-      state: hierophant
     itemIconStyle: NoItem
   - type: TargetAction
     range: 5
@@ -20,18 +21,19 @@
     event: !type:ToggleTileMovementActionEvent
 
 - type: entity
-  id: ActionHierophantClubBlink
   parent: ActionBaseHierophant
+  id: ActionHierophantClubBlink
   name: Blink
   description: Teleports you to any position you can physically reach.
   components:
+  - type: Sprite
+    sprite: _Lavaland/Objects/Weapons/hierophant_club.rsi
+    layers:
+    - state: icon
   - type: Action
     raiseOnUser: true
     priority: -24
     useDelay: 10
-    icon:
-      sprite: _Lavaland/Objects/Weapons/hierophant_club.rsi
-      state: icon
   - type: TargetAction
     range: 10
   - type: WorldTargetAction

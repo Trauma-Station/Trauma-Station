@@ -8,6 +8,7 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
+using Content.Shared.Wall;
 using Content.Trauma.Shared.Standing;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -29,9 +30,9 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
     [Dependency] private TelefragSystem _telefrag = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
 
     public static readonly ProtoId<TagPrototype> DirectionalTag = "Directional";
-    public static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     private List<EntityUid> _gibQueue = new();
 
@@ -121,7 +122,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         var anchoredEntities = _map.GetAnchoredEntities(tile.Value.GridUid, mapGridComponent, coords);
         foreach (var x in anchoredEntities)
         {
-            if (_tag.HasTag(x, WallTag) && !_tag.HasTag(x, DirectionalTag))
+            if (_wallQuery.HasComp(x) && !_tag.HasTag(x, DirectionalTag))
                 return true;
         }
 

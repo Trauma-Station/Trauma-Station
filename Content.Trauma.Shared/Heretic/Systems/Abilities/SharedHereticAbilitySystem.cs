@@ -60,9 +60,9 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] protected SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected EntityLookupSystem Lookup = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
     [Dependency] protected SharedVoidCurseSystem Voidcurse = default!;
     [Dependency] protected SharedHereticSystem Heretic = default!;
-    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
     [Dependency] protected ExamineSystemShared Examine = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
 
@@ -98,6 +98,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
     public static readonly DamageSpecifier AllDamage = new();
 
+    private static EntProtoId JauntMutedEffect = "StatusEffectMutedJaunt";
     public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     public override void Initialize()
@@ -202,6 +203,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         if (result && handle)
             args.Handled = true;
         return result;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnJauntInit(Entity<JauntComponent> ent, ref ComponentInit args)
+    {
+        StatusNew.TryAddStatusEffect(ent.Owner, JauntMutedEffect, out _, null);
     }
 
     [SubscribeLocalEvent]

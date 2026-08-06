@@ -13,6 +13,15 @@
     Bloodstream:
       # Main effects
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      # </Trauma>
       - !type:HealthChange
         damage:
           types:
@@ -36,9 +45,8 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDesoxyStamina # You are on meth. You keep going.
         time: 3
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 3
       # Side effects
       - !type:Jitter
@@ -61,16 +69,6 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      # <Trauma>
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 5
-      - !type:RemoveComponents
-        components:
-        - type: DelayedKnockdown
-        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      # </Trauma>
 
       # Side effects
       - !type:ResetNarcolepsy
@@ -93,6 +91,15 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      # </Trauma>
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.25
         sprintSpeedModifier: 1.25
@@ -121,16 +128,6 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      # <Trauma>
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 5
-      - !type:RemoveComponents
-        components:
-        - type: DelayedKnockdown
-        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      # </Trauma>
 
       # Side effects
       - !type:ResetNarcolepsy
@@ -154,6 +151,18 @@
     Bloodstream:
       metabolismRate: 0.25 # Goobstation edit
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      - !type:TakeStaminaDamage
+        amount: -10
+        immediate: true
+      # </Trauma>
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.3
         sprintSpeedModifier: 1.3
@@ -186,9 +195,8 @@
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 3
       # Side effects
       - !type:Jitter
@@ -210,19 +218,6 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      # <Goob>
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 5
-      - !type:RemoveComponents
-        components:
-        - type: DelayedKnockdown
-        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      - !type:TakeStaminaDamage
-        amount: -10
-        immediate: true
-      # </Goob>
 
       # Main effects
       - !type:ModifyBleed
@@ -390,9 +385,8 @@
     Bloodstream:
       metabolismRate: 10 # Trauma
       effects:
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         type: Add
         time: 10 # 1 second per unit
 

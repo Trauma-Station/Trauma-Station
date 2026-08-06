@@ -241,9 +241,11 @@
   name: maint altar
   components:
   - type: Sprite
-    sprite: _ShitChap/Structures/convertaltar.rsi
+    sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
     layers:
     - state: maint
+      sprite: _ShitChap/Structures/convertaltar.rsi # Trauma
+    - state: lightning
       shader: unshaded
   - type: Icon
     sprite: _ShitChap/Structures/convertaltar.rsi

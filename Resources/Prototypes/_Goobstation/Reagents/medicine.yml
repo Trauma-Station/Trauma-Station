@@ -81,6 +81,10 @@
         effectProto: StatusEffectDrunk
         time: 10
         type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
+        time: 10
+        type: Remove
       - !type:EyeDamage
       - !type:RemoveComponents
         components:
@@ -92,7 +96,6 @@
           minDurationOfIncident: 0
           maxDurationOfIncident: 0
         - type: Unrevivable # i don't think this really affects lings, but might aswell to be safe
-        - type: Muted
         - type: Paracusia
           # chud shit
           minTimeBetweenIncidents: 0.1
@@ -143,9 +146,8 @@
         effectProto: StatusEffectForcedSleeping
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 2
       - !type:RemoveComponents
         components:
@@ -1081,9 +1083,8 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 2
       - !type:HealthChange
         damage:
@@ -1106,9 +1107,8 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 5
       - !type:HealthChange
         damage:
@@ -1189,9 +1189,8 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 5
       - !type:TakeStaminaDamage
         amount: -10

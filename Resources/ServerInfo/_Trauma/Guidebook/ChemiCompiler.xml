@@ -1,0 +1,159 @@
+<Document>
+# ChemiCompiler
+
+The ChemiCompiler is a chemistry machine you program instead of click. It holds ten beakers, and runs
+short programs that move reagents between them, heat them, and package the results into pills, vials or
+medical patches.
+
+Build one from a [bold]ChemiCompiler M7 machine board[/bold], printed at a medical lathe.
+
+# The Interface
+
+The big box at the top is where you write code. It is not saved anywhere until you put it in a slot.
+
+Below it are [bold]Save[/bold], [bold]Load[/bold], and six numbered slots. The slot buttons do whatever the
+Save and Load buttons say they do:
+
+- With neither pressed, clicking a slot [bold]runs[/bold] the program in it.
+- With Save pressed, clicking a slot stores the code from the editor into it.
+- With Load pressed, clicking a slot pulls its code back into the editor.
+
+Slots holding a program are highlighted green. The Halt button stops a running program early.
+
+Below those are the ten reservoirs, r1 to r10. Click one with a beaker in hand to load it, click it
+empty-handed to take the beaker back. Full reservoirs are highlighted blue. Under them are the registers,
+which only update when a program stops. That makes them a debugger of last resort: run a program, see
+where the registers ended up, work out where it went wrong.
+
+The right-hand corner lists the materials loaded into the machine.
+
+While a program is running everything is locked, including the beakers.
+
+# Memory
+
+A program has 1024 memory cells, each holding a number from 0 to 255, and a pointer that starts at the first
+one. Almost every instruction works on whichever cell the pointer is currently sitting on.
+
+There is no way to type a number directly. If you want a cell to hold 25, you write twenty-five [bold]+[/bold]
+signs. This is not a mistake, it is the whole personality of the language. Copy and paste is your friend.
+
+# Registers
+
+Three registers decide what the chemistry instructions actually do:
+
+- [bold]sx[/bold], the source. Which reservoir, 1 to 10, an instruction reads from.
+- [bold]tx[/bold], the target. Where things go. 1 to 10 for a reservoir, 11 for the pill generator,
+  12 for the vial generator, 13 to throw it away, and 14 to 17 for the patch generators:
+  14 a patch, 15 a rapid patch, 16 a large patch, 17 a therapeutic patch.
+- [bold]ax[/bold], the amount. How many units to move, and how far to heat.
+
+You set them by putting a number in a memory cell and then copying that cell into the register.
+
+# Materials
+
+The pill generator is free, but everything else the machine prints costs the same materials it would cost
+to print at a lathe. Load sheets into the machine by hand; what it is holding shows in the corner of the
+interface.
+
+- A vial costs 1 glass.
+- Any patch costs 1 cloth and 1 plastic.
+
+Each of those makes one container per instruction,with however much you sent it. Anything that will not
+fit goes back to the reservoir it came from. If the materials aren't there the instruction fails like any
+other: the machine buzzes, your reagents stay where they were, and the program carries on regardless.
+
+# Instructions
+
+Anything that isn't an instruction is ignored, so you can leave spaces and notes in your programs.
+
+## Pointer and arithmetic
+
+- [bold]\>[/bold] move the pointer one cell right
+- [bold]\<[/bold] move the pointer one cell left
+- [bold]+[/bold] add one to the current cell
+- [bold]-[/bold] subtract one from the current cell
+
+## Loops
+
+- [bold]\[[/bold] if the current cell is zero, skip past the matching \]
+- [bold]\][/bold] if the current cell is not zero, jump back to the matching \[
+
+Loops nest. A program with brackets that don't pair up is refused rather than run, so a stray \] will not
+brick the machine. A program that loops forever is abandoned after ten minutes.
+
+## Registers
+
+Each register has one instruction to write it from the current cell, and one to read it back into the cell.
+
+- [bold]}[/bold] and [bold]{[/bold] write and read [bold]sx[/bold]
+- [bold])[/bold] and [bold]([/bold] write and read [bold]tx[/bold]
+- [bold]'[/bold] and [bold]^[/bold] write and read [bold]ax[/bold]
+
+The brace-style symbol of each pair writes the register from memory; the other reads it back. A program that
+appears to run cleanly but moves nothing has almost always got one of these pairs the wrong way round.
+
+## Chemistry
+
+- [bold],[/bold] measure how full reservoir sx is and put that number in ax
+- [bold]$[/bold] bring reservoir sx to (273 - tx) + ax Kelvin. Takes a few seconds.
+  To heat rather than cool, leave tx at 0 and put the temperature above freezing in ax.
+- [bold]@[/bold] move ax units from reservoir sx to wherever tx points
+- [bold]#[/bold] move ax units of one single reagent from sx to tx. Which reagent is taken from the current
+  memory cell, counting from 1, in the order they are listed in the beaker.
+
+Anything that will not fit in the target goes back where it came from. Reagents are never quietly lost,
+except at the ejection port, which is what the ejection port is for.
+
+## Everything else
+
+- [bold].[/bold] add the current cell to a line of text, as a character. Writing a newline (10) makes the
+  machine say the line out loud; anything still unsaid is spoken when the program stops.
+- [bold]~[/bold] lock this program so Load can no longer read it back. It can still be overwritten.
+- [bold]*[/bold] pauses briefly, for reactions that take time.
+
+# Speed
+
+Instructions are not free. Moving the pointer and counting up and down are quick, shuffling registers costs
+a little more, and anything that reaches into a beaker — transferring, isolating, measuring — takes about
+half a second on its own. Standing still on purpose with [bold]*[/bold] is the slowest single instruction
+there is, at a full second.
+
+That means the expensive part of a program is the chemistry, not the arithmetic, which is how it should be.
+Don't agonise over shaving \+ signs off your constants; think about how many times you're moving reagents.
+
+Heating is slower still. The machine pushes heat at the same rate a hotplate does, so bringing a full beaker
+up to reaction temperature takes the better part of a minute. Automating chemistry saves you clicking, not
+time.
+
+# Sounds
+
+You cannot see the registers while a program runs, so listening to the machine is how you follow it.
+
+- Two beeps as a program starts.
+- One beep every time reagents leave a reservoir, whether they go to another beaker, a pill, a vial, a patch
+  or the bin. Count them against your plan and you know how far it has got.
+- A low beep when heating begins, and the same low beep again once the reservoir is up to temperature.
+  Silence between the two is normal; heating is slow.
+- A high beep when the program finishes and the beakers unlock.
+- A buzzer when an instruction could not be carried out. This is the one to listen for.
+
+# Failures
+
+If an instruction can't be carried out, usually because sx or tx points at a reservoir with no beaker in it,
+or because the machine has run out of the materials a vial or patch needs, it beeps loudly and carries
+straight on to the next instruction. It does not stop. A program that
+buzzes repeatedly is a program that is doing nothing at all, very confidently.
+
+# Writing a program
+
+Plan on paper first. Seriously. Write down every beaker, what is in it, how full it is, and every transfer
+in order, before you write a single symbol. Then translate the plan one line at a time.
+
+A useful opening move is to fill the first several cells with small numbers you'll need later:
+
+[bold]+\>++\>+++\>++++\>+++++[/bold]
+
+That leaves 1, 2, 3, 4 and 5 in the first five cells, which are exactly the reservoir numbers you will be
+loading into sx and tx all program. Add whatever transfer amounts you need on the end, and from then on
+setting a register is just walking the pointer to the right cell and copying it.
+</Document>

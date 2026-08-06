@@ -4,8 +4,8 @@ using Content.Goobstation.Server.Blob.GameTicking;
 using Content.Goobstation.Server.Blob.Objectives;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.AlertLevel;
 using Content.Server.RoundEnd;
+using Content.Shared.AlertLevel;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Station;
 using Content.Shared.Objectives.Components;
@@ -23,6 +23,8 @@ public sealed partial class BlobCoreSystem : SharedBlobCoreSystem
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private SharedStationSystem _station = default!;
+
+    private static readonly ProtoId<AlertLevelPrototype> GreenAlert = "Green";
 
     private const double KillCoreJobTime = 0.5;
     private readonly JobQueue _killCoreJobQueue = new(KillCoreJobTime);
@@ -138,7 +140,7 @@ public sealed partial class BlobCoreSystem : SharedBlobCoreSystem
                 continue;
 
             if (stationUid != null)
-                _alertLevel.SetLevel(stationUid.Value, "green", true, true, true);
+                _alertLevel.SetLevel(stationUid.Value, GreenAlert, force: true);
 
             _roundEnd.CancelRoundEndCountdown(forceRecall: false);
             blobRuleComp.Stage = BlobStage.Default;
