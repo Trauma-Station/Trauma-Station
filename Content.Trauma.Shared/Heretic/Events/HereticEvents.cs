@@ -34,9 +34,6 @@ public sealed partial class EventHereticAscension : EntityEventArgs;
 public sealed partial class EventHereticRerollTargets : EntityEventArgs;
 
 [DataDefinition]
-public sealed partial class EventHereticUpdateTargets : EntityEventArgs;
-
-[DataDefinition]
 public sealed partial class EventHereticResolveStarGazer : EntityEventArgs;
 
 [DataDefinition]
