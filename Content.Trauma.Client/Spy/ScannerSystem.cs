@@ -11,6 +11,9 @@ public sealed partial class ScannerSystem : EntitySystem
     [Dependency] private IOverlayManager _overlayMan = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
+
+    [Dependency] private EntityQuery<ActiveScannerComponent> _scannerQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> ScanShader = "Scan";
     private ShaderInstance _shader = default!;
@@ -36,17 +39,26 @@ public sealed partial class ScannerSystem : EntitySystem
         if (args.Id != ScanShader)
             return;
 
-        if (!Exists(ent.Comp.Scanner) || !TryComp(ent.Comp.Scanner, out ActiveScannerComponent? scanner))
+        if (!Exists(ent.Comp.Scanner) || !_scannerQuery.TryComp(ent.Comp.Scanner, out var scanner))
             return;
 
         var ratio = InverseLerp(scanner.ScanStartTime, scanner.ScanEndTime, _timing.CurTime);
         args.Shader.SetParameter("ratio", ratio);
         ent.Comp.Ratio = ratio;
         var zoom = 1f;
+        var eyeRot = Angle.Zero;
 
         if (args.Viewport.Eye is { } eye)
+        {
+            eyeRot = eye.Rotation;
             zoom = eye.Zoom.X;
+        }
 
+        var rot = args.Sprite.Rotation - eyeRot;
+        if (!args.Sprite.NoRotation)
+            rot -= _transform.GetWorldRotation(ent);
+
+        args.Shader.SetParameter("angle", (float) rot.Theta);
         args.Shader.SetParameter("zoom", zoom);
     }
 

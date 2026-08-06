@@ -25,7 +25,7 @@ public sealed partial class SpyStealDoAfterEvent : DoAfterEvent
         StealTarget = stealTarget;
     }
 
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new SpyStealDoAfterEvent(Bounty, Rule, StealTarget);
 }
 
 

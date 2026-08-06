@@ -15,7 +15,7 @@ public sealed partial class ScannerOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    private readonly Vector2[] _vertices = new[] { Vector2.Zero, Vector2.Zero, Vector2.Zero };
+    private readonly List<Vector2> _vertices = new();
 
     private readonly ShaderInstance _unshadedShader;
 
@@ -36,13 +36,13 @@ public sealed partial class ScannerOverlay : Overlay
         if (args.Viewport.Eye is not { } eye)
             return;
 
-        var eyeRot = eye.Rotation;
         var handle = args.WorldHandle;
 
         var beingScannedQuery = _entMan.GetEntityQuery<BeingScannedComponent>();
         var xformQuery = _entMan.GetEntityQuery<TransformComponent>();
         var spriteQuery = _entMan.GetEntityQuery<SpriteComponent>();
 
+        _vertices.Clear();
         var query = _entMan.EntityQueryEnumerator<ActiveScannerComponent, TransformComponent>();
         while (query.MoveNext(out var scanner, out var xform))
         {
@@ -53,16 +53,16 @@ public sealed partial class ScannerOverlay : Overlay
 
             var ourPos = _xform.GetWorldPosition(xform, xformQuery);
             var (pos, rot) = _xform.GetWorldPositionRotation(scanned);
-            var spriteBB = _sprite.CalculateBounds((scanned, sprite), pos, rot, eyeRot);
+            var spriteBB = _sprite.CalculateBounds((scanned, sprite), pos, rot, Angle.Zero);
 
-            _vertices[0] = ourPos;
-            _vertices[1] = Vector2.Lerp(spriteBB.TopLeft, spriteBB.TopRight, comp.Ratio);
-            _vertices[2] = Vector2.Lerp(spriteBB.BottomLeft, spriteBB.BottomRight, comp.Ratio);
+            _vertices.Add(ourPos);
+            _vertices.Add(Vector2.Lerp(spriteBB.TopLeft, spriteBB.TopRight, comp.Ratio));
+            _vertices.Add(Vector2.Lerp(spriteBB.BottomLeft, spriteBB.BottomRight, comp.Ratio));
 
-            handle.UseShader(_unshadedShader);
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _vertices, Color.Red.WithAlpha(0.1f));
         }
 
+        handle.UseShader(_unshadedShader);
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _vertices, Color.Red.WithAlpha(0.1f));
         handle.UseShader(null);
     }
 }

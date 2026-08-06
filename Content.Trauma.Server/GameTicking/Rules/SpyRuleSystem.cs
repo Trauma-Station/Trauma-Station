@@ -17,6 +17,7 @@ using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
+using Content.Shared.Localizations;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random;
@@ -422,7 +423,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         var separator = Loc.GetString("generic-or");
         var deptsString = depts?.Count is > 0
-            ? string.Join($" {separator} ", depts.Select(x => Loc.GetEntityData(x).Name))
+            ? ContentLocalizationManager.FormatListToOr(depts.Select(x => Loc.GetEntityData(x).Name).ToList())
             : null;
 
         var desc = deptsString is { } str

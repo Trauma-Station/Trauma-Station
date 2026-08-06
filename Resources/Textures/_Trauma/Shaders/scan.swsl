@@ -1,6 +1,7 @@
 light_mode unshaded;
 
 uniform highp float zoom;
+uniform highp float angle;
 uniform highp float ratio;
 uniform highp vec3 scanColor;
 uniform highp float scanDensity;
@@ -16,11 +17,14 @@ void fragment()
 
     highp vec4 effectColor = sprite;
 
-    highp float scanned = abs(UV2.x - ratio);
+    highp vec2 dir = UV2 - vec2(0.5);
+    highp float rotated = dir.x * cos(angle) - dir.y * sin(angle) + 0.5;
 
-    if (UV2.x <= ratio)
+    highp float scanned = abs(rotated - ratio);
+
+    if (rotated <= ratio)
     {
-        highp float scanPattern = sin(UV2.x * scanDensity / zoom) * 0.5 + 0.5;
+        highp float scanPattern = sin(rotated * scanDensity / zoom) * 0.5 + 0.5;
 
         highp vec3 areaColor = scanColor * (scanPattern * 0.6 + 0.4);
         effectColor = vec4(areaColor, scanAlpha);
