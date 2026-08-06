@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Weapons.Penetration;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Administration.Logs;
@@ -190,9 +189,6 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         if (comp.Penetrate)
             return true;
 
-        if (damage.GetTotal() <= FixedPoint2.Zero)
-            return false;
-
         // <Goob> - Splits penetration change if target have PenetratableComponent
         if (TryComp<PenetratableComponent>(target, out var penetratable))
         {
@@ -206,6 +202,9 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             return true;
         }
         // </Goob>
+
+        if (damage.GetTotal() <= FixedPoint2.Zero)
+            return false;
 
         // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
         if (comp.PenetrationThreshold == 0)

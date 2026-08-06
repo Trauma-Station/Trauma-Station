@@ -2,10 +2,12 @@
 
 using System.Text;
 using Content.Server.Antag;
+using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.Roles;
+using Content.Server.RoundEnd;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
@@ -29,6 +31,10 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private ObjectivesSystem _objective = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+
+    private static readonly EntProtoId ERTEvent = "SpawnERTSecurity";
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -164,5 +170,21 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
             ("number", mostKnowledge)));
 
         args.Text = sb.ToString();
+    }
+
+    public void SpawnERTOnAscension()
+    {
+        var query = QueryActiveRules();
+
+        // starts the evac countdown call
+        while (query.MoveNext(out _, out var rule, out _))
+        {
+            if (rule.HasAHereticAscended)
+                break;
+
+            rule.HasAHereticAscended = true;
+            _ticker.StartGameRule(ERTEvent);
+            _roundEnd.RequestRoundEnd(checkCooldown: false, cantRecall: true, countdownTime: TimeSpan.FromMinutes(10));
+        }
     }
 }
