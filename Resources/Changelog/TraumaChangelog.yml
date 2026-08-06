@@ -12764,3 +12764,25 @@ Entries:
   id: 1397
   time: '2026-08-05T07:34:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3957
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix rust ascended heretics being immune to melee.
+  - type: Tweak
+    message: Carving knife draws runes 3x faster but they are much more visible.
+  - type: Fix
+    message: Fix rust construction not working.
+  id: 1398
+  time: '2026-08-05T11:29:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3960
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to go to red alert.
+  - type: Fix
+    message: Fixed some augments not being items usable in surgery.
+  - type: Remove
+    message: Command antags experiment has ended.
+  id: 1399
+  time: '2026-08-05T19:31:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3967
