@@ -12846,3 +12846,10 @@ Entries:
   id: 1405
   time: '2026-08-06T13:37:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3982
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Command lynchings are up by 400%.
+  id: 1406
+  time: '2026-08-06T15:35:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3983
