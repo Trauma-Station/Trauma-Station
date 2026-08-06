@@ -225,15 +225,12 @@
     - type: ShadowCloaked
 
 - type: entity
-  parent: [StatusEffectWormBlacklist, StatusEffectSpeed]
+  parent: StatusEffectWormBlacklist
   id: ShadowCloakPaleStatusEffect
   name: forest admonitions
   components:
   - type: StatusEffectAlert
     alert: ForestAdmonitions
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 1.1
-    walkSpeedModifier: 1.1
   - type: HereticCloakedStatusEffect
     loseFocusMessage: heretic-ability-lose-focus-pale-cloak
   - type: GrantComponentsStatusEffect
@@ -251,13 +248,17 @@
     walkSpeedModifier: 0.75
 
 - type: entity
-  parent: StatusEffectSlowdown
+  parent: [ StatusEffectSlowdown, MutedStatusEffectBase ]
   id: PaleFogAffectedStatusEffect
   name: pale fog affected
   components:
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.85
     walkSpeedModifier: 0.85
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: Deaf
+    - type: BlurryVision
 
 - type: entity
   parent: StatusEffectBase
@@ -322,12 +323,3 @@
   name: influence xray
   components:
   - type: XRayVisionStatusEffect
-
-- type: entity
-  parent: MobStatusEffectBase
-  id: StatusEffectDeaf
-  name: deaf
-  components:
-  - type: GrantComponentsStatusEffect
-    components:
-    - type: Deaf
