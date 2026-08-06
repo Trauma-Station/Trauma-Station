@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: localizedDataset
+  id: AccentBoganPrefix
+  values:
+    prefix: accent-bogan-prefix-
+    count: 4
+
+- type: localizedDataset
+  id: AccentBoganSuffix
+  values:
+    prefix: accent-bogan-suffix-
+    count: 5
+
+# British
+
+- type: localizedDataset
+  id: AccentBritishPrefix
+  values:
+    prefix: accent-british-prefix-
+    count: 5
+
+- type: localizedDataset
+  id: AccentBritishSuffix
+  values:
+    prefix: accent-british-suffix-
+    count: 6
+
+# Caveman
+
+- type: localizedDataset
+  id: AccentCavemanPrefix
+  values:
+    prefix: accent-caveman-prefix-
+    count: 21
+
+- type: localizedDataset
+  id: AccentCavemanSuffix
+  values:
+    prefix: accent-caveman-suffix-
+    count: 17
+
+# Dementia
+
+- type: localizedDataset
+  id: AccentDementiaPrefix
+  values:
+    prefix: accent-dementia-prefix-
+    count: 5
+
+- type: localizedDataset
+  id: AccentDementiaSuffix
+  values:
+    prefix: accent-dementia-suffix-
+    count: 6
+
+# Demonic
+
+- type: localizedDataset
+  id: AccentDemonicSuffix
+  values:
+    prefix: accent-demonic-suffix-
+    count: 8
+
+# Medieval
+
+- type: localizedDataset
+  id: AccentMedievalPrefix
+  values:
+    prefix: accent-medieval-prefix-
+    count: 42
+
+# Ohio
+
+- type: localizedDataset
+  id: AccentOhioPrefix
+  values:
+    prefix: accent-ohio-prefix-
+    count: 3
+
+- type: localizedDataset
+  id: AccentOhioSuffix
+  values:
+    prefix: accent-ohio-suffix-
+    count: 8
