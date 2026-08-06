@@ -32,13 +32,13 @@
   id: AccentCavemanPrefix
   values:
     prefix: accent-caveman-prefix-
-    count: 21
+    count: 20
 
 - type: localizedDataset
   id: AccentCavemanSuffix
   values:
     prefix: accent-caveman-suffix-
-    count: 17
+    count: 16
 
 # Dementia
 
