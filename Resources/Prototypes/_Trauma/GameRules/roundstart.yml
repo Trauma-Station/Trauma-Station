@@ -7,6 +7,8 @@
   components:
   - type: SubGamemodes
     rules:
+    - id: SubSpies
+      prob: 0.3
     - id: Devil
       prob: 0.02
     - id: ShadowlingRoundstart
