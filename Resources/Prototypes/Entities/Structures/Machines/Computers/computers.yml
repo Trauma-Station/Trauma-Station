@@ -767,6 +767,7 @@
   components:
   # <Trauma>
   - type: StationReportTarget # not given to aghost
+  - type: TraumaCommsConsole
   # </Trauma>
   - type: Sprite
     layers:
