@@ -157,6 +157,7 @@
     damage:
       types:
         Heat: 30
+        Structural: 30
   - type: Fixtures
     fixtures:
       projectile:
