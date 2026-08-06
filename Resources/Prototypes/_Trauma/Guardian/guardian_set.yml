@@ -1,0 +1,35 @@
+- type: selectableSet
+  id: GuardianStandardSet
+  name: Standard
+  description: A balanced guardian with a crushing strike and a fear aura that slows nearby enemies.
+  sprite:
+    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+    state: icon
+  content:
+  - HoloparasiteInjectorStandard
+  - ClothingHeadHatBizarreSoft
+  - HoloparasiteInfo
+
+- type: selectableSet
+  id: GuardianAssassinSet
+  name: Assassin
+  description: A stealthy guardian with poisoned blades and a lethal ambush burst.
+  sprite:
+    sprite: Objects/Weapons/Melee/throwing_knife.rsi
+    state: icon
+  content:
+  - HoloparasiteInjectorAssassin
+  - ClothingHeadHatBizarreSoft
+  - HoloparasiteInfo
+
+- type: selectableSet
+  id: GuardianLightningSet
+  name: Lightning
+  description: A crackling guardian that zaps targets with lightning and burns everything in its path.
+  sprite:
+    sprite: Clothing/Hands/Gloves/fingerlessinsuls.rsi
+    state: icon
+  content:
+  - HoloparasiteInjectorLightning
+  - ClothingHeadHatBizarreSoft
+  - HoloparasiteInfo
