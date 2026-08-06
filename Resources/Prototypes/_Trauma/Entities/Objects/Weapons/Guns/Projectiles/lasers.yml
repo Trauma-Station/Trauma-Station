@@ -147,7 +147,6 @@
     damage:
       types:
         Heat: 16
-        Structural: 30
 
 - type: entity
   id: LaserCannonBullet
@@ -242,7 +241,6 @@
     damage:
       types:
         Heat: 12
-        Structural: 30
   - type: Sprite
     layers:
     - state: lightbolt
@@ -310,7 +308,6 @@
     damage:
       types:
         Heat: 5
-        Structural: 20
   - type: Sprite
     layers:
     - state: lightbolt
@@ -377,7 +374,6 @@
     damage:
       types:
         Heat: 52
-        Structural: 50
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
