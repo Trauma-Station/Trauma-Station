@@ -86,7 +86,7 @@
   description: An artificial brain capable of spontaneous neural activity.
   components:
     # <Trauma>
-    - type: InternalOrgan
+    - type: InternalChildOrgan
     - type: ChildOrgan
       parents: [ Torso ] # ipc stores its brain in the torso not head
     - type: Organ

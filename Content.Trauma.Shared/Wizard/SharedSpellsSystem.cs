@@ -24,7 +24,7 @@ using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Friction;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -116,11 +116,10 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedJitteringSystem _jitter = default!;
-    [Dependency] private SharedStutteringSystem _stutter = default!;
+    [Dependency] private StutteringSystem _stutter = default!;
     [Dependency] private SharedMagicSystem _magic = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedGunSystem _gun = default!;
@@ -141,6 +140,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     #endregion
 
     private static readonly EntProtoId BlurryVision = "StatusEffectBlurryVision";
+    private static readonly EntProtoId MutedEffect = "StatusEffectMuted";
 
     [SubscribeLocalEvent, SubscribeNetworkEvent]
     private void OnSwapSecondaryTarget(SetSwapSecondaryTarget ev)
@@ -228,7 +228,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         if (!targetWizard)
             MakeMime(ev.Target);
         else
-            _statusOld.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true);
+            _status.TryUpdateStatusEffectDuration(ev.Target, MutedEffect, ev.WizardMuteDuration);
 
         ev.Handled = true;
     }

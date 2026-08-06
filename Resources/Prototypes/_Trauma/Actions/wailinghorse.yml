@@ -7,10 +7,11 @@
   description: Find your way closer to the wounded.
   categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/wailing.rsi
+    layers:
+    - state: wailingteleport
   - type: Action
-    icon:
-      sprite: _Trauma/Actions/wailing.rsi
-      state: wailingteleport
     useDelay: 4
   - type: InstantAction
     event: !type:BloodCrawlEvent
@@ -21,15 +22,16 @@
   name: Wail
   description: Throw them away from you.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/wailing.rsi
+    layers:
+    - state: wailing
   - type: Action
     raiseOnUser: true
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: BigAction
-    sound: !type:SoundPathSpecifier
+    sound:
       path: /Audio/_Trauma/Actions/screamAbility.ogg
-    icon:
-      sprite: _Trauma/Actions/wailing.rsi
-      state: wailing
   - type: InstantAction
     event: !type:RepulseEvent

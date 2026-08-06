@@ -153,8 +153,8 @@
       - Airlock
       - Firelock
       - Door
-      tags:
       - Wall
+      tags:
       - Window
       - Airlock
       - GlassAirlock

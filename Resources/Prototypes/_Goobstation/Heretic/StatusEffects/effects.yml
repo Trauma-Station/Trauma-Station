@@ -103,7 +103,6 @@
   - type: CrucibleSoulStatusEffect
   - type: AddShaderStatusEffect
     shader: SecondSkin
-    #color: "#fb793a" # FIXME: PostShaders doesnt support shader params
 
 - type: entity
   parent: [MobStatusEffectDebuff, MobStatusEffectBase]
@@ -154,7 +153,7 @@
   name: examined mirror maid
 
 - type: entity
-  parent: [StatusEffectWormBlacklist, MobStatusEffectBase]
+  parent: [ StatusEffectWormBlacklist, StatusEffectPressureImmunity ]
   id: StatusEffectNewbornEther
   name: eldritch sleep
   components:
@@ -165,7 +164,6 @@
     - type: SpecialHighTempImmunity
     - type: SpecialLowTempImmunity
     - type: SpecialBreathingImmunity
-    - type: SpecialPressureImmunity
     - type: MetabolismModifier
       modifier: 100
   - type: ForcedSleepingStatusEffect

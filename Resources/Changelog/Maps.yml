@@ -352,3 +352,10 @@ Entries:
   id: 37
   time: '2026-08-01T21:13:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3874
+- author: mickers7
+  changes:
+  - type: Add
+    message: Added the chemicompiler into all chemlabs roundstart
+  id: 38
+  time: '2026-08-05T18:49:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3947

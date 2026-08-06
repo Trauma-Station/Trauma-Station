@@ -1,20 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Atmos;
-using Content.Goobstation.Common.Body.Components;
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.PhaseShift;
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
-using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Chat;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Content.Shared.Stealth;
-using Content.Shared.Stealth.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
@@ -27,12 +21,13 @@ using Content.Shared.Speech.Muting;
 using Content.Shared.Emoting;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Electrocution;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Body;
 using Content.Shared.Pointing;
 using Content.Trauma.Common.Footprints;
@@ -46,13 +41,13 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedStealthSystem _stealth = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private TagSystem _tags = default!;
     [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -245,15 +240,6 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
         // Force stand up when entering incorporeal
         _standing.Stand(uid, force: true);
 
-        // main component.
-        var phase = EnsureComp<PhaseShiftedComponent>(uid);
-        phase.MovementSpeedBuff = 3.5f;
-
-        // don't wanna let people see them obviously.
-        var stealth = EnsureComp<StealthComponent>(uid);
-        _stealth.SetVisibility(uid, stealth.MinVisibility, stealth);
-        _stealth.SetThermalsImmune(uid, true, stealth);
-
         _actions.SetEnabled(ent.Comp.IncorporealizeActionEnt, false);
         _actions.SetEnabled(ent.Comp.CorporealizeActionEnt, true);
 
@@ -265,21 +251,11 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
         if (_tags.HasTag(uid, FootstepSoundTag))
             _tags.RemoveTag(uid, FootstepSoundTag);
 
-        // Mute and block vocal emotes.
-        _ = EnsureComp<MutedComponent>(uid);
-
         // Disable FOV for full vision while incorporeal.
         _eye.SetDrawFov(uid, false);
 
-        // Space immunity
-        _ = EnsureComp<MovementIgnoreGravityComponent>(uid);
-        _ = EnsureComp<SpecialPressureImmunityComponent>(uid);
-        _ = EnsureComp<SpecialBreathingImmunityComponent>(uid);
-        _ = EnsureComp<SpecialLowTempImmunityComponent>(uid);
-        _ = EnsureComp<SpecialHighTempImmunityComponent>(uid);
-
-        // Supermatter immunity
-        _ = EnsureComp<SupermatterImmuneComponent>(uid);
+        EntityManager.AddComponents(uid, ent.Comp.IncorporealComponents);
+        _status.AddEffects(uid, ent.Comp.StatusEffects);
 
         // Raise event for server systems to handle additional logic (like disabling lights)
         var enteredEv = new SlasherIncorporealEnteredEvent();
@@ -291,16 +267,14 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
         ent.Comp.IsIncorporeal = false;
         Dirty(ent);
 
+        _status.RemoveEffects(uid, ent.Comp.StatusEffects);
+        EntityManager.RemoveComponents(uid, ent.Comp.IncorporealComponents);
+
         // Restore frozen cooldowns
         UnfreezeCooldowns((uid, ent.Comp));
 
         ent.Comp.IncorporealStartTime = null;
 
-        if (HasComp<PhaseShiftedComponent>(uid))
-            RemComp<PhaseShiftedComponent>(uid);
-
-        if (HasComp<StealthComponent>(uid))
-            RemComp<StealthComponent>(uid);
         _actions.SetEnabled(ent.Comp.IncorporealizeActionEnt, true);
         _actions.SetEnabled(ent.Comp.CorporealizeActionEnt, false);
 
@@ -308,21 +282,8 @@ public sealed partial class SlasherIncorporealSystem : EntitySystem
 
         _tags.AddTag(uid, FootstepSoundTag);
 
-        // Let them speak
-        _ = RemComp<MutedComponent>(uid);
-
         // Restore FOV
         _eye.SetDrawFov(uid, true);
-
-        // Remove space immunity
-        _ = RemComp<MovementIgnoreGravityComponent>(uid);
-        _ = RemComp<SpecialPressureImmunityComponent>(uid);
-        _ = RemComp<SpecialBreathingImmunityComponent>(uid);
-        _ = RemComp<SpecialLowTempImmunityComponent>(uid);
-        _ = RemComp<SpecialHighTempImmunityComponent>(uid);
-
-        // Remove supermatter immunity
-        _ = RemComp<SupermatterImmuneComponent>(uid);
     }
 
     // Goida as shit.. I couldn't find a better way stop cooldowns

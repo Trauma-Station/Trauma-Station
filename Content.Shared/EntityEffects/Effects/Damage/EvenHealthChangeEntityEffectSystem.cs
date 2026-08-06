@@ -31,7 +31,7 @@ public sealed partial class EvenHealthChangeEntityEffectSystem : EntityEffectSys
                 if (!TryComp<TemperatureComponent>(entity, out var temp))
                     return; // condition stays the same so this is actually a good return in loop
 
-                healing *= scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false);
+                healing *= scaleTemp.GetEfficiencyMultiplier(temp.Temperature, args.Scale, false);
                 if (healing >= 0)
                     continue; // efficiency multiplier was 0? skip
             }

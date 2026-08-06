@@ -23,19 +23,13 @@ public sealed partial class HolosignSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     public static readonly ProtoId<TagPrototype> HolosignTag = "Holosign";
 
     private const int BlockMask = (int) (
         CollisionGroup.Impassable |
         CollisionGroup.HighImpassable);
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-
-    private void InitializeTrauma()
-    {
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-    }
 
     private EntityCoordinates? CheckCoords(Entity<HolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {

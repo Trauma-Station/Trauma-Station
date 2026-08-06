@@ -95,9 +95,8 @@
     - !type:ModifyStatusEffect
       effectProto: StatusEffectDeaf
       time: 6
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectMuted
       time: 6
   - type: Transform
     anchored: true
@@ -154,9 +153,8 @@
   - type: TileEntityEffect
     effects:
     - !type:VoidCurse
-    - !type:GenericStatusEffect
-      key: PressureImmunity
-      component: PressureImmunity
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectPressureImmunity
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -278,9 +276,9 @@
   components:
   - type: TimedDespawn
     lifetime: 30
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - WideSwingIgnore
   - type: Physics
     bodyType: Static
@@ -344,9 +342,9 @@
   components:
   - type: TimedDespawn
     lifetime: 15
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - Holosign
     - BlockLightning
   - type: Physics

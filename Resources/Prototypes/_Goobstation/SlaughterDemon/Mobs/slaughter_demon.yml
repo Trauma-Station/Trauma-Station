@@ -29,7 +29,6 @@
     - ForcedSleep
     - Pacified
     - Drowsiness
-    - Adrenaline
   - type: MobMover
   - type: InputMover
   - type: Input
@@ -135,7 +134,6 @@
   - type: KnowledgeHolder
   - type: AlwaysTakeHoly
   - type: Hands
-  - type: PressureImmunity
   - type: TriggerOnMobstateChange
     mobState:
     - Dead

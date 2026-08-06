@@ -139,12 +139,12 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         TargetBodyPart? targetPart = null;
         if (TryComp<BeingExecutedComponent>(target, out var executed)) // TODO: make this better idk why its shooting groin and shit
             targetPart = executed.TargetPart;
-        var deleted = Deleted(target);
 
         var canMiss = executed == null; // if you are executing someone its PB, no missing
-        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly) && Exists(shooter))
+        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly)
+            && Exists(shooter))
         {
-            if (!deleted && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
+            if (!Deleted(target) && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
             {
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
             }
@@ -162,7 +162,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         else
             comp.ProjectileSpent = true;
 
-        if (!deleted)
+        if (!Deleted(target))
         {
             _gun.PlayImpactSound(target, damage, comp.SoundHit, comp.ForceSound);
 

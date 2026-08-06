@@ -6,10 +6,9 @@
   name: Upgrade
   description: Upgrades bingle into a stronger version
   components:
-  - type: Action
-    useDelay: 1
-    icon:
-      sprite: _Goobstation/Mobs/Bingle/bingle.rsi
-      state: Upgraded
+  - type: Sprite
+    sprite: _Trauma/Mobs/Bingle/bingleboney.rsi
+    layers:
+    - state: Upgraded
   - type: InstantAction
     event: !type:BingleUpgradeActionEvent

@@ -13,8 +13,7 @@
   - type: Item
     size: Normal
   - type: TemperatureProtection
-    heatingCoefficient: 1.1
-    coolingCoefficient: 0.5
+    coefficient: 0.7
 
 - type: entity
   parent: ClothingNeckPonchoBlack

@@ -136,8 +136,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
       blockSmokeIngestion: True
@@ -194,8 +193,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.01
-      heatingCoefficient: 0.01
+      coefficient: 0.01
 
 - type: entity
   parent: [ClothingModsuitBootsStandard, BaseSyndicateContraband]

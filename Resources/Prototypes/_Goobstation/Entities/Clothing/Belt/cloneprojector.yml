@@ -23,7 +23,9 @@
     - type: GhostTakeoverAvailable
     - type: AntagImmune
     - type: MovementIgnoreGravity
-    - type: SpecialPressureImmunity
+    - type: PermanentStatusEffects
+      statusEffects:
+      - StatusEffectPressureImmunity
     - type: RequireProjectileTarget
     - type: NoSlip
     - type: ZombieImmune
@@ -68,7 +70,6 @@
       - Stun
       - SlowedDown
       - Pacified
-      - Flashed
     - type: Uncloneable
     - type: Tag
       tags:

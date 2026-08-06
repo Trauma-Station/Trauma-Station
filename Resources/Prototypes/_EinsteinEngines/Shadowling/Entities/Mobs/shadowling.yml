@@ -50,11 +50,13 @@
     radius: 2
     softness: 1
     energy: 50
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: BreathingImmunity
   - type: SpecialLowTempImmunity
   - type: ThermalVision
-    thermalShader: null
+    useShader: false
     color: "#BF40BF"
     activateSound: null
     deactivateSound: null

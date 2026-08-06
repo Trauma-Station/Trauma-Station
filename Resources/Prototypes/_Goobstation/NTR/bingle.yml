@@ -111,14 +111,14 @@
     color: "#4faffb"
 
 - type: entity
+  parent: BaseItem
   id: CargoBingleSpawnCoin
   name: strange coin
   description: It glows with a dim blue light, you can sense life in it.
-  parent: BaseItem
   components:
   - type: Sprite
     sprite: Objects/Misc/coins.rsi
-    state: coin_diamond
+    state: coinDiamond_1
   - type: GhostRole
     name: ghost-role-cargo-bingle-name
     description: ghost-role-cargo-bingle-desc

@@ -64,6 +64,13 @@ public sealed partial class StationAiVisionSystem : EntitySystem
     /// </summary>
     public bool IsAccessible(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, float expansionSize = 8.5f, bool fastPath = false)
     {
+        // <Trauma>
+        if (_jobLocked)
+        {
+            Log.Error($"Called IsAccessible for {ToPrettyString(grid)} @ {tile} from inside its parallel jobs! Stack trace: {Environment.StackTrace}");
+            return true;
+        }
+        // </Trauma>
         _viewportTiles.Clear();
         _opaque.Clear();
         _seeds.Clear();
@@ -120,7 +127,17 @@ public sealed partial class StationAiVisionSystem : EntitySystem
         _singleTiles.Clear();
         _job.Grid = (grid.Owner, grid.Comp2);
         _job.VisibleTiles = _singleTiles;
-        _parallel.ProcessNow(_job, _job.Data.Count);
+        // <Trauma> - set _jobLocked to prevent recursion
+        try
+        {
+            _jobLocked = true;
+            _parallel.ProcessNow(_job, _job.Data.Count);
+        }
+        finally
+        {
+            _jobLocked = false;
+        }
+        // <Trauma>
 
         return _job.VisibleTiles.Contains(tile);
     }
