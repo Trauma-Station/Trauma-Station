@@ -24,26 +24,6 @@
       particleProto: DemonPassage
 
 - type: entity
-  parent: ActionSanguineStrike
-  id: ActionDemonBlade
-  name: Butcher's Strike
-  description: Use your unholy blade consume a portion of your enemies' soul, dealing more damage and healing yourself.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Actions/demon.rsi
-    layers:
-    - state: blade
-  - type: Action
-    useDelay: 15
-    raiseOnAction: false
-    sound: !type:SoundPathSpecifier
-      path: /Audio/_Trauma/Mobs/Biowepon/clang.ogg
-  - type: Magic
-    requiresClothes: false
-    requiresSpeech: true
-    school: Evocation
-
-- type: entity
   parent: ActionRepulseNoRobes
   id: ActionDemonRepulse
   name: Demonic Pulse

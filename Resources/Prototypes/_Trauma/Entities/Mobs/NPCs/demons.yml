@@ -1120,6 +1120,13 @@
           DemonSoulFragment:
             min: 3
             max: 5
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 200
+      - ReagentId: BuzzochloricBees
+        Quantity: 75
   - type: TimedSpawner
     prototypes:
     - BeeLaughterDemon
@@ -1226,9 +1233,6 @@
           DemonSoulFragment:
             min: 4
             max: 6
-  - type: ActionGrant
-    actions:
-      - ActionDemonBlade
 
 - type: entity
   parent: BaseDemon
@@ -1290,12 +1294,12 @@
     animation: WeaponArcBite
     altDisarm: true
     canWideSwing: false
-    attackRate: 2.5
+    attackRate: 2
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150
+        damage: 200
       behaviors:
       - !type:GibBehavior
         recursive: false
@@ -1304,3 +1308,18 @@
           DemonSoulFragment:
             min: 4
             max: 5
+  - type: Devourer
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidProfile
+    stomachStorageWhitelist:
+      components:
+      - MobState
+      - Item
+    chemical: Ichor
+    healRate: 7.5
+    whitelist:
+      components:
+      - MobState
+      - item
+  
