@@ -29,7 +29,7 @@ namespace Content.Client.Communications.UI
         public List<ProtoId<AlertLevelPrototype>> SelectableAlertLevels = new();
         public bool AlertLevelSelectable;
 
-        public event Action? OnEmergencyLevel;
+        public event Action<string>? OnEmergencyLevel; // Trauma - added string for reason
         public event Action<ProtoId<AlertLevelPrototype>>? OnAlertLevel;
         public event Action<string>? OnAnnounce;
         public event Action<string>? OnBroadcast;
@@ -75,7 +75,7 @@ namespace Content.Client.Communications.UI
 
             AlertLevelButton.Disabled = !AlertLevelSelectable;
 
-            EmergencyShuttleButton.OnPressed += _ => OnEmergencyLevel?.Invoke();
+            EmergencyShuttleButton.OnPressed += _ => OnEmergencyLevel?.Invoke(Rope.Collapse(MessageInput.TextRope)); // Trauma - add reason
             EmergencyShuttleButton.Disabled = !CanCall;
         }
 

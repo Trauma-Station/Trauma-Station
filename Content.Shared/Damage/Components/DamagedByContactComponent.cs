@@ -4,6 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared.Damage.Components;
 
 [NetworkedComponent, RegisterComponent]
+[AutoGenerateComponentState] // Trauma - added AutoGenerateComponentState
 public sealed partial class DamagedByContactComponent : Component
 {
     [DataField("nextSecond", customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]

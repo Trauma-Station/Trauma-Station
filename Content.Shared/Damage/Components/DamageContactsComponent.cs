@@ -4,6 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.Damage.Components;
 
 [NetworkedComponent, RegisterComponent]
+[AutoGenerateComponentState] // Trauma - added AutoGenerateComponentState
 public sealed partial class DamageContactsComponent : Component
 {
     /// <summary>
