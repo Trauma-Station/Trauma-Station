@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Guardian.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Genetics.Mutations;
