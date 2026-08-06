@@ -798,7 +798,7 @@
           DemonSoulFragment:
             min: 1
             max: 2
-    - type: MovementSpeedModifier
+  - type: MovementSpeedModifier
     baseWalkSpeed: 5
     baseSprintSpeed: 7
 
