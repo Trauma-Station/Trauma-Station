@@ -8,7 +8,7 @@
     components:
     - ShowAntagIcons
     - Demonologist
-    - DemonologistApprentice # TODO, also apply these factions to ppl
+    - DemonologistApprentice
   icon:
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Demonologist

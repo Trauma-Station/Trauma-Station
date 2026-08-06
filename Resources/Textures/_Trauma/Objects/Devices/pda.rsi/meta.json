@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from: https://github.com/ProjectOmu/OmuStation/blob/3aeb0b663dfb2341c0fdddb5a1fb638703226f38/Resources/Textures/_Omu/Objects/Devices/pda.rsi",
+  "copyright": "Taken from: https://github.com/ProjectOmu/OmuStation/blob/3aeb0b663dfb2341c0fdddb5a1fb638703226f38/Resources/Textures/_Omu/Objects/Devices/pda.rsi, pda-demonologist by GraveSt0ne",
   "size": {
     "x": 32,
     "y": 32
@@ -42,6 +42,9 @@
     },
     {
       "name":"pda-altcaptain"
+    },
+    {
+      "name":"pda-demonologist"
     }
   ]
 }

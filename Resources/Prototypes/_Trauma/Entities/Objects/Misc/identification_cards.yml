@@ -52,7 +52,7 @@
   - type: AntagCard # D-class? Outside? Can't be.
 
 - type: entity
-  parent: [ AgentIDCard ]
+  parent: AgentIDCard
   id: SpacePolIDCardChameleon
   name: SpacePol ID card
   suffix: Agent
@@ -65,6 +65,7 @@
     - Maintenance
     - SyndicateAgent
     - External
+  - type: AntagCard
 
 - type: entity
   parent: IDCardStandard
@@ -78,3 +79,47 @@
       sprite: _Trauma/Objects/Misc/id_cards.rsi
   - type: PresetIdCard
     job: Rancher
+
+- type: entity # TODO: actions
+  parent: [ IDCardStandard, BaseMajorContraband ]
+  id: DemonologistIDCard
+  name: demonologist ID card
+  description: It's pulsating... Is it alive?
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: iddemonologist
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
+  - type: IdCard
+    jobTitle: job-name-demonologist
+    jobIcon: JobIconDemonologist
+  - type: Access
+    tags:
+    - Maintenance
+    - Demonologist
+    - External
+  - type: AntagCard
+  - type: TypingIndicator
+    proto: guardian
+  - type: Speech
+    speechVerb: SlaughterDemon
+    speechSounds: ShadowDemon
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
+  - type: GhostRole
+    name: ghost-role-information-demonologist-id-card-name
+    description: ghost-role-information-demonologist-id-card-description
+    rules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
+  - type: GhostTakeoverAvailable
+  - type: CollectiveMind
+    defaultChannel: Demonmind
+    channels:
+    - Demonmind

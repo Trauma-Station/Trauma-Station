@@ -191,7 +191,7 @@
     sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
 
 - type: entity
-  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, ClothingOuterBaseToggleable, BaseMajorContraband ]
+  parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterBaseToggleable, BaseMajorContraband ]
   id: ClothingOuterRobesDemonologist
   name: demonologist robes
   description: #TODO
@@ -200,6 +200,10 @@
     sprite: _Trauma/Clothing/OuterClothing/Armor/demonologist_robes.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Armor/demonologist_robes.rsi
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -233,11 +237,7 @@
     damageCoefficient: 0.4
   - type: FireProtection
     reduction: 1
-  - type: SelfExtinguisher
-    cooldown: 1
-    requiresIgniteFromGasImmune: false
-    sound:
-      path: /Audio/_Trauma/Revs/flamethrower.ogg
   - type: Tag
     tags:
     - SyringeArmor
+    - WhitelistChameleon

@@ -19,5 +19,5 @@
   - type: MindRole
     antagPrototype: DemonologistApprentice
     exclusiveAntag: true
-    roleType: TeamAntagonist
+    roleType: Familiar
     subtype: role-subtype-demonologist-apprentice

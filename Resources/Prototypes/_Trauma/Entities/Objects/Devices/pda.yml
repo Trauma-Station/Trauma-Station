@@ -36,18 +36,11 @@
   name: SpacePol PDA
   description: Surprisingly low quality, for a spacepol officer's pda.
   components:
-  - type: Sprite
-    layers:
-      - state: pda-security
   - type: Pda
     id: SpacePolIDCardChameleon
-  - type: ChameleonClothing
-    slot: [idcard]
-    default: SecurityPDA
-    requireTag: WhitelistChameleonPDA
 
 - type: entity
-  parent: [NanotrasenRepresentativePDA, BaseWidePDA]
+  parent: [ NanotrasenRepresentativePDA, BaseWidePDA ]
   id: AltNanotrasenRepresentativePDA
   name: nanotrasen representative's PDA
   description: Slick design for the one who pushes pencils.
@@ -137,3 +130,53 @@
   - type: PdaBorderColor
     borderColor: "#4eb349"
     accentVColor: "#60c95b"
+
+- type: entity # TODO: actions
+  parent: [ BasePDA, BaseMajorContraband ]
+  id: DemonologistPDA
+  name: demonologist PDA
+  description: The trapped souls of the damned sure do make it unique.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-demonologist
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-demonologist
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType: !type:String
+        pda-demonologist
+  - type: Pda
+    id: DemonologistIDCard
+  - type: PointLight
+    color: "#990000"
+    enabled: false
+    radius: 1.7
+    energy: 10
+    falloff: 3
+    softness: 5
+    autoRot: true
+  - type: TypingIndicator
+    proto: guardian
+  - type: Speech
+    speechVerb: SlaughterDemon
+    speechSounds: ShadowDemon
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
+  - type: GhostRole
+    name: ghost-role-information-demonologist-pda-name
+    description: ghost-role-information-demonologist-pda-description
+    rules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
+  - type: GhostTakeoverAvailable
+  - type: CollectiveMind
+    defaultChannel: Demonmind
+    channels:
+    - Demonmind

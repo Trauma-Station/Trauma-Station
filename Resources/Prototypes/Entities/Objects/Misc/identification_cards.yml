@@ -626,10 +626,10 @@
 - type: entity
   parent: [IDCardStandard, BaseChameleon] # Trauma - don't parent passenger id
   id: AgentIDCard
-  name: assistant ID card # Trauma - i hate this
+  name: assistant ID card # Trauma - FUCK THIS
   suffix: Agent
   components:
-  - type: Sprite # Trauma - i hate this
+  - type: Sprite # Trauma - FUCK THIS
     layers:
     - state: default
     - state: idpassenger

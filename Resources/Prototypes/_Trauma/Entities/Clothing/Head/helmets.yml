@@ -118,3 +118,6 @@
         Piercing: 0.4
         Ballistic: 0.4
         Heat: 0.4
+  - type: Tag
+    tags:
+    - WhitelistChameleon

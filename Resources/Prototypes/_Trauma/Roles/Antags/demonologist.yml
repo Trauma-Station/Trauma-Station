@@ -33,6 +33,11 @@
     sound: /Audio/_Trauma/Demonologist/demonologist.ogg
   startingGear: DemonologistStartingGear
   components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesDemonologistFirst
+    - NamesDemonologistLast
+    nameFormat: name-format-standard
   - type: CollectiveMind
     defaultChannel: Demonmind
     channels:
@@ -47,14 +52,14 @@
 
 - type: startingGear
   id: DemonologistStartingGear
-  equipment: # Placeholder # TODO
+  equipment: # TODO: graves sprite for me
     jumpsuit: ClothingUniformJumpsuitColorBlack
     back: ClothingBackpack
     head: ClothingHeadHelmetCult
     neck: BedsheetCult
     outerClothing: ClothingOuterRobesDemonologist
     shoes: ClothingShoesCult
-    id: PassengerPDA
+    id: DemonologistPDA
     ears: ClothingHeadsetService
   storage:
     back:
@@ -74,7 +79,7 @@
   id: Demonologist
   antag: Demonologist
   rule: Demonologist
-  ruleComp: DemonologistRule # TODO
+  ruleComp: DemonologistRule
   icon:
     sprite: _Trauma/Objects/Enchanting/book.rsi
     state: icon
