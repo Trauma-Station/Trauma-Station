@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Client.Graphics;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.DeepFryer.Components;
@@ -44,8 +45,7 @@ public sealed partial class DeepFriedSystem : EntitySystem
 
         var data = new SpriteComponent.PostShaderArgs(ShaderName, _shader)
         {
-            GetScreenTexture = true,
-            RaiseShaderEvent = true
+            Before = ContentPostShaderIds.BeforeOutlines,
         };
         _sprite.SetPostShader(uid, data);
     }

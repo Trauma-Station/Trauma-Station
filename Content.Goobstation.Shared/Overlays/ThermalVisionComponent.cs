@@ -16,7 +16,7 @@ public sealed partial class ThermalVisionComponent : SwitchableVisionOverlayComp
     public float LightRadius = 2f;
 
     [DataField]
-    public string? ThermalShader = "ThermalVision";
+    public bool UseShader = true;
 
     [DataField]
     public EntityWhitelist? UserWhitelist;

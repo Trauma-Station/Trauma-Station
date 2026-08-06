@@ -103,7 +103,6 @@
   - type: CrucibleSoulStatusEffect
   - type: AddShaderStatusEffect
     shader: SecondSkin
-    #color: "#fb793a" # FIXME: PostShaders doesnt support shader params
 
 - type: entity
   parent: [MobStatusEffectDebuff, MobStatusEffectBase]
