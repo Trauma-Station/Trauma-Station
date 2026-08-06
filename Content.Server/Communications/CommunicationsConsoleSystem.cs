@@ -295,8 +295,27 @@ namespace Content.Server.Communications
                 _popupSystem.PopupEntity(ev.Reason ?? Loc.GetString("comms-console-shuttle-unavailable"), uid, message.Actor);
                 return;
             }
+            // <Trauma>
+            var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+            var reason = SharedChatSystem.SanitizeAnnouncement(message.Reason, maxLength);
+            if (string.IsNullOrEmpty(reason))
+                reason = "No reason provided.";
+            else
+                comp.AnnouncementCooldownRemaining = comp.Delay;
+            var attemptEv = new UserMessageAttemptEvent(mob, message.Reason);
+            RaiseLocalEvent(ref attemptEv);
+            if (attemptEv.Cancelled)
+                return;
 
-            _roundEndSystem.RequestRoundEnd(mob, uid);
+            // aghosts dont show the caller or reason
+            var text = uid == mob
+                ? "round-end-system-shuttle-called-announcement"
+                : "round-end-system-shuttle-called-announcement-caller-reason";
+            var callerName = _identity.GetIdentityShortInfo(mob, uid) ?? Loc.GetString("comms-console-announcement-unknown-sender");
+            // </Trauma>
+
+            _roundEndSystem.RequestRoundEnd(mob, uid,
+                text: text, callerName: callerName, reason: message.Reason); // Trauma
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(mob):player} has called the shuttle.");
         }
 
@@ -312,8 +331,27 @@ namespace Content.Server.Communications
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
                 return;
             }
+            // <Trauma>
+            var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+            var reason = SharedChatSystem.SanitizeAnnouncement(message.Reason, maxLength);
+            if (string.IsNullOrEmpty(reason))
+                reason = "No reason provided.";
+            else
+                comp.AnnouncementCooldownRemaining = comp.Delay;
+            var attemptEv = new UserMessageAttemptEvent(mob, message.Reason);
+            RaiseLocalEvent(ref attemptEv);
+            if (attemptEv.Cancelled)
+                return;
 
-            _roundEndSystem.CancelRoundEndCountdown(mob, uid);
+            // aghosts dont show the caller or reason
+            var text = uid == mob
+                ? "round-end-system-shuttle-recalled-announcement"
+                : "round-end-system-shuttle-recalled-announcement-caller-reason";
+            var callerName = _identity.GetIdentityShortInfo(mob, uid) ?? Loc.GetString("comms-console-announcement-unknown-sender");
+            // </Trauma>
+
+            _roundEndSystem.CancelRoundEndCountdown(mob, uid,
+                text: text, callerName: callerName, reason: reason); // Trauma
             _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
         }
     }
