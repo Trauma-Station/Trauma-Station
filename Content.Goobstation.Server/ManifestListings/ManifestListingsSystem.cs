@@ -177,7 +177,7 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                 var currency = ProtoMan.Index(currencyId);
                 _sbIntermediate.Append(amount);
                 _sbIntermediate.Append(" ");
-                _sbIntermediate.Append(currency.DisplayName);
+                _sbIntermediate.Append(Loc.GetString(currency.DisplayName));
             }
 
             prependText = Loc.GetString("manifest-listing-entry-start", ("spent", _sbIntermediate.ToString()));
