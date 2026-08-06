@@ -377,7 +377,7 @@
     damage:
       types:
         Heat: 52
-        Structual: 50
+        Structural: 50
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
