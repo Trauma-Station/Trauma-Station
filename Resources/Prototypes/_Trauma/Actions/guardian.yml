@@ -6,8 +6,10 @@
   name: Recall Self
   description: Recalls yourself back into your host's body
   components:
+  - type: Sprite
+    layers:
+    - texture: Interface/Actions/manifest.png
   - type: Action
-    icon: Interface/Actions/manifest.png
     useDelay: 2
     checkCanInteract: false
     checkConsciousness: false

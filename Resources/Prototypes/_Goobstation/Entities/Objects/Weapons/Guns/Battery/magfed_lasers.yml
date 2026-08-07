@@ -69,8 +69,8 @@
     shape:
     - 0,0,6,1
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: HeldSpeedModifier
   - type: Gun
     projectileSpeed: 60

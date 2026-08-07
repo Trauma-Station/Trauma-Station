@@ -32,6 +32,7 @@
       components:
       #- Item # Trauma - allow c4ing almost anything
       - Spectral # special case for the rev since it can go incorporeal and ghost bomb you. Also, Idk, its like a ghost or something no touchy.
+      #- Clothing # Trauma - fun legal says star witness
   - type: DeviceLinkSink
     ports:
     - Trigger

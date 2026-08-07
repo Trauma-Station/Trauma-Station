@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Access.Systems;
-using Content.Trauma.Shared.Salvage.Systems;
+using Content.Shared.Advertise.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.UserInterface;
 using Content.Shared.VendingMachines;
+using Content.Trauma.Common.VendingMachines;
+using Content.Trauma.Shared.Salvage.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -18,22 +20,16 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private MiningPointsSystem _points = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedSpeakOnUIClosedSystem _speakOnUIClosed = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PointsVendorComponent, ShopVendorBalanceEvent>(OnPointsBalance);
-        SubscribeLocalEvent<PointsVendorComponent, ShopVendorPurchaseEvent>(OnPointsPurchase);
-
-        SubscribeLocalEvent<ShopVendorComponent, PowerChangedEvent>(OnPowerChanged);
-        SubscribeLocalEvent<ShopVendorComponent, BreakageEventArgs>(OnBreak);
-        SubscribeLocalEvent<ShopVendorComponent, ActivatableUIOpenAttemptEvent>(OnOpenAttempt);
         Subs.BuiEvents<ShopVendorComponent>(VendingMachineUiKey.Key, subs =>
         {
             subs.Event<ShopVendorPurchaseMessage>(OnPurchase);
@@ -53,30 +49,35 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
 
     #region Balance adapters
 
+    [SubscribeLocalEvent]
     private void OnPointsBalance(Entity<PointsVendorComponent> ent, ref ShopVendorBalanceEvent args)
     {
-        args.Balance = _points.GetPointComp(args.User)?.Comp?.Points ?? 0; // Goobstation - borg Miningpoints
+        args.Balance = _points.GetPointComp(args.User)?.Comp?.Points ?? 0;
     }
 
+    [SubscribeLocalEvent]
     private void OnPointsPurchase(Entity<PointsVendorComponent> ent, ref ShopVendorPurchaseEvent args)
     {
-        if (_points.GetPointComp(args.User) is {} idCard && _points.RemovePoints(idCard, args.Cost)) // Goobstation - borg Miningpoints
+        if (_points.GetPointComp(args.User) is {} idCard && _points.RemovePoints(idCard, args.Cost))
             args.Paid = true;
     }
 
     #endregion
 
+    [SubscribeLocalEvent]
     private void OnPowerChanged(Entity<ShopVendorComponent> ent, ref PowerChangedEvent args)
     {
         UpdateVisuals(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBreak(Entity<ShopVendorComponent> ent, ref BreakageEventArgs args)
     {
         ent.Comp.Broken = true;
         UpdateVisuals(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnOpenAttempt(Entity<ShopVendorComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (ent.Comp.Broken)
@@ -117,11 +118,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
 
         Log.Debug($"Player {ToPrettyString(user):user} purchased {listing.Id} from {ToPrettyString(ent):vendor}");
 
-        AfterPurchase(ent);
-    }
-
-    protected virtual void AfterPurchase(Entity<ShopVendorComponent> ent)
-    {
+        _speakOnUIClosed.TrySetFlag(ent.Owner);
     }
 
     private void Deny(Entity<ShopVendorComponent> ent, EntityUid user)
@@ -138,6 +135,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
         UpdateVisuals(ent);
     }
 
+    [SubscribeLocalEvent]
     protected void UpdateVisuals(Entity<ShopVendorComponent> ent)
     {
         var state = VendingMachineVisualState.Normal;
@@ -162,7 +160,11 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
         }
 
         _light.SetEnabled(ent, lit);
-        _appearance.SetData(ent, VendingMachineVisuals.VisualState, state);
+        if (ent.Comp.State == state)
+            return;
+
+        ent.Comp.State = state;
+        Dirty(ent);
     }
 }
 

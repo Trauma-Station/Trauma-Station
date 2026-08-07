@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Graphics;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.StatusEffects;
 
@@ -16,8 +17,7 @@ public sealed partial class AddShaderStatusEffectSystem : EntitySystem
         var shader = ProtoMan.Index<ShaderPrototype>(id).Instance();
         var data = new SpriteComponent.PostShaderArgs(id, shader)
         {
-            GetScreenTexture = true,
-            RaiseShaderEvent = true
+            Before = ContentPostShaderIds.BeforeOutlines,
         };
         _sprite.SetPostShader(args.Target, data);
     }

@@ -100,7 +100,7 @@ public sealed partial class ShortConstructionBUI : BoundUserInterface
         {
             IsTile = false,
             PlacementOption = prototype.PlacementMode
-        }, new ConstructionPlacementHijack(_construction, prototype));
+        }, new ConstructionPlacementHijack(prototype));
 
         _menu?.Close();
     }

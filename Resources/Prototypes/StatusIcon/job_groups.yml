@@ -188,6 +188,7 @@
   - JobIconSpacePol
   - JobIconDemonologist
   # </Trauma>
+  - JobIconCluwne
   - JobIconNinja
   - JobIconPirate
   - JobIconPrisoner
@@ -196,6 +197,7 @@
   - JobIconSyndicateCorpsman
   - JobIconSyndicateOperative
   - JobIconWizard
+  - JobIconSus
 
 - type: jobIconGroup
   id: AdminIconGroup
@@ -205,7 +207,6 @@
     state: Admin
   icons:
   - JobIconAdmin
-  - JobIconCluwne
   - JobIconZombie
   - JobIconSeniorEngineer
   - JobIconSeniorPhysician
