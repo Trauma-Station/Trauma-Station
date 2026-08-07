@@ -25,13 +25,14 @@ public sealed partial class GuardianFearAuraSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var curTime = _timing.CurTime;
         var query = EntityQueryEnumerator<GuardianFearAuraComponent, GuardianComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var aura, out var guardian, out var xform))
         {
-            if (!guardian.GuardianLoose || _timing.CurTime < aura.NextCheck)
+            if (!guardian.GuardianLoose || curTime < aura.NextCheck)
                 continue;
 
-            aura.NextCheck = _timing.CurTime + aura.CheckInterval;
+            aura.NextCheck = curTime + aura.CheckInterval;
 
             var coords = _transform.GetMapCoordinates((uid, xform));
             _mobStates.Clear();

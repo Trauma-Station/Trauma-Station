@@ -28,6 +28,7 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
     {
         base.Update(frameTime);
 
+        var curTime = _timing.CurTime;
         var query = EntityQueryEnumerator<GuardianLightningComponent, GuardianComponent>();
         while (query.MoveNext(out var uid, out var comp, out var guardian))
         {
@@ -36,10 +37,10 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
 
             KeepHostProtection((uid, comp), host);
 
-            if (!guardian.GuardianLoose || _timing.CurTime < comp.NextPassive)
+            if (!guardian.GuardianLoose || curTime < comp.NextPassive)
                 continue;
 
-            comp.NextPassive = _timing.CurTime + comp.PassiveTick;
+            comp.NextPassive = curTime + comp.PassiveTick;
 
             var action = MakeBoltAction(uid, comp.PassiveDamage, 0f);
             _lightning.ShootRandomLightnings(uid,
@@ -117,8 +118,7 @@ public sealed partial class GuardianLightningSystem : SharedGuardianLightningSys
     [SubscribeLocalEvent]
     private void OnGuardianShutdown(Entity<GuardianLightningComponent> ent, ref ComponentShutdown args)
     {
-        var host = ent.Comp.ProtectedHost ??
-                   (TryComp<GuardianComponent>(ent, out var guardian) ? guardian.Host : null);
+        var host = ent.Comp.ProtectedHost ?? CompOrNull<GuardianComponent>(ent)?.Host;
 
         if (host is { } h) // Inshallah
             RemoveHostProtection(h, ent.Comp);
