@@ -65,16 +65,15 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
             args.Paid = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBitrunningPointsBalance(Entity<BitrunningPointsVendorComponent> ent, ref ShopVendorBalanceEvent args)
     {
         args.Balance = _bitrunningPoints.GetPointComp(args.User)?.Comp?.Points ?? 0;
     }
 
+    [SubscribeLocalEvent]
     private void OnBitrunningPointsPurchase(Entity<BitrunningPointsVendorComponent> ent, ref ShopVendorPurchaseEvent args)
     {
-        if (args.Paid)
-            return;
-
         if (_bitrunningPoints.GetPointComp(args.User) is { } account && _bitrunningPoints.RemovePoints(account, args.Cost))
             args.Paid = true;
     }
