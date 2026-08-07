@@ -1,4 +1,6 @@
-﻿- type: entity
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
   parent: BaseCartridgeLightRifle
   id: CartridgeLightRifleCaseless
   name: cartridge (.30 rifle caseless)
