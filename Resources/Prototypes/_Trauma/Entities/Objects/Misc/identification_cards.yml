@@ -80,11 +80,12 @@
   - type: PresetIdCard
     job: Rancher
 
-- type: entity # TODO: actions
+- type: entity # TODO: more actions?
   parent: [ IDCardStandard, BaseMajorContraband ]
   id: DemonologistIDCard
   name: demonologist ID card
   description: It's pulsating... Is it alive?
+  suffix: Agent
   components:
   - type: Sprite
     layers:
@@ -100,6 +101,9 @@
     - Demonologist
     - External
   - type: AntagCard
+  - type: AgentIDCard
+  - type: NanoChatCard
+    listNumber: false
   - type: TypingIndicator
     proto: guardian
   - type: Speech
@@ -123,3 +127,7 @@
     defaultChannel: Demonmind
     channels:
     - Demonmind
+  - type: ActionGrant
+    actions:
+    - ActionKnock
+    - ActionCursedAccess

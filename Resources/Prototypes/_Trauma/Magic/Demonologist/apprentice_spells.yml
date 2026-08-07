@@ -11,7 +11,7 @@
     useDelay: 2700 # 45 minutes
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
-      path: /Audio/_Trauma/Demonologist/demonologist.ogg
+      path: /Audio/_Trauma/Demonologist/demonologist.ogg # TODO: Change, no longer needed, briefing done
     icon:
       sprite: _Trauma/Objects/Enchanting/book.rsi
       state: icon

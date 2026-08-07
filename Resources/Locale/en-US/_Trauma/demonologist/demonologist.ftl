@@ -6,3 +6,7 @@ demonologist-role-greeting =
     Spill blood to fuel your rituals, unlocking darker magic and the power to summon infernal servants.
     As your sacrifices mount, ever more terrible demons will answer your call.
     Bind them well, for those who fail to command Hell are consumed by it.
+
+demonologist-apprentice-role-greeting =
+    You are a demonologist apprentice! ( Use + or +K to use demonmind )
+    You have been bound to serve a demonologist! Further their dark rituals, or face the consequences.

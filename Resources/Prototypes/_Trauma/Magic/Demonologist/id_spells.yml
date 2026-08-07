@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseAction
+  id: ActionCursedAccess
+  name: Cursed Access
+  description: Strip a target's ID access for 20 seconds, leaving them locked out of everything.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/fireball.ogg # TODO: better sound
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: spell_default
+  - type: TargetAction
+    range: 8
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      requireAll: true
+      components:
+      - HumanoidProfile
+      - Inventory
+    canTargetSelf: false
+    event: !type:CursedAccessSpellEvent

@@ -131,7 +131,7 @@
     borderColor: "#4eb349"
     accentVColor: "#60c95b"
 
-- type: entity # TODO: actions
+- type: entity # TODO: actions: make announcement or spam messages in pdas
   parent: [ BasePDA, BaseMajorContraband ]
   id: DemonologistPDA
   name: demonologist PDA
