@@ -851,6 +851,7 @@
       types:
         Caustic: 20
         Blunt: 10
+        Structural: 20
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -866,9 +867,24 @@
           DemonSoulFragment:
             min: 4
             max: 5
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Gold
+        Quantity: 50
+      - ReagentId: Hemorrhinol
+        Quantity: 7
+  - type: MeleeChemicalInjector
+    transferAmount: 57
+    solution: melee
   - type: ActionGrant
     actions:
     - ActionDemonRift
+    - ActionDemonRepulse
 
 - type: entity
   parent: BaseDemon
@@ -910,9 +926,9 @@
     generated:
       reagents:
       - ReagentId: Impedrezene
-        Quantity: 4
+        Quantity: 6
   - type: MeleeChemicalInjector
-    transferAmount: 4
+    transferAmount: 6
     solution: melee
   - type: ActionGrant
     actions:
