@@ -91,7 +91,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
         if (_bitrunningPoints.GetPointComp(args.User) is { } account && _bitrunningPoints.RemovePoints(account, args.Cost))
             args.Paid = true;
     }
-    
+
     #endregion
 
     [SubscribeLocalEvent]
