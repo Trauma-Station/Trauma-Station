@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Shared.Revolutionary;
-using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Shared.Mindshield.Components;
@@ -106,6 +105,11 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
                         colorOverride: Color.Gold);
 
                     component.HasRevAnnouncementPlayed = true;
+
+                    // <Trauma>
+                    _ticker.StartGameRule(ErtSecurity);
+                    _roundEnd.RequestRoundEnd(TimeSpan.FromMinutes(10), cantRecall: true);
+                    // </Trauma>
                 }
 
                 foreach (var ms in EntityQueryEnumerator<MindShieldStatusComponent, MobStateComponent>())
@@ -125,6 +129,10 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
+                // <Trauma>
+                _antagEvac.SpawnNewAntagIfBelowPercent(uid, TimeSpan.FromMinutes(10), false);
+                // </Trauma>
+
                 _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("revolutionaries-lose-announcement"),
                     Loc.GetString("revolutionaries-sender-cc"),

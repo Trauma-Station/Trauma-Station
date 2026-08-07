@@ -529,12 +529,19 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
     private void CheckRoundShouldEnd(bool announce = true) // Goobstation
     {
+        var rules = new List<Entity<NukeopsRuleComponent>>(); // Trauma
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var nukeops, out _))
         {
-            CheckRoundShouldEnd((uid, nukeops),
-                                announce); // Goobstation
+            rules.Add((uid, nukeops)); // Trauma
         }
+
+        // <Trauma>
+        foreach (var (uid, nukeops) in rules)
+        {
+            CheckRoundShouldEnd((uid, nukeops), announce);
+        }
+        // </Trauma>
     }
 
     private void CheckRoundShouldEnd(Entity<NukeopsRuleComponent> ent,
@@ -599,6 +606,10 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
             _chat.DispatchGlobalAnnouncement(
                 Loc.GetString(nukeops.RoundEndTextAnnouncement),
                 Loc.GetString(nukeops.RoundEndTextSender));
+
+        // <Trauma>
+        _antagEvac.SpawnNewAntagIfBelowPercent(ent.Owner, TimeSpan.FromMinutes(3), true);
+        // </Trauma>
 
         // prevent it called multiple times
         nukeops.RoundEndBehavior = RoundEndBehavior.Nothing;

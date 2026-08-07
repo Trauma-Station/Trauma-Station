@@ -43,12 +43,12 @@ public sealed partial class CommunicationsConsoleBoundUserInterface(EntityUid ow
         }
     }
 
-    public void EmergencyShuttleButtonPressed()
+    public void EmergencyShuttleButtonPressed(string reason) // Trauma - added reason
     {
         if (_menu!.CountdownStarted)
-            RecallShuttle();
+            RecallShuttle(reason); // Trauma - passed reason
         else
-            CallShuttle();
+            CallShuttle(reason); // Trauma - passed reason
     }
 
     public void AnnounceButtonPressed(string message)
@@ -63,14 +63,14 @@ public sealed partial class CommunicationsConsoleBoundUserInterface(EntityUid ow
         SendMessage(new CommunicationsConsoleBroadcastMessage(message));
     }
 
-    public void CallShuttle()
+    public void CallShuttle(string reason) // Trauma - added reason
     {
-        SendMessage(new CommunicationsConsoleCallEmergencyShuttleMessage());
+        SendMessage(new CommunicationsConsoleCallEmergencyShuttleMessage(reason)); // Trauma - passed reason
     }
 
-    public void RecallShuttle()
+    public void RecallShuttle(string reason) // Trauma - added reason
     {
-        SendMessage(new CommunicationsConsoleRecallEmergencyShuttleMessage());
+        SendMessage(new CommunicationsConsoleRecallEmergencyShuttleMessage(reason)); // Trauma - passed reason
     }
 
     // TODO: Use component states and update in an AfterAutoHandleState subscription

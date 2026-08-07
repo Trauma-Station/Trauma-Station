@@ -85,8 +85,15 @@ public abstract partial class SharedUnfathomableCurioSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnTakeDamage(Entity<UnfathomableCurioShieldComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (!ent.Comp.Active || args.Cancelled || args.Damage.GetTotal() < 5)
+        if (args.Cancelled || args.Damage.GetTotal() < 5)
             return;
+
+        if (!ent.Comp.Active)
+        {
+            ent.Comp.ActivateTime = _timing.CurTime + ent.Comp.ActivateDelay;
+            Dirty(ent);
+            return;
+        }
 
         args.Cancelled = true;
         ResetShield(ent, true, args.Origin);

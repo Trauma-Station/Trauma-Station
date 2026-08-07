@@ -1,6 +1,7 @@
 light_mode unshaded;
 
 uniform lowp float pixelSize;
+uniform highp vec4 color;
 
 //
 // https://gamedev.stackexchange.com/a/59808
@@ -50,7 +51,6 @@ void fragment() {
     }
     highp vec3 hsv = rgb2hsv(sprite.xyz);
     sprite.rgb = hsv2rgb(vec3(pow(hsv.z, 0.5), s, 1.0));
-    // sprite.rgb = sprite.rgb * vec3(1.0, 1.0, 0.5);
 
-    COLOR = sprite;
+    COLOR = sprite * color;
 }

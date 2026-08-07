@@ -283,7 +283,7 @@
     - Universal
   - type: MovementIgnoreGravity
   - type: ThermalVision
-    thermalShader: null
+    useShader: false
     color: "#BF40BF"
     activateSound: null
     deactivateSound: null
