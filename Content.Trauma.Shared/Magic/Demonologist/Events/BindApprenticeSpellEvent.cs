@@ -4,7 +4,7 @@ using Content.Shared.Actions;
 
 namespace Content.Trauma.Shared.Magic.Demonologist.Events;
 
-public sealed partial class BindApprenticeEvent : EntityTargetActionEvent
+public sealed partial class BindApprenticeSpellEvent : EntityTargetActionEvent
 {
     [DataField]
     public Dictionary<string, EntProtoId> Gear = new()

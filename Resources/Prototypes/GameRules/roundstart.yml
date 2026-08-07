@@ -353,7 +353,7 @@
   components:
   - type: SecretRule
 
-- type: entity # TODO: copy logic
+- type: entity
   abstract: true
   parent: BaseGameRule
   id: BaseWizardRule

@@ -17,6 +17,7 @@ using Content.Shared.PDA;
 using Content.Shared.Stunnable;
 using Content.Shared.Temperature.Systems;
 using Content.Trauma.Common.CollectiveMind;
+using Content.Trauma.Shared.Magic.Demonologist;
 using Content.Trauma.Shared.Magic.Demonologist.Components;
 using Content.Trauma.Shared.Magic.Demonologist.Events;
 using Robust.Shared.Audio;
@@ -24,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Magic.Demonologist;
 
-public sealed partial class DemonologistSystem : EntitySystem
+public sealed partial class DemonologistSystem : SharedDemonologistSystem
 {
     [Dependency] private SharedAccessSystem _access = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -64,12 +65,12 @@ public sealed partial class DemonologistSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnStartup(Entity<DemonologistComponent> ent, ref ComponentStartup args)
+    private void OnMapInit(EntityUid uid, DemonologistComponent component, ref MapInitEvent args)
     {
-        _actions.AddAction(ent, ref ent.Comp.CombustionAction, ent.Comp.CombustionActionPrototype);
-        _actions.AddAction(ent, ref ent.Comp.BindApprenticeAction, ent.Comp.BindApprenticeActionPrototype);
-        _actions.AddAction(ent, ref ent.Comp.BloodBoilAction, ent.Comp.BloodBoilActionPrototype);
-        _actions.AddAction(ent, ref ent.Comp.CursedAccessAction, ent.Comp.CursedAccessActionPrototype);
+        _actions.AddAction(uid, ref component.CombustionAction, component.CombustionActionPrototype);
+        _actions.AddAction(uid, ref component.BindApprenticeAction, component.BindApprenticeActionPrototype);
+        _actions.AddAction(uid, ref component.BloodBoilAction, component.BloodBoilActionPrototype);
+        _actions.AddAction(uid, ref component.CursedAccessAction, component.CursedAccessActionPrototype);
     }
 
     [SubscribeLocalEvent]
@@ -113,7 +114,7 @@ public sealed partial class DemonologistSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnBindApprentice(BindApprenticeEvent ev)
+    private void OnBindApprentice(BindApprenticeSpellEvent ev)
     {
         if (HasComp<DemonologistApprenticeComponent>(ev.Target) || HasComp<DemonologistComponent>(ev.Target))
             return;

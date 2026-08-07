@@ -12,9 +12,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Trauma/Demonologist/demonologist.ogg # TODO: Change, no longer needed, briefing done
-    icon:
-      sprite: _Trauma/Objects/Enchanting/book.rsi
-      state: icon
+  - type: Sprite # TODO: Placeholder
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+    layers:
+    - state: icon
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
@@ -24,4 +25,4 @@
       - HumanoidProfile
       - Inventory
     canTargetSelf: false
-    event: !type:BindApprenticeEvent
+    event: !type:BindApprenticeSpellEvent

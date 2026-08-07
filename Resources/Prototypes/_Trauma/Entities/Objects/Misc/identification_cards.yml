@@ -84,8 +84,8 @@
   parent: [ IDCardStandard, BaseMajorContraband ]
   id: DemonologistIDCard
   name: demonologist ID card
-  description: It's pulsating... Is it alive?
   suffix: Agent
+  description: It's pulsating... Is it alive?
   components:
   - type: Sprite
     layers:
