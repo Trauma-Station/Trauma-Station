@@ -13,7 +13,7 @@ public sealed partial class UnfathomableCurioShieldComponent : Component
     public Color Color = Color.LimeGreen;
 
     [DataField]
-    public TimeSpan ActivateDelay = TimeSpan.FromSeconds(20);
+    public TimeSpan ActivateDelay = TimeSpan.FromSeconds(30);
 
     [DataField]
     public TimeSpan FadeTime = TimeSpan.FromMilliseconds(500);
@@ -37,7 +37,7 @@ public sealed partial class UnfathomableCurioShieldComponent : Component
     public float SlowdownRadius = 1.5f;
 
     [DataField]
-    public float BulletSlowdown = 0.02f;
+    public float BulletSlowdown = 0.03f;
 
     [DataField]
     public EntityWhitelist BulletWhitelist = new()

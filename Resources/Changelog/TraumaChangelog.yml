@@ -12786,3 +12786,70 @@ Entries:
   id: 1399
   time: '2026-08-05T19:31:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3967
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix woundmed damage healing being less than intended in some cases.
+  id: 1400
+  time: '2026-08-06T12:05:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3977
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed dwarves being immune to thermal vision.
+  id: 1401
+  time: '2026-08-06T12:08:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3898
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix xray projectiles not penetrating through walls.
+  - type: Tweak
+    message: Assault laser has lower dps but much more ammo capacity, as intended.
+  - type: Tweak
+    message: Laser sniper clothing/held slowdown 25% -> 15%
+  - type: Tweak
+    message: Laser rifle projectile damage increased by 1
+  - type: Tweak
+    message: Laser lmg battery is now normal size not large.
+  id: 1402
+  time: '2026-08-06T13:03:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3976
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: >-
+      Unfathomable curio shield nerfed to have higher recharge cd and to
+      recharge out of combat and not always.
+  - type: Tweak
+    message: Lionhunter rifle empowered shot no longer deals double damage.
+  - type: Tweak
+    message: Pale cloak doesn't speed up heretic by 10% anymore.
+  - type: Tweak
+    message: >-
+      Sharp medal blad throwing cd lowered, but you can't throw immediately
+      after melee attack.
+  id: 1403
+  time: '2026-08-06T13:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3963
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed revs not being able to make flamethrower fuel tanks.
+  id: 1404
+  time: '2026-08-06T13:29:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3981
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed hanged demon not being able to hardgrab people.
+  id: 1405
+  time: '2026-08-06T13:37:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3982
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Command lynchings are up by 400%.
+  id: 1406
+  time: '2026-08-06T15:35:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3983

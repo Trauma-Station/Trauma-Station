@@ -89,9 +89,6 @@
   - type: GunWieldBonus
     minAngle: -20
     maxAngle: -10
-  - type: Battery
-    maxCharge: 975
-    startingCharge: 975
 
 - type: entity
   parent: WeaponLaserCarbine
@@ -106,10 +103,10 @@
     fireRate: 1
     burstFireRate: 8
     shotsPerBurst: 2
-    burstCooldown: 0.5
+    burstCooldown: 1
   - type: BatteryAmmoProvider
     proto: LaserGunBullet
-    fireCost: 65 # 40 shots
+    fireCost: 20
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser_wide.rsi
   - type: Clothing

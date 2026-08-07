@@ -58,13 +58,15 @@ namespace Content.Shared.Communications
     }
 
     [Serializable, NetSerializable]
-    public sealed class CommunicationsConsoleCallEmergencyShuttleMessage : BoundUserInterfaceMessage
+    public sealed class CommunicationsConsoleCallEmergencyShuttleMessage(string reason) : BoundUserInterfaceMessage // Trauma - added reason
     {
+        public readonly string Reason = reason; // Trauma
     }
 
     [Serializable, NetSerializable]
-    public sealed class CommunicationsConsoleRecallEmergencyShuttleMessage : BoundUserInterfaceMessage
+    public sealed class CommunicationsConsoleRecallEmergencyShuttleMessage(string reason) : BoundUserInterfaceMessage // Trauma - added reason
     {
+        public readonly string Reason = reason; // Trauma
     }
 
     [Serializable, NetSerializable]
