@@ -14,7 +14,7 @@
       path: /Audio/Magic/fireball.ogg
     icon:
       sprite: Objects/Magic/magicactions.rsi
-      state: spell_default
+      state: spell_defaul
   - type: TargetAction
     range: 10
     interactOnMiss: false
