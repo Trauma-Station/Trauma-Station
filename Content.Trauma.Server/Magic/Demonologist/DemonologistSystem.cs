@@ -13,7 +13,6 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
-using Content.Shared.Magic;
 using Content.Shared.PDA;
 using Content.Shared.Stunnable;
 using Content.Shared.Temperature.Systems;
@@ -27,18 +26,17 @@ namespace Content.Trauma.Server.Magic.Demonologist;
 
 public sealed partial class DemonologistSystem : EntitySystem
 {
+    [Dependency] private SharedAccessSystem _access = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MindSystem _mind = default!;
-    [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedMagicSystem _magic = default!;
+    [Dependency] private RoleSystem _roles = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTemperatureSystem _temperature = default!;
-    [Dependency] private RoleSystem _roles = default!;
-    [Dependency] private SharedIdCardSystem _idCard = default!;
-    [Dependency] private SharedAccessSystem _access = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private AntagSelectionSystem _antag = default!;
 
     private readonly Dictionary<EntityUid, (HashSet<ProtoId<AccessLevelPrototype>> saved, TimeSpan restoreAt)> _cursedAccess = new();
 
