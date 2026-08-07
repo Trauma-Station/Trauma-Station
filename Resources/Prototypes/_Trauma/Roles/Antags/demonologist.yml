@@ -49,6 +49,12 @@
     understands:
     - TauCetiBasic
     - Eldritch
+  - type: ActionGrant
+    actions:
+    - ActionCombustion
+    - ActionBindApprentice
+    - ActionBloodBoil
+    - ActionCursedAccess
 
 - type: startingGear
   id: DemonologistStartingGear

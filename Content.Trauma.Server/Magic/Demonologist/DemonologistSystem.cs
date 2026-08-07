@@ -65,15 +65,6 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnMapInit(EntityUid uid, DemonologistComponent component, ref MapInitEvent args)
-    {
-        _actions.AddAction(uid, ref component.CombustionAction, component.CombustionActionPrototype);
-        _actions.AddAction(uid, ref component.BindApprenticeAction, component.BindApprenticeActionPrototype);
-        _actions.AddAction(uid, ref component.BloodBoilAction, component.BloodBoilActionPrototype);
-        _actions.AddAction(uid, ref component.CursedAccessAction, component.CursedAccessActionPrototype);
-    }
-
-    [SubscribeLocalEvent]
     private void OnBloodBoil(BloodBoilSpellEvent args)
     {
         _temperature.ChangeHeat(args.Target, 350000f, true);

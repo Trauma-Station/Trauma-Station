@@ -9,28 +9,4 @@ public sealed partial class DemonologistComponent : Component
 {
     [DataField]
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "DemonologistFaction";
-
-    [DataField]
-    public EntProtoId CombustionActionPrototype = "ActionCombustion";
-
-    [DataField]
-    public EntProtoId BindApprenticeActionPrototype = "ActionBindApprentice";
-
-    [DataField]
-    public EntProtoId BloodBoilActionPrototype = "ActionBloodBoil";
-
-    [DataField]
-    public EntProtoId CursedAccessActionPrototype = "ActionCursedAccess";
-
-    [DataField]
-    public EntityUid? CursedAccessAction;
-
-    [DataField]
-    public EntityUid? BloodBoilAction;
-
-    [DataField]
-    public EntityUid? BindApprenticeAction;
-
-    [DataField]
-    public EntityUid? CombustionAction;
 }
