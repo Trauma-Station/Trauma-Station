@@ -109,6 +109,9 @@ public sealed partial class WoundSystem
     {
         foreach (var wound in GetWoundableWounds(ent.AsNullable()))
         {
+            if (wound.Comp.WoundSeverity == WoundSeverity.Healed)
+                continue;
+
             if (!args.DamageKeys.Contains(wound.Comp.DamageType))
                 continue;
 

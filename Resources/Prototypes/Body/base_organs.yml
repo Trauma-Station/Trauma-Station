@@ -748,6 +748,7 @@
 
 - type: entity
   abstract: true
+  parent: OrganBase # Trauma
   id: OrganBaseParent
   components:
   - type: ParentOrgan
@@ -765,6 +766,7 @@
 
 - type: entity
   abstract: true
+  parent: OrganBase # Trauma
   id: OrganBaseChildInternal
   components:
   - type: ChildOrgan

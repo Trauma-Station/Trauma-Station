@@ -82,8 +82,11 @@ public sealed partial class LeechingWalkSystem : EntitySystem
             var boneHeal = FixedPoint2.Zero;
             if (_hereticQuery.TryComp(mindContainer.Mind, out var heretic))
             {
+                if (heretic.CurrentPath != HereticPath.Rust)
+                    continue;
+
                 multiplier += heretic.PassiveLevel * 0.5f;
-                if (heretic is { Ascended: true, CurrentPath: HereticPath.Rust })
+                if (heretic.Ascended)
                 {
                     if (_respiratorQuery.TryComp(uid, out var respirator))
                     {

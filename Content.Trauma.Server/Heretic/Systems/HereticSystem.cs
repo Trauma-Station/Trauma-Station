@@ -7,9 +7,11 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Chat.Systems;
+using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Revolutionary.Components;
+using Content.Server.RoundEnd;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -42,7 +44,6 @@ using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Server.GameStates;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -91,32 +92,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     public static readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
     public static readonly ProtoId<TagPrototype> AscensionRitualTag = "RitualAscension";
     public static readonly ProtoId<TagPrototype> FeastOfOwlsRitualTag = "RitualFeastOfOwls";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        PlayerMan.PlayerStatusChanged += StatusChanged;
-    }
-
-    public override void Shutdown()
-    {
-        base.Shutdown();
-
-        PlayerMan.PlayerStatusChanged -= StatusChanged;
-    }
-
-    private void StatusChanged(object? sender, SessionStatusEventArgs e)
-    {
-        if (e.NewStatus != SessionStatus.InGame)
-            return;
-
-        var query = AllEntityQuery<HereticComponent, MindComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var mind))
-        {
-            UpdateHereticTargets((uid, comp, mind));
-        }
-    }
 
     [SubscribeLocalEvent]
     private void OnStateChanged(MobStateChangedEvent args)
@@ -424,13 +399,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         ev.WeakToHoly = true;
     }
 
-    [SubscribeLocalEvent]
-    private void OnUpdateTargets(Entity<HereticComponent> ent, ref EventHereticUpdateTargets args)
-    {
-        UpdateHereticTargets(ent);
-    }
-
-    private void UpdateHereticTargets(Entity<HereticComponent, MindComponent?> ent)
+    public void UpdateHereticTargets(Entity<HereticComponent, MindComponent?> ent)
     {
         List<EntityUid>? targets = null;
         _toRemove.Clear();
@@ -532,11 +501,25 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (targets.Count == 0)
             return null;
 
-        var picked = SacrificeTypes.TryGetValue(data.Type, out var type)
-            ? _rand.Pick(targets.Where(x => HasComp(x, type)).ToList())
-            : _rand.Pick(targets);
+        var dataType = data.Type;
+
+        EntityUid picked;
+        if (SacrificeTypes.TryGetValue(dataType, out var type))
+        {
+            var list = targets.Where(x => HasComp(x, type)).ToList();
+            if (list.Count == 0)
+            {
+                picked = _rand.Pick(targets);
+                dataType = SacrificeTargetType.None;
+            }
+            else
+                picked = _rand.Pick(list);
+        }
+        else
+            picked = _rand.Pick(targets);
+
         targets.Remove(picked);
-        return GetData(picked, data.Type);
+        return GetData(picked, dataType);
     }
 
     [SubscribeLocalEvent]
