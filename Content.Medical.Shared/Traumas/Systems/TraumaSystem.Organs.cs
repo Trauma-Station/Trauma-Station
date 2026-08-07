@@ -14,12 +14,12 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private EntityQuery<InternalOrganComponent> _internalQuery = default!;
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _internalQuery = default!;
 
     #region Event handling
 
     [SubscribeLocalEvent]
-    private void OnOrganIntegrityChanged(Entity<InternalOrganComponent> organ, ref OrganIntegrityChangedEvent args)
+    private void OnOrganIntegrityChanged(Entity<InternalChildOrganComponent> organ, ref OrganIntegrityChangedEvent args)
     {
         if (_body.GetBody(organ.Owner) is not {} body)
             return;
@@ -68,7 +68,7 @@ public partial class TraumaSystem
     #endregion
 
     #region Public API
-    public bool TryCreateOrganDamageModifier(Entity<InternalOrganComponent?> ent,
+    public bool TryCreateOrganDamageModifier(Entity<InternalChildOrganComponent?> ent,
         FixedPoint2 severity,
         EntityUid effectOwner,
         string identifier)
@@ -79,13 +79,13 @@ public partial class TraumaSystem
         if (!ent.Comp.IntegrityModifiers.TryAdd((identifier, effectOwner), severity))
             return false;
 
-        //DirtyField(ent, ent.Comp, nameof(InternalOrganComponent.IntegrityModifiers));
+        //DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.IntegrityModifiers));
         UpdateOrganIntegrity(ent);
 
         return true;
     }
 
-    public bool TryChangeOrganDamageModifier(Entity<InternalOrganComponent?> ent,
+    public bool TryChangeOrganDamageModifier(Entity<InternalChildOrganComponent?> ent,
         FixedPoint2 change,
         EntityUid effectOwner,
         string identifier)
@@ -98,13 +98,13 @@ public partial class TraumaSystem
             return false;
 
         ent.Comp.IntegrityModifiers[key] = value + change;
-        //DirtyField(ent, ent.Comp, nameof(InternalOrganComponent.IntegrityModifiers));
+        //DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.IntegrityModifiers));
         UpdateOrganIntegrity(ent);
 
         return true;
     }
 
-    public bool TryRemoveOrganDamageModifier(Entity<InternalOrganComponent?> ent,
+    public bool TryRemoveOrganDamageModifier(Entity<InternalChildOrganComponent?> ent,
         EntityUid effectOwner,
         string identifier)
     {
@@ -114,7 +114,7 @@ public partial class TraumaSystem
         if (!ent.Comp.IntegrityModifiers.Remove((identifier, effectOwner)))
             return false;
 
-        //DirtyField(ent, ent.Comp, nameof(InternalOrganComponent.IntegrityModifiers));
+        //DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.IntegrityModifiers));
 
         if (_traumaQuery.TryComp(effectOwner, out var trauma))
             RemoveTrauma((effectOwner, trauma));
@@ -127,7 +127,7 @@ public partial class TraumaSystem
 
     #region Private API
 
-    private void UpdateOrganIntegrity(Entity<InternalOrganComponent?> ent)
+    private void UpdateOrganIntegrity(Entity<InternalChildOrganComponent?> ent)
     {
         if (!_internalQuery.Resolve(ent, ref ent.Comp))
             return;
@@ -143,7 +143,7 @@ public partial class TraumaSystem
         if (oldIntegrity == ent.Comp.OrganIntegrity)
             return;
 
-        DirtyField(ent, ent.Comp, nameof(InternalOrganComponent.OrganIntegrity));
+        DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.OrganIntegrity));
 
         var ev = new OrganIntegrityChangedEvent(oldIntegrity, ent.Comp.OrganIntegrity);
         RaiseLocalEvent(ent, ref ev);
@@ -162,7 +162,7 @@ public partial class TraumaSystem
             return;
 
         ent.Comp.OrganSeverity = nearestSeverity;
-        DirtyField(ent, ent.Comp, nameof(InternalOrganComponent.OrganSeverity));
+        DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.OrganSeverity));
 
         var sevEv = new OrganDamageSeverityChanged(ent.Comp.OrganSeverity, nearestSeverity);
         RaiseLocalEvent(ent, ref sevEv);

@@ -75,6 +75,9 @@
     enabled: false
   - type: NukeLabel
   - type: Nuke
+    # <Trauma>
+    alertLevelOnOverride: Omicron
+    # </Trauma>
     explosionType: Default
     maxIntensity: 100
     intensitySlope: 5
@@ -88,9 +91,8 @@
       whitelist:
         components:
         - NukeDisk
-    alertLevelOnActivate: delta
-    alertLevelOnDeactivate: green
-    alertLevelOnOverride: omicron # Goobstation
+    alertLevelOnActivate: DeltaNuke
+    alertLevelOnDeactivate: Green
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.NukeUiKey.Key

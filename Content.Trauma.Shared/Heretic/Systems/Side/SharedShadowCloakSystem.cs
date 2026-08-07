@@ -24,7 +24,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
 public abstract partial class SharedShadowCloakSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
@@ -138,7 +138,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
             return;
 
         var chance = Math.Clamp(cloak.Comp.SustainedDamage.Float() * cloak.Comp.RevealDamageMultiplier / 100f, 0f, 1f);
-        if (!SharedRandomExtensions.PredictedProb(_timing, chance, GetNetEntity(ent)))
+        if (!SharedRandomExtensions.PredictedProb(Timing, chance, GetNetEntity(ent)))
             return;
 
         if (cloak.Comp.DebuffOnEarlyReveal)

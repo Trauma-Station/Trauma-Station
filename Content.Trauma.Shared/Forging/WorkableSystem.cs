@@ -4,8 +4,8 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
-using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
+using Content.Shared.Temperature.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Forging;
@@ -15,27 +15,20 @@ public sealed partial class WorkableSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMetalSystem _metal = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTemperatureSystem _temp = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityQuery<WorkableComponent> _query = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    // TODO: quality integration
 
-        SubscribeLocalEvent<WorkableComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<WorkableComponent, ExaminedEvent>(OnExamined);
-
-        SubscribeLocalEvent<TemperatureComponent, MetalWroughtEvent>(OnTemperatureWrought);
-        // TODO: quality integration
-    }
-
-    private void OnDamageChanged(Entity<WorkableComponent> ent, ref DamageChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<WorkableComponent> ent, ref DamageDealtEvent args)
     {
         if (TerminatingOrDeleted(ent) ||
             !_timing.IsFirstTimePredicted ||
-            args.DamageDelta is not {} delta ||
             args.Origin is not {} user || // random explosion can't forge something, youd need a really really specific shaped charge
-            !delta.DamageDict.TryGetValue(ent.Comp.DamageType, out var dealt))
+            !args.Damage.DamageDict.TryGetValue(ent.Comp.DamageType, out var dealt) ||
+            dealt < FixedPoint2.Zero)
             return;
 
         if (!_metal.IsWorkable(ent.Owner))
@@ -53,6 +46,7 @@ public sealed partial class WorkableSystem : EntitySystem
             DirtyField(ent, ent.Comp, nameof(WorkableComponent.Remaining));
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<WorkableComponent> ent, ref ExaminedEvent args)
     {
         // TODO: add a skill check for knowing if its workable by eye
@@ -63,14 +57,10 @@ public sealed partial class WorkableSystem : EntitySystem
         args.PushMarkup(Loc.GetString("workable-metal-examine", ("workable", workable)));
     }
 
+    [SubscribeLocalEvent]
     private void OnTemperatureWrought(Entity<TemperatureComponent> ent, ref MetalWroughtEvent args)
     {
-        if (!TryComp<TemperatureComponent>(args.Result, out var dest))
-            return;
-
-        dest.CurrentTemperature = ent.Comp.CurrentTemperature;
-        var ev = new OnTemperatureChangeEvent(dest.CurrentTemperature, dest.CurrentTemperature, 0);
-        RaiseLocalEvent(args.Result, ev);
+        _temp.SetTemperature(args.Result, ent.Comp.Temperature);
     }
 
     private void CreateResult(Entity<WorkableComponent> ent, EntityUid? user)

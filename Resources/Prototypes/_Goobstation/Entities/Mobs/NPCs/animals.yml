@@ -710,11 +710,10 @@
 
 - type: entity
   name: horse
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [ SimpleMobBase, StripableInventoryBase ]
   id: MobHorse
   description: Very foul creature. For those that feel like punching.
   components:
-  # <Trauma>
   - type: NPCRetaliation
   - type: HTN
     rootTask:
@@ -724,7 +723,6 @@
     damage:
       types:
         Blunt: 10
-  # </Trauma>
   - type: MovementSpeedModifier
     baseSprintSpeed: 5.5
     baseWalkSpeed: 4.5 # default walking speed

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.VendingMachines;
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -11,7 +12,7 @@ namespace Content.Trauma.Shared.VendingMachines;
 /// Another component must handle <see cref="ShopVendorBalanceEvent"/> and <see cref="ShopVendorPurchaseEvent"/> to work.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedShopVendorSystem))]
-[AutoGenerateComponentState, AutoGenerateComponentPause]
+[AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class ShopVendorComponent : Component
 {
     /// <summary>
@@ -51,6 +52,9 @@ public sealed partial class ShopVendorComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan NextEject;
+
+    [DataField, AutoNetworkedField]
+    public VendingMachineVisualState State = VendingMachineVisualState.Normal;
 
     [DataField]
     public SoundSpecifier PurchaseSound = new SoundPathSpecifier("/Audio/Machines/machine_vend.ogg")

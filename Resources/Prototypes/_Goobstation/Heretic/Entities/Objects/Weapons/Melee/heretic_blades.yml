@@ -12,6 +12,8 @@
   components:
   - type: TriggerOnThrown
     keyOut: activate
+  - type: TriggerOnMeleeHit
+    keyOut: activate
   - type: TriggerOnGotEquippedHand
     keyOut: deactivate
   - type: GenericTriggerCondition
@@ -35,7 +37,7 @@
     targetUser: true
     effects:
     - !type:SetThrowCooldown
-      cooldown: 1
+      cooldown: 0.9
   - type: ItemToggleOnTrigger
     keysIn: [activate]
     canDeactivate: false
@@ -77,6 +79,7 @@
   - type: LandAtCursor
   - type: UnholyItem
   - type: HereticBlade
+  - type: SurgeryTool
   - type: Tool
     qualities:
     - Slicing

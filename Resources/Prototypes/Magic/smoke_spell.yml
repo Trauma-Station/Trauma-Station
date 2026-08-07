@@ -1,16 +1,31 @@
-#- type: entity
-#  parent: BaseAction
-#  id: ActionSmoke
-#  name: Smoke
-#  description: Summons smoke around the user.
-#  components:
-#  - type: Action
-#    useDelay: 10
-#    itemIconStyle: BigAction
-#    icon:
-#      sprite: Actions/smokeaction.rsi
-#      state: smokeaction
-#  - type: InstantAction
-#    event: !type:InstantSpawnSpellEvent
-#      prototype: WizardSmoke
-#      posData: !type:TargetInFront
+- type: entity
+  parent: BaseAction
+  id: ActionSmoke
+  name: Smoke
+  description: Summons smoke around the user.
+  components:
+  # <Trauma>
+  - type: Magic
+    school: Conjuration
+  - type: ActionUpgrade
+    effectedLevels:
+      2: ActionSmokeII
+      3: ActionSmokeIII
+  # </Trauma>
+  - type: Action
+    # <Trauma>
+    raiseOnUser: true
+    checkCanInteract: false
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Wizard/smoke.ogg
+    useDelay: 12 # was 10
+    # </Trauma>
+    itemIconStyle: BigAction
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: smoke
+  - type: InstantAction
+    # <Trauma> - replaced with dedicated smoke logic
+    event: !type:SmokeSpellEvent
+    # <Trauma>

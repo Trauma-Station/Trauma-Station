@@ -49,9 +49,17 @@ public sealed partial class HereticArenaParticipantComponent : BaseSpriteOverlay
     [DataField]
     public Dictionary<string, bool> GrantedComponentDictionary = new()
     {
-        {"SpecialPressureImmunity", false},
         {"SpecialBreathingImmunity", false},
         {"MovementIgnoreGravity", false},
+    };
+
+    /// <summary>
+    /// Status Effects to add
+    /// </summary>
+    [DataField]
+    public List<EntProtoId> StatusEffects = new()
+    {
+        "StatusEffectPressureImmunityArena"
     };
 
     [DataField]

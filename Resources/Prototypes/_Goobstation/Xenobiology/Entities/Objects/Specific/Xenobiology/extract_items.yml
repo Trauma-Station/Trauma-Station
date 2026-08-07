@@ -40,7 +40,7 @@
       shootMaxInterval: 300
       shootRange: 5
       lightningPrototype: Lightning
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 32
     integrity: 32
     integrityThresholds:

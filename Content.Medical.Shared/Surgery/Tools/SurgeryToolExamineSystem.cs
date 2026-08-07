@@ -31,7 +31,7 @@ public sealed partial class SurgeryToolExamineSystem : EntitySystem
         SubscribeLocalEvent<TweezersComponent, SurgeryToolExaminedEvent>(OnExamined);
         SubscribeLocalEvent<BoneSetterComponent, SurgeryToolExaminedEvent>(OnExamined);
         SubscribeLocalEvent<BodyPartComponent, SurgeryToolExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<InternalOrganComponent, SurgeryToolExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<InternalChildOrganComponent, SurgeryToolExaminedEvent>(OnExamined);
         SubscribeLocalEvent<StitchesComponent, SurgeryToolExaminedEvent>(OnExamined);
     }
 

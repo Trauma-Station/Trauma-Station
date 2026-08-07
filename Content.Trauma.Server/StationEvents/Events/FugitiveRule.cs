@@ -6,7 +6,7 @@ using Content.Server.GameTicking;
 using Content.Server.StationEvents.Events;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Paper;

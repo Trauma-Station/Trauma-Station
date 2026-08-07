@@ -6,9 +6,15 @@
   name: "[color=red]Devour[/color]"
   description: Consume various materials to insides of your body.
   components:
+  - type: Sprite
+    sprite: Interface/Actions/devour.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ActionVisuals.Icon" ]
+    - state: icon-on
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
   - type: Action
-    icon: { sprite : Interface/Actions/devour.rsi, state: icon }
-    iconOn: { sprite : Interface/Actions/devour.rsi, state: icon-on }
     itemIconStyle: BigAction
     priority: 1
   - type: TargetAction
