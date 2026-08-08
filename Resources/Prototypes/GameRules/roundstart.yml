@@ -166,6 +166,9 @@
   parent: BaseGameRule
   id: BaseNukeopsRule
   components:
+  # <Trauma>
+  - type: NewAntagOrEvac
+  # </Trauma>
   - type: RandomMetadata #this generates the random operation name cuz it's cool.
     nameSegments:
     - NamesOperationPrefix
@@ -314,7 +317,11 @@
   id: Revolutionary
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
-  - type: MindshieldRemovingAntag # Trauma - puts fake mindshields into headrevs that start with a real one
+  # <Trauma>
+  - type: NewAntagOrEvac
+    event: SpawnERTSecurity
+  - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
+  # </Trauma>
   - type: GameRule
     minPlayers: 20 # Trauma - was 15
   - type: RevolutionaryRule
