@@ -3,8 +3,6 @@
 using Content.Client.Guidebook;
 using Content.Client.Guidebook.Richtext;
 using Content.Goobstation.Server.MedicalPatch;
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Server.Chemistry.Components;
 using Content.Server.Power.Components;
 using Content.Shared.Chemistry;
@@ -21,9 +19,6 @@ using Content.Trauma.Shared.ChemiCompiler;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.ContentPack;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Content.IntegrationTests.Tests._Trauma;

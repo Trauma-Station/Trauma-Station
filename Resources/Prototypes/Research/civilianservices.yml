@@ -188,7 +188,7 @@
     state: advmop
   discipline: CivilianServices
   tier: 2
-  cost: 10000
+  cost: 5000 # Trauma - Was 10000
   recipeUnlocks:
   - AdvMopItem
   - MegaSprayBottle
