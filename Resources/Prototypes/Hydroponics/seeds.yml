@@ -812,7 +812,7 @@
   productPrototypes:
     - FoodCorn
   mutationPrototypes:
-    - ClearCorn
+    - ClearCorn  # Trauma
   lifespan: 25
   maturation: 8
   production: 6
@@ -912,7 +912,7 @@
   productPrototypes:
     - FoodMushroom
   mutationPrototypes:
-    - MagicMushrooms
+    - MagicMushrooms  # Trauma
   lifespan: 35
   maturation: 10
   production: 7
