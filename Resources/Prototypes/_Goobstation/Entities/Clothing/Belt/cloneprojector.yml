@@ -120,8 +120,7 @@
     - type: Mutatable
     - type: Fingerprint
     - type: Perishable
-    - type: Hunger
-    - type: Thirst
+    - type: Satiation
     - type: FootprintOwner
     - type: ItemSlots # No infinite batteries.
 

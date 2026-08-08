@@ -57,10 +57,8 @@
   - type: WeakToHoly
   - type: NightVision
     lightingColor: '#FF777715'
-  - type: Hunger
-    baseDecayRate: 0
-  - type: Thirst
-    baseDecayRate: 0
+  - type: Satiation
+    satiations: {}
   - type: MobThresholds
     thresholds:
       0: Alive

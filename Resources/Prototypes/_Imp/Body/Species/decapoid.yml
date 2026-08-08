@@ -214,8 +214,11 @@
   - type: TypingIndicator
     proto: robot
   - type: Exoskeleton # Prevents injections with syringes. Ideally it'd be on their body parts instead but eh.
-  - type: Thirst
-    baseDecayRate: -0.1 # Regen, no thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+    # no thirst
 
 - type: entity
   abstract: true

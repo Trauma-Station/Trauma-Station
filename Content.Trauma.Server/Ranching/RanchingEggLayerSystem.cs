@@ -16,17 +16,14 @@ namespace Content.Trauma.Server.Ranching;
 public sealed partial class RanchingEggLayerSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
+    [Dependency] private EntityQuery<SatiationComponent> _satiationQuery = default!;
 
     private List<Entity<RanchingEggLayerComponent>> toLayEgg = new();
 
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<RanchingEggLayerComponent, MapInitEvent>(OnMapInit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<RanchingEggLayerComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextGrowth = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(ent.Comp.EggLayCooldownMin, ent.Comp.EggLayCooldownMax));
@@ -42,9 +39,6 @@ public sealed partial class RanchingEggLayerSystem : EntitySystem
         while (query.MoveNext(out var uid, out var eggLayer))
         {
             if (_mobState.IsDead(uid) || _mobState.IsCritical(uid))
-                continue;
-
-            if (eggLayer.HungerRequired && !HasComp<HungerComponent>(uid))
                 continue;
 
             if (_timing.CurTime < eggLayer.NextGrowth)
@@ -66,10 +60,10 @@ public sealed partial class RanchingEggLayerSystem : EntitySystem
         if (!Resolve(uid, ref egglayer))
             return;
 
-        if (!TryComp<HungerComponent>(uid, out var hunger))
+        if (!_satiationQuery.TryComp(uid, out var satiation))
             return;
 
-        if (_hunger.GetHunger(hunger) < egglayer.HungerUsage || _hunger.GetHungerThreshold(hunger).GetHashCode() < egglayer.HungerThresholdRequired.GetHashCode())
+        if (!_hunger.IsValueInRange((uid, satiation), SatiationSystem.Hunger, above: egglayer.HungerThreshold))
             return;
 
         var evfood = new RanchingEggLayAttemptEvent((uid, egglayer));
