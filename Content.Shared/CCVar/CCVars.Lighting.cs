@@ -28,7 +28,7 @@ public sealed partial class CCVars
     /// Render resolution scale for ambient occlusion.
     /// </summary>
     public static readonly CVarDef<float> AmbientOcclusionResolutionScale =
-        CVarDef.Create("light.ambient_occlusion_resolution_scale", 0.5f, CVar.CLIENTONLY | CVar.ARCHIVE);
+        CVarDef.Create("light.ambient_occlusion_resolution_scale", 1f, CVar.CLIENTONLY | CVar.ARCHIVE); // Trauma - was 0.5, need to look at fox engine. just having half res with current pipeline still looks shit
 
     /// <summary>
     /// Distance in world-pixels of ambient occlusion.
