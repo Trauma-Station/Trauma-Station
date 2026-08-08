@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
 using Content.Shared.Preferences.Loadouts;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -16,12 +13,9 @@ public sealed class LoadoutOrphanTest : GameTest
     [Test]
     public async Task NoOrphanedLoadoutsTest()
     {
-        var server = Pair.Server;
-        var proto = server.ProtoMan;
-
         // go through each group
         var grouped = new HashSet<ProtoId<LoadoutPrototype>>();
-        foreach (var group in proto.EnumeratePrototypes<LoadoutGroupPrototype>())
+        foreach (var group in SProtoMan.EnumeratePrototypes<LoadoutGroupPrototype>())
         {
             // and collect the loadouts they all have
             foreach (var loadout in group.Loadouts)
@@ -30,11 +24,11 @@ public sealed class LoadoutOrphanTest : GameTest
             }
         }
 
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             var orphans = new List<string>();
             // then go through each loadout
-            foreach (var loadout in proto.EnumeratePrototypes<LoadoutPrototype>())
+            foreach (var loadout in SProtoMan.EnumeratePrototypes<LoadoutPrototype>())
             {
                 // and make sure it has a group
                 var id = loadout.ID;

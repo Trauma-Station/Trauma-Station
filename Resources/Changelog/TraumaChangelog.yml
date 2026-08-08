@@ -12853,3 +12853,19 @@ Entries:
   id: 1406
   time: '2026-08-06T15:35:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3983
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Foam no longer adds reagents to dead mobs.
+  - type: Fix
+    message: Fixed not being able to get synthmeat seeds in any way.
+  id: 1407
+  time: '2026-08-08T07:17:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3992
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mindshielded headrevs not having the broken mindshield hud icon.
+  id: 1408
+  time: '2026-08-08T07:29:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3991
