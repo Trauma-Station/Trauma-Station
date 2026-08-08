@@ -47,6 +47,12 @@
   name: energy
   knowledge: KnowledgeWeaponsEnergy
 
+# shields
+- type: weaponClass
+  id: Shield
+  name: shield
+  knowledge: KnowledgeWeaponsShield
+
 ## Ranged ##
 
 # one handed gun with relatively low recoil

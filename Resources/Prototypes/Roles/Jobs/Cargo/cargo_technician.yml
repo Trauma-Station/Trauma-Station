@@ -18,8 +18,6 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipStrength
-    - SkillChipToughness
     - SkillChipEducation
   # </Trauma>
   - !type:GiveItemOnHolidaySpecial

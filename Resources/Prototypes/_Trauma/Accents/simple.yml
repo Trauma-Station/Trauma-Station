@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: simpleAccent
+  id: Bogan
+  replacement: bogan
+  prefix: AccentBoganPrefix
+  prefixChance: 0.15
+  suffix: AccentBoganSuffix
+  suffixChance: 0.3
+
+- type: simpleAccent
+  id: British
+  replacement: british
+  prefix: AccentBritishPrefix
+  prefixChance: 0.1
+  suffix: AccentBritishSuffix
+  suffixChance: 0.05
+
+- type: simpleAccent
+  id: Caveman
+  replacement: Caveman
+  prefix: AccentCavemanPrefix
+  prefixChance: 0.4
+  suffix: AccentCavemanSuffix
+  suffixChance: 0.4
+
+- type: simpleAccent
+  id: Dementia
+  replacement: dementia
+  prefix: AccentDementiaPrefix
+  prefixChance: 0.15
+  suffix: AccentDementiaSuffix
+  suffixChance: 0.3
+
+- type: simpleAccent
+  id: Demonic
+  replacement: SlaughterDemon
+  suffix: AccentDemonicSuffix
+  suffixChance: 0.15
+  uppercase: true
+
+- type: simpleAccent
+  id: Medieval
+  replacement: medieval
+  prefix: AccentMedievalPrefix
+  prefixChance: 0.4
+
+- type: simpleAccent
+  id: Ohio
+  replacement: ohio
+  prefix: AccentOhioPrefix
+  prefixChance: 0.15
+  suffix: AccentOhioSuffix
+  suffixChance: 0.3

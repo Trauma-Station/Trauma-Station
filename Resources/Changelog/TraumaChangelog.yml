@@ -12869,3 +12869,86 @@ Entries:
   id: 1408
   time: '2026-08-08T07:29:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3991
+- author: Nousagi37
+  changes:
+  - type: Fix
+    message: >-
+      Every Snakes no longer have 100HP but rather 45HP, and venom has been
+      tuned down a bit
+  - type: Tweak
+    message: Advanced Cleaning is now 5000 research points
+  id: 1409
+  time: '2026-08-08T09:23:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3737
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a new cartridge type used primarily by ED-209 (.30 Caseless)
+  - type: Add
+    message: >-
+      Added the ability for ED-209 to passively regenerate ammo at 1 bullet
+      every 4 seconds
+  - type: Tweak
+    message: Increased the health of ED-209 from 100 to 175
+  - type: Tweak
+    message: Decreased the firerate of ED-209 from 5 to 2
+  - type: Tweak
+    message: Decreased the maximum ammo capacity of ED-209 from 125 to 100
+  id: 1410
+  time: '2026-08-08T12:28:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3986
+- author: Aviu
+  changes:
+  - type: Add
+    message: Spies infiltrate the station!
+  - type: Remove
+    message: Thief is dead, spies killed him.
+  id: 1411
+  time: '2026-08-08T13:06:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3943
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed polymorph chems from botany reagent pool.
+  - type: Fix
+    message: Fixed bananamen organs rotting.
+  - type: Fix
+    message: Fixed slowdown resistance not working.
+  - type: Fix
+    message: Fixed red jelly not giving clothing fire vulnerability.
+  - type: Tweak
+    message: >-
+      Red jelly now gives flat 10% reduction to slowdown by clothing instead of
+      full immunity.
+  - type: Remove
+    message: removed speed legs and strength augments from research.
+  - type: Tweak
+    message: Renault butcher tc 40 -> 25.
+  - type: Fix
+    message: >-
+      Fix npc always ignoring stealth entities instead of only ignoring them
+      when they are invisible.
+  - type: Remove
+    message: Removed emag from syndi borg module.
+  id: 1412
+  time: '2026-08-08T13:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3904
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Physical skills (strength/toughness/athletics) are no more.
+  - type: Remove
+    message: Novice skill mastery is no more.
+  - type: Remove
+    message: Removed shield held slowdown.
+  - type: Add
+    message: Added shield skill that is used for parries and blocking damage percentage.
+  - type: Add
+    message: Sec vendor has shield and throwing skill chips.
+  - type: Tweak
+    message: Tweaked roundstart skill point pool and skill costs.
+  - type: Fix
+    message: Fixed eshield weird behavor, also it charges slower now but can be melee parried with.
+  id: 1413
+  time: '2026-08-08T13:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3698

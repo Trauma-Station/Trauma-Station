@@ -530,7 +530,6 @@ public sealed partial class DamageableSystem
         {
             ent.Comp.Damage.DamageDict[type] = newValue;
         }
-        ent.Comp.LastModifiedTime = _timing.CurTime; // Shitmed
 
         // Setting damage does not count as 'dealing' damage, even if it is set to a larger value, so we pass an
         // empty damage delta.

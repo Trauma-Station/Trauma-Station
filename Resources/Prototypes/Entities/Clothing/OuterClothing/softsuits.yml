@@ -124,7 +124,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Radiation: 0.1

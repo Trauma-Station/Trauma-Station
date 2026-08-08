@@ -259,6 +259,8 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      components:
+      - SpyRule
 
 - type: listing
   id: UplinkBowHardlight
@@ -920,6 +922,8 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      components:
+      - SpyRule
 
 - type: listing
   id: UplinkMagazineHighCaliber

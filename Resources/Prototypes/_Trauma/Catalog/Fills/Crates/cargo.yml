@@ -11,9 +11,5 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SkillChipStrength
-          amount: 3
-        - id: SkillChipToughness
-          amount: 3
         - id: SkillChipMining
           amount: 3

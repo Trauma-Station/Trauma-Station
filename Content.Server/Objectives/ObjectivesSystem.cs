@@ -153,8 +153,8 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
             agentSummary.AppendLine(Loc.GetString("objectives-with-objectives", ("custody", custody), ("title", title), ("agent", agent)));
 
             // <Trauma>
-            var ev = new PrependObjectivesSummaryTextEvent();
-            RaiseLocalEvent(mindId, ref ev);
+            var ev = new PrependObjectivesSummaryTextEvent(mindId, name);
+            RaiseLocalEvent(mindId, ref ev, true);
             if (ev.Text != string.Empty)
                 agentSummary.AppendLine(ev.Text);
             // </Trauma>

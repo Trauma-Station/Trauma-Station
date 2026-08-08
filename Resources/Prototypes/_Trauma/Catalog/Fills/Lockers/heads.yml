@@ -64,7 +64,6 @@
   id: LockerFillHeadOfSecurityTrauma
   table: !type:AllSelector
     children:
-    - id: BoxSkillChipsSec
     - id: ClothingBeltSheathHeadOfSecurityFilled
     - id: TelescopicShield
     - id: ArmoryOverrideKeyComponents
