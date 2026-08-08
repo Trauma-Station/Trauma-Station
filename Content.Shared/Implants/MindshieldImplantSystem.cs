@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Mindshield;
-// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
@@ -31,16 +28,8 @@ public sealed partial class MindshieldImplantSystem : EntitySystem
         // Entity that was implanted
         var uid = args.Implanted;
         // <Trauma>
-        var attemptEv = new MindShieldAttemptEvent();
-        RaiseLocalEvent(uid, ref attemptEv);
-        if (attemptEv.CancelPopup is { } cancelPopup)
-        {
-            _popup.PopupEntity(Loc.GetString(cancelPopup), uid);
-            var shield = Comp<MindShieldComponent>(ent);
-            shield.Broken = true;
-            Dirty(ent, shield);
+        if (TryPreventMindshield(uid, ent))
             return;
-        }
         // </Trauma> (branch below is unreachable because of special headrev event handler)
         if (HasComp<HeadRevolutionaryComponent>(uid))
         {
