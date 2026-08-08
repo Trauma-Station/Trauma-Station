@@ -748,6 +748,7 @@
     - FoodApple
   mutationPrototypes:
     - deliciousApple # Trauma
+    - MethApple # Trauma
     - goldenApple
   harvestRepeat: Repeat
   lifespan: 55
@@ -775,6 +776,9 @@
   packetPrototype: GoldenAppleSeeds
   productPrototypes:
     - FoodGoldenApple
+  mutationPrototypes:
+    - deliciousApple # Trauma
+    - MethApple # Trauma
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
@@ -807,6 +811,8 @@
   packetPrototype: CornSeeds
   productPrototypes:
     - FoodCorn
+  mutationPrototypes:
+    - ClearCorn
   lifespan: 25
   maturation: 8
   production: 6
@@ -905,6 +911,8 @@
   packetPrototype: ChanterelleSeeds
   productPrototypes:
     - FoodMushroom
+  mutationPrototypes:
+    - MagicMushrooms
   lifespan: 35
   maturation: 10
   production: 7

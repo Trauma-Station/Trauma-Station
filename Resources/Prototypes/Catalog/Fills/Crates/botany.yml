@@ -43,6 +43,8 @@
           amount: 3
         - id: PoppySeeds
           amount: 3
+        - id: SynthMeatSeeds  # Trauma
+          amount: 3
 
 - type: entity
   parent: CrateHydroponics
