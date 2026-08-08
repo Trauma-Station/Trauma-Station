@@ -43,13 +43,13 @@ accent-demonic-words-replace-14 = circus abomination
 accent-demonic-words-15 = wizard
 accent-demonic-words-replace-15 = spell slinging worm
 
-accent-demonic-suffix-1 = YOU WERE BORN TO BLEED.
-accent-demonic-suffix-2 = FLESH IS WEAK.
-accent-demonic-suffix-3 = RIP AND TEAR.
-accent-demonic-suffix-4 = DIE SCREAMING.
-accent-demonic-suffix-5 = I HEAR YOUR HEART.
-accent-demonic-suffix-6 = OFFER YOUR BONES.
-accent-demonic-suffix-7 = BLOOD WILL DROWN YOU.
+accent-demonic-suffix-1 = {" "}YOU WERE BORN TO BLEED.
+accent-demonic-suffix-2 = {" "}FLESH IS WEAK.
+accent-demonic-suffix-3 = {" "}RIP AND TEAR.
+accent-demonic-suffix-4 = {" "}DIE SCREAMING.
+accent-demonic-suffix-5 = {" "}I HEAR YOUR HEART.
+accent-demonic-suffix-6 = {" "}OFFER YOUR BONES.
+accent-demonic-suffix-7 = {" "}BLOOD WILL DROWN YOU.
 
 # speech verbs
 chat-speech-verb-name-demon = Slaughter Demon

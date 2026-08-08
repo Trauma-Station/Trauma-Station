@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 284.0.0
+  engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/29/2026 15:15:33
+  time: 08/03/2026 23:09:32
   entityCount: 32403
 maps:
 - 1
@@ -83,6 +83,8 @@ entities:
     - type: GridTree
     - type: Broadphase
     - type: OccluderTree
+    - type: ChunkContainer
+      chunkEntities: []
   - uid: 2
     components:
     - type: MetaData
@@ -341,11 +343,11 @@ entities:
           version: 7
         2,3:
           ind: 2,3
-          tiles: KgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAACAEMAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAAAsAAAAAAIALAAAAAABACwAAAAAAABDAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAMALAAAAAADACwAAAAAAAAsAAAAAAMAQwAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAwAsAAAAAAMALAAAAAABACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAACACwAAAAAAwBVAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAABACwAAAAAAQAsAAAAAAMAVQAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAFUAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAABACwAAAAAAwAsAAAAAAEALAAAAAADACwAAAAAAQAFAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAAAsAAAAAAMALAAAAAADACwAAAAAAQAsAAAAAAIABQAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAAUAAAAAAAAqAAAAAAAALQAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAvAAAAAAAAKgAAAAAAACwAAAAAAgAFAAAAAAAAKgAAAAAAACoAAAAAAAA0AAAAAAAAKgAAAAAAAEkAAAAAAwBJAAAAAAIANAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAANAAAAAAAACoAAAAAAAAsAAAAAAEANAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAC8AAAAAAAAqAAAAAAAALAAAAAADADQAAAAAAAAqAAAAAAAASQAAAAADACoAAAAAAAA0AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAADoAAAAAAgAsAAAAAAAALAAAAAAAACwAAAAAAQAsAAAAAAMALAAAAAADACoAAAAAAAAqAAAAAAAASQAAAAACACoAAAAAAAA0AAAAAAAAKgAAAAAAADQAAAAAAAAqAAAAAAAAOgAAAAADADoAAAAAAgAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAIAKgAAAAAAACwAAAAAAQAsAAAAAAIAKgAAAAAAAA==
+          tiles: KgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAACAEMAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAAAsAAAAAAIALAAAAAABACwAAAAAAABDAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAMALAAAAAADACwAAAAAAAAsAAAAAAMAQwAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAwAsAAAAAAMALAAAAAABACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAACACwAAAAAAwBVAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAABACwAAAAAAQAsAAAAAAMAVQAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAFUAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAABACwAAAAAAwAsAAAAAAEALAAAAAADACwAAAAAAQBEAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAACACwAAAAAAAAsAAAAAAMALAAAAAADACwAAAAAAQAsAAAAAAIARAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAEQAAAAAAAAqAAAAAAAALQAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAvAAAAAAAAKgAAAAAAACwAAAAAAgBEAAAAAAAAKgAAAAAAACoAAAAAAAA0AAAAAAAAKgAAAAAAAEkAAAAAAwBJAAAAAAIANAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAANAAAAAAAACoAAAAAAAAsAAAAAAEANAAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAC8AAAAAAAAqAAAAAAAALAAAAAADADQAAAAAAAAqAAAAAAAASQAAAAADACoAAAAAAAA0AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAADoAAAAAAgAsAAAAAAAALAAAAAAAACwAAAAAAQAsAAAAAAMALAAAAAADACoAAAAAAAAqAAAAAAAASQAAAAACACoAAAAAAAA0AAAAAAAAKgAAAAAAADQAAAAAAAAqAAAAAAAAOgAAAAADADoAAAAAAgAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAIAKgAAAAAAACwAAAAAAQAsAAAAAAIAKgAAAAAAAA==
           version: 7
         1,3:
           ind: 1,3
-          tiles: KgAAAAAAADsAAAAAAAA7AAAAAAAAOwAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAA7AAAAAAAAOwAAAAAAADsAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAACoAAAAAAAA4AAAAAAAAOAAAAAABAEMAAAAAAAAqAAAAAAAAOwAAAAAAADsAAAAAAAA7AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAABDAAAAAAAAKgAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAKgAAAAAAADgAAAAAAAA4AAAAAAAAQwAAAAAAAEEAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAABBAAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAKgAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAQQAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAACoAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAACoAAAAAAAAsAAAAAAIAKgAAAAAAACwAAAAAAwAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAAAqAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAAAKgAAAAAAACwAAAAAAwAsAAAAAAIALAAAAAAAACoAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAAVQAAAAAAAFUAAAAAAAAFAAAAAAAAKgAAAAAAACwAAAAAAAAsAAAAAAMALAAAAAADACwAAAAAAAAsAAAAAAMALAAAAAABACwAAAAAAwAqAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAFUAAAAAAABVAAAAAAAABQAAAAAAACoAAAAAAAAsAAAAAAIALAAAAAACACwAAAAAAwAsAAAAAAIALAAAAAADACwAAAAAAgAsAAAAAAIAKgAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAABVAAAAAAAAVQAAAAAAAAUAAAAAAAAqAAAAAAAALAAAAAABACwAAAAAAgAsAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAIALAAAAAAAACoAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAAVQAAAAAAAFUAAAAAAAAFAAAAAAAAKgAAAAAAACwAAAAAAAAsAAAAAAMALAAAAAACACoAAAAAAAAqAAAAAAAALAAAAAADACoAAAAAAAAqAAAAAAAANAAAAAAAAD4AAAAAAAA+AAAAAAAAPgAAAAAAACoAAAAAAAA+AAAAAAAAPgAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAACACwAAAAAAQAsAAAAAAEAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAADQAAAAAAAA0AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAABACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAADACwAAAAAAwAsAAAAAAIALAAAAAADACwAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAA0AAAAAAAANAAAAAAAAC8AAAAAAAAqAAAAAAAANAAAAAAAAA==
+          tiles: KgAAAAAAADsAAAAAAAA7AAAAAAAAOwAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAABDAAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAA7AAAAAAAAOwAAAAAAADsAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAQwAAAAAAAEMAAAAAAABDAAAAAAAAQwAAAAAAACoAAAAAAAA4AAAAAAAAOAAAAAABAEMAAAAAAAAqAAAAAAAAOwAAAAAAADsAAAAAAAA7AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAABDAAAAAAAAKgAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAKgAAAAAAADgAAAAAAAA4AAAAAAAAQwAAAAAAAEEAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAABBAAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAKgAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAQQAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAACoAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAACoAAAAAAAAsAAAAAAIAKgAAAAAAACwAAAAAAwAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAAEQAAAAAAABEAAAAAAAARAAAAAAAAFUAAAAAAABVAAAAAAAAVQAAAAAAAFUAAAAAAAAqAAAAAAAALAAAAAAAACwAAAAAAgAsAAAAAAAAKgAAAAAAACwAAAAAAwAsAAAAAAIALAAAAAAAACoAAAAAAABEAAAAAAAARAAAAAAAAEQAAAAAAABVAAAAAAAAVQAAAAAAAEQAAAAAAABEAAAAAAAAKgAAAAAAACwAAAAAAAAsAAAAAAMALAAAAAADACwAAAAAAAAsAAAAAAMALAAAAAABACwAAAAAAwAqAAAAAAAARAAAAAAAAEQAAAAAAABEAAAAAAAAVQAAAAAAAFUAAAAAAABEAAAAAAAARAAAAAAAACoAAAAAAAAsAAAAAAIALAAAAAACACwAAAAAAwAsAAAAAAIALAAAAAADACwAAAAAAgAsAAAAAAIAKgAAAAAAAEQAAAAAAABEAAAAAAAARAAAAAAAAFUAAAAAAABVAAAAAAAARAAAAAAAAEQAAAAAAAAqAAAAAAAALAAAAAABACwAAAAAAgAsAAAAAAAAKgAAAAAAACwAAAAAAgAsAAAAAAIALAAAAAAAACoAAAAAAABEAAAAAAAARAAAAAAAAEQAAAAAAABVAAAAAAAAVQAAAAAAAEQAAAAAAABEAAAAAAAAKgAAAAAAACwAAAAAAAAsAAAAAAMALAAAAAACACoAAAAAAAAqAAAAAAAALAAAAAADACoAAAAAAAAqAAAAAAAANAAAAAAAAD4AAAAAAAA+AAAAAAAAPgAAAAAAACoAAAAAAAA+AAAAAAAAPgAAAAAAACwAAAAAAAAsAAAAAAAALAAAAAACACwAAAAAAQAsAAAAAAEAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAADQAAAAAAAA0AAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAsAAAAAAEALAAAAAAAACwAAAAAAgAsAAAAAAEALAAAAAABACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAALAAAAAADACwAAAAAAwAsAAAAAAIALAAAAAADACwAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAAqAAAAAAAAKgAAAAAAACoAAAAAAAA0AAAAAAAANAAAAAAAAC8AAAAAAAAqAAAAAAAANAAAAAAAAA==
           version: 7
         0,3:
           ind: 0,3
@@ -505,14 +507,14 @@ entities:
     - type: Fixtures
       fixtures: {}
     - type: AreaGrid
-      lastMapping: 104
+      lastMapping: 105
       chunks:
         0,2:
           data: AgICAgoKAwMDAwMKAAAAAAICAgICAgMDAwMDCgAAAAACAgICAgICAgICBAQEBAQEAgICAgICAgICAgQEBAQEBAICAgICAgICAgIEBAQEBAQCAgICAgICAgICBAQEBAQEAgICAgICAgICAgQEBAQEBAICAgICAgICAgIEBAQEBAQCAgICAgICAgICAgUFBQUFAgICAgICAgICAgIFBQUFBQICAgICAgICAgICBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUkJCQkJCQkAQEBAQEBAQEBJCQkJCQkJAEBAQEBAQEBAQ==
         0,3:
           data: JCQkJCQkJAEBAQEBAQEBASQkJCQkJCQBAQEBAQEBAQEkJCQkJCQkAQEBAQEBAQEBJCQkJCQkBwcHBwcHBwcHByQkJCQkJAcHBwcHBwcHBwckJCQkJCQHBwcHBwcHBwcHCgoICAgIBwcHBwcHBwcHBwoKCAgICAcHBwcHBwcHBwcKCggICAgHBwcHBgYGBgYGCggICAgIBwcHBwYGBgYGBgoICAgICAcHBwcGBgYGBgYKCAgICAgHBwcHBgYGBgYGCggICAgIBwcHBwYGBgYGBgobGxsbGxsbGxsbGxsbGxsKGxsbGxsbGxsbGxsbGxsbCgkJCQkJCQkJCQkJCQkbGw==
         1,3:
-          data: AQEBAQEBAQwMDAwMCwsLCwEBAQEBAQEMDAwMDAsLCwsBAQEBAQEBDAwMDAwLCwsLBwEBAQEBAQwMDAwMCwsLCwcBAQEBAQEMDAwMDAsLCwsHAQEBAQEBCQkJCQkJCQkJBwEBAQEBAQkJCQkJCQkJCQcBAQEODg4ODgkJCQkJCQkGGxsbDg4ODg4JCQkJCQkJBhsbGw4ODg4OCQkJCQkJCQYbGxsODg4ODgkJCQkJCQkGGxsbDg4ODg4JCQkJCQkJBhsbGw4ODg4OCQkJCQkJCRsbGxsbCgoKCgoKCgoKCgobGxsbGwoKCgoKCgoKCgoKGxsbGxsbGwoKCgoKCgoKCg==
+          data: AQEBAQEBAQwMDAwMCwsLCwEBAQEBAQEMDAwMDAsLCwsBAQEBAQEBDAwMDAwLCwsLBwEBAQEBAQwMDAwMCwsLCwcBAQEBAQEMDAwMDAsLCwsHAQEBAQEBaWlpaWlpaWlpBwEBAQEBAWlpaWlpaWlpaQcBAQEODg4ODmlpaWlpaWkGGxsbDg4ODg5paWlpaWlpBhsbGw4ODg4OaWlpaWlpaQYbGxsODg4ODmlpaWlpaWkGGxsbDg4ODg5paWlpaWlpBhsbGw4ODg4OaWlpaWlpaRsbGxsbCgoKCgoKCgoKCgobGxsbGwoKCgoKCgoKCgoKGxsbGxsbGwoKCgoKCgoKCg==
         1,2:
           data: AAAICAgICAgIAAAPDw8PDwAAAAAbGxsAAAAADw8PDw8EBAQAGxsbAAAQEA8PDw8PBAQEABsbGwAAEBAQEBAQEAQEBAAbGxsAABAQEBAQEBAEBAQAGxsbAAAQEBAQEBAQBAQEAQEBAQEBEBAQEBAQEAQBAQEBAQEBAQEBEBAQEBABAQEBAQEBAQEBARAQEBAQAQEBAQEBAQEBAQEBGxsbGwEBAQEBAQEBAQEBARsbGxsBAQEBAQEBAQEBAQEbGxsbAQEBAQEBAQwMDAwMEREREQEBAQEBAQEMDAwMDBEREREBAQEBAQEBDAwMDAwRERERAQEBAQEBAQwMDAwMEREREQ==
         2,-1:
@@ -538,7 +540,7 @@ entities:
         3,2:
           data: GRkZGRkZGRkZGQAAAAAAABkZGRkZGRkZGRkAAAAAAAAZGRkZGRkZGRkZGRkAAAAAGRkZGRkZGRkZGRkZAAAAABkZGRkZGRkZGRkZGQAAAAAZGRkZGRkZGRkZGRkAAAAAGRkZGRkZGRkZGRkZAAAAABkZGRkZGRkZGRkZGQAAAAAZGRkZGRkZGRkZGRkAAAAAGRkZGRkZGRkZGRkZCgoKChkZGRkZGRkZGRkZCgoKCgobGRkZGRkZGRkZGQoKCgoKGxsbGxsbGxsbGwoKCgoKChsbGxsbGxsbGxsKCgoKCgoRERsbFhYWFgoKCgoKCgoKEREbGxYWFhYKCgoKCgoKCg==
         2,3:
-          data: CwsREQoKCgoKChEREREREQsLCgoKCgoKCgoRERERERELCwoKCgoKCgoKERERERERCwsKCgoKCgoKCgoREREREQsLCgoKCgoKCgoKEREREREJCQoKCgoKCgoKChERERERCQkKCgoKCgoKCgoREREREQkJCgoKCgoKCgobGxsbGxsJCQoKCgoKCgoKGxsbGxsbCQkKCgoKCgoKCgoKCgpVVQkJCgoKCgoKCgoKCgoKVVUJCQoKCgoKCgoKCgoKClVVCQkKCgoKCgoKCgoKCgpVVQoKCgoAOzs7Ozs7Ozs7VVUKCgoKADs7Ozs7Ozs7Ozs7CgoKCgA7Ozs7Ozs7Ozs7Ow==
+          data: CwsREQoKCgoKChEREREREQsLCgoKCgoKCgoRERERERELCwoKCgoKCgoKERERERERCwsKCgoKCgoKCgoREREREQsLCgoKCgoKCgoKERERERFpaQoKCgoKCgoKChERERERaWkKCgoKCgoKCgoREREREWlpCgoKCgoKCgobGxsbGxtpaQoKCgoKCgoKGxsbGxsbaWkKCgoKCgoKCgoKCgpVVWlpCgoKCgoKCgoKCgoKVVVpaQoKCgoKCgoKCgoKClVVaWkKCgoKCgoKCgoKCgpVVQoKCgoAOzs7Ozs7Ozs7VVUKCgoKADs7Ozs7Ozs7Ozs7CgoKCgA7Ozs7Ozs7Ozs7Ow==
         3,3:
           data: EREbGxYWFhYKCgoKCgoKChERGxsWFhYWCgoKCgoKCgoRERsbFhYWFgoKCgoKCgoKEREbGxsKCgoKCgoKZwoKChERGxsbCgoKCgoKCgoKCgoRERsbGwoKCgoKCgoKCgoKEREbGxsKCgoKCgoKCgoKChsbGxsbCgoKCgoKCgoKCgobGxsbGwoKCgoKCgoKCgoKVVUbGxsKCgoKCgoKCgoKClVVGxsbCgoKCgoKCgoKCgpVVRsbGyQkJCQkJCQKCgoKVVUbGxskJCQkJCQkAAAAAFVVGxsbJCQkJCQkJAAAAAAbGxsbGyQkJCQkJCQAAAAAGxsbGxskJCQkJCQkAAAAAA==
         1,4:
@@ -788,6 +790,7 @@ entities:
         102: AreaGenetics
         103: AreaLootRoom
         104: AreaExecution
+        105: AreaRanch
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
@@ -894,11 +897,11 @@ entities:
           - -52,24
           - -49,-23
           - -49,-27
+          - -46,62
           - -46,61
-          - -46,63
           - -46,28
           - -46,29
-          - -46,62
+          - -46,63
           - -45,38
           - -45,42
           - -44,42
@@ -923,9 +926,9 @@ entities:
           - -37,44
           - -35,68
           - -35,-38
-          - -34,-11
           - -34,-22
           - -34,-19
+          - -34,-11
           - -34,44
           - -33,64
           - -33,65
@@ -1009,9 +1012,9 @@ entities:
           - 13,-13
           - 14,-13
           - 14,40
-          - 15,45
           - 15,44
           - 15,40
+          - 15,45
           - 16,-17
           - 20,-19
           - 20,-15
@@ -1050,10 +1053,10 @@ entities:
           - 42,44
           - 42,56
           - 42,-2
-          - 45,8
           - 45,7
-          - 45,43
           - 45,2
+          - 45,43
+          - 45,8
           - 46,-33
           - 46,-32
           - 46,47
@@ -1087,9 +1090,9 @@ entities:
           - 60,-21
           - 61,11
           - 61,12
-          - 61,-22
           - 61,-19
           - 61,-21
+          - 61,-22
           - 62,11
           - 62,9
           - 62,-19
@@ -1201,10 +1204,10 @@ entities:
           - -20,21
           - -20,22
           - -20,23
-          - -19,-15
-          - -19,-13
-          - -19,-12
           - -19,-14
+          - -19,-13
+          - -19,-15
+          - -19,-12
           - -13,-12
           - -12,-14
           - -10,20
@@ -1426,9 +1429,9 @@ entities:
           - -35,-60
           - -33,-58
           - -32,-60
-          - -32,75
           - -32,77
           - -32,72
+          - -32,75
           - -30,-60
           - -30,-57
           - -30,73
@@ -1486,46 +1489,46 @@ entities:
           - 10,-50
           - 10,-52
           - 28,21
-          - 28,14
-          - 28,25
-          - 28,24
           - 28,22
           - 28,21
           - 28,22
+          - 28,23
+          - 28,14
+          - 28,25
           - 28,25
           - 28,24
-          - 28,23
-          - 29,24
-          - 29,25
-          - 29,21
-          - 29,22
-          - 29,19
-          - 29,24
-          - 29,22
-          - 29,23
-          - 29,25
+          - 28,24
           - 29,6
           - 29,23
           - 29,21
-          - 30,23
-          - 30,24
-          - 30,24
+          - 29,22
+          - 29,24
+          - 29,24
+          - 29,22
+          - 29,21
+          - 29,25
+          - 29,19
+          - 29,25
+          - 29,23
           - 30,16
-          - 30,25
-          - 30,22
-          - 30,25
           - 30,10
+          - 30,24
+          - 30,23
+          - 30,24
+          - 30,23
+          - 30,25
           - 30,21
+          - 30,25
+          - 30,22
           - 30,22
           - 30,21
-          - 30,23
-          - 31,12
           - 31,22
-          - 31,22
-          - 31,23
-          - 31,23
-          - 31,24
           - 31,0
+          - 31,22
+          - 31,24
+          - 31,23
+          - 31,23
+          - 31,12
           - 32,17
           - 32,21
           - 32,10
@@ -1620,19 +1623,19 @@ entities:
           - -65,-29
           - -64,-30
           - -64,-20
-          - -63,-23
-          - -63,-29
-          - -63,-21
-          - -63,-30
           - -63,-27
+          - -63,-29
+          - -63,-23
+          - -63,-30
+          - -63,-21
           - -62,-30
           - -62,-28
           - -62,-20
           - -62,-29
           - -62,-30
-          - -62,-25
           - -62,-27
           - -62,-24
+          - -62,-25
           - -61,-16
           - -61,-31
           - -61,-16
@@ -1644,27 +1647,27 @@ entities:
           - -61,-20
           - -61,-19
           - -61,-16
+          - -60,-14
           - -60,-27
-          - -60,-31
-          - -60,-14
-          - -60,-14
-          - -60,-14
           - -60,-22
-          - -60,-24
-          - -60,-27
           - -60,-27
           - -60,-14
+          - -60,-24
           - -60,-28
+          - -60,-14
+          - -60,-27
+          - -60,-14
+          - -60,-31
           - -59,-20
           - -59,-26
-          - -59,-32
-          - -59,-28
-          - -59,-31
           - -59,-20
           - -59,-21
-          - -59,-34
-          - -59,-22
           - -59,-23
+          - -59,-22
+          - -59,-32
+          - -59,-34
+          - -59,-31
+          - -59,-28
           - -59,-29
           - -59,-25
           - -58,-16
@@ -1682,55 +1685,55 @@ entities:
           - -57,-15
           - -56,-16
           - -56,-20
-          - -56,-16
           - -56,-20
-          - -55,-15
+          - -56,-16
+          - -55,-16
           - -55,-15
           - -55,-15
           - -55,-16
           - -55,-16
           - -55,-17
           - -55,-15
-          - -55,-16
+          - -55,-15
           - -55,-13
-          - -54,-16
-          - -54,-16
-          - -54,-16
-          - -54,-16
           - -54,-17
           - -54,-13
+          - -54,-13
+          - -54,-16
+          - -54,-16
+          - -54,-16
+          - -54,-43
+          - -54,-37
+          - -54,-16
           - -54,-41
           - -54,-39
-          - -54,-13
-          - -54,-45
-          - -54,-36
           - -54,61
-          - -54,-37
-          - -54,-43
           - -54,-48
           - -54,-51
           - -54,-44
+          - -54,-36
+          - -54,-45
           - -53,-20
           - -53,-17
           - -53,-16
-          - -53,-43
+          - -53,-49
           - -53,-51
           - -53,-45
           - -53,-44
-          - -53,-48
+          - -53,-43
           - -53,61
-          - -53,-49
+          - -53,-48
           - -53,-20
           - -52,-20
           - -52,-20
           - -52,-43
           - -52,-20
           - -52,-19
+          - -51,51
+          - -51,49
           - -51,59
-          - -51,56
-          - -51,54
           - -51,-13
-          - -51,50
+          - -51,56
           - -51,61
           - -51,-14
           - -51,-20
@@ -1738,9 +1741,9 @@ entities:
           - -51,-15
           - -51,62
           - -51,-20
-          - -51,49
+          - -51,50
           - -51,65
-          - -51,51
+          - -51,54
           - -51,-46
           - -51,65
           - -51,-44
@@ -1750,13 +1753,13 @@ entities:
           - -51,-43
           - -51,-47
           - -51,64
+          - -50,-46
+          - -50,-15
+          - -50,-47
+          - -50,-47
+          - -50,-46
+          - -50,-15
           - -50,-48
-          - -50,-15
-          - -50,-47
-          - -50,-47
-          - -50,-46
-          - -50,-15
-          - -50,-46
           - -50,-48
           - -50,65
           - -50,49
@@ -1799,20 +1802,20 @@ entities:
           - -44,-13
           - -44,-20
           - -44,69
+          - -43,67
           - -43,68
-          - -43,65
           - -43,-54
           - -43,44
           - -43,48
-          - -43,68
-          - -43,69
-          - -43,67
-          - -43,67
           - -43,72
-          - -42,69
-          - -42,65
+          - -43,67
+          - -43,65
+          - -43,69
+          - -43,68
           - -42,68
+          - -42,65
           - -42,66
+          - -42,69
           - -42,-54
           - -41,-54
           - -41,44
@@ -1828,20 +1831,20 @@ entities:
           - -40,45
           - -39,-58
           - -39,-57
-          - -39,77
-          - -39,79
-          - -39,78
-          - -39,73
-          - -39,77
           - -39,74
+          - -39,77
+          - -39,77
+          - -39,73
+          - -39,78
+          - -39,79
           - -39,-23
           - -39,-24
           - -39,-25
           - -39,27
           - -38,74
-          - -38,-31
           - -38,-13
           - -38,-21
+          - -38,-31
           - -38,77
           - -38,78
           - -38,79
@@ -1854,19 +1857,19 @@ entities:
           - -38,-35
           - -38,-59
           - -38,-58
-          - -37,78
-          - -37,77
+          - -37,74
+          - -37,76
           - -37,77
           - -37,-33
           - -37,-59
           - -37,-39
           - -37,-57
-          - -37,77
-          - -37,-40
           - -37,79
-          - -37,76
+          - -37,-40
           - -37,72
-          - -37,74
+          - -37,78
+          - -37,77
+          - -37,77
           - -37,-28
           - -37,-22
           - -37,-29
@@ -1889,13 +1892,13 @@ entities:
           - -35,74
           - -35,-16
           - -35,-15
-          - -35,-40
-          - -35,-58
-          - -35,-60
           - -35,-59
           - -35,-39
           - -35,-38
           - -35,-39
+          - -35,-40
+          - -35,-58
+          - -35,-60
           - -34,72
           - -34,73
           - -34,-57
@@ -1918,12 +1921,12 @@ entities:
           - -33,-29
           - -33,-14
           - -32,-57
-          - -32,78
+          - -32,74
           - -32,77
           - -32,72
-          - -32,77
+          - -32,78
           - -32,-13
-          - -32,74
+          - -32,77
           - -32,-14
           - -31,-59
           - -31,-39
@@ -1935,54 +1938,54 @@ entities:
           - -31,72
           - -30,-13
           - -30,46
-          - -30,75
+          - -30,74
           - -30,-26
-          - -30,78
-          - -30,73
-          - -30,10
-          - -30,74
-          - -30,74
-          - -30,74
-          - -30,77
-          - -30,73
           - -30,75
+          - -30,77
+          - -30,10
+          - -30,73
+          - -30,74
+          - -30,73
+          - -30,74
+          - -30,75
+          - -30,78
           - -30,-57
           - -30,50
           - -30,-60
           - -30,7
-          - -29,77
+          - -29,79
           - -29,75
           - -29,79
           - -29,75
           - -29,68
           - -29,74
           - -29,72
-          - -29,73
+          - -29,77
           - -29,27
-          - -29,79
+          - -29,73
           - -29,63
           - -29,-16
           - -29,-60
           - -29,-17
           - -28,47
-          - -28,75
-          - -28,74
-          - -28,78
           - -28,79
+          - -28,77
           - -28,76
-          - -28,76
-          - -28,67
+          - -28,79
           - -28,77
           - -28,78
-          - -28,79
+          - -28,78
           - -28,75
+          - -28,74
+          - -28,67
           - -28,73
+          - -28,76
           - -28,-17
           - -28,-17
           - -28,44
           - -28,-49
           - -28,75
-          - -28,77
+          - -28,75
           - -27,-48
           - -27,-13
           - -27,-17
@@ -1998,48 +2001,48 @@ entities:
           - -27,51
           - -26,53
           - -26,-49
-          - -26,54
+          - -26,59
           - -26,-30
           - -26,53
           - -26,-15
-          - -26,59
           - -26,55
-          - -25,-17
-          - -25,9
+          - -26,54
           - -25,-16
-          - -25,-15
+          - -25,9
           - -25,-29
-          - -25,-10
+          - -25,-31
+          - -25,-17
+          - -25,-15
           - -25,54
           - -25,55
           - -25,53
           - -25,54
           - -25,55
-          - -25,-31
+          - -25,-10
           - -25,54
           - -24,-17
           - -24,-13
           - -24,-16
-          - -24,53
+          - -24,57
           - -24,65
           - -24,14
           - -24,7
           - -24,11
           - -24,9
           - -24,4
-          - -24,54
           - -24,55
-          - -24,57
-          - -24,55
-          - -24,52
           - -24,62
-          - -23,53
+          - -24,52
+          - -24,53
+          - -24,55
+          - -24,54
+          - -23,52
           - -23,57
-          - -23,61
           - -23,44
           - -23,55
+          - -23,53
           - -23,-47
-          - -23,52
+          - -23,61
           - -23,64
           - -23,64
           - -23,-15
@@ -2080,19 +2083,19 @@ entities:
           - -20,13
           - -20,9
           - -19,-68
-          - -19,39
           - -19,49
+          - -19,55
           - -19,66
           - -19,-67
           - -19,-67
           - -19,-69
-          - -19,55
-          - -18,-59
+          - -19,39
+          - -18,-43
           - -18,-31
           - -18,70
           - -18,67
+          - -18,-59
           - -18,-56
-          - -18,-43
           - -18,-65
           - -18,-66
           - -18,-68
@@ -2111,15 +2114,15 @@ entities:
           - -17,56
           - -17,-71
           - -17,-66
-          - -17,-70
-          - -17,-69
           - -17,-68
+          - -17,-69
+          - -17,-70
           - -17,-21
-          - -16,-66
-          - -16,-72
-          - -16,-72
-          - -16,-68
           - -16,-70
+          - -16,-72
+          - -16,-72
+          - -16,-66
+          - -16,-68
           - -16,-69
           - -16,-29
           - -16,0
@@ -2131,8 +2134,8 @@ entities:
           - -16,-14
           - -16,68
           - -15,-72
-          - -15,-70
           - -15,-72
+          - -15,-70
           - -15,55
           - -15,39
           - -15,33
@@ -2173,24 +2176,24 @@ entities:
           - -12,-5
           - -12,-4
           - -12,-4
-          - -12,-71
-          - -12,-72
-          - -12,-69
-          - -12,-66
           - -12,-67
-          - -12,65
           - -12,-70
+          - -12,-72
+          - -12,-71
+          - -12,-66
+          - -12,65
+          - -12,-69
           - -12,-9
           - -12,-9
-          - -11,-69
-          - -11,-67
           - -11,-70
+          - -11,-69
+          - -11,-69
           - -11,-55
           - -11,-40
-          - -11,-70
-          - -11,-70
           - -11,-71
+          - -11,-67
           - -11,-72
+          - -11,-70
           - -11,-57
           - -11,59
           - -11,54
@@ -2205,22 +2208,22 @@ entities:
           - -11,-10
           - -11,-10
           - -11,-4
-          - -11,-69
+          - -11,-70
           - -10,-69
-          - -10,-13
-          - -10,-2
+          - -10,-28
+          - -10,-7
           - -10,52
           - -10,43
           - -10,55
           - -10,-52
-          - -10,-28
+          - -10,-18
           - -10,-39
-          - -10,-7
+          - -10,-13
           - -10,-69
           - -10,-23
           - -10,-24
           - -10,-12
-          - -10,-18
+          - -10,-2
           - -9,-35
           - -9,0
           - -9,0
@@ -2235,13 +2238,13 @@ entities:
           - -9,-2
           - -9,-7
           - -9,-11
+          - -9,-19
           - -9,-15
           - -9,-4
           - -9,-23
-          - -9,-13
           - -9,45
           - -9,61
-          - -9,-19
+          - -9,-13
           - -8,-34
           - -8,-37
           - -8,-50
@@ -2263,27 +2266,27 @@ entities:
           - -8,-40
           - -7,-65
           - -7,-69
-          - -7,2
-          - -7,-16
-          - -7,3
-          - -7,55
+          - -7,7
           - -7,-15
+          - -7,5
+          - -7,55
           - -7,-31
+          - -7,-24
           - -7,-18
           - -7,-15
           - -7,-23
-          - -7,-23
-          - -7,7
-          - -7,5
+          - -7,-16
           - -7,4
+          - -7,4
+          - -7,2
           - -7,-63
           - -7,-64
           - -7,-52
           - -7,-51
           - -7,-48
+          - -7,3
           - -7,6
-          - -7,4
-          - -7,-24
+          - -7,-23
           - -6,54
           - -6,7
           - -6,-21
@@ -2325,8 +2328,8 @@ entities:
           - -3,-24
           - -3,-63
           - -3,44
-          - -3,-63
           - -3,-47
+          - -3,-63
           - -2,-68
           - -2,7
           - -2,7
@@ -2364,9 +2367,9 @@ entities:
           - 2,44
           - 2,-24
           - 2,-20
-          - 3,-60
           - 3,-45
           - 3,-40
+          - 3,-60
           - 3,-21
           - 4,-31
           - 4,-30
@@ -2374,12 +2377,12 @@ entities:
           - 4,-16
           - 4,-16
           - 4,-17
-          - 4,-54
-          - 4,-46
-          - 4,-41
-          - 4,-24
-          - 4,-56
           - 4,-37
+          - 4,-56
+          - 4,-54
+          - 4,-24
+          - 4,-41
+          - 4,-46
           - 4,-57
           - 4,-15
           - 4,44
@@ -2390,15 +2393,15 @@ entities:
           - 5,-24
           - 5,-30
           - 5,-57
-          - 6,-40
+          - 6,-55
           - 6,-21
-          - 6,-58
+          - 6,-40
           - 6,-28
           - 6,-23
           - 6,11
           - 6,14
           - 6,11
-          - 6,-55
+          - 6,-58
           - 7,-36
           - 8,-57
           - 8,-46
@@ -2420,24 +2423,24 @@ entities:
           - 9,38
           - 9,5
           - 9,13
-          - 10,1
+          - 10,16
           - 10,-24
-          - 10,-27
-          - 10,16
-          - 10,16
-          - 10,-22
           - 10,-7
+          - 10,1
+          - 10,16
+          - 10,-27
+          - 10,-22
           - 10,-52
           - 10,-55
           - 10,-54
           - 11,17
+          - 11,16
           - 11,14
-          - 11,15
           - 11,6
           - 11,-21
           - 11,-10
           - 11,4
-          - 11,16
+          - 11,15
           - 12,-23
           - 12,-7
           - 12,-57
@@ -2506,25 +2509,25 @@ entities:
           - 29,25
           - 30,9
           - 30,12
-          - 30,21
           - 30,13
-          - 30,12
           - 30,21
+          - 30,21
+          - 30,12
           - 30,-22
           - 30,-14
           - 30,-11
           - 30,-5
           - 30,8
-          - 31,23
-          - 31,7
-          - 31,5
-          - 31,10
-          - 31,22
-          - 31,14
-          - 31,22
-          - 31,6
           - 31,8
+          - 31,6
+          - 31,22
+          - 31,23
           - 31,24
+          - 31,22
+          - 31,10
+          - 31,14
+          - 31,5
+          - 31,7
           - 32,-38
           - 32,10
           - 32,12
@@ -2536,16 +2539,16 @@ entities:
           - 33,11
           - 33,12
           - 33,10
-          - 33,-43
-          - 33,12
-          - 33,-51
           - 33,-55
-          - 33,-56
+          - 33,12
           - 33,-53
-          - 33,-50
-          - 33,-36
-          - 33,-44
           - 33,-52
+          - 33,-43
+          - 33,-36
+          - 33,-50
+          - 33,-56
+          - 33,-44
+          - 33,-51
           - 34,-43
           - 34,-43
           - 34,8
@@ -2553,11 +2556,11 @@ entities:
           - 34,-53
           - 34,12
           - 34,7
+          - 34,11
+          - 34,10
+          - 34,10
           - 34,12
           - 34,7
-          - 34,10
-          - 34,10
-          - 34,11
           - 34,-6
           - 34,-8
           - 34,-20
@@ -2565,25 +2568,25 @@ entities:
           - 34,-2
           - 34,40
           - 34,11
-          - 35,7
+          - 35,15
           - 35,-16
           - 35,-12
-          - 35,-44
           - 35,-48
-          - 35,15
           - 35,-42
+          - 35,8
+          - 35,-51
           - 35,-42
           - 35,-43
-          - 35,-51
+          - 35,-49
           - 35,18
-          - 35,17
-          - 35,8
-          - 35,10
-          - 35,17
-          - 35,15
+          - 35,7
           - 35,14
           - 35,26
-          - 35,-49
+          - 35,17
+          - 35,10
+          - 35,15
+          - 35,17
+          - 35,-44
           - 35,10
           - 36,10
           - 36,-7
@@ -2591,21 +2594,21 @@ entities:
           - 36,-49
           - 36,11
           - 36,10
-          - 36,-39
+          - 36,-43
           - 36,-51
           - 36,-47
-          - 36,-53
+          - 36,-39
           - 36,-43
           - 36,-13
-          - 36,-43
+          - 36,-53
           - 37,-15
           - 37,-43
           - 37,-42
-          - 37,10
           - 37,18
           - 37,17
           - 37,6
           - 37,14
+          - 37,10
           - 37,10
           - 38,63
           - 38,-39
@@ -2613,28 +2616,28 @@ entities:
           - 38,-16
           - 38,62
           - 38,-13
-          - 38,10
-          - 38,8
           - 38,12
+          - 38,8
+          - 38,7
           - 38,-6
+          - 38,10
           - 38,16
           - 38,11
-          - 38,7
           - 38,-2
-          - 39,7
-          - 39,18
+          - 39,19
+          - 39,12
           - 39,62
-          - 39,43
+          - 39,62
           - 39,-7
           - 39,-19
-          - 39,62
+          - 39,43
           - 39,8
           - 39,12
-          - 39,12
-          - 39,19
+          - 39,4
+          - 39,18
           - 39,-36
           - 39,-38
-          - 39,4
+          - 39,7
           - 40,-36
           - 40,-38
           - 40,27
@@ -2650,33 +2653,33 @@ entities:
           - 40,-24
           - 41,1
           - 41,-36
-          - 41,-13
-          - 41,8
-          - 41,-16
-          - 41,0
-          - 41,-12
           - 41,-14
-          - 41,7
-          - 41,-1
+          - 41,8
           - 41,-13
+          - 41,0
+          - 41,-1
+          - 41,-15
+          - 41,7
+          - 41,-13
+          - 41,-12
           - 41,8
           - 41,-12
           - 41,-11
-          - 41,-15
+          - 41,-16
           - 42,-35
-          - 42,-11
-          - 42,-42
-          - 42,-16
-          - 42,8
           - 42,-24
-          - 42,-7
-          - 42,-4
-          - 42,7
+          - 42,-42
+          - 42,-11
+          - 42,8
           - 42,-16
+          - 42,-7
+          - 42,-16
+          - 42,7
+          - 42,-14
           - 42,64
           - 42,63
           - 42,2
-          - 42,-14
+          - 42,-4
           - 42,-15
           - 43,64
           - 43,7
@@ -2687,15 +2690,15 @@ entities:
           - 43,3
           - 43,4
           - 43,63
-          - 43,-20
-          - 43,-4
-          - 43,-6
-          - 43,-13
-          - 43,-36
-          - 43,-43
           - 43,-2
           - 43,-13
           - 43,-8
+          - 43,-20
+          - 43,-36
+          - 43,-43
+          - 43,-4
+          - 43,-6
+          - 43,-13
           - 43,-14
           - 43,-11
           - 43,-17
@@ -2727,14 +2730,14 @@ entities:
           - 45,-6
           - 45,-3
           - 45,-5
+          - 45,11
+          - 45,14
+          - 45,11
           - 45,8
           - 45,31
           - 45,2
-          - 45,4
-          - 45,11
-          - 45,14
           - 45,-40
-          - 45,11
+          - 45,4
           - 45,-40
           - 45,63
           - 45,63
@@ -2763,10 +2766,6 @@ entities:
           - 47,11
           - 47,-2
           - 47,-40
-          - 48,8
-          - 48,8
-          - 48,10
-          - 48,19
           - 48,20
           - 48,14
           - 48,14
@@ -2775,8 +2774,12 @@ entities:
           - 48,1
           - 48,8
           - 48,11
-          - 48,-6
           - 48,11
+          - 48,8
+          - 48,8
+          - 48,10
+          - 48,-6
+          - 48,19
           - 48,-15
           - 48,-19
           - 49,12
@@ -2788,29 +2791,29 @@ entities:
           - 49,20
           - 49,21
           - 49,-4
-          - 50,8
-          - 50,1
-          - 50,12
           - 50,20
-          - 50,12
           - 50,1
-          - 50,-4
           - 50,19
           - 50,14
+          - 50,12
+          - 50,12
+          - 50,-4
+          - 50,1
+          - 50,8
           - 51,15
+          - 51,16
+          - 51,16
+          - 51,24
           - 51,20
+          - 51,14
           - 51,12
           - 51,27
           - 51,8
           - 51,14
+          - 51,-37
           - 51,19
           - 51,20
-          - 51,16
           - 51,19
-          - 51,-37
-          - 51,16
-          - 51,24
-          - 51,14
           - 51,-26
           - 51,-8
           - 51,-5
@@ -2819,51 +2822,51 @@ entities:
           - 52,17
           - 52,16
           - 52,25
-          - 52,12
-          - 52,23
-          - 52,19
+          - 52,20
+          - 52,22
           - 52,12
           - 52,10
-          - 52,13
-          - 52,13
-          - 52,20
+          - 52,19
+          - 52,23
+          - 52,10
+          - 52,12
           - 52,61
-          - 52,20
+          - 52,13
           - 52,-21
           - 52,-9
           - 52,-15
           - 52,-29
-          - 52,22
-          - 52,10
+          - 52,13
+          - 52,20
+          - 53,1
           - 53,24
           - 53,17
           - 53,17
-          - 53,24
           - 53,-45
           - 53,-44
-          - 53,1
+          - 53,24
+          - 53,-1
           - 53,-8
           - 53,-2
-          - 53,-1
           - 54,11
           - 54,17
           - 54,17
-          - 54,8
+          - 54,10
           - 54,-5
           - 54,62
           - 54,60
           - 54,-9
+          - 54,8
           - 54,4
-          - 54,10
           - 55,9
           - 55,8
           - 55,12
           - 55,6
           - 55,10
-          - 55,-8
-          - 55,-42
           - 55,-6
+          - 55,-42
           - 55,-9
+          - 55,-8
           - 56,-40
           - 56,-8
           - 56,-6
@@ -2886,14 +2889,14 @@ entities:
           - 59,6
           - 59,-50
           - 60,2
-          - 61,9
           - 61,2
+          - 61,6
           - 61,-2
           - 61,-3
-          - 61,6
-          - 62,-2
-          - 62,7
+          - 61,9
           - 62,-3
+          - 62,7
+          - 62,-2
           - 62,-3
           - 62,4
           - 64,4
@@ -2923,8 +2926,8 @@ entities:
           - -54,-40
           - -54,-37
           - -53,-32
-          - -53,-31
           - -53,-32
+          - -53,-31
           - -53,-17
           - -53,-36
           - -53,-35
@@ -2951,23 +2954,23 @@ entities:
           - -49,41
           - -49,-35
           - -49,-23
-          - -49,41
+          - -49,32
           - -49,-17
           - -49,45
           - -49,43
           - -49,45
           - -49,27
-          - -49,32
-          - -49,-36
           - -49,43
+          - -49,-36
+          - -49,41
           - -48,25
+          - -48,-25
           - -48,-17
-          - -48,-16
           - -48,42
           - -48,42
           - -48,41
           - -48,-39
-          - -48,-25
+          - -48,-16
           - -47,30
           - -47,-28
           - -47,41
@@ -2978,9 +2981,9 @@ entities:
           - -46,-23
           - -46,-27
           - -45,46
+          - -45,-27
           - -45,-30
           - -45,-25
-          - -45,-27
           - -45,-36
           - -45,-54
           - -45,1
@@ -3010,17 +3013,17 @@ entities:
           - -39,29
           - -39,17
           - -39,2
-          - -38,-13
+          - -38,-31
           - -38,29
           - -38,27
           - -38,1
+          - -38,-13
           - -38,-30
-          - -38,-31
           - -38,-34
           - -37,-58
-          - -37,-21
-          - -37,-21
           - -37,-24
+          - -37,-21
+          - -37,-21
           - -36,-11
           - -35,-13
           - -35,-11
@@ -3034,9 +3037,9 @@ entities:
           - -33,-36
           - -33,-60
           - -33,26
-          - -33,-11
           - -33,-10
           - -33,-28
+          - -33,-11
           - -33,17
           - -32,-10
           - -32,-10
@@ -3067,11 +3070,11 @@ entities:
           - -29,52
           - -29,-57
           - -29,-59
-          - -28,-13
           - -28,-15
+          - -28,-16
           - -28,23
           - -28,22
-          - -28,-16
+          - -28,-13
           - -28,46
           - -28,39
           - -28,-60
@@ -3079,12 +3082,12 @@ entities:
           - -27,22
           - -27,36
           - -27,50
-          - -27,-25
-          - -27,-21
-          - -27,-11
-          - -27,-6
           - -27,-9
           - -27,-4
+          - -27,-25
+          - -27,-6
+          - -27,-21
+          - -27,-11
           - -27,-8
           - -26,10
           - -26,-21
@@ -3131,27 +3134,27 @@ entities:
           - -20,62
           - -20,61
           - -20,16
+          - -19,8
           - -19,11
-          - -19,28
           - -19,70
           - -19,72
           - -19,71
           - -19,72
-          - -19,8
+          - -19,28
           - -18,-62
           - -18,9
           - -18,28
           - -18,-5
           - -18,71
           - -18,25
-          - -17,-38
+          - -17,-50
           - -17,-49
           - -17,-45
-          - -17,-61
+          - -17,-38
           - -17,-3
           - -17,-52
           - -17,-56
-          - -17,-50
+          - -17,-61
           - -17,13
           - -17,1
           - -17,7
@@ -3181,9 +3184,9 @@ entities:
           - -15,-35
           - -15,-4
           - -15,22
-          - -14,-36
           - -14,-43
           - -14,-56
+          - -14,-36
           - -12,-60
           - -12,-52
           - -12,-35
@@ -3195,14 +3198,14 @@ entities:
           - -11,6
           - -11,23
           - -10,64
-          - -10,27
+          - -10,17
           - -10,-44
           - -10,-49
           - -10,-51
           - -10,-50
-          - -10,17
-          - -10,-48
           - -10,24
+          - -10,-48
+          - -10,27
           - -9,17
           - -9,68
           - -9,8
@@ -3224,15 +3227,15 @@ entities:
           - -8,30
           - -7,-7
           - -7,13
-          - -7,20
+          - -7,14
           - -7,24
           - -7,20
           - -7,19
           - -7,24
-          - -7,14
+          - -7,31
           - -7,-53
           - -7,36
-          - -7,31
+          - -7,20
           - -7,-50
           - -6,35
           - -6,35
@@ -3259,23 +3262,23 @@ entities:
           - -3,35
           - -3,59
           - -3,69
+          - -3,36
+          - -3,49
+          - -3,48
           - -3,38
           - -3,39
           - -3,35
           - -3,34
-          - -3,36
-          - -3,49
-          - -3,48
           - -2,-46
           - -2,-36
           - -2,-8
-          - -2,37
-          - -2,38
           - -2,56
-          - -2,50
-          - -2,53
           - -2,56
           - -2,47
+          - -2,38
+          - -2,37
+          - -2,53
+          - -2,50
           - -2,16
           - -2,16
           - -1,55
@@ -3321,10 +3324,10 @@ entities:
           - 5,61
           - 5,-36
           - 6,62
-          - 6,-46
+          - 6,-36
           - 6,-36
           - 6,62
-          - 6,-36
+          - 6,-46
           - 6,61
           - 7,61
           - 7,-37
@@ -3339,9 +3342,9 @@ entities:
           - 8,-36
           - 8,-42
           - 8,-44
-          - 8,-48
-          - 8,65
           - 8,-40
+          - 8,65
+          - 8,-48
           - 8,40
           - 8,61
           - 8,-40
@@ -3394,19 +3397,19 @@ entities:
           - 21,33
           - 21,-22
           - 21,67
-          - 22,-29
-          - 22,-28
-          - 22,-32
           - 22,-23
           - 22,-32
+          - 22,-32
+          - 22,-28
+          - 22,-29
           - 23,-27
           - 23,29
           - 23,-37
           - 24,26
           - 24,65
-          - 24,42
           - 24,63
           - 24,62
+          - 24,42
           - 24,69
           - 25,-38
           - 25,83
@@ -3468,16 +3471,16 @@ entities:
           - 31,62
           - 32,22
           - 32,24
-          - 32,-36
+          - 32,-35
           - 32,62
           - 32,24
           - 32,46
-          - 32,-34
+          - 32,-36
           - 32,-22
           - 32,-28
           - 32,-32
           - 32,-23
-          - 32,-35
+          - 32,-34
           - 33,24
           - 33,19
           - 33,62
@@ -3491,23 +3494,23 @@ entities:
           - 34,-19
           - 34,67
           - 34,66
-          - 34,61
           - 34,33
           - 34,60
+          - 34,61
+          - 34,40
           - 34,59
-          - 34,62
           - 34,65
           - 34,22
-          - 34,40
+          - 34,62
           - 35,60
+          - 35,35
+          - 35,53
           - 35,61
-          - 35,36
-          - 35,60
           - 35,23
           - 35,29
-          - 35,53
-          - 35,35
           - 35,50
+          - 35,60
+          - 35,36
           - 35,61
           - 35,66
           - 36,51
@@ -3536,9 +3539,9 @@ entities:
           - 38,17
           - 38,30
           - 38,-23
-          - 38,-22
-          - 38,-36
           - 38,-23
+          - 38,-36
+          - 38,-20
           - 38,63
           - 38,63
           - 38,62
@@ -3546,16 +3549,16 @@ entities:
           - 38,56
           - 38,63
           - 38,-39
-          - 38,-20
+          - 38,-22
           - 39,-39
           - 39,-39
-          - 39,46
+          - 39,62
           - 39,25
           - 39,62
           - 39,47
           - 39,62
           - 39,17
-          - 39,62
+          - 39,46
           - 39,-22
           - 39,-23
           - 39,62
@@ -3569,16 +3572,16 @@ entities:
           - 39,28
           - 39,30
           - 39,47
-          - 40,24
+          - 40,18
           - 40,-39
           - 40,-36
           - 40,-40
           - 40,-35
-          - 40,17
           - 40,16
           - 40,18
+          - 40,17
           - 40,19
-          - 40,18
+          - 40,24
           - 40,41
           - 40,46
           - 40,47
@@ -3610,15 +3613,15 @@ entities:
           - 42,63
           - 42,29
           - 42,-40
-          - 42,-21
+          - 42,-20
           - 42,-23
+          - 42,-20
+          - 42,-19
+          - 42,-22
           - 42,-22
           - 42,-19
           - 42,-22
-          - 42,-20
-          - 42,-19
-          - 42,-20
-          - 42,-22
+          - 42,-21
           - 42,-39
           - 43,55
           - 43,62
@@ -3652,23 +3655,23 @@ entities:
           - 45,64
           - 45,60
           - 45,64
-          - 45,63
-          - 45,62
           - 45,50
           - 45,63
           - 45,63
+          - 45,63
+          - 45,62
           - 45,58
-          - 46,-43
+          - 46,-35
           - 46,62
           - 46,49
           - 46,17
-          - 46,-44
+          - 46,-43
           - 46,64
           - 46,47
           - 46,-37
           - 46,-39
           - 46,52
-          - 46,-35
+          - 46,-44
           - 46,63
           - 47,-14
           - 47,10
@@ -3700,9 +3703,9 @@ entities:
           - 50,-17
           - 50,-43
           - 50,-43
-          - 50,-41
-          - 50,18
           - 50,-44
+          - 50,18
+          - 50,-41
           - 50,48
           - 50,29
           - 51,55
@@ -3820,9 +3823,9 @@ entities:
           - -17,-21
           - -14,-42
           - -14,-29
-          - -9,-25
           - -9,-24
           - -9,-23
+          - -9,-25
           - -8,-24
           - -8,-23
           - -7,-24
@@ -3866,9 +3869,9 @@ entities:
           - 11,-6
           - 13,-13
           - 14,-9
-          - 15,-1
           - 15,-9
           - 15,-6
+          - 15,-1
           - 16,-11
           - 16,-1
           - 17,-28
@@ -3906,19 +3909,19 @@ entities:
           - 32,16
           - 32,18
           - 32,-16
+          - 33,-48
           - 33,-56
           - 33,-47
-          - 33,-48
           - 33,-46
           - 33,-52
           - 33,-53
-          - 33,-43
           - 33,-44
-          - 33,21
+          - 33,-54
           - 33,23
           - 33,21
           - 33,21
-          - 33,-54
+          - 33,21
+          - 33,-43
           - 34,-43
           - 34,37
           - 34,-51
@@ -3938,14 +3941,14 @@ entities:
           - 38,-42
           - 38,23
           - 38,22
-          - 39,2
+          - 39,23
           - 39,-1
           - 39,-2
           - 39,-1
           - 39,-1
           - 39,1
-          - 39,23
           - 39,1
+          - 39,2
           - 40,23
           - 40,22
           - 40,24
@@ -3971,16 +3974,16 @@ entities:
           - 42,-9
           - 42,-8
           - 42,-6
-          - 43,-23
-          - 43,-32
           - 43,-19
-          - 43,-17
+          - 43,-32
+          - 43,-28
+          - 43,-5
           - 43,-9
           - 43,-43
-          - 43,-5
-          - 43,19
-          - 43,-28
           - 43,-21
+          - 43,19
+          - 43,-23
+          - 43,-17
           - 44,-5
           - 44,-23
           - 44,-17
@@ -4002,11 +4005,11 @@ entities:
           - 46,-2
           - 46,24
           - 46,-28
-          - 47,16
-          - 47,1
-          - 47,16
           - 47,1
           - 47,27
+          - 47,16
+          - 47,16
+          - 47,1
           - 48,26
           - 48,63
           - 48,26
@@ -4292,27 +4295,27 @@ entities:
             id: HalfTileOverlayGreyscale270
             color: '#D4D4D428'
           decals:
-          - -63,-23
+          - -63,-25
           - -63,-27
+          - -63,-30
           - -63,-20
           - -63,-28
-          - -63,-30
           - -63,-22
-          - -63,-25
           - -63,-26
+          - -63,-23
+          - -18,15
+          - -18,13
+          - -18,22
+          - -18,19
+          - -18,24
           - -18,25
+          - -18,18
+          - -18,21
           - -18,23
           - -18,12
-          - -18,13
-          - -18,18
-          - -18,15
-          - -18,24
-          - -18,20
-          - -18,19
-          - -18,22
           - -18,-3
           - -18,-4
-          - -18,21
+          - -18,20
           - -17,-12
           - -17,-13
           - -17,-14
@@ -4346,13 +4349,13 @@ entities:
           - -18,-5
           - -18,-6
           - 1,-20
-          - 1,12
+          - 1,15
+          - 1,13
           - 1,19
           - 1,14
-          - 1,17
-          - 1,13
-          - 1,15
+          - 1,12
           - 1,18
+          - 1,17
           - 8,-23
           - 8,-20
           - 8,-21
@@ -4374,23 +4377,23 @@ entities:
           - 29,0
           - 42,1
           - 42,0
+          - 42,-6
           - 42,-7
           - 42,-4
-          - 42,-6
           - 43,48
           - 44,52
           - 44,51
           - 44,50
           - 45,3
           - 45,4
-          - 50,47
-          - 50,46
-          - 50,52
-          - 50,50
-          - 50,54
-          - 50,49
-          - 50,53
           - 50,48
+          - 50,53
+          - 50,52
+          - 50,46
+          - 50,54
+          - 50,47
+          - 50,50
+          - 50,49
           - 52,1
           - 53,-5
           - 53,-4
@@ -4410,54 +4413,54 @@ entities:
             id: HalfTileOverlayGreyscale90
             color: '#D4D4D428'
           decals:
-          - -59,-29
           - -59,-25
+          - -59,-21
           - -59,-31
           - -59,-26
           - -59,-22
           - -59,-24
           - -59,-23
-          - -59,-21
+          - -59,-29
           - -26,12
           - -26,13
           - -26,14
           - -26,6
           - -26,5
           - -26,4
-          - -15,-1
-          - -15,19
+          - -15,-16
           - -15,16
+          - -15,19
           - -15,-12
-          - -15,39
+          - -15,38
           - -15,-8
           - -15,-9
-          - -15,23
+          - -15,0
           - -15,-13
-          - -15,38
           - -15,37
           - -15,36
           - -15,35
           - -15,34
           - -15,33
-          - -15,-16
+          - -15,32
+          - -15,-11
           - -15,-6
-          - -15,0
+          - -15,23
           - -15,20
           - -15,-2
-          - -15,-5
+          - -15,-14
           - -15,-4
           - -15,-7
-          - -15,-14
+          - -15,-1
           - -15,21
           - -15,-15
-          - -15,-11
-          - -15,32
-          - -15,17
-          - -15,18
-          - -15,22
-          - -15,15
-          - -15,-3
+          - -15,-5
           - -15,40
+          - -15,18
+          - -15,17
+          - -15,15
+          - -15,22
+          - -15,-3
+          - -15,39
           - -13,-1
           - 15,43
           - 24,26
@@ -4469,21 +4472,21 @@ entities:
           - 35,33
           - 35,34
           - 35,35
-          - 35,26
-          - 35,30
-          - 35,27
-          - 35,24
-          - 35,28
           - 35,29
+          - 35,28
+          - 35,27
+          - 35,30
+          - 35,26
+          - 35,24
           - 35,31
           - 39,-6
-          - 56,-47
           - 56,-44
+          - 56,-45
           - 56,-43
+          - 56,-48
           - 56,-46
           - 56,-42
-          - 56,-48
-          - 56,-45
+          - 56,-47
         - node:
             id: HalfTileOverlayGreyscale90
             color: '#EFB34196'
@@ -4496,9 +4499,9 @@ entities:
           - -27,-9
           - -27,-10
           - -27,-11
+          - -23,-10
           - -23,-11
           - -23,-12
-          - -23,-10
           - -20,-5
           - -20,-6
           - -20,-4
@@ -4534,9 +4537,9 @@ entities:
           - 48,50
           - 48,51
           - 54,-2
+          - 55,5
           - 55,4
           - 55,6
-          - 55,5
           - 55,1
         - node:
             id: QuarterTileOverlayGreyscale180
@@ -4786,15 +4789,15 @@ entities:
           - -54,72
           - -54,51
           - -53,54
-          - -52,51
-          - -52,59
-          - -52,55
-          - -52,55
-          - -52,49
+          - -52,60
           - -52,57
+          - -52,55
+          - -52,55
+          - -52,59
+          - -52,51
           - -52,64
           - -52,65
-          - -52,60
+          - -52,49
           - -51,59
           - -51,63
           - -51,61
@@ -4845,18 +4848,18 @@ entities:
           - -9,11
           - -8,9
           - -8,-69
-          - -5,-67
           - -5,-69
-          - -5,10
           - -5,-66
           - -5,11
+          - -5,-67
           - -5,22
+          - -5,10
+          - -4,10
+          - -4,11
           - -4,21
           - -4,17
-          - -4,17
           - -4,15
-          - -4,11
-          - -4,10
+          - -4,17
           - -3,-68
           - -3,11
           - -3,10
@@ -4963,32 +4966,32 @@ entities:
           - -15,-45
           - -6,61
           - -5,-45
-          - -5,63
           - -5,61
           - -5,62
+          - -5,63
           - -5,-46
+          - -5,58
           - -5,59
-          - -5,60
           - -5,65
           - -5,64
-          - -5,58
-          - -4,63
+          - -5,60
+          - -4,62
           - -4,59
           - -4,61
           - -4,-45
           - -4,64
           - -4,65
           - -4,60
-          - -4,62
           - -4,58
+          - -4,63
           - -3,62
-          - -3,61
+          - -3,59
           - -3,58
           - -3,64
-          - -3,60
+          - -3,61
           - -3,63
           - -3,-45
-          - -3,59
+          - -3,60
           - -3,65
           - -2,-45
           - -1,-45
@@ -5079,9 +5082,9 @@ entities:
           - -6,-42
           - -6,-33
           - -6,-38
+          - -5,-38
           - -5,-42
           - -5,-33
-          - -5,-38
           - -4,-38
           - -4,-33
           - -4,-42
@@ -5123,13 +5126,13 @@ entities:
           - -15,-44
           - -14,-44
           - -14,-57
-          - -13,-44
           - -13,-36
           - -13,-57
+          - -13,-44
           - -13,-29
-          - -12,-44
           - -12,-36
           - -12,-57
+          - -12,-44
           - -12,-29
           - -11,-57
           - -11,-29
@@ -5150,9 +5153,9 @@ entities:
           - -5,-36
           - -5,-40
           - -4,-29
+          - -4,-36
           - -4,-44
           - -4,-40
-          - -4,-36
           - -3,-44
           - -3,-48
           - -3,-40
@@ -5181,14 +5184,14 @@ entities:
             color: '#52B4E996'
           decals:
           - -47,55
-          - -24,-45
-          - -24,-46
           - -24,-47
           - -24,-51
           - -24,-43
           - -24,-44
-          - -18,-58
-          - -18,-49
+          - -24,-45
+          - -24,-46
+          - -18,-43
+          - -18,-56
           - -18,-45
           - -18,-46
           - -18,-47
@@ -5196,10 +5199,10 @@ entities:
           - -18,-50
           - -18,-57
           - -18,-55
-          - -18,-43
-          - -18,-44
+          - -18,-49
+          - -18,-58
           - -18,-30
-          - -18,-56
+          - -18,-44
           - -18,-51
           - -6,51
           - -6,50
@@ -5219,27 +5222,27 @@ entities:
           decals:
           - -58,30
           - -44,55
-          - -20,-31
+          - -20,-30
           - -20,-51
           - -20,-52
           - -20,-47
           - -20,-44
-          - -20,-30
-          - -20,-45
           - -20,-29
+          - -20,-45
+          - -20,-31
           - -20,-43
           - -20,-46
-          - -16,-46
-          - -16,-56
-          - -16,-55
-          - -16,-51
           - -16,-50
           - -16,-45
           - -16,-58
-          - -16,-57
+          - -16,-47
           - -16,-49
           - -16,-48
-          - -16,-47
+          - -16,-57
+          - -16,-51
+          - -16,-56
+          - -16,-55
+          - -16,-46
           - -14,-30
           - -10,51
           - -10,50
@@ -5399,9 +5402,9 @@ entities:
             id: QuarterTileOverlayGreyscale270
             color: '#D4D4D496'
           decals:
+          - -28,-22
           - -28,-20
           - -28,-21
-          - -28,-22
           - -28,-19
           - -19,7
           - -9,50
@@ -5859,12 +5862,12 @@ entities:
             id: FullTileOverlayGreyscale
             color: '#9FED5896'
           decals:
-          - -17,59
           - -17,58
+          - -17,60
           - -17,63
           - -17,62
           - -17,61
-          - -17,60
+          - -17,59
           - -17,65
           - -17,64
           - -16,60
@@ -5877,12 +5880,12 @@ entities:
           - -16,62
           - -15,64
           - -15,65
-          - -15,61
-          - -15,59
           - -15,58
           - -15,60
           - -15,63
           - -15,62
+          - -15,61
+          - -15,59
           - -14,63
           - -5,-13
           - -5,-12
@@ -5908,20 +5911,20 @@ entities:
           - 31,-19
           - 32,-16
           - 33,-21
-          - 33,-20
           - 33,-18
-          - 33,-19
           - 33,-16
+          - 33,-19
+          - 33,-20
           - 34,-22
           - 34,-19
           - 34,-20
           - 34,-21
           - 34,-18
-          - 35,-20
-          - 35,-18
-          - 35,-21
           - 35,-8
+          - 35,-21
           - 35,-19
+          - 35,-18
+          - 35,-20
           - 45,46
           - 48,46
           - 49,46
@@ -6016,15 +6019,15 @@ entities:
             id: QuarterTileOverlayGreyscale
             color: '#EFB34196'
           decals:
+          - -28,-4
+          - -28,-5
           - -28,-6
           - -28,-11
-          - -28,-10
-          - -28,-9
           - -28,-7
           - -28,-8
-          - -28,-5
-          - -28,-4
           - -28,-3
+          - -28,-9
+          - -28,-10
           - 30,-21
           - 33,-2
           - 34,-2
@@ -6072,24 +6075,24 @@ entities:
           - -10,14
           - -10,4
           - -10,5
-          - -9,12
-          - -9,13
           - -9,7
           - -9,6
-          - -9,5
-          - -9,9
+          - -9,8
           - -9,10
           - -9,11
-          - -9,8
+          - -9,5
+          - -9,12
+          - -9,13
+          - -9,9
           - -8,9
           - -8,10
           - -8,11
-          - 17,57
           - 17,59
+          - 17,58
           - 17,56
           - 17,60
           - 17,64
-          - 17,58
+          - 17,57
           - 17,61
           - 18,64
           - 19,64
@@ -6111,32 +6114,32 @@ entities:
             id: QuarterTileOverlayGreyscale90
             color: '#EFB34196'
           decals:
+          - -12,4
           - -12,14
           - -12,13
-          - -12,4
           - -11,4
           - -11,13
           - -11,14
           - -10,10
-          - -10,4
-          - -10,7
-          - -10,9
-          - -10,12
           - -10,13
-          - -10,14
-          - -10,6
-          - -10,8
+          - -10,7
+          - -10,4
+          - -10,12
           - -10,11
+          - -10,8
+          - -10,9
           - -10,5
+          - -10,6
+          - -10,14
           - -9,5
           - -9,6
           - -9,8
+          - -9,10
           - -9,12
+          - -9,13
           - -9,9
           - -9,7
-          - -9,10
           - -9,11
-          - -9,13
           - -8,9
           - -8,11
           - -8,10
@@ -6149,10 +6152,10 @@ entities:
           - 14,69
           - 14,68
           - 15,68
-          - 16,66
           - 16,68
-          - 16,62
           - 16,67
+          - 16,62
+          - 16,66
           - 17,66
           - 17,62
           - 18,66
@@ -6261,33 +6264,33 @@ entities:
           - -46,-35
           - -46,-37
           - -46,-36
+          - -43,62
           - -43,63
           - -43,61
-          - -43,62
           - -34,66
           - -34,65
           - -16,-47
           - -16,-48
+          - -15,11
+          - -15,12
+          - -15,13
+          - -15,6
+          - -15,5
+          - -15,7
           - -15,9
           - -15,8
           - -15,10
-          - -15,12
-          - -15,11
-          - -15,13
-          - -15,5
-          - -15,6
-          - -15,7
-          - 12,83
           - 12,78
           - 12,82
           - 12,81
           - 12,76
+          - 12,74
           - 12,79
           - 12,80
           - 12,75
-          - 12,74
-          - 12,77
           - 12,73
+          - 12,77
+          - 12,83
           - 13,-20
           - 13,-21
           - 23,-24
@@ -6347,40 +6350,40 @@ entities:
           - -37,-11
           - -37,66
           - -37,65
-          - -13,7
+          - -13,8
           - -13,9
           - -13,5
           - -13,6
           - -13,11
           - -13,13
           - -13,12
+          - -13,7
           - -13,10
-          - -13,8
           - 10,78
           - 10,79
           - 10,80
           - 10,81
           - 11,73
-          - 11,75
-          - 11,74
-          - 11,83
           - 11,76
+          - 11,75
+          - 11,83
+          - 11,74
           - 18,-21
           - 20,-24
           - 20,-21
           - 20,-22
           - 20,-23
           - 24,83
-          - 24,73
+          - 24,82
           - 24,76
           - 24,77
           - 24,78
           - 24,79
           - 24,80
           - 24,81
-          - 24,82
-          - 24,74
           - 24,75
+          - 24,74
+          - 24,73
           - 36,17
           - 37,0
           - 37,2
@@ -6829,9 +6832,9 @@ entities:
           - 54,-29
           - 54,-27
           - 57,-35
+          - 58,-24
           - 58,-23
           - 58,-15
-          - 58,-24
           - 60,-32
           - 63,-14
           - 63,-15
@@ -7279,11 +7282,11 @@ entities:
             color: '#D381C996'
           decals:
           - -46,-43
-          - -43,-47
-          - -43,-49
-          - -43,-45
-          - -43,-48
           - -43,-46
+          - -43,-48
+          - -43,-47
+          - -43,-45
+          - -43,-49
           - -39,-35
           - -39,-34
           - -38,-29
@@ -7362,10 +7365,10 @@ entities:
             color: '#D381C996'
           decals:
           - -58,27
-          - -49,-41
           - -49,-39
-          - -49,-40
           - -49,-38
+          - -49,-40
+          - -49,-41
           - -43,-28
           - -43,-25
           - -43,-26
@@ -7662,9 +7665,9 @@ entities:
           - -61,-30
           - -60,-22
           - -25,11
+          - -24,5
           - -24,29
           - -24,11
-          - -24,5
           - -23,11
           - -23,5
           - -23,29
@@ -7782,19 +7785,19 @@ entities:
           - -42,52
           - -42,55
           - -42,51
-          - -37,49
-          - -37,53
           - -37,57
+          - -37,53
+          - -37,50
           - -37,56
           - -37,51
           - -37,55
-          - -37,50
+          - -37,49
           - -37,54
-          - -34,39
-          - -34,40
           - -34,38
           - -34,37
+          - -34,40
           - -34,36
+          - -34,39
           - -32,30
           - -32,44
           - -32,43
@@ -7803,13 +7806,13 @@ entities:
           - -24,45
           - -24,44
           - -19,39
-          - -18,35
-          - -18,36
-          - -18,43
-          - -18,37
-          - -18,42
           - -18,34
+          - -18,36
           - -18,44
+          - -18,43
+          - -18,42
+          - -18,37
+          - -18,35
           - -14,-52
           - -14,-51
           - -13,-47
@@ -7850,12 +7853,12 @@ entities:
           - 15,68
           - 16,68
           - 17,66
-          - 17,58
           - 17,57
           - 17,59
+          - 17,58
+          - 17,62
           - 17,60
           - 17,56
-          - 17,62
           - 18,62
           - 18,66
           - 19,62
@@ -7888,26 +7891,26 @@ entities:
           - -11,5
           - -11,4
           - -11,14
+          - -10,11
+          - -10,9
           - -10,4
           - -10,5
           - -10,6
-          - -10,7
-          - -10,8
-          - -10,9
-          - -10,11
           - -10,10
           - -10,12
           - -10,14
           - -10,13
-          - -9,6
+          - -10,8
+          - -10,7
           - -9,5
           - -9,10
+          - -9,6
           - -9,9
           - -9,12
           - -9,11
+          - -9,8
           - -9,13
           - -9,7
-          - -9,8
           - -8,9
           - -8,10
           - -8,11
@@ -7919,11 +7922,11 @@ entities:
           - 16,67
           - 17,64
           - 18,64
-          - 19,56
-          - 19,60
-          - 19,58
-          - 19,61
           - 19,57
+          - 19,61
+          - 19,56
+          - 19,58
+          - 19,60
           - 19,59
           - 19,64
         - node:
@@ -8110,16 +8113,16 @@ entities:
           - -42,41
           - -42,39
           - -42,40
-          - -39,52
           - -39,55
+          - -39,51
           - -39,36
           - -39,38
-          - -39,51
+          - -39,52
           - -39,37
           - -39,40
+          - -39,53
           - -39,39
           - -39,54
-          - -39,53
           - -36,30
           - -34,56
           - -34,55
@@ -8651,15 +8654,15 @@ entities:
           - -13,-40
           - -13,-38
           - -13,-39
+          - -12,-39
           - -12,-40
           - -12,-38
-          - -12,-39
           - -11,-38
           - -11,-39
           - -11,-40
-          - -10,-39
           - -10,-40
           - -10,-38
+          - -10,-39
           - -8,66
           - -7,62
           - 0,33
@@ -9013,9 +9016,9 @@ entities:
           - 6,39
           - 6,36
           - 6,38
+          - 7,37
           - 7,38
           - 7,36
-          - 7,37
           - 7,39
         - node:
             id: Newton
@@ -11976,6 +11979,8 @@ entities:
     - type: ExplosionAirtightGrid
     - type: TileHistory
       chunkHistory: {}
+    - type: ChunkContainer
+      chunkEntities: []
 - proto: AccordionInstrument
   entities:
   - uid: 3
@@ -45350,6 +45355,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 28.5,77.5
+  - uid: 19292
+    components:
+    - type: Transform
+      parent: 2
+      pos: 29.5,59.5
   - uid: 20067
     components:
     - type: Transform
@@ -45424,27 +45434,42 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 30.5,58.5
-  - uid: 29195
-    components:
-    - type: Transform
-      parent: 2
-      pos: 30.5,57.5
+      pos: 29.5,57.5
   - uid: 29196
     components:
     - type: Transform
       parent: 2
-      pos: 30.5,55.5
+      pos: 29.5,56.5
   - uid: 29197
     components:
     - type: Transform
       parent: 2
-      pos: 30.5,56.5
+      pos: 34.5,53.5
   - uid: 29198
     components:
     - type: Transform
       parent: 2
       pos: 32.5,54.5
+  - uid: 31313
+    components:
+    - type: Transform
+      parent: 2
+      pos: 29.5,60.5
+  - uid: 31630
+    components:
+    - type: Transform
+      parent: 2
+      pos: 29.5,58.5
+  - uid: 31814
+    components:
+    - type: Transform
+      parent: 2
+      pos: 34.5,52.5
+  - uid: 31837
+    components:
+    - type: Transform
+      parent: 2
+      pos: 34.5,51.5
   - uid: 32359
     components:
     - type: Transform
@@ -45455,11 +45480,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -10.5,-57.5
-  - uid: 32380
+  - uid: 32378
     components:
     - type: Transform
       parent: 2
-      pos: 30.5,59.5
+      pos: 29.5,55.5
 - proto: CableApcStack
   entities:
   - uid: 6101
@@ -80357,6 +80382,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -10.393614,78.45385
+- proto: ChemiCompiler
+  entities:
+  - uid: 32383
+    components:
+    - type: Transform
+      parent: 2
+      pos: -33.5,-44.5
 - proto: ChemistryBottleEpinephrine
   entities:
   - uid: 12846
@@ -96166,7 +96198,7 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: -33.5,-44.5
+      pos: -33.5,-41.5
   - uid: 15519
     components:
     - type: Transform
@@ -102867,38 +102899,6 @@ entities:
       parent: 2
       rot: -18.84955592153876 rad
       pos: 39.129684,63.4756
-- proto: FoodEggChickenFertilized
-  entities:
-  - uid: 32378
-    components:
-    - type: Transform
-      parent: 2
-      pos: 28.162128,58.235394
-  - uid: 32379
-    components:
-    - type: Transform
-      parent: 2
-      pos: 27.489407,58.305416
-  - uid: 32381
-    components:
-    - type: Transform
-      parent: 2
-      pos: 26.564413,58.249397
-  - uid: 32382
-    components:
-    - type: Transform
-      parent: 2
-      pos: 25.569344,58.2634
-  - uid: 32383
-    components:
-    - type: Transform
-      parent: 2
-      pos: 31.679909,57.367107
-  - uid: 32384
-    components:
-    - type: Transform
-      parent: 2
-      pos: 31.525742,59.383774
 - proto: FoodFrozenSnowcone
   entities:
   - uid: 16404
@@ -106418,6 +106418,29 @@ entities:
       pos: 54.5,62.5
     - type: AtmosPipeColor
       color: '#990000FF'
+  - uid: 30170
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 34.5,56.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 32379
+    components:
+    - type: Transform
+      parent: 2
+      pos: 40.5,56.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 32380
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 40.5,55.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
 - proto: GasPipeFourway
   entities:
   - uid: 15869
@@ -124943,20 +124966,6 @@ entities:
       pos: 34.5,58.5
     - type: AtmosPipeColor
       color: '#0055CCFF'
-  - uid: 19292
-    components:
-    - type: Transform
-      parent: 2
-      pos: 34.5,56.5
-    - type: AtmosPipeColor
-      color: '#0055CCFF'
-  - uid: 19293
-    components:
-    - type: Transform
-      parent: 2
-      pos: 34.5,55.5
-    - type: AtmosPipeColor
-      color: '#0055CCFF'
   - uid: 19294
     components:
     - type: Transform
@@ -128610,6 +128619,46 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.5,54.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 29816
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 35.5,56.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 31813
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 39.5,56.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 31916
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 36.5,56.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 32315
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 37.5,56.5
+    - type: AtmosPipeColor
+      color: '#0055CCFF'
+  - uid: 32375
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 38.5,56.5
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 32399
@@ -155692,6 +155741,12 @@ entities:
       pos: 13.6402,-34.18158
 - proto: Railing
   entities:
+  - uid: 19293
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 30.5,57.5
   - uid: 21835
     components:
     - type: Transform
@@ -156031,6 +156086,12 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 29.5,82.5
+  - uid: 29195
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 30.5,58.5
   - uid: 29273
     components:
     - type: Transform
@@ -156041,35 +156102,12 @@ entities:
     - type: Transform
       parent: 2
       pos: 26.5,55.5
-  - uid: 29763
-    components:
-    - type: Transform
-      parent: 2
-      pos: 27.5,55.5
-  - uid: 29769
+  - uid: 30758
     components:
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
-      pos: 28.5,56.5
-  - uid: 29816
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 28.5,57.5
-  - uid: 30170
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 28.5,58.5
-  - uid: 30736
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 28.5,59.5
+      pos: 27.5,59.5
   - uid: 30759
     components:
     - type: Transform
@@ -156079,20 +156117,31 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 31.5,57.5
+      rot: 1.5707963267948966 rad
+      pos: 27.5,58.5
   - uid: 30979
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 31.5,58.5
+      rot: 1.5707963267948966 rad
+      pos: 27.5,57.5
   - uid: 31296
     components:
     - type: Transform
       parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 27.5,56.5
+  - uid: 31314
+    components:
+    - type: Transform
+      parent: 2
+      pos: 31.5,56.5
+  - uid: 31629
+    components:
+    - type: Transform
+      parent: 2
       rot: -1.5707963267948966 rad
-      pos: 31.5,59.5
+      pos: 30.5,59.5
 - proto: RailingCorner
   entities:
   - uid: 24156
@@ -156123,17 +156172,17 @@ entities:
     - type: Transform
       parent: 2
       pos: 2.5,71.5
-  - uid: 29764
+  - uid: 30736
     components:
     - type: Transform
       parent: 2
-      pos: 28.5,55.5
-  - uid: 30758
+      pos: 27.5,55.5
+  - uid: 31426
     components:
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
-      pos: 31.5,56.5
+      pos: 30.5,56.5
 - proto: RailingCornerSmall
   entities:
   - uid: 24161
@@ -156191,81 +156240,38 @@ entities:
       pos: -20.5,24.5
 - proto: RanchBox
   entities:
-  - uid: 31629
+  - uid: 29764
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 25.5,57.5
-  - uid: 31630
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
       pos: 26.5,57.5
-  - uid: 31813
+  - uid: 29769
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 27.5,57.5
-  - uid: 31814
+      pos: 31.5,57.5
+  - uid: 32382
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 27.5,56.5
-  - uid: 31837
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 26.5,56.5
-  - uid: 31916
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 25.5,56.5
+      pos: 31.5,59.5
+- proto: RanchIncubator
+  entities:
   - uid: 32376
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 32.5,57.5
+      pos: 26.5,56.5
   - uid: 32377
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 32.5,58.5
-- proto: RanchIncubator
-  entities:
-  - uid: 31313
+      pos: 26.5,58.5
+  - uid: 32381
     components:
     - type: Transform
       parent: 2
-      pos: 32.5,59.5
-  - uid: 31314
-    components:
-    - type: Transform
-      parent: 2
-      pos: 25.5,59.5
-  - uid: 31426
-    components:
-    - type: Transform
-      parent: 2
-      pos: 26.5,59.5
-  - uid: 32315
-    components:
-    - type: Transform
-      parent: 2
-      pos: 27.5,59.5
-  - uid: 32375
-    components:
-    - type: Transform
-      parent: 2
-      pos: 28.5,59.5
+      pos: 31.5,58.5
 - proto: RandomArcade
   entities:
   - uid: 24170
@@ -164168,6 +164174,13 @@ entities:
       pos: 7.5,63.5
     - type: RotaryPhoneHolder
       name: Service - Botany
+  - uid: 29763
+    components:
+    - type: Transform
+      parent: 2
+      pos: 30.5,54.5
+    - type: RotaryPhoneHolder
+      name: Ranching
 - proto: RotaryPhoneStandWallCargo
   entities:
   - uid: 25596
@@ -164731,6 +164744,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 8.26248,-71.05977
+  - uid: 32385
+    components:
+    - type: Transform
+      parent: 2
+      pos: 29.364035,53.502754
 - proto: SecurityTechFab
   entities:
   - uid: 25689
@@ -169625,7 +169643,7 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: -33.5,-44.5
+      pos: -33.5,-41.5
 - proto: SpawnPointAtmos
   entities:
   - uid: 26432

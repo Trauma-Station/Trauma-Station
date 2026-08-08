@@ -317,7 +317,7 @@ public abstract partial class SharedSurgerySystem
         if (!TryComp(args.Surgery, out SurgeryOrganConditionComponent? organComp))
             return;
 
-        if (!HasComp<InternalOrganComponent>(args.Tool) ||
+        if (!HasComp<InternalChildOrganComponent>(args.Tool) ||
             _body.GetCategory(args.Tool) is not {} category ||
             category != organComp.Organ ||
             !_part.InsertOrgan(args.Part, args.Tool))
@@ -420,13 +420,7 @@ public abstract partial class SharedSurgerySystem
                 break;
 
             case TraumaType.Dismemberment:
-                if (_trauma.TryGetWoundableTrauma(args.Part, out var traumas, TraumaType.Dismemberment))
-                {
-                    foreach (var trauma in traumas)
-                    {
-                        _trauma.RemoveTrauma(trauma);
-                    }
-                }
+                _trauma.RemoveTraumas(args.Part, TraumaType.Dismemberment);
 
                 break;
         }

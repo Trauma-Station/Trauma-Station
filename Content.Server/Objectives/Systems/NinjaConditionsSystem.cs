@@ -76,7 +76,7 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
         }
         else
         {
-            title = Loc.GetString("objective-condition-spider-charge-title", ("location", Loc.GetString(warp.Location)));
+            title = Loc.GetString("objective-condition-spider-charge-title", ("location", Loc.TryGetString(warp.Location, out var location) ? location : warp.Location)); // Trauma - use TryGetString
         }
         _metaData.SetEntityName(uid, title, args.Meta);
     }

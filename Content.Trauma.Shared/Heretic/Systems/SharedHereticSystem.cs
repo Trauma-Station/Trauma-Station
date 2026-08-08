@@ -5,6 +5,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -38,6 +39,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
     [Dependency] protected SharedContainerSystem Container = default!;
 
     [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
@@ -243,6 +245,11 @@ public abstract partial class SharedHereticSystem : EntitySystem
             var ev = _serialization.CreateCopy(data.Event, notNullableOverride: true);
             RaiseKnowledgeEvent(body.Value, ev, false);
             ent.Comp2.KnowledgeEvents.Add(ev);
+        }
+
+        if (data.Effects is { } effects && body != null)
+        {
+            _effects.ApplyEffects(body.Value, effects);
         }
 
         if (data.ActionPrototypes is { Count: > 0 })

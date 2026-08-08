@@ -23,12 +23,15 @@ public sealed partial class ThermalVisionOverlay : Overlay
     private readonly ContainerSystem _container;
     private readonly SharedPointLightSystem _light;
 
-    public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
+
+    private static readonly ProtoId<ShaderPrototype> ThermalShader = "ThermalVision";
 
     private readonly List<ThermalVisionRenderEntry> _entries = [];
 
     private EntityUid? _lightEntity;
+
+    private readonly ShaderInstance _thermalShader;
 
     public float LightRadius;
 
@@ -44,11 +47,13 @@ public sealed partial class ThermalVisionOverlay : Overlay
         _light = _entity.System<SharedPointLightSystem>();
 
         ZIndex = -1;
+
+        _thermalShader = _proto.Index(ThermalShader).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (ScreenTexture is null || Comp is null)
+        if (Comp is null)
             return;
 
         var worldHandle = args.WorldHandle;
@@ -110,7 +115,7 @@ public sealed partial class ThermalVisionOverlay : Overlay
 
         foreach (var entry in _entries)
         {
-            Render(entry.Ent, entry.Map, worldHandle, entry.EyeRot, Comp.Color, Comp.ThermalShader, alpha);
+            Render(entry.Ent, entry.Map, worldHandle, entry.EyeRot, Comp.Color, Comp.UseShader, alpha);
         }
 
         worldHandle.SetTransform(Matrix3x2.Identity);
@@ -121,7 +126,7 @@ public sealed partial class ThermalVisionOverlay : Overlay
         DrawingHandleWorld handle,
         Angle eyeRot,
         Color color,
-        string? shader,
+        bool useShader,
         float alpha)
     {
         var (uid, sprite, xform) = ent;
@@ -131,40 +136,14 @@ public sealed partial class ThermalVisionOverlay : Overlay
         var position = _transform.GetWorldPosition(xform);
         var rotation = _transform.GetWorldRotation(xform);
 
-        var originalColor = sprite.Color;
-        Dictionary<int, (ShaderInstance? shader, Color color)> layerData = new();
-        if (shader != null)
+        List<SpriteComponent.PostShaderEntry>? entries = null;
+        if (useShader)
         {
-            // Layer shaders break handle shader so we have to do this. It has a side effect of clothing not rendering
-            // on some species or on female characters but its fine cause shader itself makes things hard to see
-            var allLayers = sprite.AllLayers.ToList();
-            for (var i = 0; i < allLayers.Count; i++)
-            {
-                if (allLayers[i] is not SpriteComponent.Layer { Visible: true } layer)
-                    continue;
-
-                if (layer.ShaderPrototype?.Id is "DisplacedDraw" or "DisplacedStencilDraw")
-                    _sprite.LayerSetVisible((uid, sprite), i, false);
-
-                layerData[i] = (layer.Shader, layer.Color);
-                layer.Shader = null;
-                _sprite.LayerSetColor(layer, Color.White.WithAlpha(layer.Color.A));
-            }
-
-            _sprite.SetColor((uid, sprite), Color.White.WithAlpha(alpha));
-            handle.UseShader(_proto.Index<ShaderPrototype>(shader).Instance());
+            _thermalShader.SetParameter("color", color.WithAlpha(alpha));
+            entries = new() { new SpriteComponent.PostShaderEntry(ThermalShader, _thermalShader) };
         }
-        else
-            _sprite.SetColor((uid, sprite), color.WithAlpha(alpha));
-        _sprite.RenderSprite((uid, sprite), handle, eyeRot, rotation, position);
-        _sprite.SetColor((uid, sprite), originalColor);
-        handle.UseShader(null);
-        foreach (var (key, value) in layerData)
-        {
-            ((SpriteComponent.Layer) sprite[key]).Shader = value.shader;
-            _sprite.LayerSetColor((uid, sprite), key, value.color);
-            _sprite.LayerSetVisible((uid, sprite), key, true);
-        }
+
+        _sprite.RenderSprite((uid, sprite), handle, eyeRot, rotation, position, entries);
     }
 
     private bool CanSee(EntityUid uid, SpriteComponent sprite)

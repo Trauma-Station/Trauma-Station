@@ -661,6 +661,10 @@
   name: stick of butter
   description: A stick of delicious, golden, fatty goodness.
   components:
+  # <Trauma>
+  - type: Temperature
+    heatCapacity: 7200.0005 # 2.4kg
+  # </Trauma>
   - type: Item
     shape:
     - 0,0,1,0
@@ -681,6 +685,7 @@
           bounds: "-0.3,-0.2,0.3,0.2"
         layer:
         - SlipLayer
+        density: 0 # Trauma
         hard: false
       fix1:
         shape:

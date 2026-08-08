@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -130,19 +128,8 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         var uid = args.FiredProjectile;
 
-        if (!_lionhunterProjectileQuery.TryComp(uid, out var comp) ||
-            !_projectileQuery.TryComp(uid, out var projectile))
+        if (!_lionhunterProjectileQuery.TryComp(uid, out var comp))
             return;
-
-        projectile.Damage = new DamageSpecifier
-        {
-            DamageDict =
-                projectile.Damage.DamageDict.ToDictionary(x => x.Key, x => x.Value * comp.EmpowerDamageMultiplier),
-            ArmorPenetration = projectile.Damage.ArmorPenetration,
-            WoundSeverityMultipliers = projectile.Damage.WoundSeverityMultipliers,
-        };
-
-        Dirty(uid, projectile);
 
         EntityManager.AddComponents(uid, comp.ComponentsOnEmpower);
 

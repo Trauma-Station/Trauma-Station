@@ -21,7 +21,7 @@
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
     # <Trauma>
-    BolaEnergy: 5 # was Bola: 6
+    BolaEnergy: 5 # was SecurityBola: 6
     PepperSpray: 3
     SkillChipShield: 2
     SkillChipBludgeon: 2

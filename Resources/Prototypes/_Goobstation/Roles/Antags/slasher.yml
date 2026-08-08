@@ -34,6 +34,21 @@
   - type: SlasherPossession
   - type: SlasherBloodTrail
   - type: SlasherIncorporeal
+    incorporealComponents:
+    - type: PhaseShifted
+      movementSpeedBuff: 3.5
+    - type: Stealth
+      lastVisibility: -1.5
+      maxVisibility: -1.5
+      thermalsImmune: true
+    - type: MovementIgnoreGravity
+    - type: SpecialBreathingImmunity
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SupermatterImmune
+    statusEffects:
+    - StatusEffectMuted
+    - StatusEffectPressureImmunity
   - type: SlasherSoulSteal
   - type: SlasherSummonMeatSpike
   - type: BreathingImmunity

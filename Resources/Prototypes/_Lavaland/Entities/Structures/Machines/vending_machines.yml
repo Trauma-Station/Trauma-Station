@@ -8,11 +8,8 @@
   components:
   - type: VendingMachine
     pack: MiningDrobeInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-  - type: Advertise
-    pack: MiningDrobeAds
+  - type: DatasetVocalizer
+    dataset: MiningDrobeAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite

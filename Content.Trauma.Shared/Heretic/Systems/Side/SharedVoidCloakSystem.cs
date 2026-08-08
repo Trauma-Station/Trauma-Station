@@ -16,33 +16,24 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
 {
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] private INetManager _net = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnBeforeHeatExchange(Entity<VoidCloakComponent> ent, ref InventoryRelayedEvent<BeforeHeatExchangeEvent> args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<VoidCloakHoodComponent, EntParentChangedMessage>(OnEntParentChanged);
-        SubscribeLocalEvent<VoidCloakHoodComponent, EntityTerminatingEvent>(OnTerminating);
-
-        SubscribeLocalEvent<VoidCloakComponent, InventoryRelayedEvent<CheckMagicItemEvent>>(OnCheckMagicItem);
-        SubscribeLocalEvent<VoidCloakComponent, InventoryRelayedEvent<ModifyChangedTemperatureEvent>>(OnTemperatureModify);
-    }
-
-    private void OnTemperatureModify(Entity<VoidCloakComponent> ent, ref InventoryRelayedEvent<ModifyChangedTemperatureEvent> args)
-    {
-        if (ent.Comp.Transparent || args.Args.TemperatureDelta > 0f)
+        if (ent.Comp.Transparent || args.Args.OurTemp > args.Args.OtherTemp)
             return;
 
-        args.Args.TemperatureDelta = 0f;
+        args.Args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnCheckMagicItem(Entity<VoidCloakComponent> ent, ref InventoryRelayedEvent<CheckMagicItemEvent> args)
     {
         if (!ent.Comp.Transparent)
             args.Args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnTerminating(Entity<VoidCloakHoodComponent> ent, ref EntityTerminatingEvent args)
     {
         if (!TryComp(ent, out AttachedClothingComponent? attached))
@@ -57,6 +48,7 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
         MakeCloakVisible(attached.AttachedUid, comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnEntParentChanged(Entity<VoidCloakHoodComponent> ent, ref EntParentChangedMessage args)
     {
         if (!TryComp(ent, out AttachedClothingComponent? attached))
@@ -80,9 +72,6 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
         _clothing.SetEquippedPrefix(cloak, "transparent-");
         _appearance.SetData(cloak, VoidCloakVisuals.Transparent, true);
 
-        if (_net.IsClient)
-            return;
-
         EnsureComp<StripMenuInvisibleComponent>(cloak);
         RemCompDeferred<UnholyItemComponent>(cloak);
         RemCompDeferred<HereticMagicItemComponent>(cloak);
@@ -94,9 +83,6 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
         comp.Transparent = false;
         _clothing.SetEquippedPrefix(cloak, null);
         _appearance.SetData(cloak, VoidCloakVisuals.Transparent, false);
-
-        if (_net.IsClient)
-            return;
 
         RemCompDeferred<StripMenuInvisibleComponent>(cloak);
         EnsureComp<UnholyItemComponent>(cloak);

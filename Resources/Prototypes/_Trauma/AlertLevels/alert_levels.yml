@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: alertLevel
+  id: Omicron
+  name: alert-level-omicron
+  announcement: alert-level-omicron-announcement
+  instructions: alert-level-omicron-instructions
+  sound: /Audio/_Goobstation/Misc/omicron.ogg
+  color: Ivory
+  emergencyLightColor: Ivory
+  selectable: false
+  disableSelection: true
+  forceEnableEmergencyLights: true
+  shuttleTime: 40m
+
+- type: alertLevel
+  id: Octarine
+  name: alert-level-octarine
+  announcement: alert-level-octarine-announcement
+  instructions: alert-level-octarine-instructions
+  sound: /Audio/Announcements/Alerts/code_octarine.ogg
+  color: CadetBlue
+  emergencyLightColor: CadetBlue
+  selectable: false
+  disableSelection: true
+  forceEnableEmergencyLights: true
+  shuttleTime: 10m
+
+- type: alertLevel
+  parent: DeltaNuke
+  id: DeltaBlob
+
+- type: alertLevel
+  parent: DeltaNuke
+  id: DeltaDelam
+
+- type: alertLevel
+  parent: DeltaNuke
+  id: DeltaSling

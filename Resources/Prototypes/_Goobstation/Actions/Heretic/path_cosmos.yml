@@ -11,9 +11,10 @@
     itemIconStyle: NoItem
     sound:
       path: /Audio/Magic/forcewall.ogg
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: cosmic_rune
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: cosmic_rune
   - type: InstantAction
     event: !type:EventHereticCosmicRune
   - type: HereticAction
@@ -30,9 +31,10 @@
   - type: Action
     useDelay: 1
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: star_touch
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: star_touch
   - type: InstantAction
     event: !type:TouchSpellEvent
       touchSpell: TouchSpellStar
@@ -57,9 +59,10 @@
     itemIconStyle: NoItem
     sound:
       path: /Audio/_Goobstation/Heretic/cosmic_energy.ogg
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: star_blast
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: star_blast
   - type: TargetAction
     range: 0
     checkCanAccess: false
@@ -88,9 +91,10 @@
     itemIconStyle: NoItem
     sound:
       path: /Audio/_Goobstation/Heretic/cosmic_expansion.ogg
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: cosmic_domain
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: cosmic_domain
   - type: InstantAction
     event: !type:EventHereticCosmicExpansion
   - type: HereticAction
@@ -107,9 +111,10 @@
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: gazer_beam_charge
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: gazer_beam_charge
   - type: InstantAction
     event: !type:StarGazeEvent
   - type: HereticAction
@@ -125,9 +130,10 @@
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: stargazer
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: stargazer
   - type: InstantAction
     event: !type:ResetStarGazerConsciousnessEvent
   - type: ConfirmableAction
@@ -142,9 +148,10 @@
     checkCanInteract: false
     useDelay: 5
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: stargazer
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: stargazer
   - type: InstantAction
     event: !type:StarGazerSeekMasterEvent
   - type: HereticAction

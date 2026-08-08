@@ -528,4 +528,9 @@ public enum LogType
     /// Trauma - Circuits related logs.
     /// </summary>
     Circuits = 20004,
+
+    /// <summary>
+    /// Trauma - ChemiCompiler related logs.
+    /// </summary>
+    ChemiCompiler = 20005,
 }

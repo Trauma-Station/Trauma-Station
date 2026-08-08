@@ -34,9 +34,6 @@
     key: walls
   - type: ExplosionResistance
     damageCoefficient: 3.64
-  - type: Tag
-    tags:
-    - Wall
 
 - type: entity
   parent: BaseWallXeno

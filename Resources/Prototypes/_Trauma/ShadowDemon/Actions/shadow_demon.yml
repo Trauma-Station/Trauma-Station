@@ -1,26 +1,35 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: DemonicWhisperAction
+  abstract: true
+  parent: BaseAction
+  id: BaseShadowDemonAction
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/ShadowDemon/actions.rsi
+  - type: Action
+    itemIconStyle: NoItem
+
+- type: entity
+  parent: [ BaseShadowDemonAction, DemonicWhisperAction ]
   id: ShadowDemonicWhisperAction
   name: Demonic Whisper
   description: Drive mortals insane with demonic telepathy! Remind them you are the reason night lights exist!
   components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Mobs/ShadowDemon/actions.rsi
-      state: shadow_whisper
+  - type: Sprite
+    layers:
+    - state: shadow_whisper
 
 - type: entity
+  parent: BaseShadowDemonAction
   id: ShadowGrappleAction
   name: Shadow Grapple
   description: Fire one of your hands.
   components:
+  - type: Sprite
+    layers:
+    - state: shadow_grapple
   - type: Action
-    icon:
-      sprite: _Trauma/Mobs/ShadowDemon/actions.rsi
-      state: shadow_grapple
-    itemIconStyle: NoItem
     useDelay: 10
   - type: EntityTargetAction
     event: !type:ShootGrappleEvent
@@ -33,14 +42,15 @@
     checkCanAccess: false
 
 - type: entity
+  parent: BaseShadowDemonAction
   id: ShadowCrawlAction
   name: Shadow Crawl
   description: Use darkness to phase out of existence.
   components:
+  - type: Sprite
+    layers:
+    - state: shadow_crawl
   - type: Action
-    icon:
-      sprite: _Trauma/Mobs/ShadowDemon/actions.rsi
-      state: shadow_crawl
     useDelay: 2 # applied only when entering jaunt
   - type: InstantAction
     event: !type:ShadowCrawlEvent

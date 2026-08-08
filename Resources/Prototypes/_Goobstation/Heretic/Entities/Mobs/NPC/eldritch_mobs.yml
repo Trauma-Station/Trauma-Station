@@ -82,9 +82,7 @@
     - Electrocution
     - Pacified
     - StaminaModifier
-    - Flashed
     - RadiationProtection
-    - Adrenaline
   - type: FloatingVisuals
   - type: LanguageSpeaker
     speaks:
@@ -170,7 +168,7 @@
   - type: ThermalVision
     color: white
     toggleAction: null
-    thermalShader: null
+    useShader: false
     isActive: true
 
 - type: entity

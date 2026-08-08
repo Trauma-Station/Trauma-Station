@@ -137,8 +137,8 @@ public sealed partial class BodySystem
     /// <summary>
     /// Get all internal organs in a body.
     /// </summary>
-    public List<Entity<InternalOrganComponent>> GetInternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
-        => GetOrgans<InternalOrganComponent>(body, logMissing);
+    public List<Entity<InternalChildOrganComponent>> GetInternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
+        => GetOrgans<InternalChildOrganComponent>(body, logMissing);
 
     /// <summary>
     /// Get all external organs in a body.
@@ -146,7 +146,7 @@ public sealed partial class BodySystem
     public List<Entity<OrganComponent>> GetExternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
     {
         var organs = GetOrgans(body, logMissing);
-        organs.RemoveAll(organ => HasComp<InternalOrganComponent>(organ));
+        organs.RemoveAll(organ => HasComp<InternalChildOrganComponent>(organ));
         return organs;
     }
 

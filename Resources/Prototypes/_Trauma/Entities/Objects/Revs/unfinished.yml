@@ -227,6 +227,7 @@
     tags:
     - RevFuelTank
   - type: Solution
+    id: beaker
     solution:
       maxVol: 100
   - type: MixableSolution

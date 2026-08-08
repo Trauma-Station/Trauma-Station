@@ -23,6 +23,10 @@ public sealed class LungTest : GameTest
   name: HumanLungDummy
   id: HumanLungDummy
   components:
+  # <Trauma> - for woundable visuals
+  - type: Sprite
+    layers: []
+  # </Trauma>
   - type: SolutionContainerManager
   - type: Body
   - type: EntityTableContainerFill

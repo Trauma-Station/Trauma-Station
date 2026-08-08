@@ -142,7 +142,7 @@ public sealed partial class MadnessMaskSystem : EntitySystem
                 var targetXform = Transform(target);
                 var targetCoords = _transform.GetMapCoordinates(target, targetXform);
 
-                if (!_examine.InRangeUnOccluded(targetCoords, coords, mask.MaxRange, null, entMan: EntityManager))
+                if (!_examine.InRangeUnOccluded(targetCoords, coords, mask.MaxRange, null))
                     continue;
 
                 var vec = coords.Position - targetCoords.Position;
