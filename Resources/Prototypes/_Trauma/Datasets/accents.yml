@@ -60,7 +60,7 @@
   id: AccentDemonicSuffix
   values:
     prefix: accent-demonic-suffix-
-    count: 8
+    count: 7
 
 # Medieval
 
@@ -68,7 +68,7 @@
   id: AccentMedievalPrefix
   values:
     prefix: accent-medieval-prefix-
-    count: 42
+    count: 41
 
 # Ohio
 
@@ -76,10 +76,10 @@
   id: AccentOhioPrefix
   values:
     prefix: accent-ohio-prefix-
-    count: 3
+    count: 7
 
 - type: localizedDataset
   id: AccentOhioSuffix
   values:
     prefix: accent-ohio-suffix-
-    count: 8
+    count: 13
