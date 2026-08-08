@@ -22,3 +22,9 @@ public record struct UpdateExperienceEvent();
 /// </summary>
 [ByRefEvent]
 public record struct UpdateItemQualityEvent(EntityUid User);
+
+/// <summary>
+/// Called in order to modify shield block fraction based on skills/etc.
+/// </summary>
+[ByRefEvent]
+public record struct GetBlockFractionEvent(EntityUid User, EntityUid Blocker, float Fraction);

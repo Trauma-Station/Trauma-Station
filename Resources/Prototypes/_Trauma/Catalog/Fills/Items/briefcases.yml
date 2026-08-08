@@ -121,7 +121,7 @@
       storagebase: !type:AllSelector
         children:
         - id: EnergyShield
-        - id: SkillChipStamina
+        - id: SkillChipShield
 
 - type: entity
   parent: BriefcaseWeaponSmall

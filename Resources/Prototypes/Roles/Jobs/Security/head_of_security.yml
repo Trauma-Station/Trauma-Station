@@ -41,7 +41,6 @@
     chips:
     - SkillChipCombatEducation
     - SkillChipCombatHOS
-    - SkillChipEnhancer
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

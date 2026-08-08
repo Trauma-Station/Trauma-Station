@@ -23,11 +23,9 @@
       FirstAidKnowledge: 100
       ChemistryKnowledge: 100
       ThrowingKnowledge: 100
-      AthleticsKnowledge: 100
-      StrengthKnowledge: 100
-      ToughnessKnowledge: 100
       MeleeKnowledge: 100
       ShootingKnowledge: 100
+      KnowledgeWeaponsShield: 100
       KnowledgeWeaponsBludgeon: 100
       KnowledgeWeaponsShortBlade: 100
       KnowledgeWeaponsLongBlade: 100
@@ -70,11 +68,9 @@
       FirstAidKnowledge: 50
       ChemistryKnowledge: 50
       ThrowingKnowledge: 50
-      AthleticsKnowledge: 50
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 50
       MeleeKnowledge: 50
       ShootingKnowledge: 50
+      KnowledgeWeaponsShield: 50
       KnowledgeWeaponsBludgeon: 50
       KnowledgeWeaponsShortBlade: 50
       KnowledgeWeaponsLongBlade: 50

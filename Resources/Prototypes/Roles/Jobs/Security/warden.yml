@@ -33,7 +33,6 @@
     chips:
     - SkillChipCombatEducation
     - SkillChipLaser
-    - SkillChipEnhancer
   - !type:AddComponentSpecial
     components:
     - type: SecurityStaff
