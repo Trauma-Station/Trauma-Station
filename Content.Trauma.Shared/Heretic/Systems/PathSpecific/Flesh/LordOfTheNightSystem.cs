@@ -183,10 +183,11 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
                 !SharedRandomExtensions.PredictedProb(_timing, ent.Comp.ArmDelimbChance, netEnt, GetNetEntity(hit)))
                 continue;
 
+            // TODO: organ groups
             var arm = _body.GetOrgan(hit, ent.Comp.ArmLeft) ?? _body.GetOrgan(hit, ent.Comp.ArmRight);
 
-            if (arm is { } armEnt)
-                _wound.AmputateWoundable(armEnt, args.User);
+            if (arm is { } armEnt && _part.GetParentPart(armEnt) is { } parent)
+                _wound.AmputateWoundable(parent, armEnt, user: args.User);
         }
     }
 }
