@@ -1,11 +1,7 @@
 // <Trauma>
-using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.Flammability;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
+using Content.Trauma.Common.Atmos;
 using Content.Trauma.Common.Heretic;
-using Content.Trauma.Common.Wizard;
-using Robust.Shared.Configuration;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
@@ -31,7 +27,7 @@ using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.FixedPoint;
-using Content.Shared.Temperature.Components;
+using JetBrains.Annotations;
 using Robust.Server.Audio;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -43,12 +39,6 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class FlammableSystem : EntitySystem
     {
-        // <Trauma>
-        [Dependency] private IConfigurationManager _cfg = default!;
-        [Dependency] private CommonSpellbladeSystem _spellblade = default!;
-        [Dependency] private BodySystem _body = default!;
-        [Dependency] private EntityQuery<FireImmunityComponent> _fireImmuneQuery = default!;
-        // </Trauma>
         [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private StunSystem _stunSystem = default!;
@@ -73,9 +63,9 @@ namespace Content.Server.Atmos.EntitySystems
 
         private readonly Dictionary<Entity<FlammableComponent>, float> _fireEvents = new();
 
-        private int _addHeatFirestack = 1500; // Goob
         public override void Initialize()
         {
+            InitTrauma(); // Trauma
             UpdatesAfter.Add(typeof(AtmosphereSystem));
 
             SubscribeLocalEvent<FlammableComponent, MapInitEvent>(OnMapInit);
@@ -95,15 +85,13 @@ namespace Content.Server.Atmos.EntitySystems
             SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
             SubscribeLocalEvent<IgniteOnHeatDamageComponent, DamageChangedEvent>(OnDamageChanged);
-
-            Subs.CVar(_cfg, GoobCVars.FireStackHeat, value => _addHeatFirestack = value, true); // Goob
         }
 
         private void OnExtinguishEvent(Entity<FlammableComponent> ent, ref ExtinguishEvent args)
         {
             // You know I'm really not sure if having AdjustFireStacks *after* Extinguish,
             // but I'm just moving this code, not questioning it.
-            Extinguish(ent, ent.Comp);
+            TryExtinguish(ent.AsNullable());
             AdjustFireStacks(ent, args.FireStacksAdjustment, ent.Comp);
         }
 
@@ -271,9 +259,9 @@ namespace Content.Server.Atmos.EntitySystems
                 _fireEvents[ent] = tempDelta;
         }
 
-        private void OnRejuvenate(EntityUid uid, FlammableComponent component, RejuvenateEvent args)
+        private void OnRejuvenate(Entity<FlammableComponent> ent, ref RejuvenateEvent args)
         {
-            Extinguish(uid, component);
+            TryExtinguish(ent.AsNullable());
         }
 
         private void OnResistFireAlert(Entity<FlammableComponent> ent, ref ResistFireAlertEvent args)
@@ -336,36 +324,62 @@ namespace Content.Server.Atmos.EntitySystems
             RaiseLocalEvent(uid, ref ev);
             // </Trauma>
 
-            // Goobstation modified - fix
             if (flammable.FireStacks <= 0)
-                Extinguish(uid, flammable);
+            {
+                TryExtinguish((uid, flammable));
+            }
+            // <Trauma> - use Ignite method instead of setting OnFire directly
             else if (ignite)
+            {
                 Ignite(uid, null, flammable);
+            }
+            // </Trauma>
         }
 
+        /// <summary>
+        /// Extinguishes an entity if it can be extinguished.
+        /// </summary>
+        [PublicAPI]
+        [Obsolete("Use TryExtinguish(Entity<FlammableComponent>) instead.")]
         public void Extinguish(EntityUid uid, FlammableComponent? flammable = null)
         {
-            // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
-            if (!Resolve(uid, ref flammable) || !flammable.CanExtinguish)
+            // Maintaining prior resolve behavior.
+            if (!Resolve(uid, ref flammable))
                 return;
 
-            // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
-            RemCompDeferred<OnFireComponent>(uid);
-            if (!flammable.OnFire)
-                return;
+            TryExtinguish((uid, flammable));
+        }
 
-            _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):entity} stopped being on fire damage");
-            flammable.OnFire = false;
-            flammable.FireStacks = 0;
-            flammable.FireProtectionPenetration = 0f; // Goob
+        /// <summary>
+        /// Extinguishes an entity if it can be extinguished.
+        /// </summary>
+        /// <returns>
+        /// Whether or not <paramref name="uid"> was extinguished.
+        /// </returns>
+        [PublicAPI]
+        public bool TryExtinguish(Entity<FlammableComponent?> ent)
+        {
+            if (!Resolve(ent, ref ent.Comp, false))
+                return false;
 
-            _ignitionSourceSystem.SetIgnited(uid, false);
+            if (!ent.Comp.OnFire || !ent.Comp.CanExtinguish)
+                return false;
+
+            // <Trauma>
+            RemCompDeferred<OnFireComponent>(ent);
+            _alertsSystem.ClearAlert(ent.Owner, ent.Comp.FireAlert);
+            // </Trauma>
+            _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(ent):entity} stopped being on fire damage");
+            ent.Comp.OnFire = false;
+            ent.Comp.FireStacks = 0;
+
+            _ignitionSourceSystem.SetIgnited(ent.Owner, false);
 
             var extinguished = new ExtinguishedEvent();
-            RaiseLocalEvent(uid, ref extinguished);
+            RaiseLocalEvent(ent, ref extinguished);
 
-            UpdateAppearance(uid, flammable);
-            _alertsSystem.ClearAlert(uid, flammable.FireAlert); // Goob Edit - Fix Fire Alert
+            UpdateAppearance(ent, ent.Comp);
+            return true;
         }
 
         // Goobstation - now nullable
@@ -510,7 +524,7 @@ namespace Content.Server.Atmos.EntitySystems
                     // If we're in an oxygenless environment, put the fire out.
                     if (!spaceEv.Cancelled && (air == null || air.GetMoles(Gas.Oxygen) < 1f)) // Trauma - spaceEv
                     {
-                        Extinguish(uid, flammable);
+                        TryExtinguish((uid, flammable));
                         continue;
                     }
 
@@ -567,11 +581,11 @@ namespace Content.Server.Atmos.EntitySystems
                 }
                 else
                 {
-                    // <Trauma>
+                    // <Trauma> - check event before extingushing
                     var noFireEvent = new NoFirestacksUpdateEvent(uid);
                     RaiseLocalEvent(uid, ref noFireEvent);
                     if (!noFireEvent.Handled)
-                        Extinguish(uid, flammable);
+                        TryExtinguish((uid, flammable));
                     // </Trauma>
                 }
             }

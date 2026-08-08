@@ -98,7 +98,7 @@ public sealed partial class SpookActionSystem : EntitySystem
         foreach (var entity in lights)
         {
             var ev = new GhostBooEvent();
-            RaiseLocalEvent(entity, ev);
+            RaiseLocalEvent(entity, ref ev);
 
             if (ev.Handled)
                 booCounter++;

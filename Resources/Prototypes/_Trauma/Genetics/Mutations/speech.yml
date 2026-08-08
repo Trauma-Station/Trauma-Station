@@ -79,7 +79,8 @@
   name: Chav
   description: Unknown
   components:
-  - type: BritishAccent
+  - type: SimpleAccent
+    accent: British
 
 - type: entity
   parent: [ BaseFreeMutation, BaseTriggerMutation ]

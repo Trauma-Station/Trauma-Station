@@ -19,10 +19,11 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
-  guides: # goobstation
+  # <Trauma>
+  guides:
   - Command
   - Writing
-  weight: 20
+  # </Trauma>
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain

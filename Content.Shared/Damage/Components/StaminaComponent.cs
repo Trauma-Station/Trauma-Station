@@ -1,6 +1,6 @@
-using Content.Shared.FixedPoint;
 using System.Numerics;
 using Content.Shared.Alert;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -24,13 +24,13 @@ public sealed partial class StaminaComponent : Component
     /// How much stamina reduces per second.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
-    public float Decay = 5f; // goob edit
+    public float Decay = 5f; // Trauma - was 3
 
     /// <summary>
     /// How much time after receiving damage until stamina starts decreasing.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
-    public float Cooldown = 5f; // goob edit
+    public float Cooldown = 5f; // Trauma - was 3
 
     /// <summary>
     /// How much stamina damage this entity has taken.
@@ -51,16 +51,6 @@ public sealed partial class StaminaComponent : Component
     public float CritThreshold = 100f;
 
     /// <summary>
-    /// Goob Edit: A dictionary of active stamina drains, with the key being the source of the drain,
-    /// DrainRate how much it changes per tick, and ModifiesSpeed if it should slow down the user.
-    /// </summary>
-    /// <remarks>
-    /// TODO: Refactor into a struct or another component at some point idk.
-    /// </remarks>
-    [DataField, AutoNetworkedField]
-    public Dictionary<string, (float DrainRate, bool ModifiesSpeed, NetEntity? Source, bool ApplyResistances)> ActiveDrains = new();
-
-    /// <summary>
     /// How long will this mob be stunned for?
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField]
@@ -75,10 +65,6 @@ public sealed partial class StaminaComponent : Component
 
     [DataField]
     public ProtoId<AlertPrototype> StaminaAlert = "Stamina";
-
-    // Goobstation
-    [DataField]
-    public float StaminaOnShove = 7.5f;
 
     /// <summary>
     /// This flag indicates whether the value of <see cref="StaminaDamage"/> decreases after the entity exits stamina crit.
@@ -187,10 +173,4 @@ public sealed partial class StaminaComponent : Component
     public Vector2 StartOffset = Vector2.Zero;
 
     #endregion
-
-    /// <summary>
-    /// Goobstation - Used for the sprinting event to get rather we sprinting or not from Goob Mod folder
-    /// </summary>
-    [DataField]
-    public bool IsSprinting { get; set; }
 }
