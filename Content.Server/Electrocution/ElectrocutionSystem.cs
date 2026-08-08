@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Effects;
-using Robust.Shared.Timing;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Doors.Systems;
@@ -43,7 +42,6 @@ namespace Content.Server.Electrocution;
 public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 {
     // <Trauma>
-    [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private IAdminLogManager _adminLogger = default!;
@@ -70,8 +68,6 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
     private static readonly ProtoId<TagPrototype> WindowTag = "Window";
 
     // Multiply and shift the log scale for shock damage.
-    // Yes, this is absurdly small for a reason.
-    public const float ElectrifiedDamagePerWatt = 0.0015f; // Goobstation - This information is allowed to be public, and was needed in BatteryElectrocuteChargeSystem.cs
     private const float RecursiveDamageMultiplier = 0.75f;
     private const float RecursiveTimeMultiplier = 0.8f;
 
@@ -242,13 +238,6 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
         if (!Resolve(uid, ref electrified, ref transform, false))
             return false;
 
-        // Goobstation - Cooldown to prevent rapid shocks
-        var currentTime = _gameTiming.CurTime;
-        var timeSinceLastShock = currentTime - electrified.LastShockTime;
-        if (timeSinceLastShock < electrified.ShockCooldown)
-            return false;
-        // Goobstation end
-
         if (!IsPowered(uid, electrified, transform))
             return false;
 
@@ -260,11 +249,6 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 
         EnsureComp<ActivatedElectrifiedComponent>(uid);
         _appearance.SetData(uid, ElectrifiedVisuals.ShowSparks, true);
-
-        // Goobstation
-        // Update last shock time
-        electrified.LastShockTime = currentTime;
-        Dirty(uid, electrified);
 
         siemens *= electrified.SiemensCoefficient;
         if (!DoCommonElectrocutionAttempt(targetUid, uid, ref siemens, electrified.IgnoreInsulation) || siemens <= 0) // Goob edit

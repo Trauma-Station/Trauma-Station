@@ -122,7 +122,7 @@ public sealed partial class ElectrifiedComponent : Component
     /// Delay between consecutive shocks
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan? ShockDelay;
+    public TimeSpan? ShockDelay = TimeSpan.FromSeconds(0.3); // Trauma - default value
 
     /// <summary>
     /// When the entity will be able to shock again
@@ -176,33 +176,4 @@ public sealed partial class ElectrifiedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsWireCut = false;
-
-    #region Goobstation
-    /// <summary>
-    /// Goobstation
-    /// Whether this will ignore target insulation
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool IgnoreInsulation;
-
-    /// <summary>
-    /// Goobstation
-    /// Don't shock this entity
-    /// </summary>
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public EntityUid? IgnoredEntity;
-
-    /// <summary>
-    /// Cooldown between shocks
-    /// </summary>
-    [DataField]
-    public TimeSpan ShockCooldown { get; set; } = TimeSpan.FromSeconds(0.3f);
-
-    /// <summary>
-    /// Last time this entity was shocked
-    /// </summary>
-    [DataField]
-    public TimeSpan LastShockTime { get; set; } = TimeSpan.Zero;
-
-    #endregion
 }
