@@ -22,7 +22,7 @@ namespace Content.Trauma.Shared.Vampires;
 
 public sealed partial class VampireBloodsuckingSystem : EntitySystem
 {
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private IngestionSystem _ingestion = default!;
     [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

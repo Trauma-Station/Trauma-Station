@@ -381,14 +381,12 @@
           FleshKudzuSpace:
             min: 1
             max: 3
-        spawnAfter: 0.5
         offset: 1
       - !type:SpawnEntitiesBehavior
         spawn:
           FleshBlocker:
             min: 1
             max: 2
-        spawnAfter: 0.5
         offset: 2
       - !type:ExplodeBehavior
 
@@ -416,6 +414,5 @@
           Kudzu:
             min: 1
             max: 3
-        spawnAfter: 0.5
         offset: 1
       - !type:ExplodeBehavior

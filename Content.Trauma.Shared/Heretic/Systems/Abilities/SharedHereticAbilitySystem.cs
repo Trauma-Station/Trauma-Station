@@ -81,7 +81,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private MobThresholdSystem _mobThreshold = default!;
     [Dependency] private BodySystem _body = default!;
-    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedEmpSystem _emp = default!;
     [Dependency] private SharedMindSystem _mind = default!;

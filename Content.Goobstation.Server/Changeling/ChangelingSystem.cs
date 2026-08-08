@@ -92,7 +92,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MobThresholdSystem _mobThreshold = default!;
     [Dependency] private DamageableSystem _damage = default!;
-    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
@@ -121,9 +121,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         base.Initialize();
 
         SubscribeLocalEvent<ChangelingIdentityComponent, MapInitEvent>(OnIdentityMapInit,
-            after: [ typeof(SharedBloodstreamSystem)] ); // needs bloodstream's solution to be set up first
+            after: [ typeof(BloodstreamSystem)] ); // needs bloodstream's solution to be set up first
         SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit,
-            after: [ typeof(SharedBloodstreamSystem)] ); // shit subscription ordering system award
+            after: [ typeof(BloodstreamSystem)] ); // shit subscription ordering system award
     }
 
     [SubscribeLocalEvent]

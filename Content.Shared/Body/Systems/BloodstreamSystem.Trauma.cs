@@ -15,7 +15,7 @@ namespace Content.Shared.Body.Systems;
 /// <summary>
 /// Trauma - Provides missing API methods for bloodstream.
 /// </summary>
-public abstract partial class SharedBloodstreamSystem
+public sealed partial class BloodstreamSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private INetManager _net = default!;
@@ -24,8 +24,10 @@ public abstract partial class SharedBloodstreamSystem
 
     private float _bloodlossMultiplier = 4f;
 
-    private void InitializeTrauma()
+    public override void Initialize()
     {
+        base.Initialize();
+
         Subs.CVar(_cfg, GoobCVars.BleedMultiplier, value => _bloodlossMultiplier = value, true);
     }
 
@@ -43,7 +45,7 @@ public abstract partial class SharedBloodstreamSystem
         params ProtoId<ReagentPrototype>[] excludedReagents)
     {
         if (!_query.Resolve(ent, ref ent.Comp, logMissing: false)
-            || !SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var bloodSolution))
+            || !_solutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var bloodSolution))
             return null;
 
         var flushedSolution = new Solution();
@@ -55,7 +57,7 @@ public abstract partial class SharedBloodstreamSystem
                 excludedReagents.Contains(reagentId.Prototype))
                 continue;
 
-            var reagentFlushAmount = SolutionContainer.RemoveReagent(ent.Comp.BloodSolution.Value, reagentId, quantity);
+            var reagentFlushAmount = _solutionContainer.RemoveReagent(ent.Comp.BloodSolution.Value, reagentId, quantity);
             flushedSolution.AddReagent(reagentId, reagentFlushAmount);
         }
 
