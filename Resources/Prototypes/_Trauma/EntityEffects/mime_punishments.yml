@@ -34,6 +34,5 @@
   id: KillSign
   effects:
   - !type:AddComponents
-    guidebookText: entity-effect-guidebook-add-killsign
     components:
     - type: KillSign
