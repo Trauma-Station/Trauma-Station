@@ -200,7 +200,7 @@
     Hydroxide: 2.5 # frankly it's there so that this recipe appears in the guidebook at all
   effects:
     - !type:SpawnEntity
-      entity: FoodMeatSynth
+      entity: FoodSynthMeat
 
 - type: reaction
   id: Synthcells

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
 using Content.Server.Power.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -10,10 +9,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Content.Trauma.Shared.DeepFryer.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
