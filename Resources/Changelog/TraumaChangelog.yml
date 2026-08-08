@@ -12906,3 +12906,30 @@ Entries:
   id: 1411
   time: '2026-08-08T13:06:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3943
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed polymorph chems from botany reagent pool.
+  - type: Fix
+    message: Fixed bananamen organs rotting.
+  - type: Fix
+    message: Fixed slowdown resistance not working.
+  - type: Fix
+    message: Fixed red jelly not giving clothing fire vulnerability.
+  - type: Tweak
+    message: >-
+      Red jelly now gives flat 10% reduction to slowdown by clothing instead of
+      full immunity.
+  - type: Remove
+    message: removed speed legs and strength augments from research.
+  - type: Tweak
+    message: Renault butcher tc 40 -> 25.
+  - type: Fix
+    message: >-
+      Fix npc always ignoring stealth entities instead of only ignoring them
+      when they are invisible.
+  - type: Remove
+    message: Removed emag from syndi borg module.
+  id: 1412
+  time: '2026-08-08T13:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3904
