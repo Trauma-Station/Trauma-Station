@@ -6,6 +6,7 @@
       components:
       - type: KillSign
 # </Trauma>
+
 - type: entity
   id: BaseRock
   name: boulder
