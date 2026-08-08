@@ -12933,3 +12933,22 @@ Entries:
   id: 1412
   time: '2026-08-08T13:06:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3904
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Physical skills (strength/toughness/athletics) are no more.
+  - type: Remove
+    message: Novice skill mastery is no more.
+  - type: Remove
+    message: Removed shield held slowdown.
+  - type: Add
+    message: Added shield skill that is used for parries and blocking damage percentage.
+  - type: Add
+    message: Sec vendor has shield and throwing skill chips.
+  - type: Tweak
+    message: Tweaked roundstart skill point pool and skill costs.
+  - type: Fix
+    message: Fixed eshield weird behavor, also it charges slower now but can be melee parried with.
+  id: 1413
+  time: '2026-08-08T13:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3698
