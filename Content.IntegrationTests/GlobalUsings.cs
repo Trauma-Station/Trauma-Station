@@ -17,7 +17,6 @@ global using Robust.Shared.Utility;
 global using Robust.Shared.ViewVariables;
 global using Robust.Shared.Serialization;
 global using Robust.Shared.Serialization.Manager.Attributes;
-global using System;
 global using System.Collections.Generic;
 global using System.Numerics;
 // </Trauma>
