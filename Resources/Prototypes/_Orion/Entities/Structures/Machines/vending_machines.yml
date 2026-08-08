@@ -6,8 +6,6 @@
   components:
   - type: VendingMachine
     pack: EmptyVendingMachineInventory
-    offState: off
-    normalState: normal-unshaded
   - type: Sprite
     sprite: _Orion/Structures/Machines/VendingMachines/bitrun.rsi
     noRot: true

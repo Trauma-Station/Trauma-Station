@@ -4,10 +4,9 @@
   name: Disconnect avatar
   description: Return to your body and end the current avatar session.
   components:
-  - type: Action
-    icon:
-      sprite: _Orion/Structures/Machines/netpod.rsi
-      state: netpod_closed_active
+  - type: Sprite
+    sprite: _Orion/Structures/Machines/netpod.rsi
+    state: netpod_closed_active
   - type: InstantAction
     event: !type:BitrunningDisconnectAvatarActionEvent
 
@@ -17,12 +16,12 @@
   name: Summon Cheese
   description: Spawns cheese wheels in a 3x3 area around you.
   components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/ingredients.rsi
+    state: cheesewheel
   - type: Action
     useDelay: 30
     itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Consumable/Food/ingredients.rsi
-      state: cheesewheel
   - type: InstantAction
     event: !type:BitrunningSpawnCheeseActionEvent
 
@@ -32,12 +31,12 @@
   name: Lesser Heal
   description: Heals minor brute and burn damage.
   components:
+  - type: Sprite
+    sprite: Objects/Consumable/Medical/medkit.rsi
+    state: treatment-module
   - type: Action
     useDelay: 20
     itemIconStyle: BigAction
-    icon:
-      sprite: Interface/Actions/actions_borg.rsi
-      state: treatment-module
   - type: InstantAction
     event: !type:BitrunningLesserHealActionEvent
 
@@ -47,12 +46,12 @@
   name: Dragon Morph
   description: Temporarily transforms you into a dragon avatar.
   components:
+  - type: Sprite
+    sprite: Mobs/Aliens/Carps/space.rsi
+    state: icon
   - type: Action
     useDelay: 8
     itemIconStyle: BigAction
-    icon:
-      sprite: Mobs/Aliens/Carps/space.rsi
-      state: icon
   - type: InstantAction
     event: !type:PolymorphSpellEvent
       protoId: BitrunningAvatarDragonPolymorph
@@ -64,12 +63,12 @@
   name: Bear Morph
   description: Temporarily transforms you into a bear avatar.
   components:
+  - type: Sprite
+    sprite: Mobs/Animals/bear.rsi
+    state: bear
   - type: Action
     useDelay: 8
     itemIconStyle: BigAction
-    icon:
-      sprite: Mobs/Animals/bear.rsi
-      state: bear
   - type: InstantAction
     event: !type:PolymorphSpellEvent
       protoId: BitrunningAvatarBearPolymorph

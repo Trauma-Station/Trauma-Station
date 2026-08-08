@@ -30,11 +30,12 @@ public sealed partial class BitrunningDiskWindow : FancyWindow
 
         foreach (var option in options)
         {
+            var currentOption = option;
             var button = new Button
             {
-
+                Text = option,
             };
-            button.OnPressed += _ => OnSelected?.Invoke(option);
+            button.OnPressed += _ => OnSelected?.Invoke(currentOption);
             OptionsContainer.AddChild(button);
         }
     }

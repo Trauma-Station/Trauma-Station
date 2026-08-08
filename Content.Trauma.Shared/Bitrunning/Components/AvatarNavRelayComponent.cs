@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Trauma.Common.Bitrunning.Components;
+using Robust.Shared.GameStates;
 
-[RegisterComponent]
+namespace Content.Trauma.Shared.Bitrunning.Components;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AvatarNavRelayComponent : Component
 {
     /// <summary>
@@ -10,5 +12,6 @@ public sealed partial class AvatarNavRelayComponent : Component
     /// Set when an avatar is spawned/connected, and on disconnect active viewers are removed before this link is cleared.
     /// If null, callers should publish ActiveCamera = null instead of falling back to a stale netpod target.
     /// </summary>
+    [DataField, AutoNetworkedField]
     public EntityUid? RelayEntity;
 }

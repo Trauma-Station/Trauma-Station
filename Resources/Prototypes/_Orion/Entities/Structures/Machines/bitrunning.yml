@@ -65,7 +65,7 @@
   - type: UserInterface
     interfaces:
       enum.QuantumConsoleUiKey.Key:
-        type: QuantumConsoleBoundUserInterface
+        type: QuantumConsoleBUI
   - type: QuantumConsole
   - type: Computer
     board: QuantumConsoleCircuitboard

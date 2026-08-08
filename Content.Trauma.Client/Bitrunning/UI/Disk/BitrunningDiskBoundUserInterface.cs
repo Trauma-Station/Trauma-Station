@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Bitrunning;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Bitrunning.UI.Disk;
 

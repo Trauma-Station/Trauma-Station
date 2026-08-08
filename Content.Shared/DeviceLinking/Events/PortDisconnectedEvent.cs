@@ -5,7 +5,7 @@ namespace Content.Shared.DeviceLinking.Events
         public readonly string Port;
         public readonly EntityUid? RemovedPortUid; // Trauma
 
-        public PortDisconnectedEvent(string port, EntityUid? removedPortUid = null) // Trauma: EntityUid? removedPortUid = null
+        public PortDisconnectedEvent(string port, EntityUid? removedPortUid = null) // Trauma: added removedPortUid
         {
             Port = port;
             RemovedPortUid = removedPortUid; // Trauma

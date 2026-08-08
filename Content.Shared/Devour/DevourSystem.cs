@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Shared.Destructible;
-// <Trauma>
+// </Trauma>
 using Content.Goobstation.Common.Devour;
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
@@ -21,6 +21,9 @@ namespace Content.Shared.Devour;
 
 public sealed partial class DevourSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    // </Trauma>
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;
@@ -29,7 +32,6 @@ public sealed partial class DevourSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!; // Goobstation
-    [Dependency] private SharedDestructibleSystem _destructible = default!; // Trauma
 
     public override void Initialize()
     {
@@ -95,12 +97,12 @@ public sealed partial class DevourSystem : EntitySystem
         }
 
         // <Trauma>
-        if (IsIndestructibleStructure(target))
+        if (!HasComp<DestructibleComponent>(target))
         {
             _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
             return;
         }
-        // <Trauma>
+        // </Trauma>
 
         _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-structure"), ent.Owner, ent.Owner);
 
@@ -112,7 +114,7 @@ public sealed partial class DevourSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
             return;
         }
-        // <Trauma>
+        // </Trauma>
 
         if (ent.Comp.SoundStructureDevour != null)
             _audioSystem.PlayPredicted(ent.Comp.SoundStructureDevour, ent.Owner, ent.Owner, ent.Comp.SoundStructureDevour.Params);
@@ -128,7 +130,7 @@ public sealed partial class DevourSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
-        /* // Trauma: Moved down
+        /* // <Trauma>: Moved down
         var ichorInjection = new Solution(ent.Comp.Chemical, ent.Comp.HealRate);
 
         // Grant ichor if the devoured thing meets the dragon's food preference
@@ -140,12 +142,14 @@ public sealed partial class DevourSystem : EntitySystem
         if (args.Args.Target is {} target && _solution.TryGetSolution(target, "food", out _, out var food))
             _bloodstreamSystem.TryAddToBloodstream(ent.Owner, food);
         // </Goobstation>
-    */
+        */ // </Trauma>
+
+
 
         // <Trauma>
         if (args.Args.Target is not { } target)
             return;
-        // <Trauma>
+        // </Trauma>
 
         // If the devoured thing meets the stomach whitelist criteria, add it to the stomach
         if (_whitelistSystem.IsWhitelistPass(ent.Comp.StomachStorageWhitelist, args.Args.Target.Value)) // Trauma
@@ -168,7 +172,7 @@ public sealed partial class DevourSystem : EntitySystem
             // PredictedQueueDel(args.Args.Target.Value); // Trauma
 
             // <Trauma>: Protect indestructible from devour
-            if (IsIndestructibleStructure(args.Args.Target.Value))
+            if (!HasComp<DestructibleComponent>(args.Args.Target.Value))
             {
                 _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
                 return;
@@ -179,7 +183,7 @@ public sealed partial class DevourSystem : EntitySystem
                 _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-indestructible"), ent.Owner, ent.Owner);
                 return;
             }
-            // <Trauma>
+            // </Trauma>
         }
 
         // <Trauma>
@@ -191,17 +195,10 @@ public sealed partial class DevourSystem : EntitySystem
 
         if (_solution.TryGetSolution(args.Args.Target.Value, "food", out _, out var food))
             _bloodstreamSystem.TryAddToBloodstream(ent.Owner, food);
-        // <Trauma>
+        // </Trauma>
 
         _audioSystem.PlayPredicted(ent.Comp.SoundDevour, ent.Owner, ent.Owner);
     }
-
-    // <Trauma>
-    private bool IsIndestructibleStructure(EntityUid target)
-    {
-        return !HasComp<DestructibleComponent>(target);
-    }
-    // <Trauma>
 
     private void OnGibContents(Entity<DevourerComponent> ent, ref GibbedBeforeDeletionEvent args)
     {
@@ -211,7 +208,7 @@ public sealed partial class DevourSystem : EntitySystem
         // <Goob>
         foreach (var entity in ent.Comp.Stomach.ContainedEntities)
             RemComp<PreventSelfRevivalComponent>(entity);
-        // <Goob>
+        // </Goob>
         _containerSystem.EmptyContainer(ent.Comp.Stomach);
     }
 }

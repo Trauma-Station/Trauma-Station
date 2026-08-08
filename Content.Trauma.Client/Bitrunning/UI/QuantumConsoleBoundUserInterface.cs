@@ -7,21 +7,21 @@ using Robust.Client.UserInterface;
 namespace Content.Trauma.Client.Bitrunning.UI;
 
 [UsedImplicitly]
-public sealed class QuantumConsoleBoundUserInterface : BoundUserInterface
+public sealed class QuantumConsoleBUI : BoundUserInterface
 {
     private QuantumConsoleWindow? _window;
 
-    public QuantumConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
+    public QuantumConsoleBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
 
     protected override void Open()
     {
         base.Open();
 
         _window = this.CreateWindow<QuantumConsoleWindow>();
-        _window.OnLoadDomain += id => SendMessage(new QuantumConsoleLoadDomainMessage(id));
-        _window.OnRandomDomain += () => SendMessage(new QuantumConsoleRandomDomainMessage());
-        _window.OnStopDomain += () => SendMessage(new QuantumConsoleStopDomainMessage());
-        _window.OnRefresh += () => SendMessage(new QuantumConsoleRefreshMessage());
+        _window.OnLoadDomain += id => SendPredictedMessage(new QuantumConsoleLoadDomainMessage(id));
+        _window.OnRandomDomain += () => SendPredictedMessage(new QuantumConsoleRandomDomainMessage());
+        _window.OnStopDomain += () => SendPredictedMessage(new QuantumConsoleStopDomainMessage());
+        _window.OnRefresh += () => SendPredictedMessage(new QuantumConsoleRefreshMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

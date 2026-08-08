@@ -5,22 +5,22 @@ using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Common.Bitrunning.Components;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class NetpodComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? LinkedServer;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Occupant;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Avatar;
 
     [DataField]
     public TimeSpan AutoConnectDelay = TimeSpan.FromSeconds(1.8);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool DeployedAvatar;
 
     /// <summary>
