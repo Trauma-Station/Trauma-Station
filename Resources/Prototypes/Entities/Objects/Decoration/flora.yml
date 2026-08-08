@@ -1,12 +1,3 @@
-# <Trauma>
-  - type: entityEffect # This makes it so destroying a Chistmas Tree marks you with a kill sign
-    id: KillSign
-    effects:
-    - !type:AddComponents
-      components:
-      - type: KillSign
-# </Trauma>
-
 - type: entity
   id: BaseRock
   name: boulder
@@ -337,6 +328,14 @@
     receivedPopup: christmas-tree-got-gift
     deniedPopup: christmas-tree-no-gift
     requiredHoliday: FestiveSeason
+  # <Trauma>
+    - type: entityEffect # This makes it so destroying a Chistmas Tree marks you with a kill sign
+      id: KillSign
+      effects:
+      - !type:AddComponents
+        components:
+        - type: KillSign
+  # </Trauma>
   # <Goob>
   - type: EntityEffectOnTrigger
     targetUser: true
