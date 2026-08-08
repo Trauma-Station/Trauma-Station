@@ -4,8 +4,8 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/08/2026 07:57:15
-  entityCount: 443
+  time: 08/08/2026 10:47:49
+  entityCount: 440
 maps:
 - 1
 grids:
@@ -132,8 +132,10 @@ entities:
     - type: ImplicitRoof
     - type: GridPathfinding
     - type: Gravity
+      inherent: True
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 3
@@ -344,33 +346,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: ExplosionAirtightGrid
-- proto: CableApcExtension
-  entities:
-  - uid: 394
-    components:
-    - type: Transform
-      parent: 2
-      pos: 16.5,-17.5
-  - uid: 442
-    components:
-    - type: Transform
-      parent: 2
-      pos: 17.5,-17.5
-- proto: DebugAPCRecharging
-  entities:
-  - uid: 390
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 17.5,-17.5
-- proto: GravityGeneratorMini
-  entities:
-  - uid: 117
-    components:
-    - type: Transform
-      parent: 2
-      pos: 16.5,-17.5
 - proto: WallNecropolisIndestructible
   entities:
   - uid: 3
@@ -943,6 +918,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 17.5,-14.5
+  - uid: 117
+    components:
+    - type: Transform
+      parent: 2
+      pos: 16.5,-17.5
   - uid: 118
     components:
     - type: Transform
