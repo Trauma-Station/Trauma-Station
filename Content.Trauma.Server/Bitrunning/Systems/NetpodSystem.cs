@@ -44,6 +44,7 @@ public sealed partial class NetpodSystem : EntitySystem
     private static readonly TimeSpan StateValidationInterval = TimeSpan.FromSeconds(5);
     private TimeSpan _nextValidationTime;
     private const string ServerSinkPort = "BitrunningNetpodSink";
+    private readonly HashSet<EntityUid> _ejectingPods = new();
 
     public override void Initialize()
     {
@@ -229,7 +230,7 @@ public sealed partial class NetpodSystem : EntitySystem
         if (args.Container.ID != "netpod-body")
             return;
 
-        if (ent.Comp.EjectingOccupant)
+        if (_ejectingPods.Contains(ent.Owner))
             return;
 
         if (ent.Comp.Avatar is not { } avatar)
@@ -346,24 +347,21 @@ public sealed partial class NetpodSystem : EntitySystem
 
     public bool EjectOccupant(EntityUid podUid)
     {
-        if (!TryComp<NetpodComponent>(podUid, out var podComp) ||
+        if (!TryComp<NetpodComponent>(podUid, out _) ||
             !TryComp<NetpodContainerComponent>(podUid, out var containerComp))
             return false;
 
         if (containerComp.BodyContainer.ContainedEntity is not { } contained)
             return false;
 
-        podComp.EjectingOccupant = true;
+        _ejectingPods.Add(podUid);
         try
         {
             return _container.Remove(contained, containerComp.BodyContainer);
         }
         finally
         {
-            if (TryComp<NetpodComponent>(podUid, out var current))
-            {
-                current.EjectingOccupant = false;
-            }
+            _ejectingPods.Remove(podUid);
         }
     }
 

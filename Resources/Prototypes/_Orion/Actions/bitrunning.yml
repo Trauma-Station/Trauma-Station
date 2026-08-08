@@ -32,8 +32,8 @@
   description: Heals minor brute and burn damage.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Medical/medkit.rsi
-    state: treatment-module
+    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    state: firstaid
   - type: Action
     useDelay: 20
     itemIconStyle: BigAction

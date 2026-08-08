@@ -23,11 +23,6 @@ public sealed partial class NetpodComponent : Component
     [DataField, AutoNetworkedField]
     public bool DeployedAvatar;
 
-    /// <summary>
-    /// Internal re-entrancy guard while removing occupant from the pod container.
-    /// </summary>
-    public bool EjectingOccupant;
-
     [DataField]
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/_Orion/Machines/tram/tramopen.ogg", AudioParams.Default.WithVolume(-2f).WithVariation(0.1f));
 
