@@ -174,6 +174,12 @@
   - type: KillPersonCondition
     requireDead: true
   - type: PickRandomPerson
+    conditions:
+    - !type:BodyWhitelistCondition
+      blacklist:
+        components:
+        - NukeOperative
+
 
 # extreme
 - type: entity
@@ -201,8 +207,11 @@
   - type: KillPersonCondition
     requireDead: true
   - type: PickRandomPerson
-    filters:
-    - !type:BodyMindFilter
+    conditions:
+    - !type:BodyWhitelistCondition
+      blacklist:
+        components:
+        - NukeOperative
       whitelist:
         components:
         - CommandStaff
