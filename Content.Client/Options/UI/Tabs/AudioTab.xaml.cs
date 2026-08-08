@@ -91,6 +91,7 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.BwoinkSoundEnabled, BwoinkSoundCheckBox);
         Control.AddOptionCheckBox(TraumaCVars.StreamerMode, StreamerModeCheckBox); // Trauma
         Control.AddOptionCheckBox(CCVars.AudioHrtf, AudioHrtfCheckBox);
+        Control.AddOptionCheckBox(CVars.AudioMuteUnfocused, MuteUnfocusedCheckBox);
 
         Control.Initialize();
     }
