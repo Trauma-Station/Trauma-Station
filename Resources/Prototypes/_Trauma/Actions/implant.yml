@@ -9,8 +9,9 @@
   - type: Action
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: Objects/Devices/communication.rsi
-      state: radio
+  - type: Sprite
+    sprite: Objects/Devices/communication.rsi
+    layers:
+    - state: radio
   - type: InstantAction
     event: !type:OpenJobListingsImplantEvent
