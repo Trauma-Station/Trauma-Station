@@ -3,8 +3,8 @@
     id: KillSign
     effects:
     - !type:AddComponents
-    components:
-    - type: KillSign
+      components:
+      - type: KillSign
 # </Trauma>
 - type: entity
   id: BaseRock
