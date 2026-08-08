@@ -329,11 +329,6 @@
     deniedPopup: christmas-tree-no-gift
     requiredHoliday: FestiveSeason
   # <Goob>
-  - type: EntityEffectOnTrigger
-    targetUser: true
-    effects:
-    - !type:NestedEffect
-      proto: KillSign
   - type: Destructible
     thresholds:
     - trigger:
