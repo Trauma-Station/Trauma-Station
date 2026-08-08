@@ -1334,7 +1334,7 @@
   parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule, BaseSyndicateContraband ]
   id: BorgModuleOperative
   name: operative cyborg module
-  description: A module that comes with a pair of syndicate jaws of life, an Emag, an Access Breaker and a syndicate pinpointer. # Goobstation
+  description: A module that comes with a pair of syndicate jaws of life, an Access Breaker and a syndicate pinpointer. # Trauma
   components:
     - type: Sprite
       layers:
@@ -1343,7 +1343,7 @@
     - type: ItemBorgModule
       hands:
       - item: SyndicateJawsOfLife # Trauma - was crowbar
-      - item: Emag
+      # - item: Emag # Trauma
       - item: AccessBreaker
       - item: PinpointerSyndicateNuclear
     - type: BorgModuleIcon
