@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpaceWhale;
+using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
 using Content.Shared.Body;
@@ -29,6 +30,7 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
     [Dependency] private WoundSystem _wound = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
