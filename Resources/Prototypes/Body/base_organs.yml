@@ -164,6 +164,14 @@
   - type: WoundableVisuals
     bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
   - type: BrainSplatterer
+  - type: BadFood
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 20
+      - ReagentId: GreyMatter
+        Quantity: 10
   # </Trauma>
   - type: Organ
     category: Head
