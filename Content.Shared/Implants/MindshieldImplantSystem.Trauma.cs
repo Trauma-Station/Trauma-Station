@@ -6,7 +6,7 @@ namespace Content.Shared.Implants;
 
 public sealed partial class MindshieldImplantSystem
 {
-    [Dependency] private MindShieldSystem _mindShield;
+    [Dependency] private MindShieldSystem _mindShield = default!;
 
     private bool TryPreventMindshield(EntityUid uid, EntityUid implant)
     {
