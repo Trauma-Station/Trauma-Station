@@ -31,7 +31,7 @@ namespace Content.Trauma.Client.Wizard.Teleport
 
         public void Populate()
         {
-            ButtonContainer.DisposeAllChildren();
+            ButtonContainer.RemoveAllChildren();
             AddButtons();
         }
 
