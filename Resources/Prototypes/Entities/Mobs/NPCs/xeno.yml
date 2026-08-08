@@ -14,8 +14,6 @@
       55: Dead
   - type: Stamina
     baseCritThreshold: 150
-  # </Trauma>
-  # <Trauma>
   - type: VentCrawler
   # </Trauma>
   - type: Sprite
