@@ -2,10 +2,13 @@
 
 using System.Text;
 using Content.Client.UserInterface.Controls;
+using Content.Shared.Atmos;
 using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Botany.Components;
+using Content.Shared.Botany.Items.Components;
+using Content.Shared.Botany.Systems;
+using Content.Shared.Botany.Traits.Components;
 using Content.Shared.Random;
-using Content.Trauma.Common.Botany;
-using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 
 namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
@@ -14,241 +17,254 @@ namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 public sealed partial class PlantAnalyzerWindow : FancyWindow
 {
     [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    private BotanySystem _botany = default!;
     private SharedAtmosphereSystem _atmos = default!;
-    private readonly ButtonGroup _buttonGroupTop = new();
+
+    public event Action<PlantAnalyzerModes>? OnSetMode;
+    public event Action<int>? OnSelectGene;
+    public event Action<int>? OnSelectEntry;
+    public event Action? OnDeleteEntry;
+
+    private PlantAnalyzerComponent _comp = default!;
+    private EntityUid? _plant;
+    private EntProtoId? _seed;
+    private int _geneCount = -1;
+    private int _consumeCount = -1;
+    private int _exudeCount = -1;
+    private int _chemicalCount = -1;
 
     private const string IndentedNewline = "\n   ";
-    public PlantAnalyzerModes _internalmode = PlantAnalyzerModes.Scan;
-    public int _internalGeneNumber = 0;
-    public int _internalDatabaseNumber = 0;
-    private List<GeneData> _internalGeneDatabank = new();
-    private List<GasData> _internalConsumeGasesDatabank = new();
-    private List<GasData> _internalExudeGasesDatabank = new();
-    private List<ChemData> _internalChemicalsDatabank = new();
-    private List<RandomPlantMutation> _internalMutationsDatabank = new();
 
-    public PlantAnalyzerWindow(PlantAnalyzerBoundUserInterface owner)
+    public PlantAnalyzerWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
+        _botany = _ent.System<BotanySystem>();
         _atmos = _ent.System<SharedAtmosphereSystem>();
 
         Tabs.OnTabChanged += _ =>
         {
-            if (Tabs.CurrentTab == 0)
-                owner.AdvPressed(PlantAnalyzerModes.Scan);
-            else if (Tabs.CurrentTab == 1)
-                owner.AdvPressed(PlantAnalyzerModes.DeleteMutations);
-            else if (Tabs.CurrentTab == 2)
-                owner.AdvPressed(PlantAnalyzerModes.Extract);
-            else if (Tabs.CurrentTab == 3)
-                owner.AdvPressed(PlantAnalyzerModes.Implant);
+            OnSetMode?.Invoke((PlantAnalyzerModes) Tabs.CurrentTab);
         };
 
-        GeneList.OnItemSelected += args => owner.SetGeneIndex(args.ItemIndex);
-        DatabaseList.OnItemSelected += args => owner.SetDatabaseIndex(args.ItemIndex);
+        GeneList.OnItemSelected += args => OnSelectGene?.Invoke(args.ItemIndex);
 
-        DeleteDatabaseEntryButton.OnPressed += _ => owner.DeleteDatabaseEntry(_internalDatabaseNumber);
-    }
+        // offset individual lists index to shitty per-databank index
+        var consume = _geneCount;
+        var exude = consume + _consumeCount;
+        var chemicals = exude + _exudeCount;
+        GeneDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(args.ItemIndex);
+        ConsumeDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(consume + args.ItemIndex);
+        ExudeDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(exude + args.ItemIndex);
+        ChemicalDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(chemicals + args.ItemIndex);
 
-    public void Populate(PlantAnalyzerCurrentMode msg)
-    {
-        _internalmode = msg.CurrentMode;
-    }
-    public void Populate(PlantAnalyzerCurrentCount msg)
-    {
-        _internalGeneNumber = msg.GeneIndex;
-        _internalDatabaseNumber = msg.DatabaseIndex;
-    }
+        DeleteDatabaseEntryButton.OnPressed += _ => OnDeleteEntry?.Invoke();
 
-    public void Populate(PlantAnalyzerSeedDatabank msg)
-    {
-        _internalGeneDatabank = msg.SeedData;
-        _internalConsumeGasesDatabank = msg.ConsumeGasData;
-        _internalExudeGasesDatabank = msg.ExudeGasData;
-        _internalChemicalsDatabank = msg.ChemicalData;
-    }
-
-    public void PopulateUpdateButtons()
-    {
-        switch (_internalmode)
+        GeneList.Clear();
+        foreach (var entry in SeedData.AllGenes)
         {
-            case PlantAnalyzerModes.Scan:
-                break;
-            case PlantAnalyzerModes.DeleteMutations:
-                break;
-            case PlantAnalyzerModes.Extract:
-                GeneList.Clear();
-                foreach (var entry in SeedDataTypes.IdToString)
-                {
-                    GeneList.AddItem(entry);
-                }
-                break;
-            case PlantAnalyzerModes.Implant:
-                DatabaseList.Clear();
-                foreach (var gene in _internalGeneDatabank)
-                {
-                    int mutationID = gene.GeneID;
-                    int intValue = (int) gene.GeneValue;
-                    SeedDataTypes.SeedDataType mutationType = SeedDataTypes.IdToType[mutationID];
-                    string mutationValue = mutationType switch
-                    {
-                        SeedDataTypes.SeedDataType.Float => $"{gene.GeneValue:F2}",
-                        SeedDataTypes.SeedDataType.Int => $"{(int) gene.GeneValue:D0}",
-                        SeedDataTypes.SeedDataType.HarvestType => Loc.GetString($"plant-analyzer-harvest-{((HarvestType) gene.GeneValue).ToString()}"),
-                        SeedDataTypes.SeedDataType.Bool => gene.GeneValue >= 0.5f ? Loc.GetString("plant-analyzer-boolean-true") : Loc.GetString("plant-analyzer-boolean-false"),
-                        _ => "N/A"
-                    };
-                    DatabaseList.AddItem($"{SeedDataTypes.IdToString[mutationID]}: {mutationValue}");
-                }
-                foreach (var gene in _internalConsumeGasesDatabank)
-                {
-                    var gas = Loc.GetString(_atmos.GetGas(gene.GasID).Name);
-                    DatabaseList.AddItem($"Consume {gas}: {gene.GasValue}");
-                }
-                foreach (var gene in _internalExudeGasesDatabank)
-                {
-                    var gas = Loc.GetString(_atmos.GetGas(gene.GasID).Name);
-                    DatabaseList.AddItem($"Exude {gas}: {gene.GasValue}");
-                }
-                foreach (var gene in _internalChemicalsDatabank)
-                {
-                    DatabaseList.AddItem($"{gene.ChemID}: Min - {gene.ChemValue.Min}, Max - {gene.ChemValue.Max}, Potency Divisor - {gene.ChemValue.PotencyDivisor }, Inherent - {gene.ChemValue.Inherent}");
-                }
-                foreach (var gene in _internalMutationsDatabank)
-                {
-                    DatabaseList.AddItem($"{gene.Name}: Description - {gene.Description}");
-                }
-                foreach (var gene in _internalMutationsDatabank)
-                {
-                    DatabaseList.AddItem($"{gene.Name}: Description - {gene.Description}");
-                }
-                break;
+            GeneList.AddItem(entry.Name);
         }
     }
-    public void Populate(PlantAnalyzerScannedSeedPlantInformation msg)
-    {
-        var target = _ent.GetEntity(msg.TargetEntity);
-        Title = Loc.GetString("plant-analyzer-interface-title");
 
-        if (target == null)
+    public void SetOwner(EntityUid uid)
+    {
+        _comp = _ent.GetComponent<PlantAnalyzerComponent>(uid);
+        Tabs.CurrentTab = (int) _comp.Mode;
+        Update();
+    }
+
+    private void Update()
+    {
+        if (_comp.GeneBank.Count != _geneCount)
         {
-            NoData.Visible = true;
+            _geneCount = _comp.GeneBank.Count;
+            UpdateGenes();
+        }
+        if (_comp.ConsumeGasesBank.Count != _consumeCount)
+        {
+            _consumeCount = _comp.ConsumeGasesBank.Count;
+            UpdateGases(ConsumeDatabaseList, _comp.ConsumeGasesBank, "Consume");
+        }
+        if (_comp.ExudeGasesBank.Count != _exudeCount)
+        {
+            _exudeCount = _comp.ExudeGasesBank.Count;
+            UpdateGases(ExudeDatabaseList, _comp.ExudeGasesBank, "Exude");
+        }
+        if (_comp.ChemicalBank.Count != _chemicalCount)
+        {
+            _chemicalCount = _comp.ChemicalBank.Count;
+            UpdateChemicals();
+        }
+
+        if (_comp.Plant != _plant || _comp.Seed != _seed)
+        {
+            _plant = _comp.Plant;
+            _seed = _comp.Seed;
+            Populate(_plant, _seed);
+        }
+    }
+
+    private void UpdateGenes()
+    {
+        GeneDatabaseList.Clear();
+        foreach (var gene in _comp.GeneBank)
+        {
+            var entry = SeedData.AllGenes[gene.GeneID];
+            var mutationValue = entry.Type switch
+            {
+                SeedDataType.Float => $"{gene.GeneValue:F2}",
+                SeedDataType.Int => $"{(int) gene.GeneValue:D0}",
+                SeedDataType.HarvestType => Loc.GetString($"plant-analyzer-harvest-{((HarvestType) gene.GeneValue).ToString()}"),
+                SeedDataType.Bool => gene.GeneValue == 0f ? "false" : "true",
+                _ => "N/A"
+            };
+            GeneDatabaseList.AddItem($"{entry.Name}: {mutationValue}");
+        }
+    }
+
+    private void UpdateGases(ItemList list, List<GasData> databank, string type)
+    {
+        list.Clear();
+        foreach (var gene in databank)
+        {
+            list.AddItem($"{type} {GasName(gene.GasID)}: {gene.GasValue}");
+        }
+    }
+
+    private void UpdateChemicals()
+    {
+        ChemicalDatabaseList.Clear();
+        foreach (var gene in _comp.ChemicalBank)
+        {
+            var data = gene.ChemValue;
+            ChemicalDatabaseList.AddItem($"{gene.ChemID}: Min - {data.Min}, Max - {data.Max}, Potency Divisor - {data.PotencyDivisor}, Inherent - {data.Inherent}");
+        }
+    }
+
+    public void Populate(EntityUid? uid, EntProtoId? seed)
+    {
+        NoData.Visible = uid == null && seed == null;
+        if (NoData.Visible)
             return;
-        }
-        NoData.Visible = false;
+
+        if (!_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant) ||
+            !_botany.TryGetPlantComponent<PlantDataComponent>(uid, seed, out var data))
+            return;
 
         // Process message fields into strings.
         StringBuilder chemString = new();
-        if (msg.SeedChem != null)
+        if (_botany.TryGetPlantComponent<PlantChemicalsComponent>(uid, seed, out var chems))
         {
-            foreach (var chem in msg.SeedChem)
+            foreach (var chem in chems.Chemicals.Keys)
             {
                 chemString.Append(IndentedNewline);
-                chemString.Append(chem);
+                chemString.Append(_proto.Index(chem).LocalizedName);
             }
         }
 
-        //Funkystation - Fixed to include new gases
         StringBuilder exudeGases = new();
-        if (msg.ExudeGases != null)
+        StringBuilder consumeGases = new();
+        if (_botany.TryGetPlantComponent<PlantConsumeExudeGasComponent>(uid, seed, out var gases))
         {
-            foreach (var gas in msg.ExudeGases)
+            foreach (var gas in gases.ExudeGasses.Keys)
             {
                 exudeGases.Append(IndentedNewline);
-                exudeGases.Append(gas);
+                exudeGases.Append(GasName(gas));
             }
-        }
 
-        StringBuilder consumeGases = new();
-        if (msg.ConsumeGases != null)
-        {
-            foreach (var gas in msg.ConsumeGases)
+            foreach (var gas in gases.ConsumeGasses.Keys)
             {
                 consumeGases.Append(IndentedNewline);
-                consumeGases.Append(gas);
+                consumeGases.Append(GasName(gas));
             }
         }
 
-        if (msg.IsTray)
-            PlantName.Text = Loc.GetString("plant-analyzer-window-label-name-scanned-plant", ("seedName", Loc.GetString(string.IsNullOrEmpty(msg.SeedName) ? "plant-analyzer-unknown-plant" : msg.SeedName)));
-        else
-            PlantName.Text = Loc.GetString("plant-analyzer-window-label-name-scanned-seed", ("seedName", Loc.GetString(string.IsNullOrEmpty(msg.SeedName) ? "plant-analyzer-unknown-plant" : msg.SeedName)));
+        _botany.TryGetPlantComponent<PlantAtmosphericComponent>(uid, seed, out var atmos);
+        _botany.TryGetPlantComponent<PlantGrowthComponent>(uid, seed, out var growth);
+        _botany.TryGetPlantComponent<PlantHarvestComponent>(uid, seed, out var harvest);
+        _botany.TryGetPlantComponent<PlantToxinsComponent>(uid, seed, out var toxins);
+        _botany.TryGetPlantComponent<PlantWeedPestComponent>(uid, seed, out var weeds);
+
+        PlantName.Text = seed is { } id
+            ? $"Scanned seed: {_proto.Index(id).Name}"
+            : $"Scanned plant: {Name(uid)}";
+
         // Basics
-        PlantYield.Text = Loc.GetString("plant-analyzer-plant-yield-text", ("seedYield", $"{msg.SeedYield:D0}"));
-        Potency.Text = Loc.GetString("plant-analyzer-plant-potency-text", ("seedPotency", $"{msg.SeedPotency:F0}"));
-        Repeat.Text = Loc.GetString("plant-analyzer-plant-harvest-text", ("plantHarvestType", Loc.GetString($"plant-analyzer-harvest-{msg.HarvestType}").ToString()));
-        Endurance.Text = Loc.GetString("plant-analyzer-plant-endurance-text", ("seedEndurance", $"{msg.Endurance:F0}"));
-        Chemicals.Text = Loc.GetString("plant-analyzer-plant-chemistry-text", ("seedChem", chemString));
-        ExudeGases.Text = Loc.GetString("plant-analyzer-plant-exude-text", ("gases", exudeGases.Length == 0 ? Loc.GetString("plant-analyzer-plant-gases-none") : exudeGases.ToString()));
-        ConsumeGases.Text = Loc.GetString("plant-analyzer-plant-consume-text", ("gases", consumeGases.Length == 0 ? Loc.GetString("plant-analyzer-plant-gases-none") : consumeGases.ToString()));
-        Lifespan.Text = Loc.GetString("plant-analyzer-plant-lifespan-text", ("lifespan", $"{msg.Lifespan:F1}"));
-        Maturation.Text = Loc.GetString("plant-analyzer-plant-maturation-text", ("maturation", $"{msg.Maturation:F1}"));
-        Production.Text = Loc.GetString("plant-analyzer-plant-production-text", ("production", $"{msg.Production:F1}"));
-        GrowthStages.Text = Loc.GetString("plant-analyzer-plant-growthstages-text", ("growthStages", $"{msg.GrowthStages:D0}"));
+        PlantYield.Text = $"Yield: {plant.Yield}";
+        Potency.Text = $"Potency: {plant.Potency:F0}%";
+        var harvestType = harvest?.HarvestRepeat is { } repeat
+            ? Loc.GetString($"plant-analyzer-harvest-{repeat}")
+            : "N/A";
+        Repeat.Text = $"Harvest type: {harvestType}";
+        Endurance.Text = $"Endurance: {plant.Endurance:F0}";
+        Chemicals.Text = $"Contained substances: {chemString}";
+        var exudeText = exudeGases.Length == 0 ? "None" : exudeGases.ToString();
+        ExudeGases.Text = $"Emitted gases: {exudeText}";
+        var consumeText = consumeGases.Length == 0 ? "None" : consumeGases.ToString();
+        ConsumeGases.Text = $"Consumed gases: {consumeText}";
+        Lifespan.Text = $"Lifespan: {plant.Lifespan:F1}";
+        Maturation.Text = $"Maturation: {plant.Maturation:F1}";
+        Production.Text = $"Production: {plant.Production:F1}";
+        GrowthStages.Text = $"Growth stages: {plant.GrowthStages}";
         // Tolerances
-        NutrientUsage.Text = Loc.GetString("plant-analyzer-tolerance-nutrient-usage", ("nutrientUsage", $"{msg.NutrientConsumption:F2}"));
-        WaterUsage.Text = Loc.GetString("plant-analyzer-tolerance-water-usage", ("waterUsage", $"{msg.WaterConsumption:F2}"));
-        IdealHeat.Text = Loc.GetString("plant-analyzer-tolerance-ideal-heat", ("idealHeat", $"{msg.IdealHeat:F0}"));
-        HeatTolerance.Text = Loc.GetString("plant-analyzer-tolerance-heat-tolerance", ("heatTolerance", $"{msg.HeatTolerance:F1}"));
-        IdealLight.Text = Loc.GetString("plant-analyzer-tolerance-ideal-light", ("idealLight", $"{msg.IdealLight:F1}"));
-        LightTolerance.Text = Loc.GetString("plant-analyzer-tolerance-light-tolerance", ("lightTolerance", $"{msg.LightTolerance:F1}"));
-        ToxinsTolerance.Text = Loc.GetString("plant-analyzer-tolerance-toxin-tolerance", ("toxinsTolerance", $"{msg.ToxinsTolerance:F1}"));
-        LowPressureTolerance.Text = Loc.GetString("plant-analyzer-tolerance-low-pressure", ("lowPressureTolerance", $"{msg.LowPressureTolerance:F1}")); ;
-        HighPressureTolerance.Text = Loc.GetString("plant-analyzer-tolerance-high-pressure", ("highPressureTolerance", $"{msg.HighPressureTolerance:F1}"));
-        PestTolerance.Text = Loc.GetString("plant-analyzer-tolerance-pest-tolerance", ("pestTolerance", $"{msg.PestTolerance:F1}"));
-        WeedTolerance.Text = Loc.GetString("plant-analyzer-tolerance-weed-tolerance", ("weedTolerance", $"{msg.WeedTolerance:F1}"));
+        NutrientUsage.Text = $"Nutrient usage: {growth?.NutrientConsumption ?? 0f:F2}";
+        WaterUsage.Text = $"Water usage: {growth?.WaterConsumption ?? 0f:F2}";
+        ToxinsTolerance.Text = $"Toxins tolerance: {toxins?.ToxinsTolerance:F1}";
+        ToxinUptakeDivisor.Text = $"Toxins resistance: {toxins?.ToxinUptakeDivisor:F1}";
+        LowHeatTolerance.Text = $"Cold tolerance: {atmos?.LowHeatTolerance:F1} K";
+        HighHeatTolerance.Text = $"Heat tolerance: {atmos?.HighHeatTolerance:F1} K";
+        LowPressureTolerance.Text = $"Low pressure tolerance: {atmos?.LowPressureTolerance} kPa";
+        HighPressureTolerance.Text = $"High pressure tolerance: {atmos?.HighPressureTolerance} kPa";
+        PestTolerance.Text = $"Pest tolerance: {weeds?.PestTolerance:F1}";
+        WeedTolerance.Text = $"Weed tolerance: {weeds?.WeedTolerance:F1}";
         // Misc
         StringBuilder mutations = new();
-        if (msg.Mutations.HasFlag(MutationFlags.TurnIntoKudzu))
+        if (_botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed))
         {
             mutations.Append(IndentedNewline);
-            mutations.Append(Loc.GetString("plant-analyzer-mutation-turnintokudzu"));
+            mutations.Append("Kudzufication");
         }
-        if (msg.Mutations.HasFlag(MutationFlags.Seedless))
+        if (_botany.PlantHasComp<PlantTraitSeedlessComponent>(uid, seed))
         {
             mutations.Append(IndentedNewline);
-            mutations.Append(Loc.GetString("plant-analyzer-mutation-seedless"));
+            mutations.Append("Seedless");
         }
-        if (msg.Mutations.HasFlag(MutationFlags.Slip))
+        if (_botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed))
         {
             mutations.Append(IndentedNewline);
-            mutations.Append(Loc.GetString("plant-analyzer-mutation-slip"));
+            mutations.Append("Ligneous");
         }
-        if (msg.Mutations.HasFlag(MutationFlags.Sentient))
+        if (_botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed))
         {
             mutations.Append(IndentedNewline);
-            mutations.Append(Loc.GetString("plant-analyzer-mutation-sentient"));
-        }
-        if (msg.Mutations.HasFlag(MutationFlags.Ligneous))
-        {
-            mutations.Append(IndentedNewline);
-            mutations.Append(Loc.GetString("plant-analyzer-mutation-ligneous"));
-        }
-        if (msg.Mutations.HasFlag(MutationFlags.CanScream))
-        {
-            mutations.Append(IndentedNewline);
-            mutations.Append(Loc.GetString("plant-analyzer-mutation-canscream"));
+            mutations.Append("Mandragora");
         }
 
-        Traits.Text = Loc.GetString("plant-analyzer-plant-mutations-text", ("traits", mutations.ToString()));
+        Traits.Text = $"Mutations: {mutations}";
 
         StringBuilder speciation = new();
-        if (msg.Speciation is null)
+        if (data.MutationPrototypes.Count == 0)
         {
-            speciation.Append("-");
+            speciation.Append('-');
         }
         else
         {
-            foreach (var species in msg.Speciation)
+            foreach (var mutation in data.MutationPrototypes)
             {
                 speciation.Append(IndentedNewline);
-                speciation.Append(Loc.GetString(species));
+                speciation.Append(_proto.Index(mutation).Name);
             }
         }
 
-        PlantSpeciation.Text = Loc.GetString("plant-analyzer-plant-speciation-text", ("speciation", speciation.ToString()));
+        PlantMutations.Text = $"Possible subtypes: {speciation}";
     }
 
+    private new string Name(EntityUid? uid)
+        => _ent.GetComponentOrNull<MetaDataComponent>(uid)?.EntityName ?? string.Empty;
+
+    private string GasName(Gas gas)
+        => Loc.GetString(_atmos.GetGas(gas).Name);
 }

@@ -77,8 +77,8 @@
   id: gluttony
   clauseWeight: -10
   removedComponents:
-  - type: Hunger
-  - type: Thirst
+  - type: Satiation
+    satiations: {}
 
 - type: clause
   id: fearofdrowning

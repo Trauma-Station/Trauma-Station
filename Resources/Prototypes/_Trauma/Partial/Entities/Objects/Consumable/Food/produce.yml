@@ -1,0 +1,265 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: FoodProduceBase
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow minimum
+
+- type: entity
+  id: Log
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 500
+  - type: StaticPrice
+    price: 50
+  - type: ToolRefinable
+    refineResult: !Clear # replace 2 planks with 5
+    - id: MaterialWoodPlank1
+      amount: 5
+
+- type: entity
+  id: SteelLog
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 500 # 5 sheets
+  - type: StaticPrice
+    price: 75
+  - type: ToolRefinable
+    refineResult: !Clear # replace the single steel with 5
+    - id: SheetSteel1
+      amount: 5 # steel costs are so hyperinflated
+
+- type: entity
+  parent:
+  - !Index:-1 DeathNettleDurability
+  id: DeathNettle
+  components:
+  - type: Item
+    shape:
+    - 0,1,0,2
+    - 1,0,1,1
+    storedRotation: 90
+  - type: MeleeWeapon
+    damage:
+      types: !Clear
+        Caustic: 1
+  - !Remove type: Destructible # replaced by durability
+
+- type: entity
+  id: FoodBanana
+  components:
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:AddComponents
+      components:
+      - type: EggFertilizer
+        specialReplacement: MobChickClown
+    entityWhitelist:
+    - MobWhiteRooster
+  - type: Healing # Bananas heal clown car
+    damageContainers:
+    - ClowncarDamageContainer
+    damage:
+      types:
+        Blunt: -50
+        Slash: -50
+        Piercing: -50
+        Ballistic: -50
+        Heat: -10
+        Shock: -10
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+
+- type: entity
+  id: TrashBananaPeel
+  components:
+  - type: StepTrigger
+    triggerGroups:
+      types: [ SlipEntity ]
+  - type: Tag
+    tags:
+    - RotHulkTrash
+
+- type: entity
+  id: TrashBananiumPeel
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/materials.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Materials/materials.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Materials/materials.rsi
+
+- type: entity
+  id: FoodCabbage
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+
+- type: entity
+  parent:
+  - Garlic
+  id: FoodGarlic
+
+- type: entity
+  id: FoodPineapple
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow
+        Slash: 2.5 # but bleeding!
+
+- type: entity
+  id: FoodTomato
+  components:
+  - type: Tag
+    tags:
+    - Tomato
+
+- type: entity
+  id: FoodEggplant
+  components:
+  - type: Tag
+    tags:
+    - EggPlant
+
+- type: entity
+  id: FoodApple
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  - type: Tag
+    tags:
+    - Apple
+
+- type: entity
+  id: FoodGoldenApple
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+        Holy: 5 # lol
+
+- type: entity
+  id: FoodChiliPepper
+  components:
+  - type: Tag
+    tags:
+    - Chili
+
+- type: entity
+  id: FoodChillyPepper
+  components:
+  - type: Tag
+    tags:
+    - Chilly
+
+- type: entity
+  id: FoodPoppy
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Heroin
+        Quantity: 2
+  - type: Tag
+    tags:
+    - Poppy
+
+- type: entity
+  id: FoodGlasstle
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 500 # 5 sheets, same as from welding it
+  - type: ToolRefinable
+    refineResult: !Clear
+    - id: SheetGlass5 # 5x so its not a total waste of time making it
+
+- type: entity
+  id: FoodGatfruit
+  components:
+  - type: Item
+    size: Small
+    sprite: Objects/Specific/Hydroponics/death_nettle.rsi # W speed
+    heldPrefix: produce
+    shape:
+    - 0,1,2,1
+    - 0,0,0,0
+    storedRotation: 270
+    storedOffset: -5,5
+
+- type: entity
+  id: RiceBushel
+  components:
+  - type: Tag
+    tags:
+    - Rice
+
+- type: entity
+  id: FoodWatermelon
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 15 # PvZ parity
+
+- type: entity
+  id: FoodHolymelon
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 15 # PVZ Parity
+        Holy: 10 # really good against devils and... *checks notes* ...devils
+
+- type: entity
+  parent: !Clear
+  - FoodUnperishableInjectableBase # no rotting W poison hoarding
+  id: FoodBungoPit
+
+- type: entity
+  id: FoodPeaPod
+  components:
+  - type: Tag
+    tags:
+    - Peas
+
+- type: entity
+  id: FoodWorldPeas
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - !Remove ReagentId: Pax
+      - ReagentId: Tilenol # replaces pax
+        Quantity: 5
+
+- type: entity
+  id: FoodCherry
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
+
+- type: entity
+  parent: !Clear
+  - FoodUnperishableInjectableBase # basically a seed
+  id: TrashCherryPit
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
+  - type: Item
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi

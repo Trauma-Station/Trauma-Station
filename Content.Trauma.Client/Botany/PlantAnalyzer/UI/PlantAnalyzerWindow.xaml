@@ -28,31 +28,33 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <Label Name="GrowthStages" Margin="0 5 0 5"/>
                     <Label Name="Endurance" Margin="0 5 0 5"/>
                 </BoxContainer>
-                <BoxContainer Name="{Loc 'plant-analyzer-window-tab-tolerances'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
+                <BoxContainer Name="{Loc 'plant-analyzer-window-tab-tolerances'}" Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
                     <Label Name="NutrientUsage" Margin="0 5 0 5"/>
                     <Label Name="WaterUsage" Margin="0 5 0 5"/>
-                    <Label Name="IdealHeat" Margin="0 5 0 5"/>
-                    <Label Name="HeatTolerance" Margin="0 5 0 5"/>
-                    <Label Name="IdealLight" Margin="0 5 0 5"/>
-                    <Label Name="LightTolerance" Margin="0 5 0 5"/>
                     <Label Name="ToxinsTolerance" Margin="0 5 0 5"/>
+                    <Label Name="ToxinUptakeDivisor" Margin="0 5 0 5"/>
+                    <Label Name="LowHeatTolerance" Margin="0 5 0 5"/>
+                    <Label Name="HighHeatTolerance" Margin="0 5 0 5"/>
                     <Label Name="LowPressureTolerance" Margin="0 5 0 5"/>
                     <Label Name="HighPressureTolerance" Margin="0 5 0 5"/>
                     <Label Name="PestTolerance" Margin="0 5 0 5"/>
                     <Label Name="WeedTolerance" Margin="0 5 0 5"/>
                 </BoxContainer>
             </BoxContainer>
-            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-mutations'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
-                <Label Name="PlantSpeciation" Margin="0 5 0 5"/>
+            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-mutations'}" Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
+                <Label Name="PlantMutations" Margin="0 5 0 5"/>
                 <Label Name="Traits" Margin="0 5 0 5"/>
                 <Label Name="ExtraInfo" Margin="0 5 0 5"/>
             </BoxContainer>
-            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-extractor'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
-                <ItemList Name="GeneList" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
+            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-extractor'}" Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
+                <ItemList Name="GeneList" SelectMode="Single" VerticalExpand="True" Margin="0 4"/>
             </BoxContainer>
-            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-databank'}" Orientation="Vertical"  VerticalAlignment="Stretch" Margin="10 0 5 0">
+            <BoxContainer Name="{Loc 'plant-analyzer-window-tab-databank'}" Orientation="Vertical" VerticalAlignment="Stretch" Margin="10 0 5 0">
                 <Button Name="DeleteDatabaseEntryButton" Text="{Loc 'plant-analyzer-delete-entry'}" StyleClasses="OpenLeft"/>
-                <ItemList Name="DatabaseList" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
+                <ItemList Name="GeneDatabaseList" SelectMode="Single" VerticalExpand="True" Margin="0 4"/>
+                <ItemList Name="ConsumeDatabaseList" SelectMode="Single" VerticalExpand="True" Margin="0 4"/>
+                <ItemList Name="ExudeDatabaseList" SelectMode="Single" VerticalExpand="True" Margin="0 4"/>
+                <ItemList Name="ChemicalDatabaseList" SelectMode="Single" VerticalExpand="True" Margin="0 4"/>
             </BoxContainer>
         </TabContainer>
     </GridContainer>

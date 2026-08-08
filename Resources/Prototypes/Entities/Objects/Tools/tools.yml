@@ -4,30 +4,12 @@
   id: Wirecutter
   description: This kills the wire.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 1
-        Piercing: 1
-        Slash: 1
-  # </Trauma>
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/wirecutter_pickup.ogg
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/Items/wirecutter_drop.ogg
-  # Goobstation edit end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
   - type: Tag
     tags:
-    - PlantSampleTaker
     - Wirecutter
-    - DroneUsable # Goobstation
   - type: Sprite
     sprite: Objects/Tools/wirecutters.rsi
     layers:
@@ -35,7 +17,6 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
     - state: cutters-cutty-thingy
   - type: MeleeWeapon
-    animationRotation: -90 # WWDP
     wideAnimationRotation: -90
     damage:
       types:
@@ -62,19 +43,7 @@
       Steel: 100
   - type: StaticPrice
     price: 30
-  - type: Retractor # Shitmed
-    speed: 0.35
-  - type: Hemostat # Shitmed
-    speed: 0.6
-  - type: SurgeryTool # Shitmed
-    startSound:
-      path: /Audio/Items/wirecutter.ogg
-      params:
-        variation: 0.125
-    endSound:
-      path: /Audio/Items/wirecutter.ogg
-      params:
-        variation: 0.125
+  - type: BotanySampleTaker
 
 - type: entity
   name: screwdriver
@@ -83,54 +52,12 @@
   id: BaseScrewdriver # Trauma - moved random sprite and stuff to Screwdriver, this is base
   description: Industrial grade torque in a small screwdriving package.
   components:
-  # <Trauma>
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/screwdriver_pickup.ogg
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/Items/screwdriver_drop.ogg
-  - type: Retractor
-    speed: 0.45
-  - type: Tending
-    speed: 0.65
-  - type: SurgeryTool
-    startSound:
-      collection: Screwdriver
-    endSound:
-      path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.2
-        hard: false
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-  - type: ThrowingAngle
-    angle: -90
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-    removalTime: 1.5
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 8
-        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
-  # </Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
   - type: Tag
     tags:
     - Screwdriver
-    - DroneUsable # Goobstation
   - type: Sprite
     sprite: Objects/Tools/screwdriver.rsi
     layers:
@@ -141,7 +68,6 @@
     sprite: Objects/Tools/screwdriver.rsi
     storedRotation: -90
   - type: MeleeWeapon
-    animationRotation: -90 # WWDP
     wideAnimationRotation: -90
     attackRate: 1
     damage:
@@ -154,15 +80,13 @@
       - Screwing
     useSound:
       collection: Screwdriver
-  # <Trauma> - moved to Screwdriver proper
-  #- type: RandomSprite
-  #  available:
-  #    - enum.DamageStateVisualLayers.Base:
-  #        screwdriver: Rainbow
-  #- type: PhysicalComposition
-  #  materialComposition:
-  #    Steel: 100
-  # </Trauma>
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          screwdriver: Rainbow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
   - type: StaticPrice
     price: 30
 
@@ -172,31 +96,12 @@
   id: Wrench
   description: 'A common tool for assembly and disassembly. Remember: lefty latchy, righty removey.'
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 # ow
-  # </Trauma>
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/wrench_pickup.ogg
-      params:
-        volume: -2
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/Items/wrench_drop.ogg
-      params:
-        volume: -2
-  # Goobstation edit end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wrench_drop.ogg
   - type: Tag
     tags:
     - Wrench
-    - DroneUsable # Goobstation
   - type: Sprite
     sprite: Objects/Tools/wrench.rsi
     state: icon
@@ -206,7 +111,6 @@
       sprite: Objects/Tools/wrench.rsi
       state: storage
   - type: MeleeWeapon
-    animationRotation: 225 # WWDP
     wideAnimationRotation: 135
     attackRate: 1.5
     damage:
@@ -234,20 +138,6 @@
   id: Multitool
   description: An advanced tool to copy, store, and send electrical pulses and signals through wires and machines.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 2 # ow
-  # </Trauma>
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/multitool_pickup.ogg
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/Items/multitool_drop.ogg
-  # Goobstation edit end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/multitool_drop.ogg
@@ -283,7 +173,6 @@
     tags:
       - Multitool
       - DoorElectronicsConfigurator
-      - DroneUsable # Goobstation
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -303,12 +192,6 @@
   id: NetworkConfigurator
   description: A tool for linking devices together. Has two modes, a list mode for mass linking devices and a linking mode for advanced device linking.
   components:
-    # <Trauma> why is this pushed out more than the rest what the fuck
-    - type: DamageOtherOnHit
-      damage:
-        types:
-          Blunt: 1 # ow
-     # </Trauma>
     - type: EmitSoundOnLand
       sound:
         path: /Audio/Items/multitool_drop.ogg
@@ -353,10 +236,6 @@
     - type: GuideHelp
       guides:
       - Networking
-    - type: PhysicalComposition #Goobstation - Recycle update
-      materialComposition:
-        Steel: 25
-        Plastic: 25
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -366,19 +245,6 @@
   id: PowerDrill
   description: A simple powered hand drill.
   components:
-  # <Trauma>
-  - type: Tending
-    speed: 0.75
-  - type: Drill
-    speed: 1
-  - type: SurgeryTool
-    startSound: /Audio/Items/drill_use.ogg
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 2.5
-        Piercing: 2.5
-  # </Trauma>
   - type: Tag
     tags:
     - Powerdrill
@@ -432,8 +298,6 @@
   - type: MeleeWeapon
     wideAnimationRotation: -90
     attackRate: 1.5
-    animationRotation: 90 # WWDP
-    range: 1.4
     damage:
       types:
         Piercing: 10
@@ -446,12 +310,6 @@
   name: RCD
   description: The rapid construction device can be used to quickly place and remove various station structures and fixtures. Requires compressed matter to function.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 # ow
-  # </Trauma>
   - type: RCD
     availablePrototypes:
     - WallSolid
@@ -474,7 +332,7 @@
     - CableTerminal
     - Deconstruct
   - type: LimitedCharges
-    maxCharges: 45
+    maxCharges: 30
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -498,52 +356,6 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.RcdUiKey.Key
-  - type: Tag
-    tags:
-      - DroneUsable # Goobstation
-      - RCD # Trauma
-
-- type: entity
-  id: RPD
-  parent: RCD
-  name: RPD
-  description: The rapid piping device allows for the quick placement and removal of atmospheric-related buildings requires compressive matter to use.
-  components:
-  - type: RCD
-    isRpd: true
-    availablePrototypes:
-    - PipeFourway
-    - PipeStraight
-    - PipeBend
-    - PipeTJunction
-    - OutletInjector
-    - ManualValve
-    - VolumetricPump
-    - PressurePump
-    - VentScrubber
-    - PressureValve
-    - DualPortVent
-    - VentGas
-    - VentPassive
-    - MixerGas
-    - Radiator
-    - RadiatorBend
-    - SignalValve
-    - CanisterPort
-    - FilterGas
-    # <Goobstation>
-    - FilterInline
-    - RadiatorInline
-    - RadiatorInlineBend
-    # </Goobstation>
-    - Deconstruct
-  - type: LimitedCharges
-    maxCharges: 90
-  - type: Sprite
-    sprite: Objects/Tools/rpd.rsi
-  - type: Tag # Trauma - remove RCD tag to prevent revs trolling
-    tags:
-    - DroneUsable
 
 - type: entity
   id: RCDEmpty
@@ -612,8 +424,6 @@
     - Multitool
   - type: Prying
     enabled: false
-  - type: UseDelay # Goobstation - For insta prying
-    delay: 0 # Goobstation - no switch CD
   - type: Tool
     qualities:
       - Screwing
@@ -669,17 +479,10 @@
   id: Shovel
   description: A large tool for digging and moving dirt.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 10 # ow
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/shovel.rsi
     state: icon
   - type: MeleeWeapon
-    animationRotation: -45 # WWDP
     wideAnimationRotation: 45
     damage:
       types:
@@ -703,12 +506,6 @@
   name: rolling pin
   description: A tool used to shape and flatten dough.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 # ow
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/rolling_pin.rsi
     state: icon
@@ -722,7 +519,6 @@
     slots:
     - Belt
   - type: MeleeWeapon
-    animationRotation: -45 # WWDP
     wideAnimationRotation: -135
     damage:
       types:

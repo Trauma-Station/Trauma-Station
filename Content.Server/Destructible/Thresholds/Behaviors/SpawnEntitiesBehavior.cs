@@ -64,7 +64,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                 {
                     var count = minMax.Min >= minMax.Max
                         ? minMax.Min
-                        : system.Random.Next(minMax.Min, minMax.Max + 1);
+                        : system.Random.NextFloat(minMax.Min, minMax.Max + 1);
 
                     if (count == 0)
                         continue;
@@ -85,8 +85,8 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                     {
                         var spawned = SpawnInContainer
                             ? system.EntityManager.SpawnNextToOrDrop(entityId, owner)
-                            : system.EntityManager.SpawnEntity(entityId, position.Offset(GetRandomVector()));
-                        system.StackSystem.SetCount((spawned, null), count);
+                            : system.EntityManager.SpawnEntity(entityId, position.Offset(getRandomVector()));
+                        system.StackSystem.SetCount((spawned, null), (int) count);
 
                         TransferForensics(spawned, system, owner);
                     }
