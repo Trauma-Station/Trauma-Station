@@ -12897,3 +12897,12 @@ Entries:
   id: 1410
   time: '2026-08-08T12:28:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3986
+- author: Aviu
+  changes:
+  - type: Add
+    message: Spies infiltrate the station!
+  - type: Remove
+    message: Thief is dead, spies killed him.
+  id: 1411
+  time: '2026-08-08T13:06:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3943
