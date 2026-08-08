@@ -28,3 +28,12 @@
         - type: RussianAccent
         - type: BackwardsAccent
         - type: OhioAccent
+
+# This makes it so destroying a Chistmas Tree marks you with a kill sign
+- type: entityEffect
+  id: KillSign
+  effects:
+  - !type:AddComponents
+    guidebookText: entity-effect-guidebook-add-killsign
+    components:
+    - type: KillSign
