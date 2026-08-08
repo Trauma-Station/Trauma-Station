@@ -34,7 +34,7 @@
 
 - type: simpleAccent
   id: Demonic
-  replacement: slaughter_demon
+  replacement: SlaughterDemon
   suffix: AccentDemonicSuffix
   suffixChance: 0.15
   uppercase: true
