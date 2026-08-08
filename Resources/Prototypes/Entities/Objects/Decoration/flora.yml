@@ -1,3 +1,10 @@
+- type: entityEffect # This makes it so destroying a Chistmas Tree marks you with a kill sign
+  id: KillSign
+  effects:
+  - !type:AddComponents
+    components:
+    - type: KillSign
+
 - type: entity
   id: BaseRock
   name: boulder
