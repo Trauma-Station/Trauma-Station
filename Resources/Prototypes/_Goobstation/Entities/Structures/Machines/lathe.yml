@@ -103,6 +103,7 @@
     - MiningToolsStatic
     - MiscSignallersStatic
     - CargoStatic
+    - PartsStatic
     dynamicPacks:
     - AdvancedTools
     - Mining
@@ -247,7 +248,6 @@
     runningState: icon
     staticPacks:
     - ServiceBoardsStatic
-    - ServiceBoardsStaticGoob
     - MaterialsStatic
     - LightsStatic
     - ServiceStatic
@@ -257,8 +257,6 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
-    - ServiceBoardsTrauma
-    - ServiceBoardsGoob
     - Translators
     - Janitor
     - Instruments

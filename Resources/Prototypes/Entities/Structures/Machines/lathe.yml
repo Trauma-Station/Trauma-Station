@@ -1,6 +1,6 @@
 - type: entity
   id: BaseLatheNoSilo # Trauma - add NoSilo, BaseLathe has OreSiloClient
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   abstract: true
   name: lathe
   components:
@@ -55,15 +55,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 175
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -318,16 +314,16 @@
     idleState: icon
     runningState: building
     staticPacks:
+    # <Trauma>
+    - SharedBoardsStatic
+    - MedicalBoardsStaticGoob
+    - SecurityBoardsStaticGoob
+    # </Trauma>
     #- ScienceBoardsStatic - Goobstation - Moved to Scifab
     - ServiceBoardsStatic
     - CargoBoardsStatic
     #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
-    #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    # Goobstation Packs
-    - SharedBoardsStatic
-    - MedicalBoardsStaticGoob
-    - SecurityBoardsStaticGoob
-    - ServiceBoardsStaticGoob
+    - EngineeringBoardsStatic
     dynamicPacks:
     # <Trauma>
     - SharedBoards

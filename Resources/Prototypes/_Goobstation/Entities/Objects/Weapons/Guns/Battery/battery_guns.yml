@@ -248,9 +248,9 @@
       autoRechargeRate: 50
 
 - type: entity
-  name: advanced pulse carbine
   parent: WeaponPulseCarbine
   id: WeaponPulseCarbineAdvanced
+  name: advanced pulse carbine
   description: A state-of-the-art pulse carbine. This particular one has an experimental recharging cell.
   components:
   - type: Tag

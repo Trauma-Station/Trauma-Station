@@ -16,8 +16,6 @@
       - Abductor
   - type: Emagged # so cargo orders aren't announced and can bypass alert levels
     emagType: All
-  - type: GlueImmune # magic
-  - type: LubeImmune
   # </Trauma>
   - type: ContentEye
     maxZoom: 8.916104, 8.916104
@@ -33,6 +31,8 @@
     - PreventAccessLogging
     - AllowBiomeLoading
     - NotGhostnadoWarpable
+    - AllowPortalTraversal
+    - PreventPortalCollision
   - type: Input
     context: "aghost"
   - type: Ghost
@@ -126,6 +126,8 @@
   - type: BypassInteractionChecks
   - type: ExplosionResistance
     damageCoefficient: 0
+  - type: GluedImmune
+  - type: LubedImmune
 
 - type: entity
   abstract: true
@@ -133,10 +135,16 @@
   id: BaseAGhostAction
   components:
   - type: Action
-    icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
-    iconOn: { sprite: Structures/Machines/parts.rsi, state: box_2 }
     keywords: [ "AI", "console", "interface" ]
     priority: -10
+  - type: Sprite
+    sprite: Structures/Machines/parts.rsi
+    layers:
+    - state: box_0
+      map: ["enum.ActionVisuals.Icon"]
+    - state: box_2
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
 
 - type: entity
   parent: BaseAGhostAction
@@ -154,10 +162,12 @@
   description: View a Communications Interface.
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
-    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
     keywords: [ "AI", "console", "interface" ]
     priority: -4
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: comms_console
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.CommunicationsConsoleUiKey.Key }
 
@@ -168,10 +178,16 @@
   description: View a Mass Scanner Interface.
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
-    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
     keywords: [ "AI", "console", "interface" ]
     priority: -6
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: mass_scanner
+      map: ["enum.ActionVisuals.Icon"]
+    - state: comms_console
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
 
@@ -191,10 +207,12 @@
   description: View a Crew Monitoring Interface.
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: crew_monitor }
-    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: crew_monitor }
     keywords: [ "AI", "console", "interface" ]
     priority: -8
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: crew_monitor
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
 
@@ -205,9 +223,11 @@
   description: View a Station Records Interface.
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: station_records }
-    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: station_records }
     keywords: [ "AI", "console", "interface" ]
     priority: -7
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: station_records
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.GeneralStationRecordConsoleKey.Key }

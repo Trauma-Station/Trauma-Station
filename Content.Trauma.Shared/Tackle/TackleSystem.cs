@@ -1,16 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Medical.Common.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Gravity;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
@@ -23,12 +26,14 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Tackle;
 
 public sealed partial class TackleSystem : EntitySystem
 {
+    [Dependency] private ISerializationManager _serMan = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private SharedStunSystem _stun = default!;
@@ -44,6 +49,7 @@ public sealed partial class TackleSystem : EntitySystem
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     public override void Initialize()
     {
@@ -72,15 +78,14 @@ public sealed partial class TackleSystem : EntitySystem
 
     private void OnTackle(Entity<TackleModifierComponent> ent, ref TackleEvent args)
     {
-        if (args.Source != null && args.Source != args.User)
-            return;
+        foreach (var mod in ent.Comp.Modifiers)
+        {
+            if (mod.TackleCondition is { } condition &&
+                !_conditions.TryCondition(ent, condition, args.User))
+                continue;
 
-        args.Source = ent;
-        args.Range *= ent.Comp.RangeMultiplier;
-        args.Speed *= ent.Comp.SpeedMultiplier;
-        args.SkillMod += ent.Comp.SkillMod;
-        args.KnockdownTime *= ent.Comp.KnockdownTimeMultiplier;
-        args.StaminaCost *= ent.Comp.StaminaCostMultiplier;
+            args.Sources.Add(mod);
+        }
     }
 
     private void OnLand(Entity<TacklingComponent> ent, ref LandEvent args)
@@ -98,14 +103,19 @@ public sealed partial class TackleSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (!Exists(ent.Comp.Source) || !TryComp(ent.Comp.Source, out TackleModifierComponent? mod) ||
-            !mod.AllowCollision)
+        if (!TryComp(ent, out TacklerComponent? tackler))
+            return;
+
+        if (ent.Comp.Source is not { } source)
+            return;
+
+        if (!source.AllowCollision)
             return;
 
         if (!TryComp(ent, out PhysicsComponent? body))
             return;
 
-        var speed = body.LinearVelocity.Length() * mod.SpeedModMultiplier;
+        var speed = body.LinearVelocity.Length() * source.SpeedModMultiplier * 0.4f;
         if (MathHelper.CloseToPercent(speed, 0f))
             return;
 
@@ -117,13 +127,13 @@ public sealed partial class TackleSystem : EntitySystem
         if (mapA.MapId == mapB.MapId)
         {
             var distance = (mapA.Position - mapB.Position).Length();
-            severity = (mod.MinDistance - distance) * speed;
+            severity = (source.MinDistance - distance) * speed;
             severity = MathF.Max(0f, severity);
         }
 
         if (HasComp<MobStateComponent>(args.Target))
         {
-            if (!HandleMobCollision(ent, args.Target, mod, speed))
+            if (!HandleMobCollision((ent, ent.Comp, tackler), args.Target, source, speed))
                 return;
 
             if (severity == 0f)
@@ -141,24 +151,24 @@ public sealed partial class TackleSystem : EntitySystem
 
         _thrown.StopThrow(ent, args.Component);
 
-        severity *= mod.SeverityModifier;
+        severity *= source.SeverityModifier * 0.2f;
 
-        _dmg.ChangeDamage(ent.Owner, mod.BaseUserDamage * severity, targetPart: TargetBodyPart.Head, canMiss: false);
-        _stun.TryUpdateParalyzeDuration(ent.Owner, TimeSpan.FromSeconds(severity * (mod.BaseUserKnockdownTime + 1f)));
+        _dmg.ChangeDamage(ent.Owner, tackler.BaseUserDamage * source.UserDamageMultiplier * severity, targetPart: TargetBodyPart.Head, canMiss: false);
+        _stun.TryUpdateParalyzeDuration(ent.Owner, TimeSpan.FromSeconds(severity * (tackler.BaseUserKnockdownTime * source.KnockdownTimeMultiplier + 1f)));
     }
 
-    private bool HandleMobCollision(Entity<TacklingComponent> user,
+    private bool HandleMobCollision(Entity<TacklingComponent, TacklerComponent> user,
         EntityUid target,
-        TackleModifierComponent mod,
+        TackleModifier mod,
         float speed)
     {
         if (_standing.IsDown(target))
             return false;
 
-        var ourMod = CalculateModifier(user, out _) + speed + user.Comp.SkillMod;
+        var ourMod = CalculateModifier(user, out _) + speed + mod.SkillMod;
         if (float.IsNaN(ourMod)) // curse of IEEE-754!
         {
-            Log.Error($"Found NaN modifier for user {ToPrettyString(user)} with speed {speed} and mod {user.Comp.SkillMod}!");
+            Log.Error($"Found NaN modifier for user {ToPrettyString(user)} with speed {speed} and mod {mod.SkillMod}!");
             return false;
         }
 
@@ -166,7 +176,7 @@ public sealed partial class TackleSystem : EntitySystem
         RaiseLocalEvent(target, ref stamEv);
         var stamResistMod = stamEv.Cancelled ? 1f : 1f - stamEv.Value;
 
-        var theirMod = CalculateModifier(target, out var canTackle) + stamResistMod * mod.StamResistModifier;
+        var theirMod = CalculateModifier(target, out var canTackle) + stamResistMod * mod.StamResistModifier * 4f;
 
         if (!canTackle)
             return true;
@@ -186,16 +196,16 @@ public sealed partial class TackleSystem : EntitySystem
         var resultAdj = result - 0.5f;
         var invResultAdj = invResult - 0.5f;
 
-        var userKnockdown = mod.BaseUserKnockdownTime * invResultAdj * 0.5f;
+        var userKnockdown = user.Comp2.BaseUserKnockdownTime * mod.UserKnockdownTimeMultiplier * invResultAdj * 0.5f;
 
         if (userKnockdown <= 0f)
             RemCompDeferred<KnockedDownComponent>(user);
         else
             _stun.UpdateKnockdownTime(user.Owner, TimeSpan.FromSeconds(userKnockdown));
 
-        var targetKnockdown = TimeSpan.FromSeconds(mod.BaseTargetKnockdownTime * result);
+        var targetKnockdown = TimeSpan.FromSeconds(user.Comp2.BaseTargetKnockdownTime * mod.TargetKnockdownTimeMultiplier * result);
         if (targetKnockdown > TimeSpan.Zero)
-            _stun.TryKnockdown(target, targetKnockdown, drop: result > mod.DisarmThreshold, stunOnFail: false);
+            _stun.TryKnockdown(target, targetKnockdown, drop: result > mod.DisarmThreshold * 1.5f, stunOnFail: false);
 
         if (resultAdj <= 0f)
             return true;
@@ -203,7 +213,7 @@ public sealed partial class TackleSystem : EntitySystem
         if (mod.GrabOnSuccess)
             _pull.TryStartPull(user, target, grabStageOverride: GrabStage.Hard, force: true);
 
-        var stamDamage = mod.BaseTargetStaminaDamage * resultAdj;
+        var stamDamage = user.Comp2.BaseTargetStaminaDamage * mod.TargetStaminaDamageMultiplier * resultAdj;
         if (stamDamage > 0f)
             _stam.TakeStaminaDamage(target, stamDamage, source: user, ignoreResist: true);
 
@@ -265,47 +275,67 @@ public sealed partial class TackleSystem : EntitySystem
         if (MathHelper.CloseToPercent(len, 0f))
             return false;
 
-        var ev = new TackleEvent(ent.Comp1.Range,
-            ent.Comp1.Speed,
-            ent.Comp1.StaminaCost,
-            ent.Comp1.SkillMod,
-            ent.Comp1.KnockdownTime,
-            ent);
-
+        var ev = new TackleEvent(ent, new());
         RaiseLocalEvent(ent, ref ev);
 
-        if (ev.Source is not { } source || !TryComp(source, out TackleModifierComponent? mod))
+        if (ev.Sources.Count == 0)
             return false;
 
-        if ((ev.Source != ent || ent.Comp1.KnockdownUser) &&
-            ev.KnockdownTime > TimeSpan.Zero && !_stun.TryKnockdown(ent.Owner, ev.KnockdownTime, true, false))
+        var source = ev.Sources.Max();
+
+        if (source?.Priority == null)
             return false;
 
-        if (ev.StaminaCost > 0f)
-            _stam.TakeStaminaDamage(ent, ev.StaminaCost, ignoreResist: true);
+        var copy = new TackleModifier();
+        _serMan.CopyTo(source, ref copy, notNullableOverride: true);
 
-        dir *= ev.Range / len;
+        foreach (var s in ev.Sources)
+        {
+            if (s == source)
+                continue;
+
+            source.Modify(copy);
+        }
+
+        var modifier = CompOrNull<MovementSpeedModifierComponent>(ent)?.SprintSpeedModifier ?? 1f;
+
+        var knockdownTime = ent.Comp1.KnockdownTime * copy.KnockdownTimeMultiplier;
+
+        if (knockdownTime > TimeSpan.Zero && !_stun.TryKnockdown(ent.Owner, knockdownTime, true, false))
+            return false;
+
+        var staminaCost = ent.Comp1.StaminaCost * copy.StaminaCostMultiplier;
+
+        if (staminaCost > 0f)
+            _stam.TakeStaminaDamage(ent, staminaCost, ignoreResist: true);
+
+        var range = ent.Comp1.Range * copy.RangeMultiplier * modifier;
+
+        dir *= Math.Min(range, len) / len;
 
         var tackle = EnsureComp<TacklingComponent>(ent);
         tackle.TackleStartPosition = GetNetCoordinates(ent.Comp2.Coordinates);
-        tackle.Source = source;
-        tackle.SkillMod = ev.SkillMod;
+        tackle.Source = copy;
 
-        ent.Comp1.NextTackle = _timing.CurTime + ent.Comp1.TackleCooldown * mod.CooldownMultiplier;
+        var cd = ent.Comp1.TackleCooldown * copy.CooldownMultiplier;
+
+        ent.Comp1.NextTackle = _timing.CurTime + cd;
 
         Entity<TacklerComponent, TacklingComponent> dirty = (ent, ent.Comp1, tackle);
         Dirty(dirty);
 
+        var speed = ent.Comp1.Speed * copy.SpeedMultiplier * modifier;
+
         _throwing.TryThrow(ent,
             dir,
-            ev.Speed,
+            speed,
             ent,
             pushbackRatio: 0f,
             recoil: false,
             animated: false,
             doSpin: false);
 
-        if (mod.UserEffect is { } effect)
+        if (copy.UserEffect is { } effect)
             _effects.TryApplyEffect(ent, effect, user: ent);
 
         return true;

@@ -54,7 +54,7 @@ public sealed partial class ThirstSystem : EntitySystem
         DirtyFields(uid, component, null, nameof(ThirstComponent.NextUpdateTime), nameof(ThirstComponent.CurrentThirstThreshold), nameof(ThirstComponent.LastThirstThreshold));
 
         TryComp(uid, out MovementSpeedModifierComponent? moveMod);
-            _movement.RefreshMovementSpeedModifiers(uid, moveMod);
+            _movement.RefreshMovementSpeedModifiers((uid, moveMod));
     }
 
     private void OnRefreshMovespeed(EntityUid uid, ThirstComponent component, RefreshMovementSpeedModifiersEvent args)
@@ -148,7 +148,7 @@ public sealed partial class ThirstSystem : EntitySystem
         if (IsMovementThreshold(component.LastThirstThreshold) != IsMovementThreshold(component.CurrentThirstThreshold) &&
                 TryComp(uid, out MovementSpeedModifierComponent? movementSlowdownComponent))
         {
-            _movement.RefreshMovementSpeedModifiers(uid, movementSlowdownComponent);
+            _movement.RefreshMovementSpeedModifiers((uid, movementSlowdownComponent));
         }
 
         // Update UI
@@ -200,11 +200,21 @@ public sealed partial class ThirstSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<ThirstComponent>();
-        while (query.MoveNext(out var uid, out var thirst))
+        // <Trauma> - client only predicts its own entity, moved per-entity logic into a method
+        var now = _timing.CurTime;
+        if (_player.LocalEntity is { } player)
         {
-            if (_timing.CurTime < thirst.NextUpdateTime)
-                continue;
+            if (!_timing.IsFirstTimePredicted || !TryComp<ThirstComponent>(player, out var thirst))
+                return;
+
+            UpdateThirst(player, thirst);
+            return;
+        }
+
+        void UpdateThirst(EntityUid uid, ThirstComponent thirst)
+        {
+            if (now < thirst.NextUpdateTime)
+                return;
 
             thirst.NextUpdateTime += thirst.UpdateRate;
 
@@ -212,10 +222,16 @@ public sealed partial class ThirstSystem : EntitySystem
             var calculatedThirstThreshold = GetThirstThreshold(thirst, thirst.CurrentThirst);
 
             if (calculatedThirstThreshold == thirst.CurrentThirstThreshold)
-                continue;
+                return;
 
             thirst.CurrentThirstThreshold = calculatedThirstThreshold;
             UpdateEffects(uid, thirst);
         }
+        var query = EntityQueryEnumerator<ThirstComponent>();
+        while (query.MoveNext(out var uid, out var thirst))
+        {
+            UpdateThirst(uid, thirst);
+        }
+        // </Trauma>
     }
 }

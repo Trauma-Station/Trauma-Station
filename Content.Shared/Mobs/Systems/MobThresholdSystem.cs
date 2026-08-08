@@ -371,7 +371,7 @@ public sealed partial class MobThresholdSystem : EntitySystem
         _mobStateSystem.UpdateMobState(target, mobState, origin);
     }
 
-    public void UpdateAlerts(EntityUid target, MobState currentMobState, MobThresholdsComponent? threshold = null, // Trauma - made public
+    private void UpdateAlerts(EntityUid target, MobState currentMobState, MobThresholdsComponent? threshold = null,
         DamageableComponent? damageable = null)
     {
         if (!Resolve(target, ref threshold, ref damageable))

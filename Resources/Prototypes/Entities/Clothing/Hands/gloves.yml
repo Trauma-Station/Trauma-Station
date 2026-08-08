@@ -494,7 +494,6 @@
     mustBeEquippedToUse: true
     heavyStaminaCost: 3 # goob edit
     canWideSwing: false # Trauma
-
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue
@@ -538,8 +537,8 @@
   description: High-quality rubber gloves, squeaky to do some cleaning!
   components:
   # <Trauma> - todo above done...
-  - type: LubeImmune
-  - type: GlueImmune
+  - type: LubedImmune
+  - type: GluedImmune
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/janitor.rsi

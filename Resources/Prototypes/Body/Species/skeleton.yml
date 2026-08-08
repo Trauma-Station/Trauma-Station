@@ -78,6 +78,7 @@
   parent:
   - AppearanceSkeletonPerson
   - BaseSpeciesMob
+  - MobFlammable
   id: MobSkeletonPerson
   name: Urist McBones
   components:
@@ -116,16 +117,9 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Critical
-      150: Dead
+      100: Dead
   - type: TransferMindOnGib
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 150
-      behaviors:
-      - !type:GibBehavior
+  # Trauma - removed Destructible
   - type: SlowOnDamage
     speedModifierThresholds:
       60: 0.9
@@ -188,6 +182,16 @@
           probability: 0.5
   - type: FireVisuals
     alternateState: Standing
+  - type: Flammable
+    minIgnitionTemperature: 873.15 # Lower bound of when bone begins to burn. These skeletons are ancient so this is probably accurate. Currently does nothing.
+  - type: Temperature
+  - type: TemperatureDamage
+    heatDamageThreshold: 373.15 # Beyond boiling point bone begins to slowly fracture and shrink, even though it doesn't burn till about 600 C
+    coldDamageThreshold: 0
+    heatDamage:
+      types:
+        Heat: 0.1 # bones don't burn easily.
+        Blunt: 0.5 #oof ouch oof my bones are micro-fracturing!!!
   - type: FlashImmunity
     showInExamine: false
   - type: Instrument
@@ -219,19 +223,26 @@
   id: OrganSkeletonPerson
   abstract: true
   suffix: SkeletonPerson
-  # <Shitmed>
+  # <Trauma>
   components:
   - type: Inorganic
-  # </Shitmed>
+  # </Trauma>
 
 - type: entity
   parent: OrganSkeletonPerson
   id: OrganSkeletonPersonExternal
   abstract: true
   components:
-  # <Shitmed>
+  # <Trauma>
   - type: BodyPart
-  # </Shitmed>
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 150 # ME FEMUR ACK ACK!
+      behaviors:
+      - !type:GibBehavior
+  # </Trauma>
   - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
   - type: VisualOrgan
@@ -240,6 +251,7 @@
   - type: VisualOrganMarkings
     markingData:
       group: Skeleton
+  - type: GibbableOrgan
 
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganSkeletonPersonExternal ]
@@ -248,12 +260,14 @@
 - type: entity
   parent: [ OrganBaseHead, OrganSkeletonPersonExternal ]
   id: OrganSkeletonPersonHead
-  # <Trauma>
   components:
+  # <Trauma>
   - type: Construction
     graph: SpiritCandle
     node: start
   # </Trauma>
+  - type: Sprite
+    state: skull_icon
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganSkeletonPersonExternal ]

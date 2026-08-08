@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Spoken by renegades, and frontiermen.
 - type: language
   id: Miltech
   speech:
-    color: "#0a4b0f" # Goob Edit - Unique from Tradeband
+    color: "#0a4b0f"
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 3

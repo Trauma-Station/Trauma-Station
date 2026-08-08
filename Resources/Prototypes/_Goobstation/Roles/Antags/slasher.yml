@@ -8,6 +8,15 @@
   objective: roles-antag-slasher-objectives
   guides: [ Slasher ]
 
+- type: antagSmite
+  id: Slasher
+  antag: Slasher
+  rule: SlasherRule
+  ruleComp: SlasherRule
+  icon:
+    sprite: _Goobstation/Objects/Specific/Slasher/machete.rsi
+    state: icon
+
 - type: antagSpecifier
   id: Slasher
   spawnerPrototype: SpawnPointGhostSlasher
@@ -25,6 +34,21 @@
   - type: SlasherPossession
   - type: SlasherBloodTrail
   - type: SlasherIncorporeal
+    incorporealComponents:
+    - type: PhaseShifted
+      movementSpeedBuff: 3.5
+    - type: Stealth
+      lastVisibility: -1.5
+      maxVisibility: -1.5
+      thermalsImmune: true
+    - type: MovementIgnoreGravity
+    - type: SpecialBreathingImmunity
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SupermatterImmune
+    statusEffects:
+    - StatusEffectMuted
+    - StatusEffectPressureImmunity
   - type: SlasherSoulSteal
   - type: SlasherSummonMeatSpike
   - type: BreathingImmunity

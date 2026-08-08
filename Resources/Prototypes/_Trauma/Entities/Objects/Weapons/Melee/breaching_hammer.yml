@@ -26,8 +26,8 @@
     walkModifier: 0.6
     sprintModifier: 0.6
   - type: ClothingSpeedModifier
-    walkModifier: 0.6
-    sprintModifier: 0.6
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: IncreaseDamageOnWield
     damage:
       types:
@@ -41,7 +41,7 @@
     useSound: /Audio/Items/crowbar.ogg
   - type: ToolTileCompatible
   - type: Prying
-    speedModifier: 0.8
+    speedModifier: 1.2
     pryPowered: true
     useSound: /Audio/Items/jaws_pry.ogg
   - type: UseDelay

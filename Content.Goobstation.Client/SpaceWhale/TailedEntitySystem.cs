@@ -9,22 +9,14 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        TransformSystem.OnGlobalMoveEvent += OnMove;
-
-        SubscribeLocalEvent<TailedEntityComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
-        SubscribeLocalEvent<TailedEntitySegmentComponent, AfterAutoHandleStateEvent>(OnSegmentAfterAutoHandleState);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAfterAutoHandleState(Entity<TailedEntityComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (_spriteQuery.TryGetComponent(ent.Owner, out var sprite))
             sprite.RenderOrder = (uint) ent.Comp.TailSegments.Count + 5;
     }
 
+    [SubscribeLocalEvent]
     private void OnSegmentAfterAutoHandleState(Entity<TailedEntitySegmentComponent> ent,
         ref AfterAutoHandleStateEvent args)
     {
@@ -41,13 +33,13 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
             ent.Comp.Order == ent.Comp.SegmentCount - 1 ? tailState : segmentState);
     }
 
-    private void OnMove(ref MoveEvent args)
+    [SubscribeLocalEvent]
+    private void OnMove(Entity<TailedEntityComponent> ent, ref MoveEvent args)
     {
         if (args.OldPosition == args.NewPosition && args.OldRotation == args.NewRotation ||
-            TerminatingOrDeleted(args.Entity) ||
-            !TryComp(args.Entity, out TailedEntityComponent? tailed) || tailed.TailSegments.Count == 0)
+            TerminatingOrDeleted(args.Entity) || ent.Comp.TailSegments.Count == 0)
             return;
 
-        UpdateTailPositions((args.Entity, tailed, args.Entity.Comp1));
+        UpdateTailPositions((ent, ent.Comp, args.Entity.Comp1));
     }
 }

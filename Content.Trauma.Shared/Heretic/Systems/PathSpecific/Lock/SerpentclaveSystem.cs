@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Singularity;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Jittering;
@@ -21,6 +20,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Doors;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -40,6 +40,7 @@ public sealed partial class SerpentclaveSystem : EntitySystem
     [Dependency] private SharedJitteringSystem _jitter = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedComplexJointVisualsSystem _joint = default!;
 
     public override void Initialize()
     {
@@ -242,9 +243,12 @@ public sealed partial class SerpentclaveSystem : EntitySystem
 
         var dir = (targetPos - projPos).Normalized();
 
-        var joint = EnsureComp<ComplexJointVisualsComponent>(proj);
-        joint.Data[GetNetEntity(ent)] =
-            new ComplexJointVisualsData("grapple", ent.Comp.JointSprite);
+        var data = new ComplexJointVisualsData("grapple", ent.Comp.JointSprite, null)
+        {
+            ShouldCollide = false,
+            ReverseBeam = true,
+        };
+        _joint.CreateJoint(ent, proj, data);
 
         _gun.ShootProjectile(proj, dir, Vector2.Zero, ent, ent);
         _gun.SetTarget(proj, target, out _);

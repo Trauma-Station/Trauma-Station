@@ -19,6 +19,9 @@
     refineResult:
     - id: FoodMeatFish
       amount: 2
+  - type: Tag
+    tags:
+    - Fish
 
 - type: entity
   abstract: true

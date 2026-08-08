@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Areas;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -14,6 +15,9 @@ namespace Content.Trauma.Shared.Weather;
 [AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class WeatherEffectsComponent : Component
 {
+    [DataField]
+    public EntityCondition[]? Conditions;
+
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
 

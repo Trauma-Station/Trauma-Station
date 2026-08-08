@@ -6,6 +6,12 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+  - type: HideableFoliage
+  # </Trauma>
   - type: PlacementReplacement
     key: web
   - type: MeleeSound
@@ -15,7 +21,7 @@
           "/Audio/Weapons/slash.ogg"
   - type: Sprite
     sprite: Structures/floor_web.rsi
-    drawdepth: WallMountedItems
+    drawdepth: Overdoors # Trauma
   - type: Appearance
   - type: Clickable
   - type: Transform
@@ -24,13 +30,6 @@
   - type: Damageable
     damageModifierSet: Wood
   - type: Injurable
-  - type: Temperature
-  - type: TemperatureDamage
-    heatDamage:
-      types:
-        Heat: 5
-    coldDamage: {}
-    coldDamageThreshold: 0
   - type: Flammable
     fireSpread: true
     damage:
@@ -76,14 +75,14 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWebSilk:
-            min: 0
-            max: 1
+      # - !type:SpawnEntitiesBehavior # Trauma, Lag prevention, todo, add way to get silk without webs
+      #   spawn:
+      #     MaterialWebSilk:
+      #       min: 0
+      #       max: 1
   - type: SpeedModifierContacts
-    walkSpeedModifier: 0.5
-    sprintSpeedModifier: 0.5
+    walkSpeedModifier: 0.35 # Trauma, was 5
+    sprintSpeedModifier: 0.35 # Trauma, was 5
     ignoreWhitelist:
       components:
       - IgnoreSpiderWeb

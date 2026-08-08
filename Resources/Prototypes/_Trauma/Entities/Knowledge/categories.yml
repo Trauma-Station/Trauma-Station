@@ -12,16 +12,6 @@
 - type: entity
   abstract: true
   parent: BaseKnowledge
-  id: BasePhysicalKnowledge
-  components:
-  - type: Knowledge
-    category: Physical
-    costs: [0, 2, 4]
-    color: "#16e720"
-
-- type: entity
-  abstract: true
-  parent: BaseKnowledge
   id: BaseWarKnowledge
   components:
   - type: Knowledge

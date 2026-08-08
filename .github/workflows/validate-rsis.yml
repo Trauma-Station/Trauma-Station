@@ -5,20 +5,31 @@ on:
     branches: [ master, staging, stable ]
   merge_group:
   pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'merge_group' }}
 
 jobs:
   validate_rsis:
     name: Validate RSIs
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
+    - name: Check for changed RSIs
+      uses: dorny/paths-filter@v4
+      with:
+        filters: |
+          rsi:
+          - '**/*.rsi'
+          - '**/*.rsi/**'
     - name: Setup Submodule
+      if: steps.filter.outputs.rsi == 'true'
       run: git submodule update --init
     - name: Pull engine updates
+      if: steps.filter.outputs.rsi == 'true'
       uses: Trauma-Station/submodule-dependency@v0.2.2
       with:
         map: |
@@ -26,8 +37,10 @@ jobs:
             "QuietToolbox": "RobustToolbox"
           }
     - name: Install Python dependencies
+      if: steps.filter.outputs.rsi == 'true'
       run: |
         pip3 install --ignore-installed --user pillow jsonschema
     - name: Validate RSIs
+      if: steps.filter.outputs.rsi == 'true'
       run: |
         python3 RobustToolbox/Schemas/validate_rsis.py Resources/

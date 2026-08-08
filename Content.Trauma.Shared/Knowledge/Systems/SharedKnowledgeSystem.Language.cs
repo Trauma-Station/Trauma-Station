@@ -185,6 +185,8 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
+        // always start with spoken language regardless of knowledge
+        _language.EnsureValidLanguage(ent.AsNullable());
         if (GetContainer(ent.Owner) is not { } brain)
         {
             // just use mob yml languages

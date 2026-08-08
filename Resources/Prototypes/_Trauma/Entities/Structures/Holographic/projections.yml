@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: HolosignSecurity
+  id: HolosignMedical
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Holo/medical.rsi
+    state: icon
+  - type: PointLight
+    color: "#57b8f0"

@@ -15,7 +15,7 @@
   - type: ChangePrefixAfterDelay
     delay: 1
   - type: FireProtection
-    reduction: 0.15
+    reduction: 0.75
   - type: Armor
     traumaDeductions:
       Dismemberment: 1

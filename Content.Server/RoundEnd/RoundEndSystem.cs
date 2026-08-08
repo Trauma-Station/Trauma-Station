@@ -1,6 +1,6 @@
 using System.Threading;
 using Content.Server.Administration.Logs;
-using Content.Server.AlertLevel;
+using Content.Shared.AlertLevel;
 using Content.Shared.CCVar;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
@@ -139,22 +139,24 @@ namespace Content.Server.RoundEnd
         /// <param name="text">text in the announcement of shuttle calling</param>
         /// <param name="name">name in the announcement of shuttle calling</param>
         /// <param name="cantRecall">if the station shouldn't be able to recall the shuttle</param>
-        public void RequestRoundEnd(EntityUid? requester = null, EntityUid? machine = null, bool checkCooldown = true, string text = "round-end-system-shuttle-called-announcement", string name = "round-end-system-shuttle-sender-announcement", bool cantRecall = false)
+        public void RequestRoundEnd(EntityUid? requester = null, EntityUid? machine = null, bool checkCooldown = true, string text = "round-end-system-shuttle-called-announcement", string name = "round-end-system-shuttle-sender-announcement", bool cantRecall = false,
+            string callerName = "", string reason = "") // Trauma
         {
             var duration = DefaultCountdownDuration;
 
             if (requester != null)
             {
                 var stationUid = _stationSystem.GetOwningStation(requester.Value);
-                if (TryComp<AlertLevelComponent>(stationUid, out var alertLevel))
+                if (TryComp<AlertLevelComponent>(stationUid, out var alertLevelComp))
                 {
                     duration = ProtoMan
-                        .Index<AlertLevelPrototype>(AlertLevelSystem.DefaultAlertLevelSet)
-                        .Levels[alertLevel.CurrentLevel].ShuttleTime;
+                        .Index(alertLevelComp.CurrentAlertLevel)
+                        .ShuttleTime;
                 }
             }
 
-            RequestRoundEnd(duration, requester, machine, checkCooldown, text, name, cantRecall);
+            RequestRoundEnd(duration, requester, machine, checkCooldown, text, name, cantRecall,
+                callerName: callerName, reason: reason); // Trauma
         }
 
         /// <summary>
@@ -167,7 +169,8 @@ namespace Content.Server.RoundEnd
         /// <param name="text">text in the announcement of shuttle calling</param>
         /// <param name="name">name in the announcement of shuttle calling</param>
         /// <param name="cantRecall">if the station shouldn't be able to recall the shuttle</param>
-        public void RequestRoundEnd(TimeSpan countdownTime, EntityUid? requester = null, EntityUid? machine = null, bool checkCooldown = true, string text = "round-end-system-shuttle-called-announcement", string name = "round-end-system-shuttle-sender-announcement", bool cantRecall = false)
+        public void RequestRoundEnd(TimeSpan countdownTime, EntityUid? requester = null, EntityUid? machine = null, bool checkCooldown = true, string text = "round-end-system-shuttle-called-announcement", string name = "round-end-system-shuttle-sender-announcement", bool cantRecall = false,
+            string callerName = "", string reason = "") // Trauma
         {
             if (_gameTicker.RunLevel != GameRunLevel.InRound)
                 return;
@@ -203,6 +206,10 @@ namespace Content.Server.RoundEnd
             }
 
             _chatSystem.DispatchGlobalAnnouncement(Loc.GetString(text,
+                // <Trauma>
+                ("caller", callerName),
+                ("reason", reason),
+                // </Trauma>
                 ("time", time),
                 ("units", Loc.GetString(units))),
                 Loc.GetString(name),
@@ -237,7 +244,12 @@ namespace Content.Server.RoundEnd
             }
         }
 
-        public void CancelRoundEndCountdown(EntityUid? requester = null, EntityUid? machine = null, bool forceRecall = false)
+        public void CancelRoundEndCountdown(EntityUid? requester = null, EntityUid? machine = null, bool forceRecall = false,
+            // <Trauma>
+            string text = "round-end-system-shuttle-recalled-announcement",
+            string callerName = "",
+            string reason = "")
+            // <Trauma>
         {
             if (_gameTicker.RunLevel != GameRunLevel.InRound)
                 return;
@@ -257,7 +269,7 @@ namespace Content.Server.RoundEnd
             else
                 _adminLogger.Add(LogType.ShuttleRecalled, LogImpact.High, $"Shuttle recalled{what}");
 
-            _chatSystem.DispatchGlobalAnnouncement(Loc.GetString("round-end-system-shuttle-recalled-announcement"),
+            _chatSystem.DispatchGlobalAnnouncement(Loc.GetString(text, ("caller", callerName), ("reason", reason)), // Trauma - use text, pass caller and reason
                 Loc.GetString("round-end-system-shuttle-sender-announcement"), false, colorOverride: Color.Gold);
 
             _audio.PlayGlobal("/Audio/Announcements/shuttlerecalled.ogg", Filter.Broadcast(), true);

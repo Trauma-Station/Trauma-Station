@@ -11,8 +11,5 @@ public sealed partial class TacklingComponent : Component
     public NetCoordinates TackleStartPosition;
 
     [DataField, AutoNetworkedField]
-    public EntityUid Source;
-
-    [DataField, AutoNetworkedField]
-    public float SkillMod;
+    public TackleModifier? Source;
 }

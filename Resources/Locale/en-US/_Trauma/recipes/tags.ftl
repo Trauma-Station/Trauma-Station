@@ -28,6 +28,7 @@ construction-graph-tag-signaltrigger = a signal trigger
 construction-graph-tag-butt = a butt
 construction-graph-tag-cyber-butt = an ipc groin
 construction-graph-tag-egg = any egg
+construction-graph-tag-egg-sack = any egg sack
 
 # weapons
 construction-graph-tag-improvised-bow = an improvised bow

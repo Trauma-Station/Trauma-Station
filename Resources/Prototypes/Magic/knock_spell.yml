@@ -4,25 +4,30 @@
   name: Knock
   description: Opens nearby doors and lockers. # Goob edit
   components:
-  - type: Action
-    raiseOnUser: true # Goobstation
-    checkCanInteract: false # Goobstation
-    useDelay: 10
-    itemIconStyle: BigAction
-    sound: !type:SoundPathSpecifier
-      path: /Audio/Magic/knock.ogg
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
-      state: knock
-  - type: InstantAction
-    event: !type:KnockSpellEvent
-      range: 5 # Trauma edit
-  - type: Magic # Goobstation
+  # <Trauma>
+  - type: Magic
     requiresSpeech: true
     school: Transmutation
   - type: ActionUpgrade
     effectedLevels:
       2: ActionKnockII
       3: ActionKnockIII
+  # </Trauma>
+  - type: Action
+    # <Trauma>
+    raiseOnUser: true
+    checkCanInteract: false
+    # </Trauma>
+    useDelay: 10
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/knock.ogg
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi # Trauma
+    layers:
+    - state: knock
+  - type: InstantAction
+    event: !type:KnockSpellEvent
+      range: 5 # Trauma
   - type: SpeakOnAction
     sentence: action-speech-spell-knock

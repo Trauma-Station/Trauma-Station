@@ -51,7 +51,11 @@
         Structural: 40
   - type: Item
     shape:
-    - 0,0,4,3
+    - 1,0,2,5
+    - 0,0,0,2
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/fireaxe.rsi
     size: Ginormous
   - type: Clothing
     sprite: Objects/Weapons/Melee/fireaxe.rsi
@@ -99,7 +103,15 @@
         # Heat: 10
         Slash: 10
         Structural: 40 # Trauma, was 80
-  # <Trauma>
+  # </Trauma>
+  - type: Item
+    shape:
+    - 1,0,2,5
+    - 0,0,0,2
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+    size: Ginormous
   - type: IgniteOnMeleeHit
     fireStacks: 2 # Trauma - was 1
   - type: Sprite

@@ -7,7 +7,9 @@
   components:
   - type: FingerprintMask
   - type: TackleModifier
-    skillMod: 1
+    modifiers:
+    - priority: 20
+      skillMod: 1
   - type: GuideHelp
     guides:
     - Tackle
@@ -65,10 +67,11 @@
         Piercing: 0.9
         Shock: 0.75
   - type: TackleModifier
-    staminaCostMultiplier: 1.2
-    knockdownTimeMultiplier: 1.25
-    rangeMultiplier: 1.65
-    skillMod: 3
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 1.2
+      knockdownTimeMultiplier: 1.25
+      skillMod: 3
 
 - type: entity
   parent: [BaseSyndicateContraband, ClothingHandsGlovesGorilla]
@@ -79,9 +82,12 @@
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
   - type: TackleModifier
-    grabOnSuccess: true
-    staminaCostMultiplier: 0.4
-    skillMod: 5
+    modifiers:
+    - priority: 20
+      grabOnSuccess: true
+      staminaCostMultiplier: 0.4
+      knockdownTimeMultiplier: 1.25
+      skillMod: 5
 
 - type: entity
   parent: [BaseGlovesTackle, BaseSecurityContraband]
@@ -105,12 +111,14 @@
   - type: Fiber
     fiberMaterial: fibers-red
   - type: TackleModifier
-    staminaCostMultiplier: 2
-    knockdownTimeMultiplier: 2
-    speedMultiplier: 2.25
-    rangeMultiplier: 3
-    minDistance: 3
-    skillMod: 7
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 2
+      knockdownTimeMultiplier: 2
+      speedMultiplier: 2.25
+      minDistance: 3
+      rangeMultiplier: 3
+      skillMod: 7
 
 - type: entity
   parent: BaseGlovesTackle
@@ -134,12 +142,14 @@
   - type: Fiber
     fiberMaterial: fibers-blue
   - type: TackleModifier
-    staminaCostMultiplier: 0.3
-    knockdownTimeMultiplier: 0.5
-    rangeMultiplier: 1.2
-    speedMultiplier: 1
-    minDistance: 1
-    skillMod: -2
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 0.3
+      knockdownTimeMultiplier: 0.5
+      rangeMultiplier: 1.2
+      speedMultiplier: 1
+      minDistance: 1
+      skillMod: -2
 
 - type: entity
   parent: [BaseGlovesTackle, BaseMinorContraband]
@@ -163,10 +173,12 @@
   - type: Fiber
     fiberMaterial: fibers-brown
   - type: TackleModifier
-    staminaCostMultiplier: 1.2
-    knockdownTimeMultiplier: 1.75
-    minDistance: 1.5
-    skillMod: -1
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 1.2
+      knockdownTimeMultiplier: 1.75
+      minDistance: 1.5
+      skillMod: -1
 
 - type: entity
   parent: ClothingHandsBase

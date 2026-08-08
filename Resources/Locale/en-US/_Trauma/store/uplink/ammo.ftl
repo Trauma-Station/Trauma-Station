@@ -10,14 +10,11 @@ uplink-caseless-pistol-tranq-desc = A magazine with 10 rounds of tranquilizer am
 uplink-caseless-pistol-poison-name = Pistol Magazine (.25 caseless toxin)
 uplink-caseless-pistol-poison-desc = A magazine with 10 rounds of poisonous ammunition loaded with Lexorin. Takes four shots and a short time to kill. For use with the Cobra.
 
-uplink-magazine-bulldog-pellet-name-trauma = Drum Magazine (12 gauge)
+uplink-magazine-bulldog-pellet-name-trauma = Drum Magazine (12 gauge shot)
 
-uplink-magazine-bulldog-slug-name-trauma = Drum Magazine (12 gauge)
+uplink-magazine-bulldog-slug-name-trauma = Drum Magazine (12 gauge slug)
 
-uplink-mosin-ammo-name-trauma = Ammunition Box (.30 rifle)
+uplink-pistol-magazine-c20r-name-trauma = SMG Magazine (9mm)
 
-uplink-estoc-ammo-name-trauma = Rifle Magazine (.20 rifle)
-
-uplink-sniper-ammo-name-trauma = Ammunition Box (.60 antimaterial)
-
-uplink-pistol-magazine-c20r-name-trauma = SMG Magazine (.35 auto)
+uplink-speedloader-magnum-name = Speedloader (.45 magnum AP)
+uplink-speedloader-magnum-desc = Revolver speedloader with 6 armor-piercing cartridges, capable of ignoring armor entirely. Compatible with the Python.

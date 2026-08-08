@@ -5,13 +5,16 @@ using Content.Client.Construction.UI;
 using Content.Goobstation.Shared.Factory;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge.Systems;
+using Robust.Shared.Configuration;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;
 
 public sealed partial class ConstructorBUI : BoundUserInterface
 {
+    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     private readonly CommonKnowledgeSystem _knowledge = default!;
     private readonly ConstructionSystem _construction;
@@ -38,6 +41,8 @@ public sealed partial class ConstructorBUI : BoundUserInterface
     {
         base.Open();
 
+        var skillsEnabled = _cfg.GetCVar(TraumaCVars.SkillsEnabled);
+
         // god BLESS whoever made construction ui for having it so decoupled <3
         _menu = this.CreateWindow<ConstructionMenu>();
         PopulateCategories();
@@ -54,6 +59,7 @@ public sealed partial class ConstructorBUI : BoundUserInterface
                 _menu.SetRecipeInfo(proto.Name ?? ent.Name, proto.Description ?? ent.Description, ent,
                     proto.Type != ConstructionType.Item, true, // TODO: favourites
                     true,
+                    skillsEnabled,
                     proto);
 
                 GenerateStepList(proto);
@@ -122,7 +128,7 @@ public sealed partial class ConstructorBUI : BoundUserInterface
 
         _recipes.Clear();
         var skills = _knowledge.GetSkillMasteries(user);
-        var useKnowledge = _construction.IsKnowledgeHolder(user);
+        var useKnowledge = _construction.UsesKnowledge(user);
         // FUCK YOU, copy pasta
         bool CanUnderstand(ConstructionPrototype recipe)
         {

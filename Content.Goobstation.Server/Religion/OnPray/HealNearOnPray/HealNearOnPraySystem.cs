@@ -7,7 +7,7 @@ using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Revenant.Components;
 using Content.Trauma.Common.Silicon;

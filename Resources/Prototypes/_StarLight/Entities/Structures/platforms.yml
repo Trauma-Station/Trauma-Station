@@ -87,7 +87,7 @@
       fix2:
         shape:
           !type:PhysShapeAabb
-          bounds: "0.49,0.49,0.36,-0.49"
+          bounds: "0.36,-0.36,0.49,0.49"
         density: 1500
         mask:
         - TableMask
@@ -109,7 +109,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,0.49,-0.36,0.36"
+          bounds: "-0.49,0.36,-0.36,0.49"
         density: 1500
         mask:
         - TableMask
@@ -145,79 +145,34 @@
 # New Dark
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatform
   id: CMPlatformDark
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
     state: platform_dark
-  - type: Climbable
   - type: ChildEntities
     childPrototypes:
-      - prototype: OverlayCMPlatformDark
+    - prototype: OverlayCMPlatformDark
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatformCorner
   id: CMPlatformCornerDark
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
-      fix2:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "0.49,0.49,0.36,-0.49"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
     state: platform_corner_dark
-  - type: Climbable
   - type: ChildEntities
     childPrototypes:
-      - prototype: OverlayCMPlatformCornerDark
+    - prototype: OverlayCMPlatformCornerDark
 
 - type: entity
-  parent: CMPlatformBase
+  parent: RMCPlatformCornerSmall
   id: RMCPlatformCornerSmallDark
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,0.49,-0.36,0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
     state: platform_deco_dark
-  - type: Climbable
   - type: ChildEntities
     childPrototypes:
-      - prototype: OverlayRMCPlatformCornerSmallDark
+    - prototype: OverlayRMCPlatformCornerSmallDark
 
 - type: entity
   parent: CMPlatform
@@ -242,79 +197,34 @@
 # New Wood
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatform
   id: CMPlatformWood
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
     state: platform_wood
-  - type: Climbable
   - type: ChildEntities
     childPrototypes:
-      - prototype: OverlayCMPlatformWood
+    - prototype: OverlayCMPlatformWood
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatformCorner
   id: CMPlatformCornerWood
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
-      fix2:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "0.49,0.49,0.36,-0.49"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
     state: platform_corner_wood
-  - type: Climbable
   - type: ChildEntities
     childPrototypes:
-      - prototype: OverlayCMPlatformCornerWood
+    - prototype: OverlayCMPlatformCornerWood
 
 - type: entity
-  parent: CMPlatformBase
+  parent: RMCPlatformCornerSmall
   id: RMCPlatformCornerSmallWood
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,0.49,-0.36,0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
     state: platform_deco_wood
-  - type: Climbable
   - type: ChildEntities
     childPrototypes:
-      - prototype: OverlayRMCPlatformCornerSmallWood
+    - prototype: OverlayRMCPlatformCornerSmallWood
 
 - type: entity
   parent: CMPlatform

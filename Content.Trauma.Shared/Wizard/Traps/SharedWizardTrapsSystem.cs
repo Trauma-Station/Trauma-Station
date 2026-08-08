@@ -2,14 +2,13 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Effects;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Magic;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
@@ -18,7 +17,6 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
-using Content.Shared.Traits.Assorted;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
@@ -49,6 +47,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -268,10 +267,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
 
         Appearance.SetData(uid, TrapVisuals.Alpha, 0.8f);
 
-        var fading = EnsureComp<FadingTimedDespawnComponent>(uid);
-        fading.Lifetime = 0.5f;
-        fading.FadeOutTime = 1f;
-        Dirty(uid, fading);
+        _fadeDespawn.FadeDespawnEntity(uid, TimeSpan.FromSeconds(0.5f), TimeSpan.FromSeconds(1f));
     }
 
     private void OnExamineAttempt(Entity<WizardTrapComponent> ent, ref ExamineAttemptEvent args)

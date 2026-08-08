@@ -14,9 +14,10 @@ public sealed partial class SharedEntityConditionsSystem : EntitySystem, IEntity
     /// </summary>
     /// <param name="target">Target entity we're checking conditions on</param>
     /// <param name="conditions">Conditions we're checking</param>
+    /// <param name="sourceEnt">An optional "source entity" which is checking the condition on the entity this is being raised to.
+    /// Sometimes needed for additional context with conditions.</param>
     /// <returns>Returns true if all conditions return true, false if any fail</returns>
-    public bool TryConditions(EntityUid target, EntityCondition[]? conditions,
-        EntityUid? user = null) // Trauma
+    public bool TryConditions<T>(EntityUid target, T[]? conditions, EntityUid? sourceEnt = null) where T : EntityCondition
     {
         // If there's no conditions we can't fail any of them...
         if (conditions == null)
@@ -24,7 +25,7 @@ public sealed partial class SharedEntityConditionsSystem : EntitySystem, IEntity
 
         foreach (var condition in conditions)
         {
-            if (!TryCondition(target, condition, user)) // Trauma - pass user
+            if (!TryCondition(target, condition, sourceEnt))
                 return false;
         }
 
@@ -36,9 +37,10 @@ public sealed partial class SharedEntityConditionsSystem : EntitySystem, IEntity
     /// </summary>
     /// <param name="target">Target entity we're checking conditions on</param>
     /// <param name="conditions">Conditions we're checking</param>
+    /// <param name="sourceEnt">An optional "source entity" which is checking the condition on the entity this is being raised to.
+    /// Sometimes needed for additional context with conditions.</param>
     /// <returns>Returns true if any conditions return true</returns>
-    public bool TryAnyCondition(EntityUid target, EntityCondition[]? conditions,
-        EntityUid? user = null) // Trauma
+    public bool TryAnyCondition<T>(EntityUid target, T[]? conditions, EntityUid? sourceEnt = null) where T : EntityCondition
     {
         // If there's no conditions we can't meet any of them...
         if (conditions == null)
@@ -46,7 +48,7 @@ public sealed partial class SharedEntityConditionsSystem : EntitySystem, IEntity
 
         foreach (var condition in conditions)
         {
-            if (TryCondition(target, condition, user)) // Trauma - pass user
+            if (TryCondition(target, condition, sourceEnt))
                 return true;
         }
 
@@ -58,19 +60,20 @@ public sealed partial class SharedEntityConditionsSystem : EntitySystem, IEntity
     /// </summary>
     /// <param name="target">Target entity we're checking conditions on</param>
     /// <param name="condition">Condition we're checking</param>
+    /// <param name="sourceEnt">An optional "source entity" which is checking the condition on the entity this is being raised to.
+    /// Sometimes needed for additional context with conditions.</param>
     /// <returns>Returns true if we meet the condition and false otherwise</returns>
-    public bool TryCondition(EntityUid target, EntityCondition condition,
-        EntityUid? user = null) // Trauma
+    public bool TryCondition<T>(EntityUid target, T condition, EntityUid? sourceEnt = null) where T : EntityCondition
     {
-        return condition.Inverted != condition.RaiseEvent(target, user, this); // Trauma - pass user
+        return condition.Inverted != condition.RaiseEvent(target, this, sourceEnt);
     }
 
     /// <summary>
     /// Raises a condition to an entity. You should not be calling this unless you know what you're doing.
     /// </summary>
-    public bool RaiseConditionEvent<T>(EntityUid target, EntityUid? user, T effect) where T : EntityConditionBase<T> // Trauma - added user
+    public bool RaiseConditionEvent<T>(EntityUid target, T effect, EntityUid? sourceEnt) where T : EntityConditionBase<T>
     {
-        var effectEv = new EntityConditionEvent<T>(effect, user); // Trauma - pass user
+        var effectEv = new EntityConditionEvent<T>(effect, sourceEnt);
         RaiseLocalEvent(target, ref effectEv);
         return effectEv.Result;
     }
@@ -96,7 +99,7 @@ public abstract partial class EntityConditionSystem<T, TCon> : EntitySystem wher
 /// </summary>
 public interface IEntityConditionRaiser
 {
-    bool RaiseConditionEvent<T>(EntityUid target, EntityUid? user, T effect) where T : EntityConditionBase<T>; // Trauma - added user
+    bool RaiseConditionEvent<T>(EntityUid target, T effect, EntityUid? sourceEnt) where T : EntityConditionBase<T>;
 }
 
 /// <summary>
@@ -105,13 +108,13 @@ public interface IEntityConditionRaiser
 /// <typeparam name="T">The Condition wer are raising.</typeparam>
 public abstract partial class EntityConditionBase<T> : EntityCondition where T : EntityConditionBase<T>
 {
-    public override bool RaiseEvent(EntityUid target, EntityUid? user, IEntityConditionRaiser raiser) // Trauma - added user
+    public override bool RaiseEvent(EntityUid target, IEntityConditionRaiser raiser, EntityUid? sourceEnt)
     {
         if (this is not T type)
             return false;
 
         // If the result of the event matches the result we're looking for then we pass.
-        return raiser.RaiseConditionEvent(target, user, type); // Trauma - pass user
+        return raiser.RaiseConditionEvent(target, type, sourceEnt);
     }
 }
 
@@ -124,7 +127,7 @@ public abstract partial class EntityCondition
     /// <summary>
     /// Check this condition on a target.
     /// </summary>
-    public abstract bool RaiseEvent(EntityUid target, EntityUid? user, IEntityConditionRaiser raiser); // Trauma - added use
+    public abstract bool RaiseEvent(EntityUid target, IEntityConditionRaiser raiser, EntityUid? sourceEnt);
 
     /// <summary>
     /// If true, invert the result. So false returns true and true returns false!
@@ -144,7 +147,7 @@ public abstract partial class EntityCondition
 /// <param name="Condition">The Condition we're checking</param>
 [ByRefEvent]
 [DataRecord]
-public partial record struct EntityConditionEvent<T>(T Condition, EntityUid? user) where T : EntityConditionBase<T> // Trauma - added user
+public partial record struct EntityConditionEvent<T>(T Condition, EntityUid? SourceEnt) where T : EntityConditionBase<T>
 {
     /// <summary>
     /// The result of our check, defaults to false if nothing handles it.
@@ -153,12 +156,13 @@ public partial record struct EntityConditionEvent<T>(T Condition, EntityUid? use
     public bool Result;
 
     /// <summary>
-    /// Trauma - The user that caused this condition to be checked.
-    /// </summary>
-    public readonly EntityUid? User = user;
-
-    /// <summary>
     /// The Condition being raised in this event
     /// </summary>
     public readonly T Condition = Condition;
+
+    /// <summary>
+    /// An optional "source entity" which is checking the condition on the entity this is being raised to.
+    /// Sometimes needed for additional context with conditions.
+    /// </summary>
+    public readonly EntityUid? SourceEnt = SourceEnt;
 }

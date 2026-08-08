@@ -46,7 +46,7 @@
 - type: listing
   id: UplinkObservationKitSyndie
   name: uplink-observation-kit-name
-  description: uplink-observation-kit-desc-trauma
+  description: uplink-observation-kit-desc
   icon:
     sprite: Objects/Storage/boxicons.rsi
     state: tracks

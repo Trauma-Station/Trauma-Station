@@ -421,6 +421,21 @@
     - component: Grammar
 
 - type: polymorph
+  id: ShapeshiftAshSpiritLock
+  configuration:
+    entity: MobGhoulAshSpiritLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    revertConfirmationPopup: false
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
   id: ShapeshiftRustWalkerLock
   configuration:
     entity: MobGhoulRustWalkerLock

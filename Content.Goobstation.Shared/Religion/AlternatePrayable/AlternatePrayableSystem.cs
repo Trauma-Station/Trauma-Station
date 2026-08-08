@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Shared.Bible.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Item;
 using Content.Shared.Popups;

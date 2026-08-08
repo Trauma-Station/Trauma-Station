@@ -10,29 +10,27 @@ public sealed partial class SpeedModifierOrganSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SpeedModifierOrganComponent, OrganEnabledEvent>(OnEnabled);
-        SubscribeLocalEvent<SpeedModifierOrganComponent, OrganDisabledEvent>(OnDisabled);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEnabled(Entity<SpeedModifierOrganComponent> ent, ref OrganEnabledEvent args)
     {
         var comp = EnsureComp<MovementSpeedModifierComponent>(args.Body);
         comp.BaseWeightlessAcceleration += ent.Comp.WeightlessAcceleration;
+        comp.BaseWeightlessModifier += ent.Comp.WeightlessModifier;
+        comp.BaseWeightlessFriction += ent.Comp.WeightlessFriction;
         Dirty(args.Body, comp);
-        _movement.RefreshWeightlessModifiers(ent.Owner);
+        _movement.RefreshWeightlessModifiers(args.Body);
     }
 
+    [SubscribeLocalEvent]
     private void OnDisabled(Entity<SpeedModifierOrganComponent> ent, ref OrganDisabledEvent args)
     {
         if (TerminatingOrDeleted(args.Body) || !TryComp<MovementSpeedModifierComponent>(args.Body, out var comp))
             return;
 
         comp.BaseWeightlessAcceleration -= ent.Comp.WeightlessAcceleration;
+        comp.BaseWeightlessModifier -= ent.Comp.WeightlessModifier;
+        comp.BaseWeightlessFriction -= ent.Comp.WeightlessFriction;
         Dirty(args.Body, comp);
-        _movement.RefreshWeightlessModifiers(ent.Owner);
+        _movement.RefreshWeightlessModifiers(args.Body);
     }
 }

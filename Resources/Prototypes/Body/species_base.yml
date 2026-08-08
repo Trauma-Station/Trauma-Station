@@ -44,8 +44,6 @@
       100: SoftCrit
       150: Critical
       200: Dead
-  - type: Destructible
-    thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
   - type: CounterAttacker
   - type: KnowledgeHolder
@@ -122,9 +120,6 @@
     - Dementia
     # </Trauma>
     - Electrocution
-    - RatvarianLanguage
-    - PressureImmunity
-    - Muted
     - Pacified
     - Flashed
     - Adrenaline
@@ -213,6 +208,7 @@
   - MobAtmosStandard
   - MobFlammable
   - BaseSpeciesMob
+  #- BaseMobDestructible # Trauma - parts handle gibbing
   id: BaseSpeciesMobOrganicUnperishable # Trauma - made unperishable for vox
   save: false
   components:
@@ -228,6 +224,22 @@
     - Bacterial
     - Parasite
   - type: VampireDrainable
+  - type: Destructible # only ashing, gibbing is still handled by torso
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
   # </Trauma>
   - type: Hunger
   - type: Thirst
@@ -248,11 +260,9 @@
   - type: Fingerprint
   - type: Blindable
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
   - type: TemperatureDamage
     heatDamageThreshold: 325
-    coldDamageThreshold: 260
+    coldDamageThreshold: 273.15
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants

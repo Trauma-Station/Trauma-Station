@@ -130,3 +130,8 @@
   id: NightVision
   kind: source
   path: "/Textures/Shaders/nightvision.swsl"
+
+- type: shader
+  id: Sharpness
+  kind: source
+  path: "/Textures/Shaders/sharpness.swsl"

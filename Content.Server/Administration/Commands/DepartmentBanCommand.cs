@@ -23,6 +23,7 @@ public sealed partial class DepartmentBanCommand : IConsoleCommand
 
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
+        string? webhookReason = null; // Trauma
         string target;
         string department;
         string reason;
@@ -53,6 +54,12 @@ public sealed partial class DepartmentBanCommand : IConsoleCommand
                 }
 
                 break;
+            // <Trauma>
+            case 6:
+                webhookReason = args[5];
+                // fallthrough, idiots never heard of if statements
+                goto case 4;
+            // </Trauma>
             case 5:
                 target = args[0];
                 department = args[1];
@@ -79,6 +86,7 @@ public sealed partial class DepartmentBanCommand : IConsoleCommand
 
         if (!_protoManager.TryIndex<DepartmentPrototype>(department, out var departmentProto))
         {
+            shell.WriteError($"Department {department} does not exist!"); // Trauma
             return;
         }
 
@@ -93,6 +101,7 @@ public sealed partial class DepartmentBanCommand : IConsoleCommand
         var targetHWid = located.LastHWId;
 
         var banInfo = new CreateRoleBanInfo(reason);
+        banInfo.WithWebhookReason(webhookReason); // Trauma
         if (minutes > 0)
             banInfo.WithMinutes(minutes);
         banInfo.AddUser(targetUid, located.Username);
@@ -137,6 +146,7 @@ public sealed partial class DepartmentBanCommand : IConsoleCommand
             3 => CompletionResult.FromHint(Loc.GetString("cmd-roleban-hint-3")),
             4 => CompletionResult.FromHintOptions(durOpts, Loc.GetString("cmd-roleban-hint-4")),
             5 => CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-roleban-hint-5")),
+            6 => CompletionResult.FromHint("[webhook reason override]"), // Trauma
             _ => CompletionResult.Empty
         };
     }

@@ -4,6 +4,20 @@
   name: recycler
   description: A large crushing machine used to recycle small items inefficiently. There are lights on the side.
   components:
+  # <Trauma>
+  - type: EntityEffectOnEmagged
+    effects:
+    - !type:AddComponents
+      components:
+      - type: DamageContacts
+        damageSound:
+          path: /Audio/Effects/saw.ogg
+          params:
+            volume: -3
+        damage:
+          types:
+            Slash: 20
+  # </Trauma>
   - type: AmbientSound
     enabled: false
     volume: -8
@@ -52,9 +66,9 @@
     noRot: false
   - type: Sprite
     drawdepth: Doors
-    sprite: Structures/Machines/recycling.rsi
+    sprite: Structures/Machines/recycler.rsi
     layers:
-    - state: grinder-o0
+    - state: recycler-o0
       map: ["enum.RecyclerVisualLayers.Main"]
   - type: Appearance
   - type: RecyclerVisuals

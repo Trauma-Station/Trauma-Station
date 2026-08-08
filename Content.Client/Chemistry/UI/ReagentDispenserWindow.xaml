@@ -61,7 +61,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </BoxContainer>
         <SplitContainer Orientation="Vertical"
                         HorizontalExpand="True"
-                        VerticalExpand="True">
+                        VerticalExpand="True"
+                        MouseFilter="Ignore">
             <ScrollContainer HScrollEnabled="False"
                              HorizontalExpand="True"
                              VerticalExpand="True"

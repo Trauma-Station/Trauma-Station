@@ -2,8 +2,9 @@
 
 # major
 - type: entity
-  parent: BaseAntagGhostRoleRule
-  id: SlaughterDemonSummon
+  abstract: true
+  parent: BaseGameRule
+  id: BaseSlaughterDemonRule
   components:
   - type: AntagSpawner
     prototype: BaseMobSlaughterDemon
@@ -23,11 +24,22 @@
     - !type:NestedEffect
       proto: SlaughterDemonSkills
 
+- type: entity
+  parent: BaseSlaughterDemonRule
+  id: SlaughterDemonRule
+  components:
+  - type: SlaughterDemonRule
+
+- type: entity
+  parent: [ SlaughterDemonRule, BaseAntagGhostRoleRule ]
+  id: SlaughterDemonSummon
+
 # laughter
 - type: entity
-  parent: SlaughterDemonSummon
-  id: LaughterDemonSummon
+  parent: BaseSlaughterDemonRule
+  id: LaughterDemonRule
   components:
+  - type: LaughterDemonRule
   - type: AntagSpawner
     prototype: MobLaughterDemon
   - type: AntagSelection
@@ -38,6 +50,10 @@
   - type: AntagObjectives
     objectives:
     - SlaughterHugAndTickleObjective
+
+- type: entity
+  parent: [ LaughterDemonRule, BaseAntagGhostRoleRule ]
+  id: LaughterDemonSummon
 
 # midround
 - type: entity

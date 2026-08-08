@@ -9,6 +9,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
+using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Mobs.Components;
@@ -47,6 +48,7 @@ public sealed partial class PullingSystem
     [Dependency] private SharedStaminaSystem _stamina = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
 
     public const float NudgeImpulse = 2f;
 
@@ -316,7 +318,7 @@ public sealed partial class PullingSystem
         _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
 
         _blocker.UpdateCanMove(pullable);
-        _modifierSystem.RefreshMovementSpeedModifiers(puller);
+        _modifierSystem.RefreshMovementSpeedModifiers(puller.Owner);
 
         var stageKey = puller.Comp.GrabStage.ToString().ToLower();
         var pullerName = Identity.Entity(puller, EntityManager);
@@ -359,11 +361,11 @@ public sealed partial class PullingSystem
         var delta = newVirtualItemsCount - virtualItemsCount;
 
         // Adding new virtual items
-        if (delta > 0)
+        if (delta > 0 && (_handsQuery.TryComp(puller, out var hands) || puller.Comp.NeedsHands))
         {
             for (var i = 0; i < delta; i++)
             {
-                if (!_handsSystem.TryGetEmptyHand(puller.Owner, out _))
+                if (!_handsSystem.TryGetEmptyHand((puller.Owner, hands), out _))
                 {
                     _popup.PopupClient(Loc.GetString("popup-grab-need-hand"), puller, puller, PopupType.Medium);
 

@@ -15,6 +15,7 @@ using Robust.Shared.Timing;
 using System.Linq;
 // </Trauma>
 using System.Numerics;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
@@ -64,6 +65,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
     [Dependency] private ISerializationManager _seriMan = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedGunSystem _gunSystem = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -84,7 +86,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     //[Dependency] private ExamineSystemShared _examine= default!; // Trauma - unused now
-    [Dependency] private TargetSystem _target = default!;
+    [Dependency] private AliveHumanoidTargetSystem _target = default!;
 
     private static readonly ProtoId<TagPrototype> InvalidForGlobalSpawnSpellTag = "InvalidForGlobalSpawnSpell";
 
@@ -231,14 +233,14 @@ public abstract partial class SharedMagicSystem : EntitySystem
             return;
         }
 
-        if (requiresSpeech && HasComp<MutedComponent>(args.Performer)) // Goob edit
+        if (requiresSpeech && !_actionBlocker.CanSpeak(args.Performer)) // Trauma - use requiresSpeech from above
             hasReqs = false;
 
         if (hasReqs)
             return;
 
         args.Cancelled = true;
-        _popup.PopupClient(Loc.GetString("spell-requirements-failed-speech"), args.Performer, args.Performer); // Goob edit
+        _popup.PopupEntity(Loc.GetString("spell-requirements-failed-speech"), args.Performer, args.Performer); // Trauma - added -speech
 
         // TODO: Pre-cast do after, either here or in SharedActionsSystem
     }
@@ -625,7 +627,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
 
         ev.Handled = true;
 
-        var allHumans = _target.GetAliveHumans();
+        var allHumans = _target.GetMinds();
 
         foreach (var human in allHumans)
         {

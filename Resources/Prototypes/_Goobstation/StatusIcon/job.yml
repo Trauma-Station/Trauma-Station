@@ -38,7 +38,6 @@
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: CommandMaid
-  allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
@@ -46,7 +45,6 @@
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: PartyMaker
-  allowSelection: false
 
 - type: jobIcon
   parent: JobIcon
@@ -54,4 +52,3 @@
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: SecurityClown
-  allowSelection: false

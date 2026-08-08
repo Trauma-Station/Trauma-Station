@@ -3,7 +3,7 @@
 #chrono/future soldier voidsuit
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitChronolegioneer
   name: futuristic helmet
   description: The helmet of the fighters of the future, designed for special timeflow operations.
@@ -49,7 +49,7 @@
 # cybersun stealth
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCybersunStealth
   suffix: stealth
   name: cybersun stealth hardsuit helmet
@@ -78,7 +78,7 @@
 # cybersun dreadnought
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitDreadnought
   name: Cybersun Dreadnought suit helmet
   description: A helmet, looking at this you wonder if there anyone alive.
@@ -116,7 +116,7 @@
 
 # Security
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetVoidsuitSecurity
   name: security hardsuit helmet
   description: A well-built faceplate attached to the security hardsuit.
@@ -155,7 +155,7 @@
 
 # Head of Security
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitHeadOfSecurityExperimental
   name: head of security's advanced hardsuit helmet
   description: Security hardsuit helmet with the latest top secret NT-HUD software. This one seems more durable than stand issue helmets.
@@ -189,7 +189,7 @@
 # Nanorep catalog Hardsuit
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitExperimentalNanorep
   name: "NTX5-Mirrorduss helmet"
   description: A dark green helmet with glowing cyan nodes, a mirrored visor, and a mounted side light.
@@ -230,12 +230,12 @@
         Radiation: 0.7
         Caustic: 0.7
   - type: FireProtection
-    reduction: 0.4
+    reduction: 1
 
 # singuloth head
 
 - type: entity
-  parent: [ClothingHeadHardsuitWithLightBase, BaseMagicalContraband]
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseMagicalContraband ]
   id: ClothingHeadSinguloth
   name: singuloth knight's helm
   description: An adamantium helmet from the chapter of the Singuloth Knights. It shines with a holy aura
@@ -265,7 +265,7 @@
         Heat: -1.2
         Radiation: 0
   - type: FireProtection
-    reduction: 0.4
+    reduction: 1
   - type: FlashImmunity
   - type: FlashSoundSuppression
 

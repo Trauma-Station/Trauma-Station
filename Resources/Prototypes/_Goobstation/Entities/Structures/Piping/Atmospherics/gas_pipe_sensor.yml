@@ -6,7 +6,7 @@
   suffix: SM hot
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-sm-hot-loop
+    localizedLabel: gas-pipe-sensor-sm-hot-loop
 
 - type: entity
   parent: GasPipeSensor
@@ -14,4 +14,4 @@
   suffix: SM cold
   components:
   - type: Label
-    currentLabel: gas-pipe-sensor-sm-cold-loop
+    localizedLabel: gas-pipe-sensor-sm-cold-loop

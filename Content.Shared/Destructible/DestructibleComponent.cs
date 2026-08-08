@@ -10,7 +10,7 @@ namespace Content.Shared.Destructible;
 ///     When attached to an <see cref="Robust.Shared.GameObjects.EntityUid"/>, allows it to take damage
 ///     and triggers thresholds when reached.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent] // Trauma - kill access
 [NetworkedComponent, AutoGenerateComponentState] // Trauma
 public sealed partial class DestructibleComponent : Component
 {
@@ -18,7 +18,8 @@ public sealed partial class DestructibleComponent : Component
     /// A list of damage thresholds for the entity;
     /// includes their triggers and resultant behaviors
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(DamageThresholdsSerializer))]
+    [AlwaysPushInheritance]
     public List<DamageThreshold> Thresholds = new();
 
     /// <summary>

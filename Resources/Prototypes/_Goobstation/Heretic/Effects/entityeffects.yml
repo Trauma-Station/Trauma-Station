@@ -42,7 +42,7 @@
   conditions:
   - !type:WhitelistCondition
     whitelist:
-      tags:
+      components:
       - Wall
   - !type:TryMakeRustWallCondition
   effects:
@@ -206,3 +206,22 @@
   - !type:TriggerCosmicMark
   - !type:ModifyParalysis
     time: 2
+
+- type: entityEffect
+  id: CosmicDash
+  conditions:
+  effects:
+  - !type:Emote
+    emote: Flip
+  - !type:PlaySoundEffect
+    positional: false
+    sound: /Audio/_Goobstation/Heretic/cosmic_energy.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectProjectileImmunity
+    time: 0.5
+
+- type: entityCondition
+  id: CosmicFieldNearby
+  condition: !type:AnyNearbyCondition
+    compName: CosmicField
+    range: 0.1

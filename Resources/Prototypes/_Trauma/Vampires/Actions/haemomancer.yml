@@ -9,9 +9,9 @@
   components:
   - type: Action
     useDelay: 30
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_claws
+  - type: Sprite
+    layers:
+    - state: vampire_claws
   - type: InstantAction
     event: !type:OnRetractableItemActionEvent
   - type: RetractableItemAction
@@ -33,9 +33,9 @@
   components:
   - type: Action
     # useDelay: 30
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_tendrils
+  - type: Sprite
+    layers:
+    - state: blood_tendrils
   - type: TargetAction
     range: 10
   - type: WorldTargetAction
@@ -58,9 +58,9 @@
   components:
   - type: Action
     useDelay: 60
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_barrier
+  - type: Sprite
+    layers:
+    - state: blood_barrier
   - type: TargetAction
     range: 5
   - type: EntityTargetAction
@@ -84,9 +84,9 @@
   components:
   - type: Action
     useDelay: 30
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_pool
+  - type: Sprite
+    layers:
+    - state: blood_pool
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -105,9 +105,9 @@
   components:
   - type: Action
     useDelay: 20
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: predator_sense
+  - type: Sprite
+    layers:
+    - state: predator_sense
   - type: InstantAction
     event: !type:PredatorSensesActionEvent
   - type: UserInterface
@@ -125,9 +125,9 @@
   components:
   - type: Action
     useDelay: 200
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_spikes
+  - type: Sprite
+    layers:
+    - state: blood_spikes
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -149,9 +149,9 @@
   components:
   - type: Action
     useDelay: 10
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_bringers_rite
+  - type: Sprite
+    layers:
+    - state: blood_bringers_rite
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
@@ -181,9 +181,10 @@
         targetEffects:
         - !type:ModifyBloodLevel
           amount: -10
-        - !type:EvenHealthChange
+        - !type:HealthChange
           damage:
-            Brute: 5
+            types:
+              Slash: 5
         - !type:SpawnParticles
           particleProto: BloodParticles
     offToggle:

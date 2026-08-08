@@ -3,7 +3,7 @@ using Content.Server.Administration;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Administration;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
 
@@ -38,7 +38,7 @@ public sealed partial class AddActionCommand : LocalizedEntityCommands
         }
 
         if (!_prototypeManager.TryIndex<EntityPrototype>(args[1], out var proto) ||
-            !proto.HasComponent<ActionComponent>())
+            !proto.HasComp<ActionComponent>(EntityManager.ComponentFactory)) // Trauma - use factory variant
         {
             shell.WriteError(Loc.GetString("cmd-addaction-action-not-found", ("action", args[1])));
             return;
@@ -62,8 +62,9 @@ public sealed partial class AddActionCommand : LocalizedEntityCommands
         if (args.Length != 2)
             return CompletionResult.Empty;
 
+        var actionName = EntityManager.ComponentFactory.CompName<ActionComponent>(); // Trauma
         var actionPrototypes = _prototypeManager.EnumeratePrototypes<EntityPrototype>()
-            .Where(p => p.HasComponent<ActionComponent>())
+            .Where(p => p.HasComp(actionName)) // Trauma - use actionName
             .Select(p => p.ID)
             .Order();
 

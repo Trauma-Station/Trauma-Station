@@ -497,8 +497,8 @@
     equipDelay: 3
     unequipDelay: 3
   - type: IngestionBlocker
-  - type: AddAccentClothing
-    accent: MumbleAccent
+  - type: MumbleAccent
+    relayAccent: true
   - type: EmoteBlocker
     blocksCategories:
     - Vocal
@@ -550,8 +550,8 @@
   - type: Clothing
     sprite: Clothing/Mask/cluwne.rsi
   - type: Unremoveable
-  - type: AddAccentClothing
-    accent: StutteringAccent
+  - type: StutteringAccent
+    relayAccent: true
 
 - type: entity
   parent: [ ClothingMaskGas, BaseSecurityContraband ]
@@ -707,22 +707,26 @@
   name: rat mask
   description: A mask of a rat that looks like a rat. Perhaps they will take you for a fellow rat.
   components:
+  # <Trauma>
+  - type: RatAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/rat.rsi
   - type: Clothing
     sprite: Clothing/Mask/rat.rsi
   - type: Tag
     tags:
+    # <Trauma>
+    - CursedAnimalMask
+    - IPCMaskWearable
+    # </Trauma>
     - HamsterWearable
-    - CursedAnimalMask # Goobstation
     - WhitelistChameleon
-    - IPCMaskWearable # EE - IPCs
   - type: HideLayerClothing
     slots:
     - Snout
   - type: IdentityBlocker
-  - type: AddAccentClothing # Goobstation
-    accent: RatAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -730,6 +734,15 @@
   name: fox mask
   description: What does the fox say?
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - CursedAnimalMask
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: FoxAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/fox.rsi
   - type: Clothing
@@ -738,13 +751,6 @@
   - type: HideLayerClothing
     slots:
     - Snout
-  - type: Tag
-    tags:
-    - CursedAnimalMask # Goobstation
-    - WhitelistChameleon # Goobstation
-    - IPCMaskWearable # EE - IPCs
-  - type: AddAccentClothing # Goobstation
-    accent: FoxAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -752,6 +758,15 @@
   name: bee mask
   description: For the queen!
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - CursedAnimalMask
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: BeeAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/bee.rsi
   - type: Clothing
@@ -760,13 +775,6 @@
   - type: HideLayerClothing
     slots:
     - Snout
-  - type: Tag
-    tags:
-    - CursedAnimalMask # Goobstation
-    - WhitelistChameleon # Goobstation
-    - IPCMaskWearable # EE - IPCs
-  - type: AddAccentClothing # Goobstation
-    accent: BeeAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -774,6 +782,15 @@
   name: bear mask
   description: I'm a cloudy, cloudy, cloudy, I'm not a bear at all.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - CursedAnimalMask
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: BearAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/bear.rsi
   - type: Clothing
@@ -782,13 +799,6 @@
   - type: HideLayerClothing
     slots:
     - Snout
-  - type: Tag
-    tags:
-    - CursedAnimalMask # Goobstation
-    - WhitelistChameleon # Goobstation
-    - IPCMaskWearable # EE - IPCs
-  - type: AddAccentClothing # Goobstation
-    accent: BearAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -796,6 +806,15 @@
   name: raven mask
   description: Where I am, death... or glitter.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - CursedAnimalMask
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: RavenAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/raven.rsi
   - type: Clothing
@@ -804,13 +823,6 @@
   - type: HideLayerClothing
     slots:
     - Snout
-  - type: Tag
-    tags:
-    - CursedAnimalMask # Goobstation
-    - WhitelistChameleon # Goobstation
-    - IPCMaskWearable # EE - IPCs
-  - type: AddAccentClothing # Goobstation
-    accent: RavenAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -818,6 +830,15 @@
   name: jackal mask
   description: It is better not to turn your back to the owner of the mask, it may bite.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - CursedAnimalMask
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: JackalAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/jackal.rsi
   - type: Clothing
@@ -826,13 +847,6 @@
   - type: HideLayerClothing
     slots:
     - Snout
-  - type: Tag
-    tags:
-    - CursedAnimalMask # Goobstation
-    - WhitelistChameleon # Goobstation
-    - IPCMaskWearable # EE - IPCs
-  - type: AddAccentClothing # Goobstation
-    accent: JackalAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -840,6 +854,15 @@
   name: bat mask
   description: A bloodsucker by night, and a cute, blinded beast by day.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - CursedAnimalMask
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: BatAccent
+    relayAccent: true
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/bat.rsi
   - type: Clothing
@@ -848,13 +871,6 @@
   - type: HideLayerClothing
     slots:
     - Snout
-  - type: Tag
-    tags:
-    - CursedAnimalMask # Goobstation
-    - WhitelistChameleon # Goobstation
-    - IPCMaskWearable # EE - IPCs
-  - type: AddAccentClothing # Goobstation
-    accent: BatAccent
 
 - type: entity
   parent: ClothingMaskBase
@@ -951,16 +967,11 @@
   name: italian moustache
   description: Made from authentic Italian moustache hairs. Gives the wearer an irresistable urge to gesticulate wildly.
   components:
-  - type: Sprite
-    sprite: Clothing/Mask/italian_moustache.rsi
-  - type: Clothing
-    sprite: Clothing/Mask/italian_moustache.rsi
-  - type: Item
-    storedRotation: -90
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: italian
-  - type: HandheldTranslator # Goob - Magic Moustache
+  # <Trauma>
+  - type: ReplacementAccent
+    accent: italian
+    relayAccent: true
+  - type: HandheldTranslator
     spoken:
     - SpaceItalian
     understood:
@@ -968,6 +979,13 @@
     toggleOnInteract: false
     setLanguageOnInteract: false
     showInfoOnExamine: false
+  # </Trauma>
+  - type: Sprite
+    sprite: Clothing/Mask/italian_moustache.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/italian_moustache.rsi
+  - type: Item
+    storedRotation: -90
 
 - type: entity
   parent: ClothingMaskBase
@@ -975,6 +993,12 @@
   name: ninja mask
   description: A close-fitting nano-enhanced mask that acts both as an air filter and a post-modern fashion statement.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - IPCMaskWearable
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/ninja.rsi
   - type: Clothing
@@ -984,9 +1008,6 @@
   - type: EyeProtection
   - type: BreathMask
   - type: IdentityBlocker
-  - type: Tag
-    tags:
-    - IPCMaskWearable # EE - IPCs
 
 - type: entity
   parent: [ClothingMaskBase, BaseClothingViewconeSmall]
@@ -994,6 +1015,15 @@
   name: welding gas mask
   description: A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 150
+      Glass: 50
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/welding-gas.rsi
     state: icon
@@ -1004,18 +1034,11 @@
   - type: IdentityBlocker
   - type: FlashImmunity
   - type: EyeProtection
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 150
-      Glass: 50
   - type: StaticPrice
     price: 100
   - type: Tag
     tags:
     - WhitelistChameleon
-  - type: HideLayerClothing # Goob
-    slots:
-    - Snout
 
 # Entity tables
 - type: entityTable

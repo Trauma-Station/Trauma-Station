@@ -54,6 +54,7 @@
             Blunt: -0.4
             Slash: -0.4
             Piercing: -0.4
+            Ballistic: -0.4
             Heat: -0.8
             Cold: -0.8
         conditions:

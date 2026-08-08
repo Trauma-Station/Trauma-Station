@@ -53,8 +53,6 @@
   flatReductions:
     Blunt: 5
 
-
-
 - type: damageModifierSet
   id: PerforatedMetallic
   coefficients:
@@ -235,6 +233,7 @@
 - type: damageModifierSet
   # <Trauma>
   id: Zombie
+  ignoreArmorPierceFlags: All
   coefficients:
     Blunt: 0.75
     Piercing: 1.25
@@ -243,12 +242,15 @@
   # </Trauma>
     Poison: 0.0
     Radiation: 0.0
-  ignoreArmorPierceFlags: All # Goobstation
 
 # immune to everything except physical and heat damage; vulnerable to holy damage because they're undead, but not as vulnerable as a ghost or demon would be
 - type: damageModifierSet
   id: Skeleton
+  # <Trauma>
+  ignoreArmorPierceFlags: All
+  # </Trauma>
   coefficients:
+    Blunt: 1.5 # Oof ouch my bones
     Cold: 0.0
     Poison: 0.0
     Radiation: 0.0
@@ -256,9 +258,6 @@
     Bloodloss: 0.0
     Cellular: 0.0
     Holy: 0.5
-  ignoreArmorPierceFlags: All # Goobstation
-  flatReductions: # Goob
-    Blunt: 5
 
 # hurt a lot by blunt, immune to a good amount of other stuff because they're a cookie
 - type: damageModifierSet

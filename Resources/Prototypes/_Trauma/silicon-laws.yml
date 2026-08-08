@@ -364,3 +364,16 @@
   - Silence4
   - Silence5
   obeysTo: laws-owner-crew
+
+  # Bioweapon Lawset
+- type: siliconLaw
+  id: Bioweapon1
+  order: 1
+  lawString: law-bioweapon-1
+
+- type: siliconLawset
+  id: BioweaponLawset
+  name: law-bioweapon-name
+  laws:
+  - Bioweapon1
+  obeysTo: laws-owner-crew

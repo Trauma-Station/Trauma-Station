@@ -206,11 +206,30 @@
     state: icon
   discipline: Experimental
   tier: 3
-  cost: 15000 # Goob 10000 -> 150000
+  cost: 15000 # Trauma - was 10000
   recipeUnlocks:
   - DeviceDesynchronizer
-  # Goobstation R&D Console rework start
+  # <Trauma>
   position: -8,-4
   technologyPrerequisites:
   - GravityManipulation
-  # Goobstation R&D Console rework end
+  # </Trauma>
+
+- type: technology
+  id: TeleSci
+  name: research-technology-telesci
+  icon:
+    sprite: Effects/portal.rsi
+    state: portal-artifact
+  discipline: Experimental
+  tier: 3
+  cost: 10000
+  recipeUnlocks:
+  - StationTeleportersControlCircuitboard
+  - StationTeleporterMachineCircuitboard
+  - TeleporterChipBlank
+  # <Trauma>
+  position: -9,-6
+  technologyPrerequisites:
+  - BluespaceTheory
+  # </Trauma>

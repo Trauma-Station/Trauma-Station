@@ -65,7 +65,13 @@
     Telecrystal: 40
   categories:
   - UplinkWearables
-  conditions:
-  - !type:BuyerSpeciesCondition
-    whitelist:
-    - Human
+
+- type: listing
+  id: UplinkClothingThievingGloves
+  name: uplink-clothing-chameleon-thieving-gloves-name
+  description: uplink-clothing-chameleon-thieving-gloves-desc
+  productEntity: ClothingHandsChameleonThief
+  cost:
+    Telecrystal: 30
+  categories:
+  - UplinkWearables

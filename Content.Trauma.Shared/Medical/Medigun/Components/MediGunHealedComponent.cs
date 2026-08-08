@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Trauma.Shared.Medical.Medigun.Components;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class MediGunHealedComponent : Component
+{
+    /// <summary>
+    /// Source of the healing that it receives.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid Source;
+
+    /// <summary>
+    /// Color that will be used on target entity when healing is active.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Color LineColor;
+}

@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: lightMask
+  id: ConeQuad
+  maskPath: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  lightCones:
+  - direction: 0
+    innerWidth: 30
+    outerWidth: 45
+  - direction: 90
+    innerWidth: 30
+    outerWidth: 45
+  - direction: 180
+    innerWidth: 30
+    outerWidth: 45
+  - direction: 270
+    innerWidth: 30
+    outerWidth: 45
+
+- type: lightMask
+  id: Cosmic
+  maskPath: /Textures/_DV/CosmicCult/LightMasks/cosmic.png
+  lightCones: []
+
+- type: lightMask
+  id: Ray
+  maskPath: /Textures/_Goobstation/Wizard/Effects/LightMasks/ray.png
+  lightCones:
+  - direction: 0
+    innerWidth: 6.3
+    outerWidth: 6.5
+
+- type: lightMask
+  id: Sparkle
+  maskPath: /Textures/_Trauma/Effects/LightMasks/sparklemask.png
+  lightCones: []

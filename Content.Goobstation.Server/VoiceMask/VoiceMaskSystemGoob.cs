@@ -26,8 +26,7 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
 
     private void OnChangeJobIcon(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeJobIconMessage ev)
     {
-        if (!ProtoMan.TryIndex(ev.JobIconProtoId, out var proto)
-            || !proto.AllowSelection)
+        if (!ProtoMan.TryIndex(ev.JobIconProtoId, out var proto))
             return;
 
         entity.Comp.JobIconProtoId = proto.ID;
@@ -40,7 +39,7 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
 
     private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref ImplantRelayEvent<TransformSpeakerJobIconEvent> args)
     {
-        TransformJobIcon(ent, ref args.Event);
+        TransformJobIcon(ent, ref args.Args);
     }
 
     private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref InventoryRelayedEvent<TransformSpeakerJobIconEvent> args)

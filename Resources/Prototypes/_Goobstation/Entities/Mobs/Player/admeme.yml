@@ -409,8 +409,7 @@
       - !type:GibBehavior { }
   - type: NoSlip
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 5000
     heatDamage:
@@ -437,6 +436,4 @@
         Piercing: -1
         Ballistic: -1
   - type: StatusEffects
-    allowed:
-    - PressureImmunity
-    - Adrenaline
+    allowed: []

@@ -364,7 +364,7 @@ public sealed partial class FaxSystem : EntitySystem
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
         else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // goobstation
-            _explosion.QueueExplosion(uid, "Default", 20, 65, 3.4f, 1f, 0, false, uid);
+            _explosion.QueueExplosion(uid, "Default", 4, 6, 3.4f, 1f, 0, false, uid);
         else
             Copy(uid, component, args);
     }
@@ -385,7 +385,7 @@ public sealed partial class FaxSystem : EntitySystem
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
         else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // goobstation
-            _explosion.QueueExplosion(uid, "Default", 20, 65, 3.4f, 1f, 0, false, uid);
+            _explosion.QueueExplosion(uid, "Default", 4, 6, 3.4f, 1f, 0, false, uid);
         else
             Send(uid, component, args);
     }
@@ -717,7 +717,7 @@ public sealed partial class FaxSystem : EntitySystem
         // </Trauma>
 
         // Goobstation - Admin Notifications / Admin Notifications
-        // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));
+        // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.AddVolume(-8f));
         foreach (var admin in _adminManager.ActiveAdmins)
             RaiseNetworkEvent(new AdminNotificationEvent(new SoundPathSpecifier("/Audio/Machines/high_tech_confirm.ogg")), admin);
     }

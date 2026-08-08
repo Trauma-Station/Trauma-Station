@@ -3,9 +3,12 @@
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class LaserBeamEndpointComponent : Component
 {
     [DataField]
     public bool PvsOverride = true;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Gun;
 }

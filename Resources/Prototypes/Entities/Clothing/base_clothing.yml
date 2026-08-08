@@ -16,7 +16,6 @@
     - fiber
   - type: Armor # Shitmed
     coverage:
-    - Other
     - Torso
     modifiers: {}
 
@@ -65,8 +64,7 @@
   # to show explosion resistance examine
   - type: GroupExamine
   - type: Armor
-    coverage:
-    - Other
+    coverage: []
     modifiers: {}
 
 # for clothing that can be toggled, like magboots
@@ -77,3 +75,31 @@
   - type: ItemToggle
     onUse: false # can't really wear it like that
   - type: ToggleClothing
+
+- type: entity
+  abstract: true
+  id: TemperatureProtectionMinimal # Really light jackets and hoods.
+  components:
+  - type: TemperatureProtection
+    coefficient: 0.8
+
+- type: entity
+  abstract: true
+  id: TemperatureProtection # Winter coats and environmentally sealed helmets
+  components:
+  - type: TemperatureProtection
+    coefficient: 0.6
+
+- type: entity
+  abstract: true
+  id: TemperatureProtectionGood # EVA suits and basic hardsuits
+  components:
+  - type: TemperatureProtection
+    coefficient: 0.05
+
+- type: entity
+  abstract: true
+  id: TemperatureProtectionGreat # Fire-retardant suits
+  components:
+  - type: TemperatureProtection
+    coefficient: 0.01

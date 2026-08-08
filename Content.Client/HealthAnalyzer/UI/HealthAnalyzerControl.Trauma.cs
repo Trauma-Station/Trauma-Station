@@ -5,7 +5,9 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Common.Body;
+using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
+using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
@@ -26,13 +28,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.HealthAnalyzer.UI;
 
+// TODO: use ui injection
 public sealed partial class HealthAnalyzerControl
 {
+    private BodySystem _body = default!;
+    private SharedSolutionContainerSystem _solution = default!;
+    private TraumaSystem _trauma = default!;
+    private WoundSystem _wound = default!;
+
+    private EntityQuery<AmputationTraumaComponent> _amputationQuery = default!;
+    private EntityQuery<BoneComponent> _boneQuery = default!;
 
     public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
-    public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
 
-    private WoundSystem _wound = default!;
+    private HealthAnalyzerUiState _lastState = default;
+    private HealthAnalyzerMode _mode = HealthAnalyzerMode.Body;
     private EntityUid? _target;
     private EntityUid? _spriteViewEntity;
     private Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton> _bodyPartControls = default!;
@@ -41,7 +51,13 @@ public sealed partial class HealthAnalyzerControl
 
     private void InitializeTrauma()
     {
+        _body = _entityManager.System<BodySystem>();
+        _solution = _entityManager.System<SharedSolutionContainerSystem>();
+        _trauma = _entityManager.System<TraumaSystem>();
         _wound = _entityManager.System<WoundSystem>();
+
+        _amputationQuery = _entityManager.GetEntityQuery<AmputationTraumaComponent>();
+        _boneQuery = _entityManager.GetEntityQuery<BoneComponent>();
 
         _bodyPartControls = new Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton>
         {
@@ -71,13 +87,17 @@ public sealed partial class HealthAnalyzerControl
     public void SetActiveBodyPart(ProtoId<OrganCategoryPrototype> part)
     {
         if (_target is {} target)
+        {
+            _mode = HealthAnalyzerMode.Body;
             OnBodyPartSelected?.Invoke(part, target);
+        }
     }
 
     public void SetMode(HealthAnalyzerMode mode)
     {
-        if (_target is {} target)
-            OnModeChanged?.Invoke(mode, target);
+        _mode = mode;
+        if (_target is { } target)
+            PopulateTrauma(target, ref _lastState);
     }
 
     public void ResetBodyPart()
@@ -92,8 +112,9 @@ public sealed partial class HealthAnalyzerControl
             button.Visible = isHumanoid;
     }
 
-    public void PopulateTrauma(EntityUid target, HealthAnalyzerUiState state)
+    public void PopulateTrauma(EntityUid target, ref HealthAnalyzerUiState state)
     {
+        _lastState = state;
         _target = target;
         var humanoid = _entityManager.HasComponent<HumanoidProfileComponent>(target);
         SetActiveButtons(humanoid);
@@ -107,20 +128,20 @@ public sealed partial class HealthAnalyzerControl
 
         PartView.Visible = SpriteView.Visible;
 
-        var bloodLevelLow = !float.IsNaN(state.BloodLevel)
-                            && _entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream)
-                            && state.BloodLevel < bloodstream.BloodlossThreshold;
+        var bloodLevelLow = !float.IsNaN(state.BloodLevel) &&
+                            _entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream) &&
+                            state.BloodLevel < bloodstream.BloodlossThreshold;
 
-        switch (state.ScanState)
+        switch (_mode)
         {
-            case HealthAnalyzerBodyState body:
-                PopulateBody(target, state, body, bloodLevelLow);
+            case HealthAnalyzerMode.Body:
+                PopulateBody(target, ref state, bloodLevelLow);
                 break;
-            case HealthAnalyzerOrgansState organs:
-                PopulateOrgans(organs);
+            case HealthAnalyzerMode.Organs:
+                PopulateOrgans(target);
                 break;
-            case HealthAnalyzerChemicalsState chemicals:
-                PopulateChemicals(chemicals);
+            case HealthAnalyzerMode.Chemicals:
+                PopulateChemicals(target);
                 break;
         }
 
@@ -136,12 +157,12 @@ public sealed partial class HealthAnalyzerControl
 
     #region Scan state populate methods
 
-    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body, bool bloodLevelLow = false)
+    public void PopulateBody(EntityUid target, ref HealthAnalyzerUiState state, bool bloodLevelLow = false)
     {
-        var part = _entityManager.GetEntity(state.Part);
-        if (part != null)
-            target = part.Value;
-        var isPart = part != null;
+        var selectedPart = _entityManager.GetEntity(state.Part);
+        if (selectedPart != null)
+            target = selectedPart.Value;
+        var isPart = selectedPart != null;
 
         if (!_entityManager.TryGetComponent<DamageableComponent>(target, out var damageable))
             return;
@@ -155,11 +176,7 @@ public sealed partial class HealthAnalyzerControl
 
         var identity = Identity.Name(target, _entityManager);
         if (isPart)
-        {
-            PartNameLabel.Text = _entityManager.HasComponent<MetaDataComponent>(target)
-                ? identity
-                : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
-        }
+            PartNameLabel.Text = identity;
 
         var damageSortedGroups = _damageable.GetDamagePerGroup((target, damageable))
             .OrderByDescending(damage => damage.Value)
@@ -202,27 +219,29 @@ public sealed partial class HealthAnalyzerControl
             });
         }
 
-        foreach (var (woundableTrauma, traumas) in body.Traumas)
+        foreach (var part in _body.GetOrgans<WoundableComponent>(target))
         {
-            if (!TryGetEntityName(woundableTrauma, out var woundableName)
-                || isPart
-                && woundableTrauma != state.Part)
+            if (isPart && part.Owner != selectedPart)
+                continue;
+
+            if (!_trauma.GetPartTraumas(part.AsNullable(), out var traumas))
                 continue;
 
             foreach (var trauma in traumas)
             {
-                // TODO: Once these string conditionals are better defined, rewrite to use a switch case based on trauma types.
                 string locString;
-                if (trauma.TargetType is {} targetType)
-                    locString = Loc.GetString($"condition-body-trauma-{trauma.TraumaType}",
-                        ("targetSymmetry", targetType.Item2 != BodyPartSymmetry.None
-                            ? $"{targetType.Item2.ToString().ToLower()} " // This is so fucking ugly.
-                            : ""),
-                        ("targetType", targetType.Item1.ToString().ToLower()));
+                if (_amputationQuery.TryComp(trauma, out var amputation))
+                {
+                    var source = _prototypes.Index(amputation.Source).Name.ToLower();
+                    locString = Loc.GetString($"condition-body-trauma-{trauma.Comp.TraumaType}", ("source", source));
+                }
                 else
-                    locString = trauma.SeverityString is {} severity
-                        ? Loc.GetString($"condition-body-trauma-{trauma.TraumaType}-{severity}", ("woundable", woundableName))
-                        : Loc.GetString($"condition-body-trauma-{trauma.TraumaType}", ("woundable", woundableName));
+                {
+                    var suffix = trauma.Comp.TraumaType == TraumaType.BoneDamage
+                        ? $"-{_boneQuery.Comp(part).BoneSeverity}"
+                        : "";
+                    locString = Loc.GetString($"condition-body-trauma-{trauma.Comp.TraumaType}{suffix}", ("woundable", part));
+                }
 
                 ConditionsListContainer.AddChild(new RichTextLabel
                 {
@@ -233,7 +252,7 @@ public sealed partial class HealthAnalyzerControl
         }
     }
 
-    public void PopulateOrgans(HealthAnalyzerOrgansState state)
+    public void PopulateOrgans(EntityUid body)
     {
         ReturnButton.Visible = false;
         PartNameLabel.Visible = false;
@@ -242,31 +261,25 @@ public sealed partial class HealthAnalyzerControl
 
         ConditionsListContainer.RemoveAllChildren();
         GroupsContainer.RemoveAllChildren();
-        foreach (var (organ, data) in state.Organs)
+        foreach (var organ in _body.GetInternalOrgans(body))
         {
-            var organEnt = _entityManager.GetEntity(organ);
-
-            if (!TryGetEntityName(organEnt, out var organName)
-                || data.IntegrityCap == 0) // avoid division by zero
+            if (organ.Comp.IntegrityCap == 0) // avoid division by zero
                 continue;
 
-            DrawOrganDiagnostics(organEnt, organName, data.Integrity / data.IntegrityCap * 100);
+            DrawOrganDiagnostics(organ, 100 * organ.Comp.OrganIntegrity / organ.Comp.IntegrityCap);
 
-            if (_entityManager.HasComponent<RottingComponent>(organEnt))
+            if (_entityManager.HasComponent<RottingComponent>(organ))
             {
                 ConditionsListContainer.AddChild(new RichTextLabel
                 {
-                    Text = Loc.GetString("condition-organ-rotting", ("organ", organName)),
+                    Text = Loc.GetString("condition-organ-rotting", ("organ", organ)),
                     Margin = new Thickness(0, 4),
                 });
             }
 
-            /*if (data.Integrity > data.IntegrityCap * 0.90) // Organs without at LEAST some significant damage wont be shown.
-                return;
-            */
             ConditionsListContainer.AddChild(new RichTextLabel
             {
-                Text = Loc.GetString($"condition-organ-damage-{data.Severity.ToString()}", ("organ", organName)),
+                Text = Loc.GetString($"condition-organ-damage-{organ.Comp.OrganSeverity}", ("organ", organ)),
                 Margin = new Thickness(0, 4),
             });
         }
@@ -281,7 +294,7 @@ public sealed partial class HealthAnalyzerControl
         }
     }
 
-    public void PopulateChemicals(HealthAnalyzerChemicalsState state)
+    public void PopulateChemicals(EntityUid body)
     {
         ReturnButton.Visible = false;
         PartNameLabel.Visible = false;
@@ -291,7 +304,21 @@ public sealed partial class HealthAnalyzerControl
         ConditionsListContainer.RemoveAllChildren();
         GroupsContainer.RemoveAllChildren();
 
-        DrawSolutionDiagnostics(state.SolutionEntities);
+        var solutions = new List<EntityUid>();
+
+        if (_entityManager.TryGetComponent<BloodstreamComponent>(body, out var blood) &&
+            _solution.ResolveSolution(body, blood.BloodSolutionName, ref blood.BloodSolution, out _))
+        {
+            solutions.Add(blood.BloodSolution.Value);
+        }
+
+        foreach (var stomach in _body.GetOrgans<StomachComponent>(body))
+        {
+            if (stomach.Comp.Solution is { } solution)
+                solutions.Add(solution);
+        }
+
+        DrawSolutionDiagnostics(solutions);
 
         ConditionsListContainer.AddChild(new RichTextLabel
         {
@@ -378,9 +405,10 @@ public sealed partial class HealthAnalyzerControl
 
     #region Drawing
 
-    private void DrawOrganDiagnostics(EntityUid ent, string name, FixedPoint2 damage)
+    private void DrawOrganDiagnostics(EntityUid ent, FixedPoint2 damage)
     {
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+        var name = _entityManager.GetComponent<MetaDataComponent>(ent).EntityName;
         var groupTitleText = Loc.GetString("group-organ-status",
             ("organ", textInfo.ToTitleCase(name)),
             ("capacity", damage));
@@ -396,15 +424,13 @@ public sealed partial class HealthAnalyzerControl
         GroupsContainer.AddChild(groupContainer);
     }
 
-    private void DrawSolutionDiagnostics(List<NetEntity> sources)
+    private void DrawSolutionDiagnostics(List<EntityUid> sources)
     {
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-        foreach (var source in sources)
+        foreach (var uid in sources)
         {
-            var uid = _entityManager.GetEntity(source);
             foreach (var (name, ent) in _solution.EnumerateSolutions(uid))
             {
-                // TODO SHITMED: get SolutionComponent off ent??? it should be networked
                 var groupTitleText = Loc.GetString("group-solution-name",
                     ("solution", name ?? Loc.GetString("group-solution-unknown")));
 

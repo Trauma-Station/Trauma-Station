@@ -37,15 +37,6 @@
     - BoxSurvivalSlotsSyndicatePlasma
 
 - type: loadout
-  id: EmergencyPlasmaMime
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: PlasmaBreather
-  storage:
-    back:
-    - BoxMimeSlotsPlasma
-
-- type: loadout
   id: EmergencyPlasmaClown
   effects:
   - !type:GroupLoadoutEffect

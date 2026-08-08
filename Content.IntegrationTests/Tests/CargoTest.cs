@@ -6,7 +6,7 @@ using Content.Server.Cargo.Components;
 using Content.Server.Cargo.Systems;
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Tools.Components;
@@ -43,9 +43,11 @@ public sealed class CargoTest : GameTest
 
         var testMap = await pair.CreateTestMap();
 
-        var entManager = server.ResolveDependency<IEntityManager>();
-        var protoManager = server.ResolveDependency<IPrototypeManager>();
-        var pricing = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<PricingSystem>();
+        // <Trauma> - microoptimisation
+        var entManager = SEntMan;
+        var protoManager = SProtoMan;
+        var pricing = SEntMan.System<PricingSystem>();
+        // </Trauma>
 
         await server.WaitAssertion(() =>
         {
@@ -133,7 +135,6 @@ public sealed class CargoTest : GameTest
                     }
                 }
             }
-            // </Trauma>
         });
     }
 
@@ -241,6 +242,7 @@ public sealed class CargoTest : GameTest
     [Test]
     public async Task MobPrice()
     {
+        var mobName = _sCompFact.CompName<MobStateComponent>(); // Trauma
         await Pair.Server.WaitAssertion(() =>
         {
             using (Assert.EnterMultipleScope())
@@ -248,7 +250,7 @@ public sealed class CargoTest : GameTest
                 foreach (var (proto, comp) in Pair.GetPrototypesWithComponent<MobPriceComponent>())
                 {
                     Assert.That(
-                        proto.TryComp<MobStateComponent>(out _, _sCompFact),
+                        proto.HasComp(mobName), // Trauma - use mobName from above
                         $"Found {nameof(MobPriceComponent)} on {proto.ID}, but no {nameof(MobStateComponent)}!"
                     );
                 }

@@ -14,6 +14,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -122,6 +123,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
                 $"Job Role of {ToPrettyString(mind.OwnedEntity)} changed from '{jobRole.Value.Comp1.JobPrototype}' to '{jobPrototype}'");
 
             jobRole.Value.Comp1.JobPrototype = jobPrototype;
+            Dirty(jobRole.Value); // Trauma
         }
         else
             MindAddRoleDo(mindId, "MindRoleJob", mind, silent, jobPrototype);
@@ -163,6 +165,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         if (jobPrototype is not null)
         {
             mindRoleComp.JobPrototype = jobPrototype;
+            Dirty(mindRoleId.Value, mindRoleComp); // Trauma
             EnsureComp<JobRoleComponent>(mindRoleId.Value);
             DebugTools.AssertNull(mindRoleComp.AntagPrototype);
             DebugTools.Assert(!mindRoleComp.Antag);
@@ -264,22 +267,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         comp.Subtype = subtype;
         Dirty(mind, comp);
 
-        // Update player character window
-        if (Player.TryGetSessionById(comp.UserId, out var session))
-        // <Trauma> - predict the event properly
-        {
-            var ev = new MindRoleTypeChangedEvent();
-            if (_net.IsServer)
-                RaiseNetworkEvent(ev, session.Channel);
-            else if (session == Player.LocalSession)
-                RaiseLocalEvent(ev);
-        }
-        // </Trauma>
-        else
-        {
-            var error = $"The Character Window of {_minds.MindOwnerLoggingString(comp)} potentially did not update immediately : session error";
-            _adminLogger.Add(LogType.Mind, LogImpact.Medium, $"{error}");
-        }
+        UpdateCharacterWindow(comp.UserId, _minds.MindOwnerLoggingString(comp));
 
         if (comp.OwnedEntity is null)
         {
@@ -294,6 +282,14 @@ public abstract partial class SharedRoleSystem : EntitySystem
             LogImpact.High,
             $"Role Type of {ToPrettyString(comp.OwnedEntity)} changed to {roleTypeId}, {subtype}");
     }
+
+    /// <summary>
+    /// Server only. Informs the specified player's CharacterUIController that their mind role has changed,
+    /// So that their Character window gets updated if it is currently open.
+    /// </summary>
+    /// <param name="user">The player that will be updated.</param>
+    /// <param name="mindString">The name of the mob's controlling mind. Only used for logging.</param>
+    protected virtual void UpdateCharacterWindow(NetUserId? user, MindStringRepresentation mindString) { }
 
     /// <summary>
     /// Finds and removes all mind roles of a specific type

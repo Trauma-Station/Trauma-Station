@@ -9,6 +9,7 @@
 - type: antagSpecifier
   id: ShadowDemon
   spawnerPrototype: SpawnPointGhostShadowDemon
+  allowNonHumans: true
   mindRoles: [ MindRoleShadowDemon ]
   briefing:
     text: shadow-demon-role-greeting
@@ -22,3 +23,12 @@
     nameFormat: name-format-slaughter
   - type: LightImmunity # Grants temporary light immunity so it survives AntagRandomSpawn | Remove once we get better spawns
     duration: 20
+
+- type: antagSmite
+  id: ShadowDemon
+  antag: ShadowDemon
+  rule: ShadowDemonRule
+  ruleComp: ShadowDemonRule
+  icon:
+    sprite: _Trauma/Mobs/ShadowDemon/demon.rsi
+    state: shadow_demon

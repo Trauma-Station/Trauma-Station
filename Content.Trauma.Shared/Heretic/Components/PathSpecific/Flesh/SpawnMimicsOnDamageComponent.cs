@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 public sealed partial class SpawnMimicsOnDamageComponent : Component
 {
     [DataField]
-    public float DamageChanceRatio = 0.015f;
+    public float DamageChanceRatio = 0.01f;
 
     [DataField]
     public FixedPoint2 MinDamage = 5;

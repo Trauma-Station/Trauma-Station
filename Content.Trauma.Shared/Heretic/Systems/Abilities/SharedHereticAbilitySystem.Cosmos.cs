@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard;
-using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -153,7 +152,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (firstRuneResolved && secondRuneResolved)
         {
-            EnsureComp<FadingTimedDespawnComponent>(runeAction.FirstRune!.Value).Lifetime = 0f;
+            _fadeDespawn.FadeDespawnEntity(runeAction.FirstRune!.Value, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             var newRune = Spawn(args.Rune, coords);
             _transform.AttachToGridOrMap(newRune);
             var newRuneComp = EnsureComp<HereticCosmicRuneComponent>(newRune);

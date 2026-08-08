@@ -208,7 +208,7 @@ public sealed partial class ClimbSystem : VirtualController
              : CanVault(comp, user, entityToMove, climbable, out reason);
         if (!canVault)
         {
-            _popupSystem.PopupClient(reason, user, user);
+            _popupSystem.PopupEntity(reason, user, user);
             return false;
         }
 
@@ -345,7 +345,7 @@ public sealed partial class ClimbSystem : VirtualController
                 ("climbable", climbable));
         }
 
-        _popupSystem.PopupPredicted(selfMessage, othersMessage, uid, user);
+        _popupSystem.PopupEntity(selfMessage, othersMessage, uid, user);
     }
 
     /// <summary>

@@ -17,7 +17,7 @@
       methods: [ Touch, Injection ]
       effects:
       - !type:NestedEffect
-        proto: XenobioExtractEvil
+        proto: XenobioExtractEvilBase
       - !type:Jitter
         time: 5
         frequency: 20

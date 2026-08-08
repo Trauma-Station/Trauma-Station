@@ -217,8 +217,8 @@ public sealed partial class GunExecutionSystem : EntitySystem
             executionTime = weapon.Comp.SuicideTime;
         }
 
-        _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-initial-internal", attacker, victim, weapon);
-        _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-initial-external", attacker, victim, weapon);
+        var key = prefix + "-popup-gun-initial-";
+        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, weapon);
 
         var doAfter = new DoAfterArgs(EntityManager,
             attacker,
@@ -381,8 +381,8 @@ public sealed partial class GunExecutionSystem : EntitySystem
         var ev = new OnEmptyGunShotEvent(attacker);
         RaiseLocalEvent(gun, ref ev);
         _audio.PlayPredicted(gun.Comp.SoundEmpty, gun, attacker);
-        _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, gun);
-        _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, gun);
+        var key = "execution-popup-gun-empty";
+        _execution.ShowExecutionPopup(key, key, attacker, victim, gun);
     }
 
     private void DoShotLogic(Entity<GunComponent> gun, EntityUid attacker, EntityUid victim, List<(EntityUid? Uid, IShootable Shootable)> ammo)
@@ -404,8 +404,8 @@ public sealed partial class GunExecutionSystem : EntitySystem
             prefix = "execution";
         }
 
-        _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-complete-internal", attacker, victim, gun);
-        _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-complete-external", attacker, victim, gun);
+        var key = prefix + "-popup-gun-complete-";
+        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, gun);
     }
 
     private void DoRecoil(EntityUid attacker, EntityUid victim, Vector2 direction)

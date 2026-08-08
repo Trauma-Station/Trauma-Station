@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Common.Temperature;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
@@ -22,20 +22,20 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
+        _modifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     [SubscribeLocalEvent]
-    private void OnTemperatureChangeAttempt(Entity<VoidCurseComponent> ent, ref TemperatureChangeAttemptEvent args)
+    private void OnBeforeHeatExchange(Entity<VoidCurseComponent> ent, ref BeforeHeatExchangeEvent args)
     {
-        if (!args.Cancelled && ent.Comp.Stacks >= ent.Comp.MaxStacks && args.CurrentTemperature > args.LastTemperature)
-            args.Cancelled = true;
+        // no heating up
+        args.Cancelled |= ent.Comp.Stacks >= ent.Comp.MaxStacks && args.OurTemp < args.OtherTemp;
     }
 
     [SubscribeLocalEvent]
     private void OnRefreshMoveSpeed(Entity<VoidCurseComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var modifier = 1f - ent.Comp.Stacks * 0.07f;
+        var modifier = 1f - ent.Comp.Stacks * 0.05f;
         if (TryComp(ent, out TemperatureSpeedComponent? tempSpeed) &&
             tempSpeed.CurrentSpeedModifier is { } current && current != 0f)
             modifier /= 1.2f * current;

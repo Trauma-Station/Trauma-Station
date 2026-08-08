@@ -17,18 +17,6 @@ public sealed class SurgeryCVars : CVars
         CVarDef.Create("surgery.can_operate_on_self", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
-    /// How many times per second do we want to heal wounds.
-    /// </summary>
-    public static readonly CVarDef<float> MedicalHealingTickrate =
-        CVarDef.Create("medical.heal_tickrate", 0.1f, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    /// The minimum time an entity must spend without taking more damage before healing can start.
-    /// </summary>
-    public static readonly CVarDef<float> MinimumTimeBeforeHeal =
-        CVarDef.Create("medical.minimum_time_before_heal", 2f, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// The name is self-explanatory
     /// </summary>
     public static readonly CVarDef<float> MaxWoundSeverity =
@@ -66,7 +54,7 @@ public sealed class SurgeryCVars : CVars
     /// The rate at which severity (wound) points get exchanged into bleeding; e.g., 50 severity would be 3.5 bleeding points.
     /// </summary>
     public static readonly CVarDef<float> BleedingSeverityTrade =
-        CVarDef.Create("bleeds.wound_severity_trade", 0.07f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("bleeds.wound_severity_trade", 0.15f, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// How quick by default do bleeds grow to their full form?

@@ -19,6 +19,6 @@ public sealed partial class PulledByUserConditionSystem : EntityConditionSystem<
 {
     protected override void Condition(Entity<PullableComponent> ent, ref EntityConditionEvent<PulledByUser> args)
     {
-        args.Result = args.User is { } puller && ent.Comp.Puller == puller;
+        args.Result = args.SourceEnt is { } puller && ent.Comp.Puller == puller;
     }
 }

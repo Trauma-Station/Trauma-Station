@@ -141,8 +141,8 @@
       types:
         Slash: 5
     animation: WeaponArcFist
-    altDisarm: false
-    canWideSwing: true
+    altDisarm: true
+    canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -164,9 +164,9 @@
     generated:
       reagents:
       - ReagentId: Honk
-        Quantity: 3
+        Quantity: 7
   - type: MeleeChemicalInjector
-    transferAmount: 3
+    transferAmount: 7
     solution: melee
 
 - type: entity
@@ -183,7 +183,9 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 10
+        Blunt: 5
+        Slash: 5
+    animation: WeaponArcBite
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -215,6 +217,7 @@
     damage:
       types:
         Blunt: 5
+    animation: WeaponArcFist
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -385,7 +388,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 5
+        Slash: 5
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -411,12 +414,67 @@
         location: Left
   - type: ComplexInteraction
 
+- type: entity
+  parent: BaseDemon
+  id: MinorDemonCentifiend
+  name: lesser centifiend
+  description: A juvenile demon, it progresses the potent diseases of its greater brethren.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/smolcentifiend.rsi
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Piercing: 1
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: UnstableCompound
+        Quantity: 1
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+
 # Medium
 
 - type: entity
   parent: BaseDemon
   id: MediumDemonCentifiend
-  name: Centifiend
+  name: centifiend
   description: One of the most common demons in Hell, this oversized arthropod spreads pestilence with its bite.
   components:
   - type: Sprite
@@ -690,7 +748,6 @@
       - MobState
       - Door
       - Item
-      tags:
       - Wall
 
 - type: entity
@@ -777,15 +834,6 @@
           DemonSoulFragment:
             min: 3
             max: 5
-  - type: Hands
-    hands:
-      hand_right:
-        location: Right
-      hand_left:
-        location: Left
-    sortedHands:
-    - hand_right
-    - hand_left
   - type: Puller
     needsHands: false
     stageChangeCooldown: 0.1
@@ -897,6 +945,43 @@
   - type: HTN
     rootTask:
       task: SimpleRangedHostileCompound
+
+- type: entity
+  parent: BaseDemon
+  id: MajorDemonButcher
+  name: butcher
+  description: The butchers march through hell, like a plague of locusts, flaying and consuming all in their path.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
+  - type: MeleeWeapon
+    angle: 45
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 30
+        Structural: 50
+    animation: WeaponArcSlash
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 4
+            max: 6
+  - type: ActionGrant
+    actions:
+      - ActionDemonRift
 
 - type: entity
   parent: BaseDemon

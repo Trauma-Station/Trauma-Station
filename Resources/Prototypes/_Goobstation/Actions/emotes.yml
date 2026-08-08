@@ -13,7 +13,27 @@
   - does a flip
   - does a flip.
   - does a flip!
-  event: !type:AnimationFlipEmoteEvent
+  conditions:
+  - !type:HasStatusEffectCondition
+    effectProto: BlockVomitEmotesStatusEffect
+    inverted: true
+  effectsOnEmote:
+  - !type:AccumulateCounterStatusEffect
+    status: EmoteVomitCounterStatusEffect
+    updateTime: 1
+  - !type:IfElse
+    condition: !type:CheckCounterStatusEffectCondition
+      status: EmoteVomitCounterStatusEffect
+      max: 5
+    trueEffects:
+    - !type:RaiseNetworkEvents
+      events:
+      - !type:AnimationFlipEmoteEvent
+    falseEffects:
+    - !type:ModifyStatusEffect
+      effectProto: BlockVomitEmotesStatusEffect
+      time: 10
+    - !type:Vomit
 
 - type: emote
   id: Tweak
@@ -28,7 +48,10 @@
   - tweaks
   - tweaks.
   - tweaks!
-  event: !type:AnimationTweakEmoteEvent
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationTweakEmoteEvent
 
 - type: emote
   id: Flex
@@ -46,7 +69,10 @@
   - shows off muscles
   - shows off its muscles
   - intimidates
-  event: !type:AnimationFlexEmoteEvent
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationFlexEmoteEvent
 
 - type: emote
   id: Spin
@@ -58,7 +84,27 @@
   - spins
   - spins.
   - spins!
-  event: !type:AnimationSpinEmoteEvent
+  conditions:
+  - !type:HasStatusEffectCondition
+    effectProto: BlockVomitEmotesStatusEffect
+    inverted: true
+  effectsOnEmote:
+  - !type:AccumulateCounterStatusEffect
+    status: EmoteVomitCounterStatusEffect
+    updateTime: 1
+  - !type:IfElse
+    condition: !type:CheckCounterStatusEffectCondition
+      status: EmoteVomitCounterStatusEffect
+      max: 5
+    trueEffects:
+    - !type:RaiseNetworkEvents
+      events:
+      - !type:AnimationSpinEmoteEvent
+    falseEffects:
+    - !type:ModifyStatusEffect
+      effectProto: BlockVomitEmotesStatusEffect
+      time: 10
+    - !type:Vomit
 
 - type: emote
   id: Jump
@@ -70,4 +116,7 @@
   - jumps
   - jumps.
   - jumps!
-  event: !type:AnimationJumpEmoteEvent
+  effectsOnEmote:
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationJumpEmoteEvent

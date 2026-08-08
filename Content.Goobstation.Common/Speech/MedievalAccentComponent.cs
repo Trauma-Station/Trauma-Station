@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Analyzers;
-using Robust.Shared.GameObjects;
+using Content.Shared.Speech.Components;
 
 namespace Content.Goobstation.Common.Speech;
 
 [RegisterComponent]
-public sealed partial class MedievalAccentComponent : Component;
+public sealed partial class MedievalAccentComponent : BaseAccentComponent;

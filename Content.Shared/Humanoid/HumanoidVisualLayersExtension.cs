@@ -67,6 +67,10 @@ namespace Content.Shared.Humanoid
                     yield return HumanoidVisualLayers.Wings; // Goob
                     break;
                 // Shitmed Change Start
+                case HumanoidVisualLayers.Wings:
+                    yield return HumanoidVisualLayers.Wings;
+                    yield return HumanoidVisualLayers.WingsBehind;
+                    break;
                 case HumanoidVisualLayers.LHand:
                     yield return HumanoidVisualLayers.LHand;
                     break;

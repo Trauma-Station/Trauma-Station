@@ -12,13 +12,8 @@ namespace Content.Goobstation.Server.Devil.Contract;
 
 public sealed partial class DevilContractSystem
 {
-    private void InitializeSpecialActions()
-    {
-        SubscribeLocalEvent<DevilContractSoulOwnershipEvent>(OnSoulOwnership);
-        SubscribeLocalEvent<DevilContractLosePartEvent>(OnLosePart);
-        SubscribeLocalEvent<DevilContractLoseOrganEvent>(OnLoseOrgan);
-        SubscribeLocalEvent<DevilContractChanceEvent>(OnChance);
-    }
+    // TODO: change to entity effects bruh
+    [SubscribeLocalEvent]
     private void OnSoulOwnership(DevilContractSoulOwnershipEvent args)
     {
         if (args.Contract?.ContractOwner is not { } contractOwner)
@@ -27,6 +22,7 @@ public sealed partial class DevilContractSystem
         TryTransferSouls(contractOwner, args.Target, 1);
     }
 
+    [SubscribeLocalEvent]
     private void OnLosePart(DevilContractLosePartEvent args)
     {
         var parts = _part.GetBodyParts(args.Target, BodyPartType.Hand);
@@ -34,17 +30,12 @@ public sealed partial class DevilContractSystem
             return;
 
         var pick = _random.Pick(parts);
-
-        if (!TryComp<WoundableComponent>(pick, out var woundable)
-            || woundable.ParentWoundable is not {} parent)
-            return;
-
-        _wound.AmputateWoundableSafely(parent, pick, woundable);
-        QueueDel(pick);
-
+        _body.RemoveOrgan(args.Target, pick);
         Log.Debug($"Removed part {ToPrettyString(pick)} from {ToPrettyString(args.Target)}");
+        QueueDel(pick);
     }
 
+    [SubscribeLocalEvent]
     private void OnLoseOrgan(DevilContractLoseOrganEvent args)
     {
         var eligibleOrgans = _body.GetInternalOrgans(args.Target);
@@ -60,6 +51,7 @@ public sealed partial class DevilContractSystem
     }
 
     // LETS GO GAMBLING!!!!!
+    [SubscribeLocalEvent]
     private void OnChance(DevilContractChanceEvent args)
     {
         AddRandomClause(args.Target);

@@ -10,9 +10,6 @@ public sealed partial class StarTouchedComponent : Component
     public float TickInterval = 0.2f;
 
     [DataField]
-    public float Range = 8f;
-
-    [DataField]
     public bool ApplyEffects;
 
     [ViewVariables(VVAccess.ReadWrite)]

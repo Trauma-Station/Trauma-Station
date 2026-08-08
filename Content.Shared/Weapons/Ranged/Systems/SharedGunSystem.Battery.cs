@@ -108,7 +108,6 @@ public abstract partial class SharedGunSystem
 
     private (EntityUid? Entity, IShootable) GetShootable(BatteryAmmoProviderComponent component, EntityCoordinates coordinates)
     {
-
         var ent = PredictedSpawnAtPosition(component.Prototype, coordinates); // Trauma - predict this shit
         return (ent, EnsureShootable(ent));
     }
@@ -144,6 +143,7 @@ public abstract partial class SharedGunSystem
         // <Trauma> - newShots -> ent.Comp.Shots; newCapacity -> ent.Comp.Capacity
         // Update the visuals.
         Appearance.SetData(ent.Owner, AmmoVisuals.HasAmmo, ent.Comp.Shots != 0, appearance);
+        Appearance.SetData(ent.Owner, AmmoVisuals.IsFull, ent.Comp.Shots == ent.Comp.Capacity, appearance);
         Appearance.SetData(ent.Owner, AmmoVisuals.AmmoCount, ent.Comp.Shots, appearance);
         if (ent.Comp.Capacity > 0) // Don't make the capacity 0 when removing a power cell as this will make it be visualized as full instead of empty.
             Appearance.SetData(ent.Owner, AmmoVisuals.AmmoMax, ent.Comp.Capacity, appearance);

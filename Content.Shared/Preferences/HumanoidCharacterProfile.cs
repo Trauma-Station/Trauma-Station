@@ -254,7 +254,8 @@ namespace Content.Shared.Preferences
             // appearance
             Eyes = 1 << 5,
             Skin = 1 << 6,
-            Barks = 1 << 7, // Trauma
+            Markings = 1 << 7,
+            Barks = 1 << 8, // Trauma
         }
 
         /// <summary>
@@ -262,13 +263,14 @@ namespace Content.Shared.Preferences
         /// </summary>
         public const RandomizeCfg RandomizeConfigAll =
             RandomizeCfg.Name
+            | RandomizeCfg.Barks // Trauma
             | RandomizeCfg.Species
             | RandomizeCfg.Age
             | RandomizeCfg.Sex
             | RandomizeCfg.Gender
             | RandomizeCfg.Eyes
             | RandomizeCfg.Skin
-            | RandomizeCfg.Barks; // Trauma
+            | RandomizeCfg.Markings;
 
         /// <summary>
         /// Picks a random species from roundstart species.
@@ -387,7 +389,7 @@ namespace Content.Shared.Preferences
             profile.Knowledge = new(baseProfile.Knowledge); // no random lol
             // </Trauma>
 
-            profile.Appearance = HumanoidCharacterAppearance.Random(randomizeCfg, baseProfile.Appearance, speciesProto, profile.Sex);
+            profile.Appearance = HumanoidCharacterAppearance.Random(speciesProto, profile.Sex, randomizeCfg, baseProfile.Appearance);
 
             return profile;
         }
@@ -482,7 +484,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithJobFromCvar(IConfigurationManager cfg)
         {
             // This path should run only rarely, so the cvar does not need to be locally stored
-            var jobs = new HashSet<string>( cfg.GetCVar(CCVars.NewCharacterJobs).Split(","));
+            var jobs = new HashSet<string>(cfg.GetCVar(CCVars.NewCharacterJobs).Split(","));
             var priority = JobPriority.High;
             Dictionary<ProtoId<JobPrototype>, JobPriority> priorities = new();
 

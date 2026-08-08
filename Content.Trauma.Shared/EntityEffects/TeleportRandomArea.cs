@@ -19,6 +19,6 @@ public sealed partial class TeleportRandomArea : EntityEffectBase<TeleportRandom
     /// <summary>
     /// Name of the component to search for, can be used to filter to more specific areas.
     /// </summary>
-    [DataField]
-    public string CompName = "Area";
+    [DataField(required: true)]
+    public CompName CompName;
 }

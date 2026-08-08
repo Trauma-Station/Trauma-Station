@@ -2,23 +2,12 @@
 
 using Content.Goobstation.Shared.SpaceWhale;
 using Content.Shared.Movement.Components;
-using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.SpaceWhale;
 
 public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TailedEntityComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<TailedEntityComponent, ComponentShutdown>(OnComponentShutdown);
-        SubscribeLocalEvent<TailedEntityComponent, UpdateTailedEntitySegmentCountEvent>(OnUpdate);
-
-        SubscribeLocalEvent<TailedEntitySegmentComponent, ComponentShutdown>(OnSegmentShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnUpdate(Entity<TailedEntityComponent> ent, ref UpdateTailedEntitySegmentCountEvent args)
     {
         var difference = args.Amount - ent.Comp.TailSegments.Count;
@@ -33,6 +22,7 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnSegmentShutdown(Entity<TailedEntitySegmentComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent.Comp.Head) || !TryComp(ent.Comp.Head, out TailedEntityComponent? comp))
@@ -63,6 +53,7 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
         UpdateTailPositions((head, comp, Transform(head)));
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<TailedEntityComponent> ent, ref MapInitEvent args)
     {
         var ev = new GetTailedEntitySegmentCountEvent(ent.Comp.Amount);
@@ -74,6 +65,7 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
         UpdateNoRotateOnMove(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnComponentShutdown(Entity<TailedEntityComponent> ent, ref ComponentShutdown args)
     {
         foreach (var data in ent.Comp.TailSegments)
@@ -114,12 +106,12 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
 
         var xform = Transform(ent);
 
-        var (headPos, headRot) = TransformSystem.GetWorldPositionRotation(xform);
-        var coords = new MapCoordinates(headPos, xform.MapID);
+        var headRot = TransformSystem.GetWorldRotation(xform);
+        var coords = GetNetCoordinates(xform.Coordinates);
 
         for (var i = 0; i < count; i++)
         {
-            var segment = Spawn(ent.Comp.Prototype, coords);
+            var segment = Spawn(ent.Comp.Prototype, xform.Coordinates);
             var segmentComp = EnsureComp<TailedEntitySegmentComponent>(segment);
             segmentComp.Coords = coords;
             segmentComp.WorldRotation = headRot;
@@ -127,7 +119,7 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
             segmentComp.SegmentCount = count;
             segmentComp.Head = ent;
             Dirty(segment, segmentComp);
-            ent.Comp.TailSegments.Add(new (GetNetEntity(segment), headPos));
+            ent.Comp.TailSegments.Add(new(GetNetEntity(segment), coords));
         }
 
         Dirty(ent);

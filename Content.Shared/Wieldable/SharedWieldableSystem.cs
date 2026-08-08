@@ -105,7 +105,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
             {
                 component.LastPopup = time;
                 var message = Loc.GetString("wieldable-component-requires", ("item", uid));
-                _popup.PopupClient(message, args.Used, args.User);
+                _popup.PopupEntity(message, args.Used, args.User);
             }
         }
     }
@@ -265,7 +265,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
         if (!TryComp<HandsComponent>(user, out var hands))
         {
             if (!quiet)
-                _popup.PopupClient(Loc.GetString("wieldable-component-no-hands"), user, user);
+                _popup.PopupEntity(Loc.GetString("wieldable-component-no-hands"), user, user);
             return false;
         }
 
@@ -273,7 +273,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
         if (checkHolding && !_hands.IsHolding((user, hands), wieldable, out _)) // Goob - checkHolding
         {
             if (!quiet)
-                _popup.PopupClient(Loc.GetString("wieldable-component-not-in-hands", ("item", wieldable.Owner)), user, user);
+                _popup.PopupEntity(Loc.GetString("wieldable-component-not-in-hands", ("item", wieldable.Owner)), user, user);
             return false;
         }
 
@@ -283,7 +283,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
             {
                 var message = Loc.GetString("wieldable-component-not-enough-free-hands",
                     ("number", wieldable.Comp.FreeHandsRequired), ("item", wieldable.Owner));
-                _popup.PopupClient(message, user, user);
+                _popup.PopupEntity(message, user, user);
             }
             return false;
         }
@@ -317,7 +317,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
         if (attemptEv.Cancelled)
         {
             if (attemptEv.Message != null)
-                _popup.PopupClient(attemptEv.Message, user, user);
+                _popup.PopupEntity(attemptEv.Message, user, user);
             return false;
         }
 
@@ -354,7 +354,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
         var selfMessage = Loc.GetString("wieldable-component-successful-wield", ("item", wieldable.Owner));
         var othersMessage = Loc.GetString("wieldable-component-successful-wield-other", ("user", Identity.Entity(user, EntityManager)), ("item", wieldable.Owner));
         if (showMessage) // Trauma - check showMessage before doing the popup
-            _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+            _popup.PopupEntity(selfMessage, othersMessage, user, user);
 
         _appearance.SetData(wieldable.Owner, WieldableVisuals.Wielded, true); // Trauma
 
@@ -384,7 +384,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
             if (attemptEv.Cancelled)
             {
                 if (attemptEv.Message != null)
-                    _popup.PopupClient(attemptEv.Message, user, user);
+                    _popup.PopupEntity(attemptEv.Message, user, user);
                 return false;
             }
         }
@@ -433,7 +433,7 @@ public abstract partial class SharedWieldableSystem : EntitySystem
 
             var selfMessage = Loc.GetString("wieldable-component-failed-wield", ("item", uid));
             var othersMessage = Loc.GetString("wieldable-component-failed-wield-other", ("user", Identity.Entity(args.User, EntityManager)), ("item", uid));
-            _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+            _popup.PopupEntity(selfMessage, othersMessage, user, user);
         }
     }
 

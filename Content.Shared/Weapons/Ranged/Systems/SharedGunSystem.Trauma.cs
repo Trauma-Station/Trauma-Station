@@ -21,6 +21,8 @@ public abstract partial class SharedGunSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
 
+    private const float DamagePitchVariation = 0.05f;
+
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.
     /// </summary>

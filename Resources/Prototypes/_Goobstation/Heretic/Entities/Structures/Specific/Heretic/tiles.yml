@@ -89,13 +89,6 @@
       effectProto: ShadowCloakStatusEffect
       time: 180
       type: Remove
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectBlurryVision
-      time: 6
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
-      time: 6
   - type: Transform
     anchored: true
   - type: Physics
@@ -123,8 +116,6 @@
       components:
       - Ghoul
       - ForestAdmonitions
-  - type: SoundBlocker
-    soundBlockPercent: 0.95
 
 - type: entity
   id: TileHereticVoid
@@ -153,9 +144,8 @@
   - type: TileEntityEffect
     effects:
     - !type:VoidCurse
-    - !type:GenericStatusEffect
-      key: PressureImmunity
-      component: PressureImmunity
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectPressureImmunity
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -277,9 +267,9 @@
   components:
   - type: TimedDespawn
     lifetime: 30
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - WideSwingIgnore
   - type: Physics
     bodyType: Static
@@ -343,9 +333,9 @@
   components:
   - type: TimedDespawn
     lifetime: 15
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - Holosign
     - BlockLightning
   - type: Physics

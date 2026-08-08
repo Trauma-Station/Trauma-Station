@@ -54,7 +54,7 @@
 
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSyndieStealthDebug
   suffix: DEBUG, DO NOT MAP, stealth
   categories: [ DoNotMap ]

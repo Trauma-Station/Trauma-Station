@@ -16,14 +16,12 @@ using Content.Server.Pointing.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Roles;
-using Content.Server.Speech.Components;
 using Content.Shared.Speech.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Tabletop;
 using Content.Shared.Actions;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Components;
-using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body;
@@ -978,6 +976,12 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new("Interface/Actions/voice-mask.rsi"), "icon"),
             Act = () =>
             {
+                // <Trauma>
+                EnsureComp<GlorpAccentComponent>(args.Target);
+                EnsureComp<MedievalAccentComponent>(args.Target);
+                EnsureComp<OhioAccentComponent>(args.Target);
+                EnsureComp<PirateAccentComponent>(args.Target);
+                // </Trauma>
                 EnsureComp<BarkAccentComponent>(args.Target);
                 EnsureComp<BleatingAccentComponent>(args.Target);
                 EnsureComp<FrenchAccentComponent>(args.Target);
@@ -990,12 +994,6 @@ public sealed partial class AdminVerbSystem
                 EnsureComp<SouthernAccentComponent>(args.Target);
                 EnsureComp<SpanishAccentComponent>(args.Target);
                 EnsureComp<StutteringAccentComponent>(args.Target);
-                // <Goob>
-                EnsureComp<MedievalAccentComponent>(args.Target);
-                EnsureComp<OhioAccentComponent>(args.Target);
-                EnsureComp<PirateAccentComponent>(args.Target);
-                EnsureComp<VulgarAccentComponent>(args.Target);
-                // </Goob>
 
                 if (_random.Next(0, 8) == 0)
                 {

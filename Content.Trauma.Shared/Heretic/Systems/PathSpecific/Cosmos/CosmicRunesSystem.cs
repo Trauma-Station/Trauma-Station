@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Bible;
+using Content.Shared.Bible.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
@@ -33,6 +31,7 @@ public sealed partial class CosmicRunesSystem : EntitySystem
     [Dependency] private SharedStarMarkSystem _starMark = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private TouchSpellSystem _touchSpell = default!;
+    [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
 
     private HashSet<Entity<StarMarkComponent>> _teleporting = new();
 
@@ -53,9 +52,9 @@ public sealed partial class CosmicRunesSystem : EntitySystem
         if (HasComp<StarTouchComponent>(args.Used))
         {
             _touchSpell.InvokeTouchSpell(args.Used, args.User);
-            EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = 0f;
+            _fadeDespawn.FadeDespawnEntity(ent, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             if (Exists(ent.Comp.LinkedRune))
-                EnsureComp<FadingTimedDespawnComponent>(ent.Comp.LinkedRune.Value).Lifetime = 0f;
+                _fadeDespawn.FadeDespawnEntity(ent.Comp.LinkedRune.Value, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             args.Handled = true;
             return;
         }
@@ -67,7 +66,7 @@ public sealed partial class CosmicRunesSystem : EntitySystem
 
         _useDelay.TryResetDelay(args.Used, false, useDelay);
         _audio.PlayPredicted(bible.HealSoundPath, Transform(ent).Coordinates, args.User);
-        EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = 0f;
+        _fadeDespawn.FadeDespawnEntity(ent, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         args.Handled = true;
     }
 

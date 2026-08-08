@@ -25,6 +25,7 @@ public sealed partial class RelayNearby : EntityEffectBase<RelayNearby>
     /// </summary>
     [DataField(required: true)]
     public string CompName = string.Empty;
+    // TODO: use CompName if plant holder is moved to shared
 
     /// <summary>
     /// Cached type for the component.

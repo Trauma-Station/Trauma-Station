@@ -9,7 +9,7 @@
   components:
   - type: Knowledge
     category: MeleeCombat
-    costs: [0, 2, 4]
+    costs: [0, 2, 6]
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
@@ -55,6 +55,24 @@
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
+  id: KnowledgeWeaponsShield
+  name: Shield Training
+  description: Allows you to parry and block damage better with shields.
+  components:
+  - type: Knowledge
+    unremoveable: true
+  - type: BlockFractionKnowledge
+    # If block ratio is 0.5:
+    # 0.35 at level 0
+    # 0.5 at level 25
+    # 0.65 at level 100
+    curve: !type:RootSkillCurve
+      skillScale: 100
+      curveOffset: 0.7
+      curveScale: 0.06
+
+- type: entity
+  parent: BaseKnowledgeWeaponsMelee
   id: KnowledgeWeaponsEnergy
   name: Energy Weapon Training
   description: Modern energy weapons are highly dangerous and unintuitive, it takes lots of training to use them correctly.
@@ -71,7 +89,7 @@
   components:
   - type: Knowledge
     category: RangedCombat
-    costs: [0, 2, 4]
+    costs: [0, 2, 6]
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
@@ -79,6 +97,8 @@
   name: Marksmanship
   description: How good your aim is with most guns. Training with the relevant weapon is much better, but a good eye puts you ahead of the rest.
   components:
+  - type: Knowledge
+    unremoveable: true
   - type: AimSpeedKnowledge
     # [-5%, +12%] neutral at lvl 28
     curve: !type:RootSkillCurve
@@ -116,7 +136,7 @@
   description: "How well you can snipe using a scoped rifle at long range."
   components:
   - type: Knowledge
-    costs: null # my sparkledog med intern actually used to be an isis rocketeer
+    costs: null # my sparkledog med intern actually used to be Quiet
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
@@ -138,3 +158,15 @@
   id: KnowledgeWeaponsMining
   name: Mining Tool Training
   description: How good you are with mining weapons, from modded out PKAs to the humble pickaxe.
+
+- type: entity
+  parent: BaseKnowledgeWeaponsRanged
+  id: ThrowingKnowledge
+  name: Throwing
+  description: Makes you throw items faster and with more precision.
+  components:
+  - type: Knowledge
+    unremoveable: true
+    experienceCost: 5
+  - type: ThrowInsertKnowledge # being better at throwing lets you slam dunk easier
+    curve: !type:QuadraticSkillCurve

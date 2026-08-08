@@ -12,6 +12,8 @@
   components:
   - type: TriggerOnThrown
     keyOut: activate
+  - type: TriggerOnMeleeHit
+    keyOut: activate
   - type: TriggerOnGotEquippedHand
     keyOut: deactivate
   - type: GenericTriggerCondition
@@ -35,7 +37,7 @@
     targetUser: true
     effects:
     - !type:SetThrowCooldown
-      cooldown: 1
+      cooldown: 0.9
   - type: ItemToggleOnTrigger
     keysIn: [activate]
     canDeactivate: false
@@ -74,9 +76,12 @@
   name: eldritch blade
   description: A sickly green crescent blade, decorated with an ornamental eye. You feel like you're being watched...
   components:
+  - type: WeaponClass
+    class: Knife # not a knife but uses short blade knowledge
   - type: LandAtCursor
   - type: UnholyItem
   - type: HereticBlade
+  - type: SurgeryTool
   - type: Tool
     qualities:
     - Slicing
@@ -192,13 +197,11 @@
           False: { state: icon }
           True: { state: infused }
 
-# Ghoul blade (cannot teleport)
 - type: entity
+  abstract: true
   parent: HereticBladeBaseNoTeleport
-  id: HereticBladeFleshGhoul
-  name: ghoul blade
+  id: HereticBladeFleshBase
   description: A crescent blade born from a fleshwarped creature. Keenly aware, it seeks to spread to others the suffering it has endured from its dreadful origins.
-  suffix: Flesh ghoul
   components:
   - type: HereticBlade
     effects:
@@ -213,8 +216,21 @@
   - type: Item
     sprite: _Goobstation/Heretic/Blades/blade_flesh-inhand.rsi
 
+# Ghoul blade (cannot teleport, lower damage)
 - type: entity
-  parent: [HereticBladeFleshGhoul, BaseRandomTeleportBlade]
+  parent: HereticBladeFleshBase
+  id: HereticBladeFleshGhoul
+  name: ghoul blade
+  description: A crescent blade born from a fleshwarped creature. Keenly aware, it seeks to spread to others the suffering it has endured from its dreadful origins.
+  suffix: Flesh ghoul
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 15
+
+- type: entity
+  parent: [HereticBladeFleshBase, BaseRandomTeleportBlade]
   id: HereticBladeFlesh
   name: bloody blade
   suffix: Flesh

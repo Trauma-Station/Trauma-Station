@@ -9,6 +9,7 @@
     - WheatBushel
   mutationPrototypes:
     - meatwheat
+    - SteelWheat # Trauma
   lifespan: 25
   maturation: 6
   production: 3
@@ -746,6 +747,7 @@
   productPrototypes:
     - FoodApple
   mutationPrototypes:
+    - deliciousApple # Trauma
     - goldenApple
   harvestRepeat: Repeat
   lifespan: 55
@@ -1643,6 +1645,7 @@
     - FoodWatermelon
   mutationPrototypes:
     - holymelon
+    - BalloonWatermelon # Trauma
   lifespan: 55
   maturation: 12
   production: 3
@@ -1788,6 +1791,7 @@
     - FoodPeaPod
   mutationPrototypes:
     - laughinPea
+    - Peanut # Trauma
   lifespan: 25
   growthStages: 3
   maturation: 8
@@ -1836,7 +1840,7 @@
       Min: 1
       Max: 3
       PotencyDivisor: 20
-    Tilenol:
+    Tilenol: # Trauma - was Pax
       Min: 1
       Max: 2
       PotencyDivisor: 50

@@ -352,15 +352,10 @@
 
 # Slasher
 - type: entity
-  parent: BaseAntagGhostRoleRule
-  id: SlasherSpawn
+  parent: BaseGameRule
+  id: SlasherRule
   components:
-  - type: GhostroleAlert
-  - type: StationEvent
-    weight: 3
-    duration: null
-    earliestStart: 30
-    minimumPlayers: 30
+  - type: SlasherRule
   - type: AntagRandomSpawn
   - type: AntagLoadProfileRule
     speciesOverride: Human
@@ -378,3 +373,14 @@
     antags:
     - !type:FixedAntagCount
       proto: Slasher
+
+- type: entity
+  parent: [ SlasherRule, BaseAntagGhostRoleRule ]
+  id: SlasherSpawn
+  components:
+  - type: GhostroleAlert
+  - type: StationEvent
+    weight: 3
+    duration: null
+    earliestStart: 30
+    minimumPlayers: 30

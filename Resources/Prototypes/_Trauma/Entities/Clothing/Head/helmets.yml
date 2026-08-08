@@ -60,7 +60,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.4
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1
   - type: FaceHuggerBlocker
 
 - type: entity

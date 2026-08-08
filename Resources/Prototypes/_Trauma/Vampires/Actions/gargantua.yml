@@ -25,9 +25,9 @@
       path: /Audio/Voice/Slime/slime_squish.ogg
       params:
         volume: 2
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_swell
+  - type: Sprite
+    layers:
+    - state: blood_swell
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -64,9 +64,9 @@
       path: /Audio/_Lavaland/heartbeat.ogg
       params:
         pitch: 2
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_rush
+  - type: Sprite
+    layers:
+    - state: blood_rush
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -97,9 +97,9 @@
       path: /Audio/_Trauma/Vampires/Actions/vampire_stomp.ogg
       params:
         volume: 5
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: seismic_stomp
+  - type: Sprite
+    layers:
+    - state: seismic_stomp
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -130,9 +130,9 @@
         volume: 2
         pitch: 2
     useDelay: 2
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: OH_YEAAAAH
+  - type: Sprite
+    layers:
+    - state: OH_YEAAAAH
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
@@ -172,9 +172,9 @@
         pitch: 0.05
     raiseOnAction: false
     raiseOnUser: true
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: demonic_grasp
+  - type: Sprite
+    layers:
+    - state: demonic_grasp
   - type: TargetAction
     range: 65
     checkCanAccess: false
@@ -196,9 +196,9 @@
     useDelay: 30
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_charge.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_charge
+  - type: Sprite
+    layers:
+    - state: vampire_charge
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -222,9 +222,9 @@
   - type: Action
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_duel.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: duel
+  - type: Sprite
+    layers:
+    - state: duel
   - type: TargetAction
     range: 10
   - type: EntityTargetAction

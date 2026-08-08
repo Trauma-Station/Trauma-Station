@@ -130,6 +130,11 @@
     - MutationRockEater # non parity but peak
   - type: ScaleVisuals # remove the scale as the mutation will do it instead
     scale: 1, 1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 300
   # </Trauma>
   - type: Fixtures
     fixtures: # TODO: This needs a second fixture just for mob collisions.
