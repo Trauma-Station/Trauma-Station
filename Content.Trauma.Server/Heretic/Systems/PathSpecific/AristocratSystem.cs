@@ -22,6 +22,7 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Weather;
+using Content.Trauma.Common.Atmos;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -71,6 +72,7 @@ public sealed partial class AristocratSystem : EntitySystem
 
     private readonly HashSet<Entity<DamageableComponent>> _targets = new();
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
+    private readonly HashSet<Entity<OnFireComponent>> _fires = new();
 
     [SubscribeLocalEvent]
     private void OnStartup(Entity<AristocratComponent> ent, ref ComponentStartup args)
@@ -370,12 +372,12 @@ public sealed partial class AristocratSystem : EntitySystem
     private void ExtinguishFires(Entity<AristocratComponent, TransformComponent> ent)
     {
         var coords = ent.Comp2.Coordinates;
-        var fires = _lookup.GetEntitiesInRange<FlammableComponent>(coords, ent.Comp1.Range);
+        _fires.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp1.Range, _fires);
 
-        foreach (var (uid, flam) in fires)
+        foreach (var target in _fires)
         {
-            if (flam.OnFire)
-                _flammable.Extinguish(uid, flam);
+            _flammable.TryExtinguish(target.Owner);
         }
 
         ExtinguishFiresTiles(ent);

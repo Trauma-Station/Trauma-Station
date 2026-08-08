@@ -83,14 +83,7 @@
   name: holofan projector
   description: Stop suicidal passengers from killing everyone during atmos emergencies.
   components:
-  - type: ChargeHolosignProjector # DeltaV - different implementation using charges
-    signProto: HoloFan
-    signComponentName: Holofan # DeltaV
-    #chargeUse: 120 # DeltaV
-  - type: Sprite
-    sprite: Objects/Devices/Holoprojectors/atmos.rsi
-    state: icon
-  # Begin DeltaV Additions
+  # <Trauma>
   - type: Item
     storedRotation: -90
   - type: LimitedCharges
@@ -98,17 +91,24 @@
   - type: ContainerContainer
     containers:
       signs: !type:Container
-  # End DeltaV Additions
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 75
+      Plastic: 12
+      Glass: 12
+  # </Trauma>
+  - type: ChargeHolosignProjector # DeltaV - different implementation using charges
+    signProto: HoloFan
+    signComponentName: Holofan # DeltaV
+    #chargeUse: 120 # DeltaV
+  - type: Sprite
+    sprite: Objects/Devices/Holoprojectors/atmos.rsi
+    state: icon
   - type: Tag
     tags:
     - HolofanProjector
   - type: StaticPrice
     price: 80
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 75
-      Plastic: 12
-      Glass: 12
   - type: GuideHelp
     guides:
     - AtmosTools
@@ -140,6 +140,27 @@
         startingItem: PowerCellMicroreactor
         disableEject: true
         swap: false
+
+- type: entity
+  parent: HolofanProjector # Trauma - use regular one
+  id: HoloprojectorXenoField
+  name: Xenoborg deflector field projector
+  description: An alien device, projecting fields that deflect projectiles.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/Holoprojectors/xenoborg.rsi
+  # <Trauma>
+  #- type: ItemSlots
+  #  slots:
+  #    cell_slot:
+  #      name: power-cell-slot-component-slot-name-default
+  #      startingItem: PowerCellMicroreactor
+  #      disableEject: true
+  #      swap: false
+  - type: ChargeHolosignProjector # different implementation
+    signProto: XenoborgDeflectorField
+    #chargeUse: 200
+  # </Trauma>
 
 - type: entity
   parent: Holoprojector

@@ -442,7 +442,7 @@ public sealed partial class SlasherSoulStealSystem : EntitySystem
             {
                 // Flicker the light via ghost boo event
                 var ev = new GhostBooEvent();
-                RaiseLocalEvent(light, ev);
+                RaiseLocalEvent(light, ref ev);
                 handled = ev.Handled;
             }
 

@@ -509,6 +509,9 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: BlockShuttleRecall
+  # </Trauma>
   - type: RandomMetadata
     nameSegments:
     - NamesXenoborg

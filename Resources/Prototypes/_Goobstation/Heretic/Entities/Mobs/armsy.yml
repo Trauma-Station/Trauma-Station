@@ -191,7 +191,7 @@
   - type: ThermalVision
     color: white
     toggleAction: null
-    thermalShader: null
+    useShader: false
     isActive: true
 
 - type: entity

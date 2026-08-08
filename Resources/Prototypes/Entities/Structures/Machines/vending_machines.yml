@@ -1471,6 +1471,8 @@
     #- MiningDrone
   - type: Wires
     layoutId: ShopVendor
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
   #- type: VendingMachine
   #  pack: SalvageEquipmentInventory
   #- type: VendingMachineVisuals

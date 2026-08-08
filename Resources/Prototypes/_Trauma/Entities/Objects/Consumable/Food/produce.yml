@@ -356,6 +356,10 @@
     solution:
       reagents:
       - ReagentId: Synthflesh
+        Quantity: 40
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 10
+      - ReagentId: GastroToxin
         Quantity: 10
   - type: Produce
     seedId: SynthMeat

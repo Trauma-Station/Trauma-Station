@@ -84,7 +84,7 @@ public sealed partial class MindcontrolSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnMindShielded(Entity<MindcontrolledComponent> ent, ref MindShieldAttemptEvent args)
+    private void OnMindShielded(Entity<MindcontrolledComponent> ent, ref MindShieldedEvent args)
     {
         RemCompDeferred(ent, ent.Comp);
     }

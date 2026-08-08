@@ -37,7 +37,7 @@ namespace Content.Trauma.Client.Wizard.Refund
 
         public void Populate()
         {
-            ButtonContainer.DisposeAllChildren();
+            ButtonContainer.RemoveAllChildren();
             AddButtons();
         }
 

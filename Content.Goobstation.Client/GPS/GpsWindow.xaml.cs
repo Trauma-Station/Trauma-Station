@@ -130,7 +130,7 @@ public sealed partial class GpsWindow : BaseWindow
 
         _previousEntry = sortedEntries;
 
-        GpsList.DisposeAllChildren();
+        GpsList.RemoveAllChildren();
 
         foreach (var entry in sortedEntries)
         {
