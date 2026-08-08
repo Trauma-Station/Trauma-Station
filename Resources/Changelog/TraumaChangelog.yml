@@ -12880,3 +12880,20 @@ Entries:
   id: 1409
   time: '2026-08-08T09:23:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3737
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a new cartridge type used primarily by ED-209 (.30 Caseless)
+  - type: Add
+    message: >-
+      Added the ability for ED-209 to passively regenerate ammo at 1 bullet
+      every 4 seconds
+  - type: Tweak
+    message: Increased the health of ED-209 from 100 to 175
+  - type: Tweak
+    message: Decreased the firerate of ED-209 from 5 to 2
+  - type: Tweak
+    message: Decreased the maximum ammo capacity of ED-209 from 125 to 100
+  id: 1410
+  time: '2026-08-08T12:28:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3986
