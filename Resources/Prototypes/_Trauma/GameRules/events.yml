@@ -316,7 +316,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SyndiePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-syndicate-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterSyndicate
@@ -339,7 +339,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-spacepol-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterSpacepol
@@ -362,7 +362,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/RussianHunterShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-russian-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterRussian
@@ -385,7 +385,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/MercHunterShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-bounty-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterBounty

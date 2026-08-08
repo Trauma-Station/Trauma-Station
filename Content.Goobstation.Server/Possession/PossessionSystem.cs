@@ -11,7 +11,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;

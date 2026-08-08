@@ -4,15 +4,13 @@ using Content.Shared.Examine;
 using Content.Shared.Rejuvenate;
 using JetBrains.Annotations;
 using Robust.Shared.Timing;
-using Content.Shared.FixedPoint;
-using Content.Trauma.Common.Charges; // Trauma
 
 namespace Content.Shared.Charges.Systems;
 
 public abstract partial class SharedChargesSystem : EntitySystem
 {
-    [Dependency] private SharedAppearanceSystem _appearance = default!; // Trauma
     [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     /*
      * Despite what a bunch of systems do you don't need to continuously tick linear number updates and can just derive it easily.
@@ -90,6 +88,13 @@ public abstract partial class SharedChargesSystem : EntitySystem
 
         ent.Comp.LastUpdate = _timing.CurTime;
         Dirty(ent);
+        UpdateChargeVisuals((ent.Owner, ent.Comp, null));
+    }
+
+    protected void UpdateChargeVisuals(Entity<LimitedChargesComponent?, AutoRechargeComponent?> entity)
+    {
+        var current = GetCurrentCharges(entity);
+        _appearance.SetData(entity.Owner, LimitedChargesState.HasCharges, current != 0);
     }
 
     [Pure]
@@ -141,8 +146,7 @@ public abstract partial class SharedChargesSystem : EntitySystem
 
         action.Comp1.LastCharges = Math.Clamp(action.Comp1.LastCharges + addCharges, 0, action.Comp1.MaxCharges);
         Dirty(action.Owner, action.Comp1);
-
-        _appearance.SetData(action.Owner, ChargesVisuals.Charges, !IsEmpty(action)); // Trauma
+        UpdateChargeVisuals(action);
     }
 
     public bool TryUseCharge(Entity<LimitedChargesComponent?> entity)
@@ -185,8 +189,7 @@ public abstract partial class SharedChargesSystem : EntitySystem
         action.Comp.LastCharges = action.Comp.MaxCharges;
         action.Comp.LastUpdate = _timing.CurTime;
         Dirty(action);
-
-        _appearance.SetData(action.Owner, ChargesVisuals.Charges, !IsEmpty(action)); // Trauma
+        UpdateChargeVisuals((action.Owner, action.Comp, null)); // Trauma
     }
 
     /// <summary>
@@ -215,8 +218,7 @@ public abstract partial class SharedChargesSystem : EntitySystem
         action.Comp.LastCharges = adjusted;
         action.Comp.LastUpdate = _timing.CurTime;
         Dirty(action);
-
-        _appearance.SetData(action.Owner, ChargesVisuals.Charges, !IsEmpty(action)); // Trauma
+        UpdateChargeVisuals((action.Owner, action.Comp, null));
     }
 
     /// <summary>
@@ -292,19 +294,5 @@ public abstract partial class SharedChargesSystem : EntitySystem
         return Math.Clamp(entity.Comp1.LastCharges + calculated,
             0,
             entity.Comp1.MaxCharges);
-    }
-
-    // Goob Change: I LOVE SET ACCESSORS.
-    public void SetMaxCharges(
-      EntityUid uid,
-      int charges,
-      LimitedChargesComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        component.MaxCharges = charges;
-        SetCharges(uid, Math.Clamp(charges, 0, component.MaxCharges));
-        Dirty(uid, component);
     }
 }

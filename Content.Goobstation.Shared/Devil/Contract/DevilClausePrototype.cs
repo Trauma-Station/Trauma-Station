@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Polymorph;
+using Content.Shared.EntityEffects;
 
 namespace Content.Goobstation.Shared.Devil.Contract;
 
@@ -22,24 +22,16 @@ public sealed partial class DevilClausePrototype : IPrototype
     [DataField]
     public string? DamageModifierSet;
 
+    // TODO: kill
     [DataField]
     public BaseDevilContractEvent? Event;
+
+    [DataField]
+    public EntityEffect[]? Effects;
 
     [DataField]
     public List<EntProtoId>? Implants;
 
     [DataField]
     public List<EntProtoId>? SpawnedItems;
-
-    [DataField]
-    public ProtoId<PolymorphPrototype>? Polymorph;
-
-}
-
-public enum SpecialCase : byte
-{
-    SoulOwnership,
-    RemoveHand,
-    RemoveLeg,
-    RemoveOrgan,
 }

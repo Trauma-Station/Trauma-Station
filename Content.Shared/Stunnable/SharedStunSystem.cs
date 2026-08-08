@@ -33,6 +33,10 @@ public abstract partial class SharedStunSystem : EntitySystem
 {
     public static readonly EntProtoId StunId = "StatusEffectStunned";
 
+    // <Trauma>
+    [Dependency] private StutteringSystem _stutter = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    // </Trauma>
     [Dependency] protected IGameTiming GameTiming = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] protected ActionBlockerSystem Blocker = default!;
@@ -44,8 +48,6 @@ public abstract partial class SharedStunSystem : EntitySystem
     [Dependency] protected SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected SharedStaminaSystem Stamina = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
-    [Dependency] private SharedStutteringSystem _stutter = default!; // Goob
-    [Dependency] private SharedJitteringSystem _jitter = default!; // Goob
 
     public override void Initialize()
     {

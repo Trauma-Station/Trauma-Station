@@ -34,7 +34,6 @@
     - Ghost
   - type: MindContainer
   - type: MindExaminable
-  - type: Muted
   - type: IsDeadIC
     dead: false
 

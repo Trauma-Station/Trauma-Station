@@ -83,6 +83,7 @@
   - BaseSpeciesMob
   - MobAtmosStandard
   - MobBloodstream
+  - MobRespirator
   - MobFlammable
   id: MobPlasmaman
   name: Urist McPlasma
@@ -132,8 +133,7 @@
   - type: Inventory
     templateId: plasmaman
   - type: Temperature
-    specificHeat: 46
-    currentTemperature: 270.15  # -3 celsius
+    temperature: 270.15  # -3 celsius
   - type: TemperatureDamage
     heatDamageThreshold: 308    # 35 celsius, -17 from base heat damage threshold
     coldDamage:

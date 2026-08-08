@@ -5,12 +5,11 @@ using Content.Goobstation.Common.Religion;
 using Content.Shared.Actions;
 using Content.Shared.Antag;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
-using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -42,24 +41,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mobState = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, ComponentGetStateAttemptEvent>(OnCosmicCultCompGetStateAttempt);
-        SubscribeLocalEvent<CosmicCultComponent, ComponentStartup>(DirtyCosmicCultComps);
-
-        SubscribeLocalEvent<CosmicCultExamineComponent, ExaminedEvent>(OnCosmicCultExamined);
-        SubscribeLocalEvent<CosmicSubtleMarkComponent, ExaminedEvent>(OnSubtleMarkExamined);
-        SubscribeLocalEvent<CosmicShopComponent, LevelUpconfirmedMessage>(OnLevelUpConfirmed);
-        SubscribeLocalEvent<CosmicEntropyMoteComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<CosmicCultComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
-        SubscribeLocalEvent<CosmicNonRespiratingComponent, SuffocationBeforeEvent>(OnSuffocationBefore);
-        SubscribeLocalEvent<CosmicLesserCultistComponent, RemoveMindShieldEvent>(OnRemoveMindShieldLesserCultist);
-        SubscribeLocalEvent<CosmicCultComponent, RemoveMindShieldEvent>(OnRemoveMindShieldCultist);
-        SubscribeLocalEvent<CosmicCultComponent, CheckVotingEligibilityEvent>(OnVoting);
-    }
-
+    [SubscribeLocalEvent]
     private void OnShouldTakeHoly(Entity<CosmicCultComponent> ent, ref UserShouldTakeHolyEvent args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
@@ -70,27 +52,25 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         args.ShouldTakeHoly = HasComp<CosmicStarMarkComponent>(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnSuffocationBefore(Entity<CosmicNonRespiratingComponent> ent, ref SuffocationBeforeEvent args)
     {
-        // DeltaV: Cosmic Cult - One line change but a refactor would be better. this is kinda cringe.
         // Makes cultists gasp and respirate but not asphyxiate in space.
         if (ent.Comp.Enabled && (ent.Comp.EnableWhenCritical && _mobState.IsIncapacitated(ent) || ent.Comp.EnableWhenAlive && _mobState.IsAlive(ent)))
             args.Cancelled = true;
     }
 
-    private void OnRemoveMindShieldLesserCultist(Entity<CosmicLesserCultistComponent> ent, ref RemoveMindShieldEvent args)
+    [SubscribeLocalEvent]
+    private void OnLesserMindShielded(Entity<CosmicLesserCultistComponent> ent, ref MindShieldAttemptEvent args)
     {
-        RemComp<CosmicLesserCultistComponent>(ent);
+        // event abuse but lazy
+        RemCompDeferred(ent, ent.Comp);
     }
 
-    private void OnRemoveMindShieldCultist(Entity<CosmicCultComponent> ent, ref RemoveMindShieldEvent args)
+    [SubscribeLocalEvent]
+    private void OnCultistMindShieldAttempt(Entity<CosmicCultComponent> ent, ref MindShieldAttemptEvent args)
     {
-        if (TryComp<MindShieldComponent>(ent, out var shieldComp))
-        {
-            _popup.PopupEntity(Loc.GetString("cosmiccult-mindshield-popup"), ent);
-            shieldComp.Broken = true;
-            Dirty(ent, shieldComp);
-        }
+        args.CancelPopup = "cosmiccult-mindshield-popup";
     }
 
     private void OnVoting(Entity<CosmicCultComponent> ent, ref CheckVotingEligibilityEvent args)

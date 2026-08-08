@@ -233,6 +233,7 @@
       Plasma: 20
     chemicalComposition:
       Zinc: 5
+  - type: DamageExaminable
 
 - type: entity
   name: revolver power cell
@@ -360,7 +361,7 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/energy_cell_lmg.rsi
   - type: Item
-    size: Large
+    size: Normal
     shape:
     - 0,0,2,1
   - type: Battery

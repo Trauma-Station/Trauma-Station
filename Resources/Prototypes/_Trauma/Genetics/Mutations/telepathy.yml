@@ -19,11 +19,12 @@
   name: Telepathy
   description: Telepathically transmits a message to the target.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: mindread # close enough and im not using fucking revenant icons
   - type: Action
     useDelay: 5
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: mindread # close enough and im not using fucking revenant icons
   - type: TargetAction
     checkCanAccess: false # MIND POWERS
     range: 7

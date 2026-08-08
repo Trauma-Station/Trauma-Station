@@ -72,10 +72,12 @@
     damageModifierSet: Hierophant
   - type: Injurable
     damageContainer: Inorganic
-  - type: Advertise
-    pack: ColossusWords
-    minimumWait: 15
-    maximumWait: 40
+  - type: Vocalizer
+    minVocalizeInterval: 15
+    maxVocalizeInterval: 40
+    hideChat: true
+  - type: DatasetVocalizer
+    dataset: ColossusWords
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/_Lavaland/Effects/meteorimpact.ogg

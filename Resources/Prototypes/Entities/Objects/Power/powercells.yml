@@ -3,6 +3,15 @@
   abstract: true
   parent: BaseItem
   components:
+  # <Trauma>
+  - type: BatteryAmmoProvider
+    proto: LaserSidearmBullet
+    fireCost: 70
+  - type: StealTarget
+    stealGroup: Battery
+  - type: BatteryDrinkerSource
+    maxAmount: 360
+  # </Trauma>
   - type: Item
     storedRotation: -90
   - type: Battery
@@ -24,21 +33,12 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
-          Quantity: 5
+      - ReagentId: Zinc
+        Quantity: 5
   - type: Tag
     tags:
       - PowerCell
       - DroneUsable # Goobstation
-  # <Goob>
-  - type: BatteryAmmoProvider
-    proto: LaserSidearmBullet
-    fireCost: 70
-  - type: StealTarget
-    stealGroup: Battery
-  - type: BatteryDrinkerSource
-    maxAmount: 360
-  # </Goob>
   - type: Riggable
   - type: Appearance
   - type: BatteryVisuals
@@ -66,20 +66,7 @@
   id: PowerCellPotato
   parent: BasePowerCell
   components:
-  - type: Sprite
-    layers:
-    - state: potato
-  - type: Battery
-    maxCharge: 70
-    startingCharge: 70
-  - type: Tag
-    tags:
-      - PotatoBattery
-      - DroneUsable # Goobstation
-  - type: Construction
-    graph: PowerCellPotato
-    node: potatobattery
-  # <Goob>
+  # <Trauma>
   - type: PowerSupplier
     supplyRate: 30
     supplyRampRate: 500
@@ -98,7 +85,20 @@
     sprite: Structures/Power/power.rsi
     state: generator
   - type: Anchorable
-  # </Goob>
+  # </Trauma>
+  - type: Sprite
+    layers:
+    - state: potato
+  - type: Battery
+    maxCharge: 70
+    startingCharge: 70
+  - type: Tag
+    tags:
+      - PotatoBattery
+      - DroneUsable # Goobstation
+  - type: Construction
+    graph: PowerCellPotato
+    node: potatobattery
 
 - type: entity
   name: small-capacity power cell
@@ -107,6 +107,14 @@
   suffix: Full
   parent: BasePowerCell
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 12
+      Steel: 12
+    chemicalComposition:
+      Zinc: 5
+  # </Trauma>
   - type: Sprite
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
@@ -120,12 +128,6 @@
   - type: Tag
     tags:
       - PowerCellSmall
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Plastic: 12
-      Steel: 12
-    chemicalComposition:
-      Zinc: 5
 
 - type: entity
   id: PowerCellSmallPrinted
@@ -153,6 +155,11 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 36 # 10 seconds to recharge
     autoRechargePauseTime: 30
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Uranium
+        Quantity: 5
 
 - type: entity
   name: medium-capacity power cell
@@ -161,6 +168,16 @@
   suffix: Full
   parent: BasePowerCell
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+      Steel: 50
+      Glass: 75
+      Gold: 2
+    chemicalComposition:
+      Lithium: 5
+  # </Trauma>
   - type: Sprite
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
@@ -171,16 +188,11 @@
   - type: Battery
     maxCharge: 720
     startingCharge: 720
-  # <Goob>
-  - type: PhysicalComposition
-    materialComposition:
-      Plastic: 50
-      Steel: 50
-      Glass: 75
-      Gold: 2
-    chemicalComposition:
-      Zinc: 10
-  # </Goob>
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Lithium
+        Quantity: 5
 
 - type: entity
   id: PowerCellMediumPrinted
@@ -206,6 +218,16 @@
   suffix: Full
   parent: BasePowerCell
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 37
+      Steel: 50
+      Glass: 100
+      Gold: 5
+    chemicalComposition:
+      Lithium: 5
+  # </Trauma>
   - type: Sprite
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
@@ -216,16 +238,11 @@
   - type: Battery
     maxCharge: 1080
     startingCharge: 1080
-  # <Goob>
-  - type: PhysicalComposition
-    materialComposition:
-      Plastic: 37
-      Steel: 50
-      Glass: 100
-      Gold: 5
-    chemicalComposition:
-      Zinc: 15
-  # </Goob>
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Lithium
+        Quantity: 5
 
 - type: entity
   id: PowerCellHighPrinted
@@ -261,6 +278,11 @@
   - type: Battery
     maxCharge: 1800
     startingCharge: 1800
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Lithium
+        Quantity: 5
 
 - type: entity
   id: PowerCellHyperPrinted
@@ -286,6 +308,16 @@
   description: A rechargeable standardized microreactor cell. Has lower capacity but slowly recharges by itself.
   suffix: Full
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Glass: 75
+      Uranium: 25
+      Gold: 12
+    chemicalComposition:
+      Uranium: 5
+  # </Trauma>
   - type: Sprite
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
@@ -297,18 +329,13 @@
     maxCharge: 720
     startingCharge: 720
   - type: BatterySelfRecharger
+    #canEmp: true # Trauma # TODO: reimplement this for predicted battery in a smart way
     autoRechargeRate: 12 # takes 1 minute to charge itself back to full
-    #canEmp: true # Goob # TODO: reimplement this for predicted battery in a smart way
-  # <Goob>
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
-      Glass: 75
-      Uranium: 25
-      Gold: 12
-    chemicalComposition:
-      Zinc: 20
-  # </Goob>
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Uranium
+        Quantity: 5
 
 - type: entity
   parent: PowerCellMicroreactor
@@ -344,6 +371,11 @@
       startingCharge: 1200
     - type: BatterySelfRecharger
       autoRechargeRate: 40
+    - type: Extractable
+      juiceSolution:
+        reagents:
+        - ReagentId: Uranium
+          Quantity: 5
 
 # Power cage (big heavy power cell for big devices)
 
@@ -367,8 +399,8 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
-          Quantity: 15
+      - ReagentId: Zinc
+        Quantity: 15
   - type: Tag
     tags:
       - PowerCage
@@ -422,6 +454,11 @@
   - type: Battery
     maxCharge: 2700
     startingCharge: 2700
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Lithium
+        Quantity: 10
 
 - type: entity
   id: PowerCageHigh
@@ -440,6 +477,11 @@
   - type: Battery
     maxCharge: 6200
     startingCharge: 6200
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Lithium
+        Quantity: 15
 
 - type: entity
   id: PowerCageSmallEmpty

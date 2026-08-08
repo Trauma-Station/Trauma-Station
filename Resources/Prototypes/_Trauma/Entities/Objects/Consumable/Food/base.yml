@@ -13,13 +13,10 @@
     stage: 1
   - type: AtmosExposed
   - type: Temperature
-    currentTemperature: 290
-    specificHeat: 25
+    temperature: 290
+    heatCapacity: 15000 # most items are 5kg :(
   - type: TemperatureDamage
   - type: InternalTemperature
-    thickness: 0.02
-    area: 0.02
-    conductivity: 15
   - type: BurnableFood
     burnTemp: 550
 

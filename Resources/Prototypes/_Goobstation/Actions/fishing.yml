@@ -6,10 +6,11 @@
   name: Throw fishing lure
   description: Throw lure from the fishing rod to catch something!
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+    layers:
+    - state: icon
   - type: Action
-    icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
     sound:
       path: /Audio/_Goobstation/Items/Fishing/fishing_rod_cast.ogg
     itemIconStyle: BigAction
@@ -26,10 +27,11 @@
   name: Reel fishing rod
   description: Reel your fishing rod to pull an object that it attached to, or stop fishing.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Fishing/goon_rod.rsi
+    layers:
+    - state: icon
   - type: Action
-    icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/goon_rod.rsi
-      state: icon
     sound:
       path: /Audio/_Goobstation/Items/Fishing/fishing_rod_reel.ogg
     itemIconStyle: NoItem

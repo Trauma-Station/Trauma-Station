@@ -135,7 +135,6 @@
     allowed:
     - Electrocution
     - Pacified
-    - Adrenaline
   - type: Temperature
   - type: TemperatureDamage
     heatDamageThreshold: 2400
@@ -175,10 +174,9 @@
     healRate: 5 # Trauma, was 7.5
     whitelist:
       components:
+      - Item # Trauma
       - MobState
       - Door
-      - Item # Trauma
-      tags:
       - Wall
   - type: Tag
     tags:
@@ -192,6 +190,11 @@
     - NamesDragon
     - NamesDragonTitle
     nameFormat: name-format-dragon
+  - type: Grammar
+    attributes:
+      proper: true
+  - type: NameIdentifier
+    group: null  # Strips the numeric identifier from the dragon's name, since they already have randomly-generated names anyway
   - type: Prying
     pryPowered: true
     force: true
@@ -262,11 +265,12 @@
   description: Summons a carp rift that will periodically spawns carps.
   components:
   - type: Action
-    icon:
-      sprite: Interface/Actions/carp_rift.rsi
-      state: icon
     useDelay: 1
     priority: 3
+  - type: Sprite
+    sprite: Interface/Actions/carp_rift.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:DragonSpawnRiftActionEvent
 
@@ -277,19 +281,24 @@
   description: Attempt to break a structure with your jaws or swallow a creature.
   components:
   - type: Action
-    icon: { sprite : Interface/Actions/devour.rsi, state: icon }
-    iconOn: { sprite : Interface/Actions/devour.rsi, state: icon-on }
     itemIconStyle: BigAction
     priority: 1
+  - type: Sprite
+    sprite: Interface/Actions/devour.rsi
+    layers:
+    - state: icon
+      map: ["enum.ActionVisuals.Icon"]
+    - state: icon-on
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: TargetAction
   - type: EntityTargetAction
     canTargetSelf: false
     whitelist:
       components:
+      - Item # Trauma
       - MobState
       - Door
-      - Item # Goobstation
-      tags:
       - Wall
     event: !type:DevourActionEvent
 
@@ -302,11 +311,14 @@
   - type: Action
     useDelay: 5
     # TODO: actual sprite and iconOn
-    icon: { sprite : Objects/Weapons/Guns/Projectiles/magic.rsi, state: fireball }
     itemIconStyle: NoItem # Trauma - was BigAction, dont show lungs
     priority: 2
     sound: !type:SoundPathSpecifier
       path: /Audio/Animals/space_dragon_breath.ogg
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
   - type: TargetAction
     checkCanAccess: false
     range: 0

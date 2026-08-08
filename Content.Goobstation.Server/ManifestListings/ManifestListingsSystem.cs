@@ -119,17 +119,9 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                         break;
                     default:
                     {
-                        if (data.ProductEntity != null)
-                            sprite = data.ProductEntity.Value;
-                        else if (data.ProductAction != null && TryGetActionIcon(data.ProductAction.Value,
-                                     out var actionSprite,
-                                     out var actionState))
-                        {
-                            sprite = actionSprite;
-                            state = actionState;
-                        }
-                        else
-                            sprite = ent.Comp.DefaultTexture.TexturePath.ToString();
+                        sprite = data.ProductEntity
+                            ?? data.ProductAction
+                            ?? ent.Comp.DefaultTexture.TexturePath.ToString();
 
                         break;
                     }
@@ -190,32 +182,5 @@ public sealed partial class ManifestListingsSystem : EntitySystem
         sb.AppendLine();
         sb.AppendLine(sb2.ToString());
         args.Text += sb.ToString();
-    }
-
-    private bool TryGetActionIcon(EntProtoId proto, out string sprite, out string state)
-    {
-        sprite = "";
-        state = "";
-
-        // TODO: change to appearance data
-        if (!ProtoMan.Index(proto).TryComp<ActionComponent>(_actionName, out var actionComp) || actionComp.Icon == null)
-            return false;
-
-        switch (actionComp.Icon)
-        {
-            case SpriteSpecifier.Texture tex:
-            {
-                sprite = tex.TexturePath.ToString();
-                if (!sprite.StartsWith("/Textures/"))
-                    sprite = $"/Textures/{sprite}";
-                return true;
-            }
-            case SpriteSpecifier.Rsi rsi:
-                sprite = rsi.RsiPath.ToString();
-                state = rsi.RsiState;
-                return true;
-            default:
-                return false;
-        }
     }
 }

@@ -5,13 +5,13 @@ using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Goobstation.Shared.Slasher.Objectives;
 using Content.Goobstation.Shared.Slasher.Systems;
-using Content.Server.AlertLevel;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
 using Content.Shared.Light.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions;
+using Content.Shared.AlertLevel;
 using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
@@ -63,7 +63,8 @@ public sealed partial class SlasherSoulStealSystem : EntitySystem
     [Dependency] private SharedPoweredLightSystem _light = default!;
     [Dependency] private SlasherRegenerateSystem _regenerate = default!;
 
-    public static readonly EntProtoId Storm = "WeatherStorm";
+    private static readonly EntProtoId Storm = "WeatherStorm";
+    private static readonly ProtoId<AlertLevelPrototype> RedAlert = "Red";
 
     private HashSet<Entity<PoweredLightComponent>> _lights = new();
 
@@ -236,7 +237,7 @@ public sealed partial class SlasherSoulStealSystem : EntitySystem
             if (station != null)
             {
                 // Set station to red alert
-                _alertLevel.SetLevel(station.Value, "red", true, true, true, false);
+                _alertLevel.SetLevel(station.Value, RedAlert, force: true);
 
                 // Make it rain in space
                 if (Transform(user).MapUid is {} map)
