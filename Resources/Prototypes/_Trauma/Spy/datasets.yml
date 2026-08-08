@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: localizedDataset
+  id: SpyObjectives
+  values:
+    prefix: spy-objectives-
+    count: 34
+
+- type: localizedDataset
+  id: SpyStealables
+  values:
+    prefix: spy-stealables-
+    count: 17
+
+- type: localizedDataset
+  id: SpyDepartment
+  values:
+    prefix: spy-department-
+    count: 7
+
+- type: localizedDataset
+  id: SpyAffected
+  values:
+    prefix: spy-affected-
+    count: 57
+
+- type: localizedDataset
+  id: SpyLocation
+  values:
+    prefix: spy-location-
+    count: 22
+
+- type: localizedDataset
+  id: SpyEscape
+  values:
+    prefix: spy-escape-
+    count: 6
+
+- type: localizedDataset
+  id: SpyRivals
+  values:
+    prefix: spy-rivals-
+    count: 20
+
+- type: localizedDataset
+  id: SpyHappenings
+  values:
+    prefix: spy-happenings-
+    count: 20
