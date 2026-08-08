@@ -61,9 +61,8 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnLesserMindShielded(Entity<CosmicLesserCultistComponent> ent, ref MindShieldAttemptEvent args)
+    private void OnLesserMindShielded(Entity<CosmicLesserCultistComponent> ent, ref MindShieldedEvent args)
     {
-        // event abuse but lazy
         RemCompDeferred(ent, ent.Comp);
     }
 

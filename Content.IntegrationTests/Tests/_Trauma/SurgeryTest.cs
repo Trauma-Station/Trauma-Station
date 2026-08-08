@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Tests.Interaction;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Surgery;
@@ -11,18 +10,11 @@ using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-public sealed class SurgeryTest : GameTest
+public sealed class SurgeryTest : InteractionTest
 {
-    public static readonly EntProtoId Human = "MobHuman";
-    public static readonly EntProtoId Weapon = "CaptainSabre";
-    public static readonly ProtoId<OrganCategoryPrototype> Torso = "Torso";
-    public static readonly ProtoId<OrganCategoryPrototype> ArmRight = "ArmRight";
-
     [SidedDependency(Side.Server)] private BodySystem _body = default!;
     [SidedDependency(Side.Server)] private SharedCombatModeSystem _combat = default!;
     [SidedDependency(Side.Server)] private SharedMeleeWeaponSystem _melee = default!;
@@ -30,6 +22,13 @@ public sealed class SurgeryTest : GameTest
     [SidedDependency(Side.Server)] private SharedTargetingSystem _targeting = default!;
     [SidedDependency(Side.Server)] private StandingStateSystem _standing = default!;
     [SidedDependency(Side.Server)] private TraumaSystem _trauma = default!;
+
+    private static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId Weapon = "CaptainSabre";
+    private static readonly ProtoId<OrganCategoryPrototype> ArmRight = "ArmRight";
+    private static readonly ProtoId<OrganCategoryPrototype> Torso = "Torso";
+
+    protected override string PlayerPrototype => Human;
 
     /// <summary>
     /// Checks that a sword can cut an arm off, leaving a dismemberment trauma on the torso.
@@ -39,13 +38,9 @@ public sealed class SurgeryTest : GameTest
     [Test]
     public async Task DismemberingTest()
     {
-        var map = await Pair.CreateTestMap();
-
+        var subject = SEntMan.GetEntity(await SpawnTarget(Human));
         await Server.WaitAssertion(() =>
         {
-            var subject = SEntMan.SpawnEntity(Human, map.GridCoords);
-            var doctor = SEntMan.SpawnEntity(Human, map.GridCoords);
-
             if (_body.GetOrgan(subject, Torso) is not { } torso)
             {
                 Assert.Fail($"Urist had no torso!");
@@ -64,19 +59,19 @@ public sealed class SurgeryTest : GameTest
 
             // have to lay down to guarantee it hits the limb instead of torso
             _standing.Down(subject);
-            _combat.SetInCombatMode(doctor, true);
-            _targeting.SetTarget(doctor, TargetBodyPart.RightArm);
+            _combat.SetInCombatMode(SPlayer, true);
+            _targeting.SetTarget(SPlayer, TargetBodyPart.RightArm);
 
             // try cutting arm with a sword until it falls off
-            var weapon = SEntMan.SpawnEntity(Weapon, map.GridCoords);
-            var melee = SEntMan.GetComponent<MeleeWeaponComponent>(weapon);
+            var weapon = SEntMan.SpawnEntity(Weapon, SEntMan.GetCoordinates(PlayerCoords));
+            var melee = SComp<MeleeWeaponComponent>(weapon);
             for (var i = 0; i < 20; i++)
             {
                 if (_body.GetBody(arm) == null)
                     break; // done
 
                 melee.NextAttack = TimeSpan.Zero;
-                _melee.AttemptLightAttack(doctor, weapon, melee, subject, canParry: false);
+                _melee.AttemptLightAttack(SPlayer, weapon, melee, subject, canParry: false);
             }
 
             Assert.That(_body.GetBody(arm), Is.Null, $"{SEntMan.ToPrettyString(weapon)} failed to sever {SEntMan.ToPrettyString(arm)} in 20 hits!");

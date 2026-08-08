@@ -8,7 +8,7 @@ namespace Content.Trauma.Server.Revolutionary;
 public sealed partial class CommandStaffSystem : EntitySystem
 {
     [SubscribeLocalEvent]
-    private void OnMindShielded(Entity<CommandStaffComponent> ent, ref MindShieldAttemptEvent args)
+    private void OnMindShielded(Entity<CommandStaffComponent> ent, ref MindShieldedEvent args)
     {
         ent.Comp.Enabled = true;
     }

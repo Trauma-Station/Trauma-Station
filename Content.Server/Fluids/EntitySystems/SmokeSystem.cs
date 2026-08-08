@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Inventory;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
@@ -45,7 +44,6 @@ public sealed partial class SmokeSystem : EntitySystem
     [Dependency] private SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private InventorySystem _inventory = default!; // Goobstation
 
     [Dependency] private EntityQuery<SmokeComponent> _smokeQuery = default!;
     [Dependency] private EntityQuery<SmokeAffectedComponent> _smokeAffectedQuery = default!;
@@ -271,14 +269,17 @@ public sealed partial class SmokeSystem : EntitySystem
 
         var blockIngestion = _internals.AreInternalsWorking(entity);
 
-        // <Goob>
-        if (_inventory.TryGetSlotEntity(entity, "mask", out var maskUid) &&
+        // <Trauma>
+        blockIngestion |= _mob.IsDead(entity); // dead things wont breathe and absorbing foam leads to perfect duping as you can just pull it out with 0 loss
+
+        if (!blockIngestion &&
+            _inventory.TryGetSlotEntity(entity, "mask", out var maskUid) &&
             TryComp<IngestionBlockerComponent>(maskUid, out var blocker) &&
             blocker is { Enabled: true, BlockSmokeIngestion: true })
         {
             blockIngestion = true;
         }
-        // </Goob>
+        // </Trauma>
 
         var cloneSolution = solution.Clone();
         var availableTransfer = FixedPoint2.Min(cloneSolution.Volume, component.TransferRate);

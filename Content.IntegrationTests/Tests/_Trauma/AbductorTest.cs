@@ -8,12 +8,9 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 

@@ -16,6 +16,7 @@ cooldown = 5
 
 [net]
 pvs_enter_budget = 300 # 200 by default
+log_late_msg = false # pointless log spam why is this on in release
 
 [adminlogs]
 high_log_playtime = 2 # this kills the raider
