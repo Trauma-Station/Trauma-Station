@@ -8,10 +8,14 @@ namespace Content.Trauma.Shared.AER;
 /// Component for Aer-1821, lets them summon a restricted devil contract
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class AerMarksmanComponent : Component
 {
     [DataField]
     public EntProtoId ContractPrototype = "AerContract";
+
+    [DataField, AutoNetworkedField]
+    public int Souls;
 
     /// <summary>
     /// Sound effect played when summoning a contract.

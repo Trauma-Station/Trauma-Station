@@ -1,13 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Actions;
 using Content.Trauma.Shared.AER;
-using Content.Goobstation.Shared.Slasher.Events;
 using Robust.Shared.Timing;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
@@ -17,9 +13,7 @@ using Content.Shared.Physics;
 using System.Linq;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Trauma.Shared.Viewcone.Components;
-using Content.Shared.Coordinates;
-
-
+using Content.Trauma.Shared.Viewcone;
 
 namespace Content.Trauma.Server.AER;
 
@@ -38,6 +32,7 @@ public sealed partial class AerShyGuySystem : EntitySystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedVisionSystem _vision = default!;
 
     public override void Update(float frameTime)
     {
@@ -112,7 +107,7 @@ public sealed partial class AerShyGuySystem : EntitySystem
             {
                 if (TryComp<ViewconeComponent>(other, out var cone))
                 {
-                    if (IsVisible((other, cone), _transform.GetWorldPosition(other), _transform.GetWorldPosition(ent.Owner)))
+                    if (_vision.IsVisible((other, cone), _transform.GetWorldPosition(other), _transform.GetWorldPosition(ent.Owner)))
                         killList.Add(other);
                 }
                 else
@@ -131,21 +126,5 @@ public sealed partial class AerShyGuySystem : EntitySystem
     private void OnMapInit(Entity<AerShyGuyComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextCheck = _timing.CurTime + ent.Comp.UpdateCooldown;
-    }
-
-    /// <summary>
-    /// stolen function from client side ViewconeOverlaySystem 
-    /// </summary>
-    public bool IsVisible(Entity<ViewconeComponent> ent, Vector2 eyePos, Vector2 pos)
-    {
-        var dist = pos - eyePos;
-        var r = ent.Comp.ConeIgnoreRadius;
-        var r2 = r * r;
-        if (dist.LengthSquared() < r2)
-            return true; // within cone ignore radius so always visible regardless of angle
-
-        var eyeRot = ent.Comp.ViewAngle;
-        var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
-        return angleDist < MathHelper.DegreesToRadians(ent.Comp.CurrentConeAngle) * 0.5f;
     }
 }

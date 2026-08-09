@@ -227,9 +227,7 @@
     damageModifierSet: IPC
 
 # lob corp magic bullet at home player version, shoot really fucking slow adds burn stacks on melee
-# todo: add something to make the seventh bullet fuck you over
-#       needs something to stop at walls to not make it the ultimate wall-banger and make 1821 more containable
-#       maybe reloading as a verb?
+# todo: maybe reloading as a verb?
 - type: entity
   name: Magic Bullet
   parent: [BaseItem, BaseGunWieldable, BaseSecurityScienceContraband]
@@ -266,7 +264,7 @@
     capacity: 7
     count: 7
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 4.5
+    rechargeCooldown: 33.3
     rechargeSound:
       path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
   - type: AmmoCounter
@@ -342,8 +340,12 @@
   components:
   - type: Gun
     fireRate: 0.5
+  - type: BasicEntityAmmoProvider
+    proto: BulletAerMagicBullet
+    capacity: 7
+    count: 1
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 66
+    rechargeCooldown: 66.6
   - type: Unremoveable
     deleteOnDrop: true
   - type: MeleeWeapon
@@ -368,7 +370,7 @@
     content: default-aer-contract-content
   - type: DevilContract
     clauseBlacklist:
-    - soulownership
+    #- soulownership
     - brokeness
 
 #spawner for lack of rifle devil clause
@@ -539,6 +541,14 @@
     researchPerSecond: 100
     researchOnBehaviour: 5000
     idGear: IdGearMagicBullet
+  - type: GhostRole
+    name: AER-1821
+    description: acquire souls, shoot the d-class trying to game your contracts
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
 
 - type: entity
   parent: [MobSpaceBasic, MobCombat, InventoryBase]
@@ -607,7 +617,7 @@
   parent: [NewBaseAer]
   id: AerShyGuy
   name: AER-096
-  description: AER-123? how queer you dont remember this one in the files
+  description: AER-096 is a humanoid creature measuring approximately 2.38 meters in height, it shows very little muscle mass and its skin is mostly devoid of pigmentation, it has no sign of any body hair.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
@@ -615,3 +625,70 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
   - type: AerShyGuy
+
+- type: entity
+  parent: ReinforcementRadio
+  id: ActivatedAerCore
+  name: Aer Core
+  description: Call in a syndicate agent of questionable quality, instantly!
+  components:
+  - type: GhostRole
+    name: AER-1821
+    description: acquire souls, shoot the d-class trying to game your contracts
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: AerMarksman
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseAerObjective
+  components:
+  - type: Objective
+    difficulty: 1.5
+    issuer: Self
+
+- type: entity
+  parent: [BaseAerObjective, BaseSurviveObjective]
+  id: AerBreachObjective
+  name: Breach Containment
+  description: Escape containment, be free.
+  components:
+  - type: Objective
+    icon:
+      sprite: _DV/CosmicCult/Icons/objectives.rsi
+      state: colossus
+  - type: AerBreachCondition
+
+- type: entity
+  parent: BaseAerObjective
+  id: AerMarksmanContractObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+      state: contract-written
+  - type: NumberObjective
+    min: 5
+    max: 7
+    title: objective-condition-contract-title
+    description: objective-condition-contract-description
+  - type: SignContractCondition
+
+- type: entity
+  parent: BaseAerObjective
+  name: Take Commisions
+  description:  Convince people to request your services.
+  id: AerMarksmanLarpObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+      state: icon
+      issuer: Self
+    difficulty: 1
+  - type: RoleplayObjective
