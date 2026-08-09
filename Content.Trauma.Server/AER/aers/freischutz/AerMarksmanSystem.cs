@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Server.Devil.Objectives.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Shared.Mind;
@@ -29,7 +31,7 @@ public sealed partial class AerMarksmanSystem : EntitySystem
     }
 
 
-    //adding objectives on mind added message i'm not super sure this is right but it worked, stolen from autotraitor 
+    //adding objectives on mind added message i'm not super sure this is right but it worked, stolen from autotraitor
     [SubscribeLocalEvent]
     private void OnMindAdded(Entity<AerMarksmanComponent> ent, ref MindAddedMessage args)
     {

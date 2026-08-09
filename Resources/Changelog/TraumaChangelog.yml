@@ -12982,7 +12982,7 @@ Entries:
     message: >-
       Priority job rolls are now captain and a few engineers, doctors, secoffs
       and miners. Players who don't have them set to Never will be chosen for
-      those before regular rolling. 
+      those before regular rolling.
   id: 1416
   time: '2026-08-09T16:38:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4009
