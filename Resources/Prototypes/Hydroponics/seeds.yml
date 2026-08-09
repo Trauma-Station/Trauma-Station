@@ -815,10 +815,10 @@
   packetPrototype: CornSeeds
   productPrototypes:
     - FoodCorn
-  # <Trauma> - Ranching crop mutations
+# <Trauma> - Ranching crop mutations
   mutationPrototypes:
     - ClearCorn
-  # </Trauma>
+# </Trauma>
   lifespan: 25
   maturation: 8
   production: 6
