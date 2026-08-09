@@ -780,8 +780,8 @@
     - FoodGoldenApple
   # <Trauma> - Ranching crop mutations
   mutationPrototypes:
-    - deliciousApple
-    - MethApple
+  - deliciousApple
+  - MethApple
   # </Trauma>
   harvestRepeat: Repeat
   lifespan: 55
@@ -815,10 +815,10 @@
   packetPrototype: CornSeeds
   productPrototypes:
     - FoodCorn
-# <Trauma> - Ranching crop mutations
+  # <Trauma> - Ranching crop mutations
   mutationPrototypes:
-    - ClearCorn
-# </Trauma>
+  - ClearCorn
+  # </Trauma>
   lifespan: 25
   maturation: 8
   production: 6
@@ -917,8 +917,10 @@
   packetPrototype: ChanterelleSeeds
   productPrototypes:
     - FoodMushroom
+  # <Trauma> - Ranching crop mutations
   mutationPrototypes:
-    - MagicMushrooms # Trauma - Ranching crop mutation
+  - MagicMushrooms
+  # </Trauma>
   lifespan: 35
   maturation: 10
   production: 7
