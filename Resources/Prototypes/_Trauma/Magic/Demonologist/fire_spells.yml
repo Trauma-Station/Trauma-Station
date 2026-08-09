@@ -34,10 +34,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg
-  - type: Sprite # TODO: Placeholder
-    sprite: _Goobstation/Wizard/actions.rsi
+  - type: Sprite
+    sprite: _Trauma/Actions/demonologist.rsi
     layers:
-    - state: shield_greater
+    - state: bloodboil
   - type: TargetAction
     range: 10
     interactOnMiss: false

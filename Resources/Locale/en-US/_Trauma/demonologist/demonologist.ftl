@@ -10,3 +10,5 @@ demonologist-role-greeting =
 demonologist-apprentice-role-greeting =
     You are a demonologist apprentice! ( Use + or +K to use demonmind )
     You have been bound to serve a demonologist! Further their dark rituals, or face the consequences.
+
+demonologist-portal-gathering = You gather your energy and open a portal.

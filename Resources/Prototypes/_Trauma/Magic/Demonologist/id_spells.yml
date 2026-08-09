@@ -12,10 +12,10 @@
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg # TODO: better sound
-  - type: Sprite # TODO: placeholder
-    sprite: _Goobstation/Wizard/actions.rsi
+  - type: Sprite
+    sprite: _Trauma/Actions/demonologist.rsi
     layers:
-    - state: knock
+    - state: accesscurse
   - type: TargetAction
     range: 8
     interactOnMiss: false

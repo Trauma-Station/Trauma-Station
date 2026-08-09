@@ -49,12 +49,13 @@
     understands:
     - TauCetiBasic
     - Eldritch
-  - type: ActionGrant
+  - type: ActionGrant # TODO: clean this up when everything's done
     actions:
     - ActionCombustion
     - ActionBindApprentice
     - ActionBloodBoil
     - ActionCursedAccess
+    - ActionSummonDemonPortal
 
 - type: startingGear
   id: DemonologistStartingGear
