@@ -7,14 +7,9 @@ namespace Content.Trauma.Shared.CosmicCult.Abilities;
 public sealed partial class CosmicShopSystem : EntitySystem
 {
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicShop>(OnCosmicShop);
-    }
-
-    private void OnCosmicShop(Entity<CosmicCultComponent> ent, ref EventCosmicShop args)
+    [SubscribeLocalEvent]
+    private void OnCosmicShop(Entity<CosmicCultComponent> ent, ref CosmicShopEvent args)
     {
         _ui.TryToggleUi(args.Action.Owner, CosmicShopKey.Key, ent);
     }

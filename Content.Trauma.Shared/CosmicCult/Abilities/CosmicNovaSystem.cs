@@ -23,7 +23,7 @@ public sealed partial class CosmicNovaSystem : EntitySystem
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedInteractionSystem _interact = default!;
 
@@ -31,19 +31,11 @@ public sealed partial class CosmicNovaSystem : EntitySystem
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicNova>(OnCosmicNova);
-        SubscribeLocalEvent<CosmicAstralNovaComponent, PreventCollideEvent>(OnPreventCollide);
-        SubscribeLocalEvent<CosmicAstralNovaComponent, ProjectileHitEvent>(OnNovaCollide);
-    }
-
     /// <summary>
     /// This is the basic spell projectile code but updated to use non-obsolete functions, all so i can change the default projectile speed. Fuck.
     /// </summary>
-    private void OnCosmicNova(Entity<CosmicCultComponent> ent, ref EventCosmicNova args)
+    [SubscribeLocalEvent]
+    private void OnCosmicNova(Entity<CosmicCultComponent> ent, ref CosmicNovaEvent args)
     {
         var startPos = _transform.GetMapCoordinates(args.Performer);
         var targetPos = _transform.ToMapCoordinates(args.Target);
@@ -63,19 +55,21 @@ public sealed partial class CosmicNovaSystem : EntitySystem
     /// <summary>
     /// If the projectile collides with another cultist, it passes right through them
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnPreventCollide(Entity<CosmicAstralNovaComponent> ent, ref PreventCollideEvent args)
     {
-        if (_entityWhitelist.IsValid(ent.Comp.AreaBlacklist, args.OtherEntity))
+        if (_whitelist.IsValid(ent.Comp.AreaBlacklist, args.OtherEntity))
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnNovaCollide(Entity<CosmicAstralNovaComponent> ent, ref ProjectileHitEvent args)
     {
         _mobs.Clear();
         _lookup.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.AreaRange, _mobs);
         _mobs.RemoveWhere(target =>
         {
-            if (_entityWhitelist.IsValid(ent.Comp.AreaBlacklist, target)) return true;
+            if (_whitelist.IsValid(ent.Comp.AreaBlacklist, target)) return true;
 
             var evt = new CosmicAbilityAttemptEvent(target);
             RaiseLocalEvent(ref evt);

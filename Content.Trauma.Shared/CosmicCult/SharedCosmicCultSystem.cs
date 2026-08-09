@@ -160,13 +160,16 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     /// <param name="ent">The cultist for which to unlock the influence</param>
     /// <param name="influence">The influence to unlock</param>
     /// <param name="force">If true, unlocks the influence even if the cultist didn't reach the required level yet</param>
-    public bool UnlockInfluence(Entity<CosmicCultComponent> ent, ProtoId<InfluencePrototype> influence, bool force = false)
+    public bool UnlockInfluence(Entity<CosmicCultComponent> ent, [ForbidLiteral] ProtoId<InfluencePrototype> influence, bool force = false)
     {
         if (!ProtoMan.TryIndex(influence, out var proto) || !force && proto.Tier > ent.Comp.CurrentLevel)
             return false;
+
         ent.Comp.OwnedInfluences.Remove(influence);
         ent.Comp.UnlockedInfluences.Add(influence);
-        Dirty(ent, ent.Comp);
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.OwnedInfluences),
+            nameof(CosmicCultComponent.UnlockedInfluences));
         return true;
     }
 
@@ -230,9 +233,10 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         amount = Math.Min(amount, ent.Comp.EntropyForNextLevel - ent.Comp.TotalEntropy + ent.Comp.EntropyRequirementOffset);
         ent.Comp.TotalEntropy += amount;
         ent.Comp.EntropyBudget += amount;
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.TotalEntropy),
+            nameof(CosmicCultComponent.EntropyBudget));
         TryLevelUp(ent);
-        if (ent.Comp.CosmicShopActionEntity is { } shop)
-            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState());
         return amount;
     }
 

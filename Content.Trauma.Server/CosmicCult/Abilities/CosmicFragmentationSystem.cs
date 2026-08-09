@@ -27,21 +27,12 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ActionsSystem _actions = default!;
 
-    private ProtoId<RadioChannelPrototype> _cultRadio = "CosmicRadio";
+    private static readonly EntProtoId CosmicBorgChantry = "CosmicBorgChantry";
+    private static readonly EntProtoId CosmicCultLawBoard = "CosmicCultLawBoard";
+    private static readonly ProtoId<RadioChannelPrototype> CultRadio = "CosmicRadio";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SiliconLawUpdaterComponent, AILawUpdatedEvent>(OnLawInserted);
-
-        SubscribeLocalEvent<BorgChassisComponent, MalignFragmentationEvent>(OnFragmentBorg);
-        SubscribeLocalEvent<SiliconLawUpdaterComponent, MalignFragmentationEvent>(OnFragmentAi);
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicFragmentation>(OnCosmicFragmentation);
-    }
-
-    private void OnCosmicFragmentation(Entity<CosmicCultComponent> ent, ref EventCosmicFragmentation args)
+    [SubscribeLocalEvent]
+    private void OnCosmicFragmentation(Entity<CosmicCultComponent> ent, ref CosmicFragmentationEvent args)
     {
         if (args.Handled || HasComp<ActiveNPCComponent>(args.Target))
         {
@@ -59,6 +50,7 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
         _actions.RemoveAction(ent.Owner, args.Action.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnFragmentBorg(Entity<BorgChassisComponent> ent, ref MalignFragmentationEvent args)
     {
         if (_cultRule.AssociatedGamerule(args.User) is { } cult && Exists(cult.Comp.ActiveChantry))
@@ -68,7 +60,7 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
             return;
         }
 
-        var chantry = Spawn("CosmicBorgChantry", Transform(ent).Coordinates);
+        var chantry = Spawn(CosmicBorgChantry, Transform(ent).Coordinates);
         EnsureComp<CosmicChantryComponent>(chantry, out var chantryComponent);
         chantryComponent.Container = _container.EnsureContainer<ContainerSlot>(chantry, chantryComponent.ContainerId);
         _container.Insert(ent.Owner, chantryComponent.Container);
@@ -79,30 +71,34 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
         _antag.SendBriefing(victim, Loc.GetString("cosmiccult-silicon-chantry-briefing", ("minutesandseconds", $"{mins} minutes and {secs} seconds")), Color.FromHex("#4cabb3"), null);
     }
 
+    [SubscribeLocalEvent]
     private void OnFragmentAi(Entity<SiliconLawUpdaterComponent> ent, ref MalignFragmentationEvent args)
     {
-        var lawboard = Spawn("CosmicCultLawBoard", Transform(args.Target).Coordinates);
+        var lawboard = Spawn(CosmicCultLawBoard, Transform(args.Target).Coordinates);
         _container.TryGetContainer(args.Target, "circuit_holder", out var container);
         if (container == null)
             return;
+
         _container.EmptyContainer(container, true);
         _container.Insert(lawboard, container, Transform(args.Target), true);
     }
 
+    [SubscribeLocalEvent]
     private void OnLawInserted(Entity<SiliconLawUpdaterComponent> ent, ref AILawUpdatedEvent args)
     {
         if (!TryComp<IntrinsicRadioTransmitterComponent>(ent, out var radio) || !TryComp<ActiveRadioComponent>(ent, out var transmitter))
             return;
+
         if (ent.Comp.LastLawset.Id == "CosmicCultLaws")
         {
-            radio.Channels.Add(_cultRadio);
-            transmitter.Channels.Add(_cultRadio);
+            radio.Channels.Add(CultRadio);
+            transmitter.Channels.Add(CultRadio);
             _antag.SendBriefing(ent, Loc.GetString("cosmiccult-silicon-subverted-briefing"), Color.FromHex("#4cabb3"), null);
         }
         else
         {
-            radio.Channels.Remove(_cultRadio);
-            transmitter.Channels.Remove(_cultRadio);
+            radio.Channels.Remove(CultRadio);
+            transmitter.Channels.Remove(CultRadio);
         }
     }
 }

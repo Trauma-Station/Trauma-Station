@@ -39,5 +39,3 @@ cosmic-shop-interface-consequence-level3 = Using your influences will envelop yo
 # Buttons
 cosmic-shop-interface-influences-button-gain = Gain
 cosmic-shop-interface-confirm-button = Proceed.
-cosmic-shop-interface-respec-button = Respec
-cosmic-shop-interface-respec-confirmation = Confirm
