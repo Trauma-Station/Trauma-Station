@@ -25,13 +25,10 @@ namespace Content.Trauma.Server.CosmicCult;
 
 public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
-    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
 
     private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
     private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");
@@ -40,7 +37,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     {
         base.Update(frameTime);
 
-        var now = _timing.CurTime;
+        var now = Timing.CurTime;
         var markQuery = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
         while (markQuery.MoveNext(out var uid, out var comp))
         {
@@ -91,9 +88,11 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         if (!HasComp<HumanoidProfileComponent>(ent))
             return; // Non-humanoids don't get abilities
 
-        ent.Comp.SiphonActionEntity = _actions.AddAction(ent.Owner, ent.Comp.SiphonAction);
-        DirtyField(ent, ent.Comp, nameof(CosmicCultComponent.SiphonActionEntity));
-        _actions.AddAction(ent.Owner, ent.Comp.ShopAction);
+        ent.Comp.SiphonActionEntity = Actions.AddAction(ent.Owner, ent.Comp.SiphonAction);
+        ent.Comp.ShopActionEntity = Actions.AddAction(ent.Owner, ent.Comp.ShopAction);
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.SiphonActionEntity),
+            nameof(CosmicCultComponent.ShopActionEntity));
     }
 
     [SubscribeLocalEvent]
@@ -124,7 +123,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         if (EntityIsCultist(args.User)) return;
 
         EnsureComp<CosmicDegenComponent>(args.User);
-        _popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
+        Popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
     }
 
     [SubscribeLocalEvent]

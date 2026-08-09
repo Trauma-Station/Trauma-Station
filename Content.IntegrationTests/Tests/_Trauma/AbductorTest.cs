@@ -17,7 +17,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// <summary>
 /// Makes sure abductor gamerules work.
 /// </summary>
-[TestFixture]
 public sealed class AbductorTest : InteractionTest
 {
     public static EntProtoId Beacon = "DefaultStationBeacon";

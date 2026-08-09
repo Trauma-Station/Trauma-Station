@@ -12,5 +12,6 @@ public sealed partial class CosmicShopSystem : EntitySystem
     private void OnCosmicShop(Entity<CosmicCultComponent> ent, ref CosmicShopEvent args)
     {
         _ui.TryToggleUi(args.Action.Owner, CosmicShopKey.Key, ent);
+        args.Handled = true;
     }
 }

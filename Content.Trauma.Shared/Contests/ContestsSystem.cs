@@ -21,12 +21,12 @@ public sealed partial class ContestsSystem : CommonContestsSystem
     {
         base.Initialize();
 
-        Subs.CVar(_cfg, GoobCVars.DoContestsSystem, (val) => _doContestSystem = val);
-        Subs.CVar(_cfg, GoobCVars.DoMassContests, (val) => _doMassContests = val);
-        Subs.CVar(_cfg, GoobCVars.AllowClampOverride, (val) => _allowClampOverride = val);
-        Subs.CVar(_cfg, GoobCVars.MassContestsMaxPercentage, (val) => _massContestsMaxPercentage = val);
-        Subs.CVar(_cfg, GoobCVars.DoStaminaContests, (val) => _doStaminaContests = val);
-        Subs.CVar(_cfg, GoobCVars.DoHealthContests, (val) => _doHealthContests = val);
+        Subs.CVar(_cfg, GoobCVars.DoContestsSystem, x => _doContestSystem = x, true);
+        Subs.CVar(_cfg, GoobCVars.DoMassContests, x => _doMassContests = x, true);
+        Subs.CVar(_cfg, GoobCVars.AllowClampOverride, x => _allowClampOverride = x, true);
+        Subs.CVar(_cfg, GoobCVars.MassContestsMaxPercentage, x => _massContestsMaxPercentage = x, true);
+        Subs.CVar(_cfg, GoobCVars.DoStaminaContests, x => _doStaminaContests = x, true);
+        Subs.CVar(_cfg, GoobCVars.DoHealthContests, x => _doHealthContests = x, true);
     }
 
     /// <summary>

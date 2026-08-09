@@ -42,6 +42,9 @@ public sealed partial class CosmicCultComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? CosmicFragmentationActionEntity;
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? ShopActionEntity;
+
     [DataField]
     public EntProtoId MonumentAction = "ActionCosmicPlaceMonument";
 

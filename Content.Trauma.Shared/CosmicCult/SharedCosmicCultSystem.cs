@@ -32,13 +32,12 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedRoleSystem _role = default!;
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] protected SharedActionsSystem Actions = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private MobStateSystem _mobState = default!;
 
     [SubscribeLocalEvent]
@@ -88,12 +87,12 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         {
             if (!TryComp<CosmicCultComponent>(args.User, out var cultComp)) // Only the cultists can absorb entropy
             {
-                _popup.PopupEntity(Loc.GetString("cosmic-entropy-interact-noncultist"), args.User, args.User);
+                Popup.PopupEntity(Loc.GetString("cosmic-entropy-interact-noncultist"), args.User, args.User);
                 return;
             }
             if (cultComp.EntropyLocked) // Can't absorb any more
             {
-                _popup.PopupEntity(Loc.GetString("cosmicability-siphon-full"), args.User, args.User);
+                Popup.PopupEntity(Loc.GetString("cosmicability-siphon-full"), args.User, args.User);
                 return;
             }
             var total = _stack.GetCount(ent.Owner); // Absorb as much as possible
@@ -103,12 +102,12 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
             var ev = new CosmicSiphonIndicatorEvent();
             RaiseLocalEvent(args.User, ev);
 
-            _popup.PopupEntity(Loc.GetString(total == absorbed ? "cosmic-entropy-interact-absorb" : "cosmic-entropy-interact-absorb-partial"), args.User, args.User);
+            Popup.PopupEntity(Loc.GetString(total == absorbed ? "cosmic-entropy-interact-absorb" : "cosmic-entropy-interact-absorb-partial"), args.User, args.User);
         }
         else // Not a part of the cult, destroy the mote
         {
             _audio.PlayPredicted(ent.Comp.ShatterSFX, args.User, args.User);
-            _popup.PopupEntity(
+            Popup.PopupEntity(
                 Loc.GetString("cosmic-entropy-interact-shatter"),
                 Loc.GetString("cosmic-entropy-interact-shatter-others", ("user", Identity.Entity(args.User, EntityManager))),
                 args.User,
@@ -221,7 +220,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         {
             if (HasComp<CosmicStarMarkComponent>(ent)) return; // Doesn't get any more obvious, no need to add even more visuals
             EnsureComp<CosmicMalignEchoComponent>(ent, out var comp);
-            comp.ExpireTimer = _timing.CurTime + TimeSpan.FromSeconds(20);
+            comp.ExpireTimer = Timing.CurTime + TimeSpan.FromSeconds(20);
         }
     }
 
@@ -279,7 +278,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
                 cultComp.EntropyLocked = false;
                 break;
             case 3:
-                cultComp.MonumentActionEntity = _actions.AddAction(args.Actor, cultComp.MonumentAction);
+                cultComp.MonumentActionEntity = Actions.AddAction(args.Actor, cultComp.MonumentAction);
                 break;
         }
     }

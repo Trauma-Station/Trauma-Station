@@ -63,7 +63,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private AudioSystem _audio = default!;
-    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private EuiManager _euiMan = default!;
     [Dependency] private GhostSystem _ghost = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -203,7 +203,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         switch (ent.Comp.CurrentTier)
         {
             case 1:
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("cosmiccult-announce-tier1-warning"),
                     sender: null,
                     true,
@@ -214,8 +214,10 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
                     SpawnRift();
 
                 while (lights.MoveNext(out var light, out _))
+                {
                     if (_rand.Prob(0.30f))
                         _ghost.DoGhostBooEvent(light);
+                }
 
                 break;
 
@@ -224,13 +226,13 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
 
             case 3:
                 var sender = Loc.GetString("cosmiccult-announcement-sender");
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("cosmiccult-announce-tier3-fluff"),
                     sender,
                     false,
                     null,
                     Color.FromHex("#4cabb3"));
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("cosmiccult-announce-tier3-warning"),
                     null,
                     false,
@@ -239,8 +241,10 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
                 _audio.PlayGlobal(_tier3Sound, Filter.Broadcast(), false, AudioParams.Default);
 
                 while (lights.MoveNext(out var light, out _))
+                {
                     if (_rand.Prob(0.90f))
                         _ghost.DoGhostBooEvent(light);
+                }
 
                 break;
             default:
