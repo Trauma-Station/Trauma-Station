@@ -246,7 +246,7 @@ public sealed class StationJobsTest : GameTest
 
                 configuration.SetCVar(CCVars.GameMinimumJobFallback, MinimumJobFallback.AnyEligiblePlayer);
                 var anyEligibleAssignments = stationJobs.AssignJobs(anyEligibleProfiles, [station]);
-                Assert.That(anyEligibleAssignments[sameDepartmentDummy.UserId].Item1, Is.EqualTo((ProtoId<JobPrototype>?) "TCaptain"));
+                Assert.That(anyEligibleAssignments[sameDepartmentDummy.UserId].Item1, Is.EqualTo((ProtoId<JobPrototype>?) "TChaplain")); // Trauma - above
                 Assert.That(anyEligibleAssignments[noPreferenceDummy.UserId].Item1, Is.EqualTo((ProtoId<JobPrototype>?) "TChaplain"));
 
                 configuration.SetCVar(CCVars.GameMinimumJobFallback, MinimumJobFallback.None);
