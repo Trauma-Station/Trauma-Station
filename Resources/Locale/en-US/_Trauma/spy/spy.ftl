@@ -17,7 +17,7 @@ spy-uplink-bounties = Bounties
 spy-uplink-rewards = Rewards
 spy-uplink-select-reward = Select Reward
 spy-uplink-no-rewards = No rewards available!
-spy-uplink-steal-fail = Your uplink blinks red: {$target} is invalid for active bounties or cannot be extracted from here.
+spy-uplink-steal-fail = Your uplink blinks red: {$target} is invalid for active non-claimed bounties or cannot be extracted from here.
 spy-uplink-new = 🕵 Make new spy uplink
 
 spy-uplink-ammo-name = Ammunition

@@ -1035,6 +1035,8 @@
       tags:
       - NukeOpsUplink
       - ContravendUplink
+      components:
+      - SpyRule
 
 - type: listing
   id: UplinkCQCManualChef
