@@ -140,8 +140,13 @@ public sealed partial class CargoSystem
 
         foreach (var ent in toSell)
         {
+            // Начисляем репутацию за конкретный предмет для нашей станции
+            ProcessReputationForSoldItem(ent, station);
+
+            // Удаляем предмет (оригинальный код)
             Del(ent);
         }
+
 
         return true;
     }

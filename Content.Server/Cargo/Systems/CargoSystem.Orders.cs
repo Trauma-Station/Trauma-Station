@@ -758,18 +758,38 @@ namespace Content.Server.Cargo.Systems
 
             var products = new List<ProtoId<CargoProductPrototype>>();
 
-            // Note that a market must be both on the station and on the console to be available.
+            CargoReputationComponent? reputationComp = null;
+            var repQuery = EntityQueryEnumerator<CargoReputationComponent>();
+            while (repQuery.MoveNext(out var _, out var comp))
+            {
+                reputationComp = comp;
+                break; 
+            } // <- ЗДЕСЬ ЗАКРЫЛСЯ WHILE!
+
             var markets = ent.Comp.AllowedGroups.Intersect(db.Markets).ToList();
             foreach (var product in ProtoMan.EnumeratePrototypes<CargoProductPrototype>())
             {
                 if (!markets.Contains(product.Group))
                     continue;
 
+                if (reputationComp != null)
+                {
+                    if (product.Group == "CargoMilitaryTier2" && reputationComp.MilitaryReputation < 15f)
+                        continue;
+
+                    if (product.Group == "CargoMedicalTier2" && reputationComp.MedicalReputation < 15f)
+                        continue;
+
+                    if (product.Group == "CargoServiceTier2" && reputationComp.ServiceReputation < 15f)
+                        continue;
+                }
+
                 products.Add(product.ID);
-            }
+            } // <- ЗДЕСЬ ЗАКРЫЛСЯ FOREACH!
 
             return products;
-        }
+        } // <- ЗДЕСЬ ЗАКРЫЛСЯ МЕТОД!
+
 
         #region Station
 
