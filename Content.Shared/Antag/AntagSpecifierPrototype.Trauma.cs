@@ -1,3 +1,5 @@
+using Content.Shared.EntityEffects;
+
 namespace Content.Shared.Antag;
 
 public sealed partial class AntagSpecifierPrototype
@@ -7,4 +9,10 @@ public sealed partial class AntagSpecifierPrototype
     /// </summary>
     [DataField]
     public bool UnequipOldGear;
+
+    /// <summary>
+    /// Effects to apply to the player's mob.
+    /// </summary>
+    [DataField, AlwaysPushInheritance]
+    public EntityEffect[]? Effects;
 }

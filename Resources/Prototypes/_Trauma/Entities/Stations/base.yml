@@ -5,8 +5,8 @@
   id: BaseStationAlertLevelLocking
   components:
   - type: AlertLevelLocking
-    requiredLevel: blue
-    lockedLevel: red
+    requiredLevel: Blue
+    lockedLevel: Red
     lockTime: 5m # if you change this update the alert levels guidebook too
 
 - type: entity

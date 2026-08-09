@@ -8,6 +8,12 @@
   description: A menacing purple snake from Kepler-283c.
   components:
   # <Trauma>
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      55: Dead
+  - type: Stamina
+    baseCritThreshold: 150
   - type: VentCrawler
   # </Trauma>
   - type: Sprite
@@ -86,7 +92,7 @@
     generated:
       reagents:
         - ReagentId: Toxin
-          Quantity: 0.5
+          Quantity: 0.25
   # </Trauma>
 
 - type: entity

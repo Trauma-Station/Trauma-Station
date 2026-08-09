@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Ghost.Components;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -6,13 +9,11 @@ using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Popups;
-using Content.Server.StationRecords.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Events;
 using Content.Shared.CCVar;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
-using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -23,6 +24,8 @@ using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.StationRecords;
+using Content.Shared.StationRecords.Components;
+using Content.Shared.StationRecords.Systems;
 using Content.Shared.Throwing;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -341,12 +344,14 @@ public sealed partial class AdminSystem : EntitySystem
         // TODO Fix order dependent Cvars
         // Please for the sake of my sanity don't make cvars & order dependent.
         // Just make a bool field on the system instead of having some cvars automatically modify other cvars.
+        //
         // I.e., this:
         //   /sudo cvar game.panic_bunker.enabled true
         //   /sudo cvar game.panic_bunker.disable_with_admins true
         // and this:
         //   /sudo cvar game.panic_bunker.disable_with_admins true
         //   /sudo cvar game.panic_bunker.enabled true
+        //
         // should have the same effect, but currently setting the disable_with_admins can modify enabled.
 
         if (hasAdmins && PanicBunker.DisableWithAdmins)
@@ -396,8 +401,13 @@ public sealed partial class AdminSystem : EntitySystem
                 var name = Identity.Entity(entity, EntityManager);
                 _popup.PopupCoordinates(Loc.GetString("admin-erase-popup", ("user", name)), coordinates, PopupType.LargeCaution);
                 var filter = Filter.Pvs(coordinates, 1, EntityManager, _playerManager);
-                var audioParams = new AudioParams().WithVolume(3);
-                _audio.PlayStatic("/Audio/Effects/pop_high.ogg", filter, coordinates, true, audioParams);
+                _audio.PlayStatic(
+                        "/Audio/Effects/pop_high.ogg",
+                        filter,
+                        coordinates,
+                        true,
+                        AudioParams.Default.AddVolume(3)
+                        );
             }
 
             foreach (var item in _inventory.GetHandOrInventoryEntities(entity))

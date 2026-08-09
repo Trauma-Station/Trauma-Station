@@ -9,10 +9,10 @@
   useQuality: false
 
 - type: construction
+  parent: BaseRev
   id: PowerArmorStand
   graph: PowerArmorStand
   targetNode: PowerArmorStand
-  category: construction-category-antagonist
   objectType: Item
   theory:
     RevolutionaryKnowledge: 3

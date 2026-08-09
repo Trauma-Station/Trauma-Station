@@ -3,11 +3,11 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Ghost.Roles.Events;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Trauma.Server.Wizard.Systems;
@@ -28,15 +28,6 @@ public sealed partial class GlobalTileMovementSystem : EntitySystem
     [Dependency] private WizardRuleSystem _wizardRuleSystem = default!;
     private static readonly EntProtoId GameRule = "GlobalTileMovement";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<GlobalTileToggleEvent>(OnGlobalTileToggle);
-        SubscribeLocalEvent<GlobalTileMovementRuleComponent, GameRuleStartedEvent>(OnRuleStarted);
-        SubscribeLocalEvent<GhostRoleSpawnerUsedEvent>(OnGhostRoleSpawnerUsed);
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawn);
-    }
-
     public Entity<GlobalTileMovementRuleComponent>? GetRule()
     {
         var query = EntityQueryEnumerator<GlobalTileMovementRuleComponent, ActiveGameRuleComponent>();
@@ -48,6 +39,7 @@ public sealed partial class GlobalTileMovementSystem : EntitySystem
         return null;
     }
 
+    [SubscribeLocalEvent]
     private void OnGlobalTileToggle(GlobalTileToggleEvent ev)
     {
         if (GetRule() != null)
@@ -62,6 +54,7 @@ public sealed partial class GlobalTileMovementSystem : EntitySystem
         _log.Add(LogType.EventRan, LogImpact.Extreme, $"Tile movement has been globally toggled via wizard spellbook.");
     }
 
+    [SubscribeLocalEvent]
     private void OnRuleStarted(Entity<GlobalTileMovementRuleComponent> ent, ref GameRuleStartedEvent args)
     {
         var map = _wizardRuleSystem.GetTargetMap();
@@ -80,7 +73,8 @@ public sealed partial class GlobalTileMovementSystem : EntitySystem
         }
     }
 
-    private void OnGhostRoleSpawnerUsed(GhostRoleSpawnerUsedEvent args)
+    [SubscribeLocalEvent]
+    private void OnGhostRoleSpawnerUsed(ref GhostRoleSpawnerUsedEvent args)
     {
         if (GetRule() is not { } rule)
             return;
@@ -88,6 +82,7 @@ public sealed partial class GlobalTileMovementSystem : EntitySystem
         EntityManager.AddComponents(args.Spawned, rule.Comp.Components);
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerSpawn(PlayerSpawnCompleteEvent ev)
     {
         if (GetRule() is not { } rule ||

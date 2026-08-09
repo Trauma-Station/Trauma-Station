@@ -5,6 +5,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -30,14 +31,15 @@ public abstract partial class SharedHereticSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected ISharedChatManager ChatMan = default!;
     [Dependency] protected ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
 
     [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
@@ -245,6 +247,11 @@ public abstract partial class SharedHereticSystem : EntitySystem
             ent.Comp2.KnowledgeEvents.Add(ev);
         }
 
+        if (data.Effects is { } effects && body != null)
+        {
+            _effects.ApplyEffects(body.Value, effects);
+        }
+
         if (data.ActionPrototypes is { Count: > 0 })
         {
             foreach (var act in data.ActionPrototypes)
@@ -296,7 +303,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
+        if (Timing.ApplyingState || TerminatingOrDeleted(uid))
             return;
 
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)

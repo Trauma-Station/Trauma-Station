@@ -204,6 +204,7 @@
   - type: StationEvent
     weight: 5
     duration: 1
+    occursDuringRoundEnd: false
     minimumPlayers: 10
   - type: RandomEntityStorageSpawnRule
     prototype: MobSkeletonCloset
@@ -220,6 +221,7 @@
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
     duration: null
+    occursDuringRoundEnd: false
   - type: SpaceSpawnRule
     spawnDistance: 0
   - type: AntagSpawner
@@ -251,9 +253,9 @@
   - type: StationEvent
     weight: 1 # Trauma - was 6
     duration: null
-    earliestStart: 40 # Trauma - Was 45. Lowered so it works better with our schedulers
-    #reoccurrenceDelay: 20 # Goobstation - no longer needed
-    maxOccurrences: 1 # Goobstation
+    occursDuringRoundEnd: false
+    earliestStart: 30
+    maxOccurrences: 1 # Trauma - replaces delay
     minimumPlayers: 30
   - type: SpaceSpawnRule
   - type: AntagGhostCharacterRule # Trauma - use ghost character instead of AntagLoadProfileRule
@@ -280,18 +282,21 @@
   - type: StationEvent
     weight: 4 # Trauma - Was 5
     duration: null
+    occursDuringRoundEnd: false
     earliestStart: 20
     reoccurrenceDelay: 20
     minimumPlayers: 15
   - type: ParadoxCloneRule
+    # <Trauma>
+    targetBlacklist:
+      components:
+      - BorgBrain # No copying the AI or borgs.
+      - BorgChassis
+      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, etc)
+    # </Trauma>
     objectiveBlacklist:
       tags:
       - ParadoxCloneObjectiveBlacklist
-    targetBlacklist: # Goobstation
-      components:
-      - BorgBrain # No copying the AI or borgs.
-      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, Ghost bar, etcetera.)
-
   - type: AntagObjectives
     objectives:
     - ParadoxCloneKillObjective
@@ -305,17 +310,19 @@
   - type: DynamicRuleCost
     cost: 50
 
-#- type: entity   Goobstaion start - disabled until rework
-#  parent: BaseGameRule
-#  id: RevenantSpawn
-#  components:
-#  - type: StationEvent
-#    weight: 3.5
-#    duration: 1
-#    earliestStart: 30
-#    minimumPlayers: 20
-#  - type: RandomSpawnRule
-#    prototype: MobRevenant      goobstation end
+- type: entity
+  abstract: true # Trauma - lol
+  parent: BaseGameRule
+  id: RevenantSpawn
+  components:
+  - type: StationEvent
+    weight: 7.5
+    duration: 1
+    occursDuringRoundEnd: false
+    earliestStart: 45
+    minimumPlayers: 20
+  - type: RandomSpawnRule
+    prototype: MobRevenant
 
 - type: entity
   parent: [ BaseAntagGhostRoleRule, BaseWizardRule ]
@@ -324,6 +331,7 @@
   - type: StationEvent
     weight: 5.5 # Trauma - was 1
     duration: null
+    occursDuringRoundEnd: false
     earliestStart: 30
     reoccurrenceDelay: 60
     minimumPlayers: 30
@@ -539,6 +547,7 @@
     weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
+    occursDuringRoundEnd: false
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -645,6 +654,7 @@
     reoccurrenceDelay: 20
     minimumPlayers: 4
     duration: null
+    occursDuringRoundEnd: false
   - type: SpaceSpawnRule
     spawnDistance: 0
 

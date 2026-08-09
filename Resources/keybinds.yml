@@ -19,7 +19,7 @@ binds:
   key: Control
 - function: TargetingMod
   type: State
-  key: Shift
+  key: Alt
 # </Trauma>
 - function: UIClick
   type: State

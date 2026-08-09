@@ -6,7 +6,7 @@
   suffix: NTR
   components:
   - type: Label
-    currentLabel: holopad-command-ntr
+    localizedLabel: holopad-command-ntr
 
 - type: entity
   parent: HolopadBluespace
@@ -14,4 +14,4 @@
   suffix: Centcomm
   components:
   - type: Label
-    currentLabel: holopad-centcomm
+    localizedLabel: holopad-centcomm

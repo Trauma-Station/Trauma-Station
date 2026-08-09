@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared.Prototypes;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
 
@@ -18,25 +17,24 @@ public sealed partial class SummonVoidCreatureSystem : EntitySystem
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private MindSystem _mind = default!;
 
+    private CompName _minionName;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SummonVoidCreatureComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<SummonVoidCreatureComponent, ComponentShutdown>(OnShutdown);
-
-        SubscribeLocalEvent<SummonVoidCreatureComponent, SummonVoidCreatureEvent>(OnSummonVoidCreature);
-
-        SubscribeLocalEvent<ChooseVoidCreatureComponent, ChooseVoidCreatureEvent>(OnChooseVoidCreature);
-        SubscribeLocalEvent<ChooseVoidCreatureComponent, RadialSelectorSelectedMessage>(OnSummonVoidCreatureSelected);
+        _minionName = Factory.CompName<WraithMinionComponent>();
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<SummonVoidCreatureComponent> ent, ref MapInitEvent args) =>
         _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<SummonVoidCreatureComponent> ent, ref ComponentShutdown args) =>
         _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
 
+    [SubscribeLocalEvent]
     private void OnSummonVoidCreature(Entity<SummonVoidCreatureComponent> ent, ref SummonVoidCreatureEvent args)
     {
         SpawnAtPosition(ent.Comp.SummonId, Transform(ent.Owner).Coordinates);
@@ -44,17 +42,19 @@ public sealed partial class SummonVoidCreatureSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnChooseVoidCreature(Entity<ChooseVoidCreatureComponent> ent, ref ChooseVoidCreatureEvent args)
     {
         _ui.TryToggleUi(ent.Owner, RadialSelectorUiKey.Key, ent.Owner);
         _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new RadialSelectorState(ent.Comp.AvailableSummons));
     }
 
+    [SubscribeLocalEvent]
     private void OnSummonVoidCreatureSelected(Entity<ChooseVoidCreatureComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         if (args.SelectedItem is not { } proto
-            || !ProtoMan.TryIndex(proto, out var summon)
-            || !summon.HasComponent<WraithMinionComponent>()
+            || !ProtoMan.Resolve(proto, out var summon)
+            || !summon.HasComp(_minionName)
             || !_mind.TryGetMind(ent.Owner, out var mindUid, out var mind))
             return;
 

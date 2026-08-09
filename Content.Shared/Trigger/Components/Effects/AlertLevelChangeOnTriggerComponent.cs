@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Shared.AlertLevel;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Trigger.Components.Effects;
@@ -12,7 +16,7 @@ public sealed partial class AlertLevelChangeOnTriggerComponent : BaseXOnTriggerC
     /// The alert level to change to when triggered.
     ///</summary>
     [DataField, AutoNetworkedField]
-    public string Level = "blue";
+    public ProtoId<AlertLevelPrototype> Level = "Blue"; // Trauma - use ProtoId
 
     /// <summary>
     /// Whether to play the sound when the alert level changes.

@@ -66,13 +66,13 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 25
-        - id: BlobGameMode
-          weight: 10
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
-          - !type:PlayerCountCondition
-            min: 20
+        # - id: BlobGameMode # Disabled until its major bugs are fixed
+        #   weight: 10
+        #   conditions:
+        #   - !type:HasBudgetCondition
+        #   - !type:MaxRuleOccurenceCondition
+        #   - !type:PlayerCountCondition
+        #     min: 20
         # </Trauma>
       # Roundstart Minor Rules
       - !type:GroupSelector
@@ -100,11 +100,6 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 30
-        - id: CorporateAgent
-          prob: 0.075
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
         # </Trauma>
       # Midround rules
       - !type:GroupSelector

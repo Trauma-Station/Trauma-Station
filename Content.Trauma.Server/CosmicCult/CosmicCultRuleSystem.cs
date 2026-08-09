@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Common.Temperature.Components;
-using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
+using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
@@ -21,6 +19,7 @@ using Content.Server.Shuttles.Systems;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Audio;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Eye;
 using Content.Shared.GameTicking.Components;
@@ -29,13 +28,14 @@ using Content.Shared.Humanoid;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Zombies;
 using Content.Trauma.Server.CosmicCult.Components;
 using Content.Trauma.Server.Objectives.Components;
@@ -44,6 +44,7 @@ using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Components.Examine;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
 using Content.Trauma.Shared.Roles;
+using Content.Trauma.Shared.Temperature;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -76,11 +77,15 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private CuffableSystem _cuffable = default!; // goob edit
+    [Dependency] private CuffableSystem _cuffable = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
+
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
 
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_briefing.ogg");
     private readonly SoundSpecifier _deconvertSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_deconvert.ogg");
@@ -279,10 +284,10 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     private bool CultistsAlive()
     {
         var query = EntityQueryEnumerator<CosmicCultComponent, MobStateComponent>();
-        while (query.MoveNext(out var ent, out var comp, out var mob)) // goob edit
+        while (query.MoveNext(out var ent, out var comp, out var mob))
         {
 
-            if (TryComp<CuffableComponent>(ent, out var cuffComp) && _cuffable.IsCuffed((ent, cuffComp))) // goob edit
+            if (TryComp<CuffableComponent>(ent, out var cuffComp) && _cuffable.IsCuffed((ent, cuffComp)))
                 continue; // dont count restrained cultists as counting towards objectives.
 
             if (!mob.Running
@@ -450,7 +455,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     {
         if (AssociatedGamerule(converter) is not { } cult
         || !_mind.TryGetMind(uid, out var mindId, out var mind)
-        || HasComp<MindShieldComponent>(uid)
+        || _mindShield.IsShielded(uid)
         || HasComp<BibleUserComponent>(uid)
         || _rotting.IsRotten(uid))
             return;
@@ -470,7 +475,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         Dirty(uid, cultComp);
 
         EnsureComp<CosmicSubtleMarkComponent>(uid);
-        EnsureComp<PressureImmunityComponent>(uid);
+        _status.TrySetStatusEffectDuration(uid, PressureImmunity);
         EnsureComp<SpecialLowTempImmunityComponent>(uid);
         EnsureComp<CosmicNonRespiratingComponent>(uid);
 
@@ -518,7 +523,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
 
         RemComp<InfluenceVitalityComponent>(ent);
         RemComp<InfluenceStrideComponent>(ent);
-        RemComp<PressureImmunityComponent>(ent);
+        _status.TryRemoveStatusEffect(ent, PressureImmunity);
         RemComp<SpecialLowTempImmunityComponent>(ent);
         RemComp<CosmicNonRespiratingComponent>(ent);
         RemComp<CosmicStarMarkComponent>(ent);
@@ -544,7 +549,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         cosmicGamerule.TotalCult--;
         cosmicGamerule.Cultists.Remove(ent);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnComponentShutdown(Entity<CosmicLesserCultistComponent> ent, ref ComponentShutdown args)
@@ -560,7 +565,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         if (TryComp<ActiveRadioComponent>(ent, out var radio))
             radio.Channels.Remove("CosmicRadio");
 
-        RemComp<PressureImmunityComponent>(ent);
+        _status.TryRemoveStatusEffect(ent, PressureImmunity);
         RemComp<SpecialLowTempImmunityComponent>(ent);
         RemComp<CosmicNonRespiratingComponent>(ent);
         RemComp<CosmicSubtleMarkComponent>(ent);

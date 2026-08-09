@@ -7,6 +7,7 @@ using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Common.Targeting;
+using Content.Shared.Bible.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -109,9 +110,3 @@ public sealed partial class GoobBibleSystem : EntitySystem
         return true;
     }
 }
-
-/// <summary>
-/// Raised on the target once bible gets used
-/// </summary>
-[ByRefEvent]
-public record struct BibleUsedEvent;

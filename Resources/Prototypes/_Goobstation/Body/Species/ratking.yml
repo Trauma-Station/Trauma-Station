@@ -30,6 +30,8 @@
   - type: SolutionManager
     solutions:
     - SolutionStomachRatKing
+  - type: Metabolizer
+    updateInterval: 0.1
 
 - type: entity
   parent: SolutionStomach

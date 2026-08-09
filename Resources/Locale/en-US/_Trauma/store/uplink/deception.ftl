@@ -4,7 +4,11 @@ uplink-codespeak-manual-desc = Syndicate agents can be trained to use a series o
 uplink-storage-briefcase-name = False Bottomed Briefcase
 uplink-storage-briefcase-desc = A briefcase with a hidden compartment that can store anything normal-sized or smaller. To use the hidden compartment, use a screwdriver on the briefcase, and then place the desired item inside before closing the compartment by using the screwdriver again. Be warned that anyone with the proper tools can use this briefcase's hidden function or open the compartment!
 
-uplink-observation-kit-desc-trauma = Includes a syndicate crew monitor, camera bug,  microreactor power cell and security hud disguised as sunglasses.
+uplink-observation-kit-name = Observation Kit
+uplink-observation-kit-desc = Includes a syndicate crew monitor, camera bug,  microreactor power cell and security hud disguised as sunglasses.
 
 uplink-records-tablet-name = Records Tablet
 uplink-records-tablet-desc = A tablet that lets you view the station records of any crewmember, handily disguised as a station map. One per agent.
+
+uplink-ultrabright-lantern-name = Extra-Bright Lantern
+uplink-ultrabright-lantern-desc = This ultra-bright lantern can be used to blind people, similar to a flash.

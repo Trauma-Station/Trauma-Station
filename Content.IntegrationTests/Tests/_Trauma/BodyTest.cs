@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Medical.Shared.Body;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Body;
@@ -10,16 +8,13 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Body.Chips;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 public sealed class BodyTest : GameTest
 {
     public static EntProtoId Urist = "MobHuman";
-    public static EntProtoId<OrganChipComponent> TestChip = "SkillChipLaser";
+    public static EntProtoId<OrganChipComponent>[] TestChips = ["SkillChipLaser", "SkillChipHeavy", "SkillChipMining"];
     public static ProtoId<PolymorphPrototype> HumanoidPolymorph = "Bananamen";
 
     [SidedDependency(Side.Server)] private BodySystem _body = default!;
@@ -38,7 +33,7 @@ public sealed class BodyTest : GameTest
 
         var map = await Pair.CreateTestMap();
 
-        var bodyName = factory.CompName<BodyComponent>();
+        var bodyName = factory.CompName<InitialBodyComponent>();
         await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
@@ -179,8 +174,11 @@ public sealed class BodyTest : GameTest
         {
             var urist = SEntMan.SpawnEntity(Urist, map.GridCoords);
             Assert.That(CountChips(urist), Is.EqualTo(0), "Fresh urist shouldnt have skillchips");
-            _chip.InstallChip(urist, TestChip);
-            Assert.That(CountChips(urist), Is.EqualTo(1), "Urist should have gained a skillchip after installing it");
+            foreach (var id in TestChips)
+            {
+                _chip.InstallChip(urist, id);
+            }
+            Assert.That(CountChips(urist), Is.EqualTo(3), "Urist should have gained 3 skillchips after installing them");
 
             if (_polymorph.PolymorphEntity(urist, HumanoidPolymorph) is not { } nana)
             {
@@ -189,7 +187,7 @@ public sealed class BodyTest : GameTest
             }
 
             Assert.That(CountChips(urist), Is.EqualTo(0), "Urist shouldnt have skillchips after being polymorphed");
-            Assert.That(CountChips(nana), Is.EqualTo(1), "Banana should have transferred urist's skillchip from polymorphing");
+            Assert.That(CountChips(nana), Is.EqualTo(3), "Banana should have transferred urist's skillchip from polymorphing");
             SEntMan.DeleteEntity(nana);
             SEntMan.DeleteEntity(urist);
         });

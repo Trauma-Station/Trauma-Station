@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.Eye;
-using Content.Shared.Prototypes;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Robust.Shared.Physics.Components;
@@ -18,6 +17,8 @@ public sealed partial class AutomationSystem : EntitySystem
     [Dependency] private EntityQuery<StealthComponent> _stealthQuery = default!;
     [Dependency] private EntityQuery<VisibilityComponent> _visibilityQuery = default!;
 
+    private CompName _slotsName;
+
     public const short NormalMask = (short) VisibilityFlags.Normal;
 
     private List<EntProtoId> _automatable = new();
@@ -30,17 +31,12 @@ public sealed partial class AutomationSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AutomationSlotsComponent, ComponentInit>(OnInit);
+        _slotsName = Factory.CompName<AutomationSlotsComponent>();
 
-        SubscribeLocalEvent<AutomationSlotsComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<AutomationSlotsComponent, ComponentShutdown>(OnShutdown);
-
-        SubscribeLocalEvent<PhysicsComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         CacheEntities();
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<AutomationSlotsComponent> ent, ref ComponentInit args)
     {
         foreach (var slot in ent.Comp.Slots)
@@ -50,6 +46,7 @@ public sealed partial class AutomationSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<AutomationSlotsComponent> ent, ref MapInitEvent args)
     {
         foreach (var slot in ent.Comp.Slots)
@@ -58,6 +55,7 @@ public sealed partial class AutomationSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<AutomationSlotsComponent> ent, ref ComponentShutdown args)
     {
         // don't care if the entity is being deleted
@@ -70,6 +68,7 @@ public sealed partial class AutomationSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAnchorChanged(Entity<PhysicsComponent> ent, ref AnchorStateChangedEvent args)
     {
         // force collision events so machines can react to objects getting unanchored
@@ -78,6 +77,7 @@ public sealed partial class AutomationSystem : EntitySystem
             _physics.WakeBody(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (!args.WasModified<EntityPrototype>())
@@ -89,10 +89,9 @@ public sealed partial class AutomationSystem : EntitySystem
     private void CacheEntities()
     {
         _automatable.Clear();
-        var name = Factory.GetComponentName<AutomationSlotsComponent>();
         foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.Components.ContainsKey(name))
+            if (proto.HasComp(_slotsName))
                 _automatable.Add(proto.ID);
         }
 

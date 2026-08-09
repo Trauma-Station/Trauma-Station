@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-FileCopyrightText: 2024 Matt <psykzz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 
 #
 # Updates an RSS file on a remote server with updates to the changelog.
@@ -60,6 +54,9 @@ TYPES_TO_EMOJI = {
     "Remove": "❌",
     "Tweak":  "⚒️"
 }
+
+EXPERIMENTAL_LABEL = "Intent: Experimental"
+EXPERIMENTAL_EMOJI = "🧪"
 
 XML_NS = "https://spacestation14.com/changelog_rss"
 XML_NS_B = f"{{{XML_NS}}}"
@@ -187,6 +184,8 @@ def generate_description_for_entries(entries: List[Any]) -> str:
         for entry in sorted(group, key=lambda x: x["time"]):
             for change in entry["changes"]:
                 emoji = TYPES_TO_EMOJI.get(change["type"], "")
+                if EXPERIMENTAL_LABEL in entry["labels"]:
+                    emoji = f"{emoji}{EXPERIMENTAL_EMOJI}"
                 msg = change["message"]
                 desc.write(f"<li>{emoji} {html.escape(msg)}</li>")
 

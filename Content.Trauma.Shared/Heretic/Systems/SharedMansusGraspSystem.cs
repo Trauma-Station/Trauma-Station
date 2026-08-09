@@ -59,7 +59,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private SharedStaminaSystem _stamina = default!;
-    [Dependency] private SharedRatvarianLanguageSystem _language = default!;
+    [Dependency] private RatvarianLanguageSystem _language = default!;
     [Dependency] private UseDelaySystem _delay = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedHereticAbilitySystem _ability = default!;
@@ -183,7 +183,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
 
         _stun.TryKnockdown(target, ent.Comp.KnockdownTime);
         _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage, source: args.User, ignoreResist: true);
-        _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
+        _language.DoRatvarian(target, ent.Comp.SpeechTime, true);
         Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);
     }
 

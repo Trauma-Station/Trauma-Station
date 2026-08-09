@@ -36,12 +36,9 @@ public sealed partial class LabelSystem : EntitySystem
 
     private void OnLabelCompMapInit(Entity<LabelComponent> ent, ref MapInitEvent args)
     {
-        if (!string.IsNullOrEmpty(ent.Comp.CurrentLabel))
+        if (ent.Comp.LocalizedLabel is { } locId)
         {
-            // <Trauma> - half of these arent localized to use TryGetString
-            if (Loc.TryGetString(ent.Comp.CurrentLabel, out var label))
-                ent.Comp.CurrentLabel = label;
-            // </Trauma>
+            ent.Comp.CurrentLabel = Loc.GetString(locId);
             Dirty(ent);
         }
 

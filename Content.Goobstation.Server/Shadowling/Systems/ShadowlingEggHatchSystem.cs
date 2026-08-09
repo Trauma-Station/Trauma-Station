@@ -92,7 +92,7 @@ public sealed partial class ShadowlingEggHatchSystem : EntitySystem
         if (TryComp<EntityStorageComponent>(egg, out var storage))
         {
             _entityStorage.Remove(sling, egg, storage);
-            _entityStorage.OpenStorage(egg, storage);
+            _entityStorage.OpenStorage((egg, storage));
         }
 
         if (_polymorph.PolymorphEntity(sling, shadowling.ShadowlingPolymorphId) is not {} newUid)

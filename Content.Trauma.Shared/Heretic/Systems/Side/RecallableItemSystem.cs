@@ -33,6 +33,13 @@ public sealed partial class RecallableItemSystem : EntitySystem
         _player.PlayerStatusChanged += StatusChanged;
     }
 
+    public override void Shutdown()
+    {
+        base.Shutdown();
+
+        _player.PlayerStatusChanged -= StatusChanged;
+    }
+
     private void StatusChanged(object? sender, SessionStatusEventArgs e)
     {
         if (e.NewStatus != SessionStatus.InGame)

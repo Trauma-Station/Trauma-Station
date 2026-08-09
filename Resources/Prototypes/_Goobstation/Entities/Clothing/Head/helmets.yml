@@ -28,8 +28,7 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/Head/Helmets/helldiver.rsi
   - type: TemperatureProtection
-    heatingCoefficient: 0.1
-    coolingCoefficient: 0.1
+    coefficient: 0.1
   - type: HideLayerClothing
     slots:
     - Hair
@@ -169,7 +168,7 @@
     - HidesHair
     - WhitelistChameleon
   - type: FireProtection
-    reduction: 0.1
+    reduction: 0.5
   - type: HideLayerClothing
     layers:
       Hair: HEAD

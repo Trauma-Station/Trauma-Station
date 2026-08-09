@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Trauma.Server.CosmicCult.Abilities;
 using Content.Trauma.Server.CosmicCult.Components;
-using Content.Server.Actions;
-using Content.Goobstation.Shared.Bible; // Goobstation - Bible
-using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
+using Content.Shared.Bible.Components;
+using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Atmos.Components;
 using Content.Shared.DoAfter;
@@ -17,6 +15,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -25,16 +24,19 @@ namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
 public sealed partial class CosmicRiftSystem : EntitySystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedCosmicCultSystem _cult = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private CosmicBlankSystem _blank = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _targets = [];
 
@@ -169,7 +171,7 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         comp.CosmicImpositionDuration = TimeSpan.FromSeconds(7.2);
         comp.CosmicStrideDuration = TimeSpan.FromSeconds(7);
         Dirty(uid, comp);
-        EnsureComp<PressureImmunityComponent>(args.User);
+        _status.TrySetStatusEffectDuration(args.User, PressureImmunity);
         EnsureComp<SpecialLowTempImmunityComponent>(args.User);
         EnsureComp<CosmicNonRespiratingComponent>(args.User);
         RemComp<HungerComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead

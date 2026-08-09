@@ -1,109 +1,80 @@
+# region Base
 - type: construction
-  parent: BaseMaterial # Trauma
+  abstract: true
+  id: BaseMaterial
+  category: construction-category-materials
+  objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+  # </Trauma>
+# endregion Base
+
+# region Materials
+- type: construction
+  parent: BaseMaterial
   id: MetalRod
   graph: MetalRod
-  startNode: start
   targetNode: MetalRod
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  abstract: true # Trauma - no handcrafting durathread
+  parent: BaseMaterial
+  id: MaterialDurathread
+  graph: Durathread
+  targetNode: MaterialDurathread
+# endregion Materials
+
+# region Glass
+- type: construction
+  parent: BaseMaterial
   id: SheetRGlass
   graph: Glass
-  startNode: start
   targetNode: SheetRGlass
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetClockworkGlass
-  graph: Glass
-  startNode: start
   targetNode: SheetClockworkGlass
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetPGlass
-  graph: Glass
-  startNode: start
   targetNode: SheetPGlass
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetRPGlass
-  graph: Glass
-  startNode: start
   targetNode: SheetRPGlass
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetRPGlass0
-  graph: Glass
-  startNode: start
   targetNode: SheetRPGlass0
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetRPGlass1
-  graph: Glass
-  startNode: start
   targetNode: SheetRPGlass1
-  category: construction-category-materials
-  objectType: Item
-
-# <Trauma> remove durathread handcraft
-#- type: construction
-#  parent: BaseMaterial # Trauma
-#  id: MaterialDurathread
-#  graph: Durathread
-#  startNode: start
-#  targetNode: MaterialDurathread
-#  category: construction-category-materials
-#  objectType: Item
-# </Trauma>
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetUGlass
-  graph: Glass
-  startNode: start
   targetNode: SheetUGlass
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetRUGlass
-  graph: Glass
-  startNode: start
   targetNode: SheetRUGlass
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetRUGlass0
-  graph: Glass
-  startNode: start
   targetNode: SheetRUGlass0
-  category: construction-category-materials
-  objectType: Item
 
 - type: construction
-  parent: BaseMaterial # Trauma
+  parent: SheetRGlass
   id: SheetRUGlass1
-  graph: Glass
-  startNode: start
   targetNode: SheetRUGlass1
-  category: construction-category-materials
-  objectType: Item
+# endregion Glass

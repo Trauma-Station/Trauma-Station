@@ -42,6 +42,8 @@
     maxHops: 20
   - type: WeaponClass
     class: Bludgeon
+  - type: StaticPrice
+    price: 50000
   # <Trauma>
   - type: Wieldable
     useDelayOnWield: false # GoobStation Edit
@@ -84,8 +86,10 @@
         Blunt: 2
   - type: Item
     size: Ginormous
-  - type: StaticPrice
-    price: 50000
+    shape:
+    - 0,0,3,1
+    - 1,2,2,5
+    storedRotation: -45
 
 - type: entity
   id: SingularityHammer
@@ -96,6 +100,8 @@
   # <Trauma>
   - type: WeaponClass
     class: Bludgeon
+  - type: StaticPrice
+    price: 30000
   # </Trauma>
   - type: Wieldable
     useDelayOnWield: false
@@ -134,5 +140,7 @@
         Structural: 35 # Goob edit
   - type: Item
     size: Ginormous
-  - type: StaticPrice
-    price: 30000
+    shape:
+    - 0,0,3,1
+    - 1,2,2,5
+    storedRotation: -45

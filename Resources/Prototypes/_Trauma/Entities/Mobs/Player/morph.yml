@@ -131,9 +131,9 @@
       # below are all invisible
       - Pda
       - Door
+      - Wall
       tags:
       - Catwalk
-      - Wall
       - Window
     disguiseProto: ChameleonDisguiseMorph
   - type: ToolRefinable

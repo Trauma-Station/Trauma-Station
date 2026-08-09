@@ -16,3 +16,5 @@ surgery-popup-step-SurgeryStepInsertTongue = {$user} is inserting a tongue into 
 
 surgery-popup-procedure-SurgeryRemoveKidneys-step-SurgeryStepRemoveOrgan = {$user} is removing {$target}'s kidneys!
 surgery-popup-step-SurgeryStepInsertKidneys = {$user} is inserting kidneys into {$target}'s {$part}!
+
+surgery-popup-procedure-SurgeryRemoveTongue-step-SurgeryStepRemoveOrganHand = {$user} is removing {$target}'s tongue!

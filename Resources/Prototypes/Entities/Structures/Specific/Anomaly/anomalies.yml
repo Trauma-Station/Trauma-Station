@@ -39,6 +39,7 @@
   - type: Clickable
   - type: Appearance
   - type: AnimationPlayer
+  - type: Damageable
   - type: GuideHelp
     guides:
     - AnomalousResearch
@@ -1000,7 +1001,6 @@
     - MouseBites
     - Copium
     - Nostalgia
-    - CrapoToxin
     - Profanol
   - type: Edible
     edible: Drink

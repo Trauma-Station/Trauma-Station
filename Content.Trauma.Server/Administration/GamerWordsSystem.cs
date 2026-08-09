@@ -80,9 +80,11 @@ public sealed partial class GamerWordsSystem : EntitySystem
         if (player.AttachedEntity is {} mob)
             _thunderstrike.Smite(mob);
         // 3. automatic permaban
-        var reason = $"Automatically banned for violation of rule C9: No bigotry.\nOffending message: {message}";
+        var preamble = "Automatically banned for violation of rule C9: No bigotry.";
+        var reason = $"{preamble}\nOffending message: {message}";
         var ban = new CreateServerBanInfo(reason);
-        ban.AddUser(player.UserId, player.Name)
+        ban.WithWebhookReason(preamble) // dont show everyone the message...
+            .AddUser(player.UserId, player.Name)
             .AddAddress(player.Channel.RemoteEndPoint.Address)
             .WithSeverity(NoteSeverity.High);
         _ban.CreateServerBan(ban);

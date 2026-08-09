@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpaceWhale;
+using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
 using Content.Shared.Body;
@@ -29,6 +30,7 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
     [Dependency] private WoundSystem _wound = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
@@ -42,8 +44,6 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-
-    [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _lookMobs = new();
 
@@ -185,11 +185,11 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
                 !SharedRandomExtensions.PredictedProb(_timing, ent.Comp.ArmDelimbChance, netEnt, GetNetEntity(hit)))
                 continue;
 
+            // TODO: organ groups
             var arm = _body.GetOrgan(hit, ent.Comp.ArmLeft) ?? _body.GetOrgan(hit, ent.Comp.ArmRight);
 
-            if (arm is { } armEnt && _woundableQuery.TryComp(armEnt, out var woundable) &&
-                woundable.ParentWoundable is { } parent)
-                _wound.AmputateWoundable(parent, armEnt, woundable, args.User);
+            if (arm is { } armEnt && _part.GetParentPart(armEnt) is { } parent)
+                _wound.AmputateWoundable(parent, armEnt, user: args.User);
         }
     }
 }

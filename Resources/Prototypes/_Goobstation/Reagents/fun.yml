@@ -30,9 +30,8 @@
         - !type:ReagentCondition
           reagent: Tranquility
           min: 10
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         conditions:
         - !type:ReagentCondition
           reagent: Tranquility
@@ -204,22 +203,3 @@
         key: Centered
         time: 10
         component: TileMovement
-
-- type: reagent
-  id: CrapoToxin
-  name: reagent-name-crapotoxin
-  group: Toxins
-  desc: reagent-desc-crapotoxin
-  physicalDesc: reagent-physical-desc-putrid
-  flavor: horrible
-  color: "#654321"
-  metabolisms:
-    Bloodstream:
-      metabolismRate: 2.5
-      effects:
-      - !type:Emote
-        emote: Fart
-        showInChat: true
-        showInGuidebook: true
-        force: true
-        probability: 1

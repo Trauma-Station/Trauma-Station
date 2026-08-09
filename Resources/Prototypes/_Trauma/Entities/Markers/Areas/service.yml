@@ -35,6 +35,8 @@
   components:
   - type: Sprite
     state: kitchen_cold
+  - type: Tag
+    tags: [ AreaCold ]
 
 - type: entity
   parent: AreaKitchen
@@ -92,3 +94,11 @@
   components:
   - type: Sprite
     state: service_hall
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaRanch
+  name: ranch
+  components:
+  - type: Sprite
+    state: ranch

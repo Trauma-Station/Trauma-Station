@@ -108,16 +108,40 @@
   - type: Puller
     needsHands: false
   - type: StarGazer
+  - type: ContinuousBeamGun
+    userCanFire: false
+    beamScale: 2
+    minMaxLaserRange: 4, 14
+    laserSpeed: 0.1
+    laserThickness: 0.9
+    beamTime: 10
+    beamSound:
+      path: /Audio/_Goobstation/Heretic/stargazer/beam_loop_one.ogg
+    damage:
+      types:
+        Heat: 10
+        Structural: 50
+    data:
+      id: stargaze
+      startSprite: { sprite: /Textures/_Goobstation/Heretic/Effects/effects96x96.rsi, state: start1 }
+      sprite: { sprite: /Textures/_Goobstation/Heretic/Effects/effects.rsi, state: beam1 }
+      endSprite: { sprite: /Textures/_Goobstation/Heretic/Effects/effects.rsi, state: end1 }
+      scale: 2, 2
+      shouldCollide: false
   - type: WarpPoint
     follow: true
-    location: star gazer
+    location: location-star-gazer
   - type: SupermatterImmune
   - type: EventHorizonIgnore
   - type: SpacetimeSpellbladeEnchantment # It's not a spellblade, trust
     effect: EffectCosmicSlash
   - type: HealingAura
     componentHealMultipliers:
-      CosmosPassive: 1.5
+      CosmosPassive: 1
   - type: Tag
     tags:
     - CannotSuicide
+  - type: Viewcone
+    baseConeAngle: 360
+  - type: NightVision
+    lightingColor: white

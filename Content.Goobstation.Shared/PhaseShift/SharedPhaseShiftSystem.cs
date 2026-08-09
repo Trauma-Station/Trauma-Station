@@ -58,7 +58,7 @@ public abstract partial class SharedPhaseShiftSystem : EntitySystem
         if (TryComp(ent, out PullableComponent? pullable))
             _pulling.TryStopPull(ent, pullable);
 
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnRefresh(Entity<PhaseShiftedComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
@@ -67,14 +67,12 @@ public abstract partial class SharedPhaseShiftSystem : EntitySystem
     // TODO: status effect component to remove it when attacking
     private void OnAttackAttempt(Entity<PhaseShiftedComponent> ent, ref AttackAttemptEvent args)
     {
-        if (_statusEffects.HasStatusEffect(ent, ent.Comp.StatusEffectId))
-            _statusEffects.TryRemoveStatusEffect(ent, ent.Comp.StatusEffectId);
+        RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnThrowAttempt(Entity<PhaseShiftedComponent> ent, ref ThrowAttemptEvent args)
     {
-        if (_statusEffects.HasStatusEffect(ent, ent.Comp.StatusEffectId))
-            _statusEffects.TryRemoveStatusEffect(ent, ent.Comp.StatusEffectId);
+        RemCompDeferred(ent, ent.Comp);
     }
 
     protected virtual void OnComponentShutdown(Entity<PhaseShiftedComponent> ent, ref ComponentShutdown args)
@@ -94,6 +92,6 @@ public abstract partial class SharedPhaseShiftSystem : EntitySystem
         RemComp<StealthComponent>(ent);
 
         ent.Comp.MovementSpeedBuff = 1;
-        _movement.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
     }
 }

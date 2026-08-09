@@ -35,8 +35,8 @@
     sprite: _Goobstation/Clothing/OuterClothing/Coats/david_jacket.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Coats/david_jacket.rsi
-  - type: AddAccentClothing
-    accent: StreetpunkAccent
+  - type: StreetpunkAccent
+    relayAccent: true
 
 - type: entity
   parent: [ClothingOuterDavidsJacket, BaseMajorContraband]

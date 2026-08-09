@@ -1,74 +1,119 @@
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Shared.Bible // Death to serverside components. Glory to Goobistan
+namespace Content.Shared.Bible.Components;
+
+/// <summary>
+/// Marks an entity as Bible that heals somebody on interaction.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(BibleSystem))]
+public sealed partial class BibleComponent : Component
 {
-    [RegisterComponent, NetworkedComponent]
-    public sealed partial class BibleComponent : Component
-    {
-        /// <summary>
-        /// Default sound when bible hits somebody.
-        /// </summary>
-        private static readonly ProtoId<SoundCollectionPrototype> DefaultBibleHit = new("BibleHit");
+    /// <summary>
+    /// Default sound when Bible hits somebody.
+    /// </summary>
+    private static readonly ProtoId<SoundCollectionPrototype> DefaultBibleHitSound = new("BibleHit");
 
-        /// <summary>
-        /// Sound to play when bible hits somebody.
-        /// </summary>
-        [DataField]
-        public SoundSpecifier BibleHitSound = new SoundCollectionSpecifier(DefaultBibleHit, AudioParams.Default.WithVolume(-4f));
+    /// <summary>
+    /// Default sound when Bible fails to heal somebody.
+    /// </summary>
+    private static readonly ProtoId<SoundCollectionPrototype> DefaultBibleSizzleSound = new("BibleSizzle");
 
-        /// <summary>
-        /// Damage that will be healed on a success
-        /// </summary>
-        [DataField(required: true)]
-        public DamageSpecifier Damage = default!;
+    /// <summary>
+    /// Default sound when Bible heals somebody.
+    /// </summary>
+    private static readonly ProtoId<SoundCollectionPrototype> DefaultBibleHealSound = new("BibleHeal");
 
-        /// <summary>
-        /// Damage that will be dealt on a failure
-        /// </summary>
-        [DataField(required: true)]
-        public DamageSpecifier DamageOnFail = default!;
+    /// <summary>
+    /// Sound to play when Bible hits somebody.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier BibleHitSound = new SoundCollectionSpecifier(DefaultBibleHitSound, AudioParams.Default.AddVolume(-4f));
 
-        /// <summary>
-        /// Damage that will be dealt when a non-chaplain attempts to heal
-        /// </summary>
-        [DataField(required: true)]
-        public DamageSpecifier DamageOnUntrainedUse = default!;
+    /// <summary>
+    /// Sound to play when Bible fails to heal somebody.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SizzleSound = new SoundCollectionSpecifier(DefaultBibleSizzleSound);
 
-        /// <summary>
-        /// Chance the bible will fail to heal someone with no helmet
-        /// </summary>
-        [DataField]
-        public float FailChance = 0.34f;
+    /// <summary>
+    /// Sound to play when Bible heals somebody.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier HealSound = new SoundCollectionSpecifier(DefaultBibleHealSound);
 
-        [DataField("sizzleSound")]
-        public SoundSpecifier SizzleSoundPath = new SoundPathSpecifier("/Audio/Effects/lightburn.ogg");
+    /// <summary>
+    /// Damage that will be healed on a success.
+    /// </summary>
+    [DataField(required: true)]
+    public DamageSpecifier Damage = default!;
 
-        [DataField("healSound")]
-        public SoundSpecifier HealSoundPath = new  SoundPathSpecifier("/Audio/Effects/holy.ogg");
+    /// <summary>
+    /// Damage that will be dealt on a failure.
+    /// </summary>
+    [DataField(required: true)]
+    public DamageSpecifier DamageOnFail = default!;
 
-        [DataField]
-        public string LocPrefix = "bible";
+    /// <summary>
+    /// Damage that will be dealt when a non-chaplain attempts to heal.
+    /// </summary>
+    [DataField(required: true)]
+    public DamageSpecifier DamageOnUntrainedUse = default!;
 
-        /// <summary>
-        /// A short light effect to display when successfully healing someone
-        /// </summary>
-        [DataField]
-        public EntProtoId? HealingLightEffect = "HolyLightEffect";
+    /// <summary>
+    /// Chance theBbible will fail to heal someone with no helmet.
+    /// </summary>
+    [DataField]
+    public float FailChance = 0.34f;
 
-        /// <summary>
-        /// How much damage to deal to the entity being smitten - Goob
-        /// </summary>
-        [DataField]
-        public DamageSpecifier SmiteDamage = new() {DamageDict = new() {{ "Holy", 25 }}}; // Ungodly
+    /// <summary>
+    /// Loc string played when a non-chaplain attempts to use the bible.
+    /// </summary>
+    [DataField]
+    public string SizzleText = "bible-sizzle";
 
-        /// <summary>
-        /// How long to stun the entity being smitten - Goob
-        /// </summary>
-        [DataField]
-        public TimeSpan SmiteStunDuration = TimeSpan.FromSeconds(8);
-    }
+    /// <summary>
+    /// Loc string shown to others when the bible fails to heal the target.
+    /// </summary>
+    [DataField]
+    public string HealFailOthersText = "bible-heal-fail-others";
+
+    /// <summary>
+    /// Loc string shown to the user when the bible fails to heal the target.
+    /// </summary>
+    [DataField]
+    public string HealFailSelfText = "bible-heal-fail-self";
+
+    /// <summary>
+    /// Loc string shown to others when the bible successfully heals the target.
+    /// </summary>
+    [DataField]
+    public string HealSuccessOthersText = "bible-heal-success-others";
+
+    /// <summary>
+    /// Loc string shown to the user when the bible successfully heals the target.
+    /// </summary>
+    [DataField]
+    public string HealSuccessSelfText = "bible-heal-success-self";
+
+    /// <summary>
+    /// Loc string shown to others when the bible hits a target without wounds.
+    /// </summary>
+    [DataField]
+    public string HealSuccessNoneOthersText = "bible-heal-success-none-others";
+
+    /// <summary>
+    /// Loc string shown to the user when the bible hits a target without wounds.
+    /// </summary>
+    [DataField]
+    public string HealSuccessNoneSelfText = "bible-heal-success-none-self";
+
+    /// <summary>
+    /// A short light effect to display when successfully healing someone.
+    /// </summary>
+    [DataField]
+    public EntProtoId? HealingLightEffect = "HolyLightEffect";
 }

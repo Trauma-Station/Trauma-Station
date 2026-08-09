@@ -27,8 +27,8 @@
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
-  - type: AddAccentClothing
-    accent: RussianAccent
+  - type: RussianAccent
+    relayAccent: true
   - type: Unremoveable
   - type: FactionClothing
     faction: Insurgent
@@ -64,7 +64,7 @@
   parent: [ ClothingNeckUnbutcherableBase, SurveillanceWirelessCameraBodyEntertainment, BaseSyndicateContraband ]
   id: ClothingNeckSlayerCoat
   name: S.L.A.Y.E.R coat
-  description: The Syndicate Lightly Armored Yet Explosive Resistant Overcoat, or S.L.A.Y.E.R. Overcoat for short, is Gorlex Entertainment's only overcoat capable of protecting the wearer's limbs from explosive damage, if worn over the shoulders. Its interior is lined with hooks. Comes with proprietary technology that allows it to patch into Nanotrasen systems like a camera. Not for the faint of heart.
+  description: The Syndicate Lightly Armored Yet Explosive Resistant Overcoat, or S.L.A.Y.E.R. Overcoat for short, is Gorlex Entertainment's only overcoat capable of protecting the wearer's limbs from explosive damage, if worn over the shoulders. Its interior is lined with hooks. Comes with proprietary technology that allows it to patch into Nanotrasen systems like a camera, and broadcast to station radios. Not for the faint of heart.
   components:
   - type: Item
     size: Normal
@@ -96,3 +96,10 @@
     damageCoefficient: 0.3
   - type: SurveillanceCamera
     id: Slayer
+  - type: TelecomExempt
+  - type: RadioMicrophone
+    broadcastChannel: RadioShow
+    listenRange: 1
+    enabled: false
+    toggleOnInteract: true
+    unobstructedRequired: true

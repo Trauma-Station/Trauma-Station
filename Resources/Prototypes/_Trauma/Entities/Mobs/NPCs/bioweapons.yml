@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ AppearanceBioweapon, BaseMobAnimal, SimpleMobBase ]
+  parent: [ AppearanceBioweapon, BaseMobAnimal, SimpleMobBase, MobNightVision ]
   id: MobBioweapon
-  description: A bioweapon supplied to security by one of Nanotrasens many human genetic experimentation subsidiaries. It follow the orders of whoever has it's translator.
+  description: A bioweapon supplied to the security department by one of Nanotrasen's many genetic alteration subsidiaries. It follow the orders of those who speak the proper dialect.
   name: Bioweapon
   components:
   - type: MovementSpeedModifier
@@ -40,24 +40,14 @@
     thresholds:
       0: Alive
       450: Dead
-  - type: PassiveDamage
-    allowedStates:
-      - Alive
-    damage:
-      types:
-        Heat: -1
-        Blunt: -.25
-        Slash: -.25
-        Piercing: -.25
-        Ballistic: -.25
   - type: MeleeWeapon
     range: 1.5
-    attackRate: 0.33
+    attackRate: 0.5
     soundHit:
       path: /Audio/_Trauma/Mobs/Bioweapon/clang.ogg
     damage:
       types:
-        Slash: 50
+        Slash: 30
     animation: WeaponArcSlash
     altDisarm: false
     canWideSwing: true
@@ -78,7 +68,6 @@
     - Miltech
     understands:
     - Miltech
-  - type: ThermalVision
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
@@ -87,7 +76,7 @@
     description: ghost-role-information-bioweapon-desc
     rules: ghost-role-information-bioweapon-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleSiliconBrain
     raffle:
       settings: short
   - type: GhostTakeoverAvailable
@@ -102,7 +91,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 450
       behaviors:
       - !type:TriggerBehavior
   - type: TimerTrigger
@@ -128,3 +117,14 @@
     rootTask:
       task: IdleCompound
   - type: Climbing
+  - type: UserInterface
+    interfaces:
+      enum.SiliconLawsUiKey.Key:
+        type: SiliconLawBoundUserInterface
+        requireInputValidation: false
+  - type: SiliconLawBound
+  - type: SiliconLawProvider
+    laws: BioweaponLawset
+  - type: ActionGrant
+    actions:
+    - ActionViewLaws

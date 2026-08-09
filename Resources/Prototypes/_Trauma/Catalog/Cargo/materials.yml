@@ -9,3 +9,13 @@
   cost: 1000
   category: cargoproduct-category-name-materials
   group: market
+
+- type: cargoProduct
+  id: MaterialDurathread
+  icon:
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: durathread_3
+  product: CrateMaterialDurathread
+  cost: 1200
+  category: cargoproduct-category-name-materials
+  group: market

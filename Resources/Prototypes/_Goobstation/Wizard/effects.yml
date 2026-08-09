@@ -312,7 +312,7 @@
     castShadows: false
     radius: 5
     energy: 8
-    mask: /Textures/_Goobstation/Wizard/Effects/LightMasks/ray.png
+    lightMask: Ray
   - type: RotatingLight
     speed: 60
     maxSpeed: 180

@@ -14,15 +14,12 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    private void InitOrgans()
-    {
-        SubscribeLocalEvent<InternalOrganComponent, OrganIntegrityChangedEvent>(OnOrganIntegrityChanged);
-        SubscribeLocalEvent<WoundableComponent, OrganDamageSeverityChangedOnWoundable>(OnOrganSeverityChanged);
-    }
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _internalQuery = default!;
 
     #region Event handling
 
-    private void OnOrganIntegrityChanged(Entity<InternalOrganComponent> organ, ref OrganIntegrityChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnOrganIntegrityChanged(Entity<InternalChildOrganComponent> organ, ref OrganIntegrityChangedEvent args)
     {
         if (_body.GetBody(organ.Owner) is not {} body)
             return;
@@ -37,13 +34,14 @@ public partial class TraumaSystem
         }
     }
 
-    private void OnOrganSeverityChanged(Entity<WoundableComponent> bodyPart, ref OrganDamageSeverityChangedOnWoundable args)
+    [SubscribeLocalEvent]
+    private void OnOrganSeverityChanged(Entity<WoundableComponent> ent, ref OrganDamageSeverityChangedOnWoundable args)
     {
-        if (_body.GetBody(bodyPart.Owner) is not {} body
-            || args.NewSeverity < args.OldSeverity)
+        if (_body.GetBody(ent.Owner) is not {} body ||
+            args.NewSeverity < args.OldSeverity)
             return;
 
-        _popup.PopupEntity(Loc.GetString($"popup-trauma-OrganDamage-{args.NewSeverity.ToString()}", ("part", bodyPart)),
+        _popup.PopupEntity(Loc.GetString($"popup-trauma-OrganDamage-{args.NewSeverity.ToString()}", ("part", ent)),
             body,
             body,
             PopupType.SmallCaution);
@@ -51,11 +49,11 @@ public partial class TraumaSystem
         if (args.NewSeverity != OrganSeverity.Destroyed)
             return;
 
-        if (TryGetWoundableTrauma(bodyPart, out var traumas, TraumaType.OrganDamage, bodyPart))
+        if (GetPartTraumas(ent.AsNullable(), out var traumas, TraumaType.OrganDamage))
         {
             foreach (var trauma in traumas)
             {
-                if (trauma.Comp.TraumaTarget != args.Organ)
+                if (trauma.Comp.TraumaTarget != args.Organ.Owner)
                     continue;
 
                 RemoveTrauma(trauma);
@@ -63,81 +61,65 @@ public partial class TraumaSystem
         }
 
         _audio.PlayPvs(args.Organ.Comp.OrganDestroyedSound, body);
-        _part.RemoveOrgan(bodyPart.Owner, args.Organ.Owner);
+        _part.RemoveOrgan(ent.Owner, args.Organ.Owner);
         PredictedQueueDel(args.Organ);
     }
 
     #endregion
 
     #region Public API
-    public bool TryCreateOrganDamageModifier(EntityUid uid,
+    public bool TryCreateOrganDamageModifier(Entity<InternalChildOrganComponent?> ent,
         FixedPoint2 severity,
         EntityUid effectOwner,
-        string identifier,
-        InternalOrganComponent? organ = null)
+        string identifier)
     {
-        if (severity == 0
-            || !Resolve(uid, ref organ))
+        if (severity == 0 || !_internalQuery.Resolve(ent, ref ent.Comp))
             return false;
 
-        if (!organ.IntegrityModifiers.TryAdd((identifier, effectOwner), severity))
+        if (!ent.Comp.IntegrityModifiers.TryAdd((identifier, effectOwner), severity))
             return false;
 
-        UpdateOrganIntegrity(uid, organ);
+        //DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.IntegrityModifiers));
+        UpdateOrganIntegrity(ent);
 
         return true;
     }
 
-    public bool TrySetOrganDamageModifier(EntityUid uid,
-        FixedPoint2 severity,
-        EntityUid effectOwner,
-        string identifier,
-        InternalOrganComponent? organ = null)
-    {
-        if (severity == 0
-            || !Resolve(uid, ref organ))
-            return false;
-
-        organ.IntegrityModifiers[(identifier, effectOwner)] = severity;
-        UpdateOrganIntegrity(uid, organ);
-
-        return true;
-    }
-
-    public bool TryChangeOrganDamageModifier(EntityUid uid,
+    public bool TryChangeOrganDamageModifier(Entity<InternalChildOrganComponent?> ent,
         FixedPoint2 change,
         EntityUid effectOwner,
-        string identifier,
-        InternalOrganComponent? organ = null)
+        string identifier)
     {
-        if (change == 0
-            || !Resolve(uid, ref organ))
+        if (change == 0 || !_internalQuery.Resolve(ent, ref ent.Comp))
             return false;
 
-        if (!organ.IntegrityModifiers.TryGetValue((identifier, effectOwner), out var value))
+        var key = (identifier, effectOwner);
+        if (!ent.Comp.IntegrityModifiers.TryGetValue(key, out var value))
             return false;
 
-        organ.IntegrityModifiers[(identifier, effectOwner)] = value + change;
-        UpdateOrganIntegrity(uid, organ);
+        ent.Comp.IntegrityModifiers[key] = value + change;
+        //DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.IntegrityModifiers));
+        UpdateOrganIntegrity(ent);
 
         return true;
     }
 
-    public bool TryRemoveOrganDamageModifier(EntityUid uid,
+    public bool TryRemoveOrganDamageModifier(Entity<InternalChildOrganComponent?> ent,
         EntityUid effectOwner,
-        string identifier,
-        InternalOrganComponent? organ = null)
+        string identifier)
     {
-        if (!Resolve(uid, ref organ))
+        if (!_internalQuery.Resolve(ent, ref ent.Comp))
             return false;
 
-        if (!organ.IntegrityModifiers.Remove((identifier, effectOwner)))
+        if (!ent.Comp.IntegrityModifiers.Remove((identifier, effectOwner)))
             return false;
 
-        if (TryComp<TraumaComponent>(effectOwner, out var traumaComp))
-            RemoveTrauma((effectOwner, traumaComp));
+        //DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.IntegrityModifiers));
 
-        UpdateOrganIntegrity(uid, organ);
+        if (_traumaQuery.TryComp(effectOwner, out var trauma))
+            RemoveTrauma((effectOwner, trauma));
+
+        UpdateOrganIntegrity(ent);
         return true;
     }
 
@@ -145,51 +127,50 @@ public partial class TraumaSystem
 
     #region Private API
 
-    private void UpdateOrganIntegrity(EntityUid uid, InternalOrganComponent organ)
+    private void UpdateOrganIntegrity(Entity<InternalChildOrganComponent?> ent)
     {
-        var oldIntegrity = organ.OrganIntegrity;
+        if (!_internalQuery.Resolve(ent, ref ent.Comp))
+            return;
 
-        if (organ.IntegrityModifiers.Count > 0)
-            organ.OrganIntegrity = FixedPoint2.Clamp(organ.IntegrityModifiers
+        var oldIntegrity = ent.Comp.OrganIntegrity;
+
+        if (ent.Comp.IntegrityModifiers.Count > 0)
+            ent.Comp.OrganIntegrity = FixedPoint2.Clamp(ent.Comp.IntegrityModifiers
                 .Aggregate(FixedPoint2.Zero, (current, modifier) => current + modifier.Value),
                 0,
-                organ.IntegrityCap);
+                ent.Comp.IntegrityCap);
 
-        if (oldIntegrity != organ.OrganIntegrity)
+        if (oldIntegrity == ent.Comp.OrganIntegrity)
+            return;
+
+        DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.OrganIntegrity));
+
+        var ev = new OrganIntegrityChangedEvent(oldIntegrity, ent.Comp.OrganIntegrity);
+        RaiseLocalEvent(ent, ref ev);
+
+        var nearestSeverity = ent.Comp.OrganSeverity;
+        foreach (var (severity, value) in ent.Comp.IntegrityThresholds.OrderByDescending(kv => kv.Value))
         {
-            var ev = new OrganIntegrityChangedEvent(oldIntegrity, organ.OrganIntegrity);
-            RaiseLocalEvent(uid, ref ev);
-
-            if (_container.TryGetContainingContainer((uid, Transform(uid), MetaData(uid)), out var container))
-            {
-                var ev1 = new OrganIntegrityChangedEventOnWoundable((uid, organ), oldIntegrity, organ.OrganIntegrity);
-                RaiseLocalEvent(container.Owner, ref ev1);
-            }
-        }
-
-        var nearestSeverity = organ.OrganSeverity;
-        foreach (var (severity, value) in organ.IntegrityThresholds.OrderByDescending(kv => kv.Value))
-        {
-            if (organ.OrganIntegrity < value)
+            if (ent.Comp.OrganIntegrity < value)
                 continue;
 
             nearestSeverity = severity;
             break;
         }
 
-        if (nearestSeverity != organ.OrganSeverity)
-        {
-            var ev = new OrganDamageSeverityChanged(organ.OrganSeverity, nearestSeverity);
-            RaiseLocalEvent(uid, ref ev);
-            if (_container.TryGetContainingContainer((uid, Transform(uid), MetaData(uid)), out var container))
-            {
-                var ev1 = new OrganDamageSeverityChangedOnWoundable((uid, organ), organ.OrganSeverity, nearestSeverity);
-                RaiseLocalEvent(container.Owner, ref ev1);
-            }
-        }
+        if (nearestSeverity == ent.Comp.OrganSeverity)
+            return;
 
-        organ.OrganSeverity = nearestSeverity;
-        Dirty(uid, organ);
+        ent.Comp.OrganSeverity = nearestSeverity;
+        DirtyField(ent, ent.Comp, nameof(InternalChildOrganComponent.OrganSeverity));
+
+        var sevEv = new OrganDamageSeverityChanged(ent.Comp.OrganSeverity, nearestSeverity);
+        RaiseLocalEvent(ent, ref sevEv);
+        if (_container.TryGetContainingContainer(ent.Owner, out var container))
+        {
+            var ev1 = new OrganDamageSeverityChangedOnWoundable((ent, ent.Comp), ent.Comp.OrganSeverity, nearestSeverity);
+            RaiseLocalEvent(container.Owner, ref ev1);
+        }
     }
 
     #endregion

@@ -7,7 +7,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.SpaceWhale;
@@ -29,20 +28,16 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
         base.Initialize();
 
         UpdatesOutsidePrediction = true;
-
-        SubscribeLocalEvent<TailedEntityComponent, GetLightAttackRangeEvent>(OnGetRange);
-        SubscribeLocalEvent<TailedEntityComponent, MeleeInRangeEvent>(OnInRange);
-        SubscribeLocalEvent<TailedEntityComponent, AttackAttemptEvent>(OnAttackAttempt);
-        SubscribeLocalEvent<TailedEntityComponent, PreventCollideEvent>(OnPreventCollide);
-        SubscribeLocalEvent<TailedEntityComponent, TailedEntityForceContractEvent>(OnForceContract);
     }
 
+    [SubscribeLocalEvent]
     private void OnForceContract(Entity<TailedEntityComponent> ent, ref TailedEntityForceContractEvent args)
     {
         args.Handled = true;
         ent.Comp.PreventSegmentCollide = true;
 
-        var pos = TransformSystem.GetMapCoordinates(ent);
+        var coords = Transform(ent).Coordinates;
+        var pos = GetNetCoordinates(coords);
 
         foreach (var data in ent.Comp.TailSegments)
         {
@@ -50,15 +45,17 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
                 continue;
 
             comp.Coords = pos;
-            TransformSystem.SetMapCoordinates(segment.Value, pos);
+            TransformSystem.SetCoordinates(segment.Value, coords);
+            TransformSystem.AttachToGridOrMap(segment.Value);
             Dirty(segment.Value, comp);
 
-            data.WorldPosition = pos.Position;
+            data.Coords = pos;
         }
 
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPreventCollide(Entity<TailedEntityComponent> ent, ref PreventCollideEvent args)
     {
         var other = args.OtherEntity;
@@ -73,6 +70,7 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAttackAttempt(Entity<TailedEntityComponent> ent, ref AttackAttemptEvent args)
     {
         if (args.Target is { } target &&
@@ -80,6 +78,7 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnInRange(Entity<TailedEntityComponent> ent, ref MeleeInRangeEvent args)
     {
         if (args.Handled || !ent.Comp.MeleeAttackWithSegments)
@@ -117,6 +116,7 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
         return args.InRange;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetRange(Entity<TailedEntityComponent> ent, ref GetLightAttackRangeEvent args)
     {
         if (!ent.Comp.MeleeAttackWithSegments || !TryComp(ent, out MeleeWeaponComponent? melee))
@@ -180,47 +180,53 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
 
         var (uid, comp, xform) = ent;
 
-        var headPos = TransformSystem.GetWorldPosition(xform) + comp.TailOffset;
+        var headPos = xform.Coordinates.Offset(comp.TailOffset);
+        var lastPos = GetCoordinates(ent.Comp1.LastPos);
 
-        if (headPos == ent.Comp1.LastPos)
+        if (headPos == lastPos)
             return;
 
-        ent.Comp1.LastPos = headPos;
+        ent.Comp1.LastPos = GetNetCoordinates(headPos);
 
         Angle? headRot = null;
         for (var i = 0; i < comp.TailSegments.Count; i++)
         {
             var data = comp.TailSegments[i];
 
-            var segPos = data.WorldPosition;
-            var nextPos = i <= 0 ? headPos : comp.TailSegments[i - 1].WorldPosition;
-            var nextRot = Angle.FromWorldVec(nextPos - segPos);
-            headRot ??= nextRot;
+            var segPos = GetCoordinates(data.Coords);
+            var nextPos = i <= 0 ? headPos : GetCoordinates(comp.TailSegments[i - 1].Coords) ?? headPos;
 
             // Compute the desired position: keep `Spacing` units behind the next entity along the line
             // from the segment to the next entity. If the segment is exactly on top of the target, fall back
             // to using the target's forward vector.
-            var toTarget = nextPos - segPos;
+            var toTarget = segPos is not { } pos
+                ? Vector2.Zero
+                : nextPos.Position - TransformSystem.WithEntityId(pos, nextPos.EntityId).Position;
             var distance = toTarget.Length();
 
-            Vector2 desiredPos;
+            var nextRot = Angle.FromWorldVec(toTarget);
+            headRot ??= nextRot;
+
+            EntityCoordinates desiredPos;
             if (distance > 0.0001f)
             {
                 var dir = toTarget / distance;
-                desiredPos = nextPos - dir * comp.Spacing;
+                desiredPos = nextPos.Offset(-dir * comp.Spacing);
             }
             else
             {
-                desiredPos = nextPos - nextRot.ToWorldVec() * comp.Spacing;
+                desiredPos = nextPos.Offset(-nextRot.ToWorldVec() * comp.Spacing);
             }
 
-            comp.TailSegments[i].WorldPosition = desiredPos;
+            var netDesired = GetNetCoordinates(desiredPos);
+
+            comp.TailSegments[i].Coords = netDesired;
 
             if (!TryGetEntity(data.Segment, out var segment) ||
                 !SegmentQuery.TryComp(segment.Value, out var segmentComp))
                 continue;
 
-            segmentComp.Coords = new MapCoordinates(desiredPos, xform.MapID);
+            segmentComp.Coords = netDesired;
             segmentComp.WorldRotation = nextRot;
 
             Dirty(segment.Value, segmentComp);
@@ -236,8 +242,11 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
 
     protected void ResetSegmentPosition(Entity<TailedEntitySegmentComponent> segment)
     {
-        if (segment.Comp.Coords is { } coords)
-            TransformSystem.SetMapCoordinates(segment, coords);
         TransformSystem.SetWorldRotation(segment, segment.Comp.WorldRotation);
+        if (segment.Comp.Coords is not { } coords)
+            return;
+
+        TransformSystem.SetCoordinates(segment, GetCoordinates(coords));
+        TransformSystem.AttachToGridOrMap(segment);
     }
 }

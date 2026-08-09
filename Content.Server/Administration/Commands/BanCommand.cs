@@ -24,6 +24,7 @@ public sealed partial class BanCommand : LocalizedCommands
 
     public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
+        string? webhookReason = null; // Trauma
         string target;
         string reason;
         uint minutes;
@@ -53,6 +54,12 @@ public sealed partial class BanCommand : LocalizedCommands
                 }
 
                 break;
+            // <Trauma>
+            case 5:
+                webhookReason = args[4];
+                // fallthrough, idiots never heard of an if statement
+                goto case 4;
+            // </Trauma>
             case 4:
                 target = args[0];
                 reason = args[1];
@@ -91,6 +98,7 @@ public sealed partial class BanCommand : LocalizedCommands
         var targetHWid = located.LastHWId;
 
         var banInfo = new CreateServerBanInfo(reason);
+        banInfo.WithWebhookReason(webhookReason); // Trauma
         banInfo.WithBanningAdmin(player?.UserId);
         banInfo.AddUser(targetUid, target);
         banInfo.AddHWId(targetHWid);
@@ -139,6 +147,11 @@ public sealed partial class BanCommand : LocalizedCommands
 
             return CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-ban-hint-severity"));
         }
+
+        // <Trauma>
+        if (args.Length == 5)
+            return CompletionResult.FromHint("[webhook reason override]");
+        // </Trauma>
 
         return CompletionResult.Empty;
     }

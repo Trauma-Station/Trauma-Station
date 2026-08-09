@@ -29,6 +29,11 @@
   id: LivingHeart
   ritualPrototypes:
   - RitualLivingHeart
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SimpleWaypointer
+      waypointerProtoIds:
+        HereticSacrificeTargetsWaypointer: true
   actionPrototypes:
   - ActionHereticLivingHeart
 
@@ -145,8 +150,11 @@
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: SpecialPressureImmunity
     - type: FireImmunity
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 ### blade path
 - type: hereticKnowledge
@@ -444,7 +452,6 @@
   path: Void
   event: !type:HereticKnowledgeEvent
     addedComponents:
-    - type: SpecialPressureImmunity
     - type: Aristocrat
     - type: MovementAlwaysTouching
     - type: CanMoveInAir
@@ -453,6 +460,10 @@
       lightingColor: "#b4babf33"
       prioritized: false
       relayOverlay: false # In case default value ever changes
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 ## rust path
 - type: hereticKnowledge
@@ -632,11 +643,14 @@
   event: !type:HereticXRayVisionEvent
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: SpecialPressureImmunity
     - type: NightVision
       lightingColor: white
   actionPrototypes:
   - ActionResetStarGazerConsciousness
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 ## lock path
 - type: hereticKnowledge
@@ -730,9 +744,12 @@
   event: !type:HereticAscensionLockEvent
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: SpecialPressureImmunity
   actionPrototypes:
   - ActionHereticShapeshiftLock
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 - type: hereticKnowledge
   id: RitualOfKnowledge
@@ -905,3 +922,9 @@
   stage: 7
   ritualPrototypes:
   - RitualSharpMedal
+
+- type: hereticKnowledge
+  id: AshSpirit
+  stage: 7
+  ritualPrototypes:
+  - RitualAshSpirit

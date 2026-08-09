@@ -191,21 +191,25 @@
   metabolisms:
     Bloodstream:
       effects:
-        - !type:EvenHealthChange
-          conditions:
-          - !type:TemperatureCondition
-            # this is a little arbitrary but they gotta be pretty cold
-            max: 213.0
-          scaleByTemperature: # Shitmed Change
-            min: 100.0
-            max: 213.0
-            scale: 1.6
-          damage:
-          # todo scale with temp like SS13
-            Airloss: -3
-            Brute: -2
-            Burn: -2
-            Toxin: -2
+      - !type:AdjustTemperature
+        amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      - !type:EvenHealthChange
+        conditions:
+        - !type:TemperatureCondition
+          # this is a little arbitrary but they gotta be pretty cold
+          max: 213.0
+        # <Trauma>
+        scaleByTemperature: &cryo_scaling
+          min: 100.0
+          max: 213.0
+          scale: 1.6
+        # </Trauma>
+        damage:
+        # todo scale with temp like SS13
+          Airloss: -3
+          Brute: -2
+          Burn: -2
+          Toxin: -2
 
 - type: reagent
   id: Doxarubixadone
@@ -222,11 +226,8 @@
         - !type:HealthChange
           conditions:
           - !type:TemperatureCondition
-            max: 213.0
-          scaleByTemperature: # Shitmed Change
-            min: 100.0
-            max: 213.0
-            scale: 1.6
+            max: 273.15
+          scaleByTemperature: *cryo_scaling # Trauma
           damage:
             types:
              Cellular: -2
@@ -404,9 +405,8 @@
       - !type:ModifyKnockdown
         time: 0.75
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline # Guess what epinephrine is...
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline # Guess what epinephrine is...
         time: 5 # lingers less than hivemind reagent to give it a niche
       # <Goob>
       - !type:ModifyStatusEffect
@@ -543,12 +543,12 @@
         conditions:
         - !type:TemperatureCondition
           max: 293.15
-        amount: 100000 # thermal energy, not temperature!
+        amount: 1000000 # thermal energy, not temperature!
       - !type:AdjustTemperature
         conditions:
         - !type:TemperatureCondition
           min: 293.15
-        amount: -10000
+        amount: -1000000
       - !type:PopupMessage
         type: Local
         visualType: Medium
@@ -589,9 +589,9 @@
           - !type:ReagentCondition
             reagent: Barozine
             min: 30
-      - !type:GenericStatusEffect
-        key: PressureImmunity
-        component: PressureImmunity
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPressureImmunity
+        type: Add
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -1232,6 +1232,12 @@
         conditions:
         damage:
           types:
+            # <Trauma> - Now slightly works on ALL brute and effectively on asphyxiation
+            Asphyxiation: -2 #Hydrate the injured so they may have the strength to stand (Space Station 13:14, KJV)
+            Piercing: -0.2
+            Ballistic: -0.2
+            Slash: -0.2
+            # </Trauma>
             Blunt: -0.2
             Poison: -0.2
             Heat: -0.2
@@ -1383,14 +1389,13 @@
   metabolisms:
     Bloodstream:
       effects:
+      - !type:AdjustTemperature
+        amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 213.0
-        scaleByTemperature: # Trauma
-          min: 100.0
-          max: 213.0
-          scale: 1.6
+          max: 273.15
+        scaleByTemperature: *cryo_scaling # Trauma
         damage:
           Brute: -4.5 # Trauma - Was 3
           Burn: -4.5 # Trauma - Was 3

@@ -40,6 +40,8 @@
   components:
   - type: Sprite
     state: detective
+  - type: Tag
+    tags: [ AreaDetective ]
 
 - type: entity
   parent: BaseAreaSecurity
@@ -80,6 +82,8 @@
   components:
   - type: Sprite
     state: interrogation
+  - type: Tag
+    tags: [ AreaInterrogation ]
 
 - type: entity
   parent: AreaSecurity

@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseCartridgeLightRifle
+  id: CartridgeLightRifleCaseless
+  name: cartridge (.30 rifle caseless)
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. Utilizes caseless technology
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: True
+    proto: BulletLightRifle

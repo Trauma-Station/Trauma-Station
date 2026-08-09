@@ -134,7 +134,7 @@
   - type: Sprite
     sprite: _Goobstation/Clothing/Shoes/Modsuits/atmostech.rsi
   - type: FireProtection # lmao
-    reduction: 0.25
+    reduction: 1
 
 - type: entity
   parent: [ ClothingShoesModsuitBase, BaseModsuitPieceRD ]

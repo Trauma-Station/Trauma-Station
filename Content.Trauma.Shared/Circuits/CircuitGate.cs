@@ -177,10 +177,7 @@ public abstract partial class CircuitGate
 
     protected void SetOutput(int value)
     {
-        if (_output is Integer existing)
-            existing.Value = value;
-        else
-            _output = new Integer(value);
+        _output = new Integer(value);
     }
 
     protected void SetOutput(string value)

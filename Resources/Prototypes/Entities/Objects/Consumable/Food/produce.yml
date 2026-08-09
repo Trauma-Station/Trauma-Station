@@ -359,6 +359,14 @@
   description: Rich in potassium.
   components:
   # <Trauma>
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:AddComponents
+      components:
+      - type: EggFertilizer
+        specialReplacement: MobChickClown
+    entityWhitelist:
+    - MobWhiteRooster
   - type: Healing # Bananas heal clown car
     damageContainers:
     - ClowncarDamageContainer
@@ -1001,6 +1009,7 @@
         acts: [ "Destruction" ]
   - type: Tag
     tags:
+    - Tomato # Trauma
     - Fruit
     - Vegetable
   - type: FoodSequenceElement
@@ -1125,6 +1134,7 @@
     tags:
     - Fruit
     - Vegetable
+    - EggPlant # Trauma
 
 - type: entity
   name: apple
@@ -1164,6 +1174,7 @@
   - type: Tag
     tags:
     - Fruit
+    - Apple # Trauma
   - type: FoodSequenceElement
     entries:
       Burger: Apple
@@ -1532,6 +1543,7 @@
   - type: Tag
     tags:
     - Vegetable
+    - Chili # Trauma
   - type: FoodSequenceElement
     entries:
       Taco: ChiliPepper
@@ -1568,6 +1580,11 @@
       Taco: ChillyPepper
       Burger: ChillyPepper
       Skewer: ChillyPepperSkewer
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Chilly
+    # </Trauma>
 
 - type: entity
   name: aloe
@@ -2036,6 +2053,11 @@
         Quantity: 15
   - type: Produce
     seedId: rice
+    # <Trauma>
+  - type: Tag
+    tags:
+    - Rice
+    # </Trauma>
 
 - type: entity
   name: soybeans
@@ -2517,6 +2539,7 @@
   - type: Tag
     tags:
     - Vegetable
+    - Peas # Trauma
   - type: FoodSequenceElement
     entries:
       Taco: Pea
@@ -2538,7 +2561,7 @@
         Quantity: 5
       - ReagentId: Nutriment
         Quantity: 5
-      - ReagentId: Tilenol
+      - ReagentId: Tilenol # Trauma - was Pax
         Quantity: 5
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/world_pea.rsi

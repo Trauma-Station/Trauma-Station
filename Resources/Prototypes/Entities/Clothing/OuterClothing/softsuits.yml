@@ -3,7 +3,7 @@
   parent: ClothingOuterEVASuitBase
   id: ClothingOuterHardsuitEVA
   name: EVA suit
-  description: A lightweight space suit with the basic ability to protect the wearer from the vacuum of space during emergencies.
+  description: A lightweight space suit with the basic ability to protect the wearer from the vacuum of space.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/eva.rsi
@@ -39,10 +39,10 @@
 
 #Emergency EVA
 - type: entity
-  parent: ClothingOuterEVASuitBaseToggleable
+  parent: [ TemperatureProtectionMinimal, ClothingOuterEVASuitBaseToggleable ]
   id: ClothingOuterSuitEmergency
-  name: emergency EVA suit
-  description: An emergency EVA suit with a built-in helmet. It's horribly slow and lacking in temperature protection, but enough to buy you time from the harsh vacuum of space.
+  name: emergency pressure suit
+  description: This bulky, uninsulated pressure suit was clearly not meant for extended use in outer space, despite NanoTrasen's claims that it passes corporate regulations.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/eva_emergency.rsi
@@ -51,10 +51,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
-  - type: HeldSpeedModifier
-  - type: TemperatureProtection
-    heatingCoefficient: 0.75
-    coolingCoefficient: 0.5
   - type: ToggleableClothing
     clothingPrototypes: # Trauma - changed to dict for modsuits
       head: ClothingHeadHelmetEVALarge
@@ -69,10 +65,10 @@
 
 #Prisoner EVA
 - type: entity
-  parent: ClothingOuterEVASuitBase
+  parent: [ TemperatureProtectionMinimal, ClothingOuterEVASuitBase]
   id:  ClothingOuterHardsuitEVAPrisoner
-  name: prisoner EVA suit
-  description: An emergency EVA suit meant for prisoners. It's horribly slow and lacking in temperature protection, but enough to buy you time from the harsh vacuum of space.
+  name: prisoner pressure suit
+  description: An emergency pressure suit meant for prisoners. It's not fully rated for extended use in outer space, but some wardens consider the lack of thermal insulation a feature.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/eva_prisoner.rsi
@@ -81,10 +77,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
-  - type: HeldSpeedModifier
-  - type: TemperatureProtection
-    heatingCoefficient: 0.75
-    coolingCoefficient: 0.5
   - type: Tag
     tags:
     - SuitEVA
@@ -120,17 +112,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.5
-    lowPressureMultiplier: 1000
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
     requireActivated: false
-  - type: HeldSpeedModifier
-  - type: TemperatureProtection
-    heatingCoefficient: 0.1
-    coolingCoefficient: 0.1
   - type: Armor
     coverage: # Shitmed
     - Torso
@@ -139,7 +124,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Radiation: 0.1

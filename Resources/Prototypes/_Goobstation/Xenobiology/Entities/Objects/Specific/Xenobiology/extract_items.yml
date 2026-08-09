@@ -40,7 +40,7 @@
       shootMaxInterval: 300
       shootRange: 5
       lightningPrototype: Lightning
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 32
     integrity: 32
     integrityThresholds:
@@ -163,7 +163,7 @@
   parent: BaseItem
   id: XenobioVolatileRedExtractJelly
   name: volatile red slime jelly
-  description: Using this on a piece of clothing seems to remove any potential slowdowns. Hovewer, subjects wearing such clothing were burnt to a crisp after a scientist lit his cigarette.
+  description: Using this on a piece of clothing seems to remove potential slowdowns. Hovewer, subjects wearing such clothing were burnt to a crisp after a scientist lit his cigarette.
   components:
   - type: Sprite
     layers:
@@ -174,7 +174,9 @@
     coatingName: clothing-coating-xenobio-volatile
     components:
     - type: VeryFlammable
-    - type: SpeedModifierImmunity
+    - type: SlowdownResistance
+      reduction: 0.1
+      global: false
 
 - type: entity
   parent: [ BaseItem, AdamantineOverheatable ]

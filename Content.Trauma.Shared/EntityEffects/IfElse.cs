@@ -31,7 +31,7 @@ public sealed partial class IfElseEffectSystem : EntityEffectSystem<TransformCom
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<IfElse> args)
     {
         var e = args.Effect;
-        var cond = _conditions.TryCondition(ent, e.Condition, user: args.User);
+        var cond = _conditions.TryCondition(ent, e.Condition, sourceEnt: args.User);
         var effects = cond ? e.TrueEffects : e.FalseEffects;
         _effects.ApplyEffects(ent, effects, args.Scale, args.User, args.Predicted);
     }

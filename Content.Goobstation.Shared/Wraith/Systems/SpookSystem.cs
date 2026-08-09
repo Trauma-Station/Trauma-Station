@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Prototypes;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Timing;
@@ -16,33 +15,37 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 /// </summary>
 public sealed partial class SpookSystem : EntitySystem
 {
-    [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IGameTiming _timing = default!;
+
+    private CompName _actionName;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpookComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
-        SubscribeLocalEvent<SpookComponent, RadialSelectorSelectedMessage>(OnRadialSelectorSelected);
+        _actionName = Factory.CompName<ActionComponent>();
     }
+
     #region UI
+    [SubscribeLocalEvent]
     private void OnUIOpenAttempt(Entity<SpookComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (!HasComp<WraithComponent>(args.User))
             args.Cancel();
 
-        _userInterfaceSystem.SetUiState(ent.Owner,
+        _ui.SetUiState(ent.Owner,
             RadialSelectorUiKey.Key,
             new RadialSelectorState(ent.Comp.Actions));
     }
 
+    [SubscribeLocalEvent]
     private void OnRadialSelectorSelected(Entity<SpookComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         DoSelectedAction(ent.Owner, args.SelectedItem);
 
-        _userInterfaceSystem.CloseUi(ent.Owner, RadialSelectorUiKey.Key);
+        _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key);
     }
     #endregion
     #region Helpers
@@ -50,14 +53,13 @@ public sealed partial class SpookSystem : EntitySystem
     {
         if (action == null
             || !ProtoMan.TryIndex(action, out var actionProto)
-            || !actionProto.HasComponent<ActionComponent>()
+            || !actionProto.HasComp(_actionName)
             || !TryComp<ActionsComponent>(uid, out var actions))
             return;
 
         foreach (var actionEnt in actions.Actions)
         {
-            var metadata = MetaData(actionEnt);
-            if (metadata.EntityPrototype != actionProto
+            if (Prototype(actionEnt) != actionProto
                 || !TryComp<ActionComponent>(actionEnt, out var actionComp)
                 || _actions.IsCooldownActive(actionComp, _timing.CurTime))
                 continue;

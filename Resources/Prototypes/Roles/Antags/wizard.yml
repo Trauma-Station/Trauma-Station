@@ -25,7 +25,7 @@
   unequipOldGear: true # Trauma
   prefRoles: [ Wizard ] # Trauma
   roleLoadout:
-  - RoleSurvivalEVA # Trauma - was RoleSurvivalExtended
+  - RoleSurvivalExtendedAntag
   briefing:
     text: wizard-role-greeting
     color: Turquoise

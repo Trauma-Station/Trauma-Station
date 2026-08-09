@@ -2,10 +2,10 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Blob;
-using Content.Server.Ghost.Roles.Events;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Nutrition.Components;
 using Robust.Server.Player;
 using Robust.Shared.Map;
@@ -19,12 +19,6 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
     [Dependency] private IPlayerManager _playerSystem = default!;
 
     public static readonly EntProtoId BlobRule = "BlobRule";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BlobCarrierComponent, GhostRoleSpawnerUsedEvent>(OnSpawned);
-    }
 
     protected override void Started(EntityUid uid,
         BlobSpawnRuleComponent component,
@@ -66,10 +60,11 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
 
     // Because GameRule spawns just a GhostRoleSpawner, we can't just remove components
     // right away, and need to track the event when entity is spawned.
-    private void OnSpawned(EntityUid uid, BlobCarrierComponent component, GhostRoleSpawnerUsedEvent args)
+    [SubscribeLocalEvent]
+    private void OnSpawned(Entity<BlobCarrierComponent> ent, ref GhostRoleSpawnerUsedEvent args)
     {
         var carrier = args.Spawned;
-        if (!TryComp<BlobCarrierComponent>(carrier, out _))
+        if (!HasComp<BlobCarrierComponent>(carrier))
             return;
 
         // Blob doesn't spawn when blob carrier was eaten.

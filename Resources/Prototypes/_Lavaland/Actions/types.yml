@@ -8,6 +8,9 @@
   components:
   - type: Action
     useDelay: 0.5
-    icon: { sprite: Objects/Tools/seclite.rsi, state: seclite }
+  - type: Sprite
+    sprite: Objects/Tools/seclite.rsi
+    layers:
+    - state: seclite
   - type: InstantAction
     event: !type:ToggleActionEvent

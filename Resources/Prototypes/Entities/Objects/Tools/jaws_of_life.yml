@@ -5,6 +5,19 @@
   abstract: true
   description: A set of jaws of life, compressed through the magic of science.
   components:
+  # <Trauma>
+  - type: UseDelay # For insta prying
+    delay: 1
+  - type: Tweezers
+    speed: 0.6
+  - type: Retractor
+    speed: 0.45
+  - type: Hemostat
+    speed: 0.7
+  - type: SurgeryTool
+    startSound: /Audio/Items/change_jaws.ogg
+    endSound: /Audio/Items/change_jaws.ogg
+  # </Trauma>
   - type: Tag
     tags:
     - JawsOfLife
@@ -23,13 +36,17 @@
   - type: Tool
     qualities:
       - Prying
-    useSound: /Audio/Items/jaws_pry.ogg
+    useSound: !type:SoundPathSpecifier
+      path: /Audio/Items/jaws_pry.ogg
+      params:
+        volume: -2
   - type: Prying
     speedModifier: 1.5
     pryPowered: true
-    useSound: /Audio/Items/jaws_pry.ogg
-  - type: UseDelay # Goobstation - For insta prying
-    delay: 1
+    useSound: !type:SoundPathSpecifier
+      path: /Audio/Items/jaws_pry.ogg
+      params:
+        volume: -2
   - type: MultipleTool
     statusShowBehavior: true
     entries:
@@ -37,14 +54,26 @@
         sprite:
           sprite: Objects/Tools/jaws_of_life.rsi
           state: jaws_pry
-        useSound: /Audio/Items/jaws_pry.ogg
-        changeSound: /Audio/Items/change_jaws.ogg
+        useSound: !type:SoundPathSpecifier
+          path: /Audio/Items/jaws_pry.ogg
+          params:
+            volume: -2
+        changeSound: !type:SoundPathSpecifier
+          path: /Audio/Items/change_jaws.ogg
+          params:
+            volume: -5
       - behavior: Cutting
         sprite:
           sprite: Objects/Tools/jaws_of_life.rsi
           state: jaws_cutter
-        useSound: /Audio/Items/jaws_cut.ogg
-        changeSound: /Audio/Items/change_jaws.ogg
+        useSound: !type:SoundPathSpecifier
+          path: /Audio/Items/jaws_cut.ogg
+          params:
+            volume: -4
+        changeSound: !type:SoundPathSpecifier
+          path: /Audio/Items/change_jaws.ogg
+          params:
+            volume: -5
   - type: MeleeWeapon
     wideAnimationRotation: 90
     damage:
@@ -52,15 +81,6 @@
         Blunt: 12 # Trauma, was 10
     soundHit:
       collection: MetalThud
-  - type: Tweezers # Shitmed
-    speed: 0.6
-  - type: Retractor # Shitmed
-    speed: 0.45
-  - type: Hemostat # Shitmed
-    speed: 0.7
-  - type: SurgeryTool # Shitmed
-    startSound: /Audio/Items/change_jaws.ogg
-    endSound: /Audio/Items/change_jaws.ogg
 
 - type: entity # Goobstation - Recycler Update
   parent: JawsOfLifeBase
@@ -98,17 +118,29 @@
         sprite:
           sprite: Objects/Tools/jaws_of_life.rsi
           state: syn_jaws_pry
-        useSound: /Audio/Items/jaws_pry.ogg
-        changeSound: /Audio/Items/change_jaws.ogg
+        useSound: !type:SoundPathSpecifier
+          path: /Audio/Items/jaws_pry.ogg
+          params:
+            volume: -2
+        changeSound: !type:SoundPathSpecifier
+          path: /Audio/Items/change_jaws.ogg
+          params:
+            volume: -5
       - behavior: Cutting
         sprite:
           sprite: Objects/Tools/jaws_of_life.rsi
           state: syn_jaws_cutter
-        useSound: /Audio/Items/jaws_cut.ogg
-        changeSound: /Audio/Items/change_jaws.ogg
+        useSound: !type:SoundPathSpecifier
+          path: /Audio/Items/jaws_cut.ogg
+          params:
+            volume: -4
+        changeSound: !type:SoundPathSpecifier
+          path: /Audio/Items/change_jaws.ogg
+          params:
+            volume: -5
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 12 # Trauma, was 14
+        Blunt: 12 # Trauma - was 14
   - type: StaticPrice
     price: 1000

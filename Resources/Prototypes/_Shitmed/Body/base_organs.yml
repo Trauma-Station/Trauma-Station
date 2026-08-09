@@ -11,6 +11,7 @@
     overrideDir: North
   - type: ThrowingAngle # We add this so that throwing things doesn't make them freak the fuck out by automatically deciding directions.
     angle: 90
+  - type: Bone
   - type: BodyPart
   - type: CoveredPart # for explosion damage and per-limb coverage
   - type: Woundable
@@ -24,7 +25,7 @@
       Critical: 10
       Mangled: 0
   - type: WoundableVisuals
-    thresholds: [ 10, 20, 30, 50, 70, 100 ]
+    thresholds: [ 100, 70, 50, 30, 20, 10 ]
     damageGroupSprites:
       Brute: _Shitmed/Mobs/Effects/brute_damage.rsi
       Burn: _Shitmed/Mobs/Effects/burn_damage.rsi
@@ -32,15 +33,6 @@
   - type: ContainerContainer
     containers:
       Wounds: !type:Container
-      Bone: !type:Container
-
-- type: entity
-  abstract: true
-  parent: OrganBase
-  id: OrganBaseInternal
-  components:
-  - type: InternalOrgan
-  - type: ChildOrgan # there are no internal organs that are roots
 
 - type: entity
   abstract: true

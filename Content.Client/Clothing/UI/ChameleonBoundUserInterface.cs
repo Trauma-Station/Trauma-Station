@@ -1,7 +1,7 @@
 using Content.Client.Clothing.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Tag;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
@@ -17,11 +17,13 @@ public sealed partial class ChameleonBoundUserInterface : BoundUserInterface
 
     [ViewVariables]
     private ChameleonMenu? _menu;
+    private CompName _tagName; // Trauma
 
     public ChameleonBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _chameleon = EntMan.System<ChameleonClothingSystem>();
         _tag = EntMan.System<TagSystem>();
+        _tagName = EntMan.ComponentFactory.CompName<TagComponent>(); // Trauma
     }
 
     protected override void Open()
@@ -47,7 +49,7 @@ public sealed partial class ChameleonBoundUserInterface : BoundUserInterface
                 if (string.IsNullOrEmpty(target) || !_proto.Resolve(target, out EntityPrototype? proto))
                     continue;
 
-                if (!proto.TryComp(out TagComponent? tag, EntMan.ComponentFactory) || !_tag.HasTag(tag, st.RequiredTag))
+                if (!proto.TryComp<TagComponent>(_tagName, out var tag) || !_tag.HasTag(tag, st.RequiredTag)) // Trauma - use _tagName
                     continue;
 
                 newTargets.Add(target);

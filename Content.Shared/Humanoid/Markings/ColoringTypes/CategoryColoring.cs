@@ -16,7 +16,7 @@ public sealed partial class CategoryColoring : LayerColoringType
 
         if (otherMarkings.Count > 0)
         {
-            outColor = otherMarkings[0].MarkingColors.FirstOrDefault();
+            outColor = otherMarkings[0].MarkingColors.ElementAtOrDefault(Index); // Trauma - was FirstOrDefault
         }
 
         return outColor;

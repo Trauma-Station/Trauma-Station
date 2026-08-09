@@ -13,7 +13,6 @@
   - Xenoborgs
   - MinorAntagonists
   # <Trauma>
-  - CorporateAgents
   - Changelings
   - Heretics
   - Blob
@@ -31,6 +30,7 @@
   - Slasher
   - ShadowDemon
   - Vampires
+  - Spy
   # </Trauma>
 
 - type: guideEntry

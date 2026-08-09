@@ -8,14 +8,8 @@
   components:
   - type: VendingMachine
     pack: EmptyVendingMachineInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
-    denyState: deny-unshaded
-    screenState: screen
-  - type: Advertise
-    pack: SyndieDrobeAds
+  - type: DatasetVocalizer
+    dataset: SyndieDrobeAds
   - type: Sprite
     sprite: _NF/Structures/Machines/VendingMachines/contravend.rsi
     layers:

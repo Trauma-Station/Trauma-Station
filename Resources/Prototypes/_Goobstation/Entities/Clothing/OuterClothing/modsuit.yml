@@ -21,8 +21,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.01
-      heatingCoefficient: 0.01
+      coefficient: 0.01
   - type: Clothing
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
@@ -34,7 +33,7 @@
     sealUpPopup: sealable-clothing-seal-up-chestplate
     sealDownPopup: sealable-clothing-seal-down-chestplate
   - type: FireProtection
-    reduction: 0.5
+    reduction: 0.63
   - type: StaminaResistance
     damageCoefficient: 0.9
   - type: SealableClothingVisuals
@@ -50,7 +49,7 @@
     - Arm
     - Leg
     - Tail
-    - Other
+    - Wings
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -195,7 +194,7 @@
     delayDelta: 1
     knockdownTimeDelta: -1
   - type: FireProtection
-    reduction: 0.7 # 0.2 stronger than other modsuits
+    reduction: 0.88
 
 - type: entity
   parent: [ ClothingOuterModsuitBase, BaseModsuitPieceAtmos ]
@@ -223,13 +222,12 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.001 # 10x better
-      heatingCoefficient: 0.001 # 10x better
+      coefficient: 0.001 # 10x better
   - type: ModifyDelayedKnockdown
     delayDelta: 1
     knockdownTimeDelta: -1
   - type: FireProtection
-    reduction: 0.75 # 0.25 better than other modsuits
+    reduction: 0.94
 
 - type: entity
   parent: [ ClothingOuterModsuitBase, BaseModsuitPieceRD ]

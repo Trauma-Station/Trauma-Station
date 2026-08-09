@@ -3,12 +3,9 @@
 # Anyway
 # See WallRock variants for the remappings.
 
-# Asteroid rock
 - type: entity
-  id: AsteroidRock
   parent: BaseWall
-  name: asteroid rock
-  description: A rocky asteroid.
+  id: BaseAsteroidRock
   components:
   - type: Transform
     noRot: true
@@ -36,6 +33,30 @@
     damageModifierSet: Rock
   - type: Injurable
     damageContainer: StructuralInorganic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 2000
+
+#Asteroid rock
+- type: entity
+  parent: BaseAsteroidRock
+  id: AsteroidRock
+  name: asteroid rock
+  description: A rocky asteroid.
+  components:
+  # <Trauma>
+  - type: Gatherable
+    toolWhitelist:
+      tags: []
+  # </Trauma>
   - type: Destructible
     thresholds:
     - trigger:
@@ -49,26 +70,26 @@
           path: /Audio/Effects/break_stone.ogg
           params:
             volume: -6
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        mask:
-        - FullTileMask
-        layer:
-        - WallLayer
-        density: 2000
-  - type: Gatherable # Lavaland Change
-    toolWhitelist:
-      tags: []
 
 - type: entity
   abstract: true
+  parent: BaseWall # Trauma, small gibtonite refractor
   id: BaseRockGibtonite
   suffix: Gibtonite
   components:
+  # <Trauma>
+  - type: Transform
+    noRot: true
+  - type: Damageable
+    damageModifierSet: Rock
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: MiningScannerViewable
+  - type: SmoothEdge
+  # </Trauma>
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -87,16 +108,16 @@
     beepSound:
       collection: GlassCrack
   - type: RandomTimerTrigger
-    min: 8
+    min: 1 # Trauma, was 8
     max: 10
   - type: ExplodeOnTrigger
     keysIn:
     - timer
   - type: Explosive
     explosionType: DemolitionCharge
-    totalIntensity: 450
+    totalIntensity: 1000 # was 450
     intensitySlope: 2.5
-    maxIntensity: 10
+    maxIntensity: 30 # was 10
     canCreateVacuum: false
   - type: Destructible
     thresholds:
@@ -445,10 +466,17 @@
           visible: false # Lavaland Change
 
 - type: entity
-  parent: [ BaseRockGibtonite, AsteroidRock ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: asteroid rock # Trauma, small refractor
   id: AsteroidRockGibtonite
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_asteroid
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
@@ -745,10 +773,17 @@
       visible: false # Lavaland Change
 
 - type: entity
-  parent: [ BaseRockGibtonite, IronRock ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: ironrock # Trauma, small refractor
   id: IronRockGibtonite
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_andesite
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]

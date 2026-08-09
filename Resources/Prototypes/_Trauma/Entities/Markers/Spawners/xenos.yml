@@ -99,3 +99,19 @@
   - type: ConditionalSpawner
     prototypes:
     - MobXenomorphQueen
+
+- type: entity
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostLoneXenomorph
+  categories: [ HideSpawnMenu, Spawner ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Trauma/Xenomorphs/the_alien.rsi
+  - type: GhostRole
+    name: ghost-role-information-lone-xenomorph-name
+    description: ghost-role-information-lone-xenomorph-description
+    rules: ghost-role-information-lone-xenomorph-rules
+    mindRoles:
+    - MindRoleXenomorph

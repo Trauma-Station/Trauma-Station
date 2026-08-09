@@ -24,19 +24,21 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
-    - id: MorphRule
+    - id: MorphMidroundRule
+    - id: LoneXenomorphSpawnRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: BlobMidround
+    #- id: BlobMidround # Disabled until its major bugs are fixed
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
     - id: FugitiveSpawn
+
 
 - type: entity
   parent: BaseGameRule
@@ -109,12 +111,12 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     minimumPlayers: 30
-    weight: 3
+    weight: 1.5
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 3, 6
       children:
       - id: MobCoconutCrab
         weight: 0.75
@@ -314,7 +316,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SyndiePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-syndicate-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterSyndicate
@@ -337,7 +339,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-spacepol-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterSpacepol
@@ -360,7 +362,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/RussianHunterShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-russian-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterRussian
@@ -383,7 +385,7 @@
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/MercHunterShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-bounty-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
       proto: FugitiveHunterBounty

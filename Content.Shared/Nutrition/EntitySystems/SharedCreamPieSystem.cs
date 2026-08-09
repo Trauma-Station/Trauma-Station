@@ -134,29 +134,21 @@ public abstract partial class SharedCreamPieSystem : EntitySystem
         // TODO: Check if they even have a head that can be hit.
         SetCreamPied(creamPied.AsNullable(), true);
 
-        // Throwing is not predicted, so the thrower is not equal to the client predicting the collision, so we cannot pass in a user.
-        // TODO: Make the popup API sane.
         /* Trauma - throwing is predicted
         if (_net.IsClient)
             return;
         */
 
-        // Shown only to the player that was hit.
-        _popup.PopupClient( // Trauma - use PopupClient
+        _popup.PopupEntity(
             Loc.GetString(
                 "cream-pied-component-on-hit-by-message",
                 ("thrown", args.Thrown)),
-            creamPied.Owner, creamPied.Owner);
-
-        var otherPlayers = Filter.PvsExcept(creamPied.Owner);
-
-        // Show to everyone else.
-        _popup.PopupEntity(
             Loc.GetString(
                 "cream-pied-component-on-hit-by-message-others",
                 ("owner", Identity.Entity(creamPied.Owner, EntityManager)),
                 ("thrown", args.Thrown)),
-            creamPied.Owner, otherPlayers, false);
+            creamPied.Owner,
+            creamPied.Owner);
     }
 
     private void OnRejuvenate(Entity<CreamPiedComponent> ent, ref RejuvenateEvent args)

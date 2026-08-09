@@ -124,7 +124,7 @@ namespace Content.Client.Construction.UI
                     return;
                 if (b)
                     _placementManager.Clear();
-                _placementManager.ToggleEraserHijacked(new ConstructionPlacementHijack(_constructionSystem, null));
+                _placementManager.ToggleEraserHijacked(new ConstructionPlacementHijack(null));
                 _constructionView.EraseButtonPressed = b;
             };
 
@@ -249,6 +249,7 @@ namespace Content.Client.Construction.UI
                 !_favoritedRecipes.Contains(prototype),
                 // <Trauma>
                 CanUnderstand(prototype),
+                _useSkills,
                 prototype);
                 // </Trauma>
 
@@ -308,7 +309,7 @@ namespace Content.Client.Construction.UI
                         IsTile = false,
                         PlacementOption = _selected.PlacementMode
                     },
-                    new ConstructionPlacementHijack(_constructionSystem, _selected));
+                    new ConstructionPlacementHijack(_selected));
 
                 UpdateGhostPlacement();
             }
@@ -615,7 +616,7 @@ namespace Content.Client.Construction.UI
                     IsTile = false,
                     PlacementOption = _selected.PlacementMode,
                 },
-                new ConstructionPlacementHijack(constructSystem, _selected));
+                new ConstructionPlacementHijack(_selected));
 
             _constructionView.BuildButtonPressed = true;
         }
@@ -783,7 +784,7 @@ namespace Content.Client.Construction.UI
                 // <Trauma> - update recipes whenever opening the window
                 if (_playerManager.LocalEntity is { } player)
                 {
-                    _useSkills = _constructionSystem!.IsKnowledgeHolder(player);
+                    _useSkills = _constructionSystem!.UsesKnowledge(player);
                     _skills = _knowledge.GetSkillMasteries(player);
                 }
                 // </Trauma>

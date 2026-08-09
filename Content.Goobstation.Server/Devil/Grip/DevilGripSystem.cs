@@ -3,7 +3,7 @@
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Religion;
 using Content.Server.Chat.Systems;
-using Content.Server.Speech.EntitySystems;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;

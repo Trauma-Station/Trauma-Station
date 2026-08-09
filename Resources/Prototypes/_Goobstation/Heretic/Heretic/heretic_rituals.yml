@@ -43,12 +43,6 @@
         applyOn: Targets
         min: 1
         cancelLoc: heretic-ritual-fail-sacrifice-ineligible
-    - !type:EffectsRitualEffect
-      applyOn: Mind
-      effects:
-      - !type:RaiseEvents
-        events:
-        - !type:EventHereticUpdateTargets
 
 - type: entity
   id: RitualAmberFocus
@@ -398,7 +392,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - AshlordRite
@@ -563,7 +556,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - MaelstromOfSilver
@@ -763,8 +755,10 @@
         health: 100
       - !type:AddComponents
         components:
-        - type: Muted
         - type: HereticBladeUserBonusDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMutedGhoul
+        time: null
   - type: Tag
     tags:
     - RitualImperfect
@@ -935,7 +929,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - PriestFinalHymn
@@ -1104,7 +1097,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - WaltzAtTheEndOfTime
@@ -1271,7 +1263,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - RustbringersOath
@@ -1439,7 +1430,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticResolveStarGazer
         - !type:EventHereticAddKnowledge
           knowledge:
@@ -1748,7 +1738,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - UnlockTheLabyrinth
@@ -2376,6 +2365,9 @@
         - whitelist:
             tags:
             - Knife
+          blacklist:
+            components:
+            - CarvingKnife
           name: heretic-ritual-ingredient-knife
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -2807,3 +2799,41 @@
       applyOn: Platform
       output:
         ClothingNeckSharpMedal: 1
+
+- type: entity
+  id: RitualAshSpirit
+  name: Ashen Ritual
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: ash_walker
+  - type: HereticRitual
+    limit: 2
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Bonfire
+          name: heretic-ritual-ingredient-bonfire
+        - whitelist:
+            tags:
+            - Book
+          name: heretic-ritual-ingredient-book
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        MobGhoulAshSpirit: 1

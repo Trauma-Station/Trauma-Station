@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
 using Content.Shared.FixedPoint;
 
@@ -8,12 +7,13 @@ namespace Content.Medical.Shared.Traumas;
 
 [RegisterComponent, NetworkedComponent]
 [EntityCategory("Traumas")]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class TraumaComponent : Component
 {
     /// <summary>
-    /// Self-explanatory. Can be null if the organ or bone, etc; got delimbed but still exists
+    /// Part this trauma belongs to, can be null if the organ or bone, etc; got delimbed but still exists
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? HoldingWoundable;
 
     /// <summary>
@@ -21,35 +21,21 @@ public sealed partial class TraumaComponent : Component
     /// For BoneDamage - the bone
     /// For Dismemberment - the parent woundable, of the woundable that got delimbed
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? TraumaTarget;
 
     /// <summary>
-    /// SHITCODE ALERT!!!!! This PURELY EXISTS FOR DELIMB TRAUMAS. I hate myself.
+    /// The wound this trauma was applied by.
     /// </summary>
-    [DataField]
-    public (BodyPartType, BodyPartSymmetry)? TargetType;
+    [DataField, AutoNetworkedField]
+    public EntityUid Wound;
 
     /// <summary>
     /// The severity the wound had when trauma got induced; Gets updated to the new one if the trauma gets worsened by the same wound
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 TraumaSeverity;
 
-    /// <summary>
-    /// Self-explanatory
-    /// </summary>
-    [DataField]
-    public TraumaType TraumaType;
-}
-
-// The networking on consciousness is rather silly.
-[Serializable, NetSerializable]
-public sealed class TraumaComponentState : ComponentState
-{
-    public NetEntity? HoldingWoundable;
-    public NetEntity? TraumaTarget;
-    public (BodyPartType, BodyPartSymmetry)? TargetType;
-    public FixedPoint2 TraumaSeverity;
+    [DataField, AutoNetworkedField]
     public TraumaType TraumaType;
 }

@@ -17,3 +17,5 @@ entity-effect-popup-blood-stops-swelling = Your blood stops swelling.
 entity-effect-popup-vampire-light-1 = The sunlight burns you!
 entity-effect-popup-vampire-light-2 = You should go away from space...
 entity-effect-popup-vampire-light-3 = You look pale!
+
+entity-effect-popup-strawberry-ice-addiction = You feel a need for fizzy pink flavor

@@ -6,6 +6,7 @@ using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Whitelist;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -26,6 +27,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] protected IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
@@ -43,13 +45,24 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public Dictionary<EntProtoId, KnowledgeComponent> AllKnowledges = new();
     public static readonly string[] MasteryNames = [
         "Unskilled",
-        "Novice",
         "Average",
         "Advanced",
         "Expert",
         "Master"
     ];
+    /// <summary>
+    /// When knowledge is disabled only these skills can be added.
+    /// </summary>
+    public static readonly EntityWhitelist DisabledSkillWhitelist = new()
+    {
+        Components =
+        [
+            "LanguageKnowledge",
+            "MartialArtsKnowledge"
+        ]
+    };
 
+    public bool SkillsEnabled;
     private bool _skillGain;
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
@@ -64,6 +77,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeLanguage();
         InitializeOnWear();
 
+        Subs.CVar(_cfg, TraumaCVars.SkillsEnabled, x => SkillsEnabled = x, true);
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
         LoadSkillPrototypes();
@@ -373,6 +387,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </returns>
     public Entity<KnowledgeComponent>? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool popup = true)
     {
+        if (!SkillsEnabled && _whitelist.IsWhitelistFail(DisabledSkillWhitelist, id))
+            return null; // no crafting etc skills when disabled
+
         if (GetKnowledge(ent, id) is { } existing)
         {
             if (existing.Comp.LearnedLevel < level)
@@ -651,17 +668,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
     public override string GetMasteryString(int mastery)
-        => MasteryNames[Math.Clamp(mastery, 0, 5)];
+        => MasteryNames[Math.Clamp(mastery, 0, 4)];
 
     public override int GetMastery(int level)
         => level switch
         {
-            >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
-            >= 88 => 5,
-            >= 75 => 4,
-            >= 50 => 3,
-            >= 25 => 2,
-            >= 1 => 1,
+            >= 100 => 5, // 5th mastery doesn't exist, but we can use this to say max level
+            >= 88 => 4,
+            >= 75 => 3,
+            >= 50 => 2,
+            >= 25 => 1,
             _ => 0,
         };
 
@@ -680,12 +696,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetInverseMastery(int mastery)
         => mastery switch
         {
-            >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
-            >= 5 => 88,
-            >= 4 => 75,
-            >= 3 => 50,
-            >= 2 => 25,
-            >= 1 => 1,
+            >= 5 => 100, // 5th mastery doesn't exist, but we can use this to say max level
+            >= 4 => 88,
+            >= 3 => 75,
+            >= 2 => 50,
+            >= 1 => 25,
             _ => 0,
         };
 
@@ -693,11 +708,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         return (GetMastery(ent.Comp) + shift) switch
         {
-            >= 5 => 3,
-            >= 4 => 4,
-            >= 3 => 6,
-            >= 2 => 8,
-            >= 1 => 12,
+            >= 4 => 3,
+            >= 3 => 4,
+            >= 2 => 6,
+            >= 1 => 8,
             _ => 12,
         };
     }

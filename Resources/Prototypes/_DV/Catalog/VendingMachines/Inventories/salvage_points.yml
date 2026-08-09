@@ -58,6 +58,8 @@
     cost: 1000
   - id: PKAUpgradeFireRate
     cost: 1000
+  - id: PKAUpgradeSpace
+    cost: 1000
   - id: ShelterCapsule
     cost: 1000
   - id: LavalandEquipmentExplorerSuit

@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleSpy
+  name: Spy Role
+  components:
+  - type: MindRole
+    roleType: SoloAntagonist
+    subtype: role-subtype-spy
+    exclusiveAntag: true
+    antagPrototype: Spy
+  - type: SpyRole
+  - type: RoleEffects
+    singleUse: true
+    added:
+    - !type:NestedEffect
+      proto: TraitorSkills

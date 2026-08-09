@@ -46,7 +46,7 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
 
         private void PopulateTokenButtons()
         {
-            TokenListingsContainer.DisposeAllChildren();
+            TokenListingsContainer.RemoveAllChildren();
             _buttonClickTimes.Clear();
 
             var tokenListings = _protoManager.EnumeratePrototypes<TokenListingPrototype>()

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.Lathe.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.AlertLevel;
 using Content.Shared.Chat;
 using Content.Shared.Lathe;
 using Content.Shared.Research.Prototypes;
@@ -17,6 +17,7 @@ namespace Content.Server.Lathe;
 /// </summary>
 public sealed partial class LatheSystem
 {
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private StationSystem _station = default!;
 
@@ -54,9 +55,12 @@ public sealed partial class LatheSystem
             InGameICChatType.Speak, hideChat: true);
     }
 
-    private string? GetAlertLevel(EntityUid uid)
+    private ProtoId<AlertLevelPrototype>? GetAlertLevel(EntityUid uid)
     {
-        var station = _station.GetOwningStation(uid);
-        return CompOrNull<AlertLevelComponent>(station)?.CurrentLevel;
+        if (_station.GetOwningStation(uid) is not { } station)
+            return null;
+
+        _alertLevel.TryGetLevel(station, out var level);
+        return level;
     }
 }

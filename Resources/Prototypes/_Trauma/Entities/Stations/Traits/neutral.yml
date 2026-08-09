@@ -18,6 +18,7 @@
     effects:
     - !type:TeleportRandomArea
       safe: true
+      compName: Area
     # TODO: spawn poof effects
 
 - type: stationTrait

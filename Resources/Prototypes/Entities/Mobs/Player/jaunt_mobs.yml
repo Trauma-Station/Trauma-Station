@@ -5,6 +5,13 @@
   description: Faint traces of a humanoid figure linger here
   suffix: Ethereal
   components:
+  # <Trauma>
+  - type: IsDeadIC
+    dead: false
+  - type: Jaunt
+    jauntAction: null
+  - type: KnowledgeHolder # so languages can get transferred to it
+  # </Trauma>
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye
@@ -18,12 +25,6 @@
   - type: Visibility
     layer: 2
   - type: Spectral
-  # <Trauma>
-  - type: IsDeadIC
-    dead: false
-  - type: Jaunt
-    jauntAction: null
-  # </Trauma>
 
 # Should be slow, for balance
 - type: entity

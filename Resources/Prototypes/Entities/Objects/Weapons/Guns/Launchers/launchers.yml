@@ -10,12 +10,6 @@
     class: Heavy
   # </Trauma>
   - type: Sprite
-  - type: Item
-    # <Trauma>
-    size: Huge # - was Ginormous
-    shape:
-    - 0,0,5,2
-    # </Trauma>
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -25,6 +19,12 @@
     quickEquip: false
     slots:
     - Back
+  - type: Item
+    # <Trauma>
+    size: Huge # was Ginormous
+    shape:
+    - 0,0,5,2
+    # </Trauma>
   - type: StaticPrice
     price: 500
   - type: Gun

@@ -43,35 +43,13 @@ public sealed partial class GuardianSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<GuardianCreatorComponent, UseInHandEvent>(OnCreatorUse);
-        SubscribeLocalEvent<GuardianCreatorComponent, AfterInteractEvent>(OnCreatorInteract);
-        SubscribeLocalEvent<GuardianCreatorComponent, ExaminedEvent>(OnCreatorExamine);
-        SubscribeLocalEvent<GuardianCreatorComponent, GuardianCreatorDoAfterEvent>(OnDoAfter);
+    [Dependency] private EntityQuery<GuardianComponent> _guardianQuery;
+    [Dependency] private EntityQuery<GuardianHostComponent> _guardianHostQuery;
 
-        SubscribeLocalEvent<GuardianComponent, ComponentShutdown>(OnGuardianShutdown);
-        SubscribeLocalEvent<GuardianComponent, MoveEvent>(OnGuardianMove);
-        SubscribeLocalEvent<GuardianComponent, DamageDealtEvent>(OnGuardianDamaged);
-        SubscribeLocalEvent<GuardianComponent, PlayerAttachedEvent>(OnGuardianPlayerAttached);
-        SubscribeLocalEvent<GuardianComponent, PlayerDetachedEvent>(OnGuardianPlayerDetached);
-
-        SubscribeLocalEvent<GuardianHostComponent, ComponentInit>(OnHostInit);
-        SubscribeLocalEvent<GuardianHostComponent, MoveEvent>(OnHostMove);
-        SubscribeLocalEvent<GuardianHostComponent, MobStateChangedEvent>(OnHostStateChange);
-        SubscribeLocalEvent<GuardianHostComponent, ComponentShutdown>(OnHostShutdown);
-
-        SubscribeLocalEvent<GuardianHostComponent, GuardianToggleActionEvent>(OnPerformAction);
-
-        SubscribeLocalEvent<GuardianComponent, AttackAttemptEvent>(OnGuardianAttackAttempt);
-
-        SubscribeLocalEvent<GuardianHostComponent, MechPilotRelayedEvent<GettingAttackedAttemptEvent>>(OnPilotAttackAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGuardianShutdown(Entity<GuardianComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp<GuardianHostComponent>(ent, out var hostComponent))
+        if (!_guardianHostQuery.TryComp(ent, out GuardianHostComponent? hostComponent))
             return;
 
         _container.Remove(ent.Owner, hostComponent.GuardianContainer);
@@ -84,6 +62,7 @@ public sealed partial class GuardianSystem : EntitySystem
         Dirty(ent, hostComponent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPerformAction(Entity<GuardianHostComponent> ent, ref GuardianToggleActionEvent args)
     {
         if (args.Handled)
@@ -91,7 +70,7 @@ public sealed partial class GuardianSystem : EntitySystem
 
         if (_container.IsEntityInContainer(ent.Owner))
         {
-            _popup.PopupPredicted(Loc.GetString("guardian-inside-container"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("guardian-inside-container"), ent.Owner, ent.Owner);
             return;
         }
 
@@ -101,9 +80,10 @@ public sealed partial class GuardianSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnGuardianPlayerDetached(Entity<GuardianComponent> ent, ref PlayerDetachedEvent args)
     {
-        if (!TryComp<GuardianHostComponent>(ent.Comp.Host, out var hostComponent) ||
+        if (!_guardianHostQuery.TryComp(ent.Comp.Host, out GuardianHostComponent? hostComponent) ||
             TerminatingOrDeleted(ent.Owner))
         {
             PredictedQueueDel(ent.Owner);
@@ -115,10 +95,11 @@ public sealed partial class GuardianSystem : EntitySystem
         RetractGuardian((ent.Comp.Host.Value, hostComponent), (ent.Owner, ent.Comp));
     }
 
+    [SubscribeLocalEvent]
     private void OnGuardianPlayerAttached(Entity<GuardianComponent> ent, ref PlayerAttachedEvent args)
     {
         var host = ent.Comp.Host;
-        if (!HasComp<GuardianHostComponent>(host))
+        if (!_guardianHostQuery.HasComp(host))
         {
             PredictedQueueDel(ent.Owner);
             ent.Comp.Host = null;
@@ -126,15 +107,17 @@ public sealed partial class GuardianSystem : EntitySystem
             return;
         }
 
-        _popup.PopupPredicted(Loc.GetString("guardian-available"), host.Value, host.Value);
+        _popup.PopupEntity(Loc.GetString("guardian-available"), host.Value, host.Value);
     }
 
+    [SubscribeLocalEvent]
     private void OnHostInit(Entity<GuardianHostComponent> ent, ref ComponentInit args)
     {
         ent.Comp.GuardianContainer = _container.EnsureContainer<ContainerSlot>(ent.Owner, "GuardianContainer");
         _action.AddAction(ent.Owner, ref ent.Comp.ActionEntity, ent.Comp.Action);
     }
 
+    [SubscribeLocalEvent]
     private void OnHostShutdown(Entity<GuardianHostComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.HostedGuardian is not { } guardian)
@@ -151,30 +134,46 @@ public sealed partial class GuardianSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnGuardianAttackAttempt(Entity<GuardianComponent> ent, ref AttackAttemptEvent args)
     {
         if (args.Cancelled || args.Target != ent.Comp.Host || ent.Comp.Host == null) // Trauma - add null host check
             return;
 
-        _popup.PopupPredictedCursor(Loc.GetString("guardian-attack-host"), ent.Owner, PopupType.LargeCaution);
+        if (_timing.CurTime >= ent.Comp.LastAttackPopupTime + ent.Comp.AttackPopupDelay)
+        {
+            _popup.PopupCursor(Loc.GetString("guardian-attack-host"), ent.Owner, PopupType.LargeCaution);
+        }
+        ent.Comp.LastAttackPopupTime = _timing.CurTime;
+
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnPilotAttackAttempt(Entity<GuardianHostComponent> ent,
         ref MechPilotRelayedEvent<GettingAttackedAttemptEvent> args)
     {
-        if (args.Args.Cancelled)
+        if (args.Args.Cancelled || args.Args.Attacker != ent.Comp.HostedGuardian)
             return;
 
-        _popup.PopupPredictedCursor(Loc.GetString("guardian-attack-host"),
-            args.Args.Attacker,
-            PopupType.LargeCaution);
+        if (_guardianQuery.TryComp(args.Args.Attacker, out var guardian))
+        {
+            if (_timing.CurTime >= guardian.LastAttackPopupTime + guardian.AttackPopupDelay)
+            {
+                _popup.PopupCursor(Loc.GetString("guardian-attack-host"),
+                    args.Args.Attacker,
+                    PopupType.LargeCaution);
+            }
+            guardian.LastAttackPopupTime = _timing.CurTime;
+        }
+
         args.Args.Cancelled = true;
     }
 
+    //[SubscribeLocalEvent] // Trauma - lol
     public void ToggleGuardian(Entity<GuardianHostComponent> ent) // Trauma - made public
     {
-        if (!TryComp<GuardianComponent>(ent.Comp.HostedGuardian, out var guardianComponent))
+        if (!_guardianQuery.TryComp(ent.Comp.HostedGuardian, out var guardianComponent))
             return;
 
         if (guardianComponent.GuardianLoose)
@@ -186,6 +185,7 @@ public sealed partial class GuardianSystem : EntitySystem
     /// <summary>
     /// Adds the guardian host component to the user and spawns the guardian inside said component.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnCreatorUse(Entity<GuardianCreatorComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
@@ -195,6 +195,7 @@ public sealed partial class GuardianSystem : EntitySystem
         UseCreator(args.User, args.User, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnCreatorInteract(Entity<GuardianCreatorComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || args.Target == null || !args.CanReach)
@@ -208,7 +209,7 @@ public sealed partial class GuardianSystem : EntitySystem
     {
         if (ent.Comp.Used)
         {
-            _popup.PopupPredicted(Loc.GetString(ent.Comp.EmptyPopup), user, user);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.EmptyPopup), user, user);
 
             return;
         }
@@ -218,14 +219,14 @@ public sealed partial class GuardianSystem : EntitySystem
         {
             var msg = Loc.GetString("guardian-activator-invalid-target",
                 ("entity", Identity.Entity(target, EntityManager, user)));
-            _popup.PopupPredicted(msg, user, user);
+            _popup.PopupEntity(msg, user, user);
             return;
         }
 
         // If user is already a host don't duplicate.
-        if (HasComp<GuardianHostComponent>(target))
+        if (_guardianHostQuery.HasComp(target))
         {
-            _popup.PopupPredicted(Loc.GetString("guardian-already-present-invalid-creation"), user, user);
+            _popup.PopupEntity(Loc.GetString("guardian-already-present-invalid-creation"), user, user);
             return;
         }
 
@@ -243,12 +244,13 @@ public sealed partial class GuardianSystem : EntitySystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<GuardianCreatorComponent> ent, ref GuardianCreatorDoAfterEvent args)
     {
         if (args.Handled || args.Args.Target == null || args.Cancelled || ent.Comp.Deleted || ent.Comp.Used)
             return;
 
-        if (!_hands.IsHolding(args.Args.User, ent.Owner) || HasComp<GuardianHostComponent>(args.Args.Target))
+        if (!_hands.IsHolding(args.Args.User, ent.Owner) || _guardianHostQuery.HasComp(args.Args.Target))
             return;
 
         var hostXform = Transform(args.Args.Target.Value);
@@ -264,14 +266,14 @@ public sealed partial class GuardianSystem : EntitySystem
         _faction.IgnoreEntity(guardian, args.Args.Target.Value);
         // </Trauma>
 
-        if (TryComp<GuardianComponent>(guardian, out var guardianComp))
+        if (_guardianQuery.TryComp(guardian, out GuardianComponent? guardianComp))
         {
             guardianComp.Host = args.Args.Target.Value;
-            Dirty(guardian, guardianComp); // Trauma - networking for babbies
+            Dirty(guardian, guardianComp);
             _audio.PlayPredicted(ent.Comp.UsedSound,
                 ent.Owner,
                 args.Args.Target);
-            _popup.PopupClient(Loc.GetString(ent.Comp.GuardianHauntedPopup),
+            _popup.PopupEntity(Loc.GetString(ent.Comp.GuardianHauntedPopup),
                 args.Args.Target.Value,
                 args.Args.Target.Value);
             // Exhaust the activator
@@ -290,15 +292,16 @@ public sealed partial class GuardianSystem : EntitySystem
     /// <summary>
     /// Triggers when the host receives damage which puts the host in either critical or killed state.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnHostStateChange(Entity<GuardianHostComponent> ent, ref MobStateChangedEvent args)
     {
         if (ent.Comp.HostedGuardian == null ||
-            !TryComp<GuardianComponent>(ent.Comp.HostedGuardian, out var guardianComp))
+            !_guardianQuery.TryComp(ent.Comp.HostedGuardian, out GuardianComponent? guardianComp))
             return;
 
         if (args.NewMobState == MobState.Critical)
         {
-            _popup.PopupClient(Loc.GetString(ent.Comp.GuardianHostCritWarn),
+            _popup.PopupEntity(Loc.GetString(ent.Comp.GuardianHostCritWarn),
                 ent.Comp.HostedGuardian.Value,
                 ent.Comp.HostedGuardian.Value);
             _audio.PlayPredicted(guardianComp.CriticalSound, ent.Comp.HostedGuardian.Value, args.Target);
@@ -313,6 +316,7 @@ public sealed partial class GuardianSystem : EntitySystem
     /// <summary>
     /// Handles guardian receiving damage and splitting it with the host according to his defense percent.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnGuardianDamaged(Entity<GuardianComponent> ent, ref DamageDealtEvent args)
     {
         if (_timing.ApplyingState)
@@ -327,12 +331,13 @@ public sealed partial class GuardianSystem : EntitySystem
             origin: args.Origin,
             ignoreResistances: true,
             interruptsDoAfters: false);
-        _popup.PopupClient(Loc.GetString(ent.Comp.GuardianDamagePopup), ent.Comp.Host.Value, ent.Comp.Host.Value);
+        _popup.PopupEntity(Loc.GetString(ent.Comp.GuardianDamagePopup), ent.Comp.Host.Value, ent.Comp.Host.Value);
     }
 
     /// <summary>
     /// Triggers while trying to examine an activator to see if it's used.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnCreatorExamine(Entity<GuardianCreatorComponent> ent, ref ExaminedEvent args)
     {
         if (!ent.Comp.Used)
@@ -344,9 +349,10 @@ public sealed partial class GuardianSystem : EntitySystem
     /// <summary>
     /// Called every time the host moves, to make sure the host and the guardian are not too far away from each other.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnHostMove(Entity<GuardianHostComponent> ent, ref MoveEvent args)
     {
-        if (!TryComp<GuardianComponent>(ent.Comp.HostedGuardian, out var guardianComponent) ||
+        if (!_guardianQuery.TryComp(ent.Comp.HostedGuardian, out GuardianComponent? guardianComponent) ||
             !guardianComponent.GuardianLoose)
         {
             return;
@@ -358,6 +364,7 @@ public sealed partial class GuardianSystem : EntitySystem
     /// <summary>
     /// Called every time the guardian moves: makes sure it's not out of it's allowed distance.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnGuardianMove(Entity<GuardianComponent> ent, ref MoveEvent args)
     {
         if (!ent.Comp.GuardianLoose)
@@ -412,6 +419,7 @@ public sealed partial class GuardianSystem : EntitySystem
 
     private void ReleaseGuardian(Entity<GuardianHostComponent> host, Entity<GuardianComponent> guardian)
     {
+        _audio.PlayPredicted(host.Comp.ReleaseSound, guardian, host);
         if (guardian.Comp.GuardianLoose)
         {
             DebugTools.Assert(!host.Comp.GuardianContainer.Contains(guardian));
@@ -442,7 +450,7 @@ public sealed partial class GuardianSystem : EntitySystem
         }
 
         _container.Insert(guardian.Owner, host.Comp.GuardianContainer);
-        _popup.PopupPredicted(Loc.GetString(host.Comp.GuardianHostRecall), host.Owner, host.Owner);
+        _popup.PopupEntity(Loc.GetString(host.Comp.GuardianHostRecall), host.Owner, host.Owner);
         guardian.Comp.GuardianLoose = false;
 
         Dirty(host);

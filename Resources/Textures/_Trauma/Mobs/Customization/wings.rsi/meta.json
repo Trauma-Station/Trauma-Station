@@ -1,0 +1,347 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from paradise station at https://github.com/ParadiseSS13/Paradise/blob/f536b461401b362fc2c007ed08b081b8f7325ac2/icons/mob/sprite_accessories/moth/moth_wings.dmi; modified by Aviu00 (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "atlas",
+      "directions": 4
+    },
+    {
+      "name": "atlas_behind",
+      "directions": 4
+    },
+    {
+      "name": "bluespace_1",
+      "directions": 4
+    },
+    {
+      "name": "bluespace_2",
+      "directions": 4
+    },
+    {
+      "name": "bluespace_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "bluespace_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "brown_1",
+      "directions": 4
+    },
+    {
+      "name": "brown_2",
+      "directions": 4
+    },
+    {
+      "name": "brown_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "brown_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "burnt_off",
+      "directions": 4
+    },
+    {
+      "name": "burnt_off_behind",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_1",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_2",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "feathery",
+      "directions": 4
+    },
+    {
+      "name": "feathery_behind",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_1",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_2",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_3",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_3_behind",
+      "directions": 4
+    },
+    {
+      "name": "gothic",
+      "directions": 4
+    },
+    {
+      "name": "gothic_behind",
+      "directions": 4
+    },
+    {
+      "name": "jungle_1",
+      "directions": 4
+    },
+    {
+      "name": "jungle_2",
+      "directions": 4
+    },
+    {
+      "name": "jungle_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "jungle_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "lightbearer_1",
+      "directions": 4
+    },
+    {
+      "name": "lightbearer_2",
+      "directions": 4
+    },
+    {
+      "name": "lightbearer_3",
+      "directions": 4
+    },
+    {
+      "name": "lightbearer_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "lightbearer_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "lightbearer_3_behind",
+      "directions": 4
+    },
+    {
+      "name": "lovers_1",
+      "directions": 4
+    },
+    {
+      "name": "lovers_2",
+      "directions": 4
+    },
+    {
+      "name": "lovers_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "lovers_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "monarch",
+      "directions": 4
+    },
+    {
+      "name": "monarch_behind",
+      "directions": 4
+    },
+    {
+      "name": "moonfly_1",
+      "directions": 4
+    },
+    {
+      "name": "moonfly_2",
+      "directions": 4
+    },
+    {
+      "name": "moonfly_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "moonfly_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "mothra_1",
+      "directions": 4
+    },
+    {
+      "name": "mothra_2",
+      "directions": 4
+    },
+    {
+      "name": "mothra_3",
+      "directions": 4
+    },
+    {
+      "name": "mothra_4",
+      "directions": 4
+    },
+    {
+      "name": "mothra_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "mothra_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "mothra_3_behind",
+      "directions": 4
+    },
+    {
+      "name": "mothra_4_behind",
+      "directions": 4
+    },
+    {
+      "name": "oakworm",
+      "directions": 4
+    },
+    {
+      "name": "oakworm_behind",
+      "directions": 4
+    },
+    {
+      "name": "plain",
+      "directions": 4
+    },
+    {
+      "name": "plain_behind",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_1",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_2",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "poison",
+      "directions": 4
+    },
+    {
+      "name": "poison_behind",
+      "directions": 4
+    },
+    {
+      "name": "ragged",
+      "directions": 4
+    },
+    {
+      "name": "ragged_behind",
+      "directions": 4
+    },
+    {
+      "name": "rosy_1",
+      "directions": 4
+    },
+    {
+      "name": "rosy_2",
+      "directions": 4
+    },
+    {
+      "name": "rosy_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "rosy_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "royal_1",
+      "directions": 4
+    },
+    {
+      "name": "royal_2",
+      "directions": 4
+    },
+    {
+      "name": "royal_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "royal_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "snow_1",
+      "directions": 4
+    },
+    {
+      "name": "snow_2",
+      "directions": 4
+    },
+    {
+      "name": "snow_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "snow_2_behind",
+      "directions": 4
+    },
+    {
+      "name": "whitefly",
+      "directions": 4
+    },
+    {
+      "name": "whitefly_behind",
+      "directions": 4
+    },
+    {
+      "name": "witchwing_1",
+      "directions": 4
+    },
+    {
+      "name": "witchwing_2",
+      "directions": 4
+    },
+    {
+      "name": "witchwing_1_behind",
+      "directions": 4
+    },
+    {
+      "name": "witchwing_2_behind",
+      "directions": 4
+    }
+  ]
+}

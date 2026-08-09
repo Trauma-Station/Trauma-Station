@@ -113,13 +113,9 @@
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
   - type: VendingMachine
     pack: CigaretteMachineInventoryDeluxe
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
-    denyState: deny-unshaded
+  - type: VendingMachineDispenseOnHit
+    chance: 0.25
+    threshold: 2
   - type: DatasetVocalizer
     dataset: CigaretteMachineAdsDLC
 
@@ -168,4 +164,4 @@
     solution:
       reagents:
       - ReagentId: Whiskey # lmao
-        Quantity: 500
+        Quantity: 480

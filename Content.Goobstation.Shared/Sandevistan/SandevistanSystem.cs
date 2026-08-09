@@ -194,7 +194,7 @@ public sealed partial class SandevistanSystem : EntitySystem
             RaiseLocalEvent(ent, ref ev);
         }
 
-        _speed.RefreshMovementSpeedModifiers(ent);
+        _speed.RefreshMovementSpeedModifiers(ent.Owner);
 
         EnsureComp<DogVisionComponent>(ent);
 
@@ -321,7 +321,7 @@ public sealed partial class SandevistanSystem : EntitySystem
                     continue;
 
                 var despawn = EnsureComp<TimedDespawnComponent>(afterimageUid);
-                despawn.Lifetime = 3f;
+                despawn.Lifetime = 0.5f;
             }
         });
     }
@@ -518,7 +518,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         // Mobs
         if (ent.Comp.IsMob)
         {
-            _speed.RefreshMovementSpeedModifiers(ent);
+            _speed.RefreshMovementSpeedModifiers(ent.Owner);
             if (HasComp<DogVisionComponent>(ent))
                 RemCompDeferred<DogVisionComponent>(ent);
         }

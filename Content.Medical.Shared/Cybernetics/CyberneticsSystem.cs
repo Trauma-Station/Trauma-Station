@@ -18,16 +18,7 @@ public sealed partial class CyberneticsSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CyberneticsComponent, EmpPulseEvent>(OnEmpPulse);
-        SubscribeLocalEvent<CyberneticsComponent, EmpDisabledRemovedEvent>(OnEmpDisabledRemoved);
-        SubscribeLocalEvent<CyberneticsComponent, OrganEnableAttemptEvent>(OnEnableAttempt);
-        SubscribeLocalEvent<CyberneticsComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEmpPulse(Entity<CyberneticsComponent> ent, ref EmpPulseEvent ev)
     {
         if (ent.Comp.Disabled || !SharedRandomExtensions.PredictedProb(_timing, ent.Comp.DisableChance, GetNetEntity(ent)))
@@ -46,6 +37,7 @@ public sealed partial class CyberneticsSystem : EntitySystem
         _damageable.ChangeDamage(target, ent.Comp.EmpDamage, increaseOnly: true);
     }
 
+    [SubscribeLocalEvent]
     private void OnEmpDisabledRemoved(Entity<CyberneticsComponent> ent, ref EmpDisabledRemovedEvent ev)
     {
         if (!ent.Comp.Disabled)
@@ -54,15 +46,17 @@ public sealed partial class CyberneticsSystem : EntitySystem
         ent.Comp.Disabled = false;
         Dirty(ent);
 
-        _body.EnableOrgan(ent.Owner);
+        _body.EnableOrgan(ent.Owner, logMissing: false);
     }
 
+    [SubscribeLocalEvent]
     private void OnEnableAttempt(Entity<CyberneticsComponent> ent, ref OrganEnableAttemptEvent args)
     {
         // prevent enabling the organ while emped
         args.Cancelled |= ent.Comp.Disabled;
     }
 
+    [SubscribeLocalEvent]
     private void OnModifyDoAfter(Entity<CyberneticsComponent> ent, ref BodyRelayedEvent<ModifyDoAfterDelayEvent> args)
     {
         if (ent.Comp.Disabled)

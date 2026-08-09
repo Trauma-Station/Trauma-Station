@@ -301,7 +301,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             GetSeverityForServerBan(banInfo, CCVars.ServerBanDefaultSeverity),
             banInfo.BanningAdmin,
             null,
-            roles: roleBans), expires);
+            roles: roleBans).WithWebhookReason(banInfo.WebhookReason), expires); // Trauma - set WebhookReason
     }
 
     private async Task<TimeSpan> GetPlayTime(CreateBanInfo banInfo)

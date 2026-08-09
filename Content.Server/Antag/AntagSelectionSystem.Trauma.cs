@@ -2,6 +2,7 @@
 
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
@@ -18,6 +19,7 @@ namespace Content.Server.Antag;
 public sealed partial class AntagSelectionSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public void UnequipOldGear(EntityUid player)
     {

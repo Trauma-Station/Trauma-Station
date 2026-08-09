@@ -24,3 +24,6 @@ uplink-holo-carp-dehydrated-desc = Looks like a plush toy carp, but just add wat
 uplink-reinforcement-radio-ancestor-name-trauma = Genetic Ancestor Teleporter
 
 uplink-syndicate-pai-name-trauma = Syndicate Personal AI Device
+
+uplink-necronomicon-name = Necronomicon
+uplink-necronomicon-desc = An unholy book capable of summoning a demonic familiar.

@@ -6,13 +6,11 @@ using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.PhaseShift;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class PhaseShiftedComponent : Component
 {
-    [DataField]
-    public ProtoId<StatusEffectPrototype> StatusEffectId = "PhaseShifted";
-
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float MovementSpeedBuff = 1.5f;
 
     [DataField]

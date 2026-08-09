@@ -117,12 +117,12 @@ public abstract partial class SharedFultonSystem : EntitySystem
             {
                 component.Beacon = args.Target.Value;
                 Audio.PlayPredicted(beacon.LinkSound, uid, args.User);
-                _popup.PopupClient(Loc.GetString("fulton-linked"), uid, args.User);
+                _popup.PopupEntity(Loc.GetString("fulton-linked"), uid, args.User);
             }
             else
             {
                 component.Beacon = EntityUid.Invalid;
-                _popup.PopupClient(Loc.GetString("fulton-folded"), uid, args.User);
+                _popup.PopupEntity(Loc.GetString("fulton-folded"), uid, args.User);
             }
 
             return;
@@ -130,19 +130,19 @@ public abstract partial class SharedFultonSystem : EntitySystem
 
         if (Deleted(component.Beacon))
         {
-            _popup.PopupClient(Loc.GetString("fulton-not-found"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("fulton-not-found"), uid, args.User);
             return;
         }
 
         if (!CanApplyFulton(args.Target.Value, component))
         {
-            _popup.PopupClient(Loc.GetString("fulton-invalid"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("fulton-invalid"), uid, uid);
             return;
         }
 
         if (HasComp<FultonedComponent>(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("fulton-fultoned"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("fulton-fultoned"), uid, uid);
             return;
         }
 

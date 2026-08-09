@@ -10,6 +10,7 @@
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
+      weight: 1
     enum.HumanoidVisualLayers.FacialHair:
       limit: 1
       required: false
@@ -74,10 +75,10 @@
       FootLeft: OrganSlimePersonFootLeft
       FootRight: OrganSlimePersonFootRight
       # <Trauma>
-      Eyes: OrganSlimePersonEyes
       Tongue: OrganSlimePersonTongue
       # </Trauma>
       Brain: OrganSlimePersonCore
+      Eyes: OrganSlimePersonEyes
       Lungs: OrganSlimePersonLungs
   - type: HumanoidProfile
     species: SlimePerson
@@ -224,8 +225,7 @@
   abstract: true
   components:
   # <Trauma>
-  - type: Woundable
-    boneEntity: null
+  - type: Boneless
   # </Trauma>
   - type: Sprite
     sprite: Mobs/Species/Slime/parts.rsi
@@ -317,6 +317,19 @@
     maxReagents: 6
     metabolizerTypes: [ Slime ]
     stages: [ Digestion, Bloodstream, Metabolites ]
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganSlimePersonInternal ] # Trauma - removed OrganSlimePersonExternal: dont want Woundable
+  id: OrganSlimePersonEyes
+  components:
+  # <Trauma>
+  - type: VisualOrganMarkings
+    markingData:
+      group: Slime
+  # <Trauma>
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
 
 - type: entity
   parent: [ OrganBaseLungs, OrganSlimePersonInternal, OrganSlimePersonMetabolizer ]
