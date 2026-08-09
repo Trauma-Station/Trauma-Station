@@ -242,7 +242,7 @@ public sealed class StationJobsTest : GameTest
             {
                 configuration.SetCVar(CCVars.GameMinimumJobFallback, MinimumJobFallback.SameDepartment);
                 var sameDepartmentAssignments = stationJobs.AssignJobs(sameDepartmentProfiles, [station]);
-                Assert.That(sameDepartmentAssignments[sameDepartmentDummy.UserId].Item1, Is.EqualTo((ProtoId<JobPrototype>?) "TCaptain"));
+                Assert.That(sameDepartmentAssignments[sameDepartmentDummy.UserId].Item1, Is.EqualTo((ProtoId<JobPrototype>?) "TChaplain")); // Trauma - dummy player is opted into chaplain not captain
 
                 configuration.SetCVar(CCVars.GameMinimumJobFallback, MinimumJobFallback.AnyEligiblePlayer);
                 var anyEligibleAssignments = stationJobs.AssignJobs(anyEligibleProfiles, [station]);
