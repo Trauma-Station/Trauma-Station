@@ -72,6 +72,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         args.CancelPopup = "cosmiccult-mindshield-popup";
     }
 
+    [SubscribeLocalEvent]
     private void OnVoting(Entity<CosmicCultComponent> ent, ref CheckVotingEligibilityEvent args)
     {
         if (args.Cancelled)
@@ -79,6 +80,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         args.Cancelled = true; // Cultists are not eligible to vote
     }
 
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<CosmicEntropyMoteComponent> ent, ref UseInHandEvent args)
     {
         args.Handled = true;
@@ -119,11 +121,13 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnCosmicCultExamined(Entity<CosmicCultExamineComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(EntityIsCultist(args.Examiner) ? ent.Comp.CultistText : ent.Comp.OthersText));
     }
 
+    [SubscribeLocalEvent]
     private void OnSubtleMarkExamined(Entity<CosmicSubtleMarkComponent> ent, ref ExaminedEvent args)
     {
         var ev = new SeeIdentityAttemptEvent();
@@ -170,6 +174,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     /// <summary>
     /// Determines if a Cosmic Cultist component should be sent to the client.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnCosmicCultCompGetStateAttempt(EntityUid uid, CosmicCultComponent comp, ref ComponentGetStateAttemptEvent args)
     {
         args.Cancelled = !CanGetState(args.Player);
@@ -179,6 +184,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     /// The criteria that determine whether a Cult Member component should be sent to a client.
     /// </summary>
     /// <param name="player">The Player the component will be sent to.</param>
+    [SubscribeLocalEvent]
     private bool CanGetState(ICommonSession? player)
     {
         //Apparently this can be null in replays so I am just returning true.
@@ -245,6 +251,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
         ent.Comp.LevelUpAwaitingConfirmation = true;
     }
 
+    [SubscribeLocalEvent]
     public virtual void OnLevelUpConfirmed(Entity<CosmicShopComponent> ent, ref LevelUpconfirmedMessage args)
     {
         if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp)
