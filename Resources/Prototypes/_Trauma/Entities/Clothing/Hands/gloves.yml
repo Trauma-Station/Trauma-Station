@@ -72,6 +72,8 @@
       staminaCostMultiplier: 1.2
       knockdownTimeMultiplier: 1.25
       skillMod: 3
+  - type: StealTarget
+    stealGroup: GorillaGloves
 
 - type: entity
   parent: [BaseSyndicateContraband, ClothingHandsGlovesGorilla]

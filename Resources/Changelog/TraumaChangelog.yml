@@ -12942,13 +12942,47 @@ Entries:
   - type: Remove
     message: Removed shield held slowdown.
   - type: Add
-    message: Added shield skill that is used for parries and blocking damage percentage.
+    message: >-
+      Added shield skill that is used for parries and blocking damage
+      percentage.
   - type: Add
     message: Sec vendor has shield and throwing skill chips.
   - type: Tweak
     message: Tweaked roundstart skill point pool and skill costs.
   - type: Fix
-    message: Fixed eshield weird behavor, also it charges slower now but can be melee parried with.
+    message: >-
+      Fixed eshield weird behavor, also it charges slower now but can be melee
+      parried with.
   id: 1413
   time: '2026-08-08T13:06:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3698
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed lord of the night gibbing at 400 damage.
+  id: 1414
+  time: '2026-08-09T12:27:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4007
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Spy bounty refresh time is 12 minutes always.
+  - type: Tweak
+    message: Spy theft doafter time is longer depending on bounty difficulty.
+  - type: Tweak
+    message: Updated spy guidebook.
+  id: 1415
+  time: '2026-08-09T12:30:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4006
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed always rolling some random job you did not opt in to.
+  - type: Tweak
+    message: >-
+      Priority job rolls are now captain and a few engineers, doctors, secoffs
+      and miners. Players who don't have them set to Never will be chosen for
+      those before regular rolling. 
+  id: 1416
+  time: '2026-08-09T16:38:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4009
