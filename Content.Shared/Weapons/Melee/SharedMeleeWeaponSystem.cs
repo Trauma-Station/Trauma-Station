@@ -995,13 +995,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 
         var chance = 1 - disarmerComp.BaseDisarmFailChance;
 
-        // Goob - Shove Rework disarm based on health & stamina
-        chance *= Math.Clamp(
-            _contests.StaminaContest(disarmer, disarmed)
-            * _contests.HealthContest(disarmer, disarmed),
-            0f,
-            1f);
-
         if (inTargetHand != null && TryComp<DisarmMalusComponent>(inTargetHand, out var malus))
             chance *= 1 - malus.Malus; // Goob - Shove Rework edit
 

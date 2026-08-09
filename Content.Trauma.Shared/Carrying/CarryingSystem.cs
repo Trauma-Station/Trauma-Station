@@ -26,7 +26,6 @@ using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Carrying;
 using Content.Trauma.Common.Polymorph;
-using Content.Trauma.Shared.Contests;
 using Robust.Shared.Map.Components;
 
 namespace Content.Trauma.Shared.Carrying;
@@ -44,7 +43,6 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
     [Dependency] private StandingStateSystem _standingState = default!;
     [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private ContestsSystem _contests = default!;
 
     public override void Initialize()
     {
@@ -143,7 +141,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         var carried = virtItem.BlockingEntity;
         args.ItemUid = carried;
 
-        args.ThrowSpeed = 5f * _contests.MassContest(ent, carried);
+        args.ThrowSpeed = 5f;
     }
 
     private void OnParentChanged(Entity<CarryingComponent> ent, ref EntParentChangedMessage args)
@@ -225,14 +223,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
 
     private void StartCarryDoAfter(EntityUid carrier, Entity<CarriableComponent> carried)
     {
-        TimeSpan length = GetPickupDuration(carrier, carried);
-
-        if (length.TotalSeconds >= 9f)
-        {
-            _popup.PopupEntity(Loc.GetString("carry-too-heavy"), carried, carrier, PopupType.SmallCaution);
-            return;
-        }
-
+        var length = TimeSpan.FromSeconds(3);
         if (!HasComp<KnockedDownComponent>(carried))
             length *= 2f;
 
@@ -289,9 +280,6 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         if (HasComp<BeingCarriedComponent>(carrier) || HasComp<ItemComponent>(carrier))
             return false;
 
-        if (GetPickupDuration(carrier, toCarry).TotalSeconds > 9f)
-            return false;
-
         Carry(carrier, toCarry);
         return true;
     }
@@ -316,15 +304,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
 
     private void ApplyCarrySlowdown(EntityUid carrier, EntityUid carried)
     {
-        var massRatio = _contests.MassContest(carrier, carried);
-
-        if (massRatio == 0)
-            massRatio = 1;
-
-        var massRatioSq = Math.Pow(massRatio, 2);
-        var modifier = (1 - (0.15 / massRatioSq));
-        modifier = Math.Max(0.1, modifier);
-        _slowdown.SetModifier(carrier, (float) modifier);
+        _slowdown.SetModifier(carrier, 0.85f);
     }
 
     public bool CanCarry(EntityUid carrier, Entity<CarriableComponent> carried)
@@ -343,16 +323,6 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
             !HasComp<BeingCarriedComponent>(carried) &&
             // finally check that there are enough free hands
             _hands.CountFreeHands(carrier) >= carried.Comp.FreeHandsRequired;
-    }
-
-    private TimeSpan GetPickupDuration(EntityUid carrier, EntityUid carried)
-    {
-        var length = TimeSpan.FromSeconds(3);
-
-        var mod = _contests.MassContest(carried, carrier);
-        length *= mod;
-
-        return length;
     }
 
     private void OnDelete(Entity<BeingCarriedComponent> ent, ref EntityTerminatingEvent args)
