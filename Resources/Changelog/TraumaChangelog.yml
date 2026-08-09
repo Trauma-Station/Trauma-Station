@@ -12963,3 +12963,14 @@ Entries:
   id: 1414
   time: '2026-08-09T12:27:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4007
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Spy bounty refresh time is 12 minutes always.
+  - type: Tweak
+    message: Spy theft doafter time is longer depending on bounty difficulty.
+  - type: Tweak
+    message: Updated spy guidebook.
+  id: 1415
+  time: '2026-08-09T12:30:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4006
