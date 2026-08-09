@@ -39,7 +39,7 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
                 continue;
 
             if (_sprite.TryGetLayer((ent, sprite), key, out var layer, true))
-                vis.Layers.Add(layer.Value);
+                vis.Layers.Add(layer);
         }
     }
 
@@ -61,11 +61,16 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
+        RemComp<JigglePhysicsVisualsComponent>(ent);
+
+        if (!_spriteQuery.TryComp(ent, out var sprite))
+            return;
+
+        var spriteEnt = new Entity<SpriteComponent>(ent, sprite);
         foreach (var key in ent.Comp.Layers)
         {
-            _displacement.EnsureDisplacementIsNotOnSprite(ent.Owner, key);
+            _displacement.EnsureDisplacementIsNotOnSprite(spriteEnt, key);
         }
-        RemComp<JigglePhysicsVisualsComponent>(ent);
     }
 
     public override void FrameUpdate(float dt)
