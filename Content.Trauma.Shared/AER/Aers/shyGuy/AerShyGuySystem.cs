@@ -5,7 +5,6 @@ using Content.Shared.Popups;
 using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Shared.AER;
 using Robust.Shared.Timing;
-using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Interaction;
@@ -14,6 +13,7 @@ using System.Linq;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Trauma.Shared.Viewcone.Components;
 using Content.Trauma.Shared.Viewcone;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Trauma.Server.AER;
 
