@@ -128,9 +128,10 @@ public sealed partial class StationJobsSystem
 
             foreach (var (job, minimum) in requiredJobs)
             {
+                var jobs = stationJobs[station]; // Trauma
                 for (var assignedToJob = 0; assignedToJob < minimum && profiles.Count > 0; assignedToJob++) // Trauma - remove null handling on minimum
                 {
-                    if (stationJobs[station][job] is <= 0)
+                    if (jobs.GetValueOrDefault(job) is <= 0) // Trauma - use jobs from above and GetValueOrDefault instead of throwing
                         break;
 
                     if (!TryPickCandidate(job, jobCandidates, out var player) &&
