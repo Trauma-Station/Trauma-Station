@@ -747,10 +747,10 @@
   productPrototypes:
     - FoodApple
   mutationPrototypes:
-  # <Trauma> - Ranching crop mutations
+    # <Trauma> - Ranching crop mutations
     - deliciousApple
     - MethApple
-  # </Trauma>
+    # </Trauma>
     - goldenApple
   harvestRepeat: Repeat
   lifespan: 55
@@ -815,8 +815,10 @@
   packetPrototype: CornSeeds
   productPrototypes:
     - FoodCorn
+  # <Trauma> - Ranching crop mutations
   mutationPrototypes:
-    - ClearCorn # Trauma - Ranching crop mutation
+    - ClearCorn
+  # </Trauma>
   lifespan: 25
   maturation: 8
   production: 6
