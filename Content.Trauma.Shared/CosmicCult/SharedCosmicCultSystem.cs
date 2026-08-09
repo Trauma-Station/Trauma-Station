@@ -184,7 +184,6 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     /// The criteria that determine whether a Cult Member component should be sent to a client.
     /// </summary>
     /// <param name="player">The Player the component will be sent to.</param>
-    [SubscribeLocalEvent]
     private bool CanGetState(ICommonSession? player)
     {
         //Apparently this can be null in replays so I am just returning true.
