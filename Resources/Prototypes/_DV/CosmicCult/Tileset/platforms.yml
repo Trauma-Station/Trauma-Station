@@ -1,95 +1,41 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
-  id: CosmicPlatformBase
-  parent: CMPlatformBase
-  description: A raised surface. This one looks even more wrong than others.
+  parent: [ CMPlatform, BaseCosmicCultStructure ]
+  id: CosmicPlatform
   components:
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/platforms.rsi
-    drawdepth: HighFloorObjects
-  - type: CosmicCorruptible
-    convertTo: null # prevent repeated corrupting
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
-
-- type: entity
-  parent: CosmicPlatformBase
-  id: CosmicPlatform
-  components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
-  - type: Sprite
     state: platform
-  - type: Climbable
 
 - type: entity
-  parent: CosmicPlatformBase
+  parent: [ CMPlatformCorner, BaseCosmicCultStructure ]
   id: CosmicPlatformCorner
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
-      fix2:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "0.36,-0.36,0.49,0.49"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
     state: platform_corner
-  - type: Climbable
 
 - type: entity
-  parent: CosmicPlatformBase
+  parent: [ RMCPlatformCornerSmall, BaseCosmicCultStructure ]
   id: CosmicPlatformCornerSmall
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,0.36,-0.36,0.49"
-        density: 1500
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
   - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
     state: platform_deco
-  - type: Climbable
 
 - type: entity
-  parent: CosmicPlatform
+  parent: [ RMCPlatformStairRight, BaseCosmicCultStructure ]
   id: CosmicPlatformStairRight
   components:
   - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
     state: platform_stair
 
 - type: entity
-  parent: CosmicPlatform
+  parent: [ RMCPlatformStairLeft, BaseCosmicCultStructure ]
   id: CosmicPlatformStairLeft
   components:
   - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
     state: platform_stair_alt
