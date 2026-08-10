@@ -11,22 +11,19 @@ public abstract partial class SharedMonumentSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<MonumentSpawnMarkComponent, ExaminedEvent>(OnMonumentMarkExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMonumentMarkExamined(Entity<MonumentSpawnMarkComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString("cosmiccult-monument-approval-count", ("count", ent.Comp.ApprovingCultists.Count)));
-        if (ent.Comp.ApprovingCultists.Contains(args.Examiner)) args.PushMarkup(Loc.GetString("cosmiccult-monument-approval-examine-present"));
+        if (ent.Comp.ApprovingCultists.Contains(args.Examiner))
+            args.PushMarkup(Loc.GetString("cosmiccult-monument-approval-examine-present"));
         args.PushMarkup(Loc.GetString("cosmiccult-monument-approval-needed", ("count", ent.Comp.ApprovalsRequired - ent.Comp.ApprovingCultists.Count)));
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
         var query = EntityQueryEnumerator<MonumentTransformingComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {

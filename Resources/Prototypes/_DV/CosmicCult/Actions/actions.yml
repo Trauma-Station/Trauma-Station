@@ -20,7 +20,7 @@
     layers:
     - state: shop
   - type: InstantAction
-    event: !type:EventCosmicShop
+    event: !type:CosmicShopEvent
   - type: UserInterface
     interfaces:
       enum.CosmicShopKey.Key:
@@ -37,7 +37,7 @@
     layers:
     - state: siphon
   - type: Action
-    useDelay: 30
+    useDelay: 2 #30
   - type: TargetAction
   - type: EntityTargetAction
     whitelist:
@@ -46,7 +46,7 @@
     blacklist:
       components:
       - CosmicCult
-    event: !type:EventCosmicSiphon
+    event: !type:CosmicSiphonEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -68,7 +68,7 @@
     blacklist:
       components:
       - CosmicCult
-    event: !type:EventCosmicBlank
+    event: !type:CosmicBlankEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -82,7 +82,7 @@
     layers:
     - state: monument
   - type: InstantAction
-    event: !type:EventCosmicPlaceMonument
+    event: !type:CosmicPlaceMonumentEvent
   - type: MonumentPlacementAction
 
 - type: entity
@@ -98,7 +98,7 @@
     layers:
     - state: return
   - type: InstantAction
-    event: !type:EventCosmicReturn
+    event: !type:CosmicReturnEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -117,7 +117,7 @@
     whitelist:
       components:
       - HumanoidProfile
-    event: !type:EventCosmicLapse
+    event: !type:CosmicLapseEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -132,7 +132,7 @@
     layers:
     - state: glare
   - type: InstantAction
-    event: !type:EventCosmicGlare
+    event: !type:CosmicGlareEvent
   - type: Tag
     tags:
     - FlashIgnoreResistances
@@ -154,7 +154,7 @@
       components:
         - Door
         - Lock
-    event: !type:EventCosmicIngress
+    event: !type:CosmicIngressEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -169,7 +169,7 @@
     layers:
     - state: entropic
   - type: InstantAction
-    event: !type:EventCosmicImposition
+    event: !type:CosmicImpositionEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -186,7 +186,7 @@
     checkCanAccess: false
     range: 0
   - type: WorldTargetAction
-    event: !type:EventCosmicNova
+    event: !type:CosmicNovaEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -205,7 +205,7 @@
       components:
       - BorgChassis
       - SiliconLawUpdater
-    event: !type:EventCosmicFragmentation
+    event: !type:CosmicFragmentationEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -229,7 +229,7 @@
       components:
       - CosmicCult
       - BibleUser
-    event: !type:EventCosmicConversion
+    event: !type:CosmicConversionEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -248,7 +248,7 @@
     whitelist:
       components:
       - Damageable
-    event: !type:EventCosmicDamageTransfer
+    event: !type:CosmicDamageTransferEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -263,7 +263,7 @@
     layers:
     - state: transmute
   - type: InstantAction
-    event: !type:EventCosmicTransmutation
+    event: !type:CosmicTransmutationEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -278,7 +278,7 @@
     layers:
     - state: stride
   - type: InstantAction
-    event: !type:EventCosmicStride
+    event: !type:CosmicStrideEvent
 
 ## COLOSSUS ACTIONS
 
@@ -297,7 +297,7 @@
   - type: TargetAction
     range: 7
   - type: WorldTargetAction
-    event: !type:EventCosmicColossusSunder
+    event: !type:CosmicColossusSunderEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -316,7 +316,7 @@
     whitelist:
       components:
         - Door
-    event: !type:EventCosmicColossusIngress
+    event: !type:CosmicColossusIngressEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -335,7 +335,7 @@
     confirmDelay: 0.1
     primeTime: 5
   - type: InstantAction
-    event: !type:EventCosmicColossusHibernate
+    event: !type:CosmicColossusHibernateEvent
 
 - type: entity
   parent: BaseCosmicAction
@@ -349,4 +349,4 @@
     layers:
     - state: nova
   - type: InstantAction
-    event: !type:EventCosmicColossusEffigy
+    event: !type:CosmicColossusEffigyEvent
