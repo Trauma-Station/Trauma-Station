@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Radio;
+using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Whitelist;
 

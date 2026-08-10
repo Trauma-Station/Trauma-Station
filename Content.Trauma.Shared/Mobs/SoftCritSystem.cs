@@ -6,6 +6,7 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Stunnable;
@@ -17,9 +18,9 @@ using Robust.Shared.Configuration;
 namespace Content.Trauma.Shared.Mobs;
 
 /// <summary>
-/// Handles shared interactions with softcrit mobs.
+/// Handles interactions with softcrit mobs.
 /// </summary>
-public abstract partial class SharedSoftCritSystem : EntitySystem
+public sealed partial class SoftCritSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
@@ -40,7 +41,6 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SoftCritMobComponent, EmoteActionEvent>(OnEmoteAction, before: new[] { typeof(VocalSystem) });
         SubscribeLocalEvent<SoftCritMobComponent, ComponentStartup>(RefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, ComponentShutdown>(RefreshSpeed);
 
@@ -48,6 +48,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         Subs.CVar(_cfg, TraumaCVars.SoftCritInhaleModifier, x => InhaleVolumeModifier = x, true);
     }
 
+    [SubscribeLocalEvent(before: [typeof(VocalSystem)])]
     private void OnEmoteAction(Entity<SoftCritMobComponent> ent, ref EmoteActionEvent args)
     {
         args.Handled = true; // shush
@@ -100,5 +101,11 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
     {
         // can't unbuckle yourself if you are in softcrit
         args.Cancelled |= args.Buckle.Owner == args.User;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRadioSendAttempt(Entity<SoftCritMobComponent> ent, ref RadioSendAttemptEvent args)
+    {
+        args.Cancelled = true; // no yapping on radio chuddy
     }
 }

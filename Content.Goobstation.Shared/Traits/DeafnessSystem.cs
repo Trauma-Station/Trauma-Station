@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Traits;
-using Content.Server.Radio;
+using Content.Shared.Radio;
 using Content.Trauma.Common.Chat;
 
-namespace Content.Goobstation.Server.Deafness;
+namespace Content.Goobstation.Shared.Traits;
 
 public sealed partial class DeafnessSystem : EntitySystem
 {

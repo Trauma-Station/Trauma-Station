@@ -1,25 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.DeviceLinking.Systems;
-using Content.Server.Radio;
+using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Power.EntitySystems;
-using Content.Trauma.Shared.Radio;
+using Content.Shared.Radio;
 
-namespace Content.Trauma.Server.Radio;
+namespace Content.Trauma.Shared.Radio;
 
 public sealed partial class SignalRadioReceiverSystem : EntitySystem
 {
-    [Dependency] private DeviceLinkSystem _device = default!;
+    [Dependency] private SharedDeviceLinkSystem _device = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SignalRadioReceiverComponent, RadioReceiveEvent>(OnRadioReceive);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRadioReceive(Entity<SignalRadioReceiverComponent> ent, ref RadioReceiveEvent args)
     {
         if (ent.Owner == args.RadioSource || !_power.IsPowered(ent.Owner))
