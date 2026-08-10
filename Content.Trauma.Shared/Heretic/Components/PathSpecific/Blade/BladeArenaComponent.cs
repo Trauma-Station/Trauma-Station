@@ -11,9 +11,6 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 public sealed partial class BladeArenaComponent : Component
 {
     [DataField]
-    public ProtoId<TagPrototype> WallTag = "Wall";
-
-    [DataField]
     public ProtoId<TagPrototype> WindowTag = "Window";
 
     [DataField]

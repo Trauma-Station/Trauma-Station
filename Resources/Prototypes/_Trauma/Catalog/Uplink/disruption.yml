@@ -86,6 +86,8 @@
       tags:
       - NukeOpsUplink
       - ContravendUplink
+      components:
+      - SpyRule
   - !type:BuyerWhitelistCondition
     blacklist:
       components:

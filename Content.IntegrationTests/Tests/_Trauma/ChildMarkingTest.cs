@@ -1,4 +1,3 @@
-using Content.IntegrationTests.Fixtures;
 using Content.Shared.Humanoid.Markings;
 
 namespace Content.IntegrationTests.Tests._Trauma;

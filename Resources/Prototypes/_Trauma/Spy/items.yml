@@ -1,0 +1,97 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: PenExplodingBox
+  id: PenFlashbangBox
+  name: flashbang pen box
+  description: A small box containing a flashbang pen. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: PenFlashbang
+
+- type: entity
+  parent: Pen
+  id: PenFlashbang
+  suffix: Flashbang
+  components:
+  - type: TimerTrigger
+    delay: 4
+    examinable: false
+  - type: ActivateOnPaperOpened
+  - type: TriggerOnUse
+  - type: TriggerOnSignal
+  - type: DeviceLinkSink # This should be changed into separate behavior where triggering via signal makes beep, while triggering manually is quiet.
+    ports:
+    - Trigger
+  - type: EmitSoundOnUse
+    handle: false # don't want the sound to stop the explosion from triggering
+  - type: AddComponentsOnTrigger # make them embed into the target, but only when activated so that they can't be metagamed
+    components: # copied from PenEmbeddable
+    - type: EmbeddableProjectile
+      offset: 0.3,0.0
+      removalTime: 0.0
+    - type: ThrowingAngle
+      angle: 315
+    - type: LandAtCursor
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Piercing: 3
+  - type: FlashOnTrigger
+    keysIn:
+    - timer
+    range: 7
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      path: "/Audio/Effects/flash_bang.ogg"
+    positional: true
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer
+  - type: SpawnOnTrigger
+    keysIn:
+    - timer
+    proto: GrenadeFlashEffect
+    predicted: true
+  - type: Flashbang
+
+- type: entity
+  parent: [ BaseSyndicateContraband, ClothingHeadHatArmoredBeret, ClothingHeadHatFedoraBrown ]
+  id: SpyFedora
+  name: spy fedora
+  description: Sharp-edged stylish fedora. Can be both worn on your head or be used to slice heads of your opponents.
+  components:
+  - type: TriggerOnThrown
+  - type: TriggerOnMeleeHit
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:SetThrowCooldown
+      cooldown: 1
+  - type: LandAtCursor
+  - type: Boomerang
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 20
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 15
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Small
+    storedRotation: -90
+    sprite: _ShitChap/Objects/Weapons/Nullrod/atheist.rsi
+  - type: Sprite
+    sprite: _ShitChap/Objects/Weapons/Nullrod/atheist.rsi
+    state: icon
+  - type: Clothing
+    sprite: _ShitChap/Objects/Weapons/Nullrod/atheist.rsi
+  - type: Sharp
+  - type: Scalpel
+    speed: 0.5

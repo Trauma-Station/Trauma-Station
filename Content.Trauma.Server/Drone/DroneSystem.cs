@@ -6,7 +6,7 @@ using Content.Server.Tools.Innate;
 using Content.Shared.Drone;
 using Content.Shared.Emoting;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;

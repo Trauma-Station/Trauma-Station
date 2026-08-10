@@ -4,16 +4,18 @@
   parent: BaseItem
   id: RadioHandheld
   components:
+  # <Trauma>
+  - type: ListenBlacklist # annoying as shit
+    blacklist:
+      components:
+      - Vocalizer
+  # </Trauma>
   - type: TelecomExempt
   - type: RadioMicrophone
     broadcastChannel: Handheld
   - type: RadioSpeaker
     channels:
     - Handheld
-  - type: ListenBlacklist # Goobstation - annoying as shit
-    blacklist:
-      components:
-      - Advertise
   - type: Speech
     speechVerb: Robotic
   - type: Sprite

@@ -4,13 +4,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IdentitySystem _identity = default!;
 
     private static readonly TimeSpan SustainedDamageReductionInterval = TimeSpan.FromSeconds(1);
@@ -34,7 +32,7 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Update(frameTime);
 
-        var now = _timing.CurTime;
+        var now = Timing.CurTime;
 
         if (_nextUpdate > now)
             return;

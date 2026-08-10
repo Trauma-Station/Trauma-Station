@@ -52,7 +52,7 @@
         # <Trauma>
         mining: !type:GridSpawnGroup
           paths:
-          - /Maps/Shuttles/mining.yml
+          - /Maps/_Trauma/Shuttles/mining.yml
         # <Trauma>
         trade: !type:GridSpawnGroup
           addComponents:
@@ -143,13 +143,6 @@
   abstract: true
   components:
     - type: StationEmergencyShuttle
-
-- type: entity
-  id: BaseStationAlertLevels
-  abstract: true
-  components:
-    - type: AlertLevel
-      alertLevelPrototype: stationAlerts
 
 - type: entity
   id: BaseStationExpeditions

@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Content.Trauma.Server.Station;
-using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 

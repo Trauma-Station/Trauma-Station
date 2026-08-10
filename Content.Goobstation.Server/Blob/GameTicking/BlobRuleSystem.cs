@@ -4,22 +4,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Goobstation.Common.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.AlertLevel;
 using Content.Server.Antag;
 using Content.Server.Audio;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
-using Content.Server.Objectives;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.AlertLevel;
 using Content.Shared.Audio;
+using Content.Shared.Destructible;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Objectives.Components;
-using Robust.Server.Player;
+using Content.Trauma.Common.GameTicking;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob.GameTicking;
@@ -32,9 +31,12 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private IChatManager _chatMan = default!;
-    [Dependency] private IPlayerManager _player = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private CommonNewAntagOrEvacSystem _antagEvac = default!;
+
+    private static readonly ProtoId<AlertLevelPrototype> StationAlertCritical = "DeltaBlob";
+    private static readonly ProtoId<AlertLevelPrototype> StationAlertDetected = "Red";
 
     protected override void Started(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -95,9 +97,6 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
         return true;
     }
 
-    private const string StationAlertCritical = "delta";
-    private const string StationAlertDetected = "red";
-
     private void CheckChangeStage(
         Entity<StationBlobConfigComponent?> stationUid,
         BlobRuleComponent blobRuleComp,
@@ -146,7 +145,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     // Station is the source here because that's the only UID we have in this method. Гойда.
                     _sound.DispatchStationEventMusic(stationUid, detectedAudio, StationEventMusicType.Blob, detectedAudio.Params);
 
-                _alertLevel.SetLevel(stationUid, StationAlertDetected, true, true, true, true);
+                _alertLevel.SetLevel(stationUid.Owner, StationAlertDetected, force: true);
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
@@ -175,7 +174,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
                 blobRuleComp.BlobCBurnCalled = true;
 
-                _alertLevel.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
+                _alertLevel.SetLevel(stationUid.Owner, StationAlertCritical, true, true, true, true);
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
@@ -207,6 +206,18 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
         var comp = EnsureComp<BlobCarrierComponent>(player);
         comp.HasMind = HasComp<ActorComponent>(player);
         comp.TransformationDelay = 10 * 60; // 10min
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDestruction(Entity<BlobCoreComponent> ent, ref DestructionEventArgs args)
+    {
+        var query = EntityQueryEnumerator<BlobRuleComponent>();
+
+        while (query.MoveNext(out var uid, out _))
+        {
+            _antagEvac.SpawnNewAntagIfBelowPercent(uid, TimeSpan.FromMinutes(5), true);
+            break;
+        }
     }
 
     [SubscribeLocalEvent]

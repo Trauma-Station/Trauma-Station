@@ -21,7 +21,7 @@ public sealed partial class ListEntitySelectorWindow : FancyWindow
     public void PopulateWindow(HashSet<NetEntity> entities, string windowTitle)
     {
         Title = windowTitle;
-        EntityContainer.DisposeAllChildren();
+        EntityContainer.RemoveAllChildren();
 
         foreach (var ent in entities)
         {

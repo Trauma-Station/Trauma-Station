@@ -7,9 +7,10 @@
   - type: Action
     useDelay: 2
     itemIconStyle: BigAction
-    icon:
-      sprite: Interface/Actions/changeling.rsi
-      state: armblade
+  - type: Sprite
+    sprite: Interface/Actions/changeling.rsi
+    layers:
+    - state: armblade
   - type: InstantAction
     event: !type:OnRetractableItemActionEvent
   - type: RetractableItemAction

@@ -1,0 +1,387 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: spyBounty
+  abstract: true
+  id: MediumBountyBase
+  difficulty: Medium
+  theftTime: 6
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: EnergyChemDispenser
+  jobBlacklist: [Chemist, ChiefMedicalOfficer]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [EnergyChemDispenser]
+    queryComp: EnergyReagentDispenser
+    areas: [AreaChem]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerScienceXenobiologyBounty
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerScienceXenobiologyBounty]
+    queryComp: XenobiologyBountyConsole
+    areas: [AreaXenobio]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerShuttleCargo
+  departmentBlacklist: [Cargo]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerShuttleCargo]
+    queryComp: ShuttleConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerShuttleMiningLavaland
+  departmentBlacklist: [Cargo]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerShuttleMiningLavaland]
+    queryComp: DockingConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCargoOrders
+  departmentBlacklist: [Cargo]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCargoOrders]
+    queryComp: CargoOrderConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCargoOrdersEngineering
+  departmentBlacklist: [Engineering]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCargoOrdersEngineering]
+    queryComp: CargoOrderConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCargoOrdersMedical
+  departmentBlacklist: [Medical]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCargoOrdersMedical]
+    queryComp: CargoOrderConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCargoOrdersScience
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCargoOrdersScience]
+    queryComp: CargoOrderConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCargoOrdersService
+  departmentBlacklist: [Service]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCargoOrdersService]
+    queryComp: CargoOrderConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCargoBounty
+  departmentBlacklist: [Cargo]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCargoBounty]
+    queryComp: CargoBountyConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerSurveillanceCameraMonitor
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerSurveillanceCameraMonitor]
+    queryComp: SurveillanceCameraMonitor
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerAtmosMonitoring
+  jobBlacklist: [AtmosphericTechnician, ChiefEngineer]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerAtmosMonitoring]
+    queryComp: AtmosMonitoringConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerPowerMonitoring
+  departmentBlacklist: [Engineering]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerPowerMonitoring]
+    queryComp: PowerMonitoringConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCriminalRecords
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCriminalRecords]
+    queryComp: CriminalRecordsConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerStationRecords
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerStationRecords]
+    queryComp: GeneralStationRecordConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerCrewMonitoring
+  departmentBlacklist: [Medical]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerCrewMonitoring]
+    queryComp: CrewMonitoringConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerResearchAndDevelopment
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerResearchAndDevelopment]
+    queryComp: ResearchConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerAnalysisConsole
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerAnalysisConsole]
+    queryComp: AnalysisConsole
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ComputerGeneticsConsole
+  jobBlacklist: [Geneticist, ResearchDirector]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ComputerGeneticsConsole, ComputerGeneticsConsoleEmpty]
+    queryComp: GeneticsConsole
+    areas: [AreaGenetics]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ExosuitFabricator
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ExosuitFabricator]
+    queryComp: Lathe
+    areas: [AreaRobotics, AreaRoboticsMechBay]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: EngineeringTechFab
+  departmentBlacklist: [Engineering]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [EngineeringTechFab]
+    queryComp: Lathe
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: CargoTechFab
+  departmentBlacklist: [Cargo]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [CargoTechFab]
+    queryComp: Lathe
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ScienceTechFab
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ScienceTechFab]
+    queryComp: Lathe
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ServiceTechFab
+  departmentBlacklist: [Service]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [ServiceTechFab]
+    queryComp: Lathe
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: VendingMachineEngivend
+  departmentBlacklist: [Engineering]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [VendingMachineEngivend]
+    queryComp: VendingMachine
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: VendingMachineMedical
+  departmentBlacklist: [Medical]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [VendingMachineMedical]
+    queryComp: VendingMachine
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: VendingMachineRobotics
+  departmentBlacklist: [Science]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [VendingMachineRobotics]
+    queryComp: VendingMachine
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: VendingMachineSalvage
+  jobBlacklist: [SalvageSpecialist, Quartermaster]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [VendingMachineSalvage]
+    queryComp: ShopVendor
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: VendingMachineChemicals
+  jobBlacklist: [Chemist, ChiefMedicalOfficer]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [VendingMachineChemicals]
+    queryComp: VendingMachine
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: Emitter
+  departmentBlacklist: [Engineering]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [Emitter]
+    queryComp: Emitter
+    areas: [AreaEngineSM, AreaEngineSMRoom]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: CargoTelepad
+  departmentBlacklist: [Cargo]
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    protos: [CargoTelepad]
+    queryComp: CargoTelepad
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: Teg
+  departmentBlacklist: [Engineering]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: Teg
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: PlantRD
+  jobBlacklist: [ResearchDirector]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: PlantRD
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: AnimalIan
+  jobBlacklist: [HeadOfPersonnel]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalIan
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: AnimalRenault
+  departmentBlacklist: [Command]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalRenault
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: AnimalShiva
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalShiva
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ForensicScanner
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ForensicScanner
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: FlippoEngravedLighter
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: FlippoEngravedLighter
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ClothingOuterHardsuitVoidParamed
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingOuterHardsuitVoidParamed
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: FireAxe
+  jobBlacklist: [AtmosphericTechnician]
+  departmentBlacklist: [Command]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: FireAxe
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ChiefEngineerToolBelt
+  jobBlacklist: [ChiefEngineer]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ChiefEngineerToolBelt
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: WantedListCartridge
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: WantedListCartridge
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: TelescopicBaton
+  departmentBlacklist: [Command]
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [TelescopicBaton]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ClothingEyesGlassesSecurity
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingEyesGlassesSecurity]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ClothingMaskGasSecurity
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingMaskGasSecurity]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ClothingHandsGlovesSecurity
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingHandsGlovesSecurity]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: Stunbaton
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [Stunbaton]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: WeaponLaserSidearm
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [WeaponLaserSidearm]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: SecurityKatana
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: SecurityKatana
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: ClothingBeltSecurity
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingBeltSecurity, ClothingBeltSecurityWebbing]
+
+- type: spyBounty
+  parent: MediumBountyBase
+  id: OrganMedium
+  repeatable: true
+  selector: !type:SpyOrganBountySelectorEvent
+    validOrgans: [LegLeft, LegRight, ArmLeft, ArmRight, Stomach, Eyes, Kidneys, Liver]
+    departmentBlacklist: [Command, Security]

@@ -11,9 +11,10 @@
     checkCanInteract: false
     useDelay: 6
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: last_refuge
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: last_refuge
   - type: InstantAction
     event: !type:EventHereticCloak
       status: LastRefugeStatusEffect
@@ -30,9 +31,10 @@
   - type: Action
     useDelay: 10
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: shapeshift
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: shapeshift
   - type: InstantAction
     event: !type:EventHereticShapeshift
   - type: ShapeshiftAction

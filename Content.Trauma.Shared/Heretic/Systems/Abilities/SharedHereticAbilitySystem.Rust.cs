@@ -14,7 +14,7 @@ using Content.Shared.Physics;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
-using Content.Shared.Tag;
+using Content.Shared.Wall;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
@@ -30,13 +30,15 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
+    [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
+
     public static readonly ProtoId<ContentTileDefinition> RustTile = "PlatingRust";
-    public static readonly ProtoId<TagPrototype> Wall = "Wall";
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 
     private readonly HashSet<Entity<FixturesComponent>> _lookupFixtures = new();
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
+    // TODO: bruh make this a comp
     public static readonly Dictionary<EntProtoId, EntProtoId> Transformations = new()
     {
         { "WallSolid", "WallSolidRust" },
@@ -55,7 +57,7 @@ public abstract partial class SharedHereticAbilitySystem
     [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<RustbringerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled || args.Type is HarmfulActionType.Disarm or HarmfulActionType.Grab)
+        if (args.Cancelled || args.Type is not (HarmfulActionType.Disarm or HarmfulActionType.Grab))
             return;
 
         if (!IsOnRust(ent))
@@ -301,7 +303,7 @@ public abstract partial class SharedHereticAbilitySystem
                 PredictedSpawnAttachedTo(transformation, coords, rotation: rotation);
         }
 
-        if (TerminatingOrDeleted(targetEntity) || !_tag.HasTag(targetEntity, Wall))
+        if (TerminatingOrDeleted(targetEntity) || !_wallQuery.HasComp(targetEntity))
             return false;
 
         if (targetEntity == target && !canRust)
@@ -350,6 +352,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         var mapCoords = _transform.ToMapCoordinates(args.Target);
 
+        _lookupMobs.Clear();
         Lookup.GetEntitiesInRange(args.Target, args.MobCheckRange, _lookupMobs, LookupFlags.Dynamic);
         foreach (var (entity, _) in _lookupMobs)
         {

@@ -2,7 +2,7 @@
 
 - type: knowledgeProfile
   id: Diona
-  pointsLimit: 5
+  pointsLimit: 3
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -25,14 +25,11 @@
     SurgeryKnowledge: 0
     FirstAidKnowledge: 1
     ChemistryKnowledge: 1
-    # Physical Skill
-    ThrowingKnowledge: 1 # Mass matters for throwing but lean into it a bit.
-    AthleticsKnowledge: 0
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 2
     # Combat Skill
+    ThrowingKnowledge: 1 # Mass matters for throwing but lean into it a bit.
     MeleeKnowledge: 0
     ShootingKnowledge: 0
+    KnowledgeWeaponsShield: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

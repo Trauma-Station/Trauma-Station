@@ -138,6 +138,10 @@
   conditions:
     - !type:StoreWhitelistCondition
       blacklist:
+        # <Trauma>
+        components:
+        - SpyUplink
+        # </Trauma>
         tags:
           - NukeOpsUplink
 
