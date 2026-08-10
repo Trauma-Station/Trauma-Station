@@ -48,7 +48,7 @@
     maxItemSize: Ginormous
   - type: Construction
     graph: BriefcaseWeapon
-    node: start
+    node: finish
   # </Trauma>
   - type: Appearance
   - type: Sprite

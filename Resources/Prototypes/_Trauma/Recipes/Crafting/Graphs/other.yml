@@ -237,8 +237,9 @@
   id: BriefcaseWeapon
   graph:
   - node: start
+  - node: finish
     edges:
-    - to: deconstruct
+    - to: start
       steps:
       - tool: Screwing
         doAfter: 5
@@ -251,4 +252,3 @@
         amount: 2
       - !type:EmptyAllContainers
       - !type:DeleteEntity
-  - node: deconstruct
