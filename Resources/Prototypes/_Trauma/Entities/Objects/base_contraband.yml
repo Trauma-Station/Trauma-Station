@@ -33,6 +33,15 @@
     allowedDepartments: [ Security, Science ]
 
 - type: entity
+  id: BaseSecuritySalvageContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedDepartments: [ Security ]
+    allowedJobs: [ SalvageSpecialist ]
+
+- type: entity
   abstract: true
   id: BaseChaplainContraband
   parent: BaseRestrictedContraband
@@ -50,8 +59,25 @@
 
 - type: entity
   abstract: true
+  id: BaseEngineeringSalvageContraband # for mesons
+  parent: BaseRestrictedContraband
+  components:
+  - type: Contraband
+    allowedDepartments: [ Engineering ]
+    allowedJobs: [ SalvageSpecialist ]
+
+- type: entity
+  abstract: true
   parent: BaseRestrictedContraband
   id: BaseLibrarianContraband # for librarian blade non-traitor edition
   components:
   - type: Contraband
     allowedJobs: [ Librarian ]
+
+- type: entity
+  abstract: true
+  parent: BaseRestrictedContraband
+  id: BaseBotanyContraband # for chainsaw, and maybe botany "weapons" in the future.
+  components:
+  - type: Contraband
+    allowedJobs: [ Botanist ]
