@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat, BaseSlimeJigglePhysics ]
   id: BaseMobSlimeXenobio
   name: basic slime
   description: It looks so much like jelly. I wonder what it tastes like?
@@ -186,21 +186,10 @@
   parent: MobSlimeXenobioBaby
   id: MobSlimeXenobioAdult
   categories: [ HideSpawnMenu ]
-  name: slime
   suffix: Adult
-  description: It looks so much like jelly. I wonder what it tastes like?
   components:
   - type: MobGrowth
-    hungerRequired: 75
     currentStage: adult
-    stages:
-      baby:
-        nextStage: adult
-        sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
-        displayName: baby
-      adult:
-        sprite: _Goobstation/Xenobiology/Mobs/slimesAdult.rsi
-        displayName: adult
 
 - type: entity
   abstract: true

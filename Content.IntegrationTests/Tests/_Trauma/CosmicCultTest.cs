@@ -31,6 +31,7 @@ public sealed class CosmicCultTest : InteractionTest
         await Server.WaitPost(() =>
         {
             Assert.That(SEntMan.EntityExists(ClientSession.AttachedEntity));
+            Assert.That(ClientSession.AttachedEntity, Is.EqualTo(SPlayer));
             _smite.MakeAntag(ClientSession, Smite);
         });
 
