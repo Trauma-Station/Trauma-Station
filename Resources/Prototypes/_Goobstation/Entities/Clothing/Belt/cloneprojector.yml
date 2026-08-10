@@ -121,6 +121,7 @@
     - type: Fingerprint
     - type: Perishable
     - type: Satiation
+      satiations: {}
     - type: FootprintOwner
     - type: ItemSlots # No infinite batteries.
 

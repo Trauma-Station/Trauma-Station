@@ -9,6 +9,7 @@
   - type: Barotrauma
     damage: !type:DamageSpecifier
   - type: Satiation
+    satiations: {}
   - type: Reproductive
     offspring: []
     partnerWhitelist: !type:EntityWhitelist

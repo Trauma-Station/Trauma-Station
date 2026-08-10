@@ -486,6 +486,13 @@
   metabolisms:
     Bloodstream:
       effects:
+        # <Trauma>
+        - !type:Satiate
+          satiationType: Hunger
+          conditions:
+          - !type:MetabolizerTypeCondition
+            type: [ Vox ]
+        # </Trauma>
         - !type:HealthChange
           conditions:
           - !type:MetabolizerTypeCondition # Goob
@@ -494,11 +501,6 @@
           damage:
             types:
               Poison: 2
-        - !type:SatiateHunger # Goob - Vox are stinky
-          conditions:
-          - !type:MetabolizerTypeCondition
-            type: [ Vox ]
-            inverted: false
 
 - type: reagent
   id: Romerol
