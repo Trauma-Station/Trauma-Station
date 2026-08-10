@@ -30,8 +30,8 @@ public sealed class CosmicCultTest : InteractionTest
     {
         await Server.WaitPost(() =>
         {
-            Assert.That(SEntMan.EntityExists(ClientSession.AttachedEntity));
-            Assert.That(ClientSession.AttachedEntity, Is.EqualTo(SPlayer));
+            Assert.That(ClientSession.AttachedEntity, Is.EqualTo(SPlayer),
+                $"Dirty player was {SEntMan.ToPrettyString(ClientSession.AttachedEntity)} instead of {SEntMan.ToPrettyString(SPlayer)}");
             _smite.MakeAntag(ClientSession, Smite);
         });
 
