@@ -13028,3 +13028,20 @@ Entries:
   id: 1420
   time: '2026-08-10T16:07:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3939
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Meson goggles are now Engineering and Salvage contraband.
+  - type: Tweak
+    message: >-
+      Jackboots are now Security and Salvage contraband, removing cargo techs
+      rights to wear them.
+  - type: Tweak
+    message: G.O.R.I.L.L.A. gauntlet is now science contraband.
+  - type: Tweak
+    message: Chainsaw is now botany contraband.
+  - type: Tweak
+    message: Pickaxe, mining drills and mech mining drills are now salvage contraband.
+  id: 1421
+  time: '2026-08-10T18:29:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4025
