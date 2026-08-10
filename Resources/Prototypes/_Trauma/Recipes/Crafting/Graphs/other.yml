@@ -230,25 +230,3 @@
 
   - node: BarbedWire1
     entity: BarbedWire
-
-# BriefcaseWeapon
-
-- type: constructionGraph
-  id: BriefcaseWeapon
-  graph:
-  - node: start
-  - node: finish
-    edges:
-    - to: start
-      steps:
-      - tool: Screwing
-        doAfter: 5
-      conditions:
-      - !type:Locked
-        locked: false
-      completed:
-      - !type:SpawnPrototype
-        prototype: SheetPlasteel1
-        amount: 2
-      - !type:EmptyAllContainers
-      - !type:DeleteEntity
