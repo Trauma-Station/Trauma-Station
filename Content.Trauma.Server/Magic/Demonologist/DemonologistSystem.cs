@@ -3,13 +3,16 @@
 using System.Linq;
 using Content.Server.Antag;
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Chat.Systems;
+using Content.Server.Communications;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Actions;
 using Content.Shared.Atmos.Components;
+using Content.Shared.CCVar;
+using Content.Shared.Chat;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
@@ -20,7 +23,10 @@ using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Shared.Magic.Demonologist;
 using Content.Trauma.Shared.Magic.Demonologist.Components;
 using Content.Trauma.Shared.Magic.Demonologist.Events;
+using Content.Trauma.Shared.Magic.Demonologist.UI;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Magic.Demonologist;
@@ -28,7 +34,6 @@ namespace Content.Trauma.Server.Magic.Demonologist;
 public sealed partial class DemonologistSystem : SharedDemonologistSystem
 {
     [Dependency] private SharedAccessSystem _access = default!;
-    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private FlammableSystem _flammable = default!;
     [Dependency] private SharedIdCardSystem _idCard = default!;
@@ -38,9 +43,14 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTemperatureSystem _temperature = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     private readonly Dictionary<EntityUid, (HashSet<ProtoId<AccessLevelPrototype>> saved, TimeSpan restoreAt)> _cursedAccess = new();
 
+
+    private const float UIUpdateInterval = 5.0f;
 
     public override void Update(float frameTime)
     {
@@ -61,6 +71,20 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
                 _access.TrySetTags(id, _cursedAccess[target].saved.ToList());
 
             _cursedAccess.Remove(target);
+        }
+
+        var query = EntityQueryEnumerator<DemonologistComponent, CommunicationsConsoleComponent>();
+        while (query.MoveNext(out var uid, out var demo, out _))
+        {
+            demo.UIUpdateAccumulator += frameTime;
+
+            if (demo.UIUpdateAccumulator < UIUpdateInterval)
+                continue;
+
+            demo.UIUpdateAccumulator -= UIUpdateInterval;
+
+            if (_uiSystem.IsUiOpen(uid, DemonicAnnouncementUiKey.Key))
+                UpdateDemonicConsoleInterface((uid, demo));
         }
     }
 
@@ -156,5 +180,42 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
             if (HasComp<ClothingComponent>(ent))
                 EnsureComp<UnremoveableComponent>(ent);
         }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDemonicConsoleMapInit(Entity<DemonologistComponent> ent, ref MapInitEvent args)
+    {
+        UpdateDemonicConsoleInterface(ent);
+    }
+
+    private void UpdateDemonicConsoleInterface(Entity<DemonologistComponent> ent)
+    {
+        if (!TryComp<CommunicationsConsoleComponent>(ent, out var console))
+            return;
+
+        _uiSystem.SetUiState(ent.Owner, DemonicAnnouncementUiKey.Key,
+            new DemonicAnnouncementConsoleState(console.AnnouncementCooldownRemaining <= 0f));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDemonicAnnounce(Entity<DemonologistComponent> ent, ref DemonicAnnouncementMessage args)
+    {
+        if (!TryComp<CommunicationsConsoleComponent>(ent, out var console))
+            return;
+
+        if (console.AnnouncementCooldownRemaining > 0f)
+            return;
+
+        var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+        var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
+
+        console.AnnouncementCooldownRemaining = console.Delay;
+
+        Loc.TryGetString(console.Title, out var title);
+        title ??= console.Title;
+
+        _chat.DispatchGlobalAnnouncement(msg, title, colorOverride: console.Color);
+
+        UpdateDemonicConsoleInterface(ent);
     }
 }

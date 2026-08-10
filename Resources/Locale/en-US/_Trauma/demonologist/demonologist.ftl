@@ -12,3 +12,9 @@ demonologist-apprentice-role-greeting =
     You have been bound to serve a demonologist! Further their dark rituals, or face the consequences.
 
 demonologist-portal-gathering = You gather your energy and open a portal.
+
+demonologist-announcement-title = Demonic Transmission
+
+demonic-announcement-menu-title = Demonic Communications
+demonic-announcement-menu-button = Transmit
+demonic-announcement-menu-placeholder = Enter your message...

@@ -9,4 +9,7 @@ public sealed partial class DemonologistComponent : Component
 {
     [DataField]
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "DemonologistFaction";
+
+    [DataField]
+    public float UIUpdateAccumulator;
 }

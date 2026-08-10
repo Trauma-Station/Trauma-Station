@@ -1,0 +1,21 @@
+<controls1:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                      Title="{Loc 'demonic-announcement-menu-title'}"
+                      MinSize="400 200">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="False"
+                  VerticalExpand="True"
+                  Margin="6 6 6 5">
+        <TextEdit Name="MessageInput"
+                  VerticalExpand="True"
+                  HorizontalExpand="True"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  MinHeight="100"/>
+        <Button Name="AnnounceButton"
+                Access="Public"
+                Text="{Loc 'demonic-announcement-menu-button'}"
+                Margin="0 4 0 0"
+                Disabled="True"/>
+    </BoxContainer>
+</controls1:FancyWindow>

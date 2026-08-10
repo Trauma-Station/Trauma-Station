@@ -56,6 +56,23 @@
     - ActionBloodBoil
     - ActionCursedAccess
     - ActionSummonDemonPortal
+  - type: CommunicationsConsole # TODO: remove after, keep in pda only
+    title: demonologist-announcement-title
+    color: "#990000"
+    delay: 120
+    initialDelay: 0
+    canShuttle: false
+    global: true
+    announceSentBy: false
+  - type: UserInterface
+    interfaces:
+      enum.DemonicAnnouncementUiKey.Key:
+        type: DemonicAnnouncementBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.DemonicAnnouncementUiKey.Key:
+        toggleAction: ActionDemonicAnnouncement
+  - type: IgnoreUIRange
 
 - type: startingGear
   id: DemonologistStartingGear

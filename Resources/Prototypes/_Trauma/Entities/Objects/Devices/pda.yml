@@ -133,7 +133,7 @@
     borderColor: "#4eb349"
     accentVColor: "#60c95b"
 
-- type: entity # TODO: actions: make announcement or spam messages in pdas
+- type: entity # TODO: actions: spam messages in pdas
   parent: [ BasePDA, BaseMajorContraband ]
   id: DemonologistPDA
   name: demonologist PDA
@@ -182,3 +182,20 @@
     defaultChannel: Demonmind
     channels:
     - Demonmind
+  - type: CommunicationsConsole
+    title: demonologist-announcement-title
+    color: "#990000"
+    delay: 60
+    initialDelay: 0
+    canShuttle: false
+    global: true
+    announceSentBy: false
+  - type: UserInterface
+    interfaces:
+      enum.DemonicAnnouncementUiKey.Key:
+        type: DemonicAnnouncementBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.DemonicAnnouncementUiKey.Key:
+        toggleAction: ActionDemonicAnnouncement
+  - type: IgnoreUIRange
