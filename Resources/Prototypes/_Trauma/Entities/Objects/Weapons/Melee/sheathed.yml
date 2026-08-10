@@ -23,6 +23,8 @@
   - type: Tag
     tags:
     - Katana
+  - type: StealTarget
+    stealGroup: SecurityKatana
 
 - type: entity
   parent: [BaseSword, BaseSyndicateContraband]
