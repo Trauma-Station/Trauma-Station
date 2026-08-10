@@ -88,10 +88,25 @@
       - ContravendUplink
       components:
       - SpyRule
-  - !type:BuyerWhitelistCondition
+  - &blacklist_surplus !type:BuyerWhitelistCondition
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: Uplink911Bundle
+  name: uplink-surplus-bundle-name
+  description: uplink-surplus-bundle-desc
+  productEntity: CrateSyndicateSurplusBundle
+  discountCategory: null # WAY too free
+  categories:
+  - DiscountedItems
+  conditions:
+  - !type:StoreHolidayCondition
+    holiday: NeverForget
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - *blacklist_surplus
 
 - type: listing
   id: UplinkDuffelSurgery
