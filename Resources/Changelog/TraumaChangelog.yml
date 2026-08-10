@@ -13045,3 +13045,10 @@ Entries:
   id: 1421
   time: '2026-08-10T18:29:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4025
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added the fulton launcher which can be bought for 1100 mining points.
+  id: 1422
+  time: '2026-08-10T19:26:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4031
