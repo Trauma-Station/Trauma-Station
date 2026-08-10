@@ -57,16 +57,10 @@ public sealed partial class SpyRuleComponent : Component
     public HashSet<SpyBounty> CurrentBounties = new();
 
     /// <summary>
-    /// Time until bounties are refreshed first time
+    /// Time until bounties are refreshed
     /// </summary>
     [DataField]
-    public TimeSpan FirstRefreshTime = TimeSpan.FromMinutes(10);
-
-    /// <summary>
-    /// Time until bounties are refreshed after they were refreshed at least once
-    /// </summary>
-    [DataField]
-    public TimeSpan RefreshTime = TimeSpan.FromMinutes(5);
+    public TimeSpan RefreshTime = TimeSpan.FromMinutes(12);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan NextRefresh = TimeSpan.Zero;

@@ -1,206 +1,232 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: spyBounty
-  id: Hypospray
+  abstract: true
+  id: HardBountyBase
   difficulty: Hard
+  theftTime: 9
+
+- type: spyBounty
+  parent: HardBountyBase
+  id: Hypospray
   jobBlacklist: [ChiefMedicalOfficer]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: Hypospray
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ClothingOuterHardsuitRd
-  difficulty: Hard
   jobBlacklist: [ResearchDirector]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingOuterHardsuitRd
 
 - type: spyBounty
+  parent: HardBountyBase
   id: HandTeleporter
-  difficulty: Hard
   jobBlacklist: [ResearchDirector]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: HandTeleporter
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ClothingShoesBootsMagAdv
-  difficulty: Hard
   jobBlacklist: [ChiefEngineer]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingShoesBootsMagAdv
 
 - type: spyBounty
+  parent: HardBountyBase
   id: BoxFolderQmClipboard
-  difficulty: Hard
   jobBlacklist: [Quartermaster]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: BoxFolderQmClipboard
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ClothingHandsKnuckleDustersQM
-  difficulty: Hard
   jobBlacklist: [Quartermaster]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingHandsKnuckleDustersQM
 
 - type: spyBounty
+  parent: HardBountyBase
   id: CaptainIDCard
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: CaptainIDCard
 
 - type: spyBounty
+  parent: HardBountyBase
   id: JetpackCaptainFilled
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: JetpackCaptainFilled
 
 - type: spyBounty
+  parent: HardBountyBase
   id: WeaponAntiqueLaser
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: WeaponAntiqueLaser
 
 - type: spyBounty
+  parent: HardBountyBase
   id: WeaponEnergyGunLawbringer
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: WeaponEnergyGunLawbringer
 
 - type: spyBounty
+  parent: HardBountyBase
   id: WeaponSecHeadSword
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: WeaponSecHeadSword
 
 - type: spyBounty
+  parent: HardBountyBase
   id: RapidSyringeGun
-  difficulty: Hard
   jobBlacklist: [ChiefMedicalOfficer]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: RapidSyringeGun
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ExecutiveBriefcase
-  difficulty: Hard
   jobBlacklist: [NanotrasenRepresentative]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ExecutiveBriefcase
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ClothingBeltGeminiHoloProjector
-  difficulty: Hard
   jobBlacklist: [ResearchDirector]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingBeltGeminiHoloProjector
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ComputerCargoOrdersSecurity
-  difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerCargoOrdersSecurity]
     queryComp: CargoOrderConsole
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ComputerFundingAllocation
-  difficulty: Hard
   jobBlacklist: [HeadOfPersonnel]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerFundingAllocation]
     queryComp: FundingAllocationConsole
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ComputerRoboticsControl
-  difficulty: Hard
   jobBlacklist: [ResearchDirector]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerRoboticsControl]
     queryComp: RoboticsConsole
 
 - type: spyBounty
+  parent: HardBountyBase
   id: StationAiUploadComputer
-  difficulty: Hard
   jobBlacklist: [ResearchDirector]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [StationAiUploadComputer]
     queryComp: SiliconLawUpdater
 
 - type: spyBounty
+  parent: HardBountyBase
   id: StationAiFixerComputer
-  difficulty: Hard
   jobBlacklist: [ResearchDirector]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [StationAiFixerComputer]
     queryComp: StationAiFixerConsole
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ComputerId
-  difficulty: Hard
   jobBlacklist: [HeadOfPersonnel]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerId]
     queryComp: IdCardConsole
 
 - type: spyBounty
+  parent: HardBountyBase
   id: VendingMachineCart
-  difficulty: Hard
   jobBlacklist: [HeadOfPersonnel]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineCart]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: HardBountyBase
   id: VendingMachineSec
-  difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineSec]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: HardBountyBase
   id: FaxMachineCaptain
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: FaxMachineCaptain
 
 - type: spyBounty
+  parent: HardBountyBase
   id: ToiletGoldenDirtyWater
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ToiletGoldenDirtyWater
 
 - type: spyBounty
+  parent: HardBountyBase
   id: CaptainSword
-  difficulty: Hard
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: CaptainSword
 
 - type: spyBounty
+  parent: HardBountyBase
   id: PlayerStationAi
-  difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [PlayerStationAi]
     queryComp: StationAiCore
     areas: [AreaAiCore]
 
 - type: spyBounty
+  parent: HardBountyBase
   id: WeaponEnergyTurretAI
-  difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [WeaponEnergyTurretAI]
     queryComp: StationAiTurret
     areas: [AreaAi, AreaAiCore, AreaAiUpload]
 
 - type: spyBounty
+  parent: HardBountyBase
   id: WeaponEnergyTurretSecurity
-  difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [WeaponEnergyTurretSecurity]
     queryComp: TurretTargetSettings
     areas: [AreaArmory]
 
 - type: spyBounty
+  parent: HardBountyBase
+  id: SwatGasMask
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: SwatGasMask
+
+- type: spyBounty
+  parent: HardBountyBase
+  id: GorillaGloves
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: GorillaGloves
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: CaneBladeNanotrasen
+  jobBlacklist: [NanotrasenRepresentative]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: CaneBladeNanotrasen
+
+- type: spyBounty
+  parent: HardBountyBase
   id: OrganHard
-  difficulty: Hard
   repeatable: true
+  theftTime: 6 # Same as OrganMedium bounty
   selector: !type:SpyOrganBountySelectorEvent
     validOrgans: [LegLeft, LegRight, ArmLeft, ArmRight, Stomach, Eyes, Kidneys, Liver]
     departmentWhitelist: [Command, Security]
