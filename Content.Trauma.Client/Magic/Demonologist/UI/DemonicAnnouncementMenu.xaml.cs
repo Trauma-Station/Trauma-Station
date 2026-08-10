@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Content.Client.UserInterface.Controls;
@@ -30,4 +32,3 @@ public sealed partial class DemonicAnnouncementMenu : FancyWindow
         AnnounceButton.OnPressed += _ => OnAnnounce?.Invoke(Rope.Collapse(MessageInput.TextRope));
     }
 }
-

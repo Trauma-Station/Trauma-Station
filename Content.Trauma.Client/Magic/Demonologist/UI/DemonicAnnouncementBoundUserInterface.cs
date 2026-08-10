@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Trauma.Shared.Magic.Demonologist.UI;
