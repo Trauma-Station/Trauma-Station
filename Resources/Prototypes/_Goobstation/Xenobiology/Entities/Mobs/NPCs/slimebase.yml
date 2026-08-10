@@ -2,22 +2,12 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat, BaseSlimeJigglePhysics ]
   id: BaseMobSlimeXenobio
   name: basic slime
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
   - type: Appearance
-  - type: JigglePhysics # wobble wobble
-    springiness: 15
-    damping: 2
-    inertiaScale: 5
-    jiggleLimit: 0.35
-    slapLimit: 2.8
-    displacementsRsi: _Trauma/Mobs/Animals/slime_jiggle.rsi
-    displacementCount: 4
-    layers:
-    - enum.DamageStateVisualLayers.Base
   - type: ZombieImmune # xenobio II way too op
   - type: Hunger
     startingHunger: 40
