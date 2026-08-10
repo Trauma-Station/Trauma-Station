@@ -11,8 +11,8 @@
     defaultChannel: Dragonmind
     channels:
     - Dragonmind
-  - type: Damageable
-    damageModifierSet: Dragon
+  # - type: Damageable
+  #   damageModifierSet: Dragon
   - type: Injurable
     damageContainer: Biological
   - type: Fauna
@@ -121,12 +121,12 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      450: Critical
-      500: Dead
+      375: Critical # Trauma - Was 450
+      400: Dead # Trauma - Was 500
   - type: SlowOnDamage
     speedModifierThresholds:
-      250: 0.7
-      400: 0.5
+      205: 0.7 # Trauma - Was 250
+      315: 0.5 # Trauma - Was 400
   # disable taking damage from fire, since its a fire breathing dragon
   - type: Flammable
     damage:
@@ -160,8 +160,8 @@
       path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
     damage:
       types:
-        Piercing: 15
-        Slash: 15
+        Piercing: 13 # Trauma - Was 15
+        Slash: 12 # Trauma - Was 15
   - type: Devourer
     foodPreferenceWhitelist:
       components:
