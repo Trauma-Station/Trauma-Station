@@ -11,8 +11,6 @@
     defaultChannel: Dragonmind
     channels:
     - Dragonmind
-  # - type: Damageable
-  #   damageModifierSet: Dragon
   - type: Injurable
     damageContainer: Biological
   - type: Fauna
