@@ -13003,3 +13003,10 @@ Entries:
   id: 1417
   time: '2026-08-10T04:33:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4022
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Syndicate Secure Briefcases can now be deconstructed providing 2 plasteel.
+  id: 1418
+  time: '2026-08-10T13:31:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4017
