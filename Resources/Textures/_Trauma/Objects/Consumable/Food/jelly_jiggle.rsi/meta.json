@@ -1,7 +1,7 @@
 {
     "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Created by @deltanedas (github)",
+    "license": "CC0-1.0",
+    "copyright": "Generated with grok on Elon Musk's dime",
     "size": {
         "x": 32,
         "y": 32
@@ -23,9 +23,6 @@
             "name": "jiggle_3"
         },
         {
-            "name": "jiggle_4"
-        },
-        {
             "name": "jiggle_-1"
         },
         {
@@ -33,9 +30,6 @@
         },
         {
             "name": "jiggle_-3"
-        },
-        {
-            "name": "jiggle_-4"
         }
     ]
 }

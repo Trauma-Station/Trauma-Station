@@ -11,22 +11,35 @@ namespace Content.Trauma.Shared.Physics;
 public sealed partial class JigglePhysicsComponent : Component
 {
     /// <summary>
-    /// Mass of what is jiggling, makes it harder to accelerate.
-    /// </summary>
-    [DataField(required: true), AutoNetworkedField]
-    public float Mass;
-
-    /// <summary>
     /// Spring constant for returning <c>Jiggle<c> to 0.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public float Springiness;
 
     /// <summary>
-    /// Limit on the absolute value of <c>Jiggle</c>, it can be negative so this is both the lower and upper bound.
+    /// Damping force used to bring <c>Slap</c> to 0.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public float Damping;
+
+    /// <summary>
+    /// Scale of the force proportional to the entity's actual acceleration.
+    /// Not really related to mass sadly.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public float InertiaScale;
+
+    /// <summary>
+    /// Limit on the magnitute of the <c>Jiggle</c> vector.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public float JiggleLimit;
+
+    /// <summary>
+    /// Limit on the magnitute of the <c>Slap</c> vector.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public float SlapLimit;
 
     /// <summary>
     /// RSI to get displacements from.
@@ -41,8 +54,10 @@ public sealed partial class JigglePhysicsComponent : Component
     public string DisplacementPrefix = "jiggle_";
 
     /// <summary>
-    /// Number of displacements there are for zero, positive and negative momentum each.
-    /// Higher number means higher fidelity as momentum changes
+    /// Number of displacements there are for positive and negative 1-D <c>Jiggle</c> each.
+    /// Negative means west, positive means east.
+    /// Zero jiggle always gets 1 displacement.
+    /// Higher number means higher fidelity as <c>Jiggle</c> changes
     /// </summary>
     /// <example>
     /// For count of 3, the states end with 1, 2, 3, 0, -1, -2, -3
@@ -54,5 +69,5 @@ public sealed partial class JigglePhysicsComponent : Component
     /// All sprite layers to apply displacements to, if they exist.
     /// </summary>
     [DataField(required: true)]
-    public List<Enum> Layers = default!;
+    public List<string> Layers = default!;
 }

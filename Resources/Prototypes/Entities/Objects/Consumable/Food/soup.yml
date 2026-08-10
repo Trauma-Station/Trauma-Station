@@ -580,6 +580,19 @@
   name: amanita jelly
   description: It's evil, don't touch it!
   components:
+  # <Trauma>
+  # TODO: enable after fixing the maps xy scale
+  #- type: JigglePhysics # violent wobble wobble
+  #  springiness: 15
+  #  damping: 2
+  #  inertiaScale: 3
+  #  jiggleLimit: 0.2
+  #  slapLimit: 1.6
+  #  displacementsRsi: _Trauma/Objects/Consumable/Food/jelly_jiggle.rsi
+  #  displacementCount: 3
+  #  layers:
+  #  - "jiggle"
+  # </Trauma>
   - type: Item
     size: Normal
     storedOffset: 0,-3
@@ -589,7 +602,11 @@
       - jelly
   - type: Sprite
     sprite: Objects/Consumable/Food/meals.rsi
-    state: amanita-jelly
+    # <Trauma> - use layers for jiggle physics
+    layers:
+    - state: amanita-jelly
+      map: [ "jiggle" ]
+    # </Trauma>
   - type: Solution
     solution:
       reagents:

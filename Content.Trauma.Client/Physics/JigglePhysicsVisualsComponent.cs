@@ -12,13 +12,13 @@ public sealed partial class JigglePhysicsVisualsComponent : Component
     /// Current clientside "position", changed over time by <see cref="Slap"/>.
     /// </summary>
     [ViewVariables]
-    public float Jiggle;
+    public Vector2 Jiggle;
 
     /// <summary>
     /// Velocity used to change <see cref="Jiggle"/>.
     /// </summary>
     [ViewVariables]
-    public float Slap;
+    public Vector2 Slap;
 
     /// <summary>
     /// The last frame's <c>PhysicsComponent.LinearVelocity</c> used to estimate acceleration.

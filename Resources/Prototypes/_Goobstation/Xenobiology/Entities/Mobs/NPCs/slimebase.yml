@@ -9,9 +9,12 @@
   components:
   - type: Appearance
   - type: JigglePhysics # wobble wobble
-    mass: 20 # almost all of the fixtures mass
-    springiness: 0.4
-    jiggleLimit: 10
+    springiness: 15
+    damping: 2
+    inertiaScale: 5
+    jiggleLimit: 0.35
+    slapLimit: 2.8
+    displacementsRsi: _Trauma/Mobs/Animals/slime_jiggle.rsi
     displacementCount: 4
     layers:
     - enum.DamageStateVisualLayers.Base
@@ -177,8 +180,6 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: base
       color: "#FFFFFF"
-  - type: JigglePhysics # fbi open up
-    displacementsRsi: _Trauma/Mobs/Animals/baby_slime_jiggle.rsi
   - type: MobGrowth
     hungerRequired: 75
     currentStage: baby
@@ -197,8 +198,6 @@
   categories: [ HideSpawnMenu ]
   suffix: Adult
   components:
-  - type: JigglePhysics
-    displacementsRsi: _Trauma/Mobs/Animals/slime_jiggle.rsi
   - type: MobGrowth
     currentStage: adult
 

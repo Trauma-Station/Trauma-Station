@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.DisplacementMap;
+using Content.Shared.Camera;
 using Content.Shared.DisplacementMap;
 using Content.Trauma.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Reflection;
 
 namespace Content.Trauma.Client.Physics;
 
@@ -13,7 +15,9 @@ namespace Content.Trauma.Client.Physics;
 public sealed partial class JigglePhysicsSystem : EntitySystem
 {
     [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private IReflectionManager _reflection = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private EntityQuery<CameraRecoilComponent> _recoilQuery = default!;
     [Dependency] private EntityQuery<JigglePhysicsVisualsComponent> _visualsQuery = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
@@ -31,10 +35,22 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
             State = ent.Comp.DisplacementPrefix + "0"
         };
 
+        // TODO: support changing every layer
         var vis = EnsureComp<JigglePhysicsVisualsComponent>(ent);
-        foreach (var sourceKey in ent.Comp.Layers)
+        foreach (var keyName in ent.Comp.Layers)
         {
-            var index = _sprite.LayerMapReserve((ent, sprite), sourceKey);
+            int index;
+            object sourceKey = keyName;
+            if (_reflection.TryParseEnumReference(keyName, out var keyEnum))
+            {
+                index = _sprite.LayerMapReserve((ent, sprite), keyEnum);
+                sourceKey = keyEnum;
+            }
+            else
+            {
+                index = _sprite.LayerMapReserve((ent, sprite), keyName);
+            }
+
             if (!_displacement.TryAddDisplacement(_data, (ent, sprite), index, sourceKey, out var key))
                 continue;
 
@@ -90,18 +106,26 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
         var vel = phys.LinearVelocity;
         var parentAccel = (vel - vis.LastParentVelocity) / dt;
 
-        var sign = parentAccel.X < 0 ? 1f : -1f;
-        var inertia = sign * parentAccel.Length();
-        var accel = SpringAcceleration(comp, vis.Jiggle) - inertia;
+        var spring = vis.Jiggle * comp.Springiness;
+        var damping = vis.Slap * comp.Damping;
+        var external = parentAccel * comp.InertiaScale;
+        var force = spring + damping + external;
         // probably not mathematically correct integration but dt is usually small
-        vis.Slap += accel * dt;
-        vis.Slap = Math.Clamp(vis.Slap, -comp.JiggleLimit, comp.JiggleLimit);
-        vis.Jiggle += vis.Slap * dt;
-        vis.Jiggle = Math.Clamp(vis.Jiggle, -comp.JiggleLimit, comp.JiggleLimit);
+        vis.Slap -= force * dt; // assume mass is 1 :^)
+        ClampVector(ref vis.Slap, comp.SlapLimit);
+        var dJiggle = vis.Slap;
+        if (_recoilQuery.TryComp(uid, out var recoil))
+            dJiggle += recoil.CurrentKick; // mgsv parity
+        vis.Jiggle += dJiggle * dt;
+        ClampVector(ref vis.Jiggle, comp.JiggleLimit);
 
         vis.LastParentVelocity = vel;
 
-        var number = NextDisplacementNumber(comp, vis.Jiggle);
+        // TODO: when X is very small and sign oscillates this needs to have a stable direction dependent on Y
+        // both axes affect jiggle so moving up/down still jiggles, the alternative of having n^2 displacements is super hell
+        var dir = vis.Jiggle.X >= 0f ? -1f : 1f;
+        var jiggle1d = vis.Jiggle.Length() * dir;
+        var number = NextDisplacementNumber(comp, jiggle1d);
         if (number != vis.DisplacementNumber)
         {
             vis.DisplacementNumber = number;
@@ -122,8 +146,18 @@ public sealed partial class JigglePhysicsSystem : EntitySystem
     }
 
     private int NextDisplacementNumber(JigglePhysicsComponent comp, float jiggle)
-        => (int) (jiggle * comp.DisplacementCount / comp.JiggleLimit);
+        => (int) Math.Round(jiggle * comp.DisplacementCount / comp.JiggleLimit);
 
-    private float SpringAcceleration(JigglePhysicsComponent comp, float jiggle)
-        => -comp.Springiness * jiggle;
+    /// <summary>
+    /// Circular clamping of a vector's length by scaling it down.
+    /// Maintains <c>Length</c> limit compared to <c>Vector2.Clamp</c> which only limits X/Y.
+    /// </summary>
+    private void ClampVector(ref Vector2 vector, float limit)
+    {
+        var len2 = vector.LengthSquared();
+        if (len2 <= limit * limit)
+            return;
+
+        vector *= limit / MathF.Sqrt(len2);
+    }
 }
