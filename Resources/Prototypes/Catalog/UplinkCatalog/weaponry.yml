@@ -209,6 +209,8 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist: # Trauma - move big guns to nukies
+      components:
+      - SpyRule
       tags:
       - NukeOpsUplink
 
@@ -243,6 +245,10 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
+      # <Trauma>
+      components:
+      - SpyRule
+      # </Trauma>
       tags:
       - NukeOpsUplink
 
@@ -259,6 +265,10 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist: # Trauma - was blacklist
+      # <Trauma>
+      components:
+      - SpyRule
+      # </Trauma>
       tags:
       - NukeOpsUplink
 

@@ -129,8 +129,6 @@
   - type: ActionGrant
     actions:
       - DemonicWhisperAction
-  - type: ReplacementAccent
-    accent: slaughterDemon
   - type: KnowledgeHolder
   - type: AlwaysTakeHoly
   - type: Hands

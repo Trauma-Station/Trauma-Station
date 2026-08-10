@@ -8,4 +8,4 @@
     category: Skills
     learnedLevel: 0
     experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
-    costs: [0, 1, 3, 5]
+    costs: [0, 1, 3, 6]

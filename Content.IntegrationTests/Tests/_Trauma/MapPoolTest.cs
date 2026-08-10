@@ -1,17 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
 using Content.Server.Maps;
 using Content.Shared.Maps;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Events;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Value;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -23,28 +19,24 @@ namespace Content.IntegrationTests.Tests._Trauma;
 [Category("MapTests")]
 public sealed class MapPoolTest : GameTest
 {
+    [SidedDependency(Side.Server)] private MapLoaderSystem _loader = default!;
+
     [Test]
     public async Task RequiredAreasMappedTest()
     {
-        var pair = Pair;
-        var server = pair.Server;
-
-        var entMan = server.EntMan;
-        var proto = server.ProtoMan;
-        var deps = entMan.EntitySysManager.DependencyCollection;
-        var loader = entMan.System<MapLoaderSystem>();
+        var deps = SEntMan.EntitySysManager.DependencyCollection;
 
         var options = DeserializationOptions.Default;
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             var ev = new BeforeEntityReadEvent();
-            entMan.EventBus.RaiseEvent(EventSource.Local, ev);
+            SEntMan.EventBus.RaiseEvent(EventSource.Local, ev);
 
             Assert.Multiple(() =>
             {
                 var missingAreas = new HashSet<EntProtoId>();
                 var missingEnts = new HashSet<EntProtoId>();
-                foreach (var pool in proto.EnumeratePrototypes<GameMapPoolPrototype>())
+                foreach (var pool in SProtoMan.EnumeratePrototypes<GameMapPoolPrototype>())
                 {
                     var requiredAreas = pool.RequiredAreas;
                     var requiredEnts = pool.RequiredEntities;
@@ -53,9 +45,9 @@ public sealed class MapPoolTest : GameTest
 
                     foreach (var mapId in pool.Maps)
                     {
-                        var mapProto = proto.Index<GameMapPrototype>(mapId);
+                        var mapProto = SProtoMan.Index<GameMapPrototype>(mapId);
                         var map = mapProto.MapPath;
-                        if (!loader.TryReadFile(map, out var data))
+                        if (!_loader.TryReadFile(map, out var data))
                         {
                             Assert.Fail($"Failed to read {map}");
                             continue;

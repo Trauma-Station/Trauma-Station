@@ -15,6 +15,8 @@ public sealed partial class BatteryElectrocuteChargeSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
+    private const float DamagePerWatt = 0.0030f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -27,9 +29,7 @@ public sealed partial class BatteryElectrocuteChargeSystem : EntitySystem
         if (args.ShockDamage == null || args.ShockDamage <= 0)
             return;
 
-        var charge = Math.Min(args.ShockDamage.Value * args.SiemensCoefficient
-            / ElectrocutionSystem.ElectrifiedDamagePerWatt * 2,
-                ent.Comp.MaxCharge * 0.25f)
+        var charge = Math.Min(args.ShockDamage.Value * args.SiemensCoefficient / 0.0030f, ent.Comp.MaxCharge * 0.25f)
             * _random.NextFloat(0.75f, 1.25f);
 
         _battery.ChangeCharge(ent.AsNullable(), charge);

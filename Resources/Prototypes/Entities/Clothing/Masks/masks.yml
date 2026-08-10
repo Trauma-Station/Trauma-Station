@@ -565,6 +565,8 @@
   - type: Hailer
   - type: ViewconeModifier
     angleModifier: 1.0
+  - type: StealTarget
+    stealGroup: SwatGasMask
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/swat.rsi

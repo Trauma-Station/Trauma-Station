@@ -76,6 +76,8 @@
   name: eldritch blade
   description: A sickly green crescent blade, decorated with an ornamental eye. You feel like you're being watched...
   components:
+  - type: WeaponClass
+    class: Knife # not a knife but uses short blade knowledge
   - type: LandAtCursor
   - type: UnholyItem
   - type: HereticBlade

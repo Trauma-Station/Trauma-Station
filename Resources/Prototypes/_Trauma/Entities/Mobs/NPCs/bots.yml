@@ -158,7 +158,7 @@
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 100
+        damage: 175
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -169,15 +169,17 @@
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: Gun
-    fireRate: 5
+    fireRate: 2
     useKey: false
     selectedMode: FullAuto
     availableModes:
     - FullAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgeRifle
-    capacity: 125
+    proto: CartridgeLightRifleCaseless
+    capacity: 100
+  - type: BallisticAmmoSelfRefiller
+    autoRefillRate: 4
   - type: HTN
     rootTask:
       task: ED209Compound

@@ -20,4 +20,9 @@ roles-antag-demonologist-apprentice-description = Serve your demonologist master
 roles-antag-mind-controlled-name = Mind Controlled
 roles-antag-mind-controlled-objective = Help your Master
 
+roles-antag-spy-name = Spy
+roles-antag-spy-objective = Steal things and complete your mission.
+
+spy-round-end-agent-name = spy
+
 never-shown = !
