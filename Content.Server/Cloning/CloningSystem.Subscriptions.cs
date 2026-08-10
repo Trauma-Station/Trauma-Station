@@ -1,4 +1,6 @@
 using Content.Server.Forensics;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Clothing.Components;
 using Content.Shared.FixedPoint;
@@ -6,6 +8,8 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Paper;
+using Content.Shared.Speech.Components;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Stacks;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;

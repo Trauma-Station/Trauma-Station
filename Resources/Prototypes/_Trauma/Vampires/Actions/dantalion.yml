@@ -12,9 +12,9 @@
     raiseOnUser: true # this action requires VampireThrallsComponent which is stored in the body
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_enthrall.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: vampire_enthrall
+  - type: Sprite
+    layers:
+    - state: vampire_enthrall
   - type: TargetAction
     range: 2
   - type: EntityTargetAction
@@ -23,7 +23,6 @@
       - Body
     blacklist:
       components:
-      - MindShield    # parity?
       - BibleUser     # makes sense
       - VampireThrall # cant thrall other thralls or already thralled
       - Vampire       # makes sense
@@ -47,9 +46,9 @@
     useDelay: 30
     sound:
       path: /Audio/_Trauma/Vampires/Actions/pacify.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: pacify
+  - type: Sprite
+    layers:
+    - state: pacify
   - type: TargetAction
     range: 7
     checkCanAccess: false
@@ -75,9 +74,9 @@
     useDelay: 30
     sound:
       path: /Audio/_Trauma/Vampires/Actions/subspace_swap.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: subspace_swap
+  - type: Sprite
+    layers:
+    - state: subspace_swap
   - type: TargetAction
     range: 7
   - type: EntityTargetAction
@@ -97,9 +96,9 @@
   components:
   - type: Action
     useDelay: 40
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: decoy
+  - type: Sprite
+    layers:
+    - state: decoy
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -146,9 +145,9 @@
       path: /Audio/Magic/blink.ogg
       params:
         pitch: 0.4
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: thralls_up
+  - type: Sprite
+    layers:
+    - state: thralls_up
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -178,9 +177,9 @@
       params:
         volume: -5
         pitch: 0.5
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: blood_bond
+  - type: Sprite
+    layers:
+    - state: blood_bond
   - type: InstantAction
     event: !type:BloodBondActionEvent
   - type: EffectAction
@@ -200,9 +199,9 @@
     useDelay: 180
     sound:
       path: /Audio/_Trauma/Vampires/Actions/hysteria.ogg
-    icon:
-      sprite: _Trauma/Vampires/actions.rsi
-      state: hysteria
+  - type: Sprite
+    layers:
+    - state: hysteria
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction

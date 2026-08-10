@@ -13,6 +13,15 @@
     Bloodstream:
       # Main effects
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      # </Trauma>
       - !type:HealthChange
         damage:
           types:
@@ -36,9 +45,8 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDesoxyStamina # You are on meth. You keep going.
         time: 3
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 3
       # Side effects
       - !type:Jitter
@@ -61,16 +69,6 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      # <Trauma>
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 5
-      - !type:RemoveComponents
-        components:
-        - type: DelayedKnockdown
-        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      # </Trauma>
 
       # Side effects
       - !type:ResetNarcolepsy
@@ -93,6 +91,15 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      # </Trauma>
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.25
         sprintSpeedModifier: 1.25
@@ -121,16 +128,6 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      # <Trauma>
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 5
-      - !type:RemoveComponents
-        components:
-        - type: DelayedKnockdown
-        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      # </Trauma>
 
       # Side effects
       - !type:ResetNarcolepsy
@@ -154,6 +151,18 @@
     Bloodstream:
       metabolismRate: 0.25 # Goobstation edit
       effects:
+      # <Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      - !type:TakeStaminaDamage
+        amount: -10
+        immediate: true
+      # </Trauma>
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.3
         sprintSpeedModifier: 1.3
@@ -186,9 +195,8 @@
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 3
       # Side effects
       - !type:Jitter
@@ -210,19 +218,6 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      # <Goob>
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 5
-      - !type:RemoveComponents
-        components:
-        - type: DelayedKnockdown
-        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      - !type:TakeStaminaDamage
-        amount: -10
-        immediate: true
-      # </Goob>
 
       # Main effects
       - !type:ModifyBleed
@@ -390,9 +385,8 @@
     Bloodstream:
       metabolismRate: 10 # Trauma
       effects:
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         type: Add
         time: 10 # 1 second per unit
 
@@ -513,6 +507,109 @@
         - !type:ReagentCondition
           reagent: TearGas
           min: 4
+
+- type: reagent
+  id: StrawberryIce
+  name: reagent-name-StrawberryIce
+  group: Narcotics
+  desc: reagent-desc-StrawberryIce
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: fizzy
+  color: "#FF36AE"
+  metabolisms:
+    Digestion:
+      metabolismRate: 1.0
+      effects:
+      # OD
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: StrawberryIce
+          min: 20
+        damage:
+          types:
+            Cellular: 1.5
+            Poison: 1.5
+      # Bad effect
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 0.05
+      - !type:AdjustReagent # TODO: MAKE THIS USE METABOLITES INSTEAD!!!
+        reagent: Hydroxysomnolene
+        amount: 1
+
+      # Main effects
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.50
+        sprintSpeedModifier: 1.50
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDesoxyStamina # You are on Ice. You keep going.
+        time: 10
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
+        time: 10
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        time: 10
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
+        time: null
+        type: Remove
+      - !type:ResetNarcolepsy
+        conditions:
+        - !type:ReagentCondition
+          reagent: StrawberryIce
+          min: 10
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        time: 10
+      # Side effects
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+      - !type:Jitter
+
+- type: reagent
+  id: Hydroxysomnolene
+  name: reagent-name-Hydroxysomnolene
+  group: Toxins
+  desc: reagent-desc-Hydroxysomnolene
+  physicalDesc: reagent-physical-desc-gloopy
+  flavor: bitter
+  color: "#b51472"
+  metabolisms:
+    Digestion: # TODO: Make this metabolize as a metabolite!
+      effects:
+      # Slow
+      - !type:MovementSpeedModifier
+        conditions:
+        - !type:ReagentCondition
+          reagent: StrawberryIce
+          max: 0.1
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+
+      # Sleepy
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: StrawberryIce
+          max: 0.1
+        effectProto: StatusEffectDrowsiness
+        time: 2
+        type: Add
+
+      # Needs more strawberry Ice!
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentCondition
+          reagent: StrawberryIce
+          max: 0.1
+        type: Local
+        visualType: MediumCaution
+        messages: [ entity-effect-popup-strawberry-ice-addiction ] # Trauma - use loc
+        probability: 0.15
 
 - type: reagent
   id: Happiness

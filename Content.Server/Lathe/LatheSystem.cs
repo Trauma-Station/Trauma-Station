@@ -291,8 +291,7 @@ namespace Content.Server.Lathe
             if (producing == null && component.Queue.First is { } node)
                 producing = node.Value.Recipe;
 
-            var state = new LatheUpdateState(GetAvailableRecipes(uid, component), component.Queue.ToArray(), producing,
-                GetAlertLevel(uid)); // Trauma
+            var state = new LatheUpdateState(GetAvailableRecipes(uid, component), component.Queue.ToArray(), producing);
             _uiSys.SetUiState(uid, LatheUiKey.Key, state);
         }
 

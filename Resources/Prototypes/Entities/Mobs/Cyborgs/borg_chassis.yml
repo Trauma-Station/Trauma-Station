@@ -132,9 +132,7 @@
     - type: ModifyKnowledgeGrant
       skills:
         MeleeKnowledge: 51
-        StrengthKnowledge: 50
         ShootingKnowledge: 50
-        ToughnessKnowledge: 28
         WeaponsKnowledge: 51
     # </Trauma>
 
@@ -151,9 +149,7 @@
         FirstAidKnowledge: 60
         ChemistryKnowledge: 60
         MeleeKnowledge: 20
-        StrengthKnowledge: 50
         ShootingKnowledge: 20
-        ToughnessKnowledge: 20
         WeaponsKnowledge: 20
     # </Trauma>
     - type: Sprite
@@ -227,9 +223,7 @@
         MechanicsKnowledge: 60
         BotsKnowledge: 60
         MeleeKnowledge: 20
-        StrengthKnowledge: 50
         ShootingKnowledge: 20
-        ToughnessKnowledge: 20
         WeaponsKnowledge: 20
     - type: Sprite
       layers:

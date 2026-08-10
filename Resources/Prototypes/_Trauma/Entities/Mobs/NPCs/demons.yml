@@ -109,6 +109,24 @@
     radius: 0
     energy: 0
 
+- type: entity
+  parent: BaseBullet
+  id: DemonAcid
+  name: demonic acid spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 15
+        Structural: 20
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
+    layers:
+    - state: xeno_toxic
+  - type: Ammo
+    muzzleFlash: null
+
 # Minor Demons
 
 - type: entity
@@ -242,6 +260,13 @@
       Hand:
         location: Left
   - type: ComplexInteraction
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 25
+      - ReagentId: Blood
+        Quantity: 75
 
 - type: entity
   parent: BaseDemon
@@ -469,6 +494,54 @@
     transferAmount: 1
     solution: melee
 
+- type: entity
+  parent: BaseDemon
+  id: MinorDemonFlesh
+  name: miserable flesh thing
+  description: A disgusting living mass of fat, muscle tissue, mucus and blood. The ritual must have failed somehow, and this wretched thing is the result.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/flesh.rsi
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 3
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
+
 # Medium
 
 - type: entity
@@ -599,13 +672,174 @@
   - type: FaxSlip
     slipChance: 0.3
 
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonMindflayer
+  name: mindflayer
+  description: A primordial beast, it's kin have existed since the dawn of Hell. Barely intelligent, it uses inate psychic abilities to feed on the intellect of its prey.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/mindflayer.rsi
+  - type: MeleeWeapon
+    range: 5
+    soundHit:
+      path: /Audio/_Goobstation/Wizard/disable_tech.ogg
+    damage:
+      types:
+        Asphyxiation: 15
+        Bloodloss: 5
+        Ion: 20
+    animation: WeaponArcPurplePunch
+    altDisarm: true
+    canWideSwing: false
+    attackRate: 0.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 2
+            max: 3
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 7
+  - type: MeleeChemicalInjector
+    transferAmount: 7
+    solution: melee
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonAbomination
+  name: abomination
+  description: A grotesque amalgamation of sickly flesh, muscle quivers underneath it's rotting skin and it constantly drools a corrosive mucus.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/abomination.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 13
+    altDisarm: false
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 3
+  - type: Gun
+    projectileSpeed: 20
+    fireRate: 0.5
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/_Goobstation/Changeling/Effects/armour_strip.ogg
+  - type: BatteryAmmoProvider
+    proto: DemonAcid
+    fireCost: 25
+    examinable: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 25
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonImp
+  name: imp
+  description: Miserable, weak and disfigured beings, they often find themselves the lackeys of more powerful demons. Lords of Hell often use imps as cannon fodder for their armies.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/imp.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Piercing: 12
+    animation: WeaponArcThrust
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 7
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonDark
+  name: darkling
+  description: Strange shadowy beings, darklings hide in the deepest recesses of Hell, only emerging to drag down the odd sinner into the darkness.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/dark.rsi
+  - type: MeleeWeapon
+    range: 3
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 10
+        Asphyxiation: 5
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
 # Major demons
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64Fat
-  name: angel
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one is a bit on the fat side.
+  id: MajorAngelHuman
+  name: Aspect of Greed
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Aspect. Humans embody the aspect of Greed.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
@@ -615,31 +849,48 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
+        Caustic: 20
+        Blunt: 10
+        Structural: 20
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 275
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 1
-            max: 3
+            min: 4
+            max: 5
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Gold
+        Quantity: 50
+      - ReagentId: Hemorrhinol
+        Quantity: 7
+  - type: MeleeChemicalInjector
+    transferAmount: 57
+    solution: melee
   - type: ActionGrant
     actions:
-      - ActionDemonRift
+    - ActionDemonRift
+    - ActionDemonRepulse
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64Buff
-  name: angel
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell. This one seems stronger.
+  id: MajorAngelLizard
+  name: Aspect of Predation
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Lizards embody the aspect of Predation.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
@@ -649,31 +900,46 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 17
+        Slash: 20
+        Piercing: 5
+    animation: WeaponArcSlash
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 400
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 1
-            max: 3
+            min: 5
+            max: 6
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Impedrezene
+        Quantity: 6
+  - type: MeleeChemicalInjector
+    transferAmount: 6
+    solution: melee
   - type: ActionGrant
     actions:
-      - ActionDemonRift
+    - ActionDemonRift
+
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64
-  name: angel
-  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel. Unfortunately, they are still stuck in Hell.
+  id: MajorAngelMoth
+  name: Aspect of Madness
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Moths embody the aspect of Madness.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
@@ -683,9 +949,10 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
-    altDisarm: true
-    canWideSwing: false
+        Piercing: 10
+    altDisarm: false
+    canWideSwing: true
+    attackRate: 4
   - type: Destructible
     thresholds:
     - trigger:
@@ -697,11 +964,11 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           DemonSoulFragment:
-            min: 1
-            max: 3
+            min: 4
+            max: 5
   - type: ActionGrant
     actions:
-    - ActionDemonRift
+    - ActionDemonRepulse
 
 - type: entity
   parent: BaseDemon
@@ -717,7 +984,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 5
+        Blunt: 6
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -748,7 +1015,6 @@
       - MobState
       - Door
       - Item
-      tags:
       - Wall
 
 - type: entity
@@ -874,6 +1140,13 @@
           DemonSoulFragment:
             min: 3
             max: 5
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 200
+      - ReagentId: BuzzochloricBees
+        Quantity: 75
   - type: TimedSpawner
     prototypes:
     - BeeLaughterDemon
@@ -980,9 +1253,6 @@
           DemonSoulFragment:
             min: 4
             max: 6
-  - type: ActionGrant
-    actions:
-      - ActionDemonRift
 
 - type: entity
   parent: BaseDemon
@@ -998,7 +1268,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Cold: 13
+        Cold: 15
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -1023,3 +1293,52 @@
         hard: false
         mask:
         - Opaque
+
+- type: entity
+  parent: BaseDemon
+  id: MajorDemonSaturn
+  name: saturnite
+  description: Many demonologists perform rituals to give themselves stronger physical forms, saturnites form when said rituals go terribly wrong.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/saturn.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 20
+        Slash: 15
+        Structural: 30
+    animation: WeaponArcBite
+    altDisarm: true
+    canWideSwing: false
+    attackRate: 2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 4
+            max: 5
+  - type: Devourer
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidProfile
+    stomachStorageWhitelist:
+      components:
+      - MobState
+      - Item
+    chemical: Ichor
+    healRate: 7.5
+    whitelist:
+      components:
+      - MobState
+      - Item

@@ -1,0 +1,39 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<Control xmlns="https://spacestation14.io">
+    <BoxContainer Margin="8 8 8 8" Orientation="Vertical">
+        <Label Name="BountyName" HorizontalExpand="True" />
+        <BoxContainer HorizontalExpand="True" Margin="0 2" Orientation="Horizontal">
+            <PanelContainer StyleClasses="PanelLight" Margin="5 0" SetWidth="1" />
+            <TextureRect
+                Name="BountyTexture"
+                Margin="0,0,4,0"
+                MinSize="48 48"
+                Stretch="KeepAspectCentered" />
+            <Control MinWidth="5" />
+            <RichTextLabel Name="BountyDescription" />
+        </BoxContainer>
+        <Collapsible>
+            <CollapsibleHeading Name="BountyReward" />
+            <CollapsibleBody Margin="10 0 0 0">
+                <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
+                    <PanelContainer StyleClasses="PanelLight" Margin="5 0" SetWidth="1" />
+                    <TextureRect
+                        Name="BountyRewardTexture"
+                        Margin="0,0,4,0"
+                        MinSize="48 48"
+                        Stretch="KeepAspectCentered" />
+                    <Control MinWidth="5" />
+                    <RichTextLabel Name="BountyRewardDescription" />
+                </BoxContainer>
+            </CollapsibleBody>
+        </Collapsible>
+    </BoxContainer>
+    <PanelContainer StyleClasses="SpyBountyClaimed" HorizontalExpand="True" VerticalExpand="True"
+                    Name="BlockedPanel" Visible="False">
+        <Label StyleClasses="SpyBountyClaimed" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Name="BlockedLabel" Text="{Loc 'spy-uplink-claimed'}" />
+    </PanelContainer>
+</Control>

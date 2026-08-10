@@ -346,7 +346,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        70: Dead # Goob - was 45
+        45: Dead
     - type: Stamina
       baseCritThreshold: 150
     - type: DamageStateVisuals
@@ -389,14 +389,14 @@
       animation: WeaponArcBite
       damage:
         types:
-          Piercing: 6
-          Poison: 4
+          Piercing: 5 # Trauma - Was 6
+          Poison: 2 # Trauma - Was 4
     - type: SolutionManager
       solutions:
       - SolutionVenomCobraSpace
     - type: MeleeChemicalInjector
       solution: melee
-      transferAmount: 6
+      transferAmount: 2 # Trauma - Was 6
     - type: ReplacementAccent
       accent: xeno
     - type: InteractionPopup
@@ -536,9 +536,9 @@
   name: snail
   description: Revolting unless you're french.
   components:
-  #<Trauma>
+  # <Trauma>
   - type: ZombieImmune
-  #</Trauma>
+  # </Trauma>
   - type: GhostRole
     prob: 0 # Trauma
     makeSentient: true

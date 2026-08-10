@@ -91,7 +91,7 @@ public sealed partial class LatheMenu : FancyWindow
             AmountLineEdit.SetText(latheComponent.DefaultProductionAmount.ToString());
         }
 
-        UpdateMiningPoints(); // Trauma
+        SetEntityTrauma(); // Trauma
     }
 
     /// <summary>

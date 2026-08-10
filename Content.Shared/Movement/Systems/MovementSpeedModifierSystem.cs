@@ -78,16 +78,13 @@ namespace Content.Shared.Movement.Systems
         }
 
         /// <summary>
-        /// This API method refreshes the movement modifiers for either being weightless, or being grounded depending
-        /// on which modifiers the entity is currently using.
+        /// This API method refreshes the movement modifiers for both being weightless and grounded.
         /// </summary>
-        /// <param name="ent">The entity we're refreshing modifiers for</param>
+        /// <param name="ent">The entity we're refreshing modifiers for.</param>
         public void RefreshMovementModifiers(Entity<MovementSpeedModifierComponent?> ent)
         {
-            if (_gravity.IsWeightless(ent.Owner))
-                RefreshWeightlessModifiers(ent);
-            else
-                RefreshMovementSpeedModifiers(ent);
+            RefreshWeightlessModifiers(ent);
+            RefreshMovementSpeedModifiers(ent);
         }
 
         /// <summary>
@@ -149,19 +146,17 @@ namespace Content.Shared.Movement.Systems
             var ev = new RefreshMovementSpeedModifiersEvent(isImmune);
             RaiseLocalEvent(ent, ev);
 
-            // replaced ev with evFirst, new ev is used after
-            var evFirst = new RefreshMovementSpeedModifiersEvent();
-            RaiseLocalEvent(ent, evFirst);
-            var ev2 = new BeforeMovespeedModifierAppliedEvent(evFirst.WalkSpeedModifier, evFirst.SprintSpeedModifier);
+            var ev2 = new BeforeMovespeedModifierAppliedEvent(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
             RaiseLocalEvent(ent, ref ev2);
-            // </Trauma>
 
-            if (MathHelper.CloseTo(ev.WalkSpeedModifier, ent.Comp.WalkSpeedModifier) &&
-                MathHelper.CloseTo(ev.SprintSpeedModifier, ent.Comp.SprintSpeedModifier))
+            // Changed below: ev -> ev2
+            if (MathHelper.CloseTo(ev2.WalkModifier, ent.Comp.WalkSpeedModifier) &&
+                MathHelper.CloseTo(ev2.SprintModifier, ent.Comp.SprintSpeedModifier))
                 return;
 
-            ent.Comp.WalkSpeedModifier = ev.WalkSpeedModifier;
-            ent.Comp.SprintSpeedModifier = ev.SprintSpeedModifier;
+            ent.Comp.WalkSpeedModifier = ev2.WalkModifier;
+            ent.Comp.SprintSpeedModifier = ev2.SprintModifier;
+            // <Trauma>
             Dirty(ent);
         }
 

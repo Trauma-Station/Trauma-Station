@@ -33,9 +33,10 @@
   description: Polymorphs you into a Spider.
   components:
   - type: Action
-    icon:
-      sprite: Mobs/Animals/spider.rsi
-      state: tarantula
+  - type: Sprite
+    sprite: Mobs/Animals/spider.rsi
+    layers:
+    - state: tarantula
   - type: InstantAction
     event: !type:PolymorphActionEvent
       protoId: WizardSpider
@@ -46,17 +47,8 @@
   name: Rod Form
   description: Take on the form of an immovable rod, destroying everything in your path.
   components:
-  - type: Action
-    useDelay: 25 # Goob edit
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
-      state: immrod # Goob edit
-  - type: InstantAction
-    event: !type:PolymorphSpellEvent # Goob edit
-      protoId: WizardRod
-  - type: SpeakOnAction
-    sentence: action-speech-spell-rod-form # Goobstation
-  - type: Magic # Goobstation
+  # <Trauma>
+  - type: Magic
     requiresClothes: true
     requiresSpeech: true
     school: Transmutation
@@ -66,7 +58,20 @@
       3: ActionPolymorphWizardRodIII
       4: ActionPolymorphWizardRodIV
       5: ActionPolymorphWizardRodV
-
+  - type: SpeakOnAction
+    sentence: action-speech-spell-rod-form
+  # </Trauma>
+  - type: Action
+    useDelay: 25 # Trauma
+  - type: Sprite
+    # <Trauma> - replaced icon
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: immrod
+    # </Trauma>
+  - type: InstantAction
+    event: !type:PolymorphSpellEvent # Goob edit
+      protoId: WizardRod
 
 - type: entity
   parent: BaseActionPolymorph
@@ -75,16 +80,16 @@
   description: Melt into the Ethereal Plane for a quick getaway!
   components:
   - type: Magic
-    requiresClothes: true # Goobstation
-    school: Translocation # Goobstation
-  - type: Sprite # Goobstation - for apprentices
-    sprite: _Goobstation/Wizard/actions.rsi
-    state: jaunt
+    # <Trauma>
+    requiresClothes: true
+    school: Translocation
+    # </Trauma>
   - type: Action
     useDelay: 30
-    icon:
-      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
-      state: jaunt
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi # Trauma
+    layers:
+    - state: jaunt
   - type: InstantAction
     event: !type:PolymorphSpellEvent # Goob edit
       protoId: Jaunt
@@ -101,7 +106,7 @@
   description: Melt into the Ethereal Plane for an even quicker getaway!
   components:
   - type: Action
-    useDelay: 20 # Trauma, was 22
+    useDelay: 20 # Trauma - was 25
 
 - type: entity
   parent: ActionPolymorphJaunt
@@ -110,4 +115,4 @@
   description: Are you even tangible anymore?
   components:
   - type: Action
-    useDelay: 10 # Trauma, was 14
+    useDelay: 10 # Trauma - was 20

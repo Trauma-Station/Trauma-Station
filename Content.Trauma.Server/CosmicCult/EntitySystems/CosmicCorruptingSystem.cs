@@ -16,8 +16,14 @@ namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 public sealed partial class CosmicCorruptingSystem : EntitySystem
 {
     [Dependency] private MapSystem _map = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private ITileDefinitionManager _tileMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TurfSystem _turfs = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
-    private readonly HashSet<Vector2i> _neighbourPositions =
+    private static readonly Vector2i[] NeighbourPositions =
     [
         new(-1, 1),
         new(0, 1),
@@ -27,33 +33,27 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
         new(1, 0),
         new(-1, -1),
         new(0, -1),
-        new(1, -1),
+        new(1, -1)
     ];
 
-    [Dependency] private IRobustRandom _rand = default!;
-    [Dependency] private TileSystem _tile = default!;
-    [Dependency] private ITileDefinitionManager _tileDefinition = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private TurfSystem _turfs = default!;
-    [Dependency] private TransformSystem _transform = default!;
-
-    /// <remarks>
-    ///     this system is a mostly generic way of replacing tiles around an entity. the only hardcoded behaviour is secret
-    ///     walls -> malign doors, but that shouldn't be too hard to fix if this is needed for smth else later.
-    /// </remarks>
-    public override void Initialize() => SubscribeLocalEvent<CosmicCorruptingComponent, MapInitEvent>(OnMapInit);
+    private HashSet<Vector2i> _adding = new();
 
     //when the entity spawns, add all neighbouring tiles to the corruptable list
-    private void OnMapInit(Entity<CosmicCorruptingComponent> ent, ref MapInitEvent args) => RecalculateStartingTiles(ent);
+    [SubscribeLocalEvent]
+    private void OnMapInit(Entity<CosmicCorruptingComponent> ent, ref MapInitEvent args)
+    {
+        RecalculateStartingTiles(ent);
+    }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var blanktimer = EntityQueryEnumerator<CosmicCorruptingComponent>();
-        while (blanktimer.MoveNext(out var uid, out var comp))
+
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<CosmicCorruptingComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
-            if (!comp.Enabled
-                || _timing.CurTime < comp.CorruptionTimer)
+            if (!comp.Enabled || now < comp.CorruptionTimer)
                 continue;
 
             comp.CorruptionTimer = _timing.CurTime + comp.CorruptionSpeed;
@@ -64,8 +64,8 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
                 comp.CorruptionChance -= comp.CorruptionReduction;
             }
 
-            if (comp.CorruptionTicks >= comp.CorruptionMaxTicks && comp.AutoDisable)
-                comp.Enabled = false; //maybe just remComp this? atm nothing re-enables a corruptor so that should be safe to do?
+            if (comp.CorruptionTicks >= comp.CorruptionMaxTicks)
+                RemComp(uid, comp);
         }
     }
 
@@ -75,7 +75,7 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
         if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var mapGrid))
             return;
 
-        var convertTile = (ContentTileDefinition) _tileDefinition[ent.Comp.ConversionTile];
+        var convertTile = (ContentTileDefinition) _tileMan[ent.Comp.ConversionTile];
 
         //if this is a mobile corruptor, reset the list of corruptable tiles every attempt.
         //not a super clean solution because I didn't account for the astral nova in the first rewrite but it works well enough for our purposes.
@@ -83,56 +83,56 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
             RecalculateStartingTiles(ent);
 
         //go over every corruptible tile
-        foreach (var pos in
-            new HashSet<Vector2i>(ent.Comp.CorruptableTiles)) //we love avoiding ConcurrentModificationExceptions
+        _adding.Clear();
+        ent.Comp.CorruptableTiles.RemoveWhere(pos =>
         {
             var tileRef = _map.GetTileRef((gridUid, mapGrid), pos);
             if (tileRef.Tile.TypeId == convertTile.TileId ||
                 tileRef.Tile.IsEmpty) //if it's already corrupted (or space), remove it from the list and continue
             {
-                ent.Comp.CorruptableTiles.Remove(pos);
-                continue;
+                return true;
             }
 
-            if (_rand.Prob(ent.Comp.CorruptionChance)) //if it rolls good
+            if (!_rand.Prob(ent.Comp.CorruptionChance))
+                return false;
+
+            //replace & variantise the tile
+            _tile.ReplaceTile(tileRef, convertTile);
+            _tile.PickVariant(convertTile);
+
+            //then add the new neighbours as targets as long as they're not already corrupted
+            foreach (var neighbourPos in NeighbourPositions)
             {
-                //replace & variantise the tile
-                _tile.ReplaceTile(tileRef, convertTile);
-                _tile.PickVariant(convertTile);
+                var neighbourRef = _map.GetTileRef((gridUid, mapGrid), tileRef.GridIndices + neighbourPos);
+                if (neighbourRef.Tile.TypeId == convertTile.TileId
+                    || tileRef.Tile.IsEmpty) //ignore already corrupted (or space) tiles
+                    continue;
 
-                //then add the new neighbours as targets as long as they're not already corrupted
-                foreach (var neighbourPos in _neighbourPositions)
-                {
-                    var neighbourRef = _map.GetTileRef((gridUid, mapGrid), tileRef.GridIndices + neighbourPos);
-                    if (neighbourRef.Tile.TypeId == convertTile.TileId
-                        || tileRef.Tile.IsEmpty) //ignore already corrupted (or space) tiles
-                        continue;
-
-                    ent.Comp.CorruptableTiles.Add(neighbourRef.GridIndices);
-                }
-
-                //corrupt anything that can be corrupted
-                foreach (var convertedEnt in _map.GetAnchoredEntities((gridUid, mapGrid), pos).ToList())
-                {
-                    var proto = Prototype(convertedEnt);
-                    if (ent.Comp.EntityConversionDict.TryGetValue(proto?.ID!, out var conversion))
-                    {
-                        ConvertEntity(convertedEnt, conversion);
-                    }
-                    else if (TryComp<CosmicCorruptibleComponent>(convertedEnt, out var corruptible)
-                    && corruptible.ConvertTo is { } result)
-                    {
-                        ConvertEntity(convertedEnt, result);
-                    }
-                }
-
-                //spawn the vfx if we should
-                if (ent.Comp.UseVFX)
-                    Spawn(ent.Comp.TileConvertVFX, _turfs.GetTileCenter(tileRef));
-
-                ent.Comp.CorruptableTiles.Remove(pos);
+                _adding.Add(neighbourRef.GridIndices);
             }
-        }
+
+            //corrupt anything that can be corrupted
+            foreach (var convertedEnt in _map.GetAnchoredEntities((gridUid, mapGrid), pos).ToList())
+            {
+                var proto = Prototype(convertedEnt);
+                if (ent.Comp.EntityConversionDict.TryGetValue(proto?.ID!, out var conversion))
+                {
+                    ConvertEntity(convertedEnt, conversion);
+                }
+                else if (TryComp<CosmicCorruptibleComponent>(convertedEnt, out var corruptible)
+                && corruptible.ConvertTo is { } result)
+                {
+                        ConvertEntity(convertedEnt, result);
+                }
+            }
+
+            //spawn the vfx if we should
+            if (ent.Comp.UseVFX)
+                Spawn(ent.Comp.TileConvertVFX, _turfs.GetTileCenter(tileRef));
+
+            return true;
+        });
+        ent.Comp.CorruptableTiles.UnionWith(_adding); // can't add them while iterating above
     }
 
     private void ConvertEntity(EntityUid convertedEnt, EntProtoId conversion)
@@ -169,9 +169,9 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
         var grid = (gridUid, mapGrid);
         var tile = _map.GetTileRef(grid, xform.Coordinates);
 
-        if (ent.Comp.FloodFillStarting) //todo make this async? it doesn't actually run that much though
+        if (ent.Comp.FloodFillStarting)
         {
-            var convertTile = (ContentTileDefinition) _tileDefinition[ent.Comp.ConversionTile];
+            var convertTile = (ContentTileDefinition)_tileMan[ent.Comp.ConversionTile];
             var visitedTiles = new HashSet<Vector2i>();
             var tilesToVisit = new HashSet<Vector2i> { tile.GridIndices };
 
@@ -184,7 +184,7 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
                 count++;
 
                 //check every neighbouring tile
-                foreach (var neighbourPos in _neighbourPositions)
+                foreach (var neighbourPos in NeighbourPositions)
                 {
                     var neighbourRef = _map.GetTileRef((gridUid, mapGrid), currtile + neighbourPos);
 
@@ -215,7 +215,7 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
         {
             //add every neighbouring tile to the corruptable list
             //don't bother checking eligibility at this point because it'll get done later anyway
-            foreach (var neighbourPos in _neighbourPositions)
+            foreach (var neighbourPos in NeighbourPositions)
             {
                 var neighbourRef = _map.GetTileRef((gridUid, mapGrid), tile.GridIndices + neighbourPos);
 

@@ -42,7 +42,7 @@ public sealed partial class VoiceMaskNameChangeWindow
 
     public void AddJobIcons()
     {
-        IconGrid.DisposeAllChildren();
+        IconGrid.RemoveAllChildren();
 
         for (var i = 0; i < _jobIcons.Count; i++)
         {

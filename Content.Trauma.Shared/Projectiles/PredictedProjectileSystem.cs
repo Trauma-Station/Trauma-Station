@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Weapons.Penetration;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Administration.Logs;
@@ -41,18 +40,13 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
     [Dependency] private SharedDestructibleSystem _destructible = default!;
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private SharedProjectileSystem _projectile = default!;
-
+    [Dependency] private EntityQuery<BeingExecutedComponent> _executedQuery = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
     [Dependency] private EntityQuery<ProjectileComponent> _query = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
     [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
     {
         // This is so entities that shouldn't get a collision are ignored.
@@ -60,6 +54,13 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             return;
 
         DoHit((uid, component, args.OurBody), args.OtherEntity, args.OtherFixture);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnTargetedProjectileHit(Entity<TargetedProjectileComponent> ent, ref BeforeProjectileHitEvent args)
+    {
+        if (TryGetEntity(ent.Comp.Target, out var t) && t == args.Target)
+            args.Damage.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
     }
 
     /// <summary>
@@ -111,17 +112,15 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         if (attemptEv.Cancelled)
         {
             _projectile.SetShooter(uid, comp, target);
-            _gun.SetTarget(uid, null, out _); // Goobstation
-            comp.IgnoredEntities.Clear(); // Goobstation
+            _gun.SetTarget(uid, null, out _);
+            comp.IgnoredEntities.Clear();
             return;
         }
 
         var shooter = comp.Shooter;
-        var dmg = comp.Damage * _damageable.UniversalProjectileDamageModifier;
-        if (TryComp(ent, out TargetedProjectileComponent? targeted) &&
-            TryGetEntity(targeted.Target, out var t) && t == target)
-            dmg.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
-
+        var damageEv = new BeforeProjectileHitEvent(comp.Damage, target, shooter);
+        RaiseLocalEvent(uid, ref damageEv);
+        var dmg = damageEv.Damage * _damageable.UniversalProjectileDamageModifier;
         var ev = new ProjectileHitEvent(dmg, target, shooter);
         RaiseLocalEvent(uid, ref ev);
 
@@ -130,21 +129,21 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
 
         var otherName = ToPrettyString(target);
         var damageRequired = _destructible.DestroyedAt(target);
-        if (TryComp<DamageableComponent>(target, out var damageable))
+        if (_damageQuery.TryComp(target, out var damageable))
         {
             damageRequired -= _damageable.GetTotalDamage((target, damageable));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 
         TargetBodyPart? targetPart = null;
-        if (TryComp<BeingExecutedComponent>(target, out var executed)) // TODO: make this better idk why its shooting groin and shit
+        if (_executedQuery.TryComp(target, out var executed))
             targetPart = executed.TargetPart;
-        var deleted = Deleted(target);
 
         var canMiss = executed == null; // if you are executing someone its PB, no missing
-        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly) && Exists(shooter))
+        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly)
+            && Exists(shooter))
         {
-            if (!deleted && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
+            if (!Deleted(target) && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
             {
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
             }
@@ -162,7 +161,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         else
             comp.ProjectileSpent = true;
 
-        if (!deleted)
+        if (!Deleted(target))
         {
             _gun.PlayImpactSound(target, damage, comp.SoundHit, comp.ForceSound);
 
@@ -190,9 +189,6 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         if (comp.Penetrate)
             return true;
 
-        if (damage.GetTotal() <= FixedPoint2.Zero)
-            return false;
-
         // <Goob> - Splits penetration change if target have PenetratableComponent
         if (TryComp<PenetratableComponent>(target, out var penetratable))
         {
@@ -206,6 +202,9 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             return true;
         }
         // </Goob>
+
+        if (damage.GetTotal() <= FixedPoint2.Zero)
+            return false;
 
         // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
         if (comp.PenetrationThreshold == 0)

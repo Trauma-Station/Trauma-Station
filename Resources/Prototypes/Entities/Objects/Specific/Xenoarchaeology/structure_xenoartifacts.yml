@@ -41,6 +41,15 @@
         - MachineMask
 
 - type: entity
+  id: DummyArtifactStructure
+  parent: BaseXenoArtifactStructure
+  name: artifact
+  suffix: Debug
+  components:
+  - type: XenoArtifact
+    isGenerationRequired: false
+
+- type: entity
   parent: BaseXenoArtifactStructure
   id: ComplexXenoArtifact
   components:

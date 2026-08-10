@@ -40,16 +40,6 @@
         children:
         - id: SkillChipMining
           amount: 3
-        - id: SkillChipStrength
-          amount: 3
-        - id: SkillChipToughness
-          amount: 3
-        - id: SkillChipMagicalDampener
-          amount: 2
-        - id: SkillChipCombatDampener
-          amount: 2
-        - id: SkillChipMindPurge
-          amount: 1
 
 - type: entity
   parent: BoxSkillChipsBase
@@ -92,21 +82,3 @@
         children:
         - id: SkillChipDatabase
           amount: 6
-
-- type: entity
-  parent: BoxSkillChipsBase
-  id: BoxSkillChipsSec
-  name: sec skillchips box
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: SkillChipToughness
-          amount: 3
-        - id: SkillChipStrength
-          amount: 3
-        - id: SkillChipStamina
-          amount: 3
-        - id: SkillChipThrowing
-          amount: 3

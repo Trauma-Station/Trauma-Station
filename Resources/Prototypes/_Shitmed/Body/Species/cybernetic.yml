@@ -38,7 +38,7 @@
   parent: OrganCybernetic
   id: OrganCyberneticInternal
   components:
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 15
     integrity: 15
     integrityThresholds:
@@ -176,7 +176,7 @@
   - type: Sprite
     layers:
     - state: eyes # combined
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 21
     integrity: 21
     integrityThresholds:
@@ -267,7 +267,7 @@
   name: cybernetic lungs
   description: Advanced synthetic lungs that breathe oxygen and nitrogen, ignore CO2, and resist most other atmospheric hazards.
   components:
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 25
     integrity: 25
     integrityThresholds:
@@ -286,7 +286,7 @@
     layers:
     - state: lung-u-l
     - state: lung-u-r
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 32
     integrity: 32
     integrityThresholds:

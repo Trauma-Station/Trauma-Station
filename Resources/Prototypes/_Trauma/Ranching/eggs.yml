@@ -178,7 +178,7 @@
   - type: ListenBlacklist
     blacklist:
       components:
-      - Advertise
+      - Vocalizer
   - type: Speech
     speechVerb: Robotic
   - type: EntityEffectOnEaten
@@ -213,7 +213,7 @@
   - type: ListenBlacklist
     blacklist:
       components:
-      - Advertise
+      - Vocalizer
   - type: Speech
     speechVerb: Robotic
   - type: Tag

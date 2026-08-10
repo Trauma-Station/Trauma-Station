@@ -1,4 +1,4 @@
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Overlays;
 using Content.Shared.StatusIcon.Components;
 
@@ -6,32 +6,21 @@ namespace Content.Client.Overlays;
 
 public sealed partial class ShowMindShieldIconsSystem : EquipmentHudSystem<ShowMindShieldIconsComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
+    [Dependency] private MindShieldSystem _mindShield = default!;
 
-        SubscribeLocalEvent<MindShieldComponent, GetStatusIconsEvent>(OnGetStatusIconsEvent);
-        SubscribeLocalEvent<FakeMindShieldComponent, GetStatusIconsEvent>(OnGetStatusIconsEventFake);
-    }
-    // TODO: Probably need to get this OFF of client since this can be read by bad actors rather easily
-    //  ...imagine cheating in a game about silly paper dolls
-    private void OnGetStatusIconsEventFake(EntityUid uid, FakeMindShieldComponent component, ref GetStatusIconsEvent ev)
+    [SubscribeLocalEvent]
+    private void OnGetStatusIconsEvent(Entity<StatusIconComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (!IsActive)
-            return;
-        if (component.IsEnabled && ProtoMan.Resolve(component.MindShieldStatusIcon, out var fakeStatusIconPrototype))
-            ev.StatusIcons.Add(fakeStatusIconPrototype);
-    }
-
-    private void OnGetStatusIconsEvent(EntityUid uid, MindShieldComponent component, ref GetStatusIconsEvent ev)
-    {
+        // Is active checks for our ability to display status icons
         if (!IsActive)
             return;
 
+        _mindShield.GetMindshieldStatus(ent.Owner, out _, out var isVisible,
         // <Trauma> - different icon when broken
-        var icon = component.Broken ? component.MindShieldBrokenStatusIcon : component.MindShieldStatusIcon;
-        if (ProtoMan.Resolve(icon, out var iconPrototype))
+            out var isBroken);
+        var icon = isBroken ? MindShieldSystem.BrokenStatusIcon : MindShieldSystem.StatusIcon;
+        if (isVisible && ProtoMan.Resolve(icon, out var statusIconPrototype))
         // </Trauma>
-            ev.StatusIcons.Add(iconPrototype);
+            args.StatusIcons.Add(statusIconPrototype);
     }
 }

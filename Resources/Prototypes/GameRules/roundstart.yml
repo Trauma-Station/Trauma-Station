@@ -28,13 +28,15 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
     # <Trauma>
+    #- id: Thief
+    #  prob: 0.5
     #- id: SubWizard # not real
     #  prob: 0.05
     #- id: SubXenoborgs # no
     #  prob: 0.05
+    - id: SubSpies
+      prob: 0.3
     - id: SubHeretic
       prob: 0.1
     - id: Devil
@@ -57,11 +59,13 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
     # <Trauma>
+    #- id: Thief
+    #  prob: 0.5
     #- id: SubXenoborgs
     #  prob: 0.05
+    - id: SubSpies
+      prob: 0.3
     - id: SubHeretic
       prob: 0.2
     - id: Devil
@@ -82,11 +86,13 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
     # <Trauma>
+    #- id: Thief
+    #  prob: 0.5
     #- id: SubWizard # not real
     #  prob: 0.05
+    - id: SubSpies
+      prob: 0.3
     - id: SubHeretic
       prob: 0.2
     - id: Devil
@@ -166,6 +172,9 @@
   parent: BaseGameRule
   id: BaseNukeopsRule
   components:
+  # <Trauma>
+  - type: NewAntagOrEvac
+  # </Trauma>
   - type: RandomMetadata #this generates the random operation name cuz it's cool.
     nameSegments:
     - NamesOperationPrefix
@@ -314,7 +323,11 @@
   id: Revolutionary
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
-  - type: MindshieldRemovingAntag # Trauma - puts fake mindshields into headrevs that start with a real one
+  # <Trauma>
+  - type: NewAntagOrEvac
+    event: SpawnERTSecurity
+  - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
+  # </Trauma>
   - type: GameRule
     minPlayers: 20 # Trauma - was 15
   - type: RevolutionaryRule

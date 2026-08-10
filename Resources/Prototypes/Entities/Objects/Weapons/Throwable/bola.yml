@@ -1,10 +1,16 @@
 - type: entity
-  name: bola
+  abstract: true
   parent: [BaseItem, BaseSecurityContraband]
   id: BaseBola
-  description: Linked together with some spare cuffs and metal.
-  abstract: true
+  name: bola
   components:
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: CombatDoAfter
+    trigger: !type:CombatDoAfterThrownEvent
+    delay: 1.5
+    dropCancelDelay: 0.005
+  # </Trauma>
   - type: Item
     size: Normal
   - type: Sprite
@@ -14,30 +20,6 @@
     sound: /Audio/Weapons/bolathrow.ogg
   - type: EmitSoundOnLand
     sound: /Audio/Effects/snap.ogg
-  - type: LandAtCursor
-  - type: Ensnaring
-    freeTime: 2.0
-    breakoutTime: 1 # Trauma, was 3.5
-    walkSpeed: 0.7 #makeshift bola shouldn't slow too much
-    sprintSpeed: 0.7
-    staminaDamage: 0
-    canThrowTrigger: true
-    canMoveBreakout: true
-    maxEnsnares: 1
-  - type: ThrowableBlocked
-  - type: CombatDoAfter
-    trigger: !type:CombatDoAfterThrownEvent
-    delay: 1.5
-    dropCancelDelay: 0.005
-
-- type: entity
-  name: bola
-  parent: BaseBola
-  id: Bola
-  components:
-  - type: Construction
-    graph: Bola
-    node: bola
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
@@ -56,12 +38,39 @@
     damage:
       types:
         Blunt: 5
+  - type: Ensnaring
+    freeTime: 2.0
+    breakoutTime: 1 # Trauma - was 3.5
+    walkSpeed: 0.5 #makeshift bola shouldn't slow too much
+    sprintSpeed: 0.5
+    staminaDamage: 0 # anything but this is gamebreaking
+    canThrowTrigger: true
+    canMoveBreakout: true
+    maxEnsnares: 1
+  - type: LandAtCursor
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.4
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+
+- type: entity
+  parent: BaseBola
+  id: Bola
+  name: makeshift bola
+  description: A makeshift bola, cobbled together with some spare cuffs and metal. It doesn't look like it's going to stay together for very long.
+  components:
+  # <Trauma>
   - type: ThrowableBlocked
     behavior: Damage
     damage:
       types:
         Blunt: 15
-  # <Trauma>
   - type: PhysicalComposition
     materialComposition:
       Steel: 300
@@ -69,3 +78,29 @@
     tags:
     - Trash
   # </Trauma>
+  - type: Construction
+    graph: Bola
+    node: bola
+
+- type: entity
+  parent: BaseBola
+  id: SecurityBola
+  name: tactical bola
+  description: A bola, comprised of steel anchors linked together with a wire cable. Reliable and reusable.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Throwable/securitybola.rsi
+    state: icon
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 0 #reusable, in contrast to makeshift
+  - type: Ensnaring
+    freeTime: 2.5 #slightly slower free time than makeshift
+    breakoutTime: 2 # Trauma - was 4, still slower than makeshift
+    walkSpeed: 0.5
+    sprintSpeed: 0.5
+    staminaDamage: 0 # anything but this is gamebreaking
+    canThrowTrigger: true
+    canMoveBreakout: true
+    maxEnsnares: 1
