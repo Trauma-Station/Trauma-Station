@@ -355,7 +355,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         if (!Resolve(rule, ref rule.Comp))
             return;
 
-        _ui.OpenUi(uplink, SpyUplinkUiKey.Key, user, true);
+        _ui.OpenUi(uplink, SpyUplinkUiKey.Key, user);
         RefreshUi(uplink);
     }
 
