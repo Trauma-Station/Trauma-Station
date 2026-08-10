@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
@@ -43,7 +42,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
         _selectedInfo.Visible = false;
         _selectedInfo.OnGainButtonPressed += () =>
         {
-            OnGainButtonPressed?.Invoke(_selectedInfo.Proto.ID);
+            OnGainButtonPressed?.Invoke(_selectedInfo.Proto!.ID);
         };
         InfluenceDetails.AddChild(_selectedInfo);
         SetupInfluences();
