@@ -65,3 +65,11 @@
   materials: # They do 5 damage
     Biomass: 14
     Plasma: 200
+    
+ - type: latheRecipe
+  parent: BaseCubeRecipe
+  id: MantisCube
+  result: MantisCube
+  materials:
+    Biomass: 32
+    Plasma: 500 
