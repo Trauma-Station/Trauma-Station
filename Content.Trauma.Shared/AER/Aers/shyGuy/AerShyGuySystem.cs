@@ -135,7 +135,7 @@ public sealed partial class AerShyGuySystem : EntitySystem
             // Loop over all shyguys. usually there should be only one shyguy since aers are supposed to be unique in a given round
             while (query.MoveNext(out var uid, out var comp))
             {
-                //remove killed entity 
+                //remove killed entity
                 if (comp.KillList.Contains(ent.Owner))
                     comp.KillList.Remove(ent.Owner);
             }

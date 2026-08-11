@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Server.Devil.Objectives.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Shared.Mind;
