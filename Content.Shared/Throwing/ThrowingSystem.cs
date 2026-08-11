@@ -272,7 +272,7 @@ public sealed partial class ThrowingSystem : EntitySystem
         // </Trauma>
 
         if (user == null)
-            return false;
+            return true;
 
         // <Trauma>
         recoil &= _gameTiming.IsFirstTimePredicted;
@@ -285,12 +285,12 @@ public sealed partial class ThrowingSystem : EntitySystem
         if (pushbackRatio == 0.0f ||
             physics.Mass == 0f ||
             !TryComp(user.Value, out PhysicsComponent? userPhysics))
-            return false;
+            return true;
         var msg = new ThrowPushbackAttemptEvent();
         RaiseLocalEvent(uid, msg);
 
         if (msg.Cancelled)
-            return false;
+            return true;
 
         var pushEv = new ThrowerImpulseEvent();
         RaiseLocalEvent(user.Value, ref pushEv);
