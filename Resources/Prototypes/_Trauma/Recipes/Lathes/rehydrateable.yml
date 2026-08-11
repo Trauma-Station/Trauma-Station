@@ -54,7 +54,7 @@
   id: HoloCarpCube
   result: HoloCarpCube
   materials:
-    Biomass: 5
+    Biomass: 15
     Plasma: 1000 # It is holographic after all
 
 - type: latheRecipe
