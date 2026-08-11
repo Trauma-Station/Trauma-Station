@@ -1,0 +1,12 @@
+﻿- type: latheRecipePack
+  id: TraumaHostileCubesStatic
+  recipes:
+  - ShrimpCube
+  - MantisShrimpCube
+  - SpiderCrabCube
+  - SnakeCube
+  - BearCube
+  - EelCube
+  - HoloCarpCube
+  - BrullbarCube
+  - MantisCube
