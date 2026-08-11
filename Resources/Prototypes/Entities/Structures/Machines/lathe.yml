@@ -460,9 +460,9 @@
     - HumanoidCubesStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - # <Trauma>
+    # <Trauma>
     - TraumaHostileCubesStatic
-    - # </Trauma>
+    # </Trauma>
     - HostileCubesStatic
 
 - type: entity
