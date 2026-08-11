@@ -1,0 +1,82 @@
+﻿- type: entity
+  parent: RehydratableAnimalCube
+  id: ShrimpCube
+  name: shrimp cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobShrimp
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: MantisShrimpCube
+  name: mantis shrimp cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobMantisShrimp
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: SpiderCrabCube
+  name: spider crab cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobSpiderCrabSea
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: SnakeCube
+  name: snake cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobCobraSpace
+    - MobYellowBellySnake
+    - MobKraitSea
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: BearCube
+  name: bear cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobBearSea
+    - MobBearSpace
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: EelCube
+  name: eel cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobEelSea
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: HoloCarpCube
+  name: holocarp cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobCarpHolo
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: BrullbarCube
+  name: brullbar cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobBrullbar

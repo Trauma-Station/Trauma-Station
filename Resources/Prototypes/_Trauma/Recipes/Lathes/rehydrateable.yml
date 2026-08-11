@@ -1,0 +1,65 @@
+﻿- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: ShrimpCube
+  result: ShrimpCube
+  completetime: 15
+  materials:
+    Biomass: 12
+    Plasma: 400
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: MantisShrimpCube
+  result: MantisShrimpCube
+  materials:
+    Biomass: 35
+    Plasma: 500
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: SpiderCrabCube
+  result: SpiderCrabCube
+  materials:
+    Biomass: 30
+    Plasma: 600
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: SnakeCube
+  result: SnakeCube
+  materials:
+    Biomass: 30
+    Plasma: 500
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: BearCube
+  result: BearCube
+  materials:
+    Biomass: 40
+    Plasma: 400
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: EelCube
+  result: EelCube
+  materials: # Very Lethal so very costly
+    Biomass: 35
+    Plasma: 900
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: HoloCarpCube
+  result: HoloCarpCube
+  materials:
+    Biomass: 5
+    Plasma: 1000 # It is holographic after all
+
+- type: latheRecipe
+  parent: BaseCubeRecipe
+  id: BrullbarCube
+  result: BrullbarCube
+  completetime: 15
+  materials: # They do 5 damage
+    Biomass: 14
+    Plasma: 200
