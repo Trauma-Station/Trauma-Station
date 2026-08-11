@@ -448,15 +448,15 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [Animal] # Applying damage to the mobs with lower metabolism capabilities
+          type: [ Animal, Arachnid ] # Applying damage to the mobs with lower metabolism capabilities
         damage:
           types:
             Poison: 0.4
       - !type:Vomit
         probability: 0.04 #Scaled for time, not metabolismrate.
         conditions:
-          - !type:MetabolizerTypeCondition
-            type: [Animal]
+        - !type:MetabolizerTypeCondition
+          type: [ Animal, Arachnid ]
 
 - type: reagent
   id: Amatoxin
@@ -536,7 +536,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Bloodsucker ] # Trauma - Plant
+          type: [ Animal, Vox, Arachnid, Plant, Bloodsucker ] # Trauma - Plant, Bloodsucker
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -546,7 +546,7 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Bloodsucker ] # Trauma, Bloodsucker
+          type: [ Animal, Vox, Plant, Arachnid, Bloodsucker ] # Trauma, Bloodsucker
           inverted: true
       - !type:InfectDisease
         probability: 0.05
@@ -566,7 +566,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Arachnid ]  # Trauma, Arachnid
+          type: [ Animal, Vox, Plant, Arachnid ]
           inverted: true
         damage:
           types:
@@ -581,7 +581,7 @@
       - !type:AdjustReagent
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Plant ] # Trauma - added Plant
+          type: [ Animal, Arachnid, Plant ] # Trauma - added Plant
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent
@@ -609,7 +609,7 @@
           reagent: Allicin
           min: 1
         - !type:MetabolizerTypeCondition
-          type: [Animal]
+          type: [ Animal ]
         damage:
           types:
             Poison: 0.06
@@ -662,7 +662,7 @@
           reagent: Honk
           min: 1
         - !type:MetabolizerTypeCondition
-          type: [ Animal ]
+          type: [ Animal, Arachnid ]
         damage:
           types:
             Poison: 0.06
