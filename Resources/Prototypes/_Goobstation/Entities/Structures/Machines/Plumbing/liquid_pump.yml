@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ConstructibleMachine, BaseMachinePowered ]
+  parent: [ ConstructibleMachine, BaseMachinePowered, BaseConstructibleMachineDestructible ]
   id: PlumbingPump
   name: liquid pump
   description: An electric pump that can transfer liquids between machines that have an automation upgrade installed.
