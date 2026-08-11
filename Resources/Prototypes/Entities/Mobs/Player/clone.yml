@@ -31,7 +31,6 @@
   - CreamPied
   # traits
   - BlackAndWhiteOverlay
-  - Clumsy
   - ImpairedMobility
   # - LegsParalyzed (you get healed)
   - BlackAndWhiteOverlay
@@ -45,7 +44,6 @@
   # job specific
   - BibleUser
   - CommandStaff
-  - Clumsy
   # - MindShield # goob edit - it's an implant. why?
   - MimePowers
   - SpaceNinja

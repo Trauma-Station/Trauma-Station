@@ -194,13 +194,9 @@
       293: 1.0
       280: 1.0
       260: 1.0
-  - type: Clumsy
-    clumsySound:
-      path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg
-    clumsyHypo: false
-    clumsyVaulting: false
-    clumsyDefib: false
-    gunFailedMessage: gun-clumsy-decapoid # The gun slips out of your claws!
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectClumsyDecapoid
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:

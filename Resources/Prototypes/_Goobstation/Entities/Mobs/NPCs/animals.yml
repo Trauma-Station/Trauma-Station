@@ -516,7 +516,9 @@
         reagents:
         - ReagentId: Laughter
           Quantity: 150
-    - type: Clumsy
+    - type: PermanentStatusEffects
+      statusEffects:
+      - StatusEffectClumsyClown
     - type: NoSlip
     - type: Tag
       tags:
