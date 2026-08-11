@@ -82,3 +82,13 @@
   - type: Rehydratable
     possibleSpawns:
     - MobBrullbar
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: MantisCube
+  name: mantis cube
+  description: Just add water! At your own risk.
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobMantis
