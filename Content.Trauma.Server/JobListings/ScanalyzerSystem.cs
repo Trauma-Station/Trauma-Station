@@ -20,13 +20,6 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
     [Dependency] private JobListingsSystem _jobs = default!;
     [Dependency] private TriggerSystem _trigger = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<StealConditionRequireScanComponent, ObjectiveGetProgressEvent>(OnGetProgress, after: [typeof(StealConditionSystem)]);
-        SubscribeLocalEvent<TriggerOnScanComponent, ScanalyzerScanFinishedEvent>(OnScan);
-    }
-
     /// <summary>
     /// Determines if the inputted mind has scanned the grand theft item.
     /// </summary>
@@ -47,7 +40,7 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
             archive.ScannedStealTargetGroups.Add(target);
     }
 
-    protected override void AfterScan(Entity<ScanalyzerComponent> entity, EntityUid user, ProtoId<StealTargetGroupPrototype> target)
+    protected override void AfterScan(Entity<ScanalyzerComponent> ent, EntityUid user, ProtoId<StealTargetGroupPrototype> target)
     {
         if (!_mind.TryGetMind(user, out var mind, out var mindComp))
             return;
@@ -55,17 +48,19 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
         _jobs.UpdateUis((mind, mindComp));
     }
 
-    private void OnGetProgress(Entity<StealConditionRequireScanComponent> entity, ref ObjectiveGetProgressEvent args)
+    [SubscribeLocalEvent]
+    private void OnGetProgress(Entity<StealConditionRequireScanComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0.0f;
-        if (!TryComp<StealConditionComponent>(entity.Owner, out var stealComp))
+        if (!TryComp<StealConditionComponent>(ent.Owner, out var stealComp))
             return;
         if (IsScanned((args.MindId, args.Mind), stealComp.StealGroup))
             args.Progress = 1.0f;
     }
 
-    private void OnScan(Entity<TriggerOnScanComponent> entity, ref ScanalyzerScanFinishedEvent args)
+    [SubscribeLocalEvent]
+    private void OnScan(Entity<TriggerOnScanComponent> ent, ref ScanalyzerScanFinishedEvent args)
     {
-        _trigger.Trigger(entity.Owner, args.User, entity.Comp.KeyOut, false);
+        _trigger.Trigger(ent.Owner, args.User, ent.Comp.KeyOut, false);
     }
 }

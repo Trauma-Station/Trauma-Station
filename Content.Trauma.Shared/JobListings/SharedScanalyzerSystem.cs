@@ -21,21 +21,12 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ScanalyzerComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<StealTargetComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<ScanalyzerComponent, ScanalyzerScanDoAfterEvent>(OnScan);
-        SubscribeLocalEvent<ScanalyzerRequiresPowerComponent, AttemptScanalyzerScanEvent>(OnAttemptScanWhenPowered);
-    }
-
     /// <summary>
     /// Starts the scanning do-after. Does not check if the scan should happen, use <see cref="CanScan"/> before calling this.
     /// </summary>
-    public void StartScan(Entity<ScanalyzerComponent> entity, EntityUid user, EntityUid target)
+    public void StartScan(Entity<ScanalyzerComponent> ent, EntityUid user, EntityUid target)
     {
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, entity.Comp.ScanDuration, new ScanalyzerScanDoAfterEvent(), entity.Owner, target, entity.Owner)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ent.Comp.ScanDuration, new ScanalyzerScanDoAfterEvent(), ent.Owner, target, ent.Owner)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -65,57 +56,51 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
 
     }
 
-    private void OnInteractUsing(Entity<StealTargetComponent> entity, ref InteractUsingEvent args)
+    [SubscribeLocalEvent]
+    private void OnInteractUsing(Entity<StealTargetComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
         if (!TryComp<ScanalyzerComponent>(args.Used, out var scanalyzer))
             return;
-        if (!CanScan((args.Used, scanalyzer), entity))
+        if (!CanScan((args.Used, scanalyzer), ent))
+            return;
+        if (HasComp<ScanalyzerRequiresPowerComponent>(ent.Owner) && !_power.IsPowered(ent.Owner))
             return;
 
-        var ev = new AttemptScanalyzerScanEvent(entity.Owner, args.User);
-        RaiseLocalEvent(args.Used, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        StartScan((args.Used, scanalyzer), args.User, entity.Owner);
+        StartScan((args.Used, scanalyzer), args.User, ent.Owner);
         args.Handled = true;
     }
 
-    private void OnScan(Entity<ScanalyzerComponent> entity, ref ScanalyzerScanDoAfterEvent args)
+    [SubscribeLocalEvent]
+    private void OnScan(Entity<ScanalyzerComponent> ent, ref ScanalyzerScanDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target is null)
             return;
         if (!TryComp<StealTargetComponent>(args.Target, out var steal))
             return;
-        if (!CanScan(entity, (args.Target.Value, steal)))
+        if (!CanScan(ent, (args.Target.Value, steal)))
             return;
 
-        entity.Comp.Used = true;
-        Dirty(entity);
+        ent.Comp.Used = true;
+        Dirty(ent);
         _popup.PopupClient(Loc.GetString("scanalyzer-popup-used"), args.User, PopupType.Medium);
 
-        AfterScan(entity, args.User, steal.StealGroup);
+        AfterScan(ent, args.User, steal.StealGroup);
         var ev = new ScanalyzerScanFinishedEvent(args.Target.Value, args.User);
-        RaiseLocalEvent(entity, ref ev);
+        RaiseLocalEvent(ent, ref ev);
         args.Handled = true;
     }
 
-    private void OnExamined(Entity<ScanalyzerComponent> entity, ref ExaminedEvent args)
+    [SubscribeLocalEvent]
+    private void OnExamined(Entity<ScanalyzerComponent> ent, ref ExaminedEvent args)
     {
-        if (!_proto.Resolve(entity.Comp.StealTarget, out var target))
+        if (!_proto.Resolve(ent.Comp.StealTarget, out var target))
             return;
         args.PushMarkup(Loc.GetString("scanalyzer-examine-steal-target", ("target", Loc.GetString(target.Name))));
-        args.PushMarkup(entity.Comp.Used
+        args.PushMarkup(ent.Comp.Used
             ? Loc.GetString("scanalyzer-examine-used")
             : Loc.GetString("scanalyzer-examine-not-used"));
-    }
-
-    private void OnAttemptScanWhenPowered(Entity<ScanalyzerRequiresPowerComponent> entity, ref AttemptScanalyzerScanEvent args)
-    {
-        if (!_power.IsPowered(args.Target))
-            args.Cancelled = true;
     }
 }
 
@@ -124,12 +109,6 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class ScanalyzerScanDoAfterEvent : SimpleDoAfterEvent;
-
-/// <summary>
-/// Raised on the scanalyzer entity before it tries to do a scan.
-/// </summary>
-[ByRefEvent]
-public record struct AttemptScanalyzerScanEvent(EntityUid Target, EntityUid User, bool Cancelled = false);
 
 /// <summary>
 /// Raised on the scanalyzer entity once a scan has finished.

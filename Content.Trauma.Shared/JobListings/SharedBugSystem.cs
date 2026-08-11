@@ -12,27 +12,14 @@ namespace Content.Trauma.Shared.JobListings;
 /// </summary>
 public abstract partial class SharedBugSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager _proto = default!;
-    [Dependency] protected AreaSystem _area =  default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BugComponent, ExaminedEvent>(OnExamine);
-    }
+    [Dependency] protected AreaSystem Area = default!;
 
     /// <summmary>
     /// Works out if the bug is in the correct area.
     /// </summary>
-    public bool IsInCorrectArea(Entity<BugComponent> entity)
+    public bool IsInCorrectArea(Entity<BugComponent> ent)
     {
-        var area = _area.GetArea(entity.Owner);
-        if (area is null)
-            return false;
-        var prototype = MetaData(area.Value).EntityPrototype;
-        if (prototype is null)
-            return false;
-        return prototype.ID == entity.Comp.TargetArea;
+        return Area.GetAreaPrototype(ent.Owner) == ent.Comp.TargetArea;
     }
 
     /// <summmary>
@@ -41,23 +28,21 @@ public abstract partial class SharedBugSystem : EntitySystem
     protected bool GetAreaName(EntProtoId area, [NotNullWhen(true)] out string? name)
     {
         name = null;
-        if (!_proto.Resolve(area, out var prototype))
+        if (!ProtoMan.Resolve(area, out var prototype))
             return false;
 
         name = prototype.Name;
         return true;
     }
 
-    private void OnExamine(Entity<BugComponent> entity, ref ExaminedEvent args)
+    [SubscribeLocalEvent]
+    private void OnExamine(Entity<BugComponent> ent, ref ExaminedEvent args)
     {
-        if (!GetAreaName(entity.Comp.TargetArea, out var name))
-            return;
+        args.PushMarkup(Loc.GetString("bug-examine-target-area", ("target-area", ProtoMan.Index(ent.Comp.TargetArea).Name)));
 
-        args.PushMarkup(Loc.GetString("bug-examine-target-area", ("target-area", name)));
-
-        if (Transform(entity.Owner).Anchored)
+        if (Transform(ent.Owner).Anchored)
         {
-            args.PushMarkup(Loc.GetString(IsInCorrectArea(entity) ? "bug-examine-correct-area" : "bug-examine-incorrect-area"));
+            args.PushMarkup(Loc.GetString(IsInCorrectArea(ent) ? "bug-examine-correct-area" : "bug-examine-incorrect-area"));
         }
     }
 }

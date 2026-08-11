@@ -18,14 +18,6 @@ public sealed partial class BugSystem : SharedBugSystem
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BugAreaConditionComponent, ObjectiveAssignedEvent>(OnAssigned);
-        SubscribeLocalEvent<BugAreaConditionComponent, ObjectiveGetProgressEvent>(OnGetObjectiveProgress);
-        SubscribeLocalEvent<BugComponent, UserAnchoredEvent>(OnWrench);
-    }
-
     /// <summary>
     /// Register an area as bugged.
     /// </summary>
@@ -46,16 +38,17 @@ public sealed partial class BugSystem : SharedBugSystem
         return archive.BuggedAreas.Contains(area);
     }
 
-    private void OnAssigned(Entity<BugAreaConditionComponent> entity, ref ObjectiveAssignedEvent args)
+    private void OnAssigned(Entity<BugAreaConditionComponent> ent, ref ObjectiveAssignedEvent args)
     {
-        if (!GetAreaName(entity.Comp.TargetArea, out var name))
+        if (!GetAreaName(ent.Comp.TargetArea, out var name))
             return;
 
-        _metaData.SetEntityName(entity.Owner, Loc.GetString("bug-objective-name", ("area", name)));
-        _metaData.SetEntityDescription(entity.Owner, Loc.GetString("bug-objective-description", ("area", name)));
-        _objectives.SetIcon(entity.Owner, new SpriteSpecifier.EntityPrototype(entity.Comp.IconEntity));
+        _metaData.SetEntityName(ent.Owner, Loc.GetString("bug-objective-name", ("area", name)));
+        _metaData.SetEntityDescription(ent.Owner, Loc.GetString("bug-objective-description", ("area", name)));
+        _objectives.SetIcon(ent.Owner, new SpriteSpecifier.EntityPrototype(ent.Comp.IconEntity));
     }
 
+    [SubscribeLocalEvent]
     private void OnGetObjectiveProgress(Entity<BugAreaConditionComponent> entity, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0f;
@@ -63,6 +56,7 @@ public sealed partial class BugSystem : SharedBugSystem
             args.Progress = 1f;
     }
 
+    [SubscribeLocalEvent]
     private void OnWrench(Entity<BugComponent> entity, ref UserAnchoredEvent args)
     {
         if (!Transform(entity.Owner).Anchored || !IsInCorrectArea(entity))

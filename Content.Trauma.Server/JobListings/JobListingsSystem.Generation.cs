@@ -10,15 +10,11 @@ namespace Content.Trauma.Server.JobListings;
 /// </summary>
 public sealed partial class JobListingsSystem
 {
-    private void InitializeReward()
-    {
-        SubscribeLocalEvent<GenerateSideJobRewardComponent, SideJobCreatedEvent>(OnCreatedWithReward);
-        SubscribeLocalEvent<LevelRestrictedSideJobComponent, SideJobCreatedEvent>(OnCreatedWithLevelRestriction);
-    }
 
+    [SubscribeLocalEvent]
     private void OnCreatedWithReward(Entity<GenerateSideJobRewardComponent> ent, ref SideJobCreatedEvent args)
     {
-        if (!_proto.Resolve(ent.Comp.RewardTable, out var table))
+        if (!ProtoMan.Resolve(ent.Comp.RewardTable, out var table))
         {
             args.Cancelled = true;
             return;
@@ -34,6 +30,7 @@ public sealed partial class JobListingsSystem
         sideJobComp.Reward = reward.Value;
     }
 
+    [SubscribeLocalEvent]
     private void OnCreatedWithLevelRestriction(Entity<LevelRestrictedSideJobComponent> ent, ref SideJobCreatedEvent args)
     {
         if (args.EffectiveLevel != ent.Comp.Level)

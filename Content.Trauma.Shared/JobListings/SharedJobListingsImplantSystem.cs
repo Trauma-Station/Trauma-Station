@@ -12,22 +12,17 @@ public abstract partial class SharedJobListingsImplantSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnImplantImplanted(Entity<JobListingsImplantComponent> ent, ref ImplantImplantedEvent args)
     {
-        base.Initialize();
-        SubscribeLocalEvent<JobListingsImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
-        SubscribeLocalEvent<JobListingsImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
+        ent.Comp.StoredAction = _actions.AddAction(args.Implanted, ent.Comp.Action, ent.Owner);
     }
 
-    private void OnImplantImplanted(Entity<JobListingsImplantComponent> entity, ref ImplantImplantedEvent args)
+    [SubscribeLocalEvent]
+    private void OnImplantRemoved(Entity<JobListingsImplantComponent> ent, ref ImplantRemovedEvent args)
     {
-        entity.Comp.StoredAction = _actions.AddAction(args.Implanted, entity.Comp.Action, entity.Owner);
-    }
-
-    private void OnImplantRemoved(Entity<JobListingsImplantComponent> entity, ref ImplantRemovedEvent args)
-    {
-        if (entity.Comp.StoredAction is not null)
-            _actions.RemoveAction(entity.Comp.StoredAction);
+        if (ent.Comp.StoredAction is not null)
+            _actions.RemoveAction(ent.Comp.StoredAction);
     }
 }
 

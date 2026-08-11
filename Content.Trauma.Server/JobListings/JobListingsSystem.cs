@@ -1,27 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Content.Server.Database.Migrations.Postgres;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.PDA;
-using Content.Server.StoreDiscount.Systems;
 using Content.Shared.EntityTable;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.PDA;
-using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Store;
-using Content.Shared.Store.Components;
 using Content.Trauma.Common.JobListings;
 using Content.Trauma.Common.Traitor;
-using Robust.Server.Containers;
 using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.JobListings;
@@ -32,7 +23,6 @@ namespace Content.Trauma.Server.JobListings;
 public sealed partial class JobListingsSystem : EntitySystem
 {
     [Dependency] private ObjectivesSystem _objectives = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PdaSystem _pda = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
@@ -40,21 +30,6 @@ public sealed partial class JobListingsSystem : EntitySystem
     [Dependency] private EntityTableSystem _table = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<UplinkAssignedEvent>(OnUplinkAssigned);
-        SubscribeLocalEvent<UplinkLinkedEvent>(OnUplinkLinked);
-        SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
-        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
-        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsClaimJobMessage>(OnMessage);
-        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsCancelJobMessage>(OnMessage);
-        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsRefreshMessage>(OnMessage);
-
-        InitializeReward();
-        InitializeRoundEnd();
-    }
 
     /// <summary>
     /// Similar to the method on the ObjectivesSystem but with extra info for side jobs.
@@ -68,7 +43,7 @@ public sealed partial class JobListingsSystem : EntitySystem
             return null;
         if (sideJobComp.Reward is null)
             return null;
-        if (!_proto.Resolve(sideJobComp.Reward.Value, out var rewardProto))
+        if (!ProtoMan.Resolve(sideJobComp.Reward.Value, out var rewardProto))
             return null;
 
         var name = Loc.GetString($"job-listings-ui-reward-name-{rewardProto.ID}");
@@ -436,6 +411,7 @@ public sealed partial class JobListingsSystem : EntitySystem
             jobBoard.Comp.BonusRefresh = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
         if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
@@ -452,6 +428,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         SetRefreshTime((args.Uplink, jobListingsComp));
     }
 
+    [SubscribeLocalEvent]
     private void OnUplinkLinked(ref UplinkLinkedEvent args)
     {
         if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
@@ -460,11 +437,13 @@ public sealed partial class JobListingsSystem : EntitySystem
         Link((args.Uplink, jobListingsComp), args.Host);
     }
 
+    [SubscribeLocalEvent]
     private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
     {
         OpenUi(pda, msg.Actor);
     }
 
+    [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))
@@ -473,6 +452,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         UpdateUi(owner.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))
@@ -481,6 +461,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         UpdateUi(owner.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))
@@ -489,6 +470,7 @@ public sealed partial class JobListingsSystem : EntitySystem
         UpdateUi(owner.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))

@@ -6,7 +6,4 @@ using Content.Trauma.Shared.JobListings;
 namespace Content.Trauma.Client.JobListings;
 
 /// <inheritdoc/>
-public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
-{
-
-}
+public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem;

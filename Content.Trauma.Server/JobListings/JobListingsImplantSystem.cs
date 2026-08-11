@@ -8,17 +8,12 @@ public sealed partial class JobListingsImplantSystem : SharedJobListingsImplantS
 {
     [Dependency] private JobListingsSystem _job = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<JobListingsImplantComponent, OpenJobListingsImplantEvent>(OnImplantUsed);
-    }
-
-    private void OnImplantUsed(Entity<JobListingsImplantComponent> entity, ref OpenJobListingsImplantEvent args)
+    [SubscribeLocalEvent]
+    private void OnImplantUsed(Entity<JobListingsImplantComponent> ent, ref OpenJobListingsImplantEvent args)
     {
         if (args.Handled)
             return;
-        _job.OpenUi(entity.Owner, args.Performer);
+        _job.OpenUi(ent.Owner, args.Performer);
         args.Handled = true;
     }
 }

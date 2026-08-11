@@ -5,7 +5,4 @@ using Content.Trauma.Shared.JobListings;
 namespace Content.Trauma.Client.JobListings;
 
 /// <inheritdoc/>
-public sealed partial class BugSystem : SharedBugSystem
-{
-
-}
+public sealed partial class BugSystem : SharedBugSystem;

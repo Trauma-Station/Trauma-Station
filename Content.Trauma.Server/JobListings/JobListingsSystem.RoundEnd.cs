@@ -14,14 +14,12 @@ namespace Content.Trauma.Server.JobListings;
 /// </summary>
 public sealed partial class JobListingsSystem
 {
-    private void InitializeRoundEnd()
-    {
-        SubscribeLocalEvent<RoundEndJobListingsInfoComponent, ObjectivesTextPrependEvent>(OnPrependObjectives);
-    }
+    private readonly StringBuilder _sb = new StringBuilder();
 
+    [SubscribeLocalEvent]
     private void OnPrependObjectives(Entity<RoundEndJobListingsInfoComponent> ent, ref ObjectivesTextPrependEvent args)
     {
-        var sb = new StringBuilder();
+        _sb.Clear();
 
         var query = EntityQueryEnumerator<JobListingsComponent>();
         while (query.MoveNext(out var uid, out var jobBoard))
@@ -35,9 +33,9 @@ public sealed partial class JobListingsSystem
             var name = _objectives.GetTitle((jobBoard.Mind.Value, mindComp), Name(mindComp.OwnedEntity ?? jobBoard.Mind.Value));
             var level = GetReputationLevel((uid, jobBoard));
             var title = Loc.GetString($"job-listings-ui-reputation-level-{level}");
-            sb.AppendLine(Loc.GetString("job-listings-round-end", ("name", name), ("count", jobBoard.JobsCompleted), ("reputation", jobBoard.Reputation), ("title", title)));
+            _sb.AppendLine(Loc.GetString("job-listings-round-end", ("name", name), ("count", jobBoard.JobsCompleted), ("reputation", jobBoard.Reputation), ("title", title)));
         }
 
-        args.Text = sb.ToString();
+        args.Text = _sb.ToString();
     }
 }
