@@ -8,7 +8,8 @@
     slots: []
   - type: Boneless
   - type: Destructible
-    thresholds: []
+    enabled: false
+    generateOverkillThreshold: false
 
 - type: entity
   parent:

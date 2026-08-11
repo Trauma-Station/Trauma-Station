@@ -116,22 +116,41 @@ public abstract partial class SharedFultonSystem : EntitySystem
             if (!_foldable.IsFolded(args.Target.Value))
             {
                 component.Beacon = args.Target.Value;
+                component.HasBeacon = true; // Trauma
                 Audio.PlayPredicted(beacon.LinkSound, uid, args.User);
                 _popup.PopupEntity(Loc.GetString("fulton-linked"), uid, args.User);
             }
             else
             {
                 component.Beacon = EntityUid.Invalid;
+                component.HasBeacon = false; // Trauma
                 _popup.PopupEntity(Loc.GetString("fulton-folded"), uid, args.User);
             }
+            Dirty(uid, component); // Trauma - wtf is networking
 
             return;
         }
 
+        // <Trauma>
+        if (!component.AttachOnInteract)
+            return;
+        // </Trauma>
+
         if (Deleted(component.Beacon))
         {
-            _popup.PopupEntity(Loc.GetString("fulton-not-found"), uid, args.User);
-            return;
+            // <Trauma> - predict it properly with HasBeacon, very rarely will the beacon actually be deleted so mispredicting that once is fine
+            if (_net.IsServer || !component.HasBeacon)
+            {
+                if (component.HasBeacon)
+                {
+                    // no more mispredicts now
+                    component.HasBeacon = false;
+                    Dirty(uid, component);
+                }
+                _popup.PopupEntity(Loc.GetString("fulton-not-found"), uid, args.User);
+                return;
+            }
+            // </Trauma>
         }
 
         if (!CanApplyFulton(args.Target.Value, component))
@@ -163,15 +182,16 @@ public abstract partial class SharedFultonSystem : EntitySystem
     {
         var newFulton = EnsureComp<FultonComponent>(args.NewId);
         newFulton.Beacon = component.Beacon;
+        newFulton.HasBeacon = component.HasBeacon; // Trauma
         Dirty(args.NewId, newFulton);
     }
 
-    protected virtual void UpdateAppearance(EntityUid uid, FultonedComponent fultoned)
+    public virtual void UpdateAppearance(EntityUid uid, FultonedComponent fultoned) // Trauma - made public
     {
         return;
     }
 
-    protected bool CanApplyFulton(EntityUid targetUid, FultonComponent component)
+    public bool CanApplyFulton(EntityUid targetUid, FultonComponent component) // Trauma - made public
     {
         if (!CanFulton(targetUid))
             return false;

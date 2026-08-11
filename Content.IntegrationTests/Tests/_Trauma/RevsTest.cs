@@ -22,7 +22,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// <summary>
 /// Makes sure revolutionary conversion works.
 /// </summary>
-[TestFixture]
+[Category("GameRuleTests")]
 public sealed class RevsTest : InteractionTest
 {
     public static readonly EntProtoId Urist = "MobHuman";

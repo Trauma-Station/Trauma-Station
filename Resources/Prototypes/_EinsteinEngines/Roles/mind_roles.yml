@@ -9,6 +9,7 @@
     antagPrototype: Shadowling
     exclusiveAntag: true
     roleType: TeamAntagonist
+    subtype: roles-antag-shadowling-name
   - type: ShadowlingRole
 
 - type: entity
@@ -18,3 +19,4 @@
   components:
   - type: MindRole
     antagPrototype: Thrall
+    subtype: roles-antag-thrall-name

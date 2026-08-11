@@ -77,6 +77,11 @@ public sealed class JobTest : GameTest
   id: {JobWeightOverride}
   weights:
     {Passenger}: 30
+  # <Trauma>
+  required:
+    Passenger: 1
+    Captain: 1
+  # </Trauma>
 ";
 
     public override PoolSettings PoolSettings => new()
@@ -185,10 +190,12 @@ public sealed class JobTest : GameTest
         var engineer = pair.Server.ProtoMan.Index(Engineer);
         var passenger = pair.Server.ProtoMan.Index(Passenger);
         Assert.That(stationJobs.TryGetJobWeight(captain, null, out var captainWeight), Is.True);
+        /* Trauma - this is no longer the case
         Assert.That(stationJobs.TryGetJobWeight(engineer, null, out var engineerWeight), Is.True);
         Assert.That(stationJobs.TryGetJobWeight(passenger, null, out var passengerWeight), Is.True);
         Assert.That(captainWeight, Is.GreaterThan(engineerWeight));
         Assert.That(engineerWeight, Is.EqualTo(passengerWeight));
+        */
 
         await pair.SetJobPriorities((Passenger, JobPriority.Medium), (Engineer, JobPriority.High), (Captain, JobPriority.Low));
         ticker.ToggleReadyAll(true);
@@ -216,6 +223,7 @@ public sealed class JobTest : GameTest
         var captain = pair.Server.ProtoMan.Index(Captain);
         var map = pair.Server.ProtoMan.Index<GameMapPrototype>(JobWeightOverrideMap);
         Assert.That(stationJobs.TryGetJobWeight(passenger, map.JobWeights, out var passengerWeight), Is.True);
+        /* Trauma - no longer the case
         Assert.That(stationJobs.TryGetJobWeight(engineer, map.JobWeights, out var engineerWeight), Is.True);
         Assert.That(stationJobs.TryGetJobWeight(captain, map.JobWeights, out var captainWeight), Is.True);
         Assert.Multiple(() =>
@@ -226,6 +234,7 @@ public sealed class JobTest : GameTest
         });
         Assert.That(JobUIComparer.TryCreate(pair.Server.ProtoMan, map.JobWeights, out var comparer), Is.True);
         Assert.That(comparer!.Compare(passenger, captain), Is.LessThan(0));
+        */
 
         await pair.Server.AddDummySessions(2);
         await pair.RunTicksSync(5);

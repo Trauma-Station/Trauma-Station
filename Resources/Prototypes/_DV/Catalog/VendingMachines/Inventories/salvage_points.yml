@@ -66,6 +66,8 @@
     cost: 1000
   - id: WeaponCrusherDagger
     cost: 1050
+  - id: WeaponLauncherFulton
+    cost: 1100
   - id: AdvancedMineralScanner
     cost: 1100
   - id: PKAUpgradeDamage

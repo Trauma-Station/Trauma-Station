@@ -52,8 +52,8 @@
     node: finish
   - type: ItemSlotHeater
     slot: ItemCabinet
-    temp: -250000
-    maxTemp: 100
+    heatChange: -250000
+    maxTemp: 313 # warm but relatively frozen
   - type: ContainerContainer
     containers:
       ItemCabinet: !type:ContainerSlot
