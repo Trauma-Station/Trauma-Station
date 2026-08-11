@@ -6,6 +6,7 @@ using Content.Trauma.Server.Antag;
 using Content.Trauma.Shared.Antag;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Robust.Server.Player;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -18,6 +19,7 @@ public sealed class CosmicCultTest : InteractionTest
     protected override string PlayerPrototype => Urist;
 
     [SidedDependency(Side.Server)] private AntagVerbSystem _smite = default!;
+    [SidedDependency(Side.Server)] private IPlayerManager _player = default!;
     [SidedDependency(Side.Server)] private SharedActionsSystem _actions = default!;
     [SidedDependency(Side.Server)] private SharedUserInterfaceSystem _ui = default!;
 
@@ -30,12 +32,11 @@ public sealed class CosmicCultTest : InteractionTest
     {
         await Server.WaitPost(() =>
         {
-            Assert.That(ClientSession.AttachedEntity, Is.EqualTo(SPlayer),
-                $"Dirty player was {SEntMan.ToPrettyString(ClientSession.AttachedEntity)} instead of {SEntMan.ToPrettyString(SPlayer)}");
+            // what is this dogshit lack of cleanup
+            _player.SetAttachedEntity(ClientSession, SPlayer);
             _smite.MakeAntag(ClientSession, Smite);
         });
 
-        Assert.That(SEntMan.EntityExists(ClientSession.AttachedEntity));
         var cultist = SComp<CosmicCultComponent>(SPlayer);
         Assert.That(cultist.ShopActionEntity, Is.Not.Null);
 
