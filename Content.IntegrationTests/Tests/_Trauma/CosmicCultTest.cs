@@ -30,8 +30,6 @@ public sealed class CosmicCultTest : InteractionTest
     {
         await Server.WaitPost(() =>
         {
-            // what is this dogshit lack of cleanup
-            _player.SetAttachedEntity(ServerSession, SPlayer);
             _smite.MakeAntag(ServerSession, Smite);
         });
 
