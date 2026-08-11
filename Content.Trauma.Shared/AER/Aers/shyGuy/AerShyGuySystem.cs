@@ -2,7 +2,6 @@
 
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Shared.AER;
 using Robust.Shared.Timing;
 using Content.Shared.Humanoid;
@@ -14,8 +13,9 @@ using Content.Shared.Eye.Blinding.Components;
 using Content.Trauma.Shared.Viewcone.Components;
 using Content.Trauma.Shared.Viewcone;
 using Content.Shared.Ghost.Components;
+using Content.Shared.Mobs;
 
-namespace Content.Trauma.Server.AER;
+namespace Content.Trauma.Shared.AER;
 
 /// <summary>
 /// system for Aer-169, lets them summon a restricted devil contract
@@ -26,7 +26,6 @@ public sealed partial class AerShyGuySystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -41,11 +40,6 @@ public sealed partial class AerShyGuySystem : EntitySystem
         // Get the current server time.
         var curTime = _timing.CurTime;
 
-        // Find all entities with the AnnoyingSoundComponent
-        // and turn them into an enumerator so we can loop over them.
-        // Note that EntityQueryEnumerator ignores paused entities,
-        // for example those that are currently located in nullspace.
-        // This means paused entities don't get updated.
         var query = EntityQueryEnumerator<AerShyGuyComponent>();
 
         // Loop over all shyguys. usually there should be only one shyguy since aers are supposed to be unique in a given round
@@ -74,7 +68,10 @@ public sealed partial class AerShyGuySystem : EntitySystem
             //plays the debug scream on shy guy position
             //maybe having moderate popup message spam on shyguy could be good
             if (beholders.Count() > 0)
+            {
                 _audio.PlayPredicted(comp.Scream, uid, uid);
+                _popup.PopupEntity("THEY SAW", ent.Owner, ent.Owner, PopupType.SmallCaution);
+            }
 
             // Now we update set the next update time.
             comp.NextCheck += comp.UpdateCooldown;
@@ -126,5 +123,22 @@ public sealed partial class AerShyGuySystem : EntitySystem
     private void OnMapInit(Entity<AerShyGuyComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextCheck = _timing.CurTime + ent.Comp.UpdateCooldown;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnTargetDeath(Entity<HumanoidProfileComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (_mobState.IsDead(ent))
+        {
+            var query = EntityQueryEnumerator<AerShyGuyComponent>();
+
+            // Loop over all shyguys. usually there should be only one shyguy since aers are supposed to be unique in a given round
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                //remove killed entity 
+                if (comp.KillList.Contains(ent.Owner))
+                    comp.KillList.Remove(ent.Owner);
+            }
+        }
     }
 }

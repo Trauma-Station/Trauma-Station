@@ -6,6 +6,8 @@ namespace Content.Trauma.Shared.Viewcone;
 
 public sealed partial class SharedVisionSystem : EntitySystem
 {
+    [Dependency] private ViewconeAngleSystem _viewconeAngle = default!;
+
     /// <summary>
     /// calculates the input viewcone on eye position in order to check if the pos point is inside the cone it
     /// </summary>
@@ -17,8 +19,9 @@ public sealed partial class SharedVisionSystem : EntitySystem
         if (dist.LengthSquared() < r2)
             return true; // within cone ignore radius so always visible regardless of angle
 
-        var eyeRot = ent.Comp.ViewAngle;
-        var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
-        return angleDist < MathHelper.DegreesToRadians(ent.Comp.CurrentConeAngle) * 0.5f;
+        var transform = Transform(ent);
+        var rota = transform.LocalRotation;
+        var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), rota).Theta);
+        return angleDist < MathHelper.DegreesToRadians(_viewconeAngle.GetAngle(ent.Owner)) * 0.5f;
     }
 }

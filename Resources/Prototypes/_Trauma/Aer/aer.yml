@@ -313,7 +313,7 @@
     penetrationThreshold: 2500
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectOmnilaser
-  - type: SpendProjectileOnTag
+  - type: AntiWallBang
 
 # I.D. Gear version of Freischütz rifle bullets
 - type: entity
@@ -452,9 +452,10 @@
   - type: Action
     useDelay: 600
     itemIconStyle: NoItem
-    icon:
-      sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
-      state: contract-written
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+    layers:
+    - state: contract-written
   - type: InstantAction
     event: !type:CreateContractEventAer {}
 
@@ -624,7 +625,19 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
+  - type: AnomalousEntity
+    researchPerSecond: 100
+    researchOnBehaviour: 5000
+    idGear: IdGearMagicBullet
   - type: AerShyGuy
+  - type: GhostRole
+    name: AER-096
+    description: Try not to get your face seen, start breaching due to a passing janitor seeing two pixels
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
 
 - type: entity
   parent: ReinforcementRadio
@@ -651,6 +664,18 @@
   - type: Objective
     difficulty: 1.5
     issuer: Self
+
+- type: entity
+  parent: [BaseAerObjective, BaseSurviveObjective]
+  id: AerShyGuyObjective
+  name: THEY SAW YOUR FACE!
+  description: KILL THEM! KILL THEM!
+  components:
+  - type: Objective
+    icon:
+      sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
+      state: alive
+  - type: AerShyGuyObjective
 
 - type: entity
   parent: [BaseAerObjective, BaseSurviveObjective]
@@ -688,7 +713,7 @@
   - type: Objective
     icon:
       sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
-      state: icon
+      state: contract-written
       issuer: Self
     difficulty: 1
   - type: RoleplayObjective

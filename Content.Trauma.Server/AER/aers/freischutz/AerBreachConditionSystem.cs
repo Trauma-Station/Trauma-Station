@@ -10,13 +10,7 @@ public sealed partial class AerBreachConditionSystem : EntitySystem
 {
     [Dependency] private SharedMindSystem _mind = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AerBreachConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetProgress(Entity<AerBreachConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = GetProgress(args.MindId, args.Mind);
