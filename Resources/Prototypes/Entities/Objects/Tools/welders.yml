@@ -3,24 +3,6 @@
   parent: [SolutionWelder, BaseItem]
   id: BaseWelder
   components:
-  # <Trauma>
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/weldingtool_pickup.ogg
-  - type: ToolTileCompatible
-    delay: 2
-  - type: Cautery
-    speed: 0.7
-  - type: SurgeryTool
-    startSound:
-      collection: Welder
-    endSound:
-      collection: WelderOff
-  - type: Tag
-    tags:
-    - DroneUsable
-    - WeldingTool
-  # </Trauma>
   - type: Sprite
     layers:
     - state: icon
@@ -87,7 +69,6 @@
         shader: unshaded
   - type: UseDelay
   - type: MeleeWeapon
-    animationRotation: -90 # WWDP
     wideAnimationRotation: -90
     damage:
       types:
@@ -97,13 +78,9 @@
   - type: RefillableSolution
     solution: welder
   - type: Tool
-    alwaysCheckDoAfter: true # Goobstation
     useSound:
       collection: Welder
-    qualities:
-    - Welding
-    - Axing # Goobstation
-    - Ignition
+    qualities: [ Welding ]
   - type: Welder
   - type: PointLight
     enabled: false
@@ -196,17 +173,6 @@
     fuelReagent: Plasma
   - type: RequiresEyeProtection
     statusEffectTime: 5 # less harmful; sunglasses can block it
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 200
-      Plasma: 50
-  - type: StaticPrice #Goobstation - Recycle update
-    price: 50
-  - type: Tag # Trauma - new tag for weldbot
-    tags:
-    - DroneUsable
-    - WeldingTool
-    - WelderExperimental
 
 - type: entity
   parent: [SolutionWelder, SolutionToolGinormous] # Bluespace technology

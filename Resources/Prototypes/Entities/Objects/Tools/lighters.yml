@@ -381,7 +381,7 @@
   - type: Tool
     useSound:
       collection: Welder
-    qualities: Welding
+    qualities: [ Welding ]
   - type: Lock
   - type: AccessReader
     access: [["CentralCommand"]]
