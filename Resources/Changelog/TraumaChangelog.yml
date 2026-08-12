@@ -13112,3 +13112,10 @@ Entries:
   id: 1429
   time: '2026-08-12T04:16:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4036
+- author: Pi-tanium
+  changes:
+  - type: Add
+    message: New 20k spesos option in the salvage vendor
+  id: 1430
+  time: '2026-08-12T20:09:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4058
