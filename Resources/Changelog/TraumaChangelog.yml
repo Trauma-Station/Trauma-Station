@@ -13075,3 +13075,10 @@ Entries:
   id: 1425
   time: '2026-08-12T00:05:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4046
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a bunch of machines being indestructible.
+  id: 1426
+  time: '2026-08-12T00:07:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4044
