@@ -13105,3 +13105,10 @@ Entries:
   id: 1428
   time: '2026-08-12T00:22:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4033
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added 9 new rehydratable cubes to emagged biocube fabricator/biogenerator
+  id: 1429
+  time: '2026-08-12T04:16:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4036
