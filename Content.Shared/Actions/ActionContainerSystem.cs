@@ -19,7 +19,7 @@ public sealed partial class ActionContainerSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private INetManager _netMan = default!;
+    //[Dependency] private INetManager _netMan = default!; // Trauma - no longer used
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMindSystem _mind = default!;
 
@@ -113,21 +113,27 @@ public sealed partial class ActionContainerSystem : EntitySystem
             return false;
 
         // Client cannot predict entity spawning.
-        if (_netMan.IsClient && !IsClientSide(uid))
-            return false;
-
-        actionId = Spawn(actionPrototypeId);
+        // <Trauma> - yes client can predict spawning. use predicted spawns if the entity exists serverside
+        var clientside = IsClientSide(uid);
+        actionId = IsClientSide(uid) ? Spawn(actionPrototypeId) : EntityManager.PredictedSpawn(actionPrototypeId);
         if (!_query.TryComp(actionId, out action))
         {
             Log.Error($"Tried to add invalid action {ToPrettyString(actionId)} to {ToPrettyString(uid)}!");
-            Del(actionId);
+            if (clientside)
+                Del(actionId.Value);
+            else
+                PredictedDel(actionId.Value);
             return false;
         }
 
         if (AddAction(uid, actionId.Value, action, comp))
             return true;
 
-        Del(actionId.Value);
+        if (clientside)
+            Del(actionId.Value);
+        else
+            PredictedDel(actionId.Value);
+        // </Trauma>
         actionId = null;
         return false;
     }
