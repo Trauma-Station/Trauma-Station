@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Server.Station.Components;
 using Content.Shared.Station.Components;
+using Robust.Shared.Map.Components;
 // </Trauma>
 using Content.Server.Antag.Components;
 using Content.Shared.GameTicking.Components;
@@ -46,10 +47,13 @@ public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomS
             var grids = new List<string>();
             foreach (var station in AllEntityQuery<StationEventEligibleComponent, StationDataComponent>())
             {
-                stations.Add($"- {ToPrettyString(station)}: Main grid {ToPrettyString(GetStationMainGrid((station, station.Comp2)))}");
+                var mainGrid = GetStationMainGrid((station, station.Comp2));
+                stations.Add($"- {ToPrettyString(station)}: Main grid {ToPrettyString(mainGrid)}");
                 foreach (var grid in station.Comp2.OwnedGrids)
                 {
-                    grids.Add($"- {ToPrettyString(grid)} @ {Transform(grid).Coordinates} with {_map.GetFilledTileCount(grid)} filled tiles");
+                    var gridComp = Comp<MapGridComponent>(grid);
+                    var count = _map.GetFilledTileCount((grid, gridComp));
+                    grids.Add($"- {ToPrettyString(grid)} @ {Transform(grid).Coordinates} with {count} filled tiles");
                 }
             }
 
