@@ -13059,3 +13059,12 @@ Entries:
   id: 1423
   time: '2026-08-10T19:52:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4032
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added synthmeat seeds to the medicinal seeds crate
+  - type: Fix
+    message: Fixed clear corn, magic mushrooms and meth apples being unobtainable
+  id: 1424
+  time: '2026-08-11T23:59:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3996
