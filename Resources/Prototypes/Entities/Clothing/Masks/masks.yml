@@ -55,8 +55,7 @@
     - PetWearable
     - WhitelistChameleon
     - SecurityBreathMask
-  - &hailer
-    type: Hailer
+  - type: Hailer
     messages:
     - sound: /Audio/_Goobstation/Hailer/asshole.ogg
       message: "Stop breaking the law, asshole!!"
@@ -574,17 +573,12 @@
     relayAccent: true
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseSecurityContraband ]
+  parent: ClothingMaskGasSecurity # Trauma - inherit sec mask for hailer and stuff
   id: ClothingMaskGasSwat
   name: swat gas mask
   description: A elite issue Security gas mask.
   components:
   # <Trauma>
-  - type: IngestionBlocker
-    blockSmokeIngestion: true
-  - *hailer
-  - type: ViewconeModifier
-    angleModifier: 1.0
   - type: StealTarget
     stealGroup: SwatGasMask
   # </Trauma>
