@@ -51,6 +51,7 @@
   description: Audibly hail nearby crew, useful for giving quick orders.
   components:
   - type: Action
+    useDelay: 2
   - type: Sprite
     sprite: Clothing/Mask/gassecurity.rsi
     layers:
