@@ -52,7 +52,7 @@ public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomS
                 foreach (var grid in station.Comp2.OwnedGrids)
                 {
                     var gridComp = Comp<MapGridComponent>(grid);
-                    var count = _map.GetFilledTileCount((grid, gridComp));
+                    var count = Map.GetFilledTileCount((grid, gridComp));
                     grids.Add($"- {ToPrettyString(grid)} @ {Transform(grid).Coordinates} with {count} filled tiles");
                 }
             }
