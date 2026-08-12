@@ -14,6 +14,7 @@ using Content.Trauma.Shared.Antag;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
+[Category("GameRuleTests")]
 public sealed partial class ChangelingTest : GameTest
 {
     private static ProtoId<AntagSmitePrototype> Smite = "Changeling";

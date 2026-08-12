@@ -98,15 +98,15 @@ public sealed partial class StationJobsSystem
 
         // The maximum jobs left on each station. This is modified as players are assigned.
         var stationJobs = new Dictionary<EntityUid, Dictionary<ProtoId<JobPrototype>, int?>>();
-        var stationMinimumJobs = new Dictionary<EntityUid, Dictionary<ProtoId<JobPrototype>, int?>>();
+        var stationMinimumJobs = new Dictionary<EntityUid, Dictionary<ProtoId<JobPrototype>, int>>(); // Trauma - non-nullable int
         foreach (var station in stations)
         {
             stationJobs.Add(station, GetJobs(station).ToDictionary(x => x.Key, x => x.Value));
             stationMinimumJobs.Add(
                 station,
                 useRoundStartJobs
-                    ? GetRoundStartJobs(station)
-                    : new Dictionary<ProtoId<JobPrototype>, int?>());
+                    ? GetRequiredJobs(station) // Trauma - use required jobs not fucking roundstart...
+                    : new Dictionary<ProtoId<JobPrototype>, int>()); // Trauma - non-nullable int
         }
 
         // Jobs assigned after this point must satisfy bans, antag restrictions, and any other candidate filter.
@@ -128,9 +128,10 @@ public sealed partial class StationJobsSystem
 
             foreach (var (job, minimum) in requiredJobs)
             {
-                for (var assignedToJob = 0; assignedToJob < minimum!.Value && profiles.Count > 0; assignedToJob++)
+                var jobs = stationJobs[station]; // Trauma
+                for (var assignedToJob = 0; assignedToJob < minimum && profiles.Count > 0; assignedToJob++) // Trauma - remove null handling on minimum
                 {
-                    if (stationJobs[station][job] is <= 0)
+                    if (jobs.GetValueOrDefault(job) is <= 0) // Trauma - use jobs from above and GetValueOrDefault instead of throwing
                         break;
 
                     if (!TryPickCandidate(job, jobCandidates, out var player) &&
@@ -419,7 +420,7 @@ public sealed partial class StationJobsSystem
 
         var matchingProfiles = profiles
             .Where(pair => pair.Value.JobPriorities.Any(preference =>
-                preference.Value != JobPriority.Never && department.Roles.Contains(preference.Key)))
+                preference.Value != JobPriority.Never && preference.Key == job)) // Trauma - check the job instead of department
             .ToDictionary();
         return TryPickCandidateIgnoringPreferences(job, matchingProfiles, out player);
     }

@@ -1,10 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2024 f0x-n3rd <150924715+f0x-n3rd@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: MIT
--->
-
 <Document>
 
 # Solids
@@ -126,7 +119,7 @@ Sutures can be created by microwaving the following ingredients for 10 seconds:
 
   ## Synthmeat
     <Box>
-      <GuideEntityEmbed Entity="FoodMeatSynth" Captain="Synthmeat"/>
+      <GuideEntityEmbed Entity="FoodSynthMeat" Caption="Synthmeat"/>
     </Box>
 
   Synthmeat can be created by combining the following ingredients

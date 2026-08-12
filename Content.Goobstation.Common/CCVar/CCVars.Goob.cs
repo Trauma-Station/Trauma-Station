@@ -54,38 +54,12 @@ public sealed partial class GoobCVars
         CVarDef.Create("atmos.monstermos_rip_tiles_pressure_offset", 0.44f, CVar.SERVERONLY);
 
     /// <summary>
-    ///     Indicates how much players are required for the round to be considered lowpop.
-    ///     Used for dynamic gamemode.
-    /// </summary>
-    public static readonly CVarDef<float> LowpopThreshold =
-        CVarDef.Create("game.players.lowpop_threshold", 15f, CVar.SERVERONLY);
-
-    /// <summary>
-    ///     Indicates how much players are required for the round to be considered highpop.
-    ///     Used for dynamic gamemode.
-    /// </summary>
-    public static readonly CVarDef<float> HighpopThreshold =
-        CVarDef.Create("game.players.highpop_threshold", 50f, CVar.SERVERONLY);
-
-    /// <summary>
-    ///     Is ore silo enabled.
-    /// </summary>
-    public static readonly CVarDef<bool> SiloEnabled =
-        CVarDef.Create("goob.silo_enabled", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     ///     Set a max drunk time in seconds to prevent permanent drunkeness.
     /// </summary>
     public static readonly CVarDef<float> MaxDrunkTime =
         CVarDef.Create("goob.max_drunk_time", 1500f, CVar.SERVER | CVar.REPLICATED);
 
     #region Player Listener
-
-    /// <summary>
-    ///     Is sprint enabled.
-    /// </summary>
-    public static readonly CVarDef<bool> ToggleSprint =
-        CVarDef.Create("control.toggle_sprint", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Whether the player mob is walking by default instead of running.
@@ -144,13 +118,6 @@ public sealed partial class GoobCVars
     #region Discord AHelp Reply System
 
     /// <summary>
-    ///     If an admin replies to users from discord, should it use their discord role color? (if applicable)
-    ///     Overrides DiscordReplyColor and AdminBwoinkColor.
-    /// </summary>
-    public static readonly CVarDef<bool> UseDiscordRoleColor =
-        CVarDef.Create("admin.use_discord_role_color", true, CVar.SERVERONLY);
-
-    /// <summary>
     ///     If an admin replies to users from discord, should it use their discord role name? (if applicable)
     /// </summary>
     public static readonly CVarDef<bool> UseDiscordRoleName =
@@ -182,12 +149,6 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<bool> UseAdminOOCColorInBwoinks =
         CVarDef.Create("admin.bwoink_use_admin_ooc_color", true, CVar.SERVERONLY);
 
-    /// <summary>
-    ///     Discord Webhook for the station report
-    /// </summary>
-    public static readonly CVarDef<string> StationReportDiscordWebHook =
-        CVarDef.Create("stationreport.discord_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
-
     #endregion
 
     /// <summary>
@@ -203,11 +164,6 @@ public sealed partial class GoobCVars
         CVarDef.Create("goob.crawl_hitzone_size", 0.4f, CVar.SERVER | CVar.REPLICATED);
 
     #region Blob
-    public static readonly CVarDef<int> BlobMax =
-        CVarDef.Create("blob.max", 3, CVar.SERVERONLY);
-
-    public static readonly CVarDef<int> BlobPlayersPer =
-        CVarDef.Create("blob.players_per", 20, CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> BlobCanGrowInSpace =
         CVarDef.Create("blob.grow_space", true, CVar.SERVER);
@@ -250,48 +206,6 @@ public sealed partial class GoobCVars
 
     #endregion
 
-    #region Contests System
-
-    /// <summary>
-    ///     The MASTER TOGGLE for the entire Contests System.
-    ///     ALL CONTESTS BELOW, regardless of type or setting will output 1f when false.
-    /// </summary>
-    public static readonly CVarDef<bool> DoContestsSystem =
-        CVarDef.Create("contests.do_contests_system", true, CVar.REPLICATED | CVar.SERVER);
-
-    /// <summary>
-    ///     Contest functions normally include an optional override to bypass the clamp set by max_percentage.
-    ///     This CVar disables the bypass when false, forcing all implementations to comply with max_percentage.
-    /// </summary>
-    public static readonly CVarDef<bool> AllowClampOverride =
-        CVarDef.Create("contests.allow_clamp_override", true, CVar.REPLICATED | CVar.SERVER);
-    /// <summary>
-    ///     Toggles all MassContest functions. All mass contests output 1f when false
-    /// </summary>
-    public static readonly CVarDef<bool> DoMassContests =
-        CVarDef.Create("contests.do_mass_contests", true, CVar.REPLICATED | CVar.SERVER);
-
-    /// <summary>
-    ///     Toggles all StaminaContest functions. All stamina contests output 1f when false
-    /// </summary>
-    public static readonly CVarDef<bool> DoStaminaContests =
-        CVarDef.Create("contests.do_stamina_contests", true, CVar.REPLICATED | CVar.SERVER);
-
-    /// <summary>
-    ///     Toggles all HealthContest functions. All health contests output 1f when false
-    /// </summary>
-    public static readonly CVarDef<bool> DoHealthContests =
-        CVarDef.Create("contests.do_health_contests", true, CVar.REPLICATED | CVar.SERVER);
-
-    /// <summary>
-    ///     The maximum amount that Mass Contests can modify a physics multiplier, given as a +/- percentage
-    ///     Default of 0.25f outputs between * 0.75f and 1.25f
-    /// </summary>
-    public static readonly CVarDef<float> MassContestsMaxPercentage =
-        CVarDef.Create("contests.max_percentage", 1f, CVar.REPLICATED | CVar.SERVER);
-
-    #endregion
-
     #region Shoving - WD Port
     /// <summary>
     /// Shove range multiplier.
@@ -304,12 +218,6 @@ public sealed partial class GoobCVars
     /// </summary>
     public static readonly CVarDef<float> ShoveSpeed =
         CVarDef.Create("game.shove_speed", 4f, CVar.SERVER | CVar.ARCHIVE);
-
-    /// <summary>
-    /// How much should the mass difference affect shove range & speed.
-    /// </summary>
-    public static readonly CVarDef<float> ShoveMassFactor =
-        CVarDef.Create("game.shove_mass_factor", 3f, CVar.SERVER | CVar.ARCHIVE);
     #endregion
 
     #region Chat

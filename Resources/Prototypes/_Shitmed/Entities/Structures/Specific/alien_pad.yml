@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: AbductorAlienPad
   parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: AbductorAlienPad
   name: alien pad
   description: Beam in the inferior lifeforms and dig in.
   components:
