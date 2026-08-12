@@ -13082,3 +13082,19 @@ Entries:
   id: 1426
   time: '2026-08-12T00:07:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4044
+- author: Nousagi37
+  changes:
+  - type: Remove
+    message: Removed Mime from getting cat ears for breaking silence vow.
+  - type: Add
+    message: >-
+      New Indictable Felony offense Code C§ 03-18  added into space law called
+      Breach of Silence; The act of a mime breaking a vow of silence, and
+      speaking. 
+  - type: Tweak
+    message: >-
+      Mime no longer gets gibbed, killsign-smited, or turned into bread for
+      breaking their vow, but is now punishable under Space Law.
+  id: 1427
+  time: '2026-08-12T00:12:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3990
