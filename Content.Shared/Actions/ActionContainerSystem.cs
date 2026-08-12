@@ -114,6 +114,9 @@ public sealed partial class ActionContainerSystem : EntitySystem
 
         // Client cannot predict entity spawning.
         // <Trauma> - yes client can predict spawning. use predicted spawns if the entity exists serverside
+        if (_timing.ApplyingState)
+            return false; // actions will be networked so dont have to do weird shit when resetting/applying state. the container can be null before ComponentInit is raised
+
         var clientside = IsClientSide(uid);
         actionId = IsClientSide(uid) ? Spawn(actionPrototypeId) : EntityManager.PredictedSpawn(actionPrototypeId);
         if (!_query.TryComp(actionId, out action))
