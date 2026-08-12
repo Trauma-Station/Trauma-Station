@@ -460,9 +460,6 @@
     - HumanoidCubesStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
-    # <Trauma>
-    - TraumaHostileCubesStatic
-    # </Trauma>
     - HostileCubesStatic
 
 - type: entity
@@ -738,9 +735,6 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     #- BioGenEmagStatic # Trauma - mutagen moved to non emag
-    # <Trauma>
-    - TraumaHostileCubesStatic
-    # </Trauma>
     - HostileCubesStatic
 
 - type: entity
