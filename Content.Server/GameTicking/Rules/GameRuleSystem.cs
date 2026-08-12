@@ -14,7 +14,7 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
 
     // Not protected, just to be used in utility methods
     [Dependency] private AtmosphereSystem _atmosphere = default!;
-    [Dependency] private MapSystem _map = default!;
+    [Dependency] protected MapSystem _map = default!; // Trauma - made it protected bruh
 
     [Dependency] protected EntityQuery<GameRuleComponent> GameRuleQuery = default!;
     [Dependency] protected EntityQuery<T> RuleQuery = default!;
