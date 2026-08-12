@@ -4,6 +4,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -41,6 +42,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         SubscribeLocalEvent<FastSpeedComponent, MartialArtModifyScaleEvent>(OnScaleSpeed);
         SubscribeLocalEvent<FastSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnMoveSpeed);
+        SubscribeLocalEvent<ForceStandStaminaComponent, TryForceStandEvent>(OnTryForceStand);
         SubscribeLocalEvent<SneakAttackComponent, ComboAttackPerformedEvent>(OnSneakAttackPerformed);
         SubscribeLocalEvent<SneakAttackComponent, TookDamageEvent>(OnSneakTookDamage);
         SubscribeLocalEvent<SneakAttackComponent, ComboAttemptEvent>(OnSneakComboAttempt);
@@ -155,6 +157,11 @@ public sealed partial class MartialArtsSystem : EntitySystem
         var level = _knowledge.GetLevel(ent.Owner);
         var modifier = ent.Comp.DamageScaleCurve.GetCurve(level);
         args.Scale *= modifier;
+    }
+
+    private void OnTryForceStand(Entity<ForceStandStaminaComponent> ent, ref TryForceStandEvent args)
+    {
+        args.Stamina *= ent.Comp.Multiplier;
     }
 
     private void CheckGrabStageOverride(Entity<GrabStagesOverrideComponent> ent, ref CheckGrabOverridesEvent args)

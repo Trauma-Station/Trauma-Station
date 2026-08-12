@@ -83,7 +83,8 @@
     - SweepKick
     - CircleKick
     - SpinKick
-    - KickUp
+  - type: ForceStandStamina
+    multiplier: 0
   - type: FastSpeed
     # 1x to 1.5x move speed scaling with level
     moveCurve: !type:LinearSkillCurve

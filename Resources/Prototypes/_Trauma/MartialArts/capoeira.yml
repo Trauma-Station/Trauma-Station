@@ -78,15 +78,3 @@
   - !type:TakeStaminaDamage
     amount: 15
   levelRequired: 10
-
-- type: combo
-  id: KickUp
-  attacks:
-  - Disarm
-  - Disarm
-  userEffects:
-  - !type:SetStanding
-    standing: true
-    force: true
-  giveExperience: false
-  levelRequired: 10

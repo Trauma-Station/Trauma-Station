@@ -477,6 +477,7 @@
   # <Trauma>
   - type: WeaponClass
     class: Unarmed # you are still just hitting people just really fast
+  - type: NoMeleeSpeedKnowledge
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/northstar.rsi

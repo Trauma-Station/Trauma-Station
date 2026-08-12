@@ -21,6 +21,9 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnGetMeleeAttackRate(Entity<MeleeSpeedKnowledgeComponent> ent, ref GetMeleeAttackRateEvent args)
     {
+        if (HasComp<NoMeleeSpeedKnowledgeComponent>(args.Weapon))
+            return;
+
         var level = _knowledge.GetLevel(ent.Owner);
         args.Multipliers *= ent.Comp.Curve.GetCurve(level);
     }
