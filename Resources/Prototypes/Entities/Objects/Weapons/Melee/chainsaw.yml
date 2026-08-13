@@ -1,10 +1,10 @@
 - type: entity
   name: chainsaw
-  parent: [BaseItem, KnifeDurabilitySharpenOnly] # Trauma
+  parent: [BaseItem, KnifeDurabilitySharpenOnly, BaseBotanyContraband] # Trauma - Durability and contraband
   id: Chainsaw
   description: A very large chainsaw. Usually you use this for cutting down trees... usually.
   components:
-  # Trauma>
+  # <Trauma>
   - type: WeaponClass
     class: Tool
   - type: BoneSaw
@@ -15,7 +15,7 @@
     endSound:
       path: /Audio/Weapons/chainsaw_rev.ogg
   - type: Sharp
-  # <Trauma>
+  # </Trauma>
   - type: Tool
     qualities:
     - Slicing

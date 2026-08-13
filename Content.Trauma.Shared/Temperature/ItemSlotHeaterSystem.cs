@@ -35,11 +35,11 @@ public sealed partial class ItemSlotHeaterSystem : EntitySystem
             // In order to support cooling, we must check if we are heating the entity or not.
             // If we are heating, then check if we are higher than the Max Temperature set,
             // otherwise check if we are below the Max Temperature (if we are cooling).
-            if ( ( heat.Temp >= 0 && temp.Temperature >= heat.MaxTemp )
-                || ( heat.Temp < 0 && temp.Temperature <= heat.MaxTemp ) )
+            if ((heat.HeatChange >= 0 && temp.Temperature >= heat.MaxTemp) ||
+                (heat.HeatChange < 0 && temp.Temperature <= heat.MaxTemp))
                 continue;
 
-            _temp.ChangeHeat(item, heat.Temp);
+            _temp.ChangeHeat(item, heat.HeatChange);
 
             active.NextUpdate = now + heat.Update;
             Dirty(uid, active);

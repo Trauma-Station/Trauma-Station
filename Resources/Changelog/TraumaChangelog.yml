@@ -12974,3 +12974,148 @@ Entries:
   id: 1415
   time: '2026-08-09T12:30:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4006
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed always rolling some random job you did not opt in to.
+  - type: Tweak
+    message: >-
+      Priority job rolls are now captain and a few engineers, doctors, secoffs
+      and miners. Players who don't have them set to Never will be chosen for
+      those before regular rolling.
+  id: 1416
+  time: '2026-08-09T16:38:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4009
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed Space Dragon's additional resistances to essentially every damage
+      type
+  - type: Tweak
+    message: >-
+      Reduced Space Dragon's Crit threshold from 450 hp to 375 hp, Also reduced
+      the threshold for damage slowdown
+  - type: Tweak
+    message: >-
+      Reduced dragon's damage from 30 damage a hit to 25 damage, Now it does the
+      same damage as an energy sword
+  id: 1417
+  time: '2026-08-10T04:33:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4022
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Syndicate Secure Briefcases can now be deconstructed providing 2 plasteel.
+  id: 1418
+  time: '2026-08-10T13:31:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4017
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added jiggle physics!
+  id: 1419
+  time: '2026-08-10T15:12:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4000
+- author: TraumaTised
+  changes:
+  - type: Add
+    message: Added a bunch of demons, godspeed chaplains.
+  - type: Tweak
+    message: Reworked angels.
+  - type: Tweak
+    message: Minor damage tweaks to demons.
+  id: 1420
+  time: '2026-08-10T16:07:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3939
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Meson goggles are now Engineering and Salvage contraband.
+  - type: Tweak
+    message: >-
+      Jackboots are now Security and Salvage contraband, removing cargo techs
+      rights to wear them.
+  - type: Tweak
+    message: G.O.R.I.L.L.A. gauntlet is now science contraband.
+  - type: Tweak
+    message: Chainsaw is now botany contraband.
+  - type: Tweak
+    message: Pickaxe, mining drills and mech mining drills are now salvage contraband.
+  id: 1421
+  time: '2026-08-10T18:29:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4025
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added the fulton launcher which can be bought for 1100 mining points.
+  id: 1422
+  time: '2026-08-10T19:26:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4031
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed forging metals being impossible due to losing heat way too fast
+  id: 1423
+  time: '2026-08-10T19:52:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4032
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added synthmeat seeds to the medicinal seeds crate
+  - type: Fix
+    message: Fixed clear corn, magic mushrooms and meth apples being unobtainable
+  id: 1424
+  time: '2026-08-11T23:59:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3996
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed dwarf damage sprites not matching their bodyparts.
+  id: 1425
+  time: '2026-08-12T00:05:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4046
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a bunch of machines being indestructible.
+  id: 1426
+  time: '2026-08-12T00:07:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4044
+- author: Nousagi37
+  changes:
+  - type: Remove
+    message: Removed Mime from getting cat ears for breaking silence vow.
+  - type: Add
+    message: >-
+      New Indictable Felony offense Code C§ 03-18  added into space law called
+      Breach of Silence; The act of a mime breaking a vow of silence, and
+      speaking.
+  - type: Tweak
+    message: >-
+      Mime no longer gets gibbed, killsign-smited, or turned into bread for
+      breaking their vow, but is now punishable under Space Law.
+  id: 1427
+  time: '2026-08-12T00:12:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3990
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Trash bag of Holding now fits in janibelt.
+  id: 1428
+  time: '2026-08-12T00:22:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4033
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added 9 new rehydratable cubes to emagged biocube fabricator/biogenerator
+  id: 1429
+  time: '2026-08-12T04:16:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4036
+- author: Pi-tanium
+  changes:
+  - type: Add
+    message: New 20k spesos option in the salvage vendor
+  id: 1430
+  time: '2026-08-12T20:09:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4058

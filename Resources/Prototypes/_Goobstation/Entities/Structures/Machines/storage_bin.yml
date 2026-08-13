@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ConstructibleMachine, BaseMachinePowered, BaseAutomatedMachine ]
+  parent: [ ConstructibleMachine, BaseMachinePowered, BaseAutomatedMachine, BaseConstructibleMachineDestructible ]
   id: StorageBin
   name: storage bin
   description: An electronically controlled storage bin intended for use with robotic arms.
