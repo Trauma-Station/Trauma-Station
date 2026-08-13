@@ -5,8 +5,7 @@ using Content.Trauma.Common.MartialArts;
 namespace Content.Trauma.Shared.MartialArts.Components;
 
 /// <summary>
-/// Applies martial art modifiers every time an attack lands, before any combo is checked.
-/// Requires <see cref="MartialArtModifiersComponent"/>.
+/// Applies martial art modifiers every time an attack lands.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ComboAttackModifierComponent : Component
@@ -18,9 +17,6 @@ public sealed partial class ComboAttackModifierComponent : Component
 [DataDefinition]
 public sealed partial class ComboAttackModifier
 {
-    /// <summary>
-    /// Only apply for this kind of attack, or every attack if null.
-    /// </summary>
     [DataField]
     public ComboAttackType? AttackType;
 
@@ -36,10 +32,6 @@ public sealed partial class ComboAttackModifier
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(3);
 
-    /// <summary>
-    /// If set, the multiplier becomes the user's velocity raised to this power, clamped between
-    /// <see cref="MinMultiplier"/> and <see cref="MaxMultiplier"/>. Standing still gives no bonus.
-    /// </summary>
     [DataField]
     public float? VelocityExponent;
 

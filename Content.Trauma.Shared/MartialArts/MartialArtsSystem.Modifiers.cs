@@ -9,7 +9,7 @@ using Content.Trauma.Shared.MartialArts.Components;
 namespace Content.Trauma.Shared.MartialArts;
 
 /// <summary>
-/// This handles temporary combat modifiers that stack while you keep fighting.
+/// This handles temporary combat modifiers.
 /// </summary>
 public partial class MartialArtsSystem
 {
@@ -43,9 +43,6 @@ public partial class MartialArtsSystem
         }
     }
 
-    /// <summary>
-    /// Adds a modifier that will stack with any others of its type until it expires.
-    /// </summary>
     public void ApplyModifier(Entity<MartialArtModifiersComponent> ent,
         MartialArtModifierType type,
         float multiplier,
@@ -88,9 +85,6 @@ public partial class MartialArtsSystem
         DirtyField(ent.Owner, ent.Comp, nameof(MartialArtModifiersComponent.NextUpdate));
     }
 
-    /// <summary>
-    /// Totals every live modifier of a type, then clamps it to that type's limit.
-    /// </summary>
     public (float Multiplier, float Modifier) GetModifiers(Entity<MartialArtModifiersComponent> ent,
         MartialArtModifierType type,
         bool unarmed)

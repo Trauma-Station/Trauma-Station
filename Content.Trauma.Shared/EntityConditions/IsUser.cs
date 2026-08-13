@@ -5,8 +5,7 @@ using Content.Shared.EntityConditions;
 namespace Content.Trauma.Shared.EntityConditions;
 
 /// <summary>
-/// Condition that requires the target entity is the user themselves.
-/// Always false if a user was not passed.
+/// Condition that requires the target entity to be the user.
 /// </summary>
 public sealed partial class IsUser : EntityConditionBase<IsUser>
 {

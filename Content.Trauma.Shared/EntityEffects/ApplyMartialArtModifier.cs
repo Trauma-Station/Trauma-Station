@@ -8,7 +8,7 @@ using Content.Trauma.Shared.MartialArts.Components;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Adds a temporary combat modifier to the target's active martial art, stacking with any others.
+/// Adds a temporary combat modifier to the target's active martial art.
 /// </summary>
 public sealed partial class ApplyMartialArtModifier : EntityEffectBase<ApplyMartialArtModifier>
 {

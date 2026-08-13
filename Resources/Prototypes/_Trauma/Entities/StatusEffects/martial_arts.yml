@@ -30,7 +30,7 @@
     sprintSpeedModifier: 0.5
     walkSpeedModifier: 0.5
 
-# for capoeira circle kick, the duration is determined by power
+# for capoeira circle kick
 - type: entity
   parent: StatusEffectSlowdown
   id: CircleKickSlowdownStatusEffect

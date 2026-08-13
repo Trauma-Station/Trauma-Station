@@ -6,7 +6,7 @@ using Robust.Shared.Physics.Components;
 namespace Content.Trauma.Shared.EntityConditions;
 
 /// <summary>
-/// Condition that requires the target entity is moving at least this fast, in m/s.
+/// Condition that requires the target entity is moving.
 /// </summary>
 public sealed partial class MovingCondition : EntityConditionBase<MovingCondition>
 {

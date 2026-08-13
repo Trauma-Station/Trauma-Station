@@ -11,11 +11,8 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// </summary>
 public sealed partial class RefundAttackCooldown : EntityEffectBase<RefundAttackCooldown>
 {
-    /// <summary>
-    /// Fraction of a single swing's cooldown to give back.
-    /// </summary>
     [DataField]
-    public float Fraction = 0.75f;
+    public float Fraction = 0.5f;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => null;

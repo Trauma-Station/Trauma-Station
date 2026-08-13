@@ -8,21 +8,12 @@ namespace Content.Trauma.Shared.MartialArts.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FastSpeedComponent : Component
 {
-    /// <summary>
-    /// Velocity in m/s is multiplied by this to get the power multiplier.
-    /// </summary>
     [DataField]
-    public float VelocityPowerMultiplier = 0.6f;
+    public float VelocityPowerMultiplier = 0.5f; /// was 0.6
 
-    /// <summary>
-    /// Power can never go below this, so standing still is not a penalty.
-    /// </summary>
     [DataField]
     public float MinPower = 1f;
 
-    /// <summary>
-    /// Power is capped here no matter how fast the user is going.
-    /// </summary>
     [DataField]
     public float MaxPower = 4f;
 }
