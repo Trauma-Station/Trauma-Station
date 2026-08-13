@@ -159,7 +159,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
 
         var user = args.User;
-        var isSelf = _body.GetBody(ent.Owner);
+        var isSelf = _body.GetBody(ent.Owner) == user;
         var isAdmin = _bypassQuery.HasComp(user);
         // you remember which skill chip is installing in yourself, for others they are just numbered
         var known = isSelf || isAdmin;
