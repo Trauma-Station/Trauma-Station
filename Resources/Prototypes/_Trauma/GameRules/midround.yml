@@ -96,7 +96,7 @@
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
-      proto: Shadowling
+      proto: ShadowlingMidround
 
 ## Sleeper agents ninja threat, the ninja does the announcement
 

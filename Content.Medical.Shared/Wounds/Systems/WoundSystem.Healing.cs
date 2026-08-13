@@ -40,8 +40,14 @@ public partial class WoundSystem
     public bool TryHealMostSevereBleedingWoundables(EntityUid body, float healAmount, out FixedPoint2 healed, BodyComponent? component = null)
     {
         healed = FixedPoint2.Zero;
-        if (!Resolve(body, ref component) || healAmount <= 0)
+        if (!Resolve(body, ref component) || healAmount == 0)
             return false;
+
+        if (healAmount < 0)
+        {
+            Log.Error($"Negative healing amount {healAmount} passed to heal {ToPrettyString(body)}, Stack trace: {Environment.StackTrace}");
+            return false;
+        }
 
         // Collect all woundables and their total bleeding amounts
         var bleedingWoundables = new List<(EntityUid Woundable, FixedPoint2 BleedAmount)>();
@@ -124,9 +130,15 @@ public partial class WoundSystem
         [ForbidLiteral] ProtoId<DamageGroupPrototype>? damageGroup = null,
         bool ignoreBlockers = false)
     {
-        healed = 0;
-        if (!_woundableQuery.Resolve(part, ref part.Comp))
+        healed = FixedPoint2.Zero;
+        if (!_woundableQuery.Resolve(part, ref part.Comp) || healAmount == FixedPoint2.Zero)
             return false;
+
+        if (healAmount < FixedPoint2.Zero)
+        {
+            Log.Error($"Negative healing amount {healAmount} passed to heal {ToPrettyString(part)} of group {damageGroup}, Stack trace: {Environment.StackTrace}");
+            return false;
+        }
 
         _woundsToHeal.Clear();
         foreach (var wound in part.Comp.Wounds.ContainedEntities)
@@ -161,8 +173,14 @@ public partial class WoundSystem
         bool ignoreBlockers = false)
     {
         healed = 0;
-        if (!_woundableQuery.Resolve(part, ref part.Comp))
+        if (!_woundableQuery.Resolve(part, ref part.Comp) || healAmount == FixedPoint2.Zero)
             return false;
+
+        if (healAmount < FixedPoint2.Zero)
+        {
+            Log.Error($"Negative healing amount {healAmount} passed to heal {ToPrettyString(part)} of type {damageType}, Stack trace: {Environment.StackTrace}");
+            return false;
+        }
 
         _woundsToHeal.Clear();
         foreach (var wound in part.Comp.Wounds.ContainedEntities)
@@ -312,18 +330,23 @@ public partial class WoundSystem
         DamageSpecifier healingPerPart = new DamageSpecifier(healing);
         healingPerPart.DamageDict.Clear();
 
-        var woundCountByType = wounds
-            .GroupBy(w => w.Comp.DamageType)
-            .ToDictionary(g => g.Key, g => g.Count());
-
-        foreach (var healingType in healing.DamageDict)
+        var woundCountByType = new Dictionary<string, int>();
+        foreach (var w in wounds)
         {
-            var splitAmount = woundCountByType.GetValueOrDefault(healingType.Key, 0);
+            var type = w.Comp.DamageType;
+            woundCountByType[type] = woundCountByType.GetValueOrDefault(type) + 1;
+        }
 
-            // If we don't have wounds with our damage type just set it to heal value
-            var splittedDamage = splitAmount != 0 ? healingType.Value / splitAmount : healingType.Value;
+        // TODO: this makes no sense really it should just have a finite healing amount or operate directly on each wound
+        foreach (var (healingType, amount) in healing.DamageDict)
+        {
+            var splitAmount = woundCountByType.GetValueOrDefault(healingType);
 
-            healingPerPart.DamageDict.Add(healingType.Key, splittedDamage);
+            // If we don't have wounds with this damage type don't bother with it at all
+            if (splitAmount == 0)
+                continue;
+
+            healingPerPart.DamageDict.Add(healingType, amount / splitAmount);
         }
 
         var healed = false;
