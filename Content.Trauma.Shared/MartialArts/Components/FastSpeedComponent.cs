@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.MartialArts.Components;
 public sealed partial class FastSpeedComponent : Component
 {
     [DataField]
-    public float VelocityPowerMultiplier = 0.5f; /// was 0.6
+    public float VelocityPowerMultiplier = 0.6f;
 
     [DataField]
     public float MinPower = 1f;

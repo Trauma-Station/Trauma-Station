@@ -18,7 +18,10 @@ public sealed partial class ComboAttackModifierComponent : Component
 public sealed partial class ComboAttackModifier
 {
     [DataField]
-    public ComboAttackType? AttackType;
+    public List<ComboAttackType>? AttackTypes;
+
+    [DataField]
+    public bool UnarmedOnly;
 
     [DataField]
     public MartialArtModifierType Type = MartialArtModifierType.AttackRate;

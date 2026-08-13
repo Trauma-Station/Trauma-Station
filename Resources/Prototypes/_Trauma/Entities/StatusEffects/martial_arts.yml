@@ -40,6 +40,19 @@
     sprintSpeedModifier: 0.6
     walkSpeedModifier: 0.6
 
+# for capoeira push kick
+- type: entity
+  parent: StatusEffectDamageModifierBase
+  id: PushKickVulnerabilityStatusEffect
+  name: winded
+  components:
+  - type: DamageModifierStatusEffect
+    modifiers:
+      coefficients:
+        Blunt: 1.25
+        Slash: 1.25
+        Piercing: 1.25
+
 # for armstrong machine gun fist
 - type: entity
   parent: MobStatusEffectBase

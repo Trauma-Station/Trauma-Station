@@ -90,16 +90,18 @@
   - type: MartialArtModifiers
   - type: ComboAttackModifier
     modifiers:
-    - velocityExponent: 0.2
+    - attackTypes: [Harm, Disarm]
+      unarmedOnly: true
+      velocityExponent: 0.2
       duration: 3
-    - attackType: Grab
+    - attackTypes: [Grab]
       type: MoveSpeed
       multiplier: 1.2
       duration: 4
   - type: EffectsOnMeleeHit
     missEffects:
     - !type:ApplyMartialArtModifier
-      type: Damage
+      type: Damage, Unarmed
       modifier: 2
       duration: 3
     - !type:RefundAttackCooldown

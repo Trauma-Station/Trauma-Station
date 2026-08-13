@@ -50,6 +50,10 @@ public partial class MartialArtsSystem
         TimeSpan duration,
         EntityUid? user = null)
     {
+        // standing still gives a multiplier of exactly 1, don't store an entry that does nothing
+        if (Math.Abs(multiplier - 1f) < 0.001f && Math.Abs(modifier) < 0.001f || duration <= TimeSpan.Zero)
+            return;
+
         ent.Comp.Data.Add(new MartialArtModifierData
         {
             Type = type,
@@ -154,7 +158,10 @@ public partial class MartialArtsSystem
 
         foreach (var rule in ent.Comp.Modifiers)
         {
-            if (rule.AttackType is { } attackType && attackType != args.Type)
+            if (rule.AttackTypes is { } types && !types.Contains(args.Type))
+                continue;
+
+            if (rule.UnarmedOnly && args.Weapon != args.Performer)
                 continue;
 
             var multiplier = rule.VelocityExponent is { } exponent
