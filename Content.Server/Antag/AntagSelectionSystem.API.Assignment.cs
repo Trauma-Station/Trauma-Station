@@ -396,7 +396,7 @@ public sealed partial class AntagSelectionSystem
     {
         if (proto.SpawnerPrototype is not { } spawnerPrototype)
         {
-            Debug.Assert(!assert, $"Tried to spawn a ghost role for {proto.ID}, but it had no prototype!");
+            Debug.Assert($"Tried to spawn a ghost role for {proto.ID}, but it had no prototype!"); // Trauma - always assert regardless of param, this is a programmer error
             return;
         }
 
