@@ -1,25 +1,28 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Knowledge;
-
 namespace Content.Trauma.Shared.MartialArts.Components;
 
 /// <summary>
-/// Capeoria specific component for doing speed stuff.
+/// Capoeira specific component, scales combo effects with how fast the user is moving.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FastSpeedComponent : Component
 {
     /// <summary>
-    /// Curve to multiply move speed with respect to level.
-    /// Momentum also increases it afterwards.
+    /// Velocity in m/s is multiplied by this to get the power multiplier.
     /// </summary>
-    [DataField(required: true)]
-    public SkillCurve MoveCurve = default!;
+    [DataField]
+    public float VelocityPowerMultiplier = 0.6f;
 
     /// <summary>
-    /// Curve to multiply when scaling melee damage with momentum.
+    /// Power can never go below this, so standing still is not a penalty.
     /// </summary>
-    [DataField(required: true)]
-    public SkillCurve DamageScaleCurve = default!;
+    [DataField]
+    public float MinPower = 1f;
+
+    /// <summary>
+    /// Power is capped here no matter how fast the user is going.
+    /// </summary>
+    [DataField]
+    public float MaxPower = 4f;
 }

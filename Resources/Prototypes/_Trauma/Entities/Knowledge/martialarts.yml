@@ -83,22 +83,27 @@
     - SweepKick
     - CircleKick
     - SpinKick
+    - KickUp
   - type: ForceStandStamina
     multiplier: 0
   - type: FastSpeed
-    # 1x to 1.5x move speed scaling with level
-    moveCurve: !type:LinearSkillCurve
-      curveOffset: 1
-      skillScale: 0.5
-    # 1x to 3x damage*momentum scaling with level
-    damageScaleCurve: !type:LinearSkillCurve
-      skillScale: 2
-      curveOffset: 1
-  - type: MeleeSpeedKnowledge
-    # 1x to 3x melee attack speed scaling with level
-    curve: !type:LinearSkillCurve
-      skillScale: 2
-      curveOffset: 1
+  - type: MartialArtModifiers
+  - type: ComboAttackModifier
+    modifiers:
+    - velocityExponent: 0.2
+      duration: 3
+    - attackType: Grab
+      type: MoveSpeed
+      multiplier: 1.2
+      duration: 4
+  - type: EffectsOnMeleeHit
+    missEffects:
+    - !type:ApplyMartialArtModifier
+      type: Damage
+      modifier: 2
+      duration: 3
+    - !type:RefundAttackCooldown
+      fraction: 0.75
 
 - type: entity
   parent: BaseMartialArtsKnowledge

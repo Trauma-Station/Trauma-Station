@@ -19,14 +19,8 @@ public partial class MartialArtsSystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private EntityQuery<CanPerformComboComponent> _comboQuery = default!;
 
-    private void InitializeCanPerformCombo()
-    {
-        SubscribeLocalEvent<CanPerformComboComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInit(Entity<CanPerformComboComponent> ent, ref ComponentInit args)
     {
         ent.Comp.AllowedCombos.Clear();
@@ -36,6 +30,7 @@ public partial class MartialArtsSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
         var user = args.Performer;
@@ -123,9 +118,6 @@ public partial class MartialArtsSystem
 
     public void PerformCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)
     {
-        // TODO: dont hardcode this here...
-        ent.Comp.Momentum += 1;
-
         var scaleEv = new MartialArtModifyScaleEvent(performer);
         RaiseLocalEvent(ent, ref scaleEv);
         var scale = scaleEv.Scale;

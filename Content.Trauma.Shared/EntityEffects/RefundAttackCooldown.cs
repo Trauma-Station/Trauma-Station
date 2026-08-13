@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects;
+using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Components;
+
+namespace Content.Trauma.Shared.EntityEffects;
+
+/// <summary>
+/// Gives the target back part of its own melee cooldown, it does not affect held weapons.
+/// </summary>
+public sealed partial class RefundAttackCooldown : EntityEffectBase<RefundAttackCooldown>
+{
+    /// <summary>
+    /// Fraction of a single swing's cooldown to give back.
+    /// </summary>
+    [DataField]
+    public float Fraction = 0.75f;
+
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+        => null;
+}
+
+public sealed partial class RefundAttackCooldownSystem : EntityEffectSystem<MeleeWeaponComponent, RefundAttackCooldown>
+{
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+
+    protected override void Effect(Entity<MeleeWeaponComponent> ent, ref EntityEffectEvent<RefundAttackCooldown> args)
+    {
+        var rate = _melee.GetAttackRate(ent, ent, ent.Comp);
+        if (rate <= 0f)
+            return;
+
+        ent.Comp.NextAttack -= TimeSpan.FromSeconds(args.Effect.Fraction * args.Scale / rate);
+        DirtyField(ent.Owner, ent.Comp, nameof(MeleeWeaponComponent.NextAttack));
+    }
+}

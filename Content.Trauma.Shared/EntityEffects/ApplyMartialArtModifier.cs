@@ -1,0 +1,50 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects;
+using Content.Trauma.Shared.Knowledge.Systems;
+using Content.Trauma.Shared.MartialArts;
+using Content.Trauma.Shared.MartialArts.Components;
+
+namespace Content.Trauma.Shared.EntityEffects;
+
+/// <summary>
+/// Adds a temporary combat modifier to the target's active martial art, stacking with any others.
+/// </summary>
+public sealed partial class ApplyMartialArtModifier : EntityEffectBase<ApplyMartialArtModifier>
+{
+    [DataField]
+    public MartialArtModifierType Type = MartialArtModifierType.AttackRate;
+
+    [DataField]
+    public float Multiplier = 1f;
+
+    [DataField]
+    public float Modifier;
+
+    [DataField]
+    public TimeSpan Duration = TimeSpan.FromSeconds(3);
+
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+        => null;
+}
+
+public sealed partial class ApplyMartialArtModifierSystem : EntityEffectSystem<MetaDataComponent, ApplyMartialArtModifier>
+{
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private MartialArtsSystem _martialArts = default!;
+
+    protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<ApplyMartialArtModifier> args)
+    {
+        if (_knowledge.GetActiveMartialArt(ent) is not { } art
+            || !TryComp<MartialArtModifiersComponent>(art, out var modifiers))
+            return;
+
+        var effect = args.Effect;
+        _martialArts.ApplyModifier((art, modifiers),
+            effect.Type,
+            effect.Multiplier,
+            effect.Modifier,
+            effect.Duration,
+            ent);
+    }
+}

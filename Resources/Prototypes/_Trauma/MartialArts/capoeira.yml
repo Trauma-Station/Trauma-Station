@@ -6,17 +6,25 @@
   - Grab
   - Harm
   - Harm
+  userConditions:
+  - !type:StandingCondition
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
+  - !type:TakeStaminaDamage
+    amount: -30
+    scaling: false
   opponentEffects:
   - !type:ModifyParalysis
-    time: 1
+    time: 2
   - !type:HealthChange
     targetPart: Chest
     damage:
       types:
-        Slash: 5
+        Blunt: 5
+  - !type:DropItems
+  - !type:GrabThrow
+    speed: 5
   levelRequired: 10
 
 - type: combo
@@ -25,15 +33,24 @@
   - Disarm
   - Disarm
   - Harm
+  userConditions:
+  - !type:StandingCondition
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
+  - !type:TakeStaminaDamage
+    amount: -40
+    scaling: false
   opponentEffects:
   - !type:HealthChange
     targetPart: Chest
     damage:
       types:
-        Slash: 15
+        Blunt: 15
+  - !type:ModifyStatusEffect
+    effectProto: CircleKickSlowdownStatusEffect
+    type: Update
+    time: 2
   levelRequired: 10
 
 - type: combo
@@ -42,15 +59,31 @@
   - Harm
   - Harm
   - Disarm
+  userConditions:
+  - !type:StandingCondition
+  - !type:MovingCondition
+    minVelocity: 2
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
+  - !type:TakeStaminaDamage
+    amount: -60
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    multiplier: 1.5
+    duration: 5
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    type: MoveSpeed
+    multiplier: 1.2
+    duration: 10
+    scaling: false
   opponentEffects:
   - !type:HealthChange
     targetPart: Chest
     damage:
       types:
-        Slash: 10
+        Blunt: 10
   - !type:ModifyParalysis
     time: 1
   - !type:TakeStaminaDamage
@@ -64,17 +97,56 @@
   - Harm
   - Disarm
   - Harm
+  userConditions:
+  - !type:StandingCondition
+  - !type:MovingCondition
+    minVelocity: 2
+  conditions:
+  - !type:StandingCondition
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
+  - !type:TakeStaminaDamage
+    amount: -100
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    multiplier: 1.5
+    duration: 5
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    type: MoveSpeed
+    multiplier: 1.2
+    duration: 10
+    scaling: false
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationFlipEmoteEvent
   opponentEffects:
   - !type:HealthChange
     targetPart: Chest
     damage:
       types:
-        Slash: 25
+        Blunt: 25
   - !type:ModifyParalysis
     time: 2
   - !type:TakeStaminaDamage
     amount: 15
+  - !type:StopPull
+  levelRequired: 10
+
+- type: combo
+  id: KickUp
+  attacks:
+  - Disarm
+  - Disarm
+  conditions:
+  - !type:IsUser
+  userEffects:
+  - !type:RemoveComponents
+    components:
+    - type: KnockedDown
+  - !type:SetStanding
+    standing: true
+    force: true
+  giveExperience: false
   levelRequired: 10
