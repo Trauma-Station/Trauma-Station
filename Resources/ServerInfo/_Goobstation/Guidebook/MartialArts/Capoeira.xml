@@ -13,12 +13,10 @@
 
   ### Capoeira Stance
 
-  Through swift motion, Capoeira masters channel speed into energy. Every combo hits harder the faster you are moving
-  when it lands, scaling all the way up to quadruple strength at a full sprint.
-  Damage, knockdown duration and stamina damage all scale together.
+  You never stop moving while performing the ginga. This makes you very mobile while fighting.
 
-  Halt their flow, and their strength will vanish. Standing still strips the bonus entirely, and no combo except
-  Kick Up can be performed while prone.
+  Through swift motion, Capoeira masters channel speed into energy, with combos being more deadly the faster they are.
+  Halt their flow, and their strength will vanish. Their combos, powered by movement, falter when they are prone.
 
   ### Capoeira Momentum
 
@@ -31,8 +29,7 @@
 
   Hit or miss, it's just part of the dance! And the best part is about to start!
 
-  A missed bare-handed swing sharpens the next one, refunding most of its recovery and doubling its damage
-  for a few seconds. Swinging a held weapon does nothing.
+  A missed bare-handed attack sharpens the next, reducing its recovery and increasing the damage.
 
   ## Combo attacks
 
@@ -54,7 +51,7 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
-  A swift kick to the chest that slows the opponent down significantly.
+  Deals Blunt damage and also slows down the opponent significantly.
 
   ### Sweep Kick
 
@@ -64,7 +61,7 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
   </Box>
 
-  Knocks down and deals stamina damage. Temporarily increases the user's attack speed.
+  Knocks down and deals Blunt and Stamina damage. Temporarily increases the user's attack speed.
   Cannot be performed if the user is moving too slow.
 
   ### Spin Kick
@@ -87,7 +84,6 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
   </Box>
 
-  Needs to be targeted at the user themselves. Can be performed while prone.
-  Removes the knock down status effect and forces the user to stand up instantly, without waiting it out.
+  Needs to be targeted at the user themselves. Can be performed while prone. Removes knock down status effect and forces the user to stand up instantly.
 
 </Document>
