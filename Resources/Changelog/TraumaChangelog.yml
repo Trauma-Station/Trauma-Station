@@ -13137,3 +13137,10 @@ Entries:
   id: 1432
   time: '2026-08-13T14:16:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4069
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed midround shadowlings never spawning.
+  id: 1433
+  time: '2026-08-13T14:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4067
