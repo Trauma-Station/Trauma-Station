@@ -32,11 +32,12 @@ public sealed partial class ApplyMartialArtModifierSystem : EntityEffectSystem<M
 {
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private MartialArtsSystem _martialArts = default!;
+    [Dependency] private EntityQuery<MartialArtModifiersComponent> _modifiersQuery = default!;
 
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<ApplyMartialArtModifier> args)
     {
-        if (_knowledge.GetActiveMartialArt(ent) is not { } art
-            || !TryComp<MartialArtModifiersComponent>(art, out var modifiers))
+        if (_knowledge.GetActiveMartialArt(ent.Owner) is not { } art
+            || !_modifiersQuery.TryComp(art, out var modifiers))
             return;
 
         var effect = args.Effect;
@@ -45,6 +46,6 @@ public sealed partial class ApplyMartialArtModifierSystem : EntityEffectSystem<M
             effect.Multiplier,
             effect.Modifier,
             effect.Duration,
-            ent);
+            ent.Owner);
     }
 }

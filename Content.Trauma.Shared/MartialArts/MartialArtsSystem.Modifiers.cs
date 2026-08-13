@@ -14,6 +14,7 @@ namespace Content.Trauma.Shared.MartialArts;
 public partial class MartialArtsSystem
 {
     [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private EntityQuery<MartialArtModifiersComponent> _query = default!;
     [Dependency] private EntityQuery<NoMartialMeleeSpeedComponent> _noSpeedQuery = default!;
 
     private void UpdateModifiers()
@@ -149,7 +150,7 @@ public partial class MartialArtsSystem
     private void OnComboAttackModifier(Entity<ComboAttackModifierComponent> ent, ref ComboAttackPerformedEvent args)
     {
         // self shoves are how you kick up, they should not build momentum
-        if (args.Performer == args.Target || !TryComp<MartialArtModifiersComponent>(ent, out var modifiers))
+        if (args.Performer == args.Target || !_query.TryComp(ent.Owner, out var modifiers))
             return;
 
         var velocity = _physicsQuery.TryComp(args.Performer, out var physics)

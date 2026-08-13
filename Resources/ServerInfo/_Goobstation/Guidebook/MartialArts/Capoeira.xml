@@ -54,7 +54,7 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
-  Slashes the chest and slows the opponent down significantly. The slow lasts longer the faster you were moving.
+  A swift kick to the chest that slows the opponent down significantly.
 
   ### Sweep Kick
 

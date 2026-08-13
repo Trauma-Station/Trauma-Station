@@ -2,12 +2,8 @@
 
 using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
-using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;

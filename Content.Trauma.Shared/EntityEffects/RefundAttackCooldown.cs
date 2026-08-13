@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Components;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -24,7 +23,7 @@ public sealed partial class RefundAttackCooldownSystem : EntityEffectSystem<Mele
 
     protected override void Effect(Entity<MeleeWeaponComponent> ent, ref EntityEffectEvent<RefundAttackCooldown> args)
     {
-        var rate = _melee.GetAttackRate(ent, ent, ent.Comp);
+        var rate = _melee.GetAttackRate(ent.Owner, ent.Owner, ent.Comp);
         if (rate <= 0f)
             return;
 
