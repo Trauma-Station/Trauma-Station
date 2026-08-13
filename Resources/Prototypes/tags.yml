@@ -1584,6 +1584,9 @@
 ## X ##
 
 - type: Tag
+  id: XenoborgCrystal # MaterialStorage whitelist: Mothership core
+
+- type: Tag
   id: XenoborgGhostrole # spawn whitelist : SpawnPointGhostRoleXenoborg
 
 - type: Tag
