@@ -40,12 +40,12 @@ public partial class WoundSystem
     public bool TryHealMostSevereBleedingWoundables(EntityUid body, float healAmount, out FixedPoint2 healed, BodyComponent? component = null)
     {
         healed = FixedPoint2.Zero;
-        if (!Resolve(body, ref component))
+        if (!Resolve(body, ref component) || healAmount == 0)
             return false;
 
-        if (healAmount <= 0)
+        if (healAmount < 0)
         {
-            Log.Error($"Non-positive healing amount {healAmount} passed to heal {ToPrettyString(body)}, Stack trace: {Environment.StackTrace}");
+            Log.Error($"Negative healing amount {healAmount} passed to heal {ToPrettyString(body)}, Stack trace: {Environment.StackTrace}");
             return false;
         }
 
@@ -131,12 +131,12 @@ public partial class WoundSystem
         bool ignoreBlockers = false)
     {
         healed = FixedPoint2.Zero;
-        if (!_woundableQuery.Resolve(part, ref part.Comp))
+        if (!_woundableQuery.Resolve(part, ref part.Comp) || healAmount == FixedPoint2.Zero)
             return false;
 
-        if (healAmount <= FixedPoint2.Zero)
+        if (healAmount < FixedPoint2.Zero)
         {
-            Log.Error($"Non-positive healing amount {healAmount} passed to heal {ToPrettyString(part)} of group {damageGroup}, Stack trace: {Environment.StackTrace}");
+            Log.Error($"Negative healing amount {healAmount} passed to heal {ToPrettyString(part)} of group {damageGroup}, Stack trace: {Environment.StackTrace}");
             return false;
         }
 
@@ -173,12 +173,12 @@ public partial class WoundSystem
         bool ignoreBlockers = false)
     {
         healed = 0;
-        if (!_woundableQuery.Resolve(part, ref part.Comp))
+        if (!_woundableQuery.Resolve(part, ref part.Comp) || healAmount == FixedPoint2.Zero)
             return false;
 
-        if (healAmount <= FixedPoint2.Zero)
+        if (healAmount < FixedPoint2.Zero)
         {
-            Log.Error($"Non-positive healing amount {healAmount} passed to heal {ToPrettyString(part)} of type {damageType}, Stack trace: {Environment.StackTrace}");
+            Log.Error($"Negative healing amount {healAmount} passed to heal {ToPrettyString(part)} of type {damageType}, Stack trace: {Environment.StackTrace}");
             return false;
         }
 
