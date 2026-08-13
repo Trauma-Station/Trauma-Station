@@ -126,6 +126,7 @@
   - FoodDeliciousApple
   mutationPrototypes:
   - goldenApple
+  - MethApple
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
@@ -152,6 +153,9 @@
   packetPrototype: MethAppleSeeds
   productPrototypes:
   - FoodMethApple
+  mutationPrototypes:
+  - goldenApple
+  - deliciousApple
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6

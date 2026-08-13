@@ -66,16 +66,10 @@ public sealed partial class CosmicCorruptingComponent : Component
     public bool Enabled = true;
 
     /// <summary>
-    /// Wether or not the CosmicCorruptingSystem should spawn VFX when converting tiles and walls.
+    /// Whether or not the CosmicCorruptingSystem should spawn VFX when converting tiles and walls.
     /// </summary>
     [DataField]
     public bool UseVFX = true;
-
-    /// <summary>
-    /// Wether or not the CosmicCorruptingSystem should ignore this component when it reaches max growth. Saves performance.
-    /// </summary>
-    [DataField]
-    public bool AutoDisable = true;
 
     /// <summary>
     /// How much time between tile corruptions.

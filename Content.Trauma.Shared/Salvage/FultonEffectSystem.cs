@@ -17,14 +17,7 @@ public sealed partial class FultonEffectSystem : EntitySystem
 
     public static readonly EntProtoId StatusEffect = "BeingFultonedStatusEffect";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FultonedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<FultonedComponent, ComponentShutdown>(OnShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<FultonedComponent> ent, ref ComponentStartup args)
     {
         if (_timing.ApplyingState)
@@ -40,6 +33,7 @@ public sealed partial class FultonEffectSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<FultonedComponent> ent, ref ComponentShutdown args)
     {
         if (_timing.ApplyingState)

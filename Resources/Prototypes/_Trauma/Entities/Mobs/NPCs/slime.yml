@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseSlimeJigglePhysics
+  components:
+  - type: JigglePhysics # wobble wobble
+    springiness: 15
+    damping: 2
+    inertiaScale: 5
+    jiggleLimit: 0.35
+    slapLimit: 2.8
+    displacementsRsi: _Trauma/Mobs/Animals/slime_jiggle.rsi
+    displacementCount: 4
+    layers:
+    - enum.DamageStateVisualLayers.Base

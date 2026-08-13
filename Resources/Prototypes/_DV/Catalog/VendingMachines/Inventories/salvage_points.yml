@@ -13,7 +13,7 @@
     cost: 150
   - id: Soap
     cost: 200
-  # TODO: laser pointer 300, toy facehugger 300
+  # TODO: laser pointer 300
   # TODO: stabilizing serum for 400
   - id: BoxMarkerBeacons
     cost: 300
@@ -66,6 +66,8 @@
     cost: 1000
   - id: WeaponCrusherDagger
     cost: 1050
+  - id: WeaponLauncherFulton
+    cost: 1100
   - id: AdvancedMineralScanner
     cost: 1100
   - id: PKAUpgradeDamage
@@ -109,6 +111,8 @@
   - id: ClothingOuterHardsuitLuxury
     cost: 3000 #still costs more than just buying it with spesos you got from vendor but whatever
   - id: ShelterCapsuleLuxury
+    cost: 3000
+  - id: SpaceCash20000
     cost: 3000
   - id: ClothingEyesNightVisionGoggles
     cost: 3500
