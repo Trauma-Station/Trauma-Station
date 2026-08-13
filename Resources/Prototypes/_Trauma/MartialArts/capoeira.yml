@@ -25,7 +25,7 @@
   - !type:ModifyStatusEffect
     effectProto: PushKickVulnerabilityStatusEffect
     type: Update
-    time: 2
+    time: 3
   - !type:GrabThrow
     speed: 5
     dropItems: true
@@ -88,8 +88,9 @@
     damage:
       types:
         Blunt: 10
-  - !type:ModifyParalysis
+  - !type:ModifyKnockdown
     time: 1
+    drop: true
   - !type:TakeStaminaDamage
     amount: 10
   levelRequired: 10
@@ -131,8 +132,9 @@
     damage:
       types:
         Blunt: 25
-  - !type:ModifyParalysis
+  - !type:ModifyKnockdown
     time: 2
+    drop: true
   - !type:TakeStaminaDamage
     amount: 15
   - !type:StopPull

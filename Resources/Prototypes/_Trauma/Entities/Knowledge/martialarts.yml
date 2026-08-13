@@ -93,11 +93,11 @@
     - attackTypes: [Harm, Disarm]
       unarmedOnly: true
       velocityExponent: 0.2
-      duration: 3
+      duration: 4
     - attackTypes: [Grab]
       type: MoveSpeed
       multiplier: 1.2
-      duration: 4
+      duration: 6
   - type: EffectsOnMeleeHit
     missEffects:
     - !type:ApplyMartialArtModifier

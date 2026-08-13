@@ -40,14 +40,14 @@
     sprintSpeedModifier: 0.6
     walkSpeedModifier: 0.6
 
-# for capoeira push kick, winded targets take more melee damage until they recover
+# for capoeira push kick
 - type: entity
   parent: MobStatusEffectBase
   id: PushKickVulnerabilityStatusEffect
   name: winded
   components:
   - type: MeleeVulnerabilityStatusEffect
-    applyToArmed: true # Trauma - Goob is unarmed-only
+    applyToArmed: true
     modifiers:
       coefficients:
         Blunt: 1.25
