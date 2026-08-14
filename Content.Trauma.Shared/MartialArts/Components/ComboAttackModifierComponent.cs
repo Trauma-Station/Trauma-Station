@@ -14,33 +14,44 @@ public sealed partial class ComboAttackModifierComponent : Component
     public List<ComboAttackModifier> Modifiers = new();
 }
 
-[DataDefinition]
+/// <summary>
+/// A single rule for when to apply a modifier and how strong it is.
+/// </summary>
+[DataRecord]
 public sealed partial class ComboAttackModifier
 {
-    [DataField]
+    /// <summary>
+    /// Attack types that trigger this, null for any of them.
+    /// </summary>
     public List<ComboAttackType>? AttackTypes;
 
-    [DataField]
+    /// <summary>
+    /// Whether this only triggers when attacking with bare hands.
+    /// </summary>
     public bool UnarmedOnly;
 
-    [DataField]
+    /// <summary>
+    /// What the applied modifier changes.
+    /// </summary>
     public MartialArtModifierType Type = MartialArtModifierType.AttackRate;
 
-    [DataField]
+    /// <summary>
+    /// Flat multiplier to apply, ignored when <see cref="VelocityExponent"/> is set.
+    /// </summary>
     public float Multiplier = 1f;
 
-    [DataField]
     public float Modifier;
 
-    [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(3);
 
-    [DataField]
+    /// <summary>
+    /// If set, the multiplier is the user's velocity raised to this instead of <see cref="Multiplier"/>.
+    /// </summary>
     public float? VelocityExponent;
 
-    [DataField]
+    /// <summary>
+    /// Bounds for the velocity scaled multiplier.
+    /// </summary>
     public float MinMultiplier = 1f;
-
-    [DataField]
     public float MaxMultiplier = 1.5f;
 }

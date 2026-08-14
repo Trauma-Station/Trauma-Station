@@ -27,16 +27,20 @@ public partial class MartialArtsSystem
                 continue;
 
             var hadMoveSpeed = false;
+            var removed = false;
             for (var i = comp.Data.Count - 1; i >= 0; i--)
             {
                 if (now < comp.Data[i].EndTime)
                     continue;
 
-                hadMoveSpeed |= (comp.Data[i].Type & MartialArtModifierType.MoveSpeed) != 0;
-                comp.Data.RemoveAt(i);
+                hadMoveSpeed |= comp.Data[i].Has(MartialArtModifierType.MoveSpeed);
+                comp.Data.RemoveSwap(i);
+                removed = true;
             }
 
-            DirtyField(uid, comp, nameof(MartialArtModifiersComponent.Data));
+            if (removed)
+                DirtyField(uid, comp, nameof(MartialArtModifiersComponent.Data));
+
             RefreshNextUpdate((uid, comp));
 
             if (hadMoveSpeed && comp.User is { } user)
@@ -86,6 +90,9 @@ public partial class MartialArtsSystem
                 next = data.EndTime;
         }
 
+        if (ent.Comp.NextUpdate == next)
+            return;
+
         ent.Comp.NextUpdate = next;
         DirtyField(ent.Owner, ent.Comp, nameof(MartialArtModifiersComponent.NextUpdate));
     }
@@ -98,13 +105,13 @@ public partial class MartialArtsSystem
         var mod = 0f;
         foreach (var data in ent.Comp.Data)
         {
-            if ((data.Type & type) == 0)
+            if (!data.Has(type))
                 continue;
 
-            if ((data.Type & MartialArtModifierType.Unarmed) != 0 && !unarmed)
+            if (data.Has(MartialArtModifierType.Unarmed) && !unarmed)
                 continue;
 
-            if ((data.Type & MartialArtModifierType.Armed) != 0 && unarmed)
+            if (data.Has(MartialArtModifierType.Armed) && unarmed)
                 continue;
 
             mult *= data.Multiplier;
@@ -135,8 +142,13 @@ public partial class MartialArtsSystem
         var (mult, mod) = GetModifiers(ent, MartialArtModifierType.Damage, args.Weapon == ent.Comp.User);
         args.Damage *= mult;
 
-        if (mod != 0f)
-            args.Damage += new DamageSpecifier(ProtoMan.Index(ent.Comp.FlatDamageType), mod);
+        if (mod == 0f)
+            return;
+
+        var dict = args.Damage.DamageDict;
+        var type = ent.Comp.FlatDamageType;
+        if (!dict.TryAdd(type, mod))
+            dict[type] += mod;
     }
 
     [SubscribeLocalEvent]

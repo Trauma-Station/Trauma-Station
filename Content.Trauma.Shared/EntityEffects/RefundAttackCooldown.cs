@@ -12,9 +12,6 @@ public sealed partial class RefundAttackCooldown : EntityEffectBase<RefundAttack
 {
     [DataField]
     public float Fraction = 0.5f;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null;
 }
 
 public sealed partial class RefundAttackCooldownSystem : EntityEffectSystem<MeleeWeaponComponent, RefundAttackCooldown>

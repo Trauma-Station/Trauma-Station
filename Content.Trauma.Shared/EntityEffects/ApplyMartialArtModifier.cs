@@ -23,9 +23,6 @@ public sealed partial class ApplyMartialArtModifier : EntityEffectBase<ApplyMart
 
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(3);
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null;
 }
 
 public sealed partial class ApplyMartialArtModifierSystem : EntityEffectSystem<MetaDataComponent, ApplyMartialArtModifier>
