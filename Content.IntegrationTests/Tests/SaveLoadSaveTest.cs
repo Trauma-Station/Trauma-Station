@@ -18,7 +18,7 @@ namespace Content.IntegrationTests.Tests
     /// </summary>
     [TestFixture]
     [Category("MapTests")] // Trauma
-    public sealed class SaveLoadSaveTest : GameTest
+    public sealed partial class SaveLoadSaveTest : GameTest
     {
         [Test]
         public async Task CreateSaveLoadSaveGrid()
@@ -246,7 +246,7 @@ namespace Content.IntegrationTests.Tests
         /// Simple system that modifies the data saved to a yaml file by removing the timestamp.
         /// Required by some tests that validate that re-saving a map does not modify it.
         /// </summary>
-        private sealed class SaveLoadSaveTestSystem : EntitySystem
+        private sealed partial class SaveLoadSaveTestSystem : EntitySystem
         {
             public bool Enabled;
             public override void Initialize()
