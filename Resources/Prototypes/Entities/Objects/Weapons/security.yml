@@ -44,13 +44,12 @@
     prefixOn: on
     prefixOff: off
   - type: ItemToggleMeleeWeapon
-    # <Trauma>
-    clickPartDamageMultiplier: 0
     activatedDamage:
       types:
-        Blunt: 7
-        Shock: 3
-    # </Trauma>
+      # <Trauma> TODO: make only wideswing do this damage
+        Blunt: 8
+        Shock: 2
+      # </Trauma>
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
