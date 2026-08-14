@@ -639,7 +639,7 @@ public sealed partial class AdminVerbSystem
             {
                 Text = maidenName,
                 Category = VerbCategory.Smite,
-                Icon = new SpriteSpecifier.Rsi(new ("/Textures/Clothing/Uniforms/Jumpskirt/janimaid.rsi"), "icon"),
+                Icon = new SpriteSpecifier.Rsi(new ("/Textures/Clothing/Uniforms/Jumpskirt/janimaid.rsi"), "icon"), // Trauma - old sprite path
                 Act = () =>
                 {
                     _outfit.SetOutfit(args.Target, "JanitorMaidGear", (_, clothing) =>
