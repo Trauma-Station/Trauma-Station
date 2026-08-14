@@ -46,10 +46,7 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-      # <Trauma> TODO: make only wideswing do this damage
-        Blunt: 7
-        Shock: 3
-      # </Trauma>
+        Blunt: 7 # Trauma - TODO: make direct do 0 damage, wide do this damage
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
