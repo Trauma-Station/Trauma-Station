@@ -30,7 +30,7 @@
   description: uplink-rifle-mosin-desc
   productEntity: WeaponSniperMosin
   cost:
-    Telecrystal: 4 # Trauma - was 1, 5x and cheaper
+    Telecrystal: 1
   categories:
   - UplinkWeaponry
 
