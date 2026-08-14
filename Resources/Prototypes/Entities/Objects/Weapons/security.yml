@@ -47,8 +47,8 @@
     activatedDamage:
       types:
       # <Trauma> TODO: make only wideswing do this damage
-        Blunt: 8
-        Shock: 2
+        Blunt: 7
+        Shock: 3
       # </Trauma>
   - type: MeleeWeapon
     wideAnimationRotation: -135
