@@ -22,6 +22,7 @@ public static partial class PoolManager
         (TraumaCVars.StationTraitsEnabled.Name, "false"), // spawns game rules and tests dont like it
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),
+        (CCVars.DatabaseSnapshot.Name,        "true"),
         (CCVars.DatabaseSqliteDelay.Name,     "0"),
         (CCVars.HolidaysEnabled.Name,         "false"),
         (CCVars.GameMap.Name,                 TestMap),
