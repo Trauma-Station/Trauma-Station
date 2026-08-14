@@ -46,7 +46,7 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Blunt: 7 # Trauma - TODO: make direct do 0 damage, wide do this damage
+        Blunt: 5 # Trauma - TODO: make direct do 0 damage, wide do this damage
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
