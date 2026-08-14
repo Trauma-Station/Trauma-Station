@@ -432,6 +432,11 @@
   - type: Storage
     whitelist:
       tags:
+      # <Trauma>
+      - BolaEnergy
+      - EnergySpeedloader
+      - MilitaryPowerCell
+      # </Trauma>
       - CigPack
       - Taser
       - SecBeltEquip
@@ -442,13 +447,11 @@
       - CombatKnife
       - Truncheon
       - HandGrenade
-      # <Goob>
-      - BolaEnergy # Goobstation
-      - EnergySpeedloader # Goobstation
-      - MilitaryPowerCell # Goobstation
-      # </Goob>
-      components:
       - Stunbaton
+      components:
+      # <Trauma>
+      - ScatteringGrenade
+      # </Trauma>
       - FlashOnTrigger
       - SmokeOnTrigger
       - Flash
@@ -458,7 +461,6 @@
       - DoorRemote
       - Whistle
       - BalloonPopper
-      - ScatteringGrenade # Goob
   - type: ItemMapper
     sprite: *BeltOverlay
     mapLayers:
@@ -468,7 +470,7 @@
           - FlashOnTrigger
       stunbaton:
         whitelist:
-          components:
+          tags:
           - Stunbaton
       tear_gas_grenade:
         whitelist:
