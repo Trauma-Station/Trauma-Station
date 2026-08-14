@@ -46,7 +46,10 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Blunt: 0
+      # <Trauma> - TODO: make it so wideswing does 0 damage
+        Blunt: 7
+        Shock: 3
+      # </Trauma>
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
