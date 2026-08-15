@@ -54,7 +54,7 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         SubscribeLocalEvent<MaterialReclaimerComponent, GotEmaggedEvent>(OnEmagged);
         SubscribeLocalEvent<MaterialReclaimerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CollideMaterialReclaimerComponent, StartCollideEvent>(OnCollide);
-        SubscribeLocalEvent<ActiveMaterialReclaimerComponent, ComponentStartup>(OnActiveStartup);
+        //SubscribeLocalEvent<ActiveMaterialReclaimerComponent, ComponentStartup>(OnActiveStartup); // Trauma
         SubscribeLocalEvent<MaterialReclaimerComponent, InteractUsingEvent>(OnInteractUsing,
             before: [typeof(SolutionTransferSystem), typeof(AnchorableSystem)]);
     }
@@ -115,10 +115,12 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         TryStartProcessItem(uid, args.OtherEntity, reclaimer);
     }
 
+    /* Trauma
     private void OnActiveStartup(EntityUid uid, ActiveMaterialReclaimerComponent component, ComponentStartup args)
     {
         component.ReclaimingContainer = Container.EnsureContainer<Container>(uid, ActiveReclaimerContainerId);
     }
+    */
 
     /// <summary>
     /// Tries to start processing an item via a <see cref="MaterialReclaimerComponent"/>.
@@ -174,7 +176,7 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         var active = EnsureComp<ActiveMaterialReclaimerComponent>(uid);
         active.Duration = duration;
         active.EndTime = Timing.CurTime + duration;
-        Container.Insert(item, active.ReclaimingContainer);
+        active.Processing.Add(item); // Trauma - add to list instead of a container
         return true;
     }
 
@@ -191,7 +193,10 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         if (!Resolve(uid, ref component, ref active, false))
             return false;
 
-        RemCompDeferred(uid, active);
+        // <Trauma> - only remove it when done processing everything
+        if (active.Processing.Count == 0)
+            RemCompDeferred(uid, active);
+        // </Trauma>
         return true;
     }
 
@@ -240,9 +245,8 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
     /// </summary>
     public bool CanStart(EntityUid uid, MaterialReclaimerComponent component)
     {
-        /* Goobstation - Recycle Update - Commented to prevent recycling one item several times
-          if (HasComp<ActiveMaterialReclaimerComponent>(uid))
-            return false;*/
+        if (HasComp<ActiveMaterialReclaimerComponent>(uid))
+            return false;
 
         return component.Powered && component.Enabled && !component.Broken;
     }
@@ -273,6 +277,10 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         if (!Resolve(reclaimer, ref reclaimerComponent))
             return TimeSpan.Zero;
 
+        // <Trauma> - delay for mincing mobs
+        if (HasComp<MobStateComponent>(item))
+            return TimeSpan.FromSeconds(0.5f);
+        // </Trauma>
         if (!reclaimerComponent.ScaleProcessSpeed ||
             !Resolve(item, ref compositionComponent, false))
             return reclaimerComponent.MinimumProcessDuration;

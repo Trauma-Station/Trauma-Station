@@ -299,7 +299,7 @@
   - type: Nymph
     blacklist:
       components:
-      - ChangelingTransform
+      - ChangelingIdentity # Trauma - was ChangelingTransform, that doesnt exist here
 
 - type: entity
   parent: [ OrganDionaBrain, BaseNymphingOrgan ]

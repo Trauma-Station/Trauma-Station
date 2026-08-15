@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Body;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
@@ -27,6 +30,9 @@ namespace Content.Server.Materials;
 /// <inheritdoc/>
 public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 {
+    // <Trauma>
+    [Dependency] private BodySystem _body = default!;
+    // </Trauma>
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private GhostSystem _ghostSystem = default!;
     [Dependency] private MaterialStorageSystem _materialStorage = default!;
@@ -126,17 +132,30 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         if (!base.TryFinishProcessItem(uid, component, active))
             return false;
 
-        if (active.ReclaimingContainer.ContainedEntities.FirstOrNull() is not { } item)
+        // <Trauma> - replace container with Processing list
+        var i = active.Processing.Count - 1;
+        if (i < 0)
             return false;
 
-        Container.Remove(item, active.ReclaimingContainer);
-        Dirty(uid, component);
+        var item = active.Processing[i];
+        if (Deleted(item))
+            return false;
+        // </Trauma>
 
         // scales the output if the process was interrupted.
         var completion = 1f - Math.Clamp((float) Math.Round((active.EndTime - Timing.CurTime) / active.Duration),
             0f,
             1f);
         Reclaim(uid, item, completion, component);
+        // <Trauma> - have a delay for damaging mobs, doesnt matter for items since they will just be recycled immediately
+        active.Duration += TimeSpan.FromSeconds(0.5);
+        active.EndTime += TimeSpan.FromSeconds(0.5);
+
+        // if it got deleted (always will for items) stop processing it
+        // keep processing mobs stacking slash damage
+        if (Deleted(item))
+            active.Processing.RemoveAt(i);
+        // </Trauma>
 
         return true;
     }
@@ -163,9 +182,11 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         {
             var didBloody = false;
 
-            if (component.DamageOnEmag is not null && _damage.TryChangeDamage(item, component.DamageOnEmag, false)) // It shouldn't ignore resistance
+            // Trauma - add targetPart and canMiss
+            if (component.DamageOnEmag is not null && _damage.TryChangeDamage(item, component.DamageOnEmag, false, targetPart: _body.GetRandomExtremity(item), canMiss: false)) // It shouldn't ignore resistance
                 didBloody = true;
 
+            /* Trauma - just delimb instead of gibbing, the mob itself doesnt have destructible thresholds
             if (_destructible.CanDestroy(item) && component.GibOnEmag)
             {
                 var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
@@ -177,9 +198,11 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
                 didBloody = true;
             }
+            */
 
             if (didBloody)
                 _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+            return; // Trauma - just damage mobs instead of deleting them
         }
 
         if (_destructible.CanDestroy(item) && component.ReclaimSolutions)
