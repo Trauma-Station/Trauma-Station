@@ -38,6 +38,7 @@ public sealed partial class CircuitSystem : EntitySystem
             }
 
             UpdateChangedGates(comp);
+
             // change any momentary pulses back to low since theyve been processed
             for (var i = 0; i < comp.Inputs.Count; i++)
             {
