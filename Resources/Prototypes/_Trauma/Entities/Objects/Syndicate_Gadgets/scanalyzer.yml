@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: [ BaseItem, BaseSyndicateContraband ]
   id: BaseSyndicateScanalyzer
   name: syndicate scanalyzer
   description: A fiendish device that reverse engineers the schematics for cutting edge technology.
-  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Syndicate/syndicate_scanalyzer.rsi
