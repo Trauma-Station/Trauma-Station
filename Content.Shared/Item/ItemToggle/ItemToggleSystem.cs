@@ -3,6 +3,7 @@ using Content.Shared.Clothing.EntitySystems;
 // </Trauma>
 using Content.Shared.ActionBlocker;
 using Content.Shared.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
@@ -411,7 +412,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnExamined(Entity<ItemToggleExaminableStatusComponent> ent, ref ExaminedEvent args)
     {
-        var status = IsActivated(ent.Owner) ? Loc.GetString(ent.Comp.OnText) : Loc.GetString(ent.Comp.OffText);
+        var status = Loc.GetString(IsActivated(ent.Owner) ? ent.Comp.OnText : ent.Comp.OffText, ("target", Identity.Entity(ent, EntityManager)));
         args.PushMarkup(status);
     }
 }
