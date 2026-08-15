@@ -36,22 +36,11 @@ public sealed partial class ComboAttackModifier
     public MartialArtModifierType Type = MartialArtModifierType.AttackRate;
 
     /// <summary>
-    /// Flat multiplier to apply, ignored when <see cref="VelocityExponent"/> is set.
+    /// Event raised on the performer to calculate the multiplier.
     /// </summary>
-    public float Multiplier = 1f;
+    public BaseComboMultiplierEvent Multiplier = new FlatMultiplierEvent();
 
     public float Modifier;
 
     public TimeSpan Duration = TimeSpan.FromSeconds(3);
-
-    /// <summary>
-    /// If set, the multiplier is the user's velocity raised to this instead of <see cref="Multiplier"/>.
-    /// </summary>
-    public float? VelocityExponent;
-
-    /// <summary>
-    /// Bounds for the velocity scaled multiplier.
-    /// </summary>
-    public float MinMultiplier = 1f;
-    public float MaxMultiplier = 1.5f;
 }

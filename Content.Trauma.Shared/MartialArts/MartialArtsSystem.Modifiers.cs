@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.MartialArts;
@@ -165,10 +164,6 @@ public partial class MartialArtsSystem
         if (args.Performer == args.Target || !_query.TryComp(ent.Owner, out var modifiers))
             return;
 
-        var velocity = _physicsQuery.TryComp(args.Performer, out var physics)
-            ? physics.LinearVelocity.Length()
-            : 0f;
-
         foreach (var rule in ent.Comp.Modifiers)
         {
             if (rule.AttackTypes is { } types && !types.Contains(args.Type))
@@ -177,11 +172,13 @@ public partial class MartialArtsSystem
             if (rule.UnarmedOnly && args.Weapon != args.Performer)
                 continue;
 
-            var multiplier = rule.VelocityExponent is { } exponent
-                ? Math.Clamp(MathF.Pow(velocity, exponent), rule.MinMultiplier, rule.MaxMultiplier)
-                : rule.Multiplier;
+            // stored on the component and reused, so reset the result first
+            var ev = rule.Multiplier;
+            ev.User = args.Performer;
+            ev.Multiplier = 1f;
+            RaiseLocalEvent(args.Performer, (object) ev, true);
 
-            ApplyModifier((ent, modifiers), rule.Type, multiplier, rule.Modifier, rule.Duration, args.Performer);
+            ApplyModifier((ent, modifiers), rule.Type, ev.Multiplier, rule.Modifier, rule.Duration, args.Performer);
         }
     }
 }

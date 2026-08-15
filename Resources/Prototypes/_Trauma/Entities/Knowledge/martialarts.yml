@@ -92,11 +92,13 @@
     modifiers:
     - attackTypes: [Harm, Disarm]
       unarmedOnly: true
-      velocityExponent: 0.2
+      multiplier: !type:VelocityMultiplierEvent
+        exponent: 0.2
       duration: 4
     - attackTypes: [Grab]
       type: MoveSpeed
-      multiplier: 1.2
+      multiplier: !type:FlatMultiplierEvent
+        value: 1.2
       duration: 6
   - type: EffectsOnMeleeHit
     missEffects:

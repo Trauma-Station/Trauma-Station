@@ -15,8 +15,8 @@
     amount: -30
     scaling: false
   opponentEffects:
-  - !type:ModifyKnockdown
-    time: 2
+#  - !type:ModifyKnockdown
+#    time: 2
   - !type:HealthChange
     targetPart: Chest
     damage:
@@ -28,7 +28,7 @@
     time: 3
   - !type:GrabThrow
     speed: 5
-    dropItems: true
+    dropItems: false
   levelRequired: 10
 
 - type: combo
