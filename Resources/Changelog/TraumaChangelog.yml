@@ -13195,3 +13195,10 @@ Entries:
   id: 1438
   time: '2026-08-15T19:57:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4065
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can build APCs etc without a wall again.
+  id: 1439
+  time: '2026-08-15T20:22:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4096
