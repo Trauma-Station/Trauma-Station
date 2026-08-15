@@ -13178,3 +13178,20 @@ Entries:
   id: 1437
   time: '2026-08-15T19:33:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4094
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix void cloak temperature protection.
+  - type: Fix
+    message: Fix void cloak blocking surgery and jumpsuit stripping.
+  - type: Fix
+    message: Fix penetrating projectiles still dealing damage twice in some cases.
+  - type: Fix
+    message: Any glass shard, not just regular one, is usable for heretic rituals.
+  - type: Fix
+    message: Fix ert not spawning on heretic ascension.
+  - type: Fix
+    message: Fix reality shifts not spawning when heretic sacrifices someone.
+  id: 1438
+  time: '2026-08-15T19:57:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4065
