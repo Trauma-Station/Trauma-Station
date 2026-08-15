@@ -13171,3 +13171,10 @@ Entries:
   id: 1436
   time: '2026-08-15T07:13:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4088
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use pulses for circuit inputs.
+  id: 1437
+  time: '2026-08-15T19:33:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4094
