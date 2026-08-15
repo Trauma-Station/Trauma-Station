@@ -7,6 +7,8 @@ using Content.Medical.Shared.Surgery;
 using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
+using Content.Server.Atmos.Components;
+using Content.Server.Body.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
