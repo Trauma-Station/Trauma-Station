@@ -7,6 +7,8 @@ using Content.Medical.Shared.Surgery;
 using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
+using Content.Server.Atmos.Components;
+using Content.Server.Body.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
@@ -45,7 +47,7 @@ public sealed class SurgeryTest : InteractionTest
     [Test]
     public async Task DismemberingTest()
     {
-        var subject = SEntMan.GetEntity(await SpawnTarget(Human));
+        var subject = await SpawnHuman();
         await Server.WaitAssertion(() =>
         {
             if (_body.GetOrgan(subject, Torso) is not { } torso)
@@ -102,7 +104,7 @@ public sealed class SurgeryTest : InteractionTest
     [Test]
     public async Task HealWoundsTest()
     {
-        var subject = SEntMan.GetEntity(await SpawnTarget(Human));
+        var subject = await SpawnHuman();
         await Server.WaitAssertion(() =>
         {
             if (_body.GetOrgan(subject, Head) is not { } head)
@@ -158,5 +160,17 @@ public sealed class SurgeryTest : InteractionTest
     {
         Assert.That(wound.Comp.WoundSeverityPoint, Is.EqualTo(FixedPoint2.Zero), "Wound was not healed");
         Assert.That(SEntMan.Deleted(wound), "Wound did not get deleted after being healed");
+    }
+
+    private async Task<EntityUid> SpawnHuman()
+    {
+        var mob = SEntMan.GetEntity(await SpawnTarget(Human));
+        await Server.WaitPost(() =>
+        {
+            // dont want them to interfere with healing
+            SEntMan.RemoveComponent<BarotraumaComponent>(mob);
+            SEntMan.RemoveComponent<RespiratorComponent>(mob);
+        });
+        return mob;
     }
 }
