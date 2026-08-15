@@ -165,9 +165,12 @@ public sealed class SurgeryTest : InteractionTest
     private async Task<EntityUid> SpawnHuman()
     {
         var mob = SEntMan.GetEntity(await SpawnTarget(Human));
-        // dont want them to interfere with healing
-        SEntMan.RemoveComponent<BarotraumaComponent>(mob);
-        SEntMan.RemoveComponent<RespiratorComponent>(mob);
+        await Server.WaitPost(() =>
+        {
+            // dont want them to interfere with healing
+            SEntMan.RemoveComponent<BarotraumaComponent>(mob);
+            SEntMan.RemoveComponent<RespiratorComponent>(mob);
+        });
         return mob;
     }
 }
