@@ -20,10 +20,10 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnBeforeHeatExchange(Entity<VoidCloakComponent> ent, ref InventoryRelayedEvent<BeforeHeatExchangeEvent> args)
     {
-        if (ent.Comp.Transparent)
+        if (ent.Comp.Transparent || args.Args.OurTemp < args.Args.OtherTemp)
             return;
 
-        args.Args.HeatTransferModifier *= 0.001f;
+        args.Args.Cancelled = true;
     }
 
     [SubscribeLocalEvent]
