@@ -483,6 +483,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -517,6 +518,8 @@
   - type: HereticClothing
   - type: PressureProtection
   - type: VoidCloak
+  - type: StripBlockBypass
+  - type: SurgeryIgnoreClothing
   - type: Appearance
   - type: GenericVisualizer
     visuals:

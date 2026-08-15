@@ -1830,7 +1830,7 @@
           name: heretic-ritual-ingredient-tank
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -1863,7 +1863,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
         - whitelist:
             components:
@@ -1904,7 +1904,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
         - whitelist:
             tags:
@@ -2057,7 +2057,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -2356,7 +2356,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
         - whitelist:
             tags:
