@@ -13202,3 +13202,12 @@ Entries:
   id: 1439
   time: '2026-08-15T20:22:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4096
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Coconut Flesh removed, all sources have been replaced with nutriment.
+  - type: Tweak
+    message: Crabon now requires Coconut Water due to the removal of Coconut Flesh.
+  id: 1440
+  time: '2026-08-15T22:21:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4101
