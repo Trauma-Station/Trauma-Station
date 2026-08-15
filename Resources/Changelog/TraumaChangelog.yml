@@ -13151,3 +13151,23 @@ Entries:
   id: 1434
   time: '2026-08-13T16:09:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4068
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed DNA scrambler price from 15tc to 10tc.
+  id: 1435
+  time: '2026-08-15T03:01:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4087
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Devastator fires slower (1.5 -> 1)
+  - type: Tweak
+    message: >-
+      Kunai deals more damage (10 -> 15 Melee Pierce, 15 -> 20 Throwing Pierce
+      and Structural)
+  - type: Tweak
+    message: Kunai are now made 3x faster than other rev weapons
+  id: 1436
+  time: '2026-08-15T07:13:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4088
