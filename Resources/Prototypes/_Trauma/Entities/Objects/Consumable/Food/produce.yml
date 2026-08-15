@@ -85,7 +85,7 @@
   - type: Solution
     solution:
       reagents:
-      - ReagentId: CoconutFlesh
+      - ReagentId: Nutriment
         Quantity: 20
       - ReagentId: Vitamin
         Quantity: 10
@@ -127,7 +127,7 @@
   - type: Solution
     solution:
       reagents:
-      - ReagentId: CoconutFlesh
+      - ReagentId: Nutriment
         Quantity: 10
       - ReagentId: Vitamin
         Quantity: 5
