@@ -38,21 +38,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
     [Dependency] private EntityQuery<CounterAttackerComponent> _counterAttackerQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CounterAttackerComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
-
-        Subs.SubscribeWithRelay<SheathCounterattackComponent, GetCounterAttackSheathEvent>(OnGetSheath,
-            baseEvent: false,
-            held: false);
-
-        SubscribeLocalEvent<CombatModeComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
-
-        SubscribeLocalEvent<CounterAttackingStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<CounterAttackingStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
         // Don't apply blocker status effect if this effect has ended early
@@ -67,11 +53,13 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
             TimeSpan.FromMilliseconds(1));
     }
 
-    private void OnGetSheath(Entity<SheathCounterattackComponent> ent, ref GetCounterAttackSheathEvent args)
+    [SubscribeLocalEvent]
+    private void OnGetSheath(Entity<SheathCounterattackComponent> ent, ref InventoryRelayedEvent<GetCounterAttackSheathEvent> args)
     {
-        args.Sheath ??= ent;
+        args.Args.Sheath ??= ent;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetAltVerbs(Entity<CombatModeComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
@@ -90,9 +78,6 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
             Priority = 10,
             Act = () =>
             {
-                if (!CanCounterAttack(user)) // check again
-                    return;
-
                 if (GetSheathAndWeapon(user) is not { } tuple)
                     return;
 
@@ -149,6 +134,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
         return (sheath, (weapon, melee));
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<CounterAttackerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         // This isn't predicted because it calls _riposte.CounterAttack which calls

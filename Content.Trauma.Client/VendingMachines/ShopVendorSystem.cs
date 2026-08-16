@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.VendingMachines;
 using Content.Trauma.Shared.VendingMachines;
-using Content.Shared.VendingMachines;
 using Robust.Client.Animations;
 
 namespace Content.Trauma.Client.VendingMachines;
@@ -9,37 +9,29 @@ namespace Content.Trauma.Client.VendingMachines;
 public sealed partial class ShopVendorSystem : SharedShopVendorSystem
 {
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShopVendorComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<ShopVendorComponent, AnimationCompletedEvent>(OnAnimationCompleted);
-    }
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     // copied from vending machines because its not reusable in other systems :)
+    [SubscribeLocalEvent]
     private void OnAnimationCompleted(Entity<ShopVendorComponent> ent, ref AnimationCompletedEvent args)
     {
-        UpdateAppearance((ent, ent.Comp));
+        UpdateAppearance(ent);
     }
 
-    private void OnAppearanceChange(Entity<ShopVendorComponent> ent, ref AppearanceChangeEvent args)
+    [SubscribeLocalEvent]
+    private void OnAutoHandleState(Entity<ShopVendorComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateAppearance((ent, ent.Comp, args.Sprite));
+        UpdateAppearance(ent);
     }
 
     private void UpdateAppearance(Entity<ShopVendorComponent, SpriteComponent?> ent)
     {
-        if (!Resolve(ent, ref ent.Comp2))
+        if (!_spriteQuery.TryComp(ent, out var spriteComp))
             return;
 
-        if (!_appearance.TryGetData<VendingMachineVisualState>(ent, VendingMachineVisuals.VisualState, out var state))
-            state = VendingMachineVisualState.Normal;
-
-        var sprite = (ent.Owner, ent.Comp2);
+        var state = ent.Comp1.State;
+        var sprite = new Entity<SpriteComponent?>(ent.Owner, spriteComp);
         SetLayerState(sprite, VendingMachineVisualLayers.Base, ent.Comp1.OffState);
         SetLayerState(sprite, VendingMachineVisualLayers.Screen, ent.Comp1.ScreenState);
         switch (state)

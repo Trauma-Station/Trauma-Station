@@ -1,15 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.StationRadio.Components;
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Utility;
 using Content.Shared.Audio.Jukebox;
 using Robust.Client.Audio;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Audio;
-using Robust.Shared.IoC;
-using Robust.Shared.Utility;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 

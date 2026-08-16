@@ -6,10 +6,7 @@
   - Conquest
   - GovernmentMan
   - SyndicateHighCommander # already ontag...
-  - NavyCaptain
-  - NavyOfficerUndercover
-  - Diplomat
-  - Inspector
+  - NanotrasenRepresentative
   - HecuOperative
   # </Trauma>
   - CentralCommandOfficial
@@ -31,15 +28,13 @@
   parent: BaseAntagSpecifier
   id: CommandBlacklistedAntag
   jobBlacklist:
-  # <Trauma>
   - Captain
-  # - HeadOfPersonnel
+  - HeadOfPersonnel
   - HeadOfSecurity
-  # - ChiefMedicalOfficer
-  # - ResearchDirector
-  # - ChiefEngineer
-  # - Quartermaster
-  # </Trauma>
+  - ChiefMedicalOfficer
+  - ResearchDirector
+  - ChiefEngineer
+  - Quartermaster
 
 # Borgs
 - type: antagSpecifier
@@ -86,3 +81,5 @@
   abstract: true
   parent: [ MindshieldRestrictedAntag, CyborgBlacklistedAntag, InternBlacklistedAntag ]
   id: RestrictedAntag
+  jobBlacklist:
+  - TramDriver

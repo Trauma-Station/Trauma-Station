@@ -8,7 +8,8 @@ namespace Content.Shared.Revolutionary.Components;
 /// <summary>
 /// Component used for marking a Head Rev for conversion and winning/losing.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedRevolutionarySystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(RevolutionarySystem))]
+[AutoGenerateComponentState] // Trauma
 public sealed partial class HeadRevolutionaryComponent : Component
 {
     /// <summary>

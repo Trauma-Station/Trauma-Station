@@ -2,7 +2,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Magic;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;

@@ -303,3 +303,17 @@ Entries:
   id: 39
   time: '2026-07-30T00:45:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3801
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed shadowling and thrall players just being listed as team antag.
+  id: 40
+  time: '2026-08-09T23:50:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4019
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Gamemode votes only set the gamemode for 1 round instead of until changed.
+  id: 41
+  time: '2026-08-12T13:47:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4054

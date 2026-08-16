@@ -1,22 +1,29 @@
 using Content.Server.StationEvents.Components;
-using Content.Server.AlertLevel;
-﻿using Content.Shared.GameTicking.Components;
+using Content.Shared.AlertLevel;
+using Content.Shared.GameTicking.Components;
 
 namespace Content.Server.StationEvents.Events;
 
 public sealed partial class AlertLevelInterceptionRule : StationEventSystem<AlertLevelInterceptionRuleComponent>
 {
-    [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
 
-    protected override void Started(EntityUid uid, AlertLevelInterceptionRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args) // Goobstation - Changed an indent.
+    protected override void Started(EntityUid uid, AlertLevelInterceptionRuleComponent component, GameRuleComponent gameRule,
+        GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
 
         if (!TryGetRandomStation(out var chosenStation))
             return;
-        if (_alertLevelSystem.GetLevel(chosenStation.Value) != "green" && component.OverrideAlert == false) // Goobstation
+
+        if (!_alertLevel.TryGetLevel(chosenStation.Value, out var level)
+            || !_alertLevel.TryGetDefaultLevel(chosenStation.Value, out var defaultLevel)
+            || level != defaultLevel && !component.OverrideAlert) // Trauma - check OverrideAlert
             return;
 
-        _alertLevelSystem.SetLevel(chosenStation.Value, component.AlertLevel, true, true, true, component.Locked); // Goobstation
+        _alertLevel.SetLevel(chosenStation.Value,
+            component.AlertLevel,
+            force: true,
+            locked: component.Locked); // Trauma
     }
 }

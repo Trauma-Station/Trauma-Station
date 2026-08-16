@@ -15,7 +15,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Muting;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
@@ -43,13 +43,12 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedStaminaSystem _stamina = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
-    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private HereticSystem _heretic = default!;
     [Dependency] private TeleportSystem _teleport = default!;
 
     private static readonly EntProtoId AlertEffect = "CarvingAlertedStatusEffect";
-    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
+    private static readonly EntProtoId MutedEffect = "StatusEffectMuted";
     private HashSet<Entity<HereticCarvingComponent>> _carvings = new();
 
     public override void Initialize()
@@ -80,7 +79,7 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
             return;
 
         var user = ent.Value;
-        if (!_statusNew.TryEffectsWithComp<CarvingAlertedStatusEffectComponent>(user, out var effects) ||
+        if (!_status.TryEffectsWithComp<CarvingAlertedStatusEffectComponent>(user, out var effects) ||
             effects.Count == 0)
             return;
 
@@ -92,7 +91,7 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
         var coords = GetCoordinates(ev.Coords);
         var sound = effect.Comp1.TeleportSound;
         _teleport.Teleport(user, coords, sound, user);
-        _statusNew.TryRemoveStatusEffect(user, AlertEffect);
+        _status.TryRemoveStatusEffect(user, AlertEffect);
         QueueDel(carving);
     }
 
@@ -115,17 +114,8 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
     private void OnMadTriggered(Entity<MadCarvingComponent> ent, ref TrapTriggeredEvent args)
     {
         _stamina.TakeStaminaDamage(args.Victim, ent.Comp.StaminaDamage);
-
-        if (!TryComp(args.Victim, out StatusEffectsComponent? status))
-            return;
-
-        _statusNew.TryUpdateStatusEffectDuration(args.Victim, BlindnessSystem.BlindingStatusEffect, ent.Comp.BlindnessTime);
-
-        _status.TryAddStatusEffect<MutedComponent>(args.Victim,
-            Muted,
-            ent.Comp.MuteTime,
-            true,
-            status);
+        _status.TryUpdateStatusEffectDuration(args.Victim, BlindnessSystem.BlindingStatusEffect, ent.Comp.BlindnessTime);
+        _status.TryUpdateStatusEffectDuration(args.Victim, MutedEffect, ent.Comp.MuteTime);
     }
 
     private void OnAlertTriggered(Entity<AlertCarvingComponent> ent, ref TrapTriggeredEvent args)
@@ -161,7 +151,7 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
             Color.DarkGreen,
             canCoalesce: false);
         _audio.PlayGlobal(ent.Comp.AlertSound, actor.PlayerSession);
-        if (_statusNew.TryUpdateStatusEffectDuration(ent.Comp.User.Value,
+        if (_status.TryUpdateStatusEffectDuration(ent.Comp.User.Value,
                 AlertEffect,
                 out var effect,
                 TimeSpan.FromMilliseconds(ent.Comp.TeleportDelay + 100)))

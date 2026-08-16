@@ -28,6 +28,7 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
     [Dependency] private SpellsSystem _spells = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private WizardRuleSystem _wizard = default!;
+    [Dependency] private FadingTimedDespawnSystem _fadeDespawn = default!;
 
     private static readonly EntProtoId SmokeProto = "AdminInstantEffectSmoke10";
 
@@ -102,10 +103,7 @@ public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
             _ui.CloseUis(ent.Owner);
 
             // Don't Queuedel right away so that client doesn't throw debug assert exception
-            var fading = EnsureComp<FadingTimedDespawnComponent>(ent.Owner);
-            fading.Lifetime = 0f;
-            fading.FadeOutTime = 2f;
-            Dirty(ent.Owner, fading);
+            _fadeDespawn.FadeDespawnEntity(ent, TimeSpan.Zero, TimeSpan.FromSeconds(2));
         }
 
         Dirty(ent);

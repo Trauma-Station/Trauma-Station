@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Medical.Common.Targeting;
 using Content.Server.Atmos.Components;
@@ -13,11 +11,10 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Server.Antag;
 using Content.Trauma.Shared.Antag;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
+[Category("GameRuleTests")]
 public sealed partial class ChangelingTest : GameTest
 {
     private static ProtoId<AntagSmitePrototype> Smite = "Changeling";

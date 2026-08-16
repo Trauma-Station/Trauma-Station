@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Server.RoundEnd;
+// </Trauma>
 using Content.Server.Objectives.Components;
 using Content.Shared.Objectives.Components;
 
@@ -5,6 +8,9 @@ namespace Content.Server.Objectives.Systems;
 
 public sealed partial class CarpRiftsConditionSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    // </Trauma>
     [Dependency] private NumberObjectiveSystem _number = default!;
 
     public override void Initialize()
@@ -40,6 +46,11 @@ public sealed partial class CarpRiftsConditionSystem : EntitySystem
             return;
 
         comp.RiftsCharged++;
+
+        // <Trauma>
+        if (comp.RiftsCharged > 2)
+            _roundEnd.RequestRoundEnd(countdownTime: TimeSpan.FromMinutes(5), name: Loc.GetString("dragon-rifts-announcement"));
+        // </Trauma>
     }
 
     /// <summary>

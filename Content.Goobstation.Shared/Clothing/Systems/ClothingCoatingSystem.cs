@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Text;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
@@ -12,14 +13,9 @@ public sealed partial class ClothingCoatingSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private StringBuilder sb = new();
 
-        SubscribeLocalEvent<ClothingCoatingComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<CoatedClothingComponent, ExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<ClothingCoatingComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Target is not { } target ||
@@ -41,13 +37,26 @@ public sealed partial class ClothingCoatingSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("clothing-coating-success", ("target", target), ("source", ent)), target);
         Dirty(target, coated);
 
-        QueueDel(ent);
+        PredictedQueueDel(ent);
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<CoatedClothingComponent> ent, ref ExaminedEvent args)
     {
-        var names = string.Join(", ", ent.Comp.CoatingNames);
-        args.PushMarkup(Loc.GetString("clothing-coating-inspect", ("coatings", names)));
+        if (ent.Comp.CoatingNames.Count == 0)
+            return;
+
+        sb.Clear();
+
+        var count = ent.Comp.CoatingNames.Count;
+        for (var i = 0; i < count; i++)
+        {
+            sb.Append(Loc.GetString(ent.Comp.CoatingNames[i]));
+            if (i < count - 1)
+                sb.Append(", ");
+        }
+
+        args.PushMarkup(Loc.GetString("clothing-coating-inspect", ("coatings", sb.ToString())));
     }
 }

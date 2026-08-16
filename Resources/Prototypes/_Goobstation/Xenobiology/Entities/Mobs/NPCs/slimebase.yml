@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat ]
+  parent: [ BaseMobSlimes, SimpleMobBase, MobCombat, BaseSlimeJigglePhysics ]
   id: BaseMobSlimeXenobio
   name: basic slime
   description: It looks so much like jelly. I wonder what it tastes like?
@@ -23,7 +23,7 @@
       Starving: 0.2
       Dead: 0.1
     baseDecayRate: 0.5
-    starvingSlowdownModifier: 0
+    starvingSlowdownModifier: 0.5 # Let them move
   - type: Sprite
     noRot: true
     drawdepth: OverMobs
@@ -186,21 +186,10 @@
   parent: MobSlimeXenobioBaby
   id: MobSlimeXenobioAdult
   categories: [ HideSpawnMenu ]
-  name: slime
   suffix: Adult
-  description: It looks so much like jelly. I wonder what it tastes like?
   components:
   - type: MobGrowth
-    hungerRequired: 75
     currentStage: adult
-    stages:
-      baby:
-        nextStage: adult
-        sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
-        displayName: baby
-      adult:
-        sprite: _Goobstation/Xenobiology/Mobs/slimesAdult.rsi
-        displayName: adult
 
 - type: entity
   abstract: true

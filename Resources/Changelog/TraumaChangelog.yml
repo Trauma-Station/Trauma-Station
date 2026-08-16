@@ -12665,3 +12665,604 @@ Entries:
   id: 1385
   time: '2026-08-02T07:47:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3903
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: LoneOps can no longer buy the zombie bundle.
+  id: 1386
+  time: '2026-08-03T13:18:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3913
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: Slayer overcoat now can toggle to broadcast to station radios.
+  - type: Tweak
+    message: Monarch coat can now be bought by non-human syndicate agents.
+  id: 1387
+  time: '2026-08-03T16:21:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3892
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Increased the contact damage of most contact chemicals specifically
+      sulfuric acid, fluorosulfuric acid, polytrinic acid, and razorium
+  - type: Tweak
+    message: >-
+      Tweaked the following chemicals to allow them to spill on the floor from
+      smoke/foam: fluorosulfuric acid, polytrinic acid, razorium, welding fuel,
+      chlorine trifluoride, and mold
+  id: 1388
+  time: '2026-08-03T20:19:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3616
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen not breathing.
+  id: 1389
+  time: '2026-08-03T23:39:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3928
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tendons surviving space.
+  id: 1390
+  time: '2026-08-04T00:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3937
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Revamped the Mining Shuttle
+  id: 1391
+  time: '2026-08-04T03:20:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Syndicate snack box no longer gives you gutworms.
+  id: 1392
+  time: '2026-08-04T20:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3948
+- author: tsarevichvanya
+  changes:
+  - type: Fix
+    message: Fixed xeno resin not slowing you down.
+  id: 1393
+  time: '2026-08-04T20:41:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3946
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed robust harvest and saltpeter not healing ballistic damage on dionae.
+  id: 1394
+  time: '2026-08-04T22:35:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3953
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Chickens only take 5 minutes to age from baby to adult now
+  - type: Tweak
+    message: Chickens ageing is no longer random
+  - type: Tweak
+    message: Happiness for each chicken when petted is now increased
+  - type: Tweak
+    message: Huger useable when laying an egg is decreased
+  id: 1395
+  time: '2026-08-04T23:00:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3942
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed heretic blades not acting as bonesaws or scalpels
+  id: 1396
+  time: '2026-08-05T06:16:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3959
+- author: Kenkaitos
+  changes:
+  - type: Fix
+    message: Fixed slime not being able to move after being starved
+  id: 1397
+  time: '2026-08-05T07:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3957
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix rust ascended heretics being immune to melee.
+  - type: Tweak
+    message: Carving knife draws runes 3x faster but they are much more visible.
+  - type: Fix
+    message: Fix rust construction not working.
+  id: 1398
+  time: '2026-08-05T11:29:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3960
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to go to red alert.
+  - type: Fix
+    message: Fixed some augments not being items usable in surgery.
+  - type: Remove
+    message: Command antags experiment has ended.
+  id: 1399
+  time: '2026-08-05T19:31:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3967
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix woundmed damage healing being less than intended in some cases.
+  id: 1400
+  time: '2026-08-06T12:05:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3977
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed dwarves being immune to thermal vision.
+  id: 1401
+  time: '2026-08-06T12:08:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3898
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix xray projectiles not penetrating through walls.
+  - type: Tweak
+    message: Assault laser has lower dps but much more ammo capacity, as intended.
+  - type: Tweak
+    message: Laser sniper clothing/held slowdown 25% -> 15%
+  - type: Tweak
+    message: Laser rifle projectile damage increased by 1
+  - type: Tweak
+    message: Laser lmg battery is now normal size not large.
+  id: 1402
+  time: '2026-08-06T13:03:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3976
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: >-
+      Unfathomable curio shield nerfed to have higher recharge cd and to
+      recharge out of combat and not always.
+  - type: Tweak
+    message: Lionhunter rifle empowered shot no longer deals double damage.
+  - type: Tweak
+    message: Pale cloak doesn't speed up heretic by 10% anymore.
+  - type: Tweak
+    message: >-
+      Sharp medal blad throwing cd lowered, but you can't throw immediately
+      after melee attack.
+  id: 1403
+  time: '2026-08-06T13:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3963
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed revs not being able to make flamethrower fuel tanks.
+  id: 1404
+  time: '2026-08-06T13:29:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3981
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed hanged demon not being able to hardgrab people.
+  id: 1405
+  time: '2026-08-06T13:37:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3982
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Command lynchings are up by 400%.
+  id: 1406
+  time: '2026-08-06T15:35:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3983
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Foam no longer adds reagents to dead mobs.
+  - type: Fix
+    message: Fixed not being able to get synthmeat seeds in any way.
+  id: 1407
+  time: '2026-08-08T07:17:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3992
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mindshielded headrevs not having the broken mindshield hud icon.
+  id: 1408
+  time: '2026-08-08T07:29:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3991
+- author: Nousagi37
+  changes:
+  - type: Fix
+    message: >-
+      Every Snakes no longer have 100HP but rather 45HP, and venom has been
+      tuned down a bit
+  - type: Tweak
+    message: Advanced Cleaning is now 5000 research points
+  id: 1409
+  time: '2026-08-08T09:23:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3737
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a new cartridge type used primarily by ED-209 (.30 Caseless)
+  - type: Add
+    message: >-
+      Added the ability for ED-209 to passively regenerate ammo at 1 bullet
+      every 4 seconds
+  - type: Tweak
+    message: Increased the health of ED-209 from 100 to 175
+  - type: Tweak
+    message: Decreased the firerate of ED-209 from 5 to 2
+  - type: Tweak
+    message: Decreased the maximum ammo capacity of ED-209 from 125 to 100
+  id: 1410
+  time: '2026-08-08T12:28:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3986
+- author: Aviu
+  changes:
+  - type: Add
+    message: Spies infiltrate the station!
+  - type: Remove
+    message: Thief is dead, spies killed him.
+  id: 1411
+  time: '2026-08-08T13:06:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3943
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed polymorph chems from botany reagent pool.
+  - type: Fix
+    message: Fixed bananamen organs rotting.
+  - type: Fix
+    message: Fixed slowdown resistance not working.
+  - type: Fix
+    message: Fixed red jelly not giving clothing fire vulnerability.
+  - type: Tweak
+    message: >-
+      Red jelly now gives flat 10% reduction to slowdown by clothing instead of
+      full immunity.
+  - type: Remove
+    message: removed speed legs and strength augments from research.
+  - type: Tweak
+    message: Renault butcher tc 40 -> 25.
+  - type: Fix
+    message: >-
+      Fix npc always ignoring stealth entities instead of only ignoring them
+      when they are invisible.
+  - type: Remove
+    message: Removed emag from syndi borg module.
+  id: 1412
+  time: '2026-08-08T13:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3904
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Physical skills (strength/toughness/athletics) are no more.
+  - type: Remove
+    message: Novice skill mastery is no more.
+  - type: Remove
+    message: Removed shield held slowdown.
+  - type: Add
+    message: >-
+      Added shield skill that is used for parries and blocking damage
+      percentage.
+  - type: Add
+    message: Sec vendor has shield and throwing skill chips.
+  - type: Tweak
+    message: Tweaked roundstart skill point pool and skill costs.
+  - type: Fix
+    message: >-
+      Fixed eshield weird behavor, also it charges slower now but can be melee
+      parried with.
+  id: 1413
+  time: '2026-08-08T13:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3698
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed lord of the night gibbing at 400 damage.
+  id: 1414
+  time: '2026-08-09T12:27:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4007
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Spy bounty refresh time is 12 minutes always.
+  - type: Tweak
+    message: Spy theft doafter time is longer depending on bounty difficulty.
+  - type: Tweak
+    message: Updated spy guidebook.
+  id: 1415
+  time: '2026-08-09T12:30:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4006
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed always rolling some random job you did not opt in to.
+  - type: Tweak
+    message: >-
+      Priority job rolls are now captain and a few engineers, doctors, secoffs
+      and miners. Players who don't have them set to Never will be chosen for
+      those before regular rolling.
+  id: 1416
+  time: '2026-08-09T16:38:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4009
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed Space Dragon's additional resistances to essentially every damage
+      type
+  - type: Tweak
+    message: >-
+      Reduced Space Dragon's Crit threshold from 450 hp to 375 hp, Also reduced
+      the threshold for damage slowdown
+  - type: Tweak
+    message: >-
+      Reduced dragon's damage from 30 damage a hit to 25 damage, Now it does the
+      same damage as an energy sword
+  id: 1417
+  time: '2026-08-10T04:33:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4022
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Syndicate Secure Briefcases can now be deconstructed providing 2 plasteel.
+  id: 1418
+  time: '2026-08-10T13:31:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4017
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added jiggle physics!
+  id: 1419
+  time: '2026-08-10T15:12:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4000
+- author: TraumaTised
+  changes:
+  - type: Add
+    message: Added a bunch of demons, godspeed chaplains.
+  - type: Tweak
+    message: Reworked angels.
+  - type: Tweak
+    message: Minor damage tweaks to demons.
+  id: 1420
+  time: '2026-08-10T16:07:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3939
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Meson goggles are now Engineering and Salvage contraband.
+  - type: Tweak
+    message: >-
+      Jackboots are now Security and Salvage contraband, removing cargo techs
+      rights to wear them.
+  - type: Tweak
+    message: G.O.R.I.L.L.A. gauntlet is now science contraband.
+  - type: Tweak
+    message: Chainsaw is now botany contraband.
+  - type: Tweak
+    message: Pickaxe, mining drills and mech mining drills are now salvage contraband.
+  id: 1421
+  time: '2026-08-10T18:29:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4025
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added the fulton launcher which can be bought for 1100 mining points.
+  id: 1422
+  time: '2026-08-10T19:26:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4031
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed forging metals being impossible due to losing heat way too fast
+  id: 1423
+  time: '2026-08-10T19:52:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4032
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added synthmeat seeds to the medicinal seeds crate
+  - type: Fix
+    message: Fixed clear corn, magic mushrooms and meth apples being unobtainable
+  id: 1424
+  time: '2026-08-11T23:59:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3996
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed dwarf damage sprites not matching their bodyparts.
+  id: 1425
+  time: '2026-08-12T00:05:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4046
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a bunch of machines being indestructible.
+  id: 1426
+  time: '2026-08-12T00:07:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4044
+- author: Nousagi37
+  changes:
+  - type: Remove
+    message: Removed Mime from getting cat ears for breaking silence vow.
+  - type: Add
+    message: >-
+      New Indictable Felony offense Code C§ 03-18  added into space law called
+      Breach of Silence; The act of a mime breaking a vow of silence, and
+      speaking.
+  - type: Tweak
+    message: >-
+      Mime no longer gets gibbed, killsign-smited, or turned into bread for
+      breaking their vow, but is now punishable under Space Law.
+  id: 1427
+  time: '2026-08-12T00:12:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3990
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Trash bag of Holding now fits in janibelt.
+  id: 1428
+  time: '2026-08-12T00:22:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4033
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added 9 new rehydratable cubes to emagged biocube fabricator/biogenerator
+  id: 1429
+  time: '2026-08-12T04:16:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4036
+- author: Pi-tanium
+  changes:
+  - type: Add
+    message: New 20k spesos option in the salvage vendor
+  id: 1430
+  time: '2026-08-12T20:09:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4058
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed players heating up or cooling down way too slowly, space actually
+      matters now.
+  id: 1431
+  time: '2026-08-13T11:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4066
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Some harmful skillchips can no longer be removed.
+  - type: Tweak
+    message: Leveling up chef CQC requires cooking unique recipes not 5000 bread.
+  id: 1432
+  time: '2026-08-13T14:16:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4069
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed midround shadowlings never spawning.
+  id: 1433
+  time: '2026-08-13T14:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4067
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed shadowlings not healing wounds in darkness.
+  id: 1434
+  time: '2026-08-13T16:09:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4068
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed DNA scrambler price from 15tc to 10tc.
+  id: 1435
+  time: '2026-08-15T03:01:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4087
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Devastator fires slower (1.5 -> 1)
+  - type: Tweak
+    message: >-
+      Kunai deals more damage (10 -> 15 Melee Pierce, 15 -> 20 Throwing Pierce
+      and Structural)
+  - type: Tweak
+    message: Kunai are now made 3x faster than other rev weapons
+  id: 1436
+  time: '2026-08-15T07:13:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4088
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use pulses for circuit inputs.
+  id: 1437
+  time: '2026-08-15T19:33:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4094
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix void cloak temperature protection.
+  - type: Fix
+    message: Fix void cloak blocking surgery and jumpsuit stripping.
+  - type: Fix
+    message: Fix penetrating projectiles still dealing damage twice in some cases.
+  - type: Fix
+    message: Any glass shard, not just regular one, is usable for heretic rituals.
+  - type: Fix
+    message: Fix ert not spawning on heretic ascension.
+  - type: Fix
+    message: Fix reality shifts not spawning when heretic sacrifices someone.
+  id: 1438
+  time: '2026-08-15T19:57:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4065
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can build APCs etc without a wall again.
+  id: 1439
+  time: '2026-08-15T20:22:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4096
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Coconut Flesh removed, all sources have been replaced with nutriment.
+  - type: Tweak
+    message: Crabon now requires Coconut Water due to the removal of Coconut Flesh.
+  id: 1440
+  time: '2026-08-15T22:21:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4101
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed borgs getting deleted if you deconstructed their charger.
+  id: 1441
+  time: '2026-08-16T00:35:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4104
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed emagged recycler just deleting people.
+  id: 1442
+  time: '2026-08-16T00:47:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4097
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mechs now insulate you from shocks.
+  id: 1443
+  time: '2026-08-16T01:00:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4107
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed the phoron cost on every biocube except holocarp, Let the factory
+      grow
+  - type: Tweak
+    message: Space Ticks have been tweaked so they are penetrated by projectiles now
+  id: 1444
+  time: '2026-08-16T01:34:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4105
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added flat ballistic resistance to all heretic robes.
+  id: 1445
+  time: '2026-08-16T05:35:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4110
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed heretic burglar's finesse and champion hook having infinite range.
+  - type: Fix
+    message: Fixed champion hook grab being escapeable while prone.
+  id: 1446
+  time: '2026-08-16T16:33:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4112
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix ghouls not understanding tau ceti basic after jaunting.
+  id: 1447
+  time: '2026-08-16T20:07:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4114

@@ -70,6 +70,6 @@
     - MutationColdAdaptation
     - MutationHeatAdaptation
     - MutationThermalAdaptation
-  - type: ComponentMutation
-    added:
-    - type: PressureImmunity
+  - type: StatusEffectsMutation
+    statusEffects:
+    - StatusEffectPressureImmunityMutation

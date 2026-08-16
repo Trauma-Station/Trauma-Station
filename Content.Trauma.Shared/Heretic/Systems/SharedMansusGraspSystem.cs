@@ -15,7 +15,6 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Speech.EntitySystems;
-using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Timing;
@@ -59,7 +58,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private SharedStaminaSystem _stamina = default!;
-    [Dependency] private SharedRatvarianLanguageSystem _language = default!;
+    [Dependency] private RatvarianLanguageSystem _language = default!;
     [Dependency] private UseDelaySystem _delay = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedHereticAbilitySystem _ability = default!;
@@ -91,32 +90,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     public const string ApplyGraspDefaultEffects = "ApplyGraspDefaultEffects";
     public const string ApplyGraspMark = "ApplyGraspMark";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HereticCombatMarkOnMeleeHitComponent, MeleeHitEvent>(OnMelee);
-        SubscribeLocalEvent<HereticCombatMarkOnMeleeHitComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<AreaMansusGraspComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<AreaMansusGraspComponent, AreaGraspChannelDoAfterEvent>(OnDoAfter);
-
-        SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract,
-            before: new[] { typeof(TouchSpellSystem), typeof(SharedCrayonSystem) });
-        SubscribeLocalEvent<RustGraspComponent, TouchSpellAttemptEvent>(OnRustAttempt);
-
-        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
-        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, ActionAttemptEvent>(OnActionAttempt);
-
-        SubscribeLocalEvent<MansusGraspComponent, TouchSpellUsedEvent>(OnTouchSpellUsed);
-
-        SubscribeLocalEvent<MindContainerComponent, MansusGraspSpecialEvent>(OnSpecial);
-
-        SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract,
-            before: new[] { typeof(TouchSpellSystem), typeof(SharedCrayonSystem) });
-        SubscribeLocalEvent<DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSpecial(Entity<MindContainerComponent> ent, ref MansusGraspSpecialEvent args)
     {
         if (InfuseOurBlades(ent))
@@ -164,6 +138,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         return success;
     }
 
+    [SubscribeLocalEvent]
     private void OnTouchSpellUsed(Entity<MansusGraspComponent> ent, ref TouchSpellUsedEvent args)
     {
         var user = args.User;
@@ -178,7 +153,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!invokeGrasp)
             args.CooldownOverride = TimeSpan.Zero;
 
-        if (!triggerGrasp || !TryComp(target, out StatusEffectsComponent? status))
+        if (!triggerGrasp || !HasComp<MobStateComponent>(target))
             return;
 
         _stun.TryKnockdown(target, ent.Comp.KnockdownTime);
@@ -187,6 +162,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);
     }
 
+    [SubscribeLocalEvent]
     private void OnActionAttempt(Entity<MansusGraspBlockTriggerComponent> ent, ref ActionAttemptEvent args)
     {
         if (!Status.HasStatusEffect(args.User, GraspAffectedStatus))
@@ -195,6 +171,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
     {
         if (args.User is { } user && Status.HasStatusEffect(user, GraspAffectedStatus))
@@ -221,6 +198,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         return TimeSpan.FromSeconds(cd);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<AreaMansusGraspComponent> ent, ref AreaGraspChannelDoAfterEvent args)
     {
         if (TerminatingOrDeleted(ent))
@@ -264,6 +242,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         PredictedQueueDel(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<AreaMansusGraspComponent> ent, ref UseInHandEvent args)
     {
         args.Handled = true;
@@ -288,11 +267,13 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<HereticCombatMarkOnMeleeHitComponent> ent, ref MapInitEvent args)
     {
         ResetPath(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMelee(Entity<HereticCombatMarkOnMeleeHitComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit || !_heretic.TryGetHereticComponent(args.User, out _, out _) &&
@@ -402,11 +383,13 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         grasp.Comp.Blackboard[SharedHereticRitualSystem.Mind] = mind;
     }
 
+    [SubscribeLocalEvent]
     private void OnRustAttempt(Entity<RustGraspComponent> ent, ref TouchSpellAttemptEvent args)
     {
         args.Cancelled = _delay.IsDelayed(ent.Owner, ent.Comp.Delay);
     }
 
+    [SubscribeLocalEvent(before: new[] { typeof(TouchSpellSystem), typeof(SharedCrayonSystem) })]
     private void OnRustInteract(EntityUid uid, RustGraspComponent comp, AfterInteractEvent args)
     {
         if (args.Handled)
@@ -454,6 +437,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         _actions.SetIfBiggerCooldown(touch.Action, time);
     }
 
+    [SubscribeLocalEvent(before: new[] { typeof(TouchSpellSystem), typeof(SharedCrayonSystem) })]
     private void OnAfterInteract(Entity<TagComponent> ent, ref AfterInteractEvent args)
     {
         if (!args.CanReach
@@ -476,13 +460,18 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
                  !_tag.HasAnyTag(ent.Comp, PenTags)) // not a pen
             return;
 
-        // remove our rune if clicked
-        if (args.Target != null && HasComp<HereticRitualRuneComponent>(args.Target))
+        if (args.Target is { } target)
         {
-            args.Handled = true;
-            // todo: add more fluff
-            PredictedQueueDel(args.Target);
-            return;
+            // remove our rune if clicked
+            if (HasComp<HereticRitualRuneComponent>(target))
+            {
+                args.Handled = true;
+                // todo: add more fluff
+                PredictedQueueDel(target);
+                return;
+            }
+            else if (_container.IsEntityInContainer(target))
+                return;
         }
 
         if (!canScribe)
@@ -509,6 +498,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         _doAfter.TryStartDoAfter(dargs);
     }
 
+    [SubscribeLocalEvent]
     private void OnRitualRuneDoAfter(DrawRitualRuneDoAfterEvent ev)
     {
         // delete the animation rune regardless

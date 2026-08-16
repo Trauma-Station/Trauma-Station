@@ -22,9 +22,14 @@
   name: Open tools panel
   description: Access the tools implanted within you
   components:
-  - type: Action
-    icon: { sprite: Clothing/Belt/utility.rsi, state: icon }
-    iconOn: Interface/Default/blocked.png
+  - type: Sprite
+    layers:
+    - sprite: Clothing/Belt/utility.rsi
+      state: icon
+      map: [ "enum.ActionVisuals.Icon" ]
+    - texture: Interface/Default/blocked.png
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
 
 - type: entity
   abstract: true
@@ -271,9 +276,14 @@
   name: Toggle strength augment
   description: Increases your melee damage by 25%, consumes 30W while active.
   components:
-  - type: Action
-    icon: Interface/Default/blocked.png
-    iconOn: { sprite: Objects/Tools/Toolboxes/toolbox_blue.rsi, state: icon }
+  - type: Sprite
+    layers:
+    - texture: Interface/Default/blocked.png
+      map: [ "enum.ActionVisuals.Icon" ]
+    - sprite: Objects/Tools/Toolboxes/toolbox_blue.rsi
+      state: icon
+      visible: false
+      map: [ "enum.ActionVisuals.IconToggled" ]
   - type: InstantAction
     event: !type:ToggleActionEvent
 

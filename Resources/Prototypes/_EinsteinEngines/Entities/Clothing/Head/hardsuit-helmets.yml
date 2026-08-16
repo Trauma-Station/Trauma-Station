@@ -2,7 +2,7 @@
 
 # Standard Combat Hardsuits
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCombatStandard
   name: combat hardsuit helmet
   description: An armoured helmet with a yellow visor and dual head-mounted lights.

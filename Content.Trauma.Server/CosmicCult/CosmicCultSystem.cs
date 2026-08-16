@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Events;
 using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
 using Content.Shared.Eye;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
@@ -25,13 +25,10 @@ namespace Content.Trauma.Server.CosmicCult;
 
 public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
-    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
 
     private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
     private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");
@@ -40,24 +37,26 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     {
         base.Update(frameTime);
 
+        var now = Timing.CurTime;
         var markQuery = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
         while (markQuery.MoveNext(out var uid, out var comp))
-            if (comp.ExpireTimer is { } timer && _timing.CurTime > timer)
-                RemComp<CosmicSubtleMarkComponent>(uid);
+        {
+            if (comp.ExpireTimer is { } timer && now > timer)
+                RemComp(uid, comp);
+        }
 
         var echoQuery = EntityQueryEnumerator<CosmicMalignEchoComponent>();
         while (echoQuery.MoveNext(out var uid, out var comp))
-            if (_timing.CurTime > comp.ExpireTimer)
-                RemComp<CosmicMalignEchoComponent>(uid);
-
+        {
+            if (now > comp.ExpireTimer)
+                RemComp(uid, comp);
+        }
     }
 
     public override int AddEntropy(Entity<CosmicCultComponent> ent, int amount)
     {
         var realAmount = base.AddEntropy(ent, amount);
-
         _cultRule.IncrementCultObjectiveEntropy(ent, realAmount);
-        Dirty(ent, ent.Comp);
         return realAmount;
     }
 
@@ -83,17 +82,17 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     /// Add the starting powers to the cultist.
     /// </summary>
     [SubscribeLocalEvent]
-    private void OnStartCultist(Entity<CosmicCultComponent> uid, ref ComponentInit args)
+    private void OnCultInit(Entity<CosmicCultComponent> ent, ref ComponentInit args)
     {
-        _eye.RefreshVisibilityMask(uid.Owner);
-        if (!HasComp<HumanoidProfileComponent>(uid)) return; // Non-humanoids don't get abilities
-        foreach (var actionId in uid.Comp.CosmicCultActions)
-            _actions.AddAction(uid, actionId);
+        _eye.RefreshVisibilityMask(ent.Owner);
+        if (!HasComp<HumanoidProfileComponent>(ent))
+            return; // Non-humanoids don't get abilities
 
-        uid.Comp.CosmicShopActionEntity = _actions.AddAction(uid, uid.Comp.CosmicShopAction);
-
-        if (TryComp(uid, out EyeComponent? eyeComp))
-            _eye.SetVisibilityMask(uid, eyeComp.VisibilityMask | (int) VisibilityFlags.CosmicCultMonument);
+        ent.Comp.SiphonActionEntity = Actions.AddAction(ent.Owner, ent.Comp.SiphonAction);
+        ent.Comp.ShopActionEntity = Actions.AddAction(ent.Owner, ent.Comp.ShopAction);
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.SiphonActionEntity),
+            nameof(CosmicCultComponent.ShopActionEntity));
     }
 
     [SubscribeLocalEvent]
@@ -124,7 +123,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         if (EntityIsCultist(args.User)) return;
 
         EnsureComp<CosmicDegenComponent>(args.User);
-        _popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
+        Popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
     }
 
     [SubscribeLocalEvent]

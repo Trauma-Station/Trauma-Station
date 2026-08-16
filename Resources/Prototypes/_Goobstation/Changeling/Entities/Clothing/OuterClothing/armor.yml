@@ -15,7 +15,7 @@
   - type: ChangePrefixAfterDelay
     delay: 1
   - type: TemperatureProtection
-    heatingCoefficient: 0.35 # solid protection, resists WEAKER fires
+    coefficient: 0.35 # solid protection, resists WEAKER fires
   - type: Armor
     traumaDeductions:
       Dismemberment: 1
@@ -29,7 +29,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Blunt: 0.45

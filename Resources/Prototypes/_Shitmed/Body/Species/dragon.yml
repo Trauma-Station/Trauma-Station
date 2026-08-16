@@ -60,7 +60,7 @@
   parent: OrganDragon
   id: OrganDragonInternal
   components:
-  - type: InternalOrgan
+  - type: InternalChildOrgan
     intCap: 28 # TODO UPDATE
     integrity: 28
     integrityThresholds:

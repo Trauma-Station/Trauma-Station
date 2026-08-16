@@ -13,6 +13,8 @@
         Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -22,7 +24,7 @@
     damageCoefficient: 0.65
 
 - type: entity
-  parent: [ ArmorHeretic, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorHeretic
   name: ominous armor
   description: A ragged, dusty set of robes. Strange eyes line the inside.
@@ -41,6 +43,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHeretic
@@ -56,6 +59,10 @@
     reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
 
 - type: entity
   abstract: true
@@ -71,6 +78,8 @@
         Ballistic: 0.7
         Heat: 0.7
         Caustic: 0.7
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
     damageCoefficient: 0.50
 
@@ -124,6 +133,8 @@
           Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
+        flatReductions:
+          Ballistic: 3
       traumaDeductions:
         Dismemberment: 0.4
         OrganDamage: 0.4
@@ -150,6 +161,8 @@
           Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
+        flatReductions:
+          Ballistic: 2
       traumaDeductions:
         Dismemberment: 0.2
         OrganDamage: 0.2
@@ -174,6 +187,8 @@
         Ballistic: 0.5
         Heat: 0.6
         Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -203,7 +218,7 @@
     lowPressureMultiplier: 1000
   - type: HollowWeave
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
 
 - type: entity
   abstract: true
@@ -219,6 +234,8 @@
         Ballistic: 0.5
         Heat: 0.4
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
     damageCoefficient: 0
 
@@ -242,7 +259,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.1
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
+    coefficient: 0.01
   - type: ScorchedMantle
 
 - type: entity
@@ -259,6 +276,8 @@
         Ballistic: 0.6
         Heat: 0.7
         Caustic: 0
+      flatReductions:
+        Ballistic: 2
 
 - type: entity
   parent: [ ArmorHereticFlesh, ClothingOuterArmorHeretic ]
@@ -309,6 +328,8 @@
         Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.5
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.5
       OrganDamage: 0.5
@@ -354,6 +375,8 @@
         Ballistic: 0.6
         Heat: 0.5
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
 
 - type: entity
   parent: [ ArmorHereticCosmos, ClothingOuterArmorHeretic ]
@@ -374,7 +397,7 @@
     lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
   - type: TackleModifier # Allows tackling on cosmic fields
     modifiers:
     - priority: 25
@@ -402,6 +425,8 @@
         Ballistic: 0.6
         Heat: 0.6
         Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -457,7 +482,7 @@
     damageCoefficient: 0.7
 
 - type: entity
-  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorCloakVoid
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
@@ -478,6 +503,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -512,6 +538,8 @@
   - type: HereticClothing
   - type: PressureProtection
   - type: VoidCloak
+  - type: StripBlockBypass
+  - type: SurgeryIgnoreClothing
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -519,3 +547,7 @@
         base:
           True: { state: transparent-icon }
           False: { state: icon }
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container

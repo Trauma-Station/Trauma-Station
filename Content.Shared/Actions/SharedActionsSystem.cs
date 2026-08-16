@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Actions;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Heretic;
 using Robust.Shared.Network;
@@ -39,6 +39,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -89,9 +90,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnActionMapInit(Entity<ActionComponent> ent, ref MapInitEvent args)
     {
-        var comp = ent.Comp;
-        comp.OriginalIconColor = comp.IconColor;
-        DirtyField(ent, ent.Comp, nameof(ActionComponent.OriginalIconColor));
+        _appearance.SetData(ent, ActionState.Toggled, ent.Comp.Toggled);
     }
 
     private void OnActionShutdown(Entity<ActionComponent> ent, ref ComponentShutdown args)
@@ -250,6 +249,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
             return;
 
         ent.Comp.Toggled = toggled;
+        _appearance.SetData(ent, ActionState.Toggled, toggled);
         UpdateAction(ent);
         DirtyField(ent, ent.Comp, nameof(ActionComponent.Toggled));
     }
@@ -1047,7 +1047,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     #region EquipHandlers
     private void OnDidEquip(Entity<ActionsComponent> ent, ref DidEquipEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         var ev = new GetItemActionsEvent(_actionContainer, args.EquipTarget, args.Equipment, args.SlotFlags);
@@ -1063,7 +1063,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnHandEquipped(Entity<ActionsComponent> ent, ref DidEquipHandEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         var ev = new GetItemActionsEvent(_actionContainer, args.User, args.Equipped);
@@ -1079,7 +1079,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnDidUnequip(EntityUid uid, ActionsComponent component, DidUnequipEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         // <Trauma>
@@ -1098,7 +1098,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnHandUnequipped(EntityUid uid, ActionsComponent component, DidUnequipHandEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         // Goobstation start
@@ -1127,29 +1127,21 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     public void SetIcon(Entity<ActionComponent?> ent, SpriteSpecifier? icon)
     {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Icon == icon)
+        if (!_actionQuery.Resolve(ent, ref ent.Comp))
             return;
 
-        ent.Comp.Icon = icon;
-        DirtyField(ent, ent.Comp, nameof(ActionComponent.Icon));
-    }
-
-    public void SetIconOn(Entity<ActionComponent?> ent, SpriteSpecifier? iconOn)
-    {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.IconOn == iconOn)
-            return;
-
-        ent.Comp.IconOn = iconOn;
-        DirtyField(ent, ent.Comp, nameof(ActionComponent.IconOn));
+        if (icon == null)
+            _appearance.RemoveData(ent.Owner, ActionState.DynamicIcon);
+        else
+            _appearance.SetData(ent.Owner, ActionState.DynamicIcon, icon);
     }
 
     public void SetIconColor(Entity<ActionComponent?> ent, Color color)
     {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.IconColor == color)
+        if (!_actionQuery.Resolve(ent, ref ent.Comp))
             return;
 
-        ent.Comp.IconColor = color;
-        DirtyField(ent, ent.Comp, nameof(ActionComponent.IconColor));
+        _appearance.SetData(ent.Owner, ActionState.Color, color);
     }
 
     /// <summary>

@@ -22,9 +22,6 @@
         params:
           variation: 0.2
           volume: -11
-    - type: HeldSpeedModifier
-      walkModifier: 0.8
-      sprintModifier: 0.8
     - type: MeleeWeapon
       wideAnimationRotation: -135
       attackRate: 0.5
@@ -42,6 +39,8 @@
     - type: MeleeThrowOnHit
       distance: 0.5
       speed: 2
+    - type: WeaponClass
+      class: Shield
     # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/shields.rsi
@@ -532,8 +531,9 @@
     - type: BatterySelfRecharger
       autoRechargeRate: 2
     - type: RechargeableBlocking
-      dischargedRechargeRate: 2
-      chargedRechargeRate: 3
+      rechargePercentage: 0.9
+      dischargedRechargeRate: 1.5
+      chargedRechargeRate: 2
     # </Trauma>
     - type: ItemToggle
       # <Trauma>
@@ -557,7 +557,7 @@
       components:
       # <Trauma>
       - type: Parry
-        parryExhaustionCost: 1.1
+        parryExhaustionCost: 0.25
       - type: DisarmMalus
         malus: 1 # was 0.6
       # </Trauma>

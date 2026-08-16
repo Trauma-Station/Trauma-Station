@@ -32,6 +32,8 @@
       - CaneBlade
   - type: DisarmMalus
   - type: Execution
+  - type: StealTarget
+    stealGroup: CaneBladeNanotrasen
 
 - type: entity
   parent: CaneSheath

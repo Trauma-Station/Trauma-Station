@@ -29,7 +29,6 @@
     - ForcedSleep
     - Pacified
     - Drowsiness
-    - Adrenaline
   - type: MobMover
   - type: InputMover
   - type: Input
@@ -130,12 +129,9 @@
   - type: ActionGrant
     actions:
       - DemonicWhisperAction
-  - type: ReplacementAccent
-    accent: slaughterDemon
   - type: KnowledgeHolder
   - type: AlwaysTakeHoly
   - type: Hands
-  - type: PressureImmunity
   - type: TriggerOnMobstateChange
     mobState:
     - Dead

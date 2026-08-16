@@ -2,6 +2,7 @@
 
 using System.Text;
 using Content.Server.Antag;
+using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Objectives;
@@ -29,6 +30,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private ObjectivesSystem _objective = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -40,18 +42,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
 
     public static EntProtoId RealityShift = "EldritchInfluence";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HereticRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelect);
-        SubscribeLocalEvent<HereticRuleComponent, ObjectivesTextPrependEvent>(OnTextPrepend);
-
-        SubscribeLocalEvent<HereticRoleComponent, GetBriefingEvent>(OnGetBriefing);
-
-        SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetBriefing(Entity<HereticRoleComponent> ent, ref GetBriefingEvent args)
     {
         var uid = args.Mind.Comp.OwnedEntity;
@@ -63,11 +54,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
         args.Append(briefingShort);
     }
 
-    private void OnSpawn(ref SpawnHereticInfluenceEvent ev)
-    {
-        SpawnInfluence(ev.Amount);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAntagSelect(Entity<HereticRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         TryMakeHeretic(args.EntityUid, ent.Comp);
@@ -135,7 +122,8 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
         return store;
     }
 
-    public void OnTextPrepend(Entity<HereticRuleComponent> ent, ref ObjectivesTextPrependEvent args)
+    [SubscribeLocalEvent]
+    private void OnTextPrepend(Entity<HereticRuleComponent> ent, ref ObjectivesTextPrependEvent args)
     {
         var sb = new StringBuilder();
 
@@ -164,5 +152,19 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
             ("number", mostKnowledge)));
 
         args.Text = sb.ToString();
+    }
+
+    public void SpawnERTOnAscension()
+    {
+        var query = QueryActiveRules();
+        while (query.MoveNext(out _, out var rule, out _))
+        {
+            if (rule.HasAHereticAscended)
+                continue;
+
+            rule.HasAHereticAscended = true;
+            _ticker.StartGameRule(rule.ERTEvent);
+            break;
+        }
     }
 }

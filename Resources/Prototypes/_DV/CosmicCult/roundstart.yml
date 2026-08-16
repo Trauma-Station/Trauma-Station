@@ -26,7 +26,6 @@
     effects:
     - !type:GrantSkills
       skills:
-        AthleticsKnowledge: 30
         KnowledgeWeaponsLongBlade: 60
         KnowledgeWeaponsTool: 60
   - type: DynamicRuleCost

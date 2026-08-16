@@ -12,7 +12,7 @@
   - type: Sprite
     drawdepth: FloorEffects
     sprite: _Goobstation/Heretic/carvings.rsi
-    color: '#FFFFFF14'
+    color: '#FFFFFF7D'
   - type: Fixtures
     fixtures:
       fix1:
@@ -108,7 +108,7 @@
     sprite: _Goobstation/Heretic/carvings.rsi
     state: alert_rune
   - type: Sprite
-    color: '#FFFFFF0a'
+    color: '#FFFFFF14'
     state: alert_rune
   - type: WizardTrap
     sparks: false

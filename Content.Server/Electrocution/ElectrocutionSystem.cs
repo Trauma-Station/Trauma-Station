@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Effects;
-using Robust.Shared.Timing;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Doors.Systems;
@@ -34,6 +33,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 using PullerComponent = Content.Shared.Movement.Pulling.Components.PullerComponent;
 
@@ -42,11 +42,11 @@ namespace Content.Server.Electrocution;
 public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 {
     // <Trauma>
-    [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private MeleeWeaponSystem _meleeWeapon = default!;
@@ -58,7 +58,7 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
     [Dependency] private SharedJitteringSystem _jittering = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStunSystem _stun = default!;
-    [Dependency] private SharedStutteringSystem _stuttering = default!;
+    [Dependency] private StutteringSystem _stuttering = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private TurfSystem _turf = default!;
@@ -68,8 +68,6 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
     private static readonly ProtoId<TagPrototype> WindowTag = "Window";
 
     // Multiply and shift the log scale for shock damage.
-    // Yes, this is absurdly small for a reason.
-    public const float ElectrifiedDamagePerWatt = 0.0015f; // Goobstation - This information is allowed to be public, and was needed in BatteryElectrocuteChargeSystem.cs
     private const float RecursiveDamageMultiplier = 0.75f;
     private const float RecursiveTimeMultiplier = 0.8f;
 
@@ -240,26 +238,17 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
         if (!Resolve(uid, ref electrified, ref transform, false))
             return false;
 
-        // Goobstation - Cooldown to prevent rapid shocks
-        var currentTime = _gameTiming.CurTime;
-        var timeSinceLastShock = currentTime - electrified.LastShockTime;
-        if (timeSinceLastShock < electrified.ShockCooldown)
-            return false;
-        // Goobstation end
-
         if (!IsPowered(uid, electrified, transform))
             return false;
 
         if (!_random.Prob(electrified.Probability))
             return false;
 
+        if (electrified.ShockDelay != null && electrified.NextShock > _timing.CurTime)
+            return false;
+
         EnsureComp<ActivatedElectrifiedComponent>(uid);
         _appearance.SetData(uid, ElectrifiedVisuals.ShowSparks, true);
-
-        // Goobstation
-        // Update last shock time
-        electrified.LastShockTime = currentTime;
-        Dirty(uid, electrified);
 
         siemens *= electrified.SiemensCoefficient;
         if (!DoCommonElectrocutionAttempt(targetUid, uid, ref siemens, electrified.IgnoreInsulation) || siemens <= 0) // Goob edit
@@ -287,6 +276,8 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
                     ignoreInsulation: electrified.IgnoreInsulation // Goobstation
                 );
             }
+            if (lastRet)
+                electrified.NextShock = _timing.CurTime + electrified.ShockDelay;
             return lastRet;
         }
 

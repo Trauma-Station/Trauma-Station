@@ -182,7 +182,8 @@
     slipData:
       launchForwardsMultiplier: 0
   - type: TriggerOnStepTrigger
-  - type: DamageUserOnTrigger
+  - type: DamageOnTrigger
+    targetUser: true
     damage:
       types:
         Piercing: 15
