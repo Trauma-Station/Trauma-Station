@@ -1,9 +1,9 @@
 - type: entity
+  parent: BulletRocket
   id: ProjectileFireball
+  categories: [ HideSpawnMenu ]
   name: fireball
   description: You better GITTAH WEIGH.
-  parent: BulletRocket
-  categories: [ HideSpawnMenu ]
   components:
   - type: PointLight
     color: "#E25822"
@@ -44,9 +44,9 @@
       - FlashIgnoreResistances
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: BaseBulletTrigger
   id: ProjectileDragonsBreath
+  categories: [ HideSpawnMenu ]
   name: dragon's breath
   description: Try not to get toasted.
   components:
@@ -74,11 +74,11 @@
     lifetime: 5
 
 - type: entity
+  parent: ProjectileFireball
   id: ProjectileAnomalyFireball
+  categories: [ HideSpawnMenu ]
   name: fireball
   description: Hovering blob of flame.
-  parent: ProjectileFireball
-  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: Magic
@@ -92,11 +92,11 @@
     maxTileBreak: 0
 
 - type: entity
+  parent: ClosetSteelBase
   id: ProjectileLocker
+  categories: [ HideSpawnMenu ]
   name: cursed locker
   description: A cursed magical locker! Can you resist?
-  parent: ClosetSteelBase
-  categories: [ HideSpawnMenu ]
   components:
   - type: ResistLocker
     resistTime: 60 # Goob edit
@@ -111,14 +111,14 @@
     disableOnSleep: true # Goobstation
     whitelist:
       components:
-        - MobState
+      - MobState
   - type: LockVisuals
     stateLocked: cursed_door
     stateUnlocked: decursed_door
   - type: Lock
     breakOnAccessBreaker: false
   - type: AccessReader
-    access: [["Wizard"]]
+    access: [[ "Wizard" ]]
     breakOnAccessBreaker: false
   - type: Projectile
     deleteOnCollide: false
@@ -166,7 +166,7 @@
         mask:
         - Impassable
         - BulletImpassable
-      fly-by: &flybyfixture
+      fly-by:
         shape: !type:PhysShapeCircle
           radius: 0.6
         layer:
@@ -177,9 +177,9 @@
         hard: false
 
 - type: entity
-  id: ProjectilePolyboltBase
   abstract: true
   parent: BaseBullet
+  id: ProjectilePolyboltBase
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -213,11 +213,11 @@
       state: magicm_green
 
 - type: entity
-  id: ProjectilePolyboltCarp
   parent: ProjectilePolyboltBase
+  id: ProjectilePolyboltCarp
+  categories: [ HideSpawnMenu ]
   name: carp polybolt
   description: Nooo, I don't wanna be fish!
-  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: Magic
@@ -229,11 +229,11 @@
       - MobState
 
 - type: entity
-  id: ProjectilePolyboltMonkey
   parent: ProjectilePolyboltBase
+  id: ProjectilePolyboltMonkey
+  categories: [ HideSpawnMenu ]
   name: monkey polybolt
   description: Nooo, I don't wanna be monkey!
-  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: Magic
@@ -245,11 +245,11 @@
       - MobState
 
 - type: entity
-  id: ProjectilePolyboltDoor
   parent: ProjectilePolyboltBase
+  id: ProjectilePolyboltDoor
+  categories: [ HideSpawnMenu ]
   name: door polybolt
   description: Nooo, I don't wanna be door!
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
@@ -268,11 +268,11 @@
       - Wall
 
 - type: entity
+  parent: BaseBullet
   id: ProjectileHealingBolt
+  categories: [ HideSpawnMenu ]
   name: healing bolt
   description: I COMMAND YOU TO LIVE!
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
   components:
   # <Trauma>
   - type: RejuvenateOnProjectileHit
@@ -309,10 +309,10 @@
     ignoreResistances: true
 
 - type: entity
-  id: BulletInstakillMagic
-  name: magical lead cylinder
   parent: BaseBullet
+  id: BulletInstakillMagic
   categories: [ HideSpawnMenu ]
+  name: magical lead cylinder
   description: This looks familiar.
   components:
   - type: Projectile
@@ -324,11 +324,11 @@
     reflective: Magic
 
 - type: entity
-  id: ProjectilePolyboltCluwne
   parent: ProjectilePolyboltBase
+  id: ProjectilePolyboltCluwne
+  categories: [ HideSpawnMenu ]
   name: cluwne polybolt
   description: KnoH KnoH!
-  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: Magic
@@ -340,11 +340,11 @@
       - MobState
 
 - type: entity
-  id: ProjectileIcicle
   parent: BaseBullet
+  id: ProjectileIcicle
+  categories: [ HideSpawnMenu ]
   name: icicle
   description: Brrrrr.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: Magic
@@ -360,9 +360,9 @@
 - type: entity
   parent: ProjectilePolyboltBase
   id: ProjectilePolyboltBread
+  categories: [ HideSpawnMenu ]
   name: bread polybolt
   description: Nooo, I don't wanna be bread!
-  categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective: Magic

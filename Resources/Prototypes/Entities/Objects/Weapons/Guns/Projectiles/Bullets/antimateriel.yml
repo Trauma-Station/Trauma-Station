@@ -1,7 +1,7 @@
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: BaseBulletKinetic # Trauma
   id: BulletAntiMateriel
+  categories: [ HideSpawnMenu ]
   name: bullet (.60 anti-materiel)
   components:
   - type: Projectile
