@@ -7,7 +7,6 @@
   completetime: 15
   materials:
     Biomass: 12
-    Plasma: 400
 
 - type: latheRecipe
   parent: BaseCubeRecipe
@@ -15,7 +14,6 @@
   result: MantisShrimpCube
   materials:
     Biomass: 35
-    Plasma: 500
 
 - type: latheRecipe
   parent: BaseCubeRecipe
@@ -23,7 +21,6 @@
   result: SpiderCrabCube
   materials:
     Biomass: 30
-    Plasma: 600
 
 - type: latheRecipe
   parent: BaseCubeRecipe
@@ -31,7 +28,6 @@
   result: SnakeCube
   materials:
     Biomass: 30
-    Plasma: 500
 
 - type: latheRecipe
   parent: BaseCubeRecipe
@@ -39,15 +35,13 @@
   result: BearCube
   materials:
     Biomass: 40
-    Plasma: 400
 
 - type: latheRecipe
   parent: BaseCubeRecipe
   id: EelCube
   result: EelCube
   materials: # Very Lethal so very costly
-    Biomass: 35
-    Plasma: 900
+    Biomass: 50
 
 - type: latheRecipe
   parent: BaseCubeRecipe
@@ -64,7 +58,6 @@
   completetime: 15
   materials: # They do 5 damage
     Biomass: 14
-    Plasma: 200
 
 - type: latheRecipe
   parent: BaseCubeRecipe
@@ -72,4 +65,3 @@
   result: MantisCube
   materials:
     Biomass: 32
-    Plasma: 500
