@@ -53,6 +53,7 @@
     bluntStaminaDamageFactor: 2.0
     angle: 0 # Trauma - was 60, no more wideswing
     animation: WeaponArcThrust
+    undamagedAlertThreshold: 0
   - type: MeleeBatteryHitsLeft
   - type: StaminaDamageOnHitRequiresToggle
   - type: StaminaDamageOnHitRequiresCharge
