@@ -92,3 +92,4 @@
   components:
   - type: SiliconLawProvider
     laws: StrategySimulatorLawset
+
