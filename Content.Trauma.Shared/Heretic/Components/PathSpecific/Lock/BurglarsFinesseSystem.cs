@@ -46,8 +46,8 @@ public sealed partial class BurglarsFinesseSystem : EntitySystem
         if (!TryComp(used, out MeleeWeaponComponent? melee))
             return;
 
-        if (!_melee.AttemptLightAttack(user, used, melee, target, false) ||
-            !_melee.InRange(user, target, melee.Range, CompOrNull<ActorComponent>(user)?.PlayerSession, out _))
+        if (!_melee.InRange(user, target, melee.Range, CompOrNull<ActorComponent>(user)?.PlayerSession, out _) ||
+            !_melee.AttemptLightAttack(user, used, melee, target, false))
             return;
 
         melee.NextAttack += TimeSpan.FromSeconds(1f / _melee.GetAttackRate(used, user, melee));

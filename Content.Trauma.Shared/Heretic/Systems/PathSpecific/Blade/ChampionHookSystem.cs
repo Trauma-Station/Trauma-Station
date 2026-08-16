@@ -189,8 +189,9 @@ public sealed partial class ChampionHookSystem : EntitySystem
     {
         if (!TryComp(used, out MeleeWeaponComponent? melee))
             return;
-        if (!_melee.AttemptLightAttack(ent, used, melee, target, false) ||
-            !_melee.InRange(ent, target, melee.Range, CompOrNull<ActorComponent>(ent)?.PlayerSession, out _))
+
+        if (!_melee.InRange(ent, target, melee.Range, CompOrNull<ActorComponent>(ent)?.PlayerSession, out _) ||
+            !_melee.AttemptLightAttack(ent, used, melee, target, false))
             return;
 
         melee.NextAttack += TimeSpan.FromSeconds(1f / _melee.GetAttackRate(used, ent, melee));
