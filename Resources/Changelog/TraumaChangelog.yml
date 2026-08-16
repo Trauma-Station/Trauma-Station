@@ -13211,3 +13211,35 @@ Entries:
   id: 1440
   time: '2026-08-15T22:21:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4101
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed borgs getting deleted if you deconstructed their charger.
+  id: 1441
+  time: '2026-08-16T00:35:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4104
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed emagged recycler just deleting people.
+  id: 1442
+  time: '2026-08-16T00:47:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4097
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mechs now insulate you from shocks.
+  id: 1443
+  time: '2026-08-16T01:00:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4107
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed the phoron cost on every biocube except holocarp, Let the factory
+      grow
+  - type: Tweak
+    message: Space Ticks have been tweaked so they are penetrated by projectiles now
+  id: 1444
+  time: '2026-08-16T01:34:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4105
