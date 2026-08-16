@@ -65,8 +65,11 @@
         Slash: 2
   - type: Tag
     tags:
+    # <Trauma>
+    - AnyGlassShard
+    - Recyclable
+    # </Trauma>
     - Trash
-    - Recyclable # Trauma
   - type: SpaceGarbage
   - type: Damageable
     damageModifierSet: Glass
@@ -109,6 +112,10 @@
         Piercing: 4.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - GlassShard
       - Trash
   - type: Solution
@@ -146,6 +153,10 @@
         Piercing: 5.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - ReinforcedGlassShard
       - Trash
   - type: Solution
@@ -187,6 +198,10 @@
         Piercing: 6.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - PlasmaGlassShard
       - Trash
   - type: Solution
@@ -228,6 +243,10 @@
         Radiation: 2.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - UraniumGlassShard
       - Trash
   - type: Solution

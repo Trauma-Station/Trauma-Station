@@ -63,7 +63,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private AudioSystem _audio = default!;
-    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private EuiManager _euiMan = default!;
     [Dependency] private GhostSystem _ghost = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -84,6 +84,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private EntityQuery<CosmicCultComponent> _cultistQuery = default!;
 
     private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
 
@@ -92,17 +93,13 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     private readonly SoundSpecifier _tier3Sound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier3.ogg");
     private readonly SoundSpecifier _tier1Sound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier1.ogg");
 
+    public List<List<InfluencePrototype>> TierInfluences = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CosmicCultAssociateRuleEvent>(OnAssociateRule);
-        SubscribeLocalEvent<CosmicCultRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelect);
-        SubscribeLocalEvent<CosmicCultComponent, ComponentShutdown>(OnComponentShutdown);
-        SubscribeLocalEvent<CosmicLesserCultistComponent, ComponentShutdown>(OnComponentShutdown);
-        SubscribeLocalEvent<CosmicGodComponent, ComponentInit>(OnGodSpawn);
-        SubscribeLocalEvent<CosmicCultComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnEvacAttempt);
+        LoadInfluences();
     }
 
     #region Starting Events
@@ -121,6 +118,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAntagSelect(Entity<CosmicCultRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         ent.Comp.UpdateAllCultists = true; // Update all the numbers at the next tick, when all the cultist roles are (hopefuly) already assigned
@@ -154,26 +152,32 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         var cultistsAtNextLevel = 0;
         foreach (var cultist in rule.Comp.Cultists)
         {
-            if (!TryComp<CosmicCultComponent>(cultist, out var comp)) return;
+            if (!_cultistQuery.TryComp(cultist, out var comp))
+                continue;
+
             if (comp.CurrentLevel > rule.Comp.CurrentTier + 1) // Someone is speedrunning, increase cult level immediately
             {
                 IncreaseCultTier(rule);
                 return;
             }
-            if (!_mobState.IsDead(cultist)) totalCult++; // Dead cultists don't count towards progression reqs to encourage sec to not just DNR captured cultists
-            if (comp.CurrentLevel > rule.Comp.CurrentTier) cultistsAtNextLevel++;
+
+            if (!_mobState.IsDead(cultist))
+                totalCult++; // Dead cultists don't count towards progression reqs to encourage sec to not just DNR captured cultists
+
+            if (comp.CurrentLevel > rule.Comp.CurrentTier)
+                cultistsAtNextLevel++;
         }
 
         rule.Comp.CultistsForNextTier = (int) Math.Ceiling(totalCult / 2f);
 
         foreach (var cultist in rule.Comp.Cultists)
         {
-            if (!TryComp<CosmicCultComponent>(cultist, out var comp)) return;
+            if (!_cultistQuery.TryComp(cultist, out var comp))
+                continue;
+
             comp.CultTier = rule.Comp.CurrentTier;
             comp.CultistsForNextLevel = rule.Comp.CurrentTier >= comp.MaxLevel ? 0 : rule.Comp.CultistsForNextTier - cultistsAtNextLevel;
             Dirty(cultist, comp);
-            if (comp.CosmicShopActionEntity is not { } shop) return;
-            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState());
         }
 
         rule.Comp.TotalCrew = _player.Sessions.Count(session
@@ -199,7 +203,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         switch (ent.Comp.CurrentTier)
         {
             case 1:
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("cosmiccult-announce-tier1-warning"),
                     sender: null,
                     true,
@@ -210,8 +214,10 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
                     SpawnRift();
 
                 while (lights.MoveNext(out var light, out _))
+                {
                     if (_rand.Prob(0.30f))
                         _ghost.DoGhostBooEvent(light);
+                }
 
                 break;
 
@@ -220,13 +226,13 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
 
             case 3:
                 var sender = Loc.GetString("cosmiccult-announcement-sender");
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("cosmiccult-announce-tier3-fluff"),
                     sender,
                     false,
                     null,
                     Color.FromHex("#4cabb3"));
-                _chatSystem.DispatchGlobalAnnouncement(
+                _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("cosmiccult-announce-tier3-warning"),
                     null,
                     false,
@@ -235,8 +241,10 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
                 _audio.PlayGlobal(_tier3Sound, Filter.Broadcast(), false, AudioParams.Default);
 
                 while (lights.MoveNext(out var light, out _))
+                {
                     if (_rand.Prob(0.90f))
                         _ghost.DoGhostBooEvent(light);
+                }
 
                 break;
             default:
@@ -248,12 +256,15 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         var query = EntityQueryEnumerator<CosmicTierConditionComponent>();
 
         while (query.MoveNext(out _, out var comp))
+        {
             comp.Tier = ent.Comp.CurrentTier;
+        }
     }
 
     #endregion
 
     #region Round & Objectives
+    [SubscribeLocalEvent]
     private void OnGodSpawn(Entity<CosmicGodComponent> ent, ref ComponentInit args)
     {
         var query = QueryActiveRules();
@@ -300,6 +311,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         return false;
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<CosmicCultComponent> ent, ref MobStateChangedEvent args)
     {
         UpdateCultData(ent); // Dead cultists don't count for levelup, recalculate the requirements
@@ -325,6 +337,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnEvacAttempt(ref CommunicationConsoleCallShuttleAttemptEvent args)
     {
         var query = EntityQueryEnumerator<MonumentComponent>();
@@ -379,13 +392,15 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         if (!_mind.TryGetMind(uid, out var mindId, out var mind))
             return;
 
-        EnsureComp<CosmicCultComponent>(uid, out var cultComp);
+        var cultComp = EnsureComp<CosmicCultComponent>(uid);
         EnsureComp<IntrinsicRadioReceiverComponent>(uid);
-        EnsureComp<CosmicCultAssociatedRuleComponent>(uid, out var associatedComp);
+        var associatedComp = EnsureComp<CosmicCultAssociatedRuleComponent>(uid);
         EnsureComp<ZombieImmuneComponent>(uid);
 
-        foreach (var influenceProto in ProtoMan.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == cultComp.CurrentLevel))
-            cultComp.UnlockedInfluences.Add(influenceProto.ID);
+        foreach (var influence in TierInfluences[cultComp.CurrentLevel])
+        {
+            cultComp.UnlockedInfluences.Add(influence.ID);
+        }
 
         associatedComp.CultGamerule = rule;
 
@@ -420,6 +435,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         rule.Comp.InitialCult++;
     }
 
+    [SubscribeLocalEvent]
     private void OnAssociateRule(ref CosmicCultAssociateRuleEvent args)
     {
         TransferCultAssociation(args.Originator, args.Target);
@@ -502,18 +518,21 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         _euiMan.OpenEui(new CosmicConvertedEui(), session);
     }
 
-    private void OnComponentShutdown(Entity<CosmicCultComponent> ent, ref ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnCultistShutdown(Entity<CosmicCultComponent> ent, ref ComponentShutdown args)
     {
-        if (AssociatedGamerule(ent) is not { } cult)
+        if (AssociatedGamerule(ent) is not { } rule)
             return;
 
-        cult.Comp.InitialCult--; // This should only really happen if the cultist is deleted somehow, so we don't count them anymore.
+        rule.Comp.InitialCult--; // This should only really happen if the cultist is deleted somehow, so we don't count them anymore.
 
         if (TerminatingOrDeleted(ent))
             return;
-        var cosmicGamerule = cult.Comp;
 
-        foreach (var actionEnt in ent.Comp.ActionEntities) _actions.RemoveAction(actionEnt);
+        foreach (var action in ent.Comp.BoughtActions)
+        {
+            _actions.RemoveAction(action);
+        }
 
         if (TryComp<IntrinsicRadioTransmitterComponent>(ent, out var transmitter))
             transmitter.Channels.Remove("CosmicRadio");
@@ -546,13 +565,14 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
             _euiMan.OpenEui(new CosmicDeconvertedEui(), session);
 
         _eye.SetVisibilityMask(ent, 1);
-        cosmicGamerule.TotalCult--;
-        cosmicGamerule.Cultists.Remove(ent);
+        rule.Comp.TotalCult--;
+        rule.Comp.Cultists.Remove(ent);
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
-    private void OnComponentShutdown(Entity<CosmicLesserCultistComponent> ent, ref ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnLesserCultistShutdown(Entity<CosmicLesserCultistComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -592,4 +612,30 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
             _euiMan.OpenEui(new CosmicDeconvertedEui(), session);
     }
     #endregion
+
+    [SubscribeLocalEvent]
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<InfluencePrototype>())
+            LoadInfluences();
+    }
+
+    private void LoadInfluences()
+    {
+        foreach (var list in TierInfluences)
+        {
+            list.Clear();
+        }
+
+        foreach (var proto in ProtoMan.EnumeratePrototypes<InfluencePrototype>())
+        {
+            var tier = proto.Tier;
+            while (tier >= TierInfluences.Count)
+            {
+                TierInfluences.Add(new());
+            }
+
+            TierInfluences[tier].Add(proto);
+        }
+    }
 }

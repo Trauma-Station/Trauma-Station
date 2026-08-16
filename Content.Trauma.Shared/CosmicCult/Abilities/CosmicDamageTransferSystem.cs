@@ -16,14 +16,8 @@ public sealed partial class CosmicDamageTransferSystem : EntitySystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicLesserCultistComponent, EventCosmicDamageTransfer>(OnTransfer);
-    }
-
-    private void OnTransfer(Entity<CosmicLesserCultistComponent> ent, ref EventCosmicDamageTransfer args)
+    [SubscribeLocalEvent]
+    private void OnTransfer(Entity<CosmicLesserCultistComponent> ent, ref CosmicDamageTransferEvent args)
     {
         if (args.Handled || !_cult.EntityIsCultist(args.Target) || !TryComp<DamageableComponent>(args.Target, out var damageComp))
             return;

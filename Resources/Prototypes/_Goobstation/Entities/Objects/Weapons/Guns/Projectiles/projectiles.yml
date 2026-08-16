@@ -540,3 +540,23 @@
     - !type:ModifyStatusEffect
       effectProto: StatusEffectMuted
       time: 20
+
+- type: entity
+  parent: BulletRocket
+  id: BulletSingularityBusterRocket
+  name: singularity buster rocket
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: buster
+  - type: SinguloFood
+    energy: -500
+  - type: Explosive
+    explosionType: Electrical
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 150
+    maxTileBreak: 1
+  - type: SmartLinkBlacklist

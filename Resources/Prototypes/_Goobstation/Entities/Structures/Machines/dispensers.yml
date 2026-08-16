@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: SmallConstructibleMachine
+  parent: [ SmallConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: EnergyChemDispenser
   name: energy chemical dispenser
   suffix: energy
   description: A bluespace Chemical Dispenser that uses station energy to synthesize Reagents. The future is here and now.
-  placement:
-    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: Structures/dispensers.rsi
