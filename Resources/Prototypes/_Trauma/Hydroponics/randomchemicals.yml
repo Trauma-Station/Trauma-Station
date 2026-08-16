@@ -90,7 +90,7 @@
   - quantity: 5
     weight: 1
     reagents:
-    - UnstableMutagen
+    - UnstableCompound # Request from john botany
   - quantity: 5
     weight: 1
     reagents:
