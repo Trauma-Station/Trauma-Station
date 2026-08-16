@@ -13259,3 +13259,10 @@ Entries:
   id: 1446
   time: '2026-08-16T16:33:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4112
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix ghouls not understanding tau ceti basic after jaunting.
+  id: 1447
+  time: '2026-08-16T20:07:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4114
