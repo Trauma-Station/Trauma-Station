@@ -77,8 +77,8 @@
             Poison: 2
 
 - type: reagent
-  id: HolyChlorineTrifluoride
   parent: ChlorineTrifluoride
+  id: HolyChlorineTrifluoride
   name: reagent-name-holy-chlorine-trifluoride
   group: Pyrotechnic
   desc: reagent-desc-holy-chlorine-trifluoride
