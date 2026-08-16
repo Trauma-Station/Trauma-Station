@@ -63,7 +63,7 @@ public sealed partial class RanchingEggLayerSystem : EntitySystem
         if (!_satiationQuery.TryComp(uid, out var satiation))
             return;
 
-        if (!_hunger.IsValueInRange((uid, satiation), SatiationSystem.Hunger, above: egglayer.HungerThreshold))
+        if (!_satiation.IsValueInRange((uid, satiation), SatiationSystem.Hunger, above: egglayer.HungerThreshold))
             return;
 
         var evfood = new RanchingEggLayAttemptEvent((uid, egglayer));

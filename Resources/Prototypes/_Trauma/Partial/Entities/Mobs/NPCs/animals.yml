@@ -280,12 +280,6 @@
     enterDelay: 0.5
   - type: AnimatedEmotes
     tweakState: mouse-tweaking-0
-  - type: EggLayer
-    eggSpawn:
-    - id: SpawnMobMouse
-    hungerUsage: 20
-    eggLayAction: MouseMultiply
-    hungerRequired: true
   - type: SolutionManager
     solutions:
     - SolutionMouseBites
@@ -496,12 +490,22 @@
     cocoonDelay: 15
     shadowCocoon: SpiderEggsHuman
     verbText: "Infest victim"
-  - type: EggLayer
-    eggSpawn:
-    - id: SpiderEggs
-    hungerUsage: 140
-    eggLayAction: SpiderMultiply
-    hungerRequired: true
+  - type: EntityProducerAction
+    insufficientSatiationPopup: action-popup-lay-egg-too-hungry
+    userPopup: action-popup-lay-egg-user
+    othersPopup: action-popup-lay-egg-others
+  - type: SatiationProduction
+    delay: 60
+    delayMax: 120
+    satiationUsage: 140
+    minimumSatiation: 140
+    automaticForPlayers: false
+  - type: EntityProducer
+    table:
+      id: SpiderEggs
+  - type: ActionGrant
+    actions:
+    - SpiderMultiply
   - type: Satiation
     satiations:
       Hunger:
