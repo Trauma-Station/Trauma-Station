@@ -1,0 +1,61 @@
+- type: entity
+  parent: MolotovFire
+  id: MolotovHellFire
+  name: hellfire
+  components:
+  - type: TimedDespawn
+    lifetime: 30
+  - type: Sprite
+    sprite: _Trauma/Effects/floorfire.rsi
+    layers:
+    - state: hellfire
+  - type: PointLight
+    color: red
+  - type: TileEntityEffect
+    effects:
+    - !type:Flammable # TODO: HELLFIRE 
+      multiplier: 8
+      multiplierOnExisting: 1
+    - !type:Ignite
+
+- type: entity
+  parent: MolotovFire
+  id: MolotovGlitchFire
+  name: glitchfire
+  components:
+  - type: TimedDespawn
+    lifetime: 60
+  - type: Sprite
+    sprite: _Trauma/Effects/floorfire.rsi
+    layers:
+    - state: glitchfire
+  - type: PointLight
+    color: purple
+  - type: TileEntityEffect
+    effects:
+    - !type:HolyIgnite
+      stacks: 1
+    - !type:Flammable
+      multiplier: 2 # not as deadly as normal fire
+      multiplierOnExisting: 1.5 # but it adds to fire more
+    - !type:Ignite
+
+- type: entity
+  parent: MolotovFire
+  id: MolotovHolyFire
+  name: holyfire
+  components:
+  - type: Sprite
+    sprite: _Trauma/Effects/floorfire.rsi
+    layers:
+    - state: holyfire
+  - type: PointLight
+    color: blue
+  - type: TileEntityEffect
+    effects:
+    - !type:HolyIgnite
+      stacks: 8
+    - !type:Flammable
+      multiplier: 3.75
+      multiplierOnExisting: 0.75
+    - !type:Ignite

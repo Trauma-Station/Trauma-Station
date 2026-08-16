@@ -19,3 +19,91 @@
     weight: 1
     reagents:
     - Crabon
+
+- type: weightedRandomFillSolution
+  id: UnknownReagentFillSolution
+  fills:
+  # 5 scary chems
+  - quantity: 10
+    weight: 1
+    reagents:
+    - Crabon
+  - quantity: 2.5
+    weight: 1
+    reagents:
+    - Burnite
+  - quantity: 5
+    weight: 1
+    reagents:
+    - HolyChlorineTrifluoride
+  - quantity: 5
+    weight: 1
+    reagents:
+    - ChlorineTrifluoride
+  - quantity: 15
+    weight: 1
+    reagents:
+    - Fluorosurfactant # yes this counts as scary
+  # 5 silly chems
+  - quantity: 15
+    weight: 1
+    reagents:
+    - Bananadine
+  - quantity: 15
+    weight: 1
+    reagents:
+    - Nutriment # NUTRIMENT IS SILLY
+  - quantity: 15
+    weight: 1
+    reagents:
+    - THC
+  - quantity: 10
+    weight: 1
+    reagents:
+    - Desoxyephedrine
+  - quantity: 10
+    weight: 1
+    reagents:
+    - Vestine # VESTINE IS SILLY
+  # 5 of whatever the fuck i could think of
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Cognizine
+  - quantity: 10
+    weight: 1
+    reagents:
+    - Honk
+  - quantity: 10
+    weight: 1
+    reagents:
+    - BuzzochloricBees
+  - quantity: 10
+    weight: 1
+    reagents:
+    - DevilsKiss
+  - quantity: 15
+    weight: 1
+    reagents:
+    - Water
+  # and 5 botanical chems
+  - quantity: 5
+    weight: 1
+    reagents:
+    - UnstableMutagen
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Left4Zed
+  - quantity: 5
+    weight: 1
+    reagents:
+    - ReaperDelight
+  - quantity: 5
+    weight: 1
+    reagents:
+    - RobustHarvest
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Phalanximine

@@ -66,3 +66,12 @@ reagent-desc-hephaestium = hephaestium, named after the greek god of stone Hepha
 
 reagent-name-ageium = ageium
 reagent-desc-ageium = ageium, causes subjects injected with it to not age!
+
+reagent-name-holy-chlorine-trifluoride = Holy Chlorine Trifluoride
+reagent-desc-holy-chlorine-trifluoride = whose idea was this?
+
+reagent-name-burnite = burnite
+reagent-desc-burnite = A highly volatile flaming chemical that's typically only made by accidentally opening a portal to hell. Luckily, this isn't an easy feat to do.
+
+reagent-name-unknown-reagent = reagent-name-unknown-reagent
+reagent-desc-unknown-reagent = reagent-desc-unknown-reagent
