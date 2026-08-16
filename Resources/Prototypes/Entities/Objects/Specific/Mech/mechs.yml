@@ -40,15 +40,18 @@
       blacklist:
         tags:
         - Book
+  - type: Insulated # giant metal thing is better at conducting electricity than you
   - type: StaticPrice
     price: 450
   # </Trauma>
   - type: MobMover
   - type: Mech
-    pilotBlacklist: # Goobstation Change
+    # <Trauma>
+    pilotBlacklist:
       components:
       - Zombie
       - ZombieBlob
+    # </Trauma>
   - type: MechAir
   - type: AirFilter
     # everything except oxygen and nitrogen
