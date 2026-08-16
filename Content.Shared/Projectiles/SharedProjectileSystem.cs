@@ -18,6 +18,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Projectiles;
@@ -31,6 +32,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = null!;
 
     public override void Initialize()
@@ -38,7 +40,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
-        SubscribeLocalEvent<EmbeddableProjectileComponent, PreventCollideEvent>(EmbeddablePreventCollision); // Goobstation - Crawl Fix
         SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileHitEvent>(OnEmbedProjectileHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ActivateInWorldEvent>(OnEmbedActivate);
@@ -212,6 +213,13 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
+    private void OnBeingShot(Entity<ProjectileComponent> entity, ref MapInitEvent args)
+    {
+        entity.Comp.WhenToStopIgnoringShooter = _timing.CurTime + entity.Comp.DelayToAcknowledgeShooter;
+        Dirty(entity);
+    }
+
     public void DetachAllEmbedded(Entity<EmbeddedContainerComponent> container)
     {
         foreach (var embedded in container.Comp.EmbeddedObjects)
@@ -235,7 +243,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
         // </Goob>
 
-        if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
+        if (_timing.CurTime < component.WhenToStopIgnoringShooter
+            && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
         {
             args.Cancelled = true;
         }
@@ -243,6 +252,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     // Goobstation - Crawling fix
     // TODO: no reason for this to be in core
+    [SubscribeLocalEvent]
     private void EmbeddablePreventCollision(EntityUid uid, EmbeddableProjectileComponent component, ref PreventCollideEvent args)
     {
         if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
