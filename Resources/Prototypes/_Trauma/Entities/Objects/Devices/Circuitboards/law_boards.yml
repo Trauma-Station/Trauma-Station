@@ -13,8 +13,8 @@
     price: 10000
 
 - type: entity
-  id: VampireCircuitBoard
   parent: BaseSiliconLawboard
+  id: VampireCircuitBoard
   name: law board (Vampire)
   description: An electronics board containing the Vampire lawset.
   components:
@@ -22,8 +22,8 @@
     laws: VampireLawset
 
 - type: entity
-  id: GreatWallCircuitBoard
   parent: BaseSiliconLawboard
+  id: GreatWallCircuitBoard
   name: law board (Great Wall)
   description: An electronics board containing the Great Wall lawset.
   components:
@@ -31,8 +31,8 @@
     laws: GreatWallLawset
 
 - type: entity
-  id: BureaucracyCircuitBoard
   parent: BaseSiliconLawboard
+  id: BureaucracyCircuitBoard
   name: law board (Bureaucracy)
   description: An electronics board containing the Bureaucracy lawset.
   components:
@@ -40,8 +40,8 @@
     laws: BureaucracyLawset
 
 - type: entity
-  id: ConspiracyCircuitBoard
   parent: BaseSiliconLawboard
+  id: ConspiracyCircuitBoard
   name: law board (Conspiracy)
   description: An electronics board containing the Conspiracy lawset.
   components:
@@ -49,8 +49,8 @@
     laws: ConspiracyLawset
 
 - type: entity
-  id: MotivationalCircuitBoard
   parent: BaseSiliconLawboard
+  id: MotivationalCircuitBoard
   name: law board (Motivational Speaker)
   description: An electronics board containing the Motivational Speaker lawset.
   components:
@@ -58,8 +58,8 @@
     laws: MotivationalLawset
 
 - type: entity
-  id: MadScientistCircuitBoard
   parent: BaseSiliconLawboard
+  id: MadScientistCircuitBoard
   name: law board (Mad Scientist)
   description: An electronics board containing the Mad Scientist lawset.
   components:
@@ -67,8 +67,8 @@
     laws: MadScientistLawset
 
 - type: entity
-  id: GhostCircuitBoard
   parent: BaseSiliconLawboard
+  id: GhostCircuitBoard
   name: law board (Ghost)
   description: An electronics board containing the Ghost lawset.
   components:
@@ -76,8 +76,8 @@
     laws: GhostLawset
 
 - type: entity
-  id: SilenceCircuitBoard
   parent: BaseSiliconLawboard
+  id: SilenceCircuitBoard
   name: law board (Silence)
   description: An electronics board containing the Silence lawset.
   components:
