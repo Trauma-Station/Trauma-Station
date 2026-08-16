@@ -237,7 +237,7 @@ public sealed partial class DamageableSystem
             var ev = new DamageDealtEvent(damage, origin, interruptsDoAfters, ignoreBlockers, damage);
             RaiseLocalEvent(ent, ref ev);
 
-            return damage;
+            return ev.ModifiedDamage;
         }
         // </Goob>
 
