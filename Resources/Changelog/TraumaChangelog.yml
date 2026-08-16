@@ -13225,3 +13225,10 @@ Entries:
   id: 1442
   time: '2026-08-16T00:47:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4097
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mechs now insulate you from shocks.
+  id: 1443
+  time: '2026-08-16T01:00:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4107
