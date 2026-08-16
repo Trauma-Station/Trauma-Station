@@ -6,40 +6,6 @@
   save: false
   abstract: true
   components:
-  # <Trauma>
-  - type: KnowledgeHolder
-  - type: IntrinsicUI
-    uis:
-      enum.StationMapUiKey.Key:
-        toggleAction: ActionShowStationMap
-  - type: StationMap # Show location on the map
-  - type: Targeting
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-    canUseInCrit: true
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
-  - type: Penetratable # Better snipers
-    penetrateDamage: 75 # It's harder to kill iron golem
-    damagePenalty: 0.25
-  - type: MiningPoints # for mining borgs mostly
-  - type: SpeechSynthesis
-    voice: Borg
-  - type: KnowledgeGrantOnWear # gets added to the brain, modified when picking borg type
-    skills:
-      # robot basic stuff
-      FabricationKnowledge: 20
-      WallsKnowledge: 10
-      InfrastructureKnowledge: 10
-      ElectronicsKnowledge: 10
-  # </Trauma>
   - type: Reactive
     groups:
       Acidic: [Touch]
@@ -92,7 +58,6 @@
       - Blunt
       - Slash
       - Piercing
-      - Ballistic # Trauma
       - Heat
       - Shock
     locPrefix: silicon
@@ -108,9 +73,6 @@
       # Only used for NT borgs that can switch type, defined here to avoid copy-pasting the rest of this component.
       enum.BorgSwitchableTypeUiKey.SelectBorgType:
         type: BorgSelectTypeUserInterface
-      # Goobstation - Add the station map interface to the borg
-      enum.StationMapUiKey.Key:
-        type: StationMapBoundUserInterface
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: SiliconLawBound
@@ -144,7 +106,6 @@
     damageValue: -10 # 10 seconds to repair from crit
     doAfterDelay: 1
     fuelCost: 0.5
-    allowSelfRepair: true # Goob
   - type: BorgChassis
   - type: LockingWhitelist
     blacklist:
@@ -182,11 +143,6 @@
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg
-    allowedEmotes: # Goobstation - Cyborg emote sounds
-    - Laugh
-    - Sigh
-    - Crying
-    - Whistle
   - type: Vocal
     emoteSounds: UnisexSilicon
     wilhelmProbability: 0
@@ -210,7 +166,6 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
-    damageModifierSet: Silicon # Trauma - ion damage
   - type: Injurable
     damageContainer: Silicon
   - type: HandheldLight
@@ -256,8 +211,6 @@
     - CanPilot
     - SiliconEmotes
     - Unimplantable
-    - SiliconMob # Goob
-    - IPCDrinkBlacklist # Goobstation - Energycrit: Don't let self antagging IPCs steal power from borgs.
   - type: Emoting
   - type: GuideHelp
     guides:
@@ -509,9 +462,6 @@
   save: false
   abstract: true
   components:
-  # <Trauma>
-  - type: BlockShuttleRecall
-  # </Trauma>
   - type: RandomMetadata
     nameSegments:
     - NamesXenoborg
@@ -528,11 +478,6 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: XenoborgLawset # custom laws here
-    subverted: true # Goob
-  - type: CollectiveMind # Goob
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: IntrinsicRadioTransmitter # can only use binary and xenoborg channel
     channels:
     - Xenoborg
@@ -549,11 +494,6 @@
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
-    # <Trauma>
-    brainWhitelist:
-      components:
-      - MMI # No infinite posibrain xorgs
-    # </Trauma>
   - type: TypingIndicator
     proto: xenoborg
   - type: Speech
@@ -561,11 +501,6 @@
     speechSounds: Xenoborg
     allowedEmotes:
     - Laugh
-    # Goobstation - Cyborg emote sounds
-    - Sigh
-    - Crying
-    - Whistle
-    # end Goobstation - Cyborg emote sounds
   - type: Vocal
     emoteSounds: UnisexSiliconXenoborg
     wilhelmProbability: 0
@@ -607,6 +542,8 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+  - type: EmpResistance
+    strengthMultiplier: 0
 
 - type: entity
   abstract: true

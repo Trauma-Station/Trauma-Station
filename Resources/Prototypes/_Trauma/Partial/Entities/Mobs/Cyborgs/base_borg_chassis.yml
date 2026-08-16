@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseBorgChassisNotIonStormable
+  components:
+  - type: KnowledgeHolder
+  - type: IntrinsicUI
+    uis:
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionShowStationMap
+  - type: StationMap # Show location on the map
+  - type: Targeting
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: Penetratable # Better snipers
+    penetrateDamage: 75 # It's harder to kill iron golem
+    damagePenalty: 0.25
+  - type: MiningPoints # for mining borgs mostly
+  - type: SpeechSynthesis
+    voice: Borg
+  - type: KnowledgeGrantOnWear # gets added to the brain, modified when picking borg type
+    skills:
+      # robot basic stuff
+      FabricationKnowledge: 20
+      WallsKnowledge: 10
+      InfrastructureKnowledge: 10
+      ElectronicsKnowledge: 10
+  - type: HealthExaminable
+    examinableTypes:
+    - Ballistic
+  - type: UserInterface
+    interfaces:
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+  - type: Repairable
+    allowSelfRepair: true
+  - type: Speech
+    allowedEmotes:
+    - Laugh
+    - Sigh
+    - Crying
+    - Whistle
+  - type: Damageable
+    damageModifierSet: Silicon
+  - type: Tag
+    tags:
+    - SiliconMob
+    - IPCDrinkBlacklist # no selfantagging ipcs
+
+- type: entity
+  id: BaseXenoborgChassis
+  components:
+  - type: BlockShuttleRecall
+  - type: SiliconLawProvider
+    subverted: true
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: BorgChassis
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+  - type: Speech
+    allowedEmotes:
+    - Sigh
+    - Crying
+    - Whistle
+  - !Remove type: EmpResistance
