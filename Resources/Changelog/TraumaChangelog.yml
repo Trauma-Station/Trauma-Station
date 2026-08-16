@@ -13211,3 +13211,10 @@ Entries:
   id: 1440
   time: '2026-08-15T22:21:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4101
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed borgs getting deleted if you deconstructed their charger.
+  id: 1441
+  time: '2026-08-16T00:35:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4104
