@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: MolotovFire
   id: MolotovHellFire
@@ -13,7 +15,7 @@
     color: red
   - type: TileEntityEffect
     effects:
-    - !type:Flammable # TODO: HELLFIRE 
+    - !type:Flammable # TODO: HELLFIRE
       multiplier: 8
       multiplierOnExisting: 1
     - !type:Ignite
