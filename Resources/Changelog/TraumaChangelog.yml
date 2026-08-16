@@ -13243,3 +13243,10 @@ Entries:
   id: 1444
   time: '2026-08-16T01:34:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4105
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added flat ballistic resistance to all heretic robes.
+  id: 1445
+  time: '2026-08-16T05:35:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4110
