@@ -13232,3 +13232,14 @@ Entries:
   id: 1443
   time: '2026-08-16T01:00:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4107
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed the phoron cost on every biocube except holocarp, Let the factory
+      grow
+  - type: Tweak
+    message: Space Ticks have been tweaked so they are penetrated by projectiles now
+  id: 1444
+  time: '2026-08-16T01:34:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4105
