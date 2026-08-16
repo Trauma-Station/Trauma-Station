@@ -13250,3 +13250,12 @@ Entries:
   id: 1445
   time: '2026-08-16T05:35:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4110
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed heretic burglar's finesse and champion hook having infinite range.
+  - type: Fix
+    message: Fixed champion hook grab being escapeable while prone.
+  id: 1446
+  time: '2026-08-16T16:33:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4112
