@@ -209,8 +209,7 @@
   - MobFlammable
   - BaseSpeciesMob
   #- BaseMobDestructible # Trauma - parts handle gibbing
-  - BaseHungerSlowdown
-  - BaseThirstSlowdown
+  - BaseHungerThirstSlowdown
   id: BaseSpeciesMobOrganicUnperishable # Trauma - made unperishable for vox
   save: false
   components:
