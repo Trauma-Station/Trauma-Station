@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Trauma.Shared.Heretic.Systems;
+using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 
@@ -16,17 +17,11 @@ public sealed partial class BurglarsFinesseSystem : EntitySystem
     [Dependency] private SharedCombatModeSystem _combat = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HandsComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerb);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetAltVerb(Entity<HandsComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
-        if (user == ent.Owner || args.Using is not { } used)
+        if (user == ent.Owner || args.Using is not { } used || !args.CanAccess || !args.CanInteract)
             return;
 
         if (!CanSteal(user, used))
@@ -35,13 +30,7 @@ public sealed partial class BurglarsFinesseSystem : EntitySystem
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 9,
-            Act = () =>
-            {
-                if (!CanSteal(user, used)) // check again
-                    return;
-
-                DoSteal(user, used, ent);
-            },
+            Act = () => DoSteal(user, used, ent)
         });
     }
 
@@ -57,7 +46,8 @@ public sealed partial class BurglarsFinesseSystem : EntitySystem
         if (!TryComp(used, out MeleeWeaponComponent? melee))
             return;
 
-        if (!_melee.AttemptLightAttack(user, used, melee, target, false))
+        if (!_melee.AttemptLightAttack(user, used, melee, target, false) ||
+            !_melee.InRange(user, target, melee.Range, CompOrNull<ActorComponent>(user)?.PlayerSession, out _))
             return;
 
         melee.NextAttack += TimeSpan.FromSeconds(1f / _melee.GetAttackRate(used, user, melee));

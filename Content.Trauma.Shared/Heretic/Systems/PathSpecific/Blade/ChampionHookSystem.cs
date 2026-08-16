@@ -39,47 +39,21 @@ public sealed partial class ChampionHookSystem : EntitySystem
 
     [Dependency] private EntityQuery<MeleeWeaponComponent> _meleeQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ChampionHookComponent, BeforeSpawnPullingVirtualItemsEvent>(OnVirtualItems);
-        SubscribeLocalEvent<ChampionHookComponent, MeleeAttackEvent>(OnMelee);
-        SubscribeLocalEvent<ChampionHookComponent, GetGrabMovespeedEvent>(OnGetMovespeed);
-        SubscribeLocalEvent<ChampionHookComponent, PullStoppedMessage>(OnHookStopped);
-
-        SubscribeLocalEvent<HereticBladeComponent, GotUnequippedHandEvent>(OnUnequipHand);
-        SubscribeLocalEvent<HereticBladeComponent, AttemptMeleeEvent>(OnMeleeAttempt);
-
-        SubscribeLocalEvent<ChampionHookedComponent, CanStandWhileImmobileEvent>(OnImmobileStand);
-        SubscribeLocalEvent<ChampionHookedComponent, BeingPulledAttemptEvent>(OnPullAttempt);
-        SubscribeLocalEvent<ChampionHookedComponent, PullStoppedMessage>(OnHookedStopped);
-        SubscribeLocalEvent<ChampionHookedComponent, StoodEvent>(OnStand);
-        SubscribeLocalEvent<ChampionHookedComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
-
-        SubscribeLocalEvent<CrawlerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetAltVerbs(Entity<CrawlerComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
 
-        if (user == ent.Owner || args.Using is not { } used)
+        if (user == ent.Owner || args.Using is not { } used || !args.CanAccess || !args.CanInteract)
             return;
 
-        if (!CanHook(user, used, out _))
+        if (!CanHook(user, used, out var hook))
             return;
 
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 9,
-            Act = () =>
-            {
-                if (!CanHook(user, used, out var hook)) // check again
-                    return;
-
-                DoHook((user, hook), used, ent);
-            },
+            Act = () => DoHook((user, hook), used, ent)
         });
     }
 
@@ -89,6 +63,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
                HasComp<HereticBladeComponent>(used);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequipHand(Entity<HereticBladeComponent> ent, ref GotUnequippedHandEvent args)
     {
         if (!TryComp(args.User, out ChampionHookComponent? hook) || hook.Weapon != ent.Owner ||
@@ -98,6 +73,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         _pulling.TryStopPull(hooked, pullable, args.User, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnMeleeAttempt(Entity<HereticBladeComponent> ent, ref AttemptMeleeEvent args)
     {
         if (!TryComp(args.User, out ChampionHookComponent? hook) || hook.Weapon != ent.Owner ||
@@ -133,22 +109,26 @@ public sealed partial class ChampionHookSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnImmobileStand(Entity<ChampionHookedComponent> ent, ref CanStandWhileImmobileEvent args)
     {
         args.CanStand = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStand(Entity<ChampionHookedComponent> ent, ref StoodEvent args)
     {
         _pulling.StopAllPulls(ent, stopPuller: false);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetMovespeed(Entity<ChampionHookComponent> ent, ref GetGrabMovespeedEvent args)
     {
         if (ent.Comp.HookedMob != null)
             args.Speed += ent.Comp.MovespeedBuff;
     }
 
+    [SubscribeLocalEvent]
     private void OnMelee(Entity<ChampionHookComponent> ent, ref MeleeAttackEvent args)
     {
         if (ent.Comp.HookedMob == null || args.Weapon == ent.Comp.Weapon ||
@@ -163,6 +143,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         Dirty(args.Weapon, weapon);
     }
 
+    [SubscribeLocalEvent]
     private void OnHookStopped(Entity<ChampionHookComponent> ent, ref PullStoppedMessage args)
     {
         if (ent.Owner != args.PullerUid)
@@ -173,6 +154,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnHookedStopped(Entity<ChampionHookedComponent> ent, ref PullStoppedMessage args)
     {
         if (ent.Owner != args.PulledUid)
@@ -181,17 +163,20 @@ public sealed partial class ChampionHookSystem : EntitySystem
         RemComp(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<ChampionHookedComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         if (args.Type == HarmfulActionType.Grab)
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPullAttempt(Entity<ChampionHookedComponent> ent, ref BeingPulledAttemptEvent args)
     {
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnVirtualItems(Entity<ChampionHookComponent> ent, ref BeforeSpawnPullingVirtualItemsEvent args)
     {
         if (ent.Comp.HookedMob != args.Pulled)
@@ -204,7 +189,8 @@ public sealed partial class ChampionHookSystem : EntitySystem
     {
         if (!TryComp(used, out MeleeWeaponComponent? melee))
             return;
-        if (!_melee.AttemptLightAttack(ent, used, melee, target, false))
+        if (!_melee.AttemptLightAttack(ent, used, melee, target, false) ||
+            !_melee.InRange(ent, target, melee.Range, CompOrNull<ActorComponent>(ent)?.PlayerSession, out _))
             return;
 
         melee.NextAttack += TimeSpan.FromSeconds(1f / _melee.GetAttackRate(used, ent, melee));
