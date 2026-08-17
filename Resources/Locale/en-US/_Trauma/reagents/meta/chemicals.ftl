@@ -75,3 +75,6 @@ reagent-desc-burnite = A highly volatile flaming chemical that's typically only 
 
 reagent-name-unknown-reagent = reagent-name-unknown-reagent
 reagent-desc-unknown-reagent = reagent-desc-unknown-reagent
+
+reagent-name-liquid-earthquake = liquid earthquake
+reagent-desc-liquid-earthquake = A constantly shifting chemical that is able to permanently decrease a plant's production at the cost of maturation

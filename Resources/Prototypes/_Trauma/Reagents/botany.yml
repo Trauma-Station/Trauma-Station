@@ -99,3 +99,25 @@
     amount: -15
   - !type:PlantAdjustHealth
     amount: 3
+
+- type: reagent
+  id: LiquidEarthquake
+  name: reagent-name-liquid-earthquake
+  group: Botanical
+  desc: reagent-desc-liquid-earthquake
+  physicalDesc: reagent-physical-desc-thick
+  flavor: medicine
+  color : "#ABAB67"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 2
+  plantMetabolism:
+  - !type:PlantAdjustHealth
+    amount: -2
+  - !type:PlantAdjustMaturation
+    Amount: 1
+  - !type:LiquidEarthquake

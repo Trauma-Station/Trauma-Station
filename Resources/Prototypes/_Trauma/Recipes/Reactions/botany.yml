@@ -48,3 +48,17 @@
       amount: 1
   products:
     Stellarium: 3
+
+- type: reaction
+  id: LiquidEarthquake
+  reactants:
+    Razorium:
+      amount: 5
+    EZNutrient:
+      amount: 1
+    Diethylamine:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    LiquidEarthquake: 2
