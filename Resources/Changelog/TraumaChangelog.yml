@@ -13279,3 +13279,10 @@ Entries:
   id: 1448
   time: '2026-08-17T04:53:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4106
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer being awful to use, it now also has popups.
+  id: 1449
+  time: '2026-08-17T18:15:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4125
