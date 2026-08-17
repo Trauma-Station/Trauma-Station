@@ -43,12 +43,20 @@
           - CorporateOverride
         insertSound:
           path: /Audio/Machines/id_insert.ogg
-  - type: NtrClientAccount
   - type: Speech
 
 - type: entity
-  id: ExecutiveBriefcaseDebug
   parent: ExecutiveBriefcaseEmpty
+  id: ExecutiveBriefcase
+  suffix: 25 points
+  components:
+  - type: Store
+    balance:
+      NTLoyaltyPoint: 25
+
+- type: entity
+  parent: ExecutiveBriefcaseEmpty
+  id: ExecutiveBriefcaseDebug
   suffix: Debug
   components:
   - type: Store
@@ -63,8 +71,8 @@
 # Executive briefcase store
 # i dont want to make a bunch of new files for 1 prototype so....
 - type: entity
-  id: StorePresetNTR
   abstract: true
+  id: StorePresetNTR
   components:
   - type: Store
     name: store-preset-name-ntr
@@ -94,7 +102,7 @@
 
 - type: storeCategory
   id: NTREvil
-  name: Evil
+  name: ntr-executive-tier-4-name
   priority: 3
   evil: true # lol
 
