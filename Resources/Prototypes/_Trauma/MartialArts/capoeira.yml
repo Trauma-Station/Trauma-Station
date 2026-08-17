@@ -14,9 +14,12 @@
   - !type:TakeStaminaDamage
     amount: -30
     scaling: false
+  - !type:ApplyMartialArtModifier
+    type: MoveSpeed
+    multiplier: 1.2
+    duration: 10
+    scaling: false
   opponentEffects:
-#  - !type:ModifyKnockdown
-#    time: 2
   - !type:HealthChange
     targetPart: Chest
     damage:
@@ -44,6 +47,11 @@
     sound: /Audio/Weapons/genhit2.ogg
   - !type:TakeStaminaDamage
     amount: -40
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    type: MoveSpeed
+    multiplier: 1.2
+    duration: 10
     scaling: false
   opponentEffects:
   - !type:HealthChange
@@ -76,11 +84,6 @@
   - !type:ApplyMartialArtModifier
     multiplier: 1.5
     duration: 5
-    scaling: false
-  - !type:ApplyMartialArtModifier
-    type: MoveSpeed
-    multiplier: 1.2
-    duration: 10
     scaling: false
   opponentEffects:
   - !type:HealthChange
@@ -117,11 +120,6 @@
   - !type:ApplyMartialArtModifier
     multiplier: 1.5
     duration: 5
-    scaling: false
-  - !type:ApplyMartialArtModifier
-    type: MoveSpeed
-    multiplier: 1.2
-    duration: 10
     scaling: false
   - !type:RaiseNetworkEvents
     events:

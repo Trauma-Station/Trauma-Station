@@ -10,10 +10,6 @@ namespace Content.Trauma.Shared.MartialArts;
 public sealed partial class ComboMultiplierSystem : EntitySystem
 {
     [SubscribeLocalEvent]
-    private void OnFlat(FlatMultiplierEvent args)
-        => args.Multiplier = args.Value;
-
-    [SubscribeLocalEvent]
     private void OnVelocity(EntityUid uid, PhysicsComponent comp, VelocityMultiplierEvent args)
         => args.Multiplier = Math.Clamp(MathF.Pow(comp.LinearVelocity.Length(), args.Exponent), args.Min, args.Max);
 }

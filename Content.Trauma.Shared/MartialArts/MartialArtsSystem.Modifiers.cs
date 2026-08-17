@@ -172,11 +172,9 @@ public partial class MartialArtsSystem
             if (rule.UnarmedOnly && args.Weapon != args.Performer)
                 continue;
 
-            // stored on the component and reused, so reset the result first
             var ev = rule.Multiplier;
-            ev.User = args.Performer;
-            ev.Multiplier = 1f;
-            RaiseLocalEvent(args.Performer, (object) ev, true);
+            ev.Reset(args.Performer);
+            RaiseLocalEvent(args.Performer, (object) ev);
 
             ApplyModifier((ent, modifiers), rule.Type, ev.Multiplier, rule.Modifier, rule.Duration, args.Performer);
         }

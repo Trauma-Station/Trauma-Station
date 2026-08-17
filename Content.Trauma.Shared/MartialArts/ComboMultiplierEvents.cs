@@ -13,12 +13,24 @@ public abstract partial class BaseComboMultiplierEvent : EntityEventArgs
     public EntityUid User = EntityUid.Invalid;
 
     public float Multiplier = 1f;
+
+    public virtual void Reset(EntityUid user)
+    {
+        User = user;
+        Multiplier = 1f;
+    }
 }
 
 public sealed partial class FlatMultiplierEvent : BaseComboMultiplierEvent
 {
     [DataField]
     public float Value = 1f;
+
+    public override void Reset(EntityUid user)
+    {
+        base.Reset(user);
+        Multiplier = Value;
+    }
 }
 
 /// <summary>
