@@ -21,9 +21,6 @@
   id: BindSoulAction
 
 - type: Tag
-  id: Bible
-
-- type: Tag
   id: Blobbernaut
 
 - type: Tag
