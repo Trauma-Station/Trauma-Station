@@ -13295,3 +13295,12 @@ Entries:
   id: 1450
   time: '2026-08-17T19:32:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4124
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Renamed reagent-name-unknown-reagent to Unobtainium and added a
+      description for it
+  id: 1451
+  time: '2026-08-17T20:00:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4120
