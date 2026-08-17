@@ -13202,3 +13202,67 @@ Entries:
   id: 1439
   time: '2026-08-15T20:22:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4096
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Coconut Flesh removed, all sources have been replaced with nutriment.
+  - type: Tweak
+    message: Crabon now requires Coconut Water due to the removal of Coconut Flesh.
+  id: 1440
+  time: '2026-08-15T22:21:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4101
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed borgs getting deleted if you deconstructed their charger.
+  id: 1441
+  time: '2026-08-16T00:35:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4104
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed emagged recycler just deleting people.
+  id: 1442
+  time: '2026-08-16T00:47:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4097
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mechs now insulate you from shocks.
+  id: 1443
+  time: '2026-08-16T01:00:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4107
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed the phoron cost on every biocube except holocarp, Let the factory
+      grow
+  - type: Tweak
+    message: Space Ticks have been tweaked so they are penetrated by projectiles now
+  id: 1444
+  time: '2026-08-16T01:34:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4105
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added flat ballistic resistance to all heretic robes.
+  id: 1445
+  time: '2026-08-16T05:35:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4110
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed heretic burglar's finesse and champion hook having infinite range.
+  - type: Fix
+    message: Fixed champion hook grab being escapeable while prone.
+  id: 1446
+  time: '2026-08-16T16:33:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4112
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix ghouls not understanding tau ceti basic after jaunting.
+  id: 1447
+  time: '2026-08-16T20:07:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4114

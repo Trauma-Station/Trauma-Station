@@ -25,6 +25,9 @@
   components:
   # removed most of upstreams components, ling is mostly implemented in ChangelingRule shitcode
   - type: Changeling
+  - type: DestructionResistance
+  - type: RevolutionaryImmune
+  - type: ZombieImmune
   # </Trauma>
   mindRoles:
   - MindRoleChangeling
