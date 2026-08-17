@@ -328,7 +328,7 @@ public abstract partial class SharedImplanterSystem : EntitySystem
             return false;
 
         // no
-        if (ent.Comp.Extractonly)
+        if (ent.Comp.ExtractOnly)
             return false;
         // </Trauma>
 
