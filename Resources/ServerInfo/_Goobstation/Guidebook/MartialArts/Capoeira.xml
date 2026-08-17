@@ -41,7 +41,7 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
-  Knocks down the opponent, breaking through their defenses temporarily making them vulnerable to melee attacks and pushes them away from you.
+  Pushes the target back, breaking through their defenses temporarily making them vulnerable to melee attacks.
 
   ### Circle Kick
 

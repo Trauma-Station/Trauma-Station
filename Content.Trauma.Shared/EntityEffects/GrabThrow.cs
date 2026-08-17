@@ -7,13 +7,19 @@ using Content.Trauma.Shared.Grab;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Grab-throws the target mob away from the user, speed scales with effect scale.
+/// Grab-throws the target mob away from the user, distance scales with effect scale.
 /// Does nothing if there is no user or it's at the same position as the target.
 /// </summary>
 public sealed partial class GrabThrow : EntityEffectBase<GrabThrow>
 {
     [DataField]
     public float Speed = 5f;
+
+    /// <summary>
+    /// How many tiles to throw the target, before scaling.
+    /// </summary>
+    [DataField]
+    public float Distance = 1f;
 
     /// <summary>
     /// Damage dealt after hitting a wall.
@@ -23,6 +29,12 @@ public sealed partial class GrabThrow : EntityEffectBase<GrabThrow>
 
     [DataField]
     public bool DropItems = true;
+
+    /// <summary>
+    /// Whether to knock the target down, <see cref="DropItems"/> does nothing without it.
+    /// </summary>
+    [DataField]
+    public bool Knockdown = true;
 }
 
 public sealed partial class GrabThrowEffectSystem : EntityEffectSystem<TransformComponent, GrabThrow>
@@ -40,14 +52,15 @@ public sealed partial class GrabThrowEffectSystem : EntityEffectSystem<Transform
         if (pos == userPos)
             return;
 
-        var direction = (pos - userPos).Normalized();
-
         var e = args.Effect;
+        var direction = (pos - userPos).Normalized() * e.Distance * args.Scale;
+
         _grabThrown.Throw(ent,
             user,
             direction,
-            e.Speed * args.Scale,
+            e.Speed,
             damage: e.Damage,
-            drop: e.DropItems);
+            drop: e.DropItems,
+            knockdown: e.Knockdown);
     }
 }

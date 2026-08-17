@@ -30,8 +30,9 @@
     type: Update
     time: 3
   - !type:GrabThrow
-    speed: 5
+    speed: 7
     dropItems: false
+    knockdown: false
   levelRequired: 10
 
 - type: combo
