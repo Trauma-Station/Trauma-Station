@@ -3171,7 +3171,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Slash: 10
+        Slash: 5
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
@@ -3264,7 +3264,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Slash: 10
+        Slash: 7.5
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
@@ -3387,7 +3387,7 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 15 # Trauma, was 8
+        Piercing: 8
   - type: NpcFactionMember
     factions:
     - Passive
@@ -3426,7 +3426,7 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 15
+        Piercing: 2 # basically a rat
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
@@ -3679,7 +3679,7 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Slash: 10 # Trauma - was 5 Piercing
+        Piercing: 5
   - type: Grammar
     attributes:
       gender: epicene
@@ -3877,13 +3877,14 @@
     rootTask:
       task: RuminantHostileCompound
   - type: MeleeWeapon
+    attackRate: 0.05 # its a sloth
     soundHit:
         path: /Audio/Effects/bite.ogg
     angle: 0
     animation: WeaponArcBite
     damage:
       types:
-        Slash: 10
+        Piercing: 20 # sloths are vicious
   # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 0.5
@@ -3954,13 +3955,14 @@
     rootTask:
       task: RuminantHostileCompound
   - type: MeleeWeapon
+    attackRate: 2 # It's a ferret.
     soundHit:
         path: /Audio/Effects/bite.ogg
     angle: 0
     animation: WeaponArcBite
     damage:
       types:
-        Slash: 10
+        Piercing: 2.5 # We are not the size of a rabbit. We'll be fine.
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
@@ -4195,7 +4197,7 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 15
+        Piercing: 10 # Pigs can stay deadly
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
