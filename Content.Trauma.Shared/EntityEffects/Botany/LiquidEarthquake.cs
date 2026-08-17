@@ -18,15 +18,8 @@ public sealed partial class LiquidEarthquake : EntityEffectBase<LiquidEarthquake
     [DataField]
     public float ProductionDecrease = 0.1f;
 
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-    {
-        return PassChance("entity-effect-guidebook-plant-liquid-earthquake",
+    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
+        Loc.GetString("entity-effect-guidebook-plant-liquid-earthquake",
             ("limit", ProductionLimit),
             ("decrease", ProductionDecrease));
-
-        string PassChance(string entityEffectGuidebookPlantLiquidEarthquake, (string, int ProductionLimit) valueTuple, (string, float ProductionDecrease) valueTuple1)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

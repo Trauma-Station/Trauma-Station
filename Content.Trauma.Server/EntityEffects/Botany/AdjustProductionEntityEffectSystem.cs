@@ -6,7 +6,7 @@ using Content.Trauma.Shared.EntityEffects.Botany;
 
 namespace Content.Trauma.Server.EntityEffects.Botany;
 
-public sealed partial class LiquidEarthquakeEntityEffectSystem : EntityEffectSystem<PlantHolderComponent, LiquidEarthquake>
+public sealed partial class AdjustProductionEntityEffectSystem : EntityEffectSystem<PlantHolderComponent, LiquidEarthquake>
 {
     protected override void Effect(Entity<PlantHolderComponent> entity, ref EntityEffectEvent<LiquidEarthquake> args)
     {
