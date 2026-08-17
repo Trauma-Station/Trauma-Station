@@ -35,19 +35,11 @@ public sealed partial class XenomorphsRuleComponent : Component
 
     [DataField]
     public SoundSpecifier XenomorphInfestationSound =
-        new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg")
-        {
-            Params = AudioParams.Default
-                .WithVolume(-16f)
-        };
+        new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg");
 
     [DataField]
     public SoundSpecifier XenomorphTakeoverSound =
-        new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg")
-        {
-            Params = AudioParams.Default
-                .WithVolume(-14f)
-        };
+        new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg");
 
     [DataField]
     public Color AnnouncementColor = Color.Red;
