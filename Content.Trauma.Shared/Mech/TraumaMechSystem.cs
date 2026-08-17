@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Electrocution;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
@@ -36,6 +37,13 @@ public sealed partial class TraumaMechSystem : EntitySystem
     {
         // Fixes scram implants or teleports locking the pilot out of being able to move.
         _mech.TryEject(ent.Comp.Mech, pilot: ent.Owner);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnElectrocutionAttempt(Entity<MechPilotComponent> ent, ref ElectrocutionAttemptEvent args)
+    {
+        // mechs can insulate the pilot from shocks theyre made of conductive metal
+        RaiseLocalEvent(ent.Comp.Mech, args);
     }
 
     [SubscribeLocalEvent]

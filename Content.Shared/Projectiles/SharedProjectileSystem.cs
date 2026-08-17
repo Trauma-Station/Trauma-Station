@@ -225,21 +225,15 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
     {
-        // Goobstation - Crawling fix
+        // <Goob>
         if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
             return;
-
-        if (component.IgnoredEntities.Contains(args.OtherEntity))
-        {
-            args.Cancelled = true;
-            return;
-        }
 
         if ((component.Shooter == args.OtherEntity || component.Weapon == args.OtherEntity) &&
             component.Weapon != null && _tag.HasTag(component.Weapon.Value, GunCanAimShooterTag) &&
             TryComp(uid, out TargetedProjectileComponent? targeted) && GetEntity(targeted.Target) == args.OtherEntity)
             return;
-        // /Goobstation
+        // </Goob>
 
         if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
         {

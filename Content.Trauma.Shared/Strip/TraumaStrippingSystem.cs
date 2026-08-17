@@ -19,6 +19,7 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<StripBlockBypassComponent> _bypassQuery = default!;
 
     private static readonly ProtoId<InventorySlotPrototype> JumpsuitSlot = "jumpsuit";
     private static readonly ProtoId<InventorySlotPrototype> OuterClothingSlot = "outerClothing";
@@ -63,7 +64,8 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
         if (args.Event.InventoryOrHand
             && args.Event.SlotOrHandName == JumpsuitSlot
             && args.DoAfter.Args.Target is { } target
-            && _inventory.TryGetSlotEntity(target, OuterClothingSlot, out _))
+            && _inventory.TryGetSlotEntity(target, OuterClothingSlot, out var item)
+            && !_bypassQuery.HasComp(item))
         {
             _popup.PopupEntity(
                 Loc.GetString("trauma-strip-jumpsuit-blocked"),

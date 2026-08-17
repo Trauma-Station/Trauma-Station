@@ -59,6 +59,12 @@ public sealed partial class Integer
     public override string ToString()
         => Value.ToString();
 
+    public override bool Equals(object? obj)
+        => obj is Integer i && i.Value == Value;
+
+    public override int GetHashCode()
+        => Value.GetHashCode();
+
     public static readonly Integer Zero = new();
 }
 

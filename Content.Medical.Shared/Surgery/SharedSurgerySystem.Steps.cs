@@ -142,6 +142,9 @@ public abstract partial class SharedSurgerySystem
                 if (!containerSlot.ContainedEntity.HasValue)
                     continue;
 
+                if (_ignoreQuery.HasComp(containerSlot.ContainedEntity.Value))
+                    continue;
+
                 args.Invalid = StepInvalidReason.Armor;
                 args.Popup = Loc.GetString("surgery-ui-window-steps-error-armor");
                 return;
