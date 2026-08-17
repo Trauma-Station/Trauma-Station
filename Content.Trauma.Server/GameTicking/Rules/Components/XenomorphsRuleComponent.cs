@@ -34,10 +34,10 @@ public sealed partial class XenomorphsRuleComponent : Component
     public string? Announcement = "xenomorphs-announcement";
 
     [DataField]
-    public SoundSpecifier? XenomorphInfestationSound = new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg");
+    public SoundSpecifier XenomorphInfestationSound = new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg");
 
     [DataField]
-    public SoundSpecifier? XenomorphTakeoverSound = new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg");
+    public SoundSpecifier XenomorphTakeoverSound = new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg");
 
     [DataField]
     public Color AnnouncementColor = Color.Red;
