@@ -610,7 +610,10 @@
           max: 0.1
         type: Local
         visualType: MediumCaution
-        messages: [ entity-effect-popup-strawberry-ice-addiction ] # Trauma - use loc
+        messages:
+        - hydroxysomnolene-effect-flavor
+        - hydroxysomnolene-effect-another-hit
+        - hydroxysomnolene-effect-sluggish
         probability: 0.15
 
 - type: reagent
