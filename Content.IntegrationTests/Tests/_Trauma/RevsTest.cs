@@ -97,14 +97,21 @@ public sealed class RevsTest : InteractionTest
     [Test]
     public async Task HeadrevBreaksMindshield()
     {
+        var implant = EntityUid.Invalid;
         await MakePlayerHeadRev();
         await Server.WaitPost(() =>
         {
-            _implant.AddImplant(SPlayer, MindShieldImplant);
+            implant = _implant.AddImplant(SPlayer, MindShieldImplant)!;
         });
         Assert.That(!SComp<HeadRevolutionaryComponent>(SPlayer).ConvertAbilityEnabled, "Mind shield didn't disable conversion");
         Assert.That(STryComp<MindShieldStatusComponent>(SPlayer, out var shield), "Mind shield didn't get broken");
         Assert.That(shield.IsBroken, "Mind shield was not broken on headrev");
+
+        await Server.WaitPost(() =>
+        {
+            _implant.ForceRemove(SPlayer, implant);
+        });
+        Assert.That(SComp<HeadRevolutionaryComponent>(SPlayer).ConvertAbilityEnabled, "Removing mind shield didn't re-enable conversion");
 
         await SpawnTarget(Urist);
         await AddTargetMind();
