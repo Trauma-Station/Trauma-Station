@@ -138,7 +138,8 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         foreach (var listing in store.LastAvailableListings)
         {
-            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || listing.ProductEntity == null)
+            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || cost > comp.MaxCost ||
+                listing.ProductEntity == null)
                 continue;
 
             var difficulty = SpyBountyDifficulty.Easy;
