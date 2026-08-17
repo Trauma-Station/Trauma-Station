@@ -119,5 +119,5 @@
   - !type:PlantAdjustHealth
     amount: -2
   - !type:PlantAdjustMaturation
-    Amount: 1
+    amount: 1
   - !type:LiquidEarthquake

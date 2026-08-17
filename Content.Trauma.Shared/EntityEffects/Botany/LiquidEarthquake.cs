@@ -1,6 +1,6 @@
 ﻿using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.EntityEffects.Botany.PlantAttributes;
+namespace Content.Trauma.Shared.EntityEffects.Botany;
 
 public sealed partial class LiquidEarthquake : EntityEffectBase<LiquidEarthquake>
 {
@@ -14,7 +14,7 @@ public sealed partial class LiquidEarthquake : EntityEffectBase<LiquidEarthquake
     /// The decrease in production per effect application.
     /// </summary>
     [DataField]
-    public double ProductionDecrease = 0.1;
+    public float ProductionDecrease = 0.1;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-plant-liquid-earthquake",

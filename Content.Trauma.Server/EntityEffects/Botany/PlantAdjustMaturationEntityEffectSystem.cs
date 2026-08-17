@@ -1,8 +1,8 @@
 ﻿using Content.Server.Botany.Components;
 using Content.Shared.EntityEffects;
-using Content.Trauma.Shared.EntityEffects.Botany.PlantAttributes;
+using Content.Trauma.Shared.EntityEffects.Botany;
 
-namespace Content.Trauma.Server.EntityEffects.Botany.PlantAttributes;
+namespace Content.Trauma.Server.EntityEffects.Botany;
 
 public sealed partial class PlantAdjustMaturationEntityEffectSystem : EntityEffectSystem<PlantHolderComponent, PlantAdjustMaturation>
 {

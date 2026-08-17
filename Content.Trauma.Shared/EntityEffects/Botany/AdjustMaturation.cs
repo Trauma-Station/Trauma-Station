@@ -1,6 +1,6 @@
 ﻿using Content.Shared.EntityEffects.Effects.Botany.PlantAttributes;
 
-namespace Content.Trauma.Shared.EntityEffects.Botany.PlantAttributes;
+namespace Content.Trauma.Shared.EntityEffects.Botany;
 
 /// <summary>
 ///     Handles increase or decrease of plant maturation.
