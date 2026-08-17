@@ -21,7 +21,7 @@ public sealed partial class HeadRevSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnMindShielded(Entity<HeadRevolutionaryComponent> ent, ref MindShieldedEvent args)
+    private void OnMindShieldBroken(Entity<HeadRevolutionaryComponent> ent, ref MindShieldBrokenEvent args)
     {
         _rev.SetConvertAbility(ent, false);
     }
