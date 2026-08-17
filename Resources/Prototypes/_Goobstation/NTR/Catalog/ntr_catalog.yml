@@ -315,25 +315,6 @@
 # Machine boards
 
 - type: listing
-  id: NTRExecutiveFlatpack
-  name: ntr-executive-task-console-name
-  description: ntr-executive-task-console-desc
-  productEntity: SpawnPodTaskFlatpack
-  icon:
-    sprite: Objects/Devices/flatpack.rsi
-    state: base
-  cost:
-    NTLoyaltyPoint: 0
-  categories:
-  - NTRBoards
-  restockTime: 5m
-  resetRestockOnPurchase: true
-  restockAfterPurchase: 20m
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2 # come on man, skill issue if you lost 3 consoles
-
-- type: listing
   id: NTRExecutiveTelecom
   name: ntr-executive-telecom-name
   description: ntr-executive-telecom-desc

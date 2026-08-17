@@ -163,6 +163,8 @@
   id: ScytheCosmicCult
   description: An preternatural scythe, wrought of indescribable material. Even just looking at it makes you feel cold.
   components:
+  - type: WeaponClass
+    class: Tool
   - type: Sharp
   - type: CosmicEquipment
   - type: Sprite
