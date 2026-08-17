@@ -13266,3 +13266,16 @@ Entries:
   id: 1447
   time: '2026-08-16T20:07:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4114
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Added Holy Chlorine Trufluoride!
+  - type: Add
+    message: Added Burnite!
+  - type: Add
+    message: Added reagent-name-unknown-reagent
+  - type: Tweak
+    message: Slightly adjusted the coconut half description.
+  id: 1448
+  time: '2026-08-17T04:53:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4106
