@@ -40,6 +40,11 @@
       FirstAidKnowledge: 25
       SurgeryKnowledge: 25
       MagicalLiteracyKnowledge: 88
+  # For heretic summons
+  - !type:GrantSkills
+    skills:
+      LiteracyKnowledge: 100
+      LanguageTauCetiBasic: 100
 
 - type: entityEffect
   id: GhoulSkillsRemove
