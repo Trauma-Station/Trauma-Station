@@ -7,11 +7,9 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Revolutionary.Components;
-using Content.Server.RoundEnd;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -629,6 +627,8 @@ public sealed partial class HereticSystem : SharedHereticSystem
             true,
             ascendSound,
             Color.Pink);
+
+        _rule.SpawnERTOnAscension();
     }
 
     [SubscribeLocalEvent]

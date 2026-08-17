@@ -30,12 +30,9 @@ public sealed class CosmicCultTest : InteractionTest
     {
         await Server.WaitPost(() =>
         {
-            Assert.That(SEntMan.EntityExists(ClientSession.AttachedEntity));
-            Assert.That(ClientSession.AttachedEntity, Is.EqualTo(SPlayer));
-            _smite.MakeAntag(ClientSession, Smite);
+            _smite.MakeAntag(ServerSession, Smite);
         });
 
-        Assert.That(SEntMan.EntityExists(ClientSession.AttachedEntity));
         var cultist = SComp<CosmicCultComponent>(SPlayer);
         Assert.That(cultist.ShopActionEntity, Is.Not.Null);
 

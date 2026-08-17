@@ -323,8 +323,7 @@ public abstract partial class SharedHereticRitualSystem
         if (heretic.MaxSacrificeInfluenceSpawn < heretic.SacrificeTracker)
             return;
 
-        var influenceEv = new SpawnHereticInfluenceEvent();
-        RaiseLocalEvent(ref influenceEv);
+        SpawnHereticInfluence();
     }
 
     private void OnLookup(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<LookupRitualEffect> args)

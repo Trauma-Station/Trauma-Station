@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Store;
-using Content.Trauma.Server.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Components;
 
@@ -13,6 +12,9 @@ public sealed partial class HereticRuleComponent : Component
 
     [DataField]
     public bool HasAHereticAscended;
+
+    [DataField]
+    public EntProtoId ERTEvent = "SpawnERTSecurityDelayed";
 
     public readonly List<EntityUid> Minds = new();
 
