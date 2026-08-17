@@ -73,8 +73,5 @@ reagent-desc-holy-chlorine-trifluoride = whose idea was this?
 reagent-name-burnite = burnite
 reagent-desc-burnite = A highly volatile flaming chemical that's typically only made by accidentally opening a portal to hell. Luckily, this isn't an easy feat to do.
 
-reagent-name-unknown-reagent = reagent-name-unknown-reagent
-reagent-desc-unknown-reagent = reagent-desc-unknown-reagent
-
-reagent-name-liquid-earthquake = liquid earthquake
-reagent-desc-liquid-earthquake = A constantly shifting chemical that is able to permanently decrease a plant's production at the cost of maturation
+reagent-name-unknown-reagent = unobtainium
+reagent-desc-unknown-reagent = An incredibly difficult chemical to come across, known to have very volatile effects whether it be spilled or put into plants
