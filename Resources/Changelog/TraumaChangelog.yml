@@ -13328,3 +13328,10 @@ Entries:
   id: 1453
   time: '2026-08-17T20:24:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4092
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Chaplains no longer have to deface their bible to enchant items.
+  id: 1454
+  time: '2026-08-17T20:38:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4131
