@@ -13313,3 +13313,18 @@ Entries:
   id: 1452
   time: '2026-08-17T20:10:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4127
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Removed items that cost more than 100tc from spy possible bounty reward.
+  - type: Tweak
+    message: >-
+      Medium bounty rewards now start from 20tc down from 30 and hard ones start
+      from 50tc down from 60.
+  - type: Fix
+    message: >-
+      Fixed spy uplink not updating bounty claimed status when someone else
+      claims it.
+  id: 1453
+  time: '2026-08-17T20:24:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4092
