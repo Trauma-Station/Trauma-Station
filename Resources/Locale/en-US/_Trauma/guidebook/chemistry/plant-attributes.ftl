@@ -1,1 +1,1 @@
-﻿plant-attribute-maturation = maturation
+plant-attribute-maturation = maturation

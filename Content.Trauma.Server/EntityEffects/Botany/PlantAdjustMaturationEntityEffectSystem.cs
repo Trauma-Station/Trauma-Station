@@ -1,4 +1,6 @@
-﻿using Content.Server.Botany.Components;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Botany.Components;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.EntityEffects.Botany;
 

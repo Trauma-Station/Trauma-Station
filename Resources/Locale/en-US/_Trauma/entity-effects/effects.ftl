@@ -1,4 +1,4 @@
-﻿entity-effect-guidebook-plant-liquid-earthquake =
+entity-effect-guidebook-plant-liquid-earthquake =
     { $chance ->
         [1] Decreases
         *[other] Decreases

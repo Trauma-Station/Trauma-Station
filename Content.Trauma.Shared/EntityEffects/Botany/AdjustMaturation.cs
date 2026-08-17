@@ -1,4 +1,6 @@
-﻿using Content.Shared.EntityEffects.Effects.Botany.PlantAttributes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects.Effects.Botany.PlantAttributes;
 
 namespace Content.Trauma.Shared.EntityEffects.Botany;
 
