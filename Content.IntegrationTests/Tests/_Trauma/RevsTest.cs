@@ -101,7 +101,7 @@ public sealed class RevsTest : InteractionTest
         await MakePlayerHeadRev();
         await Server.WaitPost(() =>
         {
-            implant = _implant.AddImplant(SPlayer, MindShieldImplant)!;
+            implant = _implant.AddImplant(SPlayer, MindShieldImplant)!.Value;
         });
         Assert.That(!SComp<HeadRevolutionaryComponent>(SPlayer).ConvertAbilityEnabled, "Mind shield didn't disable conversion");
         Assert.That(STryComp<MindShieldStatusComponent>(SPlayer, out var shield), "Mind shield didn't get broken");
