@@ -2559,7 +2559,7 @@
   description: Infiltrates your domain, spies on you, and somehow still a cool pet.
   components:
   # <Trauma>
-  - type: NPCRetaliation
+  - type: NPCRetaliation # Parrots will remember you forever.
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -3161,6 +3161,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 15
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -3254,6 +3255,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 15
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -3416,6 +3418,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 5
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -3618,6 +3621,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 10
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -3873,6 +3877,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 5
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -3951,6 +3956,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 5
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
@@ -4190,6 +4196,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
+    attackMemoryLength: 60 # pigs are smart
   - type: MeleeWeapon
     angle: 0
     animation: WeaponArcBite
@@ -4417,6 +4424,7 @@
         Piercing: 22
     animation: WeaponArcFist
   - type: NPCRetaliation
+    attackMemoryLength: 15 # Trauma, used to not have memory length.
   - type: FactionException
   - type: NpcFactionMember
     factions:
