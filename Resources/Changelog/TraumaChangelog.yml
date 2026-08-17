@@ -13304,3 +13304,12 @@ Entries:
   id: 1451
   time: '2026-08-17T20:00:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4120
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed mindshielded headrevs still being unable to convert if
+      demindshielded.
+  id: 1452
+  time: '2026-08-17T20:10:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4127
