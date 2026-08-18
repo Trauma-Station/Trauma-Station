@@ -13358,3 +13358,10 @@ Entries:
   id: 1457
   time: '2026-08-18T19:58:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4147
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Demonic Soul Fragments resprited.
+  id: 1458
+  time: '2026-08-18T20:17:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4146
