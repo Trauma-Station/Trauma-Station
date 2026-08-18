@@ -13372,3 +13372,10 @@ Entries:
   id: 1459
   time: '2026-08-18T21:08:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4139
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Bodies with souls can now be biomassed.
+  id: 1460
+  time: '2026-08-18T21:20:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4149
