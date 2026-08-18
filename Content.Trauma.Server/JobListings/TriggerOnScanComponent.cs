@@ -5,4 +5,4 @@ using Content.Shared.Trigger.Components.Triggers;
 namespace Content.Trauma.Server.JobListings;
 
 [RegisterComponent]
-public sealed partial class TriggerOnScanComponent : BaseTriggerOnXComponent {}
+public sealed partial class TriggerOnScanComponent : BaseTriggerOnXComponent;

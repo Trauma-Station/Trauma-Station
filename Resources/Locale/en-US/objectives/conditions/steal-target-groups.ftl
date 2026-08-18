@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Traitor single items
+# Trauma
 steal-target-groups-hypospray = prototype hypospray
 steal-target-groups-clothing-hands-knuckledusters-qm = golden knuckledusters
 steal-target-groups-handheld-crew-monitor = handheld crew monitor

@@ -165,7 +165,7 @@
 - type: entity
   parent: [ BaseMajorSideJob, BaseKillObjective ]
   id: KillSideJob
-  description: Someone wants someone dead. Kill them, then claim your reward. We don't care what happens to them afterwards.
+  description: You have been hired to end someone's life. Kill them, then claim your reward. We don't care what happens to them afterwards.
   components:
   - type: SideJob
     repeatable: true

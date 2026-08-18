@@ -11,7 +11,7 @@ public sealed partial class JobListingsImplantComponent : Component
     /// <summary>
     /// Action gained when this component is on an implanted entity.
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public EntProtoId Action;
 
     /// <summary>

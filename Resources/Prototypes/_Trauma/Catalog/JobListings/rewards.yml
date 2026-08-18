@@ -71,7 +71,6 @@
   id: ExtremeSideJobRewardsItems
   table: !type:GroupSelector
     children:
-    - id: AdvancedCombatMedipen
     - id: WeaponRevolverPythonAP
     - id: ClothingHandsGlovesGuerrilla
     - !type:NestedSelector

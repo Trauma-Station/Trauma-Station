@@ -173,7 +173,7 @@
   components:
   # <Trauma>
   - type: JobListingsImplant
-    action: ActionOpenJobListingsImplant
+    action: ActionOpenSideJobsImplant
   # </Trauma>
   - type: SubdermalImplant
     implantAction: ActionOpenUplinkImplant

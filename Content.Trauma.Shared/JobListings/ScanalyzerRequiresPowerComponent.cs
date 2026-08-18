@@ -3,7 +3,4 @@
 namespace Content.Trauma.Shared.JobListings;
 
 [RegisterComponent]
-public sealed partial class ScanalyzerRequiresPowerComponent : Component
-{
-
-}
+public sealed partial class ScanalyzerRequiresPowerComponent : Component;

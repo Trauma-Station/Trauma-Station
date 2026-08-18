@@ -13,7 +13,7 @@ public sealed partial class ScanalyzerComponent : Component
     /// <summary>
     /// The grand theft item that this scanalyzer is attuned for.
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public ProtoId<StealTargetGroupPrototype> StealTarget;
 
     /// <summary>
@@ -22,7 +22,7 @@ public sealed partial class ScanalyzerComponent : Component
     /// But that is sever-side only so we need this field on the client to predict things.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Used = false;
+    public bool Used;
 
     /// <summary>
     /// How long it takes to scan.
