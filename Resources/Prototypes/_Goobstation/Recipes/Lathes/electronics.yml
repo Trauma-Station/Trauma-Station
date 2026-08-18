@@ -1,17 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
-  id: ClarkeCentralElectronics
-  result: ClarkeCentralElectronics
-  categories: [ Mech, Clarke ]
-
-- type: latheRecipe
-  parent: ClarkeCentralElectronics
-  id: ClarkePeripheralsElectronics
-  result: ClarkePeripheralsElectronics
-
-- type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ]
   id: GygaxCentralElectronics
   result: GygaxCentralElectronics

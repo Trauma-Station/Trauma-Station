@@ -22,10 +22,6 @@
   name: lathe-category-mechs-ripleymkii
 
 - type: latheCategory
-  id: Clarke
-  name: lathe-category-mechs-clarke
-
-- type: latheCategory
   id: Gygax
   name: lathe-category-mechs-gygax
 

@@ -55,27 +55,6 @@
   position: -7,2
 
 - type: technology
-  id: Clarke
-  name: research-technology-clarke
-  icon:
-    sprite: Objects/Specific/Mech/mecha.rsi
-    state: clarke
-  discipline: Robotics
-  tier: 2
-  cost: 10000
-  recipeUnlocks:
-  - ClarkeHarness
-  - ClarkeHead
-  - ClarkeLArm
-  - ClarkeRArm
-  - ClarkeTreads
-  - ClarkeCentralElectronics
-  - ClarkePeripheralsElectronics
-  technologyPrerequisites:
-  - Ripley2
-  position: -7,1
-
-- type: technology
   id: HONKWeapons
   name: research-technology-honk-weapons
   icon:

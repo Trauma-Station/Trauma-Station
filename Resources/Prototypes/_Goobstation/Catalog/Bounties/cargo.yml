@@ -12,17 +12,6 @@
       - MedicalPatch
 
 - type: cargoBounty
-  id: BountyClarke
-  reward: 20000
-  description: goobstation-clarke-bounty-desc
-  entries:
-  - name: goobstation-clarke-bounty-name
-    amount: 1
-    whitelist:
-      tags:
-      - Clarke
-
-- type: cargoBounty
   id: BountyRipleyMkII
   reward: 15000
   description: goobstation-ripley-bounty-desc

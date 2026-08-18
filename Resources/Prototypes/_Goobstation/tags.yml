@@ -69,27 +69,6 @@
   id: ClothingBeltGeminiHoloProjector
 
 - type: Tag
-  id: Clarke
-
-- type: Tag
-  id: ClarkeCentralControlModule
-
-- type: Tag
-  id: ClarkeHead
-
-- type: Tag
-  id: ClarkeLArm
-
-- type: Tag
-  id: ClarkePeripheralsControlModule
-
-- type: Tag
-  id: ClarkeRArm
-
-- type: Tag
-  id: ClarkeTreads
-
-- type: Tag
   id: ClownEmergencyOxygenTank
 
 - type: Tag

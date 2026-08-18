@@ -30,20 +30,6 @@
       - MechHonkerFilled
 
 - type: entity
-  name: Clarke Spawner
-  id: SpawnMechClarke
-  parent: MarkerBase
-  components:
-  - type: Sprite
-    layers:
-      - state: green
-      - sprite: Objects/Specific/Mech/mecha.rsi
-        state: clarke
-  - type: ConditionalSpawner
-    prototypes:
-      - MechClarkeBattery
-
-- type: entity
   name: Gygax Spawner
   id: SpawnMechGygax
   parent: MarkerBase

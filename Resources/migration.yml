@@ -161,6 +161,20 @@ BibleCommunistManifesto: Bible
 ComputerNTRTasks: null
 TaskBottle: ChemistryEmptyBottle01
 TaskJug: Jug
+
+# 2026-08-18
+SpawnMechClarke: null
+ClarkeCentralElectronics: null
+ClarkeHarness: null
+ClarkeHead: null
+ClarkeLArm: null
+ClarkeRArm: null
+ClarkePeripheralsElectronics: null
+ClarkeTreads: null
+ClarkeChassis: 
+MechClarke: null
+MechClarkeBattery: null
+
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

@@ -20,56 +20,6 @@
   materials:
     Steel: 500
 
-# Clarke
-- type: latheRecipe
-  id: ClarkeHarness
-  result: ClarkeHarness
-  categories:
-  - Clarke
-  completetime: 10
-  materials:
-    Steel: 2000
-    Glass: 1500
-
-- type: latheRecipe
-  id: ClarkeHead
-  result: ClarkeHead
-  categories:
-  - Clarke
-  completetime: 10
-  materials:
-    Steel: 1550
-    Glass: 950
-
-- type: latheRecipe
-  id: ClarkeLArm
-  result: ClarkeLArm
-  categories:
-  - Clarke
-  completetime: 10
-  materials:
-    Steel: 900
-    Glass: 800
-
-- type: latheRecipe
-  id: ClarkeRArm
-  result: ClarkeRArm
-  categories:
-  - Clarke
-  completetime: 10
-  materials:
-    Steel: 900
-    Glass: 800
-
-- type: latheRecipe
-  id: ClarkeTreads
-  result: ClarkeTreads
-  categories:
-  - Clarke
-  completetime: 10
-  materials:
-    Steel: 950
-
 # Durand
 - type: latheRecipe
   parent: BaseRedAlert
@@ -232,7 +182,6 @@
   categories:
   - Mech
   - MechEquipment
-  - Clarke
   completetime: 10
   materials:
     Steel: 1000
@@ -244,7 +193,6 @@
   categories:
   - Mech
   - MechEquipment
-  - Clarke
   completetime: 10
   materials:
     Steel: 1000

@@ -1,41 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Clarke
-
-- type: entity
-  id: ClarkeCentralElectronics
-  parent: BaseElectronics
-  name: clarke central control module
-  description: The electrical control center for the clarke mech.
-  components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      sprite: Objects/Misc/module.rsi
-      state: mainboard
-    - type: Tag
-      tags:
-      - ClarkeCentralControlModule
-    - type: GuideHelp
-      guides:
-      - Robotics
-
-- type: entity
-  id: ClarkePeripheralsElectronics
-  parent: BaseElectronics
-  name: clarke peripherals control module
-  description: The electrical peripherals control for the clarke mech.
-  components:
-    - type: Sprite
-      sprite: Objects/Misc/module.rsi
-      state: id_mod
-    - type: Tag
-      tags:
-      - ClarkePeripheralsControlModule
-    - type: GuideHelp
-      guides:
-      - Robotics
-
 # Gygax
 
 - type: entity

@@ -32,11 +32,6 @@
 - type: latheRecipePack
   id: MechPartsGoob
   recipes:
-  - ClarkeHarness
-  - ClarkeHead
-  - ClarkeLArm
-  - ClarkeRArm
-  - ClarkeTreads
   - DurandHarness
   - DurandArmor
   - DurandHead
@@ -82,8 +77,6 @@
   recipes:
   - RipleyCentralElectronics
   - RipleyPeripheralsElectronics
-  - ClarkeCentralElectronics
-  - ClarkePeripheralsElectronics
 
 - type: latheRecipePack
   id: MechBoardsCivilian
