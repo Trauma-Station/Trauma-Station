@@ -163,6 +163,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         var gases = sm.GasStorage;
         var facts = sm.GasDataFields;
 
+        // TODO: use array storage and kill linq jesus christ
         //Lets get the proportions of the gasses in the mix for scaling stuff later
         //They range between 0 and 1
         gases = gases.ToDictionary(

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
-namespace Content.Goobstation.Shared.Mind.Components;
+namespace Content.Goobstation.Shared.Mind;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MindLastMobComponent : Component
@@ -11,5 +10,5 @@ public sealed partial class MindLastMobComponent : Component
     /// Can be null.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? LastMob { get; set; }
+    public EntityUid? LastMob;
 }

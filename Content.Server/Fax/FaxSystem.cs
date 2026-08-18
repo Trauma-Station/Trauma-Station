@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Administration.Notifications;
 using Content.Goobstation.Shared.Fax;
-using Content.Server.Explosion.EntitySystems;
 // </Trauma>
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
@@ -45,7 +44,6 @@ public sealed partial class FaxSystem : EntitySystem
     // <Trauma>
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private TransformSystem _transform = default!;
-    [Dependency] private ExplosionSystem _explosion = default!;
     // </Trauma>
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IAdminManager _adminManager = default!;
@@ -165,12 +163,12 @@ public sealed partial class FaxSystem : EntitySystem
 
     private void OnComponentInit(EntityUid uid, FaxMachineComponent component, ComponentInit args)
     {
-        // <Goobstation> - define the slot in ItemSlots instead of adding it
+        // <Trauma> - define the slot in ItemSlots instead of adding it
         if (_itemSlotsSystem.TryGetSlot(uid, PaperSlotId, out var slot))
             component.PaperSlot = slot;
         else
             _itemSlotsSystem.AddItemSlot(uid, PaperSlotId, component.PaperSlot);
-        // </Goobstation>
+        // </Trauma>
         UpdateAppearance(uid, component);
     }
 
@@ -285,6 +283,22 @@ public sealed partial class FaxSystem : EntitySystem
         {
             switch (command)
             {
+                // <Trauma>
+                case FaxConstants.FaxSendEntityCommand:
+                    if (!args.Data.TryGetValue(FaxConstants.FaxEntitySentData, out EntityUid? received))
+                        return;
+
+                    args.Data.TryGetValue(FaxConstants.FaxWorkCrossGridData, out bool? canCrossGrid);
+                    if (!(canCrossGrid ?? true) && _transform.GetGrid(uid) != _transform.GetGrid(received.Value))
+                        return;
+
+                    var faxXform = Transform(uid);
+                    _transform.SetCoordinates(received.Value, faxXform.Coordinates);
+                    _container.AttachParentToContainerOrGrid((received.Value, Transform(received.Value)));
+                    Receive(uid, null, args.SenderAddress);
+
+                    break;
+                // </Trauma>
                 case FaxConstants.FaxPingCommand:
                     var isForSyndie = _emag.CheckFlag(uid, EmagType.Interaction) &&
                                       args.Data.ContainsKey(FaxConstants.FaxSyndicateData);
@@ -328,21 +342,6 @@ public sealed partial class FaxSystem : EntitySystem
                     // </Trauma>
 
                     break;
-                // Goobstation
-                case FaxConstants.FaxSendEntityCommand:
-                    if (!args.Data.TryGetValue(FaxConstants.FaxEntitySentData, out EntityUid? received))
-                        return;
-
-                    args.Data.TryGetValue(FaxConstants.FaxWorkCrossGridData, out bool? canCrossGrid);
-                    if (!(canCrossGrid ?? true) && _transform.GetGrid(uid) != _transform.GetGrid(received.Value))
-                        return;
-
-                    var faxXform = Transform(uid);
-                    _transform.SetCoordinates(received.Value, faxXform.Coordinates);
-                    _container.AttachParentToContainerOrGrid((received.Value, Transform(received.Value)));
-                    Receive(uid, null, args.SenderAddress);
-
-                    break;
             }
         }
     }
@@ -363,15 +362,13 @@ public sealed partial class FaxSystem : EntitySystem
     {
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-        else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // goobstation
-            _explosion.QueueExplosion(uid, "Default", 4, 6, 3.4f, 1f, 0, false, uid);
         else
             Copy(uid, component, args);
     }
 
     private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)
     {
-        // <Goob>
+        // <Trauma>
         if (component.PaperSlot.Item is {} item)
         {
             var sentEv = new GettingFaxedSentEvent((uid, component), args.Actor);
@@ -380,12 +377,10 @@ public sealed partial class FaxSystem : EntitySystem
             if (sentEv.Handled)
                 return;
         }
-        // </Goob>
+        // </Trauma>
 
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-        else if (component.PaperSlot.Item != null && TryComp<FaxableObjectComponent>(component.PaperSlot.Item, out var faxcomp) && !faxcomp.Copyable) // goobstation
-            _explosion.QueueExplosion(uid, "Default", 4, 6, 3.4f, 1f, 0, false, uid);
         else
             Send(uid, component, args);
     }
@@ -649,24 +644,21 @@ public sealed partial class FaxSystem : EntitySystem
     ///     Accepts a new message and adds it to the queue to print
     ///     If has parameter "notifyAdmins" also output a special message to admin chat.
     /// </summary>
-    // Goobstation - make printout nullable
-    public void Receive(EntityUid uid, FaxPrintout? printout, string? fromAddress = null, FaxMachineComponent? component = null,
+    public void Receive(EntityUid uid, FaxPrintout printout, string? fromAddress = null, FaxMachineComponent? component = null,
         EntityUid? user = null, EntityUid? sender = null) // Trauma
     {
         if (!Resolve(uid, ref component))
             return;
 
-        var faxName = printout?.SenderFaxName ?? Loc.GetString("fax-machine-popup-source-unknown"); // Trauma - nullable printout
+        var faxName = printout.SenderFaxName ?? Loc.GetString("fax-machine-popup-source-unknown");
 
         _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-received", ("from", faxName)), uid);
-        if (printout != null) // Goobstation
-            _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
+        _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
 
         if (component.NotifyAdmins)
             NotifyAdmins(faxName, user, sender); // Trauma - pass user and sender
 
-        if (printout != null) // Goobstation
-            component.PrintingQueue.Enqueue(printout);
+        component.PrintingQueue.Enqueue(printout);
     }
 
     private void SpawnPaperFromQueue(EntityUid uid, FaxMachineComponent? component = null)
@@ -677,8 +669,7 @@ public sealed partial class FaxSystem : EntitySystem
         var printout = component.PrintingQueue.Dequeue();
 
         var entityToSpawn = printout.PrototypeId.Length == 0 ? component.PrintPaperId.ToString() : printout.PrototypeId;
-        var coordinates = _transform.GetMapCoordinates(uid); // Goobstation
-        var printed = Spawn(entityToSpawn, coordinates);
+        var printed = Spawn(entityToSpawn, Transform(uid).Coordinates);
 
         if (TryComp<PaperComponent>(printed, out var paper))
         {
@@ -714,11 +705,12 @@ public sealed partial class FaxSystem : EntitySystem
             return; // don't spam notify if its automated
         // replaced shitty loc string with real info
         _chat.SendAdminAnnouncement($"Received new fax message from {ToPrettyString(user)} using fax '{faxName}' {ToPrettyString(sender)}");
-        // </Trauma>
 
-        // Goobstation - Admin Notifications / Admin Notifications
         // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.AddVolume(-8f));
         foreach (var admin in _adminManager.ActiveAdmins)
+        {
             RaiseNetworkEvent(new AdminNotificationEvent(new SoundPathSpecifier("/Audio/Machines/high_tech_confirm.ogg")), admin);
+        }
+        // </Trauma>
     }
 }
