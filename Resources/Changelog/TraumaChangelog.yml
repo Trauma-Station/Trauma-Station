@@ -13351,3 +13351,10 @@ Entries:
   id: 1456
   time: '2026-08-18T04:44:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4134
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slop clarke crate from salv points vendor.
+  id: 1457
+  time: '2026-08-18T19:58:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4147
