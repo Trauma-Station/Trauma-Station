@@ -36,6 +36,7 @@
   - type: BorgBrain
   - type: BlockMovement
   - type: Examiner
+  - type: IntellicardableMind # Trauma
   - type: IntrinsicRadioReceiver
   #- type: IntrinsicRadioTransmitter
   #  channels:
