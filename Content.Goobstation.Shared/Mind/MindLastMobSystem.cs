@@ -15,7 +15,7 @@ public sealed partial class MindLastMobSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMindGotAdded(Entity<MindLastMobComponent> ent, ref MindGotAddedEvent args)
     {
-        if (!_mobQuery.HasComp(args.Container))
+        if (!_mobQuery.HasComp(args.Container) || TerminatingOrDeleted(args.Container))
             return;
 
         ent.Comp.LastMob = args.Container;
