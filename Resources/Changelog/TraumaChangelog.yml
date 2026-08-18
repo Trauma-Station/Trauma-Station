@@ -13365,3 +13365,10 @@ Entries:
   id: 1458
   time: '2026-08-18T20:17:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4146
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Shadowling screech no longer affects the deaf, they can't hear you.
+  id: 1459
+  time: '2026-08-18T21:08:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4139
