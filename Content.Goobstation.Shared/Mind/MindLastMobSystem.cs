@@ -20,7 +20,6 @@ public sealed partial class MindLastMobSystem : EntitySystem
             return;
 
         ent.Comp.LastMob = args.Container;
-        Dirty(ent);
     }
 
     [SubscribeLocalEvent]
@@ -32,7 +31,6 @@ public sealed partial class MindLastMobSystem : EntitySystem
             return;
 
         comp.LastMob = null;
-        Dirty(mind, comp);
     }
 
     [SubscribeLocalEvent]

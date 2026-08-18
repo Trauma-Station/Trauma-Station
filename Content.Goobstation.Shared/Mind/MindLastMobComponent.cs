@@ -2,13 +2,13 @@
 
 namespace Content.Goobstation.Shared.Mind;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class MindLastMobComponent : Component
 {
     /// <summary>
     /// The last mob entity this mind was in.
     /// Can be null.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? LastMob;
 }
