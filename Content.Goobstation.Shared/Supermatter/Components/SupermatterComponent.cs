@@ -52,9 +52,6 @@ public sealed partial class SupermatterComponent : Component
     public EntProtoId TeslaPrototypeId = "TeslaEnergyBall";
 
     [DataField]
-    public EntProtoId SupermatterKudzuPrototypeId = "SupermatterKudzu";
-
-    [DataField]
     public float Power;
 
     /// <summary>

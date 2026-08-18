@@ -533,7 +533,8 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
                 break;
 
             case DelamType.Cascade:
-                Spawn(sm.SupermatterKudzuPrototypeId, xform.Coordinates);
+                // TODO: actually implement it with the portals and stuff bruh
+                Spawn(sm.TeslaPrototypeId, xform.Coordinates);
                 break;
         }
     }
