@@ -31,8 +31,8 @@ public sealed partial class MindLastMobSystem : EntitySystem
             comp.LastMob != ent.Owner)
             return;
 
-        ent.Comp.LastMob = null;
-        Dirty(ent);
+        comp.LastMob = null;
+        Dirty(mind, comp);
     }
 
     [SubscribeLocalEvent]
