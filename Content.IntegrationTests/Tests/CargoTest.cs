@@ -83,6 +83,10 @@ public sealed class CargoTest : GameTest
             {
                 foreach (var proto in SProtoMan.EnumeratePrototypes<CargoProductPrototype>())
                 {
+                    // <Trauma> - w speed
+                    if (Ignored.Contains(proto.ID))
+                        continue;
+                    // </Trauma>
                     var ent = SSpawnAtPosition(proto.Product, coordinates);
 
                     foreach (var bounty in SProtoMan.EnumeratePrototypes<CargoBountyPrototype>())

@@ -38,20 +38,18 @@ public sealed partial class AreaSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AreaComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent]
     private void OnAnchorStateChanged(Entity<AreaComponent> ent, ref AnchorStateChangedEvent args)
     {
         // delete areas that get unanchored by explosions or other more cursed things
-        if (!args.Anchored)
+        if (!args.Anchored && !args.Detaching)
             PredictedQueueDel(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (!args.WasModified<EntityPrototype>())

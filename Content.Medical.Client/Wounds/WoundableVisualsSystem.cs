@@ -120,6 +120,9 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnWoundableRemoved(Entity<WoundableVisualsComponent> ent, ref OrganGotRemovedEvent args)
     {
+        if (TerminatingOrDeleted(args.Target))
+            return;
+
         RemoveWoundableLayers(args.Target.Owner, ent);
     }
 

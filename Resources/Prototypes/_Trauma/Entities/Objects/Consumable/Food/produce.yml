@@ -120,7 +120,7 @@
   parent: [ FoodProduceBase, ProduceSliceBase, BaseSlicingRefinable ]
   id: FoodCoconutHalf
   name: coconut half
-  description: The perfect defense... if you're an octopus.
+  description: The perfect defense... if you're an octopus. A botanist would kill for one of these.
   components:
   - type: Item
     size: Small

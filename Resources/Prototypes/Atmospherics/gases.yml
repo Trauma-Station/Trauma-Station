@@ -99,6 +99,11 @@
   molarHeatCapacity: 40
   heatCapacityRatio: 1.3
   molarMass: 44
+  # <Trauma>
+  gasOverlaySprite:
+    sprite: /Textures/Effects/atmospherics.rsi
+    state: water_vapor # Is it THE FOG or is it INSTANT SLEEP?
+  # </Trauma>
   color: '#8F00FF'
   reagent: NitrousOxide
   pricePerMole: 0.1 # Goobstation - Gas Prices
