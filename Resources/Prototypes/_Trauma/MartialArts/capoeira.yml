@@ -8,6 +8,7 @@
   - Harm
   userConditions:
   - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
@@ -28,11 +29,12 @@
   - !type:ModifyStatusEffect
     effectProto: PushKickVulnerabilityStatusEffect
     type: Update
-    time: 3
+    time: 8
   - !type:GrabThrow
     speed: 7
     dropItems: false
     knockdown: false
+  - !type:StopPull
   levelRequired: 10
 
 - type: combo
@@ -43,6 +45,7 @@
   - Harm
   userConditions:
   - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -74,8 +77,10 @@
   - Disarm
   userConditions:
   - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   - !type:MovingCondition
     minVelocity: 2
+    failMessage: capoeira-fail-low-velocity
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
@@ -108,10 +113,13 @@
   - Harm
   userConditions:
   - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   - !type:MovingCondition
     minVelocity: 2
+    failMessage: capoeira-fail-low-velocity
   conditions:
   - !type:StandingCondition
+    failMessage: martial-arts-fail-target-down
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
