@@ -27,7 +27,7 @@ public sealed partial class MindMessagesSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnGetPlayerInfo(Entity<MindMessagesComponent> ent, ref RoundEndGetPlayerInfoEvent args)
     {
-        args.LastWords = GetMessage(ent.Comp, ent.Comp.Index - 1);
+        args.LastWords = GetMessage(ent.Comp, ent.Comp.Messages.Length - 1);
     }
 
     public void AddMessage(MindMessagesComponent comp, string message)
