@@ -8,8 +8,16 @@ namespace Content.Trauma.Shared.Light;
 /// Allows for area pickup of light bulbs around where you click.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class LightReplacerAreaPickupComponent : Component
+public sealed partial class EntityProviderAreaPickupComponent : Component
 {
+    /// <summary>
+    /// The component required for items that can be picked up.
+    /// </summary>
+    [DataField(required: true)]
+    public CompName Comp;
+
+    internal Type? Type;
+
     [DataField]
     public float Range = 1.25f;
 
