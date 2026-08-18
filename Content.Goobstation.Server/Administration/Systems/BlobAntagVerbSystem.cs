@@ -4,22 +4,16 @@ using Content.Goobstation.Common.Blob;
 using Content.Server.Administration.Systems;
 using Content.Shared.Database;
 using Content.Shared.Verbs;
-using Content.Trauma.Common.Silicon;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Administration.Systems;
 
-public sealed partial class GoobAdminVerbSystem
+public sealed partial class GoobAntagSmiteSystem : EntitySystem
 {
-    [Dependency] private CommonSiliconSystem _silicon = default!;
-
+    [SubscribeLocalEvent]
     private void OnGetAntagVerbs(ref GetAntagVerbsEvent args)
     {
         var target = args.Target;
-        if (_silicon.IsSilicon(target))
-            return;
-
-        // Blob
         args.Verbs.Verbs.Add(new()
         {
             Text = Loc.GetString("admin-verb-text-make-blob"),

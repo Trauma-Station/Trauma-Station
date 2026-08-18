@@ -39,7 +39,6 @@
       speechVerb: Robotic
       speechSounds: Borg
     - type: Silicon
-      entityType: Player
       batteryPowered: false
       chargeThresholdMid: null
       chargeThresholdLow: null
