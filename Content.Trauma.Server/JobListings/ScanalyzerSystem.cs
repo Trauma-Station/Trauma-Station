@@ -1,15 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Mind;
-using Content.Server.Mind.Toolshed;
-using Content.Server.Objectives.Components;
-using Content.Server.Objectives.Systems;
+using Content.Shared.Trigger.Systems;
 using Content.Shared.Mind;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Shared.JobListings;
-using Content.Shared.Trigger.Systems;
-using Content.Server.Power.EntitySystems;
+using Content.Server.Mind;
+using Content.Server.Objectives.Components;
 
 namespace Content.Trauma.Server.JobListings;
 
