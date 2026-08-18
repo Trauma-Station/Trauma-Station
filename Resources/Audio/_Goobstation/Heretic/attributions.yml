@@ -73,6 +73,16 @@
   copyright: "Taken from /tg/station"
   source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons/parry.ogg"
 
+- files: ["rust_sower_armbomb.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons/rust_sower_armbomb.ogg"
+
+- files: ["rust_sower_explode.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons/rust_sower_explode.ogg"
+
 - files: ["demon_attack1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"

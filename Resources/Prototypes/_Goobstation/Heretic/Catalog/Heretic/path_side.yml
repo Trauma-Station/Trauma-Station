@@ -159,29 +159,6 @@
     stage: 3
 
 - type: listing
-  id: HereticBladeT1EnvyKnife
-  name: knowledge-path-side-t1-envy-name
-  description: knowledge-path-side-t1-envy-desc
-  icon: { sprite: _Goobstation/Heretic/Entities/envy_knife.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - EnvyKnife
-  cost:
-    KnowledgePoint: 1
-    SideKnowledgePoint: 1
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT1
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 3
-
-- type: listing
   id: HereticBladeT1Mask
   name: knowledge-path-side-t1-mask-name
   description: knowledge-path-side-t1-mask-desc
@@ -444,6 +421,29 @@
     knowledge:
     - LionhunterRifle
     - LionhunterRifleAmmunition
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT2
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 4
+
+- type: listing
+  id: HereticSideT2RustGrenade
+  name: knowledge-path-side-t2-rustgrenade-name
+  description: knowledge-path-side-t2-rustgrenade-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/rustgrenade.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - RustSowerGrenade
   cost:
     KnowledgePoint: 1
     SideKnowledgePoint: 1
