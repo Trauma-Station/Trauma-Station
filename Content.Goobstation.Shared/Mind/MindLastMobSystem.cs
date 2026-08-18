@@ -10,6 +10,7 @@ namespace Content.Goobstation.Shared.Mind;
 public sealed partial class MindLastMobSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private EntityQuery<MindLastMobComponent> _query = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     [SubscribeLocalEvent]
@@ -19,6 +20,18 @@ public sealed partial class MindLastMobSystem : EntitySystem
             return;
 
         ent.Comp.LastMob = args.Container;
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMindContainerShutdown(Entity<MindContainerComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.Mind is not { } mind ||
+            !_query.TryComp(mind, out var comp) ||
+            comp.LastMob != ent.Owner)
+            return;
+
+        ent.Comp.LastMob = null;
         Dirty(ent);
     }
 
