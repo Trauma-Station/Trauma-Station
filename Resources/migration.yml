@@ -171,7 +171,7 @@ ClarkeLArm: null
 ClarkeRArm: null
 ClarkePeripheralsElectronics: null
 ClarkeTreads: null
-ClarkeChassis: 
+ClarkeChassis:
 MechClarke: null
 MechClarkeBattery: null
 
