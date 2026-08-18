@@ -13342,3 +13342,12 @@ Entries:
   id: 1455
   time: '2026-08-17T20:39:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4132
+- author: THE FOG IS COMING
+  changes:
+  - type: Tweak
+    message: >-
+      Nitrous Oxide made from invisible instasleep gas to visible instasleep
+      gas. 
+  id: 1456
+  time: '2026-08-18T04:44:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4134
