@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Heretic;
 
-[TestFixture, TestOf(typeof(RitualIngredientDatasetPrototype)]
+[TestFixture, TestOf(typeof(RitualIngredientDatasetPrototype))]
 public sealed partial class RitualKnowledgeTests : GameTest
 {
     [SidedDependency(Side.Server)] private EntityWhitelistSystem _whitelist = default!;
