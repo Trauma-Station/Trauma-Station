@@ -644,13 +644,13 @@ public sealed partial class FaxSystem : EntitySystem
     ///     Accepts a new message and adds it to the queue to print
     ///     If has parameter "notifyAdmins" also output a special message to admin chat.
     /// </summary>
-    public void Receive(EntityUid uid, FaxPrintout printout, string? fromAddress = null, FaxMachineComponent? component = null,
+    public void Receive(EntityUid uid, FaxPrintout? printout, string? fromAddress = null, FaxMachineComponent? component = null, // Trauma - made printout nullable
         EntityUid? user = null, EntityUid? sender = null) // Trauma
     {
         if (!Resolve(uid, ref component))
             return;
 
-        var faxName = printout.SenderFaxName ?? Loc.GetString("fax-machine-popup-source-unknown");
+        var faxName = printout?.SenderFaxName ?? Loc.GetString("fax-machine-popup-source-unknown"); // Trauma - nullable printout
 
         _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-received", ("from", faxName)), uid);
         _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
@@ -658,7 +658,8 @@ public sealed partial class FaxSystem : EntitySystem
         if (component.NotifyAdmins)
             NotifyAdmins(faxName, user, sender); // Trauma - pass user and sender
 
-        component.PrintingQueue.Enqueue(printout);
+        if (printout != null) // Trauma
+            component.PrintingQueue.Enqueue(printout);
     }
 
     private void SpawnPaperFromQueue(EntityUid uid, FaxMachineComponent? component = null)
