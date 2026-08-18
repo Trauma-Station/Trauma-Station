@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.SurveillanceCamera;
-using Content.Shared.UserInterface;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using System.Runtime.InteropServices;
@@ -10,9 +9,11 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power;
+using Content.Shared.UserInterface;
 using Content.Shared.SurveillanceCamera;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SurveillanceCamera;
 
@@ -31,13 +32,14 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
-        // SubscribeLocalEvent<SurveillanceCameraMonitorComponent, ComponentStartup>(OnComponentStartup); Goobstation remove
+        // SubscribeLocalEvent<SurveillanceCameraMonitorComponent, ComponentStartup>(OnComponentStartup); // Trauma
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, AfterActivatableUIOpenEvent>(OnToggleInterface);
         Subs.BuiEvents<SurveillanceCameraMonitorComponent>(SurveillanceCameraMonitorUiKey.Key, subs =>
         {
             subs.Event<SurveillanceCameraRefreshCamerasMessage>(OnRefreshCamerasMessage);
             subs.Event<SurveillanceCameraRefreshSubnetsMessage>(OnRefreshSubnetsMessage);
             subs.Event<SurveillanceCameraDisconnectMessage>(OnDisconnectMessage);
+            //subs.Event<SurveillanceCameraMonitorSubnetRequestMessage>(OnSubnetRequest); // Trauma
             subs.Event<SurveillanceCameraMonitorSwitchMessage>(OnSwitchMessage);
             subs.Event<BoundUIClosedEvent>(OnBoundUiClose);
         });
@@ -52,19 +54,22 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         while (query.MoveNext(out var uid, out _, out var monitor))
         {
             monitor.LastHeartbeatSent += frameTime;
-            SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor); // Goobstation
+            SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor); // Trauma - added monitor.ActiveCameraAddress
             monitor.LastHeartbeat += frameTime;
 
-            if (monitor.LastHeartbeat > MaxHeartbeatTime) // Goobstation
+            if (monitor.LastHeartbeat > MaxHeartbeatTime)
             {
                 DisconnectCamera(uid, true, monitor);
                 RemComp<ActiveSurveillanceCameraMonitorComponent>(uid);
-                monitor.LastHeartbeatSent = 0f; // Goobstation
-                monitor.LastHeartbeat = 0f; // Goobstation
-                RefreshCameras(uid, monitor); // Goobstation
+                // <Trauma>
+                monitor.LastHeartbeatSent = 0f;
+                monitor.LastHeartbeat = 0f;
+                RefreshCameras(uid, monitor);
+                // </Trauma>
             }
         }
-        // Goobstation start
+        // <Trauma>
+        // TODO: move this shit out
         var queryTwo = EntityQueryEnumerator<ReconnectingSurveillanceCameraMonitorComponent, SurveillanceCameraMonitorComponent>();
         while (queryTwo.MoveNext(out var uid, out var reconnectingComponent, out var monitor))
         {
@@ -125,10 +130,10 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
                 // Refresh subnets as clearly something went wrong with the networking
                 if (expiredCameras.Count > 0)
-                    RefreshCameras(uid, monitor); // Goobstation
+                    RefreshCameras(uid, monitor);
             }
         }
-        // Goobstation end
+        // </Trauma>
     }
 
     /// ROUTING:
@@ -154,10 +159,21 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
     /// Router - [ monitor freq ] -> Monitor
 
     #region Event Handling
-    /*private void OnComponentStartup(EntityUid uid, SurveillanceCameraMonitorComponent component, ComponentStartup args)
+    /* Trauma
+    private void OnComponentStartup(EntityUid uid, SurveillanceCameraMonitorComponent component, ComponentStartup args)
     {
         RefreshSubnets(uid, component);
-    } Goobstation remove */
+    }
+
+    private void OnSubnetRequest(EntityUid uid, SurveillanceCameraMonitorComponent component,
+        SurveillanceCameraMonitorSubnetRequestMessage args)
+    {
+        if (args.Actor is { Valid: true } actor && !Deleted(actor))
+        {
+            SetActiveSubnet(uid, args.Subnet, component);
+        }
+    }
+    */
 
     private void OnPacketReceived(EntityUid uid, SurveillanceCameraMonitorComponent component,
         DeviceNetworkPacketEvent args)
@@ -185,22 +201,31 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
                     {
                         component.LastHeartbeat = 0;
                     }
-                    // Goobstation start
+                    // <Trauma>
                     if (component.KnownMobileCamerasLastHeartbeat.ContainsKey(args.SenderAddress))
                         component.KnownMobileCamerasLastHeartbeat[args.SenderAddress] = 0;
-                    // Goobstation end
+                    // </Trauma>
                     break;
                 case SurveillanceCameraSystem.CameraDataMessage:
-                    // Goobstation start
+                {
                     if (!args.Data.TryGetValue(SurveillanceCameraSystem.CameraNameData, out string? name)
-                        || !args.Data.TryGetValue(SurveillanceCameraSystem.CameraSubnetData, out string? subnetData)
+                        || !args.Data.TryGetValue(SurveillanceCameraSystem.CameraSubnetData, out ProtoId<DeviceFrequencyPrototype>? subnetData)
                         || !args.Data.TryGetValue(SurveillanceCameraSystem.CameraAddressData, out string? address)
+                        // <Trauma>
                         || !args.Data.TryGetValue(SurveillanceCameraSystem.CameraNetEntity, out (NetEntity, NetCoordinates)? netEntity)
                         || !args.Data.TryGetValue(SurveillanceCameraSystem.CameraMobile, out bool? mobile))
+                        // </Trauma>
                     {
                         return;
                     }
-                    if (mobile.HasValue && mobile.Value) // if camera is mobile, it should be in the mobile cameras list
+
+                    /* Trauma
+                    if (component.ActiveSubnet != subnetData && subnetData is { } subnet)
+                    {
+                        DisconnectFromSubnet(uid, subnet);
+                    */
+                    // <Trauma>
+                    if (mobile == true) // mobile cameras go in their own list
                     {
                         if (component.KnownMobileCameras.Count == 0) // was it the first mobile camera added?
                             EnsureComp<HasMobileCamerasSurveillanceCameraMonitorComponent>(uid);
@@ -208,18 +233,25 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
                         {
                             component.KnownMobileCameras.Add(address, (name, netEntity.Value));
                             foreach (var player in component.Viewers)
+                            {
+                                // TODO: use the portal thing instead of override
                                 if (TryComp<ActorComponent>(player, out var actor))
                                     _pvsOverride.AddSessionOverride(GetEntity(netEntity.Value.Item2.NetEntity), actor.PlayerSession);
+                            }
                         }
                     }
                     else if (!component.KnownCameras.ContainsKey(address))
-                        component.KnownCameras.Add(address, (name, netEntity.Value));
-                    // Goobstation end
+                    {
+                        component.KnownCameras.Add(address, (name, netEntity.Value)); // added netEntity
+                    }
+                    // </Trauma>
                     UpdateUserInterface(uid, component);
                     break;
+                }
                 case SurveillanceCameraSystem.CameraSubnetData:
-                    if (args.Data.TryGetValue(SurveillanceCameraSystem.CameraSubnetData, out string? subnet)
-                        && !string.IsNullOrEmpty(subnet)
+                {
+                    if (args.Data.TryGetValue(SurveillanceCameraSystem.CameraSubnetData, out ProtoId<DeviceFrequencyPrototype>? subnetValue)
+                        && subnetValue is { } subnet
                         && !component.KnownSubnets.ContainsKey(subnet))
                     {
                         component.KnownSubnets.Add(subnet, args.SenderAddress);
@@ -227,6 +259,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
                     UpdateUserInterface(uid, component);
                     break;
+                }
             }
         }
     }
@@ -308,27 +341,31 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
     #endregion
 
-    private void SendHeartbeat(EntityUid uid, string cameraAdress, SurveillanceCameraMonitorComponent? monitor = null) // Goobstation
+    private void SendHeartbeat(EntityUid uid, string cameraAddress, SurveillanceCameraMonitorComponent? monitor = null) // Trauma - added cameraAddress
     {
         if (!Resolve(uid, ref monitor)
-            || monitor.LastHeartbeatSent < HeartbeatDelay) // Goobstation
+            || monitor.LastHeartbeatSent < HeartbeatDelay)
+            /* Trauma
+            || monitor.ActiveSubnet is not { } activeSubnet
+            || !monitor.KnownSubnets.TryGetValue(activeSubnet, out var subnetAddress))
+            */
         {
             return;
         }
 
-        // Goobstation start
+        // <Trauma> - send it to all routers instead of just the active one, use cameraAddress param
         foreach (var subnetAddress in monitor.KnownSubnets.Values)
         {
             var payload = new NetworkPayload()
             {
                 { DeviceNetworkConstants.Command, SurveillanceCameraSystem.CameraHeartbeatMessage },
-                { SurveillanceCameraSystem.CameraAddressData, cameraAdress } // Goobstation
+                { SurveillanceCameraSystem.CameraAddressData, cameraAddress }
             };
 
             _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
             monitor.LastHeartbeatSent = 0;
         }
-        // Goobstation end
+        // </Trauma>
     }
 
     private void DisconnectCamera(EntityUid uid, bool removeViewers, SurveillanceCameraMonitorComponent? monitor = null)
@@ -427,10 +464,9 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
     }
     // Goobstation end
 
-    private void DisconnectFromSubnet(EntityUid uid, string subnet, SurveillanceCameraMonitorComponent? monitor = null)
+    private void DisconnectFromSubnet(EntityUid uid, ProtoId<DeviceFrequencyPrototype> subnet, SurveillanceCameraMonitorComponent? monitor = null)
     {
         if (!Resolve(uid, ref monitor)
-            || string.IsNullOrEmpty(subnet)
             || !monitor.KnownSubnets.TryGetValue(subnet, out var address))
         {
             return;
@@ -529,12 +565,19 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
     private void TrySwitchCameraByAddress(EntityUid uid, string address,
         SurveillanceCameraMonitorComponent? monitor = null)
     {
-        if (!Resolve(uid, ref monitor)) // Goobstation - removed extra checks since no more active subnet
-        {
+        if (!Resolve(uid, ref monitor))
             return;
-        }
 
-        // Goobstation start
+        /* Trauma
+        if (cameraSubnet != null && cameraSubnet != monitor.ActiveSubnet)
+            SetActiveSubnet(uid, cameraSubnet, monitor);
+
+        if (monitor.ActiveSubnet is not { } activeSubnet
+            || !monitor.KnownSubnets.TryGetValue(activeSubnet, out var subnetAddress))
+            return;
+        */
+
+        // <Trauma> - send it to every router
         foreach (var subnetAddress in monitor.KnownSubnets.Values)
         {
             var payload = new NetworkPayload()
@@ -546,7 +589,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
             monitor.NextCameraAddress = address;
             _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
         }
-        // Goobstation end
+        // </Trauma>
     }
 
     // Attempts to switch over the current viewed camera on this monitor
