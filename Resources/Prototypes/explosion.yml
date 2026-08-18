@@ -103,6 +103,7 @@
       Blunt: 32
       Piercing: 4
       Slash: 4
+      Structural: 10
     woundTypeOverrides: *woundoverrides
     # </Trauma>
   tileBreakChance: [0, 0.5, 1]
