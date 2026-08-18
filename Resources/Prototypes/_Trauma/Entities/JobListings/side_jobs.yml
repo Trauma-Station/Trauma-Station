@@ -40,7 +40,7 @@
   - type: BugAreaCondition
     targetArea: AreaOfficeCmo
   - type: SideJob
-    tool: SyndicateBugBoxCmo
+    tool: SyndicateBugCmo
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -49,7 +49,7 @@
   - type: BugAreaCondition
     targetArea: AreaOfficeCE
   - type: SideJob
-    tool: SyndicateBugBoxCE
+    tool: SyndicateBugCE
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -58,7 +58,7 @@
   - type: BugAreaCondition
     targetArea: AreaOfficeHop
   - type: SideJob
-    tool: SyndicateBugBoxHop
+    tool: SyndicateBugHop
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -67,7 +67,7 @@
   - type: BugAreaCondition
     targetArea: AreaOfficeHos
   - type: SideJob
-    tool: SyndicateBugBoxHos
+    tool: SyndicateBugHos
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -76,7 +76,7 @@
   - type: BugAreaCondition
     targetArea: AreaOfficeRd
   - type: SideJob
-    tool: SyndicateBugBoxRd
+    tool: SyndicateBugRd
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -85,7 +85,7 @@
   - type: BugAreaCondition
     targetArea: AreaOfficeQm
   - type: SideJob
-    tool: SyndicateBugBoxQm
+    tool: SyndicateBugQm
 
 # major
 - type: entity
