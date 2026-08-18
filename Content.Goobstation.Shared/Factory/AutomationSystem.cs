@@ -73,7 +73,7 @@ public sealed partial class AutomationSystem : EntitySystem
     {
         // force collision events so machines can react to objects getting unanchored
         // should get reset after a tick due to collision wake
-        if (!args.Anchored)
+        if (!args.Anchored && !args.Detaching)
             _physics.WakeBody(ent);
     }
 
