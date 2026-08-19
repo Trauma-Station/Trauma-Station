@@ -3,7 +3,7 @@
 - type: job
   id: Passenger
   name: job-name-dclass
-  description: job-name-dclass
+  description: job-description-dclass
   playTimeTracker: JobPassenger
   startingGear: PassengerGear
   icon: "JobIconDClass"
