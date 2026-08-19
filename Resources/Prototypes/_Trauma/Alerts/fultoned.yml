@@ -1,0 +1,8 @@
+- type: alert
+  id: Fultoned
+  name: alerts-fultoned-name
+  description: alerts-fultoned-desc
+  clickEvent: !type:RemoveFultonAlertEvent
+  icons:
+  - sprite: /Textures/Objects/Tools/fulton.rsi
+    state: extraction_pack
