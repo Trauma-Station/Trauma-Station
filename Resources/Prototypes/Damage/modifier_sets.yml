@@ -277,6 +277,7 @@
 - type: damageModifierSet
   id: BloodlossHuman
   coefficients:
+    Ion: 0 # Trauma
     Asphyxiation: 0.0
     Bloodloss: 0.0 # no double dipping
     Blunt: 0.08

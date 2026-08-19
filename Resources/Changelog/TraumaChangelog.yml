@@ -13379,3 +13379,34 @@ Entries:
   id: 1460
   time: '2026-08-18T21:20:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4149
+- author: Aviu
+  changes:
+  - type: Add
+    message: New heretic t2 side knowledge - rust sower grenade.
+  - type: Add
+    message: >-
+      Silicons heal small amount of ion damage by splashing themselves with
+      silicon reagent.
+  - type: Add
+    message: Lionhunter rifle shows people through walls when you wield it.
+  - type: Fix
+    message: Fix ion damage causing bleeding and wounds to organics.
+  - type: Fix
+    message: Fix laser beams acting weirdly on moving grids.
+  - type: Remove
+    message: Removed envy knife from heretic side knowledge.
+  - type: Add
+    message: Added envy knife to lavaland ruin, everyone can use it now.
+  - type: Add
+    message: Wire brushes can clean rust floors, also unrusting floors is now faster.
+  - type: Fix
+    message: Fix rust heretics being unable to instakill airlocks with grasp.
+  - type: Add
+    message: Mansus grasp now recharges quickly when standing on rune.
+  - type: Tweak
+    message: >-
+      Eldritch essence reagent changed to deal stamina damage instead of
+      stunning non heretics.
+  id: 1461
+  time: '2026-08-19T18:26:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4142
