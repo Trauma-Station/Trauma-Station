@@ -148,9 +148,9 @@
   - type: Appearance
 
 - type: entity
-  parent: [ BaseWeaponLauncher, BaseXenoborgContraband ]
-  id: WeaponXenoborgGuidedMissileLauncher
-  name: XB GML-78
+  parent: [ BaseItem, BaseXenoborgContraband ]
+  id: WeaponGuidedMissileLauncherXenoborg
+  name: XB GML-78 # Xenoborg Guided Missile Launcher 78
   description: A guided missile launcher.
   components:
   - type: Sprite
@@ -165,6 +165,10 @@
     magState: mag
     steps: 4
     zeroVisible: false
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
   - type: Gun
     fireRate: 2
     projectileSpeed: 6 # needs to be the same as the speed of the chasing walk component of the projectile
@@ -174,6 +178,7 @@
   - type: BallisticAmmoProvider
     proto: BulletGuidedXenoborgMissile
     capacity: 3
+    cycleable: false
   - type: BallisticAmmoSelfRefiller
     autoRefillRate: 17s # takes a while to get a new one
   - type: TargetAssign
@@ -219,7 +224,7 @@
   - type: Appearance
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseXenoborgContraband ]
   id: WeaponRocketLauncherXenoborg
   name: XB MRL-97-D # Xenoborg Multi Rocket Launcher 97 D (Demolition)
   description: A alien rocket launcher fitted with special demolition rockets.
