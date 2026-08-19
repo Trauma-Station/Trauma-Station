@@ -9,7 +9,6 @@ namespace Content.Trauma.Server.JobListings;
 /// Component added to a store entity to enable side-jobs.
 /// Used for progressive traitor.
 /// </summary>
-
 [RegisterComponent]
 public sealed partial class JobListingsComponent : Component
 {
