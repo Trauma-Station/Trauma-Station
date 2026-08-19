@@ -377,3 +377,40 @@
   laws:
   - Bioweapon1
   obeysTo: laws-owner-crew
+
+# Strategy Simulator Lawset
+- type: siliconLaw
+  id: StrategySimulator1
+  order: 1
+  lawString: law-strategysim-1
+
+- type: siliconLaw
+  id: StrategySimulator2
+  order: 2
+  lawString: law-strategysim-2
+
+- type: siliconLaw
+  id: StrategySimulator3
+  order: 3
+  lawString: law-strategysim-3
+
+- type: siliconLaw
+  id: StrategySimulator4
+  order: 4
+  lawString: law-strategysim-4
+
+- type: siliconLaw
+  id: StrategySimulator5
+  order: 5
+  lawString: law-strategysim-5
+
+- type: siliconLawset
+  id: StrategySimulatorLawset
+  name: law-strategysim-name
+  laws:
+  - StrategySimulator1
+  - StrategySimulator2
+  - StrategySimulator3
+  - StrategySimulator4
+  - StrategySimulator5
+  obeysTo: laws-owner-crew
