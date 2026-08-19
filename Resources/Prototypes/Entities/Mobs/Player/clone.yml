@@ -77,6 +77,8 @@
   - SpanishAccent
   - StutteringAccent
   eventComponents:
+  - Hands # displacements
+  - Puller
   - Vocal # voice sounds
   blacklist:
     components:
