@@ -13410,3 +13410,14 @@ Entries:
   id: 1461
   time: '2026-08-19T18:26:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4142
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Being fultoned now has an alert you can click to remove the fulton without
+      the context menu.
+  - type: Tweak
+    message: Fultons now require the beacon to be unfolded to work.
+  id: 1462
+  time: '2026-08-19T20:38:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4160
