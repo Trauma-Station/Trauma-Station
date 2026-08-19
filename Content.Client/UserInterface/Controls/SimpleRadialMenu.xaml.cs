@@ -89,7 +89,7 @@ public sealed partial class SimpleRadialMenu : RadialMenu
         switch (models)
         {
             case RadialMenuOptionBase[] asArray:
-                asArray.Sort(CompareByTooltip);
+                Array.Sort(asArray, CompareByTooltip);
                 return asArray;
             case List<RadialMenuOptionBase> asList:
                 asList.Sort(CompareByTooltip);
@@ -157,7 +157,7 @@ public sealed partial class SimpleRadialMenu : RadialMenu
             _ => null
         };
 
-        if(imageControl != null)
+        if (imageControl != null)
         // <Trauma> - set the color too
         {
             imageControl.Modulate = model.Color;
