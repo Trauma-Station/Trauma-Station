@@ -18,39 +18,19 @@ public sealed partial class SharedEntityConditionsSystem : EntitySystem, IEntity
     /// Sometimes needed for additional context with conditions.</param>
     /// <returns>Returns true if all conditions return true, false if any fail</returns>
     public bool TryConditions<T>(EntityUid target, T[]? conditions, EntityUid? sourceEnt = null) where T : EntityCondition
-        => TryConditions(target, conditions, out _, sourceEnt); // Trauma
-
-    // <Trauma>
-    /// <summary>
-    /// Checks a list of conditions to verify that they all return true, and reports the one that failed.
-    /// </summary>
-    /// <param name="target">Target entity we're checking conditions on</param>
-    /// <param name="conditions">Conditions we're checking</param>
-    /// <param name="failed">The first condition that failed, null if they all passed</param>
-    /// <param name="sourceEnt">An optional "source entity" which is checking the condition on the entity this is being raised to.
-    /// Sometimes needed for additional context with conditions.</param>
-    /// <returns>Returns true if all conditions return true, false if any fail</returns>
-    public bool TryConditions<T>(EntityUid target, T[]? conditions, out T? failed, EntityUid? sourceEnt = null)
-        where T : EntityCondition
     {
-        failed = null;
-
         // If there's no conditions we can't fail any of them...
         if (conditions == null)
             return true;
 
         foreach (var condition in conditions)
         {
-            if (TryCondition(target, condition, sourceEnt))
-                continue;
-
-            failed = condition;
-            return false;
+            if (!TryCondition(target, condition, sourceEnt))
+                return false;
         }
 
         return true;
     }
-    // </Trauma>
 
     /// <summary>
     /// Checks a list of conditions to see if any are true.
@@ -154,15 +134,6 @@ public abstract partial class EntityCondition
     /// </summary>
     [DataField]
     public bool Inverted;
-
-    // <Trauma>
-    /// <summary>
-    /// Optional popup to show when this condition fails.
-    /// Only used by systems that check conditions one at a time, like combos.
-    /// </summary>
-    [DataField]
-    public LocId? FailMessage;
-    // </Trauma>
 
     /// <summary>
     /// A basic description of this condition, which displays in the guidebook.
