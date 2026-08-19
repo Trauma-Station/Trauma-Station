@@ -47,7 +47,7 @@ namespace Content.Server.GameTicking.Rules;
 public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
 {
     // <Trauma>
-    [Dependency] private ChatSystem _chat = default!; // Goob
+    [Dependency] private ChatSystem _chat = default!;
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
@@ -197,11 +197,10 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
     {
         var commandList = new List<EntityUid>();
 
-        var heads = AllEntityQuery<CommandStaffComponent>();
-        while (heads.MoveNext(out var id, out var commandComp)) // GoobStation - commandComp
+        var heads = EntityQueryEnumerator<CommandStaffComponent>(); // Trauma - no reason to include paused cryo command members
+        while (heads.MoveNext(out var id, out var staff)) // Trauma - use the component
         {
-            // GoobStation - If mindshield was removed from head and he got converted - he won't count as command
-            if (commandComp.Enabled)
+            if (staff.Enabled) // Trauma
                 commandList.Add(id);
         }
 

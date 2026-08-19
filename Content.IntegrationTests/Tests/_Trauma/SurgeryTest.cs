@@ -15,6 +15,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Weapons.Melee;
 
 namespace Content.IntegrationTests.Tests._Trauma;
@@ -124,7 +125,7 @@ public sealed class SurgeryTest : InteractionTest
 
             var part = TargetBodyPart.Head;
             _damage.ChangeDamage(subject, damage, targetPart: part, canMiss: false);
-            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(amount), "Failed to damage the urist");
+            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(amount), $"Failed to damage the urist: {_damage.DumpDamage(subject)}");
 
             var wounds = _wound.GetWoundableWounds(head);
             Assert.That(wounds.Count, Is.EqualTo(1), "Expected only 1 wound");
@@ -133,11 +134,11 @@ public sealed class SurgeryTest : InteractionTest
 
             // regular healing sources must heal the wound
             _damage.ChangeDamage(subject, -damage, targetPart: part, canMiss: false);
-            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(FixedPoint2.Zero), "Failed to heal the urist");
+            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(FixedPoint2.Zero), $"Failed to heal the urist: {_damage.DumpDamage(subject)}");
             AssertHealed(wound);
 
             _damage.ChangeDamage(subject, damage, targetPart: part, canMiss: false);
-            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(amount), "Failed to damage the urist again");
+            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(amount), $"Failed to damage the urist again: {_damage.DumpDamage(subject)}");
 
             wounds = _wound.GetWoundableWounds(head);
             Assert.That(wounds.Count, Is.EqualTo(1), "Expected only 1 wound");
@@ -170,6 +171,7 @@ public sealed class SurgeryTest : InteractionTest
             // dont want them to interfere with healing
             SEntMan.RemoveComponent<BarotraumaComponent>(mob);
             SEntMan.RemoveComponent<RespiratorComponent>(mob);
+            SEntMan.RemoveComponent<TemperatureDamageComponent>(mob);
         });
         return mob;
     }

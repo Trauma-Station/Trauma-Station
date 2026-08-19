@@ -149,7 +149,7 @@ public sealed partial class WoundSystem
         RemoveWound(wound);
     }
 
-    [SubscribeLocalEvent]
+    [SubscribeLocalEvent(after: new[] { typeof(DamageableSystem) })]
     private void OnDamageDealt(Entity<WoundableComponent> ent, ref DamageDealtEvent args)
     {
         if (!ent.Comp.AllowWounds)
@@ -157,7 +157,7 @@ public sealed partial class WoundSystem
 
         // Create or update wounds based on damage changes
         var part = ent.AsNullable();
-        foreach (var (damageType, damageValue) in args.Damage.DamageDict)
+        foreach (var (damageType, damageValue) in args.ModifiedDamage.DamageDict)
         {
             if (damageValue == 0)
                 continue; // Only create wounds for damage or healing

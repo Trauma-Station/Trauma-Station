@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 reagent-name-eldritch = eldritch essence
 reagent-desc-eldritch = A strange liquid that defies the laws of physics. It re-energizes and heals those who can see beyond this fragile reality, but is incredibly harmful to the closed-minded.
 
@@ -17,6 +12,9 @@ reagent-desc-marshal = A colorless, dark liquid. Increases your physical strengt
 
 reagent-name-ether = ether of the newborn
 reagent-desc-ether = Nausea-inducing, thick green liquid. Restores your body completely, then places you into an enhanced sleep for a full minute.
+
+reagent-name-eldritch-rust = eldritch rust
+reagent-desc-eldritch-rust = A slurry of viscous, chunky brown liquid.
 
 entity-condition-guidebook-heretic-or-ghoul = target is a heretic or ghoul
 entity-condition-guidebook-not-heretic-or-ghoul = target is not a heretic or ghoul
@@ -55,13 +53,14 @@ reagent-physical-desc-crucible-soul = otherworldly
 reagent-physical-desc-clarity = clear
 reagent-physical-desc-marshal = agonizing
 reagent-physical-desc-ether = numbing
-reagent-physical-desc-raw = raw
+reagent-physical-desc-rusty = rusty
 
 flavor-complex-eldritch = Ag'hsj'saje'sh
 flavor-complex-crucible-soul = like something between the plains
 flavor-complex-clarity = like eyes
 flavor-complex-marshal = painful
 flavor-complex-ether = refreshing
+flavor-complex-rust = like rotten copper
 
 crucible-soul-effect-examine-message =
     {"["}color=#fb793a]{ CAPITALIZE(SUBJECT($ent)) } { GENDER($ent) ->

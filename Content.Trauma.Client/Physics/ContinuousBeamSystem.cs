@@ -16,9 +16,16 @@ public sealed partial class ContinuousBeamSystem : SharedContinuousBeamSystem
     [Dependency] private IInputManager _input = default!;
     [Dependency] private InputSystem _inputSystem = default!;
 
-    public override void FrameUpdate(float frameTime)
+    public override void Initialize()
     {
-        base.FrameUpdate(frameTime);
+        base.Initialize();
+
+        UpdatesOutsidePrediction = true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
 
         if (!Timing.IsFirstTimePredicted)
             return;
@@ -29,14 +36,16 @@ public sealed partial class ContinuousBeamSystem : SharedContinuousBeamSystem
         if (!TryGetGun(player, out var gun))
             return;
 
-        MapCoordinates? mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
+        var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
 
-        if (mousePos.Value.MapId == MapId.Nullspace)
+        if (mousePos.MapId == MapId.Nullspace)
             return;
 
         var keyFunc = gun.Value.Comp.AltFire ? EngineKeyFunctions.UseSecondary : EngineKeyFunctions.Use;
         var requestFire = CanFire(player, gun.Value) && _inputSystem.CmdStates.GetState(keyFunc) == BoundKeyState.Down;
 
-        RaisePredictiveEvent(new LaserBeamEndpointPositionEvent(GetNetEntity(gun.Value), mousePos.Value, requestFire));
+        var coordinates = Xform.ToCoordinates(gun.Value.Owner, mousePos);
+
+        RaisePredictiveEvent(new LaserBeamEndpointPositionEvent(GetNetCoordinates(coordinates), requestFire));
     }
 }

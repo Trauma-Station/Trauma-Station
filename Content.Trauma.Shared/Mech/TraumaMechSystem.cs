@@ -5,6 +5,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mech.Equipment.Components;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Mech;
 using Robust.Shared.Containers;
@@ -30,6 +31,13 @@ public sealed partial class TraumaMechSystem : EntitySystem
         // TODO: this should not be in an attempt event...
         var ev = new MechGunFiredEvent();
         RaiseLocalEvent(ent, ref ev);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnAttemptMelee(Entity<MechEquipmentComponent> ent, ref AttemptMeleeEvent args)
+    {
+        if (ent.Comp.EquipmentOwner is not {} mech || !_mechQuery.HasComp(mech))
+            args.Cancelled = true;
     }
 
     [SubscribeLocalEvent]
