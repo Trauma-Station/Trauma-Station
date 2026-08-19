@@ -1225,6 +1225,26 @@
             components:
             - Vampire
         proto: VampireHolyWater
+      - !type:DiseaseProgressChange
+        affectedType: Parasite
+        progressModifier: -0.10
+        probability: 0.01
+      - !type:DiseaseProgressChange
+        affectedType: Bacterial
+        progressModifier: -0.10
+        probability: 0.01
+      - !type:DiseaseProgressChange
+        affectedType: Viral
+        progressModifier: -0.10
+        probability: 0.01
+      - !type:DiseaseProgressChange
+        affectedType: OwnCells
+        progressModifier: -0.10
+        probability: 0.01
+      - !type:DiseaseProgressChange
+        affectedType: Prion
+        progressModifier: -0.10
+        probability: 0.001 # Do you think you're curing a prion?
       # </Trauma>
       - !type:SatiateThirst
         factor: 3
