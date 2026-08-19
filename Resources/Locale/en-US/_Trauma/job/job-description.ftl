@@ -6,3 +6,5 @@ job-description-cburn = Exterminate biological hazards onboard the station.
 job-description-deathsquad = Rip and tear, until it is done.
 
 job-description-rancher = Raise and breed chickens for recreation/novelty, food, utility, etc., nurture them and look out for their needs.
+
+job-name-dclass = Serve the crew under the iron fist of Nanotrasen, at their beck and call, hoping they don't choose to shoot you for sport.

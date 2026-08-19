@@ -25,6 +25,7 @@ job-name-conquest = Conquest
 job-name-mercenarycaptain = Mercenary Captain
 job-name-radiohost = Radio Host
 job-name-phonemerchant = Phone Merchant
+job-name-dclass = D-Class Subject
 
 # Role timers - Make these alphabetical or I cut you (dont listen to upstream, i copied and pasted this, make it very un-alphabetical :godo:)
 
