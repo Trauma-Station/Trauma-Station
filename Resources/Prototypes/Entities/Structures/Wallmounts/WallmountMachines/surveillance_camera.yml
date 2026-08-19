@@ -246,7 +246,7 @@
     - type: Transform
       anchored: true
     - type: Damageable
-      damageModifierSet: Metallic
+      damageModifierSet: FlimsyMetallic
     - type: Injurable
       damageContainer: StructuralInorganic
     - type: Sprite
