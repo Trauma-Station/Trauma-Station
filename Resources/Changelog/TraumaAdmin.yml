@@ -317,3 +317,12 @@ Entries:
   id: 41
   time: '2026-08-12T13:47:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4054
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ban webhook only grouping the first department for e.g. command +
+      sec because of the overlapping hos job.
+  id: 42
+  time: '2026-08-19T20:33:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4159
