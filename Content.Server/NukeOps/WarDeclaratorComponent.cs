@@ -66,4 +66,5 @@ public sealed partial class WarDeclaratorComponent : Component
 }
 
 [ByRefEvent]
-public record struct WarDeclaredEvent(WarConditionStatus? Status, Entity<WarDeclaratorComponent> DeclaratorEntity);
+public record struct WarDeclaredEvent(WarConditionStatus? Status, Entity<WarDeclaratorComponent> DeclaratorEntity,
+    EntityUid User); // Trauma

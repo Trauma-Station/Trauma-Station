@@ -94,6 +94,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         args.Handled = true;
 
         bounty.Claimed = true;
+        Dirty(rule.Value, ruleComp);
         role.Comp2.ClaimedBounties++;
         _audio.PlayPredicted(ent.Comp.StealEndSound, ent, args.User);
 

@@ -53,7 +53,10 @@
         Piercing: 5
         Cold: 25
   - type: Item
-    size: Ginormous
+    storedRotation: -45
+    size: Large
+    shape:
+    - 0,0,0,6
   - type: Clothing
     quickEquip: false
     slots:

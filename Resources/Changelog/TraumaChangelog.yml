@@ -13266,3 +13266,147 @@ Entries:
   id: 1447
   time: '2026-08-16T20:07:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4114
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Added Holy Chlorine Trufluoride!
+  - type: Add
+    message: Added Burnite!
+  - type: Add
+    message: Added reagent-name-unknown-reagent
+  - type: Tweak
+    message: Slightly adjusted the coconut half description.
+  id: 1448
+  time: '2026-08-17T04:53:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4106
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer being awful to use, it now also has popups.
+  id: 1449
+  time: '2026-08-17T18:15:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4125
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed NTR task slop, go larp.
+  - type: Tweak
+    message: Coscult astral razor now uses tools weapon training.
+  id: 1450
+  time: '2026-08-17T19:32:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4124
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Renamed reagent-name-unknown-reagent to Unobtainium and added a
+      description for it
+  id: 1451
+  time: '2026-08-17T20:00:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4120
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed mindshielded headrevs still being unable to convert if
+      demindshielded.
+  id: 1452
+  time: '2026-08-17T20:10:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4127
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Removed items that cost more than 100tc from spy possible bounty reward.
+  - type: Tweak
+    message: >-
+      Medium bounty rewards now start from 20tc down from 30 and hard ones start
+      from 50tc down from 60.
+  - type: Fix
+    message: >-
+      Fixed spy uplink not updating bounty claimed status when someone else
+      claims it.
+  id: 1453
+  time: '2026-08-17T20:24:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4092
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Chaplains no longer have to deface their bible to enchant items.
+  id: 1454
+  time: '2026-08-17T20:38:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4131
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to implant yourself with a used shield ripper.
+  id: 1455
+  time: '2026-08-17T20:39:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4132
+- author: THE FOG IS COMING
+  changes:
+  - type: Tweak
+    message: >-
+      Nitrous Oxide made from invisible instasleep gas to visible instasleep
+      gas.
+  id: 1456
+  time: '2026-08-18T04:44:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4134
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slop clarke crate from salv points vendor.
+  id: 1457
+  time: '2026-08-18T19:58:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4147
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Demonic Soul Fragments resprited.
+  id: 1458
+  time: '2026-08-18T20:17:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4146
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Shadowling screech no longer affects the deaf, they can't hear you.
+  id: 1459
+  time: '2026-08-18T21:08:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4139
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Bodies with souls can now be biomassed.
+  id: 1460
+  time: '2026-08-18T21:20:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4149
+- author: Aviu
+  changes:
+  - type: Add
+    message: New heretic t2 side knowledge - rust sower grenade.
+  - type: Add
+    message: >-
+      Silicons heal small amount of ion damage by splashing themselves with
+      silicon reagent.
+  - type: Add
+    message: Lionhunter rifle shows people through walls when you wield it.
+  - type: Fix
+    message: Fix ion damage causing bleeding and wounds to organics.
+  - type: Fix
+    message: Fix laser beams acting weirdly on moving grids.
+  - type: Remove
+    message: Removed envy knife from heretic side knowledge.
+  - type: Add
+    message: Added envy knife to lavaland ruin, everyone can use it now.
+  - type: Add
+    message: Wire brushes can clean rust floors, also unrusting floors is now faster.
+  - type: Fix
+    message: Fix rust heretics being unable to instakill airlocks with grasp.
+  - type: Add
+    message: Mansus grasp now recharges quickly when standing on rune.
+  - type: Tweak
+    message: >-
+      Eldritch essence reagent changed to deal stamina damage instead of
+      stunning non heretics.
+  id: 1461
+  time: '2026-08-19T18:26:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4142
