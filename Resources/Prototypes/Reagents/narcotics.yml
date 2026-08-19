@@ -629,7 +629,7 @@
       effects:
       - !type:Emote
         emote: Laugh
-        showInChat: true
+        showInChat: false
         probability: 0.1
         conditions:
         - !type:ReagentCondition
@@ -637,7 +637,7 @@
           max: 20
       - !type:Emote
         emote: Whistle
-        showInChat: true
+        showInChat: false
         probability: 0.1
         conditions:
         - !type:ReagentCondition
@@ -645,7 +645,7 @@
           max: 20
       - !type:Emote
         emote: Crying
-        showInChat: true
+        showInChat: false
         probability: 0.1
         conditions:
         - !type:ReagentCondition
