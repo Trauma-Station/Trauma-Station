@@ -93,7 +93,7 @@ public sealed partial class VelocityModifierContactsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnEntityExit(Entity<VelocityModifierContactsComponent> ent, ref EndCollideEvent args)
+    private void OnEndCollide(Entity<VelocityModifierContactsComponent> ent, ref EndCollideEvent args)
     {
         if (!ent.Comp.IsActive || ent.Comp.CollisionFixture != args.OurFixtureId)
             return;
@@ -107,7 +107,7 @@ public sealed partial class VelocityModifierContactsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnEntityEnter(Entity<VelocityModifierContactsComponent> ent, ref StartCollideEvent args)
+    private void OnStartCollide(Entity<VelocityModifierContactsComponent> ent, ref StartCollideEvent args)
     {
         if (!ent.Comp.IsActive || ent.Comp.CollisionFixture != args.OurFixtureId)
             return;

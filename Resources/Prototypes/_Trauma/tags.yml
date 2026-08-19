@@ -199,7 +199,7 @@
   id: MagazineTurret # Ammo whitelist: WeaponTurretRevolutionarySMG
 
 - type: Tag
-  id: MansusGraspAction # Heretic: mansus grasp action
+  id: MansusGraspAction # Heretic: whitelist for ritual rune to recharge mansus grasp when standing on it
 
 - type: Tag
   id: LizardTail

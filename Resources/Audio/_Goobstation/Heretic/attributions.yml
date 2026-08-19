@@ -1,102 +1,47 @@
-- files: ["blind.ogg", "castsummon.ogg", "disintegrate.ogg", "hereticknock.ogg", "voidblink.ogg", "cosmic_energy.ogg", "cosmic_expansion.ogg"]
+- files: ["blind.ogg", "castsummon.ogg", "disintegrate.ogg", "hereticknock.ogg", "voidblink.ogg", "cosmic_energy.ogg", "cosmic_expansion.ogg", "demon_attack1.ogg", "curse.ogg", "repluse.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station. hereticknock.ogg and voidblink.ogg converted to mono by @deltanedas (github)"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/magic"
-
-- files: ["repluse.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station, modified by Aviu00"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/magic/repulse.ogg"
+  copyright: "Taken from /tg/station. hereticknock.ogg and voidblink.ogg converted to mono by @deltanedas (github); repulse.ogg modified by Aviu00 (github)"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/effects/magic"
 
 - files: ["glass_reverse.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/glass/glass_reverse.ogg"
+  source: "https://github.com/tgstation/tgstation/blob/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/effects/glass/glass_reverse.ogg"
 
 - files: ["wail.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/hallucinations/wail.ogg"
+  source: "https://github.com/tgstation/tgstation/blob/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/effects/hallucinations/wail.ogg"
 
 - files: ["ark_deathrattle.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/machines/clockcult/ark_deathrattle.ogg"
+  source: "https://github.com/tgstation/tgstation/blob/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/machines/clockcult/ark_deathrattle.ogg"
 
-- files: ["goresplat.ogg"]
+- files: ["goresplat.ogg", "piano_hit.ogg", "ice_shovel.ogg", "constructform.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/goresplat.ogg"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/effects"
 
-- files: ["piano_hit.ogg"]
+- files: ["crack2.ogg", "blood3.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/piano_hit.ogg"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/effects/wounds"
 
-- files: ["ice_shovel.ogg"]
+- files: ["coinflip.ogg", "eatfood.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/ice_shovel.ogg"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/items"
 
-- files: ["constructform.ogg"]
+- files: ["parry.ogg", "rust_sower_armbomb.ogg", "rust_sower_explode.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/constructform.ogg"
-
-- files: ["crack2.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/wounds/crack2.ogg"
-
-- files: ["blood3.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/wounds/blood3.ogg"
-
-- files: ["coinflip.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/coinflip.ogg"
-
-- files: ["sheath.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/sheath.ogg"
-
-- files: ["eatfood.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/eatfood.ogg"
-
-- files: ["parry.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons/parry.ogg"
-
-- files: ["rust_sower_armbomb.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons/rust_sower_armbomb.ogg"
-
-- files: ["rust_sower_explode.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons/rust_sower_explode.ogg"
-
-- files: ["demon_attack1.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/magic/demon_attack1.ogg"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/items/weapons"
 
 - files: ["ambiatm1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/ambience/misc/ambiatm1.ogg"
-
-- files: ["curse.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/magic/curse.ogg"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/ambience/misc"
 
 - files: ["heartbeat.ogg"]
   license: "CC-BY-SA-3.0"

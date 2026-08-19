@@ -11,6 +11,9 @@ namespace Content.Trauma.Shared.Heretic.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class EntityEffectContactsComponent : Component
 {
+    /// <summary>
+    /// Used to prevent multiple of the same entity effects (same id) from being applied to colliding entity at once
+    /// </summary>
     [DataField(required: true)]
     public string Id;
 

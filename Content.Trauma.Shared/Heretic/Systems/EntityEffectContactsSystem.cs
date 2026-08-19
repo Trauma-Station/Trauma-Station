@@ -3,9 +3,7 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
@@ -14,16 +12,11 @@ public sealed partial class EntityEffectContactsSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedEntityConditionsSystem _condition = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
     [Dependency] private EntityQuery<EntityEffectContactsAffectedComponent> _affectedQuery = default!;
     [Dependency] private EntityQuery<EntityEffectContactsComponent> _contactsQuery = default!;
-
-    private readonly HashSet<EntityUid> _toUpdate = new();
-    private readonly HashSet<EntityUid> _toRemove = new();
 
     private static readonly TimeSpan UpdateTime = TimeSpan.FromSeconds(1);
     private TimeSpan _updateTimer;
@@ -31,20 +24,6 @@ public sealed partial class EntityEffectContactsSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-
-        _toRemove.Clear();
-
-        foreach (var ent in _toUpdate)
-        {
-            Refresh(ent);
-        }
-
-        foreach (var ent in _toRemove)
-        {
-            RemComp<EntityEffectContactsAffectedComponent>(ent);
-        }
-
-        _toUpdate.Clear();
 
         UpdateAffected();
     }
@@ -66,16 +45,16 @@ public sealed partial class EntityEffectContactsSystem : EntitySystem
         {
             if (affected.Contacts.Count == 0)
             {
-                _toUpdate.Add(uid);
+                RemCompDeferred(uid, affected);
                 continue;
             }
 
-            foreach (var ent in affected.Contacts.Values)
+            foreach (var (id, ent) in affected.Contacts)
             {
                 if (!_contactsQuery.TryComp(ent, out var contacts) ||
                     !_condition.TryConditions(uid, contacts.Conditions, ent))
                 {
-                    _toUpdate.Add(uid);
+                    RemoveAffectedId((uid, affected), id);
                     continue;
                 }
 
@@ -84,32 +63,11 @@ public sealed partial class EntityEffectContactsSystem : EntitySystem
         }
     }
 
-    private void Refresh(EntityUid uid)
+    private void RemoveAffectedId(Entity<EntityEffectContactsAffectedComponent> ent, string id)
     {
-        if (!_physicsQuery.TryComp(uid, out var body) || !_affectedQuery.TryComp(uid, out var affected))
-            return;
-
-        var entries = 0;
-        foreach (var ent in _physics.GetContactingEntities(uid, body))
-        {
-            if (!_contactsQuery.TryComp(ent, out var contacts))
-                continue;
-
-            affected.Contacts.TryAdd(contacts.Id, ent);
-            entries++;
-        }
-
-        if (entries == 0)
-            _toRemove.Add(uid);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnShutdown(Entity<EntityEffectContactsComponent> ent, ref ComponentShutdown args)
-    {
-        if (!TryComp(ent, out PhysicsComponent? phys))
-            return;
-
-        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
+        ent.Comp.Contacts.Remove(id);
+        if (ent.Comp.Contacts.Count == 0)
+            RemCompDeferred(ent, ent.Comp);
     }
 
     [SubscribeLocalEvent]
@@ -119,7 +77,7 @@ public sealed partial class EntityEffectContactsSystem : EntitySystem
             comp.Contacts.GetValueOrDefault(ent.Comp.Id) != ent.Owner)
             return;
 
-        _toUpdate.Add(args.OtherEntity);
+        RemoveAffectedId((args.OtherEntity, comp), ent.Comp.Id);
     }
 
     [SubscribeLocalEvent]
@@ -130,7 +88,5 @@ public sealed partial class EntityEffectContactsSystem : EntitySystem
 
         var comp = EnsureComp<EntityEffectContactsAffectedComponent>(args.OtherEntity);
         comp.Contacts[ent.Comp.Id] = ent;
-
-        _toUpdate.Add(args.OtherEntity);
     }
 }
