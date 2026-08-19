@@ -13421,3 +13421,10 @@ Entries:
   id: 1462
   time: '2026-08-19T20:38:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4160
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chasm jaunter related visuals issues.
+  id: 1463
+  time: '2026-08-19T21:24:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4161
