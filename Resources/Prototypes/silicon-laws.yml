@@ -602,7 +602,6 @@
     SilenceLawset: 0.35
     BioweaponLawset: 0.15
     StrategySimulatorLawset: .5
-
     # </Trauma>
     # its crewsimov by default dont be lame
     Crewsimov: 0.20 # Trauma - was 0.25
