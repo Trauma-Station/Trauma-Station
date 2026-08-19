@@ -29,7 +29,6 @@
   equipment:
     id: PassengerPDA
     ears: ClothingHeadsetGrey
-    jumpsuit: ClothingUniformJumpskirtPrisoner
     #storage:
     #back:
     #- Stuff
