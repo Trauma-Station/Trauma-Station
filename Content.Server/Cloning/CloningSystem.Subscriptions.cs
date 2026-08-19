@@ -1,18 +1,29 @@
 using Content.Shared.Body.Components;
+using Content.Server.Atmos.EntitySystems;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
-using Content.Server.Speech.EntitySystems;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Forensics.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Paper;
 using Content.Shared.Speech.Components;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Stacks;
+using Content.Shared.Storage;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
@@ -34,14 +45,15 @@ public sealed partial class CloningSystem
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private LabelSystem _label = default!;
     [Dependency] private PaperSystem _paper = default!;
-    /* Trauma - ling slop not cherry picked
     [Dependency] private VocalSystem _vocal = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private SharedChameleonClothingSystem _chameleonClothing = default!;
     [Dependency] private PullingSystem _pulling = default!;
     [Dependency] private BloodstreamSystem _bloodstream = default!;
-    */
+    [Dependency] private SharedCreamPieSystem _creampie = default!;
     [Dependency] private ForensicsSystem _forensics = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -52,6 +64,7 @@ public sealed partial class CloningSystem
         SubscribeLocalEvent<PaperComponent, CloningItemEvent>(OnClonePaper);
         SubscribeLocalEvent<ForensicsComponent, CloningItemEvent>(OnCloneForensics);
         SubscribeLocalEvent<StoreComponent, CloningItemEvent>(OnCloneStore);
+        SubscribeLocalEvent<CreamPiedComponent, CloningEvent>(OnCloneCreamPied);
     }
 
     private void OnCloneStack(Entity<StackComponent> ent, ref CloningItemEvent args)
@@ -94,4 +107,81 @@ public sealed partial class CloningSystem
         }
     }
 
+    private void OnCloneItemChameleon(Entity<ChameleonClothingComponent> ent, ref CloningItemEvent args)
+    {
+        // copy the prototype the original is mimicing
+        _chameleonClothing.SetSelectedPrototype(args.CloneUid, ent.Comp.Default);
+    }
+
+    private void OnCloneVocal(Entity<VocalComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _vocal.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneStorage(Entity<StorageComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _storage.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneInventory(Entity<InventoryComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _inventory.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneMovementSpeedModifier(Entity<MovementSpeedModifierComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _movementSpeedModifier.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnClonePuller(Entity<PullerComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _pulling.CopyPullerComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneBloodstream(Entity<BloodstreamComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _bloodstream.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneCreamPied(Entity<CreamPiedComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _creampie.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneFlammable(Entity<FlammableComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _flammable.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
+
+    private void OnCloneDamageable(Entity<DamageableComponent> ent, ref CloningEvent args)
+    {
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+            return;
+
+        _damageable.CopyComponent(ent.AsNullable(), args.CloneUid);
+    }
 }
