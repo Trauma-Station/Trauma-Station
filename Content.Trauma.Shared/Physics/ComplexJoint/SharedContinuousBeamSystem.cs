@@ -9,6 +9,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -27,37 +28,37 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedTransformSystem Xform = default!;
 
-    [SubscribeLocalEvent, SubscribeNetworkEvent]
+    [EventSubscription]
     private void OnGetPosition(LaserBeamEndpointPositionEvent ev, EntitySessionEventArgs args)
     {
-        if (!TryGetEntity(ev.Uid, out var uid) || args.SenderSession.AttachedEntity is not { } player)
+        var pos = GetCoordinates(ev.Coordinates);
+
+        if (!Exists(pos.EntityId) || args.SenderSession.AttachedEntity is not { } player)
             return;
 
-        if (!TryComp(uid.Value, out ContinuousBeamGunComponent? gun))
+        var uid = pos.EntityId;
+
+        if (!TryComp(uid, out ContinuousBeamGunComponent? gun))
             return;
 
-        var xform = Transform(uid.Value);
-
-        if (xform.MapID != ev.Coordinates.MapId)
+        var xform = Transform(uid);
+        var newParent = xform.GridUid ?? xform.MapUid;
+        if (newParent == null)
             return;
 
-        Entity<ContinuousBeamGunComponent> gunEnt = (uid.Value, gun);
+        Entity<ContinuousBeamGunComponent> gunEnt = (uid, gun);
 
-        var pos = ev.Coordinates;
-        var ourPos = Xform.GetWorldPosition(xform);
-
-        var dir = pos.Position - ourPos;
-        var len = dir.Length();
+        var len = pos.Position.Length();
         var newLen = Math.Clamp(len, gun.MinMaxLaserRange.X, gun.MinMaxLaserRange.Y);
         if (Math.Abs(len - newLen) > 0.01f)
-            pos = new MapCoordinates(ourPos + dir * newLen / len, xform.MapID);
+            pos = new EntityCoordinates(uid, pos.Position * newLen / len);
 
-        gun.CursorPosition = pos;
+        gun.ShootCoordinates = Xform.WithEntityId(pos, newParent.Value);
 
         if (ev.ShouldFire && ValidateGun(player, gunEnt) && CanFire(player, gunEnt))
-            ShootLaser(player, gunEnt.AsNullable(), xform.Coordinates);
+            ShootLaser(player, gunEnt.AsNullable());
         else if (gun.UserCanFire)
-            StopFiring(uid.Value, gun, null);
+            StopFiring(uid, gun, null);
     }
 
     public bool CanFire(EntityUid user, [NotNullWhen(true)] out Entity<ContinuousBeamGunComponent>? gun)
@@ -70,15 +71,15 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
         return gun.Comp.UserCanFire && _combat.IsInCombatMode(user);
     }
 
-    public EntityUid? ShootLaser(EntityUid user, Entity<ContinuousBeamGunComponent?> gun, EntityCoordinates coords)
+    public EntityUid? ShootLaser(EntityUid user, Entity<ContinuousBeamGunComponent?> gun)
     {
-        if (!Resolve(gun, ref gun.Comp, false))
+        if (!Resolve(gun, ref gun.Comp, false) || gun.Comp.ShootCoordinates is not { } coords)
             return null;
 
         if (Exists(gun.Comp.Endpoint))
             return gun.Comp.Endpoint.Value;
 
-        var endpoint = PredictedSpawnAtPosition(null, coords);
+        var endpoint = PredictedSpawnAttachedTo(null, coords);
         var comp = Factory.GetComponent<LaserBeamEndpointComponent>();
         comp.Gun = gun;
         AddComp(endpoint, comp, true);
@@ -112,7 +113,7 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
         ComplexJointVisualsComponent joint)
     {
         var exists = Exists(gun.Endpoint);
-        if (exists && gun.CursorPosition != null)
+        if (exists && gun.ShootCoordinates is { } coords && coords.IsValid(EntityManager))
             return true;
 
         StopFiring(uid, gun, joint);

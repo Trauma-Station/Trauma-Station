@@ -31,7 +31,6 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
-using Content.Trauma.Server.Abductor;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Heretic.Components;
@@ -62,7 +61,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private HereticRuleSystem _rule = default!;
-    [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
     [Dependency] private SharedHereticRitualSystem _ritual = default!;
     [Dependency] private PvsOverrideSystem _pvs = default!;
 
@@ -615,9 +613,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
                 RaiseLocalEvent(action, upgradeEvent);
             }
         }
-
-        // Restore appearance if it was changed by envy knife
-        _disguise.RestoreAppearance(uid, false);
 
         var pathLoc = path.ToString().ToLower();
         var ascendSound =

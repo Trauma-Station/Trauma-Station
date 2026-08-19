@@ -59,15 +59,6 @@ knowledge-path-side-t1-realignment-desc =
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
     Doesn't require focus to cast.
 
-knowledge-path-side-t1-envy-name = Rite of Stolen Faces
-knowledge-path-side-t1-envy-desc =
-    One day, a thief grew tired of stealing gold, so he began stealing something far more valuable: identities.
-
-    Transmute a knife, a heart and a mask of a clown or a mime to create Envy's Knife.
-    Envy's Knife changes your appearance and name to whoever you stabbed with it.
-    You can revert back to your identity at will.
-    Ascension reveals your true identity and prevents you from using the knife.
-
 knowledge-path-side-t1-mask-name = Mask of Madness
 knowledge-path-side-t1-mask-desc =
     Fear pierces you to your core, every instinct screams to tear your gaze away, but it is too late...
@@ -188,8 +179,16 @@ knowledge-path-side-t2-rifle-desc =
     These shots function as normal, albeit weak high-caliber munitions when fired.
     You can aim the rifle at distant foes by right-clicking them in Combat Mode,
     causing the shot to mark your victim with your grasp, teleport you directly to them and deal double damage.
+    Allows you to see people through walls when wielded.
 
     You can transmute 3 ballistic ammo casings (used or unused) of any caliber, including shotgun shells to create extra ammunition for the Lionhunter Rifle.
+
+knowledge-path-side-t2-rustgrenade-name = Rust Sower Grenade
+knowledge-path-side-t2-rustgrenade-desc =
+    The choked vines of the Rusted Hills are burdened with such overripe fruits. It undoes the markers of progress, leaving a clean slate to work into new shapes.
+
+    Transmute a modular grenade casing, a rag and two pieces of trash to create the cursed grenade filled with Eldritch Rust.
+    Upon detonation, it releases a huge cloud that blinds organics, rusts affected turfs and obliterates silicons and mechs.
 
 ## T3
 knowledge-path-side-t3-grasp-name = Mind Grasp

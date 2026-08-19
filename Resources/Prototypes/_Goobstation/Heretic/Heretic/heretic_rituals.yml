@@ -2073,48 +2073,6 @@
         PotionEther: 1
 
 - type: entity
-  id: RitualEnvyKnife
-  name: Rite of Stolen Faces
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Entities/envy_knife.rsi
-    state: icon
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SplitIngredientsRitualEffect
-      applyOn: Split
-      conditions:
-      - !type:ProcessIngredientsCondition
-        applyOn: Look
-        deleteEntitiesKey: Delete
-        splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            tags:
-            - Knife
-          name: heretic-ritual-ingredient-knife
-        - whitelist:
-            components:
-            - Heart
-          name: heretic-ritual-ingredient-heart
-        - whitelist:
-            tags:
-            - MimeMask
-            - ClownMask
-          name: heretic-ritual-ingredient-mime-clown-mask
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-    - !type:SpawnRitualEffect
-      applyOn: Platform
-      output:
-        EnvyKnife: 1
-
-- type: entity
   id: RitualMaskOfMadness
   name: Mask of Madness
   components:
@@ -2713,6 +2671,51 @@
       applyOn: Platform
       output:
         CartridgeLionhunter: 3
+
+- type: entity
+  id: RitualRustSowerGrenade
+  name: Rust Sower Grenade
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/rustgrenade.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: true
+            tags:
+            - HandGrenade
+            components:
+            - PayloadCase
+          name: heretic-ritual-ingredient-grenade-casing
+        - whitelist:
+            tags:
+            - Rag
+          name: heretic-ritual-ingredient-rag
+        - whitelist:
+            tags:
+            - Trash
+          name: heretic-ritual-ingredient-trash
+          amount: 2
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        RustSowerGrenade: 1
 
 # T3
 - type: entity
