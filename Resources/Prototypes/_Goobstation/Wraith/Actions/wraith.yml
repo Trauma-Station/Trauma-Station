@@ -422,7 +422,6 @@
       components:
       - WeakToHoly
     canTargetSelf: false
-    event: !type:ApplyCurseActionEvent
   - type: CurseAction # refreshes all curses when a curse is used
   - type: ActionWraithPoints
     wpConsume: 40

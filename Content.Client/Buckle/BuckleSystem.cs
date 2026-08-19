@@ -1,5 +1,7 @@
-using Content.Client.Rotation;
+// <Trauma>
 using Content.Goobstation.Shared.Vehicles;
+// </Trauma>
+using Content.Client.Rotation;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Systems;
