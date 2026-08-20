@@ -3,7 +3,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Spawners.Components;
 
-
 public sealed partial class ContainerSpawnPointComponent : Component, ISpawnPoint
 {
     /// <summary>
