@@ -384,7 +384,7 @@
   name: uranium shiv
   parent: Shiv
   id: UraniumShiv
-  description: A crude weapon fashioned from a piece of cloth and a uranium glass shard. Violates the geneva convention!
+  description: A crude weapon fashioned from a piece of cloth and a uranium glass shard. Violates the Geneva convention!
   components:
   # <Trauma>
   - type: PhysicalComposition

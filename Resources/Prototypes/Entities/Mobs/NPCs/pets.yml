@@ -1068,6 +1068,9 @@
   name: Pun Pun
   description: A prominent representative of monkeys with unlimited access to alcohol.
   components:
+  # <Trauma>
+  - type: PunPun
+  # </Trauma>
   - type: GhostRole
     prob: 1
     makeSentient: true
