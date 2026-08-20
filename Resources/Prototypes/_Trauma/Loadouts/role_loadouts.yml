@@ -40,11 +40,11 @@
   - GroupTankHarness
   - DClassJumpsuit
   - CommonBackpack
-  - DClassNeck
-  - DClassFace
-  - DClassGloves
-  - DClassOuterClothing
-  - DClassShoes
+  - PassengerNeck
+  - PassengerFace
+  - PassengerGloves
+  - PassengerOuterClothing
+  - PassengerShoes
   - Glasses
   - AssistiveItems
   - Survival
