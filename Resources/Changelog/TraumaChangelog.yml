@@ -13489,3 +13489,10 @@ Entries:
   id: 1470
   time: '2026-08-20T19:58:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4174
+- author: Cerzix
+  changes:
+  - type: Add
+    message: Added Cluoxadone, a strong anti-poison cryogenics medicine.
+  id: 1471
+  time: '2026-08-20T20:02:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4172
