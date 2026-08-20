@@ -9,20 +9,19 @@ namespace Content.Trauma.Server.GameTicking.Rules.Components;
 public sealed partial class ObserverStatisticRuleComponent : Component
 {
     /// <summary>
-    /// Entity with most unique observers
+    /// Character name for the entity with the most unique observers
     /// </summary>
     [DataField]
-    public EntityUid? MostPopularEntity;
-
+    public string MostPopularCharacterName = "noone";
 
     /// <summary>
-    /// Entity with most unique observers
+    /// Username for the player controlling the entity with the most unique observers
     /// </summary>
     [DataField]
-    public string MostPopular = "noone";
+    public string MostPopularUserName = "";
 
     /// <summary>
-    /// Number of unique followers for <see cref="MostPopularEntity"/>
+    /// Number of unique followers for <see cref="MostPopularCharacterName"/>
     /// </summary>
     [DataField]
     public int MostPopularEntityPopularity;

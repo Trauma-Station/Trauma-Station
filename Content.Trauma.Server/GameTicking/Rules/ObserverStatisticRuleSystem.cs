@@ -3,17 +3,21 @@ using Content.Server.GameTicking.Rules;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Trauma.Common.Mind;
+using Content.Shared.Roles;
 using Content.Trauma.Server.GameTicking.Rules.Components;
+using Robust.Server.Player;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
 /// <summary>
 /// Tracks observer statistics
 /// </summary>
-public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatisticRuleComponent>
+public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatisticRuleComponent>
 {
+    [Dependency] private IPlayerManager _playerManager = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -27,11 +31,16 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
             return;
 
         // Only track entities that are actual people
-        if (!mindContainer.HasMind)
+        if (!mindContainer.Mind.HasValue)
             return;
 
-        TryComp(ev.Following, out MetaDataComponent? meta);
-        if (meta is not { })
+        if (!TryComp<MindComponent>(mindContainer.Mind, out var mindComp))
+            return;
+
+        if (mindComp.CharacterName is not { })
+            return;
+
+        if (!mindComp.UserId.HasValue)
             return;
 
         if (!TryComp<FollowedComponent>(ev.Following, out var followed))
@@ -43,8 +52,9 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
             if (followed.Following.Count <= observerStats.MostPopularEntityPopularity)
                 continue;
 
-            //_roles.MindGetAllRoleInfo(mindId);
-            observerStats.MostPopular = meta.EntityName;
+            observerStats.MostPopularCharacterName = mindComp.CharacterName;
+            observerStats.MostPopularUserName = _playerManager.GetPlayerData(mindComp.UserId.Value).UserName;
+
             observerStats.MostPopularEntityPopularity = followed.Following.Count;
         }
     }
@@ -57,10 +67,7 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
     {
         base.AppendRoundEndText(uid, component, gameRule, ref args);
 
-        Log.Debug("Most Popular");
-        Log.Debug(component.MostPopular);
-        Log.Debug(component.MostPopularEntityPopularity.ToString());
         args.AddLine("");
-        args.AddLine(Loc.GetString("observer-statistic-popularity", ("name", component.MostPopular), ("count", component.MostPopularEntityPopularity)));
+        args.AddLine(Loc.GetString("observer-statistic-popularity", ("name", component.MostPopularCharacterName), ("username", component.MostPopularUserName), ("count", component.MostPopularEntityPopularity)));
     }
 }
