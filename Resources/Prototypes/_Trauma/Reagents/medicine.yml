@@ -17,10 +17,14 @@
       - !type:HealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 273.15
+          max: 213.0
+        scaleByTemperature:
+          min: 100.0
+          max: 213.0
+          scale: 1.6
         damage:
           types:
-            Poison: -4.5
+            Poison: -2.8
 
 - type: reagent
   id: Dewormer
