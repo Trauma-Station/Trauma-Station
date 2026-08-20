@@ -30,10 +30,13 @@ namespace Content.Shared.GameTicking
         // See ideally these would be pulled from the job definition or something.
         // But this is easier, and at least it isn't hardcoded.
         //TODO: Move these, they really belong in StationJobsSystem or a cvar.
-        public static readonly ProtoId<JobPrototype> FallbackOverflowJob = "DClass";  //Trauma Change: Changed overflow role from passenger to d-class
 
-        //Trauma Change: Changed overflow role from passenger to d-class
+        // <Trauma> Sets overflow job to be DClass
+        public static readonly ProtoId<JobPrototype> FallbackOverflowJob = "DClass";
+
         public const string FallbackOverflowJobName = "job-name-dclass";
+        // </Trauma>
+
 
         // TODO network.
         // Probably most useful for replays, round end info, and probably things like lobby menus.
