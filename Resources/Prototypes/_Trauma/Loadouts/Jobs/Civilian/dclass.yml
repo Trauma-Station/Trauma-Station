@@ -16,7 +16,7 @@
     back: ClothingBackpackElectropack
 
 - type: loadoutEffectGroup
-  id: DClassBackpack
+  id: DClassBackpackFreedom
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -26,54 +26,39 @@
 
 - type: loadout
   id: DClassBackpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
   equipment:
     back: ClothingBackpack
 
-- type: loadoutEffectGroup
-  id: DClassSatchel
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobDClass
-      time: 20h
-
 - type: loadout
   id: DClassSatchel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
   equipment:
     back: ClothingBackpackSatchel
 
-- type: loadoutEffectGroup
-  id: DClassDuffel
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobDClass
-      time: 20h
-
 - type: loadout
   id: DClassDuffel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
   equipment:
     back: ClothingBackpackDuffel
 
-- type: loadoutEffectGroup
-  id: DClassMessenger
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobDClass
-      time: 20h
-
 - type: loadout
   id: DClassMessenger
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
   equipment:
     back: ClothingBackpackMessenger
 
 # Greytide Time
 - type: loadoutEffectGroup
-  id: DClassTider
+  id: DClassTiderMask
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -86,7 +71,7 @@
   id: DClassMask
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassTider
+    proto: DClassTiderMask
   equipment:
     mask: ClothingMaskGas
 
