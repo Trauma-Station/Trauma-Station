@@ -13503,3 +13503,10 @@ Entries:
   id: 1472
   time: '2026-08-20T22:46:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4191
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed flashes stacking infinitely...
+  id: 1473
+  time: '2026-08-20T22:53:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4192
