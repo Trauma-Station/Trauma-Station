@@ -359,3 +359,22 @@ Entries:
   id: 38
   time: '2026-08-05T18:49:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3947
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: All maps now have a funding allocation console in hop office
+  - type: Add
+    message: All maps now have a AI Restoration Console
+  - type: Add
+    message: Box station now has ID Computers in head offices
+  - type: Add
+    message: Packed  station now has ID Computers in head offices
+  - type: Add
+    message: Cluster station now has ID Computers in head offices
+  - type: Fix
+    message: Bagel station court room now has a light outside in the hallway
+  - type: Add
+    message: Fland, Bagel, Origin now have more common intercoms
+  id: 39
+  time: '2026-08-20T19:46:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4182
