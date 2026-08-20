@@ -8,6 +8,6 @@ public sealed partial class ContainerSpawnPointComponent : Component, ISpawnPoin
     /// <summary>
     /// Extra Jobs that can spawn at a spawnpoint
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public List<ProtoId<JobPrototype>> ExtraJobs = new();
 }
