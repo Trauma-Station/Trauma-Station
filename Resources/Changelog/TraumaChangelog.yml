@@ -13471,3 +13471,12 @@ Entries:
   id: 1468
   time: '2026-08-20T17:29:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4181
+- author: Sherpack
+  changes:
+  - type: Tweak
+    message: >-
+      Eggs related to ranching are now named fertilized eggs. No more confusion
+      ! 🥚
+  id: 1469
+  time: '2026-08-20T19:53:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4177
