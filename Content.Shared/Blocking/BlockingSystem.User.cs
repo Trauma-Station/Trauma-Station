@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using Content.Shared.Blocking.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
@@ -47,6 +50,11 @@ public sealed partial class BlockingSystem
             return;
 
         var blockFraction = blocking.IsRaised ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+        // <Trauma>
+        var fractionEv = new GetBlockFractionEvent(entity, item, blockFraction);
+        RaiseLocalEvent(entity, ref fractionEv);
+        blockFraction = fractionEv.Fraction;
+        // </Trauma>
         blockFraction = Math.Clamp(blockFraction, 0, 1);
 
         // This is how much damage the shield is attempting to block

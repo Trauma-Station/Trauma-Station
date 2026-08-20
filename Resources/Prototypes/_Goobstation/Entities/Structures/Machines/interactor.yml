@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ConstructibleMachine, BaseMachinePowered, BaseAutomatedMachine ]
+  parent: [ ConstructibleMachine, BaseMachinePowered, BaseAutomatedMachine, BaseConstructibleMachineDestructible ]
   id: Interactor
   name: interactor
   description: A robotic actuator specialized in interacting with objects using tools.

@@ -151,6 +151,10 @@
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
+      # <Trauma>
+      components:
+      - SpyRule
+      # </Trauma>
       tags:
       - ContravendUplink # Trauma
       - NukeOpsUplink

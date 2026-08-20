@@ -4,6 +4,10 @@
   parent: [SimpleSpaceMobBase, BaseSlicingRefinable]
   description: It's a space tick, watch out for its nasty bite. CentComm reports that 90 percent of cargo leg amputations are due to space tick bites.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 3
+  # </Trauma>
   - type: VentCrawler # goobstation - Ventcrawl
   - type: InputMover
   - type: MobMover

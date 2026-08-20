@@ -30,6 +30,8 @@
     blacklist:
       tags:
       - NukeOpsUplink
+      components:
+      - SpyRule
 
 - type: listing
   id: UplinkAutosurgeonStatvekaSandevistan

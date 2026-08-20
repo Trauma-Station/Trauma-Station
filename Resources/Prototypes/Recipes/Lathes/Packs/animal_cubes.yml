@@ -12,6 +12,9 @@
   - CockroachCube
 
 - type: latheRecipePack
+  # <Trauma>
+  parent: TraumaHostileCubesStatic
+  # </Trauma>
   id: HostileCubesStatic
   recipes:
   - AbominationCube

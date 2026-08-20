@@ -56,6 +56,25 @@
     - WhitelistChameleon
     - SecurityBreathMask
   - type: Hailer
+    messages:
+    - sound: /Audio/_Goobstation/Hailer/asshole.ogg
+      message: "Stop breaking the law, asshole!!"
+    - sound: /Audio/_Goobstation/Hailer/bash.ogg
+      message: "Stop or I will bash you!!"
+    - sound: /Audio/_Goobstation/Hailer/bobby.ogg
+      message: "Stop in the name of the law!!"
+    - sound: /Audio/_Goobstation/Hailer/compliance.ogg
+      message: "Compliance is in your best interest!!"
+    - sound: /Audio/_Goobstation/Hailer/dontmove.ogg
+      message: "Don't move, creep!!"
+    - sound: /Audio/_Goobstation/Hailer/dredd.ogg
+      message: "I AM THE LAW!!"
+    - sound: /Audio/_Goobstation/Hailer/floor.ogg
+      message: "Get down on the floor creep!!"
+    - sound: /Audio/_Goobstation/Hailer/freeze.ogg
+      message: "Freeze scumbag!!"
+    - sound: /Audio/_Goobstation/Hailer/halt.ogg
+      message: "HALT! HALT! HALT!!"
   - type: IngestionBlocker
     blockSmokeIngestion: true
   - type: ViewconeModifier
@@ -436,7 +455,6 @@
     - HamsterWearable
     - WhitelistChameleon
     - IPCMaskWearable # EE - IPCs
-    - MimeMask # Trauma
   - type: HideLayerClothing
     slots:
     - Snout
@@ -554,17 +572,14 @@
     relayAccent: true
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseSecurityContraband ]
+  parent: ClothingMaskGasSecurity # Trauma - inherit sec mask for hailer and stuff
   id: ClothingMaskGasSwat
   name: swat gas mask
   description: A elite issue Security gas mask.
   components:
   # <Trauma>
-  - type: IngestionBlocker
-    blockSmokeIngestion: true
-  - type: Hailer
-  - type: ViewconeModifier
-    angleModifier: 1.0
+  - type: StealTarget
+    stealGroup: SwatGasMask
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/swat.rsi

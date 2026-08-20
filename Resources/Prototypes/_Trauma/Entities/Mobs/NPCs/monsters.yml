@@ -424,7 +424,8 @@
     angle: 0
     damage:
       types:
-        Blunt: 12
+        Blunt: 3
+        Slash: 1 # pinch
         Structural: 15
   - type: MeleeThrowOnHit
     distance: 2.5
@@ -520,11 +521,6 @@
   - type: MeleeWeapon
     altDisarm: false
     range: 1.5 # This one is player controlled and meant to be more dangerous despite it being stupid
-    angle: 0
-    damage:
-      types:
-        Blunt: 15
-        Structural: 15
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat]

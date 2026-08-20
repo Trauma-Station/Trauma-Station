@@ -73,10 +73,11 @@ public sealed partial class MedigunSystem : EntitySystem
     [SubscribeLocalEvent]
     private void BeamCollision(Entity<MediGunComponent> ent, ref ComplexJointCollisionEvent args)
     {
-        if (args.Data.Id != ent.Comp.JointKey || ent.Comp.HealedEntities.Contains(args.Hit.HitEntity))
+        if (args.Data.Id != ent.Comp.JointKey)
             return;
 
         DisableConnection(ent, args.Target);
+        args.BlockNextCollisions = true;
     }
 
     [SubscribeLocalEvent]
@@ -205,7 +206,7 @@ public sealed partial class MedigunSystem : EntitySystem
         var visuals = new ComplexJointVisualsData(ent.Comp.JointKey, sprite, ent.Comp.MaxRange)
         {
             Color = color,
-            ReturnOnFirstHit = true,
+            CollisionIgnoreParent = true,
         };
         _joint.CreateJoint(target, ent, visuals);
 

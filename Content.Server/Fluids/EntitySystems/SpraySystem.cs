@@ -288,7 +288,7 @@ public sealed partial class SpraySystem : SharedSpraySystem
                 {
                     // push back the grid the player is standing on
                     var userTransform = Transform(thingGettingPushed);
-                    if (userTransform.GridUid == userTransform.ParentUid)
+                    if (userTransform.GridUid == userTransform.ParentUid && userTransform.ParentUid != userTransform.MapUid) // Trauma - check map too
                     {
                         // apply both linear and angular momentum depending on the player position
                         // multiply by a cvar because grid mass is currently extremely small compared to all other masses

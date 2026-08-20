@@ -1,10 +1,18 @@
 - type: entity
   abstract: true
-  parent: [BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible]
+  parent: [ BaseMachinePowered, ConstructibleMachine ] # Trauma - removed BaseConstructibleMachineDestructible it already has a threshold
   id: BaseRecharger
   placement:
     mode: SnapgridCenter
   components:
+  # <Trauma>
+  - type: Damageable
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: EmptyOnMachineDeconstruct # dont delete stuff
+    containers:
+    - charger_slot
+  # </Trauma>
   - type: Transform
     anchored: true
     noRot: false
@@ -27,6 +35,12 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+      # <Trauma>
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      # </Trauma>
   - type: StaticPrice
     price: 75
 
@@ -176,12 +190,14 @@
       charger_slot:
         ejectOnInteract: true
         whitelist:
+          # <Trauma>
+          tags:
+          - FitsInCharger
+          # </Trauma>
           components:
           - BatteryAmmoProvider
           - Stunbaton
           - PowerCell
-          tags: # Goob
-          - FitsInCharger
         blacklist:
           tags:
           - PotatoBattery
@@ -292,6 +308,11 @@
   name: cyborg recharging station
   description: A stationary charger for various robotic and cyborg entities. Surprisingly spacious.
   components:
+  # <Trauma>
+  - type: EmptyOnMachineDeconstruct # dont delete borgs
+    containers:
+    - entity_storage
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Power/borg_charger.rsi
     noRot: True
@@ -313,9 +334,11 @@
     slotId: entity_storage
     whitelist:
       components:
+      # <Trauma>
+      - Silicon
+      - Inventory # for modsuits
+      # </Trauma>
       - BorgChassis
-      - Silicon # EE IPCs
-      - Inventory #Goobstation - Modsuits
   - type: Construction
     containers:
     - machine_parts
@@ -358,9 +381,11 @@
     capacity: 1
     whitelist:
       components:
+      # <Trauma>
+      - Silicon
+      - Inventory # for modsuits
+      # </Trauma>
       - BorgChassis
-      - Silicon #Goobstation, allows IPCs to use cyborg chargers
-      - Inventory # Goobstation - Modsuits/Augments
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container

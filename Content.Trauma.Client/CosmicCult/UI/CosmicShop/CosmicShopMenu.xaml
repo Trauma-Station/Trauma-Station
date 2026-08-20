@@ -29,7 +29,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 </ProgressBar>
                 <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label HorizontalAlignment="Center" Text="{Loc 'cosmic-shop-interface-cultists-next-stage-title'}" Margin="0 0 5 0"  StyleClasses="LabelSmall" />
-                    <Label HorizontalAlignment="Center" Name="CultisttUntilNextCultStage" FontColorOverride="#4CA7AD" StyleClasses="LabelSmall" />
+                    <Label HorizontalAlignment="Center" Name="CultistsUntilNextCultStage" FontColorOverride="#4CA7AD" StyleClasses="LabelSmall" />
                 </BoxContainer>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" MinWidth="4" Margin="6 0"/>
@@ -40,8 +40,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <Label HorizontalAlignment="Center" Name="AvailableEntropy" FontColorOverride="#4CA7AD" StyleClasses="LabelSmall" />
                 </BoxContainer>
                 <RichTextLabel Name="RespecText" HorizontalAlignment="Center" />
-                <Button Name="RespecButton"
-                        Text="{Loc 'cosmic-shop-interface-respec-button'}"
+                <controls:ConfirmButton Name="RespecButton"
+                        Text="Respec"
                         StyleClasses="ButtonColorPurpleAndCool"
                         Margin="5"
                         SetWidth="80"
@@ -68,11 +68,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 </BoxContainer>
                 <PanelContainer StyleClasses="LowDivider" MinWidth="4"/>
                 <!-- Influence details -->
-                <BoxContainer Name="InfluenceInfoContainer" MaxWidth="250" Orientation="Vertical">
+                <BoxContainer MaxWidth="250" Orientation="Vertical">
                     <!-- Filled out programatically -->
-                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Name="InfluenceDetails" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" />
-                    </ScrollContainer>
+                    <BoxContainer Name="InfluenceDetails" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True"/>
                 </BoxContainer>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" MinHeight="4"/>

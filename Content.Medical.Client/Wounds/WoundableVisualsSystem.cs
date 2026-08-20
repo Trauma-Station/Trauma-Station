@@ -5,6 +5,7 @@ using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
+using Content.Client.DisplacementMap;
 using Content.Shared.Body;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -22,6 +23,7 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private DisplacementMapSystem _displacement = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SpriteSystem _sprite = default!;
@@ -48,7 +50,7 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
             GetLayer(ent) is not {} layer)
             return;
 
-        AddDamageLayerToSprite((body, sprite), overlay, BuildStateKey(layer, MinorSuffix), BuildLayerKey(layer, BleedingSuffix));
+        AddDamageLayerToSprite((body, sprite), ent.Comp, overlay, BuildStateKey(layer, MinorSuffix), BuildLayerKey(layer, BleedingSuffix));
     }
 
     private void InitDamage(Entity<WoundableVisualsComponent> ent)
@@ -63,6 +65,7 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
         {
             var color = GetColor(ent, group);
             AddDamageLayerToSprite((body, spriteComp),
+                ent.Comp,
                 sprite,
                 BuildStateKey(layer, group, "100"),
                 BuildLayerKey(layer, group),
@@ -93,6 +96,7 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
 
                 var color = GetColor(ent, group);
                 AddDamageLayerToSprite((body, sprite),
+                    ent.Comp,
                     rsiPath,
                     BuildStateKey(layer, group, "100"),
                     BuildLayerKey(layer, group),
@@ -104,6 +108,7 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
             && ent.Comp.BleedingOverlay is {} overlay)
         {
             AddDamageLayerToSprite((body, sprite),
+                ent.Comp,
                 overlay,
                 BuildStateKey(layer, MinorSuffix),
                 BuildLayerKey(layer, BleedingSuffix));
@@ -115,6 +120,9 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnWoundableRemoved(Entity<WoundableVisualsComponent> ent, ref OrganGotRemovedEvent args)
     {
+        if (TerminatingOrDeleted(args.Target))
+            return;
+
         RemoveWoundableLayers(args.Target.Owner, ent);
     }
 
@@ -154,7 +162,7 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
             if (!_sprite.LayerMapTryGet(ent, layerKey, out var layer, false))
                 continue;
 
-            _sprite.LayerSetVisible(ent, layer, false);
+            _displacement.EnsureDisplacementIsNotOnSprite((ent, ent.Comp), layerKey);
             _sprite.RemoveLayer(ent, layer);
             _sprite.LayerMapRemove(ent, layerKey);
         }
@@ -163,12 +171,13 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
         if (!_sprite.LayerMapTryGet(ent, bleedingKey, out var bleedLayer, false))
             return;
 
-        _sprite.LayerSetVisible(ent, bleedLayer, false);
+        _displacement.EnsureDisplacementIsNotOnSprite((ent, ent.Comp), bleedingKey);
         _sprite.RemoveLayer(ent, bleedLayer, out _, false);
         _sprite.LayerMapRemove(ent, bleedingKey, out _);
     }
 
     private void AddDamageLayerToSprite(Entity<SpriteComponent?> ent,
+        WoundableVisualsComponent visuals,
         string sprite,
         string state,
         string mapKey,
@@ -186,6 +195,12 @@ public sealed partial class WoundableVisualsSystem : EntitySystem
         if (color != null)
             _sprite.LayerSetColor(ent, newLayer, color.Value);
         _sprite.LayerSetVisible(ent, newLayer, false);
+
+        var ent2 = (ent, ent.Comp);
+        if (visuals.Displacement is { } dispId)
+            _displacement.TryAddDisplacement(ProtoMan.Index(dispId).Displacement, ent2, newLayer, mapKey, out _);
+        else
+            _displacement.EnsureDisplacementIsNotOnSprite(ent2, mapKey);
     }
     #endregion
 

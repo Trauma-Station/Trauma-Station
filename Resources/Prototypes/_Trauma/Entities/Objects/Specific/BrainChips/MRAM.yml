@@ -227,8 +227,6 @@
     skills:
       LiteracyKnowledge: 100
       LanguageTauCetiBasic: 100
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 28
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
       BotsKnowledge: 50
@@ -249,8 +247,6 @@
     skills:
       LiteracyKnowledge: 100
       LanguageTauCetiBasic: 100
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 28
       KnowledgeWeaponsBludgeon: 28 # Telebatong
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
@@ -286,6 +282,8 @@
   id: SkillChipChef
   name: MRAM-Chip (Memories of a Chef)
   components:
+  - type: OrganChip
+    canRemove: false # too chuddy
   - type: KnowledgeGrantOnWear
     skills:
       MartialArtCQCChef: 1

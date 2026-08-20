@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: accent
-  id: slaughterDemon
+  id: SlaughterDemon
   wordReplacements:
     accent-demonic-words-1: accent-demonic-words-replace-1
     accent-demonic-words-2: accent-demonic-words-replace-2
