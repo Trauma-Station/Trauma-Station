@@ -37,6 +37,8 @@
   - Visitor
   #- ServiceWorker # Trauma - moved to Service
   - TramDriver
+  # Trauma: DClass
+  - DClass
 
 - type: department
   id: CentralCommand
