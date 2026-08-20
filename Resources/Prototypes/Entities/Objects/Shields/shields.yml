@@ -75,7 +75,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 75 #This is probably enough damage before it breaks # Trauma - was 125
+        damage: 75 # Trauma - was 125
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
