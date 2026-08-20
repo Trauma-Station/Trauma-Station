@@ -94,12 +94,12 @@
   name: passenger
   components:
   - type: SpawnPoint
-    job_id: Passenger
     # <Trauma>
     # For the purpose of any jobs that are sharing use of the passenger spawn.
-    extra_jobs:
-      - DClass
+    extrajobs:
+    - DClass
     # </Trauma>
+    job_id: Passenger
   - type: Sprite
     layers:
       - state: green
