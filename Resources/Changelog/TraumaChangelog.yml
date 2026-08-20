@@ -13480,3 +13480,12 @@ Entries:
   id: 1469
   time: '2026-08-20T19:53:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4177
+- author: sr483
+  changes:
+  - type: Remove
+    message: Removed syndi defib wideswing
+  - type: Tweak
+    message: Reduced syndi defib shock damage and added heat damage
+  id: 1470
+  time: '2026-08-20T19:58:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4174
