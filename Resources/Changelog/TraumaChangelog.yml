@@ -13442,3 +13442,10 @@ Entries:
   id: 1465
   time: '2026-08-20T05:21:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4168
+- author: FabledTile
+  changes:
+  - type: Fix
+    message: Rat King's minions can now target Bioweapons properly.
+  id: 1466
+  time: '2026-08-20T16:09:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4176
