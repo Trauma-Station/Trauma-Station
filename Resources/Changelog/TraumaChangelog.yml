@@ -13449,3 +13449,12 @@ Entries:
   id: 1466
   time: '2026-08-20T16:09:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4176
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed shields being twice as effective.
+  - type: Tweak
+    message: Shield hp 125 -> 75.
+  id: 1467
+  time: '2026-08-20T17:14:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4153
