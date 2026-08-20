@@ -1,6 +1,28 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
+  id: Cluoxadone
+  name: reagent-name-cluoxadone
+  group: Medicine
+  desc: reagent-desc-cluoxadone
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#a472ce"
+  worksOnTheDead: true
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:AdjustTemperature
+        amount: 80000
+      - !type:HealthChange
+        conditions:
+        - !type:TemperatureCondition
+          max: 273.15
+        damage:
+          types:
+            Poison: -4.5
+
+- type: reagent
   id: Dewormer
   name: reagent-name-dewormer
   group: Medicine
