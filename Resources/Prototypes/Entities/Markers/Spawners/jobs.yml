@@ -95,6 +95,11 @@
   components:
   - type: SpawnPoint
     job_id: Passenger
+    # <Trauma>
+    # For the purpose of any jobs that are sharing use of the passenger spawn.
+    Extra_Jobs:
+      - DClass
+    # </Trauma>
   - type: Sprite
     layers:
       - state: green

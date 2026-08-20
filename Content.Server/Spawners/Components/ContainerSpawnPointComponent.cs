@@ -25,6 +25,13 @@ public sealed partial class ContainerSpawnPointComponent : Component, ISpawnPoin
     public ProtoId<JobPrototype>? Job;
 
     /// <summary>
+    /// Trauma Change
+    /// Allows other jobs to hijack another's spawner through the ExtraJob list on a SpawnPoint entity
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public List<ProtoId<JobPrototype>> ExtraJobs = new();
+
+    /// <summary>
     /// The type of spawn point
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
