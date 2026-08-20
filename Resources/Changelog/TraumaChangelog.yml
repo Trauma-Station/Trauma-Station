@@ -13351,3 +13351,31 @@ Entries:
   id: 1456
   time: '2026-08-18T04:44:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4134
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slop clarke crate from salv points vendor.
+  id: 1457
+  time: '2026-08-18T19:58:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4147
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Demonic Soul Fragments resprited.
+  id: 1458
+  time: '2026-08-18T20:17:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4146
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Shadowling screech no longer affects the deaf, they can't hear you.
+  id: 1459
+  time: '2026-08-18T21:08:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4139
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Bodies with souls can now be biomassed.
+  id: 1460
+  time: '2026-08-18T21:20:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4149

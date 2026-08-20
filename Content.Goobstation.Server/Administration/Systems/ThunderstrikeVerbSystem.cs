@@ -12,16 +12,18 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Administration.Systems;
 
-public sealed partial class GoobAdminVerbSystem
+public sealed partial class ThunderstrikeVerbSystem : EntitySystem
 {
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private ThunderstrikeSystem _thunder = default!;
 
+    [SubscribeLocalEvent]
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
     {
         if (!SmitesAllowed(args))
             return;
 
+        // TODO: replace slop shitcode with entity effects admin smites
         var thunderstrike = Loc.GetString("admin-smite-thunderstrike-name").ToLowerInvariant();
         Verb thunder = new()
         {

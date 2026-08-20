@@ -175,7 +175,6 @@
     guides:
     - IPC
   - type: Silicon
-    entityType: Player
     batteryPowered: true
     drainPerSecond: 1.5
     chargeThresholdMid: 0.80

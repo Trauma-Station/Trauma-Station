@@ -12,14 +12,12 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Server.Changeling.GameTicking.Rules;
 
 public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponent>
 {
-    [Dependency] private CommonSiliconSystem _silicon = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private SharedRoleSystem _role = default!;
@@ -49,11 +47,9 @@ public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRule
     {
         MakeChangeling(args.EntityUid, comp);
     }
+
     public bool MakeChangeling(EntityUid target, ChangelingRuleComponent rule)
     {
-        if (_silicon.IsSilicon(target))
-            return false;
-
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
             return false;
 
