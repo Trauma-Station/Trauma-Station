@@ -23,7 +23,6 @@
   name: "Blob Node"
   cost: 50
   entity: NodeBlobTile
-  blockNearNodes: false # no nodemaxxing
 
 - type: blobTile
   id: Reflective
@@ -31,18 +30,21 @@
   cost: 15
   entity: ReflectiveBlobTile
   canChangeChem: false
+  allowNearby: true
 
 - type: blobTile
   id: Strong
   name: "Strong Blob"
   cost: 15
   entity: StrongBlobTile
+  allowNearby: true
 
 - type: blobTile
   id: Normal
   name: "Blob Tile"
   cost: 6
   entity: NormalBlobTile
+  allowNearby: true
 
 # TODO
 #- type: blobTile
