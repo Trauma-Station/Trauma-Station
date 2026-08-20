@@ -261,11 +261,22 @@ public sealed partial class SmokeSystem : EntitySystem
         if (!Resolve(smokeUid, ref component))
             return;
 
-        if (!TryComp<BloodstreamComponent>(entity, out var bloodstream) || bloodstream.SmokeImmune) // Goobstation - ignore SmokeImmune entities
+        if (!TryComp<BloodstreamComponent>(entity, out var bloodstream)
+        // <Trauma>
+            || bloodstream.SmokeImmune)
+        {
+            TouchReact(entity, solution, component);
             return;
+        }
+        // </Trauma>
 
         if (!_solutionContainerSystem.ResolveSolution(entity, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) || bloodSolution.AvailableVolume <= 0)
+        // <Trauma>
+        {
+            TouchReact(entity, solution, component);
             return;
+        }
+        // </Trauma>
 
         var blockIngestion = _internals.AreInternalsWorking(entity);
 

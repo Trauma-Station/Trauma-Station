@@ -237,7 +237,7 @@ public sealed partial class DamageableSystem
             var ev = new DamageDealtEvent(damage, origin, interruptsDoAfters, ignoreBlockers, damage);
             RaiseLocalEvent(ent, ref ev);
 
-            return damage;
+            return ev.ModifiedDamage;
         }
         // </Goob>
 
@@ -530,7 +530,6 @@ public sealed partial class DamageableSystem
         {
             ent.Comp.Damage.DamageDict[type] = newValue;
         }
-        ent.Comp.LastModifiedTime = _timing.CurTime; // Shitmed
 
         // Setting damage does not count as 'dealing' damage, even if it is set to a larger value, so we pass an
         // empty damage delta.

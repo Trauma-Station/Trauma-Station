@@ -46,10 +46,6 @@
   roles:
   # <Trauma>
   - NanotrasenRepresentative
-  - NavyOfficer
-  - NavyCaptain
-  - NavyOfficerUndercover
-  - Diplomat
   - GovernmentMan
   # </Trauma>
   - CentralCommandOfficial

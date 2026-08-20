@@ -14,6 +14,9 @@
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
 
+- type: Tag
+  id: AnyGlassShard # Heretic rituals whitelist
+
 # Area whitelist tags for ambient music
 - type: Tag
   id: AreaBeach
@@ -169,6 +172,9 @@
 ## G ##
 
 - type: Tag
+  id: GrenadeIgnoreCosmicField # Heretic: cosmic fields will not defuse this grenade
+
+- type: Tag
   id: Gunpowder # Storage whitelist: GunpowderBottle
 
 - type: Tag
@@ -193,15 +199,15 @@
   id: MagazineTurret # Ammo whitelist: WeaponTurretRevolutionarySMG
 
 - type: Tag
+  id: MansusGraspAction # Heretic: whitelist for ritual rune to recharge mansus grasp when standing on it
+
+- type: Tag
   id: LizardTail
 
 - type: Tag
   id: MetalContainer # Construction: MagazineGaussgunImprov
 
 ## M ##
-
-- type: Tag
-  id: MimeMask # Heretic: RitualEnvyKnife
 
 - type: Tag
   id: MimicToolbox # Emote: Tweak
@@ -245,13 +251,16 @@
   id: Peanut
 
 - type: Tag
+  id: Rag # Heretic: ritual ingredients
+
+- type: Tag
+  id: Raptor
+
+- type: Tag
   id: RCD # Construction: RevPrinter, not given to RPD so RCDComponent cant be used
 
 - type: Tag
   id: RechargingBoard # Construction: WeaponGaussgunImprov, WeaponGaussgunPistol
-
-- type: Tag
-  id: Raptor
 
 - type: Tag
   id: RevArmorPlate # Construction: ClothingShoesBootsRevSteel, ClothingOuterVestWebRev, Killdozer, T45Armor

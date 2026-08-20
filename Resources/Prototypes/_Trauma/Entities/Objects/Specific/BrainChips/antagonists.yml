@@ -13,6 +13,7 @@
       # Nukies are well-trained
       MeleeKnowledge: 50
       ShootingKnowledge: 50
+      KnowledgeWeaponsShield: 50
       KnowledgeWeaponsBludgeon: 50
       KnowledgeWeaponsShortBlade: 50
       KnowledgeWeaponsLongBlade: 50
@@ -24,9 +25,6 @@
       KnowledgeWeaponsEnergy: 50
       KnowledgeWeaponsSMG: 50
       KnowledgeWeaponsLaser: 20 # better than tiders
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 50
-      AthleticsKnowledge: 50
       WeaponsKnowledge: 50
       ThrowingKnowledge: 25
       FirstAidKnowledge: 25
@@ -56,9 +54,6 @@
       # still trained with guns but not much else
       MeleeKnowledge: 28
       ShootingKnowledge: 28
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 28
-      AthleticsKnowledge: 28
       MartialArtCQC: 28
 
 - type: entity
@@ -74,9 +69,6 @@
       ShootingKnowledge: 15
       KnowledgeWeaponsShortBlade: 10
       KnowledgeWeaponsPistol: 10
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 15
-      AthleticsKnowledge: 15
 
 - type: entity
   parent: BaseSkillChipAPTR
@@ -93,9 +85,6 @@
       KnowledgeWeaponsLongBlade: 80 # yarr
       KnowledgeWeaponsPistol: 50
       KnowledgeWeaponsRifle: 50
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 35
-      AthleticsKnowledge: 35
       FirstAidKnowledge: 15
 
 - type: entity
@@ -113,9 +102,6 @@
       KnowledgeWeaponsLongBlade: 40 # yarr
       KnowledgeWeaponsPistol: 25
       KnowledgeWeaponsRifle: 25
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 25
-      AthleticsKnowledge: 25
       FirstAidKnowledge: 5
 
 - type: entity
@@ -131,9 +117,6 @@
       ShootingKnowledge: 20
       KnowledgeWeaponsShortBlade: 10
       KnowledgeWeaponsPistol: 10
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 20
-      AthleticsKnowledge: 20
 
 - type: entity
   parent: BaseSkillChipAPTR
@@ -149,6 +132,3 @@
       KnowledgeWeaponsBludgeon: 10
       KnowledgeWeaponsShortBlade: 10
       KnowledgeWeaponsRifle: 30
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 25
-      AthleticsKnowledge: 25

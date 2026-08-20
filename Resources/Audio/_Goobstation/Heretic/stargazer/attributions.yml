@@ -1,4 +1,4 @@
 - files: ["beam_loop_one.ogg, beam_loop_two.ogg, beam_open.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/pull/92119/files"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/mobs/non-humanoids/stargazer"

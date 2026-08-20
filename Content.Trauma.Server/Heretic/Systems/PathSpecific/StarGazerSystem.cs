@@ -6,6 +6,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
+using Content.Trauma.Server.Wizard.Systems;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
@@ -21,6 +22,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
     [Dependency] private GhostRoleSystem _ghostRole = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private FadingTimedDespawnSystem _fadeDespawn = default!;
 
     [Dependency] private EntityQuery<GhostRoleComponent> _ghostRoleQuery = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
@@ -86,9 +88,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
 
     private void KillStarGazer(EntityUid starGazer)
     {
-        var fading = EnsureComp<FadingTimedDespawnComponent>(starGazer);
-        fading.FadeOutTime = 5f;
-        fading.Lifetime = 0f;
+        _fadeDespawn.FadeDespawnEntity(starGazer, TimeSpan.Zero, TimeSpan.FromSeconds(5));
     }
 
     private void OnTakeGhostRole(Entity<StarGazerComponent> ent, ref TakeGhostRoleEvent args)

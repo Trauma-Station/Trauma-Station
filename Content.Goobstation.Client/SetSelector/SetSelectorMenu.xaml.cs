@@ -28,7 +28,7 @@ public sealed partial class SetSelectorMenu : FancyWindow
 
     public void UpdateState(SetSelectorBoundUserInterfaceState state)
     {
-        SetsGrid.DisposeAllChildren();
+        SetsGrid.RemoveAllChildren();
         var selectedNumber = 0;
         foreach (var (set, info) in state.Sets)
         {

@@ -1,12 +1,13 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Electrocution;
 
 /// <summary>
 ///     Component for things that shock users on touch.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class ElectrifiedComponent : Component
 {
     /// <summary>
@@ -118,6 +119,17 @@ public sealed partial class ElectrifiedComponent : Component
     public float ShockTime = 5f;
 
     /// <summary>
+    /// Delay between consecutive shocks
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan? ShockDelay = TimeSpan.FromSeconds(0.3); // Trauma - default value
+
+    /// <summary>
+    /// When the entity will be able to shock again
+    /// </summary>
+    [DataField(customTypeSerializer:typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? NextShock;
+
     /// Base conductivity, is combined coefficient of electrocution targets to check if electrocution attempts works.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -164,33 +176,4 @@ public sealed partial class ElectrifiedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsWireCut = false;
-
-    #region Goobstation
-    /// <summary>
-    /// Goobstation
-    /// Whether this will ignore target insulation
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool IgnoreInsulation;
-
-    /// <summary>
-    /// Goobstation
-    /// Don't shock this entity
-    /// </summary>
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public EntityUid? IgnoredEntity;
-
-    /// <summary>
-    /// Cooldown between shocks
-    /// </summary>
-    [DataField]
-    public TimeSpan ShockCooldown { get; set; } = TimeSpan.FromSeconds(0.3f);
-
-    /// <summary>
-    /// Last time this entity was shocked
-    /// </summary>
-    [DataField]
-    public TimeSpan LastShockTime { get; set; } = TimeSpan.Zero;
-
-    #endregion
 }

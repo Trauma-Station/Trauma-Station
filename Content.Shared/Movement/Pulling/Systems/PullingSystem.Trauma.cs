@@ -21,7 +21,6 @@ using Content.Shared.Speech;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Common.Contests;
 using Content.Trauma.Common.Grab;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
@@ -40,7 +39,6 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// </summary>
 public sealed partial class PullingSystem
 {
-    [Dependency] private CommonContestsSystem _contests = default!;
     [Dependency] private CommonGrabThrownSystem _grabThrown = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
@@ -311,8 +309,7 @@ public sealed partial class PullingSystem
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        var massModifier = _contests.MassContest(puller, pullable);
-        pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] / massModifier * escapeAttemptModifier, 0f, 1f);
+        pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] * escapeAttemptModifier, 0f, 1f);
 
         _alertsSystem.ShowAlert(puller.Owner, puller.Comp.PullingAlert, puller.Comp.PullingAlertSeverity[stage]);
         _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);

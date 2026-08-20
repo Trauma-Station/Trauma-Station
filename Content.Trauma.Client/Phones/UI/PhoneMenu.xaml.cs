@@ -92,7 +92,7 @@ public sealed partial class PhoneMenu : FancyWindow
     {
         foreach (var container in _categoryContainers.Values)
         {
-            container.DisposeAllChildren();
+            container.RemoveAllChildren();
         }
     }
 

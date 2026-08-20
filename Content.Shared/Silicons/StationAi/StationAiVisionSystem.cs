@@ -144,8 +144,8 @@ public sealed partial class StationAiVisionSystem : EntitySystem
 
     private bool IsOccluded(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile)
     {
-        // <Trauma> - try catch this
-        try
+        // <Trauma> - lock occluders because some shit is calling this in multiple threads
+        lock (_occluders)
         {
         var tileBounds = _lookup.GetLocalBounds(tile, grid.Comp2.TileSize).Enlarged(-0.05f);
         _occluders.Clear();
@@ -154,13 +154,6 @@ public sealed partial class StationAiVisionSystem : EntitySystem
 
         foreach (var occluder in _occluders)
         {
-            // <Trauma>
-            if (occluder.Comp == default!)
-            {
-                Log.Error($"Somehow had null occluder {ToPrettyString(occluder)} when checking AI vision for {ToPrettyString(grid)} at {tile}");
-                continue;
-            }
-            // </Trauma>
             if (!occluder.Comp.Enabled)
                 continue;
 
@@ -169,11 +162,6 @@ public sealed partial class StationAiVisionSystem : EntitySystem
         }
 
         return anyOccluders;
-        }
-        catch (Exception e)
-        {
-            Log.Error($"IsOccluded for {ToPrettyString(grid)} at {tile} had an exception: {e}");
-            return false;
         }
         // </Trauma>
     }

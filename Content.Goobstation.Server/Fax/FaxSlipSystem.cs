@@ -21,14 +21,7 @@ public sealed partial class FaxSlipSystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FaxSlipComponent, GettingFaxedSentEvent>(OnGettingFaxedSent);
-        SubscribeLocalEvent<FaxSlipComponent, ContainerGettingInsertedAttemptEvent>(OnLubedInsertAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGettingFaxedSent(Entity<FaxSlipComponent> ent, ref GettingFaxedSentEvent args)
     {
         var chance = HasComp<LubedComponent>(ent) && ent.Comp.LubedChance != null ? ent.Comp.LubedChance.Value : ent.Comp.SlipChance;
@@ -36,48 +29,49 @@ public sealed partial class FaxSlipSystem : EntitySystem
 
         // FaxSystem wasn't really intended to do this so this copypastes logic from Send()
         // justifiable since other listeners to GettingFaxedSentEvent() might want to do different logic
-        if (shouldSlip)
+        if (!shouldSlip)
+            return;
+
+        // stop normal faxing behaviors
+        args.Handled = true;
+
+        // FaxSystem should probably be changed to handle this by itself
+        if (args.Fax.Comp.SendTimeoutRemaining > 0)
+            return;
+
+        var sendEntity = args.Fax.Comp.PaperSlot.Item;
+        if (sendEntity == null)
+            return;
+
+        if (args.Fax.Comp.DestinationFaxAddress == null)
+            return;
+
+        if (!args.Fax.Comp.KnownFaxes.TryGetValue(args.Fax.Comp.DestinationFaxAddress, out var faxName))
+            return;
+
+        var payload = new NetworkPayload()
         {
-            // stop normal faxing behaviors
-            args.Handled = true;
+            { DeviceNetworkConstants.Command, FaxConstants.FaxSendEntityCommand },
+            { FaxConstants.FaxEntitySentData, args.Fax.Comp.PaperSlot.Item },
+            { FaxConstants.FaxWorkCrossGridData, ent.Comp.CrossGrid }
+        };
 
-            // FaxSystem should probably be changed to handle this by itself
-            if (args.Fax.Comp.SendTimeoutRemaining > 0)
-                return;
+        _deviceNetwork.QueuePacket(args.Fax, args.Fax.Comp.DestinationFaxAddress, payload);
 
-            var sendEntity = args.Fax.Comp.PaperSlot.Item;
-            if (sendEntity == null)
-                return;
+        var actor = args.Actor;
+        if (actor.IsValid())
+            _adminLogger.Add(LogType.Action,
+                LogImpact.Low,
+                $"{ToPrettyString(actor):actor} " +
+                $"sent entity {ToPrettyString(sendEntity)} from \"{args.Fax.Comp.FaxName}\" {ToPrettyString(args.Fax):tool} " +
+                $"to \"{faxName}\" ({args.Fax.Comp.DestinationFaxAddress}) ");
 
-            if (args.Fax.Comp.DestinationFaxAddress == null)
-                return;
+        args.Fax.Comp.SendTimeoutRemaining += args.Fax.Comp.SendTimeout;
 
-            if (!args.Fax.Comp.KnownFaxes.TryGetValue(args.Fax.Comp.DestinationFaxAddress, out var faxName))
-                return;
-
-            var payload = new NetworkPayload()
-            {
-                { DeviceNetworkConstants.Command, FaxConstants.FaxSendEntityCommand },
-                { FaxConstants.FaxEntitySentData, args.Fax.Comp.PaperSlot.Item },
-                { FaxConstants.FaxWorkCrossGridData, ent.Comp.CrossGrid }
-            };
-
-            _deviceNetwork.QueuePacket(args.Fax, args.Fax.Comp.DestinationFaxAddress, payload);
-
-            var actor = args.Actor;
-            if (actor.IsValid())
-                _adminLogger.Add(LogType.Action,
-                    LogImpact.Low,
-                    $"{ToPrettyString(actor):actor} " +
-                    $"sent entity {ToPrettyString(sendEntity)} from \"{args.Fax.Comp.FaxName}\" {ToPrettyString(args.Fax):tool} " +
-                    $"to \"{faxName}\" ({args.Fax.Comp.DestinationFaxAddress}) ");
-
-            args.Fax.Comp.SendTimeoutRemaining += args.Fax.Comp.SendTimeout;
-
-            _audio.PlayPvs(args.Fax.Comp.SendSound, args.Fax);
-        }
+        _audio.PlayPvs(args.Fax.Comp.SendSound, args.Fax);
     }
 
+    [SubscribeLocalEvent]
     private void OnLubedInsertAttempt(Entity<FaxSlipComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
     {
         if (!HasComp<LubedComponent>(ent))

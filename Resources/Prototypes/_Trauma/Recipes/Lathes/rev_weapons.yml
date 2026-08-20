@@ -51,6 +51,7 @@
   parent: BaseRevWeapon # it is upgraded its just cheap
   id: RevKunai
   result: RevKunaiHead
+  completetime: 5
 
 - type: latheRecipe
   parent: BaseRevWeapon
