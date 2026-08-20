@@ -14,6 +14,12 @@ public sealed partial class SpawnPointComponent : Component, ISpawnPoint
     public ProtoId<JobPrototype>? Job;
 
     /// <summary>
+    /// List of alternative jobs this spawner can spawn
+    /// </summary>
+    [DataField("Extra_Job")]
+    public List<ProtoId<JobPrototype>> ExtraJobs = new();
+
+    /// <summary>
     /// The type of spawn point.
     /// </summary>
     [DataField("spawn_type"), ViewVariables(VVAccess.ReadWrite)]
