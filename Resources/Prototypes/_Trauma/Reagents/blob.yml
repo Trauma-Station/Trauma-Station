@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reagent
+  id: CryogenicPoison
+  name: reagent-name-cryogenic-poison
+  desc: reagent-desc-cryogenic-poison
+  group: Toxins
+  flavor: BrainFreeze
+  color: "#8BA6E9"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:AdjustTemperature
+        amount: -5000
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: 0.5
+            Cold: 0.5
+            Poison: 0.5

@@ -103,6 +103,21 @@ public sealed partial class BlobTileSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<BlobTileComponent> ent, ref DamageDealtEvent args)
+    {
+        if (args.Origin is not { } origin ||
+            ent.Comp.Core is not { } core ||
+            !_coreQuery.TryComp(core, out var coreComp))
+            return;
+
+        var chem = ProtoMan.Index(coreComp.CurrentChem);
+        if (chem.DamagedEffects is not { } effects)
+            return;
+
+        _effects.ApplyEffects(ent, effects, user: origin);
+    }
+
+    [SubscribeLocalEvent]
     private void OnNodePulse(Entity<BlobTileComponent> ent, ref BlobNodePulseEvent args)
     {
         args.Handled |= NodePulse(ent, args.Core, args.Chem, args.Handled);

@@ -26,8 +26,8 @@ public sealed partial class BlobTilePrototype : IPrototype
     public bool CanChangeChem = true;
 
     /// <summary>
-    /// If false, prevents placing this tile near another tile of the same type.
+    /// If non-zero, prevents placing this tile within a range of another of the same type.
     /// </summary>
     [DataField]
-    public bool AllowNearby;
+    public float BlockRange;
 }

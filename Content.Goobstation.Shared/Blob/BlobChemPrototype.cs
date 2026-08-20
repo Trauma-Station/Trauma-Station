@@ -41,6 +41,9 @@ public sealed partial class BlobChemPrototype : IPrototype
     public EntityEffect[]? AttackEffects;
 
     [DataField]
+    public EntityEffect[]? DamagedEffects;
+
+    [DataField]
     public EntityEffect[]? DestructionEffects;
 
     [DataField]
@@ -49,6 +52,9 @@ public sealed partial class BlobChemPrototype : IPrototype
     [DataField]
     public ProtoId<DamageModifierSetPrototype> DamageModifiers = "BaseBlob";
 
+    /// <summary>
+    /// Components added to tiles and mobs while this chem is used.
+    /// </summary>
     [DataField]
-    public float ExplosionResistance = 0f;
+    public ComponentRegistry? AddedComponents;
 }
