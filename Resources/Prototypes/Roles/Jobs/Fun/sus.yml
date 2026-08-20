@@ -1,7 +1,7 @@
 - type: chameleonOutfit
   id: SusChameleonOutfit
   loadoutName: chameleon-outfit-sus-name
-  #name: job-name-passenger
+  name: job-name-passenger
   #Trauma
   name: job-name-dclass
   #/Trauma
