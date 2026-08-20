@@ -4,6 +4,7 @@ using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind.Components;
+using Content.Trauma.Common.Mind;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
@@ -17,10 +18,10 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StartedFollowingEntityEvent>(OnNewFollow);
+        SubscribeLocalEvent<FollowerComponent, StartedFollowingEntityEvent>(OnNewFollow);
     }
 
-    private void OnNewFollow(StartedFollowingEntityEvent ev)
+    private void OnNewFollow(Entity<FollowerComponent> ent, ref StartedFollowingEntityEvent ev)
     {
         if (!TryComp<MindContainerComponent>(ev.Following, out var mindContainer))
             return;
@@ -42,6 +43,7 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
             if (followed.Following.Count <= observerStats.MostPopularEntityPopularity)
                 continue;
 
+            //_roles.MindGetAllRoleInfo(mindId);
             observerStats.MostPopular = meta.EntityName;
             observerStats.MostPopularEntityPopularity = followed.Following.Count;
         }
@@ -55,6 +57,9 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
     {
         base.AppendRoundEndText(uid, component, gameRule, ref args);
 
+        Log.Debug("Most Popular");
+        Log.Debug(component.MostPopular);
+        Log.Debug(component.MostPopularEntityPopularity.ToString());
         args.AddLine("");
         args.AddLine(Loc.GetString("observer-statistic-popularity", ("name", component.MostPopular), ("count", component.MostPopularEntityPopularity)));
     }
