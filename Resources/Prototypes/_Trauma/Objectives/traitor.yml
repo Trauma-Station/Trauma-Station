@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseTraitorObjective
+  id: SkinPunPunObjective
+  name: Skin Pun Pun
+  description: He has committed crimes against humanity, skin him and show everyone what this beast deserves.
+  components:
+  - type: Objective
+    difficulty: 0.1 # so easy its slop
+    icon:
+      sprite: Mobs/Animals/monkey.rsi
+      state: full
+  - type: TargetObjective
+  - type: QueryTargetObjective
+    comp: PunPun
+  - type: SkinObjective
