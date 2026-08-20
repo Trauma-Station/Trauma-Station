@@ -27,6 +27,7 @@
 - type: startingGear
   id: DClassGear
   equipment:
+    #Todo- get a sprite for and make D-Class PDA, prisoner themed
     id: PassengerPDA
     ears: ClothingHeadsetGrey
     #storage:
