@@ -22,19 +22,21 @@
     scaling: false
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
         Blunt: 5
   - !type:ModifyStatusEffect
     effectProto: PushKickVulnerabilityStatusEffect
     type: Update
-    time: 8
+    time: 6
+  - !type:StopPull
   - !type:GrabThrow
     speed: 7
     dropItems: false
     knockdown: false
-  - !type:StopPull
   levelRequired: 10
 
 - type: combo
@@ -59,8 +61,10 @@
     scaling: false
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
         Blunt: 15
   - !type:ModifyStatusEffect
@@ -93,8 +97,10 @@
     scaling: false
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
         Blunt: 10
   - !type:ModifyKnockdown
@@ -135,8 +141,10 @@
     - !type:AnimationFlipEmoteEvent
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
         Blunt: 25
   - !type:ModifyKnockdown
