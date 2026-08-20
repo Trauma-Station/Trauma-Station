@@ -99,6 +99,6 @@ spellbook-hammer-singularity-description =
 
 spellbook-crate-of-enchanting-name = Crate of Enchanting
 spellbook-crate-of-enchanting-description =
-    A crate of stolen anomaly cores, summoned by arcane power.
+    A crate of stolen anomaly cores, an enchanting rune, and a scroll of mind summoned by arcane power.
     Used for enchanting your gear to be even more powerful!
     The selection is random and may be effectively useless. No refunds!

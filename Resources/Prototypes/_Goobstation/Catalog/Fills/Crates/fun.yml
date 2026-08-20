@@ -69,7 +69,7 @@
 - type: entity
   id: CrateWizardAnomCore
   name: Crate of Enchanting
-  description: A box containing stolen anomaly cores, used for enchanting.
+  description: A box containing stolen anomaly cores, an enchanting rune and a scroll of sentience! # Trauma
   parent: CratePirate
   components:
   #ONLY contains anomalies with enchantcomp.
@@ -77,6 +77,12 @@
     containers:
       entity_storage: !type:AllSelector
         children:
+        # <Trauma>
+        - id: EnchantingRune
+        - id: BloodVialFull
+        - id: MagicInkUnden
+        - id: EnchantingScrollEmpty
+        # <Trauma>
         - !type:NestedSelector
           tableId: RandomAnomalyCoreEnchantTable
         - !type:NestedSelector
