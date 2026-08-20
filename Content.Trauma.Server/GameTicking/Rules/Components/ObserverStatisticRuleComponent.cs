@@ -14,6 +14,13 @@ public sealed partial class ObserverStatisticRuleComponent : Component
     [DataField]
     public EntityUid? MostPopularEntity;
 
+
+    /// <summary>
+    /// Entity with most unique observers
+    /// </summary>
+    [DataField]
+    public string MostPopular = "noone";
+
     /// <summary>
     /// Number of unique followers for <see cref="MostPopularEntity"/>
     /// </summary>

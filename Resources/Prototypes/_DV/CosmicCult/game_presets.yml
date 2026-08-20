@@ -8,6 +8,9 @@
   description: cosmiccult-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler

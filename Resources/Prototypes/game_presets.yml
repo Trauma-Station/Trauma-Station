@@ -6,6 +6,9 @@
   showInVote: false # secret
   description: survival-description
   rules:
+    # <Trauma>
+    - SpectatorStatistics
+    # </Trauma>
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     - SpaceTrafficControlEventScheduler
@@ -21,6 +24,9 @@
   showInVote: false # secret
   description: kessler-syndrome-description
   rules:
+    # <Trauma>
+    - SpectatorStatistics
+    # </Trauma>
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     - SpaceTrafficControlEventScheduler
@@ -44,6 +50,7 @@
     - CosmicCult
     - XenomorphsInfestationRoundstart
     - Spies
+    - SpectatorStatistics
     # </Trauma>
     - Nukeops
     - Traitor
@@ -80,6 +87,7 @@
     - CosmicCult
     - XenomorphsInfestationRoundstart
     - Spies
+    - SpectatorStatistics
     # </Trauma>
     - Nukeops
     - Traitor
@@ -172,6 +180,7 @@
   # <Trauma>
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+  - SpectatorStatistics
   # </Trauma>
   - DummyNonAntagChance
   - Traitor
@@ -192,6 +201,9 @@
   showInVote: true
   supportedMaps: DeathMatchMapPool
   rules:
+    # <Trauma>
+    - SpectatorStatistics
+    # </Trauma>
     - DeathMatch31
 
 - type: gamePreset
@@ -205,6 +217,7 @@
   # <Trauma>
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+  - SpectatorStatistics
   # </Trauma>
   - Nukeops
   - DummyNonAntagChance
@@ -227,6 +240,7 @@
   # <Trauma>
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+  - SpectatorStatistics
   # </Trauma>
   - DummyNonAntagChance
   - Revolutionary
@@ -247,6 +261,7 @@
   # <Trauma>
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+  - SpectatorStatistics
   # </Trauma>
   - Xenoborgs
   - DummyNonAntagChance
@@ -271,6 +286,7 @@
   # <Trauma>
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+  - SpectatorStatistics
   # </Trauma>
   - Zombie
   - BasicStationEventScheduler
@@ -291,6 +307,7 @@
   # <Trauma>
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+  - SpectatorStatistics
   # </Trauma>
   - Zombie
   - BasicStationEventScheduler

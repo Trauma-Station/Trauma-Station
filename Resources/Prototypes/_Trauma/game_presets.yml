@@ -17,6 +17,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
+  - SpectatorStatistics
   - Insurgency
 
 - type: gamePreset
@@ -35,6 +36,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRuleNoHeretic
+  - SpectatorStatistics
   - HereticRoundstart
 
 - type: gamePreset
@@ -53,6 +55,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
+  - SpectatorStatistics
   - ShadowlingGamemode
 
 - type: gamePreset
@@ -71,4 +74,5 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRuleNoSpy
+  - SpectatorStatistics
   - Spies

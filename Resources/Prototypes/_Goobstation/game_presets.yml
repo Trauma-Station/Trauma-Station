@@ -10,6 +10,9 @@
   description: changeling-gamemode-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -30,6 +33,9 @@
   description: traitorling-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -49,6 +55,9 @@
   description: nukeops-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -67,6 +76,9 @@
   description: nukeops-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -86,6 +98,9 @@
   description: revtraitor-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -104,6 +119,9 @@
   description: revling-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -121,6 +139,9 @@
   description: blob-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -138,6 +159,9 @@
   description: honkops-description
   showInVote: false
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
@@ -156,6 +180,9 @@
   showInVote: false
   minPlayers: 30
   rules:
+  # <Trauma>
+  - SpectatorStatistics
+  # </Trauma>
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler

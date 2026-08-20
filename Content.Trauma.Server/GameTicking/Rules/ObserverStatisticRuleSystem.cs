@@ -29,6 +29,10 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
         if (!mindContainer.HasMind)
             return;
 
+        TryComp(ev.Following, out MetaDataComponent? meta);
+        if (meta is not { })
+            return;
+
         if (!TryComp<FollowedComponent>(ev.Following, out var followed))
             return;
 
@@ -38,19 +42,20 @@ public sealed class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatist
             if (followed.Following.Count <= observerStats.MostPopularEntityPopularity)
                 continue;
 
-            observerStats.MostPopularEntity = ev.Following;
+            observerStats.MostPopular = meta.EntityName;
             observerStats.MostPopularEntityPopularity = followed.Following.Count;
         }
     }
 
-    protected override void AppendRoundEndText(EntityUid uid,
-        ObserverStatisticRuleComponent observerStats,
+    protected override void AppendRoundEndText(
+        EntityUid uid,
+        ObserverStatisticRuleComponent component,
         GameRuleComponent gameRule,
         ref RoundEndTextAppendEvent args)
     {
-        base.AppendRoundEndText(uid, observerStats, gameRule, ref args);
+        base.AppendRoundEndText(uid, component, gameRule, ref args);
 
-        args.AddLine(Loc.GetString("observer-statistic-popularity", ("name", "testjohn"), ("count", 3)));
-        // args.AddLine("");
+        args.AddLine("");
+        args.AddLine(Loc.GetString("observer-statistic-popularity", ("name", component.MostPopular), ("count", component.MostPopularEntityPopularity)));
     }
 }
