@@ -719,13 +719,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnUpdateMobState(Entity<ChangelingIdentityComponent> ent, ref UpdateMobStateEvent args)
-    {
-        if (ent.Comp.IsInStasis)
-            args.State = MobState.Dead;
-    }
-
-    [SubscribeLocalEvent]
     private void OnDamageDealt(Entity<ChangelingIdentityComponent> ent, ref DamageDealtEvent args)
     {
         if (ent.Comp.IsInStasis
@@ -772,8 +765,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             ent.Comp.IsInStasis = false;
             ent.Comp.StasisTime = ent.Comp.DefaultStasisTime;
-
-            _mobState.UpdateMobState(ent);
         }
         else
         {
