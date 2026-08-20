@@ -118,6 +118,7 @@
         map: ["enum.PowerDeviceVisualLayers.Powered"]
         shader: unshaded
   - type: MeleeWeapon
+    canWideSwing: false
     damage:
       types:
         Blunt: 8
@@ -134,4 +135,5 @@
     activatedDamage:
       types:
         Blunt: 8
-        Shock: 16
+        Shock: 8
+        Heat: 8
