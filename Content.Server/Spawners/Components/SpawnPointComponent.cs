@@ -10,20 +10,13 @@ public sealed partial class SpawnPointComponent : Component, ISpawnPoint
     /// The job this spawn point is valid for.
     /// Null will allow all jobs to spawn here.
     /// </summary>
-    [DataField("job_id")]
+    [DataField]
     public ProtoId<JobPrototype>? Job;
-
-    /// <summary>
-    /// Trauma Change
-    /// Allows additional jobs to sort of "hijack" another job's spawner.
-    /// </summary>
-    [DataField("extra_jobs")]
-    public List<ProtoId<JobPrototype>> ExtraJobs = new();
 
     /// <summary>
     /// The type of spawn point.
     /// </summary>
-    [DataField("spawn_type"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public SpawnPointType SpawnType { get; set; } = SpawnPointType.Unset;
 
     public override string ToString()
