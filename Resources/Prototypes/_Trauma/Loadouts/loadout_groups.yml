@@ -105,7 +105,7 @@
 #D-Class
 - type: loadoutGroup
   id: DClassJumpsuit
-  name: loadout-group-d-class-jumpsuit
+  name: D-Class Jumpsuits
   loadouts:
   - PrisonerJumpsuit
   - PrisonerJumpskirt
