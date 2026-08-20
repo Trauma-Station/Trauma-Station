@@ -356,18 +356,18 @@
   color: "#ffdf97"
   metabolisms:
     Bloodstream:
-      metabolismRate: 9 # Trauma - increased to encourage microdose patches
+      metabolismRate: 9
       effects:
       - !type:HealthChange
         damage:
           types:
-            Slash: -6 # Trauma - changed from -4 to make it actually worth making
-            Blunt: -6 # Trauma - changed from -4 to make it actually worth making
-            Piercing: -6 # Trauma - changed from -4 to make it actually worth making
-            Ballistic: -6 # Trauma - changed from -4 to make it actually worth making
+            Slash: -6
+            Blunt: -6
+            Piercing: -6
+            Ballistic: -6
       - !type:AdjustReagent
         reagent: Bozaide
-        amount: 4 # Trauma - changed for longer lasting healing effect
+        amount: 4
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -375,7 +375,7 @@
           min: 6
         damage:
           types:
-            Blunt: 30 # Trauma - changed from 15 for balance
+            Blunt: 30
       - !type:ModifyBleed
         amount: 1
         conditions:
@@ -383,7 +383,7 @@
           reagent: ProcenylLazide
           min: 6
       - !type:AdjustReagent
-        amount: -15 # Trauma - reduced to make the reagent last slightly longer
+        amount: -15
         reagent: ProcenylLazide
       - !type:AdjustReagent
         amount: -25
