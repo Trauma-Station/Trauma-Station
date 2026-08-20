@@ -511,6 +511,7 @@
   components:
   # <Trauma>
   - type: BlockShuttleRecall
+  - type: EmpImmune
   # </Trauma>
   - type: RandomMetadata
     nameSegments:
@@ -607,7 +608,6 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
-  - type: EmpImmune
 
 - type: entity
   abstract: true
