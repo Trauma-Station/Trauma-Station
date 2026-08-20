@@ -18,9 +18,9 @@
   parent: BaseMachine
   id: BaseSwitch
   canBuildInImpassable: true
-  conditions:
-  - !type:WallmountCondition
   # <Trauma>
+  #conditions:
+  #- !type:WallmountCondition
   theory:
     ElectronicsKnowledge: 0
   useQuality: false
