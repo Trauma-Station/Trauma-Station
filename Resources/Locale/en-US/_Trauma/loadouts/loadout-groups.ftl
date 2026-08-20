@@ -18,10 +18,9 @@ loadout-group-roboticist-envirosuit = Roboticist envirosuit
 loadout-group-roboticist-envirogloves = Roboticist envirogloves
 
 # DClass
-loadout-group-DClass-jumpsuit = D-Class jumpsuit
-loadout-group-DClass-mask = D-Class mask
-loadout-group-DClass-gloves = D-Class gloves
-loadout-group-DClass-outerclothing = D-Class outer clothing
-loadout-group-DClass-shoes = D-Class shoes
-loadout-group-DClass-neck = D-Class neck
-D-Class Jumpsuits = D-Class Jumpsuits
+loadout-group-dclass-jumpsuit = D-Class jumpsuit
+loadout-group-dclass-mask = Mask
+loadout-group-dclass-gloves = Gloves
+loadout-group-dclass-outerclothing = Outer clothing
+loadout-group-dclass-shoes = Shoes
+loadout-group-dclass-neck = Neck

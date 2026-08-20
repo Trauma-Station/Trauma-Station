@@ -39,17 +39,16 @@
   groups:
   - GroupTankHarness
   - DClassJumpsuit
-  - DClassBackPack
-  - DClassNeckWrap
+  - DClassBackpacks
+  - DClassNeck
   - DClassFace
-  - PassengerGloves
-  - PassengerOuterClothing
-  - PassengerShoes
+  - DClassGloves
+  - DClassOuterClothing
+  - DClassShoes
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - ExclusiveItems
-  # Todo- make D-Class prisoner envirosuit
   - AssistantEnvirohelm
   - AssistantEnvirosuit
   - AssistantEnvirogloves
+  - ExclusiveItems

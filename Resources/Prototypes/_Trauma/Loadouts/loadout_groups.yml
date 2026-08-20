@@ -106,36 +106,53 @@
 #Jumpsuits
 - type: loadoutGroup
   id: DClassJumpsuit
-  name: D-Class Jumpsuits
+  name: loadout-group-dclass-jumpsuit
   loadouts:
   - PrisonerJumpsuit
   - PrisonerJumpskirt
 
-#Mantles
-- type: loadoutGroup
-  id: DClassNeckWrap
-  name: loadout-group-passenger-neck
-  minLimit: 0
-  loadouts:
-  - Mantle
-  - OldNeckWrap
-
-#Mask
 - type: loadoutGroup
   id: DClassFace
-  name: loadout-group-passenger-mask
+  name: loadout-group-dclass-mask
   minLimit: 0
   loadouts:
-  - DClassFace
+  - DClassMask
 
-#Backpacks:
 - type: loadoutGroup
-  id: DClassBackPack
-  name: loadout-group-backpack
+  id: DClassGloves
+  name: loadout-group-dclass-gloves
   minLimit: 0
+  loadouts:
+  - PassengerGloves
+
+- type: loadoutGroup
+  id: DClassBackpacks
+  name: loadout-group-backpack
   loadouts:
   - DClassBackpack
   - DClassSatchel
   - DClassDuffel
   - DClassMessenger
   - DClassElectropack
+
+- type: loadoutGroup
+  id: DClassNeck
+  name: loadout-group-dclass-neck
+  minLimit: 0
+  loadouts:
+  - DClassMantle
+  - OldNeckWrap
+
+- type: loadoutGroup
+  id: DClassOuterClothing
+  name: loadout-group-dclass-outerclothing
+  minLimit: 0
+  loadouts:
+  - PassengerWintercoat
+
+- type: loadoutGroup
+  id: DClassShoes
+  name: loadout-group-dclass-shoes
+  loadouts:
+  - BlackShoes
+  - WinterBoots

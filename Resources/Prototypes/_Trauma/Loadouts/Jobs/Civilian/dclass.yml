@@ -10,26 +10,87 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtPrisoner
 
-# Greytide mask for DClass
+- type: loadout
+  id: DClassElectropack
+  equipment:
+    back: ClothingBackpackElectropack
+
 - type: loadoutEffectGroup
-  id: GreyTider
+  id: DClassBackpack
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: JobDClass
-      time: 10h # silly reward for people who play D-Class a lot
+      time: 20h
 
-# The mask itself
 - type: loadout
-  id: DClassFace
+  id: DClassBackpack
+  equipment:
+    back: ClothingBackpack
+
+- type: loadoutEffectGroup
+  id: DClassSatchel
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 20h
+
+- type: loadout
+  id: DClassSatchel
+  equipment:
+    back: ClothingBackpackSatchel
+
+- type: loadoutEffectGroup
+  id: DClassDuffel
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 20h
+
+- type: loadout
+  id: DClassDuffel
+  equipment:
+    back: ClothingBackpackDuffel
+
+- type: loadoutEffectGroup
+  id: DClassMessenger
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 20h
+
+- type: loadout
+  id: DClassMessenger
+  equipment:
+    back: ClothingBackpackMessenger
+
+# Greytide Time
+- type: loadoutEffectGroup
+  id: DClassTider
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 10h # silly reward for people who play passenger a lot
+
+# Face
+- type: loadout
+  id: DClassMask
   effects:
   - !type:GroupLoadoutEffect
-    proto: GreyTider
+    proto: DClassTider
   equipment:
     mask: ClothingMaskGas
 
-# Head of Greytide Mantle for DClass
+# Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup
   id: DClassMasterGrey
   effects:
@@ -37,78 +98,13 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobDClass
-      time: 20h # fun mantle for the most experienced D-Class
+      time: 20h # fun mantle for the most experienced greytiders
 
-  # Neck
-  - type: loadout
-    id: Mantle
-    equipment:
-      neck: ClothingNeckMantle
-    effects:
-    - !type:GroupLoadoutEffect
-      proto: DClassMasterGrey
-
-  # Backpack
-  - type: loadout
-    id: DClassElectropack
-    equipment:
-      back: ClothingBackpackElectropack
-
-  - type: loadoutEffectGroup
-    id: DClassBackpack
-    effects:
-    - !type:JobRequirementLoadoutEffect
-      requirement:
-        !type:RoleTimeRequirement
-        role: JobDClass
-        time: 20h # silly reward for people who play D-Class a lot
-
-    - type: loadout
-      id: DClassBackpack
-      equipment:
-        back: ClothingBackpack
-
-  #Satchel
-  - type: loadoutEffectGroup
-    id: DClassSatchel
-    effects:
-    - !type:JobRequirementLoadoutEffect
-      requirement:
-        !type:RoleTimeRequirement
-        role: JobDClass
-        time: 20h # silly reward for people who play D-Class a lot
-
-    - type: loadout
-      id: DClassSatchel
-      equipment:
-        back: ClothingBackPackSatchel
-
-  #Duffel Bag
-  - type: loadoutEffectGroup
-    id: DClassDuffel
-    effects:
-    - !type:JobRequirementLoadoutEffect
-      requirement:
-        !type:RoleTimeRequirement
-        role: JobDClass
-        time: 20h # silly reward for people who play D-Class a lot
-
-    - type: loadout
-      id: DClassDuffel
-      equipment:
-        back: ClothingBackpackDuffel
-
-  #Messenger Bag
-  - type: loadoutEffectGroup
-    id: DClassMessenger
-    effects:
-    - !type:JobRequirementLoadoutEffect
-      requirement:
-        !type:RoleTimeRequirement
-        role: JobDClass
-        time: 20h # silly reward for people who play D-Class a lot
-
-    - type: loadout
-      id: DClassMessenger
-      equipment:
-        back: ClothingBackpackMessenger
+# Neck
+- type: loadout
+  id: DClassMantle
+  equipment:
+    neck: ClothingNeckMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassMasterGrey
