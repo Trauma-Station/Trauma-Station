@@ -26,9 +26,9 @@ public sealed partial class ContainerSpawnPointComponent : Component, ISpawnPoin
 
     /// <summary>
     /// Trauma Change
-    /// I think this is needed? fuck me I'm not good enough at ts
+    /// Allows additional jobs to sort of "hijack" another job's spawner.
     /// </summary>
-    /// [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField("extra_jobs"), ViewVariables(VVAccess.ReadWrite)]
     public List<ProtoId<JobPrototype>> ExtraJobs = new();
 
     /// <summary>

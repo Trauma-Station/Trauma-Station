@@ -3,6 +3,11 @@
   name: job-name-passenger
   description: job-description-passenger
   playTimeTracker: JobPassenger
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Civilian
+    time: 8h
+    inverted: true # Out into the cold with you
   startingGear: PassengerGear
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone

@@ -46,7 +46,8 @@ public sealed partial class ContainerSpawnPointSystem : EntitySystem
             if (spawnPoint.SpawnType == SpawnPointType.Unset)
             {
                 // make sure we also check the job here for various reasons.
-                if (spawnPoint.Job == null || spawnPoint.Job == args.Job || (args.Job != null && spawnPoint.ExtraJobs.Contains(args.Job.Value)))
+                if (spawnPoint.Job == null || spawnPoint.Job == args.Job ||
+                    (args.Job != null && spawnPoint.ExtraJobs.Contains(args.Job.Value))) // Trauma Change: Allows function of the Extra Jobs in a spawner
                     possibleContainers.Add((uid, spawnPoint, container, xform));
                 continue;
             }
@@ -58,7 +59,8 @@ public sealed partial class ContainerSpawnPointSystem : EntitySystem
 
             if (_gameTicker.RunLevel != GameRunLevel.InRound &&
                 spawnPoint.SpawnType == SpawnPointType.Job &&
-                (args.Job == null || spawnPoint.Job == args.Job))
+                (args.Job == null || spawnPoint.Job == args.Job) ||
+                (args.Job != null && spawnPoint.ExtraJobs.Contains(args.Job.Value))) // Trauma Change: Allows function of the Extra Jobs in a spawner
             {
                 possibleContainers.Add((uid, spawnPoint, container, xform));
             }

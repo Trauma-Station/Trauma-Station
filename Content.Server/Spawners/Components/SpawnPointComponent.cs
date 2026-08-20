@@ -14,9 +14,10 @@ public sealed partial class SpawnPointComponent : Component, ISpawnPoint
     public ProtoId<JobPrototype>? Job;
 
     /// <summary>
-    /// List of alternative jobs this spawner can spawn
+    /// Trauma Change
+    /// Allows additional jobs to sort of "hijack" another job's spawner.
     /// </summary>
-    [DataField("Extra_Job")]
+    [DataField("extra_jobs")]
     public List<ProtoId<JobPrototype>> ExtraJobs = new();
 
     /// <summary>

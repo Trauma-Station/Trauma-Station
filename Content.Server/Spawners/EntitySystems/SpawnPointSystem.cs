@@ -39,7 +39,8 @@ public sealed partial class SpawnPointSystem : EntitySystem
 
             if (_gameTicker.RunLevel != GameRunLevel.InRound &&
                 spawnPoint.SpawnType == SpawnPointType.Job &&
-                (args.Job == null || spawnPoint.Job == null || spawnPoint.Job == args.Job))
+                (args.Job == null || spawnPoint.Job == null || spawnPoint.Job == args.Job ||
+                 ( args.Job != null && spawnPoint.ExtraJobs.Contains(args.Job.Value)))) // Trauma Change: Allows function of the Extra Jobs in a spawner
             {
                 possiblePositions.Add(xform.Coordinates);
             }
