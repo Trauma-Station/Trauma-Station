@@ -142,7 +142,7 @@
     resistance: 3
   - type: Occluder
   - type: Damageable
-    damageModifierSet: Metallic
+    damageModifierSet: Metallic # Trauma - Was StrongMetallic, too tanky
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: RCDDeconstructable
