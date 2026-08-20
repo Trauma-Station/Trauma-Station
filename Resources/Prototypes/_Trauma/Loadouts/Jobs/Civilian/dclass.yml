@@ -10,4 +10,105 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtPrisoner
 
-#Todo- set up mantle to rely on D-Class time
+# Greytide mask for DClass
+- type: loadoutEffectGroup
+  id: GreyTider
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 10h # silly reward for people who play D-Class a lot
+
+# The mask itself
+- type: loadout
+  id: DClassFace
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GreyTider
+  equipment:
+    mask: ClothingMaskGas
+
+# Head of Greytide Mantle for DClass
+- type: loadoutEffectGroup
+  id: DClassMasterGrey
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 20h # fun mantle for the most experienced D-Class
+
+  # Neck
+  - type: loadout
+    id: Mantle
+    equipment:
+      neck: ClothingNeckMantle
+    effects:
+    - !type:GroupLoadoutEffect
+      proto: DClassMasterGrey
+
+  # Backpack
+  - type: loadout
+    id: DClassElectropack
+    equipment:
+      back: ClothingBackpackElectropack
+
+  - type: loadoutEffectGroup
+    id: DClassBackpack
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobDClass
+        time: 20h # silly reward for people who play D-Class a lot
+
+    - type: loadout
+      id: DClassBackpack
+      equipment:
+        back: ClothingBackpack
+
+  #Satchel
+  - type: loadoutEffectGroup
+    id: DClassSatchel
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobDClass
+        time: 20h # silly reward for people who play D-Class a lot
+
+    - type: loadout
+      id: DClassSatchel
+      equipment:
+        back: ClothingBackPackSatchel
+
+  #Duffel Bag
+  - type: loadoutEffectGroup
+    id: DClassDuffel
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobDClass
+        time: 20h # silly reward for people who play D-Class a lot
+
+    - type: loadout
+      id: DClassDuffel
+      equipment:
+        back: ClothingBackpackDuffel
+
+  #Messenger Bag
+  - type: loadoutEffectGroup
+    id: DClassMessenger
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobDClass
+        time: 20h # silly reward for people who play D-Class a lot
+
+    - type: loadout
+      id: DClassMessenger
+      equipment:
+        back: ClothingBackpackMessenger

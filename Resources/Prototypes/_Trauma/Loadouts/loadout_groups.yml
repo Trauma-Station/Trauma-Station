@@ -103,9 +103,39 @@
 
 
 #D-Class
+#Jumpsuits
 - type: loadoutGroup
   id: DClassJumpsuit
   name: D-Class Jumpsuits
   loadouts:
   - PrisonerJumpsuit
   - PrisonerJumpskirt
+
+#Mantles
+- type: loadoutGroup
+  id: DClassNeckWrap
+  name: loadout-group-passenger-neck
+  minLimit: 0
+  loadouts:
+  - Mantle
+  - OldNeckWrap
+
+#Mask
+- type: loadoutGroup
+  id: DClassFace
+  name: loadout-group-passenger-mask
+  minLimit: 0
+  loadouts:
+  - DClassFace
+
+#Backpacks:
+- type: loadoutGroup
+  id: DClassBackPack
+  name: loadout-group-backpack
+  minLimit: 0
+  loadouts:
+  - DClassBackpack
+  - DClassSatchel
+  - DClassDuffel
+  - DClassMessenger
+  - DClassElectropack

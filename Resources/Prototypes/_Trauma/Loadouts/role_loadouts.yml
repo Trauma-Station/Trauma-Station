@@ -39,9 +39,9 @@
   groups:
   - GroupTankHarness
   - DClassJumpsuit
-  - CommonBackpack
-  - PassengerNeck
-  - PassengerFace
+  - DClassBackPack
+  - DClassNeckWrap
+  - DClassFace
   - PassengerGloves
   - PassengerOuterClothing
   - PassengerShoes
