@@ -21,11 +21,14 @@
     heldPrefix: unlit
 
 - type: entity
-  id: CigarSpent
+  id: FunnyCigarSpent
   parent: Cigar
+  name: spent funny cigar
+  description: "was a custom made cigar for fashionable clowns"
   suffix: spent
   components:
   - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigars/Cigar-funny.rsi
     state: burnt-icon
   - type: Smokable
     state: Burnt
