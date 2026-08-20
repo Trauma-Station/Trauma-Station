@@ -13496,3 +13496,10 @@ Entries:
   id: 1471
   time: '2026-08-20T20:02:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4172
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Heirophant club no longer lets you teleport outside of lavaland.
+  id: 1472
+  time: '2026-08-20T22:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4191
