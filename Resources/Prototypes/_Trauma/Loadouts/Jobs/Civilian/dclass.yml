@@ -64,7 +64,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobDClass
-      time: 10h # silly reward for people who play passenger a lot
+      time: 10h
 
 # Face
 - type: loadout
@@ -83,7 +83,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobDClass
-      time: 20h # fun mantle for the most experienced greytiders
+      time: 20h
 
 # Neck
 - type: loadout
