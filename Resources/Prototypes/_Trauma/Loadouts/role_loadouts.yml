@@ -33,3 +33,23 @@
   - BotanistEnvirosuit
   - BotanistEnvirogloves
   - ExclusiveItems
+
+- type: roleLoadout
+  id: JobDClass
+  groups:
+  - GroupTankHarness
+  - DClassJumpsuit
+  - CommonBackpack
+  - DClassNeck
+  - DClassFace
+  - DClassGloves
+  - DClassOuterClothing
+  - DClassShoes
+  - Glasses
+  - Survival
+  - GroupSpeciesBreathTool
+  # Goobstation - EE Plasmeme Change.
+  - AssistantEnvirohelm
+  - AssistantEnvirosuit
+  - AssistantEnvirogloves
+  - ExclusiveItems # Trauma

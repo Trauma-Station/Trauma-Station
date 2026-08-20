@@ -255,8 +255,8 @@
   id: PassengerJumpsuit
   name: loadout-group-passenger-jumpsuit
   loadouts:
-  #- GreyJumpsuit
-  #- GreyJumpskirt
+  - GreyJumpsuit
+  - GreyJumpskirt
   #- AncientJumpsuit
   #- RainbowJumpsuit
   #- RainbowJumpskirt
@@ -278,10 +278,6 @@
   #- MaroonMJ
   #- QuarterzipJumpsuit
  # goob changes end
-#  <Trauma>
-  - PrisonerJumpsuit
-  - PrisonerJumpskirt
-#  </Trauma>
 
 - type: loadoutGroup
   id: PassengerFace

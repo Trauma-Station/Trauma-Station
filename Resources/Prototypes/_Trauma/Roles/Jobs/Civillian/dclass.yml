@@ -1,11 +1,11 @@
 ﻿# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: job
-  id: Passenger
+  id: DClass
   name: job-name-dclass
   description: job-description-dclass
-  playTimeTracker: JobPassenger
-  startingGear: PassengerGear
+  playTimeTracker: JobDClass
+  startingGear: DClassGear
   icon: "JobIconDClass"
   supervisors: job-supervisors-everyone
   access:
@@ -25,7 +25,7 @@
       - Assistant
 
 - type: startingGear
-  id: PassengerGear
+  id: DClassGear
   equipment:
     id: PassengerPDA
     ears: ClothingHeadsetGrey

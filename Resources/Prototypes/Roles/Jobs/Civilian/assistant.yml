@@ -1,32 +1,45 @@
-#Trauma: Replacing with D-Class
+- type: job
+  id: Passenger
+  name: job-name-passenger
+  description: job-description-passenger
+  playTimeTracker: JobPassenger
+  startingGear: PassengerGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - Maintenance
+  # <Trauma>
+  guides:
+  - Civilian
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipTiderDampener
+    - SkillChipEducation
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - NanoTrasen
+      - Assistant
+  # </Trauma>
 
-#- type: job
-#  id: Passenger
-#  name: job-name-passenger
-#  description: job-description-passenger
-#  playTimeTracker: JobPassenger
-#  startingGear: PassengerGear
-#  icon: "JobIconPassenger"
-#  supervisors: job-supervisors-everyone
-#  access:
-#  - Maintenance
-#
-#- type: startingGear
-#  id: PassengerGear
-#  equipment:
-#    id: PassengerPDA
-#    ears: ClothingHeadsetGrey
-#  #storage:
-#    #back:
-#    #- Stuff
-#
-#- type: chameleonOutfit
-#  id: PassengerChameleonOutfit
-#  job: Passenger
-#  equipment:
-#    head: ClothingHeadHatWelding
-#    eyes: ClothingEyesGlassesCheapSunglasses
-#    mask: ClothingMaskGas
-#    neck: ClothingNeckMantle
-#    outerClothing: ClothingOuterWinterCoat
-#    gloves: ClothingHandsGlovesColorYellowBudget
+- type: startingGear
+  id: PassengerGear
+  equipment:
+    id: PassengerPDA
+    ears: ClothingHeadsetGrey
+    #storage:
+    #back:
+    #- Stuff
+
+- type: chameleonOutfit
+  id: PassengerChameleonOutfit
+  job: Passenger
+  equipment:
+    head: ClothingHeadHatWelding
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckMantle
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesColorYellowBudget

@@ -42,3 +42,17 @@
     - state: green
     - state: rancher
       sprite: _Trauma/Markers/jobs.rsi
+
+# DClass
+
+- type: entity
+  id: SpawnPointDClass
+  parent: SpawnPointJobBase
+  name: dclass
+  components:
+  - type: SpawnPoint
+    job_id: Passenger
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dclass
