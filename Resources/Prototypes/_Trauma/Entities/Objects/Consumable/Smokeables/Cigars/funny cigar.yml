@@ -1,0 +1,39 @@
+- type: entity
+  id: CigarFunny
+  parent: BaseCigar
+  name: funny cigar
+  description: "custom made cigar for fashionable clowns"
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigars/Cigar-funny.rsi
+    state: unlit-icon
+  - type: Tag
+    tags:
+      - Cigar
+      - Trash
+  - type: Clothing
+    sprite: Objects/Consumable/Smokeables/Cigars/Cigar-funny.rsi
+    slots: [ mask ]
+    equippedPrefix: unlit
+  - type: Item
+    size: Tiny
+    sprite: Objects/Consumable/Smokeables/Cigars/Cigar-funny.rsi
+    heldPrefix: unlit
+
+- type: entity
+  id: FunnyCigarSpent
+  parent: Cigar
+  name: spent funny cigar
+  description: "was a custom made cigar for fashionable clowns"
+  suffix: spent
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigars/Cigar-funny.rsi
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: Tag
+    tags:
+      - Cigar
+      - Trash
+      - Burnt
