@@ -118,7 +118,7 @@
         map: ["enum.PowerDeviceVisualLayers.Powered"]
         shader: unshaded
   - type: MeleeWeapon
-    canWideSwing: false
+    canWideSwing: false # Trauma - removed for balance purposes
     damage:
       types:
         Blunt: 8
@@ -136,4 +136,4 @@
       types:
         Blunt: 8
         Shock: 8 # Trauma - was 16, adjusted for balance
-        Heat: 8
+        Heat: 8 # Trauma - was 0, adjusted for balance
