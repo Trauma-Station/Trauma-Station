@@ -1,4 +1,7 @@
+// <Trauma>
 using Content.Shared.Weapons.Melee.Components;
+// </Trauma>
+
 namespace Content.Shared.Weapons.Melee.Events;
 
 /// <summary>

@@ -14,4 +14,9 @@ roles-antag-shadow-demon-objective = The darkness needs a King, and you got summ
 roles-antag-mind-controlled-name = Mind Controlled
 roles-antag-mind-controlled-objective = Help your Master
 
+roles-antag-spy-name = Spy
+roles-antag-spy-objective = Steal things and complete your mission.
+
+spy-round-end-agent-name = spy
+
 never-shown = !

@@ -749,7 +749,7 @@
     refineResult:
     - id: FoodMeat
       amount: 3
-    - id: Telecrystal40 # Trauma - was 5, 5x and more this way captain is actually incentivized to not let Renault be kidnapped/killed
+    - id: Telecrystal25 # Trauma - was 5, 5x
       amount: 1
   - type: Grammar
     attributes:
@@ -1068,6 +1068,9 @@
   name: Pun Pun
   description: A prominent representative of monkeys with unlimited access to alcohol.
   components:
+  # <Trauma>
+  - type: PunPun
+  # </Trauma>
   - type: GhostRole
     prob: 1
     makeSentient: true

@@ -100,7 +100,7 @@ public sealed partial class SelfExtinguisherSystem : SharedSelfExtinguisherSyste
             return;
         }
 
-        _flammable.Extinguish(target, flammable);
+        _flammable.TryExtinguish((target, flammable));
         _color.RaiseEffect(_extinguishColor, [target], Filter.Pvs(target, entityManager: EntityManager), ExtinguishAnimationLength);
         _audio.PlayPvs(selfExtinguisher.Sound, uid, selfExtinguisher.Sound.Params.WithVariation(0.125f));
 

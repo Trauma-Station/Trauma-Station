@@ -1,0 +1,352 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseCosmicAction
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+  - type: Sprite
+    sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+
+- type: entity
+  parent: [ BaseCosmicAction, BaseMentalAction ]
+  id: ActionCosmicShop
+  name: Attune Influence
+  description: Spend gathered entropy to unlock new powers, or view the Cult's progress.
+  components:
+  - type: Sprite
+    layers:
+    - state: shop
+  - type: InstantAction
+    event: !type:CosmicShopEvent
+  - type: UserInterface
+    interfaces:
+      enum.CosmicShopKey.Key:
+        type: CosmicShopBoundUserInterface
+  - type: CosmicShop
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicSiphon
+  name: Siphon Entropy
+  description: Silently siphon entropy from your target.
+  components:
+  - type: Sprite
+    layers:
+    - state: siphon
+  - type: Action
+    useDelay: 2 #30
+  - type: TargetAction
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - HumanoidProfile
+    blacklist:
+      components:
+      - CosmicCult
+    event: !type:CosmicSiphonEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicBlank
+  name: Shunt Subjectivity
+  description: Shunt your target's mind out of their body and unto the cosmic dark, temporarily rendering their body mindless.
+  components:
+  - type: Action
+    useDelay: 120
+  - type: Sprite
+    layers:
+    - state: blank
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+    blacklist:
+      components:
+      - CosmicCult
+    event: !type:CosmicBlankEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicPlaceMonument
+  name: Beckon The Monument
+  description: Mark the spot where The Monument must be. The majority of the cult must choose the same spot. Use again to remove the mark.
+  components:
+  - type: Action
+    useDelay: 1
+  - type: Sprite
+    layers:
+    - state: monument
+  - type: InstantAction
+    event: !type:CosmicPlaceMonumentEvent
+  - type: MonumentPlacementAction
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicReturn
+  name: Return
+  description: Dissipate your astral projection and return to your body.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 0
+  - type: Sprite
+    layers:
+    - state: return
+  - type: InstantAction
+    event: !type:CosmicReturnEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicLapse
+  name: Abberant Lapse
+  description: Lapse your target's corporeal form, temporarily rendering it immutable, imperceptible, and frozen in place.
+  components:
+  - type: Action
+    useDelay: 24
+  - type: Sprite
+    layers:
+    - state: lapse
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: true
+    whitelist:
+      components:
+      - HumanoidProfile
+    event: !type:CosmicLapseEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicGlare
+  name: Null Glare
+  description: Emit a horrific pulse of cosmic light, slowing and disorienting everyone around you.
+  components:
+  - type: Action
+    useDelay: 30
+    checkCanInteract: false
+  - type: Sprite
+    layers:
+    - state: glare
+  - type: InstantAction
+    event: !type:CosmicGlareEvent
+  - type: Tag
+    tags:
+    - FlashIgnoreResistances
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicIngress
+  name: Force Ingress
+  description: Use a concentrated blast of power to force a secure doorway open.
+  components:
+  - type: Action
+    useDelay: 15
+  - type: Sprite
+    layers:
+    - state: ingress
+  - type: TargetAction
+  - type: EntityTargetAction
+    whitelist:
+      components:
+        - Door
+        - Lock
+    event: !type:CosmicIngressEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicImposition
+  name: Vacuous Imposition
+  description: You negate any incoming damage for a short time.
+  components:
+  - type: Action
+    useDelay: 80
+    checkCanInteract: false
+  - type: Sprite
+    layers:
+    - state: entropic
+  - type: InstantAction
+    event: !type:CosmicImpositionEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicNova
+  name: Astral Nova
+  description: Hurl a large and disruptive blast of astral energy.
+  components:
+  - type: Action
+    useDelay: 60
+  - type: Sprite
+    layers:
+    - state: nova
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: WorldTargetAction
+    event: !type:CosmicNovaEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicFragmentation
+  name: Null Fragmentation
+  description: Transfer your malign empowerment into a digital system, such as an AI Upload Console or Cyborg, corrupting it in the process.
+  components:
+  - type: Action
+    useDelay: 25
+  - type: Sprite
+    layers:
+    - state: corruption
+  - type: TargetAction
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - BorgChassis
+      - SiliconLawUpdater
+    event: !type:CosmicFragmentationEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicConversion
+  name: Shatter Cognition
+  description: Share the knowledge you bear with someone else, forcing them to join your side.
+  components:
+  - type: Action
+    useDelay: 666
+  - type: Sprite
+    sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
+    layers:
+    - state: shatter
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+    blacklist:
+      components:
+      - CosmicCult
+      - BibleUser
+    event: !type:CosmicConversionEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicDamageTransfer
+  name: Forfeit Vitality
+  description: Take the wounds of a fellow cultist as your own, bringing them back to life at the cost of your own.
+  components:
+  - type: Action
+    useDelay: 120
+  - type: Sprite
+    layers:
+    - state: absorb
+  - type: TargetAction
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Damageable
+    event: !type:CosmicDamageTransferEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicTransmutation
+  name: Corrupt Matter
+  description: Imbue held item with malign power, transforming it into something else.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: NoItem
+  - type: Sprite
+    layers:
+    - state: transmute
+  - type: InstantAction
+    event: !type:CosmicTransmutationEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicStride
+  name: Astral Stride
+  description: Call upon astral power to move at incredible speed.
+  components:
+  - type: Action
+    useDelay: 50
+    checkCanInteract: false
+  - type: Sprite
+    layers:
+    - state: stride
+  - type: InstantAction
+    event: !type:CosmicStrideEvent
+
+## COLOSSUS ACTIONS
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicColossusSunder
+  name: Entropic Sunder
+  description: Warp to the target location and unleash a shockwave of malign energy.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: NoItem
+  - type: Sprite
+    layers:
+    - state: sunder
+  - type: TargetAction
+    range: 7
+  - type: WorldTargetAction
+    event: !type:CosmicColossusSunderEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicColossusIngress
+  name: Colossal Ingress
+  description: Use your colossal strength to force open a doorway.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+  - type: Sprite
+    layers:
+    - state: ingress
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    whitelist:
+      components:
+        - Door
+    event: !type:CosmicColossusIngressEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicColossusHibernate
+  name: Slumber Shell
+  description: Slumber your body for a period of time to regenerate integrity. Must be done on stable ground.
+  components:
+  - type: Action
+    useDelay: 180
+    checkCanInteract: false
+  - type: Sprite
+    layers:
+    - state: slumber
+  - type: ConfirmableAction
+    popup: cosmicability-hibernate-confirm
+    confirmDelay: 0.1
+    primeTime: 5
+  - type: InstantAction
+    event: !type:CosmicColossusHibernateEvent
+
+- type: entity
+  parent: BaseCosmicAction
+  id: ActionCosmicColossusEffigy
+  name: Beckon an Effigy
+  description: Draw out an Effigy of Entropy into realspace.
+  components:
+  - type: Action
+    useDelay: 999
+  - type: Sprite
+    layers:
+    - state: nova
+  - type: InstantAction
+    event: !type:CosmicColossusEffigyEvent

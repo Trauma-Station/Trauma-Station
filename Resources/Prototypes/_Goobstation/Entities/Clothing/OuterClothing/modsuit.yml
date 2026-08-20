@@ -49,7 +49,7 @@
     - Arm
     - Leg
     - Tail
-    - Other
+    - Wings
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2

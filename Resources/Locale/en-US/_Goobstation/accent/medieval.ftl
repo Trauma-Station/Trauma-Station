@@ -748,11 +748,11 @@ accent-medieval-words-replace-234 = unspeakable filth pit
 accent-medieval-words-235 = room4
 accent-medieval-words-replace-235 = unspeakable filth pit
 
-accent-medieval-prefix-236 = atmospherics
+accent-medieval-words-236 = atmospherics
 accent-medieval-words-replace-236 = Witches
 
-accent-medieval-prefix-237 = do
+accent-medieval-words-237 = do
 accent-medieval-words-replace-237 = dost
 
-accent-medieval-prefix-238 = know
+accent-medieval-words-238 = know
 accent-medieval-words-replace-238 = knoweth

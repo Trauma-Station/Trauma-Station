@@ -3,7 +3,7 @@ role_timers = true
 role_timer_override = "Trauma"
 round_end_pvs_overrides = true
 lobbyduration = 180
-fallbackpreset = "Traitor"
+fallbackpreset = "Traitor,Survival,Extended"
 
 [chat]
 max_announcement_length = 512
@@ -16,6 +16,7 @@ cooldown = 5
 
 [net]
 pvs_enter_budget = 300 # 200 by default
+log_late_msg = false # pointless log spam why is this on in release
 
 [adminlogs]
 high_log_playtime = 2 # this kills the raider
@@ -26,3 +27,6 @@ confirm_timeout = 90 # 1.5m
 
 [playtest]
 explosion_damage_modifier = 0.3
+
+[biomass]
+easy_mode = false # woodchipper is actually dangerous

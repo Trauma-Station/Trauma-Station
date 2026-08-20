@@ -8,29 +8,23 @@ namespace Content.Goobstation.Server.Deafness;
 
 public sealed partial class DeafnessSystem : EntitySystem
 {
-    private EntityQuery<DeafComponent> _deafQuery;
+    [Dependency] private EntityQuery<DeafComponent> _query = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnOverrideInVoiceRange(EntityUid uid, DeafComponent comp, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
-        base.Initialize();
-
-        _deafQuery = GetEntityQuery<DeafComponent>();
-        SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
-        SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRangeEvent>(OnOverrideInVoiceRange);
-    }
-
-    private void OnOverrideInVoiceRange(EntityUid uid, DeafComponent comp, ref ChatMessageOverrideInVoiceRangeEvent args)  // blocks normal chat
-    {
+        // blocks normal chat
         args.Cancel();
     }
 
-    private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent args) // blocks radio
+    [SubscribeLocalEvent]
+    private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent args)
     {
         var user = Transform(args.RadioReceiver).ParentUid;
-
-        if (!_deafQuery.HasComp(user))
+        if (!_query.HasComp(user))
             return;
 
+        // blocks radio
         args.Cancelled = true;
     }
 }

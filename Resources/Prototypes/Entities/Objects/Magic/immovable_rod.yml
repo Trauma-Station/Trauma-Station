@@ -12,8 +12,13 @@
     state: icon
     noRot: false
   - type: ImmovableRod
-    minSpeed: 15 # Goobstation
-    maxSpeed: 15 # Goobstation
+    # <Trauma>
+    minSpeed: 15
+    maxSpeed: 15
+    # </Trauma>
+    damage:
+      types:
+        Blunt: 70 # Trauma - was 190
   - type: GravityAffected
   - type: Physics
     bodyType: Dynamic
@@ -72,23 +77,38 @@
   id: ImmovableRodWizard
   suffix: Wizard
   components:
+  # <Trauma>
+  - type: Input
+    context: "human"
+  - type: Trail
+    frequency: 0.1
+    lifetime: 1
+    lerpTime: 0.1
+    alphaLerpAmount: 0.4
+    sprite:
+      sprite: /Textures/Objects/Fun/immovable_rod.rsi
+      state: icon
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: IsDeadIC
+    dead: false
+  # </Trauma>
   - type: ImmovableRod
-    minSpeed: 6 # Goob edit
-    maxSpeed: 6 # Goob edit
-    hitSoundProbability: 1 # Goob edit
-    ignoreResistances: true # Goobstation
-    knockdownTime: 4 # Goobstation
+    # <Trauma>
+    minSpeed: 6
+    maxSpeed: 6
+    hitSoundProbability: 1
+    ignoreResistances: true
+    knockdownTime: 4
+    # </Trauma>
     destroyTiles: false
     randomizeVelocity: false
     shouldGib: false
-    damage:
-      types:
-        Blunt: 70 # Goob edit - was 190
-  #- type: Physics # Goob
+  # <Trauma> - replaced by Input above
+  #- type: Physics
   #  bodyType: KinematicController
-  #- type: InputMover # Goob
-  - type: Input # Goob
-    context: "human"
+  #- type: InputMover
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWeightlessAcceleration: 5
     baseWeightlessModifier: 2
@@ -98,18 +118,6 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: NoSlip
-  - type: Trail # Goobstation
-    frequency: 0.1
-    lifetime: 1
-    lerpTime: 0.1
-    alphaLerpAmount: 0.4
-    sprite:
-      sprite: /Textures/Objects/Fun/immovable_rod.rsi
-      state: icon
-  - type: StatusIcon # Goobstation
-    bounds: -0.5,-0.5,0.5,0.5
-  - type: IsDeadIC # Goobstation
-    dead: false
 
 - type: entity
   parent: ImmovableRodKeepTiles

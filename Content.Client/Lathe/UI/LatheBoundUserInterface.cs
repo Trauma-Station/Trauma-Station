@@ -1,6 +1,6 @@
 // <Trauma>
+using Content.Goobstation.Common.Lathe;
 using Content.Trauma.Common.Salvage;
-using Content.Goobstation.Shared.Lathe;
 // </Trauma>
 using Content.Shared.Lathe;
 using Content.Shared.Research.Components;

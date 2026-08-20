@@ -92,10 +92,7 @@ public sealed partial class SlasherIncorporealCameraSystem : EntitySystem
     private void OnIncorporealEntered(Entity<SlasherIncorporealComponent> ent, ref SlasherIncorporealEnteredEvent args)
     {
         // Extinguish any fires on the slasher
-        if (TryComp<FlammableComponent>(ent, out var flammable))
-        {
-            _flammable.Extinguish(ent, flammable);
-        }
+        _flammable.TryExtinguish(ent.Owner);
 
         DisableLightsInArea(ent);
     }
@@ -160,10 +157,7 @@ public sealed partial class SlasherIncorporealCameraSystem : EntitySystem
         // If incorporeal, immediately extinguish any fire that was just applied
         if (comp.IsIncorporeal)
         {
-            if (TryComp<FlammableComponent>(uid, out var flammable))
-            {
-                _flammable.Extinguish(uid, flammable);
-            }
+            _flammable.TryExtinguish(uid);
         }
     }
 

@@ -11,7 +11,6 @@
       time: 50h
     - !type:AgeRequirement
       requiredAge: 21
-  weight: 20
   startingGear: NanotrasenRepresentativeGear
   icon: "JobIconNanotrasenRepresentative"
   joinNotifyCrew: true

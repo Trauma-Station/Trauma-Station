@@ -8,8 +8,8 @@
   productPrototypes:
     - WheatBushel
   mutationPrototypes:
+    - SteelWheat # Trauma - Ranching crop mutation
     - meatwheat
-    - SteelWheat # Trauma
   lifespan: 25
   maturation: 6
   production: 3
@@ -747,7 +747,10 @@
   productPrototypes:
     - FoodApple
   mutationPrototypes:
-    - deliciousApple # Trauma
+    # <Trauma> - Ranching crop mutations
+    - deliciousApple
+    - MethApple
+    # </Trauma>
     - goldenApple
   harvestRepeat: Repeat
   lifespan: 55
@@ -775,6 +778,11 @@
   packetPrototype: GoldenAppleSeeds
   productPrototypes:
     - FoodGoldenApple
+  # <Trauma> - Ranching crop mutations
+  mutationPrototypes:
+  - deliciousApple
+  - MethApple
+  # </Trauma>
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
@@ -807,6 +815,10 @@
   packetPrototype: CornSeeds
   productPrototypes:
     - FoodCorn
+  # <Trauma> - Ranching crop mutations
+  mutationPrototypes:
+  - ClearCorn
+  # </Trauma>
   lifespan: 25
   maturation: 8
   production: 6
@@ -870,7 +882,7 @@
   packetPrototype: OnionRedSeeds
   productPrototypes:
     - FoodOnionRed
-  mutationPrototypes: # Trauma, make red onions not suck
+  mutationPrototypes: # Trauma - make red onions not suck
     - onion
     - bloonion
   lifespan: 25
@@ -905,6 +917,10 @@
   packetPrototype: ChanterelleSeeds
   productPrototypes:
     - FoodMushroom
+  # <Trauma> - Ranching crop mutations
+  mutationPrototypes:
+  - MagicMushrooms
+  # </Trauma>
   lifespan: 35
   maturation: 10
   production: 7
@@ -2032,7 +2048,7 @@
   waterConsumption: 0.60
   nutrientConsumption: 0.50
   chemicals:
-    Potassium: # Trauma, Changed the max for potassium, phosphorus and sugar to 15 and the potency divisor to 6
+    Potassium: # Trauma - Changed the max for potassium, phosphorus and sugar to 15 and the potency divisor to 6
       Min: 1
       Max: 15
       PotencyDivisor: 6

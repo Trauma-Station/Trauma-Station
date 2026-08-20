@@ -26,7 +26,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Blunt: 0.85

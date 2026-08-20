@@ -64,7 +64,7 @@ public sealed partial class CurseWindow : FancyWindow
     public void Populate()
     {
         _buttons.Clear();
-        ButtonContainer.DisposeAllChildren();
+        ButtonContainer.RemoveAllChildren();
 
         foreach (var item in _data)
         {

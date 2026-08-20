@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.Silicons.Borgs; // Cortex-Next
+using Content.Trauma.Common.Silicons.Borgs;
 // </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;

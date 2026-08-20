@@ -84,8 +84,8 @@ public sealed class AbductorCameraConsoleBui : BoundUserInterface
         if (_window == null || State is not AbductorCameraConsoleBuiState state)
             return;
 
-        _window!.Stations.DisposeAllChildren();
-        _window.Beacons.DisposeAllChildren();
+        _window!.Stations.RemoveAllChildren();
+        _window.Beacons.RemoveAllChildren();
 
         foreach (var station in state.Stations)
         {

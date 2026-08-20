@@ -614,7 +614,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions:
       Dismemberment: 0.4
       OrganDamage: 0.4

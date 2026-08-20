@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Medical.Shared.Body;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Body;
@@ -10,9 +8,6 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Body.Chips;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 

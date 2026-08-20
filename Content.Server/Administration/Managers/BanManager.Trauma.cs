@@ -141,7 +141,7 @@ public sealed partial class BanManager
     private string GetRoleNames(BanDef ban)
     {
         var names = new List<string>();
-        var jobs = new HashSet<string>();
+        var jobs = new List<string>();
         foreach (var role in ban.Roles!)
         {
             if (role.RoleType == DbTypeAntag)
@@ -153,11 +153,12 @@ public sealed partial class BanManager
             else
                 names.Add(role.RoleId); // who knows what it is
         }
+        var jobsPresent = new HashSet<string>(jobs); // want to keep it for e.g. command + sec department bans but not display them
 
         // coalesce jobs that make up a whole department to make it less spammy
         foreach (var department in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
         {
-            if (!department.Roles.All(id => jobs.Contains(id)))
+            if (!department.Roles.All(id => jobsPresent.Contains(id)))
                 continue;
 
             foreach (var id in department.Roles)

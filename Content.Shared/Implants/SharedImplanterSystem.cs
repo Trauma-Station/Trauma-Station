@@ -326,6 +326,10 @@ public abstract partial class SharedImplanterSystem : EntitySystem
         var implantingSelf = user == target;
         if ((implantingSelf && !implantComp.CanImplantSelf) || (!implantingSelf && !implantComp.CanImplantOther))
             return false;
+
+        // no
+        if (ent.Comp.ExtractOnly)
+            return false;
         // </Trauma>
 
         var ev = new AddImplantAttemptEvent(user, target, implant.Value, ent.Owner);

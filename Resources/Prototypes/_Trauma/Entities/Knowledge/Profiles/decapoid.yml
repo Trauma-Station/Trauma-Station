@@ -3,7 +3,7 @@
 - type: knowledgeProfile
   id: Decapoid
   # Human but better physical stats
-  pointsLimit: 5
+  pointsLimit: 3
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -26,14 +26,11 @@
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
     ChemistryKnowledge: 0
-    # Physical Skill
-    ThrowingKnowledge: 0
-    AthleticsKnowledge: 1
-    StrengthKnowledge: 3
-    ToughnessKnowledge: 3
     # Combat Skill
+    ThrowingKnowledge: 0
     MeleeKnowledge: 0
     ShootingKnowledge: 0
+    KnowledgeWeaponsShield: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

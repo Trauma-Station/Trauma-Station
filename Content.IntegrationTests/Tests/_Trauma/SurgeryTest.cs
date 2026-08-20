@@ -1,35 +1,44 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
+using Content.IntegrationTests.Tests.Interaction;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Surgery;
 using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Server.Atmos.Components;
+using Content.Server.Body.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Weapons.Melee;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-public sealed class SurgeryTest : GameTest
+public sealed class SurgeryTest : InteractionTest
 {
-    public static readonly EntProtoId Human = "MobHuman";
-    public static readonly EntProtoId Weapon = "CaptainSabre";
-    public static readonly ProtoId<OrganCategoryPrototype> Torso = "Torso";
-    public static readonly ProtoId<OrganCategoryPrototype> ArmRight = "ArmRight";
-
     [SidedDependency(Side.Server)] private BodySystem _body = default!;
+    [SidedDependency(Side.Server)] private DamageableSystem _damage = default!;
     [SidedDependency(Side.Server)] private SharedCombatModeSystem _combat = default!;
     [SidedDependency(Side.Server)] private SharedMeleeWeaponSystem _melee = default!;
     //[SidedDependency(Side.Server)] private SharedSurgerySystem _surgery = default!;
     [SidedDependency(Side.Server)] private SharedTargetingSystem _targeting = default!;
     [SidedDependency(Side.Server)] private StandingStateSystem _standing = default!;
     [SidedDependency(Side.Server)] private TraumaSystem _trauma = default!;
+    [SidedDependency(Side.Server)] private WoundSystem _wound = default!;
+
+    private static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId Weapon = "CaptainSabre";
+    private static readonly ProtoId<OrganCategoryPrototype> ArmRight = "ArmRight";
+    private static readonly ProtoId<OrganCategoryPrototype> Head = "Head";
+    private static readonly ProtoId<OrganCategoryPrototype> Torso = "Torso";
+
+    protected override string PlayerPrototype => Human;
 
     /// <summary>
     /// Checks that a sword can cut an arm off, leaving a dismemberment trauma on the torso.
@@ -39,13 +48,9 @@ public sealed class SurgeryTest : GameTest
     [Test]
     public async Task DismemberingTest()
     {
-        var map = await Pair.CreateTestMap();
-
+        var subject = await SpawnHuman();
         await Server.WaitAssertion(() =>
         {
-            var subject = SEntMan.SpawnEntity(Human, map.GridCoords);
-            var doctor = SEntMan.SpawnEntity(Human, map.GridCoords);
-
             if (_body.GetOrgan(subject, Torso) is not { } torso)
             {
                 Assert.Fail($"Urist had no torso!");
@@ -64,19 +69,19 @@ public sealed class SurgeryTest : GameTest
 
             // have to lay down to guarantee it hits the limb instead of torso
             _standing.Down(subject);
-            _combat.SetInCombatMode(doctor, true);
-            _targeting.SetTarget(doctor, TargetBodyPart.RightArm);
+            _combat.SetInCombatMode(SPlayer, true);
+            _targeting.SetTarget(SPlayer, TargetBodyPart.RightArm);
 
             // try cutting arm with a sword until it falls off
-            var weapon = SEntMan.SpawnEntity(Weapon, map.GridCoords);
-            var melee = SEntMan.GetComponent<MeleeWeaponComponent>(weapon);
+            var weapon = SEntMan.SpawnEntity(Weapon, SEntMan.GetCoordinates(PlayerCoords));
+            var melee = SComp<MeleeWeaponComponent>(weapon);
             for (var i = 0; i < 20; i++)
             {
                 if (_body.GetBody(arm) == null)
                     break; // done
 
                 melee.NextAttack = TimeSpan.Zero;
-                _melee.AttemptLightAttack(doctor, weapon, melee, subject, canParry: false);
+                _melee.AttemptLightAttack(SPlayer, weapon, melee, subject, canParry: false);
             }
 
             Assert.That(_body.GetBody(arm), Is.Null, $"{SEntMan.ToPrettyString(weapon)} failed to sever {SEntMan.ToPrettyString(arm)} in 20 hits!");
@@ -87,13 +92,87 @@ public sealed class SurgeryTest : GameTest
             // TODO: do dismember surgery
 
             /*
-            Assert.That(_trauma.HasWoundableTrauma(torso, TraumaType.Dismemberment),
-                "Surgery was finished but Arm was cut off but there was no dismemberment trauma left!");
+            Assert.That(!_trauma.HasWoundableTrauma(torso, TraumaType.Dismemberment),
+                "Surgery was finished but dismemberment trauma remained!");
             */
 
             // TODO: do reattach surgery
 
             // TODO: do tend brute surgery
         });
+    }
+
+    [Test]
+    public async Task HealWoundsTest()
+    {
+        var subject = await SpawnHuman();
+        await Server.WaitAssertion(() =>
+        {
+            if (_body.GetOrgan(subject, Head) is not { } head)
+            {
+                Assert.Fail("Urist has no head");
+                return;
+            }
+
+            var amount = FixedPoint2.New(20);
+            var damage = new DamageSpecifier()
+            {
+                DamageDict = new()
+                {
+                    { "Heat", amount }
+                }
+            };
+
+            var part = TargetBodyPart.Head;
+            _damage.ChangeDamage(subject, damage, targetPart: part, canMiss: false);
+            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(amount), $"Failed to damage the urist: {_damage.DumpDamage(subject)}");
+
+            var wounds = _wound.GetWoundableWounds(head);
+            Assert.That(wounds.Count, Is.EqualTo(1), "Expected only 1 wound");
+            var wound = wounds[0];
+            Assert.That(wound.Comp.WoundSeverityPoint, Is.EqualTo(amount), "Wound had wrong severity");
+
+            // regular healing sources must heal the wound
+            _damage.ChangeDamage(subject, -damage, targetPart: part, canMiss: false);
+            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(FixedPoint2.Zero), $"Failed to heal the urist: {_damage.DumpDamage(subject)}");
+            AssertHealed(wound);
+
+            _damage.ChangeDamage(subject, damage, targetPart: part, canMiss: false);
+            Assert.That(_damage.GetTotalDamage(subject), Is.EqualTo(amount), $"Failed to damage the urist again: {_damage.DumpDamage(subject)}");
+
+            wounds = _wound.GetWoundableWounds(head);
+            Assert.That(wounds.Count, Is.EqualTo(1), "Expected only 1 wound");
+            wound = wounds[0];
+            Assert.That(wound.Comp.WoundSeverityPoint, Is.EqualTo(amount), "Wound had wrong severity");
+
+            // direct wound healing must heal the wound
+            Assert.That(_wound.TryHealWoundsOnOwner(subject, damage), "It should have healed the wound");
+            AssertHealed(wound);
+
+            wounds = _wound.GetWoundableWounds(head);
+            Assert.That(wounds, Is.Empty, "Expected no leftover wounds");
+            Assert.That(!_wound.TryHealWoundsOnOwner(subject, damage), "There should be no wounds left to heal");
+
+            SEntMan.DeleteEntity(subject);
+        });
+    }
+
+    private void AssertHealed(Entity<WoundComponent> wound)
+    {
+        Assert.That(wound.Comp.WoundSeverityPoint, Is.EqualTo(FixedPoint2.Zero), "Wound was not healed");
+        Assert.That(SEntMan.Deleted(wound), "Wound did not get deleted after being healed");
+    }
+
+    private async Task<EntityUid> SpawnHuman()
+    {
+        var mob = SEntMan.GetEntity(await SpawnTarget(Human));
+        await Server.WaitPost(() =>
+        {
+            // dont want them to interfere with healing
+            SEntMan.RemoveComponent<BarotraumaComponent>(mob);
+            SEntMan.RemoveComponent<RespiratorComponent>(mob);
+            SEntMan.RemoveComponent<TemperatureDamageComponent>(mob);
+        });
+        return mob;
     }
 }
