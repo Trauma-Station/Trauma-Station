@@ -223,15 +223,3 @@
   id: ServiceMJ
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryService
-
-
-#Trauma D-Class Prisoner Jumpsuits
-- type: loadout
-  id: PrisonerJumpsuit
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitPrisoner
-
-- type: loadout
-  id: PrisonerJumpskirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtPrisoner

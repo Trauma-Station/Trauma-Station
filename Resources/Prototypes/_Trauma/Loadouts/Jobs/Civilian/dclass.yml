@@ -6,7 +6,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: job-name-dclass
-      time: 10h # silly reward for people who play passenger a lot
+      time: 10h # silly reward for people who play DClass a lot
 
 # Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup
@@ -20,7 +20,7 @@
 
 # Face
 - type: loadout
-  id: PassengerFace
+  id: DClassFace
   effects:
   - !type:GroupLoadoutEffect
     proto: GreyTider
@@ -59,7 +59,7 @@
 
 # Gloves
 - type: loadout
-  id: PassengerGloves
+  id: DClassGloves
   effects:
   - !type:GroupLoadoutEffect
     proto: GreyTider
@@ -68,7 +68,7 @@
 
 # Outerclothing
 - type: loadout
-  id: PassengerWintercoat
+  id: DClassWintercoat
   equipment:
     outerClothing: ClothingOuterWinterCoat
 
