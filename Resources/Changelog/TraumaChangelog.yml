@@ -13428,3 +13428,10 @@ Entries:
   id: 1463
   time: '2026-08-19T21:24:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4161
+- author: Jack-Silver
+  changes:
+  - type: Tweak
+    message: Airlocks and cameras are now easier to break.
+  id: 1464
+  time: '2026-08-20T04:21:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4163
