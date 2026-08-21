@@ -35,6 +35,6 @@ public sealed partial class GrowBlobEffectSystem : EntityEffectSystem<BlobTileCo
         var e = args.Effect;
         _tile.TryGrow(ent, out var tile, e.Attack, e.DoEffects);
         if (tile != null)
-            _damage.ChangeDamage(tile.Value, _damage.GetAllDamage(ent), ignoreResistances: true);
+            _damage.ChangeDamage(tile.Value, _damage.GetAllDamage(ent.Owner), ignoreResistances: true);
     }
 }
