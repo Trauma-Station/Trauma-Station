@@ -6,9 +6,9 @@ using Content.Trauma.Shared.EntityEffects.Botany;
 
 namespace Content.Trauma.Server.EntityEffects.Botany;
 
-public sealed partial class AdjustProductionEntityEffectSystem : EntityEffectSystem<PlantHolderComponent, LiquidEarthquake>
+public sealed partial class AdjustProductionEntityEffectSystem : EntityEffectSystem<PlantHolderComponent, AdjustProduction>
 {
-    protected override void Effect(Entity<PlantHolderComponent> entity, ref EntityEffectEvent<LiquidEarthquake> args)
+    protected override void Effect(Entity<PlantHolderComponent> entity, ref EntityEffectEvent<AdjustProduction> args)
     {
         if (entity.Comp.Seed == null || entity.Comp.Dead)
             return;

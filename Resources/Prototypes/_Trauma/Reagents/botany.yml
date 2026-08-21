@@ -122,4 +122,4 @@
     amount: -2
   - !type:PlantAdjustMaturation
     amount: 0.2
-  - !type:LiquidEarthquake
+  - !type:AdjustProduction

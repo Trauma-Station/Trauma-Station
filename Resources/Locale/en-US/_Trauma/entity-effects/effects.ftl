@@ -1,4 +1,4 @@
-entity-effect-guidebook-plant-liquid-earthquake =
+entity-effect-guidebook-adjust-production =
     { $chance ->
         [1] Decreases
         *[other] decreases
