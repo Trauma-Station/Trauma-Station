@@ -375,7 +375,7 @@
           min: 6
         damage:
           types:
-            Blunt: 30
+            Poison: 20
       - !type:ModifyBleed
         amount: 1
         conditions:
