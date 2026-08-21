@@ -69,24 +69,24 @@
 #   equipment:
 #     jumpsuit: ClothingUniformJumpsuitAncient
 
-# - type: loadout
-#   id: Mantle
-#   equipment:
-#     neck: ClothingNeckMantle
-#   effects:
-#   - !type:GroupLoadoutEffect
-#     proto: MasterGrey
+# </Trauma>
+
+- type: loadout
+  id: Mantle
+  equipment:
+    neck: ClothingNeckMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MasterGrey
 
 # Gloves
-# - type: loadout
-#   id: PassengerGloves
-#   effects:
-#   - !type:GroupLoadoutEffect
-#     proto: GreyTider
-#   equipment:
-#     gloves: ClothingHandsGlovesFingerlessInsulated
-
-# </Trauma>
+- type: loadout
+  id: PassengerGloves
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GreyTider
+  equipment:
+    gloves: ClothingHandsGlovesFingerlessInsulated
 
 # Neck
 
