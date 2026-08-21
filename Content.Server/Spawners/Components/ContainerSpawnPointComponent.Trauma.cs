@@ -1,10 +1,9 @@
-﻿using Content.Server.Spawners.EntitySystems;
-using Content.Shared.Roles;
+﻿using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Spawners.Components;
 
-public sealed partial class ContainerSpawnPointComponent : Component, ISpawnPoint
+public sealed partial class ContainerSpawnPointComponent
 {
     /// <summary>
     /// Extra Jobs that can spawn at a spawnpoint

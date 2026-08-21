@@ -257,27 +257,29 @@
   loadouts:
   - GreyJumpsuit
   - GreyJumpskirt
-  - AncientJumpsuit
-  - RainbowJumpsuit
-  - RainbowJumpskirt
+ # <Trauma> Made useless by now being a learner role
+ # - AncientJumpsuit
+ # - RainbowJumpsuit
+ # - RainbowJumpskirt
  # goob changes start
-  - GreyMJ
-  - BlackMJ
-  - BlueMJ
-  - DarkBlueMJ
-  - TealMJ
-  - GreenMJ
-  - DarkGreenMJ
-  - OrangeMJ
-  - PinkMJ
-  - RedMJ
-  - YellowMJ
-  - PurpleMJ
-  - LightBrownMJ
-  - BrownMJ
-  - MaroonMJ
-  - QuarterzipJumpsuit
+ # - GreyMJ
+ # - BlackMJ
+ # - BlueMJ
+ # - DarkBlueMJ
+ # - TealMJ
+ # - GreenMJ
+ # - DarkGreenMJ
+ # - OrangeMJ
+ # - PinkMJ
+ # - RedMJ
+ # - YellowMJ
+ # - PurpleMJ
+ # - LightBrownMJ
+ # - BrownMJ
+ # - MaroonMJ
+ # - QuarterzipJumpsuit
  # goob changes end
+ #  </Trauma>
 
 - type: loadoutGroup
   id: PassengerFace
@@ -307,7 +309,9 @@
   name: loadout-group-passenger-neck
   minLimit: 0
   loadouts:
-  - Mantle
+ # <Trauma> It is not possible to play assistant enough to unlock this
+ # - Mantle
+ # </Trauma>
   - OldNeckWrap # EE
 
 - type: loadoutGroup

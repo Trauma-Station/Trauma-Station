@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Spawners.Components;
 
-public sealed partial class SpawnPointComponent : Component, ISpawnPoint
+public sealed partial class SpawnPointComponent
 {
     /// <summary>
     /// Extra Jobs that can spawn at a spawnpoint
