@@ -114,10 +114,12 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 2
+            Poison: 1
+            Slash: 3.5
+      - !type:Jitter
   plantMetabolism:
   - !type:PlantAdjustHealth
     amount: -2
   - !type:PlantAdjustMaturation
-    amount: 1
+    amount: 0.2
   - !type:LiquidEarthquake

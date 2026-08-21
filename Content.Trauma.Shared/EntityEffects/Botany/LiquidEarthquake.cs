@@ -18,9 +18,9 @@ public sealed partial class LiquidEarthquake : EntityEffectBase<LiquidEarthquake
     [DataField]
     public float ProductionDecrease = 0.1f;
 
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
+    public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-plant-liquid-earthquake",
             ("limit", ProductionLimit),
-            ("decrease", ProductionDecrease),
+            ("decrease", Math.Round(ProductionDecrease, 1)),
             ("chance", Probability));
 }
