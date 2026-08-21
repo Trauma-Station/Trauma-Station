@@ -11,3 +11,24 @@
       entity_storage: !type:NestedSelector
         tableId: SprayPaints
         rolls: 6,10 # 8 cans on average
+
+
+- type: entity
+  id: CrateWizardDemonology
+  name: Demonology Crate
+  description: A crate containing the demonic essentials!
+  parent: LavalandCrateNecropolis
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: EnchantingRune
+        - id: BloodVialFull
+          amount: 3
+        - id: EnchantingScrollEmpty
+        - id: RitualDagger
+        - id: MagicInkRandom # spawns outside of container due to how MagicInkRandom works could fix with tableid later prob
+        - id: SheetSteel1
+          amount: 3
+        - id: SheetPaper

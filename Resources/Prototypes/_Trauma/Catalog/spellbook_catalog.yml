@@ -1,0 +1,10 @@
+- type: listing
+  id: SpellbookCrateOfDemonology
+  name: spellbook-crate-of-demonology-name
+  description: spellbook-crate-of-demonology-description
+  productEntity: CrateWizardDemonology
+  cost:
+    WizCoin: 1
+  categories:
+  - SpellbookEquipment
+  disableRefund: true #no gamble scamming
