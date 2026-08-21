@@ -506,12 +506,10 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;
 
 [Serializable, NetSerializable]
-public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates coords, bool shouldFire)
+public sealed class LaserBeamEndpointPositionEvent(NetCoordinates coords, bool shouldFire)
     : EntityEventArgs
 {
-    public NetEntity Uid = uid;
-
-    public MapCoordinates Coordinates = coords;
+    public NetCoordinates Coordinates = coords;
 
     public bool ShouldFire = shouldFire;
 }

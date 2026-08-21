@@ -13,10 +13,4 @@ public sealed partial class FaxableObjectComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public string InsertingState = "inserting";
-
-    /// <summary>
-    /// Goobstation - explodes the fax if set on false.
-    /// </summary>
-    [DataField]
-    public bool Copyable = true;
 }

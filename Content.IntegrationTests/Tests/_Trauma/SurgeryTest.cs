@@ -15,6 +15,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Weapons.Melee;
 
 namespace Content.IntegrationTests.Tests._Trauma;
@@ -170,6 +171,7 @@ public sealed class SurgeryTest : InteractionTest
             // dont want them to interfere with healing
             SEntMan.RemoveComponent<BarotraumaComponent>(mob);
             SEntMan.RemoveComponent<RespiratorComponent>(mob);
+            SEntMan.RemoveComponent<TemperatureDamageComponent>(mob);
         });
         return mob;
     }

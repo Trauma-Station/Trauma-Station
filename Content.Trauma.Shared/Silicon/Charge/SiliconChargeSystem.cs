@@ -14,6 +14,7 @@ using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Temperature.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Silicon.Charge;
@@ -28,6 +29,7 @@ public sealed partial class SiliconChargeSystem : EntitySystem
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
     [Dependency] private EntityQuery<MindContainerComponent> _mindConQuery = default!;
 
     private TimeSpan _npcUpdateDelay;
@@ -52,7 +54,7 @@ public sealed partial class SiliconChargeSystem : EntitySystem
                 continue;
 
             // Check if the Silicon is an NPC, and if so, follow the delay as specified in the CVAR.
-            if (ent.Comp.EntityType == SiliconType.Npc)
+            if (!_actorQuery.HasComp(ent))
             {
                 var remaining = now - ent.Comp.LastDrainTime;
                 if (remaining < _npcUpdateDelay)

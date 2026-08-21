@@ -4,7 +4,6 @@
   categories: [ HideSpawnMenu ]
   components:
   # <Trauma>
-  - type: LastWords
   - type: MindLastMob
   - type: MindMessages
   # </Trauma>

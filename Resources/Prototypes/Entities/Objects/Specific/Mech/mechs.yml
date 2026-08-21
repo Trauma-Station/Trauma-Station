@@ -43,6 +43,9 @@
   - type: Insulated # giant metal thing is better at conducting electricity than you
   - type: StaticPrice
     price: 450
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
   # </Trauma>
   - type: MobMover
   - type: Mech

@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Traits;
+using Content.Shared.CCVar;
 using Robust.Client.Audio;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
-using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.Traits;
-using Content.Shared.CCVar;
 
 namespace Content.Goobstation.Client.Traits;
 
@@ -20,34 +20,28 @@ public sealed partial class DeafnessSystem : EntitySystem
     private float _originalVolume;
     private bool _deaf;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnComponentStartup(Entity<DeafComponent> ent, ref ComponentStartup args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<DeafComponent, ComponentStartup>(OnComponentStartup);
-        SubscribeLocalEvent<DeafComponent, ComponentShutdown>(OnDeafShutdown);
-        SubscribeLocalEvent<DeafComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<DeafComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
-    }
-
-    private void OnComponentStartup(EntityUid uid, DeafComponent component, ComponentStartup args)
-    {
-        if (_player.LocalEntity == uid)
+        if (_player.LocalEntity == ent.Owner)
             TryDeafen();
     }
 
-    private void OnDeafShutdown(EntityUid uid, DeafComponent component, ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnDeafShutdown(Entity<DeafComponent> ent, ref ComponentShutdown args)
     {
-        if (_player.LocalEntity == uid)
+        if (_player.LocalEntity == ent.Owner)
             TryUndeafen();
     }
 
-    private void OnPlayerAttached(EntityUid uid, DeafComponent component, LocalPlayerAttachedEvent args)
+    [SubscribeLocalEvent]
+    private void OnPlayerAttached(Entity<DeafComponent> ent, ref LocalPlayerAttachedEvent args)
     {
         TryDeafen();
     }
 
-    private void OnPlayerDetached(EntityUid uid, DeafComponent component, LocalPlayerDetachedEvent args)
+    [SubscribeLocalEvent]
+    private void OnPlayerDetached(Entity<DeafComponent> ent, ref LocalPlayerDetachedEvent args)
     {
         TryUndeafen();
     }
@@ -57,6 +51,7 @@ public sealed partial class DeafnessSystem : EntitySystem
         if (_deaf)
             return; // don't set _originalVolume to 0 and thus cause gain to be locked at 0
 
+        // TODO: lol lmao properly mute sounds you can just change the slider
         // Save the current volume before muting
         _originalVolume = _cfg.GetCVar(CCVars.AudioMasterVolume);
         _audio.SetMasterGain(0);

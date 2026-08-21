@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: RustSowerSmokeBase
+  components:
+  - type: SmokeOnTrigger
+    keysIn:
+    - timer
+    duration: 20
+    spreadAmount: 10
+    solution:
+      reagents:
+      - ReagentId: EldritchRust
+        Quantity: 50
+
+- type: entity
+  parent: [RustSowerSmokeBase, BaseItem]
+  id: BulletShrapnelRustSower
+  name: rust sower shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: ball
+  - type: TimerTrigger
+    delay: 3
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      collection: ExplosionSmall
+  - type: TimedDespawn
+    lifetime: 4
+  - type: Tag
+    tags:
+    - GrenadeIgnoreCosmicField
+
+- type: entity
+  parent: [RustSowerSmokeBase, VolatileGrenadeBase, ScatteringGrenadeBase, TimerGrenadeBase, BaseMagicalContraband]
+  id: RustSowerGrenade
+  name: rust sower
+  description: A nifty little thing that explodes into rust. Causes borgs and mechs to get utterly obliterated.
+  components:
+  - type: UnholyItem
+  - type: TimerTrigger
+    delay: 5
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/rustgrenade.rsi
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      path: /Audio/_Goobstation/Heretic/rust_sower_explode.ogg
+    positional: true
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/_Goobstation/Heretic/rust_sower_armbomb.ogg
+  - type: ItemToggle
+    onActivate: false
+    onUse: false
+    wieldToggle: false
+  - type: ItemToggleOnTrigger
+    canDeactivate: false
+    consciousAction: false
+    showPopup: false
+  - type: ItemTogglePrefix
+    prefixOn: primed
+  - type: ScatteringGrenade
+    fillPrototype: BulletShrapnelRustSower
+    delayBeforeTriggerContents: 0.5
+    intervalBetweenTriggersMax: 0.2
+    capacity: 8
+    randomDistance: true
+    randomThrowDistanceMin: 4
+    randomThrowDistanceMax: 8
+    velocity: 6
+  - type: Tag
+    tags:
+    - GrenadeIgnoreCosmicField
+    - HereticItem
+    - HandGrenade

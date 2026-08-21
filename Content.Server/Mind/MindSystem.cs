@@ -1,7 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Shared.Mind.Components;
 using Content.Trauma.Common.Wizard;
-using Content.Shared.Mobs.Components;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
@@ -203,15 +201,6 @@ public sealed partial class MindSystem : SharedMindSystem
 
                 alreadyAttached = true;
             }
-
-            // Goobstation - End-of-round Last words
-            if (HasComp<MobStateComponent>(entity.Value))
-            {
-                if (TryComp<MindLastMobComponent>(mindId, out var lastMobComp))
-                    lastMobComp.LastMob = entity.Value;
-            }
-            // END
-
         }
         else if (createGhost)
         {
@@ -379,15 +368,20 @@ public sealed partial class MindSystem : SharedMindSystem
             return;
         }
 
-        if (mind.OwnedEntity != null) // Goobstation
-            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        // <Trauma>
+        var oldMob = mind.OwnedEntity;
+        if (oldMob != null)
+            EnsureComp<MindSwappingComponent>(oldMob.Value);
         EnsureComp<MindSwappingComponent>(target);
+        // </Trauma>
 
         MakeSentient(target);
         TransferTo(mindId, target, ghostCheckOverride: true, mind: mind);
 
-        if (mind.OwnedEntity != null) // Goobstation
-            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
-        EnsureComp<MindSwappingComponent>(target);
+        // <Trauma>
+        if (oldMob != null)
+            RemComp<MindSwappingComponent>(oldMob.Value);
+        RemComp<MindSwappingComponent>(target);
+        // </Trauma>
     }
 }

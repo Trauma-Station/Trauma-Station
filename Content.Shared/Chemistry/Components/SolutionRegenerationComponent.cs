@@ -14,7 +14,7 @@ public sealed partial class SolutionRegenerationComponent : Component
     /// <summary>
     /// The reagent(s) to be regenerated in the solution.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField] // Trauma - network it
     public Solution Generated = default!;
 
     /// <summary>
