@@ -10,4 +10,4 @@ lobby-state-background-the-enemy = The Enemy
 # Artists
 asardonicsailor = asardonicsailor
 Hexanova = Hexanova
-leothekiller = leothekiller
+JohnJoe = John Joe
