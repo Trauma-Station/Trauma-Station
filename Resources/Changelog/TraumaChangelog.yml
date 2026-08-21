@@ -13428,3 +13428,85 @@ Entries:
   id: 1463
   time: '2026-08-19T21:24:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4161
+- author: Jack-Silver
+  changes:
+  - type: Tweak
+    message: Airlocks and cameras are now easier to break.
+  id: 1464
+  time: '2026-08-20T04:21:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4163
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a traitor objective to skin Pun Pun alive.
+  id: 1465
+  time: '2026-08-20T05:21:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4168
+- author: FabledTile
+  changes:
+  - type: Fix
+    message: Rat King's minions can now target Bioweapons properly.
+  id: 1466
+  time: '2026-08-20T16:09:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4176
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed shields being twice as effective.
+  - type: Tweak
+    message: Shield hp 125 -> 75.
+  id: 1467
+  time: '2026-08-20T17:14:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4153
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: You can no longer call/recall evac 4 no raisin.
+  - type: Tweak
+    message: Ascended shadowling evac is 5 minutes instead of 20.
+  - type: Tweak
+    message: Red alert evac is back to 10 minutes.
+  - type: Tweak
+    message: More wallmount items no longer need a wall to build them.
+  id: 1468
+  time: '2026-08-20T17:29:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4181
+- author: Sherpack
+  changes:
+  - type: Tweak
+    message: >-
+      Eggs related to ranching are now named fertilized eggs. No more confusion
+      ! 🥚
+  id: 1469
+  time: '2026-08-20T19:53:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4177
+- author: sr483
+  changes:
+  - type: Remove
+    message: Removed syndi defib wideswing
+  - type: Tweak
+    message: Reduced syndi defib shock damage and added heat damage
+  id: 1470
+  time: '2026-08-20T19:58:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4174
+- author: Cerzix
+  changes:
+  - type: Add
+    message: Added Cluoxadone, a strong anti-poison cryogenics medicine.
+  id: 1471
+  time: '2026-08-20T20:02:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4172
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Heirophant club no longer lets you teleport outside of lavaland.
+  id: 1472
+  time: '2026-08-20T22:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4191
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed flashes stacking infinitely...
+  id: 1473
+  time: '2026-08-20T22:53:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4192
