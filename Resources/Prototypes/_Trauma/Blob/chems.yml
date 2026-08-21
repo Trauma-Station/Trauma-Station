@@ -257,6 +257,6 @@
   growthEffects:
   - !type:GrowBlob
     probability: 0.3
-  attackedEffects:
+  damagedEffects:
   - !type:GrowBlob
     probability: 0.2 # 60% for burn damage specifically on tg, this is for any damage
