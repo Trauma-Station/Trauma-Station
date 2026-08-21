@@ -30,3 +30,14 @@
     #Todo: get a sprite for and make D-Class PDA, prisoner themed. The ID itself already exists.
     id: PassengerPDA
     ears: ClothingHeadsetGrey
+
+- type: chameleonOutfit
+  id: DClassChameleonOutfit
+  job: DClass
+  equipment:
+    head: ClothingHeadHatWelding
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckMantle
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesColorYellowBudget
