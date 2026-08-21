@@ -68,6 +68,8 @@
   - type: ChildEntities
     childPrototypes:
       - prototype: OverlayCMPlatform
+  - type: CosmicCorruptible
+    convertTo: CosmicPlatform
 
 - type: entity
   parent: CMPlatformBase
@@ -99,6 +101,8 @@
   - type: ChildEntities
     childPrototypes:
       - prototype: OverlayCMPlatformCorner
+  - type: CosmicCorruptible
+    convertTo: CosmicPlatformCorner
 
 - type: entity
   parent: CMPlatformBase
@@ -121,6 +125,8 @@
   - type: ChildEntities
     childPrototypes:
       - prototype: OverlayRMCPlatformCornerSmall
+  - type: CosmicCorruptible
+    convertTo: CosmicPlatformCornerSmall
 
 - type: entity
   parent: CMPlatform
@@ -131,6 +137,8 @@
   - type: ChildEntities
     childPrototypes:
       - prototype: OverlayCMPlatform
+  - type: CosmicCorruptible
+    convertTo: CosmicPlatformStairRight
 
 - type: entity
   parent: CMPlatform
@@ -141,6 +149,8 @@
   - type: ChildEntities
     childPrototypes:
       - prototype: OverlayCMPlatform
+  - type: CosmicCorruptible
+    convertTo: CosmicPlatformStairLeft
 
 # New Dark
 
@@ -175,7 +185,7 @@
     - prototype: OverlayRMCPlatformCornerSmallDark
 
 - type: entity
-  parent: CMPlatform
+  parent: RMCPlatformStairRight
   id: RMCPlatformStairRightDark
   components:
   - type: Sprite
@@ -185,7 +195,7 @@
       - prototype: OverlayCMPlatformDark
 
 - type: entity
-  parent: CMPlatform
+  parent: RMCPlatformStairLeft
   id: RMCPlatformStairLeftDark
   components:
   - type: Sprite
@@ -227,7 +237,7 @@
     - prototype: OverlayRMCPlatformCornerSmallWood
 
 - type: entity
-  parent: CMPlatform
+  parent: RMCPlatformStairRight
   id: RMCPlatformStairRightWood
   components:
   - type: Sprite
@@ -237,7 +247,7 @@
       - prototype: OverlayCMPlatformWood
 
 - type: entity
-  parent: CMPlatform
+  parent: RMCPlatformStairLeft
   id: RMCPlatformStairLeftWood
   components:
   - type: Sprite
