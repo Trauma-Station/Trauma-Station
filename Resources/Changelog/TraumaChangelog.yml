@@ -13546,3 +13546,10 @@ Entries:
   id: 1477
   time: '2026-08-21T09:19:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3614
+- author: Xenobeam-1
+  changes:
+  - type: Tweak
+    message: Adjusted upstream making buckets 3x4, they're 2x3 now.
+  id: 1478
+  time: '2026-08-21T09:30:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4205
