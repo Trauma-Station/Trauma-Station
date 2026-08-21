@@ -1,5 +1,7 @@
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Events;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Mind;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.GameTicking.Components;
@@ -8,6 +10,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Robust.Server.Player;
+using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
@@ -17,30 +20,21 @@ namespace Content.Trauma.Server.GameTicking.Rules;
 public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatisticRuleComponent>
 {
     [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private const string Rule = "SpectatorStatistics";
 
-        SubscribeLocalEvent<FollowerComponent, StartedFollowingEntityEvent>(OnNewFollow);
-    }
-
+    [SubscribeLocalEvent]
     private void OnNewFollow(Entity<FollowerComponent> ent, ref StartedFollowingEntityEvent ev)
     {
-        if (!TryComp<MindContainerComponent>(ev.Following, out var mindContainer))
-            return;
-
-        // Only track entities that are actual people
-        if (!mindContainer.Mind.HasValue)
-            return;
-
-        if (!TryComp<MindComponent>(mindContainer.Mind, out var mindComp))
+        if (!_mind.TryGetMind(ev.Following, out var mind, out var mindComp))
             return;
 
         if (mindComp.CharacterName is not { })
             return;
 
-        if (!mindComp.UserId.HasValue)
+        if (mindComp.UserId is not { })
             return;
 
         if (!TryComp<FollowedComponent>(ev.Following, out var followed))
@@ -57,6 +51,13 @@ public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<Observe
 
             observerStats.MostPopularEntityPopularity = followed.Following.Count;
         }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRoundStarting(RoundStartingEvent ev)
+    {
+        var rule = Spawn(Rule, MapCoordinates.Nullspace);
+        _ticker.StartGameRule(rule);
     }
 
     protected override void AppendRoundEndText(
