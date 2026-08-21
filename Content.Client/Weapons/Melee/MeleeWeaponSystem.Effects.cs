@@ -24,6 +24,7 @@ public sealed partial class MeleeWeaponSystem
             return;
 
         // <Trauma>
+        Log.Info("DoLunge {ToPrettyString(user)} weap {ToPrettyString(weapon)} src {ToPrettyString(source)]");
         if (source != null && source != user)
         {
             user = source.Value;
