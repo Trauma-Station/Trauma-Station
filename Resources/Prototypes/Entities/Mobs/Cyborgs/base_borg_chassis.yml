@@ -511,6 +511,8 @@
   components:
   # <Trauma>
   - type: BlockShuttleRecall
+  - type: EmpResistance
+    durationMultiplier: 0
   # </Trauma>
   - type: RandomMetadata
     nameSegments:
