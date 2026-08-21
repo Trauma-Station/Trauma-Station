@@ -13471,3 +13471,42 @@ Entries:
   id: 1468
   time: '2026-08-20T17:29:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4181
+- author: Sherpack
+  changes:
+  - type: Tweak
+    message: >-
+      Eggs related to ranching are now named fertilized eggs. No more confusion
+      ! 🥚
+  id: 1469
+  time: '2026-08-20T19:53:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4177
+- author: sr483
+  changes:
+  - type: Remove
+    message: Removed syndi defib wideswing
+  - type: Tweak
+    message: Reduced syndi defib shock damage and added heat damage
+  id: 1470
+  time: '2026-08-20T19:58:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4174
+- author: Cerzix
+  changes:
+  - type: Add
+    message: Added Cluoxadone, a strong anti-poison cryogenics medicine.
+  id: 1471
+  time: '2026-08-20T20:02:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4172
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Heirophant club no longer lets you teleport outside of lavaland.
+  id: 1472
+  time: '2026-08-20T22:46:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4191
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed flashes stacking infinitely...
+  id: 1473
+  time: '2026-08-20T22:53:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4192
