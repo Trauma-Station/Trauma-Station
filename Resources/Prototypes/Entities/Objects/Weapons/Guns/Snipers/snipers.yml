@@ -133,7 +133,7 @@
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
   - type: GunRequiresWield
   - type: Gun
-    fireRate: 0.4 # Trauma, was 0.8
+    fireRate: 0.5
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
