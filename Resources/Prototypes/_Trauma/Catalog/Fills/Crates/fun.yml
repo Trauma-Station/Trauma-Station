@@ -21,14 +21,15 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:AllSelector
+      entity_storage: !type:NestedPrototype
         children:
-        - id: EnchantingRune
+        - !type:NestedSelector
+          tableId: RandomInkSpawner # have i lost the plot entirely, this did not fix my issue of ink spawning outside the crate
+        - id: EnchantingRune # spawns off center to tiles and cant be walked over like one created normally
         - id: BloodVialFull
           amount: 3
         - id: EnchantingScrollEmpty
         - id: RitualDagger
-        - id: MagicInkRandom # spawns outside of container due to how MagicInkRandom works could fix with tableid later prob
         - id: SheetSteel1
           amount: 3
         - id: SheetPaper
