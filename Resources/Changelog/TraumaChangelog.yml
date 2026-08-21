@@ -13569,3 +13569,12 @@ Entries:
   id: 1480
   time: '2026-08-21T22:18:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4217
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Added signal autolinking for interactors and conveyors, logic gates
+      starting interactors.
+  id: 1481
+  time: '2026-08-21T22:49:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4218
