@@ -13,35 +13,6 @@
     jumpsuit: ClothingUniformJumpskirtColorGrey
 
 # <Trauma> To prevent the no loadout orphans test from failing, all currently orphans must be commented.
-# Greytide Time
-# - type: loadoutEffectGroup
-#   id: GreyTider
-#   effects:
-#   - !type:JobRequirementLoadoutEffect
-#     requirement:
-#       !type:RoleTimeRequirement
-#       role: JobPassenger
-#       time: 10h # silly reward for people who play passenger a lot
-
-# Head of Greytide (for grey mantle)
-# - type: loadoutEffectGroup
-#   id: MasterGrey
-#   effects:
-#   - !type:JobRequirementLoadoutEffect
-#     requirement:
-#       !type:RoleTimeRequirement
-#       role: JobPassenger
-#       time: 20h # fun mantle for the most experienced greytiders
-
-# Face
-# - type: loadout
-#   id: PassengerFace
-#   effects:
-#   - !type:GroupLoadoutEffect
-#     proto: GreyTider
-#   equipment:
-#     mask: ClothingMaskGas
-
 # Rainbow
 # - type: loadout
 #   id: RainbowJumpsuit
@@ -70,6 +41,35 @@
 #     jumpsuit: ClothingUniformJumpsuitAncient
 
 # </Trauma>
+
+# Greytide Time
+- type: loadoutEffectGroup
+  id: GreyTider
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 10h # silly reward for people who play passenger a lot
+
+# Face
+- type: loadout
+  id: PassengerFace
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GreyTider
+  equipment:
+    mask: ClothingMaskGas
+
+# Head of Greytide (for grey mantle)
+- type: loadoutEffectGroup
+  id: MasterGrey
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 20h # fun mantle for the most experienced greytiders
 
 - type: loadout
   id: Mantle
