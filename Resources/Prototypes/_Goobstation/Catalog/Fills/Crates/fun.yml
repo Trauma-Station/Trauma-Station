@@ -65,24 +65,7 @@
     containers:
       entity_storage:
         id: DiscoBeachBall
-# <Trauma>
-# - type: entity
-#  id: CrateWizardAnomCore
-#  name: Crate of Enchanting
-#  description: A box containing stolen anomaly cores, used for enchanting.
-#  parent: CratePirate
-#  components:
-#  #ONLY contains anomalies with enchantcomp.
-#  - type: EntityTableContainerFill
-#    containers:
-#      entity_storage: !type:AllSelector
-#        children:
-#        - !type:NestedSelector
-#          tableId: RandomAnomalyCoreEnchantTable
-#        - !type:NestedSelector
-#          tableId: RandomAnomalyCoreInertEnchantTable
-#          rolls: 2
-# </Trauma>
+
 - type: entityTable
   id: RandomAnomalyCoreEnchantTable
   table: !type:GroupSelector
