@@ -13510,3 +13510,53 @@ Entries:
   id: 1473
   time: '2026-08-20T22:53:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4192
+- author: assripper. John Joe
+  changes:
+  - type: Add
+    message: new lobby art showcasing some of the antags found on trauma station
+  id: 1474
+  time: '2026-08-21T05:01:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4196
+- author: Hoodsie
+  changes:
+  - type: Fix
+    message: Fixed xenomorph guidebook saying they are spaceproof.
+  id: 1475
+  time: '2026-08-21T05:01:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4194
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed and re-enabled blob.
+  - type: Add
+    message: >-
+      Added the Cryogenic Poison, Energized Jelly, Pressurized Slime and
+      Replicating Foam chems from tgstation.
+  - type: Tweak
+    message: >-
+      Blob tile range checks are now per-type, factories can be less packed
+      together than nodes for example.
+  id: 1476
+  time: '2026-08-21T08:09:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4202
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Minor cosmetic improvements to the cosmic cult
+  id: 1477
+  time: '2026-08-21T09:19:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3614
+- author: Xenobeam-1
+  changes:
+  - type: Tweak
+    message: Adjusted upstream making buckets 3x4, they're 2x3 now.
+  id: 1478
+  time: '2026-08-21T09:30:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4205
+- author: Evoluxionary
+  changes:
+  - type: Add
+    message: Added new security duty gloves to the secdrobe.
+  id: 1479
+  time: '2026-08-21T11:01:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4195

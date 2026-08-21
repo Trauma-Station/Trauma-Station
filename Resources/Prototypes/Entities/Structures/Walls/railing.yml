@@ -30,6 +30,10 @@
   parent: BaseRailing
   id: Railing
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailing
+  # </Trauma>
   - type: Sprite
     state: side
   - type: Icon
@@ -70,6 +74,10 @@
   parent: BaseRailing
   id: RailingCorner
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailingCorner
+  # </Trauma>
   - type: Sprite
     state: corner
   - type: Icon
@@ -119,6 +127,10 @@
   parent: BaseRailing
   id: RailingCornerSmall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailingCornerSmall
+  # </Trauma>
   - type: Sprite
     state: corner_small
   - type: Icon
@@ -159,6 +171,10 @@
   parent: BaseRailing
   id: RailingRound
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailingRound
+  # </Trauma>
   - type: Sprite
     state: round
   - type: Icon
