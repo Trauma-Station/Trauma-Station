@@ -19,7 +19,7 @@ public sealed partial class AdjustProduction : EntityEffectBase<AdjustProduction
     public float ProductionDecrease = 0.1f;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
-        Loc.GetString("entity-effect-adjust-production",
+        Loc.GetString("entity-effect-guidebook-plant-adjust-production",
             ("limit", ProductionLimit),
             ("decrease", Math.Round(ProductionDecrease, 1)),
             ("chance", Probability));
