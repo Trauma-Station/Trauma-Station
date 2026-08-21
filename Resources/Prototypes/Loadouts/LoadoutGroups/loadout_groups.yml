@@ -279,21 +279,21 @@
  # - MaroonMJ
  # - QuarterzipJumpsuit
  # goob changes end
- #  </Trauma>
 
-- type: loadoutGroup
-  id: PassengerFace
-  name: loadout-group-passenger-mask
-  minLimit: 0
-  loadouts:
-  - PassengerFace
+#- type: loadoutGroup
+ # id: PassengerFace
+ # name: loadout-group-passenger-mask
+ # minLimit: 0
+ # loadouts:
+ # - PassengerFace
 
-- type: loadoutGroup
-  id: PassengerGloves
-  name: loadout-group-passenger-gloves
-  minLimit: 0
-  loadouts:
-  - PassengerGloves
+#- type: loadoutGroup
+ #  id: PassengerGloves
+ #  name: loadout-group-passenger-gloves
+ #  minLimit: 0
+ #  loadouts:
+ #  - PassengerGloves
+#  </Trauma>
 
 - type: loadoutGroup
   id: CommonBackpack
