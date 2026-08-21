@@ -37,7 +37,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!RandomTeleport(args.User, ent, out var wp, user: args.User))
+        if (!RandomTeleport(args.User, (ent, ent.Comp), out var wp, user: args.User))
             return;
 
         _adminLog.Add(LogType.Action, LogImpact.Low, $"{args.User:actor} randomly teleported to {wp} using {ent:used}");
@@ -75,7 +75,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
 
         var newCoords = Transform(target).Coordinates;
         if (sound)
-            _audio.PlayPredicted(rtp.ArrivalSound, oldCoords, predicted ? user : null);
+            _audio.PlayPredicted(rtp.Comp.ArrivalSound, oldCoords, predicted ? user : null);
         _sparks.DoSparks(newCoords, predicted: predicted, source: user);
 
         return true;

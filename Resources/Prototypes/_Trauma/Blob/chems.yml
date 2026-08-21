@@ -39,13 +39,13 @@
   attackEffects:
   - !type:AddReagentToBlood
     reagent: FrostOil
-    quantity: 7.5
+    amount: 7.5
   - !type:AddReagentToBlood
     reagent: Ice
-    quantity: 7.5
+    amount: 7.5
   - !type:AddReagentToBlood
     reagent: CryogenicPoison
-    quantity: 7.5
+    amount: 7.5
 
 - type: blobChem
   id: ElectromagneticWeb
@@ -94,6 +94,10 @@
       Blunt: 5
       Asphyxiation: 15
       Structural: 150
+  smokeSolution:
+    reagents:
+    - ReagentId: Histamine
+      Quantity: 30
   attackEffects:
   - !type:TakeStaminaDamage
     amount: 30
@@ -158,12 +162,18 @@
   info: |
     Deals 15 blunt, 10 airloss and 25 stamina damage, which can be protected against by armor.
     You take half brute damage.
-    Splashes water around when hit or killed.
+    Splashes water around when blobs are hit or killed.
   color: "#aaaabb"
   damage:
     types:
       Blunt: 15
       Asphyxiation: 10
+  smokeSolution:
+    reagents:
+    - ReagentId: SpaceLube
+      Quantity: 15
+    - ReagentId: Water # hydrating!
+      Quantity: 15
   attackEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -225,3 +235,28 @@
       Quantity: 30
   healingScale: 5
   bonusPoints: 1
+
+- type: blobChem
+  id: ReplicatingFoam
+  name: "replicating foam"
+  color: "#7b5a57"
+  info: |
+    Deals 17 blunt damage and 2 caustic damage.
+    Chance of bonus expansion when growing normally or attacked.
+    You take double brute damage.
+  damage:
+    types:
+      Blunt: 17
+      Caustic: 2
+      Structural: 150
+  smokeSolution:
+    reagents:
+    - ReagentId: Slime
+      Quantity: 30 # Yum
+  damageModifiers: ReplicatingFoamBlob
+  growthEffects:
+  - !type:GrowBlob
+    probability: 0.3
+  attackedEffects:
+  - !type:GrowBlob
+    probability: 0.2 # 60% for burn damage specifically on tg, this is for any damage

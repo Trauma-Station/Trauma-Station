@@ -41,6 +41,9 @@ public sealed partial class BlobChemPrototype : IPrototype
     public EntityEffect[]? AttackEffects;
 
     [DataField]
+    public EntityEffect[]? GrowthEffects;
+
+    [DataField]
     public EntityEffect[]? DamagedEffects;
 
     [DataField]

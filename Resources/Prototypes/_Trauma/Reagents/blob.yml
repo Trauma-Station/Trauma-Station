@@ -6,6 +6,7 @@
   desc: reagent-desc-cryogenic-poison
   group: Toxins
   flavor: BrainFreeze
+  physicalDesc: reagent-physical-desc-clear
   color: "#8BA6E9"
   metabolisms:
     Bloodstream:

@@ -14,12 +14,12 @@ public sealed partial class EmpEffectsComponent : Component
     /// <summary>
     /// Effect prototype to apply to this entity.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public ProtoId<EntityEffectPrototype> Effects;
 
     /// <summary>
     /// Whether to mark the entity as disabled by the EMP.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool Disable;
 }

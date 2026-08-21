@@ -29,6 +29,7 @@ public sealed partial class SparksEffectSystem : EntityEffectSystem<TransformCom
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<Sparks> args)
     {
         var e = args.Effect;
-        _sparks.DoSparks(e.MinSparks, e.MaxSparks, e.MinVelocity, e.MaxVelocity, e.PlaySound, args.Predicted, ent);
+        _sparks.DoSparks(ent.Comp.Coordinates, e.MinSparks, e.MaxSparks,
+            e.MinVelocity, e.MaxVelocity, e.PlaySound, args.Predicted, ent);
     }
 }

@@ -40,10 +40,8 @@ public sealed partial class SparksSystem : CommonSparksSystem
 
         if (playSound)
         {
-            if (!predicted && _net.IsServer)
+            if (predicted ? (_net.IsClient && _timing.IsFirstTimePredicted) : _net.IsServer)
                 _audio.PlayPvs(Sound, coords);
-            else if (_net.IsClient && _timing.IsFirstTimePredicted)
-                _audio.PlayLocal(Sound, coords, null);
         }
 
         var mapCoords = _transform.ToMapCoordinates(coords);

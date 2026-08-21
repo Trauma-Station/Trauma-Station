@@ -5,6 +5,7 @@ using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Damage.Systems;
+using Content.Shared.EntityEffects;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Map;
@@ -19,6 +20,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -150,9 +152,9 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
 
         _damage.SetDamageModifierSetId(ent.Owner, chem.DamageModifiers);
         if (old?.AddedComponents is { } oldAdded)
-            EntityManager.RemoveComponents(oldAdded);
+            EntityManager.RemoveComponents(ent, oldAdded);
         if (chem.AddedComponents is { } added)
-            EntityManager.AddComponents(added);
+            EntityManager.AddComponents(ent, added);
     }
 
     /// <summary>
@@ -163,6 +165,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     /// <param name="node">Node will be used in ConnectBlobTile method.</param>
     /// <param name="id">Type of a new blob tile.</param>
     /// <param name="coords">Coordinates of a new tile.</param>
+    /// <param name="doEffects">Whether to apply GrowthEffects to the new tile.</param>
     /// <seealso cref="ConnectBlobTile"/>
     /// <seealso cref="BlobCoreComponent"/>
     public bool TransformBlobTile(
@@ -170,7 +173,8 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         Entity<BlobCoreComponent?> core,
         Entity<BlobNodeComponent>? node,
         [ForbidLiteral] ProtoId<BlobTilePrototype> id,
-        EntityCoordinates coords)
+        EntityCoordinates coords,
+        bool doEffects = true)
     {
         if (!Resolve(core, ref core.Comp))
             return false;
@@ -189,6 +193,9 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
 
         ConnectBlobTile((tile, tileComp), core.AsNullable(), node);
         ChangeBlobEntChem((tile, tileComp), ProtoMan.Index(core.Comp.CurrentChem), null);
+
+        if (doEffects && ProtoMan.Index(core.Comp.CurrentChem).GrowthEffects is { } effects)
+            _effects.ApplyEffects(tile, effects, user: core);
 
         return true;
     }
@@ -271,11 +278,11 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         var range = ProtoMan.Index(newTile).BlockRange;
         if (range > 0f)
         {
-            if (GetNearbyTile(coords, newTile) == null)
-                return true;
-
-            _popup.PopupCoordinates("Too close to another tile of the same type!", coords, user, PopupType.Large);
-            return false;
+            if (AnyTileInRange(newTile, coords, range))
+            {
+                _popup.PopupCoordinates("Too close to another tile of the same type!", coords, user, PopupType.Large);
+                return false;
+            }
         }
 
         if (!requireNode)
@@ -385,7 +392,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         var nearestDistance = float.MaxValue;
         Entity<BlobNodeComponent>? nearest = null;
 
-        var worldPos = _transform.ToWorldPosition(coords):
+        var worldPos = _transform.ToWorldPosition(coords);
         _nodes.Clear();
         _lookup.GetEntitiesInRange(coords, radius, _nodes, LookupFlags.Static);
         foreach (var node in _nodes)
@@ -405,13 +412,13 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     /// <summary>
     /// Returns true if a given tile exists within a radius of a position.
     /// </summary>
-    public bool IsTileInRange([ForbidLiteral] ProtoId<BlobTilePrototype> id, EntityCoordinates coords, float radius)
+    public bool AnyTileInRange([ForbidLiteral] ProtoId<BlobTilePrototype> id, EntityCoordinates coords, float radius)
     {
         _tiles.Clear();
         _lookup.GetEntitiesInRange(coords, radius, _tiles, LookupFlags.Static);
         foreach (var tile in _tiles)
         {
-            if (tile.Comp.Type == id)
+            if (tile.Comp.Tile == id)
                 return true;
         }
 

@@ -27,7 +27,8 @@ public abstract partial class SharedBlobbernautSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnDamageDealt(Entity<BlobbernautComponent> ent, ref DamageDealtEvent args)
     {
-        if (args.Origin is not { } origin)
+        if (args.Origin is not { } origin ||
+            !args.Damage.AnyPositive())
             return;
 
         var chem = ProtoMan.Index(ent.Comp.CurrentChem);
