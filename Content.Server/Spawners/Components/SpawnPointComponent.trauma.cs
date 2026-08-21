@@ -8,6 +8,6 @@ public sealed partial class SpawnPointComponent : Component, ISpawnPoint
     /// <summary>
     /// Extra Jobs that can spawn at a spawnpoint
     /// </summary>
-    [DataField("extrajobs")]
+    [DataField]
     public List<ProtoId<JobPrototype>> ExtraJobs = new();
 }
