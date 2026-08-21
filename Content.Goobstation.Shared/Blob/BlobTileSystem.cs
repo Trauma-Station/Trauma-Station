@@ -36,6 +36,7 @@ public sealed partial class BlobTileSystem : EntitySystem
     [Dependency] private NpcFactionSystem _faction = default!;
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
     [Dependency] private EntityQuery<BlobObserverComponent> _observerQuery = default!;
+    [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
@@ -103,6 +104,22 @@ public sealed partial class BlobTileSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<BlobTileComponent> ent, ref DamageDealtEvent args)
+    {
+        if (args.Origin is not { } origin ||
+            !args.Damage.AnyPositive() ||
+            ent.Comp.Core is not { } core ||
+            !_coreQuery.TryComp(core, out var coreComp))
+            return;
+
+        var chem = ProtoMan.Index(coreComp.CurrentChem);
+        if (chem.DamagedEffects is not { } effects)
+            return;
+
+        _effects.ApplyEffects(ent, effects, user: origin);
+    }
+
+    [SubscribeLocalEvent]
     private void OnNodePulse(Entity<BlobTileComponent> ent, ref BlobNodePulseEvent args)
     {
         args.Handled |= NodePulse(ent, args.Core, args.Chem, args.Handled);
@@ -119,9 +136,20 @@ public sealed partial class BlobTileSystem : EntitySystem
             healing *= chem.HealingScale;
         _damage.ChangeDamage(ent.Owner, healing);
 
-        if (lazy)
-            return false;
+        return !lazy && TryGrow(ent, core, chem, out _);
+    }
 
+    public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true)
+    {
+        newTile = null;
+        return ent.Comp.Core is { } core &&
+            _coreQuery.TryComp(core, out var coreComp) &&
+            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects);
+    }
+
+    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem, out EntityUid? newTile, bool attack = true, bool doEffects = true)
+    {
+        newTile = null;
         var xform = Transform(ent);
         if (xform.GridUid is not { } gridUid || !_gridQuery.TryComp(gridUid, out var grid))
             return false;
@@ -159,16 +187,19 @@ public sealed partial class BlobTileSystem : EntitySystem
             var spawn = true;
             foreach (var uid in _map.GetAnchoredEntities(gridUid, grid, innerTile.GridIndices))
             {
-                if (HasComp<BlobTileComponent>(uid))
+                if (_tileQuery.HasComp(uid))
                     spawn = false;
 
                 if (!HasComp<DestructibleComponent>(uid))
                     continue;
 
-                DoLunge(ent, uid);
-                _damage.TryChangeDamage(uid, chem.Damage);
-                if (_net.IsClient && _timing.IsFirstTimePredicted) // all clients will predict it
-                    _audio.PlayPvs(core.Comp.AttackSound, uid);
+                if (attack)
+                {
+                    DoLunge(ent, uid);
+                    _damage.TryChangeDamage(uid, chem.Damage);
+                    if (_net.IsClient && _timing.IsFirstTimePredicted) // all clients will predict it
+                        _audio.PlayPvs(core.Comp.AttackSound, uid);
+                }
                 return true;
             }
 
@@ -177,7 +208,8 @@ public sealed partial class BlobTileSystem : EntitySystem
 
             // spawn a new blob tile there
             var coords = _map.ToCoordinates(gridUid, innerTile.GridIndices, grid);
-            if (_core.TransformBlobTile(null, core.AsNullable(), node, ent.Comp.SpreadTile, coords))
+            newTile = _core.TransformBlobTile(null, core.AsNullable(), node, ent.Comp.SpreadTile, coords, doEffects);
+            if (newTile != null)
                 break;
         }
 
@@ -193,7 +225,7 @@ public sealed partial class BlobTileSystem : EntitySystem
             _core.GetNearNode(coords, coreComp.TilesRadiusLimit) is not { } node)
             return;
 
-        _core.TransformBlobTile(target.AsNullable(), (core, coreComp), node, nextId, coords);
+        _core.TransformBlobTile(target.AsNullable(), (core, coreComp), node, nextId, coords, doEffects: false);
     }
 
     public bool IsEmptySpecial(Entity<BlobNodeComponent> node, ProtoId<BlobTilePrototype> tile)
