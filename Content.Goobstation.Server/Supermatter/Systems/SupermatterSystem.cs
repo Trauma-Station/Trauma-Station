@@ -163,6 +163,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         var gases = sm.GasStorage;
         var facts = sm.GasDataFields;
 
+        // TODO: use array storage and kill linq jesus christ
         //Lets get the proportions of the gasses in the mix for scaling stuff later
         //They range between 0 and 1
         gases = gases.ToDictionary(
@@ -532,7 +533,8 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
                 break;
 
             case DelamType.Cascade:
-                Spawn(sm.SupermatterKudzuPrototypeId, xform.Coordinates);
+                // TODO: actually implement it with the portals and stuff bruh
+                Spawn(sm.TeslaPrototypeId, xform.Coordinates);
                 break;
         }
     }

@@ -25,6 +25,11 @@
   flavorType: Complex
   description: flavor-complex-ether
 
+- type: flavor
+  id: rust
+  flavorType: Complex
+  description: flavor-complex-rust
+
 - type: reagent
   id: EldritchEssence
   parent: BaseDrink
@@ -32,6 +37,7 @@
   name: reagent-name-eldritch
   desc: reagent-desc-eldritch
   physicalDesc: reagent-physical-desc-eldritch
+  contrabandSeverity: Magical
   flavor: eldritch
   color: "#1f8016"
   metabolisms:
@@ -77,10 +83,6 @@
         time: 50
         type: Remove
     Bloodstream:
-      # Either predicted random is broken or some entity effect shitcode but setting probability of paralysis to below 1
-      # results in it either not doing anything or paralyzing repeatedly over and over.
-      # So we have this instead.
-      metabolismRate: 5
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -91,12 +93,13 @@
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
-      - !type:ModifyParalysis
-        time: 1
+      - !type:TakeStaminaDamage
+        amount: 10
+        immediate: false
       - !type:HealthChange
         damage:
           types:
-            Poison: 15
+            Poison: 3
   tileReactions:
   - !type:ChangeTileReaction # Rusts tile
 
@@ -107,6 +110,7 @@
   name: reagent-name-crucible-soul
   desc: reagent-desc-crucible-soul
   physicalDesc: reagent-physical-desc-crucible-soul
+  contrabandSeverity: Magical
   flavor: crucibleSoul
   color: "#fb793a"
   metabolisms:
@@ -156,6 +160,7 @@
   name: reagent-name-clarity
   desc: reagent-desc-clarity
   physicalDesc: reagent-physical-desc-clarity
+  contrabandSeverity: Magical
   flavor: clarity
   color: "#d5dc1d"
   metabolisms:
@@ -200,6 +205,7 @@
   name: reagent-name-marshal
   desc: reagent-desc-marshal
   physicalDesc: reagent-physical-desc-marshal
+  contrabandSeverity: Magical
   flavor: marshal
   color: "#5e718e"
   metabolisms:
@@ -293,6 +299,7 @@
   name: reagent-name-ether
   desc: reagent-desc-ether
   physicalDesc: reagent-physical-desc-ether
+  contrabandSeverity: Magical
   flavor: ether
   color: "#92ca35"
   metabolisms:
@@ -340,3 +347,64 @@
         effectProto: StatusEffectForcedSleeping
         time: 9
         delay: 5
+
+- type: reagent
+  id: EldritchRust
+  group: Unknown
+  name: reagent-name-eldritch-rust
+  desc: reagent-desc-eldritch-rust
+  physicalDesc: reagent-physical-desc-rusty
+  contrabandSeverity: Magical
+  flavor: rust
+  color: "#b18644"
+  metabolisms:
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        inverted: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "generic-reagent-effect-burning-insides" ]
+        probability: 0.33
+      - !type:Emote
+        emote: Scream
+        probability: 0.3
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        time: 3.5
+      - !type:Jitter
+      - !type:ModifyStatusEffect
+        effectProto: EldritchRustStatusEffect
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        ignoreResistances: false
+        splitDamage: Split
+        damage:
+          types:
+            Ion: 30
+  tileReactions:
+  - !type:ChangeTileReaction # Rusts tile

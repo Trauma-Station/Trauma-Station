@@ -796,12 +796,6 @@
   - ActionHereticRealignment
 
 - type: hereticKnowledge
-  id: EnvyKnife
-  stage: 4
-  ritualPrototypes:
-  - RitualEnvyKnife
-
-- type: hereticKnowledge
   id: MaskOfMadness
   stage: 4
   ritualPrototypes:
@@ -879,6 +873,12 @@
   stage: 5
   ritualPrototypes:
   - RitualLionhunterRifleAmmunition
+
+- type: hereticKnowledge
+  id: RustSowerGrenade
+  stage: 5
+  ritualPrototypes:
+  - RitualRustSowerGrenade
 
 ## T3
 - type: hereticKnowledge

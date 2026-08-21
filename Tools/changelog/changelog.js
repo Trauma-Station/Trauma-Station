@@ -94,6 +94,7 @@ async function main() {
         console.log("No author found, setting it to author of the PR\n");
         author = user.login;
     }
+    author = author.trim();
 
     // Get all changes from the changelog body
     const changelog = headerMatch[2];
@@ -153,7 +154,7 @@ function getChanges(body) {
     	}
 
         (entries[category] ??= [])
-        	.push({ type: match[1], message: match[2] });
+        	.push({ type: match[1], message: match[2].trim() });
         empty = false;
     }
 

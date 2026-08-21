@@ -31,7 +31,7 @@
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    #- id: BlobMidround # Disabled until its major bugs are fixed
+    - id: BlobMidround
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation

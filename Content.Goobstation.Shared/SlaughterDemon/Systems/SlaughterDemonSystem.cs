@@ -22,39 +22,16 @@ namespace Content.Goobstation.Shared.SlaughterDemon.Systems;
 
 public sealed partial class SlaughterDemonSystem : EntitySystem
 {
-    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private SlaughterDevourSystem _slaughterDevour = default!;
+    [Dependency] private SlaughterDevourSystem _devour = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
-
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        // movement speed
-        SubscribeLocalEvent<SlaughterDemonComponent, RefreshMovementSpeedModifiersEvent>(RefreshMovement);
-
-        // blood crawl
-        SubscribeLocalEvent<SlaughterDemonComponent, BloodCrawlExitEvent>(OnBloodCrawlExit);
-        SubscribeLocalEvent<SlaughterDemonComponent, BloodCrawlAttemptEvent>(OnBloodCrawlAttempt);
-
-        // devouring
-        SubscribeLocalEvent<SlaughterDemonComponent, SlaughterDevourEvent>(OnSlaughterDevour);
-        SubscribeLocalEvent<SlaughterDemonComponent, BeingGibbedEvent>(OnBeingGibbed);
-
-        // polymorph shittery
-        SubscribeLocalEvent<SlaughterDemonComponent, PolymorphedEvent>(OnPolymorph);
-
-        // cant pickup items
-        SubscribeLocalEvent<SlaughterDemonComponent, PickupAttemptEvent>(OnPickup);
-    }
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -68,10 +45,11 @@ public sealed partial class SlaughterDemonSystem : EntitySystem
 
             comp.ExitedBloodCrawl = false;
             Dirty(uid, comp);
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorph(Entity<SlaughterDemonComponent> ent, ref PolymorphedEvent args)
     {
         if (!TryComp<SlaughterDevourComponent>(args.NewEntity, out var component)
@@ -89,56 +67,59 @@ public sealed partial class SlaughterDemonSystem : EntitySystem
             _actions.StartUseDelay(action.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnBloodCrawlExit(Entity<SlaughterDemonComponent> ent, ref BloodCrawlExitEvent args)
     {
         ent.Comp.Accumulator = _timing.CurTime + ent.Comp.NextUpdate;
         ent.Comp.ExitedBloodCrawl = true;
         Dirty(ent);
 
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
+        _speed.RefreshMovementSpeedModifiers(ent.Owner);
 
         PlayMeatySound(ent);
         PredictedSpawnAtPosition(ent.Comp.JauntUpEffect, Transform(ent.Owner).Coordinates);
     }
 
-    private void OnSlaughterDevour(Entity<SlaughterDemonComponent> ent, ref SlaughterDevourEvent args)
+    [SubscribeLocalEvent]
+    private void OnSlaughterDevour(Entity<SlaughterDemonComponent> ent, ref SlaughterDevourDoAfterEvent args)
     {
-        var demonUid = ent.Owner;
-        var demon = ent.Comp;
-        var pullingEnt = args.pullingEnt;
+        if (args.Cancelled || args.Target is not { } target)
+            return;
 
-        demon.ConsumedMobs.Add(pullingEnt);
-        demon.Devoured++;
-
+        var (uid, comp) = ent;
+        comp.ConsumedMobs.Add(target);
+        comp.Devoured++;
         Dirty(ent);
 
-        if (!TryComp<SlaughterDevourComponent>(demonUid, out var slaughterDevour)
-            || slaughterDevour.Container == null)
+        if (!TryComp<SlaughterDevourComponent>(uid, out var devour) ||
+            devour.Container is not { } container)
             return;
 
-        var evAttempt = new SlaughterDevourAttemptEvent(pullingEnt, demonUid);
-        RaiseLocalEvent(pullingEnt, ref evAttempt);
+        var attemptEv = new SlaughterDevourAttemptEvent(target, uid);
+        RaiseLocalEvent(target, ref attemptEv);
 
-        if (evAttempt.Cancelled)
+        if (attemptEv.Cancelled)
             return;
 
-        _container.Insert(pullingEnt, slaughterDevour.Container);
+        var coords = Transform(target).Coordinates;
+        _container.Insert(target, container);
 
         // Stop them from being able to self-revive
-        EnsureComp<PreventSelfRevivalComponent>(pullingEnt);
+        EnsureComp<PreventSelfRevivalComponent>(target);
 
         // Kill them for sure, just in case
-        if (_mobStateQuery.TryComp(pullingEnt, out var mobState))
-            _mobState.ChangeMobState(pullingEnt, MobState.Dead, mobState);
+        if (_mobQuery.TryComp(target, out var mob))
+            _mob.ChangeMobState(target, MobState.Dead, mob);
 
-        _bloodstream.SpillAllSolutions(pullingEnt);
+        _bloodstream.SpillAllSolutions(target);
 
-        _audio.PlayPredicted(slaughterDevour.FeastSound, args.PreviousCoordinates, ent.Owner);
+        _audio.PlayPredicted(devour.FeastSound, coords, uid);
 
-        _slaughterDevour.HealAfterDevouring(pullingEnt, demonUid, slaughterDevour);
-        _slaughterDevour.IncrementObjective(demonUid,pullingEnt, demon);
+        _devour.HealAfterDevouring((uid, devour), target);
+        _devour.IncrementObjective(ent, target);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeingGibbed(Entity<SlaughterDemonComponent> ent, ref BeingGibbedEvent args)
     {
         if (!TryComp<SlaughterDevourComponent>(ent.Owner, out var devour)
@@ -159,20 +140,16 @@ public sealed partial class SlaughterDemonSystem : EntitySystem
             _rejuvenate.PerformRejuvenate(entity);
     }
 
-    private void RefreshMovement(EntityUid uid,
-        SlaughterDemonComponent component,
-        RefreshMovementSpeedModifiersEvent args)
+    [SubscribeLocalEvent]
+    private void RefreshMovement(Entity<SlaughterDemonComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (component.ExitedBloodCrawl)
+        if (ent.Comp.ExitedBloodCrawl)
         {
-            args.ModifySpeed(component.SpeedModWalk, component.SpeedModRun);
-        }
-        else
-        {
-            args.ModifySpeed(1f, 1f);
+            args.ModifySpeed(ent.Comp.SpeedModWalk, ent.Comp.SpeedModRun);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnBloodCrawlAttempt(Entity<SlaughterDemonComponent> ent, ref BloodCrawlAttemptEvent args)
     {
         if (args.Cancelled)
@@ -181,8 +158,11 @@ public sealed partial class SlaughterDemonSystem : EntitySystem
         PredictedSpawnAtPosition(ent.Comp.JauntEffect, Transform(ent.Owner).Coordinates);
     }
 
-    private void OnPickup(Entity<SlaughterDemonComponent> ent, ref PickupAttemptEvent args) =>
+    [SubscribeLocalEvent]
+    private void OnPickup(Entity<SlaughterDemonComponent> ent, ref PickupAttemptEvent args)
+    {
         args.Cancel();
+    }
 
     #region Helper
 

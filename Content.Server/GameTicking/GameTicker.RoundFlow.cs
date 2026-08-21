@@ -1,13 +1,7 @@
 // <Trauma>
-using Content.Goobstation.Common.LastWords;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.FixedPoint;
-using Content.Goobstation.Shared.Mind.Components;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Mind;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -216,7 +210,7 @@ namespace Content.Server.GameTicking
                 }
 
                 _metaData.SetEntityName(mapUid, proto.MapName);
-                var g = new List<EntityUid> {grid.Value.Owner};
+                var g = new List<EntityUid> { grid.Value.Owner };
                 RaiseLocalEvent(new PostGameMapLoad(proto, mapId, g, stationName));
                 return g;
             }
@@ -266,7 +260,7 @@ namespace Content.Server.GameTicking
                 }
 
                 _metaData.SetEntityName(mapUid, proto.MapName);
-                var g = new List<EntityUid> {grid.Value.Owner};
+                var g = new List<EntityUid> { grid.Value.Owner };
                 RaiseLocalEvent(new PostGameMapLoad(proto, mapId, g, stationName));
                 return g;
             }
@@ -316,7 +310,7 @@ namespace Content.Server.GameTicking
                     throw new Exception($"Failed to load game-map grid {ev.GameMap.ID}");
                 }
 
-                var g = new List<EntityUid> {grid.Value.Owner};
+                var g = new List<EntityUid> { grid.Value.Owner };
                 // TODO MAP LOADING use a new event?
                 RaiseLocalEvent(new PostGameMapLoad(proto, targetMap, g, stationName));
                 return g;
@@ -398,7 +392,7 @@ namespace Content.Server.GameTicking
                 HumanoidCharacterProfile profile;
                 if (_prefsManager.TryGetCachedPreferences(userId, out var preferences))
                 {
-                    profile = (HumanoidCharacterProfile) preferences.SelectedCharacter;
+                    profile = (HumanoidCharacterProfile)preferences.SelectedCharacter;
                 }
                 else
                 {
@@ -565,37 +559,17 @@ namespace Content.Server.GameTicking
                 else if (mind.CurrentEntity != null && TryName(mind.CurrentEntity.Value, out var icName))
                     playerIcName = icName;
 
-                if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride && HasComp<HumanoidProfileComponent>(mind.CurrentEntity)) // Trauma - Check for HumanoidProfile to reduce lag
+                if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride &&
+                    HasComp<HumanoidProfileComponent>(mind.CurrentEntity)) // Trauma - Check for HumanoidProfile to reduce lag
                 {
                     _pvsOverride.AddGlobalOverride(entity.Value);
                 }
 
                 var roles = _roles.MindGetAllRoleInfo(mindId);
 
-                // <Trauma> - last words/damage
-                var lastWords = "";
-                var mobState = MobState.Invalid;
-                var damagePerGroup = new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
-                var lastMob = TryComp<MindLastMobComponent>(mindId, out var lastMobComponent)
-                    ? lastMobComponent.LastMob
-                    : null;
-
-                // Get last words if they exist (stored on the mind)
-                if (TryComp<LastWordsComponent>(mindId, out var lastWordsComponent))
-                    lastWords = lastWordsComponent.LastWords;
-
-                // Get mob state and damage if the mob still exists
-                if (lastMob != null && !TerminatingOrDeleted(lastMob))
-                {
-                    if (TryComp<MobStateComponent>(lastMob, out var mobStateComp))
-                        mobState = mobStateComp.CurrentState;
-
-                    // TODO: store a thing on the mind when gibbing/cremating/singuloing someone for special displaying
-                    foreach (var (group, amount) in _damageable.GetDamagePerGroup(lastMob.Value))
-                    {
-                        damagePerGroup[group] = amount;
-                    }
-                }
+                // <Trauma>
+                var infoEv = new RoundEndGetPlayerInfoEvent();
+                RaiseLocalEvent(mindId, ref infoEv);
                 // </Trauma>
 
                 var playerEndRoundInfo = new RoundEndMessageEvent.RoundEndPlayerInfo()
@@ -616,9 +590,9 @@ namespace Content.Server.GameTicking
                     Observer = observer,
                     Connected = connected,
                     // <Trauma>
-                    LastWords = lastWords,
-                    EntMobState = mobState,
-                    DamagePerGroup = damagePerGroup,
+                    LastWords = infoEv.LastWords,
+                    EntMobState = (MobState) infoEv.MobState,
+                    DamagePerGroup = infoEv.DamagePerGroup,
                     // </Trauma>
                 };
                 listOfPlayerInfo.Add(playerEndRoundInfo);
@@ -1048,12 +1022,6 @@ namespace Content.Server.GameTicking
 
             Text += text;
             _doNewLine = true;
-        }
-
-        // goob edit
-        public void AppendAtStart(string text)
-        {
-            Text = text + Text;
         }
     }
 }
