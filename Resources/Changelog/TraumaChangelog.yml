@@ -13517,3 +13517,10 @@ Entries:
   id: 1474
   time: '2026-08-21T05:01:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4196
+- author: Hoodsie
+  changes:
+  - type: Fix
+    message: Fixed xenomorph guidebook saying they are spaceproof.
+  id: 1475
+  time: '2026-08-21T05:01:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4194
