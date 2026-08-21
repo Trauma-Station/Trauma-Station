@@ -140,9 +140,12 @@ public sealed partial class BlobTileSystem : EntitySystem
     }
 
     public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true)
-        => ent.Comp.Core is { } core &&
+    {
+        newTile = null;
+        return ent.Comp.Core is { } core &&
             _coreQuery.TryComp(core, out var coreComp) &&
             TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects);
+    }
 
     public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem, out EntityUid? newTile, bool attack = true, bool doEffects = true)
     {
