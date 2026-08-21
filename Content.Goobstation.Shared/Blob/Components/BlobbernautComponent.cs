@@ -36,4 +36,10 @@ public sealed partial class BlobbernautComponent : Component
     /// </summary>
     [DataField]
     public float AttackEffectsScale = 4f;
+
+    /// <summary>
+    /// Scale used with the chemical's damaged effects.
+    /// </summary>
+    [DataField]
+    public float DamagedEffectsScale = 1.5f;
 }
