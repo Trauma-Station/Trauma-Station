@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.Bank;
+using Content.Shared.FixedPoint;
+// </Trauma>
 using Content.Client.UserInterface.Controls;
 using Content.Client.VendingMachines.UI;
 using Content.Shared.VendingMachines;
@@ -36,7 +40,12 @@ namespace Content.Client.VendingMachines
             var system = EntMan.System<VendingMachineSystem>();
             _cachedInventory = system.GetAllInventory(Owner);
 
-            _menu?.Populate(_cachedInventory, enabled);
+            // <Trauma>
+            FixedPoint2 money = 0;
+            if (EntMan.TryGetComponent(Owner, out MoneyStorageComponent? moneyStore))
+                money = moneyStore.MoneyBuffer;
+            _menu?.Populate(_cachedInventory, enabled, money);
+            // </Trauma>
         }
 
         public void UpdateAmounts()
@@ -45,7 +54,12 @@ namespace Content.Client.VendingMachines
 
             var system = EntMan.System<VendingMachineSystem>();
             _cachedInventory = system.GetAllInventory(Owner);
-            _menu?.UpdateAmounts(_cachedInventory, enabled);
+            // <Trauma>
+            FixedPoint2 money = 0;
+            if (EntMan.TryGetComponent(Owner, out MoneyStorageComponent? moneyStore))
+                money = moneyStore.MoneyBuffer;
+            _menu?.UpdateAmounts(_cachedInventory, enabled, money);
+            // </Trauma>
         }
 
         private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)

@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseObjective
+  id: ObjectiveBankAccount
+  name: Bank Account Details
+  description: Your bank account details.
+  components:
+  - type: Objective
+    issuer: objective-issuer-nanotrasen
+    difficulty: 0
+    icon:
+      sprite: _Trauma/Objects/Economy/coin.rsi
+      state: coin
+  - type: BankAccountObjective

@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseComputer
+  id: BaseBankConsole
+  name: financial network terminal
+  abstract: true
+  components:
+  - type: BankTerminal
+  - type: Transform
+    anchored: true
+
+- type: entity
+  parent: BaseBankConsole
+  id: BankTerminal
+  name: corporate banking console
+  description: An encrypted financial interface used to provision new routing paths and authorize direct account-to-account wire transfers.
+  components:
+  - type: ActivatableUI
+    key: enum.BankTerminalUiKey.Key
+  - type: UserInterface
+    interfaces:
+        enum.BankTerminalUiKey.Key:
+          type: BankTerminalBoundUserInterface
+
+- type: entity
+  parent: BankTerminal
+  id: BankTerminalBank
+  name: corporate bank
+  description: A direct connection to the bank itself.
+  components:
+  - type: Bank
+    currency: Spesos

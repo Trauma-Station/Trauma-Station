@@ -1,0 +1,124 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseSpaceCoin
+  name: nano coins
+  description: Metallic currency for smaller transactions.
+  components:
+  - type: Currency
+    price:
+      Spesos: 0.01
+  - type: Tag
+    tags:
+    - Small
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,0,0
+    storedOffset: 0,0
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit: 1
+  - type: StaticPrice
+    price: 0
+  - type: Stack
+    stackType: CoinCredit
+    count: 1
+    baseLayer: base
+    layerStates:
+    - coin
+    - coin_5
+    - coin_10
+    - coin_25
+    - coin_50
+    layerFunction: Threshold
+  - type: StackLayerThreshold
+    thresholds: [5, 10, 25, 50]
+  - type: Projectile
+    deleteOnCollide: false
+    onlyCollideWhenShot: false
+    damage:
+      types:
+        Piercing: 5
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 50
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+        mask:
+        - ItemMask
+  - type: Appearance
+
+- type: material
+  id: CoinCredit
+  name: nano coin
+  unit: materials-unit-bill
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.01
+  maxCount: 1000
+
+- type: stack
+  id: CoinCredit
+  name: stack-credit
+  icon: { sprite: _Trauma/Textures/Objects/Economy/coin.rsi, state: coin }
+  spawn: SpaceCoin
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_05
+  suffix: 0.05
+  components:
+  - type: Icon
+    sprite: _Trauma/Objects/Economy/coin.rsi
+    state: coin_5
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_10
+  suffix: 0.10
+  components:
+  - type: Icon
+    sprite: _Trauma/Objects/Economy/coin.rsi
+    state: coin_10
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_25
+  suffix: 0.25
+  components:
+  - type: Icon
+    sprite: _Trauma/Objects/Economy/coin.rsi
+    state: coin_25
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_50
+  suffix: 0.50
+  components:
+  - type: Icon
+    sprite: _Trauma/Objects/Economy/coin.rsi
+    state: coin_50
+  - type: Stack
+    count: 50

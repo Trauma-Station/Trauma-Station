@@ -1,0 +1,84 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="Corporate Banking Terminal"
+        MinSize="460 380"
+        SetSize="460 380">
+    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="12">
+
+        <BoxContainer Name="AuthScreen" Orientation="Vertical" SeparationOverride="10" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4" HorizontalExpand="True">
+                <Button Name="TabSignInMode" Text="Sign In" ToggleMode="True" Pressed="True" HorizontalExpand="True"/>
+                <Button Name="TabCreateMode" Text="Open Account" ToggleMode="True" HorizontalExpand="True"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                <Label Text="Select Target Bank Network Node:" StyleClasses="LabelSubText"/>
+                <OptionButton Name="BankDropdown" HorizontalExpand="True"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="0 4">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <Label Text="Account ID:" MinSize="100 0"/>
+                    <LineEdit Name="AuthAccountInput" PlaceHolder="e.g. RTB-100000" HorizontalExpand="True"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <Label Text="Password:" MinSize="100 0"/>
+                    <LineEdit Name="AuthPasswordInput" PlaceHolder="********" HorizontalExpand="True"/>
+                </BoxContainer>
+            </BoxContainer>
+
+            <Control VerticalExpand="True"/>
+
+            <BoxContainer Name="SignInActionBox" Orientation="Vertical">
+                <Button Name="ExecuteSignInButton" Text="SIGN INTO NETWORK ACCOUNT" StyleClasses="Caution" MinSize="0 35"/>
+            </BoxContainer>
+            <BoxContainer Name="CreateAccountActionBox" Orientation="Vertical" Visible="False">
+                <Label Text="Profiles initialize with 0 credits default balance." HorizontalExpand="True" FontColorOverride="#A0A0A0" Margin="0 0 0 4"/>
+                <Button Name="ExecuteCreateButton" Text="PROVISION NEW ACCOUNT" MinSize="0 35"/>
+            </BoxContainer>
+        </BoxContainer>
+
+        <BoxContainer Name="DashboardScreen" Orientation="Vertical" SeparationOverride="10" VerticalExpand="True" Visible="False">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical">
+                    <Label Name="ActiveAccountLabel" Text="Account: RTB-XXXXXX" StyleClasses="LabelHeading"/>
+                    <Label Name="ActiveBankLabel" Text="Connected to: Bank Terminal" StyleClasses="LabelSubText" FontColorOverride="#A0A0A0"/>
+                </BoxContainer>
+                <Control HorizontalExpand="True"/>
+                <Button Name="SignOutButton" Text="SIGN OUT" MinSize="80 30"/>
+            </BoxContainer>
+
+            <PanelContainer StyleClasses="LowLight" Margin="0 2">
+                <BoxContainer Orientation="Horizontal" Margin="8" SeparationOverride="8">
+                    <Label Text="Current Balance:" StyleClasses="LabelHeading"/>
+                    <Control HorizontalExpand="True"/>
+                    <Label Name="AccountBalanceLabel" Text="0.00 Spesos" StyleClasses="LabelHeading" FontColorOverride="#50FF50"/>
+                </BoxContainer>
+            </PanelContainer>
+
+            <PanelContainer StyleClasses="StyleClassHighLight" MinSize="0 2"/>
+
+            <ScrollContainer VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="12">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <Label Text="Transfer Funds to External Account Routing ID:" StyleClasses="LabelSubText"/>
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                            <LineEdit Name="SendTargetInput" PlaceHolder="Target Account ID" HorizontalExpand="True"/>
+                            <LineEdit Name="SendAmountInput" PlaceHolder="Amount" MinSize="100 0"/>
+                            <Button Name="ExecuteSendButton" Text="SEND" MinSize="60 0" StyleClasses="Caution"/>
+                        </BoxContainer>
+                    </BoxContainer>
+
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <Label Text="Dispense Physical Cash Tokens (Withdraw):" StyleClasses="LabelSubText"/>
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                            <LineEdit Name="WithdrawAmountInput" PlaceHolder="Amount" HorizontalExpand="True"/>
+                            <Button Name="ExecuteWithdrawButton" Text="WITHDRAW" MinSize="100 0"/>
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+        </BoxContainer>
+
+    </BoxContainer>
+</controls:FancyWindow>

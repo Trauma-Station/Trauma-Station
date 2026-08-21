@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Shared.FixedPoint;
+using Content.Trauma.Common.Bank;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Client.Stylesheets;
@@ -76,19 +80,37 @@ namespace Content.Client.VendingMachines.UI
             if (data is not VendorItemsListData { ItemProtoID: var protoID, ItemText: var text })
                 return;
 
-            var item = new VendingMachineItem(protoID, text);
+            var item = new VendingMachineItem(protoID, text, GetPriceFromPrototype(protoID)); // Trauma - money
             _listItems[protoID] = (button, item);
             button.AddChild(item);
             button.AddStyleClass(StyleClass.ButtonSquare);
             button.Disabled = !_enabled || _amounts[protoID] == 0;
         }
 
+        // <Trauma>
+        public void SetBalance(FixedPoint2 balance)
+        {
+            BalanceLabel.Text = $"${balance}";
+        }
+
+        private FixedPoint2 GetPriceFromPrototype(EntProtoId protoID)
+        {
+            if (_prototypeManager.TryIndex<EntityPrototype>(protoID, out var proto) &&
+                proto.TryGetComponent<SellPriceComponent>(out var sellPriceComp, _entityManager.ComponentFactory))
+            {
+                return sellPriceComp.Price;
+            }
+            return 0;
+        }
+        // </Trauma>
+
         /// <summary>
         /// Populates the list of available items on the vending machine interface
         /// and sets icons based on their prototypes
         /// </summary>
-        public void Populate(List<VendingMachineInventoryEntry> inventory, bool enabled)
+        public void Populate(List<VendingMachineInventoryEntry> inventory, bool enabled, FixedPoint2 balance) // Trauma - money
         {
+            SetBalance(balance); // Trauma - money
             _enabled = enabled;
             _listItems.Clear();
             _amounts.Clear();
@@ -154,8 +176,9 @@ namespace Content.Client.VendingMachines.UI
         /// <summary>
         /// Updates text entries for vending data in place without modifying the list controls.
         /// </summary>
-        public void UpdateAmounts(List<VendingMachineInventoryEntry> cachedInventory, bool enabled)
+        public void UpdateAmounts(List<VendingMachineInventoryEntry> cachedInventory, bool enabled, FixedPoint2 balance) // Trauma - money
         {
+            SetBalance(balance); // Trauma - money
             _enabled = enabled;
 
             foreach (var proto in _dummies.Keys)
