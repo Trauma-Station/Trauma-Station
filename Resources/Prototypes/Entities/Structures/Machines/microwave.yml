@@ -102,7 +102,7 @@
     powerLoad: 5
   - type: PowerState
     idlePowerDraw: 5
-    workingPowerDraw: 1000
+    workingPowerDraw: 700 # Trauma - Was 1000, to stop APCs overloading
   - type: Machine
     board: MicrowaveMachineCircuitboard
   - type: ContainerContainer

@@ -31,7 +31,7 @@
         sound:
           collection: MetalBreak
   - type: ApcPowerReceiver
-    powerLoad: 300
+    powerLoad: 150 # Trauma - Was 300, to stop APCs overloading
 
 - type: entity
   parent: BaseHeaterMachine

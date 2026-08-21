@@ -18,7 +18,7 @@
     ReagentContainerOliveoil: 2
     ReagentContainerMayo: 1
     VariantCubeBox: 1
-    FoodContainerEgg: 1
+    FoodContainerEgg: 3 # Trauma - Was 1, Ranchers are stealing all the eggs
     DrinkMilkCarton: 2
     DrinkSoyMilkCarton: 1
     FoodButter: 3
@@ -33,7 +33,7 @@
     WeaponCroissant: 3
     WeaponBaguette: 2
   # <Trauma>
-    Machete: 1
     HumanCube: 1
     GingerbreadCube: 1
+    SpaceCarpCube: 1
   # </Trauma>
