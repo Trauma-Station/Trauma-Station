@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
 
 namespace Content.Goobstation.Shared.EntityEffects;
@@ -27,10 +28,13 @@ public sealed partial class GrowBlob : EntityEffectBase<GrowBlob>
 public sealed partial class GrowBlobEffectSystem : EntityEffectSystem<BlobTileComponent, GrowBlob>
 {
     [Dependency] private BlobTileSystem _tile = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     protected override void Effect(Entity<BlobTileComponent> ent, ref EntityEffectEvent<GrowBlob> args)
     {
         var e = args.Effect;
-        _tile.TryGrow(ent, e.Attack, e.DoEffects);
+        _tile.TryGrow(ent, out var tile, e.Attack, e.DoEffects);
+        if (tile != null)
+            _damage.ChangeDamage(tile.Value, _damage.GetAllDamage(ent), ignoreResistances: true);
     }
 }

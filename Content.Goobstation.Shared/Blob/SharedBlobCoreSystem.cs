@@ -168,7 +168,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     /// <param name="doEffects">Whether to apply GrowthEffects to the new tile.</param>
     /// <seealso cref="ConnectBlobTile"/>
     /// <seealso cref="BlobCoreComponent"/>
-    public bool TransformBlobTile(
+    public EntityUid? TransformBlobTile(
         Entity<BlobTileComponent?>? oldTile,
         Entity<BlobCoreComponent?> core,
         Entity<BlobNodeComponent>? node,
@@ -177,12 +177,12 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         bool doEffects = true)
     {
         if (!Resolve(core, ref core.Comp))
-            return false;
+            return null;
 
         if (oldTile is { } old)
         {
             if (!Resolve(old, ref old.Comp) || old.Comp.Core != core.Owner)
-                return false;
+                return null;
 
             PredictedQueueDel(old);
         }
@@ -197,7 +197,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         if (doEffects && ProtoMan.Index(core.Comp.CurrentChem).GrowthEffects is { } effects)
             _effects.ApplyEffects(tile, effects, user: core);
 
-        return true;
+        return tile;
     }
 
     /// <summary>

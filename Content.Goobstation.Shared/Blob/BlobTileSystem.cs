@@ -136,16 +136,17 @@ public sealed partial class BlobTileSystem : EntitySystem
             healing *= chem.HealingScale;
         _damage.ChangeDamage(ent.Owner, healing);
 
-        return !lazy && TryGrow(ent, core, chem);
+        return !lazy && TryGrow(ent, core, chem, out _);
     }
 
-    public bool TryGrow(Entity<BlobTileComponent> ent, bool attack = true, bool doEffects = true)
+    public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true)
         => ent.Comp.Core is { } core &&
             _coreQuery.TryComp(core, out var coreComp) &&
-            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), attack, doEffects);
+            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects);
 
-    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem, bool attack = true, bool doEffects = true)
+    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem, out EntityUid? newTile, bool attack = true, bool doEffects = true)
     {
+        newTile = null;
         var xform = Transform(ent);
         if (xform.GridUid is not { } gridUid || !_gridQuery.TryComp(gridUid, out var grid))
             return false;
@@ -204,7 +205,8 @@ public sealed partial class BlobTileSystem : EntitySystem
 
             // spawn a new blob tile there
             var coords = _map.ToCoordinates(gridUid, innerTile.GridIndices, grid);
-            if (_core.TransformBlobTile(null, core.AsNullable(), node, ent.Comp.SpreadTile, coords, doEffects))
+            newTile = _core.TransformBlobTile(null, core.AsNullable(), node, ent.Comp.SpreadTile, coords, doEffects);
+            if (newTile != null)
                 break;
         }
 
