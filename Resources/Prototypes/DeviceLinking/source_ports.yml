@@ -91,7 +91,7 @@
   id: Output
   name: signal-port-name-logic-output
   description: signal-port-description-logic-output
-  defaultLinks: [ Input ]
+  defaultLinks: [ Input, Start ] # Trauma - added Start
 
 - type: sourcePort
   id: OutputHigh
