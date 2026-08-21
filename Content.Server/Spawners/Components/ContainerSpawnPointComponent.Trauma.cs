@@ -1,4 +1,4 @@
-﻿using Content.Server.Spawners.EntitySystems;
+using Content.Server.Spawners.EntitySystems;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
