@@ -13560,3 +13560,12 @@ Entries:
   id: 1479
   time: '2026-08-21T11:01:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4195
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: ED209 no longer needs an exosuit thruster to make.
+  - type: Tweak
+    message: All automation machines no longer need parts, just the board.
+  id: 1480
+  time: '2026-08-21T22:18:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4217
