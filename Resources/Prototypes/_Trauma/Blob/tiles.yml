@@ -11,19 +11,21 @@
   name: "Resource Blob"
   cost: 60
   entity: ResourceBlobTile
+  blockRange: 4
 
 - type: blobTile
   id: Factory
   name: "Blob Factory"
   cost: 80
   entity: FactoryBlobTile
+  blockRange: 7
 
 - type: blobTile
   id: Node
   name: "Blob Node"
   cost: 50
   entity: NodeBlobTile
-  blockNearNodes: false # no nodemaxxing
+  blockRange: 5
 
 - type: blobTile
   id: Reflective
