@@ -299,13 +299,17 @@ namespace Content.Server.Communications
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var reason = SharedChatSystem.SanitizeAnnouncement(message.Reason, maxLength);
             if (string.IsNullOrEmpty(reason))
-                reason = "No reason provided.";
-            else
-                comp.AnnouncementCooldownRemaining = comp.Delay;
+            {
+                _popupSystem.PopupEntity("Missing shuttle call reason", uid, message.Actor);
+                return;
+            }
+
             var attemptEv = new UserMessageAttemptEvent(mob, message.Reason);
             RaiseLocalEvent(ref attemptEv);
             if (attemptEv.Cancelled)
                 return;
+
+            comp.AnnouncementCooldownRemaining = comp.Delay;
 
             // aghosts dont show the caller or reason
             var text = uid == mob
@@ -335,13 +339,17 @@ namespace Content.Server.Communications
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var reason = SharedChatSystem.SanitizeAnnouncement(message.Reason, maxLength);
             if (string.IsNullOrEmpty(reason))
-                reason = "No reason provided.";
-            else
-                comp.AnnouncementCooldownRemaining = comp.Delay;
+            {
+                _popupSystem.PopupEntity("Missing shuttle recall reason", uid, message.Actor);
+                return; // dont be a chud
+            }
+
             var attemptEv = new UserMessageAttemptEvent(mob, message.Reason);
             RaiseLocalEvent(ref attemptEv);
             if (attemptEv.Cancelled)
                 return;
+
+            comp.AnnouncementCooldownRemaining = comp.Delay;
 
             // aghosts dont show the caller or reason
             var text = uid == mob
