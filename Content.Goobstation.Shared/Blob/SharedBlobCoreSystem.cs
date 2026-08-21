@@ -5,7 +5,7 @@ using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Explosion.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Map;
@@ -18,7 +18,9 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private BlobTileSystem _tile = default!;
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -30,6 +32,9 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
 
     private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
     private static readonly ProtoId<AlertPrototype> BlobResource = "BlobResource";
+
+    private HashSet<Entity<BlobNodeComponent>> _nodes = new();
+    private HashSet<Entity<BlobTileComponent>> _tiles = new();
 
     #region Events
 
@@ -43,7 +48,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         ConnectBlobTile((ent, tile), ent.AsNullable(), (ent, node));
 
         UpdateAllAlerts(ent.AsNullable());
-        UpdateChem(ent);
+        UpdateChem(ent, null);
 
         foreach (var actionId in ent.Comp.ActionPrototypes)
         {
@@ -95,16 +100,17 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp))
             return;
 
-        if (newChem == ent.Comp.CurrentChem)
+        var old = ent.Comp.CurrentChem;
+        if (newChem == old)
             return;
 
         ent.Comp.CurrentChem = newChem;
         DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.CurrentChem));
 
-        UpdateChem(ent.Comp);
+        UpdateChem(ent.Comp, ProtoMan.Index(old));
     }
 
-    private void UpdateChem(BlobCoreComponent core)
+    private void UpdateChem(BlobCoreComponent core, BlobChemPrototype? old)
     {
         var chem = ProtoMan.Index(core.CurrentChem);
         var color = chem.Color;
@@ -117,8 +123,9 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
             tileComp.Color = color;
             Dirty(tile, tileComp);
 
-            ChangeBlobEntChem((tile, tileComp), chem);
+            ChangeBlobEntChem((tile, tileComp), chem, old);
 
+            // TODO: this should be an event
             if (_factoryQuery.CompOrNull(tile)?.Blobbernaut is not { } mob)
                 continue;
 
@@ -134,27 +141,20 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
                 Dirty(mob, melee);
             }
 
-            ChangeBlobEntChem(mob, chem);
+            ChangeBlobEntChem(mob, chem, old);
         }
     }
 
-    private void ChangeBlobEntChem(Entity<BlobTileComponent?> ent, BlobChemPrototype chem)
+    private void ChangeBlobEntChem(Entity<BlobTileComponent?> ent, BlobChemPrototype chem, BlobChemPrototype? old)
     {
         if (ProtoMan.TryIndex(ent.Comp?.Tile, out var tile) && !tile.CanChangeChem)
             return;
 
         _damage.SetDamageModifierSetId(ent.Owner, chem.DamageModifiers);
-        var expRes = chem.ExplosionResistance;
-        if (expRes == 0f)
-        {
-            RemComp<ExplosionResistanceComponent>(ent);
-        }
-        else
-        {
-            var res = EnsureComp<ExplosionResistanceComponent>(ent);
-            res.DamageCoefficient = 1f - expRes; // damage % is inversely proportional to resistance
-            Dirty(ent, res);
-        }
+        if (old?.AddedComponents is { } oldAdded)
+            EntityManager.RemoveComponents(ent, oldAdded);
+        if (chem.AddedComponents is { } added)
+            EntityManager.AddComponents(ent, added);
     }
 
     /// <summary>
@@ -165,22 +165,24 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     /// <param name="node">Node will be used in ConnectBlobTile method.</param>
     /// <param name="id">Type of a new blob tile.</param>
     /// <param name="coords">Coordinates of a new tile.</param>
+    /// <param name="doEffects">Whether to apply GrowthEffects to the new tile.</param>
     /// <seealso cref="ConnectBlobTile"/>
     /// <seealso cref="BlobCoreComponent"/>
-    public bool TransformBlobTile(
+    public EntityUid? TransformBlobTile(
         Entity<BlobTileComponent?>? oldTile,
         Entity<BlobCoreComponent?> core,
         Entity<BlobNodeComponent>? node,
         [ForbidLiteral] ProtoId<BlobTilePrototype> id,
-        EntityCoordinates coords)
+        EntityCoordinates coords,
+        bool doEffects = true)
     {
         if (!Resolve(core, ref core.Comp))
-            return false;
+            return null;
 
         if (oldTile is { } old)
         {
             if (!Resolve(old, ref old.Comp) || old.Comp.Core != core.Owner)
-                return false;
+                return null;
 
             PredictedQueueDel(old);
         }
@@ -190,9 +192,12 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         var tileComp = TileQuery.Comp(tile);
 
         ConnectBlobTile((tile, tileComp), core.AsNullable(), node);
-        ChangeBlobEntChem((tile, tileComp), ProtoMan.Index(core.Comp.CurrentChem));
+        ChangeBlobEntChem((tile, tileComp), ProtoMan.Index(core.Comp.CurrentChem), null);
 
-        return true;
+        if (doEffects && ProtoMan.Index(core.Comp.CurrentChem).GrowthEffects is { } effects)
+            _effects.ApplyEffects(tile, effects, user: core);
+
+        return tile;
     }
 
     /// <summary>
@@ -270,14 +275,14 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
             return false;
         }
 
-        // Handle node spawn
-        if (ProtoMan.Index(newTile).BlockNearNodes)
+        var range = ProtoMan.Index(newTile).BlockRange;
+        if (range > 0f)
         {
-            if (GetNearNode(coords, coreComp.NodeRadiusLimit) == null)
-                return true;
-
-            _popup.PopupCoordinates(Loc.GetString("blob-target-close-to-node"), coords, user, PopupType.Large);
-            return false;
+            if (AnyTileInRange(newTile, coords, range))
+            {
+                _popup.PopupCoordinates("Too close to another tile of the same type!", coords, user, PopupType.Large);
+                return false;
+            }
         }
 
         if (!requireNode)
@@ -384,39 +389,39 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         EntityCoordinates coords,
         float radius = 3f)
     {
-        if (_transform.GetGrid(coords) is not { } gridUid ||
-            !_gridQuery.TryComp(gridUid, out var grid))
-            return null;
-
         var nearestDistance = float.MaxValue;
-        var nodeComponent = new BlobNodeComponent();
-        Entity<BlobNodeComponent>? nearest = default;
+        Entity<BlobNodeComponent>? nearest = null;
 
-        var innerTiles = _map.GetLocalTilesIntersecting(
-                gridUid,
-                grid,
-                new Box2(coords.Position + new Vector2(-radius, -radius),
-                    coords.Position + new Vector2(radius, radius)),
-                false)
-            .ToArray();
-
-        foreach (var tileRef in innerTiles)
+        var worldPos = _transform.ToWorldPosition(coords);
+        _nodes.Clear();
+        _lookup.GetEntitiesInRange(coords, radius, _nodes, LookupFlags.Static);
+        foreach (var node in _nodes)
         {
-            foreach (var ent in _map.GetAnchoredEntities(gridUid, grid, tileRef.GridIndices))
-            {
-                if (!_nodeQuery.TryComp(ent, out var nodeComp))
-                    continue;
+            var tilePos = _transform.GetWorldPosition(node.Owner);
+            var distance = Vector2.DistanceSquared(worldPos, tilePos);
+            if (distance >= nearestDistance)
+                continue;
 
-                var tileCords = Transform(ent).Coordinates;
-                var distance = Vector2.DistanceSquared(coords.Position, tileCords.Position);
-                if (distance >= nearestDistance)
-                    continue;
-
-                nearestDistance = distance;
-                nearest = (ent, nodeComp);
-            }
+            nearestDistance = distance;
+            nearest = node;
         }
 
         return nearest;
+    }
+
+    /// <summary>
+    /// Returns true if a given tile exists within a radius of a position.
+    /// </summary>
+    public bool AnyTileInRange([ForbidLiteral] ProtoId<BlobTilePrototype> id, EntityCoordinates coords, float radius)
+    {
+        _tiles.Clear();
+        _lookup.GetEntitiesInRange(coords, radius, _tiles, LookupFlags.Static);
+        foreach (var tile in _tiles)
+        {
+            if (tile.Comp.Tile == id)
+                return true;
+        }
+
+        return false;
     }
 }
