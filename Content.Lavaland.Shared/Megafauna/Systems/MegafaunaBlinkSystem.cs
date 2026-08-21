@@ -2,7 +2,9 @@
 
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Events;
+using Content.Lavaland.Shared.Procedural.Components;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -16,23 +18,11 @@ namespace Content.Lavaland.Shared.Megafauna.Systems;
 public sealed partial class MegafaunaBlinkSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private IGameTiming _timing = default!;
-
-    private EntityQuery<MegafaunaBlinkComponent> _blinkQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<MegafaunaBlinkComponent, MegafaunaBlinkActionEvent>(OnBlinkAction);
-
-        SubscribeLocalEvent<MegafaunaBlinkInactiveComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<MegafaunaBlinkInactiveComponent, MegafaunaStartupEvent>(OnStartup);
-        SubscribeLocalEvent<MegafaunaBlinkInactiveComponent, MegafaunaShutdownEvent>(OnShutdown);
-        SubscribeLocalEvent<MegafaunaBlinkInactiveComponent, EntityTerminatingEvent>(OnDelete);
-
-        _blinkQuery = GetEntityQuery<MegafaunaBlinkComponent>();
-    }
+    [Dependency] private EntityQuery<LavalandMapComponent> _lavalandMapQuery = default!;
+    [Dependency] private EntityQuery<MegafaunaBlinkComponent> _blinkQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -57,20 +47,28 @@ public sealed partial class MegafaunaBlinkSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnBlinkAction(Entity<MegafaunaBlinkComponent> ent, ref MegafaunaBlinkActionEvent args)
     {
         if (args.Handled
             || !args.Target.IsValid(EntityManager))
             return;
 
+        var xform = Transform(ent);
+        if (!_lavalandMapQuery.HasComp(xform.MapUid))
+        {
+            _popup.PopupEntity("The staff's power is weakened here!", ent, args.Performer);
+            return;
+        }
+
         var comp = ent.Comp;
         Blink(ent, args.Target, comp.Delay, comp.Sound);
 
-        if (comp.SpawnOnUsed != null)
-            PredictedSpawnAtPosition(comp.SpawnOnUsed.Value, Transform(ent).Coordinates);
+        if (comp.SpawnOnUsed is { } onUsed)
+            PredictedSpawnAtPosition(onUsed, xform.Coordinates);
 
-        if (comp.SpawnOnTarget != null)
-            PredictedSpawnAtPosition(comp.SpawnOnTarget.Value, args.Target);
+        if (comp.SpawnOnTarget is { } onTarget)
+            PredictedSpawnAtPosition(onTarget, args.Target);
 
         args.Handled = true;
     }
@@ -95,12 +93,14 @@ public sealed partial class MegafaunaBlinkSystem : EntitySystem
         SoundSpecifier? sound = null)
         => Blink(ent, Transform(target).Coordinates, duration, sound);
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<MegafaunaBlinkInactiveComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.FixedPosition)
             ent.Comp.Marker = PredictedSpawnAtPosition(ent.Comp.MarkerId, Transform(ent).Coordinates);
     }
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<MegafaunaBlinkInactiveComponent> ent, ref MegafaunaStartupEvent args)
     {
         if (!ent.Comp.FixedPosition
@@ -108,6 +108,7 @@ public sealed partial class MegafaunaBlinkSystem : EntitySystem
             ent.Comp.Marker = PredictedSpawnAtPosition(ent.Comp.MarkerId, Transform(ent).Coordinates);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<MegafaunaBlinkInactiveComponent> ent, ref MegafaunaShutdownEvent args)
     {
         if (ent.Comp.Marker == null
@@ -119,6 +120,7 @@ public sealed partial class MegafaunaBlinkSystem : EntitySystem
         ent.Comp.Marker = null;
     }
 
+    [SubscribeLocalEvent]
     private void OnDelete(Entity<MegafaunaBlinkInactiveComponent> ent, ref EntityTerminatingEvent args)
     {
         if (TerminatingOrDeleted(ent.Comp.Marker))
