@@ -40,60 +40,59 @@
 #   equipment:
 #     jumpsuit: ClothingUniformJumpsuitAncient
 
-# </Trauma>
-
 # Greytide Time
-- type: loadoutEffectGroup
-  id: GreyTider
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobPassenger
-      time: 10h # silly reward for people who play passenger a lot
+# - type: loadoutEffectGroup
+#   id: GreyTider
+#   effects:
+#   - !type:JobRequirementLoadoutEffect
+#     requirement:
+#       !type:RoleTimeRequirement
+#       role: JobPassenger
+#       time: 10h # silly reward for people who play passenger a lot
 
 # Face
-- type: loadout
-  id: PassengerFace
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: GreyTider
-  equipment:
-    mask: ClothingMaskGas
+# - type: loadout
+#   id: PassengerFace
+#   effects:
+#   - !type:GroupLoadoutEffect
+#     proto: GreyTider
+#   equipment:
+#     mask: ClothingMaskGas
+
+# - type: loadoutEffectGroup
+#   id: MasterGrey
+#   effects:
+#   - !type:JobRequirementLoadoutEffect
+#     requirement:
+#       !type:RoleTimeRequirement
+#       role: JobPassenger
+#       time: 20h # fun mantle for the most experienced greytiders
 
 # Head of Greytide (for grey mantle)
-- type: loadoutEffectGroup
-  id: MasterGrey
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobPassenger
-      time: 20h # fun mantle for the most experienced greytiders
-
-- type: loadout
-  id: Mantle
-  equipment:
-    neck: ClothingNeckMantle
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterGrey
+# - type: loadout
+#   id: Mantle
+#   equipment:
+#     neck: ClothingNeckMantle
+#   effects:
+#   - !type:GroupLoadoutEffect
+#     proto: MasterGrey
 
 # Gloves
-- type: loadout
-  id: PassengerGloves
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: GreyTider
-  equipment:
-    gloves: ClothingHandsGlovesFingerlessInsulated
+# - type: loadout
+#   id: PassengerGloves
+#   effects:
+#   - !type:GroupLoadoutEffect
+#     proto: GreyTider
+#   equipment:
+#     gloves: ClothingHandsGlovesFingerlessInsulated
 
 # Neck
+# - type: startingGear
+#   id: Mantle
+#   equipment:
+#     neck: ClothingNeckMantle
 
-- type: startingGear
-  id: Mantle
-  equipment:
-    neck: ClothingNeckMantle
+# </Trauma>
 
 # Back
 - type: loadout

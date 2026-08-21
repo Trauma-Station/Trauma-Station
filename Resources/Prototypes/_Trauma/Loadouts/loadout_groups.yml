@@ -123,7 +123,7 @@
   name: loadout-group-dclass-gloves
   minLimit: 0
   loadouts:
-  - PassengerGloves
+  - DClassGloves
 
 - type: loadoutGroup
   id: DClassBackpacks

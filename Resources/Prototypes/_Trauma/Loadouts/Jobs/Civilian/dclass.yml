@@ -58,20 +58,29 @@
 
 # Greytide Time
 - type: loadoutEffectGroup
-  id: DClassTiderMask
+  id: DClassGreyTider
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: JobDClass
-      time: 10h
+      time: 20h
 
 # Face
 - type: loadout
   id: DClassMask
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassTiderMask
+    proto: DClassGreyTider
+  equipment:
+    mask: ClothingMaskGas
+
+#Gloves
+- type: loadout
+  id: DClassGloves
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassGreyTider
   equipment:
     mask: ClothingMaskGas
 
@@ -83,13 +92,13 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobDClass
-      time: 20h
+      time: 40h
 
 # Neck
 - type: loadout
   id: DClassMantle
-  equipment:
-    neck: ClothingNeckMantle
   effects:
   - !type:GroupLoadoutEffect
     proto: DClassMasterGrey
+  equipment:
+    neck: ClothingNeckMantle
