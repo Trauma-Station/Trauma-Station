@@ -24,6 +24,7 @@ public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<Observe
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private EntityQuery<FollowedComponent> _followedQuery = default!;
 
     private const string Rule = "SpectatorStatistics";
 
@@ -39,7 +40,7 @@ public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<Observe
         if (mindComp.UserId is not { })
             return;
 
-        if (!TryComp<FollowedComponent>(ev.Following, out var followed))
+        if (!_followedQuery.TryComp(ev.Following, out var followed))
             return;
 
         var query = QueryActiveRules();
