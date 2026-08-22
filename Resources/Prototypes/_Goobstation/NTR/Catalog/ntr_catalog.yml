@@ -153,13 +153,13 @@
 - type: listing
   id: NTRExecutiveMandate
   name: ntr-executive-mandate-name
-  description: ntr-executive-mandate-desc/melee/
+  description: ntr-executive-mandate-desc
   productEntity: SpawnPodMandate
   icon:
-    sprite: _Trauma/Objects/Weapons/mandate.back.icon.rsi
+    sprite: _Trauma/Objects/Weapons/Melee/mandate.back.icon.rsi
     state: icon-on
   cost:
-    NTLoyaltyPoint: 50 # bigass sword so this should be fine
+    NTLoyaltyPoint: 50 # big sword so this should be fine
   categories:
   - NTRpersonal
   restockTime: 0
