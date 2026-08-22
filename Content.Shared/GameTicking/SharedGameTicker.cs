@@ -34,7 +34,7 @@ namespace Content.Shared.GameTicking
         // <Trauma> Sets overflow job to be DClass
         public static readonly ProtoId<JobPrototype> FallbackOverflowJob = "DClass";
 
-        public const string FallbackOverflowJobName = "job-name-dclass";
+        public const string FallbackOverflowJobName = "job-name-d-class";
         // </Trauma>
 
 

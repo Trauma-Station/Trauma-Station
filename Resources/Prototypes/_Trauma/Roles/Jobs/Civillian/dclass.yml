@@ -2,7 +2,7 @@
 
 - type: job
   id: DClass
-  name: job-name-dclass
+  name: job-name-d-class
   description: job-description-dclass
   playTimeTracker: JobDClass
   startingGear: DClassGear
