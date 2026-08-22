@@ -98,7 +98,16 @@
   components:
   - type: SpawnOnDespawn
     prototype: CigarGoldCase # might be an overill but who cares lol
-
+    
+- type: entity
+  id: SpawnPodMandate
+  categories: [ HideSpawnMenu ]
+  name: SpawnSupplyMandate
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnOnDespawn
+    prototype: Mandate
+    
 - type: entity
   id: SpawnPodWhiskey
   categories: [ HideSpawnMenu ]
