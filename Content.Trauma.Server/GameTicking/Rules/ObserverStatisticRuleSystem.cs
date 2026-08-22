@@ -21,7 +21,7 @@ namespace Content.Trauma.Server.GameTicking.Rules;
 /// </summary>
 public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<ObserverStatisticRuleComponent>
 {
-    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private EntityQuery<FollowedComponent> _followedQuery = default!;
@@ -37,7 +37,7 @@ public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<Observe
         if (mindComp.CharacterName is not { })
             return;
 
-        if (mindComp.UserId is not { })
+        if (mindComp.UserId is not { } id)
             return;
 
         if (!_followedQuery.TryComp(ev.Following, out var followed))
@@ -50,7 +50,7 @@ public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<Observe
                 continue;
 
             observerStats.MostPopularCharacterName = mindComp.CharacterName;
-            observerStats.MostPopularUserName = _playerManager.GetPlayerData(mindComp.UserId.Value).UserName;
+            observerStats.MostPopularUserName = _player.GetPlayerData(id).UserName;
 
             observerStats.MostPopularEntityPopularity = followed.Following.Count;
         }
@@ -59,8 +59,7 @@ public sealed partial class ObserverStatisticRuleSystem : GameRuleSystem<Observe
     [SubscribeLocalEvent]
     private void OnRoundStarting(RoundStartingEvent ev)
     {
-        var rule = Spawn(Rule, MapCoordinates.Nullspace);
-        _ticker.StartGameRule(rule);
+        _ticker.StartGameRule(Rule);
     }
 
     protected override void AppendRoundEndText(
