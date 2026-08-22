@@ -13598,3 +13598,12 @@ Entries:
   id: 1483
   time: '2026-08-22T03:58:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4183
+- author: mickers7
+  changes:
+  - type: Add
+    message: Re-added Capoeira
+  - type: Tweak
+    message: Reworked Capoeira
+  id: 1484
+  time: '2026-08-22T05:00:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4078

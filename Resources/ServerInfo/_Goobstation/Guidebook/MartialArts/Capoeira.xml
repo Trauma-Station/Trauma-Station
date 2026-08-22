@@ -11,13 +11,11 @@
 
   ## Special abilities
 
-  Capoeira users are better at Grab intent. Successfully grabbing an opponent grants user a brief speed boost and denies target from sprinting temporarily.
-
   ### Capoeira Stance
 
   You never stop moving while performing the ginga. This makes you very mobile while fighting.
 
-  Through swift motion, Capoeira masters channel speed into energy, with combos being more deadly the faster they run.
+  Through swift motion, Capoeira masters channel speed into energy, with combos being more deadly the faster they are.
   Halt their flow, and their strength will vanish. Their combos, powered by movement, falter when they are prone.
 
   ### Capoeira Momentum
@@ -25,11 +23,13 @@
   Through the flowing, relentless motion of Capoeira, each successful combo restores the user's stamina.
   Every connected strike fuels their endurance, allowing them to fight longer, faster, and harder without pause.
 
+  The heavier the combo, the more it restores. This does not scale with speed.
+
   ### Capoeira Tempo
 
   Hit or miss, it's just part of the dance! And the best part is about to start!
 
-  A missed attack sharpens the next, reducing its recovery and increasing the damage.
+  A missed bare-handed attack sharpens the next, reducing its recovery and increasing the damage.
 
   ## Combo attacks
 
@@ -41,7 +41,7 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
-  Knocks down and pushes opponent away from the user. Doesn't force to drop held items.
+  Pushes the target back, breaking through their defenses temporarily making them vulnerable to melee attacks.
 
   ### Circle Kick
 
@@ -61,7 +61,7 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
   </Box>
 
-  Knocks down and deals Blunt and Stamina damage. Temporarily increases user's attack speed by a bit.
+  Knocks down and deals Blunt and Stamina damage. Temporarily increases the user's attack speed.
   Cannot be performed if the user is moving too slow.
 
   ### Spin Kick
@@ -73,7 +73,8 @@
     <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
-  Deals a lot of Blunt damage and knocks the opponent down. Also makes the user flip. Only works on standing opponents.
+  Deals a lot of damage, knocks the opponent down and breaks any grab on them. Also makes the user flip,
+  and increases their attack speed. Only works on standing opponents.
   Cannot be performed if the user is moving too slow.
 
   ### Kick Up
