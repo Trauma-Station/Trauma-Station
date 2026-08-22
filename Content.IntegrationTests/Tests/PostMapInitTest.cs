@@ -420,13 +420,24 @@ namespace Content.IntegrationTests.Tests
                     var comp = entManager.GetComponent<StationJobsComponent>(station);
                     var jobs = new HashSet<ProtoId<JobPrototype>>(comp.SetupAvailableJobs.Keys);
 
+                    // <Trauma> the SpawnPointComponent portion of allowing ExtraJobs to work on spawners
                     var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
+                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset
+                                    && (x.Job != null || x.ExtraJobs.Count > 0))
+                        .SelectMany(x => (x.Job != null ? new[] { x.Job.Value } : [])
+                            .Concat(x.ExtraJobs));
+                    // </Trauma>
+
+                    // <Trauma> - dont allow unused jobs
+                    // Extra Jobs Addendum: made it so it only deals with primary jobs for the unused spawnpoints.
+                    // Issues were being caused previously, and there shouldn't be any issues caused by ignoring extra jobs for this test.
+                    var unused = new List<ProtoId<JobPrototype>>();
+
+                    var primarySpawnPoints = entManager.EntityQuery<SpawnPointComponent>()
                         .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
                         .Select(x => x.Job.Value);
 
-                    // <Trauma> - dont allow unused jobs
-                    var unused = new List<ProtoId<JobPrototype>>();
-                    foreach (var job in spawnPoints)
+                    foreach (var job in primarySpawnPoints)
                     {
                         if (!jobs.Contains(job))
                             unused.Add(job);
@@ -438,9 +449,13 @@ namespace Content.IntegrationTests.Tests
 
                     jobs.ExceptWith(spawnPoints);
 
+                    // <Trauma> Allows for handling extra jobs on a spawner in the test. The main job for a spawner must always be present because it's easier.
                     spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
-                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job != null)
-                        .Select(x => x.Job.Value);
+                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset
+                                    && (x.Job != null || x.ExtraJobs.Count > 0))
+                        .SelectMany(x => (x.Job != null ? new[] { x.Job.Value } : [])
+                            .Concat(x.ExtraJobs));
+                    // </Trauma>
 
                     jobs.ExceptWith(spawnPoints);
 
