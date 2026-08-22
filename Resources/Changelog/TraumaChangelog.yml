@@ -13578,3 +13578,14 @@ Entries:
   id: 1481
   time: '2026-08-21T22:49:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4218
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added signal screens, you can set their text to anything with circuits.
+  - type: Add
+    message: Added if/else logic gate to circuits.
+  - type: Fix
+    message: Interactors completed/started ports should behave better.
+  id: 1482
+  time: '2026-08-22T01:43:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4219
