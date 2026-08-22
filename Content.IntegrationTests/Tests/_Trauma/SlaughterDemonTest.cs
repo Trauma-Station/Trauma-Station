@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Station;
 using Content.Goobstation.Shared.SlaughterDemon;
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Server.Fluids.EntitySystems;
@@ -7,6 +8,7 @@ using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Station.Components;
 using Content.Trauma.Server.Antag;
 using Content.Trauma.Shared.Antag;
 using Robust.Shared.Map;
@@ -45,10 +47,20 @@ public sealed class SlaughterDemonTest : InteractionTest
 
         await Server.WaitPost(() =>
         {
+            var mapSystem = SEntMan.System<SharedMapSystem>();
+            var stationSystem = SEntMan.System<StationSystem>();
             var mapId = SEntMan.GetComponent<TransformComponent>(demon).MapID;
-            var grid = SEntMan.System<SharedMapSystem>().CreateGridEntity(mapId);
-            var tile = _tileDef[FloorSteel].TileId;
-            SEntMan.System<SharedMapSystem>().SetTile(grid, new Vector2i(0, 0), new Tile(tile));
+
+            var gridEnt = mapSystem.CreateGridEntity(mapId);
+
+            var tileId = _tileDef[FloorSteel].TileId;
+            mapSystem.SetTile(gridEnt, new Vector2i(0, 0), new Tile(tileId));
+            var stationUid = SEntMan.SpawnEntity(null, MapCoordinates.Nullspace);
+            var stationComp = SEntMan.AddComponent<StationDataComponent>(stationUid);
+            var memberComp = SEntMan.AddComponent<StationMemberComponent>(gridEnt);
+
+            memberComp.Station = stationUid;
+            stationComp.Grids.Add(gridEnt);
         });
 
         await Server.WaitAssertion(() =>
