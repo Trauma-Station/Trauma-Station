@@ -4,7 +4,7 @@
   parent: Screen
   id: SignalScreen
   name: signal screen
-  descriptions: Displays text from signals sent to its text port.
+  description: Displays text from signals sent to its text port.
   components:
   - type: Screen
     ignoreNetwork: true
