@@ -13589,3 +13589,12 @@ Entries:
   id: 1482
   time: '2026-08-22T01:43:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4219
+- author: buunie099
+  changes:
+  - type: Add
+    message: >-
+      Added the most popular character that was spectated to the round end
+      window
+  id: 1483
+  time: '2026-08-22T03:58:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4183
