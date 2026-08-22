@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Bank;
-// </Trauma>
 using System.Linq;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -111,80 +108,7 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnBreak(EntityUid uid, VendingMachineComponent vendComponent, BreakageEventArgs eventArgs)
     {
-<<<<<<< HEAD
-        if (!Resolve(uid, ref component))
-            return null;
-
-        if (type == InventoryType.Emagged && HasComp<EmaggedComponent>(uid))
-            return component.EmaggedInventory.GetValueOrDefault(entryId);
-
-        if (type == InventoryType.Contraband && component.Contraband)
-            return component.ContrabandInventory.GetValueOrDefault(entryId);
-
-        return component.Inventory.GetValueOrDefault(entryId);
-    }
-
-    /// <summary>
-    /// Tries to eject the provided item. Will do nothing if the vending machine is incapable of ejecting, already ejecting
-    /// or the item doesn't exist in its inventory.
-    /// </summary>
-    /// <param name="uid"></param>
-    /// <param name="type">The type of inventory the item is from</param>
-    /// <param name="itemId">The prototype ID of the item</param>
-    /// <param name="throwItem">Whether the item should be thrown in a random direction after ejection</param>
-    /// <param name="vendComponent"></param>
-    public void TryEjectVendorItem(EntityUid uid, InventoryType type, string itemId, bool throwItem, EntityUid? user = null, VendingMachineComponent? vendComponent = null)
-    {
-        if (!Resolve(uid, ref vendComponent))
-            return;
-
-        if (vendComponent.Ejecting || vendComponent.Broken || !_receiver.IsPowered(uid))
-        {
-            return;
-        }
-
-        var entry = GetEntry(uid, itemId, type, vendComponent);
-
-        if (string.IsNullOrEmpty(entry?.ID))
-        {
-            Popup.PopupClient(Loc.GetString("vending-machine-component-try-eject-invalid-item"), uid);
-            Deny((uid, vendComponent));
-            return;
-        }
-
-        if (entry.Amount <= 0)
-        {
-            Popup.PopupClient(Loc.GetString("vending-machine-component-try-eject-out-of-stock"), uid);
-            Deny((uid, vendComponent));
-            return;
-        }
-
-        // <Trauma>
-        var attemptEvent = new VendingMachineVendAttemptEvent(itemId);
-        RaiseLocalEvent(uid, ref attemptEvent);
-
-        if (attemptEvent.Cancelled)
-        {
-            if (!string.IsNullOrEmpty(attemptEvent.Reason))
-                Popup.PopupClient(Loc.GetString(attemptEvent.Reason), uid);
-
-            Deny((uid, vendComponent));
-            return;
-        }
-        // </Trauma>
-
-        // Start Ejecting, and prevent users from ordering while anim playing
-        vendComponent.EjectEnd = Timing.CurTime + vendComponent.EjectDelay;
-        vendComponent.NextItemToEject = entry.ID;
-        vendComponent.ThrowNextItem = throwItem;
-
-        if (TryComp(uid, out SpeakOnUIClosedComponent? speakComponent))
-            _speakOn.TrySetFlag((uid, speakComponent));
-
-        entry.Amount--;
-=======
         vendComponent.Broken = true;
->>>>>>> upstream
         Dirty(uid, vendComponent);
 
         UISystem.CloseUi(uid, VendingMachineUiKey.Key);
