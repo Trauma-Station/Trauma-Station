@@ -26,25 +26,6 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         _menu?.OpenCenteredLeft();
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        if (state is not JobListingsUserInterfaceState jobListingsState || _menu is null)
-            return;
-
-        _menu.SetReputation(jobListingsState.Reputation, jobListingsState.ReputationLevel);
-        _menu.SetRefresh(jobListingsState.BonusRefresh, jobListingsState.RefreshTime, jobListingsState.RefreshWaitDuration);
-        _menu.MaximumAcceptedSideJobs = jobListingsState.MaximumAcceptedSideJobs;
-        _menu.ClearJobListings();
-        foreach (var sideJob in jobListingsState.AvailableSideJobs)
-        {
-            _menu.AddAvailableSideJob(sideJob);
-        }
-        foreach (var sideJob in jobListingsState.AcceptedSideJobs)
-        {
-            _menu.AddAcceptedSideJob(sideJob);
-        }
-    }
-
     private void OnJobAccepted(NetEntity job)
     {
         SendMessage(new JobListingsAcceptJobMessage(job));

@@ -1,54 +1,19 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Diagnostics.CodeAnalysis;
-using Content.Server.Hands.Systems;
-using Content.Server.Mind;
-using Content.Server.Objectives;
-using Content.Server.PDA;
-using Content.Shared.EntityTable;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
-using Content.Shared.PDA;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Speech.Components;
 using Content.Trauma.Common.JobListings;
 using Content.Trauma.Common.Traitor;
-using Robust.Server.GameObjects;
-using Robust.Shared.Timing;
+using Content.Trauma.Server.JobListings;
+using Content.Trauma.Shared.Heretic.Rituals;
+using Content.Trauma.Shared.JobListings;
+using Robust.Server.GameStates;
+using Robust.Shared.Player;
 
-namespace Content.Trauma.Server.JobListings;
-
-/// <summary>
-/// System that manages the side-jobs for progressive traitor.
-/// </summary>
-public sealed partial class JobListingsSystem : EntitySystem
+public sealed partial class JobListingsSystem : SharedJobListingsSystem
 {
-    [Dependency] private ObjectivesSystem _objectives = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private PdaSystem _pda = default!;
-    [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private MindSystem _mind = default!;
-    [Dependency] private EntityTableSystem _table = default!;
-    [Dependency] private HandsSystem _hands = default!;
-    [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
-
-    /// <summary>
-    /// Similar to the method on the ObjectivesSystem but with extra info for side jobs.
-    /// </summary>
-    public SideJobInfo? GetInfo(EntityUid mind, EntityUid sideJob)
-    {
-        var basic = _objectives.GetInfo(sideJob, mind);
-        if (basic is null)
-            return null;
-        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
-            return null;
-        if (sideJobComp.Reward is null)
-            return null;
-        if (!ProtoMan.Resolve(sideJobComp.Reward.Value, out var rewardProto))
-            return null;
-
-        var name = Loc.GetString($"job-listings-ui-reward-name-{rewardProto.ID}");
-        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, name, sideJobComp.ReputationGain, GetNetEntity(sideJob));
-    }
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     /// <summary>
     /// Assign the store owner a random side job.
@@ -59,13 +24,13 @@ public sealed partial class JobListingsSystem : EntitySystem
         if (jobBoard.Comp.Mind is null)
             return false;
 
-        var mind = jobBoard.Comp.Mind.Value;
+        var mind = GetEntity(jobBoard.Comp.Mind.Value);
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return false;
 
         var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
         var possiblePriorityJobs = jobBoard.Comp.PrioritySideJobOffers.ShallowClone();
-        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(jobBoard.Owner));
+        var random = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(jobBoard.Owner));
 
         while (possiblePriorityJobs.Count > 0 || possibleJobs.Count > 0)
         {
@@ -110,79 +75,13 @@ public sealed partial class JobListingsSystem : EntitySystem
                 continue;
             }
 
-            jobBoard.Comp.AvailableSideJobs.Add(sideJob);
+            jobBoard.Comp.AvailableSideJobs.Add(GetNetEntity(sideJob));
+            DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AvailableSideJobs));
+            PVSOverrideEntity((mind, mindComp), sideJob);
             return true;
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// Accept an already assigned job.
-    /// </summary>
-    public bool AcceptSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
-    {
-        if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs)
-            return false;
-        if (!jobBoard.Comp.AvailableSideJobs.Contains(sideJob))
-            return false;
-        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
-            return false;
-
-        jobBoard.Comp.AvailableSideJobs.Remove(sideJob);
-        jobBoard.Comp.AcceptedSideJobs.Add(sideJob);
-
-        if (sideJobComp.Tool is not null)
-        {
-            var reward = Spawn(sideJobComp.Tool.Value, Transform(actor).Coordinates);
-            _hands.PickupOrDrop(actor, reward);
-        }
-
-        return true;
-    }
-
-    /// <summary>
-    /// Cancel an already accepted job.
-    /// </summary>
-    public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
-    {
-        jobBoard.Comp.AcceptedSideJobs.Remove(sideJob);
-        QueueDel(sideJob);
-    }
-
-    /// <summary>
-    /// Claim a completed job and retrieve the rewards.
-    /// </summary>
-    public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
-    {
-        if (jobBoard.Comp.Mind is null)
-            return;
-        var info = GetInfo(jobBoard.Comp.Mind.Value, sideJob);
-        if (info is null)
-            return;
-        if (info.Value.Progress < 0.999F)
-            return;
-        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
-            return;
-
-        jobBoard.Comp.AcceptedSideJobs.Remove(sideJob);
-
-        if (sideJobComp.Reward is not null)
-        {
-            var reward = Spawn(sideJobComp.Reward.Value, Transform(actor).Coordinates);
-            _hands.PickupOrDrop(actor, reward);
-        }
-
-        if (!sideJobComp.Repeatable)
-        {
-            var availableSideJobProto = MetaData(sideJob).EntityPrototype;
-            if (availableSideJobProto is not null)
-                jobBoard.Comp.CompletedObjectives.Add(availableSideJobProto.ID);
-        }
-
-        GainReputation(jobBoard, sideJobComp.ReputationGain);
-        jobBoard.Comp.JobsCompleted += 1;
-        QueueDel(sideJob);
     }
 
     /// <summary>
@@ -196,27 +95,18 @@ public sealed partial class JobListingsSystem : EntitySystem
 
         foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs)
         {
-            var availableSideJobProto = MetaData(availableSideJob).EntityPrototype;
+            var availableSideJobProto = MetaData(GetEntity(availableSideJob)).EntityPrototype;
             if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
                 return false;
         }
         foreach (var acceptedSideJob in jobBoard.Comp.AcceptedSideJobs)
         {
-            var acceptedSideJobProto = MetaData(acceptedSideJob).EntityPrototype;
+            var acceptedSideJobProto = MetaData(GetEntity(acceptedSideJob)).EntityPrototype;
             if (acceptedSideJobProto is not null && acceptedSideJobProto.ID == sideJobProtoId)
                 return false;
         }
 
         return true;
-    }
-
-    /// <summary>
-    /// Count how many jobs exist on the job board.
-    /// This includes both available and assigned.
-    /// </summary>
-    public int CountSideJobs(Entity<JobListingsComponent> jobBoard)
-    {
-        return jobBoard.Comp.AvailableSideJobs.Count + jobBoard.Comp.AcceptedSideJobs.Count;
     }
 
     /// <summary>
@@ -256,115 +146,6 @@ public sealed partial class JobListingsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Open the job listings ui.
-    /// </summary>
-    public void OpenUi(EntityUid owner, EntityUid actor)
-    {
-        _ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
-        UpdateUi(owner);
-    }
-
-    /// <summary>
-    /// Update the job listings ui on an entity.
-    /// </summary>
-    /// <param name="owner">The entity that owns the Ui, probably a PDA.</param>
-    public void UpdateUi(EntityUid owner)
-    {
-        if (!GetJobBoard(owner, out var jobBoard))
-            return;
-        if (jobBoard.Value.Comp.Mind is null)
-            return;
-
-        var availableSideJobs = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Value.Comp.AvailableSideJobs)
-        {
-            var info = GetInfo(jobBoard.Value.Comp.Mind.Value, sideJob);
-            if (info is null)
-                continue;
-            availableSideJobs.Add(info.Value);
-        }
-
-        var acceptedSideJobs = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs)
-        {
-            var info = GetInfo(jobBoard.Value.Comp.Mind.Value, sideJob);
-            if (info is null)
-                continue;
-            acceptedSideJobs.Add(info.Value);
-        }
-
-        var reputationLevel = GetReputationLevel(jobBoard.Value);
-
-        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, reputationLevel, jobBoard.Value.Comp.MaximumAcceptedSideJobs, jobBoard.Value.Comp.BonusRefresh, jobBoard.Value.Comp.RefreshTime, jobBoard.Value.Comp.RefreshWaitDuration);
-        _ui.SetUiState(owner, JobListingsUiKey.Key, state);
-    }
-
-    /// <summary>
-    /// Update the entities with uis that point to this job board.
-    /// </summary>
-    public void UpdateUis(Entity<JobListingsComponent> jobBoard)
-    {
-        foreach (var remote in jobBoard.Comp.Remotes)
-        {
-            UpdateUi(remote);
-        }
-    }
-
-    /// <summary>
-    /// Update the entities with uis that point to the job board owned by this mind.
-    /// </summary>
-    public void UpdateUis(Entity<MindComponent> mind)
-    {
-        if (!TryComp<JobListingsOwnerComponent>(mind.Owner, out var jobBoard))
-            return;
-        if (!TryComp<JobListingsComponent>(jobBoard.JobListings, out var jobListingsComp))
-            return;
-        UpdateUis((jobBoard.JobListings, jobListingsComp));
-    }
-
-    /// <summary>
-    /// Find a job board from an entity that has a <see cref="RemoteJobListingsComponent"/>.
-    /// </summary>
-    public bool GetJobBoard(EntityUid owner, [NotNullWhen(true)] out Entity<JobListingsComponent>? jobBoard)
-    {
-        jobBoard = null;
-
-        if (!TryComp<RemoteJobListingsComponent>(owner, out var remoteComp))
-            return false;
-        if (!TryComp<JobListingsComponent>(remoteComp.JobListings, out var jobListingsComp))
-            return false;
-
-        jobBoard = (remoteComp.JobListings, jobListingsComp);
-        return true;
-    }
-
-    /// <summary>
-    /// Link an entity with a ui (like a pda) to a job board.
-    /// </summary>
-    public void Link(Entity<JobListingsComponent> jobBoard, EntityUid remote)
-    {
-        AddComp(remote, new RemoteJobListingsComponent { JobListings = jobBoard.Owner });
-        jobBoard.Comp.Remotes.Add(remote);
-    }
-
-    /// <summary>
-    /// Set the time when the refresh button on this job board will become available.
-    /// </summary>
-    public void SetRefreshTime(Entity<JobListingsComponent> jobBoard)
-    {
-        jobBoard.Comp.RefreshTime = _timing.CurTime + jobBoard.Comp.RefreshWaitDuration;
-    }
-
-    /// <summary>
-    /// Determines if the job board can be refreshed at this current time.
-    /// This is a final server-side check.
-    /// </summary>
-    public bool CanRefresh(Entity<JobListingsComponent> jobBoard)
-    {
-        return jobBoard.Comp.BonusRefresh || jobBoard.Comp.RefreshTime is not null && _timing.CurTime >= jobBoard.Comp.RefreshTime;
-    }
-
-    /// <summary>
     /// Refresh the job board.
     /// This has no checks and should only be called if <see cref="CanRefresh"/> returns true.
     /// This method deletes every job not currently accepted and then assigns jobs until the job board is full.
@@ -373,42 +154,28 @@ public sealed partial class JobListingsSystem : EntitySystem
     {
         foreach (var job in jobBoard.Comp.AvailableSideJobs)
         {
-            QueueDel(job);
+            QueueDel(GetEntity(job));
         }
+
         jobBoard.Comp.AvailableSideJobs.Clear();
         jobBoard.Comp.BonusRefresh = false;
+        DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.BonusRefresh));
 
         SetRefreshTime(jobBoard);
         FillSideJobs(jobBoard);
     }
 
     /// <summary>
-    /// Work out the level (and therefore title) the traitor should have based on
+    /// Helper method to add a PVS override for the job board and sidejobs.
+    /// They are nullspace entities on the server and would not normally be replicated to the client but this method makes it so.
     /// </summary>
-    public int GetReputationLevel(Entity<JobListingsComponent> jobBoard)
+    private void PVSOverrideEntity(Entity<MindComponent> mind, EntityUid entity)
     {
-        var reputationLevel = 0;
-        foreach (var bracket in jobBoard.Comp.ReputationLevels)
-        {
-            if (jobBoard.Comp.Reputation >= bracket)
-                reputationLevel += 1;
-            else
-                break;
-        }
-        return reputationLevel;
-    }
-
-    /// <summary>
-    /// Increase the traitor's reputation by a certain amount.
-    /// Grain a bonus refresh if they level up.
-    /// </summary>
-    public void GainReputation(Entity<JobListingsComponent> jobBoard, int reputationGain)
-    {
-        var oldLevel = GetReputationLevel(jobBoard);
-        jobBoard.Comp.Reputation += reputationGain;
-        var newLevel = GetReputationLevel(jobBoard);
-        if (newLevel > oldLevel)
-            jobBoard.Comp.BonusRefresh = true;
+        if (mind.Comp.OwnedEntity is null)
+            return;
+        if (!_player.TryGetSessionByEntity(mind.Comp.OwnedEntity.Value, out var session))
+            return;
+        _pvsOverride.AddSessionOverride(entity, session);
     }
 
     [SubscribeLocalEvent]
@@ -416,13 +183,19 @@ public sealed partial class JobListingsSystem : EntitySystem
     {
         if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
             return;
-
-        var mind = _mind.GetMind(args.User);
+        var mind = Mind.GetMind(args.User);
         if (mind is null)
             return;
-        jobListingsComp.Mind = mind.Value;
-        AddComp(mind.Value, new JobListingsOwnerComponent { JobListings = args.Uplink });
+        if (!TryComp<MindComponent>(mind, out var mindComp))
+            return;
 
+        // set mind
+        jobListingsComp.Mind = GetNetEntity(mind.Value);
+        DirtyField(args.Uplink, jobListingsComp, nameof(JobListingsComponent.Mind));
+        PVSOverrideEntity((mind.Value, mindComp), args.Uplink);
+        AddComp(mind.Value, new JobListingsOwnerComponent { JobListings = GetNetEntity(args.Uplink) });
+
+        // init job board
         FillSideJobs((args.Uplink, jobListingsComp));
         Link((args.Uplink, jobListingsComp), args.Host);
         SetRefreshTime((args.Uplink, jobListingsComp));
@@ -436,54 +209,4 @@ public sealed partial class JobListingsSystem : EntitySystem
 
         Link((args.Uplink, jobListingsComp), args.Host);
     }
-
-    [SubscribeLocalEvent]
-    private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
-    {
-        OpenUi(pda, msg.Actor);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
-    {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
-            return;
-        AcceptSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
-        UpdateUi(owner.Owner);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
-    {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
-            return;
-        ClaimSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
-        UpdateUi(owner.Owner);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
-    {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
-            return;
-        CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
-        UpdateUi(owner.Owner);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
-    {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
-            return;
-        if (!CanRefresh(jobBoard.Value))
-            return;
-        Refresh(jobBoard.Value);
-        UpdateUi(owner.Owner);
-    }
 }
-
-/// <summary>
-/// Raised on a side job when it is created.
-/// </summary>
-[ByRefEvent]
-public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = false);
