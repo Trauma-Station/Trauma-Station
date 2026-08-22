@@ -4,8 +4,8 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/22/2026 21:10:14
-  entityCount: 32986
+  time: 08/22/2026 21:17:33
+  entityCount: 32990
 maps:
 - 1
 grids:
@@ -7902,11 +7902,11 @@ entities:
           immutable: True
         - temperature: 293.15
           volume: 2500
-          moles:
-            Plasma: 6666.982
+          moles: {}
         - temperature: 293.15
           volume: 2500
-          moles: {}
+          moles:
+            Plasma: 6666.982
         - temperature: 293.15
           volume: 2500
           moles:
@@ -10025,7 +10025,7 @@ entities:
           -12,-9:
             0: 32768
             2: 2
-            4: 136
+            3: 136
           -11,-8:
             0: 64985
           -11,-7:
@@ -10034,7 +10034,7 @@ entities:
             0: 26224
           -11,-9:
             0: 47240
-            4: 51
+            3: 51
           -10,-8:
             0: 64432
           -10,-7:
@@ -10103,17 +10103,17 @@ entities:
             2: 8738
             0: 34952
           -13,-12:
-            3: 224
-            4: 57344
+            4: 224
+            3: 57344
           -12,-11:
             2: 34
             0: 64136
           -13,-11:
-            4: 224
+            3: 224
             0: 57344
           -12,-10:
             0: 143
-            4: 32768
+            3: 32768
           -13,-10:
             0: 65518
           -13,-9:
@@ -10127,7 +10127,7 @@ entities:
             0: 16383
           -11,-10:
             0: 33211
-            4: 12288
+            3: 12288
           -11,-13:
             0: 65535
           -10,-12:
@@ -10156,7 +10156,7 @@ entities:
             5: 224
             6: 57344
           -13,-13:
-            4: 57568
+            3: 57568
           -11,-15:
             0: 65280
             2: 1
@@ -10454,7 +10454,7 @@ entities:
             2: 8750
           -20,-11:
             2: 4369
-            4: 52416
+            3: 52416
           -20,-10:
             2: 273
             0: 61152
@@ -10467,7 +10467,7 @@ entities:
           -19,-12:
             0: 56784
           -19,-11:
-            4: 4368
+            3: 4368
             0: 52940
           -19,-10:
             0: 56796
@@ -11261,17 +11261,18 @@ entities:
       pos: -0.5,10.5
     - type: DeviceList
       devices:
-      - 834
-      - 20087
-      - 20364
-      - 15509
-      - 15477
-      - 15510
-      - 15486
-      - 15460
       - 15479
       - 15416
       - 15482
+      - 15509
+      - 15477
+      - 15510
+      - 834
+      - 20087
+      - 20364
+      - 15341
+      - 15486
+      - 15460
   - uid: 14
     components:
     - type: Transform
@@ -12695,6 +12696,19 @@ entities:
       - 32698
       - 22505
       - 22506
+  - uid: 32989
+    components:
+    - type: Transform
+      parent: 2
+      pos: -0.5,15.5
+    - type: DeviceList
+      devices:
+      - 20313
+      - 20109
+      - 19979
+      - 20043
+      - 15323
+      - 15341
 - proto: AirCanister
   entities:
   - uid: 109
@@ -17118,6 +17132,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 6.5,7.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 835
     components:
     - type: Transform
@@ -17667,6 +17684,11 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 32699
+  - uid: 32990
+    components:
+    - type: Transform
+      parent: 2
+      pos: 0.5,13.5
 - proto: AltarConvertRed
   entities:
   - uid: 934
@@ -96358,6 +96380,9 @@ entities:
     - type: Transform
       parent: 2
       pos: -1.5,14.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 32989
   - uid: 15324
     components:
     - type: Transform
@@ -96464,6 +96489,10 @@ entities:
     - type: Transform
       parent: 2
       pos: 0.5,10.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
+      - 32989
   - uid: 15342
     components:
     - type: Transform
@@ -96910,6 +96939,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 7.5,7.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15417
     components:
     - type: Transform
@@ -97164,6 +97196,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 7.5,9.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15461
     components:
     - type: Transform
@@ -97252,6 +97287,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 1.5,4.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15478
     components:
     - type: Transform
@@ -97262,6 +97300,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 7.5,8.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15480
     components:
     - type: Transform
@@ -97277,6 +97318,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 5.5,4.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15483
     components:
     - type: Transform
@@ -97297,6 +97341,9 @@ entities:
     - type: Transform
       parent: 2
       pos: -1.5,7.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15487
     components:
     - type: Transform
@@ -97434,11 +97481,17 @@ entities:
     - type: Transform
       parent: 2
       pos: 0.5,4.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15510
     components:
     - type: Transform
       parent: 2
       pos: 2.5,4.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
   - uid: 15511
     components:
     - type: Transform
@@ -130916,12 +130969,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -5.5,72.5
-  - uid: 19979
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: 2.5,11.5
   - uid: 19980
     components:
     - type: Transform
@@ -131410,6 +131457,9 @@ entities:
     - type: Transform
       parent: 2
       pos: 2.5,14.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 32989
     - type: GasThermoMachine
       targetTemperature: 235.15
   - uid: 22504
@@ -131730,6 +131780,9 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 5.5,8.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
     - type: AtmosPipeColor
       color: '#0000FFFF'
   - uid: 20088
@@ -131905,6 +131958,9 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 0.5,12.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 32989
     - type: AtmosPipeColor
       color: '#0000FFFF'
   - uid: 20110
@@ -133512,6 +133568,9 @@ entities:
     - type: Transform
       parent: 2
       pos: -0.5,12.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 32989
     - type: AtmosPipeColor
       color: '#FF0000FF'
   - uid: 20314
@@ -133915,6 +133974,9 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 0.5,6.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 13
     - type: AtmosPipeColor
       color: '#FF0000FF'
   - uid: 20365
@@ -135367,6 +135429,15 @@ entities:
       color: '#0000FFFF'
 - proto: GasVentScrubberFreezer
   entities:
+  - uid: 19979
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 2.5,12.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 32989
   - uid: 22505
     components:
     - type: Transform
@@ -135378,12 +135449,6 @@ entities:
       - 32699
 - proto: GasVolumePump
   entities:
-  - uid: 20551
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: 2.5,12.5
   - uid: 20552
     components:
     - type: Transform
@@ -148254,6 +148319,24 @@ entities:
     - type: Transform
       parent: 2
       pos: -52.61403,65.565544
+- proto: PoweredDimSmallLight
+  entities:
+  - uid: 20551
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -51.5,-96.5
+  - uid: 32987
+    components:
+    - type: Transform
+      parent: 2
+      pos: -45.5,-94.5
+  - uid: 32988
+    components:
+    - type: Transform
+      parent: 2
+      pos: -58.5,-94.5
 - proto: Poweredlight
   entities:
   - uid: 22773
