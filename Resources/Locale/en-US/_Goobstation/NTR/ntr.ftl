@@ -33,6 +33,9 @@ ntr-executive-pizza-small-desc = Order a small pizza party bundle from NanoTrase
 ntr-executive-softsuit-name = Order a softsuit
 ntr-executive-softsuit-desc = A basic softsuit designed for short-term space exposure. Offers minimal protection.
 
+ntr-executive-mandate-name = Mandate
+ntr-executive-mandate-desc = A large sword for commiting honorable executions against mindshielded people
+
 ntr-executive-hardsuit-name = Order a hardsuit
 ntr-executive-hardsuit-desc = A durable hardsuit for extreme environments. Are you sure this purchase is justified?
 
