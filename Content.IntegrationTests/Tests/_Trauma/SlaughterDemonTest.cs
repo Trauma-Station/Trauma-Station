@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.Station;
 using Content.Goobstation.Shared.SlaughterDemon;
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Server.Fluids.EntitySystems;
+using Content.Server.Station.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
@@ -60,7 +60,7 @@ public sealed class SlaughterDemonTest : InteractionTest
             var memberComp = SEntMan.AddComponent<StationMemberComponent>(gridEnt);
 
             memberComp.Station = stationUid;
-            stationComp.Grids.Add(gridEnt);
+            stationSystem.AddGridToStation(stationUid, gridEnt);
         });
 
         await Server.WaitAssertion(() =>
