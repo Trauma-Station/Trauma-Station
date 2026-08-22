@@ -27,7 +27,6 @@ public sealed class SlaughterDemonTest : InteractionTest
     public static readonly EntProtoId BloodCrawlAction = "BloodCrawlAction";
     public static readonly ProtoId<AntagSmitePrototype> SmiteSlaughterDemon = "SlaughterDemon";
     public static readonly ProtoId<ReagentPrototype> Blood = "Blood";
-    public static readonly string FloorSteel = "FloorSteel";
 
     protected override string PlayerPrototype => SlaughterDemon;
 
@@ -35,7 +34,6 @@ public sealed class SlaughterDemonTest : InteractionTest
     [SidedDependency(Side.Server)] private PuddleSystem _puddle = default!;
     [SidedDependency(Side.Server)] private SharedActionsSystem _actions = default!;
     [SidedDependency(Side.Server)] private MobStateSystem _mobState = default!;
-    [SidedDependency(Side.Server)] private ITileDefinitionManager _tileDef = default!;
 
     /// <summary>
     /// Verifies that a Slaughter Demon can enter blood puddles via Blood Jaunt (Blood Crawl) and can safely exit.
@@ -45,23 +43,7 @@ public sealed class SlaughterDemonTest : InteractionTest
     {
         var demon = SPlayer;
 
-        await Server.WaitPost(() =>
-        {
-            var mapSystem = SEntMan.System<SharedMapSystem>();
-            var stationSystem = SEntMan.System<StationSystem>();
-            var mapId = SEntMan.GetComponent<TransformComponent>(demon).MapID;
-
-            var gridEnt = mapSystem.CreateGridEntity(mapId);
-
-            var tileId = _tileDef[FloorSteel].TileId;
-            mapSystem.SetTile(gridEnt, new Vector2i(0, 0), new Tile(tileId));
-            var stationUid = SEntMan.SpawnEntity(null, MapCoordinates.Nullspace);
-            var stationComp = SEntMan.AddComponent<StationDataComponent>(stationUid);
-            var memberComp = SEntMan.AddComponent<StationMemberComponent>(gridEnt);
-
-            memberComp.Station = stationUid;
-            stationSystem.AddGridToStation(stationUid, gridEnt);
-        });
+        var map = await Pair.CreateTestMap();
 
         await Server.WaitAssertion(() =>
         {
