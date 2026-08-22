@@ -13589,3 +13589,30 @@ Entries:
   id: 1482
   time: '2026-08-22T01:43:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4219
+- author: buunie099
+  changes:
+  - type: Add
+    message: >-
+      Added the most popular character that was spectated to the round end
+      window
+  id: 1483
+  time: '2026-08-22T03:58:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4183
+- author: mickers7
+  changes:
+  - type: Add
+    message: Re-added Capoeira
+  - type: Tweak
+    message: Reworked Capoeira
+  id: 1484
+  time: '2026-08-22T05:00:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4078
+- author: jshoe2
+  changes:
+  - type: Add
+    message: >-
+      Replaced Wizard Enchanting crate with a new Demonology Crate, everything
+      you need to summon demons!
+  id: 1485
+  time: '2026-08-22T08:43:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4201
