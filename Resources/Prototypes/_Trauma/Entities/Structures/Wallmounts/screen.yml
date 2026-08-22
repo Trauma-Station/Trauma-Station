@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: Screen
+  id: SignalScreen
+  name: signal screen
+  description: Displays text from signals sent to its text port.
+  components:
+  - type: Screen
+    ignoreNetwork: true
+  - type: SignalScreen
+  - type: DeviceLinkSink
+    ports:
+    - Text
+  - type: Construction
+    graph: SignalScreen
+    node: signal screen

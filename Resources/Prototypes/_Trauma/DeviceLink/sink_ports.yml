@@ -49,7 +49,6 @@
 
 # Lathe
 
-
 - type: sinkPort
   id: LatheSetRecipe
   name: signal-port-name-lathe-set-recipe
@@ -59,3 +58,10 @@
   id: LatheQuantity
   name: signal-port-name-lathe-quantity
   description: signal-port-description-lathe-quantity
+
+# Signal Screen
+
+- type: sinkPort
+  id: Text
+  name: signal-port-name-text
+  description: signal-port-description-text
