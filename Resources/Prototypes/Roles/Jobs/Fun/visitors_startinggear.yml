@@ -769,7 +769,7 @@
   id: VisitorParamedicAlt
   equipment:
     jumpsuit: ClothingUniformJumpsuitParamedic
-    shoes: ClothingShoesBootsWork
+    shoes: ClothingShoesColorBlue # Trauma - was ClothingShoesBootsWork
     gloves: ClothingHandsGlovesNitrile
     head: ClothingHeadHatParamedicsoftFlipped
     neck: ClothingNeckStethoscope

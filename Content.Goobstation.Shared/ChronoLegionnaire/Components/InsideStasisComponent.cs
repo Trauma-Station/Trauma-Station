@@ -23,9 +23,3 @@ public sealed partial class InsideStasisComponent : Component
 
     public EntityUid Effect = new();
 }
-
-/// <summary>
-/// Event when someone get inside the stasis
-/// </summary>
-[ByRefEvent]
-public record struct StasisEvent;

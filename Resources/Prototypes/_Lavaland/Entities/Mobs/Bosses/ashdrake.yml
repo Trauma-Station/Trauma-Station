@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: ash drake
+  parent: [ LavalandMobBase, BaseSlicingRefinable ]
   id: LavalandBossAshDrake
-  parent: LavalandMobBase
+  name: ash drake
   description: Guardian of the Necropolis.
   components:
   - type: Physics
@@ -73,10 +73,9 @@
     thresholds:
       0: Alive
       2500: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FireballSpellbook
-      amount: 1
   - type: Damageable
     damageModifierSet: Hierophant
   - type: Injurable

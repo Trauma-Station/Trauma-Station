@@ -18,9 +18,9 @@
   copyright: "Taken from BlueMoon station and converted to mono by @deltanedas (github)"
   source: "https://github.com/BlueMoon-Labs/MOLOT-BlueMoon-Station/tree/master/sound/alien"
 
-- files: ["scream1.ogg", "scream2.ogg", "scream3.ogg", "scream4.ogg", "scream5.ogg", "scream6.ogg", "scream7.ogg", "scream8.ogg", "9.ogg", "scream10.ogg"]
+- files: ["scream1.ogg", "scream2.ogg", "scream3.ogg", "scream4.ogg", "scream5.ogg", "scream6.ogg", "scream7.ogg", "scream8.ogg", "9.ogg", "scream10.ogg, scream11.ogg, scream12.ogg"]
   license: "CC-BY-3.0"
-  copyright: "Taken from BlueMoon station and converted to mono by @deltanedas (github)"
+  copyright: "Taken from BlueMoon station and converted to mono by @deltanedas (github) and assripper"
   source: "https://github.com/BlueMoon-Labs/MOLOT-BlueMoon-Station/tree/master/sound/alien"
 
 - files: ["hiss1.ogg", "hiss2.ogg", "hiss3.ogg", "hiss4.ogg", "hiss5.ogg"]

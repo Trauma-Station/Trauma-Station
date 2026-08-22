@@ -11,3 +11,34 @@
       entity_storage:
         id: MobMothmaggot
         amount: 4
+
+- type: entity
+  parent: CrateLivestock
+  id: CrateNPCBunny
+  name: crate of bunnies
+  description: A crate containing four cute bunnies.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:GroupSelector
+        children:
+        - id: MobBunny
+          amount: 4
+        - id: MobBunnySea
+          amount: 4
+          weight: 0.5
+        - id: MobBunnyEvil
+          amount: 4
+          weight: 0.1
+
+- type: entity
+  parent: CrateLivestock
+  id: CrateNPCSnakeGrass
+  name: grass snake crate
+  description: A crate containing three snakes.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MobSnakeGrass
+        amount: 3

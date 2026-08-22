@@ -27,8 +27,8 @@ public sealed partial class LordOfTheNightComponent : Component
     [DataField]
     public EntityWhitelist UnanchorWhitelist = new()
     {
-        Components = new[] { "Door", "Destructible" },
-        Tags = new() { "Wall", "Window", "Structure" },
+        Components = new[] { "Door", "Destructible", "Wall" },
+        Tags = new() { "Window", "Structure" },
     };
 
     [DataField]
@@ -38,7 +38,7 @@ public sealed partial class LordOfTheNightComponent : Component
     };
 
     [DataField]
-    public FixedPoint2 HealPerArm = 80;
+    public FixedPoint2 HealPerArm = 250;
 
     [DataField]
     public FixedPoint2 HealthPerSegment = 250;

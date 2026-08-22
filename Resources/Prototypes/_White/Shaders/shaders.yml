@@ -1,11 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: shader
-  id: NightVision
-  kind: source
-  path: "/Textures/_White/Shaders/nightvision.swsl"
-
-- type: shader
   id: FlickerHologram
   kind: source
   path: "/Textures/_White/Shaders/flickerhologram.swsl"

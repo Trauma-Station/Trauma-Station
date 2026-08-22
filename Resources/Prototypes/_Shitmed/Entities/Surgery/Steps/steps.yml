@@ -411,6 +411,7 @@
         Blunt: -5
         Slash: -5
         Piercing: -5
+        Ballistic: -5
   - type: SurgeryRepeatableStep
 
 - type: entity
@@ -523,7 +524,7 @@
   components:
   - type: SurgeryStep
     tool:
-    - type: InternalOrgan
+    - type: InternalChildOrgan
     duration: 6
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi

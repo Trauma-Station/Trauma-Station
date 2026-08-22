@@ -12,24 +12,22 @@ namespace Content.Lavaland.Shared.Megafauna.Selectors;
 /// </summary>
 public sealed partial class PerformActionSelector : MegafaunaSelector
 {
-    [DataField]
+    [DataField(required: true)]
     public EntProtoId ActionId;
 
     protected override float InvokeImplementation(MegafaunaCalculationBaseArgs args)
     {
-        var entMan = args.EntityManager;
-        var actionSys = entMan.System<SharedActionsSystem>();
-        var megafaunaSys = entMan.System<MegafaunaSystem>();
+        var entMan = args.EntMan;
+        var actions = entMan.System<SharedActionsSystem>();
 
-        if (!actionSys.TryGetActionById(args.Entity, ActionId, out var action))
+        if (!actions.TryGetActionById(args.Entity, ActionId, out var action))
         {
             DebugTools.Assert($"{entMan.ToPrettyString(args.Entity)}'s AI failed to get an action with ID {ActionId}!");
             return FailDelay;
         }
 
-        var ev = megafaunaSys.GetPerformEvent(args.Entity, action.Value.Owner);
-
-        if (!actionSys.TryPerformAction(args.Entity, ev))
+        var ev = args.System.GetPerformEvent(args.Entity, action.Value.Owner);
+        if (!actions.TryPerformAction(args.Entity, ev))
         {
             DebugTools.Assert($"{entMan.ToPrettyString(args.Entity)}'s AI failed to perform action {entMan.ToPrettyString(action.Value.Owner)} with ID {ActionId}!");
             return FailDelay;

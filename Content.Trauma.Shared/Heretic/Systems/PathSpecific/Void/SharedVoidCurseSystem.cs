@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Common.Temperature;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
@@ -16,35 +16,29 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<VoidCurseComponent, TemperatureChangeAttemptEvent>(OnTemperatureChangeAttempt);
-        SubscribeLocalEvent<VoidCurseComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
-        SubscribeLocalEvent<VoidCurseComponent, ComponentRemove>(OnRemove);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<VoidCurseComponent> ent, ref ComponentRemove args)
     {
         if (TerminatingOrDeleted(ent))
             return;
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
+        _modifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
-    private void OnTemperatureChangeAttempt(Entity<VoidCurseComponent> ent, ref TemperatureChangeAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnBeforeHeatExchange(Entity<VoidCurseComponent> ent, ref BeforeHeatExchangeEvent args)
     {
-        if (!args.Cancelled && ent.Comp.Stacks >= ent.Comp.MaxStacks && args.CurrentTemperature > args.LastTemperature)
-            args.Cancelled = true;
+        // no heating up
+        args.Cancelled |= ent.Comp.Stacks >= ent.Comp.MaxStacks && args.OurTemp < args.OtherTemp;
     }
 
+    [SubscribeLocalEvent]
     private void OnRefreshMoveSpeed(Entity<VoidCurseComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var modifier = 1f - ent.Comp.Stacks * 0.14f;
+        var modifier = 1f - ent.Comp.Stacks * 0.05f;
         if (TryComp(ent, out TemperatureSpeedComponent? tempSpeed) &&
-            tempSpeed.CurrentSpeedModifier != null && tempSpeed.CurrentSpeedModifier != 0f)
-            modifier /= 1.2f * tempSpeed.CurrentSpeedModifier.Value;
+            tempSpeed.CurrentSpeedModifier is { } current && current != 0f)
+            modifier /= 1.2f * current;
 
         modifier = Math.Clamp(modifier, 0f, 1f);
 

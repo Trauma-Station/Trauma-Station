@@ -2,7 +2,8 @@
 
 using Content.Trauma.Shared.Wizard.ScryingOrb;
 using Content.Shared.Eye;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
+using Content.Shared.Ghost.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;

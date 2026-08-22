@@ -35,8 +35,8 @@ knowledge-path-blade-s4-name = Champion Hook
 knowledge-path-blade-s4-desc =
     In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
 
-    Grants you Champion Hook, a combat ability, that makes your next blade light attack deal extra damage,
-    knockdown and hook your opponent, allowing you to drag them with you at increased speed while holding a blade.
+    Grants you Champion Hook, a combat ability, that allows you to alt-click target in combat mode with your blade,
+    hitting them with extra damage, knocking down and hooking them, which allows you to drag your target at increased speed while holding a blade.
     You cannot attack with your blade that is actively hooking someone.
     Hook gets broken when victim stands up.
 

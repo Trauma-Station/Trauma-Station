@@ -6,5 +6,5 @@
   name: Ghost Role (Animal)
   components:
   - type: MindRole
-    roleType: FreeAgent
+    roleType: Animal
     sortWeight: 30

@@ -16,10 +16,8 @@
 - type: latheRecipePack
   id: PrintingPressBlueprints
   recipes:
-  - BookMaterials
   - BookDoors
   - BookAirlocks
-  - BookToys
   - BookBananium
   - BookBots
   - BookFurniture

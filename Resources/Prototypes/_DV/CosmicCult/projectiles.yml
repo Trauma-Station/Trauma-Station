@@ -117,14 +117,14 @@
       - MobState
     damage:
       types:
-        Asphyxiation: 30
-        Ion: 35
+        Asphyxiation: 18
+        Ion: 21
   - type: Projectile
     impactEffect: BulletImpactEffectCosmic
     damage:
       types:
-        Asphyxiation: 5
-        Ion: 8
+        Asphyxiation: 3
+        Ion: 5
 
 - type: entity
   id: BulletImpactEffectCosmic

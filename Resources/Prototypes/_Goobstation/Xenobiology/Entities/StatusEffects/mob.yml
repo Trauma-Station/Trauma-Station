@@ -27,9 +27,9 @@
 
 - type: entity
   parent: MobStatusEffectBase
-  id: StatusEffectWeatherImmune
+  id: StatusEffectAshStormImmune
   name: ash storm immunity
   components:
   - type: GrantComponentsStatusEffect
     components:
-    - type: WeatherImmune
+    - type: AshStormImmune

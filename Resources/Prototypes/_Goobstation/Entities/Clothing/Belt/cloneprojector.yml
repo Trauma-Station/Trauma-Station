@@ -23,7 +23,9 @@
     - type: GhostTakeoverAvailable
     - type: AntagImmune
     - type: MovementIgnoreGravity
-    - type: SpecialPressureImmunity
+    - type: PermanentStatusEffects
+      statusEffects:
+      - StatusEffectPressureImmunity
     - type: RequireProjectileTarget
     - type: NoSlip
     - type: ZombieImmune
@@ -37,7 +39,6 @@
       speechVerb: Robotic
       speechSounds: Borg
     - type: Silicon
-      entityType: enum.SiliconType.Player
       batteryPowered: false
       chargeThresholdMid: null
       chargeThresholdLow: null
@@ -49,8 +50,7 @@
         1: 0.45
         0: 0.00
     - type: Vocal
-      sounds:
-        Unsexed: UnisexSilicon
+      emoteSounds: UnisexSilicon
     - type: UnblockableSpeech
     - type: ProtectedFromStepTriggers
     - type: MobState
@@ -69,7 +69,6 @@
       - Stun
       - SlowedDown
       - Pacified
-      - Flashed
     - type: Uncloneable
     - type: Tag
       tags:

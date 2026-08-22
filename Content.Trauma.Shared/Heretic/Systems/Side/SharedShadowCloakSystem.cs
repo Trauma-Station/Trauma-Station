@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.Identity;
 using Content.Goobstation.Common.Speech;
 using Content.Medical.Common.DoAfter;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates;
@@ -25,7 +24,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
 public abstract partial class SharedShadowCloakSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
@@ -34,7 +33,6 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MovementSpeedModifierSystem _modifier = default!;
-    [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private EntityQuery<ShadowCloakEntityComponent> _cloakQuery = default!;
 
@@ -60,7 +58,6 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
 
         SubscribeLocalEvent<ShadowCloakEntityComponent, EntParentChangedMessage>(OnEntParentChanged);
         SubscribeLocalEvent<ShadowCloakEntityComponent, ComponentShutdown>(OnCloakShutdown);
-        SubscribeLocalEvent<ShadowCloakEntityComponent, DamageDealtEvent>(OnDamageDealt);
     }
 
     private void OnStand(Entity<ShadowCloakedComponent> ent, ref StoodEvent args)
@@ -126,20 +123,6 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         args.VoiceName = Name(cloak);
     }
 
-    private void OnDamageDealt(Entity<ShadowCloakEntityComponent> ent, ref DamageDealtEvent args)
-    {
-        if (ent.Comp.User is not {} user)
-            return;
-
-        _dmg.ChangeDamage(user,
-            args.Damage,
-            origin: args.Origin,
-            interruptsDoAfters: args.InterruptsDoAfters,
-            ignoreBlockers: args.IgnoreBlockers,
-            targetPart: TargetBodyPart.Vital,
-            canMiss: false);
-    }
-
     private void OnDamageDealt(Entity<ShadowCloakedComponent> ent, ref DamageDealtEvent args)
     {
         if (!args.Damage.AnyPositive())
@@ -155,7 +138,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
             return;
 
         var chance = Math.Clamp(cloak.Comp.SustainedDamage.Float() * cloak.Comp.RevealDamageMultiplier / 100f, 0f, 1f);
-        if (!SharedRandomExtensions.PredictedProb(_timing, chance, GetNetEntity(ent)))
+        if (!SharedRandomExtensions.PredictedProb(Timing, chance, GetNetEntity(ent)))
             return;
 
         if (cloak.Comp.DebuffOnEarlyReveal)
@@ -236,7 +219,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
             PredictedQueueDel(child);
         }
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
+        _modifier.RefreshMovementSpeedModifiers(ent.Owner);
 
         ResetAbilityCooldown(ent, revealCooldown);
     }
@@ -245,7 +228,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
     {
         Startup(ent);
 
-        _modifier.RefreshMovementSpeedModifiers(ent);
+        _modifier.RefreshMovementSpeedModifiers(ent.Owner);
 
         if (_net.IsClient)
             return;

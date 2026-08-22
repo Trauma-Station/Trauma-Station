@@ -93,11 +93,11 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
         if (target == user)
         {
-            _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-target-self"), user, user);
+            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-target-self"), user, user);
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-cuffing-target",
+            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-cuffing-target",
                 ("targetName", Identity.Name(target, EntityManager, user))), user, user);
             _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-cuffing-by-other",
                 ("otherName", Identity.Name(user, EntityManager, target))), target, target, PopupType.Large);
@@ -148,7 +148,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
                             target, Filter.Pvs(target, entityManager: EntityManager)
                             .RemoveWhere(e => e.AttachedEntity == target || e.AttachedEntity == user), true);
 
-                        _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-welding-target",
+                        _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-welding-target",
                             ("targetName", Identity.Name(target, EntityManager, user))), user, user);
                         _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-welding-by-other",
                             ("otherName", Identity.Name(user, EntityManager, target))), target, target, PopupType.Large);
@@ -174,11 +174,11 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
                         if (target == user)
                         {
-                            _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-unlocking-target-self"), user, user);
+                            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-unlocking-target-self"), user, user);
                         }
                         else
                         {
-                            _popup.PopupClient(Loc.GetString("reverse-bear-trap-component-start-unlocking-target",
+                            _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-unlocking-target",
                                 ("targetName", Identity.Name(target, EntityManager, user))), user, user);
                             _popup.PopupEntity(Loc.GetString("reverse-bear-trap-component-start-unlocking-by-other",
                                 ("otherName", Identity.Name(user, EntityManager, target))), target, target, PopupType.Large);
@@ -227,7 +227,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
                     {
                         trap.CountdownDuration = option;
                         Dirty(uid, trap);
-                        _popup.PopupClient(Loc.GetString("popup-trigger-timer-set", ("time", option)), args.User, args.User);
+                        _popup.PopupEntity(Loc.GetString("popup-trigger-timer-set", ("time", option)), args.User, args.User);
                     },
                 });
             }
@@ -256,7 +256,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         var identity = Identity.Name(target, EntityManager);
         var you = Loc.GetString($"reverse-bear-trap-component-{prefix}unlocked-trap-self");
         var others = Loc.GetString($"reverse-bear-trap-component-{prefix}unlocked-trap-observer", ("user", identity));
-        _popup.PopupPredicted(you, others, target, args.User);
+        _popup.PopupEntity(you, others, target, args.User);
     }
 
     private void OnBearTrapApply(EntityUid uid, ReverseBearTrapComponent trap, BearTrapApplyDoAfterEvent args)
@@ -281,7 +281,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         var identity = Identity.Name(target, EntityManager);
         var you = Loc.GetString("reverse-bear-trap-component-trap-fall-self");
         var others = Loc.GetString("reverse-bear-trap-component-trap-fall-observer", ("user", identity));
-        _popup.PopupPredicted(you, others, uid, user);
+        _popup.PopupEntity(you, others, uid, user);
 
         ResetTrap(uid, trap);
     }
@@ -296,7 +296,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         var identity = Identity.Name(wearer, EntityManager);
         var you = Loc.GetString("reverse-bear-trap-component-trap-fall-self");
         var others = Loc.GetString("reverse-bear-trap-component-trap-fall-observer", ("user", identity));
-        _popup.PopupPredicted(you, others, wearer, args.User);
+        _popup.PopupEntity(you, others, wearer, args.User);
 
         ResetTrap(uid, trap);
     }
@@ -325,7 +325,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         var identity = Identity.Entity(wearer, EntityManager);
         var you = Loc.GetString("reverse-bear-trap-component-trap-click-self");
         var others = Loc.GetString("reverse-bear-trap-component-trap-click-observer", ("user", identity));
-        _popup.PopupPredicted(you, others, wearer, wearer);
+        _popup.PopupEntity(you, others, wearer, wearer);
     }
 
     private void ResetTrap(EntityUid uid, ReverseBearTrapComponent trap)
@@ -373,7 +373,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
         var you = Loc.GetString("reverse-bear-trap-component-trap-snap-self");
         var others = Loc.GetString("reverse-bear-trap-component-trap-snap-observer", ("user", Identity.Name(wearer, EntityManager)));
-        _popup.PopupPredicted(you, others, wearer, wearer, PopupType.LargeCaution);
+        _popup.PopupEntity(you, others, wearer, wearer, PopupType.LargeCaution);
 
         // damage destroys trap
         ResetTrap(uid, trap);

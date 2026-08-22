@@ -2,24 +2,21 @@
 
 using Content.Goobstation.Shared.Blob.Components;
 using Content.Goobstation.Shared.Blob.NPC.BlobPod;
-using Content.Server.DoAfter;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
-using Content.Server.Popups;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Trauma.Common.CollectiveMind;
-using Robust.Server.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
@@ -27,63 +24,44 @@ namespace Content.Goobstation.Server.Blob.NPC.BlobPod;
 
 public sealed partial class BlobPodSystem : SharedBlobPodSystem
 {
-    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private MobStateSystem _mobs = default!;
-    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private PopupSystem _popups = default!;
-    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private ExplosionSystem _explosionSystem = default!;
-    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private NPCSystem _npc = default!;
     [Dependency] private SharedMoverController _mover = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnBeforeDamageChanged(Entity<BlobPodComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlobPodComponent, BlobPodZombifyDoAfterEvent>(OnZombify);
-        SubscribeLocalEvent<BlobPodComponent, DestructionEventArgs>(OnDestruction);
-        SubscribeLocalEvent<BlobPodComponent, EntGotRemovedFromContainerMessage>(OnUnequip);
-        SubscribeLocalEvent<BlobPodComponent, BeforeDamageChangedEvent>(OnGetDamage);
-    }
-
-
-
-    private void OnGetDamage(Entity<BlobPodComponent> ent, ref BeforeDamageChangedEvent args)
-    {
-        if (ent.Comp.ZombifiedEntityUid == null || TerminatingOrDeleted(ent.Comp.ZombifiedEntityUid.Value))
+        if (ent.Comp.ZombifiedEntityUid is not { } zombie || TerminatingOrDeleted(zombie))
             return;
+
         // relay damage
         args.Cancelled = true;
-        _damageableSystem.TryChangeDamage(ent.Comp.ZombifiedEntityUid.Value, args.Damage, origin: args.Origin);
+        _damage.ChangeDamage(zombie, args.Damage, origin: args.Origin);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequip(Entity<BlobPodComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
-        if(args.Container.ID != "head")
+        if (args.Container.ID != "head")
             return;
 
-        if (!HasComp<HumanoidProfileComponent>(args.Container.Owner) || !HasComp<ZombieBlobComponent>(args.Container.Owner))
+        var target = args.Container.Owner;
+        if (!HasComp<HumanoidProfileComponent>(target))
             return;
 
-        if (!TryComp<ZombieBlobComponent>(args.Container.Owner, out var zombieBlob))
+        if (!TryComp<ZombieBlobComponent>(target, out var zombieBlob))
             return;
 
-        if (TryComp<CollectiveMindComponent>(args.Container.Owner, out var mind))
+        if (TryComp<CollectiveMindComponent>(target, out var mind))
             mind.Channels.Remove(zombieBlob.CollectiveMindAdded);
 
-        RemCompDeferred<ZombieBlobComponent>(args.Container.Owner);
-    }
-
-    private void OnDestruction(EntityUid uid, BlobPodComponent component, DestructionEventArgs args)
-    {
-        if (!TryComp<BlobCoreComponent>(component.Core, out var blobCoreComponent))
-            return;
-        if (blobCoreComponent.CurrentChem == BlobChemType.ExplosiveLattice)
-        {
-            _explosionSystem.QueueExplosion(uid, blobCoreComponent.BlobExplosive, 4, 1, 2, maxTileBreak: 0);
-        }
+        RemCompDeferred(target, zombieBlob);
     }
 
     public bool Zombify(Entity<BlobPodComponent> ent, EntityUid target)
@@ -98,11 +76,11 @@ public sealed partial class BlobPodSystem : SharedBlobPodSystem
         if (!equipped)
             return false;
 
-        _popups.PopupEntity(Loc.GetString("blob-mob-zombify-second-end", ("pod", ent.Owner)),
+        _popup.PopupEntity(Loc.GetString("blob-mob-zombify-second-end", ("pod", ent.Owner)),
             target,
             target,
             Content.Shared.Popups.PopupType.LargeCaution);
-        _popups.PopupEntity(
+        _popup.PopupEntity(
             Loc.GetString("blob-mob-zombify-third-end", ("pod", ent.Owner), ("target", target)),
             target,
             Filter.PvsExcept(target),
@@ -113,7 +91,7 @@ public sealed partial class BlobPodSystem : SharedBlobPodSystem
         RemComp<HTNComponent>(ent);
         RemComp<UnremoveableComponent>(ent);
 
-        _audioSystem.PlayPvs(ent.Comp.ZombifyFinishSoundPath, ent);
+        _audio.PlayPvs(ent.Comp.ZombifyFinishSoundPath, ent);
 
         var rejEv = new RejuvenateEvent();
         RaiseLocalEvent(target, rejEv);
@@ -133,55 +111,51 @@ public sealed partial class BlobPodSystem : SharedBlobPodSystem
         return true;
     }
 
-    private void OnZombify(EntityUid uid, BlobPodComponent component, BlobPodZombifyDoAfterEvent args)
+    [SubscribeLocalEvent]
+    private void OnZombify(Entity<BlobPodComponent> ent, ref BlobPodZombifyDoAfterEvent args)
     {
-        component.IsZombifying = false;
-        if (args.Handled || args.Args.Target == null)
+        ent.Comp.IsZombifying = false;
+        if (args.Handled || args.Target is not { } target)
         {
-            _audioSystem.Stop(component.ZombifyStingStream, component.ZombifyStingStream);
+            _audio.Stop(ent.Comp.ZombifyStingStream, ent.Comp.ZombifyStingStream);
+            ent.Comp.ZombifyStingStream = null;
             return;
         }
 
         if (args.Cancelled)
-        {
             return;
-        }
 
-        Zombify((uid, component), args.Args.Target.Value);
+        Zombify(ent, target);
     }
 
-
-    public override bool NpcStartZombify(EntityUid uid, EntityUid target, BlobPodComponent? component = null)
+    public override bool NpcStartZombify(Entity<BlobPodComponent> ent, EntityUid target)
     {
-        if (!Resolve(uid, ref component))
-            return false;
         if (!HasComp<HumanoidProfileComponent>(target))
             return false;
         if (_mobs.IsAlive(target))
             return false;
-        if (!_actionBlocker.CanInteract(uid, target))
+        if (!_blocker.CanInteract(ent, target))
             return false;
 
-        StartZombify(uid, target, component);
+        StartZombify(ent, target);
         return true;
     }
 
-    public void StartZombify(EntityUid uid, EntityUid target, BlobPodComponent? component = null)
+    public void StartZombify(Entity<BlobPodComponent> ent, EntityUid target)
     {
-        if (!Resolve(uid, ref component))
-            return;
+        ent.Comp.ZombifyTarget = target;
+        Dirty(ent);
 
-        component.ZombifyTarget = target;
-        _popups.PopupEntity(Loc.GetString("blob-mob-zombify-second-start", ("pod", uid)), target, target,
+        _popup.PopupEntity(Loc.GetString("blob-mob-zombify-second-start", ("pod", ent)), target, target,
             Content.Shared.Popups.PopupType.LargeCaution);
-        _popups.PopupEntity(Loc.GetString("blob-mob-zombify-third-start", ("pod", uid), ("target", target)), target,
+        _popup.PopupEntity(Loc.GetString("blob-mob-zombify-third-start", ("pod", ent), ("target", target)), target,
             Filter.PvsExcept(target), true, Content.Shared.Popups.PopupType.LargeCaution);
 
-        component.ZombifyStingStream = _audioSystem.PlayPvs(component.ZombifySoundPath, target);
-        component.IsZombifying = true;
+        ent.Comp.ZombifyStingStream = _audio.PlayPvs(ent.Comp.ZombifySoundPath, target);
+        ent.Comp.IsZombifying = true;
 
         var ev = new BlobPodZombifyDoAfterEvent();
-        var args = new DoAfterArgs(EntityManager, uid, component.ZombifyDelay, ev, uid, target: target)
+        var args = new DoAfterArgs(EntityManager, ent, ent.Comp.ZombifyDelay, ev, ent, target: target)
         {
             BreakOnMove = true,
             DistanceThreshold = 2f,

@@ -7,7 +7,13 @@
       Radiation: 5
       Heat: 4
       Blunt: 3
+      Piercing: 3
       Slash: 3
+    woundTypeOverrides: &woundoverrides
+      Heat: Burns
+      Blunt: Fracture
+      Slash: Laceration
+      Piercing: Puncture
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20
@@ -22,6 +28,7 @@
     types:
       Heat: 3
       Blunt: 5
+    woundTypeOverrides: *woundoverrides
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20
@@ -64,7 +71,8 @@
     types:
       Heat: 1
       Blunt: 2
-      Slash: 3
+      Piercing: 3
+    woundTypeOverrides: *woundoverrides
   lightColor: Orange
   texturePath: /Textures/Effects/fire.rsi
   fireStates: 6
@@ -76,8 +84,10 @@
     types:
       Heat: 4
       Blunt: 7
+      Piercing: 4
       Slash: 4
       Holy: 10
+    woundTypeOverrides: *woundoverrides
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20
@@ -102,7 +112,9 @@
     types:
       Heat: 3
       Blunt: 2
+      Piercing: 2
       Slash: 2
+    woundTypeOverrides: *woundoverrides
   lightColor: Orange
   texturePath: /Textures/Effects/fire.rsi
   fireStates: 8

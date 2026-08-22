@@ -40,6 +40,12 @@ public sealed partial class ViewconeEffectSystem : EntitySystem
 
     private void OnFootStep(Entity<ViewconeFootstepsEffectComponent> ent, ref FootStepEvent args)
     {
+        // Silent shoes suppress the viewcone footstep effect
+        var ev = new CanSpawnFootstepsEvent();
+        RaiseLocalEvent(ent.Owner, ref ev);
+        if (ev.Cancelled)
+            return;
+
         SpawnEffect(ent, ent.Comp.Effect, args.WorldAngle);
     }
 

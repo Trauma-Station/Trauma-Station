@@ -79,23 +79,24 @@ public sealed partial class ImmovableRodSystem : EntitySystem
             _physics.SetFriction(uid, phys, 0f);
             _physics.SetBodyStatus(uid, phys, BodyStatus.InAir);
 
+            //var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
             var xform = Transform(uid);
-            // var (worldPos, worldRot) = _transform.GetWorldPositionRotation(uid);
-            var vel = xform.LocalRotation.ToWorldVec() * component.MaxSpeed; // Trauma
+            var localRot = xform.LocalRotation;
+            var vel = localRot.ToWorldVec() * component.MaxSpeed; // Trauma
 
             if (component.RandomizeVelocity)
             {
                 vel = component.DirectionOverride.Degrees switch
                 {
                     0f => _random.NextVector2(component.MinSpeed, component.MaxSpeed),
-                    _ => xform.LocalRotation.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed) // Trauma
+                    _ => localRot.RotateVec(component.DirectionOverride.ToVec()) * _random.NextFloat(component.MinSpeed, component.MaxSpeed) // Trauma
                 };
 
                 xform.LocalRotation = vel.ToAngle(); // Trauma
             }
 
             _physics.ApplyLinearImpulse(uid, vel, body: phys);
-            // xform.LocalRotation = (vel - worldPos).ToWorldAngle() + MathHelper.PiOver2;
+            //_transform.SetLocalRotationNoLerp(uid, (vel - worldPos).ToWorldAngle() + MathHelper.PiOver2);
         }
     }
 
@@ -131,7 +132,7 @@ public sealed partial class ImmovableRodSystem : EntitySystem
             return;
         }
 
-        // dont delete/hurt self if polymoprhed into a rod
+        // Don't delete/hurt self if polymorphed into a rod
         if (TryComp<PolymorphedEntityComponent>(uid, out var polymorphed))
         {
             if (polymorphed.Parent == ent)
@@ -142,11 +143,14 @@ public sealed partial class ImmovableRodSystem : EntitySystem
         if (HasComp<BodyComponent>(ent))
         {
             component.MobCount++;
-            _popup.PopupEntity(Loc.GetString("immovable-rod-penetrated-mob", ("rod", uid), ("mob", ent)), uid, PopupType.LargeCaution);
 
-            if (!component.ShouldGib)
+            var coords = Transform(uid).Coordinates;
+
+            _adminLogger.Add(LogType.Gib, LogImpact.Medium, $"Entity {ToPrettyString(uid)} hit {ToPrettyString(ent)} at X:{coords.X} Y:{coords.Y}");
+
+            if (!component.ShouldGib || !_destructible.DestroyEntity(ent))
             {
-                if (component.Damage == null)
+                if (component.Damage is null)
                     return;
 
                 component.DamagedEntities.Add(ent); // Goobstation
@@ -156,10 +160,8 @@ public sealed partial class ImmovableRodSystem : EntitySystem
                 return;
             }
 
-            var coords = Transform(uid).Coordinates;
-            _adminLogger.Add(LogType.Gib, LogImpact.Low, $"Entity {ToPrettyString(uid)} gibbed {ToPrettyString(ent)} at X:{coords.X} Y:{coords.Y}");
-
             _gibbing.Gib(ent);
+            _popup.PopupEntity(Loc.GetString("immovable-rod-penetrated-mob", ("rod", uid), ("mob", ent)), uid, PopupType.LargeCaution);
             return;
         }
 

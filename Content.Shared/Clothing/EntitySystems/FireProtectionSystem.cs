@@ -1,4 +1,3 @@
-using Content.Goobstation.Common.Flammability;
 using Content.Shared.Armor;
 using Content.Shared.Atmos;
 using Content.Shared.Clothing.Components;
@@ -9,7 +8,7 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// <summary>
 /// Handles reducing fire damage when wearing clothing with <see cref="FireProtectionComponent"/>.
 /// </summary>
-public sealed class FireProtectionSystem : EntitySystem
+public sealed partial class FireProtectionSystem : EntitySystem // Trauma - made partial lol
 {
     public override void Initialize()
     {
@@ -21,11 +20,12 @@ public sealed class FireProtectionSystem : EntitySystem
 
     private void OnGetProtection(Entity<FireProtectionComponent> ent, ref InventoryRelayedEvent<GetFireProtectionEvent> args)
     {
-        // goob edit - VERY flammable component (trademark)
-        if (HasComp<VeryFlammableComponent>(ent))
+        // <Trauma> - rewritten to use armor coverage instead of blanket reduction
+        if (_veryFlammableQuery.HasComp(ent))
             return;
 
-        args.Args.Reduce(ent.Comp.Reduction);
+        AddCoverage(ent, args.Args);
+        // </Trauma>
     }
 
     private void OnArmorExamine(Entity<FireProtectionComponent> ent, ref ArmorExamineEvent args)

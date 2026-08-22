@@ -19,10 +19,11 @@ public sealed partial class FishingRodComponent : Component
     public float StartingProgress = 0.33f;
 
     /// <summary>
-    /// How many seconds we wait until fish starts to fight with us
+    /// How long we wait until fish starts to fight with us
+    /// Gives higher ping players a chance to react.
     /// </summary>
     [DataField]
-    public float StartingStruggleTime = 0.3f;
+    public TimeSpan StartingStruggleTime = TimeSpan.FromSeconds(0.3);
 
     /// <summary>
     /// If lure moves bigger than this distance away from the rod,
@@ -38,10 +39,10 @@ public sealed partial class FishingRodComponent : Component
     public SpriteSpecifier RopeSprite =
         new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Objects/Specific/Fishing/fishing_lure.rsi"), "rope");
 
-    [DataField, ViewVariables]
+    [DataField]
     public Vector2 RopeUserOffset = new (0f, 0f);
 
-    [DataField, ViewVariables]
+    [DataField]
     public Vector2 RopeLureOffset = new (0f, 0f);
 
     [DataField, AutoNetworkedField]

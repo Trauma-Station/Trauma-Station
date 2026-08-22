@@ -41,10 +41,9 @@ public sealed partial class BlobPodZombifyOperator : HTNOperator
 
         if (pod.ZombifyTarget == null)
         {
-            if (_blobPod.NpcStartZombify(owner, target, pod))
-                return HTNOperatorStatus.Continuing;
-            else
-                return HTNOperatorStatus.Failed;
+            return _blobPod.NpcStartZombify((owner, pod), target)
+                ? HTNOperatorStatus.Continuing
+                : HTNOperatorStatus.Failed;
         }
 
         pod.ZombifyTarget = null;

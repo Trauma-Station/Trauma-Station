@@ -1,8 +1,14 @@
 reagent-name-johntonite = johntonite
 reagent-desc-johntonite = A highly toxic substance specific to individuals named John.
 
+reagent-name-glennium = glennium
+reagent-desc-glennium = A highly toxic substance specific to individuals named Glenn.
+
 reagent-name-nitric-acid = nitric acid
 reagent-desc-nitric-acid = A corrosive chemical used in the production of explosives.
 
 reagent-name-tiring-solution = tiring solution
 reagent-desc-tiring-solution = An extremely weak stamina-toxin that tires out the target. Completely harmless.
+
+reagent-name-batracho-toxin = batrachotoxin
+reagent-desc-batracho-toxin = A potent paralytic secreted by the skin of dart frogs. Causes progressive paralysis and organ failure in sufficient quantities.

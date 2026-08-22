@@ -11,13 +11,7 @@ public sealed partial class DragonAreaRiftsSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<DragonAreaRiftsComponent, DragonSpawnRiftAttemptEvent>(OnSpawnRiftAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSpawnRiftAttempt(Entity<DragonAreaRiftsComponent> ent, ref DragonSpawnRiftAttemptEvent args)
     {
         if (args.Cancelled)

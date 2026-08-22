@@ -1,20 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Mindcontrol;
 using Content.Shared.StatusIcon.Components;
 
 namespace Content.Goobstation.Client.Mindcontrol;
 
 public sealed partial class MindcontrolSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnGetStatusIconsEvent(Entity<MindcontrolledComponent> ent, ref GetStatusIconsEvent args)
     {
-        base.Initialize();
-        SubscribeLocalEvent<Shared.Mindcontrol.MindcontrolledComponent, GetStatusIconsEvent>(OnGetStatusIconsEvent);
-    }
-    private void OnGetStatusIconsEvent(Entity<Shared.Mindcontrol.MindcontrolledComponent> ent, ref GetStatusIconsEvent args)
-    {
-        if (_prototype.TryIndex(ent.Comp.MindcontrolIcon, out var iconPrototype))
+        if (ProtoMan.TryIndex(ent.Comp.MindcontrolIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 }

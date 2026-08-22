@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Roles.Jobs;
-using Content.Server.Speech;
 // </Trauma>
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -16,10 +15,10 @@ using Content.Shared.Inventory;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.VoiceMask;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.VoiceMask;
 
@@ -29,7 +28,6 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private LockSystem _lock = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -81,7 +79,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
 
     private void OnTransformSpeechImplant(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<TransformSpeechEvent> args)
     {
-        TransformSpeech(entity, args.Event);
+        TransformSpeech(entity, args.Args);
     }
 
     private void OnTransformSpeakerNameInventory(Entity<VoiceMaskComponent> entity, ref InventoryRelayedEvent<TransformSpeakerNameEvent> args)
@@ -91,7 +89,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
 
     private void OnTransformSpeakerNameImplant(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<TransformSpeakerNameEvent> args)
     {
-        TransformVoice(entity, args.Event);
+        TransformVoice(entity, args.Args);
     }
 
     private void OnSeeIdentityAttemptEvent(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<SeeIdentityAttemptEvent> args)
@@ -99,7 +97,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
         if (!entity.Comp.OverrideIdentity || !entity.Comp.Active)
             return;
 
-        args.Event.NameOverride = GetCurrentVoiceName(entity);
+        args.Args.NameOverride = GetCurrentVoiceName(entity);
     }
 
     private void OnImplantImplantedEvent(Entity<VoiceMaskComponent> entity, ref ImplantImplantedEvent ev)
@@ -123,7 +121,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     #region User inputs from UI
     private void OnChangeVerb(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeVerbMessage msg)
     {
-        if (msg.Verb is { } id && !_proto.HasIndex<SpeechVerbPrototype>(id))
+        if (msg.Verb is { } id && !ProtoMan.HasIndex<SpeechVerbPrototype>(id))
             return;
 
         entity.Comp.VoiceMaskSpeechVerb = msg.Verb;

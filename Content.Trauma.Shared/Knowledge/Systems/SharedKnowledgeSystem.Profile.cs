@@ -14,7 +14,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public override void EnsureProfileValid([ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, ref KnowledgeProfile profile)
     {
-        var parent = _proto.Index(parentId);
+        var parent = ProtoMan.Index(parentId);
 
         _invalid.Clear();
         foreach (var (id, mastery) in profile.Mastery)
@@ -36,7 +36,7 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(target) is not { } ent)
             return;
 
-        var parent = _proto.Index(parentId);
+        var parent = ProtoMan.Index(parentId);
         ApplyProfile(ent, parent.Profile); // species skills first, can't be removed
         ApplyProfile(ent, profile, parent.PointsLimit); // then your extra skills, limited by species points limit
     }

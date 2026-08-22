@@ -13,55 +13,50 @@ namespace Content.Trauma.Shared.CosmicCult.Abilities;
 public sealed partial class CosmicLapseSystem : EntitySystem
 {
     [Dependency] private SharedCosmicCultSystem _cult = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedPolymorphSystem _polymorph = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
-    public override void Initialize()
-    {
-        base.Initialize();
 
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicLapse>(OnCosmicLapse);
-    }
-
-    private void OnCosmicLapse(Entity<CosmicCultComponent> ent, ref EventCosmicLapse action)
+    [SubscribeLocalEvent]
+    private void OnCosmicLapse(Entity<CosmicCultComponent> ent, ref CosmicLapseEvent args)
     {
-        if (action.Handled
-            || HasComp<CosmicBlankComponent>(action.Target))
+        if (args.Handled || HasComp<CosmicBlankComponent>(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-generic-fail"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-generic-fail"), ent, ent);
             return;
         }
 
-        var evt = new CosmicAbilityAttemptEvent(action.Target, PlayEffects: true);
+        var evt = new CosmicAbilityAttemptEvent(args.Target, PlayEffects: true);
         RaiseLocalEvent(ref evt);
-        if (evt.Cancelled) return;
+        if (evt.Cancelled)
+            return;
 
-        action.Handled = true;
-        var tgtpos = Transform(action.Target).Coordinates;
+        args.Handled = true;
+        var tgtpos = Transform(args.Target).Coordinates;
         if (_net.IsServer) // Predicted spawn looks bad with animations
             PredictedSpawnAtPosition(ent.Comp.LapseVFX, tgtpos);
 
-        _popup.PopupClient(Loc.GetString("cosmicability-lapse-success",
-            ("target", Identity.Entity(action.Target, EntityManager))),
+        _popup.PopupEntity(Loc.GetString("cosmicability-lapse-success",
+            ("target", Identity.Entity(args.Target, EntityManager))),
             ent,
             ent);
-        var species = Comp<HumanoidProfileComponent>(action.Target).Species;
+        var species = Comp<HumanoidProfileComponent>(args.Target).Species;
         ProtoId<PolymorphPrototype> polymorphId = "CosmicLapseMob" + species;
-        if (!_prototype.HasIndex(polymorphId))
+        if (!ProtoMan.HasIndex(polymorphId))
             polymorphId = HumanLapse;
-        if (!_prototype.Resolve(polymorphId, out var polymorph)) return;
-        var copy = polymorph.Configuration;
+        if (!ProtoMan.Resolve(polymorphId, out var polymorph))
+            return;
 
-        if (_cult.EntityIsCultist(action.Target))
+        var copy = polymorph.Configuration;
+        if (_cult.EntityIsCultist(args.Target))
         {
             copy.Duration *= 2;
             copy.Forced = false;
         }
 
-        _polymorph.PolymorphEntity(action.Target, copy);
+        _polymorph.PolymorphEntity(args.Target, copy);
 
         // Doesn't make an echo because the morph is invisible
     }

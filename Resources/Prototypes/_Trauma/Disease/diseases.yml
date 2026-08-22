@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: DiseaseBase
+  id: DiseaseGutWorms
+  name: gut worms
+  description: Foodborn parasites infest the subject.
+  components:
+  - type: Disease
+    diseaseType: Parasite
+    genotype: 7361
+    infectionRate: 0.05
+    immunityGainRate: 0.5
+    mutationRate: 0
+    effects:
+      DiseaseBehaviorSluggish: 1
+      DiseaseBehaviorFeelUnwell: 1
+      DiseaseBehaviorVomitNoSpread: 1

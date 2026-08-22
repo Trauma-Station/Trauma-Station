@@ -104,7 +104,6 @@
   #    Burn:
   #      sprite: Mobs/Effects/burn_damage.rsi
   - type: Butcherable
-    butcheringType: Spike
     spawned:
       - id: FoodMeatPlant
         amount: 5
@@ -167,10 +166,7 @@
     speechVerb: Plant
     allowedEmotes: ['Chirp']
   - type: Vocal
-    sounds:
-      Male: UnisexDiona
-      Female: UnisexDiona
-      Unsexed: UnisexDiona
+    emoteSounds: UnisexDiona
   - type: TypingIndicator
     proto: diona
   - type: BodyEmotes
@@ -188,7 +184,7 @@
     baseConeAngle: 360
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganDiona
   abstract: true
   suffix: Diona
@@ -297,7 +293,16 @@
     stages: [ Digestion, Bloodstream, Metabolites ]
 
 - type: entity
-  parent: OrganDionaBrain
+  abstract: true
+  id: BaseNymphingOrgan
+  components:
+  - type: Nymph
+    blacklist:
+      components:
+      - ChangelingIdentity # Trauma - was ChangelingTransform, that doesnt exist here
+
+- type: entity
+  parent: [ OrganDionaBrain, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaBrainNymphing
   components:
@@ -306,7 +311,7 @@
     entityPrototype: OrganDionaNymphBrain
 
 - type: entity
-  parent: OrganDionaLungs
+  parent: [ OrganDionaLungs, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaLungsNymphing
   components:
@@ -314,7 +319,7 @@
     entityPrototype: OrganDionaNymphLungs
 
 - type: entity
-  parent: OrganDionaStomach
+  parent: [ OrganDionaStomach, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaStomachNymphing
   components:

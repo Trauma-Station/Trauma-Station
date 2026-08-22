@@ -97,6 +97,25 @@
   components:
   - type: RandomSpawner
     prototypes:
+    - MobBearSea
+    - MobSquidSea
+    - MobSpiderCrabSea
+    - MobKraitSea
+    - MobArcherSea
+    - MobBunnyEvil
+    - MobEelSea
+    - MobCobra
+    - MobYellowBellySnake
+    - MobMantis
+    - MobMantisShrimp
+    - MobShrimp
+    - MobDartFrog2
+    - MobDartFrog4
+    - MobDartFrog5
+    - MobGorillaAngry
+    - MobBearSpace
+    - MobKangarooSpace
+    - MobAdultSlimesYellowAngry
     - MobAngryBee
     - MobBrullbar
     - MobWhiteWolf
@@ -144,6 +163,11 @@
   components:
   - type: RandomSpawner
     prototypes:
+    - MobDartFrog1
+    - MobDartFrog3
+    - MobDartFrog6
+    - MobBunny
+    - MobBunnySea
     - MobBee
     - MobGorilla
     - MobKangaroo

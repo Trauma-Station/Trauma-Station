@@ -55,7 +55,7 @@ public sealed partial class NinjaSuitComponent : Component
     /// Battery charge used to create an EMP burst. Can do it 2 times on a small-capacity power cell.
     /// </summary>
     [DataField]
-    public float EmpCharge = 180f;
+    public float EmpCharge = 180;
 
     // TODO: EmpOnTrigger bruh
     /// <summary>

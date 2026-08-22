@@ -25,7 +25,6 @@ public abstract partial class SharedChangelingBiomassSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private MobThresholdSystem _mob = default!;
@@ -169,7 +168,7 @@ public abstract partial class SharedChangelingBiomassSystem : EntitySystem
     public readonly ProtoId<DamageTypePrototype> Genetic = "Cellular";
     private void KillChangeling(Entity<ChangelingBiomassComponent> ent)
     {
-        var genetic = _proto.Index(Genetic);
+        var genetic = ProtoMan.Index(Genetic);
 
         if (!_mob.TryGetDeadThreshold(ent, out var totalDamage))
             return;

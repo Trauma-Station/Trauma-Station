@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Client.Graphics;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.DeepFryer.Components;
@@ -10,7 +11,6 @@ namespace Content.Trauma.Client.DeepFryer;
 public sealed partial class DeepFriedSystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private static readonly ProtoId<ShaderPrototype> ShaderName = "Fried";
     private ShaderInstance _shader = default!;
@@ -19,44 +19,38 @@ public sealed partial class DeepFriedSystem : EntitySystem
     {
         base.Initialize();
 
-        _shader = _protoMan.Index(ShaderName).InstanceUnique();
-
-        SubscribeLocalEvent<DeepFriedComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
-        SubscribeLocalEvent<DeepFriedComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<DeepFriedComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
-        SubscribeLocalEvent<DeepFriedComponent, ComponentStartup>(OnStartUp);
-        SubscribeLocalEvent<DeepFriedComponent, ComponentShutdown>(OnShutdown);
+        _shader = ProtoMan.Index(ShaderName).InstanceUnique();
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<DeepFriedComponent> ent, ref ComponentShutdown args)
     {
         if (!Terminating(ent.Owner))
             SetShader(ent, false);
     }
 
-    private void OnStartUp(Entity<DeepFriedComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<DeepFriedComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
-            return;
-
-        for (var i = 0; i < sprite.AllLayers.Count(); ++i)
-        {
-            sprite.LayerSetShader(i, ShaderName);
-        }
-
         SetShader(ent, true);
     }
 
-    private void SetShader(Entity<DeepFriedComponent> ent, bool enabled)
+    private void SetShader(EntityUid uid, bool enabled)
     {
-        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
+        if (!enabled)
+        {
+            _sprite.RemovePostShader(uid, ShaderName);
             return;
+        }
 
-        sprite.PostShader = enabled ? _shader : null;
-        sprite.GetScreenTexture = enabled;
-        sprite.RaiseShaderEvent = enabled;
+        var data = new SpriteComponent.PostShaderArgs(ShaderName, _shader)
+        {
+            Before = ContentPostShaderIds.BeforeOutlines,
+        };
+        _sprite.SetPostShader(uid, data);
     }
 
+    [SubscribeLocalEvent]
     private void OnHeldVisualsUpdated(Entity<DeepFriedComponent> ent, ref HeldVisualsUpdatedEvent args)
     {
         if (args.RevealedLayers.Count == 0)
@@ -76,6 +70,7 @@ public sealed partial class DeepFriedSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipmentVisualsUpdated(Entity<DeepFriedComponent> ent, ref EquipmentVisualsUpdatedEvent args)
     {
         if (args.RevealedLayers.Count == 0)
@@ -86,6 +81,7 @@ public sealed partial class DeepFriedSystem : EntitySystem
         if (!TryComp(args.Equipee, out SpriteComponent? sprite))
             return;
 
+        // TODO: is this really needed
         foreach (var key in args.RevealedLayers)
         {
             if (!_sprite.LayerMapTryGet((args.Equipee, sprite), key, out var index, true) || sprite[index] is not SpriteComponent.Layer)
@@ -95,7 +91,7 @@ public sealed partial class DeepFriedSystem : EntitySystem
         }
     }
 
-
+    [SubscribeLocalEvent]
     private void OnAppearanceChange(Entity<DeepFriedComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)

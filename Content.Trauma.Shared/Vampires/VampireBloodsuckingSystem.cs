@@ -62,7 +62,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {
-            _popup.PopupClient("This target cannot be drained!", ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity("This target cannot be drained!", ent.Owner, PopupType.MediumCaution);
             return;
         }
 
@@ -101,7 +101,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         // testing against the mindcontainer component directly fixes mispredicts of _mind.TryGetMind
         if (!_mindQuery.TryComp(target, out var mindContainer) || !mindContainer.HasMind)
         {
-            _popup.PopupClient("Their blood is pale...", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("Their blood is pale...", user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -109,7 +109,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         // then don't go further.
         if (drainable.BloodGathered >= drainable.MaxBlood)
         {
-            _popup.PopupClient("You have drained most of their life force, you will get no more usable blood from them", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("You have drained most of their life force, you will get no more usable blood from them", user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -120,7 +120,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         var ev = new BloodsuckingSuccessEvent(bloodInt, target);
         RaiseLocalEvent(user, ref ev);
 
-        _popup.PopupClient("You drain the life force out of them...", user, user, PopupType.MediumCaution);
+        _popup.PopupEntity("You drain the life force out of them...", user, user, PopupType.MediumCaution);
         _popup.PopupEntity("You feel like your life force has been drained...", user, target, PopupType.MediumCaution);
 
         ent.Comp.ConsumedVictims.Add(target);
@@ -136,7 +136,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         PredictedSpawnAtPosition(BiteEffect, Transform(target).Coordinates);
         _audio.PlayPredicted(BiteSound, target, ent.Owner);
 
-        _popup.PopupClient("You start draining them...", ent.Owner, ent.Owner, PopupType.Medium);
+        _popup.PopupEntity("You start draining them...", ent.Owner, ent.Owner, PopupType.Medium);
 
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
@@ -154,7 +154,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
         {
-            _popup.PopupClient("The blood sucking process has failed!", ent.Owner, ent.Owner, PopupType.SmallCaution);
+            _popup.PopupEntity("The blood sucking process has failed!", ent.Owner, ent.Owner, PopupType.SmallCaution);
             Dirty(ent);
         }
     }

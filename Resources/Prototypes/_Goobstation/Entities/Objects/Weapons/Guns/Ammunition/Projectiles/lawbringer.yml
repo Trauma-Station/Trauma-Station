@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BaseBullet
   id: BulletClownshot
   name: clownshot
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Fixtures
@@ -36,15 +36,15 @@
   - type: ProjectileRequireWhitelist
     whitelist:
      components:
-      - Clumsy
+     - Clumsy
   - type: ProjectileThrowOnHit
     distance: 20
     speed: 50
 
 - type: entity
+  parent: BaseBullet
   id: BulletPulse
   name: pulse
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Fixtures
@@ -79,9 +79,9 @@
     speed: 8
 
 - type: entity
+  parent: BaseBullet
   id: BulletDetain
   name: detain
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Fixtures
@@ -116,9 +116,9 @@
     overtime: 15
 
 - type: entity
+  parent: BaseBullet
   id: BulletExecute
   name: execute
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Fixtures
@@ -151,9 +151,9 @@
         Radiation: 2
 
 - type: entity
+  parent: BaseBullet
   id: BulletHotshot
   name: hotshot
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Fixtures
@@ -188,9 +188,9 @@
     fireStacks: 2
 
 - type: entity
+  parent: BaseBullet
   id: BulletSleepshot
   name: sleepshot
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Fixtures
@@ -220,14 +220,8 @@
     damage:
       types:
         Heat: 0
-  - type: RefillableSolution
-    solution: ammo
-  - type: DrainableSolution
-    solution: ammo
   - type: SolutionInjectOnProjectileHit
-    transferAmount: 2
-    solution: ammo
-  - type: InjectableSolution
+    transferAmount: 1.5
     solution: ammo
   - type: Solution
     id: ammo
@@ -238,9 +232,9 @@
   - type: BlurOnCollide
 
 - type: entity
+  parent: BaseBullet
   id: BulletBigshot
   name: bigshot
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
@@ -264,3 +258,42 @@
         Heat: 2
         Structural: 100
     ignoreResistances: true # This needs ProjectileDamageWhitelistComponent
+
+- type: entity
+  parent: BaseBullet
+  id: BulletLawyershot
+  name: lawyershot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
+    layers:
+    - state: omnilaser-yellow
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Heat: 0
+  - type: ProjectileRequireWhitelist
+    whitelist:
+      components:
+      - Lawyer
+  - type: SolutionInjectOnProjectileHit
+    transferAmount: 2
+    solution: ammo
+  - type: Solution
+    id: ammo
+    solution:
+      reagents:
+      - ReagentId: MuteToxin
+        Quantity: 2
+  - type: BlurOnCollide

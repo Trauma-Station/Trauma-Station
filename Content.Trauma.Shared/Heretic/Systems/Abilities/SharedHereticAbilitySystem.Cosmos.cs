@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard;
-using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -16,16 +15,7 @@ public abstract partial class SharedHereticAbilitySystem
 {
     [Dependency] private TeleportSystem _teleport = default!;
 
-    protected virtual void SubscribeCosmos()
-    {
-        SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
-        SubscribeLocalEvent<StarBlastActionComponent, EventHereticStarBlast>(OnStarBlast);
-        SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
-
-        SubscribeLocalEvent<StarBlastComponent, ProjectileHitEvent>(OnHit);
-        SubscribeLocalEvent<StarBlastComponent, EntityTerminatingEvent>(OnEntityTerminating);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExpansion(EventHereticCosmicExpansion args)
     {
         if (!TryUseAbility(args))
@@ -50,6 +40,7 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnStarBlast(Entity<StarBlastActionComponent> ent, ref EventHereticStarBlast args)
     {
         if (!TryUseAbility(args, false))
@@ -103,6 +94,7 @@ public abstract partial class SharedHereticAbilitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnEntityTerminating(Entity<StarBlastComponent> ent, ref EntityTerminatingEvent args)
     {
         if (ent.Comp.Action == EntityUid.Invalid || TerminatingOrDeleted(ent.Comp.Action) ||
@@ -113,6 +105,7 @@ public abstract partial class SharedHereticAbilitySystem
         Dirty(ent.Comp.Action, action);
     }
 
+    [SubscribeLocalEvent]
     private void OnHit(Entity<StarBlastComponent> ent, ref ProjectileHitEvent args)
     {
         var coords = Transform(ent).Coordinates;
@@ -131,6 +124,7 @@ public abstract partial class SharedHereticAbilitySystem
         _starMark.SpawnCosmicFields(coords, 1, strength);
     }
 
+    [SubscribeLocalEvent]
     private void OnCosmicRune(EventHereticCosmicRune args)
     {
         if (!TryComp(args.Action, out HereticCosmicRuneActionComponent? runeAction))
@@ -139,12 +133,12 @@ public abstract partial class SharedHereticAbilitySystem
         if (!TryUseAbility(args, false))
             return;
 
-        var coords = Transform(args.Performer).Coordinates.SnapToGrid(EntityManager, _mapMan);
+        var coords = Transform(args.Performer).Coordinates.SnapToGrid(EntityManager);
 
         // No placing runes on top of runes
         if (Lookup.GetEntitiesInRange<HereticCosmicRuneComponent>(coords, 0.4f).Count > 0)
         {
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), args.Performer, args.Performer);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-occupied"), args.Performer, args.Performer);
             return;
         }
 
@@ -158,7 +152,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (firstRuneResolved && secondRuneResolved)
         {
-            EnsureComp<FadingTimedDespawnComponent>(runeAction.FirstRune!.Value).Lifetime = 0f;
+            _fadeDespawn.FadeDespawnEntity(runeAction.FirstRune!.Value, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             var newRune = Spawn(args.Rune, coords);
             _transform.AttachToGridOrMap(newRune);
             var newRuneComp = EnsureComp<HereticCosmicRuneComponent>(newRune);

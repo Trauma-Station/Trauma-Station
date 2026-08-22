@@ -43,38 +43,33 @@
   - type: AshJaunt
 
 - type: entity
+  parent: BaseMobJaunt
   id: PolymorphSpaceJaunt
   name: Unknown
   description: You can't figure out what that is.
-  parent: BaseMobJaunt
   categories: [ HideSpawnMenu ]
   components:
   - type: Actions
   - type: ActionsContainer
-  - type: Muted
   - type: Sprite
     sprite: Structures/Specific/Anomalies/Cores/gravity_core.rsi
     state: core
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: Eye
     visMask:
     - Ghost
     - Normal
 
 - type: entity
+  parent: BaseMobJaunt
   id: PolymorphMirrorJaunt
   name: Unknown
   description: You can't figure out what that is.
-  parent: BaseMobJaunt
   categories: [ HideSpawnMenu ]
   components:
   - type: Actions
   - type: ActionsContainer
-  - type: Muted
   - type: Sprite
     sprite: Structures/Specific/Anomalies/Cores/ice_core.rsi
     state: core
@@ -83,10 +78,7 @@
     channels:
     - MansusLink
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: ActionGrant
     actions:
     - ActionMirrorJaunt

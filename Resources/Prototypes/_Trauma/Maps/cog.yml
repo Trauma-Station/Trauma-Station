@@ -29,6 +29,7 @@
             Botanist: [ 3, 3 ]
             Chef: [ 2, 2 ]
             ServiceWorker: [ 3, 3 ]
+            Rancher: [ 2, 2 ]
             # Engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]

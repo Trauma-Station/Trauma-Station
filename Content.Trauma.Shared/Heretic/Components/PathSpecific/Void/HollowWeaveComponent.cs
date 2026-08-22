@@ -12,7 +12,7 @@ public sealed partial class HollowWeaveComponent : Component
     public TimeSpan NextStatus;
 
     [DataField]
-    public TimeSpan StatusDelay = TimeSpan.FromSeconds(30);
+    public TimeSpan StatusDelay = TimeSpan.FromSeconds(20);
 
     [DataField]
     public TimeSpan StatusDuration = TimeSpan.FromSeconds(5);

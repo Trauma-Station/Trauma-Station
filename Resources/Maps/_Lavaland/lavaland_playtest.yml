@@ -2163,67 +2163,56 @@ entities:
   - uid: 18
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 20.5,10.5
       parent: 2
   - uid: 20
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -3.5,-0.5
       parent: 2
   - uid: 23
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -3.5,1.5
       parent: 2
   - uid: 24
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 16.5,18.5
       parent: 2
   - uid: 58
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -3.5,2.5
       parent: 2
   - uid: 73
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -3.5,-1.5
       parent: 2
   - uid: 91
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 20.5,8.5
       parent: 2
   - uid: 111
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 4.5,8.5
       parent: 2
   - uid: 112
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 2.5,8.5
       parent: 2
   - uid: 120
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -0.5,8.5
       parent: 2
   - uid: 121
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -2.5,8.5
       parent: 2
   - uid: 148
@@ -2244,73 +2233,61 @@ entities:
   - uid: 339
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,-0.5
       parent: 2
   - uid: 340
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,1.5
       parent: 2
   - uid: 341
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,0.5
       parent: 2
   - uid: 342
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,2.5
       parent: 2
   - uid: 343
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,-1.5
       parent: 2
   - uid: 344
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 7.5,2.5
       parent: 2
   - uid: 345
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 9.5,2.5
       parent: 2
   - uid: 346
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 10.5,2.5
       parent: 2
   - uid: 438
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 12.5,-0.5
       parent: 2
   - uid: 439
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 13.5,-0.5
       parent: 2
   - uid: 442
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 13.5,-1.5
       parent: 2
   - uid: 444
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 13.5,0.5
       parent: 2
 - proto: LockerMedicineFilled

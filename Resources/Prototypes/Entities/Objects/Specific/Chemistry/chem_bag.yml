@@ -4,6 +4,10 @@
   parent: [ BaseStorageItem , ContentsExplosionResistanceBase ] # Goobstation edit
   description: A bag for storing chemistry products, such as pills, pill canisters, bottles, and syringes.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.25
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Chemistry/chem_bag.rsi
     state: icon
@@ -22,16 +26,18 @@
     areaInsert: true
     whitelist:
       components:
+        # <Trauma>
+        - MedicalPatch
+        # </Trauma>
         - FitsInDispenser
         - Pill
       tags:
+        # <Trauma>
+        - ChemDispensable
+        # </Trauma>
         - Document
         - PillCanister
         - Bottle
         - Syringe
         - Dropper
-        - ChemDispensable # Goobstation
-        - MedicalPatch # Goobstation
   - type: Dumpable
-  - type: ExplosionResistance # Goobstation
-    damageCoefficient: 0.25

@@ -1,0 +1,134 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipNukie
+  name: MRAM-Chip (gorlex)
+  components:
+  # TODO: evil sprite
+  - type: Cybernetics
+    disableChance: 0.01 # extra hardening
+  - type: KnowledgeGrantOnWear
+    skills:
+      # Nukies are well-trained
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      KnowledgeWeaponsShield: 50
+      KnowledgeWeaponsBludgeon: 50
+      KnowledgeWeaponsShortBlade: 50
+      KnowledgeWeaponsLongBlade: 50
+      KnowledgeWeaponsPolearm: 20 # training wasnt focused on spear ops
+      KnowledgeWeaponsPistol: 50
+      KnowledgeWeaponsRifle: 50
+      KnowledgeWeaponsSniper: 50
+      KnowledgeWeaponsHeavy: 50
+      KnowledgeWeaponsEnergy: 50
+      KnowledgeWeaponsSMG: 50
+      KnowledgeWeaponsLaser: 20 # better than tiders
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
+      WallsKnowledge: 25
+      InfrastructureKnowledge: 25
+      ElectronicsKnowledge: 25
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: SkillChipNukie
+  id: SkillChipSyndieSoldierTeamLeader
+  name: MRAM-Chip (syndicate leader)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtCQC: 50
+
+- type: entity
+  parent: SkillChipNukie
+  id: SkillChipSyndieSoldier
+  name: MRAM-Chip (syndicate soldier)
+  components:
+  - type: Cybernetics
+    disableChance: 0.3 # budget cuts...
+  - type: KnowledgeGrantOnWear
+    skills:
+      # still trained with guns but not much else
+      MeleeKnowledge: 28
+      ShootingKnowledge: 28
+      MartialArtCQC: 28
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipSyndieVisitor
+  name: MRAM-Chip (syndicate visitor)
+  components:
+  - type: Cybernetics
+    disableChance: 1
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 15
+      ShootingKnowledge: 15
+      KnowledgeWeaponsShortBlade: 10
+      KnowledgeWeaponsPistol: 10
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipPirateCaptainScooner
+  name: MRAM-Chip (pirate captain)
+  components:
+  - type: Cybernetics
+    disableChance: 0.01
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 50
+      ShootingKnowledge: 35
+      KnowledgeWeaponsShortBlade: 20
+      KnowledgeWeaponsLongBlade: 80 # yarr
+      KnowledgeWeaponsPistol: 50
+      KnowledgeWeaponsRifle: 50
+      FirstAidKnowledge: 15
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipPirateScooner
+  name: MRAM-Chip (pirate)
+  components:
+  - type: Cybernetics
+    disableChance: 0.5
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 30
+      ShootingKnowledge: 25
+      KnowledgeWeaponsShortBlade: 20
+      KnowledgeWeaponsLongBlade: 40 # yarr
+      KnowledgeWeaponsPistol: 25
+      KnowledgeWeaponsRifle: 25
+      FirstAidKnowledge: 5
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipBlackmarketeer
+  name: MRAM-Chip (blackmarketeer)
+  components:
+  - type: Cybernetics
+    disableChance: 1
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 20
+      ShootingKnowledge: 20
+      KnowledgeWeaponsShortBlade: 10
+      KnowledgeWeaponsPistol: 10
+
+- type: entity
+  parent: BaseSkillChipAPTR
+  id: SkillChipCossack
+  name: MRAM-Chip (cossack)
+  components:
+  - type: Cybernetics
+    disableChance: 1
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 25
+      ShootingKnowledge: 25
+      KnowledgeWeaponsBludgeon: 10
+      KnowledgeWeaponsShortBlade: 10
+      KnowledgeWeaponsRifle: 30

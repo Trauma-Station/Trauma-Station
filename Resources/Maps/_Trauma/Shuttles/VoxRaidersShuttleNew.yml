@@ -1463,25 +1463,21 @@ entities:
   - uid: 208
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -2.5,-5.5
       parent: 1
   - uid: 209
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -2.5,-4.5
       parent: 1
   - uid: 210
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 1.5,-5.5
       parent: 1
   - uid: 211
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 1.5,-4.5
       parent: 1
 - proto: Gyroscope

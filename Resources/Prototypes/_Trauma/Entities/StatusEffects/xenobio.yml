@@ -20,6 +20,8 @@
       maxIntensity: 1050
       intensitySlope: 4
       intensityPerUnit: 70
+    - !type:Delete
+      queued: true
 
 - type: entity
   parent: StatusEffectDelayBase
@@ -35,3 +37,5 @@
     - !type:PlaySoundEffect
       sound:
         path: /Audio/Effects/extinguish.ogg
+    - !type:Delete
+      queued: true

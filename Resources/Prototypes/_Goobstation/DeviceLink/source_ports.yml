@@ -1,12 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: sourcePort
-  id: MaterialSilo
-  name: signal-port-name-material-silo
-  description: signal-port-description-material-silo
-  defaultLinks: [ MaterialSiloUtilizer ]
-
-- type: sourcePort
   id: SignalContrabandDetected
   name: signal-port-name-contraband-detected
   description: signal-port-description-contraband-detected
@@ -101,11 +95,13 @@
   id: Started
   name: signal-port-name-machine-started
   description: signal-port-description-machine-started
+  defaultLinks: [ Off ] # for stopping conveyors
 
 - type: sourcePort
   id: Completed
   name: signal-port-name-machine-completed
   description: signal-port-description-machine-completed
+  defaultLinks: [ Forward ] # for starting conveyors again
 
 - type: sourcePort
   id: Failed

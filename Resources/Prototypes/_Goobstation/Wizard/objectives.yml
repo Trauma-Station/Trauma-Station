@@ -7,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-swf
+    issuer: SpaceWizardsFederation
     icon:
       sprite: Clothing/Head/Hats/wizardhat.rsi
       state: icon

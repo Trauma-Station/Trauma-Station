@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: proto-kinetic shotgun
-  id: WeaponProtoKineticShotgun
   parent: [ BaseGunWieldable, WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
+  id: WeaponProtoKineticShotgun
+  name: proto-kinetic shotgun
   description: Fires a spread of low-damage kinetic bolts that are half as effective for mining.
   components:
   - type: PressureDamageChange

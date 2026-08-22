@@ -7,7 +7,7 @@
   description: Deliver the payload and get out before the payload detonates.
   components:
   - type: Objective
-    issuer: objective-issuer-syndicate
+    issuer: TheSyndicate
     unique: true
     difficulty: 1
     icon:

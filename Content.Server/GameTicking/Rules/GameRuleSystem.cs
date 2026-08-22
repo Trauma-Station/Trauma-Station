@@ -1,8 +1,6 @@
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Chat.Managers;
 using Content.Shared.GameTicking.Components;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -11,13 +9,12 @@ namespace Content.Server.GameTicking.Rules;
 public abstract partial class GameRuleSystem<T> : EntitySystem where T : IComponent
 {
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] protected IRobustRandom RobustRandom = default!;
     [Dependency] protected GameTicker GameTicker = default!;
 
     // Not protected, just to be used in utility methods
     [Dependency] private AtmosphereSystem _atmosphere = default!;
-    [Dependency] private MapSystem _map = default!;
+    [Dependency] protected MapSystem Map = default!; // Trauma - made it protected bruh
 
     [Dependency] protected EntityQuery<GameRuleComponent> GameRuleQuery = default!;
     [Dependency] protected EntityQuery<T> RuleQuery = default!;

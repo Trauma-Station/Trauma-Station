@@ -3,6 +3,11 @@
   parent: BaseStructure
   id: BaseBonfire
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Bonfire
+  # </Trauma>
   - type: Fixtures
     fixtures:
       fix1:
@@ -27,15 +32,15 @@
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 50
-        behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: WoodDestroy
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: AmbientSound
     volume: -5
     range: 5

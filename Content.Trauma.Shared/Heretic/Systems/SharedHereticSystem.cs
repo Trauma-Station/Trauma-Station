@@ -5,6 +5,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -28,17 +29,17 @@ namespace Content.Trauma.Shared.Heretic.Systems;
 public abstract partial class SharedHereticSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected ISharedChatManager ChatMan = default!;
     [Dependency] protected ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
 
     [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
@@ -95,7 +96,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
             var pathStr = path.ToString();
             var knowledgeId = $"{pathStr}Passive{i}";
 
-            if (_proto.HasIndex<HereticKnowledgePrototype>(knowledgeId))
+            if (ProtoMan.HasIndex<HereticKnowledgePrototype>(knowledgeId))
             {
                 TryAddKnowledge((ent, mind, ent.Comp), knowledgeId);
                 var passiveDesc = Loc.GetString($"knowledge-path-{pathStr.ToLower()}-passive-desc-{i}");
@@ -232,7 +233,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
         body ??= ent.Comp1.OwnedEntity;
 
-        var data = _proto.Index(id);
+        var data = ProtoMan.Index(id);
 
         if (data.MindEvent is { } hereticEv)
         {
@@ -244,6 +245,11 @@ public abstract partial class SharedHereticSystem : EntitySystem
             var ev = _serialization.CreateCopy(data.Event, notNullableOverride: true);
             RaiseKnowledgeEvent(body.Value, ev, false);
             ent.Comp2.KnowledgeEvents.Add(ev);
+        }
+
+        if (data.Effects is { } effects && body != null)
+        {
+            _effects.ApplyEffects(body.Value, effects);
         }
 
         if (data.ActionPrototypes is { Count: > 0 })
@@ -297,7 +303,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
+        if (Timing.ApplyingState || TerminatingOrDeleted(uid))
             return;
 
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)

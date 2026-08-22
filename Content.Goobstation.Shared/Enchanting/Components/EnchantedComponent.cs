@@ -9,7 +9,7 @@ namespace Content.Goobstation.Shared.Enchanting.Components;
 /// Added to items after being enchanted.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(EnchantingSystem))]
-[AutoGenerateComponentState(true)]
+[AutoGenerateComponentState]
 public sealed partial class EnchantedComponent : Component
 {
     /// <summary>

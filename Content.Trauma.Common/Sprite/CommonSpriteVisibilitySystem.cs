@@ -13,4 +13,12 @@ public abstract partial class CommonSpriteVisibilitySystem : EntitySystem
     /// use value greater or equal to 1 to remove visibility modifier
     /// and less or equal to 0 to set sprite.Visible to false</param>
     public abstract void UpdateVisibilityModifiers(EntityUid uid, string key, float alpha);
+
+    /// <summary>
+    /// Modifies sprite visibility to be opaque or invisible for a key.
+    /// </summary>
+    public void UpdateVisibilityModifiers(EntityUid uid, string key, bool visible)
+    {
+        UpdateVisibilityModifiers(uid, key, visible ? 1f : 0f);
+    }
 }

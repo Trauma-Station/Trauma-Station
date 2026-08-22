@@ -48,7 +48,7 @@ public sealed partial class InjectChemicalsActionSystem : EntitySystem
 
     private void InjectMain(Entity<InjectChemicalsActionComponent> ent, EntityUid target)
     {
-        _popup.PopupClient(Loc.GetString(ent.Comp.Main.Popup), target, target);
+        _popup.PopupEntity(Loc.GetString(ent.Comp.Main.Popup), target, target);
         ent.Comp.NextComedown = _timing.CurTime + ent.Comp.ComedownDelay;
         Inject(target, ent.Comp.Main.Reagents, ent.Comp.Main.Quantity);
     }
@@ -58,7 +58,7 @@ public sealed partial class InjectChemicalsActionSystem : EntitySystem
         if (_mutation.GetActionMutation(ent)?.Comp?.Target is not {} target)
             return;
 
-        _popup.PopupClient(Loc.GetString(ent.Comp.Comedown.Popup), target, target);
+        _popup.PopupEntity(Loc.GetString(ent.Comp.Comedown.Popup), target, target);
         ent.Comp.NextComedown = null;
         Inject(target, ent.Comp.Comedown.Reagents, ent.Comp.Comedown.Quantity);
     }

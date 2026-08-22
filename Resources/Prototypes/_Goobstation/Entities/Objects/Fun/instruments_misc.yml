@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-   #Goobstation
 - type: entity
+  abstract: true
   parent: [BaseHandheldInstrument, Clothing]
   id: BaseCassette
-  abstract: true
   components:
   - type: Instrument
     program: 62
@@ -23,19 +22,23 @@
     - neck
   - type: ActivatableUI
     inHandsOnly: false
+  - type: StaticPrice
+    price: 50
 
 - type: entity
   parent: [BaseCassette, BaseSyndicateContraband]
   id: BloodredCassette
-  name: bloodred cassette player
+  name: blood-red cassette player
   description: The least subtle way to enjoy your favorite tunes.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
+    sprite: &bloodred _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
   - type: Item
-    sprite: _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
+    sprite: *bloodred
   - type: Clothing
-    sprite: _Goobstation/Objects/Fun/bloodred_cassette_player.rsi
+    sprite: *bloodred
+  - type: StaticPrice
+    price: 250
 
 - type: entity
   parent: BaseCassette
@@ -44,11 +47,11 @@
   description: Regular old cassette player to enjoy your tunes on the go.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
+    sprite: &regular _Goobstation/Objects/Fun/crew_cassette_player.rsi
   - type: Item
-    sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
+    sprite: *regular
   - type: Clothing
-    sprite: _Goobstation/Objects/Fun/crew_cassette_player.rsi
+    sprite: *regular
 
 - type: entity
   parent: BaseCassette
@@ -57,8 +60,10 @@
   description: Perfect to make you look like you do mergers and acquisitions.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
+    sprite: &executive _Goobstation/Objects/Fun/executive_cassette_player.rsi
   - type: Item
-    sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
+    sprite: *executive
   - type: Clothing
-    sprite: _Goobstation/Objects/Fun/executive_cassette_player.rsi
+    sprite: *executive
+  - type: StaticPrice
+    price: 51 # premium

@@ -248,7 +248,7 @@ public sealed partial class PullingSystem : EntitySystem
 
     private void OnStopBeingPulledAlert(Entity<PullableComponent> ent, ref StopBeingPulledAlertEvent args)
     {
-        if (args.Handled || !_blocker.CanInteract(ent, null)) // Trauma - check action blockers
+        if (args.Handled)
             return;
 
         args.Handled = TryStopPull(ent, ent, ent);
@@ -731,6 +731,11 @@ public sealed partial class PullingSystem : EntitySystem
 
         if (pullerUidNull == null)
             return true;
+
+        // <Trauma> - check action blockers so you cant break grabs while stunned asleep etc
+        if (user is { } userUid && !_blocker.CanInteract(userUid, pullableUid))
+            return false;
+        // </Trauma>
 
         var msg = new AttemptStopPullingEvent(user);
         RaiseLocalEvent(pullableUid, ref msg, true);

@@ -58,7 +58,7 @@ public sealed partial class SlasherRegenerateSystem : EntitySystem
         // Check if a soul is available to use
         if (!comp.HasSoulAvailable)
         {
-            _popup.PopupPredicted(Loc.GetString("slasher-regenerate-no-soul"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("slasher-regenerate-no-soul"), uid, uid);
             return;
         }
 

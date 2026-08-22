@@ -4,6 +4,7 @@
   parent: BaseMedicalKnowledge
   id: SurgeryKnowledge
   name: Surgery
+  description: Does nothing currently. Don't waste points on it.
   components:
   - type: Knowledge
     experienceCost: 24
@@ -12,6 +13,7 @@
   parent: BaseMedicalKnowledge
   id: FirstAidKnowledge
   name: First Aid
+  description: How good you are with syringes.
   components:
   - type: Knowledge
     experienceCost: 19
@@ -29,6 +31,7 @@
   parent: BaseMedicalKnowledge
   id: ChemistryKnowledge
   name: Chemistry
+  description: Does nothing currently. Don't waste points on it.
   components:
   - type: Knowledge
     experienceCost: 15

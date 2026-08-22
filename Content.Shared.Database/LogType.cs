@@ -485,6 +485,11 @@ public enum LogType
     Connection = 104,
 
     /// <summary>
+    /// Silicon law changes.
+    /// </summary>
+    SiliconLaw = 105,
+
+    /// <summary>
     /// Goob - Obsolete
     /// </summary>
     SecretPlusObsolete = 10001,
@@ -523,4 +528,9 @@ public enum LogType
     /// Trauma - Circuits related logs.
     /// </summary>
     Circuits = 20004,
+
+    /// <summary>
+    /// Trauma - ChemiCompiler related logs.
+    /// </summary>
+    ChemiCompiler = 20005,
 }

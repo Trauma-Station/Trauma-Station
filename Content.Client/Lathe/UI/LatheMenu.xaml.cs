@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Trauma.Common.Salvage;
-using Content.Goobstation.Common.Silo;
 // </Trauma>
 using System.Linq;
 using System.Text;
@@ -92,7 +91,7 @@ public sealed partial class LatheMenu : FancyWindow
             AmountLineEdit.SetText(latheComponent.DefaultProductionAmount.ToString());
         }
 
-        UpdateMiningPoints(); // Trauma
+        SetEntityTrauma(); // Trauma
     }
 
     /// <summary>

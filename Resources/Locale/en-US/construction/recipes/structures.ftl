@@ -2,8 +2,10 @@ construction-recipe-diagonal-shuttle-wall = shuttle wall (diagonal)
 construction-window-diagonal = window (diagonal)
 construction-recipe-reinforced-window-diagonal = reinforced window (diagonal)
 construction-recipe-clockwork-window-diagonal = clockwork window (diagonal)
-construction-recipe-plasma-window-diagonal = plasma window (diagonal)
-construction-recipe-reinforced-plasma-window-diagonal = reinforced plasma window (diagonal)
+# <Trauma>
+construction-recipe-plasma-window-diagonal = glass-phoron window (diagonal)
+construction-recipe-reinforced-plasma-window-diagonal = reinforced glass-phoron window (diagonal)
+# </Trauma>
 construction-recipe-uranium-window-diagonal = uranium window (diagonal)
 construction-recipe-reinforced-uranium-window-diagonal = reinforced uranium window (diagonal)
 construction-recipe-firelock-edge = directional firelock

@@ -24,7 +24,7 @@
   id: HereticSideT1Flask
   name: knowledge-path-side-t1-flask-name
   description: knowledge-path-side-t1-flask-desc
-  icon: { sprite: _Goobstation/Heretic/items.rsi, state: eldritch_flask }
+  icon: { sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
@@ -159,29 +159,6 @@
     stage: 3
 
 - type: listing
-  id: HereticBladeT1EnvyKnife
-  name: knowledge-path-side-t1-envy-name
-  description: knowledge-path-side-t1-envy-desc
-  icon: { sprite: _Goobstation/Heretic/Entities/envy_knife.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - EnvyKnife
-  cost:
-    KnowledgePoint: 1
-    SideKnowledgePoint: 1
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT1
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 3
-
-- type: listing
   id: HereticBladeT1Mask
   name: knowledge-path-side-t1-mask-name
   description: knowledge-path-side-t1-mask-desc
@@ -190,29 +167,6 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - MaskOfMadness
-  cost:
-    KnowledgePoint: 1
-    SideKnowledgePoint: 1
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT1
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 3
-
-- type: listing
-  id: HereticBladeT1Curio
-  name: knowledge-path-side-t1-curio-name
-  description: knowledge-path-side-t1-curio-desc
-  icon: { sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - UnfathomableCurio
   cost:
     KnowledgePoint: 1
     SideKnowledgePoint: 1
@@ -251,6 +205,52 @@
     stage: 3
 
 - type: listing
+  id: HereticSideT1IceSpear
+  name: knowledge-path-side-t1-ice-spear-name
+  description: knowledge-path-side-t1-ice-spear-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/ice_spear.rsi, state: spear }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MysteriesOfCreation
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT1
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 3
+
+- type: listing
+  id: HereticBladeT1Curio
+  name: knowledge-path-side-t2-curio-name
+  description: knowledge-path-side-t2-curio-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - UnfathomableCurio
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT2
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 4
+
+- type: listing
   id: HereticSideT2RustWalker
   name: knowledge-path-side-t2-rustwalker-name
   description: knowledge-path-side-t2-rustwalker-desc
@@ -282,29 +282,6 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - CarvingKnife
-  cost:
-    KnowledgePoint: 1
-    SideKnowledgePoint: 1
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT2
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 4
-
-- type: listing
-  id: HereticSideT2IceSpear
-  name: knowledge-path-side-t2-ice-spear-name
-  description: knowledge-path-side-t2-ice-spear-desc
-  icon: { sprite: _Goobstation/Heretic/Entities/ice_spear.rsi, state: spear }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - MysteriesOfCreation
   cost:
     KnowledgePoint: 1
     SideKnowledgePoint: 1
@@ -459,6 +436,29 @@
     stage: 4
 
 - type: listing
+  id: HereticSideT2RustGrenade
+  name: knowledge-path-side-t2-rustgrenade-name
+  description: knowledge-path-side-t2-rustgrenade-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/rustgrenade.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - RustSowerGrenade
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT2
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 4
+
+- type: listing
   id: HereticSideT3Grasp
   name: knowledge-path-side-t3-grasp-name
   description: knowledge-path-side-t3-grasp-desc
@@ -559,6 +559,52 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - ForestAdmonitions
+  cost:
+    KnowledgePoint: 2
+    SideKnowledgePoint: 2
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT3
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 6
+
+- type: listing
+  id: HereticSideT3SharpMedal
+  name: knowledge-path-side-t3-medal-name
+  description: knowledge-path-side-t3-medal-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - SharpMedal
+  cost:
+    KnowledgePoint: 2
+    SideKnowledgePoint: 2
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT3
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 6
+
+- type: listing
+  id: HereticSideT3AshSpirit
+  name: knowledge-path-side-t3-ash-spirit-name
+  description: knowledge-path-side-t3-ash-spirit-desc
+  icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: ash_walker }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AshSpirit
   cost:
     KnowledgePoint: 2
     SideKnowledgePoint: 2

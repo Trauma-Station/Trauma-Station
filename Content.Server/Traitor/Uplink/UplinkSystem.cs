@@ -19,7 +19,6 @@ public sealed partial class UplinkSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private StoreSystem _store = default!;
     [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private SharedMindSystem _mind = default!;
@@ -164,7 +163,7 @@ public sealed partial class UplinkSystem : EntitySystem
     /// </summary>
     public bool TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts)
     {
-        if (!_proto.Resolve(FallbackUplinkCatalog, out var catalog))
+        if (!ProtoMan.Resolve(FallbackUplinkCatalog, out var catalog))
             return false;
 
         if (!catalog.Cost.TryGetValue(TelecrystalCurrencyPrototype, out var cost))

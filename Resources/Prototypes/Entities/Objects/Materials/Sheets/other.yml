@@ -106,7 +106,7 @@
 - type: entity
   parent: SheetPlasma
   id: SheetPlasma1
-  name: plasma
+  #name: plasma # Trauma - whoever made this doesn't know how inheritance works
   suffix: Single
   components:
   - type: Sprite

@@ -15,7 +15,6 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 
 public sealed partial class WraithSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto  = default!;
     [Dependency] private WraithPointsSystem _wraithPoints = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -45,7 +44,7 @@ public sealed partial class WraithSystem : EntitySystem
     }
 
     private void OnMapInit(Entity<WraithComponent> ent, ref MapInitEvent args) =>
-        EntityManager.AddComponents(ent.Owner, _proto.Index(ent.Comp.Abilities));
+        EntityManager.AddComponents(ent.Owner, ProtoMan.Index(ent.Comp.Abilities));
 
     private void OnBanishment(Entity<WraithComponent> ent, ref BanishmentEvent args)
     {

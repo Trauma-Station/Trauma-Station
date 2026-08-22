@@ -17,7 +17,6 @@ public sealed partial class HypoportSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private BodySystem _body = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private EntityQuery<IgnoreHypoportComponent> _ignoreQuery = default!;
     [Dependency] private EntityQuery<InjectorComponent> _injectorQuery = default!;
@@ -93,7 +92,7 @@ public sealed partial class HypoportSystem : EntitySystem
     private bool IsHypospray(EntityUid uid)
     {
         var comp = _injectorQuery.Comp(uid);
-        if (!_proto.Resolve(comp.ActiveModeProtoId, out var mode))
+        if (!ProtoMan.Resolve(comp.ActiveModeProtoId, out var mode))
             return false; // invalid injector but not my problem
 
         // instant injection into mobs means hypospray

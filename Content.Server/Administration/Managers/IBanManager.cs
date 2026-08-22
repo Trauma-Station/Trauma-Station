@@ -19,49 +19,7 @@ public interface IBanManager
     /// </summary>
     void CreateServerBan(CreateServerBanInfo banInfo);
 
-    /// <summary>
-    /// Bans the specified target, address range and / or HWID. One of them must be non-null
-    /// </summary>
-    /// <param name="target">Target user, username or GUID, null for none</param>
-    /// <param name="banningAdmin">The person who banned our target</param>
-    /// <param name="addressRange">Address range, null for none</param>
-    /// <param name="hwid">H</param>
-    /// <param name="minutes">Number of minutes to ban for. 0 and null mean permanent</param>
-    /// <param name="severity">Severity of the resulting ban note</param>
-    /// <param name="reason">Reason for the ban</param>
-    [Obsolete("Use CreateServerBan(CreateBanInfo) instead")]
-    public void CreateServerBan(NetUserId? target,
-        string? targetUsername,
-        NetUserId? banningAdmin,
-        (IPAddress, int)? addressRange,
-        ImmutableTypedHwid? hwid,
-        uint? minutes,
-        NoteSeverity severity,
-        string reason)
-    {
-        var info = new CreateServerBanInfo(reason);
-        if (target != null)
-        {
-            ArgumentNullException.ThrowIfNull(targetUsername);
-            info.AddUser(target.Value, targetUsername);
-        }
-
-        if (addressRange != null)
-            info.AddAddressRange(addressRange.Value);
-
-        if (hwid != null)
-            info.AddHWId(hwid);
-
-        if (minutes > 0)
-            info.WithMinutes(minutes.Value);
-
-        if (banningAdmin != null)
-            info.WithBanningAdmin(banningAdmin.Value);
-
-        info.WithSeverity(severity);
-
-        CreateServerBan(info);
-    }
+    // Trauma - removed obsolete CreateServerBan overload
 
     /// <summary>
     /// Gets a list of prefixed prototype IDs with the player's role bans.
@@ -127,6 +85,17 @@ public abstract class CreateBanInfo
     [Access(Other = AccessPermissions.Read)]
     public const int DefaultMaskIpv6 = 64;
 
+    // <Trauma>
+    public string? WebhookReason;
+    /// <summary>
+    /// Set the reason to show in ban webhook if the full reason is unacceptable to broadcast.
+    /// </summary>
+    public CreateBanInfo WithWebhookReason(string? reason)
+    {
+        WebhookReason = reason;
+        return this;
+    }
+    // </Trauma>
     internal readonly HashSet<(NetUserId UserId, string UserName)> Users = [];
     internal readonly HashSet<(IPAddress Address, int Mask)> AddressRanges = [];
     internal readonly HashSet<ImmutableTypedHwid> HWIds = [];

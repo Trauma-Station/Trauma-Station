@@ -2920,7 +2920,6 @@ entities:
   - uid: 120
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 3.5,-0.5
       parent: 768
   - uid: 121

@@ -5,11 +5,7 @@ using Content.Medical.Common.Surgery.Tools;
 namespace Content.Medical.Shared.Surgery.Tools;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class RetractorComponent : Component, ISurgeryToolComponent
+public sealed partial class RetractorComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "a retractor";
-    [DataField]
-    public bool? Used { get; set; } = null;
-    [DataField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "a retractor";
 }

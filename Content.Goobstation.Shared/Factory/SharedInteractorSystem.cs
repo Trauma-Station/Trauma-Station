@@ -100,7 +100,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
                 Act = () =>
                 {
                     var value = toggle();
-                    _popup.PopupClient(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
+                    _popup.PopupEntity(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
                 },
                 Text = Loc.GetString($"interactor-verb-toggle-{id}"),
                 Icon = VerbIcon,

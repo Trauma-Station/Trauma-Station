@@ -19,7 +19,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -35,9 +35,6 @@
     - WhitelistChameleon
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
 
 - type: entity
   parent: [ ClothingOuterSuitBomb, BaseJanitorContraband ] # Trauma - Made it contraband
@@ -52,7 +49,7 @@
     sprite: Clothing/OuterClothing/Suits/janitor_bombsuit.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ ClothingOuterBaseLargeFireproof, AllowSuitStorageClothing ]
   id: ClothingOuterSuitFire
   name: fire suit
   description: A suit that helps protect against hazardous temperatures.
@@ -63,11 +60,6 @@
     sprite: Clothing/OuterClothing/Suits/fire.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.04
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.05
-  - type: FireProtection
-    reduction: 0.65 # doesnt have a full seal so not as good
   - type: Armor
     coverage:
     - Torso
@@ -76,7 +68,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions: # having a suit on saves your limbs
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -94,28 +86,24 @@
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseEngineeringContraband] # Trauma - Made it contraband
+  parent: [ TemperatureProtectionGreat, ClothingOuterEVASuitBase, AllowSuitStorageClothing, BaseEngineeringContraband ] # Trauma - Made it contraband
   id: ClothingOuterSuitAtmosFire
   name: atmos fire suit
   description: An expensive firesuit that protects against even the most deadly of station fires. Designed to protect even if the wearer is set aflame.
   components:
+  # <Trauma>
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.02
-    lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.05
   - type: FireProtection
-    reduction: 0.8 # atmos firesuit offers best protection, hardsuits are a little vulnerable
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: Armor
     coverage:
     - Torso
@@ -124,7 +112,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     traumaDeductions: # having a suit on saves your limbs
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -132,20 +120,14 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
+        # <Trauma>
         Blunt: 0.85
-        Slash: 0.85
+        Slash: 0.85 # was 0.9
+        Heat: 0.6 # was 0.8
+        Cold: 0.8
         Piercing: 0.85
-        Heat: 0.4
-  - type: ClothingSpeedModifier
-    walkModifier: 0.85 # Goob edit
-    sprintModifier: 0.85
-  - type: HeldSpeedModifier
+        # </Trauma>
   - type: GroupExamine
-  - type: ProtectedFromStepTriggers
-    slots: WITHOUT_POCKET
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
   - type: Tag
     tags:
     - CorgiWearable
@@ -167,7 +149,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Heat: 0.85
@@ -175,17 +157,15 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
+  - type: ToggleableClothing
+    clothingPrototypes: # Trauma - changed to dictionary for modsuits
       head: ClothingHeadHatHoodRad
+    verbText: toggle-clothing-verb-hood
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing, BaseHighlyIllegalContraband]
+  parent: [ ClothingOuterBaseLargeInsulated, AllowSuitStorageClothing, BaseToggleClothing, BaseHighlyIllegalContraband ]
   id: ClothingOuterSuitSpaceNinja
   name: space ninja suit
   description: This black technologically advanced, cybernetically-enhanced suit provides many abilities like invisibility or teleportation.
@@ -198,9 +178,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 0.01
   - type: Armor
     coverage:
     - Torso
@@ -209,7 +186,7 @@
     - Leg
     - Foot
     - Tail
-    - Other
+    - Wings
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -224,14 +201,13 @@
     parent: true
     components:
     - type: Stealth
-      maxVisibility: 0.1
+      # <Trauma>
       hadOutline: true
-      thermalsImmune: true # Goobstation
-    - type: StealthOnMove
-      invisibilityPenalty: 3
-      maxInvisibilityPenalty: 1.6
-      passiveVisibilityRate: -1 # cloak very fast
-      movementVisibilityRate: 0.15 # only some cloak if moving
+      thermalsImmune: true
+      # </Trauma>
+      minVisibility: 0.1
+      lastVisibility: 0.1
+      shimmerFrequency: 0.05
   - type: PowerCellDraw
     drawRate: 3.6 # 100 seconds on the default cell # Goob edit
   - type: ToggleCellDraw
@@ -243,6 +219,7 @@
     noPowerPopup: ninja-no-power
   # core ninja suit stuff
   - type: NinjaSuit
+    empCharge: 300 # Trauma
   - type: EmpResistance
     strengthMultiplier: 0
   - type: UseDelay
@@ -263,9 +240,6 @@
         whitelist:
           tags:
             - PowerCell
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
 
 - type: entity
   parent: ClothingOuterBase
@@ -339,6 +313,7 @@
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodIan
+    verbText: toggle-clothing-verb-hood
   - type: Construction
     graph: ClothingOuterSuitIan
     node: suit
@@ -351,31 +326,34 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
-  - type: AddAccentClothing
-    accent: BarkAccent
+  - type: BarkAccent
+    relayAccent: true
 
 - type: entity
-  parent: [ ClothingOuterBase, ClothingOuterBaseToggleable ]
+  parent: [ ClothingOuterBaseToggleable, AllowSuitStorageClothing ]
   id: ClothingOuterSuitCarp
   name: carp suit
   description: A special suit that makes you look just like a space carp, if your eyesight is bad.
   components:
-  - type: AllowSuitStorage
+  # <Trauma>
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
-  - type: Item
-    size: Normal
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodCarp
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
+    verbText: toggle-clothing-verb-hood
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
-  parent: ClothingOuterSuitCarp
+  parent: [ ClothingOuterSuitCarp, TemperatureProtectionGood ]
   id: ClothingOuterHardsuitCarp
   suffix: Hardsuit, DO NOT MAP
   categories: [ DoNotMap ]
@@ -383,9 +361,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 0.01
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitCarp
@@ -394,3 +369,14 @@
     - jumpsuit
   - type: StaticPrice
     price: 1500
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterSuitTramDriver
+  name: tram driver suit
+  description: It protects from everything that could distract you. That is, nothing at all.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Suits/tramdriver.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Suits/tramdriver.rsi

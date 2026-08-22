@@ -57,7 +57,7 @@ public sealed partial class PoweredSealableClothingSystem : EntitySystem
         // Prevents sealing if wires panel is opened
         if (TryComp(entity, out WiresPanelComponent? panel) && panel.Open)
         {
-            _popup.PopupClient(Loc.GetString(entity.Comp.ClosePanelFirstPopup), entity, args.User);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.ClosePanelFirstPopup), entity, args.User);
             args.Cancel();
             return;
         }
@@ -69,7 +69,7 @@ public sealed partial class PoweredSealableClothingSystem : EntitySystem
         var ent = (entity.Owner, cellDrawComp);
         if (!_powerCell.HasDrawCharge(ent) || !_powerCell.HasActivatableCharge(ent))
         {
-            _popup.PopupClient(Loc.GetString(entity.Comp.NotPoweredPopup), entity, args.User);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.NotPoweredPopup), entity, args.User);
             args.Cancel();
         }
     }
@@ -84,7 +84,7 @@ public sealed partial class PoweredSealableClothingSystem : EntitySystem
 
         if (controlComp.IsCurrentlySealed || controlComp.IsInProcess)
         {
-            _popup.PopupClient(Loc.GetString(entity.Comp.OpenSealedPanelFailPopup), entity, args.User);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.OpenSealedPanelFailPopup), entity, args.User);
             args.Cancelled = true;
         }
     }

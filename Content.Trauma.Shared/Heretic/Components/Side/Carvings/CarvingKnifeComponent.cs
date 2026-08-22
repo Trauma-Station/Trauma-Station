@@ -19,10 +19,10 @@ public sealed partial class CarvingKnifeComponent : Component
     public int MaxRuneAmount = 3;
 
     [DataField]
-    public TimeSpan RuneDrawTime = TimeSpan.FromSeconds(3f);
+    public TimeSpan RuneDrawTime = TimeSpan.FromSeconds(1f);
 
     [DataField]
-    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/sheath.ogg");
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Items/sheath.ogg");
 
     [DataField]
     public EntProtoId RunebreakAction = "ActionRunebreak";
@@ -44,13 +44,17 @@ public enum CarvingKnifeUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed partial class CarveRuneDoAfterEvent(EntProtoId carving) : DoAfterEvent
+public sealed partial class CarveRuneDoAfterEvent : DoAfterEvent
 {
-    public EntProtoId Carving = carving;
+    public EntProtoId Carving;
 
-    public CarveRuneDoAfterEvent() : this(default) { }
+    public CarveRuneDoAfterEvent() {}
+    public CarveRuneDoAfterEvent(EntProtoId carving)
+    {
+        Carving = carving;
+    }
 
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new CarveRuneDoAfterEvent(Carving);
 }
 
 public sealed partial class DeleteAllCarvingsEvent : InstantActionEvent;

@@ -15,13 +15,13 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Emp;
 using Content.Shared.Ensnaring;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Jaunt;
 using Content.Shared.Magic.Events;
 using Content.Shared.Mind;
@@ -30,8 +30,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Projectiles;
-using Content.Shared.Prototypes;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -44,6 +42,7 @@ using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
+using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
@@ -54,24 +53,20 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private INetManager _net = default!;
 
-    [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] protected ITileDefinitionManager Tile = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected EntityLookupSystem Lookup = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
     [Dependency] protected SharedVoidCurseSystem Voidcurse = default!;
     [Dependency] protected SharedHereticSystem Heretic = default!;
-    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
     [Dependency] protected ExamineSystemShared Examine = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
 
-    [Dependency] private SharedProjectileSystem _projectile = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ThrowingSystem _throw = default!;
@@ -97,52 +92,47 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private TouchSpellSystem _touchSpell = default!;
     [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private SharedGhoulSystem _ghoul = default!;
+    [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
-    public static readonly DamageSpecifier AllDamage = new()
-    {
-        DamageDict =
-        {
-            { "Blunt", 1 },
-            { "Slash", 1 },
-            { "Piercing", 1 },
-            { "Heat", 1 },
-            { "Cold", 1 },
-            { "Shock", 1 },
-            { "Asphyxiation", 1 },
-            { "Bloodloss", 1 },
-            { "Caustic", 1 },
-            { "Poison", 1 },
-            { "Radiation", 1 },
-            { "Cellular", 1 },
-            { "Ion", 1 },
-            { "Holy", 1 },
-        },
-    };
+    private CompName _graspName;
 
+    public static readonly DamageSpecifier AllDamage = new();
+
+    private static EntProtoId JauntMutedEffect = "StatusEffectMutedJaunt";
     public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeAsh();
+        _graspName = Factory.CompName<MansusGraspComponent>();
+
         SubscribeBlade();
-        SubscribeRust();
-        SubscribeCosmos();
-        SubscribeVoid();
-        SubscribeFlesh();
-        SubscribeSide();
-        SubscribeLock();
 
-        SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
-        SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
-        SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
-
-        SubscribeLocalEvent<MindContainerComponent, BeforeTouchSpellAbilityUsedEvent>(OnBeforeTouchSpell);
+        CacheDamageTypes();
     }
 
+    [SubscribeLocalEvent]
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<DamageTypePrototype>())
+            CacheDamageTypes();
+    }
+
+    private void CacheDamageTypes()
+    {
+        var damage = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
+        damage.Clear();
+        foreach (var type in ProtoMan.EnumeratePrototypes<DamageTypePrototype>())
+        {
+            damage[type.ID] = 1;
+        }
+        AllDamage.DamageDict = damage;
+    }
+
+    [SubscribeLocalEvent]
     private void OnBeforeTouchSpell(Entity<MindContainerComponent> ent, ref BeforeTouchSpellAbilityUsedEvent args)
     {
         if (!TryUseAbility(args.Args, false))
@@ -151,7 +141,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             return;
         }
 
-        if (!Proto.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
+        if (!ProtoMan.Index(args.Args.TouchSpell).HasComp(_graspName))
             return;
 
         if (!Heretic.TryGetHereticComponent(ent.AsNullable(), out var heretic, out var mind))
@@ -166,12 +156,13 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             return ent.Comp.MansusGraspProto;
 
         var pathSpecific = ent.Comp.MansusGraspProto + ent.Comp.CurrentPath;
-        return Proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
+        return ProtoMan.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
-    private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnActionAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
     {
-        if (StatusNew .HasEffectComp<BlockHereticActionsStatusEffectComponent>( args.User))
+        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>( args.User))
             args.Cancelled = true;
     }
 
@@ -216,11 +207,19 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         return result;
     }
 
+    [SubscribeLocalEvent]
+    private void OnJauntInit(Entity<JauntComponent> ent, ref ComponentInit args)
+    {
+        StatusNew.TryAddStatusEffect(ent.Owner, JauntMutedEffect, out _, null);
+    }
+
+    [SubscribeLocalEvent]
     private void OnJauntMagicAttempt(Entity<JauntComponent> ent, ref HereticMagicCastAttemptEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeCast(Entity<HereticActionComponent> ent, ref BeforeCastSpellEvent args)
     {
         var attemptEv = new HereticMagicCastAttemptEvent(args.Performer, ent);
@@ -268,7 +267,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         var toCoords = coords;
 
         var fromMap = _transform.ToMapCoordinates(fromCoords);
-        var spawnCoords = _mapMan.TryFindGridAt(fromMap, out var gridUid, out _)
+        var spawnCoords = _map.TryFindGridAt(fromMap, out var gridUid, out _)
             ? _transform.WithEntityId(fromCoords, gridUid)
             : new(_map.GetMap(fromMap.MapId), fromMap.Position);
 
@@ -322,17 +321,14 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
         if (boneHeal == null || boneHeal != FixedPoint2.Zero && Resolve(uid, ref uid.Comp2, false))
         {
-            var parts = _body.GetOrgans<WoundableComponent>((uid, uid.Comp2));
+            var bones = _body.GetOrgans<BoneComponent>((uid, uid.Comp2));
 
-            foreach (var part in parts)
+            foreach (var bone in bones)
             {
-                if (_trauma.GetBone(part.AsNullable()) is not {} bone)
-                    continue;
-
                 if (boneHeal is { } heal)
-                    _trauma.ApplyDamageToBone(bone, heal, bone.Comp);
+                    _trauma.DamageBone(bone.AsNullable(), heal); // heal is negative
                 else
-                    _trauma.SetBoneIntegrity(bone, bone.Comp.BoneIntegrity, bone.Comp);
+                    _trauma.SetBoneIntegrity(bone.AsNullable(), bone.Comp.BoneIntegrity);
             }
         }
 

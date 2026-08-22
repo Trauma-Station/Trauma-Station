@@ -364,10 +364,17 @@ entity-effect-guidebook-extinguish-reaction =
         *[other] extinguish
     } fire
 
+# Trauma - $direction is set from the Flammable effect's multiplier sign, so negative Flammable reagents read "Decreases flammability"; defaults to increase
 entity-effect-guidebook-flammable-reaction =
     { $chance ->
-        [1] Increases
-        *[other] increase
+        [1] { $direction ->
+                [decrease] Decreases
+                *[increase] Increases
+            }
+        *[other] { $direction ->
+                [decrease] decrease
+                *[increase] increase
+            }
     } flammability
 
 entity-effect-guidebook-ignite =
@@ -486,8 +493,8 @@ entity-effect-guidebook-plant-attribute =
         [1] Adjusts
         *[other] adjust
     } {$attribute} by {$positive ->
-    [true] [color=red]{$amount}[/color]
-    *[false] [color=green]{$amount}[/color]
+    [false] [color=red]{$amount}[/color]
+    *[true] [color=green]{$amount}[/color]
     }
 
 entity-effect-guidebook-plant-cryoxadone =

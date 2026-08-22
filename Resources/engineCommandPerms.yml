@@ -151,4 +151,5 @@
 
 - Commands:
   - "|"
+  - loglevel
   - oldhelp

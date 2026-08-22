@@ -7,7 +7,14 @@ namespace Content.Goobstation.Shared.Stealth;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ForcedStealthStatusEffectComponent : Component
 {
-    [DataField] public float Visibility = 0f;
+    [DataField]
+    public float Visibility;
+
+    [DataField]
+    public bool RevealOnAttack = true;
+
+    [DataField]
+    public bool RevealOnDamage = true;
 
     /// <summary>
     /// Null if the target entity wasn't stealthed beforehand.

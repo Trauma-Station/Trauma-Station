@@ -58,12 +58,18 @@
         Glass: 125
 
 - type: entity
+  parent: [ BaseItem, BaseItemDestructible ]
   id: Fulton
-  parent: BaseItem
-  suffix: Full
   name: fulton
+  suffix: Full
   description: Used to extract containers, items, or forcibly recruit people into your base of operations.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Cloth: 125
+  # </Trauma>
   - type: Fulton
     whitelist: # Trauma - allow mobs to be directly fultoned without needing to build a chair
       components:
@@ -84,21 +90,6 @@
     drawdepth: SmallObjects
     sprite: Objects/Tools/fulton.rsi
     state: extraction_pack
-  - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 50
-      Cloth: 125
 
 - type: entity
   id: Fulton1

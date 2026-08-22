@@ -13,7 +13,6 @@ namespace Content.Trauma.Server.Vampires;
 /// </summary>
 public sealed partial class VampireUmbraeSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private CloningSystem _cloning = default!;
 
     /// <summary>
@@ -51,8 +50,8 @@ public sealed partial class VampireUmbraeSystem : EntitySystem
 
             _cloning.CopyEquipment(original, cloneEnt, SlotFlags.All);
 
-            EntityManager.RemoveComponents(cloneEnt, _proto.Index(ShadowCloneRemoveComponents).Components);
-            EntityManager.AddComponents(cloneEnt, _proto.Index(ShadowCloneAddComponents).Components);
+            EntityManager.RemoveComponents(cloneEnt, ProtoMan.Index(ShadowCloneRemoveComponents).Components);
+            EntityManager.AddComponents(cloneEnt, ProtoMan.Index(ShadowCloneAddComponents).Components);
         }
     }
 }

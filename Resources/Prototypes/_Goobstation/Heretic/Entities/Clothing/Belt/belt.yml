@@ -14,7 +14,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,7,4
+    - 0,0,9,4
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: UnholyItem

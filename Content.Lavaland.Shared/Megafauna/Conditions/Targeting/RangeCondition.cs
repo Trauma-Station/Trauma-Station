@@ -6,7 +6,7 @@ namespace Content.Lavaland.Shared.Megafauna.Conditions;
 
 /// <summary>
 /// Condition that returns true if the target is at specific range from the boss.
-/// Returns false if out of range, or target is null.
+/// Returns false if out of range.
 /// </summary>
 public sealed partial class RangeCondition : MegafaunaEntityCondition
 {
@@ -18,17 +18,16 @@ public sealed partial class RangeCondition : MegafaunaEntityCondition
 
     public override bool EvaluateImplementation(MegafaunaCalculationBaseArgs args, EntityUid target)
     {
-        var entMan = args.EntityManager;
-        var transformSys = entMan.System<SharedTransformSystem>();
+        var entMan = args.EntMan;
+        var xform = entMan.System<SharedTransformSystem>();
 
-        var bossPos = transformSys.GetMapCoordinates(args.Entity);
-        var targetPos = transformSys.GetMapCoordinates(target);
+        var bossPos = xform.GetMapCoordinates(args.Entity);
+        var targetPos = xform.GetMapCoordinates(target);
 
         if (bossPos.MapId != targetPos.MapId)
             return false;
 
         var distance = Vector2.Distance(bossPos.Position, targetPos.Position);
-
         return distance > (MinRange ?? -1f) && distance < (MaxRange ?? float.MaxValue);
     }
 }

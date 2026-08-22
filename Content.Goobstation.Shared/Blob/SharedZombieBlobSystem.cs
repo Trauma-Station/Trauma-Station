@@ -37,7 +37,7 @@ public abstract partial class SharedZombieBlobSystem : EntitySystem
         if(ent.Comp.CanShoot)
             return;
 
-        _popup.PopupClient(Loc.GetString("blob-no-using-guns-popup"), ent, ent);
+        _popup.PopupEntity(Loc.GetString("blob-no-using-guns-popup"), ent, ent);
         args.Cancel();
     }
 }

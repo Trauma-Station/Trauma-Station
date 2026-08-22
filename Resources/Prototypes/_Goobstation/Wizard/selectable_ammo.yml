@@ -88,7 +88,7 @@
   id: ProjectileBeeBolt
   desc: Bee. Unleashes a swarm of angry bees.
   icon:
-    sprite: _Goobstation/Objects/Weapons/Grenades/beenades.rsi
+    sprite: _Goobstation/Objects/Weapons/Grenades/beenade.rsi
     state: icon
   color: yellow
   soundGunshot:

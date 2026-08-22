@@ -38,7 +38,8 @@ construction-graph-tag-voice-trigger = a voice trigger
 construction-graph-tag-signal-trigger = a signal trigger
 construction-graph-tag-proximity-sensor = proximity sensor
 construction-graph-tag-glass-shard = a glass shard
-construction-graph-tag-plasma-glass-shard = a plasma glass shard
+# Trauma - plasma -> phoron
+construction-graph-tag-plasma-glass-shard = a glass-phoron shard
 construction-graph-tag-uranium-glass-shard = a uranium glass shard
 construction-graph-tag-reinforced-glass-shard = a reinforced glass shard
 construction-graph-tag-grey-flatcap = a grey flatcap

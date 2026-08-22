@@ -42,7 +42,8 @@ namespace Content.Benchmarks
         [GlobalSetup]
         public void Setup()
         {
-            var random = new Random(3005);
+            var random = new RobustRandom();
+            random.SetSeed(3005);
 
             _colors = new (Color, Color)[N];
             _output = new Color[N];

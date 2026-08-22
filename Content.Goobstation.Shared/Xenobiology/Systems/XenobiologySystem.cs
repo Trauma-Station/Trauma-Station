@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Shared.Examine;
 using Content.Shared.Jittering;
@@ -20,28 +21,26 @@ namespace Content.Goobstation.Shared.Xenobiology.Systems;
 /// </summary>
 public sealed partial class XenobiologySystem : EntitySystem
 {
-    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
-    [Dependency] private MetaDataSystem _metaData = default!;
-    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedJitteringSystem _jitter = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+
+    private TimeSpan _updateInterval;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeTaming();
-        SubscribeBreeding();
-
-        SubscribeLocalEvent<SlimeComponent, ExaminedEvent>(OnExamined);
+        Subs.CVar(_cfg, GoobCVars.BreedingInterval, x => _updateInterval = TimeSpan.FromSeconds(x), true);
     }
 
     public override void Update(float frameTime)
@@ -50,6 +49,7 @@ public sealed partial class XenobiologySystem : EntitySystem
         UpdateMitosis();
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<SlimeComponent> slime, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange || _net.IsClient)
@@ -68,9 +68,7 @@ public sealed partial class XenobiologySystem : EntitySystem
     /// <param name="slime">The slime entity.</param>
     /// <returns>Grey if no breed can be found.</returns>
     public EntProtoId GetProducedExtract(Entity<SlimeComponent> slime)
-    {
-        return _prototypeManager.TryIndex(slime.Comp.Breed, out var breedPrototype)
+        => ProtoMan.Resolve(slime.Comp.Breed, out var breedPrototype)
             ? breedPrototype.ProducedExtract
             : slime.Comp.DefaultExtract;
-    }
 }

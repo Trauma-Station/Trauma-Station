@@ -23,9 +23,9 @@
     price: 15
 
 - type: entity
-  name: block of freedom cheese
-  parent: FoodBakingBase
+  parent: [ FoodBakingBase, BaseSlicingRefinable ]
   id: FoodFreedomCheeseBlock
+  name: block of freedom cheese
   description: A solid block of artery-clogging cheese based on an questionable old world recipe. Slice it for your buddies.. or just eat the entire block for yourself, you weirdo.
   components:
   - type: FlavorProfile
@@ -46,15 +46,15 @@
         Quantity: 16
       - ReagentId: GastroToxin
         Quantity: 4
-  - type: SliceableFood
-    count: 4
-    slice: FoodFreedomCheeseSlice
-
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodFreedomCheeseSlice
+      amount: 4
 
 - type: entity
-  name: freedom cheese slice
   parent: FoodBakingBase
   id: FoodFreedomCheeseSlice
+  name: freedom cheese slice
   description: Highly questionable amalgamation of cheddar, fillers and the spirit of freedom. NanoTrasen's healthcare does not cover incidents regarding the consumption of this item.
   components:
   - type: FlavorProfile

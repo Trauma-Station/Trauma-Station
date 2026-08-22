@@ -3,6 +3,35 @@
   parent: BaseItem
   abstract: true
   components:
+  # <Trauma>
+  - type: EmitSoundOnPickup
+    sound:
+      collection: LasersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: LasersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: LasersDrop
+  - type: Cautery
+    speed: 0.9
+  - type: SurgeryTool
+    endSound:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: AlwaysHot
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud
+  - type: BatteryDrinkerSource
+    maxAmount: 180 # you probably don't want to drain your entire gun charging in battle
+  - type: WeaponClass
+    class: Laser
+  # </Trauma>
   - type: Sprite
   - type: Item
     size: Huge
@@ -25,33 +54,6 @@
     startingCharge: 1000
   - type: StaticPrice
     price: 500
-  - type: Cautery # Shitmed
-    speed: 0.9
-  - type: SurgeryTool # Shitmed
-    endSound:
-      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      collection: LasersPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: LasersDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: LasersDrop
-  # Goobstation edit end
-  - type: AlwaysHot # Goobstation V
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud # Goobstation ^
-  - type: BatteryDrinkerSource # Goobstation - Energycrit
-    maxAmount: 180 # you probably don't want to drain your entire gun charging in battle
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunWieldable]
@@ -451,7 +453,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
   - type: Gun
-    selectedMode: SemiAuto
+    selectedMode: SemiAuto # Trauma
     fireRate: 3
     availableModes:
     - SemiAuto # Trauma - removed FullAuto
@@ -582,6 +584,8 @@
   components:
     - type: Item
       size: Ginormous
+      shape:
+      - 0,0,7,3
     - type: MultiHandedItem
     - type: ClothingSpeedModifier
       walkModifier: 0.6
@@ -656,6 +660,10 @@
   id: WeaponDisablerPractice
   description: A self-defense weapon that exhausts organic targets, weakening them until they collapse. This one has been undertuned for cadets making it mostly harmless.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: NonLethal
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/practice_disabler.rsi
     layers:
@@ -1200,3 +1208,34 @@
     fireRate: 2
     minAngle: 1
     maxAngle: 2
+
+- type: entity
+  parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
+  id: WeaponBurstFireLaserXenoborg
+  name: xenoborg burst fire laser
+  description: An alien weapon, channelling a burst-fire laser through a prism, causing targets to burst into fire.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/xenoborg_burstfire.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-unshaded-4
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+      shader: unshaded
+  - type: BatterySelfRecharger
+    autoRechargeRate: 60
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/xenofirebeam.ogg
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    minAngle: 2
+    maxAngle: 30
+    angleIncrease: 3
+    angleDecay: 15
+    cameraRecoilScalar: .25
+  - type: BatteryAmmoProvider
+    proto: XenoborgFireLaser
+    fireCost: 100

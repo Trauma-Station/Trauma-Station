@@ -29,7 +29,9 @@ public sealed partial class Flammable : EntityEffectBase<Flammable>
     public float FireProtectionPenetration;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-flammable-reaction", ("chance", Probability));
+        => Loc.GetString("entity-effect-guidebook-flammable-reaction",
+            ("chance", Probability),
+            ("direction", Multiplier < 0 ? "decrease" : "increase")); // Trauma - negative multiplier reduces flammability; MultiplierOnExisting's sign is not reflected
 
     public override LogImpact? Impact => LogImpact.Low;
 }

@@ -24,8 +24,9 @@ public sealed partial class HumanoidCharacterProfile
     [DataField]
     public KnowledgeProfile Knowledge = new();
 
-    public static ProtoId<BarkPrototype> RandomBark(IRobustRandom random, IPrototypeManager proto, string species)
+    public static ProtoId<BarkPrototype> RandomBark(IPrototypeManager proto, string species)
     {
+        var random = IoCManager.Resolve<IRobustRandom>();
         var barks = new List<ProtoId<BarkPrototype>>();
         foreach (var bark in proto.EnumeratePrototypes<BarkPrototype>())
         {

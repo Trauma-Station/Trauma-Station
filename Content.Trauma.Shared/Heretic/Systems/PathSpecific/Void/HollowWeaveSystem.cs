@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Weapons.Ranged;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
@@ -20,13 +21,18 @@ public sealed partial class HollowWeaveSystem : EntitySystem
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
+
     [Dependency] private EntityQuery<RemoveOnAttackStatusEffectComponent> _removeQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectComponent> _statusQuery = default!;
 
 
     public override void Initialize()
     {
         base.Initialize();
 
+        Subs.SubscribeWithRelay<HollowWeaveComponent, BeforeDamageChangedEvent>(OnTakeDamage,
+            baseEvent: false,
+            held: false);
         Subs.SubscribeWithRelay<HollowWeaveComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction,
             baseEvent: false,
             held: false);
@@ -45,7 +51,9 @@ public sealed partial class HollowWeaveSystem : EntitySystem
 
     private void RemoveStatus<T>(Entity<RemoveOnAttackStatusEffectComponent> ent, ref StatusEffectRelayedEvent<T> args)
     {
-        if (args.Container.Comp.ActiveStatusEffects?.ContainedEntities.Where(_removeQuery.HasComp) is not { } effects)
+        var now = _timing.CurTime;
+        if (args.Container.Comp.ActiveStatusEffects?.ContainedEntities.Where(
+            x => _removeQuery.TryComp(x, out var comp) && now >= _statusQuery.Comp(x).StartEffectTime + comp.RemoveThreshold) is not { } effects)
             return;
 
         foreach (var effect in effects)
@@ -54,24 +62,38 @@ public sealed partial class HollowWeaveSystem : EntitySystem
         }
     }
 
-    private void OnBeforeHarmfulAction(Entity<HollowWeaveComponent> ent, ref BeforeHarmfulActionEvent args)
+    private void OnTakeDamage(Entity<HollowWeaveComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (args.Type != HarmfulActionType.Harm || args.Target == args.User)
+        if (args.Cancelled || args.Damage.GetTotal() < 5)
             return;
 
-        if (!_heretic.IsHereticOrGhoul(args.Target))
+        if (TryEvadeAttack(ent, args.Target, args.Origin))
+            args.Cancelled = true;
+    }
+
+    private void OnBeforeHarmfulAction(Entity<HollowWeaveComponent> ent, ref BeforeHarmfulActionEvent args)
+    {
+        if (args.Cancelled || args.Type != HarmfulActionType.Harm)
             return;
+
+        if (TryEvadeAttack(ent, args.Target, args.User))
+            args.Cancelled = true;
+    }
+
+    private bool TryEvadeAttack(Entity<HollowWeaveComponent> ent, EntityUid target, EntityUid? user)
+    {
+        if (!_heretic.IsHereticOrGhoul(target))
+            return false;
 
         var now = _timing.CurTime;
         if (now < ent.Comp.NextStatus)
-            return;
+            return false;
 
         ent.Comp.NextStatus = now + ent.Comp.StatusDelay;
         Dirty(ent);
 
-        args.Cancelled = true;
-
-        _status.TryUpdateStatusEffectDuration(args.Target, ent.Comp.StatusEffect, ent.Comp.StatusDuration);
-        _audio.PlayPredicted(ent.Comp.Sound, args.Target, args.User);
+        _status.TryUpdateStatusEffectDuration(target, ent.Comp.StatusEffect, ent.Comp.StatusDuration);
+        _audio.PlayPredicted(ent.Comp.Sound, target, user);
+        return true;
     }
 }

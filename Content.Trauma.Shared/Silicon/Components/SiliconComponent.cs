@@ -37,23 +37,6 @@ public sealed partial class SiliconComponent : Component
     /// </summary>
     public bool Dead = false;
 
-    // BatterySystem took issue with how this was used, so I'm coming back to it at a later date, when more foundational Silicon stuff is implemented.
-    // /// <summary>
-    // ///     The entity to get the battery from.
-    // /// </summary>
-    // public EntityUid BatteryOverride? = EntityUid.Invalid;
-
-
-    /// <summary>
-    ///     The type of silicon this is.
-    /// </summary>
-    /// <remarks>
-    ///     Any new types of Silicons should be added to the enum.
-    ///     Setting this to Npc will delay charge state updates by LastDrainTime and skip battery heat calculations
-    /// </remarks>
-    [DataField(customTypeSerializer: typeof(EnumSerializer))]
-    public Enum EntityType = SiliconType.Npc;
-
     /// <summary>
     ///     Is this silicon battery powered?
     /// </summary>
@@ -104,11 +87,4 @@ public sealed partial class SiliconComponent : Component
 
     [DataField]
     public float FireStackMultiplier = 1f;
-
-    /// <summary>
-    ///     Whether or not a Silicon will cancel all sleep events.
-    ///     Maybe you want an android that can sleep as well as drink APCs? I'm not going to judge.
-    /// </summary>
-    [DataField]
-    public bool DoSiliconsDreamOfElectricSheep;
 }

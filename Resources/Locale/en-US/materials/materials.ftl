@@ -1,23 +1,12 @@
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 RiceMar1244 <138547931+RiceMar1244@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Tunguso4ka <71643624+Tunguso4ka@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Velcroboy <107660393+IamVelcroboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Zadeon <loldude9000@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Glass
 materials-glass = glass
 materials-reinforced-glass = reinforced glass
-materials-plasma-glass = plasma glass
-materials-reinforced-plasma-glass = reinforced plasma glass
+# <Trauma>
+materials-plasma-glass = glass-phoron
+materials-reinforced-plasma-glass = reinforced glass-phoron
+# </Trauma>
 materials-uranium-glass = uranium glass
 materials-reinforced-uranium-glass = reinforced uranium glass
 
@@ -32,7 +21,8 @@ materials-biomass = biomass
 materials-cardboard = cardboard
 materials-cloth = cloth
 materials-durathread = durathread
-materials-plasma = plasma
+# Trauma - plasma -> phoron
+materials-plasma = phoron
 materials-plastic = plastic
 materials-wood = wood
 materials-paper = paper
@@ -51,7 +41,8 @@ materials-raw-iron = raw iron
 materials-raw-quartz = raw quartz
 materials-raw-gold = raw gold
 materials-raw-silver = raw silver
-materials-raw-plasma = raw plasma
+# Trauma - plasma -> phoron
+materials-raw-plasma = raw phoron
 materials-raw-uranium = raw uranium
 materials-raw-bananium = raw bananium
 materials-raw-salt = raw salt

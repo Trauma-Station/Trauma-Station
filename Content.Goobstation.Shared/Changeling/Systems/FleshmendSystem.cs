@@ -23,14 +23,7 @@ public sealed partial class FleshmendSystem : EntitySystem
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private DamageableSystem _dmg = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FleshmendComponent, StatusEffectAppliedEvent>(OnApplied);
-        SubscribeLocalEvent<FleshmendComponent, StatusEffectRemovedEvent>(OnRemoved);
-    }
-
+    [SubscribeLocalEvent]
     private void OnApplied(Entity<FleshmendComponent> ent, ref StatusEffectAppliedEvent args)
     {
         if (ent.Comp.DoVisualEffect)
@@ -44,6 +37,7 @@ public sealed partial class FleshmendSystem : EntitySystem
         Cycle(ent, args.Target);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoved(Entity<FleshmendComponent> ent, ref StatusEffectRemovedEvent args)
     {
         if (ent.Comp.DoVisualEffect)
@@ -77,7 +71,7 @@ public sealed partial class FleshmendSystem : EntitySystem
         var now = _timing.CurTime;
         while (query.MoveNext(out var uid, out var comp, out var effect))
         {
-            if (effect.AppliedTo is not { } target || comp.UpdateTimer < now)
+            if (effect.AppliedTo is not { } target || now < comp.UpdateTimer)
                 continue;
 
             comp.UpdateTimer = now + comp.UpdateDelay;
@@ -88,17 +82,15 @@ public sealed partial class FleshmendSystem : EntitySystem
 
     private void Cycle(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        if (!TryFlammableChecks(ent, target))
-            return;
-
-        DoFleshmend(ent, target);
+        if (TryFlammableChecks(ent, target))
+            DoFleshmend(ent, target);
     }
 
     private bool TryFlammableChecks(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        if (TryComp<FlammableComponent>(target, out var flam)
-            && flam.OnFire
-            && !ent.Comp.IgnoreFire)
+        if (!ent.Comp.IgnoreFire &&
+            TryComp<FlammableComponent>(target, out var flam)
+            && flam.OnFire)
         {
             if (ent.Comp.DoVisualEffect)
                 RemComp<FleshmendEffectComponent>(target);
@@ -123,7 +115,8 @@ public sealed partial class FleshmendSystem : EntitySystem
         // heal the damage
         foreach (var (group, amount) in ent.Comp.Healing)
         {
-            _dmg.HealEvenly(target, amount, group);
+            // negative values to heal, stupid API treats it like ChangeDamage but ignores positive values anyway...
+            _dmg.HealEvenly(target, -amount, group);
         }
 
         // heal bleeding and restore blood

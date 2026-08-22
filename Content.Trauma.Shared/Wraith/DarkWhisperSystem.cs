@@ -42,7 +42,7 @@ public sealed partial class DarkWhisperSystem : EntitySystem
             if (_timing.CurTime < whisper.NextUpdate)
                 continue;
 
-            _popup.PopupClient(Loc.GetString("dark-whisper-end"), uid, uid, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("dark-whisper-end"), uid, uid, PopupType.MediumCaution);
 
             whisper.Active = false;
 
@@ -56,7 +56,7 @@ public sealed partial class DarkWhisperSystem : EntitySystem
 
     private void OnDarkWhisper(Entity<DarkWhisperComponent> ent, ref DarkWhisperEvent args)
     {
-        _popup.PopupClient(Loc.GetString("dark-whisper-start"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("dark-whisper-start"), ent.Owner, ent.Owner, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("dark-whisper-target"), args.Target, args.Target, PopupType.MediumCaution);
 
         ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.Update;

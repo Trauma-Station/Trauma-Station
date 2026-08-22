@@ -17,6 +17,7 @@
         Blunt: -1.33
         Slash: -1.33
         Piercing: -1.33
+        Ballistic: -1.33
         Heat: -1
         Cold: -1
         Shock: -1
@@ -119,8 +120,7 @@
     proto: alien
   - type: AtmosExposed
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 600
     coldDamageThreshold: 100 # Trauma, was -150
@@ -142,20 +142,15 @@
     speechSounds: Xenomorph
     speechVerb: SmallMob
   - type: Vocal
-    sounds:
-      Male: Xenomorph
-      Female: Xenomorph
-      Unsexed: Xenomorph
+    emoteSounds: Xenomorph
   - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     understands:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - Hissing
     - Draconic
-  - type: CollectiveMind # Goobstation
+  - type: CollectiveMind
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
@@ -163,22 +158,29 @@
   - type: Emoting
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
-  - type: Access # Goobstation - xeno doors
+  - type: Access
     enabled: true
     groups:
     - XenomorphAccess
-  - type: BloodSplatterer # Trauma
+  - type: BloodSplatterer
   - type: KnowledgeGrant
     skills:
       ThrowingKnowledge: 50
-      StrengthKnowledge: 50
-
 
 - type: entity
   parent: [BaseMobXenomorph, StripableInventoryBase]
   id: BaseMobXenomorphAdult
   abstract: true
   components:
+  - type: MovementSpeedModifier
+    baseWeightlessAcceleration: 1.7
+    baseWeightlessFriction: 1
+    baseWeightlessModifier: 1
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepXenomorph
+      params:
+        volume: -6
   - type: Prying
     speedModifier: 5
     pryPowered: true
@@ -188,6 +190,7 @@
   - type: ShowHealthIcons
   - type: Puller
     needsHands: false
+    startingGrabStage: Hard
   - type: IdExaminable
   - type: Inventory
     templateId: xenomorph
@@ -207,8 +210,7 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
-  - type: XenomorphShoveTracker
-  - type: MovementAlwaysTouching # Trauma
+  - type: MovementAlwaysTouching
 
 - type: entity
   id: BaseMobXenomorphDungeon

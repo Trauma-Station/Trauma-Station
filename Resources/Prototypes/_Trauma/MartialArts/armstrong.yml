@@ -13,6 +13,7 @@
   - !type:TakeStaminaDamage
     amount: 7
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 5
@@ -32,6 +33,7 @@
   - !type:TakeStaminaDamage
     amount: 12
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 6
@@ -51,6 +53,7 @@
   - !type:TakeStaminaDamage
     amount: 18
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 12
@@ -69,6 +72,7 @@
   - !type:TakeStaminaDamage
     amount: 7
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 6
@@ -81,6 +85,7 @@
   - !type:TakeStaminaDamage
     amount: 13
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 8
@@ -102,6 +107,7 @@
   - !type:TakeStaminaDamage
     amount: 7
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 5
@@ -114,6 +120,7 @@
   - !type:TakeStaminaDamage
     amount: 20
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 18
@@ -141,6 +148,7 @@
   - !type:TakeStaminaDamage
     amount: 25
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 20
@@ -166,6 +174,7 @@
   - !type:TakeStaminaDamage
     amount: 8
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 13
@@ -190,6 +199,7 @@
   - !type:TakeStaminaDamage
     amount: 15
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 17
@@ -214,6 +224,7 @@
   - !type:TakeStaminaDamage
     amount: 17
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 25
@@ -230,6 +241,7 @@
     sound: /Audio/Magic/fireball.ogg
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Heat: 15
@@ -247,6 +259,7 @@
     sound: /Audio/Magic/fireball.ogg
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Heat: 17
@@ -264,6 +277,7 @@
     sound: /Audio/Magic/fireball.ogg
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Heat: 20
@@ -283,6 +297,7 @@
   - !type:TakeStaminaDamage
     amount: -10
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 5
@@ -322,11 +337,13 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Blunt: 7
   opponentEffects:
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Blunt: 14
@@ -343,11 +360,13 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Blunt: 6
   opponentEffects:
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Blunt: 16
@@ -364,11 +383,13 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Blunt: 4
   opponentEffects:
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Blunt: 18

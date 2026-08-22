@@ -97,10 +97,6 @@
   #- CircuitImprinterHyperConvectionMachineCircuitboard
   - LatheUpgradeKitHyper
   - LatheUpgradeKitCryo
-  - RoboticArmCircuitboard
-  - ConstructorCircuitboard
-  - StorageBinCircuitboard
-  - InteractorCircuitboard
   - UpgradeKitTubeSpeed
   # </Trauma>
   - SheetifierMachineCircuitboard

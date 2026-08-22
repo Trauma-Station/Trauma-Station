@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [SimpleSpaceMobBase,FlyingMobBase]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobNightVision ]
   id: BaseMobShadowlingAscendant
   name: shadowling ascendant
   suffix: ""
@@ -50,15 +50,13 @@
     radius: 2
     softness: 1
     energy: 50
-  - type: NightVision
-    color: "#BF40BF"
-    activateSound: null
-    deactivateSound: null
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: BreathingImmunity
   - type: SpecialLowTempImmunity
   - type: ThermalVision
-    thermalShader: null
+    useShader: false
     color: "#BF40BF"
     activateSound: null
     deactivateSound: null
@@ -69,10 +67,16 @@
       - Critical
     damage:
       types:
-        Heat: -20
-        Blunt: -6.66
-        Slash: -6.66
-        Piercing: -6.66
+        Heat: -5
+        Blunt: -5
+        Slash: -5
+        Piercing: -5
+        Ballistic: -5
+        Radiation: -1
+        Poison: -1
+        Cold: -1
+        Cellular: -1
+        Caustic: -1
   - type: SlowOnDamage
     speedModifierThresholds:
       600: 0.5
@@ -109,7 +113,6 @@
   components:
   - type: ShadowlingVeil
   - type: ShadowlingIcyVeins
-  - type: ShadowlingDestroyEngines
   - type: ShadowlingBlindnessSmoke
   - type: ShadowlingNullCharge
   - type: ShadowlingSonicScreech

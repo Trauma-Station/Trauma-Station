@@ -83,7 +83,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [MobHereticFleshAscendSegmentBase, BaseMob, MobCombat]
+  parent: [MobHereticFleshAscendSegmentBase, BaseMob, MobCombat, MobNightVision]
   id: MobHereticFleshAscend
   name: Lord of the Night
   description: An abomination made from dozens and dozens of severed and malformed limbs grasping onto each other.
@@ -136,10 +136,6 @@
     channels:
     - MansusLink
   - type: Examiner
-  - type: NightVision
-    color: "#82120a"
-    activateSound: null
-    deactivateSound: null
   - type: CombatMode
     toggleMouseRotator: false
   - type: ContentEye
@@ -153,7 +149,7 @@
     prototype: MobHereticFleshAscendSegment
   - type: WarpPoint
     follow: true
-    location: lord of the night
+    location: location-lord-of-the-night
   - type: Speech
     speechVerb: LargeMob
   - type: StatusIcon
@@ -190,6 +186,13 @@
     needsHands: false
   - type: Pullable
     canBeGrabbed: false
+  - type: Viewcone
+    baseConeAngle: 360
+  - type: ThermalVision
+    color: white
+    toggleAction: null
+    useShader: false
+    isActive: true
 
 - type: entity
   parent: MobHereticFleshAscendSegmentBase

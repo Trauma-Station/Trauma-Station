@@ -47,7 +47,7 @@ public sealed partial class PredatorSensesSystem : EntitySystem
 
         if (_drainable.Count == 0)
         {
-            _popup.PopupClient("There is no prey to be hunted here...", performer, PopupType.MediumCaution);
+            _popup.PopupEntity("There is no prey to be hunted here...", performer, PopupType.MediumCaution);
             return;
         }
 

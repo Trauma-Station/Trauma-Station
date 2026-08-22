@@ -13,7 +13,7 @@ namespace Content.Goobstation.Shared.GrabReleaseBind;
 /// </summary>
 public sealed partial class GrabReleaseBindSystem : EntitySystem
 {
-    [Dependency] private PullingSystem _pullingSystem = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -26,9 +26,9 @@ public sealed partial class GrabReleaseBindSystem : EntitySystem
 
     private void HandleResistGrab(ICommonSession? session)
     {
-        if (session?.AttachedEntity == null || !TryComp<PullableComponent>(session.AttachedEntity, out var pullable))
+        if (session?.AttachedEntity is not { } uid || !TryComp<PullableComponent>(uid, out var pullable))
             return;
 
-        _pullingSystem.TryStopPull(session.AttachedEntity.Value, pullable, session.AttachedEntity.Value);
+        _pulling.TryStopPull(uid, pullable, user: uid);
     }
 }

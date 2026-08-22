@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDartFrog1
+  name: Strawberry Poison Frog Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dart_frog1
+      sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDartFrog1
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDartFrog3
+  name: Azure Poison Frog Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dart_frog3
+      sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDartFrog3
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDartFrog6
+  name: Rose Poison Frog Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dart_frog6
+      sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDartFrog6
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBunny
+  name: Bunny Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bunny
+      sprite: _Trauma/Mobs/Animals/bunny.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBunny
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBunnySea
+  name: Sea Bunny Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: sea_bunny
+      sprite: _Trauma/Mobs/Animals/bunny.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBunnySea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSnakeGrass
+  name: Grass Snake Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: grass_snake
+      sprite: _Trauma/Mobs/Animals/grass_snake.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSnakeGrass

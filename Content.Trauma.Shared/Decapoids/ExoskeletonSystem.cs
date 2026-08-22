@@ -11,7 +11,6 @@ namespace Content.Trauma.Shared.Decapoids;
 /// </summary>
 public sealed partial class ExoskeletonSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityQuery<InjectorComponent> _injectorQuery = default!;
 
     public override void Initialize()
@@ -33,7 +32,7 @@ public sealed partial class ExoskeletonSystem : EntitySystem
     private bool IsHypospray(EntityUid uid) // Copypasted from HypoportSystem because uhh umm
     {
         var comp = _injectorQuery.Comp(uid);
-        if (!_proto.Resolve(comp.ActiveModeProtoId, out var mode))
+        if (!ProtoMan.Resolve(comp.ActiveModeProtoId, out var mode))
             return false; // invalid injector but not my problem
 
         // instant injection into mobs means hypospray

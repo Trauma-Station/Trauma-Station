@@ -31,6 +31,7 @@ public sealed partial class WeldbotComponent : Component
             { "Blunt", -10 },
             { "Slash", -10 },
             { "Piercing", -10 },
+            { "Ballistic", -10 },
             { "Structural", -20 }
         }
     };

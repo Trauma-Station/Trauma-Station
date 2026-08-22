@@ -45,7 +45,7 @@ public sealed partial class ConstructorSystem : SharedConstructorSystem
 
         _machine.Started(uid);
 
-        var proto = Proto.Index(id);
+        var proto = ProtoMan.Index(id);
         var completed = proto.Type switch
         {
             ConstructionType.Structure => await _construction.TryStartStructureConstruction(uid, id, OutputPosition(ent), Angle.Zero),

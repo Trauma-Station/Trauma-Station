@@ -92,7 +92,7 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Piercing: 14
+        Ballistic: 14 # Trauma
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
@@ -146,7 +146,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10 # Trauma
         Heat: 4
   - type: PointLight
     enabled: true
@@ -169,7 +169,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 11 # 20% decrease
+        Ballistic: 11 # 20% decrease # Trauma
     increaseOnly: true # Trauma - apply modifiers, but ignore decreases
 
 - type: entity
@@ -603,7 +603,7 @@
 #    lifetime: 0.4
 # Lavaland Change end
 
-# Deals less damage, glaive has better HP recovery
+  # Deals less damage, glaive has better HP recovery
 - type: entity
   id: BulletChargeGlaive
   name: leech bolt
@@ -617,26 +617,6 @@
       types:
         Blunt: 1
         Slash: 5
-
-- type: entity
-  parent: BulletRocket
-  id: BulletSingularityBusterRocket
-  categories: [ HideSpawnMenu ]
-  name: singularity buster rocket
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-    - state: buster
-  - type: SinguloFood
-    energy: -500
-  - type: Explosive # Goob
-    explosionType: Electrical
-    maxIntensity: 10
-    intensitySlope: 3
-    totalIntensity: 150
-    maxTileBreak: 1
-  - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
   parent: BaseBullet
@@ -654,8 +634,8 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
     layers:
-    - state: magicm_red
-      shader: unshaded
+      - state: magicm_red
+        shader: unshaded
   - type: Ammo
     muzzleFlash: null
   - type: Physics
@@ -1015,7 +995,7 @@
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 0
+        Ballistic: 0 # Trauma
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -1086,7 +1066,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10 # Trauma
 
 - type: entity
   id: BulletCannonBall
@@ -1457,7 +1437,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 2
+        Ballistic: 2 # Trauma
   - type: StunOnCollide #somewhat mirror to taser stats, meant to be tot 'sidegrade'
     stunAmount: 0
     knockdownAmount: 2.5

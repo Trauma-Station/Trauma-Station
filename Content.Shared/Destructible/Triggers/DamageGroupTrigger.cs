@@ -31,4 +31,20 @@ public sealed partial class DamageGroupTrigger : IThresholdTrigger
     {
         return system.Damageable.GetDamagePerGroup(damageable.Owner).GetValueOrDefault(DamageGroup) >= Damage * scale; // Trauma - multiply by scale
     }
+
+    public int CompareTo(IThresholdTrigger? other)
+    {
+        if (other is DamageGroupTrigger trigger && trigger.DamageGroup == DamageGroup)
+        {
+            return Damage.CompareTo(trigger.Damage);
+        }
+
+        // Not comparable...
+        return 0;
+    }
+
+    public bool Equals(IThresholdTrigger? other)
+    {
+        return other is DamageGroupTrigger trigger && trigger.DamageGroup == DamageGroup && trigger.Damage == Damage;
+    }
 }

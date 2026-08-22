@@ -1,6 +1,10 @@
 - type: vendingMachineInventory
   id: ChefvendInventory
   startingInventory:
+    # <Trauma>
+    DrinkFullFatCarton: 3
+    FoodCondimentPacketCocoa: 2
+    # </Trauma>
     ReagentContainerFlour: 2
     ReagentContainerCornmeal: 2
     ReagentContainerSugar: 2
@@ -12,7 +16,6 @@
     FoodCondimentBottleBBQ: 1
     FoodCondimentBottleVinegar: 2
     ReagentContainerOliveoil: 2
-    DrinkFullFatCarton: 3 # Trauma
     ReagentContainerMayo: 1
     VariantCubeBox: 1
     FoodContainerEgg: 1

@@ -15,8 +15,6 @@ namespace Content.Shared.Decals;
 // Trauma - completely rewrote decals to be entity based
 public abstract partial class SharedDecalSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected IMapManager MapManager = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] protected SharedMapSystem Map = default!;
     [Dependency] protected SharedTransformSystem Xform = default!;
@@ -153,7 +151,7 @@ public abstract partial class SharedDecalSystem : EntitySystem
     {
         decalId = EntityUid.Invalid;
 
-        if (!PrototypeManager.HasIndex<DecalPrototype>(decal.Id))
+        if (!ProtoMan.HasIndex<DecalPrototype>(decal.Id))
         {
             Log.Error($"Tried to spawn decal with invalid prototype {decal.Id} at {coordinates}!");
             return false;

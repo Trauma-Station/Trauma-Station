@@ -1,1 +1,1 @@
-flavor-complex-plasma = like plasma
+flavor-complex-plasma = like phoron

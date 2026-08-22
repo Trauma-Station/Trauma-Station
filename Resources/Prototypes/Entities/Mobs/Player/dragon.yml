@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase ] # Shitmed
+  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added AppearanceDragon
   id: BaseMobDragon
   suffix: ""
   name: space dragon
@@ -11,14 +11,8 @@
     defaultChannel: Dragonmind
     channels:
     - Dragonmind
-  - type: Damageable
-    damageModifierSet: Dragon
   - type: Injurable
     damageContainer: Biological
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: Fauna
   - type: LanguageSpeaker # carp language (keeping basic as an option because the space monster gloating is funny)
     speaks:
@@ -125,12 +119,12 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      450: Critical
-      500: Dead
+      375: Critical # Trauma - Was 450
+      400: Dead # Trauma - Was 500
   - type: SlowOnDamage
     speedModifierThresholds:
-      250: 0.7
-      400: 0.5
+      205: 0.7 # Trauma - Was 250
+      315: 0.5 # Trauma - Was 400
   # disable taking damage from fire, since its a fire breathing dragon
   - type: Flammable
     damage:
@@ -139,7 +133,6 @@
     allowed:
     - Electrocution
     - Pacified
-    - Adrenaline
   - type: Temperature
   - type: TemperatureDamage
     heatDamageThreshold: 2400
@@ -148,8 +141,8 @@
     updateInterval: 0.25
     metabolizerTypes: [ Dragon ]
     stages: [ Digestion, Bloodstream ]
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatDragon
       amount: 2
   - type: InteractionPopup
@@ -165,8 +158,8 @@
       path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
     damage:
       types:
-        Piercing: 15
-        Slash: 15
+        Piercing: 13 # Trauma - Was 15
+        Slash: 12 # Trauma - Was 15
   - type: Devourer
     foodPreferenceWhitelist:
       components:
@@ -176,13 +169,12 @@
       - MobState
       - Item # Trauma
     chemical: Ichor
-    healRate: 7.5
+    healRate: 5 # Trauma, was 7.5
     whitelist:
       components:
+      - Item # Trauma
       - MobState
       - Door
-      - Item # Trauma
-      tags:
       - Wall
   - type: Tag
     tags:
@@ -196,6 +188,11 @@
     - NamesDragon
     - NamesDragonTitle
     nameFormat: name-format-dragon
+  - type: Grammar
+    attributes:
+      proper: true
+  - type: NameIdentifier
+    group: null  # Strips the numeric identifier from the dragon's name, since they already have randomly-generated names anyway
   - type: Prying
     pryPowered: true
     force: true
@@ -215,6 +212,7 @@
         Blunt: -1.33
         Slash: -1.33
         Piercing: -1.33
+        Ballistic: -1.33
         Heat: -1
         Cold: -1
         Shock: -1
@@ -225,32 +223,12 @@
   - type: GhostRole
     mindRoles:
     - MindRoleDragon
-  #- type: ActionGun # Goobstation - remove fireball because it's tied to lungs now
-  #  action: ActionDragonsBreath
-  #  gunProto: DragonsBreathGun
+  #- type: ActionGrant # Trauma - it's tied to lungs now
+  #  actions:
+  #  - ActionDragonsBreath
   - type: GuideHelp
     guides:
     - MinorAntagonists
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  id: DragonsBreathGun
-  name: dragon's lung
-  description: For dragon's breathing.
-  components:
-  - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 5
-    rechargeSound:
-      path: /Audio/Animals/space_dragon_roar.ogg
-  - type: BasicEntityAmmoProvider
-    proto: ProjectileDragonsBreathSpread # Trauma - add Spread
-    capacity: 1
-    count: 1
-  - type: Gun
-    soundGunshot:
-      path: /Audio/Animals/space_dragon_roar.ogg
-    soundEmpty: null
-    projectileSpeed: 5
 
 - type: entity
   parent: BaseMobDragon
@@ -270,10 +248,9 @@
       0: Alive
       200: Dead
   # less meat spawned since it's a lot easier to kill
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatDragon
-      amount: 1
   - type: MeleeWeapon
     damage:
       types:
@@ -286,11 +263,12 @@
   description: Summons a carp rift that will periodically spawns carps.
   components:
   - type: Action
-    icon:
-      sprite: Interface/Actions/carp_rift.rsi
-      state: icon
     useDelay: 1
     priority: 3
+  - type: Sprite
+    sprite: Interface/Actions/carp_rift.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:DragonSpawnRiftActionEvent
 
@@ -301,45 +279,51 @@
   description: Attempt to break a structure with your jaws or swallow a creature.
   components:
   - type: Action
-    icon: { sprite : Interface/Actions/devour.rsi, state: icon }
-    iconOn: { sprite : Interface/Actions/devour.rsi, state: icon-on }
     itemIconStyle: BigAction
     priority: 1
+  - type: Sprite
+    sprite: Interface/Actions/devour.rsi
+    layers:
+    - state: icon
+      map: ["enum.ActionVisuals.Icon"]
+    - state: icon-on
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: TargetAction
   - type: EntityTargetAction
     canTargetSelf: false
     whitelist:
       components:
+      - Item # Trauma
       - MobState
       - Door
-      - Item # Goobstation
-      tags:
       - Wall
     event: !type:DevourActionEvent
 
 - type: entity
-  parent: [ BaseAction, DragonsBreathGun ] # Trauma - inherit from the gun too
+  parent: BaseAction
   id: ActionDragonsBreath
   name: "[color=orange]Dragon's Breath[/color]"
   description: Spew out flames at anyone foolish enough to attack you!
   components:
-  # <Trauma>
-  - type: GunAction
-  # </Trauma>
   - type: Action
-    # <Trauma>
-    raiseOnAction: true # action does the logic instead of the mob
     useDelay: 5
-    # </Trauma>
     # TODO: actual sprite and iconOn
-    icon: { sprite : Objects/Weapons/Guns/Projectiles/magic.rsi, state: fireball }
     itemIconStyle: NoItem # Trauma - was BigAction, dont show lungs
     priority: 2
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Animals/space_dragon_breath.ogg
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
   - type: TargetAction
     checkCanAccess: false
     range: 0
   - type: WorldTargetAction
-    event: !type:ActionGunShootEvent
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileDragonsBreath
+      projectileSpeed: 5
 
 - type: entity
   parent: Smoke

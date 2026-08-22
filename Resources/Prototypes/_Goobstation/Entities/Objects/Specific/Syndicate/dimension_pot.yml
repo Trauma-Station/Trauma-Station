@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: DimensionPot
   parent: PottedPlantBase
+  id: DimensionPot
   suffix: Dimension
+  categories: [ DoNotMap ]
   components:
   - type: Sprite
     layers:
@@ -69,3 +70,11 @@
         layer:
         - WallLayer
         hard: false
+
+- type: entity
+  parent: PortalBlue
+  id: DimensionPotExitPortal
+  suffix: Dimension pot exit
+  components:
+  - type: Portal
+    canTeleportToOtherMaps: true # or else you cant leave

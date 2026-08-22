@@ -53,6 +53,7 @@ public sealed partial class ZombieComponent : Component
         {
             {"Slash", 0.5},
             {"Piercing", 0.3},
+            {"Ballistic", 0.3}, // Trauma
             {"Blunt", 0.1},
         }
     };
@@ -105,13 +106,14 @@ public sealed partial class ZombieComponent : Component
     [DataField("passiveHealing")]
     public DamageSpecifier PassiveHealing = new()
     {
-        DamageDict = new () ///Changed to be higher for goob
+        DamageDict = new ()
         {
-            { "Blunt", -2 },
-            { "Slash", -1 },
-            { "Piercing", -1 },
-            { "Heat", -1 },
-            { "Shock", -1 }
+            { "Blunt", -0.4 },
+            { "Slash", -0.2 },
+            { "Piercing", -0.2 },
+            { "Ballistic", -0.2 }, // Trauma
+            { "Heat", -0.02 },
+            { "Shock", -0.02 }
         }
     };
 
@@ -127,13 +129,16 @@ public sealed partial class ZombieComponent : Component
     [DataField("healingOnBite")]
     public DamageSpecifier HealingOnBite = new()
     {
-        DamageDict = new() ///Changed to be higher for goob
+        DamageDict = new()
         {
+            // <Trauma> - 2 -> 25, added more types
             { "Blunt", -25 },
             { "Slash", -25 },
             { "Piercing", -25 },
+            { "Ballistic", -25 }, // Trauma
             { "Heat", -25 },
             { "Shock", -25 }
+            // </Trauma>
         }
     };
 

@@ -7,9 +7,9 @@ namespace Content.Shared.UserInterface
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
     public sealed partial class ActivatableUIComponent : Component
     {
+        [AutoNetworkedField] // Trauma
         [DataField(required: true, customTypeSerializer: typeof(EnumSerializer))]
-        [AutoNetworkedField] // Goob edit
-        public Enum? Key;
+        public Enum Key;
 
         /// <summary>
         /// Whether the item must be held in one of the user's hands to work.

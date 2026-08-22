@@ -31,8 +31,7 @@
     resetOnHandSelected: false
     altClickAttack: true
     canMiss: false
-    canParryLight: false
-    canParryWide: false
+    canBeParried: false
     damage:
       types:
         Heat: 0
@@ -157,11 +156,16 @@
           - CosmicColossus
           tags:
           - Bot
-      damage:
+      damage: &dmg
         types:
           Blunt: 167
           Slash: 167
           Piercing: 167
+          # Needed to instakill airlocks
+          # Should be possible without this but for some reason airlock destructible thresholds are sorted and the one
+          # that destroys airlock at 500 damage is lower priority than consraph change threshold at 450 damage
+          # We just rely oun autooverkill threshold for this (1000 damage)
+          Structural: 500
       splitDamage: SplitEnsureAll
       targetPart: Chest
     - !type:HealthChange
@@ -176,13 +180,8 @@
           components:
           - Edible
           - ShadowCloakEntity
-          tags:
           - Wall # HereticRustGraspWallEffect handles walls
-      damage:
-        types:
-          Blunt: 167
-          Slash: 167
-          Piercing: 167
+      damage: *dmg
       splitDamage: SplitEnsureAll
       targetPart: Chest
 

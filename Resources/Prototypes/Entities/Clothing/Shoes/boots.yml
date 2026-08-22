@@ -1,9 +1,13 @@
 - type: entity
-  parent: ClothingShoesBaseButcherable
+  parent: [ClothingShoesBaseButcherable, BaseEngineeringCargoContraband] # Trauma - contraband
   id: ClothingShoesBootsWork
   name: workboots
   description: Engineering lace-up work boots for the especially blue-collar.
   components:
+  # <Trauma>
+  - type: SlowdownResistance
+    reduction: 0.1
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/workboots.rsi
   - type: Clothing
@@ -11,11 +15,15 @@
   - type: Matchbox
 
 - type: entity
-  parent: [ClothingShoesMilitaryBase, BaseSecurityCargoContraband] # Goob edit - Also allowed for Cargo
+  parent: [ClothingShoesMilitaryBase, BaseSecuritySalvageContraband] # Trauma - added Salvage to contraband
   id: ClothingShoesBootsJack
   name: jackboots
   description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/jackboots.rsi
   - type: Clothing
@@ -52,6 +60,10 @@
   name: combat boots
   description: Robust combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/combatboots.rsi
   - type: Clothing
@@ -184,7 +196,7 @@
     sprite: Clothing/Shoes/Boots/winterbootssyndicate.rsi
 
 - type: entity
-  parent: ClothingShoesBaseWinterBoots
+  parent: [ClothingShoesBaseWinterBoots, BaseSlicingRefinable]
   id: ClothingShoesBootsWinterWeb
   name: web winter boots
   description: Boots made out of dense webbing to help survive even the coldest of winters.
@@ -203,8 +215,8 @@
       reagents:
       - ReagentId: Fiber
         Quantity: 20
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialWebSilk1
       amount: 2
   - type: Construction

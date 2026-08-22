@@ -49,7 +49,8 @@ artifact-trigger-hint-death = Life essence
 artifact-trigger-hint-radiation = Radiation
 artifact-trigger-hint-pressure = Extreme pressure
 artifact-trigger-hint-regular-gases = Standard atmospheric gases
-artifact-trigger-hint-plasma = Gaseous plasma
+# Trauma - plasma -> phoron
+artifact-trigger-hint-plasma = Gaseous phoron
 artifact-trigger-hint-land = Active deceleration
 artifact-trigger-hint-examine = Examination
 artifact-trigger-hint-medical = Therapeutic chemicals
@@ -60,12 +61,14 @@ xenoarch-trigger-tip-cold = Low temperature gas
 xenoarch-trigger-tip-no-oxygen = Oxygen-free environment
 xenoarch-trigger-tip-water = Water
 xenoarch-trigger-tip-co2 = Carbon dioxide
-xenoarch-trigger-tip-plasma = Non-solid plasma
+# Trauma - plasma -> phoron
+xenoarch-trigger-tip-plasma = Non-solid phoron
 xenoarch-trigger-tip-tritium = Tritium
 xenoarch-trigger-tip-ammonia = Ammonia
 xenoarch-trigger-tip-n2o = Nitrous oxide
 xenoarch-trigger-tip-frezon = Frezon
-xenoarch-trigger-tip-radiation = Radiation
+xenoarch-trigger-tip-radiation = Heavy-ion radiation
+xenoarch-trigger-tip-microwave = Microwave radiation
 xenoarch-trigger-tip-brute-damage = Physical damage
 xenoarch-trigger-tip-interaction = Physical interaction
 xenoarch-trigger-tip-wrenching = Tightening
@@ -80,6 +83,13 @@ xenoarch-trigger-tip-blood = Blood
 xenoarch-trigger-tip-throw = Being thrown
 xenoarch-trigger-tip-death = Death
 xenoarch-trigger-tip-magnet = Magnetic waves
+xenoarch-trigger-tip-money = Bribery
+xenoarch-trigger-tip-knowledge = Knowledge Intake
+xenoarch-trigger-tip-carbs = Carbohydrate Intake
+xenoarch-trigger-tip-meat = Protein Intake
+xenoarch-trigger-tip-produce = Healthy Produce Intake
+xenoarch-trigger-tip-stamp = Bureaucratic Approval
+xenoarch-trigger-tip-shock = Electrical Shock
 
 ### Description hints
 xenoarch-trigger-examine-wrenching = There's a loose bit spinning around.

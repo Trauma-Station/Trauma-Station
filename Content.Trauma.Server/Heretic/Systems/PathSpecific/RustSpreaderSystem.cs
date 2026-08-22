@@ -14,8 +14,7 @@ namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed partial class RustSpreaderSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
-    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private ITileDefinitionManager _tiles = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     [Dependency] private HereticAbilitySystem _ability = default!;
@@ -41,7 +40,7 @@ public sealed partial class RustSpreaderSystem : EntitySystem
     private void OnInit(Entity<RustSpreaderComponent> ent, ref MapInitEvent args)
     {
         var coords = _xform.GetMapCoordinates(ent.Owner);
-        if (!_mapManager.TryFindGridAt(coords, out var gridUid, out var grid))
+        if (!_map.TryFindGridAt(coords, out var gridUid, out var grid))
         {
             QueueDel(ent);
             return;
@@ -146,7 +145,7 @@ public sealed partial class RustSpreaderSystem : EntitySystem
                     spreader.ProcessedTiles.Add(neighbor);
                 }
 
-                var tileDef = (ContentTileDefinition) _tileDefinitionManager[tile.Tile.TypeId];
+                var tileDef = (ContentTileDefinition) _tiles[tile.Tile.TypeId];
 
                 if (_ability.CanRustTile(tileDef))
                     _ability.MakeRustTile(tile.GridUid, mapGrid, tile, spreader.TileRune);

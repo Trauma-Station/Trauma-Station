@@ -14,7 +14,6 @@
   - !type:ModifyStatusEffect
     effectProto: HysteriaStatusEffect
     time: 30
-  - !type:GenericStatusEffect
-    key: Flashed
-    component: Flashed
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectFlashed
     time: 3

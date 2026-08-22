@@ -33,7 +33,7 @@ public sealed partial class HereticCloakSystem : EntitySystem
         foreach (var effect in effects)
         {
             if (effect.Comp1.LoseFocusMessage is { } message)
-                _popup.PopupPredicted(Loc.GetString(message), ent, ent);
+                _popup.PopupEntity(Loc.GetString(message), ent, ent);
             if (effect.Comp1.RequiresFocus)
                 PredictedQueueDel(effect.Owner);
         }

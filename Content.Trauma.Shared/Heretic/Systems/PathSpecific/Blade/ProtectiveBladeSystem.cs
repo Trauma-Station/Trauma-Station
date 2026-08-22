@@ -58,7 +58,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
         SubscribeLocalEvent<ProtectiveBladesComponent, ProtectiveBladeUsedEvent>(OnBladeUsed);
         SubscribeLocalEvent<ProtectiveBladesComponent, BeforeDamageChangedEvent>(OnTakeDamage);
         SubscribeLocalEvent<ProtectiveBladesComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction,
-            after: [typeof(SharedHereticAbilitySystem), typeof(RiposteeSystem), typeof(UnfathomableCurioSystem)]);
+            after: [typeof(SharedHereticAbilitySystem), typeof(RiposteeSystem), typeof(SharedUnfathomableCurioSystem)]);
         SubscribeLocalEvent<ProtectiveBladesComponent, ProjectileReflectAttemptEvent>(OnProjectileReflectAttempt);
         SubscribeLocalEvent<ProtectiveBladesComponent, HitScanReflectAttemptEvent>(OnHitscanReflectAttempt);
 

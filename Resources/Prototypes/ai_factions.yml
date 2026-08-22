@@ -65,8 +65,8 @@
 
 - type: npcFaction
   id: PetsNT
-  friendly:
-  - NanoTrasen
+  # friendly: # Trauma
+  # - NanoTrasen
   hostile:
   # <Goob>
   - Balloon # Pets can join the fight against the balloons

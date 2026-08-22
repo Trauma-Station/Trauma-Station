@@ -4,6 +4,7 @@
   parent: BaseScientificKnowledge
   id: JanitorKnowledge
   name: Janitor
+  description: Helps you throw out trash. That's it.
   components:
   - type: Knowledge
     experienceCost: 5

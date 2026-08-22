@@ -4,7 +4,22 @@
   id: ShardBase
   description: It's a shard of some unknown material.
   components:
+  # <Trauma>
+  - type: EmbeddableProjectile # so spacewind doesnt massacre the entire station :-)
+    sound: /Audio/Weapons/bladeslice.ogg
+  - type: Scalpel
+    speed: 0.45
+  - type: ThrowableBlocked
+    behavior: Damage
+    damage:
+      types:
+        Blunt: 100
+  - type: ReflectiveSurface
   - type: Sharp
+  # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
@@ -48,24 +63,16 @@
     damage:
       types:
         Slash: 2
-  - type: EmbeddableProjectile # Goobstation - Make shards embeddable so spacewind doesnt massacre the entire station :-)
-    sound: /Audio/Weapons/bladeslice.ogg
   - type: Tag
     tags:
+    # <Trauma>
+    - AnyGlassShard
+    - Recyclable
+    # </Trauma>
     - Trash
   - type: SpaceGarbage
   - type: Damageable
     damageModifierSet: Glass
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: StepTrigger
     intersectRatio: 0.2
     triggerGroups: # Goobstation
@@ -79,6 +86,7 @@
       launchForwardsMultiplier: 0
   - type: TriggerOnStepTrigger
   - type: DamageOnTrigger
+    targetPart: Feet # Trauma
     targetUser: true
     damage:
       types:
@@ -86,14 +94,6 @@
   - type: DeleteOnTrigger
   - type: StaticPrice
     price: 0
-  - type: Scalpel # Shitmed
-    speed: 0.45
-  - type: ThrowableBlocked # Goobstation
-    behavior: Damage
-    damage:
-      types:
-        Blunt: 100
-  - type: ReflectiveSurface # Goob
 
 - type: entity
   parent: ShardBase
@@ -112,6 +112,10 @@
         Piercing: 4.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - GlassShard
       - Trash
   - type: Solution
@@ -149,6 +153,10 @@
         Piercing: 5.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - ReinforcedGlassShard
       - Trash
   - type: Solution
@@ -190,6 +198,10 @@
         Piercing: 6.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - PlasmaGlassShard
       - Trash
   - type: Solution
@@ -231,6 +243,10 @@
         Radiation: 2.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - UraniumGlassShard
       - Trash
   - type: Solution
@@ -275,7 +291,5 @@
       reagents:
       - ReagentId: Silicon
         Quantity: 5
-      - ReagentId: Zinc
-        Quantity: 1.65
-      - ReagentId: Copper
-        Quantity: 3.35
+      - ReagentId: Brass
+        Quantity: 5

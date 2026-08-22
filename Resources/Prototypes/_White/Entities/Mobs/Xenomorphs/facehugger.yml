@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseMob, ClothingMaskBase, MobDamageable, BaseXenomorphGhostRole ]
+  parent: [ BaseMob, ClothingMaskBase, MobDamageable, BaseXenomorphGhostRole, BaseSlicingRefinable ]
   id: MobXenomorphFaceHugger
   name: xenomorph facehugger
   description: A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.
@@ -23,14 +23,16 @@
   - type: GhostRole
     name: ghost-role-information-facehugger-name
     description: ghost-role-information-facehugger-description
+    raffle:
+      settings: insta
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: mumble
+  - type: ReplacementAccent
+    accent: mumble
+    relayAccent: true
   - type: Damageable
     damageModifierSet: Xenomorph
   - type: Injurable
@@ -51,20 +53,19 @@
         Base: facehugger_dead
   - type: MeleeWeapon
     hidden: true
-    canHeavyAttack: false
+    canWideSwing: false
     angle: 0
     damage:
       types:
         Blunt: 0
   - type: Temperature
-    currentTemperature: 310.15
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
-      amount: 1
   - type: FaceHugger
     blacklist:
       components:
@@ -132,30 +133,22 @@
         layer:
         - LowImpassable
         hard: false
-  - type: LanguageSpeaker # Trauma
+  - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Trauma
     understands:
     - Xeno
-#    - XenoHivemind # Trauma
     - Hissing
     - Draconic
   - type: Speech
     speechSounds: Xenomorph
     speechVerb: SmallMob
-  - type: ReplacementAccent
-    accent: xeno
   - type: Vocal
-    sounds:
-      Male: Xenomorph
-      Female: Xenomorph
-      Unsexed: Xenomorph
-  - type: CollectiveMind # Trauma
+    emoteSounds: Xenomorph
+  - type: CollectiveMind
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
-  # <Trauma>
   - type: ThermalVision
     toggleAction: ToggleThermalVisionXenomorph
     color: white
@@ -190,4 +183,3 @@
     canEmag: false
     canExamine: false
   - type: FaceHuggerLeap
-  # </Trauma>

@@ -10,3 +10,10 @@
   id: Vomit
   effects:
   - !type:Vomit
+
+- type: entityEffect
+  id: LockUp
+  effects:
+  - !type:TeleportRandomArea
+    safe: true
+    compName: PrisonArea

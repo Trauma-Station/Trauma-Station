@@ -12,7 +12,6 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed partial class AreaSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MapAreaSystem _mapArea = default!;
     [Dependency] private TurfSystem _turf = default!;
@@ -39,20 +38,18 @@ public sealed partial class AreaSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AreaComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent]
     private void OnAnchorStateChanged(Entity<AreaComponent> ent, ref AnchorStateChangedEvent args)
     {
         // delete areas that get unanchored by explosions or other more cursed things
-        if (!args.Anchored)
+        if (!args.Anchored && !args.Detaching)
             PredictedQueueDel(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (!args.WasModified<EntityPrototype>())
@@ -67,7 +64,7 @@ public sealed partial class AreaSystem : EntitySystem
         DepartmentAreas.Clear();
         var name = Factory.GetComponentName<AreaComponent>();
         var dept = Factory.GetComponentName<DepartmentAreaComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: proto.HasComp(name) after engine update
             if (!proto.Components.ContainsKey(name))
@@ -147,11 +144,30 @@ public sealed partial class AreaSystem : EntitySystem
     /// </summary>
     public void AddOpenAreas<T>(MapId map, List<Entity<TransformComponent>> areas, Predicate<Entity<TransformComponent>> pred) where T: IComponent
     {
+        AddOpenAreas(map, areas, typeof(T), pred);
+    }
+
+    /// <summary>
+    /// Add areas not blocked by anything on a given map to a list, matching a predicate.
+    /// Uses the name of a component to narrow down the query, use a marker component's name for it to be faster.
+    /// </summary>
+    public void AddOpenAreas(MapId map, List<Entity<TransformComponent>> areas, string comp, Predicate<Entity<TransformComponent>> pred) // TODO: switch to CompName after contingency
+    {
+        var type = Factory.GetRegistration(comp).Type;
+        AddOpenAreas(map, areas, type, pred);
+    }
+
+    /// <summary>
+    /// Add areas not blocked by anything on a given map to a list, matching a predicate.
+    /// Uses a component type to narrow down the query, use a marker component's type for it to be faster.
+    /// </summary>
+    public void AddOpenAreas(MapId map, List<Entity<TransformComponent>> areas, Type type, Predicate<Entity<TransformComponent>> pred)
+    {
         // TODO: open areas cache...
-        var query = EntityQueryEnumerator<T, TransformComponent>();
         var mask = CollisionGroup.MobMask;
-        while (query.MoveNext(out var uid, out _, out var xform))
+        foreach (var (uid, _) in EntityManager.GetAllComponents(type, true))
         {
+            var xform = Transform(uid);
             if (xform.MapID != map)
                 continue;
 

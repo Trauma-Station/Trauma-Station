@@ -27,6 +27,16 @@
         - TabletopMachineMask
         layer:
         - TabletopMachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: ActivatableUI
     key: enum.FaxUiKey.Key
   - type: ActivatableUIRequiresPower
@@ -90,9 +100,9 @@
   components:
   - type: Sprite
     layers:
-      - state: icon
-        map: [ "base" ]
-        color: "#bfe3ff"
+    - state: icon
+      map: [ "base" ]
+      color: "#bfe3ff"
   - type: FaxMachine
     name: "Central Command"
     notifyAdmins: true
@@ -105,9 +115,9 @@
   components:
   - type: Sprite
     layers:
-      - state: icon
-        map: [ "base" ]
-        color: "#a3a3a3"
+    - state: icon
+      map: [ "base" ]
+      color: "#a3a3a3"
   - type: FaxMachine
     name: "ERR*?*%!"
     responsePings: false

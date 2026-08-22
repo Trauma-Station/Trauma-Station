@@ -254,6 +254,25 @@
   components:
   - type: Rehydratable
     possibleSpawns:
+    # <Trauma>
+    - MobBearSea
+    - MobSquidSea
+    - MobSpiderCrabSea
+    - MobKraitSea
+    - MobArcherSea
+    - MobBunnyEvil
+    - MobEelSea
+    - MobCobra
+    - MobYellowBellySnake
+    - MobMantis
+    - MobMantisShrimp
+    - MobShrimp
+    - MobDartFrog2
+    - MobDartFrog4
+    - MobDartFrog5
+    - MobCobraSpace
+    - MobGorillaAngry
+    # </Trauma>
     - MobCarpHolo
     - MobAngryBee
     - MobAdultSlimesYellowAngry

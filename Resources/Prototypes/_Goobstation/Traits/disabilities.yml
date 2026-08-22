@@ -14,14 +14,6 @@
   - type: LegsParalyzed
 
 - type: trait
-  id: ByondYourPrime
-  name: trait-tile-movement-name
-  description: trait-tile-movement-desc
-  category: Disabilities
-  components:
-  - type: TileMovement
-
-- type: trait
   id: SocialAnxietyTrait
   name: trait-social-anxiety-name
   description: trait-social-anxiety-disc

@@ -36,9 +36,9 @@ knowledge-path-side-t1-shark-name = Scorching Shark
 knowledge-path-side-t1-shark-desc =
     The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators.
 
-    Allows you to transmute three piles of ash, a liver, and three sheets of plasma into three Fire Sharks.
+    Allows you to transmute three piles of ash, a liver, and three sheets of phoron into three Fire Sharks.
     Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks.
-    Fire Sharks ignite their victims and drop plasma sheet once they die.
+    Fire Sharks ignite their victims and drop phoron sheet once they die.
     You can only create six at a time.
 
 knowledge-path-side-t1-ether-name = Ether Of The Newborn
@@ -59,15 +59,6 @@ knowledge-path-side-t1-realignment-desc =
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
     Doesn't require focus to cast.
 
-knowledge-path-side-t1-envy-name = Rite of Stolen Faces
-knowledge-path-side-t1-envy-desc =
-    One day, a thief grew tired of stealing gold, so he began stealing something far more valuable: identities.
-
-    Transmute a knife, a heart and a mask of a clown or a mime to create Envy's Knife.
-    Envy's Knife changes your appearance and name to whoever you stabbed with it.
-    You can revert back to your identity at will.
-    Ascension reveals your true identity and prevents you from using the knife.
-
 knowledge-path-side-t1-mask-name = Mask of Madness
 knowledge-path-side-t1-mask-desc =
     Fear pierces you to your core, every instinct screams to tear your gaze away, but it is too late...
@@ -75,16 +66,10 @@ knowledge-path-side-t1-mask-desc =
     "Why? Why was I cursed with sight to witness this?"
 
     Allows you to transmute any mask, a stun baton, and a liver to create a Mask of Madness.
-    The mask protects you from bright flashes and instills extreme fear into heathens who witness it.
+    The mask protects you from bright flashes and instills extreme fear into heathens who witness it,
+    making them perceive everyone as a person who wears the mask.
+    It can be toggled to give you night vision instead, disabling fear and eye protection.
     It can also be forced onto a heathen, to make them unable to take it off...
-
-knowledge-path-side-t1-curio-name = Unfatomable Curio
-knowledge-path-side-t1-curio-desc =
-    The Mansus holds many curiosities, some are not meant for the mortal eye.
-
-    Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
-    a belt that has a lot of storage space. Whilst worn it will veil you,
-    blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
 
 knowledge-path-side-t1-coin-name = Eldritch Coin
 knowledge-path-side-t1-coin-desc =
@@ -93,12 +78,23 @@ knowledge-path-side-t1-coin-desc =
     Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
     The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
-## T2
-knowledge-path-side-t2-ice-spear-name = Mysteries of Creation
-knowledge-path-side-t2-ice-spear-desc =
+knowledge-path-side-t1-ice-spear-name = Mysteries of Creation
+knowledge-path-side-t1-ice-spear-desc =
     Artifacts linked to the Winter Dawn exude unnatural stillness. Time slows around them. Fires choke. Thoughts become brittle. Proximity breeds hallucinations of endless white fields, a sky with no sun, and a voice that speaks only in cracking ice.
 
-    Grants you Mysteries of Creation, a spell that allows you to summon the Glacier Spear at will. This magical spear chills victims upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube. If the spear is destroyed, activating this ability will create a new one, otherwise it will summon the existing spear into your hand.
+    Allows you to transmute a spear in a cold environment to create Glacier Spear. This magical spear chills victims
+    upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube.
+    Spear can be freely recalled in your hand unless it is destroyed.
+
+## T2
+knowledge-path-side-t2-curio-name = Unfatomable Curio
+knowledge-path-side-t2-curio-desc =
+    The Mansus holds many curiosities, some are not meant for the mortal eye.
+
+    Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
+    a belt that has a lot of storage space. Whilst worn it will veil you,
+    blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
+    Additionally, when veil is active, you gan an aura that massively slows down projectiles passing by.
 
 knowledge-path-side-t2-rustwalker-name = Rusted Ritual
 knowledge-path-side-t2-rustwalker-desc =
@@ -183,8 +179,16 @@ knowledge-path-side-t2-rifle-desc =
     These shots function as normal, albeit weak high-caliber munitions when fired.
     You can aim the rifle at distant foes by right-clicking them in Combat Mode,
     causing the shot to mark your victim with your grasp, teleport you directly to them and deal double damage.
+    Allows you to see people through walls when wielded.
 
     You can transmute 3 ballistic ammo casings (used or unused) of any caliber, including shotgun shells to create extra ammunition for the Lionhunter Rifle.
+
+knowledge-path-side-t2-rustgrenade-name = Rust Sower Grenade
+knowledge-path-side-t2-rustgrenade-desc =
+    The choked vines of the Rusted Hills are burdened with such overripe fruits. It undoes the markers of progress, leaving a clean slate to work into new shapes.
+
+    Transmute a modular grenade casing, a rag and two pieces of trash to create the cursed grenade filled with Eldritch Rust.
+    Upon detonation, it releases a huge cloud that blinds organics, rusts affected turfs and obliterates silicons and mechs.
 
 ## T3
 knowledge-path-side-t3-grasp-name = Mind Grasp
@@ -232,3 +236,20 @@ knowledge-path-side-t3-admonitions-desc =
     You are also visible to people close to you.
     Forest Admonitions is harder to reveal by damage compared to Cloak Of Shadow, but it has longer cooldown as well.
     While active, you also spread pale fog around your position, which muffles sounds, debuffs heathens and disables shadow cloak for other heretics.
+
+knowledge-path-side-t3-medal-name = Sharp Medal
+knowledge-path-side-t3-medal-desc =
+    They say that the blacksmith who forged this charm did not use ordinary fuel,
+    but his own fingers, which he threw into the forge one by one.
+    The Sharp Medal remembers this and demands more.
+
+    Transmute 2 hands, eyes and a knife to create the Sharp Medal.
+    The Sharp Medal allows you to throw your blades akin to boomerangs, and also functions as a focus.
+
+knowledge-path-side-t3-ash-spirit-name = Ashen Ritual
+knowledge-path-side-t3-ash-spirit-desc =
+    I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on.
+
+    Allows you to transmute a Bonfire and a book to create an Ash Spirit.
+    Ash Spirits have a long range jaunt and the ability to melt the foes at range.
+    You can only create two at a time.

@@ -1,0 +1,295 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: decal
+  id: checkerNESW_dark
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: checkerNESW_dark
+
+- type: decal
+  id: checkerNESW_steel
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: checkerNESW_steel
+
+- type: decal
+  id: checkerNESW_white
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: checkerNESW_steel
+
+- type: decal
+  id: checkerNWSE_dark
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: checkerNWSE_dark
+
+- type: decal
+  id: checkerNWSE_steel
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: checkerNWSE_steel
+
+- type: decal
+  id: checkerNWSE_white
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: checkerNWSE_white
+
+- type: decal
+  id: halftile_dark
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_dark
+
+- type: decal
+  id: halftile_steel
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_steel
+
+- type: decal
+  id: halftile_white
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_white
+
+- type: decal
+  id: halftile_dark_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_dark_90
+
+- type: decal
+  id: halftile_steel_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_steel_90
+
+- type: decal
+  id: halftile_white_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_white_90
+
+- type: decal
+  id: halftile_dark_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_dark_180
+
+- type: decal
+  id: halftile_steel_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_steel_180
+
+- type: decal
+  id: halftile_white_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_white_180
+
+- type: decal
+  id: halftile_dark_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_dark_270
+
+- type: decal
+  id: halftile_steel_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_steel_270
+
+- type: decal
+  id: halftile_white_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: halftile_white_270
+
+- type: decal
+  id: quartertile_dark
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_dark
+
+- type: decal
+  id: quartertile_steel
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_steel
+
+- type: decal
+  id: quartertile_white
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_white
+
+- type: decal
+  id: quartertile_dark_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_dark_90
+
+- type: decal
+  id: quartertile_steel_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_steel_90
+
+- type: decal
+  id: quartertile_white_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_white_90
+
+- type: decal
+  id: quartertile_dark_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_dark_180
+
+- type: decal
+  id: quartertile_steel_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_steel_180
+
+- type: decal
+  id: quartertile_white_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_white_180
+
+- type: decal
+  id: quartertile_dark_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_dark_270
+
+- type: decal
+  id: quartertile_steel_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_steel_270
+
+- type: decal
+  id: quartertile_white_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: quartertile_white_270
+
+- type: decal
+  id: threequartertile_dark
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_dark
+
+- type: decal
+  id: threequartertile_steel
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_steel
+
+- type: decal
+  id: threequartertile_white
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_white
+
+- type: decal
+  id: threequartertile_dark_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_dark_90
+
+- type: decal
+  id: threequartertile_steel_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_steel_90
+
+- type: decal
+  id: threequartertile_white_90
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_white_90
+
+- type: decal
+  id: threequartertile_dark_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_dark_180
+
+- type: decal
+  id: threequartertile_steel_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_steel_180
+
+- type: decal
+  id: threequartertile_white_180
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_white_180
+
+- type: decal
+  id: threequartertile_dark_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_dark_270
+
+- type: decal
+  id: threequartertile_steel_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_steel_270
+
+- type: decal
+  id: threequartertile_white_270
+  tags: ["station", "markings"]
+  sprite:
+    sprite: _Trauma/Decals/tile.rsi
+    state: threequartertile_white_270

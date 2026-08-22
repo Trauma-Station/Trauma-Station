@@ -206,7 +206,7 @@
   - type: Tag
     tags:
     - Fruit # Seed of a fruit, you can yell at me
-    - Pistachios # Added tag due to CrateFoodGetMore interaction with BountyFruit.
+    - Pistachios # Added tag due to CrateServiceGetMore interaction with BountyFruit.
 
 - type: entity
   name: popcorn
@@ -217,7 +217,7 @@
   - type: FlavorProfile
     flavors:
       - corn
-      - salt
+      - salty
       - butter
   - type: Sprite
     state: popcorn
@@ -287,7 +287,7 @@
 
 - type: entity
   name: syndi-cakes
-  parent: FoodSnackBase
+  parent: FoodSnackHealthyBase # Trauma - healthy so syndie snack box isnt death sentence
   id: FoodSnackSyndi
   description: An extremely moist snack cake that tastes just as good after being nuked.
   components:

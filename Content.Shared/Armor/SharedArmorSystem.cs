@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Medical.Common.Body;
 using Content.Shared.Localizations;
+using Content.Trauma.Common.Armor;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -54,11 +55,32 @@ public abstract partial class SharedArmorSystem : EntitySystem
             return;
 
         // <Trauma>
-        if (args.Args.TargetPart is not {} partType || !component.ArmorCoverage.Contains(partType))
+        if (args.Args.TargetPart is not { } partType || !component.ArmorCoverage.Contains(partType))
             return;
 
-        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration)); // apply penetration to base modifiers
+        var isPrecise = (args.Args.Damage.Flags & DamageSpecifier.DamageFlags.PreciseHit) != 0;
+        var ev = new ArmorProtectAttemptEvent(args.Args.Origin, isPrecise);
+        RaiseLocalEvent(uid, ref ev);
+        var mult = ev.Multiplier;
+        if (mult <= 0f)
+            return;
+
+        // apply penetration to base modifiers
+        var modifierSet = DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration);
+        if (mult >= 1f)
+        {
+            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, modifierSet);
+            return;
+        }
+
+        var newModifierSet = new DamageModifierSet();
+        foreach (var (key, value) in modifierSet.Coefficients)
+        {
+            newModifierSet.Coefficients[key] = 1f - (1f - value) * mult;
+        }
+
+        newModifierSet.FlatReduction = modifierSet.FlatReduction;
+        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, newModifierSet);
         // </Trauma>
     }
 

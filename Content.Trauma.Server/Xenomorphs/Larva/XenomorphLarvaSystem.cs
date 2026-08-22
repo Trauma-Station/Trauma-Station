@@ -8,6 +8,7 @@ using Content.Trauma.Shared.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Larva;
 using Content.Shared.DoAfter;
 using Content.Shared.Gibbing;
+using Content.Shared.Traits.Assorted;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
@@ -84,6 +85,6 @@ public sealed partial class XenomorphLarvaSystem : EntitySystem
             return;
 
         _container.Remove(uid, container);
-        _gibbing.Gib(victim);
+        EnsureComp<UnrevivableComponent>(victim);
     }
 }

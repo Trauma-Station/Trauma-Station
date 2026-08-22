@@ -6,7 +6,6 @@ namespace Content.Trauma.Common.Language.Systems;
 
 public abstract partial class CommonLanguageSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     /// <summary>
     /// A cached instance of <see cref="PsychomanticPrototype"/>.
@@ -23,8 +22,8 @@ public abstract partial class CommonLanguageSystem : EntitySystem
         base.Initialize();
 
 
-        Universal = _prototype.Index<LanguagePrototype>(UniversalPrototype);
-        Psychomantic = _prototype.Index<LanguagePrototype>(PsychomanticPrototype);
+        Universal = ProtoMan.Index<LanguagePrototype>(UniversalPrototype);
+        Psychomantic = ProtoMan.Index<LanguagePrototype>(PsychomanticPrototype);
     }
 
     /// <summary>

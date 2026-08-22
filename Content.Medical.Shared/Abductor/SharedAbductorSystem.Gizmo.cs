@@ -72,7 +72,7 @@ public abstract partial class SharedAbductorSystem
 
         console.Target = ent.Comp.Target;
         Dirty(target, console);
-        _popup.PopupClient(Loc.GetString("abductors-ui-gizmo-transferred"), ent, args.User);
+        _popup.PopupEntity(Loc.GetString("abductors-ui-gizmo-transferred"), ent, args.User);
         var flashed = new List<EntityUid>(2) { ent.Owner, target };
         var filter = Filter.Local();
         var user = args.User;
@@ -135,6 +135,6 @@ public abstract partial class SharedAbductorSystem
         ent.Comp.BrainwashMode = !ent.Comp.BrainwashMode;
         Dirty(ent);
         var modeName = Loc.GetString(ent.Comp.BrainwashMode ? "abductors-gizmo-mode-brainwash" : "abductors-gizmo-mode-mark");
-        _popup.PopupClient(Loc.GetString("abductors-gizmo-mode-changed", ("mode", modeName)), ent, args.User);
+        _popup.PopupEntity(Loc.GetString("abductors-gizmo-mode-changed", ("mode", modeName)), ent, args.User);
     }
 }

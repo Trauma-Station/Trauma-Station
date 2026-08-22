@@ -6,6 +6,8 @@
   id: WeaponLauncherNonLethal
   description: Essentially a scaled up flare gun that takes 40mm shells; mechanical safety features prevent the loading and firing of lethal grenades.
   components:
+  - type: WeaponClass
+    class: NonLethal
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Launchers/riotlauncher.rsi
     layers:

@@ -6,45 +6,37 @@ using Content.Goobstation.Shared.Blob.Components;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed partial class BlobbernautSystem : SharedBlobbernautSystem
-{
-
-}
+public sealed partial class BlobbernautSystem : SharedBlobbernautSystem;
 
 public sealed partial class BlobbernautVisualizerSystem : VisualizerSystem<BlobbernautComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BlobbernautComponent, AfterAutoHandleStateEvent>(OnBlobTileHandleState);
-    }
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly DamageStateVisualLayers[] Layers =
     [
         DamageStateVisualLayers.Base, DamageStateVisualLayers.BaseUnshaded,
     ];
 
-    private void UpdateAppearance(EntityUid id, BlobbernautComponent blobbernaut, AppearanceComponent? appearance = null, SpriteComponent? sprite = null)
+    private void UpdateAppearance(Entity<BlobbernautComponent> ent, SpriteComponent? sprite = null)
     {
-        if (!Resolve(id, ref appearance, ref sprite))
+        if (!Resolve(ent, ref sprite))
             return;
 
+        var color = ProtoMan.Index(ent.Comp.CurrentChem).Color;
         foreach (var key in Layers)
         {
-            if (!sprite.LayerMapTryGet(key, out _))
-                continue;
-
-            sprite.LayerSetColor(key, blobbernaut.Color);
+            _sprite.LayerSetColor((ent, sprite), key, color);
         }
     }
 
-    protected override void OnAppearanceChange(EntityUid uid, BlobbernautComponent component, ref AppearanceChangeEvent args)
+    protected override void OnAppearanceChange(EntityUid uid, BlobbernautComponent comp, ref AppearanceChangeEvent args)
     {
-        UpdateAppearance(uid, component, args.Component, args.Sprite);
+        UpdateAppearance((uid, comp), args.Sprite);
     }
 
-    private void OnBlobTileHandleState(EntityUid uid, BlobbernautComponent component, ref AfterAutoHandleStateEvent args)
+    [SubscribeLocalEvent]
+    private void OnBlobTileHandleState(Entity<BlobbernautComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateAppearance(uid, component);
+        UpdateAppearance(ent);
     }
 }

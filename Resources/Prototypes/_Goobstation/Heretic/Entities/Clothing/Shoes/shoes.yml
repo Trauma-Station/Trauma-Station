@@ -32,6 +32,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.5
     traumaDeductions:

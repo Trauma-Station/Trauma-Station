@@ -11,23 +11,17 @@ namespace Content.Goobstation.Shared.Wraith.Minions.Harbinger;
 
 public sealed partial class SpikerLashSystem : EntitySystem
 {
-    [Dependency] private SharedStunSystem _stunSystem = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SpikerLashComponent, SpikerLashEvent>(OnSpikerLash);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSpikerLash(Entity<SpikerLashComponent> ent, ref SpikerLashEvent args)
     {
-        _popup.PopupPredicted(Loc.GetString("wraith-spiker-lash", ("user", ent.Owner), ("target", args.Target)), ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("wraith-spiker-lash", ("user", ent.Owner), ("target", args.Target)), ent.Owner, ent.Owner, PopupType.MediumCaution);
         _audio.PlayPredicted(ent.Comp.LashSound, ent.Owner, args.Target);
-        _stunSystem.TryKnockdown(args.Target, ent.Comp.KnockdownDuration, true);
+        _stun.TryKnockdown(args.Target, ent.Comp.KnockdownDuration, true);
 
         if (!TryComp<BloodstreamComponent>(args.Target, out var blood))
             return;

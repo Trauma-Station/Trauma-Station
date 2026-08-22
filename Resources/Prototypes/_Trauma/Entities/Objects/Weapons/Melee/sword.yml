@@ -91,8 +91,8 @@
     walkModifier: 0.7
     sprintModifier: 0.7
   - type: Parry
-    maxParries: 3
-    maxReflects: 5
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.25
     parryMinSkill: 40
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg

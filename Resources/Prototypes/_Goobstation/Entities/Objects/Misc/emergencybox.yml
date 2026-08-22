@@ -165,7 +165,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
 
 - type: entity
   parent: BoxSurvivalSlots
@@ -211,7 +211,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
   - type: Sprite
     state: box_extend
 
@@ -259,7 +259,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
   - type: Sprite
     state: box_sec
 
@@ -307,7 +307,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
   - type: Sprite
     state: box_med
 
@@ -360,7 +360,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
 
 - type: entity
   parent: BoxSurvivalSlots
@@ -406,7 +406,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
   - type: Sprite
     state: box_syndie
 
@@ -470,7 +470,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
 
 
 ## EE PLASMAMEN
@@ -495,7 +495,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
 
 - type: entity
   parent: BoxSurvivalSlotsEngineering
@@ -517,7 +517,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
   - type: Sprite
     state: box_extend
 
@@ -541,7 +541,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
   - type: Sprite
     state: box_sec
 
@@ -565,7 +565,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
   - type: Sprite
     state: box_med
 
@@ -589,7 +589,7 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
 
 - type: entity
   parent: BoxSurvivalSlotsSyndicate
@@ -611,31 +611,9 @@
       spacepen:
       - SpaceMedipen
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
   - type: Sprite
     state: box_syndie
-
-- type: entity
-  parent: BoxSurvivalSlots
-  id: BoxMimeSlotsPlasma
-  suffix: Mime, Emergency Plasma
-  components:
-  - type: ContainerFill
-    containers:
-      water:
-      - DrinkMilkBottleFull
-      flare:
-      - Flare
-      tank:
-      - EmergencyPlasmaTankFilled
-      mask:
-      - ClothingMaskBreath
-      emergencypen:
-      - EmergencyMedipen
-      spacepen:
-      - SpaceMedipen
-  - type: Label
-    currentLabel: reagent-name-plasma
 
 - type: entity
   parent: BoxSurvivalSlots

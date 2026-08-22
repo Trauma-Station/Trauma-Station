@@ -8,45 +8,32 @@ namespace Content.Goobstation.Shared.Blob.Components;
 [RegisterComponent]
 public sealed partial class BlobObserverControllerComponent : Component
 {
-    public Entity<BlobObserverComponent> Blob;
+    [DataField]
+    public EntityUid Blob;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(false)]
 public sealed partial class BlobObserverComponent : Component
 {
+    public override bool SendOnlyToOwner => true;
+
     [ViewVariables]
     public bool IsProcessingMoveEvent;
 
-    //[AutoNetworkedField]
-    [ViewVariables]
-    public Entity<BlobCoreComponent>? Core = default!;
+    [DataField, AutoNetworkedField]
+    public EntityUid? Core;
 
-    /*[ViewVariables]
-    public bool CanMove = true;*/
+    [DataField, AutoNetworkedField]
+    public ProtoId<BlobChemPrototype> SelectedChemId = "ReactiveSpines";
 
-    [ViewVariables, AutoNetworkedField]
-    public BlobChemType SelectedChemId = BlobChemType.ReactiveSpines;
-
-    public override bool SendOnlyToOwner => true;
-
-    [ViewVariables, AutoNetworkedField]
-    public EntityUid VirtualItem = EntityUid.Invalid;
+    [DataField, AutoNetworkedField]
+    public EntityUid VirtualItem;
 }
 
 [Serializable, NetSerializable]
-public sealed class BlobChemSwapBoundUserInterfaceState(
-    BlobChemColors chemList,
-    BlobChemType selectedId)
-    : BoundUserInterfaceState
+public sealed class BlobSetChemMessage(ProtoId<BlobChemPrototype> chem) : BoundUserInterfaceMessage
 {
-    public readonly BlobChemColors ChemList = chemList;
-    public readonly BlobChemType SelectedChem = selectedId;
-}
-
-[Serializable, NetSerializable]
-public sealed class BlobChemSwapPrototypeSelectedMessage(BlobChemType selectedId) : BoundUserInterfaceMessage
-{
-    public readonly BlobChemType SelectedId = selectedId;
+    public readonly ProtoId<BlobChemPrototype> Chem = chem;
 }
 
 [Serializable, NetSerializable]
@@ -59,54 +46,30 @@ public sealed partial class BlobTransformTileActionEvent : WorldTargetActionEven
 {
     /// <summary>
     /// Type of tile that can be transformed.
-    /// Will be ignored if equals to Invalid.
+    /// Will be ignored if null.
     /// </summary>
     [DataField]
-    public BlobTileType TransformFrom = BlobTileType.Normal;
+    public ProtoId<BlobTilePrototype>? TransformFrom = "Normal";
 
     /// <summary>
     /// Type of the resulting tile.
     /// </summary>
-    [DataField]
-    public BlobTileType TileType = BlobTileType.Invalid;
+    [DataField(required: true)]
+    public ProtoId<BlobTilePrototype> TileType;
 
     /// <summary>
     /// Does this tile requires node nearby.
     /// </summary>
     [DataField]
     public bool RequireNode = true;
-
-    public BlobTransformTileActionEvent(EntityUid performer, EntityCoordinates target, BlobTileType transformFrom, BlobTileType tileType, bool requireNode) : this()
-    {
-        Performer = performer;
-        Target = target;
-        TransformFrom = transformFrom;
-        TileType = tileType;
-        RequireNode = requireNode;
-    }
 }
 
-public sealed partial class BlobCreateBlobbernautActionEvent : WorldTargetActionEvent
-{
+public sealed partial class BlobCreateBlobbernautActionEvent : WorldTargetActionEvent;
 
-}
+public sealed partial class BlobSplitCoreActionEvent : WorldTargetActionEvent;
 
-public sealed partial class BlobSplitCoreActionEvent : WorldTargetActionEvent
-{
+public sealed partial class BlobSwapCoreActionEvent : WorldTargetActionEvent;
 
-}
+public sealed partial class BlobToCoreActionEvent : InstantActionEvent;
 
-public sealed partial class BlobSwapCoreActionEvent : WorldTargetActionEvent
-{
-
-}
-
-public sealed partial class BlobToCoreActionEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class BlobSwapChemActionEvent : InstantActionEvent
-{
-
-}
+public sealed partial class BlobSwapChemActionEvent : InstantActionEvent;

@@ -8,35 +8,36 @@ namespace Content.Goobstation.Shared.Blob;
 
 public abstract partial class SharedBlobCarrierSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var blobFactoryQuery = EntityQueryEnumerator<BlobCarrierComponent>();
-        while (blobFactoryQuery.MoveNext(out var ent, out var comp))
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<BlobCarrierComponent>();
+        while (query.MoveNext(out var ent, out var comp))
         {
             if (!comp.HasMind)
                 return;
 
             comp.TransformationTimer += frameTime;
 
-            if (_gameTiming.CurTime < comp.NextAlert)
+            if (now < comp.NextAlert)
                 continue;
 
             var remainingTime = Math.Round(comp.TransformationDelay - comp.TransformationTimer, 0);
-            _popup.PopupClient(Loc.GetString("carrier-blob-alert", ("second", remainingTime)), ent, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("carrier-blob-alert", ("second", (int) remainingTime)), ent, ent, PopupType.LargeCaution);
 
-            comp.NextAlert = _gameTiming.CurTime + TimeSpan.FromSeconds(comp.AlertInterval);
+            comp.NextAlert = now + TimeSpan.FromSeconds(comp.AlertInterval);
 
-            if (!(comp.TransformationTimer >= comp.TransformationDelay))
-                continue;
-
-            TransformToBlob((ent, comp));
+            if (comp.TransformationTimer >= comp.TransformationDelay)
+                TransformToBlob((ent, comp));
         }
     }
 
-    protected abstract void TransformToBlob(Entity<BlobCarrierComponent> ent);
+    protected virtual void TransformToBlob(Entity<BlobCarrierComponent> ent)
+    {
+    }
 }

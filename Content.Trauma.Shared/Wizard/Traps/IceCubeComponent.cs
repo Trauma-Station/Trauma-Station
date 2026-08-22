@@ -11,10 +11,11 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Trauma.Shared.Wizard.Traps;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
 {
-    [ViewVariables(VVAccess.ReadOnly)]
-    public BodyType? OldBodyType = null;
+    [DataField, AutoNetworkedField]
+    public BodyType? OldBodyType;
 
     [DataField]
     public BodyType FrozenBodyType = BodyType.Dynamic;
@@ -41,15 +42,12 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
     public float TemperaturePerHeatDamageIncrease = 5f;
 
     [DataField]
-    public float SustainedDamageMeltProbabilityMultiplier = 4f;
-
-    [DataField]
-    public float StaminaDamageMeltProbabilityMultiplier = 5f;
+    public float SustainedDamageMeltProbabilityMultiplier = 3f;
 
     [DataField]
     public float DamageMeltProbabilityThreshold = 60f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float SustainedDamage;
 
     [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>))]
@@ -59,7 +57,7 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
     public int CollisionLayer = (int) CollisionGroup.WallLayer;
 
     [DataField]
-    public TimeSpan BreakFreeDelay = TimeSpan.FromSeconds(10);
+    public TimeSpan BreakFreeDelay = TimeSpan.FromSeconds(15);
 
     [DataField]
     public DamageModifierSet DamageReduction = new()
@@ -69,6 +67,7 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
             { "Blunt", 0.35f },
             { "Slash", 0.35f },
             { "Piercing", 0.35f },
+            { "Ballistic", 0.35f },
         },
     };
 

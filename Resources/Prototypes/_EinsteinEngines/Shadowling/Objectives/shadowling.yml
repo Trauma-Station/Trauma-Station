@@ -6,7 +6,7 @@
   description: I must ascend at all costs.
   components:
   - type: Objective
-    issuer: objective-issuer-shadowling
+    issuer: Shadowling
     unique: true
     difficulty: 3
     icon:

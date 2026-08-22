@@ -8,94 +8,92 @@ namespace Content.Trauma.Shared.CosmicCult;
 
 public sealed partial class CosmicShopSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private EntityQuery<CosmicCultComponent> _cultistQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<CosmicShopComponent, BoundUIOpenedEvent>(OnUIOpened);
-        SubscribeLocalEvent<CosmicShopComponent, InfluenceSelectedMessage>(OnInfluenceSelected);
-        SubscribeLocalEvent<CosmicShopComponent, RespecConfirmedMessage>(OnRespecConfirmed);
-    }
-
-    private void OnUIOpened(Entity<CosmicShopComponent> ent, ref BoundUIOpenedEvent args)
-    {
-        if (!HasComp<CosmicCultComponent>(args.Actor))
-            return;
-
-        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState());
-    }
-
-    #region UI listeners
+    [SubscribeLocalEvent]
     private void OnInfluenceSelected(Entity<CosmicShopComponent> ent, ref InfluenceSelectedMessage args)
     {
         var user = args.Actor;
-        if (!_prototype.TryIndex(args.InfluenceProtoId, out var proto) || !TryComp<CosmicCultComponent>(user, out var cultComp))
+        if (!ProtoMan.TryIndex(args.InfluenceProtoId, out var proto) || !_cultistQuery.TryComp(user, out var cultist))
             return;
 
-        if (cultComp.EntropyBudget < proto.Cost || cultComp.OwnedInfluences.Contains(proto))
+        if (cultist.EntropyBudget < proto.Cost || cultist.OwnedInfluences.Contains(proto))
             return;
+
+        cultist.EntropyBudget -= proto.Cost;
+        DirtyField(user, cultist, nameof(CosmicCultComponent.EntropyBudget));
+        cultist.OwnedInfluences.Add(proto);
+        DirtyField(user, cultist, nameof(CosmicCultComponent.OwnedInfluences));
 
         _audio.PlayLocal(ent.Comp.PurchaseSfx, user, user);
-        cultComp.OwnedInfluences.Add(proto);
 
         if (!proto.Passive)
         {
-            var actionEnt = _actions.AddAction(user, proto.Action);
-            cultComp.ActionEntities.Add(actionEnt);
+            if (_actions.AddAction(user, proto.Action) is not { } action)
+                return;
+
+            cultist.BoughtActions.Add(action);
+            DirtyField(user, cultist, nameof(CosmicCultComponent.BoughtActions));
         }
         else
         {
             if (proto.Add != null)
-                _entMan.AddComponents(args.Actor, proto.Add);
+                EntityManager.AddComponents(user, proto.Add);
 
             if (proto.Remove != null)
-                _entMan.RemoveComponents(args.Actor, proto.Remove);
+                EntityManager.RemoveComponents(user, proto.Remove);
         }
-
-        cultComp.EntropyBudget -= proto.Cost;
-        Dirty(user, cultComp); //force an update to make sure that the client has the correct set of owned abilities
-
-        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState());
     }
 
+    [SubscribeLocalEvent]
     private void OnRespecConfirmed(Entity<CosmicShopComponent> ent, ref RespecConfirmedMessage args)
     {
-        if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp) || cultComp.RespecsAvailable <= 0)
+        var user = args.Actor;
+        if (!_cultistQuery.TryComp(user, out var cultist) || cultist.RespecsAvailable <= 0)
             return;
 
-        if (cultComp.OwnedInfluences.Count == 0)
+        if (cultist.OwnedInfluences.Count == 0)
             return; // Nothing to respec
 
-        foreach (var influence in cultComp.OwnedInfluences)
+        cultist.RespecsAvailable--;
+
+        foreach (var influence in cultist.OwnedInfluences)
         {
-            if (!_prototype.Resolve(influence, out var proto)) continue;
-            cultComp.OwnedInfluences.Remove(influence);
-            cultComp.UnlockedInfluences.Add(influence);
-            cultComp.EntropyBudget += proto.Cost;
+            if (!ProtoMan.Resolve(influence, out var proto))
+                continue;
+
+            cultist.OwnedInfluences.Remove(influence);
+            cultist.UnlockedInfluences.Add(influence);
+            cultist.EntropyBudget += proto.Cost;
 
             if (proto.Passive)
             {
                 if (proto.Add != null)
-                    _entMan.RemoveComponents(args.Actor, proto.Add);
+                    EntityManager.RemoveComponents(user, proto.Add);
 
                 if (proto.Remove != null)
-                    _entMan.AddComponents(args.Actor, proto.Remove); // This will probably not work well, but there are currently no influences that remove components. Should be careful with those in the future.
+                    EntityManager.AddComponents(user, proto.Remove); // This will probably not work well, but there are currently no influences that remove components. Should be careful with those in the future.
             }
         }
-        foreach (var action in cultComp.ActionEntities)
-            _actions.RemoveAction(action);
-        cultComp.ActionEntities.Clear();
 
-        _audio.PlayLocal(ent.Comp.PurchaseSfx, args.Actor, args.Actor);
-        cultComp.RespecsAvailable--;
-        Dirty(args.Actor, cultComp); //force an update to make sure that the client has the correct set of owned abilities
+        DirtyFields(user, cultist, null,
+            nameof(CosmicCultComponent.RespecsAvailable),
+            nameof(CosmicCultComponent.OwnedInfluences),
+            nameof(CosmicCultComponent.UnlockedInfluences),
+            nameof(CosmicCultComponent.EntropyBudget));
 
-        _ui.SetUiState(ent.Owner, CosmicShopKey.Key, new CosmicShopBuiState());
+        if (cultist.BoughtActions.Count > 0)
+        {
+            foreach (var action in cultist.BoughtActions)
+            {
+                _actions.RemoveAction(action);
+            }
+            cultist.BoughtActions.Clear();
+            DirtyField(user, cultist, nameof(CosmicCultComponent.BoughtActions));
+        }
+
+        _audio.PlayLocal(ent.Comp.PurchaseSfx, user, user);
     }
-    #endregion
 }

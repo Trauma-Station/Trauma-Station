@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Wraith.SaltLines;
 using Content.Server.Administration.Logs;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
@@ -22,8 +21,6 @@ public sealed partial class SaltLineSystem : EntitySystem
 
     private static readonly ProtoId<ReagentPrototype> ReagentSalt = "TableSalt";
 
-    private EntityQuery<SolutionContainerManagerComponent> _solutionContainerManQuery;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -34,8 +31,6 @@ public sealed partial class SaltLineSystem : EntitySystem
         SubscribeLocalEvent<SaltLinePlacerComponent, AfterInteractEvent>(OnSaltLineAfterInteract);
 
         SubscribeLocalEvent<ConsumeOnSaltLineComponent, AttemptSaltLineEvent>(OnAttemptSaltLine);
-
-        _solutionContainerManQuery = GetEntityQuery<SolutionContainerManagerComponent>();
     }
 
     private void OnMapInit(Entity<SaltLineComponent> ent, ref MapInitEvent args) =>
@@ -84,22 +79,14 @@ public sealed partial class SaltLineSystem : EntitySystem
 
     private void OnAttemptSaltLine(Entity<ConsumeOnSaltLineComponent> ent, ref AttemptSaltLineEvent args)
     {
-        if (!_solutionContainerManQuery.TryComp(ent.Owner, out var solMan))
+        foreach (var (_, solution) in _solution.EnumerateSolutions(ent.Owner))
         {
-            args.Cancelled = true;
-            return;
-        }
-
-        foreach (var container in solMan.Containers)
-        {
-            if (!_solution.TryGetSolution(ent.Owner, container, out var solution)
-                || solution?.Comp.Solution is not { } sol
-                || !sol.ContainsPrototype(ReagentSalt))
+            if (!solution.Comp.Solution.ContainsPrototype(ReagentSalt))
                 continue;
 
             // Try remove salt from the first found solution, if there's no salt return and check next container,
             // else exit the function without cancelling it
-            if (TryRemoveSalt(solution.Value, ent, args.User))
+            if (TryRemoveSalt(solution, ent, args.User))
                 return;
         }
 

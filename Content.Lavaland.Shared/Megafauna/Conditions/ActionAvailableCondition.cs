@@ -12,14 +12,13 @@ public sealed partial class ActionAvailableCondition : MegafaunaCondition
 
     public override bool EvaluateImplementation(MegafaunaCalculationBaseArgs args)
     {
-        var entMan = args.EntityManager;
-        var actionSys = entMan.System<SharedActionsSystem>();
-        var megafaunaSys = entMan.System<MegafaunaSystem>();
+        var entMan = args.EntMan;
+        var actions = entMan.System<SharedActionsSystem>();
 
-        if (!actionSys.TryGetActionById(args.Entity, ActionId, out var action))
+        if (!actions.TryGetActionById(args.Entity, ActionId, out var action))
             return false;
 
-        var ev = megafaunaSys.GetPerformEvent(args.Entity, action.Value.Owner);
-        return actionSys.CanPerformAction(args.Entity, action.Value, ev);
+        var ev = args.System.GetPerformEvent(args.Entity, action.Value.Owner);
+        return actions.CanPerformAction(args.Entity, action.Value, ev);
     }
 }

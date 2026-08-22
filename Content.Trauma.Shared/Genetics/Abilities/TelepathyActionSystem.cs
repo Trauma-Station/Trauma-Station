@@ -80,7 +80,7 @@ public sealed partial class TelepathyActionSystem : EntitySystem
         // start the delay now that a message is being sent
         _actions.StartUseDelay(ent.Owner);
 
-        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(user)} sent a telepathic message to {ToPrettyString(target)}: {msg}");
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{user:user} sent a telepathic message to {target:target}: {msg}");
 
         // TODO: handle mind magic protection with -popup-blocked
         Tell(channel, msg);

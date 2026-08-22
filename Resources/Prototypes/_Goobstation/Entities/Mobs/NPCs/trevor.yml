@@ -2,7 +2,7 @@
 
 - type: entity
   name: Trevor
-  parent: [MobHorse, ShowSecurityIcons]
+  parent: [ MobHorse, BaseSlicingRefinable, ShowSecurityIcons ]
   id: MobTrevor
   description: A thousand years of space evolution and this is the best we could come up with.
   components:
@@ -40,10 +40,10 @@
     raffle: null
     allowSpeech: true
     allowMovement: true
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
-      amount: 12
+      amount: 12 # perfect for burgers
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:

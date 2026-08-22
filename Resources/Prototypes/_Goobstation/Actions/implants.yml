@@ -6,14 +6,15 @@
   name: Swap
   description: Allows you to swap locations with any living being.
   components:
+  - type: Sprite
+    sprite: /Textures/_Goobstation/Actions/syndicateswap.rsi
+    layers:
+    - state: icon
   - type: Action
     checkCanInteract: false
     useDelay: 60
     raiseOnUser: true
     itemIconStyle: BigAction
-    icon:
-      sprite: /Textures/_Goobstation/Actions/syndicateswap.rsi
-      state: icon
   - type: TargetAction
     checkCanAccess: false
     range: 15
@@ -37,13 +38,14 @@
   name: Nanite Mender
   description: Let loose a swarm of nanites to rapidly repair a target entity.
   components:
+  - type: Sprite
+    sprite: /Textures/_Goobstation/Actions/implants/nanitemend.rsi
+    layers:
+    - state: icon
   - type: Action
     useDelay: 20
     itemIconStyle: BigAction
     raiseOnUser: true
-    icon:
-      sprite: /Textures/_Goobstation/Actions/implants/nanitemend.rsi
-      state: icon
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction

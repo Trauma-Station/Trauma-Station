@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Overlays;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Thrall;
-using Content.Server.AlertLevel;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
@@ -12,13 +10,16 @@ using Content.Server.Polymorph.Systems;
 using Content.Server.Station.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Actions;
+using Content.Shared.AlertLevel;
 using Content.Shared.Audio;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Examine;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -33,7 +34,6 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
 {
     [Dependency] private EntityStorageSystem _entityStorage = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private PolymorphSystem _polymorph = default!;
@@ -42,6 +42,7 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
     [Dependency] private SharedPoweredLightSystem _poweredLight = default!;
     [Dependency] private NavMapSystem _navMap = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private ChatSystem _chatSystem = default!;
@@ -49,15 +50,8 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
     [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
 
     public static readonly EntProtoId NightmareAbilities = "NightmareAbilities";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShadowlingAscensionEggComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
-        SubscribeLocalEvent<ShadowlingAscensionEggComponent, DestructionEventArgs>(OnDestruction);
-        SubscribeLocalEvent<ShadowlingAscensionEggComponent, ExaminedEvent>(OnExamined);
-    }
+    public static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
+    public static readonly ProtoId<AlertLevelPrototype> DeltaSling = "DeltaSling";
 
     public override void Update(float frameTime)
     {
@@ -84,6 +78,7 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVerbs(EntityUid uid, ShadowlingAscensionEggComponent component, GetVerbsEvent<Verb> args)
     {
         if (args.User != component.Creator)
@@ -93,11 +88,12 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
             new Verb
             {
                 Act = () => TryAscend(args.User, args.Target, component),
-                Text = Loc.GetString(component.VerbName),
+                Text = component.VerbName,
                 Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")) //todo: custom icon
             });
     }
 
+    [SubscribeLocalEvent]
     private void OnDestruction(EntityUid uid, ShadowlingAscensionEggComponent component, DestructionEventArgs args)
     {
         if (component.AscendingEffectEntity != null)
@@ -115,6 +111,7 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
         component.StartTimer = false;
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(EntityUid uid, ShadowlingAscensionEggComponent component, ExaminedEvent args)
     {
         if (!component.StartTimer && component.Creator == args.Examiner)
@@ -178,9 +175,8 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
 
         _chatSystem.DispatchStationAnnouncement(eggUid, message, "Central Command", false, null, Color.Red);
 
-        var stationUid = _station.GetStationInMap(Transform(uid).MapID);
-        if (stationUid != null)
-            _alertLevel.SetLevel(stationUid.Value, "delta", true, true, true, true);
+        if (_station.GetStationInMap(Transform(uid).MapID) is { } station)
+            _alertLevel.SetLevel(station, DeltaSling, force: true);
 
         var effectEnt = Spawn(component.ShadowlingInside, Transform(eggUid).Coordinates);
         component.ShadowlingInsideEntity = effectEnt;
@@ -234,9 +230,10 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
             _actions.RemoveAction(ascendant.ActionHatchEntity);
         }
 
-        var nightmareComps = _protoMan.Index(NightmareAbilities);
+        var nightmareComps = ProtoMan.Index(NightmareAbilities);
         foreach (var thrall in thralls)
         {
+            _status.TrySetStatusEffectDuration(thrall, PressureImmunity);
             if (HasComp<LesserShadowlingComponent>(thrall))
             {
                 EntityManager.AddComponents(thrall, nightmareComps);

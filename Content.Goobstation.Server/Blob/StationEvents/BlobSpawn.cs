@@ -2,13 +2,11 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Blob;
-using Content.Server.Ghost.Roles.Events;
-using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -22,12 +20,6 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
 
     public static readonly EntProtoId BlobRule = "BlobRule";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BlobCarrierComponent, GhostRoleSpawnerUsedEvent>(OnSpawned);
-    }
-
     protected override void Started(EntityUid uid,
         BlobSpawnRuleComponent component,
         GameRuleComponent gameRule,
@@ -35,22 +27,15 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var station))
-        {
+        if (GetRandomStationGrids() is not { } stationGrids)
             return;
-        }
 
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
-        while (locations.MoveNext(out _, out _, out var transform))
+        while (locations.MoveNext(out _, out _, out var xform))
         {
-            if (!HasComp<BecomesStationComponent>(transform.GridUid))
-                continue;
-
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
-            {
-                validLocations.Add(transform.Coordinates);
-            }
+            if (xform.GridUid is { } grid && stationGrids.Contains(grid))
+                validLocations.Add(xform.Coordinates);
         }
 
         if (validLocations.Count == 0)
@@ -75,10 +60,11 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
 
     // Because GameRule spawns just a GhostRoleSpawner, we can't just remove components
     // right away, and need to track the event when entity is spawned.
-    private void OnSpawned(EntityUid uid, BlobCarrierComponent component, GhostRoleSpawnerUsedEvent args)
+    [SubscribeLocalEvent]
+    private void OnSpawned(Entity<BlobCarrierComponent> ent, ref GhostRoleSpawnerUsedEvent args)
     {
         var carrier = args.Spawned;
-        if (!TryComp<BlobCarrierComponent>(carrier, out _))
+        if (!HasComp<BlobCarrierComponent>(carrier))
             return;
 
         // Blob doesn't spawn when blob carrier was eaten.

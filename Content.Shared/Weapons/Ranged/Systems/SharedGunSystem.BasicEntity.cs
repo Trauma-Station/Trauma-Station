@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Weapons.Ranged;
+// </Trauma>
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
@@ -29,7 +32,7 @@ public abstract partial class SharedGunSystem
     {
         // <Trauma>
         WeightedRandomEntityPrototype? prototypes = null;
-        if (ent.Comp.Proto == null && (!ProtoManager.Resolve(ent.Comp.Prototypes, out prototypes) ||
+        if (ent.Comp.Proto == null && (!ProtoMan.Resolve(ent.Comp.Prototypes, out prototypes) ||
                                         prototypes.Weights.Count == 0))
             return;
         var rand = Random(ent);
@@ -44,6 +47,8 @@ public abstract partial class SharedGunSystem
                 ent.Comp.Count--;
 
             // <Trauma>
+            var ev = new BasicAmmoChangedEvent(ent.Comp.Count);
+            RaiseLocalEvent(ent, ref ev);
             var proto = ent.Comp.Proto ?? prototypes!.Pick(rand);
             var ammoEnt = PredictedSpawnAtPosition(proto, args.Coordinates);
             // </Trauma>
@@ -71,6 +76,7 @@ public abstract partial class SharedGunSystem
             return;
 
         Appearance.SetData(ent, AmmoVisuals.HasAmmo, ent.Comp.Count != 0, appearance);
+        Appearance.SetData(ent, AmmoVisuals.IsFull, ent.Comp.Count == ent.Comp.Capacity, appearance);
         Appearance.SetData(ent, AmmoVisuals.AmmoCount, ent.Comp.Count ?? int.MaxValue, appearance);
         Appearance.SetData(ent, AmmoVisuals.AmmoMax, ent.Comp.Capacity ?? int.MaxValue, appearance);
     }
@@ -93,6 +99,10 @@ public abstract partial class SharedGunSystem
         UpdateBasicEntityAppearance((ent.Owner, ent.Comp));
         UpdateAmmoCount(ent);
         Dirty(ent);
+        // <Trauma>
+        var ev = new BasicAmmoChangedEvent(count);
+        RaiseLocalEvent(ent, ref ev);
+        // </Trauma>
 
         return true;
     }

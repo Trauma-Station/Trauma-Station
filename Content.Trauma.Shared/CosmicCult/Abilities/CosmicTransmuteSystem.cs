@@ -15,25 +15,17 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
     [Dependency] private SharedCosmicCultSystem _cult = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedHandsSystem _hand = default!;
     [Dependency] private PullingSystem _pull = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private EntityQuery<CosmicTransmutableComponent> _query = default!;
 
-    private string? _message;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicTransmutation>(OnTransmute);
-        SubscribeLocalEvent<CosmicTransmutableComponent, GetVerbsEvent<ExamineVerb>>(OnDetailedExamine);
-    }
-
+    [SubscribeLocalEvent]
     private void OnDetailedExamine(Entity<CosmicTransmutableComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
     {
-        if (!_cult.EntityIsCultist(args.User) || !_proto.TryIndex(ent.Comp.TransmuteTo, out var result)) //non-cultists don't need to know this
+        // non-cultists don't need to know this
+        if (!_cult.EntityIsCultist(args.User) || !ProtoMan.TryIndex(ent.Comp.TransmuteTo, out var result))
             return;
 
         var msg = new FormattedMessage();
@@ -51,15 +43,15 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
     }
 
     // Contrary to popular belief, does not make you a mute trans person
-    private void OnTransmute(Entity<CosmicCultComponent> ent, ref EventCosmicTransmutation args)
+    [SubscribeLocalEvent]
+    private void OnTransmute(Entity<CosmicCultComponent> ent, ref CosmicTransmutationEvent args)
     {
         if (args.Handled)
             return;
-        _message = null;
 
-        if (!TryTransmutePulled(ent) && !TryTransmuteHeld(ent)) // That's some slightly less wonky code layout here
+        if (!TryTransmutePulled(ent, out var message) && !TryTransmuteHeld(ent, out message)) // That's some slightly less wonky code layout here
         {
-            _popup.PopupClient(Loc.GetString(_message ?? "cosmicability-transmute-no-item"), ent, ent);
+            _popup.PopupEntity(Loc.GetString(message ?? "cosmicability-transmute-no-item"), ent, ent);
             return;
         }
 
@@ -69,19 +61,21 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
             PredictedSpawnAtPosition(ent.Comp.TransmuteVFX, Transform(ent).Coordinates);
     }
 
-    private bool TryTransmutePulled(Entity<CosmicCultComponent> ent)
+    private bool TryTransmutePulled(Entity<CosmicCultComponent> ent, out LocId? message)
     {
+        message = null;
         if (_pull.GetPulling(ent.Owner) is not { } target)
             return false;
-        if (!TryComp<CosmicTransmutableComponent>(target, out var comp)
-        || !_proto.TryIndex(comp.TransmuteTo, out var proto))
+
+        if (!_query.TryComp(target, out var comp) ||
+            !ProtoMan.TryIndex(comp.TransmuteTo, out var proto))
         {
-            _message = "cosmicability-transmute-not-transmutable";
+            message = "cosmicability-transmute-not-transmutable";
             return false;
         }
         if (comp.RequiresEmpowerment && !ent.Comp.CosmicEmpowered)
         {
-            _message = "cosmicability-transmute-not-empowered";
+            message = "cosmicability-transmute-not-empowered";
             return false;
         }
 
@@ -92,21 +86,22 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
         return true;
     }
 
-    private bool TryTransmuteHeld(Entity<CosmicCultComponent> ent)
+    private bool TryTransmuteHeld(Entity<CosmicCultComponent> ent, out LocId? message)
     {
-        if (!_hand.TryGetActiveItem(ent.Owner, out var item)
-        || item is not { } target)
+        message = null;
+        if (!_hand.TryGetActiveItem(ent.Owner, out var item) || item is not { } target)
             return false;
-        if (!TryComp<CosmicTransmutableComponent>(target, out var comp)
-        || !_proto.TryIndex(comp.TransmuteTo, out var proto))
+
+        if (!_query.TryComp(target, out var comp) ||
+            !ProtoMan.TryIndex(comp.TransmuteTo, out var proto))
         {
-            _message ??= "cosmicability-transmute-not-transmutable";
+            message = "cosmicability-transmute-not-transmutable";
             return false;
         }
 
         if (comp.RequiresEmpowerment && !ent.Comp.CosmicEmpowered)
         {
-            _message ??= "cosmicability-transmute-not-empowered";
+            message = "cosmicability-transmute-not-empowered";
             return false;
         }
 

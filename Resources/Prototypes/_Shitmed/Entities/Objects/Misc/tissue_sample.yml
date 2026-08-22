@@ -11,6 +11,7 @@
     state: xeno
   - type: SurgeryTool
   - type: TissueSample
+    used: true
   - type: StaticPrice
     price: 2500 # coroner gameplay
   - type: Solution

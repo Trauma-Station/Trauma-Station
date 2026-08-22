@@ -4,30 +4,6 @@
 
 - type: entity
   parent: BaseTraitorRule
-  id: CorporateAgent
-  components:
-  - type: TraitorRule
-    objectiveIssuers: CorporateFlavor
-  - type: AntagRandomObjectives
-    sets:
-    - groups: CorporateObjectiveGroups
-    maxDifficulty: 8 # Very rare antag so they should get a lot of objectives
-  - type: GameRule
-    minPlayers: 30
-    delay:
-      min: 465
-      max: 665 # Delay is so the heads help their department get set up.
-  - type: AntagSelection
-    antags:
-    - !type:LinearAntagCount
-      proto: CorporateAgent
-      range:
-        min: 1
-        max: 2
-      playerRatio: 25
-
-- type: entity
-  parent: BaseTraitorRule
   id: CalmTraitor # For Dual Antag Gamemodes
   components:
   - type: GameRule
@@ -96,6 +72,7 @@
   parent: BaseGameRule
   components:
   - type: BlobRule
+  - type: NewAntagOrEvac
 
 - type: entity
   parent: [ BlobRule, BaseRoundstartAntagRule ]
@@ -104,9 +81,12 @@
   - type: GameRule
     minPlayers: 40
   - type: AntagSelection
+    agentName: blob-round-end-agent-name
     antags:
     - !type:FixedAntagCount
       proto: Blob
+  - type: DynamicRuleCost
+    cost: 80
 
 - type: entity
   parent: [ BaseNukeopsRule, BaseRoundstartAntagRule ]
@@ -152,3 +132,5 @@
     antags:
     - !type:FixedAntagCount
       proto: Devil
+  - type: DynamicRuleCost
+    cost: 40

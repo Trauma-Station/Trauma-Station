@@ -17,7 +17,6 @@ public sealed partial class LabyrinthPortalSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private EntityQuery<MindComponent> _mindQuery = default!;
     [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
@@ -88,7 +87,7 @@ public sealed partial class LabyrinthPortalSystem : EntitySystem
                 QueueDel(ent);
             }
 
-            var table = _proto.Index(portal.ToSpawn);
+            var table = ProtoMan.Index(portal.ToSpawn);
             var mob = table.Pick(_random);
             var spawned = Spawn(mob, xform.Coordinates);
             portal.SpawnedMobs.Add(spawned);

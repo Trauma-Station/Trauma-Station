@@ -125,7 +125,7 @@ public sealed partial class KnowledgeGrantSystem : EntitySystem
 
         args.Repeat = hasLearned;
         if (!hasLearned)
-            _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.SmallCaution);
     }
 }
 

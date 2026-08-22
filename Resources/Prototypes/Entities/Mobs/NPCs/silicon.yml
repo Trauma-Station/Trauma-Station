@@ -68,8 +68,7 @@
   - type: TypingIndicator
     proto: robot
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
+    emoteSounds: UnisexSilicon
   - type: Emoting
   - type: ZombieImmune
   - type: ProtectedFromStepTriggers
@@ -109,6 +108,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic # Trauma
     - Heat
     - Shock
     locPrefix: silicon
@@ -150,7 +150,7 @@
     speechSounds: Pai #couldn't decide if this should be borg or pai sounds so I flipped a coin.
 
 - type: entity
-  parent: [MobSiliconBase, SolutionFireExtinguisherMini]
+  parent: [MobSiliconBase, SolutionFireExtinguisherBot] # Trauma - was SolutionFireExtinguisherMini
   id: MobFireBot
   name: firebot
   description: A little fire extinguishing bot. He looks rather anxious.
@@ -164,11 +164,11 @@
   - type: HTN
     rootTask:
       task: FirebotCompound
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-        - ReagentId: Water
-          Quantity: 10
+#  - type: SolutionRegeneration Trauma
+#    generated:
+#      reagents:
+#        - ReagentId: Water
+#          Quantity: 10
   - type: Spray
     transferAmount: 10
     pushbackAmount: 60
@@ -289,8 +289,7 @@
       params:
         variation: 0.125
   - type: Vocal
-    sounds:
-      Unsexed: Cluwne
+    emoteSounds: Cluwne
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
@@ -360,7 +359,7 @@
       # </Trauma>
       Alive:
         reagent: Tricordrazine
-        quantity: 30
+        quantity: 10 # Trauma - Was 30
       Critical:
         reagent: Inaprovaline
         quantity: 15
@@ -373,8 +372,8 @@
       # </Trauma>
       # when you are fine, medibot will help you go sleep
       Alive:
-        reagent: ChloralHydrate
-        quantity: 15
+        reagent: Morphine # Trauma - Was ChloralHydrate
+        quantity: 10 # Trauma - Was 15
       # when you are crit, medibot will help you have fun
       Critical:
         reagent: SpaceDrugs
@@ -407,23 +406,19 @@
     interactFailureString: petting-failure-medibot
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
-      path: /Audio/Animals/cat_meow.ogg
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: ShowHealthBars
     damageContainers:
     - Biological
   - type: ShowHealthIcons
     damageContainers:
     - Biological
-  - type: Advertise
-    pack: MedibotAds
   - type: Vocalizer
   - type: DatasetVocalizer
     dataset: MedibotAds
   - type: Inventory
     templateId: medibot
   - type: DoAfter
-  - type: StationAiVision # Goobstation - AI can see through NT silicon
-    range: 1
 
 - type: entity
   parent:
@@ -510,7 +505,7 @@
     enabled: false
     radius: 3.5
     softness: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
   - type: FootstepModifier
     footstepSoundCollection:

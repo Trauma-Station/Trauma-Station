@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
@@ -14,40 +16,29 @@ namespace Content.Goobstation.Shared.Blob.NPC.BlobPod;
 
 public abstract partial class SharedBlobPodSystem : EntitySystem
 {
-    [Dependency] private MobStateSystem _mobs = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _query = default!;
 
-
-    private EntityQuery<HumanoidProfileComponent> _query;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlobPodComponent, GetVerbsEvent<InnateVerb>>(AddDrainVerb);
-        SubscribeLocalEvent<BlobPodComponent, BeingUnequippedAttemptEvent>(OnUnequipAttempt);
-        SubscribeLocalEvent<BlobPodComponent, CanDropTargetEvent>(OnCanDragDropOn);
-        SubscribeLocalEvent<BlobPodComponent, DragDropTargetEvent>(OnBlobPodDragDrop);
-
-        _query = GetEntityQuery<HumanoidProfileComponent>();
-    }
-
+    [SubscribeLocalEvent]
     private void OnBlobPodDragDrop(Entity<BlobPodComponent> ent, ref DragDropTargetEvent args)
     {
         if (args.Handled)
             return;
 
-        args.Handled = NpcStartZombify(ent, args.Dragged, ent);
+        args.Handled = NpcStartZombify(ent, args.Dragged);
     }
 
+    [SubscribeLocalEvent]
     private void OnCanDragDropOn(Entity<BlobPodComponent> ent, ref CanDropTargetEvent args)
     {
         if (args.Handled)
             return;
         if (args.User == args.Dragged)
             return;
-        if (!_query.HasComponent(args.Dragged))
+        if (!_query.HasComp(args.Dragged))
             return;
-        if (_mobs.IsAlive(args.Dragged))
+        if (_mob.IsAlive(args.Dragged))
             return;
 
         args.CanDrop = true;
@@ -60,6 +51,7 @@ public abstract partial class SharedBlobPodSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequipAttempt(Entity<BlobPodComponent> ent, ref BeingUnequippedAttemptEvent args)
     {
         if (args.User == args.UnEquipTarget)
@@ -68,43 +60,46 @@ public abstract partial class SharedBlobPodSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<MobStateComponent>(args.UnEquipTarget, out var mobStateComponent))
-            return;
-        if (_mobs.IsDead(args.UnEquipTarget,mobStateComponent) || _mobs.IsCritical(args.UnEquipTarget, mobStateComponent))
+        if (!_mob.IsAlive(args.UnEquipTarget))
             return;
         if (!HasComp<ZombieBlobComponent>(args.UnEquipTarget))
             return;
         args.Cancel();
     }
 
-    private void AddDrainVerb(EntityUid uid, BlobPodComponent component, GetVerbsEvent<InnateVerb> args)
+    [SubscribeLocalEvent]
+    private void OnGetVerbs(Entity<BlobPodComponent> ent, ref GetVerbsEvent<InnateVerb> args)
     {
-        if (args.User == args.Target)
-            return;
-        if (!args.CanAccess)
-            return;
-        if (!_query.HasComponent(args.Target))
-            return;
-        if (_mobs.IsAlive(args.Target))
+        var target = args.Target;
+        if (args.User == target ||
+            !args.CanAccess ||
+            !_query.HasComp(args.Target) ||
+            _mob.IsAlive(args.Target))
             return;
 
-        InnateVerb verb = new()
+        args.Verbs.Add(new()
         {
-            Act = () =>
-            {
-                NpcStartZombify(uid, args.Target, component);
-            },
+            Act = () => NpcStartZombify(ent, target),
             Text = Loc.GetString("blob-pod-verb-zombify"),
             // Icon = new SpriteSpecifier.Texture(new ("/Textures/")),
             Priority = 2
-        };
-        args.Verbs.Add(verb);
+        });
     }
 
-    public abstract bool NpcStartZombify(EntityUid uid, EntityUid argsTarget, BlobPodComponent component);
+    [SubscribeLocalEvent]
+    private void OnDestruction(Entity<BlobPodComponent> ent, ref DestructionEventArgs args)
+    {
+        if (!TryComp<BlobCoreComponent>(ent.Comp.Core, out var core))
+            return;
+
+        var chem = ProtoMan.Index(core.CurrentChem);
+        if (chem.PodDeathEffects is { } effects)
+            _effects.ApplyEffects(ent, effects, predicted: false); // predicted destruction when
+    }
+
+    public virtual bool NpcStartZombify(Entity<BlobPodComponent> ent, EntityUid target)
+        => false;
 }
 
 [Serializable, NetSerializable]
-public sealed partial class BlobPodZombifyDoAfterEvent : SimpleDoAfterEvent
-{
-}
+public sealed partial class BlobPodZombifyDoAfterEvent : SimpleDoAfterEvent;

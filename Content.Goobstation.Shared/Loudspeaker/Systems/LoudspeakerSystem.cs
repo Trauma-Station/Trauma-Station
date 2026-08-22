@@ -166,7 +166,7 @@ public sealed partial class LoudSpeakerSystem : EntitySystem
         var state = !loudspeaker.Comp.IsActive ? "on" : "off";
 
         _audio.PlayPredicted(loudspeaker.Comp.ToggleSound, user, user);
-        _popup.PopupClient(Loc.GetString("loudspeaker-toggle-popup", ("state", state)), user, user);
+        _popup.PopupEntity(Loc.GetString("loudspeaker-toggle-popup", ("state", state)), user, user);
     }
 
     #endregion

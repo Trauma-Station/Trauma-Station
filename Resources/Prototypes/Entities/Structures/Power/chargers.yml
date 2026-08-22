@@ -1,10 +1,18 @@
 - type: entity
   abstract: true
-  parent: [BaseMachinePowered, ConstructibleMachine]
+  parent: [ BaseMachinePowered, ConstructibleMachine ] # Trauma - removed BaseConstructibleMachineDestructible it already has a threshold
   id: BaseRecharger
   placement:
     mode: SnapgridCenter
   components:
+  # <Trauma>
+  - type: Damageable
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: EmptyOnMachineDeconstruct # dont delete stuff
+    containers:
+    - charger_slot
+  # </Trauma>
   - type: Transform
     anchored: true
     noRot: false
@@ -21,20 +29,18 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 80
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-    - trigger:
-        !type:DamageTrigger
-        damage: 40
+        damage: 175
       behaviors:
       - !type:EmptyAllContainersBehaviour
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+      # <Trauma>
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      # </Trauma>
   - type: StaticPrice
     price: 75
 
@@ -90,12 +96,7 @@
   - type: Machine
     board: CellRechargerCircuitboard
   - type: WiresPanel
-  - type: GenericVisualizer
-    visuals:
-      enum.WiresVisuals.MaintenancePanelState:
-        enum.WiresVisualLayers.MaintenancePanel:
-          True: { visible: true }
-          False: { visible: false }
+  - type: WiresVisuals
   - type: PowerCellSlot
     cellSlotId: charger_slot
     # fitsInCharger is true i dont think this will ever affect anything negatively but it lets it function
@@ -189,12 +190,14 @@
       charger_slot:
         ejectOnInteract: true
         whitelist:
+          # <Trauma>
+          tags:
+          - FitsInCharger
+          # </Trauma>
           components:
           - BatteryAmmoProvider
           - Stunbaton
           - PowerCell
-          tags: # Goob
-          - FitsInCharger
         blacklist:
           tags:
           - PotatoBattery
@@ -305,6 +308,11 @@
   name: cyborg recharging station
   description: A stationary charger for various robotic and cyborg entities. Surprisingly spacious.
   components:
+  # <Trauma>
+  - type: EmptyOnMachineDeconstruct # dont delete borgs
+    containers:
+    - entity_storage
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Power/borg_charger.rsi
     noRot: True
@@ -326,9 +334,11 @@
     slotId: entity_storage
     whitelist:
       components:
+      # <Trauma>
+      - Silicon
+      - Inventory # for modsuits
+      # </Trauma>
       - BorgChassis
-      - Silicon # EE IPCs
-      - Inventory #Goobstation - Modsuits
   - type: Construction
     containers:
     - machine_parts
@@ -371,9 +381,11 @@
     capacity: 1
     whitelist:
       components:
+      # <Trauma>
+      - Silicon
+      - Inventory # for modsuits
+      # </Trauma>
       - BorgChassis
-      - Silicon #Goobstation, allows IPCs to use cyborg chargers
-      - Inventory # Goobstation - Modsuits/Augments
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container

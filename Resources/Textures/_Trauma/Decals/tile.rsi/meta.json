@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Sprited by JOEL",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+	{
+      "name": "halftile_dark"
+    },
+    {
+      "name": "halftile_dark_90"
+    },
+    {
+      "name": "halftile_dark_180"
+    },
+    {
+      "name": "halftile_dark_270"
+    },
+    {
+      "name": "quartertile_dark"
+    },
+    {
+      "name": "quartertile_dark_90"
+    },
+    {
+      "name": "quartertile_dark_180"
+    },
+    {
+      "name": "quartertile_dark_270"
+    },
+    {
+      "name": "threequartertile_dark"
+    },
+    {
+      "name": "threequartertile_dark_90"
+    },
+    {
+      "name": "threequartertile_dark_180"
+    },
+    {
+      "name": "threequartertile_dark_270"
+    },
+    {
+      "name": "checkerNESW_dark"
+    },
+    {
+      "name": "checkerNWSE_dark"
+    },
+    {
+      "name": "halftile_steel"
+    },
+    {
+      "name": "halftile_steel_90"
+    },
+    {
+      "name": "halftile_steel_180"
+    },
+    {
+      "name": "halftile_steel_270"
+    },
+    {
+      "name": "quartertile_steel"
+    },
+    {
+      "name": "quartertile_steel_90"
+    },
+    {
+      "name": "quartertile_steel_180"
+    },
+    {
+      "name": "quartertile_steel_270"
+    },
+    {
+      "name": "threequartertile_steel"
+    },
+    {
+      "name": "threequartertile_steel_90"
+    },
+    {
+      "name": "threequartertile_steel_180"
+    },
+    {
+      "name": "threequartertile_steel_270"
+    },
+    {
+      "name": "checkerNESW_steel"
+    },
+    {
+      "name": "checkerNWSE_steel"
+    },
+    {
+      "name": "halftile_white"
+    },
+    {
+      "name": "halftile_white_90"
+    },
+    {
+      "name": "halftile_white_180"
+    },
+    {
+      "name": "halftile_white_270"
+    },
+    {
+      "name": "quartertile_white"
+    },
+    {
+      "name": "quartertile_white_90"
+    },
+    {
+      "name": "quartertile_white_180"
+    },
+    {
+      "name": "quartertile_white_270"
+    },
+    {
+      "name": "threequartertile_white"
+    },
+    {
+      "name": "threequartertile_white_90"
+    },
+    {
+      "name": "threequartertile_white_180"
+    },
+    {
+      "name": "threequartertile_white_270"
+    },
+    {
+      "name": "checkerNESW_white"
+    },
+    {
+      "name": "checkerNWSE_white"
+    }
+  ]
+}

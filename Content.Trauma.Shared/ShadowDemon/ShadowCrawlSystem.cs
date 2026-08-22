@@ -101,7 +101,7 @@ public sealed partial class ShadowCrawlSystem : EntitySystem
         // Ensures we don't attack people while invisible
         _combat.SetInCombatMode(ent.Owner, false);
 
-        _popup.PopupClient(Loc.GetString("shadow-crawl-success"), ent.Owner, ent.Owner, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("shadow-crawl-success"), ent.Owner, ent.Owner, PopupType.Medium);
 
         args.Handled = true;
     }
@@ -146,7 +146,7 @@ public sealed partial class ShadowCrawlSystem : EntitySystem
         RaiseLocalEvent(uid, ref attemptEv);
         if (attemptEv.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString("shadow-crawl-cancelled"), uid, uid, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("shadow-crawl-cancelled"), uid, uid, PopupType.MediumCaution);
             return false;
         }
 

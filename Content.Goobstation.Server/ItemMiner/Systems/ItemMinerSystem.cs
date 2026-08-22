@@ -15,13 +15,13 @@ namespace Content.Goobstation.Server.ItemMiner;
 public sealed partial class ItemMinerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private PowerReceiverSystem _power = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private StackSystem _stack = default!;
 
+    private CompName _stackName;
     // no freezing the game
     private TimeSpan _minInterval = TimeSpan.FromSeconds(0.001f);
 
@@ -29,6 +29,7 @@ public sealed partial class ItemMinerSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ItemMinerComponent, MapInitEvent>(OnInit);
+        _stackName = Factory.CompName<StackComponent>();
     }
 
     private void OnInit(Entity<ItemMinerComponent> ent, ref MapInitEvent args)
@@ -103,10 +104,10 @@ public sealed partial class ItemMinerSystem : EntitySystem
                 {
                     // check if we're spawning a stack proto with a non-1 count
                     var remaining = miner.Amount - spawned;
-                    var entProto = _proto.Index(miner.Proto);
+                    var entProto = ProtoMan.Index(miner.Proto);
 
                     // from here on `spawned` and `amt` stand for stack counts and not entity counts
-                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, Factory))
+                    if (entProto.TryComp<StackComponent>(_stackName, out var stackComp))
                     {
                         spawned *= stackComp.Count;
                         remaining *= stackComp.Count;

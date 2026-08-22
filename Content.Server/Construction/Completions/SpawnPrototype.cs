@@ -1,6 +1,6 @@
 using Content.Server.Stack;
 using Content.Shared.Construction;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Stacks;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -23,8 +23,8 @@ namespace Content.Server.Construction.Completions
                 return;
 
             var coordinates = entityManager.GetComponent<TransformComponent>(uid).Coordinates;
-
-            if (EntityPrototypeHelpers.HasComponent<StackComponent>(Prototype))
+            var protoMan = IoCManager.Resolve<IPrototypeManager>(); // Trauma, cant wait for ts to die
+            if (protoMan.Index(Prototype).HasComp<StackComponent>(entityManager.ComponentFactory)) // Trauma - use proper check
             {
                 var stackEnt = entityManager.SpawnEntity(Prototype, coordinates);
                 var stack = entityManager.GetComponent<StackComponent>(stackEnt);

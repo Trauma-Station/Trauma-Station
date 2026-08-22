@@ -1,8 +1,7 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Damage;
 
@@ -19,6 +18,21 @@ public sealed partial class DamageSpecifier
 
     [DataField]
     public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> WoundSeverityMultipliers = new();
+
+    [DataField]
+    public DamageFlags Flags = DamageFlags.None;
+
+    /// <summary>
+    /// Wounds that are induced by damage types.
+    /// If not stated, use damage type as a wound.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<DamageTypePrototype>, string> WoundTypeOverrides = new();
+
+    public string GetWoundId(ProtoId<DamageTypePrototype> id)
+    {
+        return WoundTypeOverrides.GetValueOrDefault(id, id);
+    }
 
     public DamageSpecifier(float armorPenetration,
         float partVariation,
@@ -37,6 +51,8 @@ public sealed partial class DamageSpecifier
         ArmorPenetration = src.ArmorPenetration;
         PartDamageVariation = src.PartDamageVariation;
         WoundSeverityMultipliers = new(src.WoundSeverityMultipliers);
+        Flags = src.Flags;
+        WoundTypeOverrides = new(src.WoundTypeOverrides);
     }
 
     /// <summary>
@@ -81,5 +97,13 @@ public sealed partial class DamageSpecifier
         }
 
         return result;
+    }
+
+    [Flags, Serializable, NetSerializable]
+    public enum DamageFlags : byte
+    {
+        None = 0,
+        PreciseHit = 1 << 0,
+        MartialArtCombo = 1 << 1,
     }
 }

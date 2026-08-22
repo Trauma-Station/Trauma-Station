@@ -1,4 +1,6 @@
-using Robust.Shared.Map; // Goobstation
+// <Trauma>
+using Robust.Shared.Map;
+// </Trauma>
 
 namespace Content.Server.SurveillanceCamera;
 
@@ -6,50 +8,56 @@ namespace Content.Server.SurveillanceCamera;
 [Access(typeof(SurveillanceCameraMonitorSystem))]
 public sealed partial class SurveillanceCameraMonitorComponent : Component
 {
-    // Currently active camera viewed by this monitor.
+    /// <summary>
+    /// Currently active camera viewed by this monitor.
+    /// </summary>
     [ViewVariables]
     public EntityUid? ActiveCamera { get; set; }
 
     [ViewVariables]
     public string ActiveCameraAddress { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Last time this monitor was sent a heartbeat.
+    /// </summary>
     [ViewVariables]
-    // Last time this monitor was sent a heartbeat.
     public float LastHeartbeat { get; set; }
 
+    /// <summary>
+    /// Last time this monitor sent a heartbeat.
+    /// </summary>
     [ViewVariables]
-    // Last time this monitor sent a heartbeat.
     public float LastHeartbeatSent { get; set; }
 
-    // Next camera this monitor is trying to connect to.
-    // If the monitor has connected to the camera, this
-    // should be set to null.
+    /// <summary>
+    /// Next camera this monitor is trying to connect to.
+    /// If the monitor has connected to the camera, this should be set to null.
+    /// </summary>
     [ViewVariables]
     public string? NextCameraAddress { get; set; }
 
+    /// <summary>
+    /// Set of viewers currently looking at this monitor.
+    /// </summary>
     [ViewVariables]
-    // Set of viewers currently looking at this monitor.
     public HashSet<EntityUid> Viewers { get; } = new();
 
-    // Known cameras in this subnet by address with name values.
-    // This is cleared when the subnet is changed.
+    /// <summary>
+    /// Current active subnet.
+    /// </summary>
     [ViewVariables]
-    public Dictionary<string, (string, (NetEntity, NetCoordinates))> KnownCameras { get; } = new(); //Goobstation
+    public string ActiveSubnet { get; set; } = default!;
 
-    // The same as KnownCameras but for MobileCameras only: sec bodycams, no pro, dragable wireless camera
+    /// <summary>
+    /// Known cameras in this subnet by address with name values.
+    /// This is cleared when the subnet is changed.
+    /// </summary>
     [ViewVariables]
-    public Dictionary<string, (string, (NetEntity, NetCoordinates))> KnownMobileCameras { get; } = new(); //Goobstation
+    public Dictionary<string, (string, (NetEntity, NetCoordinates))> KnownCameras { get; } = new(); // Trauma - store the entity and pos as well
 
-    // Mobile cameras should receive a heartbeat as they constantly stream their location
+    /// <summary>
+    /// The subnets known by this camera monitor.
+    /// </summary>
     [ViewVariables]
-    public Dictionary<string, float> KnownMobileCamerasLastHeartbeat { get; } = new(); //Goobstation
-
-    // Mobile cameras should receive a heartbeat as they constantly stream their location
-    [ViewVariables]
-    public Dictionary<string, float> KnownMobileCamerasLastHeartbeatSent { get; } = new(); //Goobstation
-
-    [ViewVariables]
-    // The subnets known by this camera monitor.
     public Dictionary<string, string> KnownSubnets { get; } = new();
-
 }

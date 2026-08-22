@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Lathe;
+using Content.Goobstation.Common.Lathe;
 using Content.Server.Lathe;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
@@ -8,20 +8,13 @@ using Content.Shared.Popups;
 
 public sealed partial class GoobLatheSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private LatheSystem _lathe = default!;
     [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     private Dictionary<string, int> _totalMaterials = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<LatheComponent, LatheQueueResetMessage>(OnLatheQueueResetMessage);
-    }
-
+    [SubscribeLocalEvent]
     private void OnLatheQueueResetMessage(Entity<LatheComponent> ent, ref LatheQueueResetMessage args)
     {
         var (uid, comp) = ent;
@@ -34,7 +27,7 @@ public sealed partial class GoobLatheSystem : EntitySystem
         // there is no test to make sure this doesn't give infinite mats... goida
         foreach (var batch in comp.Queue)
         {
-            var recipe = _proto.Index(batch.Recipe);
+            var recipe = ProtoMan.Index(batch.Recipe);
             var count = batch.ItemsRequested - batch.ItemsPrinted;
             foreach (var (mat, amount) in recipe.Materials)
             {

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
 
@@ -11,6 +12,7 @@ namespace Content.Shared.Mind;
 public abstract partial class SharedMindSystem
 {
     [Dependency] private CommonLanguageSystem _language = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     // TODO: make it only delete certain objectives and not all of them in case an antag is ever converted and then deconverted.
     public void ClearObjectives(Entity<MindComponent?> mind)
@@ -20,7 +22,7 @@ public abstract partial class SharedMindSystem
 
         foreach (var obj in mind.Comp.Objectives)
         {
-            QueueDel(obj);
+            PredictedQueueDel(obj);
         }
         mind.Comp.Objectives.Clear();
         Dirty(mind, mind.Comp);
@@ -32,7 +34,9 @@ public abstract partial class SharedMindSystem
 
         // If the entity already speaks some language (like monkey or robot), we do nothing else.
         // Otherwise, we give them the fallback language
-        if (speaker.Speaks.Count == 0)
-            _language.AddLanguage(uid, CommonLanguageSystem.FallbackLanguagePrototype);
+        if (speaker.Speaks.Count > 0)
+            return;
+
+        _language.AddLanguage(uid, CommonLanguageSystem.FallbackLanguagePrototype);
     }
 }

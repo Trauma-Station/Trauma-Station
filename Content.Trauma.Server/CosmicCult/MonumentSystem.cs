@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Server.Actions;
-using Content.Server.AlertLevel;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
+using Content.Shared.Actions;
+using Content.Shared.AlertLevel;
 using Content.Shared.Audio;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
@@ -20,7 +20,6 @@ using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Components.Examine;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
@@ -29,36 +28,30 @@ namespace Content.Trauma.Server.CosmicCult;
 
 public sealed partial class MonumentSystem : SharedMonumentSystem
 {
-    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private AlertLevelSystem _alert = default!;
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private RoundEndSystem _evac = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCosmicCultSystem _cult = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private NavMapSystem _navMap = default!;
     [Dependency] private StationSystem _station = default!;
-    [Dependency] private ChatSystem _chatSystem = default!;
-    [Dependency] private AlertLevelSystem _alert = default!;
-    [Dependency] private ActionsSystem _actions = default!;
-    [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private RoundEndSystem _evac = default!;
+
+    private static readonly ProtoId<AlertLevelPrototype> BlueAlert = "Blue";
+    private static readonly ProtoId<AlertLevelPrototype> OctarineAlert = "Octarine";
+
     private HashSet<Entity<HumanoidProfileComponent>> _targets = [];
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MonumentComponent, ComponentStartup>(OnStartMonument);
-        SubscribeLocalEvent<MonumentComponent, InteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<MonumentComponent, StartFinaleDoAfterEvent>(OnFinaleStartDoAfter);
-        SubscribeLocalEvent<MonumentComponent, CancelFinaleDoAfterEvent>(OnFinaleCancelDoAfter);
-    }
 
     public override void Update(float frameTime)
     {
@@ -81,7 +74,7 @@ public sealed partial class MonumentSystem : SharedMonumentSystem
             {
                 _sound.StopStationEventMusic(uid, StationEventMusicType.CosmicCult);
                 _sound.DispatchStationEventMusic(uid, comp.FinaleMusic, StationEventMusicType.CosmicCult, comp.FinaleMusic.Params);
-                _chatSystem.DispatchStationAnnouncement(
+                _chat.DispatchStationAnnouncement(
                     uid,
                     Loc.GetString("cosmiccult-announce-finale-warning"),
                     null,
@@ -111,12 +104,14 @@ public sealed partial class MonumentSystem : SharedMonumentSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnStartMonument(Entity<MonumentComponent> ent, ref ComponentStartup args)
     {
         UpdateMonumentAppearance(ent); // Why don't just spawn it with stage 3 visuals? Because the spawn animation is for stage 2, and I'm NOT redoing that.
         ent.Comp.CanActivate = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnInteract(Entity<MonumentComponent> ent, ref InteractHandEvent args)
     {
         if (!HasComp<HumanoidProfileComponent>(args.User) // Humanoids only!
@@ -190,12 +185,10 @@ public sealed partial class MonumentSystem : SharedMonumentSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnFinaleStartDoAfter(Entity<MonumentComponent> ent, ref StartFinaleDoAfterEvent args)
     {
-        if (args.Args.Target == null
-        || args.Cancelled
-        || args.Handled
-        || !ent.Comp.CanActivate)
+        if (args.Cancelled || args.Handled || !ent.Comp.CanActivate)
             return;
 
         if (_cultRule.AssociatedGamerule(ent) is not { } cult) return;
@@ -216,12 +209,11 @@ public sealed partial class MonumentSystem : SharedMonumentSystem
 
         cult.Comp.MonumentInGame = ent;
 
-        var stationUid = _station.GetOwningStation(ent);
-        if (stationUid != null)
-            _alert.SetLevel(stationUid.Value, "octarine", true, true, true, true);
+        if (_station.GetOwningStation(ent) is { } station)
+            _alert.SetLevel(station, OctarineAlert, force: true, locked: true);
 
         var indicatedLocation = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((ent, Transform(ent))));
-        _chatSystem.DispatchStationAnnouncement(ent,
+        _chat.DispatchStationAnnouncement(ent,
             Loc.GetString("cosmiccult-finale-location", ("location", indicatedLocation)),
             null,
             false,
@@ -247,20 +239,18 @@ public sealed partial class MonumentSystem : SharedMonumentSystem
         Dirty(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnFinaleCancelDoAfter(Entity<MonumentComponent> ent, ref CancelFinaleDoAfterEvent args)
     {
-        if (_cultRule.AssociatedGamerule(ent) is not { } cult
-        || args.Cancelled
-        || args.Handled)
+        if (args.Cancelled || args.Handled || _cultRule.AssociatedGamerule(ent) is not { } cult)
             return;
 
         cult.Comp.MonumentInGame = null;
 
         _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
 
-        var stationUid = _station.GetOwningStation(ent);
-        if (stationUid != null)
-            _alert.SetLevel(stationUid.Value, "blue", true, true, true); // Blue makes more sense than green IMO.
+        if (_station.GetOwningStation(ent) is { } station)
+            _alert.SetLevel(station, BlueAlert, force: true); // Blue makes more sense than green IMO.
 
         foreach (var cultist in cult.Comp.Cultists)
         {

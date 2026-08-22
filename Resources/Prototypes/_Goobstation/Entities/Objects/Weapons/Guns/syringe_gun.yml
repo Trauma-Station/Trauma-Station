@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseStorageItem
   id: BaseSyringeGun
-  abstract: true
   components:
+  - type: WeaponClass
+    class: Pistol # form factor that's it really
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Cannons/syringe_gun.rsi
     state: icon

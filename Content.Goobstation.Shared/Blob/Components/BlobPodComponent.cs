@@ -10,27 +10,26 @@ namespace Content.Goobstation.Shared.Blob.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BlobPodComponent : Component
 {
-    [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadOnly)]
-    public bool IsZombifying = false;
+    [DataField, AutoNetworkedField]
+    public bool IsZombifying;
 
-    [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid? ZombifiedEntityUid = default!;
+    [DataField, AutoNetworkedField]
+    public EntityUid? ZombifiedEntityUid;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("zombifyDelay")]
-    public float ZombifyDelay = 5.00f;
+    [DataField]
+    public TimeSpan ZombifyDelay = TimeSpan.FromSeconds(5);
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid? Core = null;
+    [DataField]
+    public EntityUid? Core;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("zombifySoundPath")]
+    [DataField]
     public SoundSpecifier ZombifySoundPath = new SoundPathSpecifier("/Audio/Effects/Fluids/blood1.ogg");
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("zombifyFinishSoundPath")]
+    [DataField]
     public SoundSpecifier ZombifyFinishSoundPath = new SoundPathSpecifier("/Audio/Effects/gib1.ogg");
 
     public Entity<AudioComponent>? ZombifyStingStream;
+    [DataField]
     public EntityUid? ZombifyTarget;
 
     [DataField]

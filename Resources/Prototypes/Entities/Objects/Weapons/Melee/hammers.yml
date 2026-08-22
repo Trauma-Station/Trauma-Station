@@ -4,6 +4,10 @@
   id: Sledgehammer
   description: The perfect tool for wanton carnage.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Bludgeon
+  # <Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/sledgehammer.rsi
     state: icon
@@ -32,9 +36,17 @@
   name: Mjollnir
   description: A weapon worthy of a god, able to strike with the force of a lightning bolt. It crackles with barely contained energy.
   components:
+  # <Trauma>
+  - type: MeleeRequiresWield
+  - type: Boomerang
+    maxHops: 20
+  - type: WeaponClass
+    class: Bludgeon
+  - type: StaticPrice
+    price: 50000
+  # <Trauma>
   - type: Wieldable
     useDelayOnWield: false # GoobStation Edit
-  - type: MeleeRequiresWield # Goobstation
   - type: LandAtCursor
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/mjollnir.rsi # GoobStation Edit
@@ -74,10 +86,10 @@
         Blunt: 2
   - type: Item
     size: Ginormous
-  - type: Boomerang # Goobstation
-    maxHops: 20
-  - type: StaticPrice
-    price: 50000
+    shape:
+    - 0,0,3,1
+    - 1,2,2,5
+    storedRotation: -45
 
 - type: entity
   id: SingularityHammer
@@ -85,6 +97,12 @@
   name: Singularity Hammer
   description: The pinnacle of close combat technology, the hammer harnesses the power of a miniaturized singularity to deal crushing blows.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Bludgeon
+  - type: StaticPrice
+    price: 30000
+  # </Trauma>
   - type: Wieldable
     useDelayOnWield: false
   - type: MeleeRequiresWield
@@ -122,5 +140,7 @@
         Structural: 35 # Goob edit
   - type: Item
     size: Ginormous
-  - type: StaticPrice
-    price: 30000
+    shape:
+    - 0,0,3,1
+    - 1,2,2,5
+    storedRotation: -45

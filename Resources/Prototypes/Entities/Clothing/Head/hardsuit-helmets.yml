@@ -4,7 +4,7 @@
 #CREW HARDSUITS
 #Atmospherics Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitInsulatedBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitAtmos
   name: atmospherics hardsuit helmet # Goob edit
   description: A special hardsuit helmet designed for working in low-pressure and high-temperature environments. # Goob edit
@@ -57,11 +57,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 0.2, 5x for limb coverage
   - type: Armor
     modifiers:
       coefficients:
@@ -77,9 +74,9 @@
 
 #Engineering Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitEngineering
-  name: engineering hardsuit helmet # Goob edit
+  name: engineering hardsuit helmet
   description: An engineering hardsuit helmet designed for working in low-pressure, highly radioactive environments. # Goob edit
   components:
   # <Trauma>
@@ -109,7 +106,7 @@
 
 #Spationaut Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSpatio
   name: spationaut hardsuit helmet # Goob edit
   description: A sturdy helmet designed for complex industrial operations in space. # Goob edit
@@ -171,7 +168,7 @@
 
 #Salvage Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSalvage
   name: salvage hardsuit helmet # Goob edit
   description: A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating for wildlife encounters and dual floodlights.
@@ -206,7 +203,7 @@
 
 #Goliath Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitGoliath
   name: goliath hardsuit helmet # Goob edit
   description: A sturdy hardsuit helmet, infused with a goliath's hide and an eerie, unblinking eye cut from its mass. # Goob edit
@@ -265,7 +262,7 @@
       coefficients:
         Blunt: 0.75
         Slash: 0.75
-        Piercing: 0.55
+        Piercing: 0.75 # Trauma, was .55
         Heat: 0.75 #Goliath hide gets grilled instead of you
         Radiation: 0.1
         Caustic: 0.8
@@ -303,13 +300,13 @@
       coefficients:
         Blunt: 0.65
         Slash: 0.65
-        Piercing: 0.55
+        Piercing: 0.65 # Trauma was .75
         Heat: 0.35
         Radiation: 0.01
 
 #Security Hardsuit - Goob deprecated
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSecurity
   name: security hardsuit helmet
   description: Armored hardsuit helmet for security needs.
@@ -340,8 +337,13 @@
         Blunt: 0.65
         Slash: 0.65
         Piercing: 0.65
+        Ballistic: 0.65 # Trauma
         Heat: 0.8
         Caustic: 0.7
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 2
+      # </Trauma>
   - type: Tag
     tags:
     - CorgiWearable
@@ -349,7 +351,7 @@
 
 #Brigmedic Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitBrigmedic
   name: brigmedic hardsuit helmet # Goob edit
   description: The lightweight helmet of the brigmedic hardsuit. Protects against viruses, and clowns.
@@ -371,17 +373,22 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.7
+        Piercing: 0.9 #Trauma was 0.75
+        Ballistic: 0.75 # Trauma
         Heat: 0.9
         Radiation: 0.4
         Caustic: 0.4
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 2
+      # </Trauma>
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
 
 #Warden's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitWarden
   name: warden's hardsuit helmet # Goob edit
   description: A modified riot helmet. Oddly comfortable.
@@ -409,15 +416,20 @@
       coefficients:
         Blunt: 0.45
         Slash: 0.55
-        Piercing: 0.65
+        Piercing: 0.55 # Trauma, was .65
+        Ballistic: 0.65 # Trauma
         Heat: 0.8
         Caustic: 0.7
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
 
 #Captain's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCap
   name: captain's spacesuit helmet # Goob edit
   description: Special spacesuit helmet, made for the captain of the station. # Goob edit
@@ -445,7 +457,8 @@
       coefficients:
         Blunt: 0.9 #Goob - Modsuit Rebalance start
         Slash: 0.9
-        Piercing: 0.75
+        Piercing: 0.9 # Trauma, was .75
+        Ballistic: 0.75 # Trauma
         Heat: 0.65
         Radiation: 0.15
         Caustic: 0.65 #Goob - Modsuit Rebalance end
@@ -456,7 +469,7 @@
 
 #Chief Engineer's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitEngineeringWhite
   name: chief engineer's hardsuit helmet # Goob edit
   description: Special hardsuit helmet, made for the chief engineer of the station. # Goob edit
@@ -475,7 +488,7 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 1, 5x for limb coverage
   - type: Armor
     modifiers:
       coefficients:
@@ -493,7 +506,7 @@
 
 #Chief Medical Officer's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitMedical
   name: chief medical officer's hardsuit helmet # Goob edit
   description: Lightweight medical hardsuit helmet that doesn't restrict your head movements. # Goob edit
@@ -518,7 +531,7 @@
 
 #Research Director's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitRd
   name: experimental research hardsuit helmet # Goob edit
   description: Lightweight hardsuit helmet that doesn't restrict your head movements. # Goob edit
@@ -554,7 +567,7 @@
 
 #Head of Security's hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSecurityRed
   name: head of security's hardsuit helmet # Goob edit
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS. # Goob edit
@@ -585,13 +598,18 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7 # Trauma
         Heat: 0.8
         Radiation: 0.5
         Caustic: 0.5
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
 
 #Luxury Mining Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit helmet # Goob edit
   description: A refurbished mining hardsuit helmet, fitted with satin cushioning and an extra (non-functioning) antenna, because you're that extra. # Goob edit
@@ -623,7 +641,7 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSyndie
   name: blood-red hardsuit helmet # Goob edit
   description: A heavily armored helmet designed for work in special operations. Property of Gorlex Marauders.
@@ -654,8 +672,13 @@
         Blunt: 0.3 # Trauma, was 0.5
         Slash: 0.3 # Trauma, was 0.5
         Piercing: 0.3 # Trauma, was 0.5
+        Ballistic: 0.3 # Trauma
         Heat: 0.3 # Trauma, was 0.5
         Radiation: 0.3 # Trauma, was 0.5
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: Tag
     tags:
     - CorgiWearable
@@ -675,7 +698,7 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitInsulatedBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSyndieElite
   name: syndicate elite hardsuit helmet # Goob edit
   description: An elite version of the blood-red hardsuit's helmet, with heat-resistant armor and fireproofing. Property of Gorlex Marauders. # Trauma - align desc with resistances
@@ -693,11 +716,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 0.2, 5x for limb coverage
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.5
@@ -709,9 +729,14 @@
         Blunt: 0.8 # Trauma, was 0.6
         Slash: 0.8 # Trauma, was 0.6
         Piercing: 0.8 # Trauma, was 0.6
+        Ballistic: 0.8 # Trauma
         Heat: 0.3 # Trauma, was 0.6
         Radiation: 0.01
         # Caustic: 0.4 # Trauma
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 2
+      # </Trauma>
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
   - type: Tag
@@ -721,7 +746,7 @@
 
 #Syndicate Commander Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSyndieCommander
   name: syndicate hardsuit helmet # Goob edit
   description: A bulked up version of the blood-red hardsuit's helmet, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights. # Goob edit
@@ -751,10 +776,15 @@
       coefficients:
         Blunt: 0.4
         Slash: 0.4
-        Piercing: 0.35
+        Piercing: 0.4 # Trauma, was 0.35
+        Ballistic: 0.35 # Trauma
         Heat: 0.5
         Radiation: 0.2
         Caustic: 0.4
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: Tag
     tags:
     - CorgiWearable
@@ -789,9 +819,14 @@
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
+        Ballistic: 0.2 # Trauma
         Heat: 0.2
         Radiation: 0.2
         # Caustic: 0.2 # Trauma
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
   - type: Tag
@@ -801,9 +836,9 @@
 
 #Wizard Hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitWithLightBase, ClothingHeadHatWizardBaseArmor] # Goob edit
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, ClothingHeadHatWizardBaseArmor] # Trauma - added wizard armor
   id: ClothingHeadHelmetHardsuitWizard
-  name: wizard hardsuit helmet # Goob edit
+  name: wizard hardsuit helmet
   description: A bizarre gem-encrusted helmet that radiates magical energies.
   components:
   # <Trauma>
@@ -832,9 +867,14 @@
         Blunt: 0.4
         Slash: 0.4
         Piercing: 0.4
+        Ballistic: 0.4 # Trauma
         Heat: 0.4
         Radiation: 0.05
         Caustic: 0.1
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
   - type: WizardClothes # Goobstation
@@ -891,12 +931,13 @@
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.9
+        Ballistic: 0.4 # Trauma
         Heat: 0.4
         Caustic: 0.75
 
 #Pirate Captain Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadHardsuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitPirateCap
   name: pirate captain's hardsuit helmet # Goob edit
   suffix: Pirate
@@ -943,6 +984,7 @@
         Blunt: 0.75
         Slash: 0.8
         Piercing: 0.85
+        Ballistic: 0.4 # Trauma
         Heat: 0.4
         Caustic: 0.75
 
@@ -1034,7 +1076,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHardsuitWithLightBase ]
+  parent: [ BaseCentcommContraband, ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetCBURN
   name: CBURN exosuit helmet
   description: A pressure resistant and fireproof hood worn by special cleanup units.
@@ -1070,9 +1112,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
   - type: Armor
     modifiers:
       coefficients:
@@ -1089,7 +1128,7 @@
 
 #Deathsquad Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHardsuitWithLightBase ]
+  parent: [ BaseCentcommContraband, ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitDeathsquad
   name: deathsquad hardsuit helmet # Goob edit
   description: A robust helmet for special operations.
@@ -1107,7 +1146,7 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: FireProtection
-    reduction: 0.2
+    reduction: 1 # Trauma - was 1, 5x for limb coverage
   - type: Armor
     traumaDeductions: # prevents traumas at all (kinda)
       Dismemberment: 1
@@ -1119,6 +1158,7 @@
         Blunt: 0.15 # Best armor in the game - Yeah no shit.
         Slash: 0.15
         Piercing: 0.15
+        Ballistic: 0.15 # Trauma
         Heat: 0.15
         Cold: 0.1
         Cellular: 0.1

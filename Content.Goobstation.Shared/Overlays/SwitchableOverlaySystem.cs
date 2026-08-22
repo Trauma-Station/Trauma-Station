@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Flashbang;
 using Content.Shared.Actions;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -92,12 +92,18 @@ public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySys
     private void OnGetState(EntityUid uid, TComp component, ref ComponentGetState args)
     {
         var lightRadius = 0f;
-        string? thermalShader = null;
+        var useShader = false;
+        EntityWhitelist? userWhitelist = null;
+        var whitelistCheckMind = false;
+        var worksInHands = false;
 
         if (component is ThermalVisionComponent thermal)
         {
             lightRadius = thermal.LightRadius;
-            thermalShader = thermal.ThermalShader;
+            useShader = thermal.UseShader;
+            userWhitelist = thermal.UserWhitelist;
+            whitelistCheckMind = thermal.WhitelistCheckMind;
+            worksInHands = thermal.WorksInHands;
         }
 
         args.State = new SwitchableVisionOverlayComponentState
@@ -110,9 +116,12 @@ public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySys
             DeactivateSound = component.DeactivateSound,
             ToggleAction = component.ToggleAction,
             LightRadius = lightRadius,
-            ThermalShader = thermalShader,
+            UseShader = useShader,
             DrawOverlay = component.DrawOverlay,
             OverlayOpacity = component.OverlayOpacity,
+            UserWhitelist = userWhitelist,
+            WhitelistCheckMind = whitelistCheckMind,
+            WorksInHands = worksInHands,
         };
     }
 
@@ -140,7 +149,10 @@ public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySys
         if (component is ThermalVisionComponent thermal)
         {
             thermal.LightRadius = state.LightRadius;
-            thermal.ThermalShader = state.ThermalShader;
+            thermal.UseShader = state.UseShader;
+            thermal.UserWhitelist = state.UserWhitelist;
+            thermal.WhitelistCheckMind = state.WhitelistCheckMind;
+            thermal.WorksInHands = state.WorksInHands;
         }
 
         if (component.IsActive == state.IsActive)

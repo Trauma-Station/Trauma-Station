@@ -65,7 +65,6 @@ namespace Content.IntegrationTests.Tests
             var serverEntManager = server.ResolveDependency<IEntityManager>();
 
             EntityUid dummy = default;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var map = await pair.CreateTestMap();
 
             await server.WaitPost(() =>
@@ -105,7 +104,6 @@ namespace Content.IntegrationTests.Tests
             var serverEntManager = server.ResolveDependency<IEntityManager>();
 
             EntityUid dummy = default;
-            var mapManager = server.ResolveDependency<IMapManager>();
 
             var map = await pair.CreateTestMap();
 
@@ -146,7 +144,6 @@ namespace Content.IntegrationTests.Tests
             var serverEntManager = server.ResolveDependency<IEntityManager>();
 
             EntityUid dummy = default;
-            var mapManager = server.ResolveDependency<IMapManager>();
 
             var map = await pair.CreateTestMap();
 

@@ -17,7 +17,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipCBURN
+    - SkillChipERT
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   # </Trauma>

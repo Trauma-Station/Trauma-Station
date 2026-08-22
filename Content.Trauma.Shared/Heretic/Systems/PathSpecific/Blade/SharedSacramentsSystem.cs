@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Targeting;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 
@@ -14,28 +16,35 @@ public abstract partial class SharedSacramentsSystem : EntitySystem
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private SharedStaminaSystem _stam = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnBeforeThrow(Entity<SacramentsOfPowerComponent> ent, ref BeforeThrowEvent args)
     {
-        base.Initialize();
+        if (args.Cancelled || ent.Comp.State != SacramentsState.Open)
+            return;
 
-        SubscribeLocalEvent<SacramentsOfPowerComponent, BeforeDamageChangedEvent>(OnBeforeDamageChange);
-        SubscribeLocalEvent<SacramentsOfPowerComponent, BeforeStaminaDamageEvent>(OnBeforeStamina);
-        SubscribeLocalEvent<SacramentsOfPowerComponent, ShotAttemptedEvent>(OnShotAttempted);
-        SubscribeLocalEvent<SacramentsOfPowerComponent, AttackAttemptEvent>(OnAttackAttempt);
+        var thrownItem = args.ItemUid;
+        var ev = new AttemptPacifiedThrowEvent(thrownItem, ent);
+        RaiseLocalEvent(thrownItem, ref ev);
+
+        if (ev.Cancelled)
+            args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAttackAttempt(Entity<SacramentsOfPowerComponent> ent, ref AttackAttemptEvent args)
     {
         if (ent.Comp.State == SacramentsState.Open)
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnShotAttempted(Entity<SacramentsOfPowerComponent> ent, ref ShotAttemptedEvent args)
     {
         if (ent.Comp.State == SacramentsState.Open)
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStamina(Entity<SacramentsOfPowerComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         if (ent.Comp.State != SacramentsState.Open || args.Value <= 0f || args.Source == ent.Owner)
@@ -50,6 +59,7 @@ public abstract partial class SharedSacramentsSystem : EntitySystem
         _stam.TakeStaminaDamage(source, args.Value, source: ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeDamageChange(Entity<SacramentsOfPowerComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (ent.Comp.State != SacramentsState.Open || !args.Damage.AnyPositive() || args.Origin == ent.Owner)

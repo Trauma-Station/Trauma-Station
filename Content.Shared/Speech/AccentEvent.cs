@@ -1,21 +1,14 @@
+using Content.Shared.Inventory;
+
 namespace Content.Shared.Speech;
 
-public sealed class AccentGetEvent : EntityEventArgs
+/// <summary>
+/// Raised on an entity to apply speech accents to its message.
+/// Handlers should modify <see cref="Message"/> in place.
+/// Relayed through inventory (e.g. voice masks) and status effects.
+/// </summary>
+[ByRefEvent]
+public record struct AccentGetEvent(EntityUid Entity, string Message) : IInventoryRelayEvent
 {
-    /// <summary>
-    ///     The entity to apply the accent to.
-    /// </summary>
-    public EntityUid Entity { get; }
-
-    /// <summary>
-    ///     The message to apply the accent transformation to.
-    ///     Modify this to apply the accent.
-    /// </summary>
-    public string Message { get; set; }
-
-    public AccentGetEvent(EntityUid entity, string message)
-    {
-        Entity = entity;
-        Message = message;
-    }
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }

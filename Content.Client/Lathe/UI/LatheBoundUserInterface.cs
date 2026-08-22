@@ -1,6 +1,6 @@
 // <Trauma>
+using Content.Goobstation.Common.Lathe;
 using Content.Trauma.Common.Salvage;
-using Content.Goobstation.Shared.Lathe;
 // </Trauma>
 using Content.Shared.Lathe;
 using Content.Shared.Research.Components;
@@ -54,7 +54,6 @@ namespace Content.Client.Lathe.UI
                 case LatheUpdateState msg:
                     if (_menu != null)
                         _menu.Recipes = msg.Recipes;
-                    if (_menu != null) _menu.AlertLevel = msg.AlertLevel; // Trauma
                     _menu?.PopulateRecipes();
                     _menu?.UpdateCategories();
                     _menu?.PopulateQueueList(msg.Queue);

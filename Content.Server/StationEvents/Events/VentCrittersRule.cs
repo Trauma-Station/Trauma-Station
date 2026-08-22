@@ -18,7 +18,7 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var station))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
         {
             return;
         }
@@ -30,7 +30,7 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
             if (!transform.Anchored)
                 continue;
 
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
+            if (transform.GridUid is { } grid && stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
             {
                 validLocations.Add(transform.Coordinates);
                 foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))

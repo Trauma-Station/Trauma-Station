@@ -10,7 +10,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
-using Content.Trauma.Common.Silicon;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind;
@@ -21,70 +21,74 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind
 /// </summary>
 public sealed partial class ShadowlingSonicScreechSystem : EntitySystem
 {
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private SharedStunSystem _stun = default!;
-    [Dependency] private TagSystem _tag = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedPopupSystem _popups = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private INetManager _net = default!;
-    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
-    public override void Initialize()
+    private readonly HashSet<Entity<DamageableComponent>> _targets = new();
+
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<ShadowlingSonicScreechComponent> ent, ref MapInitEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShadowlingSonicScreechComponent, SonicScreechEvent>(OnSonicScreech);
-        SubscribeLocalEvent<ShadowlingSonicScreechComponent, MapInitEvent>(OnStartup);
-        SubscribeLocalEvent<ShadowlingSonicScreechComponent, ComponentShutdown>(OnShutdown);
+        _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
     }
 
-    private void OnStartup(Entity<ShadowlingSonicScreechComponent> ent, ref MapInitEvent args)
-        => _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
-
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<ShadowlingSonicScreechComponent> ent, ref ComponentShutdown args)
-        => _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
+    {
+        _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
+    }
 
-    private void OnSonicScreech(EntityUid uid, ShadowlingSonicScreechComponent component, SonicScreechEvent args)
+    // TODO: how many of these fucking copypasted screech systems are there
+    [SubscribeLocalEvent]
+    private void OnSonicScreech(Entity<ShadowlingSonicScreechComponent> ent, ref SonicScreechEvent args)
     {
         if (args.Handled)
             return;
 
-        _popups.PopupPredicted(Loc.GetString("shadowling-sonic-screech-complete"), uid, uid, PopupType.Medium);
-        _audio.PlayPredicted(component.ScreechSound, uid, uid);
-
-        var effectEnt = PredictedSpawnAtPosition(component.SonicScreechEffect, Transform(uid).Coordinates);
-        _transform.SetParent(effectEnt, uid);
-
-        foreach (var entity in _lookup.GetEntitiesInRange(uid, component.Range))
-        {
-            if (_tag.HasTag(entity, component.WindowTag)
-                && TryComp<DamageableComponent>(entity, out var damageableComponent)
-                && _net.IsServer)
-            {
-                _damageable.ChangeDamage((entity, damageableComponent), component.WindowDamage, true);
-                continue;
-            }
-
-            if (!HasComp<MobStateComponent>(entity))
-                continue;
-
-            if (HasComp<ThrallComponent>(entity) ||
-                HasComp<ShadowlingComponent>(entity))
-                continue;
-
-            if (_silicon.IsSilicon(entity))
-            {
-                _stun.TryAddParalyzeDuration(entity, component.SiliconStunTime);
-                continue;
-            }
-
-            if (HasComp<HumanoidProfileComponent>(entity))
-                PredictedSpawnAtPosition(component.ProtoFlash, Transform(entity).Coordinates);
-        }
-
         args.Handled = true;
+
+        _popup.PopupEntity(Loc.GetString("shadowling-sonic-screech-complete"), ent, ent, PopupType.Medium);
+        _audio.PlayPredicted(ent.Comp.ScreechSound, ent, ent);
+
+        var coords = Transform(ent).Coordinates;
+        var effectEnt = PredictedSpawnAtPosition(ent.Comp.SonicScreechEffect, coords);
+        _transform.SetParent(effectEnt, ent);
+
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.Range, _targets);
+        foreach (var target in _targets)
+        {
+            // TODO: audio occlusion check...
+
+            if (_tag.HasTag(target, ent.Comp.WindowTag))
+            {
+                _damage.ChangeDamage(target.AsNullable(), ent.Comp.WindowDamage, true);
+                continue;
+            }
+
+            if (!_mobQuery.HasComp(target))
+                continue;
+
+            if (_whitelist.IsWhitelistPass(ent.Comp.Blacklist, target))
+                continue;
+
+            if (_whitelist.IsWhitelistPass(ent.Comp.SiliconWhitelist, target))
+            {
+                _stun.TryAddParalyzeDuration(target.Owner, ent.Comp.SiliconStunTime);
+                continue;
+            }
+
+            if (_humanoidQuery.HasComp(target))
+                PredictedSpawnAtPosition(ent.Comp.ProtoFlash, Transform(target).Coordinates);
+        }
     }
 }

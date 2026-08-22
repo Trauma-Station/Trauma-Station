@@ -26,16 +26,20 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipSecurityOfficer # TODO: give it some clown one later
+    - SkillChipCombatEducation
+    - SkillChipClown
+    - SkillChipUnarmed
   - !type:AddComponentSpecial
     components:
     - type: Clumsy
-      clumsyDamage:
+      gunShootFailDamage:
         types: #literally just picked semi random valus. i tested this once and tweaked it.
           Blunt: 5
           Piercing: 4
-        groups:
-          Burn: 3
+          Heat: 3
+      catchingFailDamage:
+        types:
+          Blunt: 1
     - type: SleepEmitSound
       snore: /Audio/Voice/Misc/silly_snore.ogg
       interval: 10

@@ -109,7 +109,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         EntityCoordinates coordinates;
 
-        if (MapManager.TryFindGridAt(mousePos, out var gridUid, out _))
+        if (Maps.TryFindGridAt(mousePos, out var gridUid, out _))
         {
             coordinates = TransformSystem.ToCoordinates(gridUid, mousePos);
         }

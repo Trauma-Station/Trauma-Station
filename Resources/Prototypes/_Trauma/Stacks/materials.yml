@@ -9,6 +9,13 @@
 
 - type: stack
   parent: BaseMediumStack
+  id: BarbedWire
+  name: stack-barbwire
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/barbwire.rsi, state: icon }
+  spawn: BarbedWire1
+
+- type: stack
+  parent: BaseMediumStack
   id: Brick
   name: stack-brick
   icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: brick }

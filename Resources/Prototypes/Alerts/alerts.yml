@@ -6,8 +6,11 @@
   order:
   - category: Health
   - category: Stamina
-  - alertType: ChangelingBiomass # goobstation - changelings
-  - alertType: ChangelingChemicals # goobstation - changelings
+  # <Trauma>
+  - alertType: ParryExhaustion
+  - alertType: ChangelingBiomass
+  - alertType: ChangelingChemicals
+  # </Trauma>
   - alertType: SuitPower
   - alertType: ModsuitPower # Goobstation - Modsuits
   - category: Internals
@@ -15,6 +18,7 @@
   - alertType: HolyFire # Trauma
   - alertType: Handcuffed
   - alertType: Ensnared
+  - alertType: Fultoned # Trauma
   - category: Buckled
   - alertType: Pulling
   - alertType: Walking
@@ -32,10 +36,12 @@
   - alertType: Rooted
   - alertType: Pacified
   - alertType: Stealthy
-  - alertType: ShadowCloak # Goobstation
-  - alertType: DragonPower # Goobstation
-  - category: Ninjutsu # Goobstation
-  - category: Counter # WD EDIT
+  # <Trauma>
+  - alertType: ShadowCloak
+  - alertType: DragonPower
+  - category: Ninjutsu
+  - category: Counter
+  # </Trauma>
 
 - type: entity
   id: AlertSpriteView

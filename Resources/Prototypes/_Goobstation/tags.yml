@@ -21,9 +21,6 @@
   id: BindSoulAction
 
 - type: Tag
-  id: Bible
-
-- type: Tag
   id: Blobbernaut
 
 - type: Tag
@@ -363,9 +360,6 @@
   id: MechUnGrabbable
 
 - type: Tag
-  id: MedicalPatch
-
-- type: Tag
   id: Medipen
 
 - type: Tag
@@ -435,7 +429,7 @@
   id: NukeOpsReinforcementUplink
 
 - type: Tag
-  id: Nullrod
+  id: Nullrod # Allows transforming it into an altar's specific nullrod. Given to the Nullrod entity specifically.
 
 - type: Tag
   id: NunHood

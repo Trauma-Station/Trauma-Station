@@ -5,6 +5,19 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RiflesPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RiflesDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RiflesDrop
+  - type: WeaponClass
+    class: Heavy # I am heavy weapons guy... and this, is my heavy weapon.
+  # </Trauma>
   - type: Sprite
   - type: Item
     size: Huge
@@ -63,17 +76,6 @@
     price: 500
   - type: UseDelay
     delay: 1
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      collection: RiflesPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: RiflesDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: RiflesDrop
-  # Goobstation edit end
 
 - type: entity
   name: L6 SAW

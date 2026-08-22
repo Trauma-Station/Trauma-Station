@@ -7,6 +7,7 @@ using Content.Shared.Examine;
 using Content.Shared.Gibbing;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
@@ -29,6 +30,7 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
+    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -47,12 +49,16 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedHereticCurseSystem _curse = default!;
     [Dependency] private FleshGraspSystem _fleshGrasp = default!;
+    [Dependency] private SharedGhoulSystem _ghoul = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
 
-    public static SoundSpecifier RitualSuccessSound =
-        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
+    public static SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg")
+    {
+        Params = AudioParams.Default.WithVolume(-3f)
+    };
 
     public const string Performer = "Performer";
     public const string Mind = "Mind";
@@ -93,6 +99,10 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         return (false, false);
     }
 
+    protected virtual void SpawnHereticInfluence(int amount = 1)
+    {
+    }
+
     private bool IsSacrificeTarget(Entity<HereticComponent> heretic, EntityUid target)
     {
         return heretic.Comp.SacrificeTargets.Any(x => x.Entity == GetNetEntity(target));
@@ -127,6 +137,19 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (ent.Comp2.Limit > 0)
         {
             ent.Comp2.LimitedOutput = ent.Comp2.LimitedOutput.Where(Exists).ToList();
+            Dirty(ent, ent.Comp2);
+
+            // In case this is a ghoul creation ritual, we try to free up some space
+            var difference = ent.Comp2.LimitedOutput.Count + ent.Comp2.LimitGhoulCleanupIterations - ent.Comp2.Limit;
+            if (difference > 0)
+            {
+                for (var i = 0; i < difference; i++)
+                {
+                    if (!ent.Comp2.LimitedOutput.Any(x => _ghoul.TryKillAndDeconvertInactiveGhoul(x)))
+                        break;
+                }
+            }
+
             if (ent.Comp2.LimitedOutput.Count >= ent.Comp2.Limit)
             {
                 if (ent.Comp2.LimitReachedEffects is { } limitReachedEffects)
@@ -227,7 +250,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
         if (heretic.RitualContainer.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("heretic-ritual-norituals"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("heretic-ritual-norituals"), args.User, args.User);
             return;
         }
 
@@ -250,7 +273,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         Dirty(mind, heretic);
 
         var ritualName = Name(ritual);
-        _popup.PopupClient(Loc.GetString("heretic-ritual-switch", ("name", ritualName)), user, user);
+        _popup.PopupEntity(Loc.GetString("heretic-ritual-switch", ("name", ritualName)), user, user);
     }
 
     private void OnInteractUsing(Entity<HereticRitualRuneComponent> ent, ref InteractUsingEvent args)
@@ -263,7 +286,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
         if (!TryComp(heretic.ChosenRitual, out HereticRitualComponent? ritual))
         {
-            _popup.PopupClient(Loc.GetString("heretic-ritual-noritual"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("heretic-ritual-noritual"), args.User, args.User);
             return;
         }
 
@@ -280,7 +303,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
                 RitualSuccess(ent, args.User, true);
         }
         else if (TryGetValue(ritEnt, CancelString, out string? cancelStr))
-            _popup.PopupClient(cancelStr, ent, args.User);
+            _popup.PopupEntity(cancelStr, ent, args.User);
 
         raiser.Blackboard.Clear();
         Dirty(ritEnt);
@@ -297,9 +320,14 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
     public void RitualSuccess(EntityUid ent, EntityUid user, bool predicted)
     {
-        _audio.PlayPredicted(RitualSuccessSound, Transform(ent).Coordinates, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
+        var coords = Transform(ent).Coordinates;
+        if (predicted)
+            _audio.PlayPredicted(RitualSuccessSound, coords, user);
+        else
+            _audio.PlayPvs(RitualSuccessSound, coords);
+
         var popup = Loc.GetString("heretic-ritual-success");
-        _popup.PopupPredicted(popup, ent, predicted ? user : null, Filter.Entities(user), false);
+        _popup.PopupEntity(popup, ent, user);
         PredictedSpawnAttachedTo("HereticRuneRitualAnimation", ent.ToCoordinates());
     }
 

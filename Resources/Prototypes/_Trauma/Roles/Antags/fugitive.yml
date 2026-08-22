@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Hunters
-  # SpacePol
+  # SyndiePol
 - type: startingGear
-  id: HunterAntagGear
+  id: HunterAntagGearSpacepol
   equipment:
     head: ClothingHeadHelmetSwat # maybe keep justice for shits and giggles?
     eyes: ClothingEyesGlassesSecurity
@@ -27,11 +27,11 @@
     - MedkitCombatFilled
 
 - type: antagSpecifier
-  id: FugitiveHunter
-  spawnerPrototype: SpawnPointGhostRoleHunter
-  startingGear: HunterAntagGear
+  id: FugitiveHunterSyndicate
+  spawnerPrototype: SpawnPointGhostRoleHunterSpacepol
+  startingGear: HunterAntagGearSpacepol
   briefing:
-    text: hunter-role-greeting
+    text: hunter-syndicate-role-greeting
     color: red
   components:
   - type: NpcFactionMember
@@ -39,8 +39,89 @@
     - Syndicate
   - type: AutoImplant
     implants:
-    - FakeMindShieldImplant
     - DeathAcidifierImplant
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
+
+# Spacepol
+
+- type: antagSpecifier
+  id: FugitiveHunterSpacepol
+  spawnerPrototype: SpawnPointGhostRoleHunterSpacepol
+  startingGear: HunterAntagGearSpacepol
+  briefing:
+    text: hunter-spacepol-role-greeting
+    color: red
+  components:
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
+
+# Russians
+
+- type: startingGear
+  id: HunterAntagGearRussian
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    shoes: ClothingShoesBootsCombat
+    head: ClothingHeadHatUshanka
+    eyes: ClothingEyesGlassesSunglasses
+    mask: KnittedBalaclava
+    outerClothing: ClothingOuterCoatBomber
+    back: ClothingBackpackSatchelLeather
+    id: AgentIDCard
+    ears: ClothingHeadsetAltFreelancer
+    gloves: ClothingHandsGlovesCombat
+    neck: ClothingNeckBombCollarBroken
+    belt: ClothingBeltUtilityEngineering
+  storage:
+    back:
+    - Stunprod
+    - BarbHandcuffs
+    - ForensicScanner
+
+- type: antagSpecifier
+  id: FugitiveHunterRussian
+  spawnerPrototype: SpawnPointGhostRoleHunterRussian
+  startingGear: HunterAntagGearRussian
+  briefing:
+    text: hunter-spacepol-role-greeting
+    color: red
+  components:
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
+# Bounty Hunter
+
+- type: startingGear
+  id: HunterAntagGearBounty
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryContractor
+    shoes: ClothingShoesBootsCombatFilled
+    head: ClothingHeadHatCorpsoft
+    eyes: ClothingEyesThermalVisionGogglesSyndie
+    outerClothing: ClothingOuterCoatJacketLeather
+    back: ClothingBackpackRev
+    id: AgentIDCard
+    ears: ClothingHeadsetAltFreelancer
+    gloves: ClothingHandsGlovesCombat
+    belt: ClothingBeltSecurityWebbingFilled
+  storage:
+    back:
+    - Katana
+    - WeaponRevolverDeckard
+    - ForensicScanner
+    - FoodBurgerMcrib
+
+- type: antagSpecifier
+  id: FugitiveHunterBounty
+  spawnerPrototype: SpawnPointGhostRoleHunterBounty
+  startingGear: HunterAntagGearBounty
+  briefing:
+    text: hunter-spacepol-role-greeting
+    color: red
+  components:
   - type: RandomMetadata
   mindRoles:
   - MindRoleGhostRoleHunter
@@ -62,6 +143,7 @@
     belt:
     - BarberScissors
     - Telecrystal25
+    - BaseUplinkRadio
 
 - type: antagSpecifier
   id: Fugitive
@@ -74,9 +156,6 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
-  - type: AutoImplant
-    implants:
-    - UplinkImplant
   - type: RandomMetadata
   - type: EmitSoundOnSpawn # fell out of the ceiling
     sound: /Audio/Effects/clang.ogg

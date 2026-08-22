@@ -15,7 +15,8 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipPsychologist
+    - SkillChipEducation
+    - SkillChipChemist
   # </Trauma>
 
 - type: startingGear

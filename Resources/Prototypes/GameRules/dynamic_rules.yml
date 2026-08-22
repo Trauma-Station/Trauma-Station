@@ -47,11 +47,11 @@
           - !type:PlayerCountCondition
             min: 10
         # <Trauma>
-        - id: Changeling
-          weight: 25
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
+#        - id: Changeling
+#          weight: 25
+#          conditions:
+#          - !type:HasBudgetCondition
+#          - !type:MaxRuleOccurenceCondition
         - id: HereticRoundstart
           weight: 20
           conditions:
@@ -100,11 +100,6 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 30
-        - id: CorporateAgent
-          prob: 0.075
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
         # </Trauma>
       # Midround rules
       - !type:GroupSelector

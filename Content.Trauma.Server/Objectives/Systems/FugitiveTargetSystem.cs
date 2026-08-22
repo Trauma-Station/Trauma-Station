@@ -15,7 +15,6 @@ public sealed partial class FugitiveTargetSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private TargetObjectiveSystem _target = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -86,7 +85,7 @@ public sealed partial class FugitiveTargetSystem : EntitySystem
         if (!TryComp<HumanoidProfileComponent>(mob, out var humanoid))
             return Name(mob);
 
-        var speciesProto = _proto.Index(humanoid.Species);
+        var speciesProto = ProtoMan.Index(humanoid.Species);
         var species = Loc.GetString(speciesProto.Name).ToLower();
         var sex = humanoid.Sex.ToString().ToLower();
 

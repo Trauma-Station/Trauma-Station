@@ -1,34 +1,36 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.VoiceMask;
+using Content.Goobstation.Common.VoiceMask;
 using Content.Server.VoiceMask;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Implants;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.StatusIcon;
 using Content.Shared.VoiceMask;
 
 namespace Content.Goobstation.Server.VoiceMask;
 
 public sealed partial class VoiceMaskSystemGoob : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedJobSystem _job = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private VoiceMaskSystem _voiceMask = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeJobIconMessage>(OnChangeJobIcon);
-        SubscribeLocalEvent<VoiceMaskComponent, ImplantRelayEvent<TransformSpeakerJobIconEvent>>(OnTransformJobIcon);
-        SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<TransformSpeakerJobIconEvent>>(OnTransformJobIcon);
+        base.Initialize();
+
+        Subs.BuiEvents<VoiceMaskComponent>(VoiceMaskUIKey.Key, subs =>
+        {
+            subs.Event<VoiceMaskChangeJobIconMessage>(OnChangeJobIcon);
+        });
     }
 
     private void OnChangeJobIcon(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeJobIconMessage ev)
     {
-        if (!_proto.TryIndex(ev.JobIconProtoId, out var proto)
-            || !proto.AllowSelection)
+        if (!ProtoMan.TryIndex<JobIconPrototype>(ev.JobIcon, out var proto))
             return;
 
         entity.Comp.JobIconProtoId = proto.ID;
@@ -39,11 +41,13 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
         _voiceMask.UpdateUI(entity);
     }
 
+    [SubscribeLocalEvent]
     private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref ImplantRelayEvent<TransformSpeakerJobIconEvent> args)
     {
-        TransformJobIcon(ent, ref args.Event);
+        TransformJobIcon(ent, ref args.Args);
     }
 
+    [SubscribeLocalEvent]
     private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref InventoryRelayedEvent<TransformSpeakerJobIconEvent> args)
     {
         TransformJobIcon(ent, ref args.Args);

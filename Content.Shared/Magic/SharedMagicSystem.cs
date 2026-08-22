@@ -15,6 +15,7 @@ using Robust.Shared.Timing;
 using System.Linq;
 // </Trauma>
 using System.Numerics;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
@@ -62,9 +63,9 @@ public abstract partial class SharedMagicSystem : EntitySystem
     [Dependency] private CommonWizardSystem _wizard = default!;
     // </Trauma>
     [Dependency] private ISerializationManager _seriMan = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedGunSystem _gunSystem = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -85,7 +86,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     //[Dependency] private ExamineSystemShared _examine= default!; // Trauma - unused now
-    [Dependency] private TargetSystem _target = default!;
+    [Dependency] private AliveHumanoidTargetSystem _target = default!;
 
     private static readonly ProtoId<TagPrototype> InvalidForGlobalSpawnSpellTag = "InvalidForGlobalSpawnSpell";
 
@@ -232,14 +233,14 @@ public abstract partial class SharedMagicSystem : EntitySystem
             return;
         }
 
-        if (requiresSpeech && HasComp<MutedComponent>(args.Performer)) // Goob edit
+        if (requiresSpeech && !_actionBlocker.CanSpeak(args.Performer)) // Trauma - use requiresSpeech from above
             hasReqs = false;
 
         if (hasReqs)
             return;
 
         args.Cancelled = true;
-        _popup.PopupClient(Loc.GetString("spell-requirements-failed-speech"), args.Performer, args.Performer); // Goob edit
+        _popup.PopupEntity(Loc.GetString("spell-requirements-failed-speech"), args.Performer, args.Performer); // Trauma - added -speech
 
         // TODO: Pre-cast do after, either here or in SharedActionsSystem
     }
@@ -405,27 +406,26 @@ public abstract partial class SharedMagicSystem : EntitySystem
 
         ev.Handled = true;
 
+        /* Trauma - fuck you predict it
         if (!_net.IsServer)
             return; // client returns handled for predicted audio
+        */
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
+        var toCoords = ev.Target;
+        var userVelocity = _physics.GetMapLinearVelocity(ev.Performer);
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
         var fromMap = _transform.ToMapCoordinates(fromCoords);
-
-        var spawnCoords = _mapManager.TryFindGridAt(fromMap, out var gridUid, out _)
-            ? _transform.WithEntityId(fromCoords, gridUid)
-            : new(_mapSystem.GetMap(fromMap.MapId), fromMap.Position);
-        var userVelocity = _physics.GetMapLinearVelocity(spawnCoords); // Goob edit
-
-        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma
-        var direction = _transform.ToMapCoordinates(ev.Target).Position -
-                        fromMap.Position;
-        _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.Speed); // Goob - put speed in event instead of hardcoded
-
-        if (ev.Entity != null) // Goobstation
-            _gunSystem.SetTarget(ent, ev.Entity.Value, out _);
+        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma - predict
+        var direction = _transform.ToMapCoordinates(toCoords).Position -
+                         fromMap.Position;
+        // <Trauma>
+        if (ev.Entity is { } target)
+            _gunSystem.SetTarget(ent, target, out _);
+        // </Trauma>
+        _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.ProjectileSpeed);
     }
     // End Projectile Spells
     #endregion
@@ -484,7 +484,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        var ent = Spawn(proto, position.SnapToGrid(EntityManager, _mapManager));
+        var ent = Spawn(proto, position.SnapToGrid(EntityManager));
 
         if (lifetime != null)
         {
@@ -627,7 +627,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
 
         ev.Handled = true;
 
-        var allHumans = _target.GetAliveHumans();
+        var allHumans = _target.GetMinds();
 
         foreach (var human in allHumans)
         {

@@ -17,6 +17,7 @@ public sealed partial class HealingAuraComponent : Component
             {"Blunt", -1.5f},
             {"Slash", -1.5f},
             {"Piercing", -1.5f},
+            {"Ballistic", -1.5f},
             {"Heat", -1.5f},
             {"Cold", -1.5f},
             {"Shock", -1.5f},

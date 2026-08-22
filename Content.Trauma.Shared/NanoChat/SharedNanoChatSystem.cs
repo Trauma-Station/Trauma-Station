@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Access.Components;
 using Content.Shared.Examine;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Trauma.Common.NanoChat;
+using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.NanoChat;
@@ -14,12 +16,7 @@ public abstract partial class SharedNanoChatSystem : CommonNanoChatSystem
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<NanoChatCardComponent, ExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<NanoChatCardComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -37,20 +34,20 @@ public abstract partial class SharedNanoChatSystem : CommonNanoChatSystem
     #region Public API Methods
 
     public override uint? GetNumber(Entity<NanoChatCardComponent?> card)
-    {
-        if (!Resolve(card, ref card.Comp))
-            return null;
-
-        return card.Comp.Number;
-    }
+        => Resolve(card, ref card.Comp) ? card.Comp.Number : null;
 
     public override void SetNumber(Entity<NanoChatCardComponent?> card, uint number)
     {
-        if (!Resolve(card, ref card.Comp))
+        if (!Resolve(card, ref card.Comp) || card.Comp.Number == number || number > 9999)
             return;
 
         card.Comp.Number = number;
         Dirty(card);
+    }
+
+    public virtual void TrySendMessage(Entity<NanoChatCartridgeComponent> sender, Entity<NanoChatCardComponent> card, NanoChatMessage message, uint dest, EntityUid user)
+    {
+        // client cant predict radio stuff
     }
 
     /// <summary>
@@ -251,6 +248,42 @@ public abstract partial class SharedNanoChatSystem : CommonNanoChatSystem
             Dirty(card);
 
         return removed;
+    }
+
+    /// <summary>
+    ///     Ensures a recipient exists in the sender's contacts.
+    /// </summary>
+    /// <param name="card">The card to check contacts for</param>
+    /// <param name="recipientNumber">The recipient's number to check</param>
+    /// <returns>True if the recipient exists or was created successfully</returns>
+    public bool EnsureRecipientExists(Entity<NanoChatCardComponent> card, uint recipientNumber)
+        => EnsureRecipientExists((card, card.Comp), recipientNumber, GetCardInfo(recipientNumber));
+
+    /// <summary>
+    ///     Gets the <see cref="NanoChatRecipient" /> for a given NanoChat number.
+    /// </summary>
+    public NanoChatRecipient? GetCardInfo(uint number)
+    {
+        // Find card with this number to get its info
+        var query = EntityQueryEnumerator<NanoChatCardComponent>();
+        while (query.MoveNext(out var uid, out var card))
+        {
+            if (card.Number != number)
+                continue;
+
+            // Try to get job title from ID card if possible
+            string? jobTitle = null;
+            var name = "Unknown";
+            if (TryComp<IdCardComponent>(uid, out var idCard))
+            {
+                jobTitle = idCard.LocalizedJobTitle;
+                name = idCard.FullName ?? name;
+            }
+
+            return new NanoChatRecipient(number, name, jobTitle);
+        }
+
+        return null;
     }
 
     /// <summary>

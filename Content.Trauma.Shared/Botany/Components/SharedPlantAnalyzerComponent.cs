@@ -7,7 +7,7 @@ using Content.Trauma.Common.Botany;
 
 namespace Content.Trauma.Shared.Botany.Components;
 
-public enum PlantAnalyzerModes
+public enum PlantAnalyzerModes : byte
 {
     Scan,
     Extract,

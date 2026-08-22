@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Server.LinkAccount;
 using Content.Server.MoMMI;
 // </Trauma>
 using Content.Server.Administration;
@@ -23,6 +22,7 @@ using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.Players.JobWhitelist;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Players.RateLimiting;
+using Content.Server.Players.Whitelist;
 using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
@@ -32,7 +32,6 @@ using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
 using Content.Shared.FeedbackSystem;
 using Content.Shared.IoC;
-using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 
@@ -48,7 +47,6 @@ internal static class ServerContentIoC
         deps.Register<IChatSanitizationManager, ChatSanitizationManager>();
         deps.Register<IServerPreferencesManager, ServerPreferencesManager>();
         deps.Register<IServerDbManager, ServerDbManager>();
-        deps.Register<RecipeManager, RecipeManager>();
         deps.Register<INodeGroupFactory, NodeGroupFactory>();
         deps.Register<IConnectionManager, ConnectionManager>();
         deps.Register<ServerUpdateManager>();
@@ -71,6 +69,7 @@ internal static class ServerContentIoC
         deps.Register<ServerInfoManager>();
         deps.Register<DiscordWebhook>();
         deps.Register<VoteWebhooks>();
+        deps.Register<EventWebhook>();
         deps.Register<ServerDbEntryManager>();
         deps.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
         deps.Register<ServerApi>();
@@ -85,9 +84,8 @@ internal static class ServerContentIoC
         //deps.Register<DiscordLink>(); // Trauma - wasn't cherry picked
         //deps.Register<DiscordChatLink>(); // Trauma
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
-        deps.Register<IPostInjectInit, LinkAccountManager>(); // RMC - Patreon
-        deps.Register<LinkAccountManager>(); // RMC - Patreon
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
+        deps.Register<WhitelistManager>();
     }
 }

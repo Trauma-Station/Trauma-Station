@@ -7,3 +7,16 @@
   - /Audio/Voice/Misc/lowHiss2.ogg
   - /Audio/Voice/Misc/lowHiss3.ogg
   - /Audio/Voice/Misc/lowHiss4.ogg
+
+- type: soundCollection
+  id: FootstepXenomorph
+  files:
+  - /Audio/_Trauma/Xenomorphs/step1.ogg
+  - /Audio/_Trauma/Xenomorphs/step2.ogg
+  - /Audio/_Trauma/Xenomorphs/step3.ogg
+  - /Audio/_Trauma/Xenomorphs/step4.ogg
+  - /Audio/_Trauma/Xenomorphs/step5.ogg
+  - /Audio/_Trauma/Xenomorphs/step6.ogg
+  - /Audio/_Trauma/Xenomorphs/step7.ogg
+  - /Audio/_Trauma/Xenomorphs/step8.ogg
+  - /Audio/_Trauma/Xenomorphs/step9.ogg

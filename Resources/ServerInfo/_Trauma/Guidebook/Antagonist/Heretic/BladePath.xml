@@ -42,8 +42,8 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the blade mark, creating flying blades that protect you from attacks when active, throw with an empty hand to use then as a ranged attack.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Champion Hook</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Makes your next blade light attack deal extra damage, knockdown and hook victim.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Alt-click target with your blade in combat mode to deal extra damage, knockdown and hook victim.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Sacraments of Power</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>

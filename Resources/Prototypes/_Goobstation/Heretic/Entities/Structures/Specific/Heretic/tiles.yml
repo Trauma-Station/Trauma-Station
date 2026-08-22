@@ -89,14 +89,6 @@
       effectProto: ShadowCloakStatusEffect
       time: 180
       type: Remove
-    - !type:GenericStatusEffect
-      key: BlurryVision
-      component: BlurryVision
-      time: 6
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
-      time: 6
   - type: Transform
     anchored: true
   - type: Physics
@@ -124,8 +116,6 @@
       components:
       - Ghoul
       - ForestAdmonitions
-  - type: SoundBlocker
-    soundBlockPercent: 0.95
 
 - type: entity
   id: TileHereticVoid
@@ -154,9 +144,8 @@
   - type: TileEntityEffect
     effects:
     - !type:VoidCurse
-    - !type:GenericStatusEffect
-      key: PressureImmunity
-      component: PressureImmunity
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectPressureImmunity
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -264,8 +253,8 @@
   sprite: /Textures/_Goobstation/Heretic/Tiles/plating_rust.png
   baseTurf: Plating
   isSubfloor: true
-  deconstructTools: [ Prying ] # This used to be welding but it was annoying to weld plating instead of rust accidentally and space the area
-  deconstructTimeMultiplier: 5
+  deconstructTools: [ Prying, Brushing ]
+  deconstructTimeMultiplier: 3
   footstepSounds:
     collection: FootstepPlating
   friction: 1.5
@@ -278,9 +267,9 @@
   components:
   - type: TimedDespawn
     lifetime: 30
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - WideSwingIgnore
   - type: Physics
     bodyType: Static
@@ -323,6 +312,7 @@
       components:
       - CosmosPassive
   - type: VelocityModifierContacts
+    collisionFixture: fix2
     isActive: false
     modifier: 0.05
     whitelist:
@@ -343,9 +333,9 @@
   components:
   - type: TimedDespawn
     lifetime: 15
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - Holosign
     - BlockLightning
   - type: Physics

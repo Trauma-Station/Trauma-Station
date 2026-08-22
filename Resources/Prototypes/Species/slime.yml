@@ -7,3 +7,10 @@
   dollPrototype: AppearanceSlimePerson
   skinColoration: Hues
   knowledge: Slimeperson # Trauma
+  defaultSoundsBySex:
+  - MaleSlime
+  - FemaleSlime
+  - MaleSlime
+  voices:
+  - MaleSlime
+  - FemaleSlime

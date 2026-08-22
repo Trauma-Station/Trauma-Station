@@ -24,7 +24,11 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
             return;
 
         if (args.HitEntities.Count == 0)
+        {
+            if (args.IsHit && ent.Comp.MissEffects is { } missEffects)
+                _effects.ApplyEffects(args.User, missEffects, user: args.User);
             return;
+        }
 
         var user = args.User;
         var targetEffects = ent.Comp.TargetEffects;
@@ -33,7 +37,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
         if (!ent.Comp.EffectForEveryHit)
         {
             var target = args.HitEntities[0];
-            if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds))
+            if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds, user))
                 return;
 
             DoEffects(targetEffects, userEffects, user, target);
@@ -42,7 +46,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
 
         foreach (var target in args.HitEntities)
         {
-            if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds))
+            if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds, user))
                 continue;
 
             DoEffects(targetEffects, userEffects, user, target);

@@ -347,7 +347,7 @@
     - id: HoloprojectorSecurity
     - id: RubberStampHos
     - id: BoxHoSCircuitboards
-    #- id: WeaponDisabler # Goobstation (Disablers in belts)
+    #- id: WeaponDisabler # Trauma - disablers are in belts
     - id: WantedListCartridge
     - id: DrinkHosFlask
     - id: PlushieLizardJobHeadofsecurity

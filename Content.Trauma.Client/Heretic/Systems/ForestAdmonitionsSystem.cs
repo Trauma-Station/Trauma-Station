@@ -12,6 +12,16 @@ public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSys
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
 
+    [Dependency] private EntityQuery<ShadowCloakEntityComponent> _shadowQuery = default!;
+
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<ForestAdmonitionsEntityComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ForestAdmonitionsComponent), 1f);
+    }
 
     public override void FrameUpdate(float frameTime)
     {
@@ -22,18 +32,15 @@ public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSys
 
         var now = Timing.CurTime;
 
-        var query = EntityQueryEnumerator<ForestAdmonitionsEntityComponent, ShadowCloakEntityComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var shadow))
+        var query = EntityQueryEnumerator<ForestAdmonitionsEntityComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (comp.NextUpdate > now)
                 continue;
 
             comp.NextUpdate = now + comp.UpdateTime;
 
-            if (!Exists(shadow.User))
-                continue;
-
-            var viewer = shadow.User.Value == player ? uid : player;
+            var viewer = (_shadowQuery.CompOrNull(uid)?.User ?? uid) == player ? uid : player;
 
             var factor = CalculateVisibilityFactor((uid, comp), viewer);
             _spriteVis.UpdateVisibilityModifiers(uid, nameof(ForestAdmonitionsComponent), factor);

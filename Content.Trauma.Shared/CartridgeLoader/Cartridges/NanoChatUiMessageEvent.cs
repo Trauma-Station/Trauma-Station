@@ -46,3 +46,15 @@ public sealed class NanoChatUiMessageEvent : CartridgeMessageEvent
         RecipientJob = recipientJob;
     }
 }
+
+[Serializable, NetSerializable]
+public enum NanoChatUiMessageType : byte
+{
+    NewChat,
+    SelectChat,
+    CloseChat,
+    SendMessage,
+    DeleteChat,
+    ToggleMute,
+    ToggleListNumber,
+}

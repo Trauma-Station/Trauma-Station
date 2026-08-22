@@ -19,3 +19,8 @@
   id: apotheosis
   flavorType: Complex
   description: flavor-complex-apotheosis
+
+- type: flavor
+  id: rich
+  flavorType: Complex
+  description: flavor-complex-rich

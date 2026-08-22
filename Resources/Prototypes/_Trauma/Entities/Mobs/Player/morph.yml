@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobNightVision, BaseSlicingRefinable ]
   id: MobMorphBase
   name: morph
   description: A revolting, pulsating pile of flesh.
@@ -109,6 +109,7 @@
       components:
       - BorgChassis
       - Silicon
+      - MorphBiomassBlacklist
       tags:
       - Bot # no biomass if its a bot
       - SiliconMob # no biomass if its borg or ipc
@@ -130,13 +131,13 @@
       # below are all invisible
       - Pda
       - Door
+      - Wall
       tags:
       - Catwalk
-      - Wall
       - Window
     disguiseProto: ChameleonDisguiseMorph
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatDragon
       amount: 2
   - type: TypingIndicator
@@ -158,10 +159,6 @@
     factions:
     - SimpleHostile
   - type: VentCrawler
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   parent: MobMorphBase

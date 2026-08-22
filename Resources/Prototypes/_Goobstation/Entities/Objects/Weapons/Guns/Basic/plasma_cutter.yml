@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: plasma cutter
   parent: BaseWeaponBatterySmall
   id: WeaponPlasmaCutter
-  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
+  name: plasma cutter # deadspace gameplay
+  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse. Phoron rounds make it excellent at mining.
   components:
+  - type: WeaponClass
+    class: Mining
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/cutter.rsi
     state: icon

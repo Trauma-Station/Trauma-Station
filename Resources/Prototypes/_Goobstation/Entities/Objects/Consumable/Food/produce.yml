@@ -29,7 +29,7 @@
         Quantity: 5
 
 - type: entity
-  parent: ProduceBase
+  parent: [ ProduceBase, BaseSlicingRefinable ]
   id: Nevcotta
   name: nevcotta log
   description: When planted out of it's native habitat, it grows into an entirely different plant.
@@ -39,9 +39,10 @@
     state: icon
   - type: Produce
     seedId: towercap # Shhh, I don't want to make this an actual plant yet!
-  - type: Log
-    spawnedPrototype: NevcottaBark
-    spawnCount: 2
+  - type: ToolRefinable
+    refineResult:
+    - id: NevcottaBark
+      amount: 2
 
 - type: entity
   parent: BaseItem

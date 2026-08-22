@@ -31,12 +31,11 @@ namespace Content.Shared.Polymorph.Systems;
 public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private CommonSparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISerializationManager _serMan = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -163,13 +162,13 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
     {
         if (_container.IsEntityInContainer(target) || _container.IsEntityInContainer(user))
         {
-            _popup.PopupClient(Loc.GetString("chameleon-projector-inside-container"), target, user);
+            _popup.PopupEntity(Loc.GetString("chameleon-projector-inside-container"), target, user);
             return false;
         }
 
         if (IsInvalid(ent.Comp, target))
         {
-            _popup.PopupClient(Loc.GetString("chameleon-projector-invalid"), target, user);
+            _popup.PopupEntity(Loc.GetString("chameleon-projector-invalid"), target, user);
             return false;
         }
 
@@ -177,7 +176,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         if (TryComp<ItemToggleComponent>(ent.Owner, out var itemToggle) && !_toggle.TryActivate((ent.Owner, itemToggle), user))
             return false;
 
-        _popup.PopupClient(Loc.GetString("chameleon-projector-success"), target, user);
+        _popup.PopupEntity(Loc.GetString("chameleon-projector-success"), target, user);
         Disguise(ent, user, target);
         return true;
     }
@@ -242,9 +241,11 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
     {
         var proj = ent.Comp;
 
+        /* Trauma - yes prediction
         // no spawning prediction sorry
         if (_net.IsClient)
             return;
+        */
 
         // reveal first to allow quick switching
         if (ent.Comp.Disguised != null)
@@ -256,7 +257,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 
         proj.Disguised = user;
 
-        var disguise = SpawnAttachedTo(proj.DisguiseProto, user.ToCoordinates());
+        var disguise = PredictedSpawnAttachedTo(proj.DisguiseProto, user.ToCoordinates()); // Trauma - predict it
 
         var disguised = EnsureComp<ChameleonDisguisedComponent>(user);
         disguised.Disguise = disguise;
@@ -283,7 +284,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         // </Trauma>
 
         _appearance.CopyData(entity, disguise);
-        _sparks.DoSparks(Transform(user).Coordinates); // Goob
+        _sparks.DoSparks(user); // Trauma
     }
 
     /// <summary>
@@ -302,7 +303,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         _toggle.TryDeactivate(disguise.Projector);
 
         RemComp<ChameleonDisguisedComponent>(ent);
-        _sparks.DoSparks(Transform(ent).Coordinates); // Goob
+        _sparks.DoSparks(ent); // Trauma
         return true;
     }
 
@@ -368,10 +369,10 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         if (comp.SourceProto is not { } protoId)
             return false;
 
-        if (!_proto.TryIndex<EntityPrototype>(protoId, out var proto))
+        if (!ProtoMan.TryIndex<EntityPrototype>(protoId, out var proto))
             return false;
 
-        return proto.TryGetComponent(out src, EntityManager.ComponentFactory);
+        return proto.TryComp(out src, EntityManager.ComponentFactory);
     }
 }
 

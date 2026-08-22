@@ -1,9 +1,13 @@
 // <Trauma>
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Common.Wizard;
 // </Trauma>
 using Content.Client.Movement.Systems;
 using Content.Shared.Actions;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
+using Content.Shared.Ghost.Systems;
+using Content.Shared.NightVision;
+using Content.Shared.Overlays;
 using Robust.Client.Console;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
@@ -14,25 +18,26 @@ namespace Content.Client.Ghost
     public sealed partial class GhostSystem : SharedGhostSystem
     {
         // <Trauma>
-        [Dependency] private CommonGhostVisibilitySystem _ghostVisSystem = default!;
+        [Dependency] private CommonGhostVisibilitySystem _ghostVis = default!;
+        [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
         // </Trauma>
         [Dependency] private IClientConsoleHost _console = default!;
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private SharedActionsSystem _actions = default!;
-        [Dependency] private PointLightSystem _pointLightSystem = default!;
         [Dependency] private ContentEyeSystem _contentEye = default!;
         [Dependency] private SpriteSystem _sprite = default!;
+        [Dependency] private SharedNightVisionSystem _nv = default!;
 
         public int AvailableGhostRoleCount { get; private set; }
 
         private bool _ghostVisibility = true;
 
-        private bool GhostVisibility
+        public bool GhostVisibility
         {
-            get => _ghostVisSystem.GhostsVisible() || _ghostVisibility; // Goob edit
-            set
+            get => _ghostVis.GhostsVisible() || _ghostVisibility; // Goob edit
+            private set
             {
-                if (_ghostVisSystem.GhostsVisible()) // Goobstation
+                if (_ghostVis.GhostsVisible()) // Goobstation
                     value = true;
 
                 if (_ghostVisibility == value)
@@ -42,11 +47,13 @@ namespace Content.Client.Ghost
 
                 _ghostVisibility = value;
 
-                var query = AllEntityQuery<GhostComponent, SpriteComponent>();
-                while (query.MoveNext(out var uid, out _, out var sprite))
+                // <Trauma> - use sprite visibility system instead of SetVisible, removed Sprite from the query
+                var query = AllEntityQuery<GhostComponent>();
+                while (query.MoveNext(out var uid, out _))
                 {
-                    _sprite.SetVisible((uid, sprite), value || uid == _playerManager.LocalEntity);
+                    _spriteVis.UpdateVisibilityModifiers(uid, nameof(GhostComponent), value || uid == _playerManager.LocalEntity);
                 }
+                // </Trauma>
             }
         }
 
@@ -81,8 +88,9 @@ namespace Content.Client.Ghost
 
         private void OnStartup(EntityUid uid, GhostComponent component, ComponentStartup args)
         {
-            if (TryComp(uid, out SpriteComponent? sprite))
-                _sprite.SetVisible((uid, sprite), GhostVisibility || uid == _playerManager.LocalEntity);
+            // <Trauma> - use sprite visibility system instead of SetVisible
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(GhostComponent), GhostVisibility || uid == _playerManager.LocalEntity);
+            // </Trauma>
         }
 
         private void OnToggleLighting(EntityUid uid, EyeComponent component, ToggleLightingActionEvent args)
@@ -90,27 +98,25 @@ namespace Content.Client.Ghost
             if (args.Handled)
                 return;
 
-            TryComp<PointLightComponent>(uid, out var light);
-
             if (!component.DrawLight)
             {
                 // normal lighting
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-normal"), args.Performer);
                 _contentEye.RequestEye(component.DrawFov, true);
             }
-            else if (!light?.Enabled ?? false) // skip this option if we have no PointLightComponent
+            else if (TryComp<NightVisionComponent>(uid, out var nv) && !nv.Enabled)
             {
-                // enable personal light
-                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-personal-light"), args.Performer);
-                _pointLightSystem.SetEnabled(uid, true, light);
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-half-bright"), args.Performer);
+                _nv.SetEnabled((uid, nv), true);
             }
             else
             {
                 // fullbright mode
                 Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-fullbright"), args.Performer);
                 _contentEye.RequestEye(component.DrawFov, false);
-                _pointLightSystem.SetEnabled(uid, false, light);
+                _nv.SetEnabled((uid, nv), false);
             }
+
             args.Handled = true;
         }
 
@@ -126,7 +132,7 @@ namespace Content.Client.Ghost
 
         private void OnToggleGhosts(EntityUid uid, EyeComponent component, ToggleGhostsActionEvent args) // Goob edit
         {
-            if (args.Handled || _ghostVisSystem.GhostsVisible()) // Goob edit
+            if (args.Handled || _ghostVis.GhostsVisible()) // Goob edit
                 return;
 
             var locId = GhostVisibility ? "ghost-gui-toggle-ghost-visibility-popup-off" : "ghost-gui-toggle-ghost-visibility-popup-on";

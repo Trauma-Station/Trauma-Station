@@ -15,7 +15,6 @@ namespace Content.Trauma.Shared.Weapons.AmmoSelector;
 
 public sealed partial class SelectableAmmoSystem : CommonSelectableAmmoSystem
 {
-    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -56,13 +55,13 @@ public sealed partial class SelectableAmmoSystem : CommonSelectableAmmoSystem
 
         var name = GetProviderProtoName(ent);
         if (name != null)
-            _popup.PopupClient(Loc.GetString("mode-selected", ("mode", name)), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("mode-selected", ("mode", name)), ent, args.Actor);
         _audio.PlayPredicted(ent.Comp.SoundSelect, ent, args.Actor);
     }
 
     public override bool TrySetProto(Entity<AmmoSelectorComponent> ent, ProtoId<SelectableAmmoPrototype> proto)
     {
-        if (!_protoManager.Resolve(proto, out var index))
+        if (!ProtoMan.Resolve(proto, out var index))
             return false;
 
         if (!SetProviderProto(ent, index))
@@ -94,13 +93,13 @@ public sealed partial class SelectableAmmoSystem : CommonSelectableAmmoSystem
     {
         // TODO: fuck you, event
         if (TryComp(uid, out BasicEntityAmmoProviderComponent? basic) && basic.Proto != null)
-            return _protoManager.Resolve(basic.Proto, out var index) ? index.Name : null;
+            return ProtoMan.Resolve(basic.Proto, out var index) ? index.Name : null;
 
         if (TryComp(uid, out BatteryAmmoProviderComponent? battery))
-            return _protoManager.Resolve(battery.Prototype, out var index) ? index.Name : null;
+            return ProtoMan.Resolve(battery.Prototype, out var index) ? index.Name : null;
 
         if (TryComp(uid, out ChangelingChemicalsAmmoProviderComponent? chemicals))
-            return _protoManager.Resolve(chemicals.Proto, out var index) ? index.Name : null;
+            return ProtoMan.Resolve(chemicals.Proto, out var index) ? index.Name : null;
 
         // Add more providers if needed
 

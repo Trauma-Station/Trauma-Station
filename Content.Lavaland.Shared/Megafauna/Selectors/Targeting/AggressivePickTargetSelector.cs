@@ -31,7 +31,7 @@ public sealed partial class AggressivePickTargetSelector : MegafaunaSelector
 
     protected override float InvokeImplementation(MegafaunaCalculationBaseArgs args)
     {
-        var entMan = args.EntityManager;
+        var entMan = args.EntMan;
 
         if (!entMan.TryGetComponent<AggressiveComponent>(args.Entity, out var aggressiveComp))
         {
@@ -73,13 +73,12 @@ public sealed partial class AggressivePickTargetSelector : MegafaunaSelector
                 }
             }
 
-            DebugTools.Assert(picked != null, nameof(picked) + " != null"); // It's impossible at that point, but better to check.
+            DebugTools.Assert(picked != null); // It's impossible at that point, but better to check.
         }
 
-        var comp = args.EntityManager.EnsureComponent<MegafaunaAiTargetingComponent>(args.Entity);
-
+        var comp = entMan.EnsureComponent<MegafaunaAiTargetingComponent>(args.Entity);
         comp.TargetEnt = picked.Value;
-        comp.TargetCoords = args.EntityManager.GetComponent<TransformComponent>(picked.Value).Coordinates;
+        comp.TargetCoords = entMan.GetComponent<TransformComponent>(picked.Value).Coordinates;
 
         return DelaySelector.Get(args);
     }

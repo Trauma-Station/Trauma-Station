@@ -1,11 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseObjective
   id: BaseVampireObjective
   components:
   - type: Objective
-    issuer: objective-issuer-vampire
+    issuer: Vampire
     unique: true
     difficulty: 1
   - type: RoleRequirement

@@ -91,35 +91,11 @@ public sealed partial class StrapComponent : Component
     [DataField]
     public bool BuckleOnInteractHand = true;
 
-    // <Goobstation>
     /// <summary>
-    /// adds bverb for bucle
+    /// Whether being buckled to this entity should change the buckled ent's drawdepth.
     /// </summary>
     [DataField]
-    public bool AddBuckleverb = true;
-
-    /// <summary>
-    /// add so can block unbuckeling of vehicle drivers
-    /// </summary>
-    [DataField]
-    public bool AllowOthersToUnbuckle = true;
-
-    // Goobstation
-    /// <summary>
-    /// Whether to block movement if buckled.
-    /// For use with other components that might want the buckled entity to still be able to move.
-    /// </summary>
-    [DataField]
-    public bool BlockMovement = true;
-    // </Goobstation>
-
-    // WD EDIT START
-    /// <summary>
-    /// Delay, that must occur, before user can unbuckle
-    /// </summary>
-    [DataField]
-    public TimeSpan SelfUnBuckleDelay = TimeSpan.Zero;
-    // WD EDIT END
+    public bool ModifyBuckleDrawDepth = true;
 }
 
 public enum StrapPosition

@@ -1,8 +1,3 @@
-// <Trauma>
-using Content.Client.LinkAccount;
-using Content.Client.UserInterface.Systems.MenuBar.Widgets;
-using Robust.Shared;
-// </Trauma>
 using Content.Client.FeedbackPopup;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
@@ -24,10 +19,6 @@ namespace Content.Client.UserInterface.Systems.EscapeMenu;
 [UsedImplicitly]
 public sealed partial class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    // <Trauma>
-    [Dependency] private LinkAccountManager _linkAccount = default!; // RMC - Patreon
-    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
-    // </Trauma>
     [Dependency] private IClientConsoleHost _console = default!;
     [Dependency] private IUriOpener _uri = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -37,25 +28,9 @@ public sealed partial class EscapeUIController : UIController, IOnStateEntered<G
     [Dependency] private GuidebookUIController _guidebook = default!;
     [Dependency] private FeedbackPopupUIController _feedback = null!;
 
-    // <Trauma>
-    public static Action<EscapeUIController>? OnCreated;
-    public Action? OnTogglePatronPerksWindow;
-    // </Trauma>
-
     private Options.UI.EscapeMenu? _escapeWindow;
 
-    public override void Initialize()  // RMC - Patreon
-    {
-        _linkAccount.Updated += () =>
-        {
-            if (_escapeWindow != null)
-                _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
-        };
-
-        // <Trauma>
-        OnCreated?.Invoke(this);
-        // </Trauma>
-    }
+    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.EscapeButton;
 
     public void UnloadButton()
     {
@@ -86,6 +61,7 @@ public sealed partial class EscapeUIController : UIController, IOnStateEntered<G
         DebugTools.Assert(_escapeWindow == null);
 
         _escapeWindow = UIManager.CreateWindow<Options.UI.EscapeMenu>();
+        StateEnteredTrauma(_escapeWindow); // Trauma
 
         _escapeWindow.OnClose += DeactivateButton;
         _escapeWindow.OnOpen += ActivateButton;
@@ -100,26 +76,6 @@ public sealed partial class EscapeUIController : UIController, IOnStateEntered<G
         {
             CloseEscapeWindow();
             _changelog.ToggleWindow();
-        };
-
-        // <Trauma>
-        var repo = _cfg.GetCVar(CCVars.InfoLinksGithub);
-        _escapeWindow.SourceCodeButton.Visible = repo != "";
-        _escapeWindow.SourceCodeButton.OnPressed += _ =>
-        {
-            var commit = _cfg.GetCVar(CVars.BuildVersion);
-            if (commit == "") // for dev, live server has it set to commit hash
-                commit = "master";
-            var uri = $"{repo}/tree/{commit}";
-            _uri.OpenUri(uri);
-        };
-        // </Trauma>
-
-        _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks(); // RMC - Patreon
-        _escapeWindow.PatronPerksButton.OnPressed += _ => // RMC - Patreon
-        {
-            CloseEscapeWindow();
-            OnTogglePatronPerksWindow?.Invoke();
         };
 
         _escapeWindow.RulesButton.OnPressed += _ =>

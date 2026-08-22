@@ -5,8 +5,8 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.JoinQueue;
 using Content.Goobstation.Shared.JoinQueue;
 using Content.Server.Connection;
-using Content.Server.LinkAccount;
 using Content.Shared.CCVar;
+using Content.Trauma.Common.LinkAccount;
 using Prometheus;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -42,8 +42,8 @@ public sealed partial class JoinQueueManager : IJoinQueueManager
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IConnectionManager _connection = default!;
     [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private ILinkAccountManager _linkAccount = default!;
     [Dependency] private IServerNetManager _net = default!;
-    [Dependency] private LinkAccountManager _linkAccount = default!;
 
     /// <summary>
     ///     Queue of active player sessions
@@ -119,7 +119,6 @@ public sealed partial class JoinQueueManager : IJoinQueueManager
         }
 
         var isPrivileged = await _connection.HasPrivilegedJoin(session.UserId);
-        var isPatron = _linkAccount.GetPatron(session)?.Tier != null;
         var currentOnline = _player.PlayerCount - 1;
         var haveFreeSlot = currentOnline < _configuration.GetCVar(CCVars.SoftMaxPlayers);
         if (isPrivileged || haveFreeSlot)
@@ -132,7 +131,7 @@ public sealed partial class JoinQueueManager : IJoinQueueManager
             return;
         }
 
-        if (isPatron && _patreonIsEnabled)
+        if (_patreonIsEnabled && _linkAccount.IsPatron(session))
             _patronQueue.Add(session);
         else
             _queue.Add(session);

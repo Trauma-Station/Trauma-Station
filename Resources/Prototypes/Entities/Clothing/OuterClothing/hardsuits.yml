@@ -15,11 +15,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: Armor
@@ -201,6 +198,13 @@
   name: salvager maxim hardsuit # Goob edit
   description: Fire. Heat. These things forge great weapons, they also forge great salvagers.
   components:
+  # <Trauma>
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/maxim.rsi
   - type: Clothing
@@ -226,17 +230,9 @@
         Radiation: 0.01
   - type: ExplosionResistance
     damageCoefficient: 0.2
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitMaxim
-  - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.5
-  - type: ModifyDelayedKnockdown # Goobstation
-    delayDelta: 3
-    knockdownTimeDelta: -3
 
 #Security Hardsuit (goob - not used)
 - type: entity
@@ -265,7 +261,12 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7 # Trauma
         Heat: 0.8
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
@@ -305,9 +306,14 @@
         Blunt: 0.85
         Slash: 0.85
         Piercing: 0.85
+        Ballistic: 0.85 # Trauma
         Heat: 0.85
         Radiation: 0.05
         Caustic: 0.4
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 2
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -348,7 +354,12 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6 # Trauma
         Heat: 0.7
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -389,6 +400,7 @@
         Blunt: 0.6 #Goob - Modsuit Rebalance start
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6 # Trauma
         Heat: 0.7 #Goob - Modsuit Rebalance end
         Radiation: 0.05
   - type: ClothingSpeedModifier
@@ -410,7 +422,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
+  parent: [ TemperatureProtectionGreat, ClothingOuterHardsuitBase, BaseCommandContraband]
   id: ClothingOuterHardsuitEngineeringWhite
   name: chief engineer's hardsuit # Goob edit
   description: A special hardsuit that protects against hazardous, low pressure environments, made for the chief engineer of the station. # Goob edit
@@ -423,7 +435,7 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: Armor
@@ -443,6 +455,7 @@
       head: ClothingHeadHelmetHardsuitEngineeringWhite
   - type: ClothingGrantComponent # Goobstation - Make sure the CE doesn't get cooked by supermatter
     component:
+    - type: RadStormImmune
     - type: SupermatterImmune
     # tesla immunity too
     - type: EventHorizonIgnore
@@ -563,8 +576,13 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6 # Trauma
         Heat: 0.7
         Radiation: 0.5
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -628,6 +646,8 @@
     sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
   - type: Item
     size: Huge
+    shape:
+    - 0,0,3,3
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
   - type: PressureProtection
@@ -648,8 +668,13 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5
         Heat: 0.5
         Radiation: 0.5
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -696,7 +721,7 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
+  parent: [ TemperatureProtectionGreat, ClothingOuterHardsuitBase, BaseSyndicateContraband ]
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit # Goob edit
   description: An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor. Property of Gorlex Marauders. # Trauma - align desc with resistances
@@ -708,13 +733,10 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.5 # Goob edit
   - type: Armor
@@ -728,10 +750,17 @@
         Blunt: 0.8 # Trauma - was .55
         Slash: 0.8 # Trauma - was .55
         Piercing: 0.8 # Trauma - was .55
+        Ballistic: 0.8 # Trauma - was .55
         Heat: 0.2
         Radiation: 0.01
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 2
+      # </Trauma>
   - type: Item
     size: Huge
+    shape:
+    - 0,0,3,3
   - type: ClothingSpeedModifier
     walkModifier: 1 # Trauma - was 0.9
     sprintModifier: 1 # Trauma - was 0.9
@@ -759,7 +788,7 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.4 # Trauma - was 0.5
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.5 # Goob edit
   - type: Armor
@@ -770,14 +799,19 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Radiation: 0.5
+        Blunt: 0.35 # Trauma - was 0.5
+        Slash: 0.35 # Trauma - was 0.5
+        Piercing: 0.35 # Trauma - was 0.5
+        Ballistic: 0.35 # Trauma - was 0.5
+        Heat: 0.35 # Trauma - was 0.5
+        Radiation: 0.35 # Trauma - was 0.5
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
-    walkModifier: 1 # Trauma, was 0.9
-    sprintModifier: 1 # Trauma, was 0.9
+    walkModifier: 1.1 # Trauma, was 0.9
+    sprintModifier: 1.1 # Trauma, was 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
@@ -820,8 +854,13 @@
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
+        Ballistic: 0.2 # Trauma
         Heat: 0.2
         Radiation: 0.2
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.65
     sprintModifier: 0.65
@@ -864,8 +903,13 @@
         Blunt: 0.3
         Slash: 0.3
         Piercing: 0.3
+        Ballistic: 0.3 # Trauma
         Heat: 0.3
         Radiation: 0
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.9 # Goob edit
     sprintModifier: 0.9 # Goob edit
@@ -935,6 +979,8 @@
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
   - type: Item
     size: Huge
+    shape:
+    - 0,0,3,3
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
   - type: ExplosionResistance
@@ -945,6 +991,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7 # Trauma
         Heat: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.6
@@ -972,6 +1019,8 @@
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
   - type: Item
     size: Huge
+    shape:
+    - 0,0,3,3
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
   - type: PressureProtection
@@ -985,6 +1034,7 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6 # Trauma
         Heat: 0.4
         Caustic: 0.75
   - type: ClothingSpeedModifier
@@ -1014,6 +1064,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTLeader
@@ -1029,6 +1083,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertchaplain.rsi #if you change this, please update the humanoid.yml with a better markers sprite.
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertchaplain.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTChaplain
@@ -1044,11 +1102,15 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTEngineer
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 0.8, 1.25x for limb coverage
 
 #ERT Medic Hardsuit
 - type: entity
@@ -1061,6 +1123,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTMedical
@@ -1076,6 +1142,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTSecurity
@@ -1095,6 +1165,10 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,3
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitERTJanitor
@@ -1110,16 +1184,18 @@
     sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+  - type: Item
+    shape:
+    - 0,0,7,7
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
+    coefficient: 0.001
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: FireProtection
-    reduction: 0.8
+    reduction: 1 # Trauma - was 1, 1.25x for limb coverage
   - type: StaminaResistance # Goobstation - Start
     damageCoefficient: 0
   - type: ClothingSlowOnDamageModifier
@@ -1139,6 +1215,7 @@
         Blunt: 0.1 # Best armor in the game - Yeah no shit.
         Slash: 0.1
         Piercing: 0.1
+        Ballistic: 0.1 # Trauma
         Heat: 0.1
         Cold: 0.1
         Cellular: 0.1
@@ -1170,9 +1247,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: Armor

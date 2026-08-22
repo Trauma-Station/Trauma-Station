@@ -1,30 +1,34 @@
-<!--
-SPDX-FileCopyrightText: 2023 /ʊniɹɑː/ <onoira@psiko.zone>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: MIT
--->
-
 <Document>
 # Enchanting
 
-Those who are magically inclined, such as Wizards, Heretic and Chaplains, have access to the arcane art of Enchanting.
+Those with magical literacy, through years of study or a magical gift, have access to the arcane art of Enchanting.
+
+# Equipment
+
+<Box>
+  <GuideEntityEmbed Entity="BloodEnchanter"/>
+  <GuideEntityEmbed Entity="EnchantingRune"/>
+</Box>
+
+A holy bible must be [bold]defaced[/bold] to enchant items, atop a [bold]Enchantment Rune[/bold] carved into the floor.
 
 # Enchanting an item
 
 To enchant an item, you need a sacrificial offering and an item to enchant. Most often these are the cores of anomalies, but are occasionally more mundane components like Diamonds.
-<Box>
-  <GuideEntityEmbed Entity="AltarConvert" Caption=""/>
-</Box>
-Place an item on an altar (or a Transmutation Rune) alongside the offering and hit the item with your magical tome. For wizards, this is their Wizard's Grimoire. For Chaplain, their Bible or other religious texts. For Heretics, their Codex Cicatrix.
+
+Enchanting scrolls can be scribed using magical inks.
+
+Place an item on your enchanting rune alongside the offering and hit the item with your magical tome. For wizards, this is their Wizard's Grimoire. For Chaplain, their Bible or other religious texts. For Heretics, their Codex Cicatrix.
 
 If the item and offering are compatible, the offering will be consumed and the item will become enchanted. If you use an anomaly core, those from critical anomalies are more potent than inert cores, and empower your item more effectively.
 
 # Enchantment limits
 
-An item can only be enchanted with one kind of enchantment, unless you perform a ritual. By killing any living entity with a soul on top of an altar alongside your enchanted item, their soul will be consumed and increase the enchantment limit.
+An item can only be enchanted with two kinds of enchantment, unless you perform a ritual. By killing any living entity with a soul on top of a rune alongside your enchanted item, their soul will be consumed and increase the enchantment limit.
 
 The sacrifice will be possible to revive, but have the ill effects of losing their soul, akin to selling their soul to a Devil.
+
+Sacrafices can be made up to 10 enchantments worth.
 
 # Types of enchantments
 
@@ -66,5 +70,8 @@ Thorns can be applied to armor, and damages melee attackers with 4 slash damage 
 
   ### Fortune
 Fortune has a chance to increase ore yield for drills and pickaxes, chance proportional to enchantment level. Obtainable from Santa Anomaly cores and diamonds.
+
+  ### More...
+There are many other enchantments and curses, perhaps creatures from the underworld could provide them?
 
 </Document>

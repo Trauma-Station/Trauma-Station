@@ -1,50 +1,43 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.Blob.Components;
-/// <remarks>
-/// To add a new special blob tile you will need to change code in BlobNodeSystem and BlobTypedStorage.
-/// </remarks>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class BlobNodeComponent : Component
 {
     [DataField]
-    public float PulseFrequency = 4f;
+    public TimeSpan PulseFrequency = TimeSpan.FromSeconds(4);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextPulse;
 
     [DataField]
     public float PulseRadius = 4f;
 
-    public float NextPulse = 0;
-
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public EntityUid? BlobResource = null;
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public EntityUid? BlobFactory = null;
+    [DataField, AutoNetworkedField]
+    public EntityUid? BlobResource;
+    [DataField, AutoNetworkedField]
+    public EntityUid? BlobFactory;
     /*
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public EntityUid? BlobStorage = null;
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public EntityUid? BlobTurret = null;
+    [DataField, AutoNetworkedField]
+    public EntityUid? BlobStorage;
+    [DataField, AutoNetworkedField]
+    public EntityUid? BlobTurret;
     */
 }
 
-public sealed class BlobTileGetPulseEvent : HandledEntityEventArgs
-{
-
-}
-
-[Serializable, NetSerializable]
-public sealed partial class BlobMobGetPulseEvent : EntityEventArgs
-{
-    public NetEntity BlobEntity { get; set; }
-}
+/// <summary>
+/// Event raised on tiles near a node when it pulses.
+/// </summary>
+[ByRefEvent]
+public record struct BlobNodePulseEvent(Entity<BlobCoreComponent> Core, BlobChemPrototype Chem, bool Handled = false);
 
 /// <summary>
 /// Event raised on all special tiles of Blob Node on pulse.
 /// </summary>
-public sealed class BlobSpecialGetPulseEvent : EntityEventArgs;
-
-/// <summary>
-/// Event
-/// </summary>
-public sealed class BlobNodePulseEvent : EntityEventArgs;
+[ByRefEvent]
+public record struct BlobSpecialPulseEvent(Entity<BlobCoreComponent> Core, BlobChemPrototype Chem);

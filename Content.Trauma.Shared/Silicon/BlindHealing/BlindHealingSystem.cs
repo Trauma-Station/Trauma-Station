@@ -49,7 +49,7 @@ public sealed partial class BlindHealingSystem : EntitySystem
         var str = Loc.GetString("comp-repairable-repair",
             ("target", target),
             ("tool", ent));
-        _popup.PopupClient(str, ent, args.User);
+        _popup.PopupEntity(str, ent, args.User);
     }
 
     private bool TryHealBlindness(Entity<BlindHealingComponent> ent, EntityUid user, EntityUid target)

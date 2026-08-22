@@ -16,6 +16,7 @@
         Blunt: 0.4
         Slash: 0.4
         Piercing: 0.4
+        Ballistic: 0.4
         Heat: 0.5
         Shock: 0.5
         Cold: 0.5

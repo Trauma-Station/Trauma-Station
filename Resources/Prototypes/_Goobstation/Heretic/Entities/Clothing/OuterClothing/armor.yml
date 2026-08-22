@@ -1,7 +1,30 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  abstract: true
+  id: ArmorHeretic
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Ballistic: 0.5
+        Heat: 0.5
+        Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+
+- type: entity
+  parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorHeretic
   name: ominous armor
   description: A ragged, dusty set of robes. Strange eyes line the inside.
@@ -20,20 +43,7 @@
     - Leg
     - Foot
     - Tail
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Caustic: 0.8
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0.0
-  - type: ExplosionResistance
-    damageCoefficient: 0.65
+    - Wings
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHeretic
@@ -46,12 +56,35 @@
     hiddenSlots:
     - jumpsuit
   - type: FireProtection
-    reduction: 0.2
+    reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticRust
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Ballistic: 0.7
+        Heat: 0.7
+        Caustic: 0.7
+      flatReductions:
+        Ballistic: 2
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+
+- type: entity
+  parent: [ ArmorHereticRust, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticRust
   name: salvaged remains
   description: Touching the folds of this plain robe seem to fill you with unease. Even looking fills you with a sense of vertigo. Some pulse threatening to pull you within.
@@ -65,18 +98,8 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticRust
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.7
-        Caustic: 0.7
-  - type: ExplosionResistance
-    damageCoefficient: 0.50
   - type: FireProtection
-    reduction: 0.3
+    reduction: 0.38
   - type: SalvagedRemains
   - type: Appearance
   - type: ItemToggle
@@ -107,8 +130,11 @@
           Blunt: 0.4
           Slash: 0.4
           Piercing: 0.4
+          Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
+        flatReductions:
+          Ballistic: 3
       traumaDeductions:
         Dismemberment: 0.4
         OrganDamage: 0.4
@@ -117,7 +143,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
     - type: FireProtection
-      reduction: 0.6
+      reduction: 0.75
     deactivateComponents:
     - type: Armor
       coverage:
@@ -132,8 +158,11 @@
           Blunt: 0.7
           Slash: 0.7
           Piercing: 0.7
+          Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
+        flatReductions:
+          Ballistic: 2
       traumaDeductions:
         Dismemberment: 0.2
         OrganDamage: 0.2
@@ -142,10 +171,34 @@
     - type: ExplosionResistance
       damageCoefficient: 0.50
     - type: FireProtection
-      reduction: 0.3
+      reduction: 0.38
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticVoid
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Ballistic: 0.5
+        Heat: 0.6
+        Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+
+- type: entity
+  parent: [ ArmorHereticVoid, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticVoid
   name: hollow weave
   description: At first, the empty canvas of this robe seems to shimmer with a faint, cold light. Yet upon tracking the shape of the folds more carefully, it is better to describe it as the absence of such a thing.
@@ -159,31 +212,35 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticVoid
+  - type: FireProtection
+    reduction: 0.5
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
+  - type: HollowWeave
+  - type: TemperatureProtection
+    coefficient: 0.01
+
+- type: entity
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticAsh
+  components:
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
-        Heat: 0.5
-        Caustic: 0.6
-    traumaDeductions:
-      Dismemberment: 0.3
-      OrganDamage: 0.3
-      BoneDamage: 0.3
-      VeinsDamage: 0.0
+        Ballistic: 0.5
+        Heat: 0.4
+        Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
-    damageCoefficient: 0.50
-  - type: FireProtection
-    reduction: 0.4
-  - type: PressureProtection
-    lowPressureMultiplier: 1000
-  - type: HollowWeave
-  - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    damageCoefficient: 0
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  parent: [ ArmorHereticAsh, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticAsh
   name: scorched mantle
   description: Left to burn to tatters, what remains is naught but a blackened echo of the mantle of the Watch. Yet the soot-choked folds turn blade and flame from the form within. A brief reprieve before its gaze turns inwards.
@@ -197,26 +254,33 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticAsh
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.4
-        Heat: 0.5
-        Caustic: 0.8
   - type: FireProtection
     reduction: 1
-  - type: ExplosionResistance
-    damageCoefficient: 0
   - type: PressureProtection
     highPressureMultiplier: 0.1
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
+    coefficient: 0.01
   - type: ScorchedMantle
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticFlesh
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Ballistic: 0.6
+        Heat: 0.7
+        Caustic: 0
+      flatReductions:
+        Ballistic: 2
+
+- type: entity
+  parent: [ ArmorHereticFlesh, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticFlesh
   name: writhing embrace
   description: A rotten carcass, or perhaps several, twisted into fleshy polyps, knotted intestines and cracked bone. How one 'wears' this baffles reasonable understanding. It moves when it believes itself unobserved.
@@ -234,14 +298,6 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticFlesh
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.3
-        Slash: 0.3
-        Piercing: 0.6
-        Heat: 0.7
-        Caustic: 0
   - type: FireProtection
     reduction: 0
   - type: Storage
@@ -259,7 +315,31 @@
   - type: SpawnMimicsOnDamage
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticBlade
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Ballistic: 0.5
+        Heat: 0.5
+        Caustic: 0.5
+      flatReductions:
+        Ballistic: 2
+    traumaDeductions:
+      Dismemberment: 0.5
+      OrganDamage: 0.5
+      BoneDamage: 0.5
+      VeinsDamage: 0.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+
+- type: entity
+  parent: [ ArmorHereticBlade, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticBlade
   name: shattered panoply
   description: The sharpened edges of this ancient suit of armor assert a revelation known to aspirants of battle; a true warrior can not be distinguished from the blade they wield.
@@ -273,31 +353,33 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticBlade
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Caustic: 0.5
-    traumaDeductions:
-      Dismemberment: 0.5
-      OrganDamage: 0.5
-      BoneDamage: 0.5
-      VeinsDamage: 0.0
   - type: Insulated
   - type: FireProtection
-    reduction: 0.5
-  - type: ExplosionResistance
-    damageCoefficient: 0.5
+    reduction: 0.63
   - type: ModifyDelayedKnockdown
     cancel: true
   - type: StaminaResistance
     damageCoefficient: 0.3
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticCosmos
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Ballistic: 0.6
+        Heat: 0.5
+        Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
+
+- type: entity
+  parent: [ ArmorHereticCosmos, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticCosmos
   name: starwoven cloak
   description: Gleaming gems conjure forth wisps of power, turning about to illuminate the wearer in a dim radiance. Gazing upon the robe, you cannot help but feel noticed.
@@ -311,22 +393,48 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticCosmos
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.6
-        Heat: 0.4
-        Caustic: 0.8
   - type: PressureProtection
     lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
+  - type: TackleModifier # Allows tackling on cosmic fields
+    modifiers:
+    - priority: 25
+      allowCollision: false
+      affectsOtherModifiers: false
+      staminaCostMultiplier: 0
+      speedMultiplier: 0.5
+      knockdownTimeMultiplier: 0
+      rangeMultiplier: 0.5
+      cooldownMultiplier: 0.3
+      userEffect: CosmicDash
+      tackleCondition: CosmicFieldNearby
 
 - type: entity
-  parent: ClothingOuterArmorHeretic
+  abstract: true
+  parent: ArmorHeretic
+  id: ArmorHereticLock
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Ballistic: 0.6
+        Heat: 0.6
+        Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0.0
+
+- type: entity
+  parent: [ ArmorHereticLock, ClothingOuterArmorHeretic ]
   id: ClothingOuterArmorHereticLock
   name: shifting guise
   suffix: Lock
@@ -339,28 +447,42 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticLock
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.6
-        Heat: 0.6
-        Caustic: 0.6
-    traumaDeductions:
-      Dismemberment: 0.3
-      OrganDamage: 0.3
-      BoneDamage: 0.3
-      VeinsDamage: 0.0
   - type: DigitalCamouflage
   - type: ClothingGrantComponent
     component:
     # This thing is hardcoded to either shoes or entity itself in mover controller
     - type: FootstepModifier
       footstepSoundCollection: null
+    # Goida. This makes heretic invisible for people far away when wearing this
+    - type: ForestAdmonitionsEntity
+      revealDuration: 0
+      selfVisibility: 1
+      revealDistance: 7
+      revealDistanceSoft: 6
 
 - type: entity
-  parent: [ ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  abstract: true
+  id: ArmorHereticVoidCloak
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Ballistic: 0.7
+        Heat: 0.7
+        Caustic: 0.7
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.7
+
+- type: entity
+  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorCloakVoid
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
@@ -381,20 +503,7 @@
     - Leg
     - Foot
     - Tail
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.7
-        Caustic: 0.7
-    traumaDeductions:
-      Dismemberment: 0.3
-      OrganDamage: 0.3
-      BoneDamage: 0.3
-      VeinsDamage: 0.0
-  - type: ExplosionResistance
-    damageCoefficient: 0.7
+    - Wings
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -429,6 +538,8 @@
   - type: HereticClothing
   - type: PressureProtection
   - type: VoidCloak
+  - type: StripBlockBypass
+  - type: SurgeryIgnoreClothing
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -436,3 +547,7 @@
         base:
           True: { state: transparent-icon }
           False: { state: icon }
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container

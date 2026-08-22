@@ -13,6 +13,7 @@
     - spacebear-bearjaws
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Piercing: 5
@@ -32,6 +33,7 @@
     - spacebear-pawslam
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 10 # TODO: DOUBLE DAMAGE WHEN KNOCKED DOWN AND GIVE 2S SLOWDOWN
@@ -57,6 +59,7 @@
   - !type:Extinguish # put it out
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Heat: 10

@@ -10,16 +10,19 @@ public sealed partial class ForestAdmonitionsEntityComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastRevealTime;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float RevealDuration = 5f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float RevealDistance = 2f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
+    public float RevealDistanceSoft;
+
+    [DataField, AutoNetworkedField]
     public float SelfVisibility = 0.2f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float ExamineThreshold = 0.2f;
 
     [DataField]

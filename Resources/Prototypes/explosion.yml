@@ -4,7 +4,15 @@
     types:
       Heat: 5
       Blunt: 5
-      Slash: 5 # Goob edit
+      Piercing: 5
+    # <Trauma>
+      Slash: 5
+    woundTypeOverrides: &woundoverrides
+      Heat: Burns
+      Blunt: Fracture
+      Slash: Laceration
+      Piercing: Puncture
+    # </Trauma>
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20
@@ -19,8 +27,12 @@
     types:
       Heat: 3
       Blunt: 3
-      Slash: 3 # Goob edit
+      Piercing: 3
       Structural: 50
+    # <Trauma>
+      Slash: 3
+    woundTypeOverrides: *woundoverrides
+    # </Trauma>
   tileBreakChance: [ 0, 0.5, 1 ]
   tileBreakIntensity: [ 0, 10, 30 ]
   tileBreakRerollReduction: 20
@@ -35,8 +47,12 @@
     types:
       Heat: 6
       Blunt: 6
-      Slash: 6 # Goob edit
+      Piercing: 6
       Structural: 20
+    # <Trauma>
+      Slash: 6
+    woundTypeOverrides: *woundoverrides
+    # </Trauma>
   tileBreakChance: [ 0, 0.5, 1 ]
   tileBreakIntensity: [ 1, 10, 15 ]
   tileBreakRerollReduction: 30
@@ -53,7 +69,11 @@
       Radiation: 5
       Heat: 4
       Blunt: 3
-      Slash: 3 # Goob edit
+      Piercing: 3
+    # <Trauma>
+      Slash: 3
+    woundTypeOverrides: *woundoverrides
+    # </Trauma>
   lightColor: Green
   fireColor: Green
   texturePath: /Textures/Effects/fire_greyscale.rsi
@@ -66,6 +86,7 @@
       Cold: 5
       Blunt: 2
       Structural: 20
+    woundTypeOverrides: *woundoverrides # Trauma
   tileBreakChance: [0]
   tileBreakIntensity: [0]
   lightColor: Blue
@@ -77,9 +98,13 @@
   id: Minibomb
   damagePerIntensity:
     types:
-      Heat: 8 # Goob edit
-      Blunt: 14 # Goob edit
-      Slash: 8 # Goob edit
+    # <Trauma>
+      Heat: 4
+      Blunt: 32
+      Piercing: 4
+      Slash: 4
+    woundTypeOverrides: *woundoverrides
+    # </Trauma>
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20
@@ -92,10 +117,14 @@
   id: PowerSink
   damagePerIntensity:
     types:
-      Heat: 24 # Goob edit
-      Blunt: 24 # Goob edit
-      Slash: 24 # Goob edit
+    # <Trauma>
+      Heat: 24
+      Blunt: 24
+      Piercing: 24
       Structural: 30
+      Slash: 24
+    woundTypeOverrides: *woundoverrides
+    # </Trauma>
   tileBreakChance: [ 0, 0.5, 1 ]
   tileBreakIntensity: [ 1, 5, 10 ]
   tileBreakRerollReduction: 3
@@ -109,10 +138,14 @@
   id: HardBomb
   damagePerIntensity:
     types:
-      Heat: 30 # Goob edit
-      Blunt: 30 # Goob edit
-      Slash: 12 # Goob edit
+    # <Trauma>
+      Heat: 30
+      Blunt: 30
+      Piercing: 12
       Structural: 40
+      Slash: 12
+    woundTypeOverrides: *woundoverrides
+    # </Trauma>
   tileBreakChance: [ 0, 0.5, 1 ]
   tileBreakIntensity: [ 0, 10, 30 ]
   tileBreakRerollReduction: 10
@@ -129,6 +162,7 @@
       Heat: 1
       Blunt: 2
       Piercing: 3
+    woundTypeOverrides: *woundoverrides # Trauma
   lightColor: Orange
   texturePath: /Textures/Effects/fire.rsi
   fireStates: 3

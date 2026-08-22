@@ -40,7 +40,7 @@ public sealed partial class RallySystem : EntitySystem
 
             _status.TryAddStatusEffect(affected, ent.Comp.StatusEffectRally, out _, ent.Comp.Duration);
 
-            _popup.PopupClient(Loc.GetString("wraith-skeleton-rally-howl", ("user", ent.Owner)), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-skeleton-rally-howl", ("user", ent.Owner)), ent.Owner, ent.Owner);
         }
 
         args.Handled = true;

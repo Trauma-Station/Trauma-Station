@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Shared.Bible.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -56,7 +56,7 @@ public sealed partial class AlternatePrayableSystem : EntitySystem
         if (_timing.CurTime > comp.NextPopup)
         {
             var popup = Loc.GetString("alternate-pray-start", ("user", Name(user)), ("item", Name(nullRod)));
-            _popupSystem.PopupPredicted(popup, user, user);
+            _popupSystem.PopupEntity(popup, user, user);
 
             comp.NextPopup = _timing.CurTime + comp.PopupDelay;
         }

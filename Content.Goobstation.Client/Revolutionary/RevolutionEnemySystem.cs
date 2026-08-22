@@ -10,8 +10,6 @@ namespace Content.Goobstation.Client.Revolutionary;
 /// </summary>
 public sealed partial class RevolutionaryEnemySystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -21,7 +19,7 @@ public sealed partial class RevolutionaryEnemySystem : EntitySystem
 
     private void OnGetStatusIcons(Entity<RevolutionEnemyComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (_proto.Resolve(ent.Comp.StatusIcon, out var icon))
+        if (ProtoMan.Resolve(ent.Comp.StatusIcon, out var icon))
             args.StatusIcons.Add(icon);
     }
 }

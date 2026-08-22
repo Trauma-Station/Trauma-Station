@@ -2664,13 +2664,11 @@ entities:
   - uid: 377
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 20.5,10.5
       parent: 1
   - uid: 378
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 20.5,16.5
       parent: 1
   - uid: 379

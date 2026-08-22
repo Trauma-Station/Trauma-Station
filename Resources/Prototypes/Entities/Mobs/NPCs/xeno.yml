@@ -3,19 +3,18 @@
 
 - type: entity
   name: space adder
-  parent: [ AppearanceSpaceAdder, SimpleSpaceMobBase ] # Shitmed
+  parent: [AppearanceSpaceAdder, SimpleSpaceMobBase, BaseSlicingRefinable, MobNightVision] # Trauma - added AppearanceSpaceAdder, MobNightVision
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
   # <Trauma>
-  - type: GhostTakeoverAvailable
-  - type: GhostRole
-    name: ghost-role-information-purple-snake-name
-    description: ghost-role-information-purple-snake-description
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle: null
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      55: Dead
+  - type: Stamina
+    baseCritThreshold: 150
+  - type: VentCrawler
   # </Trauma>
   - type: Sprite
     drawdepth: Mobs
@@ -31,8 +30,8 @@
         Base: dead_purple_snake
       Dead:
         Base: dead_purple_snake
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSnake
       amount: 4
   - type: Grammar
@@ -88,24 +87,21 @@
       reagents:
       - ReagentId: Toxin
         Quantity: 30
+  # <Trauma>
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+        - ReagentId: Toxin
+          Quantity: 0.25
+  # </Trauma>
 
 - type: entity
   name: space adder
-  parent: [ AppearanceSpaceAdder, MobPurpleSnake ] # Shitmed
+  parent: [AppearanceSpaceAdder, MobPurpleSnake, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAdder
   id: MobSmallPurpleSnake
   suffix: small
   description: A smaller version of the menacing purple snake from Kepler-283c.
   components:
-  # <Trauma>
-  - type: GhostTakeoverAvailable
-  - type: GhostRole
-    name: ghost-role-information-small-purple-snake-name
-    description: ghost-role-information-small-purple-snake-description
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle: null
-  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -120,8 +116,8 @@
         Base: dead_small_purple_snake
       Dead:
         Base: dead_small_purple_snake
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSnake
       amount: 2
   - type: SolutionTransfer

@@ -1,67 +1,47 @@
+# region Base
 - type: construction
+  abstract: true
+  id: BaseRobot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+  # <Trauma>
+  theory:
+    BotsKnowledge: 0
+  practical:
+    ElectronicsKnowledge: 1
+  # </Trauma>
+# endregion Base
+
+- type: construction
+  parent: BaseRobot
   id: cleanbot
   graph: CleanBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: firebot
   graph: FireBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: honkbot
   graph: HonkBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
   # <Trauma>
   theory:
     BotsKnowledge: 0
     BananiumKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: jonkbot
   graph: JonkBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: medibot
   graph: MediBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
   # <Trauma>
   theory:
     BotsKnowledge: 0
@@ -71,43 +51,16 @@
   # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: mimebot
   graph: MimeBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: supplybot
   graph: SupplyBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: BaseRobot
   id: hugbot
   graph: HugBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>

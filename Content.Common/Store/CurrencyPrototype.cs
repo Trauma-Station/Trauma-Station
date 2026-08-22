@@ -23,8 +23,8 @@ public sealed partial class CurrencyPrototype : IPrototype
     /// doesn't necessarily refer to the full name of the currency, only
     /// that which is displayed to the user.
     /// </summary>
-    [DataField]
-    public string DisplayName { get; private set; } = string.Empty;
+    [DataField(required: true)] // Trauma - required
+    public LocId DisplayName; // Trauma - use LocId
 
     /// <summary>
     /// The physical entity of the currency

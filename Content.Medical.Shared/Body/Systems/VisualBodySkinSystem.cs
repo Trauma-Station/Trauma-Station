@@ -9,7 +9,6 @@ namespace Content.Medical.Shared.Body;
 /// </summary>
 public sealed partial class VisualBodySkinSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -23,7 +22,7 @@ public sealed partial class VisualBodySkinSystem : EntitySystem
         if (args.Args.Base?.SkinColor is not {} color)
             return;
 
-        var appearances = _proto.Index(ent.Comp.MarkingData.Group).Appearances;
+        var appearances = ProtoMan.Index(ent.Comp.MarkingData.Group).Appearances;
 
         var markings = ent.Comp.Markings;
         foreach (var (layer, list) in markings)

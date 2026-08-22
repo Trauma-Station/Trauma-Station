@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: flesh shield
   parent: BaseShield
-  id: ShieldMimic
+  id: FleshShield
+  name: flesh shield
   description: A large fleshy closet door, could be used as a shield...
   components:
   - type: Sprite
@@ -12,26 +12,16 @@
   - type: Item
     sprite: _Trauma/Objects/Weapons/Melee/fleshshield.rsi
     size: Ginormous
+    heldPrefix: null
   - type: Blocking
     passiveBlockFraction: .3
     activeBlockFraction: .6
     passiveBlockModifier:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-    activeBlockModifier:
-      coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Heat: 0.8
       flatReductions:
-        Blunt: 1
-        Slash: 1
-        Piercing: 1
-        Heat: 1
+        Blunt: 10
+        Slash: 10
+        Piercing: 10
+        Heat: 10
   - type: Destructible
     thresholds: [] # indestructible
   - type: Unremoveable

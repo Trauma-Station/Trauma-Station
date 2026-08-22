@@ -18,9 +18,9 @@
   speed: 0.9 # heavy and slow
   price: 2
   damage:
-    Blunt: 1.25 # hit hard ye
+    Blunt: 1.1 # hit hard ye
     Slash: 0.9 # doesn't hold a good edge
-    Piercing: 0.75 # really doesnt handle it well
+    Piercing: 0.9 # really doesnt handle it well
   overheated: OverheatedBrass
 
 - type: metal
@@ -35,8 +35,6 @@
   workScale: 1.5
   durability: 1 # standard material most things use
   price: 1.5
-  damage:
-    Blunt: 1.25
   overheated: OverheatedSteel
 
 # TODO: cast iron and stuff? very nice frying pan, not very nice sword blades
@@ -57,7 +55,7 @@
   damage:
     Blunt: 0.5 # too light to make a good hammer etc
     Slash: 1.25 # decent knives
-    Piercing: 1.5 # very pointy spears
+    Piercing: 1.25 # very pointy spears
   overheated: OverheatedPlasteel
   masteryOffset: 1 # hard to make stuff with it
 
@@ -117,6 +115,6 @@
   price: 20
   damage:
     Blunt: 0.2 # just not heavy
-    Slash: 1.4 # the sharpest of edges
-    Piercing: 1.5 # on par with plasteel, but it's already stupid strong
+    Slash: 1.5 # the sharpest of edges
+    Piercing: 1.5 # the sharpest of points
   overheated: OverheatedAdamantine

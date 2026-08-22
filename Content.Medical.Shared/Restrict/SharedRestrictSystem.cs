@@ -30,7 +30,7 @@ public sealed partial class SharedRestrictSystem : EntitySystem
         if (!_tag.HasAllTags(args.User, ent.Comp.Contains) || _tag.HasAnyTag(args.User, ent.Comp.DoesntContain))
         {
             if (ent.Comp.Messages.Count != 0)
-                _popup.PopupClient(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.User);
+                _popup.PopupEntity(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.User);
 
             args.Handled = true;
         }
@@ -56,7 +56,7 @@ public sealed partial class SharedRestrictSystem : EntitySystem
             if(ent.Comp.Messages.Count != 0 && time > ent.Comp.LastPopup + TimeSpan.FromSeconds(1))
             {
                 ent.Comp.LastPopup = time;
-                _popup.PopupClient(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.User);
+                _popup.PopupEntity(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.User);
             }
 
             args.Cancel();

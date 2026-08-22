@@ -3,30 +3,25 @@
 - type: damageModifierSet
   id: Walls
   coefficients:
-    Shock: 1.2
-    Heat: 1.2
-    Structural: 0.5
+    Structural: 1
   flatReductions:
-    Blunt: 10
-    Slash: 10
-    Piercing: 30
-    Heat: 10
-    Structural: 10
+    Blunt: 20
+    Slash: 20
+    Piercing: 20
+    Ballistic: 20
+    Heat: 20
 
 - type: damageModifierSet
   id: Gunsafes
   coefficients:
-    Shock: 0
-    Heat: 1
     Structural: 0.5
-    Ion: 0
-    Caustic: 0
   flatReductions:
-    Blunt: 15
-    Slash: 15
-    Piercing: 15
-    Heat: 15
-    Structural: 15
+    Structural: 10
+    Blunt: 20
+    Slash: 20
+    Piercing: 20
+    Ballistic: 20
+    Heat: 20
 
 - type: damageModifierSet
   id: NormalMode
@@ -57,3 +52,101 @@
     Slash: 0.9
     Caustic: 2
     Holy: 2
+
+- type: damageModifierSet
+  id: HoloCarp
+  coefficients:
+    Blunt: 0
+    Slash: 0
+    Piercing: 0
+    Ballistic: 0
+    Heat: 3
+    Caustic: 0
+    Cold: 0
+    Shock: 0
+    Poison: 0
+    Radiation: 0
+    Cellular: 0
+    Holy: 1
+    Ion: 0
+    Bloodloss: 0
+  ignoreArmorPierceFlags: All
+
+- type: damageModifierSet
+  id: MagicCarp
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Ballistic: 0.5
+    Heat: 0.5
+    Caustic: 0.5
+    Cold: 0.5
+    Shock: 0.5
+    Poison: 0.5
+    Radiation: 0.5
+    Cellular: 0.5
+    Holy: 3
+    Ion: 0.5
+    Bloodloss: 0.5
+  ignoreArmorPierceFlags: All
+
+- type: damageModifierSet
+  id: NukieSpider
+  coefficients:
+    # A stock bloodred hardsuit, but made for a giant spider.
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Ballistic: 0.5
+    Heat: 0.5
+    Radiation: 0.5
+    Caustic: 0.5
+    Cold: 0.8
+
+# Chickens
+
+- type: damageModifierSet
+  id: SpicyChicken
+  coefficients:
+    Heat: 0
+
+- type: damageModifierSet
+  id: StoneChicken
+  coefficients:
+    Structural: 4
+    Blunt: 0.5
+    Slash: 0.25
+    Piercing: 0.5
+    Ballistic: 0.75
+    Heat: 0.5
+    Radiation: 0
+  flatReductions:
+    Blunt: 5
+
+- type: damageModifierSet
+  id: KnightChickenEffect
+  coefficients:
+    Shock: 0.8
+    Heat: 0.8
+    Blunt: 0.8
+    Slash: 0.8
+    Piercing: 0.8
+
+# Blob
+
+- type: damageModifierSet
+  id: PressurizedSlimeBlob
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Ballistic: 0.5
+
+- type: damageModifierSet
+  id: ReplicatingFoamBlob
+  coefficients:
+    Blunt: 2
+    Slash: 2
+    Piercing: 2
+    Ballistic: 2

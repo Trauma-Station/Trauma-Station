@@ -5,28 +5,25 @@
   effects:
   - !type:GrantSkills
     skills:
-      MeleeKnowledge: 51
-      ShootingKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
-      WeaponsKnowledge: 51
-      ThrowingKnowledge: 26
-      FirstAidKnowledge: 26
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
 
 - type: entityEffect
   id: HereticSkills
   effects:
   - !type:GrantSkills
     skills:
-      MeleeKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
-      WeaponsKnowledge: 51
-      ThrowingKnowledge: 26
-      FirstAidKnowledge: 26
-      SurgeryKnowledge: 26
+      KnowledgeWeaponsPolearm: 50 # Ice spear
+      KnowledgeWeaponsLongBlade: 50 # Ragged sword
+      KnowledgeWeaponsShortBlade: 50
+      MeleeKnowledge: 50
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
+      SurgeryKnowledge: 25
       MagicalLiteracyKnowledge: 88
 
 - type: entityEffect
@@ -34,29 +31,34 @@
   effects:
   - !type:GrantTemporarySkills
     skills:
-      MeleeKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
-      WeaponsKnowledge: 51
-      ThrowingKnowledge: 26
-      FirstAidKnowledge: 26
-      SurgeryKnowledge: 26
+      KnowledgeWeaponsPolearm: 50 # Ice spear
+      KnowledgeWeaponsLongBlade: 50 # Ragged sword
+      KnowledgeWeaponsShortBlade: 50
+      MeleeKnowledge: 50
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
+      SurgeryKnowledge: 25
       MagicalLiteracyKnowledge: 88
+  # For heretic summons
+  - !type:GrantSkills
+    skills:
+      LiteracyKnowledge: 100
+      LanguageTauCetiBasic: 100
 
 - type: entityEffect
   id: GhoulSkillsRemove
   effects:
   - !type:RemoveTemporarySkills
     skills:
-      MeleeKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
-      WeaponsKnowledge: 51
-      ThrowingKnowledge: 26
-      FirstAidKnowledge: 26
-      SurgeryKnowledge: 26
+      KnowledgeWeaponsPolearm: 50 # Ice spear
+      KnowledgeWeaponsLongBlade: 50 # Ragged sword
+      KnowledgeWeaponsShortBlade: 50
+      MeleeKnowledge: 50
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
+      SurgeryKnowledge: 25
       MagicalLiteracyKnowledge: 88
 
 - type: entityEffect
@@ -64,24 +66,23 @@
   effects:
   - !type:GrantSkills
     skills:
-      MeleeKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
-      WeaponsKnowledge: 51
-      ThrowingKnowledge: 26
-      FirstAidKnowledge: 26
+      MeleeKnowledge: 50
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
 
 - type: entityEffect
   id: WizardSkills
   effects:
   - !type:GrantSkills
     skills:
+      # Whatever can be sourced from grimoire or wizard den
       MeleeKnowledge: 88
       ShootingKnowledge: 88
-      StrengthKnowledge: 88
-      ToughnessKnowledge: 88
-      AthleticsKnowledge: 88
+      KnowledgeWeaponsPolearm: 88
+      KnowledgeWeaponsLongBlade: 88
+      KnowledgeWeaponsShortBlade: 88
+      KnowledgeWeaponsBludgeon: 88
       WeaponsKnowledge: 88
       ThrowingKnowledge: 88
       FirstAidKnowledge: 88
@@ -93,14 +94,11 @@
   effects:
   - !type:GrantSkills
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-      AthleticsKnowledge: 26
-      WeaponsKnowledge: 26
-      ThrowingKnowledge: 26
-      FirstAidKnowledge: 26
+      MeleeKnowledge: 25
+      ShootingKnowledge: 25
+      WeaponsKnowledge: 25
+      ThrowingKnowledge: 25
+      FirstAidKnowledge: 25
 
 - type: entityEffect
   id: SlaughterDemonSkills
@@ -108,5 +106,3 @@
   - !type:GrantSkills
     skills:
       MartialArtHellRip: 88
-      StrengthKnowledge: 70
-      AthleticsKnowledge: 40

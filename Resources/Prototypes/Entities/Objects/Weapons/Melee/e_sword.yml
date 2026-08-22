@@ -3,6 +3,14 @@
   parent: BaseItem
   abstract: true
   components:
+  # <Trauma>
+  - type: UserInterface
+    interfaces:
+      enum.EsColorPickerMenu.Key:
+        type: EsColorPickerBUI
+  - type: WeaponClass
+    class: Energy
+  # </Trauma>
   - type: EnergySword
   - type: ItemToggle
     # Goobstation start
@@ -20,22 +28,28 @@
       path: /Audio/Weapons/ebladehum.ogg
   - type: ComponentToggler
     components:
-    - type: Sharp
-    - type: DisarmMalus
-      malus: 0.6
-    - type: Execution
-      doAfterDuration: 4.0
-    - type: Scalpel # Shitmed
+    # <Trauma>
+    - type: Scalpel
       speed: 0.75
-    - type: Cautery # Shitmed: you have to be very, very careful to cauterize with it
+    - type: Cautery # you have to be very, very careful to cauterize with it
       speed: 0.2
-    - type: SurgeryTool # Shitmed
+    - type: SurgeryTool
       startSound:
         path: /Audio/Weapons/ebladehum.ogg
       endSound:
         path: /Audio/Weapons/eblade1.ogg
         params:
           variation: 0.250
+    - type: Sharp
+    # </Trauma>
+    - type: Tool
+      qualities:
+      - Ignition # Trauma
+      - Slicing
+    - type: DisarmMalus
+      malus: 0.6
+    - type: Execution
+      doAfterDuration: 4.0
   - type: ItemToggleHot
   - type: ItemToggleSize
     activatedSize: Huge
@@ -91,21 +105,13 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Parry # Trauma
+  - type: Parry # Trauma - replaces Reflect
     reflects:
-      - Energy
-    maxParries: 0
-    maxReflects: 10
+    - Energy
+    reflectExhaustionCost: 0.125
     reflectSpread: 60
   - type: IgnitionSource
     temperature: 700
-  - type: Tool
-    qualities:
-    - Ignition
-  - type: UserInterface # Goobstation-EsColorPicker
-    interfaces:
-      enum.EsColorPickerMenu.Key:
-        type: EsColorPickerBUI
 
 - type: entity
   name: energy sword
@@ -113,6 +119,21 @@
   id: EnergySword
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
   components:
+  # <Trauma>
+  - type: Construction
+    deconstructionTarget: null
+    graph: EnergyDoubleSwordGraph
+    node: esword
+  - type: Tag
+    tags:
+    - EnergySword
+  - type: ThrowableBlocker
+    blockSound:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+        volume: -2
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_sword.rsi
     layers:
@@ -124,19 +145,6 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
-  - type: Construction # WD EDIT
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: esword
-  - type: Tag # WD EDIT
-    tags:
-    - EnergySword
-  - type: ThrowableBlocker # Goobstation
-    blockSound:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-        volume: -2
   - type: StaticPrice
     price: 2500
 
@@ -146,6 +154,10 @@
   id: EnergyDaggerLoud
   description: A not as loud and dangerous dagger with a beam made of pure, concentrated plasma. This one is completely undisguised.
   components:
+  # <Trauma>
+  - type: Tool
+    examinable: false # stealth item..?
+  # </Trauma>
   - type: ItemToggle
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
@@ -165,8 +177,6 @@
         types:
             Slash: 10
             Heat: 10
-        woundSeverityMultipliers:
-          Slash: 1
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -175,7 +185,16 @@
         volume: -3
   - type: ComponentToggler
     components:
-    - type: Sharp
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.5
+      reflectSpread: 120
+    # </Trauma>
+    - type: Tool
+      qualities:
+      - Ignition # Trauma
+      - Slicing
     - type: DisarmMalus
       malus: 0.4
     - type: Execution
@@ -204,13 +223,9 @@
   - type: PointLight
     enabled: false
     radius: 1.5
-    energy: 1.5
+    energy: 2.7
     color: white
     netsync: false
-  - type: Parry # Trauma
-    maxReflects: 3
-    maxParries: 0
-    reflectSpread: 120
 
 - type: entity
   name: pen
@@ -219,6 +234,10 @@
   suffix: E-Dagger
   description: 'A dark ink pen.'
   components:
+  # <Trauma>
+  - type: Tool
+    examinable: false # stealth item..? (shoutout for copy pasting everything)
+  # </Trauma>
   - type: ItemToggle
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
@@ -243,12 +262,19 @@
       types:
         Slash: 10
         Heat: 10
-      woundSeverityMultipliers: # Trauma
-        Slash: 1
     deactivatedSecret: true
   - type: ComponentToggler
     components:
-    - type: Sharp
+    # <Trauma>
+    - type: Parry
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.5
+      reflectSpread: 120
+    # </Trauma>
+    - type: Tool
+      qualities:
+      - Ignition # Trauma
+      - Slicing
     - type: DisarmMalus
       malus: 0.4
     - type: Execution
@@ -270,7 +296,7 @@
   - type: PointLight
     enabled: false
     radius: 1.5
-    energy: 1.5
+    energy: 2.7
     color: white
     netsync: false
   - type: MeleeWeapon
@@ -282,6 +308,7 @@
       types:
         Blunt: 1
   - type: EmitSoundOnUse
+    handle: false # Trauma
     sound:
       path: /Audio/Items/pen_click.ogg
       params:
@@ -294,10 +321,6 @@
   - type: Tag
     tags:
     - Write
-  - type: Parry # Trauma
-    maxReflects: 3
-    maxParries: 0
-    reflectSpread: 120
 
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]
@@ -323,6 +346,14 @@
   id: EnergyCutlass
   description: An exotic energy weapon.
   components:
+  # <Trauma>
+  - type: ThrowableBlocker
+    blockSound:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+        volume: -2
+  # </Trauma>
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
@@ -340,12 +371,6 @@
         map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_cutlass.rsi
-  - type: ThrowableBlocker # Goobstation
-    blockSound:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-        volume: -2
 
 - type: entity
   name: double-bladed energy sword
@@ -354,6 +379,23 @@
   abstract: true # Goob edit
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  # <Trauma>
+  - type: Parry
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.0625
+  - type: FlipOnHit
+    lightAttackOnly: true
+    statusEffect: StatusEffectFlipDesword
+    hitWhitelist:
+      components:
+      - MobState
+  - type: ThrowableBlocker
+    blockSound:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+        volume: -2
+  # </Trauma>
   - type: ItemToggle
     predictable: false # Goobstation - wielded weapons sound prediction is broken
     onUse: false # wielding events control it instead
@@ -387,15 +429,20 @@
         volume: 3
   - type: ComponentToggler
     components:
-    - type: Sharp
     - type: DisarmMalus
       malus: 1 # Goobstation value
     - type: Execution
       doAfterDuration: 4.0
+    - type: Tool
+      qualities:
+      - Slicing
   - type: Wieldable
     wieldSound: null # esword light sound instead
   - type: MeleeWeapon
-    heavyStaminaCost: 0 # goob edit
+    # <Trauma>
+    clickDamageModifier: 1.1
+    heavyStaminaCost: 0
+    # </Trauma>
     wideAnimationRotation: -135
     attackRate: 1 #Goob Station rebalance, was originally 1.5
     angle: 100
@@ -414,22 +461,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-  - type: Parry # Trauma
-    maxReflects: 15
-    maxParries: 0
-    reflectSpread: 30
-  - type: FlipOnHit # WD EDIT
-    lightAttackOnly: true
-    statusEffect: StatusEffectFlipDesword
-    hitWhitelist:
-      components:
-      - MobState
-  - type: ThrowableBlocker # Goobstation
-    blockSound:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-        volume: -2
 
 - type: entity # Goobstation
   parent: EnergySwordDoubleBase
@@ -441,68 +472,59 @@
     node: desword
 
 # Item will look weird in handslot. Will need to adjust handstorage visuals in a future PR
-#- type: entity
-#  parent: EnergySwordDouble
-#  id: HyperEutacticBlade
-#  name: hypereutactic-blade
-#  description: A supermassive weapon envisioned to cleave the very fabric of space and time itself in twain, the hypereutactic blade dynamically flash-forges a hypereutactic crystaline nanostructure capable of passing through most known forms of matter like a hot knife through butter.
-#  components:
-#  - type: MeleeWeapon
-#    wideAnimationRotation: 180
-#    attackRate: 0.8 #0.7 and below is too slow
-#    angle: 100
-#    range: 2.0
-#    damage:
-#      types:
-#        Blunt: 4.5
-#  - type: ItemToggleMeleeWeapon
-#    activatedSoundOnSwing:
-#      path: /Audio/Weapons/eblademiss.ogg
-#      params:
-#        volume: -3
-#        variation: 0.250
-#    activatedDamage:
-#      types:
-#        Slash: 20
-#        Heat: 20
-#        Structural: 20
-#  - type: MeleeRequiresWield
-#  - type: HeldSpeedModifier #slowdown is what balances this compared to a dsword
-#    walkModifier: 0.6
-#    sprintModifier: 0.6
-#  - type: UseDelay
-#    delay: 1.5
-#  - type: Sprite
-#    sprite: Objects/Weapons/Melee/hypereutactic_blade.rsi
-#    layers:
-#    - state: hypereutactic
-#    - state: hypereutactic_blade
-#      color: "#FFFFFF"
-#      visible: false
-#      shader: unshaded
-#      map: [ "blade" ]
-#    - state: hypereutactic_gem
-#      color: "#FFFFFF"
-#      visible: false
-#      shader: unshaded
-#     map: [ "gem" ]
-# - type: Item
-#   size: Small
-#    sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
-#  - type: Reflect
-#    reflectProb: 1
-#    spread: 75
-
-# Nukie variant, reduced reflection rate.
-#- type: entity
-#  parent: HyperEutacticBlade
-#  id: HyperEutaticBlade
-#  name: hypereutatic-blade
-#  description: Often mistaken for the Hypereutactic Blade. This mass produced, off-brand, knockoff gets the same job done but with less reflection.
-#  components:
-#  - type: Reflect
-#    reflectProb: 0.75
-#    spread: 75
+- type: entity
+  parent: EnergySwordDouble
+  id: HyperEutacticBlade
+  name: hypereutactic-blade
+  description: A supermassive weapon envisioned to cleave the very fabric of space and time itself in twain, the hypereutactic blade dynamically flash-forges a hypereutactic crystaline nanostructure capable of passing through most known forms of matter like a hot knife through butter.
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    attackRate: 0.8 #0.7 and below is too slow
+    angle: 100
+    range: 2.0
+    damage:
+      types:
+        Blunt: 4.5
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: -3
+        variation: 0.250
+    activatedDamage:
+      types:
+        Slash: 20
+        Heat: 20
+        Structural: 20
+  - type: MeleeRequiresWield
+  - type: HeldSpeedModifier #slowdown is what balances this compared to a dsword
+    walkModifier: 0.6
+    sprintModifier: 0.6
+    weightlessAcceleration: 0.6
+    zeroGravityModifier: 0.6
+  - type: UseDelay
+    delay: 1.5
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/hypereutactic_blade.rsi
+    layers:
+    - state: hypereutactic
+    - state: hypereutactic_blade
+      color: "#FFFFFF"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+    - state: hypereutactic_gem
+      color: "#FFFFFF"
+      visible: false
+      shader: unshaded
+      map: [ "gem" ]
+  - type: Item
+    size: Small
+    sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
+  - type: Reflect
+    reflectProb: 1.0
+    spread: 75
 
 # Borgs
 

@@ -17,21 +17,20 @@ namespace Content.Trauma.Shared.Power;
 
 public sealed partial class BatteryDrinkerSystem : EntitySystem
 {
+    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private EntityWhitelistSystem _whitelist = default!; // Goobstation - Energycrit
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<BatteryComponent, GetVerbsEvent<AlternativeVerb>>(AddAltVerb);
-        SubscribeLocalEvent<PowerCellSlotComponent, GetVerbsEvent<AlternativeVerb>>(AddAltVerb); // Goobstation - Energycrit
-
-        SubscribeLocalEvent<BatteryDrinkerComponent, BatteryDrinkerDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<PowerCellSlotComponent, GetVerbsEvent<AlternativeVerb>>(AddAltVerb);
     }
 
     private void AddAltVerb<TComp>(EntityUid uid, TComp component, GetVerbsEvent<AlternativeVerb> args)
@@ -68,7 +67,7 @@ public sealed partial class BatteryDrinkerSystem : EntitySystem
 
         var doAfterTime = drinkerComp.DrinkSpeed * sourceComp.DrinkSpeedMulti;
 
-        var args = new DoAfterArgs(EntityManager, user, doAfterTime, new BatteryDrinkerDoAfterEvent(), user, target) // TODO: Make this doafter loop, once we merge Upstream.
+        var args = new DoAfterArgs(EntityManager, user, doAfterTime, new BatteryDrinkerDoAfterEvent(), user, target)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -76,50 +75,65 @@ public sealed partial class BatteryDrinkerSystem : EntitySystem
             DistanceThreshold = 1.35f,
             RequireCanInteract = true,
             CancelDuplicate = false,
-            MultiplyDelay = false, // Goobstation
+            MultiplyDelay = false,
         };
 
         _doAfter.TryStartDoAfter(args);
     }
 
-    private void OnDoAfter(EntityUid uid, BatteryDrinkerComponent drinkerComp, DoAfterEvent args)
+    [SubscribeLocalEvent]
+    private void OnDoAfter(Entity<BatteryDrinkerComponent> ent, ref BatteryDrinkerDoAfterEvent args)
     {
         if (args.Cancelled || args.Target is not { } source)
             return;
 
         if (!TryComp<BatteryDrinkerSourceComponent>(source, out var sourceComp))
+        {
+            Log.Error($"Somehow drained from invalid battery {ToPrettyString(source)}");
             return;
+        }
 
         var sourceBattery = Comp<BatteryComponent>(source);
 
-        var drinker = uid;
-        if (!_powerCell.TryGetBatteryFromEntityOrSlot(drinker, out var drinkerBattery))
+        if (!_powerCell.TryGetBatteryFromEntityOrSlot(ent.Owner, out var drinkerBattery))
+        {
+            Log.Error($"{ToPrettyString(ent)} has no battery!");
             return;
+        }
+
+        var networked = sourceBattery.NetSyncEnabled;
+        if (!networked && _net.IsClient)
+            return; // client cant predict APCs, SMESes, etc just batteries
 
         var drinkerBatt = drinkerBattery.Value.AsNullable();
 
-        var amountToDrink = drinkerComp.DrinkMultiplier * 1000;
+        var amountToDrink = ent.Comp.DrinkMultiplier * 1000;
 
         amountToDrink = MathF.Min(amountToDrink, _battery.GetCharge((source, sourceBattery)));
         amountToDrink = MathF.Min(amountToDrink, drinkerBattery.Value.Comp.MaxCharge - _battery.GetCharge(drinkerBatt));
 
         if (sourceComp.MaxAmount > 0)
-            amountToDrink = MathF.Min(amountToDrink, (float) sourceComp.MaxAmount);
+            amountToDrink = MathF.Min(amountToDrink, sourceComp.MaxAmount);
 
         if (amountToDrink <= 0)
         {
-            _popup.PopupClient(Loc.GetString("battery-drinker-empty", ("target", source)), drinker, drinker);
+            _popup.PopupEntity(Loc.GetString("battery-drinker-empty", ("target", source)), ent, ent);
             return;
         }
 
         if (_battery.TryUseCharge((source, sourceBattery), amountToDrink))
             _battery.ChangeCharge(drinkerBatt, amountToDrink);
 
-        if (sourceComp != null && sourceComp.DrinkSound != null)
+        _popup.PopupEntity(Loc.GetString("ipc-recharge-tip"), ent, ent, PopupType.SmallCaution);
+        if (sourceComp.DrinkSound != null)
         {
-            _popup.PopupClient(Loc.GetString("ipc-recharge-tip"), drinker, drinker, PopupType.SmallCaution);
-            _audio.PlayPredicted(sourceComp.DrinkSound, source, drinker);
-            PredictedSpawnAtPosition("EffectSparks", Transform(source).Coordinates);
+            if (networked)
+                _audio.PlayPredicted(sourceComp.DrinkSound, source, ent);
+            else
+                _audio.PlayPvs(sourceComp.DrinkSound, source);
         }
+        PredictedSpawnAtPosition("EffectSparks", Transform(source).Coordinates);
+
+        args.Repeat = !_battery.IsFull(drinkerBatt);
     }
 }

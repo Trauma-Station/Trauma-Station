@@ -20,6 +20,7 @@ public sealed partial class KnowledgeTab : Control
         _sprite = _system.GetEntitySystem<SpriteSystem>();
     }
 
+    // TODO: update UI whenever knowledge changes
     /// <summary>
     /// Updates the specificied knowledge tab with the player's current martial arts knowledge.
     /// </summary>
@@ -30,25 +31,26 @@ public sealed partial class KnowledgeTab : Control
         KnowledgeBox.RemoveAllChildren();
         KnowledgePlaceholder.Visible = true;
 
-        var doohickeys = _knowledge.GrabAllKnowledge(player);
-        if (doohickeys == null)
+        if (_knowledge.GrabAllKnowledge(player) is not { } groups)
             return;
 
         KnowledgePlaceholder.Visible = false;
         KnowledgeBox.SeparationOverride = 10;
-        foreach (var (groupId, conditions) in doohickeys)
+        foreach (var (groupId, conditions) in groups)
         {
             var boxContainer = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                ToolTip = conditions.Desc,
+                MouseFilter = MouseFilterMode.Pass, // for the tooltip to exist
             };
 
             var textRect = new TextureRect
             {
                 Margin = new Thickness(0, 8, 0, 0),
             };
-            if (conditions.Sprite != null)
-                textRect.Texture = _sprite.Frame0(conditions.Sprite);
+            if (conditions.Sprite is { } sprite)
+                textRect.Texture = _sprite.Frame0(sprite);
 
             var box = new BoxContainer
             {
@@ -66,7 +68,7 @@ public sealed partial class KnowledgeTab : Control
 
             var masteryText = new RichTextLabel
             {
-                Text = conditions.Description,
+                Text = conditions.LevelString,
                 Modulate = conditions.Color,
                 SetWidth = 325,
                 HorizontalAlignment = HAlignment.Left,
@@ -103,7 +105,7 @@ public sealed partial class KnowledgeTab : Control
                 groupContainer = childNotNull;
             }
 
-            // Create category if categor not found.
+            // Create category if it doesnt exist
             if (groupContainer is not { })
             {
                 var body = new CollapsibleBody();

@@ -14,9 +14,9 @@
     - type: Targeting
     - type: LanguageSpeaker
       speaks:
-      - TauCetiBasic
+      - Universal
       understands:
-      - TauCetiBasic
+      - Universal
     # </Trauma>
     - type: LagCompensation
     - type: GhostRole
@@ -292,7 +292,9 @@
   description: Either manifests the guardian or recalls it back into your body
   components:
   - type: Action
-    icon: Interface/Actions/manifest.png
     useDelay: 2
+  - type: Sprite
+    layers:
+    - texture: Interface/Actions/manifest.png
   - type: InstantAction
     event: !type:GuardianToggleActionEvent

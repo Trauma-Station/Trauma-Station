@@ -37,7 +37,7 @@ public sealed partial class SummonPlagueRatSystem : EntitySystem
 
         if (_physics.GetEntitiesIntersectingBody(ent.Owner, (int) CollisionGroup.Impassable).Count > 0)
         {
-            _popup.PopupClient(Loc.GetString("wraith-plaguerat-blocked"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-plaguerat-blocked"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
 

@@ -8,6 +8,8 @@ This is a fork of [SS14](https://github.com/space-wizards/space-station-14) call
 
 ## Documentation/Wiki
 
+Trauma itself has a non-technical wiki on its content [here](https://wiki.traumastation.com/wiki/Main_Page)
+
 SS14 Docs [docs site](https://docs.spacestation14.com/) has documentation on SS14's content, engine, game design, and more. It also has lots of resources for new contributors to the project.
 
 ## Contributing

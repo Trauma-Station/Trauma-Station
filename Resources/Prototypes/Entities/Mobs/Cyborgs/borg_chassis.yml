@@ -115,7 +115,7 @@
           map: ["light"]
           visible: false
     - type: BorgChassis
-      maxModules: 3
+      maxModules: 7 # Trauma - was 3
       moduleWhitelist:
         tags:
           - BorgModuleGeneric
@@ -128,6 +128,13 @@
       interactFailureString: petting-failure-syndicate-cyborg
       interactSuccessSound:
         path: /Audio/Ambience/Objects/periodic_beep.ogg
+    # <Trauma>
+    - type: ModifyKnowledgeGrant
+      skills:
+        MeleeKnowledge: 51
+        ShootingKnowledge: 50
+        WeaponsKnowledge: 51
+    # </Trauma>
 
 - type: entity
   id: BorgChassisSyndicateMedical
@@ -135,6 +142,16 @@
   name: syndicate medical cyborg
   description: A combat medical cyborg. Has limited offensive potential, but makes more than up for it with its support capabilities.
   components:
+    # <Trauma>
+    - type: ModifyKnowledgeGrant
+      skills:
+        SurgeryKnowledge: 60
+        FirstAidKnowledge: 60
+        ChemistryKnowledge: 60
+        MeleeKnowledge: 20
+        ShootingKnowledge: 20
+        WeaponsKnowledge: 20
+    # </Trauma>
     - type: Sprite
       layers:
         - state: synd_medical
@@ -147,7 +164,7 @@
           map: ["light"]
           visible: false
     - type: BorgChassis
-      maxModules: 3
+      maxModules: 7 # Trauma - was 3
       moduleWhitelist:
         tags:
           - BorgModuleGeneric
@@ -174,9 +191,52 @@
   name: syndicate saboteur cyborg
   description: A streamlined engineering cyborg, equipped with covert modules. Its chameleon projector lets it disguise itself as a Nanotrasen cyborg.
   components:
+    # <Trauma>
+    - type: BorgDisguise
+      action: ActionBorgDisguiseToggle
+      disguisedPrototype: BorgChassisEngineer
+      hasMindState: engineer_e
+      noMindState: engineer_e_r
+      disguisedLight: engineer_l
+      realLight: synd_engi_l
+    - type: GenericVisualizer
+      visuals:
+        enum.BorgDisguiseVisuals.IsDisguised:
+          enum.BorgVisualLayers.Body:
+            True: { visible: false }
+            False: { visible: true }
+          enum.BorgDisguiseVisualLayers.Body:
+            True: { visible: true }
+            False: { visible: false }
+    - type: ModifyKnowledgeGrant
+      skills:
+        FabricationKnowledge: 60
+        DoorsKnowledge: 60
+        AirlocksKnowledge: 60
+        FurnitureKnowledge: 60
+        InfrastructureKnowledge: 60
+        ElectronicsKnowledge: 60
+        WallsKnowledge: 60
+        WindowsKnowledge: 60
+        MetalworkingKnowledge: 60
+        GunsmithingKnowledge: 60
+        MechanicsKnowledge: 60
+        BotsKnowledge: 60
+        MeleeKnowledge: 20
+        ShootingKnowledge: 20
+        WeaponsKnowledge: 20
     - type: Sprite
       layers:
+        - state: engineer_e
+          map: [ "enum.BorgDisguiseVisualLayers.Light" ]
+          shader: unshaded
+          visible: false
         - state: synd_engi
+          map: [ "enum.BorgVisualLayers.Body" ]
+        - state: engineer
+          map: [ "enum.BorgDisguiseVisualLayers.Body" ]
+          visible: false
+    # </Trauma>
         - state: synd_engi_e
           map: ["enum.BorgVisualLayers.Light"]
           shader: unshaded
@@ -186,7 +246,7 @@
           map: ["light"]
           visible: false
     - type: BorgChassis
-      maxModules: 3
+      maxModules: 7 # Trauma - was 3
       moduleWhitelist:
         tags:
           - BorgModuleGeneric

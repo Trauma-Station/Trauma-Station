@@ -58,7 +58,7 @@
   id: ArrowBee
   desc: Bee hardlight arrow. Summons angry bees when it hits any living entity, except bees themselves.
   icon:
-    sprite: _Goobstation/Objects/Weapons/Grenades/beenades.rsi
+    sprite: _Goobstation/Objects/Weapons/Grenades/beenade.rsi
     state: icon
   color: yellow
   protoId: ArrowBee

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mobs.Components;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -9,7 +10,6 @@ namespace Content.Goobstation.Shared.Weapons.MissChance;
 
 public sealed partial class MissChanceSystem : EntitySystem
 {
-    [Dependency] private INetManager _netManager = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -20,24 +20,19 @@ public sealed partial class MissChanceSystem : EntitySystem
 
     private void PreventCollide(Entity<MissChanceComponent> ent, ref PreventCollideEvent args)
     {
-        // This piece of goidacode guarantees synchronized random
-        var random = new Random((int) _timing.CurTick.Value + (int) GetNetEntity(ent));
-
-        if (args.Cancelled
-        || !HasComp<MobStateComponent>(args.OtherEntity)
-        || !random.Prob(ent.Comp.Chance))
+        var missChance = ent.Comp.Chance;
+        if (args.Cancelled ||
+            !HasComp<MobStateComponent>(args.OtherEntity) ||
+            !SharedRandomExtensions.PredictedProb(_timing, missChance, GetNetEntity(ent)))
             return;
 
         args.Cancelled = true;
     }
 
-    public void ApplyMissChance(EntityUid? ent, float chance)
+    public void ApplyMissChance(EntityUid uid, float chance)
     {
-        // GunShotEvent goes nuts with ammo uids on client so we tell it to stfu
-        if (_netManager.IsClient || ent == null)
-            return;
-
-        var missComp = EnsureComp<MissChanceComponent>((EntityUid)ent);
+        var missComp = EnsureComp<MissChanceComponent>(uid);
         missComp.Chance = chance;
+        Dirty(uid, missComp);
     }
 }

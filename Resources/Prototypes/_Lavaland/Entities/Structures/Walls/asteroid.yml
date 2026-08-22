@@ -2,9 +2,15 @@
 
 # Gibtonite ore variants
 - type: entity
-  parent: [ BaseRockGibtonite, WallRock ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: rock # Trauma, small refractor
   id: WallRockGibtonite
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock
+  #</Trauma>
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockGibtonite
@@ -13,6 +19,7 @@
       WallRockSand: WallRockSandGibtonite
       WallRockSnow: WallRockSnowGibtonite
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
@@ -28,10 +35,17 @@
       map: [ "enum.MiningScannerVisualLayers.Overlay", "gib" ]
 
 - type: entity
-  parent: [ BaseRockGibtonite, WallRockBasalt ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: basalt # Trauma, small refractor
   id: WallRockBasaltGibtonite
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_wall
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
@@ -48,9 +62,16 @@
 
 - type: entity
   id: WallRockSnowGibtonite
-  parent: [ BaseRockGibtonite, WallRockSnow ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: snowdrift # Trauma, small refractor
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_snow
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
@@ -67,9 +88,16 @@
 
 - type: entity
   id: WallRockSandGibtonite
-  parent: [ BaseRockGibtonite, WallRockSand ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: sandstone # Trauma, small refractor
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_sand
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
@@ -86,9 +114,16 @@
 
 - type: entity
   id: WallRockChromiteGibtonite
-  parent: [ BaseRockGibtonite, WallRockChromite ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: chromite # Trauma, small refractor
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_chromite
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
@@ -105,9 +140,16 @@
 
 - type: entity
   id: WallRockAndesiteGibtonite
-  parent: [ BaseRockGibtonite, WallRockAndesite ]
+  parent: [ BaseRockGibtonite ] # Trauma, small refractor
+  name: andesite # Trauma, small refractor
   components:
+  #<Trauma>
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock_andesite
+  #</Trauma>
   - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Trauma
     layers:
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]

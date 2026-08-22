@@ -6,6 +6,8 @@
   id: WeaponRifleBurner
   description: A high caliber syndicate gun chambered in .50 caliber, capable of firing anti-materiel and high explosive rounds.
   components:
+  - type: WeaponClass
+    class: Heavy # fiddy cal
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Rifles/burner.rsi
     layers:

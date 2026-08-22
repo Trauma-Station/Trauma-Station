@@ -18,7 +18,7 @@ namespace Content.IntegrationTests.Tests.Administration.Notes;
 /// </summary>
 public sealed class NotesControlTest : InteractionTest
 {
-    protected override PoolSettings Settings => new() {Connected = true, Dirty = true, AdminLogsEnabled = true, DummyTicker = false};
+    public override PoolSettings PoolSettings => new() { Connected = true, Dirty = true, AdminLogsEnabled = true, DummyTicker = false };
 
     [Ignore("The addition of mentor help breaks this test")] // Trauma - Mentor Help
     [Test]

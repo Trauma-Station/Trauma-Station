@@ -9,7 +9,6 @@ namespace Content.Goobstation.Server.Humanoid;
 public sealed partial class RandomHumanoidSkinColorSystem : EntitySystem
 {
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
@@ -19,6 +18,6 @@ public sealed partial class RandomHumanoidSkinColorSystem : EntitySystem
 
     private void OnMapInit(Entity<RandomHumanoidSkinColorComponent> ent, ref MapInitEvent args)
     {
-        _humanoid.SetSkinColor(ent.Owner, _random.Pick(_prototype.Index(ent.Comp.Palette).Colors.Values));
+        _humanoid.SetSkinColor(ent.Owner, _random.Pick(ProtoMan.Index(ent.Comp.Palette).Colors.Values));
     }
 }

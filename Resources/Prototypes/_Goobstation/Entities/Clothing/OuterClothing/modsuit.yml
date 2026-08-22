@@ -21,8 +21,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.01
-      heatingCoefficient: 0.01
+      coefficient: 0.01
   - type: Clothing
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
@@ -34,7 +33,7 @@
     sealUpPopup: sealable-clothing-seal-up-chestplate
     sealDownPopup: sealable-clothing-seal-down-chestplate
   - type: FireProtection
-    reduction: 0.5
+    reduction: 0.63
   - type: StaminaResistance
     damageCoefficient: 0.9
   - type: SealableClothingVisuals
@@ -50,7 +49,7 @@
     - Arm
     - Leg
     - Tail
-    - Other
+    - Wings
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -103,10 +102,11 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.6
-        Heat: 0.6
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Ballistic: 0.6
+        Heat: 0.8
         Radiation: 0.6
 
 - type: entity
@@ -133,9 +133,9 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.45
-        Heat: 0.5
-        Caustic: 0.5
+        Piercing: 0.5
+        Ballistic: 0.45
+        Heat: 0.7
         Radiation: 0.5
   - type: ClothingAutoInject
     reagents:
@@ -161,9 +161,9 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.85
+        Piercing: 0.9
+        Ballistic: 0.85
         Heat: 0.8
-        Caustic: 0.6
         Radiation: 0.3
   - type: ModifyDelayedKnockdown
     delayDelta: 1
@@ -189,13 +189,12 @@
         Piercing: 0.8
         Heat: 0.7
         Shock: 0.8
-        Caustic: 0.5
         Radiation: 0.01
   - type: ModifyDelayedKnockdown
     delayDelta: 1
     knockdownTimeDelta: -1
   - type: FireProtection
-    reduction: 0.7 # 0.2 stronger than other modsuits
+    reduction: 0.88
 
 - type: entity
   parent: [ ClothingOuterModsuitBase, BaseModsuitPieceAtmos ]
@@ -223,13 +222,12 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      coolingCoefficient: 0.001 # 10x better
-      heatingCoefficient: 0.001 # 10x better
+      coefficient: 0.001 # 10x better
   - type: ModifyDelayedKnockdown
     delayDelta: 1
     knockdownTimeDelta: -1
   - type: FireProtection
-    reduction: 0.75 # 0.25 better than other modsuits
+    reduction: 0.94
 
 - type: entity
   parent: [ ClothingOuterModsuitBase, BaseModsuitPieceRD ]

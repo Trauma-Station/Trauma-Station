@@ -25,7 +25,20 @@
       proto: Heretic
       range:
         min: 1
-        max: 3
+        max: 2
+      playerRatio: 20
+
+- type: entity
+  parent: Vampire
+  id: SubVampire
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: Vampire
+      range:
+        min: 1
+        max: 2
       playerRatio: 20
 
 - type: entity
@@ -38,3 +51,27 @@
       proto: AbductorScientist
     - !type:FixedAntagCount
       proto: AbductorAgent
+
+- type: entity
+  parent: Spies
+  id: SubSpies
+  components:
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: Spy
+      range:
+        min: 1
+        max: 3
+      playerRatio: 20
+
+- type: entity
+  parent: Changeling
+  id: SubChangeling
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Changeling

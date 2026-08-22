@@ -1,10 +1,31 @@
 - type: entity
   name: BaseWeaponSniper
   parent: BaseItem
-  id: BaseWeaponSniper
+  id: BaseWeaponSniperNoAmmo # Trauma - this has no ammo provider, moved that to BaseWeaponSniper
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SnipersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SnipersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SnipersDrop
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud
+  - type: WeaponClass
+    class: Sniper
+  # </Trauma>
   - type: Sprite
     layers:
     - state: base
@@ -25,101 +46,20 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-  - type: BallisticAmmoProvider
-    autoCycle: false # Goobstation
-    capacity: 10
-    proto: CartridgeLightRifle
-    whitelist:
-      tags:
-      - CartridgeLightRifle
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
+  # <Trauma> - moved to BaseWeaponSniper
+  #- type: BallisticAmmoProvider
+  #  capacity: 10
+  #  proto: CartridgeLightRifle
+  #  whitelist:
+  #    tags:
+  #    - CartridgeLightRifle
+  #- type: ContainerContainer
+  #  containers:
+  #    ballistic-ammo: !type:Container
+  #      ents: []
+  # </Trauma>
   - type: StaticPrice
     price: 500
-  # <Goob>
-  - type: EmitSoundOnPickup
-    sound:
-      collection: SnipersPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: SnipersDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: SnipersDrop
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud
-  # </Goob>
-
-# Goobstation - Start - I decided to put it here, because it changes Hristov.
-- type: entity
-  name: BaseMagazineSniper
-  parent: [BaseItem, BaseGunWieldable]
-  id: BaseWeaponSniperMagazine
-  description: A rooty tooty point and shooty.
-  abstract: true
-  components:
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-  - type: Item
-    sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
-    size: Huge
-    shape:
-      - 0,0,6,1
-    storedRotation: 45
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: Gun
-    fireRate: 0.75
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-  - type: ChamberMagazineAmmoProvider
-    autoCycle: false
-    soundRack:
-      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineAntiMateriel
-        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineAntiMateriel
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeAntiMateriel
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeAntiMateriel
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: StaticPrice
-    price: 500
-# Goobstation - End
 
 - type: entity
   name: Kardashev-Mosin
@@ -127,6 +67,13 @@
   id: WeaponSniperMosin
   description: A true relic, the Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Loads 10 rounds of .30 rifle.
   components:
+  # <Trauma>
+  - type: Item  # Goob edit
+    size: Large
+    storedRotation: 45
+  - type: ScannableForPoints # goob edit
+    points: 2
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
     layers:
@@ -163,20 +110,16 @@
     solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 2
-  - type: Sharp
-    butcherDelayModifier: 2 #It's a bayonet
+  - type: Tool
+    qualities: Slicing
+    speedModifier: 0.5 #It's a bayonet
   - type: GunRequiresWield
   - type: StaticPrice
     price: 500
-  - type: Item  # Goob edit
-    size: Large
-    storedRotation: 45
-  - type: ScannableForPoints # goob edit
-    points: 2
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
   id: WeaponSniperHristov
   description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses .60 anti-materiel ammo.
   components:
@@ -197,6 +140,9 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
     resetOnHandSelected: false # Goobstation - quickscope pro
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/spent.png
   #- type: BallisticAmmoProvider - Goobstation - Magazine Sniper
   #  whitelist:
   #    tags:
@@ -219,7 +165,9 @@
   id: Musket
   description: This should've been in a museum long before you were born. Uses .60 anti-materiel ammo.
   components:
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Item
     size: Large
   - type: Sprite

@@ -9,7 +9,6 @@ namespace Content.Shared.Humanoid;
 
 public sealed partial class HumanoidProfileSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private GrammarSystem _grammar = default!;
 
     public override void Initialize()
@@ -27,6 +26,7 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
         ent.Comp.Gender = profile.Gender;
         ent.Comp.Age = profile.Age;
         ent.Comp.Species = profile.Species;
+        ent.Comp.Voice = profile.Voice;
         ent.Comp.Sex = profile.Sex;
         Dirty(ent);
         // <Trauma>
@@ -34,8 +34,8 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
         SetKnowledgeProfile((ent, ent.Comp), profile.Knowledge);
         // </Trauma>
 
-        var sexChanged = new SexChangedEvent(ent.Comp.Sex, profile.Sex);
-        RaiseLocalEvent(ent, ref sexChanged);
+        var voiceChanged = new VoiceChangedEvent(ent.Comp.Voice, profile.Voice);
+        RaiseLocalEvent(ent, ref voiceChanged);
 
         if (TryComp<GrammarComponent>(ent, out var grammar))
         {
@@ -57,7 +57,7 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
     /// </summary>
     public string GetSpeciesRepresentation(ProtoId<SpeciesPrototype> species)
     {
-        if (_prototype.TryIndex(species, out var speciesPrototype))
+        if (ProtoMan.TryIndex(species, out var speciesPrototype))
             return Loc.GetString(speciesPrototype.Name);
 
         Log.Error($"Tried to get representation of unknown species: {species}"); // Trauma - fix it being unformatted
@@ -69,7 +69,7 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
     /// </summary>
     public string GetAgeRepresentation(ProtoId<SpeciesPrototype> species, int age)
     {
-        if (!_prototype.TryIndex(species, out var speciesPrototype))
+        if (!ProtoMan.TryIndex(species, out var speciesPrototype))
         {
             Log.Error("Tried to get age representation of species that couldn't be indexed: " + species);
             return Loc.GetString("identity-age-young");

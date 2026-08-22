@@ -5,3 +5,5 @@ flavor-complex-tiredness = like tiredness
 flavor-complex-blood = like blood
 
 flavor-complex-apotheosis = like apotheosis
+
+flavor-complex-rich = rich

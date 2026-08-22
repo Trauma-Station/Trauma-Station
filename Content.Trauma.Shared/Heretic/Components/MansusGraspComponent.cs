@@ -11,7 +11,7 @@ public sealed partial class MansusGraspComponent : Component
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(5f);
 
     [DataField]
-    public float StaminaDamage = 80f;
+    public float StaminaDamage = 40f;
 
     [DataField]
     public TimeSpan SpeechTime = TimeSpan.FromSeconds(10f);

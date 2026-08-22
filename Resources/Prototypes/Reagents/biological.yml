@@ -43,11 +43,19 @@
         - !type:MetabolizerTypeCondition
           type: [ Bloodsucker ]
         damage:
+          Airloss: -3 # Trauma
+          Toxin: -1.25 # Trauma
           Brute: -3
           Burn: -1.25
     Bloodstream: # Don't inject someone else's blood into yourself! Your own blood won't actually metabolise.
       effects:
       - !type:HealthChange
+        # <Trauma>
+        conditions:
+        - !type:MetabolizerTypeCondition
+          inverted: true # bloodsuckers shouldnt take damage...
+          type: [ Bloodsucker, Vampire ]
+        # </Trauma>
         damage:
           types:
             Poison: 0.2
@@ -196,6 +204,10 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      - !type:HealBoneDamage
+        amount: 1.5
+      # </Trauma>
       - !type:SatiateThirst
         factor: 1.5
     # Dragon doesn't require airloss healing, so omnizine is still best for humans.
@@ -220,6 +232,7 @@
             Blunt: -5
             Slash: -5
             Piercing: -5
+            Ballistic: -5 # Trauma
       - !type:ModifyBleed
         amount: -1.5
   plantMetabolism:

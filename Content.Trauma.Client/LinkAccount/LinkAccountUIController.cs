@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Info;
-using Content.Client.LinkAccount;
 using Content.Client.Lobby;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
@@ -18,6 +17,7 @@ namespace Content.Trauma.Client.LinkAccount;
 
 public sealed partial class LinkAccountUIController : UIController, IOnSystemChanged<LinkAccountSystem>
 {
+    [Dependency] private EscapeUIController _escape = default!;
     [Dependency] private IClipboardManager _clipboard = default!;
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private LinkAccountManager _linkAccount = default!;
@@ -38,7 +38,7 @@ public sealed partial class LinkAccountUIController : UIController, IOnSystemCha
 
         LinkBanner.OnLinkBanner += HookFunctions;
         LobbyState.OnCreated += HookFunctionsLobby;
-        EscapeUIController.OnCreated += HookFunctionsEscape;
+        _escape.OnTogglePatronPerksWindow = () => TogglePatronPerksWindow();
     }
 
     private void HookFunctions(LinkBanner banner)
@@ -49,11 +49,6 @@ public sealed partial class LinkAccountUIController : UIController, IOnSystemCha
     private void HookFunctionsLobby(LobbyState lobby)
     {
         lobby.OnTogglePatronPerksWindow = () => TogglePatronPerksWindow();
-    }
-
-    private void HookFunctionsEscape(EscapeUIController escape)
-    {
-        escape.OnTogglePatronPerksWindow = () => TogglePatronPerksWindow();
     }
 
     private void OnCode(Guid code)
@@ -68,6 +63,9 @@ public sealed partial class LinkAccountUIController : UIController, IOnSystemCha
 
     private void OnUpdated()
     {
+        if (_escape.Window is { } window)
+            window.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
+
         if (UIManager.ActiveScreen is not LobbyGui gui)
             return;
 
@@ -86,95 +84,95 @@ public sealed partial class LinkAccountUIController : UIController, IOnSystemCha
 
     public void ToggleWindow()
     {
-        if (_window == null)
+        if (_window is { } window)
         {
-            _window = new LinkAccountWindow();
-            _window.OnClose += () => _window = null;
-            _window.Label.SetMarkupPermissive($"{Loc.GetString("rmc-ui-link-discord-account-text")}");
-            if (_linkAccount.Linked)
-                _window.Label.SetMarkupPermissive($"{Loc.GetString("rmc-ui-link-discord-account-already-linked")}\n\n{Loc.GetString("rmc-ui-link-discord-account-text")}");
-
-            _window.CopyButton.OnPressed += _ =>
-            {
-                _clipboard.SetText(_code.ToString());
-                _window.CopyButton.Text = Loc.GetString("rmc-ui-link-discord-account-copied");
-                _window.CopyButton.Disabled = true;
-                _disableUntil = _timing.RealTime.Add(TimeSpan.FromSeconds(3));
-            };
-
-            var messageLink = _config.GetCVar(GoobCVars.RMCDiscordAccountLinkingMessageLink);
-            if (string.IsNullOrEmpty(messageLink))
-            {
-                _window.LinkButton.Visible = false;
-                _window.CopyButton.RemoveStyleClass("OpenRight");
-            }
-            else
-            {
-                _window.LinkButton.Visible = true;
-                _window.LinkButton.OnPressed += _ => _uriOpener.OpenUri(messageLink);
-                _window.CopyButton.AddStyleClass("OpenRight");
-            }
-
-            _window.OpenCentered();
-
-            if (_code == default)
-                _window.CopyButton.Disabled = true;
-
-            _net.ClientSendMessage(new LinkAccountRequestMsg());
+            window.Close();
+            _window = null;
             return;
         }
 
-        _window.Close();
-        _window = null;
+        _window = new LinkAccountWindow();
+        _window.OnClose += () => _window = null;
+        _window.Label.SetMarkupPermissive($"{Loc.GetString("rmc-ui-link-discord-account-text")}");
+        if (_linkAccount.Linked)
+            _window.Label.SetMarkupPermissive($"{Loc.GetString("rmc-ui-link-discord-account-already-linked")}\n\n{Loc.GetString("rmc-ui-link-discord-account-text")}");
+
+        _window.CopyButton.OnPressed += _ =>
+        {
+            _clipboard.SetText(_code.ToString());
+            _window.CopyButton.Text = Loc.GetString("rmc-ui-link-discord-account-copied");
+            _window.CopyButton.Disabled = true;
+            _disableUntil = _timing.RealTime.Add(TimeSpan.FromSeconds(3));
+        };
+
+        var messageLink = _config.GetCVar(GoobCVars.RMCDiscordAccountLinkingMessageLink);
+        if (string.IsNullOrEmpty(messageLink))
+        {
+            _window.LinkButton.Visible = false;
+            _window.CopyButton.RemoveStyleClass("OpenRight");
+        }
+        else
+        {
+            _window.LinkButton.Visible = true;
+            _window.LinkButton.OnPressed += _ => _uriOpener.OpenUri(messageLink);
+            _window.CopyButton.AddStyleClass("OpenRight");
+        }
+
+        _window.OpenCentered();
+
+        if (_code == default)
+            _window.CopyButton.Disabled = true;
+
+        _net.ClientSendMessage(new LinkAccountRequestMsg());
     }
 
     public void TogglePatronPerksWindow()
     {
-        if (_patronPerksWindow == null)
+        if (_patronPerksWindow is { } window)
         {
-            _patronPerksWindow = new PatronPerksWindow();
-            _patronPerksWindow.OnClose += () => _patronPerksWindow = null;
-
-            var tier = _linkAccount.Tier;
-            SetTabTitle(_patronPerksWindow.LobbyMessageTab, Loc.GetString("rmc-ui-lobby-message"));
-            SetTabVisible(_patronPerksWindow.LobbyMessageTab, tier is { LobbyMessage: true });
-            _patronPerksWindow.LobbyMessageSaveButton.OnPressed += OnLobbyMessageSave;
-
-            if (_linkAccount.LobbyMessage?.Message is { } lobbyMessage)
-                _patronPerksWindow.LobbyMessage.Text = lobbyMessage;
-
-            SetTabTitle(_patronPerksWindow.ShoutoutTab, Loc.GetString("rmc-ui-shoutout"));
-            SetTabVisible(_patronPerksWindow.ShoutoutTab, tier is { RoundEndShoutout: true });
-            _patronPerksWindow.NTShoutoutSaveButton.OnPressed += OnNTShoutoutSave;
-
-            if (_linkAccount.RoundEndShoutout?.NT is { } ntShoutout)
-                _patronPerksWindow.NTShoutout.Text = ntShoutout;
-
-            SetTabTitle(_patronPerksWindow.GhostColorTab, Loc.GetString("rmc-ui-ghost-color"));
-            SetTabVisible(_patronPerksWindow.GhostColorTab, tier is { GhostColor: true });
-            _patronPerksWindow.GhostColorSliders.Color = _linkAccount.GhostColor ?? Color.White;
-            _patronPerksWindow.GhostColorSliders.OnColorChanged += OnGhostColorChanged;
-            _patronPerksWindow.GhostColorClearButton.OnPressed += OnGhostColorClear;
-            _patronPerksWindow.GhostColorSaveButton.OnPressed += OnGhostColorSave;
-
-            UpdateExamples();
-
-            for (var i = 0; i < _patronPerksWindow.Tabs.ChildCount; i++)
-            {
-                var child = _patronPerksWindow.Tabs.GetChild(i);
-                if (!child.GetValue(TabVisibleProperty))
-                    continue;
-
-                _patronPerksWindow.Tabs.CurrentTab = i;
-                break;
-            }
-
-            _patronPerksWindow.OpenCentered();
+            window.Close();
+            _patronPerksWindow = null;
             return;
         }
 
-        _patronPerksWindow.Close();
-        _patronPerksWindow = null;
+        _patronPerksWindow = new PatronPerksWindow();
+        _patronPerksWindow.OnClose += () => _patronPerksWindow = null;
+
+        var tier = _linkAccount.Tier;
+        SetTabTitle(_patronPerksWindow.LobbyMessageTab, Loc.GetString("rmc-ui-lobby-message"));
+        SetTabVisible(_patronPerksWindow.LobbyMessageTab, tier is { LobbyMessage: true });
+        _patronPerksWindow.LobbyMessageSaveButton.OnPressed += OnLobbyMessageSave;
+
+        if (_linkAccount.LobbyMessage?.Message is { } lobbyMessage)
+            _patronPerksWindow.LobbyMessage.Text = lobbyMessage;
+
+        SetTabTitle(_patronPerksWindow.ShoutoutTab, Loc.GetString("rmc-ui-shoutout"));
+        SetTabVisible(_patronPerksWindow.ShoutoutTab, tier is { RoundEndShoutout: true });
+        _patronPerksWindow.NTShoutoutSaveButton.OnPressed += OnNTShoutoutSave;
+
+        if (_linkAccount.RoundEndShoutout?.NT is { } ntShoutout)
+            _patronPerksWindow.NTShoutout.Text = ntShoutout;
+
+        SetTabTitle(_patronPerksWindow.GhostColorTab, Loc.GetString("rmc-ui-ghost-color"));
+        SetTabVisible(_patronPerksWindow.GhostColorTab, tier is { GhostColor: true });
+        _patronPerksWindow.GhostColorSliders.Color = _linkAccount.GhostColor ?? Color.White;
+        _patronPerksWindow.GhostColorSliders.OnColorChanged += OnGhostColorChanged;
+        _patronPerksWindow.GhostColorClearButton.OnPressed += OnGhostColorClear;
+        _patronPerksWindow.GhostColorSaveButton.OnPressed += OnGhostColorSave;
+
+        UpdateExamples();
+
+        for (var i = 0; i < _patronPerksWindow.Tabs.ChildCount; i++)
+        {
+            var child = _patronPerksWindow.Tabs.GetChild(i);
+            if (!child.GetValue(TabVisibleProperty))
+                continue;
+
+            _patronPerksWindow.Tabs.CurrentTab = i;
+            break;
+        }
+
+        _patronPerksWindow.OpenCentered();
     }
 
     private void OnLobbyMessageSave(ButtonEventArgs args)

@@ -3,6 +3,7 @@
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Body;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Systems;
@@ -29,12 +30,4 @@ public sealed partial class TraumaSystem : EntitySystem
     [Dependency] private AlertsSystem _alert = default!;
 
     private static readonly ProtoId<AlertPrototype> _brokenBonesAlertId = "BrokenBones";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        InitProcess();
-        InitBones();
-        InitOrgans();
-    }
 }

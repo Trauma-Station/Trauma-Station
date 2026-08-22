@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 14 # Trauma, was 25
+        Ballistic: 14 # Trauma, was 25
       armorPenetration: -0.39 # Trauma
 
 - type: entity

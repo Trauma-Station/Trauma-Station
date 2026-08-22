@@ -34,7 +34,7 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         if (args.Effect.ScaleByTemperature is { } scaleTemp)
         {
             damageSpec *= TryComp<TemperatureComponent>(entity, out var temp)
-                ? scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false)
+                ? scaleTemp.GetEfficiencyMultiplier(temp.Temperature, args.Scale, false)
                 : FixedPoint2.Zero;
         }
 
@@ -48,6 +48,7 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
                 damageSpec,
                 args.Effect.IgnoreResistances,
                 interruptsDoAfters: false,
+                origin: args.User, // Trauma - without this the user's targeting is never used
                 targetPart: args.Effect.UseTargeting ? args.Effect.TargetPart : null,
                 ignoreBlockers: args.Effect.IgnoreBlockers,
                 splitDamage: args.Effect.SplitDamage,
@@ -64,6 +65,9 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     [DataField(required: true)]
     public DamageSpecifier Damage = default!;
 
+    /// <summary>
+    /// Should this effect ignore damage resistances?
+    /// </summary>
     [DataField]
     public bool IgnoreResistances = true;
 

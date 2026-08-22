@@ -1,24 +1,76 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
+  parent: BaseMaterial
   id: SheetPaper
   graph: SheetPaper
   targetNode: paper sheet
-  category: construction-category-materials
-  objectType: Item
   theory: {} # it's folding paper bro
-  practical:
-    MaterialsKnowledge: 0 # its folding paper bro
   useQuality: false
 
 - type: construction
+  parent: BaseRev
   id: PowerArmorStand
   graph: PowerArmorStand
   targetNode: PowerArmorStand
-  category: construction-category-antagonist
   objectType: Item
   theory:
     RevolutionaryKnowledge: 3
+
+- type: construction
+  id: BarbWireStructure
+  graph: BarbedWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: TripWire
+  graph: TripWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: PipeBombTrap
+  graph: PipeBombTrap
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: BaseMaterial
+  id: BarbedWireMaterial
+  graph: BarbedWireMaterial
+  targetNode: BarbedWire
+
+- type: construction
+  parent: BarbedWireMaterial
+  id: BarbedWireMaterialMV
+  targetNode: BarbedWire0
+
+- type: construction
+  parent: BarbedWireMaterial
+  id: BarbedWireMaterialHV
+  graph: BarbedWireMaterial
+  targetNode: BarbedWire1
 
 - type: construction
   abstract: true
@@ -27,7 +79,6 @@
   category: construction-category-tools
   objectType: Item
   theory:
-    MaterialsKnowledge: 1
     FabricationKnowledge: 1
   useQuality: false
 

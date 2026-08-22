@@ -47,7 +47,7 @@ public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirus
         if (virusComp.Severity == null)
             return;
 
-        if (!TryGetRandomStation(out var chosenStation))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
             return;
 
         // pick random access groups
@@ -68,7 +68,7 @@ public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirus
                 continue;
 
             // make sure not to hit CentCom or other maps
-            if (CompOrNull<StationMemberComponent>(xform.GridUid)?.Station != chosenStation)
+            if (xform.GridUid is not { } grid || !stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
                 continue;
 
             // check access
@@ -90,7 +90,7 @@ public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirus
                 continue;
 
             // make sure not to hit CentCom or other maps
-            if (CompOrNull<StationMemberComponent>(xform.GridUid)?.Station != chosenStation)
+            if (xform.GridUid is not { } grid || !stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
                 continue;
 
             // use the access reader from the door electronics if they exist

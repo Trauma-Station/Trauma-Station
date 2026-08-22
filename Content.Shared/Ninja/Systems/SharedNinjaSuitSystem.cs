@@ -119,8 +119,10 @@ public abstract partial class SharedNinjaSuitSystem : EntitySystem
             return;
 
         // previously cloaked, disable abilities for a short time
-        // _audio.PlayPredicted(comp.RevealSound, uid, user); // Goob edit
-        // Popup.PopupClient(Loc.GetString("ninja-revealed"), user, user, PopupType.MediumCaution); // Goob edit
+        /* Trauma - perfect stealth S rank
+        _audio.PlayPredicted(comp.RevealSound, uid, user);
+        Popup.PopupEntity(Loc.GetString("ninja-revealed"), user, user, PopupType.MediumCaution);
+        */
         _useDelay.TryResetDelay(uid, id: comp.DisableDelayId);
     }
 

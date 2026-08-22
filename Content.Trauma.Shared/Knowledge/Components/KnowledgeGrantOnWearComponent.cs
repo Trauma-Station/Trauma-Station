@@ -9,6 +9,7 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// 1. clothing is worn (to the wearer)
 /// 2. organ is installed (to the body)
 /// 3. borg chassis has a mmi/pb inserted (to the brain)
+/// 4. brain chip is installed (to the brain or body)
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(fieldDeltas: true)]
@@ -43,4 +44,10 @@ public sealed partial class KnowledgeGrantOnWearComponent : Component
     /// </summary>
     [DataField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, bool> Blocked = new();
+
+    /// <summary>
+    /// Whether to list skills added when examined.
+    /// </summary>
+    [DataField]
+    public bool Examinable;
 }

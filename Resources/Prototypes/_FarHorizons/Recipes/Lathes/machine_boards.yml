@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# Holographic Generator
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
@@ -9,3 +9,15 @@
   parent: [ BaseCircuitboardRecipe, BaseSecurityMachineRecipeCategory ]
   id: HolographicBarrierGeneratorCircuitboard
   result: HolographicBarrierGeneratorCircuitboard
+
+# Nuclear Reactor
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: NuclearFabricatorMachineCircuitboard
+  result: NuclearFabricatorMachineCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: NuclearCentrifugeMachineCircuitboard
+  result: NuclearCentrifugeMachineCircuitboard

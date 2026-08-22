@@ -1,9 +1,9 @@
 // <Trauma>
 using Content.Trauma.Common.Storage;
-using Content.Shared.Tag;
 // </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -25,14 +25,11 @@ namespace Content.Server.Materials;
 public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private StackSystem _stackSystem = default!;
-    [Dependency] private TagSystem _tag = default!; // Goobstation Change
 
-    private static readonly ProtoId<TagPrototype> OreTag = "Ore"; // Goobstation Change
     public override void Initialize()
     {
         base.Initialize();
@@ -68,23 +65,15 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!_actionBlocker.CanInteract(player, uid))
             return;
 
-        if (!component.CanEjectStoredMaterials || !_prototypeManager.TryIndex<MaterialPrototype>(msg.Material, out var material))
+        if (!component.CanEjectStoredMaterials || !ProtoMan.TryIndex<MaterialPrototype>(msg.Material, out var material))
             return;
 
         var volume = 0;
 
         if (material.StackEntity != null)
         {
-            // Goobstation Change Start
-            var proto = _prototypeManager.Index<EntityPrototype>(material.StackEntity);
-            if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, Factory))
+            if (!ProtoMan.Index(material.StackEntity.Value).TryComp(out PhysicalCompositionComponent? composition, Factory)) // Trauma - use Factory
                 return;
-
-            if (proto.TryGetComponent<TagComponent>(out var tag, EntityManager.ComponentFactory)
-                && component.DisallowOreEjection
-                && _tag.HasTag(tag, OreTag))
-                return;
-            // Goobstation Change End
 
             var volumePerSheet = composition.MaterialComposition.FirstOrDefault(kvp => kvp.Key == msg.Material).Value;
             var sheetsToExtract = Math.Min(msg.SheetsToExtract, _stackSystem.GetMaxCount(material.StackEntity.Value));
@@ -124,15 +113,19 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!base.TryInsertMaterialEntity(user, toInsert, receiver, storage, material, composition))
             return false;
         _audio.PlayPvs(storage.InsertingSound, receiver);
-        if (user != receiver) // Goobstation - for automation to not spam popups
-            _popup.PopupEntity(Loc.GetString("machine-insert-item", ("user", user), ("machine", receiver),
-                ("item", toInsert)), receiver);
+        if (user != receiver) // Trauma - for automation to not spam popups
+            _popup.PopupEntity(Loc.GetString("machine-insert-item",
+                ("user", Identity.Entity(user, EntityManager)),
+                ("machine", receiver),
+                ("item", toInsert)),
+            receiver);
         QueueDel(toInsert);
 
         // Logging
         TryComp<StackComponent>(toInsert, out var stack);
         var count = stack?.Count ?? 1;
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.Action,
+            LogImpact.Low,
             $"{ToPrettyString(user):player} inserted {count} {ToPrettyString(toInsert):inserted} into {ToPrettyString(receiver):receiver}");
         return true;
     }
@@ -157,7 +150,7 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
     public List<EntityUid> SpawnMultipleFromMaterial(int amount, string material, EntityCoordinates coordinates, out int overflowMaterial)
     {
         overflowMaterial = 0;
-        if (!_prototypeManager.TryIndex<MaterialPrototype>(material, out var stackType))
+        if (!ProtoMan.TryIndex<MaterialPrototype>(material, out var stackType))
         {
             Log.Error("Failed to index material prototype " + material);
             return new List<EntityUid>();
@@ -191,8 +184,8 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
         if (amount <= 0 || materialProto.StackEntity == null)
             return new List<EntityUid>();
 
-        var entProto = _prototypeManager.Index<EntityPrototype>(materialProto.StackEntity);
-        if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
+        var entProto = ProtoMan.Index<EntityPrototype>(materialProto.StackEntity);
+        if (!entProto.TryComp<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
             return new List<EntityUid>();
 
         var materialPerStack = composition.MaterialComposition[materialProto.ID];

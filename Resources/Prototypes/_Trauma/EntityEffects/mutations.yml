@@ -296,9 +296,8 @@
   - !type:PopupMessage
     messages:
     - entity-effect-popup-martyrdom-blinded
-  - !type:GenericStatusEffect
-    key: BlurryVision
-    component: BlurryVision
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
     time: 40
   - !type:ModifyStatusEffect
     effectProto: StatusEffectBlindness

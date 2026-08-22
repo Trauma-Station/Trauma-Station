@@ -11,6 +11,7 @@
   save: false
   components:
   # <Trauma>
+  - type: BagAccess
   - type: Targeting
   - type: BodyStatus
   - type: Carriable
@@ -43,13 +44,13 @@
       100: SoftCrit
       150: Critical
       200: Dead
-  - type: Destructible
-    thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
   - type: CounterAttacker
   - type: KnowledgeHolder
-  - type: VampireDrainable
   - type: PressureTracker # avoid initial mispredict with PKAs and stuff, might be used by other stuff in the future too
+  - type: WeaponClass
+    class: Unarmed
+    examinable: false
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
@@ -113,15 +114,12 @@
       - !type:WashCreamPie
   - type: StatusEffects
     allowed:
-    # <Trauma>
+    # <Trauma> - TODO: replace with status effect entities
     - Vulgarity
     - Brainrotted
     - Dementia
     # </Trauma>
     - Electrocution
-    - RatvarianLanguage
-    - PressureImmunity
-    - Muted
     - Pacified
     - Flashed
     - Adrenaline
@@ -183,10 +181,7 @@
     speechSounds: Alto
   - type: DamageForceSay
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+    emoteSounds: MaleHuman
   - type: Emoting
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
@@ -213,6 +208,7 @@
   - MobAtmosStandard
   - MobFlammable
   - BaseSpeciesMob
+  #- BaseMobDestructible # Trauma - parts handle gibbing
   id: BaseSpeciesMobOrganicUnperishable # Trauma - made unperishable for vox
   save: false
   components:
@@ -227,6 +223,23 @@
     - Viral
     - Bacterial
     - Parasite
+  - type: VampireDrainable
+  - type: Destructible # only ashing, gibbing is still handled by torso
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
   # </Trauma>
   - type: Hunger
   - type: Thirst
@@ -247,11 +260,10 @@
   - type: Fingerprint
   - type: Blindable
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    specificHeat: 300 # Trauma - 10x lower heat capacity so spacing etc doesnt literally do nothing
   - type: TemperatureDamage
     heatDamageThreshold: 325
-    coldDamageThreshold: 260
+    coldDamageThreshold: 273.15
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants
@@ -273,7 +285,6 @@
     thermalRegulationTemperatureThreshold: 2
   #- type: Perishable # Trauma - moved to BaseSpeciesMobOrganic
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 5

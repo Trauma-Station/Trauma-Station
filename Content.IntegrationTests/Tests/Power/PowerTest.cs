@@ -192,7 +192,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var mapSys = entityManager.System<SharedMapSystem>();
             const float loadPower = 200;
@@ -203,18 +202,18 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var generatorEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates());
-                var consumerEnt1 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 1));
-                var consumerEnt2 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
+                var generatorEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates());
+                var consumerEnt1 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 1));
+                var consumerEnt2 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
 
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(generatorEnt);
                 consumer1 = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt1);
@@ -252,7 +251,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var mapSys = entityManager.System<SharedMapSystem>();
             const float loadPower = 200;
@@ -263,18 +261,18 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var generatorEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates());
-                var consumerEnt1 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 1));
-                var consumerEnt2 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
+                var generatorEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates());
+                var consumerEnt1 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 1));
+                var consumerEnt2 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
 
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(generatorEnt);
                 consumer1 = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt1);
@@ -308,7 +306,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var mapSys = entityManager.System<SharedMapSystem>();
             var gameTiming = server.ResolveDependency<IGameTiming>();
@@ -318,17 +315,17 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var generatorEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates());
-                var consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
+                var generatorEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates());
+                var consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
 
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(generatorEnt);
                 consumer = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt);
@@ -342,7 +339,7 @@ namespace Content.IntegrationTests.Tests.Power
             });
 
             // Exact values can/will be off by a tick, add tolerance for that.
-            var tickPeriod = (float) gameTiming.TickPeriod.TotalSeconds;
+            var tickPeriod = (float)gameTiming.TickPeriod.TotalSeconds;
             var tickDev = 400 * tickPeriod * 1.1f;
 
             server.RunTicks(1);
@@ -358,7 +355,7 @@ namespace Content.IntegrationTests.Tests.Power
             });
 
             // run for 0.25 seconds (minus the previous tick)
-            var ticks = (int) Math.Round(0.25 * gameTiming.TickRate) - 1;
+            var ticks = (int)Math.Round(0.25 * gameTiming.TickRate) - 1;
             server.RunTicks(ticks);
 
             await server.WaitAssertion(() =>
@@ -375,7 +372,7 @@ namespace Content.IntegrationTests.Tests.Power
 
 
             // run for 0.75 seconds
-            ticks = (int) Math.Round(0.75 * gameTiming.TickRate);
+            ticks = (int)Math.Round(0.75 * gameTiming.TickRate);
             server.RunTicks(ticks);
 
             await server.WaitAssertion(() =>
@@ -395,7 +392,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var gameTiming = server.ResolveDependency<IGameTiming>();
             var batterySys = entityManager.System<BatterySystem>();
@@ -411,17 +407,17 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                generatorEnt = entityManager.SpawnEntity("DischargingBatteryDummy", grid.Owner.ToCoordinates());
-                consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
+                generatorEnt = entityManager.SpawnAttachedTo("DischargingBatteryDummy", grid.Owner.ToCoordinates());
+                consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 2));
 
                 netBattery = entityManager.GetComponent<PowerNetworkBatteryComponent>(generatorEnt);
                 battery = entityManager.GetComponent<BatteryComponent>(generatorEnt);
@@ -436,7 +432,7 @@ namespace Content.IntegrationTests.Tests.Power
             });
 
             // Exact values can/will be off by a tick, add tolerance for that.
-            var tickPeriod = (float) gameTiming.TickPeriod.TotalSeconds;
+            var tickPeriod = (float)gameTiming.TickPeriod.TotalSeconds;
             var tickDev = 400 * tickPeriod * 1.1f;
 
             server.RunTicks(1);
@@ -452,7 +448,7 @@ namespace Content.IntegrationTests.Tests.Power
             });
 
             // run for 0.25 seconds (minus the previous tick)
-            var ticks = (int) Math.Round(0.25 * gameTiming.TickRate) - 1;
+            var ticks = (int)Math.Round(0.25 * gameTiming.TickRate) - 1;
             server.RunTicks(ticks);
 
             await server.WaitAssertion(() =>
@@ -472,7 +468,7 @@ namespace Content.IntegrationTests.Tests.Power
             });
 
             // run for 0.75 seconds
-            ticks = (int) Math.Round(0.75 * gameTiming.TickRate);
+            ticks = (int)Math.Round(0.75 * gameTiming.TickRate);
             server.RunTicks(ticks);
 
             await server.WaitAssertion(() =>
@@ -499,7 +495,6 @@ namespace Content.IntegrationTests.Tests.Power
 
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -515,18 +510,18 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var generatorEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates());
-                var consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 1));
-                var batteryEnt = entityManager.SpawnEntity("DischargingBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                var generatorEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates());
+                var consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 1));
+                var batteryEnt = entityManager.SpawnAttachedTo("DischargingBatteryDummy", grid.Owner.ToCoordinates(0, 2));
                 netBattery = entityManager.GetComponent<PowerNetworkBatteryComponent>(batteryEnt);
                 battery = entityManager.GetComponent<BatteryComponent>(batteryEnt);
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(generatorEnt);
@@ -594,7 +589,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var gameTiming = server.ResolveDependency<IGameTiming>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
@@ -607,17 +601,17 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                generatorEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates());
-                batteryEnt = entityManager.SpawnEntity("ChargingBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                generatorEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates());
+                batteryEnt = entityManager.SpawnAttachedTo("ChargingBatteryDummy", grid.Owner.ToCoordinates(0, 2));
 
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(generatorEnt);
                 var netBattery = entityManager.GetComponent<PowerNetworkBatteryComponent>(batteryEnt);
@@ -631,7 +625,7 @@ namespace Content.IntegrationTests.Tests.Power
             });
 
             // run for 0.5 seconds
-            var ticks = (int) Math.Round(0.5 * gameTiming.TickRate);
+            var ticks = (int)Math.Round(0.5 * gameTiming.TickRate);
             server.RunTicks(ticks);
 
             await server.WaitAssertion(() =>
@@ -652,7 +646,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var gameTiming = server.ResolveDependency<IGameTiming>();
             var batterySys = entityManager.System<BatterySystem>();
@@ -668,21 +661,20 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 4; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var terminal = entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 1));
-                entityManager.GetComponent<TransformComponent>(terminal).LocalRotation = Angle.FromDegrees(180);
+                var terminal = entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 1), rotation: Angle.FromDegrees(180));
 
-                batteryEnt = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
-                supplyEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
-                consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 3));
+                batteryEnt = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                supplyEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
+                consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 3));
 
                 consumer = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt);
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(supplyEnt);
@@ -705,7 +697,7 @@ namespace Content.IntegrationTests.Tests.Power
             server.RunTicks(gameTiming.TickRate);
 
             // Exact values can/will be off by a tick, add tolerance for that.
-            var tickPeriod = (float) gameTiming.TickPeriod.TotalSeconds;
+            var tickPeriod = (float)gameTiming.TickPeriod.TotalSeconds;
             var tickDev = 400 * tickPeriod * 1.1f;
 
             await server.WaitAssertion(() =>
@@ -732,7 +724,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var gameTiming = server.ResolveDependency<IGameTiming>();
             var batterySys = entityManager.System<BatterySystem>();
@@ -748,21 +739,20 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 4; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var terminal = entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 1));
-                entityManager.GetComponent<TransformComponent>(terminal).LocalRotation = Angle.FromDegrees(180);
+                var terminal = entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 1), rotation: Angle.FromDegrees(180));
 
-                batteryEnt = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
-                supplyEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
-                consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 3));
+                batteryEnt = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                supplyEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
+                consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 3));
 
                 consumer = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt);
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(supplyEnt);
@@ -787,7 +777,7 @@ namespace Content.IntegrationTests.Tests.Power
             server.RunTicks(gameTiming.TickRate);
 
             // Exact values can/will be off by a tick, add tolerance for that.
-            var tickPeriod = (float) gameTiming.TickPeriod.TotalSeconds;
+            var tickPeriod = (float)gameTiming.TickPeriod.TotalSeconds;
             var tickDev = 400 * tickPeriod * 1.1f;
 
             await server.WaitAssertion(() =>
@@ -812,7 +802,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -823,7 +812,7 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Map layout here is
                 // C - consumer
@@ -837,18 +826,17 @@ namespace Content.IntegrationTests.Tests.Power
                 for (var i = 0; i < 5; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 2));
-                var terminal = entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 2));
-                entityManager.GetComponent<TransformComponent>(terminal).LocalRotation = Angle.FromDegrees(180);
+                entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 2));
+                var terminal = entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 2), rotation: Angle.FromDegrees(180));
 
-                var batteryEnt1 = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 1));
-                var batteryEnt2 = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 3));
-                var supplyEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 2));
-                var consumerEnt1 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 0));
-                var consumerEnt2 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 4));
+                var batteryEnt1 = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 1));
+                var batteryEnt2 = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 3));
+                var supplyEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 2));
+                var consumerEnt1 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 0));
+                var consumerEnt2 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 4));
 
                 consumer1 = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt1);
                 consumer2 = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt2);
@@ -907,7 +895,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var gameTiming = server.ResolveDependency<IGameTiming>();
             var batterySys = entityManager.System<BatterySystem>();
@@ -923,7 +910,7 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Layout is two generators, two batteries, and one load. As to why two: because previously this test
                 // would fail ONLY if there were more than two batteries present, because each of them tries to supply
@@ -936,16 +923,16 @@ namespace Content.IntegrationTests.Tests.Power
                 for (var i = -2; i <= 2; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var batteryEnt1 = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
-                var batteryEnt2 = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, -2));
+                var batteryEnt1 = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                var batteryEnt2 = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, -2));
 
-                var supplyEnt1 = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 1));
-                var supplyEnt2 = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, -1));
+                var supplyEnt1 = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 1));
+                var supplyEnt2 = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, -1));
 
-                var consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 0));
+                var consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 0));
 
                 consumer = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt);
                 supplier1 = entityManager.GetComponent<PowerSupplierComponent>(supplyEnt1);
@@ -1004,7 +991,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -1015,7 +1001,7 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Map layout here is
                 // C - consumer
@@ -1029,18 +1015,17 @@ namespace Content.IntegrationTests.Tests.Power
                 for (var i = 0; i < 5; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 2));
-                var terminal = entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 2));
-                entityManager.GetComponent<TransformComponent>(terminal).LocalRotation = Angle.FromDegrees(180);
+                entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 2));
+                var terminal = entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 2), rotation: Angle.FromDegrees(180));
 
-                var batteryEnt1 = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 1));
-                var batteryEnt2 = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 3));
-                var supplyEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 2));
-                var consumerEnt1 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 0));
-                var consumerEnt2 = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 4));
+                var batteryEnt1 = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 1));
+                var batteryEnt2 = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 3));
+                var supplyEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 2));
+                var consumerEnt1 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 0));
+                var consumerEnt2 = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 4));
 
                 consumer1 = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt1);
                 consumer2 = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt2);
@@ -1090,7 +1075,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -1101,21 +1085,20 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitPost(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 4; i++)
                 {
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
-                    entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, i));
+                    entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, i));
                 }
 
-                var terminal = entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 1));
-                entityManager.GetComponent<TransformComponent>(terminal).LocalRotation = Angle.FromDegrees(180);
+                var terminal = entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 1), rotation: Angle.FromDegrees(180));
 
-                var batteryEnt = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
-                var supplyEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
-                var consumerEnt = entityManager.SpawnEntity("ConsumerDummy", grid.Owner.ToCoordinates(0, 3));
+                var batteryEnt = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                var supplyEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
+                var consumerEnt = entityManager.SpawnAttachedTo("ConsumerDummy", grid.Owner.ToCoordinates(0, 3));
 
                 consumer = entityManager.GetComponent<PowerConsumerComponent>(consumerEnt);
                 supplier = entityManager.GetComponent<PowerSupplierComponent>(supplyEnt);
@@ -1173,7 +1156,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var nodeContainer = entityManager.System<NodeContainerSystem>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -1185,7 +1167,7 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 4; i++)
@@ -1193,15 +1175,14 @@ namespace Content.IntegrationTests.Tests.Power
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
                 }
 
-                var leftEnt = entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, 0));
-                entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, 1));
-                entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, 2));
-                var rightEnt = entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, 3));
+                var leftEnt = entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, 0));
+                entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, 1));
+                entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, 2));
+                var rightEnt = entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, 3));
 
-                var terminal = entityManager.SpawnEntity("CableTerminal", grid.Owner.ToCoordinates(0, 1));
-                entityManager.GetComponent<TransformComponent>(terminal).LocalRotation = Angle.FromDegrees(180);
+                var terminal = entityManager.SpawnAttachedTo("CableTerminal", grid.Owner.ToCoordinates(0, 1), rotation: Angle.FromDegrees(180));
 
-                var battery = entityManager.SpawnEntity("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
+                var battery = entityManager.SpawnAttachedTo("FullBatteryDummy", grid.Owner.ToCoordinates(0, 2));
                 var batteryNodeContainer = entityManager.GetComponent<NodeContainerComponent>(battery);
 
                 if (nodeContainer.TryGetNode<CableNode>(entityManager.GetComponent<NodeContainerComponent>(leftEnt),
@@ -1237,7 +1218,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -1250,7 +1230,7 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 // Power only works when anchored
                 for (var i = 0; i < 3; i++)
@@ -1258,14 +1238,14 @@ namespace Content.IntegrationTests.Tests.Power
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
                 }
 
-                entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, 0));
-                entityManager.SpawnEntity("CableHV", grid.Owner.ToCoordinates(0, 1));
-                entityManager.SpawnEntity("CableMV", grid.Owner.ToCoordinates(0, 1));
-                entityManager.SpawnEntity("CableMV", grid.Owner.ToCoordinates(0, 2));
+                entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, 0));
+                entityManager.SpawnAttachedTo("CableHV", grid.Owner.ToCoordinates(0, 1));
+                entityManager.SpawnAttachedTo("CableMV", grid.Owner.ToCoordinates(0, 1));
+                entityManager.SpawnAttachedTo("CableMV", grid.Owner.ToCoordinates(0, 2));
 
-                generatorEnt = entityManager.SpawnEntity("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
-                substationEnt = entityManager.SpawnEntity("SubstationDummy", grid.Owner.ToCoordinates(0, 1));
-                apcEnt = entityManager.SpawnEntity("ApcDummy", grid.Owner.ToCoordinates(0, 2));
+                generatorEnt = entityManager.SpawnAttachedTo("GeneratorDummy", grid.Owner.ToCoordinates(0, 0));
+                substationEnt = entityManager.SpawnAttachedTo("SubstationDummy", grid.Owner.ToCoordinates(0, 1));
+                apcEnt = entityManager.SpawnAttachedTo("ApcDummy", grid.Owner.ToCoordinates(0, 2));
 
                 var generatorSupplier = entityManager.GetComponent<PowerSupplierComponent>(generatorEnt);
                 substationNetBattery = entityManager.GetComponent<PowerNetworkBatteryComponent>(substationEnt);
@@ -1295,7 +1275,6 @@ namespace Content.IntegrationTests.Tests.Power
         {
             var pair = Pair;
             var server = pair.Server;
-            var mapManager = server.ResolveDependency<IMapManager>();
             var entityManager = server.ResolveDependency<IEntityManager>();
             var batterySys = entityManager.System<BatterySystem>();
             var extensionCableSystem = entityManager.System<ExtensionCableSystem>();
@@ -1307,7 +1286,7 @@ namespace Content.IntegrationTests.Tests.Power
             await server.WaitAssertion(() =>
             {
                 var map = mapSys.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
+                var grid = mapSys.CreateGridEntity(mapId);
 
                 const int range = 5;
 
@@ -1317,15 +1296,15 @@ namespace Content.IntegrationTests.Tests.Power
                     mapSys.SetTile(grid, new Vector2i(0, i), new Tile(1));
                 }
 
-                var apcEnt = entityManager.SpawnEntity("ApcDummy", grid.Owner.ToCoordinates(0, 0));
-                var apcExtensionEnt = entityManager.SpawnEntity("CableApcExtension", grid.Owner.ToCoordinates(0, 0));
+                var apcEnt = entityManager.SpawnAttachedTo("ApcDummy", grid.Owner.ToCoordinates(0, 0));
+                var apcExtensionEnt = entityManager.SpawnAttachedTo("CableApcExtension", grid.Owner.ToCoordinates(0, 0));
 
                 // Create a powered receiver in range (range is 0 indexed)
-                var powerReceiverEnt = entityManager.SpawnEntity("ApcPowerReceiverDummy", grid.Owner.ToCoordinates(0, range - 1));
+                var powerReceiverEnt = entityManager.SpawnAttachedTo("ApcPowerReceiverDummy", grid.Owner.ToCoordinates(0, range - 1));
                 receiver = entityManager.GetComponent<ApcPowerReceiverComponent>(powerReceiverEnt);
 
                 // Create an unpowered receiver outside range
-                var unpoweredReceiverEnt = entityManager.SpawnEntity("ApcPowerReceiverDummy", grid.Owner.ToCoordinates(0, range));
+                var unpoweredReceiverEnt = entityManager.SpawnAttachedTo("ApcPowerReceiverDummy", grid.Owner.ToCoordinates(0, range));
                 unpoweredReceiver = entityManager.GetComponent<ApcPowerReceiverComponent>(unpoweredReceiverEnt);
 
                 var battery = entityManager.GetComponent<BatteryComponent>(apcEnt);

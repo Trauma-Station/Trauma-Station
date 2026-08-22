@@ -30,6 +30,10 @@
       {
          "name":"vent_lockout",
          "delays":[ [ 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ] ]
+      },
+	  {
+         "name":"vent_direction",
+         "directions" : 4
       }
    ]
 }

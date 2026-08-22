@@ -57,7 +57,7 @@ public sealed partial class RechargeableBlockingSystem : EntitySystem
             args.DamageDelta is not { } delta)
             return;
 
-        var batteryUse = delta.GetTotal().Float();
+        var batteryUse = MathF.Min(delta.GetTotal().Float(), _battery.GetCharge(battery.AsNullable()));
         _battery.TryUseCharge(battery.AsNullable(), batteryUse);
     }
 

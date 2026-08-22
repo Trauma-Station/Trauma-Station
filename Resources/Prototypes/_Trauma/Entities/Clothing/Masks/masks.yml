@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseRevMajorContraband ]
+  parent: [ ClothingMaskGas, BaseRevMajorContraband, BaseClothingViewconeSmall ]
   id: ClothingMaskGasRev
   name: gas mask
   description: A reliable military-style gas mask.
@@ -45,7 +45,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseCentcommContraband ]
+  parent: [ BaseCentcommContraband, ClothingMaskGasSwat ]
   id: ClothingHunterMaskGasSwat
   name: spacepol swat gas mask
   description: A standard issue gas mask for SpacePol Officers
@@ -74,6 +74,3 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
-  - type: IngestionBlocker
-    blockSmokeIngestion: true
-  - type: Hailer

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "moxie_is_moxie",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sea_bunny",
+      "directions": 4
+    },
+    {
+      "name": "bunny",
+      "directions": 4
+    },
+    {
+      "name": "bunny_evil",
+      "directions": 4
+    },
+    {
+      "name": "sea_bunny_dead"
+    },
+    {
+      "name": "bunny_dead"
+    }
+  ]
+}

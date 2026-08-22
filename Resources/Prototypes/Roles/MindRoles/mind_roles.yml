@@ -264,7 +264,7 @@
   name: Syndicate Reinforcement Role
   components:
   - type: MindRole
-    roleType: Familiar
+    roleType: TeamAntagonist # Trauma - was Familiar
     subtype: role-subtype-traitor-reinforcement
 
 

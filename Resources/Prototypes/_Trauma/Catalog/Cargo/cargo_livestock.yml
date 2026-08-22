@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoProduct
+  id: LivestockBunny
+  icon:
+    sprite: _Trauma/Mobs/Animals/bunny.rsi
+    state: bunny
+  product: CrateNPCBunny
+  cost: 5000
+  category: cargoproduct-category-name-livestock
+  group: market
+
+- type: cargoProduct
+  id: LivestockSnakeGrass
+  icon:
+    sprite: _Trauma/Mobs/Animals/grass_snake.rsi
+    state: grass_snake
+  product: CrateNPCSnakeGrass
+  cost: 3000
+  category: cargoproduct-category-name-livestock
+  group: market

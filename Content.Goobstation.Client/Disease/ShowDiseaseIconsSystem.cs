@@ -13,8 +13,6 @@ namespace Content.Goobstation.Client.Disease;
 /// </summary>
 public sealed partial class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDiseaseIconsComponent>
 {
-    [Dependency] private IPrototypeManager _proto = default!;
-
     private float? LowThreshold, MediumThreshold, HighThreshold;
 
     public override void Initialize()
@@ -76,11 +74,11 @@ public sealed partial class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDise
 
             total += comp.InfectionProgress * comp.Complexity;
         }
-        if (total > (HighThreshold ?? int.MaxValue) && _proto.TryIndex(carrier.HighIcon, out var highIcon))
+        if (total > (HighThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.HighIcon, out var highIcon))
             return highIcon;
-        else if (total > (MediumThreshold ?? int.MaxValue) && _proto.TryIndex(carrier.MediumIcon, out var medIcon))
+        else if (total > (MediumThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.MediumIcon, out var medIcon))
             return medIcon;
-        else if (total > (LowThreshold ?? int.MaxValue) && _proto.TryIndex(carrier.LowIcon, out var lowIcon))
+        else if (total > (LowThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.LowIcon, out var lowIcon))
             return lowIcon;
 
         return null;

@@ -10,8 +10,10 @@ namespace Content.Shared.Actions;
 /// </summary>
 public sealed partial class ConfirmableActionSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private SharedActionsSystem _actions = default!;
+    // </Trauma>
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedActionsSystem _actions = default!; // Goobstation
     [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
@@ -65,28 +67,28 @@ public sealed partial class ConfirmableActionSystem : EntitySystem
         Unprime(ent);
     }
 
-    public void Prime(Entity<ConfirmableActionComponent> ent, EntityUid user) // Goob edit
+    public void Prime(Entity<ConfirmableActionComponent> ent, EntityUid user) // Trauma - made public
     {
         var (uid, comp) = ent;
         comp.NextConfirm = _timing.CurTime + comp.ConfirmDelay;
         comp.NextUnprime = comp.NextConfirm + comp.PrimeTime;
         Dirty(uid, comp);
 
-        // Goobstation - Confirmable action with changed icon - Start
+        // <Trauma>
         if (!string.IsNullOrEmpty(comp.Popup))
-            _popup.PopupClient(Loc.GetString(comp.Popup), user, user, comp.PopupFontType);
+            _popup.PopupEntity(Loc.GetString(comp.Popup), user, user, comp.PopupFontType);
 
         _actions.SetToggled(ent.Owner, true);
-        // Goobstation - Confirmable action with changed icon - End
+        // </Trauma>
     }
 
-    public void Unprime(Entity<ConfirmableActionComponent> ent) // Goob edit
+    public void Unprime(Entity<ConfirmableActionComponent> ent) // Trauma - made public
     {
         var (uid, comp) = ent;
         comp.NextConfirm = null;
         comp.NextUnprime = null;
 
-        _actions.SetToggled(ent.Owner, false); // Goobstation - Confirmable action with changed icon
+        _actions.SetToggled(ent.Owner, false); // Trauma
 
         Dirty(uid, comp);
     }

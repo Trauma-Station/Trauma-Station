@@ -47,7 +47,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseSpeciesAppearance
+  parent: BaseSpeciesAppearanceDecapoid
   id: AppearanceDecapoid
   name: Decapoid appearance
   components:
@@ -64,6 +64,11 @@
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
             state: jumpsuit
+      mask: # yes they do
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: mask
       head: # don't need mask, those are fine
         sizeMaps:
           32:
@@ -89,18 +94,28 @@
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
             state: back
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: earpiece
   - type: InitialBody
     organs:
-      Torso: TorsoDecapoid
-      Head: HeadDecapoid
-      ArmRight: RightArmDecapoid
-      ArmLeft: LeftArmDecapoid
-      HandRight: RightHandDecapoid
-      HandLeft: LeftHandDecapoid
-      LegRight: RightLegDecapoid
-      LegLeft: LeftLegDecapoid
-      FootRight: RightFootDecapoid
-      FootLeft: LeftFootDecapoid
+      Torso: OrganDecapoidTorso
+      Head: OrganDecapoidHead
+      ArmRight: OrganDecapoidArmRight
+      ArmLeft: OrganDecapoidArmLeft
+      HandRight: OrganDecapoidHandRight
+      HandLeft: OrganDecapoidHandLeft
+      LegRight: OrganDecapoidLegRight
+      LegLeft: OrganDecapoidLegLeft
+      FootRight: OrganDecapoidFootRight
+      FootLeft: OrganDecapoidFootLeft
       Lungs: OrganDecapoidLungs
       Stomach: OrganDecapoidStomach
       Brain: OrganDecapoidBrain
@@ -138,7 +153,6 @@
     footstepSoundCollection:
       collection: FootstepDecapoid
   - type: Butcherable # No bones. No I didn't forget go fuck yourself.
-    butcheringType: Spike
     spawned:
     - id: FoodMeatCrab # maybe custom someday. as-is, it's fine
       amount: 3
@@ -159,10 +173,7 @@
   - type: Injurable
     damageContainer: Biological
   - type: Vocal
-    sounds:
-      Male: UnisexDecapoid
-      Female: UnisexDecapoid
-      Unsexed: UnisexDecapoid # male and female sounds have to 1) exist and 2) come first, otherwise urists will spawn without emote sounds 66% of the time, because this game is poorly programmed
+    emoteSounds: UnisexDecapoid
   - type: MovementSpeedModifier
     weightlessAcceleration: 1.5 # move more easily in space
     weightlessFrictionNoInput: 2 # more control over movement in space
@@ -177,8 +188,7 @@
       types:
         Heat : 1
   - type: Temperature
-    currentTemperature: 310
-    specificHeat: 42
+    temperature: 310
   - type: TemperatureSpeed
     thresholds: # lol
       293: 1.0
@@ -204,11 +214,13 @@
   - type: TypingIndicator
     proto: robot
   - type: Exoskeleton # Prevents injections with syringes. Ideally it'd be on their body parts instead but eh.
+  - type: Thirst
+    baseDecayRate: -0.1 # Regen, no thirst
 
 - type: entity
   abstract: true
   parent: OrganBaseFleshy
-  id: BaseDecapoidOrgan
+  id: OrganDecapoid
   suffix: "decapoid"
   components:
   - type: Sprite
@@ -218,8 +230,8 @@
 
 - type: entity
   abstract: true
-  parent: BaseDecapoidOrgan
-  id: BaseDecapoidOrganExternal
+  parent: OrganDecapoid
+  id: OrganDecapoidExternal
   components:
   - type: Sprite
     sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
@@ -231,61 +243,61 @@
       group: Decapoid
 
 - type: entity
-  id: TorsoDecapoid
+  id: OrganDecapoidTorso
   name: "decapoid torso"
-  parent: [OrganBaseTorso, BaseDecapoidOrganExternal]
+  parent: [OrganBaseTorso, OrganDecapoidExternal]
 
 - type: entity
-  id: HeadDecapoid
+  id: OrganDecapoidHead
   name: "decapoid head"
-  parent: [OrganBaseHead, BaseDecapoidOrganExternal]
+  parent: [OrganBaseHead, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftArmDecapoid
+  id: OrganDecapoidArmLeft
   name: "left decapoid arm"
-  parent: [OrganBaseArmLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseArmLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightArmDecapoid
+  id: OrganDecapoidArmRight
   name: "right decapoid arm"
-  parent: [OrganBaseArmRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseArmRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftHandDecapoid
+  id: OrganDecapoidHandLeft
   name: "decapoid major claw"
-  parent: [OrganBaseHandLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseHandLeft, OrganDecapoidExternal]
   components:
   - type: HandOrgan
     startingItem: DecapoidClawItem
 
 - type: entity
-  id: RightHandDecapoid
+  id: OrganDecapoidHandRight
   name: "right minor claw"
-  parent: [OrganBaseHandRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseHandRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftLegDecapoid # these are the front legs
+  id: OrganDecapoidLegLeft # these are the front legs
   name: "front decapoid legs"
-  parent: [OrganBaseLegLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseLegLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightLegDecapoid # these are the back legs
+  id: OrganDecapoidLegRight # these are the back legs
   name: "back decapoid legs"
-  parent: [OrganBaseLegRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseLegRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftFootDecapoid # these are the front feet
+  id: OrganDecapoidFootLeft # these are the front feet
   name: "front decapoid feet"
-  parent: [OrganBaseFootLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseFootLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightFootDecapoid # these are the back feet
+  id: OrganDecapoidFootRight # these are the back feet
   name: "back decapoid feet"
-  parent: [OrganBaseFootRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseFootRight, OrganDecapoidExternal]
 
 - type: entity # These are a bit evil
   id: OrganDecapoidEyes
-  parent: [OrganBaseEyes, BaseDecapoidOrgan]
+  parent: [OrganBaseEyes, OrganDecapoid]
   components:
   - type: VisualOrgan
     data:
@@ -296,7 +308,7 @@
 
 - type: entity
   id: OrganDecapoidLungs
-  parent: [OrganBaseLungs, BaseDecapoidOrgan]
+  parent: [OrganBaseLungs, OrganDecapoid]
   name: decapoid respiratory system
   description: "Extracts dissolved oxygen from water, and utilizes it for cell maintenance."
   components:
@@ -305,36 +317,35 @@
 
 - type: entity
   id: OrganDecapoidStomach
-  parent: [OrganBaseStomach, BaseDecapoidOrgan]
+  parent: [OrganBaseStomach, OrganDecapoid]
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
 
 - type: entity
   id: OrganDecapoidBrain
-  parent: [OrganBaseBrain, BaseDecapoidOrgan]
-
+  parent: [OrganBaseBrain, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidTongue
-  parent: [OrganBaseTongue, BaseDecapoidOrgan]
+  parent: [OrganBaseTongue, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidAppendix
-  parent: [OrganBaseAppendix, BaseDecapoidOrgan]
+  parent: [OrganBaseAppendix, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidEars
-  parent: [OrganBaseEars, BaseDecapoidOrgan]
+  parent: [OrganBaseEars, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidHeart
-  parent: [OrganBaseHeart, BaseDecapoidOrgan]
+  parent: [OrganBaseHeart, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidLiver
-  parent: [OrganBaseLiver, BaseDecapoidOrgan]
+  parent: [OrganBaseLiver, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidKidneys
-  parent: [OrganBaseKidneys, BaseDecapoidOrgan]
+  parent: [OrganBaseKidneys, OrganDecapoid]

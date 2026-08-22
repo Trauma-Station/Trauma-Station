@@ -31,7 +31,6 @@ public abstract partial class BaseTextureTag
         };
 
         spriteView.SetEntity(netEntity);
-        spriteView.Scale = new Vector2(2, 2);
 
         return spriteView;
     }

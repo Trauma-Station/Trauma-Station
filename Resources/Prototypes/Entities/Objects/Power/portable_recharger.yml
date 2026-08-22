@@ -33,7 +33,7 @@
   - type: ItemSlots
     slots:
       charger_slot:
-        ejectOnInteract: true
+        ejectOnInteract: false # Trauma - Left click picks up instead of ejects content
         whitelist:
           components:
           - BatteryAmmoProvider

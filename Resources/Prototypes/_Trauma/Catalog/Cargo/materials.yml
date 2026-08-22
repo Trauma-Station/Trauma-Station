@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoProduct
+  id: MaterialWood
+  icon:
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: wood_3
+  product: CrateMaterialWood
+  cost: 1000
+  category: cargoproduct-category-name-materials
+  group: market
+
+- type: cargoProduct
+  id: MaterialDurathread
+  icon:
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: durathread_3
+  product: CrateMaterialDurathread
+  cost: 1200
+  category: cargoproduct-category-name-materials
+  group: market

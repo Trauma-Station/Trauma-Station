@@ -24,7 +24,8 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
-    - id: MorphRule
+    - id: MorphMidroundRule
+    - id: LoneXenomorphSpawnRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -37,6 +38,7 @@
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
     - id: FugitiveSpawn
+
 
 - type: entity
   parent: BaseGameRule
@@ -67,8 +69,8 @@
       time: null # it removes itself when done
 
 - type: entity
-  id: RatmaSpawn
   parent: BaseStationEventShortDelay
+  id: RatmaSpawn
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
@@ -84,8 +86,8 @@
       amount: 1, 1
 
 - type: entity
-  id: WailingHorseSpawn
   parent: BaseStationEventShortDelay
+  id: WailingHorseSpawn
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
@@ -101,26 +103,170 @@
       amount: 1, 1
 
 - type: entity
-  id: CoconutCrabSpawn
   parent: BaseStationEventShortDelay
+  id: CoconutCrabSpawn
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
     minimumPlayers: 30
-    weight: 3
+    weight: 1.5
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 3, 6
       children:
       - id: MobCoconutCrab
         weight: 0.75
       - id: MobCrabTiny
       - id: MobCoconutCrabFloofy # because it looks funny
         weight: 0.05 # NEVER BASICALLY
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: DartFrogSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobDartFrog1
+      - id: MobDartFrog2
+      - id: MobDartFrog3
+      - id: MobDartFrog4
+      - id: MobDartFrog5
+      - id: MobDartFrog6
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: MantisSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobMantis
+      - id: MobMantisShrimp
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: ShrimpSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobMantisShrimp
+      - id: MobShrimp
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: SnakeSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobCobra
+      - id: MobYellowBellySnake
+      - id: MobKraitSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: EelSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobEelSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: BunnySpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobBunny
+      - id: MobBunnySea
+      - id: MobBunnyEvil
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: SpiderCrabSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobSpiderCrabSea
 
 - type: entity
   parent: BaseAntagGhostRoleRule
@@ -153,7 +299,7 @@
 
 - type: entity
   parent: BaseAntagGhostRoleRule
-  id: FugitiveHunterRule
+  id: FugitiveHunterRuleSyndicate
   components:
   - type: AntagGhostCharacterRule
   - type: AntagObjectives
@@ -168,13 +314,82 @@
     maxDifficulty: 5
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+    gridPath: /Maps/_Trauma/Shuttles/SyndiePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
-      proto: FugitiveHunter
+      proto: FugitiveHunterSyndicate
       count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleSpacepol
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterArrestFugitiveObjective
+    - HunterArrestFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterSpacepol
+      count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleRussians
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterArrestFugitiveObjective
+    - HunterKillFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/RussianHunterShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterRussian
+      count: 4
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleBountyHunter
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterKillFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/MercHunterShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterBounty
+      count: 1
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect

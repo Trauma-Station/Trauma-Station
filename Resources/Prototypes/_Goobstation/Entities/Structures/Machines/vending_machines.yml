@@ -22,14 +22,8 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: FitnessVendInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
-    screenState: screen
-  - type: Advertise
-    pack: FitnessVendAds
+  - type: DatasetVocalizer
+    dataset: FitnessVendAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
@@ -38,11 +32,8 @@
     rotateWhileAnchored: false
     rotateWhilePulling: true
   - type: PointLight
-    radius: 2
     energy: 1.6
     color: "#9dc5c9"
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true
 
 - type: entity
   id: VendingMachineHotfood
@@ -64,24 +55,16 @@
     - state: heater
   - type: VendingMachine
     pack: HotfoodInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
   - type: Rotatable
     rotateWhileAnchored: false
     rotateWhilePulling: true
-  - type: Advertise
-    pack: HotfoodAds
+  - type: DatasetVocalizer
+    dataset: HotfoodAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: PointLight
-    radius: 2
     energy: 1.6
     color: "#9dc5c9"
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true
 
 - type: entity
   id: VendingMachineSolsnack
@@ -102,13 +85,8 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: SolsnackInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    ejectState: eject-unshaded
-    denyState: deny-unshaded
-  - type: Advertise
-    pack: SolsnackAds
+  - type: DatasetVocalizer
+    dataset: SolsnackAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
@@ -117,11 +95,8 @@
     rotateWhileAnchored: false
     rotateWhilePulling: true
   - type: PointLight
-    radius: 2
     energy: 1.6
     color: "#9dc5c9"
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true
 
 - type: entity
   id: VendingMachineWeeb
@@ -143,13 +118,8 @@
     - state: fan
   - type: VendingMachine
     pack: WeebVendInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
-  - type: Advertise
-    pack: WeebVendAds
+  - type: DatasetVocalizer
+    dataset: WeebVendAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
@@ -158,11 +128,8 @@
     rotateWhileAnchored: false
     rotateWhilePulling: true
   - type: PointLight
-    radius: 2
     energy: 1.6
     color: "#9dc5c9"
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true
 
 - type: entity
   parent: VendingMachine
@@ -172,11 +139,8 @@
   components:
   - type: VendingMachine
     pack: MailDrobeInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-  - type: Advertise
-    pack: MailDrobeAds
+  - type: DatasetVocalizer
+    dataset: MailDrobeAds
   - type: Sprite
     sprite: _Goobstation/Structures/Machines/VendingMachines/maildrobe.rsi
     layers:
@@ -216,14 +180,8 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
     pack: SweetToofInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
-    screenState: screen
-  - type: Advertise
-    pack: SweetToofAds # Todo - Make these
+  - type: DatasetVocalizer
+    dataset: SweetToofAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Transform
@@ -232,8 +190,5 @@
     rotateWhileAnchored: false
     rotateWhilePulling: true
   - type: PointLight
-    radius: 2
     energy: 1.6
     color: "#9dc5c9"
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true

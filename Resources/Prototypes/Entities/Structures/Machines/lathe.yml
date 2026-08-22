@@ -1,6 +1,6 @@
 - type: entity
-  id: BaseLathe
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: BaseLatheNoSilo # Trauma - add NoSilo, BaseLathe has OreSiloClient
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   abstract: true
   name: lathe
   components:
@@ -15,6 +15,10 @@
     - !type:AutomatedPorts
       sinks:
       - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
   - type: LatheAutomation
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -47,19 +51,17 @@
           - MachineLayer
   - type: Lathe
   - type: MaterialStorage
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
+  # <Trauma> - inheritance major
+  #- type: Destructible
+  #  thresholds:
+  #  - trigger:
+  #      !type:DamageTrigger
+  #      damage: 175
+  #    behaviors:
+  #    - !type:PlaySoundBehavior
+  #      sound:
+  #        collection: MetalBreak
+  # </Trauma>
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -124,7 +126,7 @@
 
 - type: entity
   id: Autolathe
-  parent: [BaseLatheLube, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheLube
   name: autolathe
   description: It produces basic items using metal and glass. Has the ability to process blueprints to print new recipes.
   components:
@@ -149,12 +151,21 @@
         - Sheet
         - RawMaterial
         - Ingot
+  - type: OreSiloClient
   - type: Lathe
     idleState: icon
     runningState: building
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
+    # <Trauma>
+    - NailsStatic
+    - LatheMiscStatic
+    - MedicalVehiclesStatic
+    - GrenadeTriggersStatic
+    - TapeRecorderStatic
+    - MiscSignallersStatic
+    # </Trauma>
     - ToolsStatic
     - PartsStatic
     - AtmosStatic
@@ -169,20 +180,14 @@
     - ServiceStatic
     - PowerCellsStatic
     - ElectronicsStatic
-    # Goobstation
-    - NailsStatic
-    - LatheMiscStatic
-    - MedicalVehiclesStatic
-    - GrenadeTriggersStatic
-    - TapeRecorderStatic
-    - MiscSignallersStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
+    # <Trauma>
+    - ScienceExplosives
+    # </Trauma>
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
     # - SyndicateAmmoStatic # Trauma
-    # Goobstation
-    - ScienceExplosives
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -209,7 +214,7 @@
 
 - type: entity
   id: Protolathe
-  parent: [BaseLatheLube, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheLube
   name: protolathe
   description: Converts raw materials into advanced items.
   components:
@@ -230,6 +235,7 @@
     board: ProtolatheMachineCircuitboard
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
   - type: Lathe
     idleState: icon
     runningState: building
@@ -290,7 +296,7 @@
 
 - type: entity
   id: CircuitImprinter
-  parent: [BaseLatheLube, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheLube
   name: circuit imprinter
   description: Prints circuit boards for machines.
   components:
@@ -312,17 +318,21 @@
     idleState: icon
     runningState: building
     staticPacks:
+    # <Trauma>
+    - SharedBoardsStatic
+    - MedicalBoardsStaticGoob
+    - SecurityBoardsStaticGoob
+    # </Trauma>
     #- ScienceBoardsStatic - Goobstation - Moved to Scifab
     - ServiceBoardsStatic
     - CargoBoardsStatic
     #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
-    #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    # Goobstation Packs
-    - SharedBoardsStatic
-    - MedicalBoardsStaticGoob
-    - SecurityBoardsStaticGoob
-    - ServiceBoardsStaticGoob
+    - EngineeringBoardsStatic
     dynamicPacks:
+    # <Trauma>
+    - SharedBoards
+    - ReactorCircuitboards
+    # </Trauma>
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
@@ -331,10 +341,9 @@
     - CameraBoards
     #- MechBoards - Goobstation - split between departmental lathes
     - ShuttleBoards
-    # Goobstation Packs
-    - SharedBoards
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
   - type: RequireProjectileTarget
 
 - type: entity
@@ -350,7 +359,7 @@
 
 - type: entity
   id: ExosuitFabricator
-  parent: [BaseLatheLube, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheLube
   name: exosuit fabricator
   description: Creates parts for robotics and other mechanical needs.
   components:
@@ -411,6 +420,7 @@
     - MechWeaponsSecurityLight
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
   - type: GuideHelp
     guides:
     - Robotics
@@ -458,7 +468,7 @@
 
 - type: entity
   id: SecurityTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheLube
   name: security techfab
   description: Prints equipment and circuitboards for use by security crew. #Goobstation - Circuitboards description
   components:
@@ -522,10 +532,13 @@
   #   # - SyndicateAmmoStatic # Trauma
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
+  - type: OreSiloClient
+  #- type: LatheAnnouncing # Trauma - not cherry picked
+  #  channels: [Security]
 
 - type: entity
   id: AmmoTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheLube
   name: ammo techfab
   description: Prints the bare minimum of bullets that any budget military or armory could need. Nothing fancy.
   components:
@@ -556,13 +569,20 @@
       # - SyndicateAmmoStatic # Trauma
     - type: MaterialStorage
       whitelist: *StandardMaterialWhitelist
+    - type: OreSiloClient
 
 - type: entity
   id: MedicalTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer] #Goobstation - Circuitboards description
+  parent: BaseLatheLube
   name: medical techfab
   description: Prints equipment and circuitboards for use by the medbay.
   components:
+  # <Trauma>
+  - type: MasterSiloClient # it's the only lathe in med
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SyndicateCartridgesStatic
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Machines/techfab.rsi
     layers:
@@ -582,14 +602,7 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
-    - TopicalsStatic
-    - ChemistryStatic
-    - MedicalStatic
-    - RollerBedsStatic
-    - MedicalClothingStatic
-    - EmptyMedkitsStatic
-    - SurgeryStatic
-    # Goobstation Packs
+    # <Trauma>
     - ParamedHypoStatic
     - MedicalPatchesStatic
     - SurgeryStaticGoob
@@ -598,12 +611,18 @@
     - MedicalBoardsStaticGoob
     - PowerCellsStatic
     - GrenadeTriggersStatic
-    # Einstein Engines Packs
     - SyringeCase
-    - TraumaMedicalStatic # Trauma
+    - TraumaMedicalStatic
+    # </Trauma>
+    - TopicalsStatic
+    - ChemistryStatic
+    - MedicalStatic
+    - RollerBedsStatic
+    - MedicalClothingStatic
+    - EmptyMedkitsStatic
+    - SurgeryStatic
     dynamicPacks:
-    - Chemistry
-    # Goobstation Packs
+    # <Trauma>
     - Surgery
     - MedicalCybernetics
     - EnvirosuitExtinguisherRefill
@@ -613,20 +632,22 @@
     - MedicalBoards
     - Janitor
     - Genetics
-    # Einstein Engines Packs
-    - Translators # Language
-    - TranslatorImplanters # Language
-    - TraumaCybernetics # Trauma
+    - Translators
+    - TranslatorImplanters
+    - TraumaCybernetics
+    # </Trauma>
+    - Chemistry
   - type: Machine
     board: MedicalTechFabCircuitboard
-  - type: EmagLatheRecipes # Goobstation Packs
-    emagStaticPacks:
-    - SyndicateCatridgesStatic
   - type: StealTarget
     stealGroup: MedicalTechFabCircuitboard
+  - type: OreSiloClient
+  #- type: LatheAnnouncing # Trauma - not cherry picked
+  #  channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
-  parent: [BaseLathe, BaseSiloUtilizer] # Trauma - was BaseLathe
+  parent: BaseLathe
   id: UniformPrinter
   name: uniform printer
   description: Prints new or replacement uniforms.
@@ -721,11 +742,18 @@
     - HostileCubesStatic
 
 - type: entity
-  parent: [BaseLathe, BaseSiloUtilizer] # Goob edit
+  parent: BaseLatheNoSilo # Trauma - oreproc doesnt need to use silos
   id: OreProcessor
   name: ore processor
   description: It produces sheets and ingots using ores.
   components:
+    # <Trauma>
+    - type: MiningPoints
+    - type: MiningPointsLathe
+    - type: MaterialStorageMagnetPickup
+      magnetEnabled: true
+    - type: MasterSiloFeeder # shitsalv 1984
+    # </Trauma>
     - type: Sprite
       sprite: Structures/Machines/ore_processor.rsi
       layers:
@@ -741,10 +769,9 @@
     - type: Machine
       board: OreProcessorMachineCircuitboard
     - type: MaterialStorage
-      ignoreMaterialWhiteList: true # Goob edit
-      connectToSilo: true # Goob edit
-      disconnectSiloOffMap: true # Goob edit
-      disallowOreEjection: false # Goob edit
+      # <Trauma>
+      ignoreMaterialWhiteList: true
+      # </Trauma>
       ignoreColor: true
       whitelist:
         tags:
@@ -756,13 +783,9 @@
       idleState: icon
       runningState: building
       defaultProductionAmount: 10
-      outputToStorage: true # Goob edit
       staticPacks:
       - OreSmelting
       - RGlassSmelting
-    - type: MiningPoints # DeltaV - Source of mining points for miners
-    - type: MiningPointsLathe # DeltaV
-    - type: MaterialStorageMagnetPickup # Frontier
 
 - type: entity
   parent: OreProcessor

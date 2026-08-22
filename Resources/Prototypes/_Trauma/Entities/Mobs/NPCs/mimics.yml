@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [ MobSpaceBasic, MobCombat ]
+  parent: [ MobSpaceBasic, MobCombat, BaseSlicingRefinable ]
   id: BaseMobMimic
   description: The last thing you'll ever see.
   components:
@@ -62,6 +62,7 @@
         Blunt: -1
         Slash: -1
         Piercing: -1
+        Ballistic: -1
   - type: MeleeWeapon
     range: 0.75
     attackRate: 0.1
@@ -88,6 +89,7 @@
   - type: Stamina
     baseCritThreshold: 999
   - type: FlashImmunity
+    showInExamine: false
   - type: PointLight
     radius: 0
     energy: 0
@@ -126,8 +128,8 @@
   - type: AutoEmote # TODO: find out why this doesnt work
     emotes:
     - TweakBox
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: SpawnLootToolboxMimic
     - id: ToolboxMimic
 
@@ -192,10 +194,10 @@
     overtime: 5
   - type: Stamina
     baseCritThreshold: 999
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: SpawnLootLockerMimic
-    - id: ShieldMimic
+    - id: FleshShield
 
 - type: entity
   parent: ClosetSteelBase
@@ -205,6 +207,7 @@
   description: It's a storage unit. Why is it breathing?
   components:
   - type: TriggerOnActivate
+  - type: TriggerOnInteractUsing
   - type: TriggerOnDamage
     threshold: 0
     probability: 0.5
@@ -266,8 +269,8 @@
   - type: Battery
     maxCharge: 100
     startingCharge: 100
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: SpawnLootVendorMimic
     - id: GunMimic
 
@@ -339,8 +342,6 @@
     polymorph: MimicVendor
   - type: DatasetVocalizer
     dataset: MimicMachineAds
-  - type: Advertise
-    pack: MimicMachineAds
   - type: Damageable
     damageModifierSet: FlimsyGlass
   - type: Injurable

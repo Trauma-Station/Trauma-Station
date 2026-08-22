@@ -41,7 +41,7 @@ const yaml = require("js-yaml");
 const HeaderRegex = /^\s*(?::cl:|🆑) *([a-z0-9_\-() ,.]+)?\s+(.+)/ims; // :cl: or 🆑 [0] followed by optional author name [1] and the changelog [2]
 const LineRegex = /\r?\n/;
 const CategoryRegex = /^([a-zA-Z]+)\s*:/;
-const EntryRegex = /^ *[*-]? *(add|remove|tweak|fix): *([^\n\r]+)\r?$/im; // * or - followed by change type [0] and change message [1]
+const EntryRegex = /^ *[*-]? *(add|remove|tweak|fix):\s*([^\n\r]+)\s*$/im; // * or - followed by change type [0] and change message [1]
 const CommentRegex = /<!--.*?-->/gs; // HTML comments
 
 // Main function
@@ -94,6 +94,7 @@ async function main() {
         console.log("No author found, setting it to author of the PR\n");
         author = user.login;
     }
+    author = author.trim();
 
     // Get all changes from the changelog body
     const changelog = headerMatch[2];
@@ -153,7 +154,7 @@ function getChanges(body) {
     	}
 
         (entries[category] ??= [])
-        	.push({ type: match[1], message: match[2] });
+        	.push({ type: match[1], message: match[2].trim() });
         empty = false;
     }
 

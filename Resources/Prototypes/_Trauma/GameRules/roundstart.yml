@@ -7,14 +7,29 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
+    - id: SubSpies
+      prob: 0.3
     - id: Devil
       prob: 0.02
     - id: ShadowlingRoundstart
       prob: 0.02
     - id: WraithRoundstart
       prob: 0.02
+
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoSpy
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: SubHeretic
+      prob: 0.2
+    - id: Devil
+      prob: 0.02
+    - id: ShadowlingRoundstart
+      prob: 0.02
+    - id: WraithRoundstart
+      prob: 0.1
 
 - type: entity
   parent: BaseGameRule
@@ -58,6 +73,53 @@
       playerRatio: 10
 
 - type: entity
+  parent: BaseRoundstartAntagRule
+  id: Spies
+  components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+  - type: SpyRule
+  - type: Store
+    categories:
+    - UplinkWeaponry
+    - UplinkExplosives
+    - UplinkWearables
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkAllies
+    currencyWhitelist:
+    - Telecrystal
+    balance:
+      Telecrystal: 0
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    agentName: spy-round-end-agent-name
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      playerRatio: 6
+      proto: Spy
+      range:
+        min: 1
+        max: 8
+  # Get 3 random rp objectives and 1 real objective
+  - type: AntagObjectives
+    objectives:
+    - SpyRandomObjective
+    - SpyRandomObjective
+    - SpyRandomObjective
+  - type: AntagRandomObjectives
+    maxDifficulty: 10
+    sets:
+    - groups: SpyObjectiveGroups
+      maxPicks: 1
+
+- type: entity
   parent: BaseInsurgencyRule
   id: InsurgencyShipVariantInsurgents
   components:
@@ -78,7 +140,7 @@
   - type: SubGamemodes
     rules:
     - id: SubTraitor
-      prob: 0.5
+      prob: 0.2
 
 - type: entity
   parent: [ BaseShadowlingRule, BaseRoundstartAntagRule ]
@@ -88,12 +150,8 @@
     minPlayers: 30
   - type: AntagSelection
     antags:
-    - !type:LinearAntagCount
+    - !type:FixedAntagCount
       proto: Shadowling
-      range:
-        min: 1
-        max: 3
-      playerRatio: 25
 
 - type: entity
   parent: TraitorReinforcement
@@ -105,3 +163,9 @@
       proto: InstallHypoportNukie
     - !type:InstallOrganChip
       chip: SkillChipNukie
+
+- type: entity
+  parent: BaseGameRule
+  id: SpectatorStatistics
+  components:
+    - type: ObserverStatisticRule

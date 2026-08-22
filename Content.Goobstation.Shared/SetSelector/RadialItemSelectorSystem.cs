@@ -9,7 +9,6 @@ namespace Content.Goobstation.Shared.SetSelector;
 public sealed partial class RadialItemSelectorSystem : EntitySystem
 {
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -30,7 +29,7 @@ public sealed partial class RadialItemSelectorSystem : EntitySystem
             return;
 
         var selected = args.SelectedItem;
-        if (!_proto.HasIndex(selected) || ent.Comp.Entries.All(x => x.Prototype != selected))
+        if (!ProtoMan.HasIndex(selected) || ent.Comp.Entries.All(x => x.Prototype != selected))
             return;
 
         var coords = Transform(ent).Coordinates;

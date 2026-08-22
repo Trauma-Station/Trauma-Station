@@ -298,7 +298,7 @@
 # Black Gloves
 # TECHNICALLY, if you ported the worn state to the RSI, this could be greyscaled, but I do not really feel like doing that.
 - type: entity
-  parent: ClothingHandsGlovesSyntheticBase
+  parent: [ClothingHandsGlovesSyntheticBase, BaseSlicingRefinable]
   id: ClothingHandsGlovesColorBlack
   name: black gloves
   description: Regular black gloves that do not keep you from frying.
@@ -313,15 +313,14 @@
       - state: inhand-right
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/black.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesFingerless
   - type: Fiber
     fiberColor: fibers-black
 
 - type: entity # Goobstation
-  parent: ClothingHandsBase
+  parent: [ClothingHandsBase, BaseSlicingRefinable]
   id: ClothingHandsGlovesColorYellowBase
   abstract: true
   components:
@@ -330,9 +329,8 @@
     sprite: Clothing/Hands/Gloves/Color/yellow.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/Color/yellow.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesFingerlessInsulated
   - type: Insulated
   - type: Fiber

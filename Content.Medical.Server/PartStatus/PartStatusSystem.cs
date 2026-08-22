@@ -29,10 +29,11 @@ public sealed partial class PartStatusSystem : EntitySystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private IChatManager _chat = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private WoundSystem _wound = default!;
+    [Dependency] private EntityQuery<BleedInflicterComponent> _bleedQuery = default!;
+    [Dependency] private EntityQuery<BoneComponent> _boneQuery = default!;
 
     private static readonly BodyPartType[] BodyPartOrder =
     [
@@ -54,14 +55,7 @@ public sealed partial class PartStatusSystem : EntitySystem
     private const string BleedLocaleStr = "inspect-wound-Bleeding-moderate";
     private const string BoneLocaleStr = "inspect-trauma-BoneDamage";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeNetworkEvent<GetPartStatusEvent>(OnGetPartStatus);
-        SubscribeLocalEvent<HealthExaminableComponent, GetVerbsEvent<ExamineVerb>>(OnGetExamineVerbs);
-    }
-
+    [SubscribeNetworkEvent]
     private void OnGetPartStatus(GetPartStatusEvent message, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not {} entity ||
@@ -81,7 +75,7 @@ public sealed partial class PartStatusSystem : EntitySystem
             recordReplay: false);
     }
 
-
+    [SubscribeLocalEvent]
     private void OnGetExamineVerbs(EntityUid uid, HealthExaminableComponent component, GetVerbsEvent<ExamineVerb> args)
     {
         if (!TryComp<DamageableComponent>(uid, out var damage))
@@ -133,11 +127,11 @@ public sealed partial class PartStatusSystem : EntitySystem
                 continue;
 
             var (damageSeverities, isBleeding) = AnalyzeWounds(woundable);
-            var boneSev = _trauma.GetBone(woundable.AsNullable())?.Comp.BoneSeverity ?? BoneSeverity.Normal; // fallback for boneless limbs like slimes
+            var boneSev = _boneQuery.CompOrNull(woundable)?.BoneSeverity ?? BoneSeverity.Normal; // fallback for boneless limbs like slimes
             partStatusSet.Add(new PartStatus(
                 part.PartType,
                 part.Symmetry,
-                _proto.Index(category).Name.ToLowerInvariant(), // looks better lowercase
+                ProtoMan.Index(category).Name.ToLowerInvariant(), // looks better lowercase
                 woundable.Comp.WoundableSeverity,
                 damageSeverities,
                 boneSev,
@@ -148,12 +142,12 @@ public sealed partial class PartStatusSystem : EntitySystem
     }
 
     private (Dictionary<string, WoundSeverity> DamageSeverities, bool IsBleeding) AnalyzeWounds(
-        Entity<WoundableComponent> woundable)
+        Entity<WoundableComponent> part)
     {
         var damageSeverities = new Dictionary<string, WoundSeverity>();
         var isBleeding = false;
 
-        foreach (var wound in _wound.GetWoundableWounds(woundable))
+        foreach (var wound in _wound.GetWoundableWounds(part.AsNullable()))
         {
             if (wound.Comp.DamageGroup == null
                 || wound.Comp.WoundSeverity == WoundSeverity.Healed)
@@ -163,10 +157,10 @@ public sealed partial class PartStatusSystem : EntitySystem
                 !damageSeverities.TryGetValue(wound.Comp.DamageType, out var existingSeverity) ||
                 wound.Comp.WoundSeverity > existingSeverity)
                 damageSeverities[wound.Comp.TextString == null
-                    ? _proto.Index(wound.Comp.DamageGroup).ID
+                    ? ProtoMan.Index(wound.Comp.DamageGroup).ID
                     : wound.Comp.TextString] = wound.Comp.WoundSeverity;
 
-            if (TryComp<BleedInflicterComponent>(wound, out var bleeds) && bleeds.IsBleeding)
+            if (!isBleeding && _bleedQuery.TryComp(wound, out var bleeds) && bleeds.IsBleeding)
                 isBleeding = true;
         }
 
@@ -324,7 +318,7 @@ public sealed partial class PartStatusSystem : EntitySystem
 
     private bool WoundSeverityCheck(string type)
     {
-        return !_proto.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
+        return !ProtoMan.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
     }
 
     private List<string> GetTraumaDescriptions(PartStatus partStatus, bool inspectingSelf)

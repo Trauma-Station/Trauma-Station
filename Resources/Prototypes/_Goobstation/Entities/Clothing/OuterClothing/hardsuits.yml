@@ -16,8 +16,7 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 0.01
+    coefficient: 0.01
   - type: ExplosionResistance
     damageCoefficient: 0.05
   - type: Armor
@@ -31,6 +30,7 @@
         Blunt: 0.01
         Slash: 0.01
         Piercing: 0.01
+        Ballistic: 0.01
         Heat: 0.01
         Cold: 0.01
         Shock: 0.01
@@ -60,7 +60,7 @@
 # Cybersun Stealth
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContrabandUnscannable]
   id: ClothingOuterHardsuitCybersunStealth
   suffix: stealth
   name: cybersun stealth hardsuit
@@ -75,24 +75,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
-  - type: ExplosionResistance
-    damageCoefficient: 0.65
-  - type: Armor
-    traumaDeductions:
-      Dismemberment: 0.3
-      OrganDamage: 0.3
-      BoneDamage: 0.3
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.8
-        Heat: 0.8
-        Radiation: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.8
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
@@ -106,16 +91,11 @@
     - type: StealthOnMove
       passiveVisibilityRate: -0.5
       movementVisibilityRate: 0.6
-  - type: ModifyDelayedKnockdown # Goobstation
-    delayDelta: 3
-    knockdownTimeDelta: -3
-  - type: StaminaResistance
-    damageCoefficient: 0.5
 
 # cybersun dreadnought suit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateAnchoredContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContrabandUnscannable ]
   id: ClothingOuterHardsuitCybersunDreadnought
   name: Cybersun dreadnought suit
   description: The Syndicate places its glory on your shoulders, do not disappoint.
@@ -134,7 +114,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.1 # chinalake meta would go hard
   - type: FireProtection
-    reduction: 0.9 # atmos fire suit is 0.8, so i guess this is fine? Reduction goes the opossite way right?
+    reduction: 1
   - type: Armor
     traumaDeductions: # not full protection so its damage can actually harm you
       Dismemberment: 0.9
@@ -146,6 +126,7 @@
         Blunt: 0.1
         Slash: 0.1 # holy shit bruv
         Piercing: 0.1
+        Ballistic: 0.1
         Heat: 0.1
         Radiation: 0.25 # do people even know rad ammo exists? anyway making rad its weakness is kinda fair
         Caustic: 0.4
@@ -200,8 +181,11 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.8
         Radiation: 0.6
+      flatReductions: # This is done so shotguns are worse against armor
+        Ballistic: 2
   - type: ClothingSpeedModifier
     sprintModifier: 0.85
     walkModifier: 0.85
@@ -264,7 +248,8 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.75
+        Piercing: 0.8
+        Ballistic: 0.75
         Heat: 0.8
         Radiation: 0.7
         Caustic: 0.7
@@ -276,7 +261,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitExperimentalNanorep
   - type: FireProtection
-    reduction: 0.4
+    reduction: 0.5
 
 # Singuloth hardsuit
 
@@ -290,8 +275,8 @@
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/singuloth_knight_armor.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/singuloth_knight_armor.rsi
-  - type: AddAccentClothing
-    accent: MedievalAccent
+  - type: MedievalAccent
+    relayAccent: true
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadSinguloth

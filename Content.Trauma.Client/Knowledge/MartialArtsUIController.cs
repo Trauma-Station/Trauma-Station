@@ -101,8 +101,8 @@ public sealed partial class MartialArtsUIController : UIController, IOnStateChan
         var buttons = GetButtons();
         if (buttons.Count < 2) // always have 1 from no martial art option
         {
-            var player = _player.LocalEntity;
-            _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player);
+            if (_player.LocalEntity is { } player)
+                _popup.PopupEntity(Loc.GetString("knowledge-no-martial-art"), player);
             _button?.Pressed = false;
             return;
         }
@@ -163,7 +163,7 @@ public sealed partial class MartialArtsUIController : UIController, IOnStateChan
             var actionOption = new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, martialArt.Item2)
             {
                 IconSpecifier = RadialMenuEntityIconSpecifier.With(martialArt.Item1),
-                ToolTip = Loc.GetString(martialArt.Item3)
+                ToolTip = martialArt.Item3
             };
             martialArts.Add(actionOption);
         }

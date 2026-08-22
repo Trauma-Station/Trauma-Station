@@ -22,9 +22,10 @@ public sealed partial class BodySystem
     [Dependency] private CommonBodyCacheSystem _cache = default!;
     [Dependency] private CommonBodyPartSystem _part = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private OrganRelationSystem _relation = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _internalQuery = default!;
 
     /// <summary>
     /// Body parts' organ categories.
@@ -44,6 +45,21 @@ public sealed partial class BodySystem
     ];
 
     /// <summary>
+    /// Map between a body part type and the organ categories with that type, regardless of symmetry.
+    /// </summary>
+    public static readonly Dictionary<BodyPartType, ProtoId<OrganCategoryPrototype>[]> PartTypeOrgans = new()
+    {
+        {BodyPartType.Head, [ "Head" ]},
+        {BodyPartType.Torso, [ "Torso" ]},
+        {BodyPartType.Arm, [ "ArmLeft", "ArmRight" ]},
+        {BodyPartType.Hand, [ "HandLeft", "HandRight" ]},
+        {BodyPartType.Leg, [ "LegLeft", "LegRight" ]},
+        {BodyPartType.Foot, [" FootLeft", "FootRight" ]},
+        {BodyPartType.Tail, [ "Tail" ]},
+        {BodyPartType.Wings, [ "Wings" ]}
+    };
+
+    /// <summary>
     /// Vital body parts' organ categories.
     /// </summary>
     public static readonly ProtoId<OrganCategoryPrototype>[] VitalParts =
@@ -53,14 +69,17 @@ public sealed partial class BodySystem
     ];
     // TODO: vital internal organs???
 
+    private readonly HashSet<ProtoId<OrganCategoryPrototype>> _coveredParts = new();
+    private readonly List<EntityUid> _extremities = new();
+
     /// <summary>
     /// Tries to enable a given organ, letting systems run logic.
     /// Returns true if it is valid and now enabled.
     /// </summary>
-    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null)
+    public bool EnableOrgan(Entity<OrganComponent?> organ, EntityUid? bodyUid = null, bool logMissing = true)
     {
         // allow the user to pass in a body incase it's null here
-        if (!_organQuery.Resolve(organ, ref organ.Comp) || (bodyUid ?? organ.Comp.Body) is not {} body)
+        if (!_organQuery.Resolve(organ, ref organ.Comp, logMissing) || (bodyUid ?? organ.Comp.Body) is not {} body)
             return false;
 
         if (HasComp<EnabledOrganComponent>(organ))
@@ -121,8 +140,8 @@ public sealed partial class BodySystem
     /// <summary>
     /// Get all internal organs in a body.
     /// </summary>
-    public List<Entity<InternalOrganComponent>> GetInternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
-        => GetOrgans<InternalOrganComponent>(body, logMissing);
+    public List<Entity<InternalChildOrganComponent>> GetInternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
+        => GetOrgans<InternalChildOrganComponent>(body, logMissing);
 
     /// <summary>
     /// Get all external organs in a body.
@@ -130,7 +149,7 @@ public sealed partial class BodySystem
     public List<Entity<OrganComponent>> GetExternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
     {
         var organs = GetOrgans(body, logMissing);
-        organs.RemoveAll(organ => HasComp<InternalOrganComponent>(organ));
+        organs.RemoveAll(organ => _internalQuery.HasComp(organ));
         return organs;
     }
 
@@ -367,7 +386,7 @@ public sealed partial class BodySystem
             return false; // organ doesn't support markings
 
         var markingData = organ.Comp.MarkingData;
-        var proto = _proto.Index(marking);
+        var proto = ProtoMan.Index(marking);
         var layer = proto.BodyPart;
         if (!force)
         {
@@ -497,7 +516,44 @@ public sealed partial class BodySystem
         return GetRandomBodyPart(target);
     }
 
+    /// <summary>
+    /// Gets a random bodypart that has no child parts, like a hand or an arm with no hand attached.
+    /// </summary>
+    public TargetBodyPart GetRandomExtremity(Entity<BodyComponent?> body)
+    {
+        if (!_bodyQuery.Resolve(body, ref body.Comp, false))
+            return TargetBodyPart.Chest;
+
+        _extremities.Clear();
+        foreach (var part in GetExternalOrgans(body))
+        {
+            if (IsExtremity(part))
+                _extremities.Add(part);
+        }
+
+        if (_extremities.Count == 0)
+            return TargetBodyPart.Chest; // should never happen...
+
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(body));
+        var picked = rand.Pick(_extremities);
+        return _part.GetTargetBodyPart(picked) ?? TargetBodyPart.Chest;
+    }
+
     #endregion
+
+    /// <summary>
+    /// Returns true if a bodypart has no child parts.
+    /// </summary>
+    public bool IsExtremity(EntityUid part)
+    {
+        foreach (var child in _relation.AllChildren(part))
+        {
+            if (!_internalQuery.HasComp(child))
+                return false;
+        }
+
+        return true;
+    }
 
     private bool IsDetached(EntityUid uid)
         => (MetaData(uid).Flags & MetaDataFlags.Detached) != 0;

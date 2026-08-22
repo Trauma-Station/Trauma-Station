@@ -31,13 +31,8 @@ public sealed partial class HitscanBasicDamageSystem : EntitySystem
 
         var dmg = ent.Comp.Damage * _damage.UniversalHitscanDamageModifier;
 
-        // <Trauma> - add targetPart and canBeCancelled
-        var user = args.Data.Shooter ?? args.Data.Gun;
-        var targetPart = _gun.GetTargetPart(
-            user,
-            _transform.GetMapCoordinates(user),
-            _transform.GetMapCoordinates(target));
-        if(!_damage.TryChangeDamage(target, dmg, out var damageDealt, origin: args.Data.Gun, targetPart: targetPart, canBeCancelled: true))
+        // <Trauma> - canBeCancelled
+        if(!_damage.TryChangeDamage(target, dmg, out var damageDealt, origin: args.Data.Gun, canBeCancelled: true))
             return;
         // </Trauma>
 

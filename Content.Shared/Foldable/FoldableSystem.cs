@@ -102,9 +102,9 @@ public sealed partial class FoldableSystem : EntitySystem
         if (!result && folder != null)
         {
             if (comp.IsFolded)
-                _popup.PopupPredicted(Loc.GetString("foldable-unfold-fail", ("object", uid)), uid, folder.Value);
+                _popup.PopupEntity(Loc.GetString("foldable-unfold-fail", ("object", uid)), uid, folder.Value);
             else
-                _popup.PopupPredicted(Loc.GetString("foldable-fold-fail", ("object", uid)), uid, folder.Value);
+                _popup.PopupEntity(Loc.GetString("foldable-fold-fail", ("object", uid)), uid, folder.Value);
         }
         return result;
     }
@@ -118,7 +118,7 @@ public sealed partial class FoldableSystem : EntitySystem
         if (_container.IsEntityInContainer(uid) && !fold.CanFoldInsideContainer)
             return false;
 
-        if (!TryComp(uid, out PhysicsComponent? body) ||
+        if (TryComp(uid, out PhysicsComponent? body) && body.CanCollide && // Trauma - FoldableClothingFix
             !_anchorable.TileFree(Transform(uid).Coordinates, body))
             return false;
 

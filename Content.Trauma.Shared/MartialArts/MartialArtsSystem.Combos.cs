@@ -5,8 +5,7 @@ using Content.Shared.EntityConditions;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
+using Content.Shared.Popups;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 
@@ -19,23 +18,19 @@ public partial class MartialArtsSystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private EntityQuery<CanPerformComboComponent> _comboQuery = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    private void InitializeCanPerformCombo()
+    [SubscribeLocalEvent]
+    private void OnInit(Entity<CanPerformComboComponent> ent, ref ComponentInit args)
     {
-        SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
-    }
-
-    private void OnMapInit(Entity<CanPerformComboComponent> ent, ref MapInitEvent args)
-    {
+        ent.Comp.AllowedCombos.Clear();
         foreach (var item in ent.Comp.RoundstartCombos)
         {
-            ent.Comp.AllowedCombos.Add(_proto.Index(item));
+            ent.Comp.AllowedCombos.Add(ProtoMan.Index(item));
         }
-        Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
         var user = args.Performer;
@@ -69,11 +64,14 @@ public partial class MartialArtsSystem
 
         if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
         {
-            var proto = _proto.Index(queued);
+            var proto = ProtoMan.Index(queued);
             var level = _knowledge.GetLevel(ent.Owner);
 
-            if (!CheckCombo(ent, proto, level, user, args.Target))
+            if (!CheckCombo(ent, proto, level, user, args.Target, out var failMessage))
+            {
+                PopupFail(failMessage, user);
                 return;
+            }
 
             PerformCombo(user, args.Target, proto, ent, level);
             comboActions.QueuedPrototype = null;
@@ -89,22 +87,37 @@ public partial class MartialArtsSystem
         var performer = args.Performer;
         var level = _knowledge.GetLevel(ent.Owner);
 
+        LocId? failMessage = null;
         foreach (var proto in ent.Comp.AllowedCombos)
         {
-            if (!CheckCombo(ent, proto, level, performer, target))
+            if (!CheckCombo(ent, proto, level, performer, target, out var fail))
+            {
+                failMessage ??= fail;
                 continue;
+            }
 
             PerformCombo(performer, target, proto, ent, level);
-            break; // found the combo
+            return; // found the combo
         }
+
+        PopupFail(failMessage, performer);
+    }
+
+    private void PopupFail(LocId? message, EntityUid user)
+    {
+        if (message is { } id)
+            _popup.PopupCursor(Loc.GetString(id), user, PopupType.MediumCaution);
     }
 
     private bool CheckCombo(Entity<CanPerformComboComponent> ent,
         ComboPrototype proto,
         int level,
-        EntityUid performer,
-        EntityUid target)
+        EntityUid user,
+        EntityUid target,
+        out LocId? failMessage)
     {
+        failMessage = null;
+
         var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
         if (proto.AttackTypes.Count <= 0 || sum < 0)
             return false;
@@ -113,19 +126,27 @@ public partial class MartialArtsSystem
         var attackList = proto.AttackTypes.AsEnumerable();
 
         if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
-            !list.SequenceEqual(attackList) ||
-            !_conditions.TryConditions(performer, proto.UserConditions) ||
-            !_conditions.TryConditions(target, proto.Conditions))
+            !list.SequenceEqual(attackList))
             return false;
+
+        // only complain once the attacks lined up, or every combo you don't know would yell at you
+        if (!_conditions.TryConditions(user, proto.UserConditions, out var failedUser, sourceEnt: user))
+        {
+            failMessage = failedUser?.FailMessage;
+            return false;
+        }
+
+        if (!_conditions.TryConditions(target, proto.Conditions, out var failedTarget, sourceEnt: user))
+        {
+            failMessage = failedTarget?.FailMessage;
+            return false;
+        }
 
         return true;
     }
 
     public void PerformCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)
     {
-        // TODO: dont hardcode this here...
-        ent.Comp.Momentum += 1;
-
         var scaleEv = new MartialArtModifyScaleEvent(performer);
         RaiseLocalEvent(ent, ref scaleEv);
         var scale = scaleEv.Scale;

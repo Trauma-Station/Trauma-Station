@@ -3,6 +3,7 @@
 using Content.Shared.Body;
 using Content.Shared.Clothing;
 using Content.Shared.EntityConditions;
+using Content.Shared.Examine;
 using Content.Shared.Implants;
 using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Body.Chips;
@@ -17,51 +18,70 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeOnWear()
     {
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganGotInsertedEvent>(OnGrantKnowledgeOrgan);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganGotRemovedEvent>(OnRemoveKnowledgeOrgan);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ClothingGotEquippedEvent>(OnGrantKnowledgeWear);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ClothingGotUnequippedEvent>(OnRemoveKnowledgeWear);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainInsertedIntoBorgEvent>(OnBrainInsertedIntoBorg);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainRemovedFromBorgEvent>(OnBrainRemovedFromBorg);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ImplantImplantedEvent>(OnImplantImplanted);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ImplantRemovedEvent>(OnImplantRemoved);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganChipInsertedEvent>(OnGrantKnowledgeChip);
-        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganChipRemovedEvent>(OnRemoveKnowledgeChip);
-
         SubscribeLocalEvent<ModifyKnowledgeGrantComponent, MapInitEvent>(OnModifyGrantMapInit,
             after: [ typeof(InitialBodySystem) ]); // TODO: move this to a partial of KnowledgeGrantSystem bruh...
     }
 
+    [SubscribeLocalEvent]
+    private void OnExamined(Entity<KnowledgeGrantOnWearComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange || !ent.Comp.Examinable)
+            return;
+
+        using (args.PushGroup(nameof(KnowledgeGrantOnWearComponent)))
+        {
+            args.PushMarkup("This offsets these skills when used:");
+            foreach (var (skill, level) in ent.Comp.Skills)
+            {
+                var color = level < 0
+                    ? "red"
+                    : "green";
+                var name = ProtoMan.Index(skill).Name;
+                args.PushMarkup($"- [color={color}]{level}[/color] [bold]{name}[/bold]");
+            }
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnGrantKnowledgeOrgan(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganGotInsertedEvent args)
         => ApplyKnowledgeModifiers(args.Target, ent);
 
+    [SubscribeLocalEvent]
     private void OnRemoveKnowledgeOrgan(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganGotRemovedEvent args)
         => RemoveKnowledgeModifiers(args.Target, ent);
 
+    [SubscribeLocalEvent]
     private void OnGrantKnowledgeWear(Entity<KnowledgeGrantOnWearComponent> ent, ref ClothingGotEquippedEvent args)
         => ApplyKnowledgeModifiers(args.Wearer, ent);
 
+    [SubscribeLocalEvent]
     private void OnRemoveKnowledgeWear(Entity<KnowledgeGrantOnWearComponent> ent, ref ClothingGotUnequippedEvent args)
         => RemoveKnowledgeModifiers(args.Wearer, ent);
 
+    [SubscribeLocalEvent]
     private void OnBrainInsertedIntoBorg(Entity<KnowledgeGrantOnWearComponent> ent, ref BrainInsertedIntoBorgEvent args)
         => ApplyKnowledgeModifiers(args.Brain, ent);
 
+    [SubscribeLocalEvent]
     private void OnBrainRemovedFromBorg(Entity<KnowledgeGrantOnWearComponent> ent, ref BrainRemovedFromBorgEvent args)
         => RemoveKnowledgeModifiers(args.Brain, ent);
 
+    [SubscribeLocalEvent]
     private void OnImplantImplanted(Entity<KnowledgeGrantOnWearComponent> ent, ref ImplantImplantedEvent args)
         => ApplyKnowledgeModifiers(args.Implanted, ent);
 
+    [SubscribeLocalEvent]
     private void OnImplantRemoved(Entity<KnowledgeGrantOnWearComponent> ent, ref ImplantRemovedEvent args)
         => RemoveKnowledgeModifiers(args.Implanted, ent);
 
+    [SubscribeLocalEvent]
     private void OnGrantKnowledgeChip(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganChipInsertedEvent args)
     {
         if (args.Body is { } body)
             ApplyKnowledgeModifiers(body, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoveKnowledgeChip(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganChipRemovedEvent args)
     {
         if (args.Body is { } body)

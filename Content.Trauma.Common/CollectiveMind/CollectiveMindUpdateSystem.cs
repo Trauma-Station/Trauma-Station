@@ -5,13 +5,12 @@ namespace Content.Trauma.Common.CollectiveMind;
 
 public sealed partial class CollectiveMindUpdateSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     private static Dictionary<string, int> _currentId = new();
 
     public void UpdateCollectiveMind(EntityUid uid, CollectiveMindComponent collective)
     {
-        foreach (var prototype in _proto.EnumeratePrototypes<CollectiveMindPrototype>())
+        foreach (var prototype in ProtoMan.EnumeratePrototypes<CollectiveMindPrototype>())
         {
             if (!_currentId.ContainsKey(prototype.ID))
                 _currentId[prototype.ID] = 0;

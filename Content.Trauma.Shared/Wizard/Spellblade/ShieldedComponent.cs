@@ -16,7 +16,16 @@ public sealed partial class ShieldedComponent : BaseSpriteOverlayComponent
 
     [DataField]
     public DamageModifierSet Resistances = new()
-        { Coefficients = new() { ["Blunt"] = 0.5f, ["Slash"] = 0.5f, ["Piercing"] = 0.5f, ["Heat"] = 0.5f } };
+    {
+        Coefficients = new()
+        {
+            ["Blunt"] = 0.5f,
+            ["Slash"] = 0.5f,
+            ["Piercing"] = 0.5f,
+            ["Ballistic"] = 0.5f,
+            ["Heat"] = 0.5f
+        }
+    };
 
     public override bool Unshaded { get; set; } = false;
 

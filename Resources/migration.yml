@@ -50,9 +50,6 @@ BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
 # 2025-01-01 Trauma Remove scurret poster
 PosterLegitHelio: null
 
-# 2026-01-05 Actually use the ToiletCisternLoot table.
-ToiletEmpty: ToiletFilled
-
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser
 WeaponDisabler: WeaponLaserSidearm
@@ -147,6 +144,23 @@ BSOManual: null
 # 2026-06-09 give bartenders energy dispensers
 BoozeDispenser: EnergyBoozeDispenser
 SodaDispenser: EnergySodaDispenser
+
+# 2026-06-10
+MaterialSilo: MachineMasterMaterialSilo
+
+# 2026-06-21
+GunSafeLaserSpec: GunSafeSurplusBallistics
+
+# 2026-07-25
+WehMedipen: WehMedipenTiny
+
+# 2026-08-03
+BibleCommunistManifesto: Bible
+
+# 2026-09-17
+ComputerNTRTasks: null
+TaskBottle: ChemistryEmptyBottle01
+TaskJug: Jug
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -260,7 +274,6 @@ ReverseEngineeringMachine: null
 Roboisseur: null
 SalvagePartsSpawnerLow: null
 SalvagePartsSpawnerMid: null
-SecBreachingHammer: null
 Shinai: null
 ShockCollar: null
 shuttle_manipulator: null
@@ -497,10 +510,10 @@ DefaultStationBeaconTeslaEngine: null
 FoodBoxDonkpocketGondola: FoodBoxDonkpocketPizza
 
 # 2024-01-31
-SpyCrewMonitor: null
-SpyCrewMonitorEmpty: null
-SyndiCrewMonitor: null
-SyndiCrewMonitorEmpty: null
+# SpyCrewMonitor: null Trauma - Re-add Antag Crew Monitors
+# SpyCrewMonitorEmpty: null Trauma - Re-add Antag Crew Monitors
+# SyndiCrewMonitor: null Trauma - Re-add Antag Crew Monitors
+# SyndiCrewMonitorEmpty: null Trauma - Re-add Antag Crew Monitors
 
 #SpawnVehicleWheelchair: null Goobstation - Re-add vehicles
 #SpawnVehicleWheelchairFolded: null Goobstation - Re-add vehicles
@@ -548,7 +561,7 @@ FoodDonutJellyBlumpkin: FoodDonutJellyBluePumpkin
 SolarAssemblyPart: SolarAssemblyFlatpack
 AmePart: AmePartFlatpack
 AmePartStealObjective: AmePartFlatpackStealObjective
-Observationskit: null
+# Observationskit: null Trauma - Re-add Antag Crew Monitors
 
 # 2024-02-26
 CrateBaseWeldable: CrateGenericSteel
@@ -799,7 +812,7 @@ PresentRandomAsh: PresentRandomCoal
 CrateCrewMonitoringBoards: CrateCrewMonitoring
 
 # 2024-11-25
-CrateSlimepersonLifeSupport: CrateNitrogenInternals
+CrateSlimepersonLifeSupport: CrateEmergencyEVA
 
 # 2024-12-01
 DungeonMasterCircuitBoard: GameMasterCircuitBoard
@@ -907,8 +920,6 @@ ToxinChemistryBottle: ChemistryBottleToxin
 
 ClothingMaskBlushingMime: ClothingMaskSexyMime
 ClothingMaskBlushingClown: ClothingMaskSexyMime
-MachineMaterialSilo: null
-CrateMaterialSilo: null
 
 # 2025-03-29
 ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle
@@ -1062,6 +1073,10 @@ VimChassis: null
 # 2025-08-01
 FoodDonutJellySlugcat: FoodDonutJellyScurret
 
+# 2025-08-06
+TrashBagBlue: TrashBagHolding
+BagOfSummoningGarbage: null
+
 # 2025-08-11
 ClothingUniformJumpsuitChiefEngineerNT: ClothingUniformJumpsuitChiefEngineer
 ClothingUniformJumpsuitParamedicNT: ClothingUniformJumpsuitParamedic
@@ -1184,3 +1199,59 @@ FoodMeatSnail: MobSnail
 CratePartsT3: null
 CratePartsT3T4: null
 CratePartsT4: null
+
+# 2026-07-17
+WeaponRifleM90GrenadeLauncher: null
+
+# 2026-07-18
+SheetGlassLingering0: null
+SheetRGlassLingering0: null
+SheetRPGlassLingering0: null
+SheetSteelLingering0: null
+SheetPlasteelLingering0: null
+SheetPlasmaLingering0: null
+PartRodMetalLingering0: null
+FloorTileItemSteelLingering0: null
+FloorTileItemWhiteLingering0: null
+FloorTileItemDarkLingering0: null
+SoapBorg: Soap
+Ointment10Lingering: Ointment
+RegenerativeMeshLingering0: null
+Brutepack10Lingering: Brutepack
+MedicatedSutureLingering0: null
+Bloodpack10Lingering: Bloodpack
+Gauze10Lingering: Gauze
+BorgVial: ChemistryEmptyVial
+BorgBeaker: Beaker
+CableHVStackLingering10: CableHVStack10
+CableMVStackLingering10: CableMVStack10
+CableApcStackLingering10: CableApcStack10
+
+# 2026-07-19
+BoxHugNitrogen: BoxSurvivalHugNitrogen
+BoxMime: BoxSurvival
+BoxMimeNitrogen: BoxSurvivalNitrogen
+BoxMimeMoth: BoxSurvival
+
+# 2026-07-19
+CrateChemistryVials: null
+CrateSecurityHelmet: null
+CrateEmergencyInternals: CrateEmergencyEVA
+CrateEmergencyInternalsLarge: CrateEmergencyEVA
+CrateNitrogenInternals: CrateEmergencyEVA
+CrateServiceCleanerGrenades: CrateJanitorialCleanerGrenades
+CrateServiceColorfulLights: CrateJanitorialColorfulLights
+CrateServiceHolidayLights: CrateJanitorialHolidayLights
+CrateMousetrapBoxes: CrateJanitorialMousetraps
+CrateServiceReplacementLights: CrateJanitorialReplacementLights
+CrateServiceJanitorialSupplies: CrateJanitorialSupplies
+CrateMaterialTextiles: CrateMaterialCloth
+CrateFoodBarSupply: CrateServiceBarSupply
+CrateFoodCooking: CrateServiceCooking
+CrateFoodDinnerware: CrateServiceDinnerware
+CrateFoodGetMore: CrateServiceGetMore
+CrateEngineeringGyroscope: CrateSpaceGyroscope
+CrateEngineeringJetpack: CrateSpaceMiniJetpack
+CrateEngineeringMiniJetpack: CrateSpaceMiniJetpack
+CrateEngineeringShuttle: CrateSpaceShuttlePower
+CrateEngineeringThruster: CrateSpaceThruster

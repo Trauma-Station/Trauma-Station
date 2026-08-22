@@ -77,6 +77,6 @@ public sealed partial class HereticClothingSystem : EntitySystem
         if (_heretic.IsHereticOrGhoul(args.Wearer))
             return;
 
-        _popup.PopupClient(Loc.GetString("heretic-clothing-component-equip", ("item", ent)), args.Wearer, args.Wearer, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("heretic-clothing-component-equip", ("item", ent)), args.Wearer, args.Wearer, PopupType.MediumCaution);
     }
 }

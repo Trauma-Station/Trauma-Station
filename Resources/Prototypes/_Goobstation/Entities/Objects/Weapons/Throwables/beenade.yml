@@ -7,7 +7,7 @@
   description: Not the bees!!!
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Grenades/beenades.rsi
+    sprite: _Goobstation/Objects/Weapons/Grenades/beenade.rsi
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]

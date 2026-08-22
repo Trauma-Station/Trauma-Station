@@ -31,7 +31,7 @@ namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 public sealed partial class CosmicChantrySystem : EntitySystem
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
-    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
@@ -41,26 +41,16 @@ public sealed partial class CosmicChantrySystem : EntitySystem
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private NavMapSystem _navMap = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private EntityManager _entMan = default!;
 
     /// <summary>
     /// Mind role to add to colossi.
     /// </summary>
     public static readonly EntProtoId MindRole = "MindRoleCosmicColossus";
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg");
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicChantryComponent, DestructionEventArgs>(OnChantryDestroyed);
-        SubscribeLocalEvent<CosmicChantryComponent, CosmicChantryDoAfter>(OnDoAfter);
-        SubscribeLocalEvent<CosmicChantryVictimComponent, MindRemovedMessage>(OnMindLeftVictim);
-        SubscribeLocalEvent<CosmicChantryVictimComponent, MindAddedMessage>(OnMindAddedToVictim);
-    }
 
     public override void Update(float frameTime)
     {
@@ -75,7 +65,7 @@ public sealed partial class CosmicChantrySystem : EntitySystem
                 comp.SpawnTimer = _timing.CurTime + comp.SpawningTime;
                 var indicatedLocation = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, Transform(uid))));
                 _sound.PlayGlobalOnStation(uid, _audio.ResolveSound(comp.ChantryAlarm));
-                _chatSystem.DispatchStationAnnouncement(uid,
+                _chat.DispatchStationAnnouncement(uid,
                 Loc.GetString("cosmiccult-chantry-location", ("location", indicatedLocation)),
                 null, false, null,
                 Color.FromHex("#cae8e8"));
@@ -98,9 +88,9 @@ public sealed partial class CosmicChantrySystem : EntitySystem
 
                 if (!TryComp<BorgChassisComponent>(victim, out var borgComp) || borgComp.BrainEntity is not { } borgBrain) return;
                 var newBrain = Spawn(comp.Mindsink);
-                _containerSystem.EmptyContainer(borgComp.BrainContainer);
+                _container.EmptyContainer(borgComp.BrainContainer);
                 // fully replaced the brain with a mindsink
-                _containerSystem.Insert(newBrain, borgComp.BrainContainer);
+                _container.Insert(newBrain, borgComp.BrainContainer);
                 if (_mind.TryGetMind(victim, out var mindEnt, out _))
                     _mind.TransferTo(mindEnt, newBrain);
                 else
@@ -113,7 +103,7 @@ public sealed partial class CosmicChantrySystem : EntitySystem
                 _popup.PopupCoordinates(Loc.GetString("cosmiccult-chantry-powerup"), Transform(uid).Coordinates, PopupType.LargeCaution);
                 comp.Spawned = true;
 
-                var doAfterArgs = new DoAfterArgs(EntityManager, uid, comp.EventTime, new CosmicChantryDoAfter(), uid, victim)
+                var doAfterArgs = new DoAfterArgs(EntityManager, uid, comp.EventTime, new CosmicChantryDoAfterEvent(), uid, victim)
                 {
                     NeedHand = false,
                     BreakOnWeightlessMove = false,
@@ -125,22 +115,24 @@ public sealed partial class CosmicChantrySystem : EntitySystem
                 };
                 _doAfter.TryStartDoAfter(doAfterArgs);
             }
-            if (_entMan.IsQueuedForDeletion(uid))
-                _containerSystem.EmptyContainer(comp.Container); // Try prevent the borg from getting deleted because the event sometimes fails mysteriously.
+            if (TerminatingOrDeleted(uid))
+                _container.EmptyContainer(comp.Container); // Try prevent the borg from getting deleted because the event sometimes fails mysteriously.
         }
     }
 
-    private void OnDoAfter(Entity<CosmicChantryComponent> ent, ref CosmicChantryDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnDoAfter(Entity<CosmicChantryComponent> ent, ref CosmicChantryDoAfterEvent args)
     {
         ent.Comp.Completed = true;
         TransformVictim(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnChantryDestroyed(Entity<CosmicChantryComponent> ent, ref DestructionEventArgs args)
     {
-        _containerSystem.EmptyContainer(ent.Comp.Container);
+        _container.EmptyContainer(ent.Comp.Container);
         _sound.PlayGlobalOnStation(ent, _audio.ResolveSound(ent.Comp.ChantryDestructionAnnouncement));
-        _chatSystem.DispatchStationAnnouncement(ent,
+        _chat.DispatchStationAnnouncement(ent,
         Loc.GetString("cosmiccult-chantry-destruction"),
         null, false, null,
         Color.FromHex("#cae8e8"));
@@ -170,11 +162,11 @@ public sealed partial class CosmicChantrySystem : EntitySystem
         Spawn(ent.Comp.SpawnVFX, tgtpos);
         RemComp<CosmicChantryVictimComponent>(victim);
 
-        _containerSystem.EmptyContainer(ent.Comp.Container);
+        _container.EmptyContainer(ent.Comp.Container);
         if (TryComp<CosmicColossusComponent>(colossus, out var colossusComp))
         {
-            colossusComp.Container = _containerSystem.EnsureContainer<ContainerSlot>(colossus, colossusComp.ContainerId);
-            _containerSystem.Insert(victim, colossusComp.Container);
+            colossusComp.Container = _container.EnsureContainer<ContainerSlot>(colossus, colossusComp.ContainerId);
+            _container.Insert(victim, colossusComp.Container);
         }
 
         QueueDel(ent);
@@ -213,12 +205,16 @@ public sealed partial class CosmicChantrySystem : EntitySystem
         }
     }
 
-    private void OnMindLeftVictim(Entity<CosmicChantryVictimComponent> ent, ref MindRemovedMessage args) =>
+    [SubscribeLocalEvent]
+    private void OnMindLeftVictim(Entity<CosmicChantryVictimComponent> ent, ref MindRemovedMessage args)
+    {
         MakeVictimGhostRole(ent);
+    }
 
+    [SubscribeLocalEvent]
     private void OnMindAddedToVictim(Entity<CosmicChantryVictimComponent> ent, ref MindAddedMessage args)
     {
-        if (!ent.Comp.Chantry.Comp.Completed) return;
-        TransformVictim(ent.Comp.Chantry);
+        if (ent.Comp.Chantry.Comp.Completed)
+            TransformVictim(ent.Comp.Chantry);
     }
 }

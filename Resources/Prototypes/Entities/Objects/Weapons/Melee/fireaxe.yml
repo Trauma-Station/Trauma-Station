@@ -14,11 +14,13 @@
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: CosmicTransmutable
     transmuteTo: ScytheCosmicCult
+  - type: WeaponClass
+    class: Bludgeon # not really but you use it like one
+  - type: Sharp
   # </Trauma>
   - type: Tag
     tags:
     - FireAxe
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true # Trauma
@@ -48,6 +50,12 @@
         Slash: 10
         Structural: 40
   - type: Item
+    shape:
+    - 1,0,2,5
+    - 0,0,0,2
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/fireaxe.rsi
     size: Ginormous
   - type: Clothing
     sprite: Objects/Weapons/Melee/fireaxe.rsi
@@ -57,8 +65,11 @@
     - suitStorage
   - type: Tool
     qualities:
-      - Axing # Trauma
-      - Prying
+    - Axing # Trauma
+    - Prying
+    - Prying
+    - Slicing
+    - Sawing
   - type: ToolTileCompatible
   - type: Prying
   - type: UseDelay
@@ -80,21 +91,29 @@
   # <Trauma>
     damage:
       types:
-        Heat: 5
+        Blunt: 5 # Trauma, was heat
         Slash: 10
         Structural: 20
       woundSeverityMultipliers:
         Slash: 2.5
-        Heat: 2
+        Blunt: 2 # Trauma, was heat
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Heat: 10
+        # Heat: 10
         Slash: 10
-        Structural: 80
-  # <Trauma>
+        Structural: 40 # Trauma, was 80
+  # </Trauma>
+  - type: Item
+    shape:
+    - 1,0,2,5
+    - 0,0,0,2
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+    size: Ginormous
   - type: IgniteOnMeleeHit
-    fireStacks: 5 # Trauma - was 1
+    fireStacks: 2 # Trauma - was 1
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
     state: icon

@@ -20,7 +20,6 @@ public sealed partial class SetSelectorSystem : EntitySystem
     [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private EntityTableSystem _entityTable = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
@@ -69,7 +68,7 @@ public sealed partial class SetSelectorSystem : EntitySystem
 
         foreach (var setIndex in selector.Comp.SelectedSets)
         {
-            var set = _proto.Index(selector.Comp.AvailableSets[setIndex]);
+            var set = ProtoMan.Index(selector.Comp.AvailableSets[setIndex]);
 
             // Spawn guaranteed content
             spawnedEntities.AddRange(set.Content.Select(item => Spawn(item, coordinates)));
@@ -77,7 +76,7 @@ public sealed partial class SetSelectorSystem : EntitySystem
             // Spawn from entity tables
             foreach (var tableId in set.Tables)
             {
-                var tablePrototype = _proto.Index(tableId);
+                var tablePrototype = ProtoMan.Index(tableId);
                 var tableSpawns = _entityTable.GetSpawns(tablePrototype.Table);
                 spawnedEntities.AddRange(tableSpawns.Select(spawn => Spawn(spawn, coordinates)));
             }
@@ -136,7 +135,7 @@ public sealed partial class SetSelectorSystem : EntitySystem
 
         for (var i = 0; i < component.AvailableSets.Count; i++)
         {
-            var set = _proto.Index(component.AvailableSets[i]);
+            var set = ProtoMan.Index(component.AvailableSets[i]);
             var selected = component.SelectedSets.Contains(i);
             var info = new SelectableSetInfo(
                 set.Name,

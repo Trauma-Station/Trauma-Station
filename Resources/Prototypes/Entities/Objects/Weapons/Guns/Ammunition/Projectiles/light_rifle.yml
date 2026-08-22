@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 15 # Trauma, was 19
+        Ballistic: 15 # Trauma, was 19
 
 - type: entity
   parent: BaseBulletPractice
@@ -29,7 +29,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 11 # Trauma, was 14
+        Ballistic: 11 # Trauma, was 14
         # Heat: 5 # Trauma
 
 - type: entity
@@ -42,5 +42,5 @@
     damage:
       types:
         # Radiation: 10 # Trauma
-        Piercing: 11
+        Ballistic: 11
       armorPenetration: 0.5 # Trauma

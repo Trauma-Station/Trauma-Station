@@ -19,7 +19,7 @@ binds:
   key: Control
 - function: TargetingMod
   type: State
-  key: Shift
+  key: Alt
 # </Trauma>
 - function: UIClick
   type: State
@@ -517,7 +517,7 @@ binds:
   type: State
   key: F8
 - function: ToggleRoundEndSummaryWindow
-  type: Toggle
+  type: State
   key: F9
 - function: OpenSandboxWindow
   type: State

@@ -7,35 +7,25 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Server.Botany.Components;
 using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Server.Botany.Systems;
 
 public sealed partial class PlantAnalyzerSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAtmosphereSystem _atmos = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<PlantAnalyzerComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerSetMode>(OnModeSelected);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerSetGeneIndex>(OnGeneIterate);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerDeleteDatabankEntry>(OnDeleteDatabaseEntry);
-        SubscribeLocalEvent<PlantAnalyzerComponent, PlantAnalyzerRequestDefault>(OnRequestDefault);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<PlantAnalyzerComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Target is not { } target || !args.CanReach || ent.Comp.Busy || !IsValidTarget(target))
@@ -54,29 +44,32 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         ent.Comp.Busy = _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerDoAfterEvent args)
     {
         ent.Comp.Busy = false;
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
+        var user = args.User;
         if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
         {
-            ReadScannedPlant(ent, target);
+            ReadScannedPlant(ent, target, user);
         }
         else if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.DeleteMutations)
         {
-            DeleteMutations(ent, target);
+            DeleteMutations(ent, target, user);
         }
         else if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Extract)
         {
-            ExtractGene(ent, target);
+            ExtractGene(ent, target, user);
         }
         else if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
         {
-            InjectGene(ent, target);
+            InjectGene(ent, target, user);
         }
-        _ui.TryOpenUi(args.User, PlantAnalyzerUiKey.Key, ent);
+
+        _ui.TryOpenUi(ent.Owner, PlantAnalyzerUiKey.Key, user);
         args.Handled = true;
     }
 
@@ -88,32 +81,39 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         return HasComp<SeedComponent>(target);
     }
 
-    public void ExtractGene(Entity<PlantAnalyzerComponent> ent, EntityUid target)
+    public void ExtractGene(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
         if (ent.Comp.GeneIndex < 0)
             return;
+
+        var name = Name(target);
         if (TryComp<SeedComponent>(target, out var seedComp))
         {
             if (seedComp.Seed != null)
             {
                 // Copy genes to databank.
                 GetGeneFromInteger(ent, seedComp.Seed);
-                // Delete seed
-                Del(target);
             }
-            else if (seedComp.SeedId != null && _proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else if (seedComp.SeedId != null && ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 // Copy genes to databank.
                 GetGeneFromInteger(ent, protoSeed);
-                // Delete seed
-                Del(target);
             }
+            else
+            {
+                _popup.PopupEntity($"No genome detected in {name}", ent, user);
+                return;
+            }
+
+            Del(target);
         }
+
+        _popup.PopupEntity($"Extracted and isolated gene from {name}", ent, user);
         _audio.PlayPvs(ent.Comp.ExtractEndSound, ent);
         SendDatabase(ent);
     }
 
-    public void InjectGene(Entity<PlantAnalyzerComponent> ent, EntityUid target)
+    public void InjectGene(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
         if (!TryComp<SeedComponent>(target, out var seedComp) ||
             ent.Comp.DatabankIndex < 0 ||
@@ -127,56 +127,71 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
         else
         {
-            if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            if (seedComp.SeedId == null || !ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
                 return;
             seedComp.Seed = protoSeed.Clone();
             SetGeneFromInteger(ent, ref seedComp.Seed);
         }
 
+        _popup.PopupEntity($"Injected gene into {Name(target)}", ent, user);
         _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
         SendDatabase(ent);
     }
 
-    public void DeleteMutations(Entity<PlantAnalyzerComponent> ent, EntityUid target)
+    public void DeleteMutations(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
         if (!TryComp<SeedComponent>(target, out var seedComp))
             return;
 
-        if (seedComp.Seed != null)
+        var name = Name(target);
+        if (seedComp.Seed is { } data)
         {
-            seedComp.Seed.Mutations.Clear();
+            if (data.Mutations.Count == 0)
+            {
+                _popup.PopupEntity($"There are no mutations to clear from {name}.", ent, user);
+                return;
+            }
+
+            data.Mutations.Clear();
         }
         else
         {
-            if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            if (seedComp.SeedId == null || !ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
                 return;
+
             seedComp.Seed = protoSeed.Clone();
             seedComp.Seed.Mutations.Clear();
         }
 
+        _popup.PopupEntity($"Cleared mutations of {Name(target)}!", ent, user);
         _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
     }
-    public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target)  //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
+
+    public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
         if (TryComp<SeedComponent>(target, out var seedComp))
         {
+            var name = Name(target);
+            _popup.PopupEntity($"Scanned seed genome from {name}", ent, user);
             if (seedComp.Seed != null)
             {
                 var state = ObtainingGeneDataSeed(ent, seedComp.Seed, target, false);
-                _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);  //Funkystation - Swapped to set state instead of UI message
+                _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
             }
-            else if (seedComp.SeedId != null && _proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+            else if (seedComp.SeedId != null && ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
             {
                 var state = ObtainingGeneDataSeed(ent, protoSeed, target, false);
-                _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
+                _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
             }
         }
         else if (TryComp<PlantHolderComponent>(target, out var plantComp))
         {
-            if (plantComp.Seed != null)
+            if (plantComp.Seed is { } data)
             {
-                var state = ObtainingGeneDataSeed(ent, plantComp.Seed, target, true);
-                _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state); //Funkystation - Swapped to set state instead of UI message
+                var name = Loc.GetString(data.DisplayName);
+                _popup.PopupEntity($"Scanned plant genome from {name}", ent, user);
+                var state = ObtainingGeneDataSeed(ent, data, target, true);
+                _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
             }
         }
 
@@ -195,7 +210,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         ent.Comp.StoredMutationStrings.Clear();
         foreach (var mutationProto in mutationProtos)
         {
-            if (_proto.Resolve<SeedPrototype>(mutationProto, out var seed))
+            if (ProtoMan.Resolve<SeedPrototype>(mutationProto, out var seed))
             {
                 ent.Comp.StoredMutationStrings.Add(seed.DisplayName);
             }
@@ -257,6 +272,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         return plantGases;
     }
 
+    [SubscribeLocalEvent]
     private void OnModeSelected(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerSetMode args)
     {
         SetMode(ent, args.ScannerModes);
@@ -275,6 +291,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGeneIterate(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerSetGeneIndex args)
     {
         GeneIterate(ent, args.Index, args.IsDatabank);
@@ -319,6 +336,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     public void OnDeleteDatabaseEntry(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerDeleteDatabankEntry args)
     {
         int totalCount = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
@@ -365,15 +383,18 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         SendDatabase(ent);
     }
 
+    [SubscribeLocalEvent]
     public void OnRequestDefault(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerRequestDefault args)
     {
         var state = new PlantAnalyzerCurrentMode(ent.Comp.Settings.AnalyzerModes);
         _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, state);
     }
+
     public void SendDatabase(Entity<PlantAnalyzerComponent> ent)
     {
         _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
     }
+
     // This is some shit which is really fucking wack.
     public void GetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
     {

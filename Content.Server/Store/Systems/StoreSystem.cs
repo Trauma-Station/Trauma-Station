@@ -24,7 +24,6 @@ public sealed partial class StoreSystem : SharedStoreSystem
         InitializeUi();
         InitializeCommand();
         InitializeRefund();
-        InitializeTrauma(); // Trauma
     }
 
     private void OnMapInit(EntityUid uid, StoreComponent component, MapInitEvent args)

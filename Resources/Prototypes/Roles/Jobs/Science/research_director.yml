@@ -10,7 +10,6 @@
   - !type:DepartmentTimeRequirement
     department: Science
     time: 10h
-  weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
@@ -34,12 +33,16 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipResearchDirector
+    - SkillChipEchelonEducation
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
+      # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
+      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear

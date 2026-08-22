@@ -19,7 +19,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipCaptain # TODO: better chip
+    - SkillChipERT
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   # </Trauma>

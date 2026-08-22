@@ -5,11 +5,11 @@ using Content.Shared.FixedPoint;
 
 namespace Content.Medical.Shared.Traumas;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class BleedInflicterComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public bool IsBleeding = false;
+    [DataField, AutoNetworkedField]
+    public bool IsBleeding;
 
     /// <summary>
     ///     The severity it requires for the wound to have, so bleeds can be induced
@@ -17,10 +17,10 @@ public sealed partial class BleedInflicterComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 SeverityThreshold = FixedPoint2.Zero;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [ViewVariables]
     public FixedPoint2 BleedingAmount => BleedingAmountRaw * Scaling;
 
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 BleedingAmountRaw = FixedPoint2.Zero;
 
     // these are calculated when wound is spawned.
@@ -39,15 +39,15 @@ public sealed partial class BleedInflicterComponent : Component
     [DataField]
     public FixedPoint2 ScalingSpeed = FixedPoint2.New(1);
 
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 SeverityPenalty = FixedPoint2.New(1);
 
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 Scaling = FixedPoint2.New(1);
 
-    [DataField, ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 ScalingLimit = FixedPoint2.New(1.4);
 
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public Dictionary<string, (int Priority, bool CanBleed)> BleedingModifiers = new();
 }

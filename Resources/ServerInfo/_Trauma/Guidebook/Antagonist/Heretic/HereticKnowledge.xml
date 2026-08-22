@@ -89,12 +89,6 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Glass shard, Water tank</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a flask of eldritch essence, a potent healing mixture for heretics.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Rite of Stolen Faces</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Knife, Heart, Clown or Mime mask</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates an Envy's Knife, a weapon that allows you to steal the appearance of whoever you stab.</Box></ColorBox>
-
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Scorching Shark</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
@@ -111,19 +105,25 @@
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Mask, Stun Baton, Liver</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides flash immunity and eye protection. Instills great fear in heathens.</Box></ColorBox>
-
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Unfathomable Curio</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Utility belt, 3 Rods, Lungs</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides a lot of storage space and recharging shield.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides flash immunity and eye protection, instills great fear in heathens. Can be toggled to give night vision instead.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Eldritch Coin</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">1 Gold, 1 Silver</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Toggles door bolts or opens/closes doors when flipped.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mysteries of Creation</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Spear, cold temperature</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a glacial spear, a throwing weapon that shatters and freezes targets that it hits, can be freely recalled unless destroyed.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Unfathomable Curio</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Utility belt, 3 Rods, Lungs</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides a lot of storage space and recharging shield.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Carving Knife</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
@@ -149,12 +149,6 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Table, Water tank</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a mawed crucible; a cauldron that can brew potions, but must be refilled with body parts or organs.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mysteries of Creation</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a glacial spear, a throwing weapon that can freeze targets that it hits.</Box></ColorBox>
-
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Through the Boundary</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
@@ -178,6 +172,12 @@
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Wood plank, PDA, organ or limb</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a lionhunter's rifle, a weak ballistic gun that can be aimed at targets by right clicking them in Combat Mode, which causes projectile to be greatly empowered.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Rust Sower Grenade</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Grenade casing, rag, 2 trash</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates an eldritch rust grenade that spread smoke, obliterating silicons and blinding organics caught in it.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Crimson Cleave</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>
@@ -208,5 +208,17 @@
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Five Glass sheets, Jumpsuit, Lungs</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a maid in the mirror, a dangerous creature that can freeze targets it hits and go incorporeal.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Sharp Medal</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">2 hands, eyes, knife</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Amulet that gives focus and allows you to throw your blades like boomerangs.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Ashen Ritual</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Bonfire, book</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons ash spirit, a powerful summon with long range jaunt and deadly solar beam attack.</Box></ColorBox>
   </Table>
 </Document>

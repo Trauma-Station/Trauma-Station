@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
@@ -9,7 +10,7 @@ public sealed partial class BoxEntityShape : EntityShape
     [DataField]
     public bool Hollow;
 
-    protected override List<Vector2> GetShapeImplementation(System.Random rand, IPrototypeManager proto)
+    protected override List<Vector2> GetShapeImplementation(IRobustRandom rand, IPrototypeManager proto)
     {
         return ShapeHelpers.MakeBox(Offset, Size, Hollow, StepSize).ToList();
     }

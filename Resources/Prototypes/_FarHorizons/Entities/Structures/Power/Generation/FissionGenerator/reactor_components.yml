@@ -1,0 +1,510 @@
+# All masses for calculations should be based on the density*volume of the lathe recipe, not the recycled material yield.
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseReactorPart
+  components:
+  - type: ReactorPart
+  - type: Sprite
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
+    layers:
+    - state: default_rod
+      map: ["enum.NuclearPropertiesVisuals.Layer"]
+  - type: Item
+    size: Huge
+  - type: MultiHandedItem
+  - type: Tag
+    tags:
+    - ReactorPart
+  - type: GuideHelp
+    guides:
+    - NuclearReactor
+    - Power
+
+## Fuel Rods ##
+
+- type: entity
+  abstract: true
+  parent: [ BaseReactorPart, BaseEngineeringContraband ]
+  id: BaseReactorFuelRod
+  name: fuel rod
+  description: A fuel rod for a nuclear reactor.
+  components:
+  - type: ReactorPart
+    iconStateInserted: "fuel"
+    iconStateCap: "fuel_cap"
+    neutronCrossSection: -1 # starts with control rods fully inserted
+    thermalCrossSection: 10
+    # every rod has 3.95 kg of steel @ 420 J/kgK
+    # add the fissile material's capacity to this
+    thermalMass: 1659
+  - type: ReactorFuelRod
+  - type: ReactorControlRod # control rods are built in to the fuel rod assembly
+  - type: Edible # Blame Abby for making them edible
+    transferAmount: null
+    delay: 30
+    forceFeedDelay: 60
+  - type: FlavorProfile
+    flavors:
+    - metallic
+    - electrons
+  - type: BadFood
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 1000
+      canReact: false
+      reagents:
+      - ReagentId: Uranium
+        Quantity: 800
+      - ReagentId: Radium
+        Quantity: 200
+  - type: SentienceTarget
+    flavorKind: station-event-random-sentience-flavor-inanimate
+    weight: 0.2
+
+- type: entity
+  parent: [ BaseReactorFuelRod, BaseNuclearPropertiesCerenkite ]
+  id: CerenkiteReactorFuelRod
+  name: cerenkite fuel rod # These are your basic, semi-harmless fuel rods
+  components:
+  - type: ReactorPart
+    thermalMass: 2320 # assuming its the same as uranium, funny made up material
+
+- type: entity
+  parent: [ BaseReactorFuelRod, BaseNuclearPropertiesUranium ]
+  id: UraniumReactorFuelRod
+  name: uranium fuel rod
+  components:
+  - type: ReactorPart
+    # 5.7 kg of uranium @ 116 J/kgK -> +661 J/K
+    thermalMass: 2320
+
+- type: entity
+  parent: [ BaseReactorFuelRod, BaseNuclearPropertiesPlutonium ]
+  id: PlutoniumReactorFuelRod
+  name: plutonium fuel rod
+  components:
+  - type: ReactorPart
+    # 5.96 kg of plutonium @ 146 J/kgK -> +869 J/K
+    thermalMass: 2528
+  - type: SentienceTarget
+    weight: 2
+
+- type: entity
+  parent: [ BaseReactorFuelRod, BaseNuclearPropertiesBananium ]
+  id: BananiumReactorFuelRod
+  name: bananium fuel rod
+  description: A honk rod for a nuclear reactor.
+  components:
+  - type: ReactorPart
+    # half uranium half biomass (assumed 2kJ/kgK and 1.5kg/L)
+    # 2.85 kg of uranium -> 330 J/K
+    # 0.23 kg of biomass -> 450 J/K
+    thermalMass: 2439
+
+- type: entity
+  parent: [ BaseReactorFuelRod, BaseNuclearPropertiesPlasma ]
+  id: PlasmaReactorFuelRod
+  name: phoron fuel rod
+  components:
+  - type: ReactorPart
+    # assume phoron is 1.4kJ/kgK and 3kg/L
+    # 0.45 kg of phoron -> 630 J/K
+    thermalMass: 2289
+
+- type: entity
+  parent: [ BaseReactorFuelRod, BaseNuclearPropertiesUraniumGlass ]
+  id: UraniumGlassReactorFuelRod
+  name: uranium glass fuel rod
+  components:
+  - type: ReactorPart
+    # half uranium half silica glass (750J/kgK and 2.2kg/L)
+    # 2.85 kg of uranium -> 330 J/K
+    # 0.33 kg of glass -> 248 J/K
+    thermalMass: 2237
+
+## Reflectors ##
+
+- type: entity
+  abstract: true
+  parent: BaseReactorPart
+  id: BaseReactorReflector
+  name: neutron reflector
+  description: A neutron reflector assembly for a nuclear reactor.
+  components:
+  - type: ReactorPart
+    iconStateInserted: reflector
+    iconStateCap: reflector_cap
+    # 4 kg of steel
+    thermalMass: 1680
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+
+- type: entity
+  parent: [ BaseReactorReflector, BaseNuclearPropertiesBohrum ]
+  id: BohrumReactorReflector
+  name: bohrum neutron reflector # what the crew starts with
+  components:
+  - type: ReactorPart
+    neutronCrossSection: 0.2 # decent
+    reflectChance: 0.8
+    # 6 kg of steel -> 2520 J/K
+    # 0.75 kg of phoron -> 1040 J/K
+    thermalMass: 5250
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 500
+      Plasteel: 250
+
+- type: entity
+  parent: [ BaseReactorReflector, BaseNuclearPropertiesSteel ]
+  id: SteelReactorReflector
+  name: steel neutron reflector
+  components:
+  - type: ReactorPart
+    neutronCrossSection: 0.3 # meh
+    reflectChance: 0.65
+    # 8 kg of steel -> 3360 J/K
+    thermalMass: 5040
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 750
+
+- type: entity
+  parent: [ BaseReactorReflector, BaseNuclearPropertiesGold ]
+  id: GoldReactorReflector
+  name: gold neutron reflector
+  components:
+  - type: ReactorPart
+    neutronCrossSection: 0.6 # not great
+    reflectChance: 0.4
+    # 19 kg of gold -> 2488 J/K
+    thermalMass: 4168
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Gold: 500
+
+- type: entity
+  parent: [ BaseReactorReflector, BaseNuclearPropertiesSilver ]
+  id: SilverReactorReflector
+  name: silver neutron reflector
+  components:
+  - type: ReactorPart
+    neutronCrossSection: 0.7 # bad
+    reflectChance: 0.2
+    # 10.5 kg of silver @ 235 J/kgK -> 2468 J/K
+    thermalMass: 4148
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Gold: 500
+
+- type: entity
+  parent: [ BaseReactorReflector, BaseNuclearPropertiesGraphite ]
+  id: GraphiteReactorReflector
+  name: graphite neutron reflector
+  components:
+  - type: ReactorPart
+    neutronCrossSection: 0.007 # the best
+    reflectChance: 0.997
+    # 2.1 kg of graphite @ 710 J/kgK -> 1491 J/K
+    thermalMass: 3171
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Coal: 500 # gem
+
+# TODO: beryllium and lead if someone makes it
+
+# Gas Channel Rods
+- type: entity
+  abstract: true
+  parent: BaseReactorPart
+  id: BaseReactorGasChannel
+  name: gas channel rod
+  description: A gas channel for a nuclear reactor.
+  components:
+  - type: ReactorPart
+    iconStateInserted: "gas"
+    iconStateCap: "gas_cap"
+    thermalCrossSection: 15
+    # 4 kg of steel -> 1680 J/K added to every rod
+    thermalMass: 1680
+  - type: ReactorGasChannel
+    gasVolume: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesSteel ]
+  id: SteelReactorGasChannel
+  name: steel gas channel rod
+  components:
+  - type: ReactorPart
+    # 8 kg of steel -> 3360 J/K
+    thermalMass: 5040
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 500
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesGold ]
+  id: GoldReactorGasChannel
+  name: gold gas channel rod
+  components:
+  - type: ReactorPart
+    # 19 kg of gold @ 129 J/kgK -> 2488 J/K
+    thermalMass: 4168
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Gold: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesSilver ]
+  id: SilverReactorGasChannel
+  name: silver gas channel rod
+  components:
+  - type: ReactorPart
+    # 10.5 kg of silver @ 235 J/kgK -> 2468 J/K
+    thermalMass: 4148
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Silver: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesBrass ]
+  id: BrassReactorGasChannel
+  name: brass gas channel rod
+  components:
+  - type: ReactorPart
+    # 8.5 kg of brass @ 377 J/kgK -> 3204 J/K
+    thermalMass: 4884
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Brass: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesPlasteel ]
+  id: PlasteelReactorGasChannel
+  name: plasteel gas channel rod
+  components:
+  - type: ReactorPart
+    # plasteel is half phoron half steel by volume
+    # 4 kg of steel -> 1680 J/K
+    # 1.5 kg of phoron -> 2100 J/K
+    thermalMass: 5460
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Plasteel: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesGlass ]
+  id: GlassReactorGasChannel
+  name: glass gas channel rod
+  components:
+  - type: ReactorPart
+    # silica glass (750J/kgK and 2.2kg/L)
+    # 2.2 kg of glass -> 1650 J/K
+    thermalMass: 3330
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Glass: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesPlasmaGlass ]
+  id: PlasmaGlassReactorGasChannel
+  name: phoron glass gas channel rod
+  components:
+  - type: ReactorPart
+    # half phoron half glass by volume
+    # 1.5 kg of phoron -> 2100 J/K
+    # 1.1 kg of glass -> 825 J/K
+    thermalMass: 4605
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      PlasmaGlass: 250
+
+- type: entity
+  parent: [ BaseReactorGasChannel, BaseNuclearPropertiesDiamond ]
+  id: DiamondReactorGasChannel
+  name: diamond gas channel rod
+  components:
+  - type: ReactorPart
+    # pure diamond is 3.52 kg/L and 509 J/kgK
+    # 3.52 kg of diamond -> 1792 J/K
+    thermalMass: 3472
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Diamond: 250
+
+# Heat Exchanger Rods
+- type: entity
+  abstract: true
+  parent: BaseReactorPart
+  id: BaseReactorHeatExchanger
+  name: heat exchanger rod
+  description: A heat exchanger for a nuclear reactor.
+  components:
+  - type: ReactorPart
+    iconStateInserted: "heat"
+    iconStateCap: "heat_cap"
+    neutronCrossSection: 0.1
+    thermalCrossSection: 25
+    # 4 kg of steel base
+    thermalMass: 1680
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesSteel ]
+  id: SteelReactorHeatExchanger
+  name: steel heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 6 kg of steel -> 2520 J/K
+    thermalMass: 4200
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 625
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesGold ]
+  id: GoldReactorHeatExchanger
+  name: gold heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 14.25 kg of gold -> 1838 J/K
+    thermalMass: 3518
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Gold: 275
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesSilver ]
+  id: SilverReactorHeatExchanger
+  name: silver heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 7.9 kg of silver -> 1851 J/K
+    thermalMass: 3531
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Silver: 275
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesBrass ]
+  id: BrassReactorHeatExchanger
+  name: brass heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 6.4 kg of brass @ 377 J/kgK -> 2404 J/K
+    thermalMass: 4084
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Brass: 275
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesPlasteel ]
+  id: PlasteelReactorHeatExchanger
+  name: plasteel heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 3 kg of steel -> 1244 J/K
+    # 1.1 kg of phoron -> 1540 J/K
+    thermalMass: 4464
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Plasteel: 275
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesGlass ]
+  id: GlassReactorHeatExchanger
+  name: glass heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 1.65 kg of glass -> 1238 J/K
+    thermalMass: 2918
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Glass: 275
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesPlasmaGlass ]
+  id: PlasmaGlassReactorHeatExchanger
+  name: phoron glass heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 0.8 kg of glass -> 619 J/K
+    # 1.1 kg of phoron -> 1540 J/K
+    thermalMass: 3839
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      PlasmaGlass: 275
+
+- type: entity
+  parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesDiamond ]
+  id: DiamondReactorHeatExchanger
+  name: diamond heat exchanger rod
+  components:
+  - type: ReactorPart
+    # 2.64 kg of diamond -> 1344 J/K
+    thermalMass: 3024
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Diamond: 275
+
+# Parts to chose from for a random prefab
+- type: weightedRandom
+  id: NuclearReactorRandomParts
+  weights:
+    # Fuel rods (0.125 total)
+    CerenkiteReactorFuelRod: 0.0625
+    UraniumReactorFuelRod: 0.03125
+    PlutoniumReactorFuelRod: 0.0015625
+    BananiumReactorFuelRod: 0.00625
+    PlasmaReactorFuelRod: 0.015625
+    UraniumGlassReactorFuelRod: 0.0078125
+    # Reflectors (5 total)
+    BohrumReactorReflector: 2.125
+    SteelReactorReflector: 2.375
+    GoldReactorReflector: 0.125
+    SilverReactorReflector: 0.25
+    GraphiteReactorReflector: 0.125
+    # Gas channels (40 total)
+    SteelReactorGasChannel: 20
+    GoldReactorGasChannel: 1
+    SilverReactorGasChannel: 2
+    BrassReactorGasChannel: 4
+    PlasteelReactorGasChannel: 6
+    GlassReactorGasChannel: 4
+    PlasmaGlassReactorGasChannel: 2
+    DiamondReactorGasChannel: 1
+    # Heat exchangers (40 total)
+    SteelReactorHeatExchanger: 20
+    GoldReactorHeatExchanger: 1
+    SilverReactorHeatExchanger: 2
+    BrassReactorHeatExchanger: 4
+    PlasteelReactorHeatExchanger: 6
+    GlassReactorHeatExchanger: 4
+    PlasmaGlassReactorHeatExchanger: 2
+    DiamondReactorHeatExchanger: 1

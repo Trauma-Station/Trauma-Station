@@ -254,7 +254,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
 
         var msg = Loc.GetString("logic-gate-cycle", ("gate", ent.Comp.Gate.ToString().ToUpper()));
-        _popup.PopupClient(msg, ent, args.User);
+        _popup.PopupEntity(msg, ent, args.User);
     }
 
     private void OnCombinedExamined(Entity<CombinedFilterComponent> ent, ref ExaminedEvent args)

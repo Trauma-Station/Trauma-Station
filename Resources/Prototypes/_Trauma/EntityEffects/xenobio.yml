@@ -9,47 +9,69 @@
     guidebookText: entity-effect-guidebook-remove-reactive
     components:
     - type: Reactive # prevent double dipping if it somehow reacts again in the same tick
-  - !type:Delete
-    queued: true # needs to still exist for most effects to work properly
   - !type:PlaySoundEffect
     sound: /Audio/Effects/Chemistry/bubbles.ogg
+
+- type: entityEffect
+  id: XenobioExtractDelete
+  effects:
+  - &base
+    !type:NestedEffect
+    proto: XenobioExtractBase
+  - !type:Delete
+    queued: true # needs to still exist for most effects to work properly
 
 - type: entityEffect
   id: XenobioExtractEvil
   effects:
-  - !type:NestedEffect
-    proto: XenobioExtractBase
-  - !type:PopupMessage
+  - &delete
+    !type:NestedEffect
+    proto: XenobioExtractDelete
+  - &evil_popup
+    !type:PopupMessage
     type: Pvs
     messages: [ "xeno-extract-reaction-evil" ]
 
 - type: entityEffect
+  id: XenobioExtractEvilBase
+  effects:
+  - *base
+  - *evil_popup
+
+- type: entityEffect
   id: XenobioExtractFail
   effects:
-  - !type:NestedEffect
-    proto: XenobioExtractBase
-  - !type:PopupMessage
+  - *delete
+  - &fail_popup
+    !type:PopupMessage
     type: Pvs
     messages: [ "xeno-extract-reaction-fail" ]
 
 - type: entityEffect
+  id: XenobioExtractFailBase
+  effects:
+  - *base
+  - *fail_popup
+
+- type: entityEffect
   id: XenobioExtractReaction
   effects:
-  - !type:NestedEffect
-    proto: XenobioExtractBase
-  - !type:PopupMessage
+  - *delete
+  - &reaction_popup
+    !type:PopupMessage
     type: Pvs
     messages: [ "xeno-extract-reaction" ]
 
 - type: entityEffect
+  id: XenobioExtractReactionBase
+  effects:
+  - *base
+  - *reaction_popup
+
+- type: entityEffect
   id: XenobioExtractReagent
   effects:
-  - !type:RemoveComponents
-    guidebookText: entity-effect-guidebook-remove-reactive
-    components:
-    - type: Reactive # prevent double dipping if it somehow reacts again in the same tick
-  - !type:PlaySoundEffect
-    sound: /Audio/Effects/Chemistry/bubbles.ogg
+  - *base
   - !type:AddTag
     tag: Trash
     guidebookText: entity-effect-guidebook-add-trash-tag

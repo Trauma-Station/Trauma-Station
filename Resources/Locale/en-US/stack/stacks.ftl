@@ -7,11 +7,13 @@ stack-plastic = plastic
 stack-silver = silver
 stack-gold = gold
 stack-reinforced-glass = reinforced glass
-stack-plasma-glass = plasma glass
+# Trauma - plasma -> phoron
+stack-plasma-glass = glass-phoron
 stack-uranium = uranium
 stack-uranium-glass = uranium glass
 stack-clockwork-glass = clockwork glass
-stack-reinforced-plasma-glass = reinforced plasma glass
+# Trauma - plasma -> phoron
+stack-reinforced-plasma-glass = reinforced glass-phoron
 stack-reinforced-uranium-glass = reinforced uranium glass
 stack-gunpowder = gunpowder
 stack-cardboard = cardboard
@@ -104,7 +106,8 @@ stack-rolling-paper = rolling {$amount ->
 
 stack-fulton = fulton
 stack-credit = speso
-stack-plasma = plasma
+# Trauma - plasma -> phoron
+stack-plasma = phoron
 stack-biomass = biomass
 stack-pyrotton = pyrotton
 stack-sharkminnow-tooth = sharkminnow tooth
@@ -113,7 +116,8 @@ stack-telecrystal = telecrystal
 stack-gold-ore = gold ore
 stack-rough-diamond = rough diamond
 stack-iron-ore = iron ore
-stack-plasma-ore = plasma ore
+# Trauma - plasma -> phoron
+stack-plasma-ore = phoron ore
 stack-silver-ore = silver ore
 stack-space-quartz = space quartz
 stack-uranium-ore = uranium ore

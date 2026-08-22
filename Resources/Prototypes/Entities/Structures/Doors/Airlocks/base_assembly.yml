@@ -58,6 +58,9 @@
           collection: MetalSlam
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: Tag
+    tags:
+    - AirlockAssembly
     # </Trauma>
   - type: Construction
     graph: Airlock

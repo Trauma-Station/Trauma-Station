@@ -59,5 +59,5 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     /// The time between skipping bounties.
     /// </summary>
     [DataField]
-    public TimeSpan SkipDelay = TimeSpan.FromMinutes(15);
+    public TimeSpan SkipDelay = TimeSpan.FromMinutes(3); // Trauma - Changed this from 15 to 3.
 }

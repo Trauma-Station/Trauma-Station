@@ -16,6 +16,12 @@ public sealed partial class TraumaInflicterComponent : Component
     public FixedPoint2 SeverityThreshold = 9f;
 
     /// <summary>
+    /// If wound severity difference pre and post wound inflicting is less then this, traumas won't be applied
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 MinTraumaSeverityDelta = 10f;
+
+    /// <summary>
     /// The container where all the traumas are stored
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]

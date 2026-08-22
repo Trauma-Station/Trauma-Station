@@ -88,6 +88,10 @@
     graph: GasMaskHalf
     node: end
     deconstructionTarget: null
+  - type: Item
+    size: Tiny
+  - type: ViewconeModifier
+    angleModifier: 1.0
 
 - type: entity # TODO: Whenever vampirism is ported, make this block it.
   parent: ClothingMaskBase
@@ -104,8 +108,8 @@
     equipDelay: 3
     unequipDelay: 10
   - type: IngestionBlocker
-  - type: AddAccentClothing
-    accent: MumbleAccent
+  - type: MumbleAccent
+    relayAccent: true
   - type: Tag
     tags:
     - Muzzle

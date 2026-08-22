@@ -112,6 +112,10 @@
   color: "#8a9a5b"
   recognizable: true
   physicalDesc: reagent-physical-desc-fuzzy
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   metabolisms:
     Bloodstream:
       effects:
@@ -146,6 +150,10 @@
   color: "#a1000b"
   boilingPoint: 78.2 # This isn't a real chemical...
   meltingPoint: -19.4
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: 20
@@ -161,7 +169,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.5
+            Caustic: 1 # Trauma - Was 0.5
       - !type:Emote
         emote: Scream
         probability: 0.3
@@ -213,6 +221,10 @@
   color: "#00ff5f" # Trauma
   boilingPoint: 165
   meltingPoint: -87
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
@@ -221,7 +233,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.3
+            Caustic: 0.75 # Trauma - Was 0.3
       - !type:Emote
         emote: Scream
         probability: 0.2
@@ -255,6 +267,10 @@
   recognizable: true
   boilingPoint: 337.0
   meltingPoint: 10.31
+  # <Trauma>
+  tileReactions:
+  - !type:SpillTileReaction
+  # </Trauma>
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: 10
@@ -270,7 +286,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.1
+            Caustic: 0.3 # Trauma - Was 0.1
       - !type:Emote
         emote: Scream
         probability: 0.1
@@ -517,7 +533,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant ] # Trauma - Plant
+          type: [ Animal, Vox, Plant, Bloodsucker ] # Trauma - Plant
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -527,15 +543,27 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant ]
+          type: [ Animal, Vox, Plant, Bloodsucker ] # Trauma, Bloodsucker
           inverted: true
+      - !type:InfectDisease
+        probability: 0.05
+        scaleProbability: false
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Rat, Vox, Bloodsucker ] # Trauma, Bloodsucker
+          inverted: true
+        - !type:ReagentCondition
+          reagent: UncookedAnimalProteins
+          min: 0.01
+        disease: DiseaseGutWorms
+        mutate: false
     Bloodstream:
     # </Trauma>
       effects:
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant ]
+          type: [ Animal, Vox, Plant, Arachnid ]  # Trauma, Arachnid
           inverted: true
         damage:
           types:
@@ -618,7 +646,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Honk
-          min: 30
+          min: 50
       - !type:Emote
         emote: Honk
         showInChat: true

@@ -1,7 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Shared.ManifestListings;
-using Content.Goobstation.Shared.NTR;
-using Content.Goobstation.Shared.NTR.Events;
 using Content.Trauma.Common.Wizard;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
@@ -9,13 +7,13 @@ using Robust.Shared.Prototypes;
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
+using Content.Shared.Mindshield;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
 using Content.Shared.Actions;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Mindshield.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
@@ -37,6 +35,7 @@ public sealed partial class StoreSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private StackSystem _stack = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
 
     private void InitializeUi()
     {
@@ -130,20 +129,20 @@ public sealed partial class StoreSystem
                 return;
             }
         }
-        if (HasComp<NtrClientAccountComponent>(uid))
-            RaiseLocalEvent(uid, new NtrListingPurchaseEvent(cost.First().Value));
-        OnPurchase(listing); // Goob edit - ntr shittery
 
-        // Goobstation start
+        // <Trauma>
+        OnPurchase(listing);
         if (Mind.TryGetMind(buyer, out var mindId, out _))
         {
             var ev = new ListingPurchasedEvent(buyer, uid, listing);
             RaiseLocalEvent(mindId, ref ev);
         }
-        // Goobstation end
+        // </Trauma>
 
-        // if (!IsOnStartingMap(uid, component)) // Goob edit
-        //    DisableRefund(uid, component);
+        /* Trauma
+        if (!IsOnStartingMap(uid, component))
+            DisableRefund(uid, component);
+        */
 
         //subtract the cash
         foreach (var (currency, amount) in cost)
@@ -279,7 +278,8 @@ public sealed partial class StoreSystem
             logImpact = LogImpact.High;
             logExtraInfo = ", but was not from an expected faction";
 
-            if (HasComp<MindShieldComponent>(buyer))
+            _mindShield.GetMindshieldStatus(buyer, out var isMindshielded, out _);
+            if (isMindshielded)
             {
                 logImpact = LogImpact.Extreme;
                 logExtraInfo += " while also possessing a mindshield";
@@ -288,7 +288,7 @@ public sealed partial class StoreSystem
 
         _admin.Add(LogType.StorePurchase,
             logImpact,
-            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, Proto)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
+            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, ProtoMan)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
 
         listing.PurchaseAmount++; //track how many times something has been purchased
         if (msg.SoundSource != null && GetEntity(msg.SoundSource) != null)
@@ -319,7 +319,7 @@ public sealed partial class StoreSystem
     /// This would need to be done should a currency with decimal values need to use it.
     /// not quite sure how to handle that
     /// </remarks>
-    public void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
+    private void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
     {
         if (msg.Amount <= 0)
             return;
@@ -329,7 +329,7 @@ public sealed partial class StoreSystem
             return;
 
         //make sure a malicious client didn't send us random shit
-        if (!Proto.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
+        if (!ProtoMan.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
             return;
 
         //we need an actually valid entity to spawn. This check has been done earlier, but just in case.
@@ -356,7 +356,7 @@ public sealed partial class StoreSystem
         UpdateUserInterface(buyer, uid, component);
     }
 
-    public void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
+    private void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
     {
         // TODO: Remove guardian/holopara
 
@@ -434,7 +434,7 @@ public sealed partial class StoreSystem
                     refundComp.Data == null || refundComp.StoreEntity != uid || refundComp.Data.DisableRefund)
                     continue;
 
-                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, Proto);
+                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, ProtoMan);
                 listings.Add(new RefundListingData(GetNetEntity(bought), name));
             }
 

@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: sinkPort
+  id: Control
+  name: signal-port-name-control
+  description: signal-port-description-control
+
 # Circuits
 
 - type: sinkPort
@@ -41,3 +46,22 @@
   id: Circuit8
   name: signal-port-name-circuit-8
   description: signal-port-description-circuit-input
+
+# Lathe
+
+- type: sinkPort
+  id: LatheSetRecipe
+  name: signal-port-name-lathe-set-recipe
+  description: signal-port-description-lathe-set-recipe
+
+- type: sinkPort
+  id: LatheQuantity
+  name: signal-port-name-lathe-quantity
+  description: signal-port-description-lathe-quantity
+
+# Signal Screen
+
+- type: sinkPort
+  id: Text
+  name: signal-port-name-text
+  description: signal-port-description-text

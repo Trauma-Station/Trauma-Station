@@ -67,14 +67,14 @@ public sealed partial class MutatorSystem : EntitySystem
     {
         if (ent.Comp.Mutations.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("mutator-depleted"), user, user);
+            _popup.PopupEntity(Loc.GetString("mutator-depleted"), user, user);
             return;
         }
 
         var targetName = Identity.Name(target, EntityManager);
         if (!_mutation.CanMutate(target))
         {
-            _popup.PopupClient(Loc.GetString("mutator-cant-mutate", ("target", targetName)), user, user);
+            _popup.PopupEntity(Loc.GetString("mutator-cant-mutate", ("target", targetName)), user, user);
             return;
         }
 
@@ -99,7 +99,7 @@ public sealed partial class MutatorSystem : EntitySystem
         var userName = Identity.Name(user, EntityManager);
         var you = Loc.GetString("mutator-mutating-you", ("user", userName), ("item", ent));
         var others = Loc.GetString("mutator-mutating-others", ("user", userName), ("target", targetName), ("item", ent));
-        _popup.PopupPredicted(you, others, ent, target);
+        _popup.PopupEntity(you, others, ent, target);
     }
 
     private void OnDoAfter(Entity<MutatorComponent> ent, ref MutatorDoAfterEvent args)

@@ -13,7 +13,6 @@ namespace Content.Shared.Damage.Systems;
 public sealed partial class DamageExamineSystem : EntitySystem
 {
     [Dependency] private ExamineSystemShared _examine = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -76,7 +75,11 @@ public sealed partial class DamageExamineSystem : EntitySystem
             if (damage.Value != FixedPoint2.Zero)
             {
                 msg.PushNewline();
-                msg.AddMarkupOrThrow(Loc.GetString("damage-value", ("type", _prototype.Index<DamageTypePrototype>(damage.Key).LocalizedName), ("amount", damage.Value)));
+                // <Trauma> - round down to 1 decimal, its fixedpoint2 so remove 1 place's info
+                var rounded = damage.Value / 10;
+                rounded *= 10;
+                msg.AddMarkupOrThrow(Loc.GetString("damage-value", ("type", ProtoMan.Index<DamageTypePrototype>(damage.Key).LocalizedName), ("amount", rounded)));
+                // </Trauma>
             }
         }
 
