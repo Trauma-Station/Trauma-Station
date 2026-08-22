@@ -28,7 +28,7 @@
   id: DClassGear
   equipment:
     #Todo: get a sprite for and make D-Class PDA, prisoner themed. The ID itself already exists.
-    id: PassengerPDA
+    id: DClassPDA
     ears: ClothingHeadsetGrey
 
 - type: chameleonOutfit
