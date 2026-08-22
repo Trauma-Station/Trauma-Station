@@ -104,5 +104,6 @@ public sealed partial class DamageSpecifier
     {
         None = 0,
         PreciseHit = 1 << 0,
+        MartialArtCombo = 1 << 1,
     }
 }

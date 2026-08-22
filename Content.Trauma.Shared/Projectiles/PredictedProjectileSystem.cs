@@ -53,7 +53,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         if (args.OurFixtureId != SharedProjectileSystem.ProjectileFixture || !args.OtherFixture.Hard)
             return;
 
-        DoHit((uid, component, args.OurBody), args.OtherEntity, args.OtherFixture);
+        DoHit((uid, component, args.OurBody), args.OtherEntity);
     }
 
     [SubscribeLocalEvent]
@@ -73,10 +73,10 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
     {
         if (!_query.TryComp(uid, out var comp) ||
             !_physicsQuery.TryComp(uid, out var physics) ||
-            FindHardFixture(target) is not { } otherFixture)
+            FindHardFixture(target) != null)
             return;
 
-        DoHit((uid, comp, physics), target, otherFixture);
+        DoHit((uid, comp, physics), target);
     }
 
     private Fixture? FindHardFixture(EntityUid uid)
@@ -96,7 +96,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
     /// <summary>
     /// Process a hit for a projectile and a target entity.
     /// </summary>
-    public void DoHit(Entity<ProjectileComponent, PhysicsComponent> ent, EntityUid target, Fixture otherFixture)
+    public void DoHit(Entity<ProjectileComponent, PhysicsComponent> ent, EntityUid target)
     {
         var (uid, comp, ourBody) = ent;
         if (comp is { Weapon: null, OnlyCollideWhenShot: true })

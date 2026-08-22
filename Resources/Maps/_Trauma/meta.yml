@@ -4,8 +4,8 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/05/2026 17:29:00
-  entityCount: 28098
+  time: 08/20/2026 17:30:40
+  entityCount: 28099
 maps:
 - 1
 grids:
@@ -490,7 +490,7 @@ entities:
     - type: Fixtures
       fixtures: {}
     - type: AreaGrid
-      lastMapping: 100
+      lastMapping: 104
       chunks:
         2,-1:
           data: AgICAgICAgIYGBgYGBgYGAICAgICAgICGBgYGBgYGBgCAgICAgQEBAQEBBgYGBgYAgICAgIEBAQEBAQYGAYGBgMDAwMDBAQEBAQEGBgGBgYDAwMDAwQEBAQEBBgYBgYGAwMDAwMEBAQEBAQYMjIyMgMDAwMDBAQEBAQEGDIyMjIDAQAEBAQEBAQEBBgyMjIyAwEABAQEBAQYGBgYMjIyMgABAAQEBAQEGBgYGDIyMjIBAQAEBAQEBBgzMzMyMjIyAQEABAQEBAQYMzMzMwcHBwEBAQQEBAQEGDMzMzMHBwcBBQUFBQUFBBgzMzMzBwcHAQUFBQUFBRgYMzMzMwcHBw==
@@ -505,17 +505,17 @@ entities:
         -2,0:
           data: BwcHBwcHBwcHCwsLGxsbGw4ODg8PDw8PDwsLCxsbGxsODg4PDw8PDw8LCwsMDAwMDg4ODw8PDw8PCwsLDAwMDA4ODg8PDw8PDwsLCwwMDAwODg4PDw8PDw8LCwsMDAwMDg4ODw8PDw8PCwsLDAwMDA4ODg8PDw8PDwsLCwwMDAwODg4PDw8PDw8LCwsLCwsLDg4OEBAPDw8PCwsLCwsLCxAQEBAQGBgYGAsLCwsLCwsQEBAQEBgNDQ0NDQ0NDQ0NEBAQEBAYDQ0NDQ0NDQ0NDRERERERGA0NDQ0NDQ0NDQ0RERERERgNDQ0NDQ0NDQ0NEREREREYDQ0NDQ0NDQ0NDQ==
         -1,0:
-          data: BQUFGxsbAAAAAAAAAAAAAAUFBRgYGAAAAAAAAAAAAAAFBQUYGBgAAAAAAAAAAAAADAwYGBgYAAAAAAAAAAAAAAwMGBgYAAAAAAAAAAAAAAAMDBgYGAAAAAAAAAAAAAAADAwYGBgAAAAAAAAAAAAAAAwMGBgYAAAAAAAAAAAAAAALCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsSEhISEgsLCwsLCwsLCwsLEhISEhILCwsAAAAAUQAAABISEhISAAAABwcHB1EAEhISEhISEhISAAcHBwdRABISEhISEhISEgAHBwcHUQ==
+          data: BQUFGxsbZWVlZWVlZWVlZQUFBRgYGGVlZWVlZWVlZWUFBQUYGBhlZWVlZWVlZWVlDAwYGBgYZWVlZWVlZWVlZQwMGBgYAABlZWVlZWVlZWUMDBgYGAAAZWVlZWVlZWVlDAwYGBgAAAAAAAAAAAAAAAwMGBgYAAAAAAAAAAAAAAALCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsSEhISEgsLCwsLCwsLCwsLEhISEhILCwsAAAAAUQAAABISEhISAAAABwcHB1EAEhISEhISEhISAAcHBwdRABISEhISEhISEgAHBwcHUQ==
         -2,-1:
           data: FBQUFBQUFBQUCwsLExMTExQUFBQUFBQUFAsLCxMTExMUFBQUFBQUFAsLCwsTExMTFBQUFBQUFBQLCwsLExMTExQUFBQUFBQUCwsLCxMTExMUFBQUFBQUFBQLCwsTExMTFBQUFBQUFBQUCwsLExMTExQUFBQUFBQUFAsLCwcHBwcUFBQUFBQUFBQLCwsHBwcHFBQUFBQUFBQUCwsLGxsbGxQUFBQUFBQUFAsLCxsbGxsUFBQUFBQUFBQLCwsbGxsbFBQUFBQUFBQUCwsLGxsbGxQUFBQUFBQUFAsLCxsbGxsHBwcHBwcHBwcLCwsbGxsbBwcHBwcHBwcHCwsLGxsbGw==
         -2,-2:
           data: HBwcHBwcHBwcHB0dHR0dHRwcHBwcHBwcHBwdHR0dHR0cHBwcHBwcHBwcHR0dHR0dBQUcHBwcHB4eHh4eHh4eHQUFHR0dHR0eHh4eHh4eHh4FBR0dHR0dHh4eHh4eHh4eBQUdHR0dHR4eHh4eHh4eHhgdHR0dHR0eHh4eHh4eHh4YGAAAAAAAHh4eHh4eHh4eGBgYGBgYGB4eHh4eHh4eHhgYGBgYGBgeHh4eHh4eHh4YGBgYGBgYGAsLCwsLCwsLFBQUFBQYGBgLCwsLCwsLCxQUFBQUFBQUFAsLCwsLCwsUFBQUFBQUFBQLCwsTExMTFBQUFBQUFBQUCwsLExMTEw==
         -1,-1:
-          data: ExMTGBgYGBUVFRUVFRUVFRMTExgYGBgVFRUVFRUVFRUTExMYGBgYFRUVFRUVFRUVExMTGAUFBQUVFRUVFRUVFRMTExgFBQUFAAcHBwcHBwcTExMYBQUFBQAHBwcHBwcHExMTGAUFBQUHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHGxsbGxsbAAAAAAAAAAAAABsbGxsbGwAAAAAAAAAAAAAbGxsbGxsAAAAAAAAAAAAAGxsbGxsbAAAAAAAAAAAAABsbGxsbGwAAAAAAAAAAAAAbGxsbGxsAAAAAAAAAAAAAGxsbGxsbAAAAAAAAAAAAAA==
+          data: ExMTGBgYGBUVFRUVFRUVFRMTExgYGBgVFRUVFRUVFRUTExMYGBgYFRUVFRUVFRUVExMTGAUFBQUVFRUVFRUVFRMTExgFBQUFAAcHBwcHBwcTExMYBQUFBQAHBwcHBwcHExMTGAUFBQUHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHGxsbGxsbZmZnZ2dnZ2dnZxsbGxsbG2ZmZ2dnZ2dnZ2cbGxsbGxtmZmdnZ2dnZ2dnGxsbGxsbZmZnZ2dnZ2dnZxsbGxsbG2ZmZwBnZ2dnZ2cbGxsbGxtmZmdnZ2VlZWVlGxsbGxsbZWVlZWVlZWVlZQ==
         -1,-2:
           data: HR0dHR0fHx8fHx8fCwsLNB0dHR0dHx8fHx8fHwsLCzQdHR0dHR8fHx8fHx8LCws0HR0dHR0fHx8fHx8fCwsLNB4eHh0dHx8fHx8fHwsLCzQeHh4gICAgICAgICALCws0Hh4eICAgICAgICAgCwsLNR4eHiAgICAgICAgIAsLCzUeHh4gICAgICAgICALCws1Hh4eICAgICAgICAgCwsLNR4eHgsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsTExMYGAsLFRUVFRUVFRUVExMTGBgYGBUVFRUVFRUVFQ==
         0,-1:
-          data: FRUVFQAWFhcXFxYWAAsLCxUVFRUAFhYXFxcWFgALCwsVFRUVABYWFxcXFhYACwsLFRUVFQAWFhYWFhYWAAsLCwcHAAAAFhYWFhYWFgALCwsHBwAAAAAAFhYWAAAACwsLBwcHBwcHBxYWFgcHBwsLCwcHBwcHBwcHBwcHBwcHBwsHBwcHBwcHBwcHBwcHBwcLAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAACw==
+          data: FRUVFQAWFhcXFxYWAAsLCxUVFRUAFhYXFxcWFgALCwsVFRUVABYWFxcXFhYACwsLFRUVFQAWFhYWFhYWAAsLCwcHAAAAFhYWFhYWFgALCwsHBwAAAAAAFhYWAAAACwsLBwcHBwcHBxYWFgcHBwsLCwcHBwcHBwcHBwcHBwcHBwsHBwcHBwcHBwcHBwcHBwcLZ2dnZmZoaGhoaGhoGBgYC2dnZ2ZmaGhoaGhoaGgYAAtnZ2dmZmhoaGhoAGhoGBgLZ2dnZmZoaGhoaGhoaBgYC2cAZ2ZmaABoaGhoaGgYGAtnZ2dmZmhoaGhoaGhoGBgLZWVlZWUAaGhoaGhoaBgYCw==
         0,-2:
           data: NDQ0NDQ0NjY2NjY2NjY2NjQ0NDQ0NDY2NjY2NjY2NjY0NDQ0NDQ2NjY2NjY2NjY2NDQ0NDQ0NjY2NjY2NjY2NjQ0NDQ0NDY2NjY2NjY2NjY1NTU1NTU1NTU2NjY2NhgYNTU1NTU1NTU1NjY2NjYYGDU1NTU1NTU1NTY2NjY2GBg1NTU1NTU1NTU2NjY2NhgYNTU1NTU1NTU1NjY2NjYYGAsLCwsLCwsLCwsLCwsLGBgLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsVFRUVCwsLCwsLCwsLCwsLFRUVFQAAAAAAAAAAAAsLCw==
         1,-2:
@@ -523,11 +523,11 @@ entities:
         3,-1:
           data: GBg3Nzc3Nzc3Nzc3Nzc3NxgYNzc3Nzc3Nzc3Nzc3NzcYGDc3Nzc3Nzc3Nzc3Nzc3BgYGNzc3Nzc3Nzc3Nzc3NwYGBjc3Nzc3Nzc3Nzc3NzcGBgY3Nzc3Nzc3Nzc3Nzc3MjIyMjIyMjIyNzc3Nzc3NzIyMjIyMjIyMjc3Nzc3NzcyMjIyMjIyMjI3Nzc3Nzc3MjIyMjIyMjIyNzc3Nzc3NzIyMjIyMjIyMjc3Nzc3NzcyMjIyMjIyMjI3Nzc3Nzc3T09PT09PT083Nzc3Nzc3N09PT09PT09PT1JSUlJSUlJPT09PT09PT09SUlJSUlJST09PT09PT09SUlJSUlJSUg==
         0,0:
-          data: AAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAAAAAAAsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwtRUVFRUVFRBwcHBwcHUVFRUVFRUVFRUQcHBwcHB1FRUVFRUVFRUVEHBwcHBwdRUVFRUVFRUVFRBwcHBwcHUVFRUVFRUVFRUQcHBwcHBw==
+          data: ZWVlZWUAaGhoaGhoaBgYC2VlZWVlaGhoaGhoaGhoaAtlZWVlZWgVFRUVaGhoaGgLZWVlZWVoaGhoaGhoaGhoC2VlZWUAAGhoaGhoaGgAaAtlZWVlAABoaGhoaGhoaGgLAAAAAAAAaGhoaGhoaGhoCwAAAAAAAGhoaGhoaGhoaAsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwtRUVFRUVFRBwcHBwcHUVFRUVFRUVFRUQcHBwcHB1FRUVFRUVFRUVEHBwcHBwdRUVFRUVFRUVFRBwcHBwcHUVFRUVFRUVFRUQcHBwcHBw==
         -1,-3:
           data: ISEhISEhISEhGBgYCwsLOCEhISEhISEhIRgYGAsLCwAhISEFBQUFBQUYGBgLCwsAHR0dBQUFBQUFGBgYCwsLAB0dHQUFBQUFBRgYGAsLCzkdHR0FBQUFBQUYGBgLCws5HR0dHRgYGBgYGBgYCwsLOR0dHR0YGBgYGGRkZAsLCzkiIiIiGBgYGBhkZGQLCws5IiIiIhgYGBgYZGRkCwsLOSIiIiIYGBgYGBgYGAsLCzkiIiIiGB8fHx8fHx8LCwsLIiIiIhgfHx8fHx8fCwsLCyIiIiIYHx8fHx8fHwsLCwsiIiIiHR8fHx8fHx8LCws0IiIiIh0fHx8fHx8fCwsLNA==
         -1,-4:
-          data: IyMjOjo6Ojo6Ojo6Ojo6OxgYGDo6Ojo6Ojo6Ojo6OhgAABg6Ojo6Ojo6Ojo6Ojo4AAAYOjo6Ojo6Ojo6Ojo6OAAAGDo6Ojo6Ojo6OgsLCzgAABgYGBgYGBgYGBgLCws4AAAYGBgYGBgYGBgYCwsLOAAAZGRkZGQYGBgYAAsLCzgdHWRkZGRkGBgYGAALCws4HR1kZGRkZBgYGBgACwsLOB0dZGRkZGQYGBgYGAsLCzghIWRkZGRkISEYGBgLCws4ISEhISEhISEhGBgYCwsLOCEhISEhISEhIRgYGAsLCzghISEhISEhISEYGBgLCws4ISEhISEhISEhGBgYCwsLOA==
+          data: IyMjOjo6Ojo6Ojo6Ojo6OxgYGDo6Ojo6Ojo6Ojo6OhgpKRg6Ojo6Ojo6Ojo6Ojo4KSkYOjo6Ojo6Ojo6Ojo6OCkpGDo6Ojo6Ojo6OgsLCzgpKRgYGBgYGBgYGBgLCws4KSkYGBgYGBgYGBgYCwsLOCkpZGRkZGQYGBgYAAsLCzgdHWRkZGRkGBgYGAALCws4HR1kZGRkZBgYGBgACwsLOB0dZGRkZGQYGBgYGAsLCzghIWRkZGRkISEYGBgLCws4ISEhISEhISEhGBgYCwsLOCEhISEhISEhIRgYGAsLCzghISEhISEhISEYGBgLCws4ISEhISEhISEhGBgYCwsLOA==
         -3,0:
           data: JAcHBwcHBwcHBwcHBwcHByQHBwcQEBAQEBAQEA4ODg4HBwcHEBAQEBAQEBAODg4OBwcHBxAQEBAQEBAQDg4ODhgYGBAQEBAQEBAQEA4ODg4YGBgQEBAQEBAQEBAODg4OGBgYEBAQEBAQEBAQDg4ODhgYGBAQEBAQEBAQEA4ODg4YGBgQEBAQEBAQEBAODg4OGBgYEBAQEBAQEBAQEBAQDgAAABAQEBAQEBAQEBAQEBAAAAAQEBAQEBAQEBAQEBAQAAAAABAQEBAQEBAQEBAQEAAAAAAQEBAQEBAQEBAQEBEAABAQEBAQEBAQEBAQEBARAAAQEBAQEBAQEBAQEBAQEQ==
         -3,-1:
@@ -565,7 +565,7 @@ entities:
         -2,-3:
           data: KysrKysrKysrKx0dHSEhISsrKysrKysrKysdHR0hISErKysrKysrKysrHR0dISEhHBwcKyscHBwcHR0dHR0dHRwcHCsrHBwcHB0dHR0dHR0cHBwrKxwcHBwdHR0dHR0dHBwcKyscHBwcHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dIiIiHBwcHBwcHBwcHB0dHSIiIhwcHBwcHBwcHBwdHR0iIiIcHBwcHBwcHBwcHR0dIiIiHBwcHBwcHBwcHB0dHSIiIhwcHBwcHBwcHBwdHR0iIiIcHBwcHBwcHBwcHR0dIiIiHBwcHBwcHBwcHB0dHSIiIg==
         -2,-4:
-          data: LCwsLC0tLS0tLS0jIyMjIywsLCwtLS0tLS0tGBgYGBgYGBgYGBgYGBgYGBgYAAAAGBgYGBgYGBgYGBgYGAAAABgYGBgYGBgYGBgYGBgAAAAuLi4uGBgYGBgYHR0dAAAALi4uLhgYGBgYGB0dHQAAAC4uLi4YGBgYGBgdHR0AAAAuLi4uGBgYGBgYHR0dHR0dLi4uLhgYGBgYGB0dHR0dHS8vLy8vLy8vLy8dHR0dHR0vLy8vLy8vLy8vHR0dISEhLy8vLy8vLy8vLx0dHSEhIS8vLy8vLy8vLy8dHR0hISEvLy8vLy8vLy8vHR0dISEhLy8rLy8vLy8vLx0dHSEhIQ==
+          data: LCwsLC0tLS0tLS0jIyMjIywsLCwtLS0tLS0tGBgYGBgYGBgYGBgYGBgYGBgYKSkpGBgYGBgYGBgYGBgYGCkpKRgYGBgYGBgYGBgYGBgpKSkuLi4uGBgYGBgYHR0dKSkpLi4uLhgYGBgYGB0dHSkpKS4uLi4YGBgYGBgdHR0pKSkuLi4uGBgYGBgYHR0dHR0dLi4uLhgYGBgYGB0dHR0dHS8vLy8vLy8vLy8dHR0dHR0vLy8vLy8vLy8vHR0dISEhLy8vLy8vLy8vLx0dHSEhIS8vLy8vLy8vLy8dHR0hISEvLy8vLy8vLy8vHR0dISEhLy8rLy8vLy8vLx0dHSEhIQ==
         -3,-4:
           data: AAAAAAAwMDAwMDAwMBgYGAAAAAAAMDAwMDAwMDAYGBgAAAAAAAAAADAwMDAwGBgYAAAAAAAAAAAYGBgYGBgYGAAAAAAAAAAAGBgYGBgYGBgAAAAAAAAAABgYGC4uLi4uKioqKgAAABgYGBguLi4uLioqKioAAAAYGBgYLi4uLi4qKioqAAAAGBgYGC4uLi4uKioqKgAAABgYMTExLi4uLioqKioAAAAYGDExLy8vLy8qKioqAAAAGBgxMS8vLy8vKioqKgAAABgYGBgvLy8vLyoqKioAAAAYGBgYLy8vLy8AAAAAAAAAABgYGC8vLy8vAAAAKioqKioYGCsvLy8vLw==
         -3,-5:
@@ -749,6 +749,10 @@ entities:
         98: AreaDisposals
         99: AreaGenetics
         100: AreaLootRoom
+        101: AreaBridge
+        102: AreaBridgeHall
+        103: AreaCommandMeetingRoom
+        104: AreaCapQuarters
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
@@ -5585,40 +5589,6 @@ entities:
           decals:
           - 35,-58
         - node:
-            id: BrickTileWhiteCornerNe
-            color: '#EFB34196'
-          decals:
-          - 55,5
-        - node:
-            id: BrickTileWhiteCornerNe
-            color: '#FFFF0085'
-          decals:
-          - 51,29
-          - 60,22
-        - node:
-            id: BrickTileWhiteCornerNw
-            color: '#EFB34196'
-          decals:
-          - 49,5
-        - node:
-            id: BrickTileWhiteCornerNw
-            color: '#FFFF0085'
-          decals:
-          - 49,29
-          - 55,22
-        - node:
-            id: BrickTileWhiteCornerSe
-            color: '#FFFF0085'
-          decals:
-          - 51,27
-          - 60,18
-        - node:
-            id: BrickTileWhiteCornerSw
-            color: '#FFFF0085'
-          decals:
-          - 49,27
-          - 55,18
-        - node:
             id: BrickTileWhiteLineE
             color: '#EFB34196'
           decals:
@@ -5628,36 +5598,6 @@ entities:
           - 55,2
           - 55,3
           - 55,4
-        - node:
-            id: BrickTileWhiteLineE
-            color: '#FFFF0085'
-          decals:
-          - 51,28
-          - 60,19
-          - 60,20
-          - 60,21
-        - node:
-            id: BrickTileWhiteLineN
-            color: '#EFB34196'
-          decals:
-          - 51,5
-          - 52,5
-          - 53,5
-        - node:
-            id: BrickTileWhiteLineN
-            color: '#FFFF0085'
-          decals:
-          - 50,29
-          - 57,22
-          - 58,22
-          - 59,22
-        - node:
-            id: BrickTileWhiteLineS
-            color: '#FFFF0085'
-          decals:
-          - 57,18
-          - 58,18
-          - 59,18
         - node:
             id: BrickTileWhiteLineW
             color: '#EFB34196'
@@ -5670,74 +5610,6 @@ entities:
           - 49,2
           - 49,4
           - 103,-11
-        - node:
-            id: BrickTileWhiteLineW
-            color: '#FFFF0085'
-          decals:
-          - 49,28
-          - 55,19
-          - 55,21
-        - node:
-            id: CheckerNESW
-            color: '#D4D4D428'
-          decals:
-          - 50,11
-          - 50,12
-          - 50,13
-          - 50,14
-          - 50,15
-          - 50,16
-          - 50,17
-          - 50,18
-          - 50,19
-          - 50,20
-          - 50,21
-          - 50,22
-          - 50,23
-          - 50,24
-          - 50,25
-          - 51,11
-          - 51,12
-          - 51,13
-          - 51,14
-          - 51,15
-          - 51,16
-          - 51,17
-          - 51,18
-          - 51,19
-          - 51,20
-          - 51,21
-          - 51,22
-          - 51,23
-          - 51,24
-          - 51,25
-          - 52,11
-          - 52,15
-          - 52,25
-          - 53,11
-          - 53,15
-          - 53,25
-          - 54,11
-          - 54,15
-          - 54,25
-          - 54,26
-          - 54,27
-          - 54,28
-          - 54,29
-          - 54,30
-          - 55,11
-          - 55,15
-          - 55,25
-          - 55,26
-          - 55,27
-          - 55,28
-          - 55,29
-          - 55,30
-          - 56,11
-          - 56,12
-          - 56,13
-          - 56,14
-          - 56,15
         - node:
             id: CheckerNWSE
             color: '#EFB34196'
@@ -5796,37 +5668,6 @@ entities:
           - 61,8
           - 67,7
         - node:
-            id: FullTileOverlayGreyscale
-            color: '#D4D4D409'
-            cleanable: True
-          decals:
-          - 47,12
-          - 47,13
-          - 47,14
-          - 47,16
-          - 48,14
-          - 48,14
-          - 49,18
-          - 49,21
-          - 49,21
-          - 52,12
-          - 52,14
-          - 52,14
-          - 52,24
-          - 53,13
-          - 54,12
-          - 54,13
-          - 55,12
-          - 56,26
-          - 56,28
-          - 56,29
-        - node:
-            id: OffsetOverlay
-            color: '#EFB34196'
-            angle: 3.141592653589793 rad
-          decals:
-          - 52,1
-        - node:
             id: QuarterTileOverlayGreyscale270
             color: '#EFB34196'
           decals:
@@ -5873,22 +5714,6 @@ entities:
           - 47,2
           - 47,3
           - 47,4
-        - node:
-            id: WarnLineGreyscaleN
-            color: '#FFFF0085'
-          decals:
-          - 56,22
-        - node:
-            id: WarnLineGreyscaleS
-            color: '#FFFF0085'
-          decals:
-          - 50,27
-          - 56,18
-        - node:
-            id: WarnLineGreyscaleW
-            color: '#FFFF0085'
-          decals:
-          - 55,20
         - node:
             id: BrickTileWhiteCornerSw
             color: '#EFB34196'
@@ -5967,6 +5792,185 @@ entities:
           - 54,-6
           - 55,-7
           - 55,-6
+        - node:
+            id: BrickTileWhiteCornerNe
+            color: '#EFB34196'
+          decals:
+          - 55,5
+        - node:
+            id: BrickTileWhiteCornerNe
+            color: '#FFFF0085'
+          decals:
+          - 51,29
+          - 60,22
+        - node:
+            id: BrickTileWhiteCornerNw
+            color: '#EFB34196'
+          decals:
+          - 49,5
+        - node:
+            id: BrickTileWhiteCornerNw
+            color: '#FFFF0085'
+          decals:
+          - 49,29
+          - 55,22
+        - node:
+            id: BrickTileWhiteCornerSe
+            color: '#FFFF0085'
+          decals:
+          - 51,27
+          - 60,18
+        - node:
+            id: BrickTileWhiteCornerSw
+            color: '#FFFF0085'
+          decals:
+          - 49,27
+          - 55,18
+        - node:
+            id: BrickTileWhiteLineE
+            color: '#FFFF0085'
+          decals:
+          - 51,28
+          - 60,19
+          - 60,20
+          - 60,21
+        - node:
+            id: BrickTileWhiteLineN
+            color: '#EFB34196'
+          decals:
+          - 51,5
+          - 52,5
+          - 53,5
+        - node:
+            id: BrickTileWhiteLineN
+            color: '#FFFF0085'
+          decals:
+          - 50,29
+          - 57,22
+          - 58,22
+          - 59,22
+        - node:
+            id: BrickTileWhiteLineS
+            color: '#FFFF0085'
+          decals:
+          - 57,18
+          - 58,18
+          - 59,18
+        - node:
+            id: BrickTileWhiteLineW
+            color: '#FFFF0085'
+          decals:
+          - 49,28
+          - 55,19
+          - 55,21
+        - node:
+            id: CheckerNESW
+            color: '#D4D4D428'
+          decals:
+          - 50,11
+          - 50,12
+          - 50,13
+          - 50,14
+          - 50,15
+          - 50,16
+          - 50,17
+          - 50,18
+          - 50,19
+          - 50,20
+          - 50,21
+          - 50,22
+          - 50,23
+          - 50,24
+          - 50,25
+          - 51,11
+          - 51,12
+          - 51,13
+          - 51,14
+          - 51,15
+          - 51,16
+          - 51,17
+          - 51,18
+          - 51,19
+          - 51,20
+          - 51,21
+          - 51,22
+          - 51,23
+          - 51,24
+          - 51,25
+          - 52,11
+          - 52,15
+          - 52,25
+          - 53,11
+          - 53,15
+          - 53,25
+          - 54,11
+          - 54,15
+          - 54,25
+          - 54,26
+          - 54,27
+          - 54,28
+          - 54,29
+          - 54,30
+          - 55,11
+          - 55,15
+          - 55,25
+          - 55,26
+          - 55,27
+          - 55,28
+          - 55,29
+          - 55,30
+          - 56,11
+          - 56,12
+          - 56,13
+          - 56,14
+          - 56,15
+        - node:
+            id: FullTileOverlayGreyscale
+            color: '#D4D4D409'
+            cleanable: True
+          decals:
+          - 47,12
+          - 47,13
+          - 47,14
+          - 47,16
+          - 48,14
+          - 48,14
+          - 49,18
+          - 49,21
+          - 49,21
+          - 52,12
+          - 52,14
+          - 52,14
+          - 52,24
+          - 53,13
+          - 54,12
+          - 54,13
+          - 55,12
+          - 56,26
+          - 56,28
+          - 56,29
+        - node:
+            id: OffsetOverlay
+            color: '#EFB34196'
+            angle: 3.141592653589793 rad
+          decals:
+          - 52,1
+        - node:
+            id: WarnLineGreyscaleN
+            color: '#FFFF0085'
+          decals:
+          - 56,22
+        - node:
+            id: WarnLineGreyscaleS
+            color: '#FFFF0085'
+          decals:
+          - 50,27
+          - 56,18
+        - node:
+            id: WarnLineGreyscaleW
+            color: '#FFFF0085'
+          decals:
+          - 55,20
         - node:
             id: DeliveryGreyscale
             color: '#FFFFFFFF'
@@ -11652,7 +11656,7 @@ entities:
       pos: -42.5,29.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -103723.55
+      secondsUntilStateChange: -104208.875
     - type: DeviceLinkSink
       invokeCounter: 2
     - type: DeviceLinkSource
@@ -123284,6 +123288,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -1.5,37.5
+  - uid: 28099
+    components:
+    - type: Transform
+      parent: 2
+      pos: -31.5,-31.5
 - proto: MachinePowerTransmissionLaser
   entities:
   - uid: 19109
