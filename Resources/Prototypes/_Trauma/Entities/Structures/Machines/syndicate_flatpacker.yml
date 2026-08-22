@@ -1,0 +1,94 @@
+- type: entity
+  id: MachineSyndicateFlatpacker
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
+  name: Syndicate Technician's Flatpacker
+  description: turns normal items into their syndicate versions or more dangerous versions at the cost of a longer flatpacking duration, power, a stack of plasma, and alerting the station.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/syndie_flatpack.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: screen
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: packing
+      map: ["anim"]
+      visible: false
+    - state: inserting
+      visible: false
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+      enum.SyndicateFlatpackCreatorVisuals.Packing:
+        anim:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 175
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: SyndicateConverter
+  - type: Machine
+    board: SyndicateFlatpackerMachineCircuitboard
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  - type: AmbientSound
+    enabled: false
+    volume: 5
+    range: 3
+    sound:
+      path: /Audio/Items/rped.ogg
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: Appearance
+  - type: ActivatableUI
+    key: enum.SyndicateConverterUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.SyndicateConverterUIKey.Key:
+        type: SyndicateConverterBoundUserInterface
+  - type: ItemSlots
+    slots:
+      item_slot:
+        name: syndicate-converter-item-slot-name
+  - type: AutomationSlots # Goobstation
+    slots:
+    - !type:AutomatedItemSlot
+      input: AutomationSlotBoard
+      output: AutomationSlotBoard
+      slotId: board_slot
+    - !type:AutomatedMaterialStorage
+      input: AutomationSlotMaterials
+      output: null # no automatic silo stealer...
+    - !type:AutomatedPorts
+      sinks:
+      - On
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      board_slot: !type:ContainerSlot
+  - type: Construction
+    containers:
+    - machine_parts
+    - machine_board
+    - board_slot
+  - type: StaticPrice
+    price: 200000 # CHANGE
