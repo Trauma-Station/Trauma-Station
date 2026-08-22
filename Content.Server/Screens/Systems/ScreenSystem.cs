@@ -30,6 +30,10 @@ public sealed partial class ScreenSystem : EntitySystem
     /// </summary>
     private void OnPacketReceived(EntityUid uid, ScreenComponent component, DeviceNetworkPacketEvent args)
     {
+        // <Trauma>
+        if (component.IgnoreNetwork)
+            return;
+        // </Trauma>
         if (args.Data.TryGetValue(ShuttleTimerMasks.ShuttleMap, out _))
             ShuttleTimer(uid, component, args);
         else
