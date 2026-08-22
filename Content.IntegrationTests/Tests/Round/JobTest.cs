@@ -79,8 +79,8 @@ public sealed class JobTest : GameTest
     {Passenger}: 30
   # <Trauma>
   required:
-    Passenger: 1
-    Captain: 1
+    {Passenger}: 1
+    {Captain}: 1
   # </Trauma>
 ";
 
