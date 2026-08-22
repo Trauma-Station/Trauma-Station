@@ -20,7 +20,7 @@ public sealed partial class DamageSpecifier
     public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> WoundSeverityMultipliers = new();
 
     [DataField]
-    public DamageFlags Flags = DamageFlags.None;
+    public bool IsPrecise;
 
     /// <summary>
     /// Wounds that are induced by damage types.
@@ -51,7 +51,7 @@ public sealed partial class DamageSpecifier
         ArmorPenetration = src.ArmorPenetration;
         PartDamageVariation = src.PartDamageVariation;
         WoundSeverityMultipliers = new(src.WoundSeverityMultipliers);
-        Flags = src.Flags;
+        IsPrecise = src.IsPrecise;
         WoundTypeOverrides = new(src.WoundTypeOverrides);
     }
 
@@ -97,12 +97,5 @@ public sealed partial class DamageSpecifier
         }
 
         return result;
-    }
-
-    [Flags, Serializable, NetSerializable]
-    public enum DamageFlags : byte
-    {
-        None = 0,
-        PreciseHit = 1 << 0,
     }
 }

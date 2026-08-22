@@ -58,7 +58,7 @@ public abstract partial class SharedArmorSystem : EntitySystem
         if (args.Args.TargetPart is not { } partType || !component.ArmorCoverage.Contains(partType))
             return;
 
-        var isPrecise = (args.Args.Damage.Flags & DamageSpecifier.DamageFlags.PreciseHit) != 0;
+        var isPrecise = args.Args.Damage.IsPrecise;
         var ev = new ArmorProtectAttemptEvent(args.Args.Origin, isPrecise);
         RaiseLocalEvent(uid, ref ev);
         var mult = ev.Multiplier;

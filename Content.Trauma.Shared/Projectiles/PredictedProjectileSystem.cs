@@ -60,7 +60,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
     private void OnTargetedProjectileHit(Entity<TargetedProjectileComponent> ent, ref BeforeProjectileHitEvent args)
     {
         if (TryGetEntity(ent.Comp.Target, out var t) && t == args.Target)
-            args.Damage.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
+            args.Damage.IsPrecise = true;
     }
 
     /// <summary>

@@ -669,7 +669,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
         // <Goob>
         modifiedDamage = DamageSpecifier.ApplyModifierSets(modifiedDamage, attackedEvent.ModifiersList);
-        modifiedDamage.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
+        modifiedDamage.IsPrecise = true;
         var comboEv = new ComboAttackPerformedEvent(user, target.Value, meleeUid, ComboAttackType.Harm);
         RaiseLocalEvent(user, ref comboEv);
         // </Goob>
