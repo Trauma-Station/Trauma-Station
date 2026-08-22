@@ -6,10 +6,10 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Trauma.Server.Antag;
 using Content.Trauma.Shared.Antag;
+using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -25,6 +25,7 @@ public sealed class SlaughterDemonTest : InteractionTest
     public static readonly EntProtoId BloodCrawlAction = "BloodCrawlAction";
     public static readonly ProtoId<AntagSmitePrototype> SmiteSlaughterDemon = "SlaughterDemon";
     public static readonly ProtoId<ReagentPrototype> Blood = "Blood";
+    public static readonly string FloorSteel = "FloorSteel";
 
     protected override string PlayerPrototype => SlaughterDemon;
 
@@ -32,14 +33,23 @@ public sealed class SlaughterDemonTest : InteractionTest
     [SidedDependency(Side.Server)] private PuddleSystem _puddle = default!;
     [SidedDependency(Side.Server)] private SharedActionsSystem _actions = default!;
     [SidedDependency(Side.Server)] private MobStateSystem _mobState = default!;
+    [SidedDependency(Side.Server)] private ITileDefinitionManager _tileDef = default!;
 
     /// <summary>
-    /// Verifies that a Slaughter Demon can enter blood puddles via Blood Jaunt (Blood Crawl), becomes container-trapped/invisible inside, and can safely exit.
+    /// Verifies that a Slaughter Demon can enter blood puddles via Blood Jaunt (Blood Crawl) and can safely exit.
     /// </summary>
     [Test]
     public async Task BloodJauntWorks()
     {
         var demon = SPlayer;
+
+        await Server.WaitPost(() =>
+        {
+            var mapId = SEntMan.GetComponent<TransformComponent>(demon).MapID;
+            var grid = SEntMan.System<SharedMapSystem>().CreateGridEntity(mapId);
+            var tile = _tileDef[FloorSteel].TileId;
+            SEntMan.System<SharedMapSystem>().SetTile(grid, new Vector2i(0, 0), new Tile(tile));
+        });
 
         await Server.WaitAssertion(() =>
         {
