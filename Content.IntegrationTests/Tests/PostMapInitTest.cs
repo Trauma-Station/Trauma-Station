@@ -421,21 +421,33 @@ namespace Content.IntegrationTests.Tests
                     var jobs = new HashSet<ProtoId<JobPrototype>>(comp.SetupAvailableJobs.Keys);
 
                     // <Trauma> the SpawnPointComponent portion of allowing ExtraJobs to work on spawners
-                    var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
-                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset
-                                    && (x.Job != null || x.ExtraJobs.Count > 0))
-                        .SelectMany(x => (x.Job != null ? new[] { x.Job.Value } : [])
-                            .Concat(x.ExtraJobs));
+                    var spawnPoints = new List<ProtoId<JobPrototype>>();
+                    foreach (var spawnPoint in entManager.EntityQuery<SpawnPointComponent>())
+                    {
+                        if (spawnPoint.SpawnType is not (SpawnPointType.Job or SpawnPointType.Unset) ||
+                            spawnPoint.Job == null && spawnPoint.ExtraJobs.Count == 0)
+                            continue;
+                        if (spawnPoint.Job != null)
+                            spawnPoints.Add(spawnPoint.Job.Value);
+                        foreach (var extraJob in spawnPoint.ExtraJobs)
+                        {
+                            spawnPoints.Add(extraJob);
+                        }
+                    }
                     // </Trauma>
 
                     // <Trauma> - dont allow unused jobs
                     // Extra Jobs Addendum: made it so it only deals with primary jobs for the unused spawnpoints.
                     // Issues were being caused previously, and there shouldn't be any issues caused by ignoring extra jobs for this test.
                     var unused = new List<ProtoId<JobPrototype>>();
-
-                    var primarySpawnPoints = entManager.EntityQuery<SpawnPointComponent>()
-                        .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
-                        .Select(x => x.Job.Value);
+                    var primarySpawnPoints = new List<ProtoId<JobPrototype>>();
+                    foreach (var spawnPoint in entManager.EntityQuery<SpawnPointComponent>())
+                    {
+                        if (spawnPoint.SpawnType is not SpawnPointType.Job || spawnPoint.Job == null)
+                            continue;
+                        if (spawnPoint.Job != null)
+                            primarySpawnPoints.Add(spawnPoint.Job.Value);
+                    }
 
                     foreach (var job in primarySpawnPoints)
                     {
@@ -450,11 +462,19 @@ namespace Content.IntegrationTests.Tests
                     jobs.ExceptWith(spawnPoints);
 
                     // <Trauma> Allows for handling extra jobs on a spawner in the test. The main job for a spawner must always be present because it's easier.
-                    spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
-                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset
-                                    && (x.Job != null || x.ExtraJobs.Count > 0))
-                        .SelectMany(x => (x.Job != null ? new[] { x.Job.Value } : [])
-                            .Concat(x.ExtraJobs));
+                    spawnPoints.Clear();
+                    foreach (var spawnPoint in entManager.EntityQuery<ContainerSpawnPointComponent>())
+                    {
+                        if (spawnPoint.SpawnType is not (SpawnPointType.Job or SpawnPointType.Unset) ||
+                            spawnPoint.Job == null && spawnPoint.ExtraJobs.Count == 0)
+                            continue;
+                        if (spawnPoint.Job != null)
+                            spawnPoints.Add(spawnPoint.Job.Value);
+                        foreach (var extraJob in spawnPoint.ExtraJobs)
+                        {
+                            spawnPoints.Add(extraJob);
+                        }
+                    }
                     // </Trauma>
 
                     jobs.ExceptWith(spawnPoints);
