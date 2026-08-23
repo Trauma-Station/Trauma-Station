@@ -1372,16 +1372,6 @@
   - sprite: Objects/Fun/Plushies/lizard.rsi
     state: plushie_lizard_inversed
 
-# Experiment Plushie
-
-- type: foodSequenceElement
-  id: ExperimentPlushie
-  scale: 0.8, 0.8
-  name: food-sequence-cotton-burger-content-plushie-experiment
-  sprites:
-  - sprite: Objects/Fun/Plushies/expi.rsi
-    state: icon
-
 #Diona Plushie
 
 - type: foodSequenceElement
