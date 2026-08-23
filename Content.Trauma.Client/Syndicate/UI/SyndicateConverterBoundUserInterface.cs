@@ -28,4 +28,3 @@ public sealed class SyndicateConverterBoundUserInterface : BoundUserInterface
         _menu.OpenCentered();
     }
 }
-
