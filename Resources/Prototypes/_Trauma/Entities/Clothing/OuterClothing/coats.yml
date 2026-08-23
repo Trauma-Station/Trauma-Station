@@ -49,9 +49,6 @@
     - shoes
     - hands
     - eyes
-    - mask
-    - neck
-    - head
   - type: IdentityBlocker
   - type: NoirOverlay
   - type: ViewconeModifier
