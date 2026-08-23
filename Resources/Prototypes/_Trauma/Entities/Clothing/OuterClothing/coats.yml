@@ -53,6 +53,3 @@
     baseConeAngle: 180
   - type: ViewconeModifier
     angleModifier: 0.5
-  - type: Tag
-    tags:
-    - WhitelistChameleon
