@@ -448,7 +448,7 @@ namespace Content.IntegrationTests.Tests
 
                     jobs.ExceptWith(spawnPoints);
 
-                    // <Trauma> Replaced this one with a list. It's effectively unchanged from what is was before.
+                    // <Trauma> Replaced this one with a list. It's effectively unchanged from what it was before.
                     spawnPoints.Clear();
                     foreach (var spawnPoint in entManager.EntityQuery<ContainerSpawnPointComponent>())
                     {
