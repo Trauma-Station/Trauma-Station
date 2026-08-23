@@ -110,7 +110,7 @@
   content:
   - WeaponRevolverDeckard
   - SpeedLoaderMagnum
-  
+
 - type: selectableSet
   id: DetectivePirateSet
   name: selectable-set-pirate-set-name

@@ -59,5 +59,5 @@ selectable-set-pirate-set-description =
     A blast from the past.
     Contains: Pirate Revolver, 1 AP ammo speedloader.
 
-		
-	
+
+
