@@ -50,6 +50,10 @@
     - hands
     - eyes
     - mask
+    - neck
+    - head
   - type: IdentityBlocker
   - type: NoirOverlay
+  - type: ViewconeModifier
+    angleModifier: 0.5
 
