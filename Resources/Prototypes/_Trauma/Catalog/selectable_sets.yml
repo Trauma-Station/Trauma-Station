@@ -87,3 +87,36 @@
   - EncryptionKeySyndie
   - ClothingMaskGasVoiceChameleon
   - ClothingHeadsetChameleon
+
+# Detective
+
+
+- type: selectableSet
+  id: DetectiveInspectorSet
+  name: selectable-set-inspector-set-name
+  description: selectable-set-inspector-set-description
+  sprite:
+    entity: WeaponRevolverInspector
+  content:
+  - WeaponRevolverInspector
+  - SpeedLoaderMagnum
+
+- type: selectableSet
+  id: DetectiveDeckardSet
+  name: selectable-set-deckard-set-name
+  description: selectable-set-deckard-set-description
+  sprite:
+    entity: WeaponRevolverDeckard
+  content:
+  - WeaponRevolverDeckard
+  - SpeedLoaderMagnum
+  
+- type: selectableSet
+  id: DetectivePirateSet
+  name: selectable-set-pirate-set-name
+  description: selectable-set-pirate-set-description
+  sprite:
+    entity: WeaponRevolverPirate
+  content:
+  - WeaponRevolverPirate
+  - SpeedLoaderMagnumAP

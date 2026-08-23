@@ -41,3 +41,23 @@ selectable-set-syndicate-door-kicker-description =
     syndicate operative pda, web vest, chest rig, syndicate gas mask,
     syndicate jaws of death, 'bojevic' combat shotgun, shell box,
     syndicate encryption key, and two C-4.
+
+# Detective
+
+selectable-set-inspector-set-name = Inspector
+selectable-set-inspector-set-description =
+    The honorable classic.
+    Contains: Inspector, 1 speedloader.
+
+selectable-set-deckard-set-name = Deckard
+selectable-set-deckard-set-description =
+    Provides a faster rate of fire while sacrificing ammo capacity.
+    Contains: Deckard, 1 speedloader.
+
+selectable-set-pirate-set-name = Pirate Revolver
+selectable-set-pirate-set-description =
+    A blast from the past.
+    Contains: Pirate Revolver, 1 AP ammo speedloader.
+
+		
+	
