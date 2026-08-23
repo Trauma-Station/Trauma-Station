@@ -429,27 +429,14 @@ namespace Content.IntegrationTests.Tests
                             continue;
                         if (spawnPoint.Job != null)
                             spawnPoints.Add(spawnPoint.Job.Value);
-                        foreach (var extraJob in spawnPoint.ExtraJobs)
-                        {
-                            spawnPoints.Add(extraJob);
-                        }
+                        if (spawnPoint.ExtraJobs.Count > 0)
+                            spawnPoints.AddRange(spawnPoint.ExtraJobs);
                     }
                     // </Trauma>
 
                     // <Trauma> - dont allow unused jobs
-                    // Extra Jobs Addendum: made it so it only deals with primary jobs for the unused spawnpoints.
-                    // Issues were being caused previously, and there shouldn't be any issues caused by ignoring extra jobs for this test.
                     var unused = new List<ProtoId<JobPrototype>>();
-                    var primarySpawnPoints = new List<ProtoId<JobPrototype>>();
-                    foreach (var spawnPoint in entManager.EntityQuery<SpawnPointComponent>())
-                    {
-                        if (spawnPoint.SpawnType is not SpawnPointType.Job || spawnPoint.Job == null)
-                            continue;
-                        if (spawnPoint.Job != null)
-                            primarySpawnPoints.Add(spawnPoint.Job.Value);
-                    }
-
-                    foreach (var job in primarySpawnPoints)
+                    foreach (var job in spawnPoints)
                     {
                         if (!jobs.Contains(job))
                             unused.Add(job);
@@ -461,19 +448,14 @@ namespace Content.IntegrationTests.Tests
 
                     jobs.ExceptWith(spawnPoints);
 
-                    // <Trauma> Allows for handling extra jobs on a spawner in the test. The main job for a spawner must always be present because it's easier.
+                    // <Trauma> Replaced this one with a list. It's effectively unchanged from what is was before.
                     spawnPoints.Clear();
                     foreach (var spawnPoint in entManager.EntityQuery<ContainerSpawnPointComponent>())
                     {
-                        if (spawnPoint.SpawnType is not (SpawnPointType.Job or SpawnPointType.Unset) ||
-                            spawnPoint.Job == null && spawnPoint.ExtraJobs.Count == 0)
+                        if (spawnPoint.SpawnType is not (SpawnPointType.Job or SpawnPointType.Unset) || spawnPoint.Job == null)
                             continue;
                         if (spawnPoint.Job != null)
                             spawnPoints.Add(spawnPoint.Job.Value);
-                        foreach (var extraJob in spawnPoint.ExtraJobs)
-                        {
-                            spawnPoints.Add(extraJob);
-                        }
                     }
                     // </Trauma>
 
