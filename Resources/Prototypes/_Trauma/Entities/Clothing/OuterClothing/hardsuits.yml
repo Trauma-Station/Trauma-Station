@@ -1,0 +1,11 @@
+﻿- type: entity
+  id: ClothingOuterHardsuitSpatio
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Radiation: 0.5
+        Caustic: 0.8
