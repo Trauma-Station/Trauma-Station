@@ -39,9 +39,9 @@
   name: CSIJ biosuit
   description: A suit of writhing flesh that- wait no that's foam.
   components:
-  - type: sprite
+  - type: Sprite
     sprite: _Trauma/Clothing/OuterClothing/Misc/csijlevelv.rsi
-  - type: clothing
+  - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Misc/csijlevelv.rsi
   - type: HideClothingLayerClothing
     hiddenSlots:
