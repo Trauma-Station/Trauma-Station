@@ -10,13 +10,7 @@ public sealed partial class SyndicateConverterSignalSystem : EntitySystem
 {
     public static readonly ProtoId<SinkPortPrototype> OnPort = "On";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SyndicateConverterComponent, SignalReceivedEvent>(OnSignalReceived);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<SyndicateConverterComponent> ent, ref SignalReceivedEvent args)
     {
         if (args.Port != OnPort)

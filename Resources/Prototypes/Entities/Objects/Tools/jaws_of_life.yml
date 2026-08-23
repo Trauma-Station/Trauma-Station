@@ -92,12 +92,14 @@
       Glass: 125
       Plasma: 75
       Gold: 12
+  # <Trauma>
   - type: SyndicateConvertible
     convertTo: SyndicateJawsOfLife
     alertValue: 2
     conversionTime: 30
     materialCost:
       Plasma: 3000
+  # </Trauma>
 
 - type: entity
   name: syndicate jaws of death

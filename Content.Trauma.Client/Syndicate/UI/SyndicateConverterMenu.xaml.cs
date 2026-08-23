@@ -14,8 +14,8 @@ namespace Content.Trauma.Client.Syndicate.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SyndicateConverterMenu : FancyWindow
 {
-    [Dependency] private IEntityManager _entityManager = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly ItemSlotsSystem _itemSlots;
     private readonly SyndicateConverterSystem _syndicateConverter;
     private readonly MaterialStorageSystem _materialStorage;
@@ -33,13 +33,13 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _itemSlots = _entityManager.System<ItemSlotsSystem>();
-        _syndicateConverter = _entityManager.System<SyndicateConverterSystem>();
-        _materialStorage = _entityManager.System<MaterialStorageSystem>();
+        _itemSlots = _ent.System<ItemSlotsSystem>();
+        _syndicateConverter = _ent.System<SyndicateConverterSystem>();
+        _materialStorage = _ent.System<MaterialStorageSystem>();
 
         ConvertButton.OnPressed += _ => ConvertButtonPressed?.Invoke();
 
-        InsertLabel.SetMarkup(Loc.GetString("syndicate-flatpacker-ui-insert-board"));
+        InsertLabel.SetMarkup(Loc.GetString("syndicate-flatpacker-ui-insert-item"));
     }
 
     public void SetEntity(EntityUid uid)
@@ -52,22 +52,22 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
     {
         base.FrameUpdate(args);
 
-        if (!_entityManager.TryGetComponent<SyndicateConverterComponent>(_owner, out var converter) ||
+        if (!_ent.TryGetComponent<SyndicateConverterComponent>(_owner, out var converter) ||
             !_itemSlots.TryGetSlot(_owner, converter.SlotId, out var itemSlot))
             return;
 
         var converterEntity = new Entity<SyndicateConverterComponent>(_owner, converter);
 
-        Entity<SyndicateConvertibleComponent>? currentItemEntity = new Entity<SyndicateConvertibleComponent>();
+        Entity<SyndicateConvertibleComponent>? currentItemEntity = default;
         SyndicateConvertibleComponent? currentItemComp = null;
 
         if (_currentItem != null)
-            if (_entityManager.TryGetComponent<SyndicateConvertibleComponent>(_currentItem, out currentItemComp))
-            {
+        {
+            if (_ent.TryGetComponent<SyndicateConvertibleComponent>(_currentItem, out currentItemComp))
                 currentItemEntity = new Entity<SyndicateConvertibleComponent>((EntityUid) _currentItem, currentItemComp);
-            }
             else
                 currentItemComp = null;
+        }
         else
             currentItemEntity = null;
 
@@ -76,7 +76,7 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
         else if (currentItemEntity != null)
         {
             ConvertButton.Disabled =
-            _syndicateConverter.TryGetConversionCost(converterEntity, currentItemEntity, out var curCost) ||
+            !_syndicateConverter.TryGetConversionCost(converterEntity, (Entity<SyndicateConvertibleComponent>) currentItemEntity, out var curCost) ||
             !_materialStorage.CanChangeMaterialAmount(_owner, curCost);
         }
 
@@ -84,22 +84,23 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
             return;
 
         _currentItem = itemSlot.Item;
+        if (_currentItem != null && _ent.TryGetComponent<SyndicateConvertibleComponent>(_currentItem, out currentItemComp))
+            currentItemEntity = new Entity<SyndicateConvertibleComponent>((EntityUid) _currentItem, currentItemComp);
         CostHeaderLabel.Visible = false;
         InsertLabel.Visible = _currentItem == null;
 
-        if (_currentItem is null)
+        if (currentItemEntity is null)
         {
             ItemSprite.SetPrototype(NoItemEffectId);
-            CostLabel.SetMessage(Loc.GetString("syndicate-flatpacker-ui-no-board-label"));
+            CostLabel.SetMessage(Loc.GetString("syndicate-flatpacker-ui-no-item-label"));
             ItemNameLabel.SetMessage(string.Empty);
             ConvertButton.Disabled = true;
             return;
         }
-
-        if (_syndicateConverter.TryGetConvertedPrototype(currentItemEntity, out var prototype)
-            && _syndicateConverter.TryGetConversionCost(converterEntity, currentItemEntity, out var cost))
+        else if (_syndicateConverter.TryGetConvertedPrototype((Entity<SyndicateConvertibleComponent>) currentItemEntity, out var prototype)
+            && _syndicateConverter.TryGetConversionCost(converterEntity, (Entity<SyndicateConvertibleComponent>) currentItemEntity, out var cost))
         {
-            var proto = _prototypeManager.Index<EntityPrototype>(prototype);
+            var proto = _proto.Index<EntityPrototype>(prototype);
             ItemSprite.SetPrototype(prototype);
             ItemNameLabel.SetMessage(proto.Name);
             CostLabel.SetMarkup(GetCostString(cost));
@@ -108,7 +109,7 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
         else
         {
             ItemSprite.SetPrototype(NoItemEffectId);
-            CostLabel.SetMarkup(Loc.GetString("syndicate-flatpacker-ui-board-invalid-label"));
+            CostLabel.SetMarkup(Loc.GetString("syndicate-flatpacker-ui-item-invalid-label"));
             ItemNameLabel.SetMessage(string.Empty);
             ConvertButton.Disabled = true;
         }
@@ -123,7 +124,7 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
         {
             var (mat, amount) = orderedCosts[i];
 
-            var matProto = _prototypeManager.Index<MaterialPrototype>(mat);
+            var matProto = _proto.Index<MaterialPrototype>(mat);
 
             var sheetVolume = _materialStorage.GetSheetVolume(matProto);
             var sheets = (float) -amount / sheetVolume;

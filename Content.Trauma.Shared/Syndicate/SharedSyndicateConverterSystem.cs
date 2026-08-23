@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Syndicate.Components;
 using Robust.Shared.Containers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Trauma.Shared.Syndicate;
 
@@ -23,26 +24,20 @@ public abstract partial class SharedSyndicateConverterSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<SyndicateConverterComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
     }
 
+    [SubscribeLocalEvent]
     private void OnInsertAttempt(Entity<SyndicateConverterComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
-        if (args.Slot.ID != ent.Comp.SlotId || args.Cancelled)
-            return;
-
-        args.Cancelled = true;
+        return;
     }
 
     /// <summary>
     /// Returns the converted item from the input that the syndicate converter will create.
     /// </summary>
-    public bool TryGetConvertedPrototype(Entity<SyndicateConvertibleComponent>? item, [NotNullWhen(true)] out EntProtoId? prototype)
+    public bool TryGetConvertedPrototype(Entity<SyndicateConvertibleComponent> item, [NotNullWhen(true)] out EntProtoId? prototype)
     {
-        prototype = null;
-        if (item == null)
-            return prototype is not null;
-        prototype = ((Entity<SyndicateConvertibleComponent>) item).Comp.ConvertTo;
+        prototype = item.Comp.ConvertTo;
         return prototype is not null;
     }
 
@@ -52,13 +47,11 @@ public abstract partial class SharedSyndicateConverterSystem : EntitySystem
     /// <param name="entity">The conversion machine</param>
     /// <param name="inputItem">The item to convert.</param>
     /// <param name="cost">Cost to convert</param>
-    public bool TryGetConversionCost(Entity<SyndicateConverterComponent> entity, Entity<SyndicateConvertibleComponent>? item, out Dictionary<string, int> cost)
+    public bool TryGetConversionCost(Entity<SyndicateConverterComponent> entity, Entity<SyndicateConvertibleComponent> item, out Dictionary<string, int> cost)
     {
         cost = new();
-        if (item is null)
-            return false;
         Dictionary<ProtoId<MaterialPrototype>, int> baseCost;
-        baseCost = ((Entity<SyndicateConvertibleComponent>) item).Comp.MaterialCost;
+        baseCost = item.Comp.MaterialCost;
 
         foreach (var (mat, amount) in baseCost)
         {

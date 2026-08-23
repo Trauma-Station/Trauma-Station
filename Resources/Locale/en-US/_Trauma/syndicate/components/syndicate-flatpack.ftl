@@ -8,4 +8,4 @@ syndicate-flatpacker-ui-no-item-label = No item present!
 syndicate-flatpacker-ui-item-invalid-label = [color=red]Invalid item!
     Unable to convert![/color]
 syndicate-flatpacker-ui-insert-item = Insert an item to begin.
-syndicate-flatpacker-ui-pack-button = Convert
+syndicate-flatpacker-ui-convert-button = Convert

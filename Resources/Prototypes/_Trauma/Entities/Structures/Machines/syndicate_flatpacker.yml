@@ -28,7 +28,7 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
-      enum.SyndicateFlatpackCreatorVisuals.Packing:
+      enum.SyndicateConverterVisuals.Packing:
         anim:
           True: { visible: true }
           False: { visible: false }
@@ -41,8 +41,8 @@
         sound:
           collection: MetalBreak
   - type: SyndicateConverter
-  - type: Machine
-    board: SyndicateFlatpackerMachineCircuitboard
+  #- type: Machine
+  #//  board: SyndicateFlatpackerMachineCircuitboard
   - type: MaterialStorage
     whitelist:
       tags:
@@ -69,13 +69,18 @@
   - type: ItemSlots
     slots:
       item_slot:
-        name: syndicate-converter-item-slot-name
-  - type: AutomationSlots # Goobstation
+        name: syndicate-flatpacker-item-slot-name
+        blacklist:
+          tags:
+          - Sheet
+          - RawMaterial
+          - Ingot
+  - type: AutomationSlots
     slots:
     - !type:AutomatedItemSlot
       input: AutomationSlotBoard
       output: AutomationSlotBoard
-      slotId: board_slot
+      slotId: item_slot
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null # no automatic silo stealer...
@@ -86,11 +91,11 @@
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
-      board_slot: !type:ContainerSlot
+      item_slot: !type:ContainerSlot
   - type: Construction
     containers:
     - machine_parts
     - machine_board
-    - board_slot
+    - item_slot
   - type: StaticPrice
-    price: 200000 # CHANGE
+    price: 200000 # REVIEW/CHANGE BEFORE MERGING!!!!!!

@@ -17,15 +17,7 @@ public sealed partial class SyndicateConverterSystem : SharedSyndicateConverterS
     [Dependency] private AmbientSoundSystem _ambientSound = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
 
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SyndicateConverterComponent, SyndicateConverterStartPackBuiMessage>(OnStartPack);
-        SubscribeLocalEvent<SyndicateConverterComponent, PowerChangedEvent>(OnPowerChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartPack(Entity<SyndicateConverterComponent> converterEntity, ref SyndicateConverterStartPackBuiMessage args)
     {
         var (uid, comp) = converterEntity;
@@ -54,6 +46,7 @@ public sealed partial class SyndicateConverterSystem : SharedSyndicateConverterS
         Dirty(uid, comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnPowerChanged(Entity<SyndicateConverterComponent> converterEntity, ref PowerChangedEvent args)
     {
         if (args.Powered)
