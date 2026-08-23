@@ -41,13 +41,14 @@
     id: DetectivePDA
     #gloves: ClothingHandsGlovesForensic - Goobstation, moved to loadouts
     ears: ClothingHeadsetAltSecurityRegular # Goobstation
-    belt: ClothingBeltHolsterFilled
+    #belt: ClothingBeltHolsterFilled - Replaced by revolver selector
   storage:
     back:
     - Flash
     - ForensicPad
     - ForensicScanner
     - ClothingMaskGasSecurity # Goobstation
+    - RevolverSelector
 
 - type: chameleonOutfit
   id: DetectiveChameleonOutfit

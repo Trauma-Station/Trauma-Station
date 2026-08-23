@@ -1,0 +1,20 @@
+- type: entity
+  parent: [ BaseItem, BaseSetSelector ]
+  id: RevolverSelector
+  name: revolver selector
+  description: An old looking case. Reeks of alchohol and gunpowder.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/medalcase.rsi
+    state: closed
+  - type: Item
+    storedRotation: 90
+  - type: SetSelector
+    possibleSets:
+    - DetectiveInspectorSet
+    - DetectiveDeckardSet
+    - DetectivePirateSet
+    spawnedStoragePrototype: ClothingBeltHolster
+    spawnedStorageContainer: storagebase
+    approveSound:
+      collection: storageRustle
