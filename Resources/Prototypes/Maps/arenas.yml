@@ -12,6 +12,7 @@
         - type: StationJobs
           availableJobs:
             Passenger: [ -1, -1 ]
+            DClass: [ -1, -1 ] # Trauma
 - type: gameMap
   id: dm01-entryway
   mapName: DM01 Entryway
