@@ -48,8 +48,8 @@
     - jumpsuit
   - type: IdentityBlocker
   - type: IngestionBlocker
-  - type: Viewcone
-    baseConeAngle: 60
+  - type: ViewconeModifier
+    angleModifier: 0.6
   - type: NoirOverlay
   - type: Tag
     tags:
