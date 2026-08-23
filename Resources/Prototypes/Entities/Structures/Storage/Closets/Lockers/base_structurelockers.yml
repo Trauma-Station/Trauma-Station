@@ -37,7 +37,7 @@
   - type: Paintable
     group: Locker
   - type: Damageable
-    damageModifierSet: StructuralMetallic
+    damageModifierSet: Metallic # Trauma - Was StructuralMetallic
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
