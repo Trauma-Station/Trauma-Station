@@ -43,9 +43,9 @@
     sprite: _Trauma/Clothing/OuterClothing/Misc/csijlevelv.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Misc/csijlevelv.rsi
-  - type: HideClothingLayerClothing
   - type: ViewconeModifier
     angleModifier: 0.5
+  - type: HideClothingLayerClothing
     hiddenSlots:
     - jumpsuit
     - shoes
