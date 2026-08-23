@@ -261,24 +261,6 @@
  # - AncientJumpsuit
  # - RainbowJumpsuit
  # - RainbowJumpskirt
- # goob changes start
- # - GreyMJ
- # - BlackMJ
- # - BlueMJ
- # - DarkBlueMJ
- # - TealMJ
- # - GreenMJ
- # - DarkGreenMJ
- # - OrangeMJ
- # - PinkMJ
- # - RedMJ
- # - YellowMJ
- # - PurpleMJ
- # - LightBrownMJ
- # - BrownMJ
- # - MaroonMJ
- # - QuarterzipJumpsuit
- # goob changes end
 
 #- type: loadoutGroup
  # id: PassengerFace
