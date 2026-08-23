@@ -47,12 +47,10 @@
     hiddenSlots:
     - jumpsuit
     - shoes
-    - head
     - hands
     - eyes
     - belt
     - mask
-    - neck
   - type: IdentityBlocker
   - type: IngestionBlocker
   - type: NoirOverlay
