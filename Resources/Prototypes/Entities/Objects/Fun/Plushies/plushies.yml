@@ -388,58 +388,6 @@
         Quantity: 10
 
 - type: entity
-  parent: BasePlushie
-  id: PlushieExperiment #Arf!
-  name: experiment plushie
-  description: A plushie of a canid of sorts. It yearns to be detonated on a landmine.
-  components:
-  - type: Sprite
-    sprite: Objects/Fun/Plushies/expi.rsi
-    state: icon
-  - type: Item
-    sprite: Objects/Fun/Plushies/expi.rsi
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        shader: shaded
-      right:
-      - state: inhand-right
-        shader: shaded
-  - type: EmitSoundOnUse
-    sound: &PlushieExperimentSound
-      path: /Audio/Items/Toys/arf.ogg
-      params:
-        volume: -5
-  - type: EmitSoundOnLand
-    sound: *PlushieExperimentSound
-  - type: EmitSoundOnActivate
-    sound: *PlushieExperimentSound
-  - type: EmitSoundOnTrigger
-    sound: *PlushieExperimentSound
-  - type: EmitSoundOnCollide
-    sound: *PlushieExperimentSound
-  - type: Edible
-    useSound: *PlushieExperimentSound
-  - type: MeleeWeapon
-    soundHit: *PlushieExperimentSound
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET
-        shader: shaded
-    quickEquip: false
-    sprite: Objects/Fun/Plushies/expi.rsi
-    slots:
-    - HEAD
-  - type: FoodSequenceElement
-    entries:
-      CottonBurger: ExperimentPlushie
-  - type: Tag
-    tags:
-    - Payload
-    - ClothMade
-
-- type: entity
   parent: PlushieLizard
   id: PlushieRainbowLizard #Weh but gay
   name: rainbow lizard plushie
