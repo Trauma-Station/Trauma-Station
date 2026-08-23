@@ -32,3 +32,24 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance
     damageCoefficient: 0.5
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterCsij
+  name: CSIJ biosuit
+  description: A suit of writhing flesh that- wait no that's foam.
+  components:
+  - type: sprite
+    sprite: _Trauma/Clothing/OuterClothing/Misc/csijlevelv.rsi
+  - type: clothing
+    sprite: _Trauma/Clothing/OuterClothing/Misc/csijlevelv.rsi
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
+  - type: IdentityBlocker
+  - type: IngestionBlocker
+  - type: Viewcone
+  - type: NoirOverlay
+  - type: Tag
+    tags:
+    - WhitelistChameleon
