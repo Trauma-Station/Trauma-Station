@@ -47,6 +47,7 @@
           Janitor: [ 1, 1 ]
           Musician: [ 1, 1 ]
           Passenger: [ -1, -1 ]
+          DClass: [ -1, -1 ]
       - type: StationBlobConfig
         stageBegin: 15
         stageCritical: 200
