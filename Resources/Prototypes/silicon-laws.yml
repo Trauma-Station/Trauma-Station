@@ -591,7 +591,6 @@
   weights:
     # <Trauma>
     RevLawset: 0.35
-    CosmicCultLaws: 0.35
     VampireLawset: 0.35
     GreatWallLawset: 0.35
     BureaucracyLawset: 0.35
