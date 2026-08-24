@@ -34,10 +34,6 @@
     - Freespeak
     - Tradeband
     - NewKinPidgin
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: IntellicardableMind
   # </Trauma>
   - type: Instrument
