@@ -13,7 +13,6 @@ using Content.Shared.Body;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clumsy;
 using Content.Shared.Cluwne;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -140,6 +139,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] private EntityQuery<SiliconComponent> _siliconQuery = default!;
     #endregion
 
+    private static readonly EntProtoId ClumsyWizard = "StatusEffectClumsyWizard";
     private static readonly EntProtoId BlurryVision = "StatusEffectBlurryVision";
     private static readonly EntProtoId MutedEffect = "StatusEffectMuted";
 
@@ -201,7 +201,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
         if (!targetWizard)
-            EnsureComp<ClumsyComponent>(ev.Target);
+            _status.AddEffect(ev.Target, ClumsyWizard);
 
         SetGear(ev.Target, ev.Gear, !targetWizard);
 

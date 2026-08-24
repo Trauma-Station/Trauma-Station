@@ -53,6 +53,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     {
         base.Initialize();
         InitializeActionDoAfter();
+        InitializeRelay();
 
         SubscribeLocalEvent<ActionComponent, MapInitEvent>(OnActionMapInit);
 

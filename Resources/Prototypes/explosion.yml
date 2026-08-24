@@ -103,6 +103,7 @@
       Blunt: 32
       Piercing: 4
       Slash: 4
+      Structural: 10
     woundTypeOverrides: *woundoverrides
     # </Trauma>
   tileBreakChance: [0, 0.5, 1]
@@ -168,3 +169,17 @@
   fireStates: 3
   fireStacks: 2
   temperature: 1500
+
+- type: explosion
+  id: XenoborgAntiStructureExplosion
+  damagePerIntensity:
+    types:
+      Heat: 4
+      Blunt: 2
+      Piercing: 3
+      Structural: 50
+  lightColor: Blue
+  fireColor: Blue
+  texturePath: /Textures/Effects/fire_greyscale.rsi
+  fireStates: 3
+  temperature: 800

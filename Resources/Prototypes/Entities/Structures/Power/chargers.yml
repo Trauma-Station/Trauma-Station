@@ -190,13 +190,11 @@
       charger_slot:
         ejectOnInteract: true
         whitelist:
-          # <Trauma>
           tags:
-          - FitsInCharger
-          # </Trauma>
+          - FitsInCharger # Trauma
+          - Stunbaton
           components:
           - BatteryAmmoProvider
-          - Stunbaton
           - PowerCell
         blacklist:
           tags:
@@ -245,12 +243,14 @@
       charger_slot:
         ejectOnInteract: true
         whitelist:
+          tags:
+          # <Trauma>
+          - FitsInCharger
+          # </Trauma>
+          - Stunbaton
           components:
           - BatteryAmmoProvider
-          - Stunbaton
           - PowerCell
-          tags:
-          - FitsInCharger # Goobstation
         blacklist:
           tags:
           - PotatoBattery
@@ -291,9 +291,10 @@
       charger_slot:
         ejectOnInteract: true
         whitelist:
+          tags:
+          - Stunbaton
           components:
           - BatteryAmmoProvider
-          - Stunbaton
         blacklist:
           tags:
           - PotatoBattery

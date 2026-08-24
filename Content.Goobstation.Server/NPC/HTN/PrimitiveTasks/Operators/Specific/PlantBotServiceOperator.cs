@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Silicon.Bots;
-using Content.Server.Botany.Components;
-using Content.Server.Botany.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
+using Content.Shared.Botany.Components;
+using Content.Shared.Botany.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
@@ -23,7 +23,9 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
     private SharedAudioSystem _audio = default!;
     private SharedInteractionSystem _interaction = default!;
     private SharedPopupSystem _popup = default!;
-    private PlantHolderSystem _plantHolderSystem = default!;
+    private PlantHarvestSystem _harvest = default!;
+    private PlantHolderSystem _holder = default!;
+    private PlantTraySystem _tray = default!;
 
     public const float RequiredWaterLevelToService = 80f;
     public const float RequiredWeedsAmountToWeed = 1f;
@@ -44,7 +46,8 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
         _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
         _interaction = sysManager.GetEntitySystem<SharedInteractionSystem>();
         _popup = sysManager.GetEntitySystem<SharedPopupSystem>();
-        _plantHolderSystem = sysManager.GetEntitySystem<PlantHolderSystem>();
+        _holder = sysManager.GetEntitySystem<PlantHolderSystem>();
+        _tray = sysManager.GetEntitySystem<PlantTraySystem>();
     }
 
     public override void TaskShutdown(NPCBlackboard blackboard, HTNOperatorStatus status)
@@ -61,33 +64,34 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
             return HTNOperatorStatus.Failed;
 
         if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out var botComp)
-            || !_entMan.TryGetComponent<PlantHolderComponent>(target, out var plantHolderComponent)
+            || !_entMan.TryGetComponent<PlantTrayComponent>(target, out var tray)
+            || !_entMan.TryGetComponent<PlantHolderComponent>(target, out var holder)
             || !_interaction.InRangeUnobstructed(owner, target)
-            || (plantHolderComponent is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed, Harvest: false} && (!_entMan.HasComponent<EmaggedComponent>(owner) || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)))
+            || (tray is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed } && !holder.ReadyForHarvest && (!_entMan.HasComponent<EmaggedComponent>(owner) || _holder.IsDead(target) || tray.WaterLevel <= 0f)))
             return HTNOperatorStatus.Failed;
 
         if (botComp.IsEmagged)
         {
-            _plantHolderSystem.AdjustWater(target, -WaterTransferAmount);
+            _tray.AdjustWater((target, tray), -WaterTransferAmount);
             _audio.PlayPvs(botComp.RemoveWaterSound, target);
         }
         else
         {
-            if (plantHolderComponent.WaterLevel <= RequiredWaterLevelToService)
+            if (tray.WaterLevel <= RequiredWaterLevelToService)
             {
-                _plantHolderSystem.AdjustWater(target, 10);
+                _tray.AdjustWater((target, tray), 10);
                 _audio.PlayPvs(botComp.WaterSound, target);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-add-water"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
-            else if (plantHolderComponent.WeedLevel >= RequiredWeedsAmountToWeed)
+            else if (tray.WeedLevel >= RequiredWeedsAmountToWeed)
             {
-                plantHolderComponent.WeedLevel -= WeedsRemovedAmount;
+                _tray.AdjustWeed((target, tray), -WeedsRemovedAmount);
                 _audio.PlayPvs(botComp.WeedSound, target);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-remove-weeds"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
-            else if (plantHolderComponent.Harvest)
+            else if (holder.ReadyForHarvest)
             {
-                _plantHolderSystem.DoHarvest(target, owner, plantHolderComponent);
+                _harvest.DoHarvest((target, holder), owner);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-harvest"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
             else

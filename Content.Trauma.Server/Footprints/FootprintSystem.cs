@@ -158,7 +158,7 @@ public sealed partial class FootprintSystem : EntitySystem
 
     private Entity<PuddleComponent>? GetPuddle(Entity<MapGridComponent> grid, Vector2i pos)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, pos);
+        var anchored = _map.GetAnchoredEntities(grid, grid, pos);
         while (anchored.MoveNext(out var uid))
         {
             if (_puddleQuery.TryComp(uid, out var comp))

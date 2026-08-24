@@ -11,33 +11,30 @@ namespace Content.Goobstation.Server.Implants.Systems;
 
 public sealed partial class NutrimentPumpImplantSystem : EntitySystem
 {
-    [Dependency] private HungerSystem _hunger = default!;
-    [Dependency] private ThirstSystem _thirst = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
+    [Dependency] private EntityQuery<SatiationComponent> _satiationQuery = default!;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<ImplantedComponent>();
-        while (query.MoveNext(out var uid, out var implantedComponent))
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<NutrimentPumpImplantComponent, SubdermalImplantComponent>();
+        while (query.MoveNext(out var uid, out var pump, out var implant))
         {
-            foreach (var containedEntity in implantedComponent.ImplantContainer.ContainedEntities)
-            {
-                if (!TryComp<NutrimentPumpImplantComponent>(containedEntity, out var pumpImplant))
-                    continue;
+            if (now < pump.NextExecutionTime)
+                continue;
 
-                if (pumpImplant.NextExecutionTime > _gameTiming.CurTime)
-                    continue;
+            pump.NextExecutionTime = now + pump.ExecutionInterval;
 
-                if (TryComp<HungerComponent>(uid, out var hungerComponent))
-                    _hunger.ModifyHunger(uid, pumpImplant.FoodRate, hungerComponent);
+            if (implant.ImplantedEntity is not { } mob ||
+                !_satiationQuery.TryComp(mob, out var satiation))
+                continue;
 
-                if (TryComp<ThirstComponent>(uid, out var thirstComponent))
-                    _thirst.ModifyThirst(uid, thirstComponent, pumpImplant.DrinkRate); // why the fuck is the order of arguments different for ModifyThirst????
-
-                pumpImplant.NextExecutionTime = _gameTiming.CurTime + pumpImplant.ExecutionInterval;
-            }
+            var ent = new Entity<SatiationComponent>(mob, satiation);
+            _satiation.ModifyValue(ent, SatiationSystem.Hunger, pump.FoodRate);
+            _satiation.ModifyValue(ent, SatiationSystem.Thirst, pump.DrinkRate);
         }
     }
 }
