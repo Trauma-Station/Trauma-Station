@@ -114,12 +114,14 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        # <Trauma>
+        #- Impassable
+        #- BulletImpassable
+        # </Trauma>
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 33
+    damage: 22 # Trauma - was 33
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -155,8 +157,10 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        # <Trauma>
+        #- Impassable
+        #- BulletImpassable
+        # </Trauma>
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
@@ -199,12 +203,14 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        # <Trauma>
+        #- Impassable
+        #- BulletImpassable
+        # </Trauma>
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 15
+    damage: 13 # Trauma - was 15
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -246,7 +252,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 2
+        Ballistic: 2 # Trauma - was Piercing
   - type: StunOnCollide #somewhat mirror to taser stats, meant to be tot 'sidegrade'
     stunAmount: 0
     knockdownAmount: 2.5

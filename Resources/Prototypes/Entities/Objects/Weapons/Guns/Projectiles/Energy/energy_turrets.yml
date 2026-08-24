@@ -45,6 +45,10 @@
   categories: [ HideSpawnMenu ]
   name: laser bolt
   components:
+  # <Trauma>
+  - type: BlurOnCollide
+    blurTime: 3
+  # </Trauma>
   - type: Ammo
     muzzleFlash: MuzzleFlashEffectHeavyLaser
   - type: Sprite
@@ -56,7 +60,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 28
+        Heat: 20 # Trauma - was 28
 
 - type: entity
   parent: BulletEnergyTurretBase
@@ -88,6 +92,11 @@
   categories: [ HideSpawnMenu ]
   name: tesla gun lightning
   components:
+  # <Trauma>
+  - type: Ammo
+    muzzleFlash: null
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: TimedDespawn
     lifetime: 5
   - type: Sprite

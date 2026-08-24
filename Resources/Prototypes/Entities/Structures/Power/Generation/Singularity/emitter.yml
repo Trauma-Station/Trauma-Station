@@ -40,14 +40,16 @@
     idlePowerDraw: 5
     workingPowerDraw: 600
     ensureApc: false
-  - type: NotifyOnNonFunctioning
-    locDestroyed: emitter-destroyed-broadcast
-    locUnlocked: emitter-unlocked-broadcast
-    locUnpowered: emitter-unpowered-broadcast
-    locUnanchored: emitter-unpowered-broadcast
-    locTurnedOff: emitter-turn-off-broadcast
-    radioChannel: Engineering
-    requirePowered: true
+  # <Trauma> - hugbox slop
+  #- type: NotifyOnNonFunctioning
+  #  locDestroyed: emitter-destroyed-broadcast
+  #  locUnlocked: emitter-unlocked-broadcast
+  #  locUnpowered: emitter-unpowered-broadcast
+  #  locUnanchored: emitter-unpowered-broadcast
+  #  locTurnedOff: emitter-turn-off-broadcast
+  #  radioChannel: Engineering
+  #  requirePowered: true
+  # </Trauma>
   - type: Gun
     showExamineText: false
     fireRate: 10 #just has to be fast enough to keep up with upgrades

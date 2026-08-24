@@ -18,6 +18,9 @@
   name: Ian
   description: Favorite pet corgi.
   components:
+  # <Trauma>
+  - type: IanAdventureTarget
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -140,6 +143,10 @@
   name: real mouse
   description: It's 100% a real hungry mouse.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+    attackMemoryLength: 0 # dementia
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -164,6 +171,9 @@
   name: Puppy Ian
   description: Favourite puppy corgi. Awww.
   components:
+  # <Trauma>
+  - type: IanAdventureTarget
+  # </Trauma>
   - type: Grammar
     attributes:
       proper: true
@@ -179,15 +189,17 @@
 - type: entity
   parent: [ BaseUniquePet, MobCat ]
   id: MobCatRuntime
-  name: Runtime
+  # <Trauma>
+  name: Aves
   description: The cat who walks by himself.
+  # </Trauma>
   components:
   - type: NpcFactionMember
     factions:
       - PetsNT
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: RuminantHostileCompound # Trauma - was SimpleHostileCompound
   - type: Grammar
     attributes:
       proper: true

@@ -4,6 +4,14 @@
   id: MobBat
   description: Some cultures find them terrifying, others crunchy on the teeth.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 6
@@ -54,8 +62,10 @@
       reagents:
       - ReagentId: Blood
         Quantity: 50
-  - type: ReplacementAccent
-    accent: mouse
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: mouse
+  # </Trauma>
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
@@ -88,6 +98,10 @@
   id: MobBee
   description: Nice to have, but you can't build a civilization on a foundation of honey alone.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 0
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
@@ -113,7 +127,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      10: Dead
+      5: Dead # Trauma - was 10
   - type: Stamina
     baseCritThreshold: 10
     animationThreshold: 1
@@ -161,7 +175,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 20
+        damage: 5 # Trauma - was 20
       behaviors:
       - !type:GibBehavior
         recursive: false
@@ -203,6 +217,14 @@
   id: MobChicken
   description: Comes before an egg, and IS a dinosaur!
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Chicken
+    understands:
+    - Chicken
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -288,8 +310,10 @@
   - type: ActionGrant
     actions:
     - ActionAnimalLayEgg
-  - type: ReplacementAccent
-    accent: chicken
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: chicken
+  # </Trauma>
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -365,6 +389,22 @@
   parent: [SolutionFood, SolutionTiny, SimpleMobBase, BaseSlicingRefinable, MobNightVision]
   id: BaseCockroach
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 0
+  - type: ZombieImmune
+  - type: LanguageSpeaker
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+  - type: ThermalRegulator
+    metabolismHeat: 300
+  - type: StaticPrice
+    price: -520
+  - type: VentCrawler
+  # </Trauma>
   - type: Sprite
     drawdepth: SmallMobs
   - type: Item
@@ -501,19 +541,38 @@
 
 - type: entity
   name: mothroach
-  parent: [ BaseMobMothroach, BaseCockroach, BaseSlicingRefinable ]
+  parent: [ BaseMobMothroach, BaseCockroach, BaseSlicingRefinable, BaseAnimalGhostRole ] # Trauma - added BaseAnimalGhostRole
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: DashAction
+    actionProto: ActionDashMoth
+  - type: LanguageSpeaker
+    speaks:
+    - Moffic
+    understands:
+    - Moffic
+    - TauCetiBasic
+  - type: EatToGrow
+    growth: 0.05
+    maxGrowth: 2
+  # </Trauma>
   - type: GhostRole
+    prob: 0 # Trauma
     makeSentient: true
     allowSpeech: true
     allowMovement: true
     name: ghost-role-information-mothroach-name
     description: ghost-role-information-mothroach-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    # <Trauma> - inherit animal rules
+    #rules: ghost-role-information-freeagent-rules
+    #mindRoles:
+    #- MindRoleGhostRoleFreeAgentHarmless
+    # </Trauma>
   - type: Fixtures
     fixtures:
       fix1:
@@ -546,7 +605,7 @@
       movement:
         state: mothroach
   - type: Item
-    size: Normal
+    size: Small # Trauma - was Normal, let it fit in chest cavity
   - type: Clothing
     quickEquip: false
     sprite: Mobs/Animals/mothroach/mothroach.rsi
@@ -601,8 +660,10 @@
       amount: 2
   - type: Extractable
     grindableSolutionName: food
-  - type: ReplacementAccent
-    accent: mothroach
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: mothroach
+  # </Trauma>
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Vocal
@@ -682,6 +743,14 @@
   id: MobDuckMallard
   description: An adorable mallard duck, it's fluffy and soft!
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Duck
+    understands:
+    - Duck
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -757,8 +826,10 @@
   - type: ActionGrant
     actions:
     - ActionAnimalLayEgg
-  - type: ReplacementAccent
-    accent: duck
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: duck
+  # </Trauma>
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -823,6 +894,10 @@
   id: MobButterfly
   description: Despite popular misconceptions, it's not actually made of butter.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 1
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 6
@@ -966,7 +1041,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma - was RuminantCompound
   - type: GuideHelp
     guides:
     - Chef
@@ -1000,6 +1075,15 @@
   id: MobCrab
   description: A folk legend goes around that his claw snaps spacemen out of existence over distasteful remarks. Be polite and tolerant for your own safety.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Crab
+    understands:
+    - Crab
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -1048,8 +1132,10 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
-  - type: ReplacementAccent
-    accent: crab
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: crab
+  # </Trauma>
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1057,10 +1143,11 @@
         Quantity: 50
   - type: Tag
     tags:
+    - Crab # Trauma
     - VimPilot
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma - was RuminantCompound
 
 - type: entity
   name: goat
@@ -1303,7 +1390,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma - was RuminantCompound
   - type: MovementSpeedModifier
     baseWalkSpeed: 0.6
     baseSprintSpeed: 0.8
@@ -1448,6 +1535,12 @@
   id: MobGorilla
   description: Smashes, roars, looks cool. Don't stand near one.
   components:
+  # <Trauma>
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      80: 0.7
+      100: 0.5
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -1489,7 +1582,7 @@
       collection: Punch
     damage:
       types:
-        Blunt: 20
+        Blunt: 30 # Trauma - was 20
     animation: WeaponArcFist
   - type: NPCRetaliation
   - type: FactionException
@@ -1519,8 +1612,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      250: Dead
+      120: Critical # Trauma - was 200
+      220: Dead # Trauma - was 250
 
 - type: entity
   name: kangaroo
@@ -1533,6 +1626,14 @@
   id: MobKangaroo
   description: A large marsupial herbivore. It has powerful hind legs, with nails that resemble long claws.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Kangaroo
+    understands:
+    - Kangaroo
+    - TauCetiBasic
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.5
     baseSprintSpeed: 4.5
@@ -1557,8 +1658,10 @@
   - type: Inventory
     speciesId: kangaroo
     templateId: kangaroo
-  - type: ReplacementAccent
-    accent: kangaroo
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: kangaroo
+  # </Trauma>
   - type: ToolRefinable
     refineResult:
     - id: FoodMeat
@@ -1576,7 +1679,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: GhostRole
-    prob: 0.25
+    prob: 0 # Trauma
     name: ghost-role-information-kangaroo-name
     description: ghost-role-information-kangaroo-description
     rules: ghost-role-information-nonantagonist-rules
@@ -1625,6 +1728,32 @@
   description: The genetic bipedal ancestor of... Uh... Something. Yeah, there's definitely something on the station that descended from whatever this is.
   abstract: true
   components:
+  # <Trauma>
+  - type: BagAccess
+  - type: VampireDrainable
+  - type: BloodSplatterer
+  - type: VentCrawler
+    allowInventory: false
+  - type: GroupRetaliation
+    range: 8
+  - type: Targeting
+  - type: HumanoidProfile
+    species: Monkey
+  - type: Vocal
+    emoteSounds: MonkeyMode
+    wilhelmProbability: 0.001
+  - type: DiseaseCarrier
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  # stupid monkey needs clever mutation to be literate
+  - type: BlockReading
+  - type: BlockWriting
+  - type: XenoVacTarget # dead monkey cleaner 9000
+  # </Trauma>
   - type: CombatMode
     canDisarm: true
   - type: Inventory
@@ -1650,10 +1779,12 @@
   - type: Stripping
   - type: Sprite
     drawdepth: Mobs
-  - type: Hands
-    startingHands:
-      hand_left:
-        location: Left
+  # <Trauma> - it has hand bodyparts
+  #- type: Hands
+  #  startingHands:
+  #    hand_left:
+  #      location: Left
+  # </Trauma>
   - type: ComplexInteraction
   - type: CreamPied
     sprite:
@@ -1692,7 +1823,7 @@
   - type: FactionException
   - type: NpcFactionMember
     factions:
-      - Passive
+    - Monkey # Trauma - was Passive
   - type: HTN
     rootTask:
       task: MonkeyCompound
@@ -1722,24 +1853,42 @@
 - type: entity
   name: monkey
   id: MobMonkey
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, BaseAnimalGhostRole, MobBaseAncestor ] # Trauma - added AppearanceMonkey, BaseAnimalGhostRole
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Monkey
+    understands:
+    - Monkey
+    - Kobold
+    - TauCetiBasic
+  - type: Skinnable # Fuck pun-pun
+    skinnedSprite: _Trauma/Mobs/Animals/skinnedmonkey.rsi
+    unskinnedSprite: Mobs/Animals/monkey.rsi
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
+  - type: KnowledgeHolder
+  # </Trauma>
   - type: NameIdentifier
     group: Monkey
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: MonkeyAccent
+  #- type: MonkeyAccent # Trauma
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
   - type: GhostRole
-    prob: 0.05
+    prob: 0.1 # Trauma - was 0.05
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
-    rules: ghost-role-information-nonantagonist-rules
+    #rules: ghost-role-information-nonantagonist-rules # Trauma - inherit animal rules
   - type: GhostTakeoverAvailable
   - type: PermanentStatusEffects
     statusEffects:
@@ -1749,10 +1898,20 @@
   name: monkey
   id: MobBaseSyndicateMonkey
   abstract: true # Trauma - it's a base...
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Trauma - added AppearanceMonkey
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Monkey
+    understands:
+    - Monkey
+    - Kobold
+    - TauCetiBasic # Understanding your nukeops partners.
+  # </Trauma>
   - type: NameIdentifier
     group: Monkey
   - type: SentienceTarget
@@ -1760,12 +1919,12 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: MonkeyAccent
+  #- type: MonkeyAccent # Trauma
   - type: NpcFactionMember
     factions:
     - Syndicate
   - type: GhostRole
-    prob: 0.05
+    prob: 0.1 # Trauma - was 0.05
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
@@ -1798,15 +1957,31 @@
 - type: entity
   name: kobold
   id: MobBaseKobold
-  parent: MobBaseAncestor
+  parent: [ AppearanceKobold, BaseAnimalGhostRole, MobBaseAncestor ] # Trauma - added AppearanceKobold, BaseAnimalGhostRole
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   abstract: true
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Kobold
+    understands:
+    - Kobold
+    - Monkey
+    - TauCetiBasic
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # free lizardmen...
+    dormant:
+    - MutationMonkified
+  # </Trauma>
   - type: NameIdentifier
     group: Kobold
   - type: LizardAccent
-  - type: ReplacementAccent
-    accent: kobold
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: kobold
+  # </Trauma>
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
@@ -1829,8 +2004,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      60: Critical
-      125: Dead
+      100: Critical # Trauma - was 60
+      200: Dead # Trauma - was 125
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.5
     baseSprintSpeed: 5
@@ -1855,11 +2030,11 @@
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-kobold
   - type: GhostRole
-    prob: 0.05
+    prob: 0.1 # Trauma - was 0.05
     makeSentient: true
     name: ghost-role-information-kobold-name
     description: ghost-role-information-kobold-description
-    rules: ghost-role-information-nonantagonist-rules
+    #rules: ghost-role-information-nonantagonist-rules # Trauma - inherit animal rules
 
 - type: entity
   name: kobold
@@ -1915,19 +2090,76 @@
 
 - type: entity
   name: mouse
-  parent: [SimpleMobBase, BaseMobAnimal, SolutionVermin, BaseSlicingRefinable, MobNightVision]
+  parent: [BaseMobMouse, BaseAnimalGhostRole, SimpleMobBase, SolutionVermin, BaseSlicingRefinable, MobNightVision] # Trauma - added BaseMobMouse+BaseAnimalGhostRole, removed BaseMobAnimal
   id: MobMouse
   description: Squeak!
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 3 # 3-5 kills per bullet
+  - type: ZombieImmune
+  - type: VentCrawler
+    enterDelay: 0.5
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-0
+  - type: SolutionManager
+    solutions:
+    - SolutionMouseBites
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+  - type: Stamina
+    baseCritThreshold: 20
+    animationThreshold: 10
+  - type: Crawler
+  - type: NPCRetaliation
+    attackMemoryLength: 5 # stop caring fast if you don't keep hitting
+  - type: GroupRetaliation
+    range: 5 # slightly lower for mice
+  - type: CollectiveMind
+    defaultChannel: Mousemind
+    channels:
+    - Mousemind
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: ActionGrant
+    actions:
+    - ActionMouseCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Mouse
+  - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
+  - type: MobSpam # no 500 dead mice lagging the server
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  # </Trauma>
   - type: GhostRole
+    prob: 0.3 # Trauma - not guaranteed anymore
     makeSentient: true
     allowSpeech: true
     allowMovement: true
     name: ghost-role-information-mouse-name
     description: ghost-role-information-mouse-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    # <Trauma> - inherit animal rules
+    #rules: ghost-role-information-freeagent-rules
+    #mindRoles:
+    #- MindRoleGhostRoleFreeAgentHarmless
+    # <Trauma>
   - type: GhostTakeoverAvailable
   - type: Speech
     speechSounds: Squeak
@@ -2044,14 +2276,16 @@
   # TODO: Remove CombatMode when Prototype Composition is added
   - type: CombatMode
   - type: MeleeWeapon
+    altDisarm: false # Trauma
     soundHit:
       path: /Audio/Effects/bite.ogg
     angle: 0
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 0
+        Slash: 1 # Trauma - was 0 Piercing
   - type: Bloodstream
+    smokeImmune: true # Trauma - prevent server lagging mouse farms
     bloodReferenceSolution:
       reagents:
       - ReagentId: Blood
@@ -2102,6 +2336,10 @@
   parent: MobMouse
   id: MobMouse1
   components:
+  # <Trauma>
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-1
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
@@ -2130,6 +2368,10 @@
   parent: MobMouse
   id: MobMouse2
   components:
+  # <Trauma>
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-2
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
@@ -2161,6 +2403,7 @@
   id: MobMouseCancer
   components:
   - type: GhostRole
+    prob: 1 # Trauma - Ensure evil mice get their ghostrole
     name: ghost-role-information-cancer-mouse-name
     description: ghost-role-information-cancer-mouse-description
     rules: ghost-role-information-freeagent-rules
@@ -2260,6 +2503,9 @@
   id: MobSlug
   description: And they called this a lizard?
   components:
+  # <Trauma>
+  - type: VentCrawler
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 2
     baseSprintSpeed : 3
@@ -2310,6 +2556,17 @@
   id: MobFrog
   description: Hop hop hop. Lookin' moist.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: Penetratable
+    penetrateDamage: 3 # 3-5 kills per bullet
+  - type: ZombieImmune
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      10: Critical
+      20: Dead
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
     baseSprintSpeed: 6
@@ -2383,6 +2640,25 @@
   abstract: true
   description: Infiltrates your domain, spies on you, and somehow still a cool pet.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 5
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  # </Trauma>
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.5
     baseSprintSpeed : 6
@@ -2469,6 +2745,14 @@
   id: MobPenguin
   description: Their lives are constant pain due to their inner-body knees.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Penguin
+    understands:
+    - Penguin
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -2605,6 +2889,15 @@
   id: MobSnake
   description: Hissss! Bites aren't poisonous.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -2651,10 +2944,32 @@
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ]
+  parent: [ BaseMobGiantSpider, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added BaseMobGiantSpider
   id: MobSpiderBase
   abstract: true
   components:
+  # <Trauma>
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Slash: 3
+        Piercing: 7
+  - type: VentCrawler
+  - type: UseDelay # For insta prying
+    delay: 1
+  - type: FoliageIgnoringVision
+  - type: LanguageSpeaker
+    speaks:
+    - Xeno
+    understands:
+    - Xeno
+    - TauCetiBasic
+  # </Trauma>
   - type: Physics
   - type: ToolRefinable
     refineResult:
@@ -2671,8 +2986,10 @@
   - type: MeleeChemicalInjector
     transferAmount: 0.75
     solution: melee
-  - type: ReplacementAccent
-    accent: xeno
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: xeno
+  # </Trauma>
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-tarantula
@@ -2684,6 +3001,7 @@
     needsHands: false
   - type: NoSlip
   - type: Spider
+    spawnsWebsAsNonPlayer: false # Trauma
   - type: IgnoreSpiderWeb
   - type: Bloodstream
     bloodReferenceSolution:
@@ -2705,7 +3023,7 @@
   - type: Prying # Open door from xeno.yml.
     pryPowered: true
     force: true
-    speedModifier: 1.5
+    speedModifier: 4 # Trauma - was 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
@@ -2714,6 +3032,7 @@
     - Alive
     damage:
       types:
+        Ballistic: -0.03 # Trauma
         Poison: -0.07
         Blunt: -0.03
         Slash: -0.03
@@ -2744,6 +3063,7 @@
   - type: InputMover
   - type: MobMover
   - type: HTN
+    constantlyReplan: false # Trauma
     rootTask:
       task: SimpleHostileCompound
   - type: GhostRole
@@ -2753,12 +3073,14 @@
     rules: ghost-role-information-giant-spider-rules
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: short
+    # <Trauma>
+    #raffle:
+    #  settings: short
+    # </Trauma>
   - type: GhostTakeoverAvailable
 
 - type: entity
-  name: tarantula
+  name: giant spider # Trauma
   parent: MobSpiderBase
   id: MobGiantSpider
   description: Widely recognized to be the literal worst thing in existence.
@@ -2792,13 +3114,67 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 6
+        # <Trauma> - buffed to slowly break grilles
+        Slash: 3
+        Piercing: 7
+        # </Trauma>
 
 - type: entity
   parent:
   - MobSpiderAngryBase
   - MobGiantSpider
   id: MobGiantSpiderAngry
+  # <Trauma>
+  components:
+  - type: MobSpam
+  - type: Tag
+    tags:
+    - Spider
+  - type: ActionGrant
+    actions:
+    - ActionSpiderCall
+    - SpiderMultiply
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Spider
+  - type: MobCallable
+  - type: HTN
+    constantlyReplan: false
+    rootTask:
+      task: SpiderCompound
+  - type: ShadowCocoonMaker
+    cocoonDelay: 15
+    shadowCocoon: SpiderEggsHuman
+    verbText: "Infest victim"
+  - type: EntityProducerAction
+    insufficientSatiationPopup: action-popup-lay-egg-too-hungry
+    userPopup: action-popup-lay-egg-user
+    othersPopup: action-popup-lay-egg-others
+  - type: SatiationProduction
+    delay: 60
+    delayMax: 120
+    satiationUsage: 140
+    minimumSatiation: 140
+    automaticForPlayers: false
+  - type: EntityProducer
+    table:
+      id: SpiderEggs
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SpiderHunger
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  # - type: Hands # TODO - Make spiders only able to hold webs
+  - type: Puller
+    needsHands: false
+  - type: Inventory
+    templateId: xenomorph
+  - type: ComplexInteraction
+  # <Trauma>
 
 - type: entity
   name: clown spider
@@ -2806,6 +3182,14 @@
   id: MobClownSpider
   description: Combines the two most terrifying things in existence, spiders and clowns.
   components:
+    # <Trauma>
+    - type: SolutionManager
+      solutions:
+      - SolutionClownSpider
+    - type: MeleeChemicalInjector
+      transferAmount: 6
+      solution: melee
+    # </Trauma>
     - type: Sprite
       drawdepth: Mobs
       layers:
@@ -2827,7 +3211,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        180: Dead
+        240: Dead # Trauma - was 180
     - type: Spider
       webPrototype: SpiderWebClown
     - type: MeleeWeapon
@@ -2838,7 +3222,11 @@
         path: /Audio/Effects/bite.ogg
       damage:
         types:
-          Piercing: 8
+          # <Trauma> - split into slash and blunt so it can break grilles and windows
+          Slash: 4
+          Piercing: 2
+          Blunt: 2
+          # </Trauma>
     - type: FootstepModifier
       footstepSoundCollection:
         collection: FootstepClownFast
@@ -2847,7 +3235,7 @@
     - type: Bloodstream
       bloodReferenceSolution:
         reagents:
-        - ReagentId: Laughter
+        - ReagentId: SpaceLube # Trauma - was Laughter
           Quantity: 150
 
 - type: entity
@@ -2857,6 +3245,13 @@
   description: This spider looks a little magical
   suffix: Wizard
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Universal # Should allow them to understand everything and speak it too. Might need to change this.
+    understands:
+    - Universal
+  # </Trauma>
   - type: Accentless
     removes:
     - type: ReplacementAccent
@@ -2864,7 +3259,7 @@
 
 - type: entity
   name: possum
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
+  parent: [ BaseMobTrashPanda, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added BaseMobTrashPanda
   id: MobPossum
   description: '"O Possum! My Possum!" -- Walt Whitman, 1865'
   components:
@@ -2937,7 +3332,7 @@
 
 - type: entity
   name: raccoon
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
+  parent: [ BaseMobTrashPanda, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added BaseMobTrashPanda
   id: MobRaccoon
   description: Trash panda!
   components:
@@ -2994,6 +3389,14 @@
   id: MobFox
   description: They're a fox.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Fox
+    understands:
+    - Fox
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/fox.rsi
@@ -3056,7 +3459,7 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 15
+        Piercing: 15 # Trauma - was 8
   - type: NpcFactionMember
     factions:
     - Passive
@@ -3144,6 +3547,26 @@
   parent: [MobCorgiBase, BaseSlicingRefinable]
   id: MobCorgi
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 15
+  - type: LanguageSpeaker
+    speaks:
+    - Dog
+    understands:
+    - Dog
+    - TauCetiBasic
+  # </Trauma>
   - type: DamageStateVisuals
     states:
       Alive:
@@ -3156,8 +3579,10 @@
     refineResult:
     - id: FoodMeat
       amount: 2
-  - type: ReplacementAccent
-    accent: dog
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: dog
+  # </Trauma>
   - type: Tag
     tags:
     - VimPilot
@@ -3231,6 +3656,9 @@
   id: MobCorgiPuppy
   description: A little corgi! Aww...
   components:
+  # <Trauma>
+  - type: VentCrawler
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -3258,6 +3686,19 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: LanguageSpeaker
+    speaks:
+    - Cat
+    understands:
+    - Cat
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
@@ -3306,12 +3747,12 @@
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    animation: WeaponArcBite
+    animation: WeaponArcSlash # Trauma - was Bite
     soundHit:
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 5
+        Slash: 10 # Trauma - was 5 Piercing
   - type: Grammar
     attributes:
       gender: epicene
@@ -3346,9 +3787,17 @@
 - type: entity
   name: syndicat
   id: MobCatSyndy
-  parent: MobCatSpace
+  parent: [ MobCatSpace, MobNightVision ] # Trauma - added MobNightVision
   description: Explosive kitten.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Cat
+    understands:
+    - Cat
+    - TauCetiBasic # Needs to understand your nukie ops.
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -3492,7 +3941,7 @@
 
 - type: entity
   name: sloth
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
+  parent: [BaseMobTrashPanda, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible] # Trauma - added BaseMobTrashPanda
   id: MobSloth
   description: Very slow animal. For people with low energy.
   components:
@@ -3549,7 +3998,7 @@
 
 - type: entity
   name: ferret
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible]
+  parent: [BaseMobTrashPanda, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible] # Trauma - added BaseMobTrashPanda
   id: MobFerret
   description: Just a silly little guy!
   components:
@@ -3607,7 +4056,19 @@
   id: MobHamster
   description: A cute, fluffy, robust hamster.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  # </Trauma>
   - type: GhostRole
+    prob: 0 # Trauma
     makeSentient: true
     allowSpeech: true
     allowMovement: true
@@ -3764,6 +4225,23 @@
   id: MobPig
   description: Oink.
   components:
+  # <Trauma>
+  - type: NPCRetaliation
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 15
+  - type: LanguageSpeaker
+    speaks:
+    - Pig
+    understands:
+    - Pig
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -3819,8 +4297,10 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  - type: ReplacementAccent
-    accent: pig
+  # <Trauma>
+  #- type: ReplacementAccent
+  #  accent: pig
+  # </Trauma>
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -3828,7 +4308,7 @@
     - Passive
   - type: HTN
     rootTask:
-      task: RuminantCompound
+      task: RuminantHostileCompound # Trauma - was RuminantCompound
 
 - type: entity
   name: diona nymph
@@ -3836,6 +4316,14 @@
   id: MobDionaNymph
   description: It's like a cat, only.... branch-ier.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - RootSpeak
+    understands:
+    - RootSpeak
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -3924,6 +4412,14 @@
   id: MobReindeerBuck
   description: You think it can pull a sleigh?
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Deer
+    understands:
+    - Deer
+    - TauCetiBasic
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     layers:

@@ -76,6 +76,10 @@
   id: Cowbar
   description: Cow your problems away. Moo!
   components:
+  # <Trauma>
+  - type: UseDelay # For insta prying
+    delay: 3
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/Cowtools/cowbar.rsi
     state: cowbar

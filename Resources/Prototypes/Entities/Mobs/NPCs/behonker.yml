@@ -5,6 +5,9 @@
   name: behonker
   description: A floating demon aspect of the honkmother.
   components:
+  # <Trauma>
+  - type: Fauna
+  # </Trauma>
   - type: GhostRole
     allowMovement: true
     makeSentient: true
@@ -29,7 +32,7 @@
     autoRechargeRate: 40
   - type: Gun
     fireRate: 0.75
-    useKey: false
+    useKey: true # Trauma - was false
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -94,7 +97,7 @@
   - type: ToolRefinable
     refineResult:
     - id: MaterialBananium1
-      amount: 2
+      amount: 5 # Trauma - was 2
     - id: WeaponBehonkerLaser
   - type: MeleeWeapon
     soundHit:

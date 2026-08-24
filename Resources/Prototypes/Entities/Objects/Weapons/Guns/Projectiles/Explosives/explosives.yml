@@ -4,6 +4,9 @@
   categories: [ HideSpawnMenu ]
   name: rocket
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -26,6 +29,9 @@
   categories: [ HideSpawnMenu ]
   name: weak rocket
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -48,6 +54,9 @@
   categories: [ HideSpawnMenu ]
   name: baton grenade
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -60,7 +69,7 @@
     soundHit:
       path: /Audio/Effects/gen_hit.ogg
   - type: StaminaDamageOnCollide
-    damage: 80
+    damage: 50 # Trauma - was 80
 
 - type: entity
   parent: BaseBulletTrigger
@@ -68,6 +77,9 @@
   categories: [ HideSpawnMenu ]
   name: blast grenade
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -86,6 +98,11 @@
   categories: [ HideSpawnMenu ]
   name: flash grenade
   components:
+  # <Trauma>
+  - type: Flashbang
+    minProtectionRange: 7 # Can't stun/knockdown people wearing any ear protection
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -102,6 +119,9 @@
   categories: [ HideSpawnMenu ]
   name: frag grenade
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -127,6 +147,9 @@
   categories: [ HideSpawnMenu ]
   name: cleanade grenade round
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
@@ -156,13 +179,16 @@
   categories: [ HideSpawnMenu ]
   name: EMP rocket
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: frag
   - type: EmpOnTrigger
-    range: 5
-    energyConsumption: 50000
+    range: 3 # Trauma - was 5
+    energyConsumption: 360 # Trauma - was 50k
     disableDuration: 10
   - type: Ammo
     muzzleFlash: null
@@ -177,6 +203,9 @@
   categories: [ HideSpawnMenu ]
   name: cannonball
   components:
+  # <Trauma>
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:

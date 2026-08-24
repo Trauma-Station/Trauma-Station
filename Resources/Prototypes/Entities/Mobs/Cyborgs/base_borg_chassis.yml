@@ -6,6 +6,40 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: KnowledgeHolder
+  - type: IntrinsicUI
+    uis:
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionShowStationMap
+  - type: StationMap # Show location on the map
+  - type: Targeting
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: Penetratable # Better snipers
+    penetrateDamage: 75 # It's harder to kill iron golem
+    damagePenalty: 0.25
+  - type: MiningPoints # for mining borgs mostly
+  - type: SpeechSynthesis
+    voice: Borg
+  - type: KnowledgeGrantOnWear # gets added to the brain, modified when picking borg type
+    skills:
+      # robot basic stuff
+      FabricationKnowledge: 20
+      WallsKnowledge: 10
+      InfrastructureKnowledge: 10
+      ElectronicsKnowledge: 10
+  # </Trauma>
   - type: Reactive
     groups:
       Acidic: [Touch]
@@ -55,6 +89,7 @@
     allowRevives: true
   - type: HealthExaminable
     examinableTypes:
+      - Ballistic # Trauma
       - Blunt
       - Slash
       - Piercing
@@ -63,6 +98,10 @@
     locPrefix: silicon
   - type: UserInterface
     interfaces:
+      # <Trauma>
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+      # </Trauma>
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
         requireInputValidation: false
@@ -103,6 +142,7 @@
     - Science
   - type: ZombieImmune
   - type: Repairable
+    allowSelfRepair: true # Trauma
     damageValue: -10 # 10 seconds to repair from crit
     doAfterDelay: 1
     fuelCost: 0.5
@@ -166,6 +206,7 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
+    damageModifierSet: Silicon # Trauma
   - type: Injurable
     damageContainer: Silicon
   - type: HandheldLight
@@ -206,6 +247,10 @@
   - type: StandingState
   - type: Tag
     tags:
+    # <Trauma>
+    - SiliconMob
+    - IPCDrinkBlacklist # no selfantagging ipcs
+    # </Trauma>
     - DoorBumpOpener
     - FootstepSound
     - CanPilot
@@ -387,12 +432,13 @@
   - type: Speech
     speechSounds: SyndieBorg
     allowedEmotes:
+    # <Trauma>
     - Laugh
-    # Goobstation - Cyborg emote sounds
     - Sigh
     - Crying
+    # </Trauma>
     - Whistle
-    # end Goobstation - Cyborg emote sounds
+    - Laugh
   - type: Vocal
     emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
@@ -462,6 +508,13 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: BlockShuttleRecall
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  # </Trauma>
   - type: RandomMetadata
     nameSegments:
     - NamesXenoborg
@@ -477,6 +530,7 @@
   - type: EmagSiliconLaw # should xenoborgs be emagable?
     stunTime: 5
   - type: SiliconLawProvider
+    subverted: true # Trauma
     laws: XenoborgLawset # custom laws here
   - type: IntrinsicRadioTransmitter # can only use binary and xenoborg channel
     channels:
@@ -488,6 +542,11 @@
     - Xenoborg
     #- Binary # Goob
   - type: BorgChassis
+    # <Trauma>
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+    # </Trauma>
     maxModules: 0
     hasMindState: robot_e
     noMindState: robot_e_r
@@ -500,6 +559,11 @@
     speechVerb: Robotic
     speechSounds: Xenoborg
     allowedEmotes:
+    # <Trauma>
+    - Sigh
+    - Crying
+    - Whistle
+    # </Trauma>
     - Laugh
   - type: Vocal
     emoteSounds: UnisexSiliconXenoborg
@@ -542,8 +606,10 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
-  - type: EmpResistance
-    strengthMultiplier: 0
+  # <Trauma>
+  #- type: EmpResistance
+  #  strengthMultiplier: 0
+  # </Trauma>
 
 - type: entity
   abstract: true

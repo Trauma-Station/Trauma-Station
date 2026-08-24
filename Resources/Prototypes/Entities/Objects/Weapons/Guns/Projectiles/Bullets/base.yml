@@ -15,6 +15,7 @@
   - type: FlyBySound
   - type: Clickable
   - type: Physics
+    bodyStatus: InAir # Trauma
     bodyType: Dynamic
   - type: TileFrictionModifier
     modifier: 0
@@ -40,7 +41,7 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Piercing: 14
+        Ballistic: 14 # Trauma - was Piercing
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
@@ -94,7 +95,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10 # Trauma - was Piercing
         Heat: 4
   - type: PointLight
     enabled: true
@@ -102,7 +103,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnCollide
-    fireStacks: 0.25
+    fireStacks: 0.5 # Trauma - was 0.25
 
 - type: entity
   parent: BaseBullet
@@ -117,8 +118,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 11 # 20% decrease
-    ignoreResistances: true
+        Ballistic: 11 # Trauma - was Piercing
+    increaseOnly: true # Trauma - apply modifiers, but ignore decreases
 
 - type: entity
   parent: BaseBullet

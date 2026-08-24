@@ -50,5 +50,5 @@
     sprite: Objects/Tools/rpd.rsi
   - type: Tag
     tags:
-    - !Remove RCD # prevent revs trolling
+    # remove RCD tag to prevent revs trolling
     - DroneUsable

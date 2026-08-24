@@ -1,5 +1,0 @@
-- type: entity
-  id: StatusEffectClumsyAll
-  components:
-  - type: TackleModStatusEffect
-    modifier: -2

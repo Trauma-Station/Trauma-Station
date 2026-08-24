@@ -47,4 +47,4 @@
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 0
+        Ballistic: 0 # Trauma - was Piercing

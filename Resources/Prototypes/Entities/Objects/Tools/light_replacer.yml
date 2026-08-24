@@ -4,6 +4,10 @@
   id: LightReplacer
   description: An item which uses magnets to easily replace broken lights. Refill by adding more lights into the replacer.
   components:
+  # <Trauma>
+  - type: EntityProviderAreaPickup
+    comp: LightBulb
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Janitorial/light_replacer.rsi
     state: icon
@@ -25,6 +29,7 @@
         type: LightReplacerMenuBoundUserInterface
   - type: Tag
     tags:
+    - DroneUsable # Trauma
     - LightReplacer
 
 - type: entity

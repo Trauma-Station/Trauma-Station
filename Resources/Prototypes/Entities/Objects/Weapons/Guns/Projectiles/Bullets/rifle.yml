@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Ballistic: 17
+        Ballistic: 13 # Trauma - was 17 Piercing
 
 - type: entity
   parent: BaseBulletPractice
@@ -29,8 +29,7 @@
   - type: Projectile
     damage:
       types:
-        Ballistic: 12
-        Heat: 5
+        Ballistic: 10 # Trauma - was 12 Piercing + 5 Heat
 
 - type: entity
   parent: BaseBulletUranium
@@ -40,6 +39,6 @@
   components:
   - type: Projectile
     damage:
+      armorPenetration: 0.5 # Trauma
       types:
-        Radiation: 7
-        Piercing: 8
+        Ballistic: 10 # Trauma - was 7 Radiation + 8 Piercing

@@ -1,9 +1,32 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible, BaseThirstSlowdown ]
+  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible, BaseThirstSlowdown ] # Trauma - added AppearanceRatKing
   description: He's da rat. He make da roolz.
   components:
+  # <Trauma>
+  - type: VentCrawler
+  - type: Targeting
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Poison: -0.5
+        Blunt: -0.1
+        Slash: -0.1
+        Piercing: -0.1
+        Heat: -0.1
+        Cold: -0.1
+        Shock: -0.1
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Mouse
+    understands:
+    - TauCetiBasic
+    - Mouse
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.00
@@ -95,6 +118,7 @@
     coefficient: 0.5 # rat king touches more wires, see?
   - type: Rummager
   - type: RatKing
+    molesAmmoniaPerDomain: 300 # Trauma
     hungerPerArmyUse: 25
     hungerPerDomainUse: 50
   - type: MobsterAccent
@@ -163,10 +187,26 @@
 - type: entity
   name: rat servant
   id: MobRatServant
-  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, BaseThirstSlowdown ]
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, BaseThirstSlowdown, MobNightVision ] # Trauma - added MobNightVision
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 5
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - type: Bloodstream
+    bloodReferenceSolution: # he is very small
+      reagents:
+      - ReagentId: Blood
+        Quantity: 10
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
@@ -223,17 +263,23 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      15: Critical
-      30: Dead
+      15: Dead # Trauma - instead of crit at 15/dead at 30
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 60
+        damage: 10 # Trauma - was 60
       behaviors:
       - !type:GibBehavior
+        deleteGibs: true # Trauma - no lag pls
         recursive: false
+      # <Trauma>
+      - !type:SpawnGasBehavior
+        gasMixture:
+          moles:
+            Ammonia: 25
+      # </Trauma>
   - type: Stamina
     baseCritThreshold: 60
   - type: MeleeWeapon

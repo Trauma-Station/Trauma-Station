@@ -1,8 +1,0 @@
-- type: entity
-  id: LightReplacer
-  components:
-  - type: EntityProviderAreaPickup
-    comp: LightBulb
-  - type: Tag
-    tags:
-    - DroneUsable

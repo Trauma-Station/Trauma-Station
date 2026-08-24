@@ -4,6 +4,10 @@
   id: StatusEffectClumsyAll
   name: clumsy
   components:
+  # <Trauma>
+  - type: TackleModStatusEffect
+    modifier: -2
+  # </Trauma>
   - type: ClumsyCatchStatusEffect
     failDamage:
       types:

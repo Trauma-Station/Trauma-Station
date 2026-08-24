@@ -4,6 +4,12 @@
   categories: [ HideSpawnMenu ]
   name: emitter bolt
   components:
+  # <Trauma>
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: SmartLinkBlacklist
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Power/Generation/Singularity/emitter.rsi
     layers:
