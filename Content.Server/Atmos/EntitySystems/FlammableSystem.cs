@@ -63,9 +63,10 @@ namespace Content.Server.Atmos.EntitySystems
 
         private readonly Dictionary<Entity<FlammableComponent>, float> _fireEvents = new();
 
+        private const int FirestackEnergy = 37500; // joules release when on fire
+
         public override void Initialize()
         {
-            InitTrauma(); // Trauma
             UpdatesAfter.Add(typeof(AtmosphereSystem));
 
             SubscribeLocalEvent<FlammableComponent, MapInitEvent>(OnMapInit);
@@ -531,10 +532,10 @@ namespace Content.Server.Atmos.EntitySystems
                     var source = EnsureComp<IgnitionSourceComponent>(uid);
                     _ignitionSourceSystem.SetIgnited((uid, source));
 
-                    // <Trauma> - check fire immune and use cvar instead of hardcoded energy
-                    var isImmune = _fireImmuneQuery.HasComp(uid); // Trauma
+                    // <Trauma> - check fire immune first
+                    var isImmune = _fireImmuneQuery.HasComp(uid);
                     if (!isImmune)
-                        _temperatureSystem.ChangeHeat(uid, _addHeatFirestack * flammable.FireStacks, false);
+                        _temperatureSystem.ChangeHeat(uid, FirestackEnergy * flammable.FireStacks, false);
                     // </Trauma>
 
                     var ev = new GetFireProtectionEvent(uid); // Trauma - added uid
