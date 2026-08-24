@@ -320,7 +320,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        _teleport.RandomTeleport(args.User, rtp, sound: false, user: args.User);
+        _teleport.RandomTeleport(args.User, (ent, rtp), sound: false, user: args.User);
         ShatterBlade(ent, args.User);
         _popup.PopupEntity(Loc.GetString("heretic-blade-use"), args.User, args.User);
         args.Handled = true;

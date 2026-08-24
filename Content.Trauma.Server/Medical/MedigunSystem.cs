@@ -30,7 +30,7 @@ public sealed partial class MedigunSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private AlertsSystem _alert = default!;
     [Dependency] private BatterySystem _battery = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private DamageableSystem _damage = default!;

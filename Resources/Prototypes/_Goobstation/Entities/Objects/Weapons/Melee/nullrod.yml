@@ -461,44 +461,32 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-    - behavior: Screwing
-      sprite:
+    - behavior: [ Screwing ]
+      sprite: &hand_sprite
         sprite: _ShitChap/Objects/Weapons/Nullrod/uristhand.rsi
         state: icon
       useSound:
         path: /Audio/Items/drill_use.ogg
-      changeSound:
+      changeSound: &drill_sound
         path: /Audio/Items/change_drill.ogg
-    - behavior: Prying
-      sprite:
-        sprite: _ShitChap/Objects/Weapons/Nullrod/uristhand.rsi
-        state: icon
+    - behavior: [ Prying ]
+      sprite: *hand_sprite
       useSound:
         path: /Audio/Items/jaws_pry.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
-    - behavior: Anchoring
-      sprite:
-        sprite: _ShitChap/Objects/Weapons/Nullrod/uristhand.rsi
-        state: icon
+      changeSound: *drill_sound
+    - behavior: [ Anchoring ]
+      sprite: *hand_sprite
       useSound:
         path: /Audio/Items/ratchet.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
-    - behavior: Cutting
-      sprite:
-        sprite: _ShitChap/Objects/Weapons/Nullrod/uristhand.rsi
-        state: icon
+      changeSound: *drill_sound
+    - behavior: [ Cutting ]
+      sprite: *hand_sprite
       useSound:
         path: /Audio/Items/jaws_cut.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
-    - behavior: Pulsing
-      sprite:
-        sprite: _ShitChap/Objects/Weapons/Nullrod/uristhand.rsi
-        state: icon
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
+      changeSound: *drill_sound
+    - behavior: [ Pulsing ]
+      sprite: *hand_sprite
+      changeSound: *drill_sound
   - type: MeleeWeapon
     canWideSwing: false
     attackRate: 0.9

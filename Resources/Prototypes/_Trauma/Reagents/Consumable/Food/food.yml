@@ -19,7 +19,8 @@
       metabolites:
         LabGrownNutriment: 1
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 0.015 # same as regular nutriment per u
     Bloodstream:
       metabolismRate: 0.01
@@ -61,7 +62,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 0.010
       - !type:HealthChange
         damage:

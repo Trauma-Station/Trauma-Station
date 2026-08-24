@@ -24,6 +24,7 @@
       size: Large
     - type: Speech
       speechVerb: Robotic
+    - type: ItemToggleExaminableStatus
     - type: ItemToggle
       soundActivate:
         path: /Audio/Items/Defib/defib_safety_on.ogg
@@ -118,6 +119,7 @@
         map: ["enum.PowerDeviceVisualLayers.Powered"]
         shader: unshaded
   - type: MeleeWeapon
+    canWideSwing: false # Trauma - removed for balance purposes
     damage:
       types:
         Blunt: 8
@@ -134,4 +136,5 @@
     activatedDamage:
       types:
         Blunt: 8
-        Shock: 16
+        Shock: 8 # Trauma - was 16, adjusted for balance
+        Heat: 8 # Trauma - was 0, adjusted for balance

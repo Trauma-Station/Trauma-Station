@@ -6,7 +6,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Forensics;
+using Content.Shared.Forensics.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -20,21 +20,13 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AutoSurgeonComponent, StrappedEvent>(OnStrapped);
-        SubscribeLocalEvent<AutoSurgeonComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<AutoSurgeonComponent, AutoSurgeonDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<AutoSurgeonComponent, ExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStrapped(Entity<AutoSurgeonComponent> ent, ref StrappedEvent args)
     {
         ent.Comp.ActiveSound = _audio.Stop(ent.Comp.ActiveSound);
@@ -71,8 +63,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
 
         _popup.PopupEntity($"You start up the {name}...", ent, user, PopupType.Medium);
 
-        var ev = new TransferDnaEvent { Donor = target, Recipient = ent };
-        RaiseLocalEvent(target, ref ev);
+        _forensics.TransferDna(ent.Owner, target);
 
         if (_net.IsClient) // Fuck sound networking
             return;
@@ -81,6 +72,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             ent.Comp.ActiveSound = sound.Entity;
     }
 
+    [SubscribeLocalEvent]
     private void OnUnstrapped(Entity<AutoSurgeonComponent> ent, ref UnstrappedEvent args)
     {
         // no sound spamming idc about the doafter, just run away
@@ -88,6 +80,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
         ent.Comp.ActiveSound = null;
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<AutoSurgeonComponent> ent, ref AutoSurgeonDoAfterEvent args)
     {
         _audio.Stop(ent.Comp.ActiveSound);
@@ -154,8 +147,12 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnExamined(Entity<AutoSurgeonComponent> ent, ref ExaminedEvent args) =>
-        args.PushMarkup(ent.Comp.Used ? Loc.GetString("gun-cartridge-spent") : Loc.GetString("gun-cartridge-unspent")); // Yes gun locale, and?
+    [SubscribeLocalEvent]
+    private void OnExamined(Entity<AutoSurgeonComponent> ent, ref ExaminedEvent args)
+    {
+        var key = ent.Comp.Used ? "un" : "";
+        args.PushMarkup(Loc.GetString("gun-cartridge-{key}ent"));
+    }
 }
 
 [Serializable, NetSerializable]

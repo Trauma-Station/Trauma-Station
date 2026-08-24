@@ -1,18 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
-  id: DuckBot
-  graph: DuckBot
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  theory:
-    CookingKnowledge: 0
-    BotsKnowledge: 0
-  practical:
-    ElectronicsKnowledge: 1
-
-- type: construction
   id: BoogieBot
   graph: BoogieBot
   targetNode: bot

@@ -75,7 +75,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 125 #This is probably enough damage before it breaks
+        damage: 75 # Trauma - was 125
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -535,6 +535,7 @@
       dischargedRechargeRate: 1.5
       chargedRechargeRate: 2
     # </Trauma>
+    - type: ItemToggleExaminableStatus
     - type: ItemToggle
       # <Trauma>
       soundFailToActivate:
@@ -643,6 +644,9 @@
         types:
           Blunt: 10
     # </Trauma>
+    - type: ItemToggleExaminableStatus
+      onText: item-toggle-examined-active
+      offText: item-toggle-examined-not-active
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
