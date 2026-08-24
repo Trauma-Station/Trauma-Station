@@ -1,0 +1,104 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: loadout
+  id: PrisonerJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+
+- type: loadout
+  id: PrisonerJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtPrisoner
+
+- type: loadout
+  id: DClassElectropack
+  equipment:
+    back: ClothingBackpackElectropack
+
+- type: loadoutEffectGroup
+  id: DClassBackpackFreedom
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 20h
+
+- type: loadout
+  id: DClassBackpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
+  equipment:
+    back: ClothingBackpack
+
+- type: loadout
+  id: DClassSatchel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
+  equipment:
+    back: ClothingBackpackSatchel
+
+- type: loadout
+  id: DClassDuffel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
+  equipment:
+    back: ClothingBackpackDuffel
+
+- type: loadout
+  id: DClassMessenger
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassBackpackFreedom
+  equipment:
+    back: ClothingBackpackMessenger
+
+# Greytide Time
+- type: loadoutEffectGroup
+  id: DClassGreyTider
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 20h
+
+# Face
+- type: loadout
+  id: DClassMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassGreyTider
+  equipment:
+    mask: ClothingMaskGas
+
+#Gloves
+- type: loadout
+  id: DClassGloves
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassGreyTider
+  equipment:
+    mask: ClothingMaskGas
+
+# Head of Greytide (for grey mantle)
+- type: loadoutEffectGroup
+  id: DClassMasterGrey
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDClass
+      time: 40h
+
+# Neck
+- type: loadout
+  id: DClassMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DClassMasterGrey
+  equipment:
+    neck: ClothingNeckMantle

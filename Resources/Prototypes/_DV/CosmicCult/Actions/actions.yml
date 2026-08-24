@@ -37,7 +37,7 @@
     layers:
     - state: siphon
   - type: Action
-    useDelay: 2 #30
+    useDelay: 30
   - type: TargetAction
   - type: EntityTargetAction
     whitelist:

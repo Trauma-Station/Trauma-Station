@@ -31,9 +31,6 @@
     - ActionHierophantClubTileMovement
     - ActionHierophantClubBlink
   - type: ItemActionGrant
-    actions:
-    - ActionHierophantClubTileMovement
-    - ActionHierophantClubBlink
   - type: HeldGrantComponent
     components:
     - type: MegafaunaBlink

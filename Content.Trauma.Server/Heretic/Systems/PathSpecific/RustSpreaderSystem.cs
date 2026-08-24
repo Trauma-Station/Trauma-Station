@@ -117,7 +117,7 @@ public sealed partial class RustSpreaderSystem : EntitySystem
                 tile = _map.GetTileRef(tile.GridUid, mapGrid, tile.GridIndices);
                 spreader.ProcessedTiles.Add(tile);
 
-                var ourEnts = _map.GetAnchoredEntitiesEnumerator(tile.GridUid, mapGrid, tile.GridIndices);
+                var ourEnts = _map.GetAnchoredEntities(tile.GridUid, mapGrid, tile.GridIndices);
                 List<EntityUid> toRust = new();
                 while (ourEnts.MoveNext(out var ent))
                 {

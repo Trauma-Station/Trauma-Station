@@ -40,6 +40,7 @@
   - type: Item
     size: Small
     sprite: Objects/Tools/welder.rsi
+  - type: ItemToggleExaminableStatus
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -87,7 +88,7 @@
         shader: unshaded
   - type: UseDelay
   - type: MeleeWeapon
-    animationRotation: -90 # WWDP
+    animationRotation: -90 # Trauma
     wideAnimationRotation: -90
     damage:
       types:
@@ -97,13 +98,10 @@
   - type: RefillableSolution
     solution: welder
   - type: Tool
-    alwaysCheckDoAfter: true # Goobstation
+    alwaysCheckDoAfter: true # Trauma
     useSound:
       collection: Welder
-    qualities:
-    - Welding
-    - Axing # Goobstation
-    - Ignition
+    qualities: [ Welding, Axing, Ignition ] # Trauma - added Axing, Ignition
   - type: Welder
   - type: PointLight
     enabled: false
@@ -184,6 +182,18 @@
   id: WelderExperimental
   description: "An experimental welder capable of self-fuel generation and less harmful to the eyes."
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 200
+      Plasma: 50
+  - type: StaticPrice
+    price: 50
+  - type: Tag # new tag for weldbot
+    tags:
+    - DroneUsable
+    - WelderExperimental
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/welder_experimental.rsi
   - type: Item
@@ -196,17 +206,6 @@
     fuelReagent: Plasma
   - type: RequiresEyeProtection
     statusEffectTime: 5 # less harmful; sunglasses can block it
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 200
-      Plasma: 50
-  - type: StaticPrice #Goobstation - Recycle update
-    price: 50
-  - type: Tag # Trauma - new tag for weldbot
-    tags:
-    - DroneUsable
-    - WeldingTool
-    - WelderExperimental
 
 - type: entity
   parent: [SolutionWelder, SolutionToolGinormous] # Bluespace technology

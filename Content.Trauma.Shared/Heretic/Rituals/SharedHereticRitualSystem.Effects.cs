@@ -311,13 +311,11 @@ public abstract partial class SharedHereticRitualSystem
             RaiseLocalEvent(mind, ref ev2);
         }
 
-        var dict = new Dictionary<string, FixedPoint2>()
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, new()
         {
             { SharedHereticSystem.Currency, knowledgeGain },
             { SharedHereticSystem.SideCurrency, sideknowledgeGain },
-        };
-
-        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, dict);
+        });
 
         heretic.SacrificeTracker++;
         if (heretic.MaxSacrificeInfluenceSpawn < heretic.SacrificeTracker)

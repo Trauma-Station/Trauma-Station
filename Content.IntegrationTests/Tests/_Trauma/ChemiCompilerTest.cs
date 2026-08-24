@@ -882,12 +882,12 @@ public sealed class ChemiCompilerTest : GameTest
             {
                 var beaker = SEntMan.SpawnAtPosition(Beaker, map.GridCoords);
                 Assert.That(_slots.TryGetSlot(uid, comp.SlotId(i), out var slot));
-                Assert.That(_slots.CanInsert(uid, beaker, null, slot!, slot!.Swap), Is.True,
+                Assert.That(_slots.CanInsert(uid, slot!, beaker, null, slot!.Swap), Is.True,
                     $"Reservoir {i} would not accept a beaker while empty");
 
                 _slots.TryInsert(uid, comp.SlotId(i), beaker, null);
 
-                Assert.That(_slots.CanInsert(uid, SEntMan.SpawnAtPosition(Beaker, map.GridCoords), null, slot, slot.Swap),
+                Assert.That(_slots.CanInsert(uid, slot, SEntMan.SpawnAtPosition(Beaker, map.GridCoords), null, slot.Swap),
                     Is.False,
                     $"Reservoir {i} still accepted a beaker while full, so clicking would swap instead of filling the next one");
             }
