@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 
@@ -10,7 +11,7 @@ namespace Content.Goobstation.Shared.Xenobiology.Systems;
 // This handles slime breeding and mutation.
 public partial class XenobiologySystem
 {
-    private List<Entity<SlimeComponent, MobGrowthComponent, HungerComponent>> _splitting = new();
+    private List<Entity<SlimeComponent, MobGrowthComponent, SatiationComponent>> _splitting = new();
 
     [SubscribeLocalEvent]
     private void OnPendingSlimeMapInit(Entity<PendingSlimeSpawnComponent> ent, ref MapInitEvent args)
@@ -43,24 +44,25 @@ public partial class XenobiologySystem
     private void UpdateMitosis()
     {
         _splitting.Clear();
-        var query = EntityQueryEnumerator<SlimeComponent, MobGrowthComponent, HungerComponent>();
-        while (query.MoveNext(out var uid, out var slime, out var growthComp, out var hungerComp))
+        var query = EntityQueryEnumerator<SlimeComponent, MobGrowthComponent, SatiationComponent>();
+        while (query.MoveNext(out var uid, out var slime, out var growthComp, out var satiation))
         {
             if (_timing.CurTime < slime.NextUpdateTime
                 || _mob.IsDead(uid)
                 || growthComp.IsFirstStage)
                 continue;
 
-            _splitting.Add((uid, slime, growthComp, hungerComp));
+            _splitting.Add((uid, slime, growthComp, satiation));
             slime.NextUpdateTime = _timing.CurTime + _updateInterval;
         }
 
         foreach (var ent in _splitting)
         {
-            if (_hunger.GetHunger(ent) > ent.Comp1.MitosisHunger - ent.Comp1.JitterDifference)
+            var value = _satiation.GetValueOrNull((ent, ent.Comp3), SatiationSystem.Hunger) ?? 0f;
+            if (value > ent.Comp1.MitosisHunger - ent.Comp1.JitterDifference)
                 _jitter.DoJitter(ent, TimeSpan.FromSeconds(1), true);
 
-            if (_hunger.GetHunger(ent) < ent.Comp1.MitosisHunger)
+            if (value < ent.Comp1.MitosisHunger)
                 continue;
 
             DoMitosis(ent);

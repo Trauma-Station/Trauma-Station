@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: satiation
+  parent: SimpleMobBaseHunger
+  id: SpiderHunger
+  startingValue: 15
+  thresholds:
+    Overfed: 150
+    Okay: 140
+    Peckish: 139
+    Starving: 10
+    Dead: 0

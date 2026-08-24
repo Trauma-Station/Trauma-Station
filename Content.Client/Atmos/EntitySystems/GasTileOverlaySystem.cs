@@ -8,7 +8,7 @@ using Robust.Shared.GameStates;
 namespace Content.Client.Atmos.EntitySystems;
 
 [UsedImplicitly]
-public sealed class GasTileOverlaySystem : SharedGasTileOverlaySystem
+public sealed partial class GasTileOverlaySystem : SharedGasTileOverlaySystem
 {
     public override void Initialize()
     {
