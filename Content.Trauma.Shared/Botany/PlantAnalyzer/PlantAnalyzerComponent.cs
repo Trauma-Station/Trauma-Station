@@ -32,6 +32,12 @@ public sealed partial class PlantAnalyzerComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId? Seed;
 
+    /// <summary>
+    /// Snapshot of the mutations present when a plant was last scanned.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<string> ScannedMutations = new();
+
     [DataField]
     public SoundSpecifier? ScanningEndSound;
 
@@ -63,13 +69,14 @@ public sealed partial class PlantAnalyzerComponent : Component
     public int DatabankIndex = 0;
 }
 
+// has to match the UI's tab order
 [Serializable, NetSerializable]
 public enum PlantAnalyzerModes : byte
 {
     Scan,
+    DeleteMutations,
     Extract,
-    Implant,
-    DeleteMutations
+    Implant
 }
 
 [Serializable, NetSerializable]

@@ -157,10 +157,13 @@ WehMedipen: WehMedipenTiny
 # 2026-08-03
 BibleCommunistManifesto: Bible
 
-# 2026-09-17
+# 2026-08-17
 ComputerNTRTasks: null
 TaskBottle: ChemistryEmptyBottle01
 TaskJug: Jug
+
+# 2026-08-24
+LightReplacerEmpty: LightReplacer
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

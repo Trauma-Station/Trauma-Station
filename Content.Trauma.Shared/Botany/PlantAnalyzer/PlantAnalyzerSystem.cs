@@ -96,10 +96,16 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
     public void ExtractGene(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
-        if (ent.Comp.GeneIndex < 0)
+        // only requires a seed for balance chudding, deleting existing plants would be bad
+        if (!HasComp<SeedComponent>(target) ||
+            ent.Comp.GeneIndex < 0)
+        {
+            _popup.PopupEntity($"Collect seeds from it first!", ent, user);
             return;
+        }
 
         GetGeneFromInteger(ent, target);
+        PredictedQueueDel(target);
 
         _popup.PopupEntity($"Extracted and isolated gene from {Name(target)}", ent, user);
         _audio.PlayPredicted(ent.Comp.ExtractEndSound, ent, user);
@@ -124,7 +130,6 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
     public void DeleteMutations(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
-        /* TODO reimplement
         if (!TryComp<SeedComponent>(target, out var seed))
         {
             _popup.PopupEntity($"Can't clear mutations from germinated plants!", ent, user);
@@ -132,7 +137,8 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
 
         var uid = EnsurePlantData((target, seed));
-        var comp = Comp<PlantDataComponent>(uid);
+        var comp = Comp<PlantComponent>(uid);
+        var name = Name(target);
         if (comp.Mutations.Count == 0)
         {
             _popup.PopupEntity($"There are no mutations to clear from {name}.", ent, user);
@@ -140,27 +146,30 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
 
         comp.Mutations.Clear();
-        }
-        else
-        {
-            if (seedComp.SeedId == null || !ProtoMan.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
-                return;
+        // it's not networked on the plant
 
-            seedComp.Seed = protoSeed.Clone();
-            seedComp.Seed.Mutations.Clear();
-        }
-
-        _popup.PopupEntity($"Cleared mutations of {Name(target)}!", ent, user);
+        _popup.PopupEntity($"Cleared mutations of {name}!", ent, user);
         _audio.PlayPredicted(ent.Comp.DeleteMutationEndSound, ent, user);
-        */
     }
 
     public void ScanPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
         (ent.Comp.Plant, ent.Comp.Seed) = GetPlantData(target);
+
+        // mutations list isnt networked, have to do it ourselves
+        ent.Comp.ScannedMutations.Clear();
+        if (_botany.TryGetPlantComponent<PlantComponent>(ent.Comp.Plant, ent.Comp.Seed, out var plant))
+        {
+            foreach (var mutation in plant.Mutations)
+            {
+                ent.Comp.ScannedMutations.Add(mutation.Name);
+            }
+        }
+
         DirtyFields(ent, ent.Comp, null,
             nameof(PlantAnalyzerComponent.Plant),
-            nameof(PlantAnalyzerComponent.Seed));
+            nameof(PlantAnalyzerComponent.Seed),
+            nameof(PlantAnalyzerComponent.ScannedMutations));
 
         _popup.PopupEntity($"Scanned data of {Name(target)}.", ent, user);
         _audio.PlayPredicted(ent.Comp.ScanningEndSound, ent, user);
@@ -352,7 +361,10 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
         if (!TryComp<PlantComponent>(uid, out var plant) ||
             !TryComp<PlantDataComponent>(uid, out var data))
+        {
+            Log.Error($"{ToPrettyString(seed)} has invalid PlantData {ToPrettyString(uid)}!");
             return;
+        }
 
         TryComp<PlantAtmosphericComponent>(uid, out var atmos);
         TryComp<PlantGrowthComponent>(uid, out var growth);
@@ -414,58 +426,58 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     atmos.HighPressureTolerance = value;
                     DirtyField(uid, atmos, nameof(PlantAtmosphericComponent.HighPressureTolerance));
                     break;
-                case 9:
+                case 8:
                     if (weed == null)
                         return;
                     weed.PestTolerance = value;
                     DirtyField(uid, weed, nameof(PlantWeedPestComponent.PestTolerance));
                     break;
-                case 10:
+                case 9:
                     if (weed == null)
                         return;
                     weed.WeedTolerance = value;
                     DirtyField(uid, weed, nameof(PlantWeedPestComponent.WeedTolerance));
                     break;
-                case 11:
+                case 10:
                     plant.Endurance = value;
                     DirtyField(uid, plant, nameof(PlantComponent.Endurance));
                     break;
-                case 13:
+                case 11:
                     plant.Lifespan = value;
                     DirtyField(uid, plant, nameof(PlantComponent.Lifespan));
                     break;
-                case 14:
+                case 12:
                     plant.Maturation = value;
                     DirtyField(uid, plant, nameof(PlantComponent.Maturation));
                     break;
-                case 15:
+                case 13:
                     plant.Production = value;
                     DirtyField(uid, plant, nameof(PlantComponent.Production));
                     break;
-                case 16:
+                case 14:
                     if (harvest == null)
                         return;
                     harvest.HarvestRepeat = (HarvestType) value;
                     DirtyField(uid, harvest, nameof(PlantHarvestComponent.HarvestRepeat));
                     break;
-                case 12:
+                case 15:
                     plant.Yield = (int) value;
                     DirtyField(uid, plant, nameof(PlantComponent.Yield));
                     break;
-                case 17:
+                case 16:
                     plant.Potency = value;
                     DirtyField(uid, plant, nameof(PlantComponent.Potency));
                     break;
-                case 18:
+                case 17:
                     SetTrait<PlantTraitSeedlessComponent>(uid, value);
                     break;
-                case 20:
+                case 18:
                     SetTrait<PlantTraitLigneousComponent>(uid, value);
                     break;
-                case 21:
+                case 19:
                     SetTrait<PlantTraitScreamComponent>(uid, value);
                     break;
-                case 22:
+                case 20:
                     SetTrait<PlantTraitKudzuComponent>(uid, value);
                     break;
             }

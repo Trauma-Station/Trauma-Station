@@ -17,12 +17,7 @@ plant-analyzer-window-mode-scan = Scan
 plant-analyzer-window-mode-implant = Implant
 plant-analyzer-window-mode-extract = Extract
 
-plant-analyzer-add = +
-plant-analyzer-subtract = -
-plant-analyzer-delete-entry = Delete
 plant-analyzer-delete-mutations = Delete Mutations
-plant-analyzer-invalid-gene = -----
-plant-analyzer-invalid-database = -----
 plant-analyzer-database-entries-header = Database:
 
 plant-analyzer-harvest-Unknown = Unknown

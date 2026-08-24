@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Text;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Botany.Components;
 using Content.Shared.Botany.Items.Components;
 using Content.Shared.Botany.Systems;
-using Content.Shared.Botany.Traits.Components;
 using Content.Shared.Random;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
+using Robust.Shared.Timing;
+using System.Text;
 
 namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 
@@ -33,6 +33,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
     private int _consumeCount = -1;
     private int _exudeCount = -1;
     private int _chemicalCount = -1;
+    private bool _updating;
 
     private const string IndentedNewline = "\n   ";
 
@@ -49,35 +50,50 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             OnSetMode?.Invoke((PlantAnalyzerModes) Tabs.CurrentTab);
         };
 
-        GeneList.OnItemSelected += args => OnSelectGene?.Invoke(args.ItemIndex);
-
         // offset individual lists index to shitty per-databank index
         var consume = _geneCount;
         var exude = consume + _consumeCount;
         var chemicals = exude + _exudeCount;
-        GeneDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(args.ItemIndex);
-        ConsumeDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(consume + args.ItemIndex);
-        ExudeDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(exude + args.ItemIndex);
-        ChemicalDatabaseList.OnItemSelected += args => OnSelectEntry?.Invoke(chemicals + args.ItemIndex);
+        GeneDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, 0);
+        ConsumeDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, consume);
+        ExudeDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, exude);
+        ChemicalDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, chemicals);
 
         DeleteDatabaseEntryButton.OnPressed += _ => OnDeleteEntry?.Invoke();
+    }
 
-        GeneList.Clear();
-        foreach (var entry in SeedData.AllGenes)
-        {
-            GeneList.AddItem(entry.Name);
-        }
+    private void SelectEntry(int i, int offset)
+    {
+        if (!_updating)
+            OnSelectEntry?.Invoke(i + offset);
     }
 
     public void SetOwner(EntityUid uid)
     {
         _comp = _ent.GetComponent<PlantAnalyzerComponent>(uid);
         Tabs.CurrentTab = (int) _comp.Mode;
+
+        GeneList.Clear();
+        foreach (var entry in SeedData.AllGenes)
+        {
+            GeneList.AddItem(entry.Name);
+        }
+        GeneList[_comp.GeneIndex].Selected = true;
+        GeneList.OnItemSelected += args => OnSelectGene?.Invoke(args.ItemIndex);
+
+        Update();
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
         Update();
     }
 
     private void Update()
     {
+        _updating = true;
         if (_comp.GeneBank.Count != _geneCount)
         {
             _geneCount = _comp.GeneBank.Count;
@@ -86,12 +102,12 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         if (_comp.ConsumeGasesBank.Count != _consumeCount)
         {
             _consumeCount = _comp.ConsumeGasesBank.Count;
-            UpdateGases(ConsumeDatabaseList, _comp.ConsumeGasesBank, "Consume");
+            UpdateGases(ConsumeDatabaseList, _comp.ConsumeGasesBank, "Consume", 0);
         }
         if (_comp.ExudeGasesBank.Count != _exudeCount)
         {
             _exudeCount = _comp.ExudeGasesBank.Count;
-            UpdateGases(ExudeDatabaseList, _comp.ExudeGasesBank, "Exude");
+            UpdateGases(ExudeDatabaseList, _comp.ExudeGasesBank, "Exude", _consumeCount);
         }
         if (_comp.ChemicalBank.Count != _chemicalCount)
         {
@@ -105,6 +121,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             _seed = _comp.Seed;
             Populate(_plant, _seed);
         }
+        _updating = false;
     }
 
     private void UpdateGenes()
@@ -123,15 +140,23 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             };
             GeneDatabaseList.AddItem($"{entry.Name}: {mutationValue}");
         }
+
+        if (_comp.DatabankIndex < _geneCount)
+            GeneDatabaseList[_comp.DatabankIndex].Selected = true;
     }
 
-    private void UpdateGases(ItemList list, List<GasData> databank, string type)
+    private void UpdateGases(ItemList list, List<GasData> databank, string type, int offset)
     {
         list.Clear();
         foreach (var gene in databank)
         {
             list.AddItem($"{type} {GasName(gene.GasID)}: {gene.GasValue}");
         }
+
+        var len = databank.Count;
+        var index = _comp.DatabankIndex - (_geneCount + offset);
+        if (index >= 0 && index < len)
+            list[index].Selected = true;
     }
 
     private void UpdateChemicals()
@@ -140,8 +165,13 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         foreach (var gene in _comp.ChemicalBank)
         {
             var data = gene.ChemValue;
-            ChemicalDatabaseList.AddItem($"{gene.ChemID}: Min - {data.Min}, Max - {data.Max}, Potency Divisor - {data.PotencyDivisor}, Inherent - {data.Inherent}");
+            var foreign = data.Inherent ? " [Foreign]" : "";
+            ChemicalDatabaseList.AddItem($"{gene.ChemID}{foreign}: Min - {data.Min}, Max - {data.Max}, Potency Divisor - {data.PotencyDivisor}");
         }
+
+        var index = _comp.DatabankIndex - (_geneCount + _consumeCount + _exudeCount);
+        if (index >= 0 && index < _chemicalCount)
+            GeneDatabaseList[index].Selected = true;
     }
 
     public void Populate(EntityUid? uid, EntProtoId? seed)
@@ -220,27 +250,20 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         HighPressureTolerance.Text = $"High pressure tolerance: {atmos?.HighPressureTolerance} kPa";
         PestTolerance.Text = $"Pest tolerance: {weeds?.PestTolerance:F1}";
         WeedTolerance.Text = $"Weed tolerance: {weeds?.WeedTolerance:F1}";
+
         // Misc
         StringBuilder mutations = new();
-        if (_botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed))
+        if (_comp.ScannedMutations.Count == 0)
         {
-            mutations.Append(IndentedNewline);
-            mutations.Append("Kudzufication");
+            mutations.Append('-');
         }
-        if (_botany.PlantHasComp<PlantTraitSeedlessComponent>(uid, seed))
+        else
         {
-            mutations.Append(IndentedNewline);
-            mutations.Append("Seedless");
-        }
-        if (_botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed))
-        {
-            mutations.Append(IndentedNewline);
-            mutations.Append("Ligneous");
-        }
-        if (_botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed))
-        {
-            mutations.Append(IndentedNewline);
-            mutations.Append("Mandragora");
+            foreach (var mutation in _comp.ScannedMutations)
+            {
+                mutations.Append(IndentedNewline);
+                mutations.Append(mutation);
+            }
         }
 
         Traits.Text = $"Mutations: {mutations}";

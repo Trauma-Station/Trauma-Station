@@ -156,13 +156,15 @@
       - Screwing
     useSound:
       collection: Screwdriver
-  - type: RandomSprite
-    available:
-      - enum.DamageStateVisualLayers.Base:
-          screwdriver: Rainbow
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
+  # <Trauma>
+  #- type: RandomSprite
+  #  available:
+  #    - enum.DamageStateVisualLayers.Base:
+  #        screwdriver: Rainbow
+  #- type: PhysicalComposition
+  #  materialComposition:
+  #    Steel: 100
+  # </Trauma>
   - type: StaticPrice
     price: 30
 

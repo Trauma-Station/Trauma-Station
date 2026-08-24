@@ -158,7 +158,7 @@ public sealed partial class ItemSlotsSystem : EntitySystem
     {
         itemSlot = null;
 
-        if (!Resolve(ent, ref ent.Comp))
+        if (!Resolve(ent, ref ent.Comp, false)) // Trauma - dont log missing bruh
             return false;
 
         return ent.Comp.Slots.TryGetValue(slotId, out itemSlot);

@@ -15,8 +15,8 @@ public sealed partial class PlantAnalyzerBUI(EntityUid owner, Enum key) : BoundU
 
         _window = this.CreateWindow<PlantAnalyzerWindow>();
         _window.OnSetMode += mode => SendPredictedMessage(new PlantAnalyzerSetMode(mode));
-        _window.OnSelectGene += i => SendPredictedMessage(new PlantAnalyzerSetGeneIndex(i, true));
-        _window.OnSelectEntry += i => SendPredictedMessage(new PlantAnalyzerSetGeneIndex(i, false));
+        _window.OnSelectGene += i => SendPredictedMessage(new PlantAnalyzerSetGeneIndex(i, false));
+        _window.OnSelectEntry += i => SendPredictedMessage(new PlantAnalyzerSetGeneIndex(i, true));
         _window.OnDeleteEntry += () => SendPredictedMessage(new PlantAnalyzerDeleteDatabankEntry());
         _window.SetOwner(Owner);
         _window.OpenCenteredLeft();

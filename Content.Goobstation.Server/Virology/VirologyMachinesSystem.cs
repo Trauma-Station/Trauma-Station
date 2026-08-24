@@ -89,11 +89,14 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
 
     private void OnComponentInit(Entity<VirologyMachineComponent> ent, ref ComponentInit args)
     {
+        if (!TryComp<ItemSlotsComponent>(ent, out var slots))
+            return;
+
         // TODO: kys israelgpt
-        if (_slots.TryGetSlot(ent.Owner, VirologyMachineComponent.SwabSlotId, out var slot))
+        if (_slots.TryGetSlot((ent, slots), VirologyMachineComponent.SwabSlotId, out var slot))
             ent.Comp.SwabSlot = slot;
         else
-            _slots.AddItemSlot(ent.Owner, VirologyMachineComponent.SwabSlotId, ent.Comp.SwabSlot);
+            _slots.AddItemSlot((ent, slots), VirologyMachineComponent.SwabSlotId, ent.Comp.SwabSlot);
     }
 
     private void OnAnalyzerCheck(Entity<VirologyMachineComponent> ent, ref VirologyMachineCheckEvent args)
