@@ -275,6 +275,27 @@ public sealed partial class CircuitMemoryCell : CircuitGate
 }
 
 /// <summary>
+/// Choosen between second and third outputs based on the first as a bool.
+/// The choices can be any type, including different ones.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class CircuitIfElse : CircuitGate
+{
+    public override string Name => "IF";
+    public override string Category => "Misc";
+    public override GateValue OutputType => GateValue.Any;
+    public override string Desc => "Outputs the second input if the first is true, the third if false.";
+    public override int InputCount => 3;
+
+    public override void Update(CircuitComponent comp)
+    {
+        CopyOutputFromObject(comp.GetBool(Inputs[0])
+            ? comp.GetValue(Inputs[1])
+            : comp.GetValue(Inputs[2]));
+    }
+}
+
+/// <summary>
 /// A binary logic gate for a circuit.
 /// </summary>
 [Serializable, NetSerializable]

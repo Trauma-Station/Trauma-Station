@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.Projectiles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 // </Trauma>
@@ -25,7 +24,7 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
 
     public override void Initialize()
     {
-        _cfg.OnValueChanged(GoobCVars.CrawlHitzoneSize, x => _crawlHitzoneSquared = x * x, true); // Goob - squared now as a micro-optimisation
+        _cfg.OnValueChanged(GoobCVars.CrawlHitzoneSize, x => _crawlHitzoneSquared = x * x, true); // Trauma
         SubscribeLocalEvent<RequireProjectileTargetComponent, PreventCollideEvent>(PreventCollide);
         SubscribeLocalEvent<RequireProjectileTargetComponent, StoodEvent>(StandingBulletHit);
         SubscribeLocalEvent<RequireProjectileTargetComponent, DownedEvent>(LayingBulletPass);
@@ -34,7 +33,7 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
     private void PreventCollide(Entity<RequireProjectileTargetComponent> ent, ref PreventCollideEvent args)
     {
         if (args.Cancelled)
-            return;
+          return;
 
         if (!ent.Comp.Active)
             return;
@@ -44,11 +43,6 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
         if (TryComp(other, out TargetedProjectileComponent? targeted))
         {
             if (GetEntity(targeted.Target) is not {} target || target == ent.Owner)
-                return;
-
-            var ev = new ShouldTargetedProjectileCollideEvent(target);
-            RaiseLocalEvent(ent, ev);
-            if (ev.Handled)
                 return;
         }
 
@@ -75,7 +69,7 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
             // </Goob>
 
             if (!_container.IsEntityOrParentInContainer(shooter.Value))
-                args.Cancelled = true;
+               args.Cancelled = true;
         }
     }
 

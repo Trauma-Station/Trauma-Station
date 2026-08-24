@@ -84,16 +84,16 @@ public sealed partial class DamageSpecifier
             result.Coefficients.Add(type, MathF.Pow(coef, inversePen));
         }
 
-        foreach (var (type, flat) in modifierSet.FlatReduction)
+        foreach (var (type, flat) in modifierSet.FlatReductions)
         {
             // Negative flat reductions are not modified by this
             if (flat <= 0)
             {
-                result.FlatReduction.Add(type, flat);
+                result.FlatReductions.Add(type, flat);
                 continue;
             }
 
-            result.FlatReduction.Add(type, flat * inversePen);
+            result.FlatReductions.Add(type, flat * inversePen);
         }
 
         return result;
@@ -104,5 +104,6 @@ public sealed partial class DamageSpecifier
     {
         None = 0,
         PreciseHit = 1 << 0,
+        MartialArtCombo = 1 << 1,
     }
 }

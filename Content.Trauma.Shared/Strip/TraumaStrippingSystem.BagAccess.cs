@@ -29,11 +29,11 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private SharedStrippableSystem _strippable = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
-    [Dependency] private EntityQuery<ItemSlotsComponent> _itemSlotsQuery = default!;
+    [Dependency] private EntityQuery<ItemSlotsComponent> _slotsQuery = default!;
     [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
 
     private readonly List<EntityUid> _bagAccessScratch = new(); // Reused buffer for UpdateBagAccess, avoid per-tick allocation
@@ -103,7 +103,7 @@ public sealed partial class TraumaStrippingSystem
         var enumerator = _inventory.GetSlotEnumerator(args.Target);
         while (enumerator.NextItem(out var slotEntity, out var slotDef))
         {
-            if (_storageQuery.HasComponent(slotEntity))
+            if (_storageQuery.HasComp(slotEntity))
             {
                 var capturedSlotName = slotDef.Name;
                 var capturedNetEnt = GetNetEntity(slotEntity);
@@ -116,11 +116,11 @@ public sealed partial class TraumaStrippingSystem
                 });
             }
 
-            if (_quickDrawableQuery.HasComponent(slotEntity) && _itemSlotsQuery.TryComp(slotEntity, out var itemSlots))
+            if (_quickDrawableQuery.HasComp(slotEntity) && _slotsQuery.TryComp(slotEntity, out var itemSlots))
             {
                 foreach (var (slotId, slot) in itemSlots.Slots)
                 {
-                    if (!_itemSlots.CanEject(slotEntity, user, slot))
+                    if (!_slots.CanEject(slotEntity, slot, user))
                         continue;
 
                     var capturedSlotId = slotId;
@@ -269,14 +269,14 @@ public sealed partial class TraumaStrippingSystem
         if (!Exists(slotEntity))
             return;
 
-        if (!_itemSlots.TryGetSlot(slotEntity, args.SlotId, out var slot))
+        if (!_slots.TryGetSlot(slotEntity, args.SlotId, out var slot))
             return;
 
-        if (!_itemSlots.CanEject(slotEntity, args.User, slot))
+        if (!_slots.CanEject(slotEntity, slot, args.User))
             return;
 
         // doAfter: false, otherwise ItemSlots tries to start its own doafter too and we'd get two.
-        _itemSlots.TryEjectToHands(slotEntity, slot, args.User, excludeUserAudio: true, doAfter: false);
+        _slots.TryEjectToHands(slotEntity, slot, args.User, excludeUserAudio: true, doAfter: false);
         args.Handled = true;
     }
 

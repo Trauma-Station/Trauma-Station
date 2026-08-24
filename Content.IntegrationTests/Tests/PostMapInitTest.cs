@@ -420,9 +420,19 @@ namespace Content.IntegrationTests.Tests
                     var comp = entManager.GetComponent<StationJobsComponent>(station);
                     var jobs = new HashSet<ProtoId<JobPrototype>>(comp.SetupAvailableJobs.Keys);
 
-                    var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
-                        .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
-                        .Select(x => x.Job.Value);
+                    // <Trauma> the SpawnPointComponent portion of allowing ExtraJobs to work on spawners
+                    var spawnPoints = new List<ProtoId<JobPrototype>>();
+                    foreach (var spawnPoint in entManager.EntityQuery<SpawnPointComponent>())
+                    {
+                        if (spawnPoint.SpawnType is not (SpawnPointType.Job or SpawnPointType.Unset) ||
+                            spawnPoint.Job == null && spawnPoint.ExtraJobs.Count == 0)
+                            continue;
+                        if (spawnPoint.Job != null)
+                            spawnPoints.Add(spawnPoint.Job.Value);
+                        if (spawnPoint.ExtraJobs.Count > 0)
+                            spawnPoints.AddRange(spawnPoint.ExtraJobs);
+                    }
+                    // </Trauma>
 
                     // <Trauma> - dont allow unused jobs
                     var unused = new List<ProtoId<JobPrototype>>();
@@ -438,9 +448,16 @@ namespace Content.IntegrationTests.Tests
 
                     jobs.ExceptWith(spawnPoints);
 
-                    spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
-                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job != null)
-                        .Select(x => x.Job.Value);
+                    // <Trauma> Replaced this one with a list. It's effectively unchanged from what it was before.
+                    spawnPoints.Clear();
+                    foreach (var spawnPoint in entManager.EntityQuery<ContainerSpawnPointComponent>())
+                    {
+                        if (spawnPoint.SpawnType is not (SpawnPointType.Job or SpawnPointType.Unset) || spawnPoint.Job == null)
+                            continue;
+                        if (spawnPoint.Job != null)
+                            spawnPoints.Add(spawnPoint.Job.Value);
+                    }
+                    // </Trauma>
 
                     jobs.ExceptWith(spawnPoints);
 

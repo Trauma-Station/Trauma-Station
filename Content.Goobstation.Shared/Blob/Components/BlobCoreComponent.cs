@@ -76,9 +76,6 @@ public sealed partial class BlobCoreComponent : Component
     #region Blob Ranges
 
     [DataField]
-    public float NodeRadiusLimit = 5f;
-
-    [DataField]
     public float TilesRadiusLimit = 9f;
 
     #endregion
