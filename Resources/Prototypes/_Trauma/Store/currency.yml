@@ -4,7 +4,22 @@
   id: Spesos
   displayName: store-currency-display-spesos
   cash:
+    0.01: SpaceCoin
+    0.05: SpaceCoin_05
+    0.10: SpaceCoin_10
+    0.25: SpaceCoin_25
+    0.50: SpaceCoin_50
     1: SpaceCash
+    10: SpaceCash10
+    100: SpaceCash100
+    500: SpaceCash500
+    1000: SpaceCash1000
+    2500: SpaceCash2500
+    5000: SpaceCash5000
+    10000: SpaceCash10000
+    20000: SpaceCash20000
+    30000: SpaceCash30000
+    1000000: SpaceCash1000000
   canWithdraw: true
 
 - type: currency
@@ -12,4 +27,6 @@
   displayName: store-currency-display-fake-spesos
   cash:
     1: SpaceCashCounterfeit
+    10: SpaceCashCounterfeit10
+    250: SpaceCashCounterfeit250
   canWithdraw: true
