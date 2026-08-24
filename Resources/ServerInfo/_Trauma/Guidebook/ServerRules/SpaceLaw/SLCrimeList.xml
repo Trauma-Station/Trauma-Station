@@ -185,4 +185,87 @@
   - PA-02: Criminal Association; The act of meeting or talking to known criminals, or otherwise associating with them.
   - PA-03: Reoffending; The act of commiting any crime after being incarcerated for a previous crime.
   - PA-04: Intoxication; The act of being under any mind-altering substance, prohibited or legal, while on parole.
+
+  # Violation Types
+
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box>Type 1 Violations</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      This level of violation is to be punished via Corporal methods. The infringing action must warrant the punishment given.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 2 Violations</Box></ColorBox>
+    <ColorBox Color="#6d659c"><Box HorizontalAlignment="Left" Margin="4">
+      This level of violation is to be punished by either up to three minutes in the brig or corporal punishment of a warranted level.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 3 Violations</Box></ColorBox>
+    <ColorBox Color="#bf8f62"><Box HorizontalAlignment="Left" Margin="4">
+      This level of violation is to be punished by either up to five minutes in the brig, corporal punishment, or reduction of access.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 4 Violations</Box></ColorBox>
+    <ColorBox Color="#9e3939"><Box HorizontalAlignment="Left" Margin="4">
+      This level of violation may void the rights given by Space Law, and is typically punished by demotion to D-Class, five minutes of brig time, \n and/or a substantial corporal punishments. It may include all three.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 5 Violations</Box></ColorBox>
+    <ColorBox Color="#1c1c1c"><Box HorizontalAlignment="Left" Margin="4">
+      This level of violation voids the rights given by Space Law, and immediately warrants a sentence of permanent confinement, \n to be escalated to execution if a Type 2 Violation or above is committed.
+    </Box></ColorBox>
+  </Table>
+  \n
+  All specific violations are detailed below.
+
+  ## Type 1 Violations
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Minor Contraband Posession</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      Posession of [bold]any[/bold] contraband that does not fall under any other violations.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Littering</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      Improper disposal of waste via public dumping.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Public Nuisance</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The disorderly conduct of an employee in a public area that is disruptive to the work of other employees, or otherwise damages the Nanotrasen™ brand.
+      Test
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Harassment</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The act of intentionally offending, verbally intimidating or humiliating another employee.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Trespass</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      Entering a department you do not have access to through non-forceful means without approval from a member of the department. Department heads can retroactively waive approval given by their employees.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Unauthorized Possession of Department Contraband</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      Posession of department contraband without approval from a member of that department. Department heads can retroactively waive approval given by their employees.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Public Smoking and Vaping</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The act of smoking or vaping outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or offices.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Departmental Impersonation</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The act of wearing a departmental uniform whilst not being a part of that department.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Concealment of Identity</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA. You may hold anyone who is failing to show their company-mandated ID/PDA until it is otherwise acquired or a new one is issued.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Personal Possession of Schedule A Narcotics</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The act of possessing prohibited Schedule A narcotics that does not exceed 50 units with intent for personal use.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Public Intoxication</Box></ColorBox>
+    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+      The act of being intoxicated, whether by alcohol or illicit substances, outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or medbay if undergoing sobering treatment.
+    </Box></ColorBox>
+  </Table>
+
+  \n
+  <ColorBox Color="#000000"><Box HorizontalAlignment="Center"></Box></ColorBox>
+  <ColorBox Color="#6d659c"><Box HorizontalAlignment="Left" Margin="4">
+
+  </Box></ColorBox>
+
 </Document>
