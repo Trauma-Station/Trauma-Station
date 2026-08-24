@@ -13616,3 +13616,10 @@ Entries:
   id: 1485
   time: '2026-08-22T08:43:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4201
+- author: Pi-tanium
+  changes:
+  - type: Remove
+    message: Ion storms can no longer roll the coscult lawset.
+  id: 1486
+  time: '2026-08-24T01:56:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4249
