@@ -13623,3 +13623,10 @@ Entries:
   id: 1486
   time: '2026-08-24T01:56:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4249
+- author: badjuju
+  changes:
+  - type: Tweak
+    message: Changed spationaut suit and helmet resistances
+  id: 1487
+  time: '2026-08-24T10:58:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4243
