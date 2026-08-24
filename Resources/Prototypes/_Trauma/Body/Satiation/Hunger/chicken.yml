@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: satiation
+  parent: SimpleMobBaseHunger
+  id: ChickenHunger
+  thresholds:
+    Overfed: 100
+    Okay: 50
+    Peckish: 35
+    Starving: 20
+    Dead: 15

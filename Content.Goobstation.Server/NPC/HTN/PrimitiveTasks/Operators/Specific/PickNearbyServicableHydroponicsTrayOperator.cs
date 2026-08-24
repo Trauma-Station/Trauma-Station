@@ -3,10 +3,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Silicon.Bots;
-using Content.Server.Botany.Components;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
+using Content.Shared.Botany.Components;
+using Content.Shared.Botany.Systems;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 
@@ -17,7 +18,9 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     [Dependency] private IEntityManager _ent = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
+    private PlantHolderSystem _holder = default!;
     private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<PlantHolderComponent> _holderQuery = default!;
 
     /// <summary>
     /// Determines how close the bot needs to be to service a tray
@@ -36,7 +39,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
 
-    private HashSet<Entity<PlantHolderComponent>> _targets = new();
+    private HashSet<Entity<PlantTrayComponent>> _targets = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -46,6 +49,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
 
         _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
+        _holderQuery = _ent.GetEntityQuery<PlantHolderComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -60,7 +64,8 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         _lookup.GetEntitiesInRange(coords, Range, _targets);
         foreach (var target in _targets)
         {
-            if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || target.Comp.Dead || target.Comp.WaterLevel <= 0f))
+            var holder = _holderQuery.Comp(target);
+            if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed } && !holder.ReadyForHarvest && (!emagged || _holder.IsDead((target, holder)) || target.Comp.WaterLevel <= 0f))
                 continue;
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range

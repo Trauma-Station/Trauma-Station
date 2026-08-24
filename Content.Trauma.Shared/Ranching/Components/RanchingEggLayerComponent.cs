@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.Prototypes;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Ranching.Components;
@@ -33,22 +33,16 @@ public sealed partial class RanchingEggLayerComponent : Component
     public float EggLayCooldownMax = 40f;
 
     /// <summary>
-    /// The amount of nutrient consumed on eggLay.
+    /// The amount of nutrient hunger used to lay an egg.
     /// </summary>
     [DataField]
     public float HungerUsage = 3f;
 
     /// <summary>
-    /// What hunger threshold is required
+    /// Food level needed to lay eggs.
     /// </summary>
     [DataField]
-    public HungerThreshold HungerThresholdRequired = HungerThreshold.Okay;
-
-    /// <summary>
-    /// Whether given entity needs to have Hunger in order to lay eggs
-    /// </summary>
-    [DataField]
-    public bool HungerRequired = true;
+    public SatiationValue HungerThreshold = 50;
 
     /// <summary>
     /// When to next try to lay an egg.

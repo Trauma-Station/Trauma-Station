@@ -19,7 +19,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
 
     private static readonly ProtoId<DamageTypePrototype> BallisticProto = "Ballistic";
     private static readonly ProtoId<DamageTypePrototype> SlashProto = "Slash";

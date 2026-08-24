@@ -13,19 +13,14 @@
       - Armor
   - type: ComponentsEnchant
     added:
+    - type: SpeechFontOverride
+      font: LDFComicSans
     - type: ClothingGrantComponent
       component:
-      - type: Clumsy
-        gunShootFailDamage:
-          types:
-            Blunt: 5
-            Piercing: 4
-            Heat: 3
-        catchingFailDamage:
-          types:
-            Blunt: 1
+      # TODO: make it a clothing comp
+      - type: PermanentStatusEffects
+        statusEffects:
+        - StatusEffectClumsyCurse
       - type: SleepEmitSound
         snore: /Audio/Voice/Misc/silly_snore.ogg
         interval: 10
-      - type: SpeechFontOverride
-        font: LDFComicSans

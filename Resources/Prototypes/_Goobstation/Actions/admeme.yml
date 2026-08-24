@@ -63,7 +63,7 @@
     checkCanAccess: false
     range: 48
   - type: WorldTargetAction
-    event: !type:TeleportSpellEvent
+    event: !type:TeleportActionEvent
 
 - type: entity
   parent: BaseAction
