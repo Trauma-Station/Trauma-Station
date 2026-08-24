@@ -159,7 +159,7 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Radiation: 0.1
+        Radiation: 0.5 # Trauma - was 0.1
         Caustic: 0.8
   - type: Tag
     tags:
