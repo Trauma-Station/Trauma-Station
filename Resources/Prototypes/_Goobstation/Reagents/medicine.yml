@@ -272,7 +272,8 @@
       metabolites:
         Mitotrophin: 0.2 # a little something for wasting it all on hunger
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1.5 # 50% less
 
 - type: reagent

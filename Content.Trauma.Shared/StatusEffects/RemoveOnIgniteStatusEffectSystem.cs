@@ -15,12 +15,11 @@ public sealed partial class RemoveOnIgniteStatusEffectSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StatusEffectContainerComponent, IgnitedEvent>(_status.RelayEvent);
-
-        SubscribeLocalEvent<RemoveOnIgniteStatusEffectComponent, StatusEffectRelayedEvent<IgnitedEvent>>(OnIgnite);
     }
 
+    [SubscribeLocalEvent]
     private void OnIgnite(Entity<RemoveOnIgniteStatusEffectComponent> ent, ref StatusEffectRelayedEvent<IgnitedEvent> args)
     {
-        _status.TryRemoveStatusEffect(args.Container.Owner, ent.Comp.EffectProto);
+        _status.TryRemoveStatusEffect(args.AppliedTo, ent.Comp.EffectProto);
     }
 }

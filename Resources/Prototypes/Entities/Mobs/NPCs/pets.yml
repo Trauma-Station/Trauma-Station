@@ -19,12 +19,6 @@
   description: Favorite pet corgi.
   components:
   # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - Dog
-    understands:
-    - Dog
-    - TauCetiBasic
   - type: IanAdventureTarget
   # </Trauma>
   - type: Sprite
@@ -151,7 +145,7 @@
   components:
   # <Trauma>
   - type: NPCRetaliation
-    attackMemoryLength: 0
+    attackMemoryLength: 0 # dementia
   # </Trauma>
   - type: Sprite
     layers:
@@ -169,6 +163,7 @@
     attributes:
       proper: true
       gender: female
+  - type: SpeakOnException
 
 - type: entity
   parent: [ MobCorgiPuppy, BaseSlicingRefinable ]
@@ -177,12 +172,6 @@
   description: Favourite puppy corgi. Awww.
   components:
   # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - Dog
-    understands:
-    - Dog
-    - TauCetiBasic
   - type: IanAdventureTarget
   # </Trauma>
   - type: Grammar
@@ -221,12 +210,9 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalNamedCat
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Cat
-    understands:
-    - Cat
-    - TauCetiBasic
+  - type: SpeakOnException
+    speechCooldown: 3m
+    chanceSpeakNoAccent: 0.01
 
 - type: entity
   parent: [ BaseUniquePet, MobCatCalico ]
@@ -237,6 +223,9 @@
   - type: NpcFactionMember
     factions:
       - PetsNT
+  - type: SpeakOnException
+    speechCooldown: 2m
+    chanceSpeakNoAccent: 0.007
   - type: Grammar
     attributes:
       proper: true
@@ -247,12 +236,6 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalNamedCat
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Cat
-    understands:
-    - Cat
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobCatCaracal ]
@@ -280,12 +263,6 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalNamedCat
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Cat
-    understands:
-    - Cat
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobFerret ]
@@ -301,12 +278,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Hissing
-    understands:
-    - Hissing
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable , BaseMobDestructible ]
@@ -364,12 +335,6 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalNamedCat
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Cat
-    understands:
-    - Cat
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable , BaseMobDestructible ]

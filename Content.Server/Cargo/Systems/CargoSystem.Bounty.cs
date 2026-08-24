@@ -439,7 +439,7 @@ public sealed partial class CargoSystem
         if (component.Bounties.Count >= component.MaxBounties)
             return false;
 
-        _nameIdentifier.GenerateUniqueName(uid, BountyNameIdentifierGroup, out var randomVal);
+        _nameIdentifier.GenerateUniqueNameModifier(BountyNameIdentifierGroup, out var randomVal);
         // <Trauma> - set reward to the actual reward given
         var ev = new ModifyBountyRewardEvent(bounty.Reward);
         RaiseLocalEvent(uid, ref ev);

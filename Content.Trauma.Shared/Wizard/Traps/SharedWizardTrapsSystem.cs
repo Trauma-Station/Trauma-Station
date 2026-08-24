@@ -36,7 +36,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private SparksSystem _spark = default!;
+    [Dependency] private CommonSparksSystem _sparks = default!;
     [Dependency] private SharedElectrocutionSystem _electrocution = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
@@ -203,12 +203,13 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
 
         if (comp.Sparks)
         {
-            _spark.DoSparks(Transform(uid).Coordinates,
+            _sparks.DoSparks(uid,
                 comp.MinSparks,
                 comp.MaxSparks,
                 comp.MinVelocity,
                 comp.MaxVelocity,
-                comp.TriggerSound == null);
+                comp.TriggerSound == null,
+                predicted: false); // client doesnt predict it for other players, network audio
         }
 
         _audio.PlayPredicted(comp.TriggerSound, args.OtherEntity, args.OtherEntity);

@@ -35,9 +35,3 @@
   background: /Textures/_Trauma/LobbyScreens/mugshotLobbyArt.webp
   title: lobby-state-background-the-mugshot
   artist: Hexanova
-
-- type: lobbyBackground
-  id: antagLobbyArt
-  background: /Textures/_Trauma/LobbyScreens/traumantags.webp
-  title: lobby-state-background-the-enemy
-  artist: JohnJoe

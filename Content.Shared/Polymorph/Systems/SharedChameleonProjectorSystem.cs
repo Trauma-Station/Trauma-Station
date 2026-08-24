@@ -31,7 +31,7 @@ namespace Content.Shared.Polymorph.Systems;
 public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private CommonSparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
@@ -241,9 +241,11 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
     {
         var proj = ent.Comp;
 
+        /* Trauma - yes prediction
         // no spawning prediction sorry
         if (_net.IsClient)
             return;
+        */
 
         // reveal first to allow quick switching
         if (ent.Comp.Disguised != null)
@@ -255,7 +257,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 
         proj.Disguised = user;
 
-        var disguise = SpawnAttachedTo(proj.DisguiseProto, user.ToCoordinates());
+        var disguise = PredictedSpawnAttachedTo(proj.DisguiseProto, user.ToCoordinates()); // Trauma - predict it
 
         var disguised = EnsureComp<ChameleonDisguisedComponent>(user);
         disguised.Disguise = disguise;
@@ -282,7 +284,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         // </Trauma>
 
         _appearance.CopyData(entity, disguise);
-        _sparks.DoSparks(Transform(user).Coordinates); // Goob
+        _sparks.DoSparks(user); // Trauma
     }
 
     /// <summary>
@@ -301,7 +303,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         _toggle.TryDeactivate(disguise.Projector);
 
         RemComp<ChameleonDisguisedComponent>(ent);
-        _sparks.DoSparks(Transform(ent).Coordinates); // Goob
+        _sparks.DoSparks(ent); // Trauma
         return true;
     }
 
