@@ -13560,3 +13560,173 @@ Entries:
   id: 1479
   time: '2026-08-21T11:01:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4195
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: ED209 no longer needs an exosuit thruster to make.
+  - type: Tweak
+    message: All automation machines no longer need parts, just the board.
+  id: 1480
+  time: '2026-08-21T22:18:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4217
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Added signal autolinking for interactors and conveyors, logic gates
+      starting interactors.
+  id: 1481
+  time: '2026-08-21T22:49:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4218
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added signal screens, you can set their text to anything with circuits.
+  - type: Add
+    message: Added if/else logic gate to circuits.
+  - type: Fix
+    message: Interactors completed/started ports should behave better.
+  id: 1482
+  time: '2026-08-22T01:43:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4219
+- author: buunie099
+  changes:
+  - type: Add
+    message: >-
+      Added the most popular character that was spectated to the round end
+      window
+  id: 1483
+  time: '2026-08-22T03:58:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4183
+- author: mickers7
+  changes:
+  - type: Add
+    message: Re-added Capoeira
+  - type: Tweak
+    message: Reworked Capoeira
+  id: 1484
+  time: '2026-08-22T05:00:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4078
+- author: jshoe2
+  changes:
+  - type: Add
+    message: >-
+      Replaced Wizard Enchanting crate with a new Demonology Crate, everything
+      you need to summon demons!
+  id: 1485
+  time: '2026-08-22T08:43:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4201
+- author: Pi-tanium
+  changes:
+  - type: Remove
+    message: Ion storms can no longer roll the coscult lawset.
+  id: 1486
+  time: '2026-08-24T01:56:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4249
+- author: badjuju
+  changes:
+  - type: Tweak
+    message: Changed spationaut suit and helmet resistances
+  id: 1487
+  time: '2026-08-24T10:58:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4243
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: PAIs no longer get access to the binary channel.
+  id: 1488
+  time: '2026-08-24T16:54:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4252
+- author: sr483
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed Procenyl Lazide's effects, it is now more powerful and worth
+      making.
+  id: 1489
+  time: '2026-08-24T17:17:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4189
+- author: Big Brother, StarMade, Joel
+  changes:
+  - type: Remove
+    message: the unemployed, and their drip
+  - type: Add
+    message: Added 1984
+  - type: Add
+    message: Job spawners can now have extra jobs added to them
+  id: 1490
+  time: '2026-08-24T17:18:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4169
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed lone xeno slop.
+  id: 1491
+  time: '2026-08-25T00:31:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4259
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Solar flares now prevent all radio sources including IPCs, intercoms and
+      nanochat.
+  id: 1492
+  time: '2026-08-25T00:40:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4260
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed capoeira making weapons faster.
+  id: 1493
+  time: '2026-08-25T00:50:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4261
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed xenobio slime latching damage never stopping even if you deleted the
+      slime.
+  id: 1494
+  time: '2026-08-25T01:33:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4262
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use holosigns on xeno weeds.
+  id: 1495
+  time: '2026-08-25T01:51:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4264
+- author: Jack-Silver
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed the EHP of many of the stations overly tanky structures like door
+      assemblies, closets and wallmoounts.
+  id: 1496
+  time: '2026-08-25T05:01:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4244
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Energy chem dispensers are now predicted, show total energy used to make
+      the current amount of chemicals and use much more power.
+  id: 1497
+  time: '2026-08-25T08:19:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4267
+- author: Pi-tanium
+  changes:
+  - type: Fix
+    message: Lings never need to absorb other lings now
+  id: 1498
+  time: '2026-08-25T09:23:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4269
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed ID cards always having their job icon reset when changing accesses.
+  - type: Fix
+    message: Fixed energy chem dispensers taking forever to recharge.
+  id: 1499
+  time: '2026-08-25T15:02:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4272

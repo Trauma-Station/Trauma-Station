@@ -89,15 +89,19 @@
     allowRevives: true
   - type: HealthExaminable
     examinableTypes:
+      - Ballistic # Trauma
       - Blunt
       - Slash
       - Piercing
-      - Ballistic # Trauma
       - Heat
       - Shock
     locPrefix: silicon
   - type: UserInterface
     interfaces:
+      # <Trauma>
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+      # </Trauma>
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
         requireInputValidation: false
@@ -108,9 +112,6 @@
       # Only used for NT borgs that can switch type, defined here to avoid copy-pasting the rest of this component.
       enum.BorgSwitchableTypeUiKey.SelectBorgType:
         type: BorgSelectTypeUserInterface
-      # Goobstation - Add the station map interface to the borg
-      enum.StationMapUiKey.Key:
-        type: StationMapBoundUserInterface
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: SiliconLawBound
@@ -141,10 +142,10 @@
     - Science
   - type: ZombieImmune
   - type: Repairable
+    allowSelfRepair: true # Trauma
     damageValue: -10 # 10 seconds to repair from crit
     doAfterDelay: 1
     fuelCost: 0.5
-    allowSelfRepair: true # Goob
   - type: BorgChassis
   - type: LockingWhitelist
     blacklist:
@@ -182,11 +183,6 @@
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg
-    allowedEmotes: # Goobstation - Cyborg emote sounds
-    - Laugh
-    - Sigh
-    - Crying
-    - Whistle
   - type: Vocal
     emoteSounds: UnisexSilicon
     wilhelmProbability: 0
@@ -210,7 +206,7 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
-    damageModifierSet: Silicon # Trauma - ion damage
+    damageModifierSet: Silicon # Trauma
   - type: Injurable
     damageContainer: Silicon
   - type: HandheldLight
@@ -251,13 +247,15 @@
   - type: StandingState
   - type: Tag
     tags:
+    # <Trauma>
+    - SiliconMob
+    - IPCDrinkBlacklist # no selfantagging ipcs
+    # </Trauma>
     - DoorBumpOpener
     - FootstepSound
     - CanPilot
     - SiliconEmotes
     - Unimplantable
-    - SiliconMob # Goob
-    - IPCDrinkBlacklist # Goobstation - Energycrit: Don't let self antagging IPCs steal power from borgs.
   - type: Emoting
   - type: GuideHelp
     guides:
@@ -434,12 +432,13 @@
   - type: Speech
     speechSounds: SyndieBorg
     allowedEmotes:
+    # <Trauma>
     - Laugh
-    # Goobstation - Cyborg emote sounds
     - Sigh
     - Crying
+    # </Trauma>
     - Whistle
-    # end Goobstation - Cyborg emote sounds
+    - Laugh
   - type: Vocal
     emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
@@ -511,6 +510,10 @@
   components:
   # <Trauma>
   - type: BlockShuttleRecall
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
   # </Trauma>
   - type: RandomMetadata
     nameSegments:
@@ -527,12 +530,8 @@
   - type: EmagSiliconLaw # should xenoborgs be emagable?
     stunTime: 5
   - type: SiliconLawProvider
+    subverted: true # Trauma
     laws: XenoborgLawset # custom laws here
-    subverted: true # Goob
-  - type: CollectiveMind # Goob
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: IntrinsicRadioTransmitter # can only use binary and xenoborg channel
     channels:
     - Xenoborg
@@ -543,29 +542,29 @@
     - Xenoborg
     #- Binary # Goob
   - type: BorgChassis
+    # <Trauma>
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+    # </Trauma>
     maxModules: 0
     hasMindState: robot_e
     noMindState: robot_e_r
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
-    # <Trauma>
-    brainWhitelist:
-      components:
-      - MMI # No infinite posibrain xorgs
-    # </Trauma>
   - type: TypingIndicator
     proto: xenoborg
   - type: Speech
     speechVerb: Robotic
     speechSounds: Xenoborg
     allowedEmotes:
-    - Laugh
-    # Goobstation - Cyborg emote sounds
+    # <Trauma>
     - Sigh
     - Crying
     - Whistle
-    # end Goobstation - Cyborg emote sounds
+    # </Trauma>
+    - Laugh
   - type: Vocal
     emoteSounds: UnisexSiliconXenoborg
     wilhelmProbability: 0
@@ -607,6 +606,10 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+  # <Trauma>
+  #- type: EmpResistance
+  #  strengthMultiplier: 0
+  # </Trauma>
 
 - type: entity
   abstract: true

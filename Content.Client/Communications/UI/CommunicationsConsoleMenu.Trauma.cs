@@ -2,6 +2,8 @@
 
 using Content.Shared.AlertLevel;
 using Content.Trauma.Common.AlertLevel;
+using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 using System.Globalization;
 
 namespace Content.Client.Communications.UI;
@@ -12,6 +14,8 @@ namespace Content.Client.Communications.UI;
 public sealed partial class CommunicationsConsoleMenu
 {
     [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     public AlertLevelSystem AlertLevel = default!;
 
     public EntityUid Station;
@@ -48,11 +52,14 @@ public sealed partial class CommunicationsConsoleMenu
 
         if (locked != wasLocked)
         {
-            SelectableAlertLevels = AlertLevel.GetSelectableAlertLevels(Station);
-            AlertLevelSelectable = AlertLevel.CanChangeAlertLevel(Station);
+            if (!AlertLevel.TryGetLevel(Station, out var current))
+                return;
+            var levels = AlertLevel.GetSelectableAlertLevels(Station);
+            var selectable = AlertLevel.CanChangeAlertLevel(Station);
+            AlertLevelControls.UpdateAlertLevels(levels, current.Value, selectable);
         }
 
-        var level = _protoMan.Index<AlertLevelPrototype>(ev.LockedLevel).LocalizedName;
+        var level = _proto.Index<AlertLevelPrototype>(ev.LockedLevel).LocalizedName;
         UnlockLabel.Text = remaining != null
             ? Loc.GetString("comms-console-menu-level-unlocked-at",
                 ("time", remaining.Value.ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)),

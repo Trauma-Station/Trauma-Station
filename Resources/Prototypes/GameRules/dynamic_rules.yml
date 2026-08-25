@@ -101,6 +101,11 @@
           - !type:PlayerCountCondition
             min: 30
         # </Trauma>
+        - id: Changeling
+          prob: 0.25
+          conditions:
+          - !type:HasBudgetCondition
+          - !type:MaxRuleOccurenceCondition
       # Midround rules
       - !type:GroupSelector
         conditions:

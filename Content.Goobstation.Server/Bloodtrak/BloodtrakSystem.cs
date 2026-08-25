@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Bloodtrak;
-using Content.Server.Forensics;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Forensics.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Pinpointer;
 using Content.Shared.Popups;
@@ -16,12 +16,12 @@ namespace Content.Goobstation.Server.Bloodtrak;
 public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
 {
     [Dependency] private TagSystem _tag = default!;
-    [Dependency] private ForensicsSystem _forensicsSystem = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private UseDelaySystem _delaySystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public static readonly ProtoId<TagPrototype> ScannableTag = "DNASolutionScannable";
 
@@ -40,7 +40,7 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
     {
         if (!_tag.HasTag(target, ScannableTag) || !HasComp<PuddleComponent>(target))
         {
-            _popupSystem.PopupEntity(Loc.GetString("bloodtrak-scan-failed"), user, user);
+            _popup.PopupEntity(Loc.GetString("bloodtrak-scan-failed"), user, user);
             return null;
         }
 
@@ -48,7 +48,7 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
         {
             if (component.ResultList.Count == 0)
             {
-                _popupSystem.PopupEntity("Nothing scanned!?", user, user);
+                _popup.PopupEntity("Nothing scanned!?", user, user);
                 return null;
             }
 
@@ -58,15 +58,15 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
                 component.ResultListOffset = 0;
 
             var (dna, freshnessTimestamp, entityId) = component.ResultList[component.ResultListOffset];
-            _popupSystem.PopupEntity(Loc.GetString("bloodtrak-dna-saved", ("dna", dna)), user, user);
+            _popup.PopupEntity(Loc.GetString("bloodtrak-dna-saved", ("dna", dna)), user, user);
             return (entityId, freshnessTimestamp);
         }
 
-        var solutionsDna = _forensicsSystem.GetSolutionsDNA(target);
+        var solutionsDna = _forensics.GetSolutionsDNA(target);
 
         if (solutionsDna.Count == 0)
         {
-            _popupSystem.PopupEntity(Loc.GetString("bloodtrak-no-dna"), user, user);
+            _popup.PopupEntity(Loc.GetString("bloodtrak-no-dna"), user, user);
             return null;
         }
 
@@ -90,11 +90,11 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
         if (component.ResultList.Count > 0)
         {
             var (dna, freshnessTimestamp, entityId) = component.ResultList[component.ResultListOffset];
-            _popupSystem.PopupEntity(Loc.GetString("bloodtrak-dna-saved", ("dna", dna)), user, user);
+            _popup.PopupEntity(Loc.GetString("bloodtrak-dna-saved", ("dna", dna)), user, user);
             return (entityId, freshnessTimestamp);
         }
 
-        _popupSystem.PopupEntity(Loc.GetString("bloodtrak-no-match"), user, user);
+        _popup.PopupEntity(Loc.GetString("bloodtrak-no-match"), user, user);
         return null;
     }
 
@@ -114,7 +114,7 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
 
     private void OnAfterInteract(EntityUid uid, BloodtrakComponent component, AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target is not { } target || component.IsActive || _delaySystem.IsDelayed(uid))
+        if (!args.CanReach || args.Target is not { } target || component.IsActive || _delay.IsDelayed(uid))
             return;
 
         args.Handled = true;
@@ -141,18 +141,18 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
             // If the targrt does not exist anymore (deleted, etc), display no target.
             if (pinpointer.Target == null || !Exists(pinpointer.Target.Value))
             {
-                _popupSystem.PopupEntity(Loc.GetString("bloodtrak-no-target"), uid);
+                _popup.PopupEntity(Loc.GetString("bloodtrak-no-target"), uid);
                 return false;
             }
 
-            if (_delaySystem.IsDelayed(uid))
+            if (_delay.IsDelayed(uid))
                 return false;
 
             // Tracking duration scales linearly with freshness.
-            var newExpirationTime = _gameTiming.CurTime + pinpointer.MaximumTrackingDuration - (_gameTiming.CurTime - pinpointer.Freshness);
-            if (newExpirationTime <= _gameTiming.CurTime)
+            var newExpirationTime = _timing.CurTime + pinpointer.MaximumTrackingDuration - (_timing.CurTime - pinpointer.Freshness);
+            if (newExpirationTime <= _timing.CurTime)
             {
-                _popupSystem.PopupEntity(Loc.GetString("bloodtrak-sample-expired"), uid);
+                _popup.PopupEntity(Loc.GetString("bloodtrak-sample-expired"), uid);
                 return false;
             }
             pinpointer.ExpirationTime = newExpirationTime;
@@ -174,7 +174,7 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
 
     private void OnActivate(EntityUid uid, BloodtrakComponent component, ActivateInWorldEvent args)
     {
-        if (args.Handled || !args.Complex || _delaySystem.IsDelayed(uid))
+        if (args.Handled || !args.Complex || _delay.IsDelayed(uid))
             return;
 
         TogglePinpointer(uid, component);
@@ -184,7 +184,7 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var currentTime = _gameTiming.CurTime;
+        var currentTime = _timing.CurTime;
 
         var query = EntityQueryEnumerator<BloodtrakComponent>();
         while (query.MoveNext(out var uid, out var tracker))
@@ -199,11 +199,11 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
             if (!targetValid || expired)
             {
                 // Deactivate only if target is invalid or time expired
-                _popupSystem.PopupEntity(Loc.GetString(targetValid ? "bloodtrak-tracking-expired" : "bloodtrak-target-lost"), uid);
+                _popup.PopupEntity(Loc.GetString(targetValid ? "bloodtrak-tracking-expired" : "bloodtrak-target-lost"), uid);
                 TogglePinpointer(uid, tracker);
                 tracker.Target = null;
 
-                _delaySystem.SetLength(uid, tracker.CooldownDuration);
+                _delay.SetLength(uid, tracker.CooldownDuration);
 
                 Dirty(uid, tracker);
             }

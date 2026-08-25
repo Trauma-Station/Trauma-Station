@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Silicon.Systems;
 using Content.Shared.Alert;
-using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Trauma.Shared.Silicon.Components;
 

@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [SimpleMobBase, StripableInventoryBase, BaseExaminableHunger]
   id: BaseMobChickRanch
   name: chicken
   description: Comes before an egg, and IS a dinosaur!
@@ -75,17 +75,17 @@
       - ReagentId: Blood
         Quantity: 100
   - type: Unrevivable
-  - type: ExaminableHunger
-  - type: Hunger
-    thresholds:
-      Overfed: 100
-      Okay: 50
-      Peckish: 35
-      Starving: 20
-      Dead: 15
-    starvationDamage:
-      types:
-        Asphyxiation: 1
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: ChickenHunger
+  - type: SatiationDamage
+    satiations:
+      Hunger:
+        thresholds:
+          Dead:
+            types:
+              Asphyxiation: 1
 
 - type: entity
   abstract: true
