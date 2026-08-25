@@ -24,6 +24,7 @@
     # CMOCrewMonitorStealObjective: 1 # Goobstation
     CMORapidSyringeGunStealObjective: 1
     RDHardsuitStealObjective: 1
+    RDTeleportArmourStealObjective: 1 # Trauma
     NukeDiskStealObjective: 1
     MagbootsStealObjective: 1
     # CERocketLauncherStealObjective: 1

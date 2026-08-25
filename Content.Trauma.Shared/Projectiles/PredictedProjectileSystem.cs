@@ -53,6 +53,10 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         if (args.OurFixtureId != SharedProjectileSystem.ProjectileFixture || !args.OtherFixture.Hard)
             return;
 
+        // For stuff that cares about it being hit.
+        var hityBProjectileEvent = new HitByProjectileEvent(args.OurEntity, args.OtherEntity);
+        RaiseLocalEvent(args.OtherEntity, hityBProjectileEvent);
+
         DoHit((uid, component, args.OurBody), args.OtherEntity);
     }
 

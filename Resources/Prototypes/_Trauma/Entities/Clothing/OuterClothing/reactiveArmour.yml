@@ -1,0 +1,61 @@
+- type: entity
+  abstract: true
+  parent: [ ClothingOuterArmorBase]
+  id: ClothingOuterArmorReactiveBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Armor/reactive.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Armor/reactive.rsi
+
+  - type: entity
+  abstract: true
+  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  id: ClothingOuterArmorReactiveUnfinished
+  name: unfinished reactive armour
+  description: This one needs an anomaly core.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
+
+- type: entity
+  abstract: true
+  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  id: ClothingOuterArmorReactiveRD
+  name: reactive teleport armour
+  description: Someone separated our Research Director from his own head!
+  components:
+  - type: StealTarget
+    stealGroup: TeleportArmourStealObjective
+  - type: ClothingGrantComponent
+    component:
+    - type: ReactiveArmour
+      armourBehavior: Teleport
+
+
+- type: entity
+  abstract: true
+  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  id: ClothingOuterArmorReactiveTeleport
+  name: reactive teleport armour
+  description: Reactive armour with bluespace core in it.
+  components:
+  - type: ClothingGrantComponent
+    component:
+    - type: ReactiveArmour
+      armourBehavior: Teleport
+
+- type: entity
+  abstract: true
+  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  id: ClothingOuterArmorReactiveTesla
+  name: reactive tesla armour
+  description: Reactive armour with tesla core in it.
+  components:
+  - type: ClothingGrantComponent
+    component:
+    - type: ReactiveArmour
+      armourBehavior: Tesla

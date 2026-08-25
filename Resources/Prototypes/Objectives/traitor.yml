@@ -233,6 +233,15 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
+# Trauma
+- type: entity
+  parent: BaseRDStealObjective
+  id: RDTeleportArmourStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: ClothingOuterArmorReactiveRD
+# /Trauma
+
 ## hos
 
 # - type: entity # Trauma
