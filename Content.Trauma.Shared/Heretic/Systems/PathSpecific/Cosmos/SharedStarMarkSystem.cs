@@ -275,7 +275,7 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
             return false;
 
         var ev = new BeforeCastTouchSpellEvent(entity, false);
-        RaiseLocalEvent(entity, ev, true);
+        RaiseLocalEvent(entity, ref ev, true);
 
         var result = !ev.Cancelled &&
                      _status.TryUpdateStatusEffectDuration(entity,
