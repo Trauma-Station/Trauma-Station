@@ -58,7 +58,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
                 // incase some bullshit doesnt clean it up properly
                 comp.SourceEntityUid is not { } source ||
                 !_slimeQuery.TryComp(source, out var slime) ||
-                slime.LatchedEntityTarget != uid)
+                slime.LatchedTarget != uid)
             {
                 RemCompDeferred(uid, comp);
                 continue;
