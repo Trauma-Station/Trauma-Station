@@ -5,7 +5,12 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.Chemistry;
 using Content.Shared.Chemistry;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.FixedPoint;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Timing;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
@@ -16,77 +21,73 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
 {
     [Dependency] private IEntityManager _ent = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+    private SharedBatterySystem _battery = default!;
+    private SharedSolutionContainerSystem _solution = default!;
 
-    private float _batteryCharge;
-    private float _batteryMaxCharge;
-    private float _currentReceiving;
-    private float _idleUse;
-    private bool _usingBattery;
-    private bool _hasPower;
-    private int _selectedAmount;
+    public event Action? OnEjectBeaker;
+    public event Action? OnClearBeaker;
+    public event Action<int>? OnSetAmount;
+    public event Action<ProtoId<ReagentPrototype>>? OnDispenseReagent;
+
+    private EnergyReagentDispenserComponent _comp = default!;
+    private Entity<BatteryComponent?> _batteryEnt = default!;
+    private EntityUid? _beaker;
+    private FixedPoint2 _lastVolume = -1;
+    private float _batteryCharge = -1;
+    private int _selectedAmount = -1;
     private float _lastBatteryCharge = -1;
-    private bool _cardsNeedUpdate = true;
-    public event Action<string>? OnDispenseReagentButtonPressed;
 
     public EnergyReagentDispenserWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+        _battery = _ent.System<SharedBatterySystem>();
+        _solution = _ent.System<SharedSolutionContainerSystem>();
+
+        EjectButton.OnPressed += _ => OnEjectBeaker?.Invoke();
+        ClearButton.OnPressed += _ => OnClearBeaker?.Invoke();
+        AmountGrid.OnButtonPressed += s => OnSetAmount?.Invoke(int.Parse(s));
     }
 
-    public void UpdateReagentsList(List<EnergyReagentInventoryItem> inventory)
+    protected override void FrameUpdate(FrameEventArgs args)
     {
-        if (ReagentList == null)
-            return;
+        base.FrameUpdate(args);
 
+        Update();
+    }
+
+    public void SetOwner(EntityUid uid, EnergyReagentDispenserComponent comp)
+    {
+        _comp = comp;
+        _batteryEnt = (uid, _ent.GetComponent<BatteryComponent>(uid));
+
+        SetupReagentsList();
+        Update();
+    }
+
+    private void SetupReagentsList()
+    {
         ReagentList.Children.Clear();
-        inventory.Sort((x, y) => string.Compare(x.ReagentLabel, y.ReagentLabel, StringComparison.Ordinal));
 
-        foreach (var item in inventory)
+        foreach (var (id, cost) in _comp.Reagents)
         {
-            var card = new EnergyReagentCardControl(item);
-            card.OnPressed += OnDispenseReagentButtonPressed;
+            var card = new EnergyReagentCardControl(_proto.Index(id), cost);
+            card.OnPressed += id => OnDispenseReagent?.Invoke(id);
             ReagentList.Children.Add(card);
         }
-        _cardsNeedUpdate = true;
-        UpdateCardStates();
-    }
 
-    public void UpdateState(BoundUserInterfaceState message)
-    {
-        if (message is not EnergyReagentDispenserBoundUserInterfaceState state)
-            return;
-
-        _batteryMaxCharge = state.BatteryMaxCharge;
-        _batteryCharge = state.BatteryCharge;
-        _currentReceiving = state.CurrentReceivingEnergy;
-        _idleUse = state.IdleUse;
-        _selectedAmount = state.SelectedDispenseAmount;
-        _usingBattery = state.UsingBattery;
-        _hasPower = state.HasPower;
-
-        UpdateContainerInfo(state);
-        UpdateReagentsList(state.Inventory);
-        UpdateBatteryPercent();
-
-        _ent.TryGetEntity(state.OutputContainerEntity, out var outputContainerEnt);
-        View.SetEntity(outputContainerEnt);
-
-        ClearButton.Disabled = state.OutputContainer is null;
-        EjectButton.Disabled = state.OutputContainer is null;
-
-        AmountGrid.Selected = _selectedAmount.ToString();
-        _cardsNeedUpdate = true;
         UpdateCardStates();
     }
 
     private void UpdateBatteryPercent()
     {
-        var batteryPercent = _batteryMaxCharge > 0
-            ? _batteryCharge / _batteryMaxCharge * 100
+        var max = _batteryEnt.Comp.MaxCharge;
+        var batteryPercent = max > 0
+            ? _batteryCharge * 100 / max
             : 0;
 
-        BatteryStatusLabel.Text = $"{_batteryCharge,3:F0}/{_batteryMaxCharge,3:F0} ({batteryPercent,3:F0}%)";
+        BatteryStatusLabel.Text = $"{_batteryCharge,3:F0}/{max,3:F0} ({batteryPercent,3:F0}%)";
         BatteryStatusLabel.StyleClasses.Clear();
         BatteryStatusLabel.StyleClasses.Add(batteryPercent switch
         {
@@ -96,124 +97,125 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
         });
     }
 
-    private void UpdateContainerInfo(EnergyReagentDispenserBoundUserInterfaceState state)
+    private void BeakerChanged()
     {
-        ContainerInfo.Children.Clear();
+        View.SetEntity(_beaker);
 
-        if (state.OutputContainer is null)
+        var empty = _beaker == null;
+        NoContainer.Visible = empty;
+        ClearButton.Disabled = empty;
+        EjectButton.Disabled = empty;
+        ContainerReagents.Visible = !empty;
+        if (_beaker is not { } beaker)
         {
-            ContainerInfoName.Text = "";
-            ContainerInfoFill.Text = "";
-            ContainerInfo.Children.Add(new Label { Text = Loc.GetString("reagent-dispenser-window-no-container-loaded-text") });
+            ContainerInfoName.Text = string.Empty;
+            ContainerInfoFill.Text = string.Empty;
+            ContainerReagents.RemoveAllChildren();
             return;
         }
 
-        ContainerInfoName.Text = state.OutputContainer.DisplayName;
-        ContainerInfoFill.Text = state.OutputContainer.CurrentVolume + "/" + state.OutputContainer.MaxVolume;
+        if (_ent.TryGetComponent<MetaDataComponent>(beaker, out var meta))
+            ContainerInfoName.Text = meta.EntityName;
+    }
 
-        foreach (var (reagent, quantity) in state.OutputContainer.Reagents!)
+    private void UpdateContents(EntityUid beaker)
+    {
+        if (!_solution.TryGetFitsInDispenser(beaker, out _, out var sol))
+            return; // bug with the item slot whitelist if this happens
+
+        // currently there should never be a way to have the reagents change without the volume changing
+        // so this is cheap change detection
+        OnChanged(ref _lastVolume, sol.Volume, () => SolutionChanged(sol));
+    }
+
+    private void SolutionChanged(Solution sol)
+    {
+        ContainerInfoFill.Text = $"{sol.Volume} / {sol.MaxVolume}";
+
+        ContainerReagents.RemoveAllChildren();
+        foreach (var pair in sol.Contents)
         {
-            var localizedName = _proto.TryIndex(reagent.Prototype, out ReagentPrototype? proto)
+            var id = pair.Reagent.Prototype;
+            var localizedName = _proto.Resolve(id, out var proto)
                 ? proto.LocalizedName
-                : Loc.GetString("reagent-dispenser-window-reagent-name-not-found-text");
+                : $"??? {id} ???";
 
             var nameLabel = new Label { Text = $"{localizedName}: " };
             var quantityLabel = new Label
             {
-                Text = Loc.GetString("reagent-dispenser-window-quantity-label-text", ("quantity", quantity)),
+                Text = Loc.GetString("reagent-dispenser-window-quantity-label-text", ("quantity", pair.Quantity)),
                 StyleClasses = { StyleNano.StyleClassLabelSecondaryColor },
             };
 
-            ContainerInfo.Children.Add(new BoxContainer
+            ContainerReagents.Children.Add(new BoxContainer
             {
                 Orientation = LayoutOrientation.Horizontal,
                 Children =
                 {
                     nameLabel,
-                    quantityLabel,
-                },
+                    quantityLabel
+                }
             });
+        }
+    }
+
+    delegate void Changed();
+
+    private void OnChanged<T>(ref T cached, T value, Changed changed)
+    where
+        T: notnull, IEquatable<T>
+    {
+        if (cached.Equals(value))
+            return;
+
+        cached = value;
+        changed();
+    }
+
+    private void OnChanged<T>(ref T? cached, T? value, Changed changed)
+    where
+        T: struct, IEquatable<T>
+    {
+        if (EqualityComparer<T?>.Default.Equals(cached, value))
+            return;
+
+        cached = value;
+        changed();
+    }
+
+    private void Update()
+    {
+        OnChanged(ref _selectedAmount, _comp.DispenseAmount, () =>
+        {
+            AmountGrid.Selected = _selectedAmount.ToString();
+            UpdateCardStates();
+        });
+
+        OnChanged(ref _beaker, _comp.Beaker, BeakerChanged);
+        if (_beaker is { } beaker)
+            UpdateContents(beaker);
+
+        var oldCharge = _batteryCharge;
+        _batteryCharge = _battery.GetCharge(_batteryEnt);
+
+        // dont care if 1000J becomes 1000.1
+        if ((int) oldCharge != (int) _batteryCharge)
+        {
+            UpdateBatteryPercent();
+            UpdateCardStates();
         }
     }
 
     private void UpdateCardStates()
     {
-        if (ReagentList == null || !_cardsNeedUpdate)
-            return;
-
-        var stateChanged = false;
         foreach (var child in ReagentList.Children)
         {
             if (child is not EnergyReagentCardControl card)
                 continue;
 
-            var totalCost = card.PowerCostPerUnit * _selectedAmount;
-            var shouldBeDisabled = totalCost > _batteryCharge;
-            if (card.IsDisabled == shouldBeDisabled)
-                continue;
-            stateChanged = true;
-            break;
-        }
-
-        if (!stateChanged && _lastBatteryCharge == _batteryCharge)
-            return;
-
-        _lastBatteryCharge = _batteryCharge;
-        _cardsNeedUpdate = false;
-        HandleToggle();
-    }
-
-    private void HandleToggle()
-    {
-        foreach (var child in ReagentList.Children)
-        {
-            if (child is not EnergyReagentCardControl card)
-                continue;
-
-            var totalCost = card.PowerCostPerUnit * _selectedAmount;
+            var totalCost = card.EnergyCost * _selectedAmount;
+            card.SetAmount(_selectedAmount);
             card.SetDisabled(totalCost > _batteryCharge, "Insufficient energy");
         }
-    }
-
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-
-        var oldCharge = _batteryCharge;
-
-        /// Causes the UI to assume the battery is charging if it is connected to APC, and thus not refresh every tick
-        /// Refreshing every tick makes the UI extremely hard to use as buttons cannot be pressed at the same time
-        /// We check if ApcPowerReceiverBatteryComponent is enabled, aka the machine is using the battery for idle power as APC is off/disconnected
-        /// If you touch this expect the indicator to go fucking whack or the UI to become problematic. UI suck moment. This seriously caused issues for so long because braindead
-        /// We add a check for if Powered is false because when the battery hits 0, usingBattery becomes false despite no APC power still, otherwise it will start to tick back up the second it hits 0
-        if (_usingBattery || !_hasPower)
-            _batteryCharge = Math.Clamp(_batteryCharge - _idleUse * args.DeltaSeconds, 0, _batteryMaxCharge);
-        else
-            _batteryCharge = Math.Clamp(_batteryCharge + _currentReceiving * args.DeltaSeconds, 0, _batteryMaxCharge);
-
-        if ((int) oldCharge != (int) _batteryCharge)
-            UpdateBatteryPercent();
-
-        CheckEnergyThresholds(oldCharge, _batteryCharge);
-    }
-
-    private void CheckEnergyThresholds(float oldEnergy, float newEnergy)
-    {
-        if (ReagentList == null)
-            return;
-
-        foreach (var child in ReagentList.Children)
-        {
-            if (child is not EnergyReagentCardControl card)
-                continue;
-
-            var threshold = card.PowerCostPerUnit * _selectedAmount;
-            if ((!(oldEnergy < threshold) || !(newEnergy >= threshold)) &&
-                (!(oldEnergy >= threshold) || !(newEnergy < threshold)))
-                continue;
-            _cardsNeedUpdate = true;
-            break;
-        }
-        UpdateCardStates();
     }
 }
