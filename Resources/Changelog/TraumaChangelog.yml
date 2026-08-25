@@ -13673,3 +13673,10 @@ Entries:
   id: 1492
   time: '2026-08-25T00:40:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4260
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed capoeira making weapons faster.
+  id: 1493
+  time: '2026-08-25T00:50:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4261
