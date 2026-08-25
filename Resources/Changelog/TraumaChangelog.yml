@@ -13714,3 +13714,10 @@ Entries:
   id: 1497
   time: '2026-08-25T08:19:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4267
+- author: Pi-tanium
+  changes:
+  - type: Fix
+    message: Lings never need to absorb other lings now
+  id: 1498
+  time: '2026-08-25T09:23:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4269
