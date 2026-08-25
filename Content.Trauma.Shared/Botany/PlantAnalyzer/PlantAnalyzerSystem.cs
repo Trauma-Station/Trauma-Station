@@ -12,6 +12,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Random;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
 
@@ -20,6 +21,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
     [Dependency] private BotanySystem _botany = default!;
     [Dependency] private SharedAtmosphereSystem _atmos = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -84,13 +86,24 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         return (null, null);
     }
 
-    private EntityUid EnsurePlantData(Entity<SeedComponent> seed)
+    private EntityUid EnsurePlantData(Entity<PlantAnalyzerComponent> ent, Entity<SeedComponent> seed)
     {
         if (seed.Comp.PlantData is { } uid)
             return uid;
 
         seed.Comp.PlantData = uid = EntityManager.PredictedSpawn(seed.Comp.PlantProtoId);
         Dirty(seed);
+
+        // make sure the dummy plant entity is in pvs so clients can predict it
+        var slot = _container.EnsureContainer<ContainerSlot>(seed.Owner, "seed_plant_data");
+        _container.Insert(uid, slot);
+
+        // let the UI update the seed's data without rescanning, if it was scanned already
+        if (ent.Comp.Scanned == seed.Owner)
+        {
+            ent.Comp.Plant = uid;
+            DirtyField(ent, ent.Comp, nameof(PlantAnalyzerComponent.Plant));
+        }
         return uid;
     }
 
@@ -136,7 +149,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
             return;
         }
 
-        var uid = EnsurePlantData((target, seed));
+        var uid = EnsurePlantData(ent, (target, seed));
         var comp = Comp<PlantComponent>(uid);
         var name = Name(target);
         if (comp.Mutations.Count == 0)
@@ -154,6 +167,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
     public void ScanPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
+        ent.Comp.Scanned = target;
         (ent.Comp.Plant, ent.Comp.Seed) = GetPlantData(target);
 
         // mutations list isnt networked, have to do it ourselves
@@ -167,6 +181,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
 
         DirtyFields(ent, ent.Comp, null,
+            nameof(PlantAnalyzerComponent.Scanned),
             nameof(PlantAnalyzerComponent.Plant),
             nameof(PlantAnalyzerComponent.Seed),
             nameof(PlantAnalyzerComponent.ScannedMutations));
@@ -357,7 +372,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
     public void SetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, Entity<SeedComponent> seed)
     {
-        var uid = EnsurePlantData(seed);
+        var uid = EnsurePlantData(ent, seed);
 
         if (!TryComp<PlantComponent>(uid, out var plant) ||
             !TryComp<PlantDataComponent>(uid, out var data))

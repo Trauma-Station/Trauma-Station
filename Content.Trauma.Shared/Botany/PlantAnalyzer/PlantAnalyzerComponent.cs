@@ -26,9 +26,21 @@ public sealed partial class PlantAnalyzerComponent : Component
     [DataField, AutoNetworkedField]
     public bool Busy;
 
+    /// <summary>
+    /// The scanned tray, plant or seed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Scanned;
+
+    /// <summary>
+    /// The plant data being scanned, null if scanning a baseline seed.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Plant;
 
+    /// <summary>
+    /// The seed's plant prototype if scanning a seed.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? Seed;
 

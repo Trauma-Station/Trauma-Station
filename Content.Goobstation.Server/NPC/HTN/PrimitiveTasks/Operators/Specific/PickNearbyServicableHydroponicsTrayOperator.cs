@@ -30,16 +30,13 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     /// <summary>
     /// Target entity to service
     /// </summary>
-    [DataField(required: true)]
-    public string TargetKey = string.Empty;
+    public const string TargetKey = "PlantTarget";
 
     /// <summary>
     /// Target entitycoordinates to move to.
     /// </summary>
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
-
-    private HashSet<Entity<PlantTrayComponent>> _targets = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -52,6 +49,27 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         _holderQuery = _ent.GetEntityQuery<PlantHolderComponent>();
     }
 
+    private bool ShouldServiceTray(Entity<PlantTrayComponent> tray)
+    {
+        // fixing small problems in the tray
+        if (tray.Comp.WaterLevel <= PlantbotServiceOperator.RequiredWaterLevelToService ||
+            tray.Comp.WeedLevel >= PlantbotServiceOperator.RequiredWeedsAmountToWeed)
+            return true;
+
+        // harvesting the plant
+        return tray.Comp.PlantEntity is { } plant &&
+            _holderQuery.TryComp(plant, out var holder) &&
+            holder.ReadyForHarvest;
+    }
+
+    private bool ShouldKillTray(Entity<PlantTrayComponent> tray)
+    {
+        if (tray.Comp.PlantEntity is not { } plant || _holder.IsDead(plant))
+            return false;
+
+        return tray.Comp.WaterLevel > 0f;
+    }
+
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
         CancellationToken cancelToken)
     {
@@ -60,12 +78,10 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         var emagged = _emaggedQuery.HasComp(owner);
 
         var coords = _ent.GetComponent<TransformComponent>(owner).Coordinates;
-        _targets.Clear();
-        _lookup.GetEntitiesInRange(coords, Range, _targets);
-        foreach (var target in _targets)
+        var targets = _lookup.GetEntitiesInRange<PlantTrayComponent>(coords, Range, LookupFlags.Dynamic | LookupFlags.Static);
+        foreach (var target in targets)
         {
-            var holder = _holderQuery.Comp(target);
-            if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed } && !holder.ReadyForHarvest && (!emagged || _holder.IsDead((target, holder)) || target.Comp.WaterLevel <= 0f))
+            if (!(emagged ? ShouldKillTray(target) : ShouldServiceTray(target)))
                 continue;
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range
