@@ -12,7 +12,7 @@
       This level of violation is to be punished by either up to three minutes in the brig or corporal punishment of a warranted level.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 3 Violations</Box></ColorBox>
-    <ColorBox Color="#e7c11b"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished by either up to five minutes in the brig, corporal punishment, or reduction of access.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 4 Violations</Box></ColorBox>
@@ -74,6 +74,14 @@
     <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of being intoxicated, whether by alcohol or illicit substances, outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or medbay if undergoing sobering treatment.
     </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Attending an unlawful gathering</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
+      Taking part in, but not organizing and inciting, an unlawful gathering.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Insolence</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of disrespecting or insulting security or one's superiors. Officers are expected to deliver swift corporal punishment and move on.
+    </Box></ColorBox>
   </Table>
   \n
 
@@ -134,7 +142,7 @@
       The act of selling Schedule A or B narcotics.
     </Box></ColorBox>
   </Table>
-  ### Theft and Damage Violations
+  ### Theft and Damages Violations
   Type 2 violations that involve theft and damage to company property and interests.
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Petty Larceny</Box></ColorBox>
@@ -169,6 +177,7 @@
     <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
       The act of participating in gambling activities that are not sanctioned by the corporation.
     </Box></ColorBox>
+
   </Table>
   ### Incitement and Conspiracy Violations
   Type 2 violations that involve incitement and conspiracy against the company.
@@ -180,10 +189,6 @@
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Bribery</Box></ColorBox>
     <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
       The act of offering or accepting a bribe, which is any item, favor, or service offered in exchange for an illicit advantage.
-    </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Blackmail</Box></ColorBox>
-    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
-      The act of threatening to reveal damaging information about another employee unless certain demands are met.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Incitement of Violence</Box></ColorBox>
     <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
@@ -201,11 +206,123 @@
   \n
 
   ## Type 3 Violations
+  ### Violence and Compliance Violations
+  Type 3 violations that are violent or non-compliant with security.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Aggravated Battery</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of intentionally causing physical harm to another employee by using a weapon or with the intent to cause serious bodily harm or death.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Aggravated Assault</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of threatening an employee with immediate physical harm by using a weapon or with the intent to cause serious bodily harm or death.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Involuntary Manslaughter</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of unintentionally causing the death of another employee through reckless actions or inaction.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Obstruction of Justice</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of interfering with security's ability to work through forceful means, or otherwise impeding the work of officers.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Resisting Arrest</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of using force to resist arrest by security personnel.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Vigilantism</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of taking the law into one's own hand and neglecting their own duties to do such.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Insubordination</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Typically punished via corporal methods, or reduction of access, if there is a reasonable risk.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Abandonment of Occupation</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      Willful and verbally confirmed abandonment of role, or extensive use of the company time on non-productive work for 15 or more minutes.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Inappropriate Use of Departmental Communication Systems</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of using company communication systems for non-work related purposes. Not to be punished with brig time.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Corruption of an Employee</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of bribing, blackmailing or otherwise corrupting a non-managerial employee to gain illicit advantages.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Breach of Silence</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of a mime breaking a vow of silence, and speaking.
+    </Box></ColorBox>
+  </Table>
+  ### Contraband Violations
+  Type 3 violations that involve contraband.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Possession of Firearms</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of possessing firearms without proper authorization.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Manufacture of Prohibited Weaponry</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of manufacturing firearms or other prohibited weapons without proper authorization, this includes growing illegal fauna such as gatfruits or capfruits.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left"></Box>Weapon Trafficking</ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of selling firearms or other prohibited weapons.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Manufacture of Narcotics</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of producing Schedule A/B substances, this includes growing fauna with intent to create narcotics.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Production of Narcotics with intent to supply/sell</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of producing Schedule A or B substances for commercial gain.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Possession of a Traffickable Quantity of Narcotics</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of possessing Schedule A or B substances in a quantity that exceeds 50 units.
+    </Box></ColorBox>
+  </Table>
+  ### Theft and Damages Violations
+  Type 3 violations that involve theft and damage to company property and interests.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Secure Trespass</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of entering a command or security area one does not have access to without explicit approval from a member of that department.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Grand Larceny</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of stealing any unique or valuable item that does not belong to the offender, that does not fall under any other sections or codes.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Grand Theft</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      Stealing any high value or importance item.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Unlawful Imprisonment</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of holding an individual against their will without a justifiable basis. This includes but is not limited to: kidnapping, false arrest, and misconduct regarding incarceration.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Grave Robbery</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of stealing from a corpse.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Extortion</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of using coercion, threats and/or intimidation to obtain money, property, services or other goods from another employee.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Loan Sharking</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of offering loans or goods at extremely high interest rates, and using threats or violence to collect debts.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Operation of an Illegal Business</Box></ColorBox>
+    <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+      The act of operating an illegal business, this includes but is not limited to: illegal gambling rings, fight clubs, drug dens, black market shops and other illicit commercial enterprises.
+    </Box></ColorBox>
+  </Table>
 
   \n
-  <ColorBox Color="#000000"><Box HorizontalAlignment="Left"></Box>Test</ColorBox>
-  <ColorBox Color="#e7c11b"><Box HorizontalAlignment="Left" Margin="4">
-    Test
+  <ColorBox Color="#000000"><Box HorizontalAlignment="Left"></Box></ColorBox>
+  <ColorBox Color="#9c5d27"><Box HorizontalAlignment="Left" Margin="4">
+
   </Box></ColorBox>
 
 </Document>
