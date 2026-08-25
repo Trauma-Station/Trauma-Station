@@ -94,7 +94,7 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
 [ByRefEvent]
 public record struct ModifyViewconeAngleEvent() : IInventoryRelayEvent
 {
-    public SlotFlags TargetSlots => SlotFlags.HEAD | SlotFlags.EYES | SlotFlags.MASK | SlotFlags.OUTERCLOTHING;
+    public SlotFlags TargetSlots => SlotFlags.HEAD | SlotFlags.EYES | SlotFlags.MASK;
 
     private float _angleModifier = 1f;
 

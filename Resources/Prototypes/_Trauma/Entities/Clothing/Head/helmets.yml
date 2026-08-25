@@ -92,3 +92,20 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Head/Misc/mamluk.rsi
   - type: FaceHuggerBlocker
+
+- type: entity
+  parent: ClothingHeadHelmetBase
+  id: ClothingHeadHelmetCsij
+  name: CSIJ biosuit hood
+  description: A suit of writhing flesh that- wait no that's foam.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Misc/csijlevelv.rsi
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-HEAD
+  - type: NoirOverlay
+  - type: IdentityBlocker
+  - type: ViewconeModifier
+    angleModifier: 0.5
