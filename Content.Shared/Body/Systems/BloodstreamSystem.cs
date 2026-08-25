@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Bloodstream;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
+using Robust.Shared.Collections;
 // </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
@@ -53,30 +54,37 @@ public sealed partial class BloodstreamSystem : EntitySystem
         base.Update(frameTime);
 
         var curTime = _timing.CurTime;
-        // <Trauma> - moved actual update logic into helper method, client only predicts its own entity
+        // <Trauma> - moved actual update logic into helper method, client only predicts its own entity. also defer updating from enumeration for spawns
         if (_net.IsClient)
         {
             if (!_timing.IsFirstTimePredicted ||
                 _timing.ApplyingState ||
                 _player.LocalEntity is not { } uid ||
-                !_query.TryComp(uid, out var comp))
+                !_query.TryComp(uid, out var comp) ||
+                curTime < comp.NextUpdate)
                 return;
 
             UpdateMob(uid, comp);
             return; // no predicting other mobs it wastes so much cpu
         }
 
+        var updating = new ValueList<Entity<BloodstreamComponent>>();
         var query = EntityQueryEnumerator<BloodstreamComponent>();
         while (query.MoveNext(out var uid, out var bloodstream))
         {
-            UpdateMob(uid, bloodstream);
+            if (curTime < bloodstream.NextUpdate)
+                continue;
+
+            updating.Add((uid, bloodstream));
+        }
+
+        foreach (var ent in updating)
+        {
+            UpdateMob(ent, ent.Comp);
         }
         void UpdateMob(EntityUid uid, BloodstreamComponent bloodstream)
         // </Trauma>
         {
-            if (curTime < bloodstream.NextUpdate)
-                return; // Trauma - no longer in a loop
-
             bloodstream.NextUpdate += bloodstream.AdjustedUpdateInterval;
             DirtyField(uid, bloodstream, nameof(BloodstreamComponent.NextUpdate)); // needs to be dirtied on the client so it can be rerolled during prediction
 

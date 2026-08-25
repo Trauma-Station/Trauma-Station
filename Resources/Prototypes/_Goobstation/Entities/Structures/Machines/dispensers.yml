@@ -1,16 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: [ SmallConstructibleMachine, BaseConstructibleMachineDestructible ]
-  id: EnergyChemDispenser
-  name: energy chemical dispenser
-  suffix: energy
-  description: A bluespace Chemical Dispenser that uses station energy to synthesize Reagents. The future is here and now.
+  id: BaseEnergyReagentDispenser
+  suffix: Energy
   components:
   - type: Sprite
-    sprite: Structures/dispensers.rsi
-    state: industrial-working
     snapCardinals: true
+    sprite: Structures/dispensers.rsi
   - type: Transform
     anchored: true
     noRot: true
@@ -30,15 +28,14 @@
         layer:
         - MachineLayer
   - type: Battery
-    netsync: false
     maxCharge: 1500
     startingCharge: 1500
-  - type: ApcPowerReceiverBattery
-    idleLoad: 65
-    batteryRechargeRate: 30
-    batteryRechargeEfficiency: 1.0
+  - type: ApcBatteryCharger
+    idleLoad: 100
+    drawRate: 3000 # charges the battery at 30 W
+    efficiency: 0.01 # crazy high 1% efficiency for converting energy to matter
   - type: ApcPowerReceiver
-    powerLoad: 65
+    powerLoad: 100
   - type: ExtensionCableReceiver
   - type: Anchorable
   - type: Pullable
@@ -64,6 +61,13 @@
       machine_board: !type:Container
       machine_parts: !type:Container
       energyBeakerSlot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      energyBeakerSlot:
+        whitelistFailPopup: reagent-dispenser-component-cannot-put-entity-message
+        whitelist:
+          components:
+          - FitsInDispenser
   - type: StaticPrice
     price: 1000
   - type: WiresPanel
@@ -71,22 +75,14 @@
     guides:
     - Chemicals
     - Chemist
-  - type: StealTarget
-    stealGroup: ChemDispenser
-  - type: Machine
-    board: EnergyChemDispenserMachineCircuitboard
   - type: ActivatableUI
     key: enum.EnergyReagentDispenserUiKey.Key
+  - type: ActivatableUIRequiresAnchor # anchor instead of power so draw spikes when dispensing at full charge don't close the UI
   - type: UserInterface
     interfaces:
       enum.EnergyReagentDispenserUiKey.Key:
         type: EnergyReagentDispenserBUI
   - type: EnergyReagentDispenser #Keep on bottom for view's sake, format is reagentProto: Cost
-    energyBeakerSlot:
-      whitelistFailPopup: reagent-dispenser-component-cannot-put-entity-message
-      whitelist:
-        components:
-        - FitsInDispenser
     reagents:
       Aluminium: 8
       Carbon: 3
@@ -108,3 +104,30 @@
       Sodium: 5
       Sugar: 5
       Sulfur: 5
+
+- type: entity
+  parent: BaseEnergyReagentDispenser
+  id: BaseEnergyReagentDispenserAnimated
+  components:
+  - type: Sprite
+    layers:
+    - state: industrial-working
+      map: ["base"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        base:
+          True: { state: industrial-working }
+          False: { state: industrial-off }
+
+- type: entity
+  parent: BaseEnergyReagentDispenserAnimated
+  id: EnergyChemDispenser
+  name: energy chemical dispenser
+  description: A bluespace Chemical Dispenser that uses station energy to synthesize Reagents. The future is here and now.
+  components:
+  - type: Machine
+    board: EnergyChemDispenserMachineCircuitboard
+  - type: StealTarget
+    stealGroup: ChemDispenser

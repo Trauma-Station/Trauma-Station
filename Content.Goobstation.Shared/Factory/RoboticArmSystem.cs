@@ -298,23 +298,16 @@ public sealed partial class RoboticArmSystem : EntitySystem
 
     private void StartMoving(Entity<RoboticArmComponent> ent)
     {
-        SetPowerDraw(ent, ent.Comp.MovingPowerDraw);
+        _power.SetLoad(ent.Owner, ent.Comp.MovingPowerDraw);
         ent.Comp.NextMove = _timing.CurTime + ent.Comp.MoveDelay;
         DirtyField(ent, ent.Comp, nameof(RoboticArmComponent.NextMove));
     }
 
     private void StopMoving(Entity<RoboticArmComponent> ent)
     {
-        SetPowerDraw(ent, ent.Comp.IdlePowerDraw);
+        _power.SetLoad(ent.Owner, ent.Comp.IdlePowerDraw);
         ent.Comp.NextMove = null;
         DirtyField(ent, ent.Comp, nameof(RoboticArmComponent.NextMove));
-    }
-
-    private void SetPowerDraw(EntityUid uid, float draw)
-    {
-        SharedApcPowerReceiverComponent? receiver = null;
-        if (_power.ResolveApc(uid, ref receiver))
-            _power.SetLoad(receiver, draw);
     }
 
     public EntityCoordinates OutputPosition(EntityUid uid)

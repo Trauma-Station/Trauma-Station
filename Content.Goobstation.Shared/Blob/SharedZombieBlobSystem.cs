@@ -11,33 +11,24 @@ namespace Content.Goobstation.Shared.Blob;
 public abstract partial class SharedZombieBlobSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ZombieBlobComponent> _query = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent(after: [typeof(SharedInteractionSystem)])]
+    private void OnBUIMessageAttempt(Entity<ActivatableUIComponent> ent, ref BoundUserInterfaceMessageAttempt args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<ZombieBlobComponent, ShotAttemptedEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<BoundUserInterfaceMessageAttempt>(OnBoundUserInterface, after: [typeof(SharedInteractionSystem)]);
-    }
-
-    private void OnBoundUserInterface(BoundUserInterfaceMessageAttempt args)
-    {
-        if(
-            args.Cancelled ||
-            !TryComp<ActivatableUIComponent>(args.Target, out var uiComp) ||
-            !HasComp<ZombieBlobComponent>(args.Actor))
+        if (args.Cancelled || !ent.Comp.RequiresComplex || !_query.HasComp(args.Actor))
             return;
 
-        if(uiComp.RequiresComplex)
-            args.Cancel();
+        args.Cancel(); // no using computers and shit for blob zombies
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptShoot(Entity<ZombieBlobComponent> ent, ref ShotAttemptedEvent args)
     {
-        if(ent.Comp.CanShoot)
+        if (ent.Comp.CanShoot)
             return;
 
-        _popup.PopupEntity(Loc.GetString("blob-no-using-guns-popup"), ent, ent);
+        _popup.PopupEntity("You can't use guns!", ent, ent);
         args.Cancel();
     }
 }
