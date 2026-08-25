@@ -20,7 +20,7 @@ public sealed partial class FleshmendSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private DamageableSystem _dmg = default!;
 
     [SubscribeLocalEvent]

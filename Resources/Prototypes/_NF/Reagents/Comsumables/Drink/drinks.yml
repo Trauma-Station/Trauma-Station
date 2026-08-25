@@ -14,7 +14,8 @@
         Ethanol: 0.03
         Desoxyephedrine: 0.25
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 1
   metamorphicSprite:
     sprite: _NF/Objects/Consumable/Drinks/ginandsonic.rsi
@@ -36,7 +37,8 @@
       metabolites:
         Ethanol: 0.3
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 0.2
   metamorphicSprite:
     sprite: _NF/Objects/Consumable/Drinks/goldencat.rsi
@@ -58,7 +60,8 @@
       metabolites:
         Ethanol: 0.4
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 1
       - !type:Explosion
         explosionType: Default
@@ -87,7 +90,8 @@
       metabolites:
         Ethanol: 0.4
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 0.8
   metamorphicSprite:
     sprite: _NF/Objects/Consumable/Drinks/torpedojuice.rsi
@@ -109,10 +113,9 @@
       metabolites:
         Ethanol: 0.2
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 0.5
-      - !type:SatiateHunger
-        factor: 0.1
       - !type:ModifyBloodLevel
         amount: 0.2
   metamorphicSprite:

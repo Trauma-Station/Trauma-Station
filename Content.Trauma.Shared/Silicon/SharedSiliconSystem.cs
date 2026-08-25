@@ -11,7 +11,7 @@ using Content.Shared.Suicide;
 using Content.Trauma.Common.Body;
 using Content.Trauma.Shared.Silicon.Components;
 
-namespace Content.Trauma.Shared.Silicon.Systems;
+namespace Content.Trauma.Shared.Silicon;
 
 public sealed partial class SharedSiliconChargeSystem : EntitySystem
 {

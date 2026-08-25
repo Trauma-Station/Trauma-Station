@@ -259,8 +259,8 @@
       0: Alive
       30: Dead
   - type: MovementSpeedModifier
-    baseWalkSpeed : 2.5
-    baseSprintSpeed : 5
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 5
   - type: DamageStateVisuals
     states:
       Alive:
@@ -280,8 +280,8 @@
     - horrible
     - terrible
     - chewy
-  - type: Hunger
-    baseDecayRate: 0.25
+  - type: Satiation
+    satiations: {}
   - type: Extractable
     grindableSolutionName: food
   - type: Solution

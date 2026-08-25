@@ -9,6 +9,12 @@
     "states": [
         {
             "name": "armblade"
+        },
+        {
+            "name": "stasis_enter"
+        },
+        {
+            "name": "stasis_exit"
         }
     ]
 }

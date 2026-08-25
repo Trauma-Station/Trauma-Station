@@ -165,7 +165,8 @@
     - 0,0,2,0
     storedRotation: 45
   - type: Tool
-    qualities: Slicing
+    qualities:
+    - Slicing
   - type: MeleeWeapon
     animationRotation: 225
     wideAnimationRotation: -135
@@ -189,7 +190,8 @@
           - 0,0,2,0
           storedRotation: 45
         - type: Tool
-          qualities: Slicing
+          qualities:
+          - Slicing
         - type: MeleeWeapon
           animationRotation: 225
           wideAnimationRotation: -135

@@ -105,11 +105,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
 
             if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryUpdateParalyzeDuration(uid, comp.ParalyzeTime))
             {
-                var dict = new Dictionary<string, FixedPoint2>()
-                {
-                    {SharedHereticSystem.Currency, comp.Reward - comp.CurrentStep}
-                };
-                _heretic.UpdateKnowledge(uid, dict, false, false, mindContainer);
+                _heretic.UpdateKnowledge(uid, new() { { SharedHereticSystem.Currency, comp.Reward - comp.CurrentStep } }, false, false, mindContainer);
                 RemCompDeferred(uid, comp);
                 continue;
             }
