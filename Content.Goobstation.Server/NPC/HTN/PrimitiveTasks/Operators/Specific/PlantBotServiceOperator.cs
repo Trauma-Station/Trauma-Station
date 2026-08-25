@@ -64,7 +64,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
 
         if (!_ent.TryGetComponent<PlantbotComponent>(owner, out var botComp)
             || !_ent.TryGetComponent<PlantTrayComponent>(target, out var tray)
-            || !_interaction.InRangeUnobstructed(owner, target)
+            || !_interaction.InRangeUnobstructed(owner, target))
             return HTNOperatorStatus.Failed;
 
         if (botComp.IsEmagged)
