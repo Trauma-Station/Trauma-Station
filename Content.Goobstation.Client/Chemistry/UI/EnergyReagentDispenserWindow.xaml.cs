@@ -30,6 +30,7 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
     public event Action<ProtoId<ReagentPrototype>>? OnDispenseReagent;
 
     private EnergyReagentDispenserComponent _comp = default!;
+    private BatteryComponent _batteryComp = default!;
     private Entity<BatteryComponent?> _batteryEnt = default!;
     private EntityUid? _beaker;
     private FixedPoint2 _lastVolume = -1;
@@ -60,7 +61,8 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
     public void SetOwner(EntityUid uid, EnergyReagentDispenserComponent comp)
     {
         _comp = comp;
-        _batteryEnt = (uid, _ent.GetComponent<BatteryComponent>(uid));
+        _batteryComp = _ent.GetComponent<BatteryComponent>(uid);
+        _batteryEnt = (uid, _batteryComp);
 
         SetupReagentsList();
         Update();
@@ -82,7 +84,7 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
 
     private void UpdateBatteryPercent()
     {
-        var max = _batteryEnt.Comp.MaxCharge;
+        var max = _batteryComp.MaxCharge;
         var batteryPercent = max > 0
             ? _batteryCharge * 100 / max
             : 0;
