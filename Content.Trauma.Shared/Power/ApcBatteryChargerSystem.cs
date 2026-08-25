@@ -53,7 +53,7 @@ public abstract partial class ApcBatteryChargerSystem : EntitySystem
     public float CalcChargeRate(Entity<ApcBatteryChargerComponent> ent, float power)
         => Math.Clamp((power - ent.Comp.IdleLoad) * ent.Comp.Efficiency,
             0f,
-            Math.Min(1f, GetRemainingCharge(ent)));
+            Math.Max(1f, GetRemainingCharge(ent)));
 
     /// <summary>
     /// Update the battery's charge rate directly.

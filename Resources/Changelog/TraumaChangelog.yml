@@ -13721,3 +13721,12 @@ Entries:
   id: 1498
   time: '2026-08-25T09:23:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4269
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed ID cards always having their job icon reset when changing accesses.
+  - type: Fix
+    message: Fixed energy chem dispensers taking forever to recharge.
+  id: 1499
+  time: '2026-08-25T15:02:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4272
