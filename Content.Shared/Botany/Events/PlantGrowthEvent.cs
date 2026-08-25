@@ -6,25 +6,27 @@ namespace Content.Shared.Botany.Events;
 /// Event of plant growing ticking.
 /// </summary>
 [ByRefEvent]
-[Serializable, NetSerializable]
+//[Serializable, NetSerializable] // Trauma - this isnt a networked event or used in yml
 public readonly record struct PlantGrowEvent(NetEntity Tray);
 
 /// <summary>
 /// Event raised when a harvest is attempted.
 /// </summary>
 [ByRefEvent]
-public sealed class DoHarvestEvent(EntityUid user, EntityUid target) : CancellableEntityEventArgs
+// <Trauma> - made it a struct, still cancellable despite the shitty event name
+public record struct DoHarvestEvent(EntityUid User, EntityUid Target, bool Cancelled = false)
 {
-    public EntityUid User { get; } = user;
-    public EntityUid Target { get; } = target;
+    public void Cancel()
+    {
+        Cancelled = true;
+    }
 }
+// </Trauma>
 
 /// <summary>
 /// Event raised after a harvest is attempted.
 /// </summary>
 [ByRefEvent]
-public sealed class AfterDoHarvestEvent(EntityUid user, EntityUid target) : CancellableEntityEventArgs
-{
-    public EntityUid User { get; } = user;
-    public EntityUid Target { get; } = target;
-}
+// <Trauma> - make it a non-cancellable struct
+public record struct AfterDoHarvestEvent(EntityUid User, EntityUid Target);
+// </Trauma>
