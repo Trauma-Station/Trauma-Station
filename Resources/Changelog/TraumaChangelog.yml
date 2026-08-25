@@ -13664,3 +13664,12 @@ Entries:
   id: 1491
   time: '2026-08-25T00:31:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4259
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Solar flares now prevent all radio sources including IPCs, intercoms and
+      nanochat.
+  id: 1492
+  time: '2026-08-25T00:40:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4260
