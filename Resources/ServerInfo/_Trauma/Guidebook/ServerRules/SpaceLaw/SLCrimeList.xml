@@ -1,271 +1,211 @@
 <Document>
 
-  # Crimes
-
-  # I. Criminal Violations Title (Law Section, Code CXX-YY)
-
-  ### Criminal violations are those that involve the employee themselves becoming classified as a criminal of some kind through their actions. Criminal violations encompass misdemeanours, felonies and taboo violations, these are the only actual laws that security cadets are expected to learn and remember, and should be prioritized.
-
-  ## C§ 01 - No Penalty Misdemeanours:
-
-  C§ 01 encompasses minor violations that are not considered indictable offences, punishment includes, but is not limited to; verbal warnings, citations, fines, as well as the offending party resolving the issue.
-
-  - C01-01: Minor Contraband Possession; Having any item classified as contraband, that does not fall under any other codes. This includes, but is not limited to: departmentally-restricted contraband, rival corporate paraphernalia, and any item that does not fall under any other sections or codes.
-  - C01-02: Littering; The improper disposal of waste via public dumping. This usually doesn't involve any sentence other than cleaning up the litter.
-  - C01-03: Public Nuisance; The disorderly conduct of an employee in a public area that is disruptive to the work of other employees, or otherwise damages the Nanotrasen™ brand.
-  - C01-04: Unsanctioned Assembly; Rallying a group of employees for unlawful reasons, including but not limited to: protests, riots, disruption of departments, organised criminal activity.
-  - C01-05: Harassment; The act of intentionally offending, verbally intimidating or humiliating another employee.
-  - C01-06: Dereliction of duty; The willful neglect of one's job duties.
-  - C01-07: Trespass; The act of entering an area one does not have access to through non-forceful means and without explicit approval from a member of that department. Heads of staff reserve the right to waive any approvals given by members of their department.
-  - C01-08: Unauthorized Use of Company Property; Using company property without explicit approval from a member of the department that the property belongs to. Heads of staff reserve the right to waive any approvals given by members of their department.
-  - C01-09: Public Smoking and Vaping; The act of smoking or vaping outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or offices.
-  - C01-10: Departmental Impersonation; The act of wearing a departmental uniform whilst not being a part of that department.
-  - C01-11: Vandalism; The act of intentionally defacing company property.
-  - C01-12: Concealment of Identity; The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA.
-  - C01-13: Personal Possession of Schedule A Narcotics; The act of possessing prohibited Schedule A narcotics that does not exceed 50 units.
-
-  ## C§ 02 - Indictable Misdemeanours:
-
-  C§ 02 encompasses minor violations that are indictable offences, punishment includes: incarceration, fines, corporal punishment or community service. The maximum sentence for C§ 02 incarceration is 3 minutes.
-
-  - C02-01: Noncompliance; The act of refusing to comply with a lawful order from a security officer, or any order that resolves a C§ 01 offence.
-  - C02-02: Battery; The act of intentionally causing physical harm to another employee.
-  - C02-03: Assault; The act of threatening an employee with immediate physical harm.
-  - C02-04: Petty Larceny; The act of stealing any item that does not belong to the offender. That does not fall under any other sections or codes.
-  - C02-05: Burglary; The act of unlawfully entering an area one does not have access to through forceful means and with the intent to steal.
-  - C02-06: Receiving and Handling Stolen Goods; The act of receiving or handling items that have been stolen knowingly.
-  - C02-07: Breaking and Entering; The act of unlawfully entering an area one does not have access to through forceful means.
-  - C02-08: Tampering; The act of intentionally sabotaging or interfering with company property or electronic systems.
-  - C02-09: Bribery; The act of offering or accepting a bribe, which is any item, favor, or service offered in exchange for an illicit advantage.
-  - C02-10: Possession of Prohibited Weaponry; The act of possessing prohibited weaponry that does not fall under any other sections or codes.
-  - C02-11: Incitement of Violence; The act of encouraging or threatening violence against another employee, group of employees or department.
-  - C02-12: Inciting a Riot; The act of organizing or causing a riot or unlawful assembly.
-  - C02-13: Reckless Endangerment; The act of endangering the safety of other employees through reckless actions or inaction.
-  - C02-14: Personal Possession of Schedule B Narcotics; The act of possessing prohibited Schedule B narcotics that does not exceed 50 units.
-  - C02-15: Conspiracy; The act of forming an agreement with other employees to commit a crime.
-  - C02-16: Aiding and Abetting; The act of assisting in the commission of a crime, or providing support to those committing a crime.
-  - C02-17: Evasion; The act of fleeing or failing to stop when being pursued or hailed by security, without using force.
-  - C02-18: Obstruction of Work; The act of interfering with other employee's ability to work through forceful means, or otherwise impeding the work of other employees.
-  - C02-19: Destruction of Property; The act of intentionally destroying company or personal property.
-  - C02-20: Failure to Report; The act of failing to report a crime or violation that one has knowledge of to security or management.
-  - C02-21: Looting; The act of stealing items from a crime scene, or otherwise taking items that do not belong to the offender from an area that has recently been the site of a crime or catastrophe.
-
-  ## C§ 03 - Indictable Felonies:
-
-  C§ 03 encompasses serious violations that are indictable offences, punishment includes: incarceration, corporal punishment, community service and demotions. The maximum sentence for C§ 03 incarceration is 5 minutes.
-
-  - C03-01: Secure Trespass; The act of entering a command or security area one does not have access to without explicit approval from a member of that department.
-  - C03-02: Aggravated Battery; The act of intentionally causing physical harm to another employee by using a weapon or with the intent to cause serious bodily harm or death.
-  - C03-03: Aggravated Assault; The act of threatening an employee with immediate physical harm by using a weapon or with the intent to cause serious bodily harm or death.
-  - C03-04: Grand Larceny; The act of stealing any unique or valuable item that does not belong to the offender, that does not fall under any other sections or codes.
-  - C03-05: Grand Theft; Stealing any high value or importance item.
-  - C03-06: Destruction of Property; This includes killing any of the station-wide "pets" without a good reason.
-  - C03-07: Grand Assault; Any assault on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
-  - C03-08: Grand Battery; Any battery on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
-  - C03-09: Unlawful Imprisonment; The act of holding an individual against their will without a justifiable basis. This includes but is not limited to: kidnapping, false arrest, and misconduct regarding incarceration.
-  - C03-10: Possession of Firearms; The act of possessing firearms without proper authorization.
-  - C03-11: Manufacture of Prohibited Weaponry; The act of manufacturing firearms or other prohibited weapons without proper authorization, this includes growing illegal fauna such as gatfruits or capfruits.
-  - C03-12: Manufacture of Narcotics; The act of producing Schedule A/B substances, this includes growing fauna with intent to create narcotics.
-  - C03-13: Obstruction of Justice; The act of interfering with security's ability to work through forceful means, or otherwise impeding the work of officers.
-  - C03-14: Resisting Arrest; The act of using force to resist arrest by security personnel.
-  - C03-15: Vigilantism; The act of taking the law into one's own hand and neglecting their own duties to do such.
-  - C03-16: Involuntary Manslaughter; The act of unintentionally causing the death of another employee through reckless actions or inaction.
-  - C03-17: Grave Robbery; The act of stealing from a corpse.
-  - C03-18: Breach of Silence; The act of a mime breaking a vow of silence, and speaking.
-
-  ## C§ 04 - Criminal Terminations:
-
-  ### C§ 04 encompasses serious violations that specifically void the rights and contract of an employee and result in the disposable classification.
-
-  - C04-01: Homicide; The act of killing another employee, whether intentionally or unintentionally.
-  - C04-02: Attempted Homicide; The act of attempting to kill another employee.
-  - C04-03: Prevention of Revival; The act of intentionally stopping, preventing or hindering the revival process of a deceased employee that does not have a do not resuscitate order through any means. This includes, but is not limited to: removing a corpse from medbay, hiding corpses, removing the corpse's brain or core, turning suit sensors off or otherwise disabling them.
-  - C04-04: Breach of Custody; The act of removing someone or oneself who has been arrested from a secure area with the intent to free them.
-  - C04-05: Embezzlement; The act of stealing money that was entrusted to one's care by the corporation, such as taking money from a request computer for personal use. Heads reserve the right to offer bonuses that do not exceed 300 spesos.
-  - C04-06: Fraud; The act of intentionally deceiving others or the corporation for personal gain.
-  - C04-07: Forgery; The act of creating a false document, signature, stamp or other imitation of an item of value used with the intent to deceive another employee or the corporation.
-  - C04-08: Terrorism; The act of mass violence or destruction against the corporation for ideological or political purposes.
-  - C04-09: Attempted Malicious Engine Sabotage; The act of attempting to sabotage the station's singularity or tesla engine to cause a station-wide catastrophe.
-  - C04-10: Unionization; The act of conspiring with other employees to unionize, striking or asking for "workers rights", which are a violation of corporate rights.
-  - C04-11: Production of Explosives and Incendiary Devices/Reagents; The act of creating explosive or incendiary devices/reagents.
-
-  # II. Taboo Violations Code (Law Code T-XX)
-
-  ### Those who engage in taboo violations open themselves up to immediate execution by security.
-  ### Security team members should strive to capture alive those who violate taboo for study.
-
-  ### §T encompasses violations that are considered extremely dangerous, unnatural or otherwise forbidden. In the case of T-01, the chaplain is permitted to enforce this law and is advised to cooperate with security regarding such matters.
-
-  - T-01: Magic; The act of practicing magic or usage of a magical item.
-  - T-02: Possession of Psionic Capabilities; The act of possessing powers that mimic magic through the mind itself.
-  - T-03: Possession of Illegal DNA Modification; The act of possessing genetic mutations that are considered dangerous or otherwise taboo, mutations include: magic organs, hulk mutations, ork mutations and other dangerous modifications.
-  - T-04: Malicious Engine Sabotage; The act of sabotaging the station's singularity or tesla engine to cause a station-wide catastrophe.
-  - T-05: Unsanctioned Alien Species; The act of being or bringing unsanctioned alien species onto the station, such as xenomorphs, space carp, changelings, shadowlings and other dangerous fauna.
-
-  # III. Protocol Violations Code (Law Code P-XX)
-
-  ### §P encompasses protocol violations, which are generally very minor. Punishment is typically decided by managerial staff like command, central command or the corporate liaison rather than security.
-
-  ### When and if they are punished is usually at the discretion of the Corporate Liaison or their superior, who may request an officer to help enforce the punishment.
-  ### Punishment includes, and may not exceed: Demotion, citations, pay docking and increased supervision. In the case of P-01 violations the offending party may be sent to lavaland to make up for lost productivity.
-
-  - P-01: Time Theft; Any extended use of company time for purposes other than productive work. This generally means spending 15 minutes or more doing things other than one's job-related duties.
-  - P-02: Unsanctioned Social Gatherings;  Attending and organizing parties, weddings, funerals, ect, that have not been written off by management staff.
-  - P-03: Inappropriate Use of Departmental Communication Systems; The act of using company communication systems for non-work related purposes.
-
-  # IV. Disciplinary Violations Code (Law Code D-XX)
-
-  ### §D encompasses disciplinary violations that may be enforced at the discretion of security personnel or management staff. The typical punishment for them is corporal punishment.
-
-  - D-01: Public Intoxication; The act of being intoxicated, whether by alcohol or illicit substances, outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or medbay if undergoing sobering treatment
-  - D-02: Insubordination; The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion.
-  - D-03: Insolence; The act of disrespecting or insulting security or one's superiors. Officers are expected to deliver swift corporal punishment and move on.
-
-  # V. Managerial Violations Code (Law Code M-XX)
-
-  ### §M encompasses violations specifically by management staff.
-  ### These violations are decided by the corporate liaison, central command, the captain or a lesser triumvirate of command, and may involve security for enforcement.
-
-  - M-01: Managerial Incompetence; The act of lacking the necessary skill, knowledge, quality or decorum to perform a job or duty. They shall be immediately stripped of their head of staff equipment, banished to salvage-work, and considered a D-Class employee from then on.
-  - M-02: Insanity; The act of being irrational, mentally ill, extremely unreasonable or otherwise not of sound mind, such as engaging in excessively manic or bizarre behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. They may then either prescribe a treatment plan, have the head of staff committed to the brig, or perform a lobotomy and have them work in salvage.
-  - M-03: Coup de'tat; The act of suddenly and illegally seizing power against the captain without a proper justification shall result in all command members involved being stripped of their head of staff equipment, banished to salvage-work, and considered D-Class employees.
-
-  # VI. Foreign Violations Act (Law Code F-XX)
-
-  ### §F encompasses violations specific to workers who are not employees of Nanotrasen.
-  ### This includes visitors, salvagers, and other foreign agents.
-  ### Punishment is at the discretion of the officer who finds individuals in violation of the code.
-
-  - F-01: Fraternization; Socializing with, or attempting to befriend Nanotrasen Employees.
-  - F-02: Corporate Espionage; Taking proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
-  - F-03: Solicitation; The act of offering services to an employee for spesos or favors outside the scope of their contract.
-  - F-04: Poaching; The act of attempting to get a Nanotrasen employee to join their company.
-
-  # VII. Racketeering and Organised Crime Title (Law Section, Code RXX-YY)
-
-  ## R§ 01 - Racketeering Misdemeanors
-
-  R§ 01 encompasses minor violations related to organised crime, corrupt organizations and other forms of racketeering, these are incarceratable offenses with a maximum sentece of 3 minutes.
-  - R01-01: Illegal Gambling; The act of participating in gambling activities that are not sanctioned by the corporation.
-  - R01:02: Money Laundering; The act of concealing the origins of illegally obtained money through the use of legitimate businesses or financial transactions.
-  - R01-03: Counterfeiting; The act of producing or using imitation currency.
-  - R01-04: Smuggling; The act of illegally importing or exporting contraband into the station.
-  - R01-05: Sale of Contraband; The act of selling items classified as contraband, that does not fall under any other sections or codes.
-  - R01-06: Drug Trafficking; The act of selling Schedule A or B narcotics.
-  - R01-07: Blackmail; The act of threatening to reveal damaging information about another employee unless certain demands are met.
-
-  ## R§ 02 - Racketeering Felonies
-
-  R§ 02 encompasses serious violations related to organised crime and other forms of racketeering, these are incarceratable offenses with a maximum sentence of 5 minutes.
-
-  - R02-01: Extortion; The act of using coercion, threats and/or intimidation to obtain money, property, services or other goods from another employee.
-  - R02-02: Loan Sharking; The act of offering loans or goods at extremely high interest rates, and using threats or violence to collect debts.
-  - R02-03: Weapon Trafficking; The act of selling firearms or other prohibited weapons.
-  - R02-04: Production of Prohibited Weaponry with intent to supply/sell; The act of manufacturing firearms or other prohibited weapons for commercial gain.
-  - R02-05: Production of Narcotics with intent to supply/sell; The act of producing Schedule A or B substances for commercial gain.
-  - R02-06: Possession of a Traffickable Quantity of Narcotics; The act of possessing Schedule A or B substances in a quantity that exceeds 50 units.
-  - R02-07: Operation of an Illegal Business; The act of operating an illegal business, this includes but is not limited to: illegal gambling rings, fight clubs, drug dens, black market shops and other illicit commercial enterprises.
-  - R02-08: Corruption of an Employee; The act of bribing, blackmailing or otherwise corrupting a non-managerial employee to gain illicit advantages.
-
-  ## R§ 03 - Racketeering Terminations
-
-  R§ 03 encompasses serious violations related to organised crime and other forms of racketeering, that specifically void the rights and contract of the employee and result in the dispoable classification.
-
-  - R03-01: Sapient Trafficking; The act of trading or otherwise exploiting other sapient employees for illegal purposes. This includes hypnosis implants or other forms of hypnotic control.
-  - R03-02: Contract Killing; The act of killing someone for monetary gain.
-  - R03-03: Possession of a Commercial Quantity of Narcotics; The act of possessing Schedule A or B substances in a quantity that exceeds 200 units.
-  - R03-04: Operation of a Criminal Enterprise; The act of operating a criminal enterprise such as a gang, mafia, triad, yakuza or other criminal organization.
-  - R03-05: Corruption of a Managerial Official; The act of bribing, blackmailing or otherwise corrupting a member of command to gain illicit advantages.
-
-  # VIII. Parole Violations (Law Code PA-XX)
-
-  ### §PA encompasses violations of parole, which are any violations committed by an employee who has been previously incarcerated, and only applicable to those who have been incarcerated. Parole offenders run the risk of being indicted for a longer sentence for any crime they commit.
-
-  - PA-01: Evasion of Surveillance; The act of intentionally avoiding security surveillance via turning coordinates off.
-  - PA-02: Criminal Association; The act of meeting or talking to known criminals, or otherwise associating with them.
-  - PA-03: Reoffending; The act of commiting any crime after being incarcerated for a previous crime.
-  - PA-04: Intoxication; The act of being under any mind-altering substance, prohibited or legal, while on parole.
-
   # Violation Types
 
   <Table Columns="2">
     <ColorBox Color="#000000"><Box>Type 1 Violations</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished via Corporal methods. The infringing action must warrant the punishment given.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 2 Violations</Box></ColorBox>
-    <ColorBox Color="#6d659c"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished by either up to three minutes in the brig or corporal punishment of a warranted level.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 3 Violations</Box></ColorBox>
-    <ColorBox Color="#bf8f62"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#e7c11b"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished by either up to five minutes in the brig, corporal punishment, or reduction of access.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 4 Violations</Box></ColorBox>
-    <ColorBox Color="#9e3939"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#cb1414"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation may void the rights given by Space Law, and is typically punished by demotion to D-Class, five minutes of brig time, \n and/or a substantial corporal punishments. It may include all three.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 5 Violations</Box></ColorBox>
-    <ColorBox Color="#1c1c1c"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#9810b3"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation voids the rights given by Space Law, and immediately warrants a sentence of permanent confinement, \n to be escalated to execution if a Type 2 Violation or above is committed.
     </Box></ColorBox>
   </Table>
   \n
-  All specific violations are detailed below.
+
+  [bold]All specific violations are detailed below.[/bold]
 
   ## Type 1 Violations
   <Table Columns="2">
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Minor Contraband Posession</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Minor Contraband Posession</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       Posession of [bold]any[/bold] contraband that does not fall under any other violations.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Littering</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Littering</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       Improper disposal of waste via public dumping.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Public Nuisance</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Public Nuisance</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The disorderly conduct of an employee in a public area that is disruptive to the work of other employees, or otherwise damages the Nanotrasen™ brand.
-      Test
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Harassment</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Harassment</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of intentionally offending, verbally intimidating or humiliating another employee.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Trespass</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Trespass</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       Entering a department you do not have access to through non-forceful means without approval from a member of the department. Department heads can retroactively waive approval given by their employees.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Unauthorized Possession of Department Contraband</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Unauthorized Possession of Department Contraband</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       Posession of department contraband without approval from a member of that department. Department heads can retroactively waive approval given by their employees.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Public Smoking and Vaping</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Public Smoking and Vaping</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of smoking or vaping outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or offices.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Departmental Impersonation</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Departmental Impersonation</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of wearing a departmental uniform whilst not being a part of that department.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Concealment of Identity</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Concealment of Identity</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA. You may hold anyone who is failing to show their company-mandated ID/PDA until it is otherwise acquired or a new one is issued.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Personal Possession of Schedule A Narcotics</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Personal Possession of Schedule A Narcotics</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of possessing prohibited Schedule A narcotics that does not exceed 50 units with intent for personal use.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Center">Public Intoxication</Box></ColorBox>
-    <ColorBox Color="#90a182"><Box HorizontalAlignment="Left" Margin="4">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Public Intoxication</Box></ColorBox>
+    <ColorBox Color="#1c8238"><Box HorizontalAlignment="Left" Margin="4">
       The act of being intoxicated, whether by alcohol or illicit substances, outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or medbay if undergoing sobering treatment.
     </Box></ColorBox>
   </Table>
+  \n
+
+  ## Type 2 Violations
+  ### Violence and Compliance Violations
+  Type 2 violations that are violent or non-compliant with security.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Battery</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of intentionally causing physical harm to another employee.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Assault</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of threatening an employee with immediate physical harm.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Failure to Report</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of failing to report a crime or violation that one has knowledge of to security or management.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Noncompliance</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of refusing to comply with a lawful order from a security officer, or any order that resolves a Type 1 Violation.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Evasion</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of fleeing or failing to stop when being pursued or hailed by security, without using force.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Aiding and Abetting</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of assisting in the commission of a crime, or providing support to those committing a crime.
+    </Box></ColorBox>
+  </Table>
+  ### Contraband Violations
+  Type 2 violations that involve contraband.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Receiving and Handling Stolen Goods</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of receiving or handling items that have been stolen knowingly.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Possession of Prohibited Weaponry</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of possessing prohibited weaponry that does not fall under any other sections or codes.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Personal Possession of Schedule B Narcotics</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of possessing prohibited Schedule B narcotics that does not exceed 50 units.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Smuggling</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of illegally importing or exporting contraband into the station.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Sale of Contraband</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of selling items classified as contraband, that does not fall under any other sections or codes.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Drug Trafficking</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of selling Schedule A or B narcotics.
+    </Box></ColorBox>
+  </Table>
+  ### Theft and Damage Violations
+  Type 2 violations that involve theft and damage to company property and interests.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Petty Larceny</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of stealing any item that does not belong to the offender. That does not fall under any other sections or codes.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Breaking and Entering</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of unlawfully entering an area one does not have access to through forceful means.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Tampering</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of intentionally sabotaging or interfering with company property or electronic systems.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Obstruction of Work</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of interfering with other employee's ability to work through forceful means, or otherwise impeding the work of other employees.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Destruction of Property</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of intentionally destroying company or personal property.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Looting</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of stealing items from a crime scene, or otherwise taking items that do not belong to the offender from an area that has recently been the site of a crime or catastrophe.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Money Laundering and Counterfeiting</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of concealing the origins of illegally obtained money through the use of legitimate businesses or financial transactions and/or generating counterfeit currency that may or may not be laundered through this route.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Illegal Gambling</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of participating in gambling activities that are not sanctioned by the corporation.
+    </Box></ColorBox>
+  </Table>
+  ### Incitement and Conspiracy Violations
+  Type 2 violations that involve incitement and conspiracy against the company.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Conspiracy</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of forming an agreement with other employees to commit a crime.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Bribery</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of offering or accepting a bribe, which is any item, favor, or service offered in exchange for an illicit advantage.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Blackmail</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of threatening to reveal damaging information about another employee unless certain demands are met.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Incitement of Violence</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of encouraging or threatening violence against another employee, group of employees or department.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Inciting a Riot</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of organizing or causing a riot or unlawful assembly.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left">Reckless Endangerment</Box></ColorBox>
+    <ColorBox Color="#308ed6"><Box HorizontalAlignment="Left" Margin="4">
+      The act of endangering the safety of other employees through reckless actions or inaction.
+    </Box></ColorBox>
+  </Table>
+  \n
+
+  ## Type 3 Violations
 
   \n
-  <ColorBox Color="#000000"><Box HorizontalAlignment="Center"></Box></ColorBox>
-  <ColorBox Color="#6d659c"><Box HorizontalAlignment="Left" Margin="4">
-
+  <ColorBox Color="#000000"><Box HorizontalAlignment="Left"></Box>Test</ColorBox>
+  <ColorBox Color="#e7c11b"><Box HorizontalAlignment="Left" Margin="4">
+    Test
   </Box></ColorBox>
 
 </Document>
