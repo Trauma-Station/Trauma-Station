@@ -129,23 +129,3 @@
   - type: StationEvent
     startAnnouncement: null
     startAudio: null
-
-## Lone Xenomorph
-
-- type: entity
-  parent: BaseGameRule
-  id: LoneXenomorphSpawnRule
-  components:
-  - type: StationEvent
-    earliestStart: 20
-    weight: 3
-    minimumPlayers: 30
-    duration: null
-    occursDuringRoundEnd: false
-  - type: MaintsSpawnRule
-  - type: AntagSpawner
-    prototype: MobLoneXenomorph
-  - type: AntagSelection
-    antags:
-    - !type:FixedAntagCount
-      proto: LoneXenomorph

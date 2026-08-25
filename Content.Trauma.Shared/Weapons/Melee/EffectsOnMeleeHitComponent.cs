@@ -25,6 +25,12 @@ public sealed partial class EffectsOnMeleeHitComponent : Component
     public EntityEffect[]? TargetEffects;
 
     /// <summary>
+    /// Effects to run on the user when the swing connects with nothing, if not null.
+    /// </summary>
+    [DataField]
+    public EntityEffect[]? MissEffects;
+
+    /// <summary>
     /// If true, it will run effects on every hit.
     /// </summary>
     [DataField]

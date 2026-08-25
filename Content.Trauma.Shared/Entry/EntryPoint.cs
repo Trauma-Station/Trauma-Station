@@ -4,4 +4,17 @@ using Robust.Shared.ContentPack;
 
 namespace Content.Trauma.Shared.Entry;
 
-public sealed class EntryPoint : GameShared;
+public sealed partial class EntryPoint : GameShared
+{
+    [Dependency] private IPrototypeManager _proto = default!;
+
+    public override void PreInit()
+    {
+        Dependencies.InjectDependencies(this);
+    }
+
+    public override void Init()
+    {
+        _proto.PartialDirectory(new("/Prototypes/_Trauma/Partial"), 1);
+    }
+}

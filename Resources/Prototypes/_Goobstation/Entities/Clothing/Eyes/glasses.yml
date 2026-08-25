@@ -189,8 +189,10 @@
     damageContainers:
     - Biological
     - Inorganic
-  - type: ShowHungerIcons
-  - type: ShowThirstIcons
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
+    - Thirst
 
 - type: entity
   parent: [ClothingEyesBase, ClothingEyesGlassesSunglasses, ShowHealthRelatedIcons]

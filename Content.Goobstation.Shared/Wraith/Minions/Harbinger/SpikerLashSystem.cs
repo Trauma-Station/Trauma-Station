@@ -12,7 +12,7 @@ namespace Content.Goobstation.Shared.Wraith.Minions.Harbinger;
 public sealed partial class SpikerLashSystem : EntitySystem
 {
     [Dependency] private SharedStunSystem _stun = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
 

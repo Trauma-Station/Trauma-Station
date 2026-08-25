@@ -75,7 +75,7 @@ internal sealed partial class StoreOnCollideSystem : EntitySystem
             return;
 
         ent.Comp.IgnoredEntity = projectile.Shooter;
-        projectile.IgnoreShooter = false;
+        projectile.WhenToStopIgnoringShooter = TimeSpan.Zero;
         Entity<ProjectileComponent, StoreOnCollideComponent> toDirty = (ent.Owner, projectile, ent.Comp);
         Dirty(toDirty);
         // Goobstation end

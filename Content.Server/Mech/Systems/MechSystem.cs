@@ -219,7 +219,8 @@ public sealed partial class MechSystem : SharedMechSystem
                 {
                     if (args.User == uid || args.User == component.PilotSlot.ContainedEntity)
                     {
-                        TryEject(uid, component);
+                        if(TryEject(uid, component))
+                            _ui.CloseUi(uid, MechUiKey.Key);
                         return;
                     }
 
@@ -258,7 +259,10 @@ public sealed partial class MechSystem : SharedMechSystem
         if (args.Cancelled || args.Handled)
             return;
 
-        TryEject(uid, component);
+        if (!TryEject(uid, component))
+            return;
+
+        _ui.CloseUi(uid, MechUiKey.Key);
         args.Handled = true;
     }
     //goobstation

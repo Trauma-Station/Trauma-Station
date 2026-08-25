@@ -2102,7 +2102,7 @@
             - Liver
           name: heretic-ritual-ingredient-liver
         - whitelist:
-            components:
+            tags:
             - Stunbaton
           name: heretic-ritual-ingredient-stun-baton
     - !type:EffectsRitualEffect

@@ -17,7 +17,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 6 # Really good, actually
       - !type:HealthChange
         damage:

@@ -115,17 +115,6 @@
 
 - type: entity
   parent: BaseSubdermalImplant
-  id: ClumsyImplant
-  name: clumsy implant
-  description: This implant makes the user clumsy, allowing them to drive a certain vehicle.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ComponentsImplant
-    added:
-    - type: Clumsy
-
-- type: entity
-  parent: BaseSubdermalImplant
   id: ShadowmindImplant
   name: shadowmind implant
   description: This implant allows the user to access Shadowmind channel (use +q).
@@ -203,9 +192,6 @@
     - type: ChangelingIdentity
     - type: Store
     # this shit is broken still CBF to fix it but you need to make it find or add a ling rule, then MakeChangeling it
-    removed:
-    - type: Hunger
-    - type: Thirst
 
 - type: entity
   parent: BaseSubdermalImplant
