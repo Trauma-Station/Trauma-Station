@@ -36,7 +36,6 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
     private FixedPoint2 _lastVolume = -1;
     private float _batteryCharge = -1;
     private int _selectedAmount = -1;
-    private float _lastBatteryCharge = -1;
 
     public EnergyReagentDispenserWindow()
     {
