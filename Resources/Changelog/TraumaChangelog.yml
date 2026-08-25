@@ -13696,3 +13696,12 @@ Entries:
   id: 1495
   time: '2026-08-25T01:51:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4264
+- author: Jack-Silver
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed the EHP of many of the stations overly tanky structures like door
+      assemblies, closets and wallmoounts.
+  id: 1496
+  time: '2026-08-25T05:01:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4244
