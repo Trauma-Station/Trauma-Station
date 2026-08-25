@@ -194,7 +194,7 @@ public sealed partial class FireBlastSystem : EntitySystem
         var (target, flam, _) = result.Value;
 
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev, true);
+        RaiseLocalEvent(target, ref ev, true);
 
         var antimagic = ev.Cancelled;
 
