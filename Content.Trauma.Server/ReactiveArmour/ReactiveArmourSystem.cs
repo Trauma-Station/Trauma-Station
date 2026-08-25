@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Random;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Weapons.Melee.Events;
