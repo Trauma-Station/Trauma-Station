@@ -89,7 +89,7 @@ public sealed partial class PlantSystem : EntitySystem
 
         using (args.PushGroup(nameof(PlantComponent)))
         {
-            if (_plantHolder.IsDead(ent.Owner))
+            if (holder.Dead) // Trauma - skip the API's resolve, already have the holder comp
                 args.PushMarkup(Loc.GetString("plant-component-dead-plant-matter-message"));
 
             if (_plantHolder.GetHealthThreshold(ent.Owner))
