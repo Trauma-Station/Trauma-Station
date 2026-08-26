@@ -70,10 +70,6 @@
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
       The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA. You may hold anyone who is failing to show their company-mandated ID/PDA until it is otherwise acquired or a new one is issued.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Personal Possession of Schedule A Narcotics</Box></ColorBox>
-    <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
-      The act of possessing prohibited Schedule A narcotics that does not exceed 50 units with intent for personal use.
-    </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Public Intoxication</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
       The act of being intoxicated, whether by alcohol or illicit substances, outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or medbay if undergoing sobering treatment.
@@ -89,6 +85,10 @@
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Bribery</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
       The act of offering or accepting a bribe, which is any item, favor, or service offered in exchange for an illicit advantage. Both the one who offered the bribe and the one who accepted the bribe are liable for violations committed due to the bribe.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Personal Possession of Schedule A Narcotics</Box></ColorBox>
+    <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
+      The act of possessing prohibited Schedule A narcotics that does not exceed 50 units with intent for personal use.
     </Box></ColorBox>
   </Table>
   \n
@@ -152,6 +152,10 @@
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Drug Trafficking</Box></ColorBox>
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
       The act of selling Schedule A or B narcotics.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Minor posession of Schedule B Narcotics</Box></ColorBox>
+    <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
+      Posession of 50 or less units of Schdule B Narcotics with intent for personal use.
     </Box></ColorBox>
   </Table>
   ### Theft and Damages Violations
