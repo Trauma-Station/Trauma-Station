@@ -31,6 +31,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         var mind = GetEntity(jobBoard.Comp.Mind.Value);
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return false;
+        var actor = mindComp.OwnedEntity;
+        if (actor is null)
+            return false;
 
         var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
         var possiblePriorityJobs = jobBoard.Comp.PrioritySideJobOffers.ShallowClone();
@@ -82,6 +85,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             jobBoard.Comp.AvailableSideJobs.Add(GetNetEntity(sideJob));
             DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AvailableSideJobs));
             PVSOverrideEntity((mind, mindComp), sideJob);
+            RaiseNetworkEvent(new JobListingsInitSideJobMessage(GetNetEntity(jobBoard), GetNetEntity(sideJob)), actor.Value);
             return true;
         }
 

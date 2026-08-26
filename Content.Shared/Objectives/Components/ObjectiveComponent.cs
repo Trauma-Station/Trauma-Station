@@ -4,6 +4,7 @@ using Content.Shared.Objectives.Prototypes;
 using Content.Shared.Objectives.Systems;
 using Robust.Shared.Utility;
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared.Objectives.Components;
 
@@ -12,6 +13,9 @@ namespace Content.Shared.Objectives.Components;
 /// </summary>
 [RegisterComponent, Access(typeof(SharedObjectivesSystem))]
 [EntityCategory("Objectives")]
+// <Trauma> - make it actually networked
+[NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+// </Trauma>
 public sealed partial class ObjectiveComponent : Component
 {
     /// <summary>
@@ -38,6 +42,9 @@ public sealed partial class ObjectiveComponent : Component
     /// Can be specified by an <see cref="ObjectiveGetInfoEvent"/> handler but is usually done in the prototype.
     /// </summary>
     [DataField]
+    // <Trauma> - make it actually networked
+    [AutoNetworkedField]
+    // </Trauma>
     public SpriteSpecifier? Icon;
 }
 

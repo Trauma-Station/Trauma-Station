@@ -1,18 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Objectives;
-
-namespace Content.Trauma.Server.JobListings;
+namespace Content.Trauma.Shared.JobListings;
 
 /// <summary>
 /// A list of areas the traitor has bugged. This component is stored on their mind.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BugMindArchiveComponent : Component
 {
     /// <summary>
     /// List of bugged areas.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> BuggedAreas = new();
 }

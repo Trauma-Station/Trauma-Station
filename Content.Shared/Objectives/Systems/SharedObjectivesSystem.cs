@@ -153,5 +153,8 @@ public abstract partial class SharedObjectivesSystem : EntitySystem
             return;
 
         comp.Icon = icon;
+        // <Trauma> - make it actually networked
+        DirtyField(uid, comp, nameof(ObjectiveComponent.Icon));
+        // </Trauma>
     }
 }

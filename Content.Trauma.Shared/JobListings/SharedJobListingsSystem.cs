@@ -110,15 +110,35 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 
         var mind = GetEntity(jobBoard.Comp.Mind);
         if (mind is null)
+        {
+            Log.Error("Failed to get mind from job board.");
             return false;
+        }
+
         if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
+        {
+            Log.Error("Side job does not have an ObjectiveComponent.");
             return false;
+        }
+
         if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+        {
+            Log.Error("Side job does not have a SideJobComponent.");
             return false;
+        }
+
         if (sideJobComp.Reward is null)
+        {
+            Log.Error("Side job has no reward.");
             return false;
+        }
+
         if (objectiveComp.Icon is null)
+        {
+            Log.Error("Side job objective has no icon.");
             return false;
+        }
+
         // don't use SharedObjectiveSystem.GetInfo because it will error on the client since progress is not predicted
         var meta = MetaData(sideJob);
         var title = meta.EntityName;
@@ -326,4 +346,15 @@ public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = fa
 public sealed class JobListingsUiUpdateMessage(NetEntity owner) : EntityEventArgs
 {
     public readonly NetEntity Owner = owner;
+}
+
+/// <summary>
+/// Networked from server to client to raises the initialisation events on the objective client-side.
+/// They are raised on the server-side but most of it isn't networked.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class JobListingsInitSideJobMessage(NetEntity jobBoard, NetEntity sideJob) : EntityEventArgs
+{
+    public readonly NetEntity JobBoard = jobBoard;
+    public readonly NetEntity SideJob = sideJob;
 }

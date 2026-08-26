@@ -1,22 +1,47 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.JobListings;
 using Content.Shared.Construction.Components;
-using Content.Server.Mind;
+using Content.Shared.Examine;
 using Content.Shared.Mind;
-using Robust.Shared.Prototypes;
-using Content.Shared.Objectives.Systems;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
+using Content.Trauma.Shared.Areas;
+using System.Diagnostics.CodeAnalysis;
 
-namespace Content.Trauma.Server.JobListings;
+namespace Content.Trauma.Shared.JobListings;
 
-/// <inheritdoc/>
-public sealed partial class BugSystem : SharedBugSystem
+/// <summary>
+/// System facilitating planting bugs in head of staff offices for traitor objectives.
+/// The list of areas which bugs have been planted into is stored in the traitor's mind inside <see cref="BugMindArchiveComponent"/>.
+/// </summary>
+public sealed partial class BugSystem : EntitySystem
 {
-    [Dependency] private MindSystem _mind = default!;
-    [Dependency] private JobListingsSystem _jobs = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedJobListingsSystem _jobs = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
+
+    /// <summmary>
+    /// Works out if the bug is in the correct area.
+    /// </summary>
+    public bool IsInCorrectArea(Entity<BugComponent> ent)
+    {
+        return _area.GetAreaPrototype(ent.Owner) == ent.Comp.TargetArea;
+    }
+
+    /// <summmary>
+    /// Returns the name of the bug's target area.
+    /// </summary>
+    public bool GetAreaName(EntProtoId area, [NotNullWhen(true)] out string? name)
+    {
+        name = null;
+        if (!ProtoMan.Resolve(area, out var prototype))
+            return false;
+
+        name = prototype.Name;
+        return true;
+    }
 
     /// <summary>
     /// Register an area as bugged.
@@ -38,6 +63,18 @@ public sealed partial class BugSystem : SharedBugSystem
         return archive.BuggedAreas.Contains(area);
     }
 
+    [SubscribeLocalEvent]
+    private void OnExamine(Entity<BugComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString("bug-examine-target-area", ("target-area", ProtoMan.Index(ent.Comp.TargetArea).Name)));
+
+        if (Transform(ent.Owner).Anchored)
+        {
+            args.PushMarkup(Loc.GetString(IsInCorrectArea(ent) ? "bug-examine-correct-area" : "bug-examine-incorrect-area"));
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnAssigned(Entity<BugAreaConditionComponent> ent, ref ObjectiveAssignedEvent args)
     {
         if (!GetAreaName(ent.Comp.TargetArea, out var name))
@@ -46,6 +83,7 @@ public sealed partial class BugSystem : SharedBugSystem
         _metaData.SetEntityName(ent.Owner, Loc.GetString("bug-objective-name", ("area", name)));
         _metaData.SetEntityDescription(ent.Owner, Loc.GetString("bug-objective-description", ("area", name)));
         _objectives.SetIcon(ent.Owner, new SpriteSpecifier.EntityPrototype(ent.Comp.IconEntity));
+        Log.Debug("set icon");
     }
 
     [SubscribeLocalEvent]
@@ -54,6 +92,7 @@ public sealed partial class BugSystem : SharedBugSystem
         args.Progress = 0f;
         if (IsAreaBugged((args.MindId, args.Mind), entity.Comp.TargetArea))
             args.Progress = 1f;
+        Log.Debug("set progress");
     }
 
     [SubscribeLocalEvent]

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Objectives;
-
-namespace Content.Trauma.Server.JobListings;
+namespace Content.Trauma.Shared.JobListings;
 
 /// <summary>
 /// An objective to bug a specific area.
