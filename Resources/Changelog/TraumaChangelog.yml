@@ -13730,3 +13730,10 @@ Entries:
   id: 1499
   time: '2026-08-25T15:02:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4272
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed being peckish slowing you by 25% now you only slowdown at starving
+  id: 1500
+  time: '2026-08-26T04:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4281
