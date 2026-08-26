@@ -17,7 +17,7 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PlantbotServiceOperator : HTNOperator
 {
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _ent = default!;
 
     private ChatSystem _chat = default!;
     private SharedAudioSystem _audio = default!;
@@ -33,10 +33,9 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
     public const float WeedsRemovedAmount = 1f;
 
     /// <summary>
-    /// Target entity to inject.
+    /// Target tray to service.
     /// </summary>
-    [DataField(required: true)]
-    public string TargetKey = string.Empty;
+    public const string TargetKey = "PlantTarget";
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -60,14 +59,12 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<EntityUid>(TargetKey, out var target, _entMan) || _entMan.Deleted(target))
+        if (!blackboard.TryGetValue<EntityUid>(TargetKey, out var target, _ent) || _ent.Deleted(target))
             return HTNOperatorStatus.Failed;
 
-        if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out var botComp)
-            || !_entMan.TryGetComponent<PlantTrayComponent>(target, out var tray)
-            || !_entMan.TryGetComponent<PlantHolderComponent>(target, out var holder)
-            || !_interaction.InRangeUnobstructed(owner, target)
-            || (tray is { WaterLevel: >= RequiredWaterLevelToService, WeedLevel: <= RequiredWeedsAmountToWeed } && !holder.ReadyForHarvest && (!_entMan.HasComponent<EmaggedComponent>(owner) || _holder.IsDead(target) || tray.WaterLevel <= 0f)))
+        if (!_ent.TryGetComponent<PlantbotComponent>(owner, out var botComp)
+            || !_ent.TryGetComponent<PlantTrayComponent>(target, out var tray)
+            || !_interaction.InRangeUnobstructed(owner, target))
             return HTNOperatorStatus.Failed;
 
         if (botComp.IsEmagged)
@@ -89,7 +86,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
                 _audio.PlayPvs(botComp.WeedSound, target);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-remove-weeds"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
-            else if (holder.ReadyForHarvest)
+            else if (tray.PlantEntity is { } plant && _ent.TryGetComponent<PlantHolderComponent>(plant, out var holder) && holder.ReadyForHarvest)
             {
                 _harvest.DoHarvest((target, holder), owner);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-harvest"), InGameICChatType.Speak, hideChat: true, hideLog: true);

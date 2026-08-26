@@ -29,17 +29,10 @@ public sealed partial class PlantHarvestSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnInteractHand(Entity<PlantTrayComponent> ent, ref InteractHandEvent args)
     {
-        if (args.Handled)
-            return;
-
-        if (!_plantTray.TryGetPlant(ent.AsNullable(), out var plantUid)
-            || !_holderQuery.TryComp(plantUid, out var holder)
-            || !holder.ReadyForHarvest)
-            return;
-
-        // TODO: Remove this once trays have a proper UI.
-        TryHandleHarvest(plantUid.Value, args.User);
-        args.Handled = true;
+        // <Trauma> - relay the event to the plant instead of duplicating its logic bruh
+        if (ent.Comp.PlantEntity is { } plant)
+            RaiseLocalEvent(plant, args);
+        // </Trauma>
     }
 
     [SubscribeLocalEvent]
@@ -72,7 +65,7 @@ public sealed partial class PlantHarvestSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (_plantHolder.IsDead(ent.Owner))
+        if (ent.Comp.Dead) // Trauma - use the bool directly it has the comp already
         {
             args.Handled = true;
             _plant.RemovePlant(ent.Owner);
@@ -85,8 +78,13 @@ public sealed partial class PlantHarvestSystem : EntitySystem
         var ev = new DoHarvestEvent(args.User, ent.Owner);
         RaiseLocalEvent(ent.Owner, ref ev);
         args.Handled = true;
+        // <Trauma> - replaced events as api slop by checking the event properly
+        if (!ev.Cancelled)
+            TryHandleHarvest(ent, args.User);
+        // <Trauma>
     }
 
+    /* Trauma - replaced by proper event usage
     [SubscribeLocalEvent]
     private void OnHandledDoHarvest(Entity<PlantHolderComponent> ent, ref DoHarvestEvent args)
     {
@@ -95,6 +93,7 @@ public sealed partial class PlantHarvestSystem : EntitySystem
 
         TryHandleHarvest(ent, args.User);
     }
+    */
 
     private void TryAutoHarvest(Entity<PlantHarvestComponent> ent, EntityUid user)
     {
