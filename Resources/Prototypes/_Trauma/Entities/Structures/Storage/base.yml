@@ -9,3 +9,50 @@
     - Green
     - Blue
     - Yellow
+
+- type: entity
+  abstract: true
+  id: AntiTamper
+  components:
+  - type: Speech
+    speechSounds: Pai
+  - type: WiresPanel
+    openingTool: Prying
+  - type: WiresPanelSecurity
+  - type: WiresVisuals
+  - type: Electrified
+    requirePower: false
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+
+- type: entity
+  abstract: true
+  id: AntiTamperLowPriority
+  parent: AntiTamper
+  components:
+  - type: AntiTamper
+    yellAlertType: OnDestroyed
+    alarmAlertType: OnDestroyed
+    alarmSound:
+      path: /Audio/Machines/warning_buzzer.ogg
+      volume: 1
+  - type: Wires
+    layoutId: SecureStorageLowPriority
+    boardName: wires-board-name-secure-storage
+
+- type: entity
+  abstract: true
+  id: AntiTamperHighPriority
+  parent: AntiTamper
+  components:
+  - type: AntiTamper
+    yellAlertType: All
+    alarmAlertType: OnDestroyed
+    alarmSound:
+      path: /Audio/Machines/warning_buzzer.ogg
+      volume: 5
+  - type: Wires
+    layoutId: SecureStorageHighPriority
+    boardName: wires-board-name-secure-storage

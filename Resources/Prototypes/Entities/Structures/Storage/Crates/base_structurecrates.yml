@@ -94,7 +94,7 @@
   - type: ResistLocker
 
 - type: entity
-  parent: CrateBaseWeldable
+  parent: [ CrateBaseWeldable, AntiTamperLowPriority ] # Trauma
   id: CrateBaseSecure
   suffix: Secure
   components:

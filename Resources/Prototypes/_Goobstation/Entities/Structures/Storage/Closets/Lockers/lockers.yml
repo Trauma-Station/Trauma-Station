@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: LockerBase
+  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
   id: LockerNanorep
   name: nanotrasen representative locker
   components:
@@ -14,3 +14,10 @@
     stateBaseClosed: ntr
     stateDoorOpen: ntr_open
     stateDoorClosed: ntr_door
+  # <Trauma>
+  - type: RadioMicrophone
+    broadcastChannel: CentCom
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+  # </Trauma>

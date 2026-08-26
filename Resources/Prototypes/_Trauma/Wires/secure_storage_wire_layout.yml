@@ -1,0 +1,19 @@
+- type: wireLayout
+  id: SecureStorageLowPriority
+  dummyWires: 1
+  wires:
+  - !type:PowerWireAction
+  - !type:PowerWireAction
+  - !type:AntiTamperWireAction
+  - !type:SpeechWireAction
+  - !type:AccessWireAction
+
+- type: wireLayout
+  id: SecureStorageHighPriority
+  dummyWires: 3
+  wires:
+  - !type:PowerWireAction
+  - !type:PowerWireAction
+  - !type:AntiTamperWireAction
+  - !type:SpeechWireAction
+  - !type:AccessWireAction

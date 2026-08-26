@@ -211,7 +211,7 @@
     access: [["Security"]]
 
 - type: entity
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
   id: CrateEngineeringSecure
   name: secure engineering crate
   components:
@@ -223,7 +223,7 @@
     access: [["Engineering"]]
 
 - type: entity
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
   id: CrateMedicalSecure
   name: secure medical crate
   components:
@@ -235,7 +235,7 @@
     access: [["Medical"]]
 
 - type: entity
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
   id: CrateChemistrySecure
   name: secure chemistry crate
   components:
@@ -247,7 +247,7 @@
       access: [["Chemistry"]]
 
 - type: entity
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
   id: CratePrivateSecure
   name: private crate
   components:
@@ -487,7 +487,7 @@
 
 - type: entity
   id: CrateBaseLockBox
-  parent: CrateBaseSecure
+  parent: [ CrateBaseSecure, AntiTamperHighPriority ] # Trauma
   name: lock box
   description: "A secure lock box. Funds from its sale will be distributed back to the department. Just remember: Cargo always takes a cut."
   abstract: true
@@ -557,7 +557,13 @@
     overrideAccount: Engineering
   - type: AccessReader
     access: [["Engineering"]]
-
+  # <Trauma>
+  - type: RadioMicrophone
+    broadcastChannel: Engineering
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+  # </Trauma>
 - type: entity
   id: CrateLockBoxMedical
   parent: CrateBaseLockBox
@@ -587,6 +593,13 @@
     overrideAccount: Medical
   - type: AccessReader
     access: [["Medical"]]
+  # <Trauma>
+  - type: RadioMicrophone
+    broadcastChannel: Medical
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+  # </Trauma>
 
 - type: entity
   id: CrateLockBoxScience
@@ -617,6 +630,13 @@
     overrideAccount: Science
   - type: AccessReader
     access: [["Research"]]
+  # <Trauma>
+  - type: RadioMicrophone
+    broadcastChannel: Science
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+  # </Trauma>
 
 - type: entity
   id: CrateLockBoxSecurity
@@ -647,6 +667,13 @@
     overrideAccount: Security
   - type: AccessReader
     access: [["Security"]]
+  # <Trauma>
+  - type: RadioMicrophone
+    broadcastChannel: Security
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+  # </Trauma>
 
 - type: entity
   id: CrateLockBoxService
@@ -677,6 +704,13 @@
     overrideAccount: Service
   - type: AccessReader
     access: [["Service"]]
+  # <Trauma>
+  - type: RadioMicrophone
+    broadcastChannel: Service
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+  # </Trauma>
 
 - type: entity
   parent: CrateGeneric
