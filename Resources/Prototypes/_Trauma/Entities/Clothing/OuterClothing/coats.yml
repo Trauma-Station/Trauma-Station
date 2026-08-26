@@ -34,7 +34,7 @@
     damageCoefficient: 0.5
 
 - type: entity
-  parent: ClothingOuterBase
+  parent: ClothingOuterBaseToggleable
   id: ClothingOuterSuitCsij
   name: CSIJ biosuit
   description: A suit of writhing flesh that- wait no that's foam.
