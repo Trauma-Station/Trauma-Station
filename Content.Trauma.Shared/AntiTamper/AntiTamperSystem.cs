@@ -31,13 +31,16 @@ public sealed partial class AntiTamperSystem : EntitySystem
         var comp = ent.Comp;
         var ded = destructible.IsBroken;
 
+        var alarmOnDamaged = CompareFlag(comp.AlarmAlertType, AntiTamperAlertType.OnDamaged);
+        var alarmOnDestroyed = CompareFlag(comp.AlarmAlertType, AntiTamperAlertType.OnDestroyed);
+        var yellOnDamaged = CompareFlag(comp.YellAlertType, AntiTamperAlertType.OnDamaged);
+        var yellOnDestroyed = CompareFlag(comp.YellAlertType, AntiTamperAlertType.OnDestroyed);
+
         if (_timing.CurTime - comp.LastAlarm >= comp.AlarmCooldown &&
-            (!ded && CompareFlag(comp.AlarmAlertType, AntiTamperAlertType.OnDamaged)
-            || ded && CompareFlag(comp.AlarmAlertType, AntiTamperAlertType.OnDestroyed)))
+            !ded && alarmOnDamaged || ded && alarmOnDestroyed)
             AlertAlarm(ent);
         if (_timing.CurTime - comp.LastYell >= comp.AlarmCooldown &&
-            (!ded && CompareFlag(comp.YellAlertType, AntiTamperAlertType.OnDamaged)
-            || ded && CompareFlag(comp.YellAlertType, AntiTamperAlertType.OnDestroyed)))
+            !ded && yellOnDamaged || ded && yellOnDestroyed)
             AlertYell(ent);
     }
 
