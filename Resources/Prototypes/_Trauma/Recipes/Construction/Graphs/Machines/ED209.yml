@@ -71,9 +71,6 @@
       - tool: Welding
         doAfter: 1
 
-      - tool: Anchoring
-        doAfter: 1
-
       - material: Plasteel
         amount: 20
 
