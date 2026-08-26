@@ -13762,3 +13762,10 @@ Entries:
   id: 1503
   time: '2026-08-26T08:50:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4289
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added recovery mode for IPCs.
+  id: 1504
+  time: '2026-08-26T16:35:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4293
