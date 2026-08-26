@@ -13744,3 +13744,14 @@ Entries:
   id: 1501
   time: '2026-08-26T07:26:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4287
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed holofans and xorg shield thing getting a free full recharge by
+      recalling.
+  - type: Tweak
+    message: Nerfed xorg radiation module from 4 rads to 1.
+  id: 1502
+  time: '2026-08-26T07:45:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4288
