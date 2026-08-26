@@ -51,6 +51,7 @@ public sealed partial class BugSystem : EntitySystem
         var archive = EnsureComp<BugMindArchiveComponent>(mind.Owner);
         if (!archive.BuggedAreas.Contains(area))
             archive.BuggedAreas.Add(area);
+        Dirty(mind.Owner, archive);
     }
 
     /// <summary>
@@ -83,7 +84,6 @@ public sealed partial class BugSystem : EntitySystem
         _metaData.SetEntityName(ent.Owner, Loc.GetString("bug-objective-name", ("area", name)));
         _metaData.SetEntityDescription(ent.Owner, Loc.GetString("bug-objective-description", ("area", name)));
         _objectives.SetIcon(ent.Owner, new SpriteSpecifier.EntityPrototype(ent.Comp.IconEntity));
-        Log.Debug("set icon");
     }
 
     [SubscribeLocalEvent]
@@ -92,7 +92,6 @@ public sealed partial class BugSystem : EntitySystem
         args.Progress = 0f;
         if (IsAreaBugged((args.MindId, args.Mind), entity.Comp.TargetArea))
             args.Progress = 1f;
-        Log.Debug("set progress");
     }
 
     [SubscribeLocalEvent]

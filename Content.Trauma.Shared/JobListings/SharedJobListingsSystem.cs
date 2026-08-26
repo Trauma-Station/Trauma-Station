@@ -110,34 +110,15 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 
         var mind = GetEntity(jobBoard.Comp.Mind);
         if (mind is null)
-        {
-            Log.Error("Failed to get mind from job board.");
             return false;
-        }
-
         if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
-        {
-            Log.Error("Side job does not have an ObjectiveComponent.");
             return false;
-        }
-
         if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
-        {
-            Log.Error("Side job does not have a SideJobComponent.");
             return false;
-        }
-
         if (sideJobComp.Reward is null)
-        {
-            Log.Error("Side job has no reward.");
             return false;
-        }
-
         if (objectiveComp.Icon is null)
-        {
-            Log.Error("Side job objective has no icon.");
             return false;
-        }
 
         // don't use SharedObjectiveSystem.GetInfo because it will error on the client since progress is not predicted
         var meta = MetaData(sideJob);
