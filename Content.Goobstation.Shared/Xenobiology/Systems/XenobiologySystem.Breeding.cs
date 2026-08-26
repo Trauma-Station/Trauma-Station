@@ -11,7 +11,7 @@ namespace Content.Goobstation.Shared.Xenobiology.Systems;
 // This handles slime breeding and mutation.
 public partial class XenobiologySystem
 {
-    private List<Entity<SlimeComponent, MobGrowthComponent, SatiationComponent>> _splitting = new();
+    private List<Entity<SlimeComponent>> _splitting = new();
 
     [SubscribeLocalEvent]
     private void OnPendingSlimeMapInit(Entity<PendingSlimeSpawnComponent> ent, ref MapInitEvent args)
@@ -47,24 +47,27 @@ public partial class XenobiologySystem
         var query = EntityQueryEnumerator<SlimeComponent, MobGrowthComponent, SatiationComponent>();
         while (query.MoveNext(out var uid, out var slime, out var growthComp, out var satiation))
         {
-            if (_timing.CurTime < slime.NextUpdateTime
-                || _mob.IsDead(uid)
-                || growthComp.IsFirstStage)
+            if (_timing.CurTime < slime.NextUpdateTime)
                 continue;
 
-            _splitting.Add((uid, slime, growthComp, satiation));
             slime.NextUpdateTime = _timing.CurTime + _updateInterval;
+
+            if (_mob.IsDead(uid)
+                || growthComp.IsFirstStage) // W impossible to reuse shitcode larping as generic and reusable
+                continue;
+
+            var value = _satiation.GetValueOrNull((uid, satiation), SatiationSystem.Hunger) ?? 0f;
+            if (value > slime.MitosisHunger - slime.JitterDifference)
+                _jitter.DoJitter(uid, TimeSpan.FromSeconds(1), true);
+
+            if (value < slime.MitosisHunger)
+                continue;
+
+            _splitting.Add((uid, slime));
         }
 
         foreach (var ent in _splitting)
         {
-            var value = _satiation.GetValueOrNull((ent, ent.Comp3), SatiationSystem.Hunger) ?? 0f;
-            if (value > ent.Comp1.MitosisHunger - ent.Comp1.JitterDifference)
-                _jitter.DoJitter(ent, TimeSpan.FromSeconds(1), true);
-
-            if (value < ent.Comp1.MitosisHunger)
-                continue;
-
             DoMitosis(ent);
         }
     }
