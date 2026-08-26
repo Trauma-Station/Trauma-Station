@@ -22,8 +22,6 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public Action<NetEntity>? OnClaimed;
     public Action? OnRefresh;
 
-    public int MaximumAcceptedSideJobs;
-
     public JobListingsMenu()
     {
         RobustXamlLoader.Load(this);
@@ -52,6 +50,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
         var reputationLevel = _jobs.GetReputationLevel(jobBoard.Value);
         SetReputation(jobBoard.Value.Comp.Reputation, reputationLevel);
         SetRefresh(jobBoard.Value.Comp.BonusRefresh, jobBoard.Value.Comp.RefreshTime, jobBoard.Value.Comp.RefreshWaitDuration);
+        Refresh(jobBoard.Value.Comp.MaximumAcceptedSideJobs);
     }
 
     public void ClearJobListings()
@@ -65,7 +64,6 @@ public sealed partial class JobListingsMenu : DefaultWindow
         var control = CreateControl(info);
         control.UpdateAsAvailable(info);
         AvailableJobListingsContainer.AddChild(control);
-        Refresh();
     }
 
     public void AddAcceptedSideJob(SideJobInfo info)
@@ -73,7 +71,6 @@ public sealed partial class JobListingsMenu : DefaultWindow
         var control = CreateControl(info);
         control.UpdateAsAccepted(info);
         AcceptedJobListingsContainer.AddChild(control);
-        Refresh();
     }
 
     public void SetReputation(int reputation, int level)
@@ -166,11 +163,11 @@ public sealed partial class JobListingsMenu : DefaultWindow
         }
     }
 
-    private void Refresh()
+    private void Refresh(int maximumAcceptedSideJobs)
     {
         AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;
         AvailableJobListingsNote.Visible = AvailableJobListingsContainer.ChildCount == 0;
-        if (AcceptedJobListingsContainer.ChildCount >= MaximumAcceptedSideJobs)
+        if (AcceptedJobListingsContainer.ChildCount >= maximumAcceptedSideJobs)
             DisableAcceptButtons();
         else
             EnableAcceptButtons();
