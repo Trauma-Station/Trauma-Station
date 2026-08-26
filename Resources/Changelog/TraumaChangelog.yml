@@ -13737,3 +13737,10 @@ Entries:
   id: 1500
   time: '2026-08-26T04:11:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4281
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed forging being brokn.
+  id: 1501
+  time: '2026-08-26T07:26:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4287
