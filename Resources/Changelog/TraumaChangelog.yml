@@ -13755,3 +13755,10 @@ Entries:
   id: 1502
   time: '2026-08-26T07:45:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4288
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio slimes hunger for growing and splitting.
+  id: 1503
+  time: '2026-08-26T08:50:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4289
