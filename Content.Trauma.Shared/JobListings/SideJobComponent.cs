@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// A component attached to an objective entity to make it into a side job.
 /// Every side job has this component.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class SideJobComponent : Component
 {
     /// <summary>
@@ -39,4 +39,12 @@ public sealed partial class SideJobComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Repeatable = false;
+
+    /// <summary>
+    /// Objective progress is handled server-side.
+    /// Somethings are infact in possible to predict like if someone is alive (because they could be out of PVS).
+    /// The side job can be updated and this will cache and network the progress.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CachedProgress;
 }

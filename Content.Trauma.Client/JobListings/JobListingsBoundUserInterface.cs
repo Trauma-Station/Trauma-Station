@@ -11,14 +11,20 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     public JobListingsBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _menu = this.CreateWindow<JobListingsMenu>();
-        _menu.OnJobAccepted += OnJobAccepted;
-        _menu.OnJobClaimed += OnJobClaimed;
-        _menu.OnJobCancelled += OnJobCancelled;
+        _menu.OnAccepted += OnAccepted;
+        _menu.OnClaimed += OnClaimed;
+        _menu.OnCancelled += OnCancelled;
         _menu.OnRefresh += OnRefresh;
     }
 
     [ViewVariables]
     private JobListingsMenu? _menu;
+
+    public override void Update()
+    {
+        base.Update();
+        _menu?.Update(Owner);
+    }
 
     protected override void Open()
     {
@@ -26,17 +32,17 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         _menu?.OpenCenteredLeft();
     }
 
-    private void OnJobAccepted(NetEntity job)
+    private void OnAccepted(NetEntity job)
     {
         SendMessage(new JobListingsAcceptJobMessage(job));
     }
 
-    private void OnJobClaimed(NetEntity job)
+    private void OnClaimed(NetEntity job)
     {
         SendMessage(new JobListingsClaimJobMessage(job));
     }
 
-    private void OnJobCancelled(NetEntity job)
+    private void OnCancelled(NetEntity job)
     {
         SendMessage(new JobListingsCancelJobMessage(job));
     }

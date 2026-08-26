@@ -65,6 +65,6 @@ public sealed partial class BugSystem : SharedBugSystem
             return;
 
         RegisterBuggedArea((mind, mindComp), entity.Comp.TargetArea);
-        _jobs.UpdateUis((mind, mindComp));
+        // _jobs.UpdateUis((mind, mindComp));
     }
 }

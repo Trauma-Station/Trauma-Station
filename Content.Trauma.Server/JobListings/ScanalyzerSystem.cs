@@ -42,7 +42,7 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
         if (!_mind.TryGetMind(user, out var mind, out var mindComp))
             return;
         RegisterScan((mind, mindComp), target);
-        _jobs.UpdateUis((mind, mindComp));
+        // _jobs.UpdateUis((mind, mindComp));
     }
 
     [SubscribeLocalEvent]

@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Trauma.Common.JobListings;
+using Content.Trauma.Shared.JobListings;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Timing;
 
@@ -10,13 +11,15 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class JobListingsMenu : DefaultWindow
 {
+    [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IGameTiming _timing = default!;
+    private SharedJobListingsSystem _jobs = default!;
 
     private TimeSpan? _refreshTimerBarTime;
 
-    public Action<NetEntity>? OnJobAccepted;
-    public Action<NetEntity>? OnJobCancelled;
-    public Action<NetEntity>? OnJobClaimed;
+    public Action<NetEntity>? OnAccepted;
+    public Action<NetEntity>? OnCancelled;
+    public Action<NetEntity>? OnClaimed;
     public Action? OnRefresh;
 
     public int MaximumAcceptedSideJobs;
@@ -26,6 +29,29 @@ public sealed partial class JobListingsMenu : DefaultWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         RefreshButton.OnPressed += _ => OnRefresh?.Invoke();
+        _jobs = _entity.System<SharedJobListingsSystem>();
+    }
+
+    public void Update(EntityUid owner)
+    {
+        if (!_jobs.GetJobBoard(owner, out var jobBoard))
+            return;
+        var availableSideJobInfos = _jobs.GetAvailableSideJobsInfo(jobBoard.Value);
+        var acceptedSideJobInfos = _jobs.GetAcceptedSideJobsInfo(jobBoard.Value);
+
+        ClearJobListings();
+        foreach (var sideJob in availableSideJobInfos)
+        {
+            AddAvailableSideJob(sideJob);
+        }
+        foreach (var sideJob in acceptedSideJobInfos)
+        {
+            AddAcceptedSideJob(sideJob);
+        }
+
+        var reputationLevel = _jobs.GetReputationLevel(jobBoard.Value);
+        SetReputation(jobBoard.Value.Comp.Reputation, reputationLevel);
+        SetRefresh(jobBoard.Value.Comp.BonusRefresh, jobBoard.Value.Comp.RefreshTime, jobBoard.Value.Comp.RefreshWaitDuration);
     }
 
     public void ClearJobListings()
@@ -34,21 +60,21 @@ public sealed partial class JobListingsMenu : DefaultWindow
         AcceptedJobListingsContainer.RemoveAllChildren();
     }
 
-    // public void AddAvailableSideJob(SideJobInfo info)
-    // {
-    //     var control = CreateControl(info);
-    //     control.UpdateAsAvailable(info);
-    //     AvailableJobListingsContainer.AddChild(control);
-    //     Refresh();
-    // }
+    public void AddAvailableSideJob(SideJobInfo info)
+    {
+        var control = CreateControl(info);
+        control.UpdateAsAvailable(info);
+        AvailableJobListingsContainer.AddChild(control);
+        Refresh();
+    }
 
-    // public void AddAcceptedSideJob(SideJobInfo info)
-    // {
-    //     var control = CreateControl(info);
-    //     control.UpdateAsAccepted(info);
-    //     AcceptedJobListingsContainer.AddChild(control);
-    //     Refresh();
-    // }
+    public void AddAcceptedSideJob(SideJobInfo info)
+    {
+        var control = CreateControl(info);
+        control.UpdateAsAccepted(info);
+        AcceptedJobListingsContainer.AddChild(control);
+        Refresh();
+    }
 
     public void SetReputation(int reputation, int level)
     {
@@ -111,14 +137,14 @@ public sealed partial class JobListingsMenu : DefaultWindow
         return $"{Math.Floor(time.TotalMinutes):0}m {time.Seconds}s";
     }
 
-    // private SideJobControl CreateControl(SideJobInfo info)
-    // {
-    //     var control = new SideJobControl();
-    //     control.OnAccepted += job => OnAccepted(job, control, info);
-    //     control.OnClaimed += job => OnClaimed(job, control, info);
-    //     control.OnCancelled += job => OnCancelled(job, control, info);
-    //     return control;
-    // }
+    private SideJobControl CreateControl(SideJobInfo info)
+    {
+        var control = new SideJobControl();
+        control.OnAccepted += job => OnAccepted?.Invoke(job);
+        control.OnClaimed += job => OnClaimed?.Invoke(job);
+        control.OnCancelled += job => OnCancelled?.Invoke(job);
+        return control;
+    }
 
     private void DisableAcceptButtons()
     {
@@ -139,35 +165,6 @@ public sealed partial class JobListingsMenu : DefaultWindow
             sideJobControl.AcceptButton.Disabled = false;
         }
     }
-
-    // private void OnAccepted(NetEntity job, SideJobControl control, SideJobInfo info)
-    // {
-    //     // predict the ui change
-    //     AvailableJobListingsContainer.RemoveChild(control);
-    //     control.UpdateAsAccepted(info);
-    //     AcceptedJobListingsContainer.AddChild(control);
-    //     Refresh();
-    //     // invoke the event so the BUI sends a message to the server and calculates the REAL state
-    //     OnJobAccepted?.Invoke(job);
-    // }
-
-    // private void OnClaimed(NetEntity job, SideJobControl control, SideJobInfo info)
-    // {
-    //     // predict ui change
-    //     AcceptedJobListingsContainer.RemoveChild(control);
-    //     Refresh();
-    //     // invoke event
-    //     OnJobClaimed?.Invoke(job);
-    // }
-
-    // private void OnCancelled(NetEntity job, SideJobControl control, SideJobInfo info)
-    // {
-    //     // predict ui change
-    //     AcceptedJobListingsContainer.RemoveChild(control);
-    //     Refresh();
-    //     // invoke event
-    //     OnJobCancelled?.Invoke(job);
-    // }
 
     private void Refresh()
     {

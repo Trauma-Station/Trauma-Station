@@ -10,6 +10,8 @@ using Content.Trauma.Shared.JobListings;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
 
+namespace Content.Trauma.Server.JobListings;
+
 public sealed partial class JobListingsSystem : SharedJobListingsSystem
 {
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
@@ -165,6 +167,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         FillSideJobs(jobBoard);
     }
 
+    public override void UpdateUi(EntityUid owner, EntityUid actor)
+    {
+        if (!GetJobBoard(owner, out var jobBoard))
+            return;
+        UpdateAllSideJobs(jobBoard.Value);
+        RaiseNetworkEvent(new JobListingsUiUpdateMessage(GetNetEntity(owner)), actor);
+    }
+
     /// <summary>
     /// Helper method to add a PVS override for the job board and sidejobs.
     /// They are nullspace entities on the server and would not normally be replicated to the client but this method makes it so.
@@ -176,6 +186,44 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!_player.TryGetSessionByEntity(mind.Comp.OwnedEntity.Value, out var session))
             return;
         _pvsOverride.AddSessionOverride(entity, session);
+    }
+
+    /// <summary>
+    /// Update the CachedProgress field on a sidejob.
+    /// </summary>
+    /// <param name="sideJob"></param>
+    private void UpdateSideJob(Entity<JobListingsComponent> jobBoard, Entity<SideJobComponent> sideJob)
+    {
+        if (jobBoard.Comp.Mind is null)
+            return;
+        var mind = GetEntity(jobBoard.Comp.Mind);
+        if (!TryComp<MindComponent>(mind, out var mindComp))
+            return;
+        var progress = _objectives.GetProgress(sideJob.Owner, (mind.Value, mindComp));
+        if (progress is null)
+            return;
+        sideJob.Comp.CachedProgress = progress.Value;
+        DirtyField(sideJob.Owner, sideJob.Comp, nameof(SideJobComponent.CachedProgress));
+    }
+
+    /// <summary>
+    /// Update all the side jobs that a job board has.
+    /// </summary>
+    private void UpdateAllSideJobs(Entity<JobListingsComponent> jobBoard)
+    {
+        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs)
+        {
+            if (!TryComp<SideJobComponent>(GetEntity(sideJob), out var sideJobComp))
+                return;
+            UpdateSideJob(jobBoard, (GetEntity(sideJob), sideJobComp));
+        }
+
+        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs)
+        {
+            if (!TryComp<SideJobComponent>(GetEntity(sideJob), out var sideJobComp))
+                return;
+            UpdateSideJob(jobBoard, (GetEntity(sideJob), sideJobComp));
+        }
     }
 
     [SubscribeLocalEvent]

@@ -73,7 +73,7 @@ namespace Content.Client.PDA
             // <Trauma> - job listings
             _menu.ShowJobListingsButton.OnPressed += _ =>
             {
-                SendMessage(new PdaShowJobListingsMessage());
+                SendPredictedMessage(new PdaShowJobListingsMessage());
             };
             // </Trauma>
 

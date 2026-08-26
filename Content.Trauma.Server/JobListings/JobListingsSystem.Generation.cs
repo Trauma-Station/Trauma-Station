@@ -20,7 +20,7 @@ public sealed partial class JobListingsSystem
             return;
         }
 
-        var reward = _table.GetSpawns(table).FirstOrNull();
+        var reward = Table.GetSpawns(table).FirstOrNull();
         if (reward is null || !TryComp<SideJobComponent>(ent.Owner, out var sideJobComp))
         {
             args.Cancelled = true;
@@ -28,6 +28,7 @@ public sealed partial class JobListingsSystem
         }
 
         sideJobComp.Reward = reward.Value;
+        DirtyField(ent.Owner, sideJobComp, nameof(SideJobComponent.Reward));
     }
 
     [SubscribeLocalEvent]

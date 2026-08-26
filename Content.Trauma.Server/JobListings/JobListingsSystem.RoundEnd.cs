@@ -14,6 +14,8 @@ namespace Content.Trauma.Server.JobListings;
 /// </summary>
 public sealed partial class JobListingsSystem
 {
+    [Dependency] private ObjectivesSystem _objectives = default!;
+
     private readonly StringBuilder _sb = new StringBuilder();
 
     [SubscribeLocalEvent]
@@ -27,10 +29,10 @@ public sealed partial class JobListingsSystem
             if (jobBoard.Mind is null)
                 return;
 
-            if (!TryComp<MindComponent>(jobBoard.Mind.Value, out var mindComp))
+            if (!TryComp<MindComponent>(GetEntity(jobBoard.Mind.Value), out var mindComp))
                 continue;
 
-            var name = _objectives.GetTitle((jobBoard.Mind.Value, mindComp), Name(mindComp.OwnedEntity ?? jobBoard.Mind.Value));
+            var name = _objectives.GetTitle((GetEntity(jobBoard.Mind.Value), mindComp), Name(mindComp.OwnedEntity ?? GetEntity(jobBoard.Mind.Value)));
             var level = GetReputationLevel((uid, jobBoard));
             var title = Loc.GetString($"job-listings-ui-reputation-level-{level}");
             _sb.AppendLine(Loc.GetString("job-listings-round-end", ("name", name), ("count", jobBoard.JobsCompleted), ("reputation", jobBoard.Reputation), ("title", title)));

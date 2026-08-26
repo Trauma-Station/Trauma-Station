@@ -101,6 +101,63 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     }
 
     /// <summary>
+    /// A helper method to get important info about a side job.
+    /// Called by the Ui to display side job information.
+    /// </summary>
+    public bool GetInfo(EntityUid sideJob, Entity<JobListingsComponent> jobBoard, [NotNullWhen(true)] out SideJobInfo? info)
+    {
+        info = null;
+
+        var mind = GetEntity(jobBoard.Comp.Mind);
+        if (mind is null)
+            return false;
+        if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
+            return false;
+        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            return false;
+        if (sideJobComp.Reward is null)
+            return false;
+        if (objectiveComp.Icon is null)
+            return false;
+        // don't use SharedObjectiveSystem.GetInfo because it will error on the client since progress is not predicted
+        var meta = MetaData(sideJob);
+        var title = meta.EntityName;
+        var description = meta.EntityDescription;
+        var icon = objectiveComp.Icon;
+        var rewardName = Loc.GetString($"job-listings-ui-reward-name-{sideJobComp.Reward.Value}");
+        info = new SideJobInfo(GetNetEntity(sideJob), sideJobComp.CachedProgress, title, description, icon, rewardName, sideJobComp.ReputationGain);
+        return true;
+    }
+
+    /// <summary>
+    /// Get all infos for the available side jobs.
+    /// </summary>
+    public List<SideJobInfo> GetAvailableSideJobsInfo(Entity<JobListingsComponent> jobBoard)
+    {
+        var infos = new List<SideJobInfo>();
+        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs)
+        {
+            if (GetInfo(GetEntity(sideJob), jobBoard, out var info))
+                infos.Add(info.Value);
+        }
+        return infos;
+    }
+
+    /// <summary>
+    /// Get all infos for the accepted side jobs.
+    /// </summary>
+    public List<SideJobInfo> GetAcceptedSideJobsInfo(Entity<JobListingsComponent> jobBoard)
+    {
+        var infos = new List<SideJobInfo>();
+        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs)
+        {
+            if (GetInfo(GetEntity(sideJob), jobBoard, out var info))
+                infos.Add(info.Value);
+        }
+        return infos;
+    }
+
+    /// <summary>
     /// Count how many jobs exist on the job board.
     /// This includes both available and assigned.
     /// </summary>
@@ -115,7 +172,13 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     public void OpenUi(EntityUid owner, EntityUid actor)
     {
         Ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
+        UpdateUi(owner, actor);
     }
+
+    /// <summary>
+    /// Updates the job listings ui.
+    /// </summary>
+    public abstract void UpdateUi(EntityUid owner, EntityUid actor);
 
     /// <summary>
     /// Find a job board from an entity that has a <see cref="RemoteJobListingsComponent"/>.
@@ -200,11 +263,11 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.Reputation), nameof(JobListingsComponent.BonusRefresh));
     }
 
-    // [SubscribeLocalEvent]
-    // private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
-    // {
-    //     OpenUi(pda, msg.Actor);
-    // }
+    [SubscribeLocalEvent]
+    private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
+    {
+        OpenUi(pda, msg.Actor);
+    }
 
     // [SubscribeLocalEvent]
     // private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
@@ -246,7 +309,21 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 }
 
 /// <summary>
+/// Struct that describes a SideJob entity.
+/// </summary>
+public record struct SideJobInfo(NetEntity Entity, float Progress, string Title, string Description, SpriteSpecifier Icon, string RewardName, int ReputationGain);
+
+/// <summary>
 /// Raised on a side job when it is created.
 /// </summary>
 [ByRefEvent]
 public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = false);
+
+/// <summary>
+/// Networked from server to client to update the Ui.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class JobListingsUiUpdateMessage(NetEntity owner) : EntityEventArgs
+{
+    public readonly NetEntity Owner = owner;
+}
