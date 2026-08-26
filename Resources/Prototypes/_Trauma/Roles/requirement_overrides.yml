@@ -81,12 +81,6 @@
       department: Service
       time: 5h
       inverted: true
-    #Assistant made into a learner role, D-Class the new assistant role
-    Passenger:
-    - !type:DepartmentTimeRequirement
-      department: Civilian
-      time: 8h
-      inverted: true # Out into the cold with you
     # Service
     Chef: # Anti-raider ops
     - !type:DepartmentTimeRequirement

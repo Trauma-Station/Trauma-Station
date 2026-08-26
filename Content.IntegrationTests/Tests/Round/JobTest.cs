@@ -28,7 +28,7 @@ namespace Content.IntegrationTests.Tests.Round;
 [TestFixture]
 public sealed class JobTest : GameTest
 {
-    private static readonly ProtoId<JobPrototype> Passenger = "DClass"; //Trauma
+    private static readonly ProtoId<JobPrototype> Passenger = "Passenger";
     private static readonly ProtoId<JobPrototype> Engineer = "StationEngineer";
     private static readonly ProtoId<JobPrototype> Captain = "Captain";
 
@@ -79,8 +79,8 @@ public sealed class JobTest : GameTest
     {Passenger}: 30
   # <Trauma>
   required:
-    {Passenger}: 1
-    {Captain}: 1
+    Passenger: 1
+    Captain: 1
   # </Trauma>
 ";
 

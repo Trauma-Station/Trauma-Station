@@ -257,25 +257,41 @@
   loadouts:
   - GreyJumpsuit
   - GreyJumpskirt
- # <Trauma> Made useless by now being a learner role
- # - AncientJumpsuit
- # - RainbowJumpsuit
- # - RainbowJumpskirt
+  - AncientJumpsuit
+  - RainbowJumpsuit
+  - RainbowJumpskirt
+ # goob changes start
+  - GreyMJ
+  - BlackMJ
+  - BlueMJ
+  - DarkBlueMJ
+  - TealMJ
+  - GreenMJ
+  - DarkGreenMJ
+  - OrangeMJ
+  - PinkMJ
+  - RedMJ
+  - YellowMJ
+  - PurpleMJ
+  - LightBrownMJ
+  - BrownMJ
+  - MaroonMJ
+  - QuarterzipJumpsuit
+ # goob changes end
 
-#- type: loadoutGroup
- # id: PassengerFace
- # name: loadout-group-passenger-mask
- # minLimit: 0
- # loadouts:
- # - PassengerFace
+- type: loadoutGroup
+  id: PassengerFace
+  name: loadout-group-passenger-mask
+  minLimit: 0
+  loadouts:
+  - PassengerFace
 
-#- type: loadoutGroup
- #  id: PassengerGloves
- #  name: loadout-group-passenger-gloves
- #  minLimit: 0
- #  loadouts:
- #  - PassengerGloves
-#  </Trauma>
+- type: loadoutGroup
+  id: PassengerGloves
+  name: loadout-group-passenger-gloves
+  minLimit: 0
+  loadouts:
+  - PassengerGloves
 
 - type: loadoutGroup
   id: CommonBackpack
@@ -291,9 +307,7 @@
   name: loadout-group-passenger-neck
   minLimit: 0
   loadouts:
- # <Trauma> It is not possible to play assistant enough to unlock this
- # - Mantle
- # </Trauma>
+  - Mantle
   - OldNeckWrap # EE
 
 - type: loadoutGroup

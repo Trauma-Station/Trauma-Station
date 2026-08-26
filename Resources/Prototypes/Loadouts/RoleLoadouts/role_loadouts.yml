@@ -63,10 +63,8 @@
   - PassengerJumpsuit
   - CommonBackpack
   - PassengerNeck
- # <Trauma> No longer unlockable
- #- PassengerGloves
- #- PassengerFace
- # </Trauma>
+  - PassengerFace
+  - PassengerGloves
   - PassengerOuterClothing
   - PassengerShoes
   - Glasses

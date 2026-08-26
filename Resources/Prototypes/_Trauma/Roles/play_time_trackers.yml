@@ -8,6 +8,3 @@
 
 - type: playTimeTracker
   id: JobRancher
-
-- type: playTimeTracker
-  id: JobDClass
