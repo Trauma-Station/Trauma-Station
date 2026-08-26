@@ -273,9 +273,9 @@
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of selling firearms or other prohibited weapons.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Manufacture of Narcotics</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Manufacture of Restricted Chemicals</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      The act of producing Schedule A/B substances, this includes growing fauna with intent to create narcotics.
+      The act of producing Schedule A, B, and/or pyrotechnic substances, this includes growing fauna with intent to create narcotics.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Production of Narcotics with intent to supply/sell</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
