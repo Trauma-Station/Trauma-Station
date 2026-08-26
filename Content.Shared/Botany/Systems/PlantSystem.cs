@@ -89,7 +89,7 @@ public sealed partial class PlantSystem : EntitySystem
 
         using (args.PushGroup(nameof(PlantComponent)))
         {
-            if (_plantHolder.IsDead(ent.Owner))
+            if (holder.Dead) // Trauma - skip the API's resolve, already have the holder comp
                 args.PushMarkup(Loc.GetString("plant-component-dead-plant-matter-message"));
 
             if (_plantHolder.GetHealthThreshold(ent.Owner))
@@ -242,7 +242,7 @@ public sealed partial class PlantSystem : EntitySystem
         ent.Comp.Maturation = MathF.Max(1f, ent.Comp.Maturation + amount);
         DirtyField(ent, nameof(ent.Comp.Maturation));
 
-        if (ent.Comp.Production < ent.Comp.Maturation)
+        if (ent.Comp.Production > ent.Comp.Maturation) // Trauma - swap sign it was wrong, maturation is always higher than production
         {
             ent.Comp.Production = ent.Comp.Maturation;
             DirtyField(ent, nameof(ent.Comp.Production));
@@ -259,7 +259,14 @@ public sealed partial class PlantSystem : EntitySystem
         if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
-        ent.Comp.Production = MathF.Max(ent.Comp.Maturation, ent.Comp.Production + amount);
+        // <Trauma> - replace wrong clamping logic by rebounding maturation to ensure maturation is always bigger than production
+        ent.Comp.Production = MathF.Max(1f, ent.Comp.Production + amount);
+        if (ent.Comp.Production < ent.Comp.Maturation)
+        {
+            ent.Comp.Maturation = ent.Comp.Production;
+            DirtyField(ent, nameof(ent.Comp.Maturation));
+        }
+        // </Trauma>
         DirtyField(ent, nameof(ent.Comp.Production));
     }
 

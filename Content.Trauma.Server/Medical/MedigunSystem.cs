@@ -86,11 +86,18 @@ public sealed partial class MedigunSystem : EntitySystem
         if (!args.UpdatedIds.TryGetValue(ent.Comp.JointKey, out var set))
             return;
 
-        foreach (var healed in ent.Comp.HealedEntities)
+        ent.Comp.HealedEntities.RemoveAll(healed =>
         {
-            if (!set.Contains(healed) || !MediGunHealingTick(ent, healed))
-                DisableConnection(ent, healed);
-        }
+            if (set.Contains(healed) && MediGunHealingTick(ent, healed))
+                return false;
+
+            _joint.ClearBeamJoints(ent.Owner, ent.Comp.JointKey, healed);
+            RemCompDeferred<MediGunHealedComponent>(healed);
+            return true;
+        });
+
+        if (ent.Comp.HealedEntities.Count == 0)
+            ClearJoints(ent);
     }
 
     /// <summary>
