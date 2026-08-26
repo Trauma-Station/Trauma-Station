@@ -3,23 +3,23 @@
   # Violation Types
 
   <Table Columns="2">
-    <ColorBox Color="#000000"><Box>Type 1 Violations</Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 1 Violations | Misdemeanors</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished via Corporal methods. The infringing action must warrant the punishment given, and a warning must be issued first.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box>Type 2 Violations</Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 2 Violations | Indictable Misdemeanors</Box></ColorBox>
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished by either up to three minutes in the brig or corporal punishment of a warranted level.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box>Type 3 Violations</Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 3 Violations | Indictable Felonies</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished by either up to five minutes in the brig, corporal punishment, or reduction of access.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box>Type 4 Violations</Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 4 Violations | Terminatable Felonies</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation may void the rights given by Space Law, and is typically punished by demotion to D-Class, five minutes of brig time, \n and/or a substantial corporal punishments. It may include all three. There is a remote possibility for permanent confinement with parole on good behavior, \n but only upon the approval of the Head of Security or Captain.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box>Type 5 Violations</Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 5 Violations | Capital Crimes</Box></ColorBox>
     <ColorBox Color="#571d50"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation voids the rights given by Space Law, and immediately warrants a sentence of permanent confinement, \n to be escalated to execution if a Type 2 Violation or above is committed.
     </Box></ColorBox>
@@ -241,7 +241,7 @@
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of taking the law into one's own hand and neglecting their own duties to do such.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Insubordination</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Derelction of Duty</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Typically punished via corporal methods, or reduction of access, if there is a reasonable risk.
     </Box></ColorBox>
@@ -299,7 +299,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Grand Theft</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      Stealing any high value or importance item.
+      Stealing any item of high value or importance.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Unlawful Imprisonment</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
