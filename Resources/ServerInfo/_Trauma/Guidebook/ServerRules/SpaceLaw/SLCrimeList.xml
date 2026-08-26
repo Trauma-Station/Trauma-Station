@@ -153,10 +153,6 @@
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
       The act of selling Schedule A or B narcotics.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Minor posession of Schedule B Narcotics</Box></ColorBox>
-    <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
-      Posession of 50 or less units of Schdule B Narcotics with intent for personal use.
-    </Box></ColorBox>
   </Table>
   ### Theft and Damages Violations
   Type 2 violations that involve theft and damage to company property and interests.
