@@ -210,18 +210,18 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         var dirty = string.Empty;
         if (args.IsDatabank)
         {
-            var end = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
-            if (end == 0)
+            var len = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
+            if (len == 0)
                 return;
-            ent.Comp.DatabankIndex = Math.Clamp(index, 0, end - 1);
+            ent.Comp.DatabankIndex = Math.Clamp(index, 0, len - 1);
             dirty = nameof(PlantAnalyzerComponent.DatabankIndex);
         }
         else
         {
-            var end = SeedData.AllGenes.Length;
-            if (end == 0)
+            var len = SeedData.AllGenes.Length;
+            if (len == 0)
                 return;
-            ent.Comp.GeneIndex = Math.Clamp(index, 0, end - 1);
+            ent.Comp.GeneIndex = Math.Clamp(index, 0, len - 1);
             dirty = nameof(PlantAnalyzerComponent.GeneIndex);
         }
         DirtyField(ent, ent.Comp, dirty);
