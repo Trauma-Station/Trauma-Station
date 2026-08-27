@@ -15,8 +15,9 @@
   configuration:
     entity: PolymorphAshJaunt
     forced: true
-    duration: 7
+    duration: 5
     attachToGridOrMap: true
+    showPopup: false
     allowRepeatedMorphs: true
 
 - type: polymorph

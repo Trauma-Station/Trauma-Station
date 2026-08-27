@@ -41,6 +41,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedSacramentsSystem _sacraments = default!;
 
     public static readonly EntProtoId<ProtectiveBladeComponent> BladePrototype = "HereticProtectiveBlade";
     public static readonly EntProtoId BladeProjecilePrototype = "HereticProtectiveBladeProjectile";
@@ -155,7 +156,6 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
         if (session?.AttachedEntity is not { Valid: true } player || !Exists(player) ||
             !coords.IsValid(EntityManager) || !_heretic.IsHereticOrGhoul(player) ||
             !TryComp(player, out ProtectiveBladesComponent? blades) ||
-            IsSacramentsActive(player) ||
             _status.HasStatusEffect(player, blades.BlockShootStatus))
             return false;
 
@@ -168,7 +168,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
 
     private void OnProjectileReflectAttempt(Entity<ProtectiveBladesComponent> ent, ref ProjectileReflectAttemptEvent args)
     {
-        if (args.Cancelled || !RefreshBlades(ent) || IsSacramentsActive(ent))
+        if (args.Cancelled || !RefreshBlades(ent) || _sacraments.ShouldBlockDamage(ent.Owner, args.Component.Shooter))
             return;
 
         foreach (var blade in ent.Comp.Blades)
@@ -187,7 +187,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
 
     private void OnHitscanReflectAttempt(Entity<ProtectiveBladesComponent> ent, ref HitScanReflectAttemptEvent args)
     {
-        if (args.Reflected || !RefreshBlades(ent) || IsSacramentsActive(ent))
+        if (args.Reflected || !RefreshBlades(ent) || _sacraments.ShouldBlockDamage(ent.Owner, args.Shooter))
             return;
 
         foreach (var blade in ent.Comp.Blades)
@@ -215,7 +215,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
 
     private void OnBeforeHarmfulAction(Entity<ProtectiveBladesComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled || !RefreshBlades(ent) || IsSacramentsActive(ent))
+        if (args.Cancelled || !RefreshBlades(ent) || _sacraments.ShouldBlockDamage(ent.Owner, args.User))
             return;
 
         PredictedQueueDel(ent.Comp.Blades[0]);
@@ -227,7 +227,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
 
     private void OnTakeDamage(Entity<ProtectiveBladesComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (args.Cancelled || args.Damage.GetTotal() < 5 || !RefreshBlades(ent) || IsSacramentsActive(ent))
+        if (args.Cancelled || args.Damage.GetTotal() < 5 || !RefreshBlades(ent) || _sacraments.ShouldBlockDamage(ent.Owner, args.Origin))
             return;
 
         PredictedQueueDel(ent.Comp.Blades[0]);
@@ -273,10 +273,5 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
 
         _status.TryUpdateStatusEffectDuration(origin, origin.Comp.BlockShootStatus, out _, origin.Comp.BladeShootDelay);
         return true;
-    }
-
-    private bool IsSacramentsActive(EntityUid uid)
-    {
-        return TryComp(uid, out SacramentsOfPowerComponent? sacraments) && sacraments.State == SacramentsState.Open;
     }
 }
