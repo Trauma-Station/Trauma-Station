@@ -25,6 +25,10 @@
     entity: BarricadePlasteel
     edges:
     - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: SheetPlasteel1
+        amount: 6
       conditions:
       - !type:EntityAnchored
         anchored: false
@@ -37,6 +41,10 @@
     entity: BarricadePlasteelFolding
     edges:
     - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: SheetPlasteel1
+        amount: 8
       conditions:
       - !type:EntityAnchored
         anchored: false
