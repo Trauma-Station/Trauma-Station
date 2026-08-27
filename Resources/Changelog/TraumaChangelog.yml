@@ -13840,3 +13840,10 @@ Entries:
   id: 1509
   time: '2026-08-27T09:13:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4311
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed unused mentor slop.
+  id: 1510
+  time: '2026-08-27T12:54:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4314
