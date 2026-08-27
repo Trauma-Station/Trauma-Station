@@ -34,21 +34,21 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
 
     private void OnAccepted(NetEntity job)
     {
-        SendMessage(new JobListingsAcceptJobMessage(job));
+        SendPredictedMessage(new JobListingsAcceptJobMessage(job));
     }
 
     private void OnClaimed(NetEntity job)
     {
-        SendMessage(new JobListingsClaimJobMessage(job));
+        SendPredictedMessage(new JobListingsClaimJobMessage(job));
     }
 
     private void OnCancelled(NetEntity job)
     {
-        SendMessage(new JobListingsCancelJobMessage(job));
+        SendPredictedMessage(new JobListingsCancelJobMessage(job));
     }
 
     private void OnRefresh()
     {
-        SendMessage(new JobListingsRefreshMessage());
+        SendPredictedMessage(new JobListingsRefreshMessage());
     }
 }

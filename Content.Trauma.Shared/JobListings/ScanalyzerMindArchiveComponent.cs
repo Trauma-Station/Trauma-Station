@@ -2,7 +2,7 @@
 
 using Content.Shared.Objectives;
 
-namespace Content.Trauma.Server.JobListings;
+namespace Content.Trauma.Shared.JobListings;
 
 /// <summary>
 /// The list of grand theft items the scanalyzer has scanned are stored on the traitor's mind.

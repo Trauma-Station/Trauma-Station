@@ -235,6 +235,26 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     }
 
     /// <summary>
+    /// Refresh the job board.
+    /// This has no checks and should only be called if <see cref="CanRefresh"/> returns true.
+    /// This method deletes every job not currently accepted and then assigns jobs until the job board is full.
+    /// The assignment is only done on the server
+    /// </summary>
+    public virtual void Refresh(Entity<JobListingsComponent> jobBoard)
+    {
+        foreach (var job in jobBoard.Comp.AvailableSideJobs)
+        {
+            QueueDel(GetEntity(job));
+        }
+
+        jobBoard.Comp.AvailableSideJobs.Clear();
+        jobBoard.Comp.BonusRefresh = false;
+        DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.BonusRefresh));
+
+        SetRefreshTime(jobBoard);
+    }
+
+    /// <summary>
     /// Work out the level (and therefore title) the traitor should have based on
     /// </summary>
     public int GetReputationLevel(Entity<JobListingsComponent> jobBoard)
@@ -270,43 +290,43 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         OpenUi(pda, msg.Actor);
     }
 
-    // [SubscribeLocalEvent]
-    // private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
-    // {
-    //     if (!GetJobBoard(owner.Owner, out var jobBoard))
-    //         return;
-    //     AcceptSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
-    //     UpdateUi(owner.Owner);
-    // }
+    [SubscribeLocalEvent]
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        AcceptSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
+        UpdateUi(owner.Owner, msg.Actor);
+    }
 
-    // [SubscribeLocalEvent]
-    // private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
-    // {
-    //     if (!GetJobBoard(owner.Owner, out var jobBoard))
-    //         return;
-    //     ClaimSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
-    //     UpdateUi(owner.Owner);
-    // }
+    [SubscribeLocalEvent]
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        ClaimSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
+        UpdateUi(owner.Owner, msg.Actor);
+    }
 
-    // [SubscribeLocalEvent]
-    // private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
-    // {
-    //     if (!GetJobBoard(owner.Owner, out var jobBoard))
-    //         return;
-    //     CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
-    //     UpdateUi(owner.Owner);
-    // }
+    [SubscribeLocalEvent]
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
+        UpdateUi(owner.Owner, msg.Actor);
+    }
 
-    // [SubscribeLocalEvent]
-    // private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
-    // {
-    //     if (!GetJobBoard(owner.Owner, out var jobBoard))
-    //         return;
-    //     if (!CanRefresh(jobBoard.Value))
-    //         return;
-    //     Refresh(jobBoard.Value);
-    //     UpdateUi(owner.Owner);
-    // }
+    [SubscribeLocalEvent]
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        if (!CanRefresh(jobBoard.Value))
+            return;
+        Refresh(jobBoard.Value);
+        UpdateUi(owner.Owner, msg.Actor);
+    }
 }
 
 /// <summary>
@@ -327,15 +347,4 @@ public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = fa
 public sealed class JobListingsUiUpdateMessage(NetEntity owner) : EntityEventArgs
 {
     public readonly NetEntity Owner = owner;
-}
-
-/// <summary>
-/// Networked from server to client to raises the initialisation events on the objective client-side.
-/// They are raised on the server-side but most of it isn't networked.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class JobListingsInitSideJobMessage(NetEntity jobBoard, NetEntity sideJob) : EntityEventArgs
-{
-    public readonly NetEntity JobBoard = jobBoard;
-    public readonly NetEntity SideJob = sideJob;
 }

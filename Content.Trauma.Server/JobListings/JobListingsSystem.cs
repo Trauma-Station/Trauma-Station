@@ -3,11 +3,7 @@
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Speech.Components;
-using Content.Trauma.Common.JobListings;
 using Content.Trauma.Common.Traitor;
-using Content.Trauma.Server.JobListings;
-using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.JobListings;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
@@ -22,6 +18,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <summary>
     /// Assign the store owner a random side job.
     /// When the traitor is assigned their uplink, the traitor's mind becomes the store's owner.
+    /// This has to be server-side because predicting spawning null space entities is not possible.
     /// </summary>
     public bool AssignSideJob(Entity<JobListingsComponent> jobBoard, int effectiveLevel)
     {
@@ -85,7 +82,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             jobBoard.Comp.AvailableSideJobs.Add(GetNetEntity(sideJob));
             DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AvailableSideJobs));
             PVSOverrideEntity((mind, mindComp), sideJob);
-            RaiseNetworkEvent(new JobListingsInitSideJobMessage(GetNetEntity(jobBoard), GetNetEntity(sideJob)), actor.Value);
             return true;
         }
 
@@ -153,23 +149,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         return true;
     }
 
-    /// <summary>
-    /// Refresh the job board.
-    /// This has no checks and should only be called if <see cref="CanRefresh"/> returns true.
-    /// This method deletes every job not currently accepted and then assigns jobs until the job board is full.
-    /// </summary>
-    public void Refresh(Entity<JobListingsComponent> jobBoard)
+    public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
-        foreach (var job in jobBoard.Comp.AvailableSideJobs)
-        {
-            QueueDel(GetEntity(job));
-        }
-
-        jobBoard.Comp.AvailableSideJobs.Clear();
-        jobBoard.Comp.BonusRefresh = false;
-        DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.BonusRefresh));
-
-        SetRefreshTime(jobBoard);
+        base.Refresh(jobBoard);
         FillSideJobs(jobBoard);
     }
 

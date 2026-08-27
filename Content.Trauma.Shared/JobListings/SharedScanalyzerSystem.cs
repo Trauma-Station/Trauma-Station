@@ -3,10 +3,12 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Mind;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.Trigger.Systems;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -20,6 +22,8 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     /// <summary>
     /// Starts the scanning do-after. Does not check if the scan should happen, use <see cref="CanScan"/> before calling this.
@@ -51,9 +55,30 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         return true;
     }
 
-    protected virtual void AfterScan(Entity<ScanalyzerComponent> entity, EntityUid user, ProtoId<StealTargetGroupPrototype> target)
+    /// <summary>
+    /// Determines if the inputted mind has scanned the grand theft item.
+    /// </summary>
+    public bool IsScanned(Entity<MindComponent> mind, ProtoId<StealTargetGroupPrototype> target)
     {
+        if (!TryComp<ScanalyzerMindArchiveComponent>(mind.Owner, out var archive))
+            return false;
+        return archive.ScannedStealTargetGroups.Contains(target);
+    }
 
+    /// <summary>
+    /// Register a grand theft item as scanned.
+    /// </summary>
+    public void RegisterScan(Entity<MindComponent> mind, ProtoId<StealTargetGroupPrototype> target)
+    {
+        var archive = EnsureComp<ScanalyzerMindArchiveComponent>(mind.Owner);
+        if (!archive.ScannedStealTargetGroups.Contains(target))
+            archive.ScannedStealTargetGroups.Add(target);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnScan(Entity<TriggerOnScanComponent> ent, ref ScanalyzerScanFinishedEvent args)
+    {
+        _trigger.Trigger(ent.Owner, args.User, ent.Comp.KeyOut, false);
     }
 
     [SubscribeLocalEvent]
@@ -86,7 +111,10 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         Dirty(ent);
         _popup.PopupClient(Loc.GetString("scanalyzer-popup-used"), args.User, PopupType.Medium);
 
-        AfterScan(ent, args.User, steal.StealGroup);
+        if (!_mind.TryGetMind(args.User, out var mind, out var mindComp))
+            return;
+        RegisterScan((mind, mindComp), steal.StealGroup);
+        // _jobs.UpdateUis((mind, mindComp));
         var ev = new ScanalyzerScanFinishedEvent(args.Target.Value, args.User);
         RaiseLocalEvent(ent, ref ev);
         args.Handled = true;
