@@ -28,9 +28,9 @@ public sealed partial class SideJobControl : Control
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _sprite = _entity.System<SpriteSystem>();
-        // AcceptButton.OnPressed += OnAcceptButtonPressed;
-        // CancelButton.OnPressed += OnCancelButtonPressed;
-        // ClaimButton.OnPressed += OnClaimButtonPressed;
+        AcceptButton.OnPressed += OnAcceptButtonPressed;
+        CancelButton.OnPressed += OnCancelButtonPressed;
+        ClaimButton.OnPressed += OnClaimButtonPressed;
     }
 
     public void UpdateAsAvailable(SideJobInfo info)
