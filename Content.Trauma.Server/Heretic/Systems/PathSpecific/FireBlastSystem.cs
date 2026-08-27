@@ -205,7 +205,6 @@ public sealed partial class FireBlastSystem : EntitySystem
             origin.Comp.FireBlastBeamSprite,
             origin.Comp.FireBlastRange)
         {
-            ShouldCollide = false,
             ReverseBeam = true,
         };
         _joint.CreateJoint(origin, target, data);
