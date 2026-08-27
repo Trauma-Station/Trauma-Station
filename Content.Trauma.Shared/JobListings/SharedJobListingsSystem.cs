@@ -182,6 +182,33 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     public abstract void UpdateUi(EntityUid owner, EntityUid actor);
 
     /// <summary>
+    /// Update all the uis of the remotes (pdas, uplink implants) of a job board.
+    /// </summary>
+    public void UpdateUi(Entity<JobListingsComponent> jobBoard, EntityUid actor)
+    {
+        foreach (var remote in jobBoard.Comp.Remotes)
+        {
+            UpdateUi(GetEntity(remote), actor);
+        }
+    }
+
+    /// <summary>
+    /// Update all the uis of the remotes (pdas, uplink implants) of a job board owned by a particular mind.
+    /// </summary>
+    public void UpdateUi(Entity<MindComponent> mind)
+    {
+        if (mind.Comp.OwnedEntity is null)
+            return;
+        if (!TryComp<JobListingsOwnerComponent>(mind.Owner, out var jobListingsOwnerComp))
+            return;
+        var jobBoard = GetEntity(jobListingsOwnerComp.JobListings);
+        if (!TryComp<JobListingsComponent>(jobBoard, out var jobBoardComp))
+            return;
+
+        UpdateUi((jobBoard, jobBoardComp), mind.Comp.OwnedEntity.Value);
+    }
+
+    /// <summary>
     /// Find a job board from an entity that has a <see cref="RemoteJobListingsComponent"/>.
     /// </summary>
     public bool GetJobBoard(EntityUid owner, [NotNullWhen(true)] out Entity<JobListingsComponent>? jobBoard)

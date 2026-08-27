@@ -24,6 +24,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TriggerSystem _trigger = default!;
+    [Dependency] private SharedJobListingsSystem _jobs = default!;
 
     /// <summary>
     /// Starts the scanning do-after. Does not check if the scan should happen, use <see cref="CanScan"/> before calling this.
@@ -71,8 +72,10 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     public void RegisterScan(Entity<MindComponent> mind, ProtoId<StealTargetGroupPrototype> target)
     {
         var archive = EnsureComp<ScanalyzerMindArchiveComponent>(mind.Owner);
-        if (!archive.ScannedStealTargetGroups.Contains(target))
-            archive.ScannedStealTargetGroups.Add(target);
+        if (archive.ScannedStealTargetGroups.Contains(target))
+            return;
+        archive.ScannedStealTargetGroups.Add(target);
+        Dirty(mind.Owner, archive);
     }
 
     [SubscribeLocalEvent]
@@ -114,7 +117,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         if (!_mind.TryGetMind(args.User, out var mind, out var mindComp))
             return;
         RegisterScan((mind, mindComp), steal.StealGroup);
-        // _jobs.UpdateUis((mind, mindComp));
+        _jobs.UpdateUi((mind, mindComp));
         var ev = new ScanalyzerScanFinishedEvent(args.Target.Value, args.User);
         RaiseLocalEvent(ent, ref ev);
         args.Handled = true;

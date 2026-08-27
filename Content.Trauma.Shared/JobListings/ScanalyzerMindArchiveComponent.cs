@@ -7,12 +7,12 @@ namespace Content.Trauma.Shared.JobListings;
 /// <summary>
 /// The list of grand theft items the scanalyzer has scanned are stored on the traitor's mind.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ScanalyzerMindArchiveComponent : Component
 {
     /// <summary>
     /// List of scanned grand theft items.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<StealTargetGroupPrototype>> ScannedStealTargetGroups = new();
 }

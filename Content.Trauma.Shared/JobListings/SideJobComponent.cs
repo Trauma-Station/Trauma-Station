@@ -42,7 +42,7 @@ public sealed partial class SideJobComponent : Component
 
     /// <summary>
     /// Objective progress is handled server-side.
-    /// Somethings are infact in possible to predict like if someone is alive (because they could be out of PVS).
+    /// Somethings are infact impossible to predict, like if someone is alive (because they could be out of PVS).
     /// The side job can be updated and this will cache and network the progress.
     /// </summary>
     [DataField, AutoNetworkedField]

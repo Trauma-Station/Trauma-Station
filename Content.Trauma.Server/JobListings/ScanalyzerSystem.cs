@@ -1,4 +1,5 @@
 using Content.Server.Objectives.Components;
+using Content.Server.Objectives.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Shared.JobListings;
 
@@ -6,7 +7,7 @@ namespace Content.Trauma.Server.JobListings;
 
 public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
 {
-    [SubscribeLocalEvent]
+    [SubscribeLocalEvent(after: [typeof(StealConditionSystem)])]
     private void OnGetProgress(Entity<StealConditionRequireScanComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0.0f;

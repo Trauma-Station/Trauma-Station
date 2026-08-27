@@ -103,6 +103,6 @@ public sealed partial class BugSystem : EntitySystem
             return;
 
         RegisterBuggedArea((mind, mindComp), entity.Comp.TargetArea);
-        // _jobs.UpdateUis((mind, mindComp));
+        _jobs.UpdateUi((mind, mindComp));
     }
 }
