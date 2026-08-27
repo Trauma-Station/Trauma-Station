@@ -13790,3 +13790,10 @@ Entries:
   id: 1507
   time: '2026-08-27T03:26:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4305
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: SSD people and NPCs no longer fall asleep after 10 minutes.
+  id: 1508
+  time: '2026-08-27T08:00:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4304
