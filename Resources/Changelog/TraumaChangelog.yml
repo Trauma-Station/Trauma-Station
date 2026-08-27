@@ -13847,3 +13847,10 @@ Entries:
   id: 1510
   time: '2026-08-27T12:54:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4314
+- author: q7i9VcWs
+  changes:
+  - type: Fix
+    message: Revs losing no longer spawns ERT
+  id: 1511
+  time: '2026-08-27T13:35:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4315
