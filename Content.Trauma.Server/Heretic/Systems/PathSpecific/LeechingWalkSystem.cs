@@ -47,13 +47,7 @@ public sealed partial class LeechingWalkSystem : EntitySystem
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<LeechingWalkComponent, MapInitEvent>(OnMapInit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<LeechingWalkComponent> ent, ref MapInitEvent args)
     {
         RemCompDeferred<DiseaseCarrierComponent>(ent);
@@ -81,11 +75,8 @@ public sealed partial class LeechingWalkSystem : EntitySystem
             var multiplier = 1f;
             var shouldHeal = true;
             var boneHeal = FixedPoint2.Zero;
-            if (_hereticQuery.TryComp(mindContainer.Mind, out var heretic))
+            if (_hereticQuery.TryComp(mindContainer.Mind, out var heretic) && heretic.CurrentPath == HereticPath.Rust)
             {
-                if (heretic.CurrentPath != HereticPath.Rust)
-                    continue;
-
                 multiplier += heretic.PassiveLevel * 0.5f;
                 if (heretic.Ascended)
                 {
@@ -151,5 +142,4 @@ public sealed partial class LeechingWalkSystem : EntitySystem
             }
         }
     }
-
 }

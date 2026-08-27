@@ -202,9 +202,15 @@ public sealed partial class HereticSystem : SharedHereticSystem
     public override void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative)
     {
         if (negative)
+        {
             EntityManager.RemoveComponents(uid, ev.AddedComponents);
+            Status.RemoveEffects(uid, ev.StatusEffects);
+        }
         else
+        {
             EntityManager.AddComponents(uid, ev.AddedComponents);
+            Status.AddEffects(uid, ev.StatusEffects);
+        }
         ev.Negative = negative;
         ev.Heretic = uid;
         RaiseLocalEvent(uid, (object) ev, true);

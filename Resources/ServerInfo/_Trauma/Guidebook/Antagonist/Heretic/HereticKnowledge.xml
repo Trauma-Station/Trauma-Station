@@ -110,7 +110,7 @@
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Eldritch Coin</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">1 Gold, 1 Silver</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">1 Gold or 1 Silver</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Toggles door bolts or opens/closes doors when flipped.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mysteries of Creation</Box></ColorBox>
@@ -123,7 +123,7 @@
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Utility belt, 3 Rods, Lungs</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides a lot of storage space and recharging shield.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides a lot of storage space, focus and recharging shield.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Carving Knife</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
