@@ -57,10 +57,10 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// <summary>
     /// Cancel an already accepted job.
     /// </summary>
-    public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
+    public virtual void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
         jobBoard.Comp.AcceptedSideJobs.Remove(GetNetEntity(sideJob));
-        QueueDel(sideJob);
+        DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AcceptedSideJobs));
     }
 
     /// <summary>
@@ -172,8 +172,8 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void OpenUi(EntityUid owner, EntityUid actor)
     {
-        Ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
         UpdateUi(owner, actor);
+        Ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
     }
 
     /// <summary>
@@ -238,19 +238,12 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// Refresh the job board.
     /// This has no checks and should only be called if <see cref="CanRefresh"/> returns true.
     /// This method deletes every job not currently accepted and then assigns jobs until the job board is full.
-    /// The assignment is only done on the server
     /// </summary>
     public virtual void Refresh(Entity<JobListingsComponent> jobBoard)
     {
-        foreach (var job in jobBoard.Comp.AvailableSideJobs)
-        {
-            QueueDel(GetEntity(job));
-        }
-
         jobBoard.Comp.AvailableSideJobs.Clear();
         jobBoard.Comp.BonusRefresh = false;
         DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.BonusRefresh));
-
         SetRefreshTime(jobBoard);
     }
 

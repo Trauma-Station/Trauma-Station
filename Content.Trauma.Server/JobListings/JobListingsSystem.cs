@@ -149,9 +149,21 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         return true;
     }
 
+    public override void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
+    {
+        base.CancelSideJob(jobBoard, sideJob);
+        QueueDel(sideJob);
+    }
+
     public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
         base.Refresh(jobBoard);
+
+        foreach (var job in jobBoard.Comp.AvailableSideJobs)
+        {
+            QueueDel(GetEntity(job));
+        }
+
         FillSideJobs(jobBoard);
     }
 

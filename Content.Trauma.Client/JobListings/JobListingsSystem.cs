@@ -20,9 +20,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             bui.Update();
     }
 
-    [SubscribeLocalEvent]
-    private void OnUpdateUi(JobListingsUiUpdateMessage args)
+    [SubscribeNetworkEvent]
+    private void OnUpdateUi(JobListingsUiUpdateMessage msg, EntitySessionEventArgs args)
     {
-        UpdateUi(GetEntity(args.Owner));
+        UpdateUi(GetEntity(msg.Owner));
     }
 }
