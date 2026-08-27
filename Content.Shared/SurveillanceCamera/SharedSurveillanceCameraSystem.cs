@@ -48,7 +48,7 @@ public abstract partial class SharedSurveillanceCameraSystem : EntitySystem
     // TODO: predict the rest of the server side system
     public virtual void SetActive(EntityUid camera, bool setting, SurveillanceCameraComponent? component = null) { }
 
-    protected virtual void OpenSetupInterface(EntityUid uid, EntityUid player, SurveillanceCameraComponent? camera = null) { }
+    public virtual void OpenSetupInterface(EntityUid uid, EntityUid player, SurveillanceCameraComponent? camera = null) { } // Trauma - made public
 }
 
 [Serializable, NetSerializable]

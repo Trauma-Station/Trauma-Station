@@ -194,7 +194,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         UpdateSetupInterface(uid, component);
     }
 
-    protected override void OpenSetupInterface(EntityUid uid, EntityUid player, SurveillanceCameraComponent? camera = null)
+    public override void OpenSetupInterface(EntityUid uid, EntityUid player, SurveillanceCameraComponent? camera = null) // Trauma - made public
     {
         if (!Resolve(uid, ref camera))
             return;
