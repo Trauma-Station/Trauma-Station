@@ -32,20 +32,6 @@
   id: HydroponicsToolClippers
   description: A tool used to take samples from plants.
   components:
-  # <Trauma>
-  - type: Retractor # Same as wirecutters
-    speed: 0.35
-  - type: Hemostat
-    speed: 0.6
-  - type: SurgeryTool
-    startSound:
-      path: /Audio/_Shitmed/Medical/Surgery/retractor1.ogg
-    endSound:
-      path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
-  - type: Tag
-    tags:
-    - HydroponicsToolClippers # for plantbot construction
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/clippers.rsi
     state: icon
@@ -64,11 +50,6 @@
   - type: Tool
     qualities:
     - Shearing
-    # <Trauma>
-    - Cutting
-    useSound:
-      path: /Audio/Items/wirecutter.ogg
-    # </Trauma>
 
 - type: entity
   name: scythe
@@ -76,12 +57,6 @@
   id: HydroponicsToolScythe
   description: A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow.
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: Tool
-  - type: CosmicTransmutable
-    transmuteTo: ScytheCosmicCult # Is in fact a scythe
-  # </Trauma>
   - type: Tool
     qualities:
     - Slicing
@@ -94,13 +69,6 @@
       types:
         Slash: 10
   - type: Item
-    # <Trauma>
-    shape:
-    - 0,0,1,0
-    - 0,1,0,2
-    storedOffset: -5,-5
-    storedRotation: -45
-    # </Trauma>
     size: Normal
   - type: Clothing
     sprite: Objects/Tools/Hydroponics/scythe.rsi
@@ -119,18 +87,6 @@
   id: HydroponicsToolHatchet
   description: A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood.
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: Tool
-  - type: Sharp
-  - type: BoneSaw
-    speed: 0.35
-  - type: SurgeryTool
-    startSound:
-      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
-  - type: CosmicTransmutable
-    transmuteTo: ScytheCosmicCult # erm
-  # </Trauma>
   - type: Tool
     qualities:
     - Slicing
@@ -149,13 +105,6 @@
         Slash: 8
         Piercing: 2
   - type: Item
-    # <Trauma>
-    size: Small
-    shape:
-    - 0,0,1,0
-    - 1,1,1,1
-    storedOffset: 10,0
-    # </Trauma>
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
     storedSprite:
       state: storage
@@ -201,13 +150,6 @@
   parent: BaseStorageItem
   description: A bag for botanists to easily move their huge harvests.
   components:
-  # <Trauma>
-  - type: RelayInteractionStorage
-    whitelist:
-      components:
-      - ProduceMaterialExtractor
-  - type: AntiRottingContainer
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/Equipment/plant_bag.rsi
     state: icon

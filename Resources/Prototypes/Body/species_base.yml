@@ -10,63 +10,21 @@
   id: BaseSpeciesMob
   save: false
   components:
-  # <Trauma>
-  - type: BagAccess
-  - type: Targeting
-  - type: BodyStatus
-  - type: Carriable
-  - type: FootprintOwner
-  - type: CPRTraining # IPCs can try CPR i guess?? it won't work
-  - type: StunVisuals
-  - type: HasJobIcons
-  - type: LanguageSpeaker # all mobs should speak TauCeti unless otherwise specified, to prevent universal.
-    speaks:
-    - TauCetiBasic
-    understands:
-    - TauCetiBasic
-  - type: BloodSplatterer
-  - type: CanEscapeInventory
-  - type: CanBeShadowCocoon
-  - type: Penetratable
-    penetrateDamage: 50
-    damagePenalty: 0.2
-  - type: ExaminableCharacter
-  - type: MindControllable
-  - type: MobState # humanoids can be in softcrit
-    allowedStates:
-    - Alive
-    - SoftCrit
-    - Critical
-    - Dead
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      100: SoftCrit
-      150: Critical
-      200: Dead
-  - type: Tackler
-  - type: CounterAttacker
-  - type: KnowledgeHolder
-  - type: PressureTracker # avoid initial mispredict with PKAs and stuff, might be used by other stuff in the future too
-  - type: WeaponClass
-    class: Unarmed
-    examinable: false
-  #- type: DamageVisuals
-  #  thresholds: [ 10, 20, 30, 50, 70, 100 ]
-  #  targetLayers:
-  #  - "enum.HumanoidVisualLayers.Chest"
-  #  - "enum.HumanoidVisualLayers.Head"
-  #  - "enum.HumanoidVisualLayers.LArm"
-  #  - "enum.HumanoidVisualLayers.LLeg"
-  #  - "enum.HumanoidVisualLayers.RArm"
-  #  - "enum.HumanoidVisualLayers.RLeg"
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: Mobs/Effects/brute_damage.rsi
-  #      color: "#FF0000"
-  #    Burn:
-  #      sprite: Mobs/Effects/burn_damage.rsi
-  # </Trauma>
+  - type: DamageVisuals
+    thresholds: [ 10, 20, 30, 50, 70, 100 ]
+    targetLayers:
+    - "enum.HumanoidVisualLayers.Chest"
+    - "enum.HumanoidVisualLayers.Head"
+    - "enum.HumanoidVisualLayers.LArm"
+    - "enum.HumanoidVisualLayers.LLeg"
+    - "enum.HumanoidVisualLayers.RArm"
+    - "enum.HumanoidVisualLayers.RLeg"
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#FF0000"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: JobStatus
@@ -105,7 +63,7 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
-      Acidic: [Touch, Ingestion, Eyes] # Trauma - added Eyes
+      Acidic: [Touch, Ingestion]
     reactions:
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
@@ -113,12 +71,6 @@
       - !type:WashCreamPie
   - type: StatusEffects
     allowed:
-    # <Trauma>
-    # TODO: replace with status effect entities
-    - Vulgarity
-    - Brainrotted
-    - Dementia
-    # </Trauma>
     - Electrocution
     - Pacified
     - Flashed
@@ -213,35 +165,6 @@
   id: BaseSpeciesMobOrganicUnperishable # Trauma - made unperishable for vox
   save: false
   components:
-  # <Trauma>
-  - type: Absorbable
-  - type: WraithAbsorbable
-  - type: DiseaseCarrier
-  - type: Scent
-  - type: Mutatable
-  - type: Immunity
-    affectedTypes:
-    - Viral
-    - Bacterial
-    - Parasite
-  - type: VampireDrainable
-  - type: Destructible # only ashing, gibbing is still handled by torso
-    thresholds:
-    - trigger: !type:DamageTypeTrigger
-        damageType: Heat
-        damage: 1500
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawnInContainer: true
-        spawn:
-          Ash:
-            min: 1
-            max: 1
-      - !type:BurnBodyBehavior
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MeatLaserImpact
-  # </Trauma>
   - type: Satiation
     satiations:
       Hunger:
@@ -253,22 +176,19 @@
       types:
         Blunt: 0.50
         Heat: 0.1
-  # <Trauma> - go to med or chef chud
-  #- type: PassiveDamage
-  #  intervalHaltOnDamageTaken: 5s
-  #  allowedStates:
-  #  - Alive
-  #  damage:
-  #    types:
-  #      Heat: -0.07
-  #      Blunt: -0.05
-  #      Piercing: -0.05
-  #      Slash: -0.05
-  # </Trauma>
+  - type: PassiveDamage
+    intervalHaltOnDamageTaken: 5s
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -0.07
+        Blunt: -0.05
+        Piercing: -0.05
+        Slash: -0.05
   - type: Fingerprint
   - type: Blindable
   - type: Temperature
-    specificHeat: 300 # Trauma - 10x lower heat capacity so spacing etc doesnt literally do nothing
   - type: TemperatureDamage
     heatDamageThreshold: 325
     coldDamageThreshold: 273.15
@@ -277,7 +197,7 @@
         Cold: 0.1 #per second, scales with temperature & other constants
     heatDamage:
       types:
-        Heat: 1 # Trauma - was 1.5
+        Heat: 1.5 #per second, scales with temperature & other constants
   - type: TemperatureSpeed
     thresholds:
       293: 0.9
@@ -291,13 +211,11 @@
     shiveringHeatRegulation: 2000
     normalBodyTemperature: 310.15
     thermalRegulationTemperatureThreshold: 2
-  #- type: Perishable # Trauma - moved to BaseSpeciesMobOrganic
+  - type: Perishable
   - type: Butcherable
     spawned:
     - id: FoodMeat
       amount: 5
-    - id: MaterialBones1 # Trauma
-      amount: 3
   - type: Respirator
     damage:
       types:

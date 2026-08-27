@@ -40,12 +40,6 @@
   id: FoodProduceBase
   abstract: true
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 2.5 # ow minimum
-  # </Trauma>
   - type: Sprite
     state: produce
   - type: Produce
@@ -199,13 +193,6 @@
   name: tower-cap log
   description: It's better than bad, it's good!
   components:
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Wood: 500
-  - type: StaticPrice
-    price: 50
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/towercap.rsi
   - type: Item
@@ -220,7 +207,7 @@
     qualityNeeded: Sawing
     refineResult:
     - id: MaterialWoodPlank1
-      amount: 5 # Trauma - was 2
+      amount: 2
 
 - type: entity
   parent: [ProduceBase, BaseSlicingRefinable]
@@ -228,13 +215,6 @@
   name: steel-cap log
   description: Steel doesn't grow on trees! It grows on mushrooms, of course.
   components:
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 500 # 5 sheets
-  - type: StaticPrice
-    price: 75
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/steelcap.rsi
   - type: Item
@@ -249,7 +229,6 @@
     qualityNeeded: Sawing
     refineResult:
     - id: SheetSteel1
-      amount: 5 # Trauma - steel costs are so hyperinflated
 
 - type: entity
   parent: ProduceBaseRuminant
@@ -283,7 +262,7 @@
     grindableSolutionName: food
 
 - type: entity
-  parent: [ ProduceBase, BaseMajorContraband, DeathNettleDurability ] # Trauma - added DeathNettleDurability
+  parent: [ ProduceBase, BaseMajorContraband ]
   id: DeathNettle
   name: death nettle
   description: This nettle's out for blood.
@@ -291,19 +270,14 @@
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/death_nettle.rsi
   - type: Item
-    # <Trauma>
-    shape:
-    - 0,1,0,2
-    - 1,0,1,1
-    storedRotation: 90
-    # </Trauma>
     size: Small
     sprite: Objects/Specific/Hydroponics/death_nettle.rsi
     heldPrefix: produce
   - type: MeleeWeapon
     damage:
       types:
-        Caustic: 1 # Trauma - was 8 Heat 8 Caustic
+        Heat: 8
+        Caustic: 8
   - type: Solution
     solution:
       reagents:
@@ -335,21 +309,19 @@
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
-  # <Trauma> - replaced by durability
-  #- type: Destructible
-  #  thresholds:
-  #  - trigger:
-  #      !type:DamageTrigger
-  #      damage: 25
-  #    behaviors:
-  #    - !type:PlaySoundBehavior
-  #      sound:
-  #        path: /Audio/Voice/Diona/diona_salute.ogg
-  #        params:
-  #          volume: -5
-  #    - !type:DoActsBehavior
-  #      acts: [ "Destruction" ]
-  # </Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Voice/Diona/diona_salute.ogg
+          params:
+            volume: -5
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: DamageOnHit
     damage:
       types:
@@ -361,31 +333,6 @@
   id: FoodBanana
   description: Rich in potassium.
   components:
-  # <Trauma>
-  - type: EntityEffectOnEaten
-    effects:
-    - !type:AddComponents
-      components:
-      - type: EggFertilizer
-        specialReplacement: MobChickClown
-    entityWhitelist:
-    - MobWhiteRooster
-  - type: Healing # Bananas heal clown car
-    damageContainers:
-    - ClowncarDamageContainer
-    damage:
-      types:
-        Blunt: -50
-        Slash: -50
-        Piercing: -50
-        Ballistic: -50
-        Heat: -10
-        Shock: -10
-    healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
-    healingEndSound:
-      path: "/Audio/Items/Medical/brutepack_end.ogg"
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - banana
@@ -483,9 +430,6 @@
     heldPrefix: peel
   - type: Slippery
   - type: StepTrigger
-    triggerGroups:
-      types: [ SlipEntity ]
-    # </Trauma>
     intersectRatio: 0.2
   - type: CollisionWake
     enabled: false
@@ -509,9 +453,6 @@
         - ItemMask
   - type: Tag
     tags:
-    # <Trauma>
-    - RotHulkTrash
-    # </Trauma>
     - Recyclable
     - Trash
     - BananaPeel
@@ -586,14 +527,14 @@
   name: bananium peel
   components:
   - type: Sprite
-    sprite: &trauma_materials _Trauma/Objects/Materials/materials.rsi # Trauma
+    sprite: Objects/Materials/materials.rsi
     state: peel
   - type: Item
-    sprite: *trauma_materials # Trauma
+    sprite: Objects/Materials/materials.rsi
     heldPrefix: peel
   - type: Slippery
   - type: Clothing
-    sprite: *trauma_materials # Trauma
+    sprite: Objects/Materials/materials.rsi
     equippedPrefix: peel
 
 - type: entity
@@ -642,12 +583,6 @@
   id: FoodCabbage
   description: Ewwwwwwwwww. Cabbage.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 # ow
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - cabbage
@@ -676,7 +611,7 @@
 
 - type: entity
   name: garlic
-  parent: [ Garlic, FoodProduceBase ] # Trauma - added garlic
+  parent: FoodProduceBase
   id: FoodGarlic
   description: Delicious, but with a potentially overwhelming odor.
   components:
@@ -899,13 +834,6 @@
   id: FoodPineapple
   description: Mmm, tropical.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 2.5 # ow
-        Slash: 2.5 # but bleeding!
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - pineapple
@@ -1014,7 +942,6 @@
         acts: [ "Destruction" ]
   - type: Tag
     tags:
-    - Tomato # Trauma
     - Fruit
     - Vegetable
   - type: FoodSequenceElement
@@ -1137,7 +1064,6 @@
     plantId: EggplantPlants
   - type: Tag
     tags:
-    - EggPlant # Trauma
     - Fruit
     - Vegetable
 
@@ -1147,12 +1073,6 @@
   id: FoodApple
   description: It's a little piece of Eden.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 # ow
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - apple
@@ -1178,7 +1098,6 @@
         Quantity: 10
   - type: Tag
     tags:
-    - Apple # Trauma
     - Fruit
   - type: FoodSequenceElement
     entries:
@@ -1191,13 +1110,6 @@
   id: FoodGoldenApple
   description: It should be shaped like a cube, shouldn't it?
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5 # ow
-        Holy: 5 # lol
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - apple
@@ -1547,7 +1459,6 @@
     plantId: ChiliPlants
   - type: Tag
     tags:
-    - Chili # Trauma
     - Vegetable
   - type: FoodSequenceElement
     entries:
@@ -1561,11 +1472,6 @@
   id: FoodChillyPepper
   description: Icy hot.
   components:
-  # <Trauma>
-  - type: Tag
-    tags:
-    - Chilly
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - spicy
@@ -1639,10 +1545,6 @@
   - type: Solution
     solution:
       reagents:
-      # <Trauma>
-      - ReagentId: Heroin
-        Quantity: 2
-      # </Trauma>
       - ReagentId: Nutriment
         Quantity: 5
       - ReagentId: Bicaridine
@@ -1655,7 +1557,6 @@
     grindableSolutionName: food
   - type: Tag
     tags:
-    - Poppy # Trauma
     - Flower # TODO add "RedFlower" or "Poppy" tag, when other color flowers will be
   - type: FoodSequenceElement
     entries:
@@ -1842,11 +1743,6 @@
   id: FoodGlasstle
   description: A fragile crystal plant with lot of spiky thorns.
   components:
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Glass: 500 # 5 sheets, same as from welding it
-  # </Trauma>
   - type: Item
     size: Small
     sprite: Objects/Specific/Hydroponics/glasstle.rsi
@@ -1872,7 +1768,7 @@
     damageContainer: Inorganic
   - type: ToolRefinable
     refineResult:
-    - id: SheetGlass5 # Trauma - 5x so its not a total waste of time making it
+    - id: SheetGlass1
   - type: Destructible
     thresholds:
     - trigger:
@@ -1949,17 +1845,6 @@
   id: FoodGatfruit
   description: A delicious, gun-shaped fruit with a thick wooden stem.
   components:
-  # <Trauma>
-  - type: Item
-    size: Small
-    sprite: Objects/Specific/Hydroponics/death_nettle.rsi # W speed
-    heldPrefix: produce
-    shape:
-    - 0,1,2,1
-    - 0,0,0,0
-    storedRotation: 270
-    storedOffset: -5,5
-  # </Trauma>
   - type: FlavorProfile
     flavors:
       - gunpowder
@@ -2049,11 +1934,6 @@
   id: RiceBushel
   parent: ProduceBaseRuminant
   components:
-  # <Trauma>
-  - type: Tag
-    tags:
-    - Rice
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/rice.rsi
   - type: Item
@@ -2168,12 +2048,6 @@
   id: FoodWatermelon
   description: Round green object that you can slice and eat.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 15 # PvZ parity
-  # </Trauma>
   - type: Item
     size: Normal
     heldPrefix: produce
@@ -2280,13 +2154,6 @@
   id: FoodHolymelon
   description: The water within this melon has been blessed by some deity that's particularly fond of watermelon.
   components:
-  # <Trauma>
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 15 # PVZ Parity
-        Holy: 10 # really good against devils and... *checks notes* ...devils
-  # </Trauma>
   - type: Item
     size: Normal
     heldPrefix: produce
@@ -2496,7 +2363,7 @@
 
 - type: entity
   name: bungo pit
-  parent: FoodUnperishableInjectableBase # Trauma - was FoodInjectableBase, its a seed
+  parent: FoodInjectableBase
   id: FoodBungoPit
   components:
   - type: Sprite
@@ -2545,7 +2412,6 @@
     plantId: PeaPlants
   - type: Tag
     tags:
-    - Peas # Trauma
     - Vegetable
   - type: FoodSequenceElement
     entries:
@@ -2568,7 +2434,7 @@
         Quantity: 5
       - ReagentId: Nutriment
         Quantity: 5
-      - ReagentId: Tilenol # Trauma - was Pax
+      - ReagentId: Pax
         Quantity: 5
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/world_pea.rsi
@@ -2784,7 +2650,7 @@
       - ReagentId: Vitamin
         Quantity: 3.5
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # Trauma
+    sprite: Objects/Specific/Hydroponics/cherry.rsi
   - type: Produce
     plantId: CherryPlants
   - type: Extractable
@@ -2802,14 +2668,14 @@
 
 - type: entity
   name: cherry pit
-  parent: FoodUnperishableInjectableBase # Trauma - was FoodInjectableBase, its a seed
+  parent: FoodInjectableBase
   id: TrashCherryPit
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # Trauma
+    sprite: Objects/Specific/Hydroponics/cherry.rsi
     state: pit
   - type: Item
-    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # Trauma
+    sprite: Objects/Specific/Hydroponics/cherry.rsi
     heldPrefix: pit
     size: Tiny
   - type: Tag

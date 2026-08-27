@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseSpeciesMob
+  components:
+  - type: BagAccess
+  - type: Targeting
+  - type: BodyStatus
+  - type: Carriable
+  - type: FootprintOwner
+  - type: CPRTraining # IPCs can try CPR i guess?? it won't work
+  - type: StunVisuals
+  - type: HasJobIcons
+  - type: LanguageSpeaker # all mobs should speak TauCeti unless otherwise specified, to prevent universal.
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: BloodSplatterer
+  - type: CanEscapeInventory
+  - type: CanBeShadowCocoon
+  - type: Penetratable
+    penetrateDamage: 50
+    damagePenalty: 0.2
+  - type: ExaminableCharacter
+  - type: MindControllable
+  - type: MobState # humanoids can be in softcrit
+    allowedStates:
+    - Alive
+    - SoftCrit
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: SoftCrit
+      150: Critical
+      200: Dead
+  - type: Tackler
+  - type: CounterAttacker
+  - type: KnowledgeHolder
+  - type: PressureTracker # avoid initial mispredict with PKAs and stuff, might be used by other stuff in the future too
+  - type: WeaponClass
+    class: Unarmed
+    examinable: false
+  - !Remove type: DamageVisuals # woundable visuals used instead
+  - type: Reactive
+    groups:
+      Acidic:
+      - Eyes
+  - type: StatusEffects
+    allowed:
+    # TODO: replace with status effect entities
+    - Vulgarity
+    - Brainrotted
+    - Dementia
+
+- type: entity
+  id: BaseSpeciesMobOrganicUnperishable
+  components:
+  - type: Absorbable
+  - type: WraithAbsorbable
+  - type: DiseaseCarrier
+  - type: Scent
+  - type: Mutatable
+  - type: Immunity
+    affectedTypes:
+    - Viral
+    - Bacterial
+    - Parasite
+  - type: VampireDrainable
+  - type: Destructible # only ashing, gibbing is still handled by torso
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
+  - type: Temperature
+    specificHeat: 300 # 10x lower heat capacity so spacing etc doesnt literally do nothing
+  - type: TemperatureDamage
+    heatDamage:
+      types:
+        Heat: 1
+  - type: Butcherable
+    spawned:
+    - id: MaterialBones1
+      amount: 3
+  - !Remove type: PassiveDamage # go to med or eat food
+  - !Remove type: Perishable # moved to BaseSpeciesMobOrganic
