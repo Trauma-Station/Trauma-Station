@@ -1,9 +1,11 @@
+// <Trauma>
+using Content.Shared.Timing;
+// </Trauma>
 using Content.Shared.Database;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
-using Content.Shared.Timing;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
