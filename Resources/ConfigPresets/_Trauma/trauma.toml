@@ -31,3 +31,6 @@ explosion_damage_modifier = 0.3
 
 [biomass]
 easy_mode = false # woodchipper is actually dangerous
+
+[ic]
+ssd_sleep = false # chuddy and doesnt account for NPCs

@@ -332,8 +332,6 @@
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
   # <Trauma>
-  - type: NewAntagOrEvac
-    event: SpawnERTSecurity
   - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
   # </Trauma>
   - type: GameRule

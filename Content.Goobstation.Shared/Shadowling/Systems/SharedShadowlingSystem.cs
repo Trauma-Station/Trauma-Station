@@ -206,6 +206,12 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
             return false;
         }
 
+        if (!CanGlare(target))
+        {
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-cant-be-controlled"), uid, uid, PopupType.SmallCaution);
+            return false;
+        }
+
         // Target needs to be alive
         if (!TryComp<MobStateComponent>(target, out var mobState)
             || !_mobStateSystem.IsCritical(target, mobState) && !_mobStateSystem.IsCritical(target, mobState))

@@ -95,6 +95,23 @@
     animationThreshold: 150
 
 - type: entity
+  id: BaseMobHereticSummonFiery
+  abstract: true
+  components:
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water, Holywater ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 1
+
+- type: entity
   id: BaseMobHereticGhoul
   abstract: true
   components:
@@ -375,7 +392,7 @@
       130: Dead
 
 - type: entity
-  parent: [BaseMobHereticSummon, FlyingMobBase]
+  parent: [BaseMobHereticSummonFiery, BaseMobHereticSummon, FlyingMobBase]
   id: MobGhoulFireSharkBase
   name: fire shark
   description: It is a eldritch dwarf space shark, also known as a fire shark.
@@ -468,7 +485,7 @@
         Piercing: 8
 
 - type: entity
-  parent: [BaseMobHereticSummon, FlyingMobBase, MobNightVision]
+  parent: [BaseMobHereticSummonFiery, BaseMobHereticSummon, FlyingMobBase, MobNightVision]
   id: MobGhoulAshSpiritBase
   name: ash spirit
   description: A manifestation of ash, trailing a perpetual cloud of short-lived cinders.
@@ -497,7 +514,7 @@
         volume: -5
     damage:
       types:
-        Heat: 6
+        Heat: 4
     effects:
     - !type:Flammable
       multiplier: 2
@@ -571,6 +588,7 @@
   - MobFlammable
   - MobAtmosExposed
   - MobPolymorphable
+  - MobNightVision
   abstract: true
   id: MobGhoulRustWalkerBase
   name: rust walker

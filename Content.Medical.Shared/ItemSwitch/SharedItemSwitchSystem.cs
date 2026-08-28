@@ -269,7 +269,7 @@ public abstract partial class SharedItemSwitchSystem : EntitySystem
             return;
 
         var count = _battery.GetRemainingUses(ent.Owner, state.EnergyPerUse);
-        args.PushMarkup(Loc.GetString("melee-battery-examine", ("color", "yellow"), ("count", count)));
+        args.PushMarkup(Loc.GetString("examine-battery-hits-left", ("color", "yellow"), ("count", count)));
     }
 
     protected void CheckPowerAndSwitchState(Entity<ItemSwitchComponent> ent)

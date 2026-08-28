@@ -31,11 +31,11 @@
     maxCharge: 1500
     startingCharge: 1500
   - type: ApcBatteryCharger
-    idleLoad: 100
-    drawRate: 3000 # charges the battery at 30 W
-    efficiency: 0.01 # crazy high 1% efficiency for converting energy to matter
+    idleLoad: 800
+    drawRate: 1000 # charges the battery at 30 W
+    efficiency: 0.03 # crazy high 3% efficiency for converting energy to matter
   - type: ApcPowerReceiver
-    powerLoad: 100
+    powerLoad: 800
   - type: ExtensionCableReceiver
   - type: Anchorable
   - type: Pullable

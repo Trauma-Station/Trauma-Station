@@ -437,7 +437,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         }
 
         // <Trauma>
-        var tookEv = new TookStaminaDamageEvent(uid, value);
+        var tookEv = new TookStaminaDamageEvent(uid, source, value);
         RaiseLocalEvent(uid, ref tookEv);
         // </Trauma>
 
