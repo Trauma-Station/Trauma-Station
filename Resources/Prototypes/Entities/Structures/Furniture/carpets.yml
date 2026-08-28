@@ -146,9 +146,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/green_carpet.rsi
+    sprite: _Trauma/Structures/Furniture/Carpets/green_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/green_carpet.rsi
+    sprite: _Trauma/Structures/Furniture/Carpets/green_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger:
