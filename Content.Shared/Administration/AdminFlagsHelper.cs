@@ -65,9 +65,7 @@ namespace Content.Shared.Administration
             foreach (var name in names)
             {
                 if (!NameFlagsMap.TryGetValue(name, out var value))
-                {
-                    throw new ArgumentException($"Invalid admin flag name: {name}");
-                }
+                    continue; // Trauma - ignore unknown flags instead of fucking throwing
 
                 flags |= value;
             }
@@ -86,7 +84,7 @@ namespace Content.Shared.Administration
         /// </exception>
         public static AdminFlags NameToFlag(string name)
         {
-            return NameFlagsMap[name];
+            return NameFlagsMap.GetValueOrDefault(name); // Trauma - don't throw for unknown flags
         }
 
         /// <summary>
