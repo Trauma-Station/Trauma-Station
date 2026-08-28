@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Administration.Logs;
@@ -19,7 +19,7 @@ namespace Content.Trauma.Server.ReactiveArmour;
 /// </summary>
 public sealed partial class ReactiveArmourSystem : EntitySystem
 {
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private RandomTeleportSystem _teleport = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -48,9 +48,11 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
         if (ent.Comp.ArmourBehavior == null)
             return;
 
-        var tmp = _random.NextFloat(0.0f, 1.0f);
-        if (tmp < ent.Comp.ActivationChance)
+        if (_timing.CurTime < ent.Comp.LastActivated + ent.Comp.ActivationDelay)
+        {
+            Console.WriteLine($"REACTIVE ARMOUR: only {_timing.CurTime - ent.Comp.LastActivated} seconds passed");
             return;
+        }
 
         if (ent.Comp.ArmourBehavior == "Teleport"){ // bs core
             _audio.PlayPredicted(ent.Comp.DepartureSound, ent, null);
@@ -67,14 +69,14 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
             _lightning.ShootRandomLightnings(ent, ent.Comp.LightningRange, ent.Comp.LightningBoltCount);
             _adminLog.Add(LogType.Action, LogImpact.Low, $"{ent:actor} shoot lightnings due to wearing reacive armour");
         }
-        if (ent.Comp.ArmourBehavior == "Cloack"){ // shadow core
 
-        }
-        if (ent.Comp.ArmourBehavior == "Repulsive"){ // grav core
 
-        }
 
+        // cloac - shadow core
+        // repulsive - grav core
         // Reactive Incendiary Armor - Sets the wearer on fire {trollface} - pyro core
+
+        ent.Comp.LastActivated = _timing.CurTime;
     }
 
 }

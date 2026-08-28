@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [ ClothingOuterArmorBase]
+  parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReactiveBase
   components:
   - type: Sprite
@@ -10,8 +10,8 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Armor/reactive.rsi
 
-  - type: entity
-  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveUnfinished
   name: unfinished reactive armour
   suffix: empty
@@ -38,7 +38,7 @@
 
 
 - type: entity
-  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveTeleport
   name: reactive teleport armour
   description: Reactive armour with bluespace core in it.
@@ -49,7 +49,7 @@
       armourBehavior: Teleport
 
 - type: entity
-  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveTesla
   name: reactive tesla armour
   description: Reactive armour with tesla core in it.

@@ -16,7 +16,9 @@ public sealed partial class ReactiveArmourComponent : Component
     public string ArmourBehavior;
 
     [DataField]
-    public float ActivationChance = .5f;
+    public TimeSpan ActivationDelay = TimeSpan.FromSeconds(5);
+
+    public TimeSpan LastActivated = TimeSpan.FromSeconds(0);
 
     // Teleport
     [DataField]
