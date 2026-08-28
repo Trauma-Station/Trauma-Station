@@ -13854,3 +13854,10 @@ Entries:
   id: 1511
   time: '2026-08-27T13:35:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4315
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenoborg deflector fields letting lasers pass through them.
+  id: 1512
+  time: '2026-08-28T07:25:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4325
