@@ -289,7 +289,7 @@ public sealed class ActionButton : Control, IEntityControl
     {
         _controller ??= UserInterfaceManager.GetUIController<ActionUIController>();
         if (Action != null ||
-            _controller.IsDragging && GetPositionInParent() == Parent?.ChildCount - 1)
+            _controller.IsDragging && Parent is { } parent && GetPositionInParent() == parent.ChildCount - 1) // Trauma - null check for parent
         {
             Button.Texture = _slotBackground;
         }
