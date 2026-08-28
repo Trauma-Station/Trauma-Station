@@ -13861,3 +13861,16 @@ Entries:
   id: 1512
   time: '2026-08-28T07:25:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4325
+- author: Mr_Samuel
+  changes:
+  - type: Fix
+    message: Gemini holograms no longer appear as a solid square.
+  - type: Fix
+    message: Gemini holograms can no longer be mutated.
+  - type: Fix
+    message: >-
+      SmartEquip of Gemini no longer instantly unequips clothing with an unequip
+      delay.
+  id: 1513
+  time: '2026-08-28T18:47:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4330
