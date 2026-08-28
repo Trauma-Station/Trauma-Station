@@ -45,6 +45,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
         _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
         _interaction = sysManager.GetEntitySystem<SharedInteractionSystem>();
         _popup = sysManager.GetEntitySystem<SharedPopupSystem>();
+        _harvest = sysManager.GetEntitySystem<PlantHarvestSystem>();
         _holder = sysManager.GetEntitySystem<PlantHolderSystem>();
         _tray = sysManager.GetEntitySystem<PlantTraySystem>();
     }

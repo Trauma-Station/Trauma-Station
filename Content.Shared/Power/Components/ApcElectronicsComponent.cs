@@ -1,4 +1,4 @@
-namespace Content.Server.Power.Components
+namespace Content.Shared.Power.Components // Trauma - moved to shared
 {
     /// <summary>
     /// This object is an APC electronics, used for constructing APCs
