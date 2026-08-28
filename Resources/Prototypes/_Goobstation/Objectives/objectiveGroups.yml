@@ -13,7 +13,7 @@
     LingCMOHyposprayStealObjective: 1
     LingCMORapidSyringeGunStealObjective: 1
     LingRDHardsuitStealObjective: 1
-    LingRDTeleportArmourStealObjective: 1 # Trauma
+    LingRDTeleportArmourStealObjective: 1
     LingNukeDiskStealObjective: 1
     LingMagbootsStealObjective: 1
     LingCorgiMeatStealObjective: 1

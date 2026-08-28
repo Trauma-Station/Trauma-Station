@@ -12,7 +12,7 @@ using Content.Trauma.Shared.Projectiles;
 using System;
 
 
-namespace Content.Server.Trauma.ReactiveArmour;
+namespace Content.Trauma.Server.ReactiveArmour;
 
 /// <summary>
 /// Handles behavior of reactive armour

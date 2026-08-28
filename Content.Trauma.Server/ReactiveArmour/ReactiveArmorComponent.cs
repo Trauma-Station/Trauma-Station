@@ -4,7 +4,7 @@ using Content.Shared.Destructible.Thresholds;
 using Robust.Shared.Audio;
 
 
-namespace Content.Server.Trauma.ReactiveArmour;
+namespace Content.Trauma.Server.ReactiveArmour;
 
 /// <summary>
 /// Component that is given to mob upon wearing reactive armour

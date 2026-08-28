@@ -4,7 +4,6 @@
   abstract: true
   parent: [ ClothingOuterArmorBase]
   id: ClothingOuterArmorReactiveBase
-  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Armor/reactive.rsi
@@ -12,10 +11,10 @@
     sprite: _Trauma/Clothing/Armor/reactive.rsi
 
   - type: entity
-  abstract: true
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
   id: ClothingOuterArmorReactiveUnfinished
   name: unfinished reactive armour
+  suffix: empty
   description: This one needs an anomaly core.
   components:
   - type: Sprite
@@ -24,10 +23,10 @@
     sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
 
 - type: entity
-  abstract: true
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
   id: ClothingOuterArmorReactiveRD
   name: reactive teleport armour
+  suffix: RD
   description: Someone separated our Research Director from his own head!
   components:
   - type: StealTarget
@@ -39,7 +38,6 @@
 
 
 - type: entity
-  abstract: true
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
   id: ClothingOuterArmorReactiveTeleport
   name: reactive teleport armour
@@ -51,7 +49,6 @@
       armourBehavior: Teleport
 
 - type: entity
-  abstract: true
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
   id: ClothingOuterArmorReactiveTesla
   name: reactive tesla armour
