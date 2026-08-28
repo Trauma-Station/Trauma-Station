@@ -240,7 +240,9 @@ public sealed partial class SmartEquipSystem : EntitySystem
             return;
         }
 
-        _inventory.TryUnequip(uid, equipmentSlot, inventory: inventory, predicted: true, checkDoafter: true);
+        if (!_inventory.TryUnequip(uid, equipmentSlot, inventory: inventory, predicted: true, checkDoafter: true)) // Trauma - don't pickup if unequip started a doafter
+            return;
+
         _hands.TryPickup(uid, slotItem, handsComp: hands);
     }
 }
