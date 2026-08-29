@@ -13909,3 +13909,10 @@ Entries:
   id: 1518
   time: '2026-08-29T09:26:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4351
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fix charge batong
+  id: 1519
+  time: '2026-08-29T11:17:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4354
