@@ -26,7 +26,8 @@ public sealed partial class JobListingsSystem
         if (roll <= ent.Comp.CurrencyChance)
         {
             sideJobComp.Reward = ent.Comp.CurrencyReward;
-            sideJobComp.RewardName = Loc.GetString(ent.Comp.CurrencyName);
+            Loc.TryGetString(ent.Comp.CurrencyName, out var name);
+            sideJobComp.RewardName = Loc.GetString(name ?? ent.Comp.CurrencyName);
         }
         else
         {
@@ -34,14 +35,15 @@ public sealed partial class JobListingsSystem
             var entryId = ent.Comp.UplinkRewards[index];
             var entry = ProtoMan.Index(entryId);
 
-            if (entry.ProductEntity is not { } reward || entry.Name is not { } name)
+            if (entry.ProductEntity is not { } reward || entry.Name is not { } rawName)
             {
                 args.Cancelled = true;
                 return;
             }
 
             sideJobComp.Reward = reward;
-            sideJobComp.RewardName = Loc.GetString(name);
+            Loc.TryGetString(rawName, out var name);
+            sideJobComp.RewardName = Loc.GetString(name ?? rawName);
         }
 
         DirtyFields(ent, sideJobComp, null, [nameof(SideJobComponent.Reward), nameof(SideJobComponent.RewardName)]);
