@@ -16,6 +16,13 @@ public sealed partial class SideJobComponent : Component
     public EntProtoId? Reward;
 
     /// <summary>
+    /// The real name of the reward entity.
+    /// The entity name is often disguised (like stealth box being called 'cardboard box') so we take the real name from the uplink entry.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public string? RewardName;
+
+    /// <summary>
     /// The entity spawned when the side job is accepted, to be used to complete the job.
     /// For example, it could be a bug that must be planted in an office.
     /// </summary>

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.JobListings;
 
 namespace Content.Trauma.Server.JobListings;
@@ -14,21 +15,36 @@ public sealed partial class JobListingsSystem
     [SubscribeLocalEvent]
     private void OnCreatedWithReward(Entity<GenerateSideJobRewardComponent> ent, ref SideJobCreatedEvent args)
     {
-        if (!ProtoMan.Resolve(ent.Comp.RewardTable, out var table))
+        if (!TryComp<SideJobComponent>(ent, out var sideJobComp))
         {
             args.Cancelled = true;
             return;
         }
 
-        var reward = Table.GetSpawns(table).FirstOrNull();
-        if (reward is null || !TryComp<SideJobComponent>(ent.Owner, out var sideJobComp))
+        var random = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(ent));
+        var roll = random.NextFloat();
+        if (roll <= ent.Comp.CurrencyChance)
         {
-            args.Cancelled = true;
-            return;
+            sideJobComp.Reward = ent.Comp.CurrencyReward;
+            sideJobComp.RewardName = Loc.GetString(ent.Comp.CurrencyName);
+        }
+        else
+        {
+            var index = random.Next(ent.Comp.UplinkRewards.Count);
+            var entryId = ent.Comp.UplinkRewards[index];
+            var entry = ProtoMan.Index(entryId);
+
+            if (entry.ProductEntity is not { } reward || entry.Name is not { } name)
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            sideJobComp.Reward = reward;
+            sideJobComp.RewardName = Loc.GetString(name);
         }
 
-        sideJobComp.Reward = reward.Value;
-        DirtyField(ent.Owner, sideJobComp, nameof(SideJobComponent.Reward));
+        DirtyFields(ent, sideJobComp, null, [nameof(SideJobComponent.Reward), nameof(SideJobComponent.RewardName)]);
     }
 
     [SubscribeLocalEvent]
@@ -36,6 +52,5 @@ public sealed partial class JobListingsSystem
     {
         if (args.EffectiveLevel != ent.Comp.Level)
             args.Cancelled = true;
-
     }
 }

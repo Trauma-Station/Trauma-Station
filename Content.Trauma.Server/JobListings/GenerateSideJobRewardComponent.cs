@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityTable;
+using Content.Shared.Store;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -11,8 +12,27 @@ namespace Content.Trauma.Server.JobListings;
 public sealed partial class GenerateSideJobRewardComponent : Component
 {
     /// <summary>
-    /// A table to pick the reward from.
+    /// A prototype for telecrystals as the main reward.
     /// </summary>
-    [DataField]
-    public ProtoId<EntityTablePrototype> RewardTable;
+    [DataField(required: true)]
+    public EntProtoId CurrencyReward;
+
+    /// <summary>
+    /// The chance that the reward is currency. If it is not then an item is taken from a list of uplink entries.
+    /// </summary>
+    [DataField(required: true)]
+    public float CurrencyChance;
+
+    /// <summary>
+    /// The real name of the currency, including a number.
+    /// The entity name will always just be 'telecrystals' and you would not know how much you are getting.
+    /// </summary>
+    [DataField(required: true)]
+    public string CurrencyName;
+
+    /// <summary>
+    /// A list of uplink entries for an alternative reward.
+    /// </summary>
+    [DataField(required: true)]
+    public List<ProtoId<ListingPrototype>> UplinkRewards;
 }

@@ -26,7 +26,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedUserInterfaceSystem Ui = default!;
     [Dependency] protected SharedMindSystem Mind = default!;
-    [Dependency] protected EntityTableSystem Table = default!;
     [Dependency] protected SharedHandsSystem Hands = default!;
     [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
     [Dependency] private INetManager _net = default!;
@@ -117,7 +116,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
             return false;
         if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
             return false;
-        if (sideJobComp.Reward is null)
+        if (sideJobComp.Reward is null || sideJobComp.RewardName is null)
             return false;
         if (objectiveComp.Icon is null)
             return false;
@@ -127,7 +126,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         var title = meta.EntityName;
         var description = meta.EntityDescription;
         var icon = objectiveComp.Icon;
-        var rewardName = Loc.GetString($"job-listings-ui-reward-name-{sideJobComp.Reward.Value}");
+        var rewardName = sideJobComp.RewardName;
         info = new SideJobInfo(GetNetEntity(sideJob), sideJobComp.CachedProgress, title, description, icon, rewardName, sideJobComp.ReputationGain);
         return true;
     }

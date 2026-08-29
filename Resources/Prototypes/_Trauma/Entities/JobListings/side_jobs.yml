@@ -9,6 +9,7 @@
     difficulty: 1
   - type: SideJob
 
+
 # minor
 - type: entity
   abstract: true
@@ -20,7 +21,24 @@
   - type: LevelRestrictedSideJob
     level: 0
   - type: GenerateSideJobReward
-    rewardTable: MinorSideJobRewards
+    currencyReward: Telecrystal7
+    currencyName: 7 tc
+    currencyChance: 0.66
+    uplinkRewards:
+    - UplinkLubeGrenade
+    - UplinkPizzaBomb
+    - UplinkExplosiveGrenade
+    - UplinkHypopen
+    - UplinkCombatMedipen
+    - UplinkSyndicateBombFake
+    - UplinkToolbox
+    - UplinkSyndicateJawsOfLife
+    - UplinkCameraBug
+    - UplinkFreedomImplanter
+    - UplinkEmpImplanter
+    - UplinkVoiceMaskImplant
+    - UplinkClothingNoSlipsShoes
+    - UplinkClothingShoesBootsMagSyndie
 
 # minor - bug area
 - type: entity
@@ -87,6 +105,7 @@
   - type: SideJob
     tool: SyndicateBugQm
 
+
 # major
 - type: entity
   abstract: true
@@ -98,7 +117,21 @@
   - type: LevelRestrictedSideJob
     level: 1
   - type: GenerateSideJobReward
-    rewardTable: MajorSideJobRewards
+    currencyReward: Telecrystal10
+    currencyName: 10 tc
+    currencyChance: 0.66
+    uplinkRewards:
+    - UplinkAgentIDCard
+    - UplinkSarinGasGrenade
+    - UplinkStealthBox
+    - UplinkSyndicateLollypopBundle
+    - UplinkChameleonProjector
+    - UplinkRadioJammer
+    - UplinkDnaScramblerImplant
+    - UplinkClusterBananaPeel
+    - UplinkCigarettesCarton
+    - UplinkFakeMindshield
+    - UplinkMicroBombImplanter
 
 # major - grant theft
 - type: entity
@@ -192,7 +225,15 @@
   - type: LevelRestrictedSideJob
     level: 2
   - type: GenerateSideJobReward
-    rewardTable: ExtremeSideJobRewards
+    currencyReward: Telecrystal15
+    currencyName: 15 tc
+    currencyChance: 0.66
+    uplinkRewards:
+    - UplinkExperimentalSyndicateTeleporter
+    - UplinkSingularityGrenade
+    - UplinkAccessBreaker
+    - UplinkEmag
+    - UplinkDisposableTurret
 
 # extreme - kill head
 - type: entity
@@ -225,6 +266,7 @@
   - type: SideJob
     reputationGain: 10000
     reward: SyndicateFinalReward
+    rewardName: syndicate lifetime achievement award
   - type: LevelRestrictedSideJob
     level: 3
 
