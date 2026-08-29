@@ -11,7 +11,7 @@
     sprite: _Trauma/Clothing/Armor/reactive.rsi
 
 - type: entity
-  parent: ClothingOuterArmorReactiveBase
+  parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReactiveUnfinished
   name: unfinished reactive armour
   suffix: empty
@@ -33,8 +33,9 @@
     stealGroup: TeleportArmourStealObjective
   - type: ClothingGrantComponent
     component:
-    - type: ReactiveArmour
-      armourBehavior: Teleport
+    - type: OnHitTriggerWithCooldown
+      activationDelay: 5
+    - type: RandomTeleportOnTrigger
 
 
 - type: entity
@@ -43,10 +44,9 @@
   name: reactive teleport armour
   description: Reactive armour with bluespace core in it.
   components:
-  - type: ClothingGrantComponent
-    component:
-    - type: ReactiveArmour
-      armourBehavior: Teleport
+  - type: OnHitTriggerWithCooldown
+    activationDelay: 5
+  - type: RandomTeleportOnTrigger
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
@@ -54,7 +54,5 @@
   name: reactive tesla armour
   description: Reactive armour with tesla core in it.
   components:
-  - type: ClothingGrantComponent
-    component:
-    - type: ReactiveArmour
-      armourBehavior: Tesla
+  - type: OnHitTriggerWithCooldown
+    activationDelay: 5
