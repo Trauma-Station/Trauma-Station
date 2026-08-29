@@ -2,8 +2,9 @@
   id: SecureStorageLowPriority
   dummyWires: 1
   wires:
-  - !type:PowerWireAction
-  - !type:PowerWireAction
+# TODO: if possible in future make them electrify, right now it will make it so the panel requires power too
+#  - !type:PowerWireAction
+#  - !type:PowerWireAction
   - !type:AntiTamperWireAction
   - !type:SpeechWireAction
   - !type:AccessWireAction
@@ -12,8 +13,8 @@
   id: SecureStorageHighPriority
   dummyWires: 3
   wires:
-  - !type:PowerWireAction
-  - !type:PowerWireAction
+#  - !type:PowerWireAction
+#  - !type:PowerWireAction
   - !type:AntiTamperWireAction
   - !type:SpeechWireAction
   - !type:AccessWireAction
