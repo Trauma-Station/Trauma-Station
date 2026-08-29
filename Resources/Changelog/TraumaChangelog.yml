@@ -13881,3 +13881,10 @@ Entries:
   id: 1514
   time: '2026-08-29T06:19:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4337
+- author: Floofyshork
+  changes:
+  - type: Tweak
+    message: Added unarmed scaling to decapoid claw
+  id: 1515
+  time: '2026-08-29T06:34:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4317
