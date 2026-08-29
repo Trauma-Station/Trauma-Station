@@ -110,11 +110,12 @@ public sealed partial class DelayedKnockdownOnHitSystem : EntitySystem
                 continue;
 
             var delayed = EnsureComp<DelayedKnockdownComponent>(hit);
-            if (delayed.Started != TimeSpan.Zero)
+            if (delayed.Started == TimeSpan.Zero)
                 delayed.Started = _timing.CurTime;
-            delayed.Delay = TimeSpan.FromSeconds(Math.Min((comp.Delay + ev.DelayDelta).TotalSeconds, delayed.Delay.TotalSeconds));
+            // only extend delays and time if it's already there so it can't infinitely stack
+            delayed.Delay = MathHelper.Min(comp.Delay + ev.DelayDelta, delayed.Delay);
             delayed.NextKnockdown = delayed.Started + delayed.Delay;
-            delayed.KnockdownTime = TimeSpan.FromSeconds(Math.Max((comp.KnockdownTime + ev.KnockdownTimeDelta).TotalSeconds, delayed.KnockdownTime.TotalSeconds));
+            delayed.KnockdownTime = MathHelper.Max(comp.KnockdownTime + ev.KnockdownTimeDelta, delayed.KnockdownTime);
             delayed.Refresh &= comp.Refresh;
             Dirty(hit, delayed);
         }
