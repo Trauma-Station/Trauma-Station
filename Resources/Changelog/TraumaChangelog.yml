@@ -13895,3 +13895,10 @@ Entries:
   id: 1516
   time: '2026-08-29T07:05:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4349
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wirecutters being greyscale.
+  id: 1517
+  time: '2026-08-29T07:07:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4350
