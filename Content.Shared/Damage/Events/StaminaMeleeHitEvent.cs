@@ -9,6 +9,7 @@ namespace Content.Shared.Damage.Events;
 /// </summary>
 public sealed class StaminaMeleeHitEvent : HandledEntityEventArgs
 {
+    public bool WideSwing; // Trauma
     /// <summary>
     /// List of hit stamina components.
     /// </summary>

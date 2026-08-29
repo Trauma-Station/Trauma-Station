@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Goobstation.Server.Weapons.DelayedKnockdown;
+namespace Content.Goobstation.Shared.Weapons.DelayedKnockdown;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class DelayedKnockdownOnHitComponent : Component
 {
     [DataField]
-    public float Delay = 2f;
+    public TimeSpan Delay = TimeSpan.FromSeconds(2);
 
     [DataField]
-    public float KnockdownTime = 4f;
+    public TimeSpan KnockdownTime = TimeSpan.FromSeconds(4);
 
     [DataField]
     public bool Refresh = true;
