@@ -71,7 +71,7 @@ public sealed partial class BugSystem : EntitySystem
 
         if (Transform(ent.Owner).Anchored)
         {
-            args.PushMarkup(Loc.GetString(IsInCorrectArea(ent) ? "bug-examine-correct-area" : "bug-examine-incorrect-area"));
+            args.PushMarkup(Loc.GetString($"bug-examine-{(IsInCorrectArea(ent) ? "correct" : "incorrect")}-area"));
         }
     }
 
