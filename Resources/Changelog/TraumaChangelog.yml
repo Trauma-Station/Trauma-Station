@@ -13888,3 +13888,10 @@ Entries:
   id: 1515
   time: '2026-08-29T06:34:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4317
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed D-class gloves loadout being a gas mask instead of grey gloves.
+  id: 1516
+  time: '2026-08-29T07:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4349
