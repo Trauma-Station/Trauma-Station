@@ -180,7 +180,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs)
         {
             if (GetInfo(GetEntity(sideJob), jobBoard.Value, out var info))
-                availableSideJobInfos.Add(info.Value);
+                acceptedSideJobsInfos.Add(info.Value);
         }
 
         var state = new JobListingsBoundUserInterfaceState(

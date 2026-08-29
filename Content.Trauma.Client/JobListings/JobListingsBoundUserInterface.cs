@@ -27,8 +27,6 @@ public sealed partial class JobListingsBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (!_timing.IsFirstTimePredicted)
-            return;
         if (state is not JobListingsBoundUserInterfaceState jobState)
             return;
         if (_menu is null)
@@ -41,7 +39,7 @@ public sealed partial class JobListingsBoundUserInterface : BoundUserInterface
             _menu.AddAvailableSideJob(sideJob);
         }
 
-        foreach (var sideJob in jobState.AvailableSidejobs)
+        foreach (var sideJob in jobState.AcceptedSideJobs)
         {
             _menu.AddAcceptedSideJob(sideJob);
         }
