@@ -11,9 +11,7 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class JobListingsMenu : DefaultWindow
 {
-    [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IGameTiming _timing = default!;
-    private SharedJobListingsSystem _jobs = default!;
 
     private TimeSpan? _refreshTimerBarTime;
 
@@ -27,30 +25,6 @@ public sealed partial class JobListingsMenu : DefaultWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         RefreshButton.OnPressed += _ => OnRefresh?.Invoke();
-        _jobs = _entity.System<SharedJobListingsSystem>();
-    }
-
-    public void Update(EntityUid owner)
-    {
-        if (!_jobs.GetJobBoard(owner, out var jobBoard))
-            return;
-        var availableSideJobInfos = _jobs.GetAvailableSideJobsInfo(jobBoard.Value);
-        var acceptedSideJobInfos = _jobs.GetAcceptedSideJobsInfo(jobBoard.Value);
-
-        ClearJobListings();
-        foreach (var sideJob in availableSideJobInfos)
-        {
-            AddAvailableSideJob(sideJob);
-        }
-        foreach (var sideJob in acceptedSideJobInfos)
-        {
-            AddAcceptedSideJob(sideJob);
-        }
-
-        var reputationLevel = _jobs.GetReputationLevel(jobBoard.Value);
-        SetReputation(jobBoard.Value.Comp.Reputation, reputationLevel);
-        SetRefresh(jobBoard.Value.Comp.BonusRefresh, jobBoard.Value.Comp.RefreshTime, jobBoard.Value.Comp.RefreshWaitDuration);
-        Refresh(jobBoard.Value.Comp.MaximumAcceptedSideJobs);
     }
 
     public void ClearJobListings()
@@ -153,23 +127,17 @@ public sealed partial class JobListingsMenu : DefaultWindow
         }
     }
 
-    private void EnableAcceptButtons()
-    {
-        foreach (var control in AvailableJobListingsContainer.Children)
-        {
-            if (control is not SideJobControl sideJobControl)
-                continue;
-            sideJobControl.AcceptButton.Disabled = false;
-        }
-    }
-
-    private void Refresh(int maximumAcceptedSideJobs)
+    public void Refresh(int maximumAcceptedSideJobs, bool loading)
     {
         AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;
         AvailableJobListingsNote.Visible = AvailableJobListingsContainer.ChildCount == 0;
+
+        if (loading)
+            AvailableJobListingsNote.Text = Loc.GetString("job-listings-ui-loading-note");
+        else
+            AvailableJobListingsNote.Text = Loc.GetString("job-listings-ui-no-available-note");
+
         if (AcceptedJobListingsContainer.ChildCount >= maximumAcceptedSideJobs)
             DisableAcceptButtons();
-        else
-            EnableAcceptButtons();
     }
 }

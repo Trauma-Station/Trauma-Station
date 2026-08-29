@@ -44,6 +44,28 @@ public sealed class JobListingsRefreshMessage : BoundUserInterfaceMessage
 
 }
 
+/// <summary>
+/// Struct that describes a SideJob entity.
+/// </summary>
+public record struct SideJobInfo(NetEntity Entity, float Progress, string Title, string Description, SpriteSpecifier Icon, string RewardName, int ReputationGain);
+
+/// <summary>
+/// The BoundUserInterfaceState used to update the job board.
+/// </summary>
+public sealed class JobListingsBoundUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, int reputation, int reputationLevel, bool bonusRefresh, TimeSpan? refreshTime, TimeSpan refreshWaitDuration, int maximumAcceptedSideJobs, bool loading) : BoundUserInterfaceState
+{
+    public readonly List<SideJobInfo> AvailableSidejobs = availableSideJobs;
+    public readonly List<SideJobInfo> AcceptedSideJobs = acceptedSideJobs;
+    public readonly int Reputation = reputation;
+    public readonly int ReputationLevel = reputationLevel;
+    public bool BonusRefresh = bonusRefresh;
+    public TimeSpan? RefreshTime = refreshTime;
+    public TimeSpan RefreshWaitDuration = refreshWaitDuration;
+    public int MaximumAcceptedSideJobs = maximumAcceptedSideJobs;
+    public bool Loading = loading;
+
+}
+
 [Serializable, NetSerializable]
 public enum JobListingsUiKey
 {

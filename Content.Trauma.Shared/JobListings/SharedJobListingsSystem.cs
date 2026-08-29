@@ -13,6 +13,7 @@ using Content.Trauma.Common.Traitor;
 using Robust.Shared.Timing;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Hands.EntitySystems;
+using Robust.Shared.CPUJob.JobQueues;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -28,6 +29,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     [Dependency] protected EntityTableSystem Table = default!;
     [Dependency] protected SharedHandsSystem Hands = default!;
     [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
+    [Dependency] private INetManager _net = default!;
 
     /// <summary>
     /// Accept an already assigned job.
@@ -131,34 +133,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Get all infos for the available side jobs.
-    /// </summary>
-    public List<SideJobInfo> GetAvailableSideJobsInfo(Entity<JobListingsComponent> jobBoard)
-    {
-        var infos = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs)
-        {
-            if (GetInfo(GetEntity(sideJob), jobBoard, out var info))
-                infos.Add(info.Value);
-        }
-        return infos;
-    }
-
-    /// <summary>
-    /// Get all infos for the accepted side jobs.
-    /// </summary>
-    public List<SideJobInfo> GetAcceptedSideJobsInfo(Entity<JobListingsComponent> jobBoard)
-    {
-        var infos = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs)
-        {
-            if (GetInfo(GetEntity(sideJob), jobBoard, out var info))
-                infos.Add(info.Value);
-        }
-        return infos;
-    }
-
-    /// <summary>
     /// Count how many jobs exist on the job board.
     /// This includes both available and assigned.
     /// </summary>
@@ -177,9 +151,52 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     }
 
     /// <summary>
+    /// Cache the side job's progress and replicate it to the client.
+    /// Can only be done by the server because too much objectives are server-side.
+    /// </summary>
+    protected virtual void UpdateAllSideJobs(Entity<JobListingsComponent> jobBoard)
+    {
+
+    }
+
+    /// <summary>
     /// Updates the job listings ui.
     /// </summary>
-    public abstract void UpdateUi(EntityUid owner, EntityUid actor);
+    public void UpdateUi(EntityUid owner, EntityUid actor, bool loading = false)
+    {
+        if (!GetJobBoard(owner, out var jobBoard))
+            return;
+
+        UpdateAllSideJobs(jobBoard.Value);
+
+        var availableSideJobInfos = new List<SideJobInfo>();
+        foreach (var sideJob in jobBoard.Value.Comp.AvailableSideJobs)
+        {
+            if (GetInfo(GetEntity(sideJob), jobBoard.Value, out var info))
+                availableSideJobInfos.Add(info.Value);
+        }
+
+        var acceptedSideJobsInfos = new List<SideJobInfo>();
+        foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs)
+        {
+            if (GetInfo(GetEntity(sideJob), jobBoard.Value, out var info))
+                availableSideJobInfos.Add(info.Value);
+        }
+
+        var state = new JobListingsBoundUserInterfaceState(
+            availableSideJobInfos,
+            acceptedSideJobsInfos,
+            jobBoard.Value.Comp.Reputation,
+            GetReputationLevel(jobBoard.Value),
+            jobBoard.Value.Comp.BonusRefresh,
+            jobBoard.Value.Comp.RefreshTime,
+            jobBoard.Value.Comp.RefreshWaitDuration,
+            jobBoard.Value.Comp.MaximumAcceptedSideJobs,
+            loading
+        );
+
+        Ui.SetUiState(owner, JobListingsUiKey.Key, state);
+    }
 
     /// <summary>
     /// Update all the uis of the remotes (pdas, uplink implants) of a job board.
@@ -345,26 +362,12 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         if (!CanRefresh(jobBoard.Value))
             return;
         Refresh(jobBoard.Value);
-        UpdateUi(owner.Owner, msg.Actor);
+        UpdateUi(owner.Owner, msg.Actor, loading: _net.IsClient);
     }
 }
-
-/// <summary>
-/// Struct that describes a SideJob entity.
-/// </summary>
-public record struct SideJobInfo(NetEntity Entity, float Progress, string Title, string Description, SpriteSpecifier Icon, string RewardName, int ReputationGain);
 
 /// <summary>
 /// Raised on a side job when it is created.
 /// </summary>
 [ByRefEvent]
 public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = false);
-
-/// <summary>
-/// Networked from server to client to update the Ui.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class JobListingsUiUpdateMessage(NetEntity owner) : EntityEventArgs
-{
-    public readonly NetEntity Owner = owner;
-}

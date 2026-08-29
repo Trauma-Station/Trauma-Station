@@ -2,12 +2,15 @@
 
 using Content.Trauma.Common.JobListings;
 using JetBrains.Annotations;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.JobListings;
 
 [UsedImplicitly]
-public sealed class JobListingsBoundUserInterface : BoundUserInterface
+public sealed partial class JobListingsBoundUserInterface : BoundUserInterface
 {
+    [Dependency] private IGameTiming _timing = default!;
+
     public JobListingsBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _menu = this.CreateWindow<JobListingsMenu>();
@@ -20,10 +23,32 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private JobListingsMenu? _menu;
 
-    public override void Update()
+    protected override void UpdateState(BoundUserInterfaceState state)
     {
-        base.Update();
-        _menu?.Update(Owner);
+        base.UpdateState(state);
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
+        if (state is not JobListingsBoundUserInterfaceState jobState)
+            return;
+        if (_menu is null)
+            return;
+
+        _menu.ClearJobListings();
+
+        foreach (var sideJob in jobState.AvailableSidejobs)
+        {
+            _menu.AddAvailableSideJob(sideJob);
+        }
+
+        foreach (var sideJob in jobState.AvailableSidejobs)
+        {
+            _menu.AddAcceptedSideJob(sideJob);
+        }
+
+        _menu.SetReputation(jobState.Reputation, jobState.ReputationLevel);
+        _menu.SetRefresh(jobState.BonusRefresh, jobState.RefreshTime, jobState.RefreshWaitDuration);
+        _menu.Refresh(jobState.MaximumAcceptedSideJobs, jobState.Loading);
     }
 
     protected override void Open()

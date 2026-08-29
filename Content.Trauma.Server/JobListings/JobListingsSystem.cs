@@ -167,14 +167,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         FillSideJobs(jobBoard);
     }
 
-    public override void UpdateUi(EntityUid owner, EntityUid actor)
-    {
-        if (!GetJobBoard(owner, out var jobBoard))
-            return;
-        UpdateAllSideJobs(jobBoard.Value);
-        RaiseNetworkEvent(new JobListingsUiUpdateMessage(GetNetEntity(owner)), actor);
-    }
-
     /// <summary>
     /// Helper method to add a PVS override for the job board and sidejobs.
     /// They are nullspace entities on the server and would not normally be replicated to the client but this method makes it so.
@@ -206,10 +198,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         DirtyField(sideJob.Owner, sideJob.Comp, nameof(SideJobComponent.CachedProgress));
     }
 
-    /// <summary>
-    /// Update all the side jobs that a job board has.
-    /// </summary>
-    private void UpdateAllSideJobs(Entity<JobListingsComponent> jobBoard)
+    protected override void UpdateAllSideJobs(Entity<JobListingsComponent> jobBoard)
     {
         foreach (var sideJob in jobBoard.Comp.AvailableSideJobs)
         {
