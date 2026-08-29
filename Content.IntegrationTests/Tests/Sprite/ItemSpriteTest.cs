@@ -46,13 +46,13 @@ public sealed partial class ItemSpriteTest : GameTest // Trauma - correct copypa
         await pair.Client.WaitPost(() =>
         {
             // <Trauma>
-            var urist = CEntMan.SpawnEntity(Urist, map.GridCoords);
+            var urist = CEntMan.SpawnEntity(Urist, map.CGridCoords);
             CEntMan.EnsureComponent<IgnoreUIRangeComponent>(urist); // avoid shitty UI debug assert
             var hands = CComp<HandsComponent>(urist);
             // </Trauma>
             foreach (var (proto, _) in pair.GetPrototypesWithComponent<ItemComponent>(Ignored))
             {
-                var dummy = CEntMan.SpawnEntity(proto.ID, map.GridCoords); // Trauma - spawn in a mapinit'd map instead of mapinit in nullspace
+                var dummy = CEntMan.SpawnEntity(proto.ID, map.CGridCoords); // Trauma - spawn in a mapinit'd map instead of mapinit in nullspace
                 var spriteComponent = pair.Client.EntMan.GetComponentOrNull<SpriteComponent>(dummy);
                 if (spriteComponent?.Icon == null)
                     badPrototypes.Add(proto);
