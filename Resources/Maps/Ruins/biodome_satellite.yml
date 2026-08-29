@@ -1,17 +1,3 @@
-# SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 PuceTint <69696513+PuceTint@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Ubaser <ubaserblueknight2@gmail.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 meta:
   format: 6
   postmapinit: false
@@ -3168,49 +3154,41 @@ entities:
   - uid: 451
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 4.5,0.5
       parent: 2
   - uid: 452
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 4.5,2.5
       parent: 2
   - uid: 453
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -1.5,2.5
       parent: 2
   - uid: 454
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -1.5,0.5
       parent: 2
   - uid: 455
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 8.5,2.5
       parent: 2
   - uid: 456
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 8.5,0.5
       parent: 2
   - uid: 457
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 19.5,0.5
       parent: 2
   - uid: 458
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 19.5,2.5
       parent: 2
 - proto: SignArmory

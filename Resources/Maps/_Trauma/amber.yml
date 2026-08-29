@@ -126586,13 +126586,11 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: -27.5,-6.5
   - uid: 18661
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 54.5,-19.5
   - uid: 18662
     components:
@@ -126683,25 +126681,21 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -35.5,-74.5
   - uid: 18680
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -31.5,-81.5
   - uid: 18681
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -35.5,-59.5
   - uid: 18682
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -31.5,-49.5
   - uid: 18683
     components:

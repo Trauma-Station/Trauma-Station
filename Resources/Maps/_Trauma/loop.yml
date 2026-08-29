@@ -90545,19 +90545,16 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: -74.5,43.5
   - uid: 13630
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: -70.5,34.5
   - uid: 13631
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: -70.5,50.5
   - uid: 13632
     components:

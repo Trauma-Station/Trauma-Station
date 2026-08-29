@@ -258085,19 +258085,16 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: 69.5,140.5
   - uid: 39979
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: 85.5,146.5
   - uid: 39980
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: 118.5,146.5
   - uid: 39981
     components:
