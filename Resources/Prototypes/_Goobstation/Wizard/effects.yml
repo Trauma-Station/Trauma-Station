@@ -189,15 +189,16 @@
   name: sparks
   categories: [ HideSpawnMenu ]
   components:
+  - type: PredictedPhysicsEffect
   - type: TimedDespawn
     lifetime: 1
   - type: Sprite
     drawdepth: Effects
     noRot: true
     layers:
-      - shader: unshaded
-        sprite: _Goobstation/Wizard/Effects/effects.rsi
-        state: sparks
+    - shader: unshaded
+      sprite: _Goobstation/Wizard/Effects/effects.rsi
+      state: sparks
   - type: AnimationPlayer
   - type: PointLight
     enabled: true
