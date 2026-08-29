@@ -205,8 +205,10 @@ namespace Content.Shared.Interaction
 
         private bool UiRangeCheck(Entity<TransformComponent?> user, Entity<TransformComponent?> target, float range)
         {
-            if (range < 0) // Goobstation
+            // <Trauma>
+            if (range <= 0)
                 return true;
+            // </Trauma>
 
             if (!Resolve(target, ref target.Comp))
                 return false;

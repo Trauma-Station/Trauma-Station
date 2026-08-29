@@ -298,7 +298,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
         CloseNestedInterfaces(uid, args.Actor, storageComp);
 
         // If UI is closed for everyone
-        if (!UI.IsUiOpen(uid, args.UiKey))
+        if (!UI.IsUiOpen(uid, args.UiKey) && !TerminatingOrDeleted(uid)) // Trauma - dont play sounds if its deleting
         {
             UpdateAppearance((uid, storageComp, null));
             if (!_tag.HasTag(args.Actor, storageComp.SilentStorageUserTag))
