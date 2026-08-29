@@ -27,7 +27,7 @@ public sealed partial class JobListingsSystem
         {
             sideJobComp.Reward = ent.Comp.CurrencyReward;
             Loc.TryGetString(ent.Comp.CurrencyName, out var name);
-            sideJobComp.RewardName = Loc.GetString(name ?? ent.Comp.CurrencyName);
+            sideJobComp.RewardName = name ?? ent.Comp.CurrencyName;
         }
         else
         {
@@ -43,7 +43,7 @@ public sealed partial class JobListingsSystem
 
             sideJobComp.Reward = reward;
             Loc.TryGetString(rawName, out var name);
-            sideJobComp.RewardName = Loc.GetString(name ?? rawName);
+            sideJobComp.RewardName = name ?? rawName;
         }
 
         DirtyFields(ent, sideJobComp, null, [nameof(SideJobComponent.Reward), nameof(SideJobComponent.RewardName)]);
