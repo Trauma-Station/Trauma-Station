@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// Component added to a store entity to enable side-jobs.
 /// Used for progressive traitor.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class JobListingsComponent : Component
 {
     /// <summary>
