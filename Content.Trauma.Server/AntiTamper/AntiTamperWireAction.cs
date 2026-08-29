@@ -1,8 +1,6 @@
 using Content.Server.Wires;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Wires;
 using Content.Trauma.Shared.AntiTamper;
-using Serilog;
 
 namespace Content.Trauma.Server.AntiTamper;
 
@@ -23,13 +21,14 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
 
     public override bool Cut(EntityUid user, Wire wire, AntiTamperComponent comp)
     {
-        comp.Enabled = false;
+        //comp.Enabled = false; // too easy guh, need a better way if you want to make it disableable
+        // "disableable" is a really fucking stupid word
+        EntityManager.System<AntiTamperSystem>().AlertYell((wire.Owner, comp));
         return true;
     }
 
     public override bool Mend(EntityUid user, Wire wire, AntiTamperComponent comp)
     {
-        comp.Enabled = true;
         return true;
     }
 
@@ -39,8 +38,8 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
         if (WiresSystem.TryGetData<bool>(wire.Owner, AntiTamperWireActionKey.Pulsed, out var pulsedKey) && pulsedKey)
             return;
 
-        EntityManager.System<AntiTamperSystem>().AlertYell((wire.Owner, comp));
-        EntityManager.System<AntiTamperSystem>().AlertAlarm((wire.Owner, comp));
+        EntityManager.System<AntiTamperSystem>().AlertYell((wire.Owner, comp), respectCooldown: false);
+        EntityManager.System<AntiTamperSystem>().AlertAlarm((wire.Owner, comp), respectCooldown: false);
 
         WiresSystem.SetData(wire.Owner, AntiTamperWireActionKey.Pulsed, true);
         WiresSystem.StartWireAction(wire.Owner, _pulseTimeout, AntiTamperWireActionKey.PulseCancel,

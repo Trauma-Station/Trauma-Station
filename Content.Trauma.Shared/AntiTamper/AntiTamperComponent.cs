@@ -5,9 +5,15 @@ namespace Content.Trauma.Shared.AntiTamper;
 [RegisterComponent]
 public sealed partial class AntiTamperComponent : Component
 {
+    /// <summary>
+    /// Whether the AntiTamper feature is enabled.
+    /// </summary>
     [DataField]
     public bool Enabled = true;
 
+    /// <summary>
+    /// Optional examine for the tamper lock.
+    /// </summary>
     [DataField]
     public LocId? LocExamine;
 
@@ -24,18 +30,33 @@ public sealed partial class AntiTamperComponent : Component
     [DataField(required: true)]
     public AntiTamperAlertType AlarmAlertType;
 
+    /// <summary>
+    /// Alarm sound to play.
+    /// </summary>
     [DataField]
     public SoundPathSpecifier? AlarmSound;
 
+    /// <summary>
+    /// Cooldown between yells.
+    /// </summary>
     [DataField]
     public TimeSpan YellCooldown = TimeSpan.FromSeconds(5);
 
+    /// <summary>
+    /// Cooldown between alarm sounds.
+    /// </summary>
     [DataField]
     public TimeSpan AlarmCooldown = TimeSpan.FromSeconds(5);
 
+    /// <summary>
+    /// Last time of the yell.
+    /// </summary>
     [DataField]
     public TimeSpan LastYell = TimeSpan.Zero;
 
+    /// <summary>
+    /// Last time of the alarm
+    /// </summary>
     [DataField]
     public TimeSpan LastAlarm = TimeSpan.Zero;
 

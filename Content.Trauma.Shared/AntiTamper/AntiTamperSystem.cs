@@ -2,7 +2,6 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Examine;
-using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -14,7 +13,7 @@ public sealed partial class AntiTamperSystem : EntitySystem
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    [SubscribeLocalEvent, UsedImplicitly]
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<AntiTamperComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.LocExamine is null)
@@ -22,7 +21,7 @@ public sealed partial class AntiTamperSystem : EntitySystem
         args.PushMarkup(Loc.GetString(ent.Comp.LocExamine));
     }
 
-    [SubscribeLocalEvent(after: [typeof(SharedDestructibleSystem)]), UsedImplicitly]
+    [SubscribeLocalEvent(after: [typeof(SharedDestructibleSystem)])] // after so .IsBroken is set
     private void OnDamage(Entity<AntiTamperComponent> ent, ref DamageDealtEvent args)
     {
         if (!TryComp(ent, out DestructibleComponent? destructible))
@@ -36,23 +35,39 @@ public sealed partial class AntiTamperSystem : EntitySystem
         var yellOnDamaged = CompareFlag(comp.YellAlertType, AntiTamperAlertType.OnDamaged);
         var yellOnDestroyed = CompareFlag(comp.YellAlertType, AntiTamperAlertType.OnDestroyed);
 
-        if (_timing.CurTime - comp.LastAlarm >= comp.AlarmCooldown &&
-            !ded && alarmOnDamaged || ded && alarmOnDestroyed)
+        if (!ded && alarmOnDamaged || ded && alarmOnDestroyed)
             AlertAlarm(ent);
-        if (_timing.CurTime - comp.LastYell >= comp.AlarmCooldown &&
-            !ded && yellOnDamaged || ded && yellOnDestroyed)
+        if (!ded && yellOnDamaged || ded && yellOnDestroyed)
             AlertYell(ent);
     }
 
-    public void AlertAlarm(Entity<AntiTamperComponent> ent)
+    /// <summary>
+    /// Play the AntiTamper alarm noise.
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <param name="respectCooldown"></param>
+    public void AlertAlarm(Entity<AntiTamperComponent> ent, bool respectCooldown = true)
     {
+        if (respectCooldown && _timing.CurTime - ent.Comp.LastAlarm >= ent.Comp.AlarmCooldown)
+            return;
+
         _audio.PlayPvs(ent.Comp.AlarmSound, Transform(ent).Coordinates);
+
         ent.Comp.LastAlarm = _timing.CurTime;
     }
 
-    public void AlertYell(Entity<AntiTamperComponent> ent)
+    /// <summary>
+    /// Trigger the AntiTamper speech bubble yell.
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <param name="respectCooldown"></param>
+    public void AlertYell(Entity<AntiTamperComponent> ent, bool respectCooldown = true)
     {
+        if (respectCooldown && _timing.CurTime - ent.Comp.LastYell >= ent.Comp.YellCooldown)
+            return;
+
         _chat.TrySendInGameICMessage(ent, Loc.GetString(ent.Comp.LocTamperMessage), InGameICChatType.Speak, false);
+
         ent.Comp.LastYell = _timing.CurTime;
     }
 
