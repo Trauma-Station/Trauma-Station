@@ -13925,3 +13925,18 @@ Entries:
   id: 1520
   time: '2026-08-29T11:33:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4355
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 4 new chemicals that wraith can inject into solutions now with their
+      defile ability
+  - type: Remove
+    message: Removed vomit and ash from wraith's defile pool
+  - type: Tweak
+    message: Made it so wraith's blight ability can now EMAG borgs once again
+  - type: Tweak
+    message: Wraith's defile ability now injects 20u instead of 10u
+  id: 1521
+  time: '2026-08-29T11:40:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4320
