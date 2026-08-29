@@ -48,7 +48,7 @@ public sealed partial class AntiTamperSystem : EntitySystem
     /// <param name="respectCooldown"></param>
     public void AlertAlarm(Entity<AntiTamperComponent> ent, bool respectCooldown = true)
     {
-        if (respectCooldown && _timing.CurTime - ent.Comp.LastAlarm >= ent.Comp.AlarmCooldown)
+        if (respectCooldown && _timing.CurTime - ent.Comp.LastAlarm < ent.Comp.AlarmCooldown)
             return;
 
         _audio.PlayPvs(ent.Comp.AlarmSound, Transform(ent).Coordinates);
@@ -63,7 +63,7 @@ public sealed partial class AntiTamperSystem : EntitySystem
     /// <param name="respectCooldown"></param>
     public void AlertYell(Entity<AntiTamperComponent> ent, bool respectCooldown = true)
     {
-        if (respectCooldown && _timing.CurTime - ent.Comp.LastYell >= ent.Comp.YellCooldown)
+        if (respectCooldown && _timing.CurTime - ent.Comp.LastYell < ent.Comp.YellCooldown)
             return;
 
         _chat.TrySendInGameICMessage(ent, Loc.GetString(ent.Comp.LocTamperMessage), InGameICChatType.Speak, false);
