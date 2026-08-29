@@ -5,7 +5,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// <summary>
 /// Added to the uplink implant entity to provide another action to open the job listings ui.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class JobListingsImplantComponent : Component
 {
     /// <summary>
@@ -17,6 +17,6 @@ public sealed partial class JobListingsImplantComponent : Component
     /// <summary>
     /// When the action is created it is stored here so it can be removed upon implant removal.
     /// </summary>
-    [DataField]
-    public EntityUid? StoredAction;
+    [DataField, AutoNetworkedField]
+    public NetEntity? StoredAction;
 }
