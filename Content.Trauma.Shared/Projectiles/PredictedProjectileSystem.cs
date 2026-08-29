@@ -54,8 +54,8 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             return;
 
         // For stuff that cares about it being hit.
-        var hityBProjectileEvent = new HitByProjectileEvent(args.OurEntity, args.OtherEntity);
-        RaiseLocalEvent(args.OtherEntity, hityBProjectileEvent);
+        var hityBProjectileEvent = new HitByProjectileEvent(uid);
+        RaiseLocalEvent(uid, hityBProjectileEvent);
 
         DoHit((uid, component, args.OurBody), args.OtherEntity);
     }

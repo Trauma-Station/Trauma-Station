@@ -23,7 +23,29 @@
     sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
 
 - type: entity
-  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTeleport
+  name: reactive teleport armour
+  description: Reactive armour with bluespace core in it.
+  components:
+  - type: ReactiveArmour
+    effects:
+    - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_departure.ogg
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 10.0
+    - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_arrival.ogg
+    - !type:Sparks
+    activationDelay: 10
+
+- type: entity
+  parent: [ ClothingOuterArmorReactiveTeleport, BaseGrandTheftContraband ]
   id: ClothingOuterArmorReactiveRD
   name: reactive teleport armour
   suffix: RD
@@ -31,22 +53,6 @@
   components:
   - type: StealTarget
     stealGroup: TeleportArmourStealObjective
-  - type: ClothingGrantComponent
-    component:
-    - type: OnHitTriggerWithCooldown
-      activationDelay: 5
-    - type: RandomTeleportOnTrigger
-
-
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTeleport
-  name: reactive teleport armour
-  description: Reactive armour with bluespace core in it.
-  components:
-  - type: OnHitTriggerWithCooldown
-    activationDelay: 5
-  - type: RandomTeleportOnTrigger
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
@@ -54,5 +60,9 @@
   name: reactive tesla armour
   description: Reactive armour with tesla core in it.
   components:
-  - type: OnHitTriggerWithCooldown
-    activationDelay: 5
+  - type: ReactiveArmour
+    effects:
+    - !type:Sparks
+    - !type:ShootRandomLightnings
+      radius: 8.0
+    activationDelay: 10
