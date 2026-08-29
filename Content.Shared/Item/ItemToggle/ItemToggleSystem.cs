@@ -273,6 +273,15 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void Deactivate(Entity<ItemToggleComponent> ent, bool predicted, EntityUid? user = null, bool showPopup = true)
     {
+        // <Trauma>
+        if (TerminatingOrDeleted(ent))
+        {
+            // dont play sounds if its deleting just let other systems clean up
+            var ev = new ItemToggledEvent(predicted, Activated: false, user);
+            RaiseLocalEvent(ent, ref ev);
+            return;
+        }
+        // </Trauma>
         var (uid, comp) = ent;
         var soundToPlay = comp.SoundDeactivate;
         if (predicted)
@@ -325,8 +334,10 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [SubscribeLocalEvent]
     private void TurnOffOnUnwielded(Entity<ItemToggleComponent> ent, ref ItemUnwieldedEvent args)
     {
-        if (!ent.Comp.WieldToggle) // Goobstation
+        // <Trauma>
+        if (!ent.Comp.WieldToggle)
             return;
+        // </Trauma>
 
         TryDeactivate((ent, ent.Comp), args.User);
     }
