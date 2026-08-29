@@ -13940,3 +13940,12 @@ Entries:
   id: 1521
   time: '2026-08-29T11:40:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4320
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed revs immediately winning/losing if everyone is at the arrivals
+      terminal.
+  id: 1522
+  time: '2026-08-29T17:04:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4357
