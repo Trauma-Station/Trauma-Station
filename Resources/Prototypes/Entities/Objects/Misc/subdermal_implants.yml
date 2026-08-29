@@ -185,10 +185,6 @@
     interfaces:
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
-      # <Trauma>
-      enum.JobListingsUiKey.Key:
-        type: JobListingsBoundUserInterface
-      # </Trauma>
 
 - type: entity
   parent: BaseSubdermalImplant
