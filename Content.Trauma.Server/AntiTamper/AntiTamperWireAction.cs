@@ -23,7 +23,9 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
     {
         // too easy guh, need a better way if you want to make it disableable without risk
         // "disableable" is a really fucking stupid word
-        EntityManager.System<AntiTamperSystem>().AlertYell((wire.Owner, comp));
+        EntityManager.System<AntiTamperSystem>().AlertYell((wire.Owner, comp), respectCooldown: false);
+        EntityManager.System<AntiTamperSystem>().AlertAlarm((wire.Owner, comp), respectCooldown: false);
+
         comp.Enabled = false;
         return true;
     }
