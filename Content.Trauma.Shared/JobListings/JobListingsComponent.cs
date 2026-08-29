@@ -2,6 +2,7 @@
 
 using Content.Shared.EntityTable;
 using Robust.Shared.Containers;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -107,7 +108,7 @@ public sealed partial class JobListingsComponent : Component
     /// <summary>
     /// The time when the job board's refresh button becomes available.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? RefreshTime;
 
     /// <summary>
