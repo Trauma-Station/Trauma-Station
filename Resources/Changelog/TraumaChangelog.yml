@@ -13874,3 +13874,10 @@ Entries:
   id: 1513
   time: '2026-08-28T18:47:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4330
+- author: Mr_Samuel
+  changes:
+  - type: Fix
+    message: PKA modkits use their install delay again.
+  id: 1514
+  time: '2026-08-29T06:19:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4337
