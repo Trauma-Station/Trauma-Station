@@ -13902,3 +13902,10 @@ Entries:
   id: 1517
   time: '2026-08-29T07:07:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4350
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed NTR stamp not having inhand sprites set.
+  id: 1518
+  time: '2026-08-29T09:26:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4351
