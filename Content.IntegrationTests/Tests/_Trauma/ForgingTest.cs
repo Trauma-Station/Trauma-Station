@@ -1,20 +1,28 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.CombatMode;
+using Content.Shared.Weapons.Melee;
 using Content.Trauma.Shared.Forging;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 public sealed partial class ForgingTest : GameTest
 {
-    [SidedDependency(Side.Server)] private IComponentFactory _factory = default!;
+    private static readonly EntProtoId Hammer = "MeleeHammer";
+    private static readonly EntProtoId MobDwarf = "MobDwarf";
+
+    [SidedDependency(Side.Server)] private ForgingSystem _forging = default!;
+    [SidedDependency(Side.Server)] private SharedCombatModeSystem _combat = default!;
+    [SidedDependency(Side.Server)] private SharedMeleeWeaponSystem _melee = default!;
 
     /// <summary>
     /// Checks that all forged item prototypes are sane and that there are no empty categories.
     /// </summary>
     [Test]
-    public async Task AllForgedItemsValid()
+    public async Task AllForgedItemsValidTest()
     {
-        var metallicName = _factory.CompName<MetallicComponent>();
+        var factory = SEntMan.ComponentFactory;
+        var metallicName = factory.CompName<MetallicComponent>();
         Assert.Multiple(() =>
         {
             var used = new HashSet<ProtoId<ForgingCategoryPrototype>>();
@@ -51,5 +59,46 @@ public sealed partial class ForgingTest : GameTest
         });
     }
 
-    // TODO: test to spawn every material + item combination and simulate working them so theres no errors and check all sprites are valid
+    /* TODO: fix it running forever
+    /// <summary>
+    /// Forges every item from every allowed material.
+    /// Doesn't attempt construction for items that e.g. need a handle.
+    /// </summary>
+    [Test]
+    public async Task SpawnForgedItemsTest()
+    {
+        var map = await Pair.CreateTestMap();
+        var coords = map.GridCoords;
+        await Server.WaitAssertion(() =>
+        {
+            var dorf = SSpawn(MobDwarf, coords);
+            var hammer = SSpawn(Hammer, coords); // this assumes a hammer will never degrade over time
+            var weapon = SComp<MeleeWeaponComponent>(hammer);
+            _combat.SetInCombatMode(dorf, true);
+            Assert.Multiple(() =>
+            {
+                foreach (var item in SProtoMan.EnumeratePrototypes<ForgedItemPrototype>())
+                {
+                    foreach (var metal in SProtoMan.EnumeratePrototypes<MetalPrototype>())
+                    {
+                        if (!_forging.CanMakeFrom(item, metal.ID))
+                            continue;
+
+                        var uid = _forging.SpawnUnfinished(coords, metal.ID, item.ID, 1);
+                        var workable = SComp<WorkableComponent>(uid);
+                        while (workable.Remaining > 0)
+                        {
+                            var last = workable.Remaining;
+                            weapon.NextAttack = TimeSpan.Zero; // bonk
+                            _melee.AttemptLightAttack(dorf, hammer, weapon, uid, canParry: false);
+                            Assert.That(workable.Remaining, Is.LessThan(last), $"Hitting {SPrettyString(uid)} with a hammer didn't help work it");
+                        }
+
+                        Assert.That(SEntMan.IsQueuedForDeletion(uid), $"{SPrettyString(uid)} was not deleted after working it");
+                    }
+                }
+            });
+        });
+    }
+    */
 }
