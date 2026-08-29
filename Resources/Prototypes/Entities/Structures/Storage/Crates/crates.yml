@@ -211,7 +211,7 @@
     access: [["Security"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
   id: CrateEngineeringSecure
   name: secure engineering crate
   components:
@@ -223,7 +223,7 @@
     access: [["Engineering"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
   id: CrateMedicalSecure
   name: secure medical crate
   components:
@@ -235,7 +235,7 @@
     access: [["Medical"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
   id: CrateChemistrySecure
   name: secure chemistry crate
   components:
@@ -247,7 +247,7 @@
       access: [["Chemistry"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ]
+  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
   id: CratePrivateSecure
   name: private crate
   components:
