@@ -13916,3 +13916,12 @@ Entries:
   id: 1519
   time: '2026-08-29T11:17:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4354
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Made chameleon mutation both reveal from moving and adapt while still much
+      faster.
+  id: 1520
+  time: '2026-08-29T11:33:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4355
