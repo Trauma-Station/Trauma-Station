@@ -138,3 +138,4 @@
   - type: RecyclableOnUnlock #Goobstation - Recycle update
   - type: Paintable
     group: CrateSecure
+  - type: LockSignalControl # Trauma
