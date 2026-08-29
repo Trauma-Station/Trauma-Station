@@ -378,3 +378,10 @@ Entries:
   id: 39
   time: '2026-08-20T19:46:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4182
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Screens are no longer rotated on every map.
+  id: 40
+  time: '2026-08-29T10:01:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4352
