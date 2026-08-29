@@ -21,14 +21,16 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
 
     public override bool Cut(EntityUid user, Wire wire, AntiTamperComponent comp)
     {
-        //comp.Enabled = false; // too easy guh, need a better way if you want to make it disableable
+        // too easy guh, need a better way if you want to make it disableable without risk
         // "disableable" is a really fucking stupid word
         EntityManager.System<AntiTamperSystem>().AlertYell((wire.Owner, comp));
+        comp.Enabled = false;
         return true;
     }
 
     public override bool Mend(EntityUid user, Wire wire, AntiTamperComponent comp)
     {
+        comp.Enabled = true;
         return true;
     }
 
