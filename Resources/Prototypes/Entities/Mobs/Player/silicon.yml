@@ -16,6 +16,7 @@
     - SiliconRadiation
   - type: ContentEye
     maxZoom: 1.44,1.44
+  - type: CrossContainerInteraction # the brain is inside a container of the core, it would prevent all AI interactions
   # </Trauma>
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
