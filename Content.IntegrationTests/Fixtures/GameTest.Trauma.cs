@@ -78,8 +78,8 @@ public abstract partial class GameTest
     }
 
     protected string SPrettyString(EntityUid? uid)
-        => SEntMan.ToPrettyString(uid);
+        => uid != null ? SEntMan.ToPrettyString(uid.Value) : string.Empty;
 
     protected string CPrettyString(EntityUid? uid)
-        => CEntMan.ToPrettyString(uid);
+        => uid != null ? CEntMan.ToPrettyString(uid.Value) : string.Empty;
 }
