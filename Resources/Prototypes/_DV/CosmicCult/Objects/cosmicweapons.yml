@@ -20,9 +20,8 @@
     damage:
       types:
         Slash: 8
-        Asphyxiation: 12
-        Structural: 15
-        Ion: 15
+        Asphyxiation: 4
+        Structural: 5
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg
       params:
@@ -82,7 +81,7 @@
     attackRate: 0.6
     damage:
       types:
-        Piercing: 12
+        Piercing: 1 # Wield or throw it instead
     animationRotation: 225
     wideAnimationRotation: 225
     soundHit:
@@ -102,10 +101,9 @@
         volume: -1
   - type: DamageOtherOnHit
     damage:
-      types: # Not a whole lot, you can throw them pretty damn quick if you set your keybinds right
-        Piercing: 20
-        Asphyxiation: 15
-        Ion: 20
+      types: # You can throw them pretty damn quick if you set your keybinds right
+        Piercing: 12
+        Asphyxiation: 10
   - type: EmbeddableProjectile
     removalTime: 2
     sound: /Audio/_DV/CosmicCult/cosmiclance_impact.ogg
@@ -123,8 +121,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Asphyxiation: 10
-        Ion: 15
+        Piercing: 11
   - type: Item
     size: Large
     shape:
@@ -177,14 +174,13 @@
   - type: LeechOnMarker
     leech:
       types:
-        Blunt: -20
-        Slash: -20
-        Piercing: -20
-        Ballistic: -20
-        Heat: -20
+        Blunt: -10
+        Slash: -10
+        Piercing: -10
+        Ballistic: -15
+        Heat: -10
         Cold: -20
-        Shock: -20
-        Caustic: -20
+        Shock: -10
   - type: Gun
     projectileSpeed: 15
     soundGunshot: /Audio/_DV/CosmicCult/projectile_razor.ogg

@@ -26,9 +26,9 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.6 # Trauma, was 0.4
-        Ballistic: 0.5 # Trauma
-        Heat: 0.6
+        Piercing: 0.6
+        Ballistic: 0.7 # Trauma
+        Heat: 0.7
   - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
     delayDelta: 3
     knockdownTimeDelta: -3
