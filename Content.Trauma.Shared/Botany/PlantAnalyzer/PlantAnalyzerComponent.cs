@@ -116,29 +116,30 @@ public record struct SeedData(SeedDataType Type, string Name)
 {
     public static readonly SeedData[] AllGenes =
     [
-        new(SeedDataType.Float, "NutrientConsumption"),
-        new(SeedDataType.Float, "WaterConsumption"),
-        new(SeedDataType.Float, "ToxinsTolerance"),
-        new(SeedDataType.Float, "ToxinUptakeDivisor"),
-        new(SeedDataType.Float, "LowHeatTolerance"),
-        new(SeedDataType.Float, "HighHeatTolerance"),
-        new(SeedDataType.Float, "LowPressureTolerance"),
-        new(SeedDataType.Float, "HighPressureTolerance"),
-        new(SeedDataType.Float, "PestTolerance"),
-        new(SeedDataType.Float, "WeedTolerance"),
-        new(SeedDataType.Float, "Endurance"),
-        new(SeedDataType.Float, "Lifespan"),
-        new(SeedDataType.Float, "Maturation"),
-        new(SeedDataType.Float, "Production"),
-        new(SeedDataType.HarvestType, "HarvestType"),
-        new(SeedDataType.Int, "Yield"),
-        new(SeedDataType.Float, "Potency"),
-        new(SeedDataType.Bool, "Seedless"),
-        new(SeedDataType.Bool, "Ligneous"),
-        new(SeedDataType.Bool, "CanScream"),
-        new(SeedDataType.Bool, "TurnIntoKudzu"),
-        new(SeedDataType.GasConsume, "Consume Gases"),
-        new(SeedDataType.GasExude, "Exude Gases"),
-        new(SeedDataType.Chemical, "Chemicals")
+        new(SeedDataType.Float, "NutrientConsumption"), // 0
+        new(SeedDataType.Float, "WaterConsumption"), // 1
+        new(SeedDataType.Float, "ToxinsTolerance"), // 2
+        new(SeedDataType.Float, "ToxinUptakeDivisor"), // 3
+        new(SeedDataType.Float, "LowHeatTolerance"), // 4
+        new(SeedDataType.Float, "HighHeatTolerance"), // 5
+        new(SeedDataType.Float, "LowPressureTolerance"), // 6
+        new(SeedDataType.Float, "HighPressureTolerance"), // 7
+        new(SeedDataType.Float, "PestTolerance"), // 8
+        new(SeedDataType.Float, "WeedTolerance"), // 9
+        new(SeedDataType.Float, "Endurance"), // 10
+        new(SeedDataType.Float, "Lifespan"), // 11
+        new(SeedDataType.Float, "Maturation"), // 12
+        new(SeedDataType.Float, "Production"), // 13
+        new(SeedDataType.HarvestType, "HarvestType"), // 14
+        new(SeedDataType.Int, "Yield"), // 15
+        new(SeedDataType.Float, "Potency"), // 16
+        new(SeedDataType.Bool, "Seedless"), // 17
+        new(SeedDataType.Bool, "Unviable"), // 18
+        new(SeedDataType.Bool, "Ligneous"), // 19
+        new(SeedDataType.Bool, "CanScream"), // 20
+        new(SeedDataType.Bool, "TurnIntoKudzu"), // 21
+        new(SeedDataType.GasConsume, "Consume Gases"), // 22
+        new(SeedDataType.GasExude, "Exude Gases"), // 23
+        new(SeedDataType.Chemical, "Chemicals") // 24
     ];
 }
