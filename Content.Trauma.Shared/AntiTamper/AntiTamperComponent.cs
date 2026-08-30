@@ -2,13 +2,13 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.AntiTamper;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AntiTamperComponent : Component
 {
     /// <summary>
     /// Whether the AntiTamper feature is enabled.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool Enabled = true;
 
     /// <summary>

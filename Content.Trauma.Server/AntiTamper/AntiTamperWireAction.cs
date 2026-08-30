@@ -36,12 +36,16 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
         _antiTamper.AlertAlarm((wire.Owner, comp), respectCooldown: false);
 
         comp.Enabled = false;
+        EntityManager.Dirty(wire.Owner, comp);
+
         return true;
     }
 
     public override bool Mend(EntityUid user, Wire wire, AntiTamperComponent comp)
     {
         comp.Enabled = true;
+        EntityManager.Dirty(wire.Owner, comp);
+
         return true;
     }
 
@@ -53,7 +57,6 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
 
         _antiTamper.AlertYell((wire.Owner, comp), respectCooldown: false);
         _antiTamper.AlertAlarm((wire.Owner, comp), respectCooldown: false);
-        EntityManager.DirtyField(z)
 
         WiresSystem.SetData(wire.Owner, AntiTamperWireActionKey.Pulsed, true);
         WiresSystem.StartWireAction(wire.Owner, _pulseTimeout, AntiTamperWireActionKey.PulseCancel,
