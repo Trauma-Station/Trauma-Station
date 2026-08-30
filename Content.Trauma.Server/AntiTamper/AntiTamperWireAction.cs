@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Wires;
 using Content.Shared.Wires;
 using Content.Trauma.Shared.AntiTamper;

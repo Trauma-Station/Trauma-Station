@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.AntiTamper;
@@ -22,7 +24,7 @@ public sealed partial class AntiTamperComponent : Component
 
     /// <summary>
     /// When to yell <see cref="LocTamperMessage"/> if at all.
-    /// Add RadioMicrophone component to alert on radio aswell.  
+    /// Add RadioMicrophone component to alert on radio aswell.
     /// </summary>
     [DataField(required: true)]
     public AntiTamperAlertType YellAlertType;
@@ -64,7 +66,7 @@ public sealed partial class AntiTamperComponent : Component
     public TimeSpan LastAlarm = TimeSpan.Zero;
 
     /// <summary>
-    /// Message yelled, see <see cref="YellAlertType"/>. 
+    /// Message yelled, see <see cref="YellAlertType"/>.
     /// </summary>
     [DataField]
     public LocId LocTamperMessage = "anti-tamper-damaged";
