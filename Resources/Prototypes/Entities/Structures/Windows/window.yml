@@ -76,7 +76,7 @@
   - type: StaticPrice
     price: 100
   - type: BlockWeather
-
+# <Trauma>
 - type: entity
   parent: BaseWindowStructure
   id: Window
@@ -106,7 +106,7 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
+# </Trauma>
 - type: entity
   parent: Window
   id: TintedWindow
