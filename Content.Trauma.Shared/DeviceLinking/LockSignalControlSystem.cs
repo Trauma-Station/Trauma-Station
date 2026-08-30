@@ -1,15 +1,16 @@
 
 
-using Content.Server.DeviceLinking.Systems;
+using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Lock;
 
-namespace Content.Trauma.Server.DeviceLinking;
+namespace Content.Trauma.Shared.DeviceLinking;
 
+[Access(typeof(LockSignalControlSystem))]
 public sealed partial class LockSignalControlSystem : EntitySystem
 {
     [Dependency] private LockSystem _lock = default!;
-    [Dependency] private DeviceLinkSystem _signal = default!;
+    [Dependency] private SharedDeviceLinkSystem _signal = default!;
 
     [SubscribeLocalEvent]
     private void OnInit(Entity<LockSignalControlComponent> ent, ref ComponentInit args)

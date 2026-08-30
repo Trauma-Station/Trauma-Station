@@ -1,7 +1,10 @@
 using Content.Shared.DeviceLinking;
 
-namespace Content.Trauma.Server.DeviceLinking;
+namespace Content.Trauma.Shared.DeviceLinking;
 
+/// <summary>
+/// Adds Lock/Unlock/Toggle links and handles their behavior.
+/// </summary>
 [RegisterComponent]
 public sealed partial class LockSignalControlComponent : Component
 {
