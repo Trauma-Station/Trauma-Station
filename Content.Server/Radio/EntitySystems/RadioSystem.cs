@@ -150,7 +150,9 @@ public sealed partial class RadioSystem : SharedRadioSystem
         var msg = new ChatMessage(ChatChannel.Radio, content, wrappedMessage, GetNetEntity(messageSource), null);
 
         // <Trauma> - language slop
-        var obfuscated = _language.ObfuscateSpeech(content, language);
+        var obfuscated = _language.ObfuscateSpeech(message, language);
+        if (escapeMarkup)
+            obfuscated = FormattedMessage.EscapeText(obfuscated);
         var obfuscatedWrapped = _chat.WrapMessage(null, null, channel, messageSource, name, obfuscated, speech, language, null, jobIcon, jobName);
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
