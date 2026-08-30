@@ -779,7 +779,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100 # discourage just beating the grave to break it open
+        damage: 200 # discourage just beating the grave to break it open
       behaviors:
       - !type:PlaySoundBehavior
         sound:
