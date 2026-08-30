@@ -1,3 +1,4 @@
+#nullable enable
 using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Fixtures;

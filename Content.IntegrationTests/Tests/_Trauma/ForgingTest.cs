@@ -11,9 +11,11 @@ public sealed partial class ForgingTest : GameTest
     private static readonly EntProtoId Hammer = "MeleeHammer";
     private static readonly EntProtoId MobDwarf = "MobDwarf";
 
+    /*
     [SidedDependency(Side.Server)] private ForgingSystem _forging = default!;
     [SidedDependency(Side.Server)] private SharedCombatModeSystem _combat = default!;
     [SidedDependency(Side.Server)] private SharedMeleeWeaponSystem _melee = default!;
+    */
 
     /// <summary>
     /// Checks that all forged item prototypes are sane and that there are no empty categories.
