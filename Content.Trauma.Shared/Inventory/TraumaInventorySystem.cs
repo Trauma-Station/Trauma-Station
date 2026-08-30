@@ -4,9 +4,8 @@ using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Stunnable;
-using Content.Trauma.Common.Glue;
 using Content.Trauma.Common.Heretic;
-using Content.Trauma.Common.Lube;
+using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.Strip;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
@@ -33,13 +32,12 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, TransformSpeakerJobIconEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeHarmfulActionEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, CanSeeOnCameraEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<InventoryComponent, GluedPickUpAttemptEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<InventoryComponent, LubedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, ModifyViewconeAngleEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, GetStandUpTimeEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeMovespeedModifierAppliedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, WaypointerChangedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, CanSpawnFootstepsEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeDamageChangedEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, SpeechFontOverrideEvent>(_inventory.RelayEvent);
     }
 }

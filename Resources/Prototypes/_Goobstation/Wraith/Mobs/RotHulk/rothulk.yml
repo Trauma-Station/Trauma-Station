@@ -93,6 +93,8 @@
     name: ghost-role-information-rothulk-name
     description: ghost-role-information-rothulk-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostTakeoverAvailable

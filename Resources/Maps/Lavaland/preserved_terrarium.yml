@@ -527,13 +527,6 @@ entities:
     - type: Transform
       pos: 4.3292236,4.651968
       parent: 1
-- proto: CrateHydroponicsSeedsExotic
-  entities:
-  - uid: 128
-    components:
-    - type: Transform
-      pos: 0.5,-5.5
-      parent: 1
 - proto: CrateHydroponicsSeedsMedicinal
   entities:
   - uid: 140

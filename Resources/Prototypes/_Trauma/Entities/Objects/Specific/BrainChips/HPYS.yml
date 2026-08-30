@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipThrowing
+  name: HPYS-Chip (Hand-Eye Coordination)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipThrowingTampered
+  name: HPYS-Chip (Tampered Hand-Eye Coordination)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 50

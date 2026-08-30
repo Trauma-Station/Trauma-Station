@@ -107,7 +107,7 @@
   name: archer fish
   description: It's an archer fish.
   components:
-  - type: WeatherImmune
+  - type: AshStormImmune
   - type: InputMover
   - type: MobMover
   - type: HTN

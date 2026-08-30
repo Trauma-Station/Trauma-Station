@@ -67,6 +67,11 @@ public sealed partial class DestructibleSystem : SharedDestructibleSystem
     {
         var (uid, comp) = entity;
 
+        // <Trauma>
+        if (!comp.Enabled)
+            return;
+        // </Trauma>
+
         comp.IsBroken = false;
 
         foreach (var threshold in comp.Thresholds)
@@ -126,9 +131,6 @@ public sealed partial class DestructibleSystem : SharedDestructibleSystem
     public bool Triggered(DamageThreshold threshold, Entity<Shared.Damage.Components.DamageableComponent> owner,
         FixedPoint2 scale) // Trauma
     {
-        if (threshold.Trigger == null)
-            return false;
-
         if (threshold.Triggered && threshold.TriggersOnce)
             return false;
 

@@ -35,9 +35,8 @@
   - !type:ModifyStatusEffect
     effectProto: StatusEffectBlindness
     time: 2
-  - !type:GenericStatusEffect
-    key: BlurryVision
-    component: BlurryVision
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
     time: 5
   - !type:HealthChange
     targetPart: Head

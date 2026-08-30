@@ -94,6 +94,11 @@
   name: passenger
   components:
   - type: SpawnPoint
+    # <Trauma>
+    # For the purpose of any jobs that are sharing use of the passenger spawn.
+    extrajobs:
+    - DClass
+    # </Trauma>
     job_id: Passenger
   - type: Sprite
     layers:
@@ -594,3 +599,15 @@
     layers:
       - state: green
       - state: psychologist
+
+- type: entity
+  id: SpawnPointTramDriver
+  parent: SpawnPointJobBase
+  name: tramdriver
+  components:
+  - type: SpawnPoint
+    job_id: Passenger # Trauma - disabled until map is updated
+  - type: Sprite
+    layers:
+      - state: green
+      - state: tramdriver

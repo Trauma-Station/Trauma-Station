@@ -784,6 +784,9 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // The following is where we apply components, equipment, and other changes to our antagonist entity.
         EntityManager.AddComponents(antag, prototype.Components);
         // <Trauma>
+        if (prototype.Effects is { } effects)
+            _effects.ApplyEffects(antag, effects, predicted: false);
+        // TODO: make below an effect?
         if (prototype.UnequipOldGear)
             UnequipOldGear(antag);
         // </Trauma>

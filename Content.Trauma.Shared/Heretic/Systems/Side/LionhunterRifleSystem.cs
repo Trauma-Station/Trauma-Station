@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -56,7 +54,6 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         SubscribeLocalEvent<AimedRifleComponent, DoAfterAttemptEvent<AimedRifleDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<AimedRifleComponent, AimedRifleDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<LionhunterRifleComponent, ProjectileShotEvent>(OnShoot);
         SubscribeLocalEvent<LionhunterRifleComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<LionhunterRifleComponent, AimedRifleAimAttemptEvent>(OnAimAttempt);
 
@@ -115,7 +112,8 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         args.PushMarkup(Loc.GetString("lionhunter-rifle-examine-message"));
     }
 
-    private void OnShoot(Entity<LionhunterRifleComponent> ent, ref ProjectileShotEvent args)
+    [SubscribeLocalEvent]
+    private void OnShoot(Entity<LionhunterRifleComponent> ent, ref GunShotProjectileEvent args)
     {
         if (CompOrNull<AimedRifleComponent>(ent.Owner)?.AimingAt == null || args.User is not { } user)
             return;
@@ -130,19 +128,8 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         var uid = args.FiredProjectile;
 
-        if (!_lionhunterProjectileQuery.TryComp(uid, out var comp) ||
-            !_projectileQuery.TryComp(uid, out var projectile))
+        if (!_lionhunterProjectileQuery.TryComp(uid, out var comp))
             return;
-
-        projectile.Damage = new DamageSpecifier
-        {
-            DamageDict =
-                projectile.Damage.DamageDict.ToDictionary(x => x.Key, x => x.Value * comp.EmpowerDamageMultiplier),
-            ArmorPenetration = projectile.Damage.ArmorPenetration,
-            WoundSeverityMultipliers = projectile.Damage.WoundSeverityMultipliers,
-        };
-
-        Dirty(uid, projectile);
 
         EntityManager.AddComponents(uid, comp.ComponentsOnEmpower);
 
@@ -213,7 +200,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         if (_wieldableQuery.TryComp(ent.Value, out var wieldable) && !wieldable.Wielded)
         {
-            _popup.PopupClient(Loc.GetString("wieldable-component-requires", ("item", ent.Value)), user, user);
+            _popup.PopupEntity(Loc.GetString("wieldable-component-requires", ("item", ent.Value)), user, user);
             return;
         }
 
@@ -225,7 +212,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         if (distance < comp.MinDistance)
         {
-            _popup.PopupClient(Loc.GetString("heretic-ability-fail-too-close"), user, user);
+            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-too-close"), user, user);
             return;
         }
 
@@ -280,7 +267,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doArgs))
         {
-            _popup.PopupClient(Loc.GetString("lionhunter-rifle-aim-message"), user, user);
+            _popup.PopupEntity(Loc.GetString("lionhunter-rifle-aim-message"), user, user);
             if (comp.ShowMark)
                 EnsureComp<AimedRifleMarkerComponent>(target);
             return;

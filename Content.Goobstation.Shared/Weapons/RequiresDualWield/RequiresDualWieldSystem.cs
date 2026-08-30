@@ -77,7 +77,7 @@ public sealed partial class RequiresDualWieldSystem : EntitySystem
         {
             component.LastPopup = time;
             var message = Loc.GetString("dual-wield-component-requires", ("item", args.Used));
-            _popup.PopupClient(message, args.Used, args.User);
+            _popup.PopupEntity(message, args.Used, args.User);
         }
     }
 

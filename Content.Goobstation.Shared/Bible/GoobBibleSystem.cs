@@ -7,6 +7,7 @@ using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Common.Targeting;
+using Content.Shared.Bible.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -74,7 +75,7 @@ public sealed partial class GoobBibleSystem : EntitySystem
         if (!_mobState.IsIncapacitated(target))
         {
             var popup = Loc.GetString("weaktoholy-component-bible-sizzle", ("target", target), ("item", bible));
-            _popup.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+            _popup.PopupEntity(popup, target, performer, PopupType.LargeCaution);
             _audio.PlayPredicted(bibleComp.SizzleSoundPath, target, performer);
             _damage.ChangeDamage(target,
                 bibleComp.SmiteDamage * multiplier,
@@ -103,15 +104,9 @@ public sealed partial class GoobBibleSystem : EntitySystem
 
             _doAfter.TryStartDoAfter(doAfterArgs);
             var popup = Loc.GetString("devil-banish-begin", ("target", target), ("user", performer));
-            _popup.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+            _popup.PopupEntity(popup, target, performer, PopupType.LargeCaution);
         }
 
         return true;
     }
 }
-
-/// <summary>
-/// Raised on the target once bible gets used
-/// </summary>
-[ByRefEvent]
-public record struct BibleUsedEvent;

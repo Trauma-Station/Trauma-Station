@@ -16,8 +16,7 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 0.01
+    coefficient: 0.01
   - type: ExplosionResistance
     damageCoefficient: 0.05
   - type: Armor
@@ -61,7 +60,7 @@
 # Cybersun Stealth
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContrabandUnscannable]
   id: ClothingOuterHardsuitCybersunStealth
   suffix: stealth
   name: cybersun stealth hardsuit
@@ -96,7 +95,7 @@
 # cybersun dreadnought suit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateAnchoredContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContrabandUnscannable ]
   id: ClothingOuterHardsuitCybersunDreadnought
   name: Cybersun dreadnought suit
   description: The Syndicate places its glory on your shoulders, do not disappoint.
@@ -115,7 +114,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.1 # chinalake meta would go hard
   - type: FireProtection
-    reduction: 0.9 # atmos fire suit is 0.8, so i guess this is fine? Reduction goes the opossite way right?
+    reduction: 1
   - type: Armor
     traumaDeductions: # not full protection so its damage can actually harm you
       Dismemberment: 0.9
@@ -262,7 +261,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitExperimentalNanorep
   - type: FireProtection
-    reduction: 0.4
+    reduction: 0.5
 
 # Singuloth hardsuit
 
@@ -276,8 +275,8 @@
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/singuloth_knight_armor.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/singuloth_knight_armor.rsi
-  - type: AddAccentClothing
-    accent: MedievalAccent
+  - type: MedievalAccent
+    relayAccent: true
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadSinguloth

@@ -21,3 +21,17 @@
     containers:
       storagebase: !type:Container
       stash: !type:ContainerSlot
+
+- type: entity
+  parent: BriefcaseWeapon
+  id: BriefcaseWeaponLarge
+  suffix: Gun, Large, Empty
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/Briefcases/weapon_case.rsi
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,6,3

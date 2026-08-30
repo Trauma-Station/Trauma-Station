@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ Handcuffs, BaseMinorContraband ]
+  parent: [ BaseMinorContraband, Handcuffs ]
   id: BarbHandcuffs # TODO: Needs to damage on remove attempt
   name: barbed wire handcuffs
   description: Used to detain people you intend to kill.
@@ -17,3 +17,13 @@
   - type: Construction
     graph: BarbCuffs
     node: finish
+
+- type: entity
+  parent: AbductorHandcuffs
+  id: WonderprodCuffs
+  name: printed wondercuffs
+  description: Made out of a metal more durable than anything Nanotrasen could dream of. Dissolves when removed.
+  components:
+  - type: Handcuff
+    breakOnRemove: true
+    brokenPrototype: Ash

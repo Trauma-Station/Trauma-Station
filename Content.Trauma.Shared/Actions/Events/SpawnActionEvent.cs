@@ -2,13 +2,12 @@
 
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Content.Shared.FixedPoint; // Goobstation
-
 
 namespace Content.Trauma.Shared.Actions.Events;
 
@@ -27,7 +26,7 @@ public sealed partial class SpawnTileEntityActionEvent : InstantActionEvent
     /// The identifier of the tile to be placed
     /// </summary>
     [DataField]
-    public string? TileId;
+    public ProtoId<ContentTileDefinition>? TileId;
 
     /// <summary>
     /// The sound that will be played when the action is performed
@@ -83,12 +82,12 @@ public sealed partial class PlaceTileEntityDoAfterEvent : DoAfterEvent
 {
     public new NetCoordinates Target;
     public EntProtoId? Entity;
-    public string? TileId;
+    public ProtoId<ContentTileDefinition>? TileId;
     public SoundSpecifier? Audio;
     public int BlockedCollisionMask;
     public int BlockedCollisionLayer;
-    public FixedPoint2 PlasmaCost; // Goobstation
-    public NetEntity Action; // Goobstation
+    public FixedPoint2 PlasmaCost;
+    public NetEntity Action;
 
     public override DoAfterEvent Clone() => new PlaceTileEntityDoAfterEvent()
     {

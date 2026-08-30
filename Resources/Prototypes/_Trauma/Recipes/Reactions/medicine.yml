@@ -1,6 +1,19 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reaction
+  id: Cluoxadone
+  minTemp: 370
+  reactants:
+    Cryoxadone:
+      amount: 1
+    Dylovene:
+      amount: 2
+    Copper:
+      amount: 1
+  products:
+    Cluoxadone: 5
+
+- type: reaction
   id: Dewormer
   reactants:
     Immurin:
@@ -11,3 +24,17 @@
       amount: 1
   products:
     Dewormer: 5
+
+- type: reaction
+  id: Suffocatium
+  reactants:
+    Leporazine:
+      amount: 1
+    SodiumHydroxide:
+      amount: 1
+    HeartbreakerToxin:
+      amount: 1
+    Lithium:
+      amount: 1
+  products:
+    Suffocatium: 2

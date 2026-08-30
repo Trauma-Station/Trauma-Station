@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -91,12 +90,8 @@ public sealed partial class HereticAbilitySystem
             toHeal += args.HealAmount;
             nwAction.LastTargets++;
 
-            _flammable.Extinguish(look, flam);
-            _dmg.ChangeDamage(look,
-                args.Damage * multiplier * _body.GetVitalBodyPartRatio(look),
-                true,
-                targetPart: TargetBodyPart.All,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            _flammable.TryExtinguish((look, flam));
+            _dmg.ChangeDamage(look, args.Damage * multiplier, targetPart: TargetBodyPart.Vital);
         }
 
         var coords = _transform.GetMapCoordinates(args.Performer);
@@ -107,7 +102,7 @@ public sealed partial class HereticAbilitySystem
             Dirty(effect, grasp);
         }
 
-        _flammable.Extinguish(args.Performer);
+        _flammable.TryExtinguish(args.Performer);
 
         if (toHeal >= 0)
             return;

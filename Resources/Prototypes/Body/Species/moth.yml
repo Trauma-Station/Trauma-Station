@@ -3,6 +3,11 @@
   id: Moth
   onlyGroupWhitelisted: true
   limits:
+    # <Trauma>
+    enum.HumanoidVisualLayers.WingsBehind:
+      limit: 0
+      required: false
+    # </Trauma>
     enum.HumanoidVisualLayers.Hair:
       limit: 0
       required: false
@@ -47,11 +52,6 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
-  # <Trauma>
-  appearances:
-    enum.HumanoidVisualLayers.Wings:
-      matchSkin: true
-  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -192,10 +192,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 0.5 # Trauma, was 2.5 - 0.2x multiplier to compensate for limb damage
-  - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 46
+        Heat: 0.75 # Trauma, was 2.5 - 0.3x multiplier to compensate for limb damage
   - type: TemperatureDamage # Moths hate the heat and thrive in the cold.
     heatDamageThreshold: 320
     coldDamageThreshold: 230

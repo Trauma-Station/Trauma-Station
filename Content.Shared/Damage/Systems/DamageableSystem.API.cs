@@ -164,7 +164,10 @@ public sealed partial class DamageableSystem
         if (before.Cancelled)
             return damageDone;
 
-        damage = before.Damage; // Trauma
+        // <Trauma>
+        damage = before.Damage;
+        var isBody = _bodyQuery.HasComp(ent);
+        // </Trauma>
 
         // Apply resistances
         if (!ignoreResistances)
@@ -194,7 +197,8 @@ public sealed partial class DamageableSystem
                 RaiseLocalEvent(ent, ev);
                 modified = ev.Damage;
             }
-            else
+            // Skip applying modifiers to body, they will be applied when we reroute the damage to body parts
+            else if (!isBody)
             {
                 // Not a body part, just apply modifiers normally
                 var ev = new DamageModifyEvent(ent, modified, origin);
@@ -224,7 +228,7 @@ public sealed partial class DamageableSystem
         }
 
         // <Goob> - For entities with a body, route damage through body parts. no damage is added to the body's DamageableComponent
-        if (_bodyQuery.HasComp(ent))
+        if (isBody)
         {
             var vitalDamage = GetVitalDamage(damage);
             damage -= vitalDamage;
@@ -237,7 +241,7 @@ public sealed partial class DamageableSystem
             var ev = new DamageDealtEvent(damage, origin, interruptsDoAfters, ignoreBlockers, damage);
             RaiseLocalEvent(ent, ref ev);
 
-            return damage;
+            return ev.ModifiedDamage;
         }
         // </Goob>
 
@@ -281,7 +285,7 @@ public sealed partial class DamageableSystem
         if (amount >= 0)
         {
             var name = group?.Id ?? "all damage";
-            Log.Error($"Tried to evenly heal {ToPrettyString(ent)} with a non-negative amount {amount} of {name}");
+            Log.Error($"Tried to evenly heal {ToPrettyString(ent)} with a non-negative amount {amount} of {name}\nStack trace:\n{Environment.StackTrace}");
             return damageChange;
         }
 
@@ -530,7 +534,6 @@ public sealed partial class DamageableSystem
         {
             ent.Comp.Damage.DamageDict[type] = newValue;
         }
-        ent.Comp.LastModifiedTime = _timing.CurTime; // Shitmed
 
         // Setting damage does not count as 'dealing' damage, even if it is set to a larger value, so we pass an
         // empty damage delta.
@@ -567,7 +570,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Gets the damages currently sustained by an entity.
     /// </summary>
-    [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
+    //[Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")] // Trauma - shush
     public DamageSpecifier GetAllDamage(Entity<DamageableComponent?> ent)
     {
         if (!_damageableQuery.Resolve(ent, ref ent.Comp))
@@ -590,7 +593,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Gets the total amount of damage currently sustained by an entity.
     /// </summary>
-    [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
+    //[Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")] // Trauma - shush
     public FixedPoint2 GetTotalDamage(Entity<DamageableComponent?> ent)
     {
         if (!_damageableQuery.Resolve(ent, ref ent.Comp, false))
@@ -613,7 +616,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Gets the total amount of damage currently sustained by an entity, indexed by damage group.
     /// </summary>
-    [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
+    //[Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")] // Trauma - shush
     public IReadOnlyDictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> GetDamagePerGroup(Entity<DamageableComponent?> ent)
     {
         if (!_damageableQuery.Resolve(ent, ref ent.Comp, false)) // Trauma - no log error

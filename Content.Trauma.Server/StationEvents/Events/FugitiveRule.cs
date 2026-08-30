@@ -6,7 +6,7 @@ using Content.Server.GameTicking;
 using Content.Server.StationEvents.Events;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Paper;
@@ -28,7 +28,7 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedContainerSystem _container = default!;
 
-    private static readonly EntProtoId HunterSpawnProto = "FugitiveHunterRule";
+    private static readonly EntProtoId HunterSpawnProto = "FugitiveHunterRandom";
 
     public override void Initialize()
     {

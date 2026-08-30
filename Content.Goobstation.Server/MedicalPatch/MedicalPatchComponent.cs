@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Server.MedicalPatch;
 
+// what dyslexic bastard wrote this jesus
 [RegisterComponent]
+[AutoGenerateComponentPause]
 public sealed partial class MedicalPatchComponent : Component
 {
     [DataField]
@@ -21,13 +24,15 @@ public sealed partial class MedicalPatchComponent : Component
     /// </summary>
     [DataField]
     public string? TrashObject = "UsedMedicalPatch";
+
     /// <summary>
-    /// how often the patch shud transfer sulution
+    /// How often the patch should transfer solution
     /// </summary>
     [DataField]
-    public float UpdateTime = 1f;
+    public TimeSpan UpdateTime = TimeSpan.FromSeconds(1);
 
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan NextUpdate = TimeSpan.Zero;
     /// <summary>
     /// if any set ammount shud be transfered when the patch is attatched,

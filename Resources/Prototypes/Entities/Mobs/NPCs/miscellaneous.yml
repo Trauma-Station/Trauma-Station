@@ -1,7 +1,7 @@
 - type: entity
   name: laser raptor
   id: MobLaserRaptor
-  parent: [AppearanceLaserRaptor, SimpleMobBase, BaseSlicingRefinable] # Trauma - added
+  parent: [AppearanceLaserRaptor, SimpleMobBase, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceLaserRaptor
   description: From the Viking age.
   components:
     - type: NpcFactionMember
@@ -68,6 +68,11 @@
   name: tomato killer
   description: Looks like it's not you eating tomatoes today, it's the tomatoes eating you.
   components:
+  # <Trauma>
+  - type: FadingTimedDespawn # otherwise its too easy to make hell armies
+    lifetime: 180
+    fadeOutTime: 60
+  # </Trauma>
   - type: GhostRole
     prob: 0 # Trauma - was 0.05
     makeSentient: true
@@ -206,9 +211,8 @@
   - type: PotencyVisuals
   - type: Appearance
   - type: Produce
-    seedId: killerTomato
-  # Goobstation - Remove killer tomato timed live
-  # billions must die
+    plantId: KillerTomatoPlants
+  # <Trauma> - fun legal
   #- type: PassiveDamage # Slight passive damage. 35 hp \ 5 min \ 60 sec = 0.08
   #  allowedStates:
   #  - Alive
@@ -216,8 +220,6 @@
   #  damage:
   #    types:
   #      Blunt: 0.11
+  # </Trauma>
   - type: StaticPrice
     price: 400
-  - type: FadingTimedDespawn # Trauma, otherwise its too easy to make hell armies
-    lifetime: 180
-    fadeOutTime: 60

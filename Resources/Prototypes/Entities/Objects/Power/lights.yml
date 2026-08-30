@@ -1,7 +1,7 @@
 - type: entity
-  parent: BaseItem
-  id: BaseLightbulb
   abstract: true
+  parent: BaseItem
+  id: BaseReplacementLight
   components:
   - type: MeleeSound
     soundGroups:
@@ -10,8 +10,8 @@
   - type: Sprite
     sprite: Objects/Power/light_bulb.rsi
     layers:
-      - map: [ enum.LightBulbVisualLayers.Base ]
-        state: normal
+    - map: [ enum.LightBulbVisualLayers.Base ]
+      state: normal
   - type: LightBulb
   - type: Damageable
   - type: Injurable
@@ -34,10 +34,10 @@
         sound:
           collection: GlassBreak
           params:
-            volume: -8
+            volume: -4
       - !type:DoActsBehavior
         acts: [ "Breakage" ]
-    - trigger:
+    - trigger: &DamageTrigger10
         !type:DamageTrigger
         damage: 10
       behaviors:
@@ -45,12 +45,7 @@
         sound:
           collection: GlassBreak
           params:
-            volume: -8
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
+            volume: -4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Appearance
@@ -71,39 +66,31 @@
         Blunt: 5
 
 - type: entity
-  parent: BaseLightbulb
-  id: BaseLightTube
   abstract: true
+  parent: BaseReplacementLight
+  id: BaseLightbulb
   components:
-  - type: Sprite
-    sprite:  Objects/Power/light_tube.rsi
-  - type: LightBulb
-    bulb: Tube
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 5
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:DoActsBehavior
-        acts: [ "Breakage" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    - trigger: *DamageTrigger10
+      behaviors: &BehaviorsSpawnShardGlass
       - !type:SpawnEntitiesBehavior
         spawn:
           ShardGlass:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+
+- type: entity
+  abstract: true
+  parent: BaseReplacementLight
+  id: BaseLightTube
+  components:
+  - type: Sprite
+    sprite: Objects/Power/light_tube.rsi
+  - type: Destructible
+    thresholds:
+    - trigger: *DamageTrigger10
+      behaviors: *BehaviorsSpawnShardGlass
 
 # Lighting color values gathered from
 # https://andi-siess.de/rgb-to-color-temperature/
@@ -120,6 +107,7 @@
     lightEnergy: 1.0
     lightRadius: 6
     lightSoftness: 1.1
+    shortName: comp-light-bulb-incandescent
   - type: Tag
     tags:
     - LightBulb
@@ -139,6 +127,7 @@
     lightSoftness: 1
     BurningTemperature: 350 #LEDs are colder than incandescent bulbs
     PowerUse: 6 #LEDs are more power efficient than incandescent bulbs
+    shortName: comp-light-bulb-led
   - type: Tag
     tags:
     - LightBulb
@@ -156,6 +145,7 @@
     lightEnergy: 0.5
     lightRadius: 5
     lightSoftness: 3
+    shortName: comp-light-bulb-dim
   - type: Tag
     tags:
     - LightBulb
@@ -173,6 +163,7 @@
     lightEnergy: 1
     lightRadius: 6
     lightSoftness: 3
+    shortName: comp-light-bulb-warm
   - type: Tag
     tags:
     - LightBulb
@@ -190,13 +181,14 @@
     lightEnergy: 0.3 # old incandescents just arent as bright
     lightRadius: 6
     lightSoftness: 1.1
+    shortName: comp-light-bulb-old
 
 - type: entity
-  suffix: Broken
   parent: BaseLightbulb
   name: incandescent light bulb
   id: LightBulbBroken
-  description: A light bulb.
+  suffix: Broken
+  description: A broken light bulb.
   components:
   - type: LightBulb
     startingState: Broken
@@ -214,6 +206,7 @@
     lightEnergy: 0.45
     lightRadius: 1.5
     lightSoftness: 3
+    shortName: comp-light-bulb-service
   - type: Tag
     tags:
     - LightBulb
@@ -231,6 +224,7 @@
     lightRadius: 10
     lightSoftness: 1
     PowerUse: 25
+    shortName: comp-light-bulb-fluorescent
 
 - type: entity
   parent: LightTube
@@ -244,13 +238,14 @@
     lightRadius: 10
     lightSoftness: 1
     PowerUse: 10
+    shortName: comp-light-bulb-old
 
 - type: entity
-  suffix: Broken
   parent: BaseLightTube
   name: fluorescent light tube
   id: LightTubeBroken
-  description: A light fixture.
+  suffix: Broken
+  description: A broken light fixture.
   components:
   - type: LightBulb
     startingState: Broken
@@ -268,6 +263,7 @@
     lightSoftness: 0.9
     BurningTemperature: 350
     PowerUse: 12
+    shortName: comp-light-bulb-led
 
 - type: entity
   parent: BaseLightTube
@@ -282,6 +278,7 @@
     lightSoftness: 0.5
     BurningTemperature: 350
     PowerUse: 100
+    shortName: comp-light-bulb-exterior
 
 - type: entity
   parent: BaseLightTube
@@ -296,6 +293,7 @@
     lightSoftness: 0.5
     BurningTemperature: 350
     PowerUse: 100
+    shortName: comp-light-bulb-sodium
 
 - type: entity
   parent: BaseLightTube
@@ -318,6 +316,7 @@
   components:
   - type: LightBulb
     color: "#47f8ff"
+    shortName: comp-light-bulb-cyan
   - type: Construction
     graph: CyanLight
     node: icon
@@ -333,6 +332,7 @@
   components:
   - type: LightBulb
     color: "#39a1ff"
+    shortName: comp-light-bulb-blue
   - type: Construction
     graph: BlueLight
     node: icon
@@ -348,6 +348,7 @@
   components:
   - type: LightBulb
     color: "#ffde46"
+    shortName: comp-light-bulb-yellow
   - type: Construction
     graph: YellowLight
     node: icon
@@ -363,6 +364,7 @@
   components:
   - type: LightBulb
     color: "#ff66cc"
+    shortName: comp-light-bulb-pink
   - type: Construction
     graph: PinkLight
     node: icon
@@ -378,6 +380,7 @@
   components:
   - type: LightBulb
     color: "#ff8227"
+    shortName: comp-light-bulb-orange
   - type: Construction
     graph: OrangeLight
     node: icon
@@ -396,6 +399,7 @@
     color: "#363636"
     lightEnergy: 1
     lightRadius: 8
+    shortName: comp-light-bulb-black
   - type: Construction
     graph: BlackLight
     node: icon
@@ -411,6 +415,7 @@
   components:
   - type: LightBulb
     color: "#fb4747"
+    shortName: comp-light-bulb-red
   - type: Construction
     graph: RedLight
     node: icon
@@ -426,6 +431,7 @@
   components:
   - type: LightBulb
     color: "#52ff39"
+    shortName: comp-light-bulb-green
   - type: Construction
     graph: GreenLight
     node: icon
@@ -458,6 +464,7 @@
   components:
   - type: LightBulb
     color: "#47f8ff"
+    shortName: comp-light-bulb-cyan
   - type: Construction
     graph: CyanLightBulb
     node: icon
@@ -473,6 +480,7 @@
   components:
   - type: LightBulb
     color: "#39a1ff"
+    shortName: comp-light-bulb-blue
   - type: Construction
     graph: BlueLightBulb
     node: icon
@@ -488,6 +496,7 @@
   components:
   - type: LightBulb
     color: "#ffde46"
+    shortName: comp-light-bulb-yellow
   - type: Construction
     graph: YellowLightBulb
     node: icon
@@ -503,6 +512,7 @@
   components:
   - type: LightBulb
     color: "#ff66cc"
+    shortName: comp-light-bulb-pink
   - type: Construction
     graph: PinkLightBulb
     node: icon
@@ -518,6 +528,7 @@
   components:
   - type: LightBulb
     color: "#ff8227"
+    shortName: comp-light-bulb-orange
   - type: Construction
     graph: OrangeLightBulb
     node: icon
@@ -536,6 +547,7 @@
     color: "#363636"
     lightEnergy: 1
     lightRadius: 8
+    shortName: comp-light-bulb-black
   - type: Construction
     graph: BlackLightBulb
     node: icon
@@ -551,6 +563,7 @@
   components:
   - type: LightBulb
     color: "#fb4747"
+    shortName: comp-light-bulb-red
   - type: Construction
     graph: RedLightBulb
     node: icon
@@ -566,6 +579,7 @@
   components:
   - type: LightBulb
     color: "#52ff39"
+    shortName: comp-light-bulb-green
   - type: Construction
     graph: GreenLightBulb
     node: icon

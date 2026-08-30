@@ -53,7 +53,7 @@ public abstract partial class SharedScentTrackerSystem : EntitySystem
             BreakOnDamage = true,
         };
 
-        _popupSystem.PopupPredicted(Loc.GetString("start-tracking-scent", ("user", Identity.Name(user, EntityManager)), ("target", Identity.Name(target, EntityManager))), user, user);
+        _popupSystem.PopupEntity(Loc.GetString("start-tracking-scent", ("user", Identity.Name(user, EntityManager)), ("target", Identity.Name(target, EntityManager))), user, user);
         _doAfterSystem.TryStartDoAfter(doAfterEventArgs);
     }
 
@@ -104,10 +104,10 @@ public abstract partial class SharedScentTrackerSystem : EntitySystem
         if (forcomp.Scent != string.Empty)
         {
             component.Scent = forcomp.Scent;
-            _popupSystem.PopupPredicted(Loc.GetString("tracking-scent", ("target", Identity.Name(target, EntityManager))), uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("tracking-scent", ("target", Identity.Name(target, EntityManager))), uid, uid);
         }
         else
-            _popupSystem.PopupPredicted(Loc.GetString("no-scent"), uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("no-scent"), uid, uid);
 
         Dirty(uid, component);
     }
@@ -118,7 +118,7 @@ public abstract partial class SharedScentTrackerSystem : EntitySystem
             return;
 
         component.Scent = string.Empty;
-        _popupSystem.PopupPredicted(Loc.GetString("stopped-tracking-scent"), uid, uid);
+        _popupSystem.PopupEntity(Loc.GetString("stopped-tracking-scent"), uid, uid);
 
         Dirty(uid, component);
     }

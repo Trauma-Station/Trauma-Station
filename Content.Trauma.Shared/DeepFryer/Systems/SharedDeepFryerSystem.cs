@@ -69,14 +69,14 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
             || deepFryerSolution.Volume <= 100f)
         {
             args.Cancelled = true;
-            _popup.PopupClient(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner, args.User);
+            _popup.PopupEntity(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner, args.User);
             return;
         }
 
         if (!_power.IsPowered(ent.Owner))
         {
             args.Cancelled = true;
-            _popup.PopupClient(Loc.GetString("deep-fryer-no-power"), ent.Owner, args.User);
+            _popup.PopupEntity(Loc.GetString("deep-fryer-no-power"), ent.Owner, args.User);
             return;
         }
 
@@ -150,7 +150,7 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
     {
         ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
 
-        _popup.PopupPredicted(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("deep-fryer-item-cooked"), ent.Owner, ent.Owner);
 
         foreach (var storedObject in ent.Comp.StoredObjects)
         {

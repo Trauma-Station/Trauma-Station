@@ -26,7 +26,7 @@ public sealed partial class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxClone
     [Dependency] private CloningSystem _cloning = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SuitSensorSystem _sensor = default!;
-    [Dependency] private TargetSystem _target = default!;
+    [Dependency] private AliveHumanoidTargetSystem _target = default!;
 
     public override void Initialize()
     {
@@ -41,8 +41,13 @@ public sealed partial class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxClone
         base.Started(uid, component, gameRule, args);
 
         // check if we got enough potential cloning targets, otherwise cancel the gamerule so that the ghost role does not show up
-        var allHumans = _target.GetAliveHumans();
-        allHumans.RemoveWhere(human => _whitelist.IsWhitelistPass(component.TargetBlacklist, human)); // Goobstation
+        var allHumans = _target.GetMinds();
+        // <Trauma>
+        if (component.TargetBlacklist is { } blacklist)
+        {
+            allHumans.RemoveWhere(mind => _whitelist.IsValid(blacklist, mind.Comp.OwnedEntity));
+        }
+        // </Trauma>
 
         if (allHumans.Count == 0)
         {
@@ -66,8 +71,13 @@ public sealed partial class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxClone
         else
         {
             // get possible targets
-            var allAliveHumanoids = _target.GetAliveHumans();
-            allAliveHumanoids.RemoveWhere(human => _whitelist.IsWhitelistPass(ent.Comp.TargetBlacklist, human)); // Goobstation
+            var allAliveHumanoids = _target.GetMinds();
+            // <Trauma>
+            if (ent.Comp.TargetBlacklist is { } blacklist)
+            {
+                allAliveHumanoids.RemoveWhere(mind => _whitelist.IsValid(blacklist, mind.Comp.OwnedEntity));
+            }
+            // </Trauma>
 
             // we already checked when starting the gamerule, but someone might have died since then.
             if (allAliveHumanoids.Count == 0)

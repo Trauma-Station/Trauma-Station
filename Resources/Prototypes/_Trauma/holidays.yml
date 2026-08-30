@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: holiday
+  id: NeverForget
+  name: holiday-name-9-11
+  beginDay: 11
+  beginMonth: September
+  greet: !type:Custom
+    text: holiday-custom-9-11

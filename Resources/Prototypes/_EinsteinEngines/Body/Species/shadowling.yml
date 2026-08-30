@@ -47,6 +47,11 @@
       Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
     species: Shadowling
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 - type: entity
   parent:

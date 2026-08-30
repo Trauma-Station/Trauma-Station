@@ -79,7 +79,7 @@ public sealed partial class InsideBodyPartSystem : CommonInsideBodyPartSystem
         args.Handled = _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ent.Owner, delay, ev, eventTarget: ent, target: part));
 
         var victim = Identity.Name(target, EntityManager);
-        _popup.PopupPredicted(Loc.GetString("body-part-burst-starting", ("victim", victim), ("part", part)), ent, ent, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("body-part-burst-starting", ("victim", victim), ("part", part)), ent, ent, PopupType.LargeCaution);
     }
 
     private void OnDoAfter(Entity<InsideBodyPartComponent> ent, ref BurstDoAfterEvent args)
@@ -102,7 +102,7 @@ public sealed partial class InsideBodyPartSystem : CommonInsideBodyPartSystem
         }
 
         var victim = Identity.Name(target, EntityManager);
-        _popup.PopupPredicted(Loc.GetString("body-part-burst-finished", ("victim", victim), ("burst", ent.Owner)), ent, ent, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("body-part-burst-finished", ("victim", victim), ("burst", ent.Owner)), ent, ent, PopupType.LargeCaution);
 
         // this should never happen as container events should indirectly remove it, but just incase
         RemComp(ent, ent.Comp);

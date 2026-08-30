@@ -47,7 +47,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: ClothingHeadHelmetBase # Trauma - was ClothingHeadBase
   id: ClothingHeadLightBase
   name: base helmet with light
   categories: [ HideSpawnMenu ]
@@ -70,7 +70,7 @@
     enabled: false
     radius: 5 # Trauma - was 3
     energy: 1
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
   - type: Appearance
@@ -108,10 +108,15 @@
 
 - type: entity
   abstract: true
-  parent: [ClothingHeadBase, BaseClothingViewconeSmall] # Trauma
+  parent: [ ClothingHeadBase, TemperatureProtection, BaseClothingViewconeSmall ] # Trauma - viewcone
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
+  # <Trauma>
+  - type: IgniteFromGasImmunity
+    parts:
+    - Head
+  # </Trauma>
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]
@@ -121,12 +126,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.2
-    coolingCoefficient: 0.2
-  - type: IgniteFromGasImmunity # EE Plasmeme Change
-    parts:
-    - Head
   - type: IngestionBlocker
   - type: Clothing
     #Copies ClothingHeadHardsuitBase behavior
@@ -150,8 +149,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseClothingViewconeSmall # Trauma
-  # No parent since we aren't actually an item.
+  parent: [ TemperatureProtection, BaseClothingViewconeSmall ] # Trauma - viewcone
   id: ClothingHeadHardsuitBase
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]
@@ -163,8 +161,12 @@
         Aerial: -1
       chanceMultipliers:
         Aerial: 0
+  - type: FireProtection
+    reduction: 1
+  - type: IgniteFromGasImmunity
+    parts:
+    - Head
   # </Trauma>
-
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]
@@ -182,14 +184,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.1
-    coolingCoefficient: 0.1
-  - type: FireProtection # EE Plasmeme Change
-    reduction: 0.2
-  - type: IgniteFromGasImmunity
-    parts:
-    - Head
   - type: Armor
     coverage:
     - Head
@@ -223,8 +217,14 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadHardsuitBase
-  id: ClothingHeadHardsuitWithLightBase
+  parent: [ TemperatureProtection, ClothingHeadHardsuitBase ]
+  id: ClothingHeadHardsuitInsulatedBase
+
+- type: entity
+  abstract: true
+  # No parent since it isn't an item
+  # must parent both this and the desired helmet base when using
+  id: ClothingHeadSuitWithLightBase
   name: base hardsuit helmet with light
   categories: [ HideSpawnMenu ]
   components:
@@ -246,7 +246,7 @@
     enabled: false
     radius: 3
     energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: false
   - type: Appearance
@@ -279,6 +279,7 @@
 
 - type: entity
   abstract: true
+  parent: TemperatureProtectionMinimal
   id: ClothingHeadHatHoodWinterBase
   name: base winter coat hood
   description: A hood, made to keep your head warm.
@@ -292,9 +293,6 @@
     unequipSound: /Audio/Effects/rustle2.ogg
     quickEquip: false
     slots: [ HEAD ]
-  - type: TemperatureProtection
-    heatingCoefficient: 1.05
-    coolingCoefficient: 0.7
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.90
   - type: Armor # so zombification resistance shows up

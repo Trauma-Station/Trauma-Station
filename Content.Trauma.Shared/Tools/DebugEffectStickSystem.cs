@@ -82,7 +82,7 @@ public sealed partial class DebugEffectStickSystem : EntitySystem
         if (_admin.HasAdminFlag(uid, AdminFlags.VarEdit))
             return true;
 
-        _popup.PopupClient("You are not worthy...", uid, uid);
+        _popup.PopupEntity("You are not worthy...", uid, uid);
         return false;
     }
 }

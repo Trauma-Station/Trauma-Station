@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Robust.Shared.Physics.Dynamics;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Projectiles;
 
@@ -20,13 +18,7 @@ public sealed partial class ProjectileComponent
     [DataField]
     public bool Penetrate;
 
-    /// <summary>
-    ///     Collision mask of what not to penetrate if <see cref="Penetrate"/> is true.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>))]
-    public int NoPenetrateMask = 0;
-
-    [NonSerialized]
+    [DataField]
     public List<EntityUid> IgnoredEntities = new();
 
     [DataField]

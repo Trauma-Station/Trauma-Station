@@ -1,0 +1,140 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseSpiderStructure
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: Sprite
+    sprite: _Trauma/Structures/spiders.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: icon
+  - type: InteractionOutline
+  - type: Damageable
+  - type: Injurable
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderplace.ogg
+      params:
+        volume: 0.7
+  - type: AmbientSound
+    range: 15
+    volume: -2
+    sound:
+      path: /Audio/_Trauma/Specific/spider/spiderwalk.ogg
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+
+- type: entity
+  parent: BaseSpiderStructure
+  id: SpiderEggs
+  name: egg sac
+  description: A bundle of spider eggs, you see them squirming within.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/spiders.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: desecration
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Eggshells:
+            min: 6
+            max: 6
+      - !type:SpillBehavior
+        solution: egg
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: desecration
+  - type: TimedDespawn
+    lifetime: 121
+  - type: TimedSpawner
+    prototypes:
+    - MobBabySpider
+    intervalSeconds: 120
+    minimumEntitiesSpawned: 3
+    maximumEntitiesSpawned: 6
+  - type: Solution
+    solution:
+      maxVol: 150
+      reagents:
+      - ReagentId: Egg
+        Quantity: 150
+    id: egg
+
+- type: entity
+  parent: BaseSpiderStructure
+  id: SpiderEggsHuman
+  name: infested crewmate
+  description: A once living crewmate, turned into a home for spiders.
+  components:
+  - type: Sprite
+    state: webbed
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: desecration
+      - !type:SpawnEntitiesBehavior
+         spawn:
+          MaterialWebSilk:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: TimedSpawner
+    chance: .5
+    prototypes:
+    - MobBabySpider
+    intervalSeconds: 60
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+  - type: AntiRottingContainer
+  - type: EntityStorage
+    capacity: 1
+    openOnMove: false
+  - type: Lock
+    locked: true
+    showLockVerbs: false
+    showExamine: false
+    breakOnAccessBreaker: false
+    unlockOnClick: false
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container

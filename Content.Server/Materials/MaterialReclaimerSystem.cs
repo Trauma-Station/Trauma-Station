@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Body;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
@@ -5,6 +8,7 @@ using Content.Server.Popups;
 using Content.Server.Stack;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Emag.Components;
@@ -26,6 +30,9 @@ namespace Content.Server.Materials;
 /// <inheritdoc/>
 public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 {
+    // <Trauma>
+    [Dependency] private BodySystem _body = default!;
+    // </Trauma>
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private GhostSystem _ghostSystem = default!;
     [Dependency] private MaterialStorageSystem _materialStorage = default!;
@@ -36,6 +43,8 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -123,17 +132,30 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         if (!base.TryFinishProcessItem(uid, component, active))
             return false;
 
-        if (active.ReclaimingContainer.ContainedEntities.FirstOrNull() is not { } item)
+        // <Trauma> - replace container with Processing list
+        var i = active.Processing.Count - 1;
+        if (i < 0)
             return false;
 
-        Container.Remove(item, active.ReclaimingContainer);
-        Dirty(uid, component);
+        var item = active.Processing[i];
+        if (Deleted(item))
+            return false;
+        // </Trauma>
 
         // scales the output if the process was interrupted.
         var completion = 1f - Math.Clamp((float) Math.Round((active.EndTime - Timing.CurTime) / active.Duration),
             0f,
             1f);
         Reclaim(uid, item, completion, component);
+        // <Trauma> - have a delay for damaging mobs, doesnt matter for items since they will just be recycled immediately
+        active.Duration += TimeSpan.FromSeconds(0.5);
+        active.EndTime += TimeSpan.FromSeconds(0.5);
+
+        // if it got deleted (always will for items) stop processing it
+        // keep processing mobs stacking slash damage
+        if (Deleted(item))
+            active.Processing.RemoveAt(i);
+        // </Trauma>
 
         return true;
     }
@@ -154,22 +176,39 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         if (component.ReclaimMaterials)
             SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
 
-        if (CanGib(uid, item, component))
+        var playSound = true;
+
+        if (CanDamageAndGib(uid, item, component))
         {
-            var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
-            _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
-            _gibbing.Gib(item);
-            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
-        }
-        else
-        {
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, true, component, xform);
+            var didBloody = false;
+
+            // Trauma - add targetPart and canMiss
+            if (component.DamageOnEmag is not null && _damage.TryChangeDamage(item, component.DamageOnEmag, false, targetPart: _body.GetRandomExtremity(item), canMiss: false)) // It shouldn't ignore resistance
+                didBloody = true;
+
+            /* Trauma - just delimb instead of gibbing, the mob itself doesnt have destructible thresholds
+            if (_destructible.CanDestroy(item) && component.GibOnEmag)
+            {
+                var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
+                _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity}");
+
+                playSound = false; // Gibbing already make the noise!
+
+                _gibbing.Gib(item);
+
+                didBloody = true;
+            }
+            */
+
+            if (didBloody)
+                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+            return; // Trauma - just damage mobs instead of deleting them
         }
 
-        QueueDel(item);
+        if (_destructible.CanDestroy(item) && component.ReclaimSolutions)
+            SpawnChemicalsFromComposition(uid, item, completion, playSound, component, xform);
+
+        _destructible.DestroyEntity(item);
     }
 
     private void SpawnMaterialsFromComposition(EntityUid reclaimer,
@@ -217,10 +256,14 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         TransformComponent? xform = null,
         PhysicalCompositionComponent? composition = null)
     {
-        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform) || reclaimerComponent.SolutionContainerId == null)
+        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform))
             return;
 
         efficiency *= reclaimerComponent.Efficiency;
+
+        // Solution will be empty, nothing to do.
+        if (efficiency <= 0)
+            return;
 
         var totalChemicals = new Solution();
 
@@ -252,9 +295,13 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
             }
         }
 
-        if (!_solutionContainer.TryGetSolution(reclaimer, reclaimerComponent.SolutionContainerId, out var outputSolution) ||
-            !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
-            totalChemicals.Volume > 0)
+        // Transfer or spill the solution if there's anything to move.
+        if (totalChemicals.Volume <= 0)
+            return;
+
+        if (reclaimerComponent.SolutionContainerId == null ||
+            !_solutionContainer.TryGetSolution(reclaimer, reclaimerComponent.SolutionContainerId, out var outputSolution) ||
+            !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume))
         {
             _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
         }

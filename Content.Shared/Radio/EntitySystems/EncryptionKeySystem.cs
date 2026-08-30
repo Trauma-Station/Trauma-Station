@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Whitelist;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
@@ -7,7 +10,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
 using Content.Shared.Tools.Components;
-using Content.Shared.Whitelist;
 using Content.Shared.Wires;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -22,13 +24,15 @@ namespace Content.Shared.Radio.EntitySystems;
 /// </summary>
 public sealed partial class EncryptionKeySystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    // </Trauma>
     [Dependency] private SharedToolSystem _tool = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedWiresSystem _wires = default!;
-    [Dependency] private EntityWhitelistSystem _whitelist = default!; // Goobstation - Whitelisted radio channels
 
     public override void Initialize()
     {
@@ -55,7 +59,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             _hands.PickupOrDrop(args.User, ent, dropNear: true);
         }
 
-        _popup.PopupPredicted(Loc.GetString("encryption-keys-all-extracted"), uid, args.User);
+        _popup.PopupEntity(Loc.GetString("encryption-keys-all-extracted"), uid, args.User);
         _audio.PlayPredicted(component.KeyExtractionSound, uid, args.User);
     }
 
@@ -108,25 +112,25 @@ public sealed partial class EncryptionKeySystem : EntitySystem
     {
         if (!component.KeysUnlocked)
         {
-            _popup.PopupClient(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
             return;
         }
 
         if (TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
         {
-            _popup.PopupClient(Loc.GetString("encryption-keys-panel-locked"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-keys-panel-locked"), uid, args.User);
             return;
         }
 
         if (component.KeySlots <= component.KeyContainer.ContainedEntities.Count)
         {
-            _popup.PopupClient(Loc.GetString("encryption-key-slots-already-full"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-key-slots-already-full"), uid, args.User);
             return;
         }
 
         if (_container.Insert(args.Used, component.KeyContainer))
         {
-            _popup.PopupClient(Loc.GetString("encryption-key-successfully-installed"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-key-successfully-installed"), uid, args.User);
             _audio.PlayPredicted(component.KeyInsertionSound, args.Target, args.User);
             args.Handled = true;
             return;
@@ -138,19 +142,19 @@ public sealed partial class EncryptionKeySystem : EntitySystem
     {
         if (!component.KeysUnlocked)
         {
-            _popup.PopupClient(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-keys-are-locked"), uid, args.User);
             return;
         }
 
         if (!_wires.IsPanelOpen(uid))
         {
-            _popup.PopupClient(Loc.GetString("encryption-keys-panel-locked"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-keys-panel-locked"), uid, args.User);
             return;
         }
 
         if (component.KeyContainer.ContainedEntities.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("encryption-keys-no-keys"), uid, args.User);
+            _popup.PopupEntity(Loc.GetString("encryption-keys-no-keys"), uid, args.User);
             return;
         }
 
@@ -219,29 +223,29 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 ? SharedChatSystem.RadioCommonPrefix.ToString()
                 : $"{SharedChatSystem.RadioChannelPrefix}{proto.KeyCode}";
 
-            // Goobstation - Start - Whitelisted radio channels
-            var restictionText = string.Empty;
+            // <Trauma> - show whitelist info
+            var restriction = string.Empty;
             if (HasComp<EncryptionKeyHolderComponent>(examineEvent.Examined))
             {
                 var receiveFail = _whitelist.IsWhitelistFail(proto.ReceiveWhitelist, examineEvent.Examined);
                 var sendFail = _whitelist.IsWhitelistFail(proto.SendWhitelist, examineEvent.Examined);
 
-                restictionText = (receiveFail, sendFail) switch
+                restriction = (receiveFail, sendFail) switch
                 {
                     (true, true) => Loc.GetString("examine-headset-not-compatible"),
                     (true, false) => Loc.GetString("examine-headset-send-only"),
                     (false, true) => Loc.GetString("examine-headset-receive-only"),
-                    _ => restictionText
+                    _ => restriction
                 };
             }
-            // Goobstation - End
+            // </Trauma>
 
             examineEvent.PushMarkup(Loc.GetString(channelFTLPattern,
                 ("color", proto.Color),
                 ("key", key),
                 ("id", proto.LocalizedName),
-                ("freq", proto.Frequency / 10f),
-                ("deviceType", restictionText)));
+                ("freq", proto.Frequency),
+                ("deviceType", restriction))); // Trauma
         }
 
         if (defaultChannel != null && ProtoMan.TryIndex(defaultChannel, out proto))

@@ -43,7 +43,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         SubscribeLocalEvent<SurgeryStepSpawnEffectComponent, SurgeryStepEvent>(OnStepSpawnComplete);
     }
 
-    protected override void RefreshUI(EntityUid body)
+    public override void RefreshUI(EntityUid body)
     {
         var surgeries = new Dictionary<NetEntity, List<EntProtoId>>();
         foreach (var part in _body.GetExternalOrgans(body))
@@ -74,41 +74,20 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         _ui.ServerSendUiMessage(body, SurgeryUIKey.Key, new SurgeryBuiRefreshMessage());
     }
 
-    private DamageGroupPrototype? GetDamageGroupByType(string id)
+    private void OnSurgeryStepDamage(Entity<SurgeryTargetComponent> ent, ref SurgeryStepDamageEvent args)
     {
-        return (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>() where @group.DamageTypes.Contains(id) select @group).FirstOrDefault();
+        _damageable.ChangeDamage(args.Part, args.Damage, true, origin: args.User, ignoreBlockers: true);
     }
-
-    private void SetDamage(EntityUid body,
-        DamageSpecifier damage,
-        float partMultiplier,
-        EntityUid user,
-        EntityUid part,
-        bool affectAll = false)
-    {
-        // kinda funky but still works
-        // TODO: Also the scar treating surgery too, fuck. I hate this system and by every second I have to spend working with THIS I want to kill myself more and more
-        _wounds.TryHaltAllBleeding(part, force: true);
-        _damageable.TryChangeDamage(body,
-            damage,
-            true,
-            origin: user,
-            partMultiplier: partMultiplier,
-            targetPart: affectAll ? TargetBodyPart.All : _part.GetTargetBodyPart(part),
-            ignoreBlockers: true);
-    }
-
-    private void OnSurgeryStepDamage(Entity<SurgeryTargetComponent> ent, ref SurgeryStepDamageEvent args) =>
-        SetDamage(args.Body, args.Damage, args.PartMultiplier, args.User, args.Part);
 
     private void OnSurgeryDamageChange(Entity<SurgeryDamageChangeEffectComponent> ent, ref SurgeryStepDamageChangeEvent args)
     {
         var damageChange = ent.Comp.Damage;
         if (Status.HasEffectComp<ForcedSleepingStatusEffectComponent>(args.Body))
-            damageChange = damageChange * ent.Comp.SleepModifier;
+            damageChange *= ent.Comp.SleepModifier;
 
-        SetDamage(args.Body, damageChange, 0.5f, args.User, args.Part, ent.Comp.AffectAll);
+        _damageable.ChangeDamage(args.Part, damageChange, true, origin: args.User, ignoreBlockers: true);
     }
+
     private void OnStepScreamComplete(Entity<SurgeryStepEmoteEffectComponent> ent, ref SurgeryStepEvent args)
     {
         if (Status.HasEffectComp<ForcedSleepingStatusEffectComponent>(args.Body))

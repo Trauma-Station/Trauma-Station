@@ -30,10 +30,6 @@
     - ActionCRWaypoint
     - ActionClearWaypoints
   - type: ItemActionGrant
-    actions:
-    - ActionTogglePatrol
-    - ActionCRWaypoint
-    - ActionClearWaypoints
   - type: ContainerContainer
     containers:
       actions: !type:Container

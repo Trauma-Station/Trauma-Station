@@ -85,7 +85,7 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
             return false;
 
         var currentAmount = data.CurrentAmount;
-        var newAmount = Math.Clamp(data.CurrentAmount + amount, 0f, data.MaxAmount);
+        var newAmount = Math.Clamp(data.CurrentAmount + amount, data.MinAmount, data.MaxAmount);
 
         data.CurrentAmount = newAmount;
 
@@ -129,8 +129,8 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
         if (resourcesComp.HasResourceData(proto.ID, out data))
             return true;
 
-        var startingAmount = Math.Clamp(proto.BaseStartingAmount, 0f, proto.BaseMaxAmount);
-        data = new InternalResourcesData(proto.BaseMaxAmount, proto.BaseRegenerationRate, startingAmount, proto.ID);
+        var startingAmount = Math.Clamp(proto.BaseStartingAmount, proto.BaseMinAmount, proto.BaseMaxAmount);
+        data = new InternalResourcesData(proto.BaseMaxAmount, proto.BaseRegenerationRate, startingAmount, proto.ID, proto.BaseMinAmount);
 
         resourcesComp.CurrentInternalResources.Add(data);
         Dirty(uid, resourcesComp);
@@ -160,11 +160,20 @@ public sealed partial class SharedInternalResourcesSystem : EntitySystem
 
         _systemNextUpdate += _systemUpdateRate;
 
+        var toUpdate = new List<(EntityUid uid, InternalResourcesData data, InternalResourcesComponent comp)>();
+
         var query = EntityQueryEnumerator<InternalResourcesComponent>();
         while (query.MoveNext(out var uid, out var resourcesComp))
         {
             foreach (var resourceData in resourcesComp.CurrentInternalResources)
-                TryUpdateResourcesAmount(uid, resourceData, resourceData.RegenerationRate, resourcesComp);
+            {
+                toUpdate.Add((uid, resourceData, resourcesComp));
+            }
+        }
+
+        foreach (var (uid, resourceData, resourcesComp) in toUpdate)
+        {
+            TryUpdateResourcesAmount(uid, resourceData, resourceData.RegenerationRate, resourcesComp);
         }
     }
 }

@@ -36,9 +36,6 @@
   - type: MixableSolution
     solution: drink
   - type: MedicalPatch
-  - type: Tag
-    tags:
-    - MedicalPatch
 
 - type: entity
   parent: BaseMedicalPatch
@@ -60,9 +57,6 @@
   - type: Solution
     solution:
       maxVol: 40
-  - type: Tag
-    tags:
-    - MedicalPatch
   - type: Spillable # only way empty the patch is wring it out and spill it on the floor
     solution: drink
 
@@ -205,7 +199,6 @@
 
 - type: constructionGraph
   id: MedicalPatchMakeshift
-  start: start
   graph:
   - node: start
     edges:
@@ -231,7 +224,6 @@
 
 - type: constructionGraph
   id: SilkPatchMakeshift
-  start: start
   graph:
   - node: start
     edges:

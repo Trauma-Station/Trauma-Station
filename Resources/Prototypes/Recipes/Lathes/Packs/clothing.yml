@@ -139,8 +139,7 @@
   - ClothingUniformJumpsuitMime
   - ClothingUniformJumpskirtMime
   - ClothingUniformJumpsuitMusician
-  - ClothingUniformJumpsuitReporterGoob # goob change
-  - ClothingUniformJumpskirtReporterGoob # goob change
+  - ClothingUniformJumpsuitTramDriver
 
 - type: latheRecipePack
   id: WinterCoats
@@ -180,6 +179,7 @@
   - ClothingNeckTieRed
   - ClothingNeckTieDet
   - ClothingNeckTieSci
+  - ClothingNeckTieSerious
 
 - type: latheRecipePack
   id: Scarves

@@ -318,3 +318,70 @@ Entries:
   id: 34
   time: '2026-05-22T09:25:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2730
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: >-
+      Cog: Warden's bedroom has been replaced with an execution room, and Brig
+      cells have returned shifting Genpop more to the right.
+  - type: Fix
+    message: >-
+      Bagel: You can no longer accidentally spawn in as a ghost role in the
+      abandoned atmos area leading to the player getting trapped or dying to
+      space
+  id: 35
+  time: '2026-07-27T21:53:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3768
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: Fland,Kettle,Origin now have roboticist mapped
+  - type: Add
+    message: Box,Kettle,Fland,Oasis's AI now have access to a turret AI control panel
+  - type: Fix
+    message: Fland,Oasis's Master Silo has been moved from Vault to Cargo
+  id: 36
+  time: '2026-07-29T01:47:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3817
+- author: Nousagi37
+  changes:
+  - type: Tweak
+    message: >-
+      Bagel: All Solar Beacons have been fixed, and Kitchen now has a backroom
+      due to Maintenance being pushed down to fit Ranching.
+  id: 37
+  time: '2026-08-01T21:13:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3874
+- author: mickers7
+  changes:
+  - type: Add
+    message: Added the chemicompiler into all chemlabs roundstart
+  id: 38
+  time: '2026-08-05T18:49:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3947
+- author: Nousagi37
+  changes:
+  - type: Add
+    message: All maps now have a funding allocation console in hop office
+  - type: Add
+    message: All maps now have a AI Restoration Console
+  - type: Add
+    message: Box station now has ID Computers in head offices
+  - type: Add
+    message: Packed  station now has ID Computers in head offices
+  - type: Add
+    message: Cluster station now has ID Computers in head offices
+  - type: Fix
+    message: Bagel station court room now has a light outside in the hallway
+  - type: Add
+    message: Fland, Bagel, Origin now have more common intercoms
+  id: 39
+  time: '2026-08-20T19:46:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4182
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Screens are no longer rotated on every map.
+  id: 40
+  time: '2026-08-29T10:01:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4352

@@ -18,7 +18,7 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 
 public sealed partial class SlasherRegenerateSystem : EntitySystem
 {
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedCuffableSystem _cuffs = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -58,7 +58,7 @@ public sealed partial class SlasherRegenerateSystem : EntitySystem
         // Check if a soul is available to use
         if (!comp.HasSoulAvailable)
         {
-            _popup.PopupPredicted(Loc.GetString("slasher-regenerate-no-soul"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("slasher-regenerate-no-soul"), uid, uid);
             return;
         }
 

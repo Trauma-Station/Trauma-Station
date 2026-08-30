@@ -24,6 +24,11 @@
       Brain: OrganHumanBrain
   - type: HumanoidProfile
     species: Shattered
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 - type: entity
   save: false
@@ -80,7 +85,9 @@
         Cellular: -2
         Holy: -2
   - type: Targeting
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ZombieImmune
   - type: MobThresholds
     thresholds:
@@ -135,11 +142,8 @@
     - Drunk
     - SlurredSpeech
     - RatvarianLanguage
-    - PressureImmunity
-    - Muted
     - Pacified
     - StaminaModifier
-    - Adrenaline
   - type: Identity
   - type: IdExaminable
   - type: Hands
@@ -201,8 +205,8 @@
     damagePenalty: 0.2
   - type: ExaminableCharacter
   - type: Stamina
-    baseCritThreshold: 200
-    animationThreshold: 100
+    baseCritThreshold: 300
+    animationThreshold: 150
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Effects/glass_step.ogg

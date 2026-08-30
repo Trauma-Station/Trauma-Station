@@ -163,7 +163,7 @@ public sealed partial class MartialArtsUIController : UIController, IOnStateChan
             var actionOption = new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, martialArt.Item2)
             {
                 IconSpecifier = RadialMenuEntityIconSpecifier.With(martialArt.Item1),
-                ToolTip = Loc.GetString(martialArt.Item3)
+                ToolTip = martialArt.Item3
             };
             martialArts.Add(actionOption);
         }

@@ -111,7 +111,7 @@ public partial class SharedGunSystem
 
             if (freeSlots == 0)
             {
-                Popup(Loc.GetString("gun-revolver-full"), ent, user);
+                PopupSystem.PopupEntity(Loc.GetString("gun-revolver-full"), ent, user);
                 return false;
             }
 
@@ -122,7 +122,7 @@ public partial class SharedGunSystem
 
             if (ev.Ammo.Count == 0)
             {
-                Popup(Loc.GetString("gun-speedloader-empty"), ent, user);
+                PopupSystem.PopupEntity(Loc.GetString("gun-speedloader-empty"), ent, user);
                 return false;
             }
 
@@ -159,7 +159,7 @@ public partial class SharedGunSystem
             Dirty(ent);
 
             Audio.PlayPredicted(ent.Comp.SoundInsert, ent, user);
-            Popup(Loc.GetString("gun-revolver-insert"), ent, user);
+            PopupSystem.PopupEntity(Loc.GetString("gun-revolver-insert"), ent, user);
             return true;
         }
 
@@ -178,14 +178,14 @@ public partial class SharedGunSystem
             Containers.Insert(insertEnt, ent.Comp.AmmoContainer);
             SetChamber(ent, insertEnt, index);
             Audio.PlayPredicted(ent.Comp.SoundInsert, ent, user);
-            Popup(Loc.GetString("gun-revolver-insert"), ent, user);
+            PopupSystem.PopupEntity(Loc.GetString("gun-revolver-insert"), ent, user);
             UpdateRevolverAppearance(ent);
             UpdateAmmoCount(ent);
             Dirty(ent);
             return true;
         }
 
-        Popup(Loc.GetString("gun-revolver-full"), ent, user);
+        PopupSystem.PopupEntity(Loc.GetString("gun-revolver-full"), ent, user);
         return false;
     }
 
@@ -333,6 +333,7 @@ public partial class SharedGunSystem
 
         var count = GetRevolverCount(ent.Comp);
         Appearance.SetData(ent, AmmoVisuals.HasAmmo, count != 0, appearance);
+        Appearance.SetData(ent, AmmoVisuals.IsFull, count == ent.Comp.Capacity, appearance);
         Appearance.SetData(ent, AmmoVisuals.AmmoCount, count, appearance);
         Appearance.SetData(ent, AmmoVisuals.AmmoMax, ent.Comp.Capacity, appearance);
     }
@@ -343,7 +344,7 @@ public partial class SharedGunSystem
     protected void SpinRevolver(Entity<RevolverAmmoProviderComponent> ent, EntityUid? user = null)
     {
         Audio.PlayPredicted(ent.Comp.SoundSpin, ent, user);
-        Popup(Loc.GetString("gun-revolver-spun"), ent, user);
+        PopupSystem.PopupEntity(Loc.GetString("gun-revolver-spun"), ent, user);
 
         var index = Random(ent).Next(ent.Comp.Capacity);
 

@@ -7,14 +7,10 @@
     # <Trauma>
     - Stimulants
     - Nocturine
-    - Tranquility
-    - BingleJuice
     - JuiceThatMakesYouHew
-    - Carpolin
     - Aluite
     - AmmoniatedMercury
     - Rororium
-    - NanoMachines
     - BlackPowder
     - PolytrinicAcid
     # </Trauma>
@@ -22,7 +18,7 @@
     - Impedrezene
     - Fresium
     - HeartbreakerToxin
-    - Honk
+    # - Honk # Trauma
     - BuzzochloricBees
   - quantity: 5
     weight: 1
@@ -54,7 +50,6 @@
     - Uranium
     - Phosphorus
     - AtomicBomb
-    - Neurotoxin
     - ChangelingSting
     - CogChamp
     - JuiceThatMakesYouWeh

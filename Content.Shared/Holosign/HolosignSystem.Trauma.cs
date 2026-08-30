@@ -8,7 +8,7 @@ using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Holosign;
@@ -23,19 +23,15 @@ public sealed partial class HolosignSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public static readonly ProtoId<TagPrototype> HolosignTag = "Holosign";
+
+    private HashSet<Entity<FixturesComponent>> _blockers = new();
 
     private const int BlockMask = (int) (
         CollisionGroup.Impassable |
         CollisionGroup.HighImpassable);
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-
-    private void InitializeTrauma()
-    {
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-    }
 
     private EntityCoordinates? CheckCoords(Entity<HolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {
@@ -47,19 +43,32 @@ public sealed partial class HolosignSystem
         // places the holographic sign at the click location, snapped to grid.
         var coords = args.ClickLocation.SnapToGrid(EntityManager);
         var mapCoords = _transform.ToMapCoordinates(coords);
-        var look = _map.TryFindGridAt(mapCoords, out var grid, out var gridComp)
-            ? _map.GetAnchoredEntities((grid, gridComp), mapCoords)
-            : _lookup.GetEntitiesInRange(mapCoords, 0.1f);
-        foreach (var entity in look)
+        _blockers.Clear();
+        if (_map.TryFindGridAt(mapCoords, out var grid, out var gridComp))
         {
-            if (!_physicsQuery.TryComp(entity, out var physics))
-                continue;
+            foreach (var uid in _map.GetAnchoredEntities((grid, gridComp), mapCoords))
+            {
+                if (!_fixturesQuery.TryComp(uid, out var fixtures))
+                    continue;
 
+                _blockers.Add((uid, fixtures));
+            }
+        }
+        else
+        {
+            // space sign..?
+            _lookup.GetEntitiesInRange(mapCoords, 0.1f, _blockers);
+        }
+        foreach (var entity in _blockers)
+        {
             if (_tag.HasTag(entity, HolosignTag))
                 return null; // no stacking holosigns
 
-            if ((physics.CollisionLayer & BlockMask) != 0) // overlapping with something that blocks the field
-                return null;
+            foreach (var fixture in entity.Comp.Fixtures.Values)
+            {
+                if (fixture.Hard && (fixture.CollisionLayer & BlockMask) != 0) // overlapping with something that blocks the field
+                    return null;
+            }
         }
 
         EntityUid? user = TryComp(ent, out LimitedChargesComponent? charges) ? null : args.User; // Don't show popups if it has limited charges (user is null = no popup)

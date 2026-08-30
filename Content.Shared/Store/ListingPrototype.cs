@@ -55,9 +55,9 @@ public partial class ListingData : IEquatable<ListingData>
     }
 
     public ListingData(
-        string? name,
+        LocId? name, // Trauma - use LocId
         ProtoId<DiscountCategoryPrototype>? discountCategory,
-        string? description,
+        LocId? description, // Trauma - use LocId
         List<ListingCondition>? conditions,
         SpriteSpecifier? icon,
         int priority,
@@ -121,7 +121,7 @@ public partial class ListingData : IEquatable<ListingData>
     /// The name of the listing. If empty, uses the entity's name (if present)
     /// </summary>
     [DataField]
-    public string? Name;
+    public LocId? Name; // Trauma - use LocId
 
     /// <summary>
     /// Discount category for listing item. This marker describes chance of how often will item be discounted.
@@ -133,7 +133,7 @@ public partial class ListingData : IEquatable<ListingData>
     /// The description of the listing. If empty, uses the entity's description (if present)
     /// </summary>
     [DataField]
-    public string? Description;
+    public LocId? Description; // Trauma - use LocId
 
     /// <summary>
     /// The categories that this listing applies to. Used for filtering a listing for a store.
@@ -389,11 +389,10 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     /// <param name="modifiers">Values for cost modification.</param>
     public void AddCostModifier(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> modifiers)
     {
-        CostModifiersBySourceId.Add(modifierSourceId, modifiers);
+        CostModifiersBySourceId.TryAdd(modifierSourceId, modifiers);
+
         if (_costModified != null)
-        {
             _costModified = ApplyAllModifiers();
-        }
     }
 
     /// <summary> Remove cost modifier with passed sourceId. </summary>

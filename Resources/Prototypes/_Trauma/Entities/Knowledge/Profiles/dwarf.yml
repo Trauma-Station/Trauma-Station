@@ -2,13 +2,12 @@
 
 - type: knowledgeProfile
   id: Dwarf
-  pointsLimit: 5 # enough to max out a single skill, gimmick with fabrication being maxed
+  pointsLimit: 3
   mastery:
     # Crafting Recipe Skills - Dwarves dont care for much but making stuff with their hands
     CookingKnowledge: 0
     DoorsKnowledge: 0
     AirlocksKnowledge: 0
-    ToysKnowledge: 0
     BananiumKnowledge: 0
     BotsKnowledge: 0
     FurnitureKnowledge: 0
@@ -18,7 +17,7 @@
     WindowsKnowledge: 0
     SmokeablesKnowledge: 0
     # Intelectual Skills
-    LiteracyKnowledge: 2
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageNovuNederic: 3
@@ -26,21 +25,18 @@
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
     ChemistryKnowledge: 0
-    # Physical Skill
-    ThrowingKnowledge: 0
-    AthleticsKnowledge: 0
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 2
     # Combat Skill
-    MeleeKnowledge: 2
-    KnowledgeWeaponsBludgeon: 2
-    KnowledgeWeaponsMining: 3
+    ThrowingKnowledge: 0
+    MeleeKnowledge: 1
+    KnowledgeWeaponsBludgeon: 1
+    KnowledgeWeaponsMining: 2
     ShootingKnowledge: 0
+    KnowledgeWeaponsShield: 0
     # Crafting Quality
-    FabricationKnowledge: 5
-    WeaponsKnowledge: 3 # The species that is about industry and crafting shouldn't be outclassed by humans at forging
+    FabricationKnowledge: 3
+    WeaponsKnowledge: 1 # The species that is about industry and crafting shouldn't be outclassed by humans at forging
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 5
+    MetalworkingKnowledge: 3
     CarvingKnowledge: 0
     GunsmithingKnowledge: 0
     MechanicsKnowledge: 0

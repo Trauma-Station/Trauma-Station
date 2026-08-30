@@ -7,10 +7,8 @@
   name: morph
   description: A revolting, pulsating pile of flesh.
   components:
-  - type: Hunger
-    baseDecayRate: 0
-  - type: Thirst
-    baseDecayRate: 0
+  - type: Satiation
+    satiations: {}
   - type: Sprite
     drawdepth: SmallMobs
     sprite: _Trauma/Mobs/morph.rsi
@@ -131,9 +129,9 @@
       # below are all invisible
       - Pda
       - Door
+      - Wall
       tags:
       - Catwalk
-      - Wall
       - Window
     disguiseProto: ChameleonDisguiseMorph
   - type: ToolRefinable

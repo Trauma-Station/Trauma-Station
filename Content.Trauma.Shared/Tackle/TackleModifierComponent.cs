@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Tackle;
@@ -11,117 +11,150 @@ namespace Content.Trauma.Shared.Tackle;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TackleModifierComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public List<TackleModifier> Modifiers = new();
+}
+
+[Serializable, NetSerializable, DataRecord]
+public sealed partial class TackleModifier : IComparable<TackleModifier>
+{
+    /// <summary>
+    /// Whether values of this will affect other tackle modifiers
+    /// </summary>
+    public bool AffectsOtherModifiers;
+
+    /// <summary>
+    /// Priority of this modifier when selecting tackle source entity
+    /// Null if it cannot be used for tackling
+    /// </summary>
+    public int? Priority;
+
     /// <summary>
     /// Multiplier to tackle throw speed
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public float SpeedMultiplier = 1.5f;
+    public float SpeedMultiplier = 1f;
 
     /// <summary>
     /// Multiplier to tackle throw range
     /// </summary>
-    [DataField, AutoNetworkedField]
     public float RangeMultiplier = 1f;
 
     /// <summary>
     /// Multiplier to tackle cooldown
     /// </summary>
-    [DataField, AutoNetworkedField]
     public float CooldownMultiplier = 1f;
 
     /// <summary>
     /// Multiplier to knockdown time when performing tackle
     /// </summary>
-    [DataField]
     public float KnockdownTimeMultiplier = 1f;
 
     /// <summary>
     /// Multiplier to stamina cost of tackle
     /// </summary>
-    [DataField]
     public float StaminaCostMultiplier = 1f;
 
     /// <summary>
     /// The higher this is, the more velocity is relevant when calculating modifiers during tackle collision
     /// </summary>
-    [DataField]
-    public float SpeedModMultiplier = 0.4f;
+    public float SpeedModMultiplier = 1f;
 
     /// <summary>
     /// Minimal "safe" distance, if tackle collision happens below safe range, user will be hurt
     /// </summary>
-    [DataField]
     public float MinDistance;
 
     /// <summary>
     /// How relevant is stamina damage resistance on target. Higher = more relevant
     /// </summary>
-    [DataField]
-    public float StamResistModifier = 4f;
+    public float StamResistModifier = 1f;
 
     /// <summary>
     /// If result modifier exceeds this value, target will be disarmed on knockdown
     /// </summary>
-    [DataField]
-    public float DisarmThreshold = 1.5f;
+    public float DisarmThreshold = 1f;
 
     /// <summary>
     /// Bonus modifier to user tackle
     /// </summary>
-    [DataField]
     public float SkillMod;
 
     /// <summary>
     /// If true, user will grab target on successful tackle outcome
     /// </summary>
-    [DataField]
     public bool GrabOnSuccess;
 
     /// <summary>
     /// Modifier to how much damage/paralyze time will the user suffer from when hitting a wall
-    /// </summary>
-    [DataField]
-    public float SeverityModifier = 0.2f;
+    /// </summary
+    public float SeverityModifier = 1f;
 
     /// <summary>
-    /// Base damage when hitting a wall, multiplier by severity that is dependent on velocity
-    /// </summary>
-    [DataField]
-    public DamageSpecifier BaseUserDamage = new()
-    {
-        DamageDict =
-        {
-            { "Blunt", 20 },
-        },
-    };
+    /// Multiplies user damage upon hitting the wall by this
+    /// </summary
+    public float UserDamageMultiplier = 1f;
+
+    /// <summary>
+    /// Multiplies knockdown time for user on collision
+    /// </summary
+    public float UserKnockdownTimeMultiplier = 1f;
+
+    /// <summary>
+    /// Multiplies target stamina damage on collide
+    /// </summary
+    public float TargetStaminaDamageMultiplier = 1f;
+
+    /// <summary>
+    /// Multiplies target knockdown time on collide
+    /// </summary
+    public float TargetKnockdownTimeMultiplier = 1f;
 
     /// <summary>
     /// Will this even collide and cause knockdown/stamina/damage on user or target?
     /// </summary>
-    [DataField, AutoNetworkedField]
     public bool AllowCollision = true;
 
     /// <summary>
-    /// Base time the user will be knocked on tackle collision
+    /// If this is non null and fails, this modifier will be ignored
     /// </summary>
-    [DataField]
-    public float BaseUserKnockdownTime = 1f;
-
-    /// <summary>
-    /// Base stamina damage target will receive on collision
-    /// </summary>
-    [DataField]
-    public float BaseTargetStaminaDamage = 22f;
-
-    /// <summary>
-    /// Base knockdown time of target during collision
-    /// </summary>
-    [DataField]
-    public float BaseTargetKnockdownTime = 2f;
+    public ProtoId<EntityConditionPrototype>? TackleCondition;
 
     /// <summary>
     /// Effects applied to user when tackling
+    /// Only applies when this tackle modifier is tackle "source"
     /// </summary>
-    [DataField, AutoNetworkedField]
     public ProtoId<EntityEffectPrototype>? UserEffect;
+
+    public void Modify(TackleModifier other)
+    {
+        if (!AffectsOtherModifiers)
+            return;
+
+        other.SpeedMultiplier *= SpeedMultiplier;
+        other.RangeMultiplier *= RangeMultiplier;
+        other.CooldownMultiplier *= CooldownMultiplier;
+        other.KnockdownTimeMultiplier *= KnockdownTimeMultiplier;
+        other.StaminaCostMultiplier *= StaminaCostMultiplier;
+        other.SpeedModMultiplier *= SpeedModMultiplier;
+        other.MinDistance = Math.Max(other.MinDistance, MinDistance);
+        other.SkillMod += SkillMod;
+        other.GrabOnSuccess |= GrabOnSuccess;
+        other.SeverityModifier *= SeverityModifier;
+        other.UserDamageMultiplier *= UserDamageMultiplier;
+        other.UserKnockdownTimeMultiplier *= UserKnockdownTimeMultiplier;
+        other.TargetStaminaDamageMultiplier *= TargetStaminaDamageMultiplier;
+        other.TargetKnockdownTimeMultiplier *= TargetKnockdownTimeMultiplier;
+        other.AllowCollision |= AllowCollision;
+    }
+
+    public int CompareTo(TackleModifier? other)
+    {
+        if (other is not { } mod || mod.Priority is not { } otherPriority)
+            return 1;
+
+        if (Priority is not { } ourPriority)
+            return -1;
+
+        return ourPriority.CompareTo(otherPriority);
+    }
 }

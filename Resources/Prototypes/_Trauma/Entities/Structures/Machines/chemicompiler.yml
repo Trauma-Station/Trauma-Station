@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# The ChemiCompiler is a reimplementation of Goonstation's machine of the same name, written from the behaviour
+# documented at https://wiki.ss13.co/ChemiCompiler. No Goonstation code or assets were used.
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
+  id: ChemiCompiler
+  name: ChemiCompiler M7
+  description: A programmable chemical workbench with ten reservoir slots. Does exactly what your program says, which is rarely what you meant.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/chemicompiler.rsi
+    snapCardinals: true
+    layers:
+    - state: chemicompiler_base
+    # the screens only animate while powered, so the base sprite is the machine's off state
+    - state: chemicompiler_screens
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: _Trauma/Structures/Machines/chemicompiler.rsi
+    state: chemicompiler_base
+  - type: ChemiCompiler
+  # lets the . instruction put a speech bubble over the machine.
+  # deliberately has no speechSounds, the machine's own beeps are all the audio feedback it needs
+  - type: Speech
+  - type: ActivatableUI
+    key: enum.ChemiCompilerUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ChemiCompilerUiKey.Key:
+        type: ChemiCompilerBUI
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ApcPowerReceiver
+    powerLoad: 500
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  # ten identical beaker slots, r1 through r10
+  - type: ItemSlots
+    slots:
+      reservoir1: &reservoir
+        name: chemicompiler-slot-reservoir
+        # without this, clicking the machine always swaps with reservoir 1 instead of filling the next free one
+        swap: false
+        whitelist:
+          components:
+          - FitsInDispenser
+      reservoir2: *reservoir
+      reservoir3: *reservoir
+      reservoir4: *reservoir
+      reservoir5: *reservoir
+      reservoir6: *reservoir
+      reservoir7: *reservoir
+      reservoir8: *reservoir
+      reservoir9: *reservoir
+      reservoir10: *reservoir
+  # glass for the vial generator, cloth and plastic for the patch generators.
+  # cloth is tagged RawMaterial rather than Sheet, which is why all three tags are needed
+  - type: MaterialStorage
+    materialWhiteList: [ Glass, Cloth, Plastic ]
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: WiresPanel
+  - type: Machine
+    board: ChemiCompilerMachineCircuitboard
+  - type: ContainerContainer
+    containers:
+      reservoir1: !type:ContainerSlot
+      reservoir2: !type:ContainerSlot
+      reservoir3: !type:ContainerSlot
+      reservoir4: !type:ContainerSlot
+      reservoir5: !type:ContainerSlot
+      reservoir6: !type:ContainerSlot
+      reservoir7: !type:ContainerSlot
+      reservoir8: !type:ContainerSlot
+      reservoir9: !type:ContainerSlot
+      reservoir10: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.4,0.25,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: GuideHelp
+    guides:
+    - ChemiCompiler

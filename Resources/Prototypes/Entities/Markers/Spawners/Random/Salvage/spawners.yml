@@ -504,6 +504,7 @@
         weight: 2
       - !type:GroupSelector
         children:
+        - id: GeneratorRTG # Trauma
         - id: Thruster
         - id: Gyroscope
 

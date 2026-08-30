@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: stack
+  parent: BaseTinyStack
+  id: OverrideKeyComponents
+  name: stack-override-key-components
+  icon: { sprite: /Textures/_Trauma/Objects/Tools/overridecomponents.rsi, state: icon }
+  spawn: ArmoryOverrideKeyComponents
+  maxCount: 3

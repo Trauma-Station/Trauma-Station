@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Overlays;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
@@ -22,6 +23,7 @@ public sealed partial class TraumaHandsRelaySystem : EntitySystem
         SubscribeLocalEvent<HandsComponent, BeforeHarmfulActionEvent>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthBarsComponent>>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthIconsComponent>>(_hands.RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ThermalVisionComponent>>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, ModifyViewconeAngleEvent>(_hands.RefRelayEvent);
     }
 }

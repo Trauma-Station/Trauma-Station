@@ -107,7 +107,7 @@ public sealed partial class LollypopSystem : EntitySystem
         var proto = ProtoMan.Index(edible.Edible);
         var msg = Loc.GetString(proto.Message, ("food", uid), ("flavors", flavors), ("satiated", false));
         if (predicted)
-            _popup.PopupClient(msg, user, user);
+            _popup.PopupEntity(msg, user, user);
         else
             _popup.PopupEntity(msg, user, user);
     }

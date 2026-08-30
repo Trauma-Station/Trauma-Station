@@ -4,7 +4,7 @@ using System.Linq;
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Containers;
 using Content.Shared.Item;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -25,10 +25,10 @@ public sealed class StorageTest : GameTest
         var pair = Pair;
         var server = pair.Server;
 
-        var protoManager = server.ResolveDependency<IPrototypeManager>();
-        var entMan = server.ResolveDependency<IEntityManager>();
         // <Trauma> - microoptimisation
-        var compFact = server.EntMan.ComponentFactory;
+        var protoManager = SProtoMan;
+        var entMan = SEntMan;
+        var compFact = entMan.ComponentFactory;
         var itemName = compFact.CompName<ItemComponent>();
         var storageName = compFact.CompName<StorageComponent>();
         // </Trauma>

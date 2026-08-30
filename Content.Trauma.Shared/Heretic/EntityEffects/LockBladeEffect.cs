@@ -50,6 +50,7 @@ public sealed partial class LockBladeEffectSystem : EntityEffectSystem<BodyCompo
 
     protected override void Effect(Entity<BodyComponent> target, ref EntityEffectEvent<LockBladeEffect> args)
     {
+        // TODO: predict ts
         if (_net.IsClient)
             return;
 
@@ -59,17 +60,19 @@ public sealed partial class LockBladeEffectSystem : EntityEffectSystem<BodyCompo
         if (_part.GetBodyParts(target, type, symmetry: symmetry).FirstOrNull() is not { } targetPart)
             return;
 
-        if (!_wound.TryInduceWound(targetPart, args.Effect.Wound, 25f, out _, damageGroup: args.Effect.DamageGroup))
+        if (!_wound.TryInduceWound(targetPart, args.Effect.Wound, 25f, out _, damageGroup: args.Effect.DamageGroup, user: args.User))
             return;
 
         var effectAmount = 1f;
 
         // Open ribcage for easier ascension if chest is mangled
-        if (TryComp(targetPart, out WoundableComponent? woundable) && woundable.RootWoundable == targetPart &&
+        if (_part.GetParentPart(targetPart) == null &&
+            TryComp(targetPart, out WoundableComponent? woundable) &&
             woundable.WoundableSeverity >= WoundableSeverity.Mangled &&
             (!EnsureComp<SkinRetractedComponent>(targetPart, out _) |
              !EnsureComp<IncisionOpenComponent>(targetPart, out _) |
-             !EnsureComp<BonesSawedComponent>(targetPart, out _) | !EnsureComp<BonesOpenComponent>(targetPart, out _)))
+             !EnsureComp<BonesSawedComponent>(targetPart, out _) |
+             !EnsureComp<BonesOpenComponent>(targetPart, out _)))
         {
             _audio.PlayPvs(args.Effect.OpeningSound, target);
             effectAmount = 2;
@@ -105,7 +108,8 @@ public sealed partial class LockBladeEffectSystem : EntityEffectSystem<BodyCompo
                 pushbackRatio: 0f,
                 friction: 2f,
                 recoil: false,
-                playSound: false);
+                playSound: false,
+                predicted: false);
         }
     }
 }

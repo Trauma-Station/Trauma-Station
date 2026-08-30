@@ -6,7 +6,7 @@
   suffix: bingle juice
   components:
   - type: Label
-    currentLabel: reagent-name-binglejuice
+    localizedLabel: reagent-name-binglejuice
   - type: Solution
     solution:
       reagents:
@@ -16,10 +16,10 @@
 - type: entity
   parent: BaseChemistryBottleFilled
   id: ChemistryBottlePlasma
-  suffix: plasma
+  suffix: phoron
   components:
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
   - type: Solution
     solution:
       reagents:

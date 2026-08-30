@@ -30,7 +30,7 @@ public sealed partial class EatingNeedsOrganSystem : EntitySystem
         var msg = user == ent.Owner
             ? "You have no mouth!"
             : $"{Identity.Name(ent, EntityManager)} has no mouth!";
-        _popup.PopupClient(msg, ent, user);
+        _popup.PopupEntity(msg, ent, user);
         args.Cancelled = true;
     }
 }

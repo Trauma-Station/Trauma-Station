@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Throwing;
 using Content.Trauma.Shared.Containers;
@@ -13,7 +12,6 @@ public sealed partial class ThrowingKnowledgeSystem : EntitySystem
 {
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
-    private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId ThrowingKnowledge = "ThrowingKnowledge";
 
     public override void Initialize()
@@ -39,34 +37,15 @@ public sealed partial class ThrowingKnowledgeSystem : EntitySystem
         if (_knowledge.GetContainer(user) is not { } brain)
             return;
 
-        // strength increases speed
-        if (_knowledge.GetKnowledge(brain, StrengthKnowledge) is { } strength)
-        {
-            var mastery = _knowledge.GetMastery(strength.Comp);
-            if (mastery < 2)
-            {
-                baseThrowSpeed *= 1 + _knowledge.SharpCurve(strength, 0, 26.0f) / (2.0f);
-            }
-            else if (mastery > 2)
-            {
-                baseThrowSpeed *= 1 + 0.5f * _knowledge.SharpCurve(strength, -50, 50.0f);
-            }
-        }
-
         // high throwing skill increases speed
         if (_knowledge.GetKnowledge(brain, ThrowingKnowledge) is { } throwing &&
             _knowledge.GetMastery(throwing.Comp) > 2)
         {
-            baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
+            baseThrowSpeed *= 0.75f * _knowledge.SharpCurve(throwing, 200, 200);
         }
-
-        float weight = ent.Comp.FixturesMass;
 
         // Make it so you gotta throw it further then just at a wall in front.
         _knowledge.AddExperience(brain, ThrowingKnowledge, 1, (int) args.Distance * 5);
-
-        // Make it so you can't just throw a wrapper over and over again.
-        _knowledge.AddExperience(brain, StrengthKnowledge, 1, (int) (weight / 10));
 
         args.BaseThrowSpeed = baseThrowSpeed;
     }

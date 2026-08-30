@@ -67,22 +67,13 @@ entity-effect-guidebook-smoke-area =
         *[other] create
     } large quantities of smoke
 
-entity-effect-guidebook-satiate-thirst =
+entity-effect-guidebook-satiate =
     { $chance ->
         [1] Satiates
         *[other] satiate
     } { $relative ->
-        [1] thirst averagely
-        *[other] thirst at {NATURALFIXED($relative, 3)}x the average rate
-    }
-
-entity-effect-guidebook-satiate-hunger =
-    { $chance ->
-        [1] Satiates
-        *[other] satiate
-    } { $relative ->
-        [1] hunger averagely
-        *[other] hunger at {NATURALFIXED($relative, 3)}x the average rate
+        [1] {$type} averagely
+        *[other] {$type} at {NATURALFIXED($relative, 3)}x the average rate
     }
 
 entity-effect-guidebook-health-change =
@@ -364,10 +355,17 @@ entity-effect-guidebook-extinguish-reaction =
         *[other] extinguish
     } fire
 
+# Trauma - $direction is set from the Flammable effect's multiplier sign, so negative Flammable reagents read "Decreases flammability"; defaults to increase
 entity-effect-guidebook-flammable-reaction =
     { $chance ->
-        [1] Increases
-        *[other] increase
+        [1] { $direction ->
+                [decrease] Decreases
+                *[increase] Increases
+            }
+        *[other] { $direction ->
+                [decrease] decrease
+                *[increase] increase
+            }
     } flammability
 
 entity-effect-guidebook-ignite =
@@ -502,12 +500,6 @@ entity-effect-guidebook-plant-phalanximine =
         *[other] restore
     } viability to a plant rendered nonviable by a mutation
 
-entity-effect-guidebook-plant-remove-kudzu =
-    { $chance ->
-        [1] Removes
-        *[other] remove
-    } kudzu weed growth from a plant
-
 entity-effect-guidebook-plant-diethylamine =
     { $chance ->
         [1] Increases
@@ -531,6 +523,18 @@ entity-effect-guidebook-plant-seeds-remove =
         [1] Removes the
         *[other] remove the
     } seeds of the plant
+
+entity-effect-guidebook-plant-mutate-exude-gasses =
+    { $chance ->
+        [1] Mutates
+        *[other] mutate
+    } the plant to exude gases between {$minValue} and {$maxValue} moles
+
+entity-effect-guidebook-plant-mutate-consume-gasses =
+    { $chance ->
+        [1] Mutates
+        *[other] mutate
+    } the plant to consume gases between {$minValue} and {$maxValue} moles
 
 entity-effect-guidebook-plant-mutate-chemicals =
     { $chance ->

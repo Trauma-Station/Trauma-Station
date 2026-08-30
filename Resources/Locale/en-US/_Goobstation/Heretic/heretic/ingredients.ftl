@@ -60,3 +60,7 @@ heretic-ritual-ingredient-spear = spear
 heretic-ritual-ingredient-screwdriver = screwdriver
 heretic-ritual-ingredient-wirecutter = wirecutter
 heretic-ritual-ingredient-hand = hand
+heretic-ritual-ingredient-bonfire = bonfire
+heretic-ritual-ingredient-rag = damp rag
+heretic-ritual-ingredient-grenade-casing = grenade casing
+heretic-ritual-ingredient-gold-silver = gold or silver bar

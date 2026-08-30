@@ -1,0 +1,1394 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: marking
+  id: MothWingsBurntOff
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: burnt_off
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsBurntOffBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: burnt_off_behind
+  coloring:
+    layers:
+      burnt_off_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Stellar
+
+- type: marking
+  id: MothWingsStellar
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: plain
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsStellarBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: plain_behind
+  coloring:
+    layers:
+      plain_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsStellarOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: plain
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsStellarOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: plain_behind
+  coloring:
+    layers:
+      plain_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Oakworm
+- type: marking
+  id: MothWingsOakworm
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: oakworm
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsOakwormBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: oakworm_behind
+  coloring:
+    layers:
+      oakworm_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsOakwormOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: oakworm
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsOakwormOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: oakworm_behind
+  coloring:
+    layers:
+      oakworm_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Gothic
+- type: marking
+  id: MothWingsGothic
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: gothic
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsGothicBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: gothic_behind
+  coloring:
+    layers:
+      gothic_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsGothicOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: gothic
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsGothicOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: gothic_behind
+  coloring:
+    layers:
+      gothic_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Whitefly
+- type: marking
+  id: MothWingsWhitefly
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: whitefly
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsWhiteflyBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: whitefly_behind
+  coloring:
+    layers:
+      whitefly_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsWhiteflyOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: whitefly
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsWhiteflyOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: whitefly_behind
+  coloring:
+    layers:
+      whitefly_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Dfan
+- type: marking
+  id: MothWingsDfan
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: poison
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDfanBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: poison_behind
+  coloring:
+    layers:
+      poison_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsDfanOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: poison
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDfanOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: poison_behind
+  coloring:
+    layers:
+      poison_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Fan
+- type: marking
+  id: MothWingsFan
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: ragged
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsFanBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: ragged_behind
+  coloring:
+    layers:
+      ragged_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsFanOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: ragged
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsFanOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: ragged_behind
+  coloring:
+    layers:
+      ragged_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Monarch
+- type: marking
+  id: MothWingsMonarch
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: monarch
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsMonarchBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: monarch_behind
+  coloring:
+    layers:
+      monarch_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsMonarchOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: monarch
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsMonarchOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: monarch_behind
+  coloring:
+    layers:
+      monarch_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Default
+- type: marking
+  id: MothWingsDefault
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: atlas
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDefaultBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: atlas_behind
+  coloring:
+    layers:
+      atlas_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsDefaultOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: atlas
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDefaultOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: atlas_behind
+  coloring:
+    layers:
+      atlas_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Feathery
+- type: marking
+  id: MothWingsFeathery
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: feathery
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsFeatheryBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: feathery_behind
+  coloring:
+    layers:
+      feathery_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+- type: marking
+  id: MothWingsFeatheryOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: feathery
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsFeatheryOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: feathery_behind
+  coloring:
+    layers:
+      feathery_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+
+# Moffra
+- type: marking
+  id: MothWingsMoffra
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_2
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_3
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_4
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsMoffraBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_2_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_3_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: mothra_4_behind
+  coloring:
+    layers:
+      mothra_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      mothra_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+      mothra_3_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 2
+      mothra_4_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 3
+
+- type: marking
+  id: MothWingsMoffraOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_2
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_3
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_4
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsMoffraOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_2_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_3_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: mothra_4_behind
+  coloring:
+    layers:
+      mothra_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      mothra_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+      mothra_3_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 2
+      mothra_4_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 3
+
+# Lightbearer
+- type: marking
+  id: MothWingsLightbearer
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lightbearer_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lightbearer_2
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lightbearer_3
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsLightbearerBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lightbearer_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lightbearer_2_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lightbearer_3_behind
+  coloring:
+    layers:
+      lightbearer_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      lightbearer_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+      lightbearer_3_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 2
+
+- type: marking
+  id: MothWingsLightbearerOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lightbearer_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lightbearer_2
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lightbearer_3
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsLightbearerOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lightbearer_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lightbearer_2_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lightbearer_3_behind
+  coloring:
+    layers:
+      lightbearer_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      lightbearer_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+      lightbearer_3_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 2
+
+# Firewatch
+- type: marking
+  id: MothWingsFirewatch
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: firewatch_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: firewatch_2
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: firewatch_3
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsFirewatchBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: firewatch_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: firewatch_2_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: firewatch_3_behind
+  coloring:
+    layers:
+      firewatch_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      firewatch_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+      firewatch_3_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 2
+
+- type: marking
+  id: MothWingsFirewatchOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: firewatch_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: firewatch_2
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: firewatch_3
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsFirewatchOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: firewatch_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: firewatch_2_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: firewatch_3_behind
+  coloring:
+    layers:
+      firewatch_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      firewatch_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+      firewatch_3_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 2
+
+# Jungle
+- type: marking
+  id: MothWingsJungle
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: jungle_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: jungle_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsJungleBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: jungle_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: jungle_2_behind
+  coloring:
+    layers:
+      jungle_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      jungle_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsJungleOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: jungle_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: jungle_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsJungleOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: jungle_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: jungle_2_behind
+  coloring:
+    layers:
+      jungle_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      jungle_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Royal
+- type: marking
+  id: MothWingsRoyal
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: royal_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: royal_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsRoyalBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: royal_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: royal_2_behind
+  coloring:
+    layers:
+      royal_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      royal_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsRoyalOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: royal_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: royal_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsRoyalOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: royal_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: royal_2_behind
+  coloring:
+    layers:
+      royal_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      royal_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Plasmafire
+- type: marking
+  id: MothWingsPlasmafire
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: plasmafire_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: plasmafire_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsPlasmafireBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: plasmafire_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: plasmafire_2_behind
+  coloring:
+    layers:
+      plasmafire_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      plasmafire_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsPlasmafireOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: plasmafire_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: plasmafire_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsPlasmafireOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: plasmafire_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: plasmafire_2_behind
+  coloring:
+    layers:
+      plasmafire_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      plasmafire_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Deathhead
+- type: marking
+  id: MothWingsDeathhead
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: deathhead_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: deathhead_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDeathheadBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: deathhead_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: deathhead_2_behind
+  coloring:
+    layers:
+      deathhead_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      deathhead_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsDeathheadOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: deathhead_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: deathhead_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDeathheadOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: deathhead_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: deathhead_2_behind
+  coloring:
+    layers:
+      deathhead_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      deathhead_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Witchwing
+- type: marking
+  id: MothWingsWitchwing
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: witchwing_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: witchwing_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsWitchwingBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: witchwing_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: witchwing_2_behind
+  coloring:
+    layers:
+      witchwing_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      witchwing_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsWitchwingOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: witchwing_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: witchwing_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsWitchwingOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: witchwing_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: witchwing_2_behind
+  coloring:
+    layers:
+      witchwing_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      witchwing_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Ladybug
+- type: marking
+  id: MothWingsLadybug
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: snow_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: snow_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsLadybugBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: snow_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: snow_2_behind
+  coloring:
+    layers:
+      snow_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      snow_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsLadybugOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: snow_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: snow_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsLadybugOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: snow_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: snow_2_behind
+  coloring:
+    layers:
+      snow_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      snow_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Rosy
+- type: marking
+  id: MothWingsRosy
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: rosy_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: rosy_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsRosyBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: rosy_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: rosy_2_behind
+  coloring:
+    layers:
+      rosy_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      rosy_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsRosyOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: rosy_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: rosy_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsRosyOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: rosy_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: rosy_2_behind
+  coloring:
+    layers:
+      rosy_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      rosy_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Striped
+- type: marking
+  id: MothWingsStriped
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lovers_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lovers_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsStripedBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lovers_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: lovers_2_behind
+  coloring:
+    layers:
+      lovers_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      lovers_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsStripedOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lovers_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lovers_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsStripedOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lovers_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: lovers_2_behind
+  coloring:
+    layers:
+      lovers_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      lovers_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Dbushy
+- type: marking
+  id: MothWingsDbushy
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: brown_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: brown_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDbushyBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: brown_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: brown_2_behind
+  coloring:
+    layers:
+      brown_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      brown_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsDbushyOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: brown_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: brown_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsDbushyOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: brown_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: brown_2_behind
+  coloring:
+    layers:
+      brown_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      brown_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Swirly
+- type: marking
+  id: MothWingsSwirly
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: moonfly_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: moonfly_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsSwirlyBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: moonfly_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: moonfly_2_behind
+  coloring:
+    layers:
+      moonfly_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      moonfly_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsSwirlyOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: moonfly_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: moonfly_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsSwirlyOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: moonfly_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: moonfly_2_behind
+  coloring:
+    layers:
+      moonfly_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      moonfly_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+# Bluespace
+- type: marking
+  id: MothWingsBluespace
+  bodyPart: Wings
+  groupWhitelist: [Moth]
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: bluespace_1
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: bluespace_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsBluespaceBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: bluespace_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings.rsi
+    state: bluespace_2_behind
+  coloring:
+    layers:
+      bluespace_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      bluespace_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1
+
+- type: marking
+  id: MothWingsBluespaceOpen
+  bodyPart: Wings
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: bluespace_1
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: bluespace_2
+  childMarkingsSuffix: [Behind]
+
+- type: marking
+  id: MothWingsBluespaceOpenBehind
+  bodyPart: WingsBehind
+  groupWhitelist: []
+  sprites:
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: bluespace_1_behind
+  - sprite: _Trauma/Mobs/Customization/wings_open.rsi
+    state: bluespace_2_behind
+  coloring:
+    layers:
+      bluespace_1_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 0
+      bluespace_2_behind:
+        type: !type:CategoryColoring
+          category: Wings
+          index: 1

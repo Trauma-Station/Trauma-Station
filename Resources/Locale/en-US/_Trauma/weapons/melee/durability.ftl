@@ -86,3 +86,7 @@ durability-drill-0 = The drill head is getting dull.
 durability-drill-1 = The drill head is completely dull.
 durability-drill-2 = The drill head is almost useless.
 durability-drill-3 = The drill head needs to be replaced.
+
+durability-nettle-0 = Some leaves fall off the death nettle.
+durability-nettle-1 = More leaves fall off the death nettle.
+durability-nettle-2 = The death nettle is now bare and useless.

@@ -2,7 +2,6 @@
 
 using System.Text.RegularExpressions;
 using Content.Goobstation.Common.Morgue;
-using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Server.Devil.Condemned;
 using Content.Goobstation.Server.Devil.Contract;
 using Content.Goobstation.Server.Devil.Objectives.Components;
@@ -28,6 +27,7 @@ using Content.Server.Stunnable;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
@@ -42,9 +42,10 @@ using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature.Components;
+using Content.Shared.Whitelist;
 using Content.Shared.Zombies;
-using Content.Trauma.Common.Silicon;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -55,11 +56,11 @@ namespace Content.Goobstation.Server.Devil;
 
 public sealed partial class DevilSystem : EntitySystem
 {
-    [Dependency] private CommonSiliconSystem _silicon = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private BodyPartSystem _part = default!;
     [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private PolymorphSystem _poly = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -67,6 +68,7 @@ public sealed partial class DevilSystem : EntitySystem
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
     [Dependency] private DevilContractSystem _contract = default!;
@@ -75,6 +77,8 @@ public sealed partial class DevilSystem : EntitySystem
     [Dependency] private CondemnedSystem _condemned = default!;
     [Dependency] private MobStateSystem _state = default!;
     [Dependency] private JitteringSystem _jittering = default!;
+
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
 
     private static readonly Regex WhitespaceAndNonWordRegex = new(@"[\s\W]+", RegexOptions.Compiled);
 
@@ -100,8 +104,7 @@ public sealed partial class DevilSystem : EntitySystem
     {
         // Remove human components.
         RemComp<CombatModeComponent>(devil);
-        RemComp<HungerComponent>(devil);
-        RemComp<ThirstComponent>(devil);
+        RemComp<SatiationComponent>(devil);
         RemComp<TemperatureComponent>(devil);
         RemComp<TemperatureSpeedComponent>(devil);
         RemComp<CondemnedComponent>(devil);
@@ -110,7 +113,7 @@ public sealed partial class DevilSystem : EntitySystem
         // Adjust stats
         EnsureComp<ZombieImmuneComponent>(devil);
         EnsureComp<BreathingImmunityComponent>(devil);
-        EnsureComp<PressureImmunityComponent>(devil);
+        _status.TrySetStatusEffectDuration(devil, PressureImmunity);
         EnsureComp<ActiveListenerComponent>(devil);
         EnsureComp<AlwaysTakeHolyComponent>(devil);
         EnsureComp<CrematoriumImmuneComponent>(devil);
@@ -127,7 +130,7 @@ public sealed partial class DevilSystem : EntitySystem
         revival.CanCheatStanding = true;
 
         // Change damage modifier
-       _damageable.SetDamageModifierSetId(devil.Owner, devil.Comp.DevilDamageModifierSet);
+        _damageable.SetDamageModifierSetId(devil.Owner, devil.Comp.DevilDamageModifierSet);
 
         // No decapitating the devil
         foreach (var part in _body.GetOrgans<WoundableComponent>(devil.Owner))
@@ -209,10 +212,7 @@ public sealed partial class DevilSystem : EntitySystem
     private void OnListen(Entity<DevilComponent> devil, ref ListenEvent args)
     {
         // Other Devils and entities without souls have no authority over you.
-        if (HasComp<DevilComponent>(args.Source)
-        || HasComp<CondemnedComponent>(args.Source)
-        || _silicon.IsSilicon(args.Source)
-        || args.Source == devil.Owner)
+        if (args.Source == devil.Owner || _whitelist.IsWhitelistPass(devil.Comp.TrueNameBlacklist, args.Source))
             return;
 
         var message = WhitespaceAndNonWordRegex.Replace(args.Message.ToLowerInvariant(), "");

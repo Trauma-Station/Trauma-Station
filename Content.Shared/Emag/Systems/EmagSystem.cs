@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 using Content.Trauma.Common.Emag;
 // </Trauma>
 using Content.Shared.Administration.Logs;
@@ -25,7 +25,7 @@ namespace Content.Shared.Emag.Systems;
 public sealed partial class EmagSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private CommonSparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedChargesSystem _sharedCharges = default!;
@@ -71,7 +71,7 @@ public sealed partial class EmagSystem : EntitySystem
         Entity<LimitedChargesComponent?> chargesEnt = ent.Owner;
         if (_sharedCharges.IsEmpty(chargesEnt))
         {
-            _popup.PopupClient(Loc.GetString("emag-no-charges"), user, user);
+            _popup.PopupEntity(Loc.GetString("emag-no-charges"), user, user);
             return false;
         }
 
@@ -89,10 +89,10 @@ public sealed partial class EmagSystem : EntitySystem
         if (!emaggedEvent.Handled)
             return false;
 
-        _popup.PopupPredicted(Loc.GetString(ent.Comp.SuccessText, ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium); // Goobstation - Success text de-hardcoded
+        _popup.PopupEntity(Loc.GetString(ent.Comp.SuccessText, ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium); // Trauma - unhardcode the loc id
 
         _audio.PlayPredicted(ent.Comp.EmagSound, ent, ent);
-        _sparks.DoSparks(Transform(target).Coordinates); // goob edit - sparks everywhere
+        _sparks.DoSparks(target, user: user); // Trauma
 
         _adminLogger.Add(LogType.Emag, LogImpact.High, $"{ToPrettyString(user):player} emagged {ToPrettyString(target):target} with flag(s): {typeToUse}");
 

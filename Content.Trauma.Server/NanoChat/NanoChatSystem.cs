@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server.Access.Components;
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.NameIdentifier;
 using Content.Server.Power.Components;
 using Content.Server.Radio;
+using Content.Shared.Access.Components;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Database;
 using Content.Shared.Kitchen;
@@ -161,7 +161,7 @@ public sealed partial class NanoChatSystem : SharedNanoChatSystem
             return;
 
         // Assign a random number
-        _name.GenerateUniqueName(ent, _nameIdentifierGroup, out var number);
+        _name.GenerateUniqueNameModifier(_nameIdentifierGroup, out var number);
         ent.Comp.Number = (uint) number;
         Dirty(ent);
     }

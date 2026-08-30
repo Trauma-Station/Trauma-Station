@@ -1,10 +1,13 @@
 - type: entity
-  parent: [BaseItem, BaseSyndicateAnchoredContraband]
+  parent: [BaseItem, BaseSyndicateContrabandUnscannable] # Trauma - unscannable
   abstract: true
   id: ReinforcementRadio
   name: syndicate reinforcement radio
   description: Call in a syndicate agent of questionable quality, instantly! Only basic equipment provided.
   components:
+  # <Trauma>
+  - type: PickupFamiliar # so random monkey that spawns into maints in the dark isnt completely clueless
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Devices/communication.rsi
     layers:
@@ -27,7 +30,7 @@
     description: ghost-role-information-syndicate-reinforcement-spy-description
     rules: ghost-role-information-syndicate-reinforcement-rules
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist # Trauma - was MindRoleGhostRoleFamiliar
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -35,7 +38,6 @@
     selectablePrototypes: ["SyndicateAgentMedic", "SyndicateAgentSpy", "SyndicateAgentThief",
                            "SyndicateAgentGrenadier", "SyndicateAgentHitman"] # Trauma
 
-# Goobstation - Nukeop reinforcement
 - type: entity
   parent: ReinforcementRadio
   id: ReinforcementRadioSyndicateNukeops # Reinforcement radio exclusive to nukeops uplink
@@ -65,7 +67,7 @@
     description: ghost-role-information-syndicate-monkey-reinforcement-description
     rules: ghost-role-information-syndicate-reinforcement-rules
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist # Trauma - was MindRoleGhostRoleFamiliar
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -94,7 +96,7 @@
     description: ghost-role-information-SyndiCat-description
     rules: ghost-role-information-syndicate-reinforcement-rules
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist # Trauma - was MindRoleGhostRoleFamiliar
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner

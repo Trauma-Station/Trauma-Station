@@ -1,8 +1,12 @@
+// <Trauma>
+using Robust.Shared.Collections;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
@@ -21,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Tools.Systems;
 
-public sealed partial class ToolRefinablSystem : EntitySystem
+public sealed partial class ToolRefinableSystem : EntitySystem
 {
     [Dependency] private SharedToolSystem _toolSystem = default!;
     [Dependency] private GibbingSystem _gib = default!;
@@ -38,7 +42,7 @@ public sealed partial class ToolRefinablSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ToolRefinableComponent, GetVerbsEvent<InteractionVerb>>(AddVerb);
-        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<ToolRefinableComponent, ToolRefineDoAfterEvent>(OnDoAfter);
     }
 
@@ -56,7 +60,7 @@ public sealed partial class ToolRefinablSystem : EntitySystem
         RaiseLocalEvent(args.Target, ref attemptEvent);
         if (attemptEvent.IsCancelled)
         {
-            _popup.PopupPredicted(attemptEvent.BlockCause, args.User, args.User);
+            _popup.PopupEntity(attemptEvent.BlockCause, args.User, args.User);
             return;
         }
 
@@ -131,7 +135,7 @@ public sealed partial class ToolRefinablSystem : EntitySystem
         RaiseLocalEvent(args.Target.Value, ref getIsBlocked);
         if (getIsBlocked.IsCancelled)
         {
-            _popup.PopupPredicted(getIsBlocked.BlockCause, args.User, args.User);
+            _popup.PopupEntity(getIsBlocked.BlockCause, args.User, args.User);
             return;
         }
 
@@ -164,7 +168,7 @@ public sealed partial class ToolRefinablSystem : EntitySystem
     private void SpawnRefinement(List<EntitySpawnEntry> spawnList, EntityUid source, IRobustRandom rng)
     {
         var spawns = EntitySpawnCollection.GetSpawns(spawnList, rng);
-        var spawned = new List<EntityUid>(spawns.Count);
+        var spawned = new ValueList<EntityUid>(spawns.Count); // Trauma - use ValueList
 
         if (_container.TryGetContainingContainer(source, out var container))
             _container.Remove((source, null, null), container);
@@ -184,19 +188,17 @@ public sealed partial class ToolRefinablSystem : EntitySystem
         if (!TryComp<ToolRefinableSolutionComponent>(source, out var comp))
             return;
 
-        TryGetSourceSolutionForTransfer(source, comp.SolutionToSplit, out var solutionInfo);
+        if (!TryGetSourceSolutionForTransfer(source, comp.SolutionToSplit, out var solutionInfo))
+            return;
 
-        foreach (var spawnedUid in spawned)
+        var (sourceSoln, sourceSolution) = solutionInfo.Value;
+
+        for (var i = spawned.Count; i > 0; i--)
         {
-            // Fills refine result if original entity allows.
-            if (solutionInfo.HasValue && comp.SolutionToSet != null)
-            {
-                var (sourceSoln, sourceSolution) = solutionInfo.Value;
-                var refineResultVolume = sourceSolution.Volume / FixedPoint2.New(spawns.Count);
-
-                var lostSolution = _solutionContainer.SplitSolution(sourceSoln, refineResultVolume);
-                FillResult(spawnedUid, comp.SolutionToSet, lostSolution);
-            }
+            var spawnedUid = spawned[i - 1];
+            var refineResultVolume = sourceSolution.Volume / FixedPoint2.New(i);
+            var lostSolution = _solutionContainer.SplitSolution(sourceSoln, refineResultVolume);
+            FillResult(spawnedUid, comp.SolutionToSet, lostSolution);
         }
     }
 
@@ -220,7 +222,7 @@ public sealed partial class ToolRefinablSystem : EntitySystem
             ? null
             : Loc.GetString(component.PopupForOther, ("user", user), ("target", uid), ("tool", used));
 
-        _popup.PopupPredicted(slicingDoneMessageForUser, slicingDoneMessageForOthers, user, user, component.PopupType);
+        _popup.PopupEntity(slicingDoneMessageForUser, slicingDoneMessageForOthers, user, user, component.PopupType);
     }
 
     /// <summary>

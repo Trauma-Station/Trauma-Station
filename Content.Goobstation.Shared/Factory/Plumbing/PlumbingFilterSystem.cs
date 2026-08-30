@@ -50,7 +50,7 @@ public sealed partial class PlumbingFilterSystem : EntitySystem
         var msg = args.Filter is {} filter2 // chud language
             ? Loc.GetString("plumbing-filter-changed", ("reagent", ProtoMan.Index(filter2).LocalizedName))
             : Loc.GetString("plumbing-filter-removed");
-        _popup.PopupClient(msg, ent, args.Actor);
+        _popup.PopupEntity(msg, ent, args.Actor);
 
         ent.Comp.Filter = args.Filter;
         Dirty(ent);

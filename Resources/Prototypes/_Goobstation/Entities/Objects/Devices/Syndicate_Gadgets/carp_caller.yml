@@ -2,7 +2,7 @@
 
 - type: entity
   id: CarpCaller
-  parent: [BaseMachinePowered, BaseSyndicateAnchoredContraband]
+  parent: [BaseMachinePowered, BaseSyndicateContrabandUnscannable]
   name: carp caller
   description: A syndicate device that seems interesting to wild space carp.
   components:

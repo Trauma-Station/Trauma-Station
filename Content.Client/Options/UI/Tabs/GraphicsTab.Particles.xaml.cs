@@ -34,7 +34,9 @@ public sealed partial class GraphicsTab
 
         public override void LoadValue()
         {
-            _dropDown.Button.SelectId(_cfg.GetCVar(TraumaCVars.ParticleQuality));
+            var value = _cfg.GetCVar(TraumaCVars.ParticleQuality);
+            value = Math.Clamp(value, QualityOff, QualityHigh);
+            _dropDown.Button.SelectId(value);
         }
 
         public override void SaveValue()

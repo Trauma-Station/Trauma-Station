@@ -75,3 +75,126 @@
         damage:
           types: # do not eat C4's bigger brother
             Poison: 2
+
+- type: reagent
+  parent: ChlorineTrifluoride
+  id: HolyChlorineTrifluoride
+  name: reagent-name-holy-chlorine-trifluoride
+  group: Pyrotechnic
+  desc: reagent-desc-holy-chlorine-trifluoride
+  physicalDesc: reagent-physical-desc-blazing
+  flavor: holy
+  color: blue
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: MolotovHolyFire
+    maxOnTileWhitelist:
+      tags: [ TraumaFire ]
+  - !type:SpillTileReaction
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HolyIgnite
+        stacks: 6
+        conditions:
+    Flammable: # have to reset this because apparently it reset? idk either
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+        multiplier: 0.3
+      - !type:Ignite
+      - !type:Emote
+        emote: Scream
+        probability: 0.2
+      - !type:PopupMessage
+        messages: [ "clf3-it-burns", "clf3-get-away" ]
+        visualType: MediumCaution
+        probability: 0.3
+        type: Local
+
+- type: reagent
+  id: Burnite
+  name: reagent-name-burnite
+  group: Pyrotechnic
+  desc: reagent-desc-burnite
+  physicalDesc: reagent-physical-desc-blazing
+  contrabandSeverity: Major
+  color: "#621800"
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: MolotovHellFire
+    maxOnTileWhitelist:
+      tags: [ TraumaFire ]
+  - !type:FlammableTileReaction
+    temperatureMultiplier: 5
+  - !type:SpillTileReaction
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 4
+            Poison: 1 # mildly poisonous
+      - !type:Flammable
+        multiplier: 0.5
+      - !type:AdjustTemperature
+        amount: 8000
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+        multiplier: 0.6
+      - !type:Ignite
+      - !type:Emote
+        emote: Scream
+        probability: 0.3
+      - !type:PopupMessage
+        messages: [ "clf3-it-burns", "clf3-get-away" ]
+        visualType: MediumCaution
+        probability: 0.4
+        type: Local
+
+- type: reagent
+  id: UnknownReagent
+  name: reagent-name-unknown-reagent
+  group: Pyrotechnic
+  desc: reagent-desc-unknown-reagent
+  physicalDesc: reagent-physical-desc-blazing
+  contrabandSeverity: Major
+  color: "#ff00ff"
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: MolotovGlitchFire
+    maxOnTileWhitelist:
+      tags: [ TraumaFire ]
+  - !type:FlammableTileReaction
+    temperatureMultiplier: 5
+  - !type:SpillTileReaction
+  plantMetabolism:
+  - !type:PlantMutateChemicals
+    randomPickBotanyReagent: UnknownReagentFillSolution
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 1
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+        multiplier: 0.3
+      - !type:Ignite
+      - !type:Emote
+        emote: Scream
+        probability: 0.2
+      - !type:PopupMessage
+        messages: [ "clf3-it-burns", "clf3-get-away" ]
+        visualType: MediumCaution
+        probability: 0.2
+        type: Local

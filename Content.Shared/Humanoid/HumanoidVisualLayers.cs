@@ -10,6 +10,7 @@ namespace Content.Shared.Humanoid
         HairSpecial,
         FacialHairSpecial,
         Wings,
+        WingsBehind,
         Face,
         // </Trauma>
         Special, // for the cat ears

@@ -74,7 +74,7 @@
 - type: entity
   name: space bear
   id: MobBearSpace
-  parent: [AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Fauna # Goob
@@ -124,7 +124,7 @@
 - type: entity
   name: space kangaroo
   id: MobKangarooSpace
-  parent: [AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It looks friendly. Why don't you give it a hug?
   components:
   # <Trauma>
@@ -195,7 +195,7 @@
 - type: entity
   name: space spider
   id: MobSpiderSpace
-  parent: [AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It's so glowing, it looks dangerous.
   components:
   # <Goob>
@@ -315,7 +315,7 @@
 - type: entity
   name: space cobra
   id: MobCobraSpace
-  parent: [AppearanceSpaceCobra, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceCobra
+  parent: [ AppearanceSpaceCobra, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceCobra
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Trauma>
@@ -346,7 +346,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        70: Dead # Goob - was 45
+        45: Dead
     - type: Stamina
       baseCritThreshold: 150
     - type: DamageStateVisuals
@@ -389,14 +389,14 @@
       animation: WeaponArcBite
       damage:
         types:
-          Piercing: 6
-          Poison: 4
+          Piercing: 5 # Trauma - Was 6
+          Poison: 2 # Trauma - Was 4
     - type: SolutionManager
       solutions:
       - SolutionVenomCobraSpace
     - type: MeleeChemicalInjector
       solution: melee
-      transferAmount: 6
+      transferAmount: 2 # Trauma - Was 6
     - type: ReplacementAccent
       accent: xeno
     - type: InteractionPopup
@@ -440,7 +440,7 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobSheepBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobSheepBase, BaseMobDestructible ]
   id: MobSheepSpace
   name: space sheep
   description: A sheep... in space!
@@ -521,9 +521,10 @@
         variation: 0.05
   - type: MobPrice
     price: 600
-  - type: Wooly
-    quantity: 10
-    growthDelay: 120 #2 minutes
+  - type: SolutionManager
+    solutions:
+    - SolutionUdderSheep
+    - SolutionWoolSpaceSheep
   - type: Speech
     speechSounds: SheepSpace
     speechVerb: Sheep
@@ -531,11 +532,27 @@
     emoteSounds: SheepSpace
 
 - type: entity
+  parent: SolutionWool
+  id: SolutionWoolSpaceSheep
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SatiationProduction
+    delay: 120 #2 minutes
+  - type: SolutionProducer
+    generated:
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 10
+
+- type: entity
   parent: [SimpleSpaceMobBase, BaseMobAnimal, SolutionVermin, MobNightVision]
   id: MobSnail
   name: snail
   description: Revolting unless you're french.
   components:
+  # <Trauma>
+  - type: ZombieImmune
+  # </Trauma>
   - type: GhostRole
     prob: 0 # Trauma
     makeSentient: true
@@ -600,6 +617,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 2
     baseSprintSpeed : 3
+  - type: NameIdentifier
+    group: AdjectivePrefix
   - type: DamageStateVisuals
     states:
       Alive:
@@ -618,23 +637,12 @@
         Quantity: 3
       - ReagentId: Water
         Quantity: 4 #It makes saline if you add salt!
-  - type: Thirst
-    startingThirst: 25  # spawn with Okay thirst state
-    thresholds:
-      OverHydrated: 35
-      Okay: 25
-      Thirsty: 15
-      Parched: 10
-      Dead: 0
-    baseDecayRate: 0.04
-  - type: Hunger
-    thresholds:
-      Overfed: 35
-      Okay: 25
-      Peckish: 15
-      Starving: 10
-      Dead: 0
-    baseDecayRate: 0.1
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SnailHunger
+      Thirst:
+        prototype: MouseThirst
   - type: Extractable
     grindableSolutionName: food
   - type: Tag
@@ -723,7 +731,7 @@
 - type: entity
   parent: [ BaseMobMothroach, MobSnail ]
   id: MobSnailMoth
-  name: Snoth
+  name: snoth
   components:
   - type: GhostRole
     prob: 1 # Trauma

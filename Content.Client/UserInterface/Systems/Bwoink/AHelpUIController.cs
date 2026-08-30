@@ -42,8 +42,8 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
     [UISystemDependency] private readonly AudioSystem _audio = default!;
 
     private BwoinkSystem? _bwoinkSystem;
-    public MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton; // Trauma - Made public
-    public Button? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton; // Trauma - Made public
+    private MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton;
+    private Button? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton;
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
     private bool _hasUnreadAHelp;
@@ -91,11 +91,8 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
 
     private void AHelpButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        // <Trauma>
-        // EnsureUIHelper();
-        // UIHelper!.ToggleWindow();
-        OnLoad?.Invoke(this);
-        // </Trauma>
+        EnsureUIHelper();
+        UIHelper!.ToggleWindow();
     }
 
     public void OnSystemLoaded(BwoinkSystem system)
@@ -104,7 +101,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
         _bwoinkSystem.OnBwoinkTextMessageRecieved += ReceivedBwoink;
 
         _input.SetInputCommand(ContentKeyFunctions.OpenAHelp,
-            InputCmdHandler.FromDelegate(_ => OnLoad?.Invoke(this))); // Trauma - Changed to open staff help
+            InputCmdHandler.FromDelegate(_ => ToggleWindow()));
     }
 
     public void OnSystemUnloaded(BwoinkSystem system)
@@ -251,7 +248,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
         helper.Control.PopOut.Visible = false;
     }
 
-    public void UnreadAHelpReceived() // Trauma - Made public
+    private void UnreadAHelpReceived()
     {
         GameAHelpButton?.StyleClasses.Add(StyleClass.Negative);
         LobbyAHelpButton?.StyleClasses.Add(StyleClass.Negative);
@@ -521,14 +518,14 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
 
     public void ToggleWindow()
     {
-        EnsureInit(_discordRelayActive);
-        if (_window!.IsOpen)
+        var createdWindow = EnsureInit(_discordRelayActive);
+        if (!createdWindow && _window!.IsOpen)
         {
             _window.Close();
         }
         else
         {
-            _window.OpenCentered();
+            _window!.OpenCentered();
         }
     }
 
@@ -562,10 +559,14 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         _window!.OpenCentered();
     }
 
-    private void EnsureInit(bool relayActive)
+    /// <summary>
+    /// Create new ahelp window or return existing window
+    /// </summary>
+    /// <returns>True if new window was created</returns>
+    private bool EnsureInit(bool relayActive)
     {
         if (_window is { Disposed: false })
-            return;
+            return false;
         _chatPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(_ownerId, text, true, false));
         _chatPanel.InputTextChanged += text => InputTextChanged?.Invoke(_ownerId, text);
         _chatPanel.RelayedToDiscordLabel.Visible = relayActive;
@@ -583,6 +584,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         var introText = Loc.GetString("bwoink-system-introductory-message");
         var introMessage = new SharedBwoinkSystem.BwoinkTextMessage( _ownerId, SharedBwoinkSystem.SystemUserId, introText);
         Receive(introMessage);
+        return true;
     }
 
     public void Dispose()

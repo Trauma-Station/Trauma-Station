@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
 using Content.Trauma.Shared.EmptyScroll;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
@@ -13,31 +10,24 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// </summary>
 public sealed class EmptyScrollTest : GameTest
 {
-    public static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId Human = "MobHuman";
+
+    [SidedDependency(Side.Server)] private EmptyScrollSystem _scroll = default!;
 
     [Test]
     public async Task PrayersTest()
     {
-        var pair = Pair;
-        var server = pair.Server;
+        var map = await Pair.CreateTestMap();
 
-        var entMan = server.EntMan;
-        var scroll = entMan.System<EmptyScrollSystem>();
-
-        var map = await pair.CreateTestMap();
-
-        await server.WaitAssertion(() =>
+        await Server.WaitPost(() =>
         {
-            Assert.Multiple(() =>
+            foreach (var prayer in _scroll.AllPrayers.Values)
             {
-                foreach (var prayer in scroll.AllPrayers.Values)
-                {
-                    // spawn fresh urist every time incase he gets gibbed or whatever
-                    var urist = entMan.SpawnEntity(Human, map.GridCoords);
-                    scroll.Pray(urist, prayer);
-                    entMan.DeleteEntity(urist);
-                }
-            });
+                // spawn fresh urist every time incase he gets gibbed or whatever
+                var urist = SSpawn(Human, map.GridCoords);
+                _scroll.Pray(urist, prayer);
+                SDel(urist);
+            }
         });
     }
 }

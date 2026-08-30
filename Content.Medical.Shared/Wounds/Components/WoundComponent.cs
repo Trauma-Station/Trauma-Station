@@ -7,40 +7,33 @@ using Content.Shared.Damage.Prototypes;
 namespace Content.Medical.Shared.Wounds;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(true, fieldDeltas: true)]
 [EntityCategory("Wounds")]
 public sealed partial class WoundComponent : Component
 {
     /// <summary>
     /// The organ this wound is applied to.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid HoldingWoundable;
 
     /// <summary>
     /// Actual severity of the wound. The more the worse.
     /// Total amount dictates <see cref="WoundSeverity"/>
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 WoundSeverityPoint;
-
-    /// <summary>
-    /// maybe some cool mechanical stuff to treat those wounds later. I genuinely have no idea
-    /// Wound type. External/Internal basically.
-    /// </summary>
-    [DataField]
-    public WoundType WoundType = WoundType.External;
 
     /// <summary>
     /// Damage group of this wound.
     /// </summary>
-    [DataField]
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype>? DamageGroup;
 
     /// <summary>
     /// Damage type of this wound.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public ProtoId<DamageTypePrototype> DamageType;
 
     /// <summary>
@@ -60,19 +53,13 @@ public sealed partial class WoundComponent : Component
     /// Wound severity. Has six severities: Healed/Minor/Moderate/Severe/Critical and Loss.
     /// Directly depends on <see cref="WoundSeverityPoint"/>
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public WoundSeverity WoundSeverity;
-
-    /// <summary>
-    /// When wound is visible. Always/HandScanner/AdvancedScanner.
-    /// </summary>
-    [DataField]
-    public WoundVisibility WoundVisibility = WoundVisibility.Always;
 
     /// <summary>
     /// "Can be healed". Tend wounds surgery bypasses that
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool CanBeHealed = true;
 
     /// <summary>
@@ -92,37 +79,4 @@ public sealed partial class WoundComponent : Component
     /// </summary>
     [DataField]
     public bool AlwaysShowInInspects;
-
-    /// <summary>
-    /// Multiplier for self-healing.
-    /// </summary>
-    [DataField]
-    public float SelfHealMultiplier = 1.0f;
-}
-
-
-[Serializable, NetSerializable]
-public sealed class WoundComponentState : ComponentState
-{
-    public NetEntity HoldingWoundable;
-
-    public FixedPoint2 WoundSeverityPoint;
-    public FixedPoint2 WoundableIntegrityMultiplier;
-
-    public WoundType WoundType;
-
-    public ProtoId<DamageGroupPrototype>? DamageGroup;
-    public string? DamageType;
-
-    public EntProtoId? ScarWound;
-
-    public bool IsScar;
-
-    public WoundSeverity WoundSeverity;
-
-    public WoundVisibility WoundVisibility;
-
-    public bool CanBeHealed;
-
-    public float SelfHealMultiplier;
 }

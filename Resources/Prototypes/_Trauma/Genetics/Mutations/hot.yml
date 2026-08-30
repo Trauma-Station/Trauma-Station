@@ -37,11 +37,12 @@
   name: Create Ash
   description: Concentrates pyrokinetic forces to create ash, useful for basically nothing.
   components:
+  - type: Sprite
+    sprite: Objects/Materials/materials.rsi
+    layers:
+    - state: ash
   - type: Action
     itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Materials/materials.rsi
-      state: ash
   - type: ConjureAction
     spawn: Ash
 
@@ -51,14 +52,15 @@
   name: Pyrobeam
   description: This power fires a heated bolt at a target.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: firebeam
   - type: Action
     useDelay: 30
     itemIconStyle: BigAction
     raiseOnUser: true
     sound: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: firebeam
   - type: TargetAction
     range: 60
     checkCanAccess: false

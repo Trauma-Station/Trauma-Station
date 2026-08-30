@@ -44,6 +44,11 @@
       Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
     species: Shadow
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 # used for nightmares and lesser shadowlings
 - type: entity
@@ -77,9 +82,11 @@
       reagents:
       - ReagentId: FluorosulfuricAcid
         Quantity: 300
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ThermalVision
-    thermalShader: null
+    useShader: false
     color: "#BF40BF"
     activateSound: null
     deactivateSound: null

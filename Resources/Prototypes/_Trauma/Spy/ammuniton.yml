@@ -1,0 +1,98 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BoxMagazineLightRifle
+  id: BoxMagazineLightRifleSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: MagazineLightRifle
+        amount: 3
+
+- type: entity
+  parent: BoxMagazineRifle
+  id: BoxMagazineRifleSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: MagazineRifle
+        amount: 3
+
+- type: entity
+  parent: BoxMagazine
+  id: BoxGrenadeSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: GrenadeFrag
+          amount: 1
+        - id: GrenadeBlast
+          amount: 1
+
+- type: entity
+  parent: BoxMagazine
+  id: BoxMagazineShotgunSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MagazineShotgun
+          amount: 2
+        - id: MagazineShotgunSlug
+          amount: 2
+
+- type: entity
+  parent: BoxMagazine
+  id: BoxMagazineHighCaliberSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MagazineHighCaliber
+          amount: 1
+        - id: MagazineHighCaliberExplosive
+          amount: 1
+
+- type: entity
+  parent: BoxMagazine
+  id: MagazineBoxAntiMaterielSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: MagazineAntiMateriel
+        amount: 3
+
+- type: entity
+  parent: BoxMagazine
+  id: MagazineBoxSpeedloaderMagnumAP
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SpeedLoaderMagnumAP
+        amount: 3
+
+- type: entity
+  parent: BoxMagazine
+  id: BoxMagazineSmartSpy
+  suffix: SpyReward
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: MagazineSmart
+        amount: 3

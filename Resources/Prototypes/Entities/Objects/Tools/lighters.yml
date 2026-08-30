@@ -21,6 +21,7 @@
   # </Trauma>
   - type: IgnitionSource
     ignited: false
+  - type: ItemToggleExaminableStatus
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -381,7 +382,7 @@
   - type: Tool
     useSound:
       collection: Welder
-    qualities: Welding
+    qualities: [ Welding ]
   - type: Lock
   - type: AccessReader
     access: [["CentralCommand"]]

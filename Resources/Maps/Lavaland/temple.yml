@@ -2447,10 +2447,10 @@ entities:
       parent: 1
     - type: Solution
       solution:
-        maxVol: 500
+        maxVol: 480
         reagents:
         - ReagentId: Blood
-          Quantity: 500
+          Quantity: 480
 - proto: WoodenBench
   entities:
   - uid: 185

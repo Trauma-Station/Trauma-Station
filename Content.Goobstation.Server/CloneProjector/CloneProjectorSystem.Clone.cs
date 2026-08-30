@@ -33,7 +33,7 @@ public partial class CloneProjectorSystem
             part.Comp.CanRemove = false;
             part.Comp.CanBleed = false;
             part.Comp.AllowWounds = false;
-            Dirty(part);
+            DirtyFields(part, part.Comp, null, nameof(WoundableComponent.CanRemove), nameof(WoundableComponent.CanBleed), nameof(WoundableComponent.AllowWounds));
         }
     }
 

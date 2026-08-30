@@ -3,7 +3,6 @@
 # TODO add hammering and shit as well just touching it with wood shouldn't complete it
 - type: constructionGraph
   id: RevSword
-  start: start
   graph:
   - node: start
     edges:
@@ -17,7 +16,6 @@
 
 - type: constructionGraph
   id: RevMace
-  start: start
   graph:
   - node: start
     edges:
@@ -31,7 +29,6 @@
 
 - type: constructionGraph
   id: RevKnife
-  start: start
   graph:
   - node: start
     edges:
@@ -45,7 +42,6 @@
 
 - type: constructionGraph
   id: RevPitchfork
-  start: start
   graph:
   - node: start
     edges:
@@ -59,7 +55,6 @@
 
 - type: constructionGraph
   id: RevTorch
-  start: start
   graph:
   - node: start
     edges:
@@ -99,7 +94,6 @@
 
 - type: constructionGraph
   id: RevGuns
-  start: start
   graph:
   - node: start
     edges:
@@ -382,7 +376,6 @@
 
 - type: constructionGraph
   id: RevIED
-  start: start
   graph:
   - node: start
     edges:

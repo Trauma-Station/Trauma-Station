@@ -1,16 +1,17 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BaseWraithAction
   id: ActionDarkWhisper
   name: Dark Whisper
   description: Choose a target and you will be able to speak through them for some seconds.
   components:
+  - type: Sprite
+    layers:
+    - state: dark_whisper
   - type: Action
     itemIconStyle: BigAction
     useDelay: 60
-    icon:
-      sprite: _Goobstation/Wraith/actions.rsi
-      state: dark_whisper
   - type: TargetAction
     range: 10
   - type: EntityTargetAction

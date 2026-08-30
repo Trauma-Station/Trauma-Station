@@ -9,7 +9,7 @@
   - type: Projectile
     damage:
       types:
-        Ballistic: 10
+        Ballistic: 11
 
 - type: entity
   parent: BaseBullet

@@ -415,7 +415,7 @@
   parent: BaseAbductorVictimObjective
   id: AbductorVictimEscapeStation
   name: Escape the station.
-  description: You must escape the station! Get the shuttle called!
+  description: You must escape the station!
   components:
   - type: Objective
     icon:

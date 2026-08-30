@@ -23,13 +23,13 @@ public sealed partial class AutomationFilterSystem : EntitySystem
     [Dependency] private SharedCuffableSystem _cuffable = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStackSystem _stack = default!;
-
-    private EntityQuery<AnchorableComponent> _anchorableQuery;
-    private EntityQuery<CuffableComponent> _cuffableQuery;
-    private EntityQuery<FilterSlotComponent> _slotQuery;
-    private EntityQuery<LabelComponent> _labelQuery;
-    private EntityQuery<MobStateComponent> _mobQuery;
-    private EntityQuery<StackComponent> _stackQuery;
+    [Dependency] private EntityQuery<AnchorableComponent> _anchorableQuery = default!;
+    [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
+    [Dependency] private EntityQuery<FilterSlotComponent> _slotQuery = default!;
+    [Dependency] private EntityQuery<ItemSlotsComponent> _slotsQuery = default!;
+    [Dependency] private EntityQuery<LabelComponent> _labelQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
 
     public static readonly int GateCount = Enum.GetValues(typeof(LogicGate)).Length;
 
@@ -37,63 +37,35 @@ public sealed partial class AutomationFilterSystem : EntitySystem
     {
         base.Initialize();
 
-        _anchorableQuery = GetEntityQuery<AnchorableComponent>();
-        _cuffableQuery = GetEntityQuery<CuffableComponent>();
-        _slotQuery = GetEntityQuery<FilterSlotComponent>();
-        _labelQuery = GetEntityQuery<LabelComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
 
         Subs.BuiEvents<LabelFilterComponent>(LabelFilterUiKey.Key, subs =>
         {
             subs.Event<LabelFilterSetLabelMessage>(OnLabelSet);
         });
-        SubscribeLocalEvent<LabelFilterComponent, ExaminedEvent>(OnLabelExamined);
-        SubscribeLocalEvent<LabelFilterComponent, AutomationFilterEvent>(OnLabelFilter);
 
         Subs.BuiEvents<NameFilterComponent>(NameFilterUiKey.Key, subs =>
         {
             subs.Event<NameFilterSetNameMessage>(OnNameSet);
             subs.Event<NameFilterSetModeMessage>(OnNameSetMode);
         });
-        SubscribeLocalEvent<NameFilterComponent, ExaminedEvent>(OnNameExamined);
-        SubscribeLocalEvent<NameFilterComponent, AutomationFilterEvent>(OnNameFilter);
 
         Subs.BuiEvents<StackFilterComponent>(StackFilterUiKey.Key, subs =>
         {
             subs.Event<StackFilterSetMinMessage>(OnStackSetMin);
             subs.Event<StackFilterSetSizeMessage>(OnStackSetSize);
         });
-        SubscribeLocalEvent<StackFilterComponent, ExaminedEvent>(OnStackExamined);
-        SubscribeLocalEvent<StackFilterComponent, AutomationFilterEvent>(OnStackFilter);
-        SubscribeLocalEvent<StackFilterComponent, AutomationFilterSplitEvent>(OnStackSplit);
-
-        SubscribeLocalEvent<CombinedFilterComponent, ComponentInit>(OnCombinedInit);
-        SubscribeLocalEvent<CombinedFilterComponent, UseInHandEvent>(OnCombinedUse);
-        SubscribeLocalEvent<CombinedFilterComponent, ExaminedEvent>(OnCombinedExamined);
-        SubscribeLocalEvent<CombinedFilterComponent, AutomationFilterEvent>(OnCombinedFilter);
-        SubscribeLocalEvent<CombinedFilterComponent, AutomationFilterSplitEvent>(OnCombinedSplit);
 
         Subs.BuiEvents<PressureFilterComponent>(PressureFilterUiKey.Key, subs =>
         {
             subs.Event<PressureFilterSetMinMessage>(OnPressureSetMin);
             subs.Event<PressureFilterSetMaxMessage>(OnPressureSetMax);
         });
-        SubscribeLocalEvent<PressureFilterComponent, ExaminedEvent>(OnPressureExamined);
         // OnPressureFilter is in server because atmos is serverside
-
-        SubscribeLocalEvent<AnchorFilterComponent, AutomationFilterEvent>(OnAnchorFilter);
 
         Subs.BuiEvents<MobFilterComponent>(MobFilterUiKey.Key, subs =>
         {
             subs.Event<MobFilterToggleMessage>(OnMobToggle);
         });
-        SubscribeLocalEvent<MobFilterComponent, ExaminedEvent>(OnMobExamined);
-        SubscribeLocalEvent<MobFilterComponent, AutomationFilterEvent>(OnMobFilter);
-
-        SubscribeLocalEvent<CuffFilterComponent, AutomationFilterEvent>(OnCuffFilter);
-
-        SubscribeLocalEvent<FilterSlotComponent, ComponentInit>(OnSlotInit);
     }
 
     /* Label filter */
@@ -108,6 +80,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnLabelExamined(Entity<LabelFilterComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -122,6 +95,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         args.PushText(Loc.GetString("automation-filter-examine-string", ("name", ent.Comp.Label)));
     }
 
+    [SubscribeLocalEvent]
     private void OnLabelFilter(Entity<LabelFilterComponent> ent, ref AutomationFilterEvent args)
     {
         args.Allowed = _labelQuery.CompOrNull(args.Item)?.CurrentLabel == ent.Comp.Label;
@@ -149,6 +123,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnNameExamined(Entity<NameFilterComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -163,6 +138,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         args.PushText(Loc.GetString("automation-filter-examine-string", ("name", ent.Comp.Name)));
     }
 
+    [SubscribeLocalEvent]
     private void OnNameFilter(Entity<NameFilterComponent> ent, ref AutomationFilterEvent args)
     {
         var name = Name(args.Item);
@@ -203,6 +179,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnStackExamined(Entity<StackFilterComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -211,12 +188,14 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         args.PushMarkup(Loc.GetString("stack-filter-examine", ("size", ent.Comp.Size)));
     }
 
+    [SubscribeLocalEvent]
     private void OnStackFilter(Entity<StackFilterComponent> ent, ref AutomationFilterEvent args)
     {
         args.Allowed = _stackQuery.CompOrNull(args.Item)?.Count >= ent.Comp.Min;
         args.CouldAllow = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStackSplit(Entity<StackFilterComponent> ent, ref AutomationFilterSplitEvent args)
     {
         args.Size = ent.Comp.Size;
@@ -224,13 +203,14 @@ public sealed partial class AutomationFilterSystem : EntitySystem
 
     /* Combined filter */
 
+    [SubscribeLocalEvent]
     private void OnCombinedInit(Entity<CombinedFilterComponent> ent, ref ComponentInit args)
     {
-        if (!TryComp<ItemSlotsComponent>(ent, out var slots))
+        if (!_slotsQuery.TryComp(ent, out var slots))
             return;
 
-        if (!_slots.TryGetSlot(ent, CombinedFilterComponent.FilterAName, out var filterA, slots) ||
-            !_slots.TryGetSlot(ent, CombinedFilterComponent.FilterBName, out var filterB, slots))
+        if (!_slots.TryGetSlot((ent, slots), CombinedFilterComponent.FilterAName, out var filterA) ||
+            !_slots.TryGetSlot((ent, slots), CombinedFilterComponent.FilterBName, out var filterB))
         {
             Log.Error($"{ToPrettyString(ent)} was missing filter slots!");
             RemCompDeferred<CombinedFilterComponent>(ent);
@@ -241,6 +221,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         ent.Comp.FilterB = filterB;
     }
 
+    [SubscribeLocalEvent]
     private void OnCombinedUse(Entity<CombinedFilterComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
@@ -254,9 +235,10 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
 
         var msg = Loc.GetString("logic-gate-cycle", ("gate", ent.Comp.Gate.ToString().ToUpper()));
-        _popup.PopupClient(msg, ent, args.User);
+        _popup.PopupEntity(msg, ent, args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnCombinedExamined(Entity<CombinedFilterComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -265,6 +247,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         args.PushMarkup(Loc.GetString("combined-filter-examine", ("gate", ent.Comp.Gate.ToString().ToUpper())));
     }
 
+    [SubscribeLocalEvent]
     private void OnCombinedFilter(Entity<CombinedFilterComponent> ent, ref AutomationFilterEvent args)
     {
         var a = IsAllowed(ent.Comp.FilterA.Item, args.Item, out var couldAllowA);
@@ -282,6 +265,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         args.CouldAllow = couldAllowA || couldAllowB; // if any subfilter could allow it, this could allow it too
     }
 
+    [SubscribeLocalEvent]
     private void OnCombinedSplit(Entity<CombinedFilterComponent> ent, ref AutomationFilterSplitEvent args)
     {
         var a = GetSplitSize(ent.Comp.FilterA.Item);
@@ -311,6 +295,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPressureExamined(Entity<PressureFilterComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -321,6 +306,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
 
     /* Anchor filter */
 
+    [SubscribeLocalEvent]
     private void OnAnchorFilter(Entity<AnchorFilterComponent> ent, ref AutomationFilterEvent args)
     {
         // only care about anchorable objects, not walls etc which aren't useful to filter
@@ -337,7 +323,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
     private void OnMobToggle(Entity<MobFilterComponent> ent, ref MobFilterToggleMessage args)
     {
         // no chudding out
-        if (args is not { State: MobState.Alive or MobState.Dead or MobState.Critical })
+        if (args is not { State: MobState.Alive or MobState.Dead or MobState.Critical or MobState.SoftCrit })
             return;
 
         if (!ent.Comp.States.Remove(args.State))
@@ -345,6 +331,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobFilter(Entity<MobFilterComponent> ent, ref AutomationFilterEvent args)
     {
         if (!_mobQuery.TryComp(args.Item, out var mob))
@@ -354,6 +341,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
         args.CouldAllow = true; // dying and defibbing etc
     }
 
+    [SubscribeLocalEvent]
     private void OnMobExamined(Entity<MobFilterComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -366,6 +354,7 @@ public sealed partial class AutomationFilterSystem : EntitySystem
 
     /* Cuff filter */
 
+    [SubscribeLocalEvent]
     private void OnCuffFilter(Entity<CuffFilterComponent> ent, ref AutomationFilterEvent args)
     {
         if (!_cuffableQuery.TryComp(args.Item, out var cuffable))
@@ -378,14 +367,15 @@ public sealed partial class AutomationFilterSystem : EntitySystem
 
     /* Filter slot */
 
+    [SubscribeLocalEvent]
     private void OnSlotInit(Entity<FilterSlotComponent> ent, ref ComponentInit args)
     {
-        if (!TryComp<ItemSlotsComponent>(ent, out var slots))
-            return;
+        if (!_slotsQuery.TryComp(ent, out var slots))
+            return; // hopefully this is the add all comps test...
 
-        if (!_slots.TryGetSlot(ent, ent.Comp.FilterSlotId, out var filterSlot, slots))
+        if (!_slots.TryGetSlot((ent, slots), ent.Comp.FilterSlotId, out var filterSlot))
         {
-            Log.Warning($"Missing filter slot {ent.Comp.FilterSlotId} on {ToPrettyString(ent)}");
+            Log.Error($"Missing filter slot {ent.Comp.FilterSlotId} on {ToPrettyString(ent)}");
             RemCompDeferred<FilterSlotComponent>(ent);
             return;
         }

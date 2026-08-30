@@ -257,7 +257,7 @@ namespace Content.Server.Voting.Managers
                 }
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset vote finished: {picked}");
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
-                ticker.SetGamePreset(picked);
+                ticker.SetGamePreset(picked, resetDelay: 1); // Trauma - add reset delay
             };
         }
 
@@ -357,7 +357,7 @@ namespace Content.Server.Voting.Managers
                 _votingSystem = _entityManager.SystemOrNull<VotingSystem>();
 
             // Check that the initiator is actually allowed to do a votekick.
-            if (_votingSystem != null && !await _votingSystem.CheckVotekickInitEligibility(initiator))
+            if (_votingSystem != null && !_votingSystem.CheckVotekickInitEligibility(initiator))
             {
                 _logManager.GetSawmill("admin.votekick").Warning($"User {initiator} attempted a votekick, despite not being eligible to!");
                 _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator}, but they are not eligible to votekick!");

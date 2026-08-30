@@ -194,7 +194,8 @@ public abstract partial class SharedFlashSystem : EntitySystem
         {
             _appearance.SetData(ent.Owner, FlashVisuals.Burnt, true); // TODO: Reset if charges are refilled.
             _tag.AddTag(ent.Owner, TrashTag);
-            _popup.PopupClient(Loc.GetString("flash-component-becomes-empty"), user);
+            if (user != null)
+                _popup.PopupEntity(Loc.GetString("flash-component-becomes-empty"), user.Value, user);
         }
 
         return true;
@@ -242,7 +243,7 @@ public abstract partial class SharedFlashSystem : EntitySystem
         // Goobstation end
 
         // don't paralyze, slowdown or convert to rev if the target is immune to flashes
-        if (!_statusEffectsSystem.TryAddStatusEffectDuration(target, FlashedKey, flashDuration))
+        if (!_statusEffectsSystem.TryUpdateStatusEffectDuration(target, FlashedKey, flashDuration)) // Trauma - update not add idiots
             return;
 
         // <Goob> - multiply durations by multiplier

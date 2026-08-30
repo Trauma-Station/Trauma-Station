@@ -5,7 +5,6 @@ using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Store;
 using Content.Shared.Tag;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Audio;
 
@@ -18,9 +17,6 @@ public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, Entit
 public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);
 
 [ByRefEvent]
-public readonly record struct SpawnHereticInfluenceEvent(int Amount = 1);
-
-[ByRefEvent]
 public record struct HereticBladeBreakFailOverrideEvent(EntityUid User, bool ShouldShatter = false);
 
 [ByRefEvent]
@@ -31,9 +27,6 @@ public sealed partial class EventHereticAscension : EntityEventArgs;
 
 [DataDefinition]
 public sealed partial class EventHereticRerollTargets : EntityEventArgs;
-
-[DataDefinition]
-public sealed partial class EventHereticUpdateTargets : EntityEventArgs;
 
 [DataDefinition]
 public sealed partial class EventHereticResolveStarGazer : EntityEventArgs;

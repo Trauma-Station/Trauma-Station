@@ -41,7 +41,7 @@ public abstract partial class SharedAntagSummonerSystem : EntitySystem
         var user = args.Actor;
         if (!_access.IsAllowed(user, ent.Owner))
         {
-            Popup.PopupClient("Access denied!", ent, user);
+            Popup.PopupEntity("Access denied!", ent, user);
             return;
         }
 
@@ -49,13 +49,13 @@ public abstract partial class SharedAntagSummonerSystem : EntitySystem
         if (now < ent.Comp.NextSummon)
         {
             var minutes = (int) Math.Ceiling((ent.Comp.NextSummon - now).TotalMinutes);
-            Popup.PopupClient($"Next security grant available in {minutes} minutes!", ent, user, PopupType.SmallCaution);
+            Popup.PopupEntity($"Next security grant available in {minutes} minutes!", ent, user, PopupType.SmallCaution);
             return;
         }
 
         if (_station.GetOwningStation(ent.Owner) is not {} station)
         {
-            Popup.PopupClient("You need to use it on a station!", ent, user, PopupType.SmallCaution);
+            Popup.PopupEntity("You need to use it on a station!", ent, user, PopupType.SmallCaution);
             return;
         }
 

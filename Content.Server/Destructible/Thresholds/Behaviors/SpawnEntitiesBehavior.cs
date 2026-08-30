@@ -1,14 +1,14 @@
 using System.Numerics;
-using Content.Shared.Forensics.Components; // Trauma - forensics was moved to shared
-using Content.Server.Stack;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Destructible.Thresholds.Behaviors;
-using Content.Shared.Prototypes;
+using Content.Shared.Forensics.Components;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Spawners;
 
 namespace Content.Server.Destructible.Thresholds.Behaviors
 {
@@ -44,23 +44,24 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                 executions = stack.Count;
             }
 
+            var stackName = system.EntityManager.ComponentFactory.CompName<StackComponent>(); // Trauma
             foreach (var (entityId, minMax) in Spawn)
             {
                 for (var execution = 0; execution < executions; execution++)
                 {
                     var count = minMax.Min >= minMax.Max
                         ? minMax.Min
-                        : system.Random.Next(minMax.Min, minMax.Max + 1);
+                        : system.Random.NextFloat(minMax.Min, minMax.Max + 1);
 
                     if (count == 0)
                         continue;
 
-                    if (EntityPrototypeHelpers.HasComponent<StackComponent>(entityId, system.PrototypeManager, system.EntityManager.ComponentFactory))
+                    if (system.PrototypeManager.Index(entityId).HasComp(stackName)) // Trauma - use stackName
                     {
                         var spawned = SpawnInContainer
                             ? system.EntityManager.SpawnNextToOrDrop(entityId, owner)
                             : system.EntityManager.SpawnEntity(entityId, position.Offset(getRandomVector()));
-                        system.StackSystem.SetCount((spawned, null), count);
+                        system.StackSystem.SetCount((spawned, null), (int) count);
 
                         TransferForensics(spawned, system, owner);
                     }

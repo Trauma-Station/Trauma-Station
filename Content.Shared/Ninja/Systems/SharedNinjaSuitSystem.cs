@@ -1,4 +1,3 @@
-using Content.Goobstation.Common.Effects;
 using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
@@ -34,7 +33,7 @@ public abstract partial class SharedNinjaSuitSystem : EntitySystem
         SubscribeLocalEvent<NinjaSuitComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<NinjaSuitComponent, ToggleClothingCheckEvent>(OnCloakCheck);
         SubscribeLocalEvent<NinjaSuitComponent, CheckItemCreatorEvent>(OnStarCheck);
-        SubscribeLocalEvent<NinjaSuitComponent, CreateItemAttemptEvent>(OnCreateStarAttempt);
+        //SubscribeLocalEvent<NinjaSuitComponent, CreateItemAttemptEvent>(OnCreateStarAttempt); // Trauma
         SubscribeLocalEvent<NinjaSuitComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
         SubscribeLocalEvent<NinjaSuitComponent, GotUnequippedEvent>(OnUnequipped);
     }
@@ -88,12 +87,13 @@ public abstract partial class SharedNinjaSuitSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    /* Trauma
     private void OnCreateStarAttempt(Entity<NinjaSuitComponent> ent, ref CreateItemAttemptEvent args)
     {
-        // Goob edit
-        // if (CheckDisabled(ent, args.User))
-        //    args.Cancelled = true;
+        if (CheckDisabled(ent, args.User))
+           args.Cancelled = true;
     }
+    */
 
     /// <summary>
     /// Call the shared and serverside code for when anyone unequips a suit.
@@ -119,8 +119,10 @@ public abstract partial class SharedNinjaSuitSystem : EntitySystem
             return;
 
         // previously cloaked, disable abilities for a short time
-        // _audio.PlayPredicted(comp.RevealSound, uid, user); // Goob edit
-        // Popup.PopupClient(Loc.GetString("ninja-revealed"), user, user, PopupType.MediumCaution); // Goob edit
+        /* Trauma - perfect stealth S rank
+        _audio.PlayPredicted(comp.RevealSound, uid, user);
+        Popup.PopupEntity(Loc.GetString("ninja-revealed"), user, user, PopupType.MediumCaution);
+        */
         _useDelay.TryResetDelay(uid, id: comp.DisableDelayId);
     }
 

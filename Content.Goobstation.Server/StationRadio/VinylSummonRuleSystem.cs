@@ -27,149 +27,130 @@ namespace Content.Goobstation.Server.StationRadio;
 /// </summary>
 public sealed partial class VinylSummonRuleSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
-    [Dependency] private SharedContainerSystem _containers = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
-    [Dependency] private SharedPowerReceiverSystem _power = default!;
-    [Dependency] private ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private SharedPopupSystem _popups = default!;
     [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StationSystem _station = default!;
 
-    private record struct TrackingData(EntityUid VinylPlayerUid, TimeSpan EndTime);
-    private readonly Dictionary<EntityUid, TrackingData> _trackingVinyls = new();
+    private const string ContainerID = "vinyl";
+    private static readonly EntProtoId Ash = "Ash";
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnInsertAttempt(Entity<VinylPlayerComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<VinylPlayerComponent, VinylInsertedEvent>(OnVinylInserted);
-        SubscribeLocalEvent<VinylPlayerComponent, VinylRemovedEvent>(OnVinylRemoved);
-    }
-
-    private void OnVinylInserted(EntityUid uid, VinylPlayerComponent player, ref VinylInsertedEvent args)
-    {
-        var playerUid = uid;
-        var vinylUid = args.Vinyl;
-
-        // Check if the inserted entity has the summon rule component / A song
-        if (!TryComp<VinylSummonRuleComponent>(vinylUid, out _)
-            || !TryComp<VinylComponent>(vinylUid, out var vinylComp)
-            || vinylComp.Song == null)
+        if (args.Container.ID != ContainerID)
             return;
 
-        void QueueSafeEject()
-        {
-            Timer.Spawn(0, () => EjectVinyl(playerUid, vinylUid));
-        }
-
         // Check if vinyl player is on a station
-        if (_stationSystem.GetOwningStation(playerUid) == null)
+        if (_station.GetOwningStation(ent) == null)
         {
-            _popups.PopupPredicted(Loc.GetString("vinyl-popout-no-station"), playerUid, null, PopupType.Medium);
-            QueueSafeEject();
+            _popup.PopupEntity(Loc.GetString("vinyl-popout-no-station"), ent, PopupType.Medium);
+            args.Cancel();
             return;
         }
 
         // Check if vinyl player is powered
-        if (!_power.IsPowered(playerUid))
+        if (!_power.IsPowered(ent.Owner))
         {
-            _popups.PopupPredicted(Loc.GetString("vinyl-popout-no-power"), playerUid, null, PopupType.Medium);
-            QueueSafeEject();
+            _popup.PopupEntity(Loc.GetString("vinyl-popout-no-power"), ent, PopupType.Medium);
+            args.Cancel();
             return;
         }
 
         // Check if vinyl player is connected to the radio system
-        if (!CheckForRadioConnection(playerUid))
+        if (!CheckForRadioConnection(ent))
         {
-            _popups.PopupPredicted(Loc.GetString("vinyl-popout-no-radio-connection"), playerUid, null, PopupType.Medium);
-            QueueSafeEject();
+            _popup.PopupEntity(Loc.GetString("vinyl-popout-no-radio-connection"), ent, PopupType.Medium);
+            args.Cancel();
             return;
         }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnVinylInserted(Entity<VinylPlayerComponent> ent, ref VinylInsertedEvent args)
+    {
+        var vinyl = args.Vinyl;
+        if (CompOrNull<VinylComponent>(vinyl)?.Song is not { } song)
+            return;
 
         // Get the audio length
-        var resolved = _audio.ResolveSound(vinylComp.Song);
+        var resolved = _audio.ResolveSound(song);
         var audioLength = _audio.GetAudioLength(resolved);
         var endTime = _timing.CurTime + audioLength;
 
         // Track this vinyl with its player
-        _trackingVinyls[vinylUid] = new TrackingData(playerUid, endTime);
+        var active = EnsureComp<ActiveVinylComponent>(vinyl);
+        active.EndTime = endTime;
+        active.Player = ent;
     }
 
-    private void OnVinylRemoved(EntityUid uid, VinylPlayerComponent player, ref VinylRemovedEvent args)
+    [SubscribeLocalEvent]
+    private void OnVinylRemoved(Entity<VinylPlayerComponent> ent, ref VinylRemovedEvent args)
     {
         // Stop tracking if the vinyl is removed
-        _trackingVinyls.Remove(args.Vinyl);
+        RemComp<ActiveVinylComponent>(args.Vinyl);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var currentTime = _timing.CurTime;
-
-        foreach (var (vinylUid, data) in _trackingVinyls.ToList())
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<ActiveVinylComponent>();
+        foreach (var vinyl in query)
         {
-            // Check if the vinyl still exists
-            if (!Exists(vinylUid)
-                || !Exists(data.VinylPlayerUid))
+            // Check if the player still exists
+            var player = vinyl.Comp.Player;
+            if (!Exists(player))
             {
-                _trackingVinyls.Remove(vinylUid);
+                RemCompDeferred(vinyl, vinyl.Comp);
                 continue;
             }
 
             // Check if vinyl player is still on a station
-            if (_stationSystem.GetOwningStation(data.VinylPlayerUid) == null)
+            if (_station.GetOwningStation(player) == null)
             {
-                _trackingVinyls.Remove(vinylUid);
-                _popups.PopupPredicted(Loc.GetString("vinyl-popout-no-station"), data.VinylPlayerUid, null, PopupType.Medium);
-                EjectVinyl(data.VinylPlayerUid, vinylUid);
+                RemCompDeferred(vinyl, vinyl.Comp);
+                _popup.PopupEntity(Loc.GetString("vinyl-popout-no-station"), player, PopupType.Medium);
+                EjectVinyl(vinyl);
                 continue;
             }
 
             // Check if vinyl player is still powered
-            if (!_power.IsPowered(data.VinylPlayerUid))
+            if (!_power.IsPowered(player))
             {
-                _trackingVinyls.Remove(vinylUid);
-                _popups.PopupPredicted(Loc.GetString("vinyl-popout-no-power"), data.VinylPlayerUid, null, PopupType.Medium);
-                EjectVinyl(data.VinylPlayerUid, vinylUid);
+                RemCompDeferred(vinyl, vinyl.Comp);
+                _popup.PopupEntity(Loc.GetString("vinyl-popout-no-power"), player, PopupType.Medium);
+                EjectVinyl(vinyl);
                 continue;
             }
 
             // Check if vinyl player is still connected to the radio system
-            if (!CheckForRadioConnection(data.VinylPlayerUid))
+            if (!CheckForRadioConnection(player))
             {
-                _trackingVinyls.Remove(vinylUid);
-                _popups.PopupPredicted(Loc.GetString("vinyl-popout-no-radio-connection"), data.VinylPlayerUid, null, PopupType.Medium);
-                EjectVinyl(data.VinylPlayerUid, vinylUid);
+                RemCompDeferred(vinyl, vinyl.Comp);
+                _popup.PopupEntity(Loc.GetString("vinyl-popout-no-radio-connection"), player, PopupType.Medium);
+                EjectVinyl(vinyl);
                 continue;
             }
 
             // Check if playback has finished
-            if (currentTime >= data.EndTime)
+            if (now >= vinyl.Comp.EndTime)
             {
-                HandleVinylFinished(vinylUid);
-                _trackingVinyls.Remove(vinylUid);
+                HandleVinylFinished(vinyl);
+                RemCompDeferred(vinyl, vinyl.Comp);
             }
         }
     }
 
-    private void EjectVinyl(EntityUid playerUid, EntityUid vinylUid)
+    private void EjectVinyl(EntityUid vinyl)
     {
-        if (!Exists(vinylUid)
-            || !Exists(playerUid)
-            || !TryComp<ItemSlotsComponent>(playerUid, out var itemSlots))
-            return;
-
-        // Find the slot containing the vinyl
-        foreach (var (_, slot) in itemSlots.Slots)
-            if (slot.Item == vinylUid)
-            {
-                _itemSlots.TryEject(playerUid, slot, null, out _);
-                return;
-            }
+        _container.TryRemoveFromContainer(vinyl);
     }
 
     private void HandleVinylFinished(EntityUid vinylUid)
@@ -182,7 +163,7 @@ public sealed partial class VinylSummonRuleSystem : EntitySystem
 
         if (ruleId != null)
         {
-            _gameTicker.StartGameRule(ruleId, out _);
+            _ticker.StartGameRule(ruleId, out _);
 
             // If we have a threat prototype with an announcement, send it
             if (threat != null)
@@ -193,14 +174,14 @@ public sealed partial class VinylSummonRuleSystem : EntitySystem
         var vinylCoords = vinylXform.Coordinates;
 
         // Remove from container
-        if (_containers.TryGetContainingContainer((vinylUid, vinylXform, null), out var container))
-            _containers.Remove(vinylUid, container);
+        if (_container.TryGetContainingContainer((vinylUid, vinylXform, null), out var container))
+            _container.Remove(vinylUid, container);
 
         // Play sound effect
         _audio.PlayPvs(summonComp.BurnSound, vinylCoords, AudioParams.Default.WithVolume(-5f));
 
         // Spawn ash at the vinyl's location
-        Spawn("Ash", vinylCoords);
+        Spawn(Ash, vinylCoords);
 
         // Delete the vinyl
         QueueDel(vinylUid);

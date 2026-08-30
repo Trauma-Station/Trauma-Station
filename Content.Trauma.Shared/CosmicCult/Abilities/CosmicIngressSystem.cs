@@ -17,14 +17,8 @@ public sealed partial class CosmicIngressSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private LockSystem _lock = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicIngress>(OnCosmicIngress);
-    }
-
-    private void OnCosmicIngress(Entity<CosmicCultComponent> ent, ref EventCosmicIngress args)
+    [SubscribeLocalEvent]
+    private void OnCosmicIngress(Entity<CosmicCultComponent> ent, ref CosmicIngressEvent args)
     {
         var target = args.Target;
 
@@ -37,7 +31,7 @@ public sealed partial class CosmicIngressSystem : EntitySystem
             {
                 if (!ent.Comp.CosmicEmpowered)
                 {
-                    _popup.PopupClient(Loc.GetString("cosmicability-ingress-not-empowered-door"), ent, ent);
+                    _popup.PopupEntity(Loc.GetString("cosmicability-ingress-not-empowered-door"), ent, ent);
                     return;
                 }
                 _door.SetBoltsDown((target, boltComp), false, user: ent, predicted: true);

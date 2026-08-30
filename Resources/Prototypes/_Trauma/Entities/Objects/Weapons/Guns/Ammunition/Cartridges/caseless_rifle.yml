@@ -23,7 +23,7 @@
       - ReagentId: Nocturine
         Quantity: 2
       - ReagentId: MuteToxin
-        Quantity: 1
+        Quantity: 1.5
   - type: SolutionTransfer
     maxTransferAmount: 3.5
 

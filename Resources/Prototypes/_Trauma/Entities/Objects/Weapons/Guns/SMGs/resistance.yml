@@ -8,7 +8,7 @@
   suffix: Full
   components:
   - type: WeaponClass
-    class: Rifle
+    class: SMG
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/SMGs/resistance.rsi
     layers:

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.EntityEffects;
+using Content.Shared.Damage;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Tackle;
@@ -15,31 +15,51 @@ public sealed partial class TacklerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextTackle;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan TackleCooldown = TimeSpan.FromSeconds(3);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
 
-    /// <summary>
-    /// Setting this to false won't knockdown user on innate tackles
-    /// If you want to disable knockdown for all tackles, set <see cref="KnockdownTime"/> to 0
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool KnockdownUser = true;
+    [DataField]
+    public float Range = 5f;
 
-    [DataField, AutoNetworkedField]
-    public float Range = 3f;
+    [DataField]
+    public float Speed = 10f;
 
-    [DataField, AutoNetworkedField]
-    public float Speed = 6.5f;
-
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float MinDistance;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float StaminaCost = 25f;
 
-    [DataField, AutoNetworkedField]
-    public float SkillMod;
+    /// <summary>
+    /// Base damage when hitting a wall, multiplied by severity that is dependent on velocity
+    /// </summary>
+    [DataField]
+    public DamageSpecifier BaseUserDamage = new()
+    {
+        DamageDict =
+        {
+            { "Blunt", 20 },
+        },
+    };
+
+    /// <summary>
+    /// Base time the user will be knocked on tackle collision
+    /// </summary>
+    [DataField]
+    public float BaseUserKnockdownTime = 1f;
+
+    /// <summary>
+    /// Base stamina damage target will receive on collision
+    /// </summary>
+    [DataField]
+    public float BaseTargetStaminaDamage = 22f;
+
+    /// <summary>
+    /// Base knockdown time of target during collision
+    /// </summary>
+    [DataField]
+    public float BaseTargetKnockdownTime = 2f;
 }

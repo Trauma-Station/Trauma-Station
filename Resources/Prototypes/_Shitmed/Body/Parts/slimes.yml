@@ -11,5 +11,4 @@
     slots:
     - Brain # sentient slime core
     - Lungs # slime lungs
-  - type: Woundable
-    boneEntity: null
+  - type: Boneless

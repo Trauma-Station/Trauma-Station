@@ -22,4 +22,4 @@
 - type: storeCategory
   id: UplinkSkills
   name: store-category-skills
-  priority: 12
+  priority: 9

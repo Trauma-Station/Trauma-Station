@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
-using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Medical.Shared.Body;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Body;
@@ -10,17 +8,14 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Body.Chips;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 public sealed class BodyTest : GameTest
 {
-    public static EntProtoId Urist = "MobHuman";
-    public static EntProtoId<OrganChipComponent> TestChip = "SkillChipLaser";
-    public static ProtoId<PolymorphPrototype> HumanoidPolymorph = "Bananamen";
+    private static EntProtoId Urist = "MobHuman";
+    private static EntProtoId<OrganChipComponent>[] TestChips = ["SkillChipLaser", "SkillChipHeavy", "SkillChipMining"];
+    private static ProtoId<PolymorphPrototype> HumanoidPolymorph = "Bananamen";
 
     [SidedDependency(Side.Server)] private BodySystem _body = default!;
     [SidedDependency(Side.Server)] private BodyPartSystem _part = default!;
@@ -38,7 +33,7 @@ public sealed class BodyTest : GameTest
 
         var map = await Pair.CreateTestMap();
 
-        var bodyName = factory.CompName<BodyComponent>();
+        var bodyName = factory.CompName<InitialBodyComponent>();
         await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
@@ -48,9 +43,9 @@ public sealed class BodyTest : GameTest
                     if (Pair.IsTestPrototype(proto) || !proto.HasComp(bodyName))
                         continue;
 
-                    var mob = SEntMan.SpawnEntity(proto.ID, map.GridCoords);
+                    var mob = SSpawn(proto.ID, map.GridCoords);
                     Assert.That(_part.GetRootPart(mob), Is.Not.Null, $"{SEntMan.ToPrettyString(mob)} had no root part!");
-                    SEntMan.DeleteEntity(mob);
+                    SDel(mob);
                 }
             });
         });
@@ -73,7 +68,7 @@ public sealed class BodyTest : GameTest
                 foreach (var species in SProtoMan.EnumeratePrototypes<SpeciesPrototype>())
                 {
                     var proto = species.Prototype;
-                    var mob = SEntMan.SpawnEntity(proto, map.GridCoords);
+                    var mob = SSpawn(proto, map.GridCoords);
                     // get the starting list of organs
                     started.Clear();
                     foreach (var organ in _body.GetOrgans(mob))
@@ -84,7 +79,7 @@ public sealed class BodyTest : GameTest
                     // remove all non-root organs
                     foreach (var organ in _body.GetOrgans<ChildOrganComponent>(mob))
                     {
-                        SEntMan.DeleteEntity(organ);
+                        SDel(organ);
                     }
 
                     // restore them
@@ -101,7 +96,7 @@ public sealed class BodyTest : GameTest
                     Assert.That(ended, Is.EquivalentTo(started),
                         $"{SEntMan.ToPrettyString(mob)} had different organs after having its body restored!");
 
-                    SEntMan.DeleteEntity(mob);
+                    SDel(mob);
                 }
             });
         });
@@ -128,7 +123,7 @@ public sealed class BodyTest : GameTest
                     if (Pair.IsTestPrototype(species))
                         continue;
 
-                    var mob = SEntMan.SpawnEntity(species.Prototype, map.GridCoords);
+                    var mob = SSpawn(species.Prototype, map.GridCoords);
                     foreach (var organ in _body.GetOrgans<VisualOrganMarkingsComponent>(mob))
                     {
                         var group = organ.Comp.MarkingData.Group;
@@ -137,7 +132,7 @@ public sealed class BodyTest : GameTest
                             validLayers[group] = groupLayers = new();
                         groupLayers.UnionWith(layers);
                     }
-                    SEntMan.DeleteEntity(mob);
+                    SDel(mob);
                 }
 
                 // then make sure every marking has a part to be added to
@@ -177,10 +172,13 @@ public sealed class BodyTest : GameTest
         var map = await Pair.CreateTestMap();
         await Server.WaitAssertion(() =>
         {
-            var urist = SEntMan.SpawnEntity(Urist, map.GridCoords);
+            var urist = SSpawn(Urist, map.GridCoords);
             Assert.That(CountChips(urist), Is.EqualTo(0), "Fresh urist shouldnt have skillchips");
-            _chip.InstallChip(urist, TestChip);
-            Assert.That(CountChips(urist), Is.EqualTo(1), "Urist should have gained a skillchip after installing it");
+            foreach (var id in TestChips)
+            {
+                _chip.InstallChip(urist, id);
+            }
+            Assert.That(CountChips(urist), Is.EqualTo(3), "Urist should have gained 3 skillchips after installing them");
 
             if (_polymorph.PolymorphEntity(urist, HumanoidPolymorph) is not { } nana)
             {
@@ -189,9 +187,9 @@ public sealed class BodyTest : GameTest
             }
 
             Assert.That(CountChips(urist), Is.EqualTo(0), "Urist shouldnt have skillchips after being polymorphed");
-            Assert.That(CountChips(nana), Is.EqualTo(1), "Banana should have transferred urist's skillchip from polymorphing");
-            SEntMan.DeleteEntity(nana);
-            SEntMan.DeleteEntity(urist);
+            Assert.That(CountChips(nana), Is.EqualTo(3), "Banana should have transferred urist's skillchip from polymorphing");
+            SDel(nana);
+            SDel(urist);
         });
     }
 

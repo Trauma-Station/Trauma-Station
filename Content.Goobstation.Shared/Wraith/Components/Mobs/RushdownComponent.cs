@@ -45,12 +45,6 @@ public sealed partial class RushdownComponent : Component
     [DataField]
     public SoundSpecifier? JumpSound = new SoundCollectionSpecifier("Werewolf_Attack");
 
-    /// <summary>
-    /// Status effect to make you stunned.
-    /// </summary>
-    [DataField]
-    public ProtoId<StatusEffectPrototype> Stunned = "Stun";
-
     [DataField]
     public SoundSpecifier? ShockwaveSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_footstep_charge2.ogg");
 }

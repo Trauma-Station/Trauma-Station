@@ -55,7 +55,7 @@ public sealed partial class SelectableAmmoSystem : CommonSelectableAmmoSystem
 
         var name = GetProviderProtoName(ent);
         if (name != null)
-            _popup.PopupClient(Loc.GetString("mode-selected", ("mode", name)), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("mode-selected", ("mode", name)), ent, args.Actor);
         _audio.PlayPredicted(ent.Comp.SoundSelect, ent, args.Actor);
     }
 

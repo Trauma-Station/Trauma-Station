@@ -7,7 +7,9 @@
   components:
   - type: FingerprintMask
   - type: TackleModifier
-    skillMod: 1
+    modifiers:
+    - priority: 20
+      skillMod: 1
   - type: GuideHelp
     guides:
     - Tackle
@@ -18,6 +20,8 @@
   name: enhanced retrieval gloves
   description: Special gloves that manipulate the blood vessels in the wearer's hands, granting them the ability to launch headfirst into walls and tackle fleeing criminals in a single bound.
   components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
   - type: Clothing
@@ -63,10 +67,13 @@
         Piercing: 0.9
         Shock: 0.75
   - type: TackleModifier
-    staminaCostMultiplier: 1.2
-    knockdownTimeMultiplier: 1.25
-    rangeMultiplier: 1.65
-    skillMod: 3
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 1.2
+      knockdownTimeMultiplier: 1.25
+      skillMod: 3
+  - type: StealTarget
+    stealGroup: GorillaGloves
 
 - type: entity
   parent: [BaseSyndicateContraband, ClothingHandsGlovesGorilla]
@@ -77,9 +84,12 @@
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
   - type: TackleModifier
-    grabOnSuccess: true
-    staminaCostMultiplier: 0.4
-    skillMod: 5
+    modifiers:
+    - priority: 20
+      grabOnSuccess: true
+      staminaCostMultiplier: 0.4
+      knockdownTimeMultiplier: 1.25
+      skillMod: 5
 
 - type: entity
   parent: [BaseGlovesTackle, BaseSecurityContraband]
@@ -103,12 +113,14 @@
   - type: Fiber
     fiberMaterial: fibers-red
   - type: TackleModifier
-    staminaCostMultiplier: 2
-    knockdownTimeMultiplier: 2
-    speedMultiplier: 2.25
-    rangeMultiplier: 3
-    minDistance: 3
-    skillMod: 7
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 2
+      knockdownTimeMultiplier: 2
+      speedMultiplier: 2.25
+      minDistance: 3
+      rangeMultiplier: 3
+      skillMod: 7
 
 - type: entity
   parent: BaseGlovesTackle
@@ -132,12 +144,14 @@
   - type: Fiber
     fiberMaterial: fibers-blue
   - type: TackleModifier
-    staminaCostMultiplier: 0.3
-    knockdownTimeMultiplier: 0.5
-    rangeMultiplier: 1.2
-    speedMultiplier: 1
-    minDistance: 1
-    skillMod: -2
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 0.3
+      knockdownTimeMultiplier: 0.5
+      rangeMultiplier: 1.2
+      speedMultiplier: 1
+      minDistance: 1
+      skillMod: -2
 
 - type: entity
   parent: [BaseGlovesTackle, BaseMinorContraband]
@@ -161,10 +175,12 @@
   - type: Fiber
     fiberMaterial: fibers-brown
   - type: TackleModifier
-    staminaCostMultiplier: 1.2
-    knockdownTimeMultiplier: 1.75
-    minDistance: 1.5
-    skillMod: -1
+    modifiers:
+    - priority: 20
+      staminaCostMultiplier: 1.2
+      knockdownTimeMultiplier: 1.75
+      minDistance: 1.5
+      skillMod: -1
 
 - type: entity
   parent: ClothingHandsBase
@@ -189,3 +205,25 @@
   - type: Construction
     graph: ClothingHandsGlovesForge
     node: finish
+
+- type: entity
+  parent: [ClothingHandsGlovesColorBlack, BaseSecurityContraband]
+  id: ClothingHandsGlovesSecurityDuty
+  name: security duty gloves
+  description: Standard duty gloves of Nanotrasen security forces.
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/securityglovesduty.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/securityglovesduty.rsi
+  - type: Fiber
+    fiberMaterial: fibers-black
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9

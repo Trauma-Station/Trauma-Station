@@ -56,7 +56,7 @@ public sealed partial class PaintSystem : EntitySystem
         if (ent.Comp.Color != args.Color)
             return;
 
-        _popup.PopupClient("It's already painted that color.", ent, args.User);
+        _popup.PopupEntity("It's already painted that color.", ent, args.User);
         args.Cancelled = true;
     }
 
@@ -73,7 +73,7 @@ public sealed partial class PaintSystem : EntitySystem
     private void OnRandomSpritePaintAttempt(Entity<RandomSpriteComponent> ent, ref PaintAttemptEvent args)
     {
         // no painting fish or whatever?
-        _popup.PopupClient("It's already colorful enough.", ent, args.User);
+        _popup.PopupEntity("It's already colorful enough.", ent, args.User);
         args.Cancelled = true;
     }
 
@@ -83,7 +83,7 @@ public sealed partial class PaintSystem : EntitySystem
     {
         if (_openable.IsClosed(ent.Owner))
         {
-            _popup.PopupClient(Loc.GetString("spray-paint-closed", ("can", ent)), ent, user);
+            _popup.PopupEntity(Loc.GetString("spray-paint-closed", ("can", ent)), ent, user);
             return false;
         }
 
@@ -94,7 +94,7 @@ public sealed partial class PaintSystem : EntitySystem
 
         if (!_charges.HasCharges(ent.Owner, 1))
         {
-            _popup.PopupClient(Loc.GetString("spray-paint-empty", ("can", ent)), ent, user);
+            _popup.PopupEntity(Loc.GetString("spray-paint-empty", ("can", ent)), ent, user);
             return false;
         }
 

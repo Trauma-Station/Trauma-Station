@@ -9,7 +9,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      LanguageTauCetiBasic: 10
+      LanguageTauCetiBasic: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -20,7 +20,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      LanguageTauCetiBasic: 50
+      LanguageTauCetiBasic: 100
 
 - type: entity
   parent: BaseSubdermalImplant

@@ -25,35 +25,23 @@ public sealed partial class WraithPossessedSystem : EntitySystem
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private WraithRevenantSystem _wraithRevenant = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<WraithPossessedComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<WraithPossessedComponent, DestructionAttemptEvent>(OnDestructionAttempt);
-        SubscribeLocalEvent<WraithPossessedComponent, MobStateChangedEvent>(OnMobStateChanged);
-    }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var eqe = EntityQueryEnumerator<WraithPossessedComponent>();
-        while (eqe.MoveNext(out var uid, out var comp))
+        var now = _timing.CurTime;
+        var query = EntityQueryEnumerator<WraithPossessedComponent>();
+        foreach (var ent in query)
         {
-            if (comp.CancelEarly)
-                ReturnBack((uid, comp));
-
-            if (_timing.CurTime < comp.NextUpdate)
+            if (now < ent.Comp.NextUpdate)
                 continue;
 
-            if (HasComp<AnimateableComponent>(uid))
-                ReturnBack((uid, comp));
+            ReturnBack(ent);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<WraithPossessedComponent> ent, ref MapInitEvent args)
     {
         if (!_mind.TryGetMind(ent.Owner, out var mindId, out _))
@@ -63,37 +51,18 @@ public sealed partial class WraithPossessedSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnDestructionAttempt(Entity<WraithPossessedComponent> ent, ref DestructionAttemptEvent args)
     {
-        // early return on destruction
-        if (ent.Comp.PossessorMind == null
-            || ent.Comp.Possessor == null)
-            return;
-
-        ent.Comp.CancelEarly = true;
-        Dirty(ent);
-
-        _mind.TransferTo(ent.Comp.PossessorMind.Value, ent.Comp.Possessor);
-
-        var ev = new PossessionEndedEvent();
-        RaiseLocalEvent(ent.Comp.Possessor.Value, ref ev);
+        ReturnBack(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<WraithPossessedComponent> ent, ref MobStateChangedEvent args)
     {
         // early return on death/crit
-        if (args.NewMobState == MobState.Alive
-            || ent.Comp.PossessorMind == null
-            || ent.Comp.Possessor == null)
-            return;
-
-        ent.Comp.CancelEarly = true;
-        Dirty(ent);
-
-        _mind.TransferTo(ent.Comp.PossessorMind.Value, ent.Comp.Possessor);
-
-        var ev = new PossessionEndedEvent();
-        RaiseLocalEvent(ent.Comp.Possessor.Value, ref ev);
+        if (args.NewMobState != MobState.Alive)
+            ReturnBack(ent);
     }
 
     #region Helpers
@@ -142,7 +111,7 @@ public sealed partial class WraithPossessedSystem : EntitySystem
         }
     }
 
-    //TO DO: Revenant should get some sort of aura, cosmetic only. Leave for part 2.
+    // TODO: Revenant should get some sort of aura, cosmetic only. Leave for part 2. (lol never happening)
     public void SetPossessorAndMind(
         Entity<WraithPossessedComponent> ent,
         EntityUid possessor,
@@ -161,22 +130,24 @@ public sealed partial class WraithPossessedSystem : EntitySystem
 
     private void ReturnBack(Entity<WraithPossessedComponent> ent)
     {
-        if (ent.Comp.Possessor == null || ent.Comp.PossessorMind == null)
+        RemCompDeferred(ent, ent.Comp);
+
+        if (ent.Comp.Possessor is not { } user || ent.Comp.PossessorMind is not { } mind)
             return;
 
-        _mind.TransferTo(ent.Comp.PossessorMind.Value, ent.Comp.Possessor);
-
-        var ev = new PossessionEndedEvent();
-        RaiseLocalEvent(ent.Comp.Possessor.Value, ref ev);
-
-        if (ent.Comp.OriginalMind.HasValue
-            && TryComp<MindComponent>(ent.Comp.OriginalMind.Value, out var mindComp)
-            && _player.TryGetSessionById(mindComp.UserId, out _))
+        if (TerminatingOrDeleted(user))
         {
-            _mind.TransferTo(ent.Comp.OriginalMind.Value, ent.Owner);
+            Log.Error($"Tried to return to deleted user of mind {ToPrettyString(mind)} from {ToPrettyString(ent)} to a deleted body!");
+            return;
         }
 
-        RemCompDeferred<WraithPossessedComponent>(ent.Owner);
+        _mind.TransferTo(mind, user);
+
+        var ev = new PossessionEndedEvent();
+        RaiseLocalEvent(user, ref ev);
+
+        if (ent.Comp.OriginalMind is { } originalMind)
+            _mind.TransferTo(originalMind, ent.Owner);
     }
     #endregion
 }

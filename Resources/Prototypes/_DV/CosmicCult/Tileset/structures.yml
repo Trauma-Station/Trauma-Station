@@ -1,74 +1,20 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-##################### SHUTTLE CORE CONTROL
 - type: entity
-  parent: BaseStructure
-  id: CosmicShuttleCore
-  name: malign instrument
-  description: Its surface glows with a myriad of inscrutable glyphs that commmunicate a single word into your mind; "Flight".
+  id: BaseCosmicCultStructure
+  abstract: true
   components:
-  - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/cosmiccomputer.rsi
-    layers:
-      - state: computer
-      - state: computer-unshaded
-        shader: unshaded
+  - type: CosmicCorruptible
+    convertTo: null
   - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
-  - type: Thruster
-    thrusterType: Angular # These are overpowered thruster-shuttle-console-hybrids that require no power grid. As such, they cannot be anchored or meaningfully taken outside of their intended use.
-    requireSpace: false
-    thrust: 4000
-    machinePartThrust: Manipulator
-  - type: ShuttleConsole
-  - type: ActivatableUI
-    key: enum.ShuttleConsoleUiKey.Key
-  - type: UserInterface
-    interfaces:
-        enum.ShuttleConsoleUiKey.Key:
-          type: ShuttleConsoleBoundUserInterface
-  - type: EmitSoundOnUIOpen
-    sound:
-      collection: Keyboard
-      params:
-        volume: -1
-        variation: 0.05
-        pitch: 1.05
-  - type: RadarConsole
-  - type: PointLight
-    radius: 1.5
-    energy: 1.6
-    enabled: true # Test fail if false
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true
-    offset: "0, 0.4"
-    castShadows: false
-    color: "#42a4ae"
-  - type: Rotatable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: Damageable
-    damageModifierSet: Metallic
-  - type: Injurable
-    damageContainer: Inorganic
 
-
-##################### CHAIR
 - type: entity
   name: malign settee
   id: CosmicChair
-  parent: SeatBase
+  parent: [ SeatBase, BaseCosmicCultStructure ]
   placement:
     mode: SnapgridCenter
   components:
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/cosmicchair.rsi
     state: chair
@@ -91,12 +37,11 @@
   - type: Transform
     anchored: true
 
-##################### PILLAR
 - type: entity
-  parent: BaseStructure
+  parent: [ BaseStructure, BaseCosmicCultStructure ]
   id: CosmicObelisk
   name: malign obelisk
-  description: A mysterious-yet-inert sturcture. Unsettling.
+  description: A mysterious-yet-inert structure. Unsettling.
   components:
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/cosmicpillar.rsi
@@ -105,8 +50,6 @@
       - state: icon
     drawdepth: Mobs
     noRot: true
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: SpriteFade
   - type: Fixtures
     fixtures:
@@ -131,71 +74,6 @@
   - type: Injurable
     damageContainer: Inorganic
 
-##################### THRUSTER
-- type: entity
-  parent: BaseStructure
-  id: CosmicThruster
-  name: malign engine
-  components:
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
-        density: 60
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
-  - type: AmbientSound
-    enabled: false
-    range: 4
-    volume: -4
-    sound:
-      path: /Audio/Effects/shuttle_thruster.ogg
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
-  - type: Rotatable
-    rotateWhileAnchored: true
-  - type: Thruster
-    damage:
-      types:
-        Cold: 40
-  - type: InteractionOutline
-  - type: Appearance
-  - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/cosmicthruster.rsi
-    layers:
-    - state: base
-      map: ["enum.ThrusterVisualLayers.Base"]
-    - state: thrust
-      map: ["enum.ThrusterVisualLayers.ThrustOn"]
-      shader: unshaded
-      visible: false
-    - state: thrust_burn_unshaded
-      map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
-      shader: unshaded
-      visible: false
-      offset: 0, 0.564
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: Damageable
-    damageModifierSet: Metallic
-  - type: Injurable
-    damageContainer: Inorganic
-
-##################### LAMP
 - type: entity
   id: CosmicLamp
   description: A mote of un-light shimmers within.
@@ -237,7 +115,7 @@
     - trigger:
         !type:DamageTrigger
         damage: 200
-      behaviors: #excess damage, don't spawn entities.
+      behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:PlaySoundBehavior
@@ -265,8 +143,8 @@
     color: "#42a4ae"
 
 - type: entity
+  parent: [ CounterBase, BaseCosmicCultStructure ]
   id: CosmicTable
-  parent: CounterBase
   name: malign table
   description: Unfathomably, cosmically.. Square.
   components:
@@ -279,8 +157,6 @@
     damageModifierSet: Metallic
   - type: Injurable
     damageContainer: Inorganic
-  - type: CosmicCultExamine
-    cultistText: cosmic-examine-text-forthecult
   - type: Destructible
     thresholds:
     - trigger:
@@ -292,3 +168,64 @@
   - type: IconSmooth
     key: cosmictable
     base: state_
+
+
+- type: entity
+  parent: [ Bed, BaseCosmicCultStructure ]
+  id: CosmicBed
+  name: malign bed
+  description: This is used to lie in... okay, maybe not.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: bed
+
+- type: entity
+  parent: [ Rack, BaseCosmicCultStructure ]
+  id: CosmicRack
+  name: corrupted rack
+  description: An eerie rack for storing eerie things on.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: rack
+
+- type: entity
+  parent: [ Railing, BaseCosmicCultStructure ]
+  id: CosmicRailing
+  name: malign railing
+  description: Unnerving railing meant to protect idiots like you from falling into endless void.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/railing.rsi
+    state: side
+
+- type: entity
+  parent: [ RailingCorner, BaseCosmicCultStructure ]
+  id: CosmicRailingCorner
+  name: malign railing
+  description: Unnerving railing meant to protect idiots like you from falling into endless void.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/railing.rsi
+    state: corner
+
+- type: entity
+  parent: [ RailingCornerSmall, BaseCosmicCultStructure ]
+  id: CosmicRailingCornerSmall
+  name: malign railing
+  description: Unnerving railing meant to protect idiots like you from falling into endless void.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/railing.rsi
+    state: corner_small
+
+- type: entity
+  parent: [ RailingRound, BaseCosmicCultStructure ]
+  id: CosmicRailingRound
+  name: malign railing
+  description: Unnerving railing meant to protect idiots like you from falling into endless void.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/railing.rsi
+    state: round

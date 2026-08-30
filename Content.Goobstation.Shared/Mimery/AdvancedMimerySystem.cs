@@ -42,7 +42,7 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
             EnsureComp<MimePowersComponent>(args.User);
         else if (!powers.Enabled || powers.VowBroken)
         {
-            _popup.PopupClient(Loc.GetString(ent.Comp.VowBrokenMessage), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.VowBrokenMessage), args.User, args.User);
             args.Cancelled = true;
         }
     }
@@ -53,7 +53,7 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
             return;
 
         if (ent.Comp.PopupMessage is { } msg)
-            _popup.PopupClient(Loc.GetString(msg), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString(msg), args.User, args.User);
 
         args.Cancelled = true;
     }
@@ -77,6 +77,6 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
             ("mime", Identity.Entity(ent.Owner, EntityManager)));
         var messageOthers = Loc.GetString("mime-invisible-wall-popup-others",
             ("mime", Identity.Entity(ent.Owner, EntityManager)));
-        _popup.PopupPredicted(messageSelf, messageOthers, ent, ent);
+        _popup.PopupEntity(messageSelf, messageOthers, ent, ent);
     }
 }

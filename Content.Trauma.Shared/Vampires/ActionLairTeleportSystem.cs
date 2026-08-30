@@ -29,13 +29,13 @@ public sealed partial class ActionLairTeleportSystem : EntitySystem
 
         if (TerminatingOrDeleted(ent.Comp.Lair) || ent.Comp.Lair is not { } lair)
         {
-            _popup.PopupClient("You do not have a lair anymore!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("You do not have a lair anymore!", user, user, PopupType.MediumCaution);
             return;
         }
 
         if (_mob.IsAlive(user))
         {
-            _popup.PopupClient("You can not teleport to your lair while alive!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("You can not teleport to your lair while alive!", user, user, PopupType.MediumCaution);
             return;
         }
 

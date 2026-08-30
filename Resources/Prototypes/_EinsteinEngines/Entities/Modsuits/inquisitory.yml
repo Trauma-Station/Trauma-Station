@@ -49,7 +49,7 @@
     walkModifier: 0.95
     sprintModifier: 0.75
   - type: FireProtection
-    reduction: 0.9
+    reduction: 1
 
 - type: entity
   parent: [ BaseModsuitBootsERT, BaseModsuitPieceERTChaplain ]

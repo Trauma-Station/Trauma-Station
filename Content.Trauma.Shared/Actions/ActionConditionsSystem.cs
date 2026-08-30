@@ -22,8 +22,8 @@ public sealed partial class ActionConditionsSystem : EntitySystem
     {
         var user = args.User;
         args.Cancelled = ent.Comp.Any
-            ? !_conditions.TryAnyCondition(user, ent.Comp.Conditions, user: user)
-            : !_conditions.TryConditions(user, ent.Comp.Conditions, user: user);
+            ? !_conditions.TryAnyCondition(user, ent.Comp.Conditions, sourceEnt: user)
+            : !_conditions.TryConditions(user, ent.Comp.Conditions, sourceEnt: user);
 
         DoPopup(args.Cancelled, ent.Comp.FailPopup, user);
     }
@@ -37,7 +37,7 @@ public sealed partial class ActionConditionsSystem : EntitySystem
         if (!passed)
             return;
 
-        _popup.PopupClient(popup, user, user, PopupType.MediumCaution);
+        _popup.PopupEntity(popup, user, user, PopupType.MediumCaution);
     }
     #endregion
 }

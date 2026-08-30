@@ -474,20 +474,6 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     /// <summary>
     /// Splits a solution without the specified reagent(s).
     /// </summary>
-    [Obsolete("Use SplitSolutionWithout with params ProtoId<ReagentPrototype>")]
-    public Solution SplitSolutionWithout(Entity<SolutionComponent> soln, FixedPoint2 quantity, params string[] reagents)
-    {
-        var (uid, comp) = soln;
-        var solution = comp.Solution;
-
-        var splitSol = solution.SplitSolutionWithout(quantity, reagents);
-        UpdateChemicals(soln);
-        return splitSol;
-    }
-
-    /// <summary>
-    /// Splits a solution without the specified reagent(s).
-    /// </summary>
     public Solution SplitSolutionWithout(Entity<SolutionComponent> soln, FixedPoint2 quantity, params ProtoId<ReagentPrototype>[] reagents)
     {
         var (uid, comp) = soln;
@@ -620,12 +606,14 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     /// <param name="container">Solution container from which we are removing reagent.</param>
     /// <param name="reagentQuantity">The reagent to remove.</param>
     /// <returns>The amount of reagent that was removed.</returns>
-    public FixedPoint2 RemoveReagent(Entity<SolutionComponent> soln, ReagentQuantity reagentQuantity)
+    public FixedPoint2 RemoveReagent(Entity<SolutionComponent> soln, ReagentQuantity reagentQuantity,
+        bool ignoreReagentData = false) // Trauma
     {
         var (uid, comp) = soln;
         var solution = comp.Solution;
 
-        var quant = solution.RemoveReagent(reagentQuantity);
+        var quant = solution.RemoveReagent(reagentQuantity,
+            ignoreReagentData: ignoreReagentData); // Trauma
         if (quant <= FixedPoint2.Zero)
             return FixedPoint2.Zero;
 
@@ -643,7 +631,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     /// <returns>The amount of reagent that was removed.</returns>
     public FixedPoint2 RemoveReagent(Entity<SolutionComponent> soln, string prototype, FixedPoint2 quantity, List<ReagentData>? data = null)
     {
-        return RemoveReagent(soln, new ReagentQuantity(prototype, quantity, data));
+        return RemoveReagent(soln, new ReagentQuantity(prototype, quantity, data),
+            ignoreReagentData: data == null); // Trauma
     }
 
     /// <summary>
@@ -656,7 +645,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     /// <returns>The amount of reagent that was removed.</returns>
     public FixedPoint2 RemoveReagent(Entity<SolutionComponent> soln, ReagentId reagentId, FixedPoint2 quantity)
     {
-        return RemoveReagent(soln, new ReagentQuantity(reagentId, quantity));
+        return RemoveReagent(soln, new ReagentQuantity(reagentId, quantity),
+            ignoreReagentData: true); // Trauma
     }
 
     /// <summary>

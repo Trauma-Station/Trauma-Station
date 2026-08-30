@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Server.Actions;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Ghost;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.CosmicCult.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -21,6 +22,7 @@ public sealed partial class CosmicConversionSystem : EntitySystem
 {
     [Dependency] private SharedCosmicCultSystem _cult = default!;
     [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private GhostSystem _ghost = default!;
@@ -31,67 +33,46 @@ public sealed partial class CosmicConversionSystem : EntitySystem
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    private readonly SoundSpecifier _conversionSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_start.ogg");
-    private readonly SoundSpecifier _conversionEndSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_end.ogg");
-    private readonly EntProtoId _conversionVFX = "CosmicConversionAbilityVFX";
-    private readonly EntProtoId _conversionEndVFX = "CosmicBlankAbilityVFX";
-    private readonly EntProtoId _conversionDecal = "DecalSpawnerCosmicAsh";
-    private readonly float _flickerRange = 8f;
+    private static readonly SoundSpecifier SFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_start.ogg");
+    private static readonly SoundSpecifier EndSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_end.ogg");
+    private static readonly EntProtoId VFX = "CosmicConversionAbilityVFX";
+    private static readonly EntProtoId EndVFX = "CosmicBlankAbilityVFX";
+    private static readonly EntProtoId Decal = "DecalSpawnerCosmicAsh";
+    private static readonly ProtoId<InfluencePrototype> InfluenceConversion = "InfluenceConversion";
+    private const float FlickerRange = 8f;
 
     private readonly HashSet<Entity<PoweredLightComponent>> _lights = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicConversion>(OnCosmicConversion);
-        SubscribeLocalEvent<CosmicCultComponent, CosmicConversionDoAfter>(OnDoAfter);
-    }
-
-    private void OnCosmicConversion(Entity<CosmicCultComponent> ent, ref EventCosmicConversion args)
+    [SubscribeLocalEvent]
+    private void OnCosmicConversion(Entity<CosmicCultComponent> ent, ref CosmicConversionEvent args)
     {
         var target = args.Target;
 
-        if (!_mind.TryGetMind(target, out _, out _)) // TODO uncomment before release!!!!
+        if (!_mind.TryGetMind(target, out _, out _))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-mindless"), ent, ent);
             return;
         }
-        if (HasComp<MindShieldComponent>(target))
+        if (_mindShield.IsShielded(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-mindshield"), ent, ent);
             return;
         }
         if (HasComp<BibleUserComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-chaplain"), ent, ent);
             return;
         }
         if (_rotting.IsRotten(target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-convert-rotten"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-convert-rotten"), ent, ent);
             return;
         }
 
         if (args.Handled)
             return;
 
-        args.Handled = true;
-
-        _actions.RemoveAction(ent.Owner, args.Action.Owner);
-        _cult.UnlockInfluence(ent, "InfluenceConversion");
-
-        Spawn(_conversionVFX, Transform(target).Coordinates);
-        _audio.PlayPvs(_conversionSFX, ent);
-        _cult.MalignEcho(ent);
-        _stun.TryAddParalyzeDuration(target, ent.Comp.CosmicConversionDelay);
-
-        _lights.Clear();
-        _lookup.GetEntitiesInRange(Transform(ent).Coordinates, _flickerRange, _lights, LookupFlags.StaticSundries);
-        foreach (var light in _lights)
-            _ghost.DoGhostBooEvent(light);
-
-        var doargs = new DoAfterArgs(EntityManager, ent, ent.Comp.CosmicConversionDelay, new CosmicConversionDoAfter(), ent, target)
+        var doargs = new DoAfterArgs(EntityManager, ent, ent.Comp.CosmicConversionDelay, new CosmicConversionDoAfterEvent(), ent, target)
         {
             DistanceThreshold = 2.5f,
             Hidden = false,
@@ -100,21 +81,40 @@ public sealed partial class CosmicConversionSystem : EntitySystem
             BreakOnMove = true,
             BreakOnDropItem = false,
         };
-        _doAfter.TryStartDoAfter(doargs);
+        if (!_doAfter.TryStartDoAfter(doargs))
+            return;
+
+        args.Handled = true;
+
+        _actions.RemoveAction(ent.Owner, args.Action.Owner);
+        _cult.UnlockInfluence(ent, InfluenceConversion);
+
+        Spawn(VFX, Transform(target).Coordinates);
+        _audio.PlayPvs(SFX, ent);
+        _cult.MalignEcho(ent);
+        _stun.TryUpdateParalyzeDuration(target, ent.Comp.CosmicConversionDelay);
+
+        _lights.Clear();
+        _lookup.GetEntitiesInRange(Transform(ent).Coordinates, FlickerRange, _lights, LookupFlags.StaticSundries);
+        foreach (var light in _lights)
+        {
+            _ghost.DoGhostBooEvent(light);
+        }
     }
 
-    private void OnDoAfter(Entity<CosmicCultComponent> ent, ref CosmicConversionDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnDoAfter(Entity<CosmicCultComponent> ent, ref CosmicConversionDoAfterEvent args)
     {
-        if (args.Args.Target is not { } target
-            || args.Cancelled
-            || args.Handled)
+        if (args.Target is not { } target ||
+            args.Cancelled ||
+            args.Handled)
             return;
         args.Handled = true;
 
         _cultRule.CosmicConversion(ent, target);
 
-        _audio.PlayPvs(_conversionEndSFX, ent);
-        Spawn(_conversionEndVFX, Transform(target).Coordinates);
-        Spawn(_conversionDecal, Transform(target).Coordinates);
+        _audio.PlayPvs(EndSFX, ent);
+        Spawn(EndVFX, Transform(target).Coordinates);
+        Spawn(Decal, Transform(target).Coordinates);
     }
 }

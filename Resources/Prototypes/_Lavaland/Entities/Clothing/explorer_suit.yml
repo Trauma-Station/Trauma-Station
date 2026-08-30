@@ -42,7 +42,7 @@
     graph: ExplorerSuit
     node: start
   - type: FireProtection
-    reduction: 0.4
+    reduction: 0.5
   - type: PressureArmorChange
   - type: PressureEfficiency
   - type: Tag
@@ -105,7 +105,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
-    reduction: 0.5
+    reduction: 0.63
   - type: Sprite
     sprite: _Lavaland/Equipment/explorer_suit.rsi
     state: reinforced1-icon
@@ -165,7 +165,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.4
   - type: FireProtection
-    reduction: 0.6
+    reduction: 0.75
   - type: ToggleableClothing
     clothingPrototypes:
       head: LavalandEquipmentExplorerHoodReinforced2
@@ -219,7 +219,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: FireProtection
-    reduction: 0.7
+    reduction: 0.88
   - type: ToggleableClothing
     clothingPrototypes:
       head: LavalandEquipmentExplorerHoodReinforced3

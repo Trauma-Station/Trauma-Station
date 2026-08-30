@@ -48,27 +48,9 @@ public sealed partial class GunExecutionSystem : EntitySystem
     [Dependency] private ThrownItemSystem _thrownItem = default!;
     [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        /* Interaction */
-        SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
-        SubscribeLocalEvent<GunComponent, ExecutionDoAfterEvent>(OnDoAfter);
-
-        /* AmmoImpactEvent */
-        SubscribeLocalEvent<CartridgeAmmoComponent, AmmoImpactEvent>(OnCartridgeAmmoImpact);
-        SubscribeLocalEvent<ProjectileSpreadComponent, AmmoImpactEvent>(OnSpreadAmmoImpact);
-        SubscribeLocalEvent<HitscanAmmoComponent, AmmoImpactEvent>(OnHitscanAmmoImpact);
-
-        /* Damage modifying */
-        SubscribeLocalEvent<BeingExecutedComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<PneumaticCannonComponent, ModifyExecutionDamageEvent>(OnCannonModifyExecutionDamage);
-    }
-
     #region Event handlers
 
+    [SubscribeLocalEvent]
     private void OnGetVerbs(Entity<GunComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
     {
         if (args.Hands == null || args.Using != ent.Owner || !args.CanAccess || !args.CanInteract)
@@ -94,6 +76,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<GunComponent> weapon, ref ExecutionDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Used != weapon.Owner || args.Target is not {} victim || !_timing.IsFirstTimePredicted)
@@ -104,6 +87,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         TryExecute(weapon, victim, args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnHitscanAmmoImpact(Entity<HitscanAmmoComponent> ent, ref AmmoImpactEvent args)
     {
         var data = new HitscanRaycastFiredData()
@@ -122,6 +106,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         args.Handled = true; // hitscan entity does nothing with projectile hit events
     }
 
+    [SubscribeLocalEvent]
     private void OnCartridgeAmmoImpact(Entity<CartridgeAmmoComponent> ent, ref AmmoImpactEvent args)
     {
         args.Handled = true; // the cartridge won't do anything by itself
@@ -159,6 +144,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         _gun.EjectCartridge(_gun.Random(args.Weapon), args.Shooter, ent, angle);
     }
 
+    [SubscribeLocalEvent]
     private void OnSpreadAmmoImpact(Entity<ProjectileSpreadComponent> ent, ref AmmoImpactEvent args)
     {
         var proj = _projectileQuery.Comp(ent);
@@ -173,11 +159,13 @@ public sealed partial class GunExecutionSystem : EntitySystem
         proj.ProjectileSpent = wasSpent;
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageModify(Entity<BeingExecutedComponent> ent, ref DamageModifyEvent args)
     {
         args.Damage *= ent.Comp.Modifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnCannonModifyExecutionDamage(Entity<PneumaticCannonComponent> ent, ref ModifyExecutionDamageEvent args)
     {
         // fast knife go brr, slow knife bounces off you
@@ -217,8 +205,8 @@ public sealed partial class GunExecutionSystem : EntitySystem
             executionTime = weapon.Comp.SuicideTime;
         }
 
-        _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-initial-internal", attacker, victim, weapon);
-        _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-initial-external", attacker, victim, weapon);
+        var key = prefix + "-popup-gun-initial-";
+        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, weapon);
 
         var doAfter = new DoAfterArgs(EntityManager,
             attacker,
@@ -265,7 +253,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         if (attemptEv.Cancelled)
         {
             if (attemptEv.Message is {} msg)
-                _popup.PopupClient(msg, weapon, attacker);
+                _popup.PopupEntity(msg, weapon, attacker);
             return false;
         }
 
@@ -381,8 +369,8 @@ public sealed partial class GunExecutionSystem : EntitySystem
         var ev = new OnEmptyGunShotEvent(attacker);
         RaiseLocalEvent(gun, ref ev);
         _audio.PlayPredicted(gun.Comp.SoundEmpty, gun, attacker);
-        _execution.ShowExecutionInternalPopup("execution-popup-gun-empty", attacker, victim, gun);
-        _execution.ShowExecutionExternalPopup("execution-popup-gun-empty", attacker, victim, gun);
+        var key = "execution-popup-gun-empty";
+        _execution.ShowExecutionPopup(key, key, attacker, victim, gun);
     }
 
     private void DoShotLogic(Entity<GunComponent> gun, EntityUid attacker, EntityUid victim, List<(EntityUid? Uid, IShootable Shootable)> ammo)
@@ -404,8 +392,8 @@ public sealed partial class GunExecutionSystem : EntitySystem
             prefix = "execution";
         }
 
-        _execution.ShowExecutionInternalPopup(prefix + "-popup-gun-complete-internal", attacker, victim, gun);
-        _execution.ShowExecutionExternalPopup(prefix + "-popup-gun-complete-external", attacker, victim, gun);
+        var key = prefix + "-popup-gun-complete-";
+        _execution.ShowExecutionPopup(key + "internal", key + "external", attacker, victim, gun);
     }
 
     private void DoRecoil(EntityUid attacker, EntityUid victim, Vector2 direction)

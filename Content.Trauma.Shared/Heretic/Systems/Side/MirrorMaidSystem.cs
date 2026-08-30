@@ -4,7 +4,7 @@ using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
@@ -68,7 +68,7 @@ public sealed partial class MirrorMaidSystem : EntitySystem
             Filter.Pvs(ent).RemovePlayerByAttachedEntity(args.Examiner),
             0.5f);
 
-        _popup.PopupClient(Loc.GetString("mirror-maid-examine-message-user",
+        _popup.PopupEntity(Loc.GetString("mirror-maid-examine-message-user",
                 ("ent", Identity.Entity(ent, EntityManager, args.Examiner))),
             ent,
             args.Examiner);

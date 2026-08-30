@@ -156,12 +156,12 @@
   - type: SpikerLash
   - type: SpikerShuffle
     statusEffectsToRemove:
-    - Stun
     - Electrocution
     - SlowedDown
     - Stutter
     newEffectsToRemove:
     - StatusEffectBlindness
+    - StatusEffectStunned
   - type: ActionGrant
     actions:
     - ActionTentacleHook

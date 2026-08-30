@@ -17,6 +17,14 @@
   finished: ForgedScrewdriver
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
 
+# - type: forgedItem
+#   id: ForgedRod
+#   category: Tools
+#   name: fishing rod
+#   construction: ForgedShortHandle
+#   finished: ForgedScrewdriver
+#   sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+
 - type: forgedItem
   id: PickaxeHead
   category: Tools

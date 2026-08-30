@@ -22,7 +22,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipMedicalIntern
+    - SkillChipDoctor
+    - SkillChipEducation
+    - SkillChipSurgeon
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier

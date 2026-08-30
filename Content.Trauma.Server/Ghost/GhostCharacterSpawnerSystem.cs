@@ -3,9 +3,9 @@
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
-using Content.Server.Ghost.Roles.Events;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
+using Content.Shared.Ghost;
 using Content.Shared.Preferences;
 using Content.Trauma.Shared.Ghost;
 using Robust.Shared.Map;
@@ -56,7 +56,7 @@ public sealed partial class GhostCharacterSpawnerSystem : EntitySystem
             _spawning.DoJobSpecials(job, mob);
 
         var ev = new GhostRoleSpawnerUsedEvent(ent, mob);
-        RaiseLocalEvent(mob, ev, true);
+        RaiseLocalEvent(mob, ref ev, true);
 
         _ghostRole.GhostRoleInternalCreateMindAndTransfer(args.Player, ent, mob, ghostRole);
 

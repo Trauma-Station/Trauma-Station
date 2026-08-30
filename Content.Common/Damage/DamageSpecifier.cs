@@ -1,8 +1,6 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Text.Json.Serialization;
-//using Content.Shared.Damage.Components; - <Trauma>
+//using Content.Shared.Damage.Components; // Trauma
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -148,7 +146,7 @@ namespace Content.Shared.Damage
 
                 float newValue = value.Float();
 
-                if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
+                if (modifierSet.FlatReductions.TryGetValue(key, out var reduction))
                     newValue = Math.Max(0f, newValue - reduction); // flat reductions can't heal you
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))

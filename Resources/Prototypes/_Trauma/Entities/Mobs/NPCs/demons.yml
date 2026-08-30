@@ -110,25 +110,45 @@
     energy: 0
 
 - type: entity
-  id: ControlledDemon
-  abstract: true
+  parent: BaseBullet
+  id: DemonAcid
+  name: demonic acid spit
+  categories: [ HideSpawnMenu ]
   components:
-  - type: GhostRole
-    name: ghost-role-information-demon-tame-name
-    description: ghost-role-information-demon-tame-desc
-    rules: ghost-role-information-familiar-rules
-    mindRoles:
-    - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: short
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 15
+        Structural: 20
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
+    layers:
+    - state: xeno_toxic
+  - type: Ammo
+    muzzleFlash: null
 
 # Minor Demons
 
 - type: entity
   parent: BaseDemon
   id: MinorDemonGuy
-  name: strange man
+  name: twisted clown
+  description: What happens when a clown pies one too many chaplains. Actions have consequences.
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: WaddleAnimation
+  - type: Speech
+    speechSounds: BikeHorn
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/guy.rsi
   - type: MeleeWeapon
@@ -137,9 +157,10 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Slash: 10
-    altDisarm: false
-    canWideSwing: true
+        Slash: 5
+    animation: WeaponArcFist
+    altDisarm: true
+    canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -150,19 +171,27 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonGuy ]
-  id: MinorDemonGuyControlled
-  suffix: Controlled
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 5
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 7
+  - type: MeleeChemicalInjector
+    transferAmount: 7
+    solution: melee
 
 - type: entity
   parent: BaseDemon
   id: MinorDemonIncel
   name: jealousy incarnate
+  description: A hellish creature that dwells in the second layer of hell, tiringly talkative.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/incel.rsi
@@ -172,7 +201,9 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 10
+        Blunt: 5
+        Slash: 5
+    animation: WeaponArcBite
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -185,19 +216,15 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
 
 - type: entity
-  parent: [ ControlledDemon, MinorDemonIncel ]
-  id: MinorDemonIncelControlled
-  suffix: Controlled
-
-- type: entity
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonUrist
-  name: Urist McHands
+  name: sinner
+  description: A wicked human sent to suffer in hell forever.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/human.rsi
@@ -208,6 +235,7 @@
     damage:
       types:
         Blunt: 5
+    animation: WeaponArcFist
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -220,7 +248,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
   - type: Crawler
@@ -232,16 +260,19 @@
       Hand:
         location: Left
   - type: ComplexInteraction
-
-- type: entity
-  parent: [ ControlledDemon, MinorDemonUrist ]
-  id: MinorDemonUristControlled
-  suffix: Controlled
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 25
+      - ReagentId: Blood
+        Quantity: 75
 
 - type: entity
   parent: BaseDemon
   id: MinorDemonIan
-  name: Flesh Hound
+  name: flesh hound
+  description: After enough time in hell, souls begin to assume a more… primal form.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/ian.rsi
@@ -266,7 +297,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
           MaterialHideCorgi:
@@ -277,14 +308,10 @@
     baseSprintSpeed: 1.5
 
 - type: entity
-  parent: [ ControlledDemon, MinorDemonIan ]
-  id: MinorDemonIanControlled
-  suffix: Controlled
-
-- type: entity
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonVox
   name: outcast
+  description: Hated by even the most repulsive demons, it wanders the planes of Hell alone.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/vox.rsi
@@ -307,7 +334,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
   - type: Crawler
@@ -373,14 +400,10 @@
   - type: ComplexInteraction
 
 - type: entity
-  parent: [ ControlledDemon, MinorDemonVox ]
-  id: MinorDemonVoxControlled
-  suffix: Controlled
-
-- type: entity
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonVulp
   name: wrathful beast
+  description: The dominant species of a bygone era, now tortured in Hell for their hubris.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/vulp.rsi
@@ -390,7 +413,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 5
+        Slash: 5
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -403,7 +426,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 0
             max: 1
   - type: Crawler
@@ -417,16 +440,115 @@
   - type: ComplexInteraction
 
 - type: entity
-  parent: [ ControlledDemon, MinorDemonVulp ]
-  id: MinorDemonVulpControlled
-  suffix: Controlled
+  parent: BaseDemon
+  id: MinorDemonCentifiend
+  name: lesser centifiend
+  description: A juvenile demon, it progresses the potent diseases of its greater brethren.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/smolcentifiend.rsi
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Piercing: 1
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: UnstableCompound
+        Quantity: 1
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+
+- type: entity
+  parent: BaseDemon
+  id: MinorDemonFlesh
+  name: miserable flesh thing
+  description: A disgusting living mass of fat, muscle tissue, mucus and blood. The ritual must have failed somehow, and this wretched thing is the result.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/flesh.rsi
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 3
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
 
 # Medium
 
 - type: entity
   parent: BaseDemon
   id: MediumDemonCentifiend
-  name: Centifiend
+  name: centifiend
+  description: One of the most common demons in Hell, this oversized arthropod spreads pestilence with its bite.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/centifiend.rsi
@@ -449,7 +571,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
   - type: Solution
@@ -468,14 +590,10 @@
     solution: melee
 
 - type: entity
-  parent: [ ControlledDemon, MediumDemonCentifiend ]
-  id: MediumDemonCentifiendControlled
-  suffix: Controlled
-
-- type: entity
   parent: BaseDemon
   id: MediumDemonChad
   name: prideful demon
+  description: It takes great pride in its mustache. It used to take pride in its skin…
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/chad.rsi
@@ -499,63 +617,15 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 3
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonChad ]
-  id: MediumDemonChadControlled
-  suffix: Controlled
-
-- type: entity
-  parent: BaseDemon
-  id: MediumDemonGhost
-  name: Pun Pun # TODO: let him talk to deadchat
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
-  - type: MeleeWeapon
-    range: 1
-    soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
-    damage:
-      types:
-        Cold: 10
-    altDisarm: false
-    canWideSwing: true
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:GibBehavior
-        recursive: false
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          BaseDemonSoulFragment:
-            min: 1
-            max: 2
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.1,-0.2,0.1,0.2"
-        hard: false
-        mask:
-        - Opaque
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonGhost ]
-  id: MediumDemonGhostControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
   id: MediumDemonHamlet
   name: hellmet
+  description: Bred as livestock in hell, rumors say Hellmets taste like chicken.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hamlet.rsi
@@ -579,7 +649,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 1
             max: 2
   - type: MovementSpeedModifier
@@ -603,16 +673,173 @@
     slipChance: 0.3
 
 - type: entity
-  parent: [ ControlledDemon, MediumDemonHamlet ]
-  id: MediumDemonHamletControlled
-  suffix: Controlled
+  parent: BaseDemon
+  id: MediumDemonMindflayer
+  name: mindflayer
+  description: A primordial beast, it's kin have existed since the dawn of Hell. Barely intelligent, it uses inate psychic abilities to feed on the intellect of its prey.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/mindflayer.rsi
+  - type: MeleeWeapon
+    range: 5
+    soundHit:
+      path: /Audio/_Goobstation/Wizard/disable_tech.ogg
+    damage:
+      types:
+        Asphyxiation: 15
+        Bloodloss: 5
+        Ion: 20
+    animation: WeaponArcPurplePunch
+    altDisarm: true
+    canWideSwing: false
+    attackRate: 0.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 2
+            max: 3
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 7
+  - type: MeleeChemicalInjector
+    transferAmount: 7
+    solution: melee
 
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonAbomination
+  name: abomination
+  description: A grotesque amalgamation of sickly flesh, muscle quivers underneath it's rotting skin and it constantly drools a corrosive mucus.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/abomination.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 13
+    altDisarm: false
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 3
+  - type: Gun
+    projectileSpeed: 20
+    fireRate: 0.5
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/_Goobstation/Changeling/Effects/armour_strip.ogg
+  - type: BatteryAmmoProvider
+    proto: DemonAcid
+    fireCost: 25
+    examinable: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 25
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonImp
+  name: imp
+  description: Miserable, weak and disfigured beings, they often find themselves the lackeys of more powerful demons. Lords of Hell often use imps as cannon fodder for their armies.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/imp.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Piercing: 12
+    animation: WeaponArcThrust
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 7
+
+- type: entity
+  parent: BaseDemon
+  id: MediumDemonDark
+  name: darkling
+  description: Strange shadowy beings, darklings hide in the deepest recesses of Hell, only emerging to drag down the odd sinner into the darkness.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/dark.rsi
+  - type: MeleeWeapon
+    range: 3
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 10
+        Asphyxiation: 5
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 1
+            max: 2
 # Major demons
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64Fat
-  name: angel
+  id: MajorAngelHuman
+  name: Aspect of Greed
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Aspect. Humans embody the aspect of Greed.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
@@ -622,35 +849,48 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
+        Caustic: 20
+        Blunt: 10
+        Structural: 20
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 275
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
-            min: 1
-            max: 3
+          DemonSoulFragment:
+            min: 4
+            max: 5
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Gold
+        Quantity: 50
+      - ReagentId: Hemorrhinol
+        Quantity: 7
+  - type: MeleeChemicalInjector
+    transferAmount: 57
+    solution: melee
   - type: ActionGrant
     actions:
-      - ActionDemonRift
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemon64Fat ]
-  id: MediumDemon64FatControlled
-  suffix: Controlled
+    - ActionDemonRift
+    - ActionDemonRepulse
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64Buff
-  name: angel
+  id: MajorAngelLizard
+  name: Aspect of Predation
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Lizards embody the aspect of Predation.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
@@ -660,35 +900,46 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
+        Slash: 20
+        Piercing: 5
+    animation: WeaponArcSlash
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 400
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
-            min: 1
-            max: 3
+          DemonSoulFragment:
+            min: 5
+            max: 6
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Impedrezene
+        Quantity: 6
+  - type: MeleeChemicalInjector
+    transferAmount: 6
+    solution: melee
   - type: ActionGrant
     actions:
-      - ActionDemonRift
+    - ActionDemonRift
 
-- type: entity
-  parent: [ ControlledDemon, MediumDemon64Buff ]
-  id: MediumDemon64BuffControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemon64
-  name: angel
+  id: MajorAngelMoth
+  name: Aspect of Madness
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an aspect. Moths embody the aspect of Madness.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
@@ -698,9 +949,10 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 15
-    altDisarm: true
-    canWideSwing: false
+        Piercing: 10
+    altDisarm: false
+    canWideSwing: true
+    attackRate: 4
   - type: Destructible
     thresholds:
     - trigger:
@@ -711,22 +963,18 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
-            min: 1
-            max: 3
+          DemonSoulFragment:
+            min: 4
+            max: 5
   - type: ActionGrant
     actions:
-    - ActionDemonRift
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemon64 ]
-  id: MediumDemon64Controlled
-  suffix: Controlled
+    - ActionDemonRepulse
 
 - type: entity
   parent: BaseDemon
   id: MajorDemonBosche
   name: bosche
+  description: Born from the dreams of a mad painter, all it knows is to consume.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/bosche.rsi
@@ -736,20 +984,20 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 1
+        Blunt: 6
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1000
+        damage: 1250
       behaviors:
       - !type:GibBehavior
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: Devourer
@@ -767,18 +1015,13 @@
       - MobState
       - Door
       - Item
-      tags:
       - Wall
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonBosche ]
-  id: MajorDemonBoscheControlled
-  suffix: Controlled
 
 - type: entity
   parent: BaseDemon
   id: MajorDemonFeverbird
   name: feverbird
+  description: Your head hurts. Something is wrong. Onion layer one. Onion layer two. Onion layer three…
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/feverbird.rsi
@@ -805,7 +1048,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: MovementIgnoreGravity
@@ -829,14 +1072,10 @@
     solution: melee
 
 - type: entity
-  parent: [ ControlledDemon, MajorDemonFeverbird ]
-  id: MajorDemonFeverbirdControlled
-  suffix: Controlled
-
-- type: entity
   parent: BaseDemon
   id: MajorDemonHanged
   name: hanged
+  description: After being sent to the gallows, the souls of criminals enter the flora of Hell, they are back to exact revenge.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hanger.rsi
@@ -859,18 +1098,9 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
-  - type: Hands
-    hands:
-      hand_right:
-        location: Right
-      hand_left:
-        location: Left
-    sortedHands:
-    - hand_right
-    - hand_left
   - type: Puller
     needsHands: false
     stageChangeCooldown: 0.1
@@ -881,13 +1111,9 @@
     grabThrowDamageModifier: 4
 
 - type: entity
-  parent: [ ControlledDemon, MajorDemonHanged ]
-  id: MajorDemonHangedControlled
-  suffix: Controlled
-
-- type: entity
   parent: BaseDemon
   id: MajorDemonHiver
+  description: Weaker demons that formed a symbiotic relationship with infernal bees. yes Hell has bees, lots of them.
   name: hiver
   components:
   - type: Sprite
@@ -911,20 +1137,22 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 200
+      - ReagentId: BuzzochloricBees
+        Quantity: 75
   - type: TimedSpawner
     prototypes:
     - BeeLaughterDemon
     intervalSeconds: 3
     minimumEntitiesSpawned: 5
     maximumEntitiesSpawned: 10
-
-- type: entity
-  parent: [ ControlledDemon, MajorDemonHiver ]
-  id: MajorDemonHiverControlled
-  suffix: Controlled
 
 - type: entity
   parent: BeeLaughter
@@ -939,6 +1167,7 @@
   parent: BaseDemon
   id: MajorDemonSteamer
   name: steamer
+  description: Steamers are demons that were born from the souls of those who died to welderbombing. Their anger manifests as blazing oil within their gut.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/steamer.rsi
@@ -961,7 +1190,7 @@
         recursive: false
       - !type:SpawnEntitiesBehavior
         spawn:
-          BaseDemonSoulFragment:
+          DemonSoulFragment:
             min: 3
             max: 5
   - type: GunRequiresWield
@@ -992,467 +1221,124 @@
       task: SimpleRangedHostileCompound
 
 - type: entity
-  parent: [ ControlledDemon, MajorDemonSteamer ]
-  id: MajorDemonSteamerControlled
-  suffix: Controlled
-
-# Demon spawners
-
-- type: entity
-  abstract: true
-  id: BaseDemonSummoningRuneHostile
-  name: summoning circle
-  description: A demon could be here any second...
-  placement:
-    mode: SnapgridCenter
-  components:
-  - type: Animateable
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Transform
-    anchored: true
-  - type: GhostRole
-    name: ghost-role-information-demon-name
-    description: ghost-role-information-demon-desc
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: short
-  - type: TimedDespawn
-    lifetime: 60
-
-- type: entity
-  abstract: true
-  parent: BaseDemonSummoningRuneHostile
-  id: BaseDemonSummoningRuneFamiliar
-  components:
-  - type: GhostRole
-    name: ghost-role-information-demon-tame-name
-    description: ghost-role-information-demon-tame-desc
-    rules: ghost-role-information-familiar-rules
-    mindRoles:
-    - MindRoleGhostRoleFamiliar
-
-- type: entity
-  id: BaseMinorSummoningRune
+  parent: BaseDemon
+  id: MajorDemonButcher
+  name: butcher
+  description: The butchers march through hell, like a plague of locusts, flaying and consuming all in their path.
   components:
   - type: Sprite
-    sprite: _Trauma/Structures/Runes/minor.rsi
-    state: icon
+    sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
+  - type: MeleeWeapon
+    angle: 45
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 30
+        Structural: 50
+    animation: WeaponArcSlash
+    altDisarm: false
+    canWideSwing: true
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 30
+        damage: 450
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 4
+            max: 6
 
 - type: entity
-  id: BaseMediumSummoningRune
+  parent: BaseDemon
+  id: MajorDemonGhost
+  name: Spectre
+  description: Torn from their bodies, they seek to warm their hands on the warm flesh of the living.
   components:
   - type: Sprite
-    sprite: _Trauma/Structures/Runes/medium.rsi
-    state: icon
+    sprite: _Trauma/Mobs/Monsters/Demons/spectre.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Cold: 15
+    altDisarm: false
+    canWideSwing: true
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 60
+        damage: 40
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 3
+            max: 4
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
 
 - type: entity
-  id: BaseMajorSummoningRune
+  parent: BaseDemon
+  id: MajorDemonSaturn
+  name: saturnite
+  description: Many demonologists perform rituals to give themselves stronger physical forms, saturnites form when said rituals go terribly wrong.
   components:
   - type: Sprite
-    sprite: _Trauma/Structures/Runes/major.rsi
-    state: icon
+    sprite: _Trauma/Mobs/Monsters/Demons/saturn.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 20
+        Slash: 15
+        Structural: 30
+    animation: WeaponArcBite
+    altDisarm: true
+    canWideSwing: false
+    attackRate: 2
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 90
+        damage: 200
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
-
-# Minor
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneGuy
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonGuy
-  - type: SpawnOnDespawn
-    prototype: MinorDemonGuy
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneGuyTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonGuyControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonGuyControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneIncel
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIncel
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIncel
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneIncelTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIncelControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIncelControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneUrist
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonUrist
-  - type: SpawnOnDespawn
-    prototype: MinorDemonUrist
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneUristTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonUristControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonUristControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneIan
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIan
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIan
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneIanTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonIanControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonIanControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneVox
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVox
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVox
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneVoxTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVoxControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVoxControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMinorSummoningRune ]
-  id: SummoningRuneVulp
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVulp
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVulp
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMinorSummoningRune ]
-  id: SummoningRuneVulpTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MinorDemonVulpControlled
-  - type: SpawnOnDespawn
-    prototype: MinorDemonVulpControlled
-
-# Medium
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneCentifiend
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonCentifiend
-  - type: SpawnOnDespawn
-    prototype: MediumDemonCentifiend
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneCentifiendTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonCentifiend
-  - type: SpawnOnDespawn
-    prototype: MediumDemonCentifiend
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneChad
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonChad
-  - type: SpawnOnDespawn
-    prototype: MediumDemonChad
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneChadTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonChadControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonChadControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneGhost
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonGhost
-  - type: SpawnOnDespawn
-    prototype: MediumDemonGhost
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneGhostTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonGhostControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonGhostControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneHamlet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonHamlet
-  - type: SpawnOnDespawn
-    prototype: MediumDemonHamlet
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneHamletTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonHamletControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonHamletControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64Fat
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64Fat
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64Fat
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64FatTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64FatControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64FatControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64Buff
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64Buff
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64Buff
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64BuffTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64BuffControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64BuffControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneDemon64Tame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemon64Controlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemon64Controlled
-
-# Major
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneBosche
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonBosche
-  - type: SpawnOnDespawn
-    prototype: MajorDemonBosche
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneBoscheTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonBoscheControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonBoscheControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneFeverbird
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonFeverbird
-  - type: SpawnOnDespawn
-    prototype: MajorDemonFeverbird
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneFeverbirdTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonFeverbirdControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonFeverbirdControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneHanged
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHanged
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHanged
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneHangedTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHangedControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHangedControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneHiver
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHiver
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHiver
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneHiverTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonHiverControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonHiverControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
-  id: SummoningRuneSteamer
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonSteamer
-  - type: SpawnOnDespawn
-    prototype: MajorDemonSteamer
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
-  id: SummoningRuneSteamerTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MajorDemonSteamerControlled
-  - type: SpawnOnDespawn
-    prototype: MajorDemonSteamerControlled
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          DemonSoulFragment:
+            min: 4
+            max: 5
+  - type: Devourer
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidProfile
+    stomachStorageWhitelist:
+      components:
+      - MobState
+      - Item
+    chemical: Ichor
+    healRate: 7.5
+    whitelist:
+      components:
+      - MobState
+      - Item

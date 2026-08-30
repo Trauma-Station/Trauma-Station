@@ -64,6 +64,8 @@
   components:
   - type: Sprite
     state: morgue
+  - type: Tag
+    tags: [ AreaMorgue ]
 
 - type: entity
   parent: BaseAreaMedical

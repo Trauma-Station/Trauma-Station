@@ -17,7 +17,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipChaplain
+    - SkillChipEducation
+    - SkillChipMarksmanship
+    - SkillChipMagLit
   # </Trauma>
   - !type:AddComponentSpecial
     components:

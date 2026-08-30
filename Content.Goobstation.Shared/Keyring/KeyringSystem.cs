@@ -67,7 +67,7 @@ public sealed partial class KeyringSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
 
         var popup = Loc.GetString("keyring-start-unlock-popup");
-        _popup.PopupClient(popup, args.User, args.User);
+        _popup.PopupEntity(popup, args.User, args.User);
 
         _audio.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
 
@@ -87,7 +87,7 @@ public sealed partial class KeyringSystem : EntitySystem
             _door.StartOpening(target);
 
             var successPopup = Loc.GetString("keyring-finish-unlock-popup");
-            _popup.PopupClient(successPopup, args.User, args.User);
+            _popup.PopupEntity(successPopup, args.User, args.User);
 
             args.Handled = true;
 
@@ -96,7 +96,7 @@ public sealed partial class KeyringSystem : EntitySystem
 
 
         var failPopup = Loc.GetString("keyring-unlock-fail-popup");
-        _popup.PopupClient(failPopup, args.User, args.User);
+        _popup.PopupEntity(failPopup, args.User, args.User);
 
         args.Handled = true;
     }

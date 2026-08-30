@@ -40,7 +40,7 @@ public sealed partial class DecalSystem : SharedDecalSystem
             return;
 
         // Transfer decals over to the new grid.
-        var enumerator = Map.GetAllTilesEnumerator(ev.Grid, MapGridQuery.Comp(ev.Grid));
+        var enumerator = Map.GetAllTiles(ev.Grid, MapGridQuery.Comp(ev.Grid));
 
         var oldChunkCollection = oldComp.ChunkCollection.ChunkCollection;
         var chunkCollection = newComp.ChunkCollection.ChunkCollection;

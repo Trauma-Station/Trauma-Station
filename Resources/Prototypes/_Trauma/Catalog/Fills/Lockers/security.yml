@@ -17,9 +17,9 @@
     damageContainer: StructuralInorganic
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entity
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
@@ -29,8 +29,8 @@
   components:
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
@@ -40,9 +40,9 @@
   components:
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entityTable
   id: FillLockerWardenTrauma
@@ -79,8 +79,8 @@
         tableId: FillGunSafeLaserT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -93,8 +93,8 @@
         tableId: FillGunSafeShotgunsT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -108,9 +108,9 @@
         tableId: FillGunSafeLaserT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -123,9 +123,9 @@
         tableId: FillGunSafeRandomBallistic
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - blue
-    - yellow
+    - Green
+    - Blue
+    - Yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -138,11 +138,11 @@
         tableId: FillGunSafeMeleeT1
   - type: StationAlertLevelLock
     lockedAlertLevels:
-    - green
-    - yellow
+    - Green
+    - Yellow
 
 - type: entity
-  parent: BaseTraumaGunSafe
+  parent: [ GunSafeBaseSecure, BaseSecurityContraband ] # Reparent to one above BaseTraumaGunSafe to remove access lock bs.
   id: GunSafeJudo
   name: judo safe
   components:
@@ -150,10 +150,6 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeJudoT1
-  - type: StationAlertLevelLock
-    lockedAlertLevels:
-    - green
-    - yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -285,7 +281,6 @@
     - id: ClothingBeltSheathKatanaFilled
       amount: 2
     - id: SecBreachingHammer
-      amount: 2
     - id: WeaponBillyClub
       amount: 3
 

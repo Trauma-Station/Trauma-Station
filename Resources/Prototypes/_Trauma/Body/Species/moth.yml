@@ -12,6 +12,10 @@
       state: empty # no sprite since the markings actually control it
   - type: SpeedModifierOrgan
     weightlessAcceleration: 0.5 # 50% faster base acceleration in space/0G
+    weightlessModifier: 0.3
+  - type: BurnableBodyPart
+    burntPart: OrganMothWingsBurntOff
+    burnMessage: wings-burned-message
   - type: DashWings
     speciesWhitelist:
     # need to have a body adapted to controlling wings
@@ -19,13 +23,51 @@
     # if you aren't moth or vox
     - Moth
     - Vox # They are birds I guess
-    toAdd:
+    toAddWhitelisted:
     - type: TackleModifier # Innate tackle
-      allowCollision: false
-      speedMultiplier: 1
-      rangeMultiplier: 1
-      cooldownMultiplier: 2.167 # Roughly 6.5s
-      userEffect: MothDash
+      modifiers:
+      - priority: null
+        affectsOtherModifiers: true
+        rangeMultiplier: 1.1
+        skillMod: 2
+      - priority: 1
+        allowCollision: false
+        staminaCostMultiplier: 1.4
+        knockdownTimeMultiplier: 0
+        speedMultiplier: 0.65
+        rangeMultiplier: 0.65
+        cooldownMultiplier: 2.167 # Roughly 6.5s
+        userEffect: MothDash
+    toAdd:
+    - type: TackleModifier # Worse innate tackle
+      modifiers:
+      - priority: null
+        affectsOtherModifiers: true
+        rangeMultiplier: 1.1
+        skillMod: 2
+      - priority: 1
+        allowCollision: false
+        staminaCostMultiplier: 1.4
+        speedMultiplier: 0.65
+        rangeMultiplier: 0.65
+        cooldownMultiplier: 2.167
+
+- type: entity
+  parent: [ OrganBaseWings, OrganMothExternal ]
+  id: OrganMothWingsBurntOff
+  name: burnt wings
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Species/Moth/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Trauma/empty.rsi
+      state: empty # no sprite since the markings actually control it
+  - type: VisualOrganMarkings
+    markings:
+      Wings:
+      - markingId: MothWingsBurntOff
+        markingColor: [ "#FFFFFFFF" ]
 
 - type: entity
   parent: OrganMothWings
@@ -60,4 +102,7 @@
     sound: /Audio/_Goobstation/Effects/moth_wings.ogg
   - !type:ModifyStatusEffect
     effectProto: StatusEffectProjectileImmunity # Dark souls
+    time: 0.65
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectWingsOpen
     time: 0.65

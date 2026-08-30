@@ -1,6 +1,3 @@
-// <Trauma>
-using Robust.Shared.Network;
-// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Destructible;
@@ -12,15 +9,13 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Kitchen.EntitySystems;
 
 public sealed partial class HandheldGrinderSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private INetManager _net = default!;
-    // </Trauma>
     [Dependency] private SharedReagentGrinderSystem _reagentGrinder = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedStackSystem _stackSystem = default!;
@@ -29,18 +24,11 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPuddleSystem _puddle = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HandheldGrinderComponent, EntRemovedFromContainerMessage>(OnGrinderRemoved);
-        SubscribeLocalEvent<HandheldGrinderComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<HandheldGrinderComponent, HandheldGrinderDoAfterEvent>(OnHandheldDoAfter);
-    }
+    [Dependency] private INetManager _net = default!;
 
     // prevent the infamous UdderSystem debug assert, see https://github.com/space-wizards/space-station-14/pull/35314
     // TODO: find a better solution than copy pasting this into every shared system that caches solution entities
+    [SubscribeLocalEvent]
     private void OnGrinderRemoved(Entity<HandheldGrinderComponent> entity, ref EntRemovedFromContainerMessage args)
     {
         // Make sure the removed entity was our contained solution and set it to null
@@ -50,6 +38,7 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
         entity.Comp.GrinderSolution = null;
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<HandheldGrinderComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
@@ -61,7 +50,7 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
 
         if (!CanGrinderBeUsed(ent, item, out var reason))
         {
-            _popup.PopupClient(reason, ent, args.User);
+            _popup.PopupEntity(reason, ent, args.User);
             return;
         }
 
@@ -77,6 +66,11 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
         if (!_solution.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.GrinderSolution))
             return;
 
+        ent.Comp.AudioStream = _audio.Stop(ent.Comp.AudioStream);
+
+        if (_net.IsServer) // Cannot correctly cancel predicted audio.
+            ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.Sound, ent)?.Entity;
+
         var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.DoAfterDuration, new HandheldGrinderDoAfterEvent(), ent, ent, item)
         {
             NeedHand = true,
@@ -86,10 +80,10 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
             BreakOnMove = true
         };
 
-        if (_doAfter.TryStartDoAfter(doAfter) && _net.IsServer) // Trauma - can't store result of PlayPredicted on client, it leaves lingering audio
-            ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.Sound, ent)?.Entity ?? ent.Comp.AudioStream; // Trauma - Pvs instead of Predicted
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
+    [SubscribeLocalEvent]
     private void OnHandheldDoAfter(Entity<HandheldGrinderComponent> ent, ref HandheldGrinderDoAfterEvent args)
     {
         ent.Comp.AudioStream = _audio.Stop(ent.Comp.AudioStream);
@@ -102,7 +96,7 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
 
         if (!CanGrinderBeUsed(ent, item, out var reason))
         {
-            _popup.PopupClient(reason, ent, args.User);
+            _popup.PopupEntity(reason, ent, args.User);
             return;
         }
 
@@ -122,7 +116,7 @@ public sealed partial class HandheldGrinderSystem : EntitySystem
         else
             _destructibleSystem.DestroyEntity(item);
 
-        _popup.PopupClient(Loc.GetString(ent.Comp.FinishedPopup, ("item", item)), ent, args.User);
+        _popup.PopupEntity(Loc.GetString(ent.Comp.FinishedPopup, ("item", item)), ent, args.User);
     }
 
     /// <summary>

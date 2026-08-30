@@ -44,7 +44,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 
         if (comp.UnlockedAbilities.Count >= comp.AvailableAbilities.Count)
         {
-            _popups.PopupPredicted(Loc.GetString("shadowling-collective-mind-ascend"), uid, uid, PopupType.Medium);
+            _popups.PopupEntity(Loc.GetString("shadowling-collective-mind-ascend"), uid, uid, PopupType.Medium);
             return;
         }
 
@@ -78,7 +78,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 
         if (abiltiesAddedCount > 0)
         {
-            _popups.PopupPredicted(
+            _popups.PopupEntity(
                 Loc.GetString("shadowling-collective-mind-success", ("thralls", thrallsRemaining)),
                 uid,
                 uid,
@@ -89,7 +89,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
         }
         else
         {
-            _popups.PopupPredicted(Loc.GetString("shadowling-collective-mind-failure", ("thralls", thrallsRemaining)),
+            _popups.PopupEntity(Loc.GetString("shadowling-collective-mind-failure", ("thralls", thrallsRemaining)),
                 uid,
                 uid,
                 PopupType.Medium);

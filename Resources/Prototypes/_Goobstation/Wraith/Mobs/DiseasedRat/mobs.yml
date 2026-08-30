@@ -120,6 +120,8 @@
     name: ghost-role-information-plagurat-name
     description: ghost-role-information-plaguerat-description
     rules: ghost-role-information-nascent-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostTakeoverAvailable

@@ -7,14 +7,15 @@ namespace Content.Shared.Chemistry.Components;
 /// <summary>
 /// Passively increases a solution's quantity of a reagent.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentPause, AutoGenerateComponentState, NetworkedComponent]
-[Access(typeof(SolutionRegenerationSystem))]
+[RegisterComponent, AutoGenerateComponentPause, AutoGenerateComponentState(fieldDeltas: true), NetworkedComponent] // Trauma - field deltas
+// [Access(typeof(SolutionRegenerationSystem))] - Trauma removed larp larp larp sahur
 public sealed partial class SolutionRegenerationComponent : Component
 {
     /// <summary>
     /// The reagent(s) to be regenerated in the solution.
     /// </summary>
     [DataField(required: true)]
+    [AutoNetworkedField]
     public Solution Generated = default!;
 
     /// <summary>

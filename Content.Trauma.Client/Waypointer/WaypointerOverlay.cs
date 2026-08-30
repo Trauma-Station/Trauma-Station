@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
+using System.Linq;
 using Content.Client.Shuttles.Systems;
 using Content.Client.Station;
 using Content.Shared.CombatMode;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Waypointer;
 using Content.Trauma.Shared.Waypointer.Components;
 using Robust.Client.Player;
@@ -16,6 +17,8 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Trauma.Client.Waypointer;
 
+using WayPointerDict = Dictionary<ProtoId<WaypointerPrototype>, bool>;
+
 /// <summary>
 /// This Overlay draws the waypointers on the screen.
 /// </summary>
@@ -24,7 +27,7 @@ public sealed partial class WaypointerOverlay : Overlay
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 
     [Dependency] private IEntityManager _entity = default!;
-    [Dependency] private IPlayerManager  _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SharedCombatModeSystem _combatMode = default!;
@@ -67,17 +70,15 @@ public sealed partial class WaypointerOverlay : Overlay
         var handle = args.WorldHandle;
         handle.UseShader(_unshadedShader); // Waypointers are unshaded.
 
-        if (_player.LocalEntity == null
-            || !_entity.TryGetComponent<ActiveWaypointerComponent>(_player.LocalEntity, out var waypointer)
-            // Check if the Waypointer hashset is null
-            || waypointer.WaypointerProtoIds == null
-            || !_entity.TryGetComponent<TransformComponent>(_player.LocalEntity, out var playerXform)
+        if (_player.LocalEntity is not { } player
+            || !_entity.TryGetComponent<TransformComponent>(player, out var playerXform)
             || playerXform.MapID != args.MapId)
             return;
 
-        var player = _player.LocalEntity.Value;
+        var protoIds = (_entity.GetComponentOrNull<ActiveWaypointerComponent>(player)?.WaypointerProtoIds ?? new WayPointerDict())
+            .Union(_entity.GetComponentOrNull<SimpleWaypointerComponent>(player)?.WaypointerProtoIds ?? new WayPointerDict());
 
-        foreach (var waypointerPair in waypointer.WaypointerProtoIds)
+        foreach (var waypointerPair in protoIds)
         {
             // The boolean in the dictionary describes if the waypointer is active
             if (!waypointerPair.Value)

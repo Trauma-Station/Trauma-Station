@@ -239,7 +239,7 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
                     return null;
             }
 
-            proto = entities.Pick(_random);
+            proto = entities.Pick(_random).Id;
         }
         var child = Spawn(proto, _transform.GetMapCoordinates(uid, targetTransformComp), rotation: _transform.GetWorldRotation(uid));
 

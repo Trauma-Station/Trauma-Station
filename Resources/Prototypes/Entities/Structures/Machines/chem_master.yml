@@ -1,11 +1,30 @@
 - type: entity
   id: ChemMaster
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: ChemMaster 4000
   description: An industrial grade chemical manipulator with pill and bottle production included.
   placement:
     mode: SnapgridCenter
   components:
+  # <Trauma>
+  - type: AutomationSlots
+    slots:
+    - !type:AutomatedSolution
+      input: PlumbingInput
+      output: PlumbingOutput
+      solutionName: buffer
+    - !type:AutomatedItemSlot
+      input: AutomationSlotBeaker
+      output: AutomationSlotBeaker
+      slotId: beakerSlot
+    - !type:AutomatedItemSlot # not very useful because you can't tell it to make pills
+      input: AutomationSlotBottles
+      output: AutomationSlotBottles
+      slotId: outputSlot
+    - !type:AutomatedBeakerSlot
+      input: PlumbingDispenser
+      output: PlumbingDispenser
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Machines/mixer.rsi
     snapCardinals: true
@@ -41,17 +60,12 @@
         - MachineLayer
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
+    - trigger: !type:DamageTrigger
+        damage: 175
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: ActivatableUI
     key: enum.ChemMasterUiKey.Key
   - type: ActivatableUIRequiresPower
@@ -87,27 +101,13 @@
       outputSlot:
         whitelistFailPopup: chem-master-component-cannot-put-entity-message
         whitelist:
+          # <Trauma>
+          components:
+          - MedicalPatch
+          # </Trauma>
           tags:
           - Bottle
           - PillCanister
-          - MedicalPatch # Goobstation
-  - type: AutomationSlots # Goobstation
-    slots:
-    - !type:AutomatedSolution
-      input: PlumbingInput
-      output: PlumbingOutput
-      solutionName: buffer
-    - !type:AutomatedItemSlot
-      input: AutomationSlotBeaker
-      output: AutomationSlotBeaker
-      slotId: beakerSlot
-    - !type:AutomatedItemSlot # not very useful because you can't tell it to make pills
-      input: AutomationSlotBottles
-      output: AutomationSlotBottles
-      slotId: outputSlot
-    - !type:AutomatedBeakerSlot
-      input: PlumbingDispenser
-      output: PlumbingDispenser
   - type: Solution # Chemmaster is special in how it interacts with reagents. For now.
     id: buffer
   - type: DumpableSolution

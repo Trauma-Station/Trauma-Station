@@ -1,106 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: MobSiliconBase
-  id: MobButtBot
-  name: butt bot
-  description: A robot which farts
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Silicon/Bots/buttbot.rsi
-    state: buttbot
-  - type: AutoEmote
-    emotes:
-    - Fart
-  - type: HTN
-    rootTask:
-      task: RuminantCompound
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: MobState
-    allowedStates:
-    - Alive
-    - Dead
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      100: Dead
-  - type: Construction
-    graph: ButtBot
-    node: bot
-  - type: Fart
-  - type: EmoteOnDamage
-    emotes:
-    - Fart
-
-- type: entity
-  parent: MobButtBot
-  id: MobButtBotCyber
-  name: cyber butt bot
-  components:
-  - type: Sprite
-    state: cyberbuttbot
-  #- type: Construction # TODO: add CyberButt actual butt item
-  #  graph: CyberButtBot
-  #  node: bot
-
-- type: entity
-  parent: MobSiliconBase
-  id: MobDuckBot
-  name: duck bot
-  description: An amusing duck
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Silicon/Bots/duckbot.rsi
-    state: duckbot
-  - type: HTN
-    rootTask:
-      task: RuminantCompound
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 30
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: MobState
-    allowedStates:
-    - Alive
-    - Dead
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      30: Dead
-  - type: Construction
-    graph: DuckBot
-    node: bot
-  - type: EggLayer
-    eggSpawn:
-    - id: FoodEgg
-  - type: SpamEmitSound
-    minInterval: 15
-    maxInterval: 30
-    sound:
-      collection: AmusingDuckCollection
-  - type: InteractionPopup
-    successChance: 0.5
-    interactSuccessString: petting-success-duckbot
-    interactFailureString: petting-failure-duckbot
-    interactSuccessSound:
-      path: /Audio/Ambience/Objects/periodic_beep.ogg
-
-- type: entity
   id: BoogieBotSpawner
   name: boogie bot
   description: Get down on it!
@@ -210,7 +110,7 @@
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 100
+        damage: 175
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -221,15 +121,17 @@
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: Gun
-    fireRate: 5
+    fireRate: 2
     useKey: false
     selectedMode: FullAuto
     availableModes:
     - FullAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgeRifle
-    capacity: 125
+    proto: CartridgeLightRifleCaseless
+    capacity: 100
+  - type: BallisticAmmoSelfRefiller
+    autoRefillRate: 4
   - type: HTN
     rootTask:
       task: ED209Compound

@@ -30,7 +30,9 @@
   - type: TemperatureDamage
     heatDamageThreshold: 423
     coldDamageThreshold: 0
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: Insulated
   - type: MeleeWeapon
     soundHit:
@@ -79,6 +81,7 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
+    - Xeno
   - type: PointLight
     radius: 3
     energy: 2.3
@@ -118,7 +121,9 @@
   - type: TemperatureDamage
     heatDamageThreshold: 423
     coldDamageThreshold: 0
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: Insulated
   - type: MeleeWeapon
     soundHit:
@@ -278,7 +283,7 @@
     - Universal
   - type: MovementIgnoreGravity
   - type: ThermalVision
-    thermalShader: null
+    useShader: false
     color: "#BF40BF"
     activateSound: null
     deactivateSound: null

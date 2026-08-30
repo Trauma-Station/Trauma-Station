@@ -86,3 +86,11 @@
   parent: BaseRevMedical
   id: RevGauze
   result: Gauze
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: ChemiCompilerMachineCircuitboard
+  result: ChemiCompilerMachineCircuitboard
+  icon:
+    sprite: _Trauma/Structures/Machines/chemicompiler.rsi
+    state: chemicompiler_base

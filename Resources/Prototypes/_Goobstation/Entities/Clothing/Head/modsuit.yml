@@ -109,8 +109,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
     - type: HideLayerClothing
@@ -124,7 +123,7 @@
     enabled: false
     radius: 3
     energy: 2
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -194,8 +193,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
     - type: HideLayerClothing
@@ -209,7 +207,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -270,14 +268,13 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -332,14 +329,13 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -398,14 +394,13 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -464,8 +459,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.005
-      coolingCoefficient: 0.005
+      coefficient: 0.005
     - type: IdentityBlocker
     - type: HideLayerClothing
       slots:
@@ -478,7 +472,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -508,7 +502,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 2
   - type: FireProtection
-    reduction: 0.25
+    reduction: 1
 
 - type: entity
   parent: [ BaseClothingModsuitHelmetHideIdentity, BaseModsuitPieceRD ]
@@ -547,14 +541,13 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: PointLight
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight
@@ -617,8 +610,7 @@
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
+      coefficient: 0.01
     - type: IdentityBlocker
     - type: IngestionBlocker
     - type: HideLayerClothing
@@ -632,7 +624,7 @@
     enabled: false
     radius: 5
     energy: 3
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     netsync: true
   - type: HandheldLight

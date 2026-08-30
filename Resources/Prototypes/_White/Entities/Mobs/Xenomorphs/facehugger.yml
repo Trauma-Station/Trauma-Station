@@ -23,14 +23,16 @@
   - type: GhostRole
     name: ghost-role-information-facehugger-name
     description: ghost-role-information-facehugger-description
+    raffle:
+      settings: insta
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: mumble
+  - type: ReplacementAccent
+    accent: mumble
+    relayAccent: true
   - type: Damageable
     damageModifierSet: Xenomorph
   - type: Injurable
@@ -57,7 +59,7 @@
       types:
         Blunt: 0
   - type: Temperature
-    currentTemperature: 310.15
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
@@ -141,8 +143,6 @@
   - type: Speech
     speechSounds: Xenomorph
     speechVerb: SmallMob
-  - type: ReplacementAccent
-    accent: xeno
   - type: Vocal
     emoteSounds: Xenomorph
   - type: CollectiveMind

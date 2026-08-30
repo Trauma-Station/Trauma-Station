@@ -4,7 +4,8 @@ using Content.Trauma.Common.Wizard;
 // </Trauma>
 using Content.Client.Movement.Systems;
 using Content.Shared.Actions;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
+using Content.Shared.Ghost.Systems;
 using Content.Shared.NightVision;
 using Content.Shared.Overlays;
 using Robust.Client.Console;
@@ -31,10 +32,10 @@ namespace Content.Client.Ghost
 
         private bool _ghostVisibility = true;
 
-        private bool GhostVisibility
+        public bool GhostVisibility
         {
             get => _ghostVis.GhostsVisible() || _ghostVisibility; // Goob edit
-            set
+            private set
             {
                 if (_ghostVis.GhostsVisible()) // Goobstation
                     value = true;

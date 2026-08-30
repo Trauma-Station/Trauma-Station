@@ -2,7 +2,7 @@ using System.Linq;
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Robust.Client.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -23,27 +23,40 @@ public sealed class FillLevelSpriteTest : GameTest
     {
         var pair = Pair;
         var client = pair.Client;
-        var protoMan = client.ResolveDependency<IPrototypeManager>();
-        var componentFactory = client.ResolveDependency<IComponentFactory>();
-        var entMan = client.ResolveDependency<IEntityManager>();
+        // <Trauma> - microoptimisation
+        var protoMan = CProtoMan;
+        var entMan = CEntMan;
+        var factory = entMan.ComponentFactory;
+        var appearanceName = factory.CompName<AppearanceComponent>();
+        var spriteName = factory.CompName<SpriteComponent>();
+        var visualsName = factory.CompName<SolutionContainerVisualsComponent>();
+        // </Trauma>
         var spriteSystem = client.System<SpriteSystem>();
 
         await client.WaitAssertion(() =>
         {
+            // <Trauma> - optimise this shit
+            /* remove protos here, no need to sort it or allocate a list at all
             var protos = protoMan.EnumeratePrototypes<EntityPrototype>()
                 .Where(p => !p.Abstract)
                 .Where(p => !pair.IsTestPrototype(p))
                 .Where(p => p.TryComp<SolutionContainerVisualsComponent>(out _, componentFactory))
                 .OrderBy(p => p.ID)
                 .ToList();
+            */
 
             Assert.Multiple(() =>
             {
-                foreach (var proto in protos)
+                foreach (var proto in protoMan.EnumeratePrototypes<EntityPrototype>())
                 {
-                    Assert.That(proto.TryComp<SolutionContainerVisualsComponent>(out var visuals, componentFactory));
-                    Assert.That(proto.TryComp<SpriteComponent>(out var sprite, componentFactory));
-                    if (!proto.HasComponent<AppearanceComponent>(componentFactory))
+                    // get relevant prototype data here
+                    if (!proto.TryComp<SolutionContainerVisualsComponent>(visualsName, out var visuals) ||
+                        pair.IsTestPrototype(proto))
+                        continue;
+
+                    // use CompNames from above
+                    Assert.That(proto.TryComp<SpriteComponent>(spriteName, out var sprite));
+                    if (!proto.HasComp(appearanceName))
                     {
                         Assert.Fail(@$"{proto.ID} has SolutionContainerVisualsComponent but no AppearanceComponent.");
                     }
@@ -101,6 +114,7 @@ public sealed class FillLevelSpriteTest : GameTest
                     }
                 }
             });
+            // <Trauma>
         });
     }
 }

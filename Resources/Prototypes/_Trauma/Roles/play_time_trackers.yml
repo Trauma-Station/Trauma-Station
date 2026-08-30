@@ -5,3 +5,9 @@
 
 - type: playTimeTracker
   id: JobPhoneMerchant
+
+- type: playTimeTracker
+  id: JobRancher
+
+- type: playTimeTracker
+  id: JobDClass

@@ -11,23 +11,33 @@
         Blunt: 1
         Piercing: 1
         Slash: 1
-  # </Trauma>
-  # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/wirecutter_pickup.ogg
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
-  # Goobstation edit end
+  - type: Retractor
+    speed: 0.35
+  - type: Hemostat
+    speed: 0.6
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/Items/wirecutter.ogg
+      params:
+        variation: 0.125
+    endSound:
+      path: /Audio/Items/wirecutter.ogg
+      params:
+        variation: 0.125
+  # </Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
   - type: Tag
     tags:
-    - PlantSampleTaker
+    - DroneUsable # Trauma
     - Wirecutter
-    - DroneUsable # Goobstation
   - type: Sprite
     sprite: Objects/Tools/wirecutters.rsi
     layers:
@@ -35,7 +45,7 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
     - state: cutters-cutty-thingy
   - type: MeleeWeapon
-    animationRotation: -90 # WWDP
+    animationRotation: -90 # Trauma
     wideAnimationRotation: -90
     damage:
       types:
@@ -62,19 +72,7 @@
       Steel: 100
   - type: StaticPrice
     price: 30
-  - type: Retractor # Shitmed
-    speed: 0.35
-  - type: Hemostat # Shitmed
-    speed: 0.6
-  - type: SurgeryTool # Shitmed
-    startSound:
-      path: /Audio/Items/wirecutter.ogg
-      params:
-        variation: 0.125
-    endSound:
-      path: /Audio/Items/wirecutter.ogg
-      params:
-        variation: 0.125
+  - type: BotanySampleTaker
 
 - type: entity
   name: screwdriver
@@ -129,8 +127,8 @@
       path: /Audio/Items/screwdriver_drop.ogg
   - type: Tag
     tags:
+    - DroneUsable # Trauma
     - Screwdriver
-    - DroneUsable # Goobstation
   - type: Sprite
     sprite: Objects/Tools/screwdriver.rsi
     layers:
@@ -141,7 +139,7 @@
     sprite: Objects/Tools/screwdriver.rsi
     storedRotation: -90
   - type: MeleeWeapon
-    animationRotation: -90 # WWDP
+    animationRotation: -90 # Trauma
     wideAnimationRotation: -90
     attackRate: 1
     damage:
@@ -154,7 +152,7 @@
       - Screwing
     useSound:
       collection: Screwdriver
-  # <Trauma> - moved to Screwdriver proper
+  # <Trauma>
   #- type: RandomSprite
   #  available:
   #    - enum.DamageStateVisualLayers.Base:
@@ -177,8 +175,6 @@
     damage:
       types:
         Blunt: 5 # ow
-  # </Trauma>
-  # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/wrench_pickup.ogg
@@ -189,14 +185,14 @@
       path: /Audio/Items/wrench_drop.ogg
       params:
         volume: -2
-  # Goobstation edit end
+  # </Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wrench_drop.ogg
   - type: Tag
     tags:
+    - DroneUsable # Trauma
     - Wrench
-    - DroneUsable # Goobstation
   - type: Sprite
     sprite: Objects/Tools/wrench.rsi
     state: icon
@@ -206,7 +202,7 @@
       sprite: Objects/Tools/wrench.rsi
       state: storage
   - type: MeleeWeapon
-    animationRotation: 225 # WWDP
+    animationRotation: 225 # Trauma
     wideAnimationRotation: 135
     attackRate: 1.5
     damage:
@@ -239,15 +235,13 @@
     damage:
       types:
         Blunt: 2 # ow
-  # </Trauma>
-  # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/multitool_pickup.ogg
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/Items/multitool_drop.ogg
-  # Goobstation edit end
+  # </Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/multitool_drop.ogg
@@ -281,9 +275,9 @@
         type: NetworkConfiguratorBoundUserInterface
   - type: Tag
     tags:
+      - DroneUsable # Trauma
       - Multitool
       - DoorElectronicsConfigurator
-      - DroneUsable # Goobstation
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -303,12 +297,16 @@
   id: NetworkConfigurator
   description: A tool for linking devices together. Has two modes, a list mode for mass linking devices and a linking mode for advanced device linking.
   components:
-    # <Trauma> why is this pushed out more than the rest what the fuck
+    # <Trauma>
     - type: DamageOtherOnHit
       damage:
         types:
           Blunt: 1 # ow
-     # </Trauma>
+    - type: PhysicalComposition
+      materialComposition:
+        Steel: 25
+        Plastic: 25
+    # </Trauma>
     - type: EmitSoundOnLand
       sound:
         path: /Audio/Items/multitool_drop.ogg
@@ -353,10 +351,6 @@
     - type: GuideHelp
       guides:
       - Networking
-    - type: PhysicalComposition #Goobstation - Recycle update
-      materialComposition:
-        Steel: 25
-        Plastic: 25
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -381,6 +375,7 @@
   # </Trauma>
   - type: Tag
     tags:
+    - DroneUsable # Trauma
     - Powerdrill
   - type: Sprite
     sprite: Objects/Tools/drill.rsi
@@ -392,26 +387,37 @@
     qualities:
       - Screwing
     speedModifier: 1.5
-    useSound: /Audio/Items/drill_use.ogg
+    useSound: !type:SoundPathSpecifier
+      path: /Audio/Items/drill_use.ogg
+      params:
+        volume: -2.5
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Screwing
+      - behavior: [ Screwing ]
         sprite:
           sprite: Objects/Tools/drill.rsi
           state: drill_screw
-        useSound:
+        useSound: !type:SoundPathSpecifier
           path: /Audio/Items/drill_use.ogg
-        changeSound:
+          params:
+            volume: -2.5
+        changeSound: !type:SoundPathSpecifier
           path: /Audio/Items/change_drill.ogg
-      - behavior: Anchoring
+          params:
+            volume: -5
+      - behavior: [ Anchoring ]
         sprite:
           sprite: Objects/Tools/drill.rsi
           state: drill_bolt
-        useSound:
+        useSound: !type:SoundPathSpecifier
           path: /Audio/Items/drill_use.ogg
-        changeSound:
+          params:
+            volume: -2.5
+        changeSound: !type:SoundPathSpecifier
           path: /Audio/Items/change_drill.ogg
+          params:
+            volume: -5
   - type: PhysicalComposition
     materialComposition:
       Steel: 300
@@ -419,10 +425,12 @@
   - type: StaticPrice
     price: 100
   - type: MeleeWeapon
+    # <Trauma>
+    animationRotation: 90
+    range: 1.4
+    # </Trauma>
     wideAnimationRotation: -90
     attackRate: 1.5
-    animationRotation: 90 # WWDP
-    range: 1.4
     damage:
       types:
         Piercing: 10
@@ -440,6 +448,10 @@
     damage:
       types:
         Blunt: 5 # ow
+  - type: Tag
+    tags:
+    - DroneUsable
+    - RCD # specifically not using the component for that because RPD also uses it
   # </Trauma>
   - type: RCD
     availablePrototypes:
@@ -463,7 +475,7 @@
     - CableTerminal
     - Deconstruct
   - type: LimitedCharges
-    maxCharges: 45
+    maxCharges: 45 # Trauma - was 30
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -487,52 +499,6 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.RcdUiKey.Key
-  - type: Tag
-    tags:
-      - DroneUsable # Goobstation
-      - RCD # Trauma
-
-- type: entity
-  id: RPD
-  parent: RCD
-  name: RPD
-  description: The rapid piping device allows for the quick placement and removal of atmospheric-related buildings requires compressive matter to use.
-  components:
-  - type: RCD
-    isRpd: true
-    availablePrototypes:
-    - PipeFourway
-    - PipeStraight
-    - PipeBend
-    - PipeTJunction
-    - OutletInjector
-    - ManualValve
-    - VolumetricPump
-    - PressurePump
-    - VentScrubber
-    - PressureValve
-    - DualPortVent
-    - VentGas
-    - VentPassive
-    - MixerGas
-    - Radiator
-    - RadiatorBend
-    - SignalValve
-    - CanisterPort
-    - FilterGas
-    # <Goobstation>
-    - FilterInline
-    - RadiatorInline
-    - RadiatorInlineBend
-    # </Goobstation>
-    - Deconstruct
-  - type: LimitedCharges
-    maxCharges: 90
-  - type: Sprite
-    sprite: Objects/Tools/rpd.rsi
-  - type: Tag # Trauma - remove RCD tag to prevent revs trolling
-    tags:
-    - DroneUsable
 
 - type: entity
   id: RCDEmpty
@@ -590,6 +556,10 @@
   id: Omnitool
   description: A drone's best friend.
   components:
+  # <Trauma>
+  - type: UseDelay # for insta prying
+    delay: 0
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/omnitool.rsi
     state: omnitool-screwing
@@ -601,8 +571,6 @@
     - Multitool
   - type: Prying
     enabled: false
-  - type: UseDelay # Goobstation - For insta prying
-    delay: 0 # Goobstation - no switch CD
   - type: Tool
     qualities:
       - Screwing
@@ -612,7 +580,7 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Screwing
+      - behavior: [ Screwing ]
         sprite:
           sprite: Objects/Tools/omnitool.rsi
           state: omnitool-screwing
@@ -620,7 +588,7 @@
           path: /Audio/Items/drill_use.ogg
         changeSound:
           path: /Audio/Items/change_drill.ogg
-      - behavior: Prying
+      - behavior: [ Prying ]
         sprite:
           sprite: Objects/Tools/omnitool.rsi
           state: omnitool-prying
@@ -628,7 +596,7 @@
           path: /Audio/Items/jaws_pry.ogg
         changeSound:
           path: /Audio/Items/change_drill.ogg
-      - behavior: Anchoring
+      - behavior: [ Anchoring ]
         sprite:
           sprite: Objects/Tools/omnitool.rsi
           state: omnitool-wrenching
@@ -636,7 +604,7 @@
           path: /Audio/Items/ratchet.ogg
         changeSound:
           path: /Audio/Items/change_drill.ogg
-      - behavior: Cutting
+      - behavior: [ Cutting ]
         sprite:
           sprite: Objects/Tools/omnitool.rsi
           state: omnitool-snipping
@@ -644,7 +612,7 @@
           path: /Audio/Items/jaws_cut.ogg
         changeSound:
           path: /Audio/Items/change_drill.ogg
-      - behavior: Pulsing
+      - behavior: [ Pulsing ]
         sprite:
           sprite: Objects/Tools/omnitool.rsi
           state: omnitool-pulsing
@@ -668,7 +636,7 @@
     sprite: Objects/Tools/shovel.rsi
     state: icon
   - type: MeleeWeapon
-    animationRotation: -45 # WWDP
+    animationRotation: -45 # Trauma
     wideAnimationRotation: 45
     damage:
       types:
@@ -711,7 +679,7 @@
     slots:
     - Belt
   - type: MeleeWeapon
-    animationRotation: -45 # WWDP
+    animationRotation: -45 # Trauma
     wideAnimationRotation: -135
     damage:
       types:

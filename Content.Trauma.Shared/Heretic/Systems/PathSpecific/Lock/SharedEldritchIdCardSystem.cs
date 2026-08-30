@@ -55,7 +55,7 @@ public abstract partial class SharedEldritchIdCardSystem : EntitySystem
 
         if (_portal.IsDoorOccupied(target, args.User))
         {
-            _popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-occupied"), args.User, args.User);
             return;
         }
 
@@ -235,7 +235,7 @@ public abstract partial class SharedEldritchIdCardSystem : EntitySystem
         ent.Comp.Inverted = !ent.Comp.Inverted;
         DirtyField(ent.Owner, ent.Comp, nameof(EldritchIdCardComponent.Inverted));
 
-        _popup.PopupClient(Loc.GetString("eldritch-id-card-component-on-invert", ("inverted", ent.Comp.Inverted)),
+        _popup.PopupEntity(Loc.GetString("eldritch-id-card-component-on-invert", ("inverted", ent.Comp.Inverted)),
             user,
             user);
     }
@@ -287,7 +287,7 @@ public abstract partial class SharedEldritchIdCardSystem : EntitySystem
         ent.Comp.Inverted = !ent.Comp.Inverted;
         DirtyField(ent.AsNullable(), nameof(LockPortalComponent.Inverted));
 
-        _popup.PopupClient(Loc.GetString("eldritch-id-card-component-portal-inverted",
+        _popup.PopupEntity(Loc.GetString("eldritch-id-card-component-portal-inverted",
                 ("inverted", ent.Comp.Inverted)),
             user,
             user);

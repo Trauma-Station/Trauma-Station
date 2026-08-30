@@ -332,7 +332,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         var cost = ent.Comp.Prints[i].Cost;
         if (!TryUseBiomass(ent, cost))
         {
-            _popup.PopupClient(Loc.GetString("genetics-console-missing-biomass"), ent, user);
+            _popup.PopupEntity(Loc.GetString("genetics-console-missing-biomass"), ent, user);
             return;
         }
 
@@ -403,7 +403,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             var you = Loc.GetString("genetics-console-damages-you");
             var others = Loc.GetString("genetics-console-damages-others");
             _audio.PlayPvs(ent.Comp.SequenceFailSound, ent);
-            _popup.PopupPredicted(you, others, ent, mob, PopupType.LargeCaution);
+            _popup.PopupEntity(you, others, ent, mob, PopupType.LargeCaution);
             _damage.ChangeDamage(mob, ent.Comp.SequenceFailDamage);
             return false;
         }

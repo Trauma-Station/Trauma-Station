@@ -4,11 +4,10 @@
   antagonist: true
   setPreference: true
   objective: roles-antag-rev-head-objective
+  guides: [ Revolutionaries ]
   requirements:
-  - !type:DepartmentTimeRequirement # Goob - was overall
-    department: Command # Goob - was overall
-    time: 10h
-  guides: [ Revolutionaries ] # Goob
+  - !type:OverallPlaytimeRequirement
+    time: 1h
   creditImage: /Textures/_Trauma/EndCredits/Antags/revolution.png # Trauma
 
 - type: antagSpecifier
@@ -36,7 +35,18 @@
   - type: HeadRevolutionary
   mindRoles:
   - MindRoleHeadRevolutionary
-  jobBlacklist: [ Mime ] # Trauma - mimes cant convert people without breaking vow...
+  # <Trauma>
+  effects:
+  - !type:AddImplant
+    implant: RadioImplantHeadrev
+  jobBlacklist:
+  - Mime # can't speak so can't convert anyone
+  - NanotrasenRepresentative
+  - HeadOfPersonnel
+  - ChiefMedicalOfficer
+  - ResearchDirector
+  - ChiefEngineer
+  # </Trauma>
 
 # TODO: Make it so creating new revolutionaries uses antag prototypes! This saves a *lot* of boilerplate for conversion antags.
 

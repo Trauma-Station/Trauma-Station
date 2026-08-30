@@ -9,6 +9,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
+using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Mobs.Components;
@@ -20,7 +21,6 @@ using Content.Shared.Speech;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Common.Contests;
 using Content.Trauma.Common.Grab;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
@@ -39,7 +39,6 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// </summary>
 public sealed partial class PullingSystem
 {
-    [Dependency] private CommonContestsSystem _contests = default!;
     [Dependency] private CommonGrabThrownSystem _grabThrown = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
@@ -47,6 +46,7 @@ public sealed partial class PullingSystem
     [Dependency] private SharedStaminaSystem _stamina = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
 
     public const float NudgeImpulse = 2f;
 
@@ -309,14 +309,13 @@ public sealed partial class PullingSystem
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        var massModifier = _contests.MassContest(puller, pullable);
-        pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] / massModifier * escapeAttemptModifier, 0f, 1f);
+        pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] * escapeAttemptModifier, 0f, 1f);
 
         _alertsSystem.ShowAlert(puller.Owner, puller.Comp.PullingAlert, puller.Comp.PullingAlertSeverity[stage]);
         _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
 
         _blocker.UpdateCanMove(pullable);
-        _modifierSystem.RefreshMovementSpeedModifiers(puller);
+        _modifierSystem.RefreshMovementSpeedModifiers(puller.Owner);
 
         var stageKey = puller.Comp.GrabStage.ToString().ToLower();
         var pullerName = Identity.Entity(puller, EntityManager);
@@ -359,11 +358,11 @@ public sealed partial class PullingSystem
         var delta = newVirtualItemsCount - virtualItemsCount;
 
         // Adding new virtual items
-        if (delta > 0)
+        if (delta > 0 && (_handsQuery.TryComp(puller, out var hands) || puller.Comp.NeedsHands))
         {
             for (var i = 0; i < delta; i++)
             {
-                if (!_handsSystem.TryGetEmptyHand(puller.Owner, out _))
+                if (!_handsSystem.TryGetEmptyHand((puller.Owner, hands), out _))
                 {
                     _popup.PopupClient(Loc.GetString("popup-grab-need-hand"), puller, puller, PopupType.Medium);
 

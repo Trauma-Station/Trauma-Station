@@ -43,6 +43,7 @@
     - Insurgency
     - CosmicCult
     - XenomorphsInfestationRoundstart
+    - Spies
     # </Trauma>
     - Nukeops
     - Traitor
@@ -50,6 +51,7 @@
     - Zombie
     - Wizard
     - Xenoborgs
+    - Changeling
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     - SpaceTrafficControlEventScheduler
@@ -78,6 +80,7 @@
     - Insurgency
     - CosmicCult
     - XenomorphsInfestationRoundstart
+    - Spies
     # </Trauma>
     - Nukeops
     - Traitor
@@ -85,6 +88,7 @@
     - Zombie
     - Wizard
     - Xenoborgs
+    - Changeling
     - BasicStationEventScheduler
     - KesslerSyndromeScheduler
     - MeteorSwarmMildScheduler

@@ -15,11 +15,15 @@
   - type: Matchbox
 
 - type: entity
-  parent: [ClothingShoesMilitaryBase, BaseSecurityCargoContraband] # Goob edit - Also allowed for Cargo
+  parent: [ClothingShoesMilitaryBase, BaseSecuritySalvageContraband] # Trauma - added Salvage to contraband
   id: ClothingShoesBootsJack
   name: jackboots
   description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/jackboots.rsi
   - type: Clothing
@@ -56,6 +60,10 @@
   name: combat boots
   description: Robust combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/combatboots.rsi
   - type: Clothing

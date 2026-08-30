@@ -5,6 +5,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -30,14 +31,15 @@ public abstract partial class SharedHereticSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private ISerializationManager _serialization = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
+    [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected ISharedChatManager ChatMan = default!;
     [Dependency] protected ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected StatusEffectsSystem Status = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
 
     [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
@@ -49,12 +51,12 @@ public abstract partial class SharedHereticSystem : EntitySystem
     public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
     public static readonly ProtoId<CurrencyPrototype> SideCurrency = "SideKnowledgePoint";
 
-    public static readonly Dictionary<string, FixedPoint2> OneKnowledgePoint = new()
+    public static readonly Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> OneKnowledgePoint = new()
     {
         {Currency, 1},
     };
 
-    public static readonly Dictionary<string, FixedPoint2> OneKnowledgeOneSidePoint = new()
+    public static readonly Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> OneKnowledgeOneSidePoint = new()
     {
         {Currency, 1},
         {SideCurrency, 1},
@@ -205,7 +207,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
     }
 
     public void UpdateKnowledge(EntityUid uid,
-        Dictionary<string, FixedPoint2> knowledge,
+        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> knowledge,
         bool showText = true,
         bool playSound = true,
         MindContainerComponent? mindContainer = null)
@@ -243,6 +245,11 @@ public abstract partial class SharedHereticSystem : EntitySystem
             var ev = _serialization.CreateCopy(data.Event, notNullableOverride: true);
             RaiseKnowledgeEvent(body.Value, ev, false);
             ent.Comp2.KnowledgeEvents.Add(ev);
+        }
+
+        if (data.Effects is { } effects && body != null)
+        {
+            _effects.ApplyEffects(body.Value, effects);
         }
 
         if (data.ActionPrototypes is { Count: > 0 })
@@ -296,7 +303,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
+        if (Timing.ApplyingState || TerminatingOrDeleted(uid))
             return;
 
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)
@@ -318,7 +325,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public virtual void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
         EntityUid? user,
-        Dictionary<string, FixedPoint2> knowledge,
+        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> knowledge,
         bool showText = true,
         bool playSound = true)
     {

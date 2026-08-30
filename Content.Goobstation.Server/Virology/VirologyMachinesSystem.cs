@@ -18,7 +18,7 @@ namespace Content.Goobstation.Server.Virology;
 public sealed partial class VirologyMachinesSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
-    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PowerReceiverSystem _power = default!;
@@ -41,6 +41,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveVirologyMachineComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            // TODO: kys israelgpt using events that 1 thing handles IN AN UPDATE LOOP
             var checkEv = new VirologyMachineCheckEvent();
             RaiseLocalEvent(uid, ref checkEv);
             if (checkEv.Cancelled)
@@ -54,7 +55,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
             if (!_power.IsPowered(uid))
             {
                 SetAppearance(uid, false);
-                comp.EndTime += TimeSpan.FromSeconds(frameTime);
+                comp.EndTime += TimeSpan.FromSeconds(frameTime); // TODO: kys israelgpt
                 continue;
             }
 
@@ -78,6 +79,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         if (!TryComp<DiseaseSwabComponent>(args.Entity, out _))
             return;
 
+        _audio.Stop(ent.Comp.SoundEntity);
         EnsureComp<ActiveVirologyMachineComponent>(ent, out var active);
         var audio = _audio.PlayPvs(ent.Comp.AnalysisSound, ent, AudioParams.Default.WithLoop(true).WithVariation(0.15f));
         if (audio.HasValue)
@@ -87,32 +89,33 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
 
     private void OnComponentInit(Entity<VirologyMachineComponent> ent, ref ComponentInit args)
     {
-        if (_itemSlots.TryGetSlot(ent, VirologyMachineComponent.SwabSlotId, out var slot))
+        if (!TryComp<ItemSlotsComponent>(ent, out var slots))
+            return;
+
+        // TODO: kys israelgpt
+        if (_slots.TryGetSlot((ent, slots), VirologyMachineComponent.SwabSlotId, out var slot))
             ent.Comp.SwabSlot = slot;
         else
-            _itemSlots.AddItemSlot(ent, VirologyMachineComponent.SwabSlotId, ent.Comp.SwabSlot);
+            _slots.AddItemSlot((ent, slots), VirologyMachineComponent.SwabSlotId, ent.Comp.SwabSlot);
     }
 
     private void OnAnalyzerCheck(Entity<VirologyMachineComponent> ent, ref VirologyMachineCheckEvent args)
     {
-        args.Cancelled = !_itemSlots.TryGetSlot(ent, VirologyMachineComponent.SwabSlotId, out var slot) || slot.Item == null;
+        args.Cancelled = !_slots.TryGetSlot(ent.Owner, VirologyMachineComponent.SwabSlotId, out var slot) || slot.Item == null;
     }
 
     private void OnMachineDone(Entity<VirologyMachineComponent> ent, ref VirologyMachineDoneEvent args)
     {
         RemCompDeferred<ActiveVirologyMachineComponent>(ent);
-        if (ent.Comp.SoundEntity != null)
-        {
-            _audio.Stop(ent.Comp.SoundEntity);
-            ent.Comp.SoundEntity = null;
-        }
+
+        ent.Comp.SoundEntity = _audio.Stop(ent.Comp.SoundEntity);
 
         if (!args.Success
-            || !_itemSlots.TryGetSlot(ent, VirologyMachineComponent.SwabSlotId, out var slot)
+            || !_slots.TryGetSlot(ent.Owner, VirologyMachineComponent.SwabSlotId, out var slot)
             || slot.Item == null)
             return;
 
-        if(!ent.Comp.Vaccinator)
+        if (!ent.Comp.Vaccinator) // TODO: kys israelgpt blindly using events with 0 human thought then pulling this shit
             AnalyzeSwab(ent, (slot.Item.Value, null));
         else
             CreatePen(ent, (slot.Item.Value, null));
@@ -134,7 +137,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
             vaccineComponent.DiseaseUid = swab.Comp.DiseaseUid.Value;
         }
 
-        _itemSlots.TryEject(ent, ent.Comp.SwabSlot, null, out _);
+        _slots.TryEject(ent.Owner, ent.Comp.SwabSlot, null, out _);
     }
 
     private void AnalyzeSwab(Entity<VirologyMachineComponent> ent, Entity<DiseaseSwabComponent?> swab)
@@ -168,7 +171,7 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         var printed = Spawn(ent.Comp.PaperPrototype, Transform(ent).Coordinates);
         _paper.SetContent((printed, EnsureComp<PaperComponent>(printed)), report.ToString());
 
-        _itemSlots.TryEject(ent, ent.Comp.SwabSlot, null, out _);
+        _slots.TryEject(ent.Owner, ent.Comp.SwabSlot, null, out _);
         _audio.PlayPvs(ent.Comp.AnalyzedSound, ent);
     }
 

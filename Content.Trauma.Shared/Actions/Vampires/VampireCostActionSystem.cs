@@ -47,7 +47,7 @@ public sealed partial class VampireCostActionSystem : EntitySystem
         if (_vampire.HasUsableBlood(args.User, ent.Comp.BloodCost))
             return;
 
-        _popup.PopupClient(ent.Comp.Popup,
+        _popup.PopupEntity(ent.Comp.Popup,
             args.User,
             args.User,
             PopupType.MediumCaution);

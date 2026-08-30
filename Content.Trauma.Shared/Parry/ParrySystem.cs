@@ -22,7 +22,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Random;
+using Content.Trauma.Shared.Weapons.Classes;
 
 namespace Content.Trauma.Shared.Parry;
 
@@ -45,22 +45,10 @@ public sealed partial class ParrySystem : EntitySystem
 
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
     [Dependency] private EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
+    [Dependency] private EntityQuery<WeaponClassComponent> _classQuery = default!;
 
-    private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
     private static readonly TimeSpan ExhaustionRegenDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextRegen = TimeSpan.Zero;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ParryComponent, HeldRelayedEvent<ProjectileReflectAttemptEvent>>(OnReflectProjectile);
-        SubscribeLocalEvent<ParryComponent, HeldRelayedEvent<HitScanReflectAttemptEvent>>(OnReflectHitscan);
-        SubscribeLocalEvent<ParryComponent, HeldRelayedEvent<BeforeHarmfulActionEvent>>(OnParry);
-        SubscribeLocalEvent<ParryComponent, ExaminedEvent>(OnExamine);
-
-        SubscribeLocalEvent<ParryExhaustionComponent, ComponentShutdown>(OnShutdown);
-    }
 
     public override void Update(float frameTime)
     {
@@ -82,15 +70,13 @@ public sealed partial class ParrySystem : EntitySystem
             if (comp.Exhaustion <= 0f || now < comp.ExhaustionRegenTimer)
                 continue;
 
-            var level = GetSkillLevel(uid);
-            var regen = comp.ExhaustionRegenRate * _knowledge.SharpCurve(level, 50 );
-
-            comp.Exhaustion = Math.Clamp(comp.Exhaustion - regen, 0f, 1f);
+            comp.Exhaustion = Math.Clamp(comp.Exhaustion - comp.ExhaustionRegenRate, 0f, 1f);
             UpdateAlert((uid, comp));
             Dirty(uid, comp);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<ParryExhaustionComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
@@ -99,6 +85,7 @@ public sealed partial class ParrySystem : EntitySystem
         _alert.ClearAlert(ent.Owner, ent.Comp.Alert);
     }
 
+    [SubscribeLocalEvent]
     private void OnReflectProjectile(Entity<ParryComponent> ent,
         ref HeldRelayedEvent<ProjectileReflectAttemptEvent> args)
     {
@@ -108,6 +95,7 @@ public sealed partial class ParrySystem : EntitySystem
             args.Args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnReflectHitscan(Entity<ParryComponent> ent, ref HeldRelayedEvent<HitScanReflectAttemptEvent> args)
     {
         if (args.Args.Reflected)
@@ -126,6 +114,7 @@ public sealed partial class ParrySystem : EntitySystem
         args.Args.Reflected = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnParry(Entity<ParryComponent> ent, ref HeldRelayedEvent<BeforeHarmfulActionEvent> args)
     {
         if (args.Args.Cancelled || args.Args.Type != HarmfulActionType.Harm)
@@ -143,7 +132,7 @@ public sealed partial class ParrySystem : EntitySystem
             || !_physicsQuery.TryComp(projectile, out var physics)
             || (reflector.Comp.Reflects & reflective.Reflective) == 0x0 // Check if the reflective types match
             || !_toggle.IsActivated(reflector.Owner) // If the item can be toggled (e.g. esword) check if it's on
-            || !CheckKnowledge(user, reflector.Comp.ReflectMinSkill)
+            || !CheckKnowledge(user, reflector, reflector.Comp.ReflectMinSkill)
             || !CheckAndUpdateExhaustion(user, reflector, true))
             return false;
 
@@ -196,7 +185,7 @@ public sealed partial class ParrySystem : EntitySystem
     {
         if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 // Check if the reflective types match
             || !_toggle.IsActivated(reflector.Owner) // If the item can be toggled (e.g. esword) check if it's on
-            || !CheckKnowledge(user, reflector.Comp.ReflectMinSkill)
+            || !CheckKnowledge(user, reflector, reflector.Comp.ReflectMinSkill)
             || !CheckAndUpdateExhaustion(user, reflector, true))
         {
             newDirection = null;
@@ -225,7 +214,7 @@ public sealed partial class ParrySystem : EntitySystem
     private bool TryParry(Entity<ParryComponent> reflector, EntityUid user, EntityUid attacker)
     {
         if (!_toggle.IsActivated(reflector.Owner)
-            || !CheckKnowledge(user, reflector.Comp.ReflectMinSkill)
+            || !CheckKnowledge(user, reflector, reflector.Comp.ReflectMinSkill)
             || !CheckAndUpdateExhaustion(user, reflector, false)
             || user == attacker) // Me when I try to kill myself, but I parry the hit
             return false;
@@ -240,19 +229,21 @@ public sealed partial class ParrySystem : EntitySystem
     /// <summary>
     /// Check if the entity has sufficient knowledge to parry/reflect
     /// </summary>
-    private bool CheckKnowledge(EntityUid user, int minLevel)
-    {
-        return GetSkillLevel(user) >= minLevel;
-    }
+    private bool CheckKnowledge(EntityUid user, EntityUid weapon, int minLevel)
+        => GetSkillLevel(user, weapon) >= minLevel;
 
-    private int GetSkillLevel(EntityUid user)
-    {
-        return ProtoMan.Resolve(MeleeKnowledge, out var skillProto)
-               && _knowledge.GetContainer(user) is { } brain
-               && _knowledge.GetKnowledge(brain, skillProto) is { } skill
+    private int GetSkillLevel(EntityUid user, EntityUid weapon)
+        => _classQuery.TryComp(weapon, out var classComp)
+           && ProtoMan.Resolve(classComp.Class, out var classProto)
+           && ProtoMan.Resolve(classProto.Knowledge, out var skillProto)
+            ? GetSkillLevel(user, skillProto)
+            : 88; // No knowledge defined, assume we can just freely parry with this
+
+    private int GetSkillLevel(EntityUid user, EntProtoId skillProto)
+        => _knowledge.GetContainer(user) is { } brain
+           && _knowledge.GetKnowledge(brain, skillProto) is { } skill
             ? skill.Comp.NetLevel
             : 0;
-    }
 
     /// <summary>
     /// Check if the entity is too exhausted to parry/reflect and add an appropriate amount of exhaustion
@@ -275,6 +266,7 @@ public sealed partial class ParrySystem : EntitySystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<ParryComponent> ent, ref ExaminedEvent args)
     {
         AppendParryExamine(ent, ref args);
@@ -286,7 +278,7 @@ public sealed partial class ParrySystem : EntitySystem
         if (ent.Comp.ParryExhaustionCost > 1f)
             return;
 
-        var level = GetSkillLevel(args.Examiner);
+        var level = GetSkillLevel(args.Examiner, ent);
         if (level < ent.Comp.ParryMinSkill)
         {
             args.PushMarkup(Loc.GetString("parry-component-examine-lowskill"));
@@ -320,7 +312,7 @@ public sealed partial class ParrySystem : EntitySystem
 
         var msg = ContentLocalizationManager.FormatListToOr(typeList);
 
-        var level = GetSkillLevel(args.Examiner);
+        var level = GetSkillLevel(args.Examiner, ent);
         if (level < ent.Comp.ReflectMinSkill)
         {
             args.PushMarkup(Loc.GetString("parry-component-examine-reflect-lowskill", ("type", msg)));
@@ -341,7 +333,7 @@ public sealed partial class ParrySystem : EntitySystem
 
     private void PlayAudioAndPopup(SoundSpecifier? sound, EntityUid user, EntityUid? shooter)
     {
-        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, shooter);
+        _popup.PopupEntity(Loc.GetString("reflect-shot"), user, shooter);
         _audio.PlayPredicted(sound, user, shooter);
     }
 

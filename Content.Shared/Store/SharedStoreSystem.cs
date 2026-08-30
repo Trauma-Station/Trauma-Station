@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
 using Content.Shared.Store.Events;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Store;
 
@@ -33,9 +34,9 @@ public abstract partial class SharedStoreSystem : EntitySystem
         SubscribeLocalEvent<RemoteStoreComponent, GetStoreEvent>(OnGetStore);
         SubscribeLocalEvent<RemoteStoreComponent, ImplantRelayEvent<GetStoreEvent>>((x, ref y) =>
         {
-            var ev = y.Event;
+            var ev = y.Args;
             OnGetStore(x, ref ev);
-            y.Event = ev;
+            y.Args = ev;
         });
         SubscribeLocalEvent<RemoteStoreComponent, ImplantRelayEvent<CurrencyInsertAttemptEvent>>(OnImplantInsertAttempt);
         SubscribeLocalEvent<StoreComponent, IntrinsicStoreActionEvent>(OnIntrinsicStoreAction);
@@ -54,7 +55,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
 
     private void OnImplantInsertAttempt(Entity<RemoteStoreComponent> implant, ref ImplantRelayEvent<CurrencyInsertAttemptEvent> args)
     {
-        var ev = args.Event;
+        var ev = args.Args;
 
         // Only allow insertion if the person implanted is doing the action.
         if (ev.User == ev.Target)
@@ -62,7 +63,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
         else
             ev.Cancel();
 
-        args.Event = ev;
+        args.Args = ev;
     }
 
     private void OnAfterInteract(EntityUid uid, CurrencyComponent component, AfterInteractEvent args)
@@ -152,7 +153,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
     /// <param name="uid"></param>
     /// <param name="component"></param>
     /// <returns>The value of the currency</returns>
-    public Dictionary<string, FixedPoint2> GetCurrencyValue(EntityUid uid, CurrencyComponent component)
+    public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> GetCurrencyValue(EntityUid uid, CurrencyComponent component)
     {
         var amount = EntityManager.GetComponentOrNull<StackComponent>(uid)?.Count ?? 1;
         return component.Price.ToDictionary(v => v.Key, p => p.Value * amount);
@@ -196,7 +197,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
     /// <param name="uid"></param>
     /// <param name="store">The store to add it to</param>
     /// <returns>Whether or not the currency was succesfully added</returns>
-    public bool TryAddCurrency(Dictionary<string, FixedPoint2> currency, EntityUid uid, StoreComponent? store = null)
+    public bool TryAddCurrency(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> currency, EntityUid uid, StoreComponent? store = null)
     {
         if (!Resolve(uid, ref store))
             return false;

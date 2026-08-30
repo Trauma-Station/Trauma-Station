@@ -34,11 +34,6 @@
   result: BookAirlocks
 
 - type: latheRecipe
-  id: BookToys
-  parent: BaseBluePrintRecipe
-  result: BookToys
-
-- type: latheRecipe
   id: BookBananium
   parent: BaseBluePrintRecipe
   result: BookBananium

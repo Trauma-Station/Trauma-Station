@@ -28,8 +28,7 @@
         Slash: 0.6
         Piercing: 0.6 # Trauma, was 0.4
         Ballistic: 0.5 # Trauma
-        Heat: 0.5
-        Asphyxiation: 0.6 # Kinda their whole thing so why not
+        Heat: 0.6
   - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -63,7 +62,7 @@
     color: "#42a4ae"
     radius: 7
     energy: 5.4
-    mask: /Textures/_DV/CosmicCult/LightMasks/cosmic.png
+    lightMask: Cosmic
     autoRot: true
     netsync: false
   - type: LightBehaviour

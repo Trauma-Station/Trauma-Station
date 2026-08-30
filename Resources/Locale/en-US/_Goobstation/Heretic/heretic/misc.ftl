@@ -12,8 +12,11 @@ heretic-knowledge-loss = You're forgotten something
 
 heretic-clothing-component-fail = Cannot wear this!
 heretic-clothing-component-equip = You can feel yourself unravelling while you equip the {$item}!
+heretic-clothing-component-wear = You can feel yourself unravelling while wearing the {$item}!
 
 heretic-protective-blade-component-no-targets = No targets!
+
+heretic-sacraments-can-attack = You can now safely attack {$heretic}!
 
 rust-corruption-silicon-damage = You are being corrupted by the rust!
 
@@ -27,6 +30,7 @@ void-ascend-begin = A snowstorm suddenly appears from outside the windows. An ov
 void-ascend-end = The snowstorm begins to fade away...
 void-ascend-restart = The snowstorm suddenly appears again...
 
+ghoul-unghoulify-message = {CAPITALIZE($ent)} has been freed from the chains of Mansus!
 ghoul-weapon-comp-examine = [color=red]This weapon seems extremely fragile. On further inspection it appears to be made of flesh and blood. It belongs to one of the creatures of the mansus and will disappear when the creature dies.[/color]
 
 injector-component-drain-mode-name = Drain

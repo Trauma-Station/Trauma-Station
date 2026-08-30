@@ -1,10 +1,12 @@
+// <Trauma>
+using Content.Trauma.Common.Ghost;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.GameTicking.Events;
 using Content.Server.Ghost.Roles.Components;
-using Content.Server.Ghost.Roles.Events;
 using Content.Shared.Ghost.Roles.Raffles;
 using Content.Server.Ghost.Roles.UI;
 using Content.Shared.Administration;
@@ -35,6 +37,8 @@ using Content.Shared.Verbs;
 using Robust.Shared.Collections;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Roles.Components;
+using Content.Shared.Ghost.Systems;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -617,11 +621,14 @@ public sealed partial class GhostRoleSystem : EntitySystem
         _mindSystem.TransferTo(newMind, mob);
 
         _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
-        // <Trauma> - always add the job too
+        // <Trauma>
+        // always add the job too
         if (role.JobProto is { } job)
         {
             _roleSystem.MindAddJobRole(newMind, newMind.Comp, silent: false, job);
         }
+        var ev = new GhostRoleCreatedMindEvent(mob, newMind);
+        RaiseLocalEvent(roleUid, ref ev);
         // </Trauma>
     }
 
@@ -804,11 +811,13 @@ public sealed partial class GhostRoleSystem : EntitySystem
         if (string.IsNullOrEmpty(component.Prototype))
             throw new NullReferenceException("Prototype string cannot be null or empty!");
 
-        var mob = Spawn(component.Prototype, Transform(uid).Coordinates);
-        _transform.AttachToGridOrMap(mob);
+        if (!_transform.TryGetMapOrGridCoordinates(uid, out var spawnCoordinates))
+            return;
+
+        var mob = Spawn(component.Prototype, spawnCoordinates.Value);
 
         var spawnedEvent = new GhostRoleSpawnerUsedEvent(uid, mob);
-        RaiseLocalEvent(mob, spawnedEvent, true); // Goob Edit: Broadcast
+        RaiseLocalEvent(mob, ref spawnedEvent, true); // Goob Edit: Broadcast
 
         if (ghostRole.MakeSentient)
             _mindSystem.MakeSentient(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);

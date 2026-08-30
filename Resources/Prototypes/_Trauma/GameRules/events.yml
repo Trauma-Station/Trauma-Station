@@ -24,7 +24,7 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
-    - id: MorphRule
+    - id: MorphMidroundRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -109,12 +109,12 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     minimumPlayers: 30
-    weight: 3
+    weight: 1.5
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 3, 6
       children:
       - id: MobCoconutCrab
         weight: 0.75
@@ -297,7 +297,7 @@
 
 - type: entity
   parent: BaseAntagGhostRoleRule
-  id: FugitiveHunterRule
+  id: FugitiveHunterRuleSyndicate
   components:
   - type: AntagGhostCharacterRule
   - type: AntagObjectives
@@ -312,13 +312,82 @@
     maxDifficulty: 5
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+    gridPath: /Maps/_Trauma/Shuttles/SyndiePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-hunter-name
+    agentName: ghost-role-information-fugitive-hunter-name
     antags:
     - !type:FixedAntagCount
-      proto: FugitiveHunter
+      proto: FugitiveHunterSyndicate
       count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleSpacepol
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterArrestFugitiveObjective
+    - HunterArrestFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterSpacepol
+      count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleRussians
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterArrestFugitiveObjective
+    - HunterKillFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/RussianHunterShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterRussian
+      count: 4
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleBountyHunter
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterKillFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/MercHunterShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterBounty
+      count: 1
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect

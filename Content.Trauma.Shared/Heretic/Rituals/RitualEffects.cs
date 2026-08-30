@@ -8,7 +8,6 @@ using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -157,8 +156,8 @@ public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<Fin
 
 public sealed partial class UpdateKnowledgeEffect : BaseRitualEffect<UpdateKnowledgeEffect>
 {
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, CurrencyPrototype>))]
-    public Dictionary<string, FixedPoint2> Knowledge;
+    [DataField(required: true)]
+    public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> Knowledge;
 }
 
 public sealed partial class RemoveRitualsEffect : BaseRitualEffect<RemoveRitualsEffect>

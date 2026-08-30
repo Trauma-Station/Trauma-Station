@@ -55,92 +55,91 @@
   description: A state-of-the-art helmet designed by the Syndicate for the Contractor modsuit. It includes a built-in HUD.
   categories: [HideSpawnMenu]
   components:
-    - type: Sprite
-      sprite: _Goobstation/Clothing/OuterClothing/Modsuits/contractor.rsi
-    - type: ThermalVision
-      isEquipment: true
-      color: "#05570a"
-      lightRadius: 15
-    - type: PointLight
-      color: "#18f324"
-    - type: Armor # mostly the same stats as HoS modsuit
-      traumaDeductions:
-        Dismemberment: 0.3
-        OrganDamage: 0.3
-        BoneDamage: 0.3
-        VeinsDamage: 0
-      modifiers:
-        coefficients:
-          Blunt: 0.55
-          Slash: 0.55
-          Piercing: 0.55
-          Ballistic: 0.5
-          Heat: 0.55
-          Caustic: 0.5
-          Radiation: 0.0
-    - type: FireProtection
-      reduction: 0.2
-    - type: FlashImmunity
-    - type: FlashSoundSuppression
-      protectionRange: 0
-    - type: ShowHealthBars
-      damageContainers:
-        - Biological
-    - type: SealableClothingVisuals
-      spriteLayer: sealed
-      clothingVisuals:
-        head:
-        - state: equipped-HEAD-sealed
-        - state: equipped-HEAD-sealed-unshaded
-          shader: unshaded
-        head-vox:
-        - state: equipped-HEAD-sealed-vox
-        - state: equipped-HEAD-sealed-unshaded-vox
-          shader: unshaded
-        head-vulpkanin: #TODO: add vulp sprites
-        - state: equipped-HEAD-sealed
-        - state: equipped-HEAD-sealed-unshaded
-          shader: unshaded
-    - type: ActivatableUI
-      inHandsOnly: false # Goobstation
-      singleUser: true
-      requireActiveHand: false # Goobstation
-      verbText: verb-instrument-openui
-      key: enum.InstrumentUiKey.Key
-    - type: UserInterface
-      interfaces:
-        enum.InstrumentUiKey.Key:
-          type: InstrumentBoundUserInterface
-    - type: HideLayerClothing
-      slots:
-      - Hair
-      - Snout
-      - HeadTop
-      - HeadSide
-    - type: ComponentToggler
-      components:
-      - type: Instrument
-        program: 62
-      - type: SwappableInstrument
-        instrumentList:
-          "Synth": {62: 0}
-          "Friend": {2: 0}
-          "Overdriven": {29: 0}
-          "Bass": {33: 0}
-          "Rock": {29: 0}
-          "Acoustic": {24: 0}
-          "Flute": {73: 0}
-          "Sax": {66: 0}
-      - type: BreathMask
-      - type: PressureProtection
-        highPressureMultiplier: 0.3
-        lowPressureMultiplier: 1000
-      - type: TemperatureProtection
-        heatingCoefficient: 0.01
-        coolingCoefficient: 0.01
-      - type: IdentityBlocker
-      - type: IngestionBlocker
-        blockSmokeIngestion: True
+  - type: Sprite
+    sprite: _Goobstation/Clothing/OuterClothing/Modsuits/contractor.rsi
+  - type: ThermalVision
+    isEquipment: true
+    color: "#05570a"
+    lightRadius: 15
+  - type: PointLight
+    color: "#18f324"
+  - type: Armor # mostly the same stats as HoS modsuit
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.55
+        Ballistic: 0.5
+        Heat: 0.55
+        Caustic: 0.5
+        Radiation: 0.0
+  - type: FireProtection
+    reduction: 1
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+    protectionRange: 0
+  - type: ShowHealthBars
+    damageContainers:
+      - Biological
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      head:
+      - state: equipped-HEAD-sealed
+      - state: equipped-HEAD-sealed-unshaded
+        shader: unshaded
+      head-vox:
+      - state: equipped-HEAD-sealed-vox
+      - state: equipped-HEAD-sealed-unshaded-vox
+        shader: unshaded
+      head-vulpkanin: #TODO: add vulp sprites
+      - state: equipped-HEAD-sealed
+      - state: equipped-HEAD-sealed-unshaded
+        shader: unshaded
+  - type: ActivatableUI
+    inHandsOnly: false # Goobstation
+    singleUser: true
+    requireActiveHand: false # Goobstation
+    verbText: verb-instrument-openui
+    key: enum.InstrumentUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: ComponentToggler
+    components:
+    - type: Instrument
+      program: 62
+    - type: SwappableInstrument
+      instrumentList:
+        "Synth": {62: 0}
+        "Friend": {2: 0}
+        "Overdriven": {29: 0}
+        "Bass": {33: 0}
+        "Rock": {29: 0}
+        "Acoustic": {24: 0}
+        "Flute": {73: 0}
+        "Sax": {66: 0}
+    - type: BreathMask
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      coefficient: 0.01
+    - type: IdentityBlocker
+    - type: IngestionBlocker
+      blockSmokeIngestion: True
 
 - type: entity
   parent: [ClothingModsuitChestplateStandard, BaseSyndicateContraband]
@@ -149,53 +148,52 @@
   description: A state of the art chestplate designed by the Syndicate for the Contractor modsuit. It incorporates powered servos to reduce the equipment load.
   categories: [HideSpawnMenu]
   components:
-    - type: Sprite
-      sprite: _Goobstation/Clothing/OuterClothing/Modsuits/contractor.rsi
-    - type: ClothingSpeedModifier
-      walkModifier: 1
-      sprintModifier: 1
-    - type: Armor # mostly the same stats as HoS modsuit
-      traumaDeductions:
-        Dismemberment: 0.3
-        OrganDamage: 0.3
-        BoneDamage: 0.3
-        VeinsDamage: 0
-      modifiers:
-        coefficients:
-          Blunt: 0.5
-          Slash: 0.5
-          Piercing: 0.5
-          Ballistic: 0.45
-          Heat: 0.5
-          Caustic: 0.5
-          Radiation: 0
-    - type: ExplosionResistance
-      damageCoefficient: 0.4
-    - type: StaminaResistance
-      damageCoefficient: 0.7
-    - type: FireProtection
-      reduction: 0.8
-    - type: SealableClothingVisuals
-      spriteLayer: sealed
-      clothingVisuals:
-        outerClothing:
-        - state: equipped-OUTERCLOTHING-sealed
-        outerClothing-vox:
-        - state: equipped-OUTERCLOTHING-sealed-vox
-    - type: ComponentToggler
-      components:
-      - type: ClothingAutoInject
-        reagents:
-          Epinephrine: 10
-          Bicaridine: 10
-          TranexamicAcid: 5
-          Tramadol: 5
-      - type: PressureProtection
-        highPressureMultiplier: 0.3
-        lowPressureMultiplier: 1000
-      - type: TemperatureProtection
-        coolingCoefficient: 0.01
-        heatingCoefficient: 0.01
+  - type: Sprite
+    sprite: _Goobstation/Clothing/OuterClothing/Modsuits/contractor.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: Armor # mostly the same stats as HoS modsuit
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Ballistic: 0.45
+        Heat: 0.5
+        Caustic: 0.5
+        Radiation: 0
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+  - type: FireProtection
+    reduction: 1
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-sealed
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-sealed-vox
+  - type: ComponentToggler
+    components:
+    - type: ClothingAutoInject
+      reagents:
+        Epinephrine: 10
+        Bicaridine: 10
+        TranexamicAcid: 5
+        Tramadol: 5
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      coefficient: 0.01
 
 - type: entity
   parent: [ClothingModsuitBootsStandard, BaseSyndicateContraband]
@@ -204,36 +202,36 @@
   description: A state-of-the-art pair of magboots for the Contractor modsuit. So long as the suit is powered, these will not slow the wearer down.
   categories: [HideSpawnMenu]
   components:
-    - type: Appearance
-    - type: Sprite
-      sprite: _Goobstation/Clothing/OuterClothing/Modsuits/contractor.rsi
-    - type: Tag
-      tags:
-        - WhitelistChameleon
-    - type: SealableClothingVisuals
-      spriteLayer: sealed
-      clothingVisuals:
-        shoes:
-        - state: equipped-FEET-sealed
-        - state: equipped-FEET-sealed-unshaded
-          shader: unshaded
-        shoes-vox:
-        - state: equipped-FEET-sealed-vox
-        - state: equipped-FEET-sealed-unshaded-vox
-          shader: unshaded
-    - type: ItemToggle
-    - type: ToggleClothing
-      action: ActionToggleMagboots
-    - type: ComponentToggler
-      components:
-      - type: NoSlip
-    - type: ModifyStandingUpTime
-      multiplier: .5
-    - type: Magboots
-      enabledPrefix: null
-    - type: ClothingSpeedModifier
-      walkModifier: 1.1
-      sprintModifier: 1.1
+  - type: Appearance
+  - type: Sprite
+    sprite: _Goobstation/Clothing/OuterClothing/Modsuits/contractor.rsi
+  - type: Tag
+    tags:
+      - WhitelistChameleon
+  - type: SealableClothingVisuals
+    spriteLayer: sealed
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET-sealed
+      - state: equipped-FEET-sealed-unshaded
+        shader: unshaded
+      shoes-vox:
+      - state: equipped-FEET-sealed-vox
+      - state: equipped-FEET-sealed-unshaded-vox
+        shader: unshaded
+  - type: ItemToggle
+  - type: ToggleClothing
+    action: ActionToggleMagboots
+  - type: ComponentToggler
+    components:
+    - type: NoSlip
+  - type: ModifyStandingUpTime
+    multiplier: .5
+  - type: Magboots
+    enabledPrefix: null
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
 
 - type: entity
   id: SuitStorageContractor

@@ -6,6 +6,15 @@
   antagonist: true
   objective: roles-antag-abductor-objective
 
+- type: antagSmite
+  id: LoneAbductor
+  antag: LoneAbductorAntag
+  rule: LoneAbductorRule
+  ruleComp: AbductorRule
+  icon:
+    sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi
+    state: icon
+
 - type: antag
   id: AbductorAgentAntag
   name: abductor-agent-ghost-role-name

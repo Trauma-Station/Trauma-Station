@@ -30,7 +30,6 @@
     - id: BookSurvival
     - id: BookDoors
     - id: BookAirlocks
-    - id: BookToys
     - id: BookBananium
     - id: BookBots
     - id: BookFurniture
@@ -254,22 +253,6 @@
   - type: Sprite
     layers:
     - state: airlocks
-
-- type: entity
-  parent: BookSchematic
-  id: BookToys
-  suffix: toys
-  description: A blueprint with designs for toys.
-  components:
-  - type: KnowledgeGrantOnUse
-    skills:
-      ToysKnowledge: 25
-    experience:
-      ToysKnowledge: 5
-    doAfter: 2
-  - type: Sprite
-    layers:
-    - state: toys
 
 - type: entity
   parent: BookSchematic

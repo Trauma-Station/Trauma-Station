@@ -64,6 +64,9 @@ public abstract partial class SharedGhoulSystem : EntitySystem
         args.Message = "ghoul";
     }
 
+    // Don't curse brain and torso
+    private static readonly ProtoId<OrganCategoryPrototype>[] FragileBlacklist = [ "Brain", "Torso" ];
+
     /// <summary>
     /// Required to prevent heretic from farming organs from ghouls
     /// </summary>
@@ -71,9 +74,7 @@ public abstract partial class SharedGhoulSystem : EntitySystem
     {
         foreach (var organ in _body.GetOrgans(uid))
         {
-            // Don't curse brain and torso
-            if (_brainQuery.HasComp(organ) || _woundableQuery.TryComp(organ, out var woundable) &&
-                woundable.RootWoundable == organ.Owner)
+            if (organ.Comp.Category is { } category && FragileBlacklist.Contains(category))
                 continue;
 
             EnsureComp<FragileOrganComponent>(organ);

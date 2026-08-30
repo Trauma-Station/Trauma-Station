@@ -17,13 +17,6 @@ public abstract partial class SharedPowerReceiverSystem : EntitySystem
 
     public abstract bool ResolveApc(EntityUid entity, [NotNullWhen(true)] ref SharedApcPowerReceiverComponent? component);
 
-    /// <summary>
-    /// Goobstation - Lets shared code set power load.
-    /// </summary>
-    public virtual void SetLoad(SharedApcPowerReceiverComponent comp, float load)
-    {
-    }
-
     public void SetNeedsPower(EntityUid uid, bool value, SharedApcPowerReceiverComponent? receiver = null)
     {
         if (!ResolveApc(uid, ref receiver) || receiver.NeedsPower == value)
@@ -75,7 +68,7 @@ public abstract partial class SharedPowerReceiverSystem : EntitySystem
         if (playSwitchSound)
         {
             _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Machines/machine_switch.ogg"), uid, user: user,
-                AudioParams.Default.WithVolume(-2f));
+                AudioParams.Default.AddVolume(-2f));
         }
 
         if (_netMan.IsClient && receiver.PowerDisabled)

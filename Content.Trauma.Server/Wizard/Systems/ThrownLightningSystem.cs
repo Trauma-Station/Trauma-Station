@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Effects;
 using Content.Server.Electrocution;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Server.Wizard.Components;
+using Content.Trauma.Shared.Effects;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
@@ -15,15 +15,7 @@ public sealed partial class ThrownLightningSystem : EntitySystem
     [Dependency] private SpellsSystem _spells = default!;
     [Dependency] private SparksSystem _sparks = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ThrownLightningComponent, ThrowDoHitEvent>(OnHit);
-        SubscribeLocalEvent<ThrownLightningComponent, ThrownEvent>(OnThrown);
-        SubscribeLocalEvent<ThrownLightningComponent, StopThrowEvent>(OnStopThrow);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStopThrow(Entity<ThrownLightningComponent> ent, ref StopThrowEvent args)
     {
         if (Deleting(ent))
@@ -36,6 +28,7 @@ public sealed partial class ThrownLightningSystem : EntitySystem
         Dirty(ent.Owner, trail);
     }
 
+    [SubscribeLocalEvent]
     private void OnThrown(Entity<ThrownLightningComponent> ent, ref ThrownEvent args)
     {
         if (TryComp(ent, out TrailComponent? trail))
@@ -51,17 +44,16 @@ public sealed partial class ThrownLightningSystem : EntitySystem
         _spells.SpeakSpell(args.User.Value, args.User.Value, speech, MagicSchool.Conjuration);
     }
 
+    [SubscribeLocalEvent]
     private void OnHit(Entity<ThrownLightningComponent> ent, ref ThrowDoHitEvent args)
     {
         if (Deleting(ent))
             return;
 
         if (_electrocution.TryDoElectrocution(args.Target, ent, 1, ent.Comp.StunTime, true, 1f, ignoreInsulation: true))
-            _sparks.DoSparks(Transform(ent).Coordinates);
+            _sparks.DoSparks(ent);
     }
 
     private bool Deleting(EntityUid ent)
-    {
-        return EntityManager.IsQueuedForDeletion(ent) || TerminatingOrDeleted(ent);
-    }
+        => EntityManager.IsQueuedForDeletion(ent) || TerminatingOrDeleted(ent);
 }

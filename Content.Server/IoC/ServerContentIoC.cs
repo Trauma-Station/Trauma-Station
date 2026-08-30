@@ -22,6 +22,7 @@ using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.Players.JobWhitelist;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Players.RateLimiting;
+using Content.Server.Players.Whitelist;
 using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
@@ -68,6 +69,7 @@ internal static class ServerContentIoC
         deps.Register<ServerInfoManager>();
         deps.Register<DiscordWebhook>();
         deps.Register<VoteWebhooks>();
+        deps.Register<EventWebhook>();
         deps.Register<ServerDbEntryManager>();
         deps.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
         deps.Register<ServerApi>();
@@ -84,5 +86,6 @@ internal static class ServerContentIoC
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
+        deps.Register<WhitelistManager>();
     }
 }

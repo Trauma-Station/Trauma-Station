@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Physics;
 using Content.Shared.Bed.Sleep;
-using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.StatusEffectNew;
@@ -13,6 +10,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Physics.ComplexJoint;
 using Content.Trauma.Shared.Teleportation;
 using Robust.Shared.Timing;
 
@@ -22,56 +20,28 @@ public sealed partial class SharedStarTouchSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedComplexJointVisualsSystem _joint = default!;
     [Dependency] private SharedStarMarkSystem _starMark = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedStarGazerSystem _starGazer = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private TouchSpellSystem _touchSpell = default!;
-    [Dependency] private BlindableSystem _blind = default!;
 
     public static readonly EntProtoId StarTouchStatusEffect = "StatusEffectStarTouched";
     public static readonly EntProtoId DrowsinessStatusEffect = "StatusEffectDrowsiness";
     public const string StarTouchBeamDataId = "startouch";
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void UpdateBeams(Entity<StarTouchedComponent> ent, ref ComplexJointUpdateEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<StarTouchComponent, TouchSpellUsedEvent>(OnTouchSpell);
-        SubscribeLocalEvent<StarTouchComponent, UseInHandEvent>(OnUseInHand);
-
-        SubscribeLocalEvent<StarTouchedStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
-        SubscribeLocalEvent<StarTouchedStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
-
-        // TODO remove this when TemporaryBlindness new status effect refactor is real
-        SubscribeLocalEvent<StarTouchedComponent, CanSeeAttemptEvent>(OnCanSee);
-        SubscribeLocalEvent<StarTouchedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<StarTouchedComponent, ComponentShutdown>(OnShutdown);
-    }
-
-    private void OnShutdown(Entity<StarTouchedComponent> ent, ref ComponentShutdown args)
-    {
-        if (TerminatingOrDeleted(ent))
+        if (args.UpdatedIds.ContainsKey(StarTouchBeamDataId))
             return;
 
-        _blind.UpdateIsBlind(ent.Owner);
+        _status.TryRemoveStatusEffect(ent, StarTouchStatusEffect);
     }
 
-    private void OnStartup(Entity<StarTouchedComponent> ent, ref ComponentStartup args)
-    {
-        _blind.UpdateIsBlind(ent.Owner);
-    }
-
-    private void OnCanSee(Entity<StarTouchedComponent> ent, ref CanSeeAttemptEvent args)
-    {
-        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
-            return;
-
-        args.Cancel();
-    }
-
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<StarTouchComponent> ent, ref UseInHandEvent args)
     {
         var user = args.User;
@@ -89,6 +59,7 @@ public sealed partial class SharedStarTouchSystem : EntitySystem
         _teleport.Teleport(user, coords, user: user);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<StarTouchedStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
         if (_timing.ApplyingState)
@@ -146,10 +117,12 @@ public sealed partial class SharedStarTouchSystem : EntitySystem
         var delay = TimeSpan.FromMilliseconds(100);
         _status.TryUpdateStatusEffectDuration(target,
             SleepingSystem.StatusEffectForcedSleeping,
-            ent.Comp.SleepTime, delay);
+            ent.Comp.SleepTime,
+            delay);
         _starMark.TryApplyStarMark(target, delay);
     }
 
+    [SubscribeLocalEvent]
     private void OnApply(Entity<StarTouchedStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
         if (_timing.ApplyingState)
@@ -158,54 +131,7 @@ public sealed partial class SharedStarTouchSystem : EntitySystem
         EnsureComp<StarTouchedComponent>(args.Target);
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        var query = EntityQueryEnumerator<StarTouchedComponent>();
-        while (query.MoveNext(out var uid, out var touch))
-        {
-            touch.Accumulator += frameTime;
-
-            if (touch.Accumulator < touch.TickInterval)
-                continue;
-
-            touch.Accumulator = 0f;
-
-            UpdateBeams((uid, touch));
-        }
-    }
-
-    private void UpdateBeams(Entity<StarTouchedComponent, ComplexJointVisualsComponent?> ent)
-    {
-        if (!Resolve(ent, ref ent.Comp2, false))
-            return;
-
-        var hasStarBeams = false;
-
-        foreach (var (netEnt, _) in ent.Comp2.Data.Where(x => x.Value.Id == StarTouchBeamDataId).ToList())
-        {
-            if (!TryGetEntity(netEnt, out var target) || TerminatingOrDeleted(target) ||
-                !_transform.InRange(target.Value, ent.Owner, ent.Comp1.Range))
-            {
-                ent.Comp2.Data.Remove(netEnt);
-                continue;
-            }
-
-            hasStarBeams = true;
-        }
-
-        Dirty(ent.Owner, ent.Comp2);
-
-        if (hasStarBeams)
-            return;
-
-        _status.TryRemoveStatusEffect(ent, StarTouchStatusEffect);
-    }
-
+    [SubscribeLocalEvent]
     private void OnTouchSpell(Entity<StarTouchComponent> ent, ref TouchSpellUsedEvent args)
     {
         var target = args.Target;
@@ -246,9 +172,12 @@ public sealed partial class SharedStarTouchSystem : EntitySystem
         Dirty(effect.Value, effectComp);
 
         EnsureComp<BlockTeleportComponent>(target);
-        var beam = EnsureComp<ComplexJointVisualsComponent>(target);
-        beam.Data[GetNetEntity(args.User)] = new ComplexJointVisualsData(StarTouchBeamDataId, comp.BeamSprite);
-        Dirty(target, beam);
+        var data = new ComplexJointVisualsData(StarTouchBeamDataId, comp.BeamSprite, comp.Range)
+        {
+            ShouldCollide = false,
+            ReverseBeam = true,
+        };
+        _joint.CreateJoint(args.User, target, data);
         var trail = EnsureComp<CosmicTrailComponent>(target);
         trail.CosmicFieldLifetime = comp.CosmicFieldLifetime;
         trail.Strength = hereticComp.PassiveLevel;

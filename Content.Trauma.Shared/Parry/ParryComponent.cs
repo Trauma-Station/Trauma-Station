@@ -10,6 +10,7 @@ namespace Content.Trauma.Shared.Parry;
 /// Uses <c>ItemToggleComponent</c> to control reflection.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class ParryComponent : Component
 {
     /// <summary>
@@ -18,23 +19,23 @@ public sealed partial class ParryComponent : Component
     [DataField]
     public ReflectType Reflects = ReflectType.Energy | ReflectType.NonEnergy;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float ParryExhaustionCost = 0.5f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float ReflectExhaustionCost = 1.1f; // > 1 means can't reflect
 
     /// <summary>
     /// The minimum required level of skill to be able to reflect anything at all.
     /// </summary>
     [DataField]
-    public int ReflectMinSkill = 50;
+    public int ReflectMinSkill = 26;
 
     /// <summary>
     /// The minimum required level of skill to be able to parry anything at all.
     /// </summary>
     [DataField]
-    public int ParryMinSkill = 30;
+    public int ParryMinSkill = 26;
 
     [DataField]
     public Angle ReflectSpread = Angle.FromDegrees(140);

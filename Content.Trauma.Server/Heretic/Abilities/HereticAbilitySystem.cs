@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
 using Content.Server.Flash;
@@ -13,6 +12,7 @@ using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
@@ -26,6 +26,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Weather;
 using Content.Trauma.Common.CollectiveMind;
+using Content.Trauma.Server.Heretic.Systems;
 using Content.Trauma.Server.Heretic.Systems.PathSpecific;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -34,7 +35,6 @@ using Robust.Server.Containers;
 using Robust.Server.GameStates;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 
@@ -69,6 +69,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private SharedSanguineStrikeSystem _lifesteal = default!;
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private BladeArenaSystem _arena = default!;
+    [Dependency] private HereticSystem _heretic = default!;
 
     #endregion
 
@@ -98,6 +99,8 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         if (!TryComp<UserInterfaceComponent>(mind, out var uic))
             return;
+
+        _heretic.UpdateHereticTargets((mind, heretic));
 
         var uid = args.Performer;
 

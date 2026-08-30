@@ -44,8 +44,6 @@
       100: SoftCrit
       150: Critical
       200: Dead
-  - type: Destructible
-    thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
   - type: CounterAttacker
   - type: KnowledgeHolder
@@ -53,8 +51,6 @@
   - type: WeaponClass
     class: Unarmed
     examinable: false
-  # </Trauma>
-  # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
   #  thresholds: [ 10, 20, 30, 50, 70, 100 ]
   #  targetLayers:
@@ -66,10 +62,11 @@
   #  - "enum.HumanoidVisualLayers.RLeg"
   #  damageOverlayGroups:
   #    Brute:
-  #      sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
+  #      sprite: Mobs/Effects/brute_damage.rsi
   #      color: "#FF0000"
   #    Burn:
-  #      sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
+  #      sprite: Mobs/Effects/burn_damage.rsi
+  # </Trauma>
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: JobStatus
@@ -108,7 +105,7 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
-      Acidic: [Touch, Ingestion, Eyes] # Goobstation
+      Acidic: [Touch, Ingestion, Eyes] # Trauma - added Eyes
     reactions:
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
@@ -117,14 +114,12 @@
   - type: StatusEffects
     allowed:
     # <Trauma>
+    # TODO: replace with status effect entities
     - Vulgarity
     - Brainrotted
     - Dementia
     # </Trauma>
     - Electrocution
-    - RatvarianLanguage
-    - PressureImmunity
-    - Muted
     - Pacified
     - Flashed
     - Adrenaline
@@ -213,6 +208,8 @@
   - MobAtmosStandard
   - MobFlammable
   - BaseSpeciesMob
+  #- BaseMobDestructible # Trauma - parts handle gibbing
+  - BaseHungerThirstSlowdown
   id: BaseSpeciesMobOrganicUnperishable # Trauma - made unperishable for vox
   save: false
   components:
@@ -228,15 +225,37 @@
     - Bacterial
     - Parasite
   - type: VampireDrainable
+  - type: Destructible # only ashing, gibbing is still handled by torso
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
   # </Trauma>
-  - type: Hunger
-  - type: Thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: NormalSatiationThirst
   - type: Barotrauma
     damage:
       types:
         Blunt: 0.50
         Heat: 0.1
-  #- type: PassiveDamage # Trauma - no
+  # <Trauma> - go to med or chef chud
+  #- type: PassiveDamage
+  #  intervalHaltOnDamageTaken: 5s
   #  allowedStates:
   #  - Alive
   #  damage:
@@ -245,20 +264,20 @@
   #      Blunt: -0.05
   #      Piercing: -0.05
   #      Slash: -0.05
+  # </Trauma>
   - type: Fingerprint
   - type: Blindable
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    specificHeat: 300 # Trauma - 10x lower heat capacity so spacing etc doesnt literally do nothing
   - type: TemperatureDamage
     heatDamageThreshold: 325
-    coldDamageThreshold: 260
+    coldDamageThreshold: 273.15
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants
     heatDamage:
       types:
-        Heat: 1.0 # Goob edit #per second, scales with temperature & other constants
+        Heat: 1 # Trauma - was 1.5
   - type: TemperatureSpeed
     thresholds:
       293: 0.9
@@ -277,7 +296,7 @@
     spawned:
     - id: FoodMeat
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+    - id: MaterialBones1 # Trauma
       amount: 3
   - type: Respirator
     damage:
@@ -288,3 +307,4 @@
         Asphyxiation: -1.0
   - type: FireVisuals
     alternateState: Standing
+  - type: StunVisuals

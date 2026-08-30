@@ -185,14 +185,13 @@ public sealed partial class NpcFactionSystem : EntitySystem
             // otherwise having multiple factions is strictly negative
             .Where(target => !IsEntityFriendly((ent, ent.Comp1), target));
         if (!Resolve(ent, ref ent.Comp2, false))
-            return hostiles.Where(target => !TryComp<StealthComponent>(target, out var stealth) || !stealth.Enabled); // Goobstation - Filter out stealthed entities
+            return hostiles;
 
         // ignore anything from enemy faction that we are explicitly friendly towards
         var faction = (ent.Owner, ent.Comp2);
         return hostiles
             .Union(GetHostiles(faction))
-            .Where(target => !IsIgnored(faction, target))
-            .Where(target => !TryComp<StealthComponent>(target, out var stealth) || !stealth.Enabled); // Goobstation - Filter out stealthed entities
+            .Where(target => !IsIgnored(faction, target));
     }
 
     public IEnumerable<EntityUid> GetNearbyFriendlies(Entity<NpcFactionMemberComponent?> ent, float range)

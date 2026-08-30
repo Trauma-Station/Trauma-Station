@@ -127,3 +127,8 @@
   - type: TargetObjective
     title: objective-condition-other-alive-title
   - type: PickRandomPerson
+    conditions:
+    - !type:RoleCondition
+      whitelist:
+        components:
+        - JobRole

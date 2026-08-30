@@ -91,7 +91,7 @@ public sealed partial class SignatureSystem : EntitySystem
             var identity = Identity.Entity(signer, EntityManager);
             var you = Loc.GetString("paper-signed-self", ("target", paper));
             var others = Loc.GetString("paper-signed-other", ("user", identity), ("target", paper));
-            _popup.PopupPredicted(you, others, signer, signer);
+            _popup.PopupEntity(you, others, signer, signer);
         }
 
         return true;

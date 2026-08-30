@@ -23,6 +23,14 @@
 - type: entity
   abstract: true
   parent: BaseForgedProduct
+  id: BaseForgedKnife
+  components:
+  - type: Temperature
+    heatCapacity: 2400 # 3.8kg knife
+
+- type: entity
+  abstract: true
+  parent: BaseForgedProduct
   id: BaseForgedProductCrossGuard
   components:
   - type: Sprite
@@ -58,7 +66,7 @@
 # Knives
 
 - type: entity
-  parent: [ BaseForgedProduct, KitchenKnife ]
+  parent: [ BaseForgedKnife, KitchenKnife ]
   id: ForgedKnife
   name: knife
   categories: [ HideSpawnMenu ]
@@ -67,9 +75,11 @@
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+  - type: Temperature
+    heatCapacity: 1800.0001
 
 - type: entity
-  parent: [ BaseForgedProduct, ButchCleaver ]
+  parent: [ BaseForgedKnife, ButchCleaver ]
   id: ForgedCleaver
   name: cleaver
   categories: [ HideSpawnMenu ]
@@ -78,9 +88,11 @@
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+  - type: Temperature
+    heatCapacity: 3518.9998
 
 - type: entity
-  parent: [ BaseForgedProduct, CombatKnife ]
+  parent: [ BaseForgedKnife, CombatKnife ]
   id: ForgedCombatKnife
   categories: [ HideSpawnMenu ]
   components:
@@ -93,7 +105,7 @@
     storedRotation: -45 # FIXME: this fucks storage because its shitcode
 
 - type: entity
-  parent: [ BaseForgedProduct, KukriKnife ]
+  parent: [ BaseForgedKnife, KukriKnife ]
   id: ForgedKukriKnife
   categories: [ HideSpawnMenu ]
   components:
@@ -103,7 +115,7 @@
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
 
 - type: entity
-  parent: [ BaseForgedProduct, SurvivalKnife, BaseMetallicProcGen ]
+  parent: [ BaseForgedKnife, SurvivalKnife, BaseMetallicProcGen ]
   id: ForgedSurvivalKnife
   categories: [ HideSpawnMenu ]
   components:
@@ -137,6 +149,8 @@
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
     storedRotation: -90
+  - type: Temperature
+    heatCapacity: 1256.6371 # yeah
 
 # TODO: Tiny blade uses?
 
@@ -255,8 +269,9 @@
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
     storedRotation: -45
+    size: Large
     shape:
-    - 0,0,0,2
+    - 0,0,1,2
   - type: MeleeWeapon
     attackRate: 1
     damage:
@@ -341,6 +356,8 @@
     damage:
       types:
         Piercing: 16
+  - type: Temperature
+    heatCapacity: 334.15927
 
 # Spear
 
@@ -364,6 +381,8 @@
   - type: SolutionContainerVisuals
     equippedFillBaseName: null # doesnt have an equipped sprite lol
     equippedMaxFillLevels: 0
+  - type: Temperature
+    heatCapacity: 504.00006
 
 # Morningstar
 

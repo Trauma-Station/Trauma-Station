@@ -244,7 +244,7 @@ public sealed partial class LockPortalSystem : EntitySystem
 
         var result = _portals.Count > 0;
         if (result && user is { } u)
-            _popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), u, u);
+            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-occupied"), u, u);
 
         return result;
     }
