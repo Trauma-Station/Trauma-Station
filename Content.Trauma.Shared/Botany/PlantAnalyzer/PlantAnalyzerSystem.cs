@@ -272,8 +272,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         int index = ent.Comp.GeneIndex;
         if (index < 0 ||
             index >= SeedData.AllGenes.Length ||
-            !_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant) ||
-            !_botany.TryGetPlantComponent<PlantDataComponent>(uid, seed, out var data))
+            !_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant))
             return;
 
         var dirty = false;
@@ -374,8 +373,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
     {
         var uid = EnsurePlantData(ent, seed);
 
-        if (!TryComp<PlantComponent>(uid, out var plant) ||
-            !TryComp<PlantDataComponent>(uid, out var data))
+        if (!TryComp<PlantComponent>(uid, out var plant))
         {
             Log.Error($"{ToPrettyString(seed)} has invalid PlantData {ToPrettyString(uid)}!");
             return;
