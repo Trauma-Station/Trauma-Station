@@ -13956,3 +13956,10 @@ Entries:
   id: 1523
   time: '2026-08-30T06:53:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4366
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI not being able to do anything... why did nobody report this
+  id: 1524
+  time: '2026-08-30T07:46:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4368
