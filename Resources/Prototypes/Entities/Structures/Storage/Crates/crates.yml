@@ -211,7 +211,7 @@
     access: [["Security"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
+  parent: CrateBaseSecure
   id: CrateEngineeringSecure
   name: secure engineering crate
   components:
@@ -223,7 +223,7 @@
     access: [["Engineering"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
+  parent: CrateBaseSecure
   id: CrateMedicalSecure
   name: secure medical crate
   components:
@@ -235,7 +235,7 @@
     access: [["Medical"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
+  parent: CrateBaseSecure
   id: CrateChemistrySecure
   name: secure chemistry crate
   components:
@@ -247,7 +247,7 @@
       access: [["Chemistry"]]
 
 - type: entity
-  parent: [ CrateBaseSecure, AntiTamperLowPriority ] # Trauma
+  parent: CrateBaseSecure
   id: CratePrivateSecure
   name: private crate
   components:
@@ -307,22 +307,6 @@
   id: CrateWeaponSecure
   name: secure weapon crate
   components:
-  # <Trauma>
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-  - type: Damageable
-    damageModifierSet: StrongCrates
-  - type: Injurable
-    damageContainer: StructuralInorganic
-  # </Trauma>
   - type: Icon
     sprite: Structures/Storage/Crates/weapon.rsi
   - type: Sprite
@@ -487,14 +471,11 @@
 
 - type: entity
   id: CrateBaseLockBox
-  parent: [ CrateBaseSecure, AntiTamperHighPriority ] # Trauma
+  parent: CrateBaseSecure
   name: lock box
   description: "A secure lock box. Funds from its sale will be distributed back to the department. Just remember: Cargo always takes a cut."
   abstract: true
   components:
-  # <Trauma>
-  - type: AntiRottingContainer # needed for plant bounties and it costs money so
-  # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/Crates/lockbox.rsi
   - type: GenericVisualizer
@@ -557,13 +538,7 @@
     overrideAccount: Engineering
   - type: AccessReader
     access: [["Engineering"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Engineering
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
+
 - type: entity
   id: CrateLockBoxMedical
   parent: CrateBaseLockBox
@@ -593,13 +568,6 @@
     overrideAccount: Medical
   - type: AccessReader
     access: [["Medical"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Medical
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   id: CrateLockBoxScience
@@ -630,13 +598,6 @@
     overrideAccount: Science
   - type: AccessReader
     access: [["Research"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Science
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   id: CrateLockBoxSecurity
@@ -667,13 +628,6 @@
     overrideAccount: Security
   - type: AccessReader
     access: [["Security"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Security
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   id: CrateLockBoxService
@@ -704,13 +658,6 @@
     overrideAccount: Service
   - type: AccessReader
     access: [["Service"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Service
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   parent: CrateGeneric
@@ -769,19 +716,6 @@
   name: coffin
   description: A comfy coffin, excellent place for the vampires and corpses.
   components:
-  # <Trauma>
-  - type: VampireLair
-  - type: EffectsOnContainer
-    inserted:
-    - !type:ModifyStatusEffect
-      effectProto: VampireCoffinStatusEffect
-      time: null
-    removed:
-    - !type:ModifyStatusEffect
-      effectProto: VampireCoffinStatusEffect
-      time: null
-      type: Remove
-  # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/Crates/coffin.rsi
     layers:
@@ -845,7 +779,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200 # discourage just beating the grave to break it open
+        damage: 100 # discourage just beating the grave to break it open
       behaviors:
       - !type:PlaySoundBehavior
         sound:

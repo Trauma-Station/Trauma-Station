@@ -1,0 +1,193 @@
+- type: entity
+  id: LockerBase
+  parent: ClosetBase
+  components:
+  - type: LockSignalControl
+
+# Command .. ish
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerCaptain
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Command
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerHeadOfPersonnel
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Command
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerHeadOfSecurity
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Security # joever
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerWarden
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Security # joever
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerChiefMedicalOfficer
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Medical
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerResearchDirector
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Science
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerChiefEngineer
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Engineering
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerQuarterMaster
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Supply
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerRepresentative
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Command
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerNanorep
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: CentCom
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerClown
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Service # poor poor clown
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  parent: [ LockerBase, AntiTamperHighPriority ]
+  id: LockerSyndicatePersonal
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Syndicate # funny
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+# Normal
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerSalvageSpecialist
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerAtmospherics
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerEngineer
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerBotanist
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerMedical
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerParamedic
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerChemistry
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerScientist
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerSecurity
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: GunSafe
+
+- type: entity
+  parent: [ GunSafe, AntiTamperLowPriority ]
+  id: GunSafeBaseSecure
+  components:
+  - type: Damageable
+    damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
+
+- type: entity
+  parent: [ LockerBooze, AntiTamperLowPriority ]
+  id: LockerDetective
+
+- type: entity
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  id: LockerMime
+
+- type: entity
+  parent: LockerBase
+  id: LockerFreezerBase
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.01 # from 0.5

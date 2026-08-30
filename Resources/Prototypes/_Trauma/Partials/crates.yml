@@ -1,0 +1,109 @@
+- type: entity
+  parent: BaseCrate
+  id: CrateGeneric
+  componnets:
+  - type: RequireProjectileTarget
+  - type: Tag
+    tags:
+    - Crate
+
+- type: entity
+  parent: [ CrateBaseWeldable, AntiTamperLowPriority ] # adding anti tamper
+  id: CrateBaseSecure
+  components:
+  - type: LockSignalControl
+
+- type: entity
+  parent: CrateBaseSecure
+  id: CrateWeaponSecure
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Damageable
+    damageModifierSet: StrongCrates
+  - type: Injurable
+    damageContainer: StructuralInorganic
+
+# Lockboxes
+
+- type: entity
+  id: CrateBaseLockBox
+  parent: CrateBaseSecure
+  components:
+  - type: AntiRottingContainer # needed for plant bounties and it costs money so
+
+- type: entity
+  id: CrateLockBoxEngineering
+  parent: CrateBaseLockBox
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Engineering
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  id: CrateLockBoxMedical
+  parent: CrateBaseLockBox
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Medical
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  id: CrateLockBoxScience
+  parent: CrateBaseLockBox
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Science
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  id: CrateLockBoxSecurity
+  parent: CrateBaseLockBox
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Security
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+- type: entity
+  id: CrateLockBoxService
+  parent: CrateBaseLockBox
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: Service
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
+
+# Other
+
+- type: entity
+  parent: BaseCrate
+  id: CrateCoffin
+  components:
+  - type: VampireLair
+  - type: EffectsOnContainer
+    inserted:
+    - !type:ModifyStatusEffect
+      effectProto: VampireCoffinStatusEffect
+      time: null
+    removed:
+    - !type:ModifyStatusEffect
+      effectProto: VampireCoffinStatusEffect
+      time: null
+      type: Remove

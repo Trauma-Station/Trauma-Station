@@ -39,7 +39,7 @@
 # Cargo
 - type: entity
   id: LockerQuarterMaster
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: quartermaster's locker
   components:
   - type: Appearance
@@ -49,17 +49,10 @@
     stateDoorClosed: qm_door
   - type: AccessReader
     access: [["Quartermaster"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Supply
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   id: LockerSalvageSpecialist
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: salvage specialist's locker # Lavaland Change
   description: Contains equipment useful for space exploration. # Lavaland Change
   components:
@@ -76,7 +69,7 @@
 # Command
 - type: entity
   id: LockerCaptain
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: captain's locker
   components:
   - type: Appearance
@@ -86,17 +79,10 @@
     stateDoorClosed: cap_door
   - type: AccessReader
     access: [["Captain"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Command
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   id: LockerHeadOfPersonnel
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: head of personnel's locker
   components:
   - type: Appearance
@@ -106,18 +92,11 @@
     stateDoorClosed: hop_door
   - type: AccessReader
     access: [["HeadOfPersonnel"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Command
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # CE
 - type: entity
   id: LockerChiefEngineer
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: chief engineer's locker
   components:
   - type: Appearance
@@ -127,13 +106,6 @@
     stateDoorClosed: ce_door
   - type: AccessReader
     access: [ [ "ChiefEngineer" ] ]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Engineering
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # Electrical supplies
 - type: entity
@@ -166,7 +138,7 @@
 # Atmos tech
 - type: entity
   id: LockerAtmospherics
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: atmospheric technician's locker
   components:
   - type: Appearance
@@ -180,7 +152,7 @@
 # Engineer
 - type: entity
   id: LockerEngineer
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: engineer's locker
   components:
   - type: Appearance
@@ -219,7 +191,7 @@
     stateDoorOpen: freezer_open
     stateDoorClosed: freezer_door
   - type: ExplosionResistance
-    damageCoefficient: 0.01 # Trauma - was 0.5
+    damageCoefficient: 0.5
   - type: AntiRottingContainer
   - type: Construction
     graph: ClosetFreezer
@@ -241,7 +213,7 @@
 # Botanist
 - type: entity
   id: LockerBotanist
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: botanist's locker
   components:
   - type: Appearance
@@ -270,7 +242,7 @@
 # Medical doctor
 - type: entity
   id: LockerMedical
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: medical doctor's locker
   components:
   - type: Appearance
@@ -284,7 +256,7 @@
 # Paramedic
 - type: entity
   id: LockerParamedic
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: paramedic's locker
   components:
   - type: Appearance
@@ -299,7 +271,7 @@
 # Chemical
 - type: entity
   id: LockerChemistry
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: chemical locker
   components:
   - type: Appearance
@@ -313,7 +285,7 @@
 # CMO
 - type: entity
   id: LockerChiefMedicalOfficer
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: chief medical officer's locker
   components:
   - type: Appearance
@@ -323,18 +295,11 @@
     stateDoorClosed: cmo_door
   - type: AccessReader
     access: [ [ "ChiefMedicalOfficer" ] ]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Medical
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # Science
 - type: entity
   id: LockerResearchDirector
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: research director's locker
   components:
   - type: Appearance
@@ -344,17 +309,10 @@
     stateDoorClosed: rd_door
   - type: AccessReader
     access: [ [ "ResearchDirector" ] ]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Science
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 - type: entity
   id: LockerScientist
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: scientist's locker
   components:
   - type: Appearance
@@ -368,7 +326,7 @@
 # HoS
 - type: entity
   id: LockerHeadOfSecurity
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: head of security's locker
   components:
   - type: Appearance
@@ -378,18 +336,11 @@
     stateDoorClosed: hos_door
   - type: AccessReader
     access: [["HeadOfSecurity"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Security # joever
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # Warden
 - type: entity
   id: LockerWarden
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   name: warden's locker
   components:
   - type: Appearance
@@ -399,18 +350,11 @@
     stateDoorClosed: warden_door
   - type: AccessReader
     access: [["Armory"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Security
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # Brigmedic
 - type: entity
   id: LockerBrigmedic
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: brigmedic locker
   components:
   - type: Appearance
@@ -424,7 +368,7 @@
 # Security Officer
 - type: entity
   id: LockerSecurity
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: security officer's locker
   components:
   - type: Appearance
@@ -437,7 +381,7 @@
 
 - type: entity
   id: GunSafe
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   name: gun safe
   components:
   - type: Appearance
@@ -459,12 +403,6 @@
   parent: GunSafe
   suffix: Armory, Locked
   components:
-  # <Trauma>
-  - type: Damageable
-    damageModifierSet: StructuralMetallicStrong
-  - type: Injurable
-    damageContainer: StructuralInorganic
-  # </Trauma>
   - type: AccessReader
     access: [["Armory"]]
 
@@ -583,7 +521,7 @@
 # Detective
 - type: entity
   id: LockerDetective
-  parent: [ LockerBooze, AntiTamperLowPriority ] # Trauma
+  parent: LockerBooze
   name: detective's cabinet
   description: Usually cold and empty... like your heart.
   components:
@@ -603,7 +541,7 @@
 - type: entity
   id: LockerSyndicatePersonal
   name: blood-red locker
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   description: It's a personal storage unit with a blood-red design.
   suffix: "Locked"
   components:
@@ -614,13 +552,6 @@
     stateDoorClosed: syndicate_door
   - type: AccessReader
     access: [["SyndicateAgent"]]
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Syndicate # funny
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # Bluespace
 - type: entity
@@ -658,7 +589,7 @@
 - type: entity
   id: LockerClown
   name: clown locker
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma
+  parent: LockerBase
   components:
   - type: Appearance
   - type: AccessReader
@@ -671,19 +602,12 @@
     contents:
     - id: VehicleClowncarTrainee
     - id: ClownMegaphone # goob - loudspeakers
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Service # poor poor clown
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
 
 # Mime
 - type: entity
   id: LockerMime
   name: mime locker
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma
+  parent: LockerBase
   components:
   - type: Appearance
   - type: AccessReader
@@ -706,10 +630,3 @@
     stateBaseClosed: hop
     stateDoorOpen: hop_open
     stateDoorClosed: representative_door
-  # <Trauma>
-  - type: RadioMicrophone
-    broadcastChannel: Command
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
-  # </Trauma>
