@@ -13,6 +13,8 @@ public sealed partial class AntiTamperSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
 
+    [Dependency] private EntityQuery<DestructibleComponent> _destructibleQuery = default!;
+
     [SubscribeLocalEvent]
     private void OnExamine(Entity<AntiTamperComponent> ent, ref ExaminedEvent args)
     {
@@ -24,11 +26,11 @@ public sealed partial class AntiTamperSystem : EntitySystem
     [SubscribeLocalEvent(after: [typeof(SharedDestructibleSystem)])] // after so .IsBroken is set
     private void OnDamage(Entity<AntiTamperComponent> ent, ref DamageDealtEvent args)
     {
-        if (!TryComp(ent, out DestructibleComponent? destructible))
+        if (!_destructibleQuery.TryComp(ent, out var destructible))
             return; // i mean dont relaly care if it cant be destroyed anywaysssss
 
         var comp = ent.Comp;
-        var ded = destructible.IsBroken;
+        var ded = destructible.IsBroken; // Will be destroyed very shortly, but not yet
 
         var alarmOnDamaged = CompareFlag(comp.AlarmAlertType, AntiTamperAlertType.OnDamaged);
         var alarmOnDestroyed = CompareFlag(comp.AlarmAlertType, AntiTamperAlertType.OnDestroyed);

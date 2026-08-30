@@ -2,6 +2,9 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.AntiTamper;
 
+/// <summary>
+/// Allows playing an alarm noise/yelling on this entity being damaged or destroyed, or its AntiTamper wire pulsed/cut (if added).
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AntiTamperComponent : Component
 {
