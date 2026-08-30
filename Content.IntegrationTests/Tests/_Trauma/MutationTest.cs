@@ -41,7 +41,7 @@ public sealed class MutationTest : GameTest
                     if (!SProtoMan.Resolve(id, out var proto) || proto.HasComp(blacklisted))
                         continue;
 
-                    var mob = SEntMan.SpawnEntity(TestMob, map.GridCoords);
+                    var mob = SSpawn(TestMob, map.GridCoords);
                     Assert.That(_mutation.AddMutation(mob, id), $"Failed to add {id} to {SEntMan.ToPrettyString(mob)}");
                     Assert.That(_mutation.HasMutation(mob, id), $"Added {id} but it was not present in {SEntMan.ToPrettyString(mob)}");
                     mobs.Add(mob);
@@ -56,7 +56,7 @@ public sealed class MutationTest : GameTest
             foreach (var mob in mobs)
             {
                 _mutation.ClearMutations(mob);
-                SEntMan.DeleteEntity(mob);
+                SDel(mob);
             }
         });
 
@@ -73,7 +73,7 @@ public sealed class MutationTest : GameTest
 
         await Server.WaitAssertion(() =>
         {
-            var dorf = SEntMan.SpawnEntity(TestMob, map.GridCoords);
+            var dorf = SSpawn(TestMob, map.GridCoords);
 
             // scan him and compare sequences later
             _genome.ScanGenome(dorf);
@@ -119,7 +119,7 @@ public sealed class MutationTest : GameTest
             Assert.That(ended, Is.EquivalentTo(started),
                 "Lost some scanned genome sequences when turning back from a monkey!");
 
-            SEntMan.DeleteEntity(dorf);
+            SDel(dorf);
         });
     }
 
