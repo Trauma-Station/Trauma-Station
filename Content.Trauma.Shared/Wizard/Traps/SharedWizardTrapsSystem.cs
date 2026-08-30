@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Effects;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
@@ -18,6 +17,7 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Effects;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -36,7 +36,6 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private CommonSparksSystem _sparks = default!;
     [Dependency] private SharedElectrocutionSystem _electrocution = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
@@ -48,6 +47,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
+    [Dependency] private SparksSystem _sparks = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -204,12 +204,12 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
         if (comp.Sparks)
         {
             _sparks.DoSparks(uid,
+                user: args.OtherEntity, // this is the only entity that is allowed to predict this
                 comp.MinSparks,
                 comp.MaxSparks,
                 comp.MinVelocity,
                 comp.MaxVelocity,
-                comp.TriggerSound == null,
-                predicted: false); // client doesnt predict it for other players, network audio
+                comp.TriggerSound == null);
         }
 
         _audio.PlayPredicted(comp.TriggerSound, args.OtherEntity, args.OtherEntity);
