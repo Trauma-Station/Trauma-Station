@@ -350,9 +350,10 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     15 => (float) plant.Yield,
                     16 => plant.Potency,
                     17 => _botany.PlantHasComp<PlantTraitSeedlessComponent>(uid, seed) ? 1f : 0f,
-                    18 => _botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed) ? 1f : 0f,
-                    19 => _botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed) ? 1f : 0f,
-                    20 => _botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed) ? 1f : 0f,
+                    18 => _botany.PlantHasComp<PlantTraitUnviableComponent>(uid, seed) ? 1f : 0f,
+                    19 => _botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed) ? 1f : 0f,
+                    20 => _botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed) ? 1f : 0f,
+                    21 => _botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed) ? 1f : 0f,
                     _ => null
                 };
 
@@ -485,12 +486,15 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     SetTrait<PlantTraitSeedlessComponent>(uid, value);
                     break;
                 case 18:
-                    SetTrait<PlantTraitLigneousComponent>(uid, value);
+                    SetTrait<PlantTraitUnviableComponent>(uid, value);
                     break;
                 case 19:
-                    SetTrait<PlantTraitScreamComponent>(uid, value);
+                    SetTrait<PlantTraitLigneousComponent>(uid, value);
                     break;
                 case 20:
+                    SetTrait<PlantTraitScreamComponent>(uid, value);
+                    break;
+                case 21:
                     SetTrait<PlantTraitKudzuComponent>(uid, value);
                     break;
             }
