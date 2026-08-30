@@ -444,33 +444,6 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconSyndicateCommander
-  icon:
-    sprite: *icon-rsi
-    state: SyndicateCommander
-  jobName: job-name-syndicate-commander
-  isCrewJob: false
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconSyndicateCorpsman
-  icon:
-    sprite: *icon-rsi
-    state: SyndicateCorpsman
-  jobName: job-name-syndicate-corpsman
-  isCrewJob: false
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconSyndicateOperative
-  icon:
-    sprite: *icon-rsi
-    state: SyndicateOperative
-  jobName: job-name-syndicate-operative
-  isCrewJob: false
-
-- type: jobIcon
-  parent: JobIcon
   id: JobIconWizard
   icon:
     sprite: *icon-rsi
