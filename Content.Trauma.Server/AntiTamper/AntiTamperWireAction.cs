@@ -14,7 +14,7 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
     [DataField]
     private int _pulseTimeout = 10;
 
-    public AntiTamperWireAction()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -53,6 +53,7 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
 
         _antiTamper.AlertYell((wire.Owner, comp), respectCooldown: false);
         _antiTamper.AlertAlarm((wire.Owner, comp), respectCooldown: false);
+        EntityManager.DirtyField(z)
 
         WiresSystem.SetData(wire.Owner, AntiTamperWireActionKey.Pulsed, true);
         WiresSystem.StartWireAction(wire.Owner, _pulseTimeout, AntiTamperWireActionKey.PulseCancel,
