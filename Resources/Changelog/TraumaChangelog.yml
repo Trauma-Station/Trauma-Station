@@ -13963,3 +13963,10 @@ Entries:
   id: 1524
   time: '2026-08-30T07:46:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4368
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed PTL slop so cargo isn't just invalidated.
+  id: 1525
+  time: '2026-08-30T11:21:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4373
