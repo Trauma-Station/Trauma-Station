@@ -37,7 +37,8 @@
     alarmAlertType: OnDestroyed
     alarmSound:
       path: /Audio/Machines/warning_buzzer.ogg
-      volume: 1
+      params:
+        volume: 1
   - type: Wires
     layoutId: SecureStorageLowPriority
     boardName: wires-board-name-secure-storage
@@ -52,7 +53,8 @@
     alarmAlertType: OnDestroyed
     alarmSound:
       path: /Audio/Machines/warning_buzzer.ogg
-      volume: 5
+      params:
+        volume: 5
   - type: Wires
     layoutId: SecureStorageHighPriority
     boardName: wires-board-name-secure-storage
