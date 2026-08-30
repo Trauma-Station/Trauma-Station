@@ -15,6 +15,6 @@ public sealed partial class EntryPoint : GameShared
 
     public override void Init()
     {
-        _proto.PartialDirectory(new("/Prototypes/_Trauma/Partial"), 1);
+        _proto.PartialDirectory(new("/Prototypes/_Trauma/Partials"), 1);
     }
 }
