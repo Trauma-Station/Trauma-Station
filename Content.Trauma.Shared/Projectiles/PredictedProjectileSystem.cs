@@ -117,6 +117,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             _projectile.SetShooter(uid, comp, target);
             _gun.SetTarget(uid, null, out _);
             comp.IgnoredEntities.Clear();
+            Dirty(uid, comp);
             return;
         }
 
@@ -160,9 +161,13 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         {
             comp.ProjectileSpent = false;
             comp.IgnoredEntities.Add(target);
+            Dirty(ent);
         }
-        else
+        else if (!comp.ProjectileSpent)
+        {
             comp.ProjectileSpent = true;
+            Dirty(ent);
+        }
 
         if (!Deleted(target))
         {

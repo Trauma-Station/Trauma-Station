@@ -265,6 +265,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
 
         component.Shooter = TerminatingOrDeleted(shooterId) ? null : shooterId; // Goobstation - set to null if deleted
+        component.IgnoredEntities.Add(shooterId); // Trauma
         Dirty(id, component);
     }
 
