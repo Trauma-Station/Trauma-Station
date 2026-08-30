@@ -13977,3 +13977,10 @@ Entries:
   id: 1526
   time: '2026-08-30T12:14:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4374
+- author: Skull Face
+  changes:
+  - type: Remove
+    message: Removed English.
+  id: 1527
+  time: '2026-08-30T13:15:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4375
