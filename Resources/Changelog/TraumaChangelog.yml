@@ -13949,3 +13949,10 @@ Entries:
   id: 1522
   time: '2026-08-29T17:04:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4357
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer not being able to inject genes into clipped seeds.
+  id: 1523
+  time: '2026-08-30T06:53:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4366
