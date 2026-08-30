@@ -13984,3 +13984,10 @@ Entries:
   id: 1527
   time: '2026-08-30T13:15:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4375
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed dionae not having CS:S installed.
+  id: 1528
+  time: '2026-08-30T21:02:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4384
