@@ -18,7 +18,6 @@
     speechSounds: Pai
   - type: WiresPanel
     openingTool: Prying
-  - type: WiresPanelSecurity
   - type: WiresVisuals
   - type: Electrified
     requirePower: false

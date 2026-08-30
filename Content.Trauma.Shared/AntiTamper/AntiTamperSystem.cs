@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.AntiTamper;
 
 public sealed partial class AntiTamperSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
-    [Dependency] private IGameTiming _timing = default!;
 
     [SubscribeLocalEvent]
     private void OnExamine(Entity<AntiTamperComponent> ent, ref ExaminedEvent args)
