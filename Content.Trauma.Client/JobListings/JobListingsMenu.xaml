@@ -2,8 +2,9 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<DefaultWindow
+<controls:FancyWindow
     xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
     xmlns:gfx="using:Robust.Client.Graphics"
     Title="{Loc 'job-listings-ui-default-title'}"
     MinSize="812 512"
@@ -75,4 +76,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </ScrollContainer>
         </BoxContainer>
     </BoxContainer>
-</DefaultWindow>
+</controls:FancyWindow>

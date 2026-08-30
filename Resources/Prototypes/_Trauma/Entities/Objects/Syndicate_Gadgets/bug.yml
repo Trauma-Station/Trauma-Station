@@ -2,10 +2,9 @@
 
 - type: entity
   parent: [ BaseItem, BaseSyndicateContraband ]
-  id: BaseSyndicateBug
+  id: SyndicateBug
   name: syndicate bug
   description: A rather conspicious listening device used to spy on important people.
-  abstract: true
   components:
   - type: Item
     size: Normal
@@ -16,45 +15,3 @@
   - type: Anchorable
     delay: 5
   - type: Bug
-
-- type: entity
-  parent: BaseSyndicateBug
-  id: SyndicateBugCmo
-  components:
-  - type: Bug
-    targetArea: AreaOfficeCmo
-
-- type: entity
-  parent: BaseSyndicateBug
-  id: SyndicateBugCE
-  components:
-  - type: Bug
-    targetArea: AreaOfficeCE
-
-- type: entity
-  parent: BaseSyndicateBug
-  id: SyndicateBugHop
-  components:
-  - type: Bug
-    targetArea: AreaOfficeHop
-
-- type: entity
-  parent: BaseSyndicateBug
-  id: SyndicateBugHos
-  components:
-  - type: Bug
-    targetArea: AreaOfficeHos
-
-- type: entity
-  parent: BaseSyndicateBug
-  id: SyndicateBugRd
-  components:
-  - type: Bug
-    targetArea: AreaOfficeRd
-
-- type: entity
-  parent: BaseSyndicateBug
-  id: SyndicateBugQm
-  components:
-  - type: Bug
-    targetArea: AreaOfficeQm

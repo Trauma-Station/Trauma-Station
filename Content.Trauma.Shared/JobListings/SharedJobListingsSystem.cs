@@ -1,19 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Hands;
-using Content.Shared.Mind;
-using Content.Shared.Objectives;
-using Content.Shared.PDA;
-using Content.Shared.EntityTable;
-using Content.Shared.Objectives.Components;
-using Content.Shared.Random.Helpers;
-using Content.Trauma.Common.JobListings;
-using Content.Trauma.Common.Traitor;
 using Robust.Shared.Timing;
+using Content.Shared.Mind;
+using Content.Shared.PDA;
+using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Hands.EntitySystems;
-using Robust.Shared.CPUJob.JobQueues;
+using Content.Trauma.Common.JobListings;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -46,10 +40,12 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         jobBoard.Comp.AcceptedSideJobs.Add(GetNetEntity(sideJob));
         DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.AcceptedSideJobs));
 
-        if (sideJobComp.Tool is not null)
+        if (sideJobComp.Tool is { } toolProto)
         {
-            var reward = PredictedSpawnAtPosition(sideJobComp.Tool.Value, Transform(actor).Coordinates);
-            Hands.PickupOrDrop(actor, reward);
+            var tool = PredictedSpawnAtPosition(toolProto, Transform(actor).Coordinates);
+            Hands.PickupOrDrop(actor, tool);
+            var ev = new SideJobToolSpawned(sideJob);
+            RaiseLocalEvent(tool, ref ev);
         }
 
         return true;
@@ -58,10 +54,11 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// <summary>
     /// Cancel an already accepted job.
     /// </summary>
-    public virtual void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
+    public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
         jobBoard.Comp.AcceptedSideJobs.Remove(GetNetEntity(sideJob));
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AcceptedSideJobs));
+        PredictedQueueDel(sideJob);
     }
 
     /// <summary>
@@ -98,7 +95,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         GainReputation(jobBoard, sideJobComp.ReputationGain);
         jobBoard.Comp.JobsCompleted += 1;
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.JobsCompleted));
-        QueueDel(sideJob);
+        PredictedQueueDel(sideJob);
     }
 
     /// <summary>
@@ -182,7 +179,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
                 acceptedSideJobsInfos.Add(info.Value);
         }
 
-        var state = new JobListingsBoundUserInterfaceState(
+        var state = new JobListingsBUI(
             availableSideJobInfos,
             acceptedSideJobsInfos,
             jobBoard.Value.Comp.Reputation,
@@ -245,7 +242,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void InitUi(Entity<JobListingsComponent> jobBoard, EntityUid host)
     {
-        Ui.SetUi(host, JobListingsUiKey.Key, new InterfaceData("JobListingsBoundUserInterface"));
+        Ui.SetUi(host, JobListingsUiKey.Key, new InterfaceData("JobListingsBUI"));
     }
 
     /// <summary>
@@ -370,3 +367,9 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = false);
+
+/// <summary>
+/// Raised on a side job's tool when it is spawned.
+/// </summary>
+[ByRefEvent]
+public record struct SideJobToolSpawned(EntityUid Objective);

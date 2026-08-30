@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Client.JobListings;
 
 [UsedImplicitly]
-public sealed partial class JobListingsBoundUserInterface : BoundUserInterface
+public sealed partial class JobListingsBUI : BoundUserInterface
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    public JobListingsBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public JobListingsBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _menu = this.CreateWindow<JobListingsMenu>();
         _menu.OnAccepted += OnAccepted;
@@ -27,7 +27,7 @@ public sealed partial class JobListingsBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not JobListingsBoundUserInterfaceState jobState)
+        if (state is not Common.JobListings.JobListingsBUI jobState)
             return;
         if (_menu is null)
             return;

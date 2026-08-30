@@ -13,8 +13,8 @@ public sealed partial class ScanalyzerComponent : Component
     /// <summary>
     /// The grand theft item that this scanalyzer is attuned for.
     /// </summary>
-    [DataField(required: true)]
-    public ProtoId<StealTargetGroupPrototype> StealTarget;
+    [DataField]
+    public ProtoId<StealTargetGroupPrototype>? StealTarget;
 
     /// <summary>
     /// If this scanalyzer has already been used.

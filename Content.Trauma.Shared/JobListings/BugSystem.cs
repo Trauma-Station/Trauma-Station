@@ -30,28 +30,14 @@ public sealed partial class BugSystem : EntitySystem
         return _area.GetAreaPrototype(ent.Owner) == ent.Comp.TargetArea;
     }
 
-    /// <summmary>
-    /// Returns the name of the bug's target area.
-    /// </summary>
-    public bool GetAreaName(EntProtoId area, [NotNullWhen(true)] out string? name)
-    {
-        name = null;
-        if (!ProtoMan.Resolve(area, out var prototype))
-            return false;
-
-        name = prototype.Name;
-        return true;
-    }
-
     /// <summary>
     /// Register an area as bugged.
     /// </summary>
     public void RegisterBuggedArea(Entity<MindComponent> mind, EntProtoId area)
     {
         var archive = EnsureComp<BugMindArchiveComponent>(mind.Owner);
-        if (!archive.BuggedAreas.Contains(area))
-            archive.BuggedAreas.Add(area);
-        Dirty(mind.Owner, archive);
+        if (archive.BuggedAreas.Add(area))
+            Dirty(mind.Owner, archive);
     }
 
     /// <summary>
@@ -67,7 +53,14 @@ public sealed partial class BugSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnExamine(Entity<BugComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("bug-examine-target-area", ("target-area", ProtoMan.Index(ent.Comp.TargetArea).Name)));
+        if (ent.Comp.TargetArea is not { } area)
+        {
+            Log.Warning("Bug's TargetArea is not set.");
+            return;
+        }
+
+        var name = ProtoMan.Index(area).Name;
+        args.PushMarkup(Loc.GetString("bug-examine-target-area", ("target-area", name)));
 
         if (Transform(ent.Owner).Anchored)
         {
@@ -78,31 +71,45 @@ public sealed partial class BugSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnAssigned(Entity<BugAreaConditionComponent> ent, ref ObjectiveAssignedEvent args)
     {
-        if (!GetAreaName(ent.Comp.TargetArea, out var name))
-            return;
-
-        _metaData.SetEntityName(ent.Owner, Loc.GetString("bug-objective-name", ("area", name)));
-        _metaData.SetEntityDescription(ent.Owner, Loc.GetString("bug-objective-description", ("area", name)));
+        var name = ProtoMan.Index(ent.Comp.TargetArea).Name;
+        _metaData.SetEntityName(ent.Owner, Loc.GetString(ent.Comp.ObjectiveName, ("area", name)));
+        _metaData.SetEntityDescription(ent.Owner, Loc.GetString(ent.Comp.ObjectiveDescription, ("area", name)));
         _objectives.SetIcon(ent.Owner, new SpriteSpecifier.EntityPrototype(ent.Comp.IconEntity));
     }
 
     [SubscribeLocalEvent]
-    private void OnGetObjectiveProgress(Entity<BugAreaConditionComponent> entity, ref ObjectiveGetProgressEvent args)
+    private void OnGetObjectiveProgress(Entity<BugAreaConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0f;
-        if (IsAreaBugged((args.MindId, args.Mind), entity.Comp.TargetArea))
+        if (IsAreaBugged((args.MindId, args.Mind), ent.Comp.TargetArea))
             args.Progress = 1f;
     }
 
     [SubscribeLocalEvent]
-    private void OnWrench(Entity<BugComponent> entity, ref UserAnchoredEvent args)
+    private void OnWrench(Entity<BugComponent> ent, ref UserAnchoredEvent args)
     {
-        if (!Transform(entity.Owner).Anchored || !IsInCorrectArea(entity))
+        if (!Transform(ent.Owner).Anchored || !IsInCorrectArea(ent))
             return;
         if (!_mind.TryGetMind(args.User, out var mind, out var mindComp))
             return;
 
-        RegisterBuggedArea((mind, mindComp), entity.Comp.TargetArea);
+        if (ent.Comp.TargetArea is not { } area)
+        {
+            Log.Warning("Bug's TargetArea is not set.");
+            return;
+        }
+
+        RegisterBuggedArea((mind, mindComp), area);
         _jobs.UpdateUi((mind, mindComp));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnToolSpawned(Entity<BugComponent> ent, ref SideJobToolSpawned args)
+    {
+        if (!TryComp<BugAreaConditionComponent>(args.Objective, out var objComp))
+            return;
+
+        ent.Comp.TargetArea ??= objComp.TargetArea;
+        Dirty(ent);
     }
 }

@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
+using Content.Client.UserInterface.Controls;
 using Content.Trauma.Common.JobListings;
-using Content.Trauma.Shared.JobListings;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.JobListings;
 
 [GenerateTypedNameReferences]
-public sealed partial class JobListingsMenu : DefaultWindow
+public sealed partial class JobListingsMenu : FancyWindow
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entity = default!;
 
     private TimeSpan? _refreshTimerBarTime;
 
@@ -110,7 +110,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
 
     private SideJobControl CreateControl(SideJobInfo info)
     {
-        var control = new SideJobControl();
+        var control = new SideJobControl(_entity, _timing);
         control.OnAccepted += job => OnAccepted?.Invoke(job);
         control.OnClaimed += job => OnClaimed?.Invoke(job);
         control.OnCancelled += job => OnCancelled?.Invoke(job);
@@ -132,10 +132,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
         AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;
         AvailableJobListingsNote.Visible = AvailableJobListingsContainer.ChildCount == 0;
 
-        if (loading)
-            AvailableJobListingsNote.Text = Loc.GetString("job-listings-ui-loading-note");
-        else
-            AvailableJobListingsNote.Text = Loc.GetString("job-listings-ui-no-available-note");
+        AvailableJobListingsNote.Text = Loc.GetString($"job-listings-ui-{(loading ? "loading" : "no-available")}-note");
 
         if (AcceptedJobListingsContainer.ChildCount >= maximumAcceptedSideJobs)
             DisableAcceptButtons();

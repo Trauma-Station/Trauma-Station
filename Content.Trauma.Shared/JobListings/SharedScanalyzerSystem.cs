@@ -18,13 +18,12 @@ namespace Content.Trauma.Shared.JobListings;
 /// </summary>
 public abstract partial class SharedScanalyzerSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private TriggerSystem _trigger = default!;
     [Dependency] private SharedJobListingsSystem _jobs = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     /// <summary>
     /// Starts the scanning do-after. Does not check if the scan should happen, use <see cref="CanScan"/> before calling this.
@@ -126,12 +125,20 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnExamined(Entity<ScanalyzerComponent> ent, ref ExaminedEvent args)
     {
-        if (!_proto.Resolve(ent.Comp.StealTarget, out var target))
+        if (!ProtoMan.Resolve(ent.Comp.StealTarget, out var target))
             return;
         args.PushMarkup(Loc.GetString("scanalyzer-examine-steal-target", ("target", Loc.GetString(target.Name))));
-        args.PushMarkup(ent.Comp.Used
-            ? Loc.GetString("scanalyzer-examine-used")
-            : Loc.GetString("scanalyzer-examine-not-used"));
+        args.PushMarkup($"scanalyzer-examine-{(ent.Comp.Used ? "used" : "not-used")}");
+    }
+
+    [SubscribeLocalEvent]
+    private void OnToolSpawned(Entity<ScanalyzerComponent> ent, ref SideJobToolSpawned args)
+    {
+        if (!TryComp<StealTargetComponent>(args.Objective, out var objComp))
+            return;
+
+        ent.Comp.StealTarget ??= objComp.StealGroup;
+        Dirty(ent);
     }
 }
 

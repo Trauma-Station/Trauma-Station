@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Random;
+using Robust.Shared.Player;
+using Robust.Server.GameStates;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
-using Robust.Server.GameStates;
-using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -14,6 +15,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 {
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     /// Assign the store owner a random side job.
@@ -34,23 +36,11 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
         var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
         var possiblePriorityJobs = jobBoard.Comp.PrioritySideJobOffers.ShallowClone();
-        var random = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(jobBoard.Owner));
 
         while (possiblePriorityJobs.Count > 0 || possibleJobs.Count > 0)
         {
-            EntProtoId job;
-            if (possiblePriorityJobs.Count > 0)
-            {
-                var index = random.Next(possiblePriorityJobs.Count);
-                job = possiblePriorityJobs[index];
-                possiblePriorityJobs.RemoveAt(index);
-            }
-            else
-            {
-                var index = random.Next(possibleJobs.Count);
-                job = possibleJobs[index];
-                possibleJobs.RemoveAt(index);
-            }
+            var shouldChoosePriority = possiblePriorityJobs.Count > 0;
+            var job = _random.PickAndTake(shouldChoosePriority ? possiblePriorityJobs : possibleJobs);
 
             if (!CanAddSideJob(jobBoard, job))
                 continue;
@@ -60,24 +50,31 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             var sideJob = Spawn(job);
             if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
             {
-                QueueDel(sideJob);
+                Del(sideJob);
                 continue;
             }
 
             // raise events to initialise the objectives
             var ev1 = new ObjectiveAssignedEvent(mind, mindComp);
             RaiseLocalEvent(sideJob, ref ev1);
-            var ev2 = new ObjectiveAfterAssignEvent(mind, mindComp, objectiveComp, MetaData(sideJob));
-            RaiseLocalEvent(sideJob, ref ev2);
+            if (ev1.Cancelled)
+            {
+                Del(sideJob);
+                continue;
+            }
+
             var ev3 = new SideJobCreatedEvent(effectiveLevel);
             RaiseLocalEvent(sideJob, ref ev3);
 
             // if initialising failed then abort
-            if (ev1.Cancelled || ev3.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
+            if (ev3.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
             {
-                QueueDel(sideJob);
+                Del(sideJob);
                 continue;
             }
+
+            var ev2 = new ObjectiveAfterAssignEvent(mind, mindComp, objectiveComp, MetaData(sideJob));
+            RaiseLocalEvent(sideJob, ref ev2);
 
             jobBoard.Comp.AvailableSideJobs.Add(GetNetEntity(sideJob));
             DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AvailableSideJobs));
@@ -149,12 +146,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         return true;
     }
 
-    public override void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
-    {
-        base.CancelSideJob(jobBoard, sideJob);
-        QueueDel(sideJob);
-    }
-
     public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
         base.Refresh(jobBoard);
@@ -220,17 +211,16 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
             return;
-        var mind = Mind.GetMind(args.User);
-        if (mind is null)
+        if (Mind.GetMind(args.User) is not { } mind)
             return;
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return;
 
         // set mind
-        jobListingsComp.Mind = GetNetEntity(mind.Value);
+        jobListingsComp.Mind = GetNetEntity(mind);
         DirtyField(args.Uplink, jobListingsComp, nameof(JobListingsComponent.Mind));
-        PVSOverrideEntity((mind.Value, mindComp), args.Uplink);
-        AddComp(mind.Value, new JobListingsOwnerComponent { JobListings = GetNetEntity(args.Uplink) });
+        PVSOverrideEntity((mind, mindComp), args.Uplink);
+        AddComp(mind, new JobListingsOwnerComponent { JobListings = GetNetEntity(args.Uplink) });
 
         // init job board
         FillSideJobs((args.Uplink, jobListingsComp));

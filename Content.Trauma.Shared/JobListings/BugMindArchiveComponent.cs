@@ -12,5 +12,5 @@ public sealed partial class BugMindArchiveComponent : Component
     /// List of bugged areas.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> BuggedAreas = new();
+    public HashSet<EntProtoId> BuggedAreas = new();
 }

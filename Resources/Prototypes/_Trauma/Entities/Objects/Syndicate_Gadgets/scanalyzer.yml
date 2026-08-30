@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
   parent: [ BaseItem, BaseSyndicateContraband ]
-  id: BaseSyndicateScanalyzer
+  id: SyndicateScanalyzer
   name: syndicate scanalyzer
   description: A fiendish device that reverse engineers the schematics for cutting edge technology.
   components:
@@ -15,56 +14,7 @@
     scanDuration: 15 #15 seconds
 
 - type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerCMOHypospray
-  components:
-  - type: Scanalyzer
-    stealTarget: Hypospray
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerRDHardsuit
-  components:
-  - type: Scanalyzer
-    stealTarget: ClothingOuterHardsuitRd
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerHandTeleporter
-  components:
-  - type: Scanalyzer
-    stealTarget: HandTeleporter
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerMagboots
-  components:
-  - type: Scanalyzer
-    stealTarget: ClothingShoesBootsMagAdv
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerClipboard
-  components:
-  - type: Scanalyzer
-    stealTarget: BoxFolderQmClipboard
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerCaptainJetpack
-  components:
-  - type: Scanalyzer
-    stealTarget: JetpackCaptainFilled
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
-  id: SyndicateScanalyzerCaptainGun
-  components:
-  - type: Scanalyzer
-    stealTarget: WeaponAntiqueLaser
-
-- type: entity
-  parent: BaseSyndicateScanalyzer
+  parent: SyndicateScanalyzer
   id: SyndicateBroadcastDevice
   name: syndicate broadcast device
   description: A device capable of speaking through communications computer. Who will listen?

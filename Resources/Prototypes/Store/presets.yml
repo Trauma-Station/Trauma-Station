@@ -61,7 +61,6 @@
   id: StorePresetRemoteUplink
   categories: [ HideSpawnMenu ]
   components:
-  - type: RingerAccessUplink
   # <Trauma> - job listings
   - type: JobListings
     maximumSideJobs: 4
@@ -97,3 +96,4 @@
     - 10000 # 1 final
     refreshWaitDuration: 600 # 10 minutes
   # </Trauma>
+  - type: RingerAccessUplink

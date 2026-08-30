@@ -6,7 +6,4 @@ namespace Content.Trauma.Shared.JobListings;
 /// If the traitor gamerule has this component it will prepend information about reputation and jobs completed.
 /// </summary>
 [RegisterComponent]
-public sealed partial class RoundEndJobListingsInfoComponent : Component
-{
-
-}
+public sealed partial class RoundEndJobListingsInfoComponent : Component;

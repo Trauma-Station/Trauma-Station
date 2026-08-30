@@ -3,6 +3,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.JobListings;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -11,7 +12,6 @@ namespace Content.Trauma.Server.JobListings;
 /// </summary>
 public sealed partial class JobListingsSystem
 {
-
     [SubscribeLocalEvent]
     private void OnCreatedWithReward(Entity<GenerateSideJobRewardComponent> ent, ref SideJobCreatedEvent args)
     {
@@ -21,29 +21,26 @@ public sealed partial class JobListingsSystem
             return;
         }
 
-        var random = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(ent));
-        var roll = random.NextFloat();
+        var roll = _random.NextFloat();
         if (roll <= ent.Comp.CurrencyChance)
         {
             sideJobComp.Reward = ent.Comp.CurrencyReward;
-            Loc.TryGetString(ent.Comp.CurrencyName, out var name);
-            sideJobComp.RewardName = name ?? ent.Comp.CurrencyName;
+            sideJobComp.RewardName = ent.Comp.CurrencyName;
         }
         else
         {
-            var index = random.Next(ent.Comp.UplinkRewards.Count);
+            var index = _random.Next(ent.Comp.UplinkRewards.Count);
             var entryId = ent.Comp.UplinkRewards[index];
             var entry = ProtoMan.Index(entryId);
 
-            if (entry.ProductEntity is not { } reward || entry.Name is not { } rawName)
+            if (entry.ProductEntity is not { } reward || entry.Name is not { } name)
             {
                 args.Cancelled = true;
                 return;
             }
 
             sideJobComp.Reward = reward;
-            Loc.TryGetString(rawName, out var name);
-            sideJobComp.RewardName = name ?? rawName;
+            sideJobComp.RewardName = name;
         }
 
         DirtyFields(ent, sideJobComp, null, [nameof(SideJobComponent.Reward), nameof(SideJobComponent.RewardName)]);

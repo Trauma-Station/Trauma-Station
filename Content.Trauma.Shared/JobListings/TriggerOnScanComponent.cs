@@ -4,5 +4,5 @@ using Content.Shared.Trigger.Components.Triggers;
 
 namespace Content.Trauma.Shared.JobListings;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TriggerOnScanComponent : BaseTriggerOnXComponent;

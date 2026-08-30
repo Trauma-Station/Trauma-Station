@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Mind;
-using Content.Shared.Objectives.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Mind;
+using Content.Shared.Objectives.Components;
 
 namespace Content.Shared.Objectives.Systems;
 
@@ -153,8 +153,7 @@ public abstract partial class SharedObjectivesSystem : EntitySystem
             return;
 
         comp.Icon = icon;
-        // <Trauma> - make it actually networked
+        // Trauma - make it actually networked
         DirtyField(uid, comp, nameof(ObjectiveComponent.Icon));
-        // </Trauma>
     }
 }

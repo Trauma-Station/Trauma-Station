@@ -18,5 +18,4 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
         if (IsScanned((args.MindId, args.Mind), stealComp.StealGroup))
             args.Progress = 1.0f;
     }
-
 }

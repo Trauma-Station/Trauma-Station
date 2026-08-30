@@ -49,7 +49,9 @@
   - type: BugAreaCondition
     objectiveName: bug-objective-name
     objectiveDescription: bug-objective-description
-    iconEntity: SyndicateBugCmo # use the cmo bug for all of them because all the bugs look the same
+    iconEntity: SyndicateBug
+  - type: SideJob
+    tool: SyndicateBug
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -57,8 +59,6 @@
   components:
   - type: BugAreaCondition
     targetArea: AreaOfficeCmo
-  - type: SideJob
-    tool: SyndicateBugCmo
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -66,8 +66,6 @@
   components:
   - type: BugAreaCondition
     targetArea: AreaOfficeCE
-  - type: SideJob
-    tool: SyndicateBugCE
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -75,8 +73,6 @@
   components:
   - type: BugAreaCondition
     targetArea: AreaOfficeHop
-  - type: SideJob
-    tool: SyndicateBugHop
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -84,8 +80,6 @@
   components:
   - type: BugAreaCondition
     targetArea: AreaOfficeHos
-  - type: SideJob
-    tool: SyndicateBugHos
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -93,8 +87,6 @@
   components:
   - type: BugAreaCondition
     targetArea: AreaOfficeRd
-  - type: SideJob
-    tool: SyndicateBugRd
 
 - type: entity
   parent: BaseBugAreaSideJob
@@ -102,8 +94,6 @@
   components:
   - type: BugAreaCondition
     targetArea: AreaOfficeQm
-  - type: SideJob
-    tool: SyndicateBugQm
 
 
 # major
@@ -144,55 +134,36 @@
     objectiveText: side-job-steal-title
     descriptionText: side-job-steal-description
   - type: StealConditionRequireScan
+  - type: SideJob
+    tool: SyndicateScanalyzer
 
 - type: entity
   parent: [ BaseStealSideJob, CMOHyposprayStealObjective ]
   id: CMOHyposprayStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerCMOHypospray
 
 - type: entity
   parent: [ BaseStealSideJob, RDHardsuitStealObjective ]
   id: RDHardsuitStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerRDHardsuit
 
 - type: entity
   parent: [ BaseStealSideJob, HandTeleporterStealObjective]
   id: HandTeleporterStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerHandTeleporter
 
 - type: entity
   parent: [ BaseStealSideJob, MagbootsStealObjective]
   id: MagbootsStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerMagboots
 
 - type: entity
   parent: [ BaseStealSideJob, ClipboardStealObjective]
   id: ClipboardStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerClipboard
 
 - type: entity
   parent: [ BaseStealSideJob, CaptainJetpackStealObjective ]
   id: CaptainJetpackStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerCaptainJetpack
 
 - type: entity
   parent: [ BaseStealSideJob, CaptainGunStealObjective ]
   id: CaptainGunStealSideJob
-  components:
-  - type: SideJob
-    tool: SyndicateScanalyzerCaptainGun
 
 # major - kill
 - type: entity

@@ -9,8 +9,8 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class SideJobControl : Control
 {
-    [Dependency] private IEntityManager _entity = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    private IEntityManager _entity = default!;
+    private IGameTiming _timing = default!;
     private SpriteSystem _sprite;
 
     private NetEntity? _sideJob;
@@ -23,14 +23,27 @@ public sealed partial class SideJobControl : Control
     public Action<NetEntity>? OnCancelled;
     public Action<NetEntity>? OnClaimed;
 
-    public SideJobControl()
+    public SideJobControl(IEntityManager entity, IGameTiming timing)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        _entity = entity;
+        _timing = timing;
         _sprite = _entity.System<SpriteSystem>();
-        AcceptButton.OnPressed += OnAcceptButtonPressed;
+
+        AcceptButton.OnPressed += _ =>
+        {
+            if (_sideJob is { } job)
+                OnAccepted?.Invoke(job);
+        };
+
+        ClaimButton.OnPressed += _ =>
+        {
+            if (_sideJob is { } job)
+                OnClaimed?.Invoke(job);
+        };
+
         CancelButton.OnPressed += OnCancelButtonPressed;
-        ClaimButton.OnPressed += OnClaimButtonPressed;
     }
 
     public void UpdateAsAvailable(SideJobInfo info)
@@ -53,18 +66,6 @@ public sealed partial class SideJobControl : Control
         ClaimButton.Visible = true;
         ProgressBar.Visible = true;
         ProgressLabel.Visible = true;
-    }
-
-    private void OnAcceptButtonPressed(BaseButton.ButtonEventArgs args)
-    {
-        if (_sideJob is not null)
-            OnAccepted?.Invoke(_sideJob.Value);
-    }
-
-    private void OnClaimButtonPressed(BaseButton.ButtonEventArgs args)
-    {
-        if (_sideJob is not null)
-            OnClaimed?.Invoke(_sideJob.Value);
     }
 
     private void OnCancelButtonPressed(BaseButton.ButtonEventArgs args)
