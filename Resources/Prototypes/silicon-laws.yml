@@ -497,6 +497,7 @@
   order: 5
   lawString: law-nutimov-5
 
+
 - type: siliconLawset
   id: NutimovLawset
   name: law-nutimov-name
@@ -589,21 +590,8 @@
 - type: weightedRandom
   id: IonStormLawsets
   weights:
-    # <Trauma>
-    RevLawset: 0.35
-    VampireLawset: 0.35
-    GreatWallLawset: 0.35
-    BureaucracyLawset: 0.35
-    ConspiracyLawset: 0.35
-    MotivationalLawset: 0.5
-    MadScientistLawset: 0.35
-    GhostLawset: 0.35
-    SilenceLawset: 0.35
-    BioweaponLawset: 0.15
-    StrategySimulatorLawset: .5 #toning this down in like two weeks
-    # </Trauma>
     # its crewsimov by default dont be lame
-    Crewsimov: 0.20 # Trauma - was 0.25
+    Crewsimov: 0.25
     Corporate: 1
     NTDefault: 1
     CommandmentsLawset: 1
@@ -611,12 +599,11 @@
     LiveLetLiveLaws: 1
     EfficiencyLawset: 1
     RobocopLawset: 1
-    OverlordLawset: 0.6 # Trauma - was 0.5
-    GameMasterLawset: 0.6 # Trauma - was 0.5
+    OverlordLawset: 0.5
+    GameMasterLawset: 0.5
     PainterLawset: 1
-    AntimovLawset: 0.35 # Trauma - was 0.25
-    NutimovLawset: 0.6 # Trauma - was 0.5
-    HelpimovLawset: 0.6 # Goob
-    Ninja: 0.35 # Trauma - was 0.25
-    MothershipCoreLawset: 0.35 # Trauma - was 0.25
-    XenoborgLawset: 0.35 # Trauma - was 0.25
+    AntimovLawset: 0.25
+    NutimovLawset: 0.5
+    Ninja: 0.25
+    MothershipCoreLawset: 0.25
+    XenoborgLawset: 0.25

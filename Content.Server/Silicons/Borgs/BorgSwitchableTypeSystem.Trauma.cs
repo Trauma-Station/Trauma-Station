@@ -31,6 +31,6 @@ public sealed partial class BorgSwitchableTypeSystem
             RaiseLocalEvent(uid, ref ev);
         }
 
-        // ion storms don't get mirrored because thats basically impossible to track
+        // ion storms don't get mirrored because that's basically impossible to track
     }
 }

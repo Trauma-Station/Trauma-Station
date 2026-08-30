@@ -14,9 +14,6 @@
   - type: Item
     size: Huge
   - type: MultiHandedItem
-  - type: Tag
-    tags:
-    - ReactorPart
   - type: GuideHelp
     guides:
     - NuclearReactor
