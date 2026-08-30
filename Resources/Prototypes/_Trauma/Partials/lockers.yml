@@ -41,7 +41,7 @@
   id: LockerWarden
   components:
   - type: RadioMicrophone
-    broadcastChannel: Security # joever
+    broadcastChannel: Security
     listenRange: 0
     toggleOnInteract: false
     enabled: true
