@@ -13970,3 +13970,10 @@ Entries:
   id: 1525
   time: '2026-08-30T11:21:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4373
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xeno missiles going invisible shortly after being shot.
+  id: 1526
+  time: '2026-08-30T12:14:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4374
