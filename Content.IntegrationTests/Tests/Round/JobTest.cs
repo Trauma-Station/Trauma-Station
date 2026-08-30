@@ -123,6 +123,7 @@ public sealed class JobTest : GameTest
         Assert.That(ticker.PlayerGameStatuses[pair.Client.User!.Value], Is.EqualTo(PlayerGameStatus.NotReadyToPlay));
 
         // Ready up and start the round
+        await pair.SetJobPriorities((Passenger, JobPriority.High), (Engineer, JobPriority.Never)); // Trauma - this didnt get reset and the test order is arbitrary
         ticker.ToggleReadyAll(true);
         Assert.That(ticker.PlayerGameStatuses[pair.Client.User!.Value], Is.EqualTo(PlayerGameStatus.ReadyToPlay));
         await pair.Server.WaitPost(() => ticker.StartRound());
