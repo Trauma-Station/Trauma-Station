@@ -14005,3 +14005,10 @@ Entries:
   id: 1530
   time: '2026-08-31T16:13:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4390
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio slimes not being able to get full enough to split.
+  id: 1531
+  time: '2026-08-31T18:30:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4396
