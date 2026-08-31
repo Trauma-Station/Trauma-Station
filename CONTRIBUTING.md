@@ -28,10 +28,38 @@ Remember to test your PR again after making changes to it! Not doing so is one o
 4. If you are adding new methods, fields, etc. in upstream files make a partial class with the same filename but with `.Trauma.cs`. If it isn't partial already, make it partial with a comment.
 5. Do not add new event handlers to upstream systems, make your own system in `Content.Trauma.*` instead.
 6. Always use proxy methods when they are available, e.g. `TryComp` instead of `EntityManager.TryGetComponent`. This also means don't depend on `EntityManager` when you are in a `EntitySystem` or a BUI.
+7. If a shared system is abstract, the server/client systems should have Server/Client prefix instead of prefixing the shared system with Shared.
 
 ### Resources
 
 All resources go in a `_Trauma` subdirectory inside the resource's folder, e.g. `Resources/Prototypes/_Trauma` for all YML prototypes.
+
+### Partial Prototypes
+
+If you are modifying upstream prototypes, use a partial prototype in `Resources/Prototypes/_Trauma/Partials` instead of directly changing upstream's YML.
+
+This should always be done except for special cases where it would be too obtuse or using partial prototypes isn't possible.
+
+Example:
+```
+- type: entity # modifying an EntityPrototype
+  id: HydroponicsToolClippers # with this ID. It will error if this doesnt' exist.
+  name: "evil plant clippers" # replace a prototype field directly
+  components: # by default, any components here will be added unless they already exist, then they will be merged.
+  - type: Tag # already exists upstream,
+    tags:
+    - AddedTag # so this gets added to the existing tags instead of removing the original ones
+  - type: Tool
+    qualities:
+    - !Remove Shearing # this quality will be removed, but any others it couldve had are kept
+  - type: MeleeWeapon
+    damage:
+      types: !Clear # remove the existing damage, this will replace it and behave like prototype inheritance
+        Blunt: 50
+  - !Remove type: PhysicalComposition # remove a component
+```
+
+See the documentation of partial prototypes on the xmldoc of `IPrototypeManager.PartialDirectory` for everything you can do.
 
 ### Update logic
 
@@ -154,6 +182,8 @@ using Content.Shared.Actions; // upstream's imports follow...
 This causes less conflicts with upstream for 2 reasons:
 1. Having all additions in 1 block means there is only 1 place it can conflict, as opposed to placing them randomly
 2. When new additions are slapped onto existing prototypes etc, it's almost always added to the bottom or alphabetically sorted etc. It's extremely rare that someone would put it at the top to spite you.
+
+However, **use partial prototypes instead** for YML to make conflicts **impossible** and make certain things like adding a single tag easier, without having to copy paste the parent's tags and hope they never get changed.
 
 ## Changelogs
 

@@ -1,15 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# for delayed entity effects
 - type: entity
-  abstract: true
   parent: StatusEffectBase
-  id: StatusEffectDelayBase
-  components:
-  - type: StatusEffectEffectsApply
-
-- type: entity
-  parent: StatusEffectDelayBase
   id: XenobioExplodeStatusEffect
   name: delayed explosion
   components:
@@ -24,7 +16,7 @@
       queued: true
 
 - type: entity
-  parent: StatusEffectDelayBase
+  parent: StatusEffectBase
   id: XenobioMetalFoamStatusEffect
   name: delayed metal foam
   components:

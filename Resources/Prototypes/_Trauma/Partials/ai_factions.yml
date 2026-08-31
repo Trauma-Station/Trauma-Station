@@ -1,0 +1,156 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: npcFaction
+  id: Dragon
+  hostile:
+  - !Remove Wizard
+  - Heretic
+  - Blob
+  - Shadowling
+  - Insurgent
+  friendly:
+  - Wizard
+  - PirateFaction
+  - Lavafauna
+  - CrabFaction
+
+- type: npcFaction
+  id: NanoTrasen
+  hostile:
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  - Insurgent
+  - CrabFaction
+
+- type: npcFaction
+  id: Mouse
+  hostile: !Clear # mice shouldnt attack random pets
+  - Insurgent
+
+- type: npcFaction
+  id: Passive
+  hostile:
+  - Insurgent
+
+- type: npcFaction
+  id: PetsNT
+  friendly:
+  - !Remove NanoTrasen
+  hostile:
+  - Balloon # Pets can join the fight against the balloons
+  - Blob
+  - Lavafauna
+  - Insurgent
+  - CrabFaction
+
+- type: npcFaction
+  id: SimpleHostile
+  hostile:
+  - !Remove Wizard
+  - Heretic
+  - Blob
+  - PirateFaction
+  - Lavafauna
+  - Insurgent
+  friendly:
+  - Wizard
+  - Shadowling
+  - Wraith
+
+- type: npcFaction
+  id: SimpleNeutral
+  hostile:
+  - Insurgent
+
+- type: npcFaction
+  id: Syndicate
+  hostile:
+  - Changeling
+  - Heretic
+  - Blob
+  - PirateFaction
+  - Shadowling
+  - Wraith
+  - Lavafauna
+  - Insurgent
+  - CrabFaction
+
+- type: npcFaction
+  id: Xeno
+  hostile:
+  - !Remove Wizard
+  - Heretic
+  - Blob
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  - Insurgent
+  - CrabFaction
+  friendly:
+  - Wizard
+
+- type: npcFaction
+  id: Zombie
+  friendly:
+  - InitialInfected
+  hostile:
+  - Insurgent
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  - CrabFaction
+
+- type: npcFaction
+  id: Revolutionary
+  hostile:
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - Wizard
+  - PirateFaction
+  - Lavafauna
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleNeutral
+  - Syndicate
+  - Xeno
+  - CrabFaction
+
+- type: npcFaction
+  id: AllHostile
+  hostile:
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  - Insurgent
+  - CrabFaction
+
+- type: npcFaction
+  id: Wizard
+  hostile:
+  - Insurgent
+
+- type: npcFaction
+  id: Xenoborg
+  hostile:
+  - Changeling
+  - Heretic
+  - PirateFaction
+  - Blob
+  - Shadowling
+  - Insurgent

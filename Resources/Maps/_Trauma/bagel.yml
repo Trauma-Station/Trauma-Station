@@ -127290,13 +127290,11 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 47.5,4.5
   - uid: 19659
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: 13.5,-14.5
   - uid: 19660
     components:
@@ -127392,19 +127390,16 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -32.5,6.5
   - uid: 19679
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -22.5,22.5
   - uid: 19680
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -1.5,-10.5
 - proto: Screwdriver
   entities:

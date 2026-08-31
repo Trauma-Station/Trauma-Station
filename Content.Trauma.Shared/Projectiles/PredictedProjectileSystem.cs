@@ -14,6 +14,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Common.Teleportation;
 using Content.Trauma.Shared.Executions;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -47,13 +48,23 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
     [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     [SubscribeLocalEvent]
-    private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
+    private void OnStartCollide(Entity<ProjectileComponent> ent, ref StartCollideEvent args)
     {
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != SharedProjectileSystem.ProjectileFixture || !args.OtherFixture.Hard)
             return;
 
-        DoHit((uid, component, args.OurBody), args.OtherEntity);
+        DoHit((ent, ent.Comp, args.OurBody), args.OtherEntity);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPortalTeleported(Entity<ProjectileComponent> ent, ref PortalTeleportedEvent args)
+    {
+        if (ent.Comp.IgnoredEntities.Count == 0)
+            return;
+
+        ent.Comp.IgnoredEntities.Clear();
+        Dirty(ent);
     }
 
     [SubscribeLocalEvent]
@@ -173,11 +184,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         }
 
         if (comp.DeleteOnCollide && comp.ProjectileSpent)
-        {
-            var deleteEv = new DeletingProjectileEvent(uid);
-            RaiseLocalEvent(ref deleteEv);
             PredictedQueueDel(uid);
-        }
 
         if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
         {
