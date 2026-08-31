@@ -15,11 +15,11 @@ namespace Content.Client.Polymorph.Systems;
 
 public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 {
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
     // <Trauma>
     [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
-    // [Dependency] private SpriteSystem _sprite = default!;
     // </Trauma>
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
     // [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!; // Trauma

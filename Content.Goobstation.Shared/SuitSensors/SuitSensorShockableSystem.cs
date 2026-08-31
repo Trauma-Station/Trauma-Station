@@ -2,27 +2,22 @@
 
 using Content.Shared.Electrocution;
 using Content.Shared.Inventory;
-using Content.Shared.Medical.SuitSensor; // great namespacing here guys
 using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.SuitSensors;
 
 public sealed partial class SuitSensorShockableSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSuitSensorSystem _suitSensor = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<InventoryComponent, ElectrocutedEvent>(OnElectrocuted);
-    }
-
+    [SubscribeLocalEvent]
     private void OnElectrocuted(Entity<InventoryComponent> ent, ref ElectrocutedEvent args)
     {
         var enumerator = _inventory.GetSlotEnumerator(ent.AsNullable());
@@ -37,7 +32,8 @@ public sealed partial class SuitSensorShockableSystem : EntitySystem
                 || sensor.User != ent.Owner)
                 continue;
 
-            _suitSensor.SetSensor((item, sensor), _random.Pick(modes), ent);
+            var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(item));
+            _suitSensor.SetSensor((item, sensor), rand.Pick(modes), ent);
             _popup.PopupEntity(Loc.GetString("suit-sensor-got-shocked", ("suit", item)),
                 ent,
                 ent,

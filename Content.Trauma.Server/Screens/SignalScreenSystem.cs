@@ -4,6 +4,7 @@ using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.TextScreen;
+using Content.Trauma.Common.DeviceLinking;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Screens;
@@ -23,25 +24,48 @@ public sealed partial class SignalScreenSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<SignalScreenComponent> ent, ref SignalReceivedEvent args)
     {
-        var now = _timing.CurTime;
-        if (now < ent.Comp.NextChange ||
-            args.Port != ent.Comp.TextPort ||
-            args.Data is not { } data)
+        if (args.Port != ent.Comp.TextPort)
             return;
 
-        var text = string.Empty;
-        if (data.TryGetValue<string>("logic_string", out var s))
-            text = s;
-        else if (data.TryGetValue<int>("logic_int", out var i))
-            text = i.ToString();
-        else if (data.TryGetValue<SignalState>(DeviceNetworkConstants.LogicState, out var state))
-            text = state switch
-            {
-                SignalState.High => "true",
-                SignalState.Low => "false",
-                _ => "pulse"
-            };
-        else
+        TrySetText(ent, "pulse");
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalReceived(Entity<SignalScreenComponent> ent, ref SignalReceivedEvent<LogicStatePayload> args)
+    {
+        if (args.Port != ent.Comp.TextPort)
+            return;
+
+        TrySetText(ent, args.Data.State switch
+        {
+            SignalState.High => "true",
+            SignalState.Low => "false",
+            _ => "pulse"
+        });
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalIntReceived(Entity<SignalScreenComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    {
+        if (args.Port != ent.Comp.TextPort)
+            return;
+
+        TrySetText(ent, args.Data.Value.ToString());
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalStringReceived(Entity<SignalScreenComponent> ent, ref SignalReceivedEvent<LogicStringPayload> args)
+    {
+        if (args.Port != ent.Comp.TextPort)
+            return;
+
+        TrySetText(ent, args.Data.Value);
+    }
+
+    private void TrySetText(Entity<SignalScreenComponent> ent, string text)
+    {
+        var now = _timing.CurTime;
+        if (now < ent.Comp.NextChange)
             return;
 
         ent.Comp.NextChange = now + ent.Comp.ChangeCooldown;

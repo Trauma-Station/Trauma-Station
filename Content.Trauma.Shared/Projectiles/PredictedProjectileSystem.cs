@@ -162,8 +162,8 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
             }
 
-            var shotByString = Exists(component.Shooter)
-                ? $"{ToPrettyString(component.Shooter!.Value):user}"
+            var shotByString = Exists(comp.Shooter)
+                ? $"{ToPrettyString(comp.Shooter!.Value):user}"
                 : "a now deleted entity (grenade?)";
 
             _adminLogger.Add(LogType.BulletHit,

@@ -2,7 +2,6 @@
 using Content.Shared.Drone;
 using Robust.Shared.Player;
 // </Trauma>
-using Content.Shared.DeviceNetwork;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -20,11 +19,6 @@ namespace Content.Server.Silicons.Borgs;
 /// <inheritdoc/>
 public sealed partial class BorgSystem
 {
-    private void InitializeTransponder()
-    {
-        SubscribeLocalEvent<BorgTransponderComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
-    }
-
     public void UpdateTransponder(float frameTime)
     {
         var now = _timing.CurTime;
@@ -56,18 +50,17 @@ public sealed partial class BorgSystem
                 hasBrain,
                 canDisable);
 
-            var payload = new NetworkPayload()
+            var payload = new RoboticsCyborgDataPayload
             {
-                [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
-                [RoboticsConsoleConstants.NET_CYBORG_DATA] = data
+                Data = data,
             };
-            _deviceNetwork.QueuePacket(uid, null, payload, device: device);
+            _deviceNetwork.SendPacket((uid, device), null, ref payload);
 
             comp.NextBroadcast = now + comp.BroadcastDelay;
         }
-        //Goobstation Drone transponder start
-        var query2 = EntityQueryEnumerator<BorgTransponderComponent, DroneComponent, DeviceNetworkComponent, MetaDataComponent>();
-        while (query2.MoveNext(out var uid, out  var comp, out var drone, out var device, out var  meta))
+        // <Trauma> - todo move this slop out
+        var query2 = EntityQueryEnumerator<DroneComponent, BorgTransponderComponent, DeviceNetworkComponent, MetaDataComponent>();
+        while (query2.MoveNext(out var uid, out var drone, out var comp, out var device, out var  meta))
         {
             if (now < comp.NextBroadcast)
                 continue;
@@ -83,12 +76,11 @@ public sealed partial class BorgSystem
                 hasBrain,
                 false);
 
-            var payload = new NetworkPayload()
+            var payload = new RoboticsCyborgDataPayload()
             {
-                [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
-                [RoboticsConsoleConstants.NET_CYBORG_DATA] = data
+                Data = data,
             };
-            _deviceNetwork.QueuePacket(uid, null, payload, device: device);
+            _deviceNetwork.SendPacket((uid, device), null, ref payload);
 
             comp.NextBroadcast = now + comp.BroadcastDelay;
         }
@@ -113,16 +105,16 @@ public sealed partial class BorgSystem
         _container.Remove(brain, ent.Comp2.BrainContainer);
     }
 
-    private void OnPacketReceived(Entity<BorgTransponderComponent> ent, ref DeviceNetworkPacketEvent args)
+    [SubscribeLocalEvent]
+    private void OnDisable(Entity<BorgTransponderComponent> ent, ref DeviceNetworkPacketEvent<RoboticsCyborgDisablePayload> args)
     {
-        var payload = args.Data;
-        if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
-            return;
+        Disable(ent);
+    }
 
-        if (command == RoboticsConsoleConstants.NET_DISABLE_COMMAND)
-            Disable(ent);
-        else if (command == RoboticsConsoleConstants.NET_DESTROY_COMMAND)
-            Destroy(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnDestroy(Entity<BorgTransponderComponent> ent, ref DeviceNetworkPacketEvent<RoboticsCyborgDestroyPayload> args)
+    {
+        Destroy(ent.AsNullable());
     }
 
     private void Disable(Entity<BorgTransponderComponent, BorgChassisComponent?> ent)
