@@ -148,8 +148,6 @@
       task: ED209EmagedCompound
   - type: PatrolSlave
 
-
-
 - type: entity
   id: ED209Endoskeleton
   name: ED-209 endoskeleton
