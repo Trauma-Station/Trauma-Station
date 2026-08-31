@@ -245,6 +245,10 @@
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Typically punished via corporal methods, or reduction of access, if there is a reasonable risk.
     </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Gross Failure of Standards</Box></ColorBox>
+    <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
+      If a member of security grossly over-escalates or otherwise violates Corporate Law and the Charter of Rights, they are to be immediately demoted to cadet as reduction of access. Further violations are to be punished through application of non-standard violations to escalate to a Type 4 Violation, and to result in immediate demotion to D-Class.
+    </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Abandonment of Occupation</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       Willful and verbally confirmed abandonment of role, or extensive use of the company time on non-productive work for 15 or more minutes.
