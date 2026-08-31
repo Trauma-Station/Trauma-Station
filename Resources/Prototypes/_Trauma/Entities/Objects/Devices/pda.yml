@@ -133,6 +133,17 @@
     borderColor: "#4eb349"
     accentVColor: "#60c95b"
 
+- type: entity
+  parent: BasePDA
+  id: DClassPDA
+  name: D-Class PDA
+  description: A hardened criminal's PDA.
+  components:
+  - type: Pda
+    id: DClassIDCard
+  - type: PdaBorderColor
+    borderColor: "#f57e00"
+
 - type: entity # TODO: actions: spam messages in pdas
   parent: [ BasePDA, BaseMajorContraband ]
   id: DemonologistPDA

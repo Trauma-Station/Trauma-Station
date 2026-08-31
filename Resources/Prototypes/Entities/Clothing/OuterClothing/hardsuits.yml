@@ -88,8 +88,14 @@
     lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
+      # <Trauma>
       coefficients:
-        Radiation: 0.1
+        Radiation: 0.5 # was 0.1
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Caustic: 0.8
+      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8

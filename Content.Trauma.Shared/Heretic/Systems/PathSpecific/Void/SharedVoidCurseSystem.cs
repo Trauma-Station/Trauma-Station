@@ -63,7 +63,7 @@ public abstract partial class SharedVoidCurseSystem : EntitySystem
             return false;
 
         var ev = new BeforeCastTouchSpellEvent(uid, false);
-        RaiseLocalEvent(uid, ev, true);
+        RaiseLocalEvent(uid, ref ev, true);
         if (ev.Cancelled)
             return false;
 

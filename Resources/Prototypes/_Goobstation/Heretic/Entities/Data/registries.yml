@@ -8,8 +8,8 @@
     damageRecovery: !type:DamageSpecifier
   - type: Barotrauma
     damage: !type:DamageSpecifier
-  - type: Hunger
-  - type: Thirst
+  - type: Satiation
+    satiations: {}
   - type: Reproductive
     offspring: []
     partnerWhitelist: !type:EntityWhitelist

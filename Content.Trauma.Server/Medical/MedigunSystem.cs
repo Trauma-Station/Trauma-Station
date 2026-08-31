@@ -30,7 +30,7 @@ public sealed partial class MedigunSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private AlertsSystem _alert = default!;
     [Dependency] private BatterySystem _battery = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private DamageableSystem _damage = default!;
@@ -73,10 +73,11 @@ public sealed partial class MedigunSystem : EntitySystem
     [SubscribeLocalEvent]
     private void BeamCollision(Entity<MediGunComponent> ent, ref ComplexJointCollisionEvent args)
     {
-        if (args.Data.Id != ent.Comp.JointKey || ent.Comp.HealedEntities.Contains(args.Hit.HitEntity))
+        if (args.Data.Id != ent.Comp.JointKey)
             return;
 
         DisableConnection(ent, args.Target);
+        args.BlockNextCollisions = true;
     }
 
     [SubscribeLocalEvent]
@@ -85,11 +86,18 @@ public sealed partial class MedigunSystem : EntitySystem
         if (!args.UpdatedIds.TryGetValue(ent.Comp.JointKey, out var set))
             return;
 
-        foreach (var healed in ent.Comp.HealedEntities)
+        ent.Comp.HealedEntities.RemoveAll(healed =>
         {
-            if (!set.Contains(healed) || !MediGunHealingTick(ent, healed))
-                DisableConnection(ent, healed);
-        }
+            if (set.Contains(healed) && MediGunHealingTick(ent, healed))
+                return false;
+
+            _joint.ClearBeamJoints(ent.Owner, ent.Comp.JointKey, healed);
+            RemCompDeferred<MediGunHealedComponent>(healed);
+            return true;
+        });
+
+        if (ent.Comp.HealedEntities.Count == 0)
+            ClearJoints(ent);
     }
 
     /// <summary>
@@ -205,7 +213,7 @@ public sealed partial class MedigunSystem : EntitySystem
         var visuals = new ComplexJointVisualsData(ent.Comp.JointKey, sprite, ent.Comp.MaxRange)
         {
             Color = color,
-            ReturnOnFirstHit = true,
+            CollisionIgnoreParent = true,
         };
         _joint.CreateJoint(target, ent, visuals);
 

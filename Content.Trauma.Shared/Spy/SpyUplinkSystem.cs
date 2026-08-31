@@ -94,6 +94,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         args.Handled = true;
 
         bounty.Claimed = true;
+        Dirty(rule.Value, ruleComp);
         role.Comp2.ClaimedBounties++;
         _audio.PlayPredicted(ent.Comp.StealEndSound, ent, args.User);
 
@@ -355,7 +356,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         if (!Resolve(rule, ref rule.Comp))
             return;
 
-        _ui.OpenUi(uplink, SpyUplinkUiKey.Key, user, true);
+        _ui.OpenUi(uplink, SpyUplinkUiKey.Key, user);
         RefreshUi(uplink);
     }
 

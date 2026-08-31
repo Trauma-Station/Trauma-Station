@@ -2,54 +2,36 @@
 
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
-using Robust.Client.Player;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 
 [GenerateTypedNameReferences]
 public sealed partial class InfluenceButtonContainer : BoxContainer
 {
-    [Dependency] private IEntityManager _entityManager = default!;
-    [Dependency] private IPlayerManager _playerManager = default!;
-
-    private readonly SpriteSystem _sprite;
-
     public Action? OnDetailButtonPressed;
-    public readonly InfluenceUIBox.InfluenceUIBoxState State;
+
     public readonly InfluencePrototype Proto;
 
-    public InfluenceButtonContainer(InfluencePrototype influenceProto, InfluenceUIBox.InfluenceUIBoxState state)
+    public InfluenceButtonContainer(SpriteSystem sprite, InfluencePrototype proto)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        _sprite = _entityManager.System<SpriteSystem>();
 
-        DetailButton.TextureNormal = _sprite.Frame0(influenceProto.Icon);
-        DetailButton.ToolTip = Loc.GetString(influenceProto.Name);
+        Proto = proto;
 
-        State = state;
-        Proto = influenceProto;
-
-        var availableEntropy = 0;
-        if (_entityManager.TryGetComponent<CosmicCultComponent>(_playerManager.LocalEntity, out var cultComp))
-            availableEntropy = cultComp.EntropyBudget;
-
-        switch (state)
-        {
-            case InfluenceUIBox.InfluenceUIBoxState.Owned:
-                DetailButton.Modulate = Color.Green;
-                break;
-
-            case InfluenceUIBox.InfluenceUIBoxState.UnlockedAndEnoughEntropy:
-                DetailButton.Modulate = Color.White;
-                break;
-
-            case InfluenceUIBox.InfluenceUIBoxState.UnlockedAndNotEnoughEntropy:
-            case InfluenceUIBox.InfluenceUIBoxState.Locked:
-                DetailButton.Modulate = Color.Gray;
-                break;
-        }
-
+        DetailButton.TextureNormal = sprite.Frame0(proto.Icon);
+        DetailButton.ToolTip = Loc.GetString(proto.Name);
         DetailButton.OnPressed += _ => OnDetailButtonPressed?.Invoke();
+    }
+
+    public void Update(CosmicCultComponent comp)
+    {
+        var state = InfluenceUIBox.GetState(Proto, comp);
+        DetailButton.Modulate = state switch
+        {
+            InfluenceUIBoxState.Owned => Color.Green,
+            InfluenceUIBoxState.UnlockedAndEnoughEntropy => Color.White,
+            _ => Color.Gray
+        };
     }
 }

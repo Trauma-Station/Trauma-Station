@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Effects;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Destructible.Thresholds;
@@ -8,6 +7,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
+using Content.Trauma.Shared.Effects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -29,13 +29,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RandomTeleportOnUseComponent, UseInHandEvent>(OnUseInHand);
-    }
-
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<RandomTeleportOnUseComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
@@ -43,7 +37,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!RandomTeleport(args.User, ent.Comp, out var wp, user: args.User))
+        if (!RandomTeleport(args.User, (ent, ent.Comp), out var wp, user: args.User))
             return;
 
         _adminLog.Add(LogType.Action, LogImpact.Low, $"{args.User:actor} randomly teleported to {wp} using {ent:used}");
@@ -61,10 +55,10 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         PredictedQueueDel(ent);
     }
 
-    public bool RandomTeleport(EntityUid target, RandomTeleportComponent rtp, bool sound = true, EntityUid? user = null, bool predicted = true)
+    public bool RandomTeleport(EntityUid target, Entity<RandomTeleportComponent> rtp, bool sound = true, EntityUid? user = null, bool predicted = true)
         => RandomTeleport(target, rtp, out _, sound, user, predicted);
 
-    public bool RandomTeleport(EntityUid target, RandomTeleportComponent rtp, out Vector2 finalWorldPos, bool sound = true, EntityUid? user = null, bool predicted = true)
+    public bool RandomTeleport(EntityUid target, Entity<RandomTeleportComponent> rtp, out Vector2 finalWorldPos, bool sound = true, EntityUid? user = null, bool predicted = true)
     {
         finalWorldPos = Vector2.Zero;
 
@@ -74,15 +68,15 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         // play sound before and after teleport if sound is true
         var oldCoords = Transform(target).Coordinates;
         if (sound)
-            _audio.PlayPredicted(rtp.DepartureSound, oldCoords, predicted ? user : null);
-        _sparks.DoSparks(oldCoords); // also sparks!!
+            _audio.PlayPredicted(rtp.Comp.DepartureSound, oldCoords, predicted ? user : null);
+        _sparks.DoSparks(oldCoords, user, source: rtp); // different source entity from below so they use different rng seeds
 
-        finalWorldPos = RandomTeleport(target, rtp.Radius, rtp.TeleportAttempts, rtp.ForceSafeTeleport, rtp.TeleportPulled);
+        finalWorldPos = RandomTeleport(target, rtp.Comp.Radius, rtp.Comp.TeleportAttempts, rtp.Comp.ForceSafeTeleport, rtp.Comp.TeleportPulled);
 
         var newCoords = Transform(target).Coordinates;
         if (sound)
-            _audio.PlayPredicted(rtp.ArrivalSound, oldCoords, predicted ? user : null);
-        _sparks.DoSparks(newCoords);
+            _audio.PlayPredicted(rtp.Comp.ArrivalSound, oldCoords, predicted ? user : null);
+        _sparks.DoSparks(newCoords, user);
 
         return true;
     }

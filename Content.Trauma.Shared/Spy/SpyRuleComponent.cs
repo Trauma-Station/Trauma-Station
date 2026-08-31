@@ -86,9 +86,15 @@ public sealed partial class SpyRuleComponent : Component
     public SortedDictionary<FixedPoint2, SpyBountyDifficulty> CostToDifficulty = new()
     {
         {0, SpyBountyDifficulty.Easy},
-        {30, SpyBountyDifficulty.Medium},
-        {60, SpyBountyDifficulty.Hard},
+        {20, SpyBountyDifficulty.Medium},
+        {50, SpyBountyDifficulty.Hard},
     };
+
+    /// <summary>
+    /// Bounties can't roll uplink items that cost more than this
+    /// </summary>
+    [DataField]
+    public FixedPoint2 MaxCost = 100;
 
     /// <summary>
     /// Chance that reward will be removed from <see cref="LootPool"/> when claimed by someone, based on difficulty

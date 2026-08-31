@@ -13,7 +13,6 @@ using Content.Shared.Body;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clumsy;
 using Content.Shared.Cluwne;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -62,9 +61,9 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Carrying;
-using Content.Trauma.Common.Silicon;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Wizard.Projectile;
+using Content.Trauma.Shared.Silicon.Components;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Content.Trauma.Shared.Wizard.Chuuni;
@@ -136,9 +135,11 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private TileFrictionController _tileFriction = default!;
 
-    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private EntityQuery<BorgChassisComponent> _borgQuery = default!;
+    [Dependency] private EntityQuery<SiliconComponent> _siliconQuery = default!;
     #endregion
 
+    private static readonly EntProtoId ClumsyWizard = "StatusEffectClumsyWizard";
     private static readonly EntProtoId BlurryVision = "StatusEffectBlurryVision";
     private static readonly EntProtoId MutedEffect = "StatusEffectMuted";
 
@@ -200,7 +201,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
         if (!targetWizard)
-            EnsureComp<ClumsyComponent>(ev.Target);
+            _status.AddEffect(ev.Target, ClumsyWizard);
 
         SetGear(ev.Target, ev.Gear, !targetWizard);
 
@@ -370,7 +371,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
                 origin: ev.Performer,
                 targetPart: TargetBodyPart.All);
 
-            if (_silicon.IsSilicon(target) || HasComp<BorgChassisComponent>(target))
+            if (IsClanker(target))
                 Stun.TryUpdateParalyzeDuration(target, ev.SiliconStunTime / range);
             else
                 Stun.KnockdownOrStun(target, ev.KnockdownTime / range);
@@ -452,39 +453,40 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     private void HandleSoulBinding(Entity<MindComponent> ent, ref BindSoulEvent ev)
     {
-        if (HasComp<GhostComponent>(ev.Performer))
+        var user = ev.Performer;
+        if (HasComp<GhostComponent>(user))
             return;
 
         if (TryComp<SoulBoundComponent>(ent, out var soulBound))
         {
-            Popup(ev.Performer, "spell-fail-no-soul");
+            Popup(user, "spell-fail-no-soul");
             return;
         }
 
-        if (!_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
+        if (!_magic.PassesSpellPrerequisites(ev.Action, user))
             return;
 
-        if (_silicon.IsSilicon(ev.Performer) || HasComp<BorgChassisComponent>(ev.Performer))
+        if (IsClanker(user))
         {
-            Popup(ev.Performer, "spell-fail-bind-soul-silicon");
+            Popup(user, "spell-fail-bind-soul-silicon");
             return;
         }
 
-        if (!Hands.TryGetActiveItem(ev.Performer, out var item))
+        if (!Hands.TryGetActiveItem(user, out var item))
         {
-            Popup(ev.Performer, "spell-fail-no-held-entity");
+            Popup(user, "spell-fail-no-held-entity");
             return;
         }
 
         if (HasComp<UnremoveableComponent>(item) || !HasComp<ItemComponent>(item))
         {
-            PopupLoc(ev.Performer, Loc.GetString("spell-fail-unremoveable", ("item", item)));
+            PopupLoc(user, Loc.GetString("spell-fail-unremoveable", ("item", item)));
             return;
         }
 
         if (_whitelist.IsValid(ev.Blacklist, item))
         {
-            PopupLoc(ev.Performer, Loc.GetString("spell-fail-soul-item-not-suitable", ("item", item)));
+            PopupLoc(user, Loc.GetString("spell-fail-soul-item-not-suitable", ("item", item)));
             return;
         }
 
@@ -504,16 +506,17 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [SubscribeLocalEvent]
     private void OnMutate(MutateSpellEvent ev)
     {
-        if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
+        var user = ev.Performer;
+        if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, user))
             return;
 
-        if (_silicon.IsSilicon(ev.Performer) || HasComp<BorgChassisComponent>(ev.Performer))
+        if (IsClanker(user))
         {
             Popup(ev.Performer, "spell-fail-mutate-silicon");
             return;
         }
 
-        EnsureComp<HulkComponent>(ev.Performer).Duration = ev.Duration;
+        EnsureComp<HulkComponent>(user).Duration = ev.Duration;
 
         ev.Handled = true;
     }
@@ -695,7 +698,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
             return;
         }
 
-        if (HasComp<BorgChassisComponent>(ev.Target) || _silicon.IsSilicon(ev.Target))
+        if (IsClanker(ev.Target))
         {
             Popup(ev.Performer, "spell-fail-target-silicon");
             return;
@@ -1262,8 +1265,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     private bool IsTouchSpellDenied(EntityUid target)
     {
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev, true);
-
+        RaiseLocalEvent(target, ref ev, true);
         return ev.Cancelled;
     }
 
@@ -1409,6 +1411,9 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     }
 
     #endregion
+
+    private bool IsClanker(EntityUid uid)
+        => _siliconQuery.HasComp(uid) || _borgQuery.HasComp(uid);
 
     #region ServerMethods
 

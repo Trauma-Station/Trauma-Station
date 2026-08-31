@@ -210,6 +210,11 @@
   parent: BaseMachine
   id: BaseRTG
   components:
+  # <Trauma>
+  - type: Damageable
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  # </Trauma>
   - type: Fixtures
     fixtures:
       fix1:

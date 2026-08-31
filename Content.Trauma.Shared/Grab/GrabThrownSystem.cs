@@ -91,13 +91,16 @@ public sealed partial class GrabThrownSystem : CommonGrabThrownSystem
         Vector2 vector,
         float grabThrownSpeed,
         DamageSpecifier? damage = null,
-        bool drop = true)
+        bool drop = true,
+        bool knockdown = true)
     {
         var comp = EnsureComp<GrabThrownComponent>(uid);
         comp.IgnoreEntity.Add(thrower);
         comp.DamageOnCollide = damage;
 
-        _stun.TryCrawling(uid, drop: drop);
+        if (knockdown)
+            _stun.TryCrawling(uid, drop: drop);
+
         _throwing.TryThrow(uid, vector, grabThrownSpeed, animated: false);
     }
 }

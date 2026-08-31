@@ -78,7 +78,7 @@ public sealed partial class FireBlastedComponent : BaseSpriteOverlayComponent
     {
         DamageDict =
         {
-            { "Heat", 15f },
+            { "Heat", 25f },
         },
     };
 

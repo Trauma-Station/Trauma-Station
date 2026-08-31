@@ -19,17 +19,13 @@ public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StatusEffectContainerComponent, LightLevelUpdated>(_status.RelayEvent);
-
-        SubscribeLocalEvent<DarknessStealthStatusEffectComponent, StatusEffectRelayedEvent<LightLevelUpdated>>(OnLightUpdated);
-
-        SubscribeLocalEvent<DarknessStealthStatusEffectComponent, StatusEffectAppliedEvent>(OnApplied);
-        SubscribeLocalEvent<DarknessStealthStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
     }
 
+    [SubscribeLocalEvent]
     private void OnLightUpdated(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectRelayedEvent<LightLevelUpdated> args)
     {
         var newLevel = args.Args.NewLightLevel;
-        var target = args.Container.Owner;
+        var target = args.AppliedTo;
 
         // We are in darkness here
         if (newLevel < ent.Comp.TriggerAt)
@@ -41,6 +37,8 @@ public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
         _stealth.SetVisibility(target, 1f);
     }
 
+    // TODO: this is brittle as fuck
+    [SubscribeLocalEvent]
     private void OnApplied(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
         var target = args.Target;
@@ -48,6 +46,7 @@ public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
         EnsureComp<StealthComponent>(target);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
         var target = args.Target;

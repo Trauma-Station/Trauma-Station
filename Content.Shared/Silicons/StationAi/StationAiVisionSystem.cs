@@ -64,13 +64,9 @@ public sealed partial class StationAiVisionSystem : EntitySystem
     /// </summary>
     public bool IsAccessible(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, float expansionSize = 8.5f, bool fastPath = false)
     {
-        // <Trauma>
-        if (_jobLocked)
+        // <Trauma> - lock all this because BUI checks are multithreaded and this isn't thread safe at all
+        lock (_viewportTiles)
         {
-            Log.Error($"Called IsAccessible for {ToPrettyString(grid)} @ {tile} from inside its parallel jobs! Stack trace: {Environment.StackTrace}");
-            return true;
-        }
-        // </Trauma>
         _viewportTiles.Clear();
         _opaque.Clear();
         _seeds.Clear();
@@ -104,7 +100,7 @@ public sealed partial class StationAiVisionSystem : EntitySystem
         // Skip occluders step if we're just doing range checks.
         if (!fastPath)
         {
-            var tileEnumerator = _maps.GetLocalTilesEnumerator(grid, grid, expandedBounds, ignoreEmpty: false);
+            var tileEnumerator = _maps.GetLocalTilesIntersecting(grid, grid, expandedBounds, ignoreEmpty: false);
 
             // Get all other relevant tiles.
             while (tileEnumerator.MoveNext(out var tileRef))
@@ -127,25 +123,17 @@ public sealed partial class StationAiVisionSystem : EntitySystem
         _singleTiles.Clear();
         _job.Grid = (grid.Owner, grid.Comp2);
         _job.VisibleTiles = _singleTiles;
-        // <Trauma> - set _jobLocked to prevent recursion
-        try
-        {
-            _jobLocked = true;
-            _parallel.ProcessNow(_job, _job.Data.Count);
-        }
-        finally
-        {
-            _jobLocked = false;
-        }
-        // <Trauma>
+        _parallel.ProcessNow(_job, _job.Data.Count);
 
         return _job.VisibleTiles.Contains(tile);
+        }
+        // <Trauma>
     }
 
     private bool IsOccluded(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile)
     {
-        // <Trauma> - try catch this
-        try
+        // <Trauma> - lock occluders because BUI shit is calling this in multiple threads
+        lock (_occluders)
         {
         var tileBounds = _lookup.GetLocalBounds(tile, grid.Comp2.TileSize).Enlarged(-0.05f);
         _occluders.Clear();
@@ -154,13 +142,6 @@ public sealed partial class StationAiVisionSystem : EntitySystem
 
         foreach (var occluder in _occluders)
         {
-            // <Trauma>
-            if (occluder.Comp == default!)
-            {
-                Log.Error($"Somehow had null occluder {ToPrettyString(occluder)} when checking AI vision for {ToPrettyString(grid)} at {tile}");
-                continue;
-            }
-            // </Trauma>
             if (!occluder.Comp.Enabled)
                 continue;
 
@@ -169,11 +150,6 @@ public sealed partial class StationAiVisionSystem : EntitySystem
         }
 
         return anyOccluders;
-        }
-        catch (Exception e)
-        {
-            Log.Error($"IsOccluded for {ToPrettyString(grid)} at {tile} had an exception: {e}");
-            return false;
         }
         // </Trauma>
     }
@@ -216,7 +192,7 @@ public sealed partial class StationAiVisionSystem : EntitySystem
             return;
 
         // Get viewport tiles
-        var tileEnumerator = _maps.GetLocalTilesEnumerator(grid, grid, localAabb, ignoreEmpty: false);
+        var tileEnumerator = _maps.GetLocalTilesIntersecting(grid, grid, localAabb, ignoreEmpty: false);
 
         while (tileEnumerator.MoveNext(out var tileRef))
         {
@@ -228,7 +204,7 @@ public sealed partial class StationAiVisionSystem : EntitySystem
             _viewportTiles.Add(tileRef.GridIndices);
         }
 
-        tileEnumerator = _maps.GetLocalTilesEnumerator(grid, grid, enlargedLocalAabb, ignoreEmpty: false);
+        tileEnumerator = _maps.GetLocalTilesIntersecting(grid, grid, enlargedLocalAabb, ignoreEmpty: false);
 
         while (tileEnumerator.MoveNext(out var tileRef))
         {
@@ -359,15 +335,9 @@ public sealed partial class StationAiVisionSystem : EntitySystem
             // <Trauma>
             var total = Data.Count;
             if (index >= total || index < 0)
-            {
-                System.Log.Error($"Job {index} is out of bounds, only {total} jobs exist!");
                 return;
-            }
             if (total > Vis1.Count || total > Vis2.Count || total > SeedTiles.Count || total > BoundaryTiles.Count)
-            {
-                System.Log.Error($"AI vision job {index} has wrong bounds lists! Data={total} Vis1={Vis1.Count} Vis2={Vis2.Count} SeedTiles={SeedTiles.Count} BoundaryTiles={BoundaryTiles.Count}");
                 return;
-            }
             // </Trauma>
             var seed = Data[index];
             var seedXform = EntManager.GetComponent<TransformComponent>(seed);

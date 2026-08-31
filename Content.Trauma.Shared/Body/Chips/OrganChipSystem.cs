@@ -159,14 +159,22 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
 
         var user = args.User;
+        var isSelf = _body.GetBody(ent.Owner) == user;
+        var isAdmin = _bypassQuery.HasComp(user);
         // you remember which skill chip is installing in yourself, for others they are just numbered
-        var known = _body.GetBody(ent.Owner) == user || _bypassQuery.HasComp(user);
+        var known = isSelf || isAdmin;
 
         var i = 0;
         foreach (var chip in ent.Comp.Container.ContainedEntities)
         {
+            var comp = _query.Comp(chip);
             var chipCopy = chip; // amazing language
-            var canRemove = true; // TODO: make it support self unremovable chips
+
+            var canRemove = comp.CanRemove;
+            if (!comp.CanSelfRemove)
+                canRemove &= !isSelf;
+            canRemove |= isAdmin; // aghosts can always remove chips
+
             args.Verbs.Add(new()
             {
                 Text = known ? $"Remove {Name(chip)}" : $"Remove {name} chip {++i}",

@@ -48,3 +48,22 @@
       components:
       - MobState
   - type: LionhunterRifle
+  - type: ItemToggle
+    onUse: false
+    onActivate: false
+  - type: ComponentToggler
+    components:
+    - type: ThermalVision
+      worksInHands: true
+      useShader: false
+      isEquipment: true
+      isActive: true
+      color: white
+      drawOverlay: false
+      lightRadius: 0
+      toggleAction: null
+      userWhitelist:
+        components:
+        - Heretic
+        - Ghoul
+      whitelistCheckMind: true

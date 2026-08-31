@@ -25,20 +25,18 @@
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
     - id: MorphMidroundRule
-    - id: LoneXenomorphSpawnRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    #- id: BlobMidround # Disabled until its major bugs are fixed
+    - id: BlobMidround
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
     - id: FugitiveSpawn
-
 
 - type: entity
   parent: BaseGameRule

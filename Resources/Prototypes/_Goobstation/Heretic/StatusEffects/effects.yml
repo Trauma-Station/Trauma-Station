@@ -240,6 +240,16 @@
 
 - type: entity
   parent: StatusEffectSlowdown
+  id: EldritchRustStatusEffect
+  name: eldritch rust slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.75
+    walkSpeedModifier: 0.75
+  - type: BlindnessStatusEffect
+
+- type: entity
+  parent: StatusEffectSlowdown
   id: ShadowCloakRevealStatusEffect
   name: shadow cloak revealed
   components:
@@ -321,5 +331,14 @@
   parent: MobStatusEffectBase
   id: StatusEffectInfluenceXray
   name: influence xray
+  components:
+  - type: XRayVisionStatusEffect
+  - type: StatusEffectAlert
+    alert: InfluenceXRay
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectXRayHeretic
+  name: x-ray vision
   components:
   - type: XRayVisionStatusEffect

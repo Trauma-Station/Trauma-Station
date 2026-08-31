@@ -7,11 +7,9 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Revolutionary.Components;
-using Content.Server.RoundEnd;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -33,7 +31,6 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
-using Content.Trauma.Server.Abductor;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Heretic.Components;
@@ -64,7 +61,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private HereticRuleSystem _rule = default!;
-    [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
     [Dependency] private SharedHereticRitualSystem _ritual = default!;
     [Dependency] private PvsOverrideSystem _pvs = default!;
 
@@ -206,9 +202,15 @@ public sealed partial class HereticSystem : SharedHereticSystem
     public override void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative)
     {
         if (negative)
+        {
             EntityManager.RemoveComponents(uid, ev.AddedComponents);
+            Status.RemoveEffects(uid, ev.StatusEffects);
+        }
         else
+        {
             EntityManager.AddComponents(uid, ev.AddedComponents);
+            Status.AddEffects(uid, ev.StatusEffects);
+        }
         ev.Negative = negative;
         ev.Heretic = uid;
         RaiseLocalEvent(uid, (object) ev, true);
@@ -281,7 +283,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
     public override void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
         EntityUid? user,
-        Dictionary<string, FixedPoint2> knowledge,
+        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> knowledge,
         bool showText = true,
         bool playSound = true)
     {
@@ -618,9 +620,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
             }
         }
 
-        // Restore appearance if it was changed by envy knife
-        _disguise.RestoreAppearance(uid, false);
-
         var pathLoc = path.ToString().ToLower();
         var ascendSound =
             new SoundPathSpecifier($"/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/ascend_{pathLoc}.ogg");
@@ -629,6 +628,8 @@ public sealed partial class HereticSystem : SharedHereticSystem
             true,
             ascendSound,
             Color.Pink);
+
+        _rule.SpawnERTOnAscension();
     }
 
     [SubscribeLocalEvent]

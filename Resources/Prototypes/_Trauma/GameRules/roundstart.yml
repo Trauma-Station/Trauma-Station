@@ -168,6 +168,12 @@
 
 - type: entity
   parent: BaseGameRule
+  id: SpectatorStatistics
+  components:
+  - type: ObserverStatisticRule
+
+- type: entity
+  parent: BaseGameRule
   id: Demonologist
   components:
   - type: DemonologistRule # TODO

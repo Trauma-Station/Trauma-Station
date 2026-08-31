@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.InternalResources.Data;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Goobstation.Shared.InternalResources.Components;
@@ -9,7 +8,6 @@ namespace Content.Goobstation.Shared.InternalResources.Components;
 /// <summary>
 /// Component that uses for generic internal resources like mana or changeling's chemicals
 /// </summary>
-
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
 public sealed partial class InternalResourcesComponent : Component

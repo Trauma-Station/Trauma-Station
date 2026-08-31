@@ -53,6 +53,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     {
         base.Initialize();
         InitializeActionDoAfter();
+        InitializeRelay();
 
         SubscribeLocalEvent<ActionComponent, MapInitEvent>(OnActionMapInit);
 
@@ -1047,7 +1048,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     #region EquipHandlers
     private void OnDidEquip(Entity<ActionsComponent> ent, ref DidEquipEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         var ev = new GetItemActionsEvent(_actionContainer, args.EquipTarget, args.Equipment, args.SlotFlags);
@@ -1063,7 +1064,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnHandEquipped(Entity<ActionsComponent> ent, ref DidEquipHandEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         var ev = new GetItemActionsEvent(_actionContainer, args.User, args.Equipped);
@@ -1079,7 +1080,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnDidUnequip(EntityUid uid, ActionsComponent component, DidUnequipEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         // <Trauma>
@@ -1098,7 +1099,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnHandUnequipped(EntityUid uid, ActionsComponent component, DidUnequipHandEvent args)
     {
-        if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
+        if (GameTiming.ApplyingState)
             return;
 
         // Goobstation start

@@ -19,18 +19,8 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-
     [Dependency] private INetManager _net = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BeforeCastTouchSpellEvent>(OnTouchSpellAttempt);
-
-        SubscribeLocalEvent<DivineInterventionComponent, TouchSpellDenialRelayEvent>(OnTouchSpellDenied);
-
-        SubscribeLocalEvent<CosmicAbilityAttemptEvent>(OnCosmicAbilityAttempt);
-    }
+    [Dependency] private EntityQuery<DivineInterventionComponent> _divineQuery = default!;
 
     /// <summary>
     /// The bare minimum, no flavor -
@@ -39,11 +29,10 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     private bool ShouldDeny(EntityUid target, out EntityUid? denyingItem)
     {
         denyingItem = null;
-        var divineQuery = GetEntityQuery<DivineInterventionComponent>();
 
         foreach (var held in _hands.EnumerateHeld(target))
         {
-            if (!divineQuery.HasComp(held))
+            if (!_divineQuery.HasComp(held))
                 continue;
 
             denyingItem = held;
@@ -53,7 +42,7 @@ public sealed partial class DivineInterventionSystem : EntitySystem
         var slots = _inventory.GetSlotEnumerator(target, SlotFlags.WITHOUT_POCKET);
         while (slots.NextItem(out var item, out var slot))
         {
-            if (!divineQuery.TryComp(item, out var comp))
+            if (!_divineQuery.TryComp(item, out var comp))
                 continue;
 
             if ((slot.SlotFlags & comp.ValidSpellDenialSlots) == 0x0)
@@ -68,9 +57,12 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     //Overload Method
     public bool ShouldDeny(EntityUid target) => ShouldDeny(target, out _);
 
+    [SubscribeLocalEvent]
     public void OnCosmicAbilityAttempt(ref CosmicAbilityAttemptEvent args)
     {
-        if (!ShouldDeny(args.Target, out var denyingItem)) return;
+        if (!ShouldDeny(args.Target, out var denyingItem))
+            return;
+
         args.Cancelled = true;
         if (args.PlayEffects && denyingItem is { } item) DenialEffects(item, args.Target);
     }
@@ -96,31 +88,18 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     /// <summary>
     /// Handles EntityTargetActionEvent spells.
     /// </summary>
-    private void OnTouchSpellAttempt(BeforeCastTouchSpellEvent args)
+    [SubscribeLocalEvent]
+    private void OnTouchSpellAttempt(ref BeforeCastTouchSpellEvent args)
     {
-        if (args.Target is not { } target)
-            return;
-
+        var target = args.Target;
         if (ShouldDeny(target, out var denyingItem)
             && denyingItem != null
             && Exists(denyingItem.Value))
         {
-            args.Cancel();
+            args.Cancelled = true;
             if (args.DoEffects)
                 DenialEffects(denyingItem.Value, target);
         }
-    }
-
-    /// <summary>
-    /// Relays whether a spell denial took place - especially useful for working between Core & GoobMod
-    /// </summary>
-    private void OnTouchSpellDenied(EntityUid uid, DivineInterventionComponent comp, TouchSpellDenialRelayEvent args)
-    {
-        var ev = new BeforeCastTouchSpellEvent(uid);
-        RaiseLocalEvent(uid, ev, true);
-
-        if (ev.Cancelled)
-            args.Cancel();
     }
 
     /// <summary>
@@ -129,13 +108,10 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     public bool TouchSpellDenied(EntityUid uid, bool doEffects = true)
     {
         var ev = new BeforeCastTouchSpellEvent(uid, doEffects);
-        RaiseLocalEvent(uid, ev, true);
+        RaiseLocalEvent(uid, ref ev, true);
 
         return ev.Cancelled;
     }
 
     #endregion
-
-
-
 }

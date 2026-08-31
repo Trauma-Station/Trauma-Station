@@ -15,6 +15,17 @@
   - type: Sprite
     sprite: _Goobstation/Wraith/actions.rsi
 
+- type: entity
+  abstract: true
+  parent: BaseWraithAction
+  id: BaseCorporealWraithAction
+  components:
+  - type: ActionUserWhitelist
+    whitelist:
+      components:
+      - Corporeal
+    onFailPopup: wraith-must-be-corporeal
+
 - type: entity # Unused - Requires Rework of ghost system to allow re-usable actions
   parent: ActionToggleGhostHearing
   id: ActionToggleGhostHearingWraith
@@ -73,7 +84,7 @@
     event: !type:BloodWritingEvent
 
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionAbsorbCorpse
   name: Absorb corpse
   description: Steal life essence from a corpse. You cannot use this on a skeleton!
@@ -103,11 +114,6 @@
     wpConsume: 20
   - type: ActionUseDelayOnUse
     useDelayAccumulator: 35
-  - type: ActionUserWhitelist
-    whitelist:
-      components:
-      - Corporeal
-    popup: wraith-must-be-corporeal
 
 - type: entity
   parent: BaseWraithAction
@@ -131,7 +137,7 @@
     wpConsume: 20
 
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionDecay
   name: Decay
   description: Cause a human to lose stamina, or an object to malfunction.
@@ -150,19 +156,13 @@
     canTargetSelf: false
     blacklist:
       components:
-      - BorgChassis
       - BibleUser
     event: !type:DecayEvent
   - type: ActionWraithPoints
     wpConsume: 30
-  - type: ActionUserWhitelist
-    whitelist:
-      components:
-      - Corporeal
-    popup: wraith-must-be-corporeal
 
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionCommand
   name: Command
   description: Command a few objects to hurl themselves at the target location.
@@ -183,11 +183,6 @@
     event: !type:WraithCommandEvent
   - type: ActionWraithPoints
     wpConsume: 70
-  - type: ActionUserWhitelist
-    whitelist:
-      components:
-      - Corporeal
-    popup: wraith-must-be-corporeal
 
 - type: entity
   parent: [ BaseWraithAction, ActionAnimateSpell ]
@@ -310,7 +305,7 @@
 
 # Harbinger Actions
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionRaiseSkeleton
   name: Raise skeleton
   description: Raise a skeletonized dead body or fill a locker with an indurable skeletal servant.
@@ -335,14 +330,9 @@
     event: !type:RaiseSkeletonEvent
   - type: ActionWraithPoints
     wpConsume: 120
-  - type: ActionUserWhitelist
-    whitelist:
-      components:
-      - Corporeal
-    popup: wraith-must-be-corporeal
 
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionSummonVoidPortal
   name: Summon void portal
   description: Summon a void portal from which otherworldly creatures pour out.
@@ -359,11 +349,6 @@
     - state: open_portal
   - type: InstantAction
     event: !type:SummonPortalEvent
-  - type: ActionUserWhitelist
-    whitelist:
-      components:
-      - Corporeal
-    popup: wraith-must-be-corporeal
   - type: ActionWraithPoints
     wpConsume: 150
 
@@ -422,7 +407,6 @@
       components:
       - WeakToHoly
     canTargetSelf: false
-    event: !type:ApplyCurseActionEvent
   - type: CurseAction # refreshes all curses when a curse is used
   - type: ActionWraithPoints
     wpConsume: 40

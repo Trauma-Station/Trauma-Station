@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +22,7 @@ namespace Content.IntegrationTests.Tests.Round;
 [TestFixture]
 public sealed class JobTest : GameTest
 {
-    private static readonly ProtoId<JobPrototype> Passenger = "Passenger";
+    private static readonly ProtoId<JobPrototype> Passenger = "DClass"; //Trauma
     private static readonly ProtoId<JobPrototype> Engineer = "StationEngineer";
     private static readonly ProtoId<JobPrototype> Captain = "Captain";
 
@@ -79,8 +73,8 @@ public sealed class JobTest : GameTest
     {Passenger}: 30
   # <Trauma>
   required:
-    Passenger: 1
-    Captain: 1
+    {Passenger}: 1
+    {Captain}: 1
   # </Trauma>
 ";
 
@@ -129,6 +123,7 @@ public sealed class JobTest : GameTest
         Assert.That(ticker.PlayerGameStatuses[pair.Client.User!.Value], Is.EqualTo(PlayerGameStatus.NotReadyToPlay));
 
         // Ready up and start the round
+        await pair.SetJobPriorities((Passenger, JobPriority.High), (Engineer, JobPriority.Never)); // Trauma - this didnt get reset and the test order is arbitrary
         ticker.ToggleReadyAll(true);
         Assert.That(ticker.PlayerGameStatuses[pair.Client.User!.Value], Is.EqualTo(PlayerGameStatus.ReadyToPlay));
         await pair.Server.WaitPost(() => ticker.StartRound());
