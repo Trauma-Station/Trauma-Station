@@ -60,16 +60,21 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
             return;
 
         // recall all holosigns
+        var added = 0;
         foreach (var signUid in ent.Comp.Signs)
         {
+            if (TerminatingOrDeleted(signUid))
+                continue;
+
             PredictedQueueDel(signUid);
+            added++;
         }
 
         ent.Comp.Signs.Clear();
         Dirty(ent);
 
         // refill charges
-        _charges.SetCharges((ent, charges), charges.MaxCharges);
+        _charges.AddCharges((ent, charges), added);
     }
 
     public bool TryPlaceSign(Entity<ChargeHolosignProjectorComponent, LimitedChargesComponent> ent, EntityCoordinates coords, EntityUid user)

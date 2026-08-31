@@ -516,9 +516,6 @@
   id: Steel
 
 - type: Tag
-  id: StunBaton # for heretic ritual
-
-- type: Tag
   id: SummonSimiansMaxLevelAction
 
 - type: Tag

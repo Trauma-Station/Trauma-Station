@@ -13730,3 +13730,127 @@ Entries:
   id: 1499
   time: '2026-08-25T15:02:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4272
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed being peckish slowing you by 25% now you only slowdown at starving
+  id: 1500
+  time: '2026-08-26T04:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4281
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed forging being brokn.
+  id: 1501
+  time: '2026-08-26T07:26:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4287
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed holofans and xorg shield thing getting a free full recharge by
+      recalling.
+  - type: Tweak
+    message: Nerfed xorg radiation module from 4 rads to 1.
+  id: 1502
+  time: '2026-08-26T07:45:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4288
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio slimes hunger for growing and splitting.
+  id: 1503
+  time: '2026-08-26T08:50:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4289
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added recovery mode for IPCs.
+  id: 1504
+  time: '2026-08-26T16:35:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4293
+- author: Jacob-House
+  changes:
+  - type: Fix
+    message: Fixed reinforcement beacons not taking structural damage.
+  id: 1505
+  time: '2026-08-26T17:26:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4290
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to craft a beepsky.
+  id: 1506
+  time: '2026-08-27T02:59:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4303
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Deconstructing metal barricades now gives the metal back.
+  id: 1507
+  time: '2026-08-27T03:26:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4305
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: SSD people and NPCs no longer fall asleep after 10 minutes.
+  id: 1508
+  time: '2026-08-27T08:00:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4304
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Heretics no longer can be enthralled.
+  - type: Fix
+    message: >-
+      Fix lock and cosmic path specific xray vision being overridden by reality
+      shifts xray.
+  - type: Tweak
+    message: >-
+      Unfathomable curio reverted to old behavior (no projectile slowdown area),
+      its back to t1 side and now gives focus too.
+  - type: Tweak
+    message: >-
+      Sacraments of power no longer block your ability to attack, but people
+      attacked by you will ignore its effect.
+  - type: Tweak
+    message: >-
+      Changed ash and void spells damage, now it doesn't deal insane amounts of
+      non-vital damage.
+  - type: Tweak
+    message: >-
+      Cosmic and blade robes now require glass sheet and knife respectively -
+      same as blades rituals, for consistency.
+  - type: Tweak
+    message: Buffed ritual of knowledge to 3 main 1 side points.
+  - type: Tweak
+    message: Eldritch coin now requires either silver OR gold to make.
+  - type: Tweak
+    message: Ash spirits and fire sharks die to water now.
+  - type: Tweak
+    message: Ash spirit beam dps 30 -> 20.
+  - type: Tweak
+    message: Ash jaunts (normal and empowered) are shorter.
+  - type: Tweak
+    message: Rust mark effect knockdown time 20 -> 5s.
+  - type: Tweak
+    message: Swapped wrong key and concierge's rite in lock path progression.
+  - type: Add
+    message: Rust walkers get night vision.
+  id: 1509
+  time: '2026-08-27T09:13:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4311
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed unused mentor slop.
+  id: 1510
+  time: '2026-08-27T12:54:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4314
+- author: q7i9VcWs
+  changes:
+  - type: Fix
+    message: Revs losing no longer spawns ERT
+  id: 1511
+  time: '2026-08-27T13:35:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4315

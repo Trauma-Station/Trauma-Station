@@ -25,6 +25,10 @@
     entity: BarricadeSteel
     edges:
     - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: SheetSteel1
+        amount: 4
       conditions:
       - !type:EntityAnchored
         anchored: false
@@ -37,6 +41,10 @@
     entity: BarricadeSteelFolding
     edges:
     - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: SheetSteel1
+        amount: 6
       conditions:
       - !type:EntityAnchored
         anchored: false

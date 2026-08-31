@@ -26,3 +26,4 @@
   - type: ClothingGrantComponent
     component:
     - type: UnfathomableCurioShield
+  - type: HereticMagicItem

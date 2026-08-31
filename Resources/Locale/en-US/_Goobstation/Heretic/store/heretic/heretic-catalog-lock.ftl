@@ -39,12 +39,14 @@ knowledge-path-lock-s4-desc =
     It also functions and appears the same as a regular ID Card.
     Using it on a normal ID card consumes it and gains its access, and you can use it in-hand to change its appearance to a card you fused.
 
-knowledge-path-lock-s5-name = Concierge's Rite
+knowledge-path-lock-s5-name = Wrong Key
 knowledge-path-lock-s5-desc =
-    The Concierge scribbled my name into the Handbook. "Welcome to your new home, fellow Steward."
+    There are keys that open doors; then there are keys that alter the reality itself.
+    The Steward knows which key fits the keyhole and which will curse the door with madness.
 
-    Allows you to transmute a crayon, a wooden plank, and a multitool to create a Labyrinth Handbook.
-    It can materialize a barricade at range that noone can pass. Has 5 charges which regenerate over time.
+    Allows you to transmute a screwdriver, a pair of (budget) insulated gloves and a wirecutter to create a Serpentclave.
+    It can trap airlocks; trapped doors will pull heathens with a tentacle and crush them when attempted to be interacted with, dealing damage and stunning them.
+    Doors linked by the eldritch ID cannot be trapped.
 
 knowledge-path-lock-armor-name = Shifting Guise
 knowledge-path-lock-armor-desc =
@@ -69,14 +71,12 @@ knowledge-path-lock-s7-desc =
 
     Your blade has better wounding and a chance to cause a weeping avulsion on attack.
 
-knowledge-path-lock-s8-name = Wrong Key
+knowledge-path-lock-s8-name = Concierge's Rite
 knowledge-path-lock-s8-desc =
-    There are keys that open doors; then there are keys that alter the reality itself.
-    The Steward knows which key fits the keyhole and which will curse the door with madness.
+    The Concierge scribbled my name into the Handbook. "Welcome to your new home, fellow Steward."
 
-    Allows you to transmute a screwdriver, a pair of insulated gloves and a wirecutter to create a Serpentclave.
-    It can trap airlocks; trapped doors will pull heathens with a tentacle and crush them when attempted to be interacted with, dealing damage and stunning them.
-    Doors linked by the eldritch ID cannot be trapped.
+    Allows you to transmute a crayon, a wooden plank, and a multitool to create a Labyrinth Handbook.
+    It can materialize a barricade at range that noone can pass. Has 5 charges which regenerate over time.
 
 knowledge-path-lock-s9-name = Unlock the Labyrinth
 knowledge-path-lock-s9-desc =

@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Religion;
-using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Stunnable;
@@ -72,13 +71,7 @@ public sealed partial class FireBlastSystem : EntitySystem
                 },
             };
 
-            _dmg.ChangeDamage((uid, dmg),
-                damage * _body.GetVitalBodyPartRatio(uid),
-                true,
-                false,
-                targetPart: TargetBodyPart.All,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll,
-                canMiss: false);
+            _dmg.ChangeDamage((uid, dmg), damage, interruptsDoAfters: false, targetPart: TargetBodyPart.Vital);
 
             var stamDmg = comp.Damage * comp.StaminaDamageMultiplier;
             _stam.TakeOvertimeStaminaDamage(uid, stamDmg);
@@ -128,14 +121,7 @@ public sealed partial class FireBlastSystem : EntitySystem
                 origin.Comp.FireProtectionPenetration);
 
             _stun.KnockdownOrStun(uid, origin.Comp.BonusKnockdownTime);
-
-            _dmg.TryChangeDamage(uid,
-                origin.Comp.FireBlastBonusDamage * _body.GetVitalBodyPartRatio(uid),
-                false,
-                false,
-                targetPart: TargetBodyPart.All,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll,
-                canMiss: false);
+            _dmg.ChangeDamage(uid, origin.Comp.FireBlastBonusDamage, targetPart: TargetBodyPart.Vital);
         }
     }
 
@@ -230,12 +216,7 @@ public sealed partial class FireBlastSystem : EntitySystem
 
         _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
-        _dmg.TryChangeDamage(target.Owner,
-            origin.Comp.FireBlastDamage * _body.GetVitalBodyPartRatio(target.Owner),
-            origin: origin,
-            targetPart: TargetBodyPart.All,
-            splitDamage: SplitDamageBehavior.SplitEnsureAll,
-            canMiss: false);
+        _dmg.ChangeDamage(target.Owner, origin.Comp.FireBlastDamage, origin: origin, targetPart: TargetBodyPart.Vital);
 
         return true;
     }
@@ -263,12 +244,6 @@ public sealed partial class FireBlastSystem : EntitySystem
                 ent.Comp.FireProtectionPenetration);
         }
 
-        _dmg.TryChangeDamage(otherEntity,
-            ent.Comp.FireBlastBeamCollideDamage * _body.GetVitalBodyPartRatio(otherEntity),
-            false,
-            false,
-            targetPart: TargetBodyPart.All,
-            splitDamage: SplitDamageBehavior.SplitEnsureAll,
-            canMiss: false);
+        _dmg.ChangeDamage(otherEntity, ent.Comp.FireBlastBeamCollideDamage, interruptsDoAfters: false, targetPart: TargetBodyPart.Vital);
     }
 }
