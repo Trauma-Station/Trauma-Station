@@ -9,6 +9,7 @@
   modifiers:
   components:
   - type: Armor
+    modifiers:
     coverage:
     - Torso
     - Tail
@@ -17,7 +18,6 @@
       OrganDamage: 0.1
       BoneDamage: 0.1
       VeinsDamage: 0
-   modifiers:
       coefficients:
         Blunt: 0.8
         Slash: 0.8
