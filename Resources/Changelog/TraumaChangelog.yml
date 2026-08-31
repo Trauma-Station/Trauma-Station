@@ -13991,3 +13991,10 @@ Entries:
   id: 1528
   time: '2026-08-30T21:02:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4384
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Coscult astral razor can only heal you off of humanoids.
+  id: 1529
+  time: '2026-08-31T12:32:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4393
