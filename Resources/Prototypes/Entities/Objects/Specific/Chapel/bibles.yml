@@ -63,8 +63,10 @@
   parent: BaseStorageItem
   id: Bible
   components:
-  - type: HolyIgniteOnMeleeHit # Trauma - it makes holy water
+  # <Trauma> - it makes holy water
+  - type: HolyIgniteOnMeleeHit
     fireStacks: 1.0
+  # </Trauma>
   - type: UseDelay
     delay: 10.0
   - type: Bible
@@ -90,7 +92,7 @@
       collection: Punch
     damage:
       types:
-        Holy: 5 # Goobstation - bro wtf
+        Holy: 8 # Trauma - was 25
         Blunt: 1
   #- type: Prayable - no, use the altar
   #  bibleUserOnly: true
