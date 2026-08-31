@@ -8,12 +8,21 @@
   suffix: Chameleon, Armor
   modifiers:
   components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/vest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/vest.rsi
+  - type: ChameleonClothing
+    slot: [outerClothing]
+    default: ClothingOuterVest
   - type: Armor
     modifiers:
     coverage:
     - Torso
     - Tail
-   traumaDeductions:
+    traumaDeductions:
       Dismemberment: 0.1
       OrganDamage: 0.1
       BoneDamage: 0.1
