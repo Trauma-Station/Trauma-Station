@@ -38,13 +38,8 @@ public sealed partial class ItemSlotsSystem
     /// Ejects an item without performing validation. Returns false without producing success effects if the backing
     /// container does not remove the item.
     /// </summary>
-    private bool Eject(EntityUid uid, ItemSlot slot, EntityUid item, EntityUid? user, bool excludeUserAudio = false,
-        bool doAfter = true) // Trauma
+    private bool Eject(EntityUid uid, ItemSlot slot, EntityUid item, EntityUid? user, bool excludeUserAudio = false)
     {
-        // <Trauma>
-        if (doAfter && TryStartInsertDoAfter(slot, item, user))
-            return true;
-        // </Trauma>
         if (slot.ContainerSlot == null || !_containers.Remove(item, slot.ContainerSlot))
             return false;
 
@@ -88,8 +83,7 @@ public sealed partial class ItemSlotsSystem
         if (user != null && item != null && !_actionBlockerSystem.CanPickup(user.Value, item.Value, showPopup: true))
             return false;
 
-        return Eject(uid, slot, item!.Value, user, excludeUserAudio,
-            doAfter: doAfter); // Trauma
+        return Eject(uid, slot, item!.Value, user, excludeUserAudio);
     }
 
     /// <summary>
@@ -126,7 +120,7 @@ public sealed partial class ItemSlotsSystem
         if (doAfter && slot.EjectDelay != null)
             return TryStartEjectDoAfter(slot, uid, user);
         // </Trauma>
-        if (!TryEject(uid, slot, user, out var item, excludeUserAudio))
+        if (!TryEject(uid, slot, user, out var item, excludeUserAudio, doAfter: false))
             return false;
 
         if (user != null)

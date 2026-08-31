@@ -8,32 +8,12 @@
   - Zombie
   - Revolutionary
   - AllHostile
-  #- Wizard # Goob
+  - Wizard
   - Xenoborg
-  # <Trauma>
-  - Heretic
-  - Blob
-  - Shadowling
-  - Insurgent
-  friendly:
-  - Wizard # was hostile, now they're friendly
-  - PirateFaction
-  - Lavafauna
-  - CrabFaction
-  # </Trauma>
 
 - type: npcFaction
   id: NanoTrasen
   hostile:
-  # <Goob>
-  - Changeling
-  - Heretic
-  - Blob
-  - Shadowling
-  - PirateFaction
-  - Wraith
-  - Lavafauna
-  # </Goob>
   - SimpleHostile
   - Syndicate
   - Xeno
@@ -43,46 +23,28 @@
   - AllHostile
   - Wizard
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  - CrabFaction
-  # </Trauma>
 
 - type: npcFaction
   id: Mouse
-  # Goobstation - not hostile to anything so they don't attack things
-  # <Trauma>
   hostile:
-  - Insurgent
-  # </Trauma>
+  - PetsNT
+  - AllHostile
+  - Wizard
 
 - type: npcFaction
   id: Passive
-  # <Trauma>
-  hostile:
-  - Insurgent
-  # </Trauma>
 
 - type: npcFaction
   id: PetsNT
-  # friendly: # Trauma
-  # - NanoTrasen
+  friendly:
+  - NanoTrasen
   hostile:
-  # <Goob>
-  - Balloon # Pets can join the fight against the balloons
-  - Blob
-  - Lavafauna
-  # </Goob>
   - Mouse
   - SimpleHostile
   - Zombie
   - Xeno
   - AllHostile
   - Dragon
-  # <Trauma>
-  - Insurgent
-  - CrabFaction
-  # </Trauma>
 
 - type: npcFaction
   id: SimpleHostile
@@ -96,41 +58,15 @@
   - Dragon
   - Xeno
   - AllHostile
-  #- Wizard # Goob
+  - Wizard
   - Xenoborg
-  # <Goob>
-  - Heretic
-  - Blob
-  - PirateFaction
-  - Lavafauna
-  # <Trauma>
-  - Insurgent
-  # </Trauma>
-  friendly:
-  - Wizard # was hostile, now they're friendly
-  - Shadowling
-  - Wraith
-  # </Goob>
 
 - type: npcFaction
   id: SimpleNeutral
-  # <Trauma>
-  hostile:
-  - Insurgent
-  # </Trauma>
 
 - type: npcFaction
   id: Syndicate
   hostile:
-  # <Goob>
-  - Changeling
-  - Heretic
-  - Blob
-  - PirateFaction
-  - Shadowling
-  - Wraith
-  - Lavafauna
-  # </Goob>
   - NanoTrasen
   - SimpleHostile
   - Xeno
@@ -140,21 +76,10 @@
   - AllHostile
   - Wizard
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  - CrabFaction
-  # </Trauma>
 
 - type: npcFaction
   id: Xeno
   hostile:
-  # <Goob>
-  - Heretic
-  - Blob
-  - PirateFaction
-  - Wraith
-  - Lavafauna
-  # </Goob>
   - NanoTrasen
   - Syndicate
   - Passive
@@ -162,32 +87,13 @@
   - Zombie
   - Revolutionary
   - AllHostile
-  #- Wizard # Goob - made friendly
+  - Wizard
   - Dragon
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  - CrabFaction
-  # </Trauma>
-  friendly: # Goob - wizard is now friendly
-  - Wizard
 
 - type: npcFaction
   id: Zombie
-  # <Trauma>
-  friendly:
-  - InitialInfected
   hostile:
-  - Insurgent
-  - Changeling
-  - Heretic
-  - Blob
-  - Shadowling
-  - PirateFaction
-  - Wraith
-  - Lavafauna
-  - CrabFaction
-  # </Trauma>
   - NanoTrasen
   - SimpleNeutral
   - SimpleHostile
@@ -203,23 +109,6 @@
 - type: npcFaction
   id: Revolutionary
   hostile:
-  # <Goob>
-  - Changeling
-  - Heretic
-  - Blob
-  - Shadowling
-  - Wizard
-  - PirateFaction
-  - Lavafauna
-  # </Goob>
-  # <Trauma> - made more hostile for rev turrets
-  - Mouse
-  - Passive
-  - PetsNT
-  - SimpleNeutral
-  - Syndicate
-  - Xeno
-  # </Trauma>
   - NanoTrasen
   - Zombie
   - SimpleHostile
@@ -227,23 +116,10 @@
   - AllHostile
   - Wizard
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  - CrabFaction
-  # </Trauma>
 
 - type: npcFaction
   id: AllHostile
   hostile:
-  # <Goob>
-  - Changeling
-  - Heretic
-  - Blob
-  - Shadowling
-  - PirateFaction
-  - Wraith
-  - Lavafauna
-  # </Goob>
   - NanoTrasen
   - Dragon
   - Mouse
@@ -257,10 +133,6 @@
   - Revolutionary
   - Wizard
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  - CrabFaction
-  # </Trauma>
 
 - type: npcFaction
   id: Wizard
@@ -278,30 +150,19 @@
   - Revolutionary
   - AllHostile
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  # </Trauma>
 
 - type: npcFaction
   id: Xenoborg
   hostile:
-  # <Goob>
-  - Changeling
-  - Heretic
-  - PirateFaction
-  - Blob
-  - Shadowling
-  # </Goob>
   # they have brains
   - NanoTrasen
   - Syndicate
   - Zombie
   - Revolutionary
   - Wizard
+
   - Xeno # rivalry
+
   # cause they are hostile to them
   - SimpleHostile
   - AllHostile
-  # <Trauma>
-  - Insurgent
-  # </Trauma>

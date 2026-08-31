@@ -13861,3 +13861,147 @@ Entries:
   id: 1512
   time: '2026-08-28T07:25:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4325
+- author: Mr_Samuel
+  changes:
+  - type: Fix
+    message: Gemini holograms no longer appear as a solid square.
+  - type: Fix
+    message: Gemini holograms can no longer be mutated.
+  - type: Fix
+    message: >-
+      SmartEquip of Gemini no longer instantly unequips clothing with an unequip
+      delay.
+  id: 1513
+  time: '2026-08-28T18:47:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4330
+- author: Mr_Samuel
+  changes:
+  - type: Fix
+    message: PKA modkits use their install delay again.
+  id: 1514
+  time: '2026-08-29T06:19:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4337
+- author: Floofyshork
+  changes:
+  - type: Tweak
+    message: Added unarmed scaling to decapoid claw
+  id: 1515
+  time: '2026-08-29T06:34:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4317
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed D-class gloves loadout being a gas mask instead of grey gloves.
+  id: 1516
+  time: '2026-08-29T07:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4349
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wirecutters being greyscale.
+  id: 1517
+  time: '2026-08-29T07:07:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4350
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed NTR stamp not having inhand sprites set.
+  id: 1518
+  time: '2026-08-29T09:26:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4351
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fix charge batong
+  id: 1519
+  time: '2026-08-29T11:17:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4354
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Made chameleon mutation both reveal from moving and adapt while still much
+      faster.
+  id: 1520
+  time: '2026-08-29T11:33:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4355
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 4 new chemicals that wraith can inject into solutions now with their
+      defile ability
+  - type: Remove
+    message: Removed vomit and ash from wraith's defile pool
+  - type: Tweak
+    message: Made it so wraith's blight ability can now EMAG borgs once again
+  - type: Tweak
+    message: Wraith's defile ability now injects 20u instead of 10u
+  id: 1521
+  time: '2026-08-29T11:40:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4320
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed revs immediately winning/losing if everyone is at the arrivals
+      terminal.
+  id: 1522
+  time: '2026-08-29T17:04:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4357
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer not being able to inject genes into clipped seeds.
+  id: 1523
+  time: '2026-08-30T06:53:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4366
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI not being able to do anything... why did nobody report this
+  id: 1524
+  time: '2026-08-30T07:46:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4368
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed PTL slop so cargo isn't just invalidated.
+  id: 1525
+  time: '2026-08-30T11:21:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4373
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xeno missiles going invisible shortly after being shot.
+  id: 1526
+  time: '2026-08-30T12:14:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4374
+- author: Skull Face
+  changes:
+  - type: Remove
+    message: Removed English.
+  id: 1527
+  time: '2026-08-30T13:15:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4375
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed dionae not having CS:S installed.
+  id: 1528
+  time: '2026-08-30T21:02:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4384
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Coscult astral razor can only heal you off of humanoids.
+  id: 1529
+  time: '2026-08-31T12:32:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4393
+- author: luminargh
+  changes:
+  - type: Add
+    message: Player-controlled ED-209's now have a SecHUD
+  id: 1530
+  time: '2026-08-31T16:13:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4390

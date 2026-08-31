@@ -121,6 +121,7 @@ public sealed partial class RadioSystem : SharedRadioSystem
         else
             speech = _chat.GetSpeechVerb(messageSource, message);
 
+        message = _language.ObfuscateSpeech(message, language, messageSource); // Trauma - makes low skill garble languages even for those that can understand it
         var content = escapeMarkup
             ? FormattedMessage.EscapeText(message)
             : message;
@@ -148,14 +149,14 @@ public sealed partial class RadioSystem : SharedRadioSystem
         // Added GetNetEntity(messageSource), to source
         var msg = new ChatMessage(ChatChannel.Radio, content, wrappedMessage, GetNetEntity(messageSource), null);
 
-        // Einstein Engines - Language begin
-        var obfuscated = _language.ObfuscateSpeech(content, language, messageSource);
-        // Goobstation - Chat Pings
-        // Added GetNetEntity(messageSource), to source
+        // <Trauma> - language slop
+        var obfuscated = _language.ObfuscateSpeech(message, language);
+        if (escapeMarkup)
+            obfuscated = FormattedMessage.EscapeText(obfuscated);
         var obfuscatedWrapped = _chat.WrapMessage(null, null, channel, messageSource, name, obfuscated, speech, language, null, jobIcon, jobName);
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
-        // Einstein Engines - Language end
+        // </Trauma>
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
