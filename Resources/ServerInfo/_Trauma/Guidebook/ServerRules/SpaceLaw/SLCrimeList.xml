@@ -389,6 +389,26 @@
       The act of stealing money that was entrusted to one's care by the corporation, such as taking money from a request computer for personal use. Heads reserve the right to offer bonuses that do not exceed 2500 spesos.
     </Box></ColorBox>
   </Table>
+  ### Foreign Violations
+  Type 4 violations that specifically involve Foreign Agents. Punishment is wholly up to the officer handling the violator, ranging from any punishment up to Type 4.
+  <Table Columns="2">
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Fraternization</Box></ColorBox>
+    <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
+      Socializing with, or attempting to befriend Nanotrasen Employees.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Corporate Espionage</Box></ColorBox>
+    <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
+      Taking proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Solicitation</Box></ColorBox>
+    <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
+      The act of offering services to an employee for spesos or favors outside the scope of their contract.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Poaching</Box></ColorBox>
+    <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
+      The act of attempting to get a Nanotrasen employee to join their company.
+    </Box></ColorBox>
+  </Table>
   \n
 
   ## Type 5 Violations
