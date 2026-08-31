@@ -7,23 +7,24 @@
   description: A thick vest with a rubbery, water-resistant shell.
   suffix: Chameleon, Armor
   components:
-  type: Armor
+   -type: Armor
     coverage:
     - Torso
     - Tail
-    traumaDeductions:
+   -traumaDeductions:
       Dismemberment: 0.1
       OrganDamage: 0.1
       BoneDamage: 0.1
       VeinsDamage: 0
-    modifiers:
+   -modifiers:
       coefficients:
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.8
         Ballistic: 0.3
         Heat: 0.8
-      flatReductions:
+        showArmorOnExamine: true
+    -flatReductions:
         Ballistic: 3
       - type: ExplosionResistance
         damageCoefficient: 0.65
