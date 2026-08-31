@@ -122,6 +122,7 @@
     damage:
       types:
         Piercing: 11
+        Ion: 4 # IPC counter
   - type: Item
     size: Large
     shape:
