@@ -6,6 +6,7 @@
   name: vest
   description: A thick vest with a rubbery, water-resistant shell.
   suffix: Chameleon, Armor
+  modifiers:
   components:
   - type: Armor
     coverage:
