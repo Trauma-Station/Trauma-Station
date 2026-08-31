@@ -710,6 +710,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma>
         if (targetCoordinates is {} target)
             projectile.TargetCoordinates = target;
+        if (user != null)
+            projectile.IgnoredEntities.Add(user.Value);
 
         if (user is {} userUid)
         {
