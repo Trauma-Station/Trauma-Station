@@ -173,11 +173,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         }
 
         if (comp.DeleteOnCollide && comp.ProjectileSpent)
-        {
-            var deleteEv = new DeletingProjectileEvent(uid);
-            RaiseLocalEvent(ref deleteEv);
             PredictedQueueDel(uid);
-        }
 
         if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
         {

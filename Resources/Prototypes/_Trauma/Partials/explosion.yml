@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: explosion
+  id: Default
+  damagePerIntensity:
+    types:
+      Slash: 5
+    woundTypeOverrides: &woundoverrides
+      Heat: Burns
+      Blunt: Fracture
+      Slash: Laceration
+      Piercing: Puncture
+  tileBreakIntensity: !Clear [ 0, 10, 30 ]
+  tileBreakRerollReduction: 20
+
+- type: explosion
+  id: DemolitionCharge
+  damagePerIntensity:
+    types:
+      Heat: 3
+      Blunt: 3
+      Piercing: 3
+      Slash: 3
+    woundTypeOverrides: *woundoverrides
+  tileBreakIntensity: !Clear [ 0, 10, 30 ]
+  tileBreakRerollReduction: 20
+
+- type: explosion
+  id: MicroBomb
+  damagePerIntensity:
+    types:
+      Slash: 6
+    woundTypeOverrides: *woundoverrides
+
+- type: explosion
+  id: Radioactive
+  damagePerIntensity:
+    types:
+      Slash: 3
+    woundTypeOverrides: *woundoverrides
+
+- type: explosion
+  id: Cryo
+  damagePerIntensity:
+    types:
+      Blunt: 2
+      Structural: 20
+    woundTypeOverrides: *woundoverrides
+
+- type: explosion
+  id: Minibomb
+  damagePerIntensity:
+    types:
+      Blunt: 32
+      Slash: 4
+    woundTypeOverrides: *woundoverrides
+  tileBreakIntensity: !Clear [0, 10, 30]
+
+- type: explosion
+  id: PowerSink
+  damagePerIntensity:
+    types:
+      Heat: 24
+      Blunt: 24
+      Piercing: 24
+      Slash: 24
+    woundTypeOverrides: *woundoverrides
+
+- type: explosion
+  id: HardBomb
+  damagePerIntensity:
+    types:
+      Heat: 30
+      Blunt: 30
+      Piercing: 12
+      Slash: 12
+    woundTypeOverrides: *woundoverrides
+
+- type: explosion
+  id: FireBomb
+  damagePerIntensity:
+    woundTypeOverrides: *woundoverrides
+
+- type: explosion
+  id: XenoborgAntiStructureExplosion
+  damagePerIntensity:
+    woundTypeOverrides: *woundoverrides

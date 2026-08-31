@@ -272,8 +272,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         int index = ent.Comp.GeneIndex;
         if (index < 0 ||
             index >= SeedData.AllGenes.Length ||
-            !_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant) ||
-            !_botany.TryGetPlantComponent<PlantDataComponent>(uid, seed, out var data))
+            !_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant))
             return;
 
         var dirty = false;
@@ -351,9 +350,10 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     15 => (float) plant.Yield,
                     16 => plant.Potency,
                     17 => _botany.PlantHasComp<PlantTraitSeedlessComponent>(uid, seed) ? 1f : 0f,
-                    18 => _botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed) ? 1f : 0f,
-                    19 => _botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed) ? 1f : 0f,
-                    20 => _botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed) ? 1f : 0f,
+                    18 => _botany.PlantHasComp<PlantTraitUnviableComponent>(uid, seed) ? 1f : 0f,
+                    19 => _botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed) ? 1f : 0f,
+                    20 => _botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed) ? 1f : 0f,
+                    21 => _botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed) ? 1f : 0f,
                     _ => null
                 };
 
@@ -374,8 +374,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
     {
         var uid = EnsurePlantData(ent, seed);
 
-        if (!TryComp<PlantComponent>(uid, out var plant) ||
-            !TryComp<PlantDataComponent>(uid, out var data))
+        if (!TryComp<PlantComponent>(uid, out var plant))
         {
             Log.Error($"{ToPrettyString(seed)} has invalid PlantData {ToPrettyString(uid)}!");
             return;
@@ -487,12 +486,15 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     SetTrait<PlantTraitSeedlessComponent>(uid, value);
                     break;
                 case 18:
-                    SetTrait<PlantTraitLigneousComponent>(uid, value);
+                    SetTrait<PlantTraitUnviableComponent>(uid, value);
                     break;
                 case 19:
-                    SetTrait<PlantTraitScreamComponent>(uid, value);
+                    SetTrait<PlantTraitLigneousComponent>(uid, value);
                     break;
                 case 20:
+                    SetTrait<PlantTraitScreamComponent>(uid, value);
+                    break;
+                case 21:
                     SetTrait<PlantTraitKudzuComponent>(uid, value);
                     break;
             }

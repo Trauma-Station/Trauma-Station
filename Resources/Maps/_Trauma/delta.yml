@@ -211223,13 +211223,11 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -7.5,-10.5
   - uid: 29626
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 2.5,-6.5
   - uid: 29627
     components:

@@ -156,7 +156,6 @@
     canTargetSelf: false
     blacklist:
       components:
-      - BorgChassis
       - BibleUser
     event: !type:DecayEvent
   - type: ActionWraithPoints

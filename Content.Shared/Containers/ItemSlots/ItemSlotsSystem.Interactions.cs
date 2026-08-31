@@ -1,4 +1,3 @@
-using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 
@@ -59,74 +58,7 @@ public sealed partial class ItemSlotsSystem
         if (args.Handled)
             return;
 
-        args.Handled = TryInsertWithConditions(ent, args.User, args.Used); // Trauma - use helper below
-    }
-
-    /// <summary>
-    /// Trauma - helper moved out of OnInteractUsing.
-    /// Returns true if it should handle interaction.
-    /// </summary>
-    public bool TryInsertWithConditions(Entity<ItemSlotsComponent> ent, EntityUid user, EntityUid used)
-    {
-        if (!TryComp(user, out HandsComponent? hands))
-            return false;
-
-        if (ent.Comp.Slots.Count == 0)
-            return false;
-
-        var slots = new List<ItemSlot>();
-        string? whitelistFailPopup = null;
-        string? lockedFailPopup = null;
-
-        foreach (var slot in ent.Comp.Slots.Values)
-        {
-            if (!slot.InsertOnInteract)
-                continue;
-
-            if (CanInsert(ent, slot, used, user, slot.Swap))
-            {
-                slots.Add(slot);
-            }
-            else
-            {
-                var allowed = CanInsertWhitelist(used, slot);
-                if (lockedFailPopup == null && slot.LockedFailPopup != null && allowed && slot.Locked)
-                    lockedFailPopup = slot.LockedFailPopup;
-
-                if (whitelistFailPopup == null && slot.WhitelistFailPopup != null && !allowed)
-                    whitelistFailPopup = slot.WhitelistFailPopup;
-            }
-        }
-
-        if (slots.Count == 0)
-        {
-            if (lockedFailPopup != null)
-                _popupSystem.PopupEntity(Loc.GetString(lockedFailPopup), ent, user);
-            else if (whitelistFailPopup != null)
-                _popupSystem.PopupEntity(Loc.GetString(whitelistFailPopup), ent, user);
-            return false;
-        }
-
-        if (!_handsSystem.TryDrop(user, used))
-            return false;
-
-        slots.Sort(SortEmpty);
-
-        foreach (var slot in slots)
-        {
-            if (slot.Item != null)
-                _handsSystem.TryPickupAnyHand(user, slot.Item.Value, handsComp: hands);
-
-            if (!Insert(ent, slot, used, user, excludeUserAudio: true))
-                return false;
-
-            if (slot.InsertSuccessPopup.HasValue)
-                _popupSystem.PopupEntity(Loc.GetString(slot.InsertSuccessPopup), ent, user);
-
-            return true;
-        }
-
-        return false;
+        args.Handled = TryInsertWithConditions(ent, args.User, args.Used);
     }
 
     [SubscribeLocalEvent]

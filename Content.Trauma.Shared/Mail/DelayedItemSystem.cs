@@ -35,6 +35,6 @@ public sealed class DelayedItemSystem : EntitySystem
 
     private void Destroy<T>(Entity<DelayedItemComponent> ent, ref T args) where T : notnull
     {
-        PredictedDel(ent.Owner);
+        PredictedQueueDel(ent.Owner);
     }
 }
