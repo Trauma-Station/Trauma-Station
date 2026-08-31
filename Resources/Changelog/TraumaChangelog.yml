@@ -13998,3 +13998,10 @@ Entries:
   id: 1529
   time: '2026-08-31T12:32:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4393
+- author: luminargh
+  changes:
+  - type: Add
+    message: Player-controlled ED-209's now have a SecHUD
+  id: 1530
+  time: '2026-08-31T16:13:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4390
