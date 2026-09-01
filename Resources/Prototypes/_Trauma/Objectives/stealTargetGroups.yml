@@ -41,3 +41,10 @@
   sprite:
     sprite: _Trauma/Objects/Weapons/Melee/sec_katana.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: TeleportArmour
+  name: steal-target-groups-teleport-armour
+  sprite:
+    sprite: _Trauma/Clothing/Armor/reactive.rsi
+    state: icon
