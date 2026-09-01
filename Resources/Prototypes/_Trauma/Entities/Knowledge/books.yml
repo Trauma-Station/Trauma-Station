@@ -137,7 +137,6 @@
       KnowledgeWeaponsShotgun: 30
       KnowledgeWeaponsRifle: 30
       KnowledgeWeaponsHeavy: 30 # For Flamethrower/RPG
-
     experience:
       ShootingKnowledge: 5
       GunsmithingKnowledge: 5
