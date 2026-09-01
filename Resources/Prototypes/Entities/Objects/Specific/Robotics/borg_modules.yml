@@ -972,7 +972,7 @@
         whitelist:
           tags:
           - BodyBag
-    #</Trauma>
+    # </Trauma>
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: defib-module }
 
