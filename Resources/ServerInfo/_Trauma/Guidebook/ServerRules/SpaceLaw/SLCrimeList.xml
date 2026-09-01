@@ -97,11 +97,11 @@
   ### Violence and Compliance Violations
   Type 2 violations that are violent or non-compliant with security.
   <Table Columns="2">
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Battery</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Assault</Box></ColorBox>
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
       The act of intentionally causing physical harm to another employee.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Assault</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Threatening Assault</Box></ColorBox>
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
       The act of threatening an employee with immediate physical harm.
     </Box></ColorBox>
@@ -217,11 +217,11 @@
   ### Violence and Compliance Violations
   Type 3 violations that are violent or non-compliant with security.
   <Table Columns="2">
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Aggravated Battery</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Aggravated Assault</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of intentionally causing physical harm to another employee by using a weapon or with the intent to cause serious bodily harm or death.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Aggravated Assault</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Threatening Aggravated Assault</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of threatening an employee with immediate physical harm by using a weapon or with the intent to cause serious bodily harm or death.
     </Box></ColorBox>
@@ -338,11 +338,11 @@
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Grand Assault</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      Any assault on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
+      Any assault on a member of security, the Captain, or the Nanotrasen Representative, whether the intent is to murder or not.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Grand Battery</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Threatened Grand Assault</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      Any battery on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
+      Any threat of harm upon a member of security, the Captain, or the Nanotrasen Representative, whether the intent is to murder or not.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Attempted Homicide</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
