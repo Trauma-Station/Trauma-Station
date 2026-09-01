@@ -175,8 +175,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             else
                 PredictedQueueDel(tool);
         }
-
-        RefreshUI(ent);
     }
 
     [SubscribeLocalEvent]
@@ -421,10 +419,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("surgery-error-laying"), user, user);
         return false;
-    }
-
-    public virtual void RefreshUI(EntityUid body)
-    {
     }
 
     [SubscribeLocalEvent]

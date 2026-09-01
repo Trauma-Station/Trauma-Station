@@ -715,6 +715,7 @@ public abstract partial class SharedSurgerySystem
 
         return stepComp.Duration / speed;
     }
+
     private (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, Entity<SurgeryComponent?> surgery, List<EntityUid> requirements, EntityUid user)
     {
         if (!_query.Resolve(surgery, ref surgery.Comp))
@@ -722,7 +723,6 @@ public abstract partial class SharedSurgerySystem
 
         if (requirements.Contains(surgery))
             throw new ArgumentException($"Surgery {surgery} has a requirement loop: {string.Join(", ", requirements)}");
-
 
         var ev = new SurgeryIgnorePreviousStepsEvent();
         RaiseLocalEvent(user, ref ev);

@@ -32,7 +32,7 @@ public sealed partial class PlantTraitLigneousSystem : EntitySystem
 
         if (_plantHolder.IsDead(ent.Owner))
         {
-            _popup.PopupCursor(Loc.GetString("plant-component-dead-plant-message"), args.User);
+            _popup.PopupCursor(Loc.GetString("plant-component-dead-plant-matter-message"), args.User); // Trauma - fix bad locid
             return;
         }
 

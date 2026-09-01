@@ -14012,3 +14012,13 @@ Entries:
   id: 1531
   time: '2026-08-31T18:30:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4396
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      The surgery UI now updates parts and surgeries in real time, no more
+      reopening because it's buggy and stuck on a surgery that can't even be
+      done.
+  id: 1532
+  time: '2026-09-01T07:48:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4401
