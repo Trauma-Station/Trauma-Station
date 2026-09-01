@@ -14065,10 +14065,3 @@ Entries:
   id: 1534
   time: '2026-09-01T12:25:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4402
-- author: deltanedas
-  changes:
-  - type: Fix
-    message: Fixed mothmaggots not being ghost roles.
-  id: 1535
-  time: '2026-09-01T12:44:55.0000000+00:00'
-  url: https://github.com/Trauma-Station/Trauma-Station/pull/4404
