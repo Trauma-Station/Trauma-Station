@@ -7,6 +7,8 @@
   name: demon
   description: It came from hell.
   components:
+  - type: Damageable
+    damageModifierSet: Demon
   - type: CollectiveMind
     defaultChannel: Demonmind
     channels:
