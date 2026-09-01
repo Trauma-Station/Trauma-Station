@@ -14,7 +14,6 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
-    //[Dependency] private LightningSystem _lightning = default!;
 
     public override void Initialize()
     {
@@ -32,9 +31,6 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
 
     private void OnHitProjectile(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
-        Console.WriteLine($"REACTIVE ARMOUR: uid {uid}");
-        Console.WriteLine($"REACTIVE ARMOUR: args.Owner {args.Owner}");
-        Console.WriteLine($"REACTIVE ARMOUR: args {args}");
         CheckForCooldown(args.Owner, comp);
     }
 
