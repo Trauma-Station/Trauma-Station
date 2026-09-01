@@ -94,7 +94,7 @@ public sealed partial class SurgeryWindow : FancyWindow
         => _proto.Index(id).Name;
 
     private bool Deleted(EntityUid uid)
-        => !_ent.TryGetComponent(uid, out MetaDataComponent comp) || comp.EntityDeleted;
+        => !_ent.TryGetComponent(uid, out MetaDataComponent? comp) || comp.EntityDeleted;
 
     private void ViewSurgery(EntityUid part, EntProtoId surgeryId)
     {
