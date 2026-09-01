@@ -105,7 +105,7 @@
     effects:
     - !type:Sparks
     - !type:ShootRandomLightnings
-      radius: 8.0
+      lightningRange: 8.0
     activationDelay: 10
   - type: Construction
     graph: ArmorReactive
