@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: ClothingOuterChameleon
   id: ClothingOuterChameleonArmor
@@ -7,17 +5,7 @@
   description: A thick vest with a rubbery, water-resistant shell.
   suffix: Chameleon, Armor
   components:
-  - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
-  - type: Sprite
-    sprite: Clothing/OuterClothing/Vests/vest.rsi
-  - type: Clothing
-    sprite: Clothing/OuterClothing/Vests/vest.rsi
-  - type: ChameleonClothing
-    slot: [outerClothing]
-    default: ClothingOuterVest
   - type: Armor
-    modifiers:
     coverage:
     - Torso
     - Tail
@@ -26,6 +14,7 @@
       OrganDamage: 0.1
       BoneDamage: 0.1
       VeinsDamage: 0
+      modifiers:
       coefficients:
         Blunt: 0.8
         Slash: 0.8
