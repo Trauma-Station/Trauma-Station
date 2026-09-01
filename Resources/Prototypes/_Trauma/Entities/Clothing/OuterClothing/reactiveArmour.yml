@@ -16,6 +16,8 @@
       Glass: 25
       Plasma: 125
       Gold: 125
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
