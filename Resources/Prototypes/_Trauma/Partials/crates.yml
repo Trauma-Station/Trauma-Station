@@ -13,6 +13,11 @@
   id: CrateBaseSecure
   components:
   - type: LockSignalControl
+  - type: DeviceLinkSource
+    ports:
+    - Lock
+    - Unlock
+    - Toggle
 
 - type: entity
   id: CrateWeaponSecure

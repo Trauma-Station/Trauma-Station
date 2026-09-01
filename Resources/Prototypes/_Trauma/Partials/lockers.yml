@@ -5,6 +5,11 @@
   parent: ClosetBase
   components:
   - type: LockSignalControl
+  - type: DeviceLinkSource
+    ports:
+    - Lock
+    - Unlock
+    - Toggle
 
 # Command .. ish
 
