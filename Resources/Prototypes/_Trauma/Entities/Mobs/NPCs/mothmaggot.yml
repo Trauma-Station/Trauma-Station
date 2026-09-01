@@ -8,8 +8,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Animals/mothmaggot.rsi
-  - type: GhostRole
-    prob: 1 # war
   - type: Item
     size: Small
   - type: EnterBodyPart
