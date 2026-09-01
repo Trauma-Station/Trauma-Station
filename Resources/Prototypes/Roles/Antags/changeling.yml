@@ -3,10 +3,7 @@
   name: roles-antag-changeling-name
   antagonist: true
   setPreference: true
-  # <Trauma>
-  objective: roles-antag-changeling-description # this string exists, -objective one doesnt
-  creditImage: /Textures/_Trauma/EndCredits/Antags/changeling.png
-  # </Trauma>
+  objective: roles-antag-changeling-objective
   guides: [ Changelings ]
   requirements:
   - !type:OverallPlaytimeRequirement
