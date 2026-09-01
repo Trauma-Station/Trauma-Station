@@ -14072,3 +14072,10 @@ Entries:
   id: 1535
   time: '2026-09-01T12:44:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4404
+- author: ghostlydragon8
+  changes:
+  - type: Add
+    message: Added lathe automation to revolution machines
+  id: 1536
+  time: '2026-09-01T17:40:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4407

@@ -68,6 +68,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
         if (ratio <= 0.0f)
             return message;
 
+        _builder.Clear();
         language.Obfuscation.Obfuscate(_builder, message, this, ratio);
 
         return _builder.ToString();

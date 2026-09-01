@@ -469,8 +469,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (GetContainer(target) is not { } ent ||
             ent.Comp.Holder is not { } holder ||
+            ent.Comp.Container is not { } container ||
             GetKnowledge(ent, id) is not { } unit ||
-            unit.Comp.Unremoveable && !force)
+            unit.Comp.Unremoveable && !force ||
+            !_container.Remove(unit.Owner, container, force: force))
             return null;
 
         ent.Comp.KnowledgeDict.Remove(id);
