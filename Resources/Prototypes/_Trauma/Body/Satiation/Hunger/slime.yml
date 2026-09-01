@@ -4,6 +4,7 @@
   parent: SimpleMobBaseHunger
   id: SlimeHunger
   startingValue: 40
+  maximumValue: 150
   thresholds:
     Overfed: 150
     Okay: 75
@@ -15,4 +16,4 @@
     Peckish: 0.4
     Starving: 0.2
     Dead: 0.1
-  baseChangeRate: 0.5
+  baseChangeRate: -0.3

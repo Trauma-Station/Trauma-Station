@@ -289,7 +289,6 @@
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
   # <Trauma>
-  - type: ChangelingRule
   - type: AntagRandomObjectives
     sets:
     - groups: ChangelingObjectiveGroups
@@ -299,6 +298,7 @@
     - !type:NestedEffect
       proto: ChangelingSkills
   # </Trauma>
+  - type: ChangelingRule
   - type: GameRule
     minPlayers: 20
     delay:
@@ -332,8 +332,6 @@
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
   # <Trauma>
-  - type: NewAntagOrEvac
-    event: SpawnERTSecurity
   - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
   # </Trauma>
   - type: GameRule

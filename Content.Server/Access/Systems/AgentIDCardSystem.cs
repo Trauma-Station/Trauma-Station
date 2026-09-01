@@ -53,9 +53,7 @@ public sealed partial class AgentIdCardSystem : SharedAgentIdCardSystem
         if (!proto.TryComp<PdaComponent>(out var comp, EntityManager.ComponentFactory))
             return;
 
-        /* Trauma - wasn't cherry picked?
         if (TryComp<ChameleonClothingComponent>(ent, out var chameleonComp) && chameleonComp.CanBeSetByController)
             _chameleon.SetSelectedPrototype(ent, comp.IdCard, component: chameleonComp);
-        */
     }
 }

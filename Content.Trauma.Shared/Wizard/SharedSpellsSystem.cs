@@ -1265,8 +1265,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     private bool IsTouchSpellDenied(EntityUid target)
     {
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev, true);
-
+        RaiseLocalEvent(target, ref ev, true);
         return ev.Cancelled;
     }
 

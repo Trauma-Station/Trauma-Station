@@ -229,8 +229,8 @@
 
 - type: listing
   id: HereticBladeT1Curio
-  name: knowledge-path-side-t2-curio-name
-  description: knowledge-path-side-t2-curio-desc
+  name: knowledge-path-side-t1-curio-name
+  description: knowledge-path-side-t1-curio-desc
   icon: { sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -243,12 +243,12 @@
     KnowledgePoint: 0
     SideKnowledgePoint: 1
   categories:
-  - HereticPathSideT2
+  - HereticPathSideT1
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 4
+    stage: 3
 
 - type: listing
   id: HereticSideT2RustWalker

@@ -12,6 +12,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Random;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
 
@@ -20,6 +21,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
     [Dependency] private BotanySystem _botany = default!;
     [Dependency] private SharedAtmosphereSystem _atmos = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -84,13 +86,24 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         return (null, null);
     }
 
-    private EntityUid EnsurePlantData(Entity<SeedComponent> seed)
+    private EntityUid EnsurePlantData(Entity<PlantAnalyzerComponent> ent, Entity<SeedComponent> seed)
     {
         if (seed.Comp.PlantData is { } uid)
             return uid;
 
         seed.Comp.PlantData = uid = EntityManager.PredictedSpawn(seed.Comp.PlantProtoId);
         Dirty(seed);
+
+        // make sure the dummy plant entity is in pvs so clients can predict it
+        var slot = _container.EnsureContainer<ContainerSlot>(seed.Owner, "seed_plant_data");
+        _container.Insert(uid, slot);
+
+        // let the UI update the seed's data without rescanning, if it was scanned already
+        if (ent.Comp.Scanned == seed.Owner)
+        {
+            ent.Comp.Plant = uid;
+            DirtyField(ent, ent.Comp, nameof(PlantAnalyzerComponent.Plant));
+        }
         return uid;
     }
 
@@ -136,7 +149,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
             return;
         }
 
-        var uid = EnsurePlantData((target, seed));
+        var uid = EnsurePlantData(ent, (target, seed));
         var comp = Comp<PlantComponent>(uid);
         var name = Name(target);
         if (comp.Mutations.Count == 0)
@@ -154,6 +167,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
     public void ScanPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target, EntityUid user)
     {
+        ent.Comp.Scanned = target;
         (ent.Comp.Plant, ent.Comp.Seed) = GetPlantData(target);
 
         // mutations list isnt networked, have to do it ourselves
@@ -167,6 +181,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
 
         DirtyFields(ent, ent.Comp, null,
+            nameof(PlantAnalyzerComponent.Scanned),
             nameof(PlantAnalyzerComponent.Plant),
             nameof(PlantAnalyzerComponent.Seed),
             nameof(PlantAnalyzerComponent.ScannedMutations));
@@ -195,18 +210,18 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         var dirty = string.Empty;
         if (args.IsDatabank)
         {
-            var end = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
-            if (end == 0)
+            var len = ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count;
+            if (len == 0)
                 return;
-            ent.Comp.DatabankIndex = Math.Clamp(index, 0, end - 1);
+            ent.Comp.DatabankIndex = Math.Clamp(index, 0, len - 1);
             dirty = nameof(PlantAnalyzerComponent.DatabankIndex);
         }
         else
         {
-            var end = SeedData.AllGenes.Length;
-            if (end == 0)
+            var len = SeedData.AllGenes.Length;
+            if (len == 0)
                 return;
-            ent.Comp.GeneIndex = Math.Clamp(index, 0, end - 1);
+            ent.Comp.GeneIndex = Math.Clamp(index, 0, len - 1);
             dirty = nameof(PlantAnalyzerComponent.GeneIndex);
         }
         DirtyField(ent, ent.Comp, dirty);
@@ -257,8 +272,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         int index = ent.Comp.GeneIndex;
         if (index < 0 ||
             index >= SeedData.AllGenes.Length ||
-            !_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant) ||
-            !_botany.TryGetPlantComponent<PlantDataComponent>(uid, seed, out var data))
+            !_botany.TryGetPlantComponent<PlantComponent>(uid, seed, out var plant))
             return;
 
         var dirty = false;
@@ -336,9 +350,10 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     15 => (float) plant.Yield,
                     16 => plant.Potency,
                     17 => _botany.PlantHasComp<PlantTraitSeedlessComponent>(uid, seed) ? 1f : 0f,
-                    18 => _botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed) ? 1f : 0f,
-                    19 => _botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed) ? 1f : 0f,
-                    20 => _botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed) ? 1f : 0f,
+                    18 => _botany.PlantHasComp<PlantTraitUnviableComponent>(uid, seed) ? 1f : 0f,
+                    19 => _botany.PlantHasComp<PlantTraitLigneousComponent>(uid, seed) ? 1f : 0f,
+                    20 => _botany.PlantHasComp<PlantTraitScreamComponent>(uid, seed) ? 1f : 0f,
+                    21 => _botany.PlantHasComp<PlantTraitKudzuComponent>(uid, seed) ? 1f : 0f,
                     _ => null
                 };
 
@@ -357,10 +372,9 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
     public void SetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, Entity<SeedComponent> seed)
     {
-        var uid = EnsurePlantData(seed);
+        var uid = EnsurePlantData(ent, seed);
 
-        if (!TryComp<PlantComponent>(uid, out var plant) ||
-            !TryComp<PlantDataComponent>(uid, out var data))
+        if (!TryComp<PlantComponent>(uid, out var plant))
         {
             Log.Error($"{ToPrettyString(seed)} has invalid PlantData {ToPrettyString(uid)}!");
             return;
@@ -472,12 +486,15 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                     SetTrait<PlantTraitSeedlessComponent>(uid, value);
                     break;
                 case 18:
-                    SetTrait<PlantTraitLigneousComponent>(uid, value);
+                    SetTrait<PlantTraitUnviableComponent>(uid, value);
                     break;
                 case 19:
-                    SetTrait<PlantTraitScreamComponent>(uid, value);
+                    SetTrait<PlantTraitLigneousComponent>(uid, value);
                     break;
                 case 20:
+                    SetTrait<PlantTraitScreamComponent>(uid, value);
+                    break;
+                case 21:
                     SetTrait<PlantTraitKudzuComponent>(uid, value);
                     break;
             }

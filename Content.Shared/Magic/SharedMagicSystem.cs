@@ -162,7 +162,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
     public bool IsTouchSpellDenied(EntityUid target) // Goob edit
     {
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev, true);
+        RaiseLocalEvent(target, ref ev, true);
 
         return ev.Cancelled;
     }

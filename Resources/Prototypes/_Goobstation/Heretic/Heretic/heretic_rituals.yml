@@ -488,8 +488,8 @@
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
-            - SilverBar
-          name: heretic-ritual-ingredient-silver
+            - Knife
+          name: heretic-ritual-ingredient-knife
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -1363,8 +1363,8 @@
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
-            - SheetPlasma
-          name: heretic-ritual-ingredient-plasma-sheet
+            - SheetGlass
+          name: heretic-ritual-ingredient-glass-sheet
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -1780,8 +1780,8 @@
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
       knowledge:
-        KnowledgePoint: 2
-        SideKnowledgePoint: 2
+        KnowledgePoint: 3
+        SideKnowledgePoint: 1
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -2135,13 +2135,11 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
+            requireAll: false
             tags:
             - GoldBar
-          name: heretic-ritual-ingredient-gold
-        - whitelist:
-            tags:
             - SilverBar
-          name: heretic-ritual-ingredient-silver
+          name: heretic-ritual-ingredient-gold-silver
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -2189,7 +2187,6 @@
       output:
         SpearIceHeretic: 1
 
-## T2
 - type: entity
   id: RitualUnfathomableCurio
   name: Unfathomable Curio
@@ -2232,6 +2229,7 @@
       output:
         UnfathomableCurio: 1
 
+## T2
 - type: entity
   id: RitualRusted
   name: Rusted Ritual

@@ -4,32 +4,32 @@
 # High yields
 - type: ore
   id: OreSteel
-  oreEntity: SteelOre1Unprocessed # Lavaland Change
+  oreEntity: SteelOre1
   minOreYield: 1
   maxOreYield: 5
 
 - type: ore
   id: OreSpaceQuartz
-  oreEntity: SpaceQuartz1Unprocessed # Lavaland Change
+  oreEntity: SpaceQuartz1
   minOreYield: 1
   maxOreYield: 5
 
 - type: ore
   id: OreCoal
-  oreEntity: Coal1Unprocessed # Lavaland Change
+  oreEntity: Coal1
   minOreYield: 1
   maxOreYield: 5
 
 # Medium yields
 - type: ore
   id: OreGold
-  oreEntity: GoldOre1Unprocessed # Lavaland Change
+  oreEntity: GoldOre1
   minOreYield: 1
   maxOreYield: 3
 
 - type: ore
   id: OreSilver
-  oreEntity: SilverOre1Unprocessed # Lavaland Change
+  oreEntity: SilverOre1
   minOreYield: 1
   maxOreYield: 3
 
@@ -42,27 +42,27 @@
 # Low yields
 - type: ore
   id: OrePlasma
-  oreEntity: PlasmaOre1Unprocessed # Lavaland Change
+  oreEntity: PlasmaOre1
   minOreYield: 1
   maxOreYield: 2
 
 - type: ore
   id: OreUranium
-  oreEntity: UraniumOre1Unprocessed # Lavaland Change
+  oreEntity: UraniumOre1
   minOreYield: 1
   maxOreYield: 2
 
 - type: ore
   id: OreBananium
-  oreEntity: BananiumOre1Unprocessed # Lavaland Change
+  oreEntity: BananiumOre1
   minOreYield: 1
-  maxOreYield: 3
+  maxOreYield: 2
 
 - type: ore
   id: OreDiamond
-  oreEntity: DiamondOre1Unprocessed # Lavaland Change
+  oreEntity: DiamondOre1
   minOreYield: 1
-  maxOreYield: 1
+  maxOreYield: 2
 
 - type: ore
   id: OreQuartzCrab
@@ -94,27 +94,21 @@
 
 - type: ore
   id: OreArtifactFragment
-  oreEntity: ArtifactFragmentOre1Unprocessed # Lavaland Change
+  oreEntity: ArtifactFragment1
   minOreYield: 1
   maxOreYield: 3
 
 - type: weightedRandomOre
   id: RandomOreDistributionStandard
   weights:
-  # Lavaland Change Start - Unprocessed Ores
     OreSteel: 10
     OreCoal: 10
     OreSpaceQuartz: 8
-    OrePlasma: 4
-    OreSilver: 2 # previously rarer than gold, even though they are both typically used in similar amounts for crafting
     OreGold: 2
+    OrePlasma: 4
+    OreSilver: 1
     OreUranium: 1
-    OreBSCrystal: 0.5 # to account for higher points (250)
-    OreBananium: 0.25 # to account for it being a useless meme ore
-    OreDiamond: 0.1 # to account for its much higher points (1000), as well as its use in endgame schematics
     OreArtifactFragment: 0.5
-    OreGibtonite: 2 # Spawns often enough but always as a single piece
-  # Lavaland Change End
 
 - type: weightedRandomOre
   id: OreCrab

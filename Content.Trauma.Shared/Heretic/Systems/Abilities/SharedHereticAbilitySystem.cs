@@ -184,7 +184,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             if (checkNullRod)
             {
                 var ev = new BeforeCastTouchSpellEvent(look, false);
-                RaiseLocalEvent(look, ev, true);
+                RaiseLocalEvent(look, ref ev, true);
                 if (ev.Cancelled)
                     continue;
             }

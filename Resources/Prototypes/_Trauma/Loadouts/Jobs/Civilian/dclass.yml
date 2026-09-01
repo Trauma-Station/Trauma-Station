@@ -82,7 +82,7 @@
   - !type:GroupLoadoutEffect
     proto: DClassGreyTider
   equipment:
-    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesColorGray
 
 # Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup

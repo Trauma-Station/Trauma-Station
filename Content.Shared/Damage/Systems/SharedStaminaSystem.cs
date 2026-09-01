@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Common.Damage.Events;
 using Content.Goobstation.Common.Stunnable;
 using Content.Trauma.Common.Damage;
 // </Trauma>
@@ -171,7 +170,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         // Shoving shouldnt handle it
     }
 
-    // goobstation - stun resistance. try not to modify this method at all
     [SubscribeLocalEvent]
     private void OnMeleeHit(EntityUid uid, StaminaDamageOnHitComponent component, MeleeHitEvent args)
     {
@@ -182,12 +180,12 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             return;
         }
 
-        var ev = new StaminaDamageOnHitAttemptEvent(args.Direction == null, false); // Goob edit
+        var ev = new StaminaDamageOnHitAttemptEvent(args.Direction == null, false); // Trauma - added both bools
         RaiseLocalEvent(uid, ref ev);
         if (ev.Cancelled)
             return;
 
-        var toHit = new List<EntityUid>();
+        var toHit = new List<(EntityUid Entity, StaminaComponent Component)>();
 
         // Split stamina damage between all eligible targets.
         foreach (var ent in args.HitEntities)
@@ -195,31 +193,36 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             if (!_stamQuery.TryGetComponent(ent, out var stam))
                 continue;
 
-            toHit.Add(ent);
+            toHit.Add((ent, stam));
         }
 
-        // Goobstation
-        RaiseLocalEvent(uid, new StaminaDamageMeleeHitEvent(toHit, args.Direction));
+        var hitEvent = new StaminaMeleeHitEvent(toHit);
+        hitEvent.WideSwing = args.Direction != null; // Trauma
+        RaiseLocalEvent(uid, hitEvent);
 
-        // <Goob>
-        // raise event to modify outgoing stamina damage by multiplier or something
-        var damage = 1.0f;
-        var overtime = 1.0f;
-        var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
-        RaiseLocalEvent(args.User, ref outgoingModifier);
+        if (hitEvent.Handled)
+            return;
+
+        var damage = component.Damage;
+
+        // <Trauma> - left clicks with batong are strongest
+        var overtime = component.Overtime;
         if (args.Direction == null)
         {
-            damage *= component.LightAttackDamageMultiplier * outgoingModifier.Value;
-            overtime *= component.LightAttackOvertimeDamageMultiplier * outgoingModifier.Value;
+            damage *= component.LightAttackDamageMultiplier;
+            overtime *= component.LightAttackOvertimeDamageMultiplier;
         }
-        // goobstation
-        foreach (var ent in toHit)
-        {
-            if (!_stamQuery.TryGetComponent(ent, out var comp))
-                continue;
+        // </Trauma>
+        damage *= hitEvent.Multiplier;
 
-            TakeStaminaDamage(ent, component.Damage * damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
-            TakeOvertimeStaminaDamage(ent, component.Overtime * overtime);
+        damage += hitEvent.FlatModifier;
+        foreach (var (ent, comp) in toHit)
+        {
+            // <Trauma> - split into immediate and overtime stam damage
+            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound,
+                immediate: true);
+            TakeOvertimeStaminaDamage(ent, overtime);
+            // </Trauma>
         }
     }
 
@@ -341,41 +344,23 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         return true;
     }
 
-    // goob edit - stunmeta
-    public void TakeOvertimeStaminaDamage(EntityUid uid, float value)
-    {
-        // do this only on server side because otherwise shit happens
-        if (value == 0)
-            return;
-
-        var hasComp = TryComp<OvertimeStaminaDamageComponent>(uid, out var overtime);
-
-        if (!hasComp)
-            overtime = EnsureComp<OvertimeStaminaDamageComponent>(uid);
-
-        // <Trauma>
-        var ev = new BeforeStaminaDamageEvent(value);
-        RaiseLocalEvent(uid, ref ev);
-        overtime!.Amount = hasComp ? overtime.Amount + ev.Value : ev.Value;
-        overtime!.Damage = hasComp ? overtime.Damage + ev.Value : ev.Value;
-        // </Trauma>
-    }
-
     public void TakeStaminaDamage(EntityUid uid, float value, StaminaComponent? component = null,
         EntityUid? source = null, EntityUid? with = null, bool visual = true, SoundSpecifier? sound = null, bool ignoreResist = false,
-        bool immediate = true, bool logDamage = true) // Goob - stunmeta
+        bool immediate = true) // Trauma
     {
-        if (!Resolve(uid, ref component, false)
-        || value == 0) // no damage???
+        if (!Resolve(uid, ref component, false) || value == 0) // Trauma - skip for 0 damage
             return;
 
-        var ev = new BeforeStaminaDamageEvent(value, source); // Goob change: Added source param.
+        var ev = new BeforeStaminaDamageEvent(value, source); // Trauma - pass source
         RaiseLocalEvent(uid, ref ev);
         if (ev.Cancelled)
             return;
 
+        // Allow stamina resistance to be applied.
         if (!ignoreResist)
+        {
             value = ev.Value;
+        }
 
         value = UniversalStaminaDamageModifier * value;
 
@@ -408,9 +393,9 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         if (!component.Critical)
         {
-            if (component.StaminaDamage >= component.CritThreshold && value > 0) // goob edit
+            if (component.StaminaDamage >= component.CritThreshold && value > 0) // Trauma - check positive value too
             {
-                EnterStamCrit(uid, component, immediate);
+                EnterStamCrit(uid, component, immediate); // Trauma - pass immediate
             }
         }
         else
@@ -426,18 +411,17 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         if (value <= 0)
             return;
-
-        // Goobstation - Don't log stamina damage if the entity is sprinting and the damage is from themselves (sprinting)
-        if (logDamage && source != uid)
+        if (source != null)
         {
-            if (source != null)
-                _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(source.Value):user} caused {value} stamina damage to {ToPrettyString(uid):target}{(with != null ? $" using {ToPrettyString(with.Value):using}" : "")}");
-            else
-                _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
+            _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(source.Value):user} caused {value} stamina damage to {ToPrettyString(uid):target}{(with != null ? $" using {ToPrettyString(with.Value):using}" : "")}");
+        }
+        else
+        {
+            _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
         }
 
         // <Trauma>
-        var tookEv = new TookStaminaDamageEvent(uid, value);
+        var tookEv = new TookStaminaDamageEvent(uid, source, value);
         RaiseLocalEvent(uid, ref tookEv);
         // </Trauma>
 
@@ -450,40 +434,6 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         {
             _audio.PlayPvs(sound, uid);
         }
-    }
-
-    // Goob edit - stamina drains
-    public void ToggleStaminaDrain(EntityUid target, float drainRate, bool enabled, bool modifiesSpeed, string key, EntityUid? source = null, bool ignoreResist = false)
-    {
-        if (!TryComp<StaminaComponent>(target, out var stamina))
-            return;
-
-        // If theres no source, we assume its the target that caused the drain.
-        var actualSource = source ?? target;
-
-        if (enabled)
-        {
-            stamina.ActiveDrains.TryAdd(key, (drainRate, modifiesSpeed, GetNetEntity(actualSource), ignoreResist));
-            EnsureComp<ActiveStaminaComponent>(target);
-        }
-        else
-        {
-            if (stamina.ActiveDrains.ContainsKey(key))
-                stamina.ActiveDrains.Remove(key);
-        }
-
-        Dirty(target, stamina);
-    }
-
-    public void ModifyStaminaDrain(EntityUid target, string key, float newValue, StaminaComponent? component = null)
-    {
-        if (!Resolve(target, ref component, false))
-            return;
-
-        if (component.ActiveDrains.TryGetValue(key, out var old))
-            component.ActiveDrains[key] = (newValue, old.Item2, old.Item3, old.Item4);
-
-        Dirty(target, component);
     }
 
     public override void Update(float frameTime)
@@ -558,25 +508,20 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         StunSystem.TryUpdateParalyzeDuration(uid, component.StunTime, true);
 
 
-        // Goobstation - Modularization
+        // <Trauma>
         var modifierEv = new GetClothingStunModifierEvent(uid);
         RaiseLocalEvent(modifierEv);
-        var clothingModifier= modifierEv.Modifier;
-        // Goobstation - Modularization
+        // </Trauma>
 
         // Give them buffer before being able to be re-stunned
-        component.NextUpdate = Timing.CurTime + component.StunTime * clothingModifier + StamCritBufferTime; // Goobstation - Modularization
+        component.NextUpdate = Timing.CurTime + component.StunTime * modifierEv.Modifier + StamCritBufferTime; // Trauma - use modifierEv
         EnsureComp<ActiveStaminaComponent>(uid);
         Dirty(uid, component);
 
         _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} entered stamina crit");
     }
 
-    // goob edit - made it public.
-    // in any case it requires a stamina component that can be freely modified.
-    // so it doesn't really matter if it's public or private. besides, very convenient.
-    // regards
-    public void ExitStamCrit(EntityUid uid, StaminaComponent? component = null)
+    public void ExitStamCrit(EntityUid uid, StaminaComponent? component = null) // Trauma - made public
     {
         if (!Resolve(uid, ref component) ||
             !component.Critical)

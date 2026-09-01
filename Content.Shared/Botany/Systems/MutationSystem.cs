@@ -81,7 +81,7 @@ public sealed partial class PlantMutationSystem : EntitySystem
         if (snapshot == null)
             return;
 
-        var newPlantUid = SpawnAtPosition(newPlantProto, Transform(oldPlant.Owner).Coordinates);
+        var newPlantUid = PredictedSpawnAtPosition(newPlantProto, Transform(oldPlant.Owner).Coordinates); // Trauma - predicted
         _botany.ApplyPlantSnapshotData(snapshot, newPlantUid, cloneLifecycle: true);
         _botany.DeletePlantSnapshot(snapshot);
 
@@ -93,7 +93,7 @@ public sealed partial class PlantMutationSystem : EntitySystem
             _plant.PlantingPlant(newPlantUid);
 
         _plant.ForceUpdate(newPlantUid);
-        QueueDel(oldPlant);
+        PredictedQueueDel(oldPlant); // Trauma - predicted
     }
 
     private void ChemicalsSpeciesChange(EntityUid plantUid, EntProtoId plantProto)

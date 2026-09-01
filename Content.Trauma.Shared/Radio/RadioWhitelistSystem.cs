@@ -13,6 +13,12 @@ public sealed partial class RadioWhitelistSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnIntrinsicReceiveAttempt(Entity<IntrinsicRadioReceiverComponent> ent, ref RadioReceiveAttemptEvent args)
     {
-        args.Cancelled = _whitelist.IsWhitelistFail(args.Channel.ReceiveWhitelist, ent.Owner);
+        args.Cancelled |= _whitelist.IsWhitelistFail(args.Channel.ReceiveWhitelist, ent.Owner);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnHeadsetReceiveAttempt(Entity<HeadsetComponent> ent, ref RadioReceiveAttemptEvent args)
+    {
+        args.Cancelled |= _whitelist.IsWhitelistFail(args.Channel.ReceiveWhitelist, ent.Owner);
     }
 }

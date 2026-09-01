@@ -8,7 +8,7 @@
   physicalDesc: reagent-physical-desc-viscous
   flavor: slimy
   metabolisms:
-    Metabolites:
+    Digestion:
       effects:
       - !type:Satiate
         satiationType: Hunger

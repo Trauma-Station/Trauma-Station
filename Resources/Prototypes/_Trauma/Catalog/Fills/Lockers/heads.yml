@@ -29,7 +29,6 @@
     - id: CartridgeRocketSingularityBuster
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
-    - id: MachinePowerTransmissionLaserFlatpack
     - id: ArmoryOverrideKeyComponents
 
 - type: entityTable

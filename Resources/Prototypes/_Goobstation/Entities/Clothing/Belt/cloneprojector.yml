@@ -118,6 +118,7 @@
     - type: Dna
     - type: Absorbable
     - type: Mutatable
+    - type: CanHostGuardian
     - type: Fingerprint
     - type: Perishable
     - type: Satiation
@@ -144,8 +145,6 @@
     clonedItemWhitelist:
       components:
       - Clothing
-    removedComponents:
-    - type: CanHostGuardian
     userBlacklist:
       components:
       - Zombie
