@@ -28,8 +28,8 @@
 
 - type: entity
   abstract: true
-  id: AntiTamperLowPriority
   parent: AntiTamper
+  id: AntiTamperLowPriority
   components:
   - type: AntiTamper
     yellAlertType: OnDestroyed
@@ -44,8 +44,8 @@
 
 - type: entity
   abstract: true
-  id: AntiTamperHighPriority
   parent: AntiTamper
+  id: AntiTamperHighPriority
   components:
   - type: AntiTamper
     yellAlertType: All

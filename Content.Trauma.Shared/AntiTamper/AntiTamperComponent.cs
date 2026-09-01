@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.AntiTamper;
 
 /// <summary>
 /// Allows playing an alarm noise/yelling on this entity being damaged or destroyed, or its AntiTamper wire pulsed/cut (if added).
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class AntiTamperComponent : Component
 {
     /// <summary>
@@ -48,15 +50,17 @@ public sealed partial class AntiTamperComponent : Component
     public TimeSpan YellCooldown = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Cooldown between alarm sounds.
+    /// Next time it .
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan AlarmCooldown = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Last time of the yell.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan LastYell = TimeSpan.Zero;
 
     /// <summary>
