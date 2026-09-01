@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Shared.Random;
-using Robust.Shared.Timing;
-// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.DisplacementMap;
@@ -15,10 +11,6 @@ namespace Content.Shared.Inventory;
 
 public partial class InventorySystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private RandomHelperSystem _randomHelper = default!;
-    // </Trauma>
     [Dependency] private IViewVariablesManager _vvm = default!;
 
     private void InitializeSlots()
@@ -272,6 +264,10 @@ public partial class InventorySystem : EntitySystem
             _containers = containers;
         }
 
+        /// <summary>
+        /// Get the next ContainerSlot in this inventory.
+        /// The slot may not contain an item.
+        /// </summary>
         public bool MoveNext([NotNullWhen(true)] out ContainerSlot? container)
         {
             while (_nextIdx < _slots.Length)
@@ -287,6 +283,30 @@ public partial class InventorySystem : EntitySystem
             }
 
             container = null;
+            return false;
+        }
+
+        /// <summary>
+        /// Get the next ContainerSlot in this inventory, along with the corresponding SlotDefinition.
+        /// The slot may not contain an item.
+        /// </summary>
+        public bool MoveNext([NotNullWhen(true)] out ContainerSlot? container, [NotNullWhen(true)] out SlotDefinition? slot)
+        {
+            while (_nextIdx < _slots.Length)
+            {
+                var i = _nextIdx++;
+                var slotCandidate = _slots[i];
+
+                if ((slotCandidate.SlotFlags & _flags) == 0)
+                    continue;
+
+                container = _containers[i];
+                slot = slotCandidate;
+                return true;
+            }
+
+            container = null;
+            slot = null;
             return false;
         }
 
@@ -333,34 +353,6 @@ public partial class InventorySystem : EntitySystem
             item = default;
             slot = null;
             return false;
-        }
-    }
-
-    /// <summary>
-    /// Shitmed - Drop whatever item is in a given slot.
-    /// Used by limb severing.
-    /// </summary>
-    public void DropSlotContents(EntityUid uid, string slotName, InventoryComponent? inventory = null)
-    {
-        if (!_timing.IsFirstTimePredicted || !Resolve(uid, ref inventory))
-            return;
-
-        foreach (var slot in inventory.Slots)
-        {
-            if (slot.Name != slotName)
-                continue;
-
-            if (!TryGetSlotContainer(uid, slotName, out var container, out _, inventory))
-                break;
-
-            if (container.ContainedEntity is { } entityUid)
-            {
-                _transform.AttachToGridOrMap(entityUid);
-                _randomHelper.RandomOffset(entityUid, 0.5f);
-            }
-
-            Dirty(uid, inventory);
-            return;
         }
     }
 }

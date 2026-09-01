@@ -289,7 +289,6 @@
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
   # <Trauma>
-  - type: ChangelingRule
   - type: AntagRandomObjectives
     sets:
     - groups: ChangelingObjectiveGroups
@@ -299,6 +298,7 @@
     - !type:NestedEffect
       proto: ChangelingSkills
   # </Trauma>
+  - type: ChangelingRule
   - type: GameRule
     minPlayers: 20
     delay:
