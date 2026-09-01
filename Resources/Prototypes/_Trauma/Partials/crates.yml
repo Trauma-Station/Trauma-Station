@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseCrate
   id: CrateGeneric
   components:
   - type: RequireProjectileTarget
@@ -16,7 +15,6 @@
   - type: LockSignalControl
 
 - type: entity
-  parent: CrateBaseSecure
   id: CrateWeaponSecure
   components:
   - type: Destructible
@@ -38,64 +36,47 @@
 
 - type: entity
   id: CrateBaseLockBox
-  parent: CrateBaseSecure
   components:
   - type: AntiRottingContainer # needed for plant bounties and it costs money so
+  - type: RadioMicrophone
+    broadcastChannel: Common
+    listenRange: 0
+    toggleOnInteract: false
+    enabled: true
 
 - type: entity
   id: CrateLockBoxEngineering
-  parent: CrateBaseLockBox
   components:
   - type: RadioMicrophone
     broadcastChannel: Engineering
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
 
 - type: entity
   id: CrateLockBoxMedical
-  parent: CrateBaseLockBox
   components:
   - type: RadioMicrophone
     broadcastChannel: Medical
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
 
 - type: entity
   id: CrateLockBoxScience
-  parent: CrateBaseLockBox
   components:
   - type: RadioMicrophone
     broadcastChannel: Science
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
 
 - type: entity
   id: CrateLockBoxSecurity
-  parent: CrateBaseLockBox
   components:
   - type: RadioMicrophone
     broadcastChannel: Security
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
 
 - type: entity
   id: CrateLockBoxService
-  parent: CrateBaseLockBox
   components:
   - type: RadioMicrophone
     broadcastChannel: Service
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true
 
 # Other
 
 - type: entity
-  parent: BaseCrate
   id: CrateCoffin
   components:
   - type: VampireLair
