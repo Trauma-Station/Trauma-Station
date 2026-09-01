@@ -14,7 +14,7 @@ public sealed partial class AntiTamperWireAction : ComponentWireAction<AntiTampe
     public override string Name { get; set; } = "wire-name-anti-tamper";
 
     [DataField]
-    private int _pulseTimeout = 10;
+    private int PulseTimeout = 10;
 
     public override void Initialize()
     {
