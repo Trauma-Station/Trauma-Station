@@ -54,6 +54,7 @@
   #- WeaponProtoKineticAccelerator - Goobstation - Moved to MiningWeapons
   - WeaponTetherGun
   - WeaponGauntletGorilla
+  - ClothingOuterArmorReactiveUnfinished # Trauma - reactive armour
 
 # Only contains parts for making basic modular grenades, no actual explosives
 - type: latheRecipePack

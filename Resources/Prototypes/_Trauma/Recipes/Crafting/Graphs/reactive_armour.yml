@@ -1,0 +1,24 @@
+- type: constructionGraph
+  id: ArmorReactive
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: teleport
+      steps:
+      - tag: AnomalyCoreBluespace
+        name: construction-graph-tag-bluespace-core
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+    - to: tesla
+      steps:
+      - tag: AnomalyCoreElectricity
+        name: construction-graph-tag-electric-core
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+  - node: teleport
+    entity: ClothingOuterArmorReactiveTeleport
+  - node: tesla
+    entity: ClothingOuterArmorReactiveTesla

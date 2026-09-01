@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Inventory;
 using Content.Shared.EntityEffects;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Hitscan.Events;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 
 
@@ -20,7 +20,7 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ReactiveArmourComponent, InventoryRelayedEvent<AttackedEvent>>(OnHitMele);
-        SubscribeLocalEvent<ReactiveArmourComponent, InventoryRelayedEvent<HitByProjectileEvent>>(OnHitProjectile);
+        SubscribeLocalEvent<ReactiveArmourComponent, InventoryRelayedEvent<GotHitByProjectileEvent>>(OnHitProjectile);
     }
 
     // No. This hould not be predicted on client.
@@ -30,12 +30,12 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
         CheckForCooldown(args.Owner, comp);
     }
 
-    private void OnHitProjectile(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<HitByProjectileEvent> args)
+    private void OnHitProjectile(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
-        Console.WriteLine($"REACTIVE ARMOUR: args.Owner {args.Owner}");
         Console.WriteLine($"REACTIVE ARMOUR: uid {uid}");
-        Console.WriteLine($"REACTIVE ARMOUR: args.Args.Target {args.Args.Target}");
-        CheckForCooldown(args.Args.Target, comp);
+        Console.WriteLine($"REACTIVE ARMOUR: args.Owner {args.Owner}");
+        Console.WriteLine($"REACTIVE ARMOUR: args {args}");
+        CheckForCooldown(args.Owner, comp);
     }
 
     // do we even have hitscan weapons?

@@ -17,6 +17,12 @@
 - type: Tag
   id: AnyGlassShard # Heretic rituals whitelist
 
+- type: Tag
+  id: AnomalyCoreBluespace # Construction: teleport reactive armour
+
+- type: Tag
+  id: AnomalyCoreElectricity # Construction: tesla reactive armour
+
 # Area whitelist tags for ambient music
 - type: Tag
   id: AreaBeach

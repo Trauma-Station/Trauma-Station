@@ -13,7 +13,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Executions;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -52,10 +52,6 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != SharedProjectileSystem.ProjectileFixture || !args.OtherFixture.Hard)
             return;
-
-        // For stuff that cares about it being hit.
-        var hityBProjectileEvent = new HitByProjectileEvent(uid);
-        RaiseLocalEvent(uid, hityBProjectileEvent);
 
         DoHit((uid, component, args.OurBody), args.OtherEntity);
     }
