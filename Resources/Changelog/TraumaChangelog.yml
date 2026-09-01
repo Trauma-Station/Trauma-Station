@@ -14058,3 +14058,10 @@ Entries:
   id: 1533
   time: '2026-09-01T12:02:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4399
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cloned people not having hands.
+  id: 1534
+  time: '2026-09-01T12:25:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4402
