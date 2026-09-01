@@ -2,9 +2,9 @@
 
 - type: constructionGraph
   id: ArmorReactive
-  start: unfinished
+  start: start
   graph:
-  - node: unfinished
+  - node: start
     edges:
     - to: teleport
       steps:

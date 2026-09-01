@@ -15,29 +15,19 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ReactiveArmourComponent, InventoryRelayedEvent<AttackedEvent>>(OnHitMele);
-        SubscribeLocalEvent<ReactiveArmourComponent, InventoryRelayedEvent<GotHitByProjectileEvent>>(OnHitProjectile);
-    }
-
     // No. This hould not be predicted on client.
-    // there has to be a better way to do this then making 3 methods for differen types of attacks...
+    // there has to be a better way to do this then making 3 methods for differen types of attacks... also do we even need a methot for hitscans?
+    [ SubscribeLocalEvent ]
     private void OnHitMele(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<AttackedEvent> args)
     {
         CheckForCooldown(args.Owner, comp);
     }
 
+    [ SubscribeLocalEvent ]
     private void OnHitProjectile(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
         CheckForCooldown(args.Owner, comp);
     }
-
-    // do we even have hitscan weapons?
-    // private void OnHitscanHit(EntityUid uid, ref AttemptHitscanRaycastFiredEvent args)
-    // {
-    // }
 
     private void CheckForCooldown(EntityUid target, ReactiveArmourComponent comp)
     {

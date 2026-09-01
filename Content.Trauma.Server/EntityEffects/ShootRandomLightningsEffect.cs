@@ -3,7 +3,6 @@
 using Content.Server.Lightning;
 using Content.Shared.EntityEffects;
 
-
 namespace Content.Trauma.Server.EntityEffects.Effects;
 
 public sealed partial class ShootRandomLightnings : EntityEffectBase<ShootRandomLightnings>

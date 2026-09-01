@@ -9,14 +9,7 @@ namespace Content.Trauma.Common.Projectiles;
 /// Raised on the entity that got hit by a projectile.
 /// </summary>
 [ByRefEvent]
-public sealed class GotHitByProjectileEvent : EntityEventArgs, IInventoryRelayEvent
+public record struct GotHitByProjectileEvent(EntityUid Projectile) : IInventoryRelayEvent
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
-
-    public EntityUid Projectile { get; }
-
-    public GotHitByProjectileEvent(EntityUid projectile)
-    {
-        Projectile = projectile;
-    }
 }

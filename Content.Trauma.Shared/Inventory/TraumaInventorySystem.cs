@@ -15,7 +15,6 @@ using Content.Trauma.Shared.Waypointer.Events;
 using Content.Trauma.Shared.Weapons.SheathCounterattack;
 using Content.Trauma.Common.Projectiles;
 
-
 namespace Content.Trauma.Shared.Inventory;
 
 public sealed partial class TraumaInventorySystem : EntitySystem

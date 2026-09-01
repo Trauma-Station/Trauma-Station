@@ -24,4 +24,3 @@
     difficulty: 2
   - type: StealCondition
     stealGroup: TeleportArmour
-    owner: job-name-rd

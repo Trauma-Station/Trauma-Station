@@ -63,7 +63,7 @@
     graph: ArmorReactive
     defaultTarget: teleport
     deconstructionTarget: null
-    node: unfinished
+    node: start
   - type: Tag
     tags:
     - WhitelistChameleon
