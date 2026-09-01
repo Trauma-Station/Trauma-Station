@@ -12,7 +12,6 @@ using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Surgery;
 using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
@@ -39,7 +38,6 @@ public sealed partial class WoundSystem
 {
     [Dependency] private BodyStatusSystem _bodyStatus = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
-    [Dependency] private SharedSurgerySystem _surgery = default!;
 
     private const string WoundContainerId = "Wounds";
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
@@ -496,12 +494,7 @@ public sealed partial class WoundSystem
             part.Comp.Wounds.Contains(wound))
             return false;
 
-        if (!_container.Insert(wound.Owner, part.Comp.Wounds))
-            return false;
-
-        if (_body.GetBody(part) is { } body)
-            _surgery.RefreshUI(body);
-        return true;
+        return _container.Insert(wound.Owner, part.Comp.Wounds);
     }
 
     private bool RemoveWound(EntityUid wound)
@@ -517,10 +510,6 @@ public sealed partial class WoundSystem
         }
 
         PredictedDel(wound);
-
-        if (_body.GetBody(comp.HoldingWoundable) is { } body)
-            _surgery.RefreshUI(body);
-
         return true;
     }
 
@@ -528,12 +517,7 @@ public sealed partial class WoundSystem
     private void OnTraumaBeingRemoved(Entity<WoundComponent> ent, ref TraumaBeingRemovedEvent args)
     {
         if (ent.Comp.WoundSeverity == WoundSeverity.Healed)
-        {
             RemoveWound(ent); // Remove wound method will perform the check on if there are any other wounds pending treatment
-        }
-
-        if (_body.GetBody(ent.Comp.HoldingWoundable) is { } body)
-            _surgery.RefreshUI(body);
     }
 
     [SubscribeLocalEvent]
