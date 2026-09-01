@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Nukeops
+  creditImage: /Textures/_Trauma/EndCredits/Antags/nukeops.png
+
+- type: antag
+  id: NukeopsMedic
+  dontShowInCredits: true
+
+- type: antag
+  id: NukeopsCommander
+  dontShowInCredits: true
+
+- type: antagSpecifier
+  id: NukeopsMedic
+  components:
+  - type: SurgerySpeedModifier
+    speedModifier: 2
+
+- type: startingGear
+  id: SyndicateOperativeGearFullNoUplink
+  equipment:
+    outerClothing: null # nukies buy their suits
+
+- type: startingGear
+  id: SyndicateOperativeGearFull
+  equipment:
+    pocket2: BaseUplinkRadio225TC # 5x and some more for the suit
+
+- type: startingGear
+  id: SyndicateCommanderGearFull
+  equipment:
+    outerClothing: null # nukies buy their suits
+    ears: ClothingHeadsetAltSyndicateCommander
+    pocket2: BaseUplinkRadio350TC # max win
+  inhand:
+  - !Remove NukeOpsDeclarationOfWar
+  - ToolboxSyndicateFilledWar
+
+- type: startingGear
+  id: SyndicateOperativeMedicFull
+  equipment:
+    back: ClothingBackpackDuffelSyndicateMedical
+    belt: ClothingBeltChemBagSyndiFilled # replaces webbing
+    outerClothing: null # nukies buy their suits
+  storage:
+    back:
+    - !Remove SawAdvanced
+    - !Remove Cautery
+    - !Remove HandheldHealthAnalyzer
+    - MedkitCombatFilled
+
+- type: startingGear
+  id: SyndicateLoneOperativeGearFull
+  equipment:
+    pocket2: LoneOpsUplink225TC

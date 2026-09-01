@@ -6,16 +6,8 @@
   objective: roles-antag-nuclear-operative-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 10h # Goob - was 5h
-  - !type:DepartmentTimeRequirement # Goob
-    department: Security
-    time: 10h
-  - !type:SpeciesRequirement # Goob
-    inverted: true
-    species:
-    - Plasmaman
+    time: 5h
   guides: [ NuclearOperatives ]
-  creditImage: /Textures/_Trauma/EndCredits/Antags/nukeops.png # Trauma
 
 - type: antag
   id: NukeopsMedic
@@ -25,19 +17,11 @@
   objective: roles-antag-nuclear-operative-agent-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 25h # Goob - was 5h
-  - !type:DepartmentTimeRequirement # Goob
-    department: Security
-    time: 10h
+    time: 5h
   - !type:RoleTimeRequirement
     role: JobChemist
-    time: 5h # Goob - was 3h
-  - !type:SpeciesRequirement # Goob
-    inverted: true
-    species:
-    - Plasmaman
+    time: 3h
   guides: [ NuclearOperatives ]
-  dontShowInCredits: true # Trauma
 
 - type: antag
   id: NukeopsCommander
@@ -47,20 +31,12 @@
   objective: roles-antag-nuclear-operative-commander-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 25h # Goob - was 5h
+    time: 5h
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 10h # Goob - was 5h
-  - !type:DepartmentTimeRequirement # Goob
-    department: Command
     time: 5h
-# should be changed to nukie playtime when thats tracked (wyci)
-  - !type:SpeciesRequirement # Goob
-    inverted: true
-    species:
-    - Plasmaman
+  # should be changed to nukie playtime when thats tracked (wyci)
   guides: [ NuclearOperatives ]
-  dontShowInCredits: true # Trauma
 
 - type: antagSpecifier
   abstract: true
@@ -103,8 +79,6 @@
     nameSegments:
     - NamesSyndicateNormal
     nameFormat: name-format-nukie-agent
-  - type: SurgerySpeedModifier # Trauma
-    speedModifier: 2
   mindRoles:
   - MindRoleNukeopsMedic
 
@@ -147,7 +121,7 @@
     eyes: ClothingEyesHudSyndicate
     ears: ClothingHeadsetAltSyndicate
     gloves: ClothingHandsGlovesCombat
-    #outerClothing: ClothingOuterHardsuitSyndie # goobstation - duke nukies
+    outerClothing: ClothingOuterHardsuitSyndie
     shoes: ClothingShoesBootsCombatFilled
     id: SyndiOperativePDA
     pocket2: PlushieCarp
@@ -163,7 +137,7 @@
   id: SyndicateOperativeGearFull
   parent: SyndicateOperativeGearFullNoUplink
   equipment:
-    pocket2: BaseUplinkRadio225TC # Goobstation - Telecrystal rework
+    pocket2: BaseUplinkRadio40TC
 
 - type: chameleonOutfit
   id: NukeopsOutfit
@@ -177,15 +151,13 @@
 #Nuclear Operative Commander Gear
 - type: startingGear
   id: SyndicateCommanderGearFull
-  parent: SyndicateOperativeGearFullNoUplink
+  parent: SyndicateOperativeGearFull
   equipment:
     id: SyndiCommanderPDA
     neck: SyndicateWhistle
-    pocket2: BaseUplinkRadio350TC # goobstation - im rich :fire::fire:
-    #outerClothing: ClothingOuterHardsuitSyndieCommander # goobstation - duke nukies
-    ears: ClothingHeadsetAltSyndicateCommander # goob - loudspeaker
+    outerClothing: ClothingOuterHardsuitSyndieCommander
   inhand:
-  - ToolboxSyndicateFilledWar # Trauma
+  - NukeOpsDeclarationOfWar
 
 - type: chameleonOutfit
   id: NukeopsCommanderOutfit
@@ -199,26 +171,24 @@
 #Nuclear Operative Medic Gear
 - type: startingGear
   id: SyndicateOperativeMedicFull
-  parent: SyndicateOperativeGearFullNoUplink
+  parent: SyndicateOperativeGearFull
   equipment:
-    back: ClothingBackpackDuffelSyndicateMedical # Goobstation
-    eyes: ClothingEyesHudSyndicate
-    #outerClothing: ClothingOuterHardsuitSyndieMedic # goobstation - duke nukies
+    eyes: ClothingEyesHudSyndicateAgent
+    outerClothing: ClothingOuterHardsuitSyndieMedic
     shoes: ClothingShoesBootsMagSyndie
-    belt: ClothingBeltChemBagSyndiFilled # Goobstation - replace webbing
-    pocket2: BaseUplinkRadio225TCMedic # Goob
+    id: SyndiCorpsmanPDA
+    belt: ClothingBeltMilitaryWebbingMedFilled
   storage:
     back:
     - SyndiHypo
-    #- SawAdvanced # Shitmed
-    #- Cautery # Shitmed
+    - SawAdvanced
+    - Cautery
     - CombatKnife
     - WeaponPistolViper
     - PinpointerSyndicateNuclear
-    #- HandheldHealthAnalyzer # Goobstation
+    - HandheldHealthAnalyzer
     - CombatMedipen
     - DeathAcidifierImplanter
-    - MedkitCombatFilled # Goobstation
 
 - type: chameleonOutfit
   id: NukeopsMedicOutfit
@@ -234,5 +204,4 @@
   id: SyndicateLoneOperativeGearFull
   parent: SyndicateOperativeGearFull
   equipment:
-    # Goobstation - Telecrystal rework
-    pocket2: LoneOpsUplink225TC #Trauma
+    pocket2: BaseUplinkRadio60TC

@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: HeadRev
+  creditImage: /Textures/_Trauma/EndCredits/Antags/revolution.png
+
+- type: antagSpecifier
+  id: HeadRev
+  effects:
+  - !type:AddImplant
+    implant: RadioImplantHeadrev
+  jobBlacklist:
+  - Mime # can't speak so can't convert anyone
+  - NanotrasenRepresentative
+  - HeadOfPersonnel
+  - ChiefMedicalOfficer
+  - ResearchDirector
+  - ChiefEngineer
+
+- type: startingGear
+  id: HeadRevGear
+  storage:
+    back: !Clear
+    - RevGear
+    - RevGear
+    - RevGear
+    - RevPropagandaAdvanced
+    - RevPropagandaAdvanced
+    - RevMace
+    - Handcuffs
+    - SheetPaper
+    - Megaphone

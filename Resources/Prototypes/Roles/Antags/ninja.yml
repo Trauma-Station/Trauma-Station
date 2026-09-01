@@ -5,12 +5,6 @@
   setPreference: false
   objective: roles-antag-space-ninja-objective
   guides: [ SpaceNinja ]
-  requirements:
-  - !type:SpeciesRequirement
-    inverted: true
-    species:
-    - Plasmaman
-  creditImage: /Textures/_Trauma/EndCredits/Antags/ninja.png # Trauma
 
 - type: antagSpecifier
   parent: RestrictedAntag
@@ -31,7 +25,7 @@
     - Syndicate
   - type: AutoImplant
     implants:
-    - MicroBombImplant # Trauma - was DeathAcidifierImplant, bada bing
+    - DeathAcidifierImplant
   - type: RandomMetadata
     nameSegments:
     - NamesNinjaTitle
@@ -56,10 +50,9 @@
     ears: ClothingHeadsetNinja
     pocket1: SpiderCharge
     pocket2: PinpointerStation
-    belt: ClothingBeltSheathKatanaNinjaFilled # Trauma - was EnergyKatana
+    belt: EnergyKatana
   inhand:
     - JetpackBlackFilled
-    - NinjutsuScroll # Goobstation
   storage:
     back: # belt holds katana so satchel has the tools for sabotaging things
     - Crowbar
@@ -70,7 +63,7 @@
     - Multitool
     - EmergencyMedipen
     - Flare
-    #- FoodSnackNutribrick # Trauma - rob chef instead chud
+    - FoodSnackNutribrick
     - DrinkWaterBottleFull
 
 - type: chameleonOutfit

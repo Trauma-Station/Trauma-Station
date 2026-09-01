@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: SpaceNinja
+  creditImage: /Textures/_Trauma/EndCredits/Antags/ninja.png
+
+- type: antagSpecifier
+  id: SpaceNinja
+  components:
+  - type: AutoImplant
+    implants:
+    - !Remove DeathAcidifierImplant
+    - MicroBombImplant
+
+- type: startingGear
+  id: SpaceNinjaGear
+  equipment:
+    belt: ClothingBeltSheathKatanaNinjaFilled # for counterattacks
+  inhand:
+  - NinjutsuScroll
+  storage:
+    back:
+    - !Remove FoodSnackNutribrick # rob chef instead chud
