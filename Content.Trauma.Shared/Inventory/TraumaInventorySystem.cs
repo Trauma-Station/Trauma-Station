@@ -13,6 +13,8 @@ using Content.Trauma.Shared.Tackle;
 using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Waypointer.Events;
 using Content.Trauma.Shared.Weapons.SheathCounterattack;
+using Content.Trauma.Common.Projectiles;
+
 
 namespace Content.Trauma.Shared.Inventory;
 
@@ -39,5 +41,6 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, CanSpawnFootstepsEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeDamageChangedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, SpeechFontOverrideEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, GotHitByProjectileEvent>(_inventory.RelayEvent);
     }
 }
