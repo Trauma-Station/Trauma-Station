@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Trauma.Common.Wizard;
-using Content.Shared.GameTicking;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Linq;
 using Content.Server.Actions;
@@ -19,14 +17,12 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Store.Systems;
 
 public sealed partial class StoreSystem
 {
-    // <Trauma>
-    [Dependency] private SharedGameTicker _ticker = default!;
-    // </Trauma>
     [Dependency] private IAdminLogManager _admin = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private ActionsSystem _actions = default!;
@@ -153,6 +149,13 @@ public sealed partial class StoreSystem
             component.BalanceSpent.TryAdd(currency, FixedPoint2.Zero);
 
             component.BalanceSpent[currency] += amount;
+        }
+
+        //apply components
+        if (listing.ProductComponents != null)
+        {
+            if (ProtoMan.Resolve(listing.ProductComponents, out var productComponentsEntity))
+                EntityManager.AddComponents(buyer, productComponentsEntity.Components);
         }
 
         //spawn entity
