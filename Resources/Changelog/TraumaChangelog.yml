@@ -14022,3 +14022,39 @@ Entries:
   id: 1532
   time: '2026-09-01T07:48:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4401
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Modular Receivers and Straight Pipes to the 3D Printer
+  - type: Tweak
+    message: >-
+      Increased the variety of skills you get from the Revolutionary
+      Melee/Revolutionary Shooting book to accommodate for all the weapons that
+      revolutionaries can make
+  - type: Tweak
+    message: Buffed the firerate on the devastator from 1.0 to 1.5
+  - type: Tweak
+    message: >-
+      Decreased the amount of revolutionary gun parts needed for the Proletariat
+      from 5 to 3
+  - type: Tweak
+    message: Decreased the time to print revolutionary parts
+  - type: Tweak
+    message: Decreased the time to print revolutionary gun parts
+  - type: Tweak
+    message: Shortened the recipes of a majority of revolutionary guns
+  - type: Tweak
+    message: Removed the welding step from most revolutionary guns
+  - type: Tweak
+    message: >-
+      Decreased the cost of forged knifes down to 2.5 steel, They now also
+      finish in 5 seconds
+  - type: Tweak
+    message: >-
+      Made Revolutionary Encryption Keys only cost plastic, steel, glass, and
+      gold
+  - type: Fix
+    message: Fixed the Revolutionary Shooting Book not giving Gunsmithing
+  id: 1533
+  time: '2026-09-01T12:02:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4399
