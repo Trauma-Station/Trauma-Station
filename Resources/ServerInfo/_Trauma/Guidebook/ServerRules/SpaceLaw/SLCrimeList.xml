@@ -33,9 +33,9 @@
 
   ## Type 1 Violations
   <Table Columns="2">
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Minor Contraband Posession</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Minor Contraband Possession</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
-      Posession of [bold]any[/bold] contraband that does not fall under any other violations.
+      Possession of [bold]any[/bold] contraband that does not fall under any other violations.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Littering</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
@@ -55,7 +55,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Unauthorized Possession of Department Contraband</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
-      Posession of department contraband without approval from a member of that department. Department heads can retroactively waive approval given by their employees.
+      Possession of department contraband without approval from a member of that department. Department heads can retroactively waive approval given by their employees.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Public Smoking and Vaping</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
@@ -240,7 +240,7 @@
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of taking the law into one's own hand and neglecting their own duties to do such.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Derelction of Duty</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Dereliction of Duty</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Typically punished via corporal methods, or reduction of access, if there is a reasonable risk.
     </Box></ColorBox>
@@ -448,7 +448,7 @@
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Magic</Box></ColorBox>
     <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">
-      The act of practicing magic or usage of a magical item. Posession of magical contraband does not constitute a Type 5 Magic Violation.
+      The act of practicing magic or usage of a magical item. Possession of magical contraband does not constitute a Type 5 Magic Violation.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Possession of Psionic Capabilities</Box></ColorBox>
     <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">
