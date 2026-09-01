@@ -964,6 +964,15 @@
     - item: Crowbar
     - item: BorgFireExtinguisher
     - item: BorgHandheldGPSBasic
+    # <Trauma>
+    - item: BodyBagFolded
+      hand:
+        emptyLabel: borg-slot-body-bag-folded-empty
+        emptyRepresentative: BodyBagFolded
+        whitelist:
+          tags:
+          - BodyBag
+    #</Trauma>
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: defib-module }
 
