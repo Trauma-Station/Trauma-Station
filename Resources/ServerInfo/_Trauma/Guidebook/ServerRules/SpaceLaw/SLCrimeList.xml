@@ -474,7 +474,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Evasion of Surveillance</Box></ColorBox>
     <ColorBox Color="#756322"><Box HorizontalAlignment="Left" Margin="4">
-      The act of intentionally avoiding security surveillance via turning coordinates off. Punishment may include corporal punishment, as well as a forced tracking implant.
+      The act of a discharged or paroled entity intentionally avoiding security surveillance via turning coordinates off. Punishment may include corporal punishment, as well as a forced tracking implant.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Criminal Association</Box></ColorBox>
     <ColorBox Color="#756322"><Box HorizontalAlignment="Left" Margin="4">
@@ -482,7 +482,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Reoffending</Box></ColorBox>
     <ColorBox Color="#756322"><Box HorizontalAlignment="Left" Margin="4">
-      The act of commiting any violation after being incarcerated for a previous violation. The typical punishment entails the increase of tier of punishment by one for each reoffence.
+      The act of commiting any violation after being incarcerated for a previous violation. The typical punishment entails the increase of tier to one higher than the original violation, or to the new violation.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Intoxication</Box></ColorBox>
     <ColorBox Color="#756322"><Box HorizontalAlignment="Left" Margin="4">
