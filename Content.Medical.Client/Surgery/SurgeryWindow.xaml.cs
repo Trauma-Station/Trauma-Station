@@ -47,13 +47,7 @@ public sealed partial class SurgeryWindow : FancyWindow
         _partQuery = _ent.GetEntityQuery<BodyPartComponent>();
         _surgeryQuery = _ent.GetEntityQuery<SurgeryComponent>();
 
-        PartsButton.OnPressed += _ =>
-        {
-            _part = null;
-            _surgery = null;
-            _previousSurgeries.Clear();
-            View(ViewType.Parts);
-        };
+        PartsButton.OnPressed += _ => ViewParts();
 
         SurgeriesButton.OnPressed += _ =>
         {
@@ -150,6 +144,14 @@ public sealed partial class SurgeryWindow : FancyWindow
         UpdateSteps(part);
     }
 
+    private void ViewParts()
+    {
+        _part = null;
+        _surgery = null;
+        _previousSurgeries.Clear();
+        View(ViewType.Parts);
+    }
+
     private void ViewPart(EntityUid part)
     {
         _part = part;
@@ -177,6 +179,8 @@ public sealed partial class SurgeryWindow : FancyWindow
         {
             if (Deleted(part) || _isBody && _body.GetBody(part) != _owner)
             {
+                if (_part == part)
+                    ViewParts();
                 changed = true;
                 return true;
             }
