@@ -5,7 +5,7 @@
   parent: ClosetBase
   components:
   - type: LockSignalControl
-  - type: DeviceLinkSource
+  - type: DeviceLinkSink
     ports:
     - Lock
     - Unlock
