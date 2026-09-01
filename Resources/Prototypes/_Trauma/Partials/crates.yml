@@ -9,7 +9,8 @@
     - Crate
 
 - type: entity
-  parent: [ CrateBaseWeldable, AntiTamperLowPriority ] # adding anti tamper
+  parent:
+  - !Index:-1 AntiTamperLowPriority
   id: CrateBaseSecure
   components:
   - type: LockSignalControl
