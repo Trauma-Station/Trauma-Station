@@ -272,7 +272,7 @@
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of manufacturing firearms or other prohibited weapons without proper authorization, this includes growing illegal fauna such as gatfruits or capfruits.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4"></Box>Weapon Trafficking</ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Weapon Trafficking</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       The act of selling firearms or other prohibited weapons.
     </Box></ColorBox>
