@@ -82,8 +82,8 @@
   - type: MeleeWeapon
     animationRotation: -90
   # moved to Screwdriver proper, dont want it interfering with forged screwdriver
-  - !Remove type: RandomSprite
-  - !Remove type: PhysicalComposition
+  - !Remove RandomSprite
+  - !Remove PhysicalComposition
 
 - type: entity
   id: Wrench

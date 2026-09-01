@@ -24,15 +24,16 @@
 - type: entity
   id: ApplePlants
   components:
-  - &apples type: PlantData
-    mutationPrototypes:
+  - type: PlantData
+    mutationPrototypes: &apples
     - DeliciousApplePlants
     - MethApplePlants
 
 - type: entity
   id: GoldenApplePlants
   components:
-  - *apples
+  - type: PlantData
+    mutationPrototypes: *apples
 
 # TODO: red/green/yellow apple slop (wtf is inheritance)
 

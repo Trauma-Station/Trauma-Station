@@ -48,7 +48,7 @@
     damage:
       types: !Clear
         Caustic: 1
-  - !Remove type: Destructible # replaced by durability
+  - !Remove Destructible # replaced by durability
 
 - type: entity
   id: FoodBanana

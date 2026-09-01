@@ -76,4 +76,4 @@
     - Sigh
     - Crying
     - Whistle
-  - !Remove type: EmpResistance
+  - !Remove EmpResistance

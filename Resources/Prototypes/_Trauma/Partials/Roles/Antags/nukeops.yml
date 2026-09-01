@@ -21,7 +21,7 @@
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplink
   equipment:
-    outerClothing: null # nukies buy their suits
+    outerClothing: !Remove # nukies buy their suits
 
 - type: startingGear
   id: SyndicateOperativeGearFull
@@ -31,7 +31,7 @@
 - type: startingGear
   id: SyndicateCommanderGearFull
   equipment:
-    outerClothing: null # nukies buy their suits
+    outerClothing: !Remove # nukies buy their suits
     ears: ClothingHeadsetAltSyndicateCommander
     pocket2: BaseUplinkRadio350TC # max win
   inhand:
@@ -43,7 +43,7 @@
   equipment:
     back: ClothingBackpackDuffelSyndicateMedical
     belt: ClothingBeltChemBagSyndiFilled # replaces webbing
-    outerClothing: null # nukies buy their suits
+    outerClothing: !Remove # nukies buy their suits
   storage:
     back:
     - !Remove SawAdvanced

@@ -43,7 +43,7 @@
   - type: WeaponClass
     class: Unarmed
     examinable: false
-  - !Remove type: DamageVisuals # woundable visuals used instead
+  - !Remove DamageVisuals # woundable visuals used instead
   - type: Reactive
     groups:
       Acidic:
@@ -95,5 +95,5 @@
     spawned:
     - id: MaterialBones1
       amount: 3
-  - !Remove type: PassiveDamage # go to med or eat food
-  - !Remove type: Perishable # moved to BaseSpeciesMobOrganic
+  - !Remove PassiveDamage # go to med or eat food
+  - !Remove Perishable # moved to BaseSpeciesMobOrganic

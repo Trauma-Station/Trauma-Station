@@ -9,7 +9,7 @@
     understands:
     - Mouse
     - TauCetiBasic
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobBee
@@ -38,7 +38,7 @@
     understands:
     - Chicken
     - TauCetiBasic
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobDuckMallard
@@ -49,7 +49,7 @@
     understands:
     - Duck
     - TauCetiBasic
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: BaseCockroach
@@ -92,7 +92,7 @@
   - type: EatToGrow
     growth: 0.05
     maxGrowth: 2
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobButterfly
@@ -123,7 +123,7 @@
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobSheepBase
@@ -161,7 +161,7 @@
     - TauCetiBasic
   - type: GhostRole
     prob: 0
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobBaseAncestor
@@ -190,7 +190,7 @@
   - type: BlockReading
   - type: BlockWriting
   - type: XenoVacTarget # dead monkey cleaner 9000
-  - !Remove type: Hands # no third hand
+  - !Remove Hands # no third hand
   - type: NpcFactionMember
     factions:
     - Monkey
@@ -219,7 +219,7 @@
   - type: KnowledgeHolder
   - type: GhostRole
     prob: 0.1
-  - !Remove type: MonkeyAccent
+  - !Remove MonkeyAccent
 
 - type: entity
   parent:
@@ -236,7 +236,7 @@
     - TauCetiBasic # Understanding your nukeops partners.
   - type: GhostRole
     prob: 0.1
-  - !Remove type: MonkeyAccent
+  - !Remove MonkeyAccent
 
 - type: entity
   parent:
@@ -264,7 +264,7 @@
       200: Dead
   - type: GhostRole
     prob: 0.1
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   parent:
@@ -334,7 +334,7 @@
         Slash: 1
   - type: Bloodstream
     smokeImmune: true # prevent server lagging mouse farms
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobMouse1
@@ -446,7 +446,7 @@
     damage:
       types:
         Ballistic: -0.03
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobSpiderAngryBase
@@ -477,6 +477,7 @@
   - type: ActionGrant
     actions:
     - ActionSpiderCall
+    - SpiderMultiply
   - type: MobCallSource
     whitelist:
       tags:
@@ -503,9 +504,6 @@
   - type: EntityProducer
     table:
       id: SpiderEggs
-  - type: ActionGrant
-    actions:
-    - SpiderMultiply
   - type: Satiation
     satiations:
       Hunger:
@@ -602,7 +600,7 @@
     understands:
     - Dog
     - TauCetiBasic
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobCorgiPuppy
@@ -667,7 +665,7 @@
     understands:
     - Mouse
     - TauCetiBasic
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobPig
@@ -690,7 +688,7 @@
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
-  - !Remove type: ReplacementAccent
+  - !Remove ReplacementAccent
 
 - type: entity
   id: MobDionaNymph
