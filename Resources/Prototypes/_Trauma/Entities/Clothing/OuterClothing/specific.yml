@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: ClothingOuterChameleon
   id: ClothingOuterChameleonArmor
@@ -22,4 +24,3 @@
     knockdownTimeDelta: -3
   - type: ExplosionResistance
     damageCoefficient: 0.65
-
