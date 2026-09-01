@@ -46,6 +46,7 @@
     Steel: 50
     Plastic: 50
     Glass: 50
+    Gold: 50
 
 - type: latheRecipe
   id: RevTurretElectronics
@@ -84,11 +85,11 @@
   id: RevStraightPipe
   result: GasPipeStraight
   completetime: 3
-  materials :
+  materials:
     Steel: 100
 
 - type: latheRecipe
   parent: RevGunParts
   id: RevModularReceiver
-  result : ModularReceiver
+  result: ModularReceiver
   completetime: 5
