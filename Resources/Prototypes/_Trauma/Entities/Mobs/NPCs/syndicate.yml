@@ -292,8 +292,8 @@
     fireCost: 62.5
 
 - type: entity
-  id: MobSyndieViscerator
   parent: [ BaseMobAsteroid, FlyingMobBase ]
+  id: MobSyndieViscerator
   name: viscerator
   description: A small, twin-bladed machine capable of inflicting very deadly lacerations.
   components:

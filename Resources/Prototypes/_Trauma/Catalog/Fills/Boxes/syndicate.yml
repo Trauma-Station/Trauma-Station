@@ -30,9 +30,9 @@
         - id: Multitool
 
 - type: entity
-  name: Viscerator Delivery Grenade Box
   parent: [ BoxCardboard, BaseSyndicateContraband ]
   id: BoxGrenadeViscerators
+  name: Viscerator Delivery Grenade Box
   description: A box containing unique grenades that deploys a swarm of viscerators upon activation, which will chase down and shred any non-operatives in the area.
   components:
   - type: EntityTableContainerFill
