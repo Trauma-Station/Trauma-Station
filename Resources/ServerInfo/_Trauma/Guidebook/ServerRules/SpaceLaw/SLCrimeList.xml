@@ -4,7 +4,7 @@
   <Table Columns="2">
     <ColorBox Color="#000000"><Box>Type 1 Violations | Misdemeanors</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
-      This level of violation is to be punished via Corporal methods. The infringing action must warrant the punishment given, and a warning must be issued first.
+      This level of violation is to be punished via corporal punishment. The infringing action must warrant the punishment given, and a warning must be issued first.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 2 Violations | Indictable Misdemeanors</Box></ColorBox>
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
@@ -14,13 +14,13 @@
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
       This level of violation is to be punished by either up to five minutes in the brig, corporal punishment, or reduction of access.
     </Box></ColorBox>
-    <ColorBox Color="#000000"><Box>Type 4 Violations | Terminatable Felonies</Box></ColorBox>
+    <ColorBox Color="#000000"><Box>Type 4 Violations | Terminable Felonies</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      This level of violation may void the rights given by Space Law, and is typically punished by demotion to D-Class, five minutes of brig time, \n and/or a substantial corporal punishments. It may include all three. There is a remote possibility for permanent confinement with parole on good behavior, \n but only upon the approval of the Head of Security or Captain.
+      This level of violation may void the rights given by Corporate Law, and is typically punished by demotion to D-Class, five minutes of brig time, \n and/or a substantial corporal punishment. It may include all three. There is a remote possibility for permanent confinement with parole on good behavior, \n but only upon the approval of the Head of Security or Captain.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Type 5 Violations | Capital Crimes</Box></ColorBox>
     <ColorBox Color="#571d50"><Box HorizontalAlignment="Left" Margin="4">
-      This level of violation voids the rights given by Space Law, and immediately warrants a sentence of permanent confinement, \n to be escalated to execution if a Type 2 Violation or above is committed.
+      This level of violation voids the rights given by Corporate Law, and immediately warrants a sentence of permanent confinement, \n to be escalated to execution if a Type 2 Violation or above is committed.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box>Non-Standard Violations</Box></ColorBox>
     <ColorBox Color="#756322"><Box HorizontalAlignment="Left" Margin="4">
@@ -79,7 +79,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Insolence</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
-      The act of disrespecting or insulting security or one's superiors. Officers are expected to deliver swift corporal punishment and move on.
+      The act of disrespecting or insulting security or one's superiors.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Bribery</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
@@ -122,7 +122,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Contracting Murder</Box></ColorBox>
     <ColorBox Color="#262087"><Box HorizontalAlignment="Left" Margin="4">
-      The act of compensating someone to murder another be it through monetary compensation, blackmail, or any other method. This also includes conspiracy to murder. If the contracted is successful, the contractor faces the same charges as the contracted.
+      The act of compensating someone to murder another be it through monetary compensation, blackmail, or any other method. This also includes conspiracy to murder. If the contract is successful, the contractor faces the same charges as the whoever they paid for the service.
     </Box></ColorBox>
   </Table>
   ### Contraband Violations
@@ -242,7 +242,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Dereliction of Duty</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Typically punished via corporal methods, or reduction of access, if there is a reasonable risk.
+      The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Not to be punished with brig time.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Gross Failure of Standards</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
@@ -270,7 +270,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Manufacture of Prohibited Weaponry</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      The act of manufacturing firearms or other prohibited weapons without proper authorization, this includes growing illegal fauna such as gatfruits or capfruits.
+      The act of manufacturing firearms or other prohibited weapons without proper authorization, this includes growing illegal flora such as gatfruits or capfruits.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Weapon Trafficking</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
@@ -326,7 +326,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Identity Theft</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      The act of stealing the crew-mandated ID from another, regardless of if utilized or not. This is typically punished with corporal punishment and reduction of access.
+      The act of stealing the crew-mandated ID from another, regardless of if utilized or not. Not to be punished with brig time.
     </Box></ColorBox>
   </Table>
   \n
@@ -349,7 +349,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Sapient Trafficking</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      The act of trading or otherwise exploiting other sapient employees for illegal purposes. This includes hypnosis implants or other forms of hypnotic control.
+      The act of trading or otherwise exploiting other sapient employees for illegal purposes. This includes any form of mind control, be it based in technology, magic, or psychic abilities.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Possession of a Commercial Quantity of Narcotics</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
@@ -377,11 +377,11 @@
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Managerial Incompetence</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      The act of lacking the necessary skill, knowledge, quality or decorum to perform a job or duty. They shall be immediately stripped of their head of staff equipment, banished to salvage-work, and be demoted to D-Class from then onward.
+      The act of lacking the necessary skill, knowledge, quality or decorum to perform a job or duty. They are to be immediately demoted to D-Class.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Insanity</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      The act of being irrational, mentally ill, extremely unreasonable or otherwise not of sound mind, such as engaging in excessively manic or bizarre behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. They may then either prescribe a treatment plan, have the head of staff committed to the brig, or perform a lobotomy and have them work in salvage.
+      The act of being irrational, mentally ill, extremely unreasonable or otherwise not of sound mind, such as engaging in excessively manic or bizarre behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. If they fail the evaluation, a treatment plan shall be issued and the command member's access shall be reduced until said treatment is completed.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Embezzlement</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
@@ -397,7 +397,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Corporate Espionage</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      Taking proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
+      Stealing proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Solicitation</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
@@ -444,7 +444,7 @@
   </Box></ColorBox>
 </Table>
   ### Taboo Violations
-  Type 5 Special violations that consist of very dangerous yet high-value targets and threats. All perpetrators of this type of violation are to, if possible, be brought alive in-custody to CC. Execution should only be performed if otherwise impossible to contain.
+  Type 5 Special violations that consist of very dangerous yet high-value targets and threats. All perpetrators of Taboo Violations are to be brought to Central Command alive, and not be executed unless proven impossible to contain.
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Magic</Box></ColorBox>
     <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">
@@ -460,13 +460,13 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Unsanctioned Alien Species</Box></ColorBox>
     <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">
-      The act of being or bringing unsanctioned alien species onto the station, such as xenomorphs, space carp, changelings, shadowlings [bolditalic]and[/bolditalic] other dangerous fauna.
+      The act of being or bringing unsanctioned alien species onto the station, such as Xenomorphs, Space Carp, Changelings, Shadowlings or any other dangerous fauna.
     </Box></ColorBox>
   </Table>
   \n
 
   ## Type Non-Standard Violations
-  These violations do not fit into any of the standard types of violations, and are typically violations that reference other violations.
+  Non-Standard Violations are typically in regards to infractions by discharged prisoners, parolees, and reoffenders, but can also apply to certain, specifically defined violations, and typically raise the tier of any violations committed instead of going to a specific tier.
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Breach of Custody</Box></ColorBox>
     <ColorBox Color="#756322"><Box HorizontalAlignment="Left" Margin="4">
