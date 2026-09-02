@@ -132,7 +132,7 @@
     Blunt: 0.8
     Slash: 0.8
     Piercing: 0.8
- 
+
 # Blob
 
 - type: damageModifierSet
