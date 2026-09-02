@@ -104,6 +104,8 @@
     Caustic: 0.5
     Cold: 0.8
 
+# Chickens
+
 - type: damageModifierSet
   id: SpicyChicken
   coefficients:
@@ -115,7 +117,8 @@
     Structural: 4
     Blunt: 0.5
     Slash: 0.25
-    Piercing: 0.75
+    Piercing: 0.5
+    Ballistic: 0.75
     Heat: 0.5
     Radiation: 0
   flatReductions:
@@ -129,6 +132,24 @@
     Blunt: 0.8
     Slash: 0.8
     Piercing: 0.8
+ 
+# Blob
+
+- type: damageModifierSet
+  id: PressurizedSlimeBlob
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Ballistic: 0.5
+
+- type: damageModifierSet
+  id: ReplicatingFoamBlob
+  coefficients:
+    Blunt: 2
+    Slash: 2
+    Piercing: 2
+    Ballistic: 2
 
 - type: damageModifierSet
   id: GuardianLightningHost

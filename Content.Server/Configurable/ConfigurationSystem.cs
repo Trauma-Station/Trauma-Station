@@ -4,7 +4,4 @@ using static Content.Shared.Configurable.ConfigurationComponent;
 
 namespace Content.Server.Configurable;
 
-public sealed class ConfigurationSystem : SharedConfigurationSystem
-{
-
-}
+public sealed partial class ConfigurationSystem : SharedConfigurationSystem;

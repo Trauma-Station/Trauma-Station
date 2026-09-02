@@ -60,6 +60,14 @@
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
+  - type: LatheAutomation
   - type: Animateable
   - type: LightningTarget
     priority: 1

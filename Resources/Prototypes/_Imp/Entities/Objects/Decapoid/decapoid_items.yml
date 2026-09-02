@@ -7,6 +7,8 @@
   suffix: Unremoveable
   description: A large claw. Not very good for fine manipulation, but very strong and very sharp.
   components:
+  - type: WeaponClass
+    class: Unarmed
   - type: Sprite
     sprite: _Impstation/Objects/Decapoid/claw.rsi
     state: icon
@@ -28,7 +30,7 @@
     delay: 0.5
   - type: Tool
     qualities:
-      - Prying
+    - Prying
     useSound: /Audio/_Impstation/Items/Decapoid/claw_prying.ogg
   - type: Prying
     speedModifier: 1.5
@@ -36,18 +38,18 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Prying
-        sprite:
-          sprite: _Impstation/Objects/Decapoid/claw.rsi
-          state: icon-closed
-        useSound: /Audio/_Impstation/Items/Decapoid/claw_prying.ogg
-        changeSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
-      - behavior: Cutting
-        sprite:
-          sprite: _Impstation/Objects/Decapoid/claw.rsi
-          state: icon
-        useSound: /Audio/_Impstation/Items/Decapoid/claw_cutting.ogg
-        changeSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
+    - behavior: [ Prying ]
+      sprite:
+        sprite: _Impstation/Objects/Decapoid/claw.rsi
+        state: icon-closed
+      useSound: /Audio/_Impstation/Items/Decapoid/claw_prying.ogg
+      changeSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
+    - behavior: [ Cutting ]
+      sprite:
+        sprite: _Impstation/Objects/Decapoid/claw.rsi
+        state: icon
+      useSound: /Audio/_Impstation/Items/Decapoid/claw_cutting.ogg
+      changeSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
   - type: Tweezers # More or less same as wirecutters + crowbar (which the claw is), but even worse, because the claw is unwieldy
     speed: 0.4
   - type: Retractor

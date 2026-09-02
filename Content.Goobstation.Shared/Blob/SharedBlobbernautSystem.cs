@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Weapons.Melee.Events;
 using System.Linq;
@@ -21,5 +22,19 @@ public abstract partial class SharedBlobbernautSystem : EntitySystem
         var target = args.HitEntities.FirstOrDefault();
         if (chem.AttackEffects is { } effects)
             _effects.ApplyEffects(target, effects, scale: ent.Comp.AttackEffectsScale, user: args.User);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<BlobbernautComponent> ent, ref DamageDealtEvent args)
+    {
+        if (args.Origin is not { } origin ||
+            !args.Damage.AnyPositive())
+            return;
+
+        var chem = ProtoMan.Index(ent.Comp.CurrentChem);
+        if (chem.DamagedEffects is not { } effects)
+            return;
+
+        _effects.ApplyEffects(ent, effects, scale: ent.Comp.DamagedEffectsScale, user: origin);
     }
 }

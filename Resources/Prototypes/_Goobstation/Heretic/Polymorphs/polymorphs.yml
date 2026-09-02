@@ -5,7 +5,7 @@
   configuration:
     entity: PolymorphAshJaunt
     forced: true
-    duration: 4 # 3 seconds + 1 for out animation
+    duration: 3 # 2 seconds + 1 for out animation
     attachToGridOrMap: true
     showPopup: false
     allowRepeatedMorphs: true
@@ -15,8 +15,9 @@
   configuration:
     entity: PolymorphAshJaunt
     forced: true
-    duration: 7
+    duration: 5
     attachToGridOrMap: true
+    showPopup: false
     allowRepeatedMorphs: true
 
 - type: polymorph

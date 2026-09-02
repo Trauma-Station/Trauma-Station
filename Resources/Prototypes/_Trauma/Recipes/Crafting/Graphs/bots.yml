@@ -1,32 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: constructionGraph
-  id: DuckBot
-  graph:
-  - node: start
-    edges:
-    - to: bot
-      steps:
-      - tag: OrganEggSack
-        icon:
-          sprite: _White/Mobs/Species/Xenomorph/organs.rsi
-          state: egg_sack
-        name: construction-graph-tag-egg-sack
-      - tag: ProximitySensor
-        icon:
-          sprite: Objects/Misc/proximity_sensor.rsi
-          state: icon
-        name: construction-graph-tag-proximity-sensor
-      - tag: BorgArm
-        icon:
-          sprite: Mobs/Silicon/drone.rsi
-          state: l_hand
-        name: construction-graph-tag-borg-arm
-        doAfter: 2
-  - node: bot
-    entity: MobDuckBot
-
-- type: constructionGraph
   id: BoogieBot
   graph:
   - node: start
@@ -60,7 +34,7 @@
     edges:
     - to: bot
       steps:
-      - tag: StunBaton
+      - tag: Stunbaton
         icon:
           sprite: Objects/Weapons/Melee/stunbaton.rsi
           state: stunbaton_off

@@ -66,6 +66,8 @@
   - RevTurretMagazine
   - RevTurretMagazineHeavy
   - RevSMGMagazine
+  - RevStraightPipe
+  - RevModularReceiver
 
 - type: latheRecipePack
   id: RevBulletPressStatic

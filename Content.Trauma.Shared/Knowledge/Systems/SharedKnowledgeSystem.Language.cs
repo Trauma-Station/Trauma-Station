@@ -138,16 +138,7 @@ public abstract partial class SharedKnowledgeSystem
         args.Handled = true;
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
-        var lang = args.Language;
-        if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
-        {
-            existing.Comp.LearnedLevel = Math.Max(26, existing.Comp.LearnedLevel);
-            Dirty(existing);
-            UpdateEntityLanguages(ent);
-            return;
-        }
-
-        EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
+        EnsureKnowledge(brain, LanguageUnit(args.Language), 100);
 
         UpdateEntityLanguages(ent);
     }
@@ -211,7 +202,7 @@ public abstract partial class SharedKnowledgeSystem
                 continue;
 
             // Add if you don't know shit.
-            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
+            if (EnsureKnowledge(brain, LanguageUnit(lang), 100) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;

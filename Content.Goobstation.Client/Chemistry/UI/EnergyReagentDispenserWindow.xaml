@@ -3,12 +3,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <controls:FancyWindow xmlns="https://spacestation14.io"
-                      xmlns:gfx="using:Robust.Client.Graphics"
-                      xmlns:controls="using:Content.Client.UserInterface.Controls"
-                      xmlns:ui="using:Content.Client.Chemistry.UI"
-                      Title="{Loc 'reagent-dispenser-bound-user-interface-title'}"
-                      MinSize="600 300"
-                      SetSize="800 500">
+        xmlns:gfx="using:Robust.Client.Graphics"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:ui="using:Content.Client.Chemistry.UI"
+        Title="{Loc 'reagent-dispenser-bound-user-interface-title'}"
+        MinSize="600 300"
+        SetSize="800 500">
     <BoxContainer Orientation="Horizontal">
         <BoxContainer Orientation="Vertical" MinWidth="200" Margin="10 10 15 10">
             <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 5">
@@ -16,66 +16,30 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <Label Name="BatteryStatusLabel" StyleClasses="LabelSubText" MinWidth="120"/>
             </BoxContainer>
             <Label Text="{Loc 'reagent-dispenser-window-amount-to-dispense-label'}" HorizontalAlignment="Center" />
-            <ui:ButtonGrid
-                Name="AmountGrid"
-                Access="Public"
-                Columns="3"
-                HorizontalAlignment="Center"
-                Margin="5"
-                ButtonList="1,5,10,15,20,25,30,40,50,60,100,120"
-                RadioGroup="True">
-            </ui:ButtonGrid>
+            <ui:ButtonGrid Name="AmountGrid" Columns="3" HorizontalAlignment="Center" Margin="5"
+	            ButtonList="1,5,10,15,20,25,30,40,50,60,100,120" RadioGroup="True"/>
             <Control VerticalExpand="True" />
-            <Label Name="ContainerInfoName"
-                   Access="Public"
-                   HorizontalAlignment="Center" />
-            <Label Name="ContainerInfoFill"
-                   Access="Public"
-                   HorizontalAlignment="Center"
-                   StyleClasses="LabelSubText" />
-            <SpriteView Name="View"
-                        Scale="4 4"
-                        HorizontalAlignment="Center" />
+            <Label Name="ContainerInfoName" HorizontalAlignment="Center"/>
+            <Label Name="ContainerInfoFill" HorizontalAlignment="Center" StyleClasses="LabelSubText"/>
+            <SpriteView Name="View" Scale="4 4" HorizontalAlignment="Center" />
             <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="ClearButton"
-                        Access="Public"
-                        Text="{Loc 'reagent-dispenser-window-clear-button'}"
-                        StyleClasses="OpenRight" />
-                <Button Name="EjectButton"
-                        Access="Public"
-                        Text="{Loc 'reagent-dispenser-window-eject-button'}"
-                        StyleClasses="OpenLeft" />
+                <Button Name="ClearButton" Text="{Loc 'reagent-dispenser-window-clear-button'}" StyleClasses="OpenRight" Disabled="True"/>
+                <Button Name="EjectButton" Text="{Loc 'reagent-dispenser-window-eject-button'}" StyleClasses="OpenLeft" Disabled="True"/>
             </BoxContainer>
         </BoxContainer>
-        <SplitContainer Orientation="Vertical"
-                        HorizontalExpand="True"
-                        VerticalExpand="True">
-            <ScrollContainer HScrollEnabled="False"
-                             HorizontalExpand="True"
-                             VerticalExpand="True"
-                             MinHeight="50"
-                             SizeFlagsStretchRatio="2.5">
-                <GridContainer Name="ReagentList"
-                               HorizontalExpand="True"
-                               VerticalExpand="True"
-                               Access="Public"
-                               Columns="3" />
+        <SplitContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" MinHeight="50" SizeFlagsStretchRatio="2.5">
+                <GridContainer Name="ReagentList" HorizontalExpand="True" VerticalExpand="True" Columns="3"/>
             </ScrollContainer>
-            <ScrollContainer HScrollEnabled="False"
-                             HorizontalExpand="True"
-                             VerticalExpand="True"
-                             MinHeight="50">
+            <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" MinHeight="50">
                 <PanelContainer VerticalExpand="True">
                     <PanelContainer.PanelOverride>
                         <gfx:StyleBoxFlat BackgroundColor="#1b1b1e" />
                     </PanelContainer.PanelOverride>
-                    <BoxContainer Name="ContainerInfo"
-                                  Orientation="Vertical"
-                                  HorizontalExpand="True"
-                                  VerticalExpand="True"
-                                  Margin="5">
+                    <BoxContainer Name="NoContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="5">
                         <Label Text="{Loc 'reagent-dispenser-window-no-container-loaded-text'}" />
                     </BoxContainer>
+                    <BoxContainer Name="ContainerReagents" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="5" Visible="False"/>
                 </PanelContainer>
             </ScrollContainer>
         </SplitContainer>

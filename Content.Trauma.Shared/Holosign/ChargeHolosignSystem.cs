@@ -8,9 +8,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Trauma.Shared.Holosign;
@@ -18,59 +16,26 @@ namespace Content.Trauma.Shared.Holosign;
 public sealed partial class ChargeHolosignSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     private HashSet<Entity<IComponent>> _signs = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ChargeHolosignProjectorComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ChargeHolosignProjectorComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<ChargeHolosignProjectorComponent, BeforeRangedInteractEvent>(OnBeforeInteract);
-        SubscribeLocalEvent<ChargeHolosignProjectorComponent, UseInHandEvent>(OnUseInHand);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInit(Entity<ChargeHolosignProjectorComponent> ent, ref ComponentInit args)
     {
         // its required, funny test is still funny
         if (string.IsNullOrEmpty(ent.Comp.SignComponentName))
             return;
 
-        ent.Comp.Container = _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
-        ent.Comp.SignComponent = EntityManager.ComponentFactory.GetRegistration(ent.Comp.SignComponentName).Type;
+        ent.Comp.SignComponent = Factory.GetRegistration(ent.Comp.SignComponentName).Type;
     }
 
-    private void OnMapInit(Entity<ChargeHolosignProjectorComponent> ent, ref MapInitEvent args)
-    {
-        if (!TryComp<LimitedChargesComponent>(ent, out var charges))
-            return;
-
-        var containers = Comp<ContainerManagerComponent>(ent);
-        for (var i = 0; i < charges.MaxCharges; i++)
-        {
-            if (!TrySpawnInContainer(ent.Comp.SignProto, ent, ent.Comp.ContainerId, out var signUid))
-            {
-                Log.Error($"Failed to spawn sign {ent.Comp.SignProto} for {ToPrettyString(ent)}!");
-                return;
-            }
-
-            ent.Comp.Signs.Add(signUid.Value);
-        }
-
-        Dirty(ent);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBeforeInteract(Entity<ChargeHolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {
-        if (!_timing.IsFirstTimePredicted ||
-            args.Handled || !args.CanReach ||
+        if (args.Handled || !args.CanReach ||
             HasComp<StorageComponent>(args.Target) || // if it's a storage component like a bag, we ignore usage so it can be stored
             !TryComp<LimitedChargesComponent>(ent, out var charges))
             return;
@@ -88,79 +53,46 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<ChargeHolosignProjectorComponent> ent, ref UseInHandEvent args)
     {
-        if (!_timing.IsFirstTimePredicted || !TryComp<LimitedChargesComponent>(ent, out var charges))
+        if (!TryComp<LimitedChargesComponent>(ent, out var charges))
             return;
 
-        // count how many holosigns we actually managed to recall
-        var count = 0;
-        var remQueue = new List<EntityUid>();
-
-        // recall all holosigns we can
+        // recall all holosigns
+        var added = 0;
         foreach (var signUid in ent.Comp.Signs)
         {
             if (TerminatingOrDeleted(signUid))
-            {
-                remQueue.Add(signUid);
                 continue;
-            }
 
-            if (ent.Comp.Container.Contains(signUid) || TryRemoveSign((ent, ent.Comp, charges), signUid, args.User, false))
-            {
-                count++;
-            }
-            else
-            {
-                // delete it if we can't recall it
-                if (_net.IsServer)
-                    QueueDel(signUid);
-                remQueue.Add(signUid);
-            }
+            PredictedQueueDel(signUid);
+            added++;
         }
 
-        foreach (var signUid in remQueue)
-            ent.Comp.Signs.Remove(signUid);
-
-        // spawn replacements for holosigns we couldn't recall
-        for (var i = count; i < charges.MaxCharges; i++)
-        {
-            if (!TrySpawnInContainer(ent.Comp.SignProto, ent, ent.Comp.ContainerId, out var signUid))
-            {
-                Log.Error($"Failed to spawn sign {ent.Comp.SignProto} for {ToPrettyString(ent)}!");
-                break;
-            }
-
-            _charges.AddCharges((ent, charges), 1);
-            ent.Comp.Signs.Add(signUid.Value);
-        }
-
+        ent.Comp.Signs.Clear();
         Dirty(ent);
+
+        // refill charges
+        _charges.AddCharges((ent, charges), added);
     }
 
-    public bool TryPlaceSign(Entity<ChargeHolosignProjectorComponent?, LimitedChargesComponent?> ent, EntityCoordinates coords, EntityUid user)
+    public bool TryPlaceSign(Entity<ChargeHolosignProjectorComponent, LimitedChargesComponent> ent, EntityCoordinates coords, EntityUid user)
     {
-        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2))
-            return false;
-
-        var container = ent.Comp1.Container;
-        if (container.Count == 0 || !_charges.TryUseCharge((ent, ent.Comp2)))
+        if (!_charges.TryUseCharge((ent, ent.Comp2)))
         {
             _popup.PopupEntity(Loc.GetString("charge-holoprojector-no-charges", ("item", ent)), ent, user);
             return false;
         }
 
-        var placed = container.ContainedEntities.First(); // checked Count beforehand so this won't fail
-        _transform.SetCoordinates(placed, coords);
-        _transform.AnchorEntity(placed);
+        var placed = PredictedSpawnAtPosition(ent.Comp1.SignProto, coords);
+        ent.Comp1.Signs.Add(placed);
+        Dirty(ent, ent.Comp1);
         return true;
     }
 
-    public bool TryRemoveSign(Entity<ChargeHolosignProjectorComponent?, LimitedChargesComponent?> ent, EntityUid sign, EntityUid user, bool showIdentity = true)
+    public bool TryRemoveSign(Entity<ChargeHolosignProjectorComponent, LimitedChargesComponent> ent, EntityUid sign, EntityUid user)
     {
-        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2))
-            return false;
-
         // don't overfill
         if (_charges.GetCurrentCharges((ent, ent.Comp2)) >= ent.Comp2.MaxCharges)
         {
@@ -168,19 +100,16 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
             return false;
         }
 
-        if (!_container.Insert(sign, ent.Comp1.Container, force: true))
-        {
-            Log.Error($"Failed to insert holosign {ToPrettyString(sign)} back into {ToPrettyString(ent)}!");
-            return false;
-        }
+        PredictedQueueDel(sign);
+        ent.Comp1.Signs.Remove(sign);
+        Dirty(ent, ent.Comp1);
 
         _charges.AddCharges((ent, ent.Comp2), 1);
 
-        var othersStr = showIdentity ? Loc.GetString("charge-holoprojector-reclaim-others", ("sign", sign), ("user", Identity.Name(user, EntityManager)))
-                                     : Loc.GetString("charge-holoprojector-recall-others", ("sign", sign));
+        var msg = Loc.GetString("charge-holoprojector-reclaim-others", ("sign", sign), ("user", Identity.Name(user, EntityManager)));
         _popup.PopupEntity(
             Loc.GetString("charge-holoprojector-reclaim", ("sign", sign)),
-            othersStr,
+            msg,
             ent,
             user);
         return true;

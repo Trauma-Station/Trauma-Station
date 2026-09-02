@@ -9,17 +9,9 @@
   components:
   # <Trauma>
   - type: AntagImmune # no evil wawa
-  - type: Clumsy
-    gunShootFailDamage:
-      types:
-        Blunt: 5
-        Piercing: 4
-        Heat: 3
-    catchingFailDamage:
-      types:
-        Blunt: 1
-    clumsySound:
-      path: /Audio/Animals/wawa_protest.ogg
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectClumsyScurret
   # </Trauma>
   # Custom names
   - type: ReplacementAccent
@@ -140,8 +132,10 @@
 
   - type: InventorySlots
   - type: Edible # Why? I'm not sure but I also am afraid of the answer.
-  - type: Hunger
-    baseDecayRate: 0.05 # They get a lil' hungy
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: ScurretHunger
   - type: BodyEmotes # Grants them clapping and so on.
     soundsId: Scurret
   - type: Deathgasp

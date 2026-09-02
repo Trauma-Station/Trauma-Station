@@ -16,7 +16,6 @@
     - tasks:
         - !type:HTNPrimitiveTask
           operator: !type:PickNearbyServicableHydroponicsTrayOperator
-            targetKey: PlantTarget
             targetMoveKey: TargetCoordinates
 
         - !type:HTNPrimitiveTask
@@ -37,4 +36,3 @@
 
         - !type:HTNPrimitiveTask
           operator: !type:PlantbotServiceOperator
-            targetKey: PlantTarget
