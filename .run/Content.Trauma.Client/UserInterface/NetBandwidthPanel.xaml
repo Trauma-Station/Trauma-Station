@@ -1,0 +1,14 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<PanelContainer xmlns="https://spacestation14.io"
+        Visible="False">
+    <BoxContainer Orientation="Vertical">
+        <Label Text="Bandwidth used/s"/>
+        <Label Name="DiffLabel" Margin="4"/>
+        <Label Text="Total bandwidth used"/>
+        <Label Name="TotalLabel" Margin="4"/>
+        <Button Name="ResetButton" Text="Reset total bandwidth"/>
+    </BoxContainer>
+</PanelContainer>

@@ -228,7 +228,14 @@ public abstract partial class SharedStorageSystem : EntitySystem
             StoredItems = storedItems,
             SavedLocations = component.SavedLocations,
             Whitelist = component.Whitelist,
-            Blacklist = component.Blacklist
+            Blacklist = component.Blacklist,
+            QuickInsert = component.QuickInsert,
+            AreaInsert = component.AreaInsert,
+            StorageInsertSound = component.StorageInsertSound,
+            StorageRemoveSound = component.StorageRemoveSound,
+            StorageOpenSound = component.StorageOpenSound,
+            StorageCloseSound = component.StorageCloseSound,
+            DefaultStorageOrientation = component.DefaultStorageOrientation,
         };
     }
 
@@ -298,7 +305,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
         CloseNestedInterfaces(uid, args.Actor, storageComp);
 
         // If UI is closed for everyone
-        if (!UI.IsUiOpen(uid, args.UiKey))
+        if (!UI.IsUiOpen(uid, args.UiKey) && !TerminatingOrDeleted(uid)) // Trauma - dont play sounds if its deleting
         {
             UpdateAppearance((uid, storageComp, null));
             if (!_tag.HasTag(args.Actor, storageComp.SilentStorageUserTag))
@@ -2012,5 +2019,12 @@ public abstract partial class SharedStorageSystem : EntitySystem
         public ProtoId<ItemSizePrototype>? MaxItemSize;
         public EntityWhitelist? Whitelist;
         public EntityWhitelist? Blacklist;
+        public bool QuickInsert;
+        public bool AreaInsert;
+        public SoundSpecifier? StorageInsertSound;
+        public SoundSpecifier? StorageRemoveSound;
+        public SoundSpecifier? StorageOpenSound;
+        public SoundSpecifier? StorageCloseSound;
+        public StorageDefaultOrientation? DefaultStorageOrientation;
     }
 }

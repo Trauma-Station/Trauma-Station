@@ -1,0 +1,78 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
+using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Physics;
+using Content.Trauma.Shared.Heretic.Components.Side;
+using Content.Trauma.Shared.Heretic.Systems.Side;
+using Robust.Shared.Map;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Random;
+
+namespace Content.Trauma.Server.Heretic.Systems;
+
+public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
+{
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+
+    private readonly HashSet<Entity<PhysicsComponent>> _lookupPhysics = new();
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var now = Timing.CurTime;
+
+        var query = EntityQueryEnumerator<ShadowCloakedComponent, ForestAdmonitionsComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var cloaked, out var forest, out var xform))
+        {
+            if (cloaked.ShadowCloakEntity != forest.CloakEntity)
+                continue;
+
+            if (now < forest.NextUpdate)
+                continue;
+
+            forest.NextUpdate = now + forest.UpdateDelay;
+            SpreadFog((uid, forest, xform));
+        }
+    }
+
+    private void SpreadFog(Entity<ForestAdmonitionsComponent, TransformComponent> ent)
+    {
+        var (_, forest, xform) = ent;
+
+        var range = forest.Range;
+        var limit = new Vector2(range).Length();
+        var inv = 1f / limit;
+        var coords = xform.Coordinates;
+        for (var y = -range; y <= range; y++)
+        {
+            for (var x = -range; x <= range; x++)
+            {
+                var offset = new Vector2(x, y);
+                var length = offset.Length() * inv;
+                var chance = MathF.Pow(1f - length, forest.FogSlope);
+
+                if (!_random.Prob(Math.Clamp(chance, 0f, 1f)))
+                    continue;
+
+                var pos = coords.Offset(offset).SnapToGrid(EntityManager);
+                var mapPos = XForm.ToMapCoordinates(pos);
+
+                if (offset != Vector2.Zero && !_map.TryFindGridAt(mapPos, out _, out _))
+                    continue;
+
+                const int mask = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable);
+
+                _lookupPhysics.Clear();
+                _lookup.GetEntitiesInRange(mapPos, 0.1f, _lookupPhysics);
+                if (_lookupPhysics.Any(e => (e.Comp.CollisionLayer & mask) != 0))
+                    continue;
+
+                Spawn(forest.FogProto, mapPos);
+            }
+        }
+    }
+}

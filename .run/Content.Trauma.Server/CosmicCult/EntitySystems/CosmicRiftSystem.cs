@@ -1,0 +1,197 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Trauma.Server.CosmicCult.Abilities;
+using Content.Trauma.Server.CosmicCult.Components;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
+using Content.Shared.Bible.Components;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
+using Content.Shared.Atmos.Components;
+using Content.Shared.DoAfter;
+using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Trauma.Server.CosmicCult.EntitySystems;
+
+public sealed partial class CosmicRiftSystem : EntitySystem
+{
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private CosmicBlankSystem _blank = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
+
+    private readonly HashSet<Entity<HumanoidProfileComponent>> _targets = [];
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var riftQuery = EntityQueryEnumerator<CosmicMalignRiftComponent>();
+        while (riftQuery.MoveNext(out var uid, out var comp))
+        {
+            if (comp.DangerWait is not { } dangerWait || _timing.CurTime < comp.DangerTimer)
+                continue;
+
+            comp.DangerTimer = _timing.CurTime + dangerWait;
+
+            _targets.Clear();
+            _lookup.GetEntitiesInRange(Transform(uid).Coordinates, comp.DangerRange, _targets);
+            _targets.RemoveWhere(target =>
+            {
+                if (_cult.EntityIsCultist(target)) return true;
+
+                var evt = new CosmicAbilityAttemptEvent(target, true);
+                RaiseLocalEvent(ref evt);
+                return evt.Cancelled;
+            });
+
+            foreach (var target in _targets)
+            {
+                if (_random.Prob(0.5f))
+                {
+                    EnsureComp<CosmicSubtleMarkComponent>(target, out var markComp); // Give them a subtle mark for a few minutes to make everyone think they're a cultist
+                    markComp.ExpireTimer = _timing.CurTime + comp.DangerTimer;
+                }
+                if (_random.Prob(0.2f))
+                    _blank.ShuntTarget(target, TimeSpan.FromSeconds(25));
+            }
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<CosmicMalignRiftComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.DangerWait is not { } dangerWait) return;
+        ent.Comp.DangerTimer = _timing.CurTime + dangerWait;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnInteract(Entity<CosmicMalignRiftComponent> uid, ref InteractHandEvent args)
+    {
+        if (args.Handled)
+        {
+            _popup.PopupEntity(Loc.GetString("cosmiccult-rift-inuse"), args.User, args.User);
+            return;
+        }
+
+        if (HasComp<BibleUserComponent>(args.User))
+        {
+            _popup.PopupEntity(Loc.GetString("cosmiccult-rift-chaplainoops"), args.User, args.User);
+            return;
+        }
+
+        if (!TryComp<CosmicCultComponent>(args.User, out var cultist))
+        {
+            _popup.PopupEntity(Loc.GetString("cosmiccult-rift-invaliduser"), args.User, args.User);
+            return;
+        }
+
+        args.Handled = true;
+        _popup.PopupEntity(Loc.GetString("cosmiccult-rift-beginabsorb"), args.User, args.User);
+        var doargs = new DoAfterArgs(EntityManager,
+            args.User,
+            uid.Comp.AbsorbTime,
+            new AbsorbRiftDoAfterEvent(),
+            args.User,
+            uid)
+        {
+            DistanceThreshold = 1.5f, Hidden = true, BreakOnDamage = true, BreakOnHandChange = false, BreakOnMove = true, MovementThreshold = 0.5f,
+        };
+        _doAfter.TryStartDoAfter(doargs);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnInteractUsing(Entity<CosmicMalignRiftComponent> uid, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+        {
+            _popup.PopupEntity(Loc.GetString("cosmiccult-rift-inuse"), args.User, args.User);
+            return;
+        }
+
+        if (HasComp<BibleComponent>(args.Used))
+        {
+            _popup.PopupEntity(Loc.GetString("cosmiccult-rift-beginpurge"), args.User, args.User);
+            var doargs = new DoAfterArgs(EntityManager,
+                args.User,
+                HasComp<BibleUserComponent>(args.User) ? uid.Comp.ChaplainTime : uid.Comp.BibleTime, // Chap gets a speed boost for purging rifts
+                new PurgeRiftDoAfterEvent(),
+                uid,
+                uid)
+            {
+                DistanceThreshold = 1.5f, Hidden = false, BreakOnDamage = true, BreakOnDropItem = true,
+                BreakOnMove = true, MovementThreshold = 2f,
+            };
+            _doAfter.TryStartDoAfter(doargs);
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnAbsorbDoAfter(Entity<CosmicCultComponent> uid, ref AbsorbRiftDoAfterEvent args)
+    {
+        var comp = uid.Comp;
+        if (args.Target is not { } target || args.Cancelled || args.Handled || !TryComp<CosmicMalignRiftComponent>(target, out var rift))
+            return;
+
+        args.Handled = true;
+        var tgtpos = Transform(target).Coordinates;
+        Spawn(uid.Comp.AbsorbVFX, tgtpos);
+        if (comp.CosmicFragmentationActionEntity == null)
+            comp.CosmicFragmentationActionEntity = _actions.AddAction(uid, uid.Comp.CosmicFragmentationAction);
+        comp.CosmicEmpowered = true;
+        comp.RespecsAvailable++;
+        comp.CosmicSiphonQuantity = 2;
+        comp.CosmicGlareRange = 8;
+        comp.CosmicGlareDuration = TimeSpan.FromSeconds(6);
+        comp.CosmicGlareStun = TimeSpan.FromSeconds(0.5);
+        comp.CosmicImpositionDuration = TimeSpan.FromSeconds(7.2);
+        comp.CosmicStrideDuration = TimeSpan.FromSeconds(7);
+        Dirty(uid, comp);
+        _status.TrySetStatusEffectDuration(args.User, PressureImmunity);
+        EnsureComp<SpecialLowTempImmunityComponent>(args.User);
+        EnsureComp<CosmicNonRespiratingComponent>(args.User);
+        RemComp<SatiationComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
+        _cult.AddEntropy(uid, rift.EntropyGranted);
+        _popup.PopupCoordinates(
+            Loc.GetString("cosmiccult-rift-absorb", ("NAME", Identity.Entity(args.User, EntityManager))),
+            Transform(args.User).Coordinates,
+            PopupType.MediumCaution);
+        QueueDel(target);
+    }
+
+    // TODO: predict all this shit
+    [SubscribeLocalEvent]
+    private void OnPurgeDoAfter(Entity<CosmicMalignRiftComponent> ent, ref PurgeRiftDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+        var tgtpos = Transform(ent).Coordinates;
+        Spawn(ent.Comp.PurgeVFX, tgtpos);
+        _audio.PlayPvs(ent.Comp.PurgeSound, args.User);
+        _popup.PopupCoordinates(
+            Loc.GetString("cosmiccult-rift-purge", ("NAME", Identity.Entity(args.User, EntityManager))),
+            Transform(args.User).Coordinates,
+            PopupType.Medium);
+        QueueDel(ent);
+    }
+}

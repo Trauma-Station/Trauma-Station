@@ -4,6 +4,7 @@
   parent: SimpleMobBaseHunger
   id: SlimeHunger
   startingValue: 40
+  maximumValue: 150
   thresholds:
     Overfed: 150
     Okay: 75

@@ -39,6 +39,7 @@
   id: MiningDrobeInventory
   startingInventory:
     ClothingUniformJumpsuitSalvageSpecialist: 3
+    ClothingUniformJumpsuitMilitarySalvageSpecialist: 3
     ClothingUniformJumpsuitShaftMiner: 3
     ClothingShoesBootsSalvage: 3
     ClothingHandsGlovesColorBlack: 3

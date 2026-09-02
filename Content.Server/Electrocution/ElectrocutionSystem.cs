@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Doors.Systems;

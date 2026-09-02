@@ -73,7 +73,7 @@ public sealed class SurgeryTest : InteractionTest
             _targeting.SetTarget(SPlayer, TargetBodyPart.RightArm);
 
             // try cutting arm with a sword until it falls off
-            var weapon = SEntMan.SpawnEntity(Weapon, SEntMan.GetCoordinates(PlayerCoords));
+            var weapon = SSpawn(Weapon, SEntMan.GetCoordinates(PlayerCoords));
             var melee = SComp<MeleeWeaponComponent>(weapon);
             for (var i = 0; i < 20; i++)
             {
@@ -153,14 +153,14 @@ public sealed class SurgeryTest : InteractionTest
             Assert.That(wounds, Is.Empty, "Expected no leftover wounds");
             Assert.That(!_wound.TryHealWoundsOnOwner(subject, damage), "There should be no wounds left to heal");
 
-            SEntMan.DeleteEntity(subject);
+            SDel(subject);
         });
     }
 
     private void AssertHealed(Entity<WoundComponent> wound)
     {
         Assert.That(wound.Comp.WoundSeverityPoint, Is.EqualTo(FixedPoint2.Zero), "Wound was not healed");
-        Assert.That(SEntMan.Deleted(wound), "Wound did not get deleted after being healed");
+        Assert.That(SDeleted(wound), "Wound did not get deleted after being healed");
     }
 
     private async Task<EntityUid> SpawnHuman()
@@ -169,9 +169,9 @@ public sealed class SurgeryTest : InteractionTest
         await Server.WaitPost(() =>
         {
             // dont want them to interfere with healing
-            SEntMan.RemoveComponent<BarotraumaComponent>(mob);
-            SEntMan.RemoveComponent<RespiratorComponent>(mob);
-            SEntMan.RemoveComponent<TemperatureDamageComponent>(mob);
+            SRemComp<BarotraumaComponent>(mob);
+            SRemComp<RespiratorComponent>(mob);
+            SRemComp<TemperatureDamageComponent>(mob);
         });
         return mob;
     }

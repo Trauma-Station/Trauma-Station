@@ -1,0 +1,40 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Sandevistan;
+using Content.Shared.Tag;
+using DrawDepthEnum = Content.Shared.DrawDepth.DrawDepth;
+
+namespace Content.Trauma.Client.Sandevistan;
+
+public sealed partial class ClientSandevistanAfterimageSystem : EntitySystem
+{
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> HideContextMenuTag = "HideContextMenu";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<SandevistanAfterimageComponent, ComponentStartup>(OnAfterimageStartup);
+    }
+
+    private void OnAfterimageStartup(Entity<SandevistanAfterimageComponent> ent, ref ComponentStartup args)
+    {
+        if (!TryComp<SpriteComponent>(ent.Comp.SourceEntity, out var userSprite))
+            return;
+
+        _tag.AddTag(ent, HideContextMenuTag);
+
+        var afterimageSprite = EnsureComp<SpriteComponent>(ent);
+        var dest = new Entity<SpriteComponent?>(ent, afterimageSprite);
+        _sprite.CopySprite((ent.Comp.SourceEntity, userSprite), dest);
+        _sprite.SetDrawDepth(dest, (int) DrawDepthEnum.FloorEffects);
+        _sprite.SetColor(dest, Color.FromHsv(new Vector4(ent.Comp.Hue, 1, 1, 0.7f)));
+        _sprite.ClearPostShaders(dest);
+        afterimageSprite.RenderOrder = 0;
+        afterimageSprite.EnableDirectionOverride = true;
+        afterimageSprite.DirectionOverride = ent.Comp.DirectionOverride;
+    }
+}

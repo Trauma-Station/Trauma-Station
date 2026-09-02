@@ -1,0 +1,125 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Trauma.Shared.Xenomorphs.Infection;
+using Content.Trauma.Shared.Xenomorphs.Larva;
+using Content.Shared.Body;
+using Content.Shared.EntityEffects;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Rejuvenate;
+using Content.Shared.Mind;
+using Robust.Server.Containers;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Trauma.Server.Xenomorphs.Infection;
+
+public sealed partial class XenomorphInfectionSystem : EntitySystem
+{
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenomorphInfectionComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<XenomorphInfectionComponent, OrganGotInsertedEvent>(OnOrganInserted);
+        SubscribeLocalEvent<XenomorphInfectionComponent, OrganGotRemovedEvent>(OnOrganRemoved);
+        SubscribeLocalEvent<XenomorphInfectedComponent, RejuvenateEvent>(OnRejuvenate);
+    }
+
+    private void OnRejuvenate(Entity<XenomorphInfectedComponent> ent, ref RejuvenateEvent args)
+    {
+        _transform.AttachToGridOrMap(ent.Comp.Infection);
+    }
+
+    private void OnShutdown(EntityUid uid, XenomorphInfectionComponent component, ComponentShutdown args)
+    {
+        if (component.Infected.HasValue)
+            RemComp<XenomorphInfectedComponent>(component.Infected.Value);
+    }
+
+    private void OnOrganInserted(EntityUid uid, XenomorphInfectionComponent component, ref OrganGotInsertedEvent args)
+    {
+        var xenomorphInfected = EnsureComp<XenomorphInfectedComponent>(args.Target);
+        xenomorphInfected.Infection = uid;
+        xenomorphInfected.InfectedIcons = component.InfectedIcons;
+        Dirty(args.Target, xenomorphInfected);
+
+        component.Infected = args.Target;
+    }
+
+    private void OnOrganRemoved(EntityUid uid, XenomorphInfectionComponent component, ref OrganGotRemovedEvent args)
+    {
+        RemComp<XenomorphPreventSuicideComponent>(args.Target);
+        RemComp<XenomorphInfectedComponent>(args.Target);
+        component.Infected = null;
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var time = _timing.CurTime;
+
+        var query = EntityQueryEnumerator<XenomorphInfectionComponent>();
+        while (query.MoveNext(out var uid, out var infection))
+        {
+            if (!infection.Infected.HasValue || infection.GrowthStage >= infection.MaxGrowthStage || time < infection.NextPointsAt)
+                continue;
+
+            var growTime = _mobState.IsCritical(infection.Infected.Value) ? infection.GrowTime * 2 : infection.GrowTime;
+            infection.NextPointsAt = time + growTime;
+
+            if (_mobState.IsDead(infection.Infected.Value) || !_random.Prob(infection.GrowProb))
+                continue;
+
+            infection.GrowthStage++;
+            if (TryComp<XenomorphInfectedComponent>(infection.Infected.Value, out var xenomorphInfected))
+            {
+                xenomorphInfected.GrowthStage = infection.GrowthStage;
+                DirtyField(infection.Infected.Value, xenomorphInfected, nameof(XenomorphInfectedComponent.GrowthStage));
+            }
+
+            if (infection.Effects.TryGetValue(infection.GrowthStage, out var effects))
+            {
+                _effects.ApplyEffects(infection.Infected.Value, effects, predicted: false);
+            }
+
+            if (infection.GrowthStage < infection.MaxGrowthStage)
+                continue;
+
+            if (!_container.TryGetContainingContainer((uid, null, null), out var container))
+            {
+                QueueDel(uid);
+                continue;
+            }
+
+            var larva = Spawn(infection.LarvaPrototype);
+
+            var larvaComponent = EnsureComp<XenomorphLarvaComponent>(larva);
+            larvaComponent.Victim = infection.Infected.Value;
+
+            var larvaVictim = EnsureComp<XenomorphLarvaVictimComponent>(infection.Infected.Value);
+            if (infection.InfectedIcons.TryGetValue(infection.GrowthStage, out var infectedIcon))
+            {
+                larvaVictim.InfectedIcon = infectedIcon;
+                Dirty(infection.Infected.Value, larvaVictim);
+            }
+
+            _container.Remove(uid, container);
+            _container.Insert(larva, container);
+
+            if (infection.SourceMindId is { } mindId
+                && TryComp<MindComponent>(mindId, out _))
+                _mind.TransferTo(mindId, larva);
+
+            QueueDel(uid);
+        }
+    }
+}

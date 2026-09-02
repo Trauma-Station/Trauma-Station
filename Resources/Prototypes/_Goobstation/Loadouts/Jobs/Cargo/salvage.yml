@@ -19,8 +19,10 @@
   equipment:
     neck: ClothingNeckCloakSalvagerSupreme
 
+
+
 - type: startingGear
-  id: LostFrontierProspectorSuit
+  id: SalvageSpecialistGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     shoes: ClothingShoesBootsSalvage
@@ -54,3 +56,8 @@
   - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
     species:
     - Plasmaman
+
+    type: loadout
+    id: SalvageSpecialistGearMJumpsuit
+    equipment:
+      jumpsuit: ClothingUniformJumpsuitMilitarySalvageSpecialist

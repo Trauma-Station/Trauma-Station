@@ -1,0 +1,194 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Actions;
+using Content.Server.Antag;
+using Content.Server.GameTicking.Events;
+using Content.Server.Popups;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
+using Content.Shared.Eye;
+using Content.Shared.Hands;
+using Content.Shared.Humanoid;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Speech.Components;
+using Content.Shared.Speech;
+using Content.Shared.Popups;
+using Robust.Shared.Audio;
+using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.EntitySerialization;
+using Robust.Shared.Timing;
+using Content.Trauma.Common.Speech;
+
+namespace Content.Trauma.Server.CosmicCult;
+
+public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
+{
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+
+    private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
+    private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var now = Timing.CurTime;
+        var markQuery = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
+        while (markQuery.MoveNext(out var uid, out var comp))
+        {
+            if (comp.ExpireTimer is { } timer && now > timer)
+                RemComp(uid, comp);
+        }
+
+        var echoQuery = EntityQueryEnumerator<CosmicMalignEchoComponent>();
+        while (echoQuery.MoveNext(out var uid, out var comp))
+        {
+            if (now > comp.ExpireTimer)
+                RemComp(uid, comp);
+        }
+    }
+
+    public override int AddEntropy(Entity<CosmicCultComponent> ent, int amount)
+    {
+        var realAmount = base.AddEntropy(ent, amount);
+        _cultRule.IncrementCultObjectiveEntropy(ent, realAmount);
+        return realAmount;
+    }
+
+    public override void LevelUp(Entity<CosmicCultComponent> ent)
+    {
+        base.LevelUp(ent);
+        _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-levelup-awaiting-input"), Color.FromHex("#4cabb3"), _levelupReadySound);
+    }
+
+    public override void OnLevelUpConfirmed(Entity<CosmicShopComponent> ent, ref LevelUpconfirmedMessage args)
+    {
+        base.OnLevelUpConfirmed(ent, ref args);
+
+        if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp))
+            return;
+
+        _cultRule.UpdateCultData((args.Actor, cultComp));
+        _antag.SendBriefing(ent, "You attune your influence and the cult grows more powerful!", Color.FromHex("#4cabb3"), _levelupSound);
+    }
+
+    #region Init Cult
+    /// <summary>
+    /// Add the starting powers to the cultist.
+    /// </summary>
+    [SubscribeLocalEvent]
+    private void OnCultInit(Entity<CosmicCultComponent> ent, ref ComponentInit args)
+    {
+        _eye.RefreshVisibilityMask(ent.Owner);
+        if (!HasComp<HumanoidProfileComponent>(ent))
+            return; // Non-humanoids don't get abilities
+
+        ent.Comp.SiphonActionEntity = Actions.AddAction(ent.Owner, ent.Comp.SiphonAction);
+        ent.Comp.ShopActionEntity = Actions.AddAction(ent.Owner, ent.Comp.ShopAction);
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.SiphonActionEntity),
+            nameof(CosmicCultComponent.ShopActionEntity));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGetVisMask(Entity<CosmicCultComponent> uid, ref GetVisMaskEvent args)
+    {
+        args.VisibilityMask |= (int) VisibilityFlags.CosmicCultMonument;
+    }
+    #endregion
+
+    #region Equipment Pickup
+    [SubscribeLocalEvent]
+    private void OnGotCosmicItemEquipped(Entity<CosmicEquipmentComponent> ent, ref GotEquippedEvent args)
+    {
+        var target = args.EquipTarget;
+        if (!EntityIsCultist(target))
+            EnsureComp<CosmicDegenComponent>(target);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGotCosmicItemUnequipped(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedEvent args)
+    {
+        RemComp<CosmicDegenComponent>(args.EquipTarget); // Cultists shouldn't have it in the first place so we don't check if entity is a cultist
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGotHeld(Entity<CosmicEquipmentComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (EntityIsCultist(args.User)) return;
+
+        EnsureComp<CosmicDegenComponent>(args.User);
+        Popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGotUnheld(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedHandEvent args)
+    {
+        RemComp<CosmicDegenComponent>(args.User);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGotSpeechOverrideEquipped(Entity<SpeechOverrideComponent> ent, ref GotEquippedEvent args)
+    {
+        ent.Comp.OldEmoteSounds = null;
+        ent.Comp.OldSpeechSounds = null;
+
+        var target = args.EquipTarget;
+        if (ent.Comp.EmoteSounds is { } emoteSounds && TryComp<VocalComponent>(target, out var vocal))
+        {
+            ent.Comp.OldEmoteSounds = vocal.EmoteSounds;
+            vocal.EmoteSounds = emoteSounds;
+            Dirty(target, vocal);
+        }
+        if (ent.Comp.SpeechSounds is { } speechSounds && TryComp<SpeechComponent>(target, out var speech))
+        {
+            ent.Comp.OldSpeechSounds = speech.SpeechSounds;
+            speech.SpeechSounds = speechSounds;
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGotSpeechOverrideUnequipped(Entity<SpeechOverrideComponent> ent, ref GotUnequippedEvent args)
+    {
+        var target = args.EquipTarget;
+        if (ent.Comp.OldEmoteSounds is { } emoteSounds && TryComp<VocalComponent>(target, out var vocal))
+        {
+            vocal.EmoteSounds = emoteSounds;
+            Dirty(target, vocal);
+        }
+        if (ent.Comp.OldSpeechSounds is { } speechSounds && TryComp<SpeechComponent>(target, out var speech))
+        {
+            speech.SpeechSounds = speechSounds;
+        }
+        ent.Comp.OldEmoteSounds = null;
+        ent.Comp.OldSpeechSounds = null;
+    }
+    #endregion
+
+    #region Movespeed
+    [SubscribeLocalEvent]
+    private void OnStartImposition(Entity<CosmicImposingComponent> ent, ref ComponentInit args) => // these functions just make sure
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnEndImposition(Entity<CosmicImposingComponent> ent, ref ComponentRemove args) => // as various cosmic cult effects get added and removed
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> ent, ref ComponentInit args) => // that movespeed applies more-or-less correctly
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> ent, ref ComponentRemove args) => // i wish movespeed was easier to work with
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+
+    [SubscribeLocalEvent]
+    private void OnRefreshMoveSpeed(Entity<InfluenceStrideComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
+        args.ModifySpeed(1.4f, 1.4f);
+    [SubscribeLocalEvent]
+    private void OnImpositionMoveSpeed(Entity<CosmicImposingComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
+        args.ModifySpeed(0.80f, 0.80f);
+    #endregion
+}
