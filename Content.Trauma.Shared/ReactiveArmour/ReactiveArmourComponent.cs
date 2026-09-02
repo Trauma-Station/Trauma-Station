@@ -3,7 +3,7 @@
 using Content.Shared.EntityEffects;
 
 
-namespace Content.Trauma.Server.ReactiveArmour;
+namespace Content.Trauma.Shared.ReactiveArmour;
 
 /// <summary>
 /// Checks if enought time have passed

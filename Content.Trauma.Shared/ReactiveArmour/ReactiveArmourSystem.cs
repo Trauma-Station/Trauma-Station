@@ -8,7 +8,7 @@ using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 
 
-namespace Content.Trauma.Server.ReactiveArmour;
+namespace Content.Trauma.Shared.ReactiveArmour;
 
 public sealed partial class ReactiveArmourSystem : EntitySystem
 {

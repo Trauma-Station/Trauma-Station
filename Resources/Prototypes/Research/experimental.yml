@@ -100,7 +100,6 @@
   cost: 10000
   recipeUnlocks:
   - WeaponGauntletGorilla
-  - ClothingOuterArmorReactiveUnfinished # Trauma - reactive armour
   # Goobstation R&D Console rework start
   position: -6,-4
   technologyPrerequisites:

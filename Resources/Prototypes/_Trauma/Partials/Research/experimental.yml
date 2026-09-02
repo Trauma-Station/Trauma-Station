@@ -1,0 +1,4 @@
+- type: technology
+  id: AnomalyCoreHarnessing
+  recipeUnlocks:
+  - ClothingOuterArmorReactiveUnfinished

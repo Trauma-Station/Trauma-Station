@@ -1,0 +1,9 @@
+- type: weightedRandom
+  id: TraitorObjectiveGroupSteal
+  weights:
+    StealSupermatterSliverObjective: 0.5
+    LawbringerStealObjective: 0.5
+    GeminiProjectorStealObjective: 0.5
+    ExecutiveBriefcaseStealObjective: 0.5
+    JusticeStealObjective: 0.5
+    TeleportArmourStealObjective: 1

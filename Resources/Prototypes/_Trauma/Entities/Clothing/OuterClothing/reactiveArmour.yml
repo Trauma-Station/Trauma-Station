@@ -31,7 +31,7 @@
   - type: ReactiveArmour
     effects:
     - !type:PlaySoundEffect
-        sound:
+        sound: &deparure_sound
           path: /Audio/Effects/teleport_departure.ogg
     - !type:Sparks
     - !type:RandomTeleport
@@ -39,7 +39,7 @@
         min: 6.0
         max: 10.0
     - !type:PlaySoundEffect
-        sound:
+        sound: &arrival_sound
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
     activationDelay: 10
@@ -79,16 +79,14 @@
   - type: ReactiveArmour
     effects:
     - !type:PlaySoundEffect
-        sound:
-          path: /Audio/Effects/teleport_departure.ogg
+        sound: *deparure_sound
     - !type:Sparks
     - !type:RandomTeleport
       radius:
         min: 6.0
         max: 10.0
     - !type:PlaySoundEffect
-        sound:
-          path: /Audio/Effects/teleport_arrival.ogg
+        sound: *arrival_sound
     - !type:Sparks
     activationDelay: 10
   - type: Construction

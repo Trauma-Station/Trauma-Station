@@ -12,14 +12,6 @@
 - type: weightedRandom
   id: TraitorObjectiveGroupSteal
   weights:
-    # <Trauma>
-    StealSupermatterSliverObjective: 0.5
-    LawbringerStealObjective: 0.5
-    GeminiProjectorStealObjective: 0.5
-    ExecutiveBriefcaseStealObjective: 0.5
-    JusticeStealObjective: 0.5
-    TeleportArmourStealObjective: 1
-    # </Trauma>
     CaptainIDStealObjective: 1
     CMOHyposprayStealObjective: 1
     # CMOCrewMonitorStealObjective: 1 # Goobstation
