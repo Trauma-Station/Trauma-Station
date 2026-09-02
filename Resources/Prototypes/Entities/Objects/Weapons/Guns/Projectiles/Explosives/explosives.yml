@@ -52,7 +52,7 @@
   parent: BaseBullet
   id: BulletGrenadeBaton
   categories: [ HideSpawnMenu ]
-  name: baton grenade
+  name: baton grenade round
   components:
   # <Trauma>
   - type: SmartLinkBlacklist
