@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: ClothingOuterChameleon
+  parent: ClothingOuterChameleon, ClothingOuterArmorBase
   id: ClothingOuterChameleonArmor
   name: vest
   description: A thick vest with a rubbery, water-resistant shell.
@@ -23,4 +23,5 @@
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: ExplosionResistance
+    damageCoefficient: 0.65
     damageCoefficient: 0.65
