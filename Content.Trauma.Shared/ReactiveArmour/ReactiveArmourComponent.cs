@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 
-
 namespace Content.Trauma.Shared.ReactiveArmour;
 
 /// <summary>

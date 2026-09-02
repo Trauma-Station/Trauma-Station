@@ -7,7 +7,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 
-
 namespace Content.Trauma.Shared.ReactiveArmour;
 
 public sealed partial class ReactiveArmourSystem : EntitySystem
@@ -19,21 +18,22 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
     [ SubscribeLocalEvent ]
     private void OnHitMele(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<AttackedEvent> args)
     {
-        CheckForCooldown(args.Owner, comp);
+        CheckForCooldown(uid, comp, args.Owner);
     }
 
     [ SubscribeLocalEvent ]
     private void OnHitProjectile(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
-        CheckForCooldown(args.Owner, comp);
+        CheckForCooldown(uid, comp, args.Owner);
     }
 
-    private void CheckForCooldown(EntityUid target, ReactiveArmourComponent comp)
+    private void CheckForCooldown(EntityUid uid, ReactiveArmourComponent comp, EntityUid target)
     {
         if (_timing.CurTime < comp.LastActivated + comp.ActivationDelay)
             return;
 
         comp.LastActivated = _timing.CurTime;
+        Dirty(uid, comp);
 
         _effects.ApplyEffects(target, comp.Effects);
     }

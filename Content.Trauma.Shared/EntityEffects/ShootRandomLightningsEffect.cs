@@ -4,6 +4,9 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 
+/// <summary>
+/// Effect that shoot lightnings(like from tesla) from the target entity
+/// </summary>
 public sealed partial class ShootRandomLightnings : EntityEffectBase<ShootRandomLightnings>
 {
     /// <summary>

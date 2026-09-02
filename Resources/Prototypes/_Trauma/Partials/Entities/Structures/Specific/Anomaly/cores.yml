@@ -2,20 +2,20 @@
 
 - type: entity
   id: AnomalyCoreBluespace
-  name: bluespace anomaly core # Goobstation - anomaly core names
+  name: bluespace anomaly core
   components:
-  - type: Tag  # Trauma - reactive armour
+  - type: Tag
     tags:
     - AnomalyCoreBluespace
 
 - type: entity
   id: AnomalyCoreElectricity
-  name: electricity anomaly core # Goobstation - anomaly core names
+  name: electricity anomaly core
   components:
-  - type: Tag  # Trauma - reactive armour
+  - type: Tag
     tags:
     - AnomalyCoreElectricity
-  - type: Enchanter # Goobstation
+  - type: Enchanter
     enchants:
     - EnchantInsulated
     tags:
