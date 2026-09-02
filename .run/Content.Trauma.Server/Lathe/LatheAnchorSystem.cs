@@ -1,0 +1,41 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Lathe;
+using Content.Server.Lathe.Components;
+using Content.Server.Power.Components;
+using Content.Shared.Lathe;
+
+namespace Content.Trauma.Server.Lathe;
+
+/// <summary>
+/// Makes unpowered lathes stop and start producing depending on being anchored.
+/// Similar to powered lathes when they lose or gain power.
+/// </summary>
+public sealed partial class LatheAnchorSystem : EntitySystem
+{
+    [Dependency] private LatheSystem _lathe = default!;
+    [Dependency] private EntityQuery<ApcPowerReceiverComponent> _powerQuery = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<LatheComponent, AnchorStateChangedEvent>(OnStateChanged);
+    }
+
+    private void OnStateChanged(Entity<LatheComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        // don't double dip, powered lathes handle it via power changed
+        if (_powerQuery.HasComp(ent))
+            return;
+
+        if (!args.Anchored)
+        {
+            _lathe.AbortProduction(ent, ent.Comp);
+        }
+        else if (ent.Comp.CurrentRecipe != null)
+        {
+            _lathe.TryStartProducing(ent, ent.Comp);
+        }
+    }
+}

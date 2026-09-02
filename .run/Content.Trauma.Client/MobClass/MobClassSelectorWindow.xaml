@@ -1,0 +1,21 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    MinSize="800 300"
+    Title="Classes">
+    <PanelContainer Name="Background"/>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <GridContainer Name="ClassPanel" VerticalExpand="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Control MinHeight="100" VerticalAlignment="Bottom">
+            <BoxContainer Name="DescriptionPanel" Orientation="Vertical" Visible="False" Margin="10">
+                <Label Name="ClassDescription" HorizontalAlignment="Center" FontColorOverride="#8B0000" Margin="0 0 0 10" />
+                <TextureButton Name="SpecializeTextureButton" ToolTip="By clicking this, you will specialize into the class you have selected." HorizontalAlignment="Center" />
+            </BoxContainer>
+        </Control>
+    </BoxContainer>
+</controls:FancyWindow>

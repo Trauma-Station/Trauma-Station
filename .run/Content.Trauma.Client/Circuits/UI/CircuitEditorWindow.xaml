@@ -1,0 +1,47 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:gfx="using:Robust.Client.Graphics"
+        MinSize="600 500"
+        Title="circuit editor console">
+    <BoxContainer Orientation="Vertical">
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1B"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Align="Center" Margin="4">
+                <controls:ConfirmButton Name="ClearButton" Text="Clear" Disabled="True"/>
+                <controls:ConfirmButton Name="ImportButton" Text="Import"/>
+                <Button Name="ExportButton" Text="Export" Disabled="True"/>
+            </BoxContainer>
+        </PanelContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+            <ScrollContainer MinWidth="128" VerticalExpand="True">
+                <PanelContainer>
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#333333"/>
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Name="NewGatesContainer" Orientation="Vertical"/>
+                </PanelContainer>
+            </ScrollContainer>
+            <BoxContainer Name="InputPortsContainer" Orientation="Vertical" VerticalExpand="True" Align="Center"/>
+            <ScrollContainer Name="GatesScroll" HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer Name="GatesPanel" SetSize="1000 1000">
+                    <LayoutContainer Name="GatesContainer"/>
+                </PanelContainer>
+            </ScrollContainer>
+            <BoxContainer Name="OutputPortsContainer" Orientation="Vertical" VerticalExpand="True" Align="Center"/>
+        </BoxContainer>
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1B"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Label Name="GateCountLabel" Text="No circuit inserted!" Align="Center" HorizontalExpand="True" Margin="4"/>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>../bin/Content.Server/</OutputPath>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<OutputType Condition="'$(FullRelease)' != 'True'">Exe</OutputType>
+		<NoWarn>0618</NoWarn>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
+	</PropertyGroup>
+	<Import Project="../MSBuild/Content.props" />
+
+	<ItemGroup>
+		<PackageReference Include="Serilog" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
+		<ProjectReference Include="../Content.Goobstation.Server/Content.Goobstation.Server.csproj" />
+		<ProjectReference Include="../Content.Lavaland.Server/Content.Lavaland.Server.csproj" />
+		<ProjectReference Include="../Content.Medical.Server/Content.Medical.Server.csproj" />
+		<ProjectReference Include="../Content.Server/Content.Server.csproj" />
+	</ItemGroup>
+
+	<Import Project="../RobustToolbox/Imports/Server.props" />
+	<Import Project="../RobustToolbox/Imports/Shared.props" />
+	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
+	<Import Project="../RobustToolbox/MSBuild/Robust.EntitySystemSubscriptionsGenerator.targets" />
+</Project>

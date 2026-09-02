@@ -1,0 +1,49 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Actions;
+using Content.Server.Station.Systems;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Server.Objectives.Systems;
+using Content.Shared.Station.Components;
+using Content.Shared.Throwing;
+using Robust.Shared.Timing;
+
+namespace Content.Trauma.Server.CosmicCult.EntitySystems;
+
+public sealed partial class CosmicColossusSystem : SharedCosmicColossusSystem
+{
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private CodeConditionSystem _codeCondition = default!;
+
+    [SubscribeLocalEvent]
+    private void OnSpawn(Entity<CosmicColossusComponent> ent, ref ComponentStartup args) // I WANT THIS BIG GUY HURLED TOWARDS THE STATION
+    {
+        if (!ent.Comp.Timed)
+            return;
+
+        ent.Comp.DeathTimer = _timing.CurTime + ent.Comp.DeathWait;
+        if (_station.GetStationInMap(Transform(ent).MapID) is { } station && TryComp<StationDataComponent>(station, out var stationData))
+        {
+            var stationGrid = _station.GetLargestGrid((station, stationData));
+            _throw.TryThrow(ent, Transform(stationGrid!.Value).Coordinates, baseThrowSpeed: 30, null, 0, 0, false, false, false, false, false);
+        }
+        _actions.AddAction(ent, ref ent.Comp.EffigyPlaceActionEntity, ent.Comp.EffigyPlaceAction, ent);
+    }
+
+    protected override void OnColossusEffigy(Entity<CosmicColossusComponent> ent, ref CosmicColossusEffigyEvent args)
+    {
+        if (!VerifyPlacement(ent, out var pos))
+            return;
+
+        _actions.RemoveAction(ent.Owner, ent.Comp.EffigyPlaceActionEntity);
+        _codeCondition.SetCompleted(ent.Owner, ent.Comp.EffigyObjective); // Ts not predictable
+        PredictedSpawnAtPosition(ent.Comp.EffigyPrototype, pos);
+        ent.Comp.Timed = false;
+        Dirty(ent, ent.Comp); // Wow what an absolute idiot forgot to add this! Oh, wait, that was me.
+    }
+
+}

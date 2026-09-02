@@ -1,0 +1,21 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    Title="{Loc 'phone-options'}" MinSize="300 70">
+    <BoxContainer Orientation="Vertical">
+        <Label Text="{Loc 'phone-name' }"/>
+        <LineEdit Name="MessageEdit"
+                  HorizontalExpand="True"
+                  Access="Public" />
+        <Label Text="{Loc 'phone-category' }"/>
+        <OptionButton
+            Name="CategoryOption"
+            MinWidth="100"
+            StyleClasses="ButtonSquare"
+            Access="Public"/>
+    </BoxContainer>
+</controls:FancyWindow>

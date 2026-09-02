@@ -1,0 +1,56 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Administration.Systems;
+using Content.Server.Antag;
+using Content.Shared.Database;
+using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Antag;
+using Robust.Shared.Player;
+using System.Linq;
+
+namespace Content.Trauma.Server.Antag;
+
+public sealed partial class AntagVerbSystem : EntitySystem
+{
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+
+    [SubscribeLocalEvent]
+    private void OnGetAntagVerbs(ref GetAntagVerbsEvent args)
+    {
+        var session = args.Session;
+        var verbs = args.Verbs.Verbs;
+
+        foreach (var smite in ProtoMan.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
+        {
+            if (!_whitelist.CheckBoth(args.Target, blacklist: smite.Blacklist, whitelist: smite.Whitelist))
+                continue;
+
+            var antag = ProtoMan.Index(smite.Antag);
+            var name = Loc.GetString(antag.Name);
+            verbs.Add(new Verb()
+            {
+                Text = Loc.GetString("admin-verb-text-make-antag", ("antag", name)),
+                Category = VerbCategory.Antag,
+                Icon = smite.Icon,
+                Act = () =>
+                {
+                    MakeAntag(session, smite);
+                },
+                Impact = LogImpact.High,
+                Message = Loc.GetString("admin-verb-make-antag", ("antag", name))
+            });
+        }
+    }
+
+    public void MakeAntag(ICommonSession player, [ForbidLiteral] ProtoId<AntagSmitePrototype> id)
+    {
+        MakeAntag(player, ProtoMan.Index(id));
+    }
+
+    public void MakeAntag(ICommonSession player, AntagSmitePrototype smite)
+    {
+        _antag.ForceMakeAntag(player, smite.Rule, smite.RuleComp);
+    }
+}

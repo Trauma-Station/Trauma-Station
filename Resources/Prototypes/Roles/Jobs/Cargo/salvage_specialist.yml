@@ -50,3 +50,8 @@
     outerClothing: ClothingOuterWinterMiner
     neck: ClothingNeckScarfStripedBrown
     gloves: ClothingHandsGlovesColorBlack
+
+    type: loadout
+    id: SalvageSpecialistGearMJumpsuit
+    equipment:
+      jumpsuit: ClothingUniformJumpsuitMilitarySalvageSpecialist
