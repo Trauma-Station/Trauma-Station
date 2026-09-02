@@ -4,6 +4,7 @@ role_timer_override = "Trauma"
 round_end_pvs_overrides = true
 lobbyduration = 180
 fallbackpreset = "Traitor,Survival,Extended"
+minimum_job_fallback = "SameDepartment"
 
 [chat]
 max_announcement_length = 512
@@ -30,3 +31,6 @@ explosion_damage_modifier = 0.3
 
 [biomass]
 easy_mode = false # woodchipper is actually dangerous
+
+[ic]
+ssd_sleep = false # chuddy and doesnt account for NPCs

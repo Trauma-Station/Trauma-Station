@@ -120,8 +120,6 @@ public sealed partial class CircuitSystem : EntitySystem
             {
                 if (linked.GateIndex is { } g)
                     ent.Comp.Changed.Add(g);
-                else if (linked.PortIndex is { } p)
-                    ent.Comp.LastOutputs[p] = ent.Comp.Inputs[i];
             }
         }
     }
@@ -133,9 +131,14 @@ public sealed partial class CircuitSystem : EntitySystem
             return;
 
         // send expected values when a circuit is repowered installed etc
-        for (var i = 0; i < comp.LastOutputs.Count; i++)
+        var gates = comp.Data.Gates;
+        for (var o = 0; o < comp.Data.OutputIndices.Count; o++)
         {
-            SendOutput(comp.Housing, i, comp.LastOutputs[i]);
+            var i = comp.Data.OutputIndices[o];
+            if (i.GateIndex is { } g)
+                SendOutput(comp.Housing, o, gates[g].Output);
+            else if (i.PortIndex is { } p)
+                SendOutput(comp.Housing, o, comp.Inputs[p]);
         }
     }
 
@@ -148,8 +151,7 @@ public sealed partial class CircuitSystem : EntitySystem
         // stop sending values when a circuit is depowered removed etc
         for (var i = 0; i < CircuitComponent.PortsCount; i++)
         {
-            if (!comp.LastOutputs[i].Equals(False.Instance))
-                SendOutput(comp.Housing, i, False.Instance);
+            SendOutput(comp.Housing, i, False.Instance);
         }
     }
 
@@ -180,7 +182,7 @@ public sealed partial class CircuitSystem : EntitySystem
         if (idx.GateIndex is { } g)
             comp.Changed.Add(g); // update it next tick
         else if (idx.PortIndex is { } p)
-            SendOutput(comp.Housing, p, comp.LastOutputs[p] = value); // send signal now
+            SendOutput(comp.Housing, p, value); // send signal now
     }
 
     private void SendOutput(EntityUid? housing, int i, object value)

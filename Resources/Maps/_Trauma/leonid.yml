@@ -4,8 +4,8 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/05/2026 17:26:37
-  entityCount: 35990
+  time: 08/20/2026 17:57:09
+  entityCount: 35992
 maps:
 - 1
 grids:
@@ -18936,6 +18936,12 @@ entities:
     - type: Transform
       parent: 2
       pos: -59.5,-59.5
+    - type: Door
+      state: Opening
+      secondsUntilStateChange: -28.389105
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
 - proto: AirlockResearchDirectorLocked
   entities:
   - uid: 456
@@ -102580,6 +102586,14 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: -90.5,7.5
+- proto: ComputerFundingAllocation
+  entities:
+  - uid: 35992
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -22.5,17.5
 - proto: ComputerGeneticsConsole
   entities:
   - uid: 16590
@@ -102718,11 +102732,6 @@ entities:
       pos: -13.5,8.5
 - proto: ComputerResearchAndDevelopment
   entities:
-  - uid: 16609
-    components:
-    - type: Transform
-      parent: 2
-      pos: -62.5,-60.5
   - uid: 16610
     components:
     - type: Transform
@@ -158113,6 +158122,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -57.5,-50.5
+  - uid: 35991
+    components:
+    - type: Transform
+      parent: 2
+      pos: -62.5,-23.5
 - proto: MagazinePistolEmpty
   entities:
   - uid: 24519
@@ -183194,7 +183208,6 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -52.5,26.5
   - uid: 28769
     components:
@@ -183205,49 +183218,41 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -46.5,-12.5
   - uid: 28771
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -62.5,11.5
   - uid: 28772
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -68.5,-42.5
   - uid: 28773
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -45.5,-42.5
   - uid: 28774
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -19.5,-40.5
   - uid: 28775
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 16.5,85.5
   - uid: 28776
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 18.5,42.5
   - uid: 28777
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -12.5,25.5
   - uid: 28778
     components:
@@ -183258,19 +183263,16 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -37.5,16.5
   - uid: 28780
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: -16.5,17.5
   - uid: 28781
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 3.5,8.5
   - uid: 28782
     components:
@@ -191679,6 +191681,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -61.5,-17.5
+- proto: StationAiFixerComputer
+  entities:
+  - uid: 16609
+    components:
+    - type: Transform
+      parent: 2
+      pos: -62.5,-60.5
 - proto: StationAiUploadComputer
   entities:
   - uid: 30134

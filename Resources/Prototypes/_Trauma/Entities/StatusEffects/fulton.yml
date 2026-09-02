@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ StatusEffectSpeed, StatusEffectDelayBase ]
+  parent: StatusEffectSpeed
   id: BeingFultonedStatusEffect
   name: fulton attached
   components:
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.65
     walkSpeedModifier: 0.65
-  - type: EntityEffectOnTrigger
-    effects:
+  - type: StatusEffectEffectsApply
+    effectsOnRemoval:
     # if you are fucked you will definitely die, will likely combine with below
     # has to be done first or the other one will guarantee this one will work
     - !type:HealthChange

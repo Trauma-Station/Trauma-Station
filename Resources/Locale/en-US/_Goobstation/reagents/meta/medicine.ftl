@@ -76,7 +76,7 @@ reagent-name-tehifin = tehifin
 reagent-desc-tehifin = Low potency burn medicine of questionable safety.
 
 reagent-name-procenyl-lazide = procenyl lazide
-reagent-desc-procenyl-lazide = Somewhat strong brute medicine with low overdose threshold, needs to be crystalized at low temperatures and separated out from its precursor solution.
+reagent-desc-procenyl-lazide = A miracle drug against severe wounds with low overdose threshold, needs to be crystalized at low temperatures and separated out from its precursor solution. Recommended to be used orally, to minimize chance of overdose.
 
 reagent-name-bozaide = bozaide
 reagent-desc-bozaide = Slow acting brute medicine, deals low amounts of radiation damage.

@@ -11,7 +11,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,1,2 # Trauma - make bucket smaller to match jugs
   - type: Solution
     solution:
       maxVol: 360 # 3 litres
@@ -20,6 +20,10 @@
     slots:
     - HEAD
     quickEquip: false
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        offset: "0, 0.03"
   - type: SolutionTransfer
     transferAmount: 120
     maxTransferAmount: 360

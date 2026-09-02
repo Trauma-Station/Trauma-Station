@@ -6,17 +6,37 @@
   - Grab
   - Harm
   - Harm
+  userConditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
+  - !type:TakeStaminaDamage
+    amount: -30
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    type: MoveSpeed
+    multiplier: 1.2
+    duration: 10
+    scaling: false
   opponentEffects:
-  - !type:ModifyParalysis
-    time: 1
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
-        Slash: 5
+        Blunt: 5
+  - !type:ModifyStatusEffect
+    effectProto: PushKickVulnerabilityStatusEffect
+    type: Update
+    time: 6
+  - !type:StopPull
+  - !type:GrabThrow
+    speed: 7
+    dropItems: false
+    knockdown: false
   levelRequired: 10
 
 - type: combo
@@ -25,15 +45,32 @@
   - Disarm
   - Disarm
   - Harm
+  userConditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
+  - !type:TakeStaminaDamage
+    amount: -40
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    type: MoveSpeed
+    multiplier: 1.2
+    duration: 10
+    scaling: false
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
-        Slash: 15
+        Blunt: 15
+  - !type:ModifyStatusEffect
+    effectProto: CircleKickSlowdownStatusEffect
+    type: Update
+    time: 2
   levelRequired: 10
 
 - type: combo
@@ -42,17 +79,33 @@
   - Harm
   - Harm
   - Disarm
+  userConditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
+  - !type:MovingCondition
+    minVelocity: 2
+    failMessage: capoeira-fail-low-velocity
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
+  - !type:TakeStaminaDamage
+    amount: -60
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    multiplier: 1.5
+    duration: 5
+    scaling: false
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
-        Slash: 10
-  - !type:ModifyParalysis
+        Blunt: 10
+  - !type:ModifyKnockdown
     time: 1
+    drop: true
   - !type:TakeStaminaDamage
     amount: 10
   levelRequired: 10
@@ -64,19 +117,42 @@
   - Harm
   - Disarm
   - Harm
+  userConditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
+  - !type:MovingCondition
+    minVelocity: 2
+    failMessage: capoeira-fail-low-velocity
+  conditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-target-down
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
+  - !type:TakeStaminaDamage
+    amount: -100
+    scaling: false
+  - !type:ApplyMartialArtModifier
+    multiplier: 1.5
+    duration: 5
+    scaling: false
+  - !type:RaiseNetworkEvents
+    events:
+    - !type:AnimationFlipEmoteEvent
   opponentEffects:
   - !type:HealthChange
-    targetPart: Chest
+    useTargeting: false
+    ignoreResistances: false
     damage:
+      flags: MartialArtCombo
       types:
-        Slash: 25
-  - !type:ModifyParalysis
+        Blunt: 25
+  - !type:ModifyKnockdown
     time: 2
+    drop: true
   - !type:TakeStaminaDamage
     amount: 15
+  - !type:StopPull
   levelRequired: 10
 
 - type: combo
@@ -84,7 +160,12 @@
   attacks:
   - Disarm
   - Disarm
+  conditions:
+  - !type:IsUser
   userEffects:
+  - !type:RemoveComponents
+    components:
+    - type: KnockedDown
   - !type:SetStanding
     standing: true
     force: true

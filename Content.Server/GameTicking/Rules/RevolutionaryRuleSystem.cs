@@ -60,6 +60,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private RoleSystem _role = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private MindShieldSystem _mindShield = default!;
@@ -84,6 +85,12 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
     {
         base.Started(uid, component, gameRule, args);
         component.CommandCheck = _timing.CurTime + component.TimerWait;
+        // <Trauma> - delay it until 5m after round starts if this rule is added at roundstart
+        // this prevents command spawning on arrivals terminal from immediately ending the revolution
+        var delay = TimeSpan.FromMinutes(5);
+        if (component.CommandCheck.Subtract(GameTicker.RoundStartTimeSpan) < delay)
+            component.CommandCheck = GameTicker.RoundStartTimeSpan + delay;
+        // </Trauma>
     }
 
     protected override void ActiveTick(EntityUid uid, RevolutionaryRuleComponent component, GameRuleComponent gameRule, float frameTime)
@@ -94,7 +101,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
         {
             component.CommandCheck = _timing.CurTime + component.TimerWait;
 
-            // goob edit
+            // <Trauma> - replaced immediately ending the round with all this
             if (CheckCommandLose())
             {
                 if (!component.HasRevAnnouncementPlayed)
@@ -106,32 +113,27 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 
                     component.HasRevAnnouncementPlayed = true;
 
-                    // <Trauma>
-                    _ticker.StartGameRule(ErtSecurity);
+                    GameTicker.StartGameRule(ErtSecurity);
                     _roundEnd.RequestRoundEnd(TimeSpan.FromMinutes(10), cantRecall: true);
-                    // </Trauma>
                 }
 
                 foreach (var ms in EntityQueryEnumerator<MindShieldStatusComponent, MobStateComponent>())
                 {
                     if (!ms.Comp1.IsMindshielded)
                         continue;
-                    var entity = ms.Owner;
 
                     // assign eotrs
-                    if (HasComp<RevolutionEnemyComponent>(entity))
+                    if (HasComp<RevolutionEnemyComponent>(ms))
                         continue;
 
-                    var revenemy = EnsureComp<RevolutionEnemyComponent>(entity);
-                    _antag.SendBriefing(entity, Loc.GetString("rev-eotr-gain"), Color.Red, revenemy.RevStartSound);
+                    var revenemy = EnsureComp<RevolutionEnemyComponent>(ms);
+                    _antag.SendBriefing(ms.Owner, Loc.GetString("rev-eotr-gain"), Color.Red, revenemy.RevStartSound);
                 }
             }
 
             if (CheckRevsLose() && !component.HasAnnouncementPlayed)
             {
-                // <Trauma>
                 _antagEvac.SpawnNewAntagIfBelowPercent(uid, TimeSpan.FromMinutes(10), false);
-                // </Trauma>
 
                 _chat.DispatchGlobalAnnouncement(
                     Loc.GetString("revolutionaries-lose-announcement"),
@@ -140,6 +142,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
 
                 component.HasAnnouncementPlayed = true;
             }
+            // </Trauma>
         }
     }
 

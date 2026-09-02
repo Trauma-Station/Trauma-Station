@@ -10,21 +10,28 @@
     sprite: _White/Mobs/Species/Xenomorph/organs.rsi
     state: egg_sack
     scale: 0.25,0.25 # :)
-  - type: Tag
-    tags:
-    - OrganEggSack
   - type: Organ
     category: EggSack
   - type: ChildOrgan
     parents: [ Torso ]
+  - type: OrganActions
+    actions:
+    - MouseMultiply
   - type: OrganComponents
     onAdd:
-    - type: EggLayer
-      eggSpawn:
-      - id: MobMouse
-      hungerUsage: 20
-      eggLayAction: MouseMultiply
-      hungerRequired: true
+    - type: EntityProducerAction
+      insufficientSatiationPopup: action-popup-lay-egg-too-hungry
+      userPopup: action-popup-lay-egg-user
+      othersPopup: action-popup-lay-egg-others
+    - type: EntityProducer
+      table:
+        id: MobMouse
+    - type: SatiationProduction
+      delay: 60
+      delayMax: 120
+      satiationUsage: 20
+      minimumSatiation: 60
+      automaticForPlayers: false
 
 - type: entity
   parent: OrganAnimalStomach

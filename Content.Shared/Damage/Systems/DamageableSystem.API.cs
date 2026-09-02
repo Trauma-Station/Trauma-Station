@@ -164,7 +164,10 @@ public sealed partial class DamageableSystem
         if (before.Cancelled)
             return damageDone;
 
-        damage = before.Damage; // Trauma
+        // <Trauma>
+        damage = before.Damage;
+        var isBody = _bodyQuery.HasComp(ent);
+        // </Trauma>
 
         // Apply resistances
         if (!ignoreResistances)
@@ -194,7 +197,8 @@ public sealed partial class DamageableSystem
                 RaiseLocalEvent(ent, ev);
                 modified = ev.Damage;
             }
-            else
+            // Skip applying modifiers to body, they will be applied when we reroute the damage to body parts
+            else if (!isBody)
             {
                 // Not a body part, just apply modifiers normally
                 var ev = new DamageModifyEvent(ent, modified, origin);
@@ -224,7 +228,7 @@ public sealed partial class DamageableSystem
         }
 
         // <Goob> - For entities with a body, route damage through body parts. no damage is added to the body's DamageableComponent
-        if (_bodyQuery.HasComp(ent))
+        if (isBody)
         {
             var vitalDamage = GetVitalDamage(damage);
             damage -= vitalDamage;
