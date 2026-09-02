@@ -28,7 +28,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return false;
 
         var mind = GetEntity(jobBoard.Comp.Mind.Value);
-        if (!TryComp<MindComponent>(mind, out var mindComp))
+        if (!MindQuery.TryComp(mind, out var mindComp))
             return false;
         var actor = mindComp.OwnedEntity;
         if (actor is null)
@@ -48,7 +48,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             // spawn the objective in directly, ignoring RequirementCheckEvent
             // (otherwise it would do things like cancel steal sidejobs for DAGD traitors or kill sidejobs for social traitors)
             var sideJob = Spawn(job);
-            if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
+            if (!ObjectiveQuery.TryComp(sideJob, out var objectiveComp))
             {
                 Del(sideJob);
                 continue;
@@ -67,7 +67,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             RaiseLocalEvent(sideJob, ref ev3);
 
             // if initialising failed then abort
-            if (ev3.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
+            if (ev3.Cancelled || !SideJobQuery.TryComp(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
             {
                 Del(sideJob);
                 continue;
@@ -92,15 +92,15 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (jobBoard.Comp.CompletedObjectives.Contains(sideJobProtoId))
             return false;
 
-        foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
+        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
         {
-            var availableSideJobProto = MetaData(availableSideJob).EntityPrototype;
+            var availableSideJobProto = Prototype(sideJob);
             if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
                 return false;
         }
-        foreach (var acceptedSideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
+        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
         {
-            var acceptedSideJobProto = MetaData(acceptedSideJob).EntityPrototype;
+            var acceptedSideJobProto = Prototype(sideJob);
             if (acceptedSideJobProto is not null && acceptedSideJobProto.ID == sideJobProtoId)
                 return false;
         }

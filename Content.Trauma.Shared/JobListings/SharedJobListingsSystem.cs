@@ -2,13 +2,13 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Timing;
+using Robust.Shared.Containers;
 using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Common.JobListings;
-using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -21,10 +21,14 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedUserInterfaceSystem Ui = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
+    [Dependency] private INetManager _net = default!;
     [Dependency] protected SharedMindSystem Mind = default!;
     [Dependency] protected SharedHandsSystem Hands = default!;
-    [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
-    [Dependency] private INetManager _net = default!;
+    [Dependency] protected EntityQuery<JobListingsComponent> JobListingsQuery = default!;
+    [Dependency] protected EntityQuery<SideJobComponent> SideJobQuery = default!;
+    [Dependency] protected EntityQuery<MindComponent> MindQuery = default!;
+    [Dependency] protected EntityQuery<ObjectiveComponent> ObjectiveQuery = default!;
+    [Dependency] private EntityQuery<JobListingsOwnerComponent> _jobListingsOwnerQuery = default!;
 
     /// <summary>
     /// Accept an already assigned job.
@@ -35,7 +39,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
             return false;
         if (!jobBoard.Comp.AvailableSideJobs.Contains(sideJob))
             return false;
-        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return false;
 
         Container.Remove(sideJob, jobBoard.Comp.AvailableSideJobs);
@@ -66,14 +70,15 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
-        if (jobBoard.Comp.Mind is null)
+        if (jobBoard.Comp.Mind is not { } netMind)
             return;
-        if (!TryComp<MindComponent>(GetEntity(jobBoard.Comp.Mind.Value), out var mindComp))
+        var mind = GetEntity(netMind);
+        if (!MindQuery.TryComp(mind, out var mindComp))
             return;
-        var progress = Objectives.GetProgress(sideJob, (GetEntity(jobBoard.Comp.Mind.Value), mindComp));
+        var progress = Objectives.GetProgress(sideJob, (mind, mindComp));
         if (progress < 0.999f)
             return;
-        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return;
 
         Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs);
@@ -86,7 +91,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 
         if (!sideJobComp.Repeatable)
         {
-            var availableSideJobProto = MetaData(sideJob).EntityPrototype;
+            var availableSideJobProto = Prototype(sideJob);
             if (availableSideJobProto is not null)
                 jobBoard.Comp.CompletedObjectives.Add(availableSideJobProto.ID);
         }
@@ -108,9 +113,9 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         var mind = GetEntity(jobBoard.Comp.Mind);
         if (mind is null)
             return false;
-        if (!TryComp<ObjectiveComponent>(sideJob, out var objectiveComp))
+        if (!ObjectiveQuery.TryComp(sideJob, out var objectiveComp))
             return false;
-        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return false;
         if (sideJobComp.Reward is null || sideJobComp.RewardName is null)
             return false;
@@ -227,10 +232,10 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         jobBoard = null;
 
-        if (!TryComp<RemoteJobListingsComponent>(owner, out var remoteComp))
+        if (!_jobListingsOwnerQuery.TryComp(owner, out var remoteComp))
             return false;
         var jobListings = GetEntity(remoteComp.JobListings);
-        if (!TryComp<JobListingsComponent>(jobListings, out var jobListingsComp))
+        if (!JobListingsQuery.TryComp(jobListings, out var jobListingsComp))
             return false;
 
         jobBoard = (jobListings, jobListingsComp);
