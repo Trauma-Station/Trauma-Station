@@ -27,7 +27,7 @@ public sealed partial class JobListingsBUI : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not Common.JobListings.JobListingsBUI jobState)
+        if (state is not JobListingsBUIState jobState)
             return;
         if (_menu is null)
             return;

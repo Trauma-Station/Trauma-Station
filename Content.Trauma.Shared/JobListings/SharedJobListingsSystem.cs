@@ -183,7 +183,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
                 acceptedSideJobsInfos.Add(info.Value);
         }
 
-        var state = new JobListingsBUI(
+        var state = new JobListingsBUIState(
             availableSideJobInfos,
             acceptedSideJobsInfos,
             jobBoard.Value.Comp.Reputation,
