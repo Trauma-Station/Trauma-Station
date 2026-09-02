@@ -67,7 +67,7 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Concealment of Identity</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
-      The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA. You may hold anyone who is failing to show their company-mandated ID/PDA until it is otherwise acquired or a new one is issued.
+      The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA. Refer to Special Punishments, clause 1.1
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Public Intoxication</Box></ColorBox>
     <ColorBox Color="#1b5712"><Box HorizontalAlignment="Left" Margin="4">
@@ -242,11 +242,11 @@
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Dereliction of Duty</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion. Not to be punished with brig time.
+      The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Gross Failure of Standards</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
-      If a member of security grossly over-escalates or otherwise violates Corporate Law and the Charter of Rights, they are to be immediately demoted to cadet as reduction of access. Further violations are to be punished through application of non-standard violations to escalate to a Type 4 Violation, and to result in immediate demotion to D-Class.
+      The act of, as a member of Security, grossly over-escalating, violating Corporate Law, and/or breaking the Rights Charter. Refer to Special Punishments, clause 3.2
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Abandonment of Occupation</Box></ColorBox>
     <ColorBox Color="#734225"><Box HorizontalAlignment="Left" Margin="4">
@@ -377,11 +377,11 @@
   <Table Columns="2">
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Managerial Incompetence</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      The act of lacking the necessary skill, knowledge, quality or decorum to perform a job or duty. They are to be immediately demoted to D-Class.
+      The act of lacking the necessary skill, knowledge, quality or decorum to perform a job or duty. Refer to Special Punishments, clause 4.1
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Insanity</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
-      The act of being irrational, mentally ill, extremely unreasonable or otherwise not of sound mind, such as engaging in excessively manic or bizarre behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. If they fail the evaluation, a treatment plan shall be issued and the command member's access shall be reduced until said treatment is completed.
+      The act of being irrational, mentally ill, extremely unreasonable or otherwise not of sound mind, such as engaging in excessively manic or bizarre behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. Refer to Special Punishments, clause 4.2
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Embezzlement</Box></ColorBox>
     <ColorBox Color="#5c1417"><Box HorizontalAlignment="Left" Margin="4">
