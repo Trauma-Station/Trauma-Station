@@ -15,7 +15,6 @@ public sealed partial class ReactiveArmourSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    // No. This hould not be predicted on client.
     // there has to be a better way to do this then making 3 methods for differen types of attacks... also do we even need a methot for hitscans?
     [ SubscribeLocalEvent ]
     private void OnHitMele(EntityUid uid, ReactiveArmourComponent comp, InventoryRelayedEvent<AttackedEvent> args)
