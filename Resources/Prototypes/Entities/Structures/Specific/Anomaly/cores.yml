@@ -157,8 +157,6 @@
     energy: 3.5
     color: "#00ccff"
     castShadows: false
-    tags:
-    - AnomalyCoreBluespace
 
 - type: entity
   parent: BaseAnomalyCore
