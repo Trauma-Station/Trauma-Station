@@ -29,6 +29,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     [Dependency] protected EntityQuery<MindComponent> MindQuery = default!;
     [Dependency] protected EntityQuery<ObjectiveComponent> ObjectiveQuery = default!;
     [Dependency] private EntityQuery<JobListingsOwnerComponent> _jobListingsOwnerQuery = default!;
+    [Dependency] private EntityQuery<RemoteJobListingsComponent> _remoteJobListingsQuery = default!;
 
     /// <summary>
     /// Accept an already assigned job.
@@ -152,7 +153,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 
     /// <summary>
     /// Cache the side job's progress and replicate it to the client.
-    /// Can only be done by the server because too much objectives are server-side.
+    /// Can only be done by the server because too many objectives are server-side.
     /// </summary>
     protected virtual void UpdateAllSideJobs(Entity<JobListingsComponent> jobBoard)
     {
@@ -216,10 +217,10 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         if (mind.Comp.OwnedEntity is null)
             return;
-        if (!TryComp<JobListingsOwnerComponent>(mind.Owner, out var jobListingsOwnerComp))
+        if (!_jobListingsOwnerQuery.TryComp(mind.Owner, out var jobListingsOwnerComp))
             return;
         var jobBoard = GetEntity(jobListingsOwnerComp.JobListings);
-        if (!TryComp<JobListingsComponent>(jobBoard, out var jobBoardComp))
+        if (!JobListingsQuery.TryComp(jobBoard, out var jobBoardComp))
             return;
 
         UpdateUi((jobBoard, jobBoardComp), mind.Comp.OwnedEntity.Value);
@@ -232,7 +233,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         jobBoard = null;
 
-        if (!_jobListingsOwnerQuery.TryComp(owner, out var remoteComp))
+        if (!_remoteJobListingsQuery.TryComp(owner, out var remoteComp))
             return false;
         var jobListings = GetEntity(remoteComp.JobListings);
         if (!JobListingsQuery.TryComp(jobListings, out var jobListingsComp))

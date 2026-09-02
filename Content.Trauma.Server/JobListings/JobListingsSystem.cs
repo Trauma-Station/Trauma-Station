@@ -20,7 +20,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <summary>
     /// Assign the store owner a random side job.
     /// When the traitor is assigned their uplink, the traitor's mind becomes the store's owner.
-    /// This has to be server-side because predicting spawning null space entities is not possible.
+    /// This has to be server-side because too many objective event handlers are server-side.
     /// </summary>
     public bool AssignSideJob(Entity<JobListingsComponent> jobBoard, int effectiveLevel)
     {
@@ -172,7 +172,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (jobBoard.Comp.Mind is null)
             return;
         var mind = GetEntity(jobBoard.Comp.Mind);
-        if (!TryComp<MindComponent>(mind, out var mindComp))
+        if (!MindQuery.TryComp(mind, out var mindComp))
             return;
         var progress = _objectives.GetProgress(sideJob.Owner, (mind.Value, mindComp));
         if (progress is null)
@@ -185,14 +185,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
         {
-            if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
                 return;
             UpdateSideJob(jobBoard, (sideJob, sideJobComp));
         }
 
         foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
         {
-            if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
                 return;
             UpdateSideJob(jobBoard, (sideJob, sideJobComp));
         }
@@ -201,11 +201,11 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     [SubscribeLocalEvent]
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
-        if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
+        if (!JobListingsQuery.TryComp(args.Uplink, out var jobListingsComp))
             return;
         if (Mind.GetMind(args.User) is not { } mind)
             return;
-        if (!TryComp<MindComponent>(mind, out var mindComp))
+        if (!MindQuery.TryComp(mind, out var mindComp))
             return;
 
         // set mind
@@ -223,7 +223,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     [SubscribeLocalEvent]
     private void OnUplinkLinked(ref UplinkLinkedEvent args)
     {
-        if (!TryComp<JobListingsComponent>(args.Uplink, out var jobListingsComp))
+        if (!JobListingsQuery.TryComp(args.Uplink, out var jobListingsComp))
             return;
 
         Link((args.Uplink, jobListingsComp), args.Host);

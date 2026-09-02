@@ -9,8 +9,6 @@ namespace Content.Trauma.Client.JobListings;
 [UsedImplicitly]
 public sealed partial class JobListingsBUI : BoundUserInterface
 {
-    [Dependency] private IGameTiming _timing = default!;
-
     public JobListingsBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _menu = this.CreateWindow<JobListingsMenu>();
