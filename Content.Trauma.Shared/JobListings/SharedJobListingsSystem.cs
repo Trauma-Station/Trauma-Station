@@ -8,6 +8,7 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Common.JobListings;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -19,6 +20,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     [Dependency] protected SharedObjectivesSystem Objectives = default!;
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedUserInterfaceSystem Ui = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
     [Dependency] protected SharedMindSystem Mind = default!;
     [Dependency] protected SharedHandsSystem Hands = default!;
     [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
@@ -31,14 +33,13 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs)
             return false;
-        if (!jobBoard.Comp.AvailableSideJobs.Contains(GetNetEntity(sideJob)))
+        if (!jobBoard.Comp.AvailableSideJobs.Contains(sideJob))
             return false;
         if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
             return false;
 
-        jobBoard.Comp.AvailableSideJobs.Remove(GetNetEntity(sideJob));
-        jobBoard.Comp.AcceptedSideJobs.Add(GetNetEntity(sideJob));
-        DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.AcceptedSideJobs));
+        Container.Remove(sideJob, jobBoard.Comp.AvailableSideJobs);
+        Container.Insert(sideJob, jobBoard.Comp.AcceptedSideJobs);
 
         if (sideJobComp.Tool is { } toolProto)
         {
@@ -56,8 +57,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
-        jobBoard.Comp.AcceptedSideJobs.Remove(GetNetEntity(sideJob));
-        DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AcceptedSideJobs));
+        Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs);
         PredictedQueueDel(sideJob);
     }
 
@@ -76,8 +76,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
             return;
 
-        jobBoard.Comp.AcceptedSideJobs.Remove(GetNetEntity(sideJob));
-        DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AcceptedSideJobs));
+        Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs);
 
         if (sideJobComp.Reward is not null)
         {
@@ -166,16 +165,16 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         UpdateAllSideJobs(jobBoard.Value);
 
         var availableSideJobInfos = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Value.Comp.AvailableSideJobs)
+        foreach (var sideJob in jobBoard.Value.Comp.AvailableSideJobs.ContainedEntities)
         {
-            if (GetInfo(GetEntity(sideJob), jobBoard.Value, out var info))
+            if (GetInfo(sideJob, jobBoard.Value, out var info))
                 availableSideJobInfos.Add(info.Value);
         }
 
         var acceptedSideJobsInfos = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs)
+        foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs.ContainedEntities)
         {
-            if (GetInfo(GetEntity(sideJob), jobBoard.Value, out var info))
+            if (GetInfo(sideJob, jobBoard.Value, out var info))
                 acceptedSideJobsInfos.Add(info.Value);
         }
 
@@ -230,10 +229,11 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 
         if (!TryComp<RemoteJobListingsComponent>(owner, out var remoteComp))
             return false;
-        if (!TryComp<JobListingsComponent>(GetEntity(remoteComp.JobListings), out var jobListingsComp))
+        var jobListings = GetEntity(remoteComp.JobListings);
+        if (!TryComp<JobListingsComponent>(jobListings, out var jobListingsComp))
             return false;
 
-        jobBoard = (GetEntity(remoteComp.JobListings), jobListingsComp);
+        jobBoard = (jobListings, jobListingsComp);
         return true;
     }
 
@@ -281,9 +281,13 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public virtual void Refresh(Entity<JobListingsComponent> jobBoard)
     {
-        jobBoard.Comp.AvailableSideJobs.Clear();
+        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
+        {
+            PredictedQueueDel(sideJob);
+        }
+        Container.EmptyContainer(jobBoard.Comp.AcceptedSideJobs);
         jobBoard.Comp.BonusRefresh = false;
-        DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.AvailableSideJobs), nameof(JobListingsComponent.BonusRefresh));
+        DirtyField(jobBoard, jobBoard.Comp, nameof(JobListingsComponent.BonusRefresh));
         SetRefreshTime(jobBoard);
     }
 
@@ -315,6 +319,13 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         if (newLevel > oldLevel)
             jobBoard.Comp.BonusRefresh = true;
         DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.Reputation), nameof(JobListingsComponent.BonusRefresh));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<JobListingsComponent> ent, ref ComponentStartup args)
+    {
+        ent.Comp.AvailableSideJobs = Container.EnsureContainer<Container>(ent, JobListingsComponent.AvailableSideJobsContainerId);
+        ent.Comp.AcceptedSideJobs = Container.EnsureContainer<Container>(ent, JobListingsComponent.AcceptedSideJobsContainerId);
     }
 
     [SubscribeLocalEvent]

@@ -76,9 +76,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             var ev2 = new ObjectiveAfterAssignEvent(mind, mindComp, objectiveComp, MetaData(sideJob));
             RaiseLocalEvent(sideJob, ref ev2);
 
-            jobBoard.Comp.AvailableSideJobs.Add(GetNetEntity(sideJob));
-            DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.AvailableSideJobs));
-            PVSOverrideEntity((mind, mindComp), sideJob);
+            Container.Insert(sideJob, jobBoard.Comp.AvailableSideJobs);
             return true;
         }
 
@@ -94,15 +92,15 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (jobBoard.Comp.CompletedObjectives.Contains(sideJobProtoId))
             return false;
 
-        foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs)
+        foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
         {
-            var availableSideJobProto = MetaData(GetEntity(availableSideJob)).EntityPrototype;
+            var availableSideJobProto = MetaData(availableSideJob).EntityPrototype;
             if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
                 return false;
         }
-        foreach (var acceptedSideJob in jobBoard.Comp.AcceptedSideJobs)
+        foreach (var acceptedSideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
         {
-            var acceptedSideJobProto = MetaData(GetEntity(acceptedSideJob)).EntityPrototype;
+            var acceptedSideJobProto = MetaData(acceptedSideJob).EntityPrototype;
             if (acceptedSideJobProto is not null && acceptedSideJobProto.ID == sideJobProtoId)
                 return false;
         }
@@ -149,12 +147,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
         base.Refresh(jobBoard);
-
-        foreach (var job in jobBoard.Comp.AvailableSideJobs)
-        {
-            QueueDel(GetEntity(job));
-        }
-
         FillSideJobs(jobBoard);
     }
 
@@ -191,18 +183,18 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
     protected override void UpdateAllSideJobs(Entity<JobListingsComponent> jobBoard)
     {
-        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs)
+        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
         {
-            if (!TryComp<SideJobComponent>(GetEntity(sideJob), out var sideJobComp))
+            if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
                 return;
-            UpdateSideJob(jobBoard, (GetEntity(sideJob), sideJobComp));
+            UpdateSideJob(jobBoard, (sideJob, sideJobComp));
         }
 
-        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs)
+        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
         {
-            if (!TryComp<SideJobComponent>(GetEntity(sideJob), out var sideJobComp))
+            if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
                 return;
-            UpdateSideJob(jobBoard, (GetEntity(sideJob), sideJobComp));
+            UpdateSideJob(jobBoard, (sideJob, sideJobComp));
         }
     }
 

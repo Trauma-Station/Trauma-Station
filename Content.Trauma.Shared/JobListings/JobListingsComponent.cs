@@ -33,10 +33,16 @@ public sealed partial class JobListingsComponent : Component
     public List<EntProtoId> PrioritySideJobOffers = new();
 
     /// <summary>
-    /// The list of available side jobs which can be accepted by the traitor.
+    /// The ID of the AvailableSideJobs container.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<NetEntity> AvailableSideJobs = new();
+    [ViewVariables]
+    public const string AvailableSideJobsContainerId = "available_side_jobs";
+
+    /// <summary>
+    /// The container of the side jobs which can be accepted by the traitor.
+    /// </summary>
+    [ViewVariables]
+    public Container AvailableSideJobs;
 
     /// <summary>
     /// How many jobs can be accepted at once.
@@ -53,11 +59,14 @@ public sealed partial class JobListingsComponent : Component
     [DataField, AutoNetworkedField]
     public int SideJobsPerLevel;
 
+    [ViewVariables]
+    public const string AcceptedSideJobsContainerId = "accepted_side_jobs";
+
     /// <summary>
-    /// The list of side jobs the traitor has accepted.
+    /// The container of the side jobs the traitor has accepted.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<NetEntity> AcceptedSideJobs = new();
+    [ViewVariables]
+    public Container AcceptedSideJobs;
 
     /// <summary>
     ///  The mind of the person (probably traitor) who owns the job board.
