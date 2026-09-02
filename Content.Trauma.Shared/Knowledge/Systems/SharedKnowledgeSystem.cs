@@ -468,6 +468,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public EntityUid? RemoveKnowledge(EntityUid target, [ForbidLiteral] EntProtoId id, bool force = false)
     {
         if (GetContainer(target) is not { } ent ||
+            TerminatingOrDeleted(ent) || // don't bother removing the knowledge if the brain etc is being deleted
             ent.Comp.Holder is not { } holder ||
             ent.Comp.Container is not { } container ||
             GetKnowledge(ent, id) is not { } unit ||
