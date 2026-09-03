@@ -81,6 +81,7 @@
     back: ClothingBackpack
     head: ClothingHeadHelmetCult
     neck: BedsheetCult
+    mask: ClothingMaskDemonologist
     outerClothing: ClothingOuterRobesDemonologist
     shoes: ClothingShoesCult
     id: DemonologistPDA

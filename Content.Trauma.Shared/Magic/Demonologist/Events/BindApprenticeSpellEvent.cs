@@ -11,6 +11,7 @@ public sealed partial class BindApprenticeSpellEvent : EntityTargetActionEvent
     {
         {"outerClothing", "ClothingOuterRobesDemonologist"},
         {"jumpsuit", "ClothingUniformJumpsuitColorBlack"}, // TODO: add more once graves sprites more
+        {"mask", "ClothingMaskDemonologist"}
     };
 
     [DataField]
