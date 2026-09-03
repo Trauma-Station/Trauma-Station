@@ -24,7 +24,6 @@
     spawned:
     - id: MaterialWoodPlank1 # "bones"
       amount: 3
-  - !Remove type: DamageVisuals
 
 - type: entity
   id: OrganDionaTorso

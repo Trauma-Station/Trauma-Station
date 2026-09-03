@@ -87,13 +87,15 @@
         prototype: DionaThirst
   - type: Damageable
     damageModifierSet: Diona
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
-        color: "#cd7314"
-      Burn:
-        sprite: Mobs/Effects/burn_damage.rsi
+  # <Trauma>
+  #- type: DamageVisuals
+  #  damageOverlayGroups:
+  #    Brute:
+  #      sprite: Mobs/Effects/brute_damage.rsi
+  #      color: "#cd7314"
+  #    Burn:
+  #      sprite: Mobs/Effects/burn_damage.rsi
+  # </Trauma>
   - type: Butcherable
     spawned:
       - id: FoodMeatPlant
