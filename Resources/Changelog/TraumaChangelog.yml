@@ -14079,3 +14079,10 @@ Entries:
   id: 1536
   time: '2026-09-01T17:40:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4407
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed nailgun execution crashing server.
+  id: 1537
+  time: '2026-09-03T05:06:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4425
