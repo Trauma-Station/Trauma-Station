@@ -1,0 +1,13 @@
+# Medical rescue module
+- type: entity
+  id: BorgModuleRescue
+  components:
+  - type: ItemBorgModule
+    hands:
+    - item: BodyBagFolded
+      hand:
+        emptyLabel: borg-slot-body-bag-folded-empty
+        emptyRepresentative: BodyBagFolded
+        whitelist:
+          tags:
+          - BodyBag
