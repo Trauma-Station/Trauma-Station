@@ -60,7 +60,6 @@
       FootRight: OrganDionaFootRight
       Brain: OrganDionaBrainNymphing
       Eyes: OrganDionaEyes
-      Tongue: OrganDionaTongue # Trauma
       Lungs: OrganDionaLungsNymphing
       Stomach: OrganDionaStomachNymphing
   - type: HumanoidProfile
@@ -73,16 +72,6 @@
   id: MobDiona
   name: Urist McPlants
   components:
-  # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - RootSpeak
-    understands:
-    - TauCetiBasic
-    - RootSpeak
-  - type: FoliageIgnoringVision
-  # </Trauma>
   - type: Respirator
     damage:
       types:
@@ -98,19 +87,19 @@
         prototype: DionaThirst
   - type: Damageable
     damageModifierSet: Diona
-  #- type: DamageVisuals # Shitmed
+  # <Trauma>
+  #- type: DamageVisuals
   #  damageOverlayGroups:
   #    Brute:
   #      sprite: Mobs/Effects/brute_damage.rsi
   #      color: "#cd7314"
   #    Burn:
   #      sprite: Mobs/Effects/burn_damage.rsi
+  # </Trauma>
   - type: Butcherable
     spawned:
       - id: FoodMeatPlant
         amount: 5
-      - id: MaterialWoodPlank1 # Trauma - Bones on butchering humanoids. I AM NO TREE IM AN ENT.
-        amount: 3
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -182,8 +171,6 @@
     allowedStates:
     - Dead
   - type: Rootable
-  - type: Viewcone
-    baseConeAngle: 360
 
 - type: entity
   parent: OrganBaseOrganic
@@ -230,7 +217,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald tree
+  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald trees
   id: OrganDionaHead
 
 - type: entity
