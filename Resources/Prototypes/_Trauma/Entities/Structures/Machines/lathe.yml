@@ -223,6 +223,9 @@
     color: "#ffffff"
     radius: 1.5
     energy: 5.0
+  - type: AlternateUI
+    key: enum.OreSiloUiKey.Key
+    verbText: Open Ore Silo UI
   - type: OreSilo
     range: 15
   - type: MasterSiloClient # theft
