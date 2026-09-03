@@ -33,30 +33,3 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Rancher
   jobName: job-name-rancher
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconSyndicateCommander
-  icon:
-    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
-    state: SyndicateCommander
-  jobName: job-name-syndicate-commander
-  isCrewJob: false
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconSyndicateCorpsman
-  icon:
-    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
-    state: SyndicateCorpsman
-  jobName: job-name-syndicate-corpsman
-  isCrewJob: false
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconSyndicateOperative
-  icon:
-    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
-    state: SyndicateOperative
-  jobName: job-name-syndicate-operative
-  isCrewJob: false
