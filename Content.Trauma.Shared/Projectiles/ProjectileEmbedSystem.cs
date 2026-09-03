@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Projectiles;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Projectiles;
 
