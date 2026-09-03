@@ -14086,3 +14086,12 @@ Entries:
   id: 1537
   time: '2026-09-03T05:06:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4425
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed pizza bomb, you can't use it as a insta-nugget hand grenade
+      anymore.
+  id: 1538
+  time: '2026-09-03T05:59:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4420
