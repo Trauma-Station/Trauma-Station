@@ -109,6 +109,11 @@ public sealed partial class GunExecutionSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnCartridgeAmmoImpact(Entity<CartridgeAmmoComponent> ent, ref AmmoImpactEvent args)
     {
+        // If it is a projectile ignore cartridge ammo logic
+        // Likely it just shoots itself and causes infinite events to be raised
+        if (_projectileQuery.HasComp(ent))
+            return;
+
         args.Handled = true; // the cartridge won't do anything by itself
         if (ent.Comp.Spent)
         {
@@ -330,8 +335,12 @@ public sealed partial class GunExecutionSystem : EntitySystem
 
         if (!ev.Handled)
         {
-            if (_projectileQuery.HasComp(ammo))
+            if (_projectileQuery.TryComp(ammo, out var projectile))
+            {
+                // In case OnlyCollideWhenShot is true, it dosn't do damage if Weapon is null
+                projectile.Weapon = gun;
                 _projectile.DoHit(ammo, target); // bullets
+            }
             else
                 DoThrowHit(ammo, shooter, target); // knives (pneumatic cannon)
         }
