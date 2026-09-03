@@ -14095,3 +14095,10 @@ Entries:
   id: 1538
   time: '2026-09-03T05:59:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4420
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dionae can no longer have hearts, kidneys or livers transplanted.
+  id: 1539
+  time: '2026-09-03T08:08:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4427
