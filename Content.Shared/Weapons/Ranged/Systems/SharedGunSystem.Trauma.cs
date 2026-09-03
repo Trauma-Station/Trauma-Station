@@ -39,7 +39,7 @@ public abstract partial class SharedGunSystem
         var damage = ent.Comp.Damage * Damageable.UniversalProjectileDamageModifier;
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damage), Loc.GetString("damage-projectile"));
 
-        var ap = GetProjectilePenetration(ent.Comp.Prototype);
+        var ap = GetProjectilePenetration(ent.Comp);
         if (ap == 0)
             return;
 
