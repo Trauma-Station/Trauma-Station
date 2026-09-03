@@ -205,16 +205,3 @@
       EARS: ClothingHeadsetService
       BELT: ClothingBeltJanitorFilled
     removeWhenCuffed: false
-
-- type: entity
-  parent: MobStatusEffectDebuff
-  id: StatusEffectForcedItemArmblade
-  name: forced armblade
-  components:
-  - type: ForcedItemStatusEffect
-    handItems:
-    - ArmbladeDull
-    spawnSound:
-      collection: gib # Same as ActionRetractableItemArmblade
-    despawnSound:
-      collection: gib # Same as ActionRetractableItemArmblade
