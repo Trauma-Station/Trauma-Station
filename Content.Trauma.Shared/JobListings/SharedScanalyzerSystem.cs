@@ -128,7 +128,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         if (!ProtoMan.Resolve(ent.Comp.StealTarget, out var target))
             return;
         args.PushMarkup(Loc.GetString("scanalyzer-examine-steal-target", ("target", Loc.GetString(target.Name))));
-        args.PushMarkup($"scanalyzer-examine-{(ent.Comp.Used ? "used" : "not-used")}");
+        args.PushMarkup(Log.GetString($"scanalyzer-examine-{(ent.Comp.Used ? "used" : "not-used")}"));
     }
 }
 
