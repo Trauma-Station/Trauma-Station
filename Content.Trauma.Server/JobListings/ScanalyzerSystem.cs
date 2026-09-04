@@ -18,4 +18,14 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
         if (IsScanned((args.MindId, args.Mind), stealComp.StealGroup))
             args.Progress = 1.0f;
     }
+
+    [SubscribeLocalEvent]
+    private void OnToolSpawned(Entity<ScanalyzerComponent> ent, ref SideJobToolSpawned args)
+    {
+        if (!TryComp<StealConditionComponent>(args.Objective, out var objComp))
+            return;
+
+        ent.Comp.StealTarget ??= objComp.StealGroup;
+        Dirty(ent);
+    }
 }

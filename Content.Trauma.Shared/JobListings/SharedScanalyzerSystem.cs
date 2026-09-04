@@ -130,16 +130,6 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         args.PushMarkup(Loc.GetString("scanalyzer-examine-steal-target", ("target", Loc.GetString(target.Name))));
         args.PushMarkup($"scanalyzer-examine-{(ent.Comp.Used ? "used" : "not-used")}");
     }
-
-    [SubscribeLocalEvent]
-    private void OnToolSpawned(Entity<ScanalyzerComponent> ent, ref SideJobToolSpawned args)
-    {
-        if (!TryComp<StealTargetComponent>(args.Objective, out var objComp))
-            return;
-
-        ent.Comp.StealTarget ??= objComp.StealGroup;
-        Dirty(ent);
-    }
 }
 
 /// <summary>
