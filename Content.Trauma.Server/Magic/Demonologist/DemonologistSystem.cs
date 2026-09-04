@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Server.Antag;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Server.Mind;
@@ -10,7 +9,6 @@ using Content.Server.Roles;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Atmos.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Clothing.Components;
@@ -18,7 +16,6 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Stunnable;
-using Content.Shared.Temperature.Systems;
 using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Shared.Magic.Demonologist;
 using Content.Trauma.Shared.Magic.Demonologist.Components;
@@ -35,20 +32,17 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
 {
     [Dependency] private SharedAccessSystem _access = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
-    [Dependency] private FlammableSystem _flammable = default!;
     [Dependency] private SharedIdCardSystem _idCard = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private RoleSystem _roles = default!;
     [Dependency] private SharedStunSystem _stun = default!;
-    [Dependency] private SharedTemperatureSystem _temperature = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private ChatSystem _chat = default!;
 
     private readonly Dictionary<EntityUid, (HashSet<ProtoId<AccessLevelPrototype>> saved, TimeSpan restoreAt)> _cursedAccess = new();
-
 
     private const float UIUpdateInterval = 5.0f;
 
@@ -84,23 +78,6 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
             if (_uiSystem.IsUiOpen(uid, DemonicAnnouncementUiKey.Key))
                 UpdateDemonicConsoleInterface((uid, demo));
         }
-    }
-
-    [SubscribeLocalEvent]
-    private void OnBloodBoil(BloodBoilSpellEvent args)
-    {
-        _temperature.ChangeHeat(args.Target, 350000f, true);
-        args.Handled = true;
-    }
-
-    [SubscribeLocalEvent]
-    private void OnCombustion(CombustionSpellEvent args)
-    {
-        if (!TryComp<FlammableComponent>(args.Target, out var flammable))
-            return;
-
-        _flammable.AdjustFireStacks(args.Target, flammable!.MaximumFireStacks, flammable, ignite: true);
-        args.Handled = true;
     }
 
     [SubscribeLocalEvent]

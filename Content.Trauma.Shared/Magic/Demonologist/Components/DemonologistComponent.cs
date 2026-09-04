@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Magic.Demonologist.Components;
 public sealed partial class DemonologistComponent : Component
 {
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "DemonologistFaction";
+    public ProtoId<FactionIconPrototype> StatusIcon = "DemonologistFaction";
 
     [DataField]
     public float UIUpdateAccumulator;

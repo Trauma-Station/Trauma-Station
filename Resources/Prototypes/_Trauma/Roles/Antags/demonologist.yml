@@ -33,6 +33,7 @@
     sound: /Audio/_Trauma/Demonologist/demonologist.ogg
   startingGear: DemonologistStartingGear
   components:
+  - type: Demonologist
   - type: RandomMetadata
     nameSegments:
     - NamesDemonologistFirst

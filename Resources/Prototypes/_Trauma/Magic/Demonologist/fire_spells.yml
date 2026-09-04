@@ -8,11 +8,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 20
     itemIconStyle: BigAction
+    raiseOnAction: true
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg
-  - type: Sprite # TODO: Placeholder
+  - type: Sprite
     sprite: _Goobstation/Wizard/actions.rsi
     layers:
     - state: mindswap
@@ -21,17 +22,24 @@
     interactOnMiss: false
   - type: EntityTargetAction
     canTargetSelf: false
-    event: !type:CombustionSpellEvent
+    event: !type:EffectTargetActionEvent
+  - type: EffectAction
+    effects:
+    - !type:Flammable
+      multiplier: 10
+    - !type:Ignite
 
 - type: entity
   parent: BaseAction
   id: ActionBloodBoil
   name: Blood Boil
   description: Boil the target's blood.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 20
     itemIconStyle: BigAction
+    raiseOnAction: true
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg
   - type: Sprite
@@ -43,4 +51,8 @@
     interactOnMiss: false
   - type: EntityTargetAction
     canTargetSelf: false
-    event: !type:BloodBoilSpellEvent
+    event: !type:EffectTargetActionEvent
+  - type: EffectAction
+    effects:
+    - !type:AdjustTemperature
+      amount: 2000000 # Around half the hp of naked urist

@@ -8,5 +8,5 @@ namespace Content.Trauma.Shared.Magic.Demonologist.Components;
 public sealed partial class DemonologistApprenticeComponent : Component
 {
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "DemonologistApprenticeFaction";
+    public ProtoId<FactionIconPrototype> StatusIcon = "DemonologistApprenticeFaction";
 }
