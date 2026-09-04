@@ -14111,3 +14111,20 @@ Entries:
   id: 1540
   time: '2026-09-03T17:16:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4428
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      You can now alt-click a rev telesphere to link machines to its silo
+      resources.
+  - type: Fix
+    message: Fixed xenoborg tile gun getting broken by embedded tiles.
+  - type: Fix
+    message: Xenoborgs can now toggle the magnet on their storage.
+  - type: Tweak
+    message: >-
+      Xenoborg deflectors no longer despawn, you still lose them if they get
+      destroyed.
+  id: 1541
+  time: '2026-09-04T00:09:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4433
