@@ -59,18 +59,16 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
         var now = _timing.CurTime;
         var toRestore = new List<EntityUid>();
 
-        foreach (var (target, (_, restoreAt)) in _cursedAccess)
+        foreach (var (idCard, data) in _cursedAccess)
         {
-            if (now >= restoreAt)
-                toRestore.Add(target);
+            if (!Exists(idCard) || now >= data.restoreAt)
+                toRestore.Add(idCard);
         }
 
-        foreach (var target in toRestore)
+        foreach (var idCard in toRestore)
         {
-            if (_idCard.TryFindIdCard(target, out var id))
-                _access.TrySetTags(id, _cursedAccess[target].saved.ToList());
-
-            _cursedAccess.Remove(target);
+            if (_cursedAccess.Remove(idCard, out var data) && Exists(idCard) && TryComp<AccessComponent>(idCard, out _))
+                _access.TrySetTags(idCard, data.saved.ToList());
         }
 
         var query = EntityQueryEnumerator<DemonologistComponent, CommunicationsConsoleComponent>();
@@ -120,7 +118,7 @@ public sealed partial class DemonologistSystem : SharedDemonologistSystem
             return;
         }
 
-        _cursedAccess[args.Target] = (new HashSet<ProtoId<AccessLevelPrototype>>(access.Tags), _timing.CurTime + TimeSpan.FromSeconds(20));
+        _cursedAccess[id] = (new HashSet<ProtoId<AccessLevelPrototype>>(access.Tags), _timing.CurTime + TimeSpan.FromSeconds(20));
 
         _access.TrySetTags(id, new List<ProtoId<AccessLevelPrototype>>());
         _stun.TryUpdateParalyzeDuration(args.Target, TimeSpan.FromSeconds(2));

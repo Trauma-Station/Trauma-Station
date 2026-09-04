@@ -196,7 +196,7 @@
   - type: CommunicationsConsole
     title: demonologist-announcement-title
     color: "#990000"
-    delay: 60
+    delay: 120
     initialDelay: 0
     canShuttle: false
     global: true
