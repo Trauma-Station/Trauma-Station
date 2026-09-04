@@ -43,7 +43,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return false;
 
-        Container.Remove(sideJob, jobBoard.Comp.AvailableSideJobs);
         Container.Insert(sideJob, jobBoard.Comp.AcceptedSideJobs);
 
         if (sideJobComp.Tool is { } toolProto)
@@ -62,7 +61,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
-        Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs);
         PredictedQueueDel(sideJob);
     }
 
@@ -81,8 +79,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
             return;
         if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return;
-
-        Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs);
 
         if (sideJobComp.Reward is not null)
         {
@@ -287,11 +283,12 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public virtual void Refresh(Entity<JobListingsComponent> jobBoard)
     {
-        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
+        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
         {
             PredictedQueueDel(sideJob);
         }
-        Container.EmptyContainer(jobBoard.Comp.AcceptedSideJobs);
+        // empty because otherwise predicted del wont delete in time before the ui is updated
+        Container.EmptyContainer(jobBoard.Comp.AvailableSideJobs);
         jobBoard.Comp.BonusRefresh = false;
         DirtyField(jobBoard, jobBoard.Comp, nameof(JobListingsComponent.BonusRefresh));
         SetRefreshTime(jobBoard);
