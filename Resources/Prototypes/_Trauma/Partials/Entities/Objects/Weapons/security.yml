@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: Stunbaton
+  components:
+  - type: WeaponClass
+    class: NonLethal
+  - type: DelayedKnockdownOnHit
+    useDelay: stunbaton
+  - type: UseDelayBlockMelee
+    delays:
+    - stunbaton
+  - type: KnowledgeGrantOnWear
+    blocked:
+      MartialArtCorporateJudo: true
+  - type: MeleeWeapon
+    angle: 0 # no more wideswing
+  - type: StaminaDamageOnHit
+    damage: 15 # now 55 total over time
+    overtime: 5
+    lightAttackOvertimeDamageMultiplier: 4
+    lightAttackDamageMultiplier: 4
+  - !Remove type: StaminaDamageOnCollide
+  - !Remove type: LandAtCursor
+  - type: UseDelay
+    delays:
+      stunbaton:
+        length: 2.5
+  - type: Item
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+
+- type: entity
+  id: Truncheon
+  components:
+  - type: WeaponClass
+    class: Bludgeon
+  - type: KnowledgeGrantOnWear
+    blocked:
+      MartialArtCorporateJudo: true
+  - type: MeleeWeapon
+    animationRotation: -45
+  - type: Item
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+
+- type: entity
+  id: Flash
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/component_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/component_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/component_drop.ogg
+  - type: Tag
+    tags:
+    - Flash
