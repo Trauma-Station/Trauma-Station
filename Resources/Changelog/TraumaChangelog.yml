@@ -14102,3 +14102,12 @@ Entries:
   id: 1539
   time: '2026-09-03T08:08:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4427
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Abductors no longer get a gland task for slimes or diona since they have
+      no heart slot.
+  id: 1540
+  time: '2026-09-03T17:16:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4428
