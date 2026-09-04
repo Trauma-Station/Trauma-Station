@@ -55,6 +55,7 @@ public sealed partial class AntiTamperSystem : EntitySystem
         if (respectCooldown && _timing.CurTime - ent.Comp.LastAlarm < ent.Comp.AlarmCooldown)
             return;
 
+        // we will play at its coordinates because of the entity being possibly destroyed
         _audio.PlayPvs(ent.Comp.AlarmSound, Transform(ent).Coordinates);
 
         ent.Comp.LastAlarm = _timing.CurTime;
