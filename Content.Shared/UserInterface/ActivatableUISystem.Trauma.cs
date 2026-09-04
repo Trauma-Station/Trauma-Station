@@ -5,11 +5,7 @@ namespace Content.Shared.UserInterface;
 
 public sealed partial class ActivatableUISystem
 {
-    private void InitializeTrauma()
-    {
-        SubscribeLocalEvent<ActivatableUIComponent, GetVerbsEvent<AlternativeVerb>>(GetAltVerb);
-    }
-
+    [SubscribeLocalEvent]
     private void GetAltVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!component.AltVerb || !ShouldAddVerb(uid, component, args))
