@@ -8,6 +8,7 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
+using System.Linq;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -147,6 +148,12 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
         base.Refresh(jobBoard);
+        // make copy so you dont mutate while iterating
+        var copy = jobBoard.Comp.AcceptedSideJobs.ContainedEntities.ToList();
+        foreach (var sideJob in copy)
+        {
+            Del(sideJob);
+        }
         FillSideJobs(jobBoard);
     }
 

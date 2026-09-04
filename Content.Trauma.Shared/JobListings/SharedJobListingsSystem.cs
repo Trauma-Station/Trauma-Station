@@ -173,6 +173,9 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
                 availableSideJobInfos.Add(info.Value);
         }
 
+        if (loading)
+            availableSideJobInfos.Clear();
+
         var acceptedSideJobsInfos = new List<SideJobInfo>();
         foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs.ContainedEntities)
         {
@@ -283,12 +286,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public virtual void Refresh(Entity<JobListingsComponent> jobBoard)
     {
-        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
-        {
-            PredictedQueueDel(sideJob);
-        }
-        // empty because otherwise predicted del wont delete in time before the ui is updated
-        Container.EmptyContainer(jobBoard.Comp.AvailableSideJobs);
         jobBoard.Comp.BonusRefresh = false;
         DirtyField(jobBoard, jobBoard.Comp, nameof(JobListingsComponent.BonusRefresh));
         SetRefreshTime(jobBoard);
