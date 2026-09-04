@@ -3,14 +3,11 @@
 - type: entity
   id: CrateGeneric
   components:
-  - type: RequireProjectileTarget
   - type: Tag
     tags:
     - Crate
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority
   id: CrateBaseSecure
   components:
   - type: LockSignalControl

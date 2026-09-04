@@ -13,87 +13,60 @@
 # Command .. ish
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
-  id: LockerCaptain
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority
-  id: LockerHeadOfPersonnel
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority
   id: LockerHeadOfSecurity
   components:
   - type: RadioMicrophone
     broadcastChannel: Security # joever
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerWarden
   components:
   - type: RadioMicrophone
     broadcastChannel: Security
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerChiefMedicalOfficer
   components:
   - type: RadioMicrophone
     broadcastChannel: Medical
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerResearchDirector
   components:
   - type: RadioMicrophone
     broadcastChannel: Science
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerChiefEngineer
   components:
   - type: RadioMicrophone
     broadcastChannel: Engineering
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerQuarterMaster
   components:
   - type: RadioMicrophone
     broadcastChannel: Supply
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerRepresentative
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: CentCom
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerNanorep
   components:
   - type: RadioMicrophone
     broadcastChannel: CentCom
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerClown
   components:
   - type: RadioMicrophone
     broadcastChannel: Service # poor poor clown
 
 - type: entity
-  parent:
-  - !Index:-1 AntiTamperHighPriority 
   id: LockerSyndicatePersonal
   components:
   - type: RadioMicrophone
@@ -104,72 +77,12 @@
 - type: entity
   parent:
   - !Index:-1 AntiTamperLowPriority 
-  id: LockerSalvageSpecialist
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority
-  id: LockerAtmospherics
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerEngineer
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerBotanist
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerMedical
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerParamedic
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerChemistry
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerScientist
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerSecurity
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: GunSafe
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
   id: GunSafeBaseSecure
   components:
   - type: Damageable
     damageModifierSet: StructuralMetallicStrong
   - type: Injurable
     damageContainer: StructuralInorganic
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerDetective
-
-- type: entity
-  parent:
-  - !Index:-1 AntiTamperLowPriority 
-  id: LockerMime
 
 - type: entity
   id: LockerFreezerBase
