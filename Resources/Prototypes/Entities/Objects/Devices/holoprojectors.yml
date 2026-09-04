@@ -144,6 +144,10 @@
   name: Xenoborg deflector field projector
   description: An alien device, projecting fields that deflect projectiles.
   components:
+  # <Trauma>
+  - type: AutoRecharge
+    rechargeDuration: 15
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Devices/Holoprojectors/xenoborg.rsi
   # <Trauma>

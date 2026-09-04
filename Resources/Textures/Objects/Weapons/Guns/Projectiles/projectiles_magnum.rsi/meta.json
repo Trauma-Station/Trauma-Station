@@ -8,6 +8,12 @@
     },
     "states": [
         {
+            "name": "decolored1"
+        },
+        {
+            "name": "decolored2"
+        },
+        {
             "name": "magnum"
         },
         {
