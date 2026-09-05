@@ -14149,3 +14149,20 @@ Entries:
   id: 1544
   time: '2026-09-05T07:44:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4455
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed blob electromagnetic web EMP to actually take away more than 2%
+      charge.
+  - type: Fix
+    message: Fixed blob tiles not having strong/reflective upgrades.
+  - type: Fix
+    message: >-
+      Fixed mobs outside of vision being invisible if you became something
+      without a vision cone e.g. blob.
+  - type: Fix
+    message: Fixed blob node prediction being janky.
+  id: 1545
+  time: '2026-09-05T10:47:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4456
