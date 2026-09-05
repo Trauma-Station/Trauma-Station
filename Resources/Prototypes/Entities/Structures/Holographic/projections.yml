@@ -144,7 +144,7 @@
           acts: [ "Destruction" ]
 
 - type: entity
-  parent: BaseHoloSign
+  parent: BaseHoloSignNoDespawn # Trauma - no despawn
   id: XenoborgDeflectorField
   name: deflector field
   description: An energy matrix, comprised of interlocking fields that deflect projectiles. Powerful, but short-lived.
@@ -165,7 +165,7 @@
         mask:
         - FullTileMask
         layer:
-        - Opaque # Traua
+        - Opaque # Trauma
         - GlassLayer
   - type: TimedDespawn
     lifetime: 15

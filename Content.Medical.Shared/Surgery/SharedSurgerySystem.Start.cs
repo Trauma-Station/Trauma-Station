@@ -37,7 +37,6 @@ public abstract partial class SharedSurgerySystem
         }
 
         _ui.OpenUi(target, SurgeryUIKey.Key, user);
-        RefreshUI(target);
     }
 
     private void OnUtilityVerb(Entity<SurgeryToolComponent> ent, ref GetVerbsEvent<UtilityVerb> args)

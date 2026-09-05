@@ -80,6 +80,7 @@
                         Mode="Press">
                     </Button>
                 </BoxContainer>
+                <!-- <Trauma> - wrap menu queue label in a container, add ResetQueueList. TODO: inject this -->
                 <BoxContainer
                     Orientation="Horizontal"
                     Align="Begin"
@@ -93,6 +94,7 @@
                         Mode="Press">
                     </Button>
                 </BoxContainer>
+                <!-- </Trauma> -->
                 <BoxContainer
                     Name="FabricatingContainer"
                     Orientation="Horizontal"
@@ -151,14 +153,14 @@
                     VerticalExpand="True"
                     HorizontalExpand="True">
                     <ui:MaterialStorageControl Name="MaterialsList" SizeFlagsStretchRatio="8"/>
-		            <!-- <Trauma> -->
-		            <BoxContainer Orientation="Vertical" Name="MiningPointsContainer" Visible="False">
-		                <BoxContainer Orientation="Horizontal">
-		                    <Label Name="MiningPointsLabel" HorizontalExpand="True"/>
-		                    <Button Name="MiningPointsClaimButton" Text="{Loc 'lathe-menu-mining-points-claim-button'}"/>
-		                </BoxContainer>
-		            </BoxContainer>
-		            <!-- </Trauma> -->
+                    <!-- <Trauma> -->
+                    <BoxContainer Orientation="Vertical" Name="MiningPointsContainer" Visible="False">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Name="MiningPointsLabel" HorizontalExpand="True"/>
+                            <Button Name="MiningPointsClaimButton" Text="{Loc 'lathe-menu-mining-points-claim-button'}"/>
+                        </BoxContainer>
+                    </BoxContainer>
+                    <!-- </Trauma> -->
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>

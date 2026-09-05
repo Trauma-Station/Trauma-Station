@@ -14,6 +14,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Common.Teleportation;
 using Content.Trauma.Shared.Executions;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -47,13 +48,23 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
     [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     [SubscribeLocalEvent]
-    private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
+    private void OnStartCollide(Entity<ProjectileComponent> ent, ref StartCollideEvent args)
     {
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != SharedProjectileSystem.ProjectileFixture || !args.OtherFixture.Hard)
             return;
 
-        DoHit((uid, component, args.OurBody), args.OtherEntity);
+        DoHit((ent, ent.Comp, args.OurBody), args.OtherEntity);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPortalTeleported(Entity<ProjectileComponent> ent, ref PortalTeleportedEvent args)
+    {
+        if (ent.Comp.IgnoredEntities.Count == 0)
+            return;
+
+        ent.Comp.IgnoredEntities.Clear();
+        Dirty(ent);
     }
 
     [SubscribeLocalEvent]
@@ -117,6 +128,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             _projectile.SetShooter(uid, comp, target);
             _gun.SetTarget(uid, null, out _);
             comp.IgnoredEntities.Clear();
+            Dirty(uid, comp);
             return;
         }
 
@@ -160,9 +172,13 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         {
             comp.ProjectileSpent = false;
             comp.IgnoredEntities.Add(target);
+            Dirty(ent);
         }
-        else
+        else if (!comp.ProjectileSpent)
+        {
             comp.ProjectileSpent = true;
+            Dirty(ent);
+        }
 
         if (!Deleted(target))
         {

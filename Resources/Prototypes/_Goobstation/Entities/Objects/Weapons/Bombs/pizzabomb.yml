@@ -13,17 +13,11 @@
       map: ["enum.StorageVisualLayers.Base"]
     - state: box-open
       map: ["enum.StorageVisualLayers.Door"]
-  - type: TimerTrigger
-    delay: 0.5
-    examinable: false
-    initialBeepDelay: 0
-    beepSound: /Audio/Machines/microwave_done_beep.ogg
   - type: TriggerOnOpenStorage
   - type: ExplodeOnTrigger
-    keysIn: [ timer ]
   - type: Explosive # Weak explosion in a very small radius. Doesn't break underplating.
     explosionType: Default
-    totalIntensity: 130
+    totalIntensity: 65
     intensitySlope: 10
-    maxIntensity: 10
+    maxIntensity: 5
     canCreateVacuum: false
