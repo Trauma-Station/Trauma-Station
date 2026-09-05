@@ -14142,3 +14142,10 @@ Entries:
   id: 1543
   time: '2026-09-04T09:43:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4440
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use heretic blades for surgery.
+  id: 1544
+  time: '2026-09-05T07:44:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4455
