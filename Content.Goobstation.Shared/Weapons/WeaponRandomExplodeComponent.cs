@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Goobstation.Server.WeaponRandomExplode;
+namespace Content.Goobstation.Shared.Weapons;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class WeaponRandomExplodeComponent : Component
 {
     [DataField]
