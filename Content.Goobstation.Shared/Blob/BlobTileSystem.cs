@@ -37,6 +37,7 @@ public sealed partial class BlobTileSystem : EntitySystem
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
     [Dependency] private EntityQuery<BlobObserverComponent> _observerQuery = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
+    [Dependency] private EntityQuery<DestructibleComponent> _destructibleQuery = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
@@ -193,7 +194,7 @@ public sealed partial class BlobTileSystem : EntitySystem
                     continue;
                 }
 
-                if (!HasComp<DestructibleComponent>(uid))
+                if (!_destructibleQuery.HasComp(uid))
                     continue;
 
                 if (attack)

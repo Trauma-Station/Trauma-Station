@@ -174,7 +174,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
 
         ent.Comp.NextAction = _timing.CurTime + _cooldown + TimeSpan.FromSeconds(Math.Abs(ent.Comp.AttackRate));
         DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.NextAction));
-        _audio.PlayPvs(ent.Comp.AttackSound, from, AudioParams.Default);
+        _audio.PlayPredicted(ent.Comp.AttackSound, from, user);
     }
 
     private static readonly TimeSpan _cooldown = TimeSpan.FromMilliseconds(333);
