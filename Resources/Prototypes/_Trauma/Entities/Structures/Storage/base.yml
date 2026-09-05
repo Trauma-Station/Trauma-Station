@@ -61,6 +61,8 @@
   - type: Wires
     layoutId: SecureStorageHighPriority
     boardName: wires-board-name-secure-storage
+  - type: ActiveListener
+    range: 0
   - type: RadioMicrophone
     broadcastChannel: Command
     listenRange: 0

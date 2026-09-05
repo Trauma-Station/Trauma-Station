@@ -41,6 +41,8 @@
   id: CrateBaseLockBox
   components:
   - type: AntiRottingContainer # needed for plant bounties and it costs money so
+  - type: ActiveListener
+    range: 0
   - type: RadioMicrophone
     broadcastChannel: Common
     listenRange: 0
