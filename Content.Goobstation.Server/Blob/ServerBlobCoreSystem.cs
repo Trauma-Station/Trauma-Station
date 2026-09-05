@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class BlobCoreSystem : SharedBlobCoreSystem
+public sealed partial class ServerBlobCoreSystem : BlobCoreSystem
 {
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private MetaDataSystem _meta = default!;
@@ -30,7 +30,7 @@ public sealed partial class BlobCoreSystem : SharedBlobCoreSystem
     private readonly JobQueue _killCoreJobQueue = new(KillCoreJobTime);
 
     public sealed class KillBlobCore(
-        BlobCoreSystem system,
+        ServerBlobCoreSystem system,
         EntityUid? station,
         Entity<BlobCoreComponent> ent,
         double maxTime,

@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobCarrierSystem : EntitySystem
+public abstract partial class BlobCarrierSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

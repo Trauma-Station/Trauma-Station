@@ -72,12 +72,12 @@
   - !type:Emp
     probability: 0.2
     rangeModifier: 3
-    energyConsumption: 50
+    energyConsumption: 2500
     duration: 3
   destructionEffects:
   - !type:Emp
     rangeModifier: 3
-    energyConsumption: 50
+    energyConsumption: 1500
     duration: 3
   damageModifiers: ElectromagneticWebBlob
 

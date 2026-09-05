@@ -68,9 +68,7 @@ public sealed partial class BlobFactorySystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnPulse(Entity<BlobFactoryComponent> ent, ref BlobSpecialPulseEvent args)
     {
-        if (!_tileQuery.TryComp(ent, out var tile) ||
-            tile.Core is not { } core ||
-            !_coreQuery.TryComp(core, out var coreComp))
+        if (!_tileQuery.TryComp(ent, out var tile))
             return;
 
         // forget dead pods
@@ -85,6 +83,7 @@ public sealed partial class BlobFactorySystem : EntitySystem
         if (ent.Comp.Accumulator < ent.Comp.AccumulateToSpawn)
         {
             ent.Comp.Accumulator++;
+            Dirty(ent);
             return;
         }
 
@@ -94,8 +93,8 @@ public sealed partial class BlobFactorySystem : EntitySystem
         ent.Comp.BlobPods.Add(pod);
         Dirty(ent);
         var blobPod = EnsureComp<BlobPodComponent>(pod);
-        blobPod.Core = core;
-        FillSmokeGas((pod, blobPod), coreComp.CurrentChem);
+        blobPod.Core = args.Core;
+        FillSmokeGas((pod, blobPod), args.Core.Comp.CurrentChem);
 
         ent.Comp.Accumulator = 0;
     }

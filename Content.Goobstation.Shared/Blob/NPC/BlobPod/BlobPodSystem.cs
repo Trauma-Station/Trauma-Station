@@ -14,7 +14,7 @@ using Content.Shared.Verbs;
 
 namespace Content.Goobstation.Shared.Blob.NPC.BlobPod;
 
-public abstract partial class SharedBlobPodSystem : EntitySystem
+public abstract partial class BlobPodSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
