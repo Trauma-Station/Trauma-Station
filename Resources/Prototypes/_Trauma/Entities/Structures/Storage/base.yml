@@ -25,6 +25,8 @@
     interfaces:
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
+  - type: AntiTamper
+
 
 - type: entity
   abstract: true
@@ -38,6 +40,7 @@
       path: /Audio/Machines/warning_buzzer.ogg
       params:
         volume: 1
+    examineText: It is equipped with a basic tamper-detection device.
   - type: Wires
     layoutId: SecureStorageLowPriority
     boardName: wires-board-name-secure-storage
@@ -54,6 +57,7 @@
       path: /Audio/Machines/warning_buzzer.ogg
       params:
         volume: 5
+    examineText: It is equipped with an advanced tamper-detection device.
   - type: Wires
     layoutId: SecureStorageHighPriority
     boardName: wires-board-name-secure-storage

@@ -20,9 +20,9 @@ public sealed partial class AntiTamperSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnExamine(Entity<AntiTamperComponent> ent, ref ExaminedEvent args)
     {
-        if (ent.Comp.LocExamine is null)
+        if (ent.Comp.ExamineText is null)
             return;
-        args.PushMarkup(Loc.GetString(ent.Comp.LocExamine));
+        args.PushMarkup(ent.Comp.ExamineText);
     }
 
     [SubscribeLocalEvent(after: [typeof(SharedDestructibleSystem)])] // after so .IsBroken is set
@@ -71,7 +71,7 @@ public sealed partial class AntiTamperSystem : EntitySystem
         if (respectCooldown && _timing.CurTime - ent.Comp.LastYell < ent.Comp.YellCooldown)
             return;
 
-        _chat.TrySendInGameICMessage(ent, Loc.GetString(ent.Comp.LocTamperMessage), InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(ent, ent.Comp.TamperMessage, InGameICChatType.Speak, false);
 
         ent.Comp.LastYell = _timing.CurTime;
     }

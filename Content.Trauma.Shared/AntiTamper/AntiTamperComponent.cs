@@ -22,10 +22,10 @@ public sealed partial class AntiTamperComponent : Component
     /// Optional examine for the tamper lock.
     /// </summary>
     [DataField]
-    public LocId? LocExamine;
+    public string? ExamineText;
 
     /// <summary>
-    /// When to yell <see cref="LocTamperMessage"/> if at all.
+    /// When to yell <see cref="TamperMessage"/> if at all.
     /// Add RadioMicrophone component to alert on radio aswell.
     /// </summary>
     [DataField(required: true)]
@@ -73,5 +73,5 @@ public sealed partial class AntiTamperComponent : Component
     /// Message yelled, see <see cref="YellAlertType"/>.
     /// </summary>
     [DataField]
-    public LocId LocTamperMessage = "anti-tamper-damaged";
+    public string TamperMessage = "WARNING: ANTI-TAMPER LOCK DAMAGED";
 };
