@@ -6,7 +6,6 @@ using Content.Shared.Lock;
 
 namespace Content.Trauma.Shared.DeviceLinking;
 
-[Access(typeof(LockSignalControlSystem))]
 public sealed partial class LockSignalControlSystem : EntitySystem
 {
     [Dependency] private LockSystem _lock = default!;

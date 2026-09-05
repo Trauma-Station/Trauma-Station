@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma - Add anti tamper
+  parent: [ LockerBase, AntiTamperHighPriority ]
   id: LockerNanorep
   name: nanotrasen representative locker
   components:

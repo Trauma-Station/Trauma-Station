@@ -400,8 +400,7 @@
 
 - type: entity
   id: GunSafeBaseSecure
-  parent:
-  - GunSafe # Trauma - make list
+  parent: GunSafe
   suffix: Armory, Locked
   components:
   - type: AccessReader
@@ -522,7 +521,7 @@
 # Detective
 - type: entity
   id: LockerDetective
-  parent: [ LockerBase, AntiTamperLowPriority ] # Trauma - Add anti tamper
+  parent: [ LockerBooze, AntiTamperLowPriority ] # Trauma - Add anti tamper
   name: detective's cabinet
   description: Usually cold and empty... like your heart.
   components:
