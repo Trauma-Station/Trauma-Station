@@ -2,6 +2,7 @@
 
 - type: entity
   id: LockerBase
+  abstract: true
   components:
   - type: LockSignalControl
   - type: DeviceLinkSink
