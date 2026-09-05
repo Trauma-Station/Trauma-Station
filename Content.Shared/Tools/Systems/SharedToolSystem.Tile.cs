@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
 // </Trauma>
 using Content.Shared.Database;
 using Content.Shared.Fluids.Components;

@@ -6,7 +6,8 @@ using Content.Shared.Bible.Components;
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod.Systems;

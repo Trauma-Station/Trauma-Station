@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;

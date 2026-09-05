@@ -1,4 +1,4 @@
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 
 namespace Content.Shared.Tools.Systems;
 
