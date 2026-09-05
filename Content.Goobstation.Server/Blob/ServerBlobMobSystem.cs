@@ -4,4 +4,4 @@ using Content.Goobstation.Shared.Blob;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class BlobMobSystem : SharedBlobMobSystem;
+public sealed partial class ServerBlobMobSystem : BlobMobSystem;

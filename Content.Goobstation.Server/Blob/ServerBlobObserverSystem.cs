@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
+public sealed partial class ServerBlobObserverSystem : BlobObserverSystem
 {
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private IChatManager _chat = default!;

@@ -11,19 +11,12 @@ using Content.Shared.Speech;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobMobSystem : EntitySystem
+public abstract partial class BlobMobSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
     [Dependency] private EntityQuery<BlobMobComponent> _mobQuery = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlobSpeakComponent, SpeakAttemptEvent>(OnSpeakAttempt, after: [ typeof(SpeechSystem) ]);
-    }
 
     public virtual void NodePulse(Entity<BlobMobComponent> ent)
     {
@@ -40,6 +33,7 @@ public abstract partial class SharedBlobMobSystem : EntitySystem
         args.Cancel();
     }
 
+    [SubscribeLocalEvent(after: [typeof(SpeechSystem)])]
     private void OnSpeakAttempt(Entity<BlobSpeakComponent> ent, ref SpeakAttemptEvent args)
     {
         if (HasComp<BlobCarrierComponent>(ent))

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobbernautSystem : EntitySystem
+public abstract partial class BlobbernautSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 

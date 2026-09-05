@@ -8,7 +8,7 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed partial class BlobMobSystem : SharedBlobMobSystem
+public sealed partial class ClientBlobMobSystem : BlobMobSystem
 {
     [Dependency] private MeleeWeaponSystem _melee = default!;
 
@@ -22,7 +22,7 @@ public sealed partial class BlobMobSystem : SharedBlobMobSystem
         SpawnAttachedTo(HealEffect, new EntityCoordinates(ent, Vector2.Zero));
     }
 
-    [SubscribeLocalEvent, SubscribeNetworkEvent]
+    [EventSubscription]
     private void OnBlobAttack(BlobAttackEvent ev)
     {
         if (!TryGetEntity(ev.BlobEntity, out var user))
