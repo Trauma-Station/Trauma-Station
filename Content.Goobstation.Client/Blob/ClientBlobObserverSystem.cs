@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
+public sealed partial class ClientBlobObserverSystem : BlobObserverSystem
 {
     [Dependency] private ILightManager _light = default!;
 

@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
+public sealed partial class ServerBlobObserverSystem : BlobObserverSystem
 {
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private IChatManager _chat = default!;
@@ -30,19 +30,14 @@ public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
     private const double MoverJobTime = 0.005;
     private readonly JobQueue _moveJobQueue = new(MoverJobTime);
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlobCoreComponent, PlayerAttachedEvent>(OnCorePlayerAttached, before: [typeof(SharedActionsSystem)]);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
         _moveJobQueue.Process();
     }
 
+    [SubscribeLocalEvent(before: [typeof(SharedActionsSystem)])]
     private void OnCorePlayerAttached(Entity<BlobCoreComponent> ent, ref PlayerAttachedEvent args)
     {
         var xform = Transform(ent);

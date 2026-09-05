@@ -22,17 +22,17 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob.NPC.BlobPod;
 
-public sealed partial class BlobPodSystem : SharedBlobPodSystem
+public sealed partial class ServerBlobPodSystem : BlobPodSystem
 {
-    [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private MobStateSystem _mobs = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private MobStateSystem _mobs = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     [SubscribeLocalEvent]
     private void OnBeforeDamageChanged(Entity<BlobPodComponent> ent, ref BeforeDamageChangedEvent args)

@@ -23,16 +23,16 @@ namespace Content.Goobstation.Shared.Blob;
 
 public sealed partial class BlobCoreActionSystem : EntitySystem
 {
+    [Dependency] private BlobCoreSystem _core = default!;
     [Dependency] private BlobTileSystem _tile = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private ITileDefinitionManager _tiles = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ITileDefinitionManager _tiles = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedBlobCoreSystem _core = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
@@ -70,7 +70,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         #region OnTarget
         if (args.Target is { } target && !HasComp<BlobMobComponent>(target))
         {
-            if (_tileQuery.TryComp(target, out var tileComp) && tileComp.Core != null)
+            if (_tileQuery.TryComp(target, out var tileComp) && tileComp.Core == core.Owner)
                 return;
 
             if (fromTile != null && HasComp<DestructibleComponent>(target) && !HasComp<ItemComponent>(target) && !HasComp<SubFloorHideComponent>(target))
@@ -174,7 +174,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
 
         ent.Comp.NextAction = _timing.CurTime + _cooldown + TimeSpan.FromSeconds(Math.Abs(ent.Comp.AttackRate));
         DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.NextAction));
-        _audio.PlayPvs(ent.Comp.AttackSound, from, AudioParams.Default);
+        _audio.PlayPredicted(ent.Comp.AttackSound, from, user);
     }
 
     private static readonly TimeSpan _cooldown = TimeSpan.FromMilliseconds(333);

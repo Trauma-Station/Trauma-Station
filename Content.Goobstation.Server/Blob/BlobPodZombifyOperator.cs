@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Blob.NPC.BlobPod;
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Goobstation.Shared.Blob.NPC.BlobPod;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
