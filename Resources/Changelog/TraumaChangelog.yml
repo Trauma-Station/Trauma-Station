@@ -14182,3 +14182,12 @@ Entries:
   id: 1547
   time: '2026-09-05T12:54:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4459
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to doxx invisible things by hovering them with your
+      mouse, except for dwarves diona and vox.
+  id: 1548
+  time: '2026-09-05T13:11:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4460
