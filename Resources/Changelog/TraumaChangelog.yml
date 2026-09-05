@@ -14173,3 +14173,12 @@ Entries:
   id: 1546
   time: '2026-09-05T12:20:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4457
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI turrets not shooting monkies.
+  - type: Tweak
+    message: Most animals no longer attack insurgents. Shiva is still evil.
+  id: 1547
+  time: '2026-09-05T12:54:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4459
