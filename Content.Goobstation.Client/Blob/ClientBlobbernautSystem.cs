@@ -6,7 +6,7 @@ using Content.Goobstation.Shared.Blob.Components;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed partial class BlobbernautSystem : SharedBlobbernautSystem;
+public sealed partial class ClientBlobbernautSystem : BlobbernautSystem;
 
 public sealed partial class BlobbernautVisualizerSystem : VisualizerSystem<BlobbernautComponent>
 {

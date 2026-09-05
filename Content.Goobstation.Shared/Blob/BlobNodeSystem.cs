@@ -11,11 +11,11 @@ namespace Content.Goobstation.Shared.Blob;
 
 public sealed partial class BlobNodeSystem : EntitySystem
 {
+    [Dependency] private BlobCoreSystem _core = default!;
+    [Dependency] private BlobMobSystem _blobMob = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mob = default!;
-    [Dependency] private SharedBlobCoreSystem _core = default!;
-    [Dependency] private SharedBlobMobSystem _blobMob = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
@@ -76,6 +76,9 @@ public sealed partial class BlobNodeSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
 
         var now = _timing.CurTime;
         var query = EntityQueryEnumerator<BlobNodeComponent>();

@@ -13,7 +13,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobCoreSystem : EntitySystem
+public abstract partial class BlobCoreSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private BlobTileSystem _tile = default!;
