@@ -5,7 +5,7 @@ using Content.Shared.EntityEffects;
 namespace Content.Trauma.Shared.ReactiveArmour;
 
 /// <summary>
-/// Checks if enought time have passed
+/// Checks if enought time have passed to activate reactive armour behavior
 /// </summary>
 [RegisterComponent]
 public sealed partial class ReactiveArmourComponent : Component
@@ -13,8 +13,9 @@ public sealed partial class ReactiveArmourComponent : Component
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
 
-    [DataField]
-    public TimeSpan ActivationDelay = TimeSpan.FromSeconds(0);
+    [DataField(required: true)]
+    public TimeSpan ActivationDelay;
 
-    public TimeSpan LastActivated = TimeSpan.FromSeconds(0);
+    [DataField, TimeOffsetSerializer, AutoPausedField, AutoNetworkedField]
+    public TimeSpan LastActivated = default;
 }
