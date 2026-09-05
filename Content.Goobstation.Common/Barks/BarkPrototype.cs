@@ -58,12 +58,6 @@ public sealed partial class BarkPrototype : IPrototype
     public bool Stop = false;
 
     /// <summary>
-    /// Makes the audio predictable via hashing.
-    /// </summary>
-    [DataField]
-    public bool Predictable = true;
-
-    /// <summary>
     /// Whether it is available for selection in the character editor.
     /// </summary>
     [DataField]
