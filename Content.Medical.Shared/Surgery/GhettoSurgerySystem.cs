@@ -10,14 +10,7 @@ namespace Content.Medical.Shared.Surgery;
 /// </summary>
 public sealed partial class GhettoSurgerySystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SharpComponent, MapInitEvent>(OnSharpInit);
-        SubscribeLocalEvent<SharpComponent, ComponentShutdown>(OnSharpShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSharpInit(Entity<SharpComponent> ent, ref MapInitEvent args)
     {
         var dirty = false;
@@ -56,6 +49,7 @@ public sealed partial class GhettoSurgerySystem : EntitySystem
             Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnSharpShutdown(Entity<SharpComponent> ent, ref ComponentShutdown args)
     {
         if (!ent.Comp.HadSurgeryTool)

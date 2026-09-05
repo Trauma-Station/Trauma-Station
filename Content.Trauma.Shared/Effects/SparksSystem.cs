@@ -16,10 +16,10 @@ public sealed partial class SparksSystem : CommonSparksSystem
 
     public override void DoSparks(EntityCoordinates coords,
         EntityUid? user = null,
-        int minSparks = 1,
-        int maxSparks = 3,
-        float minVelocity = 1f,
-        float maxVelocity = 4f,
+        int minSparks = MinSparks,
+        int maxSparks = MaxSparks,
+        float minVelocity = MinVelocity,
+        float maxVelocity = MaxVelocity,
         bool playSound = true,
         EntityUid? source = null)
     {

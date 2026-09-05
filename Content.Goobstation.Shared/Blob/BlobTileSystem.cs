@@ -25,11 +25,11 @@ namespace Content.Goobstation.Shared.Blob;
 
 public sealed partial class BlobTileSystem : EntitySystem
 {
+    [Dependency] private BlobCoreSystem _core = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedBlobCoreSystem _core = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -37,6 +37,7 @@ public sealed partial class BlobTileSystem : EntitySystem
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
     [Dependency] private EntityQuery<BlobObserverComponent> _observerQuery = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
+    [Dependency] private EntityQuery<DestructibleComponent> _destructibleQuery = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
@@ -51,7 +52,7 @@ public sealed partial class BlobTileSystem : EntitySystem
         if (ent.Comp.Core == null || observer.Core is not { } core)
             return;
 
-        if (Transform(ent).Anchored)
+        if (!Transform(ent).Anchored)
             return;
 
         var current = ProtoMan.Index(ent.Comp.Tile);
@@ -188,9 +189,12 @@ public sealed partial class BlobTileSystem : EntitySystem
             foreach (var uid in _map.GetAnchoredEntities(gridUid, grid, innerTile.GridIndices))
             {
                 if (_tileQuery.HasComp(uid))
+                {
                     spawn = false;
+                    continue;
+                }
 
-                if (!HasComp<DestructibleComponent>(uid))
+                if (!_destructibleQuery.HasComp(uid))
                     continue;
 
                 if (attack)

@@ -5,9 +5,9 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobResourceSystem : EntitySystem
+public abstract partial class BlobResourceSystem : EntitySystem
 {
-    [Dependency] private SharedBlobCoreSystem _core = default!;
+    [Dependency] private BlobCoreSystem _core = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     [SubscribeLocalEvent]

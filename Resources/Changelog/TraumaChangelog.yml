@@ -14079,3 +14079,115 @@ Entries:
   id: 1536
   time: '2026-09-01T17:40:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4407
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed nailgun execution crashing server.
+  id: 1537
+  time: '2026-09-03T05:06:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4425
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed pizza bomb, you can't use it as a insta-nugget hand grenade
+      anymore.
+  id: 1538
+  time: '2026-09-03T05:59:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4420
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dionae can no longer have hearts, kidneys or livers transplanted.
+  id: 1539
+  time: '2026-09-03T08:08:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4427
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Abductors no longer get a gland task for slimes or diona since they have
+      no heart slot.
+  id: 1540
+  time: '2026-09-03T17:16:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4428
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      You can now alt-click a rev telesphere to link machines to its silo
+      resources.
+  - type: Fix
+    message: Fixed xenoborg tile gun getting broken by embedded tiles.
+  - type: Fix
+    message: Xenoborgs can now toggle the magnet on their storage.
+  - type: Tweak
+    message: >-
+      Xenoborg deflectors no longer despawn, you still lose them if they get
+      destroyed.
+  id: 1541
+  time: '2026-09-04T00:09:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4433
+- author: StarMade, Graves, DieselMohawk
+  changes:
+  - type: Tweak
+    message: Rewrote and reformatted Corporate Law
+  id: 1542
+  time: '2026-09-04T00:17:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4263
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Sparks dont fly as fast and generally look better.
+  id: 1543
+  time: '2026-09-04T09:43:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4440
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use heretic blades for surgery.
+  id: 1544
+  time: '2026-09-05T07:44:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4455
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed blob electromagnetic web EMP to actually take away more than 2%
+      charge.
+  - type: Fix
+    message: Fixed blob tiles not having strong/reflective upgrades.
+  - type: Fix
+    message: >-
+      Fixed mobs outside of vision being invisible if you became something
+      without a vision cone e.g. blob.
+  - type: Fix
+    message: Fixed blob node prediction being janky.
+  id: 1545
+  time: '2026-09-05T10:47:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4456
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: All speech voices now have similar volume.
+  id: 1546
+  time: '2026-09-05T12:20:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4457
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI turrets not shooting monkies.
+  - type: Tweak
+    message: Most animals no longer attack insurgents. Shiva is still evil.
+  id: 1547
+  time: '2026-09-05T12:54:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4459
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to doxx invisible things by hovering them with your
+      mouse, except for dwarves diona and vox.
+  id: 1548
+  time: '2026-09-05T13:11:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4460

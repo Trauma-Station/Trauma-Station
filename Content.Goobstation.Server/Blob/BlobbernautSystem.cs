@@ -12,11 +12,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class BlobbernautSystem : SharedBlobbernautSystem
+public sealed partial class ServerBlobbernautSystem : BlobbernautSystem
 {
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

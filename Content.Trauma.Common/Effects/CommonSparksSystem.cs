@@ -6,21 +6,26 @@ namespace Content.Trauma.Common.Effects;
 
 public abstract class CommonSparksSystem : EntitySystem
 {
+    public const int MinSparks = 1;
+    public const int MaxSparks = 3;
+    public const float MinVelocity = 0.5f;
+    public const float MaxVelocity = 2f;
+
     public abstract void DoSparks(EntityCoordinates coords,
         EntityUid? user = null,
-        int minSparks = 1,
-        int maxSparks = 3,
-        float minVelocity = 1f,
-        float maxVelocity = 4f,
+        int minSparks = MinSparks,
+        int maxSparks = MaxSparks,
+        float minVelocity = MinVelocity,
+        float maxVelocity = MaxVelocity,
         bool playSound = true,
         EntityUid? source = null);
 
     public void DoSparks(EntityUid uid,
         EntityUid? user = null,
-        int minSparks = 1,
-        int maxSparks = 3,
-        float minVelocity = 1f,
-        float maxVelocity = 4f,
+        int minSparks = MinSparks,
+        int maxSparks = MaxSparks,
+        float minVelocity = MinVelocity,
+        float maxVelocity = MaxVelocity,
         bool playSound = true,
         EntityUid? source = null)
     {

@@ -13,7 +13,7 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobCoreSystem : EntitySystem
+public abstract partial class BlobCoreSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private BlobTileSystem _tile = default!;
@@ -77,7 +77,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
 
     public void UpdateAllAlerts(Entity<BlobCoreComponent?> core)
     {
-        if (!Resolve(core, ref core.Comp))
+        if (!_query.Resolve(core, ref core.Comp))
             return;
 
         if (core.Comp.Observer is not { } user)
@@ -97,7 +97,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
 
     public void ChangeChem(Entity<BlobCoreComponent?> ent, ProtoId<BlobChemPrototype> newChem)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        if (!_query.Resolve(ent, ref ent.Comp))
             return;
 
         var old = ent.Comp.CurrentChem;
@@ -176,12 +176,12 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         EntityCoordinates coords,
         bool doEffects = true)
     {
-        if (!Resolve(core, ref core.Comp))
+        if (!_query.Resolve(core, ref core.Comp))
             return null;
 
         if (oldTile is { } old)
         {
-            if (!Resolve(old, ref old.Comp) || old.Comp.Core != core.Owner)
+            if (!TileQuery.Resolve(old, ref old.Comp) || old.Comp.Core != core.Owner)
                 return null;
 
             PredictedQueueDel(old);
@@ -347,7 +347,7 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
     /// <param name="coordinates">If not null, coordinates for popup to appear.</param>
     public bool TryUseAbility(Entity<BlobCoreComponent?> core, int abilityCost, EntityCoordinates? coordinates = null)
     {
-        if (!Resolve(core, ref core.Comp))
+        if (!_query.Resolve(core, ref core.Comp))
             return false;
 
         var observer = core.Comp.Observer;

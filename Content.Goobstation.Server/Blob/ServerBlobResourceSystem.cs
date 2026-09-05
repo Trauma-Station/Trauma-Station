@@ -6,7 +6,7 @@ using Content.Server.GameTicking;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class BlobResourceSystem : SharedBlobResourceSystem
+public sealed partial class ServerBlobResourceSystem : BlobResourceSystem
 {
     /// <summary>
     /// On round end makes all the blobs resource nodes generate 100 points each pulse.

@@ -15,14 +15,14 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobObserverSystem : EntitySystem
+public abstract partial class BlobObserverSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private BlobCoreSystem _core = default!;
     [Dependency] private BlobFactorySystem _factory = default!;
     [Dependency] private BlobNodeSystem _node = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedActionsSystem _action = default!;
-    [Dependency] private SharedBlobCoreSystem _core = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
