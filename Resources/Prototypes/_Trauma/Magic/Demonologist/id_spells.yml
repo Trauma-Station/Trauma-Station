@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionCursedAccess
+  name: Cursed Access
+  description: Strip a target's ID access for 20 seconds, leaving them locked out of everything.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/fireball.ogg # TODO: better sound
+  - type: Sprite
+    sprite: _Trauma/Actions/demonologist.rsi
+    layers:
+    - state: accesscurse
+  - type: TargetAction
+    range: 8
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      requireAll: true
+      components:
+      - HumanoidProfile
+      - Inventory
+    canTargetSelf: false
+    event: !type:CursedAccessSpellEvent

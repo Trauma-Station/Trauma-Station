@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionCombustion
+  name: Combustion
+  description: Instantly ignite a target, applying maximum fire stacks.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    raiseOnAction: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/fireball.ogg
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: mindswap
+  - type: TargetAction
+    range: 10
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    event: !type:EffectTargetActionEvent
+  - type: EffectAction
+    effects:
+    - !type:Flammable
+      multiplier: 10
+    - !type:Ignite
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodBoil
+  name: Blood Boil
+  description: Boil the target's blood.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    raiseOnAction: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/fireball.ogg
+  - type: Sprite
+    sprite: _Trauma/Actions/demonologist.rsi
+    layers:
+    - state: bloodboil
+  - type: TargetAction
+    range: 10
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    event: !type:EffectTargetActionEvent
+  - type: EffectAction
+    effects:
+    - !type:AdjustTemperature
+      amount: 2000000 # Around half the hp of naked urist

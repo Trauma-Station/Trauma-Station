@@ -1,0 +1,94 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Demonologist
+  name: roles-antag-demonologist-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-demonologist-description
+  guides: [ Demonologist ] # TODO
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 5h
+
+- type: antag
+  id: DemonologistApprentice
+  name: roles-antag-demonologist-apprentice-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-demonologist-apprentice-description
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Demonologist
+  prefRoles: [ Demonologist ]
+  blacklist:
+    components:
+    - AntagImmune
+    - BibleUser
+  mindRoles: [ DemonologistMindRole ]
+  briefing:
+    text: demonologist-role-greeting
+    color: "#990000"
+    sound: /Audio/_Trauma/Demonologist/demonologist.ogg
+  startingGear: DemonologistStartingGear
+  components:
+  - type: Demonologist
+  - type: RandomMetadata
+    nameSegments:
+    - NamesDemonologistFirst
+    - NamesDemonologistLast
+    nameFormat: name-format-standard
+  - type: CollectiveMind
+    defaultChannel: Demonmind
+    channels:
+    - Demonmind
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
+  - type: ActionGrant # TODO: clean this up when everything's done
+    actions:
+    - ActionCombustion
+    - ActionBindApprentice
+    - ActionBloodBoil
+    - ActionCursedAccess
+    - ActionSummonDemonPortal
+
+- type: startingGear
+  id: DemonologistStartingGear
+  equipment: # TODO: graves sprite for me
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    back: ClothingBackpack
+    head: ClothingHeadHelmetCult
+    neck: BedsheetCult
+    mask: ClothingMaskDemonologist
+    outerClothing: ClothingOuterRobesDemonologist
+    shoes: ClothingShoesCult
+    id: DemonologistPDA
+    ears: ClothingHeadsetService
+  storage:
+    back:
+    - BloodVialFull # 1
+    - BloodVialFull # 2
+    - BloodVialFull # 3
+    - BloodEnchanter
+    - RitualDagger
+    - MagicInkIndothine
+    - MagicInkAsimel
+    - MagicInkHithine
+    - EnchantingScrollEmpty # 1
+    - EnchantingScrollEmpty # 2
+    - EnchantingScrollEmpty # 3
+
+- type: antagSmite
+  id: Demonologist
+  antag: Demonologist
+  rule: Demonologist
+  ruleComp: DemonologistRule
+  icon:
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+    state: icon

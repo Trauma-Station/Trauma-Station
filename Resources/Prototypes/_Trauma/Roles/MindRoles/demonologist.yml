@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: DemonologistMindRole
+  name: Demonologist Role
+  components:
+  - type: MindRole
+    antagPrototype: Demonologist
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+    subtype: role-subtype-demonologist
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: DemonologistApprenticeMindRole
+  name: Demonologist Apprentice Role
+  components:
+  - type: MindRole
+    antagPrototype: DemonologistApprentice
+    exclusiveAntag: true
+    roleType: Familiar
+    subtype: role-subtype-demonologist-apprentice

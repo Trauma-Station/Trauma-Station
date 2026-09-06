@@ -189,3 +189,55 @@
     sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
+
+- type: entity
+  parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterBaseToggleable, BaseMajorContraband ]
+  id: ClothingOuterRobesDemonologist
+  name: demonologist robes
+  description: #TODO
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Armor/demonologist_robes.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Armor/demonologist_robes.rsi
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,3
+  - type: ToggleableClothing
+    stripDelay: null
+    clothingPrototypes:
+      head: ClothingHeadHatHoodDemonologist
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0.5
+      OrganDamage: 0.5
+      BoneDamage: 0.5
+      VeinsDamage: 0
+    coverage:
+    - Torso
+    - Arm
+    - Leg
+    - Tail
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Ballistic: 0.6
+        Heat: 0.2
+      flatReductions:
+        Ballistic: 3
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+  - type: FireProtection
+    reduction: 1
+  - type: Tag
+    tags:
+    - SyringeArmor
+    - WhitelistChameleon

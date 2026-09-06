@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: DemonologistRitualCircle
+  name: demonic ritual circle
+  description: A dark ritual circle through which demons enter the mortal world.
+  components:
+  - type: Transform
+    anchored: true
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _Goobstation/Wraith/Objects/ritualcircle.rsi # TODO: portal
+    layers:
+    - state: harbinger_circle_5
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: AmbientSound
+    volume: -8
+    range: 1
+    sound:
+      path: /Audio/_Goobstation/Ambience/horror_crowd_ambience.ogg
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Goobstation/Wraith/flameswoosh.ogg # TODO: better sound
+      params:
+        volume: -5
+        maxDistance: 10
+        variation: 0.05
+  - type: FadingIn
+    fadeInTime: 2
+  - type: FadingTimedDespawn
+    lifetime: 7
+    fadeOutTime: 2
+  - type: PointLight
+    radius: 6
+    netsync: false
+    energy: 5
+    color: "#ebb02b"
+  - type: Damageable
+    damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+  - type: DemonPortal
+    maxDemons: 5
+    spawnInterval: 5
+    demons: # TODO: add more
+    - MinorDemonCentifiend
+    - MinorDemonVulp
+    - MediumDemonCentifiend
+    - MediumDemonChad

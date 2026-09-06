@@ -92,3 +92,32 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Head/Misc/mamluk.rsi
   - type: FaceHuggerBlocker
+
+- type: entity
+  parent: [ ClothingHeadHelmetArmoredBase, BaseMajorContraband ]
+  id: ClothingHeadHatHoodDemonologist
+  name: demonologist hood
+  description: #TODO
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Helmets/demonologist_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Helmets/demonologist_hood.rsi
+  - type: FaceHuggerBlocker
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0.5
+      OrganDamage: 0.5
+      BoneDamage: 0.5
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Ballistic: 0.4
+        Heat: 0.4
+  - type: Tag
+    tags:
+    - WhitelistChameleon

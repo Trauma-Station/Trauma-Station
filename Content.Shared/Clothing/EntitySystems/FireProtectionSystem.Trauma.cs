@@ -21,7 +21,10 @@ public sealed partial class FireProtectionSystem : EntitySystem
 
         foreach (var type in armor.ArmorCoverage)
         {
-            foreach (var part in BodySystem.PartTypeOrgans[type])
+            if (!BodySystem.PartTypeOrgans.TryGetValue(type, out var organs))
+                continue;
+
+            foreach (var part in organs)
             {
                 args.PartReductions[part] = args.PartReductions.GetValueOrDefault(part) + ent.Comp.Reduction;
             }

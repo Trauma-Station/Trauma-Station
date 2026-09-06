@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionSummonDemonPortal
+  name: Summon Demonic Portal
+  description: Open a portal to Hell and summon demons.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi # TODO: image
+    layers:
+    - state: skeleton
+  - type: InstantAction
+    event: !type:SummonDemonPortalSpellEvent
