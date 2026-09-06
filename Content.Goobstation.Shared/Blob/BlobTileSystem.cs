@@ -14,6 +14,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Fluids;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
@@ -124,6 +125,13 @@ public sealed partial class BlobTileSystem : EntitySystem
     private void OnNodePulse(Entity<BlobTileComponent> ent, ref BlobNodePulseEvent args)
     {
         args.Handled |= NodePulse(ent, args.Core, args.Chem, args.Handled);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSplashAttempt(Entity<BlobTileComponent> ent, ref SplashAttemptEvent args)
+    {
+        // blob tiles cant splash eachother with chems
+        args.Cancelled |= _tileQuery.HasComp(args.Target);
     }
 
     /// <summary>
