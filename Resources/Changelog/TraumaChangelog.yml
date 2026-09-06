@@ -14191,3 +14191,10 @@ Entries:
   id: 1548
   time: '2026-09-05T13:11:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4460
+- author: yglop
+  changes:
+  - type: Add
+    message: Viscerator grenades in uplink
+  id: 1549
+  time: '2026-09-06T09:29:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4415
