@@ -58,13 +58,7 @@
       params:
         volume: 5
     examineText: It is equipped with an advanced tamper-detection device.
+    broadcastChannel: Command
   - type: Wires
     layoutId: SecureStorageHighPriority
     boardName: wires-board-name-secure-storage
-  - type: ActiveListener
-    range: 0
-  - type: RadioMicrophone
-    broadcastChannel: Command
-    listenRange: 0
-    toggleOnInteract: false
-    enabled: true

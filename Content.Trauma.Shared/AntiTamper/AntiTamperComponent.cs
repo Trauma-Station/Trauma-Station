@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -74,4 +75,10 @@ public sealed partial class AntiTamperComponent : Component
     /// </summary>
     [DataField]
     public string TamperMessage = "WARNING: ANTI-TAMPER LOCK DAMAGED";
+
+    /// <summary>
+    /// If provided, tamper message is also announced on the provided radio channel.
+    /// </summary>
+    [DataField]
+    public ProtoId<RadioChannelPrototype>? BroadcastChannel;
 };

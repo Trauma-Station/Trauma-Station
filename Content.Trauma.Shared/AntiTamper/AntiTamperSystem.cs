@@ -4,6 +4,7 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Examine;
+using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -12,8 +13,10 @@ namespace Content.Trauma.Shared.AntiTamper;
 public sealed partial class AntiTamperSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedRadioSystem _radio = default!;
 
     [Dependency] private EntityQuery<DestructibleComponent> _destructibleQuery = default!;
 
@@ -72,6 +75,9 @@ public sealed partial class AntiTamperSystem : EntitySystem
             return;
 
         _chat.TrySendInGameICMessage(ent, ent.Comp.TamperMessage, InGameICChatType.Speak, false);
+
+        if (_proto.TryIndex(ent.Comp.BroadcastChannel, out var channel))
+            _radio.SendRadioMessage(ent, ent.Comp.TamperMessage, channel, ent);
 
         ent.Comp.LastYell = _timing.CurTime;
     }

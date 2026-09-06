@@ -16,61 +16,61 @@
 - type: entity
   id: LockerHeadOfSecurity
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Security # joever
 
 - type: entity
   id: LockerWarden
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Security
 
 - type: entity
   id: LockerChiefMedicalOfficer
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Medical
 
 - type: entity
   id: LockerResearchDirector
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Science
 
 - type: entity
   id: LockerChiefEngineer
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Engineering
 
 - type: entity
   id: LockerQuarterMaster
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Supply
 
 - type: entity
   id: LockerRepresentative
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: CentCom
 
 - type: entity
   id: LockerNanorep
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: CentCom
 
 - type: entity
   id: LockerClown
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Service # poor poor clown
 
 - type: entity
   id: LockerSyndicatePersonal
   components:
-  - type: RadioMicrophone
+  - type: AntiTamper
     broadcastChannel: Syndicate # funny
 
 # Normal
