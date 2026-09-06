@@ -262,6 +262,7 @@ public sealed partial class MobThresholdSystem : EntitySystem
             !TryComp<MobThresholdsComponent>(target2, out var threshold2))
             return false;
 
+        /* <Trauma>
         if (!TryGetThresholdForState(target1, MobState.Dead, out var ent1DeadThreshold, threshold1))
             ent1DeadThreshold = 0;
 
@@ -269,6 +270,12 @@ public sealed partial class MobThresholdSystem : EntitySystem
             ent2DeadThreshold = 0;
 
         damage = (_damageable.GetAllDamage((target1, oldDamage)) / ent1DeadThreshold.Value) * ent2DeadThreshold.Value;
+        */
+        var ent1DeadThreshold = GetLowestThreshold((target1, threshold1));
+        var ent2DeadThreshold = GetLowestThreshold((target2, threshold2));
+
+        damage = _damageable.GetAllDamage((target1, oldDamage)) * ent2DeadThreshold / ent1DeadThreshold;
+        // </Trauma>
         return true;
     }
 
