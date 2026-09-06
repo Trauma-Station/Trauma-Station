@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: wireLayout
+  id: SecureStorageLowPriority
+  dummyWires: 1
+  wires:
+# TODO: if possible in future make them electrify, right now it will make it so the panel requires power too
+#  - !type:PowerWireAction
+#  - !type:PowerWireAction
+  - !type:AntiTamperWireAction
+  - !type:SpeechWireAction
+  - !type:AccessWireAction
+
+- type: wireLayout
+  id: SecureStorageHighPriority
+  dummyWires: 3
+  wires:
+#  - !type:PowerWireAction
+#  - !type:PowerWireAction
+  - !type:AntiTamperWireAction
+  - !type:SpeechWireAction
+  - !type:AccessWireAction

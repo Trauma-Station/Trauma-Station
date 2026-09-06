@@ -307,22 +307,6 @@
   id: CrateWeaponSecure
   name: secure weapon crate
   components:
-  # <Trauma>
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-  - type: Damageable
-    damageModifierSet: StrongCrates
-  - type: Injurable
-    damageContainer: StructuralInorganic
-  # </Trauma>
   - type: Icon
     sprite: Structures/Storage/Crates/weapon.rsi
   - type: Sprite
@@ -492,9 +476,6 @@
   description: "A secure lock box. Funds from its sale will be distributed back to the department. Just remember: Cargo always takes a cut."
   abstract: true
   components:
-  # <Trauma>
-  - type: AntiRottingContainer # needed for plant bounties and it costs money so
-  # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/Crates/lockbox.rsi
   - type: GenericVisualizer
@@ -735,19 +716,6 @@
   name: coffin
   description: A comfy coffin, excellent place for the vampires and corpses.
   components:
-  # <Trauma>
-  - type: VampireLair
-  - type: EffectsOnContainer
-    inserted:
-    - !type:ModifyStatusEffect
-      effectProto: VampireCoffinStatusEffect
-      time: null
-    removed:
-    - !type:ModifyStatusEffect
-      effectProto: VampireCoffinStatusEffect
-      time: null
-      type: Remove
-  # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/Crates/coffin.rsi
     layers:
