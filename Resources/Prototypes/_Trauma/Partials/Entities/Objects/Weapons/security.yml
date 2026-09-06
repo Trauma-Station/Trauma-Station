@@ -2,6 +2,7 @@
 
 - type: entity
   id: Stunbaton
+  name: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
   - type: WeaponClass
     class: NonLethal
@@ -30,6 +31,7 @@
     shape:
     - 0,0,2,0
     storedRotation: 45
+  - !Remove type: PreventForcedThrow # AHELP: clown slip me kill he
 
 - type: entity
   id: Truncheon
