@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: XenoborgEngi
+  components:
+  - type: BorgChassis
+    maxModules: 8
+    moduleWhitelist:
+      tags:
+      - BorgModuleJanitor
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModuleAdvancedCleaning
+
+- type: entity
+  id: XenoborgEngiPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModuleAdvancedCleaning

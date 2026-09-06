@@ -1,0 +1,124 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: WheatPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - SteelWheatPlants
+
+- type: entity
+  id: LemoonPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - LemonadePlants
+
+- type: entity
+  id: TomatoPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - BluespaceTomatoPlants
+
+- type: entity
+  id: ApplePlants
+  components:
+  - type: PlantData
+    mutationPrototypes: &apples
+    - DeliciousApplePlants
+    - MethApplePlants
+
+- type: entity
+  id: GoldenApplePlants
+  components:
+  - type: PlantData
+    mutationPrototypes: *apples
+
+# TODO: red/green/yellow apple slop (wtf is inheritance)
+
+- type: entity
+  id: CornPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - ClearCornPlants
+
+- type: entity
+  id: OnionRedPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - OnionPlants
+    - BloonionPlants
+
+- type: entity
+  id: ChanterellePlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - MagicMushrooms
+
+- type: entity
+  id: ChillyPlants
+  components:
+  - type: PlantChemicals
+    chemicals:
+      Fresium:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+
+- type: entity
+  id: WatermelonPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - BalloonWatermelonPlants
+
+- type: entity
+  id: BerryPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - StrangeBerryPlants
+
+- type: entity
+  id: PeaPlants
+  components:
+  - type: PlantData
+    mutationPrototypes:
+    - PeanutPlants # pea k
+
+- type: entity
+  id: WorldPeaPlants
+  components:
+  - type: PlantChemicals
+    chemicals:
+      Pax: !Remove # replaced by tilenol
+      Tilenol:
+        min: 1
+        max: 2
+        potencyDivisor: 50
+
+- type: entity
+  id: CherryPlants
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
+  - type: PlantData
+    mutationPrototypes:
+    - CherryBombPlants
+
+- type: entity
+  id: BloonionPlants
+  components:
+  - type: PlantChemicals
+    # change upstream 1/5/20 to 1/15/6
+    chemicals:
+      Potassium: &smoke
+        min: 1
+        max: 15
+        potencyDivisor: 6
+      Phosphorus: *smoke
+      Sugar: *smoke

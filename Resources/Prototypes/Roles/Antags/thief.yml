@@ -8,7 +8,6 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h
-  creditImage: /Textures/_Trauma/EndCredits/Antags/thief.png # Trauma
 
 - type: antagSpecifier
   parent: RestrictedAntag
@@ -32,6 +31,5 @@
   id: ThiefGear
   storage:
     back:
-    #- ThiefBeacon # DeltaV - no more objectives
+    - ThiefBeacon
     - SatchelThief
-    # - ClothingHandsChameleonThief - Goobedit, since thieves have intrinsic pickpocketing now we don't need these

@@ -1,0 +1,200 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: Wirecutter
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 1
+        Piercing: 1
+        Slash: 1
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/wirecutter_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+  - type: Retractor
+    speed: 0.35
+  - type: Hemostat
+    speed: 0.6
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/Items/wirecutter.ogg
+      params:
+        variation: 0.125
+    endSound:
+      path: /Audio/Items/wirecutter.ogg
+      params:
+        variation: 0.125
+  - type: Tag
+    tags:
+    - DroneUsable
+  - type: MeleeWeapon
+    animationRotation: -90
+
+- type: entity
+  id: BaseScrewdriver
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/screwdriver_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/screwdriver_drop.ogg
+  - type: Retractor
+    speed: 0.45
+  - type: Tending
+    speed: 0.65
+  - type: SurgeryTool
+    startSound:
+      collection: Screwdriver
+    endSound:
+      path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        hard: false
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: ThrowingAngle
+    angle: -90
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+    removalTime: 1.5
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 8
+        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
+  - type: Tag
+    tags:
+    - DroneUsable
+  - type: MeleeWeapon
+    animationRotation: -90
+  # moved to Screwdriver proper, dont want it interfering with forged screwdriver
+  - !Remove RandomSprite
+  - !Remove PhysicalComposition
+
+- type: entity
+  id: Wrench
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/wrench_pickup.ogg
+      params:
+        volume: -2
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -2
+  - type: Tag
+    tags:
+    - DroneUsable
+  - type: MeleeWeapon
+    animationRotation: 225
+
+- type: entity
+  id: Multitool
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2 # ow
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/multitool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+  - type: Tag
+    tags:
+    - DroneUsable
+
+- type: entity
+  id: NetworkConfigurator
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 1 # ow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 25
+      Plastic: 25
+
+# Power Tools
+
+- type: entity
+  id: PowerDrill
+  components:
+  - type: Tending
+    speed: 0.75
+  - type: Drill
+    speed: 1
+  - type: SurgeryTool
+    startSound: /Audio/Items/drill_use.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5
+        Piercing: 2.5
+  - type: MeleeWeapon
+    animationRotation: 90
+    range: 1.4
+
+- type: entity
+  id: RCD
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  - type: Tag
+    tags:
+    - DroneUsable
+    - RCD # specifically not using the component for that because RPD also uses it
+  - type: LimitedCharges
+    maxCharges: 45 # 1.5x
+
+- type: entity
+  id: Omnitool
+  components:
+  - type: UseDelay # for insta prying
+    delay: 0
+
+# Other
+
+- type: entity
+  id: Shovel
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10 # ow
+  - type: MeleeWeapon
+    animationRotation: -45
+
+- type: entity
+  id: RollingPin
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  - type: MeleeWeapon
+    animationRotation: -45

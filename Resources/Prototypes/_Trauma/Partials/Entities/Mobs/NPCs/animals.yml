@@ -1,0 +1,711 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MobBat
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobBee
+  components:
+  - type: Penetratable
+    penetrateDamage: 0
+  - type: MobThresholds
+    thresholds: !Clear
+      0: Alive
+      5: Dead # was 10
+  - type: Destructible
+    thresholds: !Clear
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 5 # was 20
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+
+- type: entity
+  id: MobChicken
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Chicken
+    understands:
+    - Chicken
+    - TauCetiBasic
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobDuckMallard
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Duck
+    understands:
+    - Duck
+    - TauCetiBasic
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: BaseCockroach
+  components:
+  - type: Penetratable
+    penetrateDamage: 0
+  - type: ZombieImmune
+  - type: LanguageSpeaker
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+  - type: ThermalRegulator
+    metabolismHeat: 300
+  - type: StaticPrice
+    price: -520
+  - type: VentCrawler
+
+- type: entity
+  parent:
+  - BaseAnimalGhostRole
+  id: MobMothroach
+  components:
+  - type: VentCrawler
+  - type: GhostRole
+    prob: 0 # suffer
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: DashAction
+    actionProto: ActionDashMoth
+  - type: Item
+    size: Small # was Normal, let it fit in chest cavity
+  - type: LanguageSpeaker
+    speaks:
+    - Moffic
+    understands:
+    - Moffic
+    - TauCetiBasic
+  - type: EatToGrow
+    growth: 0.05
+    maxGrowth: 2
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobButterfly
+  components:
+  - type: Penetratable
+    penetrateDamage: 1
+
+- type: entity
+  id: MobCow
+  components:
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+
+- type: entity
+  id: MobCrab
+  components:
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Crab
+    understands:
+    - Crab
+    - TauCetiBasic
+  - type: Tag
+    tags:
+    - Crab
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobSheepBase
+  components:
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+
+- type: entity
+  id: MobGorilla
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 30
+  - type: MobThresholds
+    # nerfed a good bit from 200/250
+    thresholds: !Clear
+      0: Alive
+      120: Critical
+      220: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      80: 0.7
+      100: 0.5
+
+- type: entity
+  id: MobKangaroo
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Kangaroo
+    understands:
+    - Kangaroo
+    - TauCetiBasic
+  - type: GhostRole
+    prob: 0
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobBaseAncestor
+  components:
+  - type: BagAccess
+  - type: VampireDrainable
+  - type: BloodSplatterer
+  - type: VentCrawler
+    allowInventory: false
+  - type: GroupRetaliation
+    range: 8
+  - type: Targeting
+  - type: HumanoidProfile
+    species: Monkey
+  - type: Vocal
+    emoteSounds: MonkeyMode
+    wilhelmProbability: 0.001
+  - type: DiseaseCarrier
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  # stupid monkey needs clever mutation to be literate
+  - type: BlockReading
+  - type: BlockWriting
+  - type: XenoVacTarget # dead monkey cleaner 9000
+  - !Remove Hands # no third hand
+  - type: NpcFactionMember
+    factions:
+    - Monkey
+
+- type: entity
+  parent:
+  - AppearanceMonkey
+  - BaseAnimalGhostRole
+  id: MobMonkey
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Monkey
+    understands:
+    - Monkey
+    - Kobold
+    - TauCetiBasic
+  - type: Skinnable # Fuck pun-pun
+    skinnedSprite: _Trauma/Mobs/Animals/skinnedmonkey.rsi
+    unskinnedSprite: Mobs/Animals/monkey.rsi
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
+  - type: KnowledgeHolder
+  - type: GhostRole
+    prob: 0.1
+  - !Remove MonkeyAccent
+
+- type: entity
+  parent:
+  - AppearanceMonkey
+  id: MobBaseSyndicateMonkey
+  components:
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Monkey
+    understands:
+    - Monkey
+    - Kobold
+    - TauCetiBasic # Understanding your nukeops partners.
+  - type: GhostRole
+    prob: 0.1
+  - !Remove MonkeyAccent
+
+- type: entity
+  parent:
+  - AppearanceKobold
+  - BaseAnimalGhostRole
+  id: MobBaseKobold
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Kobold
+    understands:
+    - Kobold
+    - Monkey
+    - TauCetiBasic
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # free lizardmen...
+    dormant:
+    - MutationMonkified
+  - type: MobThresholds
+    # buffed from 60/125
+    thresholds: !Clear
+      0: Alive
+      100: Critical
+      200: Dead
+  - type: GhostRole
+    prob: 0.1
+  - !Remove ReplacementAccent
+
+- type: entity
+  parent:
+  - !Remove BaseMobAnimal
+  - BaseMobMouse
+  - BaseAnimalGhostRole
+  id: MobMouse
+  components:
+  - type: Penetratable
+    penetrateDamage: 3 # 3-5 kills per bullet
+  - type: ZombieImmune
+  - type: VentCrawler
+    enterDelay: 0.5
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-0
+  - type: SolutionManager
+    solutions:
+    - SolutionMouseBites
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+  - type: Stamina
+    baseCritThreshold: 20
+    animationThreshold: 10
+  - type: Crawler
+  - type: NPCRetaliation
+    attackMemoryLength: 5 # stop caring fast if you don't keep hitting
+  - type: GroupRetaliation
+    range: 5 # slightly lower for mice
+  - type: CollectiveMind
+    defaultChannel: Mousemind
+    channels:
+    - Mousemind
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: ActionGrant
+    actions:
+    - ActionMouseCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Mouse
+  - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
+  - type: MobSpam # no 500 dead mice lagging the server
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - type: GhostRole
+    prob: 0.3 # not guaranteed anymore
+  - type: MeleeWeapon
+    altDisarm: false # Sorry mouse shove lovers.
+    damage:
+      types:
+        Slash: 1
+  - type: Bloodstream
+    smokeImmune: true # prevent server lagging mouse farms
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobMouse1
+  components:
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-1
+
+- type: entity
+  id: MobMouse2
+  components:
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-2
+
+- type: entity
+  id: MobMouseCancer
+  components:
+  - type: GhostRole
+    prob: 1 # Ensure evil mice get their ghostrole
+
+- type: entity
+  id: MobSlug
+  components:
+  - type: VentCrawler
+
+- type: entity
+  id: MobFrog
+  components:
+  - type: VentCrawler
+  - type: Penetratable
+    penetrateDamage: 3 # 3-5 kills per bullet
+  - type: ZombieImmune
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      10: Critical
+      20: Dead
+
+- type: entity
+  id: MobParrotBase
+  components:
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 5
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+
+- type: entity
+  id: MobPenguin
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Penguin
+    understands:
+    - Penguin
+    - TauCetiBasic
+
+- type: entity
+  id: MobSnake
+  components:
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+
+- type: entity
+  parent:
+  - BaseMobGiantSpider
+  id: MobSpiderBase
+  components:
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Slash: 3
+        Piercing: 7
+  - type: VentCrawler
+  - type: UseDelay # For insta prying
+    delay: 1
+  - type: FoliageIgnoringVision
+    speaks:
+    - Xeno
+    understands:
+    - Xeno
+    - TauCetiBasic
+  - type: Spider
+    spawnsWebsAsNonPlayer: false
+  - type: Prying
+    speedModifier: 4
+  - type: PassiveDamage # heal ballistic too
+    damage:
+      types:
+        Ballistic: -0.03
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobSpiderAngryBase
+  components:
+  - type: HTN
+    constantlyReplan: false # Trauma
+  - type: GhostRole
+    raffle: !Remove
+
+- type: entity
+  id: MobGiantSpider
+  name: giant spider
+  components:
+  - type: MeleeWeapon
+    damage:
+      types: !Clear
+        # buffed to slowly break grilles
+        Slash: 3
+        Piercing: 7
+
+- type: entity
+  id: MobGiantSpiderAngry
+  components:
+  - type: MobSpam
+  - type: Tag
+    tags:
+    - Spider
+  - type: ActionGrant
+    actions:
+    - ActionSpiderCall
+    - SpiderMultiply
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Spider
+  - type: MobCallable
+  - type: HTN
+    constantlyReplan: false
+    rootTask:
+      task: SpiderCompound
+  - type: ShadowCocoonMaker
+    cocoonDelay: 15
+    shadowCocoon: SpiderEggsHuman
+    verbText: "Infest victim"
+  - type: EntityProducerAction
+    insufficientSatiationPopup: action-popup-lay-egg-too-hungry
+    userPopup: action-popup-lay-egg-user
+    othersPopup: action-popup-lay-egg-others
+  - type: SatiationProduction
+    delay: 60
+    delayMax: 120
+    satiationUsage: 140
+    minimumSatiation: 140
+    automaticForPlayers: false
+  - type: EntityProducer
+    table:
+      id: SpiderEggs
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SpiderHunger
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  # - type: Hands # TODO - Make spiders only able to hold webs
+  - type: Puller
+    needsHands: false
+  - type: Inventory
+    templateId: xenomorph
+  - type: ComplexInteraction
+  # </Trauma>
+
+- type: entity
+  id: MobClownSpider
+  components:
+  - type: SolutionManager
+    solutions:
+    - SolutionClownSpider
+  - type: MeleeChemicalInjector
+    transferAmount: 6
+    solution: melee
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      240: Dead # 1.5x
+  - type: MeleeWeapon
+    damage:
+      types:
+        # split into slash and blunt so it can break grilles and windows
+        Slash: 4
+        Piercing: 2
+        Blunt: 2
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents: !Clear
+      - ReagentId: SpaceLube # was Laughter
+        Quantity: 150
+
+- type: entity
+  id: MobGiantSpiderWizard
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Universal # Should allow them to understand everything and speak it too. Might need to change this.
+    understands:
+    - Universal
+
+- type: entity
+  parent:
+  - BaseMobTrashPanda
+  id: MobPossum
+
+- type: entity
+  parent:
+  - BaseMobTrashPanda
+  id: MobRaccoon
+
+- type: entity
+  id: MobFox
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 15 # was 8
+  - type: LanguageSpeaker
+    speaks:
+    - Fox
+    understands:
+    - Fox
+    - TauCetiBasic
+
+- type: entity
+  id: MobCorgi
+  components:
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 15
+  - type: LanguageSpeaker
+    speaks:
+    - Dog
+    understands:
+    - Dog
+    - TauCetiBasic
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobCorgiPuppy
+  components:
+  - type: VentCrawler
+
+- type: entity
+  parent:
+  - !Index:-2 MobCombat
+  id: MobCat
+  components:
+  - type: VentCrawler
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: LanguageSpeaker
+    speaks:
+    - Cat
+    understands:
+    - Cat
+    - TauCetiBasic
+  - type: MeleeWeapon
+    animation: WeaponArcSlash
+    damage:
+      types: !Clear
+        Slash: 10
+
+- type: entity
+  parent:
+  - !Index:-1 MobNightVision
+  id: MobCatSyndy
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Cat
+    understands:
+    - Cat
+    - TauCetiBasic # Needs to understand your nukie ops.
+
+- type: entity
+  parent:
+  - BaseMobTrashPanda
+  id: MobSloth
+
+- type: entity
+  parent:
+  - BaseMobTrashPanda
+  id: MobFerret
+
+- type: entity
+  id: MobHamster
+  components:
+  - type: VentCrawler
+  - type: GhostRole
+    prob: 0
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobPig
+  components:
+  - type: NPCRetaliation
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 15
+  - type: LanguageSpeaker
+    speaks:
+    - Pig
+    understands:
+    - Pig
+    - TauCetiBasic
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - !Remove ReplacementAccent
+
+- type: entity
+  id: MobDionaNymph
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - RootSpeak
+    understands:
+    - RootSpeak
+    - TauCetiBasic
+
+- type: entity
+  id: MobReindeerBuck
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - Deer
+    understands:
+    - Deer
+    - TauCetiBasic

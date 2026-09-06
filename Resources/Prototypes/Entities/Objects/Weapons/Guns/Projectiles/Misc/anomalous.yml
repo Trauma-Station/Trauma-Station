@@ -4,9 +4,6 @@
   name: delta particles
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
-  - type: SmartLinkBlacklist
-  # </Trauma>
   - type: PointLight
     enabled: true
     color: "#c2385d"
