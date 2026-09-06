@@ -8,7 +8,7 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedZombieBlobSystem : EntitySystem
+public abstract partial class ZombieBlobSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<ZombieBlobComponent> _query = default!;

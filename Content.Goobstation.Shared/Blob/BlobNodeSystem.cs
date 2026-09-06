@@ -84,7 +84,7 @@ public sealed partial class BlobNodeSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (!_timing.IsFirstTimePredicted)
+        if (_net.IsClient)
             return;
 
         var now = _timing.CurTime;
