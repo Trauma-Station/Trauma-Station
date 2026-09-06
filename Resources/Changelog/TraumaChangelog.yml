@@ -14226,3 +14226,10 @@ Entries:
   id: 1551
   time: '2026-09-06T14:37:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4477
+- author: luminargh
+  changes:
+  - type: Add
+    message: New lobby music, "Race to Evac"
+  id: 1552
+  time: '2026-09-06T22:05:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4480
