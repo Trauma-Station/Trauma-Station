@@ -30,6 +30,13 @@
   materials:
     Steel: 1000
 
+- type: latheRecipe # Trauma
+  parent: BaseXenoborgMachineRecipe
+  id: XenoborgChargerRecipe
+  result: XenoborgChargerFlatpack
+  materials:
+    Steel: 1000
+
 # xenoborgs
 
 - type: latheRecipe

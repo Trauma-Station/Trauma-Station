@@ -415,3 +415,67 @@
     layers:
     - state: heavylaser
       shader: unshaded
+
+# Xenoborg
+
+- type: entity
+  parent: BulletLaser
+  id: TraumaXenoborgLaser
+  name: blue amplified laser ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_magnum.rsi
+    layers:
+    - state: decolored1
+      color: "#3c13ac"
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#3c13ac"
+  - type: Projectile
+    damage:
+      types:
+        Heat: 17
+
+- type: entity
+  parent: BulletLaser
+  id: TraumaXenoborgFireLaser
+  name: xenoborg fire laser ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#d16d10"
+  - type: Projectile
+    damage:
+      types:
+        Heat: 12
+  - type: HitscanIgnite
+    igniteChance: 0.75
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_magnum.rsi
+    layers:
+    - state: decolored2
+      color: "#d16d10"
+      shader: unshaded
+
+- type: entity
+  parent: BulletLaser
+  id: TraumaXenoborgHeavyLaser
+  name: blue high-energy laser ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_magnum.rsi
+    layers:
+    - state: decolored2
+      color: "#3c13ac"
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#3c13ac"
+  - type: Projectile
+    damage:
+      types:
+        Heat: 25

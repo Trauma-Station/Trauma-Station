@@ -253,9 +253,10 @@
     - trigger
     - timer
   - type: Explosive
-    explosionType: Minibomb
-    totalIntensity: 50
-    intensitySlope: 7
+    explosionType: Default # Trauma, was minibomb
+    totalIntensity: 13.5 # Trauma, was 50
+    intensitySlope: 2.7 # Trauma, was 7
+    maxIntensity: 2.7 # Trauma
     canCreateVacuum: false
   - type: ChasingWalk
     speed: 6

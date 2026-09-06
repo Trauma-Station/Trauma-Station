@@ -19,3 +19,23 @@
   components:
   - type: Flatpack
     entity: CrewPrintingPress
+
+- type: entity
+  parent: [ BaseFlatpack, BaseXenoborgContraband ]
+  id: XenoborgChargerFlatpack
+  name: xenoborg charger flatpack
+  description: A flatpack used for constructing a xenoborg charger.
+  components:
+  - type: Sprite
+    layers:
+    - state: base-xenoborg
+    - state: overlay
+      color: "#452dfa"
+    - state: icon-xenoborg-extractor
+  - type: Item
+    size: Normal
+  - type: Flatpack
+    entity: BorgChargerXenoborg
+  - type: GuideHelp
+    guides:
+    - Xenoborgs
