@@ -290,3 +290,69 @@
   - type: BatteryAmmoProvider
     proto: XrayCannonBullet
     fireCost: 62.5
+
+- type: entity
+  parent: [ BaseMobAsteroid, FlyingMobBase ]
+  id: MobSyndieViscerator
+  name: viscerator
+  description: A small, twin-bladed machine capable of inflicting very deadly lacerations.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/viscerator.rsi
+    layers:
+    - state: viscerator
+      map: ["movement"]
+    - state: viscerator_l
+      shader: unshaded
+      map: ["light"]
+      visible: true
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: viscerator_moving
+    noMovementLayers:
+      movement:
+        state: viscerator
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 5.0
+    baseSprintSpeed : 5.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    angle: 0
+    attackRate: 1
+    range: 0.5
+    animation: WeaponArcSlash
+    damage:
+      types:
+        Slash: 6
+      armorPenetration: -2 # it should not be as dangerous to armored targets
+      woundSeverityMultipliers:
+        Slash: 2.5
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+    - Syndicate
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard: # highly aggressive
+      VisionRadius: !type:Single
+        15
+      AggroVisionRadius: !type:Single
+        15

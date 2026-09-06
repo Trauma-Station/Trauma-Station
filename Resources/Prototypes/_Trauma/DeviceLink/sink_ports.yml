@@ -66,6 +66,13 @@
   name: signal-port-name-text
   description: signal-port-description-text
 
+# Interactor
+
+- type: sinkPort
+  id: ToolLocked
+  name: signal-port-name-tool-locked
+  description: signal-port-description-tool-locked
+
 # Locker/Unlock
 
 - type: sinkPort

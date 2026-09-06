@@ -1150,9 +1150,9 @@ namespace Content.Shared.Interaction
             // <Trauma>
             if (target is { } t)
             {
-                var afterInteractTargetEvent = new CanBeInteractedWithEvent(user, used, t, clickLocation, canReach);
-                RaiseLocalEvent(t, ref afterInteractTargetEvent);
-                if (afterInteractTargetEvent.Handled)
+                var attemptEv = new CanBeInteractedWithEvent(user, used, t, clickLocation, canReach);
+                RaiseLocalEvent(t, ref attemptEv);
+                if (attemptEv.Handled)
                 {
                     DoContactInteraction(user, used, null);
                     if (canReach)
