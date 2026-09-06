@@ -14213,3 +14213,16 @@ Entries:
   id: 1550
   time: '2026-09-06T14:14:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4476
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Interactors now have a tool lock mode that prevents its tool being picked
+      up or dropped.
+  - type: Tweak
+    message: >-
+      Interactor/constructor's auto start port is now called repeating to be
+      less confusing.
+  id: 1551
+  time: '2026-09-06T14:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4477
