@@ -137,18 +137,19 @@ public sealed partial class BlobTileSystem : EntitySystem
             healing *= chem.HealingScale;
         _damage.ChangeDamage(ent.Owner, healing);
 
-        return !lazy && TryGrow(ent, core, chem, out _);
+        return !lazy && TryGrow(ent, core, chem, out _, predicted: false);
     }
 
-    public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true)
+    public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true, bool predicted = true)
     {
         newTile = null;
         return ent.Comp.Core is { } core &&
             _coreQuery.TryComp(core, out var coreComp) &&
-            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects);
+            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects, predicted);
     }
 
-    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem, out EntityUid? newTile, bool attack = true, bool doEffects = true)
+    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem,
+        out EntityUid? newTile, bool attack = true, bool doEffects = true, bool predicted = true)
     {
         newTile = null;
         var xform = Transform(ent);
@@ -201,7 +202,7 @@ public sealed partial class BlobTileSystem : EntitySystem
                 {
                     DoLunge(ent, uid);
                     _damage.TryChangeDamage(uid, chem.Damage);
-                    if (_net.IsClient && _timing.IsFirstTimePredicted) // all clients will predict it
+                    if (!predicted || _net.IsClient && _timing.IsFirstTimePredicted)
                         _audio.PlayPvs(core.Comp.AttackSound, uid);
                 }
                 return true;

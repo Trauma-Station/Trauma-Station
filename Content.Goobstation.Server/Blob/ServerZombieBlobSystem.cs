@@ -29,7 +29,7 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed partial class ZombieBlobSystem : SharedZombieBlobSystem
+public sealed partial class ServerZombieBlobSystem : ZombieBlobSystem
 {
     [Dependency] private NpcFactionSystem _faction = default!;
     [Dependency] private NPCSystem _npc = default!;
@@ -49,7 +49,7 @@ public sealed partial class ZombieBlobSystem : SharedZombieBlobSystem
     public static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
     public static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
 
-    public ZombieBlobSystem()
+    public ServerZombieBlobSystem()
     {
         _normalAtmos = new GasMixture(Atmospherics.CellVolume)
         {

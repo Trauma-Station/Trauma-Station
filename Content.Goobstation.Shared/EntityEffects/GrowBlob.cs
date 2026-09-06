@@ -33,7 +33,7 @@ public sealed partial class GrowBlobEffectSystem : EntityEffectSystem<BlobTileCo
     protected override void Effect(Entity<BlobTileComponent> ent, ref EntityEffectEvent<GrowBlob> args)
     {
         var e = args.Effect;
-        _tile.TryGrow(ent, out var tile, e.Attack, e.DoEffects);
+        _tile.TryGrow(ent, out var tile, e.Attack, e.DoEffects, predicted: args.Predicted);
         if (tile != null)
             _damage.ChangeDamage(tile.Value, _damage.GetAllDamage(ent.Owner), ignoreResistances: true);
     }

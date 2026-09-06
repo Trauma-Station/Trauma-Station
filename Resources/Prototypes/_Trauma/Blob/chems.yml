@@ -39,13 +39,13 @@
   attackEffects:
   - !type:AddReagentToBlood
     reagent: FrostOil
-    amount: 7.5
+    amount: 5
   - !type:AddReagentToBlood
     reagent: Ice
-    amount: 7.5
+    amount: 5
   - !type:AddReagentToBlood
     reagent: CryogenicPoison
-    amount: 7.5
+    amount: 15
 
 - type: blobChem
   id: ElectromagneticWeb
@@ -168,6 +168,7 @@
     types:
       Blunt: 15
       Asphyxiation: 10
+      Structural: 150
   smokeSolution:
     reagents:
     - ReagentId: SpaceLube
