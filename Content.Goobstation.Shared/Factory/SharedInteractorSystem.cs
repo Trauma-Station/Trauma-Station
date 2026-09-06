@@ -20,6 +20,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Factory;
 
@@ -30,6 +31,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     [Dependency] private AutomationSystem _automation = default!;
     [Dependency] private AutomationFilterSystem _filter = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
