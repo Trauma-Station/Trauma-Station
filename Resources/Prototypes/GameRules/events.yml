@@ -305,7 +305,7 @@
     objectives:
     - ParadoxCloneKillObjective
     - ParadoxCloneLivingObjective
-  - type: AntagRandomSpawn # TODO: improve spawning so they only start in maints
+  - type: MaintsSpawnRule # Trauma - was AntagRandomSpawn
   - type: AntagSelection
     agentName: paradox-clone-round-end-agent-name
     antags:
@@ -485,9 +485,9 @@
     startAnnouncement: station-event-vent-creatures-start-horde-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 7 # Trauma - was 5
+    earliestStart: 45 # Trauma - was 20
+    minimumPlayers: 30 # Trauma - was 15
+    weight: 3 # Trauma - was 5
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
