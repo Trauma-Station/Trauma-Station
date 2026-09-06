@@ -54,7 +54,6 @@ public sealed partial class AntiTamperComponent : Component
     /// Cooldown between alarm noises.
     /// </summary>
     [DataField]
-    [AutoPausedField]
     public TimeSpan AlarmCooldown = TimeSpan.FromSeconds(5);
 
     /// <summary>
@@ -68,6 +67,7 @@ public sealed partial class AntiTamperComponent : Component
     /// Last time of the alarm
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan LastAlarm = TimeSpan.Zero;
 
     /// <summary>
