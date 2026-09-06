@@ -14198,3 +14198,18 @@ Entries:
   id: 1549
   time: '2026-09-06T09:29:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4415
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blob now gets notified if its core is under attack.
+  - type: Tweak
+    message: Blob can now attack an extra half tile away.
+  - type: Fix
+    message: >-
+      Fixed pressurized blob chemicals breaking after 1 attack/death and not
+      doing any structural damage.
+  - type: Tweak
+    message: Buffed cryogenic poison blob chemical injection.
+  id: 1550
+  time: '2026-09-06T14:14:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4476
