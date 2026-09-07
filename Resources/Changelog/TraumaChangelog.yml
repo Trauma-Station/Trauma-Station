@@ -14233,3 +14233,10 @@ Entries:
   id: 1552
   time: '2026-09-06T22:05:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4480
+- author: Bon-Man
+  changes:
+  - type: Tweak
+    message: Lowered the damage of exosuit drills
+  id: 1553
+  time: '2026-09-07T05:58:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4485
