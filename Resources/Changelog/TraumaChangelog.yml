@@ -14240,3 +14240,10 @@ Entries:
   id: 1553
   time: '2026-09-07T05:58:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4485
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed book banning.
+  id: 1554
+  time: '2026-09-07T07:45:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4490
