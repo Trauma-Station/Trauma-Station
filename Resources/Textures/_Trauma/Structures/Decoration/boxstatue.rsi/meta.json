@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from ParadiseSS13 at https://github.com/ParadiseSS13/Paradise/commit/547ce531a7b040c7ecd8c57047b5f233e9d0cd51 ,edited by Aineias1(discord)",
+    "size": {
+        "x": 96,
+        "y": 96
+    },
+    "states": [
+        {
+            "name": "box"
+        }
+    ]
+}
