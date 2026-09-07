@@ -262,7 +262,7 @@ public sealed partial class MobThresholdSystem : EntitySystem
             !TryComp<MobThresholdsComponent>(target2, out var threshold2))
             return false;
 
-        /* <Trauma>
+        /* <Trauma> - use helper methods and more sane damage calculation
         if (!TryGetThresholdForState(target1, MobState.Dead, out var ent1DeadThreshold, threshold1))
             ent1DeadThreshold = 0;
 
