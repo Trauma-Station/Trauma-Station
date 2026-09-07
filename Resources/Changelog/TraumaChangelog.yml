@@ -14263,3 +14263,10 @@ Entries:
   id: 1556
   time: '2026-09-07T12:02:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4491
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The draft is over.
+  id: 1557
+  time: '2026-09-07T12:17:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4492
