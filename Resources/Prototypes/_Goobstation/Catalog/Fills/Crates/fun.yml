@@ -55,16 +55,16 @@
   - type: ActiveListener
     range: 4
 
-- type: entity
-  id: CrateFunDiscoBeachBall
-  parent: CrateGenericSteel
-  name: disco beach ball crate
-  description: A crate containing a Disco Beach Ball that turns any beach trip into Studio 54.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage:
-        id: DiscoBeachBall
+# - type: entity
+#   id: CrateFunDiscoBeachBall
+#   parent: CrateGenericSteel
+#   name: disco beach ball crate
+#   description: A crate containing a Disco Beach Ball that turns any beach trip into Studio 54.
+#   components:
+#   - type: EntityTableContainerFill
+#     containers:
+#       entity_storage:
+#         id: DiscoBeachBall
 
 - type: entityTable
   id: RandomAnomalyCoreEnchantTable
