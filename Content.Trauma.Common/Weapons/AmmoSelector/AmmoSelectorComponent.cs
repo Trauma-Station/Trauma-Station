@@ -8,7 +8,7 @@ namespace Content.Trauma.Common.Weapons.AmmoSelector;
 public sealed partial class AmmoSelectorComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public HashSet<ProtoId<SelectableAmmoPrototype>> Prototypes = new();
+    public List<ProtoId<SelectableAmmoPrototype>> Prototypes = new();
 
     [DataField, AutoNetworkedField]
     public ProtoId<SelectableAmmoPrototype>? CurrentlySelected;

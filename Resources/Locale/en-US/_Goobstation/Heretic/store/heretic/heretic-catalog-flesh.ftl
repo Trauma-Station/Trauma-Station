@@ -38,7 +38,6 @@ knowledge-path-flesh-s4-desc =
 
     Allows you to transmute a corpse and a muzzle to create a Voiceless Dead.
     Voiceless Dead are mute ghouls, which have 100 health and a Bloody Blade.
-    Voiceless Dead are better than regular ones at using Bloody Blades.
     You can only create two at a time.
 
 knowledge-path-flesh-s5-name = Knitting of Flesh
