@@ -54,7 +54,7 @@
     name: seeds-wheat-name
     packetPrototype: WheatSeeds
     productPrototypes: [ WheatBushel ]
-    mutationPrototypes: [ MeatWheatPlants, SteelWheatPlants ] # Trauma - steel wheat
+    mutationPrototypes: [ MeatWheatPlants ]
   - type: Plant
     lifespan: 25
     maturation: 6
@@ -318,7 +318,7 @@
   - type: PlantData
     name: seeds-lemoon-name
     packetPrototype: LemoonSeeds
-    productPrototypes: [ FoodLemoon, LemonadePlants ] # Trauma - added LemonadePlants
+    productPrototypes: [ FoodLemoon ]
   - type: Plant
     lifespan: 90
     maturation: 8
