@@ -24,18 +24,11 @@
   - PirateFaction
   - Wraith
   - Lavafauna
-  - Insurgent
   - CrabFaction
 
 - type: npcFaction
   id: Mouse
-  hostile: !Clear # mice shouldnt attack random pets
-  - Insurgent
-
-- type: npcFaction
-  id: Passive
-  hostile:
-  - Insurgent
+  hostile: !Clear [] # mice shouldnt attack random pets
 
 - type: npcFaction
   id: PetsNT
@@ -45,7 +38,7 @@
   - Balloon # Pets can join the fight against the balloons
   - Blob
   - Lavafauna
-  - Insurgent
+  - Insurgent # evil shiva
   - CrabFaction
 
 - type: npcFaction
@@ -61,11 +54,6 @@
   - Wizard
   - Shadowling
   - Wraith
-
-- type: npcFaction
-  id: SimpleNeutral
-  hostile:
-  - Insurgent
 
 - type: npcFaction
   id: Syndicate

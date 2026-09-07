@@ -11,8 +11,6 @@ using Content.Shared.Hands;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
@@ -20,12 +18,16 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Trauma.Common.TileMovement;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Vehicles;
 
 public abstract partial class SharedVehicleSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
@@ -60,9 +62,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnInsert(EntityUid uid, VehicleComponent component, ref EntInsertedIntoContainerMessage args)
     {
-        if (HasComp<InstantActionComponent>(args.Entity)
-            || args.Container.ID != component.KeySlot
-            || component.IsBroken)
+        if (_timing.ApplyingState ||
+            args.Container.ID != component.KeySlot ||
+            component.IsBroken)
             return;
 
         component.EngineRunning = true;
@@ -78,7 +80,8 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnEject(EntityUid uid, VehicleComponent component, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != component.KeySlot)
+        if (_timing.ApplyingState ||
+            args.Container.ID != component.KeySlot)
             return;
         component.EngineRunning = false;
         Dirty(uid, component);

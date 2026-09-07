@@ -60,6 +60,14 @@
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
+  - type: LatheAutomation
   - type: Animateable
   - type: LightningTarget
     priority: 1
@@ -215,6 +223,9 @@
     color: "#ffffff"
     radius: 1.5
     energy: 5.0
+  - type: AlternateUI
+    key: enum.OreSiloUiKey.Key
+    verbText: Open Ore Silo UI
   - type: OreSilo
     range: 15
   - type: MasterSiloClient # theft
