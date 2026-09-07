@@ -14247,3 +14247,10 @@ Entries:
   id: 1554
   time: '2026-09-07T07:45:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4490
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Medical borgs can now pick up and hold body bags
+  id: 1555
+  time: '2026-09-07T07:54:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4432
