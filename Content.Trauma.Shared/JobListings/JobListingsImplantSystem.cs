@@ -16,7 +16,7 @@ public abstract partial class JobListingsImplantSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnImplantImplanted(Entity<JobListingsImplantComponent> ent, ref ImplantImplantedEvent args)
     {
-        ent.Comp.StoredAction = GetNetEntity(_actions.AddAction(args.Implanted, ent.Comp.Action, ent.Owner));
+        ent.Comp.StoredAction = _actions.AddAction(args.Implanted, ent.Comp.Action, ent.Owner);
         Dirty(ent);
     }
 
@@ -25,7 +25,7 @@ public abstract partial class JobListingsImplantSystem : EntitySystem
     {
         if (ent.Comp.StoredAction is not null)
         {
-            _actions.RemoveAction(GetEntity(ent.Comp.StoredAction));
+            _actions.RemoveAction(ent.Comp.StoredAction);
             ent.Comp.StoredAction = null;
             Dirty(ent);
         }

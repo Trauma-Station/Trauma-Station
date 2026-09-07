@@ -25,10 +25,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// </summary>
     public bool AssignSideJob(Entity<JobListingsComponent> jobBoard, int effectiveLevel)
     {
-        if (jobBoard.Comp.Mind is null)
+        if (jobBoard.Comp.Mind is not { } mind)
             return false;
 
-        var mind = GetEntity(jobBoard.Comp.Mind.Value);
         if (!MindQuery.TryComp(mind, out var mindComp))
             return false;
         var actor = mindComp.OwnedEntity;
@@ -149,7 +148,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         base.Refresh(jobBoard);
         // make copy so you dont mutate while iterating
-        var copy = jobBoard.Comp.AcceptedSideJobs.ContainedEntities.ToList();
+        var copy = jobBoard.Comp.AvailableSideJobs.ContainedEntities.ToList();
         foreach (var sideJob in copy)
         {
             Del(sideJob);
@@ -178,7 +177,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         if (jobBoard.Comp.Mind is null)
             return;
-        var mind = GetEntity(jobBoard.Comp.Mind);
+        var mind = jobBoard.Comp.Mind;
         if (!MindQuery.TryComp(mind, out var mindComp))
             return;
         var progress = _objectives.GetProgress(sideJob.Owner, (mind.Value, mindComp));
@@ -216,10 +215,10 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return;
 
         // set mind
-        jobListingsComp.Mind = GetNetEntity(mind);
+        jobListingsComp.Mind = mind;
         DirtyField(args.Uplink, jobListingsComp, nameof(JobListingsComponent.Mind));
         PVSOverrideEntity((mind, mindComp), args.Uplink);
-        AddComp(mind, new JobListingsOwnerComponent { JobListings = GetNetEntity(args.Uplink) });
+        AddComp(mind, new JobListingsOwnerComponent { JobListings = args.Uplink });
 
         // init job board
         FillSideJobs((args.Uplink, jobListingsComp));

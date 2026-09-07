@@ -72,7 +72,7 @@ public sealed partial class JobListingsComponent : Component
     ///  The mind of the person (probably traitor) who owns the job board.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public NetEntity? Mind;
+    public EntityUid? Mind;
 
     /// <summary>
     /// The reputation of the traitor who owns the job board.
@@ -99,14 +99,14 @@ public sealed partial class JobListingsComponent : Component
     /// Should only be edited by <see cref="JobListingsSystem.Link"/>
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<NetEntity> Remotes = new();
+    public HashSet<EntityUid> Remotes = new();
 
     /// <summary>
     /// Non-repeating objectives that have already been completed.
     /// You will only be asked to steal the CE's magboots once, for example.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> CompletedObjectives = new();
+    public HashSet<EntProtoId> CompletedObjectives = new();
 
     /// <summary>
     /// If the job board has a bonus refresh available from leveling up.

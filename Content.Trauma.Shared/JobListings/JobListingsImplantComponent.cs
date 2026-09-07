@@ -18,5 +18,5 @@ public sealed partial class JobListingsImplantComponent : Component
     /// When the action is created it is stored here so it can be removed upon implant removal.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public NetEntity? StoredAction;
+    public EntityUid? StoredAction;
 }

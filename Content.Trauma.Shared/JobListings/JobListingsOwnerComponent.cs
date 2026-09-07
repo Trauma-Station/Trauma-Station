@@ -12,5 +12,5 @@ public sealed partial class JobListingsOwnerComponent : Component
     /// The job board entity this mind owns.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public NetEntity JobListings;
+    public EntityUid JobListings;
 }

@@ -71,7 +71,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         if (jobBoard.Comp.Mind is not { } netMind)
             return;
-        var mind = GetEntity(netMind);
+        var mind = netMind;
         if (!MindQuery.TryComp(mind, out var mindComp))
             return;
         var progress = Objectives.GetProgress(sideJob, (mind, mindComp));
@@ -107,7 +107,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         info = null;
 
-        var mind = GetEntity(jobBoard.Comp.Mind);
+        var mind = jobBoard.Comp.Mind;
         if (mind is null)
             return false;
         if (!ObjectiveQuery.TryComp(sideJob, out var objectiveComp))
@@ -205,7 +205,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     {
         foreach (var remote in jobBoard.Comp.Remotes)
         {
-            UpdateUi(GetEntity(remote), actor);
+            UpdateUi(remote, actor);
         }
     }
 
@@ -218,7 +218,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
             return;
         if (!_jobListingsOwnerQuery.TryComp(mind.Owner, out var jobListingsOwnerComp))
             return;
-        var jobBoard = GetEntity(jobListingsOwnerComp.JobListings);
+        var jobBoard = jobListingsOwnerComp.JobListings;
         if (!JobListingsQuery.TryComp(jobBoard, out var jobBoardComp))
             return;
 
@@ -234,7 +234,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
 
         if (!_remoteJobListingsQuery.TryComp(owner, out var remoteComp))
             return false;
-        var jobListings = GetEntity(remoteComp.JobListings);
+        var jobListings = remoteComp.JobListings;
         if (!JobListingsQuery.TryComp(jobListings, out var jobListingsComp))
             return false;
 
@@ -255,9 +255,9 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void Link(Entity<JobListingsComponent> jobBoard, EntityUid remote)
     {
-        AddComp(remote, new RemoteJobListingsComponent { JobListings = GetNetEntity(jobBoard.Owner) });
+        AddComp(remote, new RemoteJobListingsComponent { JobListings = jobBoard.Owner });
         InitUi(jobBoard, remote);
-        jobBoard.Comp.Remotes.Add(GetNetEntity(remote));
+        jobBoard.Comp.Remotes.Add(remote);
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.Remotes));
     }
 
