@@ -50,12 +50,9 @@
     edges:
     - to: finish
       steps:
-      - tag: BloodVial
+      - material: Glass
+        amount: 2
         doAfter: 1
-        name: construction-graph-tag-bloodvial
-        icon:
-          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
-          state: icon
       - tag: DemonEssense
         name: construction-graph-tag-demonsoul
         icon:

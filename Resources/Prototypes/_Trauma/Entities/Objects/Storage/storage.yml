@@ -101,7 +101,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-        id: GunpowderBottlePartFull
+        id: GunpowderBottleFull
         amount: 6
   - type: ItemCounter
     count:

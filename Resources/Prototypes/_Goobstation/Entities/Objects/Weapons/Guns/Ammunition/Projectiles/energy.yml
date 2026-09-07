@@ -39,8 +39,8 @@
         Heat: 5
   - type: EmpOnTrigger
     range: 1.5
-    energyConsumption: 1000
-    disableDuration: 1
+    energyConsumption: 350
+    disableDuration: 0
   - type: DeleteOnTrigger
 
 - type: entity

@@ -111,8 +111,8 @@ public sealed partial class ZombieComponent : Component
             { "Slash", -0.2 },
             { "Piercing", -0.2 },
             { "Ballistic", -0.2 }, // Trauma
-            { "Heat", -0.02 },
-            { "Shock", -0.02 }
+            { "Heat", -0.2 }, // Trauma, was 0.02
+            { "Shock", -0.2 } // Trauma, was 0.02
         }
     };
 

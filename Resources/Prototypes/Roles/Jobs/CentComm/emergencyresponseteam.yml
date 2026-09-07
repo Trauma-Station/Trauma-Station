@@ -404,6 +404,7 @@
     - TelescopicShield
     - HoloprojectorSecurity
     - PowerCellHigh
+    - ERTSecurityUndeterminedWeapon # Trauma
 
 - type: startingGear
   id: ERTSecurityGearArmedRifle

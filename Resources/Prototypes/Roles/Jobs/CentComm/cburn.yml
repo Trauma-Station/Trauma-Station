@@ -47,11 +47,12 @@
     - EnergyMagRifleOverchargeLethal # Trauma
     - EnergyMagRifleOverchargeLethal # Trauma
     - BoxLethalshot
-    - AmbuzolPlusMedipen # Injectors are cooler.
-    - AmbuzolMedipen # Injectors are cooler.
-    - AmbuzolMedipen # Injectors are cooler.
+    # - AmbuzolPlusMedipen # Injectors are cooler. - # Trauma, there is no cure
+    # - AmbuzolMedipen # Injectors are cooler.
+    # - AmbuzolMedipen # Injectors are cooler.
     - MedkitCombatFilled # Ah yes, let's send them in with ZERO meds. Good luck!
-    - CburnSpear # SPEAAR
+  inhand: # Trauma, fix shitcode
+  - CburnSpear
 # Goobstation - End - Sol
 
 - type: chameleonOutfit

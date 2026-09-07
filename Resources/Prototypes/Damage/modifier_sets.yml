@@ -235,10 +235,10 @@
   id: Zombie
   ignoreArmorPierceFlags: All
   coefficients:
-    Blunt: 0.75
-    Piercing: 1.25
+    Blunt: 0.5
+    Piercing: 0.5
     Cold: 0.2
-    Heat: 1.5
+    Heat: 1.0
   # </Trauma>
     Poison: 0.0
     Radiation: 0.0

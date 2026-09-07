@@ -1,0 +1,5 @@
+- type: entity
+  id: HoloprojectorXenoField
+  components:
+  - type: AutoRecharge
+    rechargeDuration: 15
