@@ -1,0 +1,719 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MobSkeletonPerson
+  id: Aerskeleton
+  name: Urist McAer
+  components:
+  - type: AnomalousEntity
+    researchPerSecond: 1000
+    contained: false
+  - type: AerMobActive
+  - type: AerShyGuy
+
+- type: entity
+  parent: SoapHomemadeBanana
+  id: Aersoap
+  name: Aer Soap
+  components:
+  - type: AnomalousEntity
+    researchPerSecond: 0
+    contained: false
+    active: true
+    researchOnBehaviour: 100000
+    idGear: SoapHomemadeBanana
+  - type: AerSoap
+
+
+#scaner for aer
+- type: entity
+  parent: BaseItem
+  id: AerScanner
+  name: AER scanner
+  description: A hand-held scanner built to collect informations on AERs.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Aer/aerScanner.rsi
+    layers:
+      - state: icon
+        map: ["enum.AnomalyScannerVisualLayers.Base"]
+  - type: Appearance
+  - type: AnomalousEntityScanner
+  - type: Item
+    storedRotation: -90
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Glass: 25
+
+# Aer sensor machine that must be used in containment chamber it analyses a linked anomalous entity in range
+- type: entity
+  id: MachineAERContainmentSensor
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: AER Analysis Sensor
+  description: A sensor able to examine an abnormal entity to produce usable research data.
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _Trauma/Structures/Aer/aerSensor.rsi
+    layers:
+    - state: gsensor1
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Transform
+    noRot: false
+  - type: Physics
+    canCollide: false
+  - type: AnomalousEntityContainment
+  - type: ResearchClient
+  - type: ActivatableUI
+    key: enum.ResearchClientUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#fca3c0"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+  - type: Machine
+    board: AerSensorCircuitboard
+
+# Aer sensor board
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: AerSensorCircuitboard
+  name: AER Analysis sensor board
+  description: A machine printed circuit board for an AER Analysis Sensor.
+  components:
+    - type: Sprite
+      state: science
+    - type: MachineBoard
+      prototype: MachineAERContainmentSensor
+      stackRequirements:
+        Manipulator: 1
+        Cable: 1
+        PlasmaGlass: 5
+
+# super shitty base i need ideas on what to make base
+- type: entity
+  abstract: true
+  parent: [ MobSpaceBasic, MobCombat ]
+  id: BaseAer
+  name: AER-123
+  description: It came from hell.
+  components:
+  - type: KnowledgeHolder
+  - type: KnowledgeContainer # no skills lol
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4.5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1000: Dead
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
+  - type: ZombieImmune # gibs on death so its not possible to become a zombie
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: ThermalVision
+  - type: Stamina
+    baseCritThreshold: 9999
+  - type: FlashImmunity
+    showInExamine: false
+  - type: Puller
+    needsHands: false
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: GhostTakeoverAvailable
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+  - type: WarpPoint
+  - type: AnomalousEntity
+    researchPerSecond: 1000
+    contained: false
+  - type: AerMobActive
+
+# super shitty test yaml, anti specism ipc
+- type: entity
+  parent: BaseAer
+  id: aerIpc
+  name: AER-193
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/noSpecism.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Silicon
+    entityType: Player
+    batteryPowered: true
+    drainPerSecond: 1.5
+    chargeThresholdMid: 0.80
+    chargeThresholdLow: 0.35
+    chargeThresholdCritical: 0.10
+    speedModifierThresholds:
+      4: 1
+      3: 1
+      2: 0.80
+      1: 0.45
+      0: 0.10
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 1080
+  - type: BatteryDrinker
+    blacklist:
+      tags:
+      - IPCDrinkBlacklist
+  - type: Damageable
+    damageModifierSet: IPC
+
+# lob corp magic bullet at home player version, shoot really fucking slow adds burn stacks on melee
+# todo: maybe reloading as a verb?
+- type: entity
+  name: Magic Bullet
+  parent: [BaseItem, BaseGunWieldable, BaseSecurityScienceContraband]
+  id: IdGearMagicBullet
+  suffix: I.D. Gear
+  description: I.D. Gear extracted from AER-1821. Just as the Devil said, the bullets will puncture anything you please. Forever.
+  components:
+  - type: WeaponClass
+    class: Rifle
+  - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Guns/Lever/chester_icon_48x.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _Goobstation/Objects/Weapons/Guns/Lever/chester.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    fireRate: 0.25
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Trauma/Aer/magicBulletSound.ogg
+  - type: Item
+    sprite: _Goobstation/Objects/Weapons/Guns/Lever/chester.rsi
+    size: Large
+    shape:
+    - 0,0,4,1
+  - type: BasicEntityAmmoProvider
+    proto: BulletIdMagicBullet
+    capacity: 7
+    count: 7
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 33.3
+    rechargeSound:
+      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: IgniteOnMeleeHit
+    fireStacks: 0.5
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RiflesPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RiflesDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RiflesDrop
+
+# bullet shot by the Freischütz rifle
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletKinetic
+  id: BulletAerMagicBullet
+  name: bullet devilish
+  components:
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/magicBullet.rsi
+    layers:
+    - state: arcane_barrage
+  - type: Projectile
+    damage:
+      types:
+        Ion: 80
+        Asphyxiation: 80
+        Structural: 120
+    penetrationThreshold: 2500
+  - type: Ammo
+    muzzleFlash: MuzzleFlashEffectOmnilaser
+  - type: AntiWallBang
+
+# I.D. Gear version of Freischütz rifle bullets
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletAerMagicBullet
+  id: BulletIdMagicBullet
+  name: bullet devilish
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ion: 40
+        Asphyxiation: 40
+        Structural: 60
+
+# Aer Version of the rifle shoot at double the fire rat and has a more robust buttstock whack
+# TO DO add pen functionality to the rifle?
+- type: entity
+  name: Freischütz
+  parent: IdGearMagicBullet
+  id: AerMagicBullet
+  suffix: Aer Unremovable
+  description: This magical bullet can truly hit anyone, just like you say...
+  components:
+  - type: Gun
+    fireRate: 0.5
+  - type: BasicEntityAmmoProvider
+    proto: BulletAerMagicBullet
+    capacity: 7
+    count: 1
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 66.6
+  - type: Unremoveable
+    deleteOnDrop: true
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+       Structural: 50
+  - type: IgniteOnMeleeHit
+    fireStacks: 1
+
+# aer-1821 version of devil contract no soul stealing, keep only gun related positive clauses
+- type: entity
+  name: Aer-1821 Contract
+  id: AerContract
+  description: Despite apparently working similarly to \[REDACTED\] contracts, \[REDACTED\] called them a low quality imitation
+  parent: [ BaseScienceContraband, BaseDevilContract ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+    state: contract-written
+  - type: Paper
+    content: default-aer-contract-content
+  - type: DevilContract
+    clauseBlacklist:
+    #- soulownership
+    - brokeness
+
+#spawner for lack of rifle devil clause
+- type: entity
+  parent: MarkerBase
+  id: GunForSoul
+  name: guns from the devil
+  components:
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+    state: contract-written
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: GunForSoulTable
+
+#table for lack of rifle devil clause
+- type: entityTable
+  id: GunForSoulTable
+  table: !type:GroupSelector
+    children:
+    #weak guns
+    - id: WeaponSniperMosin
+      weight: 25 #25/100
+    - id: WeaponShotgunDoubleBarreled
+      weight: 25 #25/100
+    #normal sec buyable guns
+    - id: WeaponSubMachineGunWt550 #12/100
+      weight: 12
+    - id: WeaponShotgunEnforcer #12/100
+      weight: 12
+    - id: WeaponRifleLecter #12/100
+      weight: 12
+    #evil rev smg
+    - id: WeaponSMGResistance
+      weight: 8 #8/100
+    - id: WeaponShotgunKammerer
+      weight: 3 #3/100
+    - id: WeaponRifleAk
+      weight: 3 #3/100
+
+#pipe case for lack of pipe devil deal, resized medal case with pipe and engraved flippo and tobacco
+- type: entity
+  id: PipeCase
+  parent: [ BaseStorageItem, BaseBagOpenClose ]
+  name: pipe case
+  description: A case for holding your pipe and tobacco when you are not smoking.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/medalcase.rsi
+    layers:
+    - state: closed
+      map: ["closeLayer"]
+    - state: open
+      map: ["openLayer"]
+  - type: Appearance
+  - type: Item
+    sprite: Objects/Storage/medalcase.rsi
+    size: Normal
+  - type: Storage
+    grid:
+    - 0,0,1,1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SmokingPipeFilledTobacco
+        - id: FlippoEngravedLighter
+        - id: GroundTobacco
+          amount: 2
+
+# action for summoning 1821 contracts
+- type: entity
+  parent: BaseAction
+  id: ActionCreateContractAer
+  name: Summon contract
+  description: Creates a contract in AER-1821's hand.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 600
+    itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+    layers:
+    - state: contract-written
+  - type: InstantAction
+    event: !type:CreateContractEventAer {}
+
+# aer-1821 freischutz at home mostly copypasted from demon stuff or stuff stolen from base humanoids, has two hand to wield it's rifle
+- type: entity
+  parent: [MobSpaceBasic, MobCombat, InventoryBase]
+  id: AerMarksman
+  name: AER-1821
+  description: AER-1821 wears the tattered remains of its previous life... not that anyone can recognize it. In place of a face, all that's left is a mass of twisting shadows, with piercing blue eyes within. Is it a devil? A man? Would you know?
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerMarksman.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Piercing: -1
+        Slash: -1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 300
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands:
+    - hand_right
+    - hand_left
+  - type: HandsFill
+    hands:
+      hand_left: AerMagicBullet
+      hand_right: null
+  - type: ComplexInteraction
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: SoftCrit
+      250: Critical
+      300: Dead
+  - type: ZombieImmune
+  - type: Puller
+    needsHands: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: AerMarksman
+  - type: ActionGrant
+    actions:
+    - ActionCreateContractAer
+  - type: AnomalousEntity
+    researchPerSecond: 100
+    researchOnBehaviour: 5000
+    idGear: IdGearMagicBullet
+  - type: GhostRole
+    name: AER-1821
+    description: acquire souls, shoot the d-class trying to game your contracts
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
+
+- type: entity
+  parent: [MobSpaceBasic, MobCombat, InventoryBase]
+  id: NewBaseAer
+  name: AER-123
+  description: AER-123? how queer you dont remember this one in the files
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerMarksman.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Piercing: -1
+        Slash: -1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 300
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands:
+    - hand_right
+    - hand_left
+  - type: ComplexInteraction
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: SoftCrit
+      250: Critical
+      300: Dead
+  - type: ZombieImmune
+  - type: Puller
+    needsHands: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+
+- type: entity
+  parent: [NewBaseAer]
+  id: AerShyGuy
+  name: AER-096
+  description: AER-096 is a humanoid creature measuring approximately 2.38 meters in height, it shows very little muscle mass and its skin is mostly devoid of pigmentation, it has no sign of any body hair.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: AnomalousEntity
+    researchPerSecond: 100
+    researchOnBehaviour: 5000
+    idGear: IdGearMagicBullet
+  - type: AerShyGuy
+  - type: GhostRole
+    name: AER-096
+    description: Try not to get your face seen, start breaching due to a passing janitor seeing two pixels
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
+
+- type: entity
+  parent: ReinforcementRadio
+  id: ActivatedAerCore
+  name: Aer Core
+  description: Call in a syndicate agent of questionable quality, instantly!
+  components:
+  - type: GhostRole
+    name: AER-1821
+    description: acquire souls, shoot the d-class trying to game your contracts
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: AerMarksman
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseAerObjective
+  components:
+  - type: Objective
+    difficulty: 1.5
+    issuer: Self
+
+- type: entity
+  parent: [BaseAerObjective, BaseSurviveObjective]
+  id: AerShyGuyObjective
+  name: THEY SAW YOUR FACE!
+  description: KILL THEM! KILL THEM!
+  components:
+  - type: Objective
+    icon:
+      sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
+      state: alive
+  - type: AerShyGuyObjective
+
+- type: entity
+  parent: [BaseAerObjective, BaseSurviveObjective]
+  id: AerBreachObjective
+  name: Breach Containment
+  description: Escape containment, be free.
+  components:
+  - type: Objective
+    icon:
+      sprite: _DV/CosmicCult/Icons/objectives.rsi
+      state: colossus
+  - type: AerBreachCondition
+
+- type: entity
+  parent: BaseAerObjective
+  id: AerMarksmanContractObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+      state: contract-written
+  - type: NumberObjective
+    min: 5
+    max: 7
+    title: objective-condition-contract-title
+    description: objective-condition-contract-description
+  - type: SignContractCondition
+
+- type: entity
+  parent: BaseAerObjective
+  name: Take Commisions
+  description:  Convince people to request your services.
+  id: AerMarksmanLarpObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+      state: contract-written
+      issuer: Self
+    difficulty: 1
+  - type: RoleplayObjective

@@ -64,6 +64,9 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
                 continue;
             }
 
+            if (contract.Comp.ClauseBlacklist.Contains(clauseKey))
+                continue;
+
             if (!ProtoMan.TryIndex(clauseKey, out DevilClausePrototype? clause))
                 continue;
 
