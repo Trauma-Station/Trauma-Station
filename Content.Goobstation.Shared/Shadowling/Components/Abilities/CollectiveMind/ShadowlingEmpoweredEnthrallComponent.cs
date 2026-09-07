@@ -13,7 +13,7 @@ public sealed partial class ShadowlingEmpoweredEnthrallComponent : Component
     /// The duration it takes to complete the enthrallment process.
     /// </summary>
     [DataField]
-    public TimeSpan EnthrallTime = TimeSpan.FromSeconds(1.2);
+    public TimeSpan EnthrallTime = TimeSpan.FromSeconds(4);  // Trauma - was 1.2
 
     [DataField]
     public EntProtoId EnthrallComponents = "ThrallAbilities";

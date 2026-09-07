@@ -38,7 +38,7 @@ public sealed partial class ShadowlingGlareComponent : Component
     public float MinGlareDistance = 1f;
 
     [DataField]
-    public TimeSpan MaxGlareStunTime = TimeSpan.FromSeconds(6);
+    public TimeSpan MaxGlareStunTime = TimeSpan.FromSeconds(5); //Trauma - Was 6
 
     [DataField]
     public EntProtoId SlowdownStatusEffect = "ShadowlingGlareStatusEffect";
