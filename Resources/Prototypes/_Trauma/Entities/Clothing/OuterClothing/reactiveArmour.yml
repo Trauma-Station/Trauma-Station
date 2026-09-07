@@ -1,0 +1,118 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: [ ClothingOuterArmorBase, BaseScienceContraband ]
+  id: ClothingOuterArmorReactiveBase
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Armor/reactive.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Armor/reactive.rsi
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Plastic: 75
+      Glass: 25
+      Plasma: 125
+      Gold: 125
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
+  id: ClothingOuterArmorReactiveRD
+  name: reactive teleport armour
+  suffix: RD
+  description: Someone separated our Research Director from his own head!
+  components:
+  - type: StealTarget
+    stealGroup: TeleportArmour
+  - type: ReactiveArmour
+    effects:
+    - !type:PlaySoundEffect
+        sound: &deparure_sound
+          path: /Audio/Effects/teleport_departure.ogg
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 10.0
+    - !type:PlaySoundEffect
+        sound: &arrival_sound
+          path: /Audio/Effects/teleport_arrival.ogg
+    - !type:Sparks
+    activationDelay: 10
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+
+- type: entity
+  parent: ClothingOuterArmorBase
+  id: ClothingOuterArmorReactiveUnfinished
+  name: unfinished reactive armour
+  suffix: empty
+  description: This one needs an anomaly core.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
+  - type: Construction
+    graph: ArmorReactive
+    defaultTarget: teleport
+    deconstructionTarget: null
+    node: start
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTeleport
+  name: reactive teleport armour
+  description: Reactive armour with bluespace core in it.
+  components:
+  - type: StealTarget
+    stealGroup: TeleportArmour
+  - type: ReactiveArmour
+    effects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 10.0
+    - !type:PlaySoundEffect
+        sound: *arrival_sound
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: teleport
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTesla
+  name: reactive tesla armour
+  description: Reactive armour with tesla core in it.
+  components:
+  - type: ReactiveArmour
+    effects:
+    - !type:Sparks
+    - !type:ShootRandomLightnings
+      lightningRange: 8.0
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: tesla
+  - type: Tag
+    tags:
+    - WhitelistChameleon

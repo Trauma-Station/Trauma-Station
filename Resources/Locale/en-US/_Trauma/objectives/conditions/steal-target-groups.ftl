@@ -6,3 +6,4 @@ steal-target-groups-gorilla-gloves = gorilla gloves
 steal-target-groups-cane-blade-librarian = librarian cane blade
 steal-target-groups-cane-blade-nanotrasen = nanotrasen cane blade
 steal-target-groups-security-katana = security katana
+steal-target-groups-teleport-armour = reactive teleport armour

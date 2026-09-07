@@ -68,3 +68,7 @@ construction-graph-tag-stun-baton = stun baton
 construction-graph-tag-bloodvial = a full blood vial
 construction-graph-tag-demonsoul = a demonic soul fragment
 construction-graph-tag-bible = any holy book
+
+# Reactive armour
+construction-graph-tag-bluespace-core = bluespace anomaly core
+construction-graph-tag-electric-core = electricity anomaly core

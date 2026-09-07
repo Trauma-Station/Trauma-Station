@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AnomalyCoreBluespace
+  name: bluespace anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreBluespace
+
+- type: entity
+  id: AnomalyCoreElectricity
+  name: electricity anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreElectricity
+  - type: Enchanter
+    enchants:
+    - EnchantInsulated
+    tags:
+    - AnomalyCoreElectricity

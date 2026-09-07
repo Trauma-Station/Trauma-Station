@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: LingRDStealObjective
+  id: LingTeleportArmourStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: TeleportArmour
