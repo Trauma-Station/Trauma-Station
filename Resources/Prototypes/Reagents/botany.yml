@@ -267,7 +267,11 @@
         damage:
           Brute: -2.5
           Burn: -2.5
+          Poison: -2.5 # Trauma
+          Radiation: -2.5 # Trauma
+          Cellular: -1 # Trauma
           Airloss: -5
+
       - !type:ModifyBloodLevel
         amount: 1
         conditions:
