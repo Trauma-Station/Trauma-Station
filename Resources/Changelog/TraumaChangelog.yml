@@ -14270,3 +14270,12 @@ Entries:
   id: 1557
   time: '2026-09-07T12:17:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4492
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed lemoons creating plants when harvested and not being able to mutate
+      into lemonades.
+  id: 1558
+  time: '2026-09-07T12:30:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4493
