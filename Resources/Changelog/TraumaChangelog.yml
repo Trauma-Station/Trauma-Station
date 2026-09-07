@@ -14254,3 +14254,12 @@ Entries:
   id: 1555
   time: '2026-09-07T07:54:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4432
+- author: jshoe2
+  changes:
+  - type: Remove
+    message: Rude buster upgrade from necropolis chest drops
+  - type: Tweak
+    message: Lowered crafting skill requirements on crusher upgrades
+  id: 1556
+  time: '2026-09-07T12:02:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4491
