@@ -102,6 +102,7 @@ public sealed class SurgeryTest : InteractionTest
         });
     }
 
+    [Explicit] // Heisentests are impossible to debug, it randomly gets 2.5 blunt 0.5 heat damage
     [Test]
     public async Task HealWoundsTest()
     {

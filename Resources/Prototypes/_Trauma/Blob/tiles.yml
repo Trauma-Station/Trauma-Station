@@ -39,12 +39,14 @@
   name: "Strong Blob"
   cost: 15
   entity: StrongBlobTile
+  upgrade: Reflective
 
 - type: blobTile
   id: Normal
   name: "Blob Tile"
   cost: 6
   entity: NormalBlobTile
+  upgrade: Strong
 
 # TODO
 #- type: blobTile

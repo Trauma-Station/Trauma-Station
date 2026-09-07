@@ -131,34 +131,27 @@ public sealed partial class BarkSystem : EntitySystem
         var sound = _sharedAudio.ResolveSound(proto.SoundCollection!);
         var audioParams = proto.SoundCollection!.Params;
 
-        if (proto.Predictable)
+        var hashCode = character.GetHashCode();
+
+        if (sound is ResolvedCollectionSpecifier collection && collection.Collection != null)
         {
-            var hashCode = character.GetHashCode();
+            var soundCollection = ProtoMan.Index<SoundCollectionPrototype>(collection.Collection);
+            var index = hashCode % soundCollection.PickFiles.Count;
+            sound = new ResolvedCollectionSpecifier(collection.Collection, index);
+        }
 
-            if (sound is ResolvedCollectionSpecifier collection && collection.Collection != null)
-            {
-                var soundCollection = ProtoMan.Index<SoundCollectionPrototype>(collection.Collection);
-                var index = hashCode % soundCollection.PickFiles.Count;
-                sound = new ResolvedCollectionSpecifier(collection.Collection, index);
-            }
-
-            var minPitchInt = (int) (proto.MinPitch * 100);
-            var maxPitchInt = (int) (proto.MaxPitch * 100);
-            var pitchRangeInt = maxPitchInt - minPitchInt;
-            if (pitchRangeInt != 0)
-            {
-                var predictablePitchInt = hashCode % pitchRangeInt + minPitchInt;
-                var predictablePitch = predictablePitchInt / 100f;
-                audioParams = audioParams.WithPitchScale(predictablePitch);
-            }
-            else
-            {
-                audioParams = audioParams.WithPitchScale(proto.MinPitch);
-            }
+        var minPitchInt = (int) (proto.MinPitch * 100);
+        var maxPitchInt = (int) (proto.MaxPitch * 100);
+        var pitchRangeInt = maxPitchInt - minPitchInt;
+        if (pitchRangeInt != 0)
+        {
+            var predictablePitchInt = hashCode % pitchRangeInt + minPitchInt;
+            var predictablePitch = predictablePitchInt / 100f;
+            audioParams = audioParams.WithPitchScale(predictablePitch);
         }
         else
         {
-            audioParams = audioParams.WithPitchScale(_random.NextFloat(proto.MinPitch, proto.MaxPitch));
+            audioParams = audioParams.WithPitchScale(proto.MinPitch);
         }
 
         audioParams = audioParams.WithVolume(bark.Volume);

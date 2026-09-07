@@ -24,6 +24,9 @@ public sealed partial class SparksEffectSystem : EntitySystem
     private void OnSparksEffect(SparksEffectEvent args)
     {
         var coords = GetCoordinates(args.Coords);
+        if (!coords.IsValid(EntityManager))
+            return;
+
         if (args.PlaySound)
             _audio.PlayPvs(Sound, coords);
 
