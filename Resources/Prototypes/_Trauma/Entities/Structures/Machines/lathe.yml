@@ -7,11 +7,11 @@
   components:
   - type: OreSiloClient
 
-# Like BaseLathe but without wire panel or constructible/powered machine
+# Like BaseLatheNoSilo but without wire panel or constructible/powered machine
 - type: entity
   abstract: true
   parent: [ BaseMachine, BaseRevMinorContraband ]
-  id: BaseRevIndustry
+  id: BaseRevIndustryNoSilo
   components:
   - type: Transform
     noRot: false
@@ -74,6 +74,12 @@
   - type: Construction
     deconstructionTarget: null
     graph: RevMachine
+
+- type: entity
+  abstract: true
+  parent: BaseRevIndustryNoSilo
+  id: BaseRevIndustry
+  components:
   - type: OreSiloClient
 
 - type: entity
@@ -203,7 +209,7 @@
     node: telecomms workshop
 
 - type: entity
-  parent: BaseRevIndustry
+  parent: BaseRevIndustryNoSilo
   id: RevTelesphere
   name: telesphere
   description: An experimental device, it can be used to remotely steal materials from passing trade ships using phoron. Additionally; it can be used as a material silo for the revolution.
@@ -223,6 +229,9 @@
     color: "#ffffff"
     radius: 1.5
     energy: 5.0
+  - type: AlternateUI
+    key: enum.OreSiloUiKey.Key
+    verbText: Open Ore Silo UI
   - type: OreSilo
     range: 15
   - type: MasterSiloClient # theft

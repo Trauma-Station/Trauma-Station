@@ -467,7 +467,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public EntityUid? RemoveKnowledge(EntityUid target, [ForbidLiteral] EntProtoId id, bool force = false)
     {
-        if (GetContainer(target) is not { } ent ||
+        if (_timing.ApplyingState || // containers and KnowledgeDict are networked, state handling doesnt need to do anything
+            GetContainer(target) is not { } ent ||
             ent.Comp.Holder is not { } holder ||
             ent.Comp.Container is not { } container ||
             GetKnowledge(ent, id) is not { } unit ||

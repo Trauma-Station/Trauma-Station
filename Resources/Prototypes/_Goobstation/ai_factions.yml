@@ -10,14 +10,12 @@
   - Heretic
   - Wizard
   - Blob
-  - Insurgent
   - CrabFaction
 
 - type: npcFaction
   id: Balloon
   # Balloons can't attack
-  hostile:
-  - Insurgent
+  hostile: []
 
 - type: npcFaction
   id: Monkey
@@ -91,5 +89,4 @@
   - Lavafauna
   - AllHostile
   - Xenoborg
-  - Insurgent
   - CrabFaction
