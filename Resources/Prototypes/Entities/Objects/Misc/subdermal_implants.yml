@@ -171,6 +171,10 @@
   description: This implant lets the user access a hidden Syndicate uplink at will.
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: JobListingsImplant
+    action: ActionOpenSideJobsImplant
+  # </Trauma>
   - type: SubdermalImplant
     implantAction: ActionOpenUplinkImplant
     whitelist:

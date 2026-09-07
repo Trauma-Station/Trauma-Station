@@ -327,7 +327,8 @@ namespace Content.Server.PDA
         /// <summary>
         /// Returns the currently unlocked store, if there is one.
         /// </summary>
-        private bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
+        // Trauma - made public for job listings
+        public bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
         {
             store = null;
             if (!TryComp<RingerUplinkComponent>(uid, out var uplink) || !uplink.Unlocked)

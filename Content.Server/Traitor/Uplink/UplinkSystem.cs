@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Traitor;
+// </Trauma>
 using System.Linq;
 using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
@@ -50,6 +53,10 @@ public sealed partial class UplinkSystem : EntitySystem
                 continue;
 
             entity.Comp.Store = uid;
+            // <Trauma>
+            var ev = new UplinkLinkedEvent(uid, entity.Owner);
+            RaiseLocalEvent(ref ev);
+            // </Trauma>
             return;
         }
 
@@ -57,6 +64,11 @@ public sealed partial class UplinkSystem : EntitySystem
         entity.Comp.Store = Spawn(TraitorUplinkStore, MapCoordinates.Nullspace);
         SetUplink(args.Implanted, entity.Comp.Store.Value, 0, false);
         //Log.Error($"{ToPrettyString(args.Implanted)} did not have an uplink when they were implanted."); // Trauma - implanting a non-traitor isnt an error
+
+        // <Trauma>
+        var ev2 = new UplinkAssignedEvent(args.Implanted, entity.Comp.Store.Value, entity.Owner);
+        RaiseLocalEvent(ref ev2);
+        // </Trauma>
     }
 
     /// <summary>
@@ -128,6 +140,11 @@ public sealed partial class UplinkSystem : EntitySystem
         }
 
         SetUplink(user, storeEntity, balance, giveDiscounts);
+
+        // <Trauma>
+        var ev2 = new UplinkAssignedEvent(user, storeEntity, uplinkEntity.Value);
+        RaiseLocalEvent(ref ev2);
+        // </Trauma>
 
         return true;
     }

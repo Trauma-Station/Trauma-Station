@@ -61,4 +61,39 @@
   id: StorePresetRemoteUplink
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma> - job listings
+  - type: JobListings
+    maximumSideJobs: 4
+    maximumAcceptedSideJobs: 2
+    sideJobsPerLevel: 2
+    prioritySideJobOffers: # priority exists so kill is actually picked when it is outnumbered 7 to 1 by steal objectives
+    # major - kill
+    - KillSideJob
+    sideJobOffers:
+    # minor - bug
+    - BugAreaSideJobCmo
+    - BugAreaSideJobCE
+    - BugAreaSideJobHop
+    - BugAreaSideJobHos
+    - BugAreaSideJobRd
+    - BugAreaSideJobQm
+    # major - steal
+    - CMOHyposprayStealSideJob
+    - RDHardsuitStealSideJob
+    - HandTeleporterStealSideJob
+    - MagbootsStealSideJob
+    - ClipboardStealSideJob
+    - CaptainJetpackStealSideJob
+    - CaptainGunStealSideJob
+    # extreme - kill head (no need to put this in priority because it is only extreme sidejob)
+    - KillHeadSideJob
+    # final - battlecruiser
+    - BattlecruiserSideJob
+    reputationLevels: # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000
+    - 100 # 1 minor
+    - 500 # 1 minor + 2 majors
+    - 1000 # 1 minor + 2 majors + 1 extreme
+    - 10000 # 1 final
+    refreshWaitDuration: 600 # 10 minutes
+  # </Trauma>
   - type: RingerAccessUplink

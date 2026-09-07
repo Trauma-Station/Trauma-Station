@@ -1,9 +1,9 @@
-using Content.Shared.Mind;
-using Content.Shared.Objectives;
-using Content.Shared.Objectives.Prototypes;
-using Content.Shared.Objectives.Systems;
 using Robust.Shared.Utility;
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameStates;
+using Content.Shared.Mind;
+using Content.Shared.Objectives.Prototypes;
+using Content.Shared.Objectives.Systems;
 
 namespace Content.Shared.Objectives.Components;
 
@@ -12,18 +12,25 @@ namespace Content.Shared.Objectives.Components;
 /// </summary>
 [RegisterComponent, Access(typeof(SharedObjectivesSystem))]
 [EntityCategory("Objectives")]
+// <Trauma> - make it actually networked
+[NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+// </Trauma>
 public sealed partial class ObjectiveComponent : Component
 {
     /// <summary>
     /// Difficulty rating used to avoid assigning too many difficult objectives.
     /// </summary>
     [DataField(required: true)]
+    // Trauma - make it actually networked
+    [AutoNetworkedField]
     public float Difficulty;
 
     /// <summary>
     /// Organisation that issued this objective, used for grouping and as a header above common objectives.
     /// </summary>
     [DataField(required: true)]
+    // Trauma - make it actually networked
+    [AutoNetworkedField]
     public ProtoId<ObjectiveIssuerPrototype> Issuer = "Unknown";
 
     /// <summary>
@@ -31,6 +38,8 @@ public sealed partial class ObjectiveComponent : Component
     /// Set this to false if you want multiple objectives of the same prototype.
     /// </summary>
     [DataField]
+    // Trauma - make it actually networked
+    [AutoNetworkedField]
     public bool Unique = true;
 
     /// <summary>
@@ -38,6 +47,8 @@ public sealed partial class ObjectiveComponent : Component
     /// Can be specified by an <see cref="ObjectiveGetInfoEvent"/> handler but is usually done in the prototype.
     /// </summary>
     [DataField]
+    // Trauma - make it actually networked
+    [AutoNetworkedField]
     public SpriteSpecifier? Icon;
 }
 

@@ -1,0 +1,144 @@
+<Document>
+  # Traitor Job Board
+  <Box>
+      <GuideEntityEmbed Entity="MobHumanSyndicateAgentBase" Caption="Urist McEvil says:"/>
+      [italic]
+        "You want to make a name for yourself?
+        Well, you can start by planting this bug in the CMO's office for me..."
+      [/italic]
+  </Box>
+
+  Your [color=#ff0000]employers[/color] have provided you with a job board app hidden inside your uplink.
+
+  Each job listing is a mini-objective you can complete for a small reward, like extra telecrystals or sometimes even an uplink item.
+
+  The more side jobs you do, the more your reputation within the syndicate will grow, and the tougher and more rewarding your work will be.
+
+  Do you think you have what it takes to go down in history as a [color=#ff0000]Living Legend[/color]?
+
+  ## The Basics
+  The syndicate is kind enough to provide you up to [bold]four[/bold] side jobs at a time.
+
+  You can have up to [bold]two[/bold] side jobs currently accepted.
+
+  Some jobs give you special [bold]tools[/bold] which materialise in your hands when you [bold]accept[/bold].
+
+  The accepted side jobs have a progress bar, and when complete, you can [bold]claim[/bold] your reward.
+
+  You get a certain amount of [bold]reputation[/bold] and either a bit of [bold][color=#ff0000]TC[/color][/bold] or (rarely) an [bold][color=#ff0000]uplink item[/color][/bold].
+
+  You can [bold]cancel[/bold] an accepted sidejob at any time and it will disappear.
+
+  When you [bold]cancel[/bold] or [bold]claim[/bold] you are left with a gaping hole in your job board which can only be filled by clicking the [bold]refresh[/bold] button.
+
+  When you click the [bold]refresh[/bold] button all side jobs which are not accepted disappear, and then new side jobs are generated to fill you back up to [bold]four[/bold] concurrent side jobs.
+
+  You can't just refresh whenever you want - this isn't a charity! The button unlocks after [bold]10 minutes[/bold] of no refreshing or when you earn a new [bold]title[/bold].
+
+  ## Titles
+  You start life with 0 reputation.
+
+  At 0-99 reputation you have the title 'Goody Two-Shoes Nobody'.
+
+  At 100-499 reputation you have the title 'Up-and-Coming Crook'.
+
+  At 500-999 reputation you have the title 'Front Page News'.
+
+  At 1000-9999 reputation you have the title 'Terrifying Presence'.
+
+  At 10000+ reputation you have the title 'Living Legend'.
+
+  The final title is a giant leap from the one before it. To get that much reputation, you have to do something [bold][color=#ff0000]really important[/color][/bold].
+
+  ## Side Jobs
+  ### Bug an Office
+  <Box>
+    <GuideEntityEmbed Entity="SyndicateBugCmo" Caption=""/>
+  </Box>
+  [bold]Available to:[/bold] 'Goody Two-Shoes Nobody' and above
+
+  [bold]Reward:[/bold] 100 reputation + 7 TC [bold]OR[/bold] 10 TC value uplink item
+
+  Ever heard the phrase 'The Customer is always right?'
+
+  Someone is paying us to install this spying device in someone's office. But it's a little... conspicuous.
+
+  Luckily, our end of the contract only concerns installation, not long term support. So wrench the bug inside their office then get out of there before anyone sees it!
+
+  Don't try to con us by having someone else wrench the bug for you. [bold]You need to wrench the bug[/bold] otherwise it won't count.
+
+  ### Steal a Gizmo
+  <Box>
+    <GuideEntityEmbed Entity="ClothingShoesBootsMagAdv" Caption=""/>
+  </Box>
+  [bold]Available to:[/bold] 'Up-and-Coming Crook' and above
+
+  [bold]Reward:[/bold] 200 reputation + 10 TC [bold]OR[/bold] 15 TC value uplink item
+
+  The station is full to the brim with experimental tech. I know a few people who are willing to pay top dollar for a glance at the schematics.
+
+  We are sending you on a coporate espionage mission. When you accept this side job a scanalyzer will materialse into your hands.
+
+  Steal the gizmo and then once you are in a secluded place, use the scanalyzer to scan it.
+
+  Don't try to con us by having someone else scan the gizmo for you. [bold]You need to scan the item[/bold] otherwise it won't count.
+
+  We don't care what happens to the gizmo afterwards. Throw it down the trash for all we care. It would be wise to ditch the scanalyzer afterwards too.
+
+  Just make sure to wear gloves so you don't get your fingerprints everywhere. We won't bail you out of jail if you get caught.
+
+  ### Take a Life
+  <Box>
+    <GuideEntityEmbed Entity="WeaponPistolViper" Caption=""/>
+  </Box>
+  [bold]Available to:[/bold] 'Up-and-Coming Crook' and above
+
+  [bold]Reward:[/bold] 200 reputation + 10 TC [bold]OR[/bold] 15 TC value uplink item
+
+  You don't get to work on a prestigious research station without making a few enemies in the process.
+
+  Pratically everyone onboard has a price on their head, and for this side job we want you to kill one specific person.
+
+  All that matters is they are dead, then you can claim your reward.
+  You can kill them or they can die of natural causes or whatever, we don't care.
+  If through the miracle of medicine they come back to life [bold]after[/bold] you claimed your reward, we don't care either.
+
+  They have to be actually dead, not in a critical state.
+
+  Just don't try anything weird like killing a bunch of people for free.
+  No one is going to pay you to kill someone who is already dead.
+
+  ### Kill your Boss
+  <Box>
+    <GuideEntityEmbed Entity="WeaponSubMachineGunC20r" Caption=""/>
+  </Box>
+  [bold]Available to:[/bold] 'Front Page News' and above
+
+  [bold]Reward:[/bold] 500 reputation + 15 TC [bold]OR[/bold] 20 TC value uplink item
+
+  No one likes their boss. Some people even want them dead!
+
+  You are being paid to kill a 'head of staff'. Their lives are more important so killing them is going to be more difficult.
+
+  You have all the same rules from the previous side job.
+
+  ### Obliterate the Station
+  <Box>
+    <GuideEntityEmbed Entity="SyndicateFinalReward" Caption=""/>
+  </Box>
+  [bold]Available to:[/bold] 'Terrifying Presence'
+
+  [bold]Reward:[/bold] 10,000 reputation + syndicate lifetime achievement award
+
+  Right now everyone is scared of Nanotrasen.
+
+  But if you can do a bunch of side jobs and prove their security is incredibly lax, I'm sure you can call up some scary ex-military mercenaries to the station.
+
+  They'll probably bring a nuclear bomb with them and blow everything to kingdom come.
+
+  Just use the provided syndicate broadcast device on a comms computer.
+
+  Don't think you can bumrush the bridge at minute 0 and end the shift instantly. You got to be a real mean syndicate to even unlock this side job in the first place.
+
+  And if they catch you they are probably going to kill you.
+</Document>

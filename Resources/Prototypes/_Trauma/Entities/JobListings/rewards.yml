@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: Telecrystal
+  id: Telecrystal7
+  suffix: 7 TC
+  components:
+  - type: Stack
+    count: 7
+
+- type: entity
+  parent: [ BaseSyndicateContraband, BaseItem ]
+  id: SyndicateFinalReward
+  name: syndicate lifetime achievement award
+  description: You've done it. You've made it. You are a living legend.
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_final_reward.rsi
+    state: icon

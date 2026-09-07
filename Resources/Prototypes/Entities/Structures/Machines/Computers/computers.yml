@@ -767,6 +767,8 @@
   components:
   # <Trauma>
   - type: StationReportTarget # not given to aghost
+  - type: StealTarget
+    stealGroup: CommsComputer
   - type: TraumaCommsConsole
   # </Trauma>
   - type: Sprite

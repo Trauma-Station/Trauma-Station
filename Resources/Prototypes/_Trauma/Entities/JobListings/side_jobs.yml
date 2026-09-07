@@ -1,0 +1,261 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorObjective
+  id: BaseSideJob
+  components:
+  - type: Objective
+    difficulty: 1
+  - type: SideJob
+
+
+# minor
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseMinorSideJob
+  components:
+  - type: SideJob
+    reputationGain: 100
+  - type: LevelRestrictedSideJob
+    level: 0
+  - type: GenerateSideJobReward
+    currencyReward: Telecrystal7
+    currencyName: 7 tc
+    currencyChance: 0.66
+    uplinkRewards:
+    - UplinkLubeGrenade
+    - UplinkPizzaBomb
+    - UplinkExplosiveGrenade
+    - UplinkHypopen
+    - UplinkCombatMedipen
+    - UplinkSyndicateBombFake
+    - UplinkToolbox
+    - UplinkSyndicateJawsOfLife
+    - UplinkCameraBug
+    - UplinkFreedomImplanter
+    - UplinkEmpImplanter
+    - UplinkVoiceMaskImplant
+    - UplinkClothingNoSlipsShoes
+    - UplinkClothingShoesBootsMagSyndie
+
+# minor - bug area
+- type: entity
+  abstract: true
+  parent: BaseMinorSideJob
+  id: BaseBugAreaSideJob
+  components:
+  - type: BugAreaCondition
+    objectiveName: bug-objective-name
+    objectiveDescription: bug-objective-description
+    iconEntity: SyndicateBug
+  - type: SideJob
+    tool: SyndicateBug
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobCmo
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeCmo
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobCE
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeCE
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobHop
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeHop
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobHos
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeHos
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobRd
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeRd
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobQm
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeQm
+
+
+# major
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseMajorSideJob
+  components:
+  - type: SideJob
+    reputationGain: 200
+  - type: LevelRestrictedSideJob
+    level: 1
+  - type: GenerateSideJobReward
+    currencyReward: Telecrystal10
+    currencyName: 10 tc
+    currencyChance: 0.66
+    uplinkRewards:
+    - UplinkAgentIDCard
+    - UplinkSarinGasGrenade
+    - UplinkStealthBox
+    - UplinkSyndicateLollypopBundle
+    - UplinkChameleonProjector
+    - UplinkRadioJammer
+    - UplinkDnaScramblerImplant
+    - UplinkClusterBananaPeel
+    - UplinkCigarettesCarton
+    - UplinkFakeMindshield
+    - UplinkMicroBombImplanter
+
+# major - grant theft
+- type: entity
+  abstract: true
+  parent: BaseMajorSideJob
+  id: BaseStealSideJob
+  components:
+  - type: StealCondition
+    objectiveNoOwnerText: side-job-steal-title-no-owner
+    objectiveText: side-job-steal-title
+    descriptionText: side-job-steal-description
+  - type: StealConditionRequireScan
+  - type: SideJob
+    tool: SyndicateScanalyzer
+
+- type: entity
+  parent: [ BaseStealSideJob, CMOHyposprayStealObjective ]
+  id: CMOHyposprayStealSideJob
+
+- type: entity
+  parent: [ BaseStealSideJob, RDHardsuitStealObjective ]
+  id: RDHardsuitStealSideJob
+
+- type: entity
+  parent: [ BaseStealSideJob, HandTeleporterStealObjective]
+  id: HandTeleporterStealSideJob
+
+- type: entity
+  parent: [ BaseStealSideJob, MagbootsStealObjective]
+  id: MagbootsStealSideJob
+
+- type: entity
+  parent: [ BaseStealSideJob, ClipboardStealObjective]
+  id: ClipboardStealSideJob
+
+- type: entity
+  parent: [ BaseStealSideJob, CaptainJetpackStealObjective ]
+  id: CaptainJetpackStealSideJob
+
+- type: entity
+  parent: [ BaseStealSideJob, CaptainGunStealObjective ]
+  id: CaptainGunStealSideJob
+
+# major - kill
+- type: entity
+  parent: [ BaseMajorSideJob, BaseKillObjective ]
+  id: KillSideJob
+  description: You have been hired to end someone's life. Kill them, then claim your reward. We don't care what happens to them afterwards.
+  components:
+  - type: SideJob
+    repeatable: true
+  - type: TargetObjective
+    title: side-job-kill-title
+  - type: KillPersonCondition
+    requireDead: true
+  - type: PickRandomPerson
+    conditions:
+    - !type:BodyWhitelistCondition
+      blacklist:
+        components:
+        - NukeOperative
+
+
+# extreme
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseExtremeSideJob
+  components:
+  - type: SideJob
+    reputationGain: 500
+  - type: LevelRestrictedSideJob
+    level: 2
+  - type: GenerateSideJobReward
+    currencyReward: Telecrystal15
+    currencyName: 15 tc
+    currencyChance: 0.66
+    uplinkRewards:
+    - UplinkExperimentalSyndicateTeleporter
+    - UplinkSingularityGrenade
+    - UplinkAccessBreaker
+    - UplinkEmag
+    - UplinkDisposableTurret
+
+# extreme - kill head
+- type: entity
+  parent: [ BaseExtremeSideJob, BaseKillObjective ]
+  id: KillHeadSideJob
+  description: This is no longer about contract killing - we need to make Nanotrasen afraid. Kill one of them. Kill a head of staff.
+  components:
+  - type: SideJob
+    repeatable: true
+  - type: TargetObjective
+    title: side-job-kill-title
+  - type: KillPersonCondition
+    requireDead: true
+  - type: PickRandomPerson
+    conditions:
+    - !type:BodyWhitelistCondition
+      blacklist:
+        components:
+        - NukeOperative
+      whitelist:
+        components:
+        - CommandStaff
+
+# final
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseFinalSideJob
+  components:
+  - type: SideJob
+    reputationGain: 10000
+    reward: SyndicateFinalReward
+    rewardName: syndicate lifetime achievement award
+  - type: LevelRestrictedSideJob
+    level: 3
+
+# final - battlecruiser
+- type: entity
+  parent: BaseFinalSideJob
+  id: BattlecruiserSideJob
+  components:
+  - type: Objective
+    icon:
+      sprite: _Trauma/Objects/Syndicate/syndicate_final_reward.rsi
+      state: icon
+  - type: SideJob
+    tool: SyndicateBroadcastDevice
+  - type: StealCondition
+    objectiveText: side-job-hack-comms-computer-name
+    objectiveNoOwnerText: side-job-hack-comms-computer-name
+    descriptionText: side-job-hack-comms-computer-description
+    descriptionMultiplyText: side-job-hack-comms-computer-description
+    stealGroup: CommsComputer
+  - type: StealConditionRequireScan

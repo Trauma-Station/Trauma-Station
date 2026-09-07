@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionOpenSideJobsImplant
+  name: Open Uplink
+  description: Opens the syndicate job board embedded under your skin
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    priority: -20
+  - type: Sprite
+    sprite: Objects/Devices/communication.rsi
+    layers:
+    - state: radio
+  - type: InstantAction
+    event: !type:OpenJobListingsImplantEvent
