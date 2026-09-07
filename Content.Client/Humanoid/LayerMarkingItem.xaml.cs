@@ -94,7 +94,8 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
 
     private void UpdateData()
     {
-        MarkingTexture.Textures = _markingPrototype.Sprites.Select(layer => _sprite.Frame0(layer)).ToList();
+        // Trauma - changed _sprite.Frame0 to north direction selection so it looks better
+        MarkingTexture.Textures = _markingPrototype.Sprites.Select(layer => _sprite.RsiStateLike(layer).TextureFor(Direction.North)).ToList();
         SelectButton.Text = Loc.GetString($"marking-{_markingPrototype.ID}");
     }
 

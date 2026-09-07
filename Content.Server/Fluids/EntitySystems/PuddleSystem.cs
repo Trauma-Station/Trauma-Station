@@ -1,11 +1,12 @@
 // <Trauma>
 using Content.Shared.Chemistry.Reagent;
+using Content.Trauma.Common.Fluids;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Server.Fluids.Components;
 using Content.Server.Spreader;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Database;
@@ -21,7 +22,6 @@ using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Fluids.EntitySystems;
@@ -32,7 +32,6 @@ namespace Content.Server.Fluids.EntitySystems;
 public sealed partial class PuddleSystem : SharedPuddleSystem
 {
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
@@ -271,12 +270,12 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         // <Goobstation>
         // after we've had the puddle interact with skin, add back reagents that aren't supposed to stick
         var addBack = new List<ProtoId<ReagentPrototype>>();
-        foreach (var (proto, amt) in splitSol.GetReagentPrototypes(_prototypeManager))
+        foreach (var (proto, amt) in splitSol.GetReagentPrototypes(ProtoMan))
         {
             if (!proto.SticksToSkin)
                 addBack.Add(proto.ID);
         }
-        solution.AddSolution(splitSol.SplitSolutionWithOnly(splitSol.Volume, addBack.ToArray()), _prototypeManager);
+        solution.AddSolution(splitSol.SplitSolutionWithOnly(splitSol.Volume, addBack.ToArray()), ProtoMan);
         // </Goobstation>
     }
 
@@ -431,8 +430,15 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
             // sorry! no overload for returning uid, so .owner must be used
             var owner = ent.Owner;
 
-            if (owner == user) // Goobtation - can't spill at yourself (have to use melee)
+            // <Trauma>
+            if (owner == user) // can't spill at yourself (have to use melee)
                 continue;
+
+            var attemptEv = new SplashAttemptEvent(owner);
+            RaiseLocalEvent(entity, ref attemptEv);
+            if (attemptEv.Cancelled)
+                continue;
+            // </Trauma>
 
             // between 5 and 30%
             var splitAmount = spilled.Volume * _random.NextFloat(0.05f, 0.30f);
@@ -453,7 +459,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
                 PopupType.SmallCaution);
         }
 
-        _color.RaiseEffect(spilled.GetColor(_prototypeManager), targets,
+        _color.RaiseEffect(spilled.GetColor(ProtoMan), targets,
             Filter.Pvs(entity, entityManager: EntityManager));
 
         return TrySpillAt(coordinates, spilled, out puddleUid, sound);
@@ -532,7 +538,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         // Get normalized co-ordinate for spill location and spill it in the centre
         // TODO: Does SnapGrid or something else already do this?
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, mapGrid, tileRef.GridIndices);
+        var anchored = _map.GetAnchoredEntities(gridId, mapGrid, tileRef.GridIndices);
 
         while (anchored.MoveNext(out var ent))
         {
@@ -578,7 +584,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         if (!TryComp<MapGridComponent>(tile.GridUid, out var grid))
             return false;
 
-        var anc = _map.GetAnchoredEntitiesEnumerator(tile.GridUid, grid, tile.GridIndices);
+        var anc = _map.GetAnchoredEntities(tile.GridUid, grid, tile.GridIndices);
         while (anc.MoveNext(out var ent))
         {
             if (!_puddleQuery.HasComponent(ent.Value))

@@ -28,7 +28,7 @@ public abstract partial class SharedXenomorphSystem : CommonXenomorphSystem
         if (_tag.HasTag(args.Item, XenomorphItemTag))
             return;
 
-        _popup.PopupClient(Loc.GetString("xenomorph-pickup-item-fail"), args.Item, uid);
+        _popup.PopupEntity(Loc.GetString("xenomorph-pickup-item-fail"), args.Item, uid);
         args.Cancel();
     }
 

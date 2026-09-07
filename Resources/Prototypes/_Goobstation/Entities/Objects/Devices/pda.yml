@@ -135,55 +135,6 @@
     id: NanotrasenRepresentativeIDCard
 
 - type: entity
-  parent: CentcomPDA
-  id: NavyCaptainPDA
-  name: navy captain's PDA
-  description: The devil's in the details.
-  components:
-  - type: Pda
-    id: CentcomIDCardNavyCaptain
-  - type: HealthAnalyzer
-    scanDelay: 0
-    silent: true
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    notificationsEnabled: false
-    diskSpace: 10 # DeltaV
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NewsReaderCartridge
-    - LogProbeCartridge
-    - WantedListCartridge
-    - MedTekCartridge
-    - AstroNavCartridge
-    - NanoChatCartridge # DeltaV
-
-- type: entity
-  parent: NavyCaptainPDA
-  id: NavyOfficerPDA
-  name: navy officer's PDA
-  components:
-  - type: Pda
-    id: CentcomIDCardNavyOfficer
-
-- type: entity
-  parent: NavyCaptainPDA
-  id: DiplomatPDA
-  name: diplomat's PDA
-  components:
-  - type: Pda
-    id: CentcomIDCardDiplomat
-
-- type: entity
-  parent: NavyCaptainPDA
-  id: InspectorPDA
-  name: auditor's PDA
-  components:
-  - type: Pda
-    id: CentcomIDCardInspector
-
-- type: entity
   parent: SyndiPDA
   id: SyndiPDANukie
   name: syndicate PDA
@@ -193,7 +144,7 @@
     id: NukieAgentIDCard
 
 - type: entity
-  parent: NavyCaptainPDA
+  parent: CentcomPDA
   id: HighCommandPDA
   name: high commander PDA
   description: An ordinary syndicate PDA, adorned with gilded symbols. It's owner is clearly of a higher standing.
@@ -220,10 +171,13 @@
     state: pda-highcommand
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key
-    preinstalled:
-    - NotekeeperCartridge
-    - NanoTaskCartridge
-    - NanoChatCartridge # DeltaV
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NanoChatCartridge
 
 - type: entity
   parent: BaseMedicalPDA

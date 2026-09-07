@@ -9,7 +9,6 @@
     CarrotSeeds: 5
     CabbageSeeds: 5
     ChanterelleSeeds: 5
-    #Cherry seeds and cherries added as part of Goob-Station issue #302 by jellygato - 8/27/24
     CherrySeeds: 5
     ChiliSeeds: 5
     CocoaSeeds: 3
@@ -23,7 +22,6 @@
     LimeSeeds: 5
     PineappleSeeds: 5
     LingzhiSeeds: 3
-    MangoSeeds: 5 # Goob-Station change by Krispy-Lime 8/26/25 (porting RMC-14 PR #7226)
     OatSeeds: 5
     OnionSeeds: 5
     OnionRedSeeds: 5
@@ -46,7 +44,6 @@
     FlyAmanitaSeeds: 1
   # <Trauma>
     MeatwheatSeeds: 2
-    NettleSeeds: 2
     CocaSeeds: 2
     CannabisSeeds: 2
   emaggedInventory:

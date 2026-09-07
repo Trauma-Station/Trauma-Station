@@ -17,7 +17,6 @@
     - id: JobDistributionError
     - id: KudzuGrowth
     - id: MassHallucinations
-    # - id: MimicVendorRule - Trauma, moved to basic antag
     - id: MouseMigration
     - id: PowerGridCheck
     - id: RandomSentience
@@ -35,7 +34,6 @@
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     # <Trauma>
-    - id: MimicVendorRule
     - id: SlimesSpawnHorde
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
@@ -170,6 +168,10 @@
     duration: 1
     minimumPlayers: 15
   - type: BreakerFlipRule
+    blacklist:
+      components:
+        - ProtectedGrid
+
 
 - type: entity
   id: BureaucraticError
@@ -206,6 +208,7 @@
   - type: StationEvent
     weight: 5
     duration: 1
+    occursDuringRoundEnd: false
     minimumPlayers: 10
   - type: RandomEntityStorageSpawnRule
     prototype: MobSkeletonCloset
@@ -222,6 +225,7 @@
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
     duration: null
+    occursDuringRoundEnd: false
   - type: SpaceSpawnRule
     spawnDistance: 0
   - type: AntagSpawner
@@ -253,9 +257,9 @@
   - type: StationEvent
     weight: 1 # Trauma - was 6
     duration: null
-    earliestStart: 40 # Trauma - Was 45. Lowered so it works better with our schedulers
-    #reoccurrenceDelay: 20 # Goobstation - no longer needed
-    maxOccurrences: 1 # Goobstation
+    occursDuringRoundEnd: false
+    earliestStart: 30
+    maxOccurrences: 1 # Trauma - replaces delay
     minimumPlayers: 30
   - type: SpaceSpawnRule
   - type: AntagGhostCharacterRule # Trauma - use ghost character instead of AntagLoadProfileRule
@@ -282,18 +286,21 @@
   - type: StationEvent
     weight: 4 # Trauma - Was 5
     duration: null
+    occursDuringRoundEnd: false
     earliestStart: 20
     reoccurrenceDelay: 20
     minimumPlayers: 15
   - type: ParadoxCloneRule
+    # <Trauma>
+    targetBlacklist:
+      components:
+      - BorgBrain # No copying the AI or borgs.
+      - BorgChassis
+      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, etc)
+    # </Trauma>
     objectiveBlacklist:
       tags:
       - ParadoxCloneObjectiveBlacklist
-    targetBlacklist: # Goobstation
-      components:
-      - BorgBrain # No copying the AI or borgs.
-      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, Ghost bar, etcetera.)
-
   - type: AntagObjectives
     objectives:
     - ParadoxCloneKillObjective
@@ -307,17 +314,19 @@
   - type: DynamicRuleCost
     cost: 50
 
-#- type: entity   Goobstaion start - disabled until rework
-#  parent: BaseGameRule
-#  id: RevenantSpawn
-#  components:
-#  - type: StationEvent
-#    weight: 3.5
-#    duration: 1
-#    earliestStart: 30
-#    minimumPlayers: 20
-#  - type: RandomSpawnRule
-#    prototype: MobRevenant      goobstation end
+- type: entity
+  abstract: true # Trauma - lol
+  parent: BaseGameRule
+  id: RevenantSpawn
+  components:
+  - type: StationEvent
+    weight: 7.5
+    duration: 1
+    occursDuringRoundEnd: false
+    earliestStart: 45
+    minimumPlayers: 20
+  - type: RandomSpawnRule
+    prototype: MobRevenant
 
 - type: entity
   parent: [ BaseAntagGhostRoleRule, BaseWizardRule ]
@@ -326,6 +335,7 @@
   - type: StationEvent
     weight: 5.5 # Trauma - was 1
     duration: null
+    occursDuringRoundEnd: false
     earliestStart: 30
     reoccurrenceDelay: 60
     minimumPlayers: 30
@@ -375,8 +385,8 @@
       path: /Audio/Announcements/power_off.ogg
       params:
         volume: -4
-    duration: 60
-    maxDuration: 120
+    duration: 50
+    maxDuration: 100
   - type: PowerGridCheckRule
 
 - type: entity
@@ -392,7 +402,7 @@
     duration: 120
     maxDuration: 240
   - type: SolarFlareRule
-    onlyJamHeadsets: true
+    #onlyJamHeadsets: true # Trauma - POV: intercoms and clankers somehow bypass the radio blackout
     affectedChannels:
     - Common
     extraChannels:
@@ -541,6 +551,7 @@
     weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
+    occursDuringRoundEnd: false
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -603,17 +614,6 @@
   - type: IonStormRule
 
 - type: entity
-  id: MimicVendorRule
-  parent: BaseGameRule
-  components:
-  - type: StationEvent
-    earliestStart: 0
-    minimumPlayers: 20
-    maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
-    weight: 5
-  - type: MobReplacementRule
-
-- type: entity
   id: GreytideVirus
   parent: BaseStationEventShortDelay
   components:
@@ -658,6 +658,7 @@
     reoccurrenceDelay: 20
     minimumPlayers: 4
     duration: null
+    occursDuringRoundEnd: false
   - type: SpaceSpawnRule
     spawnDistance: 0
 

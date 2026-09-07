@@ -38,7 +38,7 @@ public abstract partial class SharedBlinkSystem : EntitySystem
 
         ent.Comp.IsActive = !ent.Comp.IsActive;
         var message = ent.Comp.IsActive ? "blink-activated-message" : "blink-deactivated-message";
-        _popup.PopupClient(Loc.GetString(message), args.User);
+        _popup.PopupEntity(Loc.GetString(message), args.User);
         Dirty(ent);
         args.Handled = true;
     }

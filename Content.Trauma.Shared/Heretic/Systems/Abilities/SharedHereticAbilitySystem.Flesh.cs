@@ -17,18 +17,7 @@ public abstract partial class SharedHereticAbilitySystem
 {
     private readonly HashSet<Entity<GhoulComponent>> _lookupGhouls = new();
 
-    protected virtual void SubscribeFlesh()
-    {
-        SubscribeLocalEvent<HereticComponent, IncreaseFleshGhoulLimitEvent>(OnIncreaseFleshGhoulLimit);
-
-        SubscribeLocalEvent<FleshPassiveComponent, OnHealthChangeEvent>(OnPoisonImmune);
-
-        SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryPainEvent>>(OnPain);
-        SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent>>(OnIgnore);
-        SubscribeLocalEvent<FleshSurgeryComponent, TouchSpellUsedEvent>(OnTouchSpellUsed);
-        SubscribeLocalEvent<FleshSurgeryComponent, UseInHandEvent>(OnFleshSurgeryUse);
-    }
-
+    [SubscribeLocalEvent]
     private void OnIncreaseFleshGhoulLimit(Entity<HereticComponent> ent, ref IncreaseFleshGhoulLimitEvent args)
     {
         if (Heretic.TryGetRitual(ent.Owner, args.ImperfectRitual, out var ritual))
@@ -44,6 +33,7 @@ public abstract partial class SharedHereticAbilitySystem
         Dirty(ent, fleshMind);
     }
 
+    [SubscribeLocalEvent]
     private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref OnHealthChangeEvent args)
     {
         foreach (var (key, value) in args.Damage.DamageDict)
@@ -56,6 +46,7 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnTouchSpellUsed(Entity<FleshSurgeryComponent> ent, ref TouchSpellUsedEvent args)
     {
         if (!TryComp(args.Target, out GhoulComponent? ghoul))
@@ -64,11 +55,13 @@ public abstract partial class SharedHereticAbilitySystem
         HealGhoul((args.Target, ghoul));
     }
 
+    [SubscribeLocalEvent]
     private void OnIgnore(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent> args)
     {
         args.Args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPain(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryPainEvent> args)
     {
         args.Args.Cancelled = true;

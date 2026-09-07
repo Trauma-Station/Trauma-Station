@@ -5,6 +5,7 @@
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: BaseRevMeleeWeapon
   components:
+  - type: WeaponClass
   - type: MeleeWeapon
     wideAnimationRotation: -135
   - type: DisarmMalus
@@ -30,6 +31,8 @@
   name: forged mace
   description: A robust mace, stuns enemies. Knocks the air out of targets and makes them struggle to speak.
   components:
+  - type: WeaponClass
+    class: NonLethal # perfect for the clown
   - type: Sprite
     sprite: _Trauma/Objects/Revs/mace.rsi
     state: icon
@@ -50,21 +53,27 @@
   - type: MeleeThrowOnHit
     distance: 0.3
     speed: 1
+  - type: Solution
+    solution:
+      maxVol: 5
   - type: SolutionRegeneration
     generated:
       reagents:
       - ReagentId: MuteToxin
-        Quantity: 1
+        Quantity: 5
   - type: MeleeChemicalInjector
-    transferAmount: 0.1
+    transferAmount: 5
     solution: melee
 
+# TODO: inherit BaseSword
 - type: entity
   parent: [BaseRevForgedWeapon, KnifeDurabilitySharpenOnly]
   id: RevSword
   name: forged sword
   description: A two handed sword, deals heavy damage.
   components:
+  - type: WeaponClass
+    class: Sword
   - type: Sprite
     sprite: _Trauma/Objects/Revs/sword.rsi
     state: icon
@@ -88,13 +97,15 @@
   - type: Tag
     tags:
     - Knife
-  - type: Sharp
   - type: Utensil
     types:
     - Knife
+  - type: Sharp
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
@@ -127,6 +138,8 @@
   name: forged pitchfork
   description: A large pitchfork, can be thrown and has extended melee range.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: Sprite
     sprite: _Trauma/Objects/Revs/pitchfork.rsi
     state: icon
@@ -160,12 +173,15 @@
   - type: Construction
     graph: RevPitchfork
 
+# TDOO: inhherit BaseKnife if nothing is unwanted
 - type: entity
   parent: [BaseRevForgedWeapon, KnifeDurabilitySharpenOnly]
   id: RevKnife
   name: forged knife
   description: A small forged knife. It is concealable, can be tipped with poison and is usable with a shield.
   components:
+  - type: WeaponClass
+    class: Knife
   - type: Sprite
     sprite: _Trauma/Objects/Revs/knife.rsi
     layers:
@@ -190,7 +206,7 @@
         volume: -8
   - type: MeleeWeapon
     animationRotation: -45
-    canWideSwing: false
+    heavyPartDamageMultiplier: 0.75
     damage:
       types:
         Slash: 12
@@ -202,13 +218,13 @@
   - type: Tag
     tags:
     - Knife
-  - type: Sharp
   - type: Utensil
     types:
     - Knife
+  - type: Sharp
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/bladeslice.ogg
   - type: DamageOtherOnHit
@@ -248,6 +264,8 @@
   name: combat torch
   description: A refined torch mounted with a steel head. Lights enemies on fire when hit.
   components:
+  - type: WeaponClass
+    class: Polearm # i imagine youd poke people with it
   - type: Sprite
     sprite: _Trauma/Objects/Revs/torch.rsi
     state: icon
@@ -334,6 +352,8 @@
   name: forged maul
   description: A robust maul, designed to hit through armor. Definitely not a non-lethal option.
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Sprite
     sprite: _Trauma/Objects/Revs/maul.rsi
     state: icon
@@ -371,6 +391,8 @@
   name: forged kunai
   description: A shovel often thrown by weebs, capable of a lot if you know what you're doing. The red handle wards off demons.
   components:
+  - type: WeaponClass
+    class: Knife
   - type: Sprite
     sprite: _Trauma/Objects/Revs/kunai.rsi
     layers:
@@ -398,10 +420,10 @@
     - ThrowingKnife
   - type: Shovel # it's a shovel
   - type: ToolTileCompatible
-  - type: Sharp
   - type: Utensil
     types:
     - Knife
+  - type: Sharp
   - type: Tool
     qualities:
     - Slicing
@@ -412,10 +434,10 @@
     graph: RevKunai
   - type: MeleeWeapon
     animationRotation: -130
-    canWideSwing: false
+    heavyPartDamageMultiplier: 0.75
     damage:
       types:
-        Piercing: 10
+        Piercing: 15
         Structural: 15
         Holy: 1
     soundHit:
@@ -431,12 +453,12 @@
     increaseOnly: true
     damage:
       types:
-        Piercing: 15 # 7 to crit
-        Structural: 15
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 3
+        Piercing: 20 # 5 to crit
+        Structural: 20
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 3
   - type: MeleeChemicalInjector
     transferAmount: 3
     solution: melee

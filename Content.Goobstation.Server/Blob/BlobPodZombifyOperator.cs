@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Blob.NPC.BlobPod;
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Goobstation.Shared.Blob.NPC.BlobPod;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.HTN.PrimitiveTasks;
@@ -41,10 +41,9 @@ public sealed partial class BlobPodZombifyOperator : HTNOperator
 
         if (pod.ZombifyTarget == null)
         {
-            if (_blobPod.NpcStartZombify(owner, target, pod))
-                return HTNOperatorStatus.Continuing;
-            else
-                return HTNOperatorStatus.Failed;
+            return _blobPod.NpcStartZombify((owner, pod), target)
+                ? HTNOperatorStatus.Continuing
+                : HTNOperatorStatus.Failed;
         }
 
         pod.ZombifyTarget = null;

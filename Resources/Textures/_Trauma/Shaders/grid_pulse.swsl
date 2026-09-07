@@ -1,0 +1,63 @@
+light_mode unshaded;
+
+const highp float radius = 0.5;
+const highp float iterations = 4.0;
+const highp float outlineWidth = 0.005;
+const highp float gridDensity = 8.0;
+const highp float gridThickness = 0.04;
+const highp float glowSpread = 50.0;
+const highp float glowIntensity = 0.5;
+
+highp float getShape(highp vec2 uv, highp float r)
+{
+    highp float dist = length(uv);
+    highp float distToOutline = abs(dist - r);
+
+    highp float coreOutline = 1.0 - smoothstep(0.0, outlineWidth, distToOutline);
+    highp float glowOutline = exp(-distToOutline * glowSpread) * glowIntensity;
+
+    highp vec2 gridSpace = fract(uv * gridDensity);
+
+    highp vec2 distToLineXY = min(gridSpace, 1.0 - gridSpace);
+    highp float distToGrid = min(distToLineXY.x, distToLineXY.y);
+
+    highp float coreGrid = 1.0 - smoothstep(0.0, gridThickness, distToGrid);
+    highp float glowGrid = exp(-distToGrid * 30.0) * (glowIntensity * 0.8);
+
+    highp float insideCircle = smoothstep(r, r - 0.01, dist);
+    coreGrid *= insideCircle;
+    glowGrid *= insideCircle;
+
+    highp float core = max(coreOutline, coreGrid);
+    highp float glow = max(glowOutline, glowGrid);
+
+    return core + glow;
+}
+
+void fragment()
+{
+    highp vec4 color = zTexture(UV);
+	if (color.a == 0.0) {
+		discard;
+	}
+
+    highp vec2 uv = UV * 2.0 - 1.0;
+    highp vec4 finalColor = vec4(0.0);
+
+    for(lowp int i = 1; i <= int(iterations); i++)
+    {
+        highp float localPulse = fract((TIME + float(i)) / iterations);
+        highp float intensity = getShape(uv, radius + pow(localPulse, 0.5) * 0.5);
+
+        highp float opacityMod = (1.0 - localPulse) * 0.2;
+        highp float layerGlow = intensity * opacityMod;
+
+        finalColor += color * layerGlow;
+    }
+
+    highp float mainIntensity = getShape(uv, radius);
+
+    finalColor += color * mainIntensity;
+
+    COLOR = clamp(finalColor, 0.0, 1.0);
+}

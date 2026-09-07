@@ -25,7 +25,8 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipTechnicalAssistant
+    - SkillChipEducation
+    - SkillChipDatabase
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff

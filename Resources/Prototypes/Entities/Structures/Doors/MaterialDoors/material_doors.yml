@@ -52,14 +52,6 @@
     cost: 6
     delay: 6
     fx: EffectRCDDeconstruct6
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: Occluder
   - type: BlockWeather
   - type: SoundBlocker # Trauma
@@ -83,12 +75,6 @@
     node: metalDoor
   - type: Destructible
     thresholds:
-    - trigger: &DamageTrigger200 # Overkill threshold
-        !type:DamageTrigger
-        damage: 200
-      behaviors: &OverkillBehavior
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger: &DamageTrigger150
         !type:DamageTrigger
         damage: 150
@@ -116,8 +102,6 @@
     node: plasmaDoor
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger200
-      behaviors: *OverkillBehavior
     - trigger: *DamageTrigger150
       behaviors:
       - !type:DoActsBehavior
@@ -143,8 +127,6 @@
     node: goldDoor
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger200
-      behaviors: *OverkillBehavior
     - trigger: *DamageTrigger150
       behaviors:
       - !type:DoActsBehavior
@@ -170,8 +152,6 @@
     node: silverDoor
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger200
-      behaviors: *OverkillBehavior
     - trigger: *DamageTrigger150
       behaviors:
       - !type:DoActsBehavior
@@ -203,8 +183,6 @@
     node: bananiumDoor
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger200
-      behaviors: *OverkillBehavior
     - trigger: *DamageTrigger150
       behaviors:
       - !type:DoActsBehavior
@@ -239,8 +217,6 @@
     damageModifierSet: Wood
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger150
-      behaviors: *OverkillBehavior
     - trigger:
         !type:DamageTrigger
         damage: 75
@@ -275,8 +251,6 @@
     damageModifierSet: Wood
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger150
-      behaviors: *OverkillBehavior
     - trigger:
         !type:DamageTrigger
         damage: 50
@@ -312,8 +286,6 @@
     damageModifierSet: Web
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger150
-      behaviors: *OverkillBehavior
     - trigger:
         !type:DamageTrigger
         damage: 50
@@ -353,8 +325,6 @@
     damageModifierSet: Card
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger150
-      behaviors: *OverkillBehavior
     - trigger:
         !type:DamageTrigger
         damage: 30

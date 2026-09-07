@@ -11,6 +11,12 @@ namespace Content.Trauma.Shared.Body;
 public sealed partial class SpeedModifierOrganComponent : Component
 {
     [DataField]
+    public float WeightlessFriction;
+
+    [DataField]
+    public float WeightlessModifier;
+
+    [DataField]
     public float WeightlessAcceleration;
 
     // add more if you want to use them :)

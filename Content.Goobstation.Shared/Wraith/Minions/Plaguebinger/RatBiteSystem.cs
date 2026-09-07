@@ -10,18 +10,13 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 
+// rat bite..?
 public sealed partial class RatBiteSystem : EntitySystem
 {
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RatBiteComponent, RatBiteEvent>(OnBite);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBite(Entity<RatBiteComponent> ent, ref RatBiteEvent args)
     {
         var uid = ent.Owner;
@@ -31,9 +26,10 @@ public sealed partial class RatBiteSystem : EntitySystem
         if (args.Handled || !TryInjectReagents(target, comp.Reagents))
             return;
 
-        _popup.PopupClient(Loc.GetString("wraith-plaguerat-bite-you-message", ("target", target)), uid, uid);
+        _popup.PopupEntity(Loc.GetString("wraith-plaguerat-bite-you-message", ("target", target)), uid, uid);
         args.Handled = true;
     }
+
     private bool TryInjectReagents(EntityUid target, Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> reagents)
     {
         // Build up a solution from the bite's reagents.

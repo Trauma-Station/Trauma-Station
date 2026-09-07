@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
@@ -22,7 +23,7 @@ public sealed partial class BoxRandomEntityShape : EntityShape
     [DataField]
     public int? RemoveAmount;
 
-    protected override List<Vector2> GetShapeImplementation(System.Random rand, IPrototypeManager proto)
+    protected override List<Vector2> GetShapeImplementation(IRobustRandom rand, IPrototypeManager proto)
     {
         if (FilledChance != null)
             return ShapeHelpers.MakeBoxChanceRandom(Offset, Size, rand, FilledChance.Value, StepSize).ToList();

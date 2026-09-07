@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: EX-12 "Foxhound"
+  name: EX-12 "Foxhound" # virtual mission..?
   parent: [BaseItem, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponShotgunBulldogLegallyDistinct # """legally distinct"""
   description: A completely original Nanotrasen design, that is legally distinct from any other weapons that might be on the market.
   components:
+  - type: WeaponClass
+    class: Shotgun
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
     layers:

@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseBulletKinetic # Trauma
+  id: BulletMagnum
+  categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 20 # Trauma, was 35
+
+- type: entity
+  parent: BaseBulletPractice
+  id: BulletMagnumPractice
+  categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum practice)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 1
+
+- type: entity
+  parent: [BaseBulletIncendiary, BaseBulletKinetic] # Trauma
+  id: BulletMagnumIncendiary
+  categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum incendiary)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 17 # Trauama, was 26
+        # Heat: 9 # Trauma
+
+- type: entity
+  parent: [BaseBulletAP, BaseBulletKinetic] # Trauma
+  id: BulletMagnumAP
+  categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum armor-piercing)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 20 # Trauma, was 28
+      armorPenetration: 0.75 # Goobstation
+
+- type: entity
+  parent: [BaseBulletUranium, BaseBulletKinetic] # Trauma
+  id: BulletMagnumUranium
+  categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum uranium)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        # Radiation: 15 # Trauma
+        Ballistic: 17 # Trauma, was 20
+      armorPenetration: 0.5 # Trauma

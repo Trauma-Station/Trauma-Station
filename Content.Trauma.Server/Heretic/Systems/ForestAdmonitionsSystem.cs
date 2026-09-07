@@ -14,8 +14,8 @@ namespace Content.Trauma.Server.Heretic.Systems;
 public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 {
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private readonly HashSet<Entity<PhysicsComponent>> _lookupPhysics = new();
 
@@ -58,10 +58,10 @@ public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSys
                 if (!_random.Prob(Math.Clamp(chance, 0f, 1f)))
                     continue;
 
-                var pos = coords.Offset(offset).SnapToGrid(EntityManager, _mapMan);
+                var pos = coords.Offset(offset).SnapToGrid(EntityManager);
                 var mapPos = XForm.ToMapCoordinates(pos);
 
-                if (offset != Vector2.Zero && !_mapMan.TryFindGridAt(mapPos, out _, out _))
+                if (offset != Vector2.Zero && !_map.TryFindGridAt(mapPos, out _, out _))
                     continue;
 
                 const int mask = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable);

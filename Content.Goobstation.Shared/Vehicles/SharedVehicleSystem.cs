@@ -11,8 +11,6 @@ using Content.Shared.Hands;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
@@ -20,12 +18,16 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Trauma.Common.TileMovement;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Vehicles;
 
 public abstract partial class SharedVehicleSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
@@ -39,34 +41,14 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     private static readonly EntProtoId HornActionId = "ActionHorn";
     private static readonly EntProtoId SirenActionId = "ActionSiren";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<VehicleComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<VehicleComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<VehicleComponent, BuckleAttemptEvent>(OnBuckleAttempt);
-        SubscribeLocalEvent<VehicleComponent, StrapAttemptEvent>(OnStrapAttempt);
-        SubscribeLocalEvent<VehicleComponent, StrappedEvent>(OnStrapped);
-        SubscribeLocalEvent<VehicleComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<VehicleComponent, VirtualItemDeletedEvent>(OnDropped);
-
-        SubscribeLocalEvent<VehicleComponent, EntInsertedIntoContainerMessage>(OnInsert);
-        SubscribeLocalEvent<VehicleComponent, EntRemovedFromContainerMessage>(OnEject);
-
-        SubscribeLocalEvent<VehicleComponent, HornActionEvent>(OnHorn);
-        SubscribeLocalEvent<VehicleComponent, SirenActionEvent>(OnSiren);
-        SubscribeLocalEvent<VehicleComponent, ItemSlotEjectAttemptEvent>(OnItemSlotEject);
-        SubscribeLocalEvent<VehicleComponent, BreakageEventArgs>(OnBreak);
-        SubscribeLocalEvent<VehicleComponent, DamageChangedEvent>(OnRepair);
-        SubscribeLocalEvent<VehicleComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInit(EntityUid uid, VehicleComponent component, ComponentInit args)
     {
         _appearance.SetData(uid, VehicleState.Animated, component.EngineRunning);
         _appearance.SetData(uid, VehicleState.DrawOver, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(EntityUid uid, VehicleComponent component, ComponentRemove args)
     {
         if (component.Driver == null)
@@ -77,11 +59,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         _appearance.SetData(uid, VehicleState.DrawOver, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnInsert(EntityUid uid, VehicleComponent component, ref EntInsertedIntoContainerMessage args)
     {
-        if (HasComp<InstantActionComponent>(args.Entity)
-            || args.Container.ID != component.KeySlot
-            || component.IsBroken)
+        if (_timing.ApplyingState ||
+            args.Container.ID != component.KeySlot ||
+            component.IsBroken)
             return;
 
         component.EngineRunning = true;
@@ -94,9 +77,11 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Mount(driver, uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnEject(EntityUid uid, VehicleComponent component, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != component.KeySlot)
+        if (_timing.ApplyingState ||
+            args.Container.ID != component.KeySlot)
             return;
         component.EngineRunning = false;
         Dirty(uid, component);
@@ -107,6 +92,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Dismount(driver, uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnHorn(EntityUid uid, VehicleComponent component, HornActionEvent args)
     {
         var user = args.Performer;
@@ -117,6 +103,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnSiren(EntityUid uid, VehicleComponent component, SirenActionEvent args)
     {
         var user = args.Performer;
@@ -133,11 +120,13 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         component.SirenStream = component.SirenEnabled ? _audio.Stop(component.SirenStream) : _audio.PlayPvs(component.SirenSound, uid)?.Entity;
     }
 
+    [SubscribeLocalEvent]
     private void OnBuckleAttempt(Entity<VehicleComponent> ent, ref BuckleAttemptEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStrapAttempt(Entity<VehicleComponent> ent, ref StrapAttemptEvent args)
     {
         if (args.Cancelled)
@@ -173,6 +162,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStrapped(Entity<VehicleComponent> ent, ref StrappedEvent args)
     {
         var driver = args.Buckle.Owner;
@@ -206,6 +196,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         ent.Comp.ActiveOverlay = overlay;
     }
 
+    [SubscribeLocalEvent]
     private void OnUnstrapped(Entity<VehicleComponent> ent, ref UnstrappedEvent args)
     {
         if (ent.Comp.Driver != args.Buckle.Owner)
@@ -215,6 +206,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         _appearance.SetData(ent, VehicleState.DrawOver, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnDropped(Entity<VehicleComponent> ent, ref VirtualItemDeletedEvent args)
     {
         if (ent.Comp.Driver != args.User)
@@ -269,6 +261,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         RaiseLocalEvent(vehicle, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnItemSlotEject(EntityUid uid, VehicleComponent comp, ref ItemSlotEjectAttemptEvent args)
     {
         if (!comp.PreventEjectOfKey || comp.Driver == null || args.Slot.ID != comp.KeySlot || args.User == comp.Driver)
@@ -277,6 +270,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBreak(EntityUid uid, VehicleComponent component, BreakageEventArgs args)
     {
         component.IsBroken = true;
@@ -292,18 +286,27 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         _ambientSound.SetAmbience(uid, false);
     }
 
-    private void OnRepair(EntityUid uid, VehicleComponent component, DamageChangedEvent args)
+// this is for repairing via bananas, rejuv or whatever else can do it. not damage dealt
+#pragma warning disable CS0618
+    [SubscribeLocalEvent]
+    private void OnDamageChanged(Entity<VehicleComponent> ent, ref DamageChangedEvent args)
+#pragma warning restore CS0618
     {
-        if (!component.IsBroken)
+        if (!ent.Comp.IsBroken)
             return;
 
-        var total = _damageable.GetTotalDamage((uid, args.Damageable));
-        component.IsBroken = total > FixedPoint2.Zero;
+        var total = _damageable.GetTotalDamage(ent.Owner);
+        if (total > FixedPoint2.Zero)
+            return;
+
+        ent.Comp.IsBroken = false;
+        Dirty(ent);
     }
 
-    private void OnGetAdditionalAccess(EntityUid uid, VehicleComponent component, ref GetAdditionalAccessEvent args)
+    [SubscribeLocalEvent]
+    private void OnGetAdditionalAccess(Entity<VehicleComponent> ent, ref GetAdditionalAccessEvent args)
     {
-        if (component.Driver is { } driver)
+        if (ent.Comp.Driver is { } driver)
             args.Entities.Add(driver);
     }
 }

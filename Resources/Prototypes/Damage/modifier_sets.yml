@@ -3,7 +3,8 @@
   coefficients:
     Blunt: 0.7
     Slash: 0.5
-    Piercing: 0.7
+    Piercing: 0.5 # Trauma, was 0.7
+    Ballistic: 0.5 # Trauma
     Shock: 1.2
     Structural: 0.5
   flatReductions:
@@ -16,12 +17,14 @@
     Blunt: 0.5
     Slash: 0.5
     Piercing: 0.5
+    Ballistic: 0.5 # Trauma
     Shock: 1.2
     Structural: 0.25
   flatReductions:
     Blunt: 10
     Slash: 10
     Piercing: 10
+    Ballistic: 10 # Trauma
     Heat: 10
     Structural: 10
 
@@ -35,6 +38,7 @@
     Blunt: 10
     Slash: 10
     Piercing: 10
+    Ballistic: 10 # Trauma
     Heat: 10
     Structural: 10
 
@@ -74,7 +78,7 @@
   id: FlimsyMetallic
   coefficients:
     Blunt: 0.7
-    Slash: 0.5
+    Slash: 0.7  # Trauma - upped it by 0.2 to be in line with the others.
     Piercing: 0.7
     Shock: 1.2
 
@@ -227,21 +231,26 @@
   ignoreArmorPierceFlags: All # Goobstation
 
 - type: damageModifierSet
-  id: Zombie #Goob change, make zombies great again
+  # <Trauma>
+  id: Zombie
+  ignoreArmorPierceFlags: All
   coefficients:
-    Blunt: 2
-    Piercing: 2
-    Slash: 2
-    Cold: 0.3
-    Heat: 2
+    Blunt: 0.75
+    Piercing: 1.25
+    Cold: 0.2
+    Heat: 1.5
+  # </Trauma>
     Poison: 0.0
     Radiation: 0.0
-  ignoreArmorPierceFlags: All # Goobstation
 
 # immune to everything except physical and heat damage; vulnerable to holy damage because they're undead, but not as vulnerable as a ghost or demon would be
 - type: damageModifierSet
   id: Skeleton
+  # <Trauma>
+  ignoreArmorPierceFlags: All
+  # </Trauma>
   coefficients:
+    Blunt: 1.5 # Oof ouch my bones
     Cold: 0.0
     Poison: 0.0
     Radiation: 0.0
@@ -249,9 +258,6 @@
     Bloodloss: 0.0
     Cellular: 0.0
     Holy: 0.5
-  ignoreArmorPierceFlags: All # Goobstation
-  flatReductions: # Goob
-    Blunt: 5
 
 # hurt a lot by blunt, immune to a good amount of other stuff because they're a cookie
 - type: damageModifierSet
@@ -271,6 +277,7 @@
 - type: damageModifierSet
   id: BloodlossHuman
   coefficients:
+    Ion: 0 # Trauma
     Asphyxiation: 0.0
     Bloodloss: 0.0 # no double dipping
     Blunt: 0.08

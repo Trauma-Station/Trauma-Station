@@ -17,6 +17,19 @@
     id: Kudzu
   - type: SpeedModifierContacts
     affectAirborne: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: Temperature
+    temperature: 293.15
+    heatCapacity: 21000
 
 - type: entity
   parent: [ BaseKudzu, SolutionFood ]
@@ -38,16 +51,6 @@
     drawdepth: Overdoors
   - type: KudzuVisuals
   - type: Clickable
-  - type: Fixtures
-    fixtures:
-      fix1:
-        hard: false
-        density: 7
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        layer:
-        - MidImpassable
   - type: Damageable
     damageModifierSet: Wood
   - type: Injurable
@@ -59,7 +62,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Temperature
   - type: TemperatureDamage
     heatDamage:
       types:
@@ -183,8 +185,9 @@
         - id: MobLuminousPerson
 
 - type: entity
+  abstract: true
   parent: [ BaseKudzu, SolutionFood ]
-  id: FleshKudzu
+  id: BaseFleshKudzu
   name: tendons
   description: A rapidly growing cluster of meaty tendons. WHY ARE YOU STOPPING TO LOOK AT IT?!
   components:
@@ -199,16 +202,6 @@
     drawdepth: Overdoors
   - type: KudzuVisuals
   - type: Clickable
-  - type: Fixtures
-    fixtures:
-      fix1:
-        hard: false
-        density: 7
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        layer:
-        - MidImpassable
   - type: Damageable
   - type: Injurable
   - type: Destructible
@@ -237,7 +230,6 @@
         Heat: -1.0
         Cold: -1.0
         Blunt: -0.5 # Needs to be balanced (approx 3x) with vacuum damage to stall but not kill Kudzu
-  - type: Temperature
   - type: TemperatureDamage
     heatDamage:
       types:
@@ -248,12 +240,12 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 1 # Trauma - was 0.1, it didn't die on spaced plating because of atmos shitcode
+        Blunt: 2 # Trauma - was 0.1
   - type: Flammable
     fireSpread: true
     damage:
-     types:
-       Heat: 3
+      types:
+        Heat: 3
   - type: AtmosExposed
   - type: Edible # delightfully devilish !
     delay: 0.5
@@ -277,6 +269,29 @@
     tags:
     - Meat
     - Ruminant
+
+- type: entity
+  parent: BaseFleshKudzu
+  id: FleshKudzu
+  components:
+  - type: Temperature
+  - type: TemperatureDamage
+    heatDamage:
+      types:
+        Heat: 10
+    coldDamage:
+      types:
+        Cold: 5 #per second, scales with temperature & other constants
+    coldDamageThreshold: 0
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 1 # Trauma - was 0.1, it didn't die on spaced plating because of atmos shitcode
+
+- type: entity
+  parent: BaseFleshKudzu
+  id: FleshKudzuSpace
+  suffix: Space
 
 - type: entity
   parent: [ BaseKudzu, BaseShadow ]

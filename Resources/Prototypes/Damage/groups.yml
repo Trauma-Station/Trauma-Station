@@ -5,6 +5,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic # Trauma
 
 - type: damageGroup
   id: Burn

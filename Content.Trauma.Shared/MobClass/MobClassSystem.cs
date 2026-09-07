@@ -13,7 +13,6 @@ namespace Content.Trauma.Shared.MobClass;
 /// </summary>
 public sealed partial class MobClassSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
@@ -34,7 +33,7 @@ public sealed partial class MobClassSystem : EntitySystem
         var action = ent.Owner;
         var user = args.Performer;
 
-        if (!_mobClassQuery.TryGetComponent(user, out var mobClass) || !_proto.Resolve(mobClass.BelongsTo, out _))
+        if (!_mobClassQuery.TryGetComponent(user, out var mobClass) || !ProtoMan.Resolve(mobClass.BelongsTo, out _))
             return;
 
         _ui.SetUiState(action, MobClassUiKey.Key, new MobClassState(mobClass.BelongsTo));
@@ -64,10 +63,10 @@ public sealed partial class MobClassSystem : EntitySystem
             return;
 
         // The class must match the mob class group we belong to, otherwise we can't specialize in it.
-        if (!_proto.Resolve(ent.Comp.BelongsTo, out var mobGroup) || !mobGroup.Classes.Contains(classProto))
+        if (!ProtoMan.Resolve(ent.Comp.BelongsTo, out var mobGroup) || !mobGroup.Classes.Contains(classProto))
             return;
 
-        if (!_proto.Resolve(classProto, out var mobClass))
+        if (!ProtoMan.Resolve(classProto, out var mobClass))
             return;
 
         ent.Comp.CurrentClass = classProto;
@@ -98,7 +97,7 @@ public sealed partial class MobClassSystem : EntitySystem
     /// </summary>
     public string GetClassName(Entity<MobClassComponent?> ent)
     {
-        if (!_mobClassQuery.Resolve(ent.Owner, ref ent.Comp) || !_proto.Resolve(ent.Comp.CurrentClass, out var proto))
+        if (!_mobClassQuery.Resolve(ent.Owner, ref ent.Comp) || !ProtoMan.Resolve(ent.Comp.CurrentClass, out var proto))
             return "None";
 
         return proto.Name;

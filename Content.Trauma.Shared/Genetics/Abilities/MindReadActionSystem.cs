@@ -51,32 +51,32 @@ public sealed partial class MindReadActionSystem : EntitySystem
         var identity = Identity.Name(target, EntityManager);
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
         {
-            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-target-mindless", ("target", identity)), user, user);
+            _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-target-mindless", ("target", identity)), user, user);
             return;
         }
 
         if (_mob.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-target-dead", ("target", identity)), user, user);
+            _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-target-dead", ("target", identity)), user, user);
             return;
         }
 
         // nullrod protects from mind magic idk
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev);
+        RaiseLocalEvent(target, ref ev);
         if (ev.Cancelled)
         {
-            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-mind-protected", ("target", identity)), user, user);
+            _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-mind-protected", ("target", identity)), user, user);
             return;
         }
 
         if (user == target)
         {
-            _popup.PopupClient(Loc.GetString("MutationMindReader-popup-self"), user, user);
+            _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-self"), user, user);
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("MutationMindReader-popup-plunge", ("target", identity)), user, user);
+        _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-plunge", ("target", identity)), user, user);
 
         // you don't know details about other players' minds.
         // also it's using chatcode anyway

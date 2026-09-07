@@ -9,7 +9,7 @@ public abstract partial class SharedJobSystem
 {
     public bool TryFindJobFromIcon(JobIconPrototype jobIcon, [NotNullWhen(true)] out JobPrototype? job)
     {
-        foreach (var jobPrototype in _prototypes.EnumeratePrototypes<JobPrototype>())
+        foreach (var jobPrototype in ProtoMan.EnumeratePrototypes<JobPrototype>())
         {
             if (jobPrototype.Icon == jobIcon.ID)
             {

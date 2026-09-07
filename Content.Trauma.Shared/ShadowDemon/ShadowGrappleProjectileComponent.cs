@@ -25,4 +25,22 @@ public sealed partial class ShadowGrappleProjectileComponent : Component
     /// </summary>
     [DataField]
     public float BreakLightsRange = 2f;
+
+    /// <summary>
+    /// Should this break lights
+    /// </summary>
+    [DataField]
+    public bool BreakLights = true;
+
+    /// <summary>
+    /// Should pull user towards the target if we hit non-mob
+    /// </summary>
+    [DataField]
+    public bool PullUser = true;
+
+    /// <summary>
+    /// Minimum length of created joint
+    /// </summary>
+    [DataField]
+    public float MinJointLength = 0.35f;
 }

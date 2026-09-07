@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 // </Trauma>
@@ -13,17 +12,15 @@ namespace Content.Client.HealthAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class HealthAnalyzerWindow : FancyWindow
 {
-    // <Shitmed>
+    // <Trauma>
     public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
-    public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
-    // </Shitmed>
+    // </Trauma>
 
     public HealthAnalyzerWindow()
     {
         RobustXamlLoader.Load(this);
         // <Trauma>
         HealthAnalyzer.OnBodyPartSelected += (part, target) => OnBodyPartSelected?.Invoke(part, target);
-        HealthAnalyzer.OnModeChanged += (mode, target) => OnModeChanged?.Invoke(mode, target);
         // </Trauma>
     }
 

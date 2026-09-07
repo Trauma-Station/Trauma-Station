@@ -8,19 +8,16 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 /// <summary>
 /// Makes sure abductor gamerules work.
 /// </summary>
-[TestFixture]
+[Category("GameRuleTests")]
 public sealed class AbductorTest : InteractionTest
 {
     public static EntProtoId Beacon = "DefaultStationBeacon";
@@ -85,8 +82,8 @@ public sealed class AbductorTest : InteractionTest
         // this isn't a test of pow3r, they prevent the UIs working and this is easy
         await Server.WaitPost(() =>
         {
-            SEntMan.RemoveComponent<ActivatableUIRequiresPowerComponent>(console);
-            SEntMan.RemoveComponent<ActivatableUIRequiresPowerComponent>(teleporter);
+            SRemComp<ActivatableUIRequiresPowerComponent>(console);
+            SRemComp<ActivatableUIRequiresPowerComponent>(teleporter);
         });
 
         // spawn our victim and a beacon for him
@@ -108,7 +105,7 @@ public sealed class AbductorTest : InteractionTest
         await RunTicks(3);
 
         // player is now controlling the eye, teleport
-        Assert.That(SEntMan.HasComponent<RelayInputMoverComponent>(SPlayer), "Abductor did not control an eye entity");
+        Assert.That(SHasComp<RelayInputMoverComponent>(SPlayer), "Abductor did not control an eye entity");
         var abilities = SEntMan.GetComponent<AbductorsAbilitiesComponent>(SPlayer);
         Assert.That(abilities.SendYourself != null, "Abductor did not get a send yourself action");
         // shitcode to mimic the action because non-instant actions api is bad

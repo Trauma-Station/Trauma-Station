@@ -88,15 +88,15 @@ public sealed partial class FirefighterTankRefillableSystem : EntitySystem
                 var drained = _solution.Drain(target, targetSoln.Value, trans);
                 _solution.TryAddSolution(solutionComp.Value, drained);
                 _audio.PlayPredicted(entity.Comp.FirefightingNozzleRefill, entity, user: args.User);
-                _popup.PopupClient(Loc.GetString("firefighter-nozzle-component-after-interact-refilled-message"), entity, args.User);
+                _popup.PopupEntity(Loc.GetString("firefighter-nozzle-component-after-interact-refilled-message"), entity, args.User);
             }
             else if (atmosBackpackTankSolution.AvailableVolume <= 0)
             {
-                _popup.PopupClient(Loc.GetString("firefighter-nozzle-component-already-full"), entity, args.User);
+                _popup.PopupEntity(Loc.GetString("firefighter-nozzle-component-already-full"), entity, args.User);
             }
             else
             {
-                _popup.PopupClient(Loc.GetString("firefighter-nozzle-component-no-water-in-tank", ("owner", args.Target)), entity, args.User);
+                _popup.PopupEntity(Loc.GetString("firefighter-nozzle-component-no-water-in-tank", ("owner", args.Target)), entity, args.User);
             }
 
             args.Handled = true;

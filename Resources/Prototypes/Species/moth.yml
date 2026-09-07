@@ -10,3 +10,9 @@
   femaleFirstNames: NamesMothFirstFemale
   lastNames: NamesMothLast
   knowledge: Mothperson # Trauma
+  defaultSoundsBySex:
+  - UnisexMoth
+  - UnisexMoth
+  - UnisexMoth
+  voices:
+  - UnisexMoth

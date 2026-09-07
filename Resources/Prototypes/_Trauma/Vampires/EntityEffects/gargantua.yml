@@ -49,12 +49,15 @@
         Blunt: -10
         Piercing: -10
         Slash: -10
+        Ballistic: -10
         Heat: -10
         Bloodloss: -10
         Asphyxiation: -10
         Shock: -10
         Cold: -10
         Caustic: -10
+        Radiation: -10
+        Poison: -10
   - !type:AdjustReagentGroup
     amount: -10
     group: Toxins
@@ -71,7 +74,7 @@
     conditions:
     - !type:WhitelistCondition
       whitelist:
-        tags:
+        components:
         - Wall
     damage:
       types:

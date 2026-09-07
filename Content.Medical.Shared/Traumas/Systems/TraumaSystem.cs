@@ -30,22 +30,4 @@ public sealed partial class TraumaSystem : EntitySystem
     [Dependency] private AlertsSystem _alert = default!;
 
     private static readonly ProtoId<AlertPrototype> _brokenBonesAlertId = "BrokenBones";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        InitProcess();
-        InitBones();
-        InitOrgans();
-    }
-    /// <summary>
-    /// Heals bone damage on a woundable, if it has a bone. Does nothing if it has no bone.
-    /// </summary>
-    public void HealBone(Entity<WoundableComponent> woundable, FixedPoint2 amount)
-    {
-        if (GetBone(woundable.AsNullable()) is not { } bone)
-            return;
-
-        ApplyDamageToBone(bone, -amount, bone.Comp);
-    }
 }

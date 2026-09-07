@@ -1,13 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
+  parent: BaseRevGun
   id: RevRPG2HE
   graph: RevRockets
   targetNode: HE
-  category: construction-category-antagonist
-  objectType: Item
   theory:
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
+  practical:
+    MechanicsKnowledge: 1
     WeaponsKnowledge: 2
 
 - type: construction

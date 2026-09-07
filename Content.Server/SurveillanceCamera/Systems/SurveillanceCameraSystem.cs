@@ -5,6 +5,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power;
 using Content.Shared.SurveillanceCamera;
@@ -12,16 +13,14 @@ using Content.Shared.SurveillanceCamera.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.SurveillanceCamera;
 
 public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraSystem
 {
     // <Trauma>
-    [Dependency] private SharedTransformSystem _transform = default!; // Goobstation
+    [Dependency] private SharedTransformSystem _transform = default!;
     // </Trauma>
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ViewSubscriberSystem _viewSubscriberSystem = default!;
     [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private UserInterfaceSystem _userInterface = default!;
@@ -91,7 +90,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
                 { DeviceNetworkConstants.Command, string.Empty },
                 { CameraAddressData, deviceNet.Address },
                 { CameraNameData, component.UseEntityNameAsCameraId ? MetaData(uid).EntityName : component.CameraId },
-                { CameraSubnetData, string.Empty }
+                { CameraSubnetData, null }
             };
 
             var dest = string.Empty;
@@ -117,7 +116,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
                     payload[DeviceNetworkConstants.Command] = CameraHeartbeatMessage;
                     break;
                 case CameraPingMessage:
-                    if (!args.Data.TryGetValue(CameraSubnetData, out string? subnet))
+                    if (!args.Data.TryGetValue(CameraSubnetData, out ProtoId<DeviceFrequencyPrototype>? subnet))
                     {
                         return;
                     }
@@ -184,7 +183,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
             return;
         }
 
-        if (!_prototypeManager.Resolve<DeviceFrequencyPrototype>(component.AvailableNetworks[args.Network],
+        if (!ProtoMan.Resolve<DeviceFrequencyPrototype>(component.AvailableNetworks[args.Network],
                 out var frequency))
         {
             return;
@@ -196,7 +195,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         UpdateSetupInterface(uid, component);
     }
 
-    protected override void OpenSetupInterface(EntityUid uid, EntityUid player, SurveillanceCameraComponent? camera = null)
+    public override void OpenSetupInterface(EntityUid uid, EntityUid player, SurveillanceCameraComponent? camera = null) // Trauma - made public
     {
         if (!Resolve(uid, ref camera))
             return;
@@ -222,9 +221,9 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
 
         if (camera.AvailableNetworks.Count == 0)
         {
-            if (deviceNet.ReceiveFrequencyId != null)
+            if (deviceNet.ReceiveFrequencyId is { } recvFreq)
             {
-                camera.AvailableNetworks.Add(deviceNet.ReceiveFrequencyId);
+                camera.AvailableNetworks.Add(recvFreq);
             }
             else if (!camera.NetworkSet)
             {
@@ -256,7 +255,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         // Send a targetted event to all monitors.
         foreach (var monitor in component.ActiveMonitors)
         {
-            RaiseLocalEvent(monitor, ev, true);
+            RaiseLocalEvent(monitor, ev); // Trauma - don't broadcast it, its already broadcast below
         }
 
         component.ActiveMonitors.Clear();

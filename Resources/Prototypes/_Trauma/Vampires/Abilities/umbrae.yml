@@ -22,6 +22,7 @@
   - !type:AddActions
     actions:
     - ActionShadowAnchor
+    - ActionShadowSnare
   - !type:PopupPredicted
     message: You may now create pylons to fool anyone.
     visualType: Large

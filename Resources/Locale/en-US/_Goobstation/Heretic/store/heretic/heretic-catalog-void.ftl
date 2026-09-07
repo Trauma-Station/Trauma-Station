@@ -74,6 +74,7 @@ knowledge-path-void-s8-desc =
     The doors won't close. I can't keep the cold out now.
 
     Grants you Void Conduit, a spell which summons a pulsing gate to the Void itself. Every pulse breaks windows and airlocks, while afflicting Heathens with an eldritch chill and shielding Heretics against low pressure.
+    Spell has a maximum of 1 charge, rechargeable by breaking (using) heretic blade in your hand.
 
 knowledge-path-void-s9-name = Waltz at the End of Time
 knowledge-path-void-s9-desc =
@@ -85,4 +86,4 @@ knowledge-path-void-s9-desc =
     Water, ice and slippery surfaces no longer slip you.
     You will also become immune to flames, space, and similar environmental hazards.
     You now waltz in the air, ignoring gravitation and moving at increased speed.
-    All your path specific abilities have their cooldowns halved.
+    Void Conduit charge condition is removed and your other void spells have their cooldowns halved.

@@ -4,11 +4,6 @@
   idleState: default3
 
 - type: typingIndicator
-  id: empty
-  typingState: empty0
-  idleState: empty0
-
-- type: typingIndicator
   id: robot
   typingState: robot0
   idleState: robot3
@@ -73,13 +68,13 @@
 - type: typingIndicator
   id: gingerbread
   typingState: gingerbread0
-  idleState: gingerbread0
+  idleState: gingerbread3
   offset: 0, 0.125
 
 - type: typingIndicator
   id: diona
   typingState: diona0
-  idleState: diona0
+  idleState: diona3
   offset: 0, 0.125
 
 - type: typingIndicator

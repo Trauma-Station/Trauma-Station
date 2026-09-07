@@ -1,0 +1,46 @@
+- type: entity
+  parent: BaseBulletKinetic # Trauma
+  id: BulletLightRifle
+  categories: [ HideSpawnMenu ]
+  name: bullet (.30 rifle)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 15 # Trauma, was 19
+
+- type: entity
+  parent: BaseBulletPractice
+  id: BulletLightRiflePractice
+  categories: [ HideSpawnMenu ]
+  name: bullet (.30 rifle practice)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2
+
+- type: entity
+  parent: [BaseBulletIncendiary, BaseBulletKinetic] # Trauma
+  id: BulletLightRifleIncendiary
+  categories: [ HideSpawnMenu ]
+  name: bullet (.30 rifle incendiary)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 11 # Trauma, was 14
+        # Heat: 5 # Trauma
+
+- type: entity
+  parent: [BaseBulletUranium, BaseBulletKinetic] # Trauma
+  id: BulletLightRifleUranium
+  categories: [ HideSpawnMenu ]
+  name: bullet (.30 rifle uranium)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        # Radiation: 10 # Trauma
+        Ballistic: 11
+      armorPenetration: 0.5 # Trauma

@@ -2,7 +2,6 @@
 
 using Content.Shared.Projectiles;
 using Content.Shared.Whitelist;
-using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 
 namespace Content.Trauma.Shared.Wizard.Projectiles;
 
@@ -36,6 +35,6 @@ public sealed partial class SwapOnProjectileHitSystem : EntitySystem
             comp.Effect);
 
         if (comp.DeleteProjectileOnSwap)
-            Del(uid);
+            PredictedDel(uid);
     }
 }

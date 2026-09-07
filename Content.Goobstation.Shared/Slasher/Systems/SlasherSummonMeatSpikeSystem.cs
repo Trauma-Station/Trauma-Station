@@ -41,7 +41,7 @@ public sealed partial class SlasherSummonMeatSpikeSystem : EntitySystem
     {
         PredictedSpawnAtPosition(ent.Comp.MeatSpikePrototype, _xform.GetMoverCoordinates(ent.Owner));
         _audio.PlayPredicted(ent.Comp.SummonSound, ent.Owner, ent.Owner);
-        _popup.PopupPredicted(Loc.GetString("slasher-summon-meatspike-popup"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("slasher-summon-meatspike-popup"), ent.Owner, ent.Owner, PopupType.MediumCaution);
         args.Handled = true;
     }
 }

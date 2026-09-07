@@ -19,8 +19,8 @@
     slots:
     - Snout
   - type: IdentityBlocker
-  - type: AddAccentClothing
-    accent: PigAccent
+  - type: PigAccent
+    relayAccent: true
 
 - type: entity
   parent: ClothingMaskBase
@@ -41,8 +41,8 @@
     slots:
     - Snout
   - type: IdentityBlocker
-  - type: AddAccentClothing
-    accent: FrogAccent
+  - type: FrogAccent
+    relayAccent: true
 
 - type: entity
   parent: ClothingMaskBase
@@ -58,13 +58,13 @@
     tags:
     - CursedAnimalMask
     - WhitelistChameleon
-    - IPCMaskWearable # EE - IPCs
+    - IPCMaskWearable
   - type: HideLayerClothing
     slots:
     - Snout
   - type: IdentityBlocker
-  - type: AddAccentClothing
-    accent: CowAccent
+  - type: CowAccent
+    relayAccent: true
 
 - type: entity
   parent: ClothingMaskBase
@@ -80,10 +80,10 @@
     tags:
     - CursedAnimalMask
     - WhitelistChameleon
-    - IPCMaskWearable # EE - IPCs
+    - IPCMaskWearable
   - type: HideLayerClothing
     slots:
     - Snout
   - type: IdentityBlocker
-  - type: AddAccentClothing
-    accent: HorseAccent
+  - type: HorseAccent
+    relayAccent: true

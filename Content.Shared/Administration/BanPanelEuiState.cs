@@ -73,6 +73,7 @@ public sealed record Ban
         Erase = erase;
     }
 
+    public string? WebhookReason; // Trauma
     public readonly string? Target;
     public readonly string? IpAddress;
     public readonly string? IpAddressHid;

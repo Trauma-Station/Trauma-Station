@@ -1,0 +1,191 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseRevMajorContraband ]
+  id: ClothingOuterArmorRev
+  name: chest plate
+  description: Hastily made armor for the people.
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revchestplate.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revchestplate.rsi
+  - type: Armor
+    coverage:
+    - Torso
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+
+- type: entity
+  parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, BaseRevMajorContraband ]
+  id: ClothingOuterVestWebRev
+  name: web vest
+  description: A high-quality armored vest made from a hard synthetic material. It's surprisingly flexible and light, despite formidable armor plating.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0
+    coverage:
+    - Torso
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Ballistic: 0.3
+        Heat: 0.8
+      flatReductions: # This is done so shotguns are worse against armor
+        Ballistic: 3
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: Construction
+    graph: RevVest
+    deconstructionTarget: null
+    node: bullet
+
+- type: entity
+  parent: [ ClothingOuterStorageBase, AllowSuitStorageClothing, BaseRevMajorContraband ]
+  id: ClothingOuterVestReflectRev
+  name: reflective vest
+  description: An armored vest with advanced shielding to protect against energy weapons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Vests/revreflective.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Vests/revreflective.rsi
+  - type: Armor
+    coverage:
+    - Torso
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.8
+        Heat: 0.2
+  - type: Reflect
+    reflectProb: 0.6
+    reflects:
+    - Energy
+    reflectingInHands: false
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    softness: 5
+    color: "#4acff7"
+  - type: Construction
+    graph: RevVest
+    deconstructionTarget: null
+    node: reflect
+  - type: StaminaResistance
+    damageCoefficient: 0.3
+
+- type: entity
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseRevMajorContraband ]
+  id: ClothingOuterArmorRevFlame
+  name: flame trooper armor
+  description: Heavy armor that completely protects the user from fire.
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revflamearmor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Armor/revflamearmor.rsi
+  - type: Armor
+    coverage:
+    - Torso
+    - Leg
+    - Arm
+    - Hand
+    - Foot
+    - Tail
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: ModifyDelayedKnockdown
+    delayDelta: 2
+    knockdownTimeDelta: -2
+  - type: StaminaResistance
+    damageCoefficient: 0.3
+  - type: FireProtection
+    reduction: 1
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHelmetRevFlame
+  - type: SelfExtinguisher
+    cooldown: 1
+    requiresIgniteFromGasImmune: false
+    sound:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container
+
+- type: entity
+  parent: ClothingOuterArmorTemplar
+  id: ClothingOuterArmorVenerator
+  name: venerator cloak
+  description: Theft is a sin, but Saint Benedict didn't even notice this was missing.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
+
+- type: entity
+  parent: ClothingOuterArmorTemplar
+  id: ClothingOuterArmorMamluk
+  name: Mamluk's heritage
+  description: Those who were once slaves, became rulers under the mighty Allah.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi

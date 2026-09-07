@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
@@ -15,7 +16,7 @@ public sealed partial class AllEntityShape : EntityShape
     [DataField]
     public Dictionary<string, GroupEntityShapeOptions>? Options;
 
-    protected override List<Vector2> GetShapeImplementation(System.Random rand, IPrototypeManager proto)
+    protected override List<Vector2> GetShapeImplementation(IRobustRandom rand, IPrototypeManager proto)
     {
         var result = new List<Vector2>();
         foreach (var child in Children)

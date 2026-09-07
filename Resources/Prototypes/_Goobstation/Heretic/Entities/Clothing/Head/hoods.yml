@@ -19,6 +19,7 @@
     slots:
     - Hair
   - type: FlashImmunity
+    showInExamine: false
   - type: FlashSoundSuppression
   - type: Armor
     coverage:
@@ -62,8 +63,11 @@
           Blunt: 0.4
           Slash: 0.4
           Piercing: 0.4
+          Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
+        flatReductions:
+          Ballistic: 3
       traumaDeductions:
         Dismemberment: 0.4
         OrganDamage: 0.4
@@ -72,7 +76,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
     - type: FireProtection
-      reduction: 0.6
+      reduction: 1
     deactivateComponents:
     - type: Armor
       coverage:
@@ -82,8 +86,11 @@
           Blunt: 0.7
           Slash: 0.7
           Piercing: 0.7
+          Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
+        flatReductions:
+          Ballistic: 2
       traumaDeductions:
         Dismemberment: 0.2
         OrganDamage: 0.2
@@ -92,7 +99,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0.50
     - type: FireProtection
-      reduction: 0.3
+      reduction: 1
 
 - type: entity
   parent: [ ArmorHereticVoid, ClothingHeadHatHoodHeretic ]

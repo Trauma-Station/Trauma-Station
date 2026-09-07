@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/moff-station/moff-station-14/tree/c46569b5e636ce95816deaba4457d330f493c699/Resources/Textures/_Moffstation/Mobs/Animals/displacements.rsi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "load": {
+        "srgb": false
+    },
+    "states": [
+        {
+            "name": "jumpsuit-kobold",
+            "directions": 4
+        },
+        {
+            "name": "jumpsuit-monkey",
+            "directions": 4
+        }
+    ]
+}

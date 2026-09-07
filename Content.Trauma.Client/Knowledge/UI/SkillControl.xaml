@@ -5,7 +5,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <BoxContainer xmlns="https://spacestation14.io"
         Orientation="Horizontal"
         HorizontalExpand="False"
-        Margin="10 0">
+        Margin="10 0"
+        MouseFilter="Pass">
     <Label Name="SkillLabel" HorizontalExpand="True"/>
     <Button Name="DecreaseButton" Text=" - "/>
     <Label Name="MasteryLabel" MinWidth="120" Align="Center"/>

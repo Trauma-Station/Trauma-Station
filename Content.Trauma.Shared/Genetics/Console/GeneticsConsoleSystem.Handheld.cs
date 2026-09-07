@@ -72,7 +72,7 @@ public sealed partial class GeneticsConsoleSystem
         var targetIdentity = Identity.Entity(target, EntityManager);
         var you = Loc.GetString("genetics-console-linking-you", ("scanner", ent), ("user", userIdentity));
         var others = Loc.GetString("genetics-console-linking-others", ("scanner", ent), ("user", userIdentity), ("target", targetIdentity));
-        _popup.PopupPredicted(you, others, user, target);
+        _popup.PopupEntity(you, others, user, target);
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
             user,
@@ -96,14 +96,14 @@ public sealed partial class GeneticsConsoleSystem
             Unlink(oldMob, ent.Owner);
 
         var user = args.User;
-        _popup.PopupClient(Loc.GetString("genetics-console-linked"), user, user);
+        _popup.PopupEntity(Loc.GetString("genetics-console-linked"), user, user);
         SetScannedMob(ent.Owner, target);
 
         var linked = EnsureComp<LinkedToGeneticScannerComponent>(target);
         linked.Scanners.Add(ent.Owner);
         Dirty(target, linked);
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(user)} linked {ToPrettyString(target)} to {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{user:user} linked {target:target} to {ent.Owner:console}");
         _ui.TryOpenUi(ent.Owner, GeneticsConsoleUiKey.Key, user);
     }
 

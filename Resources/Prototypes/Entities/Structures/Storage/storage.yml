@@ -4,6 +4,10 @@
   name: rack
   description: A rack for storing things on.
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRack
+  # </Trauma>
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -36,12 +40,6 @@
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 60
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 30

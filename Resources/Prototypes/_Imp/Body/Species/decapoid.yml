@@ -47,7 +47,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseSpeciesAppearance
+  parent: BaseSpeciesAppearanceDecapoid
   id: AppearanceDecapoid
   name: Decapoid appearance
   components:
@@ -64,6 +64,11 @@
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
             state: jumpsuit
+      mask: # yes they do
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: mask
       head: # don't need mask, those are fine
         sizeMaps:
           32:
@@ -89,6 +94,16 @@
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
             state: back
+      belt:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: earpiece
   - type: InitialBody
     organs:
       Torso: OrganDecapoidTorso
@@ -138,7 +153,6 @@
     footstepSoundCollection:
       collection: FootstepDecapoid
   - type: Butcherable # No bones. No I didn't forget go fuck yourself.
-    butcheringType: Spike
     spawned:
     - id: FoodMeatCrab # maybe custom someday. as-is, it's fine
       amount: 3
@@ -159,10 +173,7 @@
   - type: Injurable
     damageContainer: Biological
   - type: Vocal
-    sounds:
-      Male: UnisexDecapoid
-      Female: UnisexDecapoid
-      Unsexed: UnisexDecapoid # male and female sounds have to 1) exist and 2) come first, otherwise urists will spawn without emote sounds 66% of the time, because this game is poorly programmed
+    emoteSounds: UnisexDecapoid
   - type: MovementSpeedModifier
     weightlessAcceleration: 1.5 # move more easily in space
     weightlessFrictionNoInput: 2 # more control over movement in space
@@ -177,20 +188,15 @@
       types:
         Heat : 1
   - type: Temperature
-    currentTemperature: 310
-    specificHeat: 42
+    temperature: 310
   - type: TemperatureSpeed
     thresholds: # lol
       293: 1.0
       280: 1.0
       260: 1.0
-  - type: Clumsy
-    clumsySound:
-      path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg
-    clumsyHypo: false
-    clumsyVaulting: false
-    clumsyDefib: false
-    gunFailedMessage: gun-clumsy-decapoid # The gun slips out of your claws!
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectClumsyDecapoid
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -204,6 +210,11 @@
   - type: TypingIndicator
     proto: robot
   - type: Exoskeleton # Prevents injections with syringes. Ideally it'd be on their body parts instead but eh.
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+    # no thirst
 
 - type: entity
   abstract: true

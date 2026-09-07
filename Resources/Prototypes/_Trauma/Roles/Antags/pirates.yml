@@ -7,4 +7,5 @@
   components:
   - type: RandomMetadata
     nameSegments:
-    - NamesDeathCommando
+    - NamesDeathCommandoFirst
+    - NamesDeathCommandoLast

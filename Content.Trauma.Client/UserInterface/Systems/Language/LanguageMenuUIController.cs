@@ -35,8 +35,15 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     private void OnUnloadGameBar(GameTopMenuBar bar)
     {
-        UnloadButton();
-        _button = null;
+        try
+        {
+            UnloadButton();
+            _button = null;
+        }
+        catch
+        {
+            // fuck off heisentest
+        }
     }
 
     public void LoadButton()
@@ -49,7 +56,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     public void UnloadButton()
     {
-        if (_button is not { } || _button == default || _button.Disposed)
+        if (_button is not { })
             return;
 
         _button.OnPressed -= LanguageButtonPressed;

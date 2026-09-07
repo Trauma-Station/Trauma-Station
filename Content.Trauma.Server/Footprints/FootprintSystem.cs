@@ -28,7 +28,6 @@ public sealed partial class FootprintSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
     [Dependency] private EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
     [Dependency] private EntityQuery<PuddleComponent> _puddleQuery = default!;
@@ -124,7 +123,7 @@ public sealed partial class FootprintSystem : EntitySystem
             return false;
 
         // just replace the old color it's not really important
-        ent.Comp.Color = sol.GetColor(_proto);
+        ent.Comp.Color = sol.GetColor(ProtoMan);
         // and add some steps, 1 footstep per u, capped
         ent.Comp.Steps += sol.Volume.Int();
         ent.Comp.Steps = Math.Min(ent.Comp.Steps, MaxStepsStuck);
@@ -159,7 +158,7 @@ public sealed partial class FootprintSystem : EntitySystem
 
     private Entity<PuddleComponent>? GetPuddle(Entity<MapGridComponent> grid, Vector2i pos)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, pos);
+        var anchored = _map.GetAnchoredEntities(grid, grid, pos);
         while (anchored.MoveNext(out var uid))
         {
             if (_puddleQuery.TryComp(uid, out var comp))

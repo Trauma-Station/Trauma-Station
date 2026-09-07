@@ -55,10 +55,10 @@
   - FreezerElectronics
 
 - type: latheRecipePack
+  parent: [EngineeringBoardsStaticTrauma] # Trauma
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
-  - CondenserMachineCircuitBoard # Goob
 
 ## Dynamic
 

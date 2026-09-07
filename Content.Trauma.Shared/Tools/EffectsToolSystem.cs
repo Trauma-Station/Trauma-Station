@@ -109,7 +109,7 @@ public sealed partial class EffectsToolSystem : EntitySystem
         if (popup && ent.Comp.InvalidPopup is {} key)
         {
             var msg = Loc.GetString(key, ("target", Identity.Name(target, EntityManager)));
-            _popup.PopupClient(msg, ent, user);
+            _popup.PopupEntity(msg, ent, user);
         }
         return false;
     }
@@ -137,7 +137,7 @@ public sealed partial class EffectsToolSystem : EntitySystem
         var userName = Identity.Name(user, EntityManager);
         var you = Loc.GetString(ent.Comp.UserPopup, ("used", ent), ("target", targetName));
         var others = Loc.GetString(ent.Comp.OthersPopup, ("used", ent), ("target", targetName), ("user", userName));
-        _popup.PopupPredicted(
+        _popup.PopupEntity(
             you,
             others,
             target,

@@ -20,3 +20,5 @@
   components:
   - type: GameRule
     minPlayers: 30
+  - type: DynamicRuleCost
+    cost: 100

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Polymorph.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Polymorph;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
@@ -10,12 +11,9 @@ namespace Content.Server.Store.Systems;
 public sealed partial class StoreSystem
 {
     [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
 
-    private void InitializeTrauma()
-    {
-        SubscribeLocalEvent<StoreComponent, PolymorphedEvent>(OnPolymorphed);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<StoreComponent> ent, ref PolymorphedEvent args)
     {
         if (args.IsRevert)
@@ -26,7 +24,7 @@ public sealed partial class StoreSystem
 
     private void OnPurchase(ListingData listing)
     {
-        if (!Proto.TryIndex<ListingPrototype>(listing.ID, out var prototype))
+        if (!ProtoMan.Resolve<ListingPrototype>(listing.ID, out var prototype))
             return;
 
         // updating restocktime

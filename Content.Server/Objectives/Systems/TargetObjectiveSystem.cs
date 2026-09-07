@@ -1,6 +1,6 @@
 // <Trauma>
-using Robust.Shared.Utility; // Goob
 using Content.Trauma.Common.Wizard;
+using Robust.Shared.Utility;
 // </Trauma>
 using Content.Server.Objectives.Components;
 using Content.Shared.Mind;
@@ -58,9 +58,7 @@ public sealed partial class TargetObjectiveSystem : EntitySystem
     /// <remarks>
     /// If it is null then the prototype is invalid, just return.
     /// </remarks>
-    public bool GetTarget(EntityUid uid,
-        [NotNullWhen(true)] out EntityUid? target,
-        TargetObjectiveComponent? comp = null)
+    public bool GetTarget(EntityUid uid, [NotNullWhen(true)] out EntityUid? target, TargetObjectiveComponent? comp = null)
     {
         target = Resolve(uid, ref comp) ? comp.Target : null;
         return target != null;
@@ -86,7 +84,16 @@ public sealed partial class TargetObjectiveSystem : EntitySystem
         // Goob edit end
 
         var jobName = _job.MindTryGetJobName(target);
-        return Loc.GetString(title, ("targetName", targetName), ("job", jobName));
+
+        var deptName = Loc.GetString("department-Unknown");
+        if (_job.MindTryGetJobId(target, out var jobId))
+        {
+            if (jobId.HasValue && _job.TryGetDepartment(jobId.Value, out var deptProto))
+            {
+                deptName = Loc.GetString(deptProto.Name);
+            }
+        }
+        return Loc.GetString(title, ("targetName", targetName), ("job", jobName), ("department", deptName));
     }
 
 }

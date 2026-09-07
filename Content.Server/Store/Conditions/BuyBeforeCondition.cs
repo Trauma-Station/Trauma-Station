@@ -9,21 +9,13 @@ public sealed partial class BuyBeforeCondition : ListingCondition
     /// <summary>
     ///     Required listing(s) needed to purchase before this listing is available
     /// </summary>
-    [DataField] // Goob edit
-    public HashSet<ProtoId<ListingPrototype>>? Whitelist; // Goob edit
-
-    /// <summary>
-    ///     Goobstation.
-    ///     If false, only one of the listings needs to be purchased to pass the whitelist.
-    ///     If true, all of the listings need to be purchased.
-    /// </summary>
     [DataField]
-    public bool WhitelistRequireAll = true;
+    public HashSet<ProtoId<ListingPrototype>>? Whitelist;
 
     /// <summary>
     ///     Listing(s) that if bought, block this purchase, if any.
     /// </summary>
-    [DataField] // Goobstation
+    [DataField]
     public HashSet<ProtoId<ListingPrototype>>? Blacklist;
 
     public override bool Condition(ListingConditionArgs args)
@@ -47,31 +39,26 @@ public sealed partial class BuyBeforeCondition : ListingCondition
             }
         }
 
-        if (Whitelist == null) // Goobstation
-            return true;
-
-        foreach (var requiredListing in Whitelist)
+        if (Whitelist != null)
         {
-            foreach (var listing in allListings)
+            foreach (var requiredListing in Whitelist)
             {
-                if (listing.ID == requiredListing.Id)
+                foreach (var listing in allListings)
                 {
-                    purchasesFound = listing.PurchaseAmount > 0;
-
-                    // Goobstation
-                    switch (purchasesFound)
+                    if (listing.ID == requiredListing.Id)
                     {
-                        case true when !WhitelistRequireAll:
-                            return true;
-                        case false when WhitelistRequireAll:
-                            return false;
+                        purchasesFound = listing.PurchaseAmount > 0;
+                        // <Trauma>
+                        if (purchasesFound != WhitelistRequireAll)
+                            return purchasesFound;
+                        // </Trauma>
+                        break;
                     }
-
-                    break;
                 }
             }
+            return purchasesFound;
         }
 
-        return purchasesFound;
+        return true;
     }
 }

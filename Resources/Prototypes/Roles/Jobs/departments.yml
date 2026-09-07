@@ -15,11 +15,13 @@
   description: department-Civilian-description
   color: "#6C6A78" # Trauma - assistant grey
   weight: -10
+  ignoreForDepartmentFallback: true
   roles:
   # <Trauma>
   - RadioHost
   - PartyMaker
   - PhoneMerchant
+  - DClass
   # </Trauma>
   #- Bartender # Trauma - moved to Service
   #- Botanist # Trauma - moved to Service
@@ -36,7 +38,9 @@
   - Reporter
   - Visitor
   #- ServiceWorker # Trauma - moved to Service
+  - TramDriver
 
+# Please kill this
 - type: department
   id: CentralCommand
   name: department-CentralCommand
@@ -45,10 +49,6 @@
   roles:
   # <Trauma>
   - NanotrasenRepresentative
-  - NavyOfficer
-  - NavyCaptain
-  - NavyOfficerUndercover
-  - Diplomat
   - GovernmentMan
   # </Trauma>
   - CentralCommandOfficial
@@ -82,6 +82,7 @@
   - HeadOfSecurity
   - ResearchDirector
   - Quartermaster
+  # Please kill these
   - CentralCommandOfficial
   - CBURN
   - ERTLeader
@@ -131,6 +132,7 @@
   weight: 20
   roles:
   # <Trauma>
+  - Brigmedic
   - SecurityClown
   # </Trauma>
   - HeadOfSecurity
@@ -170,7 +172,9 @@
   description: department-Specific-description
   color: "#9FED58"
   weight: 0 # Trauma - was 10
+  ignoreForDepartmentFallback: true
   roles:
   - Reporter
   - Psychologist
+  - TramDriver
   primary: false

@@ -9,7 +9,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Ballistic: 10
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/smartgun.rsi
     layers:

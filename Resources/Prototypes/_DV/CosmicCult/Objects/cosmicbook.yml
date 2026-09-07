@@ -16,6 +16,5 @@
     content: cosmiccult-book-text # help I am being posessed
   - type: PaperVisuals
     backgroundModulate: "#31004a"
-    fontAccentColor: "#4cabb3"
   - type: CosmicTransmutable
     transmuteTo: null # No reforging

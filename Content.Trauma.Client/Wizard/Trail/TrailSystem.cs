@@ -21,7 +21,6 @@ public sealed partial class TrailSystem : EntitySystem
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private TransformSystem _transform = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
@@ -31,7 +30,7 @@ public sealed partial class TrailSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        _overlay.AddOverlay(new TrailOverlay(EntityManager, _protoMan, _timing));
+        _overlay.AddOverlay(new TrailOverlay(EntityManager, ProtoMan, _timing));
 
         SubscribeLocalEvent<TrailComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<TrailComponent, ComponentStartup>(OnStartup);

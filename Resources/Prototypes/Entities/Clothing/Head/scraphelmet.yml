@@ -51,9 +51,8 @@
 
 # The helmet itself
 - type: entity
-  parent: [ClothingHeadHelmetBase, BaseMajorContraband]
-  id: ClothingHeadHelmetScrap #When we get the tech for it this bad boy needs to be given a vision reduction when equipped. 1-2 tiles less than normal should be good.
-  name: scrap helmet
+  parent: [ClothingHeadHelmetBase, BaseMajorContraband, BaseClothingViewconeMedium] # Trauma, viewcone
+  id: ClothingHeadHelmetScrap
   description: A cobbled-together helmet made from cabling, steel, and a bucket.
   components:
   - type: Sprite
@@ -74,9 +73,9 @@
     # </Trauma>
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
+        Blunt: 0.4 # Trauma, was 0.9
+        Slash: 0.4 # Trauma, was 0.9
+        Piercing: 0.4 # Trauma, was 0.9
         Heat: 0.9
   - type: HideLayerClothing
     slots:

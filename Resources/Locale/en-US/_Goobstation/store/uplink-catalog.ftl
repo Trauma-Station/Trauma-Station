@@ -39,8 +39,8 @@ uplink-hardlight-bow-desc = A modern bow that can fabricate hardlight arrows, de
 uplink-pie-cannon-name = Regenerating Pie Cannon
 uplink-pie-cannon-desc = A pie cannon that automatically regenerates pies, one every ten seconds.
 
-uplink-beenades-name = Beenades
-uplink-beenades-desc = A non-explosive grenade full of... bees?! NOT THE BEES!!!
+uplink-beenade-name = Beenade
+uplink-beenade-desc = A non-explosive grenade full of... bees?! NOT THE BEES!!!
 
 uplink-dart-gun-name = Dart Gun
 uplink-dart-gun-desc = This gun applies inside chemicals to its regenerating dart supply, allowing to distantly heal allies or to commit war crimes by poisoning foes.
@@ -55,7 +55,7 @@ uplink-pressure-modkit-name = Pressure Modkit
 uplink-pressure-modkit-desc = This illegal modkit takes 30 capacity of your proto-kinetic accelerator and overclocks it to deal full damage even in unsuitable pressure.
 
 uplink-grey-tide-name = Grey Tide
-uplink-grey-tide-desc = An ancient artifact with magical properties. Identical to plasma spear but capable of summoning illusions upon hitting living mob if wielder is an Assistant.
+uplink-grey-tide-desc = An ancient artifact with magical properties. Identical to glass-phoron spear but capable of summoning illusions upon hitting living mob if wielder is an Assistant.
 
 uplink-adv-mimery-name = Guide to Advanced Mimery Series
 uplink-adv-mimery-desc = The classical two part series on how to further hone your mime skills. Upon studying the series, the user should be able to make 3x1 invisible walls, and shoot bullets out of their fingers.
@@ -109,7 +109,7 @@ uplink-blast-grenade-desc = Higher damage, smaller radius. Compatible with the C
 uplink-frag-grenade-name = Frag Grenade (40mm)
 uplink-frag-grenade-desc = Lower damage, bigger radius. Compatible with the China-Lake.
 
-uplink-mpapers-grenade-name = MP-APERS shell (40mm)
+uplink-mpapers-grenade-name = MP-APERS Shell (40mm)
 uplink-mpapers-grenade-desc = Fires out 20 small pellets to turn your grenade launcher into a shotgun. Compatible with the China-Lake.
 
 uplink-l6-box-name = Magazine Box (.30 rifle)
@@ -165,7 +165,7 @@ uplink-high-caliber-shotgun-box-sarin-desc = 16 shells of 8 Gauge sarin shells f
 uplink-sarin-gas-grenade-name = Sarin Gas Grenade
 uplink-sarin-gas-grenade-desc = A brutal neurotoxin gas that stuns, blinds, and poisons anybody unlucky enough to catch a whiff as well as burning anyone not in a voidsuit, leaving them writhing on the floor begging to be finished off.
 
-uplink-M172LAW-name = M172 Light Anti-structure Weapon
+uplink-M172LAW-name = M172 Light Anti-Structure Weapon
 uplink-M172LAW-desc = A single shot disposable rocket launcher for taking out singular walls/machines with minimal collateral damage. can be stored in your backpack conveniently.
 
 uplink-RPOA-name = RPO-A 'Shmel'
@@ -176,10 +176,10 @@ uplink-ExplosivePayloadBlueprint-desc = A blueprint that will allow a single lat
 
 # Mechs
 
-uplink-mech-teleporter-heavy-name = Heavy Mech teleporter
+uplink-mech-teleporter-heavy-name = Heavy Mech Teleporter
 uplink-mech-teleporter-heavy-desc = Contains a heavily armored Cybersun mech with an integrated chainsword, Ultra AC-2, LBX AC 10 "Scattershot", BRM-6 Missile Rack and P-X Tesla Cannon.
 
-uplink-mech-teleporter-assault-name = Assault Mech teleporter
+uplink-mech-teleporter-assault-name = Assault Mech Teleporter
 uplink-mech-teleporter-assault-desc = Contains a lightly armored Cybersun mech with an integrated chainsword, LBX AC 10 "Scattershot", SRM-8 Light Missile Rack and P-X Tesla Cannon.
 
 # Chemicals
@@ -294,7 +294,7 @@ uplink-pizza-party-crate-desc = A crate coming in the form of disaster pizza del
 uplink-energy-pickaxe-name = Energy Pickaxe
 uplink-energy-pickaxe-desc = A holographic mining tool with blades comprised of hard light that also serves a deadly melee weapon. Rock and stone!
 
-uplink-bloodred-cassette-name = Bloodred Casette Player
+uplink-bloodred-cassette-name = Blood-Red Casette Player
 uplink-bloodred-cassette-desc = Provided by the most egotistical fashion designers of Cybersun, a portable music player!
 
 uplink-syndiedrobe-name = Syndiedrobe

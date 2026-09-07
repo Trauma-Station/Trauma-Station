@@ -2,7 +2,7 @@
 
 - type: entity
   id: WeaponMechMeleeDrill
-  parent: BaseMechWeaponMelee
+  parent: [ BaseMechWeaponMelee, BaseSalvageContraband ] # Trauma - Contraband tag
   name: exosuit drill
   suffix: Mech Weapon, Melee, Industrial
   description: Equipment for mining exosuits. This is the drill that'll pierce the rocks!

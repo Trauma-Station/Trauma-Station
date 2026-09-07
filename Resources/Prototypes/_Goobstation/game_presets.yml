@@ -129,7 +129,6 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - BlobGameMode
-  - CalmTraitor
 
 - type: gamePreset
   id: Honkops

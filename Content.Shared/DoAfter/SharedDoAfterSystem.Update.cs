@@ -204,26 +204,18 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         if (args.EventTarget is { Valid: true } eventTarget && !Exists(eventTarget))
             return true;
 
-        if (!TryComp(args.User, out TransformComponent? userXform))
-            return true;
-
-        TransformComponent? targetXform = null;
-        if (args.Target is { } target && !TryComp(target, out targetXform))
-            return true;
-
-        if (args.Used is { } @using && !Exists(@using))
-            return true;
-
         // TODO: Re-use existing xform query for these calculations.
         if (args.BreakOnMove && !(!args.BreakOnWeightlessMove && _gravity.IsWeightless(args.User)))
         {
-            // Whether the user has moved too much from their original position.
-            if (!_transform.InRange(userXform.Coordinates, doAfter.UserPosition, args.MovementThreshold))
+            var movementEntity = doAfter.MovementEntity;
+            var movementXform = Transform(movementEntity);
+
+            // Whether the effective movement entity has moved too much from its original position.
+            if (!_transform.InRange(movementXform.Coordinates, doAfter.UserPosition, args.MovementThreshold))
                 return true;
 
-            // Whether the distance between the user and target(if any) has changed too much.
-            if (targetXform != null &&
-                targetXform.Coordinates.TryDistance(EntityManager, userXform.Coordinates, out var distance))
+            // Whether the distance between the effective movement entity and the target(if any) has changed too much.
+            if (args.Target is { } target && Exists(target) && Transform(target).Coordinates.TryDistance(EntityManager, movementXform.Coordinates, out var distance)) // Trauma - check if it exists
             {
                 if (Math.Abs(distance - doAfter.TargetDistance) > args.MovementThreshold)
                     return true;
@@ -233,6 +225,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         // Whether the user and the target are too far apart.
         if (args.Target != null)
         {
+            if (TerminatingOrDeleted(args.Target.Value)) return true; // Trauma
             if (args.DistanceThreshold != null)
             {
                 if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, args.DistanceThreshold.Value))
@@ -243,6 +236,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         // Whether the distance between the tool and the user has grown too much.
         if (args.Used != null)
         {
+            if (TerminatingOrDeleted(args.Used.Value)) return true; // Trauma
             if (args.DistanceThreshold != null)
             {
                 if (!_interaction.InRangeUnobstructed(args.User,
@@ -271,11 +265,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             // If the user changes which hand is active at all, interrupt the do-after
             if (args.BreakOnHandChange && hands.ActiveHandId != doAfter.InitialHand)
                 return true;
+
+            //If the user's hand is no longer empty, interrupt the do-after.
+            if (args.NeedFreeHand & !_hands.ActiveHandIsEmpty(args.User))
+                return true;
         }
 
         if (args.RequireCanInteract && !_actionBlocker.CanInteract(args.User, args.Target))
             return true;
-
 
         return false;
     }

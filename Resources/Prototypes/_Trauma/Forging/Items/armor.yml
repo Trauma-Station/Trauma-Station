@@ -19,6 +19,11 @@
   name: plate
   tag: ForgedArmorPlate
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+  work: 200
+  cost: 2
+  skills:
+    MetalworkingKnowledge: 2
+    ArmorKnowledge: 2
 
 - type: Tag
   id: ForgedArmorPlate

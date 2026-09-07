@@ -19,10 +19,11 @@
   name: Launch spike
   description: Shoot your tongue out in the direction you click, embedding it and dealing damage until they remove it.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: spike
   - type: Action
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: spike
     useDelay: 1
   - type: TargetAction
     range: 10
@@ -55,10 +56,10 @@
   name: Launch chem spike
   description: Shoot your tongue out in the direction you click, embedding it and dealing damage until they remove it. While the other person has the spike embedded, you can transfer your chemicals to them.
   components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: chemspike
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: chemspike
   - type: ShootOrganAction
     polymorph: TongueSpikeChem
 
@@ -69,10 +70,10 @@
   name: Transfer Chemicals
   description: Send all of your reagents into whomever the chem spike is embedded in. One use.
   components:
-  - type: Action
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: chemspike_swap
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: chemspike_swap
   - type: InstantAction
     event: !type:ChemTransferActionEvent
   - type: ChemTransferAction

@@ -221,7 +221,7 @@ ntr-document-funny-engi1-5 = Recent investigations suggest that engineering has 
 
 # funny verbs ENGINEERING 2
 ntr-document-funny-engi2-1 = the SM turned into a tesla due to a "slight miscalculation" on the previous shift.
-ntr-document-funny-engi2-2 = at least one atmos tech believes that plasma fires are "self-solving problems".
+ntr-document-funny-engi2-2 = at least one atmos tech believes that phoron fires are "self-solving problems".
 ntr-document-funny-engi2-3 = someone, somehow, renamed your singularity into John StationEater.
 ntr-document-funny-engi2-4 = the AI has been programmed to consider hull breaches as "open-concept design".
 ntr-document-funny-engi2-5 = the SM delammed because of "lack of mouse traps" on the previous shift.
@@ -284,7 +284,7 @@ ntr-document-funny-sci3-3 = that there is no living abominations roaming the sta
 ntr-document-funny-sci3-4 = that any teleportation experiments do not result in "missing persons" reports.
 ntr-document-funny-sci3-5 = that no single scientist is responsible for more than three major explosions per shift.
 ntr-document-funny-sci3-6 = that there is no artifact that could destroy the station.
-ntr-document-funny-sci3-7 = that any plasma-based research does not lead to station-wide fires.
+ntr-document-funny-sci3-7 = that any phoron-based research does not lead to station-wide fires.
 ntr-document-funny-sci3-8 = that the [bold]Research Director[/bold] is atleast [italic]aware[/bold] of what is happening in their own department.
 ntr-document-funny-sci3-9 = that no experiment should have a "non-zero" chance of planetary destruction.
 ntr-document-funny-sci3-10 = that any discovery that warps time must be reported [italic]before[/italic] it is used to extend the duration of the shift.

@@ -26,6 +26,8 @@
     pocket1: WeaponPistolCobra
   storage:
     back:
-    - BriefcaseWeaponHushpupFilled
+    - MagazineShotgun
+    - WeaponShotgunHushpup
+    - SkillChipShotgun
     - MagazinePistolCaselessRifle
     - BoxLethalshot

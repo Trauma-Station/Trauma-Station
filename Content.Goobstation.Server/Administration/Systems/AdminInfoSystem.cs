@@ -31,7 +31,7 @@ public sealed partial class AdminInfoSystem : EntitySystem
         var main = await _locator.LookupIdAsync(ev.user);
 
         // We don't have a player like that, ignore.
-        if (main == null)
+        if (main == null || name == main.Username)
             return;
 
         _adminLog.Add(LogType.AdminMessage, LogImpact.High, $"{name} is attempting to connect with a userid from {main.Username}");

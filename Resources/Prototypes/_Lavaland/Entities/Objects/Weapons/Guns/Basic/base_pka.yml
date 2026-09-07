@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: WeaponProtoKineticAcceleratorBase
   abstract: true
   parent: BaseItem
+  id: WeaponProtoKineticAcceleratorBase
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
@@ -125,7 +125,7 @@
     - Belt
   - type: UseDelay
     delay: 1
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 250
       Glass: 125
@@ -140,3 +140,5 @@
         Blunt: 5
   - type: AltFireMelee
     attackType: Heavy
+  - type: WeaponClass
+    class: Mining

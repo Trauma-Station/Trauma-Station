@@ -14,15 +14,14 @@ public abstract partial class SharedFadingTimedDespawnSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _queuedDespawnEntities = new();
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<FadingTimedDespawnComponent> ent, ref ComponentStartup args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<FadingTimedDespawnComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
-
-        UpdatesOutsidePrediction = true;
+        ent.Comp.Timer = Timing.CurTime + ent.Comp.Lifetime;
+        Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnAfterAutoHandleState(Entity<FadingTimedDespawnComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (ent.Comp.FadeOutStarted)
@@ -36,21 +35,19 @@ public abstract partial class SharedFadingTimedDespawnSystem : EntitySystem
         if (!Timing.IsFirstTimePredicted)
             return;
 
+        var now = Timing.CurTime;
         _queuedDespawnEntities.Clear();
 
         var query = EntityQueryEnumerator<FadingTimedDespawnComponent>();
-
         while (query.MoveNext(out var uid, out var comp))
         {
             if (!CanDelete(uid))
                 continue;
 
-            comp.Lifetime -= frameTime;
-
-            if (comp.Lifetime > 0f)
+            if (now < comp.Timer)
                 continue;
 
-            if (comp.FadeOutTime <= 0f)
+            if (comp.FadeOutTime <= TimeSpan.Zero)
             {
                 _queuedDespawnEntities.Add(uid);
                 continue;
@@ -59,7 +56,7 @@ public abstract partial class SharedFadingTimedDespawnSystem : EntitySystem
             if (!comp.FadeOutStarted)
             {
                 comp.FadeOutStarted = true;
-                comp.Lifetime += comp.FadeOutTime;
+                comp.Timer += comp.FadeOutTime;
                 FadeOut((uid, comp));
                 Dirty(uid, comp);
                 continue;
@@ -81,4 +78,12 @@ public abstract partial class SharedFadingTimedDespawnSystem : EntitySystem
     }
 
     protected abstract bool CanDelete(EntityUid uid);
+
+    public void FadeDespawnEntity(EntityUid uid, TimeSpan lifetime, TimeSpan fadeOutTime)
+    {
+        var comp = Factory.GetComponent<FadingTimedDespawnComponent>();
+        comp.Lifetime = lifetime;
+        comp.FadeOutTime = fadeOutTime;
+        AddComp(uid, comp, true);
+    }
 }

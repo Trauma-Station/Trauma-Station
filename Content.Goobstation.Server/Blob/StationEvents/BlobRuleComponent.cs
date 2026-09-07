@@ -1,22 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.StationEvents.Events;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Goobstation.Server.Blob.StationEvents;
 
 [RegisterComponent, Access(typeof(BlobSpawnRule))]
 public sealed partial class BlobSpawnRuleComponent : Component
 {
-    [DataField("carrierBlobProtos", required: true, customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>)), ViewVariables(VVAccess.ReadWrite)]
-    public List<string> CarrierBlobProtos = new()
-    {
-        "SpawnPointGhostBlobRat"
-    };
+    [DataField]
+    public EntProtoId CarrierBlobProto = "SpawnPointGhostBlobRat";
 
-    [ViewVariables(VVAccess.ReadOnly), DataField("playersPerCarrierBlob")]
+    [DataField]
     public int PlayersPerCarrierBlob = 30;
 
-    [ViewVariables(VVAccess.ReadOnly), DataField("maxCarrierBlob")]
+    [DataField]
     public int MaxCarrierBlob = 2;
 }

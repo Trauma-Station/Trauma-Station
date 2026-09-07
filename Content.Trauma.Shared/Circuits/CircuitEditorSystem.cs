@@ -23,7 +23,6 @@ public sealed partial class CircuitEditorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CircuitEditorComponent, BeforeActivatableUIOpenEvent>(OnUIOpen);
         SubscribeLocalEvent<CircuitEditorComponent, EntInsertedIntoContainerMessage>(OnCircuitChanged);
         SubscribeLocalEvent<CircuitEditorComponent, EntRemovedFromContainerMessage>(OnCircuitChanged);
         Subs.BuiEvents<CircuitEditorComponent>(CircuitEditorUiKey.Key, subs =>
@@ -38,6 +37,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnUIOpen(Entity<CircuitEditorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateUI(ent);
@@ -72,7 +72,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         var data = args.Data;
         if (data.Gates.Count > CircuitComponent.MaxGates)
         {
-            _popup.PopupPredictedCursor("Circuit has too many gates to import!", args.Actor, PopupType.MediumCaution);
+            _popup.PopupCursor("Circuit has too many gates to import!", args.Actor, PopupType.MediumCaution);
             return;
         }
 
@@ -102,7 +102,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         var i = data.Gates.Count;
         if (i >= CircuitComponent.MaxGates)
         {
-            _popup.PopupPredictedCursor("Circuit is full!", args.Actor, PopupType.MediumCaution);
+            _popup.PopupCursor("Circuit is full!", args.Actor, PopupType.MediumCaution);
             return;
         }
 
@@ -203,21 +203,33 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         if (!data.ValidIndex(input))
             return; // bounds check this upfront so it doesnt get half set
 
+        var old = CircuitIndex.Invalid;
         if (output.GateIndex is { } g)
         {
             var gate = gates[g];
             if (args.N >= gate.Inputs.Count)
                 return;
 
+            old = gate.Inputs[args.N];
             gate.Inputs[args.N] = input;
         }
         else if (output.PortIndex is { } p && p < data.OutputIndices.Count)
         {
+            old = data.OutputIndices[p];
             data.OutputIndices[p] = input;
         }
         else
         {
             return; // no linking something to invalid
+        }
+
+        // clear previous link if it had one
+        if (data.ValidIndex(old))
+        {
+            if (old.GateIndex is { } og)
+                gates[og].LinkedOutputs.Remove(output);
+            else if (old.PortIndex is { } op && circuit.Comp.LinkedInputs.TryGetValue(op, out var linked))
+                linked.Remove(output);
         }
 
         circuit.Comp.LinkOutput(input, output);

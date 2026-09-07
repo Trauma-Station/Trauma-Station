@@ -1,48 +1,51 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.IntegrationTests.Fixtures;
 using Content.Medical.Shared.Body;
+using Content.Server.Polymorph.Systems;
 using Content.Shared.Body;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
+using Content.Shared.Polymorph;
+using Content.Trauma.Shared.Body.Chips;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 public sealed class BodyTest : GameTest
 {
+    private static EntProtoId Urist = "MobHuman";
+    private static EntProtoId<OrganChipComponent>[] TestChips = ["SkillChipLaser", "SkillChipHeavy", "SkillChipMining"];
+    private static ProtoId<PolymorphPrototype> HumanoidPolymorph = "Bananamen";
+
+    [SidedDependency(Side.Server)] private BodySystem _body = default!;
+    [SidedDependency(Side.Server)] private BodyPartSystem _part = default!;
+    [SidedDependency(Side.Server)] private BodyRestoreSystem _restore = default!;
+    [SidedDependency(Side.Server)] private OrganChipSystem _chip = default!;
+    [SidedDependency(Side.Server)] private PolymorphSystem _polymorph = default!;
+
     /// <summary>
     /// Makes sure that every mob with a Body has a root part (torso).
     /// </summary>
     [Test]
     public async Task BodyRootPartExists()
     {
-        var pair = Pair;
-        var server = pair.Server;
+        var factory = SEntMan.ComponentFactory;
 
-        var entMan = server.EntMan;
-        var factory = entMan.ComponentFactory;
-        var protoMan = server.ProtoMan;
-        var partSys = entMan.System<BodyPartSystem>();
+        var map = await Pair.CreateTestMap();
 
-        var map = await pair.CreateTestMap();
-
-        var bodyName = factory.GetComponentName<BodyComponent>();
-        await server.WaitAssertion(() =>
+        var bodyName = factory.CompName<InitialBodyComponent>();
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
-                foreach (var proto in protoMan.EnumeratePrototypes<EntityPrototype>())
+                foreach (var proto in SProtoMan.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (pair.IsTestPrototype(proto) || !proto.Components.ContainsKey(bodyName))
+                    if (Pair.IsTestPrototype(proto) || !proto.HasComp(bodyName))
                         continue;
 
-                    var mob = entMan.SpawnEntity(proto.ID, map.GridCoords);
-                    Assert.That(partSys.GetRootPart(mob), Is.Not.Null, $"{entMan.ToPrettyString(mob)} had no root part!");
-                    entMan.DeleteEntity(mob);
+                    var mob = SSpawn(proto.ID, map.GridCoords);
+                    Assert.That(_part.GetRootPart(mob), Is.Not.Null, $"{SEntMan.ToPrettyString(mob)} had no root part!");
+                    SDel(mob);
                 }
             });
         });
@@ -54,54 +57,46 @@ public sealed class BodyTest : GameTest
     [Test]
     public async Task BodyRestoreTest()
     {
-        var pair = Pair;
-        var server = pair.Server;
-
-        var entMan = server.EntMan;
-        var protoMan = server.ProtoMan;
-        var bodySys = entMan.System<BodySystem>();
-        var restoreSys = entMan.System<BodyRestoreSystem>();
-
-        var map = await pair.CreateTestMap();
+        var map = await Pair.CreateTestMap();
 
         var started = new HashSet<string>();
         var ended = new HashSet<string>();
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
-                foreach (var species in protoMan.EnumeratePrototypes<SpeciesPrototype>())
+                foreach (var species in SProtoMan.EnumeratePrototypes<SpeciesPrototype>())
                 {
                     var proto = species.Prototype;
-                    var mob = entMan.SpawnEntity(proto, map.GridCoords);
+                    var mob = SSpawn(proto, map.GridCoords);
                     // get the starting list of organs
                     started.Clear();
-                    foreach (var organ in bodySys.GetOrgans(mob))
+                    foreach (var organ in _body.GetOrgans(mob))
                     {
                         started.Add(organ.Comp.Category);
                     }
 
                     // remove all non-root organs
-                    foreach (var organ in bodySys.GetOrgans<ChildOrganComponent>(mob))
+                    foreach (var organ in _body.GetOrgans<ChildOrganComponent>(mob))
                     {
-                        entMan.DeleteEntity(organ);
+                        SDel(organ);
                     }
 
                     // restore them
-                    restoreSys.RestoreBody(mob);
+                    _restore.RestoreBody(mob);
 
                     // get the new list of organs
                     ended.Clear();
-                    foreach (var organ in bodySys.GetOrgans(mob))
+                    foreach (var organ in _body.GetOrgans(mob))
                     {
                         ended.Add(organ.Comp.Category);
                     }
 
                     // make sure they are the same, or some organs were lost in the cycle
                     Assert.That(ended, Is.EquivalentTo(started),
-                        $"{entMan.ToPrettyString(mob)} had different organs after having its body restored!");
+                        $"{SEntMan.ToPrettyString(mob)} had different organs after having its body restored!");
 
-                    entMan.DeleteEntity(mob);
+                    SDel(mob);
                 }
             });
         });
@@ -115,28 +110,21 @@ public sealed class BodyTest : GameTest
     [Test]
     public async Task BodyMarkingsTest()
     {
-        var pair = Pair;
-        var server = pair.Server;
-
-        var entMan = server.EntMan;
-        var protoMan = server.ProtoMan;
-        var bodySys = entMan.System<BodySystem>();
-
-        var map = await pair.CreateTestMap();
-        await server.WaitAssertion(() =>
+        var map = await Pair.CreateTestMap();
+        await Server.WaitAssertion(() =>
         {
             Assert.Multiple(() =>
             {
                 var validLayers = new Dictionary<ProtoId<MarkingsGroupPrototype>, HashSet<HumanoidVisualLayers>>();
 
                 // first collect the marking groups every species' parts has
-                foreach (var species in protoMan.EnumeratePrototypes<SpeciesPrototype>())
+                foreach (var species in SProtoMan.EnumeratePrototypes<SpeciesPrototype>())
                 {
-                    if (pair.IsTestPrototype(species))
+                    if (Pair.IsTestPrototype(species))
                         continue;
 
-                    var mob = entMan.SpawnEntity(species.Prototype, map.GridCoords);
-                    foreach (var organ in bodySys.GetOrgans<VisualOrganMarkingsComponent>(mob))
+                    var mob = SSpawn(species.Prototype, map.GridCoords);
+                    foreach (var organ in _body.GetOrgans<VisualOrganMarkingsComponent>(mob))
                     {
                         var group = organ.Comp.MarkingData.Group;
                         var layers = organ.Comp.MarkingData.Layers;
@@ -144,14 +132,14 @@ public sealed class BodyTest : GameTest
                             validLayers[group] = groupLayers = new();
                         groupLayers.UnionWith(layers);
                     }
-                    entMan.DeleteEntity(mob);
+                    SDel(mob);
                 }
 
                 // then make sure every marking has a part to be added to
                 var errors = new List<string>();
-                foreach (var marking in protoMan.EnumeratePrototypes<MarkingPrototype>())
+                foreach (var marking in SProtoMan.EnumeratePrototypes<MarkingPrototype>())
                 {
-                    if (pair.IsTestPrototype(marking) || marking.GroupWhitelist is not {} groups)
+                    if (Pair.IsTestPrototype(marking) || marking.GroupWhitelist is not {} groups)
                         continue; // not whitelisted, assumed that it will work on anything?
 
                     var layer = marking.BodyPart;
@@ -173,6 +161,46 @@ public sealed class BodyTest : GameTest
                     Assert.Fail(string.Join("\n", errors));
             });
         });
+    }
+
+    /// <summary>
+    /// Makes sure that organ chips persist when polymorphing to another humanoid mob.
+    /// </summary>
+    [Test]
+    public async Task ChipsPolymorphTest()
+    {
+        var map = await Pair.CreateTestMap();
+        await Server.WaitAssertion(() =>
+        {
+            var urist = SSpawn(Urist, map.GridCoords);
+            Assert.That(CountChips(urist), Is.EqualTo(0), "Fresh urist shouldnt have skillchips");
+            foreach (var id in TestChips)
+            {
+                _chip.InstallChip(urist, id);
+            }
+            Assert.That(CountChips(urist), Is.EqualTo(3), "Urist should have gained 3 skillchips after installing them");
+
+            if (_polymorph.PolymorphEntity(urist, HumanoidPolymorph) is not { } nana)
+            {
+                Assert.Fail($"Failed to polymorph {SEntMan.ToPrettyString(urist)} into {HumanoidPolymorph}!");
+                return;
+            }
+
+            Assert.That(CountChips(urist), Is.EqualTo(0), "Urist shouldnt have skillchips after being polymorphed");
+            Assert.That(CountChips(nana), Is.EqualTo(3), "Banana should have transferred urist's skillchip from polymorphing");
+            SDel(nana);
+            SDel(urist);
+        });
+    }
+
+    private int CountChips(EntityUid mob)
+    {
+        var count = 0;
+        foreach (var organ in _body.GetOrgans<OrganChipContainerComponent>(mob))
+        {
+            count += organ.Comp.Container.Count;
+        }
+        return count;
     }
 
     // TODO: more stuff!

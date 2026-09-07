@@ -1,19 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Trauma.Common.CartridgeLoader.Cartridges;
-
-[Serializable, NetSerializable]
-public enum NanoChatUiMessageType : byte
-{
-    NewChat,
-    SelectChat,
-    CloseChat,
-    SendMessage,
-    DeleteChat,
-    ToggleMute,
-    ToggleListNumber,
-}
 
 // putting this here because i can
 [Serializable, NetSerializable, DataRecord]

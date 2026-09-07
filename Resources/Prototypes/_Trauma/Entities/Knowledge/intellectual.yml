@@ -4,6 +4,7 @@
   parent: BaseIntellectualKnowledge
   id: MagicalLiteracyKnowledge
   name: Magical Literacy
+  description: How adept you are in the world of magic. Allows you to practice demonology if you are magically gifted, or do basic enchanting.
   components:
   - type: Knowledge
     experienceCost: 30
@@ -13,6 +14,7 @@
   parent: BaseIntellectualKnowledge
   id: LiteracyKnowledge
   name: Literacy
+  description: Does nothing currently. You shouldn't waste points on this...
   components:
   - type: Knowledge
     experienceCost: 20

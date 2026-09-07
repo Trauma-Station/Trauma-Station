@@ -81,6 +81,7 @@ namespace Content.Shared.Doors
     /// </remarks>
     public sealed class BeforeDoorAutoCloseEvent : CancellableEntityEventArgs
     {
+        public float Modifier = 1f; // Trauma
     }
 
 

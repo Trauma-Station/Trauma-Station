@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.Vehicles;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Throwing;
-using Content.Trauma.Common.Contests;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics;
@@ -20,18 +19,21 @@ public sealed partial class VehicleWallPushSystem : EntitySystem
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
-    [Dependency] private CommonContestsSystem _contests = default!;
-    [Dependency] private INetConfigurationManager _config = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+
+    private float _shoveRange;
+    private float _shoveSpeed;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<VehicleWallPushComponent, StrappedEvent>(OnStrapped);
-        SubscribeLocalEvent<VehicleWallPushComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<VehicleWallPushComponent, VehicleWallPushActionEvent>(OnKick);
+
+        Subs.CVar(_cfg, GoobCVars.ShoveRange, x => _shoveRange = x, true);
+        Subs.CVar(_cfg, GoobCVars.ShoveSpeed, x => _shoveSpeed = x, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnStrapped(EntityUid uid, VehicleWallPushComponent strap, ref StrappedEvent args)
     {
         if (!TryComp(uid, out VehicleWallPushComponent? comp))
@@ -41,6 +43,7 @@ public sealed partial class VehicleWallPushSystem : EntitySystem
             _actions.AddAction(args.Buckle.Owner, ref comp.KickAction, comp.ActionProto, uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnstrapped(EntityUid uid, VehicleWallPushComponent strap, ref UnstrappedEvent args)
     {
         if (!TryComp(uid, out VehicleWallPushComponent? comp))
@@ -52,6 +55,7 @@ public sealed partial class VehicleWallPushSystem : EntitySystem
         comp.KickAction = null;
     }
 
+    [SubscribeLocalEvent]
     private void OnKick(EntityUid uid, VehicleWallPushComponent comp, ref VehicleWallPushActionEvent args)
     {
         if (args.Handled)
@@ -81,19 +85,14 @@ public sealed partial class VehicleWallPushSystem : EntitySystem
 
         if (HasComp<PhysicsComponent>(blocker))
         {
-            var shoveRange = _config.GetCVar(GoobCVars.ShoveRange);
-            var shoveSpeed = _config.GetCVar(GoobCVars.ShoveSpeed);
-            var shoveMass = _config.GetCVar(GoobCVars.ShoveMassFactor);
-
             var userPos = from.Position;
             var targetPos = _xform.GetMapCoordinates(blocker).Position;
             var delta = targetPos - userPos;
 
             if (delta.LengthSquared() > 0f)
             {
-                var force = shoveRange * _contests.MassContest(args.Performer, blocker, rangeFactor: shoveMass);
-                var pushVec = Vector2.Normalize(delta) * force;
-                _throwing.TryThrow(blocker, pushVec, force * shoveSpeed, args.Performer, animated: true, playSound: false);
+                var pushVec = Vector2.Normalize(delta) * _shoveRange;
+                _throwing.TryThrow(blocker, pushVec, _shoveRange * _shoveSpeed, args.Performer, animated: true, playSound: false);
             }
         }
 

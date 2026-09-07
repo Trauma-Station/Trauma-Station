@@ -5,6 +5,19 @@
   description: Spray and pray.
   abstract: true
   components:
+  # <Trauma>
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SnipersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SnipersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SnipersDrop
+  - type: WeaponClass
+    class: Heavy
+  # </Trauma>
   - type: Sprite
   - type: Item
     size: Ginormous
@@ -25,17 +38,6 @@
   - type: StaticPrice
     price: 500
   # No chamber because HMG may want its own
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      collection: SnipersPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: SnipersDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: SnipersDrop
-  # Goobstation edit end
 
 - type: entity
   name: minigun
@@ -49,6 +51,10 @@
     - state: icon
   - type: Item
     sprite: Objects/Weapons/Guns/HMGs/minigun.rsi
+    shape:
+    - 0,0,2,0
+    - 0,1,6,2
+    - 1,3,4,4
   - type: Gun
     fireRate: 15
     soundGunshot:

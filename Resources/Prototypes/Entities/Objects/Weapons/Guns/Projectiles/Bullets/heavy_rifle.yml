@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseBulletKinetic # Trauma
+  id: BulletHeavyRifle
+  categories: [ HideSpawnMenu ]
+  name: bullet (.10 rifle)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 19
+
+- type: entity
+  parent: BulletHeavyRifle
+  id: BulletMinigun
+  categories: [ HideSpawnMenu ]
+  name: minigun bullet (.10 rifle)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 5

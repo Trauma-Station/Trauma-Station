@@ -49,11 +49,11 @@ public sealed partial class QueenRoarComponent : Component
     /// How long enemies are stunned for
     /// </summary>
     [DataField]
-    public float RoarStunTime = 6f;
+    public TimeSpan RoarStunTime = TimeSpan.FromSeconds(6);
 
     /// <summary>
     /// How long the roar takes to charge up
     /// </summary>
     [DataField]
-    public float RoarDelay = 3f;
+    public TimeSpan RoarDelay = TimeSpan.FromSeconds(3);
 }

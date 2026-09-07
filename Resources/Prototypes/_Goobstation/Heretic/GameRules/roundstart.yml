@@ -33,6 +33,8 @@
        min: 1
        max: 6
       playerRatio: 10
+  - type: DynamicRuleCost
+    cost: 120
 
 - type: entity
   parent: HereticRoundstart

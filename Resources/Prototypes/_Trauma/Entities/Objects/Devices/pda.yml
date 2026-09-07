@@ -117,3 +117,36 @@
   components:
   - type: Pda
     id: SyndicateIDCard
+
+- type: entity
+  parent: BasePDA
+  id: RancherPDA
+  name: rancher PDA
+  description: The second best friend of a rancher!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-rancher
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-rancher
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType: !type:String
+        pda-rancher
+  - type: Pda
+    id: RancherIDCard
+  - type: PdaBorderColor
+    borderColor: "#4eb349"
+    accentVColor: "#60c95b"
+
+- type: entity
+  parent: BasePDA
+  id: DClassPDA
+  name: D-Class PDA
+  description: A hardened criminal's PDA.
+  components:
+  - type: Pda
+    id: DClassIDCard
+  - type: PdaBorderColor
+    borderColor: "#f57e00"

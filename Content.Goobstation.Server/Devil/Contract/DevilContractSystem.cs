@@ -4,12 +4,11 @@ using Content.Goobstation.Server.Devil.Objectives.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Contract;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Wounds;
 using Content.Server.Hands.Systems;
 using Content.Server.Implants;
 using Content.Server.Mind;
-using Content.Server.Polymorph.Systems;
 using Content.Shared.Body;
+using Content.Shared.EntityEffects;
 using Content.Shared.Paper;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Random;
@@ -25,16 +24,9 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private BodyPartSystem _part = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SubdermalImplantSystem _implant = default!;
-    [Dependency] private PolymorphSystem _polymorph = default!;
     [Dependency] private MindSystem _mind = default!;
-    [Dependency] private WoundSystem _wound = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        InitializeSpecialActions();
-    }
 
     #region Helper Events
 
@@ -72,11 +64,8 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
                 continue;
             }
 
-            if (!Proto.TryIndex(clauseKey, out DevilClausePrototype? clause))
-            {
-                Log.Warning($"Unknown contract clause: {clauseKey}");
+            if (!ProtoMan.TryIndex(clauseKey, out DevilClausePrototype? clause))
                 continue;
-            }
 
             // no duplicates
             if (!processedClauses.Add(clauseKey))
@@ -91,11 +80,10 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     private void ApplyEffectToTarget(EntityUid target, DevilClausePrototype clause, Entity<DevilContractComponent>? contract)
     {
-        //Log.Debug($"Applying {clause.ID} effect to {ToPrettyString(target)}");
+        if (clause.Effects is { } effects)
+            _effects.ApplyEffects(target, effects, predicted: false);
 
         // TODO: what the fuck is this dogshit, rework to use entity effects
-        DoPolymorphs(target, clause);
-
         RemoveComponents(target, clause);
 
         AddComponents(target, clause);
@@ -115,7 +103,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             return;
 
         _damageable.SetDamageModifierSetId(target, clause.DamageModifierSet);
-        // Log.Debug($"Changed {ToPrettyString(target)} modifier set to {clause.DamageModifierSet}");
     }
 
     private void RemoveComponents(EntityUid target, DevilClausePrototype clause)
@@ -124,9 +111,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             return;
 
         EntityManager.RemoveComponents(target, clause.RemovedComponents);
-
-        //foreach (var component in clause.RemovedComponents)
-        //    Log.Debug($"Removed {component.Value.Component} from {ToPrettyString(target)}");
     }
 
     private void AddImplants(EntityUid target, DevilClausePrototype clause)
@@ -135,9 +119,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             return;
 
         _implant.AddImplants(target, clause.Implants);
-
-        //foreach (var implant in clause.Implants)
-        //    Log.Debug($"Added {implant} to {ToPrettyString(target)}");
     }
 
     private void AddComponents(EntityUid target, DevilClausePrototype clause)
@@ -146,9 +127,6 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             return;
 
         EntityManager.AddComponents(target, clause.AddedComponents, false);
-
-        //foreach (var (name, data) in clause.AddedComponents)
-        //    Log.Debug($"Added {data.Component} to {ToPrettyString(target)}");
     }
 
     private void SpawnItems(EntityUid target, DevilClausePrototype clause)
@@ -158,23 +136,9 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
         foreach (var item in clause.SpawnedItems)
         {
-            if (!Proto.TryIndex(item, out _))
-                continue;
-
             var spawnedItem = SpawnNextToOrDrop(item, target);
             _hands.TryPickupAnyHand(target, spawnedItem, false, false, false);
-
-            //Log.Debug($"Spawned {item} for {ToPrettyString(target)}");
         }
-    }
-
-    private void DoPolymorphs(EntityUid target, DevilClausePrototype clause)
-    {
-        if (clause.Polymorph == null)
-            return;
-
-        _polymorph.PolymorphEntity(target, clause.Polymorph.Value);
-        //Log.Debug($"Polymorphed {ToPrettyString(target)} to {clause.Polymorph} ");
     }
 
     private void DoSpecialActions(EntityUid target, Entity<DevilContractComponent>? contract, DevilClausePrototype clause)
@@ -190,12 +154,11 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
         // you gotta cast this shit to object, don't ask me vro idk either
         RaiseLocalEvent(target, (object)ev, true);
-        //Log.Debug($"Raising event: {(object)ev} on {ToPrettyString(target)}. ");
     }
 
     public void AddRandomNegativeClause(EntityUid target)
     {
-        var negativeClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var negativeClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight >= 0)
             .ToList();
 
@@ -210,7 +173,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomNegativeClauseSlasher(EntityUid target)
     {
-        var negativeClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var negativeClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight >= 0 && c.ID != "humanity")
             .ToList();
 
@@ -225,7 +188,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomPositiveClause(EntityUid target)
     {
-        var positiveClauses = Proto.EnumeratePrototypes<DevilClausePrototype>()
+        var positiveClauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>()
             .Where(c => c.ClauseWeight <= 0)
             .ToList();
 
@@ -240,7 +203,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
 
     public void AddRandomClause(EntityUid target)
     {
-        var clauses = Proto.EnumeratePrototypes<DevilClausePrototype>().ToList();
+        var clauses = ProtoMan.EnumeratePrototypes<DevilClausePrototype>().ToList();
 
         if (clauses.Count == 0)
             return;

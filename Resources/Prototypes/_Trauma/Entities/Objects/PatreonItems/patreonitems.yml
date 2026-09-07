@@ -208,16 +208,16 @@
   name: real headslime
   description: Squishy... ew.
   components:
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: dementia
+  - type: ReplacementAccent
+    accent: dementia
+    relayAccent: true
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
 
 - type: entity
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseSlicingRefinable ]
   id: PatreonBumblebirb
   name: Dwingle
   description: It's dwingling itself.
@@ -259,8 +259,8 @@
       0: Alive
       30: Dead
   - type: MovementSpeedModifier
-    baseWalkSpeed : 2.5
-    baseSprintSpeed : 5
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 5
   - type: DamageStateVisuals
     states:
       Alive:
@@ -280,8 +280,8 @@
     - horrible
     - terrible
     - chewy
-  - type: Hunger
-    baseDecayRate: 0.25
+  - type: Satiation
+    satiations: {}
   - type: Extractable
     grindableSolutionName: food
   - type: Solution
@@ -290,8 +290,8 @@
       reagents:
       - ReagentId: Slime
         Quantity: 50
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSlime
   - type: Damageable
   - type: Injurable

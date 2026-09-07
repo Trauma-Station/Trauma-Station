@@ -10,8 +10,11 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -21,7 +24,7 @@
     damageCoefficient: 0.65
 
 - type: entity
-  parent: [ ArmorHeretic, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorHeretic
   name: ominous armor
   description: A ragged, dusty set of robes. Strange eyes line the inside.
@@ -40,6 +43,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHeretic
@@ -52,9 +56,13 @@
     hiddenSlots:
     - jumpsuit
   - type: FireProtection
-    reduction: 0.2
+    reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container
 
 - type: entity
   abstract: true
@@ -67,8 +75,11 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.7
         Caustic: 0.7
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
     damageCoefficient: 0.50
 
@@ -88,7 +99,7 @@
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticRust
   - type: FireProtection
-    reduction: 0.3
+    reduction: 0.38
   - type: SalvagedRemains
   - type: Appearance
   - type: ItemToggle
@@ -119,8 +130,11 @@
           Blunt: 0.4
           Slash: 0.4
           Piercing: 0.4
+          Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
+        flatReductions:
+          Ballistic: 3
       traumaDeductions:
         Dismemberment: 0.4
         OrganDamage: 0.4
@@ -129,7 +143,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
     - type: FireProtection
-      reduction: 0.6
+      reduction: 0.75
     deactivateComponents:
     - type: Armor
       coverage:
@@ -144,8 +158,11 @@
           Blunt: 0.7
           Slash: 0.7
           Piercing: 0.7
+          Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
+        flatReductions:
+          Ballistic: 2
       traumaDeductions:
         Dismemberment: 0.2
         OrganDamage: 0.2
@@ -154,7 +171,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0.50
     - type: FireProtection
-      reduction: 0.3
+      reduction: 0.38
 
 - type: entity
   abstract: true
@@ -167,8 +184,11 @@
         Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
-        Heat: 0.5
+        Ballistic: 0.5
+        Heat: 0.6
         Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -193,12 +213,12 @@
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticVoid
   - type: FireProtection
-    reduction: 0.4
+    reduction: 0.5
   - type: PressureProtection
     lowPressureMultiplier: 1000
   - type: HollowWeave
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
 
 - type: entity
   abstract: true
@@ -210,9 +230,12 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.4
-        Heat: 0.5
+        Piercing: 0.6
+        Ballistic: 0.5
+        Heat: 0.4
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
     damageCoefficient: 0
 
@@ -236,7 +259,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.1
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
+    coefficient: 0.01
   - type: ScorchedMantle
 
 - type: entity
@@ -249,9 +272,12 @@
       coefficients:
         Blunt: 0.3
         Slash: 0.3
-        Piercing: 0.6
+        Piercing: 0.3
+        Ballistic: 0.6
         Heat: 0.7
         Caustic: 0
+      flatReductions:
+        Ballistic: 2
 
 - type: entity
   parent: [ ArmorHereticFlesh, ClothingOuterArmorHeretic ]
@@ -299,8 +325,11 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.5
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.5
       OrganDamage: 0.5
@@ -326,7 +355,7 @@
       head: ClothingHeadHatHoodHereticBlade
   - type: Insulated
   - type: FireProtection
-    reduction: 0.5
+    reduction: 0.63
   - type: ModifyDelayedKnockdown
     cancel: true
   - type: StaminaResistance
@@ -342,9 +371,12 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.6
-        Heat: 0.4
+        Piercing: 0.7
+        Ballistic: 0.6
+        Heat: 0.5
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
 
 - type: entity
   parent: [ ArmorHereticCosmos, ClothingOuterArmorHeretic ]
@@ -365,7 +397,19 @@
     lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
-    coolingCoefficient: 0.01
+    coefficient: 0.01
+  - type: TackleModifier # Allows tackling on cosmic fields
+    modifiers:
+    - priority: 25
+      allowCollision: false
+      affectsOtherModifiers: false
+      staminaCostMultiplier: 0
+      speedMultiplier: 0.5
+      knockdownTimeMultiplier: 0
+      rangeMultiplier: 0.5
+      cooldownMultiplier: 0.3
+      userEffect: CosmicDash
+      tackleCondition: CosmicFieldNearby
 
 - type: entity
   abstract: true
@@ -375,11 +419,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
+        Blunt: 0.6
+        Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.6
         Heat: 0.6
         Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -406,6 +453,12 @@
     # This thing is hardcoded to either shoes or entity itself in mover controller
     - type: FootstepModifier
       footstepSoundCollection: null
+    # Goida. This makes heretic invisible for people far away when wearing this
+    - type: ForestAdmonitionsEntity
+      revealDuration: 0
+      selfVisibility: 1
+      revealDistance: 7
+      revealDistanceSoft: 6
 
 - type: entity
   abstract: true
@@ -417,6 +470,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.7
         Caustic: 0.7
     traumaDeductions:
@@ -428,7 +482,7 @@
     damageCoefficient: 0.7
 
 - type: entity
-  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorCloakVoid
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
@@ -449,6 +503,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -483,6 +538,8 @@
   - type: HereticClothing
   - type: PressureProtection
   - type: VoidCloak
+  - type: StripBlockBypass
+  - type: SurgeryIgnoreClothing
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -490,3 +547,7 @@
         base:
           True: { state: transparent-icon }
           False: { state: icon }
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:Container

@@ -25,6 +25,11 @@
   flavorType: Complex
   description: flavor-complex-ether
 
+- type: flavor
+  id: rust
+  flavorType: Complex
+  description: flavor-complex-rust
+
 - type: reagent
   id: EldritchEssence
   parent: BaseDrink
@@ -32,6 +37,7 @@
   name: reagent-name-eldritch
   desc: reagent-desc-eldritch
   physicalDesc: reagent-physical-desc-eldritch
+  contrabandSeverity: Magical
   flavor: eldritch
   color: "#1f8016"
   metabolisms:
@@ -87,9 +93,9 @@
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
-      - !type:Electrocute
-        electrocuteTime: 1
-        probability: 0.3
+      - !type:TakeStaminaDamage
+        amount: 10
+        immediate: false
       - !type:HealthChange
         damage:
           types:
@@ -104,6 +110,7 @@
   name: reagent-name-crucible-soul
   desc: reagent-desc-crucible-soul
   physicalDesc: reagent-physical-desc-crucible-soul
+  contrabandSeverity: Magical
   flavor: crucibleSoul
   color: "#fb793a"
   metabolisms:
@@ -143,8 +150,8 @@
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
       - !type:MovementSpeedModifier
-        walkSpeedModifier: 0.35
-        sprintSpeedModifier: 0.35
+        walkSpeedModifier: 0.3
+        sprintSpeedModifier: 0.3
 
 - type: reagent
   id: DuskAndDawn
@@ -153,6 +160,7 @@
   name: reagent-name-clarity
   desc: reagent-desc-clarity
   physicalDesc: reagent-physical-desc-clarity
+  contrabandSeverity: Magical
   flavor: clarity
   color: "#d5dc1d"
   metabolisms:
@@ -197,6 +205,7 @@
   name: reagent-name-marshal
   desc: reagent-desc-marshal
   physicalDesc: reagent-physical-desc-marshal
+  contrabandSeverity: Magical
   flavor: marshal
   color: "#5e718e"
   metabolisms:
@@ -225,6 +234,8 @@
         time: 60
         type: Set
     Bloodstream:
+      # Slash damage is split into all parts, which means vital damage is gonna be less, compensate high damage by high metabolism rate
+      metabolismRate : 2.0
       conditions:
       - !type:WhitelistCondition
         checkMind: true
@@ -239,10 +250,47 @@
         splitDamage: Split
         damage:
           types:
-            Slash: 5
+            Slash: 32
           woundSeverityMultipliers:
-            Slash: 2
+            Slash: 5
           partDamageVariation: 2
+      - !type:Emote
+        emote: Scream
+        probability: 0.8
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        splitDamage: Split
+        ignoreResistances: false
+        damage:
+          types:
+            Slash: 12
+          woundSeverityMultipliers:
+            Slash: 5
+          partDamageVariation: 2
+      - !type:Emote
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        emote: Scream
+        probability: 0.8
 
 - type: reagent
   id: NewbornEther
@@ -251,6 +299,7 @@
   name: reagent-name-ether
   desc: reagent-desc-ether
   physicalDesc: reagent-physical-desc-ether
+  contrabandSeverity: Magical
   flavor: ether
   color: "#92ca35"
   metabolisms:
@@ -298,3 +347,64 @@
         effectProto: StatusEffectForcedSleeping
         time: 9
         delay: 5
+
+- type: reagent
+  id: EldritchRust
+  group: Unknown
+  name: reagent-name-eldritch-rust
+  desc: reagent-desc-eldritch-rust
+  physicalDesc: reagent-physical-desc-rusty
+  contrabandSeverity: Magical
+  flavor: rust
+  color: "#b18644"
+  metabolisms:
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        inverted: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "generic-reagent-effect-burning-insides" ]
+        probability: 0.33
+      - !type:Emote
+        emote: Scream
+        probability: 0.3
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        time: 3.5
+      - !type:Jitter
+      - !type:ModifyStatusEffect
+        effectProto: EldritchRustStatusEffect
+      - !type:ModifyStatusEffect
+        effectProto: VisualTearsStatusEffect
+        type: Update
+        time: 5.2
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        ignoreResistances: false
+        splitDamage: Split
+        damage:
+          types:
+            Ion: 30
+  tileReactions:
+  - !type:ChangeTileReaction # Rusts tile

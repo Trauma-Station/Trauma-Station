@@ -12,7 +12,6 @@ namespace Content.Trauma.Shared.Abductor;
 public sealed partial class AbductorTaskSystem : EntitySystem
 {
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityQuery<AbductorSubjectComponent> _query = default!;
 
@@ -33,13 +32,10 @@ public sealed partial class AbductorTaskSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AbductorSubjectComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<AbductorSubjectComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.Tasks.Count > 0)
@@ -47,10 +43,12 @@ public sealed partial class AbductorTaskSystem : EntitySystem
 
         var count = _random.Next(MinTasks, MaxTasks);
         ent.Comp.Tasks = PickTasks(ent, count);
-        ent.Comp.Tasks.Add(FinalTask);
+        if (CanAddTask(ent, ProtoMan.Index(FinalTask)))
+            ent.Comp.Tasks.Add(FinalTask);
         DirtyField(ent, ent.Comp, nameof(AbductorSubjectComponent.Tasks));
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<AbductorTaskPrototype>())
@@ -60,7 +58,7 @@ public sealed partial class AbductorTaskSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllTasks.Clear();
-        foreach (var task in _proto.EnumeratePrototypes<AbductorTaskPrototype>())
+        foreach (var task in ProtoMan.EnumeratePrototypes<AbductorTaskPrototype>())
         {
             if (task.Random)
                 AllTasks.Add(task);
@@ -78,10 +76,7 @@ public sealed partial class AbductorTaskSystem : EntitySystem
         _validTasks.Clear();
         foreach (var task in AllTasks)
         {
-            if (!_random.Prob(task.Chance))
-                continue;
-
-            if (_conditions.TryConditions(target, task.Valid))
+            if (CanAddTask(target, task))
                 _validTasks.Add(task);
         }
 
@@ -94,11 +89,18 @@ public sealed partial class AbductorTaskSystem : EntitySystem
     }
 
     /// <summary>
+    /// Returns true if a task can be given for a subject.
+    /// </summary>
+    public bool CanAddTask(EntityUid target, AbductorTaskPrototype task)
+        => _random.Prob(task.Chance) &&
+            _conditions.TryConditions(target, task.Valid);
+
+    /// <summary>
     /// Returns true if a task is currently complete for a subject.
     /// </summary>
     public bool IsTaskComplete(EntityUid target, [ForbidLiteral] ProtoId<AbductorTaskPrototype> id)
     {
-        var task = _proto.Index(id);
+        var task = ProtoMan.Index(id);
         return task.Completed is {} completed
             ? _conditions.TryConditions(target, completed)
             : !_conditions.TryConditions(target, task.Valid);

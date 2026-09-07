@@ -16,7 +16,6 @@ public sealed partial class HandOrganSystem : EntitySystem
 
     private void OnGotInserted(Entity<HandOrganComponent> ent, ref OrganGotInsertedEvent args)
     {
-        // <Trauma>
         _hands.AddHand(args.Target.Owner, ent.Comp.HandID, ent.Comp.Data); // Trauma - use .Owner
         GiveStartingItem(ent, args.Target); // Trauma
     }

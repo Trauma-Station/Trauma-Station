@@ -44,12 +44,18 @@
       Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
     species: Shadow
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
 
 # used for nightmares and lesser shadowlings
 - type: entity
   parent:
   - AppearanceShadow
   - BaseSpeciesMobOrganic
+  - MobNightVision
   id: MobShadow
   name: Urist McShadow
   components:
@@ -76,13 +82,11 @@
       reagents:
       - ReagentId: FluorosulfuricAcid
         Quantity: 300
-  - type: PressureImmunity
-  - type: NightVision
-    color: "#BF40BF"
-    activateSound: null
-    deactivateSound: null
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ThermalVision
-    thermalShader: null
+    useShader: false
     color: "#BF40BF"
     activateSound: null
     deactivateSound: null

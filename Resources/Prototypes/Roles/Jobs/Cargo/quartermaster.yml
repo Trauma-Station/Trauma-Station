@@ -13,7 +13,6 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 10h
-  weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
@@ -34,7 +33,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipQuartermaster
+    - SkillChipEchelonEducation
+    - SkillChipUnarmed
+    - SkillChipMining
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

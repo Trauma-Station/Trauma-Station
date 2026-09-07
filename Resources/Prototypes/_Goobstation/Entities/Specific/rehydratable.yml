@@ -2,7 +2,7 @@
 
 - type: entity
   parent: DehydratedSpaceCarp
-  id: DehydratedHolocarp
+  id: DehydratedHoloCarp
   name: dehydrated holocarp
   description: Looks like a plush toy holocarp, but just add water and it becomes a real-life holocarp!
   components:

@@ -81,7 +81,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Ballistic: 30
       armorPenetration: 0.5
   - type: StaminaDamageOnCollide
     damage: 30

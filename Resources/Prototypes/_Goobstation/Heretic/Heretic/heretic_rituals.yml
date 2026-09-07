@@ -35,6 +35,7 @@
           whitelist:
             components:
             - Heretic
+            - HereticBody
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -42,12 +43,6 @@
         applyOn: Targets
         min: 1
         cancelLoc: heretic-ritual-fail-sacrifice-ineligible
-    - !type:EffectsRitualEffect
-      applyOn: Mind
-      effects:
-      - !type:RaiseEvents
-        events:
-        - !type:EventHereticUpdateTargets
 
 - type: entity
   id: RitualAmberFocus
@@ -380,6 +375,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:OnFireCondition
     - !type:SacrificeEffect
       applyOn: Targets
@@ -396,7 +392,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - AshlordRite
@@ -493,8 +488,8 @@
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
-            - SilverBar
-          name: heretic-ritual-ingredient-silver
+            - Knife
+          name: heretic-ritual-ingredient-knife
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -542,6 +537,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:HasOrgan
         organCategory: Head
         inverted: true
@@ -560,7 +556,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - MaelstromOfSilver
@@ -760,8 +755,10 @@
         health: 100
       - !type:AddComponents
         components:
-        - type: Muted
         - type: HereticBladeUserBonusDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMutedGhoul
+        time: null
   - type: Tag
     tags:
     - RitualImperfect
@@ -916,6 +913,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -924,14 +922,13 @@
         result: Targets
         min: 4
         max: 4
-        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+        cancelLoc: heretic-ritual-fail-sacrifice-soul
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - PriestFinalHymn
@@ -1084,6 +1081,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -1092,14 +1090,13 @@
         result: Targets
         min: 3
         max: 3
-        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+        cancelLoc: heretic-ritual-fail-sacrifice-soul
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - WaltzAtTheEndOfTime
@@ -1245,6 +1242,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:WhitelistCondition
         whitelist:
           components:
@@ -1265,7 +1263,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - RustbringersOath
@@ -1366,8 +1363,8 @@
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
-            - SheetPlasma
-          name: heretic-ritual-ingredient-plasma-sheet
+            - SheetGlass
+          name: heretic-ritual-ingredient-glass-sheet
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -1417,6 +1414,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -1432,7 +1430,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticResolveStarGazer
         - !type:EventHereticAddKnowledge
           knowledge:
@@ -1648,6 +1645,50 @@
         LabyrinthHandbook: 1
 
 - type: entity
+  id: RitualSerpentclave
+  name: Wrong Key
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/serpentclave.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: true
+            components:
+            - Insulated
+            - Clothing
+            - FingerprintMask
+          name: heretic-ritual-ingredient-insuls
+        - whitelist:
+            tags:
+            - Wirecutter
+          name: heretic-ritual-ingredient-wirecutter
+        - whitelist:
+            tags:
+            - Screwdriver
+          name: heretic-ritual-ingredient-screwdriver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        Serpentclave: 1
+
+- type: entity
   id: RitualAscensionLock
   name: Unlock the Labyrinth
   components:
@@ -1678,6 +1719,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:HasOrgan
         organCategory: Heart
         inverted: true
@@ -1696,7 +1738,6 @@
       - !type:RaiseEvents
         events:
         - !type:EventHereticAscension
-        - !type:EventHereticUpdateTargets
         - !type:EventHereticAddKnowledge
           knowledge:
           - UnlockTheLabyrinth
@@ -1739,8 +1780,8 @@
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
       knowledge:
-        KnowledgePoint: 2
-        SideKnowledgePoint: 2
+        KnowledgePoint: 3
+        SideKnowledgePoint: 1
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1764,8 +1805,8 @@
   name: Priest's Ritual
   components:
   - type: Sprite
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
+    sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi
+    state: icon
   - type: HereticRitual
     effects:
     - !type:LookupRitualEffect
@@ -1789,7 +1830,7 @@
           name: heretic-ritual-ingredient-tank
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -1822,7 +1863,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
         - whitelist:
             components:
@@ -1863,7 +1904,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
         - whitelist:
             tags:
@@ -1891,6 +1932,7 @@
     state: fire_shark_icon
   - type: HereticRitual
     limit: 6
+    limitGhoulCleanupIterations: 3
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform
@@ -2015,7 +2057,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -2029,48 +2071,6 @@
       applyOn: Platform
       output:
         PotionEther: 1
-
-- type: entity
-  id: RitualEnvyKnife
-  name: Rite of Stolen Faces
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Entities/envy_knife.rsi
-    state: icon
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SplitIngredientsRitualEffect
-      applyOn: Split
-      conditions:
-      - !type:ProcessIngredientsCondition
-        applyOn: Look
-        deleteEntitiesKey: Delete
-        splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            tags:
-            - Knife
-          name: heretic-ritual-ingredient-knife
-        - whitelist:
-            components:
-            - Heart
-          name: heretic-ritual-ingredient-heart
-        - whitelist:
-            tags:
-            - MimeMask
-            - ClownMask
-          name: heretic-ritual-ingredient-mime-clown-mask
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-    - !type:SpawnRitualEffect
-      applyOn: Platform
-      output:
-        EnvyKnife: 1
 
 - type: entity
   id: RitualMaskOfMadness
@@ -2102,7 +2102,7 @@
             - Liver
           name: heretic-ritual-ingredient-liver
         - whitelist:
-            components:
+            tags:
             - Stunbaton
           name: heretic-ritual-ingredient-stun-baton
     - !type:EffectsRitualEffect
@@ -2113,6 +2113,79 @@
       applyOn: Platform
       output:
         ClothingMaskMadHeretic: 1
+
+- type: entity
+  id: RitualEldritchCoin
+  name: Eldritch Coin
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    state: heretic
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: false
+            tags:
+            - GoldBar
+            - SilverBar
+          name: heretic-ritual-ingredient-gold-silver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        EldritchCoin: 1
+
+- type: entity
+  id: RitualIceSpear
+  name: Mysteries of Creation
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/ice_spear.rsi
+    state: spear
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Spear
+          name: heretic-ritual-ingredient-spear
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        SpearIceHeretic: 1
 
 - type: entity
   id: RitualUnfathomableCurio
@@ -2155,43 +2228,6 @@
       applyOn: Platform
       output:
         UnfathomableCurio: 1
-
-- type: entity
-  id: RitualEldritchCoin
-  name: Eldritch Coin
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
-    state: heretic
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SplitIngredientsRitualEffect
-      applyOn: Split
-      conditions:
-      - !type:ProcessIngredientsCondition
-        applyOn: Look
-        deleteEntitiesKey: Delete
-        splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            tags:
-            - GoldBar
-          name: heretic-ritual-ingredient-gold
-        - whitelist:
-            tags:
-            - SilverBar
-          name: heretic-ritual-ingredient-silver
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-    - !type:SpawnRitualEffect
-      applyOn: Platform
-      output:
-        EldritchCoin: 1
 
 ## T2
 - type: entity
@@ -2276,7 +2312,7 @@
         ingredients:
         - whitelist:
             tags:
-            - GlassShard
+            - AnyGlassShard
           name: heretic-ritual-ingredient-glass-shard
         - whitelist:
             tags:
@@ -2285,6 +2321,9 @@
         - whitelist:
             tags:
             - Knife
+          blacklist:
+            components:
+            - CarvingKnife
           name: heretic-ritual-ingredient-knife
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -2631,6 +2670,51 @@
       output:
         CartridgeLionhunter: 3
 
+- type: entity
+  id: RitualRustSowerGrenade
+  name: Rust Sower Grenade
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/rustgrenade.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: true
+            tags:
+            - HandGrenade
+            components:
+            - PayloadCase
+          name: heretic-ritual-ingredient-grenade-casing
+        - whitelist:
+            tags:
+            - Rag
+          name: heretic-ritual-ingredient-rag
+        - whitelist:
+            tags:
+            - Trash
+          name: heretic-ritual-ingredient-trash
+          amount: 2
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        RustSowerGrenade: 1
+
 # T3
 - type: entity
   id: RitualMaidInTheMirror
@@ -2674,3 +2758,83 @@
       applyOn: Platform
       output:
         MobGhoulMirrorMaid: 1
+
+- type: entity
+  id: RitualSharpMedal
+  name: Sharp Medal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - HandOrgan
+          name: heretic-ritual-ingredient-hand
+          amount: 2
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingNeckSharpMedal: 1
+
+- type: entity
+  id: RitualAshSpirit
+  name: Ashen Ritual
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: ash_walker
+  - type: HereticRitual
+    limit: 2
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Bonfire
+          name: heretic-ritual-ingredient-bonfire
+        - whitelist:
+            tags:
+            - Book
+          name: heretic-ritual-ingredient-book
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        MobGhoulAshSpirit: 1

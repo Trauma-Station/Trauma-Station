@@ -21,20 +21,8 @@ public sealed partial class MetalSystem : SharedMetalSystem
     [Dependency] private TemperatureSystem _temperature = default!;
     [Dependency] private EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MetallicComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
-
-        SubscribeLocalEvent<InternalTemperatureComponent, MetalWroughtEvent>(OnInternalWrought);
-
-        SubscribeLocalEvent<TemperatureComponent, ItemForgedEvent>(OnTemperatureForged);
-
-        SubscribeLocalEvent<ForgedItemComponent, ForgingCompletedEvent>(OnForgingCompleted);
-    }
-
-    private void OnTemperatureChange(Entity<MetallicComponent> ent, ref OnTemperatureChangeEvent args)
+    [SubscribeLocalEvent]
+    private void OnTemperatureChange(Entity<MetallicComponent> ent, ref TemperatureChangedEvent args)
     {
         // skin temperature for damage because thats what you would touch
         _damageOnHolding.SetEnabled(ent.Owner, args.CurrentTemperature > ent.Comp.DamageHoldingTemp);
@@ -50,6 +38,7 @@ public sealed partial class MetalSystem : SharedMetalSystem
             TryHeat(ent, t);
     }
 
+    [SubscribeLocalEvent]
     private void OnInternalWrought(Entity<InternalTemperatureComponent> ent, ref MetalWroughtEvent args)
     {
         if (!_internalQuery.TryComp(args.Result, out var dest))
@@ -58,25 +47,28 @@ public sealed partial class MetalSystem : SharedMetalSystem
         dest.Temperature = ent.Comp.Temperature;
     }
 
+    [SubscribeLocalEvent]
     private void OnTemperatureForged(Entity<TemperatureComponent> ent, ref ItemForgedEvent args)
     {
         // TODO: base it off your input metals if that matters in the future
-        var temp = Proto.Index(GetMetalOrThrow(ent)).WorkingTemp;
-        _temperature.ForceChangeTemperature(ent, temp, ent.Comp);
+        var temp = ProtoMan.Index(GetMetalOrThrow(ent)).WorkingTemp;
+        _temperature.SetTemperature(ent.AsNullable(), temp);
         if (_internalQuery.TryComp(ent, out var comp))
             comp.Temperature = temp;
     }
 
+    [SubscribeLocalEvent]
     private void OnForgingCompleted(Entity<ForgedItemComponent> ent, ref ForgingCompletedEvent args)
     {
         if (args.Item.Construction is not {} graph)
             return;
 
-        var comp = EnsureComp<ConstructionComponent>(ent);
+        var comp = Factory.GetComponent<ConstructionComponent>();
         comp.Graph = graph;
         comp.Node = "start";
         comp.TargetNode = "finished"; // have to set this as the end node in every procgen's graph
         comp.EdgeIndex = 0; // say to quench it
+        AddComp(ent, comp);
     }
 
     private void TryCool(Entity<MetallicComponent> ent, float t)

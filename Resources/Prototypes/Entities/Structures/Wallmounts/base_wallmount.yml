@@ -12,7 +12,7 @@
   - type: Rotatable
   - type: Physics
     canCollide: false
-  - type: Fixtures # Trauma - stop fucking shitting up my map yml
+  - type: Fixtures
   - type: Clickable
   - type: WallMount
   - type: InteractionOutline
@@ -44,7 +44,7 @@
   abstract: true
   components:
   - type: Damageable
-    damageModifierSet: StructuralMetallic
+    damageModifierSet: Metallic # Trauma - Was StructuralMetallic
   - type: Injurable
     damageContainer: StructuralInorganic
 

@@ -20,4 +20,10 @@ public sealed partial class ActionComponent
     /// </summary>
     [DataField]
     public bool Predicted = true;
+
+    /// <summary>
+    /// If true, this means action won't get removed when user unequips action container item
+    /// </summary>
+    [DataField]
+    public bool DetachedItemAction;
 }

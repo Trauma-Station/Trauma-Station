@@ -17,7 +17,6 @@ namespace Content.Goobstation.Server.Hostname;
 public sealed partial class DynamicHostnameSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _configuration = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IJoinQueueManager _queue = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
@@ -37,7 +36,7 @@ public sealed partial class DynamicHostnameSystem : EntitySystem
         Subs.CVar(_configuration, GoobCVars.UseDynamicHostname, OnDynHostChange, true);
         Subs.CVar(_configuration, CVars.HubAdvertiseInterval, OnHubAdIntChange, true);
         _nextUpdateTime = _gameTiming.CurTime + _updateInterval;
-        _messages = _proto.Index(_messagesProto);
+        _messages = ProtoMan.Index(_messagesProto);
     }
 
     private void OnHubAdIntChange(int newValue) => _updateInterval = TimeSpan.FromSeconds(newValue);

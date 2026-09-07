@@ -4,13 +4,12 @@ using Content.Server.Antag;
 using Content.Server.Chat.Systems;
 using Content.Server.Jittering;
 using Content.Server.Popups;
-using Content.Server.Speech.EntitySystems;
-using Content.Server.Stunnable;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;
-using Content.Shared.StatusEffect;
+using Content.Shared.Speech.EntitySystems;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
@@ -29,7 +28,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private JitteringSystem _jitter = default!;
     [Dependency] private StutteringSystem _stutter = default!;
-    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private HereticSystem _heretic = default!;
@@ -90,8 +89,8 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
 
         var now = _timing.CurTime;
 
-        var query = EntityQueryEnumerator<FeastOfOwlsComponent, StatusEffectsComponent, MindContainerComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var status, out var mindContainer))
+        var query = EntityQueryEnumerator<FeastOfOwlsComponent, MindContainerComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var mindContainer))
         {
             if (comp.CurrentStep >= comp.Reward)
             {
@@ -106,16 +105,12 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
 
             if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryUpdateParalyzeDuration(uid, comp.ParalyzeTime))
             {
-                var dict = new Dictionary<string, FixedPoint2>()
-                {
-                    {SharedHereticSystem.Currency, comp.Reward - comp.CurrentStep}
-                };
-                _heretic.UpdateKnowledge(uid, dict, false, false, mindContainer);
+                _heretic.UpdateKnowledge(uid, new() { { SharedHereticSystem.Currency, comp.Reward - comp.CurrentStep } }, false, false, mindContainer);
                 RemCompDeferred(uid, comp);
                 continue;
             }
 
-            _jitter.DoJitter(uid, comp.JitterStutterTime, true, 10f, 10f, true, status);
+            _jitter.DoJitter(uid, comp.JitterStutterTime, true, 10f, 10f, true);
             _stutter.DoStutter(uid, comp.JitterStutterTime, refresh: true);
 
             if (_vocalQuery.TryComp(uid, out var vocal))
@@ -132,7 +127,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
             if (comp.CurrentStep < comp.Reward)
                 continue;
 
-            _status.TryRemoveStatusEffect(uid, "Stun", status);
+            _status.TryRemoveStatusEffect(uid, SharedStunSystem.StunId);
             RemComp<KnockedDownComponent>(uid);
             RemCompDeferred(uid, comp);
         }

@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: nail
   parent: BaseItem
-  description: A tiny metal stick. It is probably used to fix walls.
   id: Nail
+  name: nail
+  description: A tiny metal stick. It is probably used to fix walls.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
@@ -17,12 +17,13 @@
         Blunt: -8
         Slash: -8
         Piercing: -8
+        Ballistic: -8
         Heat: -8
         Shock: -8
         Structural: -8
     ignoreResistances: true
     whitelist:
-      tags:
+      components:
       - Wall # TODO: more types of nails for different structures
   - type: MeleeWeapon
     canWideSwing: false # How can you swing a nail
@@ -36,7 +37,7 @@
     onlyCollideWhenShot: true
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
       armorPenetration: -1.75 # Very shitty against armor. Pro tip: target unarmored body parts
   - type: Fixtures
     fixtures:
@@ -56,10 +57,6 @@
         mask:
         - Impassable
         - BulletImpassable
-  - type: CartridgeAmmo # Total goida. This is needed to examine the damage. TODO: just make bullets themselves examinable
-    proto: Nail
-    deleteOnSpawn: true
-    muzzleFlash: null
   - type: Tag
     tags:
     - Nail
@@ -77,17 +74,15 @@
     reflective: NonEnergy
 
 - type: entity
-  name: nail (armor-piercing)
   parent: [ Nail, BaseSyndicateContraband ]
-  description: A heavy nail designed to pierce through hard surfaces. Looks just like a regular nail, until it suddenly kills you.
   id: NailArmorPiercing
+  name: nail (armor-piercing)
+  description: A heavy nail designed to pierce through hard surfaces. Looks just like a regular nail, until it suddenly kills you.
   components:
-  - type: CartridgeAmmo
-    proto: NailArmorPiercing
   - type: Projectile
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
       armorPenetration: 0.65
   - type: ProjectileDamageWhitelist
     damage: # Slightly worse for repairs

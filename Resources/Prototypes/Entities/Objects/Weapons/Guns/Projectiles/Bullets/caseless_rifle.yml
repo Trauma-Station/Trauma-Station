@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseBulletKinetic # Trauma
+  id: BulletCaselessRifle
+  categories: [ HideSpawnMenu ]
+  name: bullet (9.5mm HP) # Goobstation edit
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 14 # Trauma, was 25
+      armorPenetration: -0.39 # Trauma
+
+- type: entity
+  parent: BaseBulletPractice
+  id: BulletCaselessRiflePractice
+  categories: [ HideSpawnMenu ]
+  name: bullet (9.5mm practice) # Goobstation edit
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2

@@ -5,7 +5,7 @@
   configuration:
     entity: PolymorphAshJaunt
     forced: true
-    duration: 4 # 3 seconds + 1 for out animation
+    duration: 3 # 2 seconds + 1 for out animation
     attachToGridOrMap: true
     showPopup: false
     allowRepeatedMorphs: true
@@ -15,8 +15,9 @@
   configuration:
     entity: PolymorphAshJaunt
     forced: true
-    duration: 7
+    duration: 5
     attachToGridOrMap: true
+    showPopup: false
     allowRepeatedMorphs: true
 
 - type: polymorph
@@ -66,7 +67,7 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: false
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     componentsToTransfer:
     - component: LanguageKnowledge
     - component: LanguageSpeaker
@@ -95,7 +96,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -111,7 +112,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -127,7 +128,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -143,7 +144,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -159,7 +160,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -175,7 +176,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -191,7 +192,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -207,7 +208,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -223,7 +224,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -239,7 +240,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -255,7 +256,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -271,7 +272,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -287,7 +288,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -303,7 +304,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -319,7 +320,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -335,7 +336,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -351,7 +352,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -368,7 +369,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -383,7 +384,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -398,7 +399,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -413,7 +414,22 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftAshSpiritLock
+  configuration:
+    entity: MobGhoulAshSpiritLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -428,7 +444,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge
@@ -443,7 +459,7 @@
     transferDamage: true
     revertOnCrit: true
     revertOnDeath: true
-    skipRevertConfirmation: true
+    revertConfirmationPopup: false
     allowRepeatedMorphs: true
     componentsToTransfer:
     - component: LanguageKnowledge

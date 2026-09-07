@@ -20,6 +20,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Factory;
 
@@ -30,6 +31,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     [Dependency] private AutomationSystem _automation = default!;
     [Dependency] private AutomationFilterSystem _filter = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
@@ -54,21 +56,21 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InteractorComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<InteractorComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<InteractorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
-        SubscribeLocalEvent<InteractorComponent, DoAfterEndedEvent>(OnDoAfterEnded);
-        SubscribeLocalEvent<InteractorComponent, SignalReceivedEvent>(OnSignalReceived);
         // hand visuals
         SubscribeLocalEvent<InteractorComponent, EntInsertedIntoContainerMessage>(OnItemModified);
         SubscribeLocalEvent<InteractorComponent, EntRemovedFromContainerMessage>(OnItemModified);
+        // locking
+        SubscribeLocalEvent<InteractorComponent, ContainerIsInsertingAttemptEvent>(OnItemModifyAttempt);
+        SubscribeLocalEvent<InteractorComponent, ContainerIsRemovingAttemptEvent>(OnItemModifyAttempt);
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<InteractorComponent> ent, ref ComponentInit args)
     {
         UpdateAppearance(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<InteractorComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -79,6 +81,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             : Loc.GetString("robotic-arm-examine-no-filter"));
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVerbs(Entity<InteractorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
@@ -91,7 +94,8 @@ public abstract partial class SharedInteractorSystem : EntitySystem
         (string, Toggle)[] options = [
             ("alt-interact", () => SetAltInteract(ent, !ent.Comp.AltInteract)),
             ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand)),
-            ("harm-mode", () => SetHarmMode(ent, !ent.Comp.HarmMode))
+            ("harm-mode", () => SetHarmMode(ent, !ent.Comp.HarmMode)),
+            ("locked", () => SetLocked(ent, !ent.Comp.Locked))
         ];
         foreach (var (id, toggle) in options)
         {
@@ -100,7 +104,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
                 Act = () =>
                 {
                     var value = toggle();
-                    _popup.PopupClient(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
+                    _popup.PopupEntity(Loc.GetString($"interactor-verb-toggled-{id}", ("enabled", value)), ent, user);
                 },
                 Text = Loc.GetString($"interactor-verb-toggle-{id}"),
                 Icon = VerbIcon,
@@ -118,6 +122,18 @@ public abstract partial class SharedInteractorSystem : EntitySystem
         UpdateAppearance(ent);
     }
 
+    private void OnItemModifyAttempt<T>(Entity<InteractorComponent> ent, ref T args) where T: ContainerAttemptEventBase
+    {
+        if (!ent.Comp.Locked ||
+            _timing.ApplyingState ||
+            TerminatingOrDeleted(ent) ||
+            args.Container.ID != ent.Comp.ToolContainerId)
+            return;
+
+        args.Cancel();
+    }
+
+    [SubscribeLocalEvent]
     private void OnDoAfterEnded(Entity<InteractorComponent> ent, ref DoAfterEndedEvent args)
     {
         UpdateToolAppearance(ent);
@@ -130,6 +146,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             Machine.Completed(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent args)
     {
         var state = SignalState.Momentary;
@@ -141,6 +158,8 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             current = ent.Comp.UseInHand;
         else if (args.Port == ent.Comp.HarmModePort)
             current = ent.Comp.HarmMode;
+        else if (args.Port == ent.Comp.LockedPort)
+            current = ent.Comp.Locked;
         else
             return;
 
@@ -158,6 +177,8 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             SetUseInHand(ent, value);
         else if (args.Port == ent.Comp.HarmModePort)
             SetHarmMode(ent, value);
+        else if (args.Port == ent.Comp.LockedPort)
+            SetLocked(ent, value);
     }
 
     public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
@@ -257,14 +278,27 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     /// <summary>
     /// Set <see cref="InteractorComponent.HarmMode"> and dirty it.
     /// </summary>
-    public bool SetHarmMode(Entity<InteractorComponent> ent, bool use)
+    public bool SetHarmMode(Entity<InteractorComponent> ent, bool harm)
     {
-        if (ent.Comp.HarmMode == use)
-            return use;
+        if (ent.Comp.HarmMode == harm)
+            return harm;
 
-        ent.Comp.HarmMode = use;
+        ent.Comp.HarmMode = harm;
         Dirty(ent);
-        return use;
+        return harm;
+    }
+
+    /// <summary>
+    /// Set <see cref="InteractorComponent.Locked"> and dirty it.
+    /// </summary>
+    public bool SetLocked(Entity<InteractorComponent> ent, bool locked)
+    {
+        if (ent.Comp.Locked == locked)
+            return locked;
+
+        ent.Comp.Locked = locked;
+        Dirty(ent);
+        return locked;
     }
 
     public EntityCoordinates TargetsPosition(EntityUid uid)

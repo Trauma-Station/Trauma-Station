@@ -13,7 +13,6 @@ namespace Content.Goobstation.Server.Xenobiology;
 public sealed partial class SlimeScannerSystem : EntitySystem
 {
     [Dependency] private ExamineSystemShared _examineSystem = default!;
-    [Dependency] private IPrototypeManager _prot = default!;
 
     public override void Initialize()
     {
@@ -57,14 +56,14 @@ public sealed partial class SlimeScannerSystem : EntitySystem
 
         var sb = new StringBuilder();
 
-        sb.AppendLine(Loc.GetString("slime-scanner-examine-slime-description", ("color", ent.Comp.SlimeColor.ToHex()), ("name", _prot.Index(ent.Comp.Breed).BreedName)));
+        sb.AppendLine(Loc.GetString("slime-scanner-examine-slime-description", ("color", ent.Comp.SlimeColor.ToHex()), ("name", ProtoMan.Index(ent.Comp.Breed).BreedName)));
 
         // all this shit for a good looking examine text. imagine.
         sb.Append($"{Loc.GetString("slime-scanner-examine-slime-mutations", ("chance", mutationChance))} ");
         var mutations = ent.Comp.PotentialMutations.ToList();
         for (int i = 0; i < mutations.Count; i++)
         {
-            var info = _prot.Index(mutations[i]);
+            var info = ProtoMan.Index(mutations[i]);
 
             var color = "white";
             // todo make the colors work
@@ -103,7 +102,7 @@ public sealed partial class SlimeScannerSystem : EntitySystem
             for (int j = 0; j < reagents.Count; j++)
             {
                 var reagent = reagents[j];
-                if (!_prot.TryIndex<ReagentPrototype>(reagent, out var rid))
+                if (!ProtoMan.TryIndex<ReagentPrototype>(reagent, out var rid))
                     continue;
 
                 sb.Append($"[color={rid.SubstanceColor.ToHex()}]{rid.ID.ToLower()}[/color]");

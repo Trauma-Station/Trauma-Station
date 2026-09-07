@@ -4,7 +4,9 @@ using Content.Lavaland.Shared.Anger.Systems;
 using Content.Lavaland.Shared.EntityShapes.Components;
 using Content.Lavaland.Shared.EntityShapes.Shapes;
 using Content.Lavaland.Shared.Megafauna.Events;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Map;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.EntityShapes;
@@ -13,12 +15,8 @@ public sealed partial class EntityShapeSystem : EntitySystem
 {
     [Dependency] private AngerSystem _anger = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
-    [Dependency] private INetManager _net = default!;
-    [Dependency] private IMapManager _mapMan = default!;
-
-    private EntityQuery<ShapeSpawnerComponent> _spawnerQuery;
-    private EntityQuery<ShapeSpawnerCounterComponent> _counterQuery;
+    [Dependency] private EntityQuery<ShapeSpawnerComponent> _spawnerQuery = default!;
+    [Dependency] private EntityQuery<ShapeSpawnerCounterComponent> _counterQuery = default!;
 
     public override void Initialize()
     {
@@ -28,9 +26,6 @@ public sealed partial class EntityShapeSystem : EntitySystem
         SubscribeLocalEvent<ShapeSpawnerCounterComponent, MapInitEvent>(OnCounterInit);
         SubscribeLocalEvent<AngerShapeSpawnerComponent, SpawnedByActionEvent>(OnActionSpawned);
         SubscribeLocalEvent<ExpandingShapeSpawnerComponent, SpawnCounterEntityShapeEvent>(OnExpandingShapeTrigger);
-
-        _spawnerQuery = GetEntityQuery<ShapeSpawnerComponent>();
-        _counterQuery = GetEntityQuery<ShapeSpawnerCounterComponent>();
     }
 
     public override void Update(float frameTime)
@@ -61,7 +56,7 @@ public sealed partial class EntityShapeSystem : EntitySystem
     public void SpawnEntityShape(EntityShape shape, EntityUid target, EntProtoId spawnId, out List<EntityUid> spawned, bool alignTile = false)
     {
         var coords = alignTile
-            ? Transform(target).Coordinates.AlignWithClosestGridTile(1.5f, EntityManager, _mapMan)
+            ? Transform(target).Coordinates.AlignWithClosestGridTile(1.5f, EntityManager)
             : Transform(target).Coordinates;
 
         SpawnEntityShape(shape, coords, spawnId, out spawned);
@@ -75,12 +70,11 @@ public sealed partial class EntityShapeSystem : EntitySystem
     {
         spawned = new List<EntityUid>();
 
-        // Sadly we still don't have proper shared random.
-        // It also crashes the spawn menu.
-        if (_net.IsClient)
+        // dont troll spawn menu
+        if (!coords.IsValid(EntityManager))
             return;
 
-        var result = shape.GetShape(GetRandom(), _protoMan);
+        var result = shape.GetShape(GetRandom(coords.EntityId), ProtoMan);
         for (int i = 0; i < result.Count; i++)
         {
             result[i] += coords.Position;
@@ -143,8 +137,6 @@ public sealed partial class EntityShapeSystem : EntitySystem
         SpawnEntityShape(spawner.Shape, uid, spawner.Spawn, out _, spawner.AlignCoords);
     }
 
-    private System.Random GetRandom()
-    {
-        return new System.Random((int) _timing.CurTick.Value);
-    }
+    private IRobustRandom GetRandom(EntityUid uid)
+        => SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid));
 }

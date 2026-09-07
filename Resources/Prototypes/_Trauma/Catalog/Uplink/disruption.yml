@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
-  id: AccessConfiguratorSyndicate
+  id: UplinkAccessConfiguratorSyndicate
   name: uplink-syndicate-access-config-name
   description: uplink-syndicate-access-config-desc
   productEntity: AccessConfiguratorSyndicate
@@ -10,27 +10,48 @@
   categories:
   - UplinkDisruption
 
-# upstream removed it lol
 - type: listing
-  id: UplinkSuperSurplusBundle
-  name: uplink-super-surplus-bundle-name
-  description: uplink-super-surplus-bundle-desc
-  productEntity: CrateSyndicateSuperSurplusBundle
+  id: UplinkSyndicateShuttleBoard
+  name: uplink-shuttle-board-name
+  description: uplink-shuttle-board-desc
+  productEntity: SyndicateShuttleConsoleCircuitboard
+  icon: { sprite: Objects/Misc/module.rsi, state: cpu_syndicate }
   cost:
-    Telecrystal: 200
-  discountCategory: null # WAY too free
+    Telecrystal: 10
   categories:
   - UplinkDisruption
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
-      - ContravendUplink
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+
+- type: listing
+  id: UplinkSyndicateShuttleBundle
+  name: uplink-shuttle-bundle-name
+  description: uplink-shuttle-bundle-desc
+  productEntity: CrateSyndicateShuttleBundle
+  icon: { sprite: Structures/Shuttles/thruster.rsi, state: base }
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkDisruption
+
+- type: listing
+  id: UplinkDoorRemoteSyndicate
+  name: uplink-syndicate-remote-name
+  description: uplink-syndicate-remote-desc
+  productEntity: DoorRemoteSyndicate
+  icon: { sprite: _Trauma/Objects/Devices/device_remote.rsi, state: icon }
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkDisruption
+
+- type: listing
+  id: UplinkComputerIFFSyndicateCircuitboard
+  name: uplink-shuttle-iff-name
+  description: uplink-shuttle-iff-desc
+  productEntity: ComputerIFFSyndicateCircuitboard
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkDisruption
 
 - type: listing
   id: UplinkDisposableTurretNukie
@@ -43,6 +64,56 @@
   - UplinkDisruption
   conditions:
   - !type:StoreWhitelistCondition
-   whitelist:
-     tags:
-     - NukeOpsUplink
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+# upstream removed it lol
+- type: listing
+  id: UplinkSuperSurplusBundle
+  name: uplink-super-surplus-bundle-name
+  description: uplink-super-surplus-bundle-desc
+  productEntity: CrateSyndicateSuperSurplusBundle
+  cost:
+    Telecrystal: 200
+  discountCategory: null # WAY too free
+  categories:
+  - UplinkDisruption
+  restockTime: 15m
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+      - ContravendUplink
+      components:
+      - SpyRule
+  - &blacklist_surplus !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: Uplink911Bundle
+  name: uplink-surplus-bundle-name
+  description: uplink-surplus-bundle-desc
+  productEntity: CrateSyndicateSurplusBundle
+  discountCategory: null # WAY too free
+  categories:
+  - DiscountedItems
+  conditions:
+  - !type:StoreHolidayCondition
+    holiday: NeverForget
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - *blacklist_surplus
+
+- type: listing
+  id: UplinkDuffelSurgery
+  name: uplink-duffel-surgery-name
+  description: uplink-duffel-surgery-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledMedical
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkDisruption

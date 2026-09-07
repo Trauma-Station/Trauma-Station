@@ -61,7 +61,9 @@
   id: StatusEffectFireBlasted
   name: fire blasted
   components:
-  - type: FireBlastedStatusEffect
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: FireBlasted
 
 - type: entity
   parent: MobStatusEffectBase
@@ -76,6 +78,7 @@
   name: star touched
   components:
   - type: StarTouchedStatusEffect
+  - type: BlindnessStatusEffect
 
 - type: entity
   parent: MobStatusEffectBase
@@ -98,11 +101,8 @@
     statusEffects:
       StatusEffectCrucibleSoulCooldown: 120
   - type: CrucibleSoulStatusEffect
-  - type: AddShadersStatusEffect
-    postShaders:
-      SecondSkin:
-        color: "#fb793a"
-        renderOrder: 1
+  - type: AddShaderStatusEffect
+    shader: SecondSkin
 
 - type: entity
   parent: [MobStatusEffectDebuff, MobStatusEffectBase]
@@ -153,7 +153,7 @@
   name: examined mirror maid
 
 - type: entity
-  parent: [StatusEffectWormBlacklist, MobStatusEffectBase]
+  parent: [ StatusEffectWormBlacklist, StatusEffectPressureImmunity ]
   id: StatusEffectNewbornEther
   name: eldritch sleep
   components:
@@ -164,7 +164,6 @@
     - type: SpecialHighTempImmunity
     - type: SpecialLowTempImmunity
     - type: SpecialBreathingImmunity
-    - type: SpecialPressureImmunity
     - type: MetabolismModifier
       modifier: 100
   - type: ForcedSleepingStatusEffect
@@ -226,21 +225,28 @@
     - type: ShadowCloaked
 
 - type: entity
-  parent: [StatusEffectWormBlacklist, StatusEffectSpeed]
+  parent: StatusEffectWormBlacklist
   id: ShadowCloakPaleStatusEffect
   name: forest admonitions
   components:
   - type: StatusEffectAlert
     alert: ForestAdmonitions
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 1.1
-    walkSpeedModifier: 1.1
   - type: HereticCloakedStatusEffect
     loseFocusMessage: heretic-ability-lose-focus-pale-cloak
   - type: GrantComponentsStatusEffect
     components:
     - type: ShadowCloaked
       shadowCloakEntity: ShadowCloakEntityPale
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: EldritchRustStatusEffect
+  name: eldritch rust slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.75
+    walkSpeedModifier: 0.75
+  - type: BlindnessStatusEffect
 
 - type: entity
   parent: StatusEffectSlowdown
@@ -252,13 +258,17 @@
     walkSpeedModifier: 0.75
 
 - type: entity
-  parent: StatusEffectSlowdown
+  parent: [ StatusEffectSlowdown, MutedStatusEffectBase ]
   id: PaleFogAffectedStatusEffect
   name: pale fog affected
   components:
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.85
     walkSpeedModifier: 0.85
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: Deaf
+    - type: BlurryVision
 
 - type: entity
   parent: StatusEffectBase
@@ -275,9 +285,12 @@
   name: void camouflage
   components:
   - type: ForcedStealthStatusEffect
-    visibility: 0.1
+    visibility: 0.05
+    revealOnAttack: false
+    revealOnDamage: false
   - type: BlockHereticActionsStatusEffect
   - type: RemoveOnAttackStatusEffect
+    removeThreshold: 0.5
 
 - type: entity
   parent: MobStatusEffectBase
@@ -318,5 +331,14 @@
   parent: MobStatusEffectBase
   id: StatusEffectInfluenceXray
   name: influence xray
+  components:
+  - type: XRayVisionStatusEffect
+  - type: StatusEffectAlert
+    alert: InfluenceXRay
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectXRayHeretic
+  name: x-ray vision
   components:
   - type: XRayVisionStatusEffect

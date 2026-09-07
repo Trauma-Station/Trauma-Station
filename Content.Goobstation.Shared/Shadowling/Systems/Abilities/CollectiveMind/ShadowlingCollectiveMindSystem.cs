@@ -18,7 +18,6 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPopupSystem _popups = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
@@ -45,7 +44,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 
         if (comp.UnlockedAbilities.Count >= comp.AvailableAbilities.Count)
         {
-            _popups.PopupPredicted(Loc.GetString("shadowling-collective-mind-ascend"), uid, uid, PopupType.Medium);
+            _popups.PopupEntity(Loc.GetString("shadowling-collective-mind-ascend"), uid, uid, PopupType.Medium);
             return;
         }
 
@@ -63,7 +62,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
             if (comp.UnlockedAbilities.Contains(unlock))
                 continue;
 
-            var proto = _protoMan.Index(unlock);
+            var proto = ProtoMan.Index(unlock);
 
             if (comp.AmountOfThralls < proto.UnlockAtThralls)
                 continue;
@@ -79,7 +78,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 
         if (abiltiesAddedCount > 0)
         {
-            _popups.PopupPredicted(
+            _popups.PopupEntity(
                 Loc.GetString("shadowling-collective-mind-success", ("thralls", thrallsRemaining)),
                 uid,
                 uid,
@@ -90,7 +89,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
         }
         else
         {
-            _popups.PopupPredicted(Loc.GetString("shadowling-collective-mind-failure", ("thralls", thrallsRemaining)),
+            _popups.PopupEntity(Loc.GetString("shadowling-collective-mind-failure", ("thralls", thrallsRemaining)),
                 uid,
                 uid,
                 PopupType.Medium);

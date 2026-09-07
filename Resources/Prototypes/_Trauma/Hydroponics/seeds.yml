@@ -1,116 +1,324 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: seed
-  id: Lemonade
-  name: seeds-lemonade-name
-  noun: seeds-noun-seeds
-  displayName: seeds-lemonade-display-name
-  plantRsi: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
-  packetPrototype: LemonadeSeeds
-  productPrototypes:
-  - FoodLemonade
-  mutationPrototypes:
-  - lime # mutated backwards idiot
-  harvestRepeat: Repeat
-  lifespan: 55
-  maturation: 6
-  production: 6
-  yield: 3
-  potency: 10
-  idealLight: 8
-  chemicals:
-    WeldingFuel:
-      Min: 1
-      Max: 5
-      PotencyDivisor: 20
-    Napalm:
-      Min: 1
-      Max: 4
-      PotencyDivisor: 25
-    ChlorineTrifluoride:
-      Min: 2
-      Max: 3
-      PotencyDivisor: 100
+- type: entity
+  parent: LemonPlants
+  id: LemonadePlants
+  name: lemonade tree
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
+  - type: PlantData
+    name: seeds-lemonade-name
+    packetPrototype: LemonadeSeeds
+    productPrototypes: [ FoodLemonade ]
+    mutationPrototypes: [ LimePlants ] # mutated backwards idiot
+  - type: PlantChemicals
+    chemicals:
+      WeldingFuel:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+      Napalm:
+        min: 1
+        max: 4
+        potencyDivisor: 25
+      ChlorineTrifluoride:
+        min: 2
+        max: 3
+        potencyDivisor: 100
 
-- type: seed
-  id: CocaPlant
-  name: seeds-cocaplant-name
-  noun: seeds-noun-seeds
-  displayName: seeds-cocaplant-display-name
-  plantRsi: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
-  packetPrototype: CocaSeeds
-  productPrototypes:
-  - LeavesCoca
-  harvestRepeat: Repeat
-  lifespan: 75
-  maturation: 5
-  production: 5
-  yield: 2
-  potency: 10
-  growthStages: 3
-  waterConsumption: 0.40
-  idealLight: 9
-  idealHeat: 300
-  chemicals:
-    CocaSlurry:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 10
+- type: entity
+  parent: BasePlant
+  id: CocaPlants
+  name: coca plant
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
+  - type: PlantData
+    name: seeds-cocaplant-name
+    packetPrototype: CocaSeeds
+    productPrototypes: [ LeavesCoca ]
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: Plant
+    lifespan: 75
+    maturation: 5
+    production: 5
+    yield: 2
+    potency: 10
+    growthStages: 3
+  - type: PlantGrowth
+    waterConsumption: 0.40
+  - type: PlantChemicals
+    chemicals:
+      CocaSlurry:
+        min: 1
+        max: 10
+        potencyDivisor: 10
 
-- type: seed
-  id: CoconutPlant
-  name: seeds-coconut-name
-  noun: seeds-noun-seeds
-  displayName: seeds-coconut-display-name
-  plantRsi: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
-  packetPrototype: CoconutSeeds
-  productPrototypes:
-  - FoodCoconut
-  harvestRepeat: SelfHarvest # bear in mind, this is the equivalent of space bear pelt for botany
-  lifespan: 80
-  maturation: 12 # takes a while
-  production: 1 # lol
-  yield: 8 # higher than cocoa because rare
-  potency: 25
-  waterConsumption: 1 # they need a lotta wata
-  nutrientConsumption: 1
-  idealLight: 8
-  chemicals:
-    CoconutFlesh:
-      Min: 1
-      Max: 20
-      PotencyDivisor: 2
-    Vitamin:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 2
-    CoconutWater:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 2
+- type: entity
+  parent: BasePlant
+  id: CoconutPlants
+  name: coconut tree
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+  - type: PlantData
+    name: seeds-coconut-name
+    packetPrototype: CoconutSeeds
+    productPrototypes: [ FoodCoconut ]
+  - type: PlantHarvest
+    harvestRepeat: SelfHarvest # bear in mind, this is the equivalent of space bear pelt for botany
+  - type: Plant
+    lifespan: 80
+    maturation: 12 # takes a while
+    production: 1 # lol
+    yield: 8 # higher than cocoa because rare
+    potency: 25
+  - type: PlantGrowth
+    waterConsumption: 1 # they need a lotta wata
+    nutrientConsumption: 1
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 20
+        potencyDivisor: 2
+      Vitamin:
+        min: 1
+        max: 10
+        potencyDivisor: 2
+      CoconutWater:
+        min: 1
+        max: 10
+        potencyDivisor: 2
 
-- type: seed
-  id: CherryBomb
-  name: seeds-cherrybomb-name
-  noun: seeds-noun-seeds
-  displayName: seeds-cherrybomb-display-name
-  plantRsi: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
-  packetPrototype: CherryBombSeeds
-  productPrototypes:
-    - FoodCherryBomb
-  harvestRepeat: Repeat
-  lifespan: 55
-  maturation: 3
-  production: 3
-  yield: 6
-  potency: 10
-  idealLight: 6
-  chemicals:
-    Nutriment:
-      Min: 1
-      Max: 3
-      PotencyDivisor: 30
-    Vitamin:
-      Min: 1
-      Max: 3
-      PotencyDivisor: 40
+- type: entity
+  parent: CherryPlants
+  id: CherryBombPlants
+  name: cherry bomb tree
+  components:
+  - type: PlantData
+    name: seeds-cherrybomb-name
+    mutationPrototypes: [ CherryPlants ]
+    packetPrototype: CherryBombSeeds
+    productPrototypes: [ FoodCherryBomb ]
+  - type: Plant
+    maturation: 3
+    production: 3
+    yield: 6
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 3
+        potencyDivisor: 30
+      Vitamin:
+        min: 1
+        max: 3
+        potencyDivisor: 40
+
+- type: entity
+  parent: ApplePlants
+  id: DeliciousApplePlants
+  name: delicious-looking apple tree
+  description: The apples look delicious, not the tree.
+  components:
+  - type: PlantData
+    name: seeds-appledelicious-name
+    packetPrototype: DeliciousAppleSeeds
+    productPrototypes: [ FoodDeliciousApple ]
+    mutationPrototypes: [ GoldenApplePlants, MethApplePlants ]
+
+- type: entity
+  parent: ApplePlants
+  id: MethApplePlants
+  name: meth apple tree
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/meth_apple.rsi
+  - type: PlantData
+    name: seeds-applemeth-name
+    packetPrototype: MethAppleSeeds
+    productPrototypes: [ FoodMethApple ]
+    mutationPrototypes: [ GoldenApplePlants, DeliciousApplePlants ]
+  - type: Plant
+    yield: 2
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      Vitamin:
+        min: 1
+        max: 4
+        potencyDivisor: 25
+      Desoxyephedrine:
+        min: 1
+        max: 3
+        potencyDivisor: 10
+
+- type: entity
+  parent: CornPlants
+  id: ClearCornPlants
+  name: ear of clear corn
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/clear_corn.rsi
+  - type: PlantData
+    name: seeds-clearcorn-name
+    mutationPrototypes: []
+    packetPrototype: ClearCornSeeds
+    productPrototypes: [ FoodClearCorn ]
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 20
+      Cornmeal:
+        min: 5
+        max: 15
+        potencyDivisor: 10
+      Ethanol:
+        min: 15
+        max: 60
+        potencyDivisor: 10
+
+- type: entity
+  parent: BasePlant
+  id: PeanutPlants
+  name: peanut plant
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/peanut.rsi
+  - type: PlantData
+    name: seeds-peanut-name
+    packetPrototype: PeanutSeeds
+    productPrototypes: [ FoodPeanut ]
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: Plant
+    lifespan: 25
+    maturation: 6
+    production: 3
+    yield: 3
+    potency: 5
+    growthStages: 3
+  - type: PlantGrowth
+    nutrientConsumption: 0.4
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 20
+        potencyDivisor: 20
+
+- type: entity
+  parent: ChanterellePlants
+  id: MagicMushroomsPlants
+  name: magic mushrooms
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/magicmushrooms.rsi
+  - type: PlantData
+    name: seeds-magicmush-name
+    mutationPrototypes: []
+    packetPrototype: MagicMushroomSeeds
+    productPrototypes: [ FoodMagicMushroom ]
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 25
+        potencyDivisor: 25
+      THC:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+
+- type: entity
+  parent: BasePlant
+  id: SynthMeatPlants
+  name: synthmeat plant
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/synthmeat.rsi
+  - type: PlantData
+    name: seeds-synthmeat-name
+    packetPrototype: SynthMeatSeeds
+    productPrototypes: [ FoodSynthMeat ]
+  - type: Plant
+    lifespan: 25
+    maturation: 6
+    production: 3
+    yield: 3
+    growthStages: 3
+    potency: 5
+  - type: PlantGrowth
+    nutrientConsumption: 0.40
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 20
+        potencyDivisor: 20
+      Synthflesh:
+        min: 5
+        max: 20
+        potencyDivisor: 20
+
+- type: entity
+  parent: WatermelonPlants
+  id: BalloonWatermelonPlants
+  name: melon balloon plant
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/balloon_mellon.rsi
+  - type: PlantData
+    name: seeds-balloonmelon-name
+    mutationPrototypes: []
+    packetPrototype: BalloonMelonSeeds
+    productPrototypes: [ MelonBalloon ]
+  - type: Plant
+    growthStages: 3
+  - type: PlantChemicals
+    chemicals:
+      Hydrogen:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      Water:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      Nitrogen:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+
+- type: entity
+  parent: WheatPlants
+  id: SteelWheatPlants
+  name: steel wheet stalk
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/steel_wheat.rsi
+  - type: PlantData
+    name: seeds-steelwheat-name
+    mutationPrototypes: [ MeatWheatPlants ]
+    packetPrototype: SteelWheatSeeds
+    productPrototypes: [ SteelWheatBushel ]
+  - type: Plant
+    growthStages: 3
+  - type: PlantChemicals
+    chemicals:
+      Iron:
+        min: 1
+        max: 16
+        potencyDivisor: 20
+      Flour:
+        min: 5
+        max: 20
+        potencyDivisor: 20

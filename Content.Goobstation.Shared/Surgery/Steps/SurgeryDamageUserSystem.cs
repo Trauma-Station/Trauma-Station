@@ -24,7 +24,7 @@ public sealed partial class SurgeryDamageUserSystem : EntitySystem
         if (ent.Comp.Popup is {} popup)
         {
             var msg = Loc.GetString(popup, ("target", args.Body), ("part", args.Part));
-            _popup.PopupPredicted(msg, args.Body, args.User, PopupType.SmallCaution);
+            _popup.PopupEntity(msg, args.Body, args.User, PopupType.SmallCaution);
         }
     }
 }

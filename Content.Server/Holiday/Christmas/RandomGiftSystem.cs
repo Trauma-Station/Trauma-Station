@@ -22,7 +22,6 @@ public sealed partial class RandomGiftSystem : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private HandsSystem _hands = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
@@ -46,7 +45,7 @@ public sealed partial class RandomGiftSystem : EntitySystem
         if (_whitelistSystem.IsWhitelistFail(component.ContentsViewers, args.Examiner) || component.SelectedEntity is null)
             return;
 
-        var name = _prototype.Index<EntityPrototype>(component.SelectedEntity).Name;
+        var name = ProtoMan.Index<EntityPrototype>(component.SelectedEntity).Name;
         args.PushText(Loc.GetString("gift-packin-contains", ("name", name)));
     }
 
@@ -61,8 +60,7 @@ public sealed partial class RandomGiftSystem : EntitySystem
         var coords = Transform(args.User).Coordinates;
         var handsEnt = Spawn(component.SelectedEntity, coords);
         _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(handsEnt)}");
-        if (component.Wrapper is not null)
-            Spawn(component.Wrapper, coords);
+        Spawn(component.Wrapper, coords);
 
         _audio.PlayPvs(component.Sound, args.User);
 
@@ -98,7 +96,7 @@ public sealed partial class RandomGiftSystem : EntitySystem
         var mapGridCompName = Factory.GetComponentName<MapGridComponent>();
         var physicsCompName = Factory.GetComponentName<PhysicsComponent>();
 
-        foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.Abstract || proto.HideSpawnMenu || proto.Components.ContainsKey(mapGridCompName) || !proto.Components.ContainsKey(physicsCompName))
                 continue;

@@ -39,7 +39,7 @@ public sealed partial class GeneticsConsoleSystem
 
         _disk.SetEnzymes(disk, _enzymes.GetEnzymes(mob));
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(args.Actor)} saved {name}'s unique enzymes to {ToPrettyString(disk)} with console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{args.Actor:user} saved {name:name}'s unique enzymes to {disk.Owner:disk} with console {ent.Owner:console}");
 
         _audio.PlayPredicted(ent.Comp.SaveSound, ent, args.Actor);
     }
@@ -102,7 +102,7 @@ public sealed partial class GeneticsConsoleSystem
         Speak(ent, "applied-enzymes");
         _enzymes.ChangeEnzymes(mob, enzymes);
 
-        _adminLog.Add(LogType.Genetics, LogImpact.High, $"{ToPrettyString(args.User)} applied unique enzymes of '{enzymes.Name}' to {ToPrettyString(mob)} with console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.High, $"{args.User:user} applied unique enzymes of '{enzymes.Name:name}' to {mob:target} with console {ent.Owner:console}");
 
         _audio.PlayPredicted(ent.Comp.ApplySound, ent, args.User);
     }

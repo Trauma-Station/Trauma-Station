@@ -1,0 +1,38 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<Control xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls">
+    <BoxContainer Margin="8 8 8 8" Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="RewardName" HorizontalExpand="True" />
+            <Button Name="CollectButton" HorizontalAlignment="Right" Text="{Loc 'spy-uplink-collect-reward'}" />
+        </BoxContainer>
+        <BoxContainer Margin="0 2" Orientation="Horizontal">
+            <PanelContainer StyleClasses="PanelLight" Margin="5 0" SetWidth="1" />
+            <TextureRect
+                Name="RewardTexture"
+                Margin="0,0,4,0"
+                MinSize="48 48"
+                Stretch="KeepAspectCentered" />
+            <Control MinWidth="5" />
+            <RichTextLabel Name="RewardDescription" />
+        </BoxContainer>
+        <Collapsible Visible="False" Access="Public" Name="RewardSelection">
+            <CollapsibleHeading Title="{Loc 'spy-uplink-select-reward'}" />
+            <CollapsibleBody Margin="10 0 0 0">
+                <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
+                    <PanelContainer StyleClasses="PanelLight" Margin="5 0" SetWidth="1" />
+                    <controls:ListContainer
+                        Name="RewardsList"
+                        Toggle="True"
+                        MinSize="96 96"
+                        Group="True">
+                        <!-- populated by code -->
+                    </controls:ListContainer>
+                </BoxContainer>
+            </CollapsibleBody>
+        </Collapsible>
+    </BoxContainer>
+</Control>

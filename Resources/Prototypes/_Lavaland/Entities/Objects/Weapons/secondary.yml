@@ -6,6 +6,8 @@
   name: kinetic dagger
   description: A scaled down version of a proto-kinetic crusher. Uses kinetic energy to vibrate the blade at high speeds.
   components:
+  - type: WeaponClass
+    class: Mining
   - type: Sprite
     sprite: Objects/Weapons/Melee/crusher_dagger.rsi
     state: icon
@@ -48,7 +50,9 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
 
@@ -58,6 +62,8 @@
   name: kinetic claws
   description: Unleash your inner edgelord with this one-handed claw small enough to fit in your backpack.
   components:
+  - type: WeaponClass
+    class: Mining
   - type: Appearance
   - type: Sprite
     sprite: _Lavaland/Objects/Weapons/Secondary/kinetic_claws.rsi
@@ -84,7 +90,6 @@
     appliedModifier: 1.75
   - type: PressureEfficiency
     lowerBound: 0
-  - type: Sharp
   - type: Prying
   - type: UseDelay
     delay: 1
@@ -107,13 +112,14 @@
   name: kinetic machete
   description: A smaller, one-handed variant of the crusher which allows you to attack from afar and block incoming attacks.
   components:
+  - type: WeaponClass
+    class: Mining
   - type: Sprite
     sprite: _Lavaland/Objects/Weapons/Secondary/kinetic_machete.rsi
     state: icon
   - type: UseDelay
     delay: 1
   - type: Appearance
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
   - type: DisarmMalus

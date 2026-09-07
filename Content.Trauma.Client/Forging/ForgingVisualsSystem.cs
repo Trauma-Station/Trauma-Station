@@ -12,7 +12,6 @@ namespace Content.Trauma.Client.Forging;
 /// </summary>
 public sealed partial class ForgingVisualsSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IResourceCache _cache = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
@@ -29,7 +28,7 @@ public sealed partial class ForgingVisualsSystem : EntitySystem
     private void OnForgedStartup(Entity<ForgedItemComponent> ent, ref ComponentStartup args)
     {
         if (ent.Comp.Completed)
-            UpdateSprites(ent.Owner, _proto.Index(ent.Comp.Item));
+            UpdateSprites(ent.Owner, ProtoMan.Index(ent.Comp.Item));
     }
 
     private void OnSpriteForged(Entity<SpriteComponent> ent, ref ForgingCompletedEvent args)

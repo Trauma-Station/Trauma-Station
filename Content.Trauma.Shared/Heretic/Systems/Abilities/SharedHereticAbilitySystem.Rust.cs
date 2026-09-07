@@ -14,7 +14,7 @@ using Content.Shared.Physics;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
-using Content.Shared.Tag;
+using Content.Shared.Wall;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
@@ -30,37 +30,22 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
+    [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
+
     public static readonly ProtoId<ContentTileDefinition> RustTile = "PlatingRust";
-    public static readonly ProtoId<TagPrototype> Wall = "Wall";
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 
     private readonly HashSet<Entity<FixturesComponent>> _lookupFixtures = new();
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
+    // TODO: bruh make this a comp
     public static readonly Dictionary<EntProtoId, EntProtoId> Transformations = new()
     {
         { "WallSolid", "WallSolidRust" },
         { "WallReinforced", "WallReinforcedRust" },
     };
 
-    protected virtual void SubscribeRust()
-    {
-        SubscribeLocalEvent<EventHereticRustConstruction>(OnRustConstruction);
-        SubscribeLocalEvent<EventHereticAggressiveSpread>(OnAggressiveSpread);
-        SubscribeLocalEvent<EventHereticEntropicPlume>(OnEntropicPlume);
-
-        SubscribeLocalEvent<RustbringerComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<RustbringerComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
-        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
-        SubscribeLocalEvent<RustbringerComponent, SlipAttemptEvent>(OnSlipAttempt);
-        SubscribeLocalEvent<RustbringerComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
-        SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
-        SubscribeLocalEvent<RustbringerComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
-        SubscribeLocalEvent<RustbringerComponent, DamageModifyEvent>(OnModifyDamage);
-
-        SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
-    }
-
+    [SubscribeLocalEvent]
     private void OnModifyDamage(Entity<RustbringerComponent> ent, ref DamageModifyEvent args)
     {
         if (!IsOnRust(ent))
@@ -69,9 +54,10 @@ public abstract partial class SharedHereticAbilitySystem
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.ModifierSet);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<RustbringerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled || args.Type is HarmfulActionType.Disarm or HarmfulActionType.Grab)
+        if (args.Cancelled || args.Type is not (HarmfulActionType.Disarm or HarmfulActionType.Grab))
             return;
 
         if (!IsOnRust(ent))
@@ -80,6 +66,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnElectrocuteAttempt(Entity<RustbringerComponent> ent, ref ElectrocutionAttemptEvent args)
     {
         if (!IsTileRust(Transform(ent).Coordinates, out _))
@@ -88,6 +75,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnGetExplosionResists(Entity<RustbringerComponent> ent, ref GetExplosionResistanceEvent args)
     {
         if (!IsOnRust(ent))
@@ -96,22 +84,26 @@ public abstract partial class SharedHereticAbilitySystem
         args.DamageCoefficient *= 0f;
     }
 
+    [SubscribeLocalEvent]
     private void OnSlipAttempt(Entity<RustbringerComponent> ent, ref SlipAttemptEvent args)
     {
         args.NoSlip |= IsOnRust(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnKnockDownAttempt(EntityUid uid, RustbringerComponent comp, ref KnockDownAttemptEvent args)
     {
         args.Cancelled |= IsOnRust(uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStatusEffect(Entity<RustbringerComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
         if (args.Effect == StatusEffectStunned)
             args.Cancelled |= IsOnRust(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStaminaDamage(Entity<RustbringerComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         args.Cancelled |= IsOnRust(ent);
@@ -120,7 +112,7 @@ public abstract partial class SharedHereticAbilitySystem
     public bool IsTileRust(EntityCoordinates coords, [NotNullWhen(true)] out Vector2i? tileCoords)
     {
         tileCoords = null;
-        if (!_mapMan.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var mapGrid))
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var mapGrid))
             return false;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);
@@ -133,6 +125,7 @@ public abstract partial class SharedHereticAbilitySystem
     public bool IsOnRust(EntityUid uid)
         => IsTileRust(Transform(uid).Coordinates, out _);
 
+    [SubscribeLocalEvent]
     private void OnEntropicPlume(EventHereticEntropicPlume args)
     {
         var uid = args.Performer;
@@ -168,7 +161,7 @@ public abstract partial class SharedHereticAbilitySystem
         var circle = new Circle(mapPos.Position, radius);
         var grids = new List<Entity<MapGridComponent>>();
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(radius, radius));
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         var tiles = new List<(EntityCoordinates, TileRef, EntityUid, MapGridComponent)>();
         foreach (var grid in grids)
@@ -189,6 +182,7 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAggressiveSpread(EventHereticAggressiveSpread args)
     {
         if (!TryUseAbility(args))
@@ -211,7 +205,7 @@ public abstract partial class SharedHereticAbilitySystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         var tiles = new List<(EntityCoordinates, TileRef, EntityUid, MapGridComponent)>();
         foreach (var grid in grids)
@@ -252,7 +246,7 @@ public abstract partial class SharedHereticAbilitySystem
             return true;
 
         if (user != null)
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-rust-stage-low"), user.Value, user.Value);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-rust-stage-low"), user.Value, user.Value);
 
         return false;
     }
@@ -309,7 +303,7 @@ public abstract partial class SharedHereticAbilitySystem
                 PredictedSpawnAttachedTo(transformation, coords, rotation: rotation);
         }
 
-        if (TerminatingOrDeleted(targetEntity) || !_tag.HasTag(targetEntity, Wall))
+        if (TerminatingOrDeleted(targetEntity) || !_wallQuery.HasComp(targetEntity))
             return false;
 
         if (targetEntity == target && !canRust)
@@ -328,6 +322,7 @@ public abstract partial class SharedHereticAbilitySystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnRustConstruction(EventHereticRustConstruction args)
     {
         if (!TryUseAbility(args, false))
@@ -337,7 +332,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (!IsTileRust(args.Target, out var pos))
         {
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-not-rusted"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-not-rusted"), ent, ent);
             return;
         }
 
@@ -351,12 +346,13 @@ public abstract partial class SharedHereticAbilitySystem
             if (fix.Fixtures.All(x => (x.Value.CollisionLayer & (int) mask) == 0))
                 continue;
 
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-occupied"), ent, ent);
             return;
         }
 
         var mapCoords = _transform.ToMapCoordinates(args.Target);
 
+        _lookupMobs.Clear();
         Lookup.GetEntitiesInRange(args.Target, args.MobCheckRange, _lookupMobs, LookupFlags.Dynamic);
         foreach (var (entity, _) in _lookupMobs)
         {
@@ -381,6 +377,7 @@ public abstract partial class SharedHereticAbilitySystem
         _audio.PlayPredicted(args.Sound, args.Target, args.Performer);
     }
 
+    [SubscribeLocalEvent]
     private void OnRustCharge(EventHereticRustCharge args)
     {
         if (!args.Target.IsValid(EntityManager) || !TryUseAbility(args))
@@ -392,7 +389,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         if (!IsTileRust(xform.Coordinates, out _))
         {
-            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
             return;
         }
 

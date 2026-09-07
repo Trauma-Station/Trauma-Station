@@ -116,33 +116,53 @@ public abstract partial class SharedFultonSystem : EntitySystem
             if (!_foldable.IsFolded(args.Target.Value))
             {
                 component.Beacon = args.Target.Value;
+                component.HasBeacon = true; // Trauma
                 Audio.PlayPredicted(beacon.LinkSound, uid, args.User);
-                _popup.PopupClient(Loc.GetString("fulton-linked"), uid, args.User);
+                _popup.PopupEntity(Loc.GetString("fulton-linked"), uid, args.User);
             }
             else
             {
                 component.Beacon = EntityUid.Invalid;
-                _popup.PopupClient(Loc.GetString("fulton-folded"), uid, args.User);
+                component.HasBeacon = false; // Trauma
+                _popup.PopupEntity(Loc.GetString("fulton-folded"), uid, args.User);
             }
+            Dirty(uid, component); // Trauma - wtf is networking
 
             return;
         }
 
-        if (Deleted(component.Beacon))
-        {
-            _popup.PopupClient(Loc.GetString("fulton-not-found"), uid, args.User);
+        // <Trauma>
+        if (!component.AttachOnInteract)
             return;
+        // </Trauma>
+
+        if (Deleted(component.Beacon) || _foldable.IsFolded(component.Beacon.Value)) // Trauma - check if the beacon's folded
+        {
+            // <Trauma> - predict it properly with HasBeacon, very rarely will the beacon actually be deleted so mispredicting that once is fine
+            if (_net.IsServer || !component.HasBeacon)
+            {
+                if (component.HasBeacon)
+                {
+                    // no more mispredicts now
+                    component.HasBeacon = false;
+                    component.Beacon = null;
+                    Dirty(uid, component);
+                }
+                _popup.PopupEntity(Loc.GetString("fulton-not-found"), uid, args.User);
+                return;
+            }
+            // </Trauma>
         }
 
         if (!CanApplyFulton(args.Target.Value, component))
         {
-            _popup.PopupClient(Loc.GetString("fulton-invalid"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("fulton-invalid"), uid, uid);
             return;
         }
 
         if (HasComp<FultonedComponent>(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("fulton-fultoned"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("fulton-fultoned"), uid, uid);
             return;
         }
 
@@ -163,15 +183,16 @@ public abstract partial class SharedFultonSystem : EntitySystem
     {
         var newFulton = EnsureComp<FultonComponent>(args.NewId);
         newFulton.Beacon = component.Beacon;
+        newFulton.HasBeacon = component.HasBeacon; // Trauma
         Dirty(args.NewId, newFulton);
     }
 
-    protected virtual void UpdateAppearance(EntityUid uid, FultonedComponent fultoned)
+    public virtual void UpdateAppearance(EntityUid uid, FultonedComponent fultoned) // Trauma - made public
     {
         return;
     }
 
-    protected bool CanApplyFulton(EntityUid targetUid, FultonComponent component)
+    public bool CanApplyFulton(EntityUid targetUid, FultonComponent component) // Trauma - made public
     {
         if (!CanFulton(targetUid))
             return false;

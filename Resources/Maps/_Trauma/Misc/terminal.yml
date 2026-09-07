@@ -5642,7 +5642,6 @@ entities:
   - uid: 125
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -7.5,-19.5
       parent: 818
     - type: Godmode
@@ -5653,7 +5652,6 @@ entities:
   - uid: 126
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -7.5,-20.5
       parent: 818
     - type: Godmode
@@ -5664,7 +5662,6 @@ entities:
   - uid: 127
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -8.5,-20.5
       parent: 818
     - type: Godmode
@@ -5675,7 +5672,6 @@ entities:
   - uid: 128
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -8.5,-21.5
       parent: 818
     - type: Godmode
@@ -5686,7 +5682,6 @@ entities:
   - uid: 129
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -9.5,-21.5
       parent: 818
     - type: Godmode
@@ -5697,7 +5692,6 @@ entities:
   - uid: 130
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -11.5,-21.5
       parent: 818
     - type: Godmode
@@ -5708,7 +5702,6 @@ entities:
   - uid: 131
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -12.5,-21.5
       parent: 818
     - type: Godmode
@@ -5719,7 +5712,6 @@ entities:
   - uid: 132
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -12.5,-20.5
       parent: 818
     - type: Godmode
@@ -5730,7 +5722,6 @@ entities:
   - uid: 133
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -13.5,-20.5
       parent: 818
     - type: Godmode
@@ -5741,7 +5732,6 @@ entities:
   - uid: 134
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -13.5,-19.5
       parent: 818
     - type: Godmode
@@ -5832,7 +5822,6 @@ entities:
   - uid: 143
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -7.5,-8.5
       parent: 818
     - type: Godmode
@@ -5843,7 +5832,6 @@ entities:
   - uid: 144
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -7.5,-7.5
       parent: 818
     - type: Godmode
@@ -5854,7 +5842,6 @@ entities:
   - uid: 145
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -7.5,-6.5
       parent: 818
     - type: Godmode
@@ -5865,7 +5852,6 @@ entities:
   - uid: 147
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -13.5,-8.5
       parent: 818
     - type: Godmode
@@ -5876,7 +5862,6 @@ entities:
   - uid: 148
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -13.5,-7.5
       parent: 818
     - type: Godmode
@@ -5887,7 +5872,6 @@ entities:
   - uid: 149
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: -13.5,-6.5
       parent: 818
     - type: Godmode
@@ -5898,7 +5882,6 @@ entities:
   - uid: 151
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 12.5,-8.5
       parent: 818
     - type: Godmode
@@ -5909,7 +5892,6 @@ entities:
   - uid: 152
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 12.5,-7.5
       parent: 818
     - type: Godmode
@@ -5920,7 +5902,6 @@ entities:
   - uid: 153
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 12.5,-6.5
       parent: 818
     - type: Godmode
@@ -5931,7 +5912,6 @@ entities:
   - uid: 155
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,-8.5
       parent: 818
     - type: Godmode
@@ -5942,7 +5922,6 @@ entities:
   - uid: 156
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,-7.5
       parent: 818
     - type: Godmode
@@ -5953,7 +5932,6 @@ entities:
   - uid: 157
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,-6.5
       parent: 818
     - type: Godmode
@@ -5964,7 +5942,6 @@ entities:
   - uid: 167
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 12.5,-19.5
       parent: 818
     - type: Godmode
@@ -5975,7 +5952,6 @@ entities:
   - uid: 168
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 12.5,-20.5
       parent: 818
     - type: Godmode
@@ -5986,7 +5962,6 @@ entities:
   - uid: 169
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 11.5,-20.5
       parent: 818
     - type: Godmode
@@ -5997,7 +5972,6 @@ entities:
   - uid: 170
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 11.5,-21.5
       parent: 818
     - type: Godmode
@@ -6008,7 +5982,6 @@ entities:
   - uid: 171
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 10.5,-21.5
       parent: 818
     - type: Godmode
@@ -6019,7 +5992,6 @@ entities:
   - uid: 172
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 8.5,-21.5
       parent: 818
     - type: Godmode
@@ -6030,7 +6002,6 @@ entities:
   - uid: 173
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 7.5,-21.5
       parent: 818
     - type: Godmode
@@ -6041,7 +6012,6 @@ entities:
   - uid: 174
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 7.5,-20.5
       parent: 818
     - type: Godmode
@@ -6052,7 +6022,6 @@ entities:
   - uid: 175
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,-20.5
       parent: 818
     - type: Godmode
@@ -6063,7 +6032,6 @@ entities:
   - uid: 176
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 6.5,-19.5
       parent: 818
     - type: Godmode

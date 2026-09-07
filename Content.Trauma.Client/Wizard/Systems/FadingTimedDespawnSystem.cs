@@ -42,7 +42,7 @@ public sealed partial class FadingTimedDespawnSystem : SharedFadingTimedDespawnS
 
         var animation = new Animation
         {
-            Length = TimeSpan.FromSeconds(comp.FadeOutTime),
+            Length = comp.FadeOutTime,
             AnimationTracks =
             {
                 new AnimationTrackComponentProperty
@@ -52,7 +52,7 @@ public sealed partial class FadingTimedDespawnSystem : SharedFadingTimedDespawnS
                     KeyFrames =
                     {
                         new AnimationTrackProperty.KeyFrame(sprite.Color, 0f),
-                        new AnimationTrackProperty.KeyFrame(sprite.Color.WithAlpha(0f), comp.FadeOutTime),
+                        new AnimationTrackProperty.KeyFrame(sprite.Color.WithAlpha(0f), (float) comp.FadeOutTime.TotalSeconds),
                     },
                 },
             },

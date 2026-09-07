@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: objectiveIssuer
+  id: Xenos
+  name: objective-issuer-xenomorph-hive
+
+- type: objectiveIssuer
+  id: Shadowling
+  name: objective-issuer-shadowling
+
+- type: objectiveIssuer
+  id: Vampire
+  name: objective-issuer-vampire
+
+- type: objectiveIssuer
+  id: CosmicCult
+  name: objective-issuer-cosmiccult
+
+- type: objectiveIssuer
+  id: Abductor
+  name: objective-issuer-abductors
+
+- type: objectiveIssuer
+  id: AbductorVictim
+  name: objective-issuer-voices
+
+- type: objectiveIssuer
+  id: Blob
+  name: objective-issuer-blob
+
+- type: objectiveIssuer
+  id: ChangelingSyndicate
+  name: objective-issuer-tiger
+
+- type: objectiveIssuer
+  id: DemonBubblegum
+  name: objective-issuer-slaughter-bubblegum
+
+- type: objectiveIssuer
+  id: DemonDevil
+  name: objective-issuer-slaughter-devil
+
+- type: objectiveIssuer
+  id: DemonFirst
+  name: objective-condition-kill-wizard-first
+
+- type: objectiveIssuer
+  id: DemonSatan
+  name: objective-issuer-slaughter-satan
+
+- type: objectiveIssuer
+  id: DemonSecond
+  name: objective-condition-kill-everyone-else
+
+- type: objectiveIssuer
+  id: Devil
+  name: objective-issuer-devil
+
+- type: objectiveIssuer
+  id: Heretic
+  name: objective-issuer-heretic
+
+- type: objectiveIssuer
+  id: Insurgents
+  name: objective-issuer-insurgents
+
+- type: objectiveIssuer
+  id: LordSinguloth
+  name: objective-issuer-lord-singuloth
+
+- type: objectiveIssuer
+  id: NanoTrasen
+  name: objective-issuer-nanotrasen
+
+- type: objectiveIssuer
+  id: Self # not to be cofused with SELF
+  name: objective-issuer-self
+
+- type: objectiveIssuer
+  id: Slasher
+  name: objective-issuer-slasher

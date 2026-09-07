@@ -19,21 +19,7 @@ public abstract partial class SharedPressureEfficiencyChangeSystem : EntitySyste
     [Dependency] private EntityQuery<PressureEfficiencyComponent> _query = default!;
     [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<PressureDamageChangeComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<PressureArmorChangeComponent, ExaminedEvent>(OnArmorExamined);
-
-        SubscribeLocalEvent<PressureDamageChangeComponent, GetMeleeDamageEvent>(OnGetDamage,
-            after: [ typeof(GunUpgradeSystem), typeof(SharedWieldableSystem) ]);
-        SubscribeLocalEvent<PressureDamageChangeComponent, ProjectileShotEvent>(OnProjectileShot,
-            after: [ typeof(GunUpgradeSystem) ]); // let this system reduce damage upgrades' added damage automatically
-        SubscribeLocalEvent<PressureArmorChangeComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnArmorRelayDamageModify,
-            before: [typeof(SharedArmorSystem)]);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<PressureDamageChangeComponent> ent, ref ExaminedEvent args)
     {
         var localeKey = "lavaland-examine-pressure-";
@@ -44,6 +30,7 @@ public abstract partial class SharedPressureEfficiencyChangeSystem : EntitySyste
             ref args);
     }
 
+    [SubscribeLocalEvent]
     private void OnArmorExamined(Entity<PressureArmorChangeComponent> ent, ref ExaminedEvent args)
     {
         var localeKey = "lavaland-examine-pressure-armor-";
@@ -59,7 +46,7 @@ public abstract partial class SharedPressureEfficiencyChangeSystem : EntitySyste
             return;
 
         localeKey += ent.Comp.ApplyWhenInRange ? "in-range-" : "out-range-";
-        localeKey += modifier > 1f ? "debuff" : "buff";
+        localeKey += modifier < 1f ? "debuff" : "buff";
 
         modifier = Math.Abs(modifier);
         var min = Math.Round(ent.Comp.LowerBound);
@@ -67,13 +54,16 @@ public abstract partial class SharedPressureEfficiencyChangeSystem : EntitySyste
         args.PushMarkup(Loc.GetString(localeKey, ("min", min), ("max", max), ("modifier", modifier)));
     }
 
+    [SubscribeLocalEvent(after: [typeof(GunUpgradeSystem), typeof(SharedWieldableSystem)])]
     private void OnGetDamage(Entity<PressureDamageChangeComponent> ent, ref GetMeleeDamageEvent args)
     {
         if (ent.Comp.ApplyToMelee && ApplyModifier(ent.Owner, args.User))
             args.Damage *= ent.Comp.AppliedModifier;
     }
 
-    private void OnProjectileShot(Entity<PressureDamageChangeComponent> ent, ref ProjectileShotEvent args)
+    // let this system reduce damage upgrades' added damage automatically
+    [SubscribeLocalEvent(after: [typeof(GunUpgradeSystem)])]
+    private void OnProjectileShot(Entity<PressureDamageChangeComponent> ent, ref GunShotProjectileEvent args)
     {
         if (!ApplyModifier(ent.Owner, args.User ?? ent)
             || !ent.Comp.ApplyToProjectiles
@@ -94,6 +84,7 @@ public abstract partial class SharedPressureEfficiencyChangeSystem : EntitySyste
         return ent.Comp.Enabled && (inRange == ent.Comp.ApplyWhenInRange);
     }
 
+    [SubscribeLocalEvent(before: [typeof(SharedArmorSystem)])]
     private void OnArmorRelayDamageModify(Entity<PressureArmorChangeComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {
         if (args.Args.TargetPart is not {} part ||

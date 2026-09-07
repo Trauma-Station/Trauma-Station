@@ -39,3 +39,13 @@
     deconstructionTarget: null
     graph: RevIED
     node: IED
+
+- type: entity
+  parent: GrenadeShrapnel
+  id: GrenadeShrapnelFoam
+  name: foam dart grenade
+  suffix: Shrapnel
+  description: Releases a bothersome spray of foam darts that cause severe welching.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Foam/foam_grenade.rsi

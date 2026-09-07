@@ -4,9 +4,12 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class MadnessMaskComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool IsActive = true;
+
     [DataField]
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(0.5);
 
@@ -24,4 +27,7 @@ public sealed partial class MadnessMaskComponent : Component
 
     [DataField]
     public float MaxFear = 5f;
+
+    [DataField]
+    public TimeSpan NonHereticToggleFlahsDuration = TimeSpan.FromSeconds(10);
 }

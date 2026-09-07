@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ OrganBaseInternal ]
+  parent: [ OrganBaseChildInternal ]
   id: OrganMouseEggSack
   name: mouse egg sack
   description: This organ is what lets mice asexually reproduce. Its tissues seem... alien, could this really be from nature?
@@ -14,11 +14,28 @@
     category: EggSack
   - type: ChildOrgan
     parents: [ Torso ]
+  - type: OrganActions
+    actions:
+    - MouseMultiply
   - type: OrganComponents
     onAdd:
-    - type: EggLayer
-      eggSpawn:
-      - id: MobMouse
-      hungerUsage: 20
-      eggLayAction: MouseMultiply
-      hungerRequired: true
+    - type: EntityProducerAction
+      insufficientSatiationPopup: action-popup-lay-egg-too-hungry
+      userPopup: action-popup-lay-egg-user
+      othersPopup: action-popup-lay-egg-others
+    - type: EntityProducer
+      table:
+        id: MobMouse
+    - type: SatiationProduction
+      delay: 60
+      delayMax: 120
+      satiationUsage: 20
+      minimumSatiation: 60
+      automaticForPlayers: false
+
+- type: entity
+  parent: OrganAnimalStomach
+  id: OrganAnimalStomachFast
+  components:
+  - type: Metabolizer
+    updateInterval: 0.1

@@ -232,12 +232,15 @@
   id: FillRadiationSuit
   table: !type:AllSelector
     children:
+    # <Trauma>
+    - id: RadiationBlockingProjector
+    - id: PillCanisterPotassiumIodide
+      prob: 0.75
+    # </Trauma>
     - id: ClothingOuterSuitRad
       amount: 2
     - id: GeigerCounter
       amount: 2
-    - id: PillCanisterPotassiumIodide
-      prob: 0.75
 
 - type: entity
   parent: LockerEvacRepair

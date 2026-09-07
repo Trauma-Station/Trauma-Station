@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: DefibrillatorSyndicate
+  id: DefibrillatorSyndicateUnpowered
+  suffix: Always Powered
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        startingItem: PowerCellMicroreactor
+        disableEject: true

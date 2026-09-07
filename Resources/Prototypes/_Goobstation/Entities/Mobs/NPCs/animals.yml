@@ -3,31 +3,16 @@
 - type: entity
   name: gondola
   parent:
-    - MobRespirator
-    - MobAtmosStandard
-    - BaseSimpleMob
-    - MobBloodstream
-    - MobFlammable
-    - BaseMobAnimal
+  - MobRespirator
+  - MobAtmosStandard
+  - BaseSimpleMob
+  - MobBloodstream
+  - MobFlammable
+  - BaseMobAnimal
+  - BaseSlicingRefinable
   id: MobGondola
   description: Having no hands he embodies the Taoist principle of wu-wei (non-action) while his smiling facial expression shows his utter and complete acceptance of the world as it is.
   components:
-  - type: Hunger
-    thresholds:
-      Overfed: 100
-      Okay: 50
-      Peckish: 25
-      Starving: 10
-      Dead: 0
-    baseDecayRate: 0.00925925925926
-  - type: Thirst
-    thresholds:
-      OverHydrated: 200
-      Okay: 150
-      Thirsty: 100
-      Parched: 50
-      Dead: 0
-    baseDecayRate: 0.04
   - type: StatusEffects
     allowed:
     - Stun
@@ -45,18 +30,18 @@
     baseSprintSpeed: 2
   - type: RandomSprite
     available:
-        - enum.DamageStateVisualLayers.Base:
-            gondola_body_long: GondolaBrowns
-            gondola_body_medium: GondolaBrowns
-          enum.DamageStateVisualLayers.BaseUnshaded:
-            gondola_moustache_large: ""
-            gondola_moustache_small: ""
-        - enum.DamageStateVisualLayers.Base:
-            gondola_body_medium: GondolaBrowns
-            gondola_body_short: GondolaBrowns
-          enum.DamageStateVisualLayers.BaseUnshaded:
-            gondola_moustache_large_short: ""
-            gondola_moustache_small_short: ""
+    - enum.DamageStateVisualLayers.Base:
+        gondola_body_long: GondolaBrowns
+        gondola_body_medium: GondolaBrowns
+      enum.DamageStateVisualLayers.BaseUnshaded:
+        gondola_moustache_large: ""
+        gondola_moustache_small: ""
+    - enum.DamageStateVisualLayers.Base:
+        gondola_body_medium: GondolaBrowns
+        gondola_body_short: GondolaBrowns
+      enum.DamageStateVisualLayers.BaseUnshaded:
+        gondola_moustache_large_short: ""
+        gondola_moustache_small_short: ""
   - type: Sprite
     sprite: _Goobstation/Mobs/Animals/gondola.rsi
     layers:
@@ -82,8 +67,8 @@
         Base: gondola_dead
       Dead:
         Base: gondola_dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatGondola
       amount: 3
   - type: Bloodstream
@@ -123,15 +108,11 @@
   - type: Perishable
 
 - type: entity
+  parent: [ MobMothroach, MobNightVision ]
+  id: MobMothSyndie
   name: syndiroach
-  id: MobMothSyndy
-  parent: MobMothroach
   description: Explosive moth.
   components:
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: Sprite
     sprite: _Goobstation/Mobs/Animals/syndiroach.rsi
   - type: Clothing
@@ -198,9 +179,9 @@
         3
 
 - type: entity
-  name: lootbug
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable ]
   id: MobLootbug
-  parent: SimpleSpaceMobBase
+  name: lootbug
   description: It eats metal, maybe it's eaten something of value?
   components:
   - type: Sprite
@@ -260,9 +241,9 @@
     tags:
     - Trash
     - VimPilot
-  - type: Butcherable
-    spawned:
-      - id: SpawnLootLootbug
+  - type: ToolRefinable
+    refineResult:
+    - id: SpawnLootLootbug
   - type: NpcFactionMember # they're pests, makes them the target of shiva and aves
     factions:
       - Mouse
@@ -293,10 +274,11 @@
   - type: MobPrice
     price: 500
 
+# TDOO: why does it not inherit from regular carp
 - type: entity
-  name: space carp
+  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobNightVision, BaseSlicingRefinable ]
   id: MobCarpSentient
-  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  name: space carp
   description: It's a space carp. Used to be a person.
   components:
   - type: InputMover
@@ -347,8 +329,8 @@
       Dead:
         Base: dead
         BaseUnshaded: dead_mouth
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: MaterialToothSpaceCarp1
@@ -364,6 +346,7 @@
       types:
         Blunt: 10
         Slash: 10
+        Structural: 10
   - type: TypingIndicator
     proto: alien
   - type: Tag
@@ -375,10 +358,6 @@
     interactFailureString: petting-failure-carp
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic # Is sentient, should have TauCeti since it's the norm.
@@ -537,7 +516,9 @@
         reagents:
         - ReagentId: Laughter
           Quantity: 150
-    - type: Clumsy
+    - type: PermanentStatusEffects
+      statusEffects:
+      - StatusEffectClumsyClown
     - type: NoSlip
     - type: Tag
       tags:
@@ -559,10 +540,7 @@
     emotes:
     - BrullbarHowl
   - type: Vocal
-    sounds:
-      Male: Brullbar
-      Female: Brullbar
-      Unsexed: Brullbar
+    emoteSounds: Brullbar
   - type: NpcFactionMember
     factions:
     - SimpleHostile
@@ -718,10 +696,19 @@
 
 - type: entity
   name: horse
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [ SimpleMobBase, StripableInventoryBase ]
   id: MobHorse
   description: Very foul creature. For those that feel like punching.
   components:
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    angle: 0
+    damage:
+      types:
+        Blunt: 10
   - type: MovementSpeedModifier
     baseSprintSpeed: 5.5
     baseWalkSpeed: 4.5 # default walking speed
@@ -801,10 +788,8 @@
   description: Little walking clown mask and shoes. You want to honk their nose!
   components:
   - type: WaddleAnimation
-  - type: Hunger
-    baseDecayRate: 0
-  - type: Thirst
-    baseDecayRate: 0
+  - type: Satiation
+    satiations: {}
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -826,7 +811,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Dead
+      100: Dead
   - type: Physics
   - type: HTN
     rootTask:
@@ -835,7 +820,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150
+        damage: 100
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -889,24 +874,15 @@
       collection: FootstepClown
   - type: CombatMode
   - type: MeleeWeapon
-    attackRate: 2
+    attackRate: 1.5
     damage:
       types:
         Blunt: 0.5
     soundHit:
       collection: BikeHorn
     animation: WeaponArcFist
-  - type: SolutionManager
-    solutions:
-    - SolutionClownSpider
-  - type: MeleeChemicalInjector
-    solution: melee
-    transferAmount: 2
   - type: Vocal
-    sounds:
-      Male: ClownGoblin
-      Female: ClownGoblin
-      Unsexed: ClownGoblin
+    emoteSounds: ClownGoblin
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic

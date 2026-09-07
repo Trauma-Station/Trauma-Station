@@ -6,9 +6,16 @@
   antagonist: true
   objective: roles-antag-slaughter-demon-objective
 
+- type: antag
+  id: LaughterDemon
+  name: ghost-role-information-laughter-demon-name
+  antagonist: true
+  objective: ghost-role-information-laughter-demon-description
+
 - type: antagSpecifier
   id: SlaughterDemon
   spawnerPrototype: SpawnPointGhostSlaughterDemon
+  allowNonHumans: true
   briefing:
     text: slaughter-role-greeting
     color: Red
@@ -32,6 +39,7 @@
 - type: antagSpecifier
   id: LaughterDemon
   spawnerPrototype: SpawnPointGhostLaughterDemon
+  allowNonHumans: true
   briefing:
     text: laughter-role-greeting
     color: Pink
@@ -43,3 +51,21 @@
     - NamesSlaughter
     nameFormat: name-format-slaughter
   mindRoles: [ MindRoleSlaughterDemon ]
+
+- type: antagSmite
+  id: SlaughterDemon
+  antag: SlaughterDemon
+  rule: SlaughterDemonRule
+  ruleComp: SlaughterDemonRule
+  icon:
+    sprite: _Goobstation/SlaughterDemon/demon.rsi
+    state: daemon
+
+- type: antagSmite
+  id: LaughterDemon
+  antag: LaughterDemon
+  rule: LaughterDemonRule
+  ruleComp: LaughterDemonRule
+  icon:
+    sprite: _Goobstation/SlaughterDemon/demon.rsi
+    state: bowmon

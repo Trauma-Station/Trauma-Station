@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Effects;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Magic;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
@@ -18,8 +16,8 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
-using Content.Shared.Traits.Assorted;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Effects;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -38,7 +36,6 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private SparksSystem _spark = default!;
     [Dependency] private SharedElectrocutionSystem _electrocution = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
@@ -49,10 +46,11 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
+    [Dependency] private SparksSystem _sparks = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private EntityQuery<WizardTrapComponent> _trapQuery = default!;
 
     public override void Initialize()
@@ -94,7 +92,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         bool IsTileValid((EntityCoordinates, TileRef) data)
         {
@@ -186,7 +184,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
 
         if (!comp.Silent)
         {
-            _popup.PopupClient(Loc.GetString("trap-triggered-message", ("trap", uid)),
+            _popup.PopupEntity(Loc.GetString("trap-triggered-message", ("trap", uid)),
                 args.OtherEntity,
                 PopupType.LargeCaution);
         }
@@ -205,7 +203,8 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
 
         if (comp.Sparks)
         {
-            _spark.DoSparks(Transform(uid).Coordinates,
+            _sparks.DoSparks(uid,
+                user: args.OtherEntity, // this is the only entity that is allowed to predict this
                 comp.MinSparks,
                 comp.MaxSparks,
                 comp.MinVelocity,
@@ -263,16 +262,13 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
         if (!_transform.InRange(uid, args.Examiner, comp.ExamineRange))
             return;
 
-        _popup.PopupClient(Loc.GetString("trap-revealed-message", ("trap", uid)), args.Examiner, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("trap-revealed-message", ("trap", uid)), args.Examiner, PopupType.Medium);
         if (_net.IsServer)
             _popup.PopupEntity(Loc.GetString("trap-flare-message", ("trap", uid)), uid, PopupType.MediumCaution);
 
         Appearance.SetData(uid, TrapVisuals.Alpha, 0.8f);
 
-        var fading = EnsureComp<FadingTimedDespawnComponent>(uid);
-        fading.Lifetime = 0.5f;
-        fading.FadeOutTime = 1f;
-        Dirty(uid, fading);
+        _fadeDespawn.FadeDespawnEntity(uid, TimeSpan.FromSeconds(0.5f), TimeSpan.FromSeconds(1f));
     }
 
     private void OnExamineAttempt(Entity<WizardTrapComponent> ent, ref ExamineAttemptEvent args)

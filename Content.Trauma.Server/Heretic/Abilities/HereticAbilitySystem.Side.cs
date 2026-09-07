@@ -6,7 +6,7 @@ using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
@@ -21,24 +21,13 @@ public sealed partial class HereticAbilitySystem
     private readonly List<EntityUid> _bloodStealTargets = new();
     private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
 
-    protected override void SubscribeSide()
-    {
-        base.SubscribeSide();
-
-        SubscribeLocalEvent<EventHereticCleave>(OnCleave);
-        SubscribeLocalEvent<EventHereticSpacePhase>(OnSpacePhase);
-        SubscribeLocalEvent<EventMirrorJaunt>(OnMirrorJaunt);
-
-        SubscribeLocalEvent<HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
-        SubscribeLocalEvent<HereticComponent, HereticRemoveActionEvent>(OnRemoveAction);
-        SubscribeLocalEvent<HereticComponent, HereticAddMindComponentsEvent>(OnAddMindComponents);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAddMindComponents(Entity<HereticComponent> ent, ref HereticAddMindComponentsEvent args)
     {
         EntityManager.AddComponents(ent, args.AddedComponents);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoveAction(Entity<HereticComponent> ent, ref HereticRemoveActionEvent args)
     {
         if (!_actions.TryGetActionById(ent.Owner, args.Action, out var act))
@@ -47,6 +36,7 @@ public sealed partial class HereticAbilitySystem
         _actionContainer.RemoveAction(act.Value.AsNullable());
     }
 
+    [SubscribeLocalEvent]
     private void OnGraspUpgrade(Entity<HereticComponent> ent, ref HereticGraspUpgradeEvent args)
     {
         if (!_actions.TryGetActionById(ent.Owner, args.GraspAction, out var grasp))
@@ -59,10 +49,12 @@ public sealed partial class HereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMirrorJaunt(EventMirrorJaunt args)
     {
         var uid = args.Performer;
         var coords = Transform(uid).Coordinates;
+        _mirrors.Clear();
         Lookup.GetEntitiesInRange(coords, args.LookupRange, _mirrors);
         if (_mirrors.Count == 0)
         {
@@ -73,6 +65,7 @@ public sealed partial class HereticAbilitySystem
         TryPerformJaunt(uid, args, args.Polymorph);
     }
 
+    [SubscribeLocalEvent]
     private void OnSpacePhase(EventHereticSpacePhase args)
     {
         var uid = args.Performer;
@@ -80,7 +73,7 @@ public sealed partial class HereticAbilitySystem
         var xform = Transform(uid);
         var mapCoords = _transform.GetMapCoordinates(uid, xform);
 
-        if (_mapMan.TryFindGridAt(mapCoords, out var gridUid, out var mapGrid) &&
+        if (_map.TryFindGridAt(mapCoords, out var gridUid, out var mapGrid) &&
             _map.TryGetTileRef(gridUid, mapGrid, xform.Coordinates, out var tile) &&
             (!_weather.CanWeatherAffect((gridUid, mapGrid), tile) ||
              _atmos.GetTileMixture(gridUid, xform.MapUid, tile.GridIndices)?.Pressure is
@@ -100,14 +93,29 @@ public sealed partial class HereticAbilitySystem
         BaseActionEvent args,
         ProtoId<PolymorphPrototype> polymorph)
     {
+        var ourId = Prototype(args.Action)?.ID;
         if (TryComp(uid, out PolymorphedEntityComponent? morphed) && HasComp<SpectralComponent>(uid))
-            _poly.Revert((uid, morphed));
+        {
+            if (_poly.Revert((uid, morphed)) is not { } reverted)
+                return false;
+
+            if (ourId is not { } id1)
+                return true;
+
+            // Reset jaunt cooldown
+            foreach (var action in _actions.GetActions(reverted))
+            {
+                if (Prototype(action)?.ID is { } id2 && id2 == id1)
+                    _actions.StartUseDelay(action.AsNullable());
+            }
+        }
         else if (!TryUseAbility(args) || _poly.PolymorphEntity(uid, polymorph) == null)
             return false;
 
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnCleave(EventHereticCleave args)
     {
         if (!TryUseAbility(args))
@@ -115,17 +123,18 @@ public sealed partial class HereticAbilitySystem
 
         args.Handled = true;
 
-        if (!args.Target.IsValid(EntityManager))
+        if (!args.Target.IsValid())
             return;
 
-        Spawn(args.Effect, args.Target);
+        var coords = Transform(args.Target).Coordinates;
+        Spawn(args.Effect, coords);
 
         var hasTargets = false;
 
         TryComp(args.Performer, out DamageableComponent? damageable);
 
         _bloodStealTargets.Clear();
-        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, args.Target))
+        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, coords))
         {
             if (target == args.Performer)
                 continue;

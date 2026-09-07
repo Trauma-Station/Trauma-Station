@@ -38,21 +38,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
     [Dependency] private EntityQuery<CounterAttackerComponent> _counterAttackerQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CounterAttackerComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
-
-        Subs.SubscribeWithRelay<SheathCounterattackComponent, GetCounterAttackSheathEvent>(OnGetSheath,
-            baseEvent: false,
-            held: false);
-
-        SubscribeLocalEvent<CombatModeComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
-
-        SubscribeLocalEvent<CounterAttackingStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<CounterAttackingStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
         // Don't apply blocker status effect if this effect has ended early
@@ -67,11 +53,13 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
             TimeSpan.FromMilliseconds(1));
     }
 
-    private void OnGetSheath(Entity<SheathCounterattackComponent> ent, ref GetCounterAttackSheathEvent args)
+    [SubscribeLocalEvent]
+    private void OnGetSheath(Entity<SheathCounterattackComponent> ent, ref InventoryRelayedEvent<GetCounterAttackSheathEvent> args)
     {
-        args.Sheath ??= ent;
+        args.Args.Sheath ??= ent;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetAltVerbs(Entity<CombatModeComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
@@ -90,9 +78,6 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
             Priority = 10,
             Act = () =>
             {
-                if (!CanCounterAttack(user)) // check again
-                    return;
-
                 if (GetSheathAndWeapon(user) is not { } tuple)
                     return;
 
@@ -100,7 +85,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
                 if (!sheath.Comp.CanCounterNpc && HasComp<ActiveNPCComponent>(ent))
                 {
-                    _popup.PopupClient(Loc.GetString("counter-attack-fail-npc-message"), user, user);
+                    _popup.PopupEntity(Loc.GetString("counter-attack-fail-npc-message"), user, user);
                     return;
                 }
 
@@ -120,7 +105,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
                 var userIdentity = Identity.Entity(user, EntityManager);
                 var targetIdentity = Identity.Entity(ent.Owner, EntityManager, user);
 
-                _popup.PopupPredicted(Loc.GetString("counter-attack-self-message",
+                _popup.PopupEntity(Loc.GetString("counter-attack-self-message",
                         ("target", targetIdentity)),
                     Loc.GetString("counter-attack-others-message",
                         ("user", userIdentity),
@@ -142,13 +127,14 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
     {
         var ev = new GetCounterAttackSheathEvent();
         RaiseLocalEvent(user, ref ev);
-        if (ev.Sheath is not { } sheath || _slots.GetItemOrNull(sheath, sheath.Comp.SlotId) is not { } weapon ||
+        if (ev.Sheath is not { } sheath || _slots.GetItemOrNull(sheath.Owner, sheath.Comp.SlotId) is not { } weapon ||
             !TryComp(weapon, out MeleeWeaponComponent? melee) || melee.NextAttack >= _timing.CurTime)
             return null;
 
         return (sheath, (weapon, melee));
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<CounterAttackerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         // This isn't predicted because it calls _riposte.CounterAttack which calls
@@ -174,8 +160,8 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
         if (sheath != comp.ActiveSheath || weapon != comp.ActiveWeapon)
             return;
 
-        if (!_slots.TryGetSlot(sheath, sheath.Comp.SlotId, out var slot) ||
-            !_slots.TryEjectToHands(sheath, slot, ent, doAfter: false))
+        if (!_slots.TryGetSlot(sheath.Owner, sheath.Comp.SlotId, out var slot) ||
+            !_slots.TryEjectToHands(sheath.Owner, slot, ent, doAfter: false))
             return;
 
         weapon.Comp.NextAttack = TimeSpan.Zero;

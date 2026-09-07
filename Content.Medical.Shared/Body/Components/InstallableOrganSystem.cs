@@ -11,7 +11,6 @@ namespace Content.Medical.Shared.Body;
 public sealed partial class InstallableOrganSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
@@ -42,7 +41,7 @@ public sealed partial class InstallableOrganSystem : EntitySystem
 
         if (_body.GetOrgan(user, category) != null)
         {
-            _popup.PopupClient($"You already have a {_proto.Index(category).Name}!",
+            _popup.PopupEntity($"You already have a {ProtoMan.Index(category).Name}!",
                 user, user, PopupType.SmallCaution);
             return;
         }
@@ -67,7 +66,7 @@ public sealed partial class InstallableOrganSystem : EntitySystem
         if (args.Cancelled || !_body.InsertOrgan(user, ent.Owner))
             return;
 
-        _popup.PopupClient($"You inserted the {Name(ent)} into your body.",
+        _popup.PopupEntity($"You inserted the {Name(ent)} into your body.",
             user, user, PopupType.Medium);
     }
 }

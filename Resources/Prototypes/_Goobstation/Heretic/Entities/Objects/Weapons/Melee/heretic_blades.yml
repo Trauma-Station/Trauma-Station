@@ -1,15 +1,92 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Evil yaml
+# Basically, we throw the blade - it checks if we are heretic and wearing sharp medal item,
+# in this case it toggles boomerang and damage on throw and makes next trigger deactivate it (either on hand equip or land)
+# Can't just rely on 1 trigger otherwise the behavior may desync (and it will remove boomerang on throw instead of adding it!)
+# So overwrite values of "ItemToggleOnTrigger" on each trigger
+# I wish I could just have 2 different "EntityEffectOnTrigger" comps, 1 for user and 1 for blade...
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
-  id: HereticBladeBaseNoTeleport
   abstract: true
+  id: SharpMedalHereticBladeEffect
+  components:
+  - type: TriggerOnThrown
+    keyOut: activate
+  - type: TriggerOnMeleeHit
+    keyOut: activate
+  - type: TriggerOnGotEquippedHand
+    keyOut: deactivate
+  - type: GenericTriggerCondition
+    keys: [activate]
+    checkUser: true
+    condition: !type:AllConditions
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Ghoul
+          - Heretic
+      - !type:InventoryAnyNestedCondition
+        condition: !type:WhitelistCondition
+          whitelist:
+            tags:
+            - SharpMedal
+  - type: EntityEffectOnTrigger
+    keysIn: [activate]
+    targetUser: true
+    effects:
+    - !type:SetThrowCooldown
+      cooldown: 0.9
+  - type: ItemToggleOnTrigger
+    keysIn: [activate]
+    canDeactivate: false
+    showPopup: false
+  - type: ItemToggle
+    onActivate: false
+    onUse: false
+    wieldToggle: false
+  - type: ComponentToggler
+    components:
+    - type: Boomerang
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Slash: 20
+        armorPenetration: 0.3
+        woundSeverityMultipliers:
+          Slash: 1.5
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+      forceSound: true
+    - type: ItemToggleOnTrigger
+      keysIn: [deactivate]
+      canActivate: false
+      showPopup: false
+    deactivateComponents:
+    - type: ItemToggleOnTrigger
+      keysIn: [activate]
+      canDeactivate: false
+      showPopup: false
+
+- type: entity
+  abstract: true
+  parent: [SharpMedalHereticBladeEffect, BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
+  id: HereticBladeBaseNoTeleport
   name: eldritch blade
   description: A sickly green crescent blade, decorated with an ornamental eye. You feel like you're being watched...
   components:
+  - type: WeaponClass
+    class: Knife # not a knife but uses short blade knowledge
+  - type: LandAtCursor
   - type: UnholyItem
   - type: HereticBlade
-  - type: Sharp
+  - type: SurgeryTool
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/eldritch_blade.rsi
     state: icon
@@ -87,7 +164,7 @@
   components:
   - type: HereticBlade
     bonusEvent: !type:BladeBladeBonusEvent
-      bonusDamage:
+      extraDamage:
         types:
           Structural: 10
     path: Blade
@@ -120,13 +197,11 @@
           False: { state: icon }
           True: { state: infused }
 
-# Ghoul blade (cannot teleport)
 - type: entity
+  abstract: true
   parent: HereticBladeBaseNoTeleport
-  id: HereticBladeFleshGhoul
-  name: ghoul blade
+  id: HereticBladeFleshBase
   description: A crescent blade born from a fleshwarped creature. Keenly aware, it seeks to spread to others the suffering it has endured from its dreadful origins.
-  suffix: Flesh ghoul
   components:
   - type: HereticBlade
     effects:
@@ -141,8 +216,21 @@
   - type: Item
     sprite: _Goobstation/Heretic/Blades/blade_flesh-inhand.rsi
 
+# Ghoul blade (cannot teleport, lower damage)
 - type: entity
-  parent: [HereticBladeFleshGhoul, BaseRandomTeleportBlade]
+  parent: HereticBladeFleshBase
+  id: HereticBladeFleshGhoul
+  name: ghoul blade
+  description: A crescent blade born from a fleshwarped creature. Keenly aware, it seeks to spread to others the suffering it has endured from its dreadful origins.
+  suffix: Flesh ghoul
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 15
+
+- type: entity
+  parent: [HereticBladeFleshBase, BaseRandomTeleportBlade]
   id: HereticBladeFlesh
   name: bloody blade
   suffix: Flesh
@@ -196,7 +284,7 @@
   components:
   - type: HereticBlade
     bonusEvent: !type:HereticBladeBonusDamageEvent
-      bonusDamage:
+      extraDamage:
         types:
           Poison: 8
     effects:
@@ -238,7 +326,7 @@
   components:
   - type: HereticBlade
     bonusEvent: !type:CosmosBladeBonusEvent
-      bonusDamage:
+      extraDamage:
         types:
           Heat: 5
     effects:

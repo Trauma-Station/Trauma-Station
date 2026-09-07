@@ -136,14 +136,9 @@
   components:
   - type: Mutation
     instability: -40
-  - type: ComponentMutation
-    added:
-    - type: Clumsy
-      gunShootFailDamage:
-        types: # literally just copied semi random values a chud picked
-          Blunt: 5
-          Piercing: 4
-          Heat: 3
+  - type: StatusEffectsMutation
+    statusEffects:
+    - StatusEffectClumsyMutation
 
 - type: entity
   parent: [ BaseFreeMutation, BaseTriggerMutation ]
@@ -223,7 +218,8 @@
     conflicts:
     - MutationAntiGlow
   - type: RandomPointLight
-    energy: 0.5, 2.0
+    minEnergy: 0.5
+    maxEnergy: 2.0
 
 - type: entity
   parent: BaseLightMutation

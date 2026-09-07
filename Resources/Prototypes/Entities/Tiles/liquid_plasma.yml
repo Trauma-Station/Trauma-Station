@@ -7,6 +7,15 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: PlasmaFishingLootTable
+    fishDefaultTimer: 20.0
+    fishTimerVariety: 15.0
+  - type: CosmicCorruptible
+    convertTo: FloorCosmicDecay
+  # </Trauma>
   - type: TileEmission
     color: "#974988"
   - type: StepTrigger
@@ -24,13 +33,6 @@
       multiplier: 3.75
       multiplierOnExisting: 0.75
     - !type:Ignite
-  # Goobstation - fishing
-  - type: FishingSpot
-    fishList: !type:NestedSelector
-      tableId: PlasmaFishingLootTable
-    fishDefaultTimer: 20.0
-    fishTimerVariety: 15.0
-  # Goobstation - fishing
   - type: Transform
     anchored: true
   - type: SyncSprite
@@ -76,5 +78,3 @@
   - type: Tag
     tags:
     - HideContextMenu
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: FloorCosmicDecay

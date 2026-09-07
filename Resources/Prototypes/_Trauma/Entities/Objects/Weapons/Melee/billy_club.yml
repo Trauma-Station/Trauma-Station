@@ -6,6 +6,8 @@
   name: billy club
   description: A lightweight wooden baton for incapacitating people with. Delivers less-than-lethal force for incapacitation.
   components:
+  - type: WeaponClass
+    class: NonLethal
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/billy_club.rsi
     state: icon

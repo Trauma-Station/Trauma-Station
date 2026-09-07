@@ -145,7 +145,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         if (!TryComp<StrapComponent>(padFound, out var strap) || strap.BuckledEntities.Count == 0)
         {
-            _popup.PopupEntity(Loc.GetString("abductor-send-pad-not-buckled"), user, user);
+            _popup.PopupEntity("Nobody is on the pad!", user, user);
             ev.Handled = true;
             return;
         }

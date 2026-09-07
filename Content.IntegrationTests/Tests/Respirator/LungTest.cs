@@ -23,6 +23,10 @@ public sealed class LungTest : GameTest
   name: HumanLungDummy
   id: HumanLungDummy
   components:
+  # <Trauma> - for woundable visuals
+  - type: Sprite
+    layers: []
+  # </Trauma>
   - type: SolutionContainerManager
   - type: Body
   - type: EntityTableContainerFill
@@ -133,7 +137,6 @@ public sealed class LungTest : GameTest
         var pair = Pair;
         var server = pair.Server;
 
-        var mapManager = server.ResolveDependency<IMapManager>();
         var entityManager = server.ResolveDependency<IEntityManager>();
         var cfg = server.ResolveDependency<IConfigurationManager>();
         var mapLoader = entityManager.System<MapLoaderSystem>();

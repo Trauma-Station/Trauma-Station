@@ -2,6 +2,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.ActionBlocker;
 using Robust.Shared.CPUJob.JobQueues;
@@ -12,19 +13,17 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed class BlobObserverMover : Job<object>
 {
-    public BlobObserverMover(EntityManager entityManager, ActionBlockerSystem blockerSystem, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, CancellationToken cancellation = default) : base(maxTime, cancellation)
+    public BlobObserverMover(EntityManager entityManager, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, CancellationToken cancellation = default) : base(maxTime, cancellation)
     {
         _observerSystem = observerSystem;
         _transform = transform;
-        //_blocker = blockerSystem;
         _entityManager = entityManager;
     }
 
-    public BlobObserverMover(EntityManager entityManager, ActionBlockerSystem blockerSystem, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, IStopwatch stopwatch, CancellationToken cancellation = default) : base(maxTime, stopwatch, cancellation)
+    public BlobObserverMover(EntityManager entityManager, SharedTransformSystem transform, BlobObserverSystem observerSystem, double maxTime, IStopwatch stopwatch, CancellationToken cancellation = default) : base(maxTime, stopwatch, cancellation)
     {
         _observerSystem = observerSystem;
         _transform = transform;
-        //_blocker = blockerSystem;
         _entityManager = entityManager;
     }
     public EntityCoordinates NewPosition;
@@ -67,9 +66,6 @@ public sealed class BlobObserverMover : Job<object>
 
             if (nearestDistance > 3f)
             {
-                /*Observer.Comp.CanMove = false;
-                _blocker.UpdateCanMove(Observer);*/
-
                 var nearestEntityPos = _transform.GetMapCoordinates(nearestEntityUid.Value);
 
                 var direction = (nearestEntityPos.Position - newPos.Position);
@@ -78,12 +74,6 @@ public sealed class BlobObserverMover : Job<object>
                 _transform.SetMapCoordinates(Observer, newPosition);
                 return default;
             }
-
-            /*if (!Observer.Comp.CanMove)
-            {
-                Observer.Comp.CanMove = true;
-                _blocker.UpdateCanMove(Observer);
-            }*/
 
             return default;
         }

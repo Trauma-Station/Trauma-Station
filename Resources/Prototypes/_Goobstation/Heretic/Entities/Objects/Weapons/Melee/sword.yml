@@ -6,6 +6,8 @@
   parent: [ KnifeDurabilitySharpenOnly, BaseSword, BaseMagicalContraband ]
   id: RaggedSword
   components:
+  - type: WeaponClass
+    class: Sword
   - type: UnholyItem
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/sword.rsi
@@ -26,7 +28,6 @@
     range: 2
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Sharp
   - type: Clothing
     quickEquip: false
     sprite: _Goobstation/Heretic/Entities/sword.rsi

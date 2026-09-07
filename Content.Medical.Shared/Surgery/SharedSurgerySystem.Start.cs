@@ -32,12 +32,11 @@ public abstract partial class SharedSurgerySystem
 
         if (_noSelfOperate && user == target)
         {
-            _popup.PopupClient(Loc.GetString("surgery-error-self-surgery"), user, user);
+            _popup.PopupEntity(Loc.GetString("surgery-error-self-surgery"), user, user);
             return;
         }
 
         _ui.OpenUi(target, SurgeryUIKey.Key, user);
-        RefreshUI(target);
     }
 
     private void OnUtilityVerb(Entity<SurgeryToolComponent> ent, ref GetVerbsEvent<UtilityVerb> args)

@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: fermid
-  id: MobFermidBase
-  parent: [ SimpleSpaceMobBase, MobCombat, AppearanceSpaceAnimal ]
   abstract: true
+  parent: [ AppearanceSpaceAnimal, SimpleSpaceMobBase, BaseSlicingRefinable, MobNightVision ]
+  id: MobFermidBase
+  name: fermid
   description: Extremely hostile asteroid-dwelling bugs. Best to avoid them wherever possible.
   components:
   - type: VentCrawler
@@ -30,8 +30,8 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSpider
       amount: 2
   - type: Bloodstream
@@ -78,10 +78,6 @@
     allowedEmotes: ['Click', 'Chitter']
   - type: TypingIndicator
     proto: spider
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: Fauna
 
 - type: entity
@@ -187,68 +183,3 @@
     damage:
       types:
         Poison: 12
-
-# Waiting on mob growth component from xenobio. Also needs sprites for moving north and south.
-#- type: entity
-#  name: fermid larva
-#  id: MobFermidLarva
-#  parent: MobFermidBase
-#  description: Don't be fooled by its size. It will eat you all the same.
-#  components:
-#  - type: Sprite
-#    drawdepth: Mobs
-#    sprite: /Textures/_Goobstation/Mobs/Animals/Fermids/fermid.rsi
-#   layers:
-#    - map: ["enum.DamageStateVisualLayers.Base"]
-#      state: fermid_larva_idle
-#  - type: MobThresholds
-#    thresholds:
-#      0: Alive
-#      10: Dead
-#  - type: SpriteMovement
-#    movementLayers:
-#      movement:
-#        state: fermid_larva
-#    noMovementLayers:
-#      movement:
-#        state: fermid_larva_idle
-#  - type: DamageStateVisuals
-#    states:
-#      Alive:
-#        Base: fermid_larva
-#      Dead:
-#        Base: fermid_larva_dead
-#  - type: MovementSpeedModifier
-#    baseWalkSpeed : 3
-#    baseSprintSpeed : 4
-#  - type: MeleeWeapon
-#    soundHit:
-#      path: /Audio/Effects/bite.ogg
-#    angle: 0
-#    animation: WeaponArcBite
-#    damage:
-#      types:
-#        Piercing: 1
-#        Poison: 1
-#  - type: Hunger
-#    startingHunger: 300
-#    thresholds:
-#      Overfed: 300
-#      Okay: 200
-#      Peckish: 100
-#      Starving: 25
-#     Dead: 0
-#    baseDecayRate: 0.04
-#  - type: Edible
-#  - type: HTN
-#    rootTask:
-#      task: MouseCompound
-#  - type: Thirst
-#    startingThirst: 25
-#    thresholds:
-#      OverHydrated: 35
-#      Okay: 25
-#      Thirsty: 15
-#      Parched: 10
-#      Dead: 0
-#    baseDecayRate: 0.04

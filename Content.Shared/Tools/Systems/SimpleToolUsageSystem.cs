@@ -66,12 +66,15 @@ public sealed partial class SimpleToolUsageSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, ent.Comp.DoAfter, new SimpleToolDoAfterEvent(), ent, tool)
+        var quality = Loc.GetString(ProtoMan.Index(ent.Comp.Quality).Name).ToLower();
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, ent.Comp.DoAfter, new SimpleToolDoAfterEvent(), ent, target: ent, used: tool) // Trauma - set correct target and used
         {
             BreakOnDamage = true,
             BreakOnDropItem = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
+            NeedHand = true,
+            ExamineText = Loc.GetString("tool-component-target-doafter-examine", ("user", user), ("quality", quality), ("target", ent)),
         };
 
         _doAfterSystem.TryStartDoAfter(doAfterArgs);

@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: shader
+  id: Scan
+  kind: source
+  path: "/Textures/_Trauma/Shaders/scan.swsl"
+  params:
+    scanDensity: 100.0
+    scanAlpha: 0.5
+    scanColor: 1.0, 0.1, 0.1

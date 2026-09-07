@@ -31,11 +31,12 @@
   name: Create Snow
   description: Concentrates cryokinetic forces to create snow, useful for snow-like construction.
   components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/frozen.rsi
+    layers:
+    - state: cone
   - type: Action
     itemIconStyle: BigAction
-    icon:
-      sprite: Objects/Consumable/Food/frozen.rsi
-      state: cone
   - type: ConjureAction
     spawn: FoodFrozenSnowcone # TODO: if anyone ever makes a snow item, spawn that instead
 
@@ -45,11 +46,12 @@
   name: Cryobeam
   description: This power fires a frozen bolt at a target.
   components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: icebeam
   - type: Action
     useDelay: 16
-    icon:
-      sprite: _Trauma/Actions/mutations.rsi
-      state: icebeam
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: BulletTemperatureCryo

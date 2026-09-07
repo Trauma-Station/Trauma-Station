@@ -55,7 +55,7 @@
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Void Conduit</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a void conduit that periodically pulses; breaking airlocks and windows, applying void chill to heathens, and granting heretics immunity to low pressures.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a void conduit that periodically pulses; breaking airlocks and windows, applying void chill to heathens, and granting heretics immunity to low pressures. Has a maximum of 1 charge, rechargeable by breaking heretic blade.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Waltz at the End of Time</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three corpses in a cold atmosphere</Box></ColorBox>

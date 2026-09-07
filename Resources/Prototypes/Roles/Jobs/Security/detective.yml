@@ -24,7 +24,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipDetective
+    - SkillChipCombatEducation
+    - SkillChipPistol
+    - SkillChipBludgeon
   - !type:AddComponentSpecial
     components:
     - type: SecurityStaff

@@ -16,7 +16,7 @@
         weight: 0.5 # Basically same as DuoAbductors anyway
       - id: DuoAbductorSpawn
         weight: 0.5
-      - id: MorphRule
+      - id: MorphMidroundRule
       - id: WraithMidround
       - id: ColossusSpawn
       - id: DragonSpawn

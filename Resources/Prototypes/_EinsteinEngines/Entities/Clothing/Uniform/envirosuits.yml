@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuit
-  name: plasma envirosuit
-  description: A special containment suit that allows plasma-based lifeforms to exist safely in an oxygenated environment.
+  name: phoron envirosuit
+  description: A special containment suit that allows phoron-based lifeforms to exist safely in an oxygenated environment.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/plain.rsi
@@ -186,7 +186,7 @@
   parent: ClothingUniformEnvirosuitBase
   id: ClothingUniformEnvirosuitMedicalDoctor
   name: medical doctor's envirosuit
-  description: A suit designed for the station's more plasma-based doctors.
+  description: A suit designed for the station's more phoron-based doctors.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/medical.rsi

@@ -29,6 +29,11 @@
   id: LivingHeart
   ritualPrototypes:
   - RitualLivingHeart
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: SimpleWaypointer
+      waypointerProtoIds:
+        HereticSacrificeTargetsWaypointer: true
   actionPrototypes:
   - ActionHereticLivingHeart
 
@@ -145,8 +150,11 @@
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: SpecialPressureImmunity
     - type: FireImmunity
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 ### blade path
 - type: hereticKnowledge
@@ -178,8 +186,6 @@
   id: ChampionHook
   path: Blade
   stage: 4
-  actionPrototypes:
-  - ActionHereticChampionHook
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ChampionHook
@@ -446,20 +452,18 @@
   path: Void
   event: !type:HereticKnowledgeEvent
     addedComponents:
-    - type: SpecialPressureImmunity
     - type: Aristocrat
     - type: MovementAlwaysTouching
     - type: CanMoveInAir
     - type: NoSlip
-    # TODO clientside light instead of thermals
-    - type: ThermalVision
-      color: "#b4babf"
-      isActive: true
-      lightRadius: 7.5
-      flashDurationMultiplier: 1
-      activateSound: null
-      deactivateSound: null
-      thermalShader: null
+    - type: NightVision
+      lightingColor: "#b4babf33"
+      prioritized: false
+      relayOverlay: false # In case default value ever changes
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 ## rust path
 - type: hereticKnowledge
@@ -636,17 +640,17 @@
   id: CreatorsGift
   stage: 10
   path: Cosmos
-  event: !type:HereticXRayVisionEvent
+  event: !type:HereticKnowledgeEvent
+    statusEffects:
+    - StatusEffectXRayHeretic
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: SpecialPressureImmunity
-    - type: NightVision
-      color: white
-      activateSound: null
-      deactivateSound: null
-      drawOverlay: false
   actionPrototypes:
   - ActionResetStarGazerConsciousness
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 ## lock path
 - type: hereticKnowledge
@@ -685,11 +689,11 @@
   - RitualEldritchId
 
 - type: hereticKnowledge
-  id: ConciergesRite
+  id: WrongKey
   path: Lock
   stage: 5
   ritualPrototypes:
-  - RitualConcierge
+  - RitualSerpentclave
 
 - type: hereticKnowledge
   id: ArmorLock
@@ -704,20 +708,14 @@
 - type: hereticKnowledge
   id: LockPassive3
   stage: 6
-  event: !type:HereticXRayVisionEvent
-    addedComponents:
-    - type: NightVision
-      color: white
-      activateSound: null
-      deactivateSound: null
-      drawOverlay: false
+  event: !type:HereticKnowledgeEvent
+    statusEffects:
+    - StatusEffectXRayHeretic
 
 - type: hereticKnowledge
   id: BurglarsFinesse
   path: Lock
   stage: 6
-  actionPrototypes:
-  - ActionHereticBurglarsFinesse
 
 - type: hereticKnowledge
   id: OpeningBlade
@@ -725,11 +723,11 @@
   stage: 7
 
 - type: hereticKnowledge
-  id: CaretakersLastRefuge
+  id: ConciergesRite
   path: Lock
   stage: 8
-  actionPrototypes:
-  - ActionHereticLastRefuge
+  ritualPrototypes:
+  - RitualConcierge
 
 - type: hereticKnowledge
   id: AscensionLock
@@ -745,9 +743,12 @@
   event: !type:HereticAscensionLockEvent
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: SpecialPressureImmunity
   actionPrototypes:
   - ActionHereticShapeshiftLock
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectPressureImmunityHeretic
+    time: null
 
 - type: hereticKnowledge
   id: RitualOfKnowledge
@@ -794,28 +795,28 @@
   - ActionHereticRealignment
 
 - type: hereticKnowledge
-  id: EnvyKnife
-  stage: 4
-  ritualPrototypes:
-  - RitualEnvyKnife
-
-- type: hereticKnowledge
   id: MaskOfMadness
   stage: 4
   ritualPrototypes:
   - RitualMaskOfMadness
 
 - type: hereticKnowledge
-  id: UnfathomableCurio
-  stage: 4
-  ritualPrototypes:
-  - RitualUnfathomableCurio
-
-- type: hereticKnowledge
   id: EldritchCoin
   stage: 4
   ritualPrototypes:
   - RitualEldritchCoin
+
+- type: hereticKnowledge
+  id: MysteriesOfCreation
+  stage: 4
+  ritualPrototypes:
+  - RitualIceSpear
+
+- type: hereticKnowledge
+  id: UnfathomableCurio
+  stage: 4
+  ritualPrototypes:
+  - RitualUnfathomableCurio
 
 ## T2
 - type: hereticKnowledge
@@ -829,12 +830,6 @@
   stage: 5
   ritualPrototypes:
   - RitualCarvingKnife
-
-- type: hereticKnowledge
-  id: MysteriesOfCreation
-  stage: 5
-  actionPrototypes:
-  - ActionHereticIceSpear
 
 - type: hereticKnowledge
   id: CodexMorbus
@@ -878,6 +873,12 @@
   ritualPrototypes:
   - RitualLionhunterRifleAmmunition
 
+- type: hereticKnowledge
+  id: RustSowerGrenade
+  stage: 5
+  ritualPrototypes:
+  - RitualRustSowerGrenade
+
 ## T3
 - type: hereticKnowledge
   id: MindGrasp
@@ -914,3 +915,15 @@
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ForestAdmonitions
+
+- type: hereticKnowledge
+  id: SharpMedal
+  stage: 7
+  ritualPrototypes:
+  - RitualSharpMedal
+
+- type: hereticKnowledge
+  id: AshSpirit
+  stage: 7
+  ritualPrototypes:
+  - RitualAshSpirit

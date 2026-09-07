@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateMaterialDurathread
+  name: durathread crate
+  description: 30 pieces of durathread.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MaterialDurathread

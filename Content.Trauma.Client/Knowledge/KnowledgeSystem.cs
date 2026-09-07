@@ -84,7 +84,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         var above = editor.MarkingsTab;
         var index = above.GetPositionInParent();
 
-        var tab = new KnowledgeProfileEditor(_proto, this);
+        var tab = new KnowledgeProfileEditor(ProtoMan, this);
         tab.OnSave += knowledge =>
         {
             editor.Profile = editor.Profile?.WithKnowledge(knowledge);

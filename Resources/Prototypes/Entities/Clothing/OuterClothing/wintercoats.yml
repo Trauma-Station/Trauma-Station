@@ -1,18 +1,19 @@
 - type: entity
-  parent: ClothingOuterStorageEdible
+  parent: [ TemperatureProtection, ClothingOuterJacketBase ]
   id: ClothingOuterWinterCoat
   name: winter coat
   description: A heavy jacket made from 'synthetic' animal furs.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 125
+      Durathread: 50
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
-  - type: TemperatureProtection
-    heatingCoefficient: 1.1
-    coolingCoefficient: 0.1
-  - type: Item
-    size: Normal
   - type: Armor
     coverage: # Shitmed
     - Torso
@@ -33,29 +34,28 @@
     - WinterCoat # Goobstation
   - type: StaticPrice
     price: 50
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Cloth: 125
-      Durathread: 50
 
 - type: entity
-  parent: [ ClothingOuterWinterCoat, ClothingOuterStorageToggleableBase ] # Trauma - winter coat first to preserve armor
+  parent: ClothingOuterWinterCoat
   id: ClothingOuterWinterCoatToggleable
   name: winter coat with hood
   categories: [ HideSpawnMenu ]
   components:
-  - type: ContainerContainer # Trauma
+  # <Trauma> - rewrote for modsuit shitcode
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHatHoodWinterDefault
+    verbText: toggle-clothing-verb-hood
+  - type: ContainerContainer
     containers:
       storagebase: !type:Container
       toggleable-clothing: !type:Container
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHatHoodWinterDefault
-  - type: Tag # Goobstation
+  - type: Tag
     tags:
     - ClothMade
     - WhitelistChameleon
     - WinterCoat
+  # </Trauma>
 
 - type: entity
   parent: ClothingOuterWinterCoatToggleable
@@ -596,7 +596,7 @@
     sprite: Clothing/OuterClothing/WinterCoats/coatnomi.rsi
 
 - type: entity
-  parent: ClothingOuterWinterCoatToggleable
+  parent: [ClothingOuterWinterCoatToggleable, BaseSlicingRefinable]
   id: ClothingOuterWinterWeb
   name: web winter coat
   description: Feels like the inside of a cocoon, not that this would make you less afraid of being in one.
@@ -608,8 +608,8 @@
   - type: Construction
     graph: WebObjects
     node: coat
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialWebSilk1
       amount: 5
   - type: FlavorProfile

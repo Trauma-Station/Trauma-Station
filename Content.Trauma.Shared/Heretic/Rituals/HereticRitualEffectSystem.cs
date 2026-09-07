@@ -7,7 +7,6 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public sealed partial class HereticRitualEffectSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -49,9 +48,9 @@ public sealed partial class HereticRitualEffectSystem : EntitySystem
         }
     }
 
-    public bool TryCondition(EntityUid uid, EntityCondition condition, Entity<HereticRitualRaiserComponent> ritual)
+    public bool TryCondition(EntityUid uid, EntityCondition condition, Entity<HereticRitualRaiserComponent> ritual, EntityUid? user = null)
     {
-        return condition.Inverted != condition.RaiseEvent(uid, ritual.Comp.Raiser);
+        return condition.Inverted != condition.RaiseEvent(uid, ritual.Comp.Raiser, user);
     }
 
     public bool AnyCondition(EntityUid target, EntityCondition[]? conditions, Entity<HereticRitualRaiserComponent> ritual)
@@ -101,7 +100,7 @@ public sealed partial class HereticRitualEffectSystem : EntitySystem
         Entity<HereticRitualRaiserComponent> ritual,
         EntityUid? user)
     {
-        var proto = _proto.Index(id);
+        var proto = ProtoMan.Index(id);
         if (TryConditions(target, proto.Conditions, ritual))
             ApplyEffects(target, proto.Effects, ritual, user);
     }
@@ -130,16 +129,16 @@ public sealed class HereticRitualRaiser(
         entMan.EventBus.RaiseLocalEvent(target, ref ritualEv);
     }
 
-    public bool RaiseConditionEvent<T>(EntityUid target, T condition) where T : EntityConditionBase<T>
+    public bool RaiseConditionEvent<T>(EntityUid target, T condition, EntityUid? sourceEnt) where T : EntityConditionBase<T>
     {
         if (condition is not IHereticRitualEntry)
         {
-            var ev = new EntityConditionEvent<T>(condition);
+            var ev = new EntityConditionEvent<T>(condition, sourceEnt);
             entMan.EventBus.RaiseLocalEvent(target, ref ev);
             return ev.Result;
         }
 
-        var ritualEv = new HereticRitualConditionEvent<T>(condition, ritual);
+        var ritualEv = new HereticRitualConditionEvent<T>(condition, ritual, sourceEnt);
         entMan.EventBus.RaiseLocalEvent(target, ref ritualEv);
         return ritualEv.Result;
     }

@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: soundCollection
+  id: TurbineDamage
+  files:
+  - /Audio/_FarHorizons/Effects/engine_grump1.ogg
+  - /Audio/_FarHorizons/Effects/engine_grump2.ogg
+  - /Audio/_FarHorizons/Effects/engine_grump3.ogg
+  - /Audio/Effects/metal_slam5.ogg
+  - /Audio/Effects/metal_scrape2.ogg

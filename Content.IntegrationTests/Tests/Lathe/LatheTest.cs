@@ -3,7 +3,7 @@ using System.Linq;
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Content.Shared.Research.Prototypes;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
@@ -14,13 +14,16 @@ namespace Content.IntegrationTests.Tests.Lathe;
 [TestFixture]
 public sealed class LatheTest : GameTest
 {
+    [RunOnSide(Side.Server)] // Trauma
     [Test]
     public async Task TestLatheRecipeIngredientsFitLathe()
     {
         var pair = Pair;
         var server = pair.Server;
 
+        /* Trauma - don't need this anymore + it would deadlock from being a server sided test
         var mapData = await pair.CreateTestMap();
+        */
 
         var entMan = server.EntMan;
         var protoMan = server.ProtoMan;
@@ -29,31 +32,34 @@ public sealed class LatheTest : GameTest
         var whitelistSystem = server.System<EntityWhitelistSystem>();
         var latheSystem = server.System<SharedLatheSystem>();
 
+        /* Trauma - no reason to tick the game at all
         await server.WaitAssertion(() =>
         {
+        */
             // Find all the lathes
-            // <Trauma> - remove linq jesus christ
-            var latheName = compFactory.GetComponentName<LatheComponent>();
-            var materialName = compFactory.GetComponentName<PhysicalCompositionComponent>();
-            var storageName = compFactory.GetComponentName<MaterialStorageComponent>();
-            var emagName = compFactory.GetComponentName<EmagLatheRecipesComponent>();
+            // <Trauma> - microptimisation, remove linq jesus christ. also get the physical comp from materials immediately not for EVERY FUCKING LATHE
+            var latheName = compFactory.CompName<LatheComponent>();
+            var materialName = compFactory.CompName<PhysicalCompositionComponent>();
+            var storageName = compFactory.CompName<MaterialStorageComponent>();
+            var emagName = compFactory.CompName<EmagLatheRecipesComponent>();
             var latheProtos = new List<EntityPrototype>();
-            var materialEntityProtos = new List<EntityPrototype>();
+            var materialEntityProtos = new List<(EntityPrototype, PhysicalCompositionComponent)>();
             foreach (var p in protoMan.EnumeratePrototypes<EntityPrototype>())
             {
-                if (p.Abstract || pair.IsTestPrototype(p))
+                if (pair.IsTestPrototype(p)) // Trauma - remove abstract check it doesnt see any
                     continue;
 
-                if (p.Components.ContainsKey(latheName))
+                if (p.HasComp(latheName))
                     latheProtos.Add(p);
-                else if (p.Components.ContainsKey(materialName))
-                    materialEntityProtos.Add(p);
+                else if (p.TryComp<PhysicalCompositionComponent>(materialName, out var material))
+                    materialEntityProtos.Add((p, material));
             }
             var compositionQuery = entMan.GetEntityQuery<PhysicalCompositionComponent>();
             // </Trauma>
 
+            /* Trauma - this isnt needed anymore and it was fucking test run time from physics contact updates
             // Spawn all of the above material EntityPrototypes - we need actual entities to do whitelist checks
-            var materialEntities = new List<EntityUid>(materialEntityProtos.Count); // Trauma - remove () from Count it's a list now
+            var materialEntities = new List<EntityUid>(materialEntityProtos.Count());
             foreach (var materialEntityProto in materialEntityProtos)
             {
                 materialEntities.Add(entMan.SpawnEntity(materialEntityProto.ID, mapData.GridCoords));
@@ -61,20 +67,21 @@ public sealed class LatheTest : GameTest
 
             Assert.Multiple(() =>
             {
+            */
                 // Check each lathe individually
                 foreach (var latheProto in latheProtos)
                 {
-                    if (!latheProto.TryGetComponent<LatheComponent>(latheName, out var latheComp)) // Trauma - reuse name from above
+                    if (!latheProto.TryComp<LatheComponent>(latheName, out var latheComp)) // Trauma - reuse name from above
                         continue;
 
-                    if (!latheProto.TryGetComponent<MaterialStorageComponent>(storageName, out var storageComp)) // Trauma - reuse name from above
+                    if (!latheProto.TryComp<MaterialStorageComponent>(storageName, out var storageComp)) // Trauma - reuse name from above
                         continue;
 
                     // Test which material-containing entities are accepted by this lathe
                     var acceptedMaterials = new HashSet<ProtoId<MaterialPrototype>>();
-                    foreach (var materialEntity in materialEntities)
+                    foreach (var (materialEntity, compositionComponent) in materialEntityProtos) // Trauma - use the protoypes instead of spawned ents, it also has the comp now
                     {
-                        Assert.That(compositionQuery.TryComp(materialEntity, out var compositionComponent)); // Trauma - use query from above
+                        //Assert.That(compositionQuery.TryComp(materialEntity, out var compositionComponent)); // Trauma - this is gotten once at the start
                         if (whitelistSystem.IsWhitelistFail(storageComp.Whitelist, materialEntity))
                             continue;
 
@@ -89,7 +96,7 @@ public sealed class LatheTest : GameTest
                     var recipes = new HashSet<ProtoId<LatheRecipePrototype>>();
                     latheSystem.AddRecipesFromPacks(recipes, latheComp.StaticPacks);
                     latheSystem.AddRecipesFromPacks(recipes, latheComp.DynamicPacks);
-                    if (latheProto.TryGetComponent<EmagLatheRecipesComponent>(emagName, out var emagRecipesComp)) // Trauma - reuse name from above
+                    if (latheProto.TryComp<EmagLatheRecipesComponent>(emagName, out var emagRecipesComp)) // Trauma - reuse name from above
                     {
                         latheSystem.AddRecipesFromPacks(recipes, emagRecipesComp.EmagStaticPacks);
                         latheSystem.AddRecipesFromPacks(recipes, emagRecipesComp.EmagDynamicPacks);
@@ -119,8 +126,10 @@ public sealed class LatheTest : GameTest
                             Assert.That(totalQuantity, Is.LessThanOrEqualTo(storageComp.StorageLimit), $"Lathe {latheProto.ID} has recipe {recipeId} which calls for {totalQuantity} units of materials but can only hold {storageComp.StorageLimit}");
                     }
                 }
+        /* Trauma
             });
         });
+        */
     }
 
     [Test]

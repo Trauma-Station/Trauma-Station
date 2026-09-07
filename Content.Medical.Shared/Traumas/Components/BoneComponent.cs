@@ -6,19 +6,19 @@ using Robust.Shared.Audio;
 
 namespace Content.Medical.Shared.Traumas;
 
-[RegisterComponent, AutoGenerateComponentState, NetworkedComponent]
+/// <summary>
+/// Component given to bodyparts that have bones.
+/// </summary>
+[RegisterComponent, AutoGenerateComponentState(fieldDeltas: true), NetworkedComponent]
 public sealed partial class BoneComponent : Component
 {
-    [AutoNetworkedField, ViewVariables]
-    public EntityUid? BoneWoundable;
-
-    [DataField, AutoNetworkedField, ViewVariables]
+    [DataField]
     public FixedPoint2 IntegrityCap = 60f;
 
-    [DataField, AutoNetworkedField, ViewVariables]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 BoneIntegrity = 60f;
 
-    [AutoNetworkedField, ViewVariables]
+    [DataField, AutoNetworkedField]
     public BoneSeverity BoneSeverity = BoneSeverity.Normal;
 
     [DataField]

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;
@@ -11,21 +10,16 @@ namespace Content.Trauma.Shared.Collision.Blur;
 public sealed partial class BlurOnCollideSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _status = default!;
-    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private static readonly EntProtoId BlurryVision = "StatusEffectBlurryVision";
 
-        SubscribeLocalEvent<BlurOnCollideComponent, ProjectileHitEvent>(OnProjectileHit);
-        SubscribeLocalEvent<BlurOnCollideComponent, ThrowDoHitEvent>(OnEntityHit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEntityHit(Entity<BlurOnCollideComponent> ent, ref ThrowDoHitEvent args)
     {
         ApplyEffects(args.Target, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnProjectileHit(Entity<BlurOnCollideComponent> ent, ref ProjectileHitEvent args)
     {
         ApplyEffects(args.Target, ent.Comp);
@@ -34,12 +28,7 @@ public sealed partial class BlurOnCollideSystem : EntitySystem
     private void ApplyEffects(EntityUid target, BlurOnCollideComponent component)
     {
         if (component.BlurTime > TimeSpan.Zero)
-        {
-            _statusOld.TryAddStatusEffect<BlurryVisionComponent>(target,
-                "BlurryVision",
-                component.BlurTime,
-                true);
-        }
+            _status.TryUpdateStatusEffectDuration(target, BlurryVision, component.BlurTime);
 
         if (component.BlindTime > TimeSpan.Zero)
             _status.TryUpdateStatusEffectDuration(target, BlindnessSystem.BlindingStatusEffect, component.BlindTime);

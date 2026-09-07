@@ -3,27 +3,18 @@
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Atmos;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
 public sealed partial class SharedChanglingActionSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ChangelingIdentityComponent> _lingQuery = default!;
+    [Dependency] private EntityQuery<OnFireComponent> _onFireQuery = default!;
 
-    private EntityQuery<ChangelingIdentityComponent> _lingQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ChangelingActionComponent, ActionAttemptEvent>(OnActionAttempt);
-        SubscribeLocalEvent<ChangelingActionComponent, ActionPerformedEvent>(OnActionPerformed);
-
-        _lingQuery = GetEntityQuery<ChangelingIdentityComponent>();
-    }
-
+    [SubscribeLocalEvent]
     private void OnActionAttempt(Entity<ChangelingActionComponent> ent, ref ActionAttemptEvent args)
     {
         if (args.Cancelled)
@@ -70,6 +61,7 @@ public sealed partial class SharedChanglingActionSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnActionPerformed(Entity<ChangelingActionComponent> ent, ref ActionPerformedEvent args)
     {
         var user = args.Performer;
@@ -90,18 +82,16 @@ public sealed partial class SharedChanglingActionSystem : EntitySystem
     #region Helper Methods
     private void DoPopup(EntityUid user, LocId popup, PopupType popupType = PopupType.Small)
     {
-        _popup.PopupClient(Loc.GetString(popup), user, user, popupType);
+        _popup.PopupEntity(Loc.GetString(popup), user, user, popupType);
     }
 
     private void DoPopup(EntityUid user, string popup, PopupType popupType = PopupType.Small)
     {
-        _popup.PopupClient(popup, user, user, popupType);
+        _popup.PopupEntity(popup, user, user, popupType);
     }
 
     private bool OnFire(EntityUid user)
-    {
-        return HasComp<OnFireComponent>(user);
-    }
+        => _onFireQuery.HasComp(user);
 
     #endregion
 }

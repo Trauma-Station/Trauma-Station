@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Inventory;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
@@ -20,10 +19,10 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Shared.Body.Systems;
 using Content.Shared.EntityEffects.Effects.Solution;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
 
@@ -38,7 +37,6 @@ public sealed partial class SmokeSystem : EntitySystem
     [Dependency] private IAdminLogManager _logger = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private BloodstreamSystem _blood = default!;
@@ -47,7 +45,6 @@ public sealed partial class SmokeSystem : EntitySystem
     [Dependency] private SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private InventorySystem _inventory = default!; // Goobstation
 
     [Dependency] private EntityQuery<SmokeComponent> _smokeQuery = default!;
     [Dependency] private EntityQuery<SmokeAffectedComponent> _smokeAffectedQuery = default!;
@@ -265,22 +262,36 @@ public sealed partial class SmokeSystem : EntitySystem
         if (!Resolve(smokeUid, ref component))
             return;
 
-        if (!TryComp<BloodstreamComponent>(entity, out var bloodstream) || bloodstream.SmokeImmune) // Goobstation - ignore SmokeImmune entities
+        if (!TryComp<BloodstreamComponent>(entity, out var bloodstream)
+        // <Trauma>
+            || bloodstream.SmokeImmune)
+        {
+            TouchReact(entity, solution, component);
             return;
+        }
+        // </Trauma>
 
         if (!_solutionContainerSystem.ResolveSolution(entity, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) || bloodSolution.AvailableVolume <= 0)
+        // <Trauma>
+        {
+            TouchReact(entity, solution, component);
             return;
+        }
+        // </Trauma>
 
         var blockIngestion = _internals.AreInternalsWorking(entity);
 
-        // <Goob>
-        if (_inventory.TryGetSlotEntity(entity, "mask", out var maskUid) &&
+        // <Trauma>
+        blockIngestion |= _mob.IsDead(entity); // dead things wont breathe and absorbing foam leads to perfect duping as you can just pull it out with 0 loss
+
+        if (!blockIngestion &&
+            _inventory.TryGetSlotEntity(entity, "mask", out var maskUid) &&
             TryComp<IngestionBlockerComponent>(maskUid, out var blocker) &&
             blocker is { Enabled: true, BlockSmokeIngestion: true })
         {
             blockIngestion = true;
         }
-        // </Goob>
+        // </Trauma>
 
         var cloneSolution = solution.Clone();
         var availableTransfer = FixedPoint2.Min(cloneSolution.Volume, component.TransferRate);
@@ -325,7 +336,7 @@ public sealed partial class SmokeSystem : EntitySystem
             if (reagentQuantity.Quantity == FixedPoint2.Zero)
                 continue;
 
-            var reagent = _prototype.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+            var reagent = ProtoMan.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
             reagent.ReactionTile(tile, reagentQuantity.Quantity, EntityManager, reagentQuantity.Reagent.Data);
         }
     }
@@ -356,7 +367,7 @@ public sealed partial class SmokeSystem : EntitySystem
             !_solutionContainerSystem.ResolveSolution(smoke.Owner, SmokeComponent.SolutionName, ref smoke.Comp1.Solution, out var solution))
             return;
 
-        var color = solution.GetColor(_prototype);
+        var color = solution.GetColor(ProtoMan);
         _appearance.SetData(smoke.Owner, SmokeVisuals.Color, color, smoke.Comp2);
     }
 }

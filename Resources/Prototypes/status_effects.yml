@@ -4,9 +4,9 @@
 # Note: We have a new status effect system that needs all of these status effects to be fully ported to.
 # Adding new status effects under the old system is NOT RECOMMENDED.
 
-- type: statusEffect
-  id: Stun
-  alert: Stun
+#- type: statusEffect # Trauma - replaced by new status effects...
+#  id: Stun
+#  alert: Stun
 
 - type: statusEffect
   id: SlowedDown
@@ -28,26 +28,8 @@
   id: SlurredSpeech
 
 - type: statusEffect
-  id: PressureImmunity
-  alwaysAllowed: true # Shitmed: Used by space animal heart to work on anything
-
-- type: statusEffect
-  id: Muted
-  alert: Muted
-
-- type: statusEffect
   id: Corporeal
   alert: Corporeal
 
 - type: statusEffect
   id: Pacified #cannot attack
-
-- type: statusEffect
-  id: RatvarianLanguage #Praise him
-
-- type: statusEffect
-  id: Flashed
-
-- type: statusEffect
-  id: Adrenaline
-  alert: Adrenaline

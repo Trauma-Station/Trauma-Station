@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.Lathe.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.AlertLevel;
 using Content.Shared.Chat;
 using Content.Shared.Lathe;
 using Content.Shared.Research.Prototypes;
@@ -17,14 +17,11 @@ namespace Content.Server.Lathe;
 /// </summary>
 public sealed partial class LatheSystem
 {
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private StationSystem _station = default!;
 
-    private void InitializeTrauma()
-    {
-        SubscribeLocalEvent<LatheComponent, ComponentShutdown>(OnShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<LatheComponent> ent, ref ComponentShutdown args)
     {
         // destroying a lathe stops its sound
@@ -40,7 +37,7 @@ public sealed partial class LatheSystem
         var recipesCount = 0;
         foreach (var pack in ent.Comp.DynamicPacks)
         {
-            if (!_proto.Resolve(pack, out var proto))
+            if (!ProtoMan.Resolve(pack, out var proto))
                 continue;
             foreach (var recipe in proto.Recipes)
             {
@@ -58,9 +55,12 @@ public sealed partial class LatheSystem
             InGameICChatType.Speak, hideChat: true);
     }
 
-    private string? GetAlertLevel(EntityUid uid)
+    private ProtoId<AlertLevelPrototype>? GetAlertLevel(EntityUid uid)
     {
-        var station = _station.GetOwningStation(uid);
-        return CompOrNull<AlertLevelComponent>(station)?.CurrentLevel;
+        if (_station.GetOwningStation(uid) is not { } station)
+            return null;
+
+        _alertLevel.TryGetLevel(station, out var level);
+        return level;
     }
 }

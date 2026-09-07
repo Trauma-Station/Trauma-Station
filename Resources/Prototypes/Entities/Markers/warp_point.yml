@@ -15,7 +15,7 @@
   components:
   - type: NavMapBeacon
   - type: WarpPoint
-    location: beacon
+    location: location-beacon
 
 # Use for areas like CC
 - type: entity

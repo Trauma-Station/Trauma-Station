@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: OreBag
+  components:
+  - type: Sprite
+    state: null
+    layers:
+    - state: orebag_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: orebag_on }
+          False: { state: orebag_off }
+  - type: ItemToggle
+    soundActivate: &sound
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate: *sound
+  - type: Item
+    size: Huge # lets it fit in conscription bag
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: OreBag

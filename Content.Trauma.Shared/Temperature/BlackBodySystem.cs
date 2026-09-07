@@ -10,22 +10,16 @@ public sealed partial class BlackBodySystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private EntityQuery<TemperatureComponent> _tempQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlackBodyComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BlackBodyComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<BlackBodyComponent> ent, ref ComponentStartup args)
     {
         EnsureComp<AppearanceComponent>(ent); // fails tests if you forget this in your prototype
         if (_tempQuery.TryComp(ent, out var temp))
-            _appearance.SetData(ent.Owner, BlackBodyVisuals.Temperature, temp.CurrentTemperature);
+            _appearance.SetData(ent.Owner, BlackBodyVisuals.Temperature, temp.Temperature);
     }
 
-    private void OnTemperatureChange(Entity<BlackBodyComponent> ent, ref OnTemperatureChangeEvent args)
+    [SubscribeLocalEvent]
+    private void OnTemperatureChange(Entity<BlackBodyComponent> ent, ref TemperatureChangedEvent args)
     {
         _appearance.SetData(ent.Owner, BlackBodyVisuals.Temperature, args.CurrentTemperature);
     }

@@ -7,4 +7,6 @@
   category: construction-category-misc
   objectType: Item
   theory:
+    FabricationKnowledge: 1
+  practical:
     ElectronicsKnowledge: 1

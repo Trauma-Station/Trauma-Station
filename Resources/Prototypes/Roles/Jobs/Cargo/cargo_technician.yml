@@ -18,7 +18,7 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipCargoTechnician
+    - SkillChipEducation
   # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: BoxingDay

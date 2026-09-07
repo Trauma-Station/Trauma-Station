@@ -63,7 +63,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
 
 - type: entity
   id: ChangelingDartMute

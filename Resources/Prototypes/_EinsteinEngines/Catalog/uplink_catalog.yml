@@ -2,7 +2,7 @@
 
 - type: listing
   id: UplinkBribePlasmaman
-  name: uplink-bribe-plasmaman-name
+  name: uplink-bribe-name
   description: uplink-bribe-plasmaman-desc
   productEntity: BriefcaseSyndieLobbyingBundlePlasmamanFilled
   cost:

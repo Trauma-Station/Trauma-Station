@@ -8,6 +8,8 @@
   maxPlayers: 10
   ignoredRequiredEntities:
   - MachineMasterMaterialSilo # 1 department silo can probably cover the whole ship be real
+  - SpawnPointExtraAiCore # no AI core
+  jobWeights: Reach
   stations:
     Reach:
       stationProto: StandardNanotrasenStation
@@ -45,6 +47,7 @@
           Janitor: [ 1, 1 ]
           Musician: [ 1, 1 ]
           Passenger: [ -1, -1 ]
+          DClass: [ -1, -1 ]
       - type: StationBlobConfig
         stageBegin: 15
         stageCritical: 200

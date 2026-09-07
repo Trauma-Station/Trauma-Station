@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Guardian;
 using Content.Server.Mind;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
@@ -17,7 +16,6 @@ namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed partial class WizardMirrorSystem : SharedWizardMirrorSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private PolymorphSystem _polymorph = default!;
@@ -57,14 +55,8 @@ public sealed partial class WizardMirrorSystem : SharedWizardMirrorSystem
     {
         var age = humanoid.Age;
         if (humanoid.Species != profile.Species && component.AllowedSpecies.Contains(profile.Species) &&
-            _proto.TryIndex(profile.Species, out var speciesProto))
+            ProtoMan.TryIndex(profile.Species, out var speciesProto))
         {
-            if (HasComp<GuardianHostComponent>(target))
-            {
-                _popup.PopupEntity(Loc.GetString("wizard-mirror-guardian-change-species-fail"), target, target);
-                return;
-            }
-
             var config = new PolymorphConfiguration
             {
                 Entity = speciesProto.Prototype,

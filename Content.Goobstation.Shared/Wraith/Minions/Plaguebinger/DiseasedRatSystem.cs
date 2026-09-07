@@ -10,7 +10,6 @@ namespace Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 /// </summary>
 public abstract partial class SharedDiseasedRatSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -36,7 +35,7 @@ public abstract partial class SharedDiseasedRatSystem : EntitySystem
     {
         foreach (var form in ent.Comp.DiseasedRatForms)
         {
-            if (!_proto.TryIndex(form, out var formIndex)
+            if (!ProtoMan.TryIndex(form, out var formIndex)
                 || filthConsumed < formIndex.FilthRequired)
                 continue;
 

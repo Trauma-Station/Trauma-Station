@@ -1,6 +1,6 @@
 - type: entity
   id: BaseLatheNoSilo # Trauma - add NoSilo, BaseLathe has OreSiloClient
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   abstract: true
   name: lathe
   components:
@@ -15,6 +15,10 @@
     - !type:AutomatedPorts
       sinks:
       - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
   - type: LatheAutomation
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -47,19 +51,17 @@
           - MachineLayer
   - type: Lathe
   - type: MaterialStorage
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
+  # <Trauma> - inheritance major
+  #- type: Destructible
+  #  thresholds:
+  #  - trigger:
+  #      !type:DamageTrigger
+  #      damage: 175
+  #    behaviors:
+  #    - !type:PlaySoundBehavior
+  #      sound:
+  #        collection: MetalBreak
+  # </Trauma>
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -156,6 +158,14 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
+    # <Trauma>
+    - NailsStatic
+    - LatheMiscStatic
+    - MedicalVehiclesStatic
+    - GrenadeTriggersStatic
+    - TapeRecorderStatic
+    - MiscSignallersStatic
+    # </Trauma>
     - ToolsStatic
     - PartsStatic
     - AtmosStatic
@@ -170,20 +180,14 @@
     - ServiceStatic
     - PowerCellsStatic
     - ElectronicsStatic
-    # Goobstation
-    - NailsStatic
-    - LatheMiscStatic
-    - MedicalVehiclesStatic
-    - GrenadeTriggersStatic
-    - TapeRecorderStatic
-    - MiscSignallersStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
+    # <Trauma>
+    - ScienceExplosives
+    # </Trauma>
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
     # - SyndicateAmmoStatic # Trauma
-    # Goobstation
-    - ScienceExplosives
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -314,17 +318,21 @@
     idleState: icon
     runningState: building
     staticPacks:
+    # <Trauma>
+    - SharedBoardsStatic
+    - MedicalBoardsStaticGoob
+    - SecurityBoardsStaticGoob
+    # </Trauma>
     #- ScienceBoardsStatic - Goobstation - Moved to Scifab
     - ServiceBoardsStatic
     - CargoBoardsStatic
     #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
-    #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    # Goobstation Packs
-    - SharedBoardsStatic
-    - MedicalBoardsStaticGoob
-    - SecurityBoardsStaticGoob
-    - ServiceBoardsStaticGoob
+    - EngineeringBoardsStatic
     dynamicPacks:
+    # <Trauma>
+    - SharedBoards
+    - ReactorCircuitboards
+    # </Trauma>
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
@@ -333,8 +341,6 @@
     - CameraBoards
     #- MechBoards - Goobstation - split between departmental lathes
     - ShuttleBoards
-    # Goobstation Packs
-    - SharedBoards
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient
@@ -638,6 +644,7 @@
   - type: OreSiloClient
   #- type: LatheAnnouncing # Trauma - not cherry picked
   #  channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseLathe
@@ -764,7 +771,6 @@
     - type: MaterialStorage
       # <Trauma>
       ignoreMaterialWhiteList: true
-      disallowOreEjection: false
       # </Trauma>
       ignoreColor: true
       whitelist:

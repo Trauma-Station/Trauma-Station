@@ -17,9 +17,22 @@ public abstract partial class SharedBuckleSystem
         SubscribeLocalEvent<StrapComponent, InteractHandEvent>(OnStrapInteractHand, before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<StrapComponent, DragDropTargetEvent>(OnStrapDragDropTarget);
         SubscribeLocalEvent<StrapComponent, CanDropTargetEvent>(OnCanDropTarget);
+        SubscribeLocalEvent<StrapComponent, GetInteractingEntitiesEvent>(OnGetInteractingForStrap);
 
+        SubscribeLocalEvent<BuckleComponent, GetInteractingEntitiesEvent>(OnGetInteractingForBuckle);
         SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand, before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<InteractionVerb>>(AddUnbuckleVerb);
+    }
+
+    private void OnGetInteractingForBuckle(Entity<BuckleComponent> ent, ref GetInteractingEntitiesEvent args)
+    {
+        if (ent.Comp.BuckledTo.HasValue)
+            args.InteractingEntities.Add(ent.Comp.BuckledTo.Value);
+    }
+
+    private void OnGetInteractingForStrap(Entity<StrapComponent> ent, ref GetInteractingEntitiesEvent args)
+    {
+        args.InteractingEntities.UnionWith(ent.Comp.BuckledEntities);
     }
 
     private void OnCanDropTarget(EntityUid uid, StrapComponent component, ref CanDropTargetEvent args)
@@ -178,7 +191,7 @@ public abstract partial class SharedBuckleSystem
             args.User != uid &&
             StrapHasSpace(uid, buckle, component) &&
             _interaction.InRangeUnobstructed(args.User, args.Target, range: buckle.Range) &&
-            component.AddBuckleverb) //Goobstation - Clowncar
+            component.AddBuckleVerb) //Goobstation - Clowncar
         {
             InteractionVerb verb = new()
             {
@@ -194,7 +207,7 @@ public abstract partial class SharedBuckleSystem
             TryComp<BuckleComponent>(@using, out var usingBuckle) &&
             StrapHasSpace(uid, usingBuckle, component) &&
             _interaction.InRangeUnobstructed(@using, args.Target, range: usingBuckle.Range) &&
-            component.AddBuckleverb) //Goobstation - Clowncar
+            component.AddBuckleVerb) //Goobstation - Clowncar
         {
             // Check that the entity is unobstructed from the target (ignoring the user).
             bool Ignored(EntityUid entity) => entity == args.User || entity == args.Target || entity == @using;
@@ -240,5 +253,4 @@ public abstract partial class SharedBuckleSystem
 
         args.Verbs.Add(verb);
     }
-
 }

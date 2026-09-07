@@ -6,10 +6,13 @@ using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Actions;
+using Content.Shared.Bible.Components;
 using Content.Shared.Examine;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Shared.Suicide;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -23,30 +26,13 @@ public abstract partial class SharedPossessionSystem : EntitySystem
     [Dependency] protected SharedPopupSystem _popup = default!;
     [Dependency] private SharedStunSystem _stun = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<PossessedComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<PossessedComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<PossessedComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<PossessedComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<PossessedComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
-        SubscribeLocalEvent<PossessedComponent, BibleSmiteAttemptEvent>(OnShouldSmite);
-
-        SubscribeLocalEvent<PossessionImmuneComponent, BeforeMindPossessEvent>(OnPossessImmune);
-        SubscribeLocalEvent<MindShieldComponent, BeforeMindPossessEvent>(OnPossessMindShield);
-        SubscribeLocalEvent<BibleUserComponent, BeforeMindPossessEvent>(OnPossessMindChaplain);
-        SubscribeLocalEvent<PossessedComponent, BeforeMindPossessEvent>(OnPossessMindPossessed);
-        SubscribeLocalEvent<ShadowlingComponent, BeforeMindPossessEvent>(OnPossessMindShadowling);
-        SubscribeLocalEvent<DevilComponent, BeforeMindPossessEvent>(OnPossessMindDevil);
-    }
-
+    [SubscribeLocalEvent]
     private void OnShouldSmite(Entity<PossessedComponent> ent, ref BibleSmiteAttemptEvent args)
     {
         args.ShouldSmite = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnShouldTakeHoly(Entity<PossessedComponent> ent, ref UserShouldTakeHolyEvent args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
@@ -56,11 +42,13 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         args.ShouldTakeHoly = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<PossessedComponent> possessed, ref ComponentInit args)
     {
         possessed.Comp.PossessedContainer = _container.EnsureContainer<Container>(possessed, "PossessedContainer");
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<PossessedComponent> possessed, ref MapInitEvent args)
     {
         EnsureComp<WeakToHolyComponent>(possessed);
@@ -73,6 +61,7 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         _actions.AddAction(possessed, ref possessed.Comp.ActionEntity, possessed.Comp.EndPossessionAction);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<PossessedComponent> possessed, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange
@@ -84,6 +73,7 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         args.PushMarkup(Loc.GetString("possessed-component-examined", ("timeremaining", timeRemaining)));
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<PossessedComponent> possessed, ref ComponentRemove args)
     {
         _actions.RemoveAction(possessed.Owner, possessed.Comp.ActionEntity);
@@ -93,12 +83,13 @@ public abstract partial class SharedPossessionSystem : EntitySystem
 
         // Paralyze, so you can't just magdump them.
         _stun.TryAddParalyzeDuration(possessed, TimeSpan.FromSeconds(2));
-        _popup.PopupClient(Loc.GetString("possession-end-popup", ("target", possessed)), possessed, possessed, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("possession-end-popup", ("target", possessed)), possessed, possessed, PopupType.LargeCaution);
 
         PossessionEnded(possessed);
     }
 
     // Check for possession immunity (e.g., tinfoil hat)
+    [SubscribeLocalEvent]
     private void OnPossessImmune(Entity<PossessionImmuneComponent> ent, ref BeforeMindPossessEvent args)
     {
         if (args.Cancelled || !args.DoesImmuneBlock)
@@ -108,15 +99,17 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnPossessMindShield(Entity<MindShieldComponent> ent, ref BeforeMindPossessEvent args)
+    [SubscribeLocalEvent]
+    private void OnPossessMindShield(Entity<MindShieldStatusComponent> ent, ref BeforeMindPossessEvent args)
     {
-        if (args.Cancelled || !args.DoesMindshieldBlock)
+        if (!ent.Comp.IsMindshielded || args.Cancelled || !args.DoesMindshieldBlock)
             return;
 
         args.Message = "shielded";
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPossessMindChaplain(Entity<BibleUserComponent> ent, ref BeforeMindPossessEvent args)
     {
         if (args.Cancelled || !args.DoesChaplainBlock)
@@ -125,6 +118,7 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPossessMindPossessed(Entity<PossessedComponent> ent, ref BeforeMindPossessEvent args)
     {
         if (args.Cancelled)
@@ -134,6 +128,14 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent(before: [typeof(SharedSuicideSystem)])]
+    private void OnSuicideAttempt(Entity<PossessedComponent> ent, ref SuicideGhostEvent args)
+    {
+        // nice try
+        args.Handled = true;
+    }
+
+    [SubscribeLocalEvent]
     private void OnPossessMindShadowling(Entity<ShadowlingComponent> ent, ref BeforeMindPossessEvent args)
     {
         if (args.Cancelled)
@@ -143,6 +145,7 @@ public abstract partial class SharedPossessionSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPossessMindDevil(Entity<DevilComponent> ent, ref BeforeMindPossessEvent args)
     {
         if (args.Cancelled)

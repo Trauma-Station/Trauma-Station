@@ -7,6 +7,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Effects;
@@ -18,9 +19,10 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Weather;
+using Content.Trauma.Common.Atmos;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -36,8 +38,6 @@ public sealed partial class AristocratSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _rand = default!;
-    [Dependency] private IPrototypeManager _prot = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -58,10 +58,10 @@ public sealed partial class AristocratSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedGravitySystem _gravity = default!;
     [Dependency] private EntityQuery<AirlockComponent> _airlockQuery = default!;
-    [Dependency] private EntityQuery<StatusEffectsComponent> _statusQuery = default!;
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
     private static readonly EntProtoId IceWallPrototype = "WallIce";
+    private static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
     private static readonly EntProtoId SnowfallMagic = "WeatherSnowfallMagic";
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
@@ -70,17 +70,11 @@ public sealed partial class AristocratSystem : EntitySystem
     private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
 
+    private readonly HashSet<Entity<DamageableComponent>> _targets = new();
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
+    private readonly HashSet<Entity<OnFireComponent>> _fires = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AristocratComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<AristocratComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<AristocratComponent, MobStateChangedEvent>(OnMobStateChange);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<AristocratComponent> ent, ref ComponentStartup args)
     {
         if (!HasComp<MobStateComponent>(ent))
@@ -88,7 +82,7 @@ public sealed partial class AristocratSystem : EntitySystem
 
         BeginWaltz(ent);
         DoVoidAnnounce(ent, "begin");
-        _movement.RefreshWeightlessModifiers(ent);
+        _movement.RefreshWeightlessModifiers(ent.Owner);
         _gravity.RefreshWeightless(ent.Owner, true);
     }
 
@@ -156,6 +150,7 @@ public sealed partial class AristocratSystem : EntitySystem
             _weather.TryRemoveWeather(map, SnowfallMagic);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChange(Entity<AristocratComponent> ent, ref MobStateChangedEvent args)
     {
         var stateComp = args.Component;
@@ -177,6 +172,7 @@ public sealed partial class AristocratSystem : EntitySystem
     }
 
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<AristocratComponent> ent, ref ComponentShutdown args)
     {
         EndWaltz(ent); // its over bros
@@ -185,7 +181,7 @@ public sealed partial class AristocratSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _movement.RefreshWeightlessModifiers(ent);
+        _movement.RefreshWeightlessModifiers(ent.Owner);
         _gravity.RefreshWeightless(ent.Owner, false);
     }
 
@@ -199,7 +195,7 @@ public sealed partial class AristocratSystem : EntitySystem
             {
                 var offset = new Vector2(x, y);
 
-                var pos = coords.Offset(offset).SnapToGrid(EntityManager, _mapMan);
+                var pos = coords.Offset(offset).SnapToGrid(EntityManager);
                 tiles.Add(pos);
             }
         }
@@ -247,8 +243,9 @@ public sealed partial class AristocratSystem : EntitySystem
             var rotated = new Box2Rotated(box, rot, pos);
 
             List<EntityUid> affected = new();
-            var result = _lookup.GetEntitiesIntersecting(xform.MapID, rotated);
-            foreach (var ent in result)
+            _targets.Clear();
+            _lookup.GetEntitiesIntersecting(xform.MapID, rotated, _targets);
+            foreach (var ent in _targets)
             {
                 if (ignored.Contains(ent))
                     continue;
@@ -256,15 +253,7 @@ public sealed partial class AristocratSystem : EntitySystem
                 if (_heretic.IsHereticOrGhoul(ent))
                 {
                     ignored.Add(ent);
-                    if (_statusQuery.TryComp(ent, out var status))
-                    {
-                        _status.TryAddStatusEffect<PressureImmunityComponent>(ent,
-                            "PressureImmunity",
-                            TimeSpan.FromSeconds(2),
-                            true,
-                            status);
-                    }
-
+                    _status.TryUpdateStatusEffectDuration(ent.Owner, PressureImmunity, TimeSpan.FromSeconds(2));
                     continue;
                 }
 
@@ -282,7 +271,7 @@ public sealed partial class AristocratSystem : EntitySystem
                     _audio.PlayPvs(conduit.AirlockDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
                     affected.Add(ent);
-                    _damage.TryChangeDamage(ent,
+                    _damage.ChangeDamage(ent.AsNullable(),
                         dmg * _rand.NextFloat(conduit.MinMaxAirlockDamageMultiplier.X,
                             conduit.MinMaxAirlockDamageMultiplier.Y),
                         origin: ent);
@@ -292,7 +281,7 @@ public sealed partial class AristocratSystem : EntitySystem
                     _audio.PlayPvs(conduit.WindowDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
                     affected.Add(ent);
-                    _damage.TryChangeDamage(ent,
+                    _damage.ChangeDamage(ent.AsNullable(),
                         dmg * _rand.NextFloat(conduit.MinMaxWindowDamageMultiplier.X,
                             conduit.MinMaxWindowDamageMultiplier.Y),
                         origin: ent);
@@ -383,12 +372,12 @@ public sealed partial class AristocratSystem : EntitySystem
     private void ExtinguishFires(Entity<AristocratComponent, TransformComponent> ent)
     {
         var coords = ent.Comp2.Coordinates;
-        var fires = _lookup.GetEntitiesInRange<FlammableComponent>(coords, ent.Comp1.Range);
+        _fires.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp1.Range, _fires);
 
-        foreach (var (uid, flam) in fires)
+        foreach (var target in _fires)
         {
-            if (flam.OnFire)
-                _flammable.Extinguish(uid, flam);
+            _flammable.TryExtinguish(target.Owner);
         }
 
         ExtinguishFiresTiles(ent);
@@ -434,8 +423,8 @@ public sealed partial class AristocratSystem : EntitySystem
 
         foreach (var noob in noobs)
         {
-            // Apply up to 3 void chill stacks
-            _voidcurse.DoCurse(noob, 1, 3);
+            // Apply up to 4 void chill stacks
+            _voidcurse.DoCurse(noob, 1, 4);
         }
     }
 
@@ -460,7 +449,7 @@ public sealed partial class AristocratSystem : EntitySystem
             if (tile == null)
                 continue;
 
-            var newTile = _prot.Index(SnowTilePrototype);
+            var newTile = ProtoMan.Index(SnowTilePrototype);
             _tile.ReplaceTile(tile.Value, newTile);
 
             // TODO: turf or something bruh

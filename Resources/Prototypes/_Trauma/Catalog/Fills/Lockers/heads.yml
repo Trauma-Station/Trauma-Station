@@ -29,7 +29,6 @@
     - id: CartridgeRocketSingularityBuster
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
-    - id: MachinePowerTransmissionLaserFlatpack
     - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
@@ -64,7 +63,6 @@
   id: LockerFillHeadOfSecurityTrauma
   table: !type:AllSelector
     children:
-    - id: BoxSkillChipsSec
     - id: ClothingBeltSheathHeadOfSecurityFilled
     - id: TelescopicShield
     - id: ArmoryOverrideKeyComponents

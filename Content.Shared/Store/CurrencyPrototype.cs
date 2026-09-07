@@ -1,7 +1,5 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Shared.Store;
 
@@ -14,7 +12,6 @@ namespace Content.Shared.Store;
 [DataDefinition]
 public sealed partial class CurrencyPrototype : IPrototype
 {
-    [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
@@ -23,8 +20,8 @@ public sealed partial class CurrencyPrototype : IPrototype
     /// doesn't necessarily refer to the full name of the currency, only
     /// that which is displayed to the user.
     /// </summary>
-    [DataField]
-    public string DisplayName { get; private set; } = string.Empty;
+    [DataField(required: true)] // Trauma - required
+    public LocId DisplayName; // Trauma - use LocId
 
     /// <summary>
     /// The physical entity of the currency

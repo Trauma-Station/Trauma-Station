@@ -3,11 +3,11 @@
 namespace Content.Trauma.Common.Construction;
 
 /// <summary>
-/// Raised on the original entity after spawning a replacement entity before it gets deleted.
+/// Raised on the original and new entity after spawning a replacement entity before it gets deleted.
 /// E.g. using shiv on unfinished bat, changed event is raised on the unfinished bat with Target as the new bat.
 /// </summary>
 /// <remarks>
 /// only exists here because idiots put the event in server 4 no raisin
 /// </remarks>
 [ByRefEvent]
-public record struct ConstructionChangedEvent(EntityUid Target);
+public record struct ConstructionChangedEvent(EntityUid New, EntityUid Old, EntityUid? User);

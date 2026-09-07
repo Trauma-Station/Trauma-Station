@@ -20,7 +20,6 @@ public abstract partial class SharedContrabandDetectorSystem : EntitySystem
     [Dependency] private SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private SharedPowerReceiverSystem _powerReceiverSystem = default!;
-    [Dependency] private IPrototypeManager _prototypeMan = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -191,7 +190,7 @@ public abstract partial class SharedContrabandDetectorSystem : EntitySystem
         if (!Resolve(contraband, ref component))
             return true;
 
-        var jobs = component.AllowedJobs.Select(p => _prototypeMan.Index(p).LocalizedName).ToArray();
+        var jobs = component.AllowedJobs.Select(p => ProtoMan.Index(p).LocalizedName).ToArray();
 
         var job = "";
         List<ProtoId<DepartmentPrototype>> departments = new();

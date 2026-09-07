@@ -44,7 +44,7 @@ public sealed partial class DefileSystem : EntitySystem
             if (!TryInjectReagents(args.Target, ent))
                 return;
 
-            _popup.PopupClient(Loc.GetString("wraith-poison-success", ("target", ent.Owner)), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-poison-success", ("target", ent.Owner)), ent.Owner, ent.Owner);
             args.Handled = true;
         }
     }

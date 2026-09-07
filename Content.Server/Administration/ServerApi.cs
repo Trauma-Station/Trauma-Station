@@ -21,7 +21,7 @@ using Content.Shared.Administration.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
@@ -359,6 +359,7 @@ public sealed partial class ServerApi : IPostInjectInit
 
             var reason = body.Reason ?? "No reason supplied";
             var info = new CreateServerBanInfo(reason);
+            info.WithWebhookReason(body.WebhookReason); // Trauma
 
             info.AddHWId(located.LastHWId);
             info.AddUser(located.UserId, located.Username);
@@ -548,14 +549,14 @@ public sealed partial class ServerApi : IPostInjectInit
     private async Task GetGameRules(IStatusHandlerContext context)
     {
         var gameRules = new List<string>();
+        // <Trauma> - cache name and skip abstract check, theyre never returned by it
+        var ruleName = _componentFactory.CompName<GameRuleComponent>();
         foreach (var gameRule in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
         {
-            if (gameRule.Abstract)
-                continue;
-
-            if (gameRule.HasComponent<GameRuleComponent>(_componentFactory))
+            if (gameRule.HasComp(ruleName))
                 gameRules.Add(gameRule.ID);
         }
+        // </Trauma>
 
         await context.RespondJsonAsync(new GameruleResponse
         {
@@ -735,6 +736,7 @@ public sealed partial class ServerApi : IPostInjectInit
     {
         public required Guid Guid { get; init; }
         public string? Reason { get; init; }
+        public string? WebhookReason { get; init; } // Trauma
         public NoteSeverity Severity { get; init; }
         public uint? Minutes { get; init; }
     }

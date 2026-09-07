@@ -13,3 +13,9 @@
   sexes:
   - Unsexed
   knowledge: Diona # Trauma
+  defaultSoundsBySex:
+  - UnisexDiona
+  - UnisexDiona
+  - UnisexDiona
+  voices:
+  - UnisexDiona

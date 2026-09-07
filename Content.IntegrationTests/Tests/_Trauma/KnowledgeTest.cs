@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-#nullable enable
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Body;
 using Content.Trauma.Common.Knowledge.Components;
@@ -8,14 +7,19 @@ using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
-using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 public sealed class KnowledgeTest : GameTest
 {
-    public static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId Borg = "PlayerBorgGeneric";
+    private static readonly EntProtoId Brain = "OrganHumanBrain";
+    private static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId MMI = "MMI";
+
+    [SidedDependency(Side.Server)] private BodySystem _body = default!;
+    [SidedDependency(Side.Server)] private SharedContainerSystem _container = default!;
+    [SidedDependency(Side.Server)] private SharedKnowledgeSystem _knowledge = default!;
 
     /// <summary>
     /// Makes sure that humans brains can go in and out.
@@ -24,33 +28,26 @@ public sealed class KnowledgeTest : GameTest
     [Test]
     public async Task TestBrainKnowledgeTransfer()
     {
-        var pair = Pair;
-        var server = pair.Server;
-        var entMan = server.EntMan;
-        var knowledge = entMan.System<SharedKnowledgeSystem>();
-        var body = entMan.System<BodySystem>();
-
-        await server.WaitPost(() =>
+        await Server.WaitPost(() =>
         {
-            var coords = MapCoordinates.Nullspace;
-            var human = entMan.SpawnEntity(Human, coords);
+            var human = SSpawn(Human);
 
-            Assert.That(entMan.HasComponent<KnowledgeHolderComponent>(human), "Human needs a KnowledgeHolder");
-            var brain = knowledge.GetContainer(human);
+            Assert.That(SHasComp<KnowledgeHolderComponent>(human), "Human needs a KnowledgeHolder");
+            var brain = _knowledge.GetContainer(human);
             Assert.That(brain, Is.Not.Null, "Human has no knowledge container");
             var (uid, comp) = brain!.Value;
             Assert.That(uid != human, "Human's knowledge container was not the brain");
             Assert.That(comp.Holder, Is.EqualTo(human), "Brain's knowledge holder was not the human");
 
-            Assert.That(body.RemoveOrgan(human, uid), "Failed to remove brain from the human");
+            Assert.That(_body.RemoveOrgan(human, uid), "Failed to remove brain from the human");
             Assert.That(comp.Holder, Is.Null, "Brain's knowledge holder was not reset after removing it");
-            Assert.That(knowledge.GetContainer(human), Is.Null, "Human's knowledge container was not reset after removing the brain");
+            Assert.That(_knowledge.GetContainer(human), Is.Null, "Human's knowledge container was not reset after removing the brain");
 
-            Assert.That(body.InsertOrgan(human, uid), "Failed to insert brain back into the human");
+            Assert.That(_body.InsertOrgan(human, uid), "Failed to insert brain back into the human");
             Assert.That(comp.Holder, Is.EqualTo(human), "Brain's knowledge holder was not set after inserting it");
-            Assert.That(knowledge.GetContainer(human)?.Owner, Is.EqualTo(uid), "Human's knowledge container was not set back to the brain after inserting it");
+            Assert.That(_knowledge.GetContainer(human)?.Owner, Is.EqualTo(uid), "Human's knowledge container was not set back to the brain after inserting it");
 
-            entMan.DeleteEntity(human);
+            SDel(human);
         });
     }
 
@@ -61,29 +58,22 @@ public sealed class KnowledgeTest : GameTest
     [Test]
     public async Task TestBorgMMIKnowledgeTransfer()
     {
-        var pair = Pair;
-        var server = pair.Server;
-        var entMan = server.EntMan;
-        var containerSys = entMan.System<SharedContainerSystem>();
-
-        await server.WaitPost(() =>
+        await Server.WaitPost(() =>
         {
-            var coords = MapCoordinates.Nullspace;
+            var borg = SSpawn(Borg);
+            var mmi = SSpawn(MMI);
+            var brain = SSpawn(Brain);
 
-            var borg = entMan.SpawnEntity("PlayerBorgGeneric", coords);
-            var mmi = entMan.SpawnEntity("MMI", coords);
-            var brain = entMan.SpawnEntity("OrganHumanBrain", coords);
+            var borgComp = SComp<KnowledgeHolderComponent>(borg);
+            var brainSlot = _container.GetContainer(mmi, "brain_slot");
+            _container.Insert(brain, brainSlot);
 
-            var borgComp = entMan.GetComponent<KnowledgeHolderComponent>(borg);
-            var brainSlot = containerSys.GetContainer(mmi, "brain_slot");
-            containerSys.Insert(brain, brainSlot);
-
-            var mmiSlot = containerSys.GetContainer(borg, "borg_brain");
-            containerSys.Insert(mmi, mmiSlot);
+            var mmiSlot = _container.GetContainer(borg, "borg_brain");
+            _container.Insert(mmi, mmiSlot);
 
             Assert.That(borgComp.KnowledgeEntity, Is.EqualTo(brain), "Borg should draw knowledge from the brain inside the MMI");
 
-            containerSys.Remove(mmi, mmiSlot);
+            _container.Remove(mmi, mmiSlot);
 
             Assert.That(borgComp.KnowledgeEntity, Is.Null, "Borg knowledge should clear after MMI ejection");
         });
@@ -96,18 +86,14 @@ public sealed class KnowledgeTest : GameTest
     [Test]
     public async Task TestAllLanguageKnowledgeExists()
     {
-        var pair = Pair;
-        var server = pair.Server;
-        var proto = server.ProtoMan;
-
-        await server.WaitAssertion(() =>
+        await Server.WaitAssertion(() =>
         {
             var missing = new List<string>();
-            foreach (var lang in proto.EnumeratePrototypes<LanguagePrototype>())
+            foreach (var lang in SProtoMan.EnumeratePrototypes<LanguagePrototype>())
             {
                 var expectedEntityId = $"Language{lang.ID}";
 
-                if (!proto.HasIndex<EntityPrototype>(expectedEntityId))
+                if (!SProtoMan.HasIndex<EntityPrototype>(expectedEntityId))
                     missing.Add($"- {lang.ID} (Expected entity: {expectedEntityId})");
             }
 

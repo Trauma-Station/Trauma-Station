@@ -3,6 +3,7 @@
 using Content.Client.Mind;
 using Content.Client.Overlays;
 using Content.Goobstation.Shared.Overlays;
+using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Whitelist;
@@ -18,6 +19,8 @@ public sealed partial class ThermalVisionSystem : EquipmentHudSystem<ThermalVisi
     private ThermalVisionOverlay _thermalOverlay = default!;
     private BaseSwitchableOverlay<ThermalVisionComponent> _overlay = default!;
 
+    protected override bool WorksInHands => true;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -26,6 +29,13 @@ public sealed partial class ThermalVisionSystem : EquipmentHudSystem<ThermalVisi
 
         _thermalOverlay = new ThermalVisionOverlay();
         _overlay = new BaseSwitchableOverlay<ThermalVisionComponent>();
+    }
+
+    protected override void OnRefreshEquipmentHud(Entity<ThermalVisionComponent> ent,
+        ref HeldRelayedEvent<RefreshEquipmentHudEvent<ThermalVisionComponent>> args)
+    {
+        if (ent.Comp.WorksInHands && ent.Comp.IsEquipment && CheckWhitelist(ent.Comp, args.Args.Uid))
+            base.OnRefreshEquipmentHud(ent, ref args);
     }
 
     protected override void OnRefreshComponentHud(Entity<ThermalVisionComponent> ent,
@@ -126,6 +136,6 @@ public sealed partial class ThermalVisionSystem : EquipmentHudSystem<ThermalVisi
         }
 
         // Night vision overlay is prioritized
-        _overlay.IsActive = !_overlayMan.HasOverlay<BaseSwitchableOverlay<NightVisionComponent>>();
+        _overlay.IsActive = !_overlayMan.HasOverlay<NightVisionOverlay>();
     }
 }

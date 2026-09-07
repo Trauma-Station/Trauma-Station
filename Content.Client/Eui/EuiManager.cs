@@ -12,6 +12,9 @@ namespace Content.Client.Eui
 
         private readonly Dictionary<uint, EuiData> _openUis = new();
 
+        /// <summary>
+        /// Initialisation of the EuiManager.
+        /// </summary>
         public void Initialize()
         {
             _net.RegisterNetMessage<MsgEuiCtl>(RxMsgCtl);

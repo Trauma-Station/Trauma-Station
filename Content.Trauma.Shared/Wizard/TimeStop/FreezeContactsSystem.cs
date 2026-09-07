@@ -5,6 +5,7 @@ using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Emoting;
+using Content.Shared.Guardian.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
@@ -18,7 +19,6 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Spawners;
-using Content.Trauma.Common.Wizard.Guardian;
 
 namespace Content.Trauma.Shared.Wizard.TimeStop;
 
@@ -80,7 +80,10 @@ public sealed partial class FreezeContactsSystem : EntitySystem
             despawn.Lifetime -= comp.FreezeTime;
 
         if (TryComp(uid, out FadingTimedDespawnComponent? fading) && !fading.FadeOutStarted)
-            fading.Lifetime -= comp.FreezeTime;
+        {
+            fading.Timer += TimeSpan.FromSeconds(comp.FreezeTime);
+            Dirty(uid, fading);
+        }
 
         if (!TryComp(uid, out ThrownItemComponent? thrownItem) || thrownItem.LandTime == null)
             return;
@@ -214,13 +217,16 @@ public sealed partial class FreezeContactsSystem : EntitySystem
                 otherDespawn.Lifetime += difference;
 
             if (TryComp(otherUid, out fading) && !fading.FadeOutStarted)
-                fading.Lifetime += difference;
+            {
+                fading.Lifetime -= TimeSpan.FromSeconds(difference);
+                Dirty(otherUid, fading);
+            }
 
             frozen.FreezeTime = despawn.Lifetime;
             return;
         }
 
-        if (IsImmune(otherUid) || TryComp(otherUid, out GuardianSharedComponent? guardian) && IsImmune(guardian.Host))
+        if (IsImmune(otherUid) || TryComp<GuardianComponent>(otherUid, out var guardian) && guardian.Host is { } host && IsImmune(host))
             return;
 
         EnsureComp<FrozenComponent>(otherUid).FreezeTime = despawn.Lifetime;
@@ -229,7 +235,10 @@ public sealed partial class FreezeContactsSystem : EntitySystem
             otherDespawn.Lifetime += despawn.Lifetime;
 
         if (TryComp(otherUid, out fading) && !fading.FadeOutStarted)
-            fading.Lifetime += despawn.Lifetime;
+        {
+            fading.Lifetime -= TimeSpan.FromSeconds(despawn.Lifetime);
+            Dirty(otherUid, fading);
+        }
 
         if (!TryComp(otherUid, out thrownItem) || thrownItem.LandTime == null)
             return;

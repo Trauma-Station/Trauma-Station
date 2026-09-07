@@ -23,7 +23,7 @@
         Heat: 0.8
 
 - type: entity
-  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease]
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband]
   id: ClothingHeadHatBeretSergeant
   name: sergeant beret
   description: The beret of a security member who has seen more than anyone. Make sure you salute them, they're probably the reason why you're alive today.
@@ -32,6 +32,25 @@
     sprite: _Trauma/Clothing/Head/Hats/beret_sergeant.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Head/Hats/beret_sergeant.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Recyclable
+    - PetWearable
+    - CorgiWearable
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRancher
+  name: ranchers hat
+  description: YEEEEEEEE HAAAAAAAA!!!!!!!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hats/rancher_hat.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hats/rancher_hat.rsi
   - type: Tag
     tags:
     - ClothMade

@@ -1,14 +1,17 @@
 - type: entity
   name: watcher
   id: MobWatcherBase
-  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable, BaseMobDestructible ]
   abstract: true
   description: It's like it's staring right through you.
   components:
-  - type: WeatherImmune # Lavaland change
+  # <Trauma>
+  - type: AshStormImmune
+  - type: Fauna
+  # </Trauma>
   - type: NpcFactionMember
     factions:
-    - Lavafauna
+    - Lavafauna # Trauma - was SimpleHostile
   - type: HTN
     rootTask:
       task: SimpleRangedHostileCompound
@@ -43,9 +46,9 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      140: Dead
-  - type: Butcherable
-    spawned:
+      140: Dead # Trauma - was 80
+  - type: ToolRefinable
+    refineResult:
     - id: DiamondOre1
     - id: MaterialWatcherWing1
       maxAmount: 2
@@ -75,7 +78,6 @@
     interactFailureString: petting-failure-generic
     interactSuccessSound:
       path: /Audio/Animals/lizard_happy.ogg
-  - type: Fauna # Lavaland Change
 
 - type: entity
   id: MobWatcherLavaland

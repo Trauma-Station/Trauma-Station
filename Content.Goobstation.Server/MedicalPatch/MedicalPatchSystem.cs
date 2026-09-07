@@ -48,7 +48,7 @@ public sealed partial class MedicalPatchSystem : EntitySystem
             if (stickycomp.StuckTo == null)
                 continue;
 
-            comp.NextUpdate = _timing.CurTime + TimeSpan.FromSeconds(comp.UpdateTime);
+            comp.NextUpdate = _timing.CurTime + comp.UpdateTime;
 
             Cycle(uid, comp);
         }

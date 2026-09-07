@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Actions;
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Humanoid;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Heretic;
@@ -19,7 +19,6 @@ using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
-using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -29,7 +28,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 public sealed partial class ChampionHookSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private PullingSystem _pulling = default!;
@@ -40,36 +39,31 @@ public sealed partial class ChampionHookSystem : EntitySystem
 
     [Dependency] private EntityQuery<MeleeWeaponComponent> _meleeQuery = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnGetAltVerbs(Entity<CrawlerComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        base.Initialize();
+        var user = args.User;
 
-        SubscribeLocalEvent<ChampionHookComponent, EventHereticToggleChampionHook>(OnHookToggle);
-        SubscribeLocalEvent<ChampionHookComponent, ComboAttackPerformedEvent>(OnAttack);
-        SubscribeLocalEvent<ChampionHookComponent, BeforeSpawnPullingVirtualItemsEvent>(OnVirtualItems);
-        SubscribeLocalEvent<ChampionHookComponent, MeleeAttackEvent>(OnMelee);
-        SubscribeLocalEvent<ChampionHookComponent, GetGrabMovespeedEvent>(OnGetMovespeed);
-        SubscribeLocalEvent<ChampionHookComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<ChampionHookComponent, PullStoppedMessage>(OnHookStopped);
-
-        SubscribeLocalEvent<HereticBladeComponent, GotUnequippedHandEvent>(OnUnequipHand);
-        SubscribeLocalEvent<HereticBladeComponent, AttemptMeleeEvent>(OnMeleeAttempt);
-
-        SubscribeLocalEvent<ChampionHookedComponent, CanStandWhileImmobileEvent>(OnImmobileStand);
-        SubscribeLocalEvent<ChampionHookedComponent, BeingPulledAttemptEvent>(OnPullAttempt);
-        SubscribeLocalEvent<ChampionHookedComponent, PullStoppedMessage>(OnHookedStopped);
-        SubscribeLocalEvent<ChampionHookedComponent, StoodEvent>(OnStand);
-        SubscribeLocalEvent<ChampionHookedComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
-    }
-
-    private void OnShutdown(Entity<ChampionHookComponent> ent, ref ComponentShutdown args)
-    {
-        if (TerminatingOrDeleted(ent.Comp.Action))
+        if (user == ent.Owner || args.Using is not { } used || !args.CanAccess || !args.CanInteract)
             return;
 
-        _action.SetToggled(ent.Comp.Action, false);
+        if (!CanHook(user, used, out var hook))
+            return;
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Priority = 9,
+            Act = () => DoHook((user, hook), used, ent)
+        });
     }
 
+    private bool CanHook(EntityUid user, EntityUid used, [NotNullWhen(true)] out ChampionHookComponent? hook)
+    {
+        return TryComp(user, out hook) && hook.HookedMob == null && _combat.IsInCombatMode(user) &&
+               HasComp<HereticBladeComponent>(used);
+    }
+
+    [SubscribeLocalEvent]
     private void OnUnequipHand(Entity<HereticBladeComponent> ent, ref GotUnequippedHandEvent args)
     {
         if (!TryComp(args.User, out ChampionHookComponent? hook) || hook.Weapon != ent.Owner ||
@@ -79,6 +73,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         _pulling.TryStopPull(hooked, pullable, args.User, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnMeleeAttempt(Entity<HereticBladeComponent> ent, ref AttemptMeleeEvent args)
     {
         if (!TryComp(args.User, out ChampionHookComponent? hook) || hook.Weapon != ent.Owner ||
@@ -114,28 +109,32 @@ public sealed partial class ChampionHookSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnImmobileStand(Entity<ChampionHookedComponent> ent, ref CanStandWhileImmobileEvent args)
     {
         args.CanStand = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStand(Entity<ChampionHookedComponent> ent, ref StoodEvent args)
     {
         _pulling.StopAllPulls(ent, stopPuller: false);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetMovespeed(Entity<ChampionHookComponent> ent, ref GetGrabMovespeedEvent args)
     {
         if (ent.Comp.HookedMob != null)
             args.Speed += ent.Comp.MovespeedBuff;
     }
 
+    [SubscribeLocalEvent]
     private void OnMelee(Entity<ChampionHookComponent> ent, ref MeleeAttackEvent args)
     {
         if (ent.Comp.HookedMob == null || args.Weapon == ent.Comp.Weapon ||
             !HasComp<HereticBladeComponent>(args.Weapon) ||
             !_heretic.TryGetHereticComponent(ent.Owner, out var heretic, out _) || heretic is not
-            { PathStage: >= 7, CurrentPath: HereticPath.Blade } ||
+                { PathStage: >= 7, CurrentPath: HereticPath.Blade } ||
             !TryComp(args.Weapon, out MeleeWeaponComponent? weapon))
             return;
 
@@ -144,6 +143,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         Dirty(args.Weapon, weapon);
     }
 
+    [SubscribeLocalEvent]
     private void OnHookStopped(Entity<ChampionHookComponent> ent, ref PullStoppedMessage args)
     {
         if (ent.Owner != args.PullerUid)
@@ -154,6 +154,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnHookedStopped(Entity<ChampionHookedComponent> ent, ref PullStoppedMessage args)
     {
         if (ent.Owner != args.PulledUid)
@@ -162,17 +163,20 @@ public sealed partial class ChampionHookSystem : EntitySystem
         RemComp(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<ChampionHookedComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         if (args.Type == HarmfulActionType.Grab)
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPullAttempt(Entity<ChampionHookedComponent> ent, ref BeingPulledAttemptEvent args)
     {
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnVirtualItems(Entity<ChampionHookComponent> ent, ref BeforeSpawnPullingVirtualItemsEvent args)
     {
         if (ent.Comp.HookedMob != args.Pulled)
@@ -181,27 +185,29 @@ public sealed partial class ChampionHookSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnAttack(Entity<ChampionHookComponent> ent, ref ComboAttackPerformedEvent args)
+    private void DoHook(Entity<ChampionHookComponent> ent, EntityUid used, EntityUid target)
     {
-        if (args.Type != ComboAttackType.Harm || !ent.Comp.IsEnabled ||
-            !HasComp<HumanoidProfileComponent>(args.Target) || !HasComp<HereticBladeComponent>(args.Weapon) ||
-            ent.Comp.Action is not { } action)
+        if (!TryComp(used, out MeleeWeaponComponent? melee))
             return;
 
-        _audio.PlayPredicted(ent.Comp.Sound, args.Target, ent);
-        _action.SetToggled(action, false);
-        _action.SetIfBiggerCooldown(action, ent.Comp.Cooldown);
-        _dmg.ChangeDamage(args.Target, ent.Comp.ExtraDamage, origin: ent, canMiss: false);
+        if (!_melee.InRange(ent, target, melee.Range, CompOrNull<ActorComponent>(ent)?.PlayerSession, out _) ||
+            !_melee.AttemptLightAttack(ent, used, melee, target, false))
+            return;
+
+        melee.NextAttack += TimeSpan.FromSeconds(1f / _melee.GetAttackRate(used, ent, melee));
+        Dirty(used, melee);
+
+        _audio.PlayPredicted(ent.Comp.Sound, target, ent);
+        _dmg.ChangeDamage(target, ent.Comp.ExtraDamage, origin: ent, canMiss: false);
         _pulling.StopAllPulls(ent, stopPullable: false);
-        ent.Comp.IsEnabled = false;
         Dirty(ent);
-        if (!_stun.TryKnockdown(args.Target, ent.Comp.KnockdownTime, autoStand: false))
+        if (!_stun.TryKnockdown(target, ent.Comp.KnockdownTime, autoStand: false))
             return;
 
-        ent.Comp.HookedMob = args.Target;
+        ent.Comp.HookedMob = target;
         if (!_pulling.TryStartPull(ent,
-                args.Target,
-                grabStageOverride: GrabStage.Hard,
+                target,
+                grabStageOverride: GrabStage.Soft,
                 escapeAttemptModifier: 0f,
                 force: true))
         {
@@ -209,16 +215,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
             return;
         }
 
-        ent.Comp.Weapon = args.Weapon;
-        EnsureComp<ChampionHookedComponent>(args.Target);
-    }
-
-    private void OnHookToggle(Entity<ChampionHookComponent> ent, ref EventHereticToggleChampionHook args)
-    {
-        ent.Comp.IsEnabled = !ent.Comp.IsEnabled;
-        ent.Comp.Action = args.Action;
-        Dirty(ent);
-        args.Toggle = true;
-        args.Handled = true;
+        ent.Comp.Weapon = used;
+        EnsureComp<ChampionHookedComponent>(target);
     }
 }

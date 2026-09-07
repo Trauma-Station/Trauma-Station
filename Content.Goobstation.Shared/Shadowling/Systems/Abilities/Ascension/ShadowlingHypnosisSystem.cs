@@ -14,7 +14,6 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Ascension;
 public sealed partial class ShadowlingHypnosisSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -40,7 +39,7 @@ public sealed partial class ShadowlingHypnosisSystem : EntitySystem
             || HasComp<ShadowlingComponent>(target))
             return;
 
-        var comps = _proto.Index(component.HypnosisComponents);
+        var comps = ProtoMan.Index(component.HypnosisComponents);
         EntityManager.AddComponents(target, comps);
         args.Handled = true;
     }

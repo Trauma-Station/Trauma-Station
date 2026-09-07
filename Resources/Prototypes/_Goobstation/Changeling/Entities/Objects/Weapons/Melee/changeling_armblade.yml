@@ -5,7 +5,6 @@
   id: ArmBladeChangeling
   suffix: Unremoveable
   components:
-  - type: Sharp
   - type: Sprite
     sprite: _Goobstation/Changeling/arm_blade.rsi
     state: icon

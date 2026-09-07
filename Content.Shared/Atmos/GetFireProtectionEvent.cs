@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Shared.Body;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Content.Shared.Inventory;
 
 namespace Content.Shared.Atmos;
@@ -23,10 +27,16 @@ public sealed class GetFireProtectionEvent : EntityEventArgs, IInventoryRelayEve
     /// </summary>
     public readonly EntityUid Target;
 
-    public GetFireProtectionEvent(EntityUid target) // Goobstation
+    /// <summary>
+    /// Trauma - reductions stacked for each armor by the covered part.
+    /// A reduction >= 1 fully protects a part.
+    /// </summary>
+    public Dictionary<ProtoId<OrganCategoryPrototype>, float> PartReductions = new();
+
+    public GetFireProtectionEvent(EntityUid target) // Trauma - added target
     {
+        Target = target; // Trauma
         Multiplier = 1f;
-        Target = target; // Goobstation
     }
 
     /// <summary>

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
+  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder, BaseXenoborgDestructible ]
   id: XenoborgEngi
   name: engi xenoborg
   suffix: with brain
@@ -21,30 +21,41 @@
       shader: unshaded
       map: ["light"]
       visible: false
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ElectrifiedVisuals.ShowSparks:
+        enum.ElectrifiedLayers.Sparks:
+          True: { visible: True }
+          False: { visible: False }
   - type: BorgChassis
     maxModules: 8 # Trauma - was 7
     hasMindState: xenoborg_engi_e
     noMindState: xenoborg_engi_e_r
     moduleWhitelist:
       tags:
+      # <Trauma>
+      - BorgModuleJanitor
+      # </Trauma>
       - XenoborgModuleGeneric
       - XenoborgModuleEngi
-      - BorgModuleEngineering
-      - BorgModuleGeneric
-      - BorgModuleJanitor # Trauma
   - type: ContainerFill
     containers:
       borg_brain:
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - BorgModuleAdvancedTool
-      - BorgModuleConstruction
-      - BorgModuleRCD
-      - BorgModuleCable
+      - XenoborgModuleAdvancedTool
+      - XenoborgModuleConstruction
       - XenoborgModuleAccessBreaker
-      - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning # Trauma
+      - XenoborgModuleTileGun
+      # <Trauma>
+      - BorgModuleAdvancedCleaning
+      # <Trauma>
   - type: ShowElectrocutionHUD
   - type: ShowHealthBars
     damageContainers:
@@ -59,7 +70,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 60
-      MaterialsKnowledge: 60
       DoorsKnowledge: 60
       AirlocksKnowledge: 60
       FurnitureKnowledge: 60
@@ -169,7 +179,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 20
-      MaterialsKnowledge: 20
       DoorsKnowledge: 20
       AirlocksKnowledge: 20
       FurnitureKnowledge: 20
@@ -178,13 +187,11 @@
       WallsKnowledge: 20
       WindowsKnowledge: 20
       ShootingKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
       WeaponsKnowledge: 51
   # </Trauma>
 
 - type: entity
-  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
+  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder, BaseXenoborgDestructible ]
   id: XenoborgScout
   name: scout xenoborg
   suffix: with brain
@@ -241,7 +248,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 20
-      MaterialsKnowledge: 20
       DoorsKnowledge: 20
       AirlocksKnowledge: 20
       FurnitureKnowledge: 20
@@ -250,14 +256,11 @@
       WallsKnowledge: 20
       WindowsKnowledge: 20
       MeleeKnowledge: 51
-      StrengthKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
       WeaponsKnowledge: 51
   # </Trauma>
 
 - type: entity
-  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
+  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder, BaseXenoborgDestructible ]
   id: XenoborgStealth
   name: stealth xenoborg
   suffix: with brain
@@ -313,7 +316,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 20
-      MaterialsKnowledge: 20
       DoorsKnowledge: 20
       AirlocksKnowledge: 20
       FurnitureKnowledge: 20
@@ -322,8 +324,6 @@
       WallsKnowledge: 20
       WindowsKnowledge: 20
       ShootingKnowledge: 51
-      ToughnessKnowledge: 51
-      AthleticsKnowledge: 51
       WeaponsKnowledge: 51
   # </Trauma>
 
@@ -339,13 +339,13 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - BorgModuleAdvancedTool
-      - BorgModuleConstruction
-      - BorgModuleRCD
-      - BorgModuleCable
+      - XenoborgModuleAdvancedTool
+      - XenoborgModuleConstruction
       - XenoborgModuleAccessBreaker
-      - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning # Trauma
+      - XenoborgModuleTileGun
+      # <Trauma>
+      - BorgModuleAdvancedCleaning
+      # </Trauma>
   - type: ItemSlots
     slots:
       cell_slot:

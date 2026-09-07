@@ -2,24 +2,6 @@
 
 - type: entity
   parent: BaseAction
-  id: ActionHereticChampionHook
-  name: Champion Hook
-  description: Knockdown and hook your next heretic blade light attack target.
-  components:
-  - type: Action
-    checkCanInteract: false
-    itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: hook
-    iconOn:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: hook_on
-  - type: InstantAction
-    event: !type:EventHereticToggleChampionHook
-
-- type: entity
-  parent: BaseAction
   id: ActionHereticSacraments
   name: Sacraments of Power
   description: Become immune to all damage temporarily, sending it back to attackers.
@@ -28,9 +10,10 @@
     checkCanInteract: false
     useDelay: 30
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: sacraments
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: sacraments
   - type: InstantAction
     event: !type:EventHereticSacraments
   - type: HereticAction
@@ -48,9 +31,10 @@
     checkCanInteract: false
     useDelay: 60
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: furious_steel
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: furious_steel
   - type: InstantAction
     event: !type:EventHereticFuriousSteel
   - type: HereticAction
@@ -71,9 +55,10 @@
     checkCanInteract: false
     useDelay: 300
     itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: among_sheep
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    layers:
+    - state: among_sheep
   - type: InstantAction
     event: !type:EventHereticDomainExpansion
   - type: HereticAction

@@ -12,7 +12,6 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed partial class AreaSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MapAreaSystem _mapArea = default!;
     [Dependency] private TurfSystem _turf = default!;
@@ -39,20 +38,18 @@ public sealed partial class AreaSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AreaComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent]
     private void OnAnchorStateChanged(Entity<AreaComponent> ent, ref AnchorStateChangedEvent args)
     {
         // delete areas that get unanchored by explosions or other more cursed things
-        if (!args.Anchored)
+        if (!args.Anchored && !args.Detaching)
             PredictedQueueDel(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (!args.WasModified<EntityPrototype>())
@@ -67,7 +64,7 @@ public sealed partial class AreaSystem : EntitySystem
         DepartmentAreas.Clear();
         var name = Factory.GetComponentName<AreaComponent>();
         var dept = Factory.GetComponentName<DepartmentAreaComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: proto.HasComp(name) after engine update
             if (!proto.Components.ContainsKey(name))

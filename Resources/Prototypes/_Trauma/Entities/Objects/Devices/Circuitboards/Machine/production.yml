@@ -15,40 +15,21 @@
       Steel: 10
       CableHV: 4
 
-- type: entity  # Food synthesizer
+- type: entity
   parent: BaseMachineCircuitboard
-  id: EnergyFoodSynthesizerMachineCircuitboard
-  name: energy food synthesizer machine board
-  description: A machine printed circuit board for a energy food synthesizer.
+  id: ChemiCompilerMachineCircuitboard
+  name: ChemiCompiler M7 machine board
+  description: A machine printed circuit board for a ChemiCompiler M7.
   components:
   - type: Sprite
-    state: service
+    state: medical
   - type: MachineBoard
-    prototype: ServiceEnergyChemDispenser
+    prototype: ChemiCompiler
     stackRequirements:
-      Manipulator: 3
-      Glass: 5
-      Steel: 5
-      BSCrystal: 1
+      Manipulator: 2
+      Glass: 2
+      Cable: 2
     tagRequirements:
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
-
-- type: entity
-  parent: EnergyFoodSynthesizerMachineCircuitboard
-  id: EnergyBoozeDispenserMachineCircuitboard
-  name: energy booze dispenser machine board
-  description: A machine printed circuit board for a energy food synthesizer.
-  components:
-  - type: MachineBoard
-    prototype: EnergyBoozeDispenser
-
-- type: entity
-  parent: EnergyFoodSynthesizerMachineCircuitboard
-  id: EnergySodaDispenserMachineCircuitboard
-  name: energy soda dispenser machine board
-  description: A machine printed circuit board for a energy food synthesizer.
-  components:
-  - type: MachineBoard
-    prototype: EnergySodaDispenser

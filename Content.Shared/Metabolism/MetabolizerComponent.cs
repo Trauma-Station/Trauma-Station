@@ -86,6 +86,7 @@ public sealed partial class MetabolizerComponent : Component
     /// </summary>
     [DataField]
     [Access(typeof(MetabolizerSystem), Other = AccessPermissions.ReadWriteExecute)] // Trauma - add Write
+    [AutoNetworkedField] // Trauma
     public HashSet<ProtoId<MetabolizerTypePrototype>>? MetabolizerTypes;
 
     /// <summary>
@@ -94,6 +95,7 @@ public sealed partial class MetabolizerComponent : Component
     ///     quantity, would be muuuuch better than just one poison acting.
     /// </summary>
     [DataField("maxReagents")]
+    [AutoNetworkedField] // Trauma
     public int MaxReagentsProcessable = 3;
 
     /// <summary>

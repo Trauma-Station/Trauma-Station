@@ -7,10 +7,11 @@
   description: Changes your coordinates, allowing you to teleport to nearby locations
   categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _Goobstation/Actions/chronoblink.rsi
+    layers:
+    - state: effect
   - type: Action
-    icon:
-      sprite: _Goobstation/Actions/chronoblink.rsi
-      state: effect
     useDelay: 15
     itemIconStyle: NoItem
     sound:
@@ -21,4 +22,4 @@
     checkCanAccess: false
     range: 0
   - type: WorldTargetAction
-    event: !type:TeleportSpellEvent
+    event: !type:TeleportActionEvent

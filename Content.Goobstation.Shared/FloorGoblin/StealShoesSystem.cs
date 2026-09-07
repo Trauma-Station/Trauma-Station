@@ -67,7 +67,7 @@ public sealed partial class StealShoesSystem : EntitySystem
 
         if (TryComp<VentCrawlerComponent>(uid, out var vent) && vent.InTube)
         {
-            _popup.PopupPredicted(Loc.GetString("steal-shoes-covered"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("steal-shoes-covered"), uid, uid);
             args.Handled = true;
             return;
         }
@@ -79,7 +79,7 @@ public sealed partial class StealShoesSystem : EntitySystem
 
         if (!CanStealHere(uid))
         {
-            _popup.PopupPredicted(Loc.GetString("steal-shoes-covered"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("steal-shoes-covered"), uid, uid);
             args.Handled = true;
             return;
         }
@@ -89,7 +89,7 @@ public sealed partial class StealShoesSystem : EntitySystem
             || shoesUid == null
             || !HasComp<ClothingComponent>(shoesUid))
         {
-            _popup.PopupPredicted(Loc.GetString("steal-shoes-no-shoes"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("steal-shoes-no-shoes"), uid, uid);
             args.Handled = true;
             return;
         }
@@ -128,7 +128,7 @@ public sealed partial class StealShoesSystem : EntitySystem
         if (component.ChompSound is { } chomp)
             _audio.PlayPredicted(chomp, uid, uid);
 
-        _popup.PopupClient(Loc.GetString("steal-shoes-event", ("target", Identity.Name(target, EntityManager)), ("shoes", Name(shoes))), uid, uid);
+        _popup.PopupEntity(Loc.GetString("steal-shoes-event", ("target", Identity.Name(target, EntityManager)), ("shoes", Name(shoes))), uid, uid);
         _popup.PopupEntity(Loc.GetString("shoes-stolen-target-event"), target, target);
 
         ev.Handled = true;

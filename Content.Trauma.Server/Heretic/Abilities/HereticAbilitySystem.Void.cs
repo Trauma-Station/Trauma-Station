@@ -10,15 +10,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    protected override void SubscribeVoid()
-    {
-        base.SubscribeVoid();
-
-        SubscribeLocalEvent<HereticVoidPrisonEvent>(OnVoidPrison);
-
-        SubscribeLocalEvent<VoidPrisonComponent, PolymorphedEvent>(OnPrisonRevert);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPrisonRevert(Entity<VoidPrisonComponent> ent, ref PolymorphedEvent args)
     {
         if (!args.IsRevert)
@@ -28,6 +20,7 @@ public sealed partial class HereticAbilitySystem
         Voidcurse.DoCurse(args.NewEntity);
     }
 
+    [SubscribeLocalEvent]
     private void OnVoidPrison(HereticVoidPrisonEvent args)
     {
         var target = args.Target;
@@ -41,7 +34,7 @@ public sealed partial class HereticAbilitySystem
         args.Handled = true;
 
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev, true);
+        RaiseLocalEvent(target, ref ev, true);
         if (ev.Cancelled)
             return;
 

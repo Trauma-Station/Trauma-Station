@@ -13,19 +13,19 @@
   - type: KnowledgeGrantOnWear
     blocked:
       MartialArtCorporateJudo: true
-  - type: Tag
-    tags:
-    - StunBaton
+  - type: WeaponClass
+    class: NonLethal
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunbaton.rsi
     layers:
     - state: stunbaton_off
       map: [ "enum.ToggleableVisuals.Layer" ]
-  - type: Stunbaton
-    energyPerUse: 50
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 50
   - type: ItemToggle
-    predictable: false
+    onActivate: false
     soundActivate:
       collection: sparks
       params:
@@ -53,6 +53,11 @@
     bluntStaminaDamageFactor: 2.0
     angle: 0 # Trauma - was 60, no more wideswing
     animation: WeaponArcThrust
+    undamagedAlertThreshold: 0
+  - type: MeleeBatteryHitsLeft
+  - type: StaminaDamageOnHitRequiresToggle
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 50
   - type: StaminaDamageOnHit
     # <Trauma>
     damage: 15 # was 35, now 55 total over time
@@ -119,6 +124,10 @@
   - type: GuideHelp
     guides:
     - Security
+    - Antagonists
+  - type: Tag
+    tags:
+    - Stunbaton
 
 - type: entity
   name: truncheon
@@ -130,6 +139,8 @@
   - type: KnowledgeGrantOnWear
     blocked:
       MartialArtCorporateJudo: true
+  - type: WeaponClass
+    class: Bludgeon
   # <Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/truncheon.rsi
@@ -195,11 +206,6 @@
         visible: false
         shader: unshaded
     - type: Flash
-      # <Trauma>
-      meleeDuration: 7.0
-      aoeFlashDuration: 6.0
-      meleeStunDuration: 2.5
-      # </Trauma>
     - type: RevolutionaryConverter
     - type: LimitedCharges
       maxCharges: 5
@@ -246,7 +252,7 @@
 
 - type: entity
   name: portable flasher
-  parent: [BaseMachine, BaseSecurityContraband]
+  parent: [BaseMachine, BaseSecurityContraband, BaseMachineDestructible]
   id: PortableFlasher
   description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
   components:
@@ -290,3 +296,11 @@
       guides:
       - Security
       - Antagonists
+    - type: Destructible
+      thresholds:
+      - trigger: !type:DamageTrigger
+          damage: 175
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalGlassBreak

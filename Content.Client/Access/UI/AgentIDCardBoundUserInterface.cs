@@ -1,68 +1,70 @@
+// <Trauma>
+using Content.Trauma.Common.NanoChat;
+// </Trauma>
+using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.StatusIcon;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.Access.UI
+namespace Content.Client.Access.UI;
+
+/// <summary>
+/// Initializes a <see cref="AgentIDCardWindow"/> and updates it when new server messages are received.
+/// </summary>
+public sealed class AgentIDCardBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    /// <summary>
-    /// Initializes a <see cref="AgentIDCardWindow"/> and updates it when new server messages are received.
-    /// </summary>
-    public sealed class AgentIDCardBoundUserInterface : BoundUserInterface
+    private AgentIDCardWindow? _window;
+
+    protected override void Open()
     {
-        private AgentIDCardWindow? _window;
+        base.Open();
 
-        public AgentIDCardBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-        {
-        }
+        if (!EntMan.TryGetComponent(Owner, out AgentIDCardComponent? agent))
+            return;
 
-        protected override void Open()
-        {
-            base.Open();
+        _window = this.CreateWindow<AgentIDCardWindow>();
+        // <Trauma>
+        _window.OnSetNumber += n => SendMessage(new AgentIDSetNumberMessage(n));
+        _window.SetOwner(Owner);
+        // </Trauma>
+        _window.OnNameChanged += OnNameChanged;
+        _window.OnJobChanged += OnJobChanged;
+        _window.OnJobIconChanged += OnJobIconChanged;
 
-            _window = this.CreateWindow<AgentIDCardWindow>();
+        ProtoId<JobIconPrototype> currentIcon = default;
+        if (EntMan.TryGetComponent<IdCardComponent>(Owner, out var card))
+            currentIcon = card.JobIcon;
 
-            _window.OnNameChanged += OnNameChanged;
-            _window.OnJobChanged += OnJobChanged;
-            _window.OnJobIconChanged += OnJobIconChanged;
-            _window.OnNumberChanged += OnNumberChanged; // DeltaV
-        }
+        _window.SetAllowedIcons(agent.IconGroups, currentIcon);
+        Update();
+    }
 
-        // DeltaV - Add number change handler
-        private void OnNumberChanged(uint newNumber)
-        {
-            SendMessage(new AgentIDCardNumberChangedMessage(newNumber));
-        }
+    public override void Update()
+    {
+        base.Update();
 
-        private void OnNameChanged(string newName)
-        {
-            SendMessage(new AgentIDCardNameChangedMessage(newName));
-        }
+        if (_window == null)
+            return;
 
-        private void OnJobChanged(string newJob)
-        {
-            SendMessage(new AgentIDCardJobChangedMessage(newJob));
-        }
+        if (!EntMan.TryGetComponent<IdCardComponent>(Owner, out var card))
+            return;
 
-        public void OnJobIconChanged(ProtoId<JobIconPrototype> newJobIconId)
-        {
-            SendMessage(new AgentIDCardJobIconChangedMessage(newJobIconId));
-        }
+        _window.Update(card);
+    }
 
-        /// <summary>
-        /// Update the UI state based on server-sent info
-        /// </summary>
-        /// <param name="state"></param>
-        protected override void UpdateState(BoundUserInterfaceState state)
-        {
-            base.UpdateState(state);
-            if (_window == null || state is not AgentIDCardBoundUserInterfaceState cast)
-                return;
+    private void OnNameChanged(string newName)
+    {
+        SendPredictedMessage(new AgentIDCardNameChangedMessage(newName));
+    }
 
-            _window.SetCurrentName(cast.CurrentName);
-            _window.SetCurrentJob(cast.CurrentJob);
-            _window.SetAllowedIcons(cast.CurrentJobIconId);
-            _window.SetCurrentNumber(cast.CurrentNumber); // DeltaV
-        }
+    private void OnJobChanged(string newJob)
+    {
+        SendPredictedMessage(new AgentIDCardJobChangedMessage(newJob));
+    }
+
+    private void OnJobIconChanged(ProtoId<JobIconPrototype> newJobIconId)
+    {
+        SendPredictedMessage(new AgentIDCardJobIconChangedMessage(newJobIconId));
     }
 }

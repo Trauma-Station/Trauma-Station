@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/6242466aba73ef2d9023079ee8af6fdda71b1560/icons/obj/antags/eldritch.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "potion"
+    }
+  ]
+}

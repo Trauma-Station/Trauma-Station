@@ -3,25 +3,7 @@
   id: BaseKnife
   abstract: true
   components:
-  - type: Tag
-    tags:
-    - Knife
-  - type: Sharp
-  - type: Execution
-    doAfterDuration: 4.0
-  - type: Utensil
-    types:
-      - Knife
-  - type: MeleeWeapon
-    animationRotation: -135 # WWDP
-    wideAnimationRotation: -135
-    canWideSwing: false # Trauma
-    damage:
-      types:
-        Slash: 10
-    soundHit:
-      path: /Audio/Weapons/bladeslice.ogg
-  # Goobstation edit start
+  # <Trauma>
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
@@ -37,19 +19,39 @@
       path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
       params:
         volume: -8
-  # Goobstation edit end
+  - type: Scalpel
+    speed: 0.65
+  - type: CosmicTransmutable
+    transmuteTo: SwordCosmicCult
+  - type: WeaponClass
+    class: Knife
+  - type: Sharp
+  # </Trauma>
+  - type: Tag
+    tags:
+    - Knife
+  - type: Execution
+    doAfterDuration: 4.0
+  - type: Utensil
+    types:
+      - Knife
+  - type: MeleeWeapon
+    animationRotation: -135 # WWDP
+    wideAnimationRotation: -135
+    heavyPartDamageMultiplier: 0.75 # Trauma
+    damage:
+      types:
+        Slash: 10
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
   - type: Item
     size: Small
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
-  - type: Scalpel # Shitmed
-    speed: 0.65
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: SwordCosmicCult
 
 - type: entity
   parent: [BaseKnife, BaseChefContraband] # Trauma - Made it contraband
@@ -57,6 +59,16 @@
   name: kitchen knife
   description: A general purpose Chef's Knife made by Asters Merchant Guild. Guaranteed to stay sharp for years to come..
   components:
+  # <Trauma>
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 10
+  # </Trauma>
   - type: Tag
     tags:
     - Knife
@@ -72,14 +84,20 @@
     guides:
     - Chef
     - FoodRecipes
-  - type: EmbeddableProjectile # Goobstation
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-  - type: LandAtCursor # Goobstation
-  - type: DamageOtherOnHit # Goobstation
-    damage:
-      types:
-        Slash: 10
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          vertices:
+          - -0.35,-0.2
+          - -0.2,-0.35
+          - 0.4,0.25
+          - 0.25,0.4
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
 
 - type: entity
   name: butcher's cleaver
@@ -87,6 +105,14 @@
   id: ButchCleaver
   description: A huge blade used for chopping and chopping up meat. This includes clowns and clown-by-products.
   components:
+  # <Trauma>
+  - type: Tool
+    speedModifier: 1.4 # it's designed for butchering
+  - type: Scalpel
+    speed: 0.3
+  - type: BoneSaw # Better than tg 25% because its a cleaver its meant to hack off limbs
+    speed: 0.5
+  # </Trauma>
   - type: Tag
     tags:
     - Knife
@@ -112,14 +138,20 @@
     guides:
     - Chef
     - FoodRecipes
-  # <Trauma>
-  - type: Sharp
-    butcherDelayModifier: 0.75 # it's designed for butchering
-  - type: Scalpel
-    speed: 0.3
-  - type: BoneSaw # Better than tg 25% because its a cleaver its meant to hack off limbs
-    speed: 0.5
-  # </Trauma>
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          vertices:
+          - -0.48,-0.15
+          - -0.3,-0.48
+          - 0.48,-0.075
+          - 0.3,0.3
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
 
 - type: entity
   name: combat knife
@@ -127,6 +159,14 @@
   id: CombatKnife
   description: A deadly knife intended for melee confrontations.
   components:
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: GunUpgrade
+    name: gun-upgrade-bayonet-name
+    examineTextType: gun-upgrade-examine-type-can-use
+    insertedTextType: gun-upgrade-inserted-examine-type-attached
+  - type: GunUpgradeBayonet
+  # </Trauma>
   - type: Tag
     tags:
     - CombatKnife
@@ -157,12 +197,6 @@
     malus: 0.225
   - type: ThrowingAngle
     angle: 225
-  - type: ThrowableBlocked # Goobstation
-  - type: GunUpgrade # Lavaland Change
-    name: gun-upgrade-bayonet-name
-    examineTextType: gun-upgrade-examine-type-can-use
-    insertedTextType: gun-upgrade-inserted-examine-type-attached
-  - type: GunUpgradeBayonet # Lavaland Change
   - type: Fixtures
     fixtures:
       fix1:
@@ -210,10 +244,40 @@
       types:
         Slash: 15
   - type: Item
+    # <Trauma>
+    storedOffset: -1,1
+    storedRotation: -45
+    # </Trauma>
     sprite: Objects/Weapons/Melee/kukri_knife.rsi
     storedSprite: null
-    storedOffset: -1,1 # Trauma
-    storedRotation: -45 # Trauma
+
+- type: entity
+  parent: [ CombatKnife, BaseXenoborgContraband ]
+  id: XenoborgBioKnife
+  name: bio knife
+  description: Melds itself to specific metabolizers and will deal extra damage to those targets!
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/bioknife.rsi
+    state: icon
+  - type: MeleeWeapon
+    attackRate: 1.0
+    damage:
+      types:
+        Slash: 10
+  - type: Item
+    sprite: Objects/Weapons/Melee/bioknife.rsi
+  - type: BonusDamageOnMetabolism
+    selectedMetabolizer: Human
+    excludedMetabolizers:
+    - Vox # Their biology is resistant to this!
+    # The rest of these are just so we don't clog up the menu with useless items.
+    - Bloodsucker
+    - Dragon
+    #- Changeling # Trauma - slop doesnt exist
+    damage:
+      types:
+        Poison: 10
 
 - type: entity
   parent: [ClothingHeadHatGreyFlatcap, BaseMinorContraband]
@@ -222,6 +286,9 @@
   description: Fashionable for both the working class and old man Jenkins. It has glass shards hidden in the brim.
   suffix: Bladed
   components:
+  # <Trauma>
+  - type: ThrowableBlocked
+  # </Trauma>
   - type: Construction
     graph: BladedFlatcapGrey
     node: icon
@@ -240,7 +307,6 @@
     sprite: Clothing/Head/Hats/greyflatcap.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/greyflatcap.rsi
-  - type: ThrowableBlocked # Goobstation
 
 - type: entity
   parent: BladedFlatcapGrey
@@ -261,12 +327,19 @@
   id: Shiv
   description: A crude weapon fashioned from a piece of cloth and a glass shard.
   components:
+  # <Trauma>
+  - type: UndetectableContraband # glass
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+  # </Trauma>
   - type: Tag
     tags:
+    - Trash # Trauma
     - CombatKnife
     - Knife
     - Shiv
-    - Trash # Trauma
   - type: Construction
     graph: Shiv
     node: icon
@@ -274,21 +347,14 @@
     sprite: Objects/Weapons/Melee/shiv.rsi
     state: icon
   - type: MeleeWeapon
-    attackRate: 2
+    attackRate: 2 # Trauma - was 1.5
     damage:
       types:
-        Slash: 7 # Trauma edit
+        Slash: 7 # Trauma - was 5.5
   - type: Item
     sprite: Objects/Weapons/Melee/shiv.rsi
   - type: DisarmMalus
     malus: 0.225
-  - type: UndetectableContraband #Goobstation-Contraband detector
-  # <Truama>
-  - type: PhysicalComposition
-    materialComposition:
-      Glass: 50
-      Cloth: 50
-  #</Trauma>
 
 - type: entity
   name: reinforced shiv
@@ -296,31 +362,25 @@
   id: ReinforcedShiv
   description: A crude weapon fashioned from a piece of cloth and a reinforced glass shard.
   components:
-  - type: Construction
-    graph: ReinforcedShiv
-    node: icon
-  - type: MeleeWeapon
-    attackRate: 2 # Trauma. was 1.5
-    damage:
-      types:
-        Slash: 7 # Trauma , was 8
-  - type: Item
-    sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
-  - type: Sprite
-    sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
-  # <Truama>
+  # <Trauma>
   - type: PhysicalComposition
     materialComposition:
       Glass: 50
       Cloth: 50
       Steel: 50
-  - type: Tag
-    tags:
-    - CombatKnife
-    - Knife
-    - Shiv
-    - Trash
-  #</Trauma>
+  # </Trauma>
+  - type: Construction
+    graph: ReinforcedShiv
+    node: icon
+  - type: MeleeWeapon
+    attackRate: 2 # Trauma - was 1.5
+    damage:
+      types:
+        Slash: 7 # Trauma - was 8
+  - type: Item
+    sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
 
 - type: entity
   name: plasma shiv
@@ -328,38 +388,39 @@
   id: PlasmaShiv
   description: A crude weapon fashioned from a piece of cloth and a plasma glass shard.
   components:
-  - type: Construction
-    graph: PlasmaShiv
-    node: icon
-  - type: MeleeWeapon
-    attackRate: 2 # Trauma, was 1.5
-    damage:
-      types:
-        Slash: 7 # Trauma, was 10
-  - type: Item
-    sprite: Objects/Weapons/Melee/plasma_shiv.rsi
-  - type: Sprite
-    sprite: Objects/Weapons/Melee/plasma_shiv.rsi
-  # <Truama>
+  # <Trauma>
   - type: PhysicalComposition
     materialComposition:
       Glass: 50
       Cloth: 50
       Plasma: 50
-  - type: Tag
-    tags:
-    - CombatKnife
-    - Knife
-    - Shiv
-    - Trash
-  #</Trauma>
+  # </Trauma>
+  - type: Construction
+    graph: PlasmaShiv
+    node: icon
+  - type: MeleeWeapon
+    attackRate: 2 # Trauma - was 1.5
+    damage:
+      types:
+        Slash: 7 # Trauma - was 10
+  - type: Item
+    sprite: Objects/Weapons/Melee/plasma_shiv.rsi
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/plasma_shiv.rsi
 
 - type: entity
   name: uranium shiv
   parent: Shiv
   id: UraniumShiv
-  description: A crude weapon fashioned from a piece of cloth and a uranium glass shard. Violates the geneva convention!
+  description: A crude weapon fashioned from a piece of cloth and a uranium glass shard. Violates the Geneva convention!
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Uranium: 50
+  # </Trauma>
   - type: Construction
     graph: UraniumShiv
     node: icon
@@ -367,25 +428,12 @@
     attackRate: 2 # Trauma - Was 1.5
     damage:
       types:
-        Slash: 3 # Trauma edit
+        Slash: 3 # Trauma - was 7
         Radiation: 4
   - type: Item
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
-  # <Truama>
-  - type: PhysicalComposition
-    materialComposition:
-      Glass: 50
-      Cloth: 50
-      Uranium: 50
-  - type: Tag
-    tags:
-    - CombatKnife
-    - Knife
-    - Shiv
-    - Trash
-  #</Trauma>
 
 - type: entity
   name: throwing knife
@@ -395,9 +443,9 @@
   components:
   - type: Tag
     tags:
+    - ThrowingKnife # Trauma
     - CombatKnife
     - Knife
-    - ThrowingKnife   # Trauma
   - type: Sprite
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
     state: icon
@@ -410,7 +458,7 @@
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
     offset: -0.15,0.0
-    removalTime: 1.5
+    removalTime: 0.5 # Trauma, was 1.5
   - type: LandAtCursor
   - type: DamageOtherOnHit
     increaseOnly: true # Trauma - apply modifiers, but ignore decreases
@@ -430,10 +478,10 @@
         shape: !type:PolygonShape
           radius: 0.01
           vertices:
-          - -0.475,-0.225
-          - -0.225,-0.475
-          - 0.525,0.275
-          - 0.275,0.525
+          - -0.35,-0.2
+          - -0.2,-0.35
+          - 0.4,0.25
+          - 0.25,0.4
         density: 20 # derived from base_item
         mask:
         - ItemMask
@@ -451,7 +499,6 @@
     components:
     - type: Execution
       doAfterDuration: 4.0
-    - type: Sharp
     - type: Utensil
       types:
       - Knife
@@ -463,6 +510,9 @@
   - type: Item
     size: Tiny
     sprite: Objects/Weapons/Melee/utility_knife.rsi
+  - type: ItemToggleExaminableStatus
+    onText: item-toggle-examined-active
+    offText: item-toggle-examined-not-active
   - type: ItemToggle
     soundActivate:
       path: /Audio/Weapons/utilityknifeopen.ogg

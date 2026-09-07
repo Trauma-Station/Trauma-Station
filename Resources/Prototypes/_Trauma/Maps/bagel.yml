@@ -30,6 +30,7 @@
             Botanist: [ 2, 2 ]
             Chef: [ 2, 2 ]
             ServiceWorker: [ 2, 2 ]
+            Rancher: [ 2, 2 ]
             # Engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]
@@ -69,3 +70,4 @@
             Reporter: [ 2, 2 ]
             RadioHost: [ 1, 1 ]
             Lawyer: [ 2, 2 ]
+            DClass: [ -1, -1 ]

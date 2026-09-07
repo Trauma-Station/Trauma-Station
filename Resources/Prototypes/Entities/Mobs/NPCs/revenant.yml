@@ -6,6 +6,11 @@
   name: revenant
   description: A spooky ghostie.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+  - type: UniversalLanguageSpeaker
+  - type: AlwaysTakeHoly
+  # </Trauma>
   - type: Emag
     emagType: All
   - type: Input
@@ -33,8 +38,6 @@
       - Ghost
   - type: ContentEye
     maxZoom: 1.2, 1.2
-  - type: NameIdentifier
-    group: GenericNumber
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-revenant-name
@@ -81,19 +84,16 @@
     - NamesRevenantAdjective
     - NamesRevenantTheme
     nameFormat: name-format-revenant
+  - type: Grammar
+    attributes:
+      proper: true
   - type: Speech
     speechVerb: Ghost
-  - type: LanguageSpeaker # Einstein Engines - Languages
-  - type: UniversalLanguageSpeaker # Einstein Engines - Languages
-  - type: NightVision # Goobstation - Nightvision
-    color: MediumPurple
-    activateSound: null
-    deactivateSound: null
   - type: Reactive
     groups:
       Acidic: [Touch]
-  - type: AlwaysTakeHoly # Trauma
   - type: Tag
     tags:
     - SlowImmune
     - KnockdownImmune
+    - AllowPortalTraversal

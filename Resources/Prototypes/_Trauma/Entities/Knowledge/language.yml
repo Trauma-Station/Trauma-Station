@@ -307,3 +307,10 @@
   components:
   - type: LanguageKnowledge
     languageId: Codespeak
+
+- type: entity
+  parent: BaseLanguageKnowledgeAntag
+  id: LanguageMiltech
+  components:
+  - type: LanguageKnowledge
+    languageId: Miltech

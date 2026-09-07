@@ -9,3 +9,10 @@
   dollPrototype: AppearanceSkeletonPerson
   skinColoration: TintedHues
   knowledge: Plasmaman # Trauma
+  defaultSoundsBySex:
+  - Skeleton
+  - Skeleton
+  - Skeleton
+  voices:
+  - Skeleton
+  - Skeleton

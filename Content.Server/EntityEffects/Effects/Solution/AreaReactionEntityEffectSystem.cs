@@ -18,7 +18,6 @@ namespace Content.Server.EntityEffects.Effects.Solution;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class AreaReactionEntityEffectsSystem : EntityEffectSystem<SolutionComponent, AreaReactionEffect>
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
@@ -36,7 +35,7 @@ public sealed partial class AreaReactionEntityEffectsSystem : EntityEffectSystem
         var duration = (int) Math.Max(args.Effect.Duration, minSteps * 2); // Trauma - Either use the duration from the code, or minSteps*2 to let it spread completely, whichever's larger
         var effect = args.Effect;
 
-        if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
+        if (!_map.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
             !_map.TryGetTileRef(gridUid, grid, xform.Coordinates, out var tileRef))
             return;
 

@@ -6,3 +6,5 @@
 armor-coefficient-value-trauma = - [color=yellow]{$type}[/color] { -protection(protect: $protect, value: $value) }
 
 stamina-resistance-coefficient-value-trauma = - [color=lightyellow]Stamina[/color] { -protection(protect: $protect, value: $value) }
+
+armor-damage-type-ballistic = Ballistic

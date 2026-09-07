@@ -21,7 +21,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipAtmosphericTechnician
+    - SkillChipEducation
+    - SkillChipDatabase
+    - SkillChipBludgeon
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff

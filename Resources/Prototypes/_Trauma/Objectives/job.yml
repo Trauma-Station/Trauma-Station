@@ -6,7 +6,7 @@
   id: BaseSalvageObjective
   components:
   - type: Objective
-    issuer: objective-issuer-nanotrasen
+    issuer: NanoTrasen
   - type: NotJobRequirement
     jobs: [ SalvageSpecialist ]
     inverted: true

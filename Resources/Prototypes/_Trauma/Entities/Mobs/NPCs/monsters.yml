@@ -2,7 +2,7 @@
 
 - type: entity
   name: Ratma
-  parent: [ MobSpaceBasic, MobCombat ]
+  parent: [ MobSpaceBasic, MobCombat, BaseSlicingRefinable ]
   id: MobRatma
   description: It came from the maintenence tunnels.
   components:
@@ -44,26 +44,27 @@
           radius: 0.40
         density: 100
         mask:
-          - MobMask
+        - MobMask
         layer:
-          - MobLayer
+        - MobLayer
   - type: MobThresholds
     thresholds:
       0: Alive
       200: Dead
   - type: PassiveDamage
     allowedStates:
-      - Alive
+    - Alive
     damage:
       types:
         Heat: -3
         Blunt: -1
         Slash: -1
         Piercing: -1
-  - type: Butcherable
-    spawned:
-      - id: FoodMeatRat
-        amount: 10
+        Ballistic: -1
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatRat
+      amount: 10
   - type: MeleeWeapon
     range: 2.5
     soundHit:
@@ -96,6 +97,7 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
+    showInExamine: false
   - type: Puller
     needsHands: false
   - type: GhostRole
@@ -116,16 +118,17 @@
   - type: NoSlip
 
 - type: entity
-  name: breadling
+  parent: [FoodBase, SimpleMobBase, MobCombat, BaseSlicingRefinable]
   id: MobBreadLing
-  parent: [FoodBase, SimpleMobBase, MobCombat]
+  name: breadling
   description: Be kind to him, he is not long for this world.
   components:
   - type: FlavorProfile
     flavors:
     - bread
-  - type: SliceableFood
-    slice: FoodBreadPlainSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodBreadPlainSlice
   - type: Solution
     solution:
       maxVol: 25
@@ -167,9 +170,9 @@
     size: Small
   - type: GhostRole
     prob: 1
-    name: ghost-role-information-breadling-namee
+    name: ghost-role-information-breadling-name
     allowMovement: true
-    description: ghost-role-information-BreadLing-desc
+    description: ghost-role-information-breadling-desc
     rules: ghost-role-information-nonantagonist-rules
     raffle:
       settings: short
@@ -304,6 +307,7 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
+    showInExamine: false
   - type: Puller
     needsHands: false
   - type: GhostRole
@@ -352,7 +356,7 @@
     canWideSwing: true
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat]
+  parent: [ SimpleMobBase, MobCombat, BaseSlicingRefinable]
   categories: [ HideSpawnMenu ] # You don't need to spawn shellless coconut crabs via the menu
   id: MobCoconutCrabShellless
   name: coconut crab
@@ -376,7 +380,8 @@
       collection: FootstepThud
   - type: SlowOnDamage
     speedModifierThresholds:
-      50: 0.9
+      999: 1
+      0: 1
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -413,19 +418,18 @@
       types:
         Bloodloss:
           -0.25
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3.5
-    baseSprintSpeed: 3.5
   - type: MeleeWeapon
     altDisarm: false
+    range: 1 # Base is 1.5 so this nerfs them by making kiting them easier.
     angle: 0
     damage:
       types:
-        Blunt: 12
+        Blunt: 3
+        Slash: 1 # pinch
         Structural: 15
   - type: MeleeThrowOnHit
-    distance: 5
-    speed: 10
+    distance: 2.5
+    speed: 5
   - type: LanguageSpeaker
     speaks:
     - Crab
@@ -441,10 +445,10 @@
   - type: Injurable
     damageContainer: Biological
   - type: WeakToHoly
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatCrab
-      amount: 5
+      amount: 6
 
 - type: entity
   parent: MobCoconutCrabShellless
@@ -475,26 +479,22 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodCoconutHalf:
-            min: 1
+            min: 2
             max: 2
           MobCoconutCrabShellless:
             min: 1
             max: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 1.5
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
   - type: MeleeWeapon
     attackRate: 0.6
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      999: 1
-      0: 1
   - type: Damageable
     damageModifierSet: CoconutCrab
   - type: Injurable
     damageContainer: Biological
   - type: MobPrice
-    price: 500 # The fact that a test requires me to add this is fucking stupid
+    price: 1000 # The fact that a test requires me to add this is fucking stupid
 
 - type: entity
   parent: MobCoconutCrabShellless
@@ -506,10 +506,6 @@
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
     - state: floofycrab
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      999: 1
-      0: 1
   - type: Damageable
     damageModifierSet: CoconutCrab
   - type: Injurable
@@ -524,11 +520,7 @@
   - type: GhostTakeoverAvailable
   - type: MeleeWeapon
     altDisarm: false
-    angle: 0
-    damage:
-      types:
-        Blunt: 15
-        Structural: 15
+    range: 1.5 # This one is player controlled and meant to be more dangerous despite it being stupid
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat]
@@ -596,12 +588,16 @@
   id: MobCrabTiny
   name: red crab
   components:
+  - type: Penetratable
+    penetrateDamage: 3
   - type: Temperature
   - type: TemperatureDamage
     heatDamageThreshold: 423
     coldDamageThreshold: 0
   - type: MovementAlwaysTouching
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: ProtectedFromStepTriggers
   - type: Respirator
     minSaturation: 5.0

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Events;
 using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Temperature;
 using Content.Shared.Eye;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
@@ -25,62 +25,38 @@ namespace Content.Trauma.Server.CosmicCult;
 
 public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
-    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private SharedEyeSystem _eye = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
 
     private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
     private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, ComponentInit>(OnStartCultist);
-        SubscribeLocalEvent<CosmicCultComponent, GetVisMaskEvent>(OnGetVisMask);
-
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotEquippedEvent>(OnGotCosmicItemEquipped);
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotUnequippedEvent>(OnGotCosmicItemUnequipped);
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotEquippedHandEvent>(OnGotHeld);
-        SubscribeLocalEvent<CosmicEquipmentComponent, GotUnequippedHandEvent>(OnGotUnheld);
-
-        SubscribeLocalEvent<InfluenceStrideComponent, ComponentInit>(OnStartInfluenceStride);
-        SubscribeLocalEvent<InfluenceStrideComponent, ComponentRemove>(OnEndInfluenceStride);
-        SubscribeLocalEvent<InfluenceStrideComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
-        SubscribeLocalEvent<CosmicImposingComponent, ComponentInit>(OnStartImposition);
-        SubscribeLocalEvent<CosmicImposingComponent, ComponentRemove>(OnEndImposition);
-        SubscribeLocalEvent<CosmicImposingComponent, RefreshMovementSpeedModifiersEvent>(OnImpositionMoveSpeed);
-
-        SubscribeLocalEvent<SpeechOverrideComponent, GotEquippedEvent>(OnGotSpeechOverrideEquipped);
-        SubscribeLocalEvent<SpeechOverrideComponent, GotUnequippedEvent>(OnGotSpeechOverrideUnequipped);
-    }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
+        var now = Timing.CurTime;
         var markQuery = EntityQueryEnumerator<CosmicSubtleMarkComponent>();
         while (markQuery.MoveNext(out var uid, out var comp))
-            if (comp.ExpireTimer is { } timer && _timing.CurTime > timer)
-                RemComp<CosmicSubtleMarkComponent>(uid);
+        {
+            if (comp.ExpireTimer is { } timer && now > timer)
+                RemComp(uid, comp);
+        }
 
         var echoQuery = EntityQueryEnumerator<CosmicMalignEchoComponent>();
         while (echoQuery.MoveNext(out var uid, out var comp))
-            if (_timing.CurTime > comp.ExpireTimer)
-                RemComp<CosmicMalignEchoComponent>(uid);
-
+        {
+            if (now > comp.ExpireTimer)
+                RemComp(uid, comp);
+        }
     }
 
     public override int AddEntropy(Entity<CosmicCultComponent> ent, int amount)
     {
         var realAmount = base.AddEntropy(ent, amount);
-
         _cultRule.IncrementCultObjectiveEntropy(ent, realAmount);
-        Dirty(ent, ent.Comp);
         return realAmount;
     }
 
@@ -94,28 +70,32 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     {
         base.OnLevelUpConfirmed(ent, ref args);
 
-        if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp)) return;
+        if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp))
+            return;
+
         _cultRule.UpdateCultData((args.Actor, cultComp));
-        _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-levelup-briefing"), Color.FromHex("#4cabb3"), _levelupSound);
+        _antag.SendBriefing(ent, "You attune your influence and the cult grows more powerful!", Color.FromHex("#4cabb3"), _levelupSound);
     }
 
     #region Init Cult
     /// <summary>
     /// Add the starting powers to the cultist.
     /// </summary>
-    private void OnStartCultist(Entity<CosmicCultComponent> uid, ref ComponentInit args)
+    [SubscribeLocalEvent]
+    private void OnCultInit(Entity<CosmicCultComponent> ent, ref ComponentInit args)
     {
-        _eye.RefreshVisibilityMask(uid.Owner);
-        if (!HasComp<HumanoidProfileComponent>(uid)) return; // Non-humanoids don't get abilities
-        foreach (var actionId in uid.Comp.CosmicCultActions)
-            _actions.AddAction(uid, actionId);
+        _eye.RefreshVisibilityMask(ent.Owner);
+        if (!HasComp<HumanoidProfileComponent>(ent))
+            return; // Non-humanoids don't get abilities
 
-        uid.Comp.CosmicShopActionEntity = _actions.AddAction(uid, uid.Comp.CosmicShopAction);
-
-        if (TryComp(uid, out EyeComponent? eyeComp))
-            _eye.SetVisibilityMask(uid, eyeComp.VisibilityMask | (int) VisibilityFlags.CosmicCultMonument);
+        ent.Comp.SiphonActionEntity = Actions.AddAction(ent.Owner, ent.Comp.SiphonAction);
+        ent.Comp.ShopActionEntity = Actions.AddAction(ent.Owner, ent.Comp.ShopAction);
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.SiphonActionEntity),
+            nameof(CosmicCultComponent.ShopActionEntity));
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVisMask(Entity<CosmicCultComponent> uid, ref GetVisMaskEvent args)
     {
         args.VisibilityMask |= (int) VisibilityFlags.CosmicCultMonument;
@@ -123,6 +103,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #endregion
 
     #region Equipment Pickup
+    [SubscribeLocalEvent]
     private void OnGotCosmicItemEquipped(Entity<CosmicEquipmentComponent> ent, ref GotEquippedEvent args)
     {
         var target = args.EquipTarget;
@@ -130,76 +111,84 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
             EnsureComp<CosmicDegenComponent>(target);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotCosmicItemUnequipped(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedEvent args)
     {
         RemComp<CosmicDegenComponent>(args.EquipTarget); // Cultists shouldn't have it in the first place so we don't check if entity is a cultist
     }
 
+    [SubscribeLocalEvent]
     private void OnGotHeld(Entity<CosmicEquipmentComponent> ent, ref GotEquippedHandEvent args)
     {
         if (EntityIsCultist(args.User)) return;
 
         EnsureComp<CosmicDegenComponent>(args.User);
-        _popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
+        Popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotUnheld(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedHandEvent args)
     {
         RemComp<CosmicDegenComponent>(args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotSpeechOverrideEquipped(Entity<SpeechOverrideComponent> ent, ref GotEquippedEvent args)
     {
+        ent.Comp.OldEmoteSounds = null;
+        ent.Comp.OldSpeechSounds = null;
+
         var target = args.EquipTarget;
-        if (ent.Comp.EmoteIDs is { } emoteIDs && TryComp<VocalComponent>(target, out var vocalComp))
+        if (ent.Comp.EmoteSounds is { } emoteSounds && TryComp<VocalComponent>(target, out var vocal))
         {
-            ent.Comp.EmoteStoredIDs = vocalComp.Sounds;
-            vocalComp.Sounds = emoteIDs;
-            var ev = new EmoteSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            ent.Comp.OldEmoteSounds = vocal.EmoteSounds;
+            vocal.EmoteSounds = emoteSounds;
+            Dirty(target, vocal);
         }
-        if (ent.Comp.SpeechIDs is { } speechIDs && TryComp<SpeechComponent>(target, out var speechComp))
+        if (ent.Comp.SpeechSounds is { } speechSounds && TryComp<SpeechComponent>(target, out var speech))
         {
-            ent.Comp.SpeechStoredIDs = speechComp.SpeechSounds;
-            speechComp.SpeechSounds = speechIDs;
-            var ev = new SpeechSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            ent.Comp.OldSpeechSounds = speech.SpeechSounds;
+            speech.SpeechSounds = speechSounds;
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGotSpeechOverrideUnequipped(Entity<SpeechOverrideComponent> ent, ref GotUnequippedEvent args)
     {
         var target = args.EquipTarget;
-        if (ent.Comp.EmoteStoredIDs is { } emoteIDs && TryComp<VocalComponent>(target, out var vocalComp))
+        if (ent.Comp.OldEmoteSounds is { } emoteSounds && TryComp<VocalComponent>(target, out var vocal))
         {
-            ent.Comp.EmoteStoredIDs = null;
-            vocalComp.Sounds = emoteIDs;
-            var ev = new EmoteSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            vocal.EmoteSounds = emoteSounds;
+            Dirty(target, vocal);
         }
-        if (ent.Comp.SpeechStoredIDs is { } speechIDs && TryComp<SpeechComponent>(target, out var speechComp))
+        if (ent.Comp.OldSpeechSounds is { } speechSounds && TryComp<SpeechComponent>(target, out var speech))
         {
-            ent.Comp.SpeechStoredIDs = null;
-            speechComp.SpeechSounds = speechIDs;
-            var ev = new SpeechSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            speech.SpeechSounds = speechSounds;
         }
+        ent.Comp.OldEmoteSounds = null;
+        ent.Comp.OldSpeechSounds = null;
     }
     #endregion
 
     #region Movespeed
-    private void OnStartImposition(Entity<CosmicImposingComponent> uid, ref ComponentInit args) => // these functions just make sure
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnEndImposition(Entity<CosmicImposingComponent> uid, ref ComponentRemove args) => // as various cosmic cult effects get added and removed
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentInit args) => // that movespeed applies more-or-less correctly
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
-    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> uid, ref ComponentRemove args) => // i wish movespeed was easier to work with
-        _movementSpeed.RefreshMovementSpeedModifiers(uid);
+    [SubscribeLocalEvent]
+    private void OnStartImposition(Entity<CosmicImposingComponent> ent, ref ComponentInit args) => // these functions just make sure
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnEndImposition(Entity<CosmicImposingComponent> ent, ref ComponentRemove args) => // as various cosmic cult effects get added and removed
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnStartInfluenceStride(Entity<InfluenceStrideComponent> ent, ref ComponentInit args) => // that movespeed applies more-or-less correctly
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+    [SubscribeLocalEvent]
+    private void OnEndInfluenceStride(Entity<InfluenceStrideComponent> ent, ref ComponentRemove args) => // i wish movespeed was easier to work with
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
 
-    private void OnRefreshMoveSpeed(EntityUid uid, InfluenceStrideComponent comp, RefreshMovementSpeedModifiersEvent args) =>
+    [SubscribeLocalEvent]
+    private void OnRefreshMoveSpeed(Entity<InfluenceStrideComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(1.4f, 1.4f);
-    private void OnImpositionMoveSpeed(EntityUid uid, CosmicImposingComponent comp, RefreshMovementSpeedModifiersEvent args) =>
+    [SubscribeLocalEvent]
+    private void OnImpositionMoveSpeed(Entity<CosmicImposingComponent> ent, ref RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(0.80f, 0.80f);
     #endregion
 }

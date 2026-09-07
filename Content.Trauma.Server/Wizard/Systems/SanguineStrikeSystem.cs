@@ -1,31 +1,30 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Body.Systems;
 using Content.Server.Fluids.EntitySystems;
-using Content.Server.Popups;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
-using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
 {
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private PointLightSystem _light = default!;
-    [Dependency] private TransformSystem _transform = default!;
-    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private BloodstreamSystem _bloodStream = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private PuddleSystem _puddle = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
     [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
 
@@ -138,7 +137,7 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
             var bloodToRemove = FixedPoint2.Min(blood.BloodSolution.Value.Comp.Solution.Volume,
                 bloodSuckAmount);
             tempSol.MaxVolume += bloodToRemove;
-            tempSol.AddSolution(_solution.SplitSolution(blood.BloodSolution.Value, bloodToRemove), _proto);
+            tempSol.AddSolution(_solution.SplitSolution(blood.BloodSolution.Value, bloodToRemove), ProtoMan);
         }
 
         var restoredBlood = FixedPoint2.Min(tempSol.Volume, missingBlood);

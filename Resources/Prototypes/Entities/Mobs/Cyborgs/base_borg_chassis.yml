@@ -89,6 +89,7 @@
     allowRevives: true
   - type: HealthExaminable
     examinableTypes:
+      - Ballistic # Trauma
       - Blunt
       - Slash
       - Piercing
@@ -97,6 +98,10 @@
     locPrefix: silicon
   - type: UserInterface
     interfaces:
+      # <Trauma>
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+      # </Trauma>
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
         requireInputValidation: false
@@ -107,9 +112,6 @@
       # Only used for NT borgs that can switch type, defined here to avoid copy-pasting the rest of this component.
       enum.BorgSwitchableTypeUiKey.SelectBorgType:
         type: BorgSelectTypeUserInterface
-      # Goobstation - Add the station map interface to the borg
-      enum.StationMapUiKey.Key:
-        type: StationMapBoundUserInterface
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: SiliconLawBound
@@ -140,10 +142,10 @@
     - Science
   - type: ZombieImmune
   - type: Repairable
+    allowSelfRepair: true # Trauma
     damageValue: -10 # 10 seconds to repair from crit
     doAfterDelay: 1
     fuelCost: 0.5
-    allowSelfRepair: true # Goob
   - type: BorgChassis
   - type: LockingWhitelist
     blacklist:
@@ -181,16 +183,11 @@
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg
-    allowedEmotes: # Goobstation - Cyborg emote sounds
-    - Laugh
-    - Sigh
-    - Crying
-    - Whistle
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
+    emoteSounds: UnisexSilicon
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
+    damageAtMaxCorruption: 300
   - type: UnblockableSpeech
   - type: FootstepModifier
     footstepSoundCollection:
@@ -209,34 +206,9 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
-    damageModifierSet: Silicon # Trauma - ion damage
+    damageModifierSet: Silicon # Trauma
   - type: Injurable
     damageContainer: Silicon
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 75
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Machines/warning_buzzer.ogg
-          params:
-            volume: 5
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:EmptyContainersBehaviour
-        containers:
-        - borg_brain
-        - borg_module
-        - cell_slot
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: HandheldLight
     toggleOnInteract: false
     wattage: 0.2
@@ -265,7 +237,7 @@
       isLooped: true
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     radius: 4
     netsync: false
@@ -275,13 +247,15 @@
   - type: StandingState
   - type: Tag
     tags:
+    # <Trauma>
+    - SiliconMob
+    - IPCDrinkBlacklist # no selfantagging ipcs
+    # </Trauma>
     - DoorBumpOpener
     - FootstepSound
     - CanPilot
     - SiliconEmotes
     - Unimplantable
-    - SiliconMob # Goob
-    - IPCDrinkBlacklist # Goobstation - Energycrit: Don't let self antagging IPCs steal power from borgs.
   - type: Emoting
   - type: GuideHelp
     guides:
@@ -305,6 +279,34 @@
   id: BaseBorgChassis
   components:
   - type: IonStormTarget
+  - type: Destructible
+    generateOverkillThreshold: false
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:GibBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapGlass:
+            min: 1
+            max: 1
+          SheetSteel:
+            min: 10
+            max: 20
 
 - type: entity
   abstract: true
@@ -401,6 +403,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FlashImmunity
+    showInExamine: false
   - type: SpeechSynthesis
     voice: BorgSyndie
   # </Trauma>
@@ -429,15 +432,15 @@
   - type: Speech
     speechSounds: SyndieBorg
     allowedEmotes:
+    # <Trauma>
     - Laugh
-    # Goobstation - Cyborg emote sounds
     - Sigh
     - Crying
+    # </Trauma>
     - Whistle
-    # end Goobstation - Cyborg emote sounds
+    - Laugh
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
   - type: BypassLock
@@ -491,8 +494,7 @@
     allowedEmotes:
     - Laugh
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
   - type: BypassLock
@@ -506,6 +508,13 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: BlockShuttleRecall
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  # </Trauma>
   - type: RandomMetadata
     nameSegments:
     - NamesXenoborg
@@ -521,12 +530,8 @@
   - type: EmagSiliconLaw # should xenoborgs be emagable?
     stunTime: 5
   - type: SiliconLawProvider
+    subverted: true # Trauma
     laws: XenoborgLawset # custom laws here
-    subverted: true # Goob
-  - type: CollectiveMind # Goob
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: IntrinsicRadioTransmitter # can only use binary and xenoborg channel
     channels:
     - Xenoborg
@@ -537,32 +542,31 @@
     - Xenoborg
     #- Binary # Goob
   - type: BorgChassis
+    # <Trauma>
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+    # </Trauma>
     maxModules: 0
     hasMindState: robot_e
     noMindState: robot_e_r
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
-    # <Trauma>
-    brainWhitelist:
-      components:
-      - MMI # No infinite posibrain xorgs
-    # </Trauma>
   - type: TypingIndicator
     proto: xenoborg
   - type: Speech
     speechVerb: Robotic
     speechSounds: Xenoborg
     allowedEmotes:
-    - Laugh
-    # Goobstation - Cyborg emote sounds
+    # <Trauma>
     - Sigh
     - Crying
     - Whistle
-    # end Goobstation - Cyborg emote sounds
+    # </Trauma>
+    - Laugh
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconXenoborg
+    emoteSounds: UnisexSiliconXenoborg
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
   - type: UnblockableSpeech
@@ -581,6 +585,36 @@
   - type: NpcFactionMember
     factions:
     - Xenoborg
+  - type: PointLight
+    color: "#3010ff"
+    energy: 7
+  - type: GuideHelp
+    guides:
+    - Cyborgs
+    - Robotics
+    - Xenoborgs
+  - type: Access
+    tags:
+    - Xenoborg
+  - type: AccessReader
+    access: [["Xenoborg"]]
+  - type: ShowJobIcons # not sure if it is needed
+  - type: ShowCrewIcons
+  - type: InteractionPopup
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: Xenoborg
+  - type: BypassLock
+    bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+  # <Trauma>
+  #- type: EmpResistance
+  #  strengthMultiplier: 0
+  # </Trauma>
+
+- type: entity
+  abstract: true
+  id: BaseXenoborgDestructible
+  components:
   - type: Destructible
     thresholds:
     - trigger:
@@ -611,24 +645,3 @@
         - cell_slot
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: PointLight
-    color: "#3010ff"
-    energy: 7
-  - type: GuideHelp
-    guides:
-    - Cyborgs
-    - Robotics
-    - Xenoborgs
-  - type: Access
-    tags:
-    - Xenoborg
-  - type: AccessReader
-    access: [["Xenoborg"]]
-  - type: ShowJobIcons # not sure if it is needed
-  - type: ShowCrewIcons
-  - type: InteractionPopup
-    interactSuccessSound:
-      path: /Audio/Ambience/Objects/periodic_beep.ogg
-  - type: Xenoborg
-  - type: BypassLock
-    bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.

@@ -18,7 +18,6 @@ namespace Content.Trauma.Server.Waypointer;
 public sealed partial class WaypointerSystem : SharedWaypointerSystem
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
@@ -52,7 +51,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
         // This might be a bit confusing, but I think this is the cheapest way to refresh overrides for new trackables.
         // I'll explain:
         // This gets all possible waypointers in the game.
-        var waypointers = _proto.GetInstances<WaypointerPrototype>();
+        var waypointers = ProtoMan.GetInstances<WaypointerPrototype>();
         // This will hold all waypointers that need their overrides to be refreshed because this trackable spawned.
         var waypointersToOverride = new HashSet<ProtoId<WaypointerPrototype>>();
 
@@ -150,7 +149,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
 
         foreach (var waypointerProtoId in waypointers)
         {
-            if (!_proto.Resolve(waypointerProtoId, out var prototype))
+            if (!ProtoMan.Resolve(waypointerProtoId, out var prototype))
                 continue;
 
             var waypointQuery = EntityManager.CompRegistryQueryEnumerator(prototype.TrackedComponents);
@@ -180,7 +179,7 @@ public sealed partial class WaypointerSystem : SharedWaypointerSystem
 
         foreach (var waypointerProtoId in waypointers)
         {
-            if (!_proto.Resolve(waypointerProtoId, out var prototype))
+            if (!ProtoMan.Resolve(waypointerProtoId, out var prototype))
                 continue;
 
             var waypointQuery = EntityManager.CompRegistryQueryEnumerator(prototype.TrackedComponents);

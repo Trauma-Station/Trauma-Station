@@ -81,6 +81,10 @@
         effectProto: StatusEffectDrunk
         time: 10
         type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
+        time: 10
+        type: Remove
       - !type:EyeDamage
       - !type:RemoveComponents
         components:
@@ -92,7 +96,6 @@
           minDurationOfIncident: 0
           maxDurationOfIncident: 0
         - type: Unrevivable # i don't think this really affects lings, but might aswell to be safe
-        - type: Muted
         - type: Paracusia
           # chud shit
           minTimeBetweenIncidents: 0.1
@@ -143,9 +146,8 @@
         effectProto: StatusEffectForcedSleeping
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 2
       - !type:RemoveComponents
         components:
@@ -260,7 +262,7 @@
       - !type:EvenHealthChange
         damage:
           # powerful due to abundance of food, but very inconvienient to use
-          Brute: -4
+          Brute: -2
           Burn: -2
       - !type:ModifyBleed
         amount: -0.5
@@ -270,7 +272,8 @@
       metabolites:
         Mitotrophin: 0.2 # a little something for wasting it all on hunger
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1.5 # 50% less
 
 - type: reagent
@@ -321,12 +324,10 @@
         damage:
           types:
             Poison: -1
+            Blunt: 0.1
       - !type:CleanBloodstream
         excluded: [Musiver]
         cleanseRate: 1
-      - !type:EvenHealthChange
-        damage:
-          Brute: 0.1
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -356,17 +357,18 @@
   color: "#ffdf97"
   metabolisms:
     Bloodstream:
-      metabolismRate: 3
+      metabolismRate: 9
       effects:
       - !type:HealthChange
         damage:
           types:
-            Slash: -4
-            Blunt: -4
-            Piercing: -4
+            Slash: -6
+            Blunt: -6
+            Piercing: -6
+            Ballistic: -6
       - !type:AdjustReagent
         reagent: Bozaide
-        amount: 3
+        amount: 4
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -374,7 +376,7 @@
           min: 6
         damage:
           types:
-            Blunt: 15
+            Poison: 20
       - !type:ModifyBleed
         amount: 1
         conditions:
@@ -382,7 +384,7 @@
           reagent: ProcenylLazide
           min: 6
       - !type:AdjustReagent
-        amount: -25
+        amount: -15
         reagent: ProcenylLazide
       - !type:AdjustReagent
         amount: -25
@@ -446,6 +448,7 @@
         damage:
           types:
             Poison: -1
+            Blunt: 0.5
       - !type:HealthChange
         conditions:
         - !type:BloodstreamCountCondition
@@ -453,9 +456,6 @@
         damage:
           types:
             Poison: -3
-      - !type:EvenHealthChange
-        damage:
-          Brute: 0.5
 
 - type: reagent
   id: Monover
@@ -482,9 +482,10 @@
         damage:
           types:
             Poison: -3 # slightly better than dylo, but the side effect is easy to fall into
-      - !type:EvenHealthChange
+      - !type:HealthChange
         damage:
-          Brute: 1
+          types:
+            Blunt: 1
         conditions:
         - !type:BloodstreamCountCondition
           min: 1 # potential use for checking bloodstream cleanliness?
@@ -515,8 +516,8 @@
           types:
             Poison: -3
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
       - !type:HealthChange
         damage:
           types:
@@ -683,6 +684,7 @@
           types:
             Blunt: -0.5
             Piercing: -0.25
+            Ballistic: -0.25
             Slash: -0.5
             Heat: -0.38
             Cold: -0.38
@@ -884,8 +886,8 @@
           Burn: -2
           Toxin: -2
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
         - !type:ReagentCondition
           reagent: Atropine
           min: 0
@@ -943,7 +945,7 @@
       - !type:HealthChange
         damage:
           types:
-            Cellular: -6
+            Cellular: -10
       - !type:HealthChange # this + explosion rounds out to ~90dmg/15u
         damage:
           types:
@@ -1082,9 +1084,8 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 2
       - !type:HealthChange
         damage:
@@ -1107,9 +1108,8 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 5
       - !type:HealthChange
         damage:
@@ -1190,9 +1190,8 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 5
       - !type:TakeStaminaDamage
         amount: -10

@@ -60,6 +60,14 @@
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
+  - type: LatheAutomation
   - type: Animateable
   - type: LightningTarget
     priority: 1
@@ -198,7 +206,7 @@
   parent: BaseRevIndustry
   id: RevTelesphere
   name: telesphere
-  description: An experimental device, it can be used to remotely steal materials from passing trade ships using plasma. Additionally; it can be used as a material silo for the revolution.
+  description: An experimental device, it can be used to remotely steal materials from passing trade ships using phoron. Additionally; it can be used as a material silo for the revolution.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/telesphere.rsi
@@ -215,6 +223,9 @@
     color: "#ffffff"
     radius: 1.5
     energy: 5.0
+  - type: AlternateUI
+    key: enum.OreSiloUiKey.Key
+    verbText: Open Ore Silo UI
   - type: OreSilo
     range: 15
   - type: MasterSiloClient # theft
@@ -359,8 +370,8 @@
 - type: entity
   parent: BaseRevIndustry
   id: RevPlasmaFoundry
-  name: plasma foundry
-  description: An advanced foundry powered by plasma, it melts metals incredibly fast and produces advanced components.
+  name: phoron foundry
+  description: An advanced foundry powered by phoron sheets, it melts metals incredibly fast and produces advanced components.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/plasmaforge.rsi
@@ -387,7 +398,7 @@
     containers:
       blueprint: !type:Container
   - type: Construction
-    node: plasma foundry
+    node: phoron foundry
 
 - type: entity
   parent: BaseRevIndustry
@@ -407,7 +418,7 @@
     node: start
   - type: Strap
     buckleOnInteractHand: false
-    addBuckleverb: false
+    addBuckleVerb: false
     buckleOffset: "0, 0.2"
     whitelist:
       tags:

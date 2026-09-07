@@ -60,7 +60,6 @@
       FootRight: OrganDionaFootRight
       Brain: OrganDionaBrainNymphing
       Eyes: OrganDionaEyes
-      Tongue: OrganDionaTongue # Trauma
       Lungs: OrganDionaLungsNymphing
       Stomach: OrganDionaStomachNymphing
   - type: HumanoidProfile
@@ -73,16 +72,6 @@
   id: MobDiona
   name: Urist McPlants
   components:
-  # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - RootSpeak
-    understands:
-    - TauCetiBasic
-    - RootSpeak
-  - type: FoliageIgnoringVision
-  # </Trauma>
   - type: Respirator
     damage:
       types:
@@ -90,26 +79,27 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  - type: Hunger
-    baseDecayRate: 0.0083
-  - type: Thirst
-    baseDecayRate: 0.0083
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: DionaHunger
+      Thirst:
+        prototype: DionaThirst
   - type: Damageable
     damageModifierSet: Diona
-  #- type: DamageVisuals # Shitmed
+  # <Trauma>
+  #- type: DamageVisuals
   #  damageOverlayGroups:
   #    Brute:
   #      sprite: Mobs/Effects/brute_damage.rsi
   #      color: "#cd7314"
   #    Burn:
   #      sprite: Mobs/Effects/burn_damage.rsi
+  # </Trauma>
   - type: Butcherable
-    butcheringType: Spike
     spawned:
       - id: FoodMeatPlant
         amount: 5
-      - id: MaterialWoodPlank1 # Trauma - Bones on butchering humanoids. I AM NO TREE IM AN ENT.
-        amount: 3
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -167,10 +157,7 @@
     speechVerb: Plant
     allowedEmotes: ['Chirp']
   - type: Vocal
-    sounds:
-      Male: UnisexDiona
-      Female: UnisexDiona
-      Unsexed: UnisexDiona
+    emoteSounds: UnisexDiona
   - type: TypingIndicator
     proto: diona
   - type: BodyEmotes
@@ -184,11 +171,9 @@
     allowedStates:
     - Dead
   - type: Rootable
-  - type: Viewcone
-    baseConeAngle: 360
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganDiona
   abstract: true
   suffix: Diona
@@ -232,7 +217,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald tree
+  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald trees
   id: OrganDionaHead
 
 - type: entity
@@ -297,7 +282,16 @@
     stages: [ Digestion, Bloodstream, Metabolites ]
 
 - type: entity
-  parent: OrganDionaBrain
+  abstract: true
+  id: BaseNymphingOrgan
+  components:
+  - type: Nymph
+    blacklist:
+      components:
+      - ChangelingIdentity # Trauma - was ChangelingTransform, that doesnt exist here
+
+- type: entity
+  parent: [ OrganDionaBrain, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaBrainNymphing
   components:
@@ -306,7 +300,7 @@
     entityPrototype: OrganDionaNymphBrain
 
 - type: entity
-  parent: OrganDionaLungs
+  parent: [ OrganDionaLungs, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaLungsNymphing
   components:
@@ -314,7 +308,7 @@
     entityPrototype: OrganDionaNymphLungs
 
 - type: entity
-  parent: OrganDionaStomach
+  parent: [ OrganDionaStomach, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaStomachNymphing
   components:

@@ -1,15 +1,6 @@
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 RatherUncreative <RatherUncreativeName@proton.me>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Whatstone <whatston3@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Hands.Components;
+// </Trauma>
 #nullable enable
 using System.Collections.Generic;
 using Content.IntegrationTests.Fixtures;
@@ -35,14 +26,14 @@ namespace Content.IntegrationTests.Tests.Sprite;
 /// <see cref="Ignored"/>
 /// </remarks>
 [TestFixture]
-public sealed class PrototypeSaveTest : GameTest
+public sealed partial class ItemSpriteTest : GameTest // Trauma - correct copypaste major, made partial
 {
     private static readonly HashSet<string> Ignored = new()
     {
         // The only prototypes that should get ignored are those that REQUIRE setup to get a sprite. At that point it is
         // the responsibility of the spawner to ensure that a valid sprite is set.
         "VirtualItem",
-        "HandPlaceholder" // Frontier
+        "DetachedBody"
     };
 
     [Test]
@@ -51,17 +42,27 @@ public sealed class PrototypeSaveTest : GameTest
         var pair = Pair;
         List<EntityPrototype> badPrototypes = [];
 
+        var map = await Pair.CreateTestMap(); // Trauma
         await pair.Client.WaitPost(() =>
         {
+            // <Trauma>
+            var urist = CEntMan.SpawnEntity(Urist, map.CGridCoords);
+            CEntMan.EnsureComponent<IgnoreUIRangeComponent>(urist); // avoid shitty UI debug assert
+            var hands = CComp<HandsComponent>(urist);
+            // </Trauma>
             foreach (var (proto, _) in pair.GetPrototypesWithComponent<ItemComponent>(Ignored))
             {
-                var dummy = pair.Client.EntMan.Spawn(proto.ID);
-                pair.Client.EntMan.RunMapInit(dummy, pair.Client.MetaData(dummy));
+                var dummy = CEntMan.SpawnEntity(proto.ID, map.CGridCoords); // Trauma - spawn in a mapinit'd map instead of mapinit in nullspace
                 var spriteComponent = pair.Client.EntMan.GetComponentOrNull<SpriteComponent>(dummy);
                 if (spriteComponent?.Icon == null)
                     badPrototypes.Add(proto);
+                // <Trauma> - equip it to try load inhand sprites, maybe wield too for wield sprites
+                _hands.TryPickup(urist, dummy, checkActionBlocker: false, animate: false, handsComp: hands);
+                _interaction.UseInHandInteraction(urist, dummy, false, false, false);
+                // </Trauma>
                 pair.Client.EntMan.DeleteEntity(dummy);
             }
+            CEntMan.DeleteEntity(urist); // Trauma
         });
 
         Assert.Multiple(() =>

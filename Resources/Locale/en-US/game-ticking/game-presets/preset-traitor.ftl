@@ -4,7 +4,7 @@ traitor-round-end-codewords = The codewords were: [color=White]{$codewords}[/col
 traitor-round-end-agent-name = traitor
 
 objective-issuer-syndicate = [color=crimson]The Syndicate[/color]
-objective-issuer-unknown = Unknown
+objective-issuer-unknown = [color=white]Unknown[/color]
 
 # Shown at the end of a round of Traitor
 
@@ -25,8 +25,7 @@ traitor-death-match-end-round-description-entry = {$originalName}'s PDA, with {$
 # TraitorRole
 traitor-role-greeting =
     You are an agent sent by [color = darkred]The Syndicate[/color] on behalf of {$corporation}.
-    Your objectives and codewords are listed in the character menu.
-    Use your uplink to buy the tools you'll need for this mission.
+    Your objectives and codewords are listed in the character menu. Use your uplink to buy the tools you'll need for this mission.
     Death to Nanotrasen!
 traitor-role-codewords =
     The codewords are: [color = lightgray]
@@ -44,17 +43,5 @@ traitor-role-uplink-implant =
 traitor-role-codewords-short =
     The codewords are:
     {$codewords}.
-traitor-role-uplink-code-short = Your uplink code is {$code}. Set it as your PDA ringtone to access uplink.
-traitor-role-uplink-implant-short = Your uplink was implanted. Access it from your hotbar.
-
-traitor-role-moreinfo =
-    Find more information about your role in the character menu.
-
-traitor-role-nouplink =
-    You do not have a syndicate uplink. Make it count.
-
-traitor-role-allegiances =
-    Your allegiances:
-
-traitor-role-notes =
-    Notes from your employer:
+traitor-role-uplink-code-short = Your uplink code is {$code}. Set it as your PDA ringtone to access your uplink.
+traitor-role-uplink-implant-short = Your uplink was implanted. Access it from the action menu.

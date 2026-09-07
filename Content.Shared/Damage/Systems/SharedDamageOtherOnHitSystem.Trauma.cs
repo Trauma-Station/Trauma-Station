@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Trauma.Common.Throwing;
+// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Coordinates;
@@ -45,17 +48,24 @@ public abstract partial class SharedDamageOtherOnHitSystem
         if (TerminatingOrDeleted(args.Target))
             return;
 
-        if (args.Target == args.Component.Thrower) // Goobstation - Mjolnir
+        // <Trauma>
+        if (args.Target == args.Component.Thrower)
             return;
 
-        var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances,
+        var damage = component.Damage * _damageable.UniversalThrownDamageModifier;
+
+        var attemptEv = new BeforeDamageOtherOnHitEvent(args.Component.Thrower, args.Target, damage, new());
+        RaiseLocalEvent(uid, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+
+        var dmg = _damageable.ChangeDamage(args.Target, attemptEv.BaseDamage + attemptEv.BonusDamage, component.IgnoreResistances,
             origin: args.Component.Thrower, increaseOnly: component.IncreaseOnly);
 
-        // <Goob>
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(args.Thrown, uid, args.Target.ToCoordinates());
         RaiseLocalEvent(args.Target, attackedEvent);
-        // </Goob>
+        // </Trauma>
 
         // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
         if (_mobQuery.HasComp(args.Target))
@@ -68,7 +78,7 @@ public abstract partial class SharedDamageOtherOnHitSystem
             _color.RaiseEffect(Color.Red, _target, Filter.Pvs(args.Target, entityManager: EntityManager));
         }
 
-        _gun.PlayImpactSound(args.Target, dmg, null, false);
+        _gun.PlayImpactSound(args.Target, dmg, component.SoundHit, component.ForceSound); // Trauma - added SoundHit and ForceSound
         if (TryComp<PhysicsComponent>(uid, out var body) && body.LinearVelocity.LengthSquared() > 0f)
         {
             var direction = body.LinearVelocity.Normalized();

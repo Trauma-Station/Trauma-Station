@@ -6,8 +6,6 @@ namespace Content.Shared.Access.Systems
 {
     public abstract partial class SharedAccessSystem : EntitySystem
     {
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
-
         public override void Initialize()
         {
             base.Initialize();
@@ -21,7 +19,7 @@ namespace Content.Shared.Access.Systems
             // Add all tags in groups to the list of tags.
             foreach (var group in component.Groups)
             {
-                if (!_prototypeManager.Resolve<AccessGroupPrototype>(group, out var proto))
+                if (!ProtoMan.Resolve<AccessGroupPrototype>(group, out var proto))
                     continue;
 
                 component.Tags.UnionWith(proto.Tags);
@@ -80,7 +78,7 @@ namespace Content.Shared.Access.Systems
 
             foreach (var group in newGroups)
             {
-                if (!_prototypeManager.Resolve<AccessGroupPrototype>(group, out var proto))
+                if (!ProtoMan.Resolve<AccessGroupPrototype>(group, out var proto))
                     continue;
 
                 access.Tags.UnionWith(proto.Tags);

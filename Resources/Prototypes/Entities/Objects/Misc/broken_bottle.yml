@@ -4,7 +4,16 @@
   id: BrokenBottle
   description: In Space Glasgow this is called a conversation starter.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 25
+  - type: ThrowableBlocked
   - type: Sharp
+  # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: MeleeWeapon
@@ -23,13 +32,9 @@
         Slash: 2
   - type: Tag
     tags:
+    - RotHulkTrash # Trauma
     - Trash
-    - RotHulkTrash # Goobstation - Wraith
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Glass: 25
   - type: SpaceGarbage
   - type: ToolRefinable
     refineResult:
     - id: SheetGlass1
-  - type: ThrowableBlocked # Goobstation

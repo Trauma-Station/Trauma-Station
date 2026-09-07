@@ -61,14 +61,13 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected DamageableSystem Damageable = default!;
     [Dependency] protected ExamineSystemShared Examine = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] protected IMapManager MapManager = default!;
-    [Dependency] protected IPrototypeManager ProtoManager = default!;
     //[Dependency] protected IRobustRandom Random = default!; // Trauma - predicted Random(uid) used instead
     [Dependency] protected ISharedAdminLogManager Logs = default!;
     [Dependency] protected SharedActionsSystem Actions = default!;
     [Dependency] protected SharedAppearanceSystem Appearance = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
     [Dependency] protected SharedContainerSystem Containers = default!;
+    [Dependency] protected SharedMapSystem Maps = default!;
     [Dependency] protected SharedPhysicsSystem Physics = default!;
     [Dependency] protected SharedPointLightSystem Lights = default!;
     [Dependency] protected SharedPopupSystem PopupSystem = default!;
@@ -112,13 +111,13 @@ public abstract partial class SharedGunSystem : EntitySystem
         InitializeBattery();
         InitializeCartridge();
         InitializeChamberMagazine();
+        InitializeCustomAmmoCounter();
         InitializeMagazine();
         InitializeRevolver();
         InitializeBasicEntity();
         InitializeClothing();
         InitializeContainer();
         InitializeSolution();
-        InitializeGoob(); // Goob
 
         // Interactions
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerb);
@@ -134,7 +133,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (gun.Comp.NextFire > Timing.CurTime)
             Log.Warning($"Initializing a map that contains an entity that is on cooldown. Entity: {ToPrettyString(gun)}");
 
-        DebugTools.Assert((gun.Comp.AvailableModes & gun.Comp.SelectedMode) != 0x0);
+        DebugTools.Assert((gun.Comp.AvailableModes & gun.Comp.SelectedMode) != 0x0, $"Bad fire mode during {ToPrettyString(gun)} mapinit!"); // Trauma - add a message bruh
 #endif
 
         RefreshModifiers((gun, gun));
@@ -390,7 +389,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             if (attemptEv.Message != null)
             {
-                PopupSystem.PopupClient(attemptEv.Message, gun, user);
+                PopupSystem.PopupEntity(attemptEv.Message, gun, user);
             }
             // <Trauma>
             if (!gun.Comp.LockOnTargetBurst || gun.Comp.ShootCoordinates == null)
@@ -443,7 +442,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             // If they're firing an existing clip then don't play anything.
             if (shots > 0)
             {
-                PopupSystem.PopupCursor(ev.Reason ?? Loc.GetString("gun-magazine-fired-empty"));
+                PopupSystem.PopupCursor(ev.Reason ?? Loc.GetString("gun-magazine-fired-empty"), user);
 
                 // Don't spam safety sounds at gun fire rate, play it at a reduced rate.
                 // May cause prediction issues? Needs more tweaking
@@ -533,17 +532,16 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma> - prevent shooting with 0,0 direction
         if (mapDirection == Vector2.Zero)
             return;
-        var recoilScale = GetRecoilScale(user, gun);
         var mapAngle = mapDirection.ToAngle();
-        var angle = GetRecoilAngle(Timing.CurTime, gun, mapDirection.ToAngle(), user, recoilScale); // Trauma - pass user
+        var angle = GetRecoilAngle(Timing.CurTime, gun, mapDirection.ToAngle(), user); // Trauma - pass user
         // </Trauma>
 
         userImpulse = true;
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
-        var fromEnt = MapManager.TryFindGridAt(fromMap, out var gridUid, out _)
+        var fromEnt = Maps.TryFindGridAt(fromMap, out var gridUid, out _)
             ? TransformSystem.WithEntityId(fromCoordinates, gridUid)
-            : new EntityCoordinates(_map.GetMapOrInvalid(fromMap.MapId), fromMap.Position);
+            : new EntityCoordinates(Maps.GetMapOrInvalid(fromMap.MapId), fromMap.Position);
 
         var toMapBeforeRecoil = toMap; // Goobstation
 
@@ -633,7 +631,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             // <Trauma>
             if (userImpulse)
-                Recoil(user, mapDirection, gun.Comp.CameraRecoilScalarModified * recoilScale);
+                Recoil(user, mapDirection, gun.Comp.CameraRecoilScalarModified);
             // </Trauma>
         }
 
@@ -654,7 +652,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             if (TryComp<ProjectileSpreadComponent>(ammoEnt, out var ammoSpreadComp))
             {
-                var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread);
+                var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread, user); // Trauma - pass user
                 RaiseLocalEvent(gun, ref spreadEvent);
 
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
@@ -712,21 +710,24 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma>
         if (targetCoordinates is {} target)
             projectile.TargetCoordinates = target;
+        if (user != null)
+            projectile.IgnoredEntities.Add(user.Value);
 
         if (user is {} userUid)
         {
-            var ev = new PlayerShotProjectileEvent(uid, userUid);
-            RaiseLocalEvent(ref ev);
+            var userEv = new PlayerShotProjectileEvent(uid, userUid);
+            RaiseLocalEvent(ref userEv);
         }
         if (gunUid is {} gun)
         {
-            var shotEv = new ProjectileShotEvent(uid, user);
+            var shotEv = new GunShotProjectileEvent(uid, user);
             RaiseLocalEvent(gun, ref shotEv);
         }
         // </Trauma>
-    }
 
-    protected abstract void Popup(string message, EntityUid? uid, EntityUid? user);
+        var ev = new ProjectileShotEvent();
+        RaiseLocalEvent(uid, ref ev);
+    }
 
     /// <summary>
     /// Call this whenever the ammo count for a gun changes.
@@ -755,7 +756,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// </summary>
     public void EjectCartridge( // Trauma - made public
         // <Trauma>
-        System.Random rand, // predicted random instance for the gun
+        IRobustRandom rand, // predicted random instance for the gun
         EntityUid? user,
         // </Trauma>
         EntityUid entity,
@@ -770,9 +771,9 @@ public abstract partial class SharedGunSystem : EntitySystem
         var coordinates = xform.Coordinates;
         coordinates = coordinates.Offset(offsetPos);
 
-        TransformSystem.SetLocalRotation(entity, rand.NextAngle(), xform);
+        TransformSystem.SetCoordinates(entity, xform, coordinates, rotation: rand.NextAngle());
         // </Trauma>
-        TransformSystem.SetCoordinates(entity, xform, coordinates);
+        TransformSystem.AttachToGridOrMap(entity, xform);
 
         // decides direction the casing ejects and only when not cycling
         if (angle != null)
@@ -783,7 +784,9 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         if (playSound && TryComp<CartridgeAmmoComponent>(entity, out var cartridge))
         {
-            Audio.PlayPredicted(cartridge.EjectSound, entity, user, AudioParams.Default.WithVariation(SharedContentAudioSystem.DefaultVariation).WithVolume(-1f));
+            var audioParams = cartridge.EjectSound?.Params ?? AudioParams.Default;
+            audioParams = audioParams.AddVolume(-1f).WithVariation(SharedContentAudioSystem.DefaultVariation);
+            Audio.PlayPredicted(cartridge.EjectSound, entity, user, audioParams);
         }
     }
 
@@ -973,16 +976,20 @@ public abstract partial class SharedGunSystem : EntitySystem
         // 3. Nothing
         if (!forceWeaponSound && modifiedDamage != null && modifiedDamage.GetTotal() > 0 && TryComp<RangedDamageSoundComponent>(otherEntity, out var rangedSound))
         {
-            var type = SharedMeleeWeaponSystem.GetHighestDamageSound(modifiedDamage, ProtoManager);
+            var type = SharedMeleeWeaponSystem.GetHighestDamageSound(modifiedDamage, ProtoMan);
 
             if (type != null && rangedSound.SoundTypes?.TryGetValue(type, out var damageSoundType) == true)
             {
-                Audio.PlayLocal(damageSoundType, otherEntity, null, AudioParams.Default.WithVariation(MeleeSoundSystem.DamagePitchVariation));
+                var damageSoundTypeParams = damageSoundType?.Params ?? AudioParams.Default;
+                damageSoundTypeParams = damageSoundTypeParams.WithVariation(DamagePitchVariation);
+                Audio.PlayLocal(damageSoundType, otherEntity, null, damageSoundTypeParams);
                 return;
             }
             if (type != null && rangedSound.SoundGroups?.TryGetValue(type, out var damageSoundGroup) == true)
             {
-                Audio.PlayLocal(damageSoundGroup, otherEntity, null, AudioParams.Default.WithVariation(MeleeSoundSystem.DamagePitchVariation));
+                var damageSoundGroupParams = damageSoundGroup?.Params ?? AudioParams.Default;
+                damageSoundGroupParams = damageSoundGroupParams.WithVariation(DamagePitchVariation);
+                Audio.PlayLocal(damageSoundGroup, otherEntity, null, damageSoundGroupParams);
                 return;
             }
         }
@@ -1067,6 +1074,7 @@ public enum AmmoVisuals : byte
     AmmoCount,
     AmmoMax,
     HasAmmo, // used for generic visualizers. c# stuff can just check ammocount != 0
+    IsFull, // used for generic visualizers. c# stuff can just check ammocount == ammomax
     MagLoaded,
     BoltClosed,
 }

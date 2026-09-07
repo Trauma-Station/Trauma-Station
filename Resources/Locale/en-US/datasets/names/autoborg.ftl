@@ -26,7 +26,8 @@ names-autoborg-dataset-25 = This battery is shit
 names-autoborg-dataset-26 = IM NOT MALF GUYS
 names-autoborg-dataset-27 = I AM ERROR
 names-autoborg-dataset-28 = Carbon Exterminator
-names-autoborg-dataset-29 = PLASMALOOSE
+# Trauma - plasma -> phoron
+names-autoborg-dataset-29 = PHORONLOOSE
 names-autoborg-dataset-30 = Taffy
 names-autoborg-dataset-31 = Boop
 names-autoborg-dataset-32 = Boop II

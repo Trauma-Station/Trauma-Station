@@ -3,6 +3,10 @@
   parent: ClothingHandsBase
   id: ClothingHandsGlovesBoxingBase
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Unarmed # you are still just hitting people
+  # </Trauma>
   - type: StaminaDamageOnHit
     damage: 8 #Stam damage values seem a bit higher than regular damage because of the decay, etc
     # This needs to be moved to boxinggloves
@@ -328,6 +332,10 @@
   name: combat gloves
   description: These tactical gloves are fireproof and shock resistant.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/combat.rsi
   - type: Clothing
@@ -366,18 +374,21 @@
         Shock: 0.75
 
 - type: entity
-  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat ]
+  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat, BaseSlicingRefinable ]
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesMercFingerless
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -463,6 +474,10 @@
   name: gloves of the north star
   description: These gloves allow you to punch incredibly fast.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Unarmed # you are still just hitting people just really fast
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/northstar.rsi
   - type: Clothing
@@ -478,6 +493,7 @@
     animation: WeaponArcFist
     mustBeEquippedToUse: true
     heavyStaminaCost: 3 # goob edit
+    canWideSwing: false # Trauma
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue
@@ -521,8 +537,8 @@
   description: High-quality rubber gloves, squeaky to do some cleaning!
   components:
   # <Trauma> - todo above done...
-  - type: LubeImmune
-  - type: GlueImmune
+  - type: LubedImmune
+  - type: GluedImmune
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/janitor.rsi
@@ -661,6 +677,9 @@
           False: {state: knuckleduster_off}
   - type: ToggleClothing
     action: ActionToggleKnuckleDustersStun
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 50
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -678,8 +697,6 @@
       params:
         variation: 0.250
         volume: 5
-  - type: Stunbaton
-    energyPerUse: 50
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
@@ -691,6 +708,10 @@
         Blunt: 8
     bluntStaminaDamageFactor: 2.0
     animation: WeaponArcFist
+  - type: MeleeBatteryHitsLeft
+  - type: StaminaDamageOnHitRequiresToggle
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 50
   - type: StaminaDamageOnHit
     damage: 35
     sound: /Audio/Weapons/egloves.ogg
@@ -705,6 +726,10 @@
     guides:
     - Security
     - Antagonists
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - Stunbaton
 
 # - type: entity #Admeme
 #   parent: ClothingHandsKnuckleDusters

@@ -35,8 +35,8 @@ knowledge-path-blade-s4-name = Champion Hook
 knowledge-path-blade-s4-desc =
     In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
 
-    Grants you Champion Hook, a combat ability, that makes your next blade light attack deal extra damage,
-    knockdown and hook your opponent, allowing you to drag them with you at increased speed while holding a blade.
+    Grants you Champion Hook, a combat ability, that allows you to alt-click target in combat mode with your blade,
+    hitting them with extra damage, knocking down and hooking them, which allows you to drag your target at increased speed while holding a blade.
     You cannot attack with your blade that is actively hooking someone.
     Hook gets broken when victim stands up.
 
@@ -45,7 +45,7 @@ knowledge-path-blade-armor-desc =
     The echoing, directionless cacophony of violence reverberates about me.
     Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers.
 
-    Allows you to transmute a table (or a suit), a mask and a bar of silver to create a Shattered Panoply.
+    Allows you to transmute a table (or a suit), a mask and a knife to create a Shattered Panoply.
     Provides baton resistance and shock insulation while worn.
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.
@@ -55,7 +55,7 @@ knowledge-path-blade-s5-desc =
     His general wished to end the war, but the Champion knew there could be no life without death. He would slay the coward himself, and anyone who tried to run.
 
     Grants you Sacraments of Power, a spell that makes you immune to all incoming damage and stamina damage for 5 seconds, the portion of absorbed damage will be sent back to attackers.
-    Prevents you from shooting or attacking during the effect duration.
+    Harming people while effect is active will force them to bypass it, which allows them to damage you.
     Takes about 1 second to activate.
 
 knowledge-path-blade-s6-name = Furious Steel

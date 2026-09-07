@@ -86,6 +86,7 @@ public record struct HereticMagicCastAttemptEvent(EntityUid User, EntityUid Acti
 
 // basic
 public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
+
 public sealed partial class EventHereticOpenStore : InstantActionEvent;
 
 public sealed partial class TouchSpellEvent : InstantActionEvent
@@ -99,6 +100,7 @@ public sealed partial class TouchSpellEvent : InstantActionEvent
     [DataField(required: true)]
     public EntityWhitelist TouchSpellWhitelist;
 }
+
 public sealed partial class EventHereticLivingHeart : InstantActionEvent; // opens ui
 
 [ByRefEvent]
@@ -145,6 +147,9 @@ public sealed partial class EventHereticVolcanoBlast : InstantActionEvent
 {
     [DataField]
     public float Radius = 5;
+
+    [DataField]
+    public EntProtoId StatusEffect = "StatusEffectFireBlasted";
 }
 
 public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
@@ -157,7 +162,7 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
     {
         DamageDict =
         {
-            { "Heat", 20 },
+            { "Heat", 30 },
         },
     };
 
@@ -188,11 +193,11 @@ public sealed partial class HereticVoidBlastEvent : InstantActionEvent;
 public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
 {
     [DataField]
-    public DamageSpecifier Damage = new ()
+    public DamageSpecifier Damage = new()
     {
         DamageDict =
         {
-            {"Cold", 20},
+            { "Cold", 20 },
         },
     };
 
@@ -209,11 +214,11 @@ public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
 public sealed partial class HereticVoidPullEvent : InstantActionEvent
 {
     [DataField]
-    public DamageSpecifier Damage = new ()
+    public DamageSpecifier Damage = new()
     {
         DamageDict =
         {
-            {"Cold", 30},
+            { "Cold", 30 },
         },
     };
 
@@ -252,8 +257,6 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
     public EntProtoId Status = "SacramentsOfPowerStatusEffect";
 }
 
-public sealed partial class EventHereticToggleChampionHook : InstantActionEvent;
-
 public sealed partial class EventHereticFuriousSteel : InstantActionEvent
 {
     [DataField]
@@ -288,11 +291,7 @@ public sealed partial class HereticBladePassiveRiposteEvent : HereticKnowledgeEv
 }
 
 // lock
-public sealed partial class EventHereticBulglarFinesse : EntityTargetActionEvent;
-
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
-
-public sealed partial class HereticXRayVisionEvent : HereticKnowledgeEvent;
 
 public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 
@@ -415,7 +414,8 @@ public sealed partial class StarGazeEvent : InstantActionEvent // Giga lazor
     public EntProtoId OrbEffect = "EffectGazerOrb";
 
     [DataField]
-    public SoundSpecifier BeamStartSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/stargazer/beam_open.ogg");
+    public SoundSpecifier BeamStartSound =
+        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/stargazer/beam_open.ogg");
 }
 
 public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEvent;
@@ -423,9 +423,11 @@ public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEven
 public sealed partial class StarGazerSeekMasterEvent : InstantActionEvent;
 
 // side
-public sealed partial class EventHereticIceSpear : InstantActionEvent;
+public sealed partial class ToggleAbyssalMaskEvent : InstantActionEvent;
 
-public sealed partial class EventHereticCleave : WorldTargetActionEvent
+public sealed partial class RecallItemEvent : InstantActionEvent;
+
+public sealed partial class EventHereticCleave : EntityTargetActionEvent
 {
     [DataField]
     public float Range = 1f;
@@ -435,10 +437,10 @@ public sealed partial class EventHereticCleave : WorldTargetActionEvent
     {
         DamageDict =
         {
-            {"Blunt", 4f},
-            {"Slash", 4f},
-            {"Piercing", 4f},
-            {"Bloodloss", 3f},
+            { "Blunt", 4f },
+            { "Slash", 4f },
+            { "Piercing", 4f },
+            { "Bloodloss", 3f },
         },
     };
 
@@ -496,16 +498,18 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);
 }
+
 #endregion
 
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;
 
 [Serializable, NetSerializable]
-public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates coords) : EntityEventArgs
+public sealed class LaserBeamEndpointPositionEvent(NetCoordinates coords, bool shouldFire)
+    : EntityEventArgs
 {
-    public NetEntity Uid = uid;
+    public NetCoordinates Coordinates = coords;
 
-    public MapCoordinates Coordinates = coords;
+    public bool ShouldFire = shouldFire;
 }
 
 [Virtual, DataDefinition, ImplicitDataDefinitionForInheritors]
@@ -517,4 +521,7 @@ public partial class HereticKnowledgeEvent : EntityEventArgs
 
     [DataField]
     public ComponentRegistry AddedComponents = new();
+
+    [DataField]
+    public List<EntProtoId> StatusEffects = new();
 }

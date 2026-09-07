@@ -9,10 +9,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.Borgs.Components;
-using Content.Trauma.Common.Silicon;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.SlaughterDemon.Systems;
 
@@ -23,95 +21,62 @@ public sealed partial class SlaughterDevourSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private EntityQuery<PullerComponent> _pullerQuery = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
 
-    private EntityQuery<PullerComponent> _pullerQuery;
-    private EntityQuery<HumanoidProfileComponent> _humanoid;
-    private EntityQuery<ActorComponent> _actorQuery;
-    /// <inheritdoc/>
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnMapInit(Entity<SlaughterDevourComponent> ent, ref MapInitEvent args)
     {
-        base.Initialize();
-
-        _pullerQuery = GetEntityQuery<PullerComponent>();
-        _humanoid = GetEntityQuery<HumanoidProfileComponent>();
-        _actorQuery = GetEntityQuery<ActorComponent>();
-
-        SubscribeLocalEvent<SlaughterDevourComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<SlaughterDevourComponent, BloodCrawlAttemptEvent>(OnBloodCrawlAttempt);
-
-        SubscribeLocalEvent<SlaughterDevourComponent, SlaughterDevourDoAfter>(OnDoAfter);
-
-        // Drink-related
-        SubscribeLocalEvent<DemonsBloodComponent, SlaughterDevourAttemptEvent>(OnAttemptDemonsBlood);
-        SubscribeLocalEvent<DemonsKissComponent, SlaughterDevourAttemptEvent>(OnAttemptDemonsKiss);
-    }
-
-    private void OnMapInit(Entity<SlaughterDevourComponent> ent, ref MapInitEvent args) =>
         ent.Comp.Container = _container.EnsureContainer<Container>(ent.Owner, "stomach");
-
-    private void OnBloodCrawlAttempt(Entity<SlaughterDevourComponent> ent, ref BloodCrawlAttemptEvent args) =>
-        TryDevour(ent.Owner, ent.Comp, ref args);
-
-    private void OnDoAfter(Entity<SlaughterDevourComponent> ent, ref SlaughterDevourDoAfter args)
-    {
-        if (args.Target == null
-            || args.Cancelled)
-            return;
-
-        var ev = new SlaughterDevourEvent(args.Target.Value, Transform(ent.Owner).Coordinates);
-        RaiseLocalEvent(ent.Owner, ref ev);
     }
 
-    /// <summary>
-    /// Exclusive to slaughter demons. They devour targets once they enter blood crawl jaunt form.
-    /// </summary>
-    private void TryDevour(EntityUid uid, SlaughterDevourComponent comp, ref BloodCrawlAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnBloodCrawlAttempt(Entity<SlaughterDevourComponent> ent, ref BloodCrawlAttemptEvent args)
     {
-        if (!_pullerQuery.TryComp(uid, out var puller)
-            || puller.Pulling == null)
+        if (_pullerQuery.CompOrNull(ent)?.Pulling is not { } pulled)
             return;
 
-        var pullingEnt = puller.Pulling.Value;
-
-        if (_mobState.IsAlive(pullingEnt))
+        if (_mobState.IsAlive(pulled))
             return;
 
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
-            uid,
-            comp.DoAfterDelay,
-            new SlaughterDevourDoAfter(),
-            uid,
-            pullingEnt)
+            ent,
+            ent.Comp.DoAfterDelay,
+            new SlaughterDevourDoAfterEvent(),
+            ent,
+            pulled)
         {
             BreakOnMove = true,
             ColorOverride = Color.Red
         };
 
-        args.Cancelled = true; // cancel the jaunt and devour instead
-
-        _doAfter.TryStartDoAfter(doAfterArgs);
+        // cancel the jaunt and devour instead
+        args.Cancelled = _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
     #region Drink-related
 
+    // TODO: make this a status effect comp jesus christ
+    [SubscribeLocalEvent]
     private void OnAttemptDemonsBlood(Entity<DemonsBloodComponent> ent, ref SlaughterDevourAttemptEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Cancelled)
             return;
 
         _popup.PopupEntity(Loc.GetString("slaughter-demons-blood-devour"), args.Devourer, args.Devourer, PopupType.SmallCaution);
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAttemptDemonsKiss(Entity<DemonsKissComponent> ent, ref SlaughterDevourAttemptEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Cancelled)
             return;
 
         _damageable.TryChangeDamage(args.Devourer, ent.Comp.Damage, ignoreResistances: true);
@@ -122,47 +87,46 @@ public sealed partial class SlaughterDevourSystem : EntitySystem
     }
     #endregion
 
-    public void HealAfterDevouring(EntityUid target, EntityUid devourer, SlaughterDevourComponent component)
+    public void HealAfterDevouring(Entity<SlaughterDevourComponent> ent, EntityUid target)
     {
         var popup = "slaughter-devour-other";
-        var amount = component.ToHealAnythingElse;
+        var amount = ent.Comp.ToHealAnythingElse;
         // I dont know how to refactor this into events so im leaving it like this
-        if (HasComp<BorgChassisComponent>(target) || _silicon.IsSilicon(target))
+        // W sped
+        if (_whitelist.IsWhitelistPass(ent.Comp.RobotWhitelist, target))
         {
             popup = "slaughter-devour-robot";
-            amount = component.ToHealNonCrew;
+            amount = ent.Comp.ToHealNonCrew;
         }
-        else if (HasComp<HumanoidProfileComponent>(target))
+        else if (_humanoidQuery.HasComp(target))
         {
             popup = "slaughter-devour-humanoid";
-            amount = component.ToHeal;
+            amount = ent.Comp.ToHeal;
         }
 
-        _popup.PopupClient(Loc.GetString(popup), devourer, devourer);
-        var damage = component.HealDamage * amount;
-        _damageable.ChangeDamage(devourer, damage, true);
+        _popup.PopupEntity(Loc.GetString(popup), ent, ent);
+        var damage = ent.Comp.HealDamage * amount;
+        _damageable.ChangeDamage(ent.Owner, damage, true);
     }
 
     /// <summary>
     ///  Increments the objectives of the slaughter demons
     /// </summary>
-    public void IncrementObjective(EntityUid uid, EntityUid devoured, SlaughterDemonComponent demon)
+    public void IncrementObjective(Entity<SlaughterDemonComponent> ent, EntityUid target)
     {
-        if (!_mind.TryGetMind(uid, out _, out var mind))
+        if (!_humanoidQuery.HasComp(target) || // cant eat mice
+            !_mind.TryGetMind(target, out _, out _) || // cant eat salv unidentified corpses etc
+            !_mind.TryGetMind(ent, out _, out var mind))
             return;
 
         // Goidaaaaaa
         foreach (var objective in mind.Objectives)
         {
             if (TryComp<SlaughterDevourConditionComponent>(objective, out var devourCondition))
-                devourCondition.Devour = demon.Devoured;
+                devourCondition.Devour = ent.Comp.Devoured;
 
-            if (TryComp<SlaughterKillEveryoneConditionComponent>(objective, out var killEveryoneCondition)
-                && _humanoid.HasComp(devoured)
-                && _actorQuery.HasComp(devoured))
-            {
+            if (TryComp<SlaughterKillEveryoneConditionComponent>(objective, out var killEveryoneCondition))
                 killEveryoneCondition.Devoured++;
-            }
         }
     }
 }

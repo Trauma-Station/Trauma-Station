@@ -11,6 +11,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Tag;
 using Content.Shared.Trigger.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
@@ -30,7 +31,6 @@ namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 public abstract partial class SharedStarMarkSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -42,10 +42,14 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private TagSystem _tag = default!;
+
     [Dependency] private EntityQuery<CosmicFieldComponent> _fieldQuery = default!;
 
     public static readonly EntProtoId StarMarkStatusEffect = "StatusEffectStarMark";
     public static readonly EntProtoId CosmicField = "WallFieldCosmic";
+
+    private HashSet<Entity<CosmicFieldComponent>> _fields = new();
 
     public override void Initialize()
     {
@@ -143,7 +147,7 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
 
         var other = args.OtherEntity;
 
-        if (!TryComp(other, out ActiveTimerTriggerComponent? trigger))
+        if (_tag.HasTag(other, ent.Comp.IgnoredTag) || !TryComp(other, out ActiveTimerTriggerComponent? trigger))
             return;
 
         // Defuse bombs
@@ -224,12 +228,13 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
         if (!predicted && _net.IsClient)
             return;
 
-        var spawnCoords = coords.SnapToGrid(EntityManager, _mapMan);
+        var spawnCoords = coords.SnapToGrid(EntityManager);
 
-        var lookup = _lookup.GetEntitiesInRange<CosmicFieldComponent>(spawnCoords, 0.1f, LookupFlags.Static);
-        if (lookup.Count > 0)
+        _fields.Clear();
+        _lookup.GetEntitiesInRange(spawnCoords, 0.1f, _fields, LookupFlags.Static);
+        if (_fields.Count > 0)
         {
-            foreach (var (lookEnt, comp) in lookup)
+            foreach (var (lookEnt, comp) in _fields)
             {
                 if (comp.Strength < strength)
                     InitializeCosmicField((lookEnt, comp), strength);
@@ -241,7 +246,7 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
             return;
         }
 
-        var ent = predicted ? PredictedSpawnAtPosition(CosmicField, spawnCoords) : Spawn(CosmicField, spawnCoords);
+        var ent = PredictedSpawnAtPosition(CosmicField, spawnCoords);
         var xform = Transform(ent);
         _transform.AttachToGridOrMap(ent, xform);
         _transform.AnchorEntity((ent, xform));
@@ -270,7 +275,7 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
             return false;
 
         var ev = new BeforeCastTouchSpellEvent(entity, false);
-        RaiseLocalEvent(entity, ev, true);
+        RaiseLocalEvent(entity, ref ev, true);
 
         var result = !ev.Cancelled &&
                      _status.TryUpdateStatusEffectDuration(entity,

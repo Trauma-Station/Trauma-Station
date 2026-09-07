@@ -13,6 +13,9 @@ public sealed partial class HereticBladeComponent : Component
     public HereticPath? Path;
 
     [DataField]
+    public EntityEffect[]? ThrowEffects;
+
+    [DataField]
     public EntityEffect[]? Effects;
 
     [DataField, NonSerialized]

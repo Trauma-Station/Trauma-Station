@@ -18,7 +18,7 @@ public sealed partial class StationAreaEffects : EntityEffectBase<StationAreaEff
     /// Name of the area's component to query.
     /// </summary>
     [DataField(required: true)]
-    public string AreaComp = string.Empty;
+    public CompName AreaComp;
 
     /// <summary>
     /// The effects to apply to the chosen area.
@@ -52,7 +52,7 @@ public sealed partial class StationAreaEffectsSystem : EntityEffectSystem<Statio
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationAreaEffects> args)
     {
         var e = args.Effect;
-        var type = Factory.GetRegistration(e.AreaComp).Type;
+        var type = Factory.GetRegistration(e.AreaComp.Name).Type;
 
         // TODO: make a open areas cache somewhere...
         var station = ent.Owner;

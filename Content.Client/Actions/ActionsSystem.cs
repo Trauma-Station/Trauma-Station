@@ -1,15 +1,14 @@
 // <Trauma>
 using Content.Trauma.Common.Wizard;
-using Content.Goobstation.Common.Actions;
 // </Trauma>
 using System.IO;
 using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Charges.Systems;
 using Content.Shared.Mapping;
 using Content.Shared.Maps;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameStates;
@@ -21,7 +20,6 @@ using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Value;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
 
@@ -32,12 +30,11 @@ namespace Content.Client.Actions
     {
         public delegate void OnActionReplaced(EntityUid actionId);
 
-        [Dependency] private SharedChargesSystem _sharedCharges = default!;
         [Dependency] private IPlayerManager _playerManager = default!;
-        [Dependency] private IPrototypeManager _proto = default!;
         [Dependency] private IResourceManager _resources = default!;
         [Dependency] private MetaDataSystem _metaData = default!;
         [Dependency] private ISerializationManager _serialization = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
 
         public event Action<EntityUid>? OnActionAdded;
         public event Action<EntityUid>? OnActionRemoved;
@@ -46,11 +43,6 @@ namespace Content.Client.Actions
         public event Action? UnlinkActions;
         public event Action? ClearAssignments;
         public event Action<List<SlotAssignment>>? AssignSlot;
-
-        // Goobstation start
-        public event Action<EntityUid>? ActionsSaved;
-        public event Action<EntityUid>? ActionsLoaded;
-        // Goobstation end
 
         private readonly List<EntityUid> _removed = new();
         private readonly List<Entity<ActionComponent>> _added = new();
@@ -69,18 +61,7 @@ namespace Content.Client.Actions
 
             SubscribeLocalEvent<EntityTargetActionComponent, ActionTargetAttemptEvent>(OnEntityTargetAttempt);
             SubscribeLocalEvent<WorldTargetActionComponent, ActionTargetAttemptEvent>(OnWorldTargetAttempt);
-
-            SubscribeNetworkEvent<LoadActionsEvent>(OnLoadActions); // Goobstation
         }
-
-        private void OnLoadActions(LoadActionsEvent msg, EntitySessionEventArgs args) // Goobstation
-        {
-            if (args.SenderSession != _playerManager.LocalSession)
-                return;
-
-            ActionsLoaded?.Invoke(GetEntity(msg.Entity));
-        }
-
 
         private void OnActionAutoHandleState(Entity<ActionComponent> ent, ref AfterAutoHandleStateEvent args)
         {
@@ -89,8 +70,6 @@ namespace Content.Client.Actions
 
         public override void UpdateAction(Entity<ActionComponent> ent)
         {
-            // TODO: Decouple this.
-            ent.Comp.IconColor = _sharedCharges.GetCurrentCharges(ent.Owner) == 0 || !ent.Comp.Enabled ? ent.Comp.DisabledIconColor : ent.Comp.OriginalIconColor; // WD EDIT
             base.UpdateAction(ent);
             if (_playerManager.LocalEntity != ent.Comp.AttachedEntity)
                 return;
@@ -174,23 +153,15 @@ namespace Content.Client.Actions
             ActionsUpdated?.Invoke();
         }
 
-        // Goobstation start
-        public override void SaveActions(EntityUid performer)
+        /// <summary>
+        /// True if this action has a distinct sprite layer to show while toggled,
+        /// rather than just highlighting whatever slot displays it.
+        /// </summary>
+        public bool HasToggleIcon(EntityUid? actionId)
         {
-            if (_playerManager.LocalEntity != performer)
-                return;
-
-            ActionsSaved?.Invoke(performer);
+            return TryComp<SpriteComponent>(actionId, out var sprite)
+                && _sprite.LayerExists((actionId.Value, sprite), ActionVisuals.IconToggled);
         }
-
-        public override void LoadActions(EntityUid performer)
-        {
-            if (_playerManager.LocalEntity != performer)
-                return;
-
-            ActionsLoaded?.Invoke(performer);
-        }
-        // Goobstation end
 
         public IEnumerable<Entity<ActionComponent>> GetClientActions()
         {
@@ -206,7 +177,7 @@ namespace Content.Client.Actions
             ActionsLoaded?.Invoke(uid); // Goobstation
         }
 
-        private void OnPlayerDetached(EntityUid uid, ActionsComponent component, LocalPlayerDetachedEvent? args = null)
+        private void OnPlayerDetached(EntityUid uid, ActionsComponent component, LocalPlayerDetachedEvent args)
         {
             ActionsSaved?.Invoke(uid); // Goobstation
             UnlinkAllActions();
@@ -296,7 +267,7 @@ namespace Content.Client.Actions
                 else if (map.TryGet<ValueDataNode>("entity", out var entityNode))
                 {
                     var id = new EntProtoId(entityNode.Value);
-                    var proto = _proto.Index(id);
+                    var proto = ProtoMan.Index(id);
                     actionId = Spawn(MappingEntityAction);
                     SetIcon(actionId, new SpriteSpecifier.EntityPrototype(id));
                     SetEvent(actionId, new StartPlacementActionEvent()
@@ -309,7 +280,7 @@ namespace Content.Client.Actions
                 else if (map.TryGet<ValueDataNode>("tileId", out var tileNode))
                 {
                     var id = new ProtoId<ContentTileDefinition>(tileNode.Value);
-                    var proto = _proto.Index(id);
+                    var proto = ProtoMan.Index(id);
                     actionId = Spawn(MappingEntityAction);
                     if (proto.Sprite is {} sprite)
                         SetIcon(actionId, new SpriteSpecifier.Texture(sprite));

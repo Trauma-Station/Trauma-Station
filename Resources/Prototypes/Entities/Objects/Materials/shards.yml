@@ -15,8 +15,11 @@
       types:
         Blunt: 100
   - type: ReflectiveSurface
-  # </Trauma>
   - type: Sharp
+  # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
@@ -62,21 +65,14 @@
         Slash: 2
   - type: Tag
     tags:
+    # <Trauma>
+    - AnyGlassShard
+    - Recyclable
+    # </Trauma>
     - Trash
-    - Recyclable # Trauma
   - type: SpaceGarbage
   - type: Damageable
     damageModifierSet: Glass
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: StepTrigger
     intersectRatio: 0.2
     triggerGroups: # Goobstation
@@ -116,6 +112,10 @@
         Piercing: 4.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - GlassShard
       - Trash
   - type: Solution
@@ -153,6 +153,10 @@
         Piercing: 5.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - ReinforcedGlassShard
       - Trash
   - type: Solution
@@ -194,6 +198,10 @@
         Piercing: 6.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - PlasmaGlassShard
       - Trash
   - type: Solution
@@ -235,6 +243,10 @@
         Radiation: 2.5
   - type: Tag
     tags:
+      # <Trauma>
+      - AnyGlassShard
+      - Recyclable
+      # </Trauma>
       - UraniumGlassShard
       - Trash
   - type: Solution
@@ -279,7 +291,5 @@
       reagents:
       - ReagentId: Silicon
         Quantity: 5
-      - ReagentId: Zinc
-        Quantity: 1.65
-      - ReagentId: Copper
-        Quantity: 3.35
+      - ReagentId: Brass
+        Quantity: 5

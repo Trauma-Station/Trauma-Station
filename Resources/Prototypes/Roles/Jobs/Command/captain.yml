@@ -19,9 +19,10 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h
-  guides: # goobstation
+  # <Trauma>
+  guides:
   - Command
-  weight: 20
+  # </Trauma>
   startingGear: CaptainGear
   icon: "JobIconCaptain"
   joinNotifyCrew: true
@@ -32,7 +33,9 @@
   # <Trauma>
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipCaptain
+    - SkillChipEchelonEducation
+    - SkillChipLaser
+    - SkillChipLongBlade
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

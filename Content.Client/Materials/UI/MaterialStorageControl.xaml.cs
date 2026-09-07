@@ -50,12 +50,7 @@ public sealed partial class MaterialStorageControl : ScrollContainer
         }
 
         var canEject = materialStorage.CanEjectStoredMaterials;
-        // <Trauma> - dont let people eject ore from oreproc
-        var storage = _materialStorage.GetStoredMaterials((_owner.Value, materialStorage));
-        var mats = materialStorage.DisallowOreEjection
-            ? FilterOutOres(storage)
-            : storage;
-        // </Trauma>
+        var mats = _materialStorage.GetStoredMaterials((_owner.Value, materialStorage));
 
         if (_currentMaterials.Equals(mats))
             return;

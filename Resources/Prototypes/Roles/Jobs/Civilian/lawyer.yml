@@ -23,7 +23,7 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipLawyer
+    - SkillChipEducation
   # Everyone knows lawyers are soulless.
   - !type:AddComponentSpecial
     components:

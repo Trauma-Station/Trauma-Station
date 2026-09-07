@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Radio;
+
+namespace Content.Trauma.Shared.CartridgeLoader.Cartridges;
+
+[RegisterComponent, NetworkedComponent, Access(typeof(NanoChatCartridgeSystem))]
+[AutoGenerateComponentState]
+public sealed partial class NanoChatCartridgeComponent : Component
+{
+    /// <summary>
+    ///     Station entity to keep track of.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Station;
+
+    /// <summary>
+    ///     The NanoChat card to keep track of.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Card;
+
+    /// <summary>
+    ///     The <see cref="RadioChannelPrototype" /> required to send or receive messages.
+    /// </summary>
+    [DataField]
+    public ProtoId<RadioChannelPrototype> RadioChannel = "Common";
+}

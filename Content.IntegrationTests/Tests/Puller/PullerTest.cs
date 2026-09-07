@@ -1,7 +1,7 @@
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Hands.Components;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Prototypes;
+//using Content.Shared.Prototypes; // Trauma - die
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -22,10 +22,10 @@ public sealed class PullerTest : GameTest
         var server = pair.Server;
 
         // <Trauma> - microoptimisation shit
-        var compFactory = server.EntMan.ComponentFactory;
-        var protoManager = server.ProtoMan;
-        var handsName = compFactory.GetComponentName<HandsComponent>();
-        var pullerName = compFactory.GetComponentName<PullerComponent>();
+        var compFactory = SEntMan.ComponentFactory;
+        var protoManager = SProtoMan;
+        var handsName = compFactory.CompName<HandsComponent>();
+        var pullerName = compFactory.CompName<PullerComponent>();
         // </Trauma>
 
         await server.WaitAssertion(() =>
@@ -34,13 +34,13 @@ public sealed class PullerTest : GameTest
             {
                 foreach (var proto in protoManager.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (!proto.TryGetComponent<PullerComponent>(pullerName, out var puller)) // Trauma - use cached pullerName from above
+                    if (!proto.TryComp<PullerComponent>(pullerName, out var puller)) // Trauma - use cached pullerName from above
                         continue;
 
                     if (!puller.NeedsHands)
                         continue;
 
-                    Assert.That(proto.Components.ContainsKey(handsName), $"Found puller {proto} with NeedsHand pulling but has no hands?"); // Trauma - used cached handsName from above
+                    Assert.That(proto.HasComp(handsName), $"Found puller {proto} with NeedsHand pulling but has no hands?"); // Trauma - used cached handsName from above
                 }
             });
         });

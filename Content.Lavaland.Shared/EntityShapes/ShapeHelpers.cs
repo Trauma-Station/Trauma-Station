@@ -6,6 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Lavaland.Shared.EntityShapes;
 
+// TODO: make all this shit add to a List<Vector2> param not this slop
 /// <summary>
 /// Some static helper methods that help to create some tile patterns with ease.
 /// Allows to reuse already written methods for generating shapes, so making new
@@ -139,7 +140,7 @@ public static class ShapeHelpers
     public static IEnumerable<Vector2> MakeBoxChanceRandom(
         Vector2 center,
         int range,
-        System.Random random,
+        IRobustRandom random,
         float filledSquareChance = 0.3f,
         float stepSize = 1)
     {
@@ -160,7 +161,7 @@ public static class ShapeHelpers
     public static IEnumerable<Vector2> MakeBoxCountRandom(
         Vector2 center,
         int range,
-        System.Random random,
+        IRobustRandom random,
         int removeAmount = 0,
         float stepSize = 1)
     {

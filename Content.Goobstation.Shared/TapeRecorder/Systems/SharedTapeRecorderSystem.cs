@@ -31,23 +31,6 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
 
     protected const string SlotName = "cassette_tape";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TapeRecorderComponent, ItemSlotEjectAttemptEvent>(OnCassetteRemoveAttempt);
-        SubscribeLocalEvent<TapeRecorderComponent, EntRemovedFromContainerMessage>(OnCassetteRemoved);
-        SubscribeLocalEvent<TapeRecorderComponent, EntInsertedIntoContainerMessage>(OnCassetteInserted);
-        SubscribeLocalEvent<TapeRecorderComponent, ExaminedEvent>(OnRecorderExamined);
-        SubscribeLocalEvent<TapeRecorderComponent, ChangeModeTapeRecorderMessage>(OnChangeModeMessage);
-        SubscribeLocalEvent<TapeRecorderComponent, AfterActivatableUIOpenEvent>(OnUIOpened);
-
-        SubscribeLocalEvent<TapeCassetteComponent, ExaminedEvent>(OnTapeExamined);
-        SubscribeLocalEvent<TapeCassetteComponent, DamageChangedEvent>(OnDamagedChanged);
-        SubscribeLocalEvent<TapeCassetteComponent, InteractUsingEvent>(OnInteractingWithCassette);
-        SubscribeLocalEvent<TapeCassetteComponent, TapeCassetteRepairDoAfterEvent>(OnTapeCassetteRepair);
-    }
-
     /// <summary>
     /// Process active tape recorder modes
     /// </summary>
@@ -81,6 +64,7 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnUIOpened(Entity<TapeRecorderComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
         UpdateUI(ent);
@@ -89,6 +73,7 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
     /// <summary>
     /// UI message when choosing between recorder modes
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnChangeModeMessage(Entity<TapeRecorderComponent> ent, ref ChangeModeTapeRecorderMessage args)
     {
         SetMode(ent, args.Mode);
@@ -177,7 +162,8 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
     /// <summary>
     /// Start repairing a damaged tape when using a screwdriver or pen on it
     /// </summary>
-    protected void OnInteractingWithCassette(Entity<TapeCassetteComponent> ent, ref InteractUsingEvent args)
+    [SubscribeLocalEvent]
+    private void OnInteractingWithCassette(Entity<TapeCassetteComponent> ent, ref InteractUsingEvent args)
     {
         //Is the tape damaged?
         if (HasComp<FitsInTapeRecorderComponent>(ent))
@@ -197,7 +183,8 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
     /// <summary>
     /// Repair a damaged tape
     /// </summary>
-    protected void OnTapeCassetteRepair(Entity<TapeCassetteComponent> ent, ref TapeCassetteRepairDoAfterEvent args)
+    [SubscribeLocalEvent]
+    private void OnTapeCassetteRepair(Entity<TapeCassetteComponent> ent, ref TapeCassetteRepairDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Args.Target == null)
             return;
@@ -214,9 +201,10 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
     /// <summary>
     /// When the cassette has been damaged, corrupt and entry and unspool it
     /// </summary>
-    protected void OnDamagedChanged(Entity<TapeCassetteComponent> ent, ref DamageChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnDamagedDealt(Entity<TapeCassetteComponent> ent, ref DamageDealtEvent args)
     {
-        if (args.DamageDelta == null || args.DamageDelta.GetTotal() < 5)
+        if (args.Damage.GetTotal() < 5)
             return;
 
         _appearance.SetData(ent, ToggleableVisuals.Enabled, true);
@@ -225,7 +213,8 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
         CorruptRandomEntry(ent);
     }
 
-    protected void OnTapeExamined(Entity<TapeCassetteComponent> ent, ref ExaminedEvent args)
+    [SubscribeLocalEvent]
+    private void OnTapeExamined(Entity<TapeCassetteComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
             return;
@@ -241,7 +230,8 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
         args.PushMarkup(tapePosMsg);
     }
 
-    protected void OnRecorderExamined(Entity<TapeRecorderComponent> ent, ref ExaminedEvent args)
+    [SubscribeLocalEvent]
+    private void OnRecorderExamined(Entity<TapeRecorderComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
             return;
@@ -262,7 +252,8 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
     /// <summary>
     /// Prevent removing the tape cassette while the recorder is active
     /// </summary>
-    protected void OnCassetteRemoveAttempt(Entity<TapeRecorderComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnCassetteRemoveAttempt(Entity<TapeRecorderComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
         if (!HasComp<ActiveTapeRecorderComponent>(ent))
             return;
@@ -270,14 +261,16 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    protected void OnCassetteRemoved(Entity<TapeRecorderComponent> ent, ref EntRemovedFromContainerMessage args)
+    [SubscribeLocalEvent]
+    private void OnCassetteRemoved(Entity<TapeRecorderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         SetMode(ent, TapeRecorderMode.Stopped);
         UpdateAppearance(ent);
         UpdateUI(ent);
     }
 
-    protected void OnCassetteInserted(Entity<TapeRecorderComponent> ent, ref EntInsertedIntoContainerMessage args)
+    [SubscribeLocalEvent]
+    private void OnCassetteInserted(Entity<TapeRecorderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         UpdateAppearance(ent);
         UpdateUI(ent);

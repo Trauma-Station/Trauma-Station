@@ -1,0 +1,21 @@
+uplink-explosive-foam-grenade-name = Shrapnel Foam Grenade
+uplink-explosive-foam-grenade-desc = A shrapnel grenade disguised as a regular foam toy grenade.
+
+uplink-sticky-grenade-name = Sticky Explosive Grenade
+uplink-sticky-grenade-desc = A sticky version of the simplistic grenade with a 3 second long fuse. Causes minimal hull damage.
+
+uplink-exploding-pen-name-trauma = Exploding Pen
+
+uplink-c4-bundle-name-trauma = C-4 Bundle
+
+uplink-cluster-grenade-name = Cluster Grenade
+uplink-cluster-grenade-desc = Three explosive grenades bundled together. The cluster splits after 3.5 seconds.
+
+uplink-flashbang-pen-name = Flashbang Pen
+uplink-flashbang-pen-desc = A flashbang device contained within a standard pen. Comes with a 4 second fuse.
+
+uplink-viscerators-delivery-grenade-name = Viscerator Delivery Grenade
+uplink-viscerators-delivery-grenade-desc = Grenade that deploys a swarm of viscerators upon activation, which will chase down and shred any non-agents in the area.
+
+uplink-viscerators-delivery-grenade-box-name = Viscerator Delivery Grenade Box
+uplink-viscerators-delivery-grenade-box-desc = A box containing unique grenades that deploys a swarm of viscerators upon activation, which will chase down and shred any non-operatives in the area.

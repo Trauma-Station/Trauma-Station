@@ -34,10 +34,10 @@ public sealed partial class QualityPrototype : IPrototype
     public float SelfDamage = 0.87f;
 
     [DataField]
-    public float Damage = 1.125f;
+    public float Damage = 1.0f;
 
     [DataField]
-    public float Projectile = 1.125f;
+    public float Projectile = 1.0f;
 
     [DataField]
     public float Durability = 1.12f;
@@ -55,7 +55,7 @@ public sealed partial class QualityPrototype : IPrototype
     public float ShieldFlat = 1.12f;
 
     [DataField]
-    public float MeleeDamage = 1.03f;
+    public float MeleeDamage = 1.0f;
 
     [DataField]
     public float Price = 1.5f;

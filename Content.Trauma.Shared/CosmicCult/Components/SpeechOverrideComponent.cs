@@ -7,29 +7,26 @@ using Content.Shared.Speech;
 namespace Content.Trauma.Shared.CosmicCult.Components;
 
 /// <summary>
-/// Component for overriding an entity's vocal and speech sounds through equipment.
+/// Component for overriding a mob's emote and speech sounds while this clothing worn.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class SpeechOverrideComponent : Component
 {
     /// <summary>
     /// Emote sounds to assign to the entity equipping this item.
     /// </summary>
     [DataField(required: true)]
-    public Dictionary<Sex, ProtoId<EmoteSoundsPrototype>>? EmoteIDs = null;
+    public ProtoId<EmoteSoundsPrototype>? EmoteSounds;
 
     /// <summary>
     /// Entity's original emote sounds to use when the item is unequipped.
     /// </summary>
     [DataField]
-    [AutoNetworkedField]
-    public Dictionary<Sex, ProtoId<EmoteSoundsPrototype>>? EmoteStoredIDs = null;
+    public ProtoId<EmoteSoundsPrototype>? OldEmoteSounds;
 
     [DataField(required: true)]
-    public ProtoId<SpeechSoundsPrototype>? SpeechIDs = null;
+    public ProtoId<SpeechSoundsPrototype>? SpeechSounds = null;
 
     [DataField]
-    [AutoNetworkedField]
-    public ProtoId<SpeechSoundsPrototype>? SpeechStoredIDs = null;
-
+    public ProtoId<SpeechSoundsPrototype>? OldSpeechSounds = null;
 }

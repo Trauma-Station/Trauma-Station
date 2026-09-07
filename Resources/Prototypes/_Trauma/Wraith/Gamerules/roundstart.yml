@@ -14,3 +14,4 @@
     antags:
     - !type:FixedAntagCount
       proto: Wraith
+  - type: WraithRule

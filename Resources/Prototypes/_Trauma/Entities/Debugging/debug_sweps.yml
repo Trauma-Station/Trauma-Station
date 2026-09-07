@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: gib stick
   parent: BaseItem
   id: GreedStick
+  name: gib stick
   description: hit hard ye
   suffix: DEBUG
   components:

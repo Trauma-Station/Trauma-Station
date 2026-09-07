@@ -34,7 +34,6 @@ namespace Content.Goobstation.Server.CloneProjector;
 
 public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private InventorySystem _inventory = default!;
@@ -225,7 +224,7 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
 
         var speciesId = humanoid.Species;
 
-        if (!_proto.Resolve(speciesId, out var species))
+        if (!ProtoMan.Resolve(speciesId, out var species))
             return false;
 
         var clone = Spawn(species.Prototype, Transform(performer).Coordinates);

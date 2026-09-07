@@ -6,7 +6,6 @@ using Content.Goobstation.Common.Bloodstream;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Antag;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
@@ -20,6 +19,7 @@ using Content.Server.Store.Systems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Construction.Components;
@@ -82,6 +82,7 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedItemSystem _item = default!;
     [Dependency] private KnowledgeSystem _knowledge = default!;
+    [Dependency] private FadingTimedDespawnSystem _fadingDespawn = default!;
 
     public override event Action? StopTargeting;
 
@@ -197,7 +198,7 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
         var xform = Transform(ev.Performer);
         var mapCoords = TransformSystem.GetMapCoordinates(ev.Performer, xform);
 
-        if (!MapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
+        if (!Map.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
             !Map.TryGetTileRef(gridUid, grid, xform.Coordinates, out var tileRef) ||
             tileRef.Tile.IsEmpty)
             return;
@@ -527,21 +528,16 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
                 continue;
             }
 
-            FadingTimedDespawnComponent? weaponDespawn;
-            if (despawnQuery.TryComp(mob, out var despawn))
-            {
-                weaponDespawn = EnsureComp<FadingTimedDespawnComponent>(weapon);
-                weaponDespawn.Lifetime = despawn.Lifetime + 30f;
-                weaponDespawn.FadeOutTime = 4f;
-                Dirty(weapon, weaponDespawn);
-            }
-            else if (fadingQuery.TryComp(mob, out var fading))
-            {
-                weaponDespawn = EnsureComp<FadingTimedDespawnComponent>(weapon);
-                weaponDespawn.Lifetime = fading.Lifetime + 30f;
-                weaponDespawn.FadeOutTime = 4f;
-                Dirty(weapon, weaponDespawn);
-            }
+            TimeSpan? lifetime = CompOrNull<TimedDespawnComponent>(mob)?.Lifetime is { } t
+                ? TimeSpan.FromSeconds(t)
+                : null;
+
+            lifetime ??= CompOrNull<FadingTimedDespawnComponent>(mob)?.Lifetime;
+
+            if (lifetime is not { } time)
+                return;
+
+            _fadingDespawn.FadeDespawnEntity(weapon, time + TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(4));
         }
     }
 
