@@ -15,3 +15,42 @@
     checkConsciousness: false
   - type: InstantAction
     event: !type:GuardianToggleSelfActionEvent # can only recall
+
+- type: entity
+  parent: BaseAction
+  id: ActionGuardianAssassinStealth
+  name: Stealth
+  description: Stealths the guardian, making it invisible.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: jaunt
+  - type: Action
+    useDelay: 12
+    itemIconStyle: BigAction
+  - type: InstantAction
+    event: !type:GuardianStealthToggleEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionGuardianLightningBolt
+  name: Lightning Bolt
+  description: Zap a target with a bolt of lightning, stunning it and chaining to nearby enemies. People with electricity resistance cannot be targeted.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Actions/mutations.rsi
+    layers:
+    - state: zap
+  - type: Action
+    useDelay: 5
+    itemIconStyle: BigAction
+  - type: TargetAction
+    interactOnMiss: false
+    range: 7
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MobState
+    canTargetSelf: false
+    event: !type:GuardianLightningBoltEvent

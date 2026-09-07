@@ -83,3 +83,25 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.65
     walkSpeedModifier: 0.65
+
+# guardian fear slowdown
+- type: entity
+  parent: StatusEffectSlowdown
+  id: GuardianFearSlowdownStatusEffect
+  name: guardian fear slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.5
+    walkSpeedModifier: 0.5
+
+# assassin stealth
+- type: entity
+  parent: ForcedStealthStatusEffect
+  id: ForcedStealthStatusEffectAssassin
+  name: stealth
+  description: You are completely invisible.
+  components:
+  - type: ForcedStealthStatusEffect
+    visibility: 0.08
+    revealOnAttack: true
+    revealOnDamage: true

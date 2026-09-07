@@ -1,0 +1,117 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Standard
+- type: entity
+  parent: MobHoloparasiteGuardian
+  id: MobHoloparasiteGuardianStandard
+  components:
+  - type: Guardian
+    damageShare: 0.4
+  - type: MeleeWeapon
+    resistanceBypass: true
+    damage:
+      types:
+        Blunt: 20
+        Structural: 100
+  - type: MeleeSpeech
+    Battlecry: ORA
+    MaxBattlecryLength: 8
+  - type: GuardianFearAura
+    radius: 2
+
+# Assassin
+- type: entity
+  parent: MobHoloparasiteGuardian
+  id: MobHoloparasiteGuardianAssassin
+  description: A shard of razor-sharp hard-light, perpetually flickering at the edge of visibility. It hunts, tuning into its owner's life to sustain itself.
+  components:
+  - type: Guardian
+    damageShare: 1.0
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 30
+        Poison: 5
+  - type: GuardianAssassin
+  - type: ActionGrant
+    actions:
+    - ActionGuardianAssassinStealth
+
+# Lightning
+- type: entity
+  parent: MobHoloparasiteGuardian
+  id: MobHoloparasiteGuardianLightning
+  description: A coiled serpent of crackling hard-light, snapping with static discharge. It weaves, tuning into its owner's life to sustain itself.
+  components:
+  - type: Guardian
+    damageShare: 0.6
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 15
+  - type: GuardianLightning
+  - type: ActionGrant
+    actions:
+    - ActionGuardianLightningBolt
+
+- type: entity
+  parent: ChargedLightning
+  id: GuardianLightning
+  name: guardian lightning
+  components:
+  - type: Sprite
+    layers:
+    - state: "blue_lightning"
+      color: "#facc15"
+      shader: unshaded
+  - type: PointLight
+    color: "#facc15"
+  - type: Electrified
+    shockTime: 5
+    requirePower: false
+    shockDamage: 0
+    ignoreInsulation: true
+  - type: Lightning
+    canArc: true
+
+- type: entity
+  parent: ChargedLightning
+  id: GuardianLightningPassive
+  name: guardian lightning discharge
+  components:
+  - type: Sprite
+    layers:
+    - state: "blue_lightning"
+      color: "#7dd3fc"
+      shader: unshaded
+  - type: PointLight
+    color: "#7dd3fc"
+  - type: Electrified
+    shockTime: 0
+    requirePower: false
+    shockDamage: 0
+    ignoreInsulation: false
+  - type: Lightning
+    canArc: true
+
+# Explosive
+#- type: entity
+#  parent: MobHoloparasiteGuardian
+#  id: MobHoloparasiteGuardianExplosive
+#  description: A knot of sullen hard-light that hungers for demolition, humming with barely restrained energy. It waits, tuning into its owner's life to sustain itself.
+#  components:
+#  - type: Sprite
+#    layers:
+#    - state: tech_base
+#      map: [ "enum.DamageStateVisualLayers.Base" ]
+#    - state: tech_flare
+#      map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+#      color: "#fb923c"
+#      shader: unshaded
+#  - type: Guardian
+#    damageShare: 0.6
+#    distanceAllowed: 13
+#  - type: MeleeWeapon
+#    damage:
+#      types:
+#        Blunt: 15

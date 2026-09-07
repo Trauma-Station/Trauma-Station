@@ -5,7 +5,7 @@
   name: uplink-holopara-kit-name
   description: uplink-holopara-kit-desc
   icon: { sprite: /Textures/Objects/Misc/guardian_info.rsi, state: icon }
-  productEntity: BoxHoloparasite
+  productEntity: GuardianFigurine # Trauma
   cost:
     Telecrystal: 50 # Trauma - was 12, 5x and cheaper, make ghostroles
   categories:

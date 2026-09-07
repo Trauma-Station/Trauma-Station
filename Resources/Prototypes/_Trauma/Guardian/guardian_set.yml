@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: selectableSet
+  id: GuardianStandardSet
+  name: selectable-set-guardian-standard-name
+  description: selectable-set-guardian-standard-description
+  sprite:
+    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+    state: icon
+  content:
+  - HoloparasiteInjectorStandard
+  - ClothingHeadHatBizarreSoft
+  - HoloparasiteInfo
+
+- type: selectableSet
+  id: GuardianAssassinSet
+  name: selectable-set-guardian-assassin-name
+  description: selectable-set-guardian-assassin-description
+  sprite:
+    sprite: Objects/Weapons/Melee/throwing_knife.rsi
+    state: icon
+  content:
+  - HoloparasiteInjectorAssassin
+  - ClothingHeadHatBizarreSoft
+  - HoloparasiteInfo
+
+- type: selectableSet
+  id: GuardianLightningSet
+  name: selectable-set-guardian-lightning-name
+  description: selectable-set-guardian-lightning-description
+  sprite:
+    sprite: Clothing/Hands/Gloves/fingerlessinsuls.rsi
+    state: icon
+  content:
+  - HoloparasiteInjectorLightning
+  - ClothingHeadHatBizarreSoft
+  - HoloparasiteInfo

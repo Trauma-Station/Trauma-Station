@@ -150,3 +150,8 @@
     Slash: 2
     Piercing: 2
     Ballistic: 2
+
+- type: damageModifierSet
+  id: GuardianLightningHost
+  coefficients:
+    Shock: 0.0
