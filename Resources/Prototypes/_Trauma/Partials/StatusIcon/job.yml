@@ -1,0 +1,17 @@
+- type: jobIcon
+  id: JobIconSyndicateCommander
+  icon:
+    sprite: &icon-trauma /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: SyndicateCommander
+
+- type: jobIcon
+  id: JobIconSyndicateCorpsman
+  icon:
+    sprite: *icon-trauma
+    state: SyndicateCorpsman
+
+- type: jobIcon
+  id: JobIconSyndicateOperative
+  icon:
+    sprite: *icon-trauma
+    state: SyndicateOperative
