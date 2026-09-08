@@ -84,13 +84,7 @@ public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<Revolutiona
     protected override void Started(EntityUid uid, RevolutionaryRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
-        component.CommandCheck = _timing.CurTime + component.TimerWait;
-        // <Trauma> - delay it until 5m after round starts if this rule is added at roundstart
-        // this prevents command spawning on arrivals terminal from immediately ending the revolution
-        var delay = TimeSpan.FromMinutes(5);
-        if (component.CommandCheck.Subtract(GameTicker.RoundStartTimeSpan) < delay)
-            component.CommandCheck = GameTicker.RoundStartTimeSpan + delay;
-        // </Trauma>
+        component.CommandCheck = _timing.CurTime + TimeSpan.FromMinutes(10); // Trauma - 10 mins instead of TimerWait
     }
 
     protected override void ActiveTick(EntityUid uid, RevolutionaryRuleComponent component, GameRuleComponent gameRule, float frameTime)

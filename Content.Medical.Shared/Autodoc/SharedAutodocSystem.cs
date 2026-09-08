@@ -32,8 +32,8 @@ public abstract partial class SharedAutodocSystem : EntitySystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private LabelSystem _label = default!;
     [Dependency] private SharedStorageSystem _storage = default!;
-    [Dependency] private SharedSurgerySystem _surgery = default!;
     [Dependency] private SleepingSystem _sleeping = default!;
+    [Dependency] private SurgerySystem _surgery = default!;
 
     public override void Initialize()
     {

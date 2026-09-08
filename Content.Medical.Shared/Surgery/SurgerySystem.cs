@@ -23,7 +23,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Standing;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -31,7 +30,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Surgery;
 
-public abstract partial class SharedSurgerySystem : EntitySystem
+public sealed partial class SurgerySystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
@@ -48,7 +47,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private StandingStateSystem _standing = default!;
-    [Dependency] protected StatusEffectsSystem Status = default!;
     [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private WoundSystem _wounds = default!;
     [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
@@ -344,14 +342,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    protected bool IsSurgeryValid(EntityUid body, EntityUid targetPart, EntProtoId surgery, EntProtoId stepId,
+    private bool IsSurgeryValid(EntityUid body, EntityUid targetPart, EntProtoId surgery, EntProtoId stepId,
         EntityUid user, out Entity<SurgeryComponent> surgeryEnt, out EntityUid part, out EntityUid step)
     {
         surgeryEnt = default;
         part = default;
         step = default;
 
-        if (!HasComp<SurgeryTargetComponent>(body) ||
+        if (!_targetQuery.HasComp(body) ||
             !IsLyingDown(body, user) ||
             GetSingleton(surgery) is not { } surgeryEntId ||
             !TryComp(surgeryEntId, out SurgeryComponent? surgeryComp) ||
