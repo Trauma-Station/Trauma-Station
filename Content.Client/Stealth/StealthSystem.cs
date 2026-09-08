@@ -49,7 +49,7 @@ public sealed partial class StealthSystem : SharedStealthSystem
             {
                 GetScreenTexture = true,
                 RaiseShaderEvent = true,
-                Before = ContentPostShaderIds.BeforeOutlines,
+                After = ContentPostShaderIds.BeforeOutlines, // Trauma - run after outlines instead of before
             });
         }
         else

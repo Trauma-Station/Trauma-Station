@@ -32,6 +32,5 @@
   - type: HereticMinion
   - type: WeakToHoly
   - type: GhostTakeoverAvailable
-  - type: HereticBladeUserBonusDamage
   - type: HolyIgniteOnCollide
   - type: HolyFlammable

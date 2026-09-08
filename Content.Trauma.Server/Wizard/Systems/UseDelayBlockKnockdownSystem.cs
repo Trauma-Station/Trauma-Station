@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Effects;
 using Content.Shared.Timing;
 using Content.Trauma.Server.Wizard.Components;
+using Content.Trauma.Shared.Effects;
 using Content.Trauma.Shared.TelescopicBaton;
 using Robust.Shared.Audio.Systems;
 
@@ -12,7 +12,7 @@ public sealed partial class UseDelayBlockKnockdownSystem : EntitySystem
 {
     [Dependency] private UseDelaySystem _delay = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private CommonSparksSystem _sparks = default!;
+    [Dependency] private SparksSystem _sparks = default!;
 
     [SubscribeLocalEvent]
     private void OnSuccess(Entity<UseDelayBlockKnockdownComponent> ent, ref KnockdownOnHitSuccessEvent args)
@@ -33,7 +33,7 @@ public sealed partial class UseDelayBlockKnockdownSystem : EntitySystem
             if (comp.DoCustom)
                 Spawn(comp.CustomEffect, coords);
             else
-                _sparks.DoSparks(coords, playSound: false, predicted: false, source: knocked);
+                _sparks.DoSparks(coords, playSound: false, source: knocked);
         }
     }
 

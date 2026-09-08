@@ -3,19 +3,7 @@
   id: NinjaThreats
   weights:
     Dragon: 1
-    # <Trauma>
-    # Revenant: 1 # Removed in favor of LoneOperative
-    SlaughterDemon: 1
-    Wraith: 1
-    LoneOperative: 1
-    #TODO When Slasher is ready Slasher: 1
-    Colossus: 1
-    Xenomorphs: 0.75
-    SleeperAgents: 1
-    Bingle: 1
-    Shadowling: 1
-    WailingHorse: 0.25 # a true horror
-    # </Trauma>
+    Revenant: 1
 
 - type: ninjaHackingThreat
   id: Dragon

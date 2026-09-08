@@ -14,6 +14,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Fluids;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
@@ -25,11 +26,11 @@ namespace Content.Goobstation.Shared.Blob;
 
 public sealed partial class BlobTileSystem : EntitySystem
 {
+    [Dependency] private BlobCoreSystem _core = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedBlobCoreSystem _core = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -37,6 +38,7 @@ public sealed partial class BlobTileSystem : EntitySystem
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
     [Dependency] private EntityQuery<BlobObserverComponent> _observerQuery = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
+    [Dependency] private EntityQuery<DestructibleComponent> _destructibleQuery = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
@@ -51,7 +53,7 @@ public sealed partial class BlobTileSystem : EntitySystem
         if (ent.Comp.Core == null || observer.Core is not { } core)
             return;
 
-        if (Transform(ent).Anchored)
+        if (!Transform(ent).Anchored)
             return;
 
         var current = ProtoMan.Index(ent.Comp.Tile);
@@ -125,6 +127,13 @@ public sealed partial class BlobTileSystem : EntitySystem
         args.Handled |= NodePulse(ent, args.Core, args.Chem, args.Handled);
     }
 
+    [SubscribeLocalEvent]
+    private void OnSplashAttempt(Entity<BlobTileComponent> ent, ref SplashAttemptEvent args)
+    {
+        // blob tiles cant splash eachother with chems
+        args.Cancelled |= _tileQuery.HasComp(args.Target);
+    }
+
     /// <summary>
     /// Logic for when a blob tile is pulsed by a blob node.
     /// Returns true if an entity was attacked, preventing further spread/attack attempts.
@@ -136,18 +145,19 @@ public sealed partial class BlobTileSystem : EntitySystem
             healing *= chem.HealingScale;
         _damage.ChangeDamage(ent.Owner, healing);
 
-        return !lazy && TryGrow(ent, core, chem, out _);
+        return !lazy && TryGrow(ent, core, chem, out _, predicted: false);
     }
 
-    public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true)
+    public bool TryGrow(Entity<BlobTileComponent> ent, out EntityUid? newTile, bool attack = true, bool doEffects = true, bool predicted = true)
     {
         newTile = null;
         return ent.Comp.Core is { } core &&
             _coreQuery.TryComp(core, out var coreComp) &&
-            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects);
+            TryGrow(ent, (core, coreComp), ProtoMan.Index(coreComp.CurrentChem), out newTile, attack, doEffects, predicted);
     }
 
-    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem, out EntityUid? newTile, bool attack = true, bool doEffects = true)
+    public bool TryGrow(Entity<BlobTileComponent> ent, Entity<BlobCoreComponent> core, BlobChemPrototype chem,
+        out EntityUid? newTile, bool attack = true, bool doEffects = true, bool predicted = true)
     {
         newTile = null;
         var xform = Transform(ent);
@@ -188,16 +198,19 @@ public sealed partial class BlobTileSystem : EntitySystem
             foreach (var uid in _map.GetAnchoredEntities(gridUid, grid, innerTile.GridIndices))
             {
                 if (_tileQuery.HasComp(uid))
+                {
                     spawn = false;
+                    continue;
+                }
 
-                if (!HasComp<DestructibleComponent>(uid))
+                if (!_destructibleQuery.HasComp(uid))
                     continue;
 
                 if (attack)
                 {
                     DoLunge(ent, uid);
                     _damage.TryChangeDamage(uid, chem.Damage);
-                    if (_net.IsClient && _timing.IsFirstTimePredicted) // all clients will predict it
+                    if (!predicted || _net.IsClient && _timing.IsFirstTimePredicted)
                         _audio.PlayPvs(core.Comp.AttackSound, uid);
                 }
                 return true;
