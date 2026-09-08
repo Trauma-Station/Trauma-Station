@@ -14325,3 +14325,22 @@ Entries:
   id: 1562
   time: '2026-09-08T10:10:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4474
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added back CQC's Leg Sweep move.
+  - type: Tweak
+    message: >-
+      Most martial arts moves are more in depth with sounds, throwing,
+      requirements, etc.n
+  - type: Remove
+    message: Removed Capoeira's kickup move, everyone can do it anyway.
+  - type: Remove
+    message: >-
+      Removed slop level requirements for some martial art moves, they always do
+      the same thing now.
+  - type: Tweak
+    message: Most martial art books/scrolls now give you master level in the skill.
+  id: 1563
+  time: '2026-09-08T11:57:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4518
