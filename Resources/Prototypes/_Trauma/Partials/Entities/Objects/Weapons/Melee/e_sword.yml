@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: EnergySwordDoubleBase
+  components:
+  - type: Parry
+    reflectExhaustionCost: 0.125
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 13
+        Heat: 13
+      woundSeverityMultipliers:
+        Slash: 2
+        Heat: 2

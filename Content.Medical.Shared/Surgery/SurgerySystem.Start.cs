@@ -7,20 +7,15 @@ using Robust.Shared.Configuration;
 
 namespace Content.Medical.Shared.Surgery;
 
-public abstract partial class SharedSurgerySystem
+public sealed partial class SurgerySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-
-    private EntityQuery<SurgeryTargetComponent> _targetQuery;
+    [Dependency] private EntityQuery<SurgeryTargetComponent> _targetQuery = default!;
 
     private bool _noSelfOperate;
 
     private void InitializeStart()
     {
-        _targetQuery = GetEntityQuery<SurgeryTargetComponent>();
-
-        SubscribeLocalEvent<SurgeryToolComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);
-
         // cvar is yes var is no, invert it
         Subs.CVar(_cfg, SurgeryCVars.CanOperateOnSelf, x => _noSelfOperate = !x, true);
     }
@@ -39,12 +34,13 @@ public abstract partial class SharedSurgerySystem
         _ui.OpenUi(target, SurgeryUIKey.Key, user);
     }
 
+    [SubscribeLocalEvent]
     private void OnUtilityVerb(Entity<SurgeryToolComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
     {
         var target = args.Target;
-        if (!args.CanInteract
-            || !args.CanAccess
-            || !_targetQuery.HasComp(target))
+        if (!args.CanInteract ||
+            !args.CanAccess ||
+            !_targetQuery.HasComp(target))
             return;
 
         var user = args.User;

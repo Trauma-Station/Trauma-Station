@@ -11,18 +11,11 @@
     state: icon
   - type: CanPerformCombo
     roundstartCombos:
-    - CQCConsecutiveSimple
-    - CQCPressureSimple
-    - CQCRestrainSimple
-    - CQCKickSimple
-    - CQCSlamSimple
     - CQCConsecutive
     - CQCPressure
     - CQCRestrain
     - CQCKick
     - CQCSlam
-    - CQCConsecutiveAdvanced
-    - CQCKickAdvanced
 
 - type: entity
   parent: MartialArtCQC
@@ -30,6 +23,8 @@
   name: Close Quarters Cooking
   description: Just like CQC, but only usable in the kitchen, freezer and cafeteria.
   components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/chefhat.rsi
   - type: MartialArtsKnowledge
     giveExperience: false # only gain XP from cooking, do your job
   - type: ExperienceOnCooking
@@ -50,6 +45,9 @@
   name: Corporate Judo
   description: NanoTrasen's official martial art for security, effective at non-lethal takedowns of shitters and other bad people.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Belt/judobelt.rsi
+    state: icon
   - type: CanPerformCombo
     roundstartCombos:
     - JudoThrow
@@ -64,6 +62,9 @@
   name: Krav Maga
   description: A defensive martial art created on Earth many centuries ago, still in use today.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Hands/Gloves/kravgloves.rsi
+    state: icon
   - type: CanPerformCombo
   - type: ComboActions
     storedComboActions:
@@ -77,13 +78,15 @@
   name: Capoeira
   description: An especially violent brazilian dance form.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/martial_arts.rsi
+    state: capoeira
   - type: CanPerformCombo
     roundstartCombos:
     - PushKick
     - SweepKick
     - CircleKick
     - SpinKick
-    - KickUp
   - type: ForceStandStamina
     multiplier: 0
   - type: FastSpeed
@@ -115,6 +118,9 @@
   name: Hell Rip
   description: Slaughter demons use this to rip their victims' limbs apart.
   components:
+  - type: Sprite
+    sprite: _Goobstation/SlaughterDemon/demon.rsi
+    state: daemon
   - type: CanPerformCombo
     roundstartCombos:
     - DropKick
@@ -128,6 +134,9 @@
   name: Ninjutsu
   description: An ancient martial art focused on silent takedowns and sneak attacks.
   components:
+  - type: Sprite
+    sprite: Clothing/Mask/ninja.rsi
+    state: icon
   - type: CanPerformCombo
     roundstartCombos:
     - BiteTheDust
@@ -135,18 +144,6 @@
     - NinjutsuTakedown
   - type: SneakAttack
     secondsTillHidden: 2
-
-- type: entity
-  parent: BaseMartialArtsKnowledge
-  id: MartialArtDragon
-  name: Dragon Kung Fu
-  description: Kill the ontag
-  components:
-  - type: CanPerformCombo
-    roundstartCombos:
-    - DragonClaw
-    - DragonTail
-    - DragonStrike
 
 - type: entity
   parent: BaseMartialArtsKnowledge
@@ -182,6 +179,9 @@
   name: Space Bear
   description: A powerful fighting style mimicing the equally powerful space bear.
   components:
+  - type: Sprite
+    sprite: Objects/Materials/materials.rsi
+    state: bearpelt
   - type: CanPerformCombo
     roundstartCombos:
     - BearJaws
@@ -243,21 +243,9 @@
     state: icon
   - type: CanPerformCombo
     roundstartCombos:
-    - ArmstrongBusterPunchesSimple
     - ArmstrongBusterPunches
-    - ArmstrongBusterPunchesAdvanced
-    - ArmstrongDropkickSimple
     - ArmstrongDropkick
-    - ArmstrongDropkickAdvanced
-    - ArmstrongMachineGunFistSimple
     - ArmstrongMachineGunFist
-    - ArmstrongMachineGunFistAdvanced
-    - ArmstrongFireballSimple
     - ArmstrongFireball
-    - ArmstrongFireballAdvanced
-    - ArmstrongHorseStanceSimple
     - ArmstrongHorseStance
-    - ArmstrongHorseStanceAdvanced
-    - ArmstrongHeadbuttSimple
     - ArmstrongHeadbutt
-    - ArmstrongHeadbuttAdvanced

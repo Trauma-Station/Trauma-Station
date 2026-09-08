@@ -130,6 +130,7 @@
     actions:
       - DemonicWhisperAction
   - type: KnowledgeHolder
+  - type: KnowledgeContainer
   - type: AlwaysTakeHoly
   - type: Hands
   - type: TriggerOnMobstateChange
