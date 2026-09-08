@@ -1,5 +1,5 @@
-# lob corp magic bullet at home player version, shoot really fucking slow adds burn stacks on melee
-# todo: maybe reloading as a verb?
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: Magic Bullet
   parent: [BaseItem, BaseGunWieldable, BaseSecurityScienceContraband]

@@ -327,7 +327,7 @@
       params:
         volume: 5
     initialBeepDelay: 0
-    beepInterval: 2 # 2 beeps total (at 0 and 2) 
+    beepInterval: 2 # 2 beeps total (at 0 and 2)
 
 - type: entity
   abstract: true
@@ -544,7 +544,7 @@
     name: AER-124
     description: Spread melancholy all around
     rules: ghost-role-information-freeagent-rules
-    raffle: 
+    raffle:
       settings: default
   - type: Grammar
     attributes:
@@ -561,7 +561,7 @@
     researchOnBehaviour: 2500
     idGear: IdGearMagicBullet
   - type: AerSlimeSad
-    reagents: 
+    reagents:
       Gloom: 10
   - type: ActionGrant
     actions:
