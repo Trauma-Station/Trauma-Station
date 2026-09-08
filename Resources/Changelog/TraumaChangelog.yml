@@ -14344,3 +14344,10 @@ Entries:
   id: 1563
   time: '2026-09-08T11:57:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4518
+- author: luminargh
+  changes:
+  - type: Add
+    message: Zombies now speak Zombish
+  id: 1564
+  time: '2026-09-08T17:07:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4507
