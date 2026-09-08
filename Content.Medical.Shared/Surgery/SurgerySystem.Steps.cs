@@ -17,24 +17,31 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Body.Part;
 using Robust.Shared.Containers;
 using System.Linq;
 
 namespace Content.Medical.Shared.Surgery;
 
-public abstract partial class SharedSurgerySystem
+public sealed partial class SurgerySystem
 {
-    [Dependency] protected BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private EntityQuery<BodyPartComponent> _partQuery = default!;
     [Dependency] private EntityQuery<BleedInflicterComponent> _bleedQuery = default!;
     [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
@@ -43,8 +50,12 @@ public abstract partial class SharedSurgerySystem
     [Dependency] private EntityQuery<SurgeryStepComponent> _stepQuery = default!;
     [Dependency] private EntityQuery<SurgeryToolComponent> _toolQuery = default!;
 
-    public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
-    public static readonly ProtoId<DamageTypePrototype> Poison = "Poison";
+    private static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
+    private static readonly ProtoId<DamageTypePrototype> Poison = "Poison";
+    /// <summary>
+    /// Maximum sepsis poison damage on a single part.
+    /// </summary>
+    private static readonly FixedPoint2 SepsisDamageLimit = FixedPoint2.New(90);
 
     private readonly List<EntityUid> _nextStepList = new();
 
@@ -205,10 +216,11 @@ public abstract partial class SharedSurgerySystem
 
         var group = ProtoMan.Index<DamageGroupPrototype>(ent.Comp.MainGroup);
         foreach (var type in group.DamageTypes)
+        {
             adjustedDamage.DamageDict[type] -= bonus;
+        }
 
-        var ev = new SurgeryStepDamageEvent(args.User, args.Body, args.Part, args.Surgery, adjustedDamage);
-        RaiseLocalEvent(args.Body, ref ev);
+        _damage.ChangeDamage(args.Part, adjustedDamage, true, origin: args.User, ignoreBlockers: true);
     }
 
     private void OnTendWoundsCheck(Entity<SurgeryTendWoundsEffectComponent> ent, ref SurgeryStepCompleteCheckEvent args)
@@ -219,7 +231,6 @@ public abstract partial class SharedSurgerySystem
 
     private void OnCavityStep(Entity<SurgeryStepCavityEffectComponent> ent, ref SurgeryStepEvent args)
     {
-        // <Trauma> - rewritten to use event
         var ev = new GetBodyPartCavityEvent();
         RaiseLocalEvent(args.Part, ref ev);
         if (ev.Container is not {} container)
@@ -230,19 +241,16 @@ public abstract partial class SharedSurgerySystem
             _container.Insert(activeHandEntity, container);
         else if (ent.Comp.Action == "Remove" && container.ContainedEntity is {} contained)
             _hands.TryPickupAnyHand(args.User, contained);
-        // </Trauma>
     }
 
     private void OnCavityCheck(Entity<SurgeryStepCavityEffectComponent> ent, ref SurgeryStepCompleteCheckEvent args)
     {
-        // <Trauma> - rewritten to use event
         var ev = new GetBodyPartCavityEvent();
         RaiseLocalEvent(args.Part, ref ev);
         if (ev.Container is not {} container
             || (ent.Comp.Action == "Insert" && container.Count == 0)
             || (ent.Comp.Action == "Remove" && container.Count != 0))
             args.Cancelled = true;
-        // </Trauma>
     }
 
     private void OnAddPartStep(Entity<SurgeryAddPartStepComponent> ent, ref SurgeryStepEvent args)
@@ -485,6 +493,31 @@ public abstract partial class SharedSurgerySystem
             TryDoSurgeryStep(body, targetPart, user, args.Surgery, args.Step);
         }
     }
+
+    [SubscribeLocalEvent]
+    private void OnSurgeryDamageChange(Entity<SurgeryDamageChangeEffectComponent> ent, ref SurgeryStepDamageChangeEvent args)
+    {
+        var damageChange = ent.Comp.Damage;
+        if (_status.HasEffectComp<ForcedSleepingStatusEffectComponent>(args.Body))
+            damageChange *= ent.Comp.SleepModifier;
+
+        _damage.ChangeDamage(args.Part, damageChange, true, origin: args.User, ignoreBlockers: true);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStepScreamComplete(Entity<SurgeryStepEmoteEffectComponent> ent, ref SurgeryStepEvent args)
+    {
+        if (_status.HasEffectComp<ForcedSleepingStatusEffectComponent>(args.Body))
+            return;
+
+        _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote, voluntary: false);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStepSpawnComplete(Entity<SurgeryStepSpawnEffectComponent> ent, ref SurgeryStepEvent args)
+    {
+        PredictedSpawnAtPosition(ent.Comp.Entity, Transform(args.Body).Coordinates);
+    }
     #endregion
 
     #region Helper Methods
@@ -499,13 +532,14 @@ public abstract partial class SharedSurgerySystem
         if (sepsisEv.Handled)
             return;
 
-        if (TryComp<SurgeryTargetComponent>(args.Body, out var surgeryTargetComponent) &&
-            surgeryTargetComponent.SepsisImmune)
+        if (_targetQuery.TryComp(args.Body, out var target) && target.SepsisImmune)
+            return;
+
+        if (_damage.GetDamageAmount(args.Part, Poison) >= SepsisDamageLimit)
             return;
 
         var sepsis = new DamageSpecifier(ProtoMan.Index(Poison), 5);
-        var ev = new SurgeryStepDamageEvent(args.User, args.Body, args.Part, args.Surgery, sepsis);
-        RaiseLocalEvent(args.Body, ref ev);
+        _damage.ChangeDamage(args.Part, sepsis, true, origin: args.User, ignoreBlockers: true);
     }
 
     private bool TryToolAudio(Entity<SurgeryStepComponent> ent, SurgeryStepEvent args)
