@@ -1,0 +1,25 @@
+﻿# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Used by Zombies.
+- type: language
+  id: Zombish
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 1
+    replacement:
+    - rrrrggghhh
+    - rrrggh
+    - uuurrrggghh
+    - uurgh
+    - raaaaaggghhh
+    - raaaggghh
+    - rrruuuggghh
+    - ruurrrggh
+    - braagggh
+    - huuaaagggh
+    - huuaagh
+    - brains
+    - braaiins
+    - raaahh
+    - raaahhhh

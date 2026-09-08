@@ -28,7 +28,7 @@ public sealed partial class ZombieComponent : Component
     ///     else while being zombified.
     /// </remarks>
     [DataField]
-    public ProtoId<LanguagePrototype> ForcedLanguage = "Xeno"; // Xeno until we make a zombie/ignorant language that is unobtainable.
+    public ProtoId<LanguagePrototype> ForcedLanguage = "Zombish";
 
     /// <summary>
     /// The baseline infection chance you have if you have no protective gear
