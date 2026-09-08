@@ -14312,3 +14312,16 @@ Entries:
   id: 1561
   time: '2026-09-08T07:38:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4514
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed flesh stalkers instantly healing on shapeshift.
+  - type: Remove
+    message: Removed voiceless dead damage bonus and bleeding steel effect on blades.
+  - type: Tweak
+    message: Ash jaunt is 1 second longer (so same as before).
+  - type: Fix
+    message: Fix flesh path being able to make more ghouls than intended.
+  id: 1562
+  time: '2026-09-08T10:10:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4474
