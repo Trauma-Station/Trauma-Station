@@ -14279,3 +14279,10 @@ Entries:
   id: 1558
   time: '2026-09-07T12:30:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4493
+- author: paige404
+  changes:
+  - type: Fix
+    message: (S)laughterdemons have remembered how to speak.
+  id: 1559
+  time: '2026-09-08T06:21:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4512
