@@ -264,8 +264,9 @@
   name: Syndicate Reinforcement Role
   components:
   - type: MindRole
-    roleType: TeamAntagonist # Trauma - was Familiar
+    roleType: TeamAntagonist
     subtype: role-subtype-traitor-reinforcement
+    antagPrototype: GenericTeamAntagonist
 
 
 # Xenoborgs

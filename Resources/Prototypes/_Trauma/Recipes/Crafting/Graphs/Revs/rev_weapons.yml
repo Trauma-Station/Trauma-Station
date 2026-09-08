@@ -122,16 +122,16 @@
         icon:
           sprite: Objects/Misc/modular_receiver.rsi
           state: icon
-      - tool: Welding
-        doAfter: 1
       - tool: Screwing
         doAfter: 1
     - to: resistance
       steps:
-      - tool: Welding
+      - tool: Screwing
         doAfter: 1
       - material: RevBolt
+        amount: 2
       - material: RevNut
+        amount: 2
       - tool: Anchoring
         doAfter: 1
       - material: RevGunParts
@@ -140,11 +140,9 @@
         icon:
           sprite: Objects/Misc/modular_receiver.rsi
           state: icon
-      - material: RevBolt
-      - material: RevNut
       - tool: Anchoring
         doAfter: 1
-      - tool: Welding
+      - tool: Screwing
     - to: RPG2
       steps:
       - tool: Hammering
@@ -312,11 +310,7 @@
         doAfter: 1
       - tool: Hammering
         doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Slicing
+      - tool: Screwing
         doAfter: 1
     - to: Proletariat
       steps:
@@ -334,7 +328,7 @@
       - tool: Hammering
         doAfter: 0.5
       - material: RevGunParts
-        amount: 5
+        amount: 3
         doAfter: 1
       - tool: Screwing
         doAfter: 1
@@ -355,8 +349,6 @@
         doAfter: 1
       - material: WoodPlank
         amount: 5
-        doAfter: 1
-      - tool: Screwing
         doAfter: 1
       - tool: Screwing
         doAfter: 1
