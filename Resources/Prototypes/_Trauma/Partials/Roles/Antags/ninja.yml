@@ -4,13 +4,14 @@
   id: SpaceNinja
   creditImage: /Textures/_Trauma/EndCredits/Antags/ninja.png
 
-- type: antagSpecifier
-  id: SpaceNinja
-  components:
-  - type: AutoImplant
-    implants:
-    - !Remove DeathAcidifierImplant
-    - MicroBombImplant
+# reenable this if partial prototypes get fixed
+#- type: antagSpecifier
+#  id: SpaceNinja
+#  components:
+#  - type: AutoImplant
+#    implants:
+#    - !Remove DeathAcidifierImplant
+#    - MicroBombImplant
 
 - type: startingGear
   id: SpaceNinjaGear
