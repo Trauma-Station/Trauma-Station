@@ -152,8 +152,10 @@
     - WirePanels
   - type: StaticPrice
     price: 150
-  - type: StructureAligner
-  - type: StructureAlignerPylon
+  # <Trauma> - despritening
+  #- type: StructureAligner
+  #- type: StructureAlignerPylon
+  # </Trauma>
 
 - type: entity
   parent: [ BaseAirlockIndestructible, StructureHealthDoor ]
