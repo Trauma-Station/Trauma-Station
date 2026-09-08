@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.Actions.Components;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
@@ -8,7 +7,6 @@ using Content.Trauma.Common.Polymorph;
 using Content.Trauma.Common.Wizard;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
-using System.Linq;
 // </Trauma>
 using Content.Server.Actions;
 using Content.Server.Inventory;
@@ -41,7 +39,6 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     // <Trauma>
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISerializationManager _serialization = default!;
-    [Dependency] private BodySystem _body = default!;
     // </Trauma>
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
@@ -49,7 +46,7 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private SharedBuckleSystem _buckle = default!;
     [Dependency] private ContainerSystem _container = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    // [Dependency] private DamageableSystem _damageable = default!; // Trauma - no longer used
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MobThresholdSystem _mobThreshold = default!;
     [Dependency] private ServerInventorySystem _inventory = default!;
@@ -266,30 +263,19 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             _container.Remove(uid, cont);
             _container.Insert(child, cont);
         }
-        // </Trauma>
 
+        if (configuration.TransferDamage)
+            _mobThreshold.TransferDamage(uid, child);
+        /*
         //Transfers all damage from the original to the new one
         if (configuration.TransferDamage &&
-            TryComp<DamageableComponent>(child, out var damageChild) &&
-            _mobThreshold.GetScaledDamage(uid, child, out var damage, out var organDamages) &&
+            TryComp<DamageableComponent>(child, out var damageParent) &&
+            _mobThreshold.GetScaledDamage(uid, child, out var damage) &&
             damage != null)
         {
-            // <Trauma> - update new bodys limb damage with old one
-            if (TryComp<BodyComponent>(child, out var childBody))
-            {
-                var organs = _body.GetOrgans((child, childBody));
-                var count = organs.Count();
-                foreach (var organ in organs)
-                {
-                    if (organ.Comp.Category is not {} category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
-                        organDamage = damage / count;
-                    _damageable.SetDamage(organ.Owner, organDamage);
-                }
-
-            }
-            // </Trauma>
-            _damageable.SetDamage((child, damageChild), damage);
+            _damageable.SetDamage((child, damageParent), damage);
         }
+        </Trauma> */
 
         // DeltaV - Drop MindContainer entities on polymorph
         var beforePolymorphedEv = new BeforePolymorphedEvent();
@@ -462,27 +448,18 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
 
         component.Reverted = true;
 
+        // <Trauma>
+        if (component.Configuration.TransferDamage)
+            _mobThreshold.TransferDamage(uid, parent);
+        /*
         if (component.Configuration.TransferDamage &&
             TryComp<DamageableComponent>(parent, out var damageParent) &&
-            _mobThreshold.GetScaledDamage(uid, parent, out var damage, out var organDamages) &&
+            _mobThreshold.GetScaledDamage(uid, parent, out var damage) &&
             damage != null)
         {
-            // <Trauma> - update old bodys limb damage with reverted one
-            if (TryComp<BodyComponent>(parent, out var parentBody))
-            {
-                var organs = _body.GetOrgans((parent, parentBody));
-                var count = organs.Count();
-                foreach (var organ in organs)
-                {
-                    if (organ.Comp.Category is not {} category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
-                        organDamage = damage / count;
-                    _damageable.SetDamage(organ.Owner, organDamage);
-                }
-
-            }
-            // </Trauma>
             _damageable.SetDamage((parent, damageParent), damage);
         }
+        </Trauma> */
 
         if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
         {

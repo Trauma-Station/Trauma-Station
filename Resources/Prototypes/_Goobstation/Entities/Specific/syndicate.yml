@@ -17,7 +17,7 @@
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtCQC: 70
+      MartialArtCQC: 88
     doAfter: 2
   - type: GuideHelp
     guides:
@@ -41,7 +41,7 @@
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtSleepingCarp: 70
+      MartialArtSleepingCarp: 88
     doAfter: 2
   - type: GuideHelp
     guides:
@@ -64,7 +64,7 @@
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtCapoeira: 26 # Starts you with all moves, +12.5% movespeed, +50% attack speed, +50% damage
+      MartialArtCapoeira: 88
     doAfter: 2
   - type: GuideHelp
     guides:
