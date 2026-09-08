@@ -14305,3 +14305,10 @@ Entries:
   id: 1560
   time: '2026-09-08T07:29:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4509
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Surgery sepsis damage is now limited to 90 poison per part.
+  id: 1561
+  time: '2026-09-08T07:38:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4514
