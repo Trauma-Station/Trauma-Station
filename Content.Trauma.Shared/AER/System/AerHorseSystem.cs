@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Mobs;
 using Content.Trauma.Shared.Wizard;
 
 namespace Content.Trauma.Shared.AER;
