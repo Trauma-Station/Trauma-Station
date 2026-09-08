@@ -282,6 +282,8 @@
   id: SkillChipChef
   name: MRAM-Chip (Memories of a Chef)
   components:
+  - type: OrganChip
+    canRemove: false # too chuddy
   - type: KnowledgeGrantOnWear
     skills:
       MartialArtCQCChef: 1

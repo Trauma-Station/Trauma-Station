@@ -63,11 +63,12 @@ public sealed partial class MetalSystem : SharedMetalSystem
         if (args.Item.Construction is not {} graph)
             return;
 
-        var comp = EnsureComp<ConstructionComponent>(ent);
+        var comp = Factory.GetComponent<ConstructionComponent>();
         comp.Graph = graph;
         comp.Node = "start";
         comp.TargetNode = "finished"; // have to set this as the end node in every procgen's graph
         comp.EdgeIndex = 0; // say to quench it
+        AddComp(ent, comp);
     }
 
     private void TryCool(Entity<MetallicComponent> ent, float t)

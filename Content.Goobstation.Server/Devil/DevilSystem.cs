@@ -44,8 +44,8 @@ using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature.Components;
+using Content.Shared.Whitelist;
 using Content.Shared.Zombies;
-using Content.Trauma.Common.Silicon;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -56,11 +56,11 @@ namespace Content.Goobstation.Server.Devil;
 
 public sealed partial class DevilSystem : EntitySystem
 {
-    [Dependency] private CommonSiliconSystem _silicon = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private BodyPartSystem _part = default!;
     [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private PolymorphSystem _poly = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -104,8 +104,7 @@ public sealed partial class DevilSystem : EntitySystem
     {
         // Remove human components.
         RemComp<CombatModeComponent>(devil);
-        RemComp<HungerComponent>(devil);
-        RemComp<ThirstComponent>(devil);
+        RemComp<SatiationComponent>(devil);
         RemComp<TemperatureComponent>(devil);
         RemComp<TemperatureSpeedComponent>(devil);
         RemComp<CondemnedComponent>(devil);
@@ -213,10 +212,7 @@ public sealed partial class DevilSystem : EntitySystem
     private void OnListen(Entity<DevilComponent> devil, ref ListenEvent args)
     {
         // Other Devils and entities without souls have no authority over you.
-        if (HasComp<DevilComponent>(args.Source)
-        || HasComp<CondemnedComponent>(args.Source)
-        || _silicon.IsSilicon(args.Source)
-        || args.Source == devil.Owner)
+        if (args.Source == devil.Owner || _whitelist.IsWhitelistPass(devil.Comp.TrueNameBlacklist, args.Source))
             return;
 
         var message = WhitespaceAndNonWordRegex.Replace(args.Message.ToLowerInvariant(), "");

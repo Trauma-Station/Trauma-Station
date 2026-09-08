@@ -17,36 +17,9 @@ namespace Content.Lavaland.Shared.Weapons.Upgrades;
 
 public sealed partial class GunUpgradeSystem
 {
-    private void InitializeUpgrades()
-    {
-        SubscribeLocalEvent<GunUpgradeComponentsComponent, EntGotInsertedIntoContainerMessage>(OnCompsUpgradeInsert);
-        SubscribeLocalEvent<GunUpgradeComponentsComponent, EntGotRemovedFromContainerMessage>(OnCompsUpgradeEject);
+    [Dependency] private EntityQuery<ProjectileComponent> _projQuery = default!;
 
-        SubscribeLocalEvent<GunUpgradeFireRateComponent, GunRefreshModifiersEvent>(OnFireRateRefresh);
-        SubscribeLocalEvent<GunUpgradeFireRateComponent, RechargeBasicEntityAmmoGetCooldownModifiersEvent>(OnFireRateRefreshRecharge);
-
-        SubscribeLocalEvent<GunUpgradeSpeedComponent, GunRefreshModifiersEvent>(OnSpeedRefresh);
-
-        SubscribeLocalEvent<GunUpgradeProjectileComponentsComponent, GunShotEvent>(OnDamageGunShotComps);
-
-        SubscribeLocalEvent<GunUpgradeVampirismComponent, GunShotEvent>(OnVampirismGunShot);
-        SubscribeLocalEvent<ProjectileVampirismComponent, ProjectileHitEvent>(OnVampirismProjectileHit);
-
-        SubscribeLocalEvent<GunUpgradeBayonetComponent, GetRelayMeleeWeaponEvent>(OnGetMeleeRelay);
-
-        SubscribeLocalEvent<GunUpgradeDamageComponent, ProjectileShotEvent>(OnDamageShot);
-
-        SubscribeLocalEvent<GunUpgradePressureComponent, EntGotInsertedIntoContainerMessage>(OnPressureInsert);
-        SubscribeLocalEvent<GunUpgradePressureComponent, EntGotRemovedFromContainerMessage>(OnPressureEject);
-
-        SubscribeLocalEvent<WeaponUpgradeDamageComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
-
-        SubscribeLocalEvent<WeaponUpgradeEffectsComponent, MeleeHitEvent>(OnEffectsUpgradeHit);
-
-        SubscribeLocalEvent<WeaponUpgradeRangeComponent, GetLightAttackRangeEvent>(OnGetRange);
-        SubscribeLocalEvent<WeaponUpgradeSpeedComponent, GetMeleeAttackRateEvent>(OnGetAttackRate);
-    }
-
+    [SubscribeLocalEvent]
     private void OnFireRateRefresh(Entity<GunUpgradeFireRateComponent> ent, ref GunRefreshModifiersEvent args)
     {
         args.FireRate *= ent.Comp.Coefficient;
@@ -54,42 +27,48 @@ public sealed partial class GunUpgradeSystem
         args.BurstCooldown /= ent.Comp.Coefficient;
     }
 
+    [SubscribeLocalEvent]
     private void OnFireRateRefreshRecharge(Entity<GunUpgradeFireRateComponent> ent, ref RechargeBasicEntityAmmoGetCooldownModifiersEvent args)
     {
         args.Multiplier /= ent.Comp.Coefficient;
     }
 
+    [SubscribeLocalEvent]
     private void OnCompsUpgradeInsert(Entity<GunUpgradeComponentsComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         if (!_timing.ApplyingState && HasComp<UpgradeableWeaponComponent>(args.Container.Owner))
             EntityManager.AddComponents(args.Container.Owner, ent.Comp.Components);
     }
 
+    [SubscribeLocalEvent]
     private void OnCompsUpgradeEject(Entity<GunUpgradeComponentsComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         if (!_timing.ApplyingState && HasComp<UpgradeableWeaponComponent>(args.Container.Owner))
             EntityManager.RemoveComponents(args.Container.Owner, ent.Comp.Components);
     }
 
+    [SubscribeLocalEvent]
     private void OnSpeedRefresh(Entity<GunUpgradeSpeedComponent> ent, ref GunRefreshModifiersEvent args)
     {
         args.ProjectileSpeed *= ent.Comp.Coefficient;
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageGunShotComps(Entity<GunUpgradeProjectileComponentsComponent> ent, ref GunShotEvent args)
     {
         foreach (var (ammo, _) in args.Ammo)
         {
-            if (HasComp<ProjectileComponent>(ammo))
+            if (_projQuery.HasComp(ammo))
                 EntityManager.AddComponents(ammo.Value, ent.Comp.Components);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnVampirismGunShot(Entity<GunUpgradeVampirismComponent> ent, ref GunShotEvent args)
     {
         foreach (var (ammo, _) in args.Ammo)
         {
-            if (!HasComp<ProjectileComponent>(ammo))
+            if (!_projQuery.HasComp(ammo))
                 continue;
 
             var comp = EnsureComp<ProjectileVampirismComponent>(ammo.Value);
@@ -97,6 +76,7 @@ public sealed partial class GunUpgradeSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnVampirismProjectileHit(Entity<ProjectileVampirismComponent> ent, ref ProjectileHitEvent args)
     {
         if (args.Shooter is not { } shooter || !HasComp<MobStateComponent>(args.Target))
@@ -105,6 +85,7 @@ public sealed partial class GunUpgradeSystem
         _damage.ChangeDamage(shooter, ent.Comp.DamageOnHit, ignoreResistances: true);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetMeleeRelay(Entity<GunUpgradeBayonetComponent> ent, ref GetRelayMeleeWeaponEvent args)
     {
         if (args.Handled)
@@ -114,9 +95,10 @@ public sealed partial class GunUpgradeSystem
         args.Handled = true;
     }
 
-    private void OnDamageShot(Entity<GunUpgradeDamageComponent> ent, ref ProjectileShotEvent args)
+    [SubscribeLocalEvent]
+    private void OnDamageShot(Entity<GunUpgradeDamageComponent> ent, ref GunShotProjectileEvent args)
     {
-        if (!TryComp<ProjectileComponent>(args.FiredProjectile, out var projectile))
+        if (!_projQuery.TryComp(args.FiredProjectile, out var projectile))
             return;
 
         if (ent.Comp.BonusDamage is { } bonus)
@@ -125,6 +107,7 @@ public sealed partial class GunUpgradeSystem
         Dirty(args.FiredProjectile, projectile);
     }
 
+    [SubscribeLocalEvent]
     private void OnPressureInsert(Entity<GunUpgradePressureComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         var weapon = args.Container.Owner;
@@ -152,6 +135,7 @@ public sealed partial class GunUpgradeSystem
         Dirty(weapon, pec);
     }
 
+    [SubscribeLocalEvent]
     private void OnPressureEject(Entity<GunUpgradePressureComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         var weapon = args.Container.Owner;
@@ -170,6 +154,7 @@ public sealed partial class GunUpgradeSystem
         Dirty(weapon, pec);
     }
 
+    [SubscribeLocalEvent]
     private void OnEffectsUpgradeHit(Entity<WeaponUpgradeEffectsComponent> ent, ref MeleeHitEvent args)
     {
         foreach (var hit in args.HitEntities)
@@ -180,6 +165,7 @@ public sealed partial class GunUpgradeSystem
 
     /* Melee */
 
+    [SubscribeLocalEvent]
     private void OnGetMeleeDamage(Entity<WeaponUpgradeDamageComponent> ent, ref GetMeleeDamageEvent args)
     {
         if (ent.Comp.BonusDamage != null)
@@ -187,6 +173,7 @@ public sealed partial class GunUpgradeSystem
         args.Damage *= ent.Comp.Modifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetRange(Entity<WeaponUpgradeRangeComponent> ent, ref GetLightAttackRangeEvent args)
     {
         if (ent.Comp.BonusRange != null)
@@ -195,6 +182,7 @@ public sealed partial class GunUpgradeSystem
             args.Range *= ent.Comp.RangeMultiplier.Value;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetAttackRate(Entity<WeaponUpgradeSpeedComponent> ent, ref GetMeleeAttackRateEvent args)
     {
         if (ent.Comp.BonusAttackRate != null)

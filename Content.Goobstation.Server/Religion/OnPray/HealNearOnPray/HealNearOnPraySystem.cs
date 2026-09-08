@@ -10,7 +10,7 @@ using Content.Shared.Examine;
 using Content.Shared.Ghost.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Revenant.Components;
-using Content.Trauma.Common.Silicon;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -20,32 +20,26 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
-    [Dependency] private CommonSiliconSystem _silicon = default!;
     [Dependency] private EntityQuery<CorporealComponent> _corporealQuery = default!;
     [Dependency] private EntityQuery<SpectralComponent> _spectralQuery = default!;
 
     private HashSet<Entity<BodyComponent>> _targets = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HealNearOnPrayComponent, AlternatePrayEvent>(OnPray);
-    }
-
-    private void OnPray(EntityUid uid, HealNearOnPrayComponent comp, ref AlternatePrayEvent args)
+    [SubscribeLocalEvent]
+    private void OnPray(Entity<HealNearOnPrayComponent> ent, ref AlternatePrayEvent args)
     {
         _targets.Clear();
-        _lookup.GetEntitiesInRange(Transform(args.User).Coordinates, comp.Range, _targets);
+        _lookup.GetEntitiesInRange(Transform(args.User).Coordinates, ent.Comp.Range, _targets);
 
         foreach (var entity in _targets)
         {
             if (_mobState.IsDead(entity.Owner) ||
-                !_examine.InRangeUnOccluded(uid, entity, comp.Range) ||
-                _silicon.IsSilicon(entity))
+                !_examine.InRangeUnOccluded(ent.Owner, entity, ent.Comp.Range) ||
+                _whitelist.IsWhitelistPass(ent.Comp.HealBlacklist, entity))
                 continue;
 
             // if its a ghost and its not in corporeal form then skip
@@ -57,17 +51,17 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
 
             if (ev.ShouldTakeHoly)
             {
-                _damageable.ChangeDamage(entity.Owner, comp.Damage, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-                Spawn(comp.DamageEffect, Transform(entity).Coordinates);
-                _audio.PlayPvs(comp.SizzleSoundPath, entity, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //This should be safe to keep in the loop as this sound will never consistently play on multiple entities.
+                _damageable.ChangeDamage(entity.Owner, ent.Comp.Damage, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+                Spawn(ent.Comp.DamageEffect, Transform(entity).Coordinates);
+                _audio.PlayPvs(ent.Comp.SizzleSoundPath, entity, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //This should be safe to keep in the loop as this sound will never consistently play on multiple entities.
             }
             else
             {
-                _damageable.ChangeDamage(entity.Owner, comp.Healing, targetPart: TargetBodyPart.All, ignoreBlockers: true, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-                Spawn(comp.HealEffect, Transform(entity).Coordinates);
+                _damageable.ChangeDamage(entity.Owner, ent.Comp.Healing, targetPart: TargetBodyPart.All, ignoreBlockers: true, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+                Spawn(ent.Comp.HealEffect, Transform(entity).Coordinates);
             }
         }
 
-        _audio.PlayPvs(comp.HealSoundPath, uid, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //Played outside the loop once at the source of the damage to prevent repeated sound-stacking.
+        _audio.PlayPvs(ent.Comp.HealSoundPath, ent, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //Played outside the loop once at the source of the damage to prevent repeated sound-stacking.
     }
 }

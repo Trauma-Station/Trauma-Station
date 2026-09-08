@@ -1,5 +1,7 @@
+// <Trauma>
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
+// </Trauma>
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -22,6 +24,9 @@ namespace Content.Shared.Teleportation.Systems;
 /// </summary>
 public sealed partial class SwapTeleporterSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private CommonSparksSystem _sparks = default!;
+    // </Trauma>
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -30,7 +35,6 @@ public sealed partial class SwapTeleporterSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private SparksSystem _sparks = default!; // goob edit - sparks everywhere
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -186,10 +190,10 @@ public sealed partial class SwapTeleporterSystem : EntitySystem
             PopupType.MediumCaution);
         _transform.SwapPositions(teleEnt, otherTeleEnt);
 
-        // goob edit - sparks everywhere
-        _sparks.DoSparks(Transform(teleEnt).Coordinates);
-        _sparks.DoSparks(Transform(otherTeleEnt).Coordinates);
-        // end goob edit
+        // <Trauma> (client doesnt predict it)
+        _sparks.DoSparks(teleEnt, source: ent);
+        _sparks.DoSparks(otherTeleEnt);
+        // </Trauma>
     }
 
     /// <summary>

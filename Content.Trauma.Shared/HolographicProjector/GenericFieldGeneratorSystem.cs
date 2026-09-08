@@ -20,6 +20,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerStateSystem _powerState = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
@@ -27,21 +28,6 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<GenericFieldGeneratorComponent> _genQuery = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, ActivateInWorldEvent>(OnActivate);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, ReAnchorEvent>(OnReanchorEvent);
-        SubscribeLocalEvent<ActiveFieldGeneratorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, ChargeChangedEvent>(OnChargeChanged);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, SignalReceivedEvent>(OnSignalReceived);
-    }
 
     public override void Update(float frameTime)
     {
@@ -63,6 +49,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
 
     #region Events
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<GenericFieldGeneratorComponent> ent, ref ComponentStartup args)
     {
         _signal.EnsureSinkPorts(ent, ent.Comp.TogglePort, ent.Comp.OnPort, ent.Comp.OffPort);
@@ -73,11 +60,10 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         ChangeConnectionLightVisualizer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnActivate(Entity<GenericFieldGeneratorComponent> ent, ref ActivateInWorldEvent args)
     {
-        if (args.Handled
-        || !TryComp(ent, out TransformComponent? transformComp)
-        || !transformComp.Anchored)
+        if (args.Handled || !Transform(ent).Anchored)
             return;
 
         ToggleGenerator(ent, args.User);
@@ -86,22 +72,26 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         Dirty(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnAnchorChanged(Entity<GenericFieldGeneratorComponent> ent, ref AnchorStateChangedEvent args)
     {
-        if (!args.Anchored)
+        if (!args.Anchored && !args.Detaching)
             RemoveConnections(ent);
     }
 
-    private void OnReanchorEvent(Entity<GenericFieldGeneratorComponent> ent, ref ReAnchorEvent args)
+    [SubscribeLocalEvent]
+    private void OnReAnchor(Entity<GenericFieldGeneratorComponent> ent, ref ReAnchorEvent args)
     {
         GridCheck(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnComponentRemoved(Entity<GenericFieldGeneratorComponent> ent, ref ComponentRemove args)
     {
         RemoveConnections(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnanchorAttempt(Entity<ActiveFieldGeneratorComponent> ent, ref UnanchorAttemptEvent args)
     {
         _popup.PopupEntity(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
@@ -143,6 +133,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnBatteryStateChanged(Entity<GenericFieldGeneratorComponent> ent, ref BatteryStateChangedEvent args)
     {
         if (args.OldState != BatteryState.Empty && args.NewState == BatteryState.Empty && ent.Comp.Charged)
@@ -165,6 +156,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         Dirty(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<GenericFieldGeneratorComponent> ent, ref SignalReceivedEvent args) //basic signal compatability
     {
         if (!Transform(ent).Anchored)
@@ -202,6 +194,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
             _battery.UseCharge((pair.Owner, battery), battery.MaxCharge);
     }
 
+    [SubscribeLocalEvent]
     private void OnChargeChanged(Entity<GenericFieldGeneratorComponent> ent, ref ChargeChangedEvent args)
     {
         ChangePowerVisualizer(ent);
@@ -328,7 +321,8 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     private void SetWorkingState(Entity<GenericFieldGeneratorComponent> ent, bool state, EntityUid? user = null)
     {
-        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = state;
+        _powerState.SetWorkingState(ent.Owner, state);
+
         ent.Comp.IsConnected = state;
         ChangeConnectionLightVisualizer(ent);
         UpdateConnectionLights(ent);

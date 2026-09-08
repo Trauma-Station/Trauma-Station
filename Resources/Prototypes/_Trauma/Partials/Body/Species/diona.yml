@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AppearanceDiona
+  components:
+  - type: InitialBody
+    organs:
+      Tongue: OrganDionaTongue
+
+- type: entity
+  id: MobDiona
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RootSpeak
+    understands:
+    - TauCetiBasic
+    - RootSpeak
+  - type: FoliageIgnoringVision
+  - type: Viewcone
+    baseConeAngle: 360
+  - type: Butcherable
+    spawned:
+    - id: MaterialWoodPlank1 # "bones"
+      amount: 3
+
+- type: entity
+  id: OrganDionaTorso
+  components:
+  - type: BodyPart
+    # removed Heart, Kidneys and Liver slots its a plant
+    # cant use !Remove for slots from the base torso prototype :)
+    slots:
+    # parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # organs
+    - Appendix
+    - Lungs
+    - Stomach

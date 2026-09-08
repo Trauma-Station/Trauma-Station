@@ -57,7 +57,7 @@ public sealed partial class SaltLineSystem : EntitySystem
         var gridUid = _transform.GetGrid(args.ClickLocation)!.Value;
         var snapPos = _map.TileIndicesFor((gridUid, grid), args.ClickLocation);
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, snapPos);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, snapPos);
         while (anchored.MoveNext(out var entity))
         {
             if (HasComp<SaltLineComponent>(entity.Value)) // dont place in same tile
@@ -130,7 +130,7 @@ public sealed partial class SaltLineSystem : EntitySystem
         foreach (var (offset, flag) in directions)
         {
             var checkTile = tile + offset;
-            var anchored = _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, checkTile);
+            var anchored = _map.GetAnchoredEntities(transform.GridUid.Value, grid, checkTile);
 
             while (anchored.MoveNext(out var entity))
             {
@@ -157,7 +157,7 @@ public sealed partial class SaltLineSystem : EntitySystem
         foreach (var offset in offsets)
         {
             var checkTile = tile + offset;
-            var anchored = _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, checkTile);
+            var anchored = _map.GetAnchoredEntities(transform.GridUid.Value, grid, checkTile);
 
             while (anchored.MoveNext(out var entity))
             {

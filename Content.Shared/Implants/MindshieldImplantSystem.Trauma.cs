@@ -19,6 +19,9 @@ public sealed partial class MindshieldImplantSystem
             return false;
         }
 
+        var brokenEv = new MindShieldBrokenEvent();
+        RaiseLocalEvent(uid, ref brokenEv);
+
         _popup.PopupEntity(Loc.GetString(cancelPopup), uid);
         var shield = Comp<MindShieldComponent>(implant);
         shield.Broken = true;

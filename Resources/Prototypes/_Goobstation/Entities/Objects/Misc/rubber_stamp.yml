@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: nanotrasen representative rubber stamp
   parent: RubberStampBase
   id: RubberStampNanorep
+  name: nanotrasen representative rubber stamp
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-nanorep
@@ -12,3 +12,5 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/stamps.rsi
     state: stamp-nanorep
+  - type: Item
+    sprite: Objects/Misc/stamps.rsi

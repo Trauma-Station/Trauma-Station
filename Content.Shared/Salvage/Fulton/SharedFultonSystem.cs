@@ -136,7 +136,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
             return;
         // </Trauma>
 
-        if (Deleted(component.Beacon))
+        if (Deleted(component.Beacon) || _foldable.IsFolded(component.Beacon.Value)) // Trauma - check if the beacon's folded
         {
             // <Trauma> - predict it properly with HasBeacon, very rarely will the beacon actually be deleted so mispredicting that once is fine
             if (_net.IsServer || !component.HasBeacon)
@@ -145,6 +145,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
                 {
                     // no more mispredicts now
                     component.HasBeacon = false;
+                    component.Beacon = null;
                     Dirty(uid, component);
                 }
                 _popup.PopupEntity(Loc.GetString("fulton-not-found"), uid, args.User);

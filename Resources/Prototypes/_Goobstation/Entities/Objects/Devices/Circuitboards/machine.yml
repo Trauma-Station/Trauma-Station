@@ -10,13 +10,6 @@
     state: engineering
   - type: MachineBoard
     prototype: RoboticArm
-    stackRequirements:
-      Manipulator: 2
-      Steel: 1
-    tagRequirements:
-      BorgArm:
-        amount: 1
-        defaultPrototype: LeftArmBorg
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -28,13 +21,6 @@
     state: engineering
   - type: MachineBoard
     prototype: Constructor
-    stackRequirements:
-      Manipulator: 2
-      Steel: 1
-    tagRequirements:
-      BorgArm:
-        amount: 1
-        defaultPrototype: LeftArmBorg
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -44,9 +30,6 @@
   components:
   - type: MachineBoard
     prototype: StorageBin
-    stackRequirements:
-      Manipulator: 1
-      Steel: 1
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -58,13 +41,6 @@
     state: engineering
   - type: MachineBoard
     prototype: Interactor
-    stackRequirements:
-      Manipulator: 2
-      Plastic: 1
-    tagRequirements:
-      BorgArm:
-        amount: 1
-        defaultPrototype: LeftArmBorg
 
 - type: entity
   parent: BaseMachineCircuitboard

@@ -27,7 +27,7 @@ public sealed partial class BlobFactoryComponent : Component
     [DataField, AutoNetworkedField]
     public List<EntityUid> BlobPods = new ();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int Accumulator = 0;
 
     [DataField]

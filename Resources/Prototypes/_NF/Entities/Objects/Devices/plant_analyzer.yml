@@ -21,11 +21,10 @@
   - type: UserInterface
     interfaces:
       enum.PlantAnalyzerUiKey.Key:
-        type: PlantAnalyzerBoundUserInterface
+        type: PlantAnalyzerBUI
   - type: PlantAnalyzer
-    settings:
-      scanDelay: 3
-      modeDelay: 1
+    scanDelay: 3
+    modeDelay: 1
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
     deleteMutationEndSound:
@@ -44,6 +43,5 @@
   suffix: Debug
   components:
   - type: PlantAnalyzer
-    settings:
-      scanDelay: 0.1
-      modeDelay: 0.1
+    scanDelay: 0.1
+    modeDelay: 0.1

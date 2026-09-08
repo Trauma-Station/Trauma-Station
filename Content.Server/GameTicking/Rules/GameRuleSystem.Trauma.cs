@@ -63,7 +63,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
 
             tile = new Vector2i(randomX, randomY);
 
-            if (!_map.TryGetTile(grid.Comp, tile, out var selectedTile) || selectedTile.IsEmpty ||
+            if (!Map.TryGetTile(grid.Comp, tile, out var selectedTile) || selectedTile.IsEmpty ||
                 _turf.IsSpace(selectedTile))
                 continue;
 
@@ -71,7 +71,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
                 || _atmosphere.IsTileAirBlockedCached(grid.Owner, tile))
                 continue;
 
-            targetCoords = _map.GridTileToLocal(grid.Owner, grid.Comp, tile);
+            targetCoords = Map.GridTileToLocal(grid.Owner, grid.Comp, tile);
             return true;
         }
 

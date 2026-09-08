@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: itemSize
+  id: Small
+  crawlSpeedModifier: 0.85
+
+- type: itemSize
+  id: Normal
+  crawlSpeedModifier: 0.7
+
+- type: itemSize
+  id: Large
+  crawlSpeedModifier: 0.6
+
+- type: itemSize
+  id: Huge
+  crawlSpeedModifier: 0.4
+
+- type: itemSize
+  id: Ginormous
+  crawlSpeedModifier: 0.2

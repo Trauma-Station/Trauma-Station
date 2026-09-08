@@ -205,3 +205,25 @@
   - type: Construction
     graph: ClothingHandsGlovesForge
     node: finish
+
+- type: entity
+  parent: [ClothingHandsGlovesColorBlack, BaseSecurityContraband]
+  id: ClothingHandsGlovesSecurityDuty
+  name: security duty gloves
+  description: Standard duty gloves of Nanotrasen security forces.
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/securityglovesduty.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/securityglovesduty.rsi
+  - type: Fiber
+    fiberMaterial: fibers-black
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9

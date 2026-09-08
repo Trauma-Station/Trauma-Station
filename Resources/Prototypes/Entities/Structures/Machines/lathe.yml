@@ -51,15 +51,17 @@
           - MachineLayer
   - type: Lathe
   - type: MaterialStorage
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 175
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
+  # <Trauma> - inheritance major
+  #- type: Destructible
+  #  thresholds:
+  #  - trigger:
+  #      !type:DamageTrigger
+  #      damage: 175
+  #    behaviors:
+  #    - !type:PlaySoundBehavior
+  #      sound:
+  #        collection: MetalBreak
+  # </Trauma>
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -156,6 +158,14 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
+    # <Trauma>
+    - NailsStatic
+    - LatheMiscStatic
+    - MedicalVehiclesStatic
+    - GrenadeTriggersStatic
+    - TapeRecorderStatic
+    - MiscSignallersStatic
+    # </Trauma>
     - ToolsStatic
     - PartsStatic
     - AtmosStatic
@@ -170,20 +180,14 @@
     - ServiceStatic
     - PowerCellsStatic
     - ElectronicsStatic
-    # Goobstation
-    - NailsStatic
-    - LatheMiscStatic
-    - MedicalVehiclesStatic
-    - GrenadeTriggersStatic
-    - TapeRecorderStatic
-    - MiscSignallersStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
+    # <Trauma>
+    - ScienceExplosives
+    # </Trauma>
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
     # - SyndicateAmmoStatic # Trauma
-    # Goobstation
-    - ScienceExplosives
   - type: BlueprintReceiver
     whitelist:
       tags:

@@ -246,7 +246,7 @@
     - type: Transform
       anchored: true
     - type: Damageable
-      damageModifierSet: Metallic
+      damageModifierSet: FlimsyMetallic # Trauma - Was Metallic, too tanky
     - type: Injurable
       damageContainer: StructuralInorganic
     - type: Sprite

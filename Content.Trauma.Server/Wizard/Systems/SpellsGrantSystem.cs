@@ -174,7 +174,7 @@ public sealed partial class SpellsGrantSystem : EntitySystem
 
         return (totalWeight, chosenSpells);
 
-        Dictionary<string, float> FilterDictionary(Dictionary<string, float> dict, List<string>? ignored = null)
+        Dictionary<ProtoId<EntityPrototype>, float> FilterDictionary(Dictionary<ProtoId<EntityPrototype>, float> dict, List<string>? ignored = null)
         {
             return ignored == null
                 ? dict.Where(w => w.Value <= totalWeight).ToDictionary()

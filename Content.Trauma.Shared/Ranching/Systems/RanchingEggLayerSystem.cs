@@ -25,12 +25,11 @@ namespace Content.Trauma.Shared.Ranching.Systems;
 /// </summary>
 public sealed partial class RanchingEggLayerSystem : EntitySystem
 {
-
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private SharedHappinessSystem _happiness = default!;
-    [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
@@ -117,6 +116,7 @@ public sealed partial class RanchingEggLayerSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
+    // TODO: use egg layer rework for this probably
     private void OnEggLay(Entity<RanchingEggLayerComponent> ent, ref RanchingEggLayEvent args)
     {
         SpawnNextToOrDrop(ent.Comp.EggSpawn, ent.Owner);
@@ -125,10 +125,10 @@ public sealed partial class RanchingEggLayerSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("action-popup-lay-egg-user"), ent.Owner, ent.Owner);
         _popup.PopupEntity(Loc.GetString("action-popup-lay-egg-others", ("entity", ent.Owner)), ent.Owner, Filter.PvsExcept(ent.Owner), true);
 
-        if (!TryComp<HungerComponent>(ent.Owner, out var hunger))
+        if (!TryComp<SatiationComponent>(ent.Owner, out var satiation))
             return;
 
-        _hunger.ModifyHunger(ent.Owner, -ent.Comp.HungerUsage, hunger);
+        _satiation.ModifyValue((ent.Owner, satiation), SatiationSystem.Hunger, -ent.Comp.HungerUsage);
 
         if (!TryComp<MostRecentlyEatenFoodTagsComponent>(ent.Owner, out var foodTags))
             return;

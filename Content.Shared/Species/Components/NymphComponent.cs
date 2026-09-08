@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
 
@@ -21,4 +22,18 @@ public sealed partial class NymphComponent : Component
     /// </summary>
     [DataField]
     public bool TransferMind = false;
+
+    /// <summary>
+    /// Whitelist the owner of the organ needs to meet for the organ to turn into a nymph.
+    /// Can be null.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Whitelist;
+
+    /// <summary>
+    /// Blacklist for the owner of the organ for it to turn into a nymph.
+    /// Can be null.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Blacklist;
 }

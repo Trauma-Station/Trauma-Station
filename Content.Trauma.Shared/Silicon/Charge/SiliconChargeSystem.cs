@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Silicon.Components;
-using Content.Trauma.Shared.Silicon.Systems;
 using Content.Goobstation.Common.CCVar;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
@@ -13,7 +11,9 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Temperature.Components;
+using Content.Trauma.Shared.Silicon.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Silicon.Charge;
@@ -28,6 +28,7 @@ public sealed partial class SiliconChargeSystem : EntitySystem
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
     [Dependency] private EntityQuery<MindContainerComponent> _mindConQuery = default!;
 
     private TimeSpan _npcUpdateDelay;
@@ -52,7 +53,7 @@ public sealed partial class SiliconChargeSystem : EntitySystem
                 continue;
 
             // Check if the Silicon is an NPC, and if so, follow the delay as specified in the CVAR.
-            if (ent.Comp.EntityType == SiliconType.Npc)
+            if (!_actorQuery.HasComp(ent))
             {
                 var remaining = now - ent.Comp.LastDrainTime;
                 if (remaining < _npcUpdateDelay)

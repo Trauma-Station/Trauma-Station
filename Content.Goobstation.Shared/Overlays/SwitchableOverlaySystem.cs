@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Flashbang;
 using Content.Shared.Actions;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -93,11 +93,17 @@ public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySys
     {
         var lightRadius = 0f;
         var useShader = false;
+        EntityWhitelist? userWhitelist = null;
+        var whitelistCheckMind = false;
+        var worksInHands = false;
 
         if (component is ThermalVisionComponent thermal)
         {
             lightRadius = thermal.LightRadius;
             useShader = thermal.UseShader;
+            userWhitelist = thermal.UserWhitelist;
+            whitelistCheckMind = thermal.WhitelistCheckMind;
+            worksInHands = thermal.WorksInHands;
         }
 
         args.State = new SwitchableVisionOverlayComponentState
@@ -113,6 +119,9 @@ public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySys
             UseShader = useShader,
             DrawOverlay = component.DrawOverlay,
             OverlayOpacity = component.OverlayOpacity,
+            UserWhitelist = userWhitelist,
+            WhitelistCheckMind = whitelistCheckMind,
+            WorksInHands = worksInHands,
         };
     }
 
@@ -141,6 +150,9 @@ public abstract partial class SwitchableOverlaySystem<TComp, TEvent> : EntitySys
         {
             thermal.LightRadius = state.LightRadius;
             thermal.UseShader = state.UseShader;
+            thermal.UserWhitelist = state.UserWhitelist;
+            thermal.WhitelistCheckMind = state.WhitelistCheckMind;
+            thermal.WorksInHands = state.WorksInHands;
         }
 
         if (component.IsActive == state.IsActive)

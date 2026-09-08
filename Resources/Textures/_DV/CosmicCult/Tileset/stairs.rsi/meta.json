@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Custom item by NoElkaTheGod",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "stair_full",
+	    "directions": 4
+    },
+    {
+      "name": "stair_left_cap",
+	  "directions": 4
+    },
+    {
+      "name": "stair_right_cap",
+	    "directions": 4
+    },
+    {
+      "name": "stair_corner",
+	    "directions": 4
+    },
+    {
+      "name": "stair_solo",
+	    "directions": 4
+    }
+  ]
+}

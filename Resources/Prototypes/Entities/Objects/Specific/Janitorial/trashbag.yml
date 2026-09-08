@@ -61,7 +61,7 @@
     sprite: Objects/Specific/Janitorial/trashbag.rsi
     equippedState: blue-equipped-BELT
   - type: Storage
-    maxItemSize: Large
+#    maxItemSize: Large # Trauma - Allow TrashBagHolding to fit in Janibelt
     grid:
     - 0,0,19,9
     quickInsert: true

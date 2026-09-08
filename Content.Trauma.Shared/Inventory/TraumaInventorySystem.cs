@@ -5,6 +5,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.Strip;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
@@ -37,5 +38,6 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, WaypointerChangedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, CanSpawnFootstepsEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeDamageChangedEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, SpeechFontOverrideEvent>(_inventory.RelayEvent);
     }
 }

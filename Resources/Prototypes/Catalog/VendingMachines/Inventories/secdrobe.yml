@@ -18,6 +18,7 @@
     # ClothingHandsGlovesFingerless: 3 # Trauma
     ClothingHandsGlovesSecurity: 3 # Trauma
     ClothingHandsGlovesSecurityBlue: 3 # Trauma
+    ClothingHandsGlovesSecurityDuty: 6 # Trauma
     ClothingUniformJumpskirtSec: 3
     ClothingUniformJumpsuitSecGrey: 3
     ClothingUniformJumpskirtSecGrey: 3

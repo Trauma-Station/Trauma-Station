@@ -156,6 +156,19 @@ WehMedipen: WehMedipenTiny
 
 # 2026-08-03
 BibleCommunistManifesto: Bible
+
+# 2026-08-17
+ComputerNTRTasks: null
+TaskBottle: ChemistryEmptyBottle01
+TaskJug: Jug
+
+# 2026-08-24
+LightReplacerEmpty: LightReplacer
+
+# 2026-08-30
+MachinePowerTransmissionLaser: null
+MachinePowerTransmissionLaserCrate: null
+MachinePowerTransmissionLaserFlatpack: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -1250,3 +1263,9 @@ CrateEngineeringJetpack: CrateSpaceMiniJetpack
 CrateEngineeringMiniJetpack: CrateSpaceMiniJetpack
 CrateEngineeringShuttle: CrateSpaceShuttlePower
 CrateEngineeringThruster: CrateSpaceThruster
+
+# 2026-08-12
+LightReplacer: LightReplacerFilled
+
+#2026-08-18
+DrinkNeurotoxinGlass: null

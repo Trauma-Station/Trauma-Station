@@ -1,4 +1,4 @@
 - files: ["hiss1.ogg", "hiss2.ogg", "hiss3.ogg", "hiss4.ogg", "hiss5.ogg", "lowHiss1.ogg", "lowHiss2.ogg", "lowHiss3.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/mobs/non-humanoids/hiss"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/mobs/non-humanoids/hiss"

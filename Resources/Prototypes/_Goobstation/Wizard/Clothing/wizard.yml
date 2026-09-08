@@ -201,8 +201,6 @@
     activeIfWorn: true
     restrictedSlots:
     - OUTERCLOTHING
-    actions:
-    - ActionSummonStickmen
 
 - type: entity
   parent: [ClothingHeadHatWizardBaseArmor, ClothingHeadHatPaper, ClothingHeadHatWizardBase]

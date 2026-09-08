@@ -11,6 +11,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Tag;
 using Content.Shared.Trigger.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
@@ -41,6 +42,8 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private TagSystem _tag = default!;
+
     [Dependency] private EntityQuery<CosmicFieldComponent> _fieldQuery = default!;
 
     public static readonly EntProtoId StarMarkStatusEffect = "StatusEffectStarMark";
@@ -144,7 +147,7 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
 
         var other = args.OtherEntity;
 
-        if (!TryComp(other, out ActiveTimerTriggerComponent? trigger))
+        if (_tag.HasTag(other, ent.Comp.IgnoredTag) || !TryComp(other, out ActiveTimerTriggerComponent? trigger))
             return;
 
         // Defuse bombs
@@ -272,7 +275,7 @@ public abstract partial class SharedStarMarkSystem : EntitySystem
             return false;
 
         var ev = new BeforeCastTouchSpellEvent(entity, false);
-        RaiseLocalEvent(entity, ev, true);
+        RaiseLocalEvent(entity, ref ev, true);
 
         var result = !ev.Cancelled &&
                      _status.TryUpdateStatusEffectDuration(entity,

@@ -23,7 +23,7 @@ public sealed partial class CursedHeartSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damage = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()

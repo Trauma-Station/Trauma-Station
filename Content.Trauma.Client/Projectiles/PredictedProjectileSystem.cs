@@ -13,26 +13,13 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
 {
     [Dependency] private PhysicsSystem _physics = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ProjectileComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
-        SubscribeLocalEvent<DeletingProjectileEvent>(OnDeletingProjectile);
-        SubscribeNetworkEvent<ShotPredictedProjectileEvent>(OnShotPredictedProjectile);
-    }
-
+    [SubscribeLocalEvent]
     private void OnUpdateIsPredicted(Entity<ProjectileComponent> ent, ref UpdateIsPredictedEvent args)
     {
         args.IsPredicted = true;
     }
 
-    private void OnDeletingProjectile(ref DeletingProjectileEvent args)
-    {
-        RemComp<SpriteComponent>(args.Entity);
-        RemComp<PointLightComponent>(args.Entity);
-    }
-
+    [SubscribeNetworkEvent]
     private void OnShotPredictedProjectile(ShotPredictedProjectileEvent args)
     {
         var uid = GetEntity(args.Projectile);

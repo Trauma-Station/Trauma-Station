@@ -13,6 +13,8 @@
         Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -76,6 +78,8 @@
         Ballistic: 0.7
         Heat: 0.7
         Caustic: 0.7
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
     damageCoefficient: 0.50
 
@@ -129,6 +133,8 @@
           Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
+        flatReductions:
+          Ballistic: 3
       traumaDeductions:
         Dismemberment: 0.4
         OrganDamage: 0.4
@@ -155,6 +161,8 @@
           Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
+        flatReductions:
+          Ballistic: 2
       traumaDeductions:
         Dismemberment: 0.2
         OrganDamage: 0.2
@@ -179,6 +187,8 @@
         Ballistic: 0.5
         Heat: 0.6
         Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -224,6 +234,8 @@
         Ballistic: 0.5
         Heat: 0.4
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
   - type: ExplosionResistance
     damageCoefficient: 0
 
@@ -264,6 +276,8 @@
         Ballistic: 0.6
         Heat: 0.7
         Caustic: 0
+      flatReductions:
+        Ballistic: 2
 
 - type: entity
   parent: [ ArmorHereticFlesh, ClothingOuterArmorHeretic ]
@@ -314,6 +328,8 @@
         Ballistic: 0.5
         Heat: 0.5
         Caustic: 0.5
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.5
       OrganDamage: 0.5
@@ -359,6 +375,8 @@
         Ballistic: 0.6
         Heat: 0.5
         Caustic: 0.8
+      flatReductions:
+        Ballistic: 2
 
 - type: entity
   parent: [ ArmorHereticCosmos, ClothingOuterArmorHeretic ]
@@ -407,6 +425,8 @@
         Ballistic: 0.6
         Heat: 0.6
         Caustic: 0.6
+      flatReductions:
+        Ballistic: 2
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -483,6 +503,7 @@
     - Leg
     - Foot
     - Tail
+    - Wings
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -517,6 +538,8 @@
   - type: HereticClothing
   - type: PressureProtection
   - type: VoidCloak
+  - type: StripBlockBypass
+  - type: SurgeryIgnoreClothing
   - type: Appearance
   - type: GenericVisualizer
     visuals:

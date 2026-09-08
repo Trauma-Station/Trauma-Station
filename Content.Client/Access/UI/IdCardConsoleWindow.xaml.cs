@@ -29,6 +29,7 @@ namespace Content.Client.Access.UI
         private string? _lastFullName;
         private string? _lastJobTitle;
         private string? _lastJobProto;
+        private string? _newJob; // Trauma
 
         // The job that will be picked if the ID doesn't have a job on the station.
         private static ProtoId<JobPrototype> _defaultJob = "Passenger";
@@ -130,6 +131,7 @@ namespace Content.Client.Access.UI
                 return;
             }
 
+            _newJob = job.ID; // Trauma
             JobTitleLineEdit.Text = Loc.GetString(job.Name);
             args.Button.SelectId(args.Id);
 
@@ -226,16 +228,14 @@ namespace Content.Client.Access.UI
 
         private void SubmitData()
         {
-            // Don't send this if it isn't dirty.
-            var jobProtoDirty = _lastJobProto != null &&
-                                _jobPrototypeIds[JobPresetOptionButton.SelectedId] != _lastJobProto;
-
+            // <Trauma> - use dirty job id from actually changing it not that broken slop
             _owner.SubmitData(
                 FullNameLineEdit.Text,
                 JobTitleLineEdit.Text,
                 // Iterate over the buttons dictionary, filter by `Pressed`, only get key from the key/value pair
                 _accessButtons.ButtonsList.Where(x => x.Value.Pressed).Select(x => x.Key).ToList(),
-                jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : null);
+                _newJob);
+            // </Trauma>
         }
     }
 }

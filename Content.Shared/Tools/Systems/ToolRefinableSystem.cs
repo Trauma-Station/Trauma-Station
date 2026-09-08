@@ -1,8 +1,12 @@
+// <Trauma>
+using Robust.Shared.Collections;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
@@ -38,7 +42,7 @@ public sealed partial class ToolRefinableSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ToolRefinableComponent, GetVerbsEvent<InteractionVerb>>(AddVerb);
-        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<ToolRefinableComponent, ToolRefineDoAfterEvent>(OnDoAfter);
     }
 
@@ -164,7 +168,7 @@ public sealed partial class ToolRefinableSystem : EntitySystem
     private void SpawnRefinement(List<EntitySpawnEntry> spawnList, EntityUid source, IRobustRandom rng)
     {
         var spawns = EntitySpawnCollection.GetSpawns(spawnList, rng);
-        var spawned = new List<EntityUid>(spawns.Count);
+        var spawned = new ValueList<EntityUid>(spawns.Count); // Trauma - use ValueList
 
         if (_container.TryGetContainingContainer(source, out var container))
             _container.Remove((source, null, null), container);

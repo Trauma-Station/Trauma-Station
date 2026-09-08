@@ -74,8 +74,10 @@
   graph: AirAlarm
   targetNode: air_alarm
   canBuildInImpassable: true
-  conditions:
-  - !type:WallmountCondition
+  # <Trauma>
+  #conditions:
+  #- !type:WallmountCondition
+  # </Trauma>
 
 - type: construction
   parent: BaseAtmos
@@ -83,8 +85,10 @@
   graph: FireAlarm
   targetNode: fire_alarm
   canBuildInImpassable: true
-  conditions:
-  - !type:WallmountCondition
+  # <Trauma>
+  #conditions:
+  #- !type:WallmountCondition
+  # </Trauma>
 
 - type: construction
   parent: BaseAtmos

@@ -4,3 +4,8 @@
   parent: RestrictedAntag
   id: Shadowling
   prefRoles: [ Shadowling ]
+
+- type: antagSpecifier
+  parent: Shadowling
+  id: ShadowlingMidround
+  spawnerPrototype: GhostRoleSpawnerShadowling

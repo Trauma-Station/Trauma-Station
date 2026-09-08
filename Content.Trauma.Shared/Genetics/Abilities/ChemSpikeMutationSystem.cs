@@ -18,7 +18,7 @@ public sealed partial class ChemSpikeMutationSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private MutationSystem _mutation = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedProjectileSystem _projectile = default!;
 

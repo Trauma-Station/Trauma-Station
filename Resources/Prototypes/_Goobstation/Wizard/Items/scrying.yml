@@ -47,9 +47,5 @@
     - ActionToggleFov
     - ActionToggleGhosts
   - type: ItemActionGrant
-    actions:
-    - ActionToggleLighting
-    - ActionToggleFov
-    - ActionToggleGhosts
   - type: StaticPrice
     price: 50000

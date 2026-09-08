@@ -8,6 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Lathe.UI;
 
+// TODO: move this shit to UI injection
 public sealed partial class LatheMenu
 {
     [Dependency] private IPlayerManager _player = default!;

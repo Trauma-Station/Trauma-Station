@@ -47,7 +47,8 @@
   name: PSON-Chip
   description: A sterilized microchip assembly that can directly interface with the brain. This one rewires the brain to weaken innate skills and overwrite personalities.
   components:
-  - type: UnremoveableOrgan
+  - type: OrganChip
+    canRemove: false # 1984
 
 - type: entity
   abstract: true

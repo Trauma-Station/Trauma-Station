@@ -47,6 +47,24 @@
     gridPath: /Maps/_Goobstation/Shuttles/retort_assault.yml
 
 - type: entity
+  parent: SpawnERTSecurity
+  id: SpawnERTSecurityDelayed
+  components:
+  - type: StationEvent
+    # Can't make announcement delayed
+    startAnnouncement: null
+    startAudio: null
+  - type: GameRule
+    delay:
+      min: 15
+      max: 20
+  - type: RoundEndRule
+  - type: AlertLevelInterceptionRule
+    alertLevel: Gamma
+    overrideAlert: true
+    locked: true
+
+- type: entity
   parent: BaseUnknownShuttleRule
   id: SpawnERTMedical
   components:

@@ -31585,13 +31585,11 @@ entities:
     components:
     - type: Transform
       parent: 1668
-      rot: -1.5707963267948966 rad
       pos: 10.5,20.5
   - uid: 2869
     components:
     - type: Transform
       parent: 1668
-      rot: -1.5707963267948966 rad
       pos: 12.5,28.5
   - uid: 5545
     components:

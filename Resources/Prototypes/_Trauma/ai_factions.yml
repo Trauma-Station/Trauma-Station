@@ -2,13 +2,9 @@
 
 - type: npcFaction
   id: Chicken
-  friendly:
-  - Chicken
 
 - type: npcFaction
   id: Raptor
-  friendly:
-  - Raptor
   hostile:
   - Chicken
   - Changeling
@@ -115,7 +111,6 @@
   - Wizard
   - Xenoborg
   hostile:
-  - Insurgent
   - Changeling
   - Heretic
   - Blob
@@ -155,3 +150,4 @@
   - CrabFaction
   - Assistant
   - DevilFaction
+  - Monkey

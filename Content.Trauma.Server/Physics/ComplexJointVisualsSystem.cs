@@ -84,13 +84,20 @@ public sealed partial class ComplexJointVisualsSystem : SharedComplexJointVisual
         if (result.Count == 0 || !raiseEvents)
             return result;
 
+        var parent = Transform(origin).ParentUid;
+
         foreach (var hit in result)
         {
             if (data.CollisionIgnoreTarget && hit.HitEntity == target)
                 continue;
 
+            if (data.CollisionIgnoreParent && hit.HitEntity == parent)
+                continue;
+
             var ev = new ComplexJointCollisionEvent(originalOrigin, hit, originalTarget, data);
             RaiseLocalEvent(originalOrigin, ref ev);
+            if (ev.BlockNextCollisions)
+                break;
         }
 
         return result;

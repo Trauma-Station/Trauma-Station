@@ -37,3 +37,4 @@
 - type: alertLevel
   parent: DeltaNuke
   id: DeltaSling
+  shuttleTime: 5m # shit bad

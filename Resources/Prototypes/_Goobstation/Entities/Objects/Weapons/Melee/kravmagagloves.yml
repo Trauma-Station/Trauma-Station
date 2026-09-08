@@ -15,7 +15,7 @@
     fiberColor: fibers-red
   - type: KnowledgeGrantOnWear
     skills:
-      MartialArtKravMaga: 50
+      MartialArtKravMaga: 88
     experience:
       MartialArtKravMaga: 2
   - type: GuideHelp

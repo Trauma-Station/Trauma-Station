@@ -3,3 +3,6 @@ alerts-on-holy-fire-desc = You're [color=cyan]on holy fire[/color]. Click the al
 
 alerts-morph-biomass-name = Biomass
 alerts-morph-biomass-desc = The collection of meat and fat taken from consuming living things.
+
+alerts-fultoned-name = [color=yellow]Fultoned[/color]
+alerts-fultoned-desc = You're being [color=yellow]fultoned[/color] to a remote location! Click to quickly remove it.

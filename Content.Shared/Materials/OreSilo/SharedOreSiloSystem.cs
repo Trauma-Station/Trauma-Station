@@ -149,6 +149,10 @@ public abstract partial class SharedOreSiloSystem : EntitySystem
     [PublicAPI]
     public bool CanTransmitMaterials(Entity<OreSiloComponent?, TransformComponent?> silo, EntityUid client)
     {
+        // <Trauma> - prevent stack overflow if a bad silo prototype links to itself or in a cycle
+        if (HasComp<OreSiloComponent>(client))
+            return false;
+        // </Trauma>
         if (!Resolve(silo, ref silo.Comp1, ref silo.Comp2))
             return false;
 

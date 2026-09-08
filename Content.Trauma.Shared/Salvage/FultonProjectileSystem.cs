@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Foldable;
 using Content.Shared.Projectiles;
 using Content.Shared.Salvage.Fulton;
 using Robust.Shared.Audio.Systems;
@@ -12,6 +13,7 @@ namespace Content.Trauma.Shared.Salvage;
 /// </summary>
 public sealed partial class FultonProjectileSystem : EntitySystem
 {
+    [Dependency] private FoldableSystem _foldable = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -36,7 +38,7 @@ public sealed partial class FultonProjectileSystem : EntitySystem
             return;
         }
 
-        if (Deleted(fulton.Beacon))
+        if (Deleted(fulton.Beacon) || _foldable.IsFolded(fulton.Beacon.Value))
         {
             // same prediction as regular fulton interaction
             if (_net.IsServer || !fulton.HasBeacon)
@@ -44,6 +46,7 @@ public sealed partial class FultonProjectileSystem : EntitySystem
                 if (fulton.HasBeacon)
                 {
                     fulton.HasBeacon = false;
+                    fulton.Beacon = null;
                     Dirty(weapon, fulton);
                 }
                 _audio.PlayLocal(ent.Comp.PopSound, target, null);

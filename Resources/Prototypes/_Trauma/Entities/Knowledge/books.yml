@@ -99,11 +99,21 @@
     - state: melee
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 35
-      WeaponsKnowledge: 35
+      MeleeKnowledge: 30
+      WeaponsKnowledge: 50
+      KnowledgeWeaponsPolearm: 30
+      KnowledgeWeaponsShortBlade: 30
+      KnowledgeWeaponsLongBlade: 30
+      KnowledgeWeaponsBludgeon: 30
+      KnowledgeWeaponsNonLethal: 30 # For Rev Mace
     experience:
       MeleeKnowledge: 15
       WeaponsKnowledge: 15
+      KnowledgeWeaponsPolearm: 15
+      KnowledgeWeaponsShortBlade: 15
+      KnowledgeWeaponsLongBlade: 15
+      KnowledgeWeaponsBludgeon: 15
+      KnowledgeWeaponsNonLethal: 15
     doAfter: 2
 
 # Shooting
@@ -120,11 +130,21 @@
     - state: shooting
   - type: KnowledgeGrantOnUse
     skills:
-      ShootingKnowledge: 35
-      WeaponsKnowledge: 35
+      ShootingKnowledge: 30
+      GunsmithingKnowledge: 30
+      KnowledgeWeaponsPistol: 30
+      KnowledgeWeaponsSMG: 30
+      KnowledgeWeaponsShotgun: 30
+      KnowledgeWeaponsRifle: 30
+      KnowledgeWeaponsHeavy: 30 # For Flamethrower/RPG
     experience:
       ShootingKnowledge: 5
-      WeaponsKnowledge: 4
+      GunsmithingKnowledge: 5
+      KnowledgeWeaponsPistol: 5
+      KnowledgeWeaponsSMG: 5
+      KnowledgeWeaponsShotgun: 5
+      KnowledgeWeaponsRifle: 5
+      KnowledgeWeaponsHeavy: 5
     doAfter: 2
 
 # Magic

@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared.Chemistry.Reagent;
+using Content.Trauma.Common.Fluids;
 using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Server.Fluids.Components;
@@ -429,8 +430,15 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
             // sorry! no overload for returning uid, so .owner must be used
             var owner = ent.Owner;
 
-            if (owner == user) // Goobtation - can't spill at yourself (have to use melee)
+            // <Trauma>
+            if (owner == user) // can't spill at yourself (have to use melee)
                 continue;
+
+            var attemptEv = new SplashAttemptEvent(owner);
+            RaiseLocalEvent(entity, ref attemptEv);
+            if (attemptEv.Cancelled)
+                continue;
+            // </Trauma>
 
             // between 5 and 30%
             var splitAmount = spilled.Volume * _random.NextFloat(0.05f, 0.30f);
@@ -530,7 +538,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         // Get normalized co-ordinate for spill location and spill it in the centre
         // TODO: Does SnapGrid or something else already do this?
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, mapGrid, tileRef.GridIndices);
+        var anchored = _map.GetAnchoredEntities(gridId, mapGrid, tileRef.GridIndices);
 
         while (anchored.MoveNext(out var ent))
         {
@@ -576,7 +584,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         if (!TryComp<MapGridComponent>(tile.GridUid, out var grid))
             return false;
 
-        var anc = _map.GetAnchoredEntitiesEnumerator(tile.GridUid, grid, tile.GridIndices);
+        var anc = _map.GetAnchoredEntities(tile.GridUid, grid, tile.GridIndices);
         while (anc.MoveNext(out var ent))
         {
             if (!_puddleQuery.HasComponent(ent.Value))

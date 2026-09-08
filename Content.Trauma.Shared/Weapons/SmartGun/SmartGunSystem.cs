@@ -7,16 +7,10 @@ using Content.Trauma.Shared.Wizard.Projectiles;
 
 namespace Content.Trauma.Shared.Weapons.SmartGun;
 
-public sealed class SmartGunSystem : EntitySystem
+public sealed partial class SmartGunSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SmartGunComponent, ProjectileShotEvent>(OnShot);
-    }
-
-    private void OnShot(Entity<SmartGunComponent> ent, ref ProjectileShotEvent args)
+    [SubscribeLocalEvent]
+    private void OnShot(Entity<SmartGunComponent> ent, ref GunShotProjectileEvent args)
     {
         var (uid, comp) = ent;
 

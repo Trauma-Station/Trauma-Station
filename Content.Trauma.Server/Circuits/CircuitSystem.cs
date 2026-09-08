@@ -16,25 +16,29 @@ public sealed partial class CircuitSystem : EntitySystem
     [Dependency] private DeviceLinkSystem _device = default!;
     [Dependency] private EntityQuery<CircuitComponent> _query = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CircuitHousingComponent, SignalReceivedEvent>(OnSignalReceived);
-
-        SubscribeLocalEvent<CircuitComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<ActiveCircuitComponent, ComponentInit>(OnActiveInit);
-        SubscribeLocalEvent<ActiveCircuitComponent, ComponentShutdown>(OnActiveShutdown);
-    }
+    private List<int> _changed = new();
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<ActiveCircuitComponent, CircuitComponent>();
-        while (query.MoveNext(out var uid, out _, out var comp))
+        while (query.MoveNext(out _, out _, out var comp))
         {
+            // update any momentary pulses's gates
+            for (var i = 0; i < comp.Inputs.Count; i++)
+            {
+                if (comp.Inputs[i] != Pulse.Instance)
+                    continue;
+
+                foreach (var input in comp.LinkedInputs[i])
+                {
+                    ValueChanged(comp, input, False.Instance);
+                }
+            }
+
+            UpdateChangedGates(comp);
+
             // change any momentary pulses back to low since theyve been processed
             for (var i = 0; i < comp.Inputs.Count; i++)
             {
@@ -42,36 +46,37 @@ public sealed partial class CircuitSystem : EntitySystem
                     continue;
 
                 comp.Inputs[i] = False.Instance;
-                foreach (var input in comp.LinkedInputs[i])
-                {
-                    ValueChanged(comp, input, False.Instance);
-                }
-            }
-
-            var changed = comp.Changed;
-            if (changed.Count == 0)
-                continue;
-
-            comp.Changed = new();
-            var gates = comp.Data.Gates;
-            foreach (var i in changed)
-            {
-                if (!gates.TryGetValue(i, out var gate))
-                    continue; // invalid...
-
-                var old = gate.Output;
-                gate.Update(comp);
-                if (gate.Output.Equals(old))
-                    continue; // no change
-
-                foreach (var output in gate.LinkedOutputs)
-                {
-                    ValueChanged(comp, output, gate.Output);
-                }
             }
         }
     }
 
+    private void UpdateChangedGates(CircuitComponent comp)
+    {
+        if (comp.Changed.Count == 0)
+            return;
+
+        _changed.Clear();
+        _changed.AddRange(comp.Changed);
+        comp.Changed.Clear();
+        var gates = comp.Data.Gates;
+        foreach (var i in _changed)
+        {
+            if (!gates.TryGetValue(i, out var gate))
+                continue; // invalid...
+
+            var old = gate.Output;
+            gate.Update(comp);
+            if (gate.Output.Equals(old))
+                continue; // no change
+
+            foreach (var output in gate.LinkedOutputs)
+            {
+                ValueChanged(comp, output, gate.Output);
+            }
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent args)
     {
         if (!ent.Comp.Powered ||
@@ -99,6 +104,7 @@ public sealed partial class CircuitSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<CircuitComponent> ent, ref MapInitEvent args)
     {
         var data = ent.Comp.Data;
@@ -114,24 +120,29 @@ public sealed partial class CircuitSystem : EntitySystem
             {
                 if (linked.GateIndex is { } g)
                     ent.Comp.Changed.Add(g);
-                else if (linked.PortIndex is { } p)
-                    ent.Comp.LastOutputs[p] = ent.Comp.Inputs[i];
             }
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnActiveInit(Entity<ActiveCircuitComponent> ent, ref ComponentInit args)
     {
         if (!_query.TryComp(ent, out var comp))
             return;
 
         // send expected values when a circuit is repowered installed etc
-        for (var i = 0; i < comp.LastOutputs.Count; i++)
+        var gates = comp.Data.Gates;
+        for (var o = 0; o < comp.Data.OutputIndices.Count; o++)
         {
-            SendOutput(comp.Housing, i, comp.LastOutputs[i]);
+            var i = comp.Data.OutputIndices[o];
+            if (i.GateIndex is { } g)
+                SendOutput(comp.Housing, o, gates[g].Output);
+            else if (i.PortIndex is { } p)
+                SendOutput(comp.Housing, o, comp.Inputs[p]);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnActiveShutdown(Entity<ActiveCircuitComponent> ent, ref ComponentShutdown args)
     {
         if (!_query.TryComp(ent, out var comp))
@@ -140,8 +151,7 @@ public sealed partial class CircuitSystem : EntitySystem
         // stop sending values when a circuit is depowered removed etc
         for (var i = 0; i < CircuitComponent.PortsCount; i++)
         {
-            if (!comp.LastOutputs[i].Equals(False.Instance))
-                SendOutput(comp.Housing, i, False.Instance);
+            SendOutput(comp.Housing, i, False.Instance);
         }
     }
 
@@ -172,7 +182,7 @@ public sealed partial class CircuitSystem : EntitySystem
         if (idx.GateIndex is { } g)
             comp.Changed.Add(g); // update it next tick
         else if (idx.PortIndex is { } p)
-            SendOutput(comp.Housing, p, comp.LastOutputs[p] = value); // send signal now
+            SendOutput(comp.Housing, p, value); // send signal now
     }
 
     private void SendOutput(EntityUid? housing, int i, object value)

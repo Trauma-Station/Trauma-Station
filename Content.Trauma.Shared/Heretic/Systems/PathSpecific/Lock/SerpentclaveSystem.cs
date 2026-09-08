@@ -42,26 +42,6 @@ public sealed partial class SerpentclaveSystem : EntitySystem
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedComplexJointVisualsSystem _joint = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SerpentclaveComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<SerpentclaveComponent, SerpentclaveDoAfterEvent>(OnDoAfter);
-
-        SubscribeLocalEvent<LockTrappedDoorComponent, BeforeDoorAutoCloseEvent>(OnBeforeAutoClose);
-        SubscribeLocalEvent<LockTrappedDoorComponent, BeforeDoorClosedEvent>(OnBeforeDoorClosed);
-        SubscribeLocalEvent<LockTrappedDoorComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<LockTrappedDoorComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<LockTrappedDoorComponent, ShouldDoorCrushEvent>(OnShouldCrush);
-        SubscribeLocalEvent<LockTrappedDoorComponent, DoorOpenedEvent>(OnOpen);
-        SubscribeLocalEvent<LockTrappedDoorComponent, BeforeDoorOpenedEvent>(OnBeforeDoorOpen);
-        SubscribeLocalEvent<LockTrappedDoorComponent, DamageDealtEvent>(OnDamageDealt);
-        SubscribeLocalEvent<LockTrappedDoorComponent, GettingInteractedWithAttemptEvent>(OnInteractAttempt);
-
-        SubscribeLocalEvent<ContainmentFieldThrowEvent>(OnFieldThrow);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -78,12 +58,14 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnFieldThrow(ref ContainmentFieldThrowEvent args)
     {
         if (HasComp<LockTrappedDoorComponent>(args.Field) && _heretic.IsHereticOrGhoul(args.Entity))
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractAttempt(Entity<LockTrappedDoorComponent> ent, ref GettingInteractedWithAttemptEvent args)
     {
         if (_heretic.IsHereticOrGhoul(args.Uid))
@@ -93,12 +75,14 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         AggroTrappedDoor(ent, args.Uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeDoorOpen(Entity<LockTrappedDoorComponent> ent, ref BeforeDoorOpenedEvent args)
     {
         if (args.User is { } user && !_mobState.IsAlive(user) && !HasComp<GhostComponent>(user))
             args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnOpen(Entity<LockTrappedDoorComponent> ent, ref DoorOpenedEvent args)
     {
         if (args.User is not { } user || _heretic.IsHereticOrGhoul(user) || HasComp<StunnedComponent>(user))
@@ -107,6 +91,7 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         AggroTrappedDoor(ent, user);
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageDealt(Entity<LockTrappedDoorComponent> ent, ref DamageDealtEvent args)
     {
         if (args.Origin is not { } origin)
@@ -130,12 +115,14 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         _audio.PlayPredicted(ent.Comp.DamageSound, ent, origin);
     }
 
+    [SubscribeLocalEvent]
     private void OnShouldCrush(Entity<LockTrappedDoorComponent> ent, ref ShouldDoorCrushEvent args)
     {
         args.ShouldCrush = true;
         args.CrushDelay *= 0.75f;
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<LockTrappedDoorComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
@@ -146,7 +133,8 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         _power.SetNeedsPower(ent, true);
     }
 
-    private void OnStartup(Entity<LockTrappedDoorComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent]
+    private void OnMapInit(Entity<LockTrappedDoorComponent> ent, ref MapInitEvent args)
     {
         if (TryComp(ent, out StationAiWhitelistComponent? whitelist))
             _ai.SetWhitelistEnabled((ent, whitelist), false);
@@ -165,6 +153,7 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         _jitter.DoJitter(ent, ent.Comp.JitterTime, false, status: status);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeDoorClosed(Entity<LockTrappedDoorComponent> ent, ref BeforeDoorClosedEvent args)
     {
         if (ent.Comp.GrappleTarget != null || _door.GetColliding(ent).Any(_heretic.IsHereticOrGhoul))
@@ -176,11 +165,13 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         args.PerformCollisionCheck = false;
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeAutoClose(Entity<LockTrappedDoorComponent> ent, ref BeforeDoorAutoCloseEvent args)
     {
         args.Modifier = 0.01f;
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<SerpentclaveComponent> ent, ref SerpentclaveDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
@@ -205,6 +196,7 @@ public sealed partial class SerpentclaveSystem : EntitySystem
         AggroTrappedDoor((target, comp), args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<SerpentclaveComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Target is not { } target || !HasComp<AirlockComponent>(args.Target))

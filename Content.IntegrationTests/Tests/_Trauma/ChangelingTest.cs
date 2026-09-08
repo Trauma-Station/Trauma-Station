@@ -9,6 +9,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Temperature.Components;
 using Content.Trauma.Server.Antag;
 using Content.Trauma.Shared.Antag;
 
@@ -39,13 +40,14 @@ public sealed partial class ChangelingTest : GameTest
         var mob = EntityUid.Invalid;
         await Server.WaitAssertion(() =>
         {
-            mob = SEntMan.SpawnEntity(Urist, map.GridCoords);
-            SEntMan.RemoveComponent<BarotraumaComponent>(mob); // dont want them to interfere with healing
-            SEntMan.RemoveComponent<RespiratorComponent>(mob);
+            mob = SSpawn(Urist, map.GridCoords);
+            SRemComp<BarotraumaComponent>(mob); // dont want them to interfere with healing
+            SRemComp<RespiratorComponent>(mob);
+            SRemComp<TemperatureDamageComponent>(mob);
             Server.PlayerMan.SetAttachedEntity(player, mob);
 
             _smite.MakeAntag(player, Smite);
-            Assert.That(SEntMan.HasComponent<ChangelingIdentityComponent>(mob), $"Changeling antag smite didn't work on {SEntMan.ToPrettyString(mob)}");
+            Assert.That(SHasComp<ChangelingIdentityComponent>(mob), $"Changeling antag smite didn't work on {SEntMan.ToPrettyString(mob)}");
 
             // do some damage that has to be healed
             var damage = new DamageSpecifier()

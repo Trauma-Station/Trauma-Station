@@ -39,8 +39,9 @@
     damage:
       types:
         Blunt: 1
-  - type: Stunbaton
-    energyPerUse: 50
+  - type: MeleeBatteryHitsLeft
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 50
   - type: StaminaDamageOnHit
     damage: 25
     overtime: 40

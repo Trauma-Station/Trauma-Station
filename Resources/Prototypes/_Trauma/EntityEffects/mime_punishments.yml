@@ -7,15 +7,6 @@
   - !type:WeightedRandomEffect
     probability: 0.25 # 75% chance of nothing happening
     children:
-    - effect: !type:NestedEffect
-        proto: KillSign
-    - effect: !type:NestedEffect
-        proto: GibExplode
-    - effect: !type:Polymorph
-        prototype: AdminBreadSmite
-    - effect: !type:ForceEquipClothing
-        spawn: ClothingHeadHatCatEars
-        slot: head
     - effect: !type:AddComponents
         guidebookText: entity-effect-guidebook-add-accents
         components:
@@ -37,21 +28,3 @@
         - type: RussianAccent
         - type: BackwardsAccent
         - type: OhioAccent
-
-- type: entityEffect
-  id: KillSign
-  effects:
-  - !type:AddComponents
-    guidebookText: entity-effect-guidebook-add-killsign
-    components:
-    - type: KillSign
-
-- type: entityEffect
-  id: GibExplode
-  effects:
-  - !type:Explosion
-    explosionType: Default
-    maxIntensity: 4
-    maxTotalIntensity: 2
-    tileBreakScale: 0
-  - !type:Gib

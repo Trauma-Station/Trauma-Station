@@ -1,7 +1,7 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added AppearanceRatKing
+  parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision, BaseMobDestructible, BaseThirstSlowdown ] # Trauma - added AppearanceRatKing
   description: He's da rat. He make da roolz.
   components:
   # <Trauma>
@@ -29,7 +29,7 @@
   # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
-    baseWalkSpeed : 4.00
+    baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
   - type: InputMover
   - type: MobMover
@@ -84,22 +84,12 @@
       types:
         Slash: 12
         Piercing: 8
-  - type: Hunger # probably should be prototyped
-    thresholds:
-      Overfed: 400
-      Okay: 250
-      Peckish: 125
-      Starving: 50
-      Dead: 0
-    baseDecayRate: 0.01666666666
-  - type: Thirst
-    thresholds:
-      OverHydrated: 600
-      Okay: 450
-      Thirsty: 300
-      Parched: 150
-      Dead: 0
-    baseDecayRate: 0.1
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: RegalRatHunger
+      Thirst:
+        prototype: NormalSatiationThirst
   - type: DamageStateVisuals
     states:
       Alive:
@@ -128,6 +118,7 @@
     coefficient: 0.5 # rat king touches more wires, see?
   - type: Rummager
   - type: RatKing
+    molesAmmoniaPerDomain: 300 # Trauma
     hungerPerArmyUse: 25
     hungerPerDomainUse: 50
   - type: MobsterAccent
@@ -154,7 +145,7 @@
     guides:
     - MinorAntagonists
   - type: Tool
-    qualities: Slicing
+    qualities: [ Slicing ]
 
 - type: entity
   id: MobRatKingBuff
@@ -193,11 +184,10 @@
     guides:
     - MinorAntagonists
 
-
 - type: entity
   name: rat servant
   id: MobRatServant
-  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, MobNightVision ] # Trauma - added MobNightVision
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, BaseSlicingRefinable, BaseThirstSlowdown, MobNightVision ] # Trauma - added MobNightVision
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
@@ -219,8 +209,8 @@
   # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
-    baseWalkSpeed : 4.0
-    baseSprintSpeed : 4.0
+    baseWalkSpeed : 3.5
+    baseSprintSpeed : 3.5
   - type: InputMover
   - type: MobMover
   - type: HTN
@@ -264,7 +254,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 15 # Goob edit #Bulky by mouse standards...
+        density: 30 #Bulky by mouse standards...
         mask:
         - SmallMobMask
         layer:
@@ -273,12 +263,13 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      15: Dead #goob
+      15: Dead # Trauma - instead of crit at 15/dead at 30
   - type: Destructible
     thresholds:
     - trigger:
-        !type:DamageTrigger
-        damage: 10 # Trauma, was 15
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 10 # Trauma - was 60
       behaviors:
       - !type:GibBehavior
         deleteGibs: true # Trauma - no lag pls
@@ -300,22 +291,12 @@
       types:
         Slash: 5
         Piercing: 3
-  - type: Hunger # probably should be prototyped
-    thresholds:
-      Overfed: 200
-      Okay: 150
-      Peckish: 100
-      Starving: 50
-      Dead: 0
-    baseDecayRate: 0.01666666666
-  - type: Thirst
-    thresholds:
-      OverHydrated: 600
-      Okay: 450
-      Thirsty: 300
-      Parched: 150
-      Dead: 0
-    baseDecayRate: 0.1
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: RegalRatHunger
+      Thirst:
+        prototype: NormalSatiationThirst
   - type: DamageStateVisuals
     states:
       Alive:

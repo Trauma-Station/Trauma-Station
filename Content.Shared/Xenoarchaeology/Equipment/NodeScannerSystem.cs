@@ -34,6 +34,13 @@ public sealed partial class NodeScannerSystem : EntitySystem
             connected.NextUpdate = _timing.CurTime + connected.LinkUpdateInterval;
 
             var attachedArtifact = connected.AttachedTo;
+            // <Trauma>
+            if (TerminatingOrDeleted(attachedArtifact))
+            {
+                RemCompDeferred(uid, connected);
+                continue;
+            }
+            // </Trauma>
             var artifactCoordinates = Transform(attachedArtifact).Coordinates;
             if (!_transform.InRange(artifactCoordinates, transform.Coordinates, scanner.MaxLinkedRange))
             {

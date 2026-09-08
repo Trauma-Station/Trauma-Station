@@ -46,6 +46,8 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
     public bool ShowIFF { get; set; } = true;
     public bool ShowIFFShuttles { get; set; } = true;
     public bool ShowDocks { get; set; } = true;
+    public bool ShowCargoDocks { get; set; } = true;
+    public bool ShowArrivalDocks { get; set; } = true;
     public bool RotateWithEntity { get; set; } = true;
 
     public float MaximumIFFDistance { get; set; } = -1f; // Frontier
@@ -712,9 +714,12 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, vertices, color);
     }
 
+    /// <summary>
+    /// Draws the docking ports: Cargo, Arrivals and General(ShowDocks) on the radar. This is a separate method to avoid cluttering the main Draw method.
+    /// </summary>
     private void DrawDocks(DrawingHandleScreen handle, EntityUid uid, Matrix3x2 gridToView)
     {
-        if (!ShowDocks)
+        if (!ShowDocks && !ShowCargoDocks && !ShowArrivalDocks)
             return;
 
         const float dockScale = 0.6f;
@@ -754,7 +759,18 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
                 verts[2] = Vector2.Transform(position + bottomRight, gridToView);
                 verts[3] = Vector2.Transform(position + bottomLeft, gridToView);
 
-                handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color.WithAlpha(0.8f));
+                switch (state.Category)
+                {
+                    case LegendCategory.Cargo when !ShowCargoDocks:
+                    case LegendCategory.Arrivals when !ShowArrivalDocks:
+                    case LegendCategory.General when !ShowDocks:
+                        continue;
+                }
+
+                if (state.GridDockedWith == null)
+                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color.WithAlpha(0.8f));
+                else
+                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color.WithAlpha(0.2f));
                 handle.DrawPrimitives(DrawPrimitiveTopology.LineStrip, verts, color);
             }
         }

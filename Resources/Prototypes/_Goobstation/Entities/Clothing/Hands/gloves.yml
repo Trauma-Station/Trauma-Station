@@ -52,16 +52,17 @@
   description: A pair of highly-advanced gauntlets capable of ripping open doors. Its retractable claws are laced with a potent neurotoxin.
   components:
   - type: Sprite
-    sprite: _Goobstation/Clothing/Hands/Gloves/deathsquad.rsi
+    sprite: &deathsquad_sprite _Goobstation/Clothing/Hands/Gloves/deathsquad.rsi
   - type: Clothing
-    sprite: _Goobstation/Clothing/Hands/Gloves/deathsquad.rsi
+    sprite: *deathsquad_sprite
     equippedPrefix: gauntlet
   - type: Fiber
     fiberMaterial: fibers-classified
     fiberColor: fibers-pitch-black
   - type: Item
-    sprite: _Goobstation/Clothing/Hands/Gloves/deathsquad.rsi
+    sprite: *deathsquad_sprite
     heldPrefix: gauntlet
+    inhandVisuals: {} # use automatic layers instead
   - type: ClothingGrantComponent
     component:
     - type: Prying
@@ -90,22 +91,22 @@
       gauntlet: !type:ItemSwitchState
         verb: gauntlet
         sprite:
-          sprite: _Goobstation/Clothing/Hands/Gloves/deathsquad.rsi
+          sprite: *deathsquad_sprite
           state: icon
         components:
-          - type: MeleeWeapon
-            attackRate: 1.2
-            damage:
-              types:
-                Blunt: 32
-                Structural: 80
-            mustBeEquippedToUse: true
-            soundHit:
-              path: /Audio/_Goobstation/Weapons/Effects/metalcrush.ogg
-            canWideSwing: false
-          - type: StaminaDamageOnHit
-            damage: 45
-            overtime: 80
+        - type: MeleeWeapon
+          attackRate: 1.2
+          damage:
+            types:
+              Blunt: 32
+              Structural: 80
+          mustBeEquippedToUse: true
+          soundHit:
+            path: /Audio/_Goobstation/Weapons/Effects/metalcrush.ogg
+          canWideSwing: false
+        - type: StaminaDamageOnHit
+          damage: 45
+          overtime: 80
         soundStateActivate:
           collection: sparks
           params:
@@ -115,21 +116,21 @@
       claws: !type:ItemSwitchState
         verb: claws
         sprite:
-          sprite: _Goobstation/Clothing/Hands/Gloves/deathsquad.rsi
+          sprite: *deathsquad_sprite
           state: icon-on
         components:
-          - type: MeleeWeapon
-            attackRate: 2
-            autoAttack: true
-            damage:
-              types:
-                Slash: 25
-                Structural: 50
-                Cellular: 15 # Rip and tear until it is done.
-            mustBeEquippedToUse: true
-            soundHit:
-              path: /Audio/Weapons/bladeslice.ogg
-            canWideSwing: false
+        - type: MeleeWeapon
+          attackRate: 2
+          autoAttack: true
+          damage:
+            types:
+              Slash: 25
+              Structural: 50
+              Cellular: 15 # Rip and tear until it is done.
+          mustBeEquippedToUse: true
+          soundHit:
+            path: /Audio/Weapons/bladeslice.ogg
+          canWideSwing: false
         soundStateActivate:
           collection: sparks
           params:

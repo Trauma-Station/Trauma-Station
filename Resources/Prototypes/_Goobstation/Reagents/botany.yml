@@ -14,7 +14,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateHunger
+      - &feed_plant !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant ]
@@ -40,10 +41,7 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateHunger
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Plant ]
+      - *feed_plant
     Bloodstream:
       metabolismRate: 0.2 # powerful at healing diona, but slow
       effects:

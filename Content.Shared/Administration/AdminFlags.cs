@@ -130,11 +130,6 @@ namespace Content.Shared.Administration
         FullAdmin = 1 << 22,
 
         /// <summary>
-        /// Trauma - Lets you use the mentor help system.
-        /// </summary>
-        MentorHelp = 1 << 29,
-
-        /// <summary>
         /// Trauma - flag for adding watchlist to a player's notes.
         /// </summary>
         Watchlist = 1 << 30,

@@ -15,13 +15,16 @@ public sealed partial class HereticClothingComponent : Component
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
     [DataField]
+    public float DamagePopupProb = 0.25f;
+
+    [DataField]
     public DamageSpecifier DamageOverTime = new()
     {
         DamageDict = new()
         {
-            { "Blunt", 2f},
-            { "Slash", 2f},
-            { "Piercing", 2f},
+            { "Blunt", 2f },
+            { "Slash", 2f },
+            { "Piercing", 2f },
         }
     };
 }

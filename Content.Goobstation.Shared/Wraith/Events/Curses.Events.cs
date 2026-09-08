@@ -20,8 +20,8 @@ public sealed partial class ApplyCurseActionEvent : EntityTargetActionEvent
     /// <summary>
     /// The curse to apply to the target
     /// </summary>
-    [DataField]
-    public ProtoId<CursePrototype>? Curse;
+    [DataField(required: true)]
+    public ProtoId<CursePrototype> Curse;
 
     /// <summary>
     /// The sound the curse makes on the target
@@ -41,13 +41,6 @@ public sealed partial class ApplyCurseActionEvent : EntityTargetActionEvent
     [DataField]
     public LocId? Popup;
 };
-
-/// <summary>
-/// Raised before a curse gets applied on an entity
-/// </summary>
-/// <param name="Target"></param> The target trying to apply the curse to
-[ByRefEvent]
-public record struct AttemptCurseEvent(EntityUid Entity, EntityUid Curser, bool Cancelled = false);
 
 /// <summary>
 /// Raised to the target once a curse is applied to them

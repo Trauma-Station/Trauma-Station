@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ConstructibleMachine, BaseMachinePowered ]
+  parent: [ ConstructibleMachine, BaseMachinePowered, BaseConstructibleMachineDestructible ]
   id: RoboticArm
   name: robotic arm
   description: A high-tech robotic arm capable of moving items to and from machines that have automation upgrades.

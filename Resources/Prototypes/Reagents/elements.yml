@@ -263,6 +263,17 @@
   color: "#364266"
   boilingPoint: 3265.0
   meltingPoint: 1414.0
+  # <Trauma>
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        splitDamage: Split
+        damage:
+          types:
+            Ion: -3
+  # </Trauma>
   metabolisms:
     Bloodstream:
       effects:

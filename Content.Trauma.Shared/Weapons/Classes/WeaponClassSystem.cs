@@ -13,6 +13,9 @@ namespace Content.Trauma.Shared.Weapons.Classes;
 public sealed partial class WeaponClassSystem : EntitySystem
 {
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityQuery<WeaponClassComponent> _query = default!;
+
+    public static readonly ProtoId<WeaponClassPrototype> Unarmed = "Unarmed";
 
     public override void Initialize()
     {
@@ -52,6 +55,12 @@ public sealed partial class WeaponClassSystem : EntitySystem
         var level = GetSkillLevel(proto, args.User);
         args.Modifier /= proto.AimSpeed.GetCurve(level);
     }
+
+    /// <summary>
+    /// Whether an attack counts as unarmed, either bare handed or using an unarmed class weapon like gloves.
+    /// </summary>
+    public bool IsUnarmed(EntityUid user, EntityUid weapon)
+        => user == weapon || _query.TryComp(weapon, out var comp) && comp.Class == Unarmed;
 
     public int GetSkillLevel(Entity<WeaponClassComponent> ent, EntityUid user)
         => GetSkillLevel(ProtoMan.Index(ent.Comp.Class), user);

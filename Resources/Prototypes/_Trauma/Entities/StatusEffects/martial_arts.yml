@@ -30,11 +30,29 @@
     sprintSpeedModifier: 0.5
     walkSpeedModifier: 0.5
 
-# for capoeira circle kick, the speed is determined by power
+# for capoeira circle kick
 - type: entity
   parent: StatusEffectSlowdown
   id: CircleKickSlowdownStatusEffect
   name: circle kick slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.6
+    walkSpeedModifier: 0.6
+
+# for capoeira push kick
+- type: entity
+  parent: MobStatusEffectBase
+  id: PushKickVulnerabilityStatusEffect
+  name: winded
+  components:
+  - type: MeleeVulnerabilityStatusEffect
+    applyToArmed: true
+    modifiers:
+      coefficients:
+        Blunt: 1.25
+        Slash: 1.25
+        Piercing: 1.25
 
 # for armstrong machine gun fist
 - type: entity

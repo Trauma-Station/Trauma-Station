@@ -69,6 +69,7 @@
           Reporter: [ 1, 1 ]
           RadioHost: [ 1, 1 ]
           Lawyer: [ 3, 3 ]
+          DClass: [ -1, -1 ]
       - type: StationBlobConfig
         stageBegin: 40
         stageCritical: 450

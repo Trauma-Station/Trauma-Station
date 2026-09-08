@@ -157,7 +157,7 @@ namespace Content.Server.Power.EntitySystems
             if (component != null)
                 return true;
 
-            if (!TryComp(entity, out ApcPowerReceiverComponent? receiver))
+            if (!_recQuery.TryComp(entity, out var receiver)) // Trauma - use the query
                 return false;
 
             component = receiver;

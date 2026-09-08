@@ -117,6 +117,9 @@
     beamTime: 10
     beamSound:
       path: /Audio/_Goobstation/Heretic/stargazer/beam_loop_one.ogg
+    targetPart: All
+    splitDamageBehavior: SplitEnsureAll
+    limbDamageCompensation: true
     damage:
       types:
         Heat: 10

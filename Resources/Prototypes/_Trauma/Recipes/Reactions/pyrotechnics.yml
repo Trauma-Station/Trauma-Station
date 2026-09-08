@@ -56,3 +56,31 @@
       amount: 1
   products:
     Octogen: 4
+
+- type: reaction
+  id: Burnite
+  reactants:
+    ChlorineTrifluoride:
+      amount: 2
+    WeldingFuel:
+      amount: 1
+    LemonadeLemonade:
+      amount: 2
+    Phlogiston:
+      amount: 5
+    Crabon: # Unironically just here to make it more annoying.
+      amount: 5
+  products:
+    Burnite: 15
+
+- type: reaction
+  id: UnknownReagent
+  reactants:
+    HolyChlorineTrifluoride:
+      amount: 30
+    Burnite:
+      amount: 30
+    Vestine:
+      amount: 30
+  products:
+    UnknownReagent: 30

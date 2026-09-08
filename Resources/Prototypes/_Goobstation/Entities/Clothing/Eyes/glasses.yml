@@ -136,7 +136,7 @@
         type: ChameleonBoundUserInterface
   - type: KnowledgeGrantOnWear # Silly
     skills:
-      MartialArtKravMaga: 10
+      MartialArtKravMaga: 100
     experience:
       MartialArtKravMaga: 2
   - type: Tag
@@ -189,8 +189,10 @@
     damageContainers:
     - Biological
     - Inorganic
-  - type: ShowHungerIcons
-  - type: ShowThirstIcons
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
+    - Thirst
 
 - type: entity
   parent: [ClothingEyesBase, ClothingEyesGlassesSunglasses, ShowHealthRelatedIcons]

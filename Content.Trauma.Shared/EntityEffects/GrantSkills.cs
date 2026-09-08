@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 
 namespace Content.Trauma.Shared.EntityEffects;
@@ -21,12 +20,13 @@ public sealed partial class GrantSkills : EntityEffectBase<GrantSkills>
         => null;
 }
 
-public sealed partial class GrantSkillsEffectSystem : EntityEffectSystem<KnowledgeHolderComponent, GrantSkills>
+public sealed partial class GrantSkillsEffectSystem : EntityEffectSystem<MetaDataComponent, GrantSkills>
 {
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
-    protected override void Effect(Entity<KnowledgeHolderComponent> ent, ref EntityEffectEvent<GrantSkills> args)
+    protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<GrantSkills> args)
     {
+        _knowledge.EnsureKnowledgeContainer(ent);
         _knowledge.AddKnowledgeUnits(ent, args.Effect.Skills);
     }
 }

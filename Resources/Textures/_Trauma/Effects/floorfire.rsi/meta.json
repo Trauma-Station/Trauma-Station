@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by SuddentlySentient",
+  "copyright": "Created by SuddentlySentient, hellfire, holyfire, and glitchfire variants edited by MayasMischief",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,18 @@
   "states": [
     {
       "name": "floorfire",
+      "delays": [[0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]]
+    },
+    {
+      "name": "hellfire",
+      "delays": [[0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]]
+    },
+    {
+      "name": "holyfire",
+      "delays": [[0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]]
+    },
+    {
+      "name": "glitchfire",
       "delays": [[0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]]
     }
   ]

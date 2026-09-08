@@ -25,6 +25,7 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
     public override void Initialize()
     {
         SubscribeLocalEvent<ReactiveComponent, ReactionEntityEvent>(OnReactive);
+        SubscribeLocalEvent<EntityEffectOnMapInitComponent, MapInitEvent>(OnMapInit);
     }
 
     private void OnReactive(Entity<ReactiveComponent> entity, ref ReactionEntityEvent args)
@@ -74,6 +75,11 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
                     ApplyEffects(entity, entry.Effects, scale);
             }
         }
+    }
+
+    private void OnMapInit(Entity<EntityEffectOnMapInitComponent> entity, ref MapInitEvent args)
+    {
+        ApplyEffects(entity, entity.Comp.Effects);
     }
 
     /// <inheritdoc cref="ApplyEffects(EntityUid,EntityEffect[],float,EntityUid?)"/>

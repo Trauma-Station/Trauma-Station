@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: StatusEffectClumsyClown
+  id: StatusEffectClumsyWizard
+
+- type: entity
+  parent: StatusEffectClumsyClown
+  id: StatusEffectClumsyMutation
+
+- type: entity
+  parent: StatusEffectClumsyClown
+  id: StatusEffectClumsyDevil
+
+- type: entity
+  parent: StatusEffectClumsyClown
+  id: StatusEffectClumsyCurse
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectClumsyDecapoid
+  name: decapoid claws
+  components:
+  - type: ClumsyCatchStatusEffect
+    failDamage: {}
+    clumsySound: &SoundDecapoid
+      path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg
+  - type: ClumsyGunStatusEffect
+    failDamage: {}
+    clumsySound: *SoundDecapoid
+    failedMessage: gun-clumsy-decapoid
+
+- type: entity
+  parent: [ StatusEffectClumsyAll, MobStatusEffectBase ]
+  id: StatusEffectClumsyScurret
+  components:
+  - type: ClumsyCatchStatusEffect
+    clumsySound: &SoundScurret
+      path: /Audio/Animals/wawa_protest.ogg
+  - type: ClumsyDefibStatusEffect
+    clumsySound: *SoundScurret
+  - type: ClumsyGunStatusEffect
+    clumsySound: *SoundScurret
+  - type: ClumsyInjectorStatusEffect
+    clumsySound: *SoundScurret
+  - type: ClumsyVaultStatusEffect
+    clumsySound: *SoundScurret

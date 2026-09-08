@@ -119,9 +119,10 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
                 {
                     ConvertEntity(convertedEnt, conversion);
                 }
-                else if (TryComp<CosmicCorruptibleComponent>(convertedEnt, out var corruptible))
+                else if (TryComp<CosmicCorruptibleComponent>(convertedEnt, out var corruptible)
+                && corruptible.ConvertTo is { } result)
                 {
-                    ConvertEntity(convertedEnt, corruptible.ConvertTo);
+                    ConvertEntity(convertedEnt, result);
                 }
             }
 

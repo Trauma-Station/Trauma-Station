@@ -128,3 +128,6 @@
   - type: ActionGrant
     actions:
     - ActionViewLaws
+  - type: NpcFactionMember
+    factions:
+    - Passive

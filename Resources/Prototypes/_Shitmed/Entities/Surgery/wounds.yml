@@ -227,21 +227,13 @@
     damageType: Ion
     scarWound: BurnScar
   - type: TraumaInflicter
-    severityThreshold: 17
-    allowedTraumas:
-#    - OrganDamage
-#    - BoneDamage
-    - VeinsDamage
-    allowArmourDeduction:
-    - OrganDamage # No matter what ultrasuperduper cool armour you have, while getting fucking boiled alive - YOUR VEINS AND NERVES WILL HURT.
-    - BoneDamage
+    severityThreshold: 0
+    allowedTraumas: []
     traumasChances:
       Dismemberment: 0
-#      OrganDamage: -0.12
-#      BoneDamage: -0.21
-      VeinsDamage: 0.34
-    mangledMultipliers:
-      BoneDamage: 1
+      OrganDamage: 0
+      BoneDamage: 0
+      VeinsDamage: 0
 
 - type: entity
   id: Cold

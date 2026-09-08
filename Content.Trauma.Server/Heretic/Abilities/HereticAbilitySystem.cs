@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
 using Content.Server.Flash;
@@ -13,6 +12,7 @@ using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;

@@ -42,7 +42,6 @@ blob-target-factory-blob-invalid = Wrong blob type, select a factory blob.
 blob-target-node-blob-invalid = Wrong blob type, select a node blob.
 blob-target-close-to-resource = Too close to another resource blob.
 blob-target-nearby-not-node = No node or resource blob nearby.
-blob-target-close-to-node = Too close to another node.
 blob-target-already-produce-blobbernaut = This factory has already produced a blobbernaut.
 blob-cant-split = You can not split the blob core.
 blob-not-have-nodes = You have no nodes.

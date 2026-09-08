@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
 using Content.Shared.Contraband;
+using Content.Trauma.Common.Effects;
 using Content.Trauma.Common.Polymorph;
 // </Trauma>
 using Content.Shared.Actions;
@@ -31,7 +31,7 @@ namespace Content.Shared.Polymorph.Systems;
 public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private CommonSparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
@@ -71,7 +71,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 
     private void OnDisguiseInteractHand(Entity<ChameleonDisguiseComponent> ent, ref InteractHandEvent args)
     {
-        TryReveal(ent.Comp.User);
+        TryReveal(ent.Comp.User, args.User); // Trauma - pass the event's user
         args.Handled = true;
     }
 
@@ -103,7 +103,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
     private void OnDisguiseBeforeEquippedHand(Entity<ChameleonDisguiseComponent> ent, ref BeforeGettingEquippedHandEvent args)
     {
         args.Cancelled = true;
-        TryReveal(ent.Comp.User);
+        TryReveal(ent.Comp.User, args.User); // Trauma - pass the event's user
     }
 
     #endregion
@@ -138,7 +138,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
             return;
 
         // We don't toggle here as this is only called when we subscribe to being toggled off.
-        TryReveal(ent.Comp.Disguised.Value);
+        TryReveal(ent.Comp.Disguised.Value, args.User); // Trauma - pass the event's user
     }
 
     private void OnGetVerbs(Entity<ChameleonProjectorComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
@@ -241,9 +241,11 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
     {
         var proj = ent.Comp;
 
+        /* Trauma - yes prediction
         // no spawning prediction sorry
         if (_net.IsClient)
             return;
+        */
 
         // reveal first to allow quick switching
         if (ent.Comp.Disguised != null)
@@ -255,7 +257,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
 
         proj.Disguised = user;
 
-        var disguise = SpawnAttachedTo(proj.DisguiseProto, user.ToCoordinates());
+        var disguise = PredictedSpawnAttachedTo(proj.DisguiseProto, user.ToCoordinates()); // Trauma - predict it
 
         var disguised = EnsureComp<ChameleonDisguisedComponent>(user);
         disguised.Disguise = disguise;
@@ -282,13 +284,14 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         // </Trauma>
 
         _appearance.CopyData(entity, disguise);
-        _sparks.DoSparks(Transform(user).Coordinates); // Goob
+        _sparks.DoSparks(user, user); // Trauma
     }
 
     /// <summary>
     /// Removes the disguise, if the user is disguised.
     /// </summary>
-    public bool TryReveal(Entity<ChameleonDisguisedComponent?> ent)
+    public bool TryReveal(Entity<ChameleonDisguisedComponent?> ent,
+        EntityUid? user = null) // Trauma
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
@@ -301,7 +304,7 @@ public abstract partial class SharedChameleonProjectorSystem : EntitySystem
         _toggle.TryDeactivate(disguise.Projector);
 
         RemComp<ChameleonDisguisedComponent>(ent);
-        _sparks.DoSparks(Transform(ent).Coordinates); // Goob
+        _sparks.DoSparks(ent, user); // Trauma
         return true;
     }
 

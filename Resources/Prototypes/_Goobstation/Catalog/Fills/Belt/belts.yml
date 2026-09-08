@@ -77,16 +77,6 @@
           amount: 3
 
 - type: entity
-  id: ClothingBeltSheathFilledNavyOfficer
-  parent: ClothingBeltSheath
-  suffix: Filled, Navy Officer
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      item:
-        id: NavyOfficerSabre
-
-- type: entity
   id: ClothingBeltSheathHeadOfSecurityFilled
   parent: ClothingBeltSheathHeadOfSecurity
   suffix: Filled, Head Of Security

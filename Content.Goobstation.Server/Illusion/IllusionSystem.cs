@@ -59,8 +59,7 @@ public sealed partial class IllusionSystem : EntitySystem
     [
         typeof(RespiratorComponent),
         typeof(BarotraumaComponent),
-        typeof(HungerComponent),
-        typeof(ThirstComponent),
+        typeof(SatiationComponent),
         typeof(ReproductiveComponent),
         typeof(ReproductivePartnerComponent),
         typeof(TemperatureComponent),

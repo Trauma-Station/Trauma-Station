@@ -38,24 +38,24 @@
     noMindState: xenoborg_engi_e_r
     moduleWhitelist:
       tags:
+      # <Trauma>
+      - BorgModuleJanitor
+      # </Trauma>
       - XenoborgModuleGeneric
       - XenoborgModuleEngi
-      - BorgModuleEngineering
-      - BorgModuleGeneric
-      - BorgModuleJanitor # Trauma
   - type: ContainerFill
     containers:
       borg_brain:
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - BorgModuleAdvancedTool
-      - BorgModuleConstruction
-      - BorgModuleRCD
-      - BorgModuleCable
+      - XenoborgModuleAdvancedTool
+      - XenoborgModuleConstruction
       - XenoborgModuleAccessBreaker
-      - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning # Trauma
+      - XenoborgModuleTileGun
+      # <Trauma>
+      - BorgModuleAdvancedCleaning
+      # <Trauma>
   - type: ShowElectrocutionHUD
   - type: ShowHealthBars
     damageContainers:
@@ -339,13 +339,13 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - BorgModuleAdvancedTool
-      - BorgModuleConstruction
-      - BorgModuleRCD
-      - BorgModuleCable
+      - XenoborgModuleAdvancedTool
+      - XenoborgModuleConstruction
       - XenoborgModuleAccessBreaker
-      - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning # Trauma
+      - XenoborgModuleTileGun
+      # <Trauma>
+      - BorgModuleAdvancedCleaning
+      # </Trauma>
   - type: ItemSlots
     slots:
       cell_slot:

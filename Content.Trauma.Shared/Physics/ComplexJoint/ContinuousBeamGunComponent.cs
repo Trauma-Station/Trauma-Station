@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Audio;
@@ -15,7 +17,7 @@ public sealed partial class ContinuousBeamGunComponent : Component
     public EntityUid? Endpoint;
 
     [DataField, AutoNetworkedField]
-    public MapCoordinates? CursorPosition;
+    public EntityCoordinates? ShootCoordinates;
 
     [DataField]
     public EntityUid? BeamSoundEnt;
@@ -70,6 +72,15 @@ public sealed partial class ContinuousBeamGunComponent : Component
 
     [DataField(required: true)]
     public DamageSpecifier Damage = new();
+
+    [DataField]
+    public SplitDamageBehavior SplitDamageBehavior = SplitDamageBehavior.Split;
+
+    [DataField]
+    public TargetBodyPart? TargetPart;
+
+    [DataField]
+    public bool LimbDamageCompensation;
 
     [DataField]
     public EntityEffect[]? Effects;

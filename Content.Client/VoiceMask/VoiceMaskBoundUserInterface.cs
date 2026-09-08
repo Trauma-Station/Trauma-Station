@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Shared.VoiceMask;
+using Content.Goobstation.Common.VoiceMask;
 using Content.Shared.StatusIcon;
 // </Trauma>
 using Content.Shared.VoiceMask;
