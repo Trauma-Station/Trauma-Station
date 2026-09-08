@@ -14226,3 +14226,56 @@ Entries:
   id: 1551
   time: '2026-09-06T14:37:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4477
+- author: luminargh
+  changes:
+  - type: Add
+    message: New lobby music, "Race to Evac"
+  id: 1552
+  time: '2026-09-06T22:05:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4480
+- author: Bon-Man
+  changes:
+  - type: Tweak
+    message: Lowered the damage of exosuit drills
+  id: 1553
+  time: '2026-09-07T05:58:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4485
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed book banning.
+  id: 1554
+  time: '2026-09-07T07:45:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4490
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Medical borgs can now pick up and hold body bags
+  id: 1555
+  time: '2026-09-07T07:54:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4432
+- author: jshoe2
+  changes:
+  - type: Remove
+    message: Rude buster upgrade from necropolis chest drops
+  - type: Tweak
+    message: Lowered crafting skill requirements on crusher upgrades
+  id: 1556
+  time: '2026-09-07T12:02:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4491
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The draft is over.
+  id: 1557
+  time: '2026-09-07T12:17:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4492
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed lemoons creating plants when harvested and not being able to mutate
+      into lemonades.
+  id: 1558
+  time: '2026-09-07T12:30:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4493

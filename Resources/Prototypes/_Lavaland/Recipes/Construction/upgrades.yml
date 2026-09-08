@@ -7,7 +7,7 @@
   targetNode: crystal
   objectType: Item
   theory:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 1
 
 - type: construction
   id: CrusherUpgradeLavaCrystalConstruction
@@ -16,7 +16,7 @@
   targetNode: crystal
   objectType: Item
   theory:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 1
 
 - type: construction
   id: CrusherUpgradeIceCrystalConstruction
@@ -25,4 +25,4 @@
   targetNode: crystal
   objectType: Item
   theory:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 1
