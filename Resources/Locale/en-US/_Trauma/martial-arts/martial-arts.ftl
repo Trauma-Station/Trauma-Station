@@ -64,6 +64,7 @@ cqc-kick = WHAM!
 cqc-restrain = Grab!
 cqc-pressure = Slap!
 cqc-consecutive = CONSECUTIVE! C! Q! C!
+cqc-leg-sweep = Hiya!
 spacebear-bearjaws = BITE!
 spacebear-pawslam = PAW SLAM!
 spacebear-smokey = SMOKEY!

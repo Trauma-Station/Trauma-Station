@@ -25,16 +25,6 @@
   id: Dementia
 
 - type: statusEffect
-  id: DragonPower
-  alert: DragonPower
-  alwaysAllowed: true
-
-- type: statusEffect
-  id: LossOfSurprise
-  alert: LossOfSurprise
-  alwaysAllowed: true
-
-- type: statusEffect
   id: Fleshmend
   alert: Fleshmend
   alwaysAllowed: true
