@@ -4,7 +4,7 @@
   abstract: true
   id: BaseRevComponent
   categories: [ Parts ]
-  completetime: 15
+  completetime: 12 # 5 Parts per minute instead of 4
   materials:
     Steel: 10
 

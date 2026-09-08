@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 using Content.Trauma.Common.Emag;
 // </Trauma>
 using Content.Shared.Administration.Logs;
@@ -92,7 +92,7 @@ public sealed partial class EmagSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString(ent.Comp.SuccessText, ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.Medium); // Trauma - unhardcode the loc id
 
         _audio.PlayPredicted(ent.Comp.EmagSound, ent, ent);
-        _sparks.DoSparks(target); // Trauma
+        _sparks.DoSparks(target, user: user); // Trauma
 
         _adminLogger.Add(LogType.Emag, LogImpact.High, $"{ToPrettyString(user):player} emagged {ToPrettyString(target):target} with flag(s): {typeToUse}");
 

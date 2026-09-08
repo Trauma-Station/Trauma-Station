@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Effects;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Destructible.Thresholds;
@@ -8,6 +7,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
+using Content.Trauma.Shared.Effects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -25,7 +25,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
-    [Dependency] private CommonSparksSystem _sparks = default!;
+    [Dependency] private SparksSystem _sparks = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
@@ -69,14 +69,14 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         var oldCoords = Transform(target).Coordinates;
         if (sound)
             _audio.PlayPredicted(rtp.Comp.DepartureSound, oldCoords, predicted ? user : null);
-        _sparks.DoSparks(oldCoords, predicted: predicted, source: rtp); // different source entity from below so they use different rng seeds
+        _sparks.DoSparks(oldCoords, user, source: rtp); // different source entity from below so they use different rng seeds
 
         finalWorldPos = RandomTeleport(target, rtp.Comp.Radius, rtp.Comp.TeleportAttempts, rtp.Comp.ForceSafeTeleport, rtp.Comp.TeleportPulled);
 
         var newCoords = Transform(target).Coordinates;
         if (sound)
             _audio.PlayPredicted(rtp.Comp.ArrivalSound, oldCoords, predicted ? user : null);
-        _sparks.DoSparks(newCoords, predicted: predicted, source: user);
+        _sparks.DoSparks(newCoords, user);
 
         return true;
     }

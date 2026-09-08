@@ -22,7 +22,7 @@ public partial class GoobInventorySystem
     {
         base.Initialize();
         SubscribeLocalEvent<InventoryComponent, DelayedKnockdownAttemptEvent>(RelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, GetFlashbangedEvent>(RelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, GetFlashbangedEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, FlashDurationMultiplierEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSpellInvocationEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetMessageColorOverrideEvent>(RelayInventoryEvent);

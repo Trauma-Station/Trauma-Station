@@ -40,7 +40,7 @@ public abstract partial class SharedSericultureSystem : EntitySystem
 
     private void OnClone(Entity<SericultureComponent> ent, ref CloningEvent args)
     {
-        if(!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
+        if (!args.Settings.EventComponents.Contains(Factory.GetRegistration(ent.Comp.GetType()).Name))
             return;
 
         // Make sure to set the datafields before adding the component so that the correct action gets spawned on map init.

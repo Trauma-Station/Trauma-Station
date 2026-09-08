@@ -85,7 +85,7 @@ public sealed class ChemiCompilerTest : GameTest
         {
             uid = SEntMan.SpawnAtPosition(Machine, map.GridCoords);
             // these tests aren't about the power grid
-            SEntMan.RemoveComponent<ApcPowerReceiverComponent>(uid);
+            SRemComp<ApcPowerReceiverComponent>(uid);
             _machine = SEntMan.GetNetEntity(uid);
 
             var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
@@ -170,7 +170,7 @@ public sealed class ChemiCompilerTest : GameTest
         for (var i = 0; i < 20 && !running; i++)
         {
             await RunTicksSync(1);
-            await Server.WaitPost(() => running = SEntMan.HasComponent<ActiveChemiCompilerComponent>(uid));
+            await Server.WaitPost(() => running = SHasComp<ActiveChemiCompilerComponent>(uid));
         }
 
         Assert.That(running, "The run message never started the program");
@@ -180,7 +180,7 @@ public sealed class ChemiCompilerTest : GameTest
     /// True if the machine is still working through a program.
     /// </summary>
     private bool IsRunning(EntityUid uid)
-        => SEntMan.HasComponent<ActiveChemiCompilerComponent>(uid);
+        => SHasComp<ActiveChemiCompilerComponent>(uid);
 
     /// <summary>
     /// Saves a program into slot 1, runs it, and waits for it to stop.
@@ -470,10 +470,10 @@ public sealed class ChemiCompilerTest : GameTest
 
         await Server.WaitAssertion(() =>
         {
-            Assert.That(SEntMan.HasComponent<MaterialStorageComponent>(uid),
+            Assert.That(SHasComp<MaterialStorageComponent>(uid),
                 "The machine has nowhere to keep glass, so this test proves nothing");
 
-            var comp = SEntMan.GetComponent<ChemiCompilerComponent>(uid);
+            var comp = SComp<ChemiCompilerComponent>(uid);
             Assert.That(Stored(uid, comp.VialCost), Is.Zero,
                 "The machine started with glass in it");
         });
@@ -928,8 +928,8 @@ public sealed class ChemiCompilerTest : GameTest
 
         await Server.WaitAssertion(() =>
         {
-            Assert.That(SEntMan.HasComponent<SpeechComponent>(uid), Is.True,
-                "The machine can't speak, so . has nowhere to put its output");
+            Assert.That(SHasComp<SpeechComponent>(uid), Is.True,
+                "The machine can't speak, so it has nowhere to put its output");
         });
 
         // 'A' is 65, then bump to 'B'. the nops keep the program alive while the buffer is inspected.

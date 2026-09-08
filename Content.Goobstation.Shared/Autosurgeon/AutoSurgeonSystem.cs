@@ -150,8 +150,8 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnExamined(Entity<AutoSurgeonComponent> ent, ref ExaminedEvent args)
     {
-        var key = ent.Comp.Used ? "un" : "";
-        args.PushMarkup(Loc.GetString("gun-cartridge-{key}ent"));
+        var key = ent.Comp.Used ? "un" : "sp";
+        args.PushMarkup(Loc.GetString($"gun-cartridge-{key}spent"));
     }
 }
 

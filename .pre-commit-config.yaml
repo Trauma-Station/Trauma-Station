@@ -9,7 +9,7 @@ repos:
   # File checkers
   - id: check-yaml
     # only check prototypes, maps would be too slow
-    files: "^Resources/Prototypes/_Trauma/.*\\.yml$"
+    files: "^Resources/(Prototypes/_Trauma|Partials)/.*\\.yml$"
     # !type:... doesn't work without somehow loading SS14, which would probably make commits take years
     args: ["--unsafe"]
   - id: check-json
@@ -49,7 +49,7 @@ repos:
     language: python
     args: ["-c", "^(\\s*#[^\\n]*\\n)*\\s*", "-H", "# SPDX-License-Identifier: AGPL-3.0-or-later"]
     # Applies to all prototypes from AGPL codebases
-    files: "^Resources/Prototypes/_(DV|EinsteinEngines|Goobstation|Lavaland|Mono|NF|Shitmed|SimpleStation|Trauma)/.*\\.yml$"
+    files: "^Resources/(Partials|Prototypes/_(DV|EinsteinEngines|Goobstation|Lavaland|Mono|NF|Shitmed|SimpleStation|Trauma))/.*\\.yml$"
 
 ci:
   autofix_commit_msg: "[pre-commit] automated pr fixes"

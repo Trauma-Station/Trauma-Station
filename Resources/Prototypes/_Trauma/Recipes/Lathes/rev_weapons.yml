@@ -26,6 +26,9 @@
   parent: BaseRevWeapon
   id: RevKnife
   result: RevKnifeBlade
+  completetime: 5
+  materials:
+    Steel: 250
 
 - type: latheRecipe
   parent: BaseRevWeapon

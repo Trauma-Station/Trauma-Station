@@ -164,6 +164,11 @@ TaskJug: Jug
 
 # 2026-08-24
 LightReplacerEmpty: LightReplacer
+
+# 2026-08-30
+MachinePowerTransmissionLaser: null
+MachinePowerTransmissionLaserCrate: null
+MachinePowerTransmissionLaserFlatpack: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

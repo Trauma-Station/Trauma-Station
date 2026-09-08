@@ -15,4 +15,10 @@ public sealed partial class RadioWhitelistSystem : EntitySystem
     {
         args.Cancelled |= _whitelist.IsWhitelistFail(args.Channel.ReceiveWhitelist, ent.Owner);
     }
+
+    [SubscribeLocalEvent]
+    private void OnHeadsetReceiveAttempt(Entity<HeadsetComponent> ent, ref RadioReceiveAttemptEvent args)
+    {
+        args.Cancelled |= _whitelist.IsWhitelistFail(args.Channel.ReceiveWhitelist, ent.Owner);
+    }
 }
