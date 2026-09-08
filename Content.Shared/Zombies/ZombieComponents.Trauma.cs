@@ -1,6 +1,4 @@
-﻿// <Trauma>
-using Content.Trauma.Common.Language;
-// </Trauma>
+﻿using Content.Trauma.Common.Language;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Zombies;
