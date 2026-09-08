@@ -1,4 +1,4 @@
-﻿// <Trauma>
+// <Trauma>
 using Content.Trauma.Common.Language;
 // </Trauma>
 using Robust.Shared.Prototypes;
