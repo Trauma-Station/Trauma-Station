@@ -333,14 +333,14 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
             return;
         }
 
+        var payload = new SurveillanceCameraHeartbeatRequestPayload();
         // <Trauma> - send it to all routers instead of just the active one, use cameraAddress param
-        var payload = new SurveillanceCameraHeartbeatPayload();
         foreach (var (subnet, subnetAddress) in monitor.KnownSubnets)
         {
             var freq = ProtoMan.Index(subnet).Frequency;
             _deviceNetworkRouter.SendPacketRouted(uid, ref payload, subnetAddress, cameraAddress, freq);
-            monitor.LastHeartbeatSent = 0;
         }
+        monitor.LastHeartbeatSent = 0;
         // </Trauma>
     }
 
@@ -544,6 +544,10 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         _surveillanceCameras.SwitchActiveViewers(monitor.ActiveCamera.Value, camera, monitor.Viewers, uid);
 
         monitor.ActiveCamera = camera;
+
+        // Reset the heartbeat timers for the new device.
+        monitor.LastHeartbeat = 0;
+        monitor.LastHeartbeatSent = 0;
 
         UpdateUserInterface(uid, monitor);
     }
