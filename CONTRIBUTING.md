@@ -185,6 +185,11 @@ This causes less conflicts with upstream for 2 reasons:
 
 However, **use partial prototypes instead** for YML to make conflicts **impossible** and make certain things like adding a single tag easier, without having to copy paste the parent's tags and hope they never get changed.
 
+## Sprite Changes
+
+If you are respriting anything from upstream you **do not need** to make a new rsi in `_Trauma/`. Just amend the copyright line and keep new states at the top of the list.
+This doesn't apply to entirely new sprites, such as icons for a new job.
+
 ## Changelogs
 
 Firstly do not make changelogs for irrelevant things players won't notice.

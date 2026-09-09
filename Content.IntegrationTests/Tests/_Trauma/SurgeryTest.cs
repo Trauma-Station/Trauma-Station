@@ -26,9 +26,9 @@ public sealed class SurgeryTest : InteractionTest
     [SidedDependency(Side.Server)] private DamageableSystem _damage = default!;
     [SidedDependency(Side.Server)] private SharedCombatModeSystem _combat = default!;
     [SidedDependency(Side.Server)] private SharedMeleeWeaponSystem _melee = default!;
-    //[SidedDependency(Side.Server)] private SharedSurgerySystem _surgery = default!;
     [SidedDependency(Side.Server)] private SharedTargetingSystem _targeting = default!;
     [SidedDependency(Side.Server)] private StandingStateSystem _standing = default!;
+    //[SidedDependency(Side.Server)] private SurgerySystem _surgery = default!;
     [SidedDependency(Side.Server)] private TraumaSystem _trauma = default!;
     [SidedDependency(Side.Server)] private WoundSystem _wound = default!;
 

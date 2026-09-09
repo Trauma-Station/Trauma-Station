@@ -14279,3 +14279,82 @@ Entries:
   id: 1558
   time: '2026-09-07T12:30:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4493
+- author: paige404
+  changes:
+  - type: Fix
+    message: (S)laughterdemons have remembered how to speak.
+  id: 1559
+  time: '2026-09-08T06:21:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4512
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Double-bladed energy sword now only has 8 total reflects instead of 16
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now only gives +10% speed for landing a light
+      attack on someone
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now does 13 slash, 13 heat which is 30 damage
+      total if you include the skill chip
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now only has 2x limb severity multiplier for
+      heat and slash damage
+  id: 1560
+  time: '2026-09-08T07:29:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4509
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Surgery sepsis damage is now limited to 90 poison per part.
+  id: 1561
+  time: '2026-09-08T07:38:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4514
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed flesh stalkers instantly healing on shapeshift.
+  - type: Remove
+    message: Removed voiceless dead damage bonus and bleeding steel effect on blades.
+  - type: Tweak
+    message: Ash jaunt is 1 second longer (so same as before).
+  - type: Fix
+    message: Fix flesh path being able to make more ghouls than intended.
+  id: 1562
+  time: '2026-09-08T10:10:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4474
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added back CQC's Leg Sweep move.
+  - type: Tweak
+    message: >-
+      Most martial arts moves are more in depth with sounds, throwing,
+      requirements, etc.n
+  - type: Remove
+    message: Removed Capoeira's kickup move, everyone can do it anyway.
+  - type: Remove
+    message: >-
+      Removed slop level requirements for some martial art moves, they always do
+      the same thing now.
+  - type: Tweak
+    message: Most martial art books/scrolls now give you master level in the skill.
+  id: 1563
+  time: '2026-09-08T11:57:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4518
+- author: luminargh
+  changes:
+  - type: Add
+    message: Zombies now speak Zombish
+  id: 1564
+  time: '2026-09-08T17:07:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4507
+- author: Evoluxionary
+  changes:
+  - type: Add
+    message: Added CSIJ larps- i mean biosuit.
+  id: 1565
+  time: '2026-09-09T10:51:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4273
