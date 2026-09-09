@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Shared.Drone;
-using Robust.Shared.Player;
-// </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
@@ -58,33 +54,6 @@ public sealed partial class BorgSystem
 
             comp.NextBroadcast = now + comp.BroadcastDelay;
         }
-        // <Trauma> - todo move this slop out
-        var query2 = EntityQueryEnumerator<DroneComponent, BorgTransponderComponent, DeviceNetworkComponent, MetaDataComponent>();
-        while (query2.MoveNext(out var uid, out var drone, out var comp, out var device, out var  meta))
-        {
-            if (now < comp.NextBroadcast)
-                continue;
-            var hasBrain = HasComp<ActorComponent>(uid);
-            var hpPercent = CalcHP(uid);
-            var data = new CyborgControlData(
-                comp.Sprite,
-                comp.Name,
-                meta.EntityName,
-                1f,
-                hpPercent,
-                0,
-                hasBrain,
-                false);
-
-            var payload = new RoboticsCyborgDataPayload()
-            {
-                Data = data,
-            };
-            _deviceNetwork.SendPacket((uid, device), null, ref payload);
-
-            comp.NextBroadcast = now + comp.BroadcastDelay;
-        }
-        //Goobstation drone transponder end
     }
 
     private void DoDisable(Entity<BorgTransponderComponent, BorgChassisComponent, MetaDataComponent> ent)
@@ -189,7 +158,7 @@ public sealed partial class BorgSystem
     /// <summary>
     /// Returns a ratio between 0 and 1, 1 when they have no damage and 0 whenever they are crit (or more damaged)
     /// </summary>
-    private float CalcHP(EntityUid uid)
+    public float CalcHP(EntityUid uid) // Trauma - made public
     {
         if (!TryComp<DamageableComponent>(uid, out var damageable))
             return 1;
