@@ -58,13 +58,13 @@ public sealed partial class ShadowlingEmpoweredEnthrallSystem : EntitySystem
 
         if (!_shadowling.CanEnthrall(uid, target))
             return;
-        // <Trauma> - no bypass mindshields
+
         if (_mindShield.IsShielded(target))
         {
             _popup.PopupEntity(Loc.GetString("shadowling-enthrall-mindshield"), uid, uid, PopupType.SmallCaution);
             return;
         }
-        // </Trauma>
+
         _popup.PopupEntity(Loc.GetString("shadowling-target-being-thralled"), target, target, PopupType.SmallCaution);
 
         _doAfter.TryStartDoAfter(doAfterArgs);

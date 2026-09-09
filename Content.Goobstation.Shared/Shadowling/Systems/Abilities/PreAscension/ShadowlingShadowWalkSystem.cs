@@ -29,13 +29,13 @@ public sealed partial class ShadowlingShadowWalkSystem : EntitySystem
 
         SubscribeLocalEvent<ShadowlingShadowWalkComponent, RefreshMovementSpeedModifiersEvent>(OnMove);
         SubscribeLocalEvent<ShadowlingShadowWalkComponent, ShadowWalkEvent>(OnShadowWalk);
-        //SubscribeLocalEvent<ShadowlingShadowWalkComponent, MapInitEvent>(OnStartup); // Trauma - removed shadow walk
+        //SubscribeLocalEvent<ShadowlingShadowWalkComponent, MapInitEvent>(OnStartup);
         SubscribeLocalEvent<ShadowlingShadowWalkComponent, ComponentShutdown>(OnShutdown);
     }
-    // <Trauma> - removed shadow walk
+
     //private void OnStartup(Entity<ShadowlingShadowWalkComponent> ent, ref MapInitEvent args)
     //    => _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
-    // </Trauma>
+
     private void OnShutdown(Entity<ShadowlingShadowWalkComponent> ent, ref ComponentShutdown args)
         => _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
 

@@ -40,6 +40,8 @@
     - state: enthrall
   - type: TargetAction
     range: 0.5
+  - type: Action
+    useDelay: 60
     interactOnMiss: false
   - type: EntityTargetAction
     canTargetSelf: false
@@ -218,6 +220,8 @@
     - state: emp_enthrall
   - type: TargetAction
     range: 1
+  - type: Action
+    useDelay: 60
     interactOnMiss: false
   - type: EntityTargetAction
     canTargetSelf: false
