@@ -42,13 +42,13 @@ public sealed partial class JobListingsComponent : Component
     /// The container of the side jobs which can be accepted by the traitor.
     /// </summary>
     [ViewVariables]
-    public Container AvailableSideJobs;
+    public Container AvailableSideJobs = default!;
 
     /// <summary>
     /// How many jobs can be accepted at once.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int MaximumAcceptedSideJobs = default!;
+    public int MaximumAcceptedSideJobs;
 
     /// <summary>
     /// How many sidejobs can be from the current highest reputation level.
