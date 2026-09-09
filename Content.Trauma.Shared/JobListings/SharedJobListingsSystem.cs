@@ -69,9 +69,8 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// </summary>
     public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
-        if (jobBoard.Comp.Mind is not { } netMind)
+        if (jobBoard.Comp.Mind is not { } mind)
             return;
-        var mind = netMind;
         if (!MindQuery.TryComp(mind, out var mindComp))
             return;
         var progress = Objectives.GetProgress(sideJob, (mind, mindComp));
@@ -96,6 +95,8 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         GainReputation(jobBoard, sideJobComp.ReputationGain);
         jobBoard.Comp.JobsCompleted += 1;
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.JobsCompleted));
+        // set reparent to false to stop error spam
+        Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs, reparent: false);
         PredictedQueueDel(sideJob);
     }
 

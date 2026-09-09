@@ -48,7 +48,7 @@ public sealed partial class JobListingsComponent : Component
     /// How many jobs can be accepted at once.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int MaximumAcceptedSideJobs;
+    public int MaximumAcceptedSideJobs = default!;
 
     /// <summary>
     /// How many sidejobs can be from the current highest reputation level.
@@ -66,7 +66,7 @@ public sealed partial class JobListingsComponent : Component
     /// The container of the side jobs the traitor has accepted.
     /// </summary>
     [ViewVariables]
-    public Container AcceptedSideJobs;
+    public Container AcceptedSideJobs = default!;
 
     /// <summary>
     ///  The mind of the person (probably traitor) who owns the job board.
