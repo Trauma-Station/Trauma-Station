@@ -14351,3 +14351,10 @@ Entries:
   id: 1564
   time: '2026-09-08T17:07:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4507
+- author: Evoluxionary
+  changes:
+  - type: Add
+    message: Added CSIJ larps- i mean biosuit.
+  id: 1565
+  time: '2026-09-09T10:51:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4273
