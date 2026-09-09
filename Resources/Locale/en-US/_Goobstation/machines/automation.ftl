@@ -75,8 +75,8 @@ signal-port-description-fax-copy = Signal port to copy a fax machine's paper.
 signal-port-name-machine-start = Start
 signal-port-description-machine-start = Signal port to start a machine once.
 
-signal-port-name-machine-autostart = Auto Start
-signal-port-description-machine-autostart = Signal port to control starting after completing automatically.
+signal-port-name-machine-repeating = Repeating
+signal-port-description-machine-repeating = Signal port to control starting after completing automatically.
 
 signal-port-name-machine-started = Started
 signal-port-description-machine-started = Signal port that gets pulsed after a machine starts.

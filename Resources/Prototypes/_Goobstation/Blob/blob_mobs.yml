@@ -231,6 +231,7 @@
     bleedReductionAmount: 30
   - type: MovementIgnoreGravity
 
+# TODO: base mob protos
 # Observer
 - type: entity
   id: MobObserverBlob
@@ -255,6 +256,8 @@
   - type: Hands
     showInHands: true
   - type: BlobObserver
+  - type: ExtraReach
+    bonus: 0.5 # make it harder to kite a blob's attacks
   - type: Visibility
     layer: 2
   - type: ContentEye

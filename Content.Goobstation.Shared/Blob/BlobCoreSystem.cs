@@ -10,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Blob;
 
@@ -19,6 +20,7 @@ public abstract partial class BlobCoreSystem : EntitySystem
     [Dependency] private BlobTileSystem _tile = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
@@ -65,6 +67,19 @@ public abstract partial class BlobCoreSystem : EntitySystem
 #pragma warning restore CS0618
     {
         UpdateAllAlerts(ent.AsNullable());
+        if (ent.Comp.Observer is not { } user ||
+            args.DamageDelta is not { } delta ||
+            !delta.AnyPositive())
+            return;
+
+        var now = _timing.CurTime;
+        if (now < ent.Comp.NextDamagePopup)
+            return;
+
+        ent.Comp.NextDamagePopup = now + ent.Comp.DamagePopupDelay;
+        DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.NextDamagePopup));
+        var type = delta.GetTotal() > ent.Comp.LargeDamageThreshold ? PopupType.LargeCaution : PopupType.MediumCaution;
+        _popup.PopupEntity("Your core is under attack!", user, user, type);
     }
 
     [SubscribeLocalEvent]

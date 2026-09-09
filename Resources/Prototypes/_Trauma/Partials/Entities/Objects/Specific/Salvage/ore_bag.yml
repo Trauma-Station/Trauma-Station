@@ -15,6 +15,12 @@
         enum.ToggleableVisuals.Layer:
           True: { state: orebag_on }
           False: { state: orebag_off }
+  - type: ItemToggle
+    soundActivate: &sound
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate: *sound
   - type: Item
     size: Huge # lets it fit in conscription bag
     inhandVisuals:

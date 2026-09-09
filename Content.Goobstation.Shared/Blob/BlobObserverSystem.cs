@@ -38,14 +38,6 @@ public abstract partial class BlobObserverSystem : EntitySystem
 
     private HashSet<Entity<BlobTileComponent>> _tiles = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlobObserverComponent, PlayerAttachedEvent>(OnPlayerAttached, before: [typeof(SharedActionsSystem)]);
-        SubscribeLocalEvent<BlobObserverComponent, PlayerDetachedEvent>(OnPlayerDetached, before: [typeof(SharedActionsSystem)]);
-    }
-
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<BlobObserverComponent> ent, ref MapInitEvent args)
     {
@@ -67,6 +59,7 @@ public abstract partial class BlobObserverSystem : EntitySystem
             args.Used = ent.Comp.VirtualItem;
     }
 
+    [SubscribeLocalEvent(before: [typeof(SharedActionsSystem)])]
     private void OnPlayerAttached(Entity<BlobObserverComponent> ent, ref PlayerAttachedEvent args)
     {
         UpdateActions(args.Player, ent);
@@ -74,6 +67,7 @@ public abstract partial class BlobObserverSystem : EntitySystem
             _core.UpdateAllAlerts(core);
     }
 
+    [SubscribeLocalEvent(before: [typeof(SharedActionsSystem)])]
     private void OnPlayerDetached(Entity<BlobObserverComponent> ent, ref PlayerDetachedEvent args)
     {
         if (ent.Comp.Core is { } core && !TerminatingOrDeleted(core))
@@ -118,7 +112,7 @@ public abstract partial class BlobObserverSystem : EntitySystem
             return;
         }
 
-        if (_core.GetTargetTile(args.Target) is not { } tile || !HasComp<BlobNodeComponent>(tile) || HasComp<BlobCoreComponent>(tile))
+        if (_core.GetTargetTile(args.Target) is not { } tile || !HasComp<BlobNodeComponent>(tile) || _coreQuery.HasComp(tile))
         {
             _popup.PopupEntity(Loc.GetString("blob-target-node-blob-invalid"), user, user, PopupType.Large);
             args.Handled = true;
@@ -139,7 +133,7 @@ public abstract partial class BlobObserverSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.CanSplit));
         _action.RemoveAction(args.Action.AsNullable());
 
-        if (TryComp<BlobCoreComponent>(newCore, out var newComp))
+        if (_coreQuery.TryComp(newCore, out var newComp))
         {
             newComp.CanSplit = false;
             newComp.BlobTiles.Add(newCore);
