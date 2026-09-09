@@ -56,7 +56,7 @@
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
     - id: WeaponEnergyShotgun
-    - id: GunpowderBottlePartFull
+    - id: GunpowderBottleFull
     - id: ReinforcementCallerHos
 
 - type: entityTable

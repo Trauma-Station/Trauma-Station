@@ -91,7 +91,7 @@ public sealed partial class MetalPrototype : IPrototype
     /// Price of a single product per point of work and ingot used.
     /// </summary>
     [DataField]
-    public double Price = 1.0;
+    public double Price = 2.0;
 
     /// <summary>
     /// Modifiers for damage done by melee weapons and thrown items.

@@ -71,7 +71,7 @@
   workScale: 0.5 # relatively soft metal
   durability: 0.1 # lol
   speed: 0.7 # heavy
-  price: 7.5 # shiny
+  price: 75 # shiny
   damage:
     Blunt: 0.6 # heavy but easily deforms
     Slash: 0.1 # no edge at all
@@ -90,7 +90,7 @@
   workScale: 0.75 # work-hardens faster than gold but still somewhat fast
   durability: 0.15
   speed: 1.1 # not so heavy
-  price: 6 # less shiny
+  price: 50 # less shiny
   damage:
     Blunt: 0.4 # easily deforms and not as heavy as gold
     Slash: 0.2 # barely any edge
@@ -112,7 +112,7 @@
   workScale: 10 # extremely hard to forge, bring friends or technology
   durability: 10 # that's its bit
   speed: 1.15 # ligher than plasteel = faster than plasteel
-  price: 20
+  price: 100
   damage:
     Blunt: 0.2 # just not heavy
     Slash: 1.5 # the sharpest of edges

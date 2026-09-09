@@ -21,6 +21,10 @@
   price: 1.25
 
 - type: quality
+  id: Forged
+  price: 2
+
+- type: quality
   id: Cardboard
   gun: 0.99
   armor: 0.99

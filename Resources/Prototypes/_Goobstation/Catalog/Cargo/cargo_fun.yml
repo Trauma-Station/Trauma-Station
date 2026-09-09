@@ -61,15 +61,15 @@
   category: cargoproduct-category-name-fun
   group: market
 
-- type: cargoProduct
-  id: FunDiscoBeachBall
-  icon:
-    sprite: Objects/Fun/Balls/beach_ball.rsi
-    state: icon
-  product: CrateFunDiscoBeachBall
-  cost: 1000
-  category: cargoproduct-category-name-fun
-  group: market
+# - type: cargoProduct
+#   id: FunDiscoBeachBall
+#   icon:
+#     sprite: Objects/Fun/Balls/beach_ball.rsi
+#     state: icon
+#   product: CrateFunDiscoBeachBall
+#   cost: 1000
+#   category: cargoproduct-category-name-fun
+#   group: market
 
 - type: cargoProduct
   id: FunDartMonkey

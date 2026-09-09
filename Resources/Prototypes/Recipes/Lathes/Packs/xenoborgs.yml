@@ -4,6 +4,7 @@
   id: XenoborgMachines
   recipes:
   - XenoborgExtractorRecipe
+  - XenoborgChargerRecipe # Trauma
 
 - type: latheRecipePack
   id: EmptyXenoborgs

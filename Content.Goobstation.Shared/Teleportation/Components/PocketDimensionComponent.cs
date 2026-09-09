@@ -41,7 +41,7 @@ public sealed partial class PocketDimensionComponent : Component
     /// Path to the pocket dimension's map file
     /// </summary>
     [DataField]
-    public ResPath PocketDimensionPath = new ResPath("/Maps/_Goobstation/Nonstations/pocket-dimension.yml");
+    public ResPath PocketDimensionPath = new ResPath("/Maps/_Trauma/Nonstations/pocket-dimension.yml");
 
     /// <summary>
     /// The prototype to spawn for the portal spawned in the pocket dimension.

@@ -8,115 +8,119 @@
   parent: SimpleSpaceMobBase
   categories: [ HideSpawnMenu ]
   components:
-  - type: ZombieImmune
-  - type: TriggerOnMobstateChange
-    mobState:
-    - Dead
-  - type: SmokeOnTrigger
-    duration: 5
-    spreadAmount: 20
-    solution:
-      reagents:
-      - ReagentId: TearGas
-        Quantity: 3
-  - type: Damageable
-    damageModifierSet: BlobMob
-  - type: Injurable
-    damageContainer: Blob
-  - type: Clothing
-    quickEquip: false
-    sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
-    equippedPrefix: blobPod
-    slots:
-    - HEAD
-  - type: Tag
-    tags:
-    - HidesHair
-  - type: CollectiveMind
-    defaultChannel: Blobmind
-    channels:
-    - Blobmind
-  - type: IngestionBlocker
-  - type: IdentityBlocker
-  - type: BlobPod
-  - type: DoAfter
-  - type: Physics
-    bodyType: KinematicController
-  - type: InteractionOutline
-  - type: Actions
-  - type: Alerts
-  - type: InputMover
-  - type: Examiner
-  - type: MobMover
-  - type: HTN
-    rootTask:
-      task: BlobPodCompound
-    blackboard:
-      NavBlob: !type:Bool
-        true
-  - type: BlobMob
-  - type: LanguageSpeaker
-    speaks:
-    - Blob
-    understands:
-    - Blob
-  - type: CombatMode
-  - type: NpcFactionMember
-    factions:
-    - Blob
-  - type: MeleeWeapon
-    hidden: true
-    soundHit:
-      path: /Audio/Effects/bite.ogg
-    angle: 0
-    animation: WeaponArcSmash
-    damage:
-      types:
-        Blunt: 8
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: blobpod
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.25
-        density: 10
-        mask:
-        - FlyingBlobMobMask
-        layer:
-        - FlyingBlobMobLayer
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      20: Dead
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3
-    baseSprintSpeed: 4
-  - type: Sprite
-    drawdepth: Mobs
-    sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
-    state: blobpod
-  - type: GuideHelp
-    guides:
-    - Blob
-  - type: MovementIgnoreGravity
-  - type: Bloodstream
-    maxBleedAmount: 0 # no bleeding
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 50
-    bleedReductionAmount: 30
+    - type: ZombieImmune
+    - type: TriggerOnMobstateChange
+      mobState:
+        - Dead
+    - type: SmokeOnTrigger
+      duration: 5
+      spreadAmount: 20
+      solution:
+        reagents:
+          - ReagentId: TearGas
+            Quantity: 3
+    - type: Damageable
+      damageModifierSet: BlobMob
+    - type: Injurable
+      damageContainer: Blob
+    - type: Clothing
+      quickEquip: false
+      sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
+      equippedPrefix: blobPod
+      slots:
+        - HEAD
+    - type: Tag
+      tags:
+      - HidesHair
+    - type: CollectiveMind
+      defaultChannel: Blobmind
+      channels:
+      - Blobmind
+    - type: IngestionBlocker
+    - type: IdentityBlocker
+    - type: BlobPod
+    - type: DoAfter
+    - type: Physics
+      bodyType: KinematicController
+    - type: InteractionOutline
+    - type: Actions
+    - type: Alerts
+    - type: InputMover
+    - type: Examiner
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: BlobPodCompound
+      blackboard:
+        NavBlob: !type:Bool
+          true
+    - type: BlobMob
+    # - type: BlobSpeak
+    # Einstein Engines - Language begin
+    - type: LanguageSpeaker
+      speaks:
+      - Blob
+      understands:
+      - Blob
+    # Einstein Engines - Language end
+    - type: CombatMode
+    - type: NpcFactionMember
+      factions:
+        - Blob
+    - type: MeleeWeapon
+      hidden: true
+      soundHit:
+        path: /Audio/Effects/bite.ogg
+      angle: 0
+      animation: WeaponArcSmash
+      damage:
+        types:
+          Blunt: 8
+    - type: DamageStateVisuals
+      states:
+        Alive:
+          Base: blobpod
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.25
+          density: 10
+          mask:
+            - FlyingBlobMobMask
+          layer:
+            - FlyingBlobMobLayer
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 20
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        20: Dead
+    - type: MovementSpeedModifier
+      baseWalkSpeed: 3
+      baseSprintSpeed: 4
+    - type: Sprite
+      drawdepth: Mobs
+      sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
+      state: blobpod
+    - type: GuideHelp
+      guides:
+      - Blob
+    - type: MovementIgnoreGravity
+    - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
+      bloodReferenceSolution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
+      bleedReductionAmount: 30
 
 # Blobbernaut
 - type: entity

@@ -143,8 +143,8 @@
   - type: ChildOrgan
     parents: [ Torso ]
   - type: Bone
-    integrityCap: 100
-    boneIntegrity: 100
+    integrityCap: 300
+    boneIntegrity: 300
   - type: Woundable
     integrity: 80
     integrityCap: 80

@@ -1192,7 +1192,7 @@
   name: xenoborg laser gun
   components:
   - type: BatteryAmmoProvider
-    proto: XenoborgLaser
+    proto: TraumaXenoborgLaser # Trauma
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/xenoborg_laser_gun.rsi
     layers:
@@ -1207,7 +1207,7 @@
   name: xenoborg laser cannon
   components:
   - type: BatteryAmmoProvider
-    proto: XenoborgHeavyLaser
+    proto: TraumaXenoborgHeavyLaser # Trauma
     fireCost: 100
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/xenoborg_laser_cannon.rsi
@@ -1255,7 +1255,7 @@
     angleDecay: 15
     cameraRecoilScalar: .25
   - type: BatteryAmmoProvider
-    proto: XenoborgFireLaser
+    proto: TraumaXenoborgFireLaser # Trauma
     fireCost: 100
 
 - type: entity

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ClothingShoesBase, BaseMinorContraband]
+  parent: [ClothingShoesBase, BaseMagicalContraband]
   id: ClothingShoesWizardSkates
   name: wizard skates
   description: "A pair of Wizard Federation Roller Skates, imbued with a protection spell against collision."
