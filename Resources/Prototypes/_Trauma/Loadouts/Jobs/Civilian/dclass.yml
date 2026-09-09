@@ -119,7 +119,7 @@
   equipment:
     jumpsuit: ClothingUniformEnvirosuitPrisoner
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -128,7 +128,7 @@
   equipment:
     head: ClothingHeadEnvirohelmPrisoner
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -137,6 +137,6 @@
   equipment:
     gloves: ClothingHandsGlovesEnviroglovesBlack
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
