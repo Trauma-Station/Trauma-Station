@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Mindshield; // Trauma - no bypass mindshields
+using Content.Shared.Mindshield;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
@@ -15,7 +15,7 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind
 /// </summary>
 public sealed partial class ShadowlingEmpoweredEnthrallSystem : EntitySystem
 {
-    [Dependency] private MindShieldSystem _mindShield = default!; // Trauma - no bypass mindshields
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedShadowlingSystem _shadowling = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
