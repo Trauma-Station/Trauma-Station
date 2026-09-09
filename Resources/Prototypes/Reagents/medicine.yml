@@ -1379,12 +1379,16 @@
   metabolisms:
     Bloodstream:
       effects:
+        # <Trauma>
+        #- !type:AdjustTemperature
+        # amount: 80000
+        # </Trauma>
         - !type:ReduceRotting
           seconds: 10 # Goob - Reduce effectiveness in exchange for easier recipe
           conditions:
           #Patient must be dead and in a cryo tube (or something cold)
           - !type:TemperatureCondition
-            max: 150.0
+            max: 213 # Trauma - was 273.15
           - !type:MobStateCondition
             mobstate: Dead
 
@@ -1414,7 +1418,7 @@
           Burn: -4.5 # Trauma - Was 3
 
 - type: reagent
-  id : Aloxadone
+  id: Aloxadone
   name: reagent-name-aloxadone
   group: Medicine
   desc: reagent-desc-aloxadone
@@ -1425,16 +1429,20 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      #- !type:AdjustTemperature
+      #  amount: 80000
+      # </Trauma>
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 213.0
-        scaleByTemperature: # Shitmed Change
+          max: 213.0 # Trauma - was 273.15
+        scaleByTemperature: # Trauma
           min: 100.0
           max: 213.0
           scale: 1.6
         damage:
-          Burn: -10 # Goob - was -4.5
+          Burn: -10 # Trauma - was -6
 
 - type: reagent
   id : Mannitol # currently this is just a way to create psicodine
