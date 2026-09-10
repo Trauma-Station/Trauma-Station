@@ -114,7 +114,7 @@ public sealed class EntityHealthBarOverlay : Overlay
             const float startX = 8f;
             var endX = widthOfMob - 8f;
 
-            var xProgress = MathHelper.Lerp(startX, endX, MathF.Clamp(deathProgress.ratio, 0f, 1f)); // Trauma - use Lerp helper and clamp ratio to avoid validation error
+            var xProgress = MathHelper.Lerp(startX, endX, Math.Clamp(deathProgress.ratio, 0f, 1f)); // Trauma - use Lerp helper and clamp ratio to avoid validation error
 
             var boxBackground = new Box2(new Vector2(startX, 0f) / EyeManager.PixelsPerMeter, new Vector2(endX, 3f) / EyeManager.PixelsPerMeter);
             boxBackground = boxBackground.Translated(position);
