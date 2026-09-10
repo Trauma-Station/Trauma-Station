@@ -43,7 +43,7 @@ public sealed partial class PAISystem : EntitySystem
         // <Trauma> - set the name now not later when the user might be deleted
         {
             component.LastUser = args.User;
-            component.NextName = Loc.GetString("pai-system-pai-name", ("owner", args.User));
+            component.LastName = Loc.GetString("pai-system-pai-name", ("owner", args.User));
         }
         // </Trauma>
     }
@@ -54,7 +54,7 @@ public sealed partial class PAISystem : EntitySystem
             return;
 
         // Ownership tag
-        var val = component.NextName; // Trauma - use the saved name
+        var val = component.LastName; // Trauma - use the saved name
 
         // TODO Identity? People shouldn't dox-themselves by carrying around a PAI.
         // But having the pda's name permanently be "old lady's PAI" is weird.
