@@ -1,38 +1,51 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Conversion;
+using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Actions;
 using Content.Shared.Body;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared.Inventory;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.CollectiveMind;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 
 public abstract partial class SharedShadowlingSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
-    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedLightDetectionDamageSystem _lightDamage = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
 
@@ -41,20 +54,33 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
     public static readonly ProtoId<MarkingPrototype> AbominationHorns = "AbominationHorns";
     public static readonly ProtoId<MarkingPrototype> AbominationTorso = "AbominationTorso";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShadowlingComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<ShadowlingComponent, HatchEvent>(OnHatch);
-        SubscribeLocalEvent<ShadowlingComponent, BeforeDamageChangedEvent>(BeforeDamageChanged);
-        SubscribeLocalEvent<ShadowlingComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<ShadowlingComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<ShadowlingComponent, ExaminedEvent>(OnExamined);
-    }
-
     #region Event Handlers
 
+    [SubscribeLocalEvent]
+    private void BeforeGunShot(Entity<ShadowlingComponent> ent, ref SelfBeforeGunShotEvent args)
+    {
+        // Slings cant shoot guns
+        if (args.Gun.Comp.ClumsyProof)
+            return;
+
+        if (!SharedRandomExtensions.PredictedProb(_timing, 0.5f, GetNetEntity(ent)))
+            return;
+
+        _damageable.ChangeDamage(ent.Owner, ent.Comp.GunShootFailDamage, origin: ent);
+
+        _stun.TryAddParalyzeDuration(ent, ent.Comp.GunShootFailStunTime);
+
+        args.Cancel();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnFlashbanged(Entity<ShadowlingComponent> ent, ref GetFlashbangedEvent args)
+    {
+        // Shadowling get damaged from flashbangs
+        _damageable.ChangeDamage(ent.Owner, ent.Comp.HeatDamage);
+    }
+
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(EntityUid uid, ShadowlingComponent component, MobStateChangedEvent args)
     {
         // Remove all Thralls if shadowling is dead
@@ -72,6 +98,7 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
         RaiseLocalEvent(ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageModify(EntityUid uid, ShadowlingComponent component, DamageModifyEvent args)
     {
         if (args.Origin is not {} origin
@@ -94,13 +121,15 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
     }
 
     public ProtoId<CollectiveMindPrototype> ShadowMind = "Shadowmind";
-    private void OnInit(EntityUid uid, ShadowlingComponent component, ref MapInitEvent args)
+    [SubscribeLocalEvent]
+    private void OnMapInit(EntityUid uid, ShadowlingComponent component, ref MapInitEvent args)
     {
         _actions.AddAction(uid, ref component.ActionHatchEntity, component.ActionHatch);
 
         EnsureComp<CollectiveMindComponent>(uid).Channels.Add(ShadowMind);
     }
 
+    [SubscribeLocalEvent]
     private void OnHatch(Entity<ShadowlingComponent> ent, ref HatchEvent args)
     {
         if (args.Handled)
@@ -112,12 +141,40 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
         StartHatchingProgress(ent);
     }
 
-    protected virtual void StartHatchingProgress(Entity<ShadowlingComponent> ent) { }
+    private void StartHatchingProgress(Entity<ShadowlingComponent> ent)
+    {
+        var (uid, comp) = ent;
+        if (comp.IsHatching)
+            return;
 
-    private void BeforeDamageChanged(EntityUid uid, ShadowlingComponent comp, BeforeDamageChangedEvent args)
+        comp.IsHatching = true;
+        Dirty(ent);
+
+        // Drop all items
+        if (TryComp<InventoryComponent>(uid, out var inv))
+        {
+            foreach (var slot in inv.Slots)
+            {
+                _inventory.DropSlotContents((uid, inv), slot.Name);
+            }
+        }
+
+        var egg = PredictedSpawnAtPosition(comp.Egg, Transform(uid).Coordinates);
+        if (TryComp<HatchingEggComponent>(egg, out var eggComp)
+            && TryComp<EntityStorageComponent>(egg, out var eggStorage))
+        {
+            eggComp.ShadowlingInside = uid;
+            _entityStorage.Insert(uid, egg, eggStorage);
+        }
+
+        // It should be noted that Shadowling shouldn't be able to take damage during this process.
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBeforeDamageChanged(Entity<ShadowlingComponent> ent, ref BeforeDamageChangedEvent args)
     {
         // Can't take damage during hatching
-        if (comp.IsHatching)
+        if (ent.Comp.IsHatching)
             args.Cancelled = true;
     }
 
@@ -163,6 +220,7 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(EntityUid uid, ShadowlingComponent comp, ExaminedEvent args)
     {
         if (args.Examiner != uid
@@ -206,9 +264,15 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
             return false;
         }
 
+        if (!CanGlare(target))
+        {
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-cant-be-controlled"), uid, uid, PopupType.SmallCaution);
+            return false;
+        }
+
         // Target needs to be alive
         if (!TryComp<MobStateComponent>(target, out var mobState)
-            || !_mobStateSystem.IsCritical(target, mobState) && !_mobStateSystem.IsCritical(target, mobState))
+            || !_mob.IsCritical(target, mobState) && !_mob.IsCritical(target, mobState))
             return true;
 
         _popup.PopupEntity(Loc.GetString("shadowling-enthrall-dead"), uid, uid, PopupType.SmallCaution);

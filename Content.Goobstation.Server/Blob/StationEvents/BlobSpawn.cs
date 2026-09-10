@@ -51,7 +51,7 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
         {
             var coords = _random.Pick(validLocations);
             Sawmill.Info($"Creating carrier blob at {coords}");
-            Spawn(_random.Pick(component.CarrierBlobProtos), coords);
+            Spawn(component.CarrierBlobProto, coords);
         }
 
         // start blob rule incase it isn't, for the sweet greentext

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Graphics;
 using Content.Goobstation.Shared.Holograms;
 
 namespace Content.Goobstation.Client.Holograms;
@@ -21,7 +22,10 @@ public sealed partial class HologramVisualizerSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnComponentInit(Entity<HologramVisualsComponent> ent, ref ComponentInit args)
     {
-        _sprite.SetPostShader(ent.Owner, new(_shaderId, _shader));
+        _sprite.SetPostShader(ent.Owner, new(_shaderId, _shader)
+        {
+            Before = ContentPostShaderIds.BeforeOutlines,
+        });
     }
 
     [SubscribeLocalEvent]

@@ -218,7 +218,12 @@ void fragment()
     const highp float TIME_OFFSET3 = 1298.67;
 
     highp float wrapped_hue = fract(hue);
-    highp vec4 product = texture(TEXTURE, UV);
+    highp vec4 product = zTexture(UV);
+    if (product.a <= 0.001)
+    {
+        COLOR = vec4(0.0);
+        return;
+    }
 
     // Colorize with wrapped hue
     highp vec3 hsv = rgb2hsv(product.rgb);

@@ -82,10 +82,10 @@ public abstract partial class SharedWeakToHolySystem : EntitySystem
 
         DamageModifierSet modifierSet = new()
         {
-            Coefficients = new Dictionary<string, float>
+            Coefficients = new()
             {
-                { "Holy", holyCoefficient },
-            },
+                { "Holy", holyCoefficient }
+            }
         };
 
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);

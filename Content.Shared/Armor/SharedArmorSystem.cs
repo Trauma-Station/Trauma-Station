@@ -79,7 +79,7 @@ public abstract partial class SharedArmorSystem : EntitySystem
             newModifierSet.Coefficients[key] = 1f - (1f - value) * mult;
         }
 
-        newModifierSet.FlatReduction = modifierSet.FlatReduction;
+        newModifierSet.FlatReductions = modifierSet.FlatReductions;
         args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, newModifierSet);
         // </Trauma>
     }
@@ -119,7 +119,7 @@ public abstract partial class SharedArmorSystem : EntitySystem
         var msg = new FormattedMessage();
         msg.AddMarkupOrThrow(Loc.GetString("armor-examine"));
 
-        if (!component.Modifiers.Coefficients.Any() && !component.Modifiers.FlatReduction.Any())
+        if (!component.Modifiers.Coefficients.Any() && !component.Modifiers.FlatReductions.Any())
             return msg;
 
         var coverage = component.ArmorCoverage;
@@ -143,18 +143,19 @@ public abstract partial class SharedArmorSystem : EntitySystem
             foreach (var coefficientArmor in armorModifiers.Coefficients)
             {
                 msg.PushNewline();
-                var armorType = Loc.GetString("armor-damage-type-" + coefficientArmor.Key.ToLower());
+                // TODO: probably make these prototype fields or have a test that they all exist
+                var armorType = Loc.GetString("armor-damage-type-" + coefficientArmor.Key.Id.ToLower());
                 msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value-trauma", // Trauma - better locale string
                     ("type", armorType),
                     ("value", MathF.Abs(1f - coefficientArmor.Value) * 100), ("protect", coefficientArmor.Value < 1f) // Trauma - better values
                 ));
             }
 
-            foreach (var flatArmor in armorModifiers.FlatReduction)
+            foreach (var flatArmor in armorModifiers.FlatReductions)
             {
                 msg.PushNewline();
 
-                var armorType = Loc.GetString("armor-damage-type-" + flatArmor.Key.ToLower());
+                var armorType = Loc.GetString("armor-damage-type-" + flatArmor.Key.Id.ToLower());
                 msg.AddMarkupOrThrow(Loc.GetString("armor-reduction-value",
                     ("type", armorType),
                     ("value", flatArmor.Value)

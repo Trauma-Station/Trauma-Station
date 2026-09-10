@@ -24,7 +24,7 @@
   - type: Item
     heldPrefix: produce
   - type: Produce
-    seedId: Lemonade
+    plantId: LemonadePlants
   - type: Extractable
     juiceSolution:
       reagents:
@@ -100,7 +100,7 @@
     proto: BulletCoconut # lol
     deleteOnSpawn: true
   - type: Produce
-    seedId: CoconutPlant
+    plantId: CoconutPlants
   - type: Tag
     tags:
     - Fruit
@@ -139,7 +139,7 @@
       - ReagentId: CoconutWater
         Quantity: 15
   - type: Produce
-    seedId: CoconutPlant
+    plantId: CoconutPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
     state: half
@@ -194,7 +194,7 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
   - type: Produce
-    seedId: CherryBomb
+    plantId: CherryBombPlants
   - type: Extractable
     juiceSolution:
       reagents:
@@ -253,7 +253,7 @@
   description: It's a delicious piece of Eden.
   components:
   - type: Produce
-    seedId: deliciousApple
+    plantId: DeliciousApplePlants
   - type: Tag
     tags:
     - Fruit
@@ -268,7 +268,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/meth_apple.rsi
   - type: Produce
-    seedId: MethApple
+    plantId: MethApplePlants
   - type: Solution
     solution:
       maxVol: 14
@@ -293,7 +293,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/clear_corn.rsi
   - type: Produce
-    seedId: ClearCorn
+    plantId: ClearCornPlants
   - type: Tag
     tags:
     - ClearCorn
@@ -317,7 +317,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/peanut.rsi
   - type: Produce
-    seedId: Peanut
+    plantId: PeanutPlants
   - type: Tag
     tags:
     - Peanut
@@ -338,7 +338,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/magicmushrooms.rsi
   - type: Produce
-    seedId: MagicMushrooms
+    plantId: MagicMushroomsPlants
   - type: Tag
     tags:
     - MagicMushroom
@@ -362,7 +362,7 @@
       - ReagentId: GastroToxin
         Quantity: 10
   - type: Produce
-    seedId: SynthMeat
+    plantId: SynthMeatPlants
   - type: Tag
     tags:
     - SynthMeat
@@ -377,7 +377,7 @@
     state: icon
     sprite: _Trauma/Objects/Fun/balloons/red_balloon.rsi
   - type: Produce
-    seedId: BalloonWatermelon
+    plantId: BalloonWatermelonPlants
   - type: Destructible
     thresholds:
     - trigger:
@@ -405,12 +405,12 @@
   parent: ProduceBase
   id: SteelWheatBushel
   name: steel wheat bushel
-  description: Sigh... steel wheat... a-grain?
+  description: Sigh... steel wheat... a-grain? # metal grains
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/steel_wheat.rsi
   - type: Produce
-    seedId: SteelWheat
+    plantId: SteelWheatPlants
   - type: Solution
     solution:
       reagents:

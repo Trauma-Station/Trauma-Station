@@ -91,7 +91,7 @@
           insertSound: /Audio/Items/sheath.ogg
           ejectSound: /Audio/Items/unsheath.ogg
           whitelist:
-            components:
+            tags:
             - Stunbaton
     - type: Tag
       tags:

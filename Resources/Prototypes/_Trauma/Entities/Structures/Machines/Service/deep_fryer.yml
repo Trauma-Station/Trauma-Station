@@ -57,6 +57,7 @@
     - type: UserInterface
     - type: HealthAnalyzer
     - type: CablePlacer
+      cablePrototypeID: CableHV
     componentsToRemove:
     - type: Perishable
   # -----------------

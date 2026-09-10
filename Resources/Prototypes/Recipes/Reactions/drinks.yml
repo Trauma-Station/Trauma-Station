@@ -880,16 +880,6 @@
     Moonshine: 3
 
 - type: reaction
-  id: Neurotoxin
-  reactants:
-    GargleBlaster:
-      amount: 1
-    Morphine:
-      amount: 1
-  products:
-    Neurotoxin: 2
-
-- type: reaction
   id: NuclearCola
   reactants:
     Cola:

@@ -252,14 +252,10 @@ public sealed partial class HereticBladeSystem : EntitySystem
 
     public void ApplySpecialEffect(EntityUid performer, EntityUid target, Entity<HereticBladeComponent> blade)
     {
-        int? stage = TryComp(performer, out HereticBladeUserBonusDamageComponent? bonus) && bonus.ApplyBladeEffects
-            ? 7
-            : null;
-        if (_heretic.TryGetHereticComponent(performer, out var hereticComp, out _))
-            stage = hereticComp.PathStage;
-
-        if (stage == null)
+        if (!_heretic.TryGetHereticComponent(performer, out var hereticComp, out _))
             return;
+
+        var stage = hereticComp.PathStage;
 
         var defaultPair = new KeyValuePair<int, float>(0, 1f);
         var prob = blade.Comp.Probabilities.LastOrDefault(x => x.Key <= stage, defaultPair).Value;
@@ -347,10 +343,10 @@ public sealed partial class HereticBladeSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMeleeHit(Entity<HereticBladeComponent> ent, ref MeleeHitEvent args)
     {
-        if (!args.IsHit)
+        if (!args.IsHit || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
-        ApplyBladeHitEffects(ent, args.User, args.HitEntities, out var heretic);
+        ApplyBladeHitEffects(ent, args.User, args.HitEntities, heretic);
         ApplyBladeBonuses(ent, args.User, heretic, args.BaseDamage, args.BonusDamage, (List<EntityUid>) args.HitEntities);
     }
 
@@ -359,32 +355,26 @@ public sealed partial class HereticBladeSystem : EntitySystem
         if (args.Cancelled || args.User is not { } user)
             return;
 
-        _heretic.TryGetHereticComponent(user, out var heretic, out _);
-
-        if (heretic == null && !HasComp<GhoulComponent>(user))
-            return;
-
-        ApplyBladeBonuses(ent, user, heretic, args.BaseDamage, args.BonusDamage, new() { args.Target });
+        if (_heretic.TryGetHereticComponent(user, out var heretic, out _))
+            ApplyBladeBonuses(ent, user, heretic, args.BaseDamage, args.BonusDamage, new() { args.Target });
     }
 
     [SubscribeLocalEvent]
     private void OnThrowHit(Entity<HereticBladeComponent> ent, ref ThrowDoHitEvent args)
     {
-        if (args.Component.Thrower is { } user && HasComp<DamageOtherOnHitComponent>(ent))
-            ApplyBladeHitEffects(ent, user, new List<EntityUid>() { args.Target }, out _);
+        if (args.Component.Thrower is not { } user || !HasComp<DamageOtherOnHitComponent>(ent) ||
+            !_heretic.TryGetHereticComponent(user, out var heretic, out _))
+            return;
+
+        ApplyBladeHitEffects(ent, user, new List<EntityUid>() { args.Target }, heretic);
     }
 
     private void ApplyBladeHitEffects(Entity<HereticBladeComponent> ent,
         EntityUid user,
         IReadOnlyList<EntityUid> targets,
-        out HereticComponent? heretic)
+        HereticComponent heretic)
     {
-        _heretic.TryGetHereticComponent(user, out heretic, out _);
-
-        if (ent.Comp.Path == null)
-            return;
-
-        if (heretic == null || ent.Comp.Path != heretic.CurrentPath)
+        if (ent.Comp.Path is not { } path || path != heretic.CurrentPath)
             return;
 
         foreach (var hit in targets)
@@ -398,34 +388,16 @@ public sealed partial class HereticBladeSystem : EntitySystem
             if (heretic.PathStage >= 7)
                 ApplySpecialEffect(user, hit, ent);
         }
-
     }
 
     private void ApplyBladeBonuses(Entity<HereticBladeComponent> ent,
         EntityUid user,
-        HereticComponent? heretic,
+        HereticComponent heretic,
         DamageSpecifier baseDamage,
         DamageSpecifier bonusDamage,
         List<EntityUid> targets)
     {
-        if (TryComp(user, out HereticBladeUserBonusDamageComponent? bonus) &&
-            (bonus.Path == null || bonus.Path == ent.Comp.Path))
-        {
-            foreach (var key in baseDamage.DamageDict.Keys)
-            {
-                baseDamage.DamageDict[key] *= bonus.BonusMultiplier;
-            }
-
-            if (heretic == null)
-            {
-                foreach (var hit in targets)
-                {
-                    ApplySpecialEffect(user, hit, ent);
-                }
-            }
-        }
-
-        if (heretic?.PathStage >= 7 && ent.Comp.BonusEvent is { } ev)
+        if (heretic.PathStage >= 7 && ent.Comp.BonusEvent is { } ev)
         {
             ev.User = user;
             ev.BonusDamage = bonusDamage;

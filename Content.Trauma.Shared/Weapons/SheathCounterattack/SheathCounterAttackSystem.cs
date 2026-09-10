@@ -127,7 +127,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
     {
         var ev = new GetCounterAttackSheathEvent();
         RaiseLocalEvent(user, ref ev);
-        if (ev.Sheath is not { } sheath || _slots.GetItemOrNull(sheath, sheath.Comp.SlotId) is not { } weapon ||
+        if (ev.Sheath is not { } sheath || _slots.GetItemOrNull(sheath.Owner, sheath.Comp.SlotId) is not { } weapon ||
             !TryComp(weapon, out MeleeWeaponComponent? melee) || melee.NextAttack >= _timing.CurTime)
             return null;
 
@@ -160,8 +160,8 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
         if (sheath != comp.ActiveSheath || weapon != comp.ActiveWeapon)
             return;
 
-        if (!_slots.TryGetSlot(sheath, sheath.Comp.SlotId, out var slot) ||
-            !_slots.TryEjectToHands(sheath, slot, ent, doAfter: false))
+        if (!_slots.TryGetSlot(sheath.Owner, sheath.Comp.SlotId, out var slot) ||
+            !_slots.TryEjectToHands(sheath.Owner, slot, ent, doAfter: false))
             return;
 
         weapon.Comp.NextAttack = TimeSpan.Zero;

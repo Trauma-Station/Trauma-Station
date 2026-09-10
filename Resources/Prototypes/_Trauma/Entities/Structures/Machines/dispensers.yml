@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: EnergyChemDispenser
+  parent: BaseEnergyReagentDispenserAnimated
   id: ServiceEnergyChemDispenser
   name: energy food synthesizer
   suffix: energy
@@ -11,8 +11,6 @@
     board: EnergyFoodSynthesizerMachineCircuitboard
   - type: Sprite
     sprite: _Trauma/Structures/Machines/service_dispenser.rsi
-    state: industrial-working
-    snapCardinals: true
   - type: GuideHelp
     guides:
     - Chef
@@ -50,10 +48,10 @@
       Cornoil: 4
 
 - type: entity
-  id: EnergyBarDispenserBase
-  parent: EnergyChemDispenser
-  suffix: Energy
   abstract: true
+  parent: BaseEnergyReagentDispenser
+  id: BaseEnergyBarDispenser
+  suffix: Energy
   components:
   - type: Sprite
     sprite: Structures/smalldispensers.rsi
@@ -79,7 +77,7 @@
         - TabletopMachineLayer
 
 - type: entity
-  parent: EnergyBarDispenserBase
+  parent: BaseEnergyBarDispenser
   id: EnergyBoozeDispenser
   name: energy booze dispenser
   description: A drunk mans best dream. Using the power of bluespace, this dispenser uses station energy to produce alcoholic beverages! Now you can get wasted without leaving the bar to restock! Ever!
@@ -110,11 +108,10 @@
       Whiskey: 5
       Wine: 5
       Champagne: 5
-      KelpPodWine: 5
       Sake: 5
 
 - type: entity
-  parent: EnergyBarDispenserBase
+  parent: BaseEnergyBarDispenser
   id: EnergySodaDispenser
   name: energy soda dispenser
   description: Soda? We got it! This bluespace dispenser, using station energy, produces a variety of non alchoholic drinks for the thirsty and the health conscious alike!

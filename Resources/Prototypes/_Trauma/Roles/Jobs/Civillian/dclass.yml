@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: DClass
+  name: job-name-d-class
+  description: job-description-dclass
+  playTimeTracker: JobDClass
+  startingGear: DClassGear
+  icon: "JobIconDClass"
+  supervisors: job-supervisors-everyone
+  access:
+  - Maintenance
+  guides:
+  - Civilian
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipTiderDampener
+    - SkillChipEducation
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - NanoTrasen
+      - Assistant
+
+- type: startingGear
+  id: DClassGear
+  equipment:
+    #Todo: get a sprite for and make D-Class PDA, prisoner themed. The ID itself already exists.
+    id: DClassPDA
+    ears: ClothingHeadsetGrey
+
+- type: chameleonOutfit
+  id: DClassChameleonOutfit
+  job: DClass
+  equipment:
+    head: ClothingHeadHatWelding
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckMantle
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesColorYellowBudget

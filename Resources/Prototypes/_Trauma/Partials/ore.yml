@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: ore
+  id: OreSteel
+  oreEntity: SteelOre1Unprocessed
+
+- type: ore
+  id: OreSpaceQuartz
+  oreEntity: SpaceQuartz1Unprocessed
+
+- type: ore
+  id: OreCoal
+  oreEntity: Coal1Unprocessed
+
+- type: ore
+  id: OreGold
+  oreEntity: GoldOre1Unprocessed
+
+- type: ore
+  id: OreSilver
+  oreEntity: SilverOre1Unprocessed
+
+- type: ore
+  id: OrePlasma
+  oreEntity: PlasmaOre1Unprocessed
+
+- type: ore
+  id: OreUranium
+  oreEntity: UraniumOre1Unprocessed
+
+- type: ore
+  id: OreBananium
+  oreEntity: BananiumOre1Unprocessed
+  maxOreYield: 3
+
+- type: ore
+  id: OreDiamond
+  oreEntity: DiamondOre1Unprocessed
+  maxOreYield: 1
+
+- type: ore
+  id: OreArtifactFragment
+  oreEntity: ArtifactFragmentOre1
+
+- type: weightedRandomOre
+  id: RandomOreDistributionStandard
+  weights:
+    OreSilver: 2 # previously rarer than gold, even though they are both typically used in similar amounts for crafting
+    OreBSCrystal: 0.5 # to account for higher points (250)
+    OreBananium: 0.25 # to account for it being a useless meme ore
+    OreDiamond: 0.1 # to account for its much higher points (1000), as well as its use in endgame schematics
+    OreGibtonite: 2 # Spawns often enough but always as a single piece

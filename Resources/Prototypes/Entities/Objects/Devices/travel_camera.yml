@@ -39,6 +39,11 @@
   parent: BasePaper
   id: BasePhotograph
   name: photograph
+  # <Trauma>
+  components:
+  - type: Item
+    sprite: Objects/Misc/bureaucracy.rsi
+  # </Trauma>
 
 - type: entity
   parent: BasePhotograph

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Silicon.Components;
-using Content.Trauma.Shared.Silicon.Systems;
 using Content.Goobstation.Common.CCVar;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
@@ -13,6 +11,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Temperature.Components;
+using Content.Trauma.Shared.Silicon.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;

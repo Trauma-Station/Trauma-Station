@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseAction
+  parent: MouseMultiply
   id: SpiderMultiply
   name: Multiply
   description: Uses hunger to multiply.
@@ -14,8 +14,6 @@
     useDelay: 1
     sound: !type:SoundPathSpecifier
       path: /Audio/Effects/pop.ogg
-  - type: InstantAction
-    event: !type:EggLayInstantActionEvent
 
 - type: entity
   parent: ActionMouseCall

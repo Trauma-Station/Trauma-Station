@@ -78384,7 +78384,6 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: 88.5,32.5
 - proto: Screwdriver
   entities:

@@ -629,7 +629,7 @@ public sealed partial class ChemiCompilerRunnerSystem : EntitySystem
         if (reservoir < 1 || reservoir > ChemiCompilerComponent.Reservoirs)
             return false;
 
-        if (_slots.GetItemOrNull(ent, ent.Comp.SlotId(reservoir)) is not { } beaker)
+        if (_slots.GetItemOrNull(ent.Owner, ent.Comp.SlotId(reservoir)) is not { } beaker)
             return false;
 
         return _solution.TryGetFitsInDispenser(beaker, out soln, out solution);

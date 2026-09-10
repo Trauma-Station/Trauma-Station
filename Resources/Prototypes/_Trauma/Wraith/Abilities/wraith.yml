@@ -32,11 +32,13 @@
     stunDuration: 1
   - type: Defile
     reagents:
-      BuzzochloricBees: 10
-      Bleach: 10
-      Ash: 10
-      Vomit: 10
-      Toxin: 10
+      BuzzochloricBees: 20
+      Bleach: 20
+      Mold: 20
+      Tirizene: 20
+      Toxin: 20
+      Lipolicide: 20
+      Hemorrhinol: 20
   - type: ActionGrant
     actions:
     - ActionPossessObject

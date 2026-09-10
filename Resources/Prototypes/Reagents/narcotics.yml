@@ -137,6 +137,24 @@
           min: 30
 
 - type: reagent
+  id: Pax
+  name: reagent-name-pax
+  group: Narcotics
+  desc: reagent-desc-pax
+  physicalDesc: reagent-physical-desc-soothing
+  allowedDepartments:
+  - Security
+  - Medical
+  color: "#AAAAAA"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:GenericStatusEffect
+        key: Pacified
+        component: Pacified
+        time: 4
+
+- type: reagent
   id: Stimulants
   name: reagent-name-stimulants
   group: Narcotics
@@ -242,9 +260,11 @@
             Asphyxiation: -2
       # Side effects
       - !type:ResetNarcolepsy
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 1
 
 - type: reagent
@@ -514,6 +534,7 @@
   group: Narcotics
   desc: reagent-desc-StrawberryIce
   physicalDesc: reagent-physical-desc-fizzy
+  contrabandSeverity: Minor
   flavor: fizzy
   color: "#FF36AE"
   metabolisms:
@@ -608,7 +629,10 @@
           max: 0.1
         type: Local
         visualType: MediumCaution
-        messages: [ entity-effect-popup-strawberry-ice-addiction ] # Trauma - use loc
+        messages:
+        - hydroxysomnolene-effect-flavor
+        - hydroxysomnolene-effect-another-hit
+        - hydroxysomnolene-effect-sluggish
         probability: 0.15
 
 - type: reagent
@@ -624,7 +648,7 @@
       effects:
       - !type:Emote
         emote: Laugh
-        showInChat: true
+        showInChat: false
         probability: 0.1
         conditions:
         - !type:ReagentCondition
@@ -632,7 +656,7 @@
           max: 20
       - !type:Emote
         emote: Whistle
-        showInChat: true
+        showInChat: false
         probability: 0.1
         conditions:
         - !type:ReagentCondition
@@ -640,7 +664,7 @@
           max: 20
       - !type:Emote
         emote: Crying
-        showInChat: true
+        showInChat: false
         probability: 0.1
         conditions:
         - !type:ReagentCondition

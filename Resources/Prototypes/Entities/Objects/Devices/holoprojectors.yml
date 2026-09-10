@@ -88,9 +88,6 @@
     storedRotation: -90
   - type: LimitedCharges
     maxCharges: 6 # same as it was on a medium cell
-  - type: ContainerContainer
-    containers:
-      signs: !type:Container
   - type: PhysicalComposition
     materialComposition:
       Steel: 75

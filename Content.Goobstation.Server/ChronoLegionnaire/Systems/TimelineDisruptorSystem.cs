@@ -41,7 +41,7 @@ public sealed partial class TimelineDisruptorSystem : SharedTimelineDisruptorSys
         if (args.Handled || !args.Complex)
             return;
 
-        if (!_slots.TryGetSlot(ent, comp.DisruptionSlot, out var disruptionSlot))
+        if (!_slots.TryGetSlot(ent.Owner, comp.DisruptionSlot, out var disruptionSlot))
             return;
 
         if (disruptionSlot.ContainerSlot == null || disruptionSlot.ContainerSlot.ContainedEntities.Count == 0)
@@ -113,6 +113,7 @@ public sealed partial class TimelineDisruptorSystem : SharedTimelineDisruptorSys
 
         Dirty(ent, ent.Comp);
     }
+
     private void FinishDisrupting(Entity<TimelineDisruptorComponent> ent)
     {
         var (_, disruptor) = ent;
@@ -120,12 +121,8 @@ public sealed partial class TimelineDisruptorSystem : SharedTimelineDisruptorSys
 
         Dirty(ent, disruptor);
 
-        if (!_slots.TryGetSlot(ent, disruptor.DisruptionSlot, out var disruptionSlot))
-            return;
-
-        EntityUid? cage = disruptionSlot.ContainerSlot!.ContainedEntity;
-
-        if (cage == null)
+        if (!_slots.TryGetSlot(ent.Owner, disruptor.DisruptionSlot, out var disruptionSlot) ||
+            disruptionSlot.ContainerSlot?.ContainedEntity is not { } cage)
             return;
 
         // Checking the storage of stasis container for any items in it
@@ -136,7 +133,7 @@ public sealed partial class TimelineDisruptorSystem : SharedTimelineDisruptorSys
         foreach (var contained in contents)
         {
             // Removing entity from container to delete it without ghost breaking
-            _container.RemoveEntity(cage.Value, contained);
+            _container.RemoveEntity(cage, contained);
             QueueDel(contained);
         }
 

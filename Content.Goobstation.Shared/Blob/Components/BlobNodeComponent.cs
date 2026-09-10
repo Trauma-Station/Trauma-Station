@@ -12,7 +12,7 @@ public sealed partial class BlobNodeComponent : Component
     public TimeSpan PulseFrequency = TimeSpan.FromSeconds(4);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoNetworkedField, AutoPausedField]
+    [AutoPausedField]
     public TimeSpan NextPulse;
 
     [DataField]

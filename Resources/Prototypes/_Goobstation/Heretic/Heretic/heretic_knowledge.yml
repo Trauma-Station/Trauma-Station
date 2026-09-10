@@ -640,11 +640,11 @@
   id: CreatorsGift
   stage: 10
   path: Cosmos
-  event: !type:HereticXRayVisionEvent
+  event: !type:HereticKnowledgeEvent
+    statusEffects:
+    - StatusEffectXRayHeretic
     addedComponents:
     - type: SpecialLowTempImmunity
-    - type: NightVision
-      lightingColor: white
   actionPrototypes:
   - ActionResetStarGazerConsciousness
   effects:
@@ -689,11 +689,11 @@
   - RitualEldritchId
 
 - type: hereticKnowledge
-  id: ConciergesRite
+  id: WrongKey
   path: Lock
   stage: 5
   ritualPrototypes:
-  - RitualConcierge
+  - RitualSerpentclave
 
 - type: hereticKnowledge
   id: ArmorLock
@@ -708,10 +708,9 @@
 - type: hereticKnowledge
   id: LockPassive3
   stage: 6
-  event: !type:HereticXRayVisionEvent
-    addedComponents:
-    - type: NightVision
-      lightingColor: white
+  event: !type:HereticKnowledgeEvent
+    statusEffects:
+    - StatusEffectXRayHeretic
 
 - type: hereticKnowledge
   id: BurglarsFinesse
@@ -724,11 +723,11 @@
   stage: 7
 
 - type: hereticKnowledge
-  id: WrongKey
+  id: ConciergesRite
   path: Lock
   stage: 8
   ritualPrototypes:
-  - RitualSerpentclave
+  - RitualConcierge
 
 - type: hereticKnowledge
   id: AscensionLock
@@ -813,13 +812,13 @@
   ritualPrototypes:
   - RitualIceSpear
 
-## T2
 - type: hereticKnowledge
   id: UnfathomableCurio
-  stage: 5
+  stage: 4
   ritualPrototypes:
   - RitualUnfathomableCurio
 
+## T2
 - type: hereticKnowledge
   id: RustedRitual
   stage: 5

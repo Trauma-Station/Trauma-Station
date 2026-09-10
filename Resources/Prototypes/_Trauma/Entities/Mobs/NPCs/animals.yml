@@ -1,6 +1,38 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
+  id: BaseAnimalGhostRole
+  components:
+  - type: GhostRole
+    rules: ghost-role-information-animal-rules
+    mindRoles:
+    - MindRoleGhostRoleAnimal
+
+- type: entity
+  abstract: true
+  id: BaseMobTrashPanda # possums and racoons
+  components:
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 10
+  - type: LanguageSpeaker
+    speaks:
+    - Hissing
+    understands:
+    - Hissing
+    - TauCetiBasic
+
+- type: entity
   parent: MobMonkey
   id: MobMonkeyGhostrole # Exists soley to make ghostrole monkey shuttles for gimmicks.
   suffix: Ghostrole
@@ -84,8 +116,6 @@
   - type: FlavorProfile
     flavors:
     - meaty
-  - type: Hunger
-    baseDecayRate: 0.3
   - type: Extractable
     grindableSolutionName: food
   - type: Solution

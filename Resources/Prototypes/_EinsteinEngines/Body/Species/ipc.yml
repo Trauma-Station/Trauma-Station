@@ -248,6 +248,8 @@
     needsCritical: false
   - type: SurgeryTarget
     sepsisImmune: true
+  - type: IntellicardableMind # recovery mode
+    downloadTimeFactor: 1.2
   - type: Tag
     tags:
     - SiliconMob

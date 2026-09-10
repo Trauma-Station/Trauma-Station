@@ -548,7 +548,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/buster.rsi
     layers:
     - state: buster
   - type: SinguloFood

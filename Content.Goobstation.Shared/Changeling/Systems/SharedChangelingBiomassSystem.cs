@@ -28,7 +28,7 @@ public abstract partial class SharedChangelingBiomassSystem : EntitySystem
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private MobThresholdSystem _mob = default!;
-    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPuddleSystem _puddle = default!;
     [Dependency] private SharedStunSystem _stun = default!;

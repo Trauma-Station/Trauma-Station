@@ -27,7 +27,7 @@ public sealed partial class SlaughterDemonSystem : EntitySystem
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
     [Dependency] private SlaughterDevourSystem _devour = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedActionsSystem _actions = default!;

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Silicons.Laws;
-using Content.Trauma.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Trauma.Common.Silicon;
+using Content.Trauma.Shared.Silicons.Laws;
 
 namespace Content.Trauma.Server.Silicons.Laws;
 
@@ -14,20 +14,13 @@ namespace Content.Trauma.Server.Silicons.Laws;
 /// </summary>
 public sealed partial class SlavedBorgSystem : SharedSlavedBorgSystem
 {
+    [Dependency] private EntityQuery<SiliconLawProviderComponent> _lawQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        // need to run after so it doesnt get overriden by the actual lawset
-        SubscribeLocalEvent<SlavedBorgComponent, GetSiliconLawsEvent>(OnGetSiliconLaws, after: [typeof(SiliconLawSystem)]);
-        SubscribeLocalEvent<SlavedBorgComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<SlavedBorgComponent, SiliconLawsetChangedEvent>(OnLawsetChanged);
-    }
-
+    // need to run after so it doesnt get overriden by the actual lawset
+    [SubscribeLocalEvent(after: [typeof(SiliconLawSystem)])]
     private void OnGetSiliconLaws(Entity<SlavedBorgComponent> ent, ref GetSiliconLawsEvent args)
     {
-        if (ent.Comp.Added || !TryComp<SiliconLawProviderComponent>(ent, out var provider))
+        if (ent.Comp.Added || !_lawQuery.TryComp(ent, out var provider))
             return;
 
         if (provider.Lawset is { } lawset)
@@ -35,18 +28,20 @@ public sealed partial class SlavedBorgSystem : SharedSlavedBorgSystem
         ent.Comp.Added = true; // prevent opening the ui adding more law 0's
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<SlavedBorgComponent> ent, ref ComponentRemove args)
     {
-        if (!ent.Comp.Added || !TryComp<SiliconLawProviderComponent>(ent, out var provider))
+        if (!ent.Comp.Added || !_lawQuery.TryComp(ent, out var provider))
             return;
 
         if (provider.Lawset is { } lawset)
             RemoveLaw(lawset, ent.Comp.Law);
     }
 
+    [SubscribeLocalEvent]
     public void OnLawsetChanged(Entity<SlavedBorgComponent> ent, ref SiliconLawsetChangedEvent args)
     {
-        if (!TryComp<SiliconLawProviderComponent>(ent, out var provider))
+        if (!_lawQuery.TryComp(ent, out var provider))
             return;
 
         if (provider.Lawset is { } lawset)

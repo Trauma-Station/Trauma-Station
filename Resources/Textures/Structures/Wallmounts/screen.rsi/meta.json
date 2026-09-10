@@ -1,14 +1,17 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/",
+    "copyright": "screen by AftrLite (GitHub), outer_frame and screen edited by whatston3 (GitHub)",
     "size": {
-      "x": 32,
-      "y": 32
+        "x": 32,
+        "y": 32
     },
     "states": [
-      {
-        "name": "screen"
-      }
+        {
+            "name": "outer_frame"
+        },
+        {
+            "name": "screen"
+        }
     ]
 }

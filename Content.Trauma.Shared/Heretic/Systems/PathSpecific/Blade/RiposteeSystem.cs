@@ -31,20 +31,12 @@ public sealed partial class RiposteeSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedSacramentsSystem _sacraments = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RiposteeComponent, BeforeHarmfulActionEvent>(OnHarmAttempt,
-            before: new[] { typeof(SharedHereticAbilitySystem) });
-
-        SubscribeNetworkEvent<RiposteUsedEvent>(OnRiposteUsed);
-    }
-
+    [SubscribeNetworkEvent]
     private void OnRiposteUsed(RiposteUsedEvent ev)
     {
         if (_net.IsServer)
@@ -105,6 +97,7 @@ public sealed partial class RiposteeSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent(before: new[] { typeof(SharedHereticAbilitySystem) })]
     private void OnHarmAttempt(Entity<RiposteeComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         if (args.Cancelled || !args.CanRiposte)
@@ -117,6 +110,9 @@ public sealed partial class RiposteeSystem : EntitySystem
             return;
 
         if (_mobState.IsIncapacitated(ent))
+            return;
+
+        if (_sacraments.ShouldBlockDamage(ent.Owner, args.User))
             return;
 
         foreach (var data in ent.Comp.Data.Values)

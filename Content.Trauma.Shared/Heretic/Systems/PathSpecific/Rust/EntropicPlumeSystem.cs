@@ -53,7 +53,7 @@ public sealed partial class EntropicPlumeSystem : EntitySystem
             return;
 
         var ev = new BeforeCastTouchSpellEvent(args.OtherEntity, false);
-        RaiseLocalEvent(args.OtherEntity, ev, true);
+        RaiseLocalEvent(args.OtherEntity, ref ev, true);
         if (ev.Cancelled)
             return;
 

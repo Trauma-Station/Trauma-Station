@@ -133,7 +133,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
         if (!ent.Comp.BypassNullrod)
         {
             var beforeEv = new BeforeCastTouchSpellEvent(target);
-            RaiseLocalEvent(target, beforeEv, true);
+            RaiseLocalEvent(target, ref beforeEv, true);
             if (beforeEv.Cancelled)
                 return true;
         }

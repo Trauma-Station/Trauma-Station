@@ -161,7 +161,7 @@ public sealed partial class NanoChatSystem : SharedNanoChatSystem
             return;
 
         // Assign a random number
-        _name.GenerateUniqueName(ent, _nameIdentifierGroup, out var number);
+        _name.GenerateUniqueNameModifier(_nameIdentifierGroup, out var number);
         ent.Comp.Number = (uint) number;
         Dirty(ent);
     }

@@ -64,3 +64,11 @@
     state: eldritch_slumber
   name: alerts-ether-name
   description: alerts-ether-desc
+
+- type: alert
+  id: InfluenceXRay
+  icons:
+  - sprite: /Textures/_Goobstation/Heretic/Effects/effects.rsi
+    state: eye_pulse
+  name: alerts-influence-xray-name
+  description: alerts-influence-xray-desc

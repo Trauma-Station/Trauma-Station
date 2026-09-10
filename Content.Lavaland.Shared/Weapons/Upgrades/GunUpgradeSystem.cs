@@ -28,8 +28,7 @@ public sealed partial class GunUpgradeSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedGunSystem _gun = default!;
-
-    private EntityQuery<GunUpgradeComponent> _upgradeQuery;
+    [Dependency] private EntityQuery<GunUpgradeComponent> _upgradeQuery = default!;
 
     private HashSet<Entity<GunUpgradeComponent>> _upgrades = new();
 
@@ -38,16 +37,10 @@ public sealed partial class GunUpgradeSystem : EntitySystem
     {
         base.Initialize();
 
-        _upgradeQuery = GetEntityQuery<GunUpgradeComponent>();
-
-        SubscribeLocalEvent<UpgradeableWeaponComponent, EntInsertedIntoContainerMessage>(OnUpgradeInserted);
-        SubscribeLocalEvent<UpgradeableWeaponComponent, ItemSlotInsertAttemptEvent>(OnItemSlotInsertAttemptEvent);
-        SubscribeLocalEvent<UpgradeableWeaponComponent, ExaminedEvent>(OnExamine);
-
         SubscribeLocalEvent<UpgradeableWeaponComponent, GunRefreshModifiersEvent>(RelayEvent);
         SubscribeLocalEvent<UpgradeableWeaponComponent, RechargeBasicEntityAmmoGetCooldownModifiersEvent>(RelayEvent);
         SubscribeLocalEvent<UpgradeableWeaponComponent, GunShotEvent>(RelayEvent);
-        SubscribeLocalEvent<UpgradeableWeaponComponent, ProjectileShotEvent>(RelayEvent);
+        SubscribeLocalEvent<UpgradeableWeaponComponent, GunShotProjectileEvent>(RelayEvent);
         SubscribeLocalEvent<UpgradeableWeaponComponent, GetRelayMeleeWeaponEvent>(RelayEvent);
         SubscribeLocalEvent<UpgradeableWeaponComponent, GetMeleeDamageEvent>(RelayEvent);
         SubscribeLocalEvent<UpgradeableWeaponComponent, MeleeHitEvent>(RelayEvent);
@@ -55,10 +48,6 @@ public sealed partial class GunUpgradeSystem : EntitySystem
         SubscribeLocalEvent<UpgradeableWeaponComponent, GetMeleeAttackRateEvent>(RelayEvent);
 
         SubscribeLocalEvent<UpgradeableWeaponComponent, GetItemActionsEvent>(RelayGetActionEvent);
-
-        SubscribeLocalEvent<GunUpgradeComponent, ExaminedEvent>(OnUpgradeExamine);
-
-        InitializeUpgrades();
     }
 
     private void RelayEvent<T>(Entity<UpgradeableWeaponComponent> ent, ref T args) where T : notnull
@@ -92,6 +81,7 @@ public sealed partial class GunUpgradeSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<UpgradeableWeaponComponent> ent, ref ExaminedEvent args)
     {
         var usedCapacity = 0;
@@ -110,6 +100,7 @@ public sealed partial class GunUpgradeSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnUpgradeExamine(Entity<GunUpgradeComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.ExamineTextType != null) // TODO add a list of all weapon types that this gun upgrade can be inserted to
@@ -119,6 +110,7 @@ public sealed partial class GunUpgradeSystem : EntitySystem
             args.PushMarkup(Loc.GetString("gun-upgrade-capacity-cost", ("value", ent.Comp.CapacityCost.Value)));
     }
 
+    [SubscribeLocalEvent]
     private void OnUpgradeInserted(Entity<UpgradeableWeaponComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         // Update some characteristics here.
@@ -126,6 +118,7 @@ public sealed partial class GunUpgradeSystem : EntitySystem
             _gun.RefreshModifiers((ent.Owner, gun));
     }
 
+    [SubscribeLocalEvent]
     private void OnItemSlotInsertAttemptEvent(Entity<UpgradeableWeaponComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
         if (!_upgradeQuery.TryComp(args.Item, out var upgradeComp)

@@ -146,8 +146,7 @@ public sealed partial class ZombieSystem
         //get diseases, breath, be thirst, be hungry, die in space, get double sentience, have offspring or be paraplegic.
         RemComp<RespiratorComponent>(target);
         RemComp<BarotraumaComponent>(target);
-        RemComp<HungerComponent>(target);
-        RemComp<ThirstComponent>(target);
+        RemComp<SatiationComponent>(target);
         RemComp<ReproductiveComponent>(target);
         RemComp<ReproductivePartnerComponent>(target);
         RemComp<LegsParalyzedComponent>(target); // Goob
@@ -246,7 +245,7 @@ public sealed partial class ZombieSystem
 
             // humanoid zombies get to pry open doors and shit
             var pryComp = EnsureComp<PryingComponent>(target);
-            pryComp.SpeedModifier = 0.75f;
+            pryComp.SpeedModifier = 3.75f; // Trauma - was 0.75f
             pryComp.PryPowered = true;
             pryComp.Force = true;
 

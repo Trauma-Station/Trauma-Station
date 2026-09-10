@@ -162,7 +162,7 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
     {
         DamageDict =
         {
-            { "Heat", 20 },
+            { "Heat", 30 },
         },
     };
 
@@ -292,8 +292,6 @@ public sealed partial class HereticBladePassiveRiposteEvent : HereticKnowledgeEv
 
 // lock
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
-
-public sealed partial class HereticXRayVisionEvent : HereticKnowledgeEvent;
 
 public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 
@@ -523,4 +521,7 @@ public partial class HereticKnowledgeEvent : EntityEventArgs
 
     [DataField]
     public ComponentRegistry AddedComponents = new();
+
+    [DataField]
+    public List<EntProtoId> StatusEffects = new();
 }

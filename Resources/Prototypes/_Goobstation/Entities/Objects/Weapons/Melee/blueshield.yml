@@ -30,8 +30,13 @@
     activatedDamage:
       types:
         Heat: 1
-  - type: Stunbaton
-    energyPerUse: 80
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 80
+  - type: MeleeBatteryHitsLeft
+  - type: StaminaDamageOnHitRequiresToggle
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 80
   - type: MeleeWeapon
     angle: 0
     wideAnimationRotation: -135

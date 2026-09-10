@@ -503,10 +503,13 @@
       - !type:HealthChange
         damage:
           types:
+            # <Trauma> - was all -0.33
             Heat: -0.5
             Shock: -0.5
-            Cold: -0.5 # Was .33, Buffed due to limb damage changes(GoobStation)
-      - !type:SatiateThirst
+            Cold: -0.5
+            # </Trauma>
+      - !type:Satiate
+        satiationType: Thirst
         factor: -10
         conditions:
         - !type:ReagentCondition
@@ -690,14 +693,14 @@
           conditions:
             - !type:ReagentCondition
               reagent: Ambuzol
-              min: 10
+              min: 15
     Digestion:
       effects:
         - !type:CureZombieInfection
           conditions:
             - !type:ReagentCondition
               reagent: Ambuzol
-              min: 10
+              min: 15
 
 - type: reagent
   id: AmbuzolPlus
@@ -750,7 +753,8 @@
   metabolisms:
     Bloodstream:
       effects:
-        - !type:SatiateThirst
+        - !type:Satiate
+          satiationType: Thirst
           factor: 6
         - !type:ModifyBloodLevel
           amount: 12 # Goobstation - buffed by two times due to shitmed changes
@@ -889,7 +893,8 @@
     Bloodstream:
       effects:
       # what the hell, this isn't satiating at all!!
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -1
 
   # Should heal quite literally everything, use in very small amounts
@@ -1184,7 +1189,8 @@
         damage:
           types:
             Blunt: -2.25 # 9 per u
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -1
       - !type:HealthChange
         conditions:
@@ -1226,7 +1232,8 @@
             - Vampire
         proto: VampireHolyWater
       # </Trauma>
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 3
       - !type:HealthChange
         conditions:
@@ -1531,7 +1538,6 @@
       effects:
       - !type:Emote
         emote: Yawn
-        showInChat: true
         probability: 0.1
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness

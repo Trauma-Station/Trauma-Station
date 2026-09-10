@@ -27,7 +27,6 @@
         children:
         - id: VehicleClowncarAntag
         - id: BikeHorn
-        - id: ClumsyImplanter
 
 - type: entity
   id: CrateFunClownCarCargo

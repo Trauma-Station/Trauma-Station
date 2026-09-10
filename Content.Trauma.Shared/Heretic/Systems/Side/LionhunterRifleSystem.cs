@@ -54,7 +54,6 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         SubscribeLocalEvent<AimedRifleComponent, DoAfterAttemptEvent<AimedRifleDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<AimedRifleComponent, AimedRifleDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<LionhunterRifleComponent, ProjectileShotEvent>(OnShoot);
         SubscribeLocalEvent<LionhunterRifleComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<LionhunterRifleComponent, AimedRifleAimAttemptEvent>(OnAimAttempt);
 
@@ -113,7 +112,8 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         args.PushMarkup(Loc.GetString("lionhunter-rifle-examine-message"));
     }
 
-    private void OnShoot(Entity<LionhunterRifleComponent> ent, ref ProjectileShotEvent args)
+    [SubscribeLocalEvent]
+    private void OnShoot(Entity<LionhunterRifleComponent> ent, ref GunShotProjectileEvent args)
     {
         if (CompOrNull<AimedRifleComponent>(ent.Owner)?.AimingAt == null || args.User is not { } user)
             return;

@@ -20,6 +20,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerStateSystem _powerState = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
@@ -320,7 +321,8 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     private void SetWorkingState(Entity<GenericFieldGeneratorComponent> ent, bool state, EntityUid? user = null)
     {
-        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = state;
+        _powerState.SetWorkingState(ent.Owner, state);
+
         ent.Comp.IsConnected = state;
         ChangeConnectionLightVisualizer(ent);
         UpdateConnectionLights(ent);

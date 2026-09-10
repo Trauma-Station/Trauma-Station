@@ -12,6 +12,8 @@
     - state: icon
       visible: true
       map: ["base"]
+  - type: Item
+    inhandVisuals: {}
   - type: GenericVisualizer
     visuals:
       enum.LimitedChargesState.HasCharges:

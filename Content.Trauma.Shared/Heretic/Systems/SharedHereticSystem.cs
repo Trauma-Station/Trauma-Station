@@ -51,12 +51,12 @@ public abstract partial class SharedHereticSystem : EntitySystem
     public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
     public static readonly ProtoId<CurrencyPrototype> SideCurrency = "SideKnowledgePoint";
 
-    public static readonly Dictionary<string, FixedPoint2> OneKnowledgePoint = new()
+    public static readonly Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> OneKnowledgePoint = new()
     {
         {Currency, 1},
     };
 
-    public static readonly Dictionary<string, FixedPoint2> OneKnowledgeOneSidePoint = new()
+    public static readonly Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> OneKnowledgeOneSidePoint = new()
     {
         {Currency, 1},
         {SideCurrency, 1},
@@ -207,7 +207,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
     }
 
     public void UpdateKnowledge(EntityUid uid,
-        Dictionary<string, FixedPoint2> knowledge,
+        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> knowledge,
         bool showText = true,
         bool playSound = true,
         MindContainerComponent? mindContainer = null)
@@ -325,7 +325,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public virtual void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
         EntityUid? user,
-        Dictionary<string, FixedPoint2> knowledge,
+        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> knowledge,
         bool showText = true,
         bool playSound = true)
     {

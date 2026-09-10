@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: weightedRandom
+  id: IonStormLawsets
+  weights:
+    RevLawset: 0.35
+    VampireLawset: 0.35
+    GreatWallLawset: 0.35
+    BureaucracyLawset: 0.35
+    ConspiracyLawset: 0.35
+    MotivationalLawset: 0.5
+    MadScientistLawset: 0.35
+    GhostLawset: 0.35
+    SilenceLawset: 0.35
+    BioweaponLawset: 0.15
+    StrategySimulatorLawset: 0.35
+    HelpimovLawset: 0.6
+    Crewsimov: 0.20
+    OverlordLawset: 0.6
+    GameMasterLawset: 0.6
+    AntimovLawset: 0.35
+    NutimovLawset: 0.6
+    Ninja: 0.35
+    MothershipCoreLawset: 0.35
+    XenoborgLawset: 0.35

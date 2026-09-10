@@ -44,7 +44,7 @@ public sealed partial class FaceHuggerSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedSolutionContainerSystem _solutions = default!; // Goobstation
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedTransformSystem _transform = default!; // Goobstation
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private BodySystem _body = default!;
