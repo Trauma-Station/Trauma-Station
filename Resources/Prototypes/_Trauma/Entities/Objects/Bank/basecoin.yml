@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseSpaceCoin
+  name: nano coins
+  description: Metallic currency for smaller transactions.
+  components:
+  - type: Currency
+    price:
+      Spesos: 0.01
+  - type: Tag
+    tags:
+    - Small
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,0,0
+    storedOffset: 0,0
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit: 1
+  - type: StaticPrice
+    price: 0
+  - type: Stack
+    stackType: CoinCredit_01
+    count: 1
+    baseLayer: base
+    layerStates:
+    - coin
+    - coin_2
+    - coin_3
+    - coin_4
+    - coin_5
+    layerFunction: Threshold
+  - type: StackLayerThreshold
+    thresholds: [2, 3, 4, 5]
+  - type: Projectile
+    deleteOnCollide: false
+    onlyCollideWhenShot: false
+    damage:
+      types:
+        Piercing: 5
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_01.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 50
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+        mask:
+        - ItemMask
+  - type: Appearance

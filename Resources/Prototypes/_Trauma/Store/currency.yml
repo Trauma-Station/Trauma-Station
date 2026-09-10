@@ -30,10 +30,18 @@
   id: Shekels
   displayName: store-currency-display-shekels
   cash:
-    0.01: SpaceCoin
-    0.02: SpaceCoin_02
-    0.05: SpaceCoin_05
-    0.10: SpaceCoin_10
-    0.20: SpaceCoin_20
-    0.50: SpaceCoin_20
+    0.01: SpaceCoin_01
+    0.12: SpaceCoin_02
+    0.04: SpaceCoin_04
+    0.12: SpaceCoin_12
+    0.16: SpaceCoin_16
+    0.24: SpaceCoin_24
+    0.48: SpaceCoin_48
+    0.96: SpaceCoin_96
+    1.20: SpaceCoin_120
+    2.40: SpaceCoin_240
+    4.80: SpaceCoin_480
+    9.60: SpaceCoin_960
+    19.20: SpaceCoin_1920
+    19.36: SpaceCoin_1936
   canWithdraw: true

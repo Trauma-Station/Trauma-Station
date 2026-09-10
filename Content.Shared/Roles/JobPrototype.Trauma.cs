@@ -15,6 +15,6 @@ public sealed partial class JobPrototype
     /// The type of starting currency of bank to grab from. (i.e. Spesos or TC or whatever).
     /// </summary>
     [DataField]
-    public ProtoId<CurrencyPrototype> StartingCurrencyType = "Spesos";
+    public ProtoId<CurrencyPrototype> StartingCurrencyType = "Shekels";
 
 }

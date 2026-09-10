@@ -18,5 +18,5 @@ public sealed partial class BankComponent : Component
     public Dictionary<string, string> Passwords = new();
 
     [DataField(required: true)]
-    public ProtoId<CurrencyPrototype> Currency = "Spesos";
+    public ProtoId<CurrencyPrototype> Currency = "Shekels";
 }

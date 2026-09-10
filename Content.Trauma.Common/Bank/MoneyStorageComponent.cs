@@ -13,7 +13,7 @@ public sealed partial class MoneyStorageComponent : Component
     public SoundSpecifier? SoundOnInsertMoney = new SoundPathSpecifier("/Audio/Weapons/Guns/Hits/laser_sear_wall.ogg", AudioParams.Default.WithVariation(0.05f));
 
     [DataField(required: true)]
-    public ProtoId<CurrencyPrototype> Currency = "Spesos";
+    public ProtoId<CurrencyPrototype> Currency = "Shekels";
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 StoredMoney;

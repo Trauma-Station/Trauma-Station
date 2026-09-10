@@ -1,111 +1,281 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
-  parent: BaseItem
-  id: BaseSpaceCoin
-  name: nano coins
-  description: Metallic currency for smaller transactions.
+  parent: BaseSpaceCoin
+  id: SpaceCoin_01
+  name: farthing
   components:
   - type: Currency
     price:
       Spesos: 0.01
-  - type: Tag
-    tags:
-    - Small
-  - type: Item
-    size: Small
-    shape:
-    - 0,0,0,0
-    storedOffset: 0,0
-  - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CoinCredit: 1
-  - type: StaticPrice
-    price: 0
+      CoinCredit_01: 1
   - type: Stack
     stackType: CoinCredit_01
-    count: 1
-    baseLayer: base
-    layerStates:
-    - coin
-    - coin_5
-    - coin_10
-    - coin_25
-    - coin_50
-    layerFunction: Threshold
-  - type: StackLayerThreshold
-    thresholds: [5, 10, 25, 50]
-  - type: Projectile
-    deleteOnCollide: false
-    onlyCollideWhenShot: false
-    damage:
-      types:
-        Piercing: 5
   - type: Sprite
-    sprite: _Trauma/Objects/Economy/coin.rsi
+    sprite: _Trauma/Objects/Economy/coin_01.rsi
     state: coin
     layers:
     - state: coin
       map: ["base"]
-  - type: Physics
-    bodyType: Dynamic
-  - type: Fixtures
-    fixtures:
-      fix1:
-        density: 50
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.15,0.15,0.15"
-        mask:
-        - ItemMask
-  - type: Appearance
 
 - type: entity
   parent: BaseSpaceCoin
-  id: SpaceCoin
-
-- type: entity
-  parent: BaseSpaceCoin
-  id: SpaceCoin_05
-  suffix: 0.05
+  id: SpaceCoin_02
+  name: halfpenny
   components:
-  - type: Icon
-    sprite: _Trauma/Objects/Economy/coin.rsi
-    state: coin_5
+  - type: Currency
+    price:
+      Spesos: 0.02
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_02: 1
   - type: Stack
-    count: 5
+    stackType: CoinCredit_02
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_02.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
 
 - type: entity
   parent: BaseSpaceCoin
-  id: SpaceCoin_10
-  suffix: 0.10
+  id: SpaceCoin_04
+  name: penny
   components:
-  - type: Icon
-    sprite: _Trauma/Objects/Economy/coin.rsi
-    state: coin_10
+  - type: Currency
+    price:
+      Spesos: 0.04
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_04: 1
   - type: Stack
-    count: 10
+    stackType: CoinCredit_04
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_04.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
 
 - type: entity
   parent: BaseSpaceCoin
-  id: SpaceCoin_25
-  suffix: 0.25
+  id: SpaceCoin_12
+  name: threepenny bit
   components:
-  - type: Icon
-    sprite: _Trauma/Objects/Economy/coin.rsi
-    state: coin_25
+  - type: Currency
+    price:
+      Spesos: 0.12
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_12: 1
   - type: Stack
-    count: 25
+    stackType: CoinCredit_12
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_12.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
 
 - type: entity
   parent: BaseSpaceCoin
-  id: SpaceCoin_50
-  suffix: 0.50
+  id: SpaceCoin_16
+  name: groat
   components:
-  - type: Icon
-    sprite: _Trauma/Objects/Economy/coin.rsi
-    state: coin_50
+  - type: Currency
+    price:
+      Spesos: 0.16
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_16: 1
   - type: Stack
-    count: 50
+    stackType: CoinCredit_16
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_16.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_24
+  name: tanner
+  components:
+  - type: Currency
+    price:
+      Spesos: 0.24
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_24: 1
+  - type: Stack
+    stackType: CoinCredit_24
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_24.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_48
+  name: shilling
+  components:
+  - type: Currency
+    price:
+      Spesos: 0.48
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_48: 1
+  - type: Stack
+    stackType: CoinCredit_48
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_48.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_96
+  name: florin
+  components:
+  - type: Currency
+    price:
+      Spesos: 0.96
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_96: 1
+  - type: Stack
+    stackType: CoinCredit_96
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_96.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_120
+  name: half crown
+  components:
+  - type: Currency
+    price:
+      Spesos: 1.20
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_120: 1
+  - type: Stack
+    stackType: CoinCredit_120
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_120.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_240
+  name: full crown
+  components:
+  - type: Currency
+    price:
+      Spesos: 2.40
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_240: 1
+  - type: Stack
+    stackType: CoinCredit_240
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_240.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_480
+  name: half pence
+  components:
+  - type: Currency
+    price:
+      Spesos: 4.80
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_480: 1
+  - type: Stack
+    stackType: CoinCredit_480
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_480.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_960
+  name: full pence
+  components:
+  - type: Currency
+    price:
+      Spesos: 9.60
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_960: 1
+  - type: Stack
+    stackType: CoinCredit_960
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_960.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_1920
+  name: sovereign
+  components:
+  - type: Currency
+    price:
+      Spesos: 19.20
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_1920: 1
+  - type: Stack
+    stackType: CoinCredit_1920
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_1920.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
+
+- type: entity
+  parent: BaseSpaceCoin
+  id: SpaceCoin_1936
+  name: guinea
+  components:
+  - type: Currency
+    price:
+      Spesos: 19.36
+  - type: PhysicalComposition
+    materialComposition:
+      CoinCredit_1936: 1
+  - type: Stack
+    stackType: CoinCredit_1936
+  - type: Sprite
+    sprite: _Trauma/Objects/Economy/coin_1936.rsi
+    state: coin
+    layers:
+    - state: coin
+      map: ["base"]
