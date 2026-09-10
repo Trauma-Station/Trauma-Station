@@ -5,12 +5,9 @@
   setPreference: false
   objective: roles-antag-space-ninja-objective
   guides: [ SpaceNinja ]
-  requirements:
-  - !type:SpeciesRequirement
-    inverted: true
-    species:
-    - Plasmaman
-  creditImage: /Textures/_Trauma/EndCredits/Antags/ninja.png # Trauma
+  tags:
+  - OffStation
+  - Midround
 
 - type: antagSpecifier
   parent: RestrictedAntag

@@ -175,7 +175,7 @@
   - !type:SpillTileReaction
   plantMetabolism:
   - !type:PlantMutateChemicals
-    randomPickBotanyReagent: UnknownReagentFillSolution
+    randomChemTables: [ UnknownReagentFillSolution ]
   metabolisms:
     Bloodstream:
       effects:

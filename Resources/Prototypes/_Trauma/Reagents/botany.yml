@@ -63,6 +63,7 @@
   plantMetabolism:
   - !type:PlantAdjustMutationLevel
     amount: 3
+    mutationTable: RandomPlantMutations
 
 - type: reagent
   id: ReaperDelight

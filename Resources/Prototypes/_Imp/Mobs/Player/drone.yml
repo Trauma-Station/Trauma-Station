@@ -53,6 +53,7 @@
     drawdepth: Mobs
   - type: Physics
     bodyType: KinematicController
+  - type: CarryBlacklist
   - type: Hands
     hands:
       # Unremovable tools

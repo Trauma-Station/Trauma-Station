@@ -13,7 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Power.Components;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Medical.Medigun;
 using Content.Trauma.Shared.Medical.Medigun.Components;
