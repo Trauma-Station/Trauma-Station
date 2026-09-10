@@ -14379,3 +14379,10 @@ Entries:
   id: 1568
   time: '2026-09-10T09:21:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4533
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed exploding pen to not full nugget you anymore.
+  id: 1569
+  time: '2026-09-10T09:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4534
