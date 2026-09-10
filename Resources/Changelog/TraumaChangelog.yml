@@ -14358,3 +14358,10 @@ Entries:
   id: 1565
   time: '2026-09-09T10:51:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4273
+- author: freycyik
+  changes:
+  - type: Tweak
+    message: Made zombies prying doors 5x faster
+  id: 1566
+  time: '2026-09-10T06:03:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4525
