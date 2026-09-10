@@ -269,7 +269,7 @@
 - type: entity
   parent:
   - !Remove BaseMobAnimal
-  - BaseMobMouse
+  - !SetIndex:0 BaseMobMouse
   - BaseAnimalGhostRole
   id: MobMouse
   components:
@@ -334,6 +334,13 @@
         Slash: 1
   - type: Bloodstream
     smokeImmune: true # prevent server lagging mouse farms
+    # W shitcode
+    bloodlossDamage:
+      types:
+        Bloodloss: 0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -1
   - !Remove ReplacementAccent
 
 - type: entity
