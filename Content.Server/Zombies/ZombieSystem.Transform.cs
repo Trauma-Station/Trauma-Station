@@ -245,7 +245,7 @@ public sealed partial class ZombieSystem
 
             // humanoid zombies get to pry open doors and shit
             var pryComp = EnsureComp<PryingComponent>(target);
-            pryComp.SpeedModifier = 0.75f;
+            pryComp.SpeedModifier = 3.75f; // Trauma - was 0.75f
             pryComp.PryPowered = true;
             pryComp.Force = true;
 
