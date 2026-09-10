@@ -14358,3 +14358,42 @@ Entries:
   id: 1565
   time: '2026-09-09T10:51:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4273
+- author: freycyik
+  changes:
+  - type: Tweak
+    message: Made zombies prying doors 5x faster
+  id: 1566
+  time: '2026-09-10T06:03:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4525
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Remove zzzz-the's pAI
+  id: 1567
+  time: '2026-09-10T09:09:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bleach being safe to drink, real life parity.
+  id: 1568
+  time: '2026-09-10T09:21:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4533
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed exploding pen to not full nugget you anymore.
+  id: 1569
+  time: '2026-09-10T09:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4534
+- author: rivermyth
+  changes:
+  - type: Add
+    message: Added tampering alert to electronic lockers and lockboxes.
+  - type: Add
+    message: Added wire panel to lockers and electronic crates.
+  - type: Add
+    message: Added Lock/Unlock/Toggle signals to lockers and electronic crates.
+  id: 1570
+  time: '2026-09-10T10:47:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4364
