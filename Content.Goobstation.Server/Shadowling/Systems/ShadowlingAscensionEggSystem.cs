@@ -237,7 +237,6 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
             if (HasComp<LesserShadowlingComponent>(thrall))
             {
                 EntityManager.AddComponents(thrall, nightmareComps);
-                RemComp<ShadowlingShadowWalkComponent>(thrall);
                 continue; // Don't polymorph the lesser again
             }
 
