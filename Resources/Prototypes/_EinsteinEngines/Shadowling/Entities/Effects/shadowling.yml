@@ -22,6 +22,44 @@
     duration: 0.34
 
 - type: entity
+  id: ShadowlingShadowWalkInEffect
+  name: shadowling shadow walk in effect
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    noRot: true
+    sprite: _EinsteinEngines/Shadowling/Effects/shadow_walk.rsi
+    state: shadow_walk_in
+    netsync: false
+    drawdepth: Effects
+  - type: PointLight
+    color: "#8A9A5B"
+    radius: 1.13
+    energy: 2
+
+- type: entity
+  id: ShadowlingShadowWalkOutEffect
+  name: shadowling shadow walk out effect
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    noRot: true
+    sprite: _EinsteinEngines/Shadowling/Effects/shadow_walk.rsi
+    state: shadow_walk_out
+    netsync: false
+    drawdepth: Effects
+  - type: PointLight
+    color: "#8A9A5B"
+    radius: 1.13
+    energy: 2
+
+- type: entity
   id: ShadowlingCollectiveMindEffect
   name: shadowling collective mind effect
   components:
