@@ -37,14 +37,6 @@ public sealed partial class BorgSystem : SharedBorgSystem
 
     public static readonly ProtoId<JobPrototype> BorgJobId = "Borg";
 
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        InitializeTransponder();
-    }
-
     public override bool CanPlayerBeBorged(ICommonSession session)
     {
         if (_banManager.GetJobBans(session.UserId)?.Contains(BorgJobId) == true)

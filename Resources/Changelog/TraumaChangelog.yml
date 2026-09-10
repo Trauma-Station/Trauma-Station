@@ -14397,3 +14397,12 @@ Entries:
   id: 1570
   time: '2026-09-10T10:47:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4364
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Drones interactions are now predicted.
+  - type: Fix
+    message: Fixed drones being able to carry people lmao
+  id: 1571
+  time: '2026-09-10T12:00:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4521

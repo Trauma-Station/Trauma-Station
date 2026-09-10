@@ -3,8 +3,8 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.DeviceNetwork.Payloads;
 using Content.Shared.DoAfter;
 using Content.Shared.Emp;
 using Content.Shared.Hands.EntitySystems;
@@ -51,7 +51,6 @@ public abstract partial class SharedPoweredLightSystem : EntitySystem
         SubscribeLocalEvent<PoweredLightComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PoweredLightComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<PoweredLightComponent, SignalReceivedEvent>(OnSignalReceived);
-        SubscribeLocalEvent<PoweredLightComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<PoweredLightComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<PoweredLightComponent, PoweredLightDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<PoweredLightComponent, DamageChangedEvent>(HandleLightDamaged);
@@ -128,35 +127,15 @@ public abstract partial class SharedPoweredLightSystem : EntitySystem
             SetState(ent, true, ent.Comp);
         else if (args.Port == ent.Comp.TogglePort)
             ToggleLight(ent, ent.Comp);
-        // <Trauma> - allow logic signals to set it directly instead of just toggling, no need for edge detector
-        else if (args.Port == ent.Comp.ControlPort)
-        {
-            if (args.Data is not { } data)
-                return; // non-logic signal
-
-            var value = false;
-            if (data.TryGetValue(DeviceNetworkConstants.LogicState, out SignalState state))
-                value = state == SignalState.High;
-            else if (data.TryGetValue("logic_int", out int i))
-                value = i != 0; // so circuits dont have to convert it
-            else
-                return; // unsupported signal (string or something)
-
-            SetState(ent, value, ent.Comp);
-        }
-        // </Trauma>
     }
 
     /// <summary>
-    /// Turns the light on or of when receiving a <see cref="DeviceNetworkConstants.CmdSetState"/> command.
-    /// The light is turned on or of according to the <see cref="DeviceNetworkConstants.StateEnabled"/> value
+    /// Turns the light on or of when receiving a <see cref="ApcNetTogglePayload"/>.
     /// </summary>
-    private void OnPacketReceived(EntityUid uid, PoweredLightComponent component, DeviceNetworkPacketEvent args)
+    [SubscribeLocalEvent]
+    private void OnPacketReceived(Entity<PoweredLightComponent> ent, ref DeviceNetworkPacketEvent<ApcNetTogglePayload> args)
     {
-        if (!args.Data.TryGetValue(DeviceNetworkConstants.Command, out string? command) || command != DeviceNetworkConstants.CmdSetState) return;
-        if (!args.Data.TryGetValue(DeviceNetworkConstants.StateEnabled, out bool enabled)) return;
-
-        SetState(uid, enabled, component);
+        SetState(ent, args.Data.Enabled, ent.Comp);
     }
 
     /// <summary>

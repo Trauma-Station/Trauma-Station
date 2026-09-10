@@ -331,8 +331,8 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         _audio.PlayPredicted(state ? ent.Comp.ActivationSound : ent.Comp.DeactivationSound, ent, user);
         if (HasComp<DeviceLinkSourceComponent>(ent))
         {
-            _signal.SendSignal(ent, ent.Comp.ConnectionStatusPort, state);
-            _signal.InvokePort(ent, state ? ent.Comp.FieldConnectedPort : ent.Comp.FieldDisconnectedPort);
+            _signal.SendSignal(ent.Owner, ent.Comp.ConnectionStatusPort, state);
+            _signal.InvokePort(ent.Owner, state ? ent.Comp.FieldConnectedPort : ent.Comp.FieldDisconnectedPort);
         }
         Dirty(ent, ent.Comp);
     }

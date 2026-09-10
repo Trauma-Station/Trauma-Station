@@ -270,7 +270,7 @@
   - type: Temperature
     specificHeat: 300 # Trauma - 10x lower heat capacity so spacing etc doesnt literally do nothing
   - type: TemperatureDamage
-    heatDamageThreshold: 325
+    heatDamageThreshold: 316.15
     coldDamageThreshold: 273.15
     coldDamage:
       types:
