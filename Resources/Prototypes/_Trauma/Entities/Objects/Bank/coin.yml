@@ -25,7 +25,7 @@
   - type: StaticPrice
     price: 0
   - type: Stack
-    stackType: CoinCredit
+    stackType: CoinCredit_01
     count: 1
     baseLayer: base
     layerStates:
@@ -61,21 +61,6 @@
         mask:
         - ItemMask
   - type: Appearance
-
-- type: material
-  id: CoinCredit
-  name: nano coin
-  unit: materials-unit-bill
-  stackEntity: SpaceCoin
-  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
-  price: 0.01
-  maxCount: 1000
-
-- type: stack
-  id: CoinCredit
-  name: stack-credit
-  icon: { sprite: _Trauma/Textures/Objects/Economy/coin.rsi, state: coin }
-  spawn: SpaceCoin
 
 - type: entity
   parent: BaseSpaceCoin

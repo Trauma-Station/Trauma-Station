@@ -1,0 +1,125 @@
+- type: material
+  id: CoinCredit_01
+  name: farthing
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.01
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_02
+  name: halfpenny
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.02
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_04
+  name: penny
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.04
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_12
+  name: threepenny bit
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.12
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_16
+  name: groat
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.16
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_24
+  name: tanner
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.24
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_48
+  name: shilling
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.48
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_96
+  name: florin
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 0.96
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_120
+  name: half crown
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 1.20
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_240
+  name: full crown
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 2.40
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_480
+  name: half pence
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 4.80
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_960
+  name: full pence
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 9.60
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_1920
+  name: sovereign
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 19.20
+  maxCount: 1000
+
+- type: material
+  id: CoinCredit_1936
+  name: guinea
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin.rsi, state: coin }
+  price: 19.36
+  maxCount: 1000
