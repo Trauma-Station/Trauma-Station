@@ -2,7 +2,7 @@
 
 - type: entity
   parent: LingRDStealObjective
-  id: LingTeleportArmourStealObjective
+  id: LingTeleportArmorStealObjective
   components:
   - type: StealCondition
-    stealGroup: TeleportArmour
+    stealGroup: TeleportArmor

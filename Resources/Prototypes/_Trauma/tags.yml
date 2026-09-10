@@ -12,10 +12,10 @@
   id: AirlockAssembly # Used for airlock assemblies so that heretic void conduit can damage them
 
 - type: Tag
-  id: AnomalyCoreBluespace # Construction: teleport reactive armour
+  id: AnomalyCoreBluespace # Construction: teleport reactive armor
 
 - type: Tag
-  id: AnomalyCoreElectricity # Construction: tesla reactive armour
+  id: AnomalyCoreElectricity # Construction: tesla reactive armor
 
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down

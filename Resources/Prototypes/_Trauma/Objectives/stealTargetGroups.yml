@@ -43,8 +43,8 @@
     state: icon
 
 - type: stealTargetGroup
-  id: TeleportArmour
-  name: steal-target-groups-teleport-armour
+  id: TeleportArmor
+  name: steal-target-groups-teleport-armor
   sprite:
     sprite: _Trauma/Clothing/Armor/reactive.rsi
     state: icon

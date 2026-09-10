@@ -3,13 +3,13 @@
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.ReactiveArmour;
+namespace Content.Trauma.Shared.ReactiveArmor;
 
 /// <summary>
 /// Checks if enought time have passed to activate reactive armour behavior
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-public sealed partial class ReactiveArmourComponent : Component
+public sealed partial class ReactiveArmorComponent : Component
 {
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;

@@ -22,13 +22,13 @@
 - type: entity
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
   id: ClothingOuterArmorReactiveRD
-  name: reactive teleport armour
+  name: reactive teleport armor
   suffix: RD
   description: Someone separated our Research Director from his own head!
   components:
   - type: StealTarget
-    stealGroup: TeleportArmour
-  - type: ReactiveArmour
+    stealGroup: TeleportArmor
+  - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
         sound: &deparure_sound
@@ -51,7 +51,7 @@
 - type: entity
   parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReactiveUnfinished
-  name: unfinished reactive armour
+  name: unfinished reactive armor
   suffix: empty
   description: This one needs an anomaly core.
   components:
@@ -71,12 +71,12 @@
 - type: entity
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveTeleport
-  name: reactive teleport armour
-  description: Reactive armour with bluespace core in it.
+  name: reactive teleport armor
+  description: Reactive armor with bluespace core in it.
   components:
   - type: StealTarget
-    stealGroup: TeleportArmour
-  - type: ReactiveArmour
+    stealGroup: TeleportArmor
+  - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
         sound: *deparure_sound
@@ -100,10 +100,10 @@
 - type: entity
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveTesla
-  name: reactive tesla armour
-  description: Reactive armour with tesla core in it.
+  name: reactive tesla armor
+  description: Reactive armor with tesla core in it.
   components:
-  - type: ReactiveArmour
+  - type: ReactiveArmor
     effects:
     - !type:Sparks
     - !type:ShootRandomLightnings
