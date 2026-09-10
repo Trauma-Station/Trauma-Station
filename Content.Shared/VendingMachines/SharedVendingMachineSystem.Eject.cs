@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Bank;
+// </Trauma>
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Advertise.Components;
@@ -152,6 +155,20 @@ public abstract partial class SharedVendingMachineSystem
             Deny((uid, vendComponent), ejectComponent: ejectComponent);
             return;
         }
+
+        // <Trauma>
+        var attemptEvent = new VendingMachineVendAttemptEvent(itemId);
+        RaiseLocalEvent(uid, ref attemptEvent);
+
+        if (attemptEvent.Cancelled)
+        {
+            if (!string.IsNullOrEmpty(attemptEvent.Reason))
+                Popup.PopupClient(Loc.GetString(attemptEvent.Reason), uid);
+
+            Deny((uid, vendComponent));
+            return;
+        }
+        // </Trauma>
 
         // Start Ejecting and prevent users from ordering while anim playing
         ejectComponent.EjectEnd = Timing.CurTime + ejectComponent.EjectDelay;

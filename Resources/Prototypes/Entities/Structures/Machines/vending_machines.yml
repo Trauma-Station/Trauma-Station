@@ -8,6 +8,9 @@
   abstract: true
   components:
   # <Trauma>
+  - type: MoneyStorage
+    currency: Spesos
+    storedMoney: 0
   - type: Rotatable
   - type: LanguageSpeaker
     speaks:

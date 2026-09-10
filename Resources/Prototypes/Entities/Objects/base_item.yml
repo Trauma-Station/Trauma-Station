@@ -4,6 +4,8 @@
   name: "item"
   components:
   # <Trauma>
+  - type: SellPrice
+    price: 0.99
   - type: EmitSoundOnPickup
     sound:
       collection: GenericPickup

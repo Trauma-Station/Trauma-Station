@@ -1,0 +1,449 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: SpaceCoin_01
+  id: SpaceCoin_01_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_01
+  id: SpaceCoin_01_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_01
+  id: SpaceCoin_01_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_01
+  id: SpaceCoin_01_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_02
+  id: SpaceCoin_02_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_02
+  id: SpaceCoin_02_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_02
+  id: SpaceCoin_02_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_02
+  id: SpaceCoin_02_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_04
+  id: SpaceCoin_04_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_04
+  id: SpaceCoin_04_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_04
+  id: SpaceCoin_04_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_04
+  id: SpaceCoin_04_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_12
+  id: SpaceCoin_12_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_12
+  id: SpaceCoin_12_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_12
+  id: SpaceCoin_12_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_12
+  id: SpaceCoin_12_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_16
+  id: SpaceCoin_16_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_16
+  id: SpaceCoin_16_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_16
+  id: SpaceCoin_16_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_16
+  id: SpaceCoin_16_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_24
+  id: SpaceCoin_24_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_24
+  id: SpaceCoin_24_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_24
+  id: SpaceCoin_24_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_24
+  id: SpaceCoin_24_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_48
+  id: SpaceCoin_48_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_48
+  id: SpaceCoin_48_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_48
+  id: SpaceCoin_48_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_48
+  id: SpaceCoin_48_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_96
+  id: SpaceCoin_96_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_96
+  id: SpaceCoin_96_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_96
+  id: SpaceCoin_96_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_96
+  id: SpaceCoin_96_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_120
+  id: SpaceCoin_120_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_120
+  id: SpaceCoin_120_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_120
+  id: SpaceCoin_120_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_120
+  id: SpaceCoin_120_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_240
+  id: SpaceCoin_240_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_240
+  id: SpaceCoin_240_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_240
+  id: SpaceCoin_240_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_240
+  id: SpaceCoin_240_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_480
+  id: SpaceCoin_480_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_480
+  id: SpaceCoin_480_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_480
+  id: SpaceCoin_480_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_480
+  id: SpaceCoin_480_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_960
+  id: SpaceCoin_960_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_960
+  id: SpaceCoin_960_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_960
+  id: SpaceCoin_960_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_960
+  id: SpaceCoin_960_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_1920
+  id: SpaceCoin_1920_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_1920
+  id: SpaceCoin_1920_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_1920
+  id: SpaceCoin_1920_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_1920
+  id: SpaceCoin_1920_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: SpaceCoin_1936
+  id: SpaceCoin_1936_2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2
+
+- type: entity
+  parent: SpaceCoin_1936
+  id: SpaceCoin_1936_3
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: SpaceCoin_1936
+  id: SpaceCoin_1936_4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+- type: entity
+  parent: SpaceCoin_1936
+  id: SpaceCoin_1936_5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5

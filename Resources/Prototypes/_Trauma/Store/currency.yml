@@ -5,6 +5,16 @@
   displayName: store-currency-display-spesos
   cash:
     1: SpaceCash
+    10: SpaceCash10
+    100: SpaceCash100
+    500: SpaceCash500
+    1000: SpaceCash1000
+    2500: SpaceCash2500
+    5000: SpaceCash5000
+    10000: SpaceCash10000
+    20000: SpaceCash20000
+    30000: SpaceCash30000
+    1000000: SpaceCash1000000
   canWithdraw: true
 
 - type: currency
@@ -12,4 +22,26 @@
   displayName: store-currency-display-fake-spesos
   cash:
     1: SpaceCashCounterfeit
+    10: SpaceCashCounterfeit10
+    250: SpaceCashCounterfeit250
+  canWithdraw: true
+
+- type: currency
+  id: Shekels
+  displayName: store-currency-display-shekels
+  cash:
+    0.01: SpaceCoin_01
+    0.12: SpaceCoin_02
+    0.04: SpaceCoin_04
+    0.12: SpaceCoin_12
+    0.16: SpaceCoin_16
+    0.24: SpaceCoin_24
+    0.48: SpaceCoin_48
+    0.96: SpaceCoin_96
+    1.20: SpaceCoin_120
+    2.40: SpaceCoin_240
+    4.80: SpaceCoin_480
+    9.60: SpaceCoin_960
+    19.20: SpaceCoin_1920
+    19.36: SpaceCoin_1936
   canWithdraw: true

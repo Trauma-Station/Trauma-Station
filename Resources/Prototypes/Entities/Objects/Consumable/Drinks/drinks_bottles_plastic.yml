@@ -4,6 +4,10 @@
   id: DrinkBottlePlasticBase
   suffix:
   components:
+  # <Trauma>
+  - type: SellPrice
+    price: 9.99
+  # </Trauma>
   - type: Item
     size: Normal
   - type: Openable

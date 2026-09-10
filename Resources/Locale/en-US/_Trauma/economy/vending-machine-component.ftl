@@ -1,0 +1,1 @@
+vending-machine-component-try-eject-no-money = Not enough funds

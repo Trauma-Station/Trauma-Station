@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: material
+  id: CoinCredit
+  name: nano_coins
+  unit: materials-unit-coin
+  stackEntity: SpaceCoin
+  icon: { sprite: /Textures/Objects/Economy/coin_01.rsi, state: coin }
+  price: 0.01
+  maxCount: 1000

@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-NC-SA-3.0",
+    "copyright": "Made by GeneRickUsername.",
+    "states": [
+        {
+            "name": "coin"
+        },
+        {
+            "name": "coin_2"
+        },
+        {
+            "name": "coin_3"
+        },
+        {
+            "name": "coin_4"
+        },
+        {
+            "name": "coin_5"
+        }
+    ]
+}
