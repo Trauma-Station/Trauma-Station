@@ -19,15 +19,15 @@ namespace Content.Client.Info
             var cfg = IoCManager.Resolve<IConfigurationManager>();
 
             var bugReport = cfg.GetCVar(CCVars.InfoLinksBugReport);
-            if (bugReport != "")
+            if (!string.IsNullOrWhiteSpace(bugReport))
             {
                 var reportButton = new Button {Text = Loc.GetString("server-info-report-button")};
-                reportButton.OnPressed += args => uriOpener.OpenUri(bugReport);
+                reportButton.OnPressed += _ => uriOpener.OpenUri(bugReport);
                 buttons.AddChild(reportButton);
             }
 
             var creditsButton = new Button {Text = Loc.GetString("server-info-credits-button")};
-            creditsButton.OnPressed += args => new CreditsWindow().Open();
+            creditsButton.OnPressed += _ => new CreditsWindow().Open();
             buttons.AddChild(creditsButton);
         }
     }

@@ -1,0 +1,85 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: department
+  id: Cargo
+  weight: 7
+
+- type: department
+  id: Civilian
+  description: department-Civilian-description-trauma
+  color: "#6C6A78" # assistant grey
+  roles:
+  - DClass
+  - RadioHost
+  - PartyMaker
+  - PhoneMerchant
+  # Moved out of Service
+  - Chaplain
+  - Clown
+  - Janitor
+  - Lawyer
+  - Librarian
+  - Mime
+  - Musician
+  - Reporter
+
+- type: department
+  id: CentralCommand
+  roles:
+  - NanotrasenRepresentative
+  - GovernmentMan
+  - HecuOperative
+
+- type: department
+  id: Command
+  roles:
+  - NanotrasenRepresentative
+  - CommandMaid
+  - HecuOperative
+
+- type: department
+  id: Engineering
+  weight: 12
+
+- type: department
+  id: Medical
+  weight: 10
+  roles:
+  - Virologist
+
+- type: department
+  id: Security
+  roles:
+  - Brigmedic
+  - SecurityClown
+
+- type: department
+  id: Science
+  weight: 15
+  roles:
+  - Roboticist
+  - Geneticist
+
+- type: department
+  id: Service
+  description: department-Service-description-trauma
+  roles:
+  - Rancher
+  # Moved to Civilian
+  - !Remove Chaplain
+  - !Remove Clown
+  - !Remove Janitor
+  - !Remove Lawyer
+  - !Remove Librarian
+  - !Remove Mime
+  - !Remove Musician
+  - !Remove Reporter
+  - !Remove TramDriver
+
+- type: department
+  id: Silicon
+  weight: -15
+
+- type: department
+  id: Specific
+  weight: 0

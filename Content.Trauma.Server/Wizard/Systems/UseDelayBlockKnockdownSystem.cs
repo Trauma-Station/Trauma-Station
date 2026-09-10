@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Effects;
 using Content.Trauma.Shared.TelescopicBaton;

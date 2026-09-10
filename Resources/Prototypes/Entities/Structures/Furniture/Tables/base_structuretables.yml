@@ -40,11 +40,7 @@
       collection: FootstepHull
   - type: Tag
     tags:
-    - Table # Trauma
     - ForceFixRotations
-  - type: RequireProjectileTarget # Goobstation - Crawling
-    ignoreThrow: true
-
 
 - type: entity
   abstract: true
@@ -62,5 +58,6 @@
         mask:
         - TableMask
         layer:
+        - BulletImpassable # Trauma
         - TableLayer
-        - BulletImpassable # Goobstation - Crawling
+        - LowImpassable

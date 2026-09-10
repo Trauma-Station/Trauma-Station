@@ -155,17 +155,20 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             targetPart = executed.TargetPart;
 
         var canMiss = executed == null; // if you are executing someone its PB, no missing
-        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly)
-            && Exists(shooter))
+        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly))
         {
             if (!Deleted(target) && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
             {
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
             }
 
+            var shotByString = Exists(comp.Shooter)
+                ? $"{ToPrettyString(comp.Shooter!.Value):user}"
+                : "a now deleted entity (grenade?)";
+
             _adminLogger.Add(LogType.BulletHit,
                 LogImpact.Medium,
-                $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooter):user} hit {otherName:target} and dealt {damage:damage} damage");
+                $"Projectile {ToPrettyString(uid):projectile} shot by {shotByString} hit {otherName:target} and dealt {damage:damage} damage");
         }
 
         if (TryPenetrate((uid, comp), target, damage, damageRequired))

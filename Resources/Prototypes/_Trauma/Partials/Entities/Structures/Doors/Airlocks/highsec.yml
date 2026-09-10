@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: HighSecDoor
+  components:
+  - type: Penetratable
+    penetrateDamage: 200
+    damagePenalty: 0.4

@@ -8,7 +8,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Pinpointer;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Bloodtrak;

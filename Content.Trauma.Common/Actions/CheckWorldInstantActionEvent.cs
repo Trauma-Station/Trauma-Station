@@ -2,9 +2,8 @@
 
 namespace Content.Trauma.Common.Actions;
 
-
 /// <summary>
-/// Checks to see if an action can fallback.
+/// Checks to see if a world target action can fallback if its validation failed.
 /// </summary>
 [ByRefEvent]
-public record struct CheckWorldInstantActionEvent(EntityUid User, EntityUid Provider, bool Fallback = false);
+public record struct CheckWorldInstantActionEvent(EntityUid User, EntityUid Provider, bool Handled = false);

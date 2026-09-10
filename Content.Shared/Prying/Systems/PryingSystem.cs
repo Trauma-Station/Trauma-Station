@@ -1,5 +1,6 @@
 // <Trauma>
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Trauma.Common.Prying;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
