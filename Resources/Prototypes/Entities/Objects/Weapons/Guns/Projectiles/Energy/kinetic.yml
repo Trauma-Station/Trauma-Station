@@ -18,11 +18,11 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 8 # Trauma - was 15
-        Structural: 11 # Trauma - was 15
+        Blunt: 15
+        Structural: 15
   # Short lifespan
   - type: TimedDespawn
-    lifetime: 0.18 # Trauma - 5.5 -> 4 tiles
+    lifetime: 0.22 # roughly 5.5 tiles
   - type: GatheringProjectile
 
 - type: entity
@@ -41,11 +41,11 @@
     damage:
       types:
         Blunt: 30
-        #Structural: 35 # Trauma
+        Structural: 35
   - type: Ammo
     muzzleFlash: HitscanEffect
   - type: TimedDespawn
-    lifetime: 0.3 # Trauma - was 1.5
+    lifetime: 1.5
   - type: PointLight
     radius: 2.5
     color: white
@@ -70,10 +70,6 @@
     - NonEnergy
   - type: GatheringProjectile
   - type: DamageMarkerOnCollide
-    # <Trauma>
-    effect: { sprite: /Textures/Objects/Weapons/effects.rsi, state: shield2 }
-    sound: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
-    # </Trauma>
     whitelist:
       components:
       - MobState

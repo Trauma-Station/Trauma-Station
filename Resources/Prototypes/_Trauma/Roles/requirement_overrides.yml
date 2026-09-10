@@ -155,14 +155,18 @@
       department: Command
       time: 5h
     Nukeops:
-    - !type:OverallPlaytimeRequirement
+    - &no_plasmamen !type:SpeciesRequirement
+      inverted: true
+      species:
+      - Plasmaman
+    - &nukie_playtime !type:OverallPlaytimeRequirement
       time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
       time: 2h
     NukeopsMedic:
-    - !type:OverallPlaytimeRequirement
-      time: 5h
+    - *no_plasmamen
+    - *nukie_playtime
     - !type:DepartmentTimeRequirement
       department: Security
       time: 2h
@@ -170,12 +174,13 @@
       role: JobChemist
       time: 2h
     NukeopsCommander:
-    - !type:OverallPlaytimeRequirement
-      time: 5h
+    - *no_plasmamen
+    - *nukie_playtime
     - !type:RoleTimeRequirement
       role: JobHeadOfSecurity
       time: 3h
     SpaceNinja:
+    - *no_plasmamen
     - !type:OverallPlaytimeRequirement
       time: 5h
     - !type:DepartmentTimeRequirement

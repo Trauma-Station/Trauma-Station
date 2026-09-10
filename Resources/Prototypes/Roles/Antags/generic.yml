@@ -5,7 +5,6 @@
   name: roles-antag-generic-solo-antagonist-name
   antagonist: true
   objective: never-shown
-  dontShowInCredits: true # Trauma
 
 # Non Descript Team Antags
 
@@ -14,7 +13,6 @@
   name: roles-antag-generic-team-antagonist-name
   antagonist: true
   objective: never-shown
-  dontShowInCredits: true # Trauma
 
 # Free Agents
 

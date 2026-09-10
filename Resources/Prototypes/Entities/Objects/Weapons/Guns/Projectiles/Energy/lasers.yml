@@ -4,10 +4,6 @@
   categories: [ HideSpawnMenu ]
   name: laser bolt
   components:
-  # <Trauma>
-  - type: BlurOnCollide
-    blurTime: 3
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
@@ -31,10 +27,8 @@
         hard: false
         mask:
         - Opaque
-        # <Trauma>
-        #- Impassable
-        #- BulletImpassable
-        # </Trauma>
+        - Impassable
+        - BulletImpassable
       fly-by:
         shape:
           !type:PhysShapeCircle
@@ -50,7 +44,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 9 # Trauma - was 13
+        Heat: 13
 
 - type: entity
   parent: BulletLaser
