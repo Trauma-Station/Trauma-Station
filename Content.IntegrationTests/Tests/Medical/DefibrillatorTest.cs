@@ -144,9 +144,9 @@ public sealed class DefibrillatorTest : InteractionTest
         var healDamage = new DamageSpecifier(ProtoMan.Index(BluntDamageTypeId), (critThreshold - deathThreshold) / 2); // Trauma - heal instead of damage to crit
         var deathDamage = new DamageSpecifier(ProtoMan.Index(BluntDamageTypeId), deathThreshold);
 
-        await Server.WaitPost(() => damageableSystem.ChangeDamage((STarget.Value, targetDamageable), deathDamage)); // Trauma - SetDamage -> ChangeDamage
+        await Server.WaitPost(() => damageableSystem.ChangeDamage((STarget.Value, targetDamageable), deathDamage, targetPart: TargetBodyPart.Chest)); // Trauma - SetDamage -> ChangeDamage, target chest
         await RunTicks(3);
-        await Server.WaitPost(() => damageableSystem.ChangeDamage((STarget.Value, targetDamageable), healDamage)); // Trauma - heal instead of setting to a lower damage
+        await Server.WaitPost(() => damageableSystem.ChangeDamage((STarget.Value, targetDamageable), healDamage, targetPart: TargetBodyPart.Chest)); // Trauma - heal instead of setting to a lower damage
         await RunTicks(3);
         Assert.That(targetMobState.CurrentState, Is.EqualTo(MobState.Dead), "Target mob was not dead before being defibrillated.");
 
