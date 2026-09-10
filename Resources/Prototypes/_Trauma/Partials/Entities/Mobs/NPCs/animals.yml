@@ -440,6 +440,7 @@
   - type: UseDelay # For insta prying
     delay: 1
   - type: FoliageIgnoringVision
+  - type: LanguageSpeaker
     speaks:
     - Xeno
     understands:
