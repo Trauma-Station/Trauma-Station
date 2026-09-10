@@ -218,11 +218,11 @@
   - type: Sprite
     layers:
     - state: emp_enthrall
+  - type: Action
+    useDelay: 60
   - type: TargetAction
     range: 1
     interactOnMiss: false
-  - type: Action
-    useDelay: 60
   - type: EntityTargetAction
     canTargetSelf: false
     event: !type:EmpoweredEnthrallEvent
