@@ -117,20 +117,6 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
         UISystem.CloseUi(uid, VendingMachineUiKey.Key);
     }
 
-    public VendingMachineInventoryEntry? GetEntry(EntityUid uid, string entryId, InventoryType type, VendingMachineComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return null;
-
-        if (type == InventoryType.Emagged && _emag.CheckFlag(uid, EmagType.Interaction))
-            return component.EmaggedInventory.GetValueOrDefault(entryId);
-
-        if (type == InventoryType.Contraband && component.Contraband)
-            return component.ContrabandInventory.GetValueOrDefault(entryId);
-
-        return component.Inventory.GetValueOrDefault(entryId);
-    }
-
     /// <summary>
     /// Tries to eject the provided item. Will do nothing if the vending machine is incapable of ejecting, already ejecting
     /// or the item doesn't exist in its inventory.
