@@ -31,7 +31,7 @@
   displayName: store-currency-display-shekels
   cash:
     0.01: SpaceCoin_01
-    0.12: SpaceCoin_02
+    0.02: SpaceCoin_02
     0.04: SpaceCoin_04
     0.12: SpaceCoin_12
     0.16: SpaceCoin_16
