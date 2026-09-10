@@ -38,10 +38,10 @@
   - type: Sprite
     layers:
     - state: enthrall
-  - type: TargetAction
-    range: 0.5
   - type: Action
     useDelay: 60
+  - type: TargetAction
+    range: 0.5
     interactOnMiss: false
   - type: EntityTargetAction
     canTargetSelf: false
@@ -95,20 +95,6 @@
     useDelay: 60
   - type: InstantAction
     event: !type:RapidRehatchEvent
-
-- type: entity
-  parent: BaseShadowlingAction
-  id: ActionShadowWalk
-  name: Shadow Walk
-  description: Step into the void, moving unseen and unhindered.
-  components:
-  - type: Sprite
-    layers:
-    - state: shadow_walk
-  - type: Action
-    useDelay: 45
-  - type: InstantAction
-    event: !type:ShadowWalkEvent
 
 - type: entity
   parent: BaseShadowlingAction
@@ -218,11 +204,11 @@
   - type: Sprite
     layers:
     - state: emp_enthrall
+  - type: Action
+    useDelay: 60
   - type: TargetAction
     range: 1
     interactOnMiss: false
-  - type: Action
-    useDelay: 60
   - type: EntityTargetAction
     canTargetSelf: false
     event: !type:EmpoweredEnthrallEvent
