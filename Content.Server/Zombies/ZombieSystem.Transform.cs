@@ -279,8 +279,10 @@ public sealed partial class ZombieSystem
         _bloodstream.ChangeBloodRefreshAmount(target, 0f);
         _bloodstream.ChangeBloodIncreaseEnabled(target, false);
 
+        /* Trauma - Counterpoint, zeds with insuls is really funny
         //This is specifically here to combat insuls, because frying zombies on grilles is funny as shit.
         _inventory.TryUnequip(target, "gloves", true, true);
+        */
         //Should prevent instances of zombies using comms for information they shouldnt be able to have.
         _inventory.TryUnequip(target, "ears", true, true);
 
