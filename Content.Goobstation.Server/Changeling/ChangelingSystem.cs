@@ -372,7 +372,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
                 continue;
 
             var soundEv = new GetFlashbangedEvent(float.MaxValue);
-            RaiseLocalEvent(target, soundEv);
+            RaiseLocalEvent(target, ref soundEv);
 
             var modifier = soundEv.ProtectionRange < float.MaxValue ? 0.5f : 1f;
             _stun.TryUpdateParalyzeDuration(target, stunTime * modifier);

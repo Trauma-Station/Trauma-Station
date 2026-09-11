@@ -43,9 +43,10 @@
   result: EncryptionKeyRev
   completetime: 6
   materials:
-    Silver: 50
-    Gold: 50
     Steel: 50
+    Plastic: 50
+    Glass: 50
+    Gold: 50
 
 - type: latheRecipe
   id: RevTurretElectronics
@@ -75,7 +76,20 @@
 - type: latheRecipe
   id: RevGunParts
   result: RevGunParts
-  completetime: 15
+  completetime: 10
   materials:
     Steel: 300
     Plastic: 100
+
+- type: latheRecipe
+  id: RevStraightPipe
+  result: GasPipeStraight
+  completetime: 3
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  parent: RevGunParts
+  id: RevModularReceiver
+  result: ModularReceiver
+  completetime: 5

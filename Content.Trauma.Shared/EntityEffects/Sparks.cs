@@ -11,13 +11,13 @@ namespace Content.Trauma.Shared.EntityEffects;
 [DataRecord]
 public sealed partial class Sparks : EntityEffectBase<Sparks>
 {
-    public int MinSparks = 1;
+    public int MinSparks = SparksSystem.MinSparks;
 
-    public int MaxSparks = 3;
+    public int MaxSparks = SparksSystem.MaxSparks;
 
-    public float MinVelocity = 1f;
+    public float MinVelocity = SparksSystem.MinVelocity;
 
-    public float MaxVelocity = 4f;
+    public float MaxVelocity = SparksSystem.MaxVelocity;
 
     public bool PlaySound = true;
 }

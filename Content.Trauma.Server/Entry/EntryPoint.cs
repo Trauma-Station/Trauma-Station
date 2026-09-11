@@ -32,5 +32,6 @@ public sealed partial class EntryPoint : GameServer
         "ShowSpriteLayerStatusEffect",
         "AnimatedEmotesBlacklist",
         "PredictedPhysicsEffect",
+        "TimedClientDespawn",
     ];
 }

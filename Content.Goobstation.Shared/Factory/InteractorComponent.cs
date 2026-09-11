@@ -31,6 +31,12 @@ public sealed partial class InteractorComponent : Component
     public ProtoId<SinkPortPrototype> HarmModePort = "HarmMode";
 
     /// <summary>
+    /// Signal port to toggle or enable/disable <see cref="Locked"/>.
+    /// </summary>
+    [DataField]
+    public ProtoId<SinkPortPrototype> LockedPort = "ToolLocked";
+
+    /// <summary>
     /// Whether to use alt interaction, i.e. use the highest priority verb on the target entity.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -47,6 +53,13 @@ public sealed partial class InteractorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool HarmMode;
+
+    /// <summary>
+    /// Prevents picking up or dropping its item in any way while locked.
+    /// Useful for interacting with storage and you don't want to insert the item.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Locked;
 }
 
 [Serializable, NetSerializable]

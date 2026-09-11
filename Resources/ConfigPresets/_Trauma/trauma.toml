@@ -4,7 +4,7 @@ role_timer_override = "Trauma"
 round_end_pvs_overrides = true
 lobbyduration = 180
 fallbackpreset = "Traitor,Survival,Extended"
-minimum_job_fallback = "SameDepartment"
+#minimum_job_fallback = "SameDepartment" # re-enable if it gets fixed
 
 [chat]
 max_announcement_length = 512
@@ -34,3 +34,9 @@ easy_mode = false # woodchipper is actually dangerous
 
 [ic]
 ssd_sleep = false # chuddy and doesnt account for NPCs
+
+[infolinks]
+bug_report = "https://github.com/Trauma-Station/Trauma-Station/issues/created_by/choose"
+discord    = "https://discord.traumastation.com"
+github     = "https://github.com/Trauma-Station/Trauma-Station"
+wiki       = "https://wiki.traumastation.com"

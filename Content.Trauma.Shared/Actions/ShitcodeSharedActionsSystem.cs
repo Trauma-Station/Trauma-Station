@@ -13,13 +13,7 @@ public sealed partial class ShitcodeSharedActionsSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<WorldTargetActionComponent, CheckWorldInstantActionEvent>(Fallback);
-    }
-
+    [SubscribeLocalEvent]
     private void Fallback(Entity<WorldTargetActionComponent> ent, ref CheckWorldInstantActionEvent args)
     {
         var user = args.User;
@@ -33,6 +27,6 @@ public sealed partial class ShitcodeSharedActionsSystem : EntitySystem
         _adminLogger.Add(LogType.Action,
             $"{ToPrettyString(user):user} is performing the {Name(ent):action} action provided by {ToPrettyString(provider):provider}.");
 
-        args.Fallback = true;
+        args.Handled = true;
     }
 }

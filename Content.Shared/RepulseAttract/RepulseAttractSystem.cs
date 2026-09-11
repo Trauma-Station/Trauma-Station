@@ -1,12 +1,13 @@
 using Content.Shared.Physics;
 using Content.Shared.Throwing;
-using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using System.Numerics;
+//using Content.Shared.RepulseAttract.Events; // Trauma - wasn't cherry picked
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee;
 
 namespace Content.Shared.RepulseAttract;

@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: PenExploding
+  components:
+  # it shouldn't insta nugget
+  - type: Explosive
+    intensitySlope: 6
+    totalIntensity: 4

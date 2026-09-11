@@ -5,6 +5,7 @@ using Content.Shared.Body;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Roles;
@@ -19,17 +20,6 @@ namespace Content.Shared.Zombies;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ZombieComponent : Component
 {
-    /// <summary>
-    ///     This is the forced language a zombie should have when they are zombified and try to speak.
-    /// </summary>
-    /// <remarks>
-    ///     This is intended as a fallback to prevent zombies from using sign language or any other
-    ///     language that bypasses accent filter, and it prevents them from understanding everything
-    ///     else while being zombified.
-    /// </remarks>
-    [DataField]
-    public ProtoId<LanguagePrototype> ForcedLanguage = "Xeno"; // Xeno until we make a zombie/ignorant language that is unobtainable.
-
     /// <summary>
     /// The baseline infection chance you have if you have no protective gear
     /// </summary>
@@ -166,6 +156,12 @@ public sealed partial class ZombieComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
+
+    /// <summary>
+    /// The blood refresh of the humanoid to restore in case of cloning.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 BeforeZombifiedBloodRefresh = new();
 
     /// <summary>
     /// The blood reagents of the humanoid to restore in case of cloning

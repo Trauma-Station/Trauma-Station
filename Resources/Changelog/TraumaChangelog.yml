@@ -14012,3 +14012,411 @@ Entries:
   id: 1531
   time: '2026-08-31T18:30:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4396
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      The surgery UI now updates parts and surgeries in real time, no more
+      reopening because it's buggy and stuck on a surgery that can't even be
+      done.
+  id: 1532
+  time: '2026-09-01T07:48:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4401
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Modular Receivers and Straight Pipes to the 3D Printer
+  - type: Tweak
+    message: >-
+      Increased the variety of skills you get from the Revolutionary
+      Melee/Revolutionary Shooting book to accommodate for all the weapons that
+      revolutionaries can make
+  - type: Tweak
+    message: Buffed the firerate on the devastator from 1.0 to 1.5
+  - type: Tweak
+    message: >-
+      Decreased the amount of revolutionary gun parts needed for the Proletariat
+      from 5 to 3
+  - type: Tweak
+    message: Decreased the time to print revolutionary parts
+  - type: Tweak
+    message: Decreased the time to print revolutionary gun parts
+  - type: Tweak
+    message: Shortened the recipes of a majority of revolutionary guns
+  - type: Tweak
+    message: Removed the welding step from most revolutionary guns
+  - type: Tweak
+    message: >-
+      Decreased the cost of forged knifes down to 2.5 steel, They now also
+      finish in 5 seconds
+  - type: Tweak
+    message: >-
+      Made Revolutionary Encryption Keys only cost plastic, steel, glass, and
+      gold
+  - type: Fix
+    message: Fixed the Revolutionary Shooting Book not giving Gunsmithing
+  id: 1533
+  time: '2026-09-01T12:02:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4399
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cloned people not having hands.
+  id: 1534
+  time: '2026-09-01T12:25:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4402
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mothmaggots not being ghost roles.
+  id: 1535
+  time: '2026-09-01T12:44:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4404
+- author: ghostlydragon8
+  changes:
+  - type: Add
+    message: Added lathe automation to revolution machines
+  id: 1536
+  time: '2026-09-01T17:40:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4407
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed nailgun execution crashing server.
+  id: 1537
+  time: '2026-09-03T05:06:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4425
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed pizza bomb, you can't use it as a insta-nugget hand grenade
+      anymore.
+  id: 1538
+  time: '2026-09-03T05:59:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4420
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dionae can no longer have hearts, kidneys or livers transplanted.
+  id: 1539
+  time: '2026-09-03T08:08:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4427
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Abductors no longer get a gland task for slimes or diona since they have
+      no heart slot.
+  id: 1540
+  time: '2026-09-03T17:16:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4428
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      You can now alt-click a rev telesphere to link machines to its silo
+      resources.
+  - type: Fix
+    message: Fixed xenoborg tile gun getting broken by embedded tiles.
+  - type: Fix
+    message: Xenoborgs can now toggle the magnet on their storage.
+  - type: Tweak
+    message: >-
+      Xenoborg deflectors no longer despawn, you still lose them if they get
+      destroyed.
+  id: 1541
+  time: '2026-09-04T00:09:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4433
+- author: StarMade, Graves, DieselMohawk
+  changes:
+  - type: Tweak
+    message: Rewrote and reformatted Corporate Law
+  id: 1542
+  time: '2026-09-04T00:17:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4263
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Sparks dont fly as fast and generally look better.
+  id: 1543
+  time: '2026-09-04T09:43:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4440
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use heretic blades for surgery.
+  id: 1544
+  time: '2026-09-05T07:44:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4455
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed blob electromagnetic web EMP to actually take away more than 2%
+      charge.
+  - type: Fix
+    message: Fixed blob tiles not having strong/reflective upgrades.
+  - type: Fix
+    message: >-
+      Fixed mobs outside of vision being invisible if you became something
+      without a vision cone e.g. blob.
+  - type: Fix
+    message: Fixed blob node prediction being janky.
+  id: 1545
+  time: '2026-09-05T10:47:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4456
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: All speech voices now have similar volume.
+  id: 1546
+  time: '2026-09-05T12:20:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4457
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI turrets not shooting monkies.
+  - type: Tweak
+    message: Most animals no longer attack insurgents. Shiva is still evil.
+  id: 1547
+  time: '2026-09-05T12:54:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4459
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to doxx invisible things by hovering them with your
+      mouse, except for dwarves diona and vox.
+  id: 1548
+  time: '2026-09-05T13:11:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4460
+- author: yglop
+  changes:
+  - type: Add
+    message: Viscerator grenades in uplink
+  id: 1549
+  time: '2026-09-06T09:29:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4415
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blob now gets notified if its core is under attack.
+  - type: Tweak
+    message: Blob can now attack an extra half tile away.
+  - type: Fix
+    message: >-
+      Fixed pressurized blob chemicals breaking after 1 attack/death and not
+      doing any structural damage.
+  - type: Tweak
+    message: Buffed cryogenic poison blob chemical injection.
+  id: 1550
+  time: '2026-09-06T14:14:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4476
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Interactors now have a tool lock mode that prevents its tool being picked
+      up or dropped.
+  - type: Tweak
+    message: >-
+      Interactor/constructor's auto start port is now called repeating to be
+      less confusing.
+  id: 1551
+  time: '2026-09-06T14:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4477
+- author: luminargh
+  changes:
+  - type: Add
+    message: New lobby music, "Race to Evac"
+  id: 1552
+  time: '2026-09-06T22:05:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4480
+- author: Bon-Man
+  changes:
+  - type: Tweak
+    message: Lowered the damage of exosuit drills
+  id: 1553
+  time: '2026-09-07T05:58:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4485
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed book banning.
+  id: 1554
+  time: '2026-09-07T07:45:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4490
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Medical borgs can now pick up and hold body bags
+  id: 1555
+  time: '2026-09-07T07:54:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4432
+- author: jshoe2
+  changes:
+  - type: Remove
+    message: Rude buster upgrade from necropolis chest drops
+  - type: Tweak
+    message: Lowered crafting skill requirements on crusher upgrades
+  id: 1556
+  time: '2026-09-07T12:02:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4491
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The draft is over.
+  id: 1557
+  time: '2026-09-07T12:17:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4492
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed lemoons creating plants when harvested and not being able to mutate
+      into lemonades.
+  id: 1558
+  time: '2026-09-07T12:30:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4493
+- author: paige404
+  changes:
+  - type: Fix
+    message: (S)laughterdemons have remembered how to speak.
+  id: 1559
+  time: '2026-09-08T06:21:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4512
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Double-bladed energy sword now only has 8 total reflects instead of 16
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now only gives +10% speed for landing a light
+      attack on someone
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now does 13 slash, 13 heat which is 30 damage
+      total if you include the skill chip
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now only has 2x limb severity multiplier for
+      heat and slash damage
+  id: 1560
+  time: '2026-09-08T07:29:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4509
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Surgery sepsis damage is now limited to 90 poison per part.
+  id: 1561
+  time: '2026-09-08T07:38:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4514
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed flesh stalkers instantly healing on shapeshift.
+  - type: Remove
+    message: Removed voiceless dead damage bonus and bleeding steel effect on blades.
+  - type: Tweak
+    message: Ash jaunt is 1 second longer (so same as before).
+  - type: Fix
+    message: Fix flesh path being able to make more ghouls than intended.
+  id: 1562
+  time: '2026-09-08T10:10:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4474
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added back CQC's Leg Sweep move.
+  - type: Tweak
+    message: >-
+      Most martial arts moves are more in depth with sounds, throwing,
+      requirements, etc.n
+  - type: Remove
+    message: Removed Capoeira's kickup move, everyone can do it anyway.
+  - type: Remove
+    message: >-
+      Removed slop level requirements for some martial art moves, they always do
+      the same thing now.
+  - type: Tweak
+    message: Most martial art books/scrolls now give you master level in the skill.
+  id: 1563
+  time: '2026-09-08T11:57:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4518
+- author: luminargh
+  changes:
+  - type: Add
+    message: Zombies now speak Zombish
+  id: 1564
+  time: '2026-09-08T17:07:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4507
+- author: Evoluxionary
+  changes:
+  - type: Add
+    message: Added CSIJ larps- i mean biosuit.
+  id: 1565
+  time: '2026-09-09T10:51:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4273
+- author: freycyik
+  changes:
+  - type: Tweak
+    message: Made zombies prying doors 5x faster
+  id: 1566
+  time: '2026-09-10T06:03:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4525
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Remove zzzz-the's pAI
+  id: 1567
+  time: '2026-09-10T09:09:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bleach being safe to drink, real life parity.
+  id: 1568
+  time: '2026-09-10T09:21:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4533
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed exploding pen to not full nugget you anymore.
+  id: 1569
+  time: '2026-09-10T09:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4534
+- author: rivermyth
+  changes:
+  - type: Add
+    message: Added tampering alert to electronic lockers and lockboxes.
+  - type: Add
+    message: Added wire panel to lockers and electronic crates.
+  - type: Add
+    message: Added Lock/Unlock/Toggle signals to lockers and electronic crates.
+  id: 1570
+  time: '2026-09-10T10:47:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4364
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Drones interactions are now predicted.
+  - type: Fix
+    message: Fixed drones being able to carry people lmao
+  id: 1571
+  time: '2026-09-10T12:00:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4521
+- author: Bon-Man
+  changes:
+  - type: Fix
+    message: Fixed all lockers and crates being electrified
+  id: 1572
+  time: '2026-09-11T06:57:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4548
+- author: luminargh
+  changes:
+  - type: Tweak
+    message: Zombies don't drop their gloves anymore, good luck!
+  id: 1573
+  time: '2026-09-11T16:24:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4552

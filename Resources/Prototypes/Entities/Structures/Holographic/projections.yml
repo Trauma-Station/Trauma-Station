@@ -122,11 +122,12 @@
         fix1:
           shape:
             !type:PhysShapeAabb
-            bounds: "-0.3,-0.3,0.3,0.3"
+            bounds: "-0.4,-0.4,0.4,0.4"
           mask:
-            - TableMask
+          - TableMask
           layer:
-            - TableLayer
+          - TableLayer
+          - LowImpassable
     - type: TimedDespawn
       lifetime: 180
     - type: PointLight
@@ -144,7 +145,7 @@
           acts: [ "Destruction" ]
 
 - type: entity
-  parent: BaseHoloSign
+  parent: BaseHoloSignNoDespawn # Trauma - no despawn
   id: XenoborgDeflectorField
   name: deflector field
   description: An energy matrix, comprised of interlocking fields that deflect projectiles. Powerful, but short-lived.
@@ -165,7 +166,7 @@
         mask:
         - FullTileMask
         layer:
-        - Opaque # Traua
+        - Opaque # Trauma
         - GlassLayer
   - type: TimedDespawn
     lifetime: 15

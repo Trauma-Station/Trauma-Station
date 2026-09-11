@@ -55,7 +55,7 @@ public sealed partial class SurveillanceCameraMonitorComponent : Component
     /// This is cleared when the subnet is changed.
     /// </summary>
     [ViewVariables]
-    public Dictionary<string, (string, (NetEntity, NetCoordinates))> KnownCameras { get; } = new(); // Trauma - store the entity and pos as well
+    public Dictionary<string, (string, NetEntity, NetCoordinates)> KnownCameras { get; } = new(); // Trauma - store the entity and pos as well
 
     /// <summary>
     /// The subnets known by this camera monitor.

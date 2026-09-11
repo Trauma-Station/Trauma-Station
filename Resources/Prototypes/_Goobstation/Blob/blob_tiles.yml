@@ -1,27 +1,27 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: MarkerBase
   id: SpawnPointGhostBlob
   name: Blob
-  suffix: DONTMAP, spawner
-  parent: MarkerBase
+  categories: [DoNotMap]
   components:
-    - type: GhostRoleMobSpawner
-      prototype: CoreBlobTile
-    - type: GhostRole
-      name: ghost-role-information-blob-name
-      description: ghost-role-information-blob-description
-      rules: You are an antagonist, destroy the station!
-      mindRoles:
-      - MindRoleGhostRoleSoloAntagonist
-      raffle:
-        settings: default
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-        - sprite: _Goobstation/Blob/Mobs/blob.rsi
-          state: blob_nuke_overlay
+  - type: GhostRoleMobSpawner
+    prototype: CoreBlobTile
+  - type: GhostRole
+    name: ghost-role-information-blob-name
+    description: ghost-role-information-blob-description
+    rules: You are an antagonist, destroy the station!
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: default
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: _Goobstation/Blob/Mobs/blob.rsi
+      state: blob_nuke_overlay
 
 - type: entity
   parent: BaseBlob
