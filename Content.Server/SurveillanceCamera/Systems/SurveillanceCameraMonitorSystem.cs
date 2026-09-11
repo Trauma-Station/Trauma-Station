@@ -73,7 +73,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         // <Trauma>
         // TODO: move this shit out
         var query2 = EntityQueryEnumerator<HasMobileCamerasSurveillanceCameraMonitorComponent, SurveillanceCameraMonitorComponent>();
-        while (query2.MoveNext(out var uid, out var _, out var monitor))
+        while (query2.MoveNext(out var uid, out var active, out var monitor))
         {
             if (monitor.KnownMobileCameras.Count > 0)
             {
@@ -119,7 +119,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
                 // Cleanup component if empty
                 if (monitor.KnownMobileCameras.Count == 0)
-                    RemComp<HasMobileCamerasSurveillanceCameraMonitorComponent>(uid);
+                    RemCompDeferred(uid, active);
 
                 // Refresh subnets as clearly something went wrong with the networking
                 if (expiredCameras.Count > 0)
