@@ -53,6 +53,7 @@
 - type: entity
   parent: [ClothingHeadHelmetBase, BaseMajorContraband, BaseClothingViewconeMedium] # Trauma, viewcone
   id: ClothingHeadHelmetScrap
+  name: scrap helmet
   description: A cobbled-together helmet made from cabling, steel, and a bucket.
   components:
   - type: Sprite
@@ -86,3 +87,5 @@
   - type: Construction
     graph: scraphelmet
     node: scraphelmet
+  - type: ImageOverlay
+    pathToOverlayImage: "/Textures/Clothing/Head/Helmets/scrapHelmetOverlayTexture.png"

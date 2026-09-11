@@ -3,7 +3,8 @@
 # Slam
 
 - type: combo
-  id: CQCSlam
+  abstract: true
+  id: BaseCQCSlam
   attacks:
   - Grab
   - Harm
@@ -13,6 +14,22 @@
   - !type:PopupMessage
     messages:
     - cqc-slam
+
+- type: combo
+  parent: BaseCQCSlam
+  id: CQCSlamSimple
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 15
+  - !type:ModifyKnockdown
+    time: 2
+    drop: true
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCSlam
+  id: CQCSlam
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -24,11 +41,14 @@
   - !type:ModifyKnockdown
     time: 5
     drop: true
+    type: Update
+  levelRequired: 26
 
 # Kick
 
 - type: combo
-  id: CQCKick
+  abstract: true
+  id: BaseCQCKick
   attacks:
   - Harm
   - Harm
@@ -47,6 +67,51 @@
   opponentEffects:
   - !type:StopPull
   - !type:GrabThrow
+
+- type: combo
+  parent: BaseCQCKick
+  id: CQCKickSimple
+  opponentEffects:
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 8
+  - !type:ModifyKnockdown
+    time: 1
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCKick
+  id: CQCKick
+  opponentEffects:
+  - !type:IfElse
+    condition: !type:StandingCondition
+      inverted: true
+    trueEffects: # kicking someone on the ground is much stronger
+    - !type:TakeStaminaDamage
+      amount: 45
+    - !type:HealthChange
+      targetPart: Head
+      damage:
+        types:
+          Blunt: 10
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectForcedSleeping
+      time: 8
+      conditions:
+      - !type:StaminaCritical
+    falseEffects:
+    - !type:TakeStaminaDamage
+      amount: 20
+  levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  parent: BaseCQCKick
+  id: CQCKickAdvanced
+  opponentEffects:
   - !type:IfElse
     condition: !type:StandingCondition
       inverted: true
@@ -66,11 +131,13 @@
     falseEffects:
     - !type:TakeStaminaDamage
       amount: 25
+  levelRequired: 60
 
 # Restrain
 
 - type: combo
-  id: CQCRestrain
+  abstract: true
+  id: BaseCQCRestrain
   attacks:
   - Grab
   - Grab
@@ -78,20 +145,41 @@
   - !type:PopupMessage
     messages:
     - cqc-restrain
+
+- type: combo
+  parent: BaseCQCRestrain
+  id: CQCRestrainSimple
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 2
+    type: Update
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCRestrain
+  id: CQCRestrain
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 30
   - !type:GenericStatusEffect
     key: Stutter
     time: 10
+    type: Update
   - !type:ModifyKnockdown
     time: 3
     drop: true
+    type: Update
+  levelRequired: 26
 
 # Pressure
 
 - type: combo
-  id: CQCPressure
+  abstract: true
+  id: BaseCQCPressure
   attacks:
   - Disarm
   - Grab
@@ -99,15 +187,30 @@
   - !type:PopupMessage
     messages:
     - cqc-pressure
+
+- type: combo
+  parent: BaseCQCPressure
+  id: CQCPressureSimple
+  opponentEffects:
+  - !type:StealItem
+    probability: 0.5
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCPressure
+  id: CQCPressure
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 60
   - !type:StealItem
+  levelRequired: 26
 
 # Consecutive
 
 - type: combo
-  id: CQCConsecutive
+  abstract: true
+  id: BaseCQCConsecutive
   attacks:
   - Disarm
   - Disarm
@@ -118,6 +221,24 @@
   - !type:PopupMessage
     messages:
     - cqc-consecutive
+
+- type: combo
+  parent: BaseCQCConsecutive
+  id: CQCConsecutiveSimple
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 20
+  - !type:HealthChange
+    targetPart: Chest
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
+  parent: BaseCQCConsecutive
+  id: CQCConsecutive
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 40
@@ -126,6 +247,13 @@
     damage:
       types:
         Blunt: 10
+  levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  parent: BaseCQCConsecutive
+  id: CQCConsecutiveAdvanced
+  opponentEffects:
   - !type:ModifyStatusEffect
     effectProto: StatusEffectForcedSleeping
     time: 7
@@ -137,17 +265,19 @@
   - !type:ModifyKnockdown
     time: 5
     drop: true
+    type: Update
+  levelRequired: 60
 
 # Leg sweep
 
 - type: combo
-  id: CQCLegSweep
+  abstract: true
+  id: BaseCQCLegSweep
   attacks:
   - Harm
   userConditions:
   - !type:StandingCondition
     inverted: true # user must be downed
-    failMessage: martial-arts-fail-standing
   conditions:
   - !type:StandingCondition
     failMessage: martial-arts-fail-target-down
@@ -157,9 +287,23 @@
   - !type:PopupMessage
     messages:
     - cqc-leg-sweep
+
+- type: combo
+  parent: BaseCQCLegSweep
+  id: CQCLegSweepSimple
+  opponentEffects:
+  - !type:LegSweep
+    time: 2
+  levelRequired: 10
+  levelExceeded: 35
+
+- type: combo
+  parent: BaseCQCLegSweep
+  id: CQCLegSweep
   opponentEffects:
   - !type:LegSweep
     time: 5
+  levelRequired: 35
 
 # Neck snap
 

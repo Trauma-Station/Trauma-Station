@@ -14,6 +14,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Repairable;
 using Content.Shared.Tools.Systems;
+using Content.Trauma.Common.DeviceLinking;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -33,32 +34,14 @@ public abstract partial class SharedTurbineSystem : EntitySystem
     private const string BladeContainer = "blade_slot";
     private const string StatorContainer = "stator_slot";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TurbineComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<TurbineComponent, ExaminedEvent>(OnExamined);
-
-        SubscribeLocalEvent<TurbineComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<TurbineComponent, RepairDoAfterEvent>(OnRepairDoAfter);
-
-        SubscribeLocalEvent<TurbineComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
-        SubscribeLocalEvent<TurbineComponent, ItemSlotEjectAttemptEvent>(OnEjectAttempt);
-        SubscribeLocalEvent<TurbineComponent, EntInsertedIntoContainerMessage>(OnPartInserted);
-        SubscribeLocalEvent<TurbineComponent, EntRemovedFromContainerMessage>(OnPartEjected);
-
-        SubscribeLocalEvent<TurbineComponent, SignalReceivedEvent>(OnSignalReceived);
-
-        SubscribeLocalEvent<TurbineComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInit(Entity<TurbineComponent> ent, ref ComponentInit args)
     {
         _device.EnsureSourcePorts(ent.Owner, ent.Comp.SpeedPort, ent.Comp.SpeedHighPort, ent.Comp.SpeedLowPort);
         _device.EnsureSinkPorts(ent.Owner, ent.Comp.StatorLoadPort, ent.Comp.FlowRatePort);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<TurbineComponent> ent, ref ExaminedEvent args)
     {
         var comp = ent.Comp;
@@ -114,6 +97,7 @@ public abstract partial class SharedTurbineSystem : EntitySystem
     }
 
     #region Repairs
+    [SubscribeLocalEvent]
     private void OnInteractUsing(EntityUid uid, TurbineComponent comp, ref InteractUsingEvent args)
     {
         if (args.Handled || !_tool.HasQuality(args.Used, comp.RepairTool))
@@ -143,6 +127,7 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         _tool.UseTool(args.Used, user, uid, comp.RepairDelay, comp.RepairTool, new RepairDoAfterEvent(), comp.RepairFuelCost);
     }
 
+    [SubscribeLocalEvent]
     private void OnRepairDoAfter(Entity<TurbineComponent> ent, ref RepairDoAfterEvent args)
     {
         if (args.Cancelled)
@@ -169,16 +154,19 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         _damage.ClearAllDamage(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnEjectAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotEjectAttemptEvent args)
     {
         args.Cancelled |= comp.RPM >= 1;
     }
 
+    [SubscribeLocalEvent]
     private void OnInsertAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotInsertAttemptEvent args)
     {
         args.Cancelled |= comp.RPM >= 1;
     }
 
+    [SubscribeLocalEvent]
     private void OnPartInserted(Entity<TurbineComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         switch (args.Container.ID)
@@ -195,6 +183,7 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         UpdatePartValues(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPartEjected(Entity<TurbineComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         switch (args.Container.ID)
@@ -211,18 +200,17 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         UpdatePartValues(ent);
     }
 
-    private void OnSignalReceived(Entity<TurbineComponent> ent, ref SignalReceivedEvent args)
+    [SubscribeLocalEvent]
+    private void OnSignalReceived(Entity<TurbineComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
     {
-        int value = 0;
-        if (args.Data?.TryGetValue("logic_int", out value) != true)
-            return; // ignore non circuits
-
+        var value = (float) args.Data.Value;
         if (args.Port == ent.Comp.StatorLoadPort)
-            SetStatorLoad(ent, (float) value);
+            SetStatorLoad(ent, value);
         else if (args.Port == ent.Comp.FlowRatePort)
-            SetFlowRate(ent, (float) value);
+            SetFlowRate(ent, value);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnanchorAttempt(Entity<TurbineComponent> ent, ref UnanchorAttemptEvent args)
     {
         if (ent.Comp.RPM < 1)
@@ -319,9 +307,8 @@ public abstract partial class SharedTurbineSystem : EntitySystem
             return;
 
         ent.Comp.LastSentSpeed = floored;
-        var payload = new NetworkPayload();
-        payload["logic_int"] = floored;
-        _device.InvokePort(ent, ent.Comp.SpeedPort, payload);
+        var payload = new LogicIntPayload(floored);
+        _device.InvokePort(ent.Owner, ent.Comp.SpeedPort, ref payload);
 
         // update high/low speed ports if they change
         var high = rpm > ent.Comp.BestRPM * 1.05;
@@ -329,12 +316,12 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         if (ent.Comp.LastSentHigh != high)
         {
             ent.Comp.LastSentHigh = high;
-            _device.SendSignal(ent, ent.Comp.SpeedHighPort, high);
+            _device.SendSignal(ent.Owner, ent.Comp.SpeedHighPort, high);
         }
         if (ent.Comp.LastSentLow != low)
         {
             ent.Comp.LastSentLow = low;
-            _device.SendSignal(ent, ent.Comp.SpeedLowPort, rpm < ent.Comp.BestRPM * 0.95);
+            _device.SendSignal(ent.Owner, ent.Comp.SpeedLowPort, rpm < ent.Comp.BestRPM * 0.95);
         }
     }
 
@@ -347,9 +334,8 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         ent.Comp.LastGen = gen;
         DirtyField(ent, ent.Comp, nameof(TurbineComponent.LastGen));
 
-        var payload = new NetworkPayload();
-        payload["logic_int"] = gen;
-        _device.InvokePort(ent, ent.Comp.PowerGenPort, payload);
+        var payload = new LogicIntPayload(gen);
+        _device.InvokePort(ent.Owner, ent.Comp.PowerGenPort, ref payload);
     }
 
     public void SetPowerSupply(Entity<TurbineComponent> ent, int supply)
@@ -360,9 +346,8 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         ent.Comp.PowerSupply = supply;
         DirtyField(ent, ent.Comp, nameof(TurbineComponent.PowerSupply));
 
-        var payload = new NetworkPayload();
-        payload["logic_int"] = supply;
-        _device.InvokePort(ent, ent.Comp.PowerSupplyPort, payload);
+        var payload = new LogicIntPayload(supply);
+        _device.InvokePort(ent.Owner, ent.Comp.PowerSupplyPort, ref payload);
     }
 
     public void SetRuined(Entity<TurbineComponent> ent, bool ruined = true)

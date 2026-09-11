@@ -3,7 +3,6 @@
   name: department-Cargo
   description: department-Cargo-description
   color: "#A46106"
-  weight: 7 # Trauma
   roles:
   - CargoTechnician
   - Quartermaster
@@ -13,32 +12,12 @@
   id: Civilian
   name: department-Civilian
   description: department-Civilian-description
-  color: "#6C6A78" # Trauma - assistant grey
+  color: "#7F7F7F"
   weight: -10
   ignoreForDepartmentFallback: true
   roles:
-  # <Trauma>
-  - RadioHost
-  - PartyMaker
-  - PhoneMerchant
-  - DClass
-  # </Trauma>
-  #- Bartender # Trauma - moved to Service
-  #- Botanist # Trauma - moved to Service
-  - Chaplain
-  #- Chef # Trauma - moved to Service
-  - Clown
-  #- HeadOfPersonnel # Trauma - moved to Service
-  - Janitor
-  - Lawyer
-  - Librarian
-  - Mime
-  - Musician
   - Passenger
-  - Reporter
   - Visitor
-  #- ServiceWorker # Trauma - moved to Service
-  - TramDriver
 
 # Please kill this
 - type: department
@@ -47,10 +26,6 @@
   description: department-CentralCommand-description
   color: "#0c344d"
   roles:
-  # <Trauma>
-  - NanotrasenRepresentative
-  - GovernmentMan
-  # </Trauma>
   - CentralCommandOfficial
   - CBURN
   - ERTLeader
@@ -60,7 +35,6 @@
   - ERTSecurity
   - ERTEngineer
   - DeathSquad
-  - HecuOperative
   editorHidden: true
   weight: 120
 
@@ -70,11 +44,6 @@
   description: department-Command-description
   color: "#334E6D"
   roles:
-  # <Trauma>
-  - NanotrasenRepresentative
-  - CommandMaid
-  - HecuOperative
-  # </Trauma>
   - Captain
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -100,7 +69,6 @@
   name: department-Engineering
   description: department-Engineering-description
   color: "#EFB341"
-  weight: 12 # Trauma
   roles:
   - AtmosphericTechnician
   - ChiefEngineer
@@ -112,11 +80,7 @@
   name: department-Medical
   description: department-Medical-description
   color: "#52B4E9"
-  weight: 10 # Trauma
   roles:
-  # <Trauma>
-  - Virologist
-  # </Trauma>
   - Chemist
   - ChiefMedicalOfficer
   - MedicalDoctor
@@ -125,16 +89,22 @@
   - Paramedic
 
 - type: department
+  id: Science
+  name: department-Science
+  description: department-Science-description
+  color: "#D381C9"
+  roles:
+  - ResearchDirector
+  - Scientist
+  - ResearchAssistant
+
+- type: department
   id: Security
   name: department-Security
   description: department-Security-description
   color: "#DE3A3A"
   weight: 20
   roles:
-  # <Trauma>
-  - Brigmedic
-  - SecurityClown
-  # </Trauma>
   - HeadOfSecurity
   - SecurityCadet
   - SecurityOfficer
@@ -142,26 +112,31 @@
   - Warden
 
 - type: department
-  id: Science
-  name: department-Science
-  description: department-Science-description
-  color: "#D381C9"
-  weight: 15 # Trauma
+  id: Service
+  name: department-Service
+  description: department-Service-description
+  color: "#9FED58"
   roles:
-  # <Trauma>
-  - Roboticist
-  - Geneticist
-  # </Trauma>
-  - ResearchDirector
-  - Scientist
-  - ResearchAssistant
+  - Bartender
+  - Botanist
+  - Chaplain
+  - Chef
+  - Clown
+  - HeadOfPersonnel
+  - Janitor
+  - Lawyer
+  - Librarian
+  - Mime
+  - Musician
+  - Reporter
+  - ServiceWorker
+  - TramDriver
 
 - type: department
   id: Silicon
   name: department-Silicon
   description: department-Silicon-description
   color: "#D381C9"
-  weight: -15 # Trauma
   roles:
   - Borg
   - StationAi
@@ -171,7 +146,7 @@
   name: department-Specific
   description: department-Specific-description
   color: "#9FED58"
-  weight: 0 # Trauma - was 10
+  weight: 10
   ignoreForDepartmentFallback: true
   roles:
   - Reporter

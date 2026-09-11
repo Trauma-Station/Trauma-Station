@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: SurveillanceCameraBase
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ CameraElectronics ]
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: RequireProjectileTarget
+  - type: Viewcone
+    baseConeAngle: 360 # prevent camera vision being messed up
+  - type: Wires
+    boardName: wires-board-name-camera
+  - type: StationAiVision
+    needsPower: true
+  - type: Damageable
+    damageModifierSet: FlimsyMetallic # cameras were way too tanky
+
+- type: entity
+  id: SurveillanceCameraAssembly
+  components:
+  - type: Damageable
+    damageModifierSet: FlimsyMetallic
