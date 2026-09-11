@@ -112,7 +112,7 @@ public sealed partial class JobListingsComponent : Component
     /// If the job board has a bonus refresh available from leveling up.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool BonusRefresh = false;
+    public bool BonusRefresh;
 
     /// <summary>
     /// The time when the job board's refresh button becomes available.
@@ -123,6 +123,6 @@ public sealed partial class JobListingsComponent : Component
     /// <summary>
     /// How long it takes for the job board's refresh button to become available.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan RefreshWaitDuration = TimeSpan.FromMinutes(1);
+    [DataField(required: true), AutoNetworkedField]
+    public TimeSpan RefreshWaitDuration;
 }

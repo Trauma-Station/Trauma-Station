@@ -95,5 +95,9 @@
     - 1000 # 1 minor + 2 majors + 1 extreme
     - 10000 # 1 final
     refreshWaitDuration: 600 # 10 minutes
+  - type: ContainerContainer
+    containers:
+      available_side_jobs: !type:Container
+      accepted_side_jobs: !type:Container
   # </Trauma>
   - type: RingerAccessUplink
