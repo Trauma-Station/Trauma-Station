@@ -14413,3 +14413,10 @@ Entries:
   id: 1572
   time: '2026-09-11T06:57:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4548
+- author: luminargh
+  changes:
+  - type: Tweak
+    message: Zombies don't drop their gloves anymore, good luck!
+  id: 1573
+  time: '2026-09-11T16:24:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4552
